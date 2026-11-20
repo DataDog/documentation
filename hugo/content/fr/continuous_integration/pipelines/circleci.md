@@ -1,0 +1,152 @@
+---
+aliases:
+- /fr/continuous_integration/setup_pipelines/circleci
+further_reading:
+- link: /continuous_integration/pipelines
+  tag: Documentation
+  text: Explorer les résultats et les performances de l'exécution du pipeline
+- link: /continuous_integration/pipelines/custom_commands/
+  tag: Documentation
+  text: Étendre Pipeline Visibility en traçant des commandes individuelles
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: Dépannage de CI Visibility
+- link: /continuous_integration/pipelines/custom_tags_and_measures/
+  tag: Documentation
+  text: Étendez Pipeline Visibility en ajoutant des tags et des mesures personnalisés
+title: Configuration de CircleCI pour CI Visibility
+---
+## Présentation {#overview}
+
+[CircleCI][1] est une plateforme d'intégration et de livraison continues qui permet aux équipes de créer, tester et déployer des logiciels à grande échelle.
+
+Configurez CI Visibility pour CircleCI afin d'optimiser les performances de vos pipelines, d'améliorer la collaboration entre les équipes et de garantir des processus de build cohérents et conformes.
+
+### Compatibilité {#compatibility}
+
+| Pipeline Visibility | Plateforme | Définition |
+|---|---|---|
+| [Nouvelles tentatives partielles][12] | Pipelines partiels | Affichez les exécutions de pipeline ayant fait l'objet de nouvelles tentatives partielles. |
+| [Analyse des logs][20] | Analyse des logs | Utilise des modèles LLM sur les logs pertinents pour analyser la cause racine des jobs CI ayant échoué. |
+| Corrélation des logs | Corrélation des logs | Corrélez les spans de pipeline et de job aux logs. Nécessite [Logs Storage][10]. |
+| [Spans personnalisés][13] | Spans personnalisés | Configurez des spans personnalisés pour vos pipelines. |
+| Tags prédéfinis personnalisés | Tags prédéfinis personnalisés | Définissez des [tags personnalisés][6] pour tous les spans de pipeline et de job générés. |
+| [Tags personnalisés][14] [et mesures à l'exécution][15] | Tags personnalisés et mesures à l'exécution | Configurez des [tags et mesures personnalisés][7] à l'exécution. |
+| [Filtrer les jobs CI sur le chemin critique][18] | Filtrer les jobs CI sur le chemin critique | Filtrez par jobs sur le chemin critique. |
+| [Temps d'exécution][19] | Temps d'exécution  | Affichez la durée pendant laquelle les pipelines ont exécuté des jobs. |
+
+### Terminologie {#terminology}
+
+Ce tableau montre la correspondance des concepts entre Datadog CI Visibility et CircleCI :
+
+| Datadog                    | CircleCI  |
+|----------------------------|-----------|
+| Pipeline                   | Workflow  |
+| Job                        | Job       |
+| _Non disponible dans Datadog_ | Étape      |
+
+## Configurer l'intégration Datadog {#configure-the-datadog-integration}
+
+L'intégration Datadog pour [CircleCI][1] utilise des [webhooks][2] pour envoyer des données à Datadog.
+
+1. Pour chaque projet, accédez à {{< ui >}}Project Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} dans CircleCI et ajoutez un nouveau webhook :
+
+   * {{< ui >}}Webhook Name{{< /ui >}} : `Datadog CI Visibility` ou tout autre nom d'identifiant que vous souhaitez fournir.
+   * {{< ui >}}Receiver URL{{< /ui >}} : <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> où `<API_KEY>` est votre [clé d'API Datadog][3].
+   * {{< ui >}}Certificate verifications{{< /ui >}} : Activez ce check.
+   * {{< ui >}}Events{{< /ui >}} : Sélectionnez {{< ui >}}Workflow Completed{{< /ui >}} et {{< ui >}}Job Completed{{< /ui >}}.
+
+2. Cliquez sur {{< ui >}}Add Webhook{{< /ui >}} pour enregistrer le nouveau webhook.
+
+## Configuration avancée {#advanced-configuration}
+
+### Configurer plusieurs projets en masse {#configure-multiple-projects-in-bulk}
+
+Datadog propose un [script][9] pour vous aider à activer les [service hooks] sur plusieurs ou l'ensemble de vos projets CircleCI en utilisant l'API CircleCI. Le script nécessite Python 3 et le package `requests`.
+
+Pour exécuter ce script, vous avez besoin de :
+
+- Votre clé d'API Datadog
+- Un jeton d'API personnel CircleCI
+
+Pour plus d'informations, vous pouvez exécuter la commande suivante :
+
+```shell
+./service_hooks.py --help
+```
+
+Pour configurer en masse les hooks de vos projets :
+
+1. Connectez-vous à votre compte CircleCI et suivez tous les projets pour lesquels vous souhaitez activer les hooks. Optionnellement, utilisez le bouton {{< ui >}}Follow All{{< /ui >}} sur la page Projets.
+
+2. Exécutez le script en utilisant les variables d'environnement `DD_API_KEY` et `DD_SITE`, ou en passant des paramètres de flag `--dd-api-key` et `--dd-site`:
+
+   Par exemple :
+
+   ```shell
+   ./service_hooks.py \
+       --dd-api-key <DD_API_KEY> \
+       --circle-token <CIRCLECI_TOKEN> \
+       --dd-site {{< region-param key="dd_site" code="true" >}} \
+       --threads 4
+   ```
+
+### Set custom tags 
+
+To set custom tags to all the pipeline and job spans generated by the integration, add to the {{< ui >}}Receiver URL{{< /ui >}} a URL-encoded query parameter `tags` with `key:value` pairs separated by commas.
+
+If a `key:value` pair contains any commas, surround it with quotes. For example, to add `key1:value1,"key2: value with , comma",key3:value3`, the following string would need to be appended to the {{< ui >}}Receiver URL{{< /ui >}}: `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`.
+
+
+
+#### Integrate with Datadog Teams 
+
+To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][8] team handle exactly.
+
+### Manage job logs 
+
+#### Logs Analysis 
+
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from CircleCI.
+
+For a full explanation, see the guide on [using Logs Analysis][20].
+
+Logs Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Logs Analysis settings, go to [CI/CD Repository settings][21], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
+
+#### Logs Storage 
+
+To enable Logs Storage, go to [CI/CD Repository settings][21], and enable Logs Storage at the Datadog organization level or for the desired repositories.
+
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
+
+## Visualize pipeline data in Datadog 
+
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
+
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][17].
+
+## Further reading 
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://circleci.com/
+[2]: https://circleci.com/docs/2.0/webhooks
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://app.datadoghq.com/ci/pipelines
+[5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: /fr/continuous_integration/pipelines/circleci/#set-custom-tags
+[7]: /fr/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /fr/account_management/teams/
+[9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
+[10]: /fr/continuous_integration/pipelines/circleci/#logs-storage
+[11]: /fr/integrations/circleci/#setup
+[12]: /fr/glossary/#partial-retry
+[13]: /fr/glossary/#custom-span
+[14]: /fr/glossary/#custom-tag
+[15]: /fr/glossary/#custom-measure
+[16]: /fr/logs/guide/best-practices-for-log-management/
+[17]: /fr/continuous_integration/search/#search-for-pipelines
+[18]: /fr/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[19]: /fr/glossary/#pipeline-execution-time
+[20]: /fr/continuous_integration/guides/use_ci_jobs_failure_analysis/
+[21]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

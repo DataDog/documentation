@@ -1,0 +1,1 @@
+If the destination returns a `401 Unauthorized` error, check the value stored for your Splunk HEC token identifier. Store only the token itself (for example, `<GUID>`).

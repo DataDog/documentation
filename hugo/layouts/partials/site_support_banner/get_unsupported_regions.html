@@ -1,0 +1,49 @@
+{{/*
+    Returns the list of unsupported regions for this page, or an empty slice.
+
+    Data: shared/site_support.yaml, mounted as data/site_support.yaml. Astro
+    reads the same file. See shared/README.md.
+
+    Lookup order:
+      1. If the page has a `site_support_id` param (frontmatter or cascade), use
+         that key. An unknown key fails the build.
+      2. Otherwise, match the page URL against each key's `url_paths` globs.
+         The URL is compared without the language prefix or a trailing slash,
+         so /fr/logs/ is matched as /logs.
+
+    Callers:
+      - layouts/partials/site_support_banner/site_support_banner.html
+      - layouts/partials/us2_fed_integration_banner/us2_fed_integration_banner.html
+      - layouts/shortcodes/callout.html
+*/}}
+{{ $page := .Page }}
+{{ $ids := site.Data.site_support.site_support_ids }}
+{{ $result := slice }}
+
+{{ $site_support_id := $page.Params.site_support_id }}
+{{ if $site_support_id }}
+    {{ with index $ids $site_support_id }}
+        {{ $result = .regions }}
+    {{ else }}
+        {{ errorf "site_support_id '%s' at '%s' not found in shared/site_support.yaml. If the site_support_id is correct, add it to that file." $site_support_id $page.Path }}
+    {{ end }}
+{{ else }}
+    {{ $path := $page.RelPermalink }}
+    {{/* Strip the language prefix (and any base URL path) by stripping the home page's path. */}}
+    {{ $path = strings.TrimPrefix (strings.TrimSuffix "/" $page.Site.Home.RelPermalink) $path }}
+    {{ if and (gt (len $path) 1) (hasSuffix $path "/") }}
+        {{ $path = strings.TrimSuffix "/" $path }}
+    {{ end }}
+
+    {{ $matchers := partialCached "site_support_banner/url_path_matchers.html" site }}
+    {{ if and $path (findRE $matchers.any $path 1) }}
+        {{ range $matchers.keys }}
+            {{ if findRE .re $path 1 }}
+                {{ $result = (index $ids .id).regions }}
+                {{ break }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $result }}

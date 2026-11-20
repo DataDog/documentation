@@ -1,0 +1,3 @@
+---
+title: Submit distribution points
+---

@@ -1,0 +1,543 @@
+---
+title: Data Observability Monitor
+description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses, as well as failed or long-running data jobs."
+further_reading:
+  - link: "/data_observability/"
+    tag: "Documentation"
+    text: "Data Observability Overview"
+  - link: "/data_observability/quality_monitoring/"
+    tag: "Documentation"
+    text: "Quality Monitoring"
+  - link: "/data_observability/jobs_monitoring/"
+    tag: "Documentation"
+    text: "Jobs Monitoring"
+  - link: "/monitors/notify/"
+    tag: "Documentation"
+    text: "Configure your monitor notifications"
+  - link: "/monitors/downtimes/"
+    tag: "Documentation"
+    text: "Schedule a downtime to mute a monitor"
+  - link: "/monitors/status/"
+    tag: "Documentation"
+    text: "Consult your monitor status"
+---
+
+## Overview
+
+[Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
+
+Data Observability also includes [job monitors](#job-monitors), which alert when data jobs such as Airflow DAGs, Databricks jobs, or dbt models fail or run longer than expected.
+
+Data quality monitors support the following metric types:
+
+**Table-level metric types:**
+| Metric type | Description |
+|---|---|
+| Freshness | Tracks the time elapsed since a table was last updated. |
+| Row Count | Tracks the number of rows in a table or view. |
+| Custom SQL | Tracks a custom metric value returned by a SQL query. |
+
+**Column-level metric types:**
+| Metric type | Description |
+|---|---|
+| Freshness | Tracks the most recent date seen in a datetime column. |
+| Uniqueness | Tracks the percentage of unique values. |
+| Nullness | Tracks the percentage of null values. |
+| Cardinality | Tracks the number of distinct values. |
+| Percent Zero | Tracks the percentage of values equal to zero. |
+| Percent Negative | Tracks the percentage of negative values. |
+| Min / Max / Mean / Sum / Standard Deviation | Tracks statistical measures across column values. |
+
+Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
+
+Data quality, source to target, and schema change monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]). Job monitors require [Jobs Monitoring][14] to be set up for at least one supported technology.
+
+Data Observability offers four monitor types, selected in the first step of the [monitor creation flow][13]:
+
+| Monitor type | What it monitors |
+|---|---|
+| Data quality | Freshness, row count, and column-level metrics on tables and columns. |
+| [Source to target](#source-to-target-monitors) | The difference in the same metric between a source asset and a target asset. |
+| [Schema change](#schema-change-monitors) | Fields added, removed, renamed, or retyped in your warehouse. |
+| [Job](#job-monitors) | Failed job runs and job runs that take too long. |
+
+Unless stated otherwise, the following sections describe the data quality monitor type.
+
+## Monitor creation
+
+To create a Data Observability monitor in Datadog, navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] or [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. To view all existing Data Observability monitors, see the [Data Observability Monitors page][7].
+
+## Choose data to monitor
+
+First, select whether to monitor the {{< ui >}}Table{{< /ui >}} or {{< ui >}}Column{{< /ui >}} level:
+
+{{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Choose data to monitor: entity type selector, query input, and lineage relationship filter" style="width:60%;" >}}
+
+Then, use the {{< ui >}}Edit{{< /ui >}} tab to search for tables, views, or columns by typing `key:value` filters into the search field.
+
+**Filter by name or location:**
+
+| Filter | Example | Description |
+|---|---|---|
+| Name | `name:USERS*` | Match by name. Supports `*` wildcards. |
+| Schema | `schema:PROD` | Match by schema. |
+| Database | `database:ANALYTICS_DB` | Match by database. |
+| Account | `account:my_account` | Match by account. |
+
+**Filter by tag:**
+
+Filter on any tag applied to your data assets by using the tag key as the filter key. For example, if your assets are tagged with `owner`, `platform`, or `environment`, search on those tags directly:
+
+| Example | Description |
+|---|---|
+| `owner:data-platform-team` | Match assets tagged with `owner:data-platform-team`. |
+| `platform:snowflake` | Match assets tagged with `platform:snowflake`. |
+| `environment:production` | Match assets tagged with `environment:production`. |
+
+Tag filters support the same `*` wildcards and quoting as name filters, for example, `owner:data-*` or `platform:"Snowflake Prod"`.
+
+**Filter by computed attribute:**
+
+In addition to your own tags, Datadog computes attributes for your data assets that you can filter on. The available computed attribute is:
+
+| Attribute | Values | Description |
+|---|---|---|
+| `lineage_score` | `0.00`, `0.10`, `0.30`, `0.50`, `0.70`, `0.90`, or `1.00` | A relative measure of how connected an asset is in your lineage graph, based on how many downstream assets depend on it compared to other assets of the same type. Higher values identify the tables, views, and columns that the downstream consumers depend on. |
+
+`lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
+
+Combine any of these filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
+
+**Examples:**
+
+| Goal | Query |
+|---|---|
+| All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
+| All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
+| Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
+| Tables owned by a specific team | `owner:data-platform-team` |
+| The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
+
+**Filter by lineage relationship:**
+
+To scope your selection to assets that are connected to another asset in your lineage graph, click {{< ui >}}Add Relation Filter{{< /ui >}}. Choose {{< ui >}}Upstream of{{< /ui >}} or {{< ui >}}Downstream of{{< /ui >}}, then select a specific asset or use the same `key:value` filters to match a set of assets. For example, monitor every table that is upstream of a critical dashboard, or every column downstream of a specific source table.
+
+**Filter by hierarchy relationship:**
+
+To scope your selection to assets that are a parent or child of another asset in your lineage graph, click {{< ui >}}Add Relation Filter{{< /ui >}}. Choose {{< ui >}}Parent of{{< /ui >}} or {{< ui >}}Child of{{< /ui >}}, then select a specific asset or use the same `key:value` filters to match a set of assets. For example, monitor every table that has a `revenue` column, or every table that is within a critical schema.
+
+A single monitor can track up to 5,000 tables, views, or columns. This limit cannot be increased. If your query matches more, split them across multiple monitors.
+
+## Select your metric type
+
+Choose a metric type based on the data quality signal you want to track. Each monitor tracks one metric type.
+
+{{< tabs >}}
+{{% tab "Freshness" %}}
+
+The {{< ui >}}Freshness{{< /ui >}} metric type detects when data has not been updated within an expected time window. Use it to catch stale data before it affects downstream reports or models.
+
+- **Table freshness** tracks the time elapsed since the table was last updated. Table freshness is not available for views or for data warehouses that do not provide updated timestamps for tables in system metadata. Use column-level freshness instead.
+- **Column freshness** tracks the most recent date seen in a datetime column.
+
+{{% /tab %}}
+{{% tab "Row Count" %}}
+
+The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your tables. Use it to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
+
+{{% /tab %}}
+{{% tab "Column Metric" %}}
+
+{{< ui >}}Column{{< /ui >}} metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
+
+| Metric | Description |
+|---|---|
+| {{< ui >}}Uniqueness{{< /ui >}} | The percentage of values in a column that are unique. |
+| {{< ui >}}Nullness{{< /ui >}} | The percentage of values in a column that are null. |
+| {{< ui >}}Cardinality{{< /ui >}} | The number of distinct values in a column. |
+| {{< ui >}}Percent Zero{{< /ui >}} | The percentage of values in a column that are equal to zero. |
+| {{< ui >}}Percent Negative{{< /ui >}} | The percentage of values in a column that are negative. |
+| {{< ui >}}Min{{< /ui >}} | The minimum of all values in a column. |
+| {{< ui >}}Max{{< /ui >}} | The maximum of all values in a column. |
+| {{< ui >}}Mean{{< /ui >}} | The average of all values in a column. |
+| {{< ui >}}Standard Deviation{{< /ui >}} | The measure of variation within values in a column. |
+| {{< ui >}}Sum{{< /ui >}} | The sum of all values in a column. |
+
+<div class="alert alert-info">Some column metrics are only available for specific column types. Numeric metrics (Percent Zero, Percent Negative, Min, Max, Mean, Standard Deviation, Sum) require numeric columns.</div>
+
+{{% /tab %}}
+{{% tab "Custom SQL" %}}
+
+The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value returned by a SQL query that you define. Use it when built-in metric types do not cover your use case, such as monitoring business-specific data quality rules.
+
+1. Select a model type that describes the value returned by your query:
+    - {{< ui >}}Default{{< /ui >}}: The query returns a scalar value. Use this in most cases.
+    - {{< ui >}}Freshness{{< /ui >}}: The query returns the difference (in seconds) between the current time and the last time an event occurred.
+    - {{< ui >}}Percentage{{< /ui >}}: The query returns a percentage value between 0 and 100.
+2. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
+3. Click {{< ui >}}Validate{{< /ui >}} to verify your query syntax.
+
+If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the {{< ui >}}Group by{{< /ui >}} field (for example, `column_a, column_b`). Each group is evaluated independently.
+
+<div class="alert alert-warning">Datadog stores the <code>dd_value</code> result and the value of each grouped column. Avoid grouping by columns that contain sensitive data. For details, see <a href="/data_observability/quality_monitoring/#data-sent-to-datadog">Data sent to Datadog</a>.</div>
+
+**Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
+
+{{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Configure monitor
+
+### Detection method
+
+Select a detection method:
+
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
+
+### WHERE clause
+
+Add a {{< ui >}}WHERE{{< /ui >}} clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
+
+- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())` — only monitor rows from the past week.
+- `region = 'US'` — only monitor data for a specific region.
+
+### Group by
+
+You can add a {{< ui >}}Group by{{< /ui >}} clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
+
+{{< img src="monitors/monitor_types/data_observability/group_by_column_selection.png" alt="Input field for selecting GROUP BY dimensions." style="width:80%;" >}}
+
+The default limit is 500 groups per monitor. To increase this limit, [contact Support][9].
+
+### Missing data
+
+In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
+
+### Model configuration
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+{{< /callout >}}
+
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
+
+| Setting | Description |
+|---|---|
+| {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
+| {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
+
+Use the following guidelines to tune a monitor:
+
+- To get more or fewer alerts across the whole series, adjust {{< ui >}}Sensitivity{{< /ui >}}. Bounds scale with how much the metric normally varies.
+- To avoid alerts on deviations smaller than a fixed amount, such as fewer than 1,000 rows from the predicted value, set a minimum bound size.
+- To correct how the model handled specific points, such as a missed alert or a false alert, annotate the bounds. See the [Annotate bounds](#annotate-bounds) section.
+
+### Monitor schedule
+
+Set how often the monitor evaluates your data:
+
+- {{< ui >}}Scheduled{{< /ui >}}: The monitor runs on a fixed cadence. Under {{< ui >}}Run this monitor{{< /ui >}}, select {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or {{< ui >}}Custom schedule{{< /ui >}}.
+- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule to accumulate enough historical data for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics.
+
+To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and supply a cron expression. A custom schedule can run as often as every 15 minutes. {{< ui >}}Preview times{{< /ui >}} lists the next several runs in your local time zone, so you can confirm the expression before saving it.
+
+### Set alert conditions
+
+Choose an aggregation type:
+
+- {{< ui >}}Simple Alert{{< /ui >}}: Send a single notification when any monitored table or column meets the condition.
+- {{< ui >}}Multi Alert{{< /ui >}}: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
+
+### Example notification
+
+{{< tabs >}}
+{{% tab "Threshold" %}}
+
+{{< code-block lang="text" >}}
+{{#is_alert}}
+Data quality issue detected on {{database.name}}.{{schema.name}}.{{table.name}}:
+current value {{value}} has breached the threshold of {{threshold}}.
+{{/is_alert}}
+
+{{#is_recovery}}
+Data quality issue on {{database.name}}.{{schema.name}}.{{table.name}} has recovered.
+Current value {{value}} is within the threshold of {{threshold}}.
+{{/is_recovery}}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Anomaly" %}}
+
+{{< code-block lang="text" >}}
+{{#is_alert}}
+Anomaly detected on {{database.name}}.{{schema.name}}.{{table.name}}:
+observed value {{observed}} is outside the expected range of {{lower_bound}} to {{upper_bound}}
+(predicted: {{predicted}}).
+{{/is_alert}}
+
+{{#is_recovery}}
+{{database.name}}.{{schema.name}}.{{table.name}} has recovered.
+Observed value {{observed}} is within the expected range.
+{{/is_recovery}}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Source to target monitors
+
+<div class="alert alert-info">Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+
+A source to target monitor compares the same metric on two data assets and alerts when the two values diverge. Other Data Observability monitors track whether a single asset is fresh or complete. A source to target monitor tracks whether the copy that landed in a destination matches what left the source.
+
+When a pipeline moves data between systems, partial failures rarely look like failures. If 100,000 rows leave a source table and 99,850 rows arrive in the destination, a row count monitor on the destination alone sees a plausible value. Comparing the two assets surfaces the gap.
+
+Use a source to target monitor to:
+
+- Validate replication from Postgres into Databricks.
+- Reconcile two databases inside the same Snowflake account, for example a quality database against production.
+- Verify a migration from Redshift to BigQuery before cutover, by running both systems side by side and confirming that they match.
+- Confirm that a transformation does not drop rows between its input and its output.
+
+Source to target monitors are available in all regions except GovCloud.
+
+### Create a source to target monitor
+
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
+2. Under {{< ui >}}Choose source{{< /ui >}}, select the warehouse that holds the source data, then select the data to compare.
+3. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
+4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
+5. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
+    - {{< ui >}}Difference{{< /ui >}}: the target value minus the source value. A negative value means the target has less than the source.
+    - {{< ui >}}% Difference{{< /ui >}}: the same difference as a percentage of the source value.
+6. Configure the detection method, schedule, and notifications as described in [Configure monitor](#configure-monitor).
+
+The {{< ui >}}Preview Monitor Evaluation{{< /ui >}} panel shows the identified source and target, along with a preview of the selected metric.
+
+The monitored asset is the target, so the monitor appears on the target's status page.
+
+### Compare a custom metric
+
+When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for the source and one query for the target. A {{< ui >}}WHERE{{< /ui >}} clause is not accepted for this metric type. Include any filtering in each query.
+
+### Evaluation
+
+The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
+
+## Schema change monitors
+
+<div class="alert alert-info">Schema change monitors are in Preview.</div>
+
+A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard, such as when a column is dropped, renamed, or switched to a different data type.
+
+Schema change monitors detect four kinds of change across databases, schemas, tables, and columns:
+
+| Change type | Description |
+|---|---|
+| Added | A database, schema, table, or column was created. |
+| Removed | A database, schema, table, or column was dropped. |
+| Renamed | A table or column was renamed. |
+| Type changed | A column's data type changed, such as from `INTEGER` to `STRING`. |
+
+Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
+
+### Create a schema change monitor
+
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Schema Change{{< /ui >}}][11].
+2. Under {{< ui >}}Choose data to monitor{{< /ui >}}, select the warehouse to watch.
+3. Configure notifications as described in [Configure monitor](#configure-monitor).
+
+A schema change monitor does not take a metric type or a detection method because it alerts on a structural change rather than on a measured value crossing a bound.
+
+### Browse detected schema changes
+
+To see the changes Datadog has detected without creating a monitor, go to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Schema Changes{{< /ui >}}][12]. Filter by platform, account, database, schema, or change type, and expand an entry to see the affected columns and their data types.
+
+Changes are detected when Datadog next collects schema metadata from your warehouse and compares the current structure against the previously collected one.
+
+## Job monitors
+
+A job monitor evaluates every run of the jobs you select, and alerts when a run fails or takes too long. Job monitors require [Jobs Monitoring][14] to be set up for at least one supported technology.
+
+Job monitors support two checks:
+
+| Check | Alerts when |
+|---|---|
+| [Job failure](#job-failure) | A set number of consecutive runs of a job fail. |
+| [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than normal when using the {{< ui >}}Anomalies{{< /ui >}} detection method. |
+
+You can add both checks in one monitor definition. Datadog then creates two monitors, one for failures and one for duration, that share the same jobs and notification settings.
+
+### Create a job monitor
+
+1. Navigate to the [job monitor creation page][15].
+2. Under {{< ui >}}Select jobs{{< /ui >}}, choose the jobs to monitor:
+    - In {{< ui >}}Technology{{< /ui >}}, select the kind of job. You cannot change the technology after you create the monitor.
+    - In {{< ui >}}Filter to jobs{{< /ui >}}, search for jobs by name, or filter with `key:value` tags or attributes to match a set of jobs.
+    - In {{< ui >}}Filter runs{{< /ui >}}, filter monitored runs by tags or attributes that change per run of the same job. This option is available only for Airflow DAGs and tasks, Databricks jobs, and custom OpenLineage jobs.
+
+    {{< img src="monitors/monitor_types/data_observability/job_monitor_select_jobs.png" alt="The Select jobs step with DAG selected as the technology, a name filter applied, and two matching jobs listed." style="width:100%;" >}}
+
+3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both. Configure each check as described in [Job failure](#job-failure) and [Job duration](#job-duration).
+4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, the failure count, the error, and links to the job and the failed run. Use the message for routing, @-mentions, and team context.
+5. Under {{< ui >}}Permissions{{< /ui >}}, optionally restrict who can edit the monitor.
+6. Review the monitor settings and create the monitor.
+
+### Group by for job monitors
+
+Each check is grouped by the attributes that identify a job in the selected technology, so each job alerts separately. The following table lists the required {{< ui >}}Group by{{< /ui >}} tags for each technology. You can add tags to alert separately on different runs of the same job, but you cannot remove the required tags:
+
+| Technology | Job types | Required group by |
+|---|---|---|
+| Airflow | DAG | `name`, `env` |
+| Airflow | Task | `name`, `dag_name` |
+| AWS Glue | Job | `name` |
+| Azure Data Factory | Pipeline | `name` |
+| Databricks | Job | `name`, `workspace_name` |
+| dbt | Job, Model, Test | `name`, `project`, `env` |
+| Spark | Batch Job | `name` |
+| [Custom OpenLineage][16] | Each job that sends custom OpenLineage events | `name`, `operation_name` |
+
+### Job failure
+
+The {{< ui >}}Job failure{{< /ui >}} check alerts when consecutive runs of a job fail.
+
+1. Set {{< ui >}}Trigger when{{< /ui >}} to the number of consecutive failed runs that triggers an alert. For example, enter `1` to alert after any failure and `2` to alert only after two failed runs in a row.
+2. Optionally, set {{< ui >}}Warn when{{< /ui >}} to a lower count.
+
+The monitor recovers automatically when a later run succeeds.
+
+{{< img src="monitors/monitor_types/data_observability/job_monitor_failure.png" alt="A Job failure check with alert and warning thresholds for consecutive failed runs and a graph of failed runs." style="width:100%;" >}}
+
+### Job duration
+
+<div class="alert alert-info">Job duration monitors are in Preview.</div>
+
+The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. For most technologies, it evaluates runs that are still in progress, so an alert can fire before the run finishes. Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
+
+Choose a {{< ui >}}Detection method{{< /ui >}}:
+
+{{< tabs >}}
+{{% tab "Anomalies" %}}
+
+{{< ui >}}Anomalies{{< /ui >}} is the default and recommended method because it reduces false positives and the configuration overhead of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
+
+- A job needs 24 hours of completed-run history before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
+- To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
+
+{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="A Job duration check using the Anomalies detection method, with a graph of recent run durations." style="width:100%;" >}}
+
+{{% /tab %}}
+{{% tab "Thresholds" %}}
+
+The {{< ui >}}Thresholds{{< /ui >}} method alerts when a run crosses a fixed duration.
+
+1. Under {{< ui >}}Alert threshold{{< /ui >}}, set {{< ui >}}Trigger when a run exceeds{{< /ui >}} to a duration in minutes or hours.
+2. Optionally, set {{< ui >}}Warning threshold{{< /ui >}} to a shorter duration. The warning threshold must be less than the alert threshold.
+
+One threshold applies to every job that the monitor matches. If the selected jobs have different typical run times, create a monitor for each group of similar jobs, or use {{< ui >}}Anomalies{{< /ui >}}.
+
+{{< img src="monitors/monitor_types/data_observability/job_monitor_duration_thresholds.png" alt="A Job duration check using the Thresholds detection method, with alert and warning thresholds shown on the run duration graph." style="width:100%;" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The preview graph shows the durations of recent completed runs for the selected jobs. Use it to compare a threshold against real run times before you save the monitor.
+
+#### How job duration is evaluated
+
+- **Runs in progress**: While a job runs, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. If an alert fires during a run, the monitor's status page shows how long the run has been in progress.
+- **Completed runs**: When a run finishes, its final duration replaces the in-progress value. The monitor evaluates runs from the past 10 days.
+- **Recovery**: The monitor recovers when a later run finishes within the threshold or the learned bound.
+- **dbt Cloud**: dbt Cloud reports a run to Datadog only after the run finishes. For dbt Cloud jobs, models, and tests, the monitor evaluates each run when it completes, not while it runs. dbt Core jobs that send OpenLineage events are evaluated while they run.
+
+## Example monitors
+
+{{< tabs >}}
+{{% tab "Row count drop" %}}
+
+Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
+
+1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Row Count{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
+2. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
+
+{{% /tab %}}
+{{% tab "Stale table" %}}
+
+Alert when a critical table has not been updated within the expected time window.
+
+1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Freshness{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+2. Select {{< ui >}}Thresholds{{< /ui >}} as the detection method.
+3. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
+
+{{% /tab %}}
+{{% tab "Null percentage spike" %}}
+
+Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
+
+1. Select {{< ui >}}Column{{< /ui >}} > {{< ui >}}Nullness{{< /ui >}} and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
+2. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method.
+
+{{% /tab %}}
+{{% tab "Rows lost between source and target" %}}
+
+Detect rows dropped between a source table and its destination after a replication or migration.
+
+1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+2. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
+3. Select {{< ui >}}Anomalies{{< /ui >}} as the detection method.
+
+{{% /tab %}}
+{{% tab "Long-running job" %}}
+
+Alert when a nightly job runs past its expected window, while the job is still running.
+
+1. Select {{< ui >}}Jobs{{< /ui >}}, set {{< ui >}}Technology{{< /ui >}} to {{< ui >}}DAG{{< /ui >}} under Airflow, and filter to the DAG to watch (for example, `name:nightly_orders_load`).
+2. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job duration{{< /ui >}} and choose {{< ui >}}Thresholds{{< /ui >}}.
+3. Set the {{< ui >}}Alert threshold{{< /ui >}} to `2 hours` and optionally a {{< ui >}}Warning threshold{{< /ui >}} at `90 minutes`.
+4. Optionally, also select {{< ui >}}Job failure{{< /ui >}} to get an alert when the DAG fails.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Annotate bounds
+
+For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data. For job duration monitors, use annotations to teach the model which job run durations are expected.
+
+{{< img src="/monitors/monitor_types/data_observability/annotate_bounds.png" alt="Hover menu for annotating a monitor bound." style="width:90%;" >}}
+
+On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a time range on the chart, and choose one of the following annotations:
+
+| Annotation | Description |
+|---|---|
+| {{< ui >}}Expected{{< /ui >}} | Expand bounds to include the marked behavior permanently. |
+| {{< ui >}}Reset for now{{< /ui >}} | Mark behavior as OK, but alert if it happens again. |
+| {{< ui >}}Missed alert{{< /ui >}} | Contract bounds to alert on this behavior. |
+| {{< ui >}}Ignore{{< /ui >}} | Exclude annotated data when modeling bounds. |
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /data_observability/
+[2]: /data_observability/quality_monitoring/
+[3]: /data_observability/quality_monitoring/data_warehouses/snowflake/
+[4]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[5]: /data_observability/quality_monitoring/data_warehouses/bigquery/
+[6]: https://app.datadoghq.com/monitors/create/data-quality
+[7]: https://app.datadoghq.com/data-obs/monitors
+[8]: /monitors/configuration/?tab=thresholdalert#thresholds
+[9]: /help/
+[10]: /api/latest/data-observability/
+[11]: https://app.datadoghq.com/monitors/create/schema-change
+[12]: https://app.datadoghq.com/data-obs/schema-changes
+[13]: https://app.datadoghq.com/monitors/create/data-quality
+[14]: /data_observability/jobs_monitoring/
+[15]: https://app.datadoghq.com/data-obs/monitors/create/data-jobs
+[16]: /data_observability/jobs_monitoring/openlineage/

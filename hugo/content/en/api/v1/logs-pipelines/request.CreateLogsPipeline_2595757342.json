@@ -1,0 +1,20 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayKeyValue",
+  "processors": [
+    {
+      "type": "array-processor",
+      "is_enabled": true,
+      "name": "extract_kv",
+      "operation": {
+        "type": "key-value",
+        "source": "tags",
+        "key_to_extract": "name",
+        "value_to_extract": "value"
+      }
+    }
+  ],
+  "tags": []
+}

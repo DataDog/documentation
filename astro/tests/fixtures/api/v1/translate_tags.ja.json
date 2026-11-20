@@ -1,0 +1,10 @@
+{
+  "aws-integration": {
+    "name": "AWS インテグレーション",
+    "description": "Datadog-AWS インテグレーションの構成は、Datadog API から直接行います。\n詳細については、[AWS インテグレーションのページ](https://docs.datadoghq.com/integrations/amazon_web_services)を参照してください。"
+  },
+  "dashboards": {
+    "name": "ダッシュボード",
+    "description": "API を使用して、ダッシュボードおよび共有ダッシュボードへのアクセスを管理します。詳細については、[ダッシュボードページ](https://docs.datadoghq.com/dashboards/)をご覧ください。"
+  }
+}

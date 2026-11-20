@@ -1,0 +1,11 @@
+- HTTP/S endpoint URL:
+   - The Observability Pipelines Worker collects log events from this endpoint.	For example, `https://127.0.0.8/logs`.
+   - The default environment variable is `DD_OP_SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
+- HTTP/S Client TLS passphrase (when enabled):
+   - The default environment variable is `DD_OP_SOURCE_HTTP_CLIENT_KEY_PASS`.
+- If you are using basic authentication:
+   - HTTP/S endpoint authentication username and password.
+   - The default environment variable is `DD_OP_SOURCE_HTTP_CLIENT_USERNAME` and `DD_OP_SOURCE_HTTP_CLIENT_PASSWORD`.
+- If you are using bearer authentication:
+   - HTTP/S endpoint bearer token.
+   - The default environment variable is `DD_OP_SOURCE_HTTP_CLIENT_BEARER_TOKEN`.

@@ -1,0 +1,172 @@
+---
+import Tabs from "@components/Tabs/Tabs.astro";
+import TabPanel from "@components/Tab/TabPanel.astro";
+import CodeBlock from "@components/CodeBlock/CodeBlock.astro";
+import ApiSchemaTable from "@components/ApiSchemaTable/ApiSchemaTable.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import {
+  renderMarkdown,
+  renderMarkdownInline,
+} from "@lib/api/markdownRenderer";
+import styles from "./ApiResponse.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import { useTranslations } from "@lib/i18n/i18n";
+
+const cl = classListFactory(styles);
+
+interface Example {
+  name: string;
+  value: string;
+  language?: string;
+}
+
+export interface ResponseData {
+  statusCode: string;
+  description?: string;
+  schemaDescription?: string;
+  schema?: SchemaField[];
+  examples?: Example[];
+  contentType?: string;
+  emptyBody?: boolean;
+}
+
+// MISSING_TRANSLATION_LABEL: These labels are not in the i18n file yet.
+const contentTypeLabel = (contentType: string) =>
+  `Content type: \`${contentType}\``;
+const NO_RESPONSE_BODY_LABEL = "No response body";
+
+interface Props {
+  responses: ResponseData[];
+}
+
+const { responses } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
+
+const outerGroupId = generateElementId("api-response");
+const outerLabels = responses.map((r) => r.statusCode);
+const outerPanelIds = responses.map((_, i) => `${outerGroupId}-panel-${i}`);
+const innerPanelIds = responses.map((_, i) => [
+  `${outerGroupId}-model-${i}`,
+  `${outerGroupId}-example-${i}`,
+]);
+---
+
+{
+  responses.length > 0 && (
+    <div class={cl("api-response")}>
+      <h3 class={cl("api-response__heading")}>{translate("response")}</h3>
+
+      <Tabs
+        id={outerGroupId}
+        variant="pills"
+        labels={outerLabels}
+        panelIds={outerPanelIds}
+      >
+        {responses.map((r, i) => {
+          const hasSchema = (r.schema?.length ?? 0) > 0;
+          const hasExamples = (r.examples?.length ?? 0) > 0;
+          // A top-level array of primitives has no rows, but Hugo still
+          // shows its Model tab, with the schema description and no table.
+          // A non-JSON body's Model is its content type.
+          const hasModel =
+            hasSchema ||
+            Boolean(r.schemaDescription) ||
+            Boolean(r.contentType) ||
+            Boolean(r.emptyBody);
+          const showInnerTabs = hasModel && hasExamples;
+          return (
+            <TabPanel id={outerPanelIds[i]} isActive={i === 0}>
+              <div
+                class={`api-response__panel api-response__panel--${r.statusCode}`}
+              >
+                {r.description && (
+                  <p
+                    class={cl("api-response__description")}
+                    set:html={renderMarkdownInline(r.description)}
+                  />
+                )}
+
+                {showInnerTabs && (
+                  <Tabs
+                    id={`${outerGroupId}-inner-${i}`}
+                    variant="pills"
+                    labels={[translate("model"), translate("example")]}
+                    panelIds={innerPanelIds[i]}
+                  >
+                    <TabPanel id={innerPanelIds[i][0]} isActive>
+                      {r.schemaDescription && (
+                        <div
+                          class={cl("api-response__schema-description")}
+                          set:html={renderMarkdown(r.schemaDescription)}
+                        />
+                      )}
+                      {r.contentType && (
+                        <div
+                          class={cl("api-response__schema-description")}
+                          set:html={renderMarkdown(
+                            contentTypeLabel(r.contentType),
+                          )}
+                        />
+                      )}
+                      {r.emptyBody && (
+                        <p class={cl("api-response__schema-description")}>
+                          {NO_RESPONSE_BODY_LABEL}
+                        </p>
+                      )}
+                      {hasSchema && (
+                        <ApiSchemaTable
+                          fields={r.schema!}
+                          nameColumnLabel="field"
+                        />
+                      )}
+                    </TabPanel>
+                    <TabPanel id={innerPanelIds[i][1]}>
+                      {r.examples!.map((ex) => (
+                        <div class={cl("api-response__example")}>
+                          <CodeBlock
+                            content={ex.value}
+                            language={ex.language ?? "json"}
+                          />
+                        </div>
+                      ))}
+                    </TabPanel>
+                  </Tabs>
+                )}
+
+                {!showInnerTabs && r.contentType && (
+                  <div
+                    class={cl("api-response__schema-description")}
+                    set:html={renderMarkdown(contentTypeLabel(r.contentType))}
+                  />
+                )}
+
+                {!showInnerTabs && hasSchema && r.schemaDescription && (
+                  <div
+                    class={cl("api-response__schema-description")}
+                    set:html={renderMarkdown(r.schemaDescription)}
+                  />
+                )}
+
+                {!showInnerTabs && hasSchema && (
+                  <ApiSchemaTable fields={r.schema!} nameColumnLabel="field" />
+                )}
+
+                {!showInnerTabs &&
+                  hasExamples &&
+                  r.examples!.map((ex) => (
+                    <div class={cl("api-response__example")}>
+                      <CodeBlock
+                        content={ex.value}
+                        language={ex.language ?? "json"}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </TabPanel>
+          );
+        })}
+      </Tabs>
+    </div>
+  )
+}

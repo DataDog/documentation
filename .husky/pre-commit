@@ -10,6 +10,17 @@ if [ "$branch" = "master" ]; then
   exit 1
 fi
 
+# If HEAD is detached, `git branch --show-current` returns empty and the
+# check above silently passes even when HEAD points at master's tip.
+if [ -z "$branch" ]; then
+  head_sha=$(git rev-parse HEAD)
+  master_sha=$(git rev-parse refs/heads/master 2>/dev/null)
+  if [ -n "$master_sha" ] && [ "$head_sha" = "$master_sha" ]; then
+    echo "${YELLOW}You're in a detached HEAD at master's tip. Check out a feature branch instead.${ENDCOLOR}"
+    exit 1
+  fi
+fi
+
 # Check for circular aliases in markdown files
 echo "Checking for circular aliases..."
 python3 .husky/check-circular-aliases.py

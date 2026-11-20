@@ -1,0 +1,658 @@
+// API
+$ddpurple: #632ca6;
+
+// Both endpoint and category pages: flush right alongside the h1.
+.main-api .api-copy-btn,
+.api-intro-header .api-copy-btn {
+    margin-top: 10px;
+
+    a {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        text-decoration: none;
+        border-bottom: none;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom: none;
+        }
+    }
+
+    .copy-btn-icon-wrapper {
+        position: relative;
+        margin-right: 2px;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+    }
+
+    #page-copied-text {
+        display: none;
+    }
+
+    @include media-breakpoint-down(xl) {
+        #page-copy-text {
+            display: none;
+        }
+    }
+}
+
+// Single API changelog page. Entries are sourced from data/changelog/<tag>.yml.
+.api-changelog {
+    .api-intro-header {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.api-changelog-intro {
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+    color: $gray-dark;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.api-changelog-filterbar {
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 14px 0;
+    margin-bottom: 8px;
+    background: $white;
+    border-bottom: 1px solid $gray-border;
+
+    @include media-breakpoint-up(lg) {
+        position: sticky;
+        top: 130px;
+    }
+}
+
+.api-changelog-tabs {
+    display: inline-flex;
+    border: 1px solid $gray-border;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.api-changelog-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    border: 0;
+    border-right: 1px solid $gray-border;
+    background: $white;
+    color: $gray-darkish;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s ease;
+
+    &:last-child {
+        border-right: 0;
+    }
+
+    &:hover {
+        background: $gray-lightest;
+    }
+
+    &.is-active {
+        background: $ddpurple;
+        color: $white;
+    }
+}
+
+.api-changelog-clear {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid $gray-border;
+    border-radius: 4px;
+    background: $white;
+    color: $gray-dark;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.api-changelog-timeline {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.api-changelog-date-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 96px 28px minmax(0, 1fr);
+    padding-bottom: 32px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 109px;
+        width: 2px;
+        height: 13px;
+        background: $gray-border;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        top: 7px;
+        left: 104px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: $white;
+        border: 3px solid $gray-light;
+    }
+
+    &:has(~ .api-changelog-date-section:not(.d-none))::after {
+        bottom: 0;
+        height: auto;
+    }
+}
+
+.api-changelog-date-header {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 26px;
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+        pointer-events: auto;
+        background-clip: border-box;
+        color: $gray-dark;
+    }
+}
+
+.api-changelog-entries {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.api-changelog-entry {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    background: $white;
+    border: 1px solid $gray-border;
+    border-radius: 6px;
+}
+
+.api-changelog-pill {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 4px;
+    color: $white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+
+    &--added {
+        background: $brand-success;
+    }
+
+    &--modified {
+        background: $ddpurple;
+    }
+
+    &--deprecated {
+        background: $brand-warning;
+        color: $gray-dark;
+    }
+
+    &--breaking {
+        background: $brand-danger;
+    }
+}
+
+.api-changelog-entry-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.api-changelog-entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.api-changelog-tag {
+    color: $gray-darkish;
+
+    strong {
+        color: $gray-dark;
+    }
+}
+
+.api-changelog-entry-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+
+    a {
+        color: $gray-dark;
+
+        &:hover {
+            color: $brand-primary;
+        }
+    }
+}
+
+.api-changelog-operations {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.625rem;
+    color: $gray-darkish;
+    font-size: 0.75rem;
+
+    code {
+        padding: 0.1rem 0.35rem;
+        border-radius: 3px;
+        background: $gray-lightest;
+        color: $gray-dark;
+        font-size: 0.75rem;
+    }
+}
+
+.api-changelog-pagination {
+    margin-top: 1.5rem;
+}
+
+.api-changelog-pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.api-changelog-pagination-item {
+    &::before {
+        content: none !important;
+    }
+
+    button {
+        display: block;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid $gray-border;
+        border-radius: 3px;
+        background: white;
+        color: $brand-primary;
+        font-size: 0.875rem;
+        font-weight: 600;
+
+        &:hover:not(:disabled) {
+            border-color: $ddpurple;
+            background: $ddpurple;
+            color: white;
+        }
+
+        &:disabled {
+            color: $gray-light;
+            cursor: default;
+        }
+    }
+
+    &.is-active button {
+        border-color: $ddpurple;
+        background: $ddpurple;
+        color: white;
+        cursor: default;
+    }
+}
+
+.api-changelog-empty {
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 1px dashed $gray-light;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.api-changelog-empty-title {
+    margin-bottom: 0.25rem;
+    color: $gray-dark;
+    font-weight: 600;
+}
+
+.api-changelog-empty-subtitle {
+    margin-bottom: 0.75rem;
+    color: $gray-darkish;
+    font-size: 0.875rem;
+}
+
+@include media-breakpoint-down(md) {
+    .api-changelog-date-section {
+        grid-template-columns: 82px 24px minmax(0, 1fr);
+
+        &::after {
+            left: 93px;
+        }
+
+        &::before {
+            left: 88px;
+        }
+    }
+
+    .api-changelog-date-header h2 {
+        font-size: 12px;
+    }
+
+    .api-changelog-entry {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+// Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
+.api-intro-header .api-copy-btn {
+    flex-shrink: 0;
+}
+
+.api-intro-header {
+    margin-bottom: 0.75rem;
+}
+
+.announcement.api {
+    .main-api {
+        h2 {
+            margin-top: -175px;
+            padding-top: 175px;
+        }
+    }
+    .api-toolbar {
+        margin-top: 0;
+
+        @include media-breakpoint-up(lg) {
+            top: 95px;
+        }
+    }
+
+    .main-api,
+    .sidenav-api {
+        @include media-breakpoint-between(lg, lg) {
+          margin-top: 30px;
+        }
+    }
+
+    .scrolled {
+        .sidenav-api {
+            @include media-breakpoint-up(lg) {
+                top: 96px;
+            }
+        }
+    }
+}
+
+
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner anchor offset
+@include media-breakpoint-down(md) {
+    .announcement.api:has(.announcement-banner--hide-mobile) .main-api h2 {
+        margin-top: -145px;
+        padding-top: 145px;
+    }
+}
+
+.main-api {
+    margin-bottom: 160px;
+    padding-left: 15px;
+
+    @media (min-width: 991px) {
+        padding-left: 29px;
+    }
+
+    h2 {
+        margin-top: -145px;
+        padding-top: 145px;
+        pointer-events: none;
+        background-clip: content-box;
+        margin-right: 0;
+        a {
+            pointer-events: initial;
+            border-bottom: 1px solid transparent;
+            &:hover {
+                color: #000;
+                border-bottom: 1px solid #000;
+            }
+        }
+    }
+
+    .read-only {
+        position: relative;
+        top: 2px;
+        font-size: 16px;
+    }
+
+    a {
+        color: #4a4a4a;
+        border-bottom: 1px solid #6c757d;
+        &:hover {
+            color: $ddpurple;
+            border-bottom: 1px solid $ddpurple;
+        }
+    }
+
+    .programming-lang-wrapper:not(.api-reference) {
+        min-height: 500px;
+
+        @include media-breakpoint-up(md) {
+            min-height: 600px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            min-height: 600px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            min-height: 600px;
+        }
+    }
+
+    .code-snippet-wrapper {
+        margin-right: 0;
+        /*height: 475px;
+
+        @include media-breakpoint-up(md) {
+            height: 435px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            height: 420px;
+        }
+
+        @include media-breakpoint-up(xl) {
+            height: 400px;
+        }*/
+    }
+
+    .table-request .isReadOnly {
+        display: none;
+    }
+
+    .divider {
+        margin-top: 70px;
+        &:last-of-type {
+            display: none;
+        }
+    }
+
+    .endpoint {
+      &.isCollapsed {
+        a.js-collapse-trigger {
+          padding-left:20px;
+        }
+      }
+      .toggle-arrow {
+        position:absolute;
+        &.expanded {
+          transform: rotate(90deg);
+        }
+      }
+    }
+}
+
+.api {
+    .api-toolbar {
+        font-weight: 600;
+        height: auto;
+
+        a {
+            border-bottom: none;
+        }
+
+        @include media-breakpoint-up(lg) {
+            align-items: baseline;
+            background: white;
+            position: sticky;
+            z-index: 5;
+            top: 65px;
+            height: 65px;
+        }
+    }
+
+    .api-content {
+        ul {
+            list-style-type: none;
+            -webkit-padding-start: 12px;
+            ul {
+                -webkit-padding-start: 20px;
+            }
+            li {
+                &:before {
+                    content: '–';
+                    position: relative;
+                    margin-right: 10px;
+                    margin-left: -12px;
+                    float: left;
+                }
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // gross change this..
+    .col-sm-9 > div:nth-child(1) > div:nth-child(1) {
+        padding-top: 70px;
+    }
+    .col-sm-9 > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+        padding-top: 0;
+    }
+    .api-nav {
+        margin-right: -15px;
+        margin-left: -15px;
+        height: 50px;
+        z-index: 9;
+        top: 64px;
+    }
+    .api-content {
+        padding-top: 40px;
+        border-bottom: 1px solid #d6d6d6;
+    }
+    .api-code {
+        background: #1d1d1d;
+        padding-left: 0;
+        padding-right: 0;
+        color: #ffffff;
+        border-bottom: 1px solid #323232;
+        h3 {
+            color: #787878;
+            font-size: 18px;
+            font-weight: 200;
+        }
+        p {
+            color: #fff;
+        }
+        a {
+            color: #7cafe9;
+            text-decoration: underline;
+        }
+        & > div {
+            padding: 80px 30px 40px 30px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .api-content {
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+    }
+
+    #accordion .btn,
+    .example-accordion .btn,
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled] {
+      font-weight: bold;
+      color: #632ca6;
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      text-align: left;
+      gap: 35px;
+    }
+    #accordion .btn.collapsed,
+    .example-accordion .btn.collapsed {
+      color: #666;
+      & i {
+        transform: rotate(180deg);
+      }
+    }
+    #accordion pre,
+    .example-accordion pre {
+      border-bottom: 3px solid rgba(119,0,255,.3);
+    }
+    .code-snippet-wrapper button:disabled,
+    .code-snippet-wrapper button[disabled], {
+      opacity:1;
+    }
+
+
+    // Style api tables from markdown to be purple similar to generated api examples
+    table,
+    .table {
+        background-color: #fdfcff;
+        border: 1px solid #ebebeb;
+        & > thead > tr > th {
+            background: #f3edff;
+        }
+        & > thead > tr > th,
+        & > tbody > tr > td {
+            border-left: 1px solid #ebebeb !important;
+        }
+        & > tbody tr:nth-child(2n) {
+            background: #fdfcff;
+        }
+    }
+}

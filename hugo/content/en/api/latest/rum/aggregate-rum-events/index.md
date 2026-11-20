@@ -1,0 +1,3 @@
+---
+title: Aggregate RUM events
+---

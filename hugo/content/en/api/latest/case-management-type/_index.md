@@ -1,0 +1,3 @@
+---
+title: Work Management Type
+---

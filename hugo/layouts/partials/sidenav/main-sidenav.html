@@ -1,0 +1,26 @@
+{{ $dot := . }}
+
+<aside class="sidenav">
+    <div class="row sticky">
+        <div class="col">
+
+            <p class="h4 text-brand-primary"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
+            {{/*
+                load searchbar if not on search results page, else
+                append the searchbar asynchronously (async-loading.js)
+            */}}
+            {{ if and $dot.File (ne $dot.File.Path "search.md") }}
+                {{ partial "search.html" . }}
+            {{ else }}
+            <div id="async-searchbar-mount"></div>
+            {{ end}}
+
+            <div class="sidenav-nav sidenav-nav-js-load">
+                {{/* Cache key must reflect which top-level menu entries match the page, not
+                     .Section -- see nav/current-top-section.html for why. */}}
+                {{ $currentTopSection := partial "nav/current-top-section.html" . }}
+                {{ partialCached "nav/left-nav.html" . $currentTopSection .Site.Language.Lang }}
+            </div>
+        </div>
+    </div>
+</aside>

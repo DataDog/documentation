@@ -1,0 +1,21 @@
+{
+  "data": {
+    "attributes": {
+      "action": {
+        "description": "Lower severity for dev environment noise",
+        "severity": "low",
+        "type": "set"
+      },
+      "enabled": true,
+      "name": "Downgrade misconfigurations in dev",
+      "rule": {
+        "finding_types": [
+          "misconfiguration"
+        ],
+        "query": "env:prod team:platform"
+      }
+    },
+    "id": "00000000-0000-0000-0000-000000000000",
+    "type": "severity_modifier_rules"
+  }
+}

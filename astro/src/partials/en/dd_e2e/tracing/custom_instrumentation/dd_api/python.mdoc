@@ -1,0 +1,15 @@
+A partial begins here.
+
+### Add custom span tags {% #add-custom-span-tags-python %}
+
+Use the `ddtrace` library to add tags to the currently active span:
+
+```python
+from ddtrace import tracer
+
+span = tracer.current_span()
+if span:
+    span.set_tag("customer.id", customer_id)
+```
+
+A partial ends here.

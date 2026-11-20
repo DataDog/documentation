@@ -1,0 +1,15 @@
+# Test-only site-support entry for the `dd_e2e` browser test page.
+#
+# Merged into the dataset by `src/config/siteSupport.ts` only when the build is
+# not `live`, so this key never exists in production. It lets the browser tests
+# exercise a really-built page that carries a banner, without a `dd_e2e` test
+# page having to name a real product key — deleting a real key is ordinary
+# content work and must not break these tests.
+site_support_ids:
+  dd_e2e_unsupported_product:
+    regions: [gov, gov2]
+    url_paths:
+      # The `.mdoc` content page (which covers the `.md` twin) and the `.astro`
+      # page (which carries a region selector, for the interactive tests).
+      - /dd_e2e/components/site-support
+      - /dd_e2e/components/site-support-banner

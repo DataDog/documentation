@@ -1,0 +1,3 @@
+- Databricks OAuth client secret:
+	- The OAuth client secret for the service principal the Observability Pipelines Worker uses to authenticate to Databricks.
+	- The default environment variable is `DD_OP_DESTINATION_DATABRICKS_ZEROBUS_OAUTH_CLIENT_SECRET`.

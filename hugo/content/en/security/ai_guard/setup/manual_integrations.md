@@ -1,0 +1,150 @@
+---
+title: Manual Integrations
+description: Protect agents built on Amazon Strands, and model traffic that passes through LiteLLM Proxy, with AI Guard by adding a plugin or guardrail.
+---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
+AI Guard manual integrations protect agents built on frameworks that the Datadog SDK doesn't instrument automatically. You register an AI Guard component with the framework, and the framework sends each model call and tool call to AI Guard for evaluation.
+
+AI Guard provides two manual integrations:
+
+- **Amazon Strands**: A plugin that you add to a Strands agent in your application code.
+- **LiteLLM Proxy**: A guardrail that you add to the LiteLLM Proxy configuration. LiteLLM Proxy evaluates the model traffic of every agent that routes through the proxy, so agents behind the proxy can be written in any language.
+
+## Supported frameworks and libraries
+
+Manual integrations work only with specific framework and Datadog SDK versions. Check the agent's framework to confirm that a manual integration applies.
+
+| Language | Framework | Framework version | Datadog SDK version |
+| --- | --- | --- | --- |
+| Python | Amazon Strands | `strands-agents` 1.29.0 or later | `dd-trace-py` 4.13.0 or later |
+| Python | LiteLLM Proxy | `litellm` 1.78.5 or later | `dd-trace-py` 4.13.0 or later |
+
+For LiteLLM Proxy, the language and Datadog SDK version apply to the proxy, not to the agents that route traffic through the proxy.
+
+For other frameworks, check [automatic integrations][1]. If no integration covers your framework, use the [SDK][2].
+
+### Evaluated operations
+
+Each manual integration evaluates the agent's activity at specific points, and the integration responds to a block differently at each point. Check these points to understand what AI Guard covers and how a block affects your agent.
+
+The Amazon Strands integration evaluates these Strands events:
+
+| Event | What AI Guard evaluates | When AI Guard blocks |
+| --- | --- | --- |
+| `BeforeModelCallEvent` | The system prompt and conversation history before each model call. | The plugin raises `AIGuardAbortError`. |
+| `AfterModelCallEvent` | The text of the model's response. | The plugin raises `AIGuardAbortError`. |
+| `BeforeToolCallEvent` | The conversation history and the pending tool call. | The plugin cancels the tool call and returns a canceled message to the agent. |
+| `AfterToolCallEvent` | The conversation history, the tool call, and the tool's result. | The plugin replaces the tool result with a blocked message. |
+
+The LiteLLM Proxy integration evaluates traffic in each mode that you set in the proxy configuration:
+
+| Mode | What AI Guard evaluates | When AI Guard blocks |
+| --- | --- | --- |
+| `pre_call` | The request messages, including tool calls, before the proxy sends the request to the model. | The proxy rejects the request. |
+| `during_call` | The request messages, in parallel with the model call. | The proxy rejects the request. |
+| `post_call` | The model's response, together with the request messages from a `pre_call` or `during_call` evaluation. | The proxy rejects the response. |
+
+### Limitations
+
+Some activity through manual integrations isn't evaluated or can't be blocked. Review these limits before you rely on a manual integration alone:
+
+- If AI Guard returns an error or doesn't respond, both integrations allow the request to proceed.
+- The Amazon Strands plugin doesn't evaluate images, documents, or video. The plugin sends a placeholder for non-text content.
+- The LiteLLM Proxy guardrail can't block streamed responses. With `post_call`, AI Guard evaluates a streamed response only after the proxy delivers every chunk to the client.
+- If the LiteLLM Proxy guardrail runs only in `post_call` mode, AI Guard evaluates the response without the request messages. Combine `post_call` with `pre_call` or `during_call` so AI Guard has the full conversation.
+
+## Enable Amazon Strands integrations
+
+Enable the Amazon Strands integration for each Strands agent you want to protect, so every model call and tool call in the agent goes to AI Guard for evaluation.
+
+**Before you begin**: [Check prerequisites][3], [create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
+
+1. Set these environment variables in the application's environment:
+
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true`. Without this value, AI Guard spans don't include the evaluated messages. |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name the agent reports to APM. |
+   | `DD_ENV` | The environment name. |
+
+1. In the application code, add the AI Guard plugin to each Strands agent you create:
+
+   ```python
+   from strands import Agent
+   from ddtrace.aiguard.integrations.strands import AIGuardStrandsPlugin
+
+   agent = Agent(
+       model=model,
+       # Send each model call and tool call to AI Guard.
+       plugins=[AIGuardStrandsPlugin()],
+   )
+   ```
+
+   `AIGuardStrandsPlugin()` accepts these optional arguments:
+
+   - `detailed_error=True`: Add the AI Guard reason to the blocked message. Default: `False`.
+   - `raise_error_on_tool_calls=True`: Raise `AIGuardAbortError` for blocked tool calls, instead of canceling the tool call or replacing the tool result. Default: `False`.
+
+**What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
+
+## Enable LiteLLM Proxy integrations {#litellm-proxy}
+
+Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the model traffic of every agent that routes through the proxy, whatever language the agent uses.
+
+**Before you begin**: [Check prerequisites][3], [create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their model requests through the proxy.
+
+1. Set these environment variables in the LiteLLM Proxy environment:
+
+   | Variable | Value |
+   | --- | --- |
+   | `DD_AI_GUARD_ENABLED` | `true`. Without this value, AI Guard spans don't include the evaluated messages. |
+   | `DD_API_KEY` | Your Datadog API key. |
+   | `DD_APP_KEY` | An application key with the `ai_guard_evaluate` scope. |
+   | `DD_SERVICE` | The service name for the proxy. |
+   | `DD_ENV` | The environment name. |
+
+   All agents that route through the proxy share these `DD_SERVICE` and `DD_ENV` values. AI Guard applies the same policy to every agent behind the proxy, and AI Guard spans from those agents appear under the proxy service.
+
+1. In the directory of the LiteLLM Proxy configuration file, create a `guardrails.py` file that imports the AI Guard guardrail:
+
+   ```python
+   from ddtrace.aiguard.integrations.litellm import DatadogAIGuardGuardrail
+
+   __all__ = ["DatadogAIGuardGuardrail"]
+   ```
+
+1. Add the guardrail to the `guardrails` section of the LiteLLM Proxy configuration file:
+
+   ```yaml
+   guardrails:
+     - guardrail_name: datadog_ai_guard
+       litellm_params:
+         guardrail: guardrails.DatadogAIGuardGuardrail
+         # Evaluate each request before the model call and each response after it.
+         mode: [pre_call, post_call]
+         # Run the guardrail on every request, not only on requests that name it.
+         default_on: true
+   ```
+
+   Without `default_on: true`, LiteLLM Proxy runs the guardrail only on requests that name the guardrail in their `guardrails` field. For the other modes, see the [Evaluated operations](#evaluated-operations) section.
+
+1. Restart the LiteLLM Proxy so the proxy loads the guardrail.
+
+For more about LiteLLM Proxy guardrails, see the [LiteLLM custom guardrail documentation][8].
+
+**What's next?** [Create a retention filter for AI Guard spans][5], optionally [limit access to AI Guard spans][6], then [verify the setup][7].
+
+[1]: /security/ai_guard/setup/automatic_integrations/
+[2]: /security/ai_guard/setup/sdk/
+[3]: /security/ai_guard/setup/#prerequisites
+[4]: /security/ai_guard/setup/#create-keys
+[5]: /security/ai_guard/setup/#retention-filter
+[6]: /security/ai_guard/setup/#limit-access
+[7]: /security/ai_guard/setup/#verify
+[8]: https://docs.litellm.ai/docs/proxy/guardrails/custom_guardrail

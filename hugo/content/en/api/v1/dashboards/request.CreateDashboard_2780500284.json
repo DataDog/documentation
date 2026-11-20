@@ -1,0 +1,53 @@
+{
+  "title": "Example-Dashboard",
+  "description": null,
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 22
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "hostmap",
+        "requests": {
+          "request_type": "data_projection",
+          "limit": 1000,
+          "query": {
+            "data_source": "dataset",
+            "dataset_provider": "ddsql_query",
+            "dataset_id": "abc-123-def"
+          },
+          "projection": {
+            "type": "hostmap",
+            "dimensions": [
+              {
+                "column": "entity_id",
+                "dimension": "node"
+              },
+              {
+                "column": "parent_id",
+                "dimension": "group"
+              },
+              {
+                "column": "cpu_usage",
+                "dimension": "fill"
+              }
+            ]
+          },
+          "style": {
+            "palette": "green_to_orange",
+            "palette_flip": false
+          }
+        }
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

@@ -1,0 +1,1 @@
+In the **Forget Value** dropdown, select the number of days (**1**-**30 days**) after which the value is forgotten.

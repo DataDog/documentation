@@ -1,0 +1,32 @@
+{{ define "main" }}
+    {{ $media := .Params.tile.media | default .Params.media | default "" }}
+    {{ $further_reading := .Params.further_reading }}
+
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Params.integration_title | default .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+
+    {{ partial "integration-labels/integration-labels.html" . }}
+    {{ partial "site_support_banner/site_support_banner.html" . }}
+    {{ partial "us2_fed_integration_banner/us2_fed_integration_banner.html" . }}
+    {{ $dir := "" }}
+    {{ with .File }}{{ $dir = .Dir }}{{ end }}
+    {{ if and (eq $dir "integrations/") ($media | len) }}
+        {{ partial "integrations-carousel/integrations-carousel.html" (dict "context" . "media" $media) }}
+    {{ end }}
+
+    {{ .Content }}
+
+    {{/* "We don't want to do this on integration guides/faqs for now" */}}
+    {{- if and ($further_reading) (eq .Params.custom_kind "integration") -}}
+
+    <h2 id="{{ anchorize "further-reading" }}">Further Reading</h2>
+        {{- partial "whats-next/whats-next.html" . -}}
+    {{- end -}}
+
+{{ end }}

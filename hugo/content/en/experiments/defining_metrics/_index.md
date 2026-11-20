@@ -1,0 +1,252 @@
+---
+title: Create Experiment Metrics
+description: Create the metrics you want to measure in your experiments.
+aliases:
+  - /product_analytics/experimentation/defining_metrics/
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
+---
+
+## Overview
+
+Create the metrics you want to measure in your experiments. You can use data from Real User Monitoring (RUM), Product Analytics, Agent Observability, or your own warehouse to create Datadog Experiments metrics.
+
+<div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics permissions</a> to create experiment metrics.</div>
+
+## Create a metric
+
+Select your data source:
+
+{{< tabs >}}
+{{% tab "Product Analytics or RUM" %}}
+
+### Prerequisites
+
+To create a metric from Product Analytics or RUM data, you must have Datadog's [client-side SDK][3] installed in your application and be actively capturing data. If you have not yet configured your SDK, select your application type to get started:
+
+- [Android and Android TV][4]
+- [iOS and tvOS][5]
+- [Browser (JavaScript)][6]
+- [React Native][7]
+
+Product Analytics uses the same SDKs and configuration as Real User Monitoring (RUM). After you configure your SDK using the RUM setup documentation, create your metric in the Product Analytics UI.
+
+### Create a metric using Product Analytics or RUM data
+
+To create a metric for your experiment:
+
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}} at the top right corner.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. Under the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}} to open the event picker. The chart on the right updates in real time as you configure your metric.
+   1. Search for a specific event, or use the {{< ui >}}By Type{{< /ui >}} filter to browse by event type.
+1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is {{< ui >}}Count of events{{< /ui >}}.
+1. Click {{< ui >}}Add Filter{{< /ui >}} to [filter your metric](#add-filters) by additional properties.
+1. (Optional) Under the {{< ui >}}Additional settings{{< /ui >}} section:
+   1. Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate that this metric is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
+   1. Adjust the [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) and {{< ui >}}Units{{< /ui >}} as needed. The defaults work for most use cases.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+{{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name set to 'Example metric', the 'click on ADD TO CART' event selected, the aggregation method dropdown set to Count of events, the Additional settings section, a bar chart preview on the right, and the Save button highlighted." style="width:90%;" >}}
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[3]: /real_user_monitoring/#get-started
+[4]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
+[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swift-package-manager--spm
+[6]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=npm
+[7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
+
+### Add filters
+
+You can filter your metric by selecting an {{< ui >}}Event properties{{< /ui >}} filter, such as Service, Country, or Device Type. Use the {{< ui >}}By Data Type{{< /ui >}} filter to narrow the list of available properties by type (for example, String or Boolean).
+
+If you do not see the property you need, type the property name in the {{< ui >}}Custom property{{< /ui >}} field (for example, `@context.tracking`) and click {{< ui >}}Add{{< /ui >}}.
+
+{{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="The Filter by panel open within the Metric definition section, showing All Properties selected, Event properties such as Application Id, Service, Browser Name, and Country in the center, a By Data Type filter with Numerical, String, and Boolean options on the left, and a Custom property section at the bottom with a text field showing the placeholder 'e.g. @context.tracking' and an Add button." style="width:90%;" >}}
+
+{{% /tab %}}
+{{% tab "Agent Observability" %}}
+
+<div class="alert alert-info"><strong>Note</strong>: Online experiments for Agent Observability are in Preview. Contact your Datadog representative to request access.</div>
+
+### Prerequisites
+
+Before you create an experiment metric from Agent Observability data:
+
+- [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
+- To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
+- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value or a `pass` or `fail` assessment.
+- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Online Experiments][17].
+
+<div class="alert alert-info"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw Boolean and categorical values cannot be used directly as experiment metrics.</div>
+
+### Create a metric from Agent Observability data
+
+To create the metric:
+
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}}.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. In the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}}.
+1. Choose one of the following Agent Observability sources.
+
+#### Agent Spans
+
+Select the {{< ui >}}Agent Spans{{< /ui >}} tab, then select one of the following:
+
+- {{< ui >}}Total estimated cost{{< /ui >}}: Average estimated cost across completed Agent Observability traces.
+- {{< ui >}}Total tokens{{< /ui >}}: Average total token usage across completed Agent Observability traces.
+
+The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their corresponding trace property. You can change the aggregation, select another property or custom property path, add filters, or create a ratio.
+
+<div class="alert alert-info">Agent Observability estimated cost values use nanodollars (1 nanodollar = 10⁻⁹ USD). For details about cost calculations and supported models, see <a href="/llm_observability/investigate/cost/">Cost</a>.</div>
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="The Create Metric event picker with Agent Spans selected, showing All agent span events, Total estimated cost, and Total tokens, with Total estimated cost selected and its description displayed." style="width:90%;" >}}
+
+#### Evaluations
+
+Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
+
+1. Search for and select the evaluation you want to measure.
+1. Review the evaluation details, such as its ML application, scope, prompt, and model.
+1. Configure the aggregation and any filters. Evaluation metrics default to {{< ui >}}Average of Assessment score{{< /ui >}}, which measures pass rate.
+
+The picker lists evaluations of all types received by Agent Observability during the selected time range, including those without an assessment. Pass rate measures the assessment, regardless of the evaluation's result type. Datadog derives `assessment_score` from the assessment, where `pass` is `1` and `fail` is `0`. Pass rate is the average of these values, so it ranges from 0 to 1. Evaluations without an assessment are excluded from both the numerator and the denominator.
+
+Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run. If the pass-rate preview is empty, submit evaluations with pass or fail assessments within the selected time range. Historical evaluations are not backfilled with `assessment_score`.
+
+For score evaluations, select {{< ui >}}Score value{{< /ui >}} to measure the raw score instead. Existing metrics that use score values retain their configuration.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing the faithfulness, user_score, and verbosity score evaluations, with faithfulness selected." style="width:90%;" >}}
+
+#### Save the metric
+
+After you configure either source:
+
+1. (Optional) Under {{< ui >}}Additional settings{{< /ui >}}, mark the metric as certified, adjust its experiment settings, or configure its units.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[14]: /llm_observability/instrument/
+[15]: /llm_observability/investigate/cost/
+[16]: /llm_observability/investigate/evaluations/
+[17]: /llm_observability/improve/online_experiments/
+
+{{% /tab %}}
+{{% tab "Warehouse" %}}
+
+### Prerequisites
+
+To create a metric from your warehouse data, you must [connect your warehouse to Datadog][8]. Datadog supports BigQuery, Databricks, Redshift, and Snowflake.
+
+After you connect your warehouse, create a SQL Model to map your data to Datadog, then use the model to create a metric.
+
+### Create a SQL Model
+
+Write your SQL query to define and preview your data, then configure your model to map the data to Datadog.
+
+#### Write your SQL
+
+Start by writing a query to retrieve your data:
+
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the {{< ui >}}Metric SQL Models{{< /ui >}} tab and click {{< ui >}}Create SQL Model{{< /ui >}}.
+1. In the {{< ui >}}Write SQL{{< /ui >}} section, enter a SQL query that returns your data of interest. The SQL editor supports `SELECT * FROM` and more advanced SQL statements.
+1. Click {{< ui >}}Run{{< /ui >}} to preview your data.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
+
+For large tables, use [SQL template variables][13] to push Datadog's date filters into your query and reduce the amount of data your warehouse scans on each run.
+
+#### Map your warehouse data to Datadog
+
+After previewing your data, map it to Datadog. In the {{< ui >}}Structure your model{{< /ui >}} section:
+
+1. Add a {{< ui >}}Metric SQL Model Name{{< /ui >}} (for example, **Revenue Orders**).
+1. (Optional) Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate that this SQL model is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
+1. Map the columns in your warehouse table to the following:
+   - {{< ui >}}Timestamp column{{< /ui >}}
+     - The column that lists the timestamp associated with the metric event.
+     - The analysis only includes rows created after the subject enrolls in the experiment.
+   - {{< ui >}}Subject Type{{< /ui >}}
+     - The attribute that Datadog uses to randomly assign experiment groups.
+     - You can define the subject type and its default warehouse column on the [Subject Types][12] page. For example, you can use `user_id` for an individual user or `org_id` for an organization account.
+   - {{< ui >}}Measures{{< /ui >}} (optional)
+     - The numeric columns from your warehouse table that Datadog can aggregate into metrics (for example, a `revenue` or `amount` column).
+     - Each SQL model automatically includes an {{< ui >}}each record{{< /ui >}} measure. Use this measure to count the number of relevant rows in the table for a specific experiment subject.
+1. Click {{< ui >}}Create Metric SQL Model{{< /ui >}} to save your SQL model.
+
+{{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Revenue Orders' and highlighted, a Mark as certified toggle, Timestamp column set to REVENUE_TIMESTAMP, Subject Type set to User (@usr.id) with USER_ID selected in the column selector, a Measures dropdown showing 'Revenue Orders (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
+
+### Create a metric using your SQL model
+
+After you create your SQL model, use it to create a metric:
+
+1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}} at the top right corner.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. Under the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}} to open the event picker. The chart on the right updates in real time as you configure your metric.
+   1. Select the relevant SQL model. Your SQL models appear under their data source (for example, **Revenue Orders** under **Snowflake**).
+1. Select an [aggregation method](#aggregation-methods) from the dropdown.
+1. (Optional) Under the {{< ui >}}Additional settings{{< /ui >}} section:
+   1. Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate this metric is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
+   1. Adjust the [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) and {{< ui >}}Units{{< /ui >}} as needed. The defaults work for most use cases.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Revenue Orders SQL model highlighted under Snowflake on the right, showing Measures: amount and Filterable dimensions: N/A." style="width:80%;" >}}
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[8]: /experiments/guide/connecting_a_data_warehouse/
+[12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
+[13]: /experiments/concepts/sql_template_variables/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Aggregation methods
+
+Aggregation methods determine how Datadog summarizes data for each experiment subject. An experiment subject is the unit that Datadog randomizes for the experiment. This is typically a user, but can also be an organization, cookie, or device, depending on how you set up your experiment.
+
+Datadog Experiments supports the following aggregation methods:
+
+- {{< ui >}}Count of events{{< /ui >}} (default)
+- {{< ui >}}Count of unique users{{< /ui >}} (useful for conversion metrics)
+- {{< ui >}}Sum of{{< /ui >}} an event property (useful for revenue metrics)
+- {{< ui >}}Distinct values of{{< /ui >}} an event property (useful for unique pages viewed metrics)
+- {{< ui >}}Percentile{{< /ui >}} of an event property (useful for latency metrics)
+- {{< ui >}}Average of{{< /ui >}} an event property (useful for satisfaction metrics)
+
+{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="The aggregation method dropdown showing Count of unique users (selected) and Count of events at the top, followed by a SELECT A MEASURE section with Sum of, Distinct values of, Percentile, and Average of options, with a description reading 'The number of users who performed the event' on the right." style="width:90%;" >}}
+
+Datadog computes metrics for each experiment subject. For example, a {{< ui >}}Count of events{{< /ui >}} metric on an experiment randomized by user calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
+
+### Ratio metrics
+
+Click {{< ui >}}Create Ratio{{< /ui >}} to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods). For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
+
+Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
+
+{{< img src="/product_analytics/experiment/exp_create_ratio_new_ui.png" alt="The Metric definition section showing the 'click on ADD TO CART' event with Count of events aggregation and an Add Filter option, the Create Ratio button highlighted below, and the Additional settings section with Mark as certified toggle, Experiment settings, and Units." style="width:90%;" >}}
+
+## Advanced options
+
+Datadog Experiments supports the following advanced options. These can be modified under {{< ui >}}Additional settings{{< /ui >}} > {{< ui >}}Experiment settings{{< /ui >}} when creating a metric.
+
+Time frame filters
+: By default, Datadog includes all events between a user's first exposure and the end of the experiment. Use this setting to measure a time-boxed value such as "sessions within 7 days". If you add a time frame filter, the metric only includes events from the specified time window, starting at the moment the experiment first enrolls the user.
+
+Desired metric direction
+: Datadog highlights statistically significant results. Use this setting to specify whether you want this metric to increase or decrease.
+
+Outlier handling
+: Real-world data often includes extreme outliers that can impact experiment results. Use this setting to set a threshold at which Datadog truncates data. For example, set a 99% upper bound to truncate all results at the metric's 99th percentile.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
+
+[2]: https://en.wikipedia.org/wiki/Delta_method

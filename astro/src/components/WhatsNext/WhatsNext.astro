@@ -1,0 +1,20 @@
+---
+import styles from "./WhatsNext.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { useTranslations } from "@lib/i18n/i18n";
+
+interface Props {
+  desc?: string;
+}
+
+const translate = useTranslations(Astro.currentLocale);
+const { desc = `${translate("additional_sentence")}:` } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<aside class={cl("whatsnext")}>
+  {desc && <p class={cl("whatsnext__desc")}>{desc}</p>}
+  <ul class={cl("whatsnext__list")}>
+    <slot />
+  </ul>
+</aside>

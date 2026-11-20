@@ -1,3 +1,0 @@
----
-title: Rum Replay Viewership
----

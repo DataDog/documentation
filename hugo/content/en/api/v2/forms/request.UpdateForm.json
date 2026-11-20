@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "form_update": {
+        "datastore_config": {
+          "datastore_id": "5108ea24-dd83-4696-9caa-f069f73d0fad",
+          "primary_column_name": "id",
+          "primary_key_generation_strategy": "none"
+        },
+        "description": "An updated description.",
+        "name": "Updated Form Name"
+      }
+    },
+    "id": "22f6006a-2302-4926-9396-d2dfcf7b0b34",
+    "type": "forms"
+  }
+}

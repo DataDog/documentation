@@ -1,0 +1,177 @@
+---
+title: Set Up AI Guard
+description: Set up AI Guard to evaluate and block unsafe prompts, responses, and tool calls in your AI agents.
+aliases:
+  - /security/ai_guard/onboarding/
+further_reading:
+- link: "https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/"
+  tag: "Blog"
+  text: "Detect when your AI agent copies a self-replicating prompt injection"
+---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
+Set up AI Guard to start evaluating agent prompts, responses, and tool calls for threats. After setup, the default policy monitors every evaluation, and you can [start blocking unsafe requests][1] when you're ready.
+
+AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for each of these methods. When you're instrumenting your application, you choose the method that fits your agent's language and libraries.
+
+AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
+
+## 1. Check prerequisites {#prerequisites}
+
+Confirm you have the Datadog permissions, the Datadog Agent, and the Datadog SDK version that AI Guard needs.
+
+### Permissions
+
+Some setup steps require specific Datadog permissions. An admin might need to create a role with these permissions and assign it to you:
+
+| Permission | ID | Type | Description |
+| --- | --- | --- | --- |
+| {{< ui >}}AI Guard Evaluate{{< /ui >}} | `ai_guard_evaluate` | Write | Required to call the AI Guard evaluation API and to create an application key with the `ai_guard_evaluate` scope. |
+| {{< ui >}}AI Guard View{{< /ui >}} | `ai_guard_view` | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings. |
+| {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies, custom rules, and sensitive data scanning. |
+| {{< ui >}}APM Retention Filters Write{{< /ui >}} | `apm_retention_filter_write` | Write | Required to create the retention filter for AI Guard spans. |
+| {{< ui >}}Security Notification Rules Read{{< /ui >}} | `security_monitoring_notification_profiles_read` | Read | Required to view notification rules for AI Guard security signals. |
+| {{< ui >}}Security Notification Rules Write{{< /ui >}} | `security_monitoring_notification_profiles_write` | Write | Required to create and edit notification rules for AI Guard security signals. |
+| {{< ui >}}Security Rules Read{{< /ui >}} | `security_monitoring_rules_read` | Read | Required to view AI Guard detection rules. |
+| {{< ui >}}Security Rules Write{{< /ui >}} | `security_monitoring_rules_write` | Write | Required to create and edit AI Guard detection rules. |
+| {{< ui >}}Security Signals Read{{< /ui >}} | `security_monitoring_signals_read` | Read | Required to view AI Guard security signals. |
+| {{< ui >}}Security Signals Write{{< /ui >}} | `security_monitoring_signals_write` | Write | Required to triage AI Guard security signals. |
+| {{< ui >}}User Access Manage{{< /ui >}} | `user_access_manage` | Write | Required only to restrict access to AI Guard spans with Data Access Control. |
+
+### Datadog Agent and Datadog SDK
+
+Every integration method runs on the Datadog SDK and sends AI Guard data through the Datadog Agent. The Agent must be running and reachable from your application.
+
+AI Guard requires these minimum Datadog SDK versions:
+
+| Language | Datadog SDK | Minimum version |
+| --- | --- | --- |
+| Python | `dd-trace-py` | 4.13.0 |
+| Node.js | `dd-trace-js` | 5.122.0 or 6.11.0 |
+| Java | `dd-trace-java` | 1.54.0 |
+| Ruby | `dd-trace-rb` | 2.44.0 |
+
+Some features require a later version, such as streamed response evaluation and sensitive data redaction. Each page lists its own requirements.
+
+To take advantage of all AI Guard features, use the latest version of the Datadog SDK for your language.
+
+<div class="alert alert-info">
+<p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
+<ul>
+<li>The Datadog SDK sends full APM traces.
+<ul>
+<li>To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. AI Guard spans still reach Datadog, and indexed AI Guard spans count toward your APM indexed span usage. See <a href="#retention-filter">Create a retention filter for AI Guard spans</a>.</li>
+<li>Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
+</ul>
+</li>
+<li>The Agent reports Infrastructure Monitoring data. To turn off Infrastructure Monitoring, set <code>DD_INFRASTRUCTURE_MODE=none</code>. This setting requires Agent 7.77.0 or later.</li>
+</ul>
+</div>
+
+## 2. Create API and application keys {#create-keys}
+
+AI Guard authenticates every evaluation with a Datadog API key and application key, so your application needs both before it can send evaluations.
+
+1. Create an API key and an application key. See [API and Application Keys][2].
+1. When you add [scopes][3] to the application key, add the `ai_guard_evaluate` scope. The user who creates the application key must have the {{< ui >}}AI Guard Evaluate{{< /ui >}} permission.
+1. Store both keys where your application reads its environment variables. Each integration page lists the variables to set.
+
+## 3. Instrument your application {#instrumentation}
+
+Instrument each AI agent with the integration method that matches its language and libraries, so AI Guard can evaluate model traffic.
+
+AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values, and applies policies by service and environment. Use the same service name that the agent reports to APM. The AI Guard {{< ui >}}Discover{{< /ui >}} tab lists the AI agent services in your organization and shows which ones AI Guard protects, matched by service name.
+
+### Find the agent language and libraries
+
+If you don't know which language or AI libraries an agent uses, check its APM service page.
+
+1. In {{< ui >}}APM{{< /ui >}}, open the agent's service page.
+1. Find the language icon next to the service name.
+1. Open the {{< ui >}}operation{{< /ui >}} dropdown. Operations such as `openai.request`, `anthropic.request`, `langchain.request`, or `litellm.request` show which AI libraries the agent calls.
+
+### Choose an integration method
+
+The appropriate integration method depends on how an agent reaches its model and which language and libraries the agent uses. Choose the first integration method that applies to the agent:
+
+1. If the agent's model traffic goes through LiteLLM Proxy, use the [LiteLLM Proxy integration][4].
+1. If the agent uses one of these AI frameworks or client libraries, use the matching [automatic integration][5] or [manual integration][6]:
+
+   | Framework or library | Language | Method |
+   | --- | --- | --- |
+   | LangChain | Python | Automatic integration |
+   | OpenAI SDK | Python, Node.js | Automatic integration |
+   | Anthropic SDK | Python, Node.js | Automatic integration |
+   | AI SDK | Node.js | Automatic integration |
+   | RubyLLM | Ruby | Automatic integration |
+   | Amazon Strands | Python | Manual integration |
+
+1. If no integration covers the agent's framework, but the agent is written in Python, Node.js, Java, or Ruby, use the [SDK][7].
+1. If none of these apply, use the [HTTP API][8]. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals. Skip the remaining setup steps.
+
+## 4. Create a retention filter for AI Guard spans {#retention-filter}
+
+Create a retention filter so Datadog keeps every AI Guard span. By default, APM samples spans. Without a retention filter, even though AI Guard still evaluates your agent's requests, Datadog can drop the corresponding spans, preventing them from appearing in AI Guard.
+
+You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to complete this task.
+
+1. Create a [custom retention filter][9] with these settings:
+
+   - {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard` in {{< ui >}}All Spans{{< /ui >}}.
+   - {{< ui >}}Span rate{{< /ui >}}: 100%.
+   - {{< ui >}}Trace rate{{< /ui >}}: 100%.
+
+1. Drag the AI Guard filter to the top of the {{< ui >}}Custom Retention Filters{{< /ui >}} list. New filters are added to the bottom of the list, and Datadog applies only the first filter that matches a span, so a filter higher in the list with a lower rate can drop AI Guard spans.
+
+Keeping AI Guard spans can add to your APM bill. APM bills separately for spans that Datadog receives, called *ingestion*, and spans that a retention filter keeps for search, called *indexing*. AI Guard spans aren't billed for ingestion. The AI Guard spans this filter keeps are indexed spans, so they count toward your APM indexed span usage. Organizations that don't use APM, or that already index a high volume of traces, are the most likely to see indexed AI Guard spans on their bill.
+
+## 5. (Optional) Limit access to AI Guard spans {#limit-access}
+
+Optionally restrict who can view AI Guard spans, because they can contain sensitive prompts, responses, and tool call data from your agents.
+
+You must have the {{< ui >}}User Access Manage{{< /ui >}} permission to complete this task.
+
+1. In {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Data Access Control{{< /ui >}}, create a restricted dataset scoped to {{< ui >}}APM data{{< /ui >}}.
+1. Apply the filter `resource_name:ai_guard`.
+1. Grant access to the dataset to specific roles or teams.
+
+## Verify the setup {#verify}
+
+Confirm that AI Guard is evaluating agent traffic.
+
+1. Send several requests through the agent.
+1. In AI Guard, verify the setup:
+   - On the {{< ui >}}Discover{{< /ui >}} tab, find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}.
+   - On the {{< ui >}}Investigate{{< /ui >}} tab, confirm that the agent's evaluations appear.
+
+## Troubleshooting: AI Guard spans don't appear
+
+If AI Guard spans for the agent don't appear, check these causes in order:
+
+1. **AI Guard isn't enabled.** Set `DD_AI_GUARD_ENABLED=true`. The variable defaults to `false`, and when it's unset:
+   - Automatic integrations don't evaluate anything.
+   - SDK calls in Node.js, Java, and Ruby return `ALLOW` without calling AI Guard.
+   - Manual integrations and Python SDK calls still evaluate, but AI Guard spans don't include the evaluated messages.
+1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
+1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
+1. **The retention filter is missing or out of order.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates, and that it sits above any other filter that matches AI Guard spans. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
+1. **The service or environment isn't set.** Confirm `DD_SERVICE` and `DD_ENV` are set, so AI Guard can match the agent to its policy and show it in Discover.
+
+To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluations` metric for your service. If the metric is above zero but spans don't appear, the cause is span retention, not AI Guard.
+
+[1]: /security/ai_guard/policies/#blocking-policy
+[2]: /account_management/api-app-keys/
+[3]: /account_management/api-app-keys/#scopes
+[4]: /security/ai_guard/setup/manual_integrations/#litellm-proxy
+[5]: /security/ai_guard/setup/automatic_integrations/
+[6]: /security/ai_guard/setup/manual_integrations/
+[7]: /security/ai_guard/setup/sdk/
+[8]: /security/ai_guard/setup/http_api/
+[9]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

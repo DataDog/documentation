@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "personal_access_tokens",
+    "attributes": {
+      "name": "Example-Key-Management",
+      "scopes": [
+        "dashboards_read"
+      ],
+      "expires_at": "2022-11-11T11:11:11+00:00"
+    }
+  }
+}

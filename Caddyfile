@@ -1,0 +1,19 @@
+# Local dev router: fronts Hugo (:1313) and Astro (:4321) on one origin, so
+# in-page navigation between the two feels seamless, matching how CloudFront
+# fronts them both in every real environment. Not used in CI or any deploy —
+# local dev only.
+#
+# Usage: `cd hugo && make start-proxied`, `cd astro && yarn dev:proxied`,
+# then `caddy run` from the repo root. Browse http://localhost:1314.
+:1314 {
+	# The API docs, in every locale, plus Vite's dev/HMR machinery.
+	@astro path /api /api/* /fr/api /fr/api/* /ja/api /ja/api/* /ko/api /ko/api/* /es/api /es/api/* /dd_e2e/* /@vite/* /@id/* /@fs/* /node_modules/* /src/*
+
+	handle @astro {
+		reverse_proxy localhost:4321
+	}
+
+	handle {
+		reverse_proxy localhost:1313
+	}
+}

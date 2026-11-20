@@ -1,0 +1,1212 @@
+{
+  "GetIPRanges": {
+    "description": "Datadog IP 범위에 대한 정보를 확인하세요.",
+    "summary": "IP 범위 나열하기"
+  },
+  "ListAPIKeys": {
+    "description": "계정에서 사용할 수 있는 API 키 전체 목록을 가져옵니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "모든 API 키 가져오기"
+  },
+  "CreateAPIKey": {
+    "description": "지정된 이름으로 API 키를 생성합니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "API 키 생성하기",
+    "request_description": "",
+    "request_schema_description": "Datadog API 키입니다."
+  },
+  "DeleteAPIKey": {
+    "description": "지정된 API 키를 삭제합니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "API 키 삭제하기"
+  },
+  "GetAPIKey": {
+    "description": "지정된 API 키를 가져옵니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "API 키 가져오기"
+  },
+  "UpdateAPIKey": {
+    "description": "API 키 이름을 편집합니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "API 키 편집하기",
+    "request_description": "",
+    "request_schema_description": "Datadog API 키입니다."
+  },
+  "ListApplicationKeys": {
+    "description": "Datadog 계정에서 사용할 수 있는 애플리케이션 키 전체 목록을 가져옵니다.\n이 엔드포인트는 [일회성 읽기 모드](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode)가 적용된 조직에서는 비활성화됩니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "모든 애플리케이션 키 가져오기"
+  },
+  "CreateApplicationKey": {
+    "description": "지정된 이름으로 애플리케이션 키를 생성합니다.\n이 엔드포인트는 [일회성 읽기 모드](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode)가 적용된 조직에서는 비활성화됩니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "애플리케이션 키 생성하기",
+    "request_description": "",
+    "request_schema_description": "관련 메타데이터가 포함된 애플리케이션 키입니다."
+  },
+  "DeleteApplicationKey": {
+    "description": "지정된 애플리케이션 키를 삭제합니다.\n이 엔드포인트는 [일회성 읽기 모드](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode)가 적용된 조직에서는 비활성화됩니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "애플리케이션 키 삭제하기"
+  },
+  "GetApplicationKey": {
+    "description": "지정된 애플리케이션 키를 가져옵니다.\n이 엔드포인트는 [일회성 읽기 모드](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode)가 적용된 조직에서는 비활성화됩니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "애플리케이션 키 가져오기"
+  },
+  "UpdateApplicationKey": {
+    "description": "애플리케이션 키 이름을 편집합니다.\n이 엔드포인트는 [일회성 읽기 모드](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode)가 적용된 조직에서는 비활성화됩니다.\n\n**참고**: 이 엔드포인트는 정부 기관용 사이트(US1-FED 및 US2-FED)에서는 비활성화되어 있습니다. 대신 [V2 키 관리](https://docs.datadoghq.com/api/latest/key-management/) 엔드포인트를 사용하세요.",
+    "summary": "애플리케이션 키 편집하기",
+    "request_description": "",
+    "request_schema_description": "관련 메타데이터가 포함된 애플리케이션 키입니다."
+  },
+  "SubmitServiceCheck": {
+    "description": "서비스 검사 목록을 제출합니다.\n\n**참고**:\n- 유효한 API 키가 필요합니다.\n- 서비스 검사는 최대 10분 전까지 제출할 수 있습니다.",
+    "summary": "서비스 검사 제출하기",
+    "request_description": "서비스 검사 요청 본문입니다.",
+    "request_schema_description": "서비스 검사입니다."
+  },
+  "GetDailyCustomReports": {
+    "description": "일일 커스텀 보고서를 가져옵니다.\n**참고:** 이 엔드포인트는 2022년 12월 1일에 완전히 지원 중단됩니다.\n관련 마이그레이션 가이드는 [Usage Attribution API v1에서 v2로 마이그레이션](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)을 참조하세요.",
+    "summary": "사용 가능한 일일 커스텀 보고서 목록 가져오기"
+  },
+  "GetSpecifiedDailyCustomReports": {
+    "description": "지정된 일일 커스텀 보고서를 가져옵니다.\n**참고:** 이 엔드포인트는 2022년 12월 1일에 완전히 지원 중단됩니다.\n관련 마이그레이션 가이드는 [Usage Attribution API v1에서 v2로 마이그레이션](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)을 참조하세요.",
+    "summary": "지정된 일일 커스텀 보고서 가져오기"
+  },
+  "DeleteDashboards": {
+    "description": "지정된 ID를 사용하여 대시보드를 삭제합니다. 실패가 발생하면 대시보드가 삭제되지 않습니다(부분 성공은 허용되지 않음).",
+    "summary": "대시보드 삭제하기",
+    "request_description": "대시보드 삭제 요청 본문입니다.",
+    "request_schema_description": "대시보드 일괄 삭제 요청 본문입니다."
+  },
+  "ListDashboards": {
+    "description": "모든 대시보드를 가져옵니다.\n\n**참고**: 이 쿼리는 사용자 지정으로 생성되거나 복제된 대시보드만 반환합니다.\n이 쿼리는 사전 설정된 대시보드를 반환하지 않습니다.",
+    "summary": "모든 대시보드 가져오기"
+  },
+  "RestoreDashboards": {
+    "description": "지정된 ID를 사용하여 대시보드를 복원합니다. 실패가 발생하면 대시보드가 복원되지 않습니다(부분 성공은 허용되지 않음).",
+    "summary": "삭제된 대시보드 복원하기",
+    "request_description": "대시보드 복원 요청 본문입니다.",
+    "request_schema_description": "대시보드 복원 요청 본문입니다."
+  },
+  "CreateDashboard": {
+    "description": "지정된 옵션을 사용하여 대시보드를 생성합니다. 위젯에서 쿼리를 정의할 때, 어떤 쿼리에 `as_count()` 또는 `as_rate()` 수정자를 추가해야 하는지 유의하세요.\n이러한 수정자에 대한 자세한 내용은 다음 [문서](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers)를 참조하세요.",
+    "summary": "새 대시보드 생성하기",
+    "request_description": "대시보드 생성 요청 본문입니다.",
+    "request_schema_description": "대시보드는 주요 성능 메트릭을 시각적으로 추적, 분석 및 표시하는 Datadog의 도구로서,\n인프라의 상태를 모니터링할 수 있도록 지원합니다."
+  },
+  "ListDashboardLists": {
+    "description": "모든 기존 대시보드 목록 정의를 가져옵니다.",
+    "summary": "모든 대시보드 목록 가져오기"
+  },
+  "CreateDashboardList": {
+    "description": "빈 대시보드 목록을 생성합니다.",
+    "summary": "대시보드 목록 생성하기",
+    "request_description": "대시보드 목록 생성 요청 본문입니다.",
+    "request_schema_description": "Datadog 대시보드입니다."
+  },
+  "DeleteDashboardList": {
+    "description": "대시보드 목록을 삭제합니다.",
+    "summary": "대시보드 목록 삭제하기"
+  },
+  "GetDashboardList": {
+    "description": "기존 대시보드 목록의 정의를 가져옵니다.",
+    "summary": "대시보드 목록 가져오기"
+  },
+  "UpdateDashboardList": {
+    "description": "대시보드 목록의 이름을 업데이트합니다.",
+    "summary": "대시보드 목록 업데이트하기",
+    "request_description": "대시보드 목록 업데이트 요청 본문입니다.",
+    "request_schema_description": "Datadog 대시보드입니다."
+  },
+  "CreatePublicDashboard": {
+    "description": "지정된 비공개 대시보드를 공유하여 공개적으로 볼 수 있는 URL을 생성합니다.",
+    "summary": "공유 대시보드 생성하기",
+    "request_description": "공유 대시보드 생성 요청 본문입니다.",
+    "request_schema_description": "대시보드가 공유된 방식 또는 공유될 방식과 관련된 메타데이터 객체입니다."
+  },
+  "DeletePublicDashboard": {
+    "description": "지정된 토큰과 연결된 대시보드의 공개 URL을 취소합니다(비공개로 전환).",
+    "summary": "공유 대시보드 URL 취소하기"
+  },
+  "GetPublicDashboard": {
+    "description": "지정된 토큰과 연결된 기존 공유 대시보드의 공유 메타데이터를 가져옵니다.",
+    "summary": "공유 대시보드 가져오기"
+  },
+  "UpdatePublicDashboard": {
+    "description": "지정된 토큰과 연결된 공유 대시보드를 업데이트합니다.",
+    "summary": "공유 대시보드 업데이트하기",
+    "request_description": "대시보드 업데이트 요청 본문입니다.",
+    "request_schema_description": "공유 대시보드의 설정을 업데이트합니다."
+  },
+  "DeletePublicDashboardInvitation": {
+    "description": "특정 이메일 주소에 주어진 공유 대시보드에 액세스하기 위해 사용된 과거에 보낸 초대 이메일 및 활성 세션을 취소합니다.",
+    "summary": "공유 대시보드 초대 취소하기",
+    "request_description": "공유 대시보드 초대 삭제 요청 본문입니다.",
+    "request_schema_description": "API가 반환하는 공유 대시보드에 존재하는 초대 데이터 및 메타데이터입니다."
+  },
+  "GetPublicDashboardInvitations": {
+    "description": "지정된 공유 대시보드에 존재하는 초대를 설명합니다(페이지별로 표시됨).",
+    "summary": "공유 대시보드의 모든 초대 가져오기"
+  },
+  "SendPublicDashboardInvitation": {
+    "description": "인증된 공유 대시보드에 액세스할 수 있는 링크가 포함된 이메일을 지정된 이메일 주소로 보냅니다. 이메일 주소는 이미 인증된 공유 대시보드의 share_list에 포함되어 있어야 합니다.",
+    "summary": "공유 대시보드 초대 이메일 보내기",
+    "request_description": "공유 대시보드 초대 요청 본문입니다.",
+    "request_schema_description": "API가 반환하는 공유 대시보드에 존재하는 초대 데이터 및 메타데이터입니다."
+  },
+  "DeleteDashboard": {
+    "description": "지정된 ID를 사용하여 대시보드를 삭제합니다.",
+    "summary": "대시보드 삭제하기"
+  },
+  "GetDashboard": {
+    "description": "지정된 ID를 사용하여 대시보드를 가져옵니다.",
+    "summary": "대시보드 가져오기"
+  },
+  "UpdateDashboard": {
+    "description": "지정된 ID를 사용하여 대시보드를 업데이트합니다.",
+    "summary": "대시보드 업데이트하기",
+    "request_description": "대시보드 업데이트 요청 본문입니다.",
+    "request_schema_description": "대시보드는 주요 성능 메트릭을 시각적으로 추적, 분석 및 표시하는 Datadog의 도구로서,\n인프라의 상태를 모니터링할 수 있도록 지원합니다."
+  },
+  "SubmitDistributionPoints": {
+    "description": "분포 포인트 엔드포인트를 사용하면 Datadog 대시보드에 그래프로 표시할 수 있는 분포 데이터를 게시할 수 있습니다.",
+    "summary": "분포 포인트 제출하기",
+    "request_description": "",
+    "request_schema_description": "분포 포인트 페이로드입니다."
+  },
+  "ListDowntimes": {
+    "description": "모든 예정된 가동 중지를 가져옵니다. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "모든 가동 중지 가져오기"
+  },
+  "CreateDowntime": {
+    "description": "가동 중지를 예약하세요. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "가동 중지 예약하기",
+    "request_description": "가동 중지 예약 요청 본문입니다.",
+    "request_schema_description": "가동 중지 예약을 사용하면 전역적으로 범위를 알림에서 제외하여\n모니터링 경보를 더 효과적으로 제어할 수 있습니다.\n시작 및 종료 시간을 예약할 수 있는 가동 중지 설정은\n지정된 Datadog 태그와 관련된 모든 경보를 차단합니다."
+  },
+  "CancelDowntimesByScope": {
+    "description": "`X` 범위와 일치하는 모든 가동 중지를 삭제합니다. **참고:** 이 기능은 v1 엔드포인트를 사용하여 생성된 가동 중지와만 상호 작용합니다. 이 엔드포인트는 지원이 중단되었으며, 대체되지 않을 예정입니다. v2 엔드포인트를 사용하여 가동 중지를 찾고 취소하세요.",
+    "summary": "범위별로 가동 중지 취소하기",
+    "request_description": "가동 중지를 취소할 범위입니다.",
+    "request_schema_description": "범위에 따라 가동 중지를 취소합니다."
+  },
+  "CancelDowntime": {
+    "description": "가동 중지를 취소합니다. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "가동 중지 취소하기"
+  },
+  "GetDowntime": {
+    "description": "`downtime_id`로 가동 중지 세부 정보를 가져옵니다. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "가동 중지 가져오기"
+  },
+  "UpdateDowntime": {
+    "description": "`downtime_id`로 단일 가동 중지를 업데이트합니다. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "가동 중지 업데이트하기",
+    "request_description": "가동 중지 요청 본문을 업데이트합니다.",
+    "request_schema_description": "가동 중지 예약을 사용하면 전역적으로 범위를 알림에서 제외하여\n모니터링 경보를 더 효과적으로 제어할 수 있습니다.\n시작 및 종료 시간을 예약할 수 있는 가동 중지 설정은\n지정된 Datadog 태그와 관련된 모든 경보를 차단합니다."
+  },
+  "ListEvents": {
+    "description": "이벤트 스트림은 시간, 우선순위, 소스 및 태그별로 쿼리하고 필터링할 수 있습니다.\n\n**참고**:\n- 쿼리 중인 이벤트에 종류를 불문한 마크다운 서식이 포함되어 있는 경우,\n출력에서 `%`, `\\`, `n`과 같은 문자가 표시될 수 있습니다.\n\n- 이 엔드포인트는 최대 `1000`개의 가장 최근 결과를 반환합니다. 결과를 추가로 반환하려면\n마지막 결과의 마지막 타임스탬프를 식별하고 이를 `end` 쿼리 시간으로 설정하여\n결과를 페이지화하세요. page 파라미터를 사용하여 반환할 `1000`개 결과 세트를 지정할 수도 있습니다.",
+    "summary": "이벤트 목록 확인"
+  },
+  "CreateEvent": {
+    "description": "이 엔드포인트를 사용하면 스트림에 이벤트를 게시할 수 있습니다.\n태그를 지정하고, 우선순위를 설정한 후 다른 이벤트와 함께 집계하세요.",
+    "summary": "이벤트 게시하기",
+    "request_description": "이벤트 요청 객체",
+    "request_schema_description": "이벤트를 나타내는 객체입니다."
+  },
+  "GetEvent": {
+    "description": "이 엔드포인트를 통해 이벤트 세부 정보를 쿼리할 수 있습니다.\n\n**참고**: 쿼리 중인 이벤트에 종류를 불문하고 마크다운 서식이 포함되어 있는 경우,\n출력에서 `%`, `\\`, `n`과 같은 문자가 표시될 수 있습니다.",
+    "summary": "이벤트 가져오기"
+  },
+  "ListEmbeddableGraphs": {
+    "description": "이전에 생성된 임베드 가능한 그래프 목록을 가져옵니다.",
+    "summary": "모든 임베드 가져오기"
+  },
+  "CreateEmbeddableGraph": {
+    "description": "임베드 가능한 그래프를 새로 만듭니다.\n\n참고: 특정 조직 내에서 동일한 쿼리에 대한 임베드가 이미 존재하는 경우,\n새 임베드를 생성하는 대신 이전 임베드가 반환됩니다.\n\n템플릿 변수 사용에 관심이 있다면\n[템플릿 변수가 있는 임베드 가능한 그래프](https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables).",
+    "summary": "임베드 생성하기",
+    "request_description": "임베드 가능한 그래프 본문",
+    "request_schema_description": "임베드 가능한 그래프를 새로 생성하기 위한 페이로드입니다."
+  },
+  "GetEmbeddableGraph": {
+    "description": "`embed_id`를 사용하여 이전에 생성된 임베드에 대한 HTML 조각을 가져옵니다.",
+    "summary": "특정 임베드 가져오기"
+  },
+  "EnableEmbeddableGraph": {
+    "description": "지정된 임베드를 활성화합니다.",
+    "summary": "임베드 활성화하기"
+  },
+  "RevokeEmbeddableGraph": {
+    "description": "지정된 임베드를 취소합니다.",
+    "summary": "임베드 취소하기"
+  },
+  "GetGraphSnapshot": {
+    "description": "그래프 스냅샷을 찍습니다. 스냅샷은 웹 페이지에서 지정된 위젯을 렌더링하고 데이터를 사용할 수 있게 되면 캡처하여 생성된 PNG 이미지입니다. 이미지는 이후 클라우드 스토리지에 업로드됩니다.\n\n**참고**: 스냅샷이 생성되면 사용할 수 있게 되기까지 약간의 지연이 발생합니다.",
+    "summary": "그래프 스냅샷 찍기"
+  },
+  "MuteHost": {
+    "description": "호스트를 음소거합니다. **참고:** 이는 호스트에 대한 [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)를 생성합니다.",
+    "summary": "호스트 음소거하기",
+    "request_description": "호스트 음소거 요청 본문입니다.",
+    "request_schema_description": "호스트를 음소거하기 위한 설정 조합입니다."
+  },
+  "UnmuteHost": {
+    "description": "호스트의 음소거를 해제합니다. 이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "호스트 음소거 해제하기"
+  },
+  "ListHosts": {
+    "description": "이 엔드포인트를 사용하면 이름, 별칭 또는 태그별로 호스트를 검색할 수 있습니다.\n기본적으로 지난 3시간 이내에 활성화된 호스트가 포함됩니다.\n보존 기간은 7일입니다.\n결과는 페이지별로 표시되며 한 번에 최대 1000개의 결과가 표시됩니다.\n**참고:** 호스트가 Amazon EC2 인스턴스인 경우 응답에서 `id`가 `aws_id`로 대체됩니다.\n**참고**: 이 엔드포인트에서 반환된 데이터를 보안 검사로 보강하려면 새로운 [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) 엔드포인트를 참조하세요.",
+    "summary": "조직의 모든 호스트 가져오기"
+  },
+  "GetHostTotals": {
+    "description": "이 엔드포인트는 Datadog 계정의 활성 및 활성화된 상태의 호스트의 총 수를 반환합니다.\n활성이란 호스트가 지난 1시간 동안 보고했음을 의미하며, 활성화된 상태란 지난 2시간 동안 보고했음을 의미합니다.",
+    "summary": "총 활성 호스트 수 가져오기"
+  },
+  "DeleteAWSAccount": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** 지정된 `account_id` 및 `role_name parameters`와 일치하는 Datadog-AWS 통합을 삭제합니다.",
+    "summary": "AWS 통합 삭제하기",
+    "request_description": "AWS 요청 객체",
+    "request_schema_description": "삭제할 AWS 계정의 목록입니다."
+  },
+  "ListAWSAccounts": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Datadog 조직에서 사용할 수 있는 모든 Datadog-AWS 통합을 나열합니다.",
+    "summary": "모든 AWS 통합 나열하기"
+  },
+  "CreateAWSAccount": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Datadog-Amazon Web Services 통합을 생성합니다.\n`POST` 메서드를 사용하면 Datadog 조직의 기존 구성에 새 구성을 추가하여\n통합 구성을 업데이트합니다.\n역할 기반 인증을 위한 고유한 AWS 계정 ID입니다.",
+    "summary": "AWS 통합 생성하기",
+    "request_description": "AWS 요청 객체",
+    "request_schema_description": "이 통합과 연결된 AWS 계정을 반환합니다."
+  },
+  "UpdateAWSAccount": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Datadog-Amazon Web Services 통합을 업데이트합니다.",
+    "summary": "AWS 통합 업데이트하기",
+    "request_description": "AWS 요청 객체",
+    "request_schema_description": "이 통합과 연결된 AWS 계정을 반환합니다."
+  },
+  "ListAvailableAWSNamespaces": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** 지정된 Datadog-AWS 통합에 대한 모든 네임스페이스 규칙을 나열합니다. 이 엔드포인트는 인수를 사용하지 않습니다.",
+    "summary": "네임스페이스 규칙 나열하기"
+  },
+  "DeleteAWSEventBridgeSource": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Amazon EventBridge 소스를 삭제합니다.",
+    "summary": "Amazon EventBridge 소스 삭제하기",
+    "request_description": "지정된 이름, 리전 및 연결된 AWS 계정으로 Amazon EventBridge 소스를 삭제합니다.",
+    "request_schema_description": "EventBridge 소스를 삭제하는 데 사용되는 객체입니다."
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** 모든 Amazon EventBridge 소스를 가져옵니다.",
+    "summary": "모든 Amazon EventBridge 소스 가져오기"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Amazon EventBridge 소스를 생성합니다.",
+    "summary": "Amazon EventBridge 소스 생성하기",
+    "request_description": "지정된 이름과 리전을 사용하여 AWS 계정에 대한 Amazon EventBridge 소스를 생성합니다.",
+    "request_schema_description": "EventBridge 소스를 생성하는 데 사용되는 객체입니다."
+  },
+  "DeleteAWSTagFilter": {
+    "description": "태그 필터링 항목을 삭제합니다.",
+    "summary": "태그 필터링 항목 삭제하기",
+    "request_description": "지정된 AWS 계정 및 `dd-aws` 네임스페이스에 대한 태그 필터링 항목을 삭제합니다.",
+    "request_schema_description": "AWS 태그 필터 항목을 삭제하는 데 사용되는 객체입니다."
+  },
+  "ListAWSTagFilters": {
+    "description": "모든 AWS 태그 필터를 가져옵니다.",
+    "summary": "모든 AWS 태그 필터 가져오기"
+  },
+  "CreateAWSTagFilter": {
+    "description": "AWS 태그 필터를 설정합니다.",
+    "summary": "AWS 태그 필터 설정하기",
+    "request_description": "`aws_account_identifier`, `namespace` 및 필터링 문자열을 사용하여 AWS 태그 필터를 설정합니다.\n네임스페이스 옵션은 `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs` 및 `custom`입니다.",
+    "request_schema_description": "AWS 태그 필터를 설정하는 데 사용되는 객체입니다."
+  },
+  "CreateNewAWSExternalID": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** 지정된 AWS 계정 ID 및 역할 이름 쌍에 대한 새로운 AWS 외부 ID를 생성합니다.",
+    "summary": "새 외부 ID 생성하기",
+    "request_description": "Datadog 역할 위임 이름입니다.\nAWS 계정 역할 이름에 대한 자세한 내용은\n[Datadog AWS 통합 구성 정보](https://docs.datadoghq.com/integrations/amazon_web_services/#setup)를 참조하세요.",
+    "request_schema_description": "이 통합과 연결된 AWS 계정을 반환합니다."
+  },
+  "DeleteAWSLambdaARN": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다.** 특정 AWS 계정과 연결된 특정 Lambda ARN을 제거하여 Datadog-AWS 로그 구성을 삭제합니다.",
+    "summary": "AWS 로그 통합 삭제하기",
+    "request_description": "AWS Lambda ARN 요청 본문을 삭제합니다.",
+    "request_schema_description": "AWS 계정 ID 및 Lambda ARN입니다."
+  },
+  "ListAWSLogsIntegrations": {
+    "description": "Datadog 계정에 구성된 모든 Datadog-AWS 로그 통합을 나열합니다.",
+    "summary": "모든 AWS 로그 통합 나열하기"
+  },
+  "CreateAWSLambdaARN": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다.** 로그 수집을 활성화하기 위해 Datadog-AWS 로그 수집을 위해 생성된 Lambda의 Lambda ARN을 AWS 계정 ID에 연결합니다.",
+    "summary": "AWS 로그 Lambda ARN 추가하기",
+    "request_description": "AWS 로그 Lambda Async 요청 본문입니다.",
+    "request_schema_description": "AWS 계정 ID 및 Lambda ARN입니다."
+  },
+  "CheckAWSLogsLambdaAsync": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다.** 지정된 서비스 및 AWS 계정에 대한 로그 포워딩 트리거를 추가할 권한이 있는지 테스트하세요. 입력값은\nAWS 서비스 로그 수집 활성화와 동일합니다. 후속 요청은 항상 위 절차를 반복하므로 이\n엔드포인트는 차단하는 대신 간헐적으로 폴링될 수 있습니다.\n\n- 계정에 Lambda가 존재하는지 검사하고 있을 때 'created' 상태를 반환합니다.\n- 검사하는 동안 'waiting' 상태를 반환합니다.\n- Lambda가 존재하면 'checked and ok' 상태를 반환합니다.\n- Lambda가 존재하지 않으면 'error' 상태를 반환합니다.",
+    "summary": "AWS Lambda 함수가 존재하는지 검사하기",
+    "request_description": "AWS 로그 Lambda Async 요청 본문을 검사합니다.",
+    "request_schema_description": "AWS 계정 ID 및 Lambda ARN입니다."
+  },
+  "ListAWSLogsServices": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요.** Datadog이 자동 로그 수집을 제공하는 현재 AWS 서비스 목록을 가져옵니다. 반환된 서비스 ID를 AWS 서비스 로그 수집 활성화 API 엔드포인트의 services 파라미터와 함께 사용합니다.",
+    "summary": "AWS 로그 지원 서비스 목록 가져오기"
+  },
+  "EnableAWSLogServices": {
+    "description": "서비스 목록에 대해 자동 로그 수집을 활성화합니다. 구성을 저장하려면 `CreateAWSLambdaARN`을 실행한 후 이 작업을 실행해야 합니다.",
+    "summary": "AWS 로그 통합 활성화하기",
+    "request_description": "AWS Log Services 요청 본문을 활성화합니다.",
+    "request_schema_description": "Datadog에서 자동 로그 수집을 제공하는 현재 AWS 서비스 목록입니다."
+  },
+  "CheckAWSLogsServicesAsync": {
+    "description": "**이 엔드포인트는 지원이 중단되었습니다.** 지정된 서비스 및 AWS 계정에 대한 로그 포워딩 트리거를 추가할\n권한이 있는지 테스트합니다. 입력값은 `EnableAWSLogServices`와 동일합니다.\n비동기식으로 완료되므로 비동기 요청이 완료될 때까지 비차단 방식으로 반복적으로\n폴링될 수 있습니다.\n\n- AWS 계정에 권한이 있는지 검사하고 있을 때 `created` 상태를\n  반환합니다.\n- 검사하는 동안 `waiting` 상태를 반환합니다.\n- Lambda가 존재하면 `checked and ok` 상태를 반환합니다.\n- Lambda가 존재하지 않으면 `error` 상태를 반환합니다.",
+    "summary": "로그 서비스에 대한 권한 검사하기",
+    "request_description": "AWS Logs Async Services 요청 본문을 검사합니다.",
+    "request_schema_description": "Datadog에서 자동 로그 수집을 제공하는 현재 AWS 서비스 목록입니다."
+  },
+  "DeleteAzureIntegration": {
+    "description": "Datadog 계정에서 지정된 Datadog-Azure 통합을 삭제합니다.",
+    "summary": "Azure 통합 삭제하기",
+    "request_description": "지정된 Datadog-Azure 통합 요청 본문을 삭제합니다.",
+    "request_schema_description": "조직에 대해 구성된 Datadog-Azure 통합입니다."
+  },
+  "ListAzureIntegration": {
+    "description": "Datadog 계정에 구성된 모든 Datadog-Azure 통합을 나열합니다.",
+    "summary": "모든 Azure 통합 나열하기"
+  },
+  "CreateAzureIntegration": {
+    "description": "Datadog-Azure 통합을 생성합니다.\n\n`POST` 메서드를 사용하면 Datadog 조직의 기존 구성에 새 구성을 추가하여\n통합 구성을 업데이트합니다.\n\n`PUT` 메서드를 사용하면 현재 구성을 Datadog 조직에 전송된 새 구성으로 대체하여\n통합 구성을 업데이트합니다.",
+    "summary": "Azure 통합 생성하기",
+    "request_description": "Datadog 계정 요청 본문에 대한 Datadog-Azure 통합을 생성합니다.",
+    "request_schema_description": "조직에 대해 구성된 Datadog-Azure 통합입니다."
+  },
+  "UpdateAzureIntegration": {
+    "description": "Datadog-Azure 통합을 업데이트합니다. 기존 `tenant_name` 및 `client_id`가 필요합니다.\n제공된 다른 모든 필드는 기존 값을 덮어씁니다. `tenant_name` 또는 `client_id`를 덮어쓰려면\n`new_tenant_name` 및 `new_client_id`를 사용하세요. 필드를 변경하지 않고 그대로 두려면 페이로드에 해당 필드를 제공하지 마세요.",
+    "summary": "Azure 통합 업데이트하기",
+    "request_description": "Datadog-Azure 통합 요청 본문을 업데이트합니다.",
+    "request_schema_description": "조직에 대해 구성된 Datadog-Azure 통합입니다."
+  },
+  "UpdateAzureHostFilters": {
+    "description": "지정된 Datadog-Azure 통합에 대해 정의된 호스트 필터 목록을 업데이트합니다.",
+    "summary": "Azure 통합 호스트 필터 업데이트하기",
+    "request_description": "Datadog-Azure 통합의 호스트 필터 요청 본문을 업데이트합니다.",
+    "request_schema_description": "조직에 대해 구성된 Datadog-Azure 통합입니다."
+  },
+  "DeleteGCPIntegration": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요. 지정된 Datadog GCP 통합을 삭제합니다.",
+    "summary": "GCP 통합 삭제하기",
+    "request_description": "지정된 Datadog GCP 통합을 삭제합니다.",
+    "request_schema_description": "Google Cloud Platform 계정입니다."
+  },
+  "ListGCPIntegration": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요. Datadog 계정에 구성된 모든 Datadog GCP 통합의 목록을 나열합니다.",
+    "summary": "모든 GCP 통합 목록 나열하기"
+  },
+  "CreateGCPIntegration": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요. Datadog GCP 통합을 생성합니다.",
+    "summary": "GCP 통합 생성하기",
+    "request_description": "Datadog GCP 통합을 생성합니다.",
+    "request_schema_description": "Google Cloud Platform 계정입니다."
+  },
+  "UpdateGCPIntegration": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 대신 V2 엔드포인트를 사용하세요. Datadog GCP 통합의 host_filters 및/또는 auto-mute를 업데이트합니다.\n`project_id` 및 `client_email`이 필요하지만, 해당 필드는 업데이트할 수 없습니다.\n이 필드들을 업데이트해야 하는 경우, 삭제한 뒤 생성(`POST`) 엔드포인트를 사용하세요.\n지정되지 않은 필드는 원래 값을 유지합니다.",
+    "summary": "GCP 통합 업데이트하기",
+    "request_description": "Datadog-GCP 통합을 업데이트합니다.",
+    "request_schema_description": "Google Cloud Platform 계정입니다."
+  },
+  "CreatePagerDutyIntegrationService": {
+    "description": "PagerDuty 통합 내 신규 서비스 객체를 생성합니다.",
+    "summary": "신규 서비스 객체 생성하기",
+    "request_description": "신규 서비스 객체 요청 본문을 생성합니다.",
+    "request_schema_description": "Datadog과 통합할 수 있는 PagerDuty 서비스입니다."
+  },
+  "DeletePagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty 통합의 단일 서비스 객체를 삭제합니다.",
+    "summary": "단일 서비스 객체 삭제하기"
+  },
+  "GetPagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty 통합의 서비스 이름을 가져옵니다.",
+    "summary": "단일 서비스 객체 가져오기"
+  },
+  "UpdatePagerDutyIntegrationService": {
+    "description": "Datadog-PagerDuty 통합의 단일 서비스 객체를 업데이트합니다.",
+    "summary": "단일 서비스 객체 업데이트하기",
+    "request_description": "기존 서비스 객체 요청 본문을 업데이트합니다.",
+    "request_schema_description": "PagerDuty 서비스 객체 키입니다."
+  },
+  "DeleteSlackIntegration": {
+    "description": "Datadog-Slack 통합을 삭제합니다.",
+    "summary": "Slack 통합 삭제하기"
+  },
+  "GetSlackIntegration": {
+    "description": "Datadog-Slack 통합에 대한 모든 정보를 가져옵니다.",
+    "summary": "Slack 통합 관련 정보 가져오기"
+  },
+  "CreateSlackIntegration": {
+    "description": "Datadog-Slack 통합을 생성합니다. 생성한 후에는\n[Slack 통합 엔드포인트에 채널 추가](https://docs.datadoghq.com/api/?lang=bash#add-channels-to-slack-integration)를 통해 채널에 추가하세요.\n\n이 메서드는 Datadog 조직의 기존 구성에 새 구성을 **추가**하여\n통합 구성을 업데이트합니다.",
+    "summary": "Slack 통합 생성하기",
+    "request_description": "Datadog-Slack 통합 요청 본문을 생성합니다.",
+    "request_schema_description": "새로운 Datadog-Slack 통합입니다."
+  },
+  "UpdateSlackIntegration": {
+    "description": "**지원 중단됨**: 이 엔드포인트는 지원이 중단되었습니다.\n\n이 메서드는 Datadog 조직에 전송된 새 구성으로 현재 구성을 **대체**하여\n통합 구성을 **완전히 재작성**합니다.\nSlack 웹훅 URL을 포함한 모든 필드가 유효한지 확인하세요.\n유효하지 않은 URL은 Slack 알림을 중단시킬 수 있기 때문입니다.",
+    "summary": "Slack 통합에 채널 추가하기",
+    "request_description": "기존 Datadog-Slack 통합 요청 본문을 업데이트합니다.",
+    "request_schema_description": "Slack 채널의 구성입니다."
+  },
+  "GetSlackIntegrationChannels": {
+    "description": "Datadog-Slack 통합을 위해 구성된 모든 채널 목록을 가져옵니다.",
+    "summary": "Slack 통합에서 모든 채널 가져오기"
+  },
+  "CreateSlackIntegrationChannel": {
+    "description": "Datadog-Slack 통합에 채널을 추가합니다.",
+    "summary": "Slack 통합 채널 생성하기",
+    "request_description": "생성할 Slack 채널을 설명하는 페이로드입니다.",
+    "request_schema_description": "Slack 채널 구성입니다."
+  },
+  "RemoveSlackIntegrationChannel": {
+    "description": "Datadog-Slack 통합에서 채널을 제거합니다.",
+    "summary": "Slack 통합 채널 제거하기"
+  },
+  "GetSlackIntegrationChannel": {
+    "description": "Datadog-Slack 통합에 구성된 채널을 가져옵니다.",
+    "summary": "Slack 통합 채널 가져오기"
+  },
+  "UpdateSlackIntegrationChannel": {
+    "description": "Datadog-Slack 통합에 사용되는 채널을 업데이트합니다.",
+    "summary": "Slack 통합 채널 업데이트하기",
+    "request_description": "업데이트할 필드와 값을 설명하는 페이로드입니다.",
+    "request_schema_description": "Slack 채널 구성입니다."
+  },
+  "CreateWebhooksIntegrationCustomVariable": {
+    "description": "이름이 `<CUSTOM_VARIABLE_NAME>`인 엔드포인트를 생성합니다.",
+    "summary": "사용자 지정 변수 생성하기",
+    "request_description": "사용자 지정 변수 요청 본문을 정의합니다.",
+    "request_schema_description": "웹훅 통합을 위한 사용자 지정 변수입니다."
+  },
+  "DeleteWebhooksIntegrationCustomVariable": {
+    "description": "이름이 `<CUSTOM_VARIABLE_NAME>`인 엔드포인트를 삭제합니다.",
+    "summary": "사용자 지정 변수 삭제하기"
+  },
+  "GetWebhooksIntegrationCustomVariable": {
+    "description": "이름이 `<CUSTOM_VARIABLE_NAME>`인 사용자 지정 변수의 내용을 표시합니다.\n\n사용자 지정 변수가 시크릿인 경우, 응답 페이로드에서 해당 값이\n반환되지 않습니다.",
+    "summary": "사용자 지정 변수 가져오기"
+  },
+  "UpdateWebhooksIntegrationCustomVariable": {
+    "description": "이름이 `<CUSTOM_VARIABLE_NAME>`인 엔드포인트를 업데이트합니다.",
+    "summary": "사용자 지정 변수 업데이트하기",
+    "request_description": "기존 사용자 지정 변수 요청 본문을 업데이트합니다.",
+    "request_schema_description": "사용자 지정 변수 객체의 업데이트 요청입니다.\n\n*모든 속성은 선택 사항입니다.*"
+  },
+  "CreateWebhooksIntegration": {
+    "description": "이름이 `<WEBHOOK_NAME>`인 엔드포인트를 생성합니다.",
+    "summary": "Webhooks 통합 생성하기",
+    "request_description": "Webhooks 통합 요청 본문을 생성합니다.",
+    "request_schema_description": "Datadog-Webhooks 통합입니다."
+  },
+  "DeleteWebhooksIntegration": {
+    "description": "이름이 `<WEBHOOK NAME>`인 엔드포인트를 삭제합니다. 이 액션은 되돌릴 수 없습니다.",
+    "summary": "웹훅 삭제하기"
+  },
+  "GetWebhooksIntegration": {
+    "description": "이름이 `<WEBHOOK_NAME>`인 웹훅의 내용을 가져옵니다.",
+    "summary": "웹훅 통합 가져오기"
+  },
+  "UpdateWebhooksIntegration": {
+    "description": "이름이 `<WEBHOOK_NAME>`인 엔드포인트를 업데이트합니다.",
+    "summary": "웹훅 업데이트하기",
+    "request_description": "기존 Datadog-Webhooks 통합을 업데이트합니다.",
+    "request_schema_description": "Webhooks 통합 객체의 업데이트 요청입니다.\n\n*모든 속성은 선택 사항입니다.*"
+  },
+  "ListLogs": {
+    "description": "목록 엔드포인트는 로그 검색 쿼리와 일치하는 로그를 반환합니다.\n[결과는 페이지별로 표시됩니다][1].\n\n**조직의 로그 보관을 고려 중이라면\n로그 목록 API 대신 Datadog 보관 기능을 사용해 보세요.\n[Datadog 로그 아카이브 설명서][2]를 참조하시기 바랍니다.**\n\n**참고**: 이 엔드포인트는 기본적으로 로그 고객을 대상으로 활성화되어 있습니다. 비활성화하려면 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "로그 검색하기",
+    "request_description": "로그 필터",
+    "request_schema_description": "조직에서 로그 목록을 가져오기 위한 요청과 함께 전송할 객체입니다."
+  },
+  "GetLogsIndexOrder": {
+    "description": "로그 인덱스의 현재 순서를 가져옵니다. 이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "인덱스 순서 가져오기"
+  },
+  "UpdateLogsIndexOrder": {
+    "description": "이 엔드포인트는 조직의 인덱스 순서를 업데이트합니다.\n요청이 성공하면 요청 본문에 전달된 인덱스 순서 객체를 반환합니다.",
+    "summary": "인덱스 순서 업데이트하기",
+    "request_description": "인덱스 이름의 새롭게 순서가 지정된 목록을 포함한 객체입니다.",
+    "request_schema_description": "로그 인덱스 이름의 순서가 지정된 목록을 포함한 객체입니다."
+  },
+  "ListLogIndexes": {
+    "description": "인덱스 객체는 로그 인덱스의 구성을 설명합니다.\n이 엔드포인트는 조직의 `LogIndex` 객체 배열을 반환합니다.",
+    "summary": "모든 인덱스 가져오기"
+  },
+  "CreateLogsIndex": {
+    "description": "새 인덱스를 생성합니다. 요청이 성공하면 요청 본문에 전달된 인덱스 객체를 반환합니다.",
+    "summary": "인덱스 생성하기",
+    "request_description": "새 인덱스를 포함한 객체입니다.",
+    "request_schema_description": "Datadog 로그 인덱스를 설명하는 객체입니다."
+  },
+  "DeleteLogsIndex": {
+    "description": "조직의 기존 인덱스를 삭제합니다. 인덱스 삭제는 영구적이며 되돌릴 수 없습니다.\n삭제된 인덱스와 이름이 동일한 인덱스는 다시 생성할 수 없습니다.",
+    "summary": "인덱스 삭제하기"
+  },
+  "GetLogsIndex": {
+    "description": "소속 조직에서 로그 인덱스 하나를 가져옵니다. 이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "인덱스 가져오기"
+  },
+  "UpdateLogsIndex": {
+    "description": "이름으로 식별되는 인덱스를 업데이트합니다.\n요청이 성공하면 요청 본문에 전달된 인덱스 객체를 반환합니다.\n\n`PUT` 메서드를 사용하면 현재 구성을 Datadog 조직에 전송된 새 구성으로 **대체**하여\n인덱스의 구성을 업데이트합니다.",
+    "summary": "인덱스 업데이트하기",
+    "request_description": "새로운 `LogsIndexUpdateRequest`를 포함한 객체입니다.",
+    "request_schema_description": "Datadog 로그 인덱스를 업데이트하기 위한 객체입니다."
+  },
+  "GetLogsPipelineOrder": {
+    "description": "현재 파이프라인 순서를 가져옵니다.\n이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "파이프라인 순서 가져오기"
+  },
+  "UpdateLogsPipelineOrder": {
+    "description": "파이프라인 순서를 업데이트합니다. 로그는 순차적으로 처리되므로 파이프라인 순서를 변경하면\n다른 파이프라인 및 해당 프로세서에서 처리되는 데이터의 구조와 내용이 변경될 수 있습니다.\n\n**참고**: `PUT` 메서드를 사용하면 현재 순서를 Datadog 조직에 전송된 새 순서로 대체하여\n파이프라인 순서를 업데이트합니다.",
+    "summary": "파이프라인 순서 업데이트하기",
+    "request_description": "새로 순서가 지정된 파이프라인 ID 목록을 포함한 객체입니다.",
+    "request_schema_description": "순서가 지정된 파이프라인 ID 목록을 포함한 객체입니다."
+  },
+  "ListLogsPipelines": {
+    "description": "조직의 모든 파이프라인을 가져옵니다.\n이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "모든 파이프라인 가져오기"
+  },
+  "CreateLogsPipeline": {
+    "description": "조직에서 파이프라인을 생성합니다.",
+    "summary": "파이프라인 생성하기",
+    "request_description": "새로운 파이프라인의 정의입니다.",
+    "request_schema_description": "파이프라인과 프로세서는 수신 로그에서 작동하며,\n더 쉽게 쿼리할 수 있도록 로그를 구문 분석하고 구조화된 속성으로 변환합니다.\n\n**참고**: 이 엔드포인트는 관리자 사용자만 사용할 수 있습니다.\n관리자가 생성한 애플리케이션 키를 사용해야 합니다."
+  },
+  "DeleteLogsPipeline": {
+    "description": "조직의 지정된 파이프라인을 삭제합니다.\n이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "파이프라인 삭제하기"
+  },
+  "GetLogsPipeline": {
+    "description": "조직의 특정 파이프라인을 불러옵니다.\n이 엔드포인트는 JSON 인수를 사용하지 않습니다.",
+    "summary": "파이프라인 가져오기"
+  },
+  "UpdateLogsPipeline": {
+    "description": "지정된 파이프라인 구성을 업데이트하여 프로세서나 해당 순서를 변경합니다.\n\n**참고**: 이 메서드를 사용하면 현재 구성을 Datadog 조직에 전송된 새 구성으로 **대체**하여\n파이프라인 구성을 업데이트합니다.",
+    "summary": "파이프라인 업데이트하기",
+    "request_description": "파이프라인의 새로운 정의입니다.",
+    "request_schema_description": "파이프라인과 프로세서는 수신 로그에서 작동하며,\n더 쉽게 쿼리할 수 있도록 로그를 구문 분석하고 구조화된 속성으로 변환합니다.\n\n**참고**: 이 엔드포인트는 관리자 사용자만 사용할 수 있습니다.\n관리자가 생성한 애플리케이션 키를 사용해야 합니다."
+  },
+  "ListActiveMetrics": {
+    "description": "지정된 시간부터 현재까지 보고 중인 활성 메트릭 목록을 가져옵니다.",
+    "summary": "활성 메트릭 목록 가져오기"
+  },
+  "GetMetricMetadata": {
+    "description": "특정 메트릭에 대한 메타데이터를 가져옵니다.",
+    "summary": "메트릭 메타데이터 가져오기"
+  },
+  "UpdateMetricMetadata": {
+    "description": "특정 메트릭의 메타데이터를 편집합니다. [지원되는 유형](https://docs.datadoghq.com/developers/metrics)에 대해 자세히 알아보세요.",
+    "summary": "메트릭 메타데이터 수정하기",
+    "request_description": "새로운 메타데이터입니다.",
+    "request_schema_description": "모든 메트릭 관련 메타데이터가 포함된 객체입니다."
+  },
+  "ListMonitors": {
+    "description": "조직의 모든 모니터 목록을 가져옵니다.",
+    "summary": "모든 모니터 가져오기"
+  },
+  "CreateMonitor": {
+    "description": "지정된 옵션을 사용하여 모니터를 생성합니다.\n\n#### 모니터 유형\n\n다음 중에서 선택한 모니터 유형입니다.\n\n- anomaly: `query alert`\n- APM: `query alert` 또는 `trace-analytics alert`\n- composite: `composite`\n- custom: `service check`\n- forecast: `query alert`\n- host: `service check`\n- integration: `query alert` 또는 `service check`\n- live process: `process alert`\n- logs: `log alert`\n- metric: `query alert`\n- network: `service check`\n- outlier: `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit: `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring: `database-monitoring alert`\n- network-performance: `network-performance alert`\n- cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**참고**:\n- Synthetic 모니터는 Synthetics API를 통해 생성됩니다. 자세한 내용은 [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/) 설명서를 참조하세요.\n- 로그 모니터에는 범위가 지정되지 않은 App Key가 필요합니다.\n\n#### 쿼리 유형\n\n##### 메트릭 경보 쿼리\n\n예: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change 또는 pct_change\n- `time_window`: `last_#m`(모니터 유형에 따라 `#`은 1에서 10080 사이), `last_#h`(모니터 유형에 따라 `#`은 1에서 168 사이), `last_1d` 또는 `last_1w`\n- `space_aggr`: avg, sum, min 또는 max\n- `tags`: 하나 이상의 태그(쉼표로 구분) 또는 *\n- `key`: key:value 태그 구문의 'key', 그룹 내 각 태그에 대해 별도의 경보를 정의함(다중 경보)\n- `operator`: <, <=, >, >=, == 또는 !=\n- `#`: 임계값을 설정하는 데 사용되는 정수 또는 십진수\n\n수식 쿼리가 있는 메트릭 모니터에서 동적 임계값을 사용하려면 `#`을 `threshold` 키워드\n(예: `... > threshold`)로 교체하고 `options.thresholds`의 `critical_query`를 통해 쿼리로 임계값을 제공하세요.\n이 기능은 미리 보기로 제공되고 있습니다.\n\n`_change_` 또는 `_pct_change_` 시간 애그리게이터를 사용하는 경우 대신 다음과 함께 `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #`을 사용하세요.\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [자세히 알아보기](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\\\_#m(모니터 유형에 따라 1~2880), last\\\\_#h(모니터 유형에 따라 1~48) 또는 last_#d(1 또는 2)\n- `timeshift` #m_ago (5, 10, 15, 30), #h_ago (1, 2, 4), 또는 1d_ago\n\n이 항목을 사용하여 다음 쿼리로 이상치 모니터를 생성합니다.\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### 서비스 검사 쿼리\n\n예: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `check` 검사 이름(예: `datadog.agent.up`)\n- `tags` 하나 이상의 따옴표로 묶인 태그(쉼표로 구분), 또는 \"*\" (예: `.over(\"env:prod\", \"role:db\")`), `over`는 비워둘 수 없습니다.\n- `count`는 최대 임계값(`options`에 정의됨)보다 크거나 같아야 합니다. 이 값은 100으로 제한됩니다.\n예를 들어, 1개의 critical, 3개의 ok, 2개의 warn 상태를 지정한 경우 `count`는 최소 3이어야 합니다.\n- `group`은 검사 모니터에 대해 지정해야 합니다. 검사별 그룹화는 일부 서비스 검사에 대해 이미 명시적으로 알려져 있습니다.\n예를 들어, Postgres 통합 모니터는 `db`, `host`, `port`로 태그가 지정되고, 네트워크 모니터는 `host`, `instance`, `url`로 태그가 지정됩니다. 자세한 내용은 [서비스 검사](https://docs.datadoghq.com/api/latest/service-checks/) 설명서를 참조하세요.\n\n##### 이벤트 경보 쿼리\n\n**참고:** 이벤트 경보 쿼리는 이벤트 V2 경보 쿼리로 대체되었습니다. 자세한 내용은 [이벤트 마이그레이션 가이드](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/)를 참조하세요.\n\n##### 이벤트 V2 경보 쿼리\n\n예: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg` 및 `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n##### 프로세스 경보 쿼리\n\n예: `processes(search).over(tags).rollup('count').last(timeframe) operator #`\n\n- `search` 프로세스를 쿼리하기 위한 자유 텍스트 검색 문자열입니다.\n일치하는 프로세스는 [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows) 페이지의 결과와 일치합니다.\n- `tags` 하나 이상의 태그(쉼표로 구분)\n- `timeframe` 개수를 롤업할 타임프레임 (예: 10m, 4h) 지원되는 타임프레임: s, m, h, d\n- `operator` <, <=, >, >=, == 또는 !=\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수\n\n##### 로그 경보 쿼리\n\n예: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `index_name` 다중 인덱스 조직의 경우, 요청이 수행되는 로그 인덱스입니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg` 및 `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n##### 복합 조건 쿼리\n\n예: `12345 && 67890`(`12345`와 `67890`은 복합 조건이 아닌 모니터의 ID)\n\n* `name` [*필수*, *기본값* = **동적, 쿼리 기반**]: 경보의 이름입니다.\n* `message` [*필수*, *기본값* = **동적, 쿼리 기반**]: 이 모니터에 대한 알림에 포함할 메시지입니다.\n이메일 알림은 이벤트와 동일한 '@username' 표기법을 사용하여 특정 사용자에게 보낼 수 있습니다.\n* `tags` [*선택 사항*, *기본값* = **빈 목록**]: 모니터와 연결할 태그 목록입니다.\nAPI를 통해 모든 모니터 세부 정보를 가져올 때 `monitor_tags` 인수를 사용하여 이러한 태그별로 결과를 필터링하세요.\nAPI를 통해서만 사용할 수 있으며 Datadog UI에서는 표시하거나 편집할 수 없습니다.\n\n##### SLO 경보 쿼리\n\n예시: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: 경보를 구성하려는 SLO의 영숫자 SLO ID입니다.\n- `time_window`: 경보를 보낼 SLO 대상의 시간 범위입니다. 유효한 옵션: `7d`, `30d`, `90d`.\n- `operator`: `>=` or `>`\n\n##### 감사 경보 쿼리\n\n예: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg` 및 `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n##### CI Pipelines 경보 쿼리\n\n예: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n##### CI Tests 경보 쿼리\n\n예: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n##### Error Tracking 경보 쿼리\n\n\"새로운 이슈\" 예: `error-tracking(query).source(issue_source).new().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`\n\"영향이 큰 이슈\" 예: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `issue_source` 이슈 소스, `all`, `browser`, `mobile`, `backend`를 지원하며 생략 시 기본값은 `all`입니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원하며 생략 시 기본값은 `count`입니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `group by` 그룹화할 속성의 쉼표로 구분된 목록, 최소한 `issue.id`를 포함해야 합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n**Database Monitoring 경보 쿼리**\n\n예: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n**네트워크 성능 경보 쿼리**\n\n예: `network-performance(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n**비용 경보 쿼리**\n\n예: `formula(query).timeframe_type(time_window).function(parameter) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `timeframe_type` 비용을 평가할 타임프레임 유형\n        - `forecast`의 경우 `current`를 지원합니다.\n        - `change`, `anomaly`, `threshold`의 경우 `last`를 지원합니다.\n- `time_window` - 일일 롤업을 지원합니다(예: `7d`).\n- `function` - [선택 사항, 생략 시 기본값은 `threshold` 모니터] `change`, `anomaly`, `forecast`를 지원합니다.\n- `parameter` 해당 유형의 파라미터를 지정합니다.\n    - `change`의 경우\n        - `relative`, `absolute`를 지원합니다.\n        - [선택 사항] `#`을 지원하며, 여기서 `#`은 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n    - `anomaly`의 경우\n        - `direction=both`, `direction=above`, `direction=below`를 지원합니다.\n        - [선택 사항] `threshold=#`을 지원하며, 여기서 `#`은 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n- `operator`\n    - `threshold`의 경우 `<`, `<=`, `>`, `>=`, `==` 또는 `!=`를 지원합니다.\n    - `change`의 경우 `>`, `<`를 지원합니다.\n    - `anomaly`의 경우 `>=`를 지원합니다.\n    - `forecast`의 경우 `>`를 지원합니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.\n\n**Network Path 경보 쿼리**\n\n예 `network-path(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` 검색 쿼리, [로그 검색 구문](https://docs.datadoghq.com/logs/search_syntax/)을 따릅니다.\n- `index_name` 모니터링할 데이터 유형으로, `netpath-path` 및 `netpath-hop`을 지원합니다.\n- `rollup_method` 통계 롤업 메서드, `count`, `avg`, `cardinality`를 지원합니다.\n- `measure` `avg` 및 카디널리티 `rollup_method` 대상, 사용할 측정값 또는 패싯 이름을 지정합니다.\n- `time_window` #m(1에서 2880 사이), #h(1에서 48 사이)입니다.\n- `operator` `<`, `<=`, `>`, `>=`, `==` 또는 `!=`입니다.\n- `#` 임계값을 설정하는 데 사용되는 정수 또는 십진수입니다.",
+    "summary": "모니터 생성하기",
+    "request_description": "모니터 요청 본문을 생성합니다.",
+    "request_schema_description": "모니터를 설명하는 객체입니다."
+  },
+  "CheckCanDeleteMonitor": {
+    "description": "지정된 모니터를 삭제할 수 있는지 검사합니다.",
+    "summary": "모니터 삭제 가능 여부 검사하기"
+  },
+  "SearchMonitorGroups": {
+    "description": "모니터 그룹 세부 정보를 검색하고 필터링합니다.",
+    "summary": "모니터 그룹 검색"
+  },
+  "SearchMonitors": {
+    "description": "모니터 세부 정보를 검색하고 필터링합니다.",
+    "summary": "모니터 검색"
+  },
+  "ValidateMonitor": {
+    "description": "요청에 제공된 모니터를 검증합니다.\n\n**참고**: 로그 모니터에는 범위가 지정되지 않은 App Key와 `logs_read_data` 권한이 필요합니다.",
+    "summary": "모니터 검증하기",
+    "request_description": "모니터 요청 객체",
+    "request_schema_description": "모니터를 설명하는 객체입니다."
+  },
+  "DeleteMonitor": {
+    "description": "지정된 모니터 삭제하기",
+    "summary": "모니터 삭제하기"
+  },
+  "GetMonitor": {
+    "description": "조직에서 지정된 모니터에 대한 세부 정보를 가져옵니다.",
+    "summary": "모니터 세부 정보 가져오기"
+  },
+  "UpdateMonitor": {
+    "description": "지정된 모니터를 편집합니다.",
+    "summary": "모니터 편집하기",
+    "request_description": "모니터 요청 본문을 편집합니다.",
+    "request_schema_description": "모니터 업데이트 요청을 설명하는 객체입니다."
+  },
+  "ListMonitorDowntimes": {
+    "description": "지정된 모니터에 대한 모든 활성 v1 가동 중지를 가져옵니다. **참고:** 이 엔드포인트는 지원이 중단되었습니다. v2 엔드포인트를 사용하세요.",
+    "summary": "모니터에 대한 활성 가동 중지 가져오기"
+  },
+  "MuteMonitor": {
+    "description": "지정된 모니터를 음소거합니다.",
+    "summary": "모니터 음소거하기"
+  },
+  "UnmuteMonitor": {
+    "description": "지정된 모니터의 음소거를 해제합니다.",
+    "summary": "모니터 음소거 해제하기"
+  },
+  "ValidateExistingMonitor": {
+    "description": "요청에 제공된 모니터를 검증합니다.\n\n**참고**: 로그 모니터에는 범위가 지정되지 않은 App Key와 `logs_read_data` 권한이 필요합니다.",
+    "summary": "기존 모니터 검증하기",
+    "request_description": "모니터 요청 객체",
+    "request_schema_description": "모니터를 설명하는 객체입니다."
+  },
+  "GetMonthlyCustomReports": {
+    "description": "월간 커스텀 보고서를 가져옵니다.\n**참고:** 이 엔드포인트는 2022년 12월 1일에 완전히 지원 중단됩니다.\n관련 마이그레이션 가이드는 [Usage Attribution API v1에서 v2로 마이그레이션](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)을 참조하세요.",
+    "summary": "사용 가능한 월별 커스텀 보고서 목록 가져오기"
+  },
+  "GetSpecifiedMonthlyCustomReports": {
+    "description": "지정된 월별 커스텀 보고서를 가져옵니다.\n**참고:** 이 엔드포인트는 2022년 12월 1일에 완전히 지원 중단됩니다.\n관련 마이그레이션 가이드는 [Usage Attribution API v1에서 v2로 마이그레이션](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)을 참조하세요.",
+    "summary": "지정된 월별 커스텀 보고서 가져오기"
+  },
+  "ListNotebooks": {
+    "description": "모든 노트북을 가져옵니다. 이는 노트북\n`name` 또는 작성자 `handle`에서 특정 `query`를 검색하는 데에도 사용할 수 있습니다.",
+    "summary": "모든 노트북 가져오기"
+  },
+  "CreateNotebook": {
+    "description": "지정된 옵션을 사용하여 노트북을 생성합니다.",
+    "summary": "노트북 생성하기",
+    "request_description": "생성하려는 노트북의 JSON 설명입니다.",
+    "request_schema_description": "노트북 생성 요청에 대한 설명입니다."
+  },
+  "DeleteNotebook": {
+    "description": "지정된 ID를 사용하여 노트북을 삭제합니다.",
+    "summary": "노트북 삭제하기"
+  },
+  "GetNotebook": {
+    "description": "지정된 노트북 ID를 사용하여 노트북을 가져옵니다.",
+    "summary": "노트북 가져오기"
+  },
+  "UpdateNotebook": {
+    "description": "지정된 ID를 사용하여 노트북을 업데이트합니다.",
+    "summary": "노트북 업데이트하기",
+    "request_description": "노트북 요청 본문을 업데이트합니다.",
+    "request_schema_description": "노트북 업데이트 요청에 대한 설명입니다."
+  },
+  "ListOrgs": {
+    "description": "이 엔드포인트는 최상위 조직에 대한 데이터를 반환합니다.",
+    "summary": "관리 조직 나열하기"
+  },
+  "CreateChildOrg": {
+    "description": "하위 조직을 생성합니다.\n\n이 엔드포인트는\n[다중 조직 계정](https://docs.datadoghq.com/account_management/multi_organization/)\n기능이 필요하며,\n[지원팀에 문의](https://docs.datadoghq.com/help/)하여 활성화해야 합니다.\n\n새 하위 조직이 생성되면\n`org.public_id`, `api_key.key` 및\n응답에 제공된 `application_key.hash`를 사용하여 상호작용할 수 있습니다.",
+    "summary": "하위 조직 생성하기",
+    "request_description": "생성해야 하는 조직 객체",
+    "request_schema_description": "생성할 조직을 설명하는 객체입니다."
+  },
+  "GetOrg": {
+    "description": "조직 정보를 가져옵니다.",
+    "summary": "조직 정보 가져오기"
+  },
+  "UpdateOrg": {
+    "description": "조직을 업데이트합니다.",
+    "summary": "조직 업데이트하기",
+    "request_description": "",
+    "request_schema_description": "조직을 만들고 편집하고 관리합니다."
+  },
+  "DowngradeOrg": {
+    "description": "MSP 고객만 사용할 수 있습니다. 마스터 조직의 계층 구조에서 하위 조직을 제거하고 해당 하위 조직을 30일 평가판으로 전환합니다.",
+    "summary": "스핀오프 하위 조직"
+  },
+  "UploadIdPForOrg": {
+    "description": "SAML IdP의 ID 공급자(IdP)\n메타데이터를 업데이트하는 몇 가지 옵션이 있습니다.\n\n* **다중 파트 양식 데이터**: 양식 게시를 사용하여 IdP 메타데이터 파일을 게시합니다.\n\n* **XML 본문:** 요청 본문으로 IdP 메타데이터 파일을 게시합니다.",
+    "summary": "IdP 메타데이터 업로드하기",
+    "request_description": "",
+    "request_schema_description": "IdP 구성을 설명하는 객체입니다."
+  },
+  "QueryMetrics": {
+    "description": "시계열 포인트를 쿼리합니다.",
+    "summary": "시계열 포인트 쿼리하기"
+  },
+  "ListMetrics": {
+    "description": "**참고**: 이 엔드포인트는 지원이 중단되었습니다. 대신 `/api/v2/metrics`를 사용하세요.\n\nDatadog에서 지난 24시간 동안의 메트릭을 검색합니다.",
+    "summary": "메트릭 검색하기"
+  },
+  "AddSecurityMonitoringSignalToIncident": {
+    "description": "인시던트에 보안 신호를 추가합니다. 이를 통해 신호 탐색기 내에서 인시던트별로 신호를 검색하고 인시던트 타임라인으로 신호를 조회할 수 있습니다.",
+    "summary": "인시던트에 보안 신호 추가하기",
+    "request_description": "신호 업데이트를 설명하는 특성입니다.",
+    "request_schema_description": "신호를 추가할 인시던트를 설명하는 특성입니다."
+  },
+  "EditSecurityMonitoringSignalAssignee": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 보안 신호의 분류 담당자를 수정합니다.",
+    "summary": "보안 신호 분류 담당자 수정하기",
+    "request_description": "신호 업데이트를 설명하는 특성입니다.",
+    "request_schema_description": "보안 신호에 대한 담당자 업데이트 작업을 설명하는 특성입니다."
+  },
+  "EditSecurityMonitoringSignalState": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 보안 신호의 분류 상태를 변경합니다.",
+    "summary": "보안 신호에 대한 분류 상태 변경하기",
+    "request_description": "신호 업데이트를 설명하는 특성입니다.",
+    "request_schema_description": "주어진 상태에 대한 상태 변경을 설명하는 특성입니다."
+  },
+  "SubmitMetrics": {
+    "description": "메트릭 엔드포인트를 사용하면 Datadog 대시보드에서 그래프로 표시할 수 있는 시계열 데이터를 게시할 수 있습니다.\n최대 페이로드 크기는 3.2메가바이트(3,200,000바이트)입니다. 압축된 페이로드는 압축 해제 시 크기가 62메가바이트(62,914,560바이트) 미만이어야 합니다.\n\nDogStatsD를 사용하지 않고 Datadog API에 직접 메트릭을 제출하는 경우 각 데이터는 다음과 같습니다.\n\n- 타임스탬프의 경우 64비트\n- 값의 경우 64비트\n- 메트릭 이름의 경우 40바이트\n- 시계열의 경우 50바이트\n- 전체 페이로드는 약 100바이트입니다. 하지만 DogStatsD API를 사용하면\n압축이 적용되어 페이로드 크기가 줄어듭니다.",
+    "summary": "메트릭 제출하기",
+    "request_description": "",
+    "request_schema_description": "메트릭의 페이로드입니다."
+  },
+  "ListServiceDependencies": {
+    "description": "APM에서 서비스 목록과 해당 종속성을 가져옵니다. 검색된 서비스는 환경 및\n기본 태그(정의된 경우)별로 필터링됩니다.",
+    "summary": "모든 APM 서비스 종속성 가져오기"
+  },
+  "ListSingleServiceDependencies": {
+    "description": "특정 서비스의 즉각적인 업스트림 및 다운스트림 서비스를 가져옵니다.\n검색된 서비스는 환경 및 기본 태그(정의된 경우)별로 필터링됩니다.",
+    "summary": "단일 APM 서비스의 종속성 가져오기"
+  },
+  "ListSLOs": {
+    "description": "조직의 서비스 수준 목표 객체 목록을 가져옵니다.",
+    "summary": "모든 SLO 가져오기"
+  },
+  "CreateSLO": {
+    "description": "서비스 수준 목표 객체를 생성합니다.",
+    "summary": "SLO 개체 생성하기",
+    "request_description": "서비스 수준 목표 요청 객체입니다.",
+    "request_schema_description": "서비스 수준 목표 객체에는 서비스 수준 지표, 하나 이상의 타임프레임에 대한\n임계값과 메타데이터(`name`, `description`, `tags` 등)가 포함됩니다."
+  },
+  "DeleteSLOTimeframeInBulk": {
+    "description": "여러 서비스 수준 목표 객체를 삭제(또는 부분 삭제)합니다.\n\n이 엔드포인트는 하나 이상의 서비스 수준 목표 객체에 대해 하나 이상의\n임계값 삭제를 용이하게 합니다. 모든 임계값이 삭제되면 서비스 수준\n목표 객체도 삭제됩니다.",
+    "summary": "SLO 타임프레임 일괄 삭제하기",
+    "request_description": "여러 서비스 수준 목표 객체 요청 본문을 삭제합니다.",
+    "request_schema_description": "타임프레임 배열에 대한 서비스 수준 목표 객체 ID의 맵으로,\n각 ID에 대해 삭제할 임계값을 나타냅니다."
+  },
+  "CheckCanDeleteSLO": {
+    "description": "SLO를 안전하게 삭제할 수 있는지 검사합니다. 예를 들어,\n대시보드에 지장을 주지 않고 SLO를 삭제할 수 있는지 확인합니다.",
+    "summary": "SLO의 안전한 삭제 여부 검사하기"
+  },
+  "ListSLOCorrection": {
+    "description": "모든 서비스 수준 목표 수정 사항을 가져옵니다.",
+    "summary": "모든 SLO 수정 사항 가져오기"
+  },
+  "CreateSLOCorrection": {
+    "description": "SLO 수정 사항을 생성합니다. `slo_id`를 사용하여 단일 SLO에 수정 사항을 적용하거나 `slo_query`를 사용하여\n쿼리와 일치하는 SLO에 수정 사항을 적용합니다. `slo_id` 또는 `slo_query` 중 하나가 반드시 필요합니다.",
+    "summary": "SLO 수정 사항 생성하기",
+    "request_description": "SLO 수정 사항 생성하기",
+    "request_schema_description": "하나 이상의 SLO에 적용할 수정 사항을 정의하는 객체입니다."
+  },
+  "DeleteSLOCorrection": {
+    "description": "지정된 SLO 수정 사항 객체를 영구적으로 삭제합니다.",
+    "summary": "SLO 수정 사항 삭제하기"
+  },
+  "GetSLOCorrection": {
+    "description": "SLO 수정 사항을 가져옵니다.",
+    "summary": "SLO에 대한 SLO 수정 사항 가져오기"
+  },
+  "UpdateSLOCorrection": {
+    "description": "지정된 SLO 수정 사항 객체를 업데이트합니다.",
+    "summary": "SLO 수정 사항 업데이트하기",
+    "request_description": "편집된 SLO 수정 사항 객체입니다.",
+    "request_schema_description": "SLO에 적용할 수정 사항을 정의하는 객체입니다."
+  },
+  "SearchSLO": {
+    "description": "조직의 서비스 수준 목표 객체 목록을 가져옵니다.",
+    "summary": "SLO 검색하기"
+  },
+  "DeleteSLO": {
+    "description": "지정된 서비스 수준 목표 객체를 영구적으로 삭제합니다.\n\nSLO가 대시보드에서 사용되는 경우, SLO가 대시보드에서 참조되므로 `DELETE /v1/slo/` 엔드포인트가\n409 충돌 오류를 반환합니다.",
+    "summary": "SLO 삭제하기"
+  },
+  "GetSLO": {
+    "description": "서비스 수준 목표 객체를 가져옵니다.",
+    "summary": "SLO 세부 정보 가져오기"
+  },
+  "UpdateSLO": {
+    "description": "지정된 서비스 수준 목표 객체를 업데이트합니다.",
+    "summary": "SLO 업데이트하기",
+    "request_description": "편집된 서비스 수준 목표 요청 객체입니다.",
+    "request_schema_description": "서비스 수준 목표 객체에는 서비스 수준 지표, 하나 이상의 타임프레임에 대한\n임계값과 메타데이터(`name`, `description`, `tags` 등)가 포함됩니다."
+  },
+  "GetSLOCorrections": {
+    "description": "SLO에 적용된 수정 사항을 가져옵니다.",
+    "summary": "SLO에 대한 수정 사항 가져오기"
+  },
+  "GetSLOHistory": {
+    "description": "SLO 유형에 관계없이 특정 SLO의 기록을 가져옵니다.\n\n상세 기록 데이터는 소스 데이터 유형에 따라 구조화됩니다.\n예를 들어, 메트릭 소스를 사용하는 이벤트 SLO에는 메트릭 데이터가 포함되며,\n모니터 SLO 유형에는 모니터 전환 기록이 포함됩니다.\n\n**참고:** 이벤트 기반 SLO와 시간 기반 SLO에 대한 응답 형식은 서로 다릅니다.\n두 가지 형식의 예가 모두 나와 있습니다.",
+    "summary": "SLO 기록 가져오기"
+  },
+  "GetSyntheticsCIBatch": {
+    "description": "배치의 업데이트된 세부 정보를 가져옵니다.",
+    "summary": "배치 세부 정보 가져오기"
+  },
+  "ListLocations": {
+    "description": "Synthetic 테스트에 사용할 수 있는 공용 및 전용 위치 목록을\n가져옵니다. 인수는 필요하지 않습니다.",
+    "summary": "모든 위치 가져오기(퍼블릭 및 프라이빗)"
+  },
+  "CreatePrivateLocation": {
+    "description": "새 Synthetic 프라이빗 위치를 생성합니다.",
+    "summary": "프라이빗 위치 생성하기",
+    "request_description": "생성할 프라이빗 위치의 세부 정보입니다.",
+    "request_schema_description": "생성할 프라이빗 위치에 대한 정보를 포함하는 객체입니다."
+  },
+  "DeletePrivateLocation": {
+    "description": "Synthetic 프라이빗 위치를 삭제합니다.",
+    "summary": "프라이빗 위치 삭제하기"
+  },
+  "GetPrivateLocation": {
+    "description": "Synthetic 프라이빗 위치를 가져옵니다.",
+    "summary": "프라이빗 위치 가져오기"
+  },
+  "UpdatePrivateLocation": {
+    "description": "Synthetic 프라이빗 위치를 편집합니다.",
+    "summary": "프라이빗 위치 편집하기",
+    "request_description": "업데이트할 프라이빗 위치의 세부 정보입니다.",
+    "request_schema_description": "생성할 프라이빗 위치에 대한 정보를 포함하는 객체입니다."
+  },
+  "GetSyntheticsDefaultLocations": {
+    "description": "기본 위치 설정을 가져옵니다.",
+    "summary": "기본 위치 가져오기"
+  },
+  "ListTests": {
+    "description": "모든 Synthetic 테스트의 목록을 가져옵니다.",
+    "summary": "모든 Synthetic 테스트의 목록 가져오기"
+  },
+  "CreateTest": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 테스트를 생성하려면 [API 테스트 생성](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test) 또는 [브라우저 테스트 생성](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test)을 사용하세요.",
+    "summary": "테스트 생성하기",
+    "request_description": "생성할 테스트의 세부 정보입니다.",
+    "request_schema_description": "Synthetic 테스트에 대한 세부 정보를 포함하는 객체입니다."
+  },
+  "CreateSyntheticsAPITest": {
+    "description": "Synthetic API 테스트를 생성합니다.",
+    "summary": "API 테스트 생성하기",
+    "request_description": "생성할 테스트의 세부 정보입니다.",
+    "request_schema_description": "Synthetic API 테스트에 대한 세부 정보를 포함하는 객체입니다."
+  },
+  "GetAPITest": {
+    "description": "Synthetic API 테스트와 연결된 상세 구성을\n가져옵니다.",
+    "summary": "API 테스트 가져오기"
+  },
+  "UpdateAPITest": {
+    "description": "Synthetic API 테스트의 구성을 편집합니다.",
+    "summary": "API 테스트 편집하기",
+    "request_description": "저장할 새 테스트 세부 정보입니다.",
+    "request_schema_description": "Synthetic API 테스트에 대한 세부 정보를 포함하는 객체입니다."
+  },
+  "CreateSyntheticsBrowserTest": {
+    "description": "Synthetic 브라우저 테스트를 생성합니다.",
+    "summary": "브라우저 테스트 생성하기",
+    "request_description": "생성할 테스트의 세부 정보입니다.",
+    "request_schema_description": "Synthetic 브라우저 테스트에 대한 세부 정보가 포함된 객체입니다."
+  },
+  "GetBrowserTest": {
+    "description": "Synthetic 브라우저 테스트와 연결된 상세 구성(단계 포함)을\n가져옵니다.",
+    "summary": "브라우저 테스트 가져오기"
+  },
+  "UpdateBrowserTest": {
+    "description": "Synthetic 브라우저 테스트의 구성을 편집합니다.",
+    "summary": "브라우저 테스트 편집하기",
+    "request_description": "저장할 새 테스트 세부 정보입니다.",
+    "request_schema_description": "Synthetic 브라우저 테스트에 대한 세부 정보가 포함된 객체입니다."
+  },
+  "GetBrowserTestLatestResults": {
+    "description": "특정 Synthetic 브라우저 테스트에 대한 최근 150개의 테스트 결과 요약을 가져옵니다.",
+    "summary": "브라우저 테스트 최신 결과 요약 가져오기"
+  },
+  "GetBrowserTestResult": {
+    "description": "특정 Synthetic 브라우저 테스트에서 특정 전체 결과를 가져옵니다.",
+    "summary": "브라우저 테스트 결과 가져오기"
+  },
+  "DeleteTests": {
+    "description": "ID별로 여러 Synthetic 테스트를 삭제합니다.",
+    "summary": "테스트 삭제하기",
+    "request_description": "삭제할 Synthetic 테스트의 공개 ID 목록입니다.",
+    "request_schema_description": "삭제하려는 Synthetic 테스트의 ID가 포함된 JSON\n목록입니다."
+  },
+  "CreateSyntheticsMobileTest": {
+    "description": "Synthetic 모바일 테스트를 생성합니다.",
+    "summary": "모바일 테스트 생성하기",
+    "request_description": "생성할 테스트의 세부 정보입니다.",
+    "request_schema_description": "Synthetic 모바일 테스트에 대한 세부 정보가 포함된 객체입니다."
+  },
+  "GetMobileTest": {
+    "description": "Synthetic 모바일 테스트와 연결된 상세 구성을\n가져옵니다.",
+    "summary": "모바일 테스트 가져오기"
+  },
+  "UpdateMobileTest": {
+    "description": "Synthetic 모바일 테스트의 구성을 편집합니다.",
+    "summary": "모바일 테스트 편집하기",
+    "request_description": "저장할 새 테스트 세부 정보입니다.",
+    "request_schema_description": "Synthetic 모바일 테스트에 대한 세부 정보가 포함된 객체입니다."
+  },
+  "SearchTests": {
+    "description": "Synthetic 테스트를 검색합니다.",
+    "summary": "Synthetic 테스트 검색하기"
+  },
+  "TriggerTests": {
+    "description": "Synthetic 테스트 세트를 트리거합니다.",
+    "summary": "Synthetic 테스트 트리거하기",
+    "request_description": "트리거할 테스트의 식별자입니다.",
+    "request_schema_description": "트리거할 Synthetic 테스트를 설명하는 객체입니다."
+  },
+  "TriggerCITests": {
+    "description": "지속적 통합을 위해 Synthetic 테스트 세트를 트리거합니다.",
+    "summary": "CI/CD 파이프라인에서 테스트 트리거하기",
+    "request_description": "트리거할 테스트의 세부 정보입니다.",
+    "request_schema_description": "트리거할 Synthetic 테스트를 설명하는 객체입니다."
+  },
+  "FetchUptimes": {
+    "description": "ID별로 여러 Synthetic 테스트의 가동 시간을 가져옵니다.",
+    "summary": "여러 테스트의 가동 시간 가져오기",
+    "request_description": "Synthetic 테스트의 공개 ID 목록 및 타임프레임입니다.",
+    "request_schema_description": "Synthetic 테스트의 ID와 타임프레임을 포함하는 객체입니다."
+  },
+  "GetTest": {
+    "description": "Synthetic 테스트와 연결된 상세 구성을 가져옵니다.",
+    "summary": "테스트 구성 가져오기"
+  },
+  "PatchTest": {
+    "description": "부분 데이터로 Synthetic 테스트의 구성을 패치합니다.",
+    "summary": "Synthetic 테스트 패치하기",
+    "request_description": "[JSON Patch](https://jsonpatch.com/) 호환 작업 목록",
+    "request_schema_description": "테스트에서 수행할 [JSON Patch](https://jsonpatch.com) 작업 배열의 래퍼"
+  },
+  "UpdateTest": {
+    "description": "이 엔드포인트는 지원이 중단되었습니다. 테스트를 편집하려면 [API 테스트 편집](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) 또는 [브라우저 테스트 편집](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test)을 사용하세요.",
+    "summary": "테스트 편집하기",
+    "request_description": "저장할 새 테스트 세부 정보입니다.",
+    "request_schema_description": "Synthetic 테스트에 대한 세부 정보를 포함하는 객체입니다."
+  },
+  "GetAPITestLatestResults": {
+    "description": "지정된 Synthetic API 테스트에 대한 최근 150개의 테스트 결과 요약을 가져옵니다.",
+    "summary": "API 테스트의 최신 결과 요약 가져오기"
+  },
+  "GetAPITestResult": {
+    "description": "지정된 Synthetic API 테스트에서 특정 전체 결과를 가져옵니다.",
+    "summary": "API 테스트 결과 가져오기"
+  },
+  "UpdateTestPauseStatus": {
+    "description": "상태를 변경하여 Synthetic 테스트를 일시 중지하거나 시작합니다.",
+    "summary": "테스트 시작 또는 일시 중지하기",
+    "request_description": "지정된 Synthetic 테스트에 설정할 상태입니다.",
+    "request_schema_description": "기존 Synthetic 테스트를 시작하거나 일시 중지하기 위한 객체입니다."
+  },
+  "ListGlobalVariables": {
+    "description": "모든 Synthetic 전역 변수 목록을 가져옵니다.",
+    "summary": "모든 전역 변수 가져오기"
+  },
+  "CreateGlobalVariable": {
+    "description": "Synthetic 전역 변수를 생성합니다.",
+    "summary": "전역 변수 생성하기",
+    "request_description": "생성할 전역 변수의 세부 정보입니다.",
+    "request_schema_description": "생성할 전역 변수의 세부 정보입니다."
+  },
+  "DeleteGlobalVariable": {
+    "description": "Synthetic 전역 변수를 삭제합니다.",
+    "summary": "전역 변수 삭제하기"
+  },
+  "GetGlobalVariable": {
+    "description": "전역 변수의 상세 구성을 가져옵니다.",
+    "summary": "전역 변수 가져오기"
+  },
+  "EditGlobalVariable": {
+    "description": "Synthetic 전역 변수를 편집합니다.",
+    "summary": "전역 변수 편집하기",
+    "request_description": "업데이트할 전역 변수의 세부 정보입니다.",
+    "request_schema_description": "생성할 전역 변수의 세부 정보입니다."
+  },
+  "ListHostTags": {
+    "description": "태그와 호스트의 매핑을 반환합니다. 각 태그에 대해 응답은 이 태그를 포함하는 호스트 이름 목록을 반환합니다. 태그에 연결되어 반환될 수 있는 조직의 호스트 이름은 총 1만 개로 제한됩니다.",
+    "summary": "모든 호스트 태그 가져오기"
+  },
+  "DeleteHostTags": {
+    "description": "이 엔드포인트를 사용하면 단일 호스트의 모든 태그를\n제거할 수 있습니다. 소스가 지정되어 있지 않은 경우 \"User\" 소스에서만 삭제됩니다.",
+    "summary": "호스트 태그 제거하기"
+  },
+  "GetHostTags": {
+    "description": "지정된 호스트에 적용되는 태그 목록을 반환합니다.",
+    "summary": "호스트 태그 가져오기"
+  },
+  "CreateHostTags": {
+    "description": "이 엔드포인트를 사용하면 호스트에 새 태그를 추가할 수 있으며,\n필요에 따라 이러한 태그가 발생한 소스를 지정합니다. 태그가 이미 존재하는 경우 태그 목록에 새 태그를 추가합니다. 소스가 지정되어 있지 않은 경우 기본값은 \"user\"입니다.",
+    "summary": "호스트에 태그 추가하기",
+    "request_description": "호스트 태그 업데이트 요청 본문입니다.",
+    "request_schema_description": "호스트 이름 및 해당 태그 배열"
+  },
+  "UpdateHostTags": {
+    "description": "이 엔드포인트를 사용하면 통합 소스의 모든 태그를\n요청에 제공된 태그로 업데이트/교체할 수 있습니다.",
+    "summary": "호스트 태그 업데이트하기",
+    "request_description": "호스트에 태그 추가하기",
+    "request_schema_description": "호스트 이름 및 해당 태그 배열"
+  },
+  "GetUsageAnalyzedLogs": {
+    "description": "분석된 로그(보안 모니터링)의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "분석된 로그의 시간당 사용량 가져오기"
+  },
+  "GetUsageAuditLogs": {
+    "description": "감사 로그의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다.",
+    "summary": "감사 로그의 시간당 사용량 가져오기"
+  },
+  "GetUsageLambda": {
+    "description": "Lambda의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "Lambda의 시간당 사용량 가져오기"
+  },
+  "GetUsageBillableSummary": {
+    "description": "계정 전체에 대한 청구 가능한 사용량을 가져옵니다.\n\n이 엔드포인트는 [상위 수준 조직](https://docs.datadoghq.com/account_management/multi_organization/)에서만 액세스할 수 있습니다.",
+    "summary": "계정 전체에 대한 청구 가능한 사용량 가져오기"
+  },
+  "GetUsageCIApp": {
+    "description": "CI Visibility(테스트, 파이프라인, 스팬)의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "CI Visibility의 시간당 사용량 가져오기"
+  },
+  "GetUsageCloudSecurityPostureManagement": {
+    "description": "CSM Pro의 시간당 사용량 가져오기\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "CSM Pro의 시간당 사용량 가져오기"
+  },
+  "GetUsageCWS": {
+    "description": "클라우드 워크로드 보안의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "클라우드 워크로드 보안의 시간당 사용량 가져오기"
+  },
+  "GetUsageDBM": {
+    "description": "데이터베이스 모니터링의 시간당 사용량 가져오기\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "데이터베이스 모니터링의 시간당 사용량 가져오기"
+  },
+  "GetUsageFargate": {
+    "description": "[Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/)의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "Fargate의 시간당 사용량 가져오기"
+  },
+  "GetUsageHosts": {
+    "description": "호스트 및 컨테이너의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "호스트 및 컨테이너의 시간당 사용량 가져오기"
+  },
+  "GetHourlyUsageAttribution": {
+    "description": "시간당 사용량 속성을 가져옵니다. 다중 리전 데이터는 2023년 3월 1일부터 사용할 수 있습니다.\n\n이 API 엔드포인트는 페이지 지정을 지원합니다. 모든 레코드를 수신하도록 `next_record_id` 값이\n응답에 설정되어 있는지 검사하세요. 해당 값이 설정되어 있다면 다른 요청을 수행하고 `next_record_id`를 파라미터로 전달하세요.\n의사 코드 예시:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # 속도 제한에 걸리지 않도록 방지\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "summary": "시간당 사용량 속성 가져오기"
+  },
+  "GetIncidentManagement": {
+    "description": "인시던트 관리의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "인시던트 관리의 시간당 사용량 가져오기"
+  },
+  "GetUsageIndexedSpans": {
+    "description": "인덱싱된 스팬의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "인덱싱된 스팬의 시간당 사용량 가져오기"
+  },
+  "GetIngestedSpans": {
+    "description": "수집된 스팬의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "수집된 스팬 시간당 사용량 가져오기"
+  },
+  "GetUsageInternetOfThings": {
+    "description": "IoT의 시간당 사용량 API를 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "IoT의 시간당 사용량 가져오기"
+  },
+  "GetUsageLogs": {
+    "description": "로그의 시간당 사용량 API를 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "로그의 시간당 사용량 가져오기"
+  },
+  "GetUsageLogsByRetention": {
+    "description": "보존 기간별로 인덱싱된 로그의 시간당 사용량 API를 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "보존 기준 시간당 로그 사용량 가져오기"
+  },
+  "GetUsageLogsByIndex": {
+    "description": "인덱스 기준 로그의 시간당 사용량 API를 가져옵니다.",
+    "summary": "인덱스 기준 로그의 시간당 사용량 가져오기"
+  },
+  "GetMonthlyUsageAttribution": {
+    "description": "월별 사용량 속성을 가져옵니다. 다중 리전 데이터는 2023년 3월 1일부터 사용할 수 있습니다.\n\n이 API 엔드포인트는 페이지 지정을 지원합니다. 모든 레코드를 수신하도록 `next_record_id` 값이\n응답에 설정되어 있는지 검사하세요. 해당 값이 설정되어 있다면 다른 요청을 수행하고 `next_record_id`를 파라미터로 전달하세요.\n의사 코드 예시:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # 속도 제한에 걸리지 않도록 방지\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "summary": "월별 사용량 속성 가져오기"
+  },
+  "GetUsageNetworkFlows": {
+    "description": "네트워크 플로우의 시간당 사용량 API를 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "네트워크 플로우의 시간당 사용량 가져오기"
+  },
+  "GetUsageNetworkHosts": {
+    "description": "네트워크 호스트의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "네트워크 호스트의 시간당 사용량 가져오기"
+  },
+  "GetUsageOnlineArchive": {
+    "description": "온라인 아카이브의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "온라인 아카이브의 시간당 사용량 가져오기"
+  },
+  "GetUsageProfiling": {
+    "description": "프로파일링된 호스트의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "프로파일링된 호스트의 시간당 사용량 가져오기"
+  },
+  "GetUsageRumUnits": {
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) 단위의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "RUM 단위의 시간당 사용량 가져오기"
+  },
+  "GetUsageRumSessions": {
+    "description": "[RUM](https://docs.datadoghq.com/real_user_monitoring/) 세션의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "RUM 세션의 시간당 사용량 가져오기"
+  },
+  "GetUsageSDS": {
+    "description": "민감한 데이터 스캐너의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "민감한 데이터 스캐너의 시간당 사용량 가져오기"
+  },
+  "GetUsageSNMP": {
+    "description": "SNMP 기기의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "SNMP 기기의 시간당 사용량 가져오기"
+  },
+  "GetUsageSummary": {
+    "description": "계정 전체의 모든 사용량을 가져옵니다.\n\nSDK 사용자 전용: `UsageSummaryResponse`, `UsageSummaryDate` 및\n`UsageSummaryDateOrg`의 모든 필드는 각 객체의 `additionalProperties` 맵을 통해 액세스할 수 있습니다.\n기존의 유형 지정 필드 게터는 변경되지 않습니다. 새로운 청구 기준에는\n유형 지정 필드 게터가 없습니다. 각 응답 수준에서 이용 가능한 모든 키를 열거하려면\n[사용량 요약에 사용 가능한 필드 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/get-available-fields-for-usage-summary/)를\n사용하세요.\n\n이 엔드포인트는 [상위 수준 조직](https://docs.datadoghq.com/account_management/multi_organization/)에서만 액세스할 수 있습니다.",
+    "summary": "계정 전체 사용량 가져오기"
+  },
+  "GetUsageSynthetics": {
+    "description": "[Synthetics 검사](https://docs.datadoghq.com/synthetics/)의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "Synthetic 검사의 시간당 사용량 가져오기"
+  },
+  "GetUsageSyntheticsAPI": {
+    "description": "[Synthetics API 검사](https://docs.datadoghq.com/synthetics/) 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "Synthetic API 검사의 시간당 사용량 가져오기"
+  },
+  "GetUsageSyntheticsBrowser": {
+    "description": "Synthetic 브라우저 검사의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "Synthetic 브라우저 검사의 시간당 사용량 가져오기"
+  },
+  "GetUsageTimeseries": {
+    "description": "[사용자 지정 메트릭](https://docs.datadoghq.com/developers/metrics/custom_metrics/)의 시간당 사용량을 가져옵니다.\n**참고:** 이 엔드포인트는 지원이 중단되었습니다. 모든 제품의 시간당 사용량 데이터는 이제 [제품군 API별 시간당 사용량 가져오기](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)에서 확인할 수 있습니다. 관련 마이그레이션 가이드는 [V1 시간당 사용량 API에서 V2로 마이그레이션하기](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)를 참조하세요.",
+    "summary": "사용자 지정 메트릭 시간당 사용량 가져오기"
+  },
+  "GetUsageTopAvgMetrics": {
+    "description": "시간당 평균으로 모든 [사용자 지정 메트릭](https://docs.datadoghq.com/developers/metrics/custom_metrics/)을 가져옵니다. month 파라미터를 사용하여 월간 누계 데이터 분석 정보를 가져오거나 day 파라미터를 사용하여 일간 분석 정보를 가져옵니다. 둘 중 하나의 파라미터를 반드시 사용해야 하며, 둘 중 하나만 허용됩니다.",
+    "summary": "시간별 평균 기준 모든 사용자 지정 메트릭 가져오기"
+  },
+  "ListUsers": {
+    "description": "조직의 모든 사용자를 나열합니다.",
+    "summary": "모든 사용자 나열하기"
+  },
+  "CreateUser": {
+    "description": "조직의 사용자를 생성합니다.\n\n**참고**: 사용자는 애플리케이션 키가 관리자에 속한 경우\n관리자 액세스 역할로만 생성할 수 있습니다.",
+    "summary": "사용자 생성하기",
+    "request_description": "생성해야 하는 사용자 객체입니다.",
+    "request_schema_description": "사용자를 생성하고 편집하고 비활성화합니다."
+  },
+  "DisableUser": {
+    "description": "조직에서 사용자를 삭제합니다.\n\n**참고:** 이 엔드포인트는 관리자에 속한 애플리케이션 키로만\n사용할 수 있습니다.",
+    "summary": "사용자 비활성화하기"
+  },
+  "GetUser": {
+    "description": "사용자의 세부 정보를 가져옵니다.",
+    "summary": "사용자 정보 가져오기"
+  },
+  "UpdateUser": {
+    "description": "사용자 정보를 업데이트합니다.\n\n**참고**: 관리자에게 속한 애플리케이션 키로만 사용할 수 있습니다.",
+    "summary": "사용자 업데이트하기",
+    "request_description": "업데이트 설명입니다.",
+    "request_schema_description": "사용자를 생성하고 편집하고 비활성화합니다."
+  },
+  "Validate": {
+    "description": "API 키(APP 키 아님)가 유효한지 검사합니다. 유효하지 않은 경우 403이 반환됩니다.",
+    "summary": "API 키 검증하기"
+  },
+  "SubmitLog": {
+    "description": "HTTP를 통해 Datadog 플랫폼으로 로그를 전송합니다. HTTP 요청당 제한은 다음과 같습니다.\n\n- 페이로드당 최대 콘텐츠 크기(압축되지 않음): 5MB\n- 단일 로그의 최대 크기: 1MB\n- 여러 로그를 배열로 전송할 경우의 최대 배열 크기: 1000개 항목\n\n1MB를 초과하는 모든 로그는 허용되며 Datadog가 로그를 자릅니다.\n- 단일 로그 요청의 경우, API는 1MB 크기부터 로그를 자르고 2xx를 반환합니다.\n- 다중 로그 요청의 경우, API는 모든 로그를 처리하고 1MB보다 큰 로그만 잘라낸 후 2xx를 반환합니다.\n\nDatadog은 로그를 압축하여 전송할 것을 권장합니다.\n압축된 로그를 전송할 경우 요청에 `Content-Encoding: gzip` 헤더를 추가하세요.\n\nHTTP API가 응답하는 상태 코드는 다음과 같습니다.\n- 200: 양호\n- 400: 잘못된 요청(페이로드 형식 문제일 가능성이 높음)\n- 403: 권한 문제(유효하지 않은 API 키를 사용 중일 가능성이 높음)\n- 413: 페이로드가 너무 큼(배치가 압축 해제 상태에서 5MB를 초과함)\n- 5xx: 내부 오류, 일정 시간 후 요청을 재시도해야 함",
+    "summary": "로그 전송하기",
+    "request_description": "전송할 로그(JSON 포맷)입니다.",
+    "request_schema_description": "구조화된 로그 메시지입니다."
+  },
+  "MuteAllMonitors": {
+    "description": "음소거를 설정하면 모든 모니터가 이메일을 통해 알림을 보내고\n[이벤트 스트림](https://docs.datadoghq.com/events)에 게시하는 것을 방지합니다.\n상태 변경은 경보 페이지를 확인해야만 볼 수 있습니다.",
+    "summary": "모든 모니터 음소거하기"
+  },
+  "UnmuteAllMonitors": {
+    "description": "모든 모니터의 음소거를 비활성화합니다. 전체 음소거가 이전에 활성화되지 않은 경우\n오류가 발생합니다.",
+    "summary": "모든 모니터 음소거 해제하기"
+  }
+}

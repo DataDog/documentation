@@ -1,0 +1,238 @@
+---
+title: Integrate Slack with Datadog Incident Management
+description: Manage Datadog incidents directly from Slack.
+aliases:
+- /service_management/incident_management/integrations/slack/
+- /incident_response/incident_management/integrations/slack/
+further_reading:
+- link: "integrations/slack/"
+  tag: "Documentation"
+  text: "Install the Slack Integration"
+- link: "https://www.datadoghq.com/blog/slack-incident-management/"
+  tag: "Blog"
+  text: "Manage incidents seamlessly with the Datadog integration for Slack"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response"
+- link: "https://app.datadoghq.com/integrations/slack"
+  tag: "App"
+  text: "In-app Slack integration tile"
+---
+
+## Overview
+
+Slack is a messaging and collaboration platform widely used by teams to communicate in real time. The Datadog Slack integration connects your incident response workflows directly to Slack, so teams can declare, manage, and resolve incidents without leaving their chat environment.
+
+With the integration, you can:
+
+- Respond faster by declaring Datadog incidents directly from Slack.
+- Automatically create Slack channels for collaboration when Datadog incidents are declared.
+- Execute your incident response in Slack. For example, page on-call teams, assign responder roles, or update severity.
+
+The Slack integration documentation is organized around the typical lifecycle of using Slack with Incident Management:
+
+1. [**Install and connect Slack**](#setup): Set up the integration between your Slack workspace and Datadog.
+2. [**Declare incidents**](#declaring-incidents-from-slack): Learn how to start incidents using Slack commands or message actions.
+3. [**Manage incidents from incident channels**](#incident-channels): Use dedicated Slack channels with commands, syncing, and automations.
+4. [**Configure global notifications**](#global-slack-notifications): Keep your organization informed with automatic updates.
+5. **[Reference Slack configuration options](#additional-slack-configurations) and [Slack commands](#slack-incident-commands)**: Explore detailed configuration options and see the full list of available Slack commands to tailor and streamline your incident response workflows.
+
+## Prerequisites
+
+Install the integration through the [Slack Integration tile][1] with the proper [OAuth scopes][6]. For more information, see the [Slack integration][2] documentation.
+
+After the integration is installed, navigate to [**Incidents** > **Settings** > **Integrations**][3] to enable Slack capabilities for Incident Management.
+
+## Declaring incidents from Slack
+
+When you connect a Slack workspace to a Datadog organization, users in the workspace can use Slack shortcuts related to Incident Management.
+
+You can declare an incident with the following slash command:
+
+```
+/datadog incident
+```
+
+To declare an incident from a Slack message, hover over the message, click **More actions** (the three vertical dots), and select **Declare incident**. Datadog posts a message to the message's thread confirming the incident's creation.
+
+By default, only Slack users connected to a Datadog organization can declare incidents. Slack users can connect to a Datadog organization by running `/datadog connect`.
+
+To allow any Slack user in the workspace to declare incidents, enable **Allow Slack users to declare incidents without a connected Datadog account** in Incident Management settings.
+
+## Incident channels
+
+You can configure Incident Management to automatically create a dedicated Slack channel for each incident that meets criteria you define. Your responders can then manage the incident directly in Slack from the incident channel.
+
+To use incident channels, go to **[Incident Response > Incident Management > Settings > Integrations][3]** and enable **Create Slack channels for incidents**.
+
+The **channel name template** you define determines how Datadog names the incident channels it creates. For full descriptions, see [Variables available only in channel name templates][7].
+
+
+### Message syncing (Slack mirroring)
+
+After enabling automatic channel creation, you can sync every message posted in an incident Slack channel to the incident's timeline.
+
+To enable syncing, enable **Mirror all Slack channel messages to the incident timeline** in Incident Management settings. A message's author does not need to be connected to the Datadog organization for Datadog to sync the message.
+
+To sync only selected messages instead, use the [**Pin To Timeline** emoji action](#emoji-quick-actions). When mirroring is on, Pin To Timeline is unavailable because every message is already on the timeline.
+
+<!-- vale Datadog.words_case_insensitive = NO -->
+### Emoji quick actions
+<!-- vale Datadog.words_case_insensitive = YES -->
+
+React to a message in an incident Slack channel with an emoji to act on it without leaving Slack. Datadog reacts with 👀 while it works and ✅ when the action is done.
+
+| Default emoji | Action               | Description                                                     |
+|---------------|----------------------|-----------------------------------------------------------------|
+| 🆘            | **Page**             | Opens a form to page an on-call responder about the message.    |
+| 🔔            | **Notify**           | Opens a form to notify stakeholders about the message.          |
+| 🔜            | **Follow-up**        | Drafts a follow-up from the message for you to accept or edit.  |
+| ‼️            | **Mark Important**   | Marks the message as important.                                 |
+| 📌            | **Pin To Timeline**  | Adds the message to the incident timeline.                      |
+
+<!-- vale Datadog.words_case_insensitive = NO -->
+To configure emoji actions for each incident type, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and open **Emoji quick actions**. You can:
+<!-- vale Datadog.words_case_insensitive = YES -->
+
+* Enable or disable each action. All actions are enabled by default except **Pin To Timeline**.
+* Replace an action's default emoji with a standard emoji or a custom emoji from your Slack workspace. Each emoji can trigger only one action, and 👀 and ✅ are reserved.
+
+#### Use custom workspace emoji
+
+To choose custom emoji from your Slack workspace, the Datadog Slack app needs permission to read your workspace's emoji. If it doesn't have it yet, the settings page shows only built-in emoji and a **Reinstall the Slack app** link. Reinstall the app to grant the permission, then select any custom emoji in the picker.
+
+If a custom emoji used by an action is removed from your workspace, the settings page flags it. Choose a different emoji before saving.
+
+If you react with an action's emoji while the action is disabled, Datadog replies with a message that only you can see. The message explains how to enable the action.
+
+The user who reacts **does** need to be connected to the Datadog organization for the action to run. The author of the message does not.
+
+In organizations with usage-based Incident Management billing:
+
+* Authoring a message that is synced to Datadog does **not** make you a billable user for the current month.
+* Pinning a message that is then synced **does** make you a billable user.
+
+In organizations with seat-based Incident Management billing:
+
+* You do **not** need a seat for Datadog to sync your messages to Incident Management.
+* You **must** have a seat to trigger an emoji action, including pinning a message. If you don't have one, Datadog prompts you to claim one.
+
+### Slack commands in the incident channel
+
+In an incident Slack channel, you can run Slack commands to modify the incident's status and severity, assign responder roles, page on-call teams, and more.
+
+For a full list of Slack commands, see [Slack commands](#slack-commands).
+
+### Re-inviting a meeting transcriber
+
+If the Datadog Transcriber leaves a linked meeting, a prompt to re-invite it can appear in the meeting-card thread. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. For requirements and other ways to re-invite the transcriber, see [Re-invite the Datadog Transcriber][8].
+
+### Other incident channel configuration options
+
+Access all configuration options for Slack in Incident Management through the [**Incidents** > **Settings** > **Integrations**][3] page.
+
+| Feature                                                   | Description & Notes                                                                                                                             |
+|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Push incident timeline messages to Slack**              | Automatically send incident timeline updates from Datadog to the Slack channel.<br><br>Keeps channel participants in-sync with Datadog updates. |
+| **Add important links to channel bookmarks**              | Post incident-related links in the Slack channel bookmarks.<br><br>Provides convenient access to resources.                                     |
+| **Add team members automatically**                        | When a Datadog team is added to the incident, its members are added to the Slack channel.                                                       |
+| **Send incident updates to the Slack channel**            | Update the channel topic with incident status, severity, and incident commander.                                                                |
+| **Send a Slack notification when a meeting starts**       | Notify the Slack channel when a meeting is started, with participants and a join link.<br><br>Provides convenient access to incident calls.     |
+| **Activate Bits AI in incident Slack channels**           | Enable AI features that use incident context from Datadog.<br><br>Applies to all incident types in the selected Slack workspace.                |
+| **Automatically archive Slack channels after resolution** | Archive incident Slack channels once the incident is resolved.<br><br>Helps reduce channel clutter.                                             |
+| **Customize incident Slack actions**                       | Customize which actions appear in the incident action tray for each status.<br><br>Increases visibility of common actions.                      |
+
+## Global channel for incident updates
+
+You can configure Incident Management to automatically post updates about incidents to a selected Slack channel. To enable this:
+
+1. In Datadog, navigate to **[Incident Response > Incident Management > Settings > Integrations][3]**.
+1. In the Slack section, enable **Send all incident updates to a global channel**.
+1. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
+
+Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident statuses, severities, and incident commanders.
+
+Under the hood, this feature is a built-in, hidden [incident notification rule][5]. If you would like to customize the message or its triggers, disable it and define your own notification rule.
+
+## Slack commands
+
+You can view the full list of available Slack commands at any time by typing `/datadog` (or `/dd`) in Slack to open the command modal to browse and execute any Datadog actions, or `/dd help` to view those options as a list instead. To open the action tray for common incident management actions, type `/dd shortcuts`.
+
+Across the following commands, you can use `inc` as shorthand for `incident`.
+
+### Global commands (run anywhere)
+
+| Command | Description |
+| ------- | ----------- |
+| `/datadog incident` | Declare a new incident. |
+| `/datadog incident test` | Declare a new test incident (if test incidents are enabled for the incident type). |
+| `/datadog incident list` | List all open (active and stable) incidents. |
+
+### Incident channel commands
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+| Command | Description |
+| ------- | ----------- |
+| `/datadog` | Open the command modal to view all available Datadog actions. |
+| `/datadog shortcuts` | Open the incident action tray to perform common actions. |
+| `/datadog help` | Show an ephemeral message listing all available Slack commands. |
+| `/datadog incident update` | Update an attribute for the incident, such as status or severity. |
+| `/datadog incident notify` | Notify `@`-handles about the incident. |
+| `/datadog incident private` | Make the incident private (if private incidents are enabled). |
+| `/datadog incident public` | Make the incident public. |
+| `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
+| `/datadog followup` | Create a follow-up for the incident. |
+| `/datadog followup list` | View and manage existing follow-ups for the incident. |
+| `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
+{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}
+| Command | Description |
+| ------- | ----------- |
+| `/datadog` | Open the command modal to view all available Datadog actions. |
+| `/datadog shortcuts` | Open the incident action tray to perform common actions. |
+| `/datadog help` | Show an ephemeral message listing all available Slack commands. |
+| `/datadog incident update` | Update an attribute for the incident, such as status or severity. |
+| `/datadog incident notify` | Notify `@`-handles about the incident. |
+| `/datadog incident private` | Make the incident private (if private incidents are enabled). |
+| `/datadog incident public` | Make the incident public. |
+| `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
+| `/datadog followup` | Create a follow-up for the incident. |
+| `/datadog followup list` | View and manage existing follow-ups for the incident. |
+{{< /site-region >}}
+
+### Action tray buttons
+
+Datadog posts the action tray directly in the incident Slack channel on status changes, so responders can perform common actions, such as updating severity or status, without typing a command. You can also open the action tray by typing `/dd shortcuts` in Slack.
+
+The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and configure **Incident Slack Actions**.
+
+| Button                              | Description                                                             | Active default | Stable default | Resolved default |
+|--------------------------------------|---------------------------------------------------------------------------|:---:|:---:|:---:|
+| ⚙️ **Edit Incident**                | Update status, severity, impact, and all other attributes                 | {{< X >}} | {{< X >}} |   |
+| 🧑‍🚒 **Edit Responders**             | Assign roles and add teammates to the incident                            | {{< X >}} |   |   |
+| 🔍 **View All Actions**             | Open the full list of available Slack actions for this incident           | {{< X >}} | {{< X >}} | {{< X >}} |
+| 🏠 **View Web App**                 | Open the incident in Datadog Incident Management                          | {{< X >}} | {{< X >}} | {{< X >}} |
+| ☎️ **Page On-Call**                 | Page a team about the ongoing incident using your preferred service       | {{< X >}} |   |   |
+| 🔔 **Notify**                       | Notify stakeholders about an incident through email, push, or services    |   | {{< X >}} | {{< X >}} |
+| ▶️ **Create/Join Zoom**             | Start a new meeting, or join if one already exists                        | {{< X >}} |   |   |
+| ▶️ **Create/Join Google Meet**      | Start a new meeting, or join if one already exists                        | {{< X >}} |   |   |
+| ▶️ **Run Workflow**                 | Select and run pre-defined workflows for the incident                     | {{< X >}} |   |   |
+| 🟨 **Set to Stable**                | Mark the incident as stable after mitigating the impact                   | {{< X >}} |   |   |
+| ✅ **Resolve Incident**             | Mark the incident as resolved                                              |   | {{< X >}} |   |
+| ✨ **Investigate with Bits AI**     | Use Bits AI to investigate the incident                                   | {{< X >}} |   |   |
+| 📋 **Create Follow-Up**             | Create follow-up tasks identified during the incident response            |   | {{< X >}} | {{< X >}} |
+| 📋 **List Follow-Ups**              | View and track follow-up tasks for the incident                           |   |   | {{< X >}} |
+| 📝 **Create/View Postmortem**       | Create or view the postmortem for the incident                            |   |   | {{< X >}} |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/integrations/slack/
+[2]: /integrations/slack/?tab=datadogforslack
+[3]: https://app.datadoghq.com/incidents/settings?section=integrations
+[4]: /integrations/jira/
+[5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
+[6]: /integrations/slack/?tab=datadogforslack#permissions
+[7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#re-invite-the-datadog-transcriber

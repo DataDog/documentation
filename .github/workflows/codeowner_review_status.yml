@@ -9,7 +9,7 @@ on:
 permissions: {}
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -49,15 +49,24 @@ jobs:
               return;
             }
 
+            // Phrase translation PRs are approved by PRApprover, not the documentation team
+            if (pr.user.login === 'dd-guacbot-683343[bot]' && pr.head.ref.startsWith('guacbot/phrase-translations-')) {
+              console.log('Phrase translation PR. Documentation team approval not required.');
+              core.setOutput('approval_status', true);
+              core.setOutput('team_requested', false);
+              return;
+            }
+
             // Define the documentation team slug (also check for webops-platform)
             const DOCUMENTATION_TEAM = 'documentation';
             const WEBOPSTEAM = 'webops-platform';
             
-            // Get all reviews
-            const { data: reviews } = await github.rest.pulls.listReviews({
+            // Get all reviews (paginated: PRs can exceed the 30-item default page size)
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
               owner,
               repo,
               pull_number: number,
+              per_page: 100,
             });
 
             // Track latest review state per user (ignore commented state)
@@ -87,6 +96,7 @@ jobs:
                 owner,
                 repo,
                 pull_number: number,
+                per_page: 100,
               });
               
               // Check if documentation or webops-platform teams are currently in requested reviewers
@@ -95,14 +105,16 @@ jobs:
               );
               
               // Also check if any documentation or webops-platform team member has reviewed (indicating they were requested)
-              const { data: docTeamMembers } = await github.rest.teams.listMembersInOrg({
+              const docTeamMembers = await github.paginate(github.rest.teams.listMembersInOrg, {
                 org: owner,
                 team_slug: DOCUMENTATION_TEAM,
+                per_page: 100,
               });
-              
-              const { data: webopsTeamMembers } = await github.rest.teams.listMembersInOrg({
+
+              const webopsTeamMembers = await github.paginate(github.rest.teams.listMembersInOrg, {
                 org: owner,
                 team_slug: WEBOPSTEAM,
+                per_page: 100,
               });
               
               const teamMembers = [...docTeamMembers, ...webopsTeamMembers];
@@ -148,7 +160,7 @@ jobs:
 
             // Set final status
             if (isDocumentationTeamRequested && !hasDocumentationApproval) {
-              core.setFailed(`Team approval required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
+              console.log(`Team approval still required from @${owner}/${DOCUMENTATION_TEAM} or @${owner}/${WEBOPSTEAM}`);
             } else if (!isDocumentationTeamRequested) {
               console.log('Documentation team review not required for this PR.');
             } else {
@@ -172,23 +184,34 @@ jobs:
           github-token: ${{ env.GITHUB_TOKEN }}
           script: |
             const { owner, repo, number } = context.issue;
-            const approvalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}' === 'true';
-            const teamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}' === 'true';
-            
+            const rawApprovalStatus = '${{ needs.check-documentation-team-approval.outputs.approval_status }}';
+            const rawTeamRequested = '${{ needs.check-documentation-team-approval.outputs.team_requested }}';
+
             // Debug logging
             console.log('Raw outputs from first job:');
-            console.log('approval_status:', '${{ needs.check-documentation-team-approval.outputs.approval_status }}');
-            console.log('team_requested:', '${{ needs.check-documentation-team-approval.outputs.team_requested }}');
+            console.log('approval_status:', rawApprovalStatus);
+            console.log('team_requested:', rawTeamRequested);
+
+            // If the upstream job was cancelled or produced no outputs, skip the
+            // status update so we don't overwrite a previous valid result.
+            if (!rawApprovalStatus && !rawTeamRequested) {
+              console.log('Upstream job was cancelled or produced no outputs. Skipping status update.');
+              return;
+            }
+
+            const approvalStatus = rawApprovalStatus === 'true';
+            const teamRequested = rawTeamRequested === 'true';
+
             console.log('Parsed values:');
             console.log('approvalStatus:', approvalStatus);
             console.log('teamRequested:', teamRequested);
-            
+
             // Get pull request details for commit SHA
             const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
-            
+
             // Create/update a consistent status check that both trigger types will update
             const statusState = (teamRequested && !approvalStatus) ? 'failure' : 'success';
-            const statusDescription = teamRequested 
+            const statusDescription = teamRequested
               ? (approvalStatus ? 'Documentation team has approved' : 'Documentation team approval required')
               : 'Documentation team review not required';
 

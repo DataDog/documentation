@@ -1,0 +1,64 @@
+entries:
+  - change_type: modified
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40645
+    operations:
+      - CreateRUMOperation
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperation
+      - DeleteRUMOperationStrongLink
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperations
+      - UpdateRUMOperation
+      - UpdateRUMOperationStrongLink
+    title: Promote RUM Operations endpoints from preview to stable
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41046
+    operations:
+      - CreateRUMOperation
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperations
+      - UpdateRUMOperation
+    title: Align RUM operations spec with responses
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateRUMOperation
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperation
+      - DeleteRUMOperationStrongLink
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperationStrongLinks
+      - ListRUMOperations
+      - UpdateRUMOperation
+      - UpdateRUMOperationStrongLink
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41964
+    operations:
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperationStrongLink
+      - UpdateRUMOperationStrongLink
+    title: Add RUM API permissions for operation strong links and sdk remote 
+      config
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateRUMOperation
+      - CreateRUMOperationStrongLink
+      - DeleteRUMOperation
+      - DeleteRUMOperationStrongLink
+      - GetRUMOperation
+      - GetRUMOperationByName
+      - ListRUMOperationStrongLinks
+      - ListRUMOperations
+      - UpdateRUMOperation
+      - UpdateRUMOperationStrongLink
+    title: Document rate-limit headers on the shared 429 responses

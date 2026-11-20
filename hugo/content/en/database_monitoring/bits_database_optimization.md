@@ -1,0 +1,124 @@
+---
+title: Bits Database Optimization
+description: Review and implement database query optimizations identified by Bits AI.
+further_reading:
+- link: "/database_monitoring/"
+  tag: "Documentation"
+  text: "Database Monitoring"
+- link: "/database_monitoring/query_metrics/"
+  tag: "Documentation"
+  text: "Exploring Query Metrics"
+- link: "/database_monitoring/connect_dbm_and_apm/"
+  tag: "Documentation"
+  text: "Correlate Database Monitoring and Traces"
+- link: "https://www.datadoghq.com/blog/how-bits-database-optimization-proves-a-query-rewrite-is-faster/"
+  tag: "Blog"
+  text: "How Bits Database Optimization proves a query rewrite is faster"
+---
+
+<div class="alert alert-info">Bits Database Optimization is available for PostgreSQL and MySQL, and in Preview for SQL Server. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+
+## Overview
+
+Bits Database Optimization detects underperforming queries across your database fleet, identifies optimizations validated against a simulated copy of your environment, and delivers the result as a pull request fixing the exact code that triggered the query.
+
+Optimization candidates are selected automatically from Database Monitoring telemetry. Candidates are identified by highest potential impact, focusing on query execution times, blocking queries, and regressed queries.
+
+<div class="alert alert-info">Bits Database Optimization does not require write access to your database, and does not export or use actual data from your environment. Optimizations are empirically tested against database simulations populated with synthetic data using statistical properties of your schema.</div>
+
+{{< img src="database_monitoring/database_optimization_panel_overview.png" alt="An optimized query in the optimization panel, showing a detailed summary of the issue, a diff for the optimized query, and a button to create a PR." style="width:100%;">}}
+
+## Prerequisites
+
+- **Database Monitoring** is configured for the target database instances. See [Database Monitoring Setup][1].
+- **Schema collection** is enabled on the target instances.
+- For automated PR creation:
+    - **APM** must be configured for the services that issue the queries you want to address. See [Correlate Database Monitoring and Traces][2] for more information.
+    - A **GitHub repository** must be linked in your Datadog organization.
+- Bits Database Optimization is enabled for your organization. You can check [Bits AI][6] availability in **Plan & Usage** > **AI Credits**.
+- To configure continuous optimizations, you need the **DBM Read** and **Org Management** permissions.
+
+## Enable continuous optimizations
+
+1. Go to [Database Monitoring > Optimizations][7].
+1. In the top right corner, click **Configure**.
+1. Toggle **Continuous Optimizations** on.
+1. Review the included instances, then click **Save**.
+
+The instances included in Continuous Optimizations are listed below the toggle. To remove an instance, click the minus (**-**) button on the right side of its row, then click **Save**.
+
+{{< img src="database_monitoring/database_optimization_continuous_optimizations_toggle.png" alt="The Bits Database Optimization configuration panel, showing the Continuous Optimizations toggle and a list of included database instances with their tags." style="width:100%;">}}
+
+When continuous optimizations are enabled, Bits Database Optimization selects eligible queries from the included instances on an ongoing basis until the limit of 50 distinct queries per database instance per month is reached. Queries are prioritized by total execution duration.
+
+Each analyzed query counts toward this limit even when no optimization is found. After a query has been analyzed, it is not analyzed again in the same month. The limit resets at the start of each month (UTC).
+
+Bits Database Optimization is priced according to AI credits. For details, see the [AI credits pricing page][5].
+
+## SQL Server (Preview)
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Database Optimization for SQL Server is in Preview. To request access, click <strong>Get Early Access</strong> in the SQL Server banner on the <a href="https://app.datadoghq.com/databases/optimizations">Optimizations</a> page, or contact your Datadog representative.
+{{< /callout >}}
+
+### Requirements
+
+In addition to the [prerequisites](#prerequisites), SQL Server requires:
+
+- **Schema collection** enabled on each SQL Server instance. Schema collection is off by default for SQL Server. Set `collect_schemas.enabled: true` in the instance configuration. See [Exploring Database Schemas][8].
+- **Continuous optimizations** turned on. See [Enable continuous optimizations](#enable-continuous-optimizations). SQL Server optimizations come only from continuous optimizations.
+
+### Recommended
+
+- **Datadog Agent 7.86 or later.** Upgrading the Agent helps Bits Database Optimization produce higher-quality optimizations for SQL Server.
+
+### Limitations
+
+- Automated pull requests are not available for SQL Server during the Preview.
+- Queries that use temporary tables or table variables are not analyzed.
+
+## Viewing optimizations
+
+### Query list
+
+On the [Database Monitoring > Queries][3] screen, queries with optimizations available have an AI icon in the Status column. Hover over an icon to see a summary of the optimization, and click the icon to open the Optimization panel.
+
+To filter the query list by optimization type, select an option from **Optimizations** above the list.
+
+{{< img src="database_monitoring/database_optimization_queries.png" alt="The status column on the Queries screen, showing AI icons in query rows where optimizations are available." style="width:100%;">}}
+
+### Optimization panel
+
+The Optimization panel includes a summary of the query issue, the optimized query used in the simulation, and a visualization of the Simulated Performance Impact.
+
+Explore the Simulated Performance Impact visualization for more details about improvements:
+  - Hover over the improvement summary (for example, "96.9x faster") to view before-and-after execution times, logical reads, and write activity (dirtied blocks for PostgreSQL, write work for MySQL, or logical writes for SQL Server). The table shows the average, median, P95, and maximum for each metric.
+  - Hover over each item in the visualization to view more details.
+
+{{< img src="database_monitoring/database_optimization_simulated_performance_impact.png" alt="An example Simulated Performance Impact visualization, showing a query optimized to 96.9x faster." style="width:100%;">}}
+
+Click **Compare Plans** to view side-by-side comparisons of the current and optimized execution plans:
+  - **List View** shows a hierarchical list of the execution plan's operations, with node cost and row estimates for each step.
+  - **Map View** shows a visual representation of the execution plan, with the option to compare the plans by different metrics.
+  - **Raw** shows the raw execution plan output.
+
+{{< img src="database_monitoring/database_optimization_plan_comparison_map_view.png" alt="The Compare Plans Map View, showing added and removed operations for an optimized query." style="width:100%;">}}
+
+### Review the pull request
+
+To review the PR for the optimization fix to your database, select **Review PR by Bits AI**. The GitHub PR opens with a pre-populated description that includes the simulation results.
+
+<div class="alert alert-info">Automated pull requests require APM to be configured for the service issuing the query, and a GitHub repository linked to your Datadog organization.</div>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /database_monitoring/architecture/
+[2]: /database_monitoring/connect_dbm_and_apm/
+[3]: https://app.datadoghq.com/databases/queries
+[4]: /monitors/configuration/?tab=evaluateddata
+[5]: https://www.datadoghq.com/pricing/?product=ai-credits#products
+[6]: /bits_ai/
+[7]: https://app.datadoghq.com/databases/optimizations
+[8]: /database_monitoring/schema_explorer/

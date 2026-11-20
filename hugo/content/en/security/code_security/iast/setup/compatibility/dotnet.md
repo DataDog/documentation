@@ -1,0 +1,129 @@
+---
+title: .NET Compatibility Requirements
+code_lang: dotnet
+type: multi-code-lang
+code_lang_weight: 10
+---
+
+## Application Security capabilities support
+
+The following application security capabilities are supported in the .NET library, for the specified tracer version:
+
+| Application Security capability  | Minimum .NET tracer version |
+| -------------------------------- | ----------------------------|
+| Threat Detection | 2.23.0|
+| Threat Protection  | 2.26.0|
+| Customize response to blocked requests | 2.27.0 |
+| Software Composition Analysis (SCA) |  2.16.0  |
+| Code Security  | 2.42.0  |
+| Automatic user activity event tracking | 2.32.0 |
+| API Security | 2.42.0 |
+
+The minimum tracer version to get all supported application security capabilities for .NET is 2.42.0.
+
+**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
+
+### Supported deployment types
+| Type              | Threat Detection support | Software Composition Analysis | Code Security |
+|-------------------|--------------------------|-------------------------------|---------------|
+| Docker            | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     | Preview (2.42.0) |
+| AWS Lambda        | {{< X >}}                |                               |               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+
+**Note**: Azure App Service is supported for **web applications only**. Application Security capabilities are not supported for Azure Functions.
+
+## Language and framework compatibility
+
+### Supported .NET versions
+
+All versions listed in this section are generally available (GA).
+
+Code Security supports the following .NET and .NET Core runtimes:
+
+| .NET Version  | Microsoft End of Life | Package version    |
+| ------------- | --------------------- | ------------------ |
+| .NET 10       | _November 14, 2028_   | latest (>= 3.31.0) |
+| .NET 9        | _November 10, 2026_   | latest (>= 3.6.0)  |
+| .NET 8        | _November 10, 2026_   | latest (>= 2.42.0) |
+| .NET 7        | May 14, 2024          | latest (>= 2.42.0) |
+| .NET 6        | November 12, 2024     | latest (>= 2.42.0) |
+| .NET 5        | May 10, 2022          | latest (>= 2.42.0) |
+| .NET Core 3.1 | December 13, 2022     | latest (>= 2.42.0) |
+
+Code Security supports the following .NET Framework versions:
+
+| .NET Framework Version | Microsoft End of Life | Package version |
+| ---------------------- | --------------------- | --------------- |
+| 4.8.1                  |                       | latest          |
+| 4.8                    |                       | latest          |
+| 4.7.2                  |                       | latest          |
+| 4.7.1                  |                       | latest          |
+| 4.7                    |                       | latest          |
+| 4.6.2                  |                       | latest          |
+| 4.6.1                  | April 26, 2022        | latest          |
+
+These are supported on the following architectures:
+- Linux (GNU) x86-64, ARM64
+- Alpine Linux (musl) x86-64, ARM64
+- Windows (msvc) x86, x86-64
+
+For more information on the runtimes and operating systems that the .NET tracer supports, see [.NET and .NET Core Compatibility Requirements][1] and [.NET Framework Compatibility Requirements][2].
+
+### Web framework compatibility
+
+**Web framework integrations provide:**
+
+- Attacker source HTTP request details
+- Tags for the HTTP request (status code, method, etc)
+- Distributed Tracing to see attack flows through your applications
+
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks.
+- If your framework is not listed below, **Code Security** still detects Insecure Cookie vulnerabilities.
+
+
+| Framework                  | Threat Detection supported? | Threat Protection supported? | Code Security? |
+| ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ASP.NET Core (including minimal APIs) | {{< X >}} | {{< X >}} | {{< X >}} |
+| ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
+| ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
+
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+
+### Data store compatibility
+
+**Datastore tracing provides:**
+
+- SQL attack detection
+- query info (for example, a sanitized query string)
+- error and stacktrace capturing
+
+##### Application Security Capability Notes
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+
+| Framework         | Threat Detection supported?    | Threat Protection supported? | Code Security? |
+|-------------------|-----------------|---------------------|---|
+| OracleDB         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+| ADO.NET         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+| SQL Server         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+| MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+| SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+
+### User Authentication Frameworks compatibility
+
+Integrations to **User Authentication Frameworks provides:**
+
+- User login events including the user IDs
+- User signup events (apps using built-in SignInManager)
+- Account Takeover detection monitoring for user login events
+
+| Framework         |
+|-------------------|
+| > .Net Core 2.1   |
+
+[1]: /tracing/trace_collection/compatibility/dotnet-core/
+[2]: /tracing/trace_collection/compatibility/dotnet-framework/
+[3]: /remote_configuration#enabling-remote-configuration

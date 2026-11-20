@@ -1,0 +1,25 @@
+{{/*
+    Renders a US2-FED-specific banner on integration pages directing readers to
+    their Integrations page or to email support for an exception request.
+
+    Suppressed when the existing site-support banner already covers gov2 for
+    this integration (i.e. gov2 is in the integration's unsupported_sites list),
+    to avoid rendering two banners on the same reader's view.
+
+    Copy strings live in config/_default/params.<lang>.yaml for localization.
+
+    Wired into layouts/integrations/single.html.
+*/}}
+{{ $unsupported_regions := partial "site_support_banner/get_unsupported_regions.html" . }}
+
+{{ if not (in $unsupported_regions "gov2") }}
+    {{ $availability := .Site.Params.us2_fed_integration_banner_availability | default "" | safeHTML }}
+    {{ $exception := .Site.Params.us2_fed_integration_banner_exception | default "" | safeHTML }}
+
+    <div class="d-none site-region-container" data-region="gov2">
+        <div class="alert alert-info">
+            <p>{{ $availability }}</p>
+            <p>{{ $exception }}</p>
+        </div>
+    </div>
+{{ end }}

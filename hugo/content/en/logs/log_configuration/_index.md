@@ -1,0 +1,68 @@
+---
+title: Log Configuration
+description: "Process, enrich, control, and manage your logs from the Logs Configuration page"
+aliases:
+  - /logs/processing
+further_reading:
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Log Pipelines"
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "PCI DSS Compliance"
+- link: "https://www.datadoghq.com/blog/logging-without-limits/"
+  tag: "Blog"
+  text: Learn more about Logging without Limits*
+- link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"
+  tag: "Blog"
+  text: "Investigate your log processing with the Datadog Log Pipeline Scanner"
+- link: "/logs/guide/"
+  tag: "Guide"
+  text: "Additional guides about logging with Datadog"
+- link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+  tag: "Architecture Center"
+  text: "A guide to Log Management Indexing Strategies with Datadog"
+---
+
+## Overview
+
+Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Pipelines{{< /ui >}}][1].
+
+You can also manage log pipelines, indexes, and archives through an AI agent connected to the Datadog MCP Server. Enable the `logs-configuration` toolset to view, create, update, delete, and reorder these resources. See [Set Up the Datadog MCP Server][13] to connect your agent. For available tools and example prompts, see [Logs Configuration tools][14].
+
+## Configuration options
+
+- Control how your logs are processed with [pipelines][3] and [processors][4].
+- Set [attributes and aliasing][5] to unify your logs environment.
+- [Generate metrics from ingested logs][6] as cost-efficient way to summarize log data from an entire ingested stream.
+- Institute fine-grained control over your log management budget with [log indexes][7].
+- Forward ingested logs to your own cloud-hosted storage bucket to keep as an [archive][8] for future troubleshooting or compliance audits.
+- [Search an archive][12] with Archive Search to query logs in real time directly from storage. Use **Search & Rehydration** mode when you need full platform access or longer retention.
+- Connect [external sources][15], such as Databricks tables, to search logs stored in your data platform with Federated Logs.
+- Restrict [logs data access][10] with restriction queries.
+
+## Log Explorer
+
+Once you've completed configuration, start investigating and troubleshooting logs in the [Log Explorer][11].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>
+*Logging without Limits is a trademark of Datadog, Inc.
+
+[1]: https://app.datadoghq.com/logs/pipelines
+[2]: /data_security/pci_compliance/
+[3]: /logs/log_configuration/pipelines
+[4]: /logs/log_configuration/processors
+[5]: /logs/log_configuration/attributes_naming_convention/
+[6]: /logs/log_configuration/logs_to_metrics/
+[7]: /logs/log_configuration/indexes
+[8]: /logs/log_configuration/archives/
+[10]: /logs/guide/logs-rbac/
+[11]: /logs/explorer/
+[12]: /logs/explorer/archive_search/
+[13]: /mcp_server/setup/
+[14]: /mcp_server/tools/#logs-configuration
+[15]: /logs/log_configuration/external_sources/

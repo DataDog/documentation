@@ -1,0 +1,168 @@
+---
+title: TeamCity Setup for CI Visibility
+aliases:
+  - /continuous_integration/setup_pipelines/teamcity
+further_reading:
+  - link: "/continuous_integration/pipelines"
+    tag: "Documentation"
+    text: "Explore Pipeline Execution Results and Performance"
+  - link: "/continuous_integration/troubleshooting/"
+    tag: "Documentation"
+    text: "Troubleshooting CI Visibility"
+---
+
+## Overview
+
+[TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
+
+Set up CI Visibility for TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][14] | Retry build triggers | View partially retried pipeline executions. |
+| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+| [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+| [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
+
+The following TeamCity versions are supported:
+
+- TeamCity >= 2021.2 or later
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and TeamCity:
+
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| Pipeline                   | Build Chain |
+| Job                        | Build       |
+| _Not available in Datadog_ | Step        |
+
+## Configure the Datadog integration
+
+The integration between [TeamCity][1] and Datadog CI Visibility is provided through a TeamCity plugin. The [source code][8] of the Datadog CI Integration plugin is open source under the Apache 2.0 license.
+
+To set up the integration:
+
+1. Download the [Datadog CI Integration plugin][5] on the TeamCity server by going to
+{{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Plugins{{< /ui >}} -> {{< ui >}}Browse Plugin Repository{{< /ui >}}.
+2. If you don't already have one, add a [TeamCity composite build][6] as the last build of the build chain. This build must have a dependency on the current last build of the chain and no other builds depending on it.
+
+   Build chains that do not end with a composite build are ignored by the plugin. For example, consider an expected build chain where `Aggregating Results` is the last composite build:
+
+   {{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:100%;">}}
+
+   The final composite build must be properly configured in terms of version control settings, with the VCS Root attached and the [VCS Trigger][13] configured.
+
+3. The following configuration parameters need to be present for TeamCity projects:
+
+   * **datadog.ci.api.key**: Your [Datadog API Key][2]. Supports type **Password** in plugin version 0.0.5 and later.
+   * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}
+   * **datadog.ci.enabled**: `true` (`false` can be used to disable the plugin for a specific project).
+
+   You can add them to either TeamCity subprojects or the [TeamCity Root Project][10]. When added to the Root project, they are propagated to all its subprojects. For example, to enable the plugin for all projects, add `datadog.ci.enabled` with the value `true` to the Root Project.
+
+   For more information on defining configuration parameters, see the [TeamCity Project Hierarchy documentation][9].
+
+4. To enable the plugin, click on {{< ui >}}Enable uploaded plugins{{< /ui >}} in the {{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Plugins{{< /ui >}} page.
+Alternatively, restart the TeamCity server.
+
+## Manage job logs
+
+### Logs Analysis
+
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant TeamCity logs.
+For a full explanation, see the [Logs Analysis guide][21].
+
+Logs Analysis is enabled by default in Datadog, but requires the TeamCity plugin to send job logs as described below.
+In [CI/CD Optimization Repository settings][22], you can enable or disable Logs Analysis for your organization or
+individual repositories.
+
+Job log forwarding requires Datadog CI Integration plugin version 0.1.0 or later.
+
+When the plugin is enabled (`datadog.ci.enabled` is set to `true`), it automatically sends logs for each build
+reported as a job in a completed build chain.
+
+To disable job log collection for a project, set the `datadog.ci.logs.disabled` project configuration parameter
+to `true`. Set it to `false` or remove it where it is defined to re-enable collection. An empty or unrecognized
+value also disables collection. Set the parameter on the Root project to disable job log collection for all
+subprojects.
+
+The plugin sends job logs after the final composite build finishes and before sending each completed job event.
+When available, the plugin collects TeamCity log severity and the name of the innermost log block.
+
+### Logs Storage
+
+After setting up the TeamCity plugin to send job logs as described in [Logs Analysis](#logs-analysis), go to
+[CI/CD Optimization Repository settings][22] and enable Logs Storage for your organization or individual repositories.
+Stored logs appear in the {{< ui >}}Logs{{< /ui >}} tab for the job.
+
+Logs Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
+[Log Management][20]. To find TeamCity job logs, filter on `datadog.product:cipipeline` and `source:teamcity`.
+
+## Advanced configuration
+
+### Configure Git user information
+
+The plugin retrieves the Git author name and email based on the [TeamCity username style][7]. Datadog recommends using either {{< ui >}}Author Name and Email{{< /ui >}} or {{< ui >}}Author Email{{< /ui >}} username styles, as they
+provide information about the user email.
+
+When one of the other username styles is used ({{< ui >}}UserId{{< /ui >}} or {{< ui >}}Author Name{{< /ui >}}), the plugin automatically generates an email for the user by appending `@Teamcity` to the username. For example, if the {{< ui >}}UserId{{< /ui >}} username style is used and the Git author username is `john.doe`, the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11], and can be modified in the VCS Root settings.
+
+<div class="alert alert-danger"> The Git author email is used for
+<a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility">billing purposes</a>,
+therefore there might be cost implications when username styles not providing email
+(<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="/help/">Reach out to the Datadog support team</a> if you have any questions about your use case.
+</div>
+
+## Visualize pipeline data in Datadog
+
+View your data on the [**CI Pipeline List**][3] and [**Executions**][4] pages after the pipelines finish.
+
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][12].
+
+## Troubleshooting
+
+### Missing or incomplete job logs
+
+If logs are missing from the Logs tab, confirm that Logs Storage is enabled in
+[CI/CD Optimization Repository settings][22].
+Confirm that the build chain completed and `datadog.ci.enabled` is `true`. The effective value of
+`datadog.ci.logs.disabled` for the project must be `false` or unset. For upload errors, review the plugin's messages
+in `teamcity-server.log`. In TeamCity, go to {{< ui >}}Administration{{< /ui >}} -> {{< ui >}}Diagnostic{{< /ui >}} ->
+{{< ui >}}Server Logs{{< /ui >}}.
+
+### Test runs are not linked to TeamCity jobs
+
+The Datadog CI Integration plugin does not correlate TeamCity pipeline or job executions with test runs in Test Optimization. Tests may appear in Test Optimization while the corresponding CI Visibility job shows **Test Runs: 0**.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.jetbrains.com/teamcity/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/ci/pipelines
+[4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
+[6]: https://www.jetbrains.com/help/teamcity/composite-build-configuration.html
+[7]: https://www.jetbrains.com/help/teamcity/git.html#General+Settings
+[8]: https://github.com/DataDog/ci-teamcity-plugin
+[9]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Project+Hierarchy
+[10]: https://www.jetbrains.com/help/teamcity/project-administrator-guide.html#Root+Project
+[11]: https://www.jetbrains.com/help/teamcity/configuring-vcs-roots.html
+[12]: /continuous_integration/search/#search-for-pipelines
+[13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
+[14]: /glossary/#partial-retry
+[15]: /glossary/#queue-time
+[16]: /glossary/#pipeline-failure
+[17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /glossary/#pipeline-execution-time
+[20]: /logs/guide/best-practices-for-log-management/
+[21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[22]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
