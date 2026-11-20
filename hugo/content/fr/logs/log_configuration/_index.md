@@ -37,6 +37,7 @@ Vous pouvez également gérer les pipelines, les index et les archives de logs v
 - Mettez en place un contrôle précis de votre budget de gestion des logs grâce aux [index de logs][7].
 - Transférez les logs ingérés vers votre propre bucket de stockage cloud pour les conserver en tant qu'[archive][8] à des fins de dépannage ultérieur ou d'audits de conformité.
 - [Recherchez dans une archive][12] avec Archive Search pour interroger les logs en temps réel directement depuis le stockage. Utilisez le mode **Search & Rehydration** lorsque vous avez besoin d'un accès complet à la plateforme ou d'une rétention plus longue.
+- Connectez des [sources externes][15], telles que des tables Databricks, pour rechercher des journaux stockés dans votre plateforme de données avec Federated Logs.
 - Restreignez [l'accès aux données de logs][10] à l'aide de requêtes de restriction.
 
 ## Log Explorer {#log-explorer}
@@ -63,3 +64,4 @@ Une fois votre configuration terminée, commencez à examiner et à étudier vos
 [12]: /fr/logs/explorer/archive_search/
 [13]: /fr/mcp_server/setup/
 [14]: /fr/mcp_server/tools/#logs-configuration
+[15]: /fr/logs/log_configuration/external_sources/

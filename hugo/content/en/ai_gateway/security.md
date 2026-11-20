@@ -1,10 +1,13 @@
 ---
 title: Security and Data Capture in AI Gateway
-description: Control whether AI Gateway spans include prompt and response content using data capture defaults and scoped overrides.
+description: Apply AI Guard policies to AI Gateway traffic and control recorded prompt and response content with data capture defaults and overrides.
 further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
+  - link: "/llm_observability/data_governance/access_control/"
+    tag: "Documentation"
+    text: "Data Access Control in Agent Observability"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
@@ -13,29 +16,262 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
 
+<!-- vale Datadog.headings = NO -->
+## Apply AI Guard policies
+<!-- vale Datadog.headings = YES -->
+
+Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the AI Gateway attachment defines which traffic it evaluates and how AI Gateway handles the result.
+
+For AI Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
+
+Start with an attachment on a test routing rule before applying a policy across the organization.
+
+### Prerequisites
+
+- Complete the [AI Gateway prerequisites][ai_guard-2] and configure an accessible model or routing rule.
+- AI Guard for AI Gateway is enabled per organization during the Preview. If {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} is not visible, contact your Customer Success Manager.
+- To manage attachments, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions. To attach a policy to a routing rule, you also need View and Edit access to that rule.
+- To select a policy, have **AI Guard View** (`ai_guard_view`). To create or edit a policy, also have **AI Guard Write** (`ai_guard_write`). See [AI Guard permissions][ai_guard-3].
+- The **same credential used to call AI Gateway** must allow both **AI Gateway Usage** (`ai_gateway_usage`) and **AI Guard Evaluate** (`ai_guard_evaluate`). Both the calling user or service account and the credential scope must permit these actions. An administrator's permissions do not grant evaluation access to an application's credential.
+
+### Choose the attachment scope
+
+| Target | Traffic evaluated |
+|---|---|
+| **Everything** | All AI Gateway requests without a route-specific attachment. This is the organization default. |
+| **Route** | Requests sent to the selected routing rule, such as `router/support-assistant`. |
+
+A route-specific attachment replaces the organization default for that route. The policies do not accumulate. The routing rule originally requested by the caller determines the attachment. This selection also applies to nested routing rules and fallback destinations.
+
+### Attach a policy
+
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}}][ai_guard-4] and click {{< ui >}}Attach AI Guard policy{{< /ui >}}.
+2. Under {{< ui >}}Target{{< /ui >}}, select {{< ui >}}Everything{{< /ui >}}, or select {{< ui >}}Route{{< /ui >}} and choose a routing rule.
+3. Select an {{< ui >}}Existing policy{{< /ui >}}. To create a policy:
+   1. Enter a {{< ui >}}New policy name{{< /ui >}}. AI Gateway policy names use the `datadog-ai-gateway.` prefix.
+   2. Click {{< ui >}}Create in AI Guard{{< /ui >}} to open the policy editor.
+   3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][ai_guard-1].
+   4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
+4. Under {{< ui >}}AI Gateway Action{{< /ui >}}, explicitly select {{< ui >}}Monitor only{{< /ui >}} or {{< ui >}}Block unsafe{{< /ui >}}. The form defaults to {{< ui >}}Block unsafe{{< /ui >}}.
+5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target and policy, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
+
+To change an attachment, attach a policy to the same target again. The new attachment replaces the previous one. Allow configuration changes to propagate before checking fresh requests.
+
+### Choose an action
+
+| Action | Behavior |
+|---|---|
+| **Monitor only** | Evaluates supported prompt content asynchronously. Policy denials and sensitive-data findings do not block the model request. Responses are not evaluated. |
+| **Block unsafe** | Evaluates supported prompt content before calling the model. Policy denials block the request. Also evaluates successful, buffered Chat Completions output before returning it. |
+
+For an attachment created in the AI Gateway UI, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
+
+Attachments created outside the AI Gateway UI can have different saved sensitive-data or evaluator-error settings. Attaching the policy again in the UI applies the behavior described above.
+
+In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See the [Troubleshooting](#troubleshooting) section.
+
+### Evaluation coverage
+
+| Request API | Prompt evaluation | Response evaluation |
+|---|---|---|
+| OpenAI Chat Completions | Supported plain-text conversation content for buffered and streaming requests. | Successful buffered output in **Block unsafe**. |
+| OpenAI Responses | Supported explicit plain-text input and instructions for buffered and streaming requests. | Not evaluated. |
+| Anthropic Messages | Supported text input for buffered and streaming requests. | Not evaluated. |
+| Native Gemini | Not evaluated. | Not evaluated. |
+
+Streamed output is not evaluated. AI Guard does not evaluate tool definitions, tool calls, or tool results for AI Gateway requests. A request containing only tool content can skip evaluation because it has no supported text. Unsupported media, such as images or audio, can cause a refusal in **Block unsafe**.
+
+A successful model response alone does not prove that AI Guard evaluated the request. Check the matching AI Gateway span for a completed evaluation.
+
+#### Sensitive data scanning
+
+Configure [sensitive data scanning][ai_guard-5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
+
+The AI Gateway integration with AI Guard does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. AI Gateway does not apply those redactions to the content it forwards.
+
+#### Data capture and evaluation
+
+[AI Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: AI Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
+
+### Verify the attachment
+
+Use synthetic content and an isolated routing rule. Avoid changing an organization-wide attachment to test enforcement.
+
+1. Create a dedicated AI Guard policy. Add a [custom rule][ai_guard-7] that denies a harmless test keyword such as `gatewayguardtest` in the last evaluated message.
+2. Attach the policy to the test route with **Monitor only** explicitly selected.
+3. Send a buffered Chat Completions request to the test route using the application's credential:
+
+   ```shell
+   curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/chat/completions" \
+     -H "Content-Type: application/json" \
+     -H "Authorization: Bearer <DATADOG_ACCESS_TOKEN>" \
+     -d '{
+       "model": "router/<TEST_ROUTE_SLUG>",
+       "stream": false,
+       "messages": [{"role": "user", "content": "Reply with hello."}]
+     }'
+   ```
+
+4. Confirm the request succeeds. In [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][ai_guard-8], follow the request into Agent Observability and check that prompt evaluation completed with an `ALLOW` decision.
+5. Change the last message to `Reply briefly to gatewayguardtest.` and repeat the request. Confirm that the model request continues and prompt evaluation completes with `DENY`. A skipped or failed evaluation does not verify monitoring.
+6. Change the attachment action to **Block unsafe**, save, and repeat the keyword request. For this Chat Completions request, expect HTTP `422` and `guardrail_violation` in both the `X-Ai-Gateway-Error-Code` header and the response's `error.code`. Confirm a completed prompt denial in the matching span.
+7. Repeat the harmless request and confirm it still succeeds. This distinguishes selective enforcement from a credential, model-access, or evaluator failure.
+8. Remove the temporary rule. To return the target to its previous behavior, attach the policy again with the original action.
+
+Match the route, caller, and timestamp when reviewing evaluation evidence. For streaming, Responses, and Anthropic traffic, verify prompt coverage separately; this procedure does not prove output evaluation for those request types.
+
+### Troubleshooting
+
+| Symptom | Check |
+|---|---|
+| The policy is missing from the selector. | Confirm **AI Guard View**, check the `datadog-ai-gateway.` policy-name prefix, and refresh the policy list after saving in AI Guard. |
+| Evaluation fails for an application's credential. | Confirm that both the principal and credential scope permit `ai_gateway_usage` and `ai_guard_evaluate`. |
+| A request succeeds without an evaluation. | Check the requested route's effective attachment, supported API and content, and whether the evaluation completed asynchronously. Without an attachment, AI Guard does not evaluate the request. |
+| A request returns `guardrail_violation`. | AI Guard denied evaluated content, or a sensitive-data finding triggered blocking. Inspect the evaluation decision. |
+| A request returns `guardrail_unavailable`. | AI Gateway could not complete a required evaluation. Check permission, payload, supported content, and evaluator availability. This code does not mean that unsafe content was detected. |
+| A monitoring request is refused. | Check for errors resolving the attachment or policy. **Monitor only** allows findings from an evaluated policy; it does not bypass configuration errors or other AI Gateway controls. |
+
+When AI Guard refuses an AI Gateway request, OpenAI-compatible requests return HTTP `422` and native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
+
 ## Configure data capture
 
 AI Gateway records supported inference requests in Agent Observability. Requests rejected before processing, such as authentication failures or malformed request bodies, might not appear there. The data capture mode controls whether a span includes prompt and response content.
 
+There are two capture modes. **Metadata only** can optionally add *capture items*, which are the only extra detail it records. Each item is either *structure* (the shape of the conversation, such as which tools were called and the role of each message) or *counts* (numbers, such as how many tool calls happened or how large the tool results were). No item records conversation text.
+
 | Mode | What is recorded |
 |---|---|
-| Metadata only | Request and response metadata, without prompt and response content. |
-| Full capture | Request and response metadata, and prompt and response content. |
+| Metadata only (default) | Request and response metadata, such as the model, provider, status, latency, token usage, and cost. No prompt or response content. Optional capture items add structure and counts. |
+| Full capture | Everything in Metadata only, plus prompt, response, reasoning, and tool content (tool arguments and results). All capture items apply. |
 
-Set the organization default in {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}. To apply a different mode to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}.
+When a request has no capture setting, or AI Gateway can't read the configuration, the request uses Metadata only with no capture items.
 
-An override can match a user, team, model, provider, or custom tag. Every filter in an override must match. Custom tags match the exact `x-dd-tag-<KEY>` header value. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
+In every mode, a span also records the request's tag values, the caller's email, and, for a failed provider call, the provider's error message.
 
-If several overrides match, **Metadata only** takes precedence over **Full capture**. If no override matches, the organization default applies.
+### Capture items
+
+Capture items apply only under Metadata only. An item can require other items, because it already reveals what those items record. When you select an item in the UI, AI Gateway also selects what it requires, and clearing an item clears the items that depend on it. The API rejects a set that breaks a dependency.
+
+| Item | Kind | What it adds to the span | Requires |
+|---|---|---|---|
+| Tool usage counts (`tool_usage`) | Counts | The `tool_call_count` and `tool_result_count` metrics. | None |
+| Tool output size (`tool_output_size`) | Counts | The `tool_output_estimated_tokens` and `tool_output_avg_estimated_tokens` metrics, and `tool_output_tokens` on each tool span. | Tool usage counts |
+| Tool names (`tool_names`) | Structure | Each tool call and result, with its tool name, ID, and type. No arguments or result text. | Tool usage counts |
+| Conversation shape (`conversation_shape`) | Structure | Every message with its role, and no text. | Tool usage counts |
+| Input size by role (`input_size_by_role`) | Counts | An `input_estimated_tokens_<ROLE>` metric for each role, such as `system`, `user`, `assistant`, and `tool`. | Tool output size |
+| Available tools (`available_tools`) | Structure | The names of the tools the request offered. No descriptions or schemas. | None |
+| Generation settings (`generation_settings`) | Counts and structure | Numeric and enumerated settings, such as temperature, max tokens, top p, reasoning effort, and the finish reason. | None |
+
+The following never reach a span under Metadata only, whichever items you select:
+
+- Message, system prompt, and reasoning text
+- Tool arguments and tool result text
+- Tool descriptions and schemas
+- Message IDs, and role names that a caller defined
+- Parameters that can carry text, such as stop sequences, response schemas, tool choice, and logit bias
+
+AI Gateway keeps a tool name, ID, or type only if it looks like an identifier (up to 128 letters, digits, and `_.:/-`). It keeps an enumerated request setting only if it is a value a provider defines.
+
+Token counts for these items are estimates at 4 bytes per token, not tokenizer counts, and they don't replace the provider's usage and cost metrics. Tool calls are counted in the response. Tool results are counted since the model's previous turn, so summing a trace counts each result once. If AI Gateway can't decode a request or response, it reports no counts for that side instead of zeros.
+
+AI Gateway also writes the item metrics to span metadata as `capture.<METRIC>`, for example `@meta.metadata.capture.tool_call_count`. The span's `capture.mode` and `capture.metadata` fields record the mode and the items that applied.
+
+### What appears in Agent Observability spans
+
+| Span detail | Metadata only | Metadata only with items | Full capture |
+|---|---|---|---|
+| Model, provider, status, latency | {{< X >}} | {{< X >}} | {{< X >}} |
+| Token usage and cost | {{< X >}} | {{< X >}} | {{< X >}} |
+| Tool call and result counts | | Tool usage counts | {{< X >}} |
+| Tool output size | | Tool output size | {{< X >}} |
+| Tool names and IDs | | Tool names | {{< X >}} |
+| Message roles without text | | Conversation shape | {{< X >}} |
+| Input size by role | | Input size by role | {{< X >}} |
+| Names of available tools | | Available tools | {{< X >}} |
+| Generation settings | | Generation settings | {{< X >}} |
+| Prompt, response, and reasoning text | | | {{< X >}} |
+| Tool arguments and results | | | {{< X >}} |
+
+### Set the organization default and overrides
+
+Set the organization default mode and items in {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}. To select Metadata only items, select {{< ui >}}Metadata only{{< /ui >}} and open {{< ui >}}Customize{{< /ui >}}.
+
+To apply a different mode or different items to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}. An override has a name, request filters, a mode, and, under Metadata only, its own items. An override does not inherit the organization default's items: an override set to Metadata only with no items records no items, even if the organization default selects some.
+
+An override can match a user, team, model, provider, or custom tag. Every filter in an override must match, and each filter takes one value. To match alternatives, create separate overrides. Custom tags match the exact `x-dd-tag-<KEY>` header value, including case. A tag key must start with a lowercase letter and contain only lowercase letters, digits, underscores, periods, slashes, or hyphens. AI Gateway ignores a header with any other key, so an override on that key does not match. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
 
 A team capture override requires the `x-ai-gateway-team: <TEAM_SLUG>` header to select that team. Unlike team budgets and rate limits, a team capture override does not match a request based on team membership alone.
+
+#### Precedence
+
+1. If no override matches, the organization default mode and items apply.
+2. If any matching override is Metadata only, the request uses Metadata only, even if the organization default or another matching override is Full capture.
+3. Under Metadata only, an item applies only if every matching Metadata only override selects it. Full capture overrides don't narrow the items.
+4. If every matching override is Full capture, the request uses Full capture.
+
+Enabling Full capture, or a change that can expand Full capture to more traffic, asks you to confirm the change. Changing only Metadata only items never needs confirmation.
+
+#### Example
+
+An organization defaults to Metadata only with {{< ui >}}Tool usage counts{{< /ui >}}. A platform team wants full content for its own debugging, but wants one regulated customer's traffic to stay redacted. Create the following overrides:
+
+| Override | Filters | Mode | Items |
+|---|---|---|---|
+| `platform-debug` | Team: `platform` | Full capture | None |
+| `regulated` | Custom tag: `customer=acme` | Metadata only | Tool usage counts, Tool output size |
+
+| Request | Mode and items |
+|---|---|
+| From another team with no tag | Metadata only, Tool usage counts (organization default) |
+| Team `platform`, no tag | Full capture (`platform-debug`) |
+| Team `platform`, tag `customer=acme` | Metadata only, Tool usage counts and Tool output size. Both overrides match, and the Metadata only override wins. Full capture overrides don't narrow items. |
+| Other team, tag `customer=acme` | Metadata only, Tool usage counts and Tool output size (`regulated`) |
+
+Send the `x-ai-gateway-team: platform` header to match the team filter, and `x-dd-tag-customer: acme` to match the tag.
 
 Before you send sensitive prompts or responses, check the mode that applies to the request:
 
 1. Review the organization default and any matching capture overrides.
 2. Send a harmless test request with the same caller, team selection, custom tags, and model or routing rule as the workload.
-3. Open the request's Gateway span and review the recorded fields.
+3. Open the request's AI Gateway span and review the recorded fields.
+
+### Restrict who can view captured content
+
+Data capture controls what AI Gateway records. It does not control who can read it: anyone in your organization who can view Agent Observability traces can open an AI Gateway span and read the prompts and responses it captured.
+
+To keep Full capture for a workload and limit who can read its spans, place those spans in a [Restricted Dataset](/llm_observability/data_governance/access_control/) with Data Access Control. Capture keeps working, and users outside the teams or roles you grant can't see the spans.
+
+A Restricted Dataset selects spans by a tag. Choose the tag that marks the workload:
+
+| Boundary | How the workload sets it | Notes |
+|---|---|---|
+| Application name (`ml_app`) | Send `x-dd-tag-ml_app: <APPLICATION_NAME>` with each request. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). | Recommended. Without the header, AI Gateway spans use `datadog-ai-gateway`, or the calling application's name when the caller propagates Agent Observability trace context. An `ml_app` filter is also the only one that restricts the application's evaluator configurations and managed prompts. |
+| Another span tag | Send `x-dd-tag-<KEY>: <VALUE>`, for example `x-dd-tag-data_scope: restricted`. | Restricts traces only. Data Access Control uses one tag key for each telemetry type, so this works only if all of your organization's Agent Observability datasets use that key. If any already use `ml_app`, use the application name instead. |
+
+To set up the restriction:
+
+1. Choose the tag and value, and send the header from every request in the workload. Use lowercase letters, digits, hyphens, and underscores in the value.
+2. Create the Restricted Dataset in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Data Access Control{{< /ui >}}](https://app.datadoghq.com/organization-settings/data-access-controls). Select Agent Observability as the product, enter the tag and value, and grant access to the teams or roles that need to read the spans. Creating a Restricted Dataset requires the Datadog Admin role or the `user_access_manage` permission. If you don't have either, send your organization's administrator the tag, its value, and the teams or roles to grant.
+3. Send a test request, then confirm with a user outside the granted teams and roles that the span is not visible. A Restricted Dataset whose filter does not match any spans restricts nothing and shows no warning.
+
+Access is granted to teams and roles, not to individual users. To limit access to one user, grant a team that has only that member and does not allow anyone in the organization to join.
+
+Keep the following in mind:
+
+- **Only tagged requests are restricted.** A request that omits the header is recorded under the default application and stays visible to everyone who can view traces. To avoid recording content outside the boundary, keep the organization default at Metadata only and create a Full capture override for the same user, team, or custom tag as the restricted workload.
+- **Other products need their own restriction.** If the calling application also sends the same prompts and responses to APM traces or custom metrics, for example through OpenTelemetry, create Restricted Datasets with matching boundaries for those products. See [Data Access Control](/account_management/rbac/data_access/#agent-observability).
+- **Monitors read all data.** A monitor evaluates with full access to data, so review who can create monitors on Agent Observability data.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[ai_guard-1]: /security/ai_guard/policies/
+[ai_guard-2]: /ai_gateway/getting_started/#prerequisites
+[ai_guard-3]: /security/ai_guard/setup/#permissions
+[ai_guard-4]: https://app.datadoghq.com/llm/gateway/guardrails
+[ai_guard-5]: /security/ai_guard/policies/#sensitive-data-scanning
+[ai_guard-6]: /ai_gateway/security/#configure-data-capture
+[ai_guard-7]: /security/ai_guard/policies/#custom-rules
+[ai_guard-8]: https://app.datadoghq.com/llm/gateway
+[ai_guard-9]: /security/ai_guard/sensitive_data_redaction/

@@ -111,7 +111,9 @@ You can also pin parameters yourself by hardcoding them in the [tool configurati
 
 ### Move conditional instructions into skills
 
-Large system prompts often contain detailed procedures that are relevant to only a subset of requests. Keeping that guidance in the main instructions consumes context on every run. Good candidates for skills include:
+Large system prompts often contain detailed procedures that are relevant to only a subset of requests. Keeping that guidance in the main instructions consumes context on every run.
+
+To avoid consuming context on guidance that most runs don't need, move specialized procedures into [skills][6]. Skills are reusable sets of instructions and domain knowledge that you attach to an agent separately from its main instructions. Good candidates for skills include:
 
 - Service investigation procedures
 - Configuration lookup instructions
@@ -167,3 +169,4 @@ For example, confirm that the agent:
 [3]: https://app.datadoghq.com/actions/agents
 [4]: /actions/agents/#tools
 [5]: /llm_observability/quickstart/terms/
+[6]: /actions/agents/#skills

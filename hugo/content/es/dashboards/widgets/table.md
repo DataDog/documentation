@@ -32,7 +32,7 @@ La visualización de tabla muestra columnas de datos agregados agrupados por cla
 
 2. Agregue columnas adicionales a la tabla usando los botones {{< ui >}}\+ Add Query{{< /ui >}} y {{< ui >}}\+ Add Formula{{< /ui >}}.
 
-### Opciones {#options}
+### Options {#options}
 
 * Cambie el nombre de los encabezados de columna estableciendo alias, haga clic en el botón {{< ui >}}as...{{< /ui >}}.
 * Configure si se muestra o no la barra de búsqueda. {{< ui >}}Auto{{< /ui >}} es el valor predeterminado y muestra la barra de búsqueda dependiendo del tamaño del widget; esto significa que si su pantalla se vuelve demasiado pequeña, prioriza mostrar los datos en el widget y oculta la barra de búsqueda, pero sigue estando disponible en modo de pantalla completa.
@@ -47,7 +47,7 @@ Personalice la visualización de los valores de las celdas para cada columna con
 
 {{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Widget de tabla que muestra formato condicional con indicadores de tendencia" style="width:100%;" >}}
 
-#### Enlaces de contexto {#context-links}
+#### Context links {#context-links}
 
 Los [enlaces de contexto][10] están habilitados de forma predeterminada y se pueden activar o desactivar. Los enlaces de contexto conectan los widgets del dashboard con otras páginas en Datadog o aplicaciones de terceros.
 
@@ -56,6 +56,10 @@ Los [enlaces de contexto][10] están habilitados de forma predeterminada y se pu
 Las columnas en el widget de tabla se consultan independientemente unas de otras. Los grupos superpuestos con nombres coincidentes se unen en tiempo real para formar las filas de la tabla. Como resultado de ese proceso, puede haber situaciones sin superposición total, lo que muestra celdas N/A. Para mitigar esto:
   * Amplíe el límite de consultas a números más altos para maximizar la superposición entre columnas
   * Ordene las tablas según la columna que considere que "impulsa" la información
+
+## Export to CSV {#export-to-csv}
+
+Puede descargar los datos de un widget de tabla como un archivo CSV. La exportación a CSV funciona en un widget a la vez, y el equipo de soporte de Datadog puede deshabilitarla para su organización. Para obtener más detalles, consulte [Exportar datos de widget a CSV][12].
 
 ## API {#api}
 
@@ -80,3 +84,4 @@ La [definición del esquema JSON del widget][9] dedicada para el widget de tabla
 [9]: /es/dashboards/graphing_json/widget_json/
 [10]: /es/dashboards/guide/context-links/
 [11]: /es/dashboards/querying/#advanced-graphing
+[12]: /es/dashboards/widgets/configuration/#export-widget-data-to-csv

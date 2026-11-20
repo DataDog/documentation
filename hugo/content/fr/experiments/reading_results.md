@@ -83,6 +83,28 @@ Pour chaque métrique, l'onglet {{< ui >}}Global lift{{< /ui >}} affiche :
 - **Couverture** : La proportion estimée de votre total métrique global associée à la population éligible de l'expérience (en excluant l'effet de l'expérience).
 - **Lift global** : Le changement estimé de vos totaux globaux de métriques si le traitement était déployé auprès de tous les utilisateurs éligibles. Datadog calcule le lift global comme le produit de la couverture et du lift local (relatif) de l'expérience.
 
+### Détails statistiques {#statistical-details}
+
+L'onglet {{< ui >}}Statistical details{{< /ui >}} (icône de calculatrice) sur la fiche d'évaluation de la métrique affiche des statistiques supplémentaires pour la [méthode d'analyse][2] de l'expérience, au-delà des moyennes des groupes et des estimations du lift. Lorsque [CUPED][15] est activé, les statistiques utilisent les résultats ajustés par CUPED. Voir [Calculs du lift et des intervalles][12] et [Regret attendu et EVSI][13] pour la méthodologie complète.
+
+Pour l'analyse à échantillon fixe, séquentielle et hybride séquentielle, l'onglet inclut :
+
+- **Standard Error** : l'erreur type de l'estimation du lift relatif, en points de pourcentage. Une valeur plus petite signifie une estimation plus précise.
+- **p-value** : plus la valeur est faible, plus les preuves d'un effet réel sont solides. Pour l'interprétation technique de chaque méthode d'analyse, voir [Calculs du lift et des intervalles][14].
+- **z-score** : le nombre d'erreurs types séparant l'estimation du lift de zéro. Le signe indique la direction du changement, et non s'il est souhaitable.
+
+Pour l'analyse bayésienne, l'onglet inclut :
+
+- **Prob. Beats Control** : la probabilité a posteriori que le traitement fasse évoluer la métrique dans le sens souhaité.
+- **Min. Expected Regret** : le lift perdu si la variante qui semble meilleure s'avère être le mauvais choix, pondéré par la probabilité que ce soit le cas. Datadog l'affiche sous forme de pourcentage de la valeur témoin.
+- **EVSI** : la valeur attendue de l'information d'échantillonnage, exprimée en pourcentage de la valeur du groupe témoin. L'EVSI quantifie la diminution du regret attendu minimal si l'expérience se poursuivait avec son trafic récent. Si l'EVSI est faible par rapport au regret attendu minimal, la collecte de données supplémentaires devrait apporter peu de valeur. L'infobulle de l'en-tête de colonne indique la période et le trafic supposés par Datadog.
+
+Un tiret (—) signifie qu'une statistique n'est pas disponible. Pour l'EVSI, survolez le tiret pour en connaître la raison.
+
+## Résultats du holdout {#holdout-results}
+
+Pour un [holdout][10], la fiche d'évaluation compare le groupe ayant bénéficié des changements déployés au groupe témoin. Les résultats préliminaires donnent une première indication pendant le déploiement des changements. L'analyse principale mesure l'effet combiné pendant la phase d'analyse. Voir [Interpréter les résultats][11].
+
 ## Explorer les résultats {#exploring-results}
 
 Depuis la scorecard des métriques, survolez le nom d'une métrique pour afficher les options d'exploration. Les options disponibles dépendent de la source de données de votre métrique.
@@ -122,3 +144,9 @@ Pour les métriques basées sur des données [RUM][4] ou [Product Analytics][5],
 [7]: /fr/experiments/global_lift/
 [8]: /fr/experiments/statistics/multiple_testing_correction
 [9]: /fr/experiments/diagnostics/
+[10]: /fr/experiments/holdouts/
+[11]: /fr/experiments/holdouts/#interpret-results
+[12]: /fr/experiments/statistics/lift_and_interval_calculations/
+[13]: /fr/experiments/statistics/expected_regret_and_evsi/
+[14]: /fr/experiments/statistics/lift_and_interval_calculations/#calculate-the-interval
+[15]: /fr/experiments/statistics/cuped/

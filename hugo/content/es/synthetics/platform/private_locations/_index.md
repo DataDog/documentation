@@ -935,7 +935,7 @@ docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json
 
 Para fijar un trabajador a una compilación semanal específica, utilice la etiqueta fechada e inmutable publicada junto a ella, en el formato `X.Y.Z-rc.N-browsers-YYYY-MM-DD`. Una imagen compatible con FIPS se publica como `datadog/synthetics-private-location-worker-fips:browsers-latest`.
 
-**Nota**: Los navegadores `browsers-latest` no están validados en ubicaciones administradas por Datadog, por lo que las pruebas de navegador pueden ser menos estables que en la imagen `latest`. El canal intercambia estabilidad por las versiones de navegador más recientes.
+**Nota**: La `browsers-latest` imagen sacrifica estabilidad para ofrecer las versiones más recientes de los navegadores. Estos navegadores no están validados en ubicaciones administradas por Datadog, por lo que las pruebas de navegador pueden ser menos estables que aquellas que utilizan la imagen más reciente.
 
 ### Pruebe su punto de conexión interno {#test-your-internal-endpoint}
 

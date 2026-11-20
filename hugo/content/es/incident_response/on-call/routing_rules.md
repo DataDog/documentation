@@ -12,6 +12,8 @@ title: Reglas de enrutamiento
 
 Las reglas de enrutamiento determinan cómo se dirigen las alertas dentro de su equipo. En lugar de enviar todas las alertas a través de una única política de escalamiento, puede crear reglas que enruten las alertas según metadatos como prioridad, etiquetas, estado del seguimiento o la hora del día.
 
+Las reglas de enrutamiento se configuran por Team. No existen reglas de enrutamiento para toda la organización, por lo que cada Team define las suyas.
+
 ## Crear una regla de enrutamiento {#create-a-routing-rule}
 
 Las reglas se evalúan de arriba hacia abajo. La última regla debe ser una alternativa que enrute todas las alertas no coincidentes a una política de escalamiento.
@@ -35,9 +37,9 @@ Para crear una regla de enrutamiento:
 
 1. En **Set targets**, haga clic en **Add** y seleccione un tipo de destino. El tipo de destino determina qué sucede cuando la regla coincide:
    - **Page escalation policy**: Seleccione una [política de escalamiento][3] y establezca la urgencia en `DYNAMIC` (según el estado de la alerta), `HIGH` o `LOW`.
-   - **Send Slack message** (Preview): Seleccione un espacio de trabajo y un canal de Slack.
-   - **Send Microsoft Teams message** (Preview): Seleccione un tenant, un equipo y un canal de Teams.
-   - **Run Workflow** (Preview): Seleccione un [flujo de trabajo][4] existente.
+   - **Send Slack message**: Seleccione un espacio de trabajo y un canal de Slack.
+   - **Send Microsoft Teams message**: Seleccione un tenant de Teams, un equipo y un canal.
+   - **Run Workflow**: Seleccione un [Workflow][4] existente.
    - **Sync with a ServiceNow Incident** (Preview): Seleccione una conexión de ServiceNow. Datadog crea un incidente de ServiceNow para cada Page y lo mantiene sincronizado. Consulte [Integrar ServiceNow con Datadog On-Call][5].
 
 1. Si seleccionó **Page escalation policy**, configure opcionalmente el [tiempo de espera de confirmación](#acknowledgment-timeout):
@@ -123,7 +125,7 @@ Cuando se confirma o resuelve un Page en Slack o Teams, Datadog actualiza la not
   - Defina [horario de soporte](#support-hours) en una condición de enrutamiento para retener las notificaciones de la política de escalamiento hasta la siguiente ventana activa.
 
 - **Utilice `DYNAMIC` urgencia para establecer la urgencia según el estado de la alerta de seguimiento:** 
-  - Si la alerta de seguimiento tiene el estado `warn`, establezca la urgencia en `LOW`.
+  - Si la alerta del monitor tiene el estado `warn`, establezca la urgencia en `LOW`.
   - Si la alerta de seguimiento tiene el estado `error`, establezca la urgencia en `HIGH`.
 
   La urgencia determina cómo se notifica a los responsables según sus preferencias de notificación.

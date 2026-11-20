@@ -15,11 +15,11 @@ La función `autosmooth()` aplica un promedio móvil con un tramo seleccionado a
 
 {{< img src="dashboards/functions/smoothing/autosmooth_illustration.png" alt="ilustración de autosmooth" style="width:80%;">}}
 
-Cuando se utiliza en una consulta `group by`, como `avg by`, se aplica el mismo tramo a todas las series temporales. Si se utiliza en varias métricas en el mismo gráfico, se pueden seleccionar diferentes tramos para suavizar de forma óptima cada una de las series temporales de las métricas.
+Cuando se utiliza en una consulta `group by`, como `avg by`, se aplica el mismo tramo a todas las series temporales. Si se utiliza en varias métricas en el mismo gráfico, se pueden seleccionar diferentes tramos para suavizar de manera óptima cada una de las series temporales de las métricas.
 
 El algoritmo está inspirado en el [algoritmo ASAP][1]; puede leer más al respecto en esta [publicación de blog][2].
 
-La función `autosmooth()` no se puede utilizar en monitores. Dado que el tramo se elige de forma dinámica, el resultado de aplicar la función podría cambiar de un minuto a otro, lo que dificultaría el establecimiento de umbrales y podría provocar alertas intermitentes.
+La función `autosmooth()` no se puede utilizar en monitores. Dado que el tramo se elige de forma dinámica, el resultado de aplicar la función podría cambiar de un minuto a otro, lo que dificulta el establecimiento de umbrales y provoca la oscilación de las alertas.
 
 ## Promedio móvil ponderado exponencialmente {#exponentially-weighted-moving-average}
 
@@ -27,13 +27,13 @@ La función `autosmooth()` no se puede utilizar en monitores. Dado que el tramo 
 
 | Función   | Descripción                                                         | Ejemplo                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_1()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 1. | `ewma_1(<METRIC_NAME>{*})` |
+| `ewma_1()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 1. | `ewma_1(<METRIC_NAME>{*})` |
 
 ### Ewma 3 {#ewma-3}
 
 | Función   | Descripción                                                         | Ejemplo                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_3()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 3. | `ewma_3(<METRIC_NAME>{*})` |
+| `ewma_3()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 3. | `ewma_3(<METRIC_NAME>{*})` |
 
 Nota: El valor del tramo es el doble de la edad promedio ponderada de la serie. Por lo tanto, `ewma_3()` es comparable a un promedio móvil de 3 días.
 
@@ -47,7 +47,7 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 comenzando desde 10 hasta que
 
 | Función   | Descripción                                                         | Ejemplo                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_5()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 5. | `ewma_5(<METRIC_NAME>{*})` |
+| `ewma_5()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 5. | `ewma_5(<METRIC_NAME>{*})` |
 
 Nota: El valor del tramo es el doble de la edad promedio ponderada de la serie. Por lo tanto, `ewma_5()` es comparable a un promedio móvil de 5 días.
 
@@ -61,7 +61,7 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 comenzando desde 10 hasta que
 
 | Función   | Descripción                                                         | Ejemplo                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_7()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 7. | `ewma_7(<METRIC_NAME>{*})` |
+| `ewma_7()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 7. | `ewma_7(<METRIC_NAME>{*})` |
 
 Nota: El valor del tramo es el doble de la edad promedio ponderada de la serie. Por lo tanto, `ewma_7()` es comparable a un promedio móvil de 7 días.
 
@@ -69,7 +69,7 @@ Nota: El valor del tramo es el doble de la edad promedio ponderada de la serie. 
 
 | Función    | Descripción                                                          | Ejemplo                     |
 | :----       | :-------                                                             | :---------                  |
-| `ewma_10()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 10. | `ewma_10(<METRIC_NAME>{*})` |
+| `ewma_10()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 10. | `ewma_10(<METRIC_NAME>{*})` |
 
 Nota: El valor del tramo es el doble de la edad promedio ponderada de la serie. Por lo tanto, `ewma_10()` es comparable a un promedio móvil de 10 días.
 
@@ -83,8 +83,8 @@ Si una métrica `10 + x%10 {*}` se incrementa en 1 comenzando desde 10 hasta que
 
 | Función    | Descripción | Ejemplo |
 | :----       | :-------    | :------ |
-| `ewma()`    | Calcula el promedio móvil ponderado exponencialmente en el tramo predeterminado de 20. | `ewma(<METRIC_NAME>{*})` |
-| `ewma_20()` | Calcula el promedio móvil ponderado exponencialmente en un tramo de 20. | `ewma_20(<METRIC_NAME>{*})` |
+| `ewma()`    | Calcule el promedio móvil ponderado exponencialmente en el tramo predeterminado de 20. | `ewma(<METRIC_NAME>{*})` |
+| `ewma_20()` | Calcule el promedio móvil ponderado exponencialmente en un tramo de 20. | `ewma_20(<METRIC_NAME>{*})` |
 
 `ewma()` y `ewma_20()` funcionan de manera idéntica.
 
@@ -140,10 +140,10 @@ Nota: El valor del tramo es el número de puntos de datos. Por lo tanto, `median
 | :----          | :-------                                                              | :---------                     |
 | `weighted()`   | Elimina automáticamente el ruido mientras preserva el peso adecuado de las etiquetas transitorias. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
 
-La función `weighted()` toma en cuenta la corta vida útil de los valores de etiqueta transitorios y cambiantes al sumar métricas de tipo gauge en el espacio para evitar picos artificiales. 
+La función `weighted()` tiene en cuenta la corta vida útil de los valores de etiqueta transitorios y cambiantes al sumar métricas de gauge en el espacio para evitar picos artificiales. 
 
-Esta función se añade automáticamente a las consultas sobre métricas de tipo gauge si se cumplen ambas condiciones siguientes: 
-1. La métrica tiene un intervalo de envío regular y consistente que también se especifica en Metrics Summary
+Esta función se añade automáticamente a las consultas sobre métricas de gauge si se cumplen ambas condiciones siguientes: 
+1. La métrica tiene un intervalo de envío regular y consistente que también se especifica en Metrics Catalog
 2. La métrica se agrega con `SUM by` (por ejemplo, `sum: mygaugemetric{*}`)
 
 Aquí hay un gráfico de ejemplo de la consulta original con picos inexactos (en morado) y la consulta con el cálculo ponderado correctamente (en verde): 
@@ -164,7 +164,7 @@ Para obtener más información sobre el modificador weighted(), consulte [¿Cóm
     {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calcule una derivada personalizada sobre su métrica.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/regression" >}}Regression: Aplique alguna función de aprendizaje automático a su métrica.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Controle la cantidad de puntos sin procesar utilizados en su métrica. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Desplace su punto de datos de métrica a lo largo de la línea de tiempo. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Desplace el punto de datos de su métrica a lo largo de la línea de tiempo. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://github.com/stanford-futuredata/ASAP
