@@ -53,7 +53,7 @@ The L1 to L7 Map has no Agent version requirement of its own. It uses data that 
 | Product | Required | What it adds to the map |
 |---|---|---|
 | [Cloud Network Monitoring][1] | Yes | The connections between resources, and where each resource runs (its composition stack). Without CNM data, the map shows a partial view that omits the composition stack and observed traffic. Network Path data appears where it is available. |
-| [APM][2] | No | The service layer. Without APM, start your investigation from a host, pod, or container. |
+| [APM][2] | No | The service layer. Without APM, the map has no service layer. |
 | [Container Monitoring][3] | No | The container layer. Workloads that do not run in containers do not have this layer. |
 | [Kubernetes][4] | No | The pod layer. Workloads that do not run on Kubernetes do not have this layer. |
 | [Network Path][5] | No | The hop-by-hop network path between a source and a destination, with end-to-end latency, probe loss, and unanswered test runs. |
@@ -139,7 +139,7 @@ Data from other products does not affect map status. For example, APM errors, Ku
 
 The map shows only the signals that are available for each resource or connection. It cannot detect issues with a missing signal, such as when Network Path does not test a connection. The hover summary for a resource or connection shows which signal determines its status.
 
-Map status reflects network signals only, so it is not a complete assessment of a resource's health. A Healthy resource can have issues that network signals do not capture. A red or orange resource is a starting point for an investigation, not proof of the cause. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
+A Healthy resource can have issues that network signals do not capture. A red or orange resource is a starting point for an investigation, not proof of the cause. To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
 
 ## Navigate the L1 to L7 Map
 
@@ -173,7 +173,7 @@ On the L1 to L7 Map page, select a view:
 After the map loads, you can change what it shows:
 
 - To add a destination, click **Add destination** next to the search field at the top of the map, and select a destination. The map switches to Connection View.
-- To remove the source or destination, click the **X** at the end of its search field. When you remove the destination, the map returns to Resource View for the source. When you remove the source, the destination becomes the explored resource.
+- To remove the source or destination, click the **X** at the end of its search field. When you remove the destination, the map returns to Resource View for the source. When you remove the source, the destination becomes the explored resource. If the destination is an endpoint, you cannot remove the source.
 - To explore a different resource or connection, use **Explore** or **Explore connection**. For details, see the [Hover over resources and connections](#hover-over-resources-and-connections) section.
 - To change the time frame, use the time picker.
 - To zoom in on a section of the map, or to fit the map to the screen, use the zoom controls.
@@ -208,8 +208,6 @@ The summary for a resource shows its type, status, and available metrics. From t
 
 - Click **Filter** to narrow the map to that resource, called the _filtered resource_, and its related resources, such as the pod and host that it runs on. The explored resource stays at the center of the map, and the details pane shows the filtered resource. To clear the filter, click the **X** next to **Filtered to** at the top of the map.
 - Click **Explore** to make that resource the explored resource. The map redraws around it. Endpoints do not have this action.
-
-  Use **Filter** to focus on one resource without losing your place, and **Explore** to re-center the map on it.
 - For an upstream resource, click **Add as source**. For a downstream resource, click **Add as destination**. The map switches to Connection View for the connection between that resource and the explored resource.
 
 {{< img src="network_performance_monitoring/l1_l7_map/resource-hover-summary.png" alt="A hover summary for a container, showing its status, CPU, memory, and packet drops, with Filter and Explore buttons" >}}
