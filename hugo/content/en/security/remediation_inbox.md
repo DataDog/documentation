@@ -162,7 +162,7 @@ From the side panel, click **Remediate with AI** and choose one of the following
 
 To let your coding agent update the remediation case as it works, set up the [Datadog MCP Server][15] with the `cases` toolset. The toolset is not enabled by default, so add `cases` to the `toolsets` parameter.
 
-To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the findings are resolved before you commit.
+To check the fix from your coding agent, set up the [Code Security MCP Server][7]. The server rescans your local code and confirms the findings are resolved before you commit.
 
 {{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options." width="80%">}}
 
