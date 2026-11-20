@@ -11,6 +11,9 @@ further_reading:
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
   text: "Datadog Extension"
+- link: "/opentelemetry/integrations/opamp_extension/"
+  tag: "Documentation"
+  text: "OpAMP Extension"
 - link: "/opentelemetry/setup/agent/"
   tag: "Documentation"
   text: "Send OpenTelemetry Data Through the Datadog Agent"
@@ -33,13 +36,13 @@ Remote flare collection from the Agent's Collector is not supported on US1-FED o
 
 For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. For the Agent's Collector, you can [configure](#configure-the-agents-collector), [send flares](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) it from Fleet Automation. These capabilities use [Remote Configuration][2], so they aren't available for the DDOT Collector or upstream Collectors.
 
-The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3].
+The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
 
 ## Prerequisites
 
 - **Agent's Collector**: No setup is needed. The configuration view is enabled by default.
 - **DDOT Collector**: The Datadog Extension is enabled automatically. Don't configure it manually.
-- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] to your Collector configuration.
+- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] (recommended) or the [OpAMP extension][15] to your Collector configuration. The OpAMP extension doesn't support the Topology view.
 
 ## Examine an OpenTelemetry Collector
 
@@ -48,7 +51,7 @@ In [Fleet View][1], filter for OTel Collectors and select a Collector to open it
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
-- Pipeline and topology views of the Collector
+- Pipeline and topology views of the Collector (the OpAMP extension doesn't support the Topology view)
 - [Audit Trail events][6], such as configuration changes, upgrades, and flares (Agent's Collector only)
 
 To check the health of your Collectors, see [Monitor Agent and OTel Collector health][7]. Health signals aren't available for the Agent's Collector.
@@ -77,7 +80,7 @@ The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a sin
 
 ### Topology view
 
-<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology-preview">Configure gateway topology</a>.</div>
+<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. The OpAMP extension doesn't support the Topology view. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology-preview">Configure gateway topology</a>.</div>
 
 The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
 
@@ -143,3 +146,4 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 [12]: /agent/fleet_automation/configure_agents/#edit-the-configuration-of-a-single-agent-or-its-collector
 [13]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [14]: /agent/fleet_automation/upgrade_agents/
+[15]: /opentelemetry/integrations/opamp_extension/
