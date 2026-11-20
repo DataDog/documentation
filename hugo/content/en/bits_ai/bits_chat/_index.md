@@ -74,6 +74,30 @@ Chats are private by default. To share one, click {{< ui >}}...{{< /ui >}} > {{<
 
 Shared links expire automatically (see the expiration date in the {{< ui >}}Share Chat{{< /ui >}} dialog). To stop sharing, open {{< ui >}}Share Chat{{< /ui >}} and select {{< ui >}}Private Chat{{< /ui >}}.
 
+## Turbo mode
+
+<!-- TODO(reviewer): confirm with the Bits Chat team that Turbo mode is available to all Bits Chat users, that Turbo turns are faster than standard turns, and that they consume more AI Credits per turn. -->
+<!-- TODO(reviewer): confirm the exact label of the Turbo option and its hint, where the option appears in Bits Chat, and whether it applies to a single message or to the whole conversation. Then add a step that shows how to turn it on. -->
+
+Turbo mode makes Bits Chat respond faster, but each Turbo turn consumes more AI Credits than a standard turn. A turn is one message you send and the response Bits Chat returns. Bits Chat shows a {{< ui >}}costs more{{< /ui >}} hint next to the {{< ui >}}Turbo{{< /ui >}} option.
+
+<!-- TODO(reviewer): confirm with the Bits Chat team whether to publish an average AI Credit multiplier and an average speedup for Turbo turns. The estimate is in tracker topic #10. Add numbers only after they are confirmed for public use. -->
+<!-- TODO(reviewer): confirm whether Turbo mode works only with some models (see tracker topic #10). If it does, add a sentence such as "Turbo mode is available only for models that support it," and describe what Bits Chat shows when the selected model doesn't support it. -->
+<!-- TODO(reviewer): confirm the factors that determine how many AI Credits a turn consumes. They aren't documented elsewhere. -->
+
+In both modes, the AI Credits a turn consumes depend on the model, the conversation length, and the number of tool calls Bits Chat makes.
+
+### Manage spend
+
+<!-- TODO(reviewer): confirm that Turbo mode has no permission or organization setting of its own, that Turbo usage is billed as Bits Chat usage, that it counts toward AI Credit limits, and that it's included in the datadog.estimated_usage.bits_chat.ai_credits metric. Also confirm whether the metric has a tag that separates Turbo usage from standard usage; if it does, document it in the Track usage bullet. -->
+
+Turbo mode doesn't have its own permission or organization setting. Turbo turns are billed in [AI Credits][5] as Bits Chat usage, so you manage Turbo spend the same way as other Bits Chat spend:
+
+- **Cap usage**: Turbo turns count toward the organization, role, and per-user [AI Credit limits][6]. When users reach a limit, they can't use Bits Chat, in either mode, until the limit resets or an admin raises it.
+- **Track usage**: Graph the `datadog.estimated_usage.bits_chat.ai_credits` metric grouped by `user_handle` to see Bits Chat AI Credit usage per user. To get notified before users reach a limit, use this metric in a [metric monitor][7].
+
+The [**Bits Chat Access**](#access-to-bits-chat) permission controls all of Bits Chat. Removing it turns off Bits Chat for that role, not only Turbo mode.
+
 ## Reports
 
 The Bits Chat Reports page provides visibility into how your organization uses Bits Chat. Go to [**Bits AI** > **Chat** > **Reports**][4] to view:
@@ -91,3 +115,6 @@ Use these insights to understand adoption patterns, identify power users for bes
 [2]: /account_management/rbac/?tab=datadogapplication#update-a-role
 [3]: https://app.datadoghq.com/ask
 [4]: https://app.datadoghq.com/ask/usage
+[5]: /account_management/billing/ai_credits/
+[6]: /account_management/billing/ai_credit_limits/
+[7]: /monitors/types/metric/

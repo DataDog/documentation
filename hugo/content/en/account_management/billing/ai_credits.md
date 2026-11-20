@@ -68,6 +68,9 @@ Usage tracking and product access are managed in [**Plan & Usage > AI Credits**]
 
 To cap AI Credit consumption at the organization, role, per-user, or service account level, see [AI Credit Limits][8].
 
+<!-- TODO(reviewer): confirm together with the Turbo mode section on the Bits Chat page. -->
+Bits Chat [Turbo mode][12] turns consume more AI Credits than standard turns and count toward the same limits.
+
 ### Disable specific products
 
 All AI Credits products are enabled by default with the Datadog Standard Role. To disable specific products, remove the following permissions per user or role:
@@ -124,3 +127,4 @@ AI Credits are available to all Datadog customers except:
 [9]: /reference_tables/
 [10]: https://app.datadoghq.com/bits-ai/ai-credits-management
 [11]: /database_monitoring/bits_database_optimization/
+[12]: /bits_ai/bits_chat/#turbo-mode
