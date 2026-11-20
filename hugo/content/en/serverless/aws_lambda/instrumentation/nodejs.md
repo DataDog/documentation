@@ -27,6 +27,8 @@ aliases:
 
 ## Setup
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
@@ -399,10 +401,6 @@ To configure Datadog using SST v3, follow these steps:
 {{% svl-tracing-env %}}
 
 <div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
-
-## Memory requirements
-
-{{% svl-lambda-memory %}}
 
 ## FIPS compliance
 

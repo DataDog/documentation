@@ -77,7 +77,7 @@ You can use logical operators on your tags:
 ## Skipped functions
 Functions that have pre-existing Datadog layers or environment variables are considered manually instrumented. Manually instrumented functions are marked `manual` and skipped by the remote instrumenter to ensure there are no layer conflicts.
 
-Datadog recommends that you only instrument Lambda functions with a memory size of at least 256 MB. To skip instrumenting smaller Lambdas, make sure they are not selected. See [Memory requirements][7].
+Datadog recommends a memory size of at least 256 MB for instrumented Lambda functions. The remote instrumenter does not warn about or skip smaller functions. To skip them, don't select them. For more information, see [Instrument AWS Lambda applications: Memory requirements][7].
 
 ## Verification
 

@@ -25,6 +25,8 @@ aliases:
 
 ## Setup
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
@@ -482,10 +484,6 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 {{< /tabs >}}
 
 {{% svl-tracing-env %}}
-
-## Memory requirements
-
-{{% svl-lambda-memory %}}
 
 ## FIPS compliance
 

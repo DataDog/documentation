@@ -26,6 +26,8 @@ If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Dat
 
 ## Setup
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Java AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
@@ -308,10 +310,6 @@ module "lambda-datadog" {
 {{< /tabs >}}
 
 {{% svl-tracing-env %}}
-
-## Memory requirements
-
-{{% svl-lambda-memory %}}
 
 ## FIPS compliance
 

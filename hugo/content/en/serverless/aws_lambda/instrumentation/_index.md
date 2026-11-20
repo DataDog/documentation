@@ -84,21 +84,25 @@ Help me monitor my AWS Lambda functions with Datadog.
 
 ## Memory requirements
 
-The Datadog Lambda extension and the Datadog SDK layer run inside your function, so they add to the memory used by every invocation. For example, on Python the extension and tracer together use about 70 MB. Datadog does not change your function's memory size or timeout, so a function with little headroom, such as one using the AWS default of 128 MB, can run out of memory or time out after it is instrumented.
+The Datadog Lambda Extension and the Datadog SDK run inside your function, so they add to the memory that every invocation uses. The overhead varies by runtime. For example, on Python, the extension and the SDK together use about 70 MB. Datadog does not change your function's memory size or timeout. A function with little headroom, such as one that uses the AWS default of 128 MB, can run out of memory or time out after you instrument it.
 
-Datadog recommends a memory size of **at least 256 MB** for instrumented functions. Before you instrument a function below 256 MB, raise its memory size and check its memory use and duration after instrumentation.
+Datadog recommends a memory size of at least 256 MB for instrumented functions. If a function has less than 256 MB of memory, increase its memory size before you instrument it. After you instrument the function, check its memory use and duration.
 
-The following installation tools instrument functions with less than 256 MB of memory, but show a warning. To silence the warning after you confirm that a function has enough headroom, use the option for your tool:
+The following installation tools show a warning when they instrument a function that has less than 256 MB of memory. The tools still instrument the function. To silence the warning after you confirm that a function has enough headroom, use the option for your tool:
 
-| Tool | Option to silence the warning |
-|---|---|
-| [Datadog CLI][10] (`datadog-ci lambda instrument`) | `--suppress-low-memory-warning` flag |
-| [Serverless Framework plugin][11] | `suppressLowMemoryWarning: true` under `custom.datadog` |
-| [AWS CDK construct][12] (`DatadogLambda`) | `suppressLowMemoryWarning: true` |
-| [CloudFormation macro][13] | `suppressLowMemoryWarning: true` parameter |
-| [Terraform module][14] (`terraform-aws-lambda-datadog`) | `suppress_low_memory_warning = true` |
+| Tool | Option to silence the warning | Default |
+|---|---|---|
+| [Datadog CLI][10] (`datadog-ci lambda instrument`) | `--suppress-low-memory-warning` flag, or `"suppressLowMemoryWarning": true` in the `lambda` section of the `datadog-ci.json` configuration file | `false` |
+| [Serverless Framework plugin][11] | `suppressLowMemoryWarning: true` setting under `custom.datadog` | `false` |
+| [AWS CDK construct][12] (`DatadogLambda`) | `suppressLowMemoryWarning: true` property (`suppress_low_memory_warning=True` in Python) | `false` |
+| [CloudFormation macro][13] | `suppressLowMemoryWarning: true` parameter, or the `DD_SUPPRESS_LOW_MEMORY_WARNING=true` environment variable on the macro function | `false` |
+| [Terraform module][14] (`terraform-aws-lambda-datadog`) | `suppress_low_memory_warning = true` variable | `false` |
 
-The Terraform module reports the warning as a Terraform check warning. The CloudFormation macro cannot return warnings to the deployment, so it writes the warning to the macro function's CloudWatch logs. For the AWS CDK construct, the CloudFormation macro, and the Terraform module, a function that does not set a memory size uses the AWS default of 128 MB and receives the warning. The Serverless Framework uses a default memory size of 1024 MB.
+The Terraform module reports the warning as a Terraform check warning. The CloudFormation macro cannot return warnings to the deployment, so it writes the warning to the macro function's CloudWatch logs.
+
+If a function does not set a memory size, the AWS CDK construct, the CloudFormation macro, and the Terraform module use the AWS default of 128 MB and show the warning. The Serverless Framework uses a default memory size of 1,024 MB, so the Serverless Framework plugin does not show the warning for these functions.
+
+[Remote instrumentation][5] does not warn about or skip functions with less than 256 MB of memory. To leave these functions uninstrumented, don't select them.
 
 ## Advanced configurations
 
@@ -121,7 +125,7 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
 [9]: /mcp_server/tools/#serverless_onboarding
-[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-lambda
+[10]: /serverless/libraries_integrations/cli/
 [11]: /serverless/libraries_integrations/plugin/
 [12]: /serverless/libraries_integrations/cdk/
 [13]: /serverless/libraries_integrations/macro/
