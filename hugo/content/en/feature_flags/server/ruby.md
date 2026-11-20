@@ -318,6 +318,21 @@ end
 
 Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][12] for minimum SDK requirements and other details.
 
+## Configure evaluation telemetry and exposures
+
+These settings require `datadog` version `<RUBY_RELEASE_VERSION>` or later. Each is enabled by default.
+
+| Environment variable | Default | When set to `false` |
+| --- | --- | --- |
+| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `Datadog::OpenFeature::ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two settings are independent. Neither changes flag values or assignment.
+
+The environment variables apply to every provider in the process. To configure a single provider, pass `<RUBY_PROVIDER_OPTION_PLACEHOLDER>` to `Datadog::OpenFeature::Provider.new`. A provider option overrides the environment variable. The provider reads both when it is created.
+
+`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `Datadog::OpenFeature::ExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+
 ## Evaluation events and privacy
 
 Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][13] for the data collected, opt-out scope, and delivery requirements.

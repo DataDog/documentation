@@ -443,6 +443,30 @@ The `Provider` instance is shared globally. Client names are for organizational 
 
 Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-java-agent` and `dd-openfeature` 1.68.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][20].
 
+## Configure evaluation telemetry and exposures
+
+These settings require `dd-openfeature` version `<JAVA_RELEASE_VERSION>` or later. Each is enabled by default.
+
+| Environment variable | Default | When set to `false` |
+| --- | --- | --- |
+| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two settings are independent. Neither changes flag values or assignment.
+
+The environment variables apply to every provider in the process. To configure a single provider, use `new Provider.Options().evaluationTelemetryEnabled(false)` and `.exposuresEnabled(false)`. A provider option overrides the environment variable, including when the option is `true`. The provider reads both when it is created.
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI.getInstance().setProviderAndWait(new Provider(new Provider.Options()
+    .evaluationTelemetryEnabled(false)
+    .exposuresEnabled(false)));
+```
+
+`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `ExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+
 ## Best practices
 
 ### Initialize early

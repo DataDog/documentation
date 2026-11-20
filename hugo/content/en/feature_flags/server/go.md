@@ -359,6 +359,21 @@ See [Server-Side Evaluation Events and Privacy][9] for targeting-key hashing, co
 
 Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-trace-go` 2.12.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][10].
 
+## Configure evaluation telemetry and exposures
+
+These settings require `dd-trace-go/v2` version `<GO_RELEASE_VERSION>` or later. Each is enabled by default.
+
+| Environment variable | Default | When set to `false` |
+| --- | --- | --- |
+| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ddopenfeature.NewExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two settings are independent. Neither changes flag values or assignment.
+
+The environment variables apply to every provider in the process. To configure a single provider, set `<GO_PROVIDER_OPTION_PLACEHOLDER>` in `ProviderConfig`. A provider option overrides the environment variable. The provider reads both when it is created.
+
+`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `ddopenfeature.NewExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
