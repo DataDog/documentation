@@ -19,6 +19,9 @@ further_reading:
 - link: "/actions/agents/"
   tag: "Documentation"
   text: "Bits Agent Builder"
+- link: "/bits_ai/bits_remediation/"
+  tag: "Documentation"
+  text: "Bits Remediation"
 ---
 
 ## Overview
@@ -38,6 +41,7 @@ The following products consume AI Credits:
 | [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
 | [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
 | [Bits Database Optimization][11] | Review and implement database query optimizations identified by Bits AI. |
+| [Bits Remediation][] | Fix issues directly from Datadog with automated remediation actions, governed by guardrails. |
 
 ## Pricing
 
@@ -124,3 +128,4 @@ AI Credits are available to all Datadog customers except:
 [9]: /reference_tables/
 [10]: https://app.datadoghq.com/bits-ai/ai-credits-management
 [11]: /database_monitoring/bits_database_optimization/
+[12]: /bits_ai/bits_remediation/
