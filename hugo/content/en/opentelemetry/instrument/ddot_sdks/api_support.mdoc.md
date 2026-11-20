@@ -192,10 +192,10 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 {% if includes($prog_lang, ["ruby", "php", "rust"]) %}
 - **An OTLP-compatible destination**: You must have a destination (Datadog Agent or OpenTelemetry Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 {% /if %}
-{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "java"]) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
 - **Runtime metrics**: DDOT SDKs export runtime metrics over OTLP for supported languages and versions. See [Export runtime metrics over OTLP][504].
 {% /if %}
-{% if equals($prog_lang, "ruby") %}
+{% if includes($prog_lang, ["python", "ruby"]) %}
 - **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 {% /if %}
 
