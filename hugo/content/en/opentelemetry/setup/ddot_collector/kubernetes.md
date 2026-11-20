@@ -838,11 +838,11 @@ Some Datadog features need the Datadog Agent alongside the DDOT Collector. For w
 
 The DDOT Collector already collects some of the data the Datadog Agent can collect, and it uses host ports on every node. Before you deploy the Datadog Agent, check these settings in the `DatadogAgent` resource:
 
-- **Container logs**: If the Collector collects container logs, as the example configurations do, leave container log collection off in the Datadog Agent. If both collect them, Datadog receives each container log twice, and you pay for both copies. To collect container logs with the Datadog Agent instead, remove the `filelog` receiver (Operator) or turn off the `logsCollection` preset (Helm).
+- **Container logs**: If the Collector collects container logs, as the example configurations do, leave container log collection off in the Datadog Agent. If both collect them, Datadog receives each container log twice, and you pay for both copies. To collect container logs with the Datadog Agent instead, remove the `filelog` receiver (OpenTelemetry Operator) or turn off the `logsCollection` preset (Helm).
 - **OTLP ports**: Don't turn on the Datadog Agent's OTLP endpoint, or the Agent's Collector, on host ports `4317` or `4318`. The DDOT Collector uses those host ports on every node. Kubernetes can't schedule two pods that use the same host port on one node, so the Datadog Agent pod stays `Pending`.
 - **Cluster name**: Set `spec.global.clusterName` to the same `<CLUSTER_NAME>` you use for the Collector. When a cluster name is set, the Datadog Agent reports `<NODE_NAME>-<CLUSTER_NAME>` as a host alias for the node. That's the same host name the Collector uses.
 
-By default, the Datadog Operator Helm chart watches `DatadogAgent` resources only in the namespace where the Operator is installed (`watchNamespaces: []`). You can create the `DatadogAgent` resource in a different namespace, such as to keep it separate from the `OpenTelemetryCollector` resource. If you do, set `watchNamespaces` to list both namespaces. The list replaces the default, so include the Operator's own namespace:
+By default, the Datadog Operator Helm chart watches `DatadogAgent` resources only in the namespace where the Datadog Operator is installed (`watchNamespaces: []`). You can create the `DatadogAgent` resource in a different namespace, such as to keep it separate from the `OpenTelemetryCollector` resource. If you do, set `watchNamespaces` to list both namespaces. The list replaces the default, so include the Datadog Operator's own namespace:
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator \
@@ -851,7 +851,7 @@ helm upgrade datadog-operator datadog/datadog-operator \
   --set 'watchNamespaces={<OPERATOR_NAMESPACE>,<DATADOG_AGENT_NAMESPACE>}'
 ```
 
-If the Operator doesn't watch the namespace where you create the `DatadogAgent` resource, the Operator ignores the resource.
+If the Datadog Operator doesn't watch the namespace where you create the `DatadogAgent` resource, it ignores the resource.
 
 ## Troubleshooting
 
