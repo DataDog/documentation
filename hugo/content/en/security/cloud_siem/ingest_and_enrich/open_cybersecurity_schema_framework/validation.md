@@ -44,7 +44,7 @@ If the dashboard has no data, check the selected time range, whether the source 
 
 ### Investigate a failed source
 
-1. In the dashboard, set the `source` filter to a source with invalid logs or low field coverage.
+1. In the [OCSF Log Quality dashboard][3], set the `source` filter to a source with invalid logs or low field coverage.
 1. Use **Error Analysis** to find the most common error type. If detailed finding logs are enabled, inspect **Validation Error Log Patterns** or search Logs Explorer for `service:ocsf-runtime-validation` and the source. Finding logs include the validation message, type, OCSF attribute path, and a `log_url` link to the sampled original log.
 1. Open the original log and inspect its `ocsf` attributes. Compare the affected field with the OCSF schema for that log's class and version. The `log_url` link points to the original log, which must still be available and accessible to you.
 1. Correct an editable source mapping, such as a [custom OCSF processor][5], or review the source data and relevant [integration pipeline][4]. Then compare the source's results after a later validation run.
