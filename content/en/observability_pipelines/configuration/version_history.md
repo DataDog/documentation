@@ -1,6 +1,6 @@
 ---
 title: Pipeline Version History
-description: View the versions of a pipeline, compare changes between versions, and restore a previous version.
+description: View the versions of a pipeline and compare changes between versions.
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/update_existing_pipelines/"
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Each time you deploy changes to a pipeline, Observability Pipelines saves a new version of that pipeline. Use the **Version History** tab to see who changed a pipeline and when, review what changed between versions, and restore a previous version.
+Each time you deploy changes to a pipeline, Observability Pipelines saves a new version of that pipeline. Use the **Version History** tab to see who changed a pipeline and when, and review what changed between versions.
 
 ## View the version history of a pipeline
 
@@ -24,7 +24,7 @@ Each time you deploy changes to a pipeline, Observability Pipelines saves a new 
 1. Select the pipeline.
 1. Click the **Version History** tab.
 
-The left side of the page lists the versions of the pipeline, with the latest version at the top. Each version shows its version number, the date it was created, and the user or service account that created it.
+The left side of the page lists the versions of the pipeline, with the latest version at the top. Observability Pipelines keeps a maximum of 50 versions for each pipeline. Each version shows its version number, the date it was created, and the user or service account that created it.
 
 Select a version to see its pipeline graph. The header of the graph shows the version number, the user or service account that created it, and the date and time it was created.
 
@@ -75,16 +75,6 @@ For a modified component, the diff highlights the lines that changed.
 To compare the entire configuration of a version with the previous version, click **View Diff**. A side-by-side view of the pipeline's JSON configuration opens, with the previous version on the left and the selected version on the right. Changed lines are highlighted.
 
 {{< img src="observability_pipelines/version_history/view_diff.webp" alt="The View Diff window showing the JSON configuration of Version 2 compared with Version 1" style="width:100%;" >}}
-
-## Restore a previous version
-
-To restore a pipeline to a previous version:
-
-1. Navigate to [Observability Pipelines][1].
-1. Select the pipeline.
-1. Click the **Version History** tab.
-1. Select the version you want to restore.
-1. Click **Restore This Version**.
 
 ## Further reading
 
