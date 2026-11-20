@@ -68,7 +68,7 @@ Before you use the map, open [CNM][14] and check that traffic appears for the re
 The map shows two types of relationships between resources:
 
 - **Composition**: Where a resource runs. For example, a service runs on containers, the containers run in pods, and the pods run on hosts. Composition is not network traffic.
-- **Connections**: Network communication between resources. CNM shows the real traffic between resources, as the Datadog Agent observes it. Network Path shows the route that its tests take between hosts, hop by hop.
+- **Connections**: Network communication between resources. CNM shows the real traffic between resources, as the Datadog Agent observes it. Network Path shows the route that its tests take, hop by hop.
 
 The map shows composition as a vertical stack, called the _composition stack_, in the following order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. The map skips layers that do not apply to a resource.
 
@@ -271,11 +271,11 @@ The summary for a network path segment shows the signals of the whole path: **En
 
 From the summary, click **View connection in Network Path** to open the Network Path explorer, filtered to the hosts at the ends of the path. For services, containers, and pods, you can also click **Explore connection** to open Connection View for the hosts at the ends of the path.
 
+{{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
+
 #### Network path hop summaries
 
-The summary for a hop shows its IP address, hostname, AS, location, and latency. For a network device monitored by NDM, the summary also links to the device's details. Click the hop to open the device's side panel.
-
-{{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
+The summary for a hop shows its IP address, hostname, AS, location, and latency. For a hop that is a network device monitored by NDM, the summary also links to the device's details. Click the hop to open the device's side panel.
 
 ### Click items on the map
 
@@ -302,7 +302,7 @@ Use this workflow when a resource, such as a service, is slow or failing. It hel
 
 ### Find where a connection degrades
 
-Use this workflow when two resources cannot communicate, or communicate slowly. It helps you find the point on the path where a network signal degrades.
+Use this workflow when two resources cannot communicate, or communicate slowly. It helps you check the connection's network signals and the latency of each segment along the path.
 
 1. Open Connection View for the two resources. Select them on the L1 to L7 Map page, click **Add destination** while the source is the explored resource, or click **Explore connection** on the connection between them.
 1. Set the time frame to when the issue started.
@@ -344,7 +344,7 @@ Check that Network Path has results for the source and destination during the se
 
 ### A hop appears as an IP address instead of a device
 
-Check whether NDM monitors the device. If it does not, the hop appears as an IP address or external endpoint, with any available AS or location information. To open the device's side panel from the hop, [set up NDM][11] for the device.
+Check whether NDM monitors the device. If it does not, the hop appears as an IP address, with any available AS or location information. To open the device's side panel from the hop, [set up NDM][11] for the device.
 
 ### A status or metric is different in another product
 
