@@ -72,11 +72,11 @@ Default: `true`. Set to `false` to disable.
 
 ### Attach evaluations to RUM
 
-The Boolean options default to `true`. Set to `false` to disable. For Flutter OpenFeature, add the RUM hook explicitly.
+The Boolean options default to `true`. Set to `false` to disable. For Flutter OpenFeature, register the RUM hook explicitly.
 
 - **Web** (`@datadog/openfeature-browser`): `enableRumFeatureFlagTracking`
 - **Android** (`dd-sdk-android-flags`): `rumIntegrationEnabled`
-- **Flutter** (`datadog_flags_flutter`): Add `DatadogRumHook` to the OpenFeature client. Omit the hook to disable RUM association. The legacy plugin uses `rumIntegrationEnabled`. See [Dart and Flutter setup][4].
+- **Flutter** (`datadog_flags_flutter`): Register `DatadogRumHook` with the OpenFeature API. Omit the hook to disable RUM association. The legacy plugin uses `rumIntegrationEnabled`. See [Dart and Flutter setup][4].
 - **iOS** (`DatadogFlags`): `rumIntegrationEnabled`
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed

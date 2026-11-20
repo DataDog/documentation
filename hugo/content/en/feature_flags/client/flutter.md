@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Use the [OpenFeature Dart client SDK][2] to evaluate Datadog feature flags in Dart and Flutter applications. `datadog_flags` provides `DatadogOpenFeatureProvider`. The provider fetches precomputed assignments, evaluates flags locally, and sends exposure and evaluation telemetry to Datadog.
+Use the [OpenFeature Dart client SDK][2] to evaluate Datadog feature flags in Dart and Flutter applications. `datadog_flags` provides `DatadogProvider`. The provider fetches precomputed assignments, evaluates flags locally, and sends exposure and evaluation telemetry to Datadog.
 
-Flutter applications can use the provider directly. Add `DatadogRumHook` from `datadog_flags_flutter` to associate successful evaluations with the active RUM view.
+Flutter applications can use the provider directly. Register `DatadogRumHook` from `datadog_flags_flutter` to associate successful evaluations with the active RUM view.
 
 OpenFeature is the recommended application API. For existing applications, see [Migrate from the legacy API](#migrate-from-the-legacy-api).
 
@@ -78,18 +78,17 @@ await api.setEvaluationContextAndWait(
   ),
 );
 
-final provider = DatadogOpenFeatureProvider(
-  configuration: DatadogFlagsConfiguration(
-    initializationTimeout: const Duration(seconds: 2),
-    datadogConfig: const DatadogFlagsConfig(
-      clientToken: '<CLIENT_TOKEN>',
-      env: '<ENV_NAME>',
-      site: DatadogFlagsSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
-      service: '<SERVICE_NAME>',
-      version: '<APP_VERSION>',
-    ),
+final configuration = DatadogFlagsConfiguration(
+  initializationTimeout: const Duration(seconds: 2),
+  datadogConfig: const DatadogFlagsConfig(
+    clientToken: '<CLIENT_TOKEN>',
+    env: '<ENV_NAME>',
+    site: DatadogFlagsSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+    service: '<SERVICE_NAME>',
+    version: '<APP_VERSION>',
   ),
 );
+final provider = DatadogProvider.fromConfiguration(configuration);
 
 final client = api.getClient();
 client.addHandler(ProviderEventType.ready, (_) {
@@ -111,7 +110,7 @@ final enabled = client.getBooleanValue('checkout.enabled', false);
 
 ## Flutter-integrated setup
 
-Initialize `datadog_flutter_plugin` for RUM, then configure the OpenFeature provider. Add `DatadogRumHook` once to each OpenFeature client that sends evaluations to RUM.
+Initialize `datadog_flutter_plugin` for RUM, then configure the OpenFeature provider. Register `DatadogRumHook` once with the OpenFeature API so that it applies to every client.
 
 ```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
@@ -133,26 +132,25 @@ await DatadogSdk.instance.initialize(
 );
 
 final api = OpenFeatureAPI.instance;
-final client = api.getClient();
-client.addHooks([DatadogRumHook()]);
+api.addHooks([DatadogRumHook()]);
 
 await api.setEvaluationContextAndWait(
   EvaluationContext(targetingKey: 'user-123'),
 );
-final provider = DatadogOpenFeatureProvider(
-  configuration: DatadogFlagsConfiguration(
-    initializationTimeout: const Duration(seconds: 2),
-    datadogConfig: const DatadogFlagsConfig(
-      clientToken: '<CLIENT_TOKEN>',
-      env: '<ENV_NAME>',
-      site: DatadogFlagsSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
-      applicationId: '<RUM_APPLICATION_ID>',
-      service: '<SERVICE_NAME>',
-      version: '<APP_VERSION>',
-    ),
+final configuration = DatadogFlagsConfiguration(
+  initializationTimeout: const Duration(seconds: 2),
+  datadogConfig: const DatadogFlagsConfig(
+    clientToken: '<CLIENT_TOKEN>',
+    env: '<ENV_NAME>',
+    site: DatadogFlagsSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+    applicationId: '<RUM_APPLICATION_ID>',
+    service: '<SERVICE_NAME>',
+    version: '<APP_VERSION>',
   ),
 );
+final provider = DatadogProvider.fromConfiguration(configuration);
 
+final client = api.getClient();
 client.addHandler(ProviderEventType.ready, (_) {
   // Reevaluate flags and update the UI after readiness or recovery.
 });
@@ -167,7 +165,9 @@ final enabled = client.getBooleanValue('checkout.enabled', false);
 
 Configure the provider explicitly. It does not derive its configuration or evaluation context from the Flutter SDK. Keep the token, environment, site, and optional telemetry fields consistent across both configurations.
 
-The hook adds the variant to the active RUM view. When no variant is available, it uses the evaluated value. It skips evaluations with errors. Omit the hook to disable RUM association. The provider still controls exposure and evaluation telemetry separately.
+The hook adds the variant of each successful evaluation to the active RUM view. It skips evaluations with errors and results without a variant. Omit the hook to disable RUM association. The provider still controls exposure and evaluation telemetry separately.
+
+Register the hook with `OpenFeatureAPI.instance.addHooks()`. A hook added to a client applies only to that client object, and each `getClient()` call returns a new client. After `api.shutdown()`, register the hook again.
 
 For a custom `DatadogSdk` instance, use `DatadogRumHook(sdk: instance)`. RUM requires the main isolate. For background evaluation, initialize a separate pure Dart provider in that isolate.
 
@@ -188,14 +188,12 @@ await api.setEvaluationContextForDomainAndWait(
   'organization',
   EvaluationContext(targetingKey: 'org-123'),
 );
-final organizationProvider = DatadogOpenFeatureProvider(
-  configuration: provider.configuration,
-);
+final organizationProvider = DatadogProvider.fromConfiguration(configuration);
 await api.setProviderForDomainAndWait('organization', organizationProvider);
 final organizationClient = api.getClient('organization');
 {{< /code-block >}}
 
-Unless `clientName` is supplied, the provider uses the domain name for assignment storage. Each Dart isolate owns separate OpenFeature and provider state. Initialize the provider independently in each isolate that evaluates flags.
+The provider uses the domain name as its Datadog client name for assignment storage, or `default` for the default domain. Each Dart isolate owns separate OpenFeature and provider state. Initialize the provider independently in each isolate that evaluates flags.
 
 ## Set the evaluation context
 
@@ -216,9 +214,9 @@ await api.setEvaluationContextAndWait(
 );
 {{< /code-block >}}
 
-The `targetingKey` identifies the randomization subject for percentage rollouts. It is optional. Without a targeting key, the provider sends an empty string in the assignment request.
+The `targetingKey` identifies the randomization subject for percentage rollouts. It is optional. A missing targeting key and an empty targeting key identify the same subject.
 
-A context change keeps previous assignments active until new assignments are usable. If the change fails, OpenFeature retains the previous active context.
+When only targeting attributes change, evaluations keep the previous assignments while new assignments load and after a failed load. When the targeting key changes, evaluations return application defaults until assignments for the new key load. If the change fails, OpenFeature retains the previous active context.
 
 To sign out, clear the context:
 
@@ -226,7 +224,22 @@ To sign out, clear the context:
 await api.setEvaluationContextAndWait(EvaluationContext.empty);
 {{< /code-block >}}
 
-Sign-out clears private assignments immediately, even if loading anonymous assignments fails. After a failed sign-out, retry the context change before calling `refresh()`. For named domains, use `setEvaluationContextForDomainAndWait()` to update or clear that domain's context.
+Sign-out is a targeting key change, so private assignments stop being used immediately. After a failed context change, `refresh()` throws `StateError` until a later context change succeeds. For named domains, use `setEvaluationContextForDomainAndWait()` to update or clear that domain's context.
+
+### Strict context switching
+
+To use assignments only while both the targeting key and the targeting attributes match, set `strictContextSwitchingAttribute` to `true`:
+
+{{< code-block lang="dart" >}}
+await api.setEvaluationContextAndWait(
+  EvaluationContext(
+    targetingKey: 'user-123',
+    attributes: {strictContextSwitchingAttribute: true},
+  ),
+);
+{{< /code-block >}}
+
+In strict mode, evaluations return defaults during an attribute change and after a failed load. Only the Boolean value `true` enables strict mode. The SDK removes this attribute from assignment requests, stored assignments, and telemetry. Other OpenFeature hooks and providers still receive it.
 
 ## Evaluate flags
 
@@ -278,12 +291,12 @@ print(details.value);
 print(details.variant);
 print(details.reason);
 print(details.errorCode);
-print(details.flagMetadata[DatadogOpenFeatureProvider.allocationKeyMetadata]);
+print(details.flagMetadata[DatadogProvider.allocationKeyMetadata]);
 {{< /code-block >}}
 
 `errorCode` identifies evaluation failures, such as `ErrorCode.providerNotReady`, `ErrorCode.flagNotFound`, or `ErrorCode.typeMismatch`. Successful details can include a variant and reason. Assignments restored from the configured store report `CACHED` until a network response replaces them.
 
-Provider-specific metadata uses `datadog.allocation_key` and `datadog.serial_id`. Access these keys with `DatadogOpenFeatureProvider.allocationKeyMetadata` and `DatadogOpenFeatureProvider.serialIdMetadata`.
+The provider supplies the `allocationKey`, `doLog`, and `variationType` metadata keys. Access the first two with `DatadogProvider.allocationKeyMetadata` and `DatadogProvider.doLogMetadata`. Metadata keys that start with `__dd_` are internal and can change, except the split feature keys that start with `__dd_feature.`.
 
 ## Provider life cycle and refresh
 
@@ -307,43 +320,55 @@ readySubscription.cancel();
 contextSubscription.cancel();
 {{< /code-block >}}
 
-`ready` signals usable assignments after initialization, refresh, or recovery. `contextChanged` signals that assignments for the new context are available. A successful refresh emits both `ready` and `configurationChanged`; this example uses only `ready` for reevaluation. `stale` means assignments remain usable while fresh assignments are unavailable. An `error` event reports a failed load or refresh. Events do not rebuild Flutter widgets automatically; update application state in the handlers.
+`ready` signals usable assignments after initialization, refresh, or recovery. `contextChanged` signals that assignments for the new context are available. A successful refresh emits `ready` and then `configurationChanged`; this example uses only `ready` for reevaluation. `stale` means assignments remain usable while fresh assignments are unavailable. An `error` event reports a failed load or refresh. Events do not rebuild Flutter widgets automatically; update application state in the handlers.
 
-`refresh()` reloads assignments for the active context. A successful refresh emits `configurationChanged`. A failed refresh emits an error and preserves usable active assignments. The provider does not poll automatically. Reapplying an unchanged context also fetches assignments. Use `refresh()` to reload assignments for the active context explicitly.
+`refresh()` reloads assignments for the active context. It waits for pending initialization or context changes before it starts. A failed refresh emits `error`, and then `stale` when previous assignments remain usable. In strict mode, a failed refresh emits `error` and evaluations return defaults until a successful load. `refresh()` throws `StateError` before initialization and after shutdown.
+
+The provider does not poll automatically. Each context change reloads assignments, even when the context is unchanged. Do not call `refresh()` from every `error` event: repeated retries can prevent a slow request from completing.
 
 ## Advanced configuration
 
-Pass configuration through `DatadogOpenFeatureProvider(configuration: ...)`:
+Pass a `DatadogFlagsConfiguration` to `DatadogProvider.fromConfiguration()`:
 
 {{< code-block lang="dart" >}}
-DatadogFlagsConfiguration(
-  datadogConfig: provider.configuration.datadogConfig,
-  initializationTimeout: const Duration(seconds: 2),
-  trackExposures: true,
-  trackEvaluations: true,
-  evaluationFlushInterval: const Duration(seconds: 10),
-  store: MyFlagsStore(),
+final provider = DatadogProvider.fromConfiguration(
+  DatadogFlagsConfiguration(
+    datadogConfig: const DatadogFlagsConfig(
+      clientToken: '<CLIENT_TOKEN>',
+      env: '<ENV_NAME>',
+      site: DatadogFlagsSite.{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+    ),
+    initializationTimeout: const Duration(seconds: 2),
+    trackExposures: true,
+    trackEvaluations: true,
+    evaluationFlushInterval: const Duration(seconds: 10),
+    flagSelection: const FlagSelection(tags: ['checkout']),
+    store: MyFlagsStore(),
+  ),
 );
 {{< /code-block >}}
 
 `trackExposures`
-: Defaults to `true`. Records exposure events for successful evaluations whose assignments permit logging. Failed evaluations do not emit exposures. Set to `false` to disable exposure tracking.
+: Defaults to `true`. Records exposure events for successful evaluations whose assignments permit logging. Failed evaluations do not emit exposures. Set to `false` to disable exposure tracking. `ExposureHook` still receives exposures when this option is `false`. See [Exposures in your own data store](#exposures-in-your-own-data-store).
 
 `trackEvaluations`
 : Defaults to `true`. Records aggregated telemetry for evaluations against active assignments, including missing-flag and type-mismatch defaults. Defaults returned before assignments become available are not recorded. Set to `false` to disable evaluation telemetry.
 
 `initializationTimeout`
-: Defaults to 5 seconds. The OpenFeature provider requires a positive duration of at most 20 seconds. Do not use the legacy API's disabled-timeout values. OpenFeature also enforces its own initialization deadline, which defaults to 30 seconds. If you configure an isolated OpenFeature API with a shorter deadline, set `initializationTimeout` to less than that deadline. This lets the provider handle its timeout before OpenFeature stops waiting.
+: Defaults to 5 seconds. The provider requires a positive duration of at most 20 seconds. Do not use the legacy API's disabled-timeout values. A missing configuration or an invalid timeout produces `PROVIDER_FATAL`, and evaluations return defaults. Recovery requires a new provider with a corrected configuration. OpenFeature also enforces its own initialization deadline, which defaults to 30 seconds. If you configure an isolated OpenFeature API with a shorter deadline, set `initializationTimeout` to less than that deadline. This lets the provider handle its timeout before OpenFeature stops waiting.
 
-  The budget covers cache loading, the assignment request, decoding, assignment publication, and storage. It bounds the caller's wait without canceling the underlying operation. Synchronous work can delay timer delivery.
+  The provider applies the timeout to initialization, each context change, and each refresh. The budget covers cache loading, the assignment request, decoding, assignment publication, and storage. It bounds the caller's wait without canceling the underlying operation. Synchronous work can delay timer delivery.
 
   The provider handles `FlagsInitializationTimeoutException` internally. Matching cached assignments produce a `stale` state. Without assignments, registration fails and evaluations return defaults. A late successful response emits `ready` and makes assignments available before cache storage completes.
 
 `evaluationFlushInterval`
-: Accepted values are between 1 and 60 seconds. The default is 10 seconds.
+: Defaults to 10 seconds. Values outside the range of 1 to 60 seconds are set to the nearest limit.
+
+`flagSelection`
+: Optional. Loads only the flags that have any of the selected `tags` or whose key matches any of the `keyPatterns`. Tags and key patterns are case-sensitive. In a key pattern, `*` matches any run of characters. Each list accepts at most 31 values, and each value is at most 200 UTF-8 bytes. If a selection exceeds a limit, the SDK logs an error and loads every flag. Evaluating a flag outside the selection returns the default value. Stored assignments are restored only under the same selection.
 
 `store`
-: Optional assignment storage. The provider uses stored assignments only when their evaluation context matches the requested context.
+: Optional assignment storage. See [Last-known assignment storage](#last-known-assignment-storage).
 
 `httpClient`, `customFlagsEndpoint`, `customFlagsHeaders`, `customExposureEndpoint`, and `customEvaluationEndpoint`
 : Override transport settings for proxies, tests, or custom routing. An application-supplied HTTP client remains owned by the application.
@@ -376,7 +401,50 @@ class MyFlagsStore implements DatadogFlagsStore {
 
 Implement the storage operations with the application's storage mechanism. The package does not provide a disk store. Preserve the complete `FlagsData.toJson()` result and restore it with `FlagsData.fromJson()`, including metadata for obfuscated assignments.
 
+The provider uses a stored snapshot only when its evaluation context and configuration scope match the request. The scope is a digest of the site, environment, and client token. Snapshots without a scope, such as snapshots from earlier SDK versions, are not used. After an upgrade or a client token rotation, evaluations use defaults until fresh assignments load.
+
+Context changes and shutdown do not delete stored snapshots. To remove stored data, call `delete()` on your store with the domain name, or `default` for the default domain.
+
 The provider serializes writes and deletes for each store instance and client name. Make every storage operation complete. An operation that never completes can block later persistence operations.
+
+## Exposures in your own data store
+
+To record exposures in your own data store, add an `ExposureHook`:
+
+{{< code-block lang="dart" >}}
+api.addHooks([
+  ExposureHook((evaluation) {
+    if (evaluation.shouldSend) {
+      myQueue.add({
+        'flag': evaluation.flagKey,
+        'variant': evaluation.variant,
+        'allocation': evaluation.allocationKey,
+        'subject': evaluation.targetingKey,
+      });
+    }
+  }),
+]);
+{{< /code-block >}}
+
+The callback receives every completed evaluation from `DatadogProvider`:
+
+- `isExposure` is `true` for a successful evaluation of an allocation that logs exposures, including repeats.
+- `isCacheHit` is `true` when the subject's most recent exposure to the flag had the same allocation, variant, and assignment serial ID.
+- `shouldSend` is `true` for a new exposure. These are the exposures that the SDK sends to Datadog when `trackExposures` is `true`.
+- `features` contains the published features of the assignment's split, such as `holdout.key`.
+- `flagKey`, `variant`, `allocationKey`, `targetingKey`, and `evaluationContext` describe the evaluation.
+
+The callback runs synchronously during the evaluation. Keep it fast and queue any I/O. The SDK catches exceptions from the callback and logs them. The evaluation result does not change. The exposure deduplication cache is in memory, so after a restart, the first evaluation of each assignment is a new exposure.
+
+## Diagnostics
+
+The SDK writes diagnostics to the Dart developer log under the name `datadog_flags`. Release builds and web builds do not show this log. To also print diagnostics in any build mode, set the lowest level to print:
+
+{{< code-block lang="dart" >}}
+DatadogProvider.verbosity = FlagsLoggerLevel.warning;
+{{< /code-block >}}
+
+The setting applies to every `datadog_flags` component in the isolate. The available levels are `debug`, `warning`, and `error`. The default is `null`, which prints nothing.
 
 ## Shutdown
 
@@ -386,7 +454,7 @@ Shut down OpenFeature when the application no longer needs its providers:
 await api.shutdown();
 {{< /code-block >}}
 
-Shutdown clears active assignments, prevents pending assignment publication, and drains pending telemetry. Repeated shutdown is safe. The provider closes its own HTTP client. Close an application-supplied client separately.
+Shutdown clears active assignments, prevents pending assignment publication, and drains pending telemetry. Repeated shutdown is safe. The provider closes its own HTTP client. Close an application-supplied client separately. Register API-level hooks again before you register a new provider.
 
 ## Testing
 
@@ -417,7 +485,7 @@ The legacy Datadog evaluation API is deprecated and planned for removal in the n
 
 | Legacy API | OpenFeature replacement |
 | --- | --- |
-| `DatadogFlags.enable()` and `sharedClient()` | `setProviderAndWait()` and `getClient()` |
+| `DatadogFlags.enable()` and `sharedClient()` | `DatadogProvider.fromConfiguration()`, `setProviderAndWait()`, and `getClient()` |
 | `DatadogFlagsClient.initialize()` | `setEvaluationContextAndWait()` |
 | `FlagsEvaluationContext` | `EvaluationContext` |
 | `FlagDetails` and `details.error?.code` | `FlagEvaluationDetails` and `details.errorCode` |
@@ -425,12 +493,13 @@ The legacy Datadog evaluation API is deprecated and planned for removal in the n
 | `getObjectDetails()` | `getStructureDetails()` for JSON objects |
 | Named shared clients | Separate providers registered with `setProviderForDomainAndWait()` |
 | `DatadogFlags.disable()` | `OpenFeatureAPI.instance.shutdown()` |
+| `DatadogFlags.reset()` and `DatadogFlagsClient.reset()` | `delete()` on your store with the domain name, or `default` |
 | `DatadogFlagsPluginConfiguration` and `DatadogSdk.flags` | Explicit provider configuration and `DatadogRumHook` |
-| `rumIntegrationEnabled` | Add or omit `DatadogRumHook` |
+| `rumIntegrationEnabled` | Register or omit `DatadogRumHook` |
 
 Change evaluation calls from named `key:` and `defaultValue:` arguments to positional arguments. Configuration and storage interfaces remain available.
 
-For Flutter, remove the legacy plugin registration and add the RUM hook once. Do not run both integrations for the same evaluations. See the [package migration guide][3] for additional details.
+For Flutter, remove the legacy plugin registration and register the RUM hook once with `OpenFeatureAPI.instance.addHooks()`. The provider does not read the Datadog SDK configuration, so pass `applicationId`, `service`, and `version` to keep these fields in evaluation telemetry. Do not run both integrations for the same evaluations. See the [package migration guide][3] for additional details.
 
 ## Further reading
 
