@@ -568,6 +568,92 @@ The timeout applies only to the first `setEvaluationContext` call. That call con
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
 
+`flagSelection`
+: Loads only the flags that match a set of tags or key patterns. See [Load a subset of flags](#load-a-subset-of-flags).
+
+### Load a subset of flags
+
+In `dd-sdk-ios` 3.22.0 and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Loading a subset reduces the size of the flag configuration that the SDK downloads and caches, which helps when an environment contains flags for many applications.
+
+Set `flagSelection` on `Flags.Configuration` before you call `Flags.enable(with:)`. The selection is fixed when `Flags.enable(with:)` runs and applies to every `FlagsClient`. If a later launch of your app uses a different selection, the SDK does not load flags cached under the previous selection, and each client starts without cached flags until it fetches flags for the new selection.
+
+`Flags.FlagSelection` accepts two optional lists:
+
+`tags`
+: Flag tags to match, such as `app:checkout-ios`. A flag matches if it has any of the listed tags. Tags match exactly and are case-sensitive.
+
+`keyPatterns`
+: Patterns to match against the whole flag key. `*` matches any sequence of characters, including none, anywhere in the pattern. Every other character, including `?`, `[`, `]`, `{`, and `}`, matches only itself. For example, `checkout-*` matches `checkout-banner` but not `new-checkout-banner`, and `*-checkout-*` matches `new-checkout-banner`.
+
+A flag loads if it matches any listed tag **or** any key pattern. In the following example, the SDK loads every flag tagged `app:checkout-ios` and every flag whose key starts with `checkout-`:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let config = Flags.Configuration(
+    flagSelection: Flags.FlagSelection(
+        tags: ["app:checkout-ios"],
+        keyPatterns: ["checkout-*"]
+    )
+)
+Flags.enable(with: config)
+{{< /code-block >}}
+
+<div class="alert alert-warning">Team tags can change when flag ownership changes, which changes the flags your application loads. Instead of selecting by team tags, add tags to your flags specifically for selection, such as <code>app:checkout-ios</code>.</div>
+
+#### Limits and validation
+
+Before sending the selection, the SDK trims leading and trailing whitespace from each value, removes empty values and duplicates, and sorts each list. After this processing, the selection must meet these limits:
+
+- `tags` contains at most 31 values.
+- `keyPatterns` contains at most 31 values.
+- Each tag is at most 200 bytes (UTF-8).
+- Each key pattern is at most 200 bytes (UTF-8).
+
+A selection cannot include a tag longer than 200 bytes, so keep the tags you add to flags for selection at 200 bytes or less.
+
+If both lists are empty after this processing, the SDK sends no selection and loads the full flag configuration without logging an error.
+
+If the selection exceeds a limit, the SDK does not send it in the flag configuration request, logs an error, and loads the full flag configuration.
+
+Because the SDK checks these limits first, selections that fail them never reach Datadog. Datadog can still ignore a selection that passes these checks, for example when the selection is too large. In that case, Datadog returns the full flag configuration with a `DD-Flag-Selection-Ignored` header that gives one of the following reasons, and the SDK logs an error:
+
+| Reason | Meaning |
+| --- | --- |
+| `too_many_values` | A list contains more than 31 values, or the selection is too large. |
+| `invalid_tag` | A tag is longer than 200 bytes. |
+| `invalid_key_pattern` | A key pattern is longer than 200 bytes. |
+| `malformed_selection` | The selection could not be parsed. |
+| `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
+
+If the header contains any other value, the SDK logs the reason as `unknown`.
+
+The SDK logs these errors:
+
+| Message | Cause |
+| --- | --- |
+| `` `Flags.Configuration.flagSelection` was not sent (<REASON>: <DETAIL>). Loading the full flag configuration. `` | The selection exceeds a limit. |
+| `` `Flags.Configuration.flagSelection` was ignored by the server (<REASON>). Loaded the full flag configuration. `` | Datadog ignored the selection. See the reasons in the previous table. |
+
+To print these errors to the Xcode console, set `Datadog.verbosityLevel` to `.error`, `.warn`, or `.debug` before you call `Flags.enable(with:)`.
+
+If you route flag configuration requests through a proxy with `customFlagsEndpoint`, see [Proxy Feature Flag SDK Traffic][4] for the header your proxy must pass through.
+
+#### Evaluate flags outside the selection
+
+Flags outside the selection are not loaded. Evaluating one of these flags with `FlagsClient` returns the default value you supply, with the error `.flagNotFound`:
+
+{{< code-block lang="swift" >}}
+let flagsClient = FlagsClient.shared()
+// "search-ranking" has no app:checkout-ios tag and does not match checkout-*
+let details = flagsClient.getBooleanDetails(key: "search-ranking", defaultValue: false)
+
+print(details.value)                  // false (the supplied default)
+print(details.error == .flagNotFound) // true
+{{< /code-block >}}
+
+The [OpenFeature provider](#use-with-openfeature) also returns the default value you supply for these flags.
+
 ## Testing
 
 The examples above use Datadog's `FlagsClient` API directly. If you use the [OpenFeature](https://openfeature.dev/) bridge or write tests around the OpenFeature API, substitute an in-memory provider for code-controlled flag values.
@@ -646,3 +732,4 @@ final class CheckoutFlagTests: XCTestCase {
 [2]: /account_management/api-app-keys/#client-tokens
 
 [3]: /feature_flags/concepts/opt_out/
+[4]: /feature_flags/guide/proxy_sdk_traffic/
