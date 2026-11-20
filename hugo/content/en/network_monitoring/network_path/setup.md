@@ -23,15 +23,145 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+### Choose a test type
 
-Datadog provides three Agent-based collection methods. You can use one method on its own or combine multiple methods:
+| Test type | What it monitors | Best for | Create in the UI (Preview) |
+|-----------|------------------|----------|----------------------------|
+| **[Scheduled&nbsp;tests](#scheduled-tests)** | Destinations that you define | A known set of endpoints, such as critical APIs or partner services | Yes |
+| **[Dynamic&nbsp;tests](#dynamic-tests)** | Destinations discovered from traffic observed by [Cloud Network Monitoring][1] | Broad visibility without listing every destination | Filters only |
+| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** (Experimental) | Destination IPs observed in [NetFlow Monitoring][6] | Hop-by-hop route visibility for NetFlow traffic | No |
 
-| Method | When to use |
-|--------|-------------|
-| **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
-| **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
-| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
+These test types run on your Datadog Agents, and you can configure every type in the Agent configuration files.
+
+### Choose a setup method
+
+| Method | Tests run from | Where you configure tests |
+|--------|----------------|---------------------------|
+| **[UI](#create-tests-in-the-ui)** (Preview) | Your Datadog Agents | In the Network Path UI, after a one-time setup on each Agent you want to target |
+| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | Your Datadog Agents | In configuration files on each host |
+| **[Synthetic Monitoring][15]** | Datadog managed locations | In Synthetic Monitoring, as Synthetic tests |
+
+You can use the UI and the Agent configuration files on the same Agent. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
+
+### Create tests in the UI (Preview) {#create-tests-in-the-ui}
+
+Create and manage scheduled tests from the [Network Path][4] UI, and set the filters that control which connections dynamic tests monitor. You turn on dynamic tests themselves in the Agent configuration, as shown in step 3 below. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent.
+
+**An Agent appears as eligible in the test creation workflow only after you complete all of the following setup.**
+
+#### Prerequisites
+
+- Agent `v7.83.2+` is installed.
+- [Remote Configuration][17] is enabled for your organization and for the Agent's API key.
+- Your Datadog role has the **Network Path Remote Configuration Write** (`network_path_config_settings_write`) permission.
+- For dynamic tests: [Cloud Network Monitoring][1] is enabled.
+
+#### Configure the Agent
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
+
+2. Enable Network Path Remote Configuration in `/etc/datadog-agent/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+   ```
+
+3. For dynamic tests, also enable connection monitoring in `/etc/datadog-agent/datadog.yaml`. The complete `network_path` section looks like this:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+     connections_monitoring:
+       enabled: true
+   ```
+
+4. Restart the Agent.
+
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
+
+2. Enable Network Path Remote Configuration in `/opt/datadog-agent/etc/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+   ```
+
+3. For dynamic tests, also enable connection monitoring in `/opt/datadog-agent/etc/datadog.yaml`. The complete `network_path` section looks like this:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+     connections_monitoring:
+       enabled: true
+   ```
+
+4. Restart the Agent.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
+
+2. Enable Network Path Remote Configuration in `%ProgramData%\Datadog\datadog.yaml`:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+   ```
+
+3. For dynamic tests, also enable connection monitoring in `%ProgramData%\Datadog\datadog.yaml`. The complete `network_path` section looks like this:
+
+   ```yaml
+   network_path:
+     remote_config:
+       enabled: true
+     connections_monitoring:
+       enabled: true
+   ```
+
+4. Restart the Agent.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After the Agent restarts, go to [Network Path][4] and create a test. The Agent appears as eligible. If it doesn't, confirm the Agent version, that Remote Configuration is enabled for the Agent's API key, and that `network_path.remote_config.enabled` is `true`.
+
+### Configure tests in the Agent configuration
+
+To configure tests in the Agent configuration files instead, set up one or more test types: [scheduled tests](#scheduled-tests), [dynamic tests](#dynamic-tests), or [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental). You can use one type on its own or combine them.
 
 ### Scheduled tests
 
@@ -874,3 +1004,5 @@ If you encounter an error like the following:
 [8]: /network_monitoring/network_path/setup/#filter-syntax
 [9]: https://app.datadoghq.com/network
 [15]: /synthetics/network_path_tests/
+[16]: /remote_configuration/
+[17]: /remote_configuration/#enable-remote-configuration

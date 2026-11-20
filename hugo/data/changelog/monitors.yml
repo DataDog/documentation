@@ -59,3 +59,18 @@ entries:
       - ValidateMonitor
     title: Add aastra job status and job duration fields to data-jobs monitor 
       queries
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41978
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add platform_settings.snowflake.warehouse to data quality monitor 
+      options

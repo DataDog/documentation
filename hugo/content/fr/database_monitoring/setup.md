@@ -3,7 +3,7 @@ description: Choisissez une architecture de configuration et configurez Database
   pour votre base de données.
 title: Configurez Database Monitoring
 ---
-Pour configurer Database Monitoring, passez en revue les architectures de configuration prises en charge, puis suivez les instructions pour votre base de données.
+Pour configurer Database Monitoring, passez en revue les architectures de configuration prises en charge, puis suivez les instructions correspondant à votre base de données.
 
 {{< whatsnext desc="Planifiez votre configuration :" >}}
     {{< nextlink href="database_monitoring/architecture" >}}<strong>Architectures de configuration</strong> : découvrez comment l'Agent se connecte aux bases de données auto-hébergées et gérées.{{< /nextlink >}}
@@ -18,6 +18,7 @@ Pour configurer Database Monitoring, passez en revue les architectures de config
     {{< nextlink href="database_monitoring/setup_oracle" >}}Oracle{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_mongodb" >}}MongoDB{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_clickhouse" >}}ClickHouse{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/setup_db2" >}}IBM Db2{{< /nextlink >}}
     {{< nextlink href="database_monitoring/setup_documentdb" >}}Amazon DocumentDB{{< /nextlink >}}
 {{< /whatsnext >}}
 

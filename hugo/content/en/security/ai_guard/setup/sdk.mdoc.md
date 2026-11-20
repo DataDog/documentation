@@ -311,6 +311,70 @@ Pass `allow_raise: false` to make a call return an evaluation and never raise `A
 
 To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. AI Guard still evaluates tool calls set to {% ui %}Pass{% /ui %} and reports the results, but never blocks them. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
 
+## Filter evaluations by application context
+
+Filtering AI Guard evaluations by application context, such as a tenant or an application flow, shows how AI Guard treats each part of your application. Custom tags on SDK calls add that context to the AI Guard span of each evaluation.
+
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+Custom tags require `dd-trace-py` 4.17.0 or later.
+
+Pass a dictionary in the `tags` parameter of the evaluate method:
+
+```python
+result = client.evaluate(
+    messages=[
+        Message(role="system", content="You are an AI Assistant"),
+        Message(role="user", content="What is the weather like today?"),
+    ],
+    tags={"tenant": "acme", "tier": "gold"},
+)
+```
+
+{% alert level="info" %}
+The SDK ignores keys with the `ai_guard.` prefix, so custom tags can't overwrite the span tags that AI Guard sets.
+{% /alert %}
+{% /if %}
+
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
+Custom tags require `dd-trace-js` 5.136.0 or later, or 6.25.0 or later.
+
+Pass an object in the `tags` option of the evaluate method:
+
+```javascript
+const result = await tracer.aiguard.evaluate([
+  { role: 'system', content: 'You are an AI Assistant' },
+  { role: 'user', content: 'What is the weather like today?' }
+], {
+  tags: { tenant: 'acme', 'app.flow': 'checkout', 'app.attempt': 2 }
+})
+```
+
+{% alert level="info" %}
+The SDK drops these entries without raising an error:
+
+- Keys equal to `ai_guard` or with the `ai_guard.` prefix, so custom tags can't overwrite the span tags that AI Guard sets.
+- Values that aren't a string, a finite number, or a Boolean.
+- Empty keys, keys longer than 200 characters, and string values longer than 25,000 characters.
+{% /alert %}
+{% /if %}
+
+<!-- Java and Ruby -->
+{% if includes($prog_lang, ["java", "ruby"]) %}
+The Java and Ruby SDKs don't support custom tags.
+{% /if %}
+
+{% if includes($prog_lang, ["python", "node_js"]) %}
+### Find evaluations by custom tag
+
+Find evaluations by custom tag to investigate AI Guard decisions for one tenant, application flow, or other part of your application.
+
+1. In {% ui %}APM{% /ui %} > {% ui %}Traces{% /ui %}, search for `resource_name:ai_guard @<TAG_KEY>:<TAG_VALUE>`, such as `resource_name:ai_guard @tenant:acme`.
+1. Open an AI Guard span from the results. The custom tags appear in the span attributes.
+1. (Optional) To filter or group evaluations by a custom tag in the facet panel or in visualizations, [create a facet][13] for the tag. For a numeric tag, create a [measure][14] instead.
+{% /if %}
+
 ## Optional SDK settings
 
 The default AI Guard SDK settings work for most applications. Change them when your application needs a different evaluation endpoint, more time for evaluation requests, or more of the conversation recorded on AI Guard spans.
@@ -340,3 +404,5 @@ With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluatio
 [10]: /security/ai_guard/policies/#tools-policies
 [11]: /security/ai_guard/policies/#handle-blocked-requests
 [12]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts
+[13]: /tracing/trace_explorer/query_syntax/#create-a-facet
+[14]: /tracing/trace_explorer/query_syntax/#measures
