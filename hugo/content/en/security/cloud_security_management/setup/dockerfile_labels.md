@@ -33,15 +33,15 @@ Datadog uses the following labels:
 | `org.opencontainers.image.source` | The repository URL | `https://github.com/org/repo` |
 | `com.datadoghq.image.source_path` | The path to the Dockerfile, relative to the repository root | `docker/api/Dockerfile` |
 
-`org.opencontainers.image.source` is a standard [OCI image annotation][3]. `com.datadoghq.image.source_path` is specific to Datadog, because the OCI specification doesn't define a field for the Dockerfile that built an image.
+`org.opencontainers.image.source` is a standard [OCI image annotation][3]. `com.datadoghq.image.source_path` is specific to Datadog because the OCI specification doesn't define a field for the Dockerfile that built an image.
 
-The following labels are also supported:
+Datadog also supports the following optional labels:
 
 - `org.opencontainers.image.revision` (optional): The commit SHA used to build the image. This pins the Dockerfile link to the commit that built the image. Without it, Datadog links to the Dockerfile on the repository's default branch.
-- `org.opencontainers.image.base.name` (optional): The base image name, for example `ubuntu:22.04`. Improves base image remediation suggestions.
+- `org.opencontainers.image.base.name` (optional): The base image name, for example `ubuntu:22.04`. Datadog uses it to improve base image remediation suggestions.
 - `org.opencontainers.image.base.digest` (optional): The base image digest.
 
-## Choose a method
+## Choose a labeling method
 
 | Method | Best for |
 |--------|----------|
@@ -57,11 +57,11 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
 ### Prerequisites
 
 - The [GitHub integration][4] is set up, and the Datadog GitHub App is installed on the repositories that contain your Dockerfiles. The GitHub App needs the following repository permissions:
-  - **Contents**: Read & write
-  - **Pull requests**: Read & write
+  - **Contents**: Read and write
+  - **Pull requests**: Read and write
 - Your GitHub user account is connected to Datadog and has write access to the repositories. Datadog opens pull requests on your behalf.
 
-### Create pull requests
+### Create Datadog pull requests
 
 1. On the [Cloud Security Setup page][5], find your GitHub account and turn on {{< ui >}}Dockerfile scanning{{< /ui >}}.
 1. Click {{< ui >}}Select Dockerfiles{{< /ui >}}. A side panel lists your Dockerfiles, grouped by repository, with one of the following statuses:
@@ -69,15 +69,17 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
    - {{< ui >}}In progress{{< /ui >}}: A Datadog pull request for the Dockerfile is open.
    - {{< ui >}}Labeled{{< /ui >}}: The final build stage has both image source labels.
 
-   To find specific Dockerfiles, search, filter by repository, or filter by status.
-1. Select the Dockerfiles to label, create the pull requests, and confirm. Datadog groups the selected Dockerfiles by repository and opens pull requests with up to 20 Dockerfiles each. A repository with more than 20 selected Dockerfiles gets more than one pull request. You can select up to 100 Dockerfiles at a time.
+   To find specific Dockerfiles, search for them, or filter by repository or status.
+1. Select the Dockerfiles to label, create the pull requests, and confirm.
 1. Review and merge the pull requests in GitHub. Datadog links vulnerabilities to Dockerfiles for images built after the merge.
+
+<div class="alert alert-info">Datadog groups the selected Dockerfiles by repository and opens pull requests with up to 20 Dockerfiles each. A repository with more than 20 selected Dockerfiles gets more than one pull request. You can select up to 100 Dockerfiles at a time.</div>
 
 ## Add labels at build time
 
 You can set the labels yourself with any Git provider.
 
-### In the Dockerfile
+### Set labels in the Dockerfile
 
 Add `LABEL` instructions to the final build stage:
 
@@ -87,7 +89,7 @@ LABEL org.opencontainers.image.source="https://github.com/org/repo"
 LABEL com.datadoghq.image.source_path="docker/api/Dockerfile"
 ```
 
-### In the build command
+### Set labels with docker build
 
 Pass labels with `docker build --label`:
 
