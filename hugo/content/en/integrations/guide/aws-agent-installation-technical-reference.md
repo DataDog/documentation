@@ -159,7 +159,7 @@ On EKS, Datadog excludes:
 - Clusters with EKS Fargate profiles
 - Clusters with an existing `datadog_operator` add-on that Datadog did not install
 
-If a selected cluster is in the `CREATING`, `PENDING`, or `UPDATING` state, Datadog postpones instrumentation and schedules another attempt for a later reconciliation. For supported node configurations and other cluster requirements, see [Prerequisites][2] on the installation guide.
+If a selected cluster is in the `CREATING`, `PENDING`, or `UPDATING` state, Datadog postpones instrumentation and schedules another attempt for a later reconciliation. For supported node configurations and other cluster requirements, see [Prerequisites][2] in the setup guide.
 
 ## Security, auditing, and change control
 
@@ -191,7 +191,7 @@ Because a single execution role is often shared across functions, Datadog create
 
 The API key and cluster-specific Service Access Token are stored in separate AWS Secrets Manager secrets, which are encrypted at rest. Datadog creates the token with only the **Remote Configuration Read** permission. The EKS add-on configuration contains only the secret identifiers, not the credential values.
 
-The credential synchronization service account assumes a dedicated IAM role through EKS Pod Identity. Its inline policy can read only the two secrets for that cluster. The AWS Secrets Store CSI Driver Provider synchronizes their values into `datadog-agent/datadog-managed-secret`. The Operator consumes the Service Access Token through its application-key setting.
+The credential synchronization service account assumes a dedicated IAM role through EKS Pod Identity. Its inline policy can read only the two secrets for that cluster. The AWS Secrets Store CSI Driver Provider synchronizes their values into `datadog-agent/datadog-managed-secret`. The Operator uses the Service Access Token in place of a Datadog application key.
 
 Datadog reuses an existing token secret when its ownership metadata matches the cluster. If the token has been revoked, Datadog creates a replacement and updates the secret. During uninstall, Datadog revokes the token and deletes both Datadog-owned AWS secrets after validating their ownership metadata. If the AWS integration role cannot delete a secret, or if its ownership metadata does not match the cluster, Datadog preserves the secret.
 
@@ -242,7 +242,7 @@ A Lambda configuration update that is still in progress is left alone and retrie
 A rule is not a one-time selection. Datadog re-evaluates its query over time and reacts to the change events forwarded from your account. Datadog instruments a resource as soon as it detects a match, in either of the following cases:
 
 - **It was created after you saved the rule.** Resource creation events, including `RunInstances`, `CreateFunction`, and `CreateCluster`, are forwarded, so a new matching EC2 instance, Lambda function, or EKS cluster is detected within minutes.
-- **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, and `TagResource` and `UntagResource` on Lambda and EKS. This supports writing a rule such as `@Tags:datadog:true` first, then adding tags to resources accordingly as you go.
+- **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, and `TagResource` and `UntagResource` on Lambda and EKS. This supports writing a rule such as `@Tags:datadog:true` first, then tagging resources into scope as you go.
 
 A rule you built by selecting specific resources holds a query naming those resources, so nothing else ever matches it.
 
@@ -258,7 +258,7 @@ Datadog removes instrumentation when a resource no longer matches the rule, whet
 
 ### Terminated, stopped, or deleted resources
 
-On EC2, Datadog detects terminated instances and cleans up the IAM resources it created for them. Datadog leaves stopped instances alone until they return. On Lambda, a deleted function drops out of coverage.
+On EC2, Datadog detects terminated instances and cleans up the IAM resources it created for them. Datadog leaves stopped instances alone until they return. On Lambda, a deleted function drops out of coverage. On EKS, a deleted cluster drops out of coverage. Datadog revokes its Service Access Token and cleans up the Datadog-owned credential secrets, Pod Identity association, and scoped IAM role associated with the cluster.
 
 ### When instrumentation fails
 

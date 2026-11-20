@@ -5,7 +5,7 @@ further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/"
   tag: "Documentation"
   text: "How Datadog instrumentation through the AWS integration works"
-- link: "https://docs.datadoghq.com/containers/guide/operator-eks-addon/"
+- link: "/containers/guide/operator-eks-addon/"
   tag: "Documentation"
   text: "Install the Datadog Operator as an Amazon EKS add-on"
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -129,7 +129,7 @@ Datadog marks any function that doesn't meet these conditions as ineligible in t
 - **Existing Datadog Operator add-on**: The cluster must not have a `datadog_operator` add-on that Datadog did not install.
 - **Existing AWS Secrets Store CSI Driver Provider add-on**: If the `aws-secrets-store-csi-driver-provider` add-on is already installed, its configuration must set `secrets-store-csi-driver.syncSecret.enabled` to `true`. Datadog doesn't modify the configuration of an existing add-on.
 - **Existing Pod Identity association**: The `datadog-agent/datadog-ascp-sync` service account must not have an existing Pod Identity association unless it matches an association Datadog previously created.
-- **Supported clusters**: The cluster status is `ACTIVE`, all workloads run on Amazon EC2-backed nodes, and at least one node runs Linux. Additional EC2 nodes can run Linux or Windows. Clusters with EKS Fargate profiles are excluded.
+- **Supported clusters**: The cluster must be in the `ACTIVE` state, all workloads must run on Amazon EC2-backed nodes, and at least one node must run Linux. Other EC2 nodes can run Linux or Windows. Clusters with EKS Fargate profiles are not supported.
 
 ## Required AWS permissions
 
@@ -258,9 +258,9 @@ You can start instrumentation from two entry points, depending on how much contr
   - **Install on all resources**: Select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear. For Lambda, this covers functions with at least 256 MB of memory. See [Functions with low memory](#functions-with-low-memory).
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
 
-When you choose **Install on all resources**, under **Select platforms to instrument**, select one or more of **EC2 Instances**, **EKS Clusters**, and **Lambda Functions**:
+When you choose **Install on all resources**, under **Select platforms to instrument**, select one or more of **EC2 Instances**, **EKS Clusters**, or **Lambda Functions**:
 
-{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Add resource-level observability step in AWS setup, with telemetry installation enabled for EC2, EKS, and Lambda." style="width:80%;" >}}
+{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-platforms.png" alt="The Add resource-level observability step in AWS setup, with telemetry installation enabled for EC2, EKS, and Lambda." style="width:80%;" >}}
 
 To install from the AWS Install Agents page:
 
@@ -275,7 +275,7 @@ For EKS, the CloudFormation setup configures the required permissions, the Event
 
 ## Verify instrumentation
 
-Instrumentation status and telemetry arrival are separate signals. After the Agent is healthy or the Lambda configuration is applied, telemetry appears within minutes:
+An instrumented status doesn't confirm that telemetry is arriving. After the Agent is healthy or the Lambda configuration is applied, telemetry appears within minutes in the following places:
 
 - **EC2**: The newly installed Agents appear in the [Infrastructure List][3] and on the host map. Fleet Automation lists the same Agents in the Fleet View.
 - **Lambda**: The instrumented functions appear on the [Serverless][11] page, and their traces appear in [APM][12]. If a function is instrumented but its telemetry doesn't arrive, see [Troubleshoot AWS Lambda Monitoring][15].
@@ -315,7 +315,7 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 
 - **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Layers and environment variables you added yourself are left in place.
-- **EKS**: Datadog removes the managed Agent resources and Operator add-on, revokes the Service Access Token, removes the Pod Identity association and scoped IAM role it created, and deletes the Datadog-owned credential secrets. For the removal order and the resources Datadog retains, see [Remove EKS instrumentation][23] in the technical reference.
+- **EKS**: Datadog removes the managed Agent resources and Operator add-on, revokes the Service Access Token, removes the Pod Identity association and scoped IAM role it created, and deletes the Datadog-owned credential secrets. For the removal order and the resources Datadog retains, see [Remove Datadog instrumentation][23] in the technical reference.
 
 <div class="alert alert-danger">Remove instrumentation in Datadog before you delete the CloudFormation stack or remove the AWS integration. Unlike remote instrumentation, deleting the stack does not remove instrumentation. It removes the permissions Datadog uses to uninstall, so the instrumentation stays on your resources and Datadog can no longer remove it.</div>
 
@@ -328,8 +328,9 @@ To remove all instrumentation from an AWS account:
 
 If the stack is already deleted, Datadog can't clean up. On the AWS Install Agents page, click **Remove all** and **Uninstall Agent** anyway, so that Datadog does not instrument the resources again if the stack is recreated. Then remove the instrumentation yourself:
 
-- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, remove `DD_SITE`, `DD_ORG_UUID`, and `DD_LAMBDA_HANDLER`, and restore `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to the values they had before, or remove them if the function didn't set them. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
 - **EC2**: [Uninstall the Agent][24] from each instance, then delete the AWS resources listed in [Created as needed, for EC2 instances][25]. Leave `AmazonSSMManagedInstanceCore` attached to an instance's existing role unless you know Datadog added it, because Systems Manager needs it to reach the instance.
+- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, remove `DD_SITE`, `DD_ORG_UUID`, and `DD_LAMBDA_HANDLER`, and restore `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to the values they had before, or remove them if the function didn't set them. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
+- **EKS**: Restore the CloudFormation stack with the EKS instrumentation permissions, then repeat the removal workflow above. This lets Datadog remove the managed resources in the required order and revoke the Service Access Token. If you cannot restore the stack, contact [Datadog Support][26].
 
 ## Troubleshooting
 
@@ -400,5 +401,6 @@ If instrumentation reports an add-on error, open the cluster's **Add-ons** tab i
 [21]: https://app.datadoghq.com/orchestration/overview/pod
 [22]: https://repost.aws/knowledge-center/eks-managed-add-on
 [23]: /integrations/guide/aws-agent-installation-technical-reference/#remove-datadog-instrumentation
-[24]: https://docs.datadoghq.com/agent/guide/how-do-i-uninstall-the-agent/
-[25]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances
+[24]: /agent/guide/how-do-i-uninstall-the-agent/
+[25]: /integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances
+[26]: /help/
