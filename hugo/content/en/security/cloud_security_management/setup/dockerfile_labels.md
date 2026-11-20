@@ -70,7 +70,7 @@ Datadog can scan your GitHub repositories for Dockerfiles and open pull requests
    - {{< ui >}}Labeled{{< /ui >}}: The final build stage has both image source labels.
 
    To find specific Dockerfiles, search for them, or filter by repository or status.
-1. Select the Dockerfiles to label, create the pull requests, and confirm.
+1. Select the Dockerfiles to label, click the button to create the pull requests (for example, {{< ui >}}Create 1 PR{{< /ui >}}), and confirm.
 1. Review and merge the pull requests in GitHub. Datadog links vulnerabilities to Dockerfiles for images built after the merge.
 
 <div class="alert alert-info">Datadog groups the selected Dockerfiles by repository and opens pull requests with up to 20 Dockerfiles each. A repository with more than 20 selected Dockerfiles gets more than one pull request. You can select up to 100 Dockerfiles at a time.</div>
