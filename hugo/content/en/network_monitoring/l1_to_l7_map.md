@@ -154,18 +154,6 @@ The following signals appear on the map. Some signals set status, and the rest p
 | Probe loss rate | Network Path | The percentage of probes that did not reach the destination. | Can set Degraded |
 | End-to-end latency | Network Path | The average round-trip time between the source and the destination. | None |
 
-The hover summary lists each signal's numerical value, such as a percentage, but does not mark which signal set the status. The highest value is not always the cause, because the map needs more evidence when a signal is measured on little traffic. For example, a single failed connection is a 100% failed setup rate, but its status is Degraded, not Critical.
-
-#### Limits of map status
-
-Map status is a starting point for an investigation, not a complete assessment of a resource's health:
-
-- Data from other products does not affect map status. For example, APM errors, Kubernetes pod states, host utilization, and NDM device status do not change a resource's status.
-- The map cannot detect issues with a missing signal, such as when Network Path does not test a connection.
-- A Healthy resource can have issues that network signals do not capture, and a red or orange resource is not proof of the cause.
-
-To investigate application errors, pod state, or host utilization, open the resource in [APM][2], the [Kubernetes Explorer][16], or the [Infrastructure List][17].
-
 ## Navigate the L1 to L7 Map
 
 ### Open the map
