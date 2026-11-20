@@ -119,7 +119,7 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
-- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI features are not available for your organization, a summary of the impact is shown instead.
+- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI features are not available for your organization, Datadog shows a summary of the impact instead.
 - **Ticketing, Assignee, and PRs**: The remediation case, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
