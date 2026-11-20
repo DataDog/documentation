@@ -41,7 +41,7 @@ For more information, see the [Set alert conditions](#set-alert-conditions) sect
 Relative thresholds are in Preview.
 {{< /callout >}}
 
-For examples and Preview limitations, see [Relative thresholds][2].
+Relative thresholds can use different aggregations for the evaluation and historical windows, including percentile aggregations for distribution metrics. For examples and Preview limitations, see [Relative thresholds][2].
 
 [1]: /metrics/distributions/
 [2]: /monitors/guide/relative-thresholds/

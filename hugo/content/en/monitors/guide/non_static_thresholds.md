@@ -31,6 +31,8 @@ A relative threshold compares the evaluated value of a metric monitor to a histo
 
 For example, alert when the average job duration over five minutes exceeds `1.5x` its average over the last week.
 
+The current value and historical baseline can use different aggregations. For distribution metrics, compare a percentile to a historical percentile or to a historical average. With a `p95:` metric variable, an `avg` rollup averages the p95 timeseries values. See [Percentile queries][7] for all three comparison examples.
+
 Choose a historical aggregation and a lookback window from 1 week to 6 months. Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor continues evaluating current values at its configured evaluation frequency.
 
 For configuration steps, query syntax, critical recovery thresholds, and Preview limitations, see the [Relative Thresholds guide][6].
@@ -203,3 +205,4 @@ The last monitor is a Composite monitor, which sends an alert only if the two pr
 [4]: /account_management/billing/usage_metrics/#types-of-usage
 [5]: /logs/log_configuration/logs_to_metrics/#logs-usage-metrics
 [6]: /monitors/guide/relative-thresholds/
+[7]: /monitors/guide/relative-thresholds/#percentile-queries

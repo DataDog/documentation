@@ -1,6 +1,6 @@
 ---
 title: Relative Thresholds
-description: "Configure relative thresholds (Preview) to compare metric values with historical baselines, including query syntax, recovery thresholds, and limitations."
+description: "Configure relative thresholds (Preview) to compare metric values with historical baselines, including percentile queries, recovery thresholds, and limitations."
 ---
 
 ## Overview
@@ -93,7 +93,7 @@ formula("<EXPRESSION>").rollup("<AGGREGATION>").last("<WINDOW>").multiplier(<FAC
 ```
 
 - `formula`: A formula referencing the metric query variables. Formulas can contain arithmetic expressions.
-- `rollup`: The aggregation used to calculate the historical value, such as `avg`.
+- `rollup`: The aggregation used to calculate the historical value, such as `avg` or `percentile`. The monitor query and historical query can use different aggregations.
 - `last`: The historical lookback window, such as `1w` or `1mo`.
 - `multiplier`: An optional numeric multiplier applied to the aggregated historical value.
 
@@ -134,6 +134,109 @@ In this example:
 - Each job has its own calculated threshold.
 
 See the [Monitors API][2] for additional configuration options.
+
+### Percentile queries
+
+Relative thresholds support percentile aggregations on [distribution metrics][6] with percentiles enabled. Choose the aggregation for the monitor's evaluation window independently from the aggregation for the historical window.
+
+For a metric variable such as `p95:example.request.duration{env:prod} by {service}`:
+
+- The `p95:` prefix selects the 95th percentile. The percentile rank comes from the metric variable.
+- `.rollup("percentile")` calculates that percentile across the distribution data in the window specified by `.last(...)`.
+- `.rollup("avg")` averages the query's timeseries values over that window. With a `p95:` variable, this is the average of the p95 values in the timeseries.
+
+**Note:** An average of p95 values and a p95 calculated across the full window's distribution data can differ. Using `.rollup("avg")` with a `p95:` variable does not change the variable to `avg:`.
+
+The following examples use the same `p95:` variable for both windows. Each service has its own threshold, and the `1.5x` multiplier applies after the historical aggregation.
+
+| Comparison | Current value over 5 minutes | Historical threshold over 1 week |
+|---|---|---|
+| Percentile vs. percentile | p95 of the distribution data | `1.5x` the p95 of the distribution data |
+| Percentile vs. average | p95 of the distribution data | `1.5x` the average of the p95 timeseries values |
+| Average vs. percentile | Average of the p95 timeseries values | `1.5x` the p95 of the distribution data |
+
+Replace `example.request.duration` with a distribution metric that has percentiles enabled.
+
+{{< tabs >}}
+{{% tab "Percentile vs. percentile" %}}
+
+Alert when the p95 request duration over five minutes exceeds `1.5x` the historical weekly p95.
+
+```json
+{
+  "name": "Request duration p95 above historical p95",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"percentile\").last(\"5m\") > threshold",
+  "message": "Request duration p95 is above its historical baseline.",
+  "options": {
+    "thresholds": {
+      "critical_query": "formula(\"query1\").rollup(\"percentile\").last(\"1w\").multiplier(1.5)"
+    },
+    "variables": [
+      {
+        "name": "query1",
+        "data_source": "metrics",
+        "query": "p95:example.request.duration{env:prod} by {service}"
+      }
+    ]
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Percentile vs. average" %}}
+
+Alert when the p95 request duration over five minutes exceeds `1.5x` the average of the p95 timeseries values over the last week.
+
+```json
+{
+  "name": "Request duration p95 above historical average of p95",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"percentile\").last(\"5m\") > threshold",
+  "message": "Request duration p95 is above its historical baseline.",
+  "options": {
+    "thresholds": {
+      "critical_query": "formula(\"query1\").rollup(\"avg\").last(\"1w\").multiplier(1.5)"
+    },
+    "variables": [
+      {
+        "name": "query1",
+        "data_source": "metrics",
+        "query": "p95:example.request.duration{env:prod} by {service}"
+      }
+    ]
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Average vs. percentile" %}}
+
+Alert when the average of the p95 request-duration timeseries values over five minutes exceeds `1.5x` the historical weekly p95.
+
+```json
+{
+  "name": "Average request duration p95 above historical p95",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"avg\").last(\"5m\") > threshold",
+  "message": "Average request duration p95 is above its historical baseline.",
+  "options": {
+    "thresholds": {
+      "critical_query": "formula(\"query1\").rollup(\"percentile\").last(\"1w\").multiplier(1.5)"
+    },
+    "variables": [
+      {
+        "name": "query1",
+        "data_source": "metrics",
+        "query": "p95:example.request.duration{env:prod} by {service}"
+      }
+    ]
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Limitations
 
@@ -224,3 +327,4 @@ If the expected range needs to adapt continuously to changing conditions, consid
 [3]: /monitors/configuration/?tab=thresholdalert#no-data
 [4]: /monitors/types/anomaly/
 [5]: /monitors/types/change-alert/
+[6]: /metrics/distributions/#enabling-advanced-query-functionality
