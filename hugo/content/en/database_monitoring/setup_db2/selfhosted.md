@@ -208,33 +208,27 @@ For a host-installed Agent, [restart the Agent][17] after configuring the check,
 
 #### Run the Agent in Docker
 
-After preparing the check configuration and `db2dsdriver.cfg`, configure password resolution inside the container. This example uses the [file-based secret backend][25] to resolve `ENC[datadog_user_database_password]`:
+After preparing the check configuration and `db2dsdriver.cfg`, run the following command. Replace `<DATADOG_API_KEY>` with your Datadog API key, `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}, and `<AGENT_VERSION>` with the tag you built in Step 3:
 
-1. On the Docker host, create `/etc/datadog-agent/secrets/datadog_user_database_password` containing only the database password. Restrict access to the file and make it readable by the Agent inside the container.
-2. Run the following command. Replace `<DATADOG_API_KEY>` with your Datadog API key, `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}, and `<AGENT_VERSION>` with the tag you built in Step 3:
+```shell
+docker run -d --name dd-agent \
+  --restart unless-stopped \
+  --cgroupns host \
+  --pid host \
+  -e DD_API_KEY="<DATADOG_API_KEY>" \
+  -e DD_SITE="<DATADOG_SITE>" \
+  -e DB2DSDRIVER_CFG_PATH=/etc/datadog-agent/db2dsdriver.cfg \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /proc/:/host/proc/:ro \
+  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+  -v /etc/datadog-agent/conf.d/ibm_db2.d:/etc/datadog-agent/conf.d/ibm_db2.d:ro \
+  -v /etc/datadog-agent/db2dsdriver.cfg:/etc/datadog-agent/db2dsdriver.cfg:ro \
+  dd-agent-db2:<AGENT_VERSION>
+```
 
-   ```shell
-   docker run -d --name dd-agent \
-     --restart unless-stopped \
-     --cgroupns host \
-     --pid host \
-     -e DD_API_KEY="<DATADOG_API_KEY>" \
-     -e DD_SITE="<DATADOG_SITE>" \
-     -e DD_SECRET_BACKEND_TYPE=file.text \
-     -e DD_SECRET_BACKEND_CONFIG='{"secrets_path":"/run/secrets"}' \
-     -e DB2DSDRIVER_CFG_PATH=/etc/datadog-agent/db2dsdriver.cfg \
-     -v /var/run/docker.sock:/var/run/docker.sock:ro \
-     -v /proc/:/host/proc/:ro \
-     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-     -v /etc/datadog-agent/conf.d/ibm_db2.d:/etc/datadog-agent/conf.d/ibm_db2.d:ro \
-     -v /etc/datadog-agent/db2dsdriver.cfg:/etc/datadog-agent/db2dsdriver.cfg:ro \
-     -v /etc/datadog-agent/secrets:/run/secrets:ro \
-     dd-agent-db2:<AGENT_VERSION>
-   ```
+The command mounts the check configuration and driver configuration into the container, and sets `DB2DSDRIVER_CFG_PATH` on the Agent process. Settings in the host's shell or `datadog.yaml` do not propagate into the container automatically.
 
-The command mounts the check configuration, driver configuration, and password file into the container. It also sets the driver and secret-backend environment variables on the Agent process. Settings in the host's shell or `datadog.yaml` do not propagate into the container automatically.
-
-If you use another [secret backend][10], replace the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` settings with that backend's configuration, mount any required files, and update the `ENC[]` references to match.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][10] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][25] to provide the password as an environment variable.
 
 ### Step 5: Validate
 
@@ -334,5 +328,5 @@ For all integration options, see the [sample configuration][19].
 [22]: /containers/kubernetes/
 [23]: /agent/configuration/network/#destinations
 [24]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html#create-container-image-install-docker
-[25]: /agent/configuration/secrets-management/#id-for-json-yaml-text
+[25]: /agent/faq/template_variables/
 [26]: /agent/configuration/agent-commands/#agent-information
