@@ -117,7 +117,7 @@ The outline color of a resource and the color of a connection line show their st
 - **Green**: A Healthy connection
 - **No color**: A Healthy or Unknown resource, or an Unknown connection
 
-These colors apply to resources and CNM connection lines. Network path segments are not colored by status. A segment where no probes got through shows **FAILED** on a dotted line.
+**Note**: These colors apply to resources and CNM connection lines. Network path segments are not colored by status. A segment where all probes failed shows **FAILED** on a dotted line.
 
 Healthy and Unknown resources look the same on the map, so a resource with no outline color is not necessarily healthy. To see a resource's status, hover over it or find it in the **Related resources** list in the details pane.
 
@@ -226,7 +226,7 @@ From the summary, click **Explore connection** to open the connection in Connect
 
 #### Network path segment summaries
 
-The summary for a network path segment shows the signals of the whole path: **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**. Every segment of the path shows the same values. To compare segments, use the latency label on each segment's line. A segment where no probes got through shows **FAILED** on a dotted line.
+The summary for a network path segment shows the signals of the whole path: **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**. Every segment of the path shows the same values. To compare segments, use the latency label on each segment's line. A segment where all probes failed shows **FAILED** on a dotted line.
 
 From the summary, click **View connection in Network Path** to open the Network Path explorer, filtered to the hosts at the ends of the path. For services, containers, and pods, you can also click **Explore connection** to open Connection View for the hosts at the ends of the path.
 
@@ -297,7 +297,7 @@ Use this workflow when two resources cannot communicate, or communicate slowly. 
 1. Open Connection View for the two resources. Select them on the L1 to L7 Map page, click **Add destination** while the source is the explored resource, or click **Explore connection** on the connection between them. For details, see the [Change what the map shows](#change-what-the-map-shows) section.
 1. Set the time frame to when the issue started.
 1. Hover over the network connections between the two stacks to check their failed setup, reset, and retransmit rates.
-1. Check the network path between the two stacks. The label on each segment's line shows that segment's latency, and **FAILED** marks a segment where no probes got through. To see the hops in an AS group, click the group's expand button. Hover over a hop to see its latency.
+1. Check the network path between the two stacks. The label on each segment's line shows that segment's latency, and **FAILED** marks a segment where all probes failed. To see the hops in an AS group, click the group's expand button. Hover over a hop to see its latency.
 1. If a hop is a network device monitored by [NDM][6], click the hop to open the device's side panel.
 1. To examine the underlying traffic in CNM, click **View connections** in the details pane.
 1. To examine the Network Path tests, hover over a network path segment and click **View connection in Network Path**. The Network Path explorer opens, filtered to the hosts at the ends of the path.
