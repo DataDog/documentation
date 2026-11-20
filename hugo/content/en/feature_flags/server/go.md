@@ -361,18 +361,34 @@ Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data w
 
 ## Configure evaluation telemetry and exposures
 
-These settings require `dd-trace-go/v2` version `<GO_RELEASE_VERSION>` or later. Each is enabled by default.
+These provider options require `dd-trace-go/v2` version `<GO_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
 
-| Environment variable | Default | When set to `false` |
-| --- | --- | --- |
-| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
-| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ddopenfeature.NewExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+| Provider option | When set to `false` |
+| --- | --- |
+| `EvaluationTelemetryEnabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `ExposuresEnabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to hooks created with `ddopenfeature.NewExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
 
-The two settings are independent. Neither changes flag values or assignment.
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
 
-The environment variables apply to every provider in the process. To configure a single provider, set `<GO_PROVIDER_OPTION_PLACEHOLDER>` in `ProviderConfig`. A provider option overrides the environment variable. The provider reads both when it is created.
+Set the options in `ProviderConfig`. Each takes a `*bool`. A nil pointer keeps the default:
 
-`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `ddopenfeature.NewExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+```go
+evaluationTelemetry := false
+exposures := false
+
+provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{
+    EvaluationTelemetryEnabled: &evaluationTelemetry,
+    ExposuresEnabled:           &exposures,
+})
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `ExposuresEnabled` to `false`, it keeps recording exposures, and hooks created with `ddopenfeature.NewExposureHook` still receive them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
 ## Testing
 

@@ -261,7 +261,7 @@ This setting stops only the exposures sent to Datadog. It does not stop the aggr
 DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false
 {{< /code-block >}}
 
-`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` is a different setting. It stops the provider from recording exposures, so `ExposureHook` receives none. See the [Java][11], [Go][12], and [Ruby][13] SDK pages.
+The Java, Go, and Ruby providers also accept an option that stops a single provider from recording exposures, so `ExposureHook` receives none of its exposures. See the [Java][11], [Go][12], and [Ruby][13] SDK pages.
 
 ### Browser SDK
 

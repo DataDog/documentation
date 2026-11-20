@@ -445,16 +445,16 @@ Use `ExposureHook` to record exposures in your own logs, data warehouse, or anal
 
 ## Configure evaluation telemetry and exposures
 
-These settings require `dd-openfeature` version `<JAVA_RELEASE_VERSION>` or later. Each is enabled by default.
+These provider options require `dd-openfeature` version `<JAVA_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
 
-| Environment variable | Default | When set to `false` |
-| --- | --- | --- |
-| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
-| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+| Provider option | When set to `false` |
+| --- | --- |
+| `evaluationTelemetryEnabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `exposuresEnabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
 
-The two settings are independent. Neither changes flag values or assignment.
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
 
-The environment variables apply to every provider in the process. To configure a single provider, use `new Provider.Options().evaluationTelemetryEnabled(false)` and `.exposuresEnabled(false)`. A provider option overrides the environment variable, including when the option is `true`. The provider reads both when it is created.
+Set the options on `Provider.Options`:
 
 ```java
 import com.datadog.openfeature.Provider;
@@ -465,7 +465,10 @@ OpenFeatureAPI.getInstance().setProviderAndWait(new Provider(new Provider.Option
     .exposuresEnabled(false)));
 ```
 
-`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `ExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposuresEnabled` to `false`, it keeps recording exposures, and `ExposureHook` still receives them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
 ## Best practices
 

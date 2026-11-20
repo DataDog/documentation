@@ -320,18 +320,27 @@ Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, d
 
 ## Configure evaluation telemetry and exposures
 
-These settings require `datadog` version `<RUBY_RELEASE_VERSION>` or later. Each is enabled by default.
+These provider options require `datadog` version `<RUBY_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
 
-| Environment variable | Default | When set to `false` |
-| --- | --- | --- |
-| `DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_ENABLED` | `true` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
-| `DD_FEATURE_FLAGS_EXPOSURES_ENABLED` | `true` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `Datadog::OpenFeature::ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+| Provider option | When set to `false` |
+| --- | --- |
+| `evaluation_telemetry_enabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `exposures_enabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `Datadog::OpenFeature::ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
 
-The two settings are independent. Neither changes flag values or assignment.
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
 
-The environment variables apply to every provider in the process. To configure a single provider, pass `<RUBY_PROVIDER_OPTION_PLACEHOLDER>` to `Datadog::OpenFeature::Provider.new`. A provider option overrides the environment variable. The provider reads both when it is created.
+Pass the options to `Datadog::OpenFeature::Provider.new`:
 
-`DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false` differs from `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. The logging setting stops only the exposures sent to Datadog, and `Datadog::OpenFeature::ExposureHook` still receives them. With `DD_FEATURE_FLAGS_EXPOSURES_ENABLED=false`, the provider records no exposures.
+```ruby
+OpenFeature::SDK.set_provider_and_wait(
+  Datadog::OpenFeature::Provider.new(evaluation_telemetry_enabled: false, exposures_enabled: false)
+)
+```
+
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposures_enabled` to `false`, it keeps recording exposures, and `Datadog::OpenFeature::ExposureHook` still receives them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
 ## Evaluation events and privacy
 
