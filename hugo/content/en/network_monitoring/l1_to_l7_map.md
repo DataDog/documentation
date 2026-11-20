@@ -68,7 +68,7 @@ Before you use the map, open [CNM][14] and check that traffic appears for the re
 The map shows two types of relationships between resources:
 
 - **Composition**: Where a resource runs. For example, a service runs on containers, the containers run in pods, and the pods run on hosts. Composition is not network traffic.
-- **Connections**: Network communication between resources. CNM provides the observed traffic, and Network Path provides the tested route.
+- **Connections**: Network communication between resources. CNM shows the real traffic between resources, as the Datadog Agent observes it. Network Path shows the route that its tests take between hosts, hop by hop.
 
 The map shows composition as a vertical stack, called the _composition stack_, in the following order from top to bottom: **Services**, **Containers**, **Pods**, and **Hosts**. The map skips layers that do not apply to a resource.
 
