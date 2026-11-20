@@ -115,7 +115,7 @@ Set `DD_TRACE_OTEL_SEMANTICS_ENABLED=true` to enable OpenTelemetry trace convent
 | Python | [4.17.0][export-16] |
 | Node.js | [5.110.0][export-17] |
 | Go | [2.12.0][export-18] |
-| .NET | [3.58.0][export-19] |
+| .NET | [3.55.0][export-14] |
 
 These versions provide a baseline for HTTP instrumentation. OTLP export versions and protocols are listed in [Language support](#language-support). Semantic convention coverage varies by instrumentation; see the linked SDK release notes for details.
 
@@ -197,4 +197,3 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [export-16]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.17.0
 [export-17]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.110.0
 [export-18]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.12.0
-[export-19]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.58.0
