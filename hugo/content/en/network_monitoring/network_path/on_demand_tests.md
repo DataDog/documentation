@@ -24,15 +24,16 @@ You can run an on-demand test from the Network Path UI. On-demand tests run thro
 
 ## Prerequisites
 
-- The Datadog Agent on each source host meets the [Private Action Runner requirements][2].
-- The Agent uses an API key with the **Private Action Runner** capability. See [Ownerless runners][3] for more information.
-- To [create the Execution Policy](#create-an-execution-policy), you need the Datadog Admin role or a custom role with the **Execution Groups Write** (`execution_groups_write`) permission.
-- You have the permissions for on-demand tests. To grant permissions, see [Datadog Role Permissions][6].
+To set up on-demand tests, you must have:
 
-  | Permission                                           | Allows                  |
-  |------------------------------------------------------|-------------------------|
-  | Network Path Test Run (`network_path_test_run`)      | Running on-demand tests |
-  | Network Path Data Read (`network_path_config_read`)  | Viewing test results    |
+- The Datadog Agent on the source host:
+    - Fulfills the [Private Action Runner requirements][2].
+    - Uses an API key with the **Private Action Runner** capability. See [Ownerless runners][3] for more information.
+- The following permissions:
+    - **Execution Groups Write** (`execution_groups_write`) to [create the Execution Policy](#create-an-execution-policy).
+    - **Network Path Test Run** (`network_path_test_run`) to run on-demand tests.
+    - **Network Path Data Read** (`network_path_config_read`) to view test results.
+    - See [Datadog Role Permissions][6] for more information.
 
 ## Setup
 
