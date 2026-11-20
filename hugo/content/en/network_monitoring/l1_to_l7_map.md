@@ -95,7 +95,7 @@ Upstream and downstream resources are the same type as the explored resource, su
 
 In Connection View, the map shows the source's composition stack on the left and the destination's on the right.
 
-The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an external endpoint, such as an IP address or a hostname and port, which can be the destination for any type of source. An endpoint cannot be the source, and you cannot explore one on its own, so use Connection View to investigate a connection to an endpoint.
+The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an external endpoint, such as an IP address or a hostname and port, which can be the destination for any type of source.
 
 Between the two stacks, the map shows CNM and Network Path data as separate lines:
 
@@ -222,7 +222,7 @@ Hover over any item on the map to see its summary. The actions available from th
 The summary for a resource shows its type, status, and available metrics. In the summary, Healthy appears as **OK** and Degraded appears as **WARNING**. From the summary, you can:
 
 - Click **Filter** to narrow the map to that resource, called the _filtered resource_, and its related resources, such as the pod and host that it runs on. The explored resource stays at the center of the map, and the details pane shows the filtered resource. To clear the filter, click the **X** next to **Filtered to** at the top of the map.
-- Click **Explore** to make that resource the explored resource. The map redraws around it. Endpoints do not have this action.
+- Click **Explore** to make that resource the explored resource. The map redraws around it. Endpoints do not have this action. To investigate a connection to an endpoint, click **Add as destination** instead.
 - For an upstream resource, click **Add as source**. For a downstream resource, click **Add as destination**. The map switches to Connection View for the connection between that resource and the explored resource.
 
 {{< img src="network_performance_monitoring/l1_l7_map/resource-hover-summary.png" alt="A hover summary for a container, showing its status, CPU, memory, and packet drops, with Filter and Explore buttons" >}}
