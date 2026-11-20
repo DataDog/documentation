@@ -38,6 +38,8 @@ Select a [supported request format](/ai_gateway/requests/#supported-request-form
 
 By default, Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
 
+The application name can also define who can read captured prompts and responses. See [Restrict who can view captured content](/ai_gateway/security/#restrict-who-can-view-captured-content).
+
 [Verify the request](/ai_gateway/getting_started/#verify-the-request) in Agent Observability. The recorded content depends on the effective [data capture setting](/ai_gateway/security/#configure-data-capture).
 
 ## Further reading
