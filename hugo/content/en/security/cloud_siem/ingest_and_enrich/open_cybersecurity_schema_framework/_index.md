@@ -74,6 +74,10 @@ The following Log Management integrations support out-of-the-box OCSF pipelines:
 
 {{% cloud-siem-supported-ocsf %}}
 
+## Monitor OCSF log quality
+
+Use the [OCSF Log Quality dashboard][11] to review sampled validation results by source, investigate schema errors, and configure detailed finding logs.
+
 ## View Security Pipelines \- OCSF
 
 Cloud SIEM OCSF remaps log data in Log Management's [integration pipelines][8]. See [Supported out-of-the-box OCSF pipelines](#supported-out-of-the-box-ocsf-pipelines) for details.
@@ -119,3 +123,4 @@ To view OCSF data in logs:
 [8]: /logs/log_configuration/pipelines/?tab=source#integration-pipelines
 [9]: https://app.datadoghq.com/logs/pipelines
 [10]: https://app.datadoghq.com/logs
+[11]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/validation/
