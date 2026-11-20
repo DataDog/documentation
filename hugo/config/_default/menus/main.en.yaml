@@ -609,7 +609,7 @@ menu:
       identifier: fleet_otel_collectors
       url: agent/fleet_automation/otel_collectors
       parent: agent_fleet_automation
-      weight: 809
+      weight: 810
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
