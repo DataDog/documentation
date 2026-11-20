@@ -17,7 +17,7 @@ further_reading:
 
 Upstream OpenTelemetry SDKs are maintained and supported by the OpenTelemetry community, and export telemetry with OTLP. Datadog supports their traces, metrics, and logs. Use upstream OpenTelemetry SDKs if your organization's policy allows only upstream OpenTelemetry components, or for languages that DDOT SDKs don't cover yet.
 
-<div class="alert alert-info">Traces, metrics, and logs from upstream OpenTelemetry SDKs work in Datadog. Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, and Database Monitoring, require <a href="/opentelemetry/instrument/ddot_sdks/">DDOT SDKs</a>. See <a href="/opentelemetry/compatibility/">Feature Compatibility</a> for details.</div>
+<div class="alert alert-info">Traces, metrics, and logs from upstream OpenTelemetry SDKs work in Datadog. Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, and SQL query-level Database Monitoring, require <a href="/opentelemetry/instrument/ddot_sdks/">DDOT SDKs</a>. See <a href="/opentelemetry/compatibility/">Feature Compatibility</a> for details.</div>
 
 ## Deployment methods
 
