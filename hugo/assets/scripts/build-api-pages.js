@@ -73,7 +73,7 @@ const updateMenu = (specData, specs, languages) => {
       } else {
         // doesn't exist lets add it
         newMenuArray.push({
-          name: language === 'en' && tag['x-docs-original-name'] ? tag.name : (existingNames[tagSlug] || tag.name),
+          name: language === 'en' ? tag.name : (existingNames[tagSlug] || tag.name),
           url: `/api/latest/${tagSlug}/`,
           identifier: tagSlug,
           generated: true

@@ -36,6 +36,27 @@ describe(`updateMenu`, () => {
       logSpy.mockRestore();
     }
   });
+
+  it('uses the spec tag name for English even when the menu has an older name', () => {
+    const readSpy = jest.spyOn(fs, 'readFileSync').mockReturnValue(yaml.safeDump({menu: {api: [{
+      name: 'Rum Audience Management',
+      identifier: 'rum-audience-management',
+      generated: true,
+    }]}}));
+    const writeSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    try {
+      bp.updateMenu([{tags: [{name: 'RUM Audience Management'}], paths: {}}], ['./data/api/v2/full_spec.yaml'], ['en']);
+
+      const menu = yaml.safeLoad(writeSpy.mock.calls[0][1]).menu.api;
+      expect(menu.find((entry) => entry.identifier === 'rum-audience-management').name).toBe('RUM Audience Management');
+    } finally {
+      readSpy.mockRestore();
+      writeSpy.mockRestore();
+      logSpy.mockRestore();
+    }
+  });
 });
 
 describe(`createPages`, () => {
