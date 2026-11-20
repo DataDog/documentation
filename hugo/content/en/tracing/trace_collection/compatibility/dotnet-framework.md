@@ -154,5 +154,5 @@ Version updates imply the following changes to runtime support:
 [8]: /agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
-[11]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[11]: /opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=net
 [12]: https://learn.microsoft.com/en-us/dotnet/framework/get-started/system-requirements

@@ -8,6 +8,12 @@ further_reading:
 
 If you experience unexpected behavior using OpenTelemetry with Datadog, this guide may help you resolve the issue. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
+## DDOT SDK configuration
+
+DDOT SDK startup logs report the effective values of important OpenTelemetry configuration settings. Use this information to check whether the SDK applied the configuration you intended when troubleshooting missing telemetry or unexpected behavior. The settings reported depend on the SDK language and version. A configuration log does not confirm successful telemetry delivery.
+
+For instructions to enable and locate these logs, see [Tracer Startup Logs][18].
+
 ## Incorrect or unexpected hostnames
 
 When using OpenTelemetry with Datadog, you might encounter various hostname-related issues. The following sections cover common scenarios and their solutions.
@@ -373,3 +379,4 @@ features:
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
 [16]: /opentelemetry/setup/ddot_collector/kubernetes/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
+[18]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration
