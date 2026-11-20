@@ -801,6 +801,12 @@ multifiltersearch:
       recommendation_type: Reduce Minimum Capacity
       recommendation_description: A Compute Instance Group Autoscaler with a minimum capacity of instances that can be reduced.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: GKE Node Pool
+      recommendation_type: Downsize GKE Node Pool
+      recommendation_description: Identifies GKE node pools with GPUs where pods requested only part of the GPU capacity, even on their busiest day, and recommends running fewer nodes.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: GCP
       resource_type: CloudSQL Instance
