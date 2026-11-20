@@ -126,7 +126,7 @@ Click a remediation to open its side panel:
 
 {{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing its summary, ticketing and assignee details, and the vulnerabilities the fix closes." width="100%">}}
 
-## Remediate
+## Act on a remediation
 
 Taking action on a remediation creates its remediation case in [Work Management][2]. A remediation has at most one remediation case, which stores its owner, ticket, and fixes.
 
