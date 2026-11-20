@@ -59,7 +59,7 @@ further_reading:
       tag: 'Blog'
 ---
 
-This page covers DDOT SDKs (Java, .NET, Node.js, Python, and Go) and the Datadog SDKs for Ruby, PHP, and Rust, which support the OpenTelemetry APIs but aren't DDOT SDKs.
+Use the OpenTelemetry APIs to add custom instrumentation with any Datadog SDK. This is the recommended approach, rather than Datadog-specific APIs, whenever an equivalent OpenTelemetry API exists. With DDOT SDKs (Java, .NET, Node.js, Python, and Go), the resulting telemetry follows OpenTelemetry Semantic Conventions and is exported over OTLP. The Datadog SDKs for Ruby, PHP, and Rust also support the OpenTelemetry APIs, but they aren't DDOT SDKs.
 
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
@@ -122,7 +122,7 @@ Use the OpenTelemetry Metrics API with DDOT SDKs and Datadog SDKs to send custom
 <!-- Native implementation (.NET, Node.js, Go, Java) -->
 {% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
 
-The DDOT SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+The SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
 You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
@@ -944,7 +944,7 @@ Use the OpenTelemetry Logs API with DDOT SDKs and Datadog SDKs to send custom ap
 <!-- Native implementation (.NET, Node.js, Go, Java) -->
 {% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
 
-The DDOT SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+The SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
 You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
