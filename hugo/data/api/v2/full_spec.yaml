@@ -244070,6 +244070,10 @@ paths:
       tags:
         - RUM Remote Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -249599,6 +249603,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
       description: Delete the link between a RUM operation and a journey.
@@ -249631,6 +249639,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
     put:
       description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
@@ -249700,6 +249712,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/{rum_operation_id}:
     delete:
       description: Delete a RUM operation.
