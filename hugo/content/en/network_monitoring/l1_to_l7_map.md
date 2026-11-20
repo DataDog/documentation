@@ -259,9 +259,9 @@ The summary for a resource shows its type, status, and available metrics. The su
 
 #### Network connection summaries
 
-The summary for a network connection shows its **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput.
+The summary for a network connection shows its CNM signals: **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput. In Resource View, a connection that Network Path also tests shows its Network Path signals too: **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**.
 
-From the summary, click **Explore connection** to open the connection in Connection View, or click **View connection in CNM**.
+From the summary, click **Explore connection** to open the connection in Connection View. To open the connection in its product, click **View connection in CNM**, or **View connection in Network Path** when Network Path tests the connection.
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-hover-summary.png" alt="A hover summary for a connection between two containers, showing retransmits, TCP failures, throughput, and RTT" >}}
 
@@ -281,7 +281,7 @@ The summary for a hop shows its IP address, hostname, AS, location, and latency.
 
 When you click a resource, its side panel opens over the map. For example, clicking a host opens the host side panel. When you click a hop that is a network device, the device's side panel from NDM opens.
 
-When you click a **+N more** item, the details pane shows a searchable list of the resources or CNM connections that the item represents.
+When you click a **+N more** item, the details pane shows a searchable list of the resources, connections, or network paths that the item represents.
 
 Clicking a single connection line, a network path segment, or an AS group does not change the map or the details pane. To see the hops in an AS group, click the group's expand button.
 
