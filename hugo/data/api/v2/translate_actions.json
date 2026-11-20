@@ -7419,6 +7419,32 @@
     "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
     "summary": "Get a Bits Security Analyst investigation"
   },
+  "GetSecurityAgentOutreachPolicy": {
+    "description": "Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule\nautomation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains\nthat could be allowed next.",
+    "summary": "Get the user outreach policy"
+  },
+  "UpdateSecurityAgentOutreachMode": {
+    "description": "Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an\nanalyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users\nwhose email domain is allowed).",
+    "summary": "Update the outreach mode",
+    "request_description": "The new outreach mode.",
+    "request_schema_description": "Request to set the organization's outreach mode."
+  },
+  "AddSecurityAgentOutreachPolicyDomain": {
+    "description": "Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The\ndomain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.\nAn organization can allow at most 20 domains.",
+    "summary": "Add an allowed outreach domain",
+    "request_description": "The email domain to allow.",
+    "request_schema_description": "Request to add one allowed email domain."
+  },
+  "RemoveSecurityAgentOutreachPolicyDomain": {
+    "description": "Remove one allowed email domain, by its name.",
+    "summary": "Remove an allowed outreach domain"
+  },
+  "UpdateSecurityAgentOutreachPolicyRules": {
+    "description": "Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;\nrules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews\nin `automated` mode.",
+    "summary": "Update outreach policy rules",
+    "request_description": "The rules to upsert.",
+    "request_schema_description": "Request to upsert the outreach automation state of detection rules."
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
