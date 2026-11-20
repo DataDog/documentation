@@ -131,7 +131,14 @@ Click a signal to open its side panel. The investigation section shows the statu
 - **Completed**: the result is available, and the signal is updated.
 - **Failed**: the investigation could not complete. The section shows the reason. See [Troubleshoot investigations](#troubleshoot-investigations).
 
-<!-- TODO: add screenshot security/ai_guard/dynamic_signals_side_panel.png: signal side panel with a completed investigation -->
+When the investigation completes, the side panel shows:
+
+- The investigation title and severity in the header, with the MITRE ATLAS tactic and techniques.
+- The verdict, the summary, and the confidence of the investigation.
+- {{< ui >}}AI Guard Outcomes{{< /ui >}}: how far the attack progressed, the AI Guard detection, and whether the model complied.
+- The {{< ui >}}Investigation{{< /ui >}} and {{< ui >}}Evidence{{< /ui >}} tabs, with the full result and the evidence that supports it.
+
+{{< img src="security/ai_guard/dynamic_signals_side_panel.png" alt="An AI Guard signal side panel with a completed investigation: a high severity title, a true positive verdict with a summary, the AI Guard outcomes, and the Investigation and Evidence tabs" style="width:100%;" >}}
 
 ### Notify on investigated signals
 
