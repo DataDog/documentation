@@ -104,7 +104,7 @@ Datadog adds tags from the reference table to usage it processes after you enabl
 
 Each metric covers one product, while the [**AI Credits Management**][10] page shows the total for all products. These metrics are estimates. For billed usage, use [**Plan & Usage > AI Credits**][6].
 
-**Note:** The AI Credits Management page shows usage for the organization you're logged in to. In a parent organization, the usage metrics also include child organizations, tagged with `child_org_name`. To see only the current organization, filter on `child_org_name:self`.
+**Note:** The AI Credits Management page shows usage only for the organization you're logged in to. In a parent organization, the `datadog.estimated_usage.*.ai_credits` metrics also include usage from child organizations, tagged with `child_org_name`. To see metric usage for only the current organization, filter the metrics on `child_org_name:self`.
 
 ## Availability
 
