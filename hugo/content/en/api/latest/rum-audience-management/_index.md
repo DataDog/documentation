@@ -1,3 +1,3 @@
 ---
-title: Rum Audience Management
+title: RUM Audience Management
 ---

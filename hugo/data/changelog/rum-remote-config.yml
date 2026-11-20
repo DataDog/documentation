@@ -13,3 +13,10 @@ entries:
       - GetRumSdkConfig
     title: Add RUM API permissions for operation strong links and sdk remote 
       config
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - GetRUMSdkConfig
+      - UpdateRUMSdkConfig
+    title: Uppercase RUM acronym in tags, operationIds and schemas

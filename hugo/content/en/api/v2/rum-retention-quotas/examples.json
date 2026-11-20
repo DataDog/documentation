@@ -1,5 +1,5 @@
 {
-  "DeleteRumQuotaConfig": {
+  "DeleteRUMQuotaConfig": {
     "responses": {
       "400": {
         "json": {
@@ -92,7 +92,7 @@
       "html": ""
     }
   },
-  "GetRumQuotaConfig": {
+  "GetRUMQuotaConfig": {
     "responses": {
       "200": {
         "json": {
@@ -207,7 +207,7 @@
       "html": ""
     }
   },
-  "UpsertRumQuotaConfig": {
+  "UpsertRUMQuotaConfig": {
     "responses": {
       "200": {
         "json": {

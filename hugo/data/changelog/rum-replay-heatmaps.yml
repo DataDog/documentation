@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - CreateReplayHeatmapSnapshot
+      - DeleteReplayHeatmapSnapshot
+      - ListReplayHeatmapSnapshots
+      - UpdateReplayHeatmapSnapshot
+    title: Uppercase RUM acronym in tags, operationIds and schemas
