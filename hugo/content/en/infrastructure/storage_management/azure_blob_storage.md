@@ -91,10 +91,10 @@ Go to **Datadog** > **Storage Management** > **Azure Blob Storage** > [**Enable 
 
 Register each storage account with Storage Management by calling the [Enable Storage Management for a bucket][402] endpoint. The App Registration must be connected to Datadog through the [Azure integration][403].
 
-Before running the following curl command, set `DD_API_KEY` and `DD_APP_KEY` to a Datadog [API key][405] and [application key][406]. The application key must have the **Cloud Inventory Write** [permission][407].
+Before running the following `curl` command, set `DD_API_KEY` and `DD_APP_KEY` to a Datadog [API key][405] and [application key][406]. The application key must have the **Cloud Inventory Write** [permission][407].
 
 ```bash
-curl -X PUT "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/cloudinventoryservice/syncconfigs" \
+curl -X PUT "https://api.{{< region-param key="dd_site" >}}/api/v2/cloudinventoryservice/syncconfigs" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -117,8 +117,8 @@ curl -X PUT "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/c
   }'
 ```
 
-To use the preceding curl command:
-- The API host matches the site selected in the site selector on this page. If your organization is on a different [Datadog site][404], select it or replace the host.
+To use the preceding `curl` command:
+- Check that the API host matches your [Datadog site][404]. If it doesn't, select your site in the site selector on this page or replace the host.
 - Replace `<CLIENT_ID>` with the **Application (client) ID** of the App Registration that has the **Storage Blob Data Reader** role on the inventory container.
 - Replace `<TENANT_ID>` with the **Directory (tenant) ID** of that App Registration.
 - Replace `<SUBSCRIPTION_ID>` with the ID of the Azure subscription that contains the storage account.
@@ -143,7 +143,7 @@ All fields are required. Make one request per storage account. A `200` response 
 
 To verify your setup:
 1. Wait for the first inventory report to generate. Storage Management metrics can take 24-48 hours to become available.
-2. Navigate to **Infrastructure** > [**Storage Management**][1] and confirm that the storage accounts you configured appear in the explorer list when **Monitored buckets** is selected.
+2. Navigate to **Infrastructure** > [**Storage Management**][1], select **Monitored buckets**, and confirm that the storage accounts you configured appear in the explorer list.
 
 ## Further reading
 
