@@ -519,10 +519,11 @@ When `collect_xe.query_plans` is on, the Agent checks the `datadog_query_plans` 
 
 If the session doesn't exist or is stopped, the Agent:
 
-- logs a warning, with the script to create the session:
+- logs a warning, with a link to the setup instructions for your deployment:
   ```text
-  The datadog_query_plans XE session doesn't exist or isn't running, so no real execution plans are collected.
+  The datadog_query_plans XE session doesn't exist or isn't running, so no real execution plans are collected. See https://docs.datadoghq.com/database_monitoring/guide/sql_real_execution_plans/?tab=selfhosted#create-the-session
   ```
+  The link opens the **Azure SQL Database** or **Azure SQL Managed Instance** tab on those deployments, and the **Self-hosted** tab otherwise. On Amazon RDS and Google Cloud SQL, use the tab for your deployment instead.
 - reports a `query_plans_xe_session_missing` health event with a warning status.
 
 The `diagnose` command reports a warning:
