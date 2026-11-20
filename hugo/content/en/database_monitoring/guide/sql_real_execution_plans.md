@@ -433,7 +433,7 @@ The following options are available under `collect_xe.query_plans`. See the [sam
 : Maximum number of plans collected per hour for each query and plan shape (query hash and query plan hash). Of the executions read on the same collection, the Agent keeps the slowest one. Default: `4`.
 
 `max_plan_size_bytes`
-: Plans larger than this size, in bytes, are skipped. Default: `1000000`.
+: Plans larger than this size, in bytes, are skipped. Default: `1000000`. The plans the Agent holds on each collection are also limited to about 64 MB in total. After it reaches that limit, the Agent skips the other plans read on that collection.
 
 [Restart the Agent][7] to apply the changes.
 
@@ -583,6 +583,7 @@ The Agent doesn't send every plan in the session:
 
 - It collects up to `samples_per_hour_per_query` plans per hour for each query and plan shape.
 - It skips plans larger than `max_plan_size_bytes`.
+- It skips plans after the plans held on a collection reach about 64 MB in total.
 - It skips plans that have no runtime statistics.
 
 The session only captures the executions that match its `WHERE` clause. With a `ring_buffer` target, the session can also lose plans between two reads of the Agent.
