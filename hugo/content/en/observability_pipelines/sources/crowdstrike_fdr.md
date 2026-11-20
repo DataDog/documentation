@@ -72,7 +72,7 @@ Click {{< ui >}}Advanced Options{{< /ui >}} to configure these settings.
 #### SQS settings
 
 - {{< ui >}}Visibility timeout{{< /ui >}}: The number of seconds a received SQS message is hidden from other receivers while the Worker processes its files. Enter a value from `0` to `43200` (12 hours). Defaults to `300` (5 minutes). If the Worker takes longer than the timeout to process the files in a message, the message is delivered again, which can result in duplicate logs. Increase this value if your feed contains large files.
-- {{< ui >}}Number of receivers{{< /ui >}}: The number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+- {{< ui >}}Number of receivers{{< /ui >}}: The number of concurrent tasks polling the SQS queue. Enter a value of `1` or greater. Defaults to the number of Worker threads.
 - {{< ui >}}Messages per poll{{< /ui >}}: The maximum number of SQS messages to receive in each poll. Enter a value from `1` to `10`. Defaults to `1`. SQS can return fewer messages than the maximum. This setting limits the number of notifications per request, not the number of files in each notification.
 
 #### Configure TLS
@@ -131,10 +131,6 @@ For [component metrics][7] and [source buffer metrics][8] emitted by all sources
 
 `pipelines.sqs_message_delete_succeeded_total`
 : **Description**: The number of successful deletions of SQS messages.
-: **Metric type**: count
-
-`pipelines.sqs_message_defer_succeeded_total`
-: **Description**: The number of SQS messages for which visibility-timeout deferral succeeded.
 : **Metric type**: count
 
 `pipelines.s3_object_processing_succeeded_duration_seconds`
