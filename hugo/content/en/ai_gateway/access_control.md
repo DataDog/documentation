@@ -30,7 +30,7 @@ Adding a resource to another access policy does not remove access granted by the
 ## Access policies
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Model access{{< /ui >}}][8] and create a policy.
-2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias and that rule's direct targets.
+2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias. Callers reach the rule's destinations through the alias only; the rule does not grant direct `<PROVIDER_SLUG>/<MODEL_ID>` access to them.
 3. Choose the users, teams, and service accounts, and their access level:
    - **No access**: Cannot call the policy's models or routing rules.
    - **Runner**: Can call the policy's models and routing rules.
@@ -57,11 +57,11 @@ Use access policies to control which callers can request higher reasoning effort
 - Complete [AI Gateway setup][reasoning-1].
 - Have `ai_gateway_config_read` and `ai_gateway_config_write` to configure policies.
 - Use a caller credential whose principal and scope allow `ai_gateway_usage`.
-- Choose a model that supports the reasoning level or fast mode you want to test. A Gateway policy grants permission; it does not add a provider capability.
+- Choose a model that supports the reasoning level or fast mode you want to test. An AI Gateway policy grants permission; it does not add a provider capability.
 
 ### Configure the policy
 
-1. Open [AI Gateway > Policies > Access policies][reasoning-2].
+1. Open [AI Gateway > Policies > Model access][reasoning-2].
 2. Create or edit a policy.
 3. Select the models or routing rules the policy covers.
 4. Grant the intended users, teams, or service accounts {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access.
@@ -76,7 +76,7 @@ For organization-wide settings, configure the same options under {{< ui >}}Polic
 
 ### Set a reasoning ceiling
 
-AI Gateway compares recognized levels in this order:
+AI Gateway compares recognized levels in the following order:
 
 ```text
 none < minimal < low < medium < high < xhigh < max
@@ -97,7 +97,7 @@ For Anthropic Messages, AI Gateway evaluates omitted effort as `high` unless con
 
 For OpenAI requests and native Gemini requests without thinking controls, omitted effort passes the reasoning check, including a ceiling of `none`. The provider applies its own default; AI Gateway does not infer or rewrite that default. Send an explicit value to constrain and verify the actual effort.
 
-For native Gemini, AI Gateway maps `thinkingBudget` to these levels:
+For native Gemini, AI Gateway maps `thinkingBudget` to the following levels:
 
 | Thinking budget | Reasoning level |
 |---|---|
@@ -129,7 +129,7 @@ A conversation can override request-level effort. For Responses, the last `confi
 
 ### Control fast mode
 
-AI Gateway recognizes these premium-mode request fields:
+AI Gateway recognizes the following premium-mode request fields:
 
 | Request format | Fast-mode request |
 |---|---|
@@ -191,7 +191,7 @@ Use the Responses example above and a test caller whose applicable policies you 
 5. Repeat the request and confirm success if the provider accepts it.
 6. Follow the requests from [AI Gateway Overview][reasoning-6] into Agent Observability. Check the destination and error details. For routing preferences, inspect the response headers too.
 
-If a request unexpectedly succeeds, review every applicable access policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [Gateway error codes][reasoning-7] to distinguish policy refusals from provider errors.
+If a request unexpectedly succeeds, review every applicable access policy and the actual caller identity. If the provider rejects an allowed request, check that the model supports that effort or premium tier. See [AI Gateway error codes][reasoning-7] to distinguish policy refusals from provider errors.
 
 ## Further reading
 

@@ -19,7 +19,7 @@ Create separate providers when workloads need different upstream accounts, regio
 
 - [AI Gateway access][providers-1] for the Datadog organization.
 - The `ai_gateway_config_read` and `ai_gateway_config_write` permissions to configure providers and models.
-- A configured integration account for the provider. To create or update API-key accounts, request **Integrations Manage** (`manage_integrations`). Cloud integration setup has separate [AWS, Azure, and GCP configuration permissions][providers-9].
+- A configured integration account for the provider. To create or update API-key accounts, request **Integrations Manage** (`manage_integrations`). Cloud integration setup has separate [AWS, Azure, and Google Cloud configuration permissions][providers-9].
 - Upstream credentials that can **invoke models**, not only read usage or metrics. Complete any required model-access approvals in the upstream account.
 - A [personal access token or service access token][providers-2] for verification. Both its principal and credential scope must allow `ai_gateway_usage`.
 
@@ -43,7 +43,7 @@ The account selector offers the providers available to the organization. Provide
 
 ### Add an integration account
 
-In the provider form's {{< ui >}}Account{{< /ui >}} selector, select an existing account, or open {{< ui >}}+ Add new account{{< /ui >}} and choose the provider. Save the integration settings, then return to Gateway setup.
+In the provider form's {{< ui >}}Account{{< /ui >}} selector, select an existing account, or open {{< ui >}}+ Add new account{{< /ui >}} and choose the provider. Save the integration settings, then return to AI Gateway setup.
 
 Some accounts use a separate integration page:
 
@@ -51,15 +51,15 @@ Some accounts use a separate integration page:
 - **Baseten** opens the Baseten integration, where you configure a key permitted to call Model APIs.
 - **Azure AI Foundry** offers {{< ui >}}+ Set up the Azure integration{{< /ui >}}. Complete [Azure integration setup][providers-4], return to the form, and select the app registration.
 
-Integration credentials remain separate from the Datadog credential the application uses to call Gateway. Rotate upstream credentials in the integration settings.
+Integration credentials remain separate from the Datadog credential the application uses to call AI Gateway. Rotate upstream credentials in the integration settings.
 
 ## Add a provider
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][providers-5] and click {{< ui >}}New Provider{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][providers-5] and click {{< ui >}}New provider account{{< /ui >}}.
 2. In {{< ui >}}Details{{< /ui >}}, select the provider's integration account and complete its connection settings. See the [Choose a provider account](#choose-a-provider-account) section.
 3. Enter a display name and a unique slug, such as `production-openai`. The slug becomes part of every direct model request. The connected account and slug cannot be changed after creation.
-4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. Gateway automatically enables discovered models. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
-5. Review the cost multiplier and the prices in the [Model Catalog][providers-6]. A custom model price takes precedence over the provider multiplier. Confirm pricing before relying on spend reporting or budgets.
+4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. AI Gateway enables discovered models on the provider automatically. Callers can use them only after you grant access in the {{< ui >}}Access{{< /ui >}} step. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
+5. Review the cost multiplier. It scales automatically detected prices, and a custom model price takes precedence over it. After you create the provider, confirm prices in [{{< ui >}}Models{{< /ui >}} > {{< ui >}}Model catalog{{< /ui >}}][providers-6] before relying on spend reporting or budgets.
 6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. See [Control model access][providers-7].
 7. In {{< ui >}}Review{{< /ui >}}, check the account, slug, models, and access assignments, then click {{< ui >}}Create provider{{< /ui >}}.
 8. Open the saved provider and [verify a model request](#verify-the-connection).
@@ -89,7 +89,7 @@ The form generates Azure CLI role-assignment commands for the selected account a
 
 ### Custom endpoints
 
-Use **Custom Provider** for endpoints that accept OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, or System One requests. These are the operations available in the Gateway form.
+Use **Custom Provider** for endpoints that accept OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, or System One requests. These are the operations available in the AI Gateway form.
 
 Custom endpoints authenticate with a bearer API key. The {{< ui >}}Provider{{< /ui >}} field in the account editor only fills in a default base URL. AI Gateway doesn't use it to choose a request format or authentication method: select the request formats under {{< ui >}}Supported operations{{< /ui >}} in step 6.
 
@@ -98,19 +98,19 @@ Custom endpoints authenticate with a bearer API key. The {{< ui >}}Provider{{< /
 3. Set {{< ui >}}Base URL{{< /ui >}} to the HTTPS API base URL, including the required base path, for example `https://llm.example.com/v1`. AI Gateway discovers models by calling `GET <BASE_URL>/models`, so the endpoint must implement the OpenAI [List models](https://platform.openai.com/docs/api-reference/models/list) API and return `{"object": "list", "data": [{"id": "<MODEL_ID>", ...}]}`. If it doesn't, [add its models manually](#add-a-model-manually).
 4. Enter the upstream {{< ui >}}API Key{{< /ui >}}. If the {{< ui >}}Authentication{{< /ui >}} selector is displayed, select {{< ui >}}API key{{< /ui >}} for this setup.
 5. Add any {{< ui >}}Custom Headers{{< /ui >}} required by the endpoint, then click {{< ui >}}Save{{< /ui >}}.
-6. Back in the Gateway provider form, select the saved account. Under {{< ui >}}Supported operations{{< /ui >}}, select the request formats this endpoint accepts.
+6. Back in the AI Gateway provider form, select the saved account. Under {{< ui >}}Supported operations{{< /ui >}}, select the request formats this endpoint accepts.
 7. Review discovery and any manual models, then complete provider creation.
 
 The selected operations become the defaults for discovered models and newly added manual models. Declaring an operation does not add support to the upstream endpoint. Test each request format the application needs.
 
 ## Identify models in requests
 
-Gateway distinguishes the caller-facing model identifier from the identifier sent upstream:
+AI Gateway distinguishes the caller-facing model identifier from the identifier sent upstream:
 
 | Setting | Purpose | Example |
 |---|---|---|
-| Provider slug | Identifies the Gateway provider account. | `production-openai` |
-| Model ID | Identifies a model within that Gateway provider. | `approved-model` |
+| Provider slug | Identifies the AI Gateway provider account. | `production-openai` |
+| Model ID | Identifies a model within that AI Gateway provider. | `approved-model` |
 | Provider model ID | Identifies the upstream model or deployment. Defaults to **Model ID** when blank. | `deployment-name` |
 
 For those example values, the application sends:
@@ -119,7 +119,7 @@ For those example values, the application sends:
 {"model": "production-openai/approved-model"}
 ```
 
-Gateway sends `deployment-name` as the upstream model identifier. Use the complete `<PROVIDER_SLUG>/<MODEL_ID>` from the Gateway catalog, rather than the upstream identifier alone.
+AI Gateway sends `deployment-name` as the upstream model identifier. Use the complete `<PROVIDER_SLUG>/<MODEL_ID>` from the AI Gateway catalog, rather than the upstream identifier alone.
 
 ### Add a model manually
 
@@ -127,21 +127,21 @@ AI Gateway discovers a provider's models from its model list. Add a model manual
 
 1. In the provider's {{< ui >}}Models{{< /ui >}} stage, under {{< ui >}}Manually add model{{< /ui >}}, click {{< ui >}}Add model{{< /ui >}}.
 2. Enter a unique {{< ui >}}Model ID{{< /ui >}} within the provider.
-3. Enter {{< ui >}}Provider model ID{{< /ui >}} if it differs from the Model ID. For Vertex AI, the field is {{< ui >}}Provider resource path{{< /ui >}} and requires a full resource path, such as:
+3. Enter {{< ui >}}Provider model ID{{< /ui >}} if it differs from the Model ID. For Vertex AI, the field is {{< ui >}}Provider resource path{{< /ui >}} and takes the publisher model path. Do not include the project or location, because AI Gateway adds them from the provider's connection settings:
 
    ```text
-   projects/<PROJECT_ID>/locations/<LOCATION>/publishers/google/models/<PUBLISHER_MODEL_ID>
+   publishers/google/models/<PUBLISHER_MODEL_ID>
    ```
 
 4. Select the supported operations that the upstream model accepts, then save the provider.
-5. Check the model's operations, enabled state, and price in the Model Catalog. Send a request to verify the mapping.
+5. Check the model's enabled state in the provider's {{< ui >}}Models{{< /ui >}} section and its price in the Model catalog. Send a request to verify the mapping.
 
-A manual entry does not grant upstream model access or Gateway caller access. Configure both before testing it.
+A manual entry does not grant upstream model access or AI Gateway caller access. Configure both before testing it.
 
 ## Verify the connection
 
 1. Open the saved provider. Under {{< ui >}}How to call this provider{{< /ui >}}, select a model and request format to view a generated example.
-2. Run the example with the application's Datadog credential and the Gateway endpoint for the correct [Datadog site][providers-8]. For a model that supports Chat Completions:
+2. Run the example with the application's Datadog credential and the AI Gateway endpoint for the correct [Datadog site][providers-8]. For a model that supports Chat Completions:
 
    ```shell
    curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/chat/completions" \
@@ -153,7 +153,7 @@ A manual entry does not grant upstream model access or Gateway caller access. Co
      }'
    ```
 
-3. Confirm a successful model response. Click {{< ui >}}View in Traces{{< /ui >}} and find the matching Gateway request by timestamp, caller, provider, and model.
+3. Confirm a successful model response. Click {{< ui >}}View in Traces{{< /ui >}} and find the matching AI Gateway request by timestamp, caller, provider, and model.
 4. Confirm the served destination and token usage. If the request succeeds but spend is missing, check model pricing separately.
 5. Repeat with each operation the application uses. Success with one API does not verify another API, region, or model.
 
@@ -248,7 +248,7 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
 ### Verify subscription traffic
 
 1. Send a prompt from Claude Code or Codex.
-2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][subscription-3] and find the request under the subscription provider. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect its span.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][subscription-3] and find the request under the subscription provider. To inspect its span, click a bar and select {{< ui >}}View traces{{< /ui >}}, or click a row in a ranking.
 3. Confirm that the usage appears on the usage page of your Claude or ChatGPT plan.
 
 ### How AI Gateway handles subscription traffic
@@ -283,7 +283,7 @@ If your setup is correct, Anthropic returns HTTP `401` with an `authentication_e
 | The subscription option doesn't appear, or creating the provider returns HTTP `403` with `subscription_providers_disabled`. | Subscription providers are not enabled for your organization. | Contact your Customer Success Manager. |
 | A request returns HTTP `403` with `no_permitted_target`. | The user's access does not include the provider or the model. | Grant access to the whole provider or to the model. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider). |
 | Claude Code shows `Failed to authenticate.` followed by `access denied: model "<PROVIDER_SLUG>/<MODEL_ID>" is not allowed by your access policies`. | AI Gateway denied the model. Claude Code adds `Failed to authenticate.` to every `403` response, so the error is not a sign-in problem. | Grant access to the model or to the whole provider. |
-| A request returns HTTP `400` with `requested_provider_unavailable`. | The `x-ai-gateway-provider` slug doesn't match an active provider. | Check the slug on the provider's page. |
+| A request returns HTTP `400` with `model_not_found`. | The `x-ai-gateway-provider` slug doesn't match a configured provider. | Check the slug on the provider's page. |
 | A request returns HTTP `400` with `unsupported_operation`. | The request used an API that the subscription provider doesn't serve. | Use Anthropic Messages with an Anthropic subscription provider, and OpenAI Responses with an OpenAI subscription provider. |
 | Anthropic or OpenAI returns HTTP `401` during a session. | The subscription sign-in is missing or expired. | Sign in again: run `/login` in Claude Code, or run `codex login`. |
 | Usage is billed per token instead of to the subscription. | Claude Code sends an API credential from `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`. | Remove the setting, then sign in with `/login`. |
@@ -294,7 +294,7 @@ If your setup is correct, Anthropic returns HTTP `401` with an `authentication_e
 
 AI Gateway supports these model families on each provider. It also supports custom OpenAI-compatible endpoints.
 
-| Model family | OpenAI | Anthropic | GCP Vertex AI | Amazon Bedrock | Azure OpenAI |
+| Model family | OpenAI | Anthropic | Google Cloud Vertex AI | Amazon Bedrock | Azure OpenAI |
 |---|:---:|:---:|:---:|:---:|:---:|
 | OpenAI GPT | {{< X >}} | | | {{< X >}} | {{< X >}} |
 | Anthropic Claude | | {{< X >}} | {{< X >}} | {{< X >}} | |
@@ -313,11 +313,11 @@ The slug, provider type, integration account, and connection configuration canno
 | The account is missing or unavailable. | Check that it is saved in the same Datadog organization, enabled for the integration, and available to this workload. |
 | Model discovery fails. | Open the provider's status details. Review the upstream status and suggested fix, then use {{< ui >}}Open integration{{< /ui >}} to update credentials when available. |
 | Discovery works, but inference fails. | Check upstream invocation permissions, model approvals, deployment configuration, region, and project. For Foundry, confirm both Azure roles. |
-| The wrong model is requested. | Compare the Gateway Model ID with the upstream Provider model ID or Vertex resource path. |
-| Gateway returns HTTP `401` or `403`. | Check `ai_gateway_usage`, credential scope, and the access policy for the requested model or route. |
+| The wrong model is requested. | Compare the AI Gateway Model ID with the upstream Provider model ID or Vertex resource path. |
+| AI Gateway returns HTTP `401` or `403`. | Check `ai_gateway_usage`, credential scope, and the access policy for the requested model or route. |
 | A request format fails. | Check the model's supported operations and the upstream endpoint's capabilities. |
 
-Provider status updates after model synchronization or Gateway requests. Review the timestamp and error details, and verify a real request after fixing the connection.
+Provider status updates after model synchronization or AI Gateway requests. Review the timestamp and error details, and verify a real request after fixing the connection.
 
 ## Further reading
 

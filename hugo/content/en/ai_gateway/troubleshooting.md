@@ -44,6 +44,8 @@ Confirm the time range and organization, and that the request reached AI Gateway
 
 Errors that AI Gateway generates include the `X-Ai-Gateway-Error-Code` response header. For OpenAI and Anthropic, the same code is in the response body's `error.code` field. For Gemini, read the code from the header. Gemini's `error.code` is the numeric HTTP status.
 
+Two cases carry no error code header. Authentication failures return HTTP `401` with the body `{"errors": ["Unauthorized"]}`. On a streamed request, an error that occurs after AI Gateway has started the response arrives as an error event in the stream.
+
 A provider `4xx` or `5xx` response keeps its original status and body and does not include `X-Ai-Gateway-Error-Code`. Those responses are not listed below.
 
 The following list shows the HTTP status that AI Gateway returns with each `X-Ai-Gateway-Error-Code` value and what the code means. When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
@@ -70,10 +72,10 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
 
 `budget_pricing_unavailable`
-: HTTP `400`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
+: HTTP `400`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Model catalog{{< /ui >}}][11], or switch the budget to Alert-only.
 
 `model_not_found`
-: HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target. Check for an unknown model, provider slug, or routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. Clients that already handle OpenAI's `model_not_found` code keep working.
+: HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target. Check for an unknown model, provider slug, or routing rule, or an empty or malformed identifier. The `message` says when the model is missing its `<PROVIDER_SLUG>/` or `router/` prefix. Otherwise, it does not say which identifier failed. A provider slug that is not configured, in the model prefix or the `x-ai-gateway-provider` header, also returns this code. Clients that already handle OpenAI's `model_not_found` code keep working.
 
 `bad_request`
 : HTTP `400`. A malformed request that AI Gateway rejected before dispatch, such as an invalid JSON body, an invalid category filter, or an unknown action. Use `message` to see which.
@@ -87,9 +89,6 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 `session_destination_unavailable`
 : HTTP `409`. The request's session is pinned to a destination that can no longer serve it, for example because the destination was removed from the routing rule. The response sets `X-Should-Retry: false`. Start a new conversation with a new session ID. See [Session destination unavailable](/ai_gateway/routing/#session-destination-unavailable).
 
-`requested_provider_unavailable`
-: HTTP `400`. The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active.
-
 `no_eligible_target`
 : HTTP `400`. Targets failed for mixed reasons: some on access, others on operation support or provider identity. This is not only a permission problem.
 
@@ -97,7 +96,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `403`. Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry.
 
 `zdr_no_eligible_target`
-: HTTP `400`. The request requires zero data retention, and none of its eligible targets qualifies for it. This is a configuration issue. Do not retry.
+: HTTP `400`. Your organization requires zero data retention, and none of the request's eligible targets qualifies for it. This is a configuration issue. Do not retry.
 
 `zdr_requirement_unavailable`
 : HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request.

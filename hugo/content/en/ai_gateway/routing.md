@@ -20,7 +20,7 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 
 ## Create a routing rule
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Routing{{< /ui >}}][7] and click {{< ui >}}New Routing Rule{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Routing{{< /ui >}}][7] and click {{< ui >}}New routing rule{{< /ui >}}.
 2. Enter a lowercase slug. The page shows the resulting `router/<RULE_SLUG>` identifier.
 3. Configure the first routing step. Select one model, use {{< ui >}}Weighted{{< /ui >}} to assign traffic shares across [sessions](#sessions), use {{< ui >}}Smart{{< /ui >}} to let a decision model pick a destination for each session (see [Smart routing steps](#smart-routing-steps)), or select {{< ui >}}Another route{{< /ui >}} to link a routing rule. A model destination can use a specific provider account or any configured provider that serves that model.
 4. Optional: Add fallback steps in priority order.
@@ -75,7 +75,7 @@ A session is the set of requests that belong to one conversation or one agent ru
 - A [Smart routing step](#smart-routing-steps) chooses a destination once per session.
 - [Session pinning](#session-pinning) remembers the destination that served the session and sends its later requests there.
 
-AI Gateway also groups a session's requests as one session in Agent Observability. See [Observe Gateway Activity](/ai_gateway/observability/).
+AI Gateway also groups a session's requests as one session in Agent Observability. See [Observe AI Gateway Activity](/ai_gateway/observability/).
 
 Send a session ID with the `x-session-id` request header. Claude Code, Codex, and several other coding agents send their own session IDs, so you do not need to set the header for them. Without any session ID, AI Gateway identifies the conversation by a [prompt fingerprint](#requests-without-a-session-id).
 
@@ -103,7 +103,7 @@ Session IDs are scoped to your Datadog organization. Within an organization, eve
 
 ### Session signals
 
-AI Gateway reads the session from the first valid signal in this order:
+AI Gateway reads the session from the first valid signal in the following order:
 
 | Order | Signal | Sent by |
 |---|---|---|
@@ -234,7 +234,7 @@ Two request tags have a session meaning:
 `x-dd-tag-session_id`
 : Sets the session of the request's span in Agent Observability when the request has no other session signal. It does not affect routing or session pinning. To route by session, use `x-session-id`.
 
-### Example: one session per agent role
+### Example: One session per agent role
 
 An evaluation harness, such as an agent benchmark, often calls models in several roles for one task: the agent under test, a user simulator, and a reviewer or judge. If all the roles send the same session ID, their requests share one session:
 
