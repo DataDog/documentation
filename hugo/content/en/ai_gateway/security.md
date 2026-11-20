@@ -5,6 +5,9 @@ further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
+  - link: "/llm_observability/data_governance/access_control/"
+    tag: "Documentation"
+    text: "Data Access Control in Agent Observability"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
@@ -112,6 +115,33 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 1. Review the organization default and any matching capture overrides.
 2. Send a harmless test request with the same caller, team selection, custom tags, and model or routing rule as the workload.
 3. Open the request's Gateway span and review the recorded fields.
+
+### Restrict who can view captured content
+
+Data capture controls what AI Gateway records. It does not control who can read it: anyone in your organization who can view Agent Observability traces can open a Gateway span and read the prompts and responses it captured.
+
+To keep Full capture for a workload and limit who can read its spans, place those spans in a [Restricted Dataset](/llm_observability/data_governance/access_control/) with Data Access Control. Capture keeps working, and users outside the teams or roles you grant can't see the spans.
+
+A Restricted Dataset selects spans by a tag. Choose the tag that marks the workload:
+
+| Boundary | How the workload sets it | Notes |
+|---|---|---|
+| Application name (`ml_app`) | Send `x-dd-tag-ml_app: <APPLICATION_NAME>` with each request. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). | Recommended. Without the header, Gateway spans use `datadog-ai-gateway`, or the calling application's name when the caller propagates Agent Observability trace context. An `ml_app` filter is also the only one that restricts the application's evaluator configurations and managed prompts. |
+| Another span tag | Send `x-dd-tag-<KEY>: <VALUE>`, for example `x-dd-tag-data_scope: restricted`. | Restricts traces only. Data Access Control uses one tag key for each telemetry type, so this works only if all of your organization's Agent Observability datasets use that key. If any already use `ml_app`, use the application name instead. |
+
+To set up the restriction:
+
+1. Choose the tag and value, and send the header from every request in the workload. Use lowercase letters, digits, hyphens, and underscores in the value.
+2. Create the Restricted Dataset in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Data Access Control{{< /ui >}}](https://app.datadoghq.com/organization-settings/data-access-controls). Select Agent Observability as the product, enter the tag and value, and grant access to the teams or roles that need to read the spans. Creating a Restricted Dataset requires the Datadog Admin role or the `user_access_manage` permission. If you don't have either, send your organization's administrator the tag, its value, and the teams or roles to grant.
+3. Send a test request, then confirm with a user outside the granted teams and roles that the span is not visible. A Restricted Dataset whose filter matches no spans restricts nothing and shows no warning.
+
+Access is granted to teams and roles, not to individual users. To limit access to one person, grant a team that has only that member and does not allow anyone in the organization to join.
+
+Keep the following in mind:
+
+- **Only tagged requests are restricted.** A request that omits the header is recorded under the default application and stays visible to everyone who can view traces. To avoid recording content outside the boundary, keep the organization default at Metadata only and create a Full capture override for the same user, team, or custom tag as the restricted workload.
+- **Other products need their own restriction.** If the calling application also sends the same prompts and responses to APM traces or custom metrics, for example through OpenTelemetry, create Restricted Datasets with matching boundaries for those products. See [Data Access Control](/account_management/rbac/data_access/#agent-observability).
+- **Monitors read all data.** A monitor evaluates with full access to data, so review who can create monitors on Agent Observability data.
 
 ## Further reading
 
