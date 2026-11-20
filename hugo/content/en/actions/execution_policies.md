@@ -153,6 +153,8 @@ When you configure a private action step in a workflow, you can target an Agent 
 
 Targeting an Agent creates a virtual connection for the step, identified by the target Agent only. The virtual connection carries no credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
 
+If an action requires authentication, select a credential connection in addition to the target. For configuration instructions, see [Handling private action credentials][8].
+
 ### Target a private Slack channel from a Slack step
 
 In a Slack step, select the workspace and enter a private channel that an Execution Policy allows you to use.
@@ -168,6 +170,8 @@ Execution Policies authorize actions for the following integrations:
 | **Kubernetes** (`com.datadoghq.kubernetes.*`) | Private actions | Agents, with optional Target Namespaces |
 | **Remote Action** (`com.datadoghq.remoteaction.*`), including the rshell bundle (the `runCommand` action) and network path actions | Private actions | Agents |
 | **Script** (`com.datadoghq.script.*`) | Private actions | Agents |
+| **HTTP** (`com.datadoghq.http.*`) | Private actions | Agents |
+| **MongoDB** (`com.datadoghq.mongodb.*`) | Private actions | Agents |
 | **Slack** | Slack actions | Workspaces and private channels |
 
 The [Private Action Runner Reference][7] shows which private actions each runner type supports. If your integration isn't authorizable through Execution Policies, use [Connections][3] instead.
@@ -218,3 +222,4 @@ When a Slack action runs:
 [5]: /account_management/rbac/
 [6]: https://app.datadoghq.com/actions/execution-policies
 [7]: /actions/private_actions/reference/
+[8]: /actions/connections/private_action_credentials/
