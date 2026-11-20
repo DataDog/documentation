@@ -172523,6 +172523,10 @@ paths:
         - Case Management Type
       x-displayName: Get all work item types
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a work item type.
       operationId: CreateCaseType
@@ -172572,6 +172576,10 @@ paths:
         - Case Management Type
       x-displayName: Create a work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/custom_attributes:
     get:
       description: Get all custom attributes
@@ -172606,6 +172614,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/cases/types/{case_type_id}:
     delete:
       description: Delete a work item type
@@ -172626,6 +172638,10 @@ paths:
         - Case Management Type
       x-displayName: Delete a work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the name, emoji, or description of an existing work item type.
       operationId: UpdateCaseType
@@ -172723,6 +172739,10 @@ paths:
         - Case Management Attribute
       x-displayName: Get custom attribute configs for work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a custom attribute configuration for a work item type.
       operationId: CreateCustomAttributeConfig
@@ -172781,6 +172801,10 @@ paths:
         - Case Management Attribute
       x-displayName: Create custom attribute config for work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
     delete:
       description: Delete custom attribute config
@@ -172803,6 +172827,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.
       operationId: UpdateCustomAttributeConfig
@@ -173400,6 +173428,10 @@ paths:
         - Case Management
       x-displayName: Add a comment to a work item
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete work item comment
@@ -173425,6 +173457,10 @@ paths:
         - Case Management
       x-displayName: Delete work item comment
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
     put:
       description: Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.
       operationId: UpdateCaseComment
@@ -174242,12 +174278,18 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
+            - notebooks_write
       summary: Create investigation notebook for case
       tags:
         - Case Management
       x-displayName: Create investigation notebook for work item
       x-menu-order: 57
+      x-permission:
+        operator: AND
+        permissions:
+          - cases_read
+          - notebooks_write
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a work item
@@ -174838,12 +174880,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Unwatch a case
       tags:
         - Case Management
       x-displayName: Unwatch a work item
       x-menu-order: 66
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.
       operationId: WatchCase
@@ -174867,12 +174913,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Watch a case
       tags:
         - Case Management
       x-displayName: Watch a work item
       x-menu-order: 65
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.

@@ -166,3 +166,13 @@ entries:
       - UpdateStatus
       - WatchCase
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/42008
+    operations:
+      - CommentCase
+      - CreateCaseNotebook
+      - DeleteCaseComment
+      - UnwatchCase
+      - WatchCase
+    title: Fix Work Management API permission metadata
