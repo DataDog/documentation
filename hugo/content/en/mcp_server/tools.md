@@ -3858,7 +3858,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
-[98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
+[98]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
 [101]: /gpu_monitoring/

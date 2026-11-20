@@ -29,8 +29,8 @@ In Datadog, navigate to [**Digital Experience** > **Performance Monitoring** > *
 
 To customize or disable individual MAUI trackers in code, see [Track Navigation][7], [Track User Interactions][8], and [Track Network Requests][9].
 
-[1]: /real_user_monitoring/setup/data_collected/?platform=ios#event-specific-attributes
-[2]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes
+[1]: /real_user_monitoring/setup/data_collected/?platform=ios#event-specific-attributes-ios
+[2]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes-android
 [3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui#view-naming-priority
 [4]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui#action-target-naming-priority
 [5]: /real_user_monitoring/application_monitoring/maui/error_tracking/

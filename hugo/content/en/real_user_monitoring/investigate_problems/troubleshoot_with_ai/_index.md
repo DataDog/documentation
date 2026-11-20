@@ -51,4 +51,4 @@ You can use Bits in RUM in three ways:
 [8]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/bits_chat/
 [9]: /bits_ai/bits_investigation/configure/
 [10]: /source_code/
-[11]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[11]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

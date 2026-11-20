@@ -68,7 +68,7 @@ This feature requires RUM iOS SDK version >= 1.18.0. See installation instructio
 RUMMonitor.shared().stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/
+[1]: /real_user_monitoring/setup/install/?platform=ios
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -79,7 +79,7 @@ This feature requires RUM Android SDK version >= 1.19.0. See installation instru
 GlobalRumMonitor.get().stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/
+[1]: /real_user_monitoring/setup/install/?platform=android
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -101,7 +101,7 @@ This feature requires RUM React Native SDK version >= 1.6.0. See installation in
 DdRum.stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: /real_user_monitoring/setup/install/?platform=react_native
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -114,5 +114,5 @@ DdRum.stopSession()
 [2]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
 [3]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android#set-user-information
 [4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter#set-user-information
-[5]: /real_user_monitoring/reactnative/#user-information
+[5]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=react_native
 [6]: /real_user_monitoring/application_monitoring/browser/

@@ -3,6 +3,7 @@ title: Kotlin Multiplatform Crash Reporting and Error Tracking
 aliases:
 - /real_user_monitoring/application_monitoring/kotlin_multiplatform/error_tracking
 - /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/error_tracking
+- /error_tracking/frontend/mobile/kotlin_multiplatform/
 type: multi-code-lang
 code_lang: kotlin-multiplatform
 code_lang_weight: 50
@@ -446,7 +447,7 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 [3]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
 [5]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[6]: /real_user_monitoring/kotlin_multiplatform/data_collected/
+[6]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
 [7]: /account_management/api-app-keys/#client-tokens
 [8]: /getting_started/tagging/using_tags/
 [9]: /error_tracking/frontend/mobile/android/#step-6---get-deobfuscated-stack-traces

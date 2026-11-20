@@ -118,5 +118,5 @@ Continue to [Saved Views](/real_user_monitoring/investigate_problems/explore_ret
 [3]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#track-additional-performance-timings
 [5]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
-[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser
 [7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#performance-timeseries

@@ -72,5 +72,5 @@ The Frontend team may also be encouraged to implement an error message in the UI
 
 [1]: /session_replay/
 [2]: /session_replay/dev_tools
-[3]: /real_user_monitoring/connect_rum_and_traces
+[3]: /tracing/other_telemetry/rum/
 [4]: https://app.datadoghq.com/rum/explorer

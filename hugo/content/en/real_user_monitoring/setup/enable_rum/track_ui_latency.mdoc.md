@@ -24,6 +24,12 @@ aliases:
   - /real_user_monitoring/application_monitoring/react_native/mobile_vitals/
   - /real_user_monitoring/application_monitoring/unity/mobile_vitals/
   - /real_user_monitoring/application_monitoring/maui/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/flutter/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/mobile_vitals/
+  - /real_user_monitoring/mobile_and_tv_monitoring/unity/mobile_vitals/
 further_reading:
   - link: "/real_user_monitoring/investigate_problems/explore_retained_data/events/#performance-timeseries"
     tag: "Documentation"

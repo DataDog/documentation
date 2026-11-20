@@ -1068,7 +1068,7 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
-[7]: /real_user_monitoring/android/?tab=us
+[7]: /real_user_monitoring/setup/install/?platform=android
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
 [10]: /tracing/trace_collection/custom_instrumentation/client-side/android/otel

@@ -29,7 +29,7 @@ To get started with RUM for .NET MAUI, create an application and configure the .
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup/install/?platform=maui">}}<u>Setup</u>: Learn how to set up the .NET MAUI SDK and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/maui/error_tracking">}}<u>Crash Reporting</u>: Add crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink>}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/maui/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, modify or drop RUM events, and more.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/data_collected/?platform=maui">}}<u>Data Collected</u>: Review data that the RUM .NET MAUI SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=maui">}}<u>Track UI Latency</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=maui">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your .NET MAUI application.{{< /nextlink >}}

@@ -259,12 +259,12 @@ After you change a journey's start or end events, review its variants, matching 
 [1]: /journey_monitoring/#prerequisites
 [2]: /journey_monitoring/suggested_journeys/
 [3]: /journey_monitoring/variants/
-[4]: /real_user_monitoring/rum_without_limits/
+[4]: /real_user_monitoring/
 [5]: /journey_monitoring/details_report/
 [6]: /journey_monitoring/status/
-[8]: /real_user_monitoring/operations_monitoring/?tab=browser#create-operations-from-datadog
+[8]: /real_user_monitoring/track_critical_operations/?tab=browser#create-operations-from-datadog
 [9]: /api/latest/rum-operations/
-[10]: /real_user_monitoring/operations_monitoring/?tab=browser#create-operations-with-the-sdk-apis
+[10]: /real_user_monitoring/track_critical_operations/?tab=browser#create-operations-with-the-sdk-apis
 [11]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/
 [12]: /synthetics/browser_tests/
 [13]: /synthetics/mobile_app_testing/
@@ -274,7 +274,7 @@ After you change a journey's start or end events, review its variants, matching 
 [17]: /journey_monitoring/details_report/#synthetic-monitoring--testing
 [18]: https://www.datadoghq.com/blog/bits-testing-test-coverage/
 [20]: /journey_monitoring/overview/#journey-catalog
-[21]: /real_user_monitoring/operations_monitoring/
+[21]: /real_user_monitoring/track_critical_operations/
 [22]: /product_analytics/
 [24]: /journey_monitoring/configuring_journeys/#step-3-add-synthetic-test-coverage
 [25]: /service_level_objectives/
@@ -282,6 +282,6 @@ After you change a journey's start or end events, review its variants, matching 
 [27]: /product_analytics/charts/funnel_analysis/
 [28]: /journey_monitoring/#rum-and-product-analytics
 [29]: /journey_monitoring/#synthetics-only
-[30]: /real_user_monitoring/explorer/visualize/#funnels
-[31]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#measure-component-level-performance-with-custom-vitals
+[30]: /real_user_monitoring/investigate_problems/explore_retained_data/visualize/#funnels
+[31]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#measure-component-level-performance-with-custom-vitals
 [32]: /mcp_server/tools/#create_rum_operation

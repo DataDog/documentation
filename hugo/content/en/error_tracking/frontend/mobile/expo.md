@@ -474,7 +474,7 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/
+[3]: /real_user_monitoring/setup/install/?platform=react_native
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
 [6]: https://www.npmjs.com/package/react-native-performance-limiter

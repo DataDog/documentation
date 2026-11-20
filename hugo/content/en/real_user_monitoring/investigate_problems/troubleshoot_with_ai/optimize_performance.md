@@ -97,7 +97,7 @@ Investigations started from RUM are standard Bits Investigations. You can:
 
 [1]: /bits_ai/bits_investigation/
 [2]: https://app.datadoghq.com/rum/optimization
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[3]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [4]: /source_code/
 [5]: /real_user_monitoring/track_critical_operations/
 [6]: https://app.datadoghq.com/bits-ai/investigations

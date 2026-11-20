@@ -289,4 +289,4 @@ Analyze performance with [metrics][8].
 [9]: /real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/
 [10]: /error_tracking/issue_states/#excluding-an-issue
 [11]: /session_replay/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser
+[12]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/?platform=browser

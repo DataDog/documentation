@@ -99,9 +99,9 @@ Continue to [Search Syntax](/real_user_monitoring/investigate_problems/explore_r
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=browser
-[2]: /real_user_monitoring/android/data_collected/
-[3]: /real_user_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/reactnative/
+[2]: /real_user_monitoring/setup/data_collected/?platform=android
+[3]: /real_user_monitoring/setup/data_collected/?platform=ios
+[4]: /real_user_monitoring/setup/install/?platform=react_native
 [5]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/
 [6]: /dashboards/guide/custom_time_frames
 [7]: /real_user_monitoring/investigate_problems/explore_retained_data/events/

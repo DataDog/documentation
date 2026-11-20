@@ -71,7 +71,7 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
+[3]: /real_user_monitoring/setup/install/?platform=flutter
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/flutter-symbols
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html

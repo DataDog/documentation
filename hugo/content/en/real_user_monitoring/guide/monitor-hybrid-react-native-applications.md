@@ -316,6 +316,6 @@ RUM.Configuration(
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/react_native/setup/
+[1]: /real_user_monitoring/setup/install/?platform=react_native
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#manually-track-views
 [3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views

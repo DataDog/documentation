@@ -7,7 +7,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 The RUM C++ SDK generates events that have associated attributes. Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to slice telemetry in analytics (group by).
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). There are also [event-specific attributes](#event-specific-attributes). You can further enrich your session data by [adding custom attributes][1].
+Every RUM event has all of the [default attributes](#default-attributes-cpp), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). There are also [event-specific attributes](#event-specific-attributes-cpp). You can further enrich your session data by [adding custom attributes][1].
 
 ## Events
 
@@ -23,7 +23,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 {% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
-## Default attributes
+## Default attributes {% #default-attributes-cpp %}
 
 By default, RUM collects common attributes for all events and the event-specific attributes listed below. You can further enrich your session data by [adding custom attributes][1].
 
@@ -98,7 +98,7 @@ You can enable [tracking account info][5] globally to associate an account (such
 | `acc.id`       | string | Identifier of the account. |
 | `acc.name`     | string | Name of the account. |
 
-## Event-specific attributes
+## Event-specific attributes {% #event-specific-attributes-cpp %}
 
 ### Session
 

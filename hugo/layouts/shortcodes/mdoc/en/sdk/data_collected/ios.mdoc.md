@@ -7,9 +7,9 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 The RUM iOS SDK generates events that have associated telemetry and attributes. Telemetry is quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
+Every RUM event has all of the [default attributes](#default-attributes-ios), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [attributes specific to a given event type](#event-specific-attributes). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
+There are additional [attributes specific to a given event type](#event-specific-attributes-ios). For example, the `view.loading_time` telemetry is associated with view events, and the `resource.method` attribute is associated with resource events.
 
 | Event Type | Retention | Description                         |
 |------------|-----------|-------------------------------------|
@@ -24,7 +24,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 {% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
-## Default attributes
+## Default attributes {% #default-attributes-ios %}
 
 By default, RUM collects common attributes for all events and event-specific attributes listed below. You can also choose to enrich your user session data with [additional events][2] to default events specific to your application monitoring and business analytics needs.
 
@@ -105,7 +105,7 @@ You can enable [tracking user info][3] globally to collect and apply user attrib
 | `usr.name`     | string | Name of the user.       |
 | `usr.email`    | string | Email of the user.      |
 
-## Event-specific attributes
+## Event-specific attributes {% #event-specific-attributes-ios %}
 
 ### Session attributes
 

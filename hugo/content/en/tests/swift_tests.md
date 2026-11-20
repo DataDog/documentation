@@ -41,6 +41,6 @@ The RUM session has all the data that [RUM normally collects][2] so you can debu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/ios/
-[2]: /real_user_monitoring/ios/data_collected/
+[1]: /real_user_monitoring/setup/install/?platform=ios
+[2]: /real_user_monitoring/setup/data_collected/?platform=ios
 [3]: /tests/setup/swift/

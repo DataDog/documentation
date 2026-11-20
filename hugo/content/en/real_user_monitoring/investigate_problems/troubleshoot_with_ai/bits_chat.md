@@ -66,7 +66,7 @@ You can ask Bits Chat about your frontend in plain language from any RUM page, a
 [2]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [3]: /session_replay/
 [4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser
-[5]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-attributes
-[6]: /real_user_monitoring/error_tracking/
+[5]: /real_user_monitoring/setup/data_collected/?platform=browser#long-task-timing-attributes
+[6]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser
-[8]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[8]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

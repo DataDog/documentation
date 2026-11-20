@@ -25,7 +25,7 @@ To get started with RUM for C / C++, create an application and configure the C++
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup/install/?platform=cpp">}}<u>Setup</u>: Learn how to set up the C++ SDK and send data to Datadog.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/cpp/error_tracking">}}<u>Crash Reporting</u>: Add crash reporting and get deobfuscated stack traces.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/cpp/advanced_configuration">}}<u>Advanced Configuration</u>: Configure tracking consent, custom attributes, sampling, and event storage.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp">}}<u>Advanced Configuration</u>: Configure tracking consent, custom attributes, sampling, and event storage.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/data_collected/?platform=cpp">}}<u>Data Collected</u>: Review data collected by the RUM C++ SDK.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/cpp/advanced_build_configuration">}}<u>Advanced Build Configuration</u>: Build the SDK for non-CMake projects and configure build options.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/reference/troubleshooting/?platform=cpp">}}<u>Troubleshooting</u>: Common build, link, and runtime issues.{{< /nextlink >}}

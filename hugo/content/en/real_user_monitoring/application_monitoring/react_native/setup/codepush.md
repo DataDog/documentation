@@ -171,7 +171,7 @@ This means that even if users open your application while offline, no data is lo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/microsoft/react-native-code-push
-[2]: /real_user_monitoring/reactnative/
+[2]: /real_user_monitoring/setup/install/?platform=react_native
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://github.com/microsoft/react-native-code-push/blob/master/docs/api-js.md#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#upload

@@ -27,5 +27,5 @@ To get started with RUM for Roku, create an application and configure the Roku S
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/setup/install/?platform=roku">}}<u>Setup</u>: Learn how to set up the Roku SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/roku/error_tracking">}}<u>Crash Reporting</u>: Add crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/roku/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=roku">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
 {{< /whatsnext >}}

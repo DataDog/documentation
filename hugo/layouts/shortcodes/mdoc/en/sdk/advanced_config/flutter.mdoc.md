@@ -91,9 +91,9 @@ A map of first party hosts and the types of tracing headers Datadog automaticall
 `rumConfiguration`
 : Optional  
 **Type**: Object  
-See [RUM configuration](#rum-configuration).
+See [RUM configuration](#rum-configuration-flutter).
 
-### RUM configuration
+### RUM configuration {% #rum-configuration-flutter %}
 
 Use the following parameters for the `DatadogRumConfiguration` class.
 

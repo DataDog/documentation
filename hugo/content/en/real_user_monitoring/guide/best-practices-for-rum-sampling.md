@@ -98,7 +98,7 @@ To modify the **head-based** sampling rate for mobile SDKs, redeploy your applic
 [5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
 [6]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
 [7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform
-[8]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
+[8]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native
 [9]: /real_user_monitoring/setup/install/?platform=roku
 [10]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity
 [11]: /data_security/data_retention_periods/

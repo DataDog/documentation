@@ -110,7 +110,7 @@ Sets the preferred frequency for uploading batches of data.
 **Default**: `BatchSize.MEDIUM`  
 Defines the Datadog SDK policy when batching data together before uploading it to Datadog servers. Smaller batches mean smaller but more network requests, whereas larger batches mean fewer but larger network requests.
 
-### RUM configuration
+### RUM configuration {% #rum-configuration-react-native %}
 
 `applicationId`
 : **Required**  
@@ -454,7 +454,7 @@ To add global attributes, track users and accounts, or modify and drop events, s
 [17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
 [20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#step-5---add-app-hang-reporting
-[21]: #rum-configuration
+[21]: #rum-configuration-react-native
 [22]: #logs-configuration
 [23]: #trace-configuration
 [24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native

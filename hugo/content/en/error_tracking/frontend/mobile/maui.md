@@ -46,7 +46,7 @@ To enable native crash reporting, set `NativeCrashReportEnabled = true` on the S
 
 <div class="alert alert-info">
 When <code>NativeCrashReportEnabled = true</code>, an unhandled C# exception that crashes an iOS app on the main thread is reported <strong>twice</strong>. One report is a C# error captured by <code>AppDomain.UnhandledException</code>. The other is a native crash captured by the iOS crash reporter. Both events share the same RUM session and view, so you can correlate them in the Explorer.
-<br><br>On Android, the C# crash is reported once, although a separate native crash can sometimes appear while the app shuts down.<br><br>To keep only one of the two, use <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> to drop the copy that doesn't fit your workflow. For example, filter by <code>Source</code> or <code>Stacktrace</code> content.
+<br><br>On Android, the C# crash is reported once, although a separate native crash can sometimes appear while the app shuts down.<br><br>To keep only one of the two, use <a href="/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=maui"><code>ErrorEventMapper</code></a> to drop the copy that doesn't fit your workflow. For example, filter by <code>Source</code> or <code>Stacktrace</code> content.
 </div>
 
 ## Setup

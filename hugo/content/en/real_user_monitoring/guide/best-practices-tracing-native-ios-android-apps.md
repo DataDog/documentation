@@ -179,8 +179,8 @@ The following sampling rate parameters control different aspects of data collect
 [5]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L32
 [6]: https://github.com/DataDog/dd-sdk-ios/blob/develop/DatadogTrace/Sources/TraceConfiguration.swift#L106
 [7]: https://www.w3.org/TR/trace-context/#sampled-flag
-[8]: /real_user_monitoring/reactnative/
-[9]: /real_user_monitoring/flutter/
-[10]: /real_user_monitoring/kotlin_multiplatform/
-[11]: /real_user_monitoring/unity/
+[8]: /real_user_monitoring/setup/install/?platform=react_native
+[9]: /real_user_monitoring/setup/install/?platform=flutter
+[10]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform
+[11]: /real_user_monitoring/setup/install/?platform=unity
 [12]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/

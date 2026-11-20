@@ -7,9 +7,9 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 The RUM Android SDK generates events that have associated attributes. These can have quantifiable values and can be used for measurements related to the event, while others are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
-Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
+Every RUM event has all of the [default attributes](#default-attributes-android), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`).
 
-There are additional [attributes that are specific to a given event type](#event-specific-attributes). For example, the `view.time_spent` attribute is associated with "view" events and the `resource.method` one is associated with "resource" events.
+There are additional [attributes that are specific to a given event type](#event-specific-attributes-android). For example, the `view.time_spent` attribute is associated with "view" events and the `resource.method` one is associated with "resource" events.
 
 | Event Type     | Retention | Description     |
 |----------------|-----------|-------------------|
@@ -24,7 +24,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 {% img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" /%}
 
-## Default attributes
+## Default attributes {% #default-attributes-android %}
 
 RUM collects common attributes for all events and attributes specific to each event listed below [automatically][2]. You can also choose to enrich your user session data by tracking [additional events][3] or by [adding custom attributes][4] to default events specific to your application monitoring and business analytics needs.
 
@@ -98,7 +98,7 @@ You can enable [tracking user info][7] globally to collect and apply user attrib
 | `usr.id`     | string | Identifier of the user. |
 | `usr.name` | string | Name of the user. |
 
-## Event-specific attributes
+## Event-specific attributes {% #event-specific-attributes-android %}
 
 Telemetry are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice telemetry values (group by) in analytics.
 
