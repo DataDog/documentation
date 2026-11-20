@@ -32,7 +32,7 @@ The Worker sends the following data to Datadog:
 
 Datadog groups the logs into patterns to determine anomalous behavior. For details, see the [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) section.
 
-**Note**: When you send logs from a new service or to a new pipeline, Datadog first establishes a baseline. Datadog can take up to 24 hours to detect the first anomaly.
+**Note**: When you send logs from a new service or to a new pipeline, Datadog first establishes a baseline, so it can take up to 24 hours to detect the first anomaly.
 
 ### How logs are grouped by patterns
 
@@ -80,7 +80,7 @@ For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you c
 
 1. In the anomaly side panel, go to the {{< ui >}}Next steps{{< /ui >}} section to see the list of patterns.
 1. In the {{< ui >}}Message{{< /ui >}} column, hover over an aggregate value to open {{< ui >}}Distribution of values by Pattern Inspector{{< /ui >}} and preview a distribution of its values.
-1. Click on a pattern to see a list of sample logs.
+1. Click a pattern to see a list of sample logs.
 
 {{< img src="observability_pipelines/log_anomaly_detection/pattern_distribution.png" alt="The Next steps section showing a list of log patterns and a distribution of values for a highlighted aggregate value." style="width:100%;" >}}
 
