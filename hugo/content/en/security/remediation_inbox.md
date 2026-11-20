@@ -147,7 +147,7 @@ Datadog creates the remediation case in the project you selected, or in the defa
 To add a ticket to a remediation that already has a case:
 
 1. Open the menu next to the case and select **Route to app**.
-1. Choose Jira, ServiceNow, or Linear.
+1. Select **Jira**, **ServiceNow**, or **Linear**.
 1. Select a template, then click **Confirm**.
 
 The ticket appears in the **Tracking** column and in the side panel of the remediation.
