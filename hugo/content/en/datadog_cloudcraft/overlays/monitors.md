@@ -37,9 +37,9 @@ Use the legend at the bottom of the diagram to filter monitors by alerting statu
 
 ### Mini panel
 
-Click a resource or service with monitors to open a mini panel with its health status and service information. Click {{< ui >}}Investigate with Bits{{< /ui >}} to initiate a [Bits Investigation][1] investigation or view an existing one.
+Click a resource or service with monitors to open a mini panel. For a resource, the mini panel lists the resource's monitors, along with its account, region, and tags. For a service, it shows the service's health status and service information. Click {{< ui >}}Investigate with Bits{{< /ui >}} to initiate a [Bits Investigation][1] investigation or view an existing one.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_mini_panel.png" alt="Cloudcraft Monitors overlay mini panel showing the health status and service information for a service, with the Investigate with Bits and View Full Details buttons." style="width:80%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_mini_panel.png" alt="Cloudcraft Monitors overlay mini panel for an EC2 instance, listing its monitors, account, region, and tags, with the Investigate with Bits and View Full Details buttons." style="width:80%;" >}}
 
 For more information, see [Bits Investigation][1].
 
