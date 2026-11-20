@@ -21279,6 +21279,32 @@ menu:
       url: /api/latest/product-analytics/
       identifier: product-analytics
       generated: true
+    - name: Get funnel step suggestions
+      url: /api/latest/product-analytics/get-funnel-step-suggestions/
+      identifier: product-analytics-get-funnel-step-suggestions
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsFunnelStepSuggestions
+        unstable:
+          - v2
+        order: 16
+    - name: Get feature suggestions
+      url: /api/latest/product-analytics/get-feature-suggestions/
+      identifier: product-analytics-get-feature-suggestions
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsFunnelSuggestions
+        unstable:
+          - v2
+        order: 15
     - name: Compute a Sankey diagram
       url: /api/latest/product-analytics/compute-a-sankey-diagram/
       identifier: product-analytics-compute-a-sankey-diagram
@@ -21396,6 +21422,19 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Analyze journey drop-off
+      url: /api/latest/product-analytics/analyze-journey-drop-off/
+      identifier: product-analytics-analyze-journey-drop-off
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryProductAnalyticsJourneyDropOff
+        unstable:
+          - v2
+        order: 14
     - name: Compute timeseries analytics
       url: /api/latest/product-analytics/compute-timeseries-analytics/
       identifier: product-analytics-compute-timeseries-analytics
