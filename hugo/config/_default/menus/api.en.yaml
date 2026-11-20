@@ -12530,6 +12530,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Claude Compliance Integration
+      url: /api/latest/claude-compliance-integration/
+      identifier: claude-compliance-integration
+      generated: true
+    - name: Update a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/update-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-update-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/get-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-get-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/delete-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-delete-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/create-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-create-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Claude Compliance integration accounts
+      url: /api/latest/claude-compliance-integration/list-claude-compliance-integration-accounts/
+      identifier: claude-compliance-integration-list-claude-compliance-integration-accounts
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListClaudeComplianceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication

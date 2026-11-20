@@ -3208,6 +3208,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update a ChatGPT Enterprise integration account."
   },
+  "ListClaudeComplianceIntegrationAccounts": {
+    "description": "List Claude Compliance integration accounts.",
+    "summary": "List Claude Compliance integration accounts"
+  },
+  "CreateClaudeComplianceIntegrationAccount": {
+    "description": "Create a Claude Compliance integration account.",
+    "summary": "Create a Claude Compliance integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Claude Compliance integration account."
+  },
+  "DeleteClaudeComplianceIntegrationAccount": {
+    "description": "Delete a Claude Compliance integration account.",
+    "summary": "Delete a Claude Compliance integration account"
+  },
+  "GetClaudeComplianceIntegrationAccount": {
+    "description": "Get a Claude Compliance integration account.",
+    "summary": "Get a Claude Compliance integration account"
+  },
+  "UpdateClaudeComplianceIntegrationAccount": {
+    "description": "Update a Claude Compliance integration account. Only the fields provided are changed.",
+    "summary": "Update a Claude Compliance integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Claude Compliance integration account."
+  },
   "ListCoreWeaveCloudIntegrationAccounts": {
     "description": "List CoreWeave integration accounts.",
     "summary": "List CoreWeave integration accounts"
