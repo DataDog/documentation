@@ -122,6 +122,8 @@ You may create a test using one of the following options:
        * The request body is limited to a maximum size of 50 kilobytes for `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
        * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.
+       * `GET` and `DELETE` requests can include a body only when {{< ui >}}HTTP version{{< /ui >}} is set to `HTTP/1.1 only`. With any other HTTP version, the test fails with an `INVALID_REQUEST` error.
+       * `HEAD` requests can't include a body. A `HEAD` request with a body fails with an `INVALID_REQUEST` error.
    {{% /tab %}}
 
    {{% tab "Proxy" %}}
