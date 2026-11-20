@@ -33,7 +33,7 @@ The L1 to L7 Map is in Preview. Complete the form to request access.
 The L1 to L7 Map brings application, infrastructure, and network context together on one map. Use it to:
 
 - **Investigate a resource**: See what a service, container, pod, or host runs on and which resources it communicates with. Network signals, such as retransmits and failed connections, show the health of each connection.
-- **Investigate a connection**: Select a source and a destination to compare their supporting resources, observed traffic, and Network Path hops. See the latency of each segment along the path.
+- **Investigate a connection**: Select a source and a destination to compare their supporting resources, observed traffic, and Network Path {{< tooltip text="hops" tooltip="A router or other network device that traffic passes through on the way to the destination." >}}. See the latency of each segment along the path.
 
 The map uses data from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM).
 
@@ -87,7 +87,7 @@ The explored resource's connections appear on either side of the stack:
 - Resources that send traffic to the explored resource appear on the left, under **Upstream**.
 - Resources that receive traffic from it appear on the right, under **Downstream**.
 
-Upstream and downstream resources are the same type as the explored resource, such as services for a service or pods for a pod. The exception is external endpoints, such as an IP address or a hostname and port, which can appear downstream of any type of resource. When CNM and Network Path both have data for the same connection, the map combines the data into one line.
+Upstream and downstream resources are the same type as the explored resource, such as services for a service or pods for a pod. The exception is {{< tooltip text="external endpoints" tooltip="A destination identified by an IP address or a hostname and port, rather than by a service, container, pod, or host." >}}, which can appear downstream of any type of resource. When CNM and Network Path both have data for the same connection, the map combines the data into one line.
 
 #### Connection View layout
 
@@ -95,7 +95,7 @@ Upstream and downstream resources are the same type as the explored resource, su
 
 In Connection View, the map shows the source's composition stack on the left and the destination's on the right.
 
-The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an external endpoint, such as an IP address or a hostname and port, which can be the destination for any type of source.
+The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an {{< tooltip text="external endpoint" tooltip="A destination identified by an IP address or a hostname and port, rather than by a service, container, pod, or host." >}}, which can be the destination for any type of source.
 
 Between the two stacks, the map shows CNM and Network Path data as separate lines:
 
@@ -120,12 +120,11 @@ The outline color of a resource and the color of a connection line show their st
 - **Orange**: Degraded
 - **Green**: A Healthy connection
 - **No color**: A Healthy resource, or an Unknown resource or connection
-
-To tell a Healthy resource from an Unknown one, hover over it or find it in the **Related resources** list in the details pane.
+    - To tell a Healthy resource from an Unknown one, hover over it or find it in the **Related resources** list in the details pane.
 
 Within each group, resources with the most severe status appear first.
 
-**Note**: Network path segments are not colored by status. A segment where all probes failed shows **FAILED** on a dotted line.
+**Note**: Network path segments are not colored by status. A segment where all {{< tooltip text="probes" tooltip="Packets that a Network Path test sends to the destination to measure latency and loss." >}} failed shows **FAILED** on a dotted line.
 
 #### Network signals
 
