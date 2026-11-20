@@ -102,8 +102,8 @@ The Bits summary describes the capture results and labels which findings are dir
 
 Based on packet header data, the summary can identify:
 
-- Whether the TCP handshake completed
-- Whether connections closed gracefully or were reset
+- TCP handshake completion
+- Graceful closes and resets
 - Retransmission and packet-loss patterns
 - Zero-window conditions
 - Out-of-order delivery
