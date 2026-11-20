@@ -48,7 +48,7 @@ The OpenTelemetry Operator's `Instrumentation` resource selects the SDK images i
 
 The [DDOT Kubernetes installation guide][14] includes OpenTelemetry SDK instrumentation images, an `Instrumentation` resource, and workload annotations. For an existing Operator or Collector deployment, see [Adapt an existing configuration for DDOT][15]. For OpenTelemetry Operator concepts and configuration options, see [OpenTelemetry Operator automatic instrumentation][9].
 
-Go applications include the SDK and instrumentation at build time, typically in the Dockerfile. Use [Orchestrion][16] for DDOT Go, where you would use OpenTelemetry Go compile-time instrumentation (`otelc`) for the upstream OpenTelemetry Go SDK. The OpenTelemetry Operator's `instrumentation.opentelemetry.io/inject-sdk` annotation supplies configuration to the application; it does not install an SDK.
+Go applications include the SDK and instrumentation at build time, typically in the Dockerfile. For DDOT Go, use [Orchestrion][16]. The upstream OpenTelemetry Go SDK uses OpenTelemetry Go compile-time instrumentation (`otelc`) instead. The OpenTelemetry Operator's `instrumentation.opentelemetry.io/inject-sdk` annotation supplies configuration to the application, but it doesn't install an SDK.
 
 ### Application installation
 
