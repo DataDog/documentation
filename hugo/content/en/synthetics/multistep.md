@@ -152,7 +152,7 @@ Click {{< ui >}}If step succeeds, exit test and mark it as passed{{< /ui >}} to 
 
 Click {{< ui >}}If step fails, continue to next step{{< /ui >}} to proceed with subsequent steps after step failure. When you select this option, an {{< ui >}}and mark test as{{< /ui >}} menu appears. Keep {{< ui >}}failed{{< /ui >}} (selected by default) to fail the test when this step fails. Select {{< ui >}}passed{{< /ui >}} so that a failure of this step does not fail the test.
 
-Continuing after a failed step can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
+Continuing after a failed step can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test creates a resource, performs several actions on it, and then deletes it.
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
@@ -206,7 +206,12 @@ To display your list of variables, type `{{` in your desired field.
 
 Multistep API tests support subtests, allowing you to reuse existing Multistep API tests or extract steps into reusable components. You can nest subtests up to two levels deep.
 
-All steps of a subtest, including wait steps, must complete within 60 seconds in total. Otherwise, the subtest step times out, even if the subtest passes when it runs on its own. If the subtest step has retries, each retry gets its own 60 seconds. On private locations, the `apiRequestMaxTimeout` setting defines this limit in milliseconds (default: `60000`). For more information, see the [Advanced configuration][20] section. To run a longer flow, split it across several subtest steps, or add its steps directly to the parent test.
+Subtest steps have a 60-second limit. A subtest step times out if the combined duration of the subtest's steps, including wait steps, exceeds 60 seconds. This can happen even when the subtest passes as a standalone test.
+
+- **Retries**: Each retry of the subtest step gets a new 60 seconds.
+- **Private locations**: The `apiRequestMaxTimeout` setting controls this limit, in milliseconds (default: `60000`). See the [Advanced configuration][20] section of the private locations configuration page.
+
+To run a flow that takes longer than 60 seconds, split it across several subtest steps, or add its steps directly to the parent test.
 
 To use an existing Multistep API test as a subtest, click {{< ui >}}Subtest{{< /ui >}}, go to the {{< ui >}}From Existing Test{{< /ui >}} tab, and select a Multistep API test from the dropdown menu.
 
@@ -222,7 +227,7 @@ If you don't need to run a subtest independently, you can pause it. It still run
 
 ## Test failure
 
-A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. A failed step does not fail the test when its {{< ui >}}and mark test as{{< /ui >}} option is set to {{< ui >}}passed{{< /ui >}}. For more information, see the [Step failure](#step-failure) section. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
+A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. A failed step does not fail the test when its {{< ui >}}and mark test as{{< /ui >}} option is set to {{< ui >}}passed{{< /ui >}}. For more information, see the [Step failure](#step-failure) section. In some cases, the test fails before it can check the assertions against the endpoint. These reasons include:
 
 `CONNREFUSED`
 : No connection could be made because the target machine actively refused it.
