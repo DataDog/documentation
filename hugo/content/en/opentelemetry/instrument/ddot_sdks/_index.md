@@ -56,7 +56,7 @@ For installation without the OpenTelemetry Operator, follow the [installation in
 
 ## Configure OpenTelemetry mode and export
 
-DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Collector can batch, enrich, and route telemetry before exporting it to Datadog or another OTLP-compatible backend. The Datadog Agent is not required for these signals. Datadog recommends running it to provide Remote Configuration for capabilities such as Live Debugger and Dynamic Instrumentation. See [feature compatibility][8] for language support and capability requirements.
+DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Collector can batch, enrich, and route telemetry before exporting it to Datadog or another OTLP-compatible backend. These signals don't go through the Datadog Agent. Datadog recommends running a Datadog Agent alongside the Collector for the Datadog-specific capabilities of DDOT SDKs, such as Live Debugger and Dynamic Instrumentation. It acts mainly as a Remote Configuration proxy, while traces, metrics, and logs keep flowing over OTLP to the Collector, so it doesn't affect your OpenTelemetry setup's freedom from vendor lock-in. See [feature compatibility][8] for language support and capability requirements.
 
 ### Language support
 

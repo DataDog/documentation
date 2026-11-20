@@ -30,7 +30,7 @@ Use the tables below to check feature availability for your SDK and telemetry ro
 
 ### DDOT SDK setups
 
-DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Datadog Agent is optional for these signals.
+DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. These signals don't go through the Datadog Agent. The Datadog Agent is needed only for the Datadog-specific capabilities marked below. It acts mainly as a Remote Configuration proxy and doesn't change how your OpenTelemetry telemetry flows.
 
 Capabilities and configuration requirements vary by language and SDK version.
 
