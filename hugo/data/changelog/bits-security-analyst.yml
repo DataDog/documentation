@@ -15,3 +15,9 @@ entries:
       - GetSecurityAgentInvestigation
       - ListSecurityAgentInvestigations
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41893
+    operations:
+      - CreateSecurityAgentInvestigation
+    title: Add Bits Security Analyst investigation create endpoint

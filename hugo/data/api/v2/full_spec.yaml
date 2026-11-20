@@ -130290,6 +130290,45 @@ components:
       type: string
       x-enum-varnames:
         - INVESTIGATION_COUNTS
+    SecurityAgentInvestigationCreateAttributes:
+      description: Attributes of the investigation to start.
+      properties:
+        rerun:
+          default: false
+          description: |-
+            Start a new investigation even if the signal already has one. If the signal's investigation is still
+            running, the response has that investigation instead. A rerun counts toward the monthly investigation
+            limit like any investigation.
+          example: false
+          type: boolean
+        signal_id:
+          description: |-
+            ID of the signal to investigate, in its V1 form, which starts with `AQ`, or in its longer V3 form, which
+            starts with `Aw`. Investigations carry the V1 form, so their `signal_id` can differ from the ID you pass.
+          example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+          type: string
+      required:
+        - signal_id
+      type: object
+    SecurityAgentInvestigationCreateData:
+      description: The investigation to start.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentInvestigationCreateRequest:
+      description: Request to start an investigation of a signal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCreateData"
+      required:
+        - data
+      type: object
     SecurityAgentInvestigationData:
       description: |-
         An investigation and its content. `attributes` is absent when `fields[investigations]` is empty or lists
@@ -266362,6 +266401,137 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    post:
+      description: |-
+        Start a Bits Security Analyst investigation of a signal, or get its investigation if it already has one.
+
+        If the signal already has an investigation, in any state, the response has its latest investigation.
+        Otherwise, an investigation starts, and the response has the new investigation in the `investigating` state.
+        Set `rerun` to `true` to start a new investigation of a signal that already has one. If the signal's
+        investigation is still running, the response has that investigation, and no new one starts.
+        While the investigation is `investigating`, the response has a `Retry-After` header.
+        `GET /api/v2/security_monitoring/security_agent/investigations/{investigation_id}` reads it right away.
+
+        The response doesn't have the investigation's content: `conclusion`, `signal`, `key_entities`, `key_evidence`,
+        `steps`, and `response_suggestions`. Get the investigation for its content.
+
+        This endpoint is rate limited to `30` requests per minute per organization. Every investigation it starts,
+        including a rerun, counts toward the organization's monthly investigation limit. Starting an investigation
+        returns `429` with the code `monthly_limit_reached` once the organization has reached that limit.
+      operationId: CreateSecurityAgentInvestigation
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                    type: investigations
+            schema:
+              $ref: "#/components/schemas/SecurityAgentInvestigationCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-10-30T14:02:40Z"
+                        rule_id: abc-def-ghi
+                        signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                        state: completed
+                        updated_at: "2026-10-30T14:15:02Z"
+                        verdict: benign
+                      id: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+                      type: investigations
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationResponse"
+          description: OK
+          headers:
+            Retry-After:
+              description: |-
+                Present while `state` is `investigating`: the number of seconds to wait before getting the
+                investigation.
+              schema:
+                description: Seconds to wait.
+                example: 300
+                format: int64
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Bad Request
+
+            `signal_id` is missing or empty (`invalid_parameter`, with `source.pointer` set to
+            `/data/attributes/signal_id`), or the body isn't a valid request.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Forbidden
+
+            - `org_not_activated`: the organization hasn't activated Bits Security Analyst, or is a demo organization,
+              where investigations can't be started.
+            - `preview_not_enabled`: the organization doesn't have access to this API in preview.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Not Found
+
+            The ID isn't a signal ID, or no signal with this ID exists in the organization (`signal_not_found`).
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Conflict
+
+            The signal already has an investigation that this endpoint can't return, or another investigation of the
+            signal is still starting (`already_investigated`).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: |-
+            Unprocessable Entity
+
+            Bits Security Analyst doesn't investigate signals from this source (`signal_not_supported`).
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+            - security_monitoring_signals_write
+      summary: Create a Bits Security Analyst investigation
+      tags:
+        - Bits Security Analyst
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: AND
+        permissions:
+          - security_monitoring_signals_read
+          - security_monitoring_signals_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
