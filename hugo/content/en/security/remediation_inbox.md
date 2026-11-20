@@ -138,7 +138,9 @@ In the **Tracking** column or the side panel, select an assignee. If the remedia
 
 1. In the **Tracking** column or the side panel, click **Add Ticket**.
 1. Select **Work Management**, **Jira**, **ServiceNow**, or **Linear**.
-1. For Jira, ServiceNow, or Linear, select a template, or create one in the dialog. The template defines where the ticket is created, such as the Jira space and ticket type, the ServiceNow table and assignment group, or the Linear team.
+1. For Jira, ServiceNow, or Linear, select a template, or create one in the dialog.
+
+   The template defines where the ticket is created, such as the Jira space and ticket type, the ServiceNow table and assignment group, or the Linear team.
 1. Optionally, change the linked Work Management [project][5] and the assignee.
 1. Click **Create**.
 
