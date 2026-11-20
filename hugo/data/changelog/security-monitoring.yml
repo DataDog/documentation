@@ -402,3 +402,9 @@ entries:
       - ValidateSecurityMonitoringRule
       - ValidateSecurityMonitoringSuppression
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: added
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/42017
+    operations:
+      - SearchRemediationGroups
+    title: Add the search remediation groups endpoint as unstable
