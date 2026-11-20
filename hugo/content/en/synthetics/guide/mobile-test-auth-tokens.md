@@ -127,7 +127,7 @@ Store the token in the Keychain rather than `UserDefaults`, so it's protected at
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-This example reads the token on Android only. On Android, `react-native-launch-arguments` reads the intent extras. On iOS, it reads only launch arguments, and Datadog passes the values as environment variables instead. To get the token on iOS, read it from `ProcessInfo.processInfo.environment` in native code, as in the iOS (Swift) example, and pass it to JavaScript.
+<div class="alert alert-info">This example works on Android only. <code>react-native-launch-arguments</code> reads intent extras on Android, but on iOS it reads only launch arguments, and Datadog passes the values as environment variables. To get the token on iOS, read it from <code>ProcessInfo.processInfo.environment</code> in native code, as in the iOS (Swift) example, and pass it to JavaScript.</div>
 
 {{< code-block lang="javascript" >}}
 import { LaunchArguments } from 'react-native-launch-arguments';

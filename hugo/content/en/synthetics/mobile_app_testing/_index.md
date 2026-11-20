@@ -101,7 +101,7 @@ You can configure advanced options when creating a mobile test to dynamically ad
 #### Test behavior options:
 
 {{< ui >}}Auto-accept alerts{{< /ui >}}
-: When enabled, automatically accepts all OS system alerts during test execution on iOS. On Android, this option grants the permissions your app requests, so permission prompts don't appear. Other Android system dialogs aren't dismissed.
+: When enabled, on iOS, automatically accepts all OS system alerts during test execution. On Android, this option grants the permissions your app requests, so permission prompts don't appear. Other Android system dialogs aren't dismissed.
 
 {{< ui >}}Allow application crash{{< /ui >}}
 : When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
@@ -112,12 +112,12 @@ You can configure advanced options when creating a mobile test to dynamically ad
 
 #### Application arguments:
 
-You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior.
+Pass `key:value` pairs to your application when the test starts to change app behavior programmatically.
 
 Your application code must read and process these key-value pairs:
 
-- **Android**: The pairs are passed as extras of the launch intent. Read them with `getIntent().getExtras()` in the launching activity.
-- **iOS**: The pairs are passed as environment variables, not as launch arguments. Read them from `ProcessInfo.processInfo.environment`.
+- **Android**: Datadog passes the pairs as extras of the launch intent. Read them with `getIntent().getExtras()` in the launching activity.
+- **iOS**: Datadog passes the pairs as environment variables, not as launch arguments. Read them from `ProcessInfo.processInfo.environment`.
 
 For example, [inject an auto-refreshing auth token][17] to skip your app's login flow.
 

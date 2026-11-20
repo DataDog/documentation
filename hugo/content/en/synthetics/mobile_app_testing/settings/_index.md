@@ -32,7 +32,9 @@ To add a mobile application, navigate to the [{{< ui >}}Mobile Applications List
 3. Name your mobile application.
 4. Add `env` tags as well as additional tags to your mobile application. You can use these tags to filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
 5. Optionally, enter a description for your mobile application.
-6. Upload a single, universal `.apk` file between 1 KiB and 2 GiB. Split APKs upload without an error, but tests that use them fail because the application can't be installed. To build a universal APK from an Android App Bundle (`.aab`), use [bundletool][102].
+6. Upload a single, universal `.apk` file between 1 KiB and 2 GiB. To build a universal APK from an Android App Bundle (`.aab`), use [bundletool][102].
+
+   **Note**: Split APKs upload without an error, but tests that use them fail because the application can't be installed.
 7. Enter a name for the version of your mobile application. Optionally, select {{< ui >}}Mark this version as latest{{< /ui >}}.
 8. Click {{< ui >}}Create Application{{< /ui >}}.
 
@@ -77,7 +79,7 @@ To edit or delete a version of a mobile application, hover over a version in the
 To add a version of an existing mobile application:
 
 1. Hover over the {{< ui >}}\+{{< /ui >}} icon in a mobile application in the {{< ui >}}Mobile Applications List{{< /ui >}} and click {{< ui >}}Add new version{{< /ui >}}. 
-2. Upload a universal `.apk` or an `.ipa` file between 1 KiB and 2 GiB. To build a universal APK from an Android App Bundle (`.aab`), use [bundletool][4].
+2. Upload a universal `.apk`, or an `.ipa` file built for Ad Hoc or Development distribution. The file must be between 1 KiB and 2 GiB. To build a universal APK from an Android App Bundle (`.aab`), use [bundletool][4].
 3. Enter a version name. 
 4. Optionally, select {{< ui >}}Mark this version as latest{{< /ui >}}.
 5. Click {{< ui >}}Add Version{{< /ui >}}.
