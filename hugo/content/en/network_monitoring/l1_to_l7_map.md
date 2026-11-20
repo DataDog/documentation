@@ -184,11 +184,41 @@ You can also open the map from other Datadog products, with a resource or connec
 | Containers | In the **Network** tab of a container's side panel, click **Explore Relationships**. |
 | Infrastructure List | In the **Network** tab of a host's side panel, click **Explore Relationships**. |
 
+### Use the details pane
+
+The details pane, to the right of the map, shows information about the explored resource, the filtered resource, or the connection between a source and a destination.
+
+#### Details pane in Resource View
+
+In Resource View, the details pane shows the following for the explored or filtered resource:
+
+- The resource's status, such as **HEALTHY** or **CRITICAL**.
+- **View details**, which opens the resource's side panel over the map to show more data, such as logs and traces.
+- A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a pod. Use the dropdown next to the link to open the resource in another product.
+- Infrastructure context, such as the environment, availability zone, VPC, data center, and security groups.
+- The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
+- **Related resources**, a searchable list of the resources on the map, sorted by status.
+
+{{< img src="network_performance_monitoring/l1_l7_map/filtered-resource-side-pane.png" alt="The details pane for a filtered container, showing its status, links to view details and open it in Kubernetes, infrastructure context, metrics, and an RTT graph" >}}
+
+#### Details pane in Connection View
+
+In Connection View, the details pane shows the following for the connection between the source and the destination:
+
+- The status of the source and the destination, such as **HEALTHY** or **CRITICAL**.
+- **View connections**, which opens the connections in CNM. Use the dropdown next to the link to open the connections in another product.
+- The connection's metrics from CNM and Network Path, with charts over the selected time frame. The charts use each product's own data, so their values can differ from the values in the map's hover summaries.
+- **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
+
+<!-- TODO (screenshots): The details pane charts were not in the Preview build on 2026-11-20. If they are not in the screenshots, remove the chart mentions from both details pane lists. -->
+
+{{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in Connection View, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
+
 ### Change what the map shows
 
 After the map loads, you can change what it shows:
 
-- To add a destination, click **Add destination** next to the search field at the top of the map, and select a destination. The map switches to Connection View.
+- To add a destination, click **Add destination** next to the search field at the top of the map. The map switches to Connection View.
 - To remove the source or destination, click the **X** on its card in the details pane. When you remove the destination, the map returns to Resource View for the source. When you remove the source, the destination becomes the explored resource. If the destination is an endpoint, you cannot remove the source.
 - To explore a different resource or connection, hover over it and click **Explore** or **Explore connection**.
 - To see the resources in a collapsed group, click **+N more** at the bottom of the group. The details pane lists the group's resources, and the map does not change.
@@ -217,7 +247,7 @@ Hover over any item on the map to see its summary. The actions available from th
 
 #### Resource summaries
 
-The summary for a resource shows its type, status, and available metrics. In the summary, Healthy appears as **OK** and Degraded appears as **WARNING**. From the summary, you can:
+The summary for a resource shows its type, status, and available metrics. The summary labels a Healthy status as **OK** and a Degraded status as **WARNING**. From the summary, you can:
 
 - Click **Filter** to narrow the map to that resource, called the _filtered resource_, and its related resources, such as the pod and host that it runs on. The explored resource stays at the center of the map, and the details pane shows the filtered resource. To clear the filter, click the **X** next to **Filtered to** at the top of the map.
 - Click **Explore** to make that resource the explored resource. The map redraws around it.
@@ -255,36 +285,6 @@ When you click a **+N more** item, the details pane shows a searchable list of t
 
 Clicking a single connection line, a network path segment, or an AS group does not change the map or the details pane. To see the hops in an AS group, click the group's expand button.
 
-### Use the details pane
-
-The details pane, to the right of the map, shows information about the explored resource, the filtered resource, or the connection between a source and a destination.
-
-#### Details pane in Resource View
-
-In Resource View, the details pane shows the following for the explored or filtered resource:
-
-- The resource's status, such as **HEALTHY** or **CRITICAL**.
-- **View details**, which opens the resource's side panel over the map to show more data, such as logs and traces.
-- A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a pod. Use the dropdown next to the link to open the resource in another product.
-- Infrastructure context, such as the environment, availability zone, VPC, data center, and security groups.
-- The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
-- **Related resources**, a searchable list of the resources on the map, sorted by status.
-
-{{< img src="network_performance_monitoring/l1_l7_map/filtered-resource-side-pane.png" alt="The details pane for a filtered container, showing its status, links to view details and open it in Kubernetes, infrastructure context, metrics, and an RTT graph" >}}
-
-#### Details pane in Connection View
-
-In Connection View, the details pane shows the following for the connection between the source and the destination:
-
-- The status of the source and the destination, such as **HEALTHY** or **CRITICAL**.
-- **View connections**, which opens the connections in CNM. Use the dropdown next to the link to open the connections in another product.
-- The connection's metrics from CNM and Network Path, with charts over the selected time frame. The charts use each product's own data, so their values can differ from the values in the map's hover summaries.
-- **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
-
-<!-- TODO (screenshots): The details pane charts were not in the Preview build on 2026-11-20. If they are not in the screenshots, remove the chart mentions from both details pane lists. -->
-
-{{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in Connection View, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
-
 ## Investigate an issue with the L1 to L7 Map
 
 ### Find the cause of a degraded resource
@@ -308,7 +308,7 @@ Use this workflow when two resources cannot communicate, or communicate slowly. 
 1. Set the time frame to when the issue started.
 1. Hover over the network connections between the two stacks to check their failed setup, reset, and retransmit rates.
 1. Check the network path between the two stacks. The label on each segment's line shows that segment's latency, and **FAILED** marks a segment where all probes failed. To see the hops in an AS group, click the group's expand button. Hover over a hop to see its latency.
-1. If a hop is a network device monitored by [NDM][6], click the hop to open the device's side panel.
+1. If a hop is a network device monitored by NDM, click the hop to open the device's side panel.
 1. To examine the underlying traffic in CNM, click **View connections** in the details pane.
 1. To examine the Network Path tests, hover over a network path segment and click **View connection in Network Path**. The Network Path explorer opens, filtered to the hosts at the ends of the path.
 
