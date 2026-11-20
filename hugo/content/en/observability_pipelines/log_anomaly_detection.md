@@ -53,7 +53,7 @@ For example, if the same logs are sent to two destinations, they form two separa
 Each anomaly has one of the following statuses:
 
 - {{< ui >}}Ongoing{{< /ui >}}: The Worker is still receiving logs with the anomalous patterns.
-- {{< ui >}}Resolved{{< /ui >}}: The Worker has not received logs with the anomalous patterns for 48 hours.
+- {{< ui >}}Resolved{{< /ui >}}: The Worker has not received logs with the anomalous patterns for 10 minutes.
 - {{< ui >}}Expired{{< /ui >}}: The anomaly was in {{< ui >}}Ongoing{{< /ui >}} status for more than 48 hours with no action taken, such as adding a [Sample processor][1]. Logs with those patterns are no longer considered anomalous.
 
 ## Enable log anomaly detection
@@ -64,7 +64,7 @@ To enable log anomaly detection:
 1. Select your pipeline.
 1. Click the cog on the upper right side of your pipeline's page and select {{< ui >}}Pipeline Settings{{< /ui >}}.
 1. Toggle on {{< ui >}}Anomaly Detection{{< /ui >}}.
-1. Click {{< ui >}}Done{{< /ui >}}.
+1. Click {{< ui >}}Done{{< /ui >}} and redeploy your pipeline for the changes to take effect.
 
 ## View log anomalies
 
@@ -80,6 +80,7 @@ For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you c
 
 1. In the anomaly side panel, go to the {{< ui >}}Next steps{{< /ui >}} section to see the list of patterns.
 1. In the {{< ui >}}Message{{< /ui >}} column, hover over an aggregate value to open {{< ui >}}Distribution of values by Pattern Inspector{{< /ui >}} and preview a distribution of its values.
+1. Click on a pattern to see a list of sample logs.
 
 {{< img src="observability_pipelines/log_anomaly_detection/pattern_distribution.png" alt="The Next steps section showing a list of log patterns and a distribution of values for a highlighted aggregate value." style="width:100%;" >}}
 
