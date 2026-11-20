@@ -11,13 +11,15 @@ further_reading:
 
 ## Prerequisites
 
-- Agent version 7.82 or later. To upgrade your Agents, see [Upgrade Agents][5].
-- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
-- [Remote Configuration][3] enabled for your organization and the Agent's API key
+- Agent version 7.82 or later. To upgrade your Agents, see [Upgrade Agents][4].
+- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
+- [Remote Configuration][3] enabled for your organization and for the API key your Agents use. Both are enabled by default.
 
 ## Modify tags across multiple Agents
 
-<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</div>
+Modify tags on many Agents at once to correct and standardize tagging across your fleet, without editing the Agent configuration on each host by hand.
+
+When a deployment has multiple tag rules, Fleet Automation applies them in order, from top to bottom. A later rule can act on the result of an earlier one. For example, a {{< ui >}}Replace Tags{{< /ui >}} rule can change a tag that {{< ui >}}Add Tags{{< /ui >}} added, or a tag that an earlier {{< ui >}}Replace Tags{{< /ui >}} rule changed.
 
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][1] tab and choose {{< ui >}}Modify Tags{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
@@ -31,12 +33,12 @@ further_reading:
 
       In a regular expression, use `(...)` or `(?<name>...)` to define capture groups, and `${index}` or `${name}` to reference them in the {{< ui >}}New tag{{< /ui >}} field. For example, to rename `team:` tags to `owner:` while keeping their values, enter `team:(.*)` as the old tag and `owner:${1}` as the new tag.
 
-    {{< img src="agent/fleet_automation/fa_modify_tags.png" alt="The Choose tags to add or remove step in Fleet Automation's Modify Tags workflow, showing the managed_by:fleet tag in the Add Tags field, an empty Remove Tags field, and a Replace Tags rule that uses a regular expression to replace env:p.* with env:prod." style="width:100%;" >}}
+    {{< img src="agent/fleet_automation/fa_modify_tags.png" alt="The Modify Tags step in Fleet Automation, with a tag to add and a regular expression rule that replaces env:p.* with env:prod." style="width:100%;" >}}
 
-    <div class="alert alert-info">When a deployment has multiple tag rules, Fleet Automation applies them in order, from top to bottom. A later rule can act on the result of an earlier one. For example, a <strong>Replace Tags</strong> rule can change a tag that <strong>Add Tags</strong> added, or a tag that an earlier <strong>Replace Tags</strong> rule changed.</div>
+    <div class="alert alert-tip">To check how your changes affect a specific Agent, preview its configuration diff in the <strong>Configuration Summary</strong> panel.</div>
 
 1. Review the deployment plan. Fleet Automation generates a configuration diff for each affected Agent so you can verify the exact changes.
-1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][6].
+1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][5].
 
 ## Further Reading
 
@@ -45,6 +47,5 @@ further_reading:
 [1]: https://app.datadoghq.com/fleet/agent-management
 [2]: /getting_started/tagging/
 [3]: /agent/guide/setup_remote_config
-[4]: /agent/guide/setup_remote_config/#enable-remote-agent-management
-[5]: /agent/fleet_automation/upgrade_agents/
-[6]: https://app.datadoghq.com/fleet/deployments
+[4]: /agent/fleet_automation/upgrade_agents/
+[5]: https://app.datadoghq.com/fleet/deployments

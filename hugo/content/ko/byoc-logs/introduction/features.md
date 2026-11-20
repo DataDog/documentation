@@ -2,6 +2,10 @@
 aliases:
 - /ko/cloudprem/introduction/features/
 description: BYOC Logs에서 지원되는 Datadog Log Explorer 기능 알아보기
+further_reading:
+- link: https://www.datadoghq.com/blog/byoc-cross-cluster-queries/
+  tag: 블로그
+  text: 팀과 AI 에이전트를 위한 클러스터 간 쿼리로 Datadog BYOC 전반에서 데이터 통합하기
 title: 지원되는 기능
 ---
 ## 개요 {#overview}
@@ -13,7 +17,7 @@ Datadog BYOC(Bring Your Own Cloud) Logs는 핵심 Log Explorer 기능을 자체 
 ### 검색 및 시각화 {#search-and-visualization}
 
 - 모든 로그 속성에 대한 전체 텍스트 검색
-- 목록, 시계열, 상위 목록, 테이블, 트리 맵, 파이 차트, 산점도 시각화
+- 목록, 시계열, 상위 목록, 표, 트리 맵, 파이 차트, 산점도 시각화
 - 필드 및 패턴으로 그룹화(월별 타임시프트 제외)
 - 고유 개수 기준 그룹화 및 정렬을 포함한 그룹화 및 정렬
 - 플랫 그룹 쿼리
@@ -51,9 +55,11 @@ Datadog BYOC(Bring Your Own Cloud) Logs는 핵심 Log Explorer 기능을 자체 
 - Bits Investigation(미리 보기)
 - MCP 서버(미리 보기)
 
+<div class="alert alert-info">Bits Investigation 및 MCP Server는 미리 보기 상태입니다. 이 기능들이 BYOC Logs 데이터를 대상으로 실행하는 쿼리는 성능이 저하될 수 있습니다.</div>
+
 ## 지원되지 않는 기능 {#unsupported-features}
 
-BYOC Logs에서는 다음 기능을 지원하지 않습니다:
+BYOC Logs에서는 다음 기능을 지원하지 않습니다.
 
 - SIEM
 - Watchdog
@@ -68,5 +74,9 @@ BYOC Logs에서는 다음 기능을 지원하지 않습니다:
 - 고급 쿼리 기능:
   - 계산된 필드
   - Grok 추출(쿼리 시 구문 분석)
+
+## 추가 자료
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/api/latest/logs-restriction-queries/

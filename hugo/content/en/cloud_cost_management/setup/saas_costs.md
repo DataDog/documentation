@@ -185,6 +185,8 @@ After you save your configuration, Datadog begins polling Anthropic usage and co
 
 {{% tab "ChatGPT Enterprise" %}}
 
+<div class="alert alert-info">ChatGPT Enterprise cost monitoring is in Preview. Datadog does not charge for this integration during Preview. Credit-priced usage is shown as estimated USD costs, which can differ from final OpenAI bills.</div>
+
 ### 1. Create a Costs-only admin API key
 
 Use a ChatGPT Enterprise workspace with access to OpenAI's Costs API. A workspace owner or admin must create the key.
@@ -710,6 +712,9 @@ Available tags depend on the source record. Credit-priced usage contributes an e
 | `product` | The product of usage, for example "actions" or "storage". |
 | `organization_name` | The GitHub organization. |
 | `repository_name` | The GitHub repository. |
+| `model_name` | The model that generated a GitHub Copilot cost. |
+| `user_email` | The email address of the user who generated a GitHub Copilot cost. Available only for GitHub enterprise accounts. |
+| `copilot_user` | The GitHub username of the user who generated a GitHub Copilot cost. Available only for GitHub enterprise accounts. |
 | `billing_currency` | The billing currency, for example "USD". |
 | `discount` | If the cost item is a discount. |
 

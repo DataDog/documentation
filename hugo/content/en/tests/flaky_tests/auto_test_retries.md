@@ -253,6 +253,10 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 
 If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][4], find your repository or service, and toggle Auto Test Retries off.
 
+## Exclude individual tests from retries
+
+Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -266,3 +270,4 @@ If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/C
 [7]: https://www.npmjs.com/package/jest-image-snapshot
 [8]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
 [9]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
+[10]: /tests/flaky_management/code_annotations/

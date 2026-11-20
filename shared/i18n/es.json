@@ -317,7 +317,7 @@
     "other": "CONSEJO"
   },
   "site_support_banner": {
-    "other": "Este producto no es compatible con el <a href=\"/getting_started/site\">sitio Datadog</a> seleccionado."
+    "other": "Este producto no es compatible con el <a href=\"/getting_started/site\">sitio de Datadog</a> seleccionado."
   },
   "site_support_banner_plaintext": {
     "other": "This product or feature is not supported for the following sites:"

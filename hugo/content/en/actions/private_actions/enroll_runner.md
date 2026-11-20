@@ -8,7 +8,7 @@ further_reading:
 - link: "/actions/private_actions/authorize_private_actions"
   tag: "Documentation"
   text: "Authorize private actions"
-- link: "/actions/private_actions/execution_policies"
+- link: "/actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
 ---
@@ -132,7 +132,7 @@ To rotate the credentials of a private runner without redeploying, run the comma
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /actions/private_actions/execution_policies/
+[1]: /actions/execution_policies/
 [2]: /actions/connections/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /actions/private_actions/set_up_agent_based/

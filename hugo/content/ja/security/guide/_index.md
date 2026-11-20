@@ -21,7 +21,6 @@ title: セキュリティガイド
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Cloud SIEM の Azure 構成ガイド{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}モニター認証ログによるセキュリティ対策{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Cloud SIEM が分析するログをカスタマイズする{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/" >}}STIX 脅威インテリジェンスを取り込む{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security 関連の各種ガイド:" >}}

@@ -135,7 +135,7 @@ El rellenado se realiza en la medida de lo posible. Para conjuntos de pruebas gr
 
 ### Java, .NET y Go {#java-net-and-go}
 
-Con `dd-trace-java`, `dd-trace-dotnet` y `dd-trace-go`, no se requiere configuración adicional para el rellenado. Estas bibliotecas detectan automáticamente cuándo se ejecutan las pruebas con un motor de cobertura de código y rellenan los datos de cobertura de código de las pruebas omitidas por Test Impact Analysis.
+Con `dd-trace-java`, `dd-trace-dotnet` y `ddtest instrument`, no se requiere configuración adicional para la carga retroactiva de datos. Estas bibliotecas detectan automáticamente cuándo se ejecutan las pruebas con un motor de cobertura de código y rellenan los datos de cobertura de código de las pruebas omitidas por Test Impact Analysis.
 
 ### JavaScript {#javascript}
 

@@ -1,18 +1,17 @@
 ---
 title: Data Streams Monitoring pour RabbitMQ
 ---
+### Prérequis {#prerequisites}
 
-### Prérequis
-
--   [Agent Datadog v7.34.0 ou version ultérieure][1]
+-   [Datadog Agent v7.34.0 ou version ultérieure][1]
 
 <table>
   <thead>
     <tr>
-      <th>Langage</th>
+      <th>Langue</th>
       <th>Bibliothèque</th>
       <th>Version minimale du traceur</th>
-      <th>Version recommandée du traceur</th>
+      <th>Version de traceur recommandée</th>
     </tr>
   </thead>
   <tbody>
@@ -46,12 +45,18 @@ title: Data Streams Monitoring pour RabbitMQ
       <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="recommended" >}}</td>
     </tr>
+    <tr>
+      <td><a href="/data_streams/php">PHP</a></td>
+      <td><a href="https://github.com/php-amqplib/php-amqplib">php-amqplib</a></td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-amqplib" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-amqplib" type="recommended" >}}</td>
+    </tr>
   </tbody>
 </table>
 
-### Configurer Data Streams Monitoring
+### Configuration de Data Streams Monitoring {#setting-up-data-streams-monitoring}
 
-Consultez les instructions de configuration pour [Java][2], [Node.js][3], [Python][4] ou [.NET][5].
+Consultez les instructions de configuration pour [Java][2], [Node.js][3], [Python][4], [.NET][5] ou [PHP][6].
 
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
 
@@ -60,3 +65,4 @@ Consultez les instructions de configuration pour [Java][2], [Node.js][3], [Pytho
 [3]: /fr/data_streams/setup/language/nodejs
 [4]: /fr/data_streams/setup/language/python
 [5]: /fr/data_streams/setup/language/dotnet
+[6]: /fr/data_streams/setup/language/php

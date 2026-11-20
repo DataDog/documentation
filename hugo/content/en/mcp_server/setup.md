@@ -16,6 +16,9 @@ further_reading:
 - link: "mcp_server/code_execution"
   tag: "Documentation"
   text: "Code Execution with the MCP Server"
+- link: "account_management/rbac/mcp_access"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 - link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
   tag: "Blog"
   text: "Investigate Kubernetes resources with Datadog MCP tools"
@@ -565,10 +568,11 @@ To enable [product-specific tools](#toolsets), include the `toolsets` query para
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+To enable all generally available toolsets (except for the [`chat` toolset][2]), use `toolsets=all`. This works best for clients that support tool filtering.
 {{% /collapse-content %}}
 
 [1]: /getting_started/site/
+[2]: /mcp_server/tools/#chat
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -577,6 +581,39 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 
 [2]: https://github.com/datadog-labs/opencode-plugin
 [3]: https://opencode.ai/
+{{% /tab %}}
+
+{{% tab "Pi" %}}
+
+Install the [Datadog Pi plugin][1] to connect the [Pi coding agent][2] to the Datadog MCP Server. The plugin handles sign-in, connections to one or more Datadog organizations, and [toolset](#toolsets) selection.
+
+[1]: https://github.com/datadog-labs/pi-plugin
+[2]: https://pi.dev/
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. Install the plugin:
+
+   <pre><code>pi install npm:@datadog/pi-plugin</code></pre>
+
+1. Restart Pi.
+
+1. Run `/datadog` in Pi to open the connection screen. Select your [Datadog site][3] and complete the OAuth login flow in your browser. Your first connection becomes the default.
+
+1. Run `/datadog toolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+To connect another Datadog organization, run `/datadog` and select {{< ui >}}Connect another organization{{< /ui >}}. If your authorization expires, run `/datadog` and select {{< ui >}}Sign in again{{< /ui >}}. After updating the plugin, run `/reload` in Pi.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/pi-plugin">plugin repository</a> for all available commands, API key authentication for headless usage, and configuration options.</div>
+
+[3]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
@@ -624,13 +661,15 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets (except for the [`chat` toolset][1]), best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Click {{< ui >}}Start{{< /ui >}} on the Datadog server. Warp opens your browser to complete the OAuth login flow. Credentials are stored securely on your device and reused for future sessions.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /mcp_server/tools/#chat
 
 {{< /site-region >}}
 
@@ -662,11 +701,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets (except for the [`chat` toolset][1]), best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /mcp_server/tools/#chat
 
 {{< /site-region >}}
 
@@ -700,7 +741,9 @@ Each [Datadog site][86] has its own MCP Server endpoint. To build the endpoint f
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool search.
+Use `toolsets=all` to enable all generally available toolsets (except for the [`chat` toolset][18]) at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. `toolsets=all` works best with clients that support tool search.
+
+Tools in Preview and the [`chat` toolset][18] are not included in `toolsets=all`. To use them, explicitly add the toolset to the `toolsets` parameter (for example, `?toolsets=all,apm,chat`).
 
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
@@ -713,10 +756,11 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
 
-- Retrieve all generally available tools:
+- Retrieve all generally available tools (except for the [`chat` toolset][18]):
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[18]: /mcp_server/tools/#chat
 {{< /site-region >}}
 
 <div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
@@ -744,12 +788,13 @@ Provide tool names as a comma-separated list. When both parameters are present, 
 
 These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
-- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, notebooks, and code execution.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
+- `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
-- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
+- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
@@ -769,6 +814,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `processes`: Tools for searching recent [Live Processes][89] observations on your hosts.
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
@@ -783,7 +829,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
-- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
+- `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
@@ -805,6 +851,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
+| [Pi][94] | Earendil | Datadog [Pi plugin][95] recommended. |
 | [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
@@ -812,6 +859,8 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 ## Required permissions
 
 The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
+
+For a complete overview of MCP access controls, including how to restrict the actions an individual AI client can perform, see [Access Control for MCP][91].
 
 ### User role permissions
 
@@ -885,6 +934,8 @@ Repeat for each client and each organization you authorized from.
 
 Revoking an authorization has no effect on Personal Access Tokens, Service Access Tokens, or API and application keys. Delete or rotate those in their own management pages.
 
+Administrators can disable an AI client or remove specific scopes from it for the entire organization. To do this, use the [{{< ui >}}Mobile and Third-Party Access{{< /ui >}}][92] page. See [Restrict actions for a specific AI client][93].
+
 ### Personal or Service Access Token
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
@@ -936,6 +987,8 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
 
+**Note**: An AI client's [OAuth application scopes][93] do not apply to connections that use API and application keys or access tokens. These connections have the access of the key or token.
+
 ### Adding OAuth clients
 
 To allow-list a redirect URL, open [{{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}][80] in Organization Settings, enter the URL, and select {{< ui >}}Add URL{{< /ui >}}.
@@ -967,6 +1020,7 @@ If your AI client does not list Datadog MCP Server tools that create or modify r
 - **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
 - **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
 - **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
+- **OAuth application scopes**: If an administrator removed a scope from your AI client, you cannot use that client for actions that need the scope. This applies even if your role includes the permission. See [Restrict actions for a specific AI client][93].
 
 After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
 
@@ -1058,3 +1112,10 @@ After you change any of these settings, refresh the tool list in your AI client.
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /infrastructure/process/
+[90]: /gpu_monitoring/
+[91]: /account_management/rbac/mcp_access/
+[92]: https://app.datadoghq.com/organization-settings/oauth-applications
+[93]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client
+[94]: https://pi.dev/
+[95]: https://github.com/datadog-labs/pi-plugin

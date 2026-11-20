@@ -24,6 +24,14 @@ datadog-code-security-mcp version --detailed
 
 Instale un binario faltante con las instrucciones en [Install security binaries][1]. Después de instalar las habilidades de agente, `dd-codesec-setup-toolchain` instala, actualiza y diagnostica los mismos binarios. Consulte [Install agent skills][4].
 
+## Se requiere una actualización del escáner {#scanner-upgrade-required}
+
+Los escaneos SAST efímeros y el guardado de reglas SAST personalizadas requieren la versión 0.9.10 o posterior de `datadog-static-analyzer`. Con una versión anterior, devuelven un error `Scanner Upgrade`. Actualice el binario y vuelva a intentarlo:
+
+```shell
+brew upgrade datadog-static-analyzer
+```
+
 ## Errores de autenticación {#authentication-errors}
 
 Las claves establecidas en la configuración del servidor MCP no se exportan a su shell. `echo $DD_API_KEY` muestra solo una clave exportada en ese shell, que es lo que utiliza un comando CLI directo.
@@ -32,6 +40,16 @@ Las claves establecidas en la configuración del servidor MCP no se exportan a s
 - Para un comando CLI directo, exporte `DD_API_KEY` y `DD_APP_KEY` en el mismo shell. Opcionalmente, exporte `DD_SITE`.
 
 Si los valores están configurados pero los escaneos siguen fallando, verifique que sus claves tengan los permisos correctos. Consulte [API and Application Keys][2] para obtener más detalles.
+
+## Regla SAST personalizada no guardada {#custom-sast-rule-not-saved}
+
+Los escaneos efímeros funcionan sin claves de Datadog, pero guardar una regla requiere `DD_API_KEY` y `DD_APP_KEY`. Consulte la sección [Errores de autenticación](#authentication-errors).
+
+Si la regla no informa la cantidad esperada de hallazgos en sus dos ejemplos o falla en ellos, no se guarda nada. Si el error indica que no se escaneó un ejemplo, cambie el nombre del archivo de ejemplo para que su extensión coincida con el lenguaje de la regla, por ejemplo `.ts` para `TYPESCRIPT`. De lo contrario, corrija la regla y vuelva a intentarlo.
+
+Si Datadog crea la regla pero rechaza su contenido, el error informa que la regla se dejó vacía. Corrija la causa que indica el error y vuelva a intentarlo con `overwrite: true` (`--overwrite` en la CLI) para reemplazar la regla vacía.
+
+Si ya existe una regla con el mismo nombre, no se guarda nada. Elija otro nombre de regla o vuelva a intentarlo con `overwrite: true` (`--overwrite` en la CLI) para reemplazar la regla existente.
 
 ## El servidor MCP no responde {#mcp-server-not-responding}
 
