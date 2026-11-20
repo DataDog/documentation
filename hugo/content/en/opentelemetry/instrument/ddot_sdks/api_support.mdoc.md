@@ -1,6 +1,6 @@
 ---
-title: OpenTelemetry API Support in Datadog SDKs
-description: "Use OpenTelemetry APIs with Datadog SDKs to create traces, metrics, and logs while maintaining vendor-neutral instrumentation."
+title: OpenTelemetry API Support
+description: "Use OpenTelemetry APIs with DDOT SDKs and Datadog SDKs to create traces, metrics, and logs while maintaining vendor-neutral instrumentation."
 aliases:
   - /opentelemetry/instrument/dd_sdks/api_support/
   - /opentelemetry/instrument/dd_otel_sdks/api_support/
@@ -59,6 +59,8 @@ further_reading:
       tag: 'Blog'
 ---
 
+This page covers DDOT SDKs (Java, .NET, Node.js, Python, and Go) and the Datadog SDKs for Ruby, PHP, and Rust, which support the OpenTelemetry APIs but aren't DDOT SDKs.
+
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
 <!-- ============================================== -->
@@ -67,7 +69,7 @@ further_reading:
 
 ## Overview
 
-Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tags, record events, and more.
+Use OpenTelemetry tracing APIs with DDOT SDKs and Datadog SDKs to create custom spans, add tags, record events, and more.
 
 {% if equals($prog_lang, "java") %}
 {% partial file="opentelemetry/traces/java.mdoc.md" /%}
@@ -115,7 +117,7 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 
 ## Overview
 
-Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
+Use the OpenTelemetry Metrics API with DDOT SDKs and Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
 <!-- Native implementation (.NET, Node.js, Go, Java) -->
 {% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
@@ -937,7 +939,7 @@ Here is the minimum version required for each instrument type:
 
 ## Overview
 
-Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
+Use the OpenTelemetry Logs API with DDOT SDKs and Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
 <!-- Native implementation (.NET, Node.js, Go, Java) -->
 {% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}

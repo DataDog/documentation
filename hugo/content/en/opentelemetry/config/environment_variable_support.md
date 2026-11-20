@@ -31,7 +31,7 @@ further_reading:
 
 DDOT SDKs implement the OpenTelemetry APIs for traces, metrics, and logs, and read the standard OpenTelemetry SDK environment variables (`OTEL_*`). You can keep your existing OpenTelemetry configuration when you adopt DDOT SDKs, and use a few Datadog (`DD_*`) settings only for Datadog-specific capabilities.
 
-This page describes the environment variables for configuring DDOT SDKs, including support differences by language.
+This page describes the environment variables for configuring DDOT SDKs, including support differences by language. It also covers the Datadog SDKs for Ruby and PHP, which read these OpenTelemetry environment variables for the OpenTelemetry Metrics and Logs APIs but aren't DDOT SDKs.
 
 The precedence rules on this page describe how *DDOT SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
 
