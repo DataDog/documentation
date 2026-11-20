@@ -100,7 +100,7 @@ The following installation tools still instrument functions with less than 256 M
 | [CloudFormation macro][13] | `suppressLowMemoryWarning: true` parameter |
 | [Terraform module][14] (`terraform-aws-lambda-datadog`) | `suppress_low_memory_warning = true` |
 
-The Terraform module reports the warning as a Terraform check warning. For the AWS CDK construct, the CloudFormation macro, and the Terraform module, a function that does not set a memory size uses the AWS default of 128 MB and receives the warning. The Serverless Framework uses a default memory size of 1024 MB.
+The Terraform module reports the warning as a Terraform check warning. The CloudFormation macro cannot return warnings to the deployment, so it writes the warning to the macro function's CloudWatch logs. For the AWS CDK construct, the CloudFormation macro, and the Terraform module, a function that does not set a memory size uses the AWS default of 128 MB and receives the warning. The Serverless Framework uses a default memory size of 1024 MB.
 
 ## Advanced configurations
 
