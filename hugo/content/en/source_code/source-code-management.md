@@ -11,12 +11,10 @@ further_reading:
 - link: "/integrations/azure-devops-source-code/"
   tag: "Documentation"
   text: "Learn about the Azure DevOps Source Code Integration"
-- link: "/integrations/bitbucket/"
+- link: "/integrations/bitbucket-source-code/"
   tag: "Documentation"
   text: "Learn about the Bitbucket Source Code Integration"  
 ---
-
-## Overview
 
 To use most source code-related features, you must connect your Git repositories to Datadog through Datadog's first-party source code management (SCM) provider integrations. After connecting your repositories, Datadog may store the contents of your repositories for up to 7 days to reduce repeated requests to the repository and support feature performance.
 
@@ -26,7 +24,7 @@ To use most source code-related features, you must connect your Git repositories
 <div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
-Datadog supports the following features for the SCM providers listed below. See [Features][1] for more details about each feature:
+Datadog supports the following features for the SCM providers listed below. For details, see [Code Snippets and Context Links][1] and [PR Comments][2]:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
@@ -90,10 +88,13 @@ Install Datadog's Azure DevOps Source Code integration using the [integration ti
 Repositories from Bitbucket workspaces are supported for Bitbucket Cloud (SaaS). Bitbucket Server and Bitbucket Data Center (On-Prem) are <strong>not</strong> supported.
 </div>
 
+The [Bitbucket integration][103] collects repository events.
+
 Install Datadog's [Bitbucket Cloud Source Code integration][102] using the [integration tile][101] or while onboarding other Datadog products to connect to your Bitbucket Cloud repositories.
 
 [101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
-[102]: /integrations/bitbucket/
+[102]: /integrations/bitbucket-source-code/
+[103]: /integrations/bitbucket/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
@@ -131,4 +132,5 @@ Successfully synced git DB in 3.579 seconds.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /source_code/features/
+[1]: /source_code/snippets-and-links/
+[2]: /source_code/pr-comments/

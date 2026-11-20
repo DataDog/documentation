@@ -515,9 +515,9 @@ Si vous utilisez un runtime ou un logger personnalisé qui n'est pas pris en cha
 
 [L'intégration du code source Datadog][26] vous permet de lier votre télémétrie (telle que les traces de pile) au code source de vos fonctions Lambda dans vos dépôts Git.
 
-Pour obtenir des instructions sur la configuration de l'intégration du code source dans vos applications serverless, consultez la section [Intégrer des informations Git dans vos artefacts de build][101].
+Pour configurer l'intégration du code source, [sélectionnez votre langue][101] et suivez les instructions **Serverless**.
 
-[101]: /fr/integrations/guide/source-code-integration/?tab=go#serverless
+[101]: /fr/source_code/service-mapping/
 
 ## Excluez les tags auto-injectés des métriques personnalisées {#exclude-auto-injected-tags-from-custom-metrics}
 

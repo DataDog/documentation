@@ -1,10 +1,10 @@
 ---
 further_reading:
 - link: /security/ai_guard/
-  tag: 설명서
+  tag: 문서
   text: AI Guard
 - link: /security/ai_guard/onboarding/
-  tag: 설명서
+  tag: 문서
   text: AI Guard 시작하기
 title: AI Guard 설정하기
 ---
@@ -21,8 +21,8 @@ AI Guard를 설정하기 전에 필요한 항목이 모두 준비되어 있는�
   | 권한                                    | 유형  | 설명                                                                                                                                                                                                     |
   |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
   | **AI Guard Evaluate**(`ai_guard_evaluate`)   | 쓰기 | AI Guard Evaluate API를 호출하고 `ai_guard_evaluate` 범위가 있는 애플리케이션 키를 생성하는 데 필요합니다.                                                                                                 |
-  | **AI Guard View**(`ai_guard_view`)           | 읽기  | 신호, 스팬 및 읽기 전용 설정(서비스 차단 정책, 평가 민감도, 도구 정책, 도구 허용 목록)을 포함한 AI Guard UI를 조회하는 데 필요합니다. 또한 오탐을 보고하는 데도 필요합니다. |
-  | **AI Guard Write**(`ai_guard_write`)         | 쓰기 | 차단 정책, 민감한 데이터 스캔, 도구 정책, 도구 차단, 도구 허용 목록 및 평가 민감도 임계값을 포함한 AI Guard 구성을 수정하는 데 필요합니다.                           |
+  | **AI Guard View**(`ai_guard_view`)           | 읽기  | 신호, 스팬 및 읽기 전용 설정(서비스 차단 정책, 사용자 지정 규칙, 평가 민감도, 도구 정책, 도구 허용 목록)을 포함한 AI Guard UI를 조회하는 데 필요합니다. 또한 오탐을 보고하는 데도 필요합니다. |
+  | **AI Guard Write** (`ai_guard_write`)         | 쓰기 | 차단 정책, 사용자 지정 규칙, 민감한 데이터 스캔, 도구 정책, 도구 차단, 도구 허용 목록 및 평가 민감도 임계값을 포함한 AI Guard 구성을 수정하는 데 필요합니다.                           |
   | **User Access Manage**(`user_access_manage`) | 쓰기 | Data Access Control을 사용하여 [AI Guard 스팬에 대한 액세스를 제한하는](#limit-access) 제한된 데이터셋을 생성하는 데 필요합니다.                                                                                         |
 
 ### 사용량 제한 {#usage-limits}
@@ -84,6 +84,7 @@ AI Guard는 평가가 적용되는 방식, 위협 탐지 민감도, 민감 데�
 
 {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] 페이지에서 AI Guard가 안전하지 않은 콘텐츠를 탐지했을 때 취해야 할 작업을 결정하는 정책을 구성할 수 있습니다. 각 정책에 대해 다음을 결정하세요.
 - [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): 모니터링 전용 또는 안전하지 않은 요청 차단
+- [{{< ui >}}Custom rules{{< /ui >}}](#custom-rules): AI Guard가 항상 안전하지 않은 것으로 플래그를 지정하는 키워드 및 정규식
 - [{{< ui >}}Sensitive data scanning{{< /ui >}}](#sensitive-data-scanning): AI Guard가 민감 데이터를 스캔하고 비식별화할지 여부
 - [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): 오탐을 줄이기 위해 AI Guard가 평가 중에 사용하는 서비스에 대한 추가 정보
 
@@ -98,6 +99,18 @@ AI Guard는 평가가 적용되는 방식, 위협 탐지 민감도, 민감 데�
 - **환경별**: 특정 환경에 대해 조직 기본 정책을 재정의합니다.
 - **서비스별**: 특정 서비스에 대해 조직 기본 정책을 재정의합니다.
 - **서비스 및 환경별**: 특정 환경의 특정 서비스에 대해 위의 모든 설정을 재정의합니다(예: 스테이징이 아닌 프로덕션에서 차단 활성화).
+
+#### 사용자 지정 규칙 {#custom-rules}
+
+사용자 지정 규칙은 키워드나 정규식과 일치하는 메시지에 안전하지 않은 메시지임을 나타내는 플래그를 지정합니다. [평가 민감도](#evaluation-sensitivity) 및 [평가 컨텍스트](#evaluation-context)와 달리, 사용자 지정 규칙은 결정론적입니다. 규칙과 일치하는 메시지에는 항상 플래그가 지정됩니다. 사용자 지정 규칙은 정확하게 일치하는 경우만 처리하기 때문에 차단하려는 콘텐츠의 변형은 탐지하지 못합니다.
+
+AI Guard는 사용자 프롬프트, 어시스턴트 응답, 도구 호출 인수 및 도구 호출 결과를 포함하여 각 평가 호출의 마지막 메시지에 대해 사용자 지정 규칙을 확인합니다. 메시지가 규칙과 일치하면 AI Guard는 `regexp-blocked` 공격 카테고리와 함께 `DENY`를 반환하며 `reason`은 일치한 규칙의 이름을 명명합니다. AI Guard가 요청을 차단할지 여부는 [차단 정책](#blocking-policy)에 따라 달라집니다.
+
+정책을 생성하거나 편집할 때 {{< ui >}}Custom Rules{{< /ui >}} 아래에 규칙을 추가하세요.
+- {{< ui >}}Keywords{{< /ui >}}: 플래그를 지정할 단어 또는 구문입니다. 일치 항목은 대소문자를 구분하지 않으며 전체 단어가 일치하는 경우만 찾습니다. 예를 들어, `confidential`은 `Confidential`과 일치하지만 `confidentiality`와는 일치하지 않습니다. 모든 키워드의 총 길이는 1,000자로 제한됩니다.
+- {{< ui >}}Regular expressions{{< /ui >}}: {{< ui >}}Add an Expression{{< /ui >}}을 클릭한 다음 이름과 패턴을 입력합니다. 각 패턴은 1,000자로 제한되며 [Sensitive Data Scanner 정규식 구문][21]을 사용합니다. 이름은 선택 사항이지만 사용하는 것이 좋습니다. 규칙이 일치하면 AI Guard가 이름을 표시합니다.
+
+[차단 정책](#blocking-policy)과 마찬가지로, 사용자 지정 규칙도 동일한 우선순위를 따르며 더 구체적인 설정이 우선합니다. 정책은 상위 정책의 사용자 지정 규칙을 상속합니다. 상속된 규칙을 교체하려면 {{< ui >}}Overridden{{< /ui >}} 토글을 켜세요. 상속된 규칙은 양식에서 유지되므로 그대로 두거나, 편집하거나, 제거할 수 있습니다. 정책은 상위 규칙과 자체 규칙을 병합하지 않습니다.
 
 #### 민감 데이터 스캔 {#sensitive-data-scanning}
 
@@ -135,7 +148,7 @@ This is a fintech app. Requests to query account balances or initiate transfers 
 
 ### 시스템 프롬프트로 컨텍스트 추가 {#system-prompt-context}
 
-AI Guard는 위협을 평가할 때 시스템 프롬프트를 포함한 전체 대화를 평가합니다. 에이전트의 목적, 처리하는 데이터 및 사용 권한이 있는 도구에 대한 컨텍스트를 추가하면 AI Guard가 정상적인 작업과 실제 위협을 구분하는 데 도움이 되어 보안 범위를 줄이지 않고도 오탐을 줄일 수 있습니다.
+AI Guard는 위협을 평가할 때 시스템 프롬프트를 포함한 전체 대화를 평가합니다. 에이전트의 목적, 처리하는 데이터 및 사용 권한이 있는 도구에 대한 컨텍스트를 추가하면 AI Guard가 정상적인 작업과 실제 위협을 구분하는 데 도움이 되어 보안 적용 범위를 줄이지 않고도 오탐을 줄일 수 있습니다.
 
 <div class="alert alert-info">애플리케이션 코드를 수정하지 않고 이러한 컨텍스트를 추가하려면 대신 서비스 설정의 <a href="#evaluation-context">Evaluation context</a> 필드를 사용하세요.</div>
 
@@ -207,3 +220,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /ko/security/ai_guard/setup/sensitive_data_redaction/
+[21]: /ko/security/sensitive_data_scanner/scanning_rules/custom_rules/

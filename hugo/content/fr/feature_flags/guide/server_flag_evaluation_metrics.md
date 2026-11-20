@@ -49,7 +49,7 @@ La livraison de configuration Agentless et cette métrique utilisent des chemins
 
 ## Étape 1 : Configurez un récepteur OTLP {#step-1-configure-an-otlp-receiver}
 
-Les métriques d'évaluation des indicateurs de fonctionnalité sont émises via OpenTelemetry (OTLP). Pour les déploiements basés sur un agent, activez le récepteur OTLP du Datadog Agent, qui est désactivé par défaut. Pour les instructions de configuration, consultez [Ingestion OTLP par le Datadog Agent][2]. Pour les déploiements serverless sans Agent, utilisez le chemin OTLP ou les métriques personnalisées pris en charge par votre configuration de Serverless Monitoring.
+Les métriques d'évaluation des indicateurs de fonctionnalité sont émises via OpenTelemetry (OTLP). Pour les déploiements basés sur un agent, activez le récepteur OTLP du Datadog Agent, qui est désactivé par défaut. Pour les instructions de configuration, consultez [Configurer l’endpoint OTLP de l’Agent][2]. Pour les déploiements serverless sans Agent, utilisez le chemin OTLP ou les métriques personnalisées pris en charge par votre configuration de Serverless Monitoring.
 
 Vous devez uniquement activer le protocole utilisé par votre application (gRPC sur le port 4317 ou HTTP sur le port 4318).
 
@@ -196,7 +196,7 @@ Après le déploiement, confirmez que les métriques atteignent Datadog :
 
 Par défaut, `feature_flag.evaluations` ne conserve qu'une heure de données. Pour conserver un historique plus long :
 
-1. Accédez à [Metrics Summary][4] et recherchez `feature_flag.evaluations`.
+1. Accédez au [Metrics Catalog][4] et recherchez `feature_flag.evaluations`.
 2. Sélectionnez la métrique et activez **Historical Metrics**.
 
 Il s'agit d'un paramètre optionnel qui n'est pas activé automatiquement pour les métriques OTLP.
@@ -226,7 +226,7 @@ La métrique `feature_flag.evaluations` est un compteur avec les tags suivants :
 [1]: /fr/feature_flags/server/
 [2]: /fr/opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /fr/dashboards/
 [6]: /fr/feature_flags/server/java/#installation
 [7]: /fr/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

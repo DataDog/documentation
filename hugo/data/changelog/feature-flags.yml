@@ -37,3 +37,87 @@ entries:
       - CreateVariantForFeatureFlag
       - UpdateVariantForFeatureFlag
     title: Fix Feature Flags variant request and response schemas
+  - change_type: added
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41164
+    operations:
+      - ExportFeatureFlagHistory
+      - ListFeatureFlagHistory
+    title: Add Feature Flags change history list and CSV export endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ExportFeatureFlagHistory
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - UpdateSavedFilterAttributes
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41461
+    operations:
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlagsEnvironments
+      - UpdateFeatureFlagsEnvironment
+    title: Document environment privacy settings and update behavior
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - UpdateAllocationsForFeatureFlagInEnvironment
+    title: Add the bandit reads to the Experiments API
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41822
+    operations:
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlagsEnvironments
+      - UpdateFeatureFlagsEnvironment
+    title: Remove key and description from Feature Flags environment responses
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41903
+    operations:
+      - ArchiveFeatureFlag
+      - CreateFeatureFlag
+      - GetFeatureFlag
+      - ListFeatureFlags
+      - UnarchiveFeatureFlag
+      - UpdateFeatureFlag
+    title: Document bucketing_mode on feature flag responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - ArchiveFeatureFlag
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - CreateFeatureFlag
+      - CreateFeatureFlagsEnvironment
+      - CreateVariantForFeatureFlag
+      - DeleteFeatureFlagsEnvironment
+      - DeleteVariantFromFeatureFlag
+      - DisableFeatureFlagEnvironment
+      - EnableFeatureFlagEnvironment
+      - ExportFeatureFlagHistory
+      - GetFeatureFlag
+      - GetFeatureFlagsEnvironment
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - ListFeatureFlagsEnvironments
+      - PauseExposureSchedule
+      - ResumeExposureSchedule
+      - StartExposureSchedule
+      - StopExposureSchedule
+      - UnarchiveFeatureFlag
+      - UpdateAllocationsForFeatureFlagInEnvironment
+      - UpdateFeatureFlag
+      - UpdateFeatureFlagsEnvironment
+      - UpdateSavedFilterAttributes
+      - UpdateVariantForFeatureFlag
+    title: Document rate-limit headers on the shared 429 responses

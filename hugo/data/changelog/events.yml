@@ -11,3 +11,18 @@ entries:
     operations:
       - CreateEvent
     title: Deprecate V1 Post an event and drop the V2 category caveat
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateEvent
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateEvent
+      - GetEvent
+      - ListEvents
+      - SearchEvents
+    title: Document rate-limit headers on the shared 429 responses

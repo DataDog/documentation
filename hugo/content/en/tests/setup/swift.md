@@ -2,7 +2,7 @@
 title: Swift Tests
 code_lang: swift
 type: multi-code-lang
-code_lang_weight: 50
+code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/swift
   - /continuous_integration/tests/swift

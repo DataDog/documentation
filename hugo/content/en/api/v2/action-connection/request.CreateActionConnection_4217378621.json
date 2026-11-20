@@ -1,0 +1,47 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "HTTP Secrets Manager Connection exampleactionconnection",
+      "external_secrets_manager": {
+        "type": "aws_secrets_manager",
+        "connection_id": "string",
+        "region": "us-east-1"
+      },
+      "integration": {
+        "type": "HTTP",
+        "base_url": "https://example.com",
+        "credentials": {
+          "type": "HTTPTokenAuth",
+          "tokens": [
+            {
+              "name": "token",
+              "type": "SECRET",
+              "value": {
+                "type": "aws_secrets_manager",
+                "secret_id": "example/http",
+                "key": "token"
+              }
+            }
+          ],
+          "headers": [
+            {
+              "name": "ApiKey",
+              "value": "literal-value"
+            }
+          ],
+          "url_parameters": [
+            {
+              "name": "apiKey",
+              "value": "literal-value"
+            }
+          ],
+          "body": {
+            "content_type": "application/json",
+            "content": "{\"example\":\"literal\"}"
+          }
+        }
+      }
+    }
+  }
+}

@@ -59,12 +59,12 @@ gem 'openfeature-sdk', '>= 0.5.1'
 
 Set these environment variables in the application process before startup:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 No Feature Flags enablement or source setting is required for a new setup. Register the Datadog provider with OpenFeature to start polling. Installing the tracer or constructing `Datadog::OpenFeature::Provider.new` alone does not start agentless configuration requests.
 
@@ -148,6 +148,47 @@ context = OpenFeature::SDK::EvaluationContext.new(
 ```
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
+
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `datadog` version `2.47.0` or later. Experimentation opt-out requires `datadog` version `2.49.0` or later. The combined example requires `2.49.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][14] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass the subject's preferences with each evaluation:
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+Replace the example timestamp with the subject's stored preference.
+
+The equivalent provider options are `enable_evaluation_telemetry_opt_out_parameter: true` and `experimentation_opt_out_mode: :immediate`. Explicit provider options override deployment settings. Use `:disabled` to override an enabled deployment policy, or omit the option to use deployment settings.
+
+Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future-experiments-only mode checks allocation activation, not prior enrollment.
+
+Telemetry opt-out suppresses each of these that the application enables: new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][15] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -272,6 +313,14 @@ if maintenance_mode
   halt 503, { error: 'Service temporarily unavailable' }.to_json
 end
 ```
+
+## Record exposures in your own data store
+
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][12] for minimum SDK requirements and other details.
+
+## Evaluation events and privacy
+
+Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][13] for the data collected, opt-out scope, and delivery requirements.
 
 ## Testing
 
@@ -401,3 +450,7 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
+[12]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[13]: /feature_flags/guide/server_evaluation_events/
+[14]: /feature_flags/concepts/opt_out/
+[15]: /feature_flags/concepts/opt_out/#configure-server-sdks

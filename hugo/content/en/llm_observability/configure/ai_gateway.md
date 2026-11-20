@@ -1,6 +1,6 @@
 ---
 title: AI Gateway
-description: Route LLM requests through Datadog AI Gateway to control model access, routing, and spend, and to observe every request in Agent Observability.
+description: Route LLM requests through Datadog AI Gateway to control model access, routing, and spend, and to observe requests in Agent Observability.
 
 further_reading:
   - link: "/llm_observability/"
@@ -24,16 +24,17 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Call models from multiple providers through one endpoint and one set of Datadog credentials
 - Give callers a stable model identifier with [routing rules](#route-requests-with-routing-rules) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](#control-model-access)
+- Bill Claude Code and Codex usage to each user's own Claude or ChatGPT subscription with [subscription providers](#use-subscription-providers)
 - Track and cap spend with [budgets](#set-budgets)
 - Cap requests and tokens per minute with [rate limits](#set-rate-limits)
-- Inspect every request as a span in Agent Observability
+- Investigate requests with spans in Agent Observability
 
 ## Prerequisites
 
 - AI Gateway Preview access for your Datadog organization.
-- A Datadog role that can configure AI Gateway providers, routing rules, access, budgets, and rate limits.
+- A Datadog role with the `ai_gateway_config_read` and `ai_gateway_config_write` permissions to configure AI Gateway providers, routing rules, budgets, and rate limits.
 - A provider [integration account][1] for a supported provider, such as OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, or Vertex AI.
-- A credential for the principal that sends requests. The principal must have the `ai_gateway_usage` permission. See [Authenticate requests](#authenticate-requests).
+- A credential for the user or service account that sends requests. The principal and credential scope must allow `ai_gateway_usage`, and an access policy or the default policy must allow the requested model or routing rule. See [Authenticate requests](#authenticate-requests) and [Control model access](#control-model-access).
 
 ## Get started
 
@@ -44,25 +45,34 @@ A provider connects an integration account to the models that callers can use th
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][2] and click {{< ui >}}New Provider{{< /ui >}}.
 2. Enter a display name and a unique slug. The slug is part of the model identifier that callers send in requests.
 3. Select the integration account that backs the provider. AI Gateway discovers and enables the models returned by that account.
-4. Optional: Set a cost multiplier. For models with a custom price in the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], AI Gateway uses the custom price as entered and does not apply the multiplier. For all other models, AI Gateway uses the auto-discovered price and applies the multiplier. Confirm the price shown for each model in the Model Catalog.
+4. Optional: Set a cost multiplier. For models with a custom price in the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], AI Gateway uses the custom price as entered and does not apply the multiplier. For all other models, AI Gateway uses the automatically detected price and applies the multiplier. Confirm the price shown for each model in the Model Catalog.
 5. Review the discovered models. To route requests to a model that discovery does not return, add the model manually and set:
-   - **Model ID**: the canonical identifier the client sends in the request, as `<PROVIDER_SLUG>/<MODEL_ID>`.
+   - **Model ID**: the canonical model identifier within the provider. In requests, prefix this value with the provider slug as `<PROVIDER_SLUG>/<MODEL_ID>`. For example, a provider slug of `production-openai` and a Model ID of `my-approved-model` produce the request value `production-openai/my-approved-model`.
    - **Provider model ID**: the identifier sent to the upstream provider. Leave this blank to send the Model ID.
    - **Supported operations**: the request formats the model accepts. Select Anthropic Messages, OpenAI Chat Completions, OpenAI Responses, or a combination of them.
-6. Create the provider.
+6. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the provider's models. See [Control model access](#control-model-access).
+7. Review and create the provider.
 
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
 ### Authenticate requests
 
-AI Gateway accepts the following Datadog credentials. The principal behind the credential must have the `ai_gateway_usage` permission.
+AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
 
 | Credential | Request headers |
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
-| [Service account token][5] | `Authorization: Bearer <SERVICE_ACCOUNT_TOKEN>` |
+| [Personal access token][4], for coding agents signed in with a [subscription](#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
+| [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
 
-For service workloads, use a service account token. Store credentials in your application's secret manager and keep them out of source control and logs.
+Coding agents signed in with a subscription send two headers:
+
+- `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
+- `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
+
+Despite its name, `dd-application-key` takes a personal access token, not an application key.
+
+For service workloads, use a service access token. Store credentials in your application's secret manager and keep them out of source control and logs.
 
 ### Send a request
 
@@ -118,7 +128,7 @@ AI Gateway supports these model families on each provider. It also supports cust
 
 From a model's page, you can rename the provider, manage manually added models, review discovered models, and click {{< ui >}}View in Traces{{< /ui >}} to see the provider's requests in Agent Observability.
 
-The slug, provider type, integration account, and connection configuration cannot be changed after you create the provider. To change them, create a new provider.
+The slug, provider type, integration account, and connection configuration cannot be changed after you create the provider. To change them, create a provider.
 
 ## Route requests with routing rules
 
@@ -128,13 +138,12 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Routing{{< /ui >}}][7] and click {{< ui >}}New Routing Rule{{< /ui >}}.
 2. Enter a lowercase slug. The page shows the resulting `router/<RULE_SLUG>` identifier.
-3. Select the primary destination. A destination can be:
-   - A specific model on a specific provider
-   - A model served by any configured provider
-   - Another routing rule
-4. Optional: Add fallback destinations in priority order.
-5. Choose the [data capture](#configure-data-capture) mode for the rule.
-6. Save the rule, then copy its identifier into the `model` field of your requests.
+3. Configure the first routing step. Select one model, use {{< ui >}}Weighted{{< /ui >}} to assign traffic shares across destinations, or select {{< ui >}}Another route{{< /ui >}} to link a routing rule. A model destination can use a specific provider account or any configured provider that serves that model.
+4. Optional: Add fallback steps in priority order.
+5. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the routing rule. See [Control model access](#control-model-access).
+6. Review and save the rule, then copy its identifier into the `model` field of your requests.
+
+Configure [data capture](#configure-data-capture) through organization defaults and scoped overrides under {{< ui >}}Policies{{< /ui >}}.
 
 ### Model served by any provider
 
@@ -150,15 +159,19 @@ AI Gateway tries the next provider or fallback destination when the current one 
 
 ## Control model access
 
-Access policies control who can call each model and routing rule. A policy lists models, routing rules, or both, and the users, [Datadog teams][13], and service accounts who can use them.
+Access policies control who can call each model and routing rule. A policy lists providers, models, routing rules, or a combination of them, and the users, [Datadog teams][13], and service accounts who can use them.
 
-A caller can use a model when they have **Runner** or **Editor** access on at least one policy that contains that provider and model. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+Selecting a provider includes all its models, including models added later. Selecting individual models or routing rules includes only those resources. A policy with no selections grants no access.
+
+A caller can use models included in the default policy. For other models, they need **Runner** or **Editor** access on a policy that includes them. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+
+AI Gateway denies access if no policy grants it.
 
 ### Default policy
 
-The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It applies to models and routing rules that are not in another policy, and it allows everyone to access them until you restrict access. New models stay available through this policy until you add them to an access policy.
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It grants everyone in your organization access to the selected resources.
 
-After you add a model or routing rule to an access policy, the default policy no longer applies to it. Callers must have access through the new policy to continue using the model or routing rule.
+Adding a resource to another access policy does not remove access granted by the default policy.
 
 ### Access policies
 
@@ -176,11 +189,143 @@ Access to a routing rule follows that rule's targets, so a change to the targets
 
 For tighter control over who can call models:
 
-- Restrict the default policy so new models are not available to everyone.
+- Include only resources approved for everyone in the default policy.
 - Create an access policy for each set of approved models.
 - Grant **Runner** only to the users, teams, and service accounts that need it.
-- Before you restrict the default policy, keep an administrator on a policy that can restore access.
 - Review policy membership and routing rule targets regularly.
+
+## Use subscription providers
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Subscription providers are in Preview. To enable them for your organization, contact your Customer Success Manager.
+{{< /callout >}}
+
+With a subscription provider, users run Claude Code and Codex through AI Gateway on their own Claude or ChatGPT subscriptions instead of an API key. Each user signs in to the coding agent with their own account, and Anthropic or OpenAI bills the usage to that user's subscription. AI Gateway applies access policies and rate limits, attributes each request to the Datadog user who sent it, and records the request in Agent Observability.
+
+Subscription providers support the following coding agents:
+
+| Coding agent | Vendor | Required subscription |
+|---|---|---|
+| Claude Code | Anthropic | Claude Pro, Max, Team, or Enterprise |
+| Codex | OpenAI | A ChatGPT plan that includes Codex |
+
+**Note**: Anthropic Console API credentials do not provide access to a Claude subscription. Requests sent with an Anthropic API key are billed per token.
+
+Each user authenticates to AI Gateway with their own Datadog [personal access token][4] in the `dd-application-key` header, not an API key or application key. For details on how the headers work, see the [Authenticate requests](#authenticate-requests) section.
+
+### Create a subscription provider
+
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][2] and click {{< ui >}}New provider account{{< /ui >}}.
+2. On the {{< ui >}}Details{{< /ui >}} step, select {{< ui >}}Use each person's own subscription instead of an integration account{{< /ui >}}. You cannot change this setting after you create the provider.
+3. In {{< ui >}}Vendor{{< /ui >}}, select {{< ui >}}Anthropic{{< /ui >}} for Claude Code or {{< ui >}}OpenAI{{< /ui >}} for Codex. To support both coding agents, create a subscription provider for each vendor.
+4. Enter a provider name and a unique slug. Claude Code and Codex send this slug in the `x-ai-gateway-provider` header to route requests to this provider.
+5. Optional: On the {{< ui >}}Models{{< /ui >}} step, add models to set custom prices for cost estimates or to limit access to specific models. If you do not add models, users can use any model that their subscription includes.
+6. On the {{< ui >}}Access{{< /ui >}} step, choose who can use the provider. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider).
+7. Review the configuration and click {{< ui >}}Create provider{{< /ui >}}.
+
+After you create the provider, open it to copy its Claude Code settings or Codex configuration.
+
+### Grant access to a subscription provider
+
+To use a subscription provider, a user needs access through the [default policy](#default-policy) or an [access policy](#access-policies). Grant access on the provider's {{< ui >}}Access{{< /ui >}} step when you create the provider. To grant access later, go to [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][17] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
+
+- {{< ui >}}All models{{< /ui >}}: Any model that each user's subscription includes. In a policy, select the provider itself rather than individual models.
+- {{< ui >}}Specific models{{< /ui >}}: Only the selected models, even if a user's subscription includes more. This option appears after you add models to the provider. In a policy, select the individual models.
+
+A request for a model outside a user's access returns HTTP `403` with the `no_permitted_target` error code and the message `access denied: model "<PROVIDER_SLUG>/<MODEL_ID>" is not allowed by your access policies`.
+
+### Set up Claude Code
+
+Point Claude Code to AI Gateway, then sign in with your Claude account:
+
+<div class="alert alert-warning">Before you sign in, unset <code>ANTHROPIC_API_KEY</code> and <code>ANTHROPIC_AUTH_TOKEN</code> in your environment and Claude Code settings, and remove the <code>apiKeyHelper</code> setting. Check all settings sources, including managed settings. These credential sources can override your subscription sign-in. Requests sent with an Anthropic API key are billed per token.</div>
+
+1. Add the following to your Claude Code user settings file, `~/.claude/settings.json`. Do not add it to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4], and `<PROVIDER_SLUG>` with the slug of the Anthropic subscription provider.
+
+   ```json
+   {
+     "env": {
+       "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
+       "ANTHROPIC_CUSTOM_HEADERS": "dd-application-key: <PERSONAL_ACCESS_TOKEN>\nx-ai-gateway-provider: <PROVIDER_SLUG>"
+     }
+   }
+   ```
+
+   AI Gateway reads your personal access token from the `dd-application-key` header and removes the token before it forwards the request to Anthropic. The `x-ai-gateway-provider` header routes every request to the subscription provider. For more about these headers, see the [Authenticate requests](#authenticate-requests) section.
+
+   To use environment variables instead, set `ANTHROPIC_BASE_URL` and `ANTHROPIC_CUSTOM_HEADERS`, with each header in `ANTHROPIC_CUSTOM_HEADERS` on its own line.
+
+2. Start Claude Code, run `/login`, and sign in with your Claude account (not an Anthropic Console account).
+
+To run Claude Code without an interactive sign-in, run `claude setup-token`, then set the `CLAUDE_CODE_OAUTH_TOKEN` environment variable to the token that it prints. Store the token as a secret.
+
+### Set up Codex
+
+Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT account:
+
+1. Add the following to your Codex configuration file, `~/.codex/config.toml`. Place `model_provider` before the first table in the file. Replace `<PROVIDER_SLUG>` with the slug of the OpenAI subscription provider.
+
+   ```toml
+   model_provider = "datadog"
+
+   [model_providers.datadog]
+   name = "Datadog AI Gateway"
+   base_url = "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1"
+   wire_api = "responses"
+   requires_openai_auth = true
+   env_http_headers = { "DD-APPLICATION-KEY" = "DD_PAT" }
+   http_headers = { "x-ai-gateway-provider" = "<PROVIDER_SLUG>" }
+   ```
+
+   With `requires_openai_auth = true`, Codex sends your ChatGPT credentials in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes the token before it forwards the request. For more about these headers, see the [Authenticate requests](#authenticate-requests) section.
+
+2. Set the `DD_PAT` environment variable to your Datadog [personal access token][4].
+3. Run `codex login` and sign in with your ChatGPT account. To sign in from another device, such as your phone, run `codex login --device-auth`.
+
+### Verify subscription traffic
+
+1. Send a prompt from Claude Code or Codex.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] and find the request under the subscription provider. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect its span.
+3. Confirm that the usage appears on the usage page of your Claude or ChatGPT plan.
+
+### How AI Gateway handles subscription traffic
+
+- **Billing**: Anthropic or OpenAI bills each request to the subscription of the user who sent it. A subscription provider has no integration account, so AI Gateway never sends your organization's provider credentials with subscription traffic.
+- **Models**: Without models on the provider, the vendor decides which models each user can use, based on their plan. Claude Code and Codex show their built-in model lists, which can include models that a user's access does not allow.
+- **Cost**: Traces record an API-equivalent cost for models with a price, using any custom price you set. Models you don't add to the provider have no price and are recorded as unpriced. The recorded cost is not your subscription bill.
+- **Budgets**: [Budgets](#set-budgets) don't count or block subscription traffic. If you select {{< ui >}}Track existing usage for current period{{< /ui >}} when you create a budget, its starting spend can include earlier subscription traffic.
+- **Rate limits**: A [rate limit](#set-rate-limits) that matches subscription traffic counts it together with other matching traffic. In Enforce mode, the rate limit rejects subscription requests over the limit.
+- **Routing rules**: A [routing rule](#route-requests-with-routing-rules) cannot include a subscription provider, and a destination for a [model served by any provider](#model-served-by-any-provider) skips subscription providers. Instead, Claude Code and Codex pin the provider with the `x-ai-gateway-provider` header.
+- **Request formats**: An Anthropic subscription provider serves only Anthropic Messages, including token counting. An OpenAI subscription provider serves only OpenAI Responses, and sends requests to ChatGPT, not to the OpenAI API. A request in another format returns HTTP `400` with the `unsupported_operation` error code. AI Gateway never sends a subscription sign-in to another vendor.
+- **Credentials**: AI Gateway does not check which vendor credential a client sends to a subscription provider. If a client sends an API key, such as `ANTHROPIC_API_KEY`, the vendor bills that key per token.
+- **Activity**: On the [{{< ui >}}Overview{{< /ui >}}][3] page, subscription traffic appears with all other traffic. Filter by the subscription provider to see it separately. A vendor `401` or `429` response, such as for an expired sign-in or an exceeded plan limit, counts as a provider error.
+
+### Troubleshoot subscription providers
+
+To check your setup without using a subscription, send a request without a sign-in to an Anthropic subscription provider. This request checks your personal access token, the provider slug, and access. Replace `<MODEL_ID>` with a Claude model ID that your access allows:
+
+```shell
+curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/messages" \
+  -H "Content-Type: application/json" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "dd-application-key: <PERSONAL_ACCESS_TOKEN>" \
+  -H "x-ai-gateway-provider: <PROVIDER_SLUG>" \
+  -d '{"model": "<MODEL_ID>", "max_tokens": 16, "messages": [{"role": "user", "content": "Woof!"}]}'
+```
+
+If your setup is correct, Anthropic returns HTTP `401` with an `authentication_error`. This response is expected: AI Gateway accepted and forwarded the request, and Anthropic rejected it because the request has no subscription credentials. You are not billed for the request.
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| The subscription option doesn't appear, or creating the provider returns HTTP `403` with `subscription_providers_disabled`. | Subscription providers are not enabled for your organization. | Contact your Customer Success Manager. |
+| A request returns HTTP `403` with `no_permitted_target`. | The user's access does not include the provider or the model. | Grant access to the whole provider or to the model. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider). |
+| Claude Code shows `Failed to authenticate.` followed by `access denied: model "<PROVIDER_SLUG>/<MODEL_ID>" is not allowed by your access policies`. | AI Gateway denied the model. Claude Code adds `Failed to authenticate.` to every `403` response, so the error is not a sign-in problem. | Grant access to the model or to the whole provider. |
+| A request returns HTTP `400` with `requested_provider_unavailable`. | The `x-ai-gateway-provider` slug doesn't match an active provider. | Check the slug on the provider's page. |
+| A request returns HTTP `400` with `unsupported_operation`. | The request used an API that the subscription provider doesn't serve. | Use Anthropic Messages with an Anthropic subscription provider, and OpenAI Responses with an OpenAI subscription provider. |
+| Anthropic or OpenAI returns HTTP `401` during a session. | The subscription sign-in is missing or expired. | Sign in again: run `/login` in Claude Code, or run `codex login`. |
+| Usage is billed per token instead of to the subscription. | Claude Code sends an API credential from `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`. | Remove the setting, then sign in with `/login`. |
+| Saving a routing rule fails with `is a subscription provider, which callers reach by pinning it rather than through a routing rule`. | Routing rules cannot include a subscription provider. | Remove the provider from the rule. Claude Code and Codex pin the provider with the `x-ai-gateway-provider` header. |
+| Codex logs `failed to refresh available models`. | AI Gateway does not return Codex's model list. | No action is needed. Codex uses its built-in model list. |
 
 ## Set budgets
 
@@ -189,7 +334,7 @@ A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, w
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New Budget{{< /ui >}}.
 2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or match a user, team, model, provider, or custom tag. Send a custom tag in an `x-dd-tag-<KEY>: <VALUE>` request header, for example `x-dd-tag-ai_agent: claudecode`. A request matches the budget when it includes every filter you selected. The form estimates historical matches and links to the matching spans in Agent Observability.
 3. Enter a spend limit and select a {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}}, or {{< ui >}}Monthly{{< /ui >}} window. The window follows the UTC calendar.
-4. Optional: Select {{< ui >}}Track existing usage for current period{{< /ui >}} to count spend already recorded in the current window. Spend from requests already in progress might not count toward the budget.
+4. Optional: Select {{< ui >}}Track existing usage for current period{{< /ui >}} if available for the selected budget configuration. This includes matching, priced usage already recorded in Agent Observability during the current window, including usage from before budget creation. After you save the budget, verify its starting spend. Requests still in progress or usage not yet recorded might be absent from that initial amount.
 5. Choose an enforcement mode and a warning threshold, then save the budget.
 
 | Enforcement mode | Behavior |
@@ -197,11 +342,11 @@ A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, w
 | Block | Matching requests are rejected with HTTP `402` until the window resets. |
 | Alert-only | Requests continue. The monitor `AI Gateway budget: <BUDGET_NAME>` alerts at the warning threshold and at the limit. |
 
-When a budget is scoped to a [Datadog team][13], it applies to requests from that team's members. A request with the header `x-ai-gateway-team: <TEAM>` matches only the selected team's budgets. A request without the header matches the budgets of every team the caller directly belongs to, and its full cost counts against each of them. A personal budget that matches the same request also applies.
+When a budget is scoped to a [Datadog team][13], it applies to requests from that team's members. To select a team, send `x-ai-gateway-team: <TEAM_SLUG>` with the slug of a team the caller belongs to. The header selects which team's budgets apply; matching personal and organization-wide budgets also apply. A request without the header matches the budgets of every team the caller directly belongs to, and its full cost counts against each of them. Team selection does not grant model access. See [Error codes](#error-codes) for invalid or unauthorized team selections.
 
 Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
 
-The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. A budget counts spend only after you create it, so earlier spend stays untracked. Use the Team, User, Model, Provider, and Tag filters to review coverage.
+The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. By default, a budget counts matching spend after you create it. Use {{< ui >}}Track existing usage for current period{{< /ui >}} when available to include earlier matching usage in the budget's current-period spend. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
 ## Set rate limits
 
@@ -231,7 +376,7 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 - All matching traffic shares one limit. For example, a team rate limit of 600 requests per minute allows 600 requests per minute for the whole team, not for each member.
 - A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has available capacity.
 - Tokens count when a response completes, so requests already in progress can take token usage over a limit.
-- A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM>`. Without the header, it applies to requests from users who directly belong to the team.
+- A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM_SLUG>`. Use the slug of a team the caller belongs to. Without the header, it applies to requests from users who directly belong to the team.
 - If a request falls back to another destination, it counts once against each rate limit.
 - Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
 - If AI Gateway cannot check a rate limit, it accepts the request.
@@ -268,7 +413,9 @@ The rate limit list shows, for each rate limit, current usage against each limit
 
 The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
 
-## Observe AI Gateway activity
+## Observe gateway activity {#observe-ai-gateway-activity}
+
+<!-- vale Datadog.words_case_insensitive = NO -->
 
 The [{{< ui >}}Overview{{< /ui >}}][3] page shows, for the selected time range:
 
@@ -277,7 +424,9 @@ The [{{< ui >}}Overview{{< /ui >}}][3] page shows, for the selected time range:
 - Spend, average cost per request, and cost per million tokens
 - Latency over time and by model
 - Providers with errors
-- Cache hit ratio and cache reuse ratio, which measure input tokens served from the model provider's cache
+- Provider prompt-cache metrics: {{< ui >}}Cache hit ratio{{< /ui >}} is cache-read input tokens divided by total input tokens. {{< ui >}}Cache reuse ratio{{< /ui >}} is cache reads per cache write.
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 Charts break down requests and cost by model or provider.
 
@@ -288,21 +437,29 @@ To investigate a request:
 3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
 4. For a failed request, review the error type, the provider's error rate, and the request's trace before you change a routing rule or provider.
 
+For available metrics and tags, see [AI Gateway metrics][16].
+
 ## Configure data capture
 
-AI Gateway records every request as a span in Agent Observability. The data capture mode controls whether the span includes prompt and response content.
+AI Gateway records supported inference requests in Agent Observability. Requests rejected before processing, such as authentication failures or malformed request bodies, might not appear there. The data capture mode controls whether a span includes prompt and response content.
 
 | Mode | What is recorded |
 |---|---|
 | Metadata only | Request and response metadata, without prompt and response content. |
 | Full capture | Request and response metadata, and prompt and response content. |
 
-Set the default mode for your organization in AI Gateway settings. Each routing rule can inherit the organization default or override it with its own mode.
+Set the organization default in {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}. To apply a different mode to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}.
+
+An override can match a user, team, model, provider, or custom tag. Every filter in an override must match. Custom tags match the exact `x-dd-tag-<KEY>` header value. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
+
+If several overrides match, **Metadata only** takes precedence over **Full capture**. If no override matches, the organization default applies.
+
+A team capture override requires the `x-ai-gateway-team: <TEAM_SLUG>` header to select that team. Unlike team budgets and rate limits, a team capture override does not match a request based on team membership alone.
 
 Before you send sensitive prompts or responses, check the mode that applies to the request:
 
-1. Review the organization mode and any routing rule override.
-2. Send a harmless test request with the same model or routing rule as your workload.
+1. Review the organization default and any matching capture overrides.
+2. Send a harmless test request with the same caller, team selection, custom tags, and model or routing rule as the workload.
 3. Open the request's Gateway span and review the recorded fields.
 
 ## Troubleshooting
@@ -310,9 +467,10 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 ### 401 or 403 responses
 
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.
-- Confirm that the user or service account has the `ai_gateway_usage` permission.
+- Confirm that the user or service account and the credential scope allow `ai_gateway_usage`.
 - Confirm that an access policy or the default policy allows that user or service account to use the requested model or routing rule.
-- Send a personal access token or a service account token in the `Authorization: Bearer` header.
+- Send a personal access token or a service access token in the `Authorization: Bearer` header.
+- For a coding agent signed in with a [subscription](#use-subscription-providers), send a personal access token, not an application key, in the `dd-application-key` header.
 
 ### 402 responses
 
@@ -333,7 +491,7 @@ A model that is available from the upstream provider might not be enabled on you
 
 ### Request not visible in Agent Observability
 
-Confirm the time range and organization, and that the request reached AI Gateway. Spans include prompt and response content only when full capture applies to the request.
+Confirm the time range and organization, and that the request reached AI Gateway. Check the HTTP status and response body: authentication failures and malformed requests might not produce an Agent Observability span. Spans include prompt and response content only when full capture applies to the request.
 
 ### Error codes
 
@@ -350,7 +508,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `403`. The caller is not a member of the selected Datadog team.
 
 `gateway_team_user_required`
-: HTTP `403`. Team selection requires a Datadog user identity. A service account token without user context cannot select a team.
+: HTTP `403`. Team selection requires a Datadog user identity. A service access token without user context cannot select a team.
 
 `gateway_team_unavailable`
 : HTTP `503`. Datadog team membership could not be verified. Retry the request.
@@ -359,7 +517,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `429`. A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`.
 
 `budget_exceeded`
-: HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset.
+: HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
 
 `budget_pricing_unavailable`
 : HTTP `402`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
@@ -401,7 +559,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `500` / `500` / `503`. The connection to the provider failed (refused, reset, DNS, or TLS) or broke mid-response.
 
 `provider_credentials_error`
-: HTTP `500` / `500` / `503`. AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service account token. Check the provider's integration account.
+: HTTP `500` / `500` / `503`. AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service access token. Check the provider's integration account.
 
 `upstream_error`
 : HTTP `500` / `500` / `503`. Any other upstream failure before a provider response. Also used when all targets failed with no more specific code.
@@ -427,3 +585,5 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
+[16]: /llm_observability/investigate/metrics/#gateway-metrics
+[17]: https://app.datadoghq.com/llm/gateway/governance/general

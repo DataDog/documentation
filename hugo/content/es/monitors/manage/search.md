@@ -1,102 +1,105 @@
 ---
-description: Filtrar la lista de monitores utilizando la búsqueda por facetas
+description: Filtre la lista de seguimientos mediante la búsqueda facetada
 further_reading:
 - link: /getting_started/search/
   tag: Documentación
   text: Introducción a la búsqueda en Datadog
-title: Buscar monitores
+- link: https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/
+  tag: Blog
+  text: Cómo auditar y limpiar monitores de manera eficaz
+title: Buscar seguimientos
 ---
+Para buscar sus seguimientos, construya una consulta utilizando el panel de facetas a la izquierda y/o la barra de búsqueda en la parte superior. Cuando selecciona atributos, la barra de búsqueda se actualiza con la consulta equivalente. Del mismo modo, cuando modifica la consulta de la barra de búsqueda (o escribe una nueva), las casillas de verificación de atributos se actualizan para reflejar el cambio. En cualquier caso, los resultados de la consulta se actualizan en tiempo real a medida que edita la consulta. **Nota**: No hay ningún botón de *búsqueda* en el que hacer clic.
 
-Para buscar tus monitores, crea una consulta utilizando el panel de facetas de la izquierda o la barra de búsqueda en la parte superior. Al seleccionar atributos, la barra de búsqueda se actualiza con la consulta correspondiente. Del mismo modo, cuando modificas la consulta de la barra de búsqueda (o escribes una nueva), las casillas de verificación de atributos se actualizan para reflejar el cambio. En cualquier caso, los resultados de la consulta se actualizan en tiempo real, a medida que editas tu consulta. **Nota**: No hay ningún botón de *búsqueda* en el que hacer clic.
+## Barra de búsqueda {#search-bar}
 
-## Barra de búsqueda
+Utilice texto simple para buscar en todos los títulos de los seguimientos y mensajes de notificación. Por ejemplo, una búsqueda de `*postgresql*` devuelve todos los seguimientos con `postgresql` en cualquier parte del título o
+mensaje de notificación.
 
-Utiliza texto simple para buscar en todos los títulos de monitores y mensajes de notificación. Por ejemplo, una búsqueda de `*postgresql*` devuelve todos los monitores que tienen `postgresql` en cualquier parte del título o
-del mensaje de notificación.
+Para limitar la búsqueda, especifique el nombre del campo:
 
-Para limitar la búsqueda, especifica el nombre del campo:
-
-| Artículo    | Descripción                                            | Ejemplo        |
+| Elemento    | Descripción                                            | Ejemplo        |
 |---------|--------------------------------------------------------|----------------|
-| Título   | Busca el texto en el título del monitor.                | `title:text`   |
-| Mensaje | Busca el texto en el mensaje de notificación del monitor. | `message:text` |
+| Title   | Busque el texto en el título del seguimiento.                | `title:text`   |
+| Message | Busque el texto en el mensaje de notificación del seguimiento. | `message:text` |
 
-Además, puedes buscar un monitor utilizando su ID, por ejemplo: `1234567`. El ID del monitor está disponible en la [página Estado del monitor][1].
+Además, puede buscar un seguimiento mediante el ID, por ejemplo: `1234567`. El ID del seguimiento está disponible en la [página de estado del seguimiento][1].
 
-<div class="alert alert-info">Para obtener información sobre cómo filtrar grupos de monitores, consulta la <a href="/monitors/manage/status/">página Estado del monitor</a>.</div>
+<div class="alert alert-info">Para obtener información sobre cómo filtrar grupos de seguimientos, consulte la <a href="/monitors/manage/status/">página Monitor Status</a>.</div>
 
-### Consulta
+### Consulta {#query}
 
-Mejora tu consulta de búsqueda utilizando operadores booleanos (`AND`, `OR`, `NOT`) y paréntesis. La sintaxis de búsqueda es similar a la de [Elasticsearch][2], con las siguientes excepciones:
+Mejore su consulta de búsqueda con operadores booleanos (`AND`, `OR`, `NOT`) y paréntesis. La sintaxis de búsqueda es similar a [Elasticsearch][2] con las siguientes excepciones:
 
-* No se admiten expresiones regulares.
-* Se admiten tanto el comodín de un solo carácter (`?`) como el comodín general (`*`).
-* No se admiten las búsquedas por proximidad, pero sí se admite el operador [impreciso][3].
-* No se admiten rangos.
-* No se admite el boosting.
+* Las expresiones regulares no son compatibles.
+* Tanto el Wildcard de un solo carácter (`?`) como el Wildcard general (`*`) son compatibles.
+* Las búsquedas de proximidad no son compatibles, pero el operador [fuzzy][3] sí lo es.
+* Los rangos no son compatibles.
+* El aumento (boosting) no es compatible.
 
-Los siguientes caracteres están reservados: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.` 2, y el espacio en blanco. Para buscar un campo de monitor que incluya un carácter reservado, encierra la cadena del campo con comillas. Por ejemplo, `status:Alert Y "chef-client"` es una cadena de consulta válida.
+Los siguientes caracteres están reservados: `-`, `(`, `)`, `"`, `~`, `*`, `:`, `.` y espacios en blanco. Para buscar un campo de seguimiento que incluya un carácter reservado, encierre la cadena del campo entre comillas. Por ejemplo, `status:Alert AND "chef-client"` es una cadena de consulta válida.
 
-Existen algunas advertencias en relación con los campos entre comillas:
+Existen algunas advertencias con respecto a los campos entre comillas:
 
-* Puedes utilizar `.` con o sin comillas, ya que suele aparecer en algunos campos. Por ejemplo, `metric:system.cpu.idle` es válido.
-* El comodín de búsqueda no se admite en cadenas que están entre comillas. Por ejemplo, `"chef-client*"` no devuelve un monitor llamado `"chef-client failing"`, ya que el `*` se interpreta de forma literal.
+* Puede usar `.` con o sin comillas, ya que aparece comúnmente en algunos campos. Por ejemplo, `metric:system.cpu.idle` es válido.
+* La búsqueda con Wildcard no es compatible dentro de cadenas entre comillas. Por ejemplo, `"chef-client*"` no devuelve un seguimiento titulado `"chef-client failing"` porque el `*` se trata literalmente.
+* Para usar un Wildcard en un valor que contiene dos puntos, escape los dos puntos con una barra invertida (`\`) en lugar de usar comillas. Por ejemplo, `tag:service\:*` devuelve todos los seguimientos que tienen una etiqueta `service`, independientemente de su valor.
 
-## Atributos
+## Atributos {#attributes}
 
-La búsqueda avanzada te permite filtrar monitores utilizando cualquier combinación de atributos de monitor:
+La búsqueda avanzada le permite filtrar seguimientos por cualquier combinación de atributos de seguimiento:
 
 | Atributo    | Descripción                                                                                     |
 |--------------|-------------------------------------------------------------------------------------------------|
-| Estado       | Estado del monitor: `Triggered` (`Alert`, `Warn`, `No Data`) o `OK`.                            |
-| Silenciado        | Estado silenciado del monitor: `true` o `false`.                                               |
-| Tipo         | [Tipo de monitor][4] del Datadog.                                                                   |
-| Creador      | La persona que crea el monitor.                                                                      |
-| Servicio      | Las etiquetas (tags) de servicio que utilizas en el formulario `service:<VALUE>`.                                         |
-| Etiqueta (tag)          | Las [etiquetas][5] asignadas al monitor                                               |
-| Entorno          | Las etiquetas de entorno que utilizas en el formulario `env:<VALUE>`.                                         |
-| Contexto        | Busca las etiquetas presentes en el campo `from` de consulta de tu monitor.                                   |
-| Métrica/Check | El check de métrica o servicio que se está monitorizando.                                                     |
-| Notificación | La persona o el servicio que recibe una notificación.                                                  |
-| Tiempo de silenciado restante   | El tiempo restante antes de que el tiempo de inactividad deje de silenciar las notificaciones de este monitor. La búsqueda de `muted_left:30m` devuelve todos los monitores que siguen silenciados durante un máximo de 30 minutos. Las unidades admitidas son segundos (`s`), minutos (`m`), horas (`h`) y semanas (`w`).    |
-| Tiempo de silenciado transcurrido | El tiempo transcurrido desde que un tiempo de inactividad del sistema ha comenzado a silenciar las notificaciones de este monitor. La búsqueda de `muted_elapsed:30d` devuelve todos los monitores que han estado silenciados durante al menos 30 días. Las unidades admitidas son segundos (`s`), minutos (`m`), horas (`h`) y semanas (`w`). |
+| Status       | El estado del seguimiento: `Triggered` (`Alert`, `Warn`, `No Data`) o `OK`                            |
+| Muted        | El estado de silencio del seguimiento: `true` o `false`                                               |
+| Type         | El [tipo de seguimiento][4] de Datadog                                                                   |
+| Creator      | El creador del seguimiento                                                                      |
+| Service      | Etiquetas de servicio que usted usa con el formato `service:<VALUE>`.                                         |
+| Tag          | Las [etiquetas][5] asignadas al seguimiento                                               |
+| Env          | Etiquetas de entorno que usted usa con el formato `env:<VALUE>`.                                         |
+| Scope        | Busque las etiquetas listadas en el campo `from` de la consulta de su seguimiento.                                   |
+| Metric/Check | La métrica o verificación de servicio de la que se hace un seguimiento                                                     |
+| Notification | La persona o el servicio que recibe una notificación                                                  |
+| Muted left   | El tiempo restante antes de que el tiempo de inactividad deje de silenciar la notificación de este seguimiento. Buscar `muted_left:30m` devuelve todos los seguimientos que siguen silenciados y a los que les quedan como máximo 30 minutos de silencio. Las unidades admitidas son segundos (`s`), minutos (`m`), horas (`h`) y semanas (`w`).    |
+| Muted elapsed | El tiempo transcurrido desde que un tiempo de inactividad comenzó a silenciar la notificación de este seguimiento. Buscar `muted_elapsed:30d` devuelve todos los seguimientos que han estado silenciados durante al menos 30 días. Las unidades admitidas son segundos (`s`), minutos (`m`), horas (`h`) y semanas (`w`). |
 
-Verifica cualquier número de casillas para encontrar tus monitores. Se aplican las siguientes reglas:
+Marque cualquier cantidad de casillas para encontrar sus seguimientos. Se aplican las siguientes reglas:
 
-* El operador `AND` se aplica cuando se verifican atributos de diferentes campos, por ejemplo: `status:Alert type:Metric` (la falta de un operador entre los dos términos de búsqueda implica `AND`).
-* La mayoría de las veces, el operador `OR` se aplica cuando se verifican atributos dentro del mismo campo, por ejemplo: `status:(Alert OR Warn)`. Se aplican algunas excepciones, por ejemplo, al verificar varios contextos o varias etiquetas de servicios se utiliza el operador `AND`.
-* Algunos atributos no permiten seleccionar varios valores. Por ejemplo, cuando se selecciona un check de métrica o servicio, las otras opciones desaparecen de la lista hasta que se borra la selección.
-* La casilla de verificación `Triggered` bajo el atributo *Status* (Estado) se resuelve como `status:(Alert OR Warn OR "No Data")`. El estado de monitor activado no es un estado válido.
-* El nombre del atributo *Métrica/Check* es siempre `metric` en la consulta. Por ejemplo, la selección del check `http.can_connect` se resuelve como `metric:http.can_connect`.
+* El operador `AND` se aplica al verificar atributos de diferentes campos, por ejemplo: `status:Alert type:Metric` (la falta de un operador entre los dos términos de búsqueda implica `AND`).
+* La mayor parte del tiempo, el operador `OR` se aplica al verificar atributos dentro del mismo campo, por ejemplo: `status:(Alert OR Warn)`. Se aplican algunas excepciones; por ejemplo, al verificar varios contextos o etiquetas de servicio, se utiliza el operador `AND`.
+* Algunos atributos no permiten seleccionar múltiples valores. Por ejemplo, cuando selecciona una métrica o una verificación de servicio, las otras opciones desaparecen de la lista hasta que elimina la selección.
+* La casilla de verificación `Triggered` bajo el atributo {{< ui >}}Status{{< /ui >}} se resuelve en `status:(Alert OR Warn OR "No Data")`. Triggered no es un estado de seguimiento válido.
+* El nombre para el atributo {{< ui >}}Metric/Check{{< /ui >}} es siempre `metric` en la consulta. Por ejemplo, seleccionar la verificación `http.can_connect` se resuelve en `metric:http.can_connect`.
 
-**Nota**: Para atributos con un amplio número de valores en tus monitores utiliza la barra de búsqueda de atributos para encontrar el valor correcto.
+**Nota**: Para atributos con una gran cantidad de valores entre sus seguimientos, utilice la barra de búsqueda de atributos para encontrar el valor correcto.
 
-## Vista guardada
+## Vista guardada {#saved-view}
 
-Aprovecha las vistas guardadas para navegar rápidamente a las vistas preestablecidas y encontrar monitores relevantes para un contexto determinado, como por ejemplo los monitores de tu equipo o aquellos silenciados durante más de 60 días:
+Aproveche las Saved Views para navegar rápidamente a vistas preestablecidas con el fin de encontrar seguimientos relevantes para un contexto determinado, como los seguimientos de su equipo o los silenciados durante más de 60 días:
 
-{{< img src="monitors/manage_monitor/overview.jpg" alt="Selección de las vistas guardadas" style="width:90%;" >}}
+{{< img src="monitors/manage_monitor/overview.jpg" alt="Selección de Saved Views" style="width:90%;" >}}
 
-Las vistas guardadas son visibles para todos los miembros de tu organización.
+Las Saved Views son visibles para todos en su organización.
 Técnicamente, una vista guardada realiza un seguimiento de:
 
-- Consulta de búsqueda
+- La consulta de búsqueda
 
-### Vista predeterminada
+### Vista predeterminada {#default-view}
 
 {{< img src="monitors/manage_monitor/default.jpg" alt="Vista predeterminada" style="width:50%;" >}}
 
-La vista Gestionar monitores existente es la vista guardada por defecto. Esta configuración sólo es accesible y visible para ti, y la actualización de esta configuración no tiene ningún impacto en tu organización.
+Su vista existente de Manage Monitor es su vista guardada predeterminada. Esta configuración solo es accesible y visible para usted, y actualizar esta configuración no tiene ningún impacto en su organización.
 
-Puedes anular **temporalmente** la vista guardada por defecto realizando cualquier acción en la interfaz de usuario o al abrir enlaces a la página Gestionar monitores, que integra una diferente configuración.
+Puede anular **temporalmente** su vista guardada predeterminada al realizar cualquier acción en la interfaz de usuario o al abrir enlaces a la página Manage Monitor que incorporen una configuración diferente.
 
-Desde la entrada de la vista predeterminada en el panel Vistas:
+Desde la entrada de la vista predeterminada en el panel Views:
 
-* **Vuelve a cargar** la vista predeterminada haciendo clic en la entrada.
-* **Actualiza** tu vista predeterminada con los parámetros actuales.
-* **Restablece** tu vista predeterminada a los valores por defecto de Datadog para empezar de nuevo.
+* {{< ui >}}Reload{{< /ui >}} su vista predeterminada haciendo clic en la entrada.
+* {{< ui >}}Update{{< /ui >}} su vista predeterminada con los parámetros actuales.
+* {{< ui >}}Reset{{< /ui >}} su vista predeterminada a los valores predeterminados de Datadog para un reinicio desde cero.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,85 +1,81 @@
 ---
 disable_toc: false
-title: eBPF 非対応の Linux 環境の脅威検知
+title: eBPF サポートなしの Linux 向け脅威検知
 ---
+このガイドでは、AWS Fargate など、eBPF が無効な環境向けに Workload Protection の eBPF-less ソリューションをセットアップする方法を説明します。eBPF-less ソリューションでは、ptrace ベースの Datadog Agent を使用します。
 
-このガイドでは、AWS Fargate のような eBPF が無効な環境向けの Workload Protection eBPF 非対応ソリューションのセットアップ方法について説明します。eBPF 非対応ソリューションでは、ptrace ベースの Datadog Agent を使用します。
+このガイドでは、ptrace ソリューションの利点についてもいくつか説明します。
 
-このガイドでは、ptrace ソリューションの利点についても説明します。
+## Agent オプションの概要 {#summary-of-agent-options}
 
-<div class="alert alert-info">eBPF 非対応の Linux 環境の脅威検知はプレビュー中です。登録をご希望の場合は、Datadog の担当者にお問い合わせください。</div>
-
-
-## Agent オプションの概要
-
-Workload Protection には、脅威の検知と対応のための Agent オプションが 2 つ用意されています。
+Workload Protection には、脅威検知と対応のための 2 つの Agent オプションが含まれています。
 
 - eBPF ソリューション
-- ptrace を使った eBPF 非対応ソリューション: このバージョンは eBPF がサポートされない環境 (Linux カーネル 3.4～4.14) でのみ利用可能です。
+- ptrace を使用した eBPF-less ソリューション: このバージョンは、eBPF が使用できない環境 (Linux カーネルバージョン 3.4〜4.14) でのみ利用可能です。
 
-{{% collapse-content title="eBPF ソリューション" level="h4" %}}
+{{% collapse-content title="eBPF ソリューション" level="h3" %}}
 
-Datadog は、すべてのセキュリティ製品を [eBPF (extended Berkeley Packet Filter)][1] を基本として構築しています。eBPF の利点には次のようなものがあります。
+Datadog は、すべてのセキュリティ製品を [eBPF (拡張された Berkeley Packet Filter)][1] を中心に構築しています。eBPF の利点の一部を以下に示します。
 
-- eBPF は、Linux カーネル ベリファイアを通じて各プログラムを検証することで、安全性を向上させます。これにより、プログラムがクラッシュしたり、無限ループに陥ったり、システムに悪影響を与えたりしないことを保証します。
-- eBPF は JIT (Just In Time) コンパイルされ、出力されたバイトコードは eBPF VM サンドボックス上で実行されます。これにより、カーネルのクラッシュを防ぎ、高いパフォーマンスを提供します。
-- デバッグとメンテナンスが容易で、プログラムを動的にロードでき、ユーザー空間をトレースするのに必要なすべての情報にアクセスできます。
+- eBPF は、Linux カーネルベリファイアを通じて各プログラムを検証することで安全性を向上させます。これにより、プログラムがクラッシュしたり、無限ループに陥ったり、システムに損害を与えたりすることがなくなります。
+- eBPF は JIT (Just In Time) コンパイルされ、出力されたバイトコードは eBPF VM サンドボックス上で実行されます。これにより、カーネルのクラッシュを防ぎ、競争力のあるパフォーマンスを提供します。
+- デバッグと保守が容易で、プログラムを動的にロードでき、ユーザー空間をトレースするために必要なすべての情報にアクセスできます。
 
-Datadog eBPF Agent のコードは [完全にオープン ソース][2] です。
+Datadog eBPF Agent のコードは [完全にオープンソース][2] です。
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="ptrace を利用した eBPF 非対応ソリューション" level="h4" %}}
-一部の環境では、eBPF をまったくサポートしない古いカーネルのインスタンスが使用されています。ptrace ソリューションはこうした環境向けに提供されています。
+{{% collapse-content title="ptrace を使用した eBPF-less ソリューション" level="h3" %}}
+一部の環境では、eBPF をまったく搭載していない古いカーネルのインスタンスが使用されています。ptrace ソリューションは、これらの環境向けに提供されています。
 
-以下の機能は、eBPF 非対応 Agent では使用できません。
+以下の機能は eBPF-less Agent では使用できません。
 
-- セキュリティ プロファイル: 以下を提供
+- セキュリティプロファイル。提供内容:
   - 異常検知
-  - シグナルのトリアージのための通常動作イベントの自動サプレッション
-  - マルウェア検知
-- ネットワーク検知
+  - シグナルトリアージのための通常動作の自動抑制
+  - マルウェア検出
+- ネットワーク検出
 
-<div class="alert alert-info">現在の実装は amd64 と arm64 のアーキテクチャと ABI をサポートしていますが、32 ビット ABI にも拡張可能です。</div>
+<div class="alert alert-info">現在の実装は amd64 および arm64 アーキテクチャと ABI をサポートしていますが、32 ビット ABI に拡張することも可能です。</div>
 
-### ptrace ソリューションの利点
+### ptrace ソリューションの利点 {#advantages-of-ptrace-solution}
 
-ptrace ベースのソリューションは、堅牢な脅威検知と揺るぎないサービス可用性のバランスを実現します。ptrace ベースのソリューションには以下のような利点があります。
+ptrace ベースのソリューションは、堅牢な脅威検知と安定したサービス可用性のバランスを実現します。ptrace ベースのソリューションには、以下のような利点があります。
 
-- 正確なプロセス制御: ptrace は、メモリとレジスタを詳細に検査し、重要なアプリケーション ワークロードを保護します。このきめ細かな可視性は、高度な脅威を特定するために不可欠です。Datadog の procfs (Process Filesystem) スキャナーは、システム全体の実行を監視し、悪意のあるプロセスをピンポイントで終了させることを可能にします。これらのツールを組み合わせることで、悪意のあるアクティビティから保護できます。
-- 運用の安定性: ユーザー空間で動作する ptrace は、カーネル空間の複雑さとリスクを回避し、より安全で管理しやすいアプローチを提供します。障害が発生した場合、ptrace ベースの Agent は OS レイヤーでデフォルトでフェイル オープンとなり、アプリケーションがハング アップしてもシステムは影響を受けません。
-- パフォーマンス効率: Datadog のエンジニアリング チームが実施した最近のベンチマークでは、Datadog の ptrace ベースの実装がカーネル ベースのソリューションに匹敵する性能を示すことが確認されています。具体的には、PostgreSQL ワークロードでのオーバーヘッドは約 3% にとどまり、Redis の操作への影響はごくわずかで、ほとんどのユースケースで非常に効率的です。
-- オープン ソースによる検証: Datadog は、ptrace ベース Agent と eBPF Agent をオープン ソース化し、顧客とセキュリティ コミュニティが自ら安全性と有効性を検証できるようにすることで、ソリューションの透明性と信頼を高めています。
+- 正確なプロセス制御: ptrace はメモリとレジスタの詳細な検査を提供し、重要なアプリケーションワークロードを保護します。このきめ細かい可視性は、高度な脅威を特定するために不可欠です。Datadog procfs (プロセスファイルシステム) スキャナーは、システム全体のすべての実行を監視し、悪意のあるプロセスをピンポイントで終了させることができます。これらのツールは連携して、悪意のあるアクティビティから保護します。
+- 運用上の安定性: ユーザー空間で動作する ptrace は、カーネル空間の複雑さやリスクを回避し、より安全で管理しやすいアプローチを提供します。障害が発生した場合、ptrace ベースの Agent は OS レイヤーでデフォルトの fail-open 状態になり、アプリケーションがハングアップしてもシステムに影響を与えません。
+- パフォーマンス効率: Datadog のエンジニアリングチームが実施した最近のベンチマークでは、Datadog の ptrace ベースの実装がカーネルベースのソリューションと同等のパフォーマンスを示すことが実証されています。具体的には、PostgreSQL ワークロードに対して約 3% という最小限のオーバーヘッドしか発生せず、Redis の操作に対する影響も無視できる程度であるため、ほとんどのユースケースで非常に効率的です。
+- オープンソースによる検証: Datadog は ptrace ベースの Agent と eBPF Agent をオープンソース化しており、クライアントやセキュリティコミュニティがその安全性と有効性を自ら検証できるため、ソリューションの透明性と信頼性が高まります。
 {{% /collapse-content %}}
 
 
-## eBPF 非対応 Agent のセットアップ
+## eBPF-less Agent のセットアップ {#ebpf-less-agent-setup}
 
-eBPF 非対応 Agent は、Docker、Linux ホストを含むさまざまなプラットフォーム上でセットアップできます。
+eBPF-less Agent は、Docker や Linux ホストなど、さまざまなプラットフォームにセットアップできます。
 
-このセクションは、Docker および Linux ホストを対象としています。eBPF が無効な Amazon Fargate 環境のセットアップ手順については、[Datadog Security を使用するための AWS Fargate 構成ガイド][3]を参照してください。
+このセクションでは、Docker および Linux ホストについて説明します。eBPF が無効になっている Amazon Fargate 環境をセットアップする手順については、[Datadog Security を使用するための AWS Fargate 構成ガイド][3] を参照してください。
 
-### eBPF 非対応 Agent の要件
+### eBPF-less Agent の要件 {#ebpf-less-agent-requirements}
 
-- eBPF 非対応 Agent は、eBPF が無効な環境向けに設計されており、ランタイム セキュリティに ptrace を使用し、arm64 と amd64 のアーキテクチャをサポートしています。
-- eBPF 非対応 Agent をデプロイするには、カスタム インストール コマンドと構成が必要です。このセクションでは、Docker および Linux ホストでのインストール手順を具体的に説明します。
+- eBPF-less Agent は、eBPF が無効な環境向けに設計されており、ランタイムセキュリティに ptrace を使用します。また、arm64/amd64 アーキテクチャをサポートしています。
+- eBPF-less Agent をデプロイするには、カスタムインストールコマンドおよび構成が必要です。このセクションでは、Docker および Linux ホストへのインストールに関する具体的な手順を説明します。
 
-eBPF 非対応ソリューションには、アプリケーション向けのトレーシング モードが 2 つ用意されています。
+eBPF-less ソリューションには、アプリケーション用に 2 つのトレーシングモードが含まれています。
 
-- ラップ モード: アプリケーションを最初からトレーシングします。
-- アタッチ モード: すでに実行中のアプリケーションにアタッチしますが、より大きなパフォーマンスのオーバーヘッドと制約を伴います。
+- ラップモード: アプリケーションを最初からトレースします。
+- アタッチモード: すでに実行中のアプリケーションにアタッチしますが、パフォーマンスのオーバーヘッドと制限が増加します。
 
-### eBPF 非対応 Agent のセット アップ手順
+### eBPF-less のセットアップ手順 {#ebpf-less-setup-steps}
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-Docker では追加の環境変数が必要です。docker run コマンドに次の行を追加してください。
+Docker では追加の環境変数が必要です。Docker インストールコマンドに次の行を追加します。
 
 ```shell
 -e DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true
 ```
 
-対応するコマンドは次のようになります。
+対応するコマンドは次のとおりです。
 
 ```shell
 docker run -d --name dd-agent \
@@ -109,12 +105,12 @@ docker run -d --name dd-agent \
   -e DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 ```
 {{% /tab %}}
 
 {{% tab "Linux ホスト" %}}
-Linux ホストに Agent を導入するには、以下のインストール スクリプトを使用してカスタム ビルドをインストールしてください。
+Linux ホストに Agent をインストールするには、次のインストールスクリプトを使用してカスタムビルドをインストールします。
 
 ```shell
 DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" \
@@ -122,7 +118,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-次に、CWS と eBPF 非対応モードを有効にするために、`/etc/datadog-agent/system-probe.yaml` ファイルを次のように変更します。
+次に、`/etc/datadog-agent/system-probe.yaml` ファイルを変更して、次のように CWS と eBPF-less モードを有効にします。
 
 {{< code-block lang="java" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
@@ -131,7 +127,7 @@ runtime_security_config:
     enabled: true
 {{< /code-block >}}
 
-あるいは、提供されている `.deb/.rpm` のカスタム ビルド パッケージを手動でインストールする場合は、`/etc/datadog-agent/system-probe.yaml` を次のように変更して、CWS と eBPF 非対応モードを有効にしてください。
+または、`.deb/.rmp` が提供するカスタムビルドパッケージを手動でインストールするには、`/etc/datadog-agent/system-probe.yaml` ファイルを変更して、次のように CWS と eBPF-less モードを有効にします。
 
 {{< code-block lang="java" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
@@ -147,69 +143,69 @@ runtime_security_config:
 
 
 
-## eBPF 非対応 Agent のデプロイ
+## eBPF-less Agent をデプロイする {#deploy-ebpf-less-agent}
 
-Agent をデプロイする前に、次の要件を満たしていることを確認してください。
+Agent をデプロイする前に、以下の構成要件を満たしていることを確認してください。
 
-1. インストールに進む前に、[Agent インストール手順][5]を環境に合わせてカスタマイズしてください。
-2. Cloud Security を有効にした状態で Agent をインストールまたは更新してください。手順は [Agent での Cloud Security のセット アップ][4] を参照してください。
-3. 前述の **eBPF 非対応 Agent のセット アップ** セクションにある追加の構成を指定して、カスタム バージョンをインストールし、eBPF 非対応モードを有効にしてください。
+1. [Agent インストール手順][5] をカスタマイズしてからインストールに進みます。
+2. Cloud Security を有効にして Agent をインストール/更新します。手順については、[Agent での Cloud Security のセットアップ][4] を参照してください。
+3. 前述の **eBPF-less Agent のセットアップ**セクションから追加構成を指定して、カスタムバージョンをインストールし、eBPF-less Agent モードを有効にします。
 
 
-## セットアップの検証
+## セットアップを検証する {#verify-setup}
 
-Agent のインストールとセットアップを検証するには、Linux ホストまたは Docker コンテナに接続して次のコマンドを実行します。
+エージェントのインストールとセットアップを検証するには、Linux ホストまたは Docker コンテナに接続し、以下を実行します。
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/system-probe config|grep -A 1 ebpfless
 ```
 
-次の出力が表示されるはずです。
+次のような出力が表示されるはずです。
 
 ```
   ebpfless:
     enabled: true
 ```
 
-## eBPF 非対応 Agent を使ったアプリケーション トレーシングのセット アップ
+## eBPF-less Agent を使用してアプリケーショントレーシングをセットアップする {#set-up-application-tracing-with-ebpf-less-agent}
 
-eBPF 非対応 Agent をインストールし、eBPF 非対応モードを有効にしたら、アプリケーションのトレーシング方法を設定できます。このセクションでは、2 通りの方法を説明します。
+eBPF-less Agent がインストールされ、eBPF-Free モードを使用するようにセットアップされたら、アプリケーションのトレース方法をセットアップできます。このセクションでは、2 つの異なる方法を紹介します。
 
-- **ラップ モード:** (推奨) このモードでは、アプリケーションは Datadog ラッパーによって起動され、ptrace を用いて開始時点からトレーシングされます。
-  - 生成された子プロセスもすべてトレーシングされます。
-  - seccomp プロファイルを適用して、ptrace のオーバーヘッドを大幅に削減します。
-- **アタッチ モード:** このモードでは、アプリケーション プロセスにアタッチする PID のリストを指定できます。これを行うまではアプリケーションは ptrace によるトレーシングが行われないため、速やかに指定してください。
-  - このモードでは seccomp プロファイルは適用できません。そのため、ptrace のオーバーヘッドがわずかに発生します。
+- **ラップモード:** (推奨) このモードでは、アプリケーションは Datadog ラッパーによって起動され、ptrace を使用して最初からトレースされます。
+  - 生成されたすべての子プロセスもトレースされます。
+  - seccomp プロファイルが適用され、ptracing のオーバーヘッドが大幅に削減されます。
+- **アタッチモード:** このモードでは、アタッチするアプリケーションプロセスの PID リストを指定できます。これが完了するまでアプリケーションの ptrace は実行されないため、迅速に行う必要があります。
+  - このモードでは、seccomp プロファイルを適用できません。その結果、少量の ptracing オーバーヘッドが発生します。
 
-どちらのモードでも、Datadog Agent に同梱されている **cws-instrumentation** バイナリを使用します。場所は `/opt/datadog-agent/embedded/bin/cws-instrumentation` です。
+どちらのモードも、Datadog Agent にパッケージ化され、`/opt/datadog-agent/embedded/bin/cws-instrumentation` に配置されている **cws-インスツルメンテーション**バイナリを使用します。
 
 <div class="alert alert-info">
-このトレーサーは、localhost 上でポート 5678 を使用して system-probe（Datadog Agent の一部）と通信します。system-probe のアドレスは、cws-instrumentation の <code>--probe-addr=host:port</code> オプションで設定できます。サーバー側アドレスは、Agent の設定ファイル <code>/etc/datadog-agent/system-probe.yaml</code> の runtime_security_config.ebpfless.socket オプションで設定できます。
+このトレーサーは、ポート 5678 を使用して localhost 上の system-probe (Datadog Agent の一部) と通信します。system-probe のアドレスは、 <code>--probe-addr=host:port</code> cws-instrumentation オプションで構成できます。サーバーサイドのアドレスは、 <code>/etc/datadog-agent/system-probe.yaml</code> Agent 構成ファイルの runtime_security_config.ebpfless.socket オプションから更新できます。
 </div>
 
 {{< tabs >}}
-{{% tab "ラップ モード" %}}
-ラップ モードでは、Datadog ラッパーがアプリケーションを起動します。例:
+{{% tab "ラップモード" %}}
+ラップモードでは、Datadog ラッパーがアプリケーションを起動します。以下はその例です。
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace -- /usr/bin/your_application
 ```
 
-アプリケーションを非ルートで実行する場合は、uid/gid を数値で指定します。
+アプリケーションが non-root として実行される場合は、uid/gid を数値で指定してください。
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --uid 100 --gid 100 -- /usr/bin/your_application
 ```
 
-<div class="alert alert-info">アプリケーションは、cws-instrumentation が Datadog Agent との接続を初期化するまで開始されません。</div>
+<div class="alert alert-info">cws-instrumentation が Datadog Agent とのコネクションを初期化するまで、アプリケーションは起動しません。</div>
 
-以下の例では、トレーサーを各種デプロイメント タイプのアプリケーションにどのように統合できるかを示します。
+以下の例は、さまざまなデプロイタイプでトレーサーをアプリケーションに統合する方法を示しています。
 
-<div class="alert alert-info">3.4 系の古いカーネルでは seccomp プロファイルは利用できないため、<code>--disable-seccomp</code> オプションで無効化してください。</div>
+<div class="alert alert-info">古い 3.4 カーネルでは、seccomp プロファイルは使用できないため、 <code>–disable-seccomp</code> オプションで無効にする必要があります。</div>
 
-#### Linux の systemd サービス
+#### Linux systemd サービス {#linux-systemd-service}
 
-すでに init スクリプトがある場合に、必要な変更を行うための簡単な例を以下に示します。
+すでに init スクリプトがある場合に必要な変更の簡単な例を以下に示します。
 
 ```shell
    [Unit]
@@ -224,9 +220,9 @@ sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --uid 100 --gid 1
    WantedBy=multi-user.target
 ```
 
-#### Linux sysvinit を使ったサービス
+#### Linux sysvinit サービス {#linux-sysvinit-service}
 
-すでに init スクリプトがある場合に、必要な変更を行うための簡単な例を以下に示します。
+すでに init スクリプトがある場合に必要な変更の簡単な例を以下に示します。
 
 ```shell
 #!/bin/sh
@@ -241,20 +237,20 @@ set -e
 # Description: My application
 ### END INIT INFO
 
-# サービスを開始する
+# Start the service
 start() {
         echo "Starting my app"
         /opt/datadog-agent/embedded/bin/cws-instrumentation trace -- /usr/bin/myapp &
 }
 
 
-# サービスを停止する
+# Stop the service
 stop() {
        echo "Stopping my app"
-    pkill -f /usr/bin/myapp
+	pkill -f /usr/bin/myapp
 }
 
-### メインロジック ###
+### main logic ###
 case "$1" in
   start)
         start
@@ -274,12 +270,12 @@ esac
 exit 0
 ```
 
-#### Docker
+#### Docker {#docker}
 
-Docker を使ってアプリケーションをデプロイしている場合は、Dockerfile を修正して、アプリケーションを次のようにラップする必要があります。
+Docker アプリケーションのデプロイでは、次のように Dockerfile を変更してアプリケーションをラップする必要があります。
 
 ```shell
-FROM gcr.io/datadoghq/agent:7 AS datadogagent
+FROM registry.datadoghq.com/agent:7 AS datadogagent
 
 FROM ubuntu:latest
 
@@ -290,40 +286,40 @@ ENTRYPOINT ["/cws-instrumentation", "trace", "--"]
 CMD ["/bin/bash", "-c", "while true; do sleep 1; echo my app is running; done"]
 ```
 
-Docker アプリケーションを実行する際は、`docker run` に `--cap-add=SYS_PTRACE` を付与して、必要なケーパビリティを有効化することが重要です。
+Docker アプリケーションを実行する際は、`docker run` コマンドに `--cap-add=SYS_PTRACE` を追加して、追加の機能を付与することが重要です。
 
-また、次のいずれかの方法で、コンテナをポート 5678 で Datadog に接続する必要があります。
+また、以下のいずれかの方法で、コンテナをポート 5678 で Datadog に接続する必要があります。
 
-- 両方のコンテナを `--network host` オプションで起動します。
-- [Docker network][6] 機能を使って、両方のコンテナを同じブリッジ ネットワーク上で実行します。
+- 両方のコンテナを `--network` ホストオプションで起動します。
+- [Docker ネットワーク][6] 機能を使用して、両方のコンテナを同じブリッジネットワーク上で実行します。
 
 {{% /tab %}}
 
 {{% tab "アタッチモード" %}}
-アタッチモードには以下の制限があるため、ラップモードが推奨されています。
+アタッチモードには以下の制限があるため、ラップモードが推奨されます。
 
-- Datadog がアタッチするまで、アプリケーションの初期化処理はすべてトレーシングされません。
-- - アタッチ時は、Datadog は seccomp プロファイルを設定できません。
-- パフォーマンス オーバーヘッドが大きい。
-- トレーシング対象のアプリケーションが再起動した場合は、トレーサーも再起動されるよう Datadog 側で確実に制御する必要があります。
+- Datadog がアタッチされるまでの間、アプリケーションによって行われたすべての初期化が欠落します。
+- - アタッチ時、Datadog は seccomp プロファイルを設定できません。
+- パフォーマンスのオーバーヘッドが増加します。
+- トレース対象のアプリケーションが再起動する場合、Datadog はトレーサーも確実に再起動させる必要があります。
 
-アタッチモードはラップモードとは異なり、次のようにすでに実行中のアプリケーションにトレーサーを直接アタッチします。
+アタッチモードは、ラップモードとは異なり、以下のように実行中のアプリケーションにトレーサーを直接アタッチします。
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --pid 2301
 ```
 
-同時に複数の PID を指定してアタッチできます。
+複数の PID を一度にアタッチできます。
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --pid 2301 --pid 2302 --pid 2303
 ```
 
-以下の例では、トレーサーをさまざまなデプロイメントタイプのアプリケーション内にどのように統合できるかを示しています。
+以下の例は、さまざまなデプロイタイプでトレーサーをアプリケーションに統合する方法を示しています。
 
-#### Linux systemd を使ったサービス
+#### Linux systemd サービス {#linux-systemd-service-1}
 
-すでに init スクリプトがある場合に、新しい systemd サービスを使ってラッパーを統合する方法の一例を以下に示します。
+すでに init スクリプトがある場合に新しい systemd サービスを使用してラッパーを統合する例を以下に示します。
 
 ```shell
 [Unit]
@@ -338,14 +334,14 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 
-#### Linux sysvinit を使ったサービス
+#### Linux sysvinit サービス {#linux-sysvinit-service-1}
 
-すでに init スクリプトがある場合に、新しい sysvinit サービスを使ってトレーサーを統合する方法の一例を以下に示します。
+すでに init スクリプトがある場合に新しい sysvinit サービスを使用してトレーサーを統合する例を以下に示します。
 
 ```shell
 #!/bin/sh
 set -e
-### 初期化情報の開始
+### BEGIN INIT INFO
 # Provides:           dd_tracing_my_app
 # Required-Start:     $network
 # Required-Stop:      $network
@@ -353,22 +349,22 @@ set -e
 # Default-Stop:       0 1 6
 # Short-Description:  Datadog tracing of my application
 # Description: Datadog tracing of my application
-### 初期化情報の終了
+### END INIT INFO
 
-# サービスを開始する
+# Start the service
 start() {
         echo "Starting tracing my app"
         /opt/datadog-agent/embedded/bin/cws-instrumentation trace $(for pid in $(pidof myapp); do echo --pid $pid; done) &
 }
 
 
-# サービスを停止する
+# Stop the service
 stop() {
        echo "Stopping my app"
-    pkill -f /opt/datadog-agent/embedded/bin/cws-instrumentation
+	pkill -f /opt/datadog-agent/embedded/bin/cws-instrumentation
 }
 
-### メインロジック ###
+### main logic ###
 case "$1" in
   start)
         start
@@ -388,25 +384,25 @@ esac
 exit 0
 ```
 
-#### Docker
+#### Docker {#docker-1}
 
-アプリケーションを実行中の Docker イメージにラッパーをアタッチするには、次の Dockerfile を使用します。
+アプリケーションを実行している Docker イメージにラッパーをアタッチするには、次の Dockerfile を使用します。
 
 ```shell
-FROM gcr.io/datadoghq/agent:7
+FROM registry.datadoghq.com/agent:7
 
 ENTRYPOINT ["/opt/datadog-agent/embedded/bin/cws-instrumentation", "trace", "--pid", "$PID"]
 ```
 
-次に、Docker 接続用のホスト PID を環境変数として指定してください。
+次に、Docker に接続するためのホスト PID を環境変数として指定します。
 
-アプリケーションにアタッチするには、以下の作業が必要です。
+アプリケーションにアタッチするには、以下が必要です。
 
-- Docker アプリケーションを実行する際に、`docker run` コマンドに `--cap-add=SYS_PTRACE` を追加して、必要な機能を追加する。
-- 以下のいずれかの方法で、アプリケーションコンテナがポート 5678 で Datadog コンテナに到達できることを確認する。
-  - 両方のコンテナを `--network` host オプションで起動する。
-  - [Docker ネットワーク][6]機能を使用して、両方のコンテナを同じブリッジネットワーク上で実行する。
-- アプリケーション コンテナが（Datadog Agent と同様に）ホストの PID ネームスペースで動作するよう、次のオプションを追加してください: `--cgroupns host --pid host`
+- Docker アプリケーションを実行する際は、`docker run` コマンドに `--cap-add=SYS_PTRACE` を含めて、必要な権限を追加してください。
+- 以下のいずれかの方法を使用して、アプリケーションコンテナからポート 5678 で Datadog コンテナにアクセスできるようにしてください。
+  - 両方のコンテナを `--network` ホストオプションで起動します。
+  - [Docker ネットワーク][6] 機能を使用して、両方のコンテナを同じブリッジネットワーク上で実行します。
+- アプリケーションコンテナが (Datadog Agent と同様に) ホスト PID で実行されていることを確認するには、次のオプションを追加します。`--cgroupns host --pid host`。
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -17,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/
   tag: Blog
   text: Unifique la remediación y la comunicación con Datadog Incident Response
+- link: https://www.datadoghq.com/blog/fedramp-high-incident-response/
+  tag: Blog
+  text: Ejecute la respuesta a incidentes en su entorno FedRAMP High
 title: On-Call
 ---
 Datadog On-Call integra seguimiento, paginación y respuesta a incidentes en una sola plataforma.

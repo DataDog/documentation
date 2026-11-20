@@ -13,7 +13,7 @@ When Datadog queries metrics in CloudWatch on your behalf, it incurs AWS CloudWa
 
 Adaptive Polling helps you save costs by reducing the polling frequency of metrics that haven't been queried (used in monitors, dashboards, notebooks, or metric queries) for at least 30 days. Polling of unqueried metrics is automatically throttled to one-hour intervals.
 
-To see which metrics are unqueried, go to the [Metric Summary][2] page and filter by the **Query Activity** facet in the [facet panel][3].
+To see which metrics are unqueried, go to the [Metrics Catalog][2] page and filter by the **Query Activity** facet in the [facet panel][3].
 
 **Note**: Newly added metrics are unqueried by default.
 
@@ -45,6 +45,6 @@ Dashboards and notebooks only run their metric queries when opened. If unopened,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services/
-[2]: https://app.datadoghq.com/metric/summary
+[2]: https://app.datadoghq.com/metric/catalog
 [3]: /metrics/summary/#facet-panel
 

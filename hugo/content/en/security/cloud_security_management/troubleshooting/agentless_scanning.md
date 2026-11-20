@@ -25,7 +25,7 @@ If no results appear after two hours:
 
 ## Enable Remote Configuration on the API key
 
-To authenticate and authorize the Agent to receive configuration, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
+To authenticate and authorize Agentless scanners to receive scan instructions, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
 
 **Note:** If you have [`api_keys_write`][9] RBAC permission, but are missing Remote Configuration [Organization][10] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key. To view and manage your organization's API Keys, see [API Keys][11] in Datadog.
 
@@ -57,13 +57,13 @@ Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed
 
 These findings reflect vulnerabilities identified in the underlying OS image and do not indicate a misconfiguration of your environment.
 
-If desired, you can use tag-based filtering in the [{{< ui >}}Cloud Security Vulnerabilities Explorer{{< /ui >}}][2] to exclude Datadog-managed scanner instances from your vulnerability views.
+Scanner instances are tagged `DatadogAgentlessScanner:true`. To exclude them from your vulnerability views, filter out this tag in the [{{< ui >}}Cloud Security Vulnerabilities Explorer{{< /ui >}}][2].
 
 ## Hosts with the Datadog Agent are not scanned
 
-This is expected behavior. Agentless Scanning excludes hosts that have the Datadog Agent installed with [Cloud Security Vulnerabilities][6] enabled. This prevents duplicate scanning.
+This is expected behavior. To prevent duplicate scanning, Agentless Scanning skips hosts where the Datadog Agent runs with both [Cloud Security Vulnerabilities][6] and Misconfigurations enabled.
 
-Hosts that have the Datadog Agent installed **without** Vulnerabilities features enabled are still scanned by Agentless Scanning.
+If the Agent has only one of these features enabled, Agentless Scanning still scans the host for the other one.
 
 ## Unexpected cross-region scanning costs
 

@@ -22,7 +22,9 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP event egress use the standard tracer URL on port 8126. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP events use a compatible local relay or, in supported agentless SDK versions, direct intake. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+
+For the SDK versions that send EVP events, their privacy controls, and direct delivery, see [Server-Side Evaluation Events and Privacy][8].
 
 ## Prerequisites
 
@@ -49,7 +51,7 @@ Agentless configuration delivery and this metric use independent paths. An agent
 
 ## Step 1: Configure an OTLP receiver
 
-Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [Set Up the Agent's OTLP Endpoint][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
 
 You only need to enable the protocol your application uses (gRPC on port 4317, or HTTP on port 4318).
 
@@ -196,7 +198,7 @@ After deploying, confirm metrics are reaching Datadog:
 
 By default, `feature_flag.evaluations` retains only one hour of data. To retain a longer history:
 
-1. Go to [Metrics Summary][4] and search for `feature_flag.evaluations`.
+1. Go to the [Metrics Catalog][4] and search for `feature_flag.evaluations`.
 2. Select the metric and enable **Historical Metrics**.
 
 This is an opt-in setting and is not enabled automatically for OTLP metrics.
@@ -226,7 +228,8 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [1]: /feature_flags/server/
 [2]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /dashboards/
 [6]: /feature_flags/server/java/#installation
 [7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[8]: /feature_flags/guide/server_evaluation_events/

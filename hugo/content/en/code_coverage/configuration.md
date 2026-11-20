@@ -360,8 +360,6 @@ When annotations are enabled, Datadog:
 
 ## Carryforward
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
-
 You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
 
 To enable carryforward for every flag in the repository:

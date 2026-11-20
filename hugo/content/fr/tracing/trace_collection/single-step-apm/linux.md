@@ -19,7 +19,7 @@ type: multi-code-lang
 Sur un host Linux ou une VM, utilisez l'instrumentation en une seule étape (SSI) pour APM afin d'installer le Datadog Agent et d'[instrumenter][14] vos applications en une seule étape, sans configuration supplémentaire requise. 
 
 {{< skill-callout
-    title="Configurez APM avec un agent"
+    title="Configurer APM avec un agent"
     text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
     action_name="copy_dd_apm_skill_install_cmd" >}}
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
@@ -66,26 +66,19 @@ Copiez ensuite la commande générée et exécutez-la.
 
 ### Installation d'un Datadog Agent existant {#existing-agent-installation}
 
-Si vous avez déjà installé le Datadog Agent, réexécutez la commande d'installation du Datadog Agent depuis [Installation d'un nouveau Datadog Agent](#new-agent-installation) sur le host. La commande met à jour le Datadog Agent existant et active SSI.
+Si vous avez déjà un Datadog Agent installé, activez SSI à distance depuis Datadog. Vous n'avez pas besoin d'exécuter des commandes sur chaque host.
 
-Sinon, utilisez Fleet Automation pour activer SSI depuis Datadog :
+1. Dans Datadog, accédez à [**APM > Instrument a Service**][21].
 
-1. Dans Datadog, accédez à [**Fleet Automation > Configuration**][21].
-1. Cliquez sur {{< ui >}}Configure Agents{{< /ui >}}.
-1. Appliquez des filtres pour sélectionner les agents que vous souhaitez configurer, puis cliquez sur **Suivant**.
+1. Sous {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, sélectionnez {{< ui >}}Deploy on existing hosts{{< /ui >}} pour instrumenter vos services à distance via le Datadog Agent.
 
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="L'écran de filtrage des agents dans Fleet Automation, avec des options pour définir le périmètre par environnement, système d'exploitation et nom de host" style="width:100%;" >}}
+1. Sous {{< ui >}}Which hosts should we instrument?{{< /ui >}}, utilisez les filtres de périmètre ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) pour affiner la liste des hosts. Sélectionnez ensuite les Agents que vous souhaitez instrumenter dans l'onglet {{< ui >}}Eligible for deployment{{< /ui >}}. Les hosts qui ne peuvent pas être instrumentés apparaissent dans l'onglet {{< ui >}}Excluded from deployment{{< /ui >}}.
 
-1. Cliquez sur la tuile {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}, puis cliquez sur {{< ui >}}Next{{< /ui >}}.
+1. Dans {{< ui >}}Configure SDKs installation{{< /ui >}}, cliquez sur {{< ui >}}Yes{{< /ui >}} pour que Datadog installe automatiquement les SDK de tracing. Pour épingler des versions de SDK spécifiques au lieu de la dernière version, développez {{< ui >}}Customize library versions{{< /ui >}}.
 
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="L'écran de sélection de produit dans Fleet Automation, affichant la tuile Application Performance Monitoring (APM)" style="width:80%;" >}}
+1. Dans {{< ui >}}Configure rollout strategy{{< /ui >}}, choisissez le pourcentage d'Agents sur lesquels effectuer le déploiement à la fois. Datadog affiche les étapes résultantes et une durée estimée. Les déploiements sont automatiquement mis en pause si trois Agents consécutifs échouent ou si les échecs atteignent 10 % du total. Vous pouvez relancer le déploiement plus tard.
 
-1. Dans l'écran {{< ui >}}Configure SDKs Installation{{< /ui >}}, cliquez sur {{< ui >}}Yes{{< /ui >}} pour installer automatiquement les SDK. Sélectionnez {{< ui >}}Use latest version{{< /ui >}}, ou décochez pour spécifier des versions individuelles du SDK.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="L'écran de configuration de l'installation des SDK dans Fleet Automation, avec des options pour activer l'installation automatique des SDK et sélectionner les versions" style="width:60%;" >}}
-
-1. Cliquez sur **Next**.
-1. Vérifiez votre configuration et cliquez sur {{< ui >}}Deploy Configuration{{< /ui >}}.
+1. Dans {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, cochez {{< ui >}}Configuration Summary{{< /ui >}} (basculez entre {{< ui >}}Summary{{< /ui >}} et {{< ui >}}YAML{{< /ui >}}), puis cliquez sur {{< ui >}}Apply Instrumentation{{< /ui >}}.
 
 ## Vérifiez l'installation {#verify-the-installation}
 
@@ -142,32 +135,91 @@ Pour mettre à jour les versions du SDK :
 <div class="alert alert-warning">Les règles d'instrumentation ne sont pas prises en charge pour le <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Les règles d'instrumentation (disponibles pour le Datadog Agent v7.73+) vous permettent de contrôler quels processus sont automatiquement instrumentés par SSI sur les hosts Linux.
+Les règles d'instrumentation vous permettent de contrôler quels processus SSI instrumente automatiquement sur les hosts Linux. Chaque règle vérifie les attributs des processus, puis autorise ou bloque l'instrumentation des processus correspondants. Vous pouvez déployer une règle sur tous les hosts éligibles, ou la limiter à un ou plusieurs [groupes de hosts](#create-host-groups) pour restreindre son application.
 
-Pour configurer les règles d'instrumentation :
+Pour afficher et gérer les règles d'instrumentation, accédez à {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20].
 
-1. Dans Datadog, accédez à {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20].
-1. Cliquez sur {{< ui >}}Add or Edit Rules{{< /ui >}}.
-1. Définissez les règles d'instrumentation :
-   1. Cliquez sur {{< ui >}}Add New Rule{{< /ui >}}, puis choisissez {{< ui >}}Allow Rule{{< /ui >}} ou {{< ui >}}Block Rule{{< /ui >}} pour spécifier si les processus correspondants doivent être instrumentés.
-   1. Nommez votre règle.
-   1. Ajoutez une ou plusieurs conditions. Consultez [Définir les conditions de règle](#define-rule-conditions) pour en savoir plus.
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="La page APM Instrumentation Rules avec Hosts sélectionné, affichant les cartes Default Behavior, Hosts in Scope et Deployment Status au-dessus d'une liste de règles d'instrumentation" style="width:100%;" >}}
 
-   {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="L'interface utilisateur des règles d'instrumentation, affichant les options de configuration pour définir une règle" style="width:100%;" >}}
+#### Prérequis pour les règles d'instrumentation {#prerequisites-for-instrumentation-rules}
 
-1. (Facultatif) Faites glisser et déposez les règles pour les réorganiser.
+- **Agent** : v7.73 ou version ultérieure sur chaque host, avec SSI et [Remote Configuration][24] activés. Les hosts qui répondent à ces exigences sont éligibles aux règles d'instrumentation.
+- **Autorisations** : L'[autorisation][25] **APM Workload Selection Write**, qui est requise pour créer et gérer les règles d'instrumentation et les groupes de hosts.
 
-   **Remarque** : Les règles sont évaluées dans l'ordre. Une fois qu'un processus correspond à une règle, les règles suivantes sont ignorées.
+#### Définir le comportement par défaut {#set-the-default-behavior}
 
-1. Définissez le comportement par défaut (autoriser ou bloquer) pour les processus qui ne correspondent à aucune règle.
-1. Cliquez sur {{< ui >}}Next{{< /ui >}} pour prévisualiser vos règles.
-1. Cliquez sur {{< ui >}}Deploy Rules{{< /ui >}}.
+Le comportement par défaut s'applique aux processus sur les hosts éligibles qui ne correspondent à aucune règle d'instrumentation. Il s'applique également lorsque vous n'avez créé aucune règle.
 
-Si Remote Configuration est activé, les règles sont déployées sur chaque host et appliquées sur ceux pour lesquels SSI est activé dans un délai de 50 secondes. Sinon, cliquez sur {{< ui >}}Export{{< /ui >}} pour exporter le fichier de configuration et l'appliquer manuellement à vos hosts.
+1. Sur la page [Instrumentation Rules][20], accédez à la carte {{< ui >}}Default Behavior{{< /ui >}} et cliquez sur {{< ui >}}Edit{{< /ui >}}.
+1. Choisissez l'une des options suivantes :
+   - {{< ui >}}Allow everything else{{< /ui >}} : Les applications prises en charge sont instrumentées, sauf si une règle les bloque.
+   - {{< ui >}}Block everything else{{< /ui >}} : Les applications ne sont pas instrumentées, sauf si une règle les autorise.
+1. Cliquez sur {{< ui >}}Save{{< /ui >}}.
+
+#### Créer des groupes de hosts {#create-host-groups}
+
+Les groupes de hosts sont des ensembles réutilisables de hosts que vous pouvez cibler avec des règles d'instrumentation.
+
+Pour créer un groupe de hosts :
+
+1. Sur la page [Instrumentation Rules][20], accédez à la carte {{< ui >}}Hosts in Scope{{< /ui >}} et cliquez sur {{< ui >}}Manage host groups{{< /ui >}}.
+1. Cliquez sur {{< ui >}}New Host Group{{< /ui >}} et saisissez un nom pour le groupe.
+1. Cliquez sur {{< ui >}}Add Hosts{{< /ui >}}, puis recherchez et sélectionnez les hosts à ajouter. Vous pouvez effectuer une recherche par nom de host, facettes ou tags de host.
+
+   <div class="alert alert-info">Les groupes de hosts sont dynamiques, de sorte que les nouveaux hosts correspondant à votre recherche sont ajoutés automatiquement au groupe. Un host peut appartenir à plusieurs groupes, mais tous les hosts d'un groupe doivent fonctionner sur la même plateforme, telle que Linux ou Windows.</div>
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="Le formulaire de création d'un groupe de hosts, avec deux des trois hosts sélectionnés dans la liste Add Hosts" style="width:80%;" >}}
+
+1. Cliquez sur {{< ui >}}Save Group{{< /ui >}}.
+
+Datadog gère automatiquement un groupe {{< ui >}}All hosts{{< /ui >}}. Il répertorie les hosts éligibles qui n'appartiennent à aucun autre groupe, afin que vous puissiez voir quels hosts restent à regrouper. Vous ne pouvez pas modifier sa liste de hosts.
+
+Si vous supprimez un groupe de hosts, Datadog supprime les règles du groupe et l'Agent cesse de les appliquer lors de sa prochaine interrogation de Remote Configuration.
+
+Pour modifier l'ordre des groupes de hosts, faites glisser un groupe par sa poignée dans la liste des groupes. L'ordre des groupes affecte [la manière dont les règles d'instrumentation sont évaluées](#how-instrumentation-rules-are-evaluated).
+
+{{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="La page Host Groups, affichant le groupe Canary placé au-dessus du groupe All hosts, avec la liste des hosts du groupe Canary" style="width:100%;" >}}
+
+#### Créer des règles d'instrumentation {#create-instrumentation-rules}
+
+**Remarque** : Vous pouvez utiliser Bits AI pour créer des règles d'instrumentation en langage naturel. Dans la fenêtre Create instrumentation rule, cliquez sur {{< ui >}}Generate with Bits{{< /ui >}} et décrivez les processus à instrumenter. Bits AI génère la règle correspondante.
+
+Pour créer une règle d'instrumentation :
+
+1. Sur la page [Instrumentation Rules][20], cliquez sur {{< ui >}}New Rule{{< /ui >}}. Vous pouvez également, sur la page Host Groups, sélectionner un groupe, ouvrir son onglet {{< ui >}}Rules{{< /ui >}} et cliquer sur {{< ui >}}Create a new rule{{< /ui >}}.
+1. Définissez une ou plusieurs conditions, puis sélectionnez {{< ui >}}Block Instrumentation{{< /ui >}} ou {{< ui >}}Allow Instrumentation{{< /ui >}}. Consultez la section [Définir les conditions de règle](#define-rule-conditions).
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="La fenêtre Create instrumentation rule, avec une condition Language égale à Python, l'action Allow Instrumentation et le panneau Rule Impact Preview" style="width:100%;" >}}
+
+1. Sous {{< ui >}}Set host targeting{{< /ui >}}, sélectionnez {{< ui >}}All eligible hosts{{< /ui >}} ou {{< ui >}}Select host groups{{< /ui >}}.
+
+   Si vous sélectionnez plusieurs groupes, les groupes partagent une règle unique, et sa modification ultérieure met à jour tous les groupes sélectionnés.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="L'étape Set host targeting, avec l'option Select host groups choisie et un groupe de hosts nommé Test sélectionné" style="width:80%;" >}}
+
+1. Nommez la règle, puis cliquez sur {{< ui >}}Next{{< /ui >}}.
+1. Examinez la règle. Datadog ajoute les nouvelles règles à la fin de la liste de règles de chaque groupe ciblé. Optionnellement, sous {{< ui >}}Set evaluation order{{< /ui >}}, faites glisser les règles pour modifier leur ordre dans chaque groupe. Consultez la section [Comment les règles d'instrumentation sont évaluées](#how-instrumentation-rules-are-evaluated).
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="L'étape d'examen de la règle, montrant son résumé et l'ordre d'évaluation des règles dans le groupe de hosts Test" style="width:100%;" >}}
+
+1. Cliquez sur {{< ui >}}Create Rule{{< /ui >}}.
+
+Datadog déploie les règles sur les hosts éligibles via Remote Configuration dans un délai de 50 secondes. Une fois les règles déployées, redémarrez les services concernés pour que les modifications prennent effet. La carte {{< ui >}}Deployment Status{{< /ui >}} sur la page [Instrumentation Rules][20] indique combien de hosts éligibles ont reçu les règles actuelles.
+
+Pour appliquer les règles manuellement, par exemple sur des hosts pour lesquels Remote Configuration n'est pas activée, cliquez sur {{< ui >}}Export{{< /ui >}} au-dessus de la liste des règles pour exporter le fichier de configuration, puis appliquez-le à vos hosts.
+
+#### Comment les règles d'instrumentation sont évaluées {#how-instrumentation-rules-are-evaluated}
+
+Pour chaque processus, Datadog évalue les règles d'instrumentation dans l'ordre suivant et applique la première règle qui correspond :
+
+1. Règles des groupes auxquels appartient le host du processus, dans l'ordre des groupes de haut en bas. Au sein de chaque groupe, les règles sont évaluées dans l'ordre défini sous {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Règles ciblant {{< ui >}}All eligible hosts{{< /ui >}}. Ces règles s'appliquent à chaque host éligible, y compris aux hosts appartenant à des groupes de hosts.
+
+Si aucune règle ne correspond, le [comportement par défaut](#set-the-default-behavior) s'applique.
 
 #### Définir les conditions de règle {#define-rule-conditions}
 
-Chaque règle se compose d'une ou plusieurs conditions. Une condition comprend les éléments suivants :
+Chaque règle se compose d'une ou plusieurs conditions. Un processus doit correspondre à toutes les conditions d'une règle pour que celle-ci s'applique. Une condition comprend les éléments suivants :
 - {{< ui >}}Attribute{{< /ui >}} : La propriété de processus que la règle évalue.
 - {{< ui >}}Operator{{< /ui >}} : La logique de comparaison (`equals`, `not equals`, `prefix` ou `contains`).
 - {{< ui >}}Value{{< /ui >}} : Le texte ou le motif à faire correspondre, tel qu'un nom de processus ou un indicateur de ligne de commande.
@@ -181,29 +233,59 @@ Les attributs pris en charge incluent :
 | Arguments | Arguments de ligne de commande utilisés pour démarrer le processus. | `--env=production` |
 | Répertoire de travail | Répertoire de travail du processus. | `/app` |
 | Langage | Langage de programmation détecté pour le processus. | `python` |
-| Fichier de point d'entrée | Le fichier spécifique utilisé pour lancer l'application. | `app.py`, `server.js` |
+| Entry Point File | Le fichier spécifique utilisé pour lancer l'application. | `app.py`, `server.js` |
 
 #### Exemples de cas d'utilisation {#example-use-cases}
 
 Examinez les exemples suivants illustrant comment appliquer des règles d'instrumentation :
 
-{{< collapse-content title="Exemple 1 : Instrumenter tous les processus sauf certains spécifiques" level="h5" >}}
+{{% collapse-content title="Exemple 1 : Instrumenter tous les processus sauf certains spécifiques" level="h5" %}}
 
-Instrumenter tous les processus par défaut. Ajoutez des règles de blocage pour exclure les services qui ajouteraient du bruit sans valeur ajoutée, tels que les tâches cron d'analyse et les processeurs de lots Java.
+Instrumenter tous les processus par défaut. Ajoutez des règles de blocage pour exclure les services qui ajouteraient du bruit sans valeur ajoutée, tels que les jobs cron d'analyse et les processeurs de lots Java.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Deux règles d'instrumentation de blocage ciblant les conditions Répertoire de travail et Fichier de point d'entrée, avec une autorisation d'instrumentation par défaut" style="width:100%;" >}}
+1. Définissez le comportement par défaut sur {{< ui >}}Allow everything else{{< /ui >}}.
+1. Créez les règles suivantes, ciblant chacune {{< ui >}}All eligible hosts{{< /ui >}} :
 
-{{< /collapse-content >}}
+   | Nom de la règle | Condition | Action |
+   | --------- | --------- | ------ |
+   | Exclure le job cron d'analyse | <code>Working Directory</code> <code>contains</code> <code>analytics-service</code> | Block Instrumentation |
+   | Exclure les services de traitement par lots | <code>Entry Point File</code> <code>contains</code> <code>batch-processor.jar</code> | Block Instrumentation |
 
-{{< collapse-content title="Exemple 2 : Instrumenter uniquement des processus spécifiques" level="h5" >}}
+{{% /collapse-content %}}
 
-Bloquer toute instrumentation par défaut. Ajoutez des règles d'autorisation pour inclure des processus spécifiques dans APM. Cette approche vous donne un contrôle précis et fonctionne bien pour les déploiements progressifs.
+{{% collapse-content title="Exemple 2 : Instrumenter uniquement des processus spécifiques" level="h5" %}}
 
-Par exemple, pour instrumenter uniquement un service de paiement et un portail client, créez des règles d'autorisation en utilisant {{< ui >}}Working Directory{{< /ui >}}, puis définissez le comportement par défaut sur {{< ui >}}Block Instrumentation{{< /ui >}}.
+Bloquer toute instrumentation par défaut. Ajoutez des règles d'autorisation pour inclure des processus spécifiques dans APM.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Deux règles d'autorisation d'instrumentation ciblant des services dans des répertoires de travail spécifiques, avec un blocage de l'instrumentation par défaut." style="width:100%;" >}}
+Par exemple, pour instrumenter uniquement un service de paiement et un portail client :
 
-{{< /collapse-content >}}
+1. Définissez le comportement par défaut sur {{< ui >}}Block everything else{{< /ui >}}.
+1. Créez les règles suivantes, ciblant chacune {{< ui >}}All eligible hosts{{< /ui >}} :
+
+   | Nom de la règle | Condition | Action |
+   | --------- | --------- | ------ |
+   | Service de paiement | <code>Working Directory</code> <code>equals</code> <code>/srv/checkout</code> | Allow Instrumentation |
+   | Portail client | <code>Working Directory</code> <code>equals</code> <code>/srv/customer-portal</code> | Allow Instrumentation |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Exemple 3 : Déployer l'instrumentation progressivement avec un groupe de hosts" level="h5" %}}
+
+Bloquez toute instrumentation par défaut et autorisez-la uniquement sur un petit groupe de hosts canaris. Une fois les résultats validés, ajoutez d'autres hosts au groupe ou modifiez la règle pour cibler tous les hosts éligibles.
+
+1. Définissez le comportement par défaut sur {{< ui >}}Block everything else{{< /ui >}}.
+1. Créez un groupe de hosts nommé <code>canary</code> et ajoutez les hosts à instrumenter en premier.
+1. Créez une règle avec les paramètres suivants :
+
+   | Paramètre | Valeur |
+   | ------- | ----- |
+   | Condition | <code>Language</code> <code>equals</code> <code>python</code> |
+   | Action | Allow Instrumentation |
+   | Ciblage des hosts | Select host groups: <code>canary</code> |
+
+Seules les applications Python sur les hosts du groupe <code>canary</code> sont instrumentées. Aucune autre application n'est instrumentée.
+
+{{% /collapse-content %}}
 
 ## Supprimez l'instrumentation APM en une étape de votre Datadog Agent {#remove-single-step-apm-instrumentation-from-your-agent}
 
@@ -236,6 +318,8 @@ Si vous rencontrez des problèmes lors de l'activation d'APM avec SSI, consultez
 [18]: /fr/tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /fr/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: https://app.datadoghq.com/fleet/agent-management
+[21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
+[24]: /fr/remote_configuration/
+[25]: /fr/account_management/rbac/permissions/

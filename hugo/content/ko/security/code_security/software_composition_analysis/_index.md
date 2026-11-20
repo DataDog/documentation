@@ -56,17 +56,48 @@ SCA는 상호 보완적인 두 가지 탐지 모드를 지원합니다.
 
 Datadog이 새로운 보안 권고를 수집하면 마지막으로 확인된 라이브러리 인벤토리와 대조하여 리포지토리를 다시 스캔하지 않아도 Vulnerabilities Explorer에 표시합니다. Repositories Explorer는 커밋을 기준으로 범위가 지정되며 스캔 실행 시점에 알려진 정보를 반영합니다. 따라서 Datadog이 보안 권고를 수집하기 전에 실행된 스캔의 경우 해당 커밋에 대해 새로 게시된 보안 권고가 Repositories Explorer에 표시되지 않습니다. 자세한 내용은 [SCA 보기 이해](#understanding-sca-views)를 참조하세요.
 
-## 취약성 데이터베이스 {#vulnerability-database}
+## 구성 요소 유형별 탐지 범위 {#detection-coverage-by-component-type}
+
+정적 및 런타임 탐지는 애플리케이션의 서로 다른 부분을 분석합니다. 각 탐지 모드가 무엇을 다루는지 알면 설정을 선택하고 취약점이 스택에 영향을 미칠 때 어디를 확인해야 하는지 파악하는 데 도움이 됩니다.
+
+| 구성 요소 | 정적 SCA | 런타임 SCA |
+|---|---|---|
+| 오픈 소스 라이브러리 | 지원되는 잠금 파일 또는 매니페스트에 나열된 경우 탐지됨. | 서비스가 라이브러리를 로드할 때 탐지됨. |
+| Go 및 .NET 런타임 | 탐지됨. | 탐지됨. |
+| PHP 인터프리터 및 JVM과 같은 기타 언어 런타임 | 탐지되지 않음. | 탐지되지 않음. |
+| 운영 체제 패키지 및 독립형 바이너리 | 탐지되지 않음. | 탐지되지 않음. |
+
+운영 체제 패키지, 컨테이너 이미지 및 운영 체제 패키지 관리자를 통해 설치된 언어 런타임의 취약점을 탐지하려면 [Cloud Security Vulnerabilities][35]를 사용하세요. Cloud Security Vulnerabilities는 [공식 운영 체제 공급업체 패키지만][38] 지원하므로 소스에서 컴파일된 언어 런타임은 탐지하지 않습니다.
+
+## 취약점 인텔리전스 {#vulnerability-intelligence}
+
+SCA 결과의 기반이 되는 취약점 데이터는 Datadog이 탐지하는 취약점, 새로운 취약점이 나타나는 속도, 그리고 우선순위를 지정할 결과를 결정합니다.
+
+### 취약점 소스 {#vulnerability-sources}
+
+Datadog 취약점 데이터베이스의 기반이 되는 소스 범위는 SCA가 탐지할 수 있는 취약점과 새로 게시된 취약점이 결과에 얼마나 빨리 나타나는지를 결정합니다.
 
 Datadog SCA는 여러 퍼블릭 및 프라이빗 소스에서 정보를 가져와 엄선된 독점 데이터베이스를 구축합니다. 이러한 소스에는 [National Vulnerability Database(NVD)][21], [GitHub Advisory Database][22], [osv.dev][23], 생태계별 권고 사항(예: [PyPA's Advisory Database][24], [Global Security Database][25]), [Datadog GuardDog][26], 그리고 Datadog Security Research가 포함됩니다.
 
 Datadog은 이러한 소스를 사용하여 지원되는 생태계 전반에서 알려진 취약성, 악성 패키지 및 새로운 공급망 위협을 식별합니다. 새로운 취약성이 공개된 후 Datadog에 표시되기까지 최대 1시간이 걸리며, 새롭게 발생하는 취약성은 일반적으로 몇 분 이내에 표시됩니다. 악성 패키지는 6시간 이내에 Datadog에 보고됩니다.
 
-## 퍼블릭 익스플로잇 소스 {#public-exploit-sources}
+### 퍼블릭 익스플로잇 소스 {#public-exploit-sources}
 
 Datadog은 CISA(Known Exploited Vulnerabilities Catalog), Exploit-DB, NIST(National Vulnerability Database), GitHub(퍼블릭 익스플로잇 참조 자료) 등 여러 퍼블릭 소스의 데이터를 집계하여 취약성에 알려진 퍼블릭 익스플로잇이 있는지 식별합니다.
 
 Datadog이 이러한 소스 중 하나에서 취약성에 대한 퍼블릭 익스플로잇을 식별하면 문제 해결의 우선순위를 지정할 수 있도록 해당 발견 결과에 플래그를 지정합니다.
+
+### 신규 취약점 {#emerging-vulnerabilities}
+
+신규 취약점은 Security 팀의 즉각적인 주의가 필요한 심각도가 높고 널리 논의되는 취약점입니다. Datadog Security Research는 신규 취약점을 추적하고 영향을 받는 결과를 표시하므로, 다음 스캔을 기다리지 않고도 노출을 찾아 우선순위를 지정할 수 있습니다.
+
+Datadog Security Research는 [신규 취약점 기준][36]에 따라 취약점을 신규 취약점으로 분류합니다. 각 신규 취약점에 대해 Datadog은 다음을 수행합니다:
+
+- [Security Research Feed][37]에 분석, 환경 내 일치 항목 및 수정 지침이 포함된 게시물을 게시합니다.
+- 신규 취약점과 일치하는 SCA 결과를 표시합니다. Vulnerabilities Explorer에서 {{< ui >}}Emerging Vulnerability{{< /ui >}} 패싯을 사용하면 이러한 결과를 필터링할 수 있습니다.
+- 신규 취약점이 귀하의 리포지토리나 서비스에 영향을 미칠 때 {{< ui >}}Vulnerabilities{{< /ui >}} 탭에 배너를 표시합니다.
+
+신규 취약점에 대한 노출을 확인하려면 Security Research Feed에서 취약점 게시물을 열거나 [CVE Explorer][27]에서 해당 CVE를 검색하세요.
 
 ## 주요 기능 {#key-capabilities}
 
@@ -178,7 +209,7 @@ Bits Code 대신 Cursor와 같은 AI 코딩 에이전트를 사용하여 다음�
 
 Cursor 딥 링크를 처리하려면 [VS Code 및 Cursor용 Datadog 확장 프로그램](/ide_plugins/vscode/?tab=cursor)을 설치하세요.
 
-{{< img src="code_security/software_composition_analysis/fix-with-cursor.png" alt="Remediate with AI 대화 상자, Coding 에이전트 탭이 선택되어 있고 Fix with Cursor와 Copy fix prompt 옵션이 표시됨" style="width:100%;" >}}
+{{< img src="code_security/software_composition_analysis/fix-with-cursor.png" alt="Remediate with AI 대화 상자, Coding agent 탭이 선택되어 있고 Fix with Cursor와 Copy fix prompt 옵션이 표시됨" style="width:100%;" >}}
 
 ### PR 게이트로 위험한 변경 사항 자동 차단 {#automatically-block-risky-changes-with-pr-gates}
 
@@ -192,18 +223,18 @@ PR Gates는 개발자가 해당 PR에서 새로운 위반 사항을 발생시킨
 
 ### 라이브러리 인벤토리 관리 {#manage-your-library-inventory}
 
-[라이브러리 인벤토리][8]는 코드베이스 전체에서 탐지된 타사 라이브러리에 대한 가시성을 제공합니다. Datadog은 다음 소스에서 이 정보를 수집합니다.
+[Library Inventory][8]는 코드베이스 전체에서 탐지된 타사 라이브러리에 대한 가시성을 제공합니다. Datadog은 다음 소스에서 이 정보를 수집합니다.
 
 * **Static SCA**: 리포지토리에서 참조되는 모든 라이브러리를 식별합니다.
 * **Runtime SCA**: 런타임에 서비스에서 실제로 로드하고 사용하는 라이브러리를 탐지합니다.
 
-라이브러리 인벤토리를 사용하여 어떤 종속성을 사용하고 있는지, 해당 종속성이 어디에서 사용되는지, 알려진 취약성이나 라이선스 위험이 있는지 파악합니다.
+Library Inventory를 사용하여 어떤 종속성을 사용하고 있는지, 해당 종속성이 어디에서 사용되는지, 알려진 취약성이나 라이선스 위험이 있는지 파악합니다.
 
 인벤토리가 생성되는 방식, Static 및 Runtime 데이터의 차이점, 라이브러리 세부 정보(사용량, 취약성, 라이선스, 버전 및 OpenSSF 점수)를 해석하는 방법에 대한 자세한 내용은 [라이브러리 인벤토리][14]를 참조하세요.
 
 ### 소프트웨어 자재 명세서(SBOM) 내보내기 {#export-a-software-bill-of-materials}
 
-[라이브러리 인벤토리][8]에서 타사 라이브러리의 SBOM을 직접 내보냅니다. 내보낸 SBOM에는 정적 분석(Static SCA) 및 런타임 분석(Runtime SCA)으로 탐지된 라이브러리가 모두 포함되어 있어 소프트웨어 공급망 전체를 하나의 통합된 보기에서 확인할 수 있습니다.
+[Library Inventory][8]에서 타사 라이브러리의 SBOM을 직접 내보냅니다. 내보낸 SBOM에는 정적 분석(Static SCA) 및 런타임 분석(Runtime SCA)으로 탐지된 라이브러리가 모두 포함되어 있어 소프트웨어 공급망 전체를 하나의 통합된 보기에서 확인할 수 있습니다.
 
 Datadog은 다음 SBOM 형식을 지원합니다.
 
@@ -216,11 +247,11 @@ SBOM 생성 및 다운로드 방법에 대한 자세한 내용은 [라이브러�
 
 ### 전체 CVE 카탈로그 탐색 {#explore-the-full-cve-catalog}
 
-[CVE 탐색기][15]를 사용하여 환경에 영향을 미치지 않는 항목을 포함해 Datadog이 추적하는 모든 CVE 및 보안 권고를 검색할 수 있습니다. 이를 통해 새로 공개된 취약성이 발견 결과에 표시되기 전에 해당 취약성에 대한 노출 정도를 평가할 수 있습니다.
+[CVE Explorer][15]를 사용하여 환경에 영향을 미치지 않는 항목을 포함해 Datadog이 추적하는 모든 CVE 및 보안 권고를 검색할 수 있습니다. 이를 통해 새로 공개된 취약성이 발견 결과에 표시되기 전에 해당 취약성에 대한 노출 정도를 평가할 수 있습니다.
 
 Datadog은 스캔된 리포지토리와 서비스에서 탐지된 패키지에 영향을 미치는 CVE를 자동으로 영향받는 항목으로 표시합니다. 스캔되지 않은 자산에는 영향받는 상태가 표시되지 않습니다.
 
-각 CVE에 대해 중증도 점수, 익스플로잇 가용성, EPSS 점수, CISA KEV 상태, 영향을 받는 패키지 및 수정된 버전을 확인할 수 있습니다. 자세한 내용은 [CVE 탐색기][27]를 참조하세요.
+각 CVE에 대해 중증도 점수, 익스플로잇 가용성, EPSS 점수, CISA KEV 상태, 영향을 받는 패키지 및 수정된 버전을 확인할 수 있습니다. 자세한 내용은 [CVE Explorer][27]를 참조하세요.
 
 ### 발견 결과로 티켓 생성 {#create-tickets-from-findings}
 
@@ -234,11 +265,11 @@ Datadog은 스캔된 리포지토리와 서비스에서 탐지된 패키지에 �
 
 <div class="alert alert-info">음소거는 리포지토리(Static SCA)에서 탐지된 라이브러리 취약성 발견 결과에 대해서만 사용할 수 있습니다. 실행 중인 서비스에서만 탐지된 발견 결과는 음소거할 수 없습니다.</div>
 
-음소거된 발견 사항을 복원하려면 세부 정보 패널에서 {{< ui >}}Unmute{{< /ui >}}를 클릭하세요. [취약성 탐색기][11]에서 {{< ui >}}Status{{< /ui >}} 필터를 사용하여 음소거된 발견 결과를 검토할 수도 있습니다.
+음소거된 발견 사항을 복원하려면 세부 정보 패널에서 {{< ui >}}Unmute{{< /ui >}}를 클릭하세요. [Vulnerabilities Explorer][11]에서 {{< ui >}}Status{{< /ui >}} 필터를 사용하여 음소거된 발견 결과를 검토할 수도 있습니다.
 
 ### APM의 라이브러리 취약성 컨텍스트 {#library-vulnerability-context-in-apm}
 
-SCA는 현재 취약성 관련 보안 권고에 해당하는 라이브러리에 플래그를 지정하여 Application Performance Monitoring(APM)이 이미 수집한 정보를 보강합니다. 잠재적으로 취약한 서비스는 [APM 카탈로그][10]의 Security 보기에서 직접 강조 표시됩니다.
+SCA는 현재 취약성 관련 보안 권고에 해당하는 라이브러리에 플래그를 지정하여 Application Performance Monitoring(APM)이 이미 수집한 정보를 보강합니다. 잠재적으로 취약한 서비스는 [APM Catalog][10]의 Security 보기에서 직접 강조 표시됩니다.
 
 ## SCA 보기 이해 {#understanding-sca-views}
 
@@ -296,9 +327,9 @@ Datadog 또는 `code-security.datadog.yaml` 파일에서 `ignore-paths`를 구�
 
 1. [Static SCA 설정][1]을 통해 리포지토리를 스캔합니다.
 2. [Runtime SCA 설정][2]을 통해 실행 중인 서비스에서 로드하는 라이브러리를 탐지합니다.
-3. [취약성 탐색기][11]에서 발견 결과를 검토하고 분류합니다.
+3. [Vulnerabilities Explorer][11]에서 발견 결과를 검토하고 분류합니다.
 4. [PR Gates][16]를 구성하여 위험한 변경 사항이 병합되기 전에 차단합니다.
-5. [CVE 탐색기][15]를 사용하여 새로 공개된 취약성에 대한 노출 정도를 사전에 평가합니다.
+5. [CVE Explorer][15]를 사용하여 새로 공개된 취약성에 대한 노출 정도를 사전에 평가합니다.
 
 ## 추가 자료 {#further-reading}
 
@@ -335,3 +366,7 @@ Datadog 또는 `code-security.datadog.yaml` 파일에서 `ignore-paths`를 구�
 [32]: /ko/bits_ai/bits_code/automations
 [33]: https://app.datadoghq.com/code
 [34]: https://app.datadoghq.com/code/automations
+[35]: /ko/security/cloud_security_management/vulnerabilities/
+[36]: /ko/security/research_feed/#criteria-for-emerging-vulnerabilities
+[37]: /ko/security/research_feed/
+[38]: /ko/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility/
