@@ -6034,11 +6034,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
       weight: 107
+    - name: Version History
+      url: observability_pipelines/configuration/version_history/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_version_history
+      weight: 108
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 108
+      weight: 109
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
