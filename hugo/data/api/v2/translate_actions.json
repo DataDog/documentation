@@ -3304,6 +3304,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update a Nebius Cloud integration account."
   },
+  "ListOpenAICodexIntegrationAccounts": {
+    "description": "List OpenAI Codex integration accounts.",
+    "summary": "List OpenAI Codex integration accounts"
+  },
+  "CreateOpenAICodexIntegrationAccount": {
+    "description": "Create an OpenAI Codex integration account.",
+    "summary": "Create an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Codex integration account."
+  },
+  "DeleteOpenAICodexIntegrationAccount": {
+    "description": "Delete an OpenAI Codex integration account.",
+    "summary": "Delete an OpenAI Codex integration account"
+  },
+  "GetOpenAICodexIntegrationAccount": {
+    "description": "Get an OpenAI Codex integration account.",
+    "summary": "Get an OpenAI Codex integration account"
+  },
+  "UpdateOpenAICodexIntegrationAccount": {
+    "description": "Update an OpenAI Codex integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Codex integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"
@@ -4772,6 +4796,14 @@
   "ListModelLabProjectArtifacts": {
     "description": "List all artifact files for a specific Model Lab project.",
     "summary": "List Model Lab project artifacts"
+  },
+  "RemoveModelLabProjectOwner": {
+    "description": "Remove a user from the owners of a Model Lab project. Removing a user who\nisn't an owner has no effect. The project's creator is always an owner and\ncan't be removed.",
+    "summary": "Remove an owner from a Model Lab project"
+  },
+  "AddModelLabProjectOwner": {
+    "description": "Add a user as an owner of a Model Lab project. The user must belong to the\nproject's organization. The project's creator is always an owner, so adding\nthe creator, or a user who is already an owner, has no effect.\nA project can have at most 50 owners besides its creator.",
+    "summary": "Add an owner to a Model Lab project"
   },
   "UnstarModelLabProject": {
     "description": "Remove the star from a Model Lab project for the current user.",
@@ -8809,6 +8841,24 @@
   "GetOIDCCloudAuthProvider": {
     "description": "Get a Custom OIDC provider by UUID.",
     "summary": "Get a Custom OIDC provider"
+  },
+  "ListTerraformCloudAuthPersonaMappings": {
+    "description": "List all HCP Terraform persona mappings in the organization. Each mapping associates an HCP Terraform workload identity token issuer and `sub` claim pattern with a Datadog user or service account.",
+    "summary": "List HCP Terraform persona mappings"
+  },
+  "CreateTerraformCloudAuthPersonaMapping": {
+    "description": "Create an HCP Terraform persona mapping. The mapping associates a Datadog user or service account with workload identity tokens from an HCP Terraform issuer whose `sub` claim matches `sub_pattern`.\n\nThe response includes the `audience` value to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. The API returns a 409 error if the pattern duplicates an existing mapping, or if it can match the same token as an existing mapping for a different account.",
+    "summary": "Create an HCP Terraform persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request to create an HCP Terraform persona mapping."
+  },
+  "DeleteTerraformCloudAuthPersonaMapping": {
+    "description": "Delete an HCP Terraform persona mapping by ID. Workload identity tokens that matched only this mapping can no longer be exchanged.",
+    "summary": "Delete an HCP Terraform persona mapping"
+  },
+  "GetTerraformCloudAuthPersonaMapping": {
+    "description": "Get an HCP Terraform persona mapping by ID.",
+    "summary": "Get an HCP Terraform persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

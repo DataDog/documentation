@@ -3888,71 +3888,76 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
       weight: 102
+    - name: MicroVMs
+      url: serverless/aws_lambda/lambda_microvm
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_microvm
+      weight: 103
     - name: Durable Functions
       url: serverless/aws_lambda/durable_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_durable_functions
-      weight: 103
+      weight: 104
     - name: Lambda Metrics
       url: serverless/aws_lambda/metrics
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_metrics
-      weight: 104
+      weight: 105
     - name: Distributed Tracing
       url: serverless/aws_lambda/distributed_tracing
       identifier: serverless_distributed_tracing
       parent: serverless_aws_lambda
-      weight: 105
+      weight: 106
     - name: Log Collection
       url: serverless/aws_lambda/logs
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
-      weight: 106
+      weight: 107
     - name: Remote Instrumentation
       url: serverless/aws_lambda/remote_instrumentation
       identifier: serverless_aws_lambda_remote_instrumentation
       parent: serverless_aws_lambda
-      weight: 107
+      weight: 108
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 108
+      weight: 109
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 109
+      weight: 110
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 110
+      weight: 111
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 111
+      weight: 112
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 112
+      weight: 113
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 113
+      weight: 114
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 114
+      weight: 115
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 115
+      weight: 116
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless_aws
@@ -6777,111 +6782,116 @@ menu:
       parent: feature_flags
       identifier: feature_flags_concepts
       weight: 3
-    - name: Environments
-      url: feature_flags/concepts/environments
+    - name: Approvals
+      url: feature_flags/concepts/approvals
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_environments
+      identifier: feature_flags_concepts_approvals
       weight: 301
-    - name: Variants and Flag Types
-      url: feature_flags/concepts/variants_and_flag_types
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_variants
-      weight: 302
-    - name: Evaluation Context
-      url: feature_flags/concepts/evaluation_context
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_evaluation_context
-      weight: 303
-    - name: Targeting Rules and Filters
-      url: feature_flags/concepts/targeting_rules
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_targeting_rules
-      weight: 304
-    - name: Targeting Attributes
-      url: feature_flags/concepts/targeting_attributes
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_targeting_attributes
-      weight: 305
-    - name: Evaluation Tester
-      url: feature_flags/concepts/evaluation_tester
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_evaluation_tester
-      weight: 306
-    - name: Scheduled Rollouts
-      url: feature_flags/concepts/scheduled_rollouts
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 307
-    - name: Saved Filters
-      url: feature_flags/concepts/saved_filters
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_saved_filters
-      weight: 308
-    - name: Traffic Splitting and Randomization
-      url: feature_flags/concepts/traffic_splitting
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_traffic_splitting
-      weight: 309
-    - name: Experiments
-      url: feature_flags/concepts/experiments
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_experiments
-      weight: 310
-    - name: Flag Evaluation and Experimentation Opt-Out
-      url: feature_flags/concepts/opt_out
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_opt_out
-      weight: 311
-    - name: Distribution Channels
-      url: feature_flags/concepts/distribution_channels
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_distribution_channels
-      weight: 312
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 313
-    - name: Monthly Flag Configuration Requests
-      url: feature_flags/concepts/monthly_flag_configuration_requests
+      weight: 302
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_mfcr
-      weight: 314
-    - name: Flag History
-      url: feature_flags/concepts/flag_history
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 303
+    - name: Environments
+      url: feature_flags/concepts/environments
       parent: feature_flags_concepts
-      identifier: feature_flags_history
-      weight: 315
+      identifier: feature_flags_concepts_environments
+      weight: 304
+    - name: Evaluation Context
+      url: feature_flags/concepts/evaluation_context
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_context
+      weight: 305
+    - name: Evaluation Results
+      url: feature_flags/concepts/evaluation_results
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_results
+      weight: 306
+    - name: Evaluation Tester
+      url: feature_flags/concepts/evaluation_tester
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_tester
+      weight: 307
+    - name: Experiments
+      url: feature_flags/concepts/experiments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_experiments
+      weight: 308
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
+      weight: 309
+    - name: Flag Evaluation and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 310
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 311
+    - name: Flag Key Obfuscation
+      url: feature_flags/concepts/flag_key_obfuscation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_key_obfuscation
+      weight: 312
+    - name: Monthly Flag Configuration Requests
+      url: feature_flags/concepts/monthly_flag_configuration_requests
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_mfcr
+      weight: 313
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 314
+    - name: Saved Filters
+      url: feature_flags/concepts/saved_filters
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_saved_filters
+      weight: 315
+    - name: Scheduled Rollouts
+      url: feature_flags/concepts/scheduled_rollouts
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_scheduled_rollouts
       weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
       weight: 317
-    - name: Flag Key Obfuscation
-      url: feature_flags/concepts/flag_key_obfuscation
+    - name: Targeting Attributes
+      url: feature_flags/concepts/targeting_attributes
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_flag_key_obfuscation
+      identifier: feature_flags_concepts_targeting_attributes
       weight: 318
-    - name: Permissions and Access Control
-      url: feature_flags/concepts/permissions
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_permissions
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 319
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 320
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
       weight: 321
-    - name: Approvals
-      url: feature_flags/concepts/approvals
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_approvals
-      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 323
+      weight: 322
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -9063,11 +9073,16 @@ menu:
       identifier: ai_guard_sensitive_data_redaction
       parent: ai_guard
       weight: 4
+    - name: Control Evaluations in Code
+      url: /security/ai_guard/middleware/
+      identifier: ai_guard_middleware
+      parent: ai_guard
+      weight: 5
     - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 5
+      weight: 6
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security

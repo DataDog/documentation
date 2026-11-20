@@ -137,7 +137,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS, GitHub, HCP Terraform, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
@@ -394,6 +394,10 @@
   "on-call-paging": {
     "name": "On-Call Paging",
     "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
+  },
+  "openai-codex-integration": {
+    "name": "OpenAI Codex Integration",
+    "description": "Manage your Datadog OpenAI Codex integration accounts and account resources\ndirectly through the Datadog API. See the\n[OpenAI Codex integration page](https://docs.datadoghq.com/integrations/openai-codex/) for\nmore information."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
