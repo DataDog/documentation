@@ -195,7 +195,7 @@ Status updates can take up to an hour to appear.
 | Capability | What it enables | How to enable |
 |---|---|---|
 | Remediation cases | Assign owners, create cases, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
-| Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Third-party tickets][14]. |
+| Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Create a case or ticket](#create-a-case-or-ticket). |
 | AI summary | The **Know before you remediate** summary. | Available by default. Not available for organizations that opted out of AI features or have HIPAA compliance enabled. |
 | Fix with Bits | AI-generated pull requests from a remediation. | [Set up Bits Code][8], connect your GitHub repositories, and turn on the **AI Products** toggle in [AI Credits admin controls][16]. |
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
@@ -218,7 +218,6 @@ Status updates can take up to an hour to appear.
 [10]: /source_code/
 [11]: https://app.datadoghq.com/security/issues?si-tab=remediation
 [13]: /account_management/rbac/permissions/
-[14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /mcp_server/setup/
 [16]: /account_management/billing/ai_credits/#admin-controls
 [17]: /integrations/jira/
