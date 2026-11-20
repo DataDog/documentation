@@ -119,7 +119,9 @@ The outline color of a resource and the color of a connection line show their st
 - **Red**: Critical
 - **Orange**: Degraded
 - **Green**: A Healthy connection
-- **No color**: A Healthy resource, or an Unknown resource or connection. To tell a Healthy resource from an Unknown one, hover over it or find it in the **Related resources** list in the details pane.
+- **No color**: A Healthy resource, or an Unknown resource or connection
+
+To tell a Healthy resource from an Unknown one, hover over it or find it in the **Related resources** list in the details pane.
 
 Within each group, resources with the most severe status appear first.
 
