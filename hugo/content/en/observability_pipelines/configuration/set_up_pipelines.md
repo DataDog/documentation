@@ -53,7 +53,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Select and set up a [log source][3]. To add more sources, see [Add another source](#add-another-log-source).
 1. Select and set up [destinations][5] for your processed logs.
 1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for multiple sources:
-    1. Click a source and select the {{< ui >}}Pre-processor{{< /ui >}} tab in the panel.
+    1. Click a source and select the {{< ui >}}Source-Level Processors{{< /ui >}} tab in the panel.
     1. Add [processors][4].
     - See [Per-source and shared processors][7] for more information.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
@@ -102,7 +102,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Select and set up a [metrics source][3]. To add more sources, see [Add another source](#add-another-metrics-source).
 1. Select and set up [destinations][5] for your processed metrics.
 1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for multiple sources:
-    1. Click a source and select the {{< ui >}}Pre-processor{{< /ui >}} tab in the panel.
+    1. Click a source and select the {{< ui >}}Source-Level Processors{{< /ui >}} tab in the panel.
     1. Add [processors][4].
     - See [Per-source and shared processors][7] for more information.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
