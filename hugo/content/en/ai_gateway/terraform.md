@@ -33,12 +33,10 @@ The [Datadog Terraform provider][1] manages AI Gateway configuration, so you can
 
 This page shows how to onboard workloads with one Terraform module, and how to manage data capture. A workload is one application or service that sends LLM requests through AI Gateway and belongs to one [Datadog team][11].
 
-<!-- TODO: Replace "the first Datadog provider version that includes AI Gateway resources" and <PROVIDER_VERSION> with the released version number (expected 4.31.0). -->
-
 ## Prerequisites
 
 - AI Gateway Preview access for your Datadog organization.
-- Terraform 1.3 or later, and the first Datadog provider version that includes AI Gateway resources.
+- Terraform 1.3 or later, and Datadog provider 4.31.0 or later.
 - A Datadog [API key and application key][12]. While AI Gateway is in Preview, its permissions can't be added to a scoped application key, so use an unscoped key. The key's owner needs the `ai_gateway_config_read` and `ai_gateway_config_write` permissions and must be able to read Datadog teams. In CI, use a [service account's][13] key.
 - At least one [provider](/ai_gateway/providers/#add-a-provider) in AI Gateway. Note its slug.
 - An invite-only Datadog team for each workload. Note each team's handle.
@@ -55,7 +53,7 @@ terraform {
   required_providers {
     datadog = {
       source  = "DataDog/datadog"
-      version = ">= <PROVIDER_VERSION>"
+      version = ">= 4.31.0"
     }
   }
 }
