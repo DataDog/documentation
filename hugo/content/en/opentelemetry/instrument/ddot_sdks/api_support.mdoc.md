@@ -59,7 +59,7 @@ further_reading:
       tag: 'Blog'
 ---
 
-Use the OpenTelemetry APIs to add custom instrumentation with any Datadog SDK. This is the recommended approach, rather than Datadog-specific APIs, whenever an equivalent OpenTelemetry API exists. With DDOT SDKs (Java, .NET, Node.js, Python, and Go), the resulting telemetry follows OpenTelemetry Semantic Conventions and is exported over OTLP. The Datadog SDKs for Ruby, PHP, and Rust also support the OpenTelemetry APIs, but they aren't DDOT SDKs.
+Use the OpenTelemetry Traces, Metrics, and Logs APIs to add custom instrumentation with any Datadog SDK. Select a signal in the **Signal** filter to see the instructions for each API. This is the recommended approach, rather than Datadog-specific APIs, whenever an equivalent OpenTelemetry API exists. With DDOT SDKs (Java, .NET, Node.js, Python, and Go), the resulting telemetry follows OpenTelemetry Semantic Conventions and is exported over OTLP. The Datadog SDKs for Ruby, PHP, and Rust also support the OpenTelemetry APIs, but they aren't DDOT SDKs.
 
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
