@@ -328,6 +328,18 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
+### Real execution plans are missing with the warning "LAST_QUERY_PLAN_STATS is off in database"
+
+Real execution plan collection (`query_metrics.collect_real_plans`) covers every query only when `LAST_QUERY_PLAN_STATS` is on in the database, or trace flag 2451 is on for the server. With the setting off, SQL Server 2022 and 2025 keep actual plans for some queries, and SQL Server 2019 doesn't keep any. The Agent collects the real plans that SQL Server keeps, and reports the databases where the setting is off. This warning, and the `last-query-plan-stats-disabled` result of the Agent's `diagnose` command, are advisory.
+
+The Agent never changes this setting. For full coverage, run the following command in each database listed in the warning:
+
+```SQL
+ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;
+```
+
+For more information, see [Collecting Real Execution Plans on SQL Server][15].
+
 ## Known limitations
 
 ### SQL Server 2012
@@ -378,3 +390,4 @@ Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: /database_monitoring/guide/sql_real_execution_plans/#troubleshooting
