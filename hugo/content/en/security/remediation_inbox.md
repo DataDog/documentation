@@ -97,12 +97,12 @@ The status of a remediation follows the status of its remediation case. See the 
 
 ### Remediation table
 
-Each row is one remediation. From left to right, each row answers four questions:
+Each row is one remediation, with the following columns:
 
-- **What is the fix?** The change to make, such as the package or image to update and the target version.
-- **What does it resolve?** The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
-- **What does it take, and who owns it?** Where the fix applies (repository and files) and the code owners or teams responsible for it.
-- **Where does it stand?** The assignee, the remediation case or synced ticket, and any linked pull requests.
+- **Remediation**: The change to make, such as the package or image to update and the target version.
+- **Impact**: The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
+- **Scope**: Where the fix applies (repository and files) and the code owners or teams responsible for it.
+- **Tracking**: The assignee, the remediation case or synced ticket, and any linked pull requests.
 
 ### Filter remediations
 
