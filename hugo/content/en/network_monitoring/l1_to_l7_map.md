@@ -100,13 +100,13 @@ The source and the destination must be the same type of resource, such as two se
 Between the two stacks, the map shows CNM and Network Path data as separate lines:
 
 - **Network connections**: Traffic that CNM observes between the source and the destination.
-- **Network path**: The route that traffic takes, from Network Path. Network Path runs _tests_ from a host to a destination and records the route of each test. On the map, the path starts at a host that the source runs on. It ends at a host that the destination runs on, or at a destination endpoint. Each _hop_ between them is a router or other network device that traffic passes through.
+- **Network path**: The route from a host that the source runs on to a host that the destination runs on, or to a destination endpoint. The map shows each {{< tooltip text="hop" tooltip="A router or other network device that traffic passes through on the way to the destination." >}} along the route, from Network Path {{< tooltip text="tests" tooltip="Network Path runs tests from a host to a destination and records the route that each test takes." >}}.
 
 For services, containers, and pods, the map shows a path only when the test's destination is a host that the destination resource runs on. Paths to other destinations, such as a load balancer in front of the destination, do not appear.
 
 When Network Path tests more than one pair of hosts, the map shows the least healthy path. The other paths collapse into a **+N more** item. The least healthy path does not necessarily run between the least healthy hosts in the two stacks.
 
-The map groups hops in the same autonomous system (AS). An AS is a network that one organization operates, such as an internet service provider or a cloud provider. Each line between two hops or AS groups is a _network path segment_.
+The map groups hops in the same {{< tooltip text="autonomous system (AS)" tooltip="A network that one organization operates, such as an internet service provider or a cloud provider." >}}. Each line between two hops or AS groups is a _network path segment_.
 
 ### Map status and network signals
 
@@ -222,8 +222,10 @@ Hover over any item on the map to see its summary. The actions available from th
 The summary for a resource shows its type, status, and available metrics. In the summary, Healthy appears as **OK** and Degraded appears as **WARNING**. From the summary, you can:
 
 - Click **Filter** to narrow the map to that resource, called the _filtered resource_, and its related resources, such as the pod and host that it runs on. The explored resource stays at the center of the map, and the details pane shows the filtered resource. To clear the filter, click the **X** next to **Filtered to** at the top of the map.
-- Click **Explore** to make that resource the explored resource. The map redraws around it. Endpoints do not have this action. To investigate a connection to an endpoint, click **Add as destination** instead.
+- Click **Explore** to make that resource the explored resource. The map redraws around it.
 - For an upstream resource, click **Add as source**. For a downstream resource, click **Add as destination**. The map switches to Connection View for the connection between that resource and the explored resource.
+
+**Note**: Endpoints do not have the **Explore** action. To investigate a connection to an endpoint, click **Add as destination**.
 
 {{< img src="network_performance_monitoring/l1_l7_map/resource-hover-summary.png" alt="A hover summary for a container, showing its status, CPU, memory, and packet drops, with Filter and Explore buttons" >}}
 
