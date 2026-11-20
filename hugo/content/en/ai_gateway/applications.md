@@ -450,8 +450,8 @@ Team selection affects matching [budgets][applications-4], [rate limits][applica
 ## Verify your application
 
 1. In Claude Code or Codex, send `Reply with exactly: Gateway connected.` The SDK examples send the same prompt. Look for `Gateway connected.` in a successful response.
-2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][applications-3] and select the time range containing the request.
-3. Follow the {{< ui >}}Traces{{< /ui >}} link to open the request in Agent Observability. The examples set the application to `claude-code`, `codex`, or `my-application`.
+2. Open [Agent Observability traces][applications-traces] and select the time range containing the request.
+3. Filter by the application name. The examples set the application to `claude-code`, `codex`, or `my-application`.
 4. Confirm the caller, served model, and provider. For a routing rule, confirm the destination that served the request.
 
 ## Troubleshoot client connections
@@ -477,7 +477,7 @@ See [Gateway troubleshooting][applications-7] for Gateway error codes.
 [12]: /getting_started/site/
 [applications-1]: /ai_gateway/getting_started/
 [applications-2]: /ai_gateway/applications/#authenticate-requests
-[applications-3]: https://app.datadoghq.com/llm/gateway
+[applications-traces]: https://app.datadoghq.com/llm/traces
 [applications-4]: /ai_gateway/spend_controls/#set-budgets
 [applications-5]: /ai_gateway/spend_controls/#set-rate-limits
 [applications-6]: /ai_gateway/security/#configure-data-capture

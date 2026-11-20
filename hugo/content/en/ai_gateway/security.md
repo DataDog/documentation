@@ -33,7 +33,8 @@ Start with an attachment on a test routing rule before applying a policy across 
 ### Prerequisites
 
 - Complete the [AI Gateway prerequisites][ai_guard-2] and configure an accessible model or routing rule.
-- To manage attachments, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions.
+- AI Guard for AI Gateway is enabled per organization during the Preview. If {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} is not visible, contact your Customer Success Manager.
+- To manage attachments, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions. To attach a policy to a routing rule, you also need View and Edit access to that rule.
 - To select a policy, have **AI Guard View** (`ai_guard_view`). To create or edit a policy, also have **AI Guard Write** (`ai_guard_write`). See [AI Guard permissions][ai_guard-3].
 - The **same credential used to call AI Gateway** must allow both **AI Gateway Usage** (`ai_gateway_usage`) and **AI Guard Evaluate** (`ai_guard_evaluate`). Both the calling user or service account and the credential scope must permit these actions. An administrator's permissions do not grant evaluation access to an application's credential.
 
@@ -56,9 +57,9 @@ A route-specific attachment replaces the organization default for that route. Th
    3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][ai_guard-1].
    4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
 4. Under {{< ui >}}AI Gateway Action{{< /ui >}}, explicitly select {{< ui >}}Monitor only{{< /ui >}} or {{< ui >}}Block unsafe{{< /ui >}}. The form defaults to {{< ui >}}Block unsafe{{< /ui >}}.
-5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target, policy, and action, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
+5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target and policy, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
 
-To update an attachment, open it, change its settings, and click {{< ui >}}Save changes{{< /ui >}}. Allow configuration changes to propagate before checking fresh requests.
+To change an attachment, attach a policy to the same target again. The new attachment replaces the previous one. Allow configuration changes to propagate before checking fresh requests.
 
 ### Choose an action
 
@@ -69,7 +70,7 @@ To update an attachment, open it, change its settings, and click {{< ui >}}Save 
 
 For an attachment created in the AI Gateway UI, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
 
-Existing attachments can have different saved sensitive-data or evaluator-error settings. Editing an attachment without changing its action preserves those settings. Changing its action applies the behavior described above.
+Attachments created outside the AI Gateway UI can have different saved sensitive-data or evaluator-error settings. Attaching the policy again in the UI applies the behavior described above.
 
 In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See the [Troubleshooting](#troubleshooting) section.
 
@@ -119,7 +120,7 @@ Use synthetic content and an isolated routing rule. Avoid changing an organizati
 5. Change the last message to `Reply briefly to gatewayguardtest.` and repeat the request. Confirm that the model request continues and prompt evaluation completes with `DENY`. A skipped or failed evaluation does not verify monitoring.
 6. Change the attachment action to **Block unsafe**, save, and repeat the keyword request. For this Chat Completions request, expect HTTP `422` and `guardrail_violation` in both the `X-Ai-Gateway-Error-Code` header and the response's `error.code`. Confirm a completed prompt denial in the matching span.
 7. Repeat the harmless request and confirm it still succeeds. This distinguishes selective enforcement from a credential, model-access, or evaluator failure.
-8. Remove the temporary rule and restore the test attachment's original configuration.
+8. Remove the temporary rule. To return the target to its previous behavior, attach the policy again with the original action.
 
 Match the route, caller, and timestamp when reviewing evaluation evidence. For streaming, Responses, and Anthropic traffic, verify prompt coverage separately; this procedure does not prove output evaluation for those request types.
 

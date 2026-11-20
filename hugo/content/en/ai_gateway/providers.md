@@ -55,11 +55,11 @@ Integration credentials remain separate from the Datadog credential the applicat
 
 ## Add a provider
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][providers-5] and click {{< ui >}}New Provider{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][providers-5] and click {{< ui >}}New provider account{{< /ui >}}.
 2. In {{< ui >}}Details{{< /ui >}}, select the provider's integration account and complete its connection settings. See the [Choose a provider account](#choose-a-provider-account) section.
 3. Enter a display name and a unique slug, such as `production-openai`. The slug becomes part of every direct model request. The connected account and slug cannot be changed after creation.
-4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. Gateway automatically enables discovered models. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
-5. Review the cost multiplier and the prices in the [Model Catalog][providers-6]. A custom model price takes precedence over the provider multiplier. Confirm pricing before relying on spend reporting or budgets.
+4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. Gateway enables discovered models on the provider automatically. Callers can use them only after you grant access in the {{< ui >}}Access{{< /ui >}} step. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
+5. Review the cost multiplier. It scales automatically detected prices, and a custom model price takes precedence over it. After you create the provider, confirm prices in [{{< ui >}}Models{{< /ui >}} > {{< ui >}}Model catalog{{< /ui >}}][providers-6] before relying on spend reporting or budgets.
 6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. See [Control model access][providers-7].
 7. In {{< ui >}}Review{{< /ui >}}, check the account, slug, models, and access assignments, then click {{< ui >}}Create provider{{< /ui >}}.
 8. Open the saved provider and [verify a model request](#verify-the-connection).
@@ -127,14 +127,14 @@ AI Gateway discovers a provider's models from its model list. Add a model manual
 
 1. In the provider's {{< ui >}}Models{{< /ui >}} stage, under {{< ui >}}Manually add model{{< /ui >}}, click {{< ui >}}Add model{{< /ui >}}.
 2. Enter a unique {{< ui >}}Model ID{{< /ui >}} within the provider.
-3. Enter {{< ui >}}Provider model ID{{< /ui >}} if it differs from the Model ID. For Vertex AI, the field is {{< ui >}}Provider resource path{{< /ui >}} and requires a full resource path, such as:
+3. Enter {{< ui >}}Provider model ID{{< /ui >}} if it differs from the Model ID. For Vertex AI, the field is {{< ui >}}Provider resource path{{< /ui >}} and takes the publisher model path. Do not include the project or location, because AI Gateway adds them from the provider's connection settings:
 
    ```text
-   projects/<PROJECT_ID>/locations/<LOCATION>/publishers/google/models/<PUBLISHER_MODEL_ID>
+   publishers/google/models/<PUBLISHER_MODEL_ID>
    ```
 
 4. Select the supported operations that the upstream model accepts, then save the provider.
-5. Check the model's operations, enabled state, and price in the Model Catalog. Send a request to verify the mapping.
+5. Check the model's enabled state in the provider's {{< ui >}}Models{{< /ui >}} section and its price in the Model catalog. Send a request to verify the mapping.
 
 A manual entry does not grant upstream model access or Gateway caller access. Configure both before testing it.
 

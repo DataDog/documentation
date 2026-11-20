@@ -30,7 +30,7 @@ Adding a resource to another access policy does not remove access granted by the
 ## Access policies
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Model access{{< /ui >}}][8] and create a policy.
-2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias and that rule's direct targets.
+2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias. Callers reach the rule's destinations through the alias only; the rule does not grant direct `<PROVIDER_SLUG>/<MODEL_ID>` access to them.
 3. Choose the users, teams, and service accounts, and their access level:
    - **No access**: Cannot call the policy's models or routing rules.
    - **Runner**: Can call the policy's models and routing rules.
@@ -61,7 +61,7 @@ Use access policies to control which callers can request higher reasoning effort
 
 ### Configure the policy
 
-1. Open [AI Gateway > Policies > Access policies][reasoning-2].
+1. Open [AI Gateway > Policies > Model access][reasoning-2].
 2. Create or edit a policy.
 3. Select the models or routing rules the policy covers.
 4. Grant the intended users, teams, or service accounts {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access.

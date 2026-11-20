@@ -17,10 +17,10 @@ Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_star
 
 A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, week, or month. It can block requests when the limit is reached.
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New Budget{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] and click {{< ui >}}New budget{{< /ui >}}.
 2. Choose the traffic to match. Select {{< ui >}}Everything{{< /ui >}} to track all AI Gateway spend, or match a user, team, model, provider, or custom tag. Send a custom tag in an `x-dd-tag-<KEY>: <VALUE>` request header, for example `x-dd-tag-ai_agent: claudecode`. A request matches the budget when it includes every filter you selected. The form estimates historical matches and links to the matching spans in Agent Observability.
 3. Enter a spend limit and select a {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}}, or {{< ui >}}Monthly{{< /ui >}} window. The window follows the UTC calendar.
-4. Optional: Select {{< ui >}}Track existing usage for current period{{< /ui >}} if available for the selected budget configuration. This includes matching, priced usage already recorded in Agent Observability during the current window, including usage from before budget creation. After you save the budget, verify its starting spend. Requests still in progress or usage not yet recorded might be absent from that initial amount.
+4. Review {{< ui >}}Track existing usage for current period{{< /ui >}}, which is selected by default when it is available for the budget configuration. It includes matching, priced usage already recorded in Agent Observability during the current window, including usage from before budget creation. After you save the budget, verify its starting spend. Requests still in progress or usage not yet recorded might be absent from that initial amount. Clear the option to count only spend from after you create the budget.
 5. Choose an enforcement mode and a warning threshold, then save the budget.
 
 | Enforcement mode | Behavior |
@@ -32,7 +32,7 @@ When a budget is scoped to a [Datadog team][13], it applies to requests from tha
 
 Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
 
-The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. By default, a budget counts matching spend after you create it. Use {{< ui >}}Track existing usage for current period{{< /ui >}} when available to include earlier matching usage in the budget's current-period spend. Use the Team, User, Model, Provider, and Tag filters to review coverage.
+The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. A budget created in the UI includes earlier matching usage from the current period when {{< ui >}}Track existing usage for current period{{< /ui >}} is selected, which is the default. A budget created through the API counts only spend from after you create it unless you set `track_existing`. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
 ### Budget prerequisites
 
@@ -53,7 +53,7 @@ A budget's selector defines both the traffic it matches and how it groups spendi
 | `provider` | The resolved destination provider. |
 | `tag:<KEY>` | A custom request tag, such as `tag:project` for the header `x-dd-tag-project`. |
 
-Every selector entry must match. Within an entry, `values` accepts any of the listed values; omit it to accept any present value for that dimension.
+Every selector entry must match. Within an entry, `values` accepts any of the listed values. With `per_value: true`, omit `values` to accept any present value for that dimension. An entry with neither `values` nor `per_value: true` is ignored, and a selector with no remaining entries matches all traffic.
 
 Set `per_value` to control how the allowance is shared:
 
@@ -103,7 +103,7 @@ To include earlier matching usage from the same accounting window, set `track_ex
 
 Historical usage cannot be imported for selectors that depend on tags removed or replaced in recorded spans, such as `tag:env` or `tag:ml_app`. This also applies to custom tag keys beginning with `gateway.`. Use application-specific custom tags, such as `project`, for historical accounting.
 
-The API also rejects empty filter values and per-value lists with values that recorded spans cannot distinguish, such as `Prod` and `prod`. Team selectors require complete historical team accounting data. If validation cannot confirm these requirements, the API returns HTTP `400` for `track_existing` before saving the create or update. The field is not silently ignored.
+The API also rejects empty filter values and per-value lists with values that recorded spans cannot distinguish, such as `Prod` and `prod`. Team selectors require complete historical team accounting data. If validation cannot confirm these requirements, the API returns HTTP `400` for `track_existing` before saving the create or update. This check applies to selector-based budgets. In other cases, a failed import still returns success and the budget starts at zero, so verify the starting spend.
 
 ### Inspect budget instances
 
@@ -165,11 +165,11 @@ A request counts against every matching budget. An available personal allowance 
 Rate limits are in Preview. To enable them for your organization, contact your Customer Success Manager.
 {{< /callout >}}
 
-A rate limit caps matching AI Gateway requests, input tokens, output tokens, or spend over a rolling window. Use rate limits to protect provider quota from runaway agents or scripts, share capacity between teams, or cap traffic to an expensive model. [Budgets](/ai_gateway/spend_controls/#set-budgets) cap spend over a day, week, or month; rate limits cap traffic over rolling windows from one minute to 24 hours.
+A rate limit caps matching AI Gateway requests, input tokens, output tokens, or spend over a rolling window. Use rate limits to protect provider quota from runaway agents or scripts, share capacity between teams, or cap traffic to an expensive model. [Budgets](/ai_gateway/spend_controls/#set-budgets) cap spend over a day, week, or month; rate limits cap traffic over a rolling minute. Windows longer than a minute, up to 24 hours, are enabled per organization during the Preview. To request them, contact your Customer Success Manager.
 
 ### Create a rate limit
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Rate limits{{< /ui >}}][15] and click {{< ui >}}New Rate Limit{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Rate limits{{< /ui >}}][15] and click {{< ui >}}New rate limit{{< /ui >}}.
 2. Choose the traffic to match. Leave the scope empty to cover all AI Gateway traffic in your organization, or match a user, team, model, provider, or custom tag. Send a custom tag in an `x-dd-tag-<KEY>: <VALUE>` request header. A request matches the rate limit when it includes every filter you selected.
 3. Set at least one limit: {{< ui >}}Requests / minute{{< /ui >}}, {{< ui >}}Input tokens / minute{{< /ui >}}, or {{< ui >}}Output tokens / minute{{< /ui >}}.
 4. Choose a mode, then save the rate limit.
@@ -223,7 +223,7 @@ The rate limit list shows rolling-minute usage and status for each rule. It also
 | Limiting | An Enforce mode rate limit is full and rejects new requests. |
 | Would limit | An Alert mode rate limit is full. Requests continue. |
 
-The list also includes two summary rows. **Untracked** is traffic that no Enforce mode rate limit matches. **Total** is all AI Gateway traffic in your organization.
+When at least one rate limit exists, the list also includes an **Untracked** row for traffic that no Enforce mode rate limit matches.
 
 ### Rate limit prerequisites
 
@@ -232,7 +232,7 @@ The list also includes two summary rows. **Untracked** is traffic that no Enforc
 - [Datadog API credentials][rate_limits-3] for the API examples. The application key's principal and scope must allow the required permissions.
 - A usable model price for enforced spend limits. Check the model in the [Model Catalog][rate_limits-4].
 
-For the basic UI workflow and response headers, see [Set rate limits][rate_limits-5]. Longer windows and spend limits are configured through the [AI Gateway API][rate_limits-6]. The UI supports shared or per-value allowances for per-minute request and token limits.
+For the basic UI workflow and response headers, see [Set rate limits][rate_limits-5]. Longer windows and spend limits are configured through the [AI Gateway API][rate_limits-6]. Longer windows must be enabled for your organization. Without them, the API returns HTTP `400` with `rate_limit_windows_disabled`. The UI supports shared or per-value allowances for per-minute request and token limits.
 
 ### Choose the metric and window
 
@@ -266,7 +266,7 @@ Each metric and window pair must be unique. If a metric has more than one window
 Use `selector` to define matching traffic and whether it shares capacity:
 
 - `dim` identifies `user_id`, `team_id`, `model`, `provider`, or a custom `tag:<KEY>`.
-- `values` restricts the dimension to the listed values. Omit it to match any present value.
+- `values` restricts the dimension to the listed values. With `per_value: true`, omit it to match any present value. An entry with neither `values` nor `per_value: true` is ignored.
 - `per_value: false` pools traffic into a shared allowance.
 - `per_value: true` gives each distinct matching value its own allowance.
 
@@ -280,7 +280,7 @@ Your organization can have up to 100 active rules. A per-value rule counts as on
 
 #### Create per-project allowances
 
-The following example gives each project 60 requests per minute and 1,000 requests per hour. It starts in Alert mode so requests continue while you review the scope. Replace the credentials before running it. The site selector updates the API host.
+The following example gives each project 60 requests per minute. It starts in Alert mode so requests continue while you review the scope. Replace the credentials before running it. The site selector updates the API host.
 
 ```shell
 curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/rate-limits" \
@@ -294,14 +294,13 @@ curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/
         "name": "Per-project request allowance",
         "selector": [{"dim": "tag:project", "per_value": true}],
         "requests_per_minute": 60,
-        "window_limits": [{"metric": "requests", "window": "1h", "amount": 1000}],
         "mode": "ALERT"
       }
     }
   }'
 ```
 
-Send `x-dd-tag-project: <PROJECT_NAME>` on inference requests. To pool all projects into one allowance instead, use `per_value: false`.
+Send `x-dd-tag-project: <PROJECT_NAME>` on inference requests. To pool specific projects into one allowance instead, list them in `values` and set `per_value: false`. If longer windows are enabled for your organization, add `window_limits`, for example `[{"metric": "requests", "window": "1h", "amount": 1000}]`.
 
 ### Choose a mode and enforcement behavior
 
@@ -386,7 +385,7 @@ AI Gateway uses model prices to estimate request cost, report spend, and enforce
 
 ### Review a model's applied price
 
-1. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][pricing-3].
+1. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Model catalog{{< /ui >}}][pricing-3].
 2. Find the model and its provider account. The same model can have a different price on another provider account.
 3. Review its pricing status. Click {{< ui >}}Set Pricing{{< /ui >}} for a model without a price. For a model with an automatic price or existing override, click {{< ui >}}Override{{< /ui >}}.
 4. In {{< ui >}}Model pricing{{< /ui >}}, review the {{< ui >}}Applied price{{< /ui >}} and the available rate tables. Check input, output, cache-read, and cache-write rates, and any context-size or service-tier conditions.
@@ -409,7 +408,7 @@ Custom rates are used as entered. The provider's cost multiplier does not also a
 
 #### Set a custom price with the API
 
-Use the [AI Gateway API][pricing-4] to read or change pricing for a model on a specific provider account. `<PROVIDER_ID>` is the provider account's API ID, not its request slug. Get it from the matching provider's `data[].id` in the `GET /api/v2/providers` response. `<MODEL_ID>` is the canonical model ID within that provider. URL-encode it as a path component if it contains `/` or other reserved characters.
+Use the [AI Gateway API][pricing-4] to read or change pricing for a model on a specific provider account. `<PROVIDER_ID>` is the provider account's API ID, not its request slug. Get it from the matching provider's `data[].id` in the `GET /api/v2/providers` response. `<MODEL_ID>` is the canonical model ID within that provider. URL-encode it as a path component if it contains reserved characters. Model IDs that contain `/` are not supported by this endpoint.
 
 Replace the identifiers, credentials, and rate placeholders before running this example. Enter each rate as a number in USD per million tokens. The site selector updates the API host:
 

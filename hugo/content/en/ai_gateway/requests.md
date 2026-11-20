@@ -292,7 +292,7 @@ Read the corresponding answer in the response's `answers` array. The question's 
 ### Call System One
 <!-- vale Datadog.headings = YES -->
 
-Use System One with a configured Baseten or compatible custom endpoint that supports this operation. System One uses `state` and a map of named `questions`; it has a different payload from OpenAI Decisions.
+Use System One with a configured Baseten, TypeSafe, or compatible custom endpoint that supports this operation. System One uses `state` and a map of named `questions`; it has a different payload from OpenAI Decisions.
 
 ```shell
 curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/systemone" \
