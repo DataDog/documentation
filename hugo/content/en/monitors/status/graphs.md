@@ -13,7 +13,7 @@ further_reading:
   text: "Set alert conditions"
 ---
 
-<div class="alert alert-info">Status Graphs is part of the <a href="/monitors/status/status_page">provisional monitor status page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
+<div class="alert alert-info">Status Graphs is part of the <a href="/monitors/status/status_page">monitor status page</a>. If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation.</div>
 
 ## Overview
 
@@ -67,6 +67,8 @@ To filter the view for an individual group, hover over the group title and click
 
 When investigating past status changes, the color dot next to the group title indicates the group's current status.
 
+To understand why evaluated values differ from the source data, or to reproduce an evaluated value, see [Monitor Evaluated Data and Source Data Graphs][3].
+
 ### Change Tracking
 The Change Tracking graph allows you to view and analyze changes related to your service and its dependencies that occurred around the same time as the alert, as such events are often the root cause of problems.
 
@@ -82,20 +84,12 @@ The source graph shows a view of a monitors's underlying data query as you would
 
 Use this graph to identify any discrepancies between raw data and expected metrics, which may indicate data collection or submission issues affecting the monitor's status.
 
-### Restrictions of source data graph
+### Graph availability by monitor type
 
-The following monitor types are not supported by the provisional status page:
+Not every monitor type shows all three graphs. For example:
 
-- Anomaly
-- Cloud Cost
-- Composite
-- Database Monitoring
-- Forecast
-- Live Process
-- Outlier
-- Synthetics
-- SLO Alerts
-- Usage
+- Composite, Service Check, and Synthetic Monitoring monitors show only the {{< ui >}}Transitions{{< /ui >}} graph.
+- SLO alert monitors and Cloud Cost budget monitors do not show the {{< ui >}}Source Data{{< /ui >}} graph.
 
 ## Transitions
 
@@ -118,3 +112,4 @@ Datadog keeps monitor groups in the UI for a retention period after they stop re
 
 [1]: /monitors/configuration/?tab=thresholdalert#group-retention-time
 [2]: /change_tracking
+[3]: /monitors/guide/history_and_evaluation_graphs/
