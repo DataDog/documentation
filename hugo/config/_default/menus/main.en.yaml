@@ -1684,6 +1684,21 @@ menu:
       identifier: bits_maintenance
       parent: bits_ai
       weight: 9
+    - name: Setup
+      url: bits_ai/bits_maintenance/setup
+      identifier: bits_maintenance_setup
+      parent: bits_maintenance
+      weight: 901
+    - name: Campaigns and Plans
+      url: bits_ai/bits_maintenance/campaigns_plans
+      identifier: bits_maintenance_campaigns_plans
+      parent: bits_maintenance
+      weight: 902
+    - name: Upgrade Instructions and Memories
+      url: bits_ai/bits_maintenance/instructions_memories
+      identifier: bits_maintenance_instructions_memories
+      parent: bits_maintenance
+      weight: 903
     - name: Bits Release
       url: bits_release/
       identifier: bits_release

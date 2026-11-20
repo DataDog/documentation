@@ -1,7 +1,16 @@
 ---
 title: Campaigns and Plans
-description: ""
+description: "Learn how Bits Maintenance uses campaigns and plans to roll out open source software upgrades across your Kubernetes clusters in ordered stages."
 further_reading:
+- link: "/bits_ai/bits_maintenance/"
+  tag: "Documentation"
+  text: "Bits Maintenance"
+- link: "/bits_ai/bits_maintenance/setup/"
+  tag: "Documentation"
+  text: "Set up Bits Maintenance"
+- link: "/bits_ai/bits_maintenance/instructions_memories/"
+  tag: "Documentation"
+  text: "Bits Maintenance upgrade instructions and memories"
 - link: "/containers/monitoring/"
   tag: "Documentation"
   text: "Container Monitoring"
@@ -15,9 +24,9 @@ Bits Maintenance is in Preview. Use this form to request access.
 
 [Bits Maintenance][1] creates a [campaign](#campaigns) to coordinate the rollout of multiple installations of a software project across your fleet through ordered stages. Each stage of a campaign has a [plan](#plans).
 
-A campaign can upgrade one software project across many clusters, or several software projects on one cluster. For a project campaign, you can customize the rollout order–for exampe, development clusters first, then staging, then production.
-
 ## Campaigns
+
+A campaign can upgrade one software project across many clusters, or several software projects on one cluster. For a project campaign, you can customize the [rollout order][3]—for example, development clusters first, then staging, then production.
 
 ### Project campaigns vs. cluster campaigns
 
@@ -40,7 +49,7 @@ To create a campaign in Datadog:
 A plan describes one installation of a software project (one stage of a campaign). Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
 
 You can view plan steps in an interactive workflow diagram:
-[screenshot]
+<!-- TODO: plan screenshot -->
 
 ### Custom steps
 
@@ -53,18 +62,22 @@ A custom step can be:
 When you create a custom step, Datadog saves it. You can then reuse it later, in other plans.
 
 To add a custom step to a plan:
-1. Navigate to {{< ui >}}Bits Maintenance > {{< ui >}}Plans{{< /ui>}}. 
+1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}. 
 1. Select a plan that has not yet started (that is, a plan that is awaiting approval).
 1. Click {{< ui >}}Revise Plan{{< /ui>}}.
-1. In the interactive workflow diagram, hover over an arrow and click {{< ui >}}+ (Insert custom step){{< /ui>}}.
-1. Add an existing custom step your team has already created, or create a new one:
+1. In the interactive workflow diagram, hover over an arrow and click {{< ui >}}Insert custom step{{< /ui>}}.
+1. Add an existing custom step your team has already created, or create one:
     - To add an existing custom step, select it, then click {{< ui >}}Add Step{{< /ui>}}.
-    - To create a new custom step:
-        1. Click {{< ui >}}+ Create Custom Step{{< /ui>}}.
+    - To create a custom step:
+        1. Click {{< ui >}}Create Custom Step{{< /ui>}}.
         1. Select either {{< ui >}}Human{{< /ui>}} or {{< ui >}}Workflow{{< /ui>}}, then fill in the fields.
         1. Click {{< ui >}}Create and Add Step{{< /ui>}}.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /bits_ai/bits_maintenance/
 [2]: /actions/workflows/
-[3]: 
-[4]: 
+[3]: /bits_ai/bits_maintenance/setup/#step-7-optional-create-a-rollout-order
+[4]: /bits_ai/bits_maintenance/setup/#step-6-recommended-create-an-operational-profile
