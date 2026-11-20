@@ -10153,6 +10153,8 @@ components:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelConfiguration"
         model_type_override:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride"
+        platform_settings:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityPlatformSettings"
         sensitivity:
           description: |-
             Sensitivity of the anomaly detection model, expressed as a multiplier on the width
@@ -10163,6 +10165,12 @@ components:
           type: number
         source_to_target_config:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySourceToTargetConfig"
+      type: object
+    MonitorFormulaAndFunctionDataQualityPlatformSettings:
+      description: Platform-specific settings for a data quality monitor.
+      properties:
+        snowflake:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySnowflakeSettings"
       type: object
     MonitorFormulaAndFunctionDataQualityQueryDefinition:
       description: A formula and functions data quality query.
@@ -10210,6 +10218,18 @@ components:
         - data_source
         - measure
         - filter
+      type: object
+    MonitorFormulaAndFunctionDataQualitySnowflakeSettings:
+      description: Snowflake-specific settings for a data quality monitor.
+      properties:
+        warehouse:
+          description: |-
+            Snowflake warehouse to run this monitor's queries on instead of the integration user's
+            default warehouse. The name is case-sensitive, and the Datadog role must have `USAGE` on
+            the warehouse directly. Ignored for monitors that read catalog metadata instead of
+            running queries (such as default row count and freshness on base tables).
+          example: "MONITOR_WH"
+          type: string
       type: object
     MonitorFormulaAndFunctionDataQualitySourceToTargetConfig:
       description: |-
@@ -34002,13 +34022,30 @@ paths:
         **Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.
       operationId: ListHosts
       parameters:
-        - description: String to filter search results.
+        - description: |-
+            String to filter search results. A filter is one or more terms separated by spaces or commas.
+            A host must match every term. Prefix a term with `!` to exclude matching hosts.
+
+            Term types:
+            - `<text>`: Partial, case-insensitive match against host name, alias, AWS ID and name, tags, apps, and
+              agent metadata. Text of fewer than 3 characters only matches a field whose value is exactly that text.
+            - `tag:<key>:<value>`: Exact match on a tag, for example `tag:env:prod`.
+            - `field:apps:<app>`: Exact match on an app name, for example `field:apps:nginx`.
+            - `field:metadata_agent_version:<value>`, `field:metadata_machine:<value>`,
+              `field:metadata_platform:<value>`, `field:metadata_processor:<value>`: Exact match on that metadata field.
+            - `exists:tag:<key>` or `exists:field:<field>`: Match hosts that have the tag key or a non-empty value
+              for the field, for example `exists:tag:env` or `exists:field:metadata_platform`.
+            - `exact:<value>`: Whole-value, case-sensitive match.
+
+            Boolean operators (`AND`, `OR`, `NOT`) and `*` wildcards are not supported.
           in: query
           name: filter
           required: false
           schema:
             type: string
-        - description: Sort hosts by this field.
+        - description: |-
+            Sort hosts by this field. Options include `name`, `aws_id`, `aws_name`, `up`, `apps`, `cpu`,
+            `iowait`, and `load`. Unrecognized values default to `cpu`..
           in: query
           name: sort_field
           required: false

@@ -21,3 +21,19 @@ entries:
     operations:
       - DeleteUserProfile
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateConnection
+      - DeleteConnection
+      - DeleteUserProfile
+      - GetAccountFacetInfo
+      - GetMapping
+      - GetUserFacetInfo
+      - ListConnections
+      - QueryAccounts
+      - QueryEventFilteredUsers
+      - QueryUsers
+      - UpdateConnection
+    title: Document rate-limit headers on the shared 429 responses

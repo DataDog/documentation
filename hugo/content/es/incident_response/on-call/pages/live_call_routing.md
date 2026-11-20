@@ -11,9 +11,15 @@ further_reading:
   text: Datadog On-Call
 title: Enrutamiento de llamadas en vivo
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">El enrutamiento de llamadas en vivo no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <div class="alert alert-info">
 El enrutamiento de llamadas en vivo es proporcionado por Datadog. Para habilitarlo para su organización, comuníquese con <a href="mailto:support@datadoghq.com">Soporte de Datadog</a>. Incluya su caso de uso y el código de país deseado (por ejemplo, <code>+33</code> para Francia).
 </div>
+{{< /site-region >}}
 
 ## Descripción general {#overview}
 

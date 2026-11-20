@@ -335,9 +335,11 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### General setup
 
-Control plane monitoring is enabled by default, but requires introspection to be enabled.
+On Datadog Operator `v1.29.0` and later, the Operator detects EKS from the node labels and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
 
-You can enable introspection using the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+{{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
+
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart][1]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -345,11 +347,16 @@ introspection:
 {{< /code-block >}}
 
 Using the command line:
+
 ```shell
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+Then deploy a minimal `DatadogAgent` spec.
+
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 
@@ -469,9 +476,11 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### General setup
 
-Control plane monitoring is enabled by default, but requires introspection to be enabled.
+On Datadog Operator `v1.29.0` and later, the Operator detects OpenShift from the `node.openshift.io/os_id` node label and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
 
-You can enable introspection using the [datadog-operator Helm chart][12]:
+{{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
+
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart][1]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -479,11 +488,12 @@ introspection:
 {{< /code-block >}}
 
 Using the command line:
+
 ```shell
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-Or, for **OpenShift users** who installed the operator through OperatorHub/Marketplace (the [recommended method](install-openshift.md)), by patching the operator cluster service version:
+If you installed the Operator through OperatorHub or Marketplace, which is the [recommended method][2], patch the Operator cluster service version instead:
 
 ```shell
 oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
@@ -491,7 +501,12 @@ oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
   -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
 ```
 
-Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+Then deploy a minimal `DatadogAgent` spec.
+
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
+
+{{% /collapse-content %}}
 
 Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
 
@@ -502,8 +517,6 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
   sed 's/namespace: openshift-etcd-operator/namespace: datadog/' | \
   oc apply -f -
 ```
-
-[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -912,15 +925,52 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 ## Kubernetes on Talos Linux {#TalosLinux}
 
-Helm is the recommended installation method for Talos Linux. Use Helm by setting the flag `providers.talos.enabled` to `true`.
+Both the Datadog Operator and Helm support Talos Linux.
+
+With Datadog Operator, control plane monitoring on Talos requires version 1.32.0 or later, which detects Talos from the node's OS image and configures the checks for you. With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
+
+Before you deploy the Agent, label the target namespace for the `privileged` Pod Security Standard, as described in the [Talos Linux section of Kubernetes distributions][13].
 
 ### API server
 
 The API server integration is automatically configured. The Datadog Agent discovers it automatically.
 
-### Etcd
+### Etcd {#TalosEtcd}
 
 By providing read access to the etcd certificates located on the host, the Datadog Agent check can communicate with etcd and start collecting etcd metrics.
+
+On Talos, those certificates exist only on control-plane nodes, so the Agent must tolerate the control-plane taint to run the etcd check.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+With Datadog Operator version 1.32.0 or later, control plane monitoring is enabled by default, and the Operator creates the etcd check configuration and mounts the host certificates for you. The only addition to a standard DatadogAgent is the control-plane toleration:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      # Required for the etcd check only. Without it, the API server,
+      # Controller Manager, and Scheduler checks still run as cluster checks.
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -966,11 +1016,18 @@ providers:
     enabled: true
 {{< /code-block >}}
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Controller Manager and Scheduler
 
 #### Secure ports
 
 Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
+
+With Datadog Operator version 1.32.0 or later, the Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they don't require toleration or Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only. The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`.
+
+With Helm, declare the checks as follows:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -1026,7 +1083,7 @@ providers:
 
 **Notes:**
 
-- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
+- The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates. Datadog Operator version 1.32.0 or later sets this for you.
 - When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Apply the patch below to control-plane nodes at cluster generation; or, for running Talos nodes, run `talosctl patch mc -n <control-plane-node1,control-plane-node2> --patch @controlplane-datadog-monitoring-patch.yaml`.
 
 {{< code-block lang="yaml" filename="controlplane-datadog-monitoring-patch.yaml" >}}
@@ -1391,3 +1448,4 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
 [11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html
+[13]: /containers/kubernetes/distributions/#Talos

@@ -340,6 +340,10 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /journey_monitoring/**
+  lambda_microvm:
+    regions: [gov, gov2]
+    url_paths:
+      - /serverless/aws_lambda/lambda_microvm/**
   launchdarkly:
     regions: [gov, gov2]
     url_paths:

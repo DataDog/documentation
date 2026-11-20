@@ -20,7 +20,7 @@ further_reading:
 
 Datadog APM uses trace metrics, which measure request rate, errors, and duration (RED), to power the Catalog, Service Page, Resource Page, and anything built on `trace.*` metrics.
 
-This page covers setups that send OTLP data to Datadog, such as the [upstream OpenTelemetry Collector][1]. If you use the [DDOT Collector][4] or the [Datadog Exporter and Connector][6], the Datadog Connector computes trace metrics. For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
+This page covers setups that send OTLP data to Datadog, such as the [upstream OpenTelemetry Collector][1]. If you use the [DDOT Collector][4] or the [Datadog Exporter and Connector][6], the Datadog Connector computes trace metrics. For DDOT SDKs, see [trace metric extrapolation setup and minimum versions][3].
 
 ## Choose a source
 
