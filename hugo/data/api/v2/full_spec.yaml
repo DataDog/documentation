@@ -3142,27 +3142,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -182374,7 +182353,9 @@ paths:
         END
         ```
 
-        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.
+        This endpoint is only accessible for
+        [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the US2-FED site.
       operationId: GetMonthlyCostAttribution
       parameters:
         - description: |-
