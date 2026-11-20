@@ -20627,6 +20627,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: OpenAI Usage and Costs Integration
+      url: /api/latest/openai-usage-and-costs-integration/
+      identifier: openai-usage-and-costs-integration
+      generated: true
+    - name: Update an OpenAI Usage and Costs account
+      url: /api/latest/openai-usage-and-costs-integration/update-an-openai-usage-and-costs-account/
+      identifier: openai-usage-and-costs-integration-update-an-openai-usage-and-costs-account
+      parent: openai-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAIUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Usage and Costs account
+      url: /api/latest/openai-usage-and-costs-integration/get-an-openai-usage-and-costs-account/
+      identifier: openai-usage-and-costs-integration-get-an-openai-usage-and-costs-account
+      parent: openai-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAIUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Usage and Costs account
+      url: /api/latest/openai-usage-and-costs-integration/delete-an-openai-usage-and-costs-account/
+      identifier: openai-usage-and-costs-integration-delete-an-openai-usage-and-costs-account
+      parent: openai-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAIUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Usage and Costs account
+      url: /api/latest/openai-usage-and-costs-integration/create-an-openai-usage-and-costs-account/
+      identifier: openai-usage-and-costs-integration-create-an-openai-usage-and-costs-account
+      parent: openai-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAIUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Usage and Costs accounts
+      url: /api/latest/openai-usage-and-costs-integration/list-openai-usage-and-costs-accounts/
+      identifier: openai-usage-and-costs-integration-list-openai-usage-and-costs-accounts
+      parent: openai-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAIUsageAndCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

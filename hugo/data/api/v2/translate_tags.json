@@ -399,6 +399,10 @@
     "name": "OpenAI Codex Integration",
     "description": "Manage your Datadog OpenAI Codex integration accounts and account resources\ndirectly through the Datadog API. See the\n[OpenAI Codex integration page](https://docs.datadoghq.com/integrations/openai-codex/) for\nmore information."
   },
+  "openai-usage-and-costs-integration": {
+    "name": "OpenAI Usage and Costs Integration",
+    "description": "Manage your Datadog OpenAI Usage and Costs integration accounts and account resources\ndirectly through the Datadog API. See the\n[OpenAI integration page](https://docs.datadoghq.com/integrations/openai/) for\nmore information."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
