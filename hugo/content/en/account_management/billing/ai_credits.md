@@ -51,7 +51,7 @@ See the [Datadog pricing page][5] for current rates. AI Credits are available in
 
 ### Billing cycle
 
-AI Credits reset on the first day of each calendar month. Unused Commit credits do not roll over to the next month.
+AI Credits reset on the first day of each calendar month, at 00:00 UTC. Unused Commit credits do not roll over to the next month.
 
 ### Overages
 
@@ -101,6 +101,10 @@ Datadog adds tags from the reference table to usage it processes after you enabl
 | [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
 | [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
 | [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
+
+Each metric covers one product, while the [**AI Credits Management**][10] page shows the total for all products. These metrics are estimates. For billed usage, use [**Plan & Usage > AI Credits**][6].
+
+**Note:** The AI Credits Management page shows usage for the organization you're logged in to. In a parent organization, the usage metrics also include child organizations, tagged with `child_org_name`. To see only the current organization, filter on `child_org_name:self`.
 
 ## Availability
 
