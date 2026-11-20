@@ -75,7 +75,7 @@ Use access policies to control which callers can request higher reasoning effort
 
 New access policies have no reasoning ceiling and allow fast mode. Selecting {{< ui >}}Limit maximum reasoning level{{< /ui >}} initially sets the ceiling to {{< ui >}}Medium{{< /ui >}}; clearing it removes the ceiling. Existing policies retain their saved values.
 
-For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [access policy rules][reasoning-3] before changing which models everyone can call.
+For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [Default policy](#default-policy) section before changing which models everyone can call.
 
 ### Set a reasoning ceiling
 
@@ -205,7 +205,6 @@ If a request unexpectedly succeeds, review every applicable access policy and th
 
 [reasoning-1]: /ai_gateway/getting_started/
 [reasoning-2]: https://app.datadoghq.com/llm/gateway/access
-[reasoning-3]: /ai_gateway/access_control/
 [reasoning-4]: https://developers.openai.com/api/docs/guides/reasoning
 [reasoning-5]: https://platform.claude.com/docs/en/build-with-claude/effort
 [reasoning-6]: https://app.datadoghq.com/llm/gateway

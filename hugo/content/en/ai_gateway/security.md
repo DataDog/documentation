@@ -20,10 +20,6 @@ Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_star
 ## Apply AI Guard policies
 <!-- vale Datadog.headings = YES -->
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
-
 Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the AI Gateway attachment defines which traffic it evaluates and how AI Gateway handles the result.
 
 For AI Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.

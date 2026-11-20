@@ -6201,7 +6201,7 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_security
       weight: 8
-    - name: Observe Gateway Activity
+    - name: Observe AI Gateway Activity
       url: ai_gateway/observability/
       parent: ai_gateway
       identifier: ai_gateway_observability
