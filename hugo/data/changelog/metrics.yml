@@ -209,3 +209,12 @@ entries:
       - CreateTagConfiguration
       - UpdateTagConfiguration
     title: Document oversized metric tag configuration errors
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41972
+    operations:
+      - CreateHistoricalMetricsConfiguration
+      - DeleteHistoricalMetricsConfiguration
+      - GetHistoricalMetricsConfiguration
+    title: Declare historical metrics config write scope and release historical 
+      metrics endpoints

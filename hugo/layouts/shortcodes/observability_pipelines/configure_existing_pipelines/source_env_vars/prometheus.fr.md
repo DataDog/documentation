@@ -1,0 +1,8 @@
+- Adresse Prometheus :
+    - L'Observability Pipelines Worker écoute à cette adresse de socket, par exemple `0.0.0.0:9091`, pour recevoir les métriques envoyées par vos clients Prometheus.
+    - La variable d'environnement par défaut est `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_ADDRESS`.
+- Si vous utilisez une authentification simple :
+	- Nom d'utilisateur pour l'authentification à l'endpoint Prometheus :
+		- La variable d'environnement par défaut est `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_USERNAME`.
+	- Mot de passe pour l'authentification à l'endpoint Prometheus :
+		- La variable d'environnement par défaut est `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_PASSWORD`.

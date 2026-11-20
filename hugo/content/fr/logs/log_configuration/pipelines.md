@@ -339,58 +339,66 @@ Les métriques d'utilisation estimées sont affichées pour chaque pipeline. Cel
 ## Auto-Processing {#auto-processing}
 <!-- vale Datadog.headings = YES -->
 
-{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="Auto-Processing est en préversion" >}}
-Remplissez le formulaire pour demander l'accès.
-{{< /callout >}}
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">Auto-Processing n'est pas disponible pour votre <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-Auto-Processing analyse vos logs d'application personnalisés et extrait les attributs principaux, notamment l'horodatage, le statut, le service, l'ID de trace et l'ID de span. Il vous aide à rechercher, filtrer et corréler les logs sans configurer manuellement le parsing.
+Auto-Processing analyse vos logs d'application personnalisés et extrait les attributs principaux, notamment l'horodatage, le statut, l'ID de trace et l'ID de span. Il vous aide à rechercher, filtrer et corréler les logs sans configurer manuellement de pipelines.
 
-Auto-Processing ne gère que les logs qui ne correspondent au filtre d'aucune intégration ou pipeline personnalisé existant. Si un log correspond au filtre d'un pipeline existant, Auto-Processing ne le traite pas, même si ce pipeline ne modifie pas le log. Vos configurations de pipeline existantes restent inchangées.
+Auto-Processing ne gère que les logs qui ne correspondent au filtre d'aucune intégration ou pipeline personnalisé. Si un log correspond au filtre d'un pipeline, Auto-Processing ne le traite pas, même si ce pipeline ne modifie pas le log. Vos configurations de pipeline existantes restent inchangées.
 
-### Fonctionnement {#how-it-works}
+<div class="alert alert-warning">Si le filtre d'un pipeline correspond à tous les logs (par exemple, <code>*</code>), Auto-Processing ne traite aucun log dans votre organisation. Pour utiliser Auto-Processing, restreignez le filtre de ce pipeline aux logs qu'il doit traiter.</div>
 
-Datadog regroupe les logs pris en charge par source et par service et crée des entrées Auto-Processing correspondantes. Datadog met automatiquement à jour les entrées pour prendre en charge de nouveaux modèles de logs sans modifier la façon dont les modèles précédemment pris en charge sont analysés.
+### Comment les entrées sont créées {#how-entries-are-created}
 
-[Examinez les transformations](#review-transformations) et [contrôlez quelles entrées traitent vos logs](#enable-or-disable-an-entry). [Passez une entrée en pipeline manuel](#switch-to-a-manual-pipeline) pour personnaliser sa configuration.
+Datadog regroupe les logs pris en charge dans des entrées Auto-Processing. Chaque entrée couvre une paire source et service. Par exemple, les logs avec `source:storefront` et `service:catalog-api` forment une seule entrée. À mesure que de nouveaux modèles de logs apparaissent, Datadog met à jour les entrées pour les prendre en charge sans modifier la façon dont les modèles précédemment pris en charge sont analysés. Les attributs déjà extraits conservent leurs noms, de sorte que les facettes, les dashboards et les monitors qui les utilisent continuent de fonctionner.
 
-<!-- vale Datadog.headings = NO -->
-### Configurer Auto-Processing {#configure-auto-processing}
-<!-- vale Datadog.headings = YES -->
+Datadog crée une entrée pour une nouvelle paire de source et de service environ 15 minutes après avoir reçu les premiers logs pour cette paire. La paire doit avoir au moins 1,000 logs indexés au cours des 24 dernières heures. Les logs écartés par les [filtres d'exclusion][15] ne sont pas comptabilisés dans ce seuil. Si le volume est inférieur au seuil, Datadog vérifie à nouveau environ 12 heures plus tard. Si le volume est toujours inférieur au seuil, Datadog ne crée pas d'entrée tant qu'un nouveau modèle de log n'apparaît pas pour cette paire.
 
-Accédez à la [page {{< ui >}}Processing{{< /ui >}}][8] et sélectionnez l'onglet {{< ui >}}Auto-Processing{{< /ui >}}.
+Chaque organisation peut avoir jusqu'à 100 entrées d'Auto-Processing. Si votre organisation envoie déjà des logs lorsque vous activez Auto-Processing, Datadog crée des entrées pour un maximum de 100 paires de source et de service. Datadog sélectionne les paires qui traiteraient le plus grand nombre de logs. Ensuite, Datadog crée des entrées pour les nouvelles paires à mesure que leurs logs arrivent, jusqu'à ce que l'organisation atteigne 100 entrées.
 
-#### Activer ou désactiver Auto-Processing {#turn-auto-processing-on-or-off}
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="L'onglet Auto-Processing sur la page Processing, qui répertorie les entrées par source et service avec le nombre d'attributs analysés, l'utilisation et un bouton bascule d'activation pour chaque entrée" style="width:100%;" >}}
 
-Utilisez le bouton bascule de la fonctionnalité pour activer ou désactiver Auto-Processing pour votre organisation.
+### Activer ou désactiver Auto-Processing {#turn-auto-processing-on-or-off}
 
-#### Choisir comment les nouvelles entrées sont activées {#choose-how-new-entries-are-enabled}
+Pour les organisations créées le 2026-11-04 ou après cette date, Auto-Processing est activé par défaut et les nouvelles entrées sont activées automatiquement. Pour les organisations créées avant le 2026-11-04, Auto-Processing est désactivé par défaut.
 
-Lorsque Auto-Processing est activé, choisissez si les nouvelles entrées sont activées automatiquement :
+Sur la [page {{< ui >}}Processing{{< /ui >}}][8], sélectionnez l'onglet {{< ui >}}Auto-Processing{{< /ui >}} et utilisez le bouton bascule de la fonctionnalité pour activer ou désactiver Auto-Processing pour votre organisation.
+
+### Choisir comment les nouvelles entrées sont activées {#choose-how-new-entries-are-enabled}
+
+Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, choisissez si les nouvelles entrées sont activées automatiquement :
 
 - **Automatically enable new entries** : les nouvelles entrées sont activées lors de leur création et commencent à traiter les logs entrants correspondants.
-- **Review new entries before enabling** : les nouvelles entrées sont désactivées lors de leur création. Examinez leurs transformations, puis activez celles que vous souhaitez utiliser.
+- **Review new entries before enabling** : les nouvelles entrées sont désactivées lors de leur création. [Examinez leurs transformations](#review-transformations), puis activez celles que vous souhaitez utiliser.
 
 ### Examiner les transformations {#review-transformations}
 
-1. Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, recherchez la source et le service que vous souhaitez examiner.
-2. Sélectionnez {{< ui >}}View Transformations{{< /ui >}}.
-3. Sélectionnez un modèle de log et inspectez des exemples de logs pour comparer leurs attributs originaux et traités.
+1. Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, recherchez la paire source et service que vous souhaitez examiner.
+2. Cliquez sur {{< ui >}}View Transformations{{< /ui >}}.
+3. Cliquez sur un modèle de log.
+4. Inspectez les exemples de logs pour comparer leurs attributs originaux et traités.
 
 ### Activer ou désactiver une entrée {#enable-or-disable-an-entry}
 
-Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, utilisez le bouton bascule d'une entrée pour activer ou désactiver le traitement pour cette source et ce service. La désactivation d'une entrée n'affecte que les futurs logs. Les logs déjà traités ne sont pas modifiés.
+Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, utilisez le bouton bascule d'une entrée pour activer ou désactiver le traitement pour cette paire source et service. La désactivation d'une entrée n'affecte que les futurs logs. Les logs déjà traités ne sont pas modifiés.
 
 ### Passer à un pipeline manuel {#switch-to-a-manual-pipeline}
 
-Pour personnaliser le parsing ou les noms d'attributs, cliquez sur {{< ui >}}Switch to manual pipeline{{< /ui >}} sur la page {{< ui >}}View Transformations{{< /ui >}}.
+Pour personnaliser le parsing ou les noms d'attributs, cliquez sur {{< ui >}}Switch to manual pipeline{{< /ui >}} sur la page {{< ui >}}View Transformations{{< /ui >}}. Datadog crée un pipeline personnalisé avec le même filtre et les mêmes processeurs et supprime l'entrée Auto-Processing pour cette paire source et service.
 
-Après le basculement, vous gérez la configuration du pipeline et toutes les mises à jour futures.
+Après le basculement :
+
+- Le pipeline apparaît dans votre liste de pipelines et analyse les logs de la même manière. Les noms des attributs restent les mêmes, de sorte que les facettes, les dashboards et les monitors existants continuent de fonctionner.
+- Datadog ne met plus à jour le pipeline lorsque de nouveaux modèles de logs apparaissent. Vous gérez sa configuration à partir de ce moment-là.
+- Comme ces logs correspondent au filtre du pipeline, Auto-Processing ne les traite plus.
+
+Pour revenir à Auto-Processing, supprimez le pipeline manuel. Datadog crée alors une nouvelle entrée pour cette paire source et service une fois que ses logs répondent aux [exigences de création d'entrée](#how-entries-are-created). La nouvelle entrée est générée à partir de zéro et ne restaure pas votre entrée précédente ni vos modifications.
 
 ### Limitations {#limitations}
 
-- Chaque organisation peut avoir jusqu'à 100 entrées d'Auto-Processing.
-- Certains nouveaux modèles de logs peuvent ne pas être parsés, même pour une source et un service déjà couverts par Auto-Processing.
-- Vous ne pouvez pas personnaliser le parsing ni renommer les attributs au sein d'une entrée d'Auto-Processing. Passez à un pipeline manuel pour effectuer ces modifications.
+- Chaque organisation peut avoir jusqu'à 100 entrées d'Auto-Processing. Datadog ne traite pas les logs provenant de paires source et service au-delà de cette limite. Pour plus de détails, consultez [Comment les entrées sont créées](#how-entries-are-created).
+- Certains modèles de logs peuvent rester non analysés, même pour une paire source et service déjà couverte par Auto-Processing.
 
 ## Pour aller plus loin {#further-reading}
 
@@ -413,3 +421,4 @@ Après le basculement, vous gérez la configuration du pipeline et toutes les mi
 [12]: /fr/logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [13]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [14]: /fr/api/latest/restriction-policies/
+[15]: /fr/logs/log_configuration/indexes/#exclusion-filters

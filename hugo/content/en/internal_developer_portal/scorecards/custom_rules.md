@@ -63,7 +63,11 @@ After you select {{< ui >}}Write a DDSQL Query{{< /ui >}}:
 
 ## Evaluate custom rules using the Scorecards API or the UI
 
-To add and evaluate custom rules using the [Scorecards API][2]: 
+You can send outcomes for a custom rule from your own systems through the Scorecards API, or set them manually for each entity in the Scorecards UI.
+
+### Use the Scorecards API
+
+To add and evaluate custom rules using the [Scorecards API][2]:
 
 1. Specify the rule's name, scorecard, description, owner, level, and scope. Pass these values to `/scorecard/rules`.
 2. For each `{rule, entity}` tuple that you evaluate, send an outcome of `pass`, `fail`, or `skip` to `/scorecard/outcomes/batch`. Optionally, include a remark that describes the reason for the outcome.
@@ -71,7 +75,9 @@ To add and evaluate custom rules using the [Scorecards API][2]:
 
 After initial setup, rules can also be enabled or disabled through the API.
 
-After you create the rule as described in the [Create custom rules](#create-custom-rules) section, evaluate it in the Scorecards UI:
+### Use the Scorecards UI
+
+To evaluate a custom rule manually in the Scorecards UI, first create the rule as described in [Create custom rules](#create-custom-rules). Then:
 
 1. Navigate to the rule you created and select {{< ui >}}Edit Outcome{{< /ui >}} next to the entity that you want to evaluate.
 2. Select the relevant outcome of `pass`, `fail`, or `skip` and add an optional remark describing the reason for the outcome. 
@@ -92,9 +98,9 @@ After creating your custom rule, choose the {{< ui >}}Add Workflow{{< /ui >}} op
 To create a workflow from scratch: 
 
 1. Set a schedule for your workflow to run on.
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon to add a step.
 1. Select the [{{< ui >}}List entity definitions{{< /ui >}} action][7] to fetch all defined entities from Catalog.
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon to add a step.
 1. Select the [{{< ui >}}For loop{{< /ui >}}][8] to iterate over each entity one-by-one.
 1. Select the action needed to fetch your evaluation data (for example: {{< ui >}}List monitors{{< /ui >}} or {{< ui >}}Get repository content{{< /ui >}} from GitHub). 
 1. Transform the returned data using a custom JavaScript function to generate pass/fail outcomes for each entity.
