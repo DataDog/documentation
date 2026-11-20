@@ -259,9 +259,9 @@ The summary for a resource shows its type, status, and available metrics. The su
 
 #### Network connection summaries
 
-The summary for a network connection shows its CNM signals: **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput. In Resource View, a connection that Network Path also tests shows its Network Path signals too: **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**.
+The summary for a network connection shows its **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput from CNM. From the summary, click **Explore connection** to open the connection in Connection View, or click **View connection in CNM**.
 
-From the summary, click **Explore connection** to open the connection in Connection View. To open the connection in its product, click **View connection in CNM**, or **View connection in Network Path** when Network Path tests the connection.
+In Resource View, if Network Path also tests the connection, the summary adds its **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**, and a **View connection in Network Path** link.
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-hover-summary.png" alt="A hover summary for a connection between two containers, showing retransmits, TCP failures, throughput, and RTT" >}}
 
