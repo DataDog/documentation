@@ -90,6 +90,7 @@ AI Guard supports the full life cycle of securing AI agents, from finding unprot
 1. Explore AI security to find additional unprotected agents and onboard them.
 1. [Manage AI Guard policies][4] as needed, optionally previewing evaluations before applying changes.
 1. [Redact sensitive data][6] that AI Guard detects in prompts and responses.
+1. [Control evaluations in code][16] with middleware, such as skipping trusted traffic or tagging evaluations with application context.
 1. [Triage signals][7] that detection rules create from AI Guard evaluation outcomes.
 1. [Investigate spans][8] to filter AI Guard evaluations for a specific service, user, or concern.
 
@@ -145,6 +146,7 @@ AI Guard features vary by integration method, so some features might not be avai
 | Sensitive data findings | Yes | No | Yes | Yes |
 | Sensitive data redaction | No | No | Yes | Yes |
 | Per-call blocking options | No | No | Yes | No |
+| Middleware | Python only | Python only | Python only | No |
 
 ## Specifications and limitations
 
@@ -185,6 +187,8 @@ When your organization exceeds a limit, AI Guard stops evaluating requests, and 
 
 To reduce how many evaluations your agent sends, use the [SDK][11] and call the evaluate method only where you want an evaluation. For example, evaluate only tool calls, or only some tool calls.
 
+In Python applications that use automatic or manual integrations, [skip evaluations with middleware][17] for requests that don't need them.
+
 ### Data residency, retention, and privacy
 
 AI Guard processes all evaluations in the US, regardless of your Datadog site.
@@ -210,3 +214,5 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [13]: /help/
 [14]: /tracing/trace_pipeline/trace_retention/
 [15]: /security/ai_guard/setup/http_api/
+[16]: /security/ai_guard/middleware/
+[17]: /security/ai_guard/middleware/#skip-evaluations-for-trusted-traffic

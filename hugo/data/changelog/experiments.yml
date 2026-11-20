@@ -125,3 +125,25 @@ entries:
     operations:
       - GetExperimentResults
     title: Expose EVSI forecast context in experiment results
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41898
+    operations:
+      - CreateBandit
+      - DeleteBandit
+      - ListBanditPolicies
+      - PatchBandit
+      - PauseBandit
+      - RefreshBandit
+      - ResumeBandit
+      - StartBandit
+      - StopBandit
+    title: Add the bandit writes, lifecycle and policy history to the 
+      Experiments API
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41898
+    operations:
+      - GetBandit
+    title: Add the bandit writes, lifecycle and policy history to the 
+      Experiments API

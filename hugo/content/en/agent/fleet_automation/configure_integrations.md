@@ -17,9 +17,9 @@ Fleet Automation can deploy, update, and remove [integration][1] configuration f
 
 ## Prerequisites
 
-- [Remote Configuration][2] enabled for your organization and the Agent's API key
+- [Remote Configuration][2] enabled for your organization and for the API key your Agents use. Both are enabled by default.
 - Agent version 7.73 or later (7.76 or later if the integration configuration uses secrets). To upgrade your Agents, see [Upgrade Agents][6].
-- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
+- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
 
 <div class="alert alert-info">
 Configuring integrations on Agents in containerized workloads is not supported.
@@ -32,8 +32,6 @@ Fleet Automation supports configuring out-of-the-box integrations that have a `c
 Custom checks are **not** supported.
 
 ## Configure integrations across multiple Agents
-
-<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</div>
 
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][3] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
@@ -49,6 +47,8 @@ Custom checks are **not** supported.
     - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}}.
 
     <div class="alert alert-tip">Toggle between <strong>Visual</strong> and <strong>YAML</strong> mode when filling out the integration configuration. Use <strong>YAML</strong> mode to paste in YAML directly.</div>
+
+    <div class="alert alert-tip">To check how your changes affect a specific Agent, preview its configuration diff in the <strong>Configuration Summary</strong> panel.</div>
 
 1. Review the deployment plan. Fleet Automation generates a configuration diff for each affected Agent so you can verify the exact changes.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][4].

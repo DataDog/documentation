@@ -849,7 +849,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
@@ -858,7 +858,7 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ### `search_datadog_sdk`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
@@ -2286,7 +2286,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits in the pipeline builder. You can also update or delete pipelines with [Pup][104] or the [Observability Pipelines API][88], but these updates go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][105].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3864,6 +3864,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [101]: /gpu_monitoring/
 [102]: /gpu_monitoring/mcp_tools/
 [103]: /mcp_server/setup#required-permissions
+[104]: /cli/
+[105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 
 ## Further reading
 

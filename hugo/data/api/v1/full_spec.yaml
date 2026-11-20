@@ -10153,6 +10153,8 @@ components:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelConfiguration"
         model_type_override:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride"
+        platform_settings:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityPlatformSettings"
         sensitivity:
           description: |-
             Sensitivity of the anomaly detection model, expressed as a multiplier on the width
@@ -10163,6 +10165,12 @@ components:
           type: number
         source_to_target_config:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySourceToTargetConfig"
+      type: object
+    MonitorFormulaAndFunctionDataQualityPlatformSettings:
+      description: Platform-specific settings for a data quality monitor.
+      properties:
+        snowflake:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySnowflakeSettings"
       type: object
     MonitorFormulaAndFunctionDataQualityQueryDefinition:
       description: A formula and functions data quality query.
@@ -10210,6 +10218,18 @@ components:
         - data_source
         - measure
         - filter
+      type: object
+    MonitorFormulaAndFunctionDataQualitySnowflakeSettings:
+      description: Snowflake-specific settings for a data quality monitor.
+      properties:
+        warehouse:
+          description: |-
+            Snowflake warehouse to run this monitor's queries on instead of the integration user's
+            default warehouse. The name is case-sensitive, and the Datadog role must have `USAGE` on
+            the warehouse directly. Ignored for monitors that read catalog metadata instead of
+            running queries (such as default row count and freshness on base tables).
+          example: "MONITOR_WH"
+          type: string
       type: object
     MonitorFormulaAndFunctionDataQualitySourceToTargetConfig:
       description: |-

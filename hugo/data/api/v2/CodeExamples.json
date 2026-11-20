@@ -548,6 +548,13 @@
       "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
+  "CreateTerraformCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an HCP Terraform persona mapping returns \"Created\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -902,6 +909,13 @@
       "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
     }
   ],
+  "CreateBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create bandit returns \"Created\" response"
+    }
+  ],
   "CreateExperimentMetricGroup": [
     {
       "group": "experiments",
@@ -963,6 +977,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
+  "PatchBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update bandit returns \"OK\" response"
     }
   ],
   "UpdateExperimentAnalysisPlanAttributes": [
@@ -2146,6 +2167,11 @@
       "group": "observability_pipelines",
       "suffix": "_3415678462",
       "description": "Validate an observability pipeline with grok library rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_33892008",
+      "description": "Validate an observability pipeline with named and unnamed parse grok include rules returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",

@@ -12,6 +12,9 @@ further_reading:
 - link: /llm_observability/instrument/api/
   tag: Documentation
   text: Référence de l'API HTTP Agent Observability
+- link: https://www.datadoghq.com/blog/agent-observability-voice-agent/
+  tag: Blog
+  text: Tracez les agents vocaux avec Datadog Agent Observability
 title: Prise en charge multimodale
 ---
 ## Présentation {#overview}
@@ -35,7 +38,7 @@ Aucune version minimale du SDK Datadog ne s'applique à l'[API HTTP Agent Observ
 
 ## Instrumentation automatique {#automatic-instrumentation}
 
-Activez [l'instrumentation automatique][3] pour capturer le contenu multimédia à partir des bibliothèques suivantes.
+Activez [l'instrumentation automatique][3] pour capturer les médias à partir des bibliothèques suivantes.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -44,8 +47,8 @@ Activez [l'instrumentation automatique][3] pour capturer le contenu multimédia 
 | ----------- | -------------- | ------------------- |
 | Complétions de chat OpenAI | Contenu d'entrée `input_audio` et audio de sortie, y compris la transcription audio du modèle | >= 4.12.0 |
 | OpenAI Realtime API | Audio d'entrée et de sortie par tour, transcriptions, utilisation de jetons et appels d'outils | >= 4.13.0 |
-| Amazon Nova 2 Sonic (`aws-sdk-bedrock-runtime`) | Audio d'entrée et de sortie pour chaque tour de parole, transcriptions, utilisation des jetons et appels d'outils | >= 4.17.0 |
-| ElevenLabs Agents (WebSocket) | Audio d'entrée et de sortie de la conversation, transcriptions et appels d'outils côté client | >= 4.17.0 |
+| Amazon Nova 2 Sonic (`aws-sdk-bedrock-runtime`) | Audio d'entrée et de sortie par tour, transcriptions, utilisation de jetons et appels d'outils | >= 4.17.0 |
+| ElevenLabs Agents (WebSocket) | Audio d'entrée et de sortie de conversation, transcriptions et appels d'outils client | >= 4.17.0 |
 | LiteLLM | Audio d'entrée et de sortie, via le format de complétions de chat OpenAI | >= 4.12.0 |
 | Complétions de chat OpenAI et API Responses | Images encodées en base64 en ligne | >= 4.15.0 |
 | Agents OpenAI | Images encodées en base64 en ligne | >= 4.15.0 |
@@ -62,16 +65,19 @@ L'audio dans les complétions de chat diffusées (`stream=True`) n'est pas captu
 | ----------- | -------------- | ------------------- |
 | Complétions de chat OpenAI | Contenu d'entrée `input_audio` et audio de sortie, y compris la transcription audio du modèle | v6 : >= 6.7.0 ; v5 : >= 5.118.0 |
 | Agents OpenAI | Audio d'entrée et de sortie, via le format de complétions de chat OpenAI | v6 : >= 6.7.0 ; v5 : >= 5.118.0 |
-| OpenAI Realtime API | Audio d'entrée et de sortie pour chaque tour de parole, transcriptions, utilisation des jetons et appels d'outils | v6 : >= 6.17.0 ; v5 : >= 5.128.0 |
-| Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Audio d'entrée et de sortie pour chaque tour de parole, transcriptions, utilisation des jetons et appels d'outils | v6 : >= 6.22.0 ; v5 : >= 5.133.0 |
-| ElevenLabs Agents (WebSocket) | Audio d'entrée et de sortie de la conversation, transcriptions et appels d'outils côté client | Bientôt disponible |
+| OpenAI Realtime API | Audio d'entrée et de sortie par tour, transcriptions, utilisation de jetons et appels d'outils | v6 : >= 6.17.0 ; v5 : >= 5.128.0 |
+| OpenAI Agents Realtime SDK | Audio d'entrée et de sortie par tour, transcriptions, utilisation de jetons et appels d'outils pour les connexions WebSocket et SIP sideband | v6 : >= 6.25.0 ; v5 : >= 5.136.0 |
+| Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Audio d'entrée et de sortie par tour, transcriptions, utilisation de jetons et appels d'outils | v6 : >= 6.22.0 ; v5 : >= 5.133.0 |
+| ElevenLabs Agents (WebSocket) | Audio d'entrée et de sortie de conversation, transcriptions et appels d'outils client | v6 : >= 6.25.0 ; v5 : >= 5.136.0 |
+
+L'instrumentation d'OpenAI Agents Realtime SDK nécessite `@openai/agents-realtime` 0.20.0 ou une version ultérieure. Pour désactiver les récupérations de données audio effectuées par le traceur pour les sidebands SIP, définissez `DD_OPENAI_REALTIME_SIDEBAND_AUDIO_RETRIEVAL_ENABLED=false`.
 
 L'audio dans les complétions de chat diffusées n'est pas capturé.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Conversation vocale dans Agent Observability avec une chronologie de lecture audio, des segments de parole de l'utilisateur et de l'agent, des badges de latence de réponse et des transcriptions des tours de parole." caption="Lecture de la conversation vocale et transcriptions des tours de parole capturées par instrumentation automatique." style="width:100%;" >}}
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Conversation vocale dans Agent Observability avec une chronologie de lecture audio, des segments de parole de l'utilisateur et de l'agent, des badges de latence de réponse et des transcriptions des tours de parole." caption="Lecture des conversations vocales et transcriptions des tours de parole capturées par l'instrumentation automatique." style="width:100%;" >}}
 
 Les intégrations ne récupèrent pas les images référencées par une URL distante ou un ID de fichier. Elles capturent uniquement les images que l'application envoie en ligne sous forme de données base64. Lorsqu'une intégration ne peut pas capturer de média, elle enregistre un marqueur textuel tel que `[image]` ou `[audio]` dans le message.
 
@@ -257,7 +263,7 @@ L'audio apparaît sous forme de lecteur, avec le texte du message affiché à c�
 
 Les images s'affichent lorsque le type MIME est `image/png`, `image/jpeg`, `image/webp` ou `image/gif`, et que le type MIME déclaré correspond aux octets encodés. Les images SVG ne s'affichent pas. La vue de trace n'effectue aucune requête sortante, donc une image référencée par une URL distante est affichée sous forme de texte plutôt que récupérée.
 
-L'audio est lu via le lecteur audio natif du navigateur. Les conteneurs pris en charge incluent `audio/wav`, `audio/mpeg`, `audio/ogg` et `audio/webm`. Les formats bruts tels que `pcm16`, `g711_ulaw` et `g711_alaw` ne sont pas lus. Convertissez l'audio brut en WAV avant de le joindre. Les intégrations automatiques OpenAI Realtime API, Nova 2 Sonic et ElevenLabs convertissent l'audio brut pris en charge au format WAV.
+L'audio est lu via le lecteur audio natif du navigateur. Les conteneurs pris en charge incluent `audio/wav`, `audio/mpeg`, `audio/ogg` et `audio/webm`. Les formats bruts tels que `pcm16`, `g711_ulaw` et `g711_alaw` ne sont pas lus. Convertissez l'audio brut en WAV avant de le joindre. Les intégrations automatiques avec OpenAI Realtime API, Nova 2 Sonic et ElevenLabs convertissent les données audio brutes prises en charge au format WAV.
 
 ## Limites et comportement {#limits-and-behavior}
 

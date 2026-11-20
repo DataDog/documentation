@@ -2039,8 +2039,7 @@ menu:
           - v2
         operationids:
           - GetHistoricalMetricsConfiguration
-        unstable:
-          - v2
+        unstable: []
         order: 26
     - name: Delete a historical metrics configuration
       url: /api/latest/metrics/delete-a-historical-metrics-configuration/
@@ -2052,8 +2051,7 @@ menu:
           - v2
         operationids:
           - DeleteHistoricalMetricsConfiguration
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: Enable historical metrics ingestion
       url: /api/latest/metrics/enable-historical-metrics-ingestion/
@@ -2065,8 +2063,7 @@ menu:
           - v2
         operationids:
           - CreateHistoricalMetricsConfiguration
-        unstable:
-          - v2
+        unstable: []
         order: 25
     - name: Update a derived metric
       url: /api/latest/metrics/update-a-derived-metric/
@@ -12533,10 +12530,131 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Claude Compliance Integration
+      url: /api/latest/claude-compliance-integration/
+      identifier: claude-compliance-integration
+      generated: true
+    - name: Update a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/update-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-update-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/get-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-get-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/delete-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-delete-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/create-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-create-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Claude Compliance integration accounts
+      url: /api/latest/claude-compliance-integration/list-claude-compliance-integration-accounts/
+      identifier: claude-compliance-integration-list-claude-compliance-integration-accounts
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListClaudeComplianceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/get-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-get-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/delete-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-delete-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 28
+    - name: Create an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/create-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-create-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 27
+    - name: List HCP Terraform persona mappings
+      url: /api/latest/cloud-authentication/list-hcp-terraform-persona-mappings/
+      identifier: cloud-authentication-list-hcp-terraform-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 25
     - name: Get a Custom OIDC provider
       url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
       identifier: cloud-authentication-get-a-custom-oidc-provider
@@ -16041,6 +16159,45 @@ menu:
         unstable:
           - v2
         order: 59
+    - name: Stop bandit
+      url: /api/latest/experiments/stop-bandit/
+      identifier: experiments-stop-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StopBandit
+        unstable:
+          - v2
+        order: 66
+    - name: Start bandit
+      url: /api/latest/experiments/start-bandit/
+      identifier: experiments-start-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartBandit
+        unstable:
+          - v2
+        order: 63
+    - name: Resume bandit
+      url: /api/latest/experiments/resume-bandit/
+      identifier: experiments-resume-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResumeBandit
+        unstable:
+          - v2
+        order: 65
     - name: Get bandit results
       url: /api/latest/experiments/get-bandit-results/
       identifier: experiments-get-bandit-results
@@ -16054,6 +16211,58 @@ menu:
         unstable:
           - v2
         order: 58
+    - name: Refresh bandit
+      url: /api/latest/experiments/refresh-bandit/
+      identifier: experiments-refresh-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RefreshBandit
+        unstable:
+          - v2
+        order: 67
+    - name: List bandit policies
+      url: /api/latest/experiments/list-bandit-policies/
+      identifier: experiments-list-bandit-policies
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBanditPolicies
+        unstable:
+          - v2
+        order: 68
+    - name: Pause bandit
+      url: /api/latest/experiments/pause-bandit/
+      identifier: experiments-pause-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PauseBandit
+        unstable:
+          - v2
+        order: 64
+    - name: Update bandit
+      url: /api/latest/experiments/update-bandit/
+      identifier: experiments-update-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchBandit
+        unstable:
+          - v2
+        order: 61
     - name: Get bandit
       url: /api/latest/experiments/get-bandit/
       identifier: experiments-get-bandit
@@ -16067,6 +16276,32 @@ menu:
         unstable:
           - v2
         order: 57
+    - name: Delete bandit
+      url: /api/latest/experiments/delete-bandit/
+      identifier: experiments-delete-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteBandit
+        unstable:
+          - v2
+        order: 62
+    - name: Create bandit
+      url: /api/latest/experiments/create-bandit/
+      identifier: experiments-create-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBandit
+        unstable:
+          - v2
+        order: 60
     - name: List bandits
       url: /api/latest/experiments/list-bandits/
       identifier: experiments-list-bandits
@@ -19287,7 +19522,7 @@ menu:
           - PinModelLabRun
         unstable:
           - v2
-        order: 10
+        order: 12
     - name: Unpin a Model Lab run
       url: /api/latest/model-lab-api/unpin-a-model-lab-run/
       identifier: model-lab-api-unpin-a-model-lab-run
@@ -19300,7 +19535,7 @@ menu:
           - UnpinModelLabRun
         unstable:
           - v2
-        order: 11
+        order: 13
     - name: List Model Lab run artifacts
       url: /api/latest/model-lab-api/list-model-lab-run-artifacts/
       identifier: model-lab-api-list-model-lab-run-artifacts
@@ -19313,7 +19548,7 @@ menu:
           - ListModelLabRunArtifacts
         unstable:
           - v2
-        order: 14
+        order: 16
     - name: Get a Model Lab run
       url: /api/latest/model-lab-api/get-a-model-lab-run/
       identifier: model-lab-api-get-a-model-lab-run
@@ -19326,7 +19561,7 @@ menu:
           - GetModelLabRun
         unstable:
           - v2
-        order: 8
+        order: 10
     - name: Delete a Model Lab run
       url: /api/latest/model-lab-api/delete-a-model-lab-run/
       identifier: model-lab-api-delete-a-model-lab-run
@@ -19339,7 +19574,7 @@ menu:
           - DeleteModelLabRun
         unstable:
           - v2
-        order: 9
+        order: 11
     - name: List Model Lab runs
       url: /api/latest/model-lab-api/list-model-lab-runs/
       identifier: model-lab-api-list-model-lab-runs
@@ -19352,7 +19587,7 @@ menu:
           - ListModelLabRuns
         unstable:
           - v2
-        order: 7
+        order: 9
     - name: Star a Model Lab project
       url: /api/latest/model-lab-api/star-a-model-lab-project/
       identifier: model-lab-api-star-a-model-lab-project
@@ -19379,6 +19614,32 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Add an owner to a Model Lab project
+      url: /api/latest/model-lab-api/add-an-owner-to-a-model-lab-project/
+      identifier: model-lab-api-add-an-owner-to-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddModelLabProjectOwner
+        unstable:
+          - v2
+        order: 7
+    - name: Remove an owner from a Model Lab project
+      url: /api/latest/model-lab-api/remove-an-owner-from-a-model-lab-project/
+      identifier: model-lab-api-remove-an-owner-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveModelLabProjectOwner
+        unstable:
+          - v2
+        order: 8
     - name: List Model Lab project artifacts
       url: /api/latest/model-lab-api/list-model-lab-project-artifacts/
       identifier: model-lab-api-list-model-lab-project-artifacts
@@ -19391,7 +19652,7 @@ menu:
           - ListModelLabProjectArtifacts
         unstable:
           - v2
-        order: 15
+        order: 17
     - name: Get a Model Lab project
       url: /api/latest/model-lab-api/get-a-model-lab-project/
       identifier: model-lab-api-get-a-model-lab-project
@@ -19456,7 +19717,7 @@ menu:
           - ListModelLabRunFacetValues
         unstable:
           - v2
-        order: 13
+        order: 15
     - name: List Model Lab run facet keys
       url: /api/latest/model-lab-api/list-model-lab-run-facet-keys/
       identifier: model-lab-api-list-model-lab-run-facet-keys
@@ -19469,7 +19730,7 @@ menu:
           - ListModelLabRunFacetKeys
         unstable:
           - v2
-        order: 12
+        order: 14
     - name: Get Model Lab artifact content
       url: /api/latest/model-lab-api/get-model-lab-artifact-content/
       identifier: model-lab-api-get-model-lab-artifact-content
@@ -19482,7 +19743,7 @@ menu:
           - GetModelLabArtifactContent
         unstable:
           - v2
-        order: 16
+        order: 18
     - name: Nebius Cloud Integration
       url: /api/latest/nebius-cloud-integration/
       identifier: nebius-cloud-integration
@@ -20366,6 +20627,75 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
+    - name: OpenAI Codex Integration
+      url: /api/latest/openai-codex-integration/
+      identifier: openai-codex-integration
+      generated: true
+    - name: Update an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/update-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-update-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/get-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-get-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/delete-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-delete-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/create-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-create-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Codex integration accounts
+      url: /api/latest/openai-codex-integration/list-openai-codex-integration-accounts/
+      identifier: openai-codex-integration-list-openai-codex-integration-accounts
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAICodexIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

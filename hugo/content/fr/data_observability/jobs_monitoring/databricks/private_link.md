@@ -64,6 +64,7 @@ Toute l'authentification auprès de Datadog est gérée par le Private Action Ru
    1. Sélectionnez le principal de service créé ci-dessus.
    1. Cliquez sur l'onglet **Secrets**, puis cliquez sur **Générer un secret**.
    1. Définissez la durée de vie du secret en jours (maximum 730 jours).
+   1. Définissez le périmètre du secret sur `all-apis`.
    1. Cliquez sur **Générer**.
    1. Rendez les informations d'identification Databricks disponibles pour l'exécuteur en utilisant **l'une** des méthodes suivantes :
       - **Stockage de secrets dans le cloud** (AWS Secrets Manager, AWS Parameter Store, Azure Key Vault ou Google Cloud Secret Manager) : stockez les informations d'identification sous forme d'objet blob JSON :
@@ -153,7 +154,7 @@ Configurez votre Private Action Runner en utilisant **l'une** des options suivan
    1. Le Private Action Runner devrait apparaître en bas comme "successfully installed".
 1. Mettez à jour le `values.yaml` existant (en vous référant aux [Helm chart values][4]) :
    1. Définissez `image.repository` sur `gcr.io/datadoghq/dd-data-observability-par`.
-   1. Réglez `image.tag` sur `1.22.1-0`.
+   1. Définissez `image.tag` sur `1.22.2-0`.
 1. Configurez les identifiants sur le Private Action Runner en utilisant l'une des méthodes suivantes :
     - Définissez les variables d'environnement `DATABRICKS_CLIENT_ID` et `DATABRICKS_CLIENT_SECRET` directement sur le runner. Si vous utilisez un principal de service géré par Microsoft Entra ID, définissez également `DATABRICKS_AZURE_TENANT_ID`. Laissez le champ « Secret Path » vide dans la tuile d'intégration.
     - Utilisez le stockage de secrets cloud. Assurez-vous qu'une identité est attribuée au pod ([Azure Workload Identity][5], [AWS IAM Role][6] ou [GKE Workload Identity][7]) avec les autorisations nécessaires pour lire le secret créé à l'[étape 2](#step-2-databrick-prerequisites), et fournissez le chemin d'accès au secret soit via la variable d'environnement `DATABRICKS_SECRET_PATH`, soit en le saisissant dans le champ « Secret Path » de la tuile d'intégration.
@@ -176,7 +177,7 @@ Configurez votre Private Action Runner en utilisant **l'une** des options suivan
    1. Sélectionnez l'option **Script**, puis cliquez sur **Next**.
    1. Suivez les instructions sous **Docker**.
 
-      **Important** : Remplacez `gcr.io/datadoghq/private-action-runner:v1.22.1-large` par `gcr.io/datadoghq/dd-data-observability-par:1.22.1-0`.
+      **Important** : Remplacez `gcr.io/datadoghq/private-action-runner:v1.22.1-large` par `gcr.io/datadoghq/dd-data-observability-par:1.22.2-0`.
 
    1. Le Private Action Runner devrait apparaître en bas comme "successfully installed".
 1. Configurez les identifiants sur le Private Action Runner en utilisant l'une des méthodes suivantes :
