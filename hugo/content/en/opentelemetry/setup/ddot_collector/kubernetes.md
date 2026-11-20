@@ -846,32 +846,32 @@ By default, the Datadog Operator Helm chart watches `DatadogAgent` resources onl
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator \
-  -n <OPERATOR_NAMESPACE> \
+  -n <DATADOG_OPERATOR_NAMESPACE> \
   --reuse-values \
-  --set 'watchNamespaces={<OPERATOR_NAMESPACE>,<DATADOG_AGENT_NAMESPACE>}'
+  --set 'watchNamespaces={<DATADOG_OPERATOR_NAMESPACE>,<DATADOG_AGENT_NAMESPACE>}'
 ```
 
 If the Datadog Operator doesn't watch the namespace where you create the `DatadogAgent` resource, it ignores the resource.
 
 ## Troubleshooting
 
-### The Operator install fails with `no matches for kind "Certificate"`
+### The OpenTelemetry Operator install fails with `no matches for kind "Certificate"`
 
-Check that cert-manager and its custom resource definitions are installed. Then install the Operator again.
+Check that cert-manager and its custom resource definitions are installed. Then install the OpenTelemetry Operator again.
 
 ### `kubectl apply -f node-collector.yaml` fails with `failed calling webhook`
 
-Check that the Operator is ready with `kubectl rollout status deployment/opentelemetry-operator --timeout=5m`, then apply the file again. If it still fails, check the Operator's webhook certificate and the network path to the webhook.
+Check that the OpenTelemetry Operator is ready with `kubectl rollout status deployment/opentelemetry-operator --timeout=5m`, then apply the file again. If it still fails, check the OpenTelemetry Operator's webhook certificate and the network path to the webhook.
 
-### The Collector pod shows `CreateContainerConfigError`
+### The OpenTelemetry Collector pod shows `CreateContainerConfigError`
 
-This error usually means the Collector can't read its API key secret. Check that `datadog-secret` exists in the same namespace as the Collector, with the keys `api-key` and `site`:
+This error usually means the OpenTelemetry Collector can't read its API key secret. Check that `datadog-secret` exists in the same namespace as the Collector, with the keys `api-key` and `site`:
 
 ```shell
 kubectl describe secret datadog-secret
 ```
 
-### The Collector pod exits with `unable to reliably determine the host name`
+### The OpenTelemetry Collector pod exits with `unable to reliably determine the host name`
 
 Check that `DD_HOSTNAME` is set, as described in [Configure the Collector](#configure-the-collector). The Collector exits with this error when it can't detect a hostname, such as on a node without cloud provider metadata.
 
@@ -890,9 +890,9 @@ Remove the Collector and the components you installed for it:
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">Uninstalling the Operator also deletes its custom resource definitions. That removes every <code>OpenTelemetryCollector</code> and <code>Instrumentation</code> resource in the cluster, not only the ones from this guide. If other teams use the Operator in this cluster, check with them before you uninstall it.</div>
+<div class="alert alert-warning">Uninstalling the OpenTelemetry Operator also deletes its custom resource definitions. That removes every <code>OpenTelemetryCollector</code> and <code>Instrumentation</code> resource in the cluster, not only the ones from this guide. If other teams use the OpenTelemetry Operator in this cluster, check with them before you uninstall it.</div>
 
-Delete the `OpenTelemetryCollector` resource, then uninstall the Operator:
+Delete the `OpenTelemetryCollector` resource, then uninstall the OpenTelemetry Operator:
 
 ```shell
 kubectl delete -f node-collector.yaml
