@@ -123,8 +123,6 @@ The investigation adds the following attributes to the signal. You can use them 
 
 In the [AI Guard Signals explorer][4], signals with a `false_positive` verdict are hidden by default. To show them, or to filter on another verdict, use the verdict facet in the facet panel.
 
-<!-- TODO: add screenshot security/ai_guard/dynamic_signals_explorer.png: AI Guard Signals explorer with the verdict facet -->
-
 Click a signal to open its side panel. The investigation section shows the status of the investigation and, when it completes, its result:
 
 - **In progress**: the investigation is waiting for the conversation to complete or is running.
@@ -155,8 +153,6 @@ To get notified when an investigation finds an attack:
    - To get notified only about the most severe attacks, select the `high` and `critical` severity levels instead of all levels.
 1. Under **Destination**, add the recipients.
 1. Click {{< ui >}}Save{{< /ui >}}.
-
-<!-- TODO: add screenshot security/ai_guard/dynamic_signals_notification_rule.png: notification rule with the verdict query -->
 
 For more information, see [Notification Rules][16].
 
@@ -191,8 +187,6 @@ To grant AI Guard access to a Restricted Dataset:
 1. Under {{< ui >}}Designate Users with Access{{< /ui >}}, add **AI Guard**. AI Guard is listed under {{< ui >}}Agents and Automated Processes{{< /ui >}}. If it isn't listed, type `AI Guard` in the selector to search for it.
 1. Save the policy.
 1. Repeat for each Restricted Dataset that contains the APM traces of your AI applications.
-
-<!-- TODO: add screenshot security/ai_guard/dynamic_signals_dac_agent.png: Designate Users with Access selector with AI Guard under Agents and Automated Processes -->
 
 If [data not in a Restricted Dataset][20] is {{< ui >}}Restricted{{< /ui >}} for APM traces, AI Guard also needs access to that data. Add AI Guard to a Restricted Dataset that covers these spans, or grant it [unrestricted access][21] to APM traces. To grant unrestricted access, create a policy in the {{< ui >}}Unrestricted User Groups{{< /ui >}} tab and add AI Guard under {{< ui >}}Designate User Groups{{< /ui >}}. If AI Guard isn't listed, search for it.
 
