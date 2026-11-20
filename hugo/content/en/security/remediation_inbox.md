@@ -41,7 +41,7 @@ Use the Remediation Inbox to find the fixes that close the most critical finding
 
 To open the Remediation Inbox, go to [Security Inbox > Remediations][11] in Datadog.
 
-{{< img src="security/remediation_inbox/remediations_tab.png" alt="The Remediations tab of Security Inbox, listing package updates with the findings each one closes, its scope, and its tracking status" width="100%">}}
+{{< img src="security/remediation_inbox/remediations_tab.png" alt="The Remediations tab of Security Inbox, listing package updates with the findings each one closes, its scope, and its tracking status." width="100%">}}
 
 ## Prerequisites
 
