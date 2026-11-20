@@ -40,7 +40,7 @@ You can start ingesting historical metric values by enabling Historical Metrics 
 
 ## Configuration
 
-Enabling or disabling Historical Metrics Ingestion, including with bulk configuration, requires the Historical Metrics Config Write ([`late_metrics_config_write`][6]) RBAC permission.
+Enabling or disabling Historical Metrics Ingestion, including with bulk configuration, requires the Historical Metrics Config Write ([`late_metrics_config_write`][6]) permission.
 
 To enable the ingestion of historical metrics for a specific metric:
 1. Navigate to the [Metrics Catalog page][1].
