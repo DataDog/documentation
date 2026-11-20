@@ -107195,6 +107195,275 @@ components:
       required:
         - type
       type: object
+    OpenAIUsageAndCostsCloudCostDataIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        OpenAI organization costs, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). See [collected data](https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=openai#data-collected) for what is included. Cost data appears in Cloud Cost Management within 24 hours after you enable this dataflow.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`. Set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAIUsageAndCostsCloudCostDataIntegrationDataflowResponse:
+      description: >-
+        OpenAI organization costs, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). See [collected data](https://docs.datadoghq.com/cloud_cost_management/saas_costs/?tab=openai#data-collected) for what is included.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the OpenAI Usage and Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthRequest"
+    OpenAIUsageAndCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the OpenAI Usage and Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthResponse"
+    OpenAIUsageAndCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the OpenAI Usage and Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthUpdate"
+    OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an admin-scoped OpenAI API key; project-scoped and standard keys cannot read organization usage or costs. A key that is not an admin key, or that is invalid, is rejected with a `422` response.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an admin-scoped OpenAI API key; project-scoped and standard keys cannot read organization usage or costs. A key that is not an admin key, or that is invalid, is rejected with a `422` response. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an OpenAI Usage and Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Usage and Costs integration account.
+          example: openai-usage-and-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountCreateData:
+      description: Data envelope for creating an OpenAI Usage and Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountCreateRequest:
+      description: Request payload to create an OpenAI Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountResponse:
+      description: Response payload for a single OpenAI Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountResponseAttributes:
+      description: Attributes of an OpenAI Usage and Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the OpenAI Usage and Costs integration account.
+          example: openai-usage-and-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountResponseData:
+      description: Data envelope of an OpenAI Usage and Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the OpenAI Usage and Costs integration account.
+          example: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the OpenAI Usage and Costs integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountSettingsResponse:
+      description: Settings configured on the OpenAI Usage and Costs integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: >-
+        Settings for updating the OpenAI Usage and Costs integration account. Only the fields provided are changed.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an OpenAI Usage and Costs integration account. Every field is optional. Only the provided fields are changed. When `dataflows` is provided, only the dataflow IDs in the request are modified. Dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Usage and Costs integration account.
+          example: openai-usage-and-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountSettingsUpdate"
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating an OpenAI Usage and Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the OpenAI Usage and Costs integration account to update.
+          example: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update an OpenAI Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    OpenAIUsageAndCostsIntegrationAccountsResponse:
+      description: Response payload for a list of OpenAI Usage and Costs integration accounts.
+      properties:
+        data:
+          description: List of OpenAI Usage and Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    OpenAIUsageAndCostsIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from OpenAI Usage and Costs, keyed by dataflow ID. Datadog always collects organization usage metrics. Each dataflow in this object adds another type of collection. Set `enabled` to start or stop a dataflow. The default for each dataflow applies when the account is created. On update, omitted fields keep their current values.
+      properties:
+        openai-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsCloudCostDataIntegrationDataflowRequest"
+      type: object
+    OpenAIUsageAndCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from OpenAI Usage and Costs, keyed by dataflow ID.
+      properties:
+        openai-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsCloudCostDataIntegrationDataflowResponse"
+        openai-usage-metrics:
+          $ref: "#/components/schemas/OpenAIUsageAndCostsUsageMetricsIntegrationDataflowResponse"
+      type: object
+    OpenAIUsageAndCostsUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Organization usage metrics under the `openai.*` namespace, such as `openai.completions.*`, `openai.embeddings.*`, `openai.images.*`, `openai.moderations.*`, `openai.audio_speeches.*`, `openai.audio_transcriptions.*`, `openai.code_interpreter_sessions.*`, and `openai.vector_stores.*`. This dataflow is always on and cannot be turned off, so it appears only in responses.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     OpenAPIEndpoint:
       description: Endpoint info extracted from an `OpenAPI` specification.
       properties:
@@ -210223,6 +210492,265 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-usage-and-costs/accounts:
+    get:
+      description: List OpenAI Usage and Costs integration accounts.
+      operationId: ListOpenAIUsageAndCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            openai-cloud-cost-data:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            openai-usage-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: openai-usage-and-costs-acme
+                          settings:
+                            custom_tags: team:ai,env:prod
+                        id: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List OpenAI Usage and Costs accounts
+      tags:
+        - OpenAI Usage and Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an OpenAI Usage and Costs integration account.
+      operationId: CreateOpenAIUsageAndCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-usage-and-costs-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an OpenAI Usage and Costs account
+      tags:
+        - OpenAI Usage and Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-usage-and-costs/accounts/{account_id}:
+    delete:
+      description: Delete an OpenAI Usage and Costs integration account.
+      operationId: DeleteOpenAIUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an OpenAI Usage and Costs account
+      tags:
+        - OpenAI Usage and Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an OpenAI Usage and Costs integration account.
+      operationId: GetOpenAIUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-usage-and-costs-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an OpenAI Usage and Costs account
+      tags:
+        - OpenAI Usage and Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an OpenAI Usage and Costs integration account. Only the fields provided are changed.
+      operationId: UpdateOpenAIUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-usage-and-costs-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 9c4e7a2b-1d5f-4e8a-b3c6-0f2d8a6e4b17
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIUsageAndCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an OpenAI Usage and Costs account
+      tags:
+        - OpenAI Usage and Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/snowflake/accounts:
     get:
       description: List Snowflake integration accounts.
@@ -244070,6 +244598,10 @@ paths:
       tags:
         - RUM Remote Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -249599,6 +250131,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
       description: Delete the link between a RUM operation and a journey.
@@ -249631,6 +250167,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
     put:
       description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
@@ -249700,6 +250240,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/{rum_operation_id}:
     delete:
       description: Delete a RUM operation.
@@ -288275,6 +288819,15 @@ tags:
       description: OpenAI Codex integration.
       url: https://docs.datadoghq.com/integrations/openai-codex/
     name: OpenAI Codex Integration
+  - description: |-
+      Manage your Datadog OpenAI Usage and Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [OpenAI integration page](https://docs.datadoghq.com/integrations/openai/) for
+      more information.
+    externalDocs:
+      description: OpenAI integration.
+      url: https://docs.datadoghq.com/integrations/openai/
+    name: OpenAI Usage and Costs Integration
   - description: |-
       Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
       directly through the Datadog API.
