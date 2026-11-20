@@ -151,7 +151,7 @@ Use a dedicated test tag and a small allowance to check the configuration before
 4. In Alert-only mode (`NOTIFY`), confirm requests continue after an allowance is exhausted. In Block mode (`BLOCK`), confirm a new matching request returns HTTP `402` with `budget_exceeded`.
 5. Confirm another instance with available capacity can still send requests, unless a separate shared budget is also exhausted.
 
-A request counts against every matching budget. An available personal allowance does not bypass an exhausted team or organization allowance. Responses already in progress can complete after an allowance is reached. AI Gateway checks a budget before a request and records the cost after the response completes, so the request that reaches the limit and requests running at the same time can take spend above the limit. Subscription provider traffic and operations that are not metered by tokens, such as web search and token counting, are not counted or blocked.
+A request counts against every matching budget. An available personal allowance does not bypass an exhausted team or organization allowance. Responses already in progress can complete after an allowance is reached. AI Gateway checks a budget before a request and records the cost after the response completes, so the request that reaches the limit and requests running at the same time can take spend above the limit. Subscription provider traffic and operations that are not metered by tokens, such as web search and token counting, are not counted or blocked. If AI Gateway cannot complete a budget check, it allows the request.
 
 ### Troubleshoot budget accounting
 
@@ -193,6 +193,7 @@ Start in Alert mode and review the rate limit for a few days before you switch t
 - Tokens and cost count when a response completes, so requests already in progress can take usage over a limit.
 - A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM_SLUG>`. Use the slug of a team the caller belongs to. Without the header, it applies to requests from users who directly belong to the team.
 - If a request falls back to another destination, it counts once against each rate limit.
+- If AI Gateway cannot complete a rate limit check, it allows the request.
 - Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
 - If AI Gateway cannot check a rate limit, it accepts the request.
 
@@ -218,7 +219,7 @@ Clients that retry on `429` should wait for the `Retry-After` duration before th
 
 ### Monitor rate limit usage
 
-The rate limit list shows rolling-minute usage and status for each rule. It also shows requests limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
+The rate limit list shows rolling-minute usage and status for each rule. It also shows requests limited in the last 15 minutes. The count includes requests that fell back to another destination. Usage turns orange at 80% of a limit and red when the limit is reached.
 
 | Status | Meaning |
 |---|---|

@@ -104,10 +104,10 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `403`. Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry.
 
 `zdr_no_eligible_target`
-: HTTP `400`. Your organization requires zero data retention, and none of the request's eligible targets qualifies for it. This is a configuration issue. Do not retry.
+: HTTP `400`. Your organization requires zero data retention, and none of the request's eligible targets qualifies for it. This is a configuration issue. Do not retry. This code applies only to organizations with zero data retention enabled.
 
 `zdr_requirement_unavailable`
-: HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request.
+: HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request. This code applies only to organizations with zero data retention enabled.
 
 `guardrail_violation`
 : HTTP `422` (OpenAI) / `400` (Anthropic). An AI Guard policy attached in Block unsafe mode refused the request or its response. See [Apply AI Guard policies](/ai_gateway/security/#apply-ai-guard-policies).

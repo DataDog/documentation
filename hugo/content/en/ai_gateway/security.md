@@ -150,6 +150,8 @@ There are two capture modes. **Metadata only** can optionally add *capture items
 
 When a request has no capture setting, or AI Gateway can't read the configuration, the request uses Metadata only with no capture items.
 
+In every mode, a span also records the request's tag values, the caller's email, and, for a failed provider call, the provider's error message.
+
 ### Capture items
 
 Capture items apply only under Metadata only. An item can require other items, because it already reveals what those items record. When you select an item in the UI, AI Gateway also selects what it requires, and clearing an item clears the items that depend on it. The API rejects a set that breaks a dependency.

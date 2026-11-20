@@ -31,11 +31,13 @@ Configure [data capture](/ai_gateway/security/#configure-data-capture) through o
 
 ## Model served by any provider
 
-A model served by any configured provider considers all enabled providers in your organization that serve that model. Only providers permitted by the caller's [model access](/ai_gateway/access_control/) settings are eligible. AI Gateway tries those providers in slug order and sends each one its provider model ID.
+A model served by any configured provider considers all enabled providers in your organization that serve that model. A caller who has access to the routing rule can use every provider the rule reaches, without direct access to those models. To let callers use a model only through a routing rule, for example one that limits reasoning effort, grant [access](/ai_gateway/access_control/) to the rule and not to the model. AI Gateway tries the providers in slug order and sends each one its provider model ID.
 
 ## Fallback behavior
 
 AI Gateway tries the next provider or fallback destination when the current one cannot serve the request or returns HTTP `401`, `402`, `403`, `408`, `429`, or `5xx`. A successful response, or any other `4xx` response (such as `400`, `404`, or `422`), is returned to the caller. If every attempt returns one of the fallback statuses, the caller receives the last of those responses. If no destination can serve the request, the request fails.
+
+Fallback applies before a response starts. If a streamed response fails after it has started, AI Gateway does not retry it on another destination.
 
 [Budgets](/ai_gateway/spend_controls/#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
