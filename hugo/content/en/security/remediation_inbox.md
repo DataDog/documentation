@@ -45,7 +45,7 @@ To open the Remediation Inbox, go to [Security Inbox > Remediations][11] in Data
 
 ## Prerequisites
 
-Findings from at least one supported product:
+You need findings from at least one of the following products:
 
 - [Software Composition Analysis][3] (SCA) library vulnerabilities
 - [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
