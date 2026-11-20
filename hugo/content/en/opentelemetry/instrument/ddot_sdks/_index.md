@@ -66,12 +66,12 @@ Select your language to see the minimum SDK version and supported protocols for 
 
 {{< programming-lang lang="java" >}}
 - **Minimum version**: v1.62.0
-- **Supported protocols**: `http/protobuf` (default), `grpc`
+- **Supported protocols**: `http/protobuf` (default), `grpc`, `http/json` (v1.65.0+)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
 - **Minimum version**: v4.8.0
-- **Supported protocols**: `http/protobuf` (v4.14.0+, default), `http/json` (default before v4.14.0)
+- **Supported protocols**: `http/protobuf` (v4.14.0+, default), `http/json` (default before v4.14.0), `grpc` (v4.17.0+)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
