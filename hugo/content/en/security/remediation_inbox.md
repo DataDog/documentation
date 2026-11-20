@@ -164,7 +164,7 @@ To let your coding agent update the remediation case as it works, set up the [Da
 
 To check the fix from your coding agent, set up the [Code Security MCP Server][7]. It rescans your local code and confirms the findings are resolved before you commit.
 
-{{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options" width="80%">}}
+{{< img src="security/remediation_inbox/remediate_with_ai.png" alt="The Remediate with AI dialog, with the Fix with Bits, Copy fix prompt, and Fix with Cursor options." width="80%">}}
 
 ### Link a pull request
 
