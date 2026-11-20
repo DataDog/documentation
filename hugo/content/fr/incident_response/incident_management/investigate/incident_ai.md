@@ -40,6 +40,19 @@ Lorsqu'un incident est marqué comme résolu, Incident AI publie un résumé fin
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Exemple de résumé d'incident dans Slack" style="width:100%;" >}}
 
+## Résumés et transcriptions de réunions {#meeting-summaries}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Les résumés de réunion et les transcriptions de réunion en direct ne sont pas disponibles pour le site Datadog sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+Pour les réunions d'incident, Incident AI peut générer des résumés et enregistrer des transcriptions en direct dans des notebooks Datadog :
+
+- **Résumés de réunion** : Pendant une réunion, Incident AI publie périodiquement des résumés en direct sur la timeline de l'incident et dans le canal de discussion de l'incident. À la fin de la réunion, il publie un résumé final.
+- **Transcriptions de réunion en direct** : Un notebook Datadog capture la conversation avec les noms des intervenants et les horodatages dans votre fuseau horaire. Le notebook se met à jour pendant la réunion et reste disponible par la suite.
+
+Pour configurer les résumés et les transcriptions de réunion, consultez la page d'intégration [Zoom][4], [Google Meet][5] ou [Microsoft Teams][6]. Pour consulter les résumés, voir les transcriptions, réinviter le transcripteur et savoir comment les données de réunion sont conservées, consultez [Meeting Summaries and Transcripts][7].
+
 ## Détection d'incidents associés {#related-incident-detection}
 
 Incident AI signale automatiquement les incidents associés s'ils sont déclarés dans un intervalle de 20 minutes, vous aidant ainsi à identifier des problèmes systémiques plus larges.
@@ -88,7 +101,7 @@ Lorsqu'il est déclenché, l'agent extrait automatiquement la chronologie de l'i
 
 Lorsqu'elle est déclenchée, l'investigation est intégrée à l'interface Web de l'incident, et Bits Investigation apparaît comme intervenant dans la section Responder Roles de la page.
 
-Pour une présentation complète du workflow d'investigation, consultez [Bits Investigation][4].
+Pour une présentation complète du workflow d'investigation, consultez [Bits Investigation][8].
 
 ## Pour aller plus loin {#further-reading}
 
@@ -97,4 +110,8 @@ Pour une présentation complète du workflow d'investigation, consultez [Bits In
 [1]: /fr/incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /fr/incident_response/incident_management/setup_and_configuration/templates
 [3]: /fr/incident_response/incident_management/post_incident/postmortems
-[4]: /fr/bits_ai/bits_investigation
+[4]: /fr/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
+[5]: /fr/incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
+[6]: /fr/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
+[7]: /fr/incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+[8]: /fr/bits_ai/bits_investigation

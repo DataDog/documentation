@@ -208,8 +208,13 @@ export function getBestDiscriminant(
 }
 
 /**
- * Build the display label for each branch of a `oneOf`/`anyOf`, positionally
- * aligned with `variants`.
+ * The name of each branch of a `oneOf`/`anyOf`, positionally aligned with
+ * `variants`, or `undefined` where the branch has no name of its own. Callers
+ * supply their own positional fallback for those.
+ *
+ * A branch's `title` wins over the discriminant, since it is written by hand
+ * in the spec for exactly this purpose and reads better than `<type=foo>`.
+ * Hugo has no equivalent: it never reads `title` (see WEB-9138).
  *
  * Hugo operates on a fully dereferenced spec, so it can read `item.properties`
  * directly; Astro resolves lazily, so each branch's `$ref` is resolved here
@@ -217,22 +222,43 @@ export function getBestDiscriminant(
  *
  * @param spec      The full parsed OpenAPI spec object.
  * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
- * @returns One label per variant, e.g. `["<type=toplist>", "Object 2"]`.
+ * @returns One name or `undefined` per variant.
  */
-export function unionOptionLabels(spec: any, variants: any[]): string[] {
+function unionOptionNames(
+  spec: any,
+  variants: any[],
+): Array<string | undefined> {
   const items = variants.map((variant) =>
     variant?.$ref ? (resolveRef(spec, variant.$ref) ?? variant) : variant,
   );
 
   const discriminant = getBestDiscriminant(spec, items);
-  const names = items.map((item) =>
-    discriminant ? getMaybeConstTypeName(spec, item, discriminant) : undefined,
-  );
+  const names = items.map((item) => {
+    if (typeof item?.title === "string" && item.title !== "") return item.title;
+    return discriminant
+      ? getMaybeConstTypeName(spec, item, discriminant)
+      : undefined;
+  });
   const byName = groupBy(names, (name) => name);
 
   // Keep a name only when it uniquely identifies one branch.
-  return names.map((name, i) =>
-    name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`,
+  return names.map((name) =>
+    name && byName.get(name)?.length === 1 ? name : undefined,
+  );
+}
+
+/**
+ * Build the display label for each branch of a `oneOf`/`anyOf`, positionally
+ * aligned with `variants`. Branches with no name of their own fall back to
+ * `Object N`.
+ *
+ * @param spec      The full parsed OpenAPI spec object.
+ * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
+ * @returns One label per variant, e.g. `["<type=toplist>", "Object 2"]`.
+ */
+export function unionOptionLabels(spec: any, variants: any[]): string[] {
+  return unionOptionNames(spec, variants).map(
+    (name, i) => name ?? `Object ${i + 1}`,
   );
 }
 
@@ -313,17 +339,22 @@ export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
 
 /**
  * The rows of a top-level `oneOf` body. Hugo's `schemaTable` turns each branch
- * into an ordinary level-0 row named `Option n`, with no row for the union
- * itself. Hugo doesn't do this for `anyOf`.
+ * into an ordinary level-0 row, with no row for the union itself. Hugo doesn't
+ * do this for `anyOf`.
+ *
+ * Hugo names every such row `Option n` positionally. Here a branch that names
+ * itself — by `title`, or by a discriminant — keeps that name, and only the
+ * unnamed ones fall back to `Option n` (see WEB-9138).
  */
 function topLevelOptionFields(
   spec: any,
   variants: any[],
   visited: Set<string>,
 ): SchemaField[] {
+  const names = unionOptionNames(spec, variants);
   // Level -1 puts the option rows at level 0 and their fields at level 1.
   return buildUnionOptions(spec, variants, visited, -1).map((option, idx) =>
-    optionAsField({ ...option, label: `Option ${idx + 1}` }),
+    optionAsField({ ...option, label: names[idx] ?? `Option ${idx + 1}` }),
   );
 }
 

@@ -26,8 +26,8 @@ Use la [página de Símbolos de Depuración de RUM][1] para ver si hay símbolos
 Si no hay símbolos de depuración para su aplicación, [cárguelos][2].
 
 <div class="alert alert-danger">
-Asegúrese de que el tamaño de cada símbolo de depuración no exceda el límite de **500 MB**; de lo contrario, la carga será rechazada.
-Para dSYMs de iOS, se admiten archivos individuales de hasta **2 GB**. 
+Asegúrese de que el tamaño de cada símbolo de depuración no exceda el límite de <strong>500 MB</strong>; de lo contrario, la carga será rechazada.
+Para dSYMs de iOS, se admiten archivos individuales de hasta <strong>2 GB</strong>. 
 </div>
 
 ### Las etiquetas de los símbolos de depuración no coinciden con {#debug-symbol-tags-do-not-match}

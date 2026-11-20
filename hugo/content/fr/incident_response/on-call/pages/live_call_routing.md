@@ -11,9 +11,15 @@ further_reading:
   text: Datadog On-Call
 title: Routage d'appel en direct
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Le routage d'appels en direct n'est pas pris en charge pour le <a href="/getting_started/site">site Datadog</a> que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <div class="alert alert-info">
 Le routage d'appel en direct est provisionné par Datadog. Pour l'activer pour votre organisation, contactez <a href="mailto:support@datadoghq.com">Datadog Support</a>. Incluez votre cas d'utilisation et le code pays souhaité (par exemple, <code>+33</code> pour la France).
 </div>
+{{< /site-region >}}
 
 ## Présentation {#overview}
 

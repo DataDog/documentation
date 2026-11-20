@@ -103,3 +103,96 @@ entries:
     operations:
       - UploadCustomCostsFile
     title: Add Update Custom Costs file endpoint
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41821
+    operations:
+      - DeleteCustomCostsFile
+      - GetCustomCostsFile
+      - ListCustomCostsFiles
+      - UpdateCustomCostsFile
+      - UploadCustomCostsFile
+    title: Document Custom Costs ai_provider, preview reason and error format
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateCostAWSCURConfig
+      - CreateCostAzureUCConfigs
+      - CreateCostGCPUsageCostConfig
+      - CreateCustomAllocationRule
+      - CreateTagPipelinesRuleset
+      - CreateUnitCost
+      - DeleteBudget
+      - DeleteCostAWSCURConfig
+      - DeleteCostAzureUCConfig
+      - DeleteCostGCPUsageCostConfig
+      - DeleteCostTagDescriptionByKey
+      - DeleteCustomAllocationRule
+      - DeleteCustomCostsFile
+      - DeleteCustomForecast
+      - DeleteTagPipelinesRuleset
+      - DeleteUnitCost
+      - GenerateCostTagDescriptionByKey
+      - GetBudget
+      - GetCommitmentsCommitmentList
+      - GetCommitmentsCoverageScalar
+      - GetCommitmentsCoverageTimeseries
+      - GetCommitmentsOnDemandHotspotsScalar
+      - GetCommitmentsSavingsScalar
+      - GetCommitmentsSavingsTimeseries
+      - GetCommitmentsUtilizationScalar
+      - GetCommitmentsUtilizationTimeseries
+      - GetCostAWSCURConfig
+      - GetCostAccountFilters
+      - GetCostAnomaly
+      - GetCostAzureUCConfig
+      - GetCostGCPUsageCostConfig
+      - GetCostTagDescriptionByKey
+      - GetCostTagKey
+      - GetCostTagMetadataCurrency
+      - GetCustomAllocationRule
+      - GetCustomCostsFile
+      - GetCustomForecast
+      - GetTagPipelinesRuleset
+      - GetUnitCost
+      - ListBudgets
+      - ListCostAWSCURConfigs
+      - ListCostAnomalies
+      - ListCostAzureUCConfigs
+      - ListCostCloudAccountsV2
+      - ListCostGCPUsageCostConfigs
+      - ListCostOCIConfigs
+      - ListCostTagDescriptions
+      - ListCostTagKeySources
+      - ListCostTagKeys
+      - ListCostTagMetadata
+      - ListCostTagMetadataMetrics
+      - ListCostTagMetadataMonths
+      - ListCostTagMetadataOrchestrators
+      - ListCostTags
+      - ListCustomAllocationRules
+      - ListCustomAllocationRulesStatus
+      - ListCustomCostsFiles
+      - ListTagPipelinesRulesets
+      - ListTagPipelinesRulesetsStatus
+      - ListUnitCosts
+      - ReorderCustomAllocationRules
+      - ReorderTagPipelinesRulesets
+      - SearchCostRecommendations
+      - UpdateCostAWSCURConfig
+      - UpdateCostAccountFilters
+      - UpdateCostAzureUCConfigs
+      - UpdateCostGCPUsageCostConfig
+      - UpdateCustomAllocationRule
+      - UpdateCustomCostsFile
+      - UpdateTagPipelinesRuleset
+      - UpdateUnitCost
+      - UploadCustomCostsFile
+      - UpsertBudget
+      - UpsertCostTagDescriptionByKey
+      - UpsertCustomForecast
+      - ValidateBudget
+      - ValidateCsvBudget
+      - ValidateQuery
+    title: Document rate-limit headers on the shared 429 responses

@@ -1,5 +1,5 @@
 ---
-title: Windows
+title: Add Components to the Agent's Collector on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 3
