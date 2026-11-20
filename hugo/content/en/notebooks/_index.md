@@ -271,7 +271,7 @@ To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="ic
 
 ## Organizing notebooks with folders
 
-Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs. Folders are public: everyone in your organization can see them.
+Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs. Folders are public: everyone in your organization can see them. Notebooks keep their own [permissions](#permissions) when you add them to a folder.
 
 {{< img src="notebooks/folders_list.png" alt="The All Folders page, listing folders with their contents, author, team, and last modified date, next to the Notebooks side panel" style="width:100%;" >}}
 
