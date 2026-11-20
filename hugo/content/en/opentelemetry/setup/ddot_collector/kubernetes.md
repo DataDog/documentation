@@ -787,15 +787,15 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 
 ## Instrument your application
 
-Instrument your application with a Datadog SDK or an OpenTelemetry SDK. Either one sends OTLP to the Collector on the application's node, which publishes the OTLP ports on the node.
+Instrument your application with a DDOT SDK or an upstream OpenTelemetry SDK. Either one sends OTLP to the Collector on the application's node, which publishes the OTLP ports on the node.
 
-### Datadog SDK
+### DDOT SDK
 
-Turn on OTLP export in the Datadog SDK for your language, as described in [DDOT SDK OTLP trace export][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [upstream OpenTelemetry SDK](#opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
+Activate OpenTelemetry mode in the DDOT SDK for your language, as described in [Activate OpenTelemetry mode][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [upstream OpenTelemetry SDK](#upstream-opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
 
-### OpenTelemetry SDK
+### Upstream OpenTelemetry SDK
 
-Instrument your application with an [OpenTelemetry SDK][12]. Add these variables to your application container's `env` list. If your application already sets `OTEL_EXPORTER_OTLP_ENDPOINT`, update it to point to this Collector. The variables send OTLP over HTTP to the Collector on the node, and set the `service`, `env`, and `version` tags on your data:
+Instrument your application with an [upstream OpenTelemetry SDK][12]. Add these variables to your application container's `env` list. If your application already sets `OTEL_EXPORTER_OTLP_ENDPOINT`, update it to point to this Collector. The variables send OTLP over HTTP to the Collector on the node, and set the `service`, `env`, and `version` tags on your data:
 
 {{< code-block lang="yaml" filename="deployment.yaml" collapsible="true" >}}
 env:
@@ -930,7 +930,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 
 ## Next steps
 
-- **Instrument more applications**: [OpenTelemetry SDKs][12] or [Datadog SDKs with OTLP export][66].
+- **Instrument more applications**: [DDOT SDKs][66] or [upstream OpenTelemetry SDKs][12].
 - **Check host names and tags**: [Hostnames and Tagging][67].
 - **Compare setups**: [Feature Compatibility][68].
 

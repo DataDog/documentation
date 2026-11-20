@@ -263,7 +263,7 @@ You can only enable runtime metrics with [environment variables](#environment-va
 
 ## Export runtime metrics over OTLP
 
-Use one of the following Datadog SDKs to export runtime metrics over OTLP:
+Use one of the following DDOT SDKs to export runtime metrics over OTLP:
 
 | SDK | Minimum SDK version | Runtime requirement |
 |-----|---------------------|---------------------|
