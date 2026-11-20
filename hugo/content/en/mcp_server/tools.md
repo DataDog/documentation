@@ -1030,6 +1030,23 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 - Show me the metric history for monitor `12345`.
 - What are the anomaly bounds for this freshness monitor?
 
+### `get_data_observability_monitor_errors`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read`*\
+Returns the latest metric collection error for each table covered by a data quality monitor. Errors can include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this tool to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`. To check a single table, provide `entity_id`. Otherwise, the tool checks up to 500 tables.
+
+- Show the latest metric collection errors for monitor `12345`.
+- Why does this data quality monitor show No Data?
+- Check monitor `12345` for collection errors on this table.
+
+### `get_data_entity_monitor_health`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries`*\
+Returns the status of every data quality monitor on a data entity, such as a table, including any metric collection errors. Requires `entity_id`.
+
+- Show the health of all data quality monitors on this table.
+- Are any monitors on this table reporting metric collection errors?
+
 ### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read`*\
