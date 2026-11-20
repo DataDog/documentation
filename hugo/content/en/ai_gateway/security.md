@@ -200,7 +200,7 @@ Set the organization default mode and items in {{< ui >}}AI Gateway{{< /ui >}} >
 
 To apply a different mode or different items to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}. An override has a name, request filters, a mode, and, under Metadata only, its own items. An override does not inherit the organization default's items: an override set to Metadata only with no items records no items, even if the organization default selects some.
 
-An override can match a user, team, model, provider, or custom tag. Every filter in an override must match, and each filter takes one value. To match alternatives, create separate overrides. Custom tags match the exact `x-dd-tag-<KEY>` header value. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
+An override can match a user, team, model, provider, or custom tag. Every filter in an override must match, and each filter takes one value. To match alternatives, create separate overrides. Custom tags match the exact `x-dd-tag-<KEY>` header value, including case. A tag key must start with a lowercase letter and contain only lowercase letters, digits, underscores, periods, slashes, or hyphens. AI Gateway ignores a header with any other key, so an override on that key does not match. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
 
 A team capture override requires the `x-ai-gateway-team: <TEAM_SLUG>` header to select that team. Unlike team budgets and rate limits, a team capture override does not match a request based on team membership alone.
 

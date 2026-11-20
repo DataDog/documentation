@@ -60,7 +60,7 @@ Integration credentials remain separate from the Datadog credential the applicat
 3. Enter a display name and a unique slug, such as `production-openai`. The slug becomes part of every direct model request. The connected account and slug cannot be changed after creation.
 4. In {{< ui >}}Models{{< /ui >}}, review {{< ui >}}Discovered models{{< /ui >}}. AI Gateway enables discovered models on the provider automatically. Callers can use them only after you grant access in the {{< ui >}}Access{{< /ui >}} step. [Add models manually](#add-a-model-manually) if the provider does not return a model you need.
 5. Review the cost multiplier. It scales automatically detected prices, and a custom model price takes precedence over it. After you create the provider, confirm prices in [{{< ui >}}Models{{< /ui >}} > {{< ui >}}Model catalog{{< /ui >}}][providers-6] before relying on spend reporting or budgets.
-6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. See [Control model access][providers-7].
+6. In {{< ui >}}Access{{< /ui >}}, choose who can call the provider's models. The default, {{< ui >}}Decide later{{< /ui >}}, creates the provider without granting anyone access: requests return HTTP `403` with `no_permitted_target` until an access policy or the default policy covers the provider's models. See [Control model access][providers-7].
 7. In {{< ui >}}Review{{< /ui >}}, check the account, slug, models, and access assignments, then click {{< ui >}}Create provider{{< /ui >}}.
 8. Open the saved provider and [verify a model request](#verify-the-connection).
 

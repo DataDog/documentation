@@ -21,10 +21,10 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 ## Create a routing rule
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Routing{{< /ui >}}][7] and click {{< ui >}}New routing rule{{< /ui >}}.
-2. Enter a lowercase slug. The page shows the resulting `router/<RULE_SLUG>` identifier.
+2. Enter a slug using lowercase letters, numbers, and hyphens, up to 128 characters. You cannot change the slug after you create the rule. The page shows the resulting `router/<RULE_SLUG>` identifier.
 3. Configure the first routing step. Select one model, use {{< ui >}}Weighted{{< /ui >}} to assign traffic shares across [sessions](#sessions), use {{< ui >}}Smart{{< /ui >}} to let a decision model pick a destination for each session (see [Smart routing steps](#smart-routing-steps)), or select {{< ui >}}Another route{{< /ui >}} to link a routing rule. A model destination can use a specific provider account or any configured provider that serves that model.
 4. Optional: Add fallback steps in priority order.
-5. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the routing rule. See [Control model access](/ai_gateway/access_control/).
+5. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the routing rule. The default, {{< ui >}}Decide later{{< /ui >}}, grants no access: requests to the rule return HTTP `403` with `no_permitted_target` until an access policy includes the rule. See [Control model access](/ai_gateway/access_control/).
 6. Review and save the rule, then copy its identifier into the `model` field of your requests.
 
 Configure [data capture](/ai_gateway/security/#configure-data-capture) through organization defaults and scoped overrides under {{< ui >}}Policies{{< /ui >}}.
@@ -40,6 +40,8 @@ AI Gateway tries the next provider or fallback destination when the current one 
 [Budgets](/ai_gateway/spend_controls/#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
 [Rate limits](/ai_gateway/spend_controls/#set-rate-limits) in Enforce mode are also checked per destination. A rate limit scoped to one model or provider makes AI Gateway fall back to the next destination. A rate limit that matches every destination, such as an organization-wide limit, returns HTTP `429`.
+
+If destinations are blocked for different reasons, such as a budget on one and a rate limit on another, AI Gateway returns HTTP `400` with `no_eligible_target`.
 
 ## Smart routing steps
 
