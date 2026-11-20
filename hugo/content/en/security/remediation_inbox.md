@@ -176,7 +176,7 @@ Datadog records each fix, whether a Bits Code session or a linked pull request, 
 
 While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. Findings stay open until the pull request merges and the next scan confirms the fix.
 
-Findings that belong to a remediation case show the linked case in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel. This lets anyone investigating a finding see that a fix is already underway.
+Findings that belong to a remediation case show the linked case in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel, so anyone investigating a finding can see that a fix is already underway.
 
 ### Remediation lifecycle
 
