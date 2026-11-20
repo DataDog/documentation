@@ -1956,6 +1956,22 @@ components:
         default: created_at
         example: "-created_at"
         type: string
+    ProductAnalyticsLaunchIDPathParameter:
+      description: UUID of the launch.
+      in: path
+      name: id
+      required: true
+      schema:
+        example: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+        type: string
+    ProductAnalyticsMonitorIDPathParameter:
+      description: Numeric ID of the monitor.
+      in: path
+      name: monitor_id
+      required: true
+      schema:
+        example: "12345"
+        type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
       example: logs
@@ -114863,6 +114879,1130 @@ components:
       type: string
       x-enum-varnames:
         - JOURNEY_TIMESERIES_RESPONSE
+    ProductAnalyticsLaunchAttributes:
+      description: Attributes of a launch.
+      properties:
+        application_id:
+          description: UUID of the RUM application that the launch belongs to.
+          nullable: true
+          type: string
+        context:
+          description: Context of the feature being launched.
+          nullable: true
+          type: string
+        created_at:
+          description: Time the launch was created.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: UUID of the user who created the launch.
+          example: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+          type: string
+        description:
+          description: Description of the feature being launched.
+          nullable: true
+          type: string
+        feature_flag_id:
+          description: UUID of the Datadog feature flag that gates the launch.
+          nullable: true
+          type: string
+        feature_flag_key:
+          description: Key of a feature flag managed outside Datadog.
+          nullable: true
+          type: string
+        kpis:
+          description: KPIs that the launch is meant to move.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchKPI"
+          nullable: true
+          type: array
+        name:
+          description: Name of the launch.
+          example: checkout_promo_codes
+          type: string
+        org_id:
+          description: ID of the organization that owns the launch.
+          example: 2
+          format: int64
+          type: integer
+        phase:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPhase"
+        repository_id:
+          description: ID of the code repository that implements the feature.
+          type: string
+        steps:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchSteps"
+        updated_at:
+          description: Time the launch was last updated.
+          format: date-time
+          nullable: true
+          type: string
+        updated_by:
+          description: UUID of the user who last updated the launch.
+          nullable: true
+          type: string
+      required:
+        - org_id
+        - phase
+        - name
+        - created_by
+        - created_at
+        - steps
+      type: object
+    ProductAnalyticsLaunchCodeAnalysis:
+      description: |-
+        Latest inspection of the repository for the tracking plan instrumentation. A new analysis replaces the stored
+        one.
+        Events and properties that it does not list are not verified.
+      properties:
+        analyzed_at:
+          description: Time of the analysis. Set by the server.
+          format: date-time
+          readOnly: true
+          type: string
+        events:
+          description: Results for the events of the tracking plan. List each event once.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchEventFinding"
+          type: array
+        revision:
+          description: Code revision that was inspected, such as a commit SHA.
+          type: string
+      type: object
+    ProductAnalyticsLaunchCodeStatus:
+      description: Whether the inspected code sends the event, or attaches the property to the event.
+      enum:
+        - found
+        - not_found
+      example: found
+      type: string
+      x-enum-varnames:
+        - FOUND
+        - NOT_FOUND
+    ProductAnalyticsLaunchCreateData:
+      description: Data of the launch to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsLaunchCreateRequest:
+      description: Request to create a launch.
+      example:
+        data:
+          attributes:
+            context: Let users apply promo codes at checkout.
+            description: Promo codes at checkout.
+            kpis:
+              - id: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                title: Checkout conversion rate
+            name: checkout_promo_codes
+            phase: plan
+            steps:
+              tracking_plan:
+                events:
+                  - kpis:
+                      - 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                    name: promo_code_applied
+                    trigger: The user applies a valid promo code.
+                    views:
+                      - /checkout
+          type: liftoff
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCreateData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsLaunchDashboardStep:
+      description: Dashboard linked to the launch.
+      properties:
+        dashboard_id:
+          description: ID of the linked dashboard.
+          nullable: true
+          type: string
+      type: object
+    ProductAnalyticsLaunchData:
+      description: A launch.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchAttributes"
+        id:
+          description: UUID of the launch.
+          example: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsLaunchEvent:
+      description: An event to instrument for the launch.
+      properties:
+        description:
+          description: What the event records.
+          type: string
+        kpis:
+          description: IDs of the launch KPIs that the event measures.
+          items:
+            description: ID of a launch KPI.
+            type: string
+          type: array
+        name:
+          description: Name of the event, unique within the tracking plan.
+          example: promo_code_applied
+          type: string
+        properties:
+          description: Properties that the event carries.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchEventProperty"
+          type: array
+        trigger:
+          description: What causes the event to be sent.
+          type: string
+        views:
+          description: Views where the event is sent. Each value must be unique and not blank.
+          items:
+            description: Name of a view.
+            type: string
+          type: array
+      required:
+        - name
+      type: object
+    ProductAnalyticsLaunchEventFinding:
+      description: Code analysis result for an event of the tracking plan.
+      properties:
+        name:
+          description: Name of the event in the tracking plan.
+          example: promo_code_applied
+          type: string
+        properties:
+          description: Results for the properties of the event. Only allowed when the event is `found`.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchPropertyFinding"
+          type: array
+        status:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCodeStatus"
+      required:
+        - name
+        - status
+      type: object
+    ProductAnalyticsLaunchEventProperty:
+      description: A reference from an event to a property of the tracking plan.
+      properties:
+        id:
+          description: ID of a property in the tracking plan `properties`.
+          example: promo_code
+          type: string
+        required:
+          description: Whether the event must always include the property.
+          type: boolean
+      required:
+        - id
+      type: object
+    ProductAnalyticsLaunchExperimentStep:
+      description: Experiment linked to the launch. The draft fields are cleared when `experiment_id` is set.
+      properties:
+        experiment_id:
+          description: UUID of the linked experiment.
+          nullable: true
+          type: string
+        hypothesis:
+          description: Hypothesis of a draft experiment.
+          nullable: true
+          type: string
+        name:
+          description: Name of a draft experiment.
+          nullable: true
+          type: string
+        protocol_id:
+          description: Protocol ID of a draft experiment.
+          nullable: true
+          type: string
+      type: object
+    ProductAnalyticsLaunchFunnelStep:
+      description: Funnel linked to the launch.
+      properties:
+        funnel_tile_def:
+          additionalProperties: {}
+          description: Definition of the funnel widget, as a JSON object.
+          nullable: true
+          type: object
+      type: object
+    ProductAnalyticsLaunchKPI:
+      description: A KPI that the launch is meant to move.
+      properties:
+        id:
+          description: ID of the KPI, unique within the launch. Tracking plan events reference it.
+          example: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+          type: string
+        title:
+          description: Name of the KPI.
+          example: Checkout conversion rate
+          type: string
+      required:
+        - id
+        - title
+      type: object
+    ProductAnalyticsLaunchListScope:
+      description: Scope of a launch list. `liftoffs` leaves out launches in the `plan` phase.
+      enum:
+        - liftoffs
+      example: liftoffs
+      type: string
+      x-enum-varnames:
+        - LIFTOFFS
+    ProductAnalyticsLaunchPatchAttributes:
+      description: |-
+        Attributes to update on a launch. Fields that are not set are left unchanged, and `null` clears a nullable
+        field.
+        Setting a non-empty `feature_flag_id` clears the stored `feature_flag_key` when `feature_flag_key` is not set.
+      properties:
+        application_id:
+          description: UUID of the RUM application that the launch belongs to.
+          nullable: true
+          type: string
+        code_analysis:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCodeAnalysis"
+        context:
+          description: Context of the feature being launched.
+          type: string
+        description:
+          description: Description of the feature being launched.
+          nullable: true
+          type: string
+        feature_flag_id:
+          description: UUID of the Datadog feature flag that gates the launch.
+          nullable: true
+          type: string
+        feature_flag_key:
+          description: |-
+            Key of a feature flag managed outside Datadog. At most 256 characters, with no leading or trailing spaces.
+          maxLength: 256
+          minLength: 1
+          nullable: true
+          type: string
+        kpis:
+          description: KPIs that the launch is meant to move. Replaces the stored list, and `null` clears it.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchKPI"
+          nullable: true
+          type: array
+        name:
+          description: Name of the launch.
+          type: string
+        phase:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPhase"
+        repository_id:
+          description: ID of the code repository that implements the feature.
+          nullable: true
+          type: string
+        steps:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPatchSteps"
+      type: object
+    ProductAnalyticsLaunchPatchData:
+      description: Data of the launch update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPatchAttributes"
+        id:
+          description: UUID of the launch. It must match the ID in the path.
+          example: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsLaunchPatchRequest:
+      description: Request to update some fields of a launch.
+      example:
+        data:
+          attributes:
+            phase: setup
+          id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+          type: liftoff
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPatchData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsLaunchPatchSteps:
+      description: |-
+        Steps to update. Steps that are not set are left unchanged.
+        A `tracking_plan` replaces the whole stored tracking plan, so include every event and property to keep.
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchDashboardStep"
+        experiment:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchExperimentStep"
+        funnel:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchFunnelStep"
+        tracking_plan:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchTrackingPlanRequest"
+      type: object
+    ProductAnalyticsLaunchPhase:
+      description: |-
+        Lifecycle phase of a launch. A new launch starts in `plan` or `setup`, and defaults to `plan`.
+        Allowed changes: `plan` to `setup`, `setup` to `ready`, `ready` to `setup` or `launched`, and `launched` to
+        `ready`.
+      enum:
+        - plan
+        - setup
+        - ready
+        - launched
+      example: plan
+      type: string
+      x-enum-varnames:
+        - PLAN
+        - SETUP
+        - READY
+        - LAUNCHED
+    ProductAnalyticsLaunchProperties:
+      additionalProperties:
+        $ref: "#/components/schemas/ProductAnalyticsLaunchProperty"
+      description: Event properties of the tracking plan, keyed by property ID.
+      example:
+        promo_code:
+          description: Promo code entered by the user.
+      type: object
+    ProductAnalyticsLaunchProperty:
+      description: An event property of the tracking plan.
+      properties:
+        description:
+          description: What the property captures.
+          example: Promo code entered by the user.
+          type: string
+      required:
+        - description
+      type: object
+    ProductAnalyticsLaunchPropertyFinding:
+      description: Code analysis result for a property of an event.
+      properties:
+        id:
+          description: ID of the property in the tracking plan.
+          example: promo_code
+          type: string
+        status:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCodeStatus"
+      required:
+        - id
+        - status
+      type: object
+    ProductAnalyticsLaunchRequestAttributes:
+      description: Attributes of a launch to create or replace.
+      properties:
+        application_id:
+          description: UUID of the RUM application that the launch belongs to.
+          nullable: true
+          type: string
+        context:
+          description: Context of the feature being launched, used to build the tracking plan.
+          example: Let users apply promo codes at checkout.
+          type: string
+        description:
+          description: Description of the feature being launched.
+          nullable: true
+          type: string
+        feature_flag_id:
+          description: |-
+            UUID of the Datadog feature flag that gates the launch. Do not set it together with `feature_flag_key`.
+          nullable: true
+          type: string
+        feature_flag_key:
+          description: |-
+            Key of a feature flag managed outside Datadog, as evaluated in code. At most 256 characters, with no
+            leading or trailing spaces. Do not set it together with `feature_flag_id`. `null` clears it. On replace,
+            omitting it keeps the stored key unless `feature_flag_id` is set.
+          maxLength: 256
+          minLength: 1
+          nullable: true
+          type: string
+        kpis:
+          description: KPIs that the launch is meant to move.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchKPI"
+          type: array
+        name:
+          description: Name of the launch.
+          example: checkout_promo_codes
+          type: string
+        phase:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchPhase"
+        repository_id:
+          description: ID of the code repository that implements the feature.
+          type: string
+        steps:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchStepsRequest"
+      required:
+        - name
+        - context
+        - steps
+      type: object
+    ProductAnalyticsLaunchResponse:
+      description: Response containing a launch.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsLaunchSteps:
+      description: Steps of the launch.
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchDashboardStep"
+        experiment:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchExperimentStep"
+        funnel:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchFunnelStep"
+        tracking_plan:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchTrackingPlan"
+      type: object
+    ProductAnalyticsLaunchStepsRequest:
+      description: Steps of the launch. The tracking plan is required.
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchDashboardStep"
+        experiment:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchExperimentStep"
+        funnel:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchFunnelStep"
+        tracking_plan:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchTrackingPlanRequest"
+      required:
+        - tracking_plan
+      type: object
+    ProductAnalyticsLaunchTrackingPlan:
+      description: Tracking plan of a launch, listing the events and properties to instrument.
+      properties:
+        code_analysis:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCodeAnalysis"
+        codegen_session_id:
+          description: ID of the code generation session that implemented the plan.
+          type: string
+        created_at:
+          description: Time the tracking plan was created.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          description: UUID of the user who created the tracking plan.
+          example: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+          type: string
+        events:
+          description: Events to instrument.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchEvent"
+          type: array
+        id:
+          description: ID of the tracking plan.
+          example: 9b1d6c2e-4f3a-4b5c-8d7e-6f5a4b3c2d1e
+          type: string
+        jira_ticket_id:
+          description: ID of the Jira ticket that tracks the instrumentation work.
+          type: string
+        pr_link:
+          description: Link to the pull request that implements the plan.
+          type: string
+        properties:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchProperties"
+        updated_at:
+          description: Time the tracking plan was last updated.
+          format: date-time
+          nullable: true
+          type: string
+        updated_by:
+          description: UUID of the user who last updated the tracking plan.
+          nullable: true
+          type: string
+      required:
+        - id
+        - created_by
+        - created_at
+      type: object
+    ProductAnalyticsLaunchTrackingPlanRequest:
+      description: Tracking plan of a launch, listing the events and properties to instrument.
+      properties:
+        code_analysis:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchCodeAnalysis"
+        codegen_session_id:
+          description: ID of the code generation session that implemented the plan.
+          type: string
+        events:
+          description: Events to instrument.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchEvent"
+          type: array
+        jira_ticket_id:
+          description: ID of the Jira ticket that tracks the instrumentation work.
+          type: string
+        pr_link:
+          description: Link to the pull request that implements the plan.
+          type: string
+        properties:
+          $ref: "#/components/schemas/ProductAnalyticsLaunchProperties"
+      type: object
+    ProductAnalyticsLaunchType:
+      default: liftoff
+      description: Launch resource type.
+      enum:
+        - liftoff
+      example: liftoff
+      type: string
+      x-enum-varnames:
+        - LIFTOFF
+    ProductAnalyticsLaunchesResponse:
+      description: Response containing a list of launches.
+      properties:
+        data:
+          description: The launches.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchData"
+          type: array
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorAttributes:
+      description: Attributes of a Product Analytics monitor.
+      properties:
+        created_time:
+          description: Time the monitor was created.
+          format: date-time
+          type: string
+        creator:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorCreator"
+        message:
+          description: Notification message sent when the monitor alerts.
+          example: Conversion from /a to /b dropped over the last hour
+          type: string
+        modified_time:
+          description: Time the monitor was last modified.
+          format: date-time
+          type: string
+        name:
+          description: Name of the monitor.
+          example: Funnel conversion drop
+          type: string
+        options:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorOptions"
+        org_id:
+          description: ID of the organization that owns the monitor.
+          example: 2
+          format: int64
+          type: integer
+        priority:
+          description: Priority of the monitor, from 1 (highest) to 5 (lowest).
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        query:
+          description: Monitor query.
+          example: formula("query").rollup("sum").last("1h") < 1
+          type: string
+        status:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorStatus"
+        tags:
+          description: Monitor tags, as `key:value` strings.
+          items:
+            description: A tag in `key:value` format.
+            type: string
+          nullable: true
+          type: array
+      required:
+        - org_id
+        - name
+        - message
+        - query
+        - options
+        - status
+      type: object
+    ProductAnalyticsMonitorCreateAttributes:
+      description: Attributes of the Product Analytics monitor to create.
+      properties:
+        message:
+          description: Notification message sent when the monitor alerts. It can include `@` notification handles.
+          example: |-
+            Conversion from /a to /b dropped over the last hour
+
+            @slack-my-alerts-channel
+          type: string
+        name:
+          description: Name of the monitor.
+          example: Funnel conversion drop
+          type: string
+        options:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorOptions"
+        priority:
+          description: Priority of the monitor, from 1 (highest) to 5 (lowest).
+          example: 3
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        query:
+          description: |-
+            Monitor query, for example `formula("query").rollup("sum").last("1h") < 1`.
+            Define the variables it references in `options.variables`.
+          example: formula("query").rollup("sum").last("1h") < 1
+          type: string
+        tags:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorTags"
+      required:
+        - name
+        - message
+        - query
+      type: object
+    ProductAnalyticsMonitorCreateData:
+      description: Data of the Product Analytics monitor to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorCreateAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsMonitorCreateRequest:
+      description: Request to create a Product Analytics monitor.
+      example:
+        data:
+          attributes:
+            message: |-
+              Conversion from /a to /b dropped over the last hour
+
+              @slack-my-alerts-channel
+            name: Funnel conversion drop
+            options:
+              thresholds:
+                critical: 1
+                warning: 2
+              variables:
+                - data_source: product_analytics_journey
+                  name: query
+                  search:
+                    expression: node_0->node_1
+                    filters:
+                      graph_filters:
+                        - name: __dd.time_to_convert
+                          operator: <=
+                          value: 86400000
+                    join_keys:
+                      primary: "@usr.id"
+                    node_objects:
+                      node_0:
+                        data_source: product_analytics
+                        search:
+                          query: "@type:view @view.name:/a"
+                      node_1:
+                        data_source: product_analytics
+                        search:
+                          query: "@type:view @view.name:/b"
+            priority: 3
+            query: formula("query").rollup("sum").last("1h") < 1
+            tags:
+              chart_id: chart-1
+              query_type: funnel
+          type: pa_monitor_request
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorCreateData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorCreator:
+      description: The user who created the monitor.
+      properties:
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        id:
+          description: Numeric ID of the user.
+          format: int64
+          type: integer
+        name:
+          description: Name of the user.
+          type: string
+        uuid:
+          description: UUID of the user.
+          type: string
+      type: object
+    ProductAnalyticsMonitorData:
+      description: A Product Analytics monitor.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorAttributes"
+        id:
+          description: ID of the monitor.
+          example: "12345"
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsMonitorListAttributes:
+      description: A list of Product Analytics monitors.
+      properties:
+        monitors:
+          description: The monitors.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsMonitorListItem"
+          type: array
+        total:
+          description: Total number of monitors that match, across all pages.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - monitors
+        - total
+      type: object
+    ProductAnalyticsMonitorListData:
+      description: Data of a Product Analytics monitor list.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorListAttributes"
+        id:
+          description: ID of the list resource. Always `list`.
+          example: list
+          type: string
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorListType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsMonitorListItem:
+      description: A Product Analytics monitor in a list.
+      properties:
+        created_time:
+          description: Time the monitor was created.
+          format: date-time
+          type: string
+        creator:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorCreator"
+        id:
+          description: ID of the monitor.
+          example: "12345"
+          type: string
+        message:
+          description: Notification message sent when the monitor alerts.
+          example: Conversion from /a to /b dropped over the last hour
+          type: string
+        modified_time:
+          description: Time the monitor was last modified.
+          format: date-time
+          type: string
+        name:
+          description: Name of the monitor.
+          example: Funnel conversion drop
+          type: string
+        options:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorOptions"
+        org_id:
+          description: ID of the organization that owns the monitor.
+          example: 2
+          format: int64
+          type: integer
+        priority:
+          description: Priority of the monitor, from 1 (highest) to 5 (lowest).
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        query:
+          description: Monitor query.
+          example: formula("query").rollup("sum").last("1h") < 1
+          type: string
+        status:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorStatus"
+        tags:
+          description: Monitor tags, as `key:value` strings.
+          items:
+            description: A tag in `key:value` format.
+            type: string
+          nullable: true
+          type: array
+      required:
+        - id
+        - org_id
+        - name
+        - message
+        - query
+        - options
+        - status
+      type: object
+    ProductAnalyticsMonitorListResponse:
+      description: Response containing a list of Product Analytics monitors.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorListData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorListType:
+      default: pa_monitor_list
+      description: Product Analytics monitor list resource type.
+      enum:
+        - pa_monitor_list
+      example: pa_monitor_list
+      type: string
+      x-enum-varnames:
+        - PA_MONITOR_LIST
+    ProductAnalyticsMonitorOptions:
+      description: Options of a Product Analytics monitor.
+      properties:
+        chart_uuid:
+          description: UUID of the chart the monitor was created from.
+          type: string
+        metric_selector:
+          description: Metric of the chart that the monitor evaluates.
+          type: string
+        query_index:
+          description: Index of the chart query that the monitor evaluates.
+          format: int64
+          type: integer
+        renotify_interval:
+          description: |-
+            Number of minutes after the last notification before the monitor notifies again on the current status.
+            `0` means it never notifies again.
+          format: int64
+          type: integer
+        thresholds:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorThresholds"
+        timeframe:
+          description: Time frame of the chart that the monitor evaluates.
+          type: string
+        variables:
+          description: Query variables referenced by the monitor query.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsMonitorVariable"
+          type: array
+      type: object
+    ProductAnalyticsMonitorRequestType:
+      default: pa_monitor_request
+      description: Product Analytics monitor request resource type.
+      enum:
+        - pa_monitor_request
+      example: pa_monitor_request
+      type: string
+      x-enum-varnames:
+        - PA_MONITOR_REQUEST
+    ProductAnalyticsMonitorResponse:
+      description: Response containing a Product Analytics monitor.
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorStatus:
+      description: |-
+        Current alert status of the monitor. `No Data` is returned when the monitor has not been evaluated yet.
+      enum:
+        - OK
+        - Alert
+        - Warn
+        - No Data
+      example: OK
+      type: string
+      x-enum-varnames:
+        - OK
+        - ALERT
+        - WARN
+        - NO_DATA
+    ProductAnalyticsMonitorTags:
+      additionalProperties:
+        description: Tag value.
+        type: string
+      description: |-
+        Monitor tags as key and value pairs. Each pair is stored as a `key:value` tag.
+        `chart_id` and `dashboard_id` link the monitor to the chart it was created from. `dashboard_id` requires
+        `chart_id`.
+      example:
+        chart_id: chart-1
+        query_type: funnel
+      type: object
+    ProductAnalyticsMonitorThresholds:
+      description: |-
+        Alert thresholds of a Product Analytics monitor.
+        Keep `critical` in sync with the comparison in the monitor query; the query is not derived from these values.
+      properties:
+        critical:
+          description: Value that triggers a critical alert.
+          example: 1
+          format: double
+          type: number
+        critical_recovery:
+          description: Value at which a critical alert recovers.
+          format: double
+          type: number
+        warning:
+          description: Value that triggers a warning.
+          example: 2
+          format: double
+          type: number
+        warning_recovery:
+          description: Value at which a warning recovers.
+          format: double
+          type: number
+      type: object
+    ProductAnalyticsMonitorType:
+      default: pa_monitor
+      description: Product Analytics monitor resource type.
+      enum:
+        - pa_monitor
+      example: pa_monitor
+      type: string
+      x-enum-varnames:
+        - PA_MONITOR
+    ProductAnalyticsMonitorUnlinkAttributes:
+      description: |-
+        The chart link to remove. It must match the stored link exactly:
+        `chart_id` alone for a saved chart, or `chart_id` and `dashboard_id` for a dashboard widget.
+      properties:
+        chart_id:
+          description: ID of the chart the monitor is linked to.
+          example: chart-1
+          type: string
+        dashboard_id:
+          description: ID of the dashboard the monitor is linked to.
+          example: dash-1
+          type: string
+      required:
+        - chart_id
+      type: object
+    ProductAnalyticsMonitorUnlinkData:
+      description: Data of the Product Analytics monitor unlink request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorUnlinkAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorUnlinkRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsMonitorUnlinkRequest:
+      description: Request to unlink a Product Analytics monitor from its chart.
+      example:
+        data:
+          attributes:
+            chart_id: chart-1
+            dashboard_id: dash-1
+          type: pa_monitor_unlink_request
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorUnlinkData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorUnlinkRequestType:
+      default: pa_monitor_unlink_request
+      description: Product Analytics monitor unlink request resource type.
+      enum:
+        - pa_monitor_unlink_request
+      example: pa_monitor_unlink_request
+      type: string
+      x-enum-varnames:
+        - PA_MONITOR_UNLINK_REQUEST
+    ProductAnalyticsMonitorUpdateAttributes:
+      description: |-
+        Attributes to update on a Product Analytics monitor. Fields that are not set are left unchanged.
+        When set, `options` or `tags` replaces the stored value.
+      properties:
+        message:
+          description: Notification message sent when the monitor alerts.
+          example: Conversion from /a to /b dropped over the last hour
+          type: string
+        name:
+          description: Name of the monitor.
+          example: Funnel conversion drop
+          type: string
+        options:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorOptions"
+        priority:
+          description: Priority of the monitor, from 1 (highest) to 5 (lowest).
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        query:
+          description: Monitor query.
+          example: formula("query").rollup("sum").last("1h") < 1
+          type: string
+        tags:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorTags"
+      type: object
+    ProductAnalyticsMonitorUpdateData:
+      description: Data of the Product Analytics monitor update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    ProductAnalyticsMonitorUpdateRequest:
+      description: Request to update a Product Analytics monitor.
+      example:
+        data:
+          attributes:
+            name: Funnel conversion drop
+            options:
+              thresholds:
+                critical: 1
+                warning: 1.5
+          type: pa_monitor_request
+      properties:
+        data:
+          $ref: "#/components/schemas/ProductAnalyticsMonitorUpdateData"
+      required:
+        - data
+      type: object
+    ProductAnalyticsMonitorVariable:
+      additionalProperties: {}
+      description: |-
+        A query variable of the monitor, referenced by name in the `formula(...)` of the monitor query.
+        Its shape depends on the `data_source`, for example `product_analytics_journey` for funnels.
+      example:
+        data_source: product_analytics_journey
+        name: query
+        search:
+          expression: node_0->node_1
+          join_keys:
+            primary: "@usr.id"
+          node_objects:
+            node_0:
+              data_source: product_analytics
+              search:
+                query: "@type:view @view.name:/a"
+            node_1:
+              data_source: product_analytics
+              search:
+                query: "@type:view @view.name:/b"
+      type: object
     ProductAnalyticsOccurrenceFilter:
       description: Filter for occurrence-based queries.
       properties:
@@ -137154,6 +138294,754 @@ components:
           $ref: "#/components/schemas/StartStepNames"
       required:
         - securityTrigger
+      type: object
+    SegmentAttributes:
+      description: Attributes of a segment.
+      properties:
+        created_at:
+          description: Time the segment was created.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          $ref: "#/components/schemas/SegmentUser"
+        data_query:
+          $ref: "#/components/schemas/SegmentDataQuery"
+        description:
+          description: Description of the segment.
+          type: string
+        disabled_at:
+          description: Time the segment was disabled, if it was.
+          format: date-time
+          type: string
+        disabled_by:
+          $ref: "#/components/schemas/SegmentUser"
+        entity:
+          description: Kind of entity that the segment contains, `user` or `account`.
+          type: string
+        materialized_at:
+          description: Time the segment membership was last computed.
+          format: date-time
+          nullable: true
+          type: string
+        modified_at:
+          description: Time the segment was last modified.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          $ref: "#/components/schemas/SegmentUser"
+        name:
+          description: Name of the segment.
+          example: High-value users
+          type: string
+        org_id:
+          description: ID of the organization that owns the segment.
+          format: int64
+          type: integer
+        row_count:
+          description: |-
+            Number of entities in the segment when its membership was last computed. `-1` means the count is not
+            available yet.
+          format: int64
+          type: integer
+        source:
+          description: Who created the segment. `0` for a user and `1` for Datadog.
+          format: int64
+          type: integer
+        tags:
+          description: Tags of the segment.
+          items:
+            description: A tag.
+            type: string
+          nullable: true
+          type: array
+        type:
+          description: |-
+            Kind of segment, derived from its blocks, such as `event_platform`, `user_store`, or `combination`.
+          type: string
+        version:
+          description: Version of the segment, increased on each update.
+          format: int64
+          type: integer
+      required:
+        - name
+        - data_query
+        - created_at
+        - modified_at
+      type: object
+    SegmentCreateAttributes:
+      description: Attributes of the segment to create.
+      properties:
+        data_query:
+          $ref: "#/components/schemas/SegmentDataQuery"
+        description:
+          description: Description of the segment.
+          type: string
+        name:
+          description: Name of the segment. It must be unique in the organization.
+          example: High-value users
+          type: string
+        tags:
+          description: Tags of the segment. Tags cannot contain commas.
+          items:
+            description: A tag.
+            type: string
+          type: array
+      required:
+        - name
+        - data_query
+      type: object
+    SegmentCreateData:
+      description: Data of the segment to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentCreateAttributes"
+        type:
+          $ref: "#/components/schemas/SegmentResourceType"
+      required:
+        - type
+        - attributes
+      type: object
+    SegmentCreateRequest:
+      description: Request to create a segment.
+      example:
+        data:
+          attributes:
+            data_query:
+              event_platform:
+                - facet: "@usr.id"
+                  from: "-2592000000"
+                  name: viewed_logs
+                  query: "@type:view @view.name:/logs"
+                  to: "0"
+            description: Users who viewed the logs page in the last 30 days.
+            name: High-value users
+            tags:
+              - team:growth
+          type: segment
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentCreateData"
+      required:
+        - data
+      type: object
+    SegmentData:
+      description: A segment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentAttributes"
+        id:
+          description: ID of the segment.
+          example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+          type: string
+        type:
+          $ref: "#/components/schemas/SegmentResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SegmentDataQuery:
+      description: |-
+        Defines who belongs to the segment. It contains one or more blocks, up to 20 in total.
+        Use `combination` to combine named blocks with a boolean formula such as `A AND NOT B`.
+      properties:
+        account_store:
+          description: Account profile blocks.
+          items:
+            $ref: "#/components/schemas/SegmentProfileStoreBlock"
+          type: array
+        combination:
+          description: Boolean formula that combines blocks by name.
+          example: viewed_logs AND premium
+          type: string
+        event_platform:
+          description: Event blocks.
+          items:
+            $ref: "#/components/schemas/SegmentEventPlatformBlock"
+          type: array
+        journeys:
+          description: Funnel blocks.
+          items:
+            $ref: "#/components/schemas/SegmentJourneyBlock"
+          type: array
+        reference_table:
+          description: Reference table blocks.
+          items:
+            $ref: "#/components/schemas/SegmentReferenceTableBlock"
+          type: array
+        retentions:
+          description: Retention blocks.
+          items:
+            $ref: "#/components/schemas/SegmentRetentionBlock"
+          type: array
+        static:
+          description: Uploaded list blocks.
+          items:
+            $ref: "#/components/schemas/SegmentStaticBlock"
+          type: array
+        templates:
+          description: Template blocks.
+          items:
+            $ref: "#/components/schemas/SegmentTemplateBlock"
+          type: array
+        user_store:
+          description: User profile blocks.
+          items:
+            $ref: "#/components/schemas/SegmentProfileStoreBlock"
+          type: array
+      type: object
+    SegmentDeleteAttributes:
+      description: Attributes of a deleted segment.
+      properties:
+        disabled_at:
+          description: Time the segment was deleted.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        disabled_by:
+          $ref: "#/components/schemas/SegmentUser"
+        name:
+          description: Name of the segment.
+          example: High-value users
+          type: string
+      required:
+        - name
+        - disabled_at
+      type: object
+    SegmentDeleteData:
+      description: A deleted segment.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentDeleteAttributes"
+        id:
+          description: ID of the segment.
+          example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+          type: string
+        type:
+          $ref: "#/components/schemas/SegmentDeletedType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SegmentDeleteResponse:
+      description: Response returned when a segment is deleted.
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentDeleteData"
+      required:
+        - data
+      type: object
+    SegmentDeletedType:
+      default: deleted_segment
+      description: Deleted segment resource type.
+      enum:
+        - deleted_segment
+      example: deleted_segment
+      type: string
+      x-enum-varnames:
+        - DELETED_SEGMENT
+    SegmentEntity:
+      description: Kind of entity that a segment contains.
+      enum:
+        - user
+        - account
+      example: user
+      type: string
+      x-enum-varnames:
+        - USER
+        - ACCOUNT
+    SegmentEventPlatformBlock:
+      description: |-
+        Selects the users or accounts that sent matching RUM or Product Analytics events in a time range.
+        `from` and `to` are epoch milliseconds, or negative offsets in milliseconds relative to now. `0` means now.
+      properties:
+        facet:
+          description: Facet that identifies the entity, such as `@usr.id`.
+          example: "@usr.id"
+          type: string
+        from:
+          description: Start of the time range.
+          example: "-2592000000"
+          type: string
+        name:
+          description: Name of the block, used in `combination`.
+          example: viewed_logs
+          type: string
+        query:
+          description: Event search query.
+          example: "@type:view @view.name:/logs"
+          type: string
+        to:
+          description: End of the time range.
+          example: "0"
+          type: string
+      required:
+        - facet
+      type: object
+    SegmentJourneyBlock:
+      description: Selects the users who converted or dropped off in a funnel.
+      properties:
+        conversion_type:
+          $ref: "#/components/schemas/ProductAnalyticsJourneyConversionType"
+        exclude_anonymous_traffic:
+          description: Whether to leave out anonymous users.
+          type: boolean
+        from:
+          description: Start of the time range, in epoch milliseconds.
+          format: int64
+          type: integer
+        group_by:
+          description: Group-by definitions of the funnel query.
+          items:
+            additionalProperties: {}
+            description: A group-by definition.
+            type: object
+          type: array
+        name:
+          description: Name of the block, used in `combination`.
+          type: string
+        search:
+          additionalProperties: {}
+          description: Funnel search, with the same shape as the `search` of a Product Analytics journey query.
+          type: object
+        target:
+          additionalProperties: {}
+          description: Funnel step or step range to evaluate.
+          type: object
+        to:
+          description: End of the time range, in epoch milliseconds.
+          format: int64
+          type: integer
+      type: object
+    SegmentPreviewAttributes:
+      description: |-
+        Segment definition to preview and the columns to return.
+        Without columns, the response returns the user ID, or the account ID for account segments.
+      properties:
+        account_store_columns:
+          description: Account profile columns to return.
+          items:
+            description: Name of an account profile column.
+            type: string
+          type: array
+        data_query:
+          $ref: "#/components/schemas/SegmentDataQuery"
+        limit:
+          description: Maximum number of rows to return, up to 1000. Defaults to 1000.
+          format: int64
+          maximum: 1000
+          type: integer
+        reference_table_columns:
+          description: Reference table columns to return.
+          items:
+            description: Name of a reference table column.
+            type: string
+          type: array
+        user_store_columns:
+          description: User profile columns to return.
+          items:
+            description: Name of a user profile column.
+            type: string
+          type: array
+      required:
+        - data_query
+      type: object
+    SegmentPreviewData:
+      description: Data of the segment preview request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentPreviewAttributes"
+        type:
+          $ref: "#/components/schemas/SegmentPreviewRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    SegmentPreviewRequest:
+      description: Request to preview the members of a segment definition.
+      example:
+        data:
+          attributes:
+            data_query:
+              event_platform:
+                - facet: "@usr.id"
+                  from: "-2592000000"
+                  query: "@type:view @view.name:/logs"
+                  to: "0"
+            limit: 50
+            user_store_columns:
+              - user_id
+              - user_email
+              - user_name
+          type: segment_preview_request
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentPreviewData"
+      required:
+        - data
+      type: object
+    SegmentPreviewRequestType:
+      default: segment_preview_request
+      description: Segment preview request resource type.
+      enum:
+        - segment_preview_request
+      example: segment_preview_request
+      type: string
+      x-enum-varnames:
+        - SEGMENT_PREVIEW_REQUEST
+    SegmentPreviewResponse:
+      description: Response containing a preview of the members of a segment.
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentPreviewResponseData"
+      required:
+        - data
+      type: object
+    SegmentPreviewResponseAttributes:
+      description: Members of the previewed segment.
+      properties:
+        hits:
+          description: Rows of the preview, each as a map of column names to values.
+          items:
+            additionalProperties: {}
+            description: A row of the preview.
+            type: object
+          type: array
+        total_rows:
+          description: Total number of entities in the segment.
+          example: 1843
+          format: int64
+          type: integer
+      required:
+        - hits
+        - total_rows
+      type: object
+    SegmentPreviewResponseData:
+      description: Data of the segment preview response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentPreviewResponseAttributes"
+        id:
+          description: ID of the preview response.
+          example: segment_preview_response
+          type: string
+        type:
+          $ref: "#/components/schemas/SegmentPreviewResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SegmentPreviewResponseType:
+      default: unified_segment_preview_response
+      description: Segment preview response resource type.
+      enum:
+        - unified_segment_preview_response
+      example: unified_segment_preview_response
+      type: string
+      x-enum-varnames:
+        - UNIFIED_SEGMENT_PREVIEW_RESPONSE
+    SegmentProfileStoreBlock:
+      description: Selects users or accounts by their profile attributes.
+      properties:
+        name:
+          description: Name of the block, used in `combination`.
+          type: string
+        query:
+          description: Profile attribute query.
+          example: "country:US"
+          type: string
+      required:
+        - query
+      type: object
+    SegmentReferenceTableBlock:
+      description: Selects users or accounts from a reference table.
+      properties:
+        columns:
+          description: Columns to include.
+          items:
+            $ref: "#/components/schemas/SegmentReferenceTableColumn"
+          type: array
+        filter_query:
+          description: Query that filters the reference table rows.
+          type: string
+        join_condition:
+          $ref: "#/components/schemas/SegmentReferenceTableJoinCondition"
+        name:
+          description: Name of the block, used in `combination`.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          example: customer_data
+          type: string
+      required:
+        - table_name
+        - join_condition
+      type: object
+    SegmentReferenceTableColumn:
+      description: A reference table column to include.
+      properties:
+        alias:
+          description: Name to use for the column.
+          type: string
+        name:
+          description: Name of the column in the reference table.
+          type: string
+      type: object
+    SegmentReferenceTableJoinCondition:
+      description: How reference table rows are matched to entities.
+      properties:
+        column_name:
+          description: Reference table column that holds the entity ID.
+          example: user_id
+          type: string
+        facet:
+          description: Facet that identifies the entity, such as `@usr.id`.
+          type: string
+      required:
+        - column_name
+      type: object
+    SegmentResourceType:
+      default: segment
+      description: Segment resource type.
+      enum:
+        - segment
+      example: segment
+      type: string
+      x-enum-varnames:
+        - SEGMENT
+    SegmentResponse:
+      description: Response containing a segment.
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentData"
+      required:
+        - data
+      type: object
+    SegmentRetentionBlock:
+      additionalProperties: {}
+      description: |-
+        Selects users from a retention query. It has the same fields as a Product Analytics retention query, plus a
+        `name`.
+      type: object
+    SegmentSortColumn:
+      description: Column to sort segments by.
+      enum:
+        - name
+        - description
+        - created_by
+        - created_at
+        - modified_by
+        - modified_at
+        - disabled_by
+        - disabled_at
+        - uuid
+      example: modified_at
+      type: string
+      x-enum-varnames:
+        - NAME
+        - DESCRIPTION
+        - CREATED_BY
+        - CREATED_AT
+        - MODIFIED_BY
+        - MODIFIED_AT
+        - DISABLED_BY
+        - DISABLED_AT
+        - UUID
+    SegmentStaticBlock:
+      description: A fixed list of users uploaded to Datadog.
+      properties:
+        id:
+          description: ID of the uploaded list.
+          type: string
+        name:
+          description: Name of the block, used in `combination`.
+          type: string
+        user_count:
+          description: Number of users in the list.
+          format: int64
+          minimum: 0
+          type: integer
+      type: object
+    SegmentSummaryAttributes:
+      description: Attributes of a segment in a list. The segment definition is not included.
+      properties:
+        created_at:
+          description: Time the segment was created.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        created_by:
+          $ref: "#/components/schemas/SegmentUser"
+        description:
+          description: Description of the segment.
+          type: string
+        entity:
+          description: Kind of entity that the segment contains, `user` or `account`.
+          type: string
+        modified_at:
+          description: Time the segment was last modified.
+          example: "2026-11-01T10:00:00Z"
+          format: date-time
+          type: string
+        modified_by:
+          $ref: "#/components/schemas/SegmentUser"
+        name:
+          description: Name of the segment.
+          example: High-value users
+          type: string
+        org_id:
+          description: ID of the organization that owns the segment.
+          format: int64
+          type: integer
+        row_count:
+          description: |-
+            Number of entities in the segment when its membership was last computed. `-1` means the count is not
+            available yet.
+          format: int64
+          type: integer
+        source:
+          description: Who created the segment. `0` for a user and `1` for Datadog.
+          format: int64
+          type: integer
+        tags:
+          description: Tags of the segment.
+          items:
+            description: A tag.
+            type: string
+          nullable: true
+          type: array
+        type:
+          description: Kind of segment, derived from its blocks.
+          type: string
+      required:
+        - name
+        - created_at
+        - modified_at
+      type: object
+    SegmentSummaryData:
+      description: A segment in a list.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentSummaryAttributes"
+        id:
+          description: ID of the segment.
+          example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+          type: string
+        type:
+          $ref: "#/components/schemas/SegmentResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SegmentTemplateBlock:
+      description: Selects users or accounts with a segment template.
+      properties:
+        from:
+          description: Start of the time range, in epoch milliseconds.
+          type: string
+        name:
+          description: Name of the block, used in `combination`.
+          type: string
+        parameters:
+          additionalProperties: {}
+          description: Template parameter values, keyed by parameter name.
+          example:
+            threshold: 10
+          type: object
+        template_id:
+          description: ID of the segment template, such as `time-spent-v1`.
+          example: time-spent-v1
+          type: string
+        to:
+          description: End of the time range, in epoch milliseconds.
+          type: string
+      required:
+        - template_id
+        - parameters
+      type: object
+    SegmentUpdateAttributes:
+      description: Attributes to update on a segment. Fields that are not set are left unchanged.
+      properties:
+        data_query:
+          $ref: "#/components/schemas/SegmentDataQuery"
+        description:
+          description: Description of the segment.
+          type: string
+        name:
+          description: Name of the segment. It must be unique in the organization.
+          type: string
+        tags:
+          description: Tags of the segment. Replaces the stored tags.
+          items:
+            description: A tag.
+            type: string
+          type: array
+      type: object
+    SegmentUpdateData:
+      description: Data of the segment update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SegmentUpdateAttributes"
+        id:
+          description: ID of the segment. It must match the ID in the path.
+          example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+          type: string
+        type:
+          $ref: "#/components/schemas/SegmentResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SegmentUpdateRequest:
+      description: Request to update a segment.
+      example:
+        data:
+          attributes:
+            description: Users who viewed the logs page in the last 7 days.
+            name: High-value users
+          id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+          type: segment
+      properties:
+        data:
+          $ref: "#/components/schemas/SegmentUpdateData"
+      required:
+        - data
+      type: object
+    SegmentUser:
+      description: A Datadog user who created, modified, or disabled a segment.
+      properties:
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user avatar.
+          type: string
+        id:
+          description: Numeric ID of the user, as a string.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        uuid:
+          description: UUID of the user.
+          type: string
+      type: object
+    SegmentsResponse:
+      description: Response containing a list of segments.
+      properties:
+        data:
+          description: The segments.
+          items:
+            $ref: "#/components/schemas/SegmentSummaryData"
+          type: array
+      required:
+        - data
       type: object
     Selectors:
       description: |-
@@ -239460,6 +241348,899 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/launches:
+    get:
+      description: |-
+        List the Product Analytics launches of your organization. A launch tracks a feature release with its phase,
+        KPIs, and tracking plan.
+        Results are sorted by `-created_at` by default.
+      operationId: ListProductAnalyticsLaunches
+      parameters:
+        - description: |-
+            Comma-separated fields to sort by: `id`, `phase`, `feature_flag_id`, `name`, `application_id`,
+            `description`, `created_by`, `created_at`, `updated_by`, or `updated_at`. Prefix a field with `-` to sort
+            in descending order.
+          in: query
+          name: sort
+          required: false
+          schema:
+            example: -created_at
+            type: string
+        - description: Set to `liftoffs` to leave out launches in the `plan` phase.
+          in: query
+          name: scope
+          required: false
+          schema:
+            $ref: "#/components/schemas/ProductAnalyticsLaunchListScope"
+        - description: Return only launches in these phases. Repeat the parameter to pass several phases.
+          explode: true
+          in: query
+          name: phase
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/ProductAnalyticsLaunchPhase"
+            type: array
+          style: form
+        - description: Return only launches of this RUM application UUID.
+          in: query
+          name: application_id
+          required: false
+          schema:
+            type: string
+        - description: Return only launches whose name contains this value, ignoring case.
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-11-01T10:00:00Z"
+                          created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                          name: checkout_promo_codes
+                          org_id: 2
+                          phase: plan
+                          steps:
+                            tracking_plan:
+                              created_at: "2026-11-01T10:00:00Z"
+                              created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                              id: 9b1d6c2e-4f3a-4b5c-8d7e-6f5a4b3c2d1e
+                        id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+                        type: liftoff
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsLaunchesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Product Analytics launches
+      tags:
+        - Product Analytics
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - product_analytics_read
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a Product Analytics launch and its tracking plan.
+        The tracking plan lists the events and event properties to instrument. Events can only reference properties
+        and KPIs defined in the launch.
+      operationId: CreateProductAnalyticsLaunch
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      context: Let users apply promo codes at checkout.
+                      description: Promo codes at checkout.
+                      kpis:
+                        - id: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                          title: Checkout conversion rate
+                      name: checkout_promo_codes
+                      phase: plan
+                      steps:
+                        tracking_plan:
+                          events:
+                            - kpis:
+                                - 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                              name: promo_code_applied
+                              trigger: The user applies a valid promo code.
+                              views:
+                                - /checkout
+                    type: liftoff
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsLaunchCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id:
+                        context: Let users apply promo codes at checkout.
+                        created_at: "2026-11-01T10:00:00Z"
+                        created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        description: Promo codes at checkout.
+                        feature_flag_id:
+                        feature_flag_key:
+                        kpis:
+                          - id: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                            title: Checkout conversion rate
+                        name: checkout_promo_codes
+                        org_id: 2
+                        phase: plan
+                        steps:
+                          tracking_plan:
+                            created_at: "2026-11-01T10:00:00Z"
+                            created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                            events:
+                              - kpis:
+                                  - 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                                name: promo_code_applied
+                                trigger: The user applies a valid promo code.
+                                views:
+                                  - /checkout
+                            id: 9b1d6c2e-4f3a-4b5c-8d7e-6f5a4b3c2d1e
+                            updated_at:
+                            updated_by:
+                        updated_at:
+                        updated_by:
+                      id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+                      type: liftoff
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsLaunchResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Product Analytics launch
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+          - product_analytics_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/launches/{id}:
+    delete:
+      description: Delete a Product Analytics launch and its tracking plan.
+      operationId: DeleteProductAnalyticsLaunch
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsLaunchIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Product Analytics launch
+      tags:
+        - Product Analytics
+      x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+          - product_analytics_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Product Analytics launch and its tracking plan by UUID.
+      operationId: GetProductAnalyticsLaunch
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsLaunchIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id:
+                        context: Let users apply promo codes at checkout.
+                        created_at: "2026-11-01T10:00:00Z"
+                        created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        description: Promo codes at checkout.
+                        feature_flag_id:
+                        feature_flag_key:
+                        kpis:
+                          - id: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                            title: Checkout conversion rate
+                        name: checkout_promo_codes
+                        org_id: 2
+                        phase: plan
+                        steps:
+                          tracking_plan:
+                            created_at: "2026-11-01T10:00:00Z"
+                            created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                            events:
+                              - kpis:
+                                  - 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                                name: promo_code_applied
+                                trigger: The user applies a valid promo code.
+                                views:
+                                  - /checkout
+                            id: 9b1d6c2e-4f3a-4b5c-8d7e-6f5a4b3c2d1e
+                            updated_at:
+                            updated_by:
+                        updated_at:
+                        updated_by:
+                      id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+                      type: liftoff
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsLaunchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Product Analytics launch
+      tags:
+        - Product Analytics
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - product_analytics_read
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Update some fields of a Product Analytics launch. Fields that are not set are left unchanged. The `id` in
+        the body must match the one in the path.
+        Setting `steps.tracking_plan` replaces the whole stored tracking plan, not only the fields you send.
+        Returns `409` when the launch changed during the update; fetch it again and retry.
+      operationId: UpdateProductAnalyticsLaunch
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsLaunchIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      phase: setup
+                    id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+                    type: liftoff
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsLaunchPatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        application_id:
+                        context: Let users apply promo codes at checkout.
+                        created_at: "2026-11-01T10:00:00Z"
+                        created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        description: Promo codes at checkout.
+                        feature_flag_id:
+                        feature_flag_key:
+                        kpis:
+                          - id: 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                            title: Checkout conversion rate
+                        name: checkout_promo_codes
+                        org_id: 2
+                        phase: setup
+                        steps:
+                          tracking_plan:
+                            created_at: "2026-11-01T10:00:00Z"
+                            created_by: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                            events:
+                              - kpis:
+                                  - 7c1e6a52-3a8f-4d4e-9a55-2f1d1c8b6a10
+                                name: promo_code_applied
+                                trigger: The user applies a valid promo code.
+                                views:
+                                  - /checkout
+                            id: 9b1d6c2e-4f3a-4b5c-8d7e-6f5a4b3c2d1e
+                            updated_at:
+                            updated_by:
+                        updated_at:
+                        updated_by:
+                      id: 5e3c7a1b-2d4f-4e6a-8b9c-0d1e2f3a4b5c
+                      type: liftoff
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsLaunchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Product Analytics launch
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+          - product_analytics_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/monitors:
+    get:
+      description: |-
+        List the Product Analytics monitors of your organization, one page at a time.
+        When `chart_id` is set, optionally with `dashboard_id`, the response includes every monitor linked to that
+        chart, without pagination.
+        With `chart_id` alone, monitors created from a dashboard widget are not returned.
+        Monitors created in the last few seconds may be missing.
+      operationId: ListProductAnalyticsMonitors
+      parameters:
+        - description: Maximum number of monitors per page, from 1 to 1000. Ignored when `chart_id` is set.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Page number, starting at 1. Ignored when `chart_id` is set.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 1
+            format: int64
+            minimum: 1
+            type: integer
+        - description: Return only the monitors linked to this chart. Turns off pagination.
+          in: query
+          name: chart_id
+          required: false
+          schema:
+            type: string
+        - description: Return only the monitors linked to this dashboard. Requires `chart_id`.
+          in: query
+          name: dashboard_id
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        monitors:
+                          - id: "12345"
+                            message: Conversion from /a to /b dropped over the last hour
+                            name: Funnel conversion drop
+                            options:
+                              thresholds:
+                                critical: 1
+                            org_id: 2
+                            query: formula("query").rollup("sum").last("1h") < 1
+                            status: OK
+                            tags:
+                              - chart_id:chart-1
+                        total: 1
+                      id: list
+                      type: pa_monitor_list
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsMonitorListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List Product Analytics monitors
+      tags:
+        - Product Analytics
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a Product Analytics monitor that alerts on a Product Analytics query, such as a funnel conversion rate.
+        Link it to the chart it was created from with the `chart_id` and `dashboard_id` tags.
+      operationId: CreateProductAnalyticsMonitor
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      message: |-
+                        Conversion from /a to /b dropped over the last hour
+
+                        @slack-my-alerts-channel
+                      name: Funnel conversion drop
+                      options:
+                        thresholds:
+                          critical: 1
+                          warning: 2
+                        variables:
+                          - data_source: product_analytics_journey
+                            name: query
+                            search:
+                              expression: node_0->node_1
+                              filters:
+                                graph_filters:
+                                  - name: __dd.time_to_convert
+                                    operator: "<="
+                                    value: 86400000
+                              join_keys:
+                                primary: "@usr.id"
+                              node_objects:
+                                node_0:
+                                  data_source: product_analytics
+                                  search:
+                                    query: "@type:view @view.name:/a"
+                                node_1:
+                                  data_source: product_analytics
+                                  search:
+                                    query: "@type:view @view.name:/b"
+                      priority: 3
+                      query: formula("query").rollup("sum").last("1h") < 1
+                      tags:
+                        chart_id: chart-1
+                        query_type: funnel
+                    type: pa_monitor_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsMonitorCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        message: Conversion from /a to /b dropped over the last hour
+                        name: Funnel conversion drop
+                        options:
+                          thresholds:
+                            critical: 1
+                            warning: 2
+                        org_id: 2
+                        priority: 3
+                        query: formula("query").rollup("sum").last("1h") < 1
+                        status: No Data
+                        tags:
+                          - chart_id:chart-1
+                          - query_type:funnel
+                      id: "12345"
+                      type: pa_monitor
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsMonitorResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a Product Analytics monitor
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/monitors/{monitor_id}:
+    delete:
+      description: Delete a Product Analytics monitor.
+      operationId: DeleteProductAnalyticsMonitor
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsMonitorIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete a Product Analytics monitor
+      tags:
+        - Product Analytics
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Product Analytics monitor by its ID.
+      operationId: GetProductAnalyticsMonitor
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsMonitorIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        message: Conversion from /a to /b dropped over the last hour
+                        name: Funnel conversion drop
+                        options:
+                          thresholds:
+                            critical: 1
+                            warning: 1.5
+                        org_id: 2
+                        priority: 3
+                        query: formula("query").rollup("sum").last("1h") < 1
+                        status: OK
+                        tags:
+                          - chart_id:chart-1
+                          - query_type:funnel
+                      id: "12345"
+                      type: pa_monitor
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsMonitorResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a Product Analytics monitor
+      tags:
+        - Product Analytics
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update a Product Analytics monitor. Fields that are not set are left unchanged, and at least one field
+        must be set. When set, `tags` replaces the monitor tags except `chart_id` and `dashboard_id`, which this
+        endpoint ignores. To remove them, use the unlink endpoint.
+      operationId: UpdateProductAnalyticsMonitor
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsMonitorIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: Funnel conversion drop
+                      options:
+                        thresholds:
+                          critical: 1
+                          warning: 1.5
+                    type: pa_monitor_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsMonitorUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        message: Conversion from /a to /b dropped over the last hour
+                        name: Funnel conversion drop
+                        options:
+                          thresholds:
+                            critical: 1
+                            warning: 1.5
+                        org_id: 2
+                        priority: 3
+                        query: formula("query").rollup("sum").last("1h") < 1
+                        status: OK
+                        tags:
+                          - chart_id:chart-1
+                          - query_type:funnel
+                      id: "12345"
+                      type: pa_monitor
+              schema:
+                $ref: "#/components/schemas/ProductAnalyticsMonitorResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a Product Analytics monitor
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/monitors/{monitor_id}/unlink:
+    post:
+      description: |-
+        Remove the `chart_id` and `dashboard_id` tags from a Product Analytics monitor. The monitor and the rest of
+        its configuration are kept.
+        The request must name the stored link exactly. A monitor with no link is left unchanged.
+      operationId: RemoveChartFromProductAnalyticsMonitor
+      parameters:
+        - $ref: "#/components/parameters/ProductAnalyticsMonitorIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      chart_id: chart-1
+                      dashboard_id: dash-1
+                    type: pa_monitor_unlink_request
+            schema:
+              $ref: "#/components/schemas/ProductAnalyticsMonitorUnlinkRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Unlink a Product Analytics monitor from its chart
+      tags:
+        - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/retention/grid:
     post:
       description: |-
@@ -239837,6 +242618,528 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/segment:
+    get:
+      description: |-
+        List the user and account segments of your organization. Disabled segments are left out unless
+        `filter[disabled]` is `false`.
+        The list does not include segment definitions; get a segment by ID to see its `data_query`.
+      operationId: ListProductAnalyticsSegments
+      parameters:
+        - description: Return only segments of this entity kind. Other values are ignored.
+          in: query
+          name: filter[entity]
+          required: false
+          schema:
+            $ref: "#/components/schemas/SegmentEntity"
+        - description: |-
+            Comma-separated segment kinds to return: `event_platform`, `user_store`, `account_store`, `reference_table`,
+            `static`, `template`, `combination`, `journey`, or `retention`.
+          in: query
+          name: filter[type]
+          required: false
+          schema:
+            example: event_platform,combination
+            type: string
+        - description: Comma-separated segment IDs to return, up to 1000.
+          in: query
+          name: filter[ids]
+          required: false
+          schema:
+            type: string
+        - description: Set to `false` to include disabled segments.
+          in: query
+          name: filter[disabled]
+          required: false
+          schema:
+            default: true
+            type: boolean
+        - description: Column to sort by. Other values are ignored.
+          in: query
+          name: sort[column]
+          required: false
+          schema:
+            $ref: "#/components/schemas/SegmentSortColumn"
+        - description: Sort order. Only used with `sort[column]`.
+          in: query
+          name: sort[order]
+          required: false
+          schema:
+            $ref: "#/components/schemas/QuerySortOrder"
+        - description: Maximum number of segments to return. Returns all segments when not set.
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            minimum: 0
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-11-01T10:00:00Z"
+                          description: Users who viewed the logs page in the last 30 days.
+                          entity: user
+                          modified_at: "2026-11-01T10:00:00Z"
+                          name: High-value users
+                          org_id: 2
+                          row_count: 1843
+                          source: 0
+                          tags:
+                            - team:growth
+                          type: event_platform
+                        id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+                        type: segment
+              schema:
+                $ref: "#/components/schemas/SegmentsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List segments
+      tags:
+        - Rum Audience Management
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create a user or account segment. The `data_query` defines who belongs to the segment.
+        Segment names must be unique in the organization.
+      operationId: CreateProductAnalyticsSegment
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      data_query:
+                        event_platform:
+                          - facet: "@usr.id"
+                            from: "-2592000000"
+                            name: viewed_logs
+                            query: "@type:view @view.name:/logs"
+                            to: "0"
+                      description: Users who viewed the logs page in the last 30 days.
+                      name: High-value users
+                      tags:
+                        - team:growth
+                    type: segment
+            schema:
+              $ref: "#/components/schemas/SegmentCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-11-01T10:00:00Z"
+                        created_by:
+                          handle: jane.doe@example.com
+                          id: "1234"
+                          name: Jane Doe
+                          uuid: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        data_query:
+                          event_platform:
+                            - facet: "@usr.id"
+                              from: "-2592000000"
+                              name: viewed_logs
+                              query: "@type:view @view.name:/logs"
+                              to: "0"
+                        description: Users who viewed the logs page in the last 30 days.
+                        entity: user
+                        modified_at: "2026-11-01T10:00:00Z"
+                        modified_by:
+                          handle: jane.doe@example.com
+                          id: "1234"
+                          name: Jane Doe
+                          uuid: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        name: High-value users
+                        org_id: 2
+                        source: 0
+                        tags:
+                          - team:growth
+                        type: event_platform
+                        version: 1
+                      id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+                      type: segment
+              schema:
+                $ref: "#/components/schemas/SegmentResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create a segment
+      tags:
+        - Rum Audience Management
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/segment/{id}:
+    delete:
+      description: |-
+        Delete a segment. Segments created by users are deleted permanently.
+        Segments created by Datadog, and segments based on an uploaded list, are disabled instead.
+      operationId: DeleteProductAnalyticsSegment
+      parameters:
+        - description: ID of the segment.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        disabled_at: "2026-11-01T10:00:00Z"
+                        disabled_by:
+                          handle: jane.doe@example.com
+                          id: "1234"
+                          uuid: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        name: High-value users
+                      id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+                      type: deleted_segment
+              schema:
+                $ref: "#/components/schemas/SegmentDeleteResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete a segment
+      tags:
+        - Rum Audience Management
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a segment by ID, including its definition.
+      operationId: GetProductAnalyticsSegment
+      parameters:
+        - description: ID of the segment.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-11-01T10:00:00Z"
+                        created_by:
+                          handle: jane.doe@example.com
+                          id: "1234"
+                          name: Jane Doe
+                          uuid: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        data_query:
+                          event_platform:
+                            - facet: "@usr.id"
+                              from: "-2592000000"
+                              name: viewed_logs
+                              query: "@type:view @view.name:/logs"
+                              to: "0"
+                        description: Users who viewed the logs page in the last 30 days.
+                        entity: user
+                        modified_at: "2026-11-01T10:00:00Z"
+                        modified_by:
+                          handle: jane.doe@example.com
+                          id: "1234"
+                          name: Jane Doe
+                          uuid: 3f2a8b1c-6d4e-4f5a-9b8c-7d6e5f4a3b2c
+                        name: High-value users
+                        org_id: 2
+                        source: 0
+                        tags:
+                          - team:growth
+                        type: event_platform
+                        version: 1
+                      id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+                      type: segment
+              schema:
+                $ref: "#/components/schemas/SegmentResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get a segment
+      tags:
+        - Rum Audience Management
+      x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update a segment. Fields that are not set are left unchanged. The `id` in the body must match the one in the
+        path.
+        The response has no body; get the segment to see the result.
+      operationId: UpdateProductAnalyticsSegment
+      parameters:
+        - description: ID of the segment.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: Users who viewed the logs page in the last 7 days.
+                      name: High-value users
+                    id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+                    type: segment
+            schema:
+              $ref: "#/components/schemas/SegmentUpdateRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Update a segment
+      tags:
+        - Rum Audience Management
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/product-analytics/segments/preview:
+    post:
+      description: |-
+        Preview the users or accounts that match a segment definition, without saving it.
+        Returns up to 1000 rows and the total number of matching entities.
+      operationId: PreviewProductAnalyticsSegment
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      data_query:
+                        event_platform:
+                          - facet: "@usr.id"
+                            from: "-2592000000"
+                            query: "@type:view @view.name:/logs"
+                            to: "0"
+                      limit: 50
+                      user_store_columns:
+                        - user_id
+                        - user_email
+                        - user_name
+                    type: segment_preview_request
+            schema:
+              $ref: "#/components/schemas/SegmentPreviewRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        hits:
+                          - user_email: john.smith@example.com
+                            user_id: "150847"
+                            user_name: John Smith
+                        total_rows: 1843
+                      id: segment_preview_response
+                      type: unified_segment_preview_response
+              schema:
+                $ref: "#/components/schemas/SegmentPreviewResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Preview a segment
+      tags:
+        - Rum Audience Management
+      x-codegen-request-body-name: body
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/users/event_filtered_query:
     post:
       description: Query users filtered by both user properties and event platform data
@@ -240019,7 +243322,8 @@ paths:
     delete:
       description: |-
         Delete a Product Analytics user profile.
-        Deletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.
+        Deletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few
+        minutes.
         This only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.
       operationId: DeleteUserProfile
       parameters:

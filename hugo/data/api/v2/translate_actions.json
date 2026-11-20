@@ -5529,6 +5529,60 @@
     "request_description": "",
     "request_schema_description": "Request body for a journey timeseries query."
   },
+  "ListProductAnalyticsLaunches": {
+    "description": "List the Product Analytics launches of your organization. A launch tracks a feature release with its phase,\nKPIs, and tracking plan.\nResults are sorted by `-created_at` by default.",
+    "summary": "List Product Analytics launches"
+  },
+  "CreateProductAnalyticsLaunch": {
+    "description": "Create a Product Analytics launch and its tracking plan.\nThe tracking plan lists the events and event properties to instrument. Events can only reference properties\nand KPIs defined in the launch.",
+    "summary": "Create a Product Analytics launch",
+    "request_description": "",
+    "request_schema_description": "Request to create a launch."
+  },
+  "DeleteProductAnalyticsLaunch": {
+    "description": "Delete a Product Analytics launch and its tracking plan.",
+    "summary": "Delete a Product Analytics launch"
+  },
+  "GetProductAnalyticsLaunch": {
+    "description": "Get a Product Analytics launch and its tracking plan by UUID.",
+    "summary": "Get a Product Analytics launch"
+  },
+  "UpdateProductAnalyticsLaunch": {
+    "description": "Update some fields of a Product Analytics launch. Fields that are not set are left unchanged. The `id` in\nthe body must match the one in the path.\nSetting `steps.tracking_plan` replaces the whole stored tracking plan, not only the fields you send.\nReturns `409` when the launch changed during the update; fetch it again and retry.",
+    "summary": "Update a Product Analytics launch",
+    "request_description": "",
+    "request_schema_description": "Request to update some fields of a launch."
+  },
+  "ListProductAnalyticsMonitors": {
+    "description": "List the Product Analytics monitors of your organization, one page at a time.\nWhen `chart_id` is set, optionally with `dashboard_id`, the response includes every monitor linked to that\nchart, without pagination.\nWith `chart_id` alone, monitors created from a dashboard widget are not returned.\nMonitors created in the last few seconds may be missing.",
+    "summary": "List Product Analytics monitors"
+  },
+  "CreateProductAnalyticsMonitor": {
+    "description": "Create a Product Analytics monitor that alerts on a Product Analytics query, such as a funnel conversion rate.\nLink it to the chart it was created from with the `chart_id` and `dashboard_id` tags.",
+    "summary": "Create a Product Analytics monitor",
+    "request_description": "",
+    "request_schema_description": "Request to create a Product Analytics monitor."
+  },
+  "DeleteProductAnalyticsMonitor": {
+    "description": "Delete a Product Analytics monitor.",
+    "summary": "Delete a Product Analytics monitor"
+  },
+  "GetProductAnalyticsMonitor": {
+    "description": "Get a Product Analytics monitor by its ID.",
+    "summary": "Get a Product Analytics monitor"
+  },
+  "UpdateProductAnalyticsMonitor": {
+    "description": "Update a Product Analytics monitor. Fields that are not set are left unchanged, and at least one field\nmust be set. When set, `tags` replaces the monitor tags except `chart_id` and `dashboard_id`, which this\nendpoint ignores. To remove them, use the unlink endpoint.",
+    "summary": "Update a Product Analytics monitor",
+    "request_description": "",
+    "request_schema_description": "Request to update a Product Analytics monitor."
+  },
+  "RemoveChartFromProductAnalyticsMonitor": {
+    "description": "Remove the `chart_id` and `dashboard_id` tags from a Product Analytics monitor. The monitor and the rest of\nits configuration are kept.\nThe request must name the stored link exactly. A monitor with no link is left unchanged.",
+    "summary": "Unlink a Product Analytics monitor from its chart",
+    "request_description": "",
+    "request_schema_description": "Request to unlink a Product Analytics monitor from its chart."
+  },
   "QueryProductAnalyticsRetentionGrid": {
     "description": "Compute a retention grid, showing how much of each cohort came back over each subsequent period.\nRows are cohorts, columns are return periods, and each cell holds the count and rate of entities that returned.",
     "summary": "Compute a retention grid",
@@ -5559,6 +5613,36 @@
     "request_description": "The Sankey diagram query.",
     "request_schema_description": "Request body for a Sankey diagram query."
   },
+  "ListProductAnalyticsSegments": {
+    "description": "List the user and account segments of your organization. Disabled segments are left out unless\n`filter[disabled]` is `false`.\nThe list does not include segment definitions; get a segment by ID to see its `data_query`.",
+    "summary": "List segments"
+  },
+  "CreateProductAnalyticsSegment": {
+    "description": "Create a user or account segment. The `data_query` defines who belongs to the segment.\nSegment names must be unique in the organization.",
+    "summary": "Create a segment",
+    "request_description": "",
+    "request_schema_description": "Request to create a segment."
+  },
+  "DeleteProductAnalyticsSegment": {
+    "description": "Delete a segment. Segments created by users are deleted permanently.\nSegments created by Datadog, and segments based on an uploaded list, are disabled instead.",
+    "summary": "Delete a segment"
+  },
+  "GetProductAnalyticsSegment": {
+    "description": "Get a segment by ID, including its definition.",
+    "summary": "Get a segment"
+  },
+  "UpdateProductAnalyticsSegment": {
+    "description": "Update a segment. Fields that are not set are left unchanged. The `id` in the body must match the one in the\npath.\nThe response has no body; get the segment to see the result.",
+    "summary": "Update a segment",
+    "request_description": "",
+    "request_schema_description": "Request to update a segment."
+  },
+  "PreviewProductAnalyticsSegment": {
+    "description": "Preview the users or accounts that match a segment definition, without saving it.\nReturns up to 1000 rows and the total number of matching entities.",
+    "summary": "Preview a segment",
+    "request_description": "",
+    "request_schema_description": "Request to preview the members of a segment definition."
+  },
   "QueryEventFilteredUsers": {
     "description": "Query users filtered by both user properties and event platform data",
     "summary": "Query event filtered users",
@@ -5578,7 +5662,7 @@
     "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
   "DeleteUserProfile": {
-    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
+    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few\nminutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
     "summary": "Delete a user profile"
   },
   "GetMapping": {
