@@ -9,7 +9,7 @@ further_reading:
       text: 'Set up the Datadog MCP Server'
     - link: '/account_management/org_settings/mobile_third_party_access/'
       tag: 'Documentation'
-      text: 'Mobile and Third-Party Access'
+      text: 'OAuth Clients'
     - link: '/account_management/saml/'
       tag: 'Documentation'
       text: 'Configure SAML single sign-on'
@@ -89,7 +89,7 @@ Every issuer URL must use `https` and must not contain a port, query, or fragmen
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][6].
+To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [OAuth Clients][6].
 
 ### Copy your organization UUID
 
@@ -173,7 +173,7 @@ If you use the Claude issuer, the scopes you select in Claude's {{< ui >}}Scopes
 
 To set the scopes Claude is allowed in Datadog:
 
-1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Mobile and Third-Party Access{{< /ui >}}][6]. You can also click {{< ui >}}Manage App{{< /ui >}} next to Claude in the {{< ui >}}Supported agents{{< /ui >}} table on the Cross-App Access page.
+1. Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}OAuth Clients{{< /ui >}}][6]. You can also click {{< ui >}}Manage App{{< /ui >}} next to Claude in the {{< ui >}}Supported agents{{< /ui >}} table on the Cross-App Access page.
 2. Select the Claude application, then select the {{< ui >}}Scopes{{< /ui >}} tab.
 3. Use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control what Claude reaches.
 4. Click {{< ui >}}Enable{{< /ui >}} to save.

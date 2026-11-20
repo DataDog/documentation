@@ -85,7 +85,7 @@ An override whose value doesn't match its declared type is ignored when the wrap
 
 {{< img src="feature_flags/devtools_extension/flags-tab-connect.png" alt="The Feature Flags tab sign-in screen, showing the Datadog site dropdown set to US1 and the Sign in to Datadog button." style="width:100%;" >}}
 
-Your credentials are stored for the browser session and clear when the session ends. To sign out and revoke the session, click **Disconnect**. You can also revoke the extension's access in Datadog under **Organization Settings > Authorized Applications**.
+Your credentials are stored for the browser session and clear when the session ends. To sign out and revoke the session, click **Disconnect**. You can also revoke the extension's access in Datadog under **Organization Settings > OAuth Clients**.
 
 ## Browse and filter flags
 

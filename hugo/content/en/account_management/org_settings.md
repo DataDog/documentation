@@ -51,9 +51,9 @@ When enabled, users logging in with SAML to your Datadog account are permanently
 Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][7].
 
-### Mobile and Third-Party Access
+### OAuth Clients
 
-The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
+The [**OAuth Clients**][15] page allows you to view and manage mobile and third-party applications in your organization.
 
 ## Access
 

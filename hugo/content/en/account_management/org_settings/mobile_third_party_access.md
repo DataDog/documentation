@@ -1,5 +1,5 @@
 ---
-title: Mobile and Third-Party Access
+title: OAuth Clients
 aliases:
 - /account_management/org_settings/oauth_apps/
 description: Manage and monitor OAuth applications in your organization, including permissions, Application Scope Management, user access, and application status controls.
@@ -13,14 +13,16 @@ further_reading:
 ---
 ## Overview
 
-Use the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page under [Organization Settings][1] to manage and gain visibility into your organization's OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it.
+Use the {{< ui >}}OAuth Clients{{< /ui >}} page under [Organization Settings][1] to manage and gain visibility into your organization's OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it.
 
-{{< img src="account_management/mobile_third_party_access/org-management-page.png" alt="Mobile and Third-Party Access management page in Datadog" style="width:100%;">}}
+If your organization uses [Custom OAuth Clients][4], this page has two tabs. The {{< ui >}}Mobile and Third-Party Access{{< /ui >}} tab lists the applications this page describes, and the {{< ui >}}Custom Clients{{< /ui >}} tab lists your organization's own clients.
+
+{{< img src="account_management/mobile_third_party_access/org-management-page.png" alt="OAuth Clients management page in Datadog" style="width:100%;">}}
 
 ## Setup
 ### Permissions
 
-By default, users with the [Datadog Admin role][2] can access the Mobile and Third-Party Access page. If your organization has [custom roles][3] defined, add your user to any custom role with the `org_authorized_apps_read` and `org_authorized_apps_write` permissions.
+By default, users with the [Datadog Admin role][2] can access the OAuth Clients page. If your organization has [custom roles][3] defined, add your user to any custom role with the `org_authorized_apps_read` and `org_authorized_apps_write` permissions.
 
 Only users with the Datadog Admin role or the `org_authorized_apps_read` and `org_authorized_apps_write` permissions can manage OAuth applications on this page, such as disabling applications or revoking OAuth access for a user.
 
@@ -32,7 +34,7 @@ Enabled OAuth applications allow users with necessary permissions to authorize a
 
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and are prompted with an error if they attempt to authorize it.
 
-To disable an application from the Mobile and Third-Party Access page:
+To disable an application from the OAuth Clients page:
 1. Hover over your application in the apps table to reveal the {{< ui >}}Disable{{< /ui >}} button on the right side of the row.
 {{< img src="account_management/mobile_third_party_access/disable-app-table.png" alt="Apps table showing the Disable button on hover" style="width:100%;">}}
 
@@ -60,7 +62,7 @@ Use {{< ui >}}Automatically allow new scopes{{< /ui >}} to choose how Datadog ha
 
 For the Datadog Mobile App, required scopes are always allowed and cannot be disabled.
 
-1. On the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page, click an application to open its detail view.
+1. On the {{< ui >}}OAuth Clients{{< /ui >}} page, click an application to open its detail view.
 
 2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
 
@@ -77,3 +79,4 @@ For the Datadog Mobile App, required scopes are always allowed and cannot be dis
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: /account_management/rbac/permissions/#general-permissions
 [3]: /account_management/rbac/?tab=datadogapplication#custom-role
+[4]: /account_management/custom_oauth_clients/
