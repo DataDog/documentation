@@ -271,17 +271,17 @@ To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="ic
 
 ## Organizing notebooks with folders
 
-Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs.
+Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs. Folders are public: everyone in your organization can see them.
 
-<!-- TODO Add screenshot of the Notebooks side panel with folders -->
+{{< img src="notebooks/folders_list.png" alt="The All Folders page, listing folders with their contents, author, team, and last modified date, next to the Notebooks side panel" style="width:100%;" >}}
 
 | Task                  | How |
 |-----------------------|-----|
-| **Create a folder**   | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
-| **Add notebooks**     | Click {{< ui >}}Add to Folder{{< /ui >}} in a notebook's breadcrumbs, select notebooks in the Notebooks List and click {{< ui >}}Add to Folder{{< /ui >}}, or drag notebooks onto a folder in the side panel. Adding a notebook that is already in a folder moves it. |
-| **Manage a folder**   | From the folder's actions menu, select {{< ui >}}Rename Folder{{< /ui >}}, {{< ui >}}Move Folder{{< /ui >}}, or {{< ui >}}Delete Folder{{< /ui >}}. Click the star icon to add the folder to {{< ui >}}Starred{{< /ui >}}. To take a notebook out of a folder without deleting it, select {{< ui >}}Remove from folder{{< /ui >}}. |
+| Create a folder       | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
+| Add notebooks         | Click {{< ui >}}Add to Folder{{< /ui >}} in a notebook's breadcrumbs or after selecting notebooks in the Notebooks List, or drag notebooks onto a folder in the side panel. Adding a notebook that is already in a folder moves it. |
+| Manage a folder       | Use the folder's actions menu to rename, move, or delete it. Click the star icon to add the folder to {{< ui >}}Starred{{< /ui >}}. To take a notebook out of a folder without deleting it, select {{< ui >}}Remove from folder{{< /ui >}}. |
 
-Deleting a folder never deletes its notebooks. By default, the folder's notebooks and subfolders move up to its parent folder, or to the top level. If you clear {{< ui >}}Bubble up all children of this folder to the parent folder{{< /ui >}}, its subfolders are deleted too, and their notebooks no longer belong to a folder.
+Deleting a folder never deletes its notebooks. By default, the folder's notebooks and subfolders move up to its parent folder, or to the top level. If you clear the bubble-up option when deleting, its subfolders are deleted too, and their notebooks no longer belong to a folder.
 
 ### Manage folders with MCP or the API
 
