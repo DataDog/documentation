@@ -40,7 +40,7 @@ Open the [Cloud SIEM - OCSF Log Quality dashboard][3] and select a time range wi
 | Error Analysis | Validation error counts by type and source, including a trend by error type. A log with an error is invalid, and one log can produce multiple errors. | Find the most common schema failures and the sources they affect. Error counts can exceed invalid-log counts. |
 | Warning Analysis | Warning counts by type and source. Warnings can occur on otherwise valid logs, and one log can produce multiple warnings. | Review potential quality gaps after addressing validation errors. |
 
-If the dashboard has no data, check the selected time range, whether the source has OCSF-mapped logs, and whether validation outputs are enabled. No data does not mean that all logs are valid.
+If the dashboard has no data, check the selected time range, whether the source has OCSF-mapped logs, and whether validation outputs are enabled. A lack of data does not imply that all logs are valid.
 
 ### Investigate a failed source
 
