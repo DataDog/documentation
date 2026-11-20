@@ -11,8 +11,6 @@ Select your SDK in the **SDK** filter to see its instructions.
 
 After you [install the Datadog SDK][1], some SDKs need an extra step to enable the RUM module and start sending data.
 
-[1]: /real_user_monitoring/setup/install/
-
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 RUM is enabled automatically when you initialize the SDK. No further action is needed.
@@ -272,3 +270,5 @@ Then, [configure retention filters](/real_user_monitoring/retain_and_recover_val
 ## Next step
 
 Continue to [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/).
+
+[1]: /real_user_monitoring/setup/install/

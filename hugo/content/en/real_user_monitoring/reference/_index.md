@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This section contains reference documentation for Real User Monitoring, including external resources such as API references, SDK performance impact, and troubleshooting.
+This section contains reference documentation for Real User Monitoring, including links to external API references, SDK performance impact data, and troubleshooting guidance.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/reference/external_resources/" >}}
@@ -23,6 +23,10 @@ This section contains reference documentation for Real User Monitoring, includin
     {{< nextlink href="/real_user_monitoring/reference/troubleshooting/" >}}
     <h3>Troubleshooting</h3>
     Troubleshoot common issues with the Datadog RUM SDK.
+    {{< /nextlink >}}
+    {{< nextlink href="/data_security/real_user_monitoring/" >}}
+    <h3>Data Security</h3>
+    Learn how RUM handles sensitive data and the options for controlling what the SDK collects.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

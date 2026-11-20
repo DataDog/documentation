@@ -41,7 +41,7 @@ Real User Monitoring (RUM) collects data about how real users experience your we
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Get started
+## Choose your platform
 
 Select an application type to start collecting RUM data:
 
@@ -70,7 +70,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Feature | Browser | Android ecosystem | Apple ecosystem | Flutter | React Native | Kotlin Multiplatform | C++ | Electron | Roku | Unity | .NET MAUI | Notes |
 |---------|---------|-------------------|-----------------|---------|--------------|----------------------|-----|----------|------|-------|-----------|-------|
 | Send logs to Datadog | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** can track only some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
 | Track views and actions | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom`.<br> - **C++**, **Roku**, and **Unity** support only manual action tracking.<br> - **C++** and **Roku** support only manual view tracking. |
 | Feature flag tracking and release tracking | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | {{< X >}} |  |  |
 | Error tracking and source mapping | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |

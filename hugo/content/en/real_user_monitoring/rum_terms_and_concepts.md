@@ -21,13 +21,13 @@ further_reading:
 
 ## Overview
 
-RUM provides visibility into the real-time activity and experience of the users of your web and mobile applications. This page describes essential terms and concepts used throughout the RUM product.
+Real User Monitoring (RUM) provides visibility into the real-time activity and experience of the users of your web and mobile applications. This page describes essential terms and concepts used throughout the RUM product.
 
 For additional definitions and descriptions of general Datadog terms, see the [main Glossary][1].
 
 | Concept                                | Description                                                                                                                        |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| [RUM application](#rum-application)     | The application or environment a set of RUM data is grouped under, identified by an Application ID and Client Token.                |
+| [RUM application](#rum-application)     | The application or environment a set of RUM data is grouped under, identified by an application ID and client token.                |
 | [Session](#session)                     | The activity of a single user on your application, made up of the views, actions, resources, errors, and other events they generate.     |
 | [View](#view)                           | A web page, mobile screen, or hybrid view a user visits during a session.                                                            |
 | [Action](#action)                       | A discrete user interaction, such as a click, tap, or custom action defined in your code.                                            |
@@ -40,18 +40,18 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 | [Session Replay](#session-replay)       | A visual, replayable recording of a user's session in your web or mobile application.                                                |
 | [Sampling](#sampling)                   | Client-side sample rates that control the volume of data the SDK sends to Datadog.                                                   |
 | [Retention filters and quotas](#retention-filters-and-quotas) | Server-side controls that determine which ingested sessions Datadog retains and how many are retained per day.  |
-| [Technical limitations](#technical-limitations) | Limits that apply to RUM sessions, events, and uploaded files.                                                              |
 | [Context](#context)                     | Custom or global attributes attached to RUM events to add business or user-specific information.                                     |
+| [Technical limitations](#technical-limitations) | Limits that apply to RUM sessions, events, and uploaded files.                                                              |
 
 ## RUM application
 
-A RUM application represents a single web or mobile application, or one environment of it, in Datadog. Each RUM application has its own **Application ID** and **Client Token**, which you use to [configure the SDK][2] to send data to Datadog. All sessions, views, actions, resources, and errors are grouped under the RUM application that collected them.
+A RUM application represents a single web or mobile application, or one environment of it, in Datadog. Each RUM application has its own application ID and client token, which you use to [configure the SDK][2] to send data to Datadog. All sessions, views, actions, resources, and errors are grouped under the RUM application that collected them.
 
 ## Session
 
 A session groups the activity of a single user on your web or mobile application. A session includes all related navigation events (views), user actions, network requests (resources), crashes and errors, and other events and signals that collectively produce a faithful representation of the user experience.
 
-A session can last up to 4 hours and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically. For other limits that apply to sessions, see [Technical limitations](#technical-limitations).
+A session can last up to 4 hours and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically. For other limits that apply to sessions, see the [Technical limitations](#technical-limitations) section.
 
 ## View
 
@@ -102,13 +102,13 @@ To learn more, see [Session Replay][10].
 RUM provides two complementary ways to control data volume:
 
 - **Head-based, client-side sample rates** are configured in the SDK and decide, when a session starts, how much data is sent to Datadog. Separate sample rates apply to different dimensions, such as sessions, Session Replay recordings, backend traces, and profiles. To learn more, see [Manage Sessions][14].
-- **Tail-based, server-side controls** apply after Datadog ingests the data, and let you selectively retain the sessions that matter most. See [Retention filters and quotas](#retention-filters-and-quotas).
+- **Tail-based, server-side controls** apply after Datadog ingests the data, and let you selectively retain the sessions that matter most. See the [Retention filters and quotas](#retention-filters-and-quotas) section.
 
 Datadog recommends sending 100% of sessions and using retention filters to control which sessions are retained. Metrics computed from ingested sessions remain accurate regardless of how many sessions are retained.
 
 ## Retention filters and quotas
 
-Retention filters and quotas are part of [RUM without Limits][11], and determine which sessions Datadog retains for further investigation. Retention filters use deterministic rules, based on event attributes and tags, to keep the sessions that matter most to your business, while retention quotas cap the number of sessions retained per application per day.
+Retention filters and quotas are part of [RUM without Limits][11] and determine which sessions Datadog retains for further investigation. Retention filters use deterministic rules, based on event attributes and tags, to keep the sessions that matter most to your business, while retention quotas cap the number of sessions retained per application per day.
 
 To learn more, see [Retain and Recover Valuable Sessions][11].
 

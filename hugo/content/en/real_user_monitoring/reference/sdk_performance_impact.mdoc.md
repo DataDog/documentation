@@ -32,7 +32,7 @@ Understand how the Datadog SDK affects your application's performance, and use t
 {% partial file="sdk/sdk_performance_impact/browser.mdoc.md" /%}
 {% /if %}
 
-<!-- Flutter, React Native, Kotlin Multiplatform, C / C++, Roku, Unity, .NET MAUI: no dedicated performance impact content -->
+<!-- Flutter, React Native, Kotlin Multiplatform, C / C++, Electron, Roku, Unity, .NET MAUI: no dedicated performance impact content -->
 {% if includes($platform, ["flutter", "react_native", "kotlin_multiplatform", "cpp", "electron", "roku", "unity", "maui"]) %}
 {% alert %}
 SDK performance impact benchmarks are not available for the selected SDK.
