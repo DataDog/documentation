@@ -66,7 +66,7 @@ A remediation groups the open findings that a single change resolves:
 | Product | Remediation | Example |
 |---|---|---|
 | Software Composition Analysis | Update one package in one repository | Update `lodash` in `my-org/web-app` |
-| Cloud Security Vulnerabilities | Update one container image, bump a base image, or update one OS package | Update `my-registry/api:1.4` |
+| Cloud Security Vulnerabilities | Update one container image, update a base image, or update one OS package | Update `my-registry/api:1.4` |
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
 
