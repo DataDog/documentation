@@ -1,5 +1,5 @@
 ---
-title: Using OpenTelemetry Instrumentation Libraries with DDOT SDKs
+title: Using OpenTelemetry Instrumentation Libraries with Datadog SDKs
 aliases:
   - /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
   - /opentelemetry/instrument/dd_otel_sdks/instrumentation_libraries/
@@ -17,15 +17,15 @@ algolia:
   tags: ['otel instrumentation']
 ---
 
-DDOT SDKs can collect spans from supported OpenTelemetry instrumentation libraries, including for frameworks not covered by DDOT SDK built-in instrumentation.
+Datadog supports OpenTelemetry-compatible instrumentations which provides observability for libraries not covered by Datadog SDKs without changing SDKs. You can extend Datadog's tracing capabilities to these frameworks.
 
-For DDOT SDK language support and setup, see [Using DDOT SDKs][32].
+For Datadog SDKs language support and setup, see [Using Datadog SDKs][32].
 
 ## Prerequisites
 
 - A Datadog SDK configured for OpenTelemetry API support, as described in the language-specific setup below.
 - A telemetry destination: the [Datadog Agent][24] for Datadog trace export, or an OTLP-compatible receiver for [supported OTLP trace export][31].
-- Only one instrumentation for each operation. Enabling both Datadog and OpenTelemetry instrumentation for the same operation can produce duplicate spans.
+- Only one instrumentation for each integration. Enabling both Datadog and OpenTelemetry instrumentation for the same integration can produce duplicate spans.
 
 ## Configuration
 
@@ -55,7 +55,7 @@ The table lists the minimum SDK versions for the OpenTelemetry Traces API. For O
 
 ## Compatibility requirements
 
-1. The Datadog Java SDK supports library instrumentations using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
+1. The Datadog Java SDK supports library instrumentation using OpenTelemetry's [instrumentation API][4] and `javaagent` [extension API][5].
 2. Each instrumentation must be packaged as an OpenTelemetry [extension][6] in its own JAR.
 3. OpenTelemetry provides an [example extension project][7] that registers a custom [instrumentation for Servlet 3 classes][8].
 4. The Java Datadog SDK also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9] build, for example the [R2DBC instrumentation JAR][11].
@@ -75,7 +75,7 @@ To use an OpenTelemetry instrumentation with the Datadog Java SDK:
 
 ## Example
 
-Here's a step-by-step example using R2DBC in Java to illustrate how you can add OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans. 
+Here's a step-by-step example using R2DBC in Java to illustrate how you can add OpenTelemetry instrumentation into your service and begin sending data to Datadog, ensuring you capture all the missing spans.
 
 ```sh
 git clone https://github.com/eugenp/tutorials
@@ -153,23 +153,23 @@ KAFKA_BROKER = 'localhost:9092'
 def produce_message():
     producer = KafkaProducer(bootstrap_servers=KAFKA_BROKER)
     message = b'Hello, OpenTelemetry!'
-    
+
     # No manual span creation, relying on automatic instrumentation
     producer.send(KAFKA_TOPIC, message)
     producer.flush()
-    
+
     print(f"Produced message: {message}")
 
 def consume_message():
     consumer = KafkaConsumer(KAFKA_TOPIC, bootstrap_servers=KAFKA_BROKER, auto_offset_reset='earliest', group_id='demo-group')
-    
+
     # No manual span creation, relying on automatic instrumentation
     for message in consumer:
         print(f"Consumed message: {message.value}")
         break  # For simplicity, consume just one message
 
 if __name__ == "__main__":
-    # manual span here 
+    # manual span here
     tracer = trace.get_tracer(__name__)
     with tracer.start_as_current_span("Span") as parent_span:
         parent_span.set_attribute("Hello", "World")
@@ -332,7 +332,7 @@ You can find a sample  [PHP application][28] with OpenTelemetry and Datadog auto
 
 ## Configuration
 
-To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]). 
+To avoid duplicate spans, you can disable the corresponding Datadog integrations. Set the `DD_TRACE_<INTEGRATION>_ENABLED` environment variable to `0` or `false` to disable an integration(see [Integration names][29]).
 
 Use the integration name when setting integration-specific configuration for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
 

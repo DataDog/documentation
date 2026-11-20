@@ -17,7 +17,7 @@ further_reading:
 
 To send APM stats such as hits, errors, and duration, set up the [`span_metrics` connector][1]. Configure the connector before any sampling processors so that it computes metrics from all spans received by the Collector.
 
-For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
+For DDOT SDKs, see [trace metric extrapolation setup and minimum versions][3].
 
 ## Setup
 

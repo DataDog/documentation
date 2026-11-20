@@ -83,20 +83,20 @@ There are two key decisions to make when using OpenTelemetry with Datadog:
 - [How to instrument your applications](#instrument-your-applications)
 - [How to send your data to Datadog](#send-opentelemetry-data-to-datadog)
 
-SDK and deployment choices determine which Datadog capabilities are available. Datadog supports upstream OpenTelemetry SDKs. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities.
+SDK and deployment choices determine which Datadog capabilities and support options are available. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities. Upstream OpenTelemetry SDKs also work well with Datadog, and are maintained and supported by the OpenTelemetry community.
 
 For more information, read [Feature Compatibility][9].
 
 ## Instrument your applications
 
-Datadog supports traces, metrics, and logs from upstream OpenTelemetry SDKs and DDOT SDKs. Both use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling.
+Datadog supports traces, metrics, and logs from DDOT SDKs and upstream OpenTelemetry SDKs. Both use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling.
 
-- **[Upstream OpenTelemetry SDKs][11]** are maintained by the OpenTelemetry project. Choose this approach for the upstream release life cycle and community-maintained instrumentation.
-- **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are Datadog's version of OpenTelemetry SDKs and are in Preview. Choose this approach for additional Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
+- **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are Datadog's version of OpenTelemetry SDKs and are in Preview. Choose this approach for Datadog support of your instrumentation and for additional Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
+- **[Upstream OpenTelemetry SDKs][11]** are maintained and supported by the OpenTelemetry community. Choose this approach if your organization's policy allows only upstream OpenTelemetry components, or for languages that DDOT SDKs don't cover yet.
 
-You can switch between upstream and DDOT SDKs while keeping OpenTelemetry API instrumentation, standard configuration, and telemetry. Switching back removes the Datadog-specific capabilities.
+You can switch between DDOT SDKs and upstream SDKs while keeping OpenTelemetry API instrumentation, standard configuration, and telemetry. Switching to upstream SDKs removes the Datadog-specific capabilities.
 
-Run one SDK per application process to avoid duplicate instrumentation. SDK installation and telemetry routing are separate: both upstream and DDOT SDKs export OTLP to an OpenTelemetry Collector or another OTLP-compatible backend.
+Run one SDK per application process to avoid duplicate instrumentation. SDK installation and telemetry routing are separate: both DDOT SDKs and upstream SDKs export OTLP to an OpenTelemetry Collector or another OTLP-compatible backend.
 
 For more information, see [Instrument Your Applications][8] and [Feature Compatibility][9].
 
@@ -132,7 +132,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 - Standard OpenTelemetry pipeline that exports to Datadog over OTLP
 - Flexible configuration options like tail-based sampling and data transformations
-- A choice of Collector: the upstream OpenTelemetry Collector, or the [DDOT Collector](/opentelemetry/setup/ddot_collector/), which Datadog builds and supports
+- A choice of Collector: the [DDOT Collector](/opentelemetry/setup/ddot_collector/), which Datadog builds and supports, or the upstream OpenTelemetry Collector
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
