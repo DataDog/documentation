@@ -609,6 +609,12 @@ multifiltersearch:
       recommendation_type: Enable Auto-Pause on Serverless SQL Server Database
       recommendation_description: Identifies serverless SQL Server Databases with auto-pause disabled that sat idle for long stretches, and recommends enabling auto-pause so compute stops billing while they are idle.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: SQL Elastic Pool
+      recommendation_type: Delete Empty Azure SQL Elastic Pool
+      recommendation_description: Identifies Azure SQL elastic pools that have held no databases for at least two weeks, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Elastic Pool
