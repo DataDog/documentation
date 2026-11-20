@@ -68,6 +68,33 @@ describe("ApiEndpoint date versions", () => {
     expect(html).toMatch(/data-api-version-content="base"/);
     expect(html).toMatch(/data-api-version-content="2027-04-15"[^>]* hidden/);
   });
+
+  it("can leave the selector to the operation page without dropping version content", async () => {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    const html = await container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({
+          ...endpointWithTwoRegions,
+          dateVersions: [
+            {
+              apiVersion: "2027-04-15",
+              responses: [],
+              codeExamples: [],
+            },
+          ],
+        }),
+        showDateVersionSelect: false,
+      },
+    });
+
+    expect(html).not.toContain("api-endpoint__version-select");
+    expect(html).toMatch(/data-api-version-content="base"/);
+    expect(html).toMatch(/data-api-version-content="2027-04-15"[^>]* hidden/);
+  });
 });
 
 describe("ApiEndpoint status alerts", () => {

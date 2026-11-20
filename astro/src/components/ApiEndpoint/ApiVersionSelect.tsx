@@ -10,6 +10,9 @@ interface Props {
   majorVersion: "v1" | "v2";
   dates: string[];
   operationId: string;
+  appearance?: "inline" | "pill";
+  /** ID of a wrapper containing the endpoint when the select sits outside it. */
+  targetId?: string;
 }
 
 const BASE = "base";
@@ -18,6 +21,8 @@ export default function ApiVersionSelect({
   majorVersion,
   dates,
   operationId,
+  appearance = "inline",
+  targetId,
 }: Props): JSX.Element {
   const [selected, setSelected] = useState(BASE);
   const root = useRef<HTMLDivElement>(null);
@@ -27,7 +32,11 @@ export default function ApiVersionSelect({
   );
 
   const showVersion = (version: string) => {
-    const endpoint = root.current?.closest("[data-operation-id]");
+    const endpoint = targetId
+      ? document
+          .getElementById(targetId)
+          ?.querySelector<HTMLElement>("[data-operation-id]")
+      : root.current?.closest<HTMLElement>("[data-operation-id]");
     endpoint
       ?.querySelectorAll<HTMLElement>("[data-api-version-content]")
       .forEach((content) => {
@@ -61,16 +70,36 @@ export default function ApiVersionSelect({
   };
 
   return (
-    <div ref={root} class={cl("api-endpoint__version-select")}>
-      <span id={`${id}-label`}>API version</span>
+    <div
+      ref={root}
+      class={cl(
+        "api-endpoint__version-select",
+        `api-endpoint__version-select--${appearance}`,
+      )}
+    >
+      <span
+        id={`${id}-label`}
+        class={cl(
+          "api-endpoint__version-select-label",
+          appearance === "pill" && "api-endpoint__version-select-label--hidden",
+        )}
+      >
+        API version
+      </span>
       <Select
         id={id}
         labelledBy={`${id}-label`}
         options={[
-          { value: BASE, label: `${majorVersion} (default)` },
+          {
+            value: BASE,
+            label: `${majorVersion} (${appearance === "pill" ? "latest" : "default"})`,
+          },
           ...dates.map((date) => ({
             value: date,
-            label: `${majorVersion} - ${date}`,
+            label:
+              appearance === "pill"
+                ? `${majorVersion} (${date})`
+                : `${majorVersion} - ${date}`,
           })),
         ]}
         value={selected}

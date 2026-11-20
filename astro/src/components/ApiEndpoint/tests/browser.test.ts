@@ -168,9 +168,16 @@ test.describe("ApiEndpoint date version switching", () => {
     page,
   }) => {
     await page.goto("/dd_e2e/components/api-endpoint");
-    const endpoint = page.locator('[data-operation-id="GetDashboard"]');
-    const selector = endpoint.locator(".api-endpoint__version-select");
+    const endpointWrapper = page.locator("#versioned-api-endpoint");
+    const endpoint = endpointWrapper.locator(
+      '[data-operation-id="GetDashboard"]',
+    );
+    const selector = page.locator(".api-endpoint__version-select--pill");
     await expect(selector).toBeVisible();
+    await expect(selector.getByRole("button")).toHaveText("v1 (latest)");
+    await expect(endpoint.locator(".api-endpoint__version-select")).toHaveCount(
+      0,
+    );
 
     await chooseSelectOption(selector, "2027-04-15");
 

@@ -3,9 +3,11 @@ if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
+import ApiVersionSelect from "@components/ApiEndpoint/ApiVersionSelect";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
 
 const title = "ApiEndpoint";
+const versionedEndpointId = "versioned-api-endpoint";
 
 const completeEndpointJson = JSON.stringify({
   operationId: "GetDashboard",
@@ -183,9 +185,19 @@ const deprecatedEndpointJson = JSON.stringify({
       <h2>Examples</h2>
 
       <h3>Complete endpoint</h3>
-      <ApiEndpoint data={completeEndpointJson}>
-        <p>Get a dashboard using the specified ID.</p>
-      </ApiEndpoint>
+      <ApiVersionSelect
+        client:load
+        appearance="pill"
+        majorVersion="v1"
+        dates={["2027-04-15"]}
+        operationId="GetDashboard"
+        targetId={versionedEndpointId}
+      />
+      <div id={versionedEndpointId}>
+        <ApiEndpoint data={completeEndpointJson} showDateVersionSelect={false}>
+          <p>Get a dashboard using the specified ID.</p>
+        </ApiEndpoint>
+      </div>
 
       <h3>Deprecated endpoint</h3>
       <ApiEndpoint data={deprecatedEndpointJson}>

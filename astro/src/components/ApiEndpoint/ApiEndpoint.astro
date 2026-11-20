@@ -56,9 +56,11 @@ interface EndpointData {
 
 interface Props {
   data: string; // JSON string of EndpointData
+  /** The operation page can place this control in its version pill instead. */
+  showDateVersionSelect?: boolean;
 }
 
-const { data: dataJson } = Astro.props;
+const { data: dataJson, showDateVersionSelect = true } = Astro.props;
 const translate = useTranslations(Astro.currentLocale);
 
 let ep: EndpointData | null = null;
@@ -142,16 +144,18 @@ const versionContents = ep
           );
         })}
       </div>
-      {ep.dateVersions && ep.dateVersions.length > 0 && (
-        <ApiVersionSelect
-          client:load
-          majorVersion={ep.version}
-          dates={ep.dateVersions
-            .map((version) => version.apiVersion)
-            .toReversed()}
-          operationId={ep.operationId}
-        />
-      )}
+      {showDateVersionSelect &&
+        ep.dateVersions &&
+        ep.dateVersions.length > 0 && (
+          <ApiVersionSelect
+            client:load
+            majorVersion={ep.version}
+            dates={ep.dateVersions
+              .map((version) => version.apiVersion)
+              .toReversed()}
+            operationId={ep.operationId}
+          />
+        )}
 
       {/* Description — rendered as slot content from the parent page */}
       {hasOverview && (
