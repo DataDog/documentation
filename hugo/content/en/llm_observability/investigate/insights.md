@@ -1,6 +1,6 @@
 ---
 title: Insights
-description: Agent Observability Insights identifies recurring cost and reliability problems in existing traces and recommends fixes.
+description: Agent Observability Insights identifies recurring cost and reliability problems in existing traces and, depending on the insight type, recommends fixes.
 further_reading:
 - link: "/llm_observability/investigate/cost/"
   tag: "Documentation"
