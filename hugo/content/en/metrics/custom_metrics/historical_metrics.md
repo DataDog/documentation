@@ -40,6 +40,8 @@ You can start ingesting historical metric values by enabling Historical Metrics 
 
 ## Configuration
 
+Enabling or disabling Historical Metrics Ingestion, in the Metrics Catalog UI, in bulk, or through the API, requires the **Historical Metrics Config Write** ([`late_metrics_config_write`][6]) permission. This permission is included in the Datadog Admin Role and the Datadog Standard Role.
+
 To enable the ingestion of historical metrics for a specific metric:
 1. Navigate to the [Metrics Catalog page][1].
 1. Click on the metric name you want to enable Historical Metrics Ingestion for to open the metric's details side panel.
@@ -58,6 +60,16 @@ You can enable or disable Historical Metrics Ingestion for multiple metrics at o
 1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the {{< ui >}}Historical metrics{{< /ui >}} toggle.
 
 {{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
+
+### Configure with the API
+
+You can also manage Historical Metrics Ingestion for a metric with the API:
+
+- [Enable historical metrics ingestion][7]
+- [Get a historical metrics configuration][8]
+- [Delete a historical metrics configuration][9]
+
+OAuth clients and [scoped application keys][10] need the `late_metrics_config_write` scope to enable or disable Historical Metrics Ingestion.
 
 ## Historical metrics submission
 
@@ -480,3 +492,8 @@ For details on the Metric Name pricing model, see [Metric Name Pricing for Custo
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/billing/metric_name_pricing/
+[6]: /account_management/rbac/permissions/#metrics
+[7]: /api/latest/metrics/#enable-historical-metrics-ingestion
+[8]: /api/latest/metrics/#get-a-historical-metrics-configuration
+[9]: /api/latest/metrics/#delete-a-historical-metrics-configuration
+[10]: /account_management/api-app-keys/#scopes
