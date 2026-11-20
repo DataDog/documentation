@@ -4545,19 +4545,6 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
-    - name: Search remediation groups
-      url: /api/latest/security-monitoring/search-remediation-groups/
-      identifier: security-monitoring-search-remediation-groups
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - SearchRemediationGroups
-        unstable:
-          - v2
-        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -10233,6 +10220,75 @@ menu:
           - v2
         operationids:
           - ListAnnotations
+        unstable:
+          - v2
+        order: 1
+    - name: Anthropic Usage And Costs Integration
+      url: /api/latest/anthropic-usage-and-costs-integration/
+      identifier: anthropic-usage-and-costs-integration
+      generated: true
+    - name: Update an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/update-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-update-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/get-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-get-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/delete-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-delete-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/create-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-create-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Anthropic Usage and Costs accounts
+      url: /api/latest/anthropic-usage-and-costs-integration/list-anthropic-usage-and-costs-accounts/
+      identifier: anthropic-usage-and-costs-integration-list-anthropic-usage-and-costs-accounts
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnthropicUsageAndCostsIntegrationAccounts
         unstable:
           - v2
         order: 1

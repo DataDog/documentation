@@ -55,6 +55,10 @@
     "name": "Annotations",
     "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
   },
+  "anthropic-usage-and-costs-integration": {
+    "name": "Anthropic Usage And Costs Integration",
+    "description": "Manage your Datadog Anthropic Usage and Costs integration accounts and account resources\ndirectly through the Datadog API. See the\n[Anthropic Usage and Costs integration page](https://docs.datadoghq.com/integrations/anthropic-usage-and-costs/) for\nmore information."
+  },
   "app-builder": {
     "name": "App Builder",
     "description": "Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps."
