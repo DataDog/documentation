@@ -23625,6 +23625,30 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
+    - name: Get Agent Observability Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-agent-observability-scanning-group/
+      identifier: sensitive-data-scanner-get-agent-observability-scanning-group
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScanningGroup
+        unstable: []
+        order: 11
+    - name: List Agent Observability Scanning Groups
+      url: /api/latest/sensitive-data-scanner/list-agent-observability-scanning-groups/
+      identifier: sensitive-data-scanner-list-agent-observability-scanning-groups
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTargetScanningGroups
+        unstable: []
+        order: 10
     - name: List standard patterns
       url: /api/latest/sensitive-data-scanner/list-standard-patterns/
       identifier: sensitive-data-scanner-list-standard-patterns
