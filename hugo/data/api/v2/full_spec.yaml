@@ -127629,6 +127629,22 @@ components:
       type: string
       x-enum-varnames:
         - SAVED_FILTERS
+    SavedFilterEnvironmentReference:
+      description: An environment of a feature flag that references the saved filter.
+      properties:
+        id:
+          description: The ID of the environment.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          format: uuid
+          type: string
+        name:
+          description: The name of the environment.
+          example: Production
+          type: string
+      required:
+        - id
+        - name
+      type: object
     SavedFilterFlagReference:
       description: A feature flag that references the saved filter.
       properties:
@@ -127663,8 +127679,14 @@ components:
         - errors
       type: object
     SavedFilterPermissionDeniedAttributes:
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
+        denied_environments:
+          description: Environments preventing this update.
+          items:
+            $ref: "#/components/schemas/SavedFilterEnvironmentReference"
+          type: array
         denied_flags:
           description: Feature flags preventing this update.
           items:
@@ -127679,7 +127701,8 @@ components:
         - denied_flags
       type: object
     SavedFilterPermissionDeniedData:
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
         attributes:
           $ref: "#/components/schemas/SavedFilterPermissionDeniedAttributes"
@@ -127697,7 +127720,8 @@ components:
       type: object
     SavedFilterPermissionDeniedResponse:
       additionalProperties: false
-      description: The caller lacks edit permission on one or more feature flags that reference this saved filter.
+      description: >-
+        The caller lacks edit permission on one or more feature flags that reference this saved filter, or on one or more of their environments.
       properties:
         data:
           $ref: "#/components/schemas/SavedFilterPermissionDeniedData"
