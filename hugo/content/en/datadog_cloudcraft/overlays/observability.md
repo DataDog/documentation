@@ -24,7 +24,7 @@ The Agent overlay shows where the Datadog Agent is installed and what features a
 
 ## Take action on hosts
 
-Click a host to open a mini panel with its Agent version and the Datadog products enabled on it. In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with direct links to Fleet Automation, where you can deploy a configuration or upgrade the Agent.
+Click a host to open a mini panel with its Agent version and the Datadog products enabled on it. In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with direct links to Fleet Automation, where you can deploy a configuration or upgrade the Agent. To select multiple hosts or resource groups for bulk actions, hold down the <kbd>Command</kbd> key on Mac or the <kbd>Control</kbd> key on Windows while clicking each one.
 
 {{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet_4.mp4" alt="Agent overlay in Cloudcraft, clicking a host to open its mini panel, then opening the side panel to deploy a configuration or upgrade the Agent with Fleet Automation." video=true >}}
 
