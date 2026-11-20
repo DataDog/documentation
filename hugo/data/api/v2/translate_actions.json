@@ -1760,6 +1760,10 @@
     "description": "Cancels a data deletion request by providing its ID.",
     "summary": "Cancels a data deletion request"
   },
+  "ForceDataDeletionRequest": {
+    "description": "Skips the remaining recovery period of a data deletion request by providing its ID.\nOnly requests in `in_progress` status can be forced. The deletion starts within a few minutes,\nthe request moves to `deleting` status, and it can no longer be canceled.",
+    "summary": "Forces a data deletion request"
+  },
   "CreateJourney": {
     "description": "Create a DEM journey.",
     "summary": "Create a DEM journey",
