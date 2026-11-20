@@ -24,8 +24,6 @@ Cloud SIEM validates samples of security logs mapped to OCSF against the schema 
 1. Turn on **Enable OCSF validation outputs** to send validation metrics to your organization. This setting is on by default.
 1. Optionally, turn on **Send detailed finding logs** to receive a log for each validation error or warning found in sampled records. This setting is off by default.
 
-{{< img src="security/security_monitoring/ocsf/validation_settings.png" alt="OCSF validation settings with validation outputs enabled and detailed finding logs disabled" style="width:100%;" >}}
-
 Finding logs require validation outputs to be enabled. Turning off validation outputs stops both metrics and finding logs. Changes affect subsequent validation results; existing metrics and logs remain available according to their retention settings.
 
 ## Explore the OCSF Log Quality dashboard
