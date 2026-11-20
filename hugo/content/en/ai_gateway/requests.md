@@ -46,8 +46,8 @@ AI Gateway translates the request and returns the response in the client's API, 
 
 1. [Configure a provider][translation-1] and review the operations listed for the model.
 2. [Authenticate][translation-2] with a Datadog token that has `ai_gateway_usage` and access to the model or routing rule.
-3. Keep the client's Gateway endpoint and request format. Set `model` to `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>`.
-4. Use the following table to check whether Gateway can translate to a target's operation.
+3. Keep the client's AI Gateway endpoint and request format. Set `model` to `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>`.
+4. Use the following table to check whether AI Gateway can translate to a target's operation.
 
 | Client request API | Supported target APIs through translation |
 |---|---|
@@ -58,13 +58,13 @@ AI Gateway translates the request and returns the response in the client's API, 
 
 Translation is selected by API support, rather than provider name. A Gemini model exposed through an OpenAI-compatible Chat Completions endpoint can accept a Chat Completions request directly. Messages and Google `generateContent` do not translate directly to each other.
 
-If a target supports the client's API, Gateway uses that API directly. For a Messages request to a target supporting both Responses and Chat Completions, Gateway prefers Responses to preserve supported reasoning continuation. Other translation targets are considered in the order of the model catalog's supported-operation list. Review the model's operations in its [provider configuration][translation-1]. This is separate from a routing rule's fallback order.
+If a target supports the client's API, AI Gateway uses that API directly. For a Messages request to a target supporting both Responses and Chat Completions, AI Gateway prefers Responses to preserve supported reasoning continuation. Other translation targets are considered in the order of the model catalog's supported-operation list. Review the model's operations in its [provider configuration][translation-1]. This is separate from a routing rule's fallback order.
 
-A [routing rule][translation-3] can select another destination if an operation or request setting cannot be translated. Each attempt starts with the original client request. If no destination accepts the operation or settings, Gateway returns HTTP `400` with the `unsupported_operation` error code and an explanation of the relevant field.
+A [routing rule][translation-3] can select another destination if an operation or request setting cannot be translated. Each attempt starts with the original client request. If no destination accepts the operation or settings, AI Gateway returns HTTP `400` with the `unsupported_operation` error code and an explanation of the relevant field.
 
 ### Send a translated request
 
-The following example sends Responses to a target that supports Anthropic Messages. Replace the model identifier with a configured target. Use the host for your [Datadog site][translation-4].
+Replace the model identifier with a configured target, and use the host for your [Datadog site][translation-4]. The following example sends Responses to a target that supports Anthropic Messages:
 
 ```shell
 curl -i "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/responses" \
@@ -81,7 +81,7 @@ curl -i "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
 
 The response uses the Responses format. To request SSE, add `"stream": true` to the body and use `curl -N -i`. Inspect the response body and check the `X-Ai-Gateway-Translation-Warnings` response header for translation warnings.
 
-Provider credentials remain configured on the Gateway provider. The application sends its Datadog token to Gateway.
+Provider credentials remain configured on the AI Gateway provider. The application sends its Datadog token to AI Gateway.
 
 ### Check feature compatibility
 
@@ -102,17 +102,17 @@ Disabled or empty settings such as `background: false`, `include: []`, and `trun
 
 #### Tools and conversation history
 
-The application executes client-side tools and returns each result using the matching call identifier. Gateway translates the wire representation; it does not execute these tools.
+The application executes client-side tools and returns each result using the matching call identifier. AI Gateway translates the wire representation; it does not execute these tools.
 
-Responses freeform custom tools, including Codex `apply_patch`, can target Messages, Chat Completions, or Google `generateContent`. Gateway represents each custom tool as a function with a string argument, then restores the custom-tool call for the Responses client. Tool namespaces and call/result associations are preserved.
+Responses freeform custom tools, including Codex `apply_patch`, can target Messages, Chat Completions, or Google `generateContent`. AI Gateway represents each custom tool as a function with a string argument, then restores the custom-tool call for the Responses client. Tool namespaces and call/result associations are preserved.
 
-Lark or regular-expression tool grammars become tool instructions without grammar enforcement. Gateway reports `custom_tool_grammar_relaxed`. On Messages targets, developer-role messages that appear after user or assistant messages become system instructions. This changes their position and role priority and produces `developer_messages_normalized`. Developer instructions that appear only before the first user or assistant message do not produce that warning.
+Lark or regular-expression tool grammars become tool instructions without grammar enforcement. AI Gateway reports `custom_tool_grammar_relaxed`. On Messages targets, developer-role messages that appear after user or assistant messages become system instructions. This changes their position and role priority and produces `developer_messages_normalized`. Developer instructions that appear only before the first user or assistant message do not produce that warning.
 
 Preserve supported assistant history, tool calls, and tool results between turns. Messages requests ending in an assistant prefill are rejected for translation. Do not assume that every client feature works because a text-only request succeeds.
 
 #### Reasoning continuation
 
-Reasoning history is specific to its originating model and target. Preserve opaque continuation data returned by Gateway without editing it.
+Reasoning history is specific to its originating model and target. Preserve opaque continuation data returned by AI Gateway without editing it.
 
 - **Responses to Messages:** Send `"include": ["reasoning.encrypted_content"]` to receive replayable reasoning data. Include the returned reasoning items in the next request's history. Without the include, reasoning history is omitted on replay and reported as `reasoning_history_omitted`.
 - **Messages to Responses:** Preserve the returned thinking blocks and signatures when sending subsequent turns.
@@ -123,11 +123,11 @@ Keep the target stable for turns that depend on reasoning continuation. A routin
 
 #### Structured output
 
-For Responses requests targeting Messages or Chat Completions, `text.format.strict: true` supports a bounded JSON Schema subset. Gateway validates answer JSON against the original schema before returning a successful structured answer.
+For Responses requests targeting Messages or Chat Completions, `text.format.strict: true` supports a bounded JSON Schema subset. AI Gateway validates answer JSON against the original schema before returning a successful structured answer.
 
 Supported schemas use an object root, explicit types or `anyOf`, closed objects with `additionalProperties: false`, scalar enums, properties, required fields, and one item schema for arrays. String lengths, numeric bounds and multiples, and array lengths are also validated. References, regular-expression or format constraints, other combinators, and unsupported keywords are rejected.
 
-Limits include a 64 KiB format, 16 schema levels, 256 schema nodes, 16 `anyOf` branches, 256 enum values, and 1 MiB of answer JSON. For streams, only life cycle metadata is sent before validation; answer, reasoning, and tool output wait for terminal validation. This adds latency. Refusal, truncation, invalid JSON, or a schema violation returns an error. Gateway does not repair the answer.
+Limits include a 64 KiB format, 16 schema levels, 256 schema nodes, 16 `anyOf` branches, 256 enum values, and 1 MiB of answer JSON. For streams, only life cycle metadata is sent before validation; answer, reasoning, and tool output wait for terminal validation. This adds latency. Refusal, truncation, invalid JSON, or a schema violation returns an error. AI Gateway does not repair the answer.
 
 Strict structured-output guarantees do not translate to Google `generateContent`. A non-strict schema can translate where supported, without providing the same guarantee.
 
@@ -140,7 +140,7 @@ Inspect the `X-Ai-Gateway-Translation-Warnings` response header for buffered and
 | `parallel_tool_calls_relaxed` | The request opted into allowing multiple function calls on a Google target. |
 | `custom_tool_grammar_relaxed` | A custom tool's grammar is included as instructions without grammar enforcement. |
 | `developer_messages_normalized` | Developer-role messages after user or assistant messages became Messages system instructions. |
-| `max_output_tokens_defaulted` | A Responses request omitted its output-token limit, so Gateway supplied a Messages limit from model metadata or a default. Set the limit explicitly to control it. |
+| `max_output_tokens_defaulted` | A Responses request omitted its output-token limit, so AI Gateway supplied a Messages limit from model metadata or a default. Set the limit explicitly to control it. |
 | `cache_control_omitted` | Anthropic prompt-cache breakpoints could not be represented in Responses. Provider automatic caching is separate. |
 | `prompt_cache_key_omitted` | The destination does not receive the source API's prompt-cache key. |
 | `reasoning_summary_omitted` | An ordinary Chat target does not return the requested visible reasoning summary. |
@@ -151,7 +151,7 @@ A successful request without a warning does not establish complete API equivalen
 
 #### Relax the single-call restriction for Google targets
 
-A request with `parallel_tool_calls: false` and callable tools cannot translate to Google `generateContent` with the single-call guarantee intact. By default, Gateway rejects that translation if no native destination accepts it. A request without tools, or with `tool_choice: "none"`, does not need relaxation.
+A request with `parallel_tool_calls: false` and callable tools cannot translate to Google `generateContent` with the single-call guarantee intact. By default, AI Gateway rejects that translation if no native destination accepts it. A request without tools, or with `tool_choice: "none"`, does not need relaxation.
 
 If your application can handle multiple calls in one turn, add the following request header:
 
@@ -159,13 +159,13 @@ If your application can handle multiple calls in one turn, add the following req
 X-Ai-Gateway-Allow-Lossy-Translation: parallel_tool_calls
 ```
 
-When Gateway relaxes the restriction, the response includes:
+When AI Gateway relaxes the restriction, the response includes:
 
 ```text
 X-Ai-Gateway-Translation-Warnings: parallel_tool_calls_relaxed
 ```
 
-The opt-in accepts only `parallel_tool_calls`. It is not an option to ignore all unsupported fields. Boolean values, wildcards, repeated policies, and repeated headers are rejected. Gateway returns every call; the application must handle each one and send its result.
+The opt-in accepts only `parallel_tool_calls`. It is not an option to ignore all unsupported fields. Boolean values, wildcards, repeated policies, and repeated headers are rejected. AI Gateway returns every call; the application must handle each one and send its result.
 
 Responses to Messages preserves the single-call restriction without this opt-in. Native requests retain their original settings.
 
@@ -186,7 +186,7 @@ For example, a Google streaming error can contain:
 data: {"error":{"code":503,"status":"UNAVAILABLE","message":"The upstream service is unavailable."}}
 ```
 
-For a translated upstream HTTP error, Gateway preserves the status and relevant headers, such as `Retry-After`, and renders the error in the client's API. Native streams retain the provider's error behavior.
+For a translated upstream HTTP error, AI Gateway preserves the status and relevant headers, such as `Retry-After`, and renders the error in the client's API. Native streams retain the provider's error behavior.
 
 ### Verify translation for your application
 
@@ -196,7 +196,7 @@ For a translated upstream HTTP error, Gateway preserves the status and relevant 
 4. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][translation-5], then follow the trace to Agent Observability. Confirm the served provider and model. Billing uses the provider's reported usage.
 5. If you use fallbacks, exercise each destination with the same request settings and history. A successful request against one destination does not prove the others are compatible.
 
-See [Gateway troubleshooting][translation-6] for authentication, model access, and operation errors.
+See [AI Gateway troubleshooting][translation-6] for authentication, model access, and operation errors.
 ## Native Gemini and decision APIs
 
 Use a native API when your application needs its request and response format. AI Gateway accepts Gemini generateContent, OpenAI Decisions, and Baseten System One requests in addition to OpenAI Responses, Chat Completions, and Anthropic Messages.
@@ -210,13 +210,13 @@ OpenAI Decisions and Baseten System One are decision APIs: they evaluate an inpu
 - Confirm that an [access policy][inference_apis-2] allows the provider model or routing rule.
 - Review [data capture][inference_apis-3] before sending sensitive content.
 
-Use the hostname for your [Datadog site][inference_apis-4]. Replace the placeholders in these examples with values from your Gateway provider and model configuration. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`.
+Use the hostname for your [Datadog site][inference_apis-4]. Replace the placeholders in these examples with values from your AI Gateway provider and model configuration. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`.
 
 ### Choose an endpoint
 
 The following paths start at the host `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}`. They already include `/ai/v1`, so don't append them to the AI Gateway base URL:
 
-| API | Gateway path | Model selection | Streaming |
+| API | AI Gateway path | Model selection | Streaming |
 |---|---|---|---|
 | Gemini generateContent | `POST /ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent` | Provider slug and model ID in the URL | Use `:streamGenerateContent` for streaming. |
 | OpenAI Decisions | `POST /ai/v1/decisions` | `model` in the body | Non-streaming response. |
@@ -232,7 +232,7 @@ This guide covers the endpoints in the table. Native requests retain their provi
 ### Call Gemini generateContent
 <!-- vale Datadog.headings = YES -->
 
-The URL's publisher segment is your **Gateway provider slug**, such as `production-vertex`. Use the canonical model ID from that provider's model configuration. Do not substitute the literal publisher name `google` unless it is also your Gateway provider slug.
+The URL's publisher segment is your **AI Gateway provider slug**, such as `production-vertex`. Use the canonical model ID from that provider's model configuration. Do not substitute the literal publisher name `google` unless it is also your AI Gateway provider slug. For example:
 
 ```shell
 curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent" \
@@ -262,13 +262,13 @@ curl -N -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >
   }'
 ```
 
-AI Gateway requests server-sent events from the upstream provider; you don't need to add `?alt=sse` to the Gateway URL. See the [Gemini inference reference][inference_apis-5] for provider request fields.
+AI Gateway requests server-sent events from the upstream provider; you don't need to add `?alt=sse` to the AI Gateway URL. See the [Gemini inference reference][inference_apis-5] for provider request fields.
 
 <!-- vale Datadog.headings = NO -->
 ### Call OpenAI Decisions
 <!-- vale Datadog.headings = YES -->
 
-Use the Decisions API to evaluate shared input against typed questions. Select a model whose Gateway configuration supports OpenAI Decisions, and prefix its model ID with the Gateway provider slug:
+Use the Decisions API to evaluate shared input against typed questions. Select a model whose AI Gateway configuration supports OpenAI Decisions, and prefix its model ID with the AI Gateway provider slug:
 
 ```shell
 curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/decisions" \
@@ -292,7 +292,7 @@ Read the corresponding answer in the response's `answers` array. The question's 
 ### Call System One
 <!-- vale Datadog.headings = YES -->
 
-Use System One with a configured Baseten, TypeSafe, or compatible custom endpoint that supports this operation. System One uses `state` and a map of named `questions`; it has a different payload from OpenAI Decisions.
+Use System One with a configured Baseten, TypeSafe, or compatible custom endpoint that supports this operation. System One uses `state` and a map of named `questions`, which is a different payload from OpenAI Decisions. For example:
 
 ```shell
 curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/systemone" \
@@ -324,20 +324,20 @@ AI Gateway preserves the native response format and uses reported token usage fo
 2. Confirm that the response uses the expected native format.
 3. Open [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][inference_apis-8] and select the time range containing your request.
 4. Click the model or a request bar to open {{< ui >}}Traces{{< /ui >}} with the corresponding filters.
-5. Open the Gateway span. Check the served provider and model, token usage, errors, and captured content according to the effective data capture setting.
+5. Open the AI Gateway span. Check the served provider and model, token usage, errors, and captured content according to the effective data capture setting.
 
 ### Troubleshoot requests
 
-For Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Provider validation errors can use different messages and response formats.
+For AI Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Provider validation errors can use different messages and response formats.
 
 | Response or symptom | What to check |
 |---|---|
-| Gemini model or provider is not found | Use the Gateway provider slug in the publisher segment and the model ID belonging to that provider. |
+| Gemini model or provider is not found | Use the AI Gateway provider slug in the publisher segment and the model ID belonging to that provider. |
 | HTTP `400`, `unsupported_operation` | Check the configured model's supported operations and use the matching endpoint. |
 | A decision payload is rejected | Match the endpoint's schema: OpenAI Decisions uses `input` and a question array; System One uses `state` and a question map. Read the provider's validation message for details. |
 | System One HTTP `400`, `bad_request`, `invalid request body` | Send a valid JSON object with the System One request fields. |
 | System One HTTP `400`, `bad_request`, `System One does not support streaming` | Remove `stream: true` and consume the non-streaming response. |
-| Request is denied | Check token scope, model access, budgets, rate limits, and the [Gateway error code][inference_apis-9]. |
+| Request is denied | Check token scope, model access, budgets, rate limits, and the [AI Gateway error code][inference_apis-9]. |
 
 ## Further reading
 

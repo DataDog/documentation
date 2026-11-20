@@ -35,13 +35,13 @@ For available metrics and tags, see [AI Gateway metrics][16].
 
 ## Attribute and correlate requests
 
-Attribute Gateway traffic to the application that sent it, add dimensions for cost and policy analysis, and connect requests to existing agent traces. Application tags, caller identity, team selection, sessions, and trace parents serve different purposes.
+Attribute AI Gateway traffic to the application that sent it, add dimensions for cost and policy analysis, and connect requests to existing agent traces. Application tags, caller identity, team selection, sessions, and trace parents serve different purposes.
 
 ### Before you begin
 
 - Complete [AI Gateway setup][correlation-1] and confirm that your caller can send a request.
 - Review [data capture][correlation-2]. Attribution and operational metrics remain useful when prompt and response content is not recorded.
-- If you want a Gateway span nested under an existing agent span, instrument the caller with [Agent Observability][correlation-3] and propagate its context.
+- If you want an AI Gateway span nested under an existing agent span, instrument the caller with [Agent Observability][correlation-3] and propagate its context.
 
 ### Choose attribution headers
 
@@ -59,7 +59,7 @@ Use non-sensitive, stable values for tags and sessions. Avoid prompts, email add
 
 ### Attribute requests to an application
 
-Set `x-dd-tag-ml_app` on requests from the same application. Without an explicit application name or propagated application context, Gateway traces appear under `datadog-ai-gateway`.
+Set `x-dd-tag-ml_app` on requests from the same application. Without an explicit application name or propagated application context, AI Gateway traces appear under `datadog-ai-gateway`.
 
 The following request also adds a custom `project` tag. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`:
 
@@ -75,9 +75,9 @@ curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/
   }'
 ```
 
-Use the Gateway hostname for your [Datadog site][correlation-4] and a model or routing rule the caller can use.
+Use the AI Gateway hostname for your [Datadog site][correlation-4] and a model or routing rule the caller can use.
 
-Do not use `x-dd-tag-model` or `x-dd-tag-provider` to describe a requested destination. Gateway reserves these dimensions and records the actual served model and provider.
+Do not use `x-dd-tag-model` or `x-dd-tag-provider` to describe a requested destination. AI Gateway reserves these dimensions and records the actual served model and provider.
 
 Custom keys must start with a lowercase letter, followed by lowercase letters, digits, underscores, periods, slashes, or hyphens (`^[a-z][a-z0-9_./-]*$`). For header keys, avoid slashes because HTTP header names do not allow them. No separate tag-key length limit is defined; HTTP header size limits still apply. Keys in the reserved `_dd.*` namespace are ignored.
 
@@ -95,9 +95,9 @@ Without this header, a request can match budgets and rate limits for every team 
 
 ### Propagate trace context
 
-Configure the caller's Datadog instrumentation to inject the active context into the outbound Gateway request. The caller must have an active Agent Observability span, such as an agent or workflow span, when it calls Gateway. For setup steps, see [Distributed tracing][correlation-8]. Preserve all headers the propagator produces through proxies and HTTP clients.
+Configure the caller's Datadog instrumentation to inject the active context into the outbound AI Gateway request. The caller must have an active Agent Observability span, such as an agent or workflow span, when it calls AI Gateway. For setup steps, see [Distributed tracing][correlation-8]. Preserve all headers the propagator produces through proxies and HTTP clients.
 
-Gateway accepts Datadog trace propagation and W3C Trace Context. To nest a Gateway span under an Agent Observability span, the propagated context must include both the Agent Observability trace ID and parent span ID. An application name or an APM trace ID alone does not establish an Agent Observability parent. Without that context, each Gateway request starts its own trace. To group a run's requests, associate them with a session.
+AI Gateway accepts Datadog trace propagation and W3C Trace Context. To nest an AI Gateway span under an Agent Observability span, the propagated context must include both the Agent Observability trace ID and parent span ID. An application name or an APM trace ID alone does not establish an Agent Observability parent. Without that context, each AI Gateway request starts its own trace. To group a run's requests, associate them with a session.
 
 A request that can call more than one model, such as a Smart Routing rule or a rule with fallbacks, produces one trace with a workflow span. The routing decision, the routed model call, and any fallback attempts appear as children of that span.
 
@@ -108,9 +108,9 @@ x-dd-tag-llmobs_trace_id: <EXISTING_LLMOBS_TRACE_ID>
 x-dd-tag-llmobs_parent_id: <EXISTING_LLMOBS_PARENT_SPAN_ID>
 ```
 
-Use IDs from an existing span in the same Datadog organization. Do not generate unrelated IDs for each HTTP call. Gateway ignores an incomplete or malformed pair. When valid distributed Agent Observability parent context is also present, that context takes precedence over these two tags.
+Use IDs from an existing span in the same Datadog organization. Do not generate unrelated IDs for each HTTP call. AI Gateway ignores an incomplete or malformed pair. When valid distributed Agent Observability parent context is also present, that context takes precedence over these two tags.
 
-An explicit `x-dd-tag-ml_app` overrides an application name carried in propagated context. Use a consistent application name when you want to view the caller and Gateway spans together.
+An explicit `x-dd-tag-ml_app` overrides an application name carried in propagated context. Use a consistent application name when you want to view the caller and AI Gateway spans together.
 
 ### Associate a session
 
@@ -133,7 +133,7 @@ Use the overview to review request volume, token usage, cost, errors, and latenc
 3. Select the time range containing your request.
 4. Filter for your application and custom tag.
 5. Confirm the caller and served destination.
-6. If you supplied parent context, open the trace to confirm the Gateway activity appears under the intended parent.
+6. If you supplied parent context, open the trace to confirm the AI Gateway activity appears under the intended parent.
 7. If you supplied a session, confirm its session association.
 8. Check that recorded content matches the effective data capture setting. A metadata-only request should still have operational information without prompt and response text.
 
@@ -143,10 +143,10 @@ A routing rule can produce several provider attempts through retries or fallback
 
 | Symptom | Check |
 |---|---|
-| Request appears under the default application | Verify the application header reaches Gateway and that you are viewing the correct time range. |
+| Request appears under the default application | Verify the application header reaches AI Gateway and that you are viewing the correct time range. |
 | Caller differs from the expected user | Check which Datadog credential the application actually sends. Caller tags do not change authentication. |
 | Team accounting is unexpected | Review the selected team, direct memberships, and every matching budget or rate limit. |
-| Gateway activity appears in a separate trace | Confirm the active Agent Observability parent exists and that the trace ID, parent span ID, and full distributed context reach Gateway. |
+| AI Gateway activity appears in a separate trace | Confirm the active Agent Observability parent exists and that the trace ID, parent span ID, and full distributed context reach AI Gateway. |
 | Tag is missing | Check the key and value, avoid reserved dimensions, and confirm your client sends the header. |
 | Prompt or response text is absent | Check the effective capture policy before treating missing content as an attribution problem. |
 

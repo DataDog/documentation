@@ -24,9 +24,9 @@ Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_star
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the Gateway attachment defines which traffic it evaluates and how Gateway handles the result.
+Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the AI Gateway attachment defines which traffic it evaluates and how AI Gateway handles the result.
 
-For Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
+For AI Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
 
 Start with an attachment on a test routing rule before applying a policy across the organization.
 
@@ -42,7 +42,7 @@ Start with an attachment on a test routing rule before applying a policy across 
 
 | Target | Traffic evaluated |
 |---|---|
-| **Everything** | All Gateway requests without a route-specific attachment. This is the organization default. |
+| **Everything** | All AI Gateway requests without a route-specific attachment. This is the organization default. |
 | **Route** | Requests sent to the selected routing rule, such as `router/support-assistant`. |
 
 A route-specific attachment replaces the organization default for that route. The policies do not accumulate. The routing rule originally requested by the caller determines the attachment. This selection also applies to nested routing rules and fallback destinations.
@@ -52,7 +52,7 @@ A route-specific attachment replaces the organization default for that route. Th
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}}][ai_guard-4] and click {{< ui >}}Attach AI Guard policy{{< /ui >}}.
 2. Under {{< ui >}}Target{{< /ui >}}, select {{< ui >}}Everything{{< /ui >}}, or select {{< ui >}}Route{{< /ui >}} and choose a routing rule.
 3. Select an {{< ui >}}Existing policy{{< /ui >}}. To create a policy:
-   1. Enter a {{< ui >}}New policy name{{< /ui >}}. Gateway policy names use the `datadog-ai-gateway.` prefix.
+   1. Enter a {{< ui >}}New policy name{{< /ui >}}. AI Gateway policy names use the `datadog-ai-gateway.` prefix.
    2. Click {{< ui >}}Create in AI Guard{{< /ui >}} to open the policy editor.
    3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][ai_guard-1].
    4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
@@ -81,21 +81,21 @@ In **Block unsafe**, other failures can also prevent requests from completing. T
 | OpenAI Chat Completions | Supported plain-text conversation content for buffered and streaming requests. | Successful buffered output in **Block unsafe**. |
 | OpenAI Responses | Supported explicit plain-text input and instructions for buffered and streaming requests. | Not evaluated. |
 | Anthropic Messages | Supported text input for buffered and streaming requests. | Not evaluated. |
-| Native Gemini | Prompt evaluation support is coming soon. | Not evaluated. |
+| Native Gemini | Not evaluated. | Not evaluated. |
 
-Streamed output is not evaluated. Tool definitions, tool calls, and tool results are outside the Gateway AI Guard evaluation path. Support is coming soon. A request containing only tool content can skip evaluation because it has no supported text. Unsupported media, such as images or audio, can cause a refusal in **Block unsafe**.
+Streamed output is not evaluated. AI Guard does not evaluate tool definitions, tool calls, or tool results for AI Gateway requests. A request containing only tool content can skip evaluation because it has no supported text. Unsupported media, such as images or audio, can cause a refusal in **Block unsafe**.
 
-A successful model response alone does not prove that AI Guard evaluated the request. Check the matching Gateway span for a completed evaluation.
+A successful model response alone does not prove that AI Guard evaluated the request. Check the matching AI Gateway span for a completed evaluation.
 
 #### Sensitive data scanning
 
 Configure [sensitive data scanning][ai_guard-5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
 
-This Gateway integration does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. Gateway does not apply those redactions to the content it forwards.
+The AI Gateway integration with AI Guard does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. AI Gateway does not apply those redactions to the content it forwards.
 
 #### Data capture and evaluation
 
-[Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
+[AI Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: AI Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
 
 ### Verify the attachment
 
@@ -130,12 +130,12 @@ Match the route, caller, and timestamp when reviewing evaluation evidence. For s
 |---|---|
 | The policy is missing from the selector. | Confirm **AI Guard View**, check the `datadog-ai-gateway.` policy-name prefix, and refresh the policy list after saving in AI Guard. |
 | Evaluation fails for an application's credential. | Confirm that both the principal and credential scope permit `ai_gateway_usage` and `ai_guard_evaluate`. |
-| A request succeeds without an evaluation. | Check the requested route's effective attachment, supported API and content, and whether the evaluation completed asynchronously. No attachment means no Gateway AI Guard evaluation. |
-| `guardrail_violation` | AI Guard denied evaluated content, or a sensitive-data finding triggered blocking. Inspect the evaluation decision. |
-| `guardrail_unavailable` | Gateway could not complete a required evaluation. Check permission, payload, supported content, and evaluator availability. This code does not mean that unsafe content was detected. |
-| A monitoring request is refused. | Check for errors resolving the attachment or policy. **Monitor only** allows findings from an evaluated policy; it does not bypass configuration errors or other Gateway controls. |
+| A request succeeds without an evaluation. | Check the requested route's effective attachment, supported API and content, and whether the evaluation completed asynchronously. Without an attachment, AI Guard does not evaluate the request. |
+| A request returns `guardrail_violation`. | AI Guard denied evaluated content, or a sensitive-data finding triggered blocking. Inspect the evaluation decision. |
+| A request returns `guardrail_unavailable`. | AI Gateway could not complete a required evaluation. Check permission, payload, supported content, and evaluator availability. This code does not mean that unsafe content was detected. |
+| A monitoring request is refused. | Check for errors resolving the attachment or policy. **Monitor only** allows findings from an evaluated policy; it does not bypass configuration errors or other AI Gateway controls. |
 
-For Gateway AI Guard refusals, OpenAI-compatible requests return HTTP `422`; native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
+When AI Guard refuses an AI Gateway request, OpenAI-compatible requests return HTTP `422` and native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
 
 ## Configure data capture
 
@@ -235,11 +235,11 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 
 1. Review the organization default and any matching capture overrides.
 2. Send a harmless test request with the same caller, team selection, custom tags, and model or routing rule as the workload.
-3. Open the request's Gateway span and review the recorded fields.
+3. Open the request's AI Gateway span and review the recorded fields.
 
 ### Restrict who can view captured content
 
-Data capture controls what AI Gateway records. It does not control who can read it: anyone in your organization who can view Agent Observability traces can open a Gateway span and read the prompts and responses it captured.
+Data capture controls what AI Gateway records. It does not control who can read it: anyone in your organization who can view Agent Observability traces can open an AI Gateway span and read the prompts and responses it captured.
 
 To keep Full capture for a workload and limit who can read its spans, place those spans in a [Restricted Dataset](/llm_observability/data_governance/access_control/) with Data Access Control. Capture keeps working, and users outside the teams or roles you grant can't see the spans.
 
@@ -247,16 +247,16 @@ A Restricted Dataset selects spans by a tag. Choose the tag that marks the workl
 
 | Boundary | How the workload sets it | Notes |
 |---|---|---|
-| Application name (`ml_app`) | Send `x-dd-tag-ml_app: <APPLICATION_NAME>` with each request. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). | Recommended. Without the header, Gateway spans use `datadog-ai-gateway`, or the calling application's name when the caller propagates Agent Observability trace context. An `ml_app` filter is also the only one that restricts the application's evaluator configurations and managed prompts. |
+| Application name (`ml_app`) | Send `x-dd-tag-ml_app: <APPLICATION_NAME>` with each request. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). | Recommended. Without the header, AI Gateway spans use `datadog-ai-gateway`, or the calling application's name when the caller propagates Agent Observability trace context. An `ml_app` filter is also the only one that restricts the application's evaluator configurations and managed prompts. |
 | Another span tag | Send `x-dd-tag-<KEY>: <VALUE>`, for example `x-dd-tag-data_scope: restricted`. | Restricts traces only. Data Access Control uses one tag key for each telemetry type, so this works only if all of your organization's Agent Observability datasets use that key. If any already use `ml_app`, use the application name instead. |
 
 To set up the restriction:
 
 1. Choose the tag and value, and send the header from every request in the workload. Use lowercase letters, digits, hyphens, and underscores in the value.
 2. Create the Restricted Dataset in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Data Access Control{{< /ui >}}](https://app.datadoghq.com/organization-settings/data-access-controls). Select Agent Observability as the product, enter the tag and value, and grant access to the teams or roles that need to read the spans. Creating a Restricted Dataset requires the Datadog Admin role or the `user_access_manage` permission. If you don't have either, send your organization's administrator the tag, its value, and the teams or roles to grant.
-3. Send a test request, then confirm with a user outside the granted teams and roles that the span is not visible. A Restricted Dataset whose filter matches no spans restricts nothing and shows no warning.
+3. Send a test request, then confirm with a user outside the granted teams and roles that the span is not visible. A Restricted Dataset whose filter does not match any spans restricts nothing and shows no warning.
 
-Access is granted to teams and roles, not to individual users. To limit access to one person, grant a team that has only that member and does not allow anyone in the organization to join.
+Access is granted to teams and roles, not to individual users. To limit access to one user, grant a team that has only that member and does not allow anyone in the organization to join.
 
 Keep the following in mind:
 

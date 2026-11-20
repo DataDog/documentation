@@ -28,7 +28,7 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 
 ## Send a request
 
-Send requests to the AI Gateway base URL for your [Datadog site][12] ({{< region-param key="dd_site_name" >}}). The {{< ui >}}Datadog Site{{< /ui >}} selector on this page updates the host.
+The {{< ui >}}Datadog Site{{< /ui >}} selector on this page updates the host. Send requests to the AI Gateway base URL for your [Datadog site][12] ({{< region-param key="dd_site_name" >}}):
 
 ```text
 https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
@@ -47,7 +47,7 @@ curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/
 
 1. Check the HTTP response and confirm the model that served the request.
 2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] to see requests, tokens, spend, errors, and latency for the selected time range.
-3. To inspect the Gateway span, open [Agent Observability traces][4], which shows the `datadog-ai-gateway` application. By default, all traces from AI Gateway appear under that application. To change this, send the `x-dd-tag-ml_app: <VALUE>` request header. The content recorded in the span depends on your [data capture](/ai_gateway/security/#configure-data-capture) setting.
+3. To inspect the AI Gateway span, open [Agent Observability traces][4], which shows the `datadog-ai-gateway` application. By default, all traces from AI Gateway appear under that application. To change this, send the `x-dd-tag-ml_app: <VALUE>` request header. The content recorded in the span depends on your [data capture](/ai_gateway/security/#configure-data-capture) setting.
 
 ## Further reading
 

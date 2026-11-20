@@ -58,7 +58,7 @@ Use the base URL for your [Datadog site][applications-12]. The paths differ beca
 ## Configure Claude Code
 <!-- vale Datadog.headings = YES -->
 
-For the Claude Code CLI, set the Gateway URL and bearer token in the terminal where you start the client:
+For the Claude Code CLI, set the AI Gateway URL and bearer token in the terminal where you start the client:
 
 ```shell
 unset ANTHROPIC_API_KEY
@@ -75,15 +75,15 @@ export ANTHROPIC_CUSTOM_HEADERS="x-dd-tag-ml_app: claude-code"
 claude
 ```
 
-This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved Gateway model or routing rule. See [Claude Code model configuration][applications-19].
+This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved AI Gateway model or routing rule. See [Claude Code model configuration][applications-19].
 
-The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with Gateway credentials. Run `/status` and confirm the Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][applications-16]. Keep tokens out of shared project settings.
+The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with AI Gateway credentials. Run `/status` and confirm the AI Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][applications-16]. Keep tokens out of shared project settings.
 
 <!-- vale Datadog.headings = NO -->
 ## Configure Codex
 <!-- vale Datadog.headings = YES -->
 
-Merge the following settings into `~/.codex/config.toml`. Replace the model placeholder with the same identifier you selected above. Keep the top-level settings before the first TOML table, and update existing keys instead of adding duplicate definitions.
+In the following settings, replace the model placeholder with the identifier you selected earlier. Keep the top-level settings before the first TOML table, and update existing keys instead of adding duplicate definitions. Merge the settings into `~/.codex/config.toml`:
 
 ```toml
 model = "<PROVIDER_SLUG>/<MODEL_ID>"
@@ -102,13 +102,13 @@ http_headers = { "x-dd-tag-ml_app" = "codex" }
 
 Start `codex` from the terminal where `DD_AI_GATEWAY_TOKEN` is available. The `env_key` setting sends that token as `Authorization: Bearer`. AI Gateway supports Responses over HTTP and server-sent events (SSE), so keep `supports_websockets = false`.
 
-Gateway model IDs and `router/<RULE_SLUG>` identifiers might not match Codex's model catalog. For an identifier Codex does not recognize, supply a matching catalog entry with model instructions, context limits, and tool capabilities. This avoids generic model settings. If your administrator supplies a local catalog, add its absolute path before the first TOML table:
+AI Gateway model IDs and `router/<RULE_SLUG>` identifiers might not match Codex's model catalog. For an identifier Codex does not recognize, supply a matching catalog entry with model instructions, context limits, and tool capabilities. This avoids generic model settings. If your administrator supplies a local catalog, add its absolute path before the first TOML table:
 
 ```toml
 model_catalog_json = "<ABSOLUTE_PATH_TO_CODEX_MODEL_CATALOG>"
 ```
 
-The catalog entry's `slug` must match `model`. A Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][applications-20].
+The catalog entry's `slug` must match `model`. An AI Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][applications-20].
 
 Web search is disabled for the connection test. Enable additional client features after checking compatibility with the selected target. For desktop environment variables and configuration options, see [Codex gateway configuration][applications-17].
 
@@ -439,7 +439,7 @@ If the token exchange returns `401`, no mapping matches the application's role. 
 
 ## Attribute requests to an application
 
-By default, Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
+By default, AI Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
 
 The application name can also define who can read captured prompts and responses. See [Restrict who can view captured content](/ai_gateway/security/#restrict-who-can-view-captured-content).
 
@@ -466,15 +466,15 @@ Team selection affects matching [budgets][applications-4], [rate limits][applica
 
 | Symptom | What to check |
 |---|---|
-| `401` or `403` | Check the Datadog site, token, `ai_gateway_usage` permission, and model access. For Claude Code, use `ANTHROPIC_AUTH_TOKEN` so the Datadog token is sent as a bearer token. |
+| A request returns HTTP `401` or `403` | Check the Datadog site, token, `ai_gateway_usage` permission, and model access. For Claude Code, use `ANTHROPIC_AUTH_TOKEN` so the Datadog token is sent as a bearer token. |
 | Unknown model or no eligible target | Use the full `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` identifier. Check the target's request format and the caller's access. For Claude Code, check model alias variables as well as the main model. |
 | Incorrect request path | Use `/ai` for Claude Code and the Anthropic SDK, and `/ai/v1` for Codex and the OpenAI SDK. Do not append the request path to the base URL. |
 | Codex returns `websocket_not_supported` | Set `supports_websockets = false` on the selected provider. |
-| Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the Gateway model identifier. Restart Codex after changing the catalog. |
-| Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart with the Gateway environment variables. |
-| Client does not use the configured Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
+| Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the AI Gateway model identifier. Restart Codex after changing the catalog. |
+| Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart with the AI Gateway environment variables. |
+| Client does not use the configured AI Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
-See [Gateway troubleshooting][applications-7] for Gateway error codes.
+See [AI Gateway troubleshooting][applications-7] for AI Gateway error codes.
 
 ## Further reading
 

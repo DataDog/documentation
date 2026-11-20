@@ -92,7 +92,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 | Grant access to models and routing rules | [Control Model Access](/ai_gateway/access_control/) |
 | Set budgets and rate limits | [Control Spend and Usage](/ai_gateway/spend_controls/) |
 | Control recorded prompt and response content | [Security and Data Capture](/ai_gateway/security/) |
-| Review usage and inspect requests | [Observe Gateway Activity](/ai_gateway/observability/) |
+| Review usage and inspect requests | [Observe AI Gateway Activity](/ai_gateway/observability/) |
 | Diagnose failed or missing requests | [Troubleshooting](/ai_gateway/troubleshooting/) |
 
 ## Further reading
