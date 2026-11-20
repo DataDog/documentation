@@ -41,9 +41,10 @@ Capabilities and configuration requirements vary by language and SDK version.
 | [Dynamic Instrumentation][56] |  | {{< X >}} |
 | [Remotely configured head sampling][57] |  | {{< X >}} |
 | [SQL query-level DBM correlation][51] | {{< X >}} | {{< X >}} |
-| [Data Streams Monitoring][15] | {{< X >}} | {{< X >}} |
-| [Feature Flag Management][52] | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
-| [App and API Protection][11] (AAP) | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
+| [Database Monitoring][54] (DBM) |  | {{< X >}} |
+| [Data Streams Monitoring][15] (DSM) |  | {{< X >}} |
+| [Feature Flag Management][52] | See [agentless requirements][59] | {{< X >}} |
+| [App and API Protection][11] (AAP) |  | {{< X >}} |
 | [Code Security][53] (IAST, SCA) | {{< X >}}<br>(without Remote Configuration) | {{< X >}} |
 | [Continuous Profiler][12] | Not supported | Not supported |
 
@@ -65,15 +66,15 @@ This table covers Datadog platform features for each setup. DDOT SDKs and upstre
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
 | [Source Code Integration][24] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-| [Database Monitoring][14] (DBM) | {{< X >}} |  | {{< X >}} | {{< X >}}<br>(without SQL query-level monitoring, which requires DDOT SDKs) |  |  |
+| [Database Monitoring][14] (DBM) | With Agent |  | {{< X >}} | {{< X >}}<br>(without SQL query-level monitoring, which requires DDOT SDKs) |  |  |
 | [Cloud Network Monitoring][21] (CNM) |  | | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring][46] |  | | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] |  | | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) |  | | {{< X >}} | {{< X >}} | | |
-| [App and API Protection][11] (AAP) | {{< X >}} | | {{< X >}} | | | |
+| [App and API Protection][11] (AAP) | With Agent | | {{< X >}} | | | |
 | [Continuous Profiler][12] |  | | {{< X >}} | | | |
 | [Data Observability: Jobs Monitoring][13] (DJM) |  | | {{< X >}} | | | |
-| [Data Streams Monitoring][15] (DSM) | {{< X >}} | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< X >}} | | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} |
+| [Data Streams Monitoring][15] (DSM) | With Agent | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< X >}} | | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} | {{< tooltip text="N/A" tooltip="Not available with upstream OpenTelemetry SDKs" >}} |
 | [Real User Monitoring][22] (RUM) |  | | {{< X >}} | | | |
 
 **Note**: Features that need the Datadog Agent, such as [Cloud Network Monitoring][21], [Live Container Monitoring][46], [Live Processes][16], and [Universal Service Monitoring][17], work with the DDOT Collector when you also run the Datadog Agent. See [Add the Datadog Agent][48].
@@ -203,7 +204,9 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [51]: /database_monitoring/connect_dbm_and_apm/
 [52]: /feature_flags/
 [53]: /security/code_security/
+[54]: /database_monitoring/setup/
 [55]: /tracing/live_debugger/
 [56]: /tracing/trace_collection/dynamic_instrumentation/
 [57]: /tracing/trace_pipeline/ingestion_controls/
 [58]: /tracing/metrics/runtime_metrics/#export-runtime-metrics-over-otlp
+[59]: /feature_flags/server/#configuration-delivery

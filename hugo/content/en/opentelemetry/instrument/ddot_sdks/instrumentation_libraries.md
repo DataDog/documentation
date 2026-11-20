@@ -1,5 +1,5 @@
 ---
-title: Using OpenTelemetry Instrumentation Libraries with Datadog SDKs
+title: Using Upstream OpenTelemetry Instrumentation Libraries
 aliases:
   - /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
   - /opentelemetry/instrument/dd_otel_sdks/instrumentation_libraries/
