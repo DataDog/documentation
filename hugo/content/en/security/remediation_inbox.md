@@ -124,7 +124,7 @@ Click a remediation to open its side panel:
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
 
-{{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing its summary, ticketing and assignee details, and the vulnerabilities the fix closes" width="100%">}}
+{{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing its summary, ticketing and assignee details, and the vulnerabilities the fix closes." width="100%">}}
 
 ## Remediate
 
