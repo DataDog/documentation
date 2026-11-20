@@ -99,12 +99,12 @@ The `histograms::mode` and `histograms::send_aggregation_metrics` settings of th
 | `<METRIC_NAME>.min`, `<METRIC_NAME>.max` | `min:<METRIC_NAME>{*}`, `max:<METRIC_NAME>{*}` |
 | `<METRIC_NAME>.bucket` | Percentile or threshold queries on `<METRIC_NAME>` (there is no per-bucket query) |
 
-- `min` and `max` are available only if your SDK sends them. Histograms converted by the `cumulativetodelta` processor don't have them.
+- DDOT sends `min` and `max` only if your SDK provides them. The `cumulativetodelta` processor removes `min` and `max` from the histograms it converts.
 - As with other distributions, percentile, threshold, and heatmap queries require [percentiles enabled on the metric][5].
 
 ### Idle series
 
-DDOT sends histogram points with a count of 0, for example for intervals in which a cumulative histogram received no new values. These series report 0 instead of no data, which can affect monitors that alert on missing data.
+DDOT sends histogram points even when their count is 0, for example for intervals in which a cumulative histogram received no new values.
 
 ### Metric names
 
