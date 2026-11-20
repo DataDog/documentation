@@ -213,7 +213,7 @@ Group filters stay applied when you explore a different resource or connection, 
 
 ### Hover over resources and connections
 
-Hover over any item on the map to see its summary. The actions available from the summary depend on the type of item. Clicking an item works differently. For details, see the [Details pane for a clicked item](#details-pane-for-a-clicked-item) section.
+Hover over any item on the map to see its summary. The actions available from the summary depend on the type of item.
 
 #### Resource summaries
 
@@ -245,9 +245,17 @@ The summary for a hop shows its IP address, hostname, AS, location, and latency.
 
 {{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
 
+### Click items on the map
+
+When you click a resource, its side panel opens over the map. For example, clicking a host opens the host side panel. When you click a hop that is a network device, the device's side panel from NDM opens.
+
+When you click a **+N more** item, the details pane shows a searchable list of the resources or CNM connections that the item represents.
+
+Clicking a single connection line, a network path segment, or an AS group does not change the map or the details pane. To see the hops in an AS group, click the group's expand button.
+
 ### Use the details pane
 
-The details pane, to the right of the map, shows information about the explored resource, the filtered resource, or the connection between a source and a destination. It also shows information for some items that you click on the map.
+The details pane, to the right of the map, shows information about the explored resource, the filtered resource, or the connection between a source and a destination.
 
 #### Details pane in Resource View
 
@@ -274,14 +282,6 @@ In Connection View, the details pane shows the following for the connection betw
 <!-- TODO (screenshots): The details pane charts were not in the Preview build on 2026-11-20. If they are not in the screenshots, remove the chart mentions from both details pane lists. -->
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-details-pane.png" alt="The details pane in Connection View, showing the status of the source and destination containers, a View connections button, connection signals, and an RTT graph" style="width:50%;" >}}
-
-#### Details pane for a clicked item
-
-When you click a resource, its side panel opens over the map. For example, clicking a host opens the host side panel. When you click a hop that is a network device, the device's side panel from NDM opens.
-
-When you click a **+N more** item, the details pane shows a searchable list of the resources or CNM connections that the item represents.
-
-Clicking a single connection line, a network path segment, or an AS group does not change the map or the details pane. To see the hops in an AS group, click the group's expand button.
 
 ## Investigate an issue with the L1 to L7 Map
 
