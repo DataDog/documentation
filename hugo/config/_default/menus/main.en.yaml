@@ -8203,56 +8203,61 @@ menu:
       parent: security_platform
       identifier: security_inbox
       weight: 5
+    - name: Remediation Inbox
+      url: security/remediation_inbox
+      parent: security_platform
+      identifier: security_remediation_inbox
+      weight: 6
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
       identifier: security_threat_intelligence
-      weight: 6
+      weight: 7
     - name: Events Forwarding
       url: security/events_forwarding
       parent: security_platform
       identifier: security_events_forwarding
-      weight: 7
+      weight: 8
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 8
+      weight: 9
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 9
+      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 11
     - name: Assignee Management
       url: security/assignee_management
       parent: security_platform
       identifier: security_assignee_management
-      weight: 11
+      weight: 12
     - name: Severity Adjustment
       url: security/manual_severity_adjustment
       parent: security_platform
       identifier: security_manual_severity_adjustment
-      weight: 12
+      weight: 14
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 12
+      weight: 13
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 13
+      weight: 15
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 14
+      weight: 16
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
