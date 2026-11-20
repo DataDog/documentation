@@ -30,16 +30,16 @@ The L1 to L7 Map is in Preview. Complete the form to request access.
 
 ## Overview
 
-The L1 to L7 Map visualizes network relationships to help you diagnose problems with a resource or with the connection between two resources. Use it to:
+The L1 to L7 Map brings application, infrastructure, and network context together on one map. Use it to:
 
 - **Investigate a resource**: See what a service, container, pod, or host runs on and which resources it communicates with. Network signals, such as retransmits and failed connections, show the health of each connection.
 - **Investigate a connection**: Select a source and a destination to compare their supporting resources, observed traffic, and Network Path hops. See the latency of each segment along the path.
 
-The map combines context from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM) in one place, so you can identify dependencies and likely causes of issues.
+The map uses data from Cloud Network Monitoring (CNM), APM, Container Monitoring, Kubernetes, Network Path, and Network Device Monitoring (NDM).
 
 The L1 to L7 Map differs from other network maps in Datadog:
 
-- The [CNM Network Map][20] shows traffic between groups of resources across your environment. Use the L1 to L7 Map to investigate one resource or one connection across the application, infrastructure, and network layers.
+- The [CNM Network Map][20] shows traffic between groups of resources across your environment. The L1 to L7 Map shows one resource or one connection across the application, infrastructure, and network layers.
 - The [Device Topology Map][13] shows the physical connections between network devices. The L1 to L7 Map shows network devices as hops on a network path.
 
 To start using the map, see the [Navigate the L1 to L7 Map](#navigate-the-l1-to-l7-map) section. For step-by-step workflows, see the [Investigate an issue with the L1 to L7 Map](#investigate-an-issue-with-the-l1-to-l7-map) section.
@@ -100,13 +100,13 @@ The source and the destination must be the same type of resource, such as two se
 Between the two stacks, the map shows CNM and Network Path data as separate lines:
 
 - **Network connections**: Traffic that CNM observes between the source and the destination.
-- **Network path**: The hop-by-hop route from Network Path, at the host layer. Each _hop_ is a router or other network device that traffic passes through on the way to the destination. The path runs between the hosts that the source and the destination run on, or from the source's host to a destination endpoint.
+- **Network path**: The route that traffic takes, from Network Path. Network Path runs _tests_ from a host to a destination and records the route of each test. On the map, the path starts at a host that the source runs on. It ends at a host that the destination runs on, or at a destination endpoint. Each _hop_ between them is a router or other network device that traffic passes through.
 
-For services, containers, and pods, the map shows a Network Path test only if Network Path matched the test's destination to a host of the destination. Tests to other destinations, such as a load balancer, do not appear.
+For services, containers, and pods, the map shows a path only when the test's destination is a host that the destination resource runs on. Paths to other destinations, such as a load balancer in front of the destination, do not appear.
 
 When Network Path tests more than one pair of hosts, the map shows the least healthy path. The other paths collapse into a **+N more** item. The least healthy path does not necessarily run between the least healthy hosts in the two stacks.
 
-The map groups hops in the same autonomous system (AS). Each line between two hops or AS groups is a _network path segment_.
+The map groups hops in the same autonomous system (AS). An AS is a network that one organization operates, such as an internet service provider or a cloud provider. Each line between two hops or AS groups is a _network path segment_.
 
 ### Map status and network signals
 
@@ -338,7 +338,7 @@ The Datadog Agent might not be installed on the host. [Install the Agent][9] on 
 
 If Network Path is not set up for the source and destination, [set up Network Path][10] and create tests between them.
 
-Check that Network Path has results for the source and destination during the selected time frame. Open the source and destination in [Network Path][15] to confirm. Traffic in CNM does not guarantee that a Network Path test or a complete route exists for the same source and destination. For services, containers, and pods, the map shows only tests whose destination Network Path matched to a host of the destination resource. Tests to other destinations, such as a load balancer, do not appear.
+Check that Network Path has results for the source and destination during the selected time frame. Open the source and destination in [Network Path][15] to confirm. Traffic in CNM does not guarantee that a Network Path test or a complete route exists for the same source and destination. For services, containers, and pods, the map shows a path only when the test's destination is a host that the destination resource runs on. Paths to other destinations, such as a load balancer in front of the destination, do not appear.
 
 ### A hop appears as an IP address instead of a device
 
