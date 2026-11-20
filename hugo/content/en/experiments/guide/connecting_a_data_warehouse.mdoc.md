@@ -259,7 +259,7 @@ Grant the service principal access to the SQL warehouse that Datadog Experiments
 ## Step 2: Connect Databricks to Datadog
 
 {% alert level="warning" %}
-Enabling monitoring products in the Databricks integration can incur charges separate from Experiments. For an Experiments-only connection, turn off {% ui %}Jobs Monitoring{% /ui %}, all other products, and {% ui %}Metrics - Model Serving{% /ui %} before saving. See [Databricks integration][13] for the optional monitoring features.
+Monitoring products in the Databricks integration can incur charges separate from Experiments. For an Experiments-only connection, disable the monitoring products and metric collection listed below before saving. See [Databricks integration][13] for the optional monitoring features.
 {% /alert %}
 
 To connect your Databricks Workspace to Datadog for warehouse-native experiment analysis:
@@ -273,8 +273,8 @@ To connect your Databricks Workspace to Datadog for warehouse-native experiment 
    - {% ui %}Client ID{% /ui %}.
    - {% ui %}Client Secret{% /ui %}.
    - {% ui %}System Tables SQL Warehouse ID{% /ui %}.
-1. Toggle off {% ui %}Jobs Monitoring{% /ui %} and all other products.
-1. Toggle off the {% ui %}Metrics - Model Serving{% /ui %} resource.
+1. Turn off {% ui %}Jobs Monitoring{% /ui %} and all other products.
+1. Turn off the {% ui %}Metrics - Model Serving{% /ui %} resource.
 1. Click {% ui %}Save Databricks Workspace{% /ui %}.
 
 **Note**: If you reuse a workspace connection that already collects monitoring data for other teams, leave its collection settings unchanged.
@@ -301,9 +301,13 @@ Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services 
 Adding an AWS account enables metric collection by default. Datadog bills for EC2 instances discovered by the AWS integration, even if they don't run the Datadog Agent. Disabling log forwarding or security monitoring does not disable metric collection. See [AWS integration billing][31].
 {% /alert %}
 
+**API setup: disable collection at creation**
+
 To keep metric collection disabled from account creation, use the [AWS integration API][32] with `metrics_config.enabled` set to `false`. For an Experiments-only account, also set `resources_config.extended_collection` and `resources_config.cloud_security_posture_management_collection` to `false`.
 
-The CloudFormation flow below enables metric collection during setup. If you use this flow, disable collection after setup as described below; collection can start before that change takes effect.
+**CloudFormation setup: disable collection afterward**
+
+CloudFormation enables metric collection during setup. Disable it afterward using the steps below. Collection can begin before the change takes effect.
 
 {% alert %}
 Adding an AWS account requires the **AWS Configurations Manage** permission. If your organization uses custom roles, verify that your role includes this permission.
