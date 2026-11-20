@@ -24,16 +24,17 @@ You can run an on-demand test from the Network Path UI. On-demand tests run thro
 
 ## Prerequisites
 
-To set up on-demand tests, you must have:
+To set up and run on-demand tests, you need:
 
-- The Datadog Agent on the source host:
-    - Fulfills the [Private Action Runner requirements][2].
-    - Uses an API key with the **Private Action Runner** capability. See [Ownerless runners][3] for more information.
+- The Datadog Agent on the source host, which must:
+    - Meet the [Private Action Runner requirements][2].
+    - Use an API key with the **Private Action Runner** capability. See [Ownerless runners][3] for more information.
 - The following permissions:
     - **Execution Groups Write** (`execution_groups_write`) to [create the Execution Policy](#create-an-execution-policy).
     - **Network Path Test Run** (`network_path_test_run`) to run on-demand tests.
     - **Network Path Data Read** (`network_path_config_read`) to view test results.
-    - See [Datadog Role Permissions][6] for more information.
+
+To grant permissions, see [Datadog Role Permissions][6].
 
 ## Setup
 
@@ -124,7 +125,7 @@ After the Agent restarts, the runner enrolls with Datadog. Go to [{{< ui >}}Acti
 
    {{< img src="network_performance_monitoring/network_path/on_demand_run_test_now.png" alt="Network Path view of the path from auth-dotnet to 1.1.1.1, with the Run Test Now button highlighted." style="width:100%;" >}}
 
-3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click the run to view the hop-by-hop path for that run.
+3. Follow the run in the {{< ui >}}Test Runs{{< /ui >}} tab. When the run completes, click it to view its hop-by-hop path.
 
 ## View results
 
