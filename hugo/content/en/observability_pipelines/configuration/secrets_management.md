@@ -256,6 +256,36 @@ bootstrap:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### All `vault_session` options
+
+The following `vault_session` fields control how the Worker authenticates to Vault.
+
+{{% secrets-management/vault-session-options %}}
+
+#### Other `backend_config` options for Vault
+
+The following top-level `backend_config` fields also apply:
+
+{{% secrets-management/vault-secret-backend-config-options %}}
+
+#### TLS configuration (`vault_tls_config`)
+
+To enable mutual TLS or a custom CA, add a `vault_tls_config` block:
+
+```yaml
+secret:
+  backend_type: vault
+  backend_config:
+    vault_address: https://myvaultaddress.net
+    vault_tls_config:
+      ca_cert: /path/to/ca.pem
+      client_cert: /path/to/client.pem
+      client_key: /path/to/client-key.pem
+      insecure: false
+```
+
+{{% secrets-management/vault-tls-config %}}
+
 {{% /collapse-content %}}
 {{% collapse-content title="JSON File" level="h3" expanded=false id="json-file" %}}
 

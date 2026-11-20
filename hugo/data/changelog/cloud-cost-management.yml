@@ -103,3 +103,13 @@ entries:
     operations:
       - UploadCustomCostsFile
     title: Add Update Custom Costs file endpoint
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41821
+    operations:
+      - DeleteCustomCostsFile
+      - GetCustomCostsFile
+      - ListCustomCostsFiles
+      - UpdateCustomCostsFile
+      - UploadCustomCostsFile
+    title: Document Custom Costs ai_provider, preview reason and error format
