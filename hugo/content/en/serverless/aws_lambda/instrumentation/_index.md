@@ -88,9 +88,7 @@ The Datadog Lambda extension and the Datadog SDK layer run inside your function,
 
 Datadog recommends a memory size of **at least 256 MB** for instrumented functions. Before you instrument a function below 256 MB, raise its memory size and check its memory use and duration after instrumentation.
 
-When Datadog instruments functions for you from the AWS integration or Fleet Automation, it skips functions with less than 256 MB of memory that are not yet instrumented, and lists them as skipped with the reason `lambda_low_memory`. To instrument one of these functions, raise its memory size to 256 MB or more. Datadog instruments it on the next pass.
-
-The following installation tools still instrument functions with less than 256 MB of memory, but show a warning. To silence the warning after you confirm that a function has enough headroom, use the option for your tool:
+The following installation tools instrument functions with less than 256 MB of memory, but show a warning. To silence the warning after you confirm that a function has enough headroom, use the option for your tool:
 
 | Tool | Option to silence the warning |
 |---|---|
