@@ -19,6 +19,8 @@ This feature is in preview and requires Datadog Agent v7.86 or later. Customers 
 
 Datadog Database Monitoring (DBM) for IBM Db2 collects database instance metadata, query performance metrics, and obfuscated SQL to help you investigate database performance.
 
+Use this guide for self-hosted Db2 databases, including databases running on cloud virtual machines such as Amazon EC2.
+
 ## Before you begin
 
 Supported IBM Db2 versions
@@ -30,7 +32,10 @@ Supported Agent versions
 Supported platforms
 : IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
-## Data collected
+Network access
+: Allow the Agent to reach each Db2 server's direct address on the Db2 service port (`50000` by default). Allow outbound HTTPS connections to [Datadog][23]. On Amazon EC2, configure security groups and VPC routing to allow connections from the Agent host to the Db2 servers. The Agent can run on a database server or a separate instance.
+
+## Collected data {#data-collected}
 
 Database Monitoring collects the following data from IBM Db2:
 
@@ -45,7 +50,7 @@ Database Monitoring collects the following data from IBM Db2:
 
 ## Setup
 
-### Step 1: Enable monitoring
+### Step 1: enable monitoring
 
 As the Db2 instance administrator, enable the monitor switches described in the IBM Db2 integration's [Enable monitoring instructions][1].
 
@@ -66,7 +71,7 @@ The connection allows the configuration update to take effect online. `MON_ACT_M
 
 For details, see IBM's [UPDATE DATABASE CONFIGURATION command][2], [activity metrics parameter][3], and [request metrics parameter][4].
 
-### Step 2: Create the Datadog user and grant access
+### Step 2: create the Datadog user and grant access
 
 Create a dedicated `datadog` user in the operating system or authentication provider used by Db2. Connect to each database you want to monitor as a user with `ACCESSCTRL` or `SECADM` authority, and grant access to the monitoring functions:
 
@@ -86,9 +91,14 @@ These grants do not include read access to tables. For details, see [Database pe
 
 {{% dbm-secret %}}
 
-### Step 3: Install the Agent and the `ibm_db` driver
+### Step 3: install the Agent and the `ibm_db` driver
 
 Install the Agent on the Db2 server or on a separate host with network access to each database server's direct address. A host-installed Agent can also monitor Db2 running in Docker or Kubernetes.
+
+Select the Agent's deployment method:
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 1. [Install Datadog Agent][6] version 7.86 or later.
 2. On Linux, install the IBM driver with the Agent's embedded Python package installer:
@@ -101,7 +111,10 @@ Install the Agent on the Db2 server or on a separate host with network access to
 
    For Windows, follow the IBM Db2 integration's [Windows driver installation instructions][13].
 
-#### Optional: Prepare an Agent container image
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Install Docker using the instructions for your host's operating system. For Amazon Linux, follow the [AWS Docker installation instructions][24], including reconnecting to apply Docker group membership changes.
 
 The Agent container image does not include the `ibm_db` driver. Build a custom image that includes the driver:
 
@@ -110,17 +123,31 @@ FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 ```
 
-Replace `<AGENT_VERSION>` with `7.86.0` or later. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
+Replace `<AGENT_VERSION>` with `7.86.0` or later. Save the Dockerfile and build the image from the same directory:
 
-Deploy the image using the [Docker][21] or [Kubernetes][22] Agent installation instructions.
+```shell
+docker build -t dd-agent-db2:<AGENT_VERSION> .
+```
 
-For integration configuration, follow the [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster check instructions][11]. Specify `ibm_db2` as the integration name and use the database connection settings shown in [Step 4](#step-4-configure-the-agent).
+Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
+
+Continue with the shared check and driver configuration in Step 4, then [run the Agent container](#run-the-agent-in-docker). For other Docker Agent options, see the [Docker Agent documentation][21].
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Build a custom Agent image using the Dockerfile in the **Docker** tab and push it to a registry accessible to your cluster. Configure the [Kubernetes Agent][22] to use this image.
+
+For integration configuration, follow the [Kubernetes Autodiscovery][12] or [cluster check instructions][11]. Specify `ibm_db2` as the integration name and use the database connection settings shown in Step 4.
 
 Set up the [secret backend][10] on the Agent that runs the check. With cluster checks, this is the Cluster Checks Runner, which also needs the custom image and the [automatic client reroute (ACR) configuration](#disable-automatic-client-reroute).
 
-### Step 4: Configure the Agent
+{{% /tab %}}
+{{< /tabs >}}
 
-On Linux, save this configuration in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. For other platforms, see the [Agent configuration directory][20]. For a containerized Agent, apply the instance settings using the configuration method selected in Step 3.
+### Step 4: configure the Agent
+
+For a Linux host or the Docker example below, save this configuration on the Agent host in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. Create the directory if it does not exist. For other host platforms, see the [Agent configuration directory][20]. For Kubernetes, apply the instance settings using the configuration method selected in Step 3.
 
 Configure one check instance per database per server. Database Monitoring requires `host` and `port`. This example monitors the same database name on two servers with distinct, fixed addresses:
 
@@ -177,15 +204,63 @@ Disable automatic client reroute for the Agent's IBM driver so each collector st
 
 Apply these settings to the Agent's driver configuration, not your application's driver configuration.
 
-After configuring the check, driver, and secret backend, [restart the Agent][17].
+For a host-installed Agent, [restart the Agent][17] after configuring the check, driver, and secret backend. For Kubernetes, apply the updated configuration to the Agent that runs the check.
 
-### Step 5: Validate
+#### Run the Agent in Docker
 
-Run the Agent status command on the host or in the Agent container that executes the check:
+After preparing the check configuration and `db2dsdriver.cfg`, configure password resolution inside the container. This example uses the [file-based secret backend][25] to resolve `ENC[datadog_user_database_password]`:
+
+1. On the Docker host, create `/etc/datadog-agent/secrets/datadog_user_database_password` containing only the database password. Restrict access to the file and make it readable by the Agent inside the container.
+2. Run the following command. Replace `<DATADOG_API_KEY>` with your Datadog API key, `<DATADOG_SITE>` with your {{< region-param key=dd_site code="true" >}}, and `<AGENT_VERSION>` with the tag you built in Step 3:
+
+   ```shell
+   docker run -d --name dd-agent \
+     --restart unless-stopped \
+     --cgroupns host \
+     --pid host \
+     -e DD_API_KEY="<DATADOG_API_KEY>" \
+     -e DD_SITE="<DATADOG_SITE>" \
+     -e DD_SECRET_BACKEND_TYPE=file.text \
+     -e DD_SECRET_BACKEND_CONFIG='{"secrets_path":"/run/secrets"}' \
+     -e DB2DSDRIVER_CFG_PATH=/etc/datadog-agent/db2dsdriver.cfg \
+     -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -v /etc/datadog-agent/conf.d/ibm_db2.d:/etc/datadog-agent/conf.d/ibm_db2.d:ro \
+     -v /etc/datadog-agent/db2dsdriver.cfg:/etc/datadog-agent/db2dsdriver.cfg:ro \
+     -v /etc/datadog-agent/secrets:/run/secrets:ro \
+     dd-agent-db2:<AGENT_VERSION>
+   ```
+
+The command mounts the check configuration, driver configuration, and password file into the container. It also sets the driver and secret-backend environment variables on the Agent process. Settings in the host's shell or `datadog.yaml` do not propagate into the container automatically.
+
+If you use another [secret backend][10], replace the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` settings with that backend's configuration, mount any required files, and update the `ENC[]` references to match.
+
+### Step 5: validate
+
+Run the status command for the Agent that executes the check:
+
+{{< tabs >}}
+{{% tab "Host" %}}
 
 ```shell
 datadog-agent status
 ```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+```shell
+docker exec dd-agent agent status
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Follow the [Kubernetes Agent status instructions][26]. With cluster checks, check the status of the Cluster Checks Runner that runs the Db2 check.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Look for `ibm_db2` under **Checks** and confirm that the check has no errors. In Datadog, open **Database Monitoring > Databases** to find the instance. Open **Database Monitoring > Queries** and select **IBM Db2** to view query metrics.
 
@@ -243,7 +318,6 @@ For all integration options, see the [sample configuration][19].
 [6]: /agent/
 [7]: /integrations/ibm-db2/#dependencies
 [8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
-[9]: /containers/docker/integrations/
 [10]: /agent/configuration/secrets-management/
 [11]: /containers/cluster_agent/clusterchecks/
 [12]: /containers/kubernetes/integrations/
@@ -257,3 +331,7 @@ For all integration options, see the [sample configuration][19].
 [20]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [21]: /containers/docker/
 [22]: /containers/kubernetes/
+[23]: /agent/configuration/network/#destinations
+[24]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-docker.html
+[25]: /agent/configuration/secrets-management/#id-for-json-yaml-text
+[26]: /agent/configuration/agent-commands/#agent-information
