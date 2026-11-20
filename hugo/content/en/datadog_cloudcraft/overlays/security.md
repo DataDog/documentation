@@ -7,7 +7,7 @@ further_reading:
   text: "Infrastructure overlay"
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
-  text: "Observability overlay"
+  text: "Agent overlay"
 - link: "/datadog_cloudcraft/overlays/ccm/"
   tag: "Documentation"
   text: "Cloud Cost Management overlay"

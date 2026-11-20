@@ -1,6 +1,6 @@
 ---
-title: Observability
-description: "Use the Observability overlay in Cloudcraft to see where the Datadog Agent is installed and which features are enabled per host."
+title: Agent
+description: "Use the Agent overlay in Cloudcraft to see where the Datadog Agent is installed and which features are enabled per host."
 further_reading:
 - link: "/datadog_cloudcraft/overlays/infrastructure/"
   tag: "Documentation"
@@ -18,53 +18,47 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The Observability overlay is not available for vSphere accounts.</div>
+<div class="alert alert-info">The Agent overlay is not available for vSphere accounts.</div>
 
-The Observability overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
+The Agent overlay shows where the Datadog Agent is installed and what features are enabled per host, such as Application Performance Monitoring (APM), Cloud Network Monitoring (CNM), Log Management, and more. This helps you to assess visibility gaps across your environment.
 
-## Take action on resources
+## Take action on hosts
 
-On the Observability overlay, you can take action on individual resources or groups of resources:
+Click a host to open a mini panel with its Agent version and the Datadog products enabled on it. In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel with direct links to Fleet Automation, where you can deploy a configuration or upgrade the Agent.
 
-- Click a single host to open a side panel with direct links to Fleet Automation, where you can deploy configurations or upgrade the Agent.
-- Click a resource group, such as a subnet or VPC, to open a side panel that allows you to apply bulk updates across all the hosts in that resource group.
-- To select multiple (but not all) hosts, hold down the <kbd>Command</kbd> key on Mac or the <kbd>Control</kbd> key on Windows while clicking on each host.
-
-{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet_3.mp4" alt="Observability overlay in Cloudcraft, clicking on a resource group, and opening the side panel to display the bulk update feature." video=true >}}
+{{< img src="datadog_cloudcraft/overlays/observability_overlay_with_fleet_4.mp4" alt="Agent overlay in Cloudcraft, clicking a host to open its mini panel, then opening the side panel to deploy a configuration or upgrade the Agent with Fleet Automation." video=true >}}
 
 ## View Datadog coverage
 
-In the bottom left legend, the {{< ui >}}View Datadog coverage by{{< /ui >}} dropdown allows you to inspect the installation status for specific features. Each row shows:
-
-- Feature name (for example, APM, Logs, CNM)
-- Numerical coverage: X / Y (for example, 16/35), where:
-  - X is the number of resources with that feature enabled
-  - Y is the total number of relevant resources in the current view or filter
+Above the diagram, select a product, such as APM, Logs, or CNM, to see which hosts it covers. Select {{< ui >}}Summary{{< /ui >}} to see where the Agent is installed.
 
 ### Legend
 
-| Pin Color | Description                                               |
-|-----------|-----------------------------------------------------------|
-| Green     | Agent and feature are both enabled                        |
-| Gray      | Feature is not enabled                                    |
-| Yellow    | Agent is installed but needs an upgrade to enable all features               |
+The legend in the bottom right of the diagram shows how many hosts are in each state.
+
+| Pin Color | Description                                                                                          |
+|-----------|------------------------------------------------------------------------------------------------------|
+| Green     | The Agent is installed and, if you selected a product, the product covers the host                   |
+| Orange    | The Agent is installed, but the selected product doesn't cover the host. In the Agent version view, the Agent is outdated. |
+| Gray      | The Agent is not installed                                                                           |
 
 ### Tracked features
 
-The observability overlay tracks coverage for the following products:
+The Agent overlay tracks coverage for the following products:
 
 | Feature           | Description                                                        |
 |-------------------|--------------------------------------------------------------------|
 | Agent version     | Verifies if the Datadog Agent is installed and its version         |
-| APM               | Application Performance Monitoring (traces collected)        |
-| CNM               | Cloud Network Monitoring coverage                                 |
-| Logs              | Log Management collection status                                              |
-| CWS               | Cloud Workload Protection coverage                                   |
-| CSPM              | Cloud Security Misconfigurations coverage                         |
+| GPU Monitoring    | GPU Monitoring coverage                                            |
+| APM               | Application Performance Monitoring (traces collected)              |
+| CSPM              | Cloud Security Misconfigurations coverage                          |
+| WP                | Workload Protection coverage                                       |
+| Logs              | Log Management collection status                                   |
+| CNM               | Cloud Network Monitoring coverage                                  |
 | Process           | Process monitoring enabled                                         |
-| CSM VM Hosts      | Coverage of Cloud Security Vulnerabilities on hosts          |
-| CSM VM Containers | Coverage of Cloud Security Vulnerabilities on containers                |
-| USM               | Coverage of Universal Service Monitoring                |
+| USM               | Coverage of Universal Service Monitoring                           |
+| CSM VM Hosts      | Coverage of Cloud Security Vulnerabilities on hosts                |
+| CSM VM Containers | Coverage of Cloud Security Vulnerabilities on containers           |
 
 ## Further reading
 

@@ -4,7 +4,7 @@ description: "Use the Infrastructure overlay in Cloudcraft to view resources gro
 further_reading:
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
-  text: "Observability overlay"
+  text: "Agent overlay"
 - link: "/datadog_cloudcraft/overlays/security/"
   tag: "Documentation"
   text: "Security overlay"
