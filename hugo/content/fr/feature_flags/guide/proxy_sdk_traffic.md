@@ -174,18 +174,20 @@ Votre proxy doit transférer les requêtes d'exposition vers l'endpoint d'ingest
 
 {{% tab "Browser" %}}
 
-Transmettez les options de configuration à `DatadogBrowserFlagging.init()`.
+Transmettez ces options à `DatadogProvider` depuis `@datadog/openfeature-browser`.
 
 ### Proxy de configuration des flags {#flag-configuration-proxy-3}
 
 Pour acheminer le téléchargement de la configuration des flags via votre proxy, définissez `flaggingProxy` sur l'URL de votre endpoint de proxy. Le SDK envoie une requête POST avec le contexte d'évaluation dans le corps directement à cette URL, en remplaçant l'endpoint CDN Datadog par défaut.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
+import { DatadogProvider } from '@datadog/openfeature-browser';
 
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
 });
 {{< /code-block >}}
@@ -195,22 +197,28 @@ Votre proxy doit transférer cette requête vers le CDN Datadog : `https://previ
 Pour ajouter des en-têtes personnalisés à la requête de configuration des flags (par exemple, pour l'authentification à votre proxy), utilisez `customHeaders` :
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
 {{< /code-block >}}
+
+Si vous utilisez [`flagSelection`][3] pour charger un sous-ensemble de flags, votre proxy doit renvoyer l'en-tête de réponse `DD-Flag-Selection-Ignored` au navigateur sans modification. Datadog définit cet en-tête lorsqu'il ignore une sélection et renvoie la configuration complète des flags. Si votre proxy se trouve sur une origine différente de celle de votre application, listez également l'en-tête dans l'en-tête de réponse `Access-Control-Expose-Headers`. Si le navigateur ne peut pas lire l'en-tête, la configuration complète se charge tout de même, mais le SDK ne peut pas signaler que la sélection a été ignorée.
 
 ### Proxy de téléversement d'événements {#event-upload-proxy-3}
 
 Les données d'événement des flags du navigateur (expositions et évaluations) sont envoyées via le pipeline d'ingestion standard du SDK Browser. Pour acheminer ce trafic via un proxy, définissez l'option `proxy` sur une URL de votre domaine.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
@@ -234,6 +242,7 @@ L'option `proxy` accepte également une fonction qui reçoit les `path` et `para
 
 [1]: /fr/getting_started/site/
 [2]: /fr/real_user_monitoring/guide/proxy-rum-data/
+[3]: /fr/feature_flags/client/javascript/#load-a-subset-of-flags
 
 {{% /tab %}}
 

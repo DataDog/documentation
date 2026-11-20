@@ -99,12 +99,6 @@ Une équipe peut être connectée à plus d'une source, bien que le type de sour
 
 ## Hiérarchies d'équipes {#team-hierarchies}
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">
-Cette fonctionnalité n'est pas prise en charge pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).
-</div>
-{{< /site-region >}}
-
 Créez une Teams map pour visualiser les hiérarchies d'équipes, en imbriquant les équipes les unes dans les autres (sous-équipes) pour refléter la structure réelle de votre entreprise. Le résultat est un modèle de responsabilité plus complet qu'une simple liste d'équipes sans hiérarchie ni liens entre elles. Les équipes associées, les équipes parentes, les équipes sœurs et les sous-équipes d'une équipe apparaissent sur sa page d'équipe, dans la section **Hierarchy** de l'onglet **Info**. Pour explorer la carte complète de toutes les équipes de votre organisation, consultez la [Teams map][7] dans le Datadog Internal Developer Portal.
 
 {{< img src="/account_management/teams/github/manage/teams-map.png" alt="Teams map présentant une hiérarchie d'équipes parentes et enfants, avec le panneau de détails de l'équipe sélectionnée affichant ses membres et ses sous-équipes" style="width:100%;" >}}

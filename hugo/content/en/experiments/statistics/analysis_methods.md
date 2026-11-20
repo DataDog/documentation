@@ -98,6 +98,8 @@ Use Bayesian analysis when:
 
 The prior matters most when sample sizes are small. With enough data, the posterior is driven mostly by observed experiment behavior, but empirically grounded priors are often strong enough to affect results even at large sample sizes. A poorly-specified prior can influence the lift estimate and interval enough to change the decision.
 
+Bayesian results also include the minimum expected regret and the expected value of sample information (EVSI). These statistics help you decide whether to stop the experiment or collect more data. For more information, see [Expected Regret and EVSI][6].
+
 ### Choosing a prior
 
 Both priors shrink noisy lift estimates toward the prior mean. Each prior applies
@@ -130,3 +132,4 @@ Confidence level
 [3]: /experiments/statistics/multiple_testing_correction
 [4]: /experiments/statistics/cuped
 [5]: https://doi.org/10.1086/710607
+[6]: /experiments/statistics/expected_regret_and_evsi

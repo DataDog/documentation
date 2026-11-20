@@ -21,10 +21,10 @@ further_reading:
   text: APM と分散型トレーシング
 - link: /real_user_monitoring
   tag: ドキュメント
-  text: RUM およびセッションリプレイ
+  text: RUM と Session Replay
 - link: https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/
   tag: ブログ
-  text: セッションリプレイブラウザ開発ツールによるトラブルシューティング
+  text: Session Replay ブラウザ開発ツールによるトラブルシューティング
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
   text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
@@ -41,13 +41,13 @@ APM と Real User Monitoring のインテグレーションにより、Web お�
 
 RUM のフロントエンドデータに加えて、トレース ID 挿入のバックエンド、インフラストラクチャー、ログ情報を使用して、スタック内の問題を特定し、ユーザーに起こっていることを理解します。
 
-iOS アプリケーションのトレースだけを Datadog に送信し始めるには、[iOS トレース収集][1]をご覧ください。
+iOS アプリケーションのトレースだけを Datadog に送信し始めるには、[iOS トレース収集][1] をご覧ください。
 
 ## 使用方法 {#usage}
 
 ### 前提条件 {#prerequisites}
 
--   RUM アプリケーションの対象となるサービスに [APM トレーシング][2]を設定していること。
+-   RUM アプリケーションの対象となるサービスに [APM トレーシング][2] を設定していること。
 -   サービスが HTTP サーバーを使用していること。
 -   HTTP サーバーで、[分散型トレーシングをサポートするライブラリ](#supported-libraries)が使用されていること。
 -   ご利用の SDK に応じて次の設定を行っていること。
@@ -62,7 +62,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{< tabs >}}
 {{% tab "ブラウザ RUM" %}}
 
-1. [RUM ブラウザモニタリング][1]を設定します。
+1. [RUM ブラウザモニタリング][1] を設定します。
 
 2. RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
 
@@ -124,9 +124,9 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
       - `RegExp`: matches if any substring of the URL matches the provided RegExp. For example, `/^https:\/\/[^\/]+\.my-api-domain\.com/` matches URLs like `https://foo.my-api-domain.com/path`, but not `https://notintended.com/?from=guess.my-api-domain.com`. **Note:** The RegExp is not anchored to the start of the URL unless you use `^`. Be careful, as overly broad patterns can unintentionally match unwanted URLs and cause CORS errors.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
 
-<div class="alert alert-danger">RegExp を使用する場合、パターンは URL 全体に対して部分文字列としてテストされ、プレフィックスのみではありません。意図しない一致を避けるために、`^`で RegExp をアンカーし、できるだけ具体的にしてください。</div>
+<div class="alert alert-danger">RegExp を使用する場合、パターンは URL の先頭部分だけでなく、URL 全体に対して部分文字列として照合されます。意図しない一致を避けるため、正規表現のアンカーとして <code>^</code> を使用し、可能な限り具体的に指定してください。 </div>
 
-3.  _(オプション)_ `traceSampleRate` 初期化パラメーターを構成して、バックエンドトレースの一定割合を保持します。設定されていない場合、ブラウザリクエストからのトレースの 100% が Datadog に送信されます。例えば、バックエンドトレースの 20 % を保持するには:
+3.  _(オプション)_ `traceSampleRate` 初期化パラメーターを構成して、バックエンドトレースの一定割合を保持します。設定されていない場合、ブラウザリクエストからのトレースの 100% が Datadog に送信されます。たとえば、バックエンドトレースの 20 % を保持するには:
 
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
@@ -141,7 +141,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 
 4. _(オプション)_ `traceSampleRate` を設定している場合、バックエンドサービス側のサンプリング判定が適用されるように、初期化パラメーター `traceContextInjection` を `sampled` に設定してください (デフォルトは `sampled` です)。
 
-    例えば、Browser SDK で `traceSampleRate` を 20% に設定した場合: 
+    たとえば、Browser SDK で `traceSampleRate` を 20% に設定した場合:
     - `traceContextInjection` が `all` に設定されている場合、バックエンドトレースの **20%** が保持され、バックエンドトレースの **80%** が破棄されます。
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection は all に設定されています" style="width:90%;">}}
@@ -157,8 +157,8 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1. [RUM Android モニタリング][1]を設定します。
-2. [Android トレース収集][2]を設定します。
+1. [RUM Android モニタリング][1] を設定します。
+2. [Android トレース収集][2] を設定します。
 3. モジュールレベルの `build.gradle` ファイルに `dd-sdk-android-okhttp` ライブラリへの Gradle 依存関係を追加します。
 
     ```groovy
@@ -203,9 +203,9 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1. [RUM iOS モニタリング][1]を設定します。
+1. [RUM iOS モニタリング][1] を設定します。
 
-2. `RUM` および URLSession のインスツルメンテーションを、`urlSessionTracking` 設定および `firstPartyHostsTracing` パラメーターで有効にします。
+2. `RUM` および URLSession のインスツルメンテーションを、`urlSessionTracking` 構成および `firstPartyHostsTracing` パラメーターで有効にします。
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -268,7 +268,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
-1. [RUM React Native モニタリング][1]を設定します。
+1. [RUM React Native モニタリング][1] を設定します。
 
 2. `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
     ```javascript
@@ -296,9 +296,9 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "Flutter RUM" %}}
 
-1. [RUM Flutter モニタリング][1]を設定します。
+1. [RUM Flutter モニタリング][1] を設定します。
 
-2. [リソースを自動追跡][2]の指示に従って、Datadog Tracking HTTP Client パッケージを含め、HTTP トラッキングを有効にします。これには、Flutter アプリケーションが呼び出す内部のファーストパーティオリジンのリストを追加するための初期化への以下の変更が含まれます。
+2. [リソースの自動追跡][2] の指示に従って、Datadog Tracking HTTP Client パッケージを含め、HTTP トラッキングを有効にします。これには、Flutter アプリケーションが呼び出す内部のファーストパーティオリジンのリストを追加するための初期化への以下の変更が含まれます。
     ```dart
     final configuration = DatadogConfiguration(
       // ...
@@ -318,7 +318,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 <div class="alert alert-danger">RUM for Roku は、 {{< region-param key="dd_datacenter" >}} Datadog サイト上では利用できません。</div>
 {{< /site-region >}}
 
-1. [RUM Roku モニタリング][1]を設定します。
+1. [RUM Roku モニタリング][1] を設定します。
 
 2. ネットワークリクエストを行うには、`datadogroku_DdUrlTransfer` コンポーネントを使用します。
     ```brightscript
@@ -335,8 +335,8 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform RUM" %}}
 
-1. [RUM Kotlin Multiplatform モニタリング][1]を設定します。
-2. [Ktor インスツルメンテーション][2]を設定します。
+1. [RUM Kotlin Multiplatform モニタリング][1] を設定します。
+2. [Ktor インスツルメンテーション][2] を設定します。
 
 3. Datadog Ktor Plugin の設定において、`tracedHosts` 初期化パラメーターを使用し、Kotlin Multiplatform アプリケーションが呼び出す内部 (ファーストパーティ) のドメインリストを定義してください。
     ```kotlin
@@ -385,11 +385,11 @@ RUM との APM インテグレーションが構成されていることを検�
 
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 1. アプリケーションのページにアクセスします。
-2. ブラウザの開発者ツールで、**Network** タブを開きます。
-3. 相関が期待されるリソースリクエストのリクエストヘッダーに [Datadog の相関ヘッダー][1]が含まれていることを確認します。
+2. ブラウザの開発者ツールで、[{{< ui >}}Network{{< /ui >}}] タブを開きます。
+3. 相関が期待されるリソースリクエストのリクエストヘッダーに [Datadog の相関ヘッダー][1] が含まれていることをチェックします。
 
 [1]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
 
@@ -399,7 +399,7 @@ RUM との APM インテグレーションが構成されていることを検�
 1. Android Studio からアプリケーションを実行します。
 2. アプリケーションの画面にアクセスします。
 3. Android Studio の [Network Inspector][1] を開きます。
-4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][2]ことを検証します。
+4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][2] ことを検証します。
 
 [1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
 [2]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-rum-resources-are-linked-to-traces
@@ -410,7 +410,7 @@ RUM との APM インテグレーションが構成されていることを検�
 1. Xcode からアプリケーションを実行します。
 2. アプリケーションの画面にアクセスします。
 3. Xcode の [Network Connections and HTTP Traffic instrument][1] を開きます。
-4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][2]ことを検証します。
+4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][2] ことを検証します。
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: /ja/real_user_monitoring/correlate_with_other_telemetry/apm/?tab=iosrum#how-rum-resources-are-linked-to-traces
@@ -421,7 +421,7 @@ RUM との APM インテグレーションが構成されていることを検�
 1. Xcode (iOS) または Android Studio (Android) からアプリケーションを実行します。
 2. アプリケーションの画面にアクセスします。
 3. Xcode の [Network Connections and HTTP Traffic instrument][1] または Android Studio の [Network Inspector][2] を開きます。
-4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3]ことを検証します。
+4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3] ことを検証します。
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
@@ -432,8 +432,8 @@ RUM との APM インテグレーションが構成されていることを検�
 
 1. 希望の IDE または `flutter run` を使ってアプリケーションを実行します。
 2. アプリケーションの画面にアクセスします。
-3. Flutter の [Dev Tools][1] を開き、[Network View][2] に移動します。
-4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3]ことを検証します。
+3. Flutter の [開発ツール][1] を開き、[ネットワークビュー][2] に移動します。
+4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3] ことを検証します。
 
 [1]: https://docs.flutter.dev/tools/devtools/overview
 [2]: https://docs.flutter.dev/tools/devtools/network
@@ -445,7 +445,7 @@ RUM との APM インテグレーションが構成されていることを検�
 1. Xcode (iOS) または Android Studio (Android) からアプリケーションを実行します。
 2. アプリケーションの画面にアクセスします。
 3. Xcode の [Network Connections and HTTP Traffic instrument][1] または Android Studio の [Network Inspector][2] を開きます。
-4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3]ことを検証します。
+4. RUM リソースのリクエストヘッダーをチェックし、[SDK によって必要なヘッダーが設定されている][3] ことを検証します。
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
@@ -460,9 +460,9 @@ RUM との APM インテグレーションが構成されていることを検�
 
 RUM Explorer からトレースを表示するには:
 
-1. [list of sessions][22] に移動し、トレースが利用可能なセッションをクリックします。`@_dd.trace_id:*` を使用して、トレースを持つリソースをクエリすることもできます。
+1. [セッションのリスト][22] に移動し、トレースが利用可能なセッションをクリックします。`@_dd.trace_id:*` を使用して、トレースを持つリソースをクエリすることもできます。
 
-セッションを選択すると、リクエストの所要時間の内訳、各スパンのフレームグラフ、および **View Trace in APM** リンクが表示されます。
+セッションを選択すると、リクエストの所要時間の内訳、各スパンのフレームグラフ、[{{< ui >}}View Trace in APM{{< /ui >}}] リンクを含むセッションパネルが表示されます。
 
 ## トレースから RUM Explorer へ {#traces-to-rum-explorer}
 
@@ -470,8 +470,8 @@ RUM Explorer からトレースを表示するには:
 
 トレースから RUM イベントを表示するには:
 
-1. トレースビュー内で、**VIEW** をクリックするとビューのライフサイクル中に作成されたすべてのトレースを表示でき、**RESOURCE** をクリックすると概要タブから特定のリソースに関連するトレースを表示できます。
-1. **See View in RUM** または **See Resource in RUM** をクリックして、RUM Explorer で対応するイベントを開きます。
+1. トレースビュー内で {{< ui >}}VIEW{{< /ui >}} をクリックすると、ビューの表示期間中に作成されたすべてのトレースを確認できます。また、[{{< ui >}}RESOURCE{{< /ui >}}] を [{{< ui >}}Overview{{< /ui >}}] タブでクリックすると、特定のリソースに関連するトレースを確認できます。
+1. [{{< ui >}}See View in RUM{{< /ui >}}] または [{{< ui >}}See Resource in RUM{{< /ui >}}] をクリックして、RUM エクスプローラーで対応するイベントを開きます。
 
 ## サポートされているライブラリ {#supported-libraries}
 
@@ -654,33 +654,35 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
 ## RUM リソースがトレースにリンクされる仕組み {#how-rum-resources-are-linked-to-traces}
 
 Datadog は、分散型トレーシングプロトコルを使用し、以下の HTTP ヘッダーを設定します。デフォルトでは、トレースコンテキストと Datadog 固有のヘッダーの両方が使用されます。
+
+これらのヘッダーは、対応するプロパゲータータイプがアクティブの場合にのみ追加されます。デフォルトでは、RUM はトレースコンテキストとともに `datadog` プロパゲーターを含めます。有効なプロパゲーターの確認や変更については、[OpenTelemetry のサポート](#opentelemetry-support) を参照してください。
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Real User Monitoring SDK から生成されました。Datadog がトレースを RUM リソースにリンクできるようにします。
 
 `x-datadog-parent-id`
-: Real User Monitoring SDK から生成されました。Datadog がトレースの最初のスパンを生成できるようにします。
+: Real User Monitoring SDK から生成されました。Datadog がトレースから最初のスパンを生成できるようにします。
 
 `x-datadog-origin: rum`
 : Real User Monitoring SDK から生成されました。Datadog がトレースの発生元を検出できるようにします。
 
 `x-datadog-sampling-priority`
-: トレースがサンプリングされた場合は `1`、サンプリングされていない場合は `0` に設定されます。
+: Real User Monitoring SDK により、トレースがサンプリングされた場合は `1` に、サンプリングされていない場合は `0` に設定されます。
 {{% /tab %}}
 {{% tab "W3C Trace Context" %}}
 
 `traceparent: [version]-[trace id]-[parent id]-[trace flags]`
 : `version`: 現在の仕様では、バージョンは `00` に設定されていると想定されています。
-: `trace id`: 128 ビットのトレース ID (32 文字の 16 進数)。ソーストレース ID は 64 ビットで、APM との互換性を保つためです。
+: `trace id`: 128 ビットのトレース ID (32 文字の 16 進数)。APM との互換性を保つために、ソーストレース ID は 64 ビットです。
 : `parent id`: 64 ビットのスパン ID (16 文字の 16 進数)。
 : `trace flags`: サンプリングされた (`01`) またはサンプリングされていない (`00`)
 
 **トレース ID 変換**: 128 ビットの W3C トレース ID は、元の 64 ビットのソーストレース ID に先頭のゼロを追加して作成されます。これにより、APM との互換性が確保され、W3C Trace Context 仕様に準拠します。元の 64 ビットのトレース ID は、128 ビットの W3C Trace Context トレース ID の下位 64 ビットになります。
 
 `tracestate: dd=s:[sampling priority];o:[origin]`
-: `dd`: Datadogのベンダープレフィックス。
+: `dd`: Datadog のベンダープレフィックス。
 : `sampling priority`: トレースがサンプリングされた場合は `1`、サンプリングされていない場合は `0` に設定されます。
-: `origin`: 生成されたトレースが Real User Monitoring から APM インデックススパン数に影響を与えないように、常に `rum` に設定します。
+: `origin`: Real User Monitoring から生成されたトレースが APM インデックススパン数に影響を与えないように、常に `rum` に設定します。
 
 **例**:
 
@@ -697,7 +699,7 @@ traceparent の完全な例:
 {{% /tab %}}
 {{% tab "b3 / b3 複数ヘッダー" %}}
 `b3: [trace id]-[span id]-[sampled]`
-: `trace id`: 64 ビットのスパン ID (16 文字の 16 進数)。
+: `trace id`: 64 ビットのトレース ID (16 文字の 16 進数)。
 : `span id`: 64 ビットのスパン ID (16 文字の 16 進数)。
 : `sampled`: True (`1`) または False (`0`)
 
@@ -711,19 +713,19 @@ b3 複数ヘッダーの例:
 {{% /tab %}}
 {{< /tabs >}}
 
-これらの HTTP ヘッダーは CORS セーフリストに含まれていないため、SDK が監視対象として設定されているリクエストを処理するサーバーで [Access-Control-Allow-Headers][17] を構成する必要があります。サーバーはまた、クロスサイト URL でトレースが許可されている場合、ブラウザが各リクエストの前に行う [preflight requests][18] (OPTIONS リクエスト) を受け入れる必要があります。
+これらの HTTP ヘッダーは CORS セーフリストに含まれていないため、SDK が監視対象として設定されているリクエストを処理するサーバーで [Access-Control-Allow-Headers][17] を構成する必要があります。サーバーはまた、クロスサイト URL でトレースが許可されている場合、ブラウザが各リクエストの前に行う [プレフライトリクエスト][18] (OPTIONS リクエスト) を受け入れる必要があります。
 
 ## トレースの保持 {#trace-retention}
 
-取り込まれたトレースは、[Live Search][19] エクスプローラーで 15 分間利用可能です。トレースをより長い期間保持するには、[APM 保持フィルター][20]を作成してください。これらの保持フィルターを任意のスパンタグにスコープして、重要なページやユーザーアクションのトレースを保持します。
+取り込まれたトレースは、[Live Search][19] エクスプローラーで 15 分間利用可能です。トレースをより長い期間保持するには、[APM 保持フィルター][20] を作成してください。これらの保持フィルターを任意のスパンタグにスコープして、重要なページやユーザーアクションのトレースを保持します。
 
-RUM Without Limits を使用する場合、特定の RUM セッションに関連する APM トレースを保持するために[クロスプロダクト保持フィルター][21]を使用することもでき、フロントエンドとバックエンドの相関を最適化します。デフォルトでは、RUM の[セッションとそのトレースは自動的に保持される][23]の 1 % が自動的に保持され、追加費用はかかりません。
+RUM Without Limits を使用する場合、特定の RUM セッションに関連する APM トレースを保持するために [クロスプロダクト保持フィルター][21] を使用することもでき、フロントエンドとバックエンドの相関を最適化します。デフォルトでは、RUM の [セッションとそのトレースは自動的に保持される][23] の 1 % が自動的に保持され、追加費用はかかりません。
 
 ## APM クォータへの影響 {#effect-on-apm-quotas}
 
 RUM とトレースを接続することで、APM に取り込まれるボリュームが大幅に増加する可能性があります。初期化パラメーター `traceSampleRate` を使用して、ブラウザおよびモバイルリクエストから取り込むバックエンドトレースの割合を制御します。
 
-cross-product retention filters を設定することで、APM にインデックスされるボリュームが増加する可能性もあります。cross-product retention filters の保持率を使用して、インデックスするバックエンドトレースの割合を制御します。
+製品間保持フィルターを構成することで、APM にインデックスされるボリュームが増加する可能性もあります。製品間保持フィルターの保持率を使用して、インデックスするバックエンドトレースの割合を制御します。
 
 ## 参考資料 {#further-reading}
 

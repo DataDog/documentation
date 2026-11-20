@@ -1205,33 +1205,13 @@ secret_backend_config:
 
 The following `vault_session` fields control how the Agent authenticates to Vault.
 
-| Field | Description |
-|---|---|
-| `vault_auth_type` | Authentication method. Supported values: `aws`, `kubernetes`. When unset, AppRole, userpass, or LDAP is used based on which credentials are provided. |
-| `vault_role_id` | AppRole role ID. Use with `vault_secret_id`. |
-| `vault_secret_id` | AppRole secret ID. Use with `vault_role_id`. |
-| `vault_username` | Username for userpass authentication. Use with `vault_password`. |
-| `vault_password` | Password for userpass authentication. Use with `vault_username`. |
-| `vault_ldap_username` | Username for LDAP authentication. Use with `vault_ldap_password`. |
-| `vault_ldap_password` | Password for LDAP authentication. Use with `vault_ldap_username`. |
-| `vault_aws_role` | Vault role name for AWS IAM authentication. Required when `vault_auth_type: aws`. |
-| `vault_aws_iam_server_id` | Value for the `X-Vault-AWS-IAM-Server-ID` header, used to prevent replay attacks. |
-| `aws_region` | AWS region for IAM authentication requests. Defaults to `us-east-1`. |
-| `vault_kubernetes_role` | Vault role name for Kubernetes authentication. Required when `vault_auth_type: kubernetes`. |
-| `vault_kubernetes_jwt` | Kubernetes service account JWT token as a string. |
-| `vault_kubernetes_jwt_path` | Path to the Kubernetes JWT token file. Defaults to `/var/run/secrets/kubernetes.io/serviceaccount/token`. |
-| `vault_kubernetes_mount_path` | Vault mount path for the Kubernetes auth method. |
-| `implicit_auth` | Set to `true` to skip authentication and use the token already set in the Vault client environment (for example, `VAULT_TOKEN`). |
+{{% secrets-management/vault-session-options %}}
 
 ##### Other `secret_backend_config` options for Vault
 
 The following top-level `secret_backend_config` fields also apply:
 
-| Field | Description |
-|---|---|
-| `vault_address` | Vault server address (for example, `http://myvaultaddress.net`). Can also be set with the `VAULT_ADDR` environment variable. |
-| `vault_token` | Static Vault token. Use when not relying on an auth method. |
-| `vault_namespace` | Vault namespace for Vault Enterprise environments. |
+{{% secrets-management/vault-secret-backend-config-options %}}
 
 ##### TLS configuration (`vault_tls_config`)
 
@@ -1248,14 +1228,7 @@ secret_backend_config:
     insecure: false
 ```
 
-| Field | Description |
-|---|---|
-| `ca_cert` | Path to a PEM-encoded CA certificate file. |
-| `ca_path` | Path to a directory of PEM-encoded CA certificate files. |
-| `client_cert` | Path to a PEM-encoded client certificate file for mTLS. |
-| `client_key` | Path to the private key file for the client certificate. |
-| `tls_server` | Expected server name for TLS SNI verification. |
-| `insecure` | Set to `true` to disable TLS certificate verification. Do not use in production. |
+{{% secrets-management/vault-tls-config %}}
 
 {{% /tab %}}
 
@@ -2468,15 +2441,15 @@ secret_refresh_on_api_key_failure_interval: 10
 
 This setting is compatible with `secret_refresh_interval`.
 
-### Enabling DDOT collector refresh
-If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+### Enabling refresh for the Agent's Collector {#enabling-ddot-collector-refresh}
+If you are using the [Agent's Collector][6], the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
   config_refresh_interval: 3600
 ```
 
-This ensures the DDOT collector remains in-sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
+This keeps the Agent's Collector in sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the Agent's Collector uses this setting to regularly check for updated values from the Agent.
 
 ## Troubleshooting
 
@@ -2729,7 +2702,7 @@ instances:
 [1]: /agent/kubernetes/integrations/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [3]: https://docs.docker.com/engine/swarm/secrets/
-[6]: /opentelemetry/setup/ddot_collector/
+[6]: /opentelemetry/setup/agent/#agents-collector
 [7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: /agent/configuration/agent-configuration-files/
 <!-- Links in tabs are scoped inside shortcodes, collapse-content links are not scoped -->

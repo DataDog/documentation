@@ -8,13 +8,13 @@ further_reading:
   text: Agent Observability の詳細
 - link: monitors/
   tag: ドキュメント
-  text: 重要なときにチームに通知するためのモニターの作成および管理
+  text: 重要なときにチームに通知するためのモニターの作成および管理。
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: ブログ
   text: Datadog LLM Observability を使用した LLM プロンプトの追跡、比較、最適化
 - link: https://learn.datadoghq.com/courses/llm-obs-investigations
   tag: ラーニングセンター
-  text: LLM Observability で調査します。
+  text: LLM Observability を使った調査
 title: Agent Observability メトリクス
 ---
 Agent Observability でアプリケーションをインスツルメントした後、ダッシュボードやモニターで使用する Agent Observability メトリクスにアクセスできます。これらのメトリクスは、LLM アプリケーションのスパン数、エラー数、トークン使用量、およびレイテンシーの測定値をキャプチャします。これらのメトリクスは、アプリケーションのトラフィックの 100% に基づいて計算されます。
@@ -24,12 +24,12 @@ Agent Observability でアプリケーションをインスツルメントした
 <br><br>
 これらは、Agent Observability の以下の 2 つとは異なります。
 <ul>
-<li><strong>スパンごとの運用データ</strong> (個々のトレースまたはスパンのコスト、トークン、レイテンシー、エラー): これらのメトリクスが集計される元の生の値です。スパンと共に保存され、<a href="/llm_observability/data_governance/#traces-and-spans">Agent Observability のトレース保持期間</a>に従い、メトリクスとしてではなくトレース エクスプローラーからクエリされます。</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">評価スコア</a></strong> (“evals”とも呼ばれます): 個々のスパンや実験行に付加された品質および安全性の判断 (例: ハルシネーション、忠実性、カスタム LLM-as-a-judge など)。これらは運用テレメトリに由来するものではなく、Datadog メトリクスの保持期間ではなく、<a href="/llm_observability/data_governance/">Agent Observability のトレースおよび実験の保持期間</a>に従います。</li>
+<li><strong>スパンごとの運用データ</strong> (個々のトレースまたはスパンのコスト、トークン、レイテンシー、エラー): これらのメトリクスが集計される元の生の値です。スパンと共に保存され、<a href="/llm_observability/data_governance/#traces-and-spans">Agent Observability のトレース保持期間</a>に従い、メトリクスとしてではなく Traces エクスプローラーからクエリされます。</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">評価スコア</a></strong> (“evals”とも呼ばれます): 個々のスパンやオフライン実験行に付加された品質および安全性の判断 (例: ハルシネーション、忠実性、カスタム LLM-as-a-judge など)。これらは、運用テレメトリから導出されたものではありません。Datadog メトリクスの保持期間ではなく、<a href="/llm_observability/data_governance/">Agent Observability のトレースおよびオフライン実験の保持期間</a>に従います。</li>
 </ul>
 </div>
 
-<div class="alert alert-info">スパンに設定されたその他のタグは、Agent Observability メトリクスのタグとしては使用できません。</div>
+<div class="alert alert-info">スパンに設定されたその他のタグは、LLM トークンとコストのメトリクスに関するタグを除き、Agent Observability メトリクスのタグとしては利用できません。詳細については、<a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">コストとトークンのメトリクスに関するカスタムタグ</a>を参照してください。</div>
 
 ### スパンメトリクス {#span-metrics}
 

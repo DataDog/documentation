@@ -7,7 +7,7 @@ further_reading:
   text: Configurer le Collector OpenTelemetry
 - link: /opentelemetry/otlp_ingest_in_the_agent/
   tag: Documentation
-  text: Ingestion OTLP par le Datadog Agent
+  text: Configurez l'endpoint OTLP de l'Agent
 - link: https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/
   tag: Architecture Center
   text: Récepteur OTLP de Datadog Agent dans Kubernetes

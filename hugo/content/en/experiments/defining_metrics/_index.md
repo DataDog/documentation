@@ -112,11 +112,15 @@ The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their co
 
 Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 
-1. Search for and select the custom score evaluation you want to measure.
+1. Search for and select the evaluation you want to measure.
 1. Review the evaluation details, such as its ML application, scope, prompt, and model.
-1. Configure the aggregation and any filters. Evaluation metrics default to the average score.
+1. Configure the aggregation and any filters. Evaluation metrics default to {{< ui >}}Average of Assessment score{{< /ui >}}, which measures pass rate.
 
-Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run.
+The picker lists evaluations of all types received by Agent Observability during the selected time range, including those without an assessment. Pass rate measures the assessment, regardless of the evaluation's result type. Datadog derives `assessment_score` from the assessment, where `pass` is `1` and `fail` is `0`. Pass rate is the average of these values, so it ranges from 0 to 1. Evaluations without an assessment are excluded from both the numerator and the denominator.
+
+Before you create the experiment metric, run the evaluation on at least one span. An evaluation appears in the picker only after it has run. If the pass-rate preview is empty, submit evaluations with pass or fail assessments within the selected time range. Historical evaluations are not backfilled with `assessment_score`.
+
+For score evaluations, select {{< ui >}}Score value{{< /ui >}} to measure the raw score instead. Existing metrics that use score values retain their configuration.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing the faithfulness, user_score, and verbosity score evaluations, with faithfulness selected." style="width:90%;" >}}
 

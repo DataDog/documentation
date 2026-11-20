@@ -68,3 +68,74 @@ entries:
       - ListOIDCCloudAuthPersonaMappings
       - ListOIDCCloudAuthProviders
     title: Add preview Custom OIDC provider and persona mapping APIs
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateAWSCloudAuthIntakeMapping
+      - CreateAWSCloudAuthPersonaMapping
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthProvider
+      - DeleteAWSCloudAuthIntakeMapping
+      - DeleteAWSCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthProvider
+      - GetAWSCloudAuthIntakeMapping
+      - GetAWSCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - GetOIDCCloudAuthPersonaMapping
+      - GetOIDCCloudAuthProvider
+      - ListAWSCloudAuthIntakeMappings
+      - ListAWSCloudAuthPersonaMappings
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+      - ListOIDCCloudAuthPersonaMappings
+      - ListOIDCCloudAuthProviders
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41945
+    operations:
+      - CreateTerraformCloudAuthPersonaMapping
+      - DeleteTerraformCloudAuthPersonaMapping
+      - GetTerraformCloudAuthPersonaMapping
+      - ListTerraformCloudAuthPersonaMappings
+    title: Publish HCP Terraform persona mapping API
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateAWSCloudAuthIntakeMapping
+      - CreateAWSCloudAuthPersonaMapping
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthProvider
+      - CreateTerraformCloudAuthPersonaMapping
+      - DeleteAWSCloudAuthIntakeMapping
+      - DeleteAWSCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthProvider
+      - DeleteTerraformCloudAuthPersonaMapping
+      - GetAWSCloudAuthIntakeMapping
+      - GetAWSCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - GetOIDCCloudAuthPersonaMapping
+      - GetOIDCCloudAuthProvider
+      - GetTerraformCloudAuthPersonaMapping
+      - ListAWSCloudAuthIntakeMappings
+      - ListAWSCloudAuthPersonaMappings
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+      - ListOIDCCloudAuthPersonaMappings
+      - ListOIDCCloudAuthProviders
+      - ListTerraformCloudAuthPersonaMappings
+    title: Document rate-limit headers on the shared 429 responses

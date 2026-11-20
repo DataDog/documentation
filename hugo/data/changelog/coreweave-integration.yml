@@ -1,0 +1,21 @@
+entries:
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41823
+    operations:
+      - CreateCoreWeaveCloudIntegrationAccount
+      - DeleteCoreWeaveCloudIntegrationAccount
+      - GetCoreWeaveCloudIntegrationAccount
+      - ListCoreWeaveCloudIntegrationAccounts
+      - UpdateCoreWeaveCloudIntegrationAccount
+    title: Add Integration Accounts v2 API for CoreWeave
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateCoreWeaveCloudIntegrationAccount
+      - DeleteCoreWeaveCloudIntegrationAccount
+      - GetCoreWeaveCloudIntegrationAccount
+      - ListCoreWeaveCloudIntegrationAccounts
+      - UpdateCoreWeaveCloudIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses

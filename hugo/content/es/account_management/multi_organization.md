@@ -31,6 +31,8 @@ Es posible administrar múltiples organizaciones secundarias desde una cuenta de
 
 La función de cuenta de múltiples organizaciones no está habilitada de forma predeterminada. Comuníquese con el [soporte de Datadog][1] para habilitarla.
 
+Para decidir si usar una organización o varias, consulte [Topología de la organización][15].
+
 ## Capacidades {#capabilities}
 
 Se pueden agregar usuarios a la organización principal y a múltiples organizaciones secundarias. Los usuarios cambian entre organizaciones desde el [menú de configuración de la cuenta de usuario][2]. 
@@ -51,10 +53,13 @@ La configuración de la cuenta, como las direcciones IP permitidas, no es hereda
     - Ingrese una o más direcciones de correo electrónico.
     - A los usuarios invitados se les asigna el [rol de Datadog Admin][5]. Puede invitar a más usuarios en
 Configuración de la organización después de crear su organización.
+    - Los usuarios se agregan a una organización a la vez. Para dar a un usuario acceso a varias organizaciones secundarias, invítelo a cada organización secundaria por separado.
     - Si el usuario no tiene una contraseña, Datadog envía una invitación por correo electrónico con un enlace para establecer una contraseña y unirse a la nueva organización secundaria.
 4. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
 La nueva organización secundaria hereda el plan de la organización principal y se agrega a la cuenta de facturación de la organización principal. Si desea actualizar la facturación de la organización secundaria, [comuníquese con su representante de ventas][6].
+
+Una organización secundaria se crea en el mismo [sitio de Datadog][16] que su organización principal. Para incluir organizaciones en otros sitios de Datadog bajo la misma cuenta de facturación, [comuníquese con su representante de ventas][6].
 
 ### Contenido {#content}
 
@@ -173,3 +178,5 @@ Atribución de uso es una función avanzada incluida en el plan Enterprise. Para
 [12]: /es/account_management/plan_and_usage/usage_details/
 [13]: /es/account_management/billing/usage_attribution/
 [14]: https://app.datadoghq.com/billing/usage-attribution
+[15]: /es/account_management/organization_topology/
+[16]: /es/getting_started/site/

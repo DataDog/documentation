@@ -7,3 +7,19 @@ entries:
       - GetSecurityAgentInvestigation
       - ListSecurityAgentInvestigations
     title: Add Bits AI Security Analyst investigations endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CountSecurityAgentInvestigations
+      - GetSecurityAgentInvestigation
+      - ListSecurityAgentInvestigations
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CountSecurityAgentInvestigations
+      - GetSecurityAgentInvestigation
+      - ListSecurityAgentInvestigations
+    title: Document rate-limit headers on the shared 429 responses

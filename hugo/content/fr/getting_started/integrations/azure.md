@@ -260,7 +260,7 @@ Si vous avez déjà connecté une inscription d'application à l'aide d'un secre
 
 Dans la boîte de dialogue {{< ui >}}Secretless Authentication Setup{{< /ui >}}, sélectionnez une méthode de configuration, puis suivez les étapes correspondant à cette méthode :
 
-{{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="La boîte de dialogue de configuration de l'authentification Secretless avec les méthodes de configuration Azure CLI, Terraform et Portail Azure, ainsi que les étapes pour créer une information d'identification fédérée, la vérifier et terminer la configuration" style="width:100%;" >}}
+{{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModalDatadogIssuer.png" alt="La boîte de dialogue de configuration de l'authentification Secretless avec les méthodes de configuration Azure CLI, Terraform et Portail Azure, ainsi que les étapes pour créer une information d'identification fédérée, la vérifier et terminer la configuration" style="width:100%;" >}}
 
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
@@ -311,9 +311,9 @@ resource "azuread_application_federated_identity_credential" "datadog_federated_
 
 L'intégration Azure de Datadog est conçue pour collecter toutes les métriques depuis [Azure Monitor][8]. La [page Integrations][9] affiche une liste organisée de sous-intégrations prédéfinies qui fournissent des dashboards et des monitors prêts à l'emploi supplémentaires pour des services Azure spécifiques. Bon nombre de ces intégrations sont installées par défaut lorsque Datadog reconnaît les données provenant de votre compte Azure. Cependant, Datadog peut ingérer des métriques depuis **toute ressource prise en charge par Azure Monitor**, même si elle ne dispose pas d'une tuile de sous-intégration dédiée.
 
-Vous pouvez trouver vos métriques Azure dans la page de résumé des métriques sur la plateforme Datadog en accédant à `Metrics > Summary` et en recherchant `Azure`.
+Vous pouvez trouver vos métriques Azure sur la page [Metrics Catalog][55] en recherchant `Azure`.
 
-{{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Image du résumé des métriques" style="width:100%;" >}}
+{{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="La page Metrics Catalog filtrée pour afficher les métriques Azure" style="width:100%;" >}}
 
 ### Filtrage par tag de ressource pour les métriques {#resource-tag-filtering-for-metrics}
 
@@ -515,3 +515,4 @@ Besoin d'aide supplémentaire ? Contactez le [support Datadog][17].
 [52]: https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FmanualForwarderUiDefinition.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 [54]: https://learn.microsoft.com/entra/workload-id/workload-identity-federation
+[55]: https://app.datadoghq.com/metric/catalog
