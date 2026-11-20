@@ -148,3 +148,13 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41979
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add CrowdStrike FDR source to Observability Pipelines

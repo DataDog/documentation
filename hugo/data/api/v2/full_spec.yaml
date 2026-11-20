@@ -100394,6 +100394,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Source"
+        - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentBitSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentdSource"
         - $ref: "#/components/schemas/ObservabilityPipelineGooglePubSubSource"
@@ -100409,6 +100410,73 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
+    ObservabilityPipelineCrowdStrikeFdrSource:
+      description: |-
+        The `crowdstrike_fdr` source ingests CrowdStrike Falcon Data Replicator (FDR) data.
+        It reads file notifications from the CrowdStrike-managed SQS queue for your FDR feed and downloads the referenced objects from the CrowdStrike-managed S3 bucket.
+
+        **Supported pipeline types:** logs
+      properties:
+        access_key_id_key:
+          description: Name of the environment variable or secret that holds the AWS access key ID that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID
+          type: string
+        client_concurrency:
+          description: Number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+          example: 4
+          format: int64
+          maximum: 9007199254740991
+          minimum: 1
+          type: integer
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: crowdstrike-fdr-source
+          type: string
+        max_number_of_messages:
+          description: Maximum number of SQS messages to receive per poll. Each message can reference multiple files. Defaults to 1.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
+        region:
+          description: AWS region of the FDR feed's SQS queue and S3 bucket.
+          example: us-west-1
+          type: string
+        secret_access_key_key:
+          description: Name of the environment variable or secret that holds the AWS secret access key that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSourceType"
+        url_key:
+          description: Name of the environment variable or secret that holds the URL of the FDR feed's SQS queue.
+          example: CROWDSTRIKE_FDR_SQS_URL
+          type: string
+        visibility_timeout_secs:
+          description: Number of seconds a received SQS message is hidden from other consumers. Set it higher than the time needed to download and process the largest FDR file. Defaults to 300.
+          example: 300
+          format: int64
+          maximum: 43200
+          minimum: 0
+          type: integer
+      required:
+        - id
+        - type
+        - region
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineCrowdStrikeFdrSourceType:
+      default: crowdstrike_fdr
+      description: The source type. Always `crowdstrike_fdr`.
+      enum:
+        - crowdstrike_fdr
+      example: crowdstrike_fdr
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE_FDR
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
