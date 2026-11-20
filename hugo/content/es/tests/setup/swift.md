@@ -4,7 +4,7 @@ aliases:
 - /es/continuous_integration/tests/swift
 - /es/continuous_integration/tests/setup/swift
 code_lang: swift
-code_lang_weight: 50
+code_lang_weight: 60
 further_reading:
 - link: /tests
   tag: Documentación
@@ -178,10 +178,10 @@ Configure todas estas variables en su objetivo de prueba:
 **Recomendado**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY` (Obligatorio)
-: La [clave de Datadog API][2] utilizada para autenticar las cargas de resultados de pruebas.<br/>
+: La [clave de API de Datadog][2] utilizada para autenticar las cargas de resultados de pruebas.<br/>
 **Predeterminado**: `(empty)`
 
-`DD_TEST_SESSION_NAME` (Opcional)
+`DD_TEST_SESSION_NAME` (opcional)
 : Identifica un grupo de pruebas, como `unit-tests`, `integration-tests` o `smoke-tests`.<br/>
 **Predeterminado**: El nombre del trabajo de CI y el comando de prueba, o el comando de prueba si el nombre del trabajo de CI no está disponible.<br/>
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
@@ -191,7 +191,7 @@ Configure todas estas variables en su objetivo de prueba:
 **Predeterminado**: El nombre del repositorio<br/>
 **Ejemplo**: `my-ios-app`
 
-`DD_ENV` (Opcional)
+`DD_ENV` (opcional)
 : Nombre del entorno donde se ejecutan las pruebas.<br/>
 **Predeterminado**: `ci` cuando se detecta un proveedor de CI; de lo contrario, `none`.<br/>
 **Recomendado**: `$(DD_ENV)`<br/>

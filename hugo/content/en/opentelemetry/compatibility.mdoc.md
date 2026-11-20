@@ -199,7 +199,7 @@ point the frontmatter at them, and update each row.
 
 ### DDOT SDK setups {% #ddot-sdk-setups %}
 
-DDOT SDKs send traces, metrics, and logs over OTLP to the DDOT Collector or an upstream OpenTelemetry Collector. These signals don't need the Datadog Agent. Because DDOT SDKs use standard OTLP, you can also send their data to other OTLP-compatible backends.
+DDOT SDKs send traces, metrics, and logs over OTLP to the DDOT Collector or an upstream OpenTelemetry Collector. These signals don't need the Datadog Agent. For most features that need the Agent, it acts as a Remote Configuration proxy and doesn't change how your OpenTelemetry telemetry flows. Because DDOT SDKs use standard OTLP, you can also send their data to other OTLP-compatible backends.
 
 Datadog recommends that you run the Datadog Agent with DDOT SDKs, because some features need it. In the table, these features show **With Agent**. For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application, and the Agent monitors the database or message broker. The Agent can run on those hosts instead of alongside your applications. [App and API Protection][22], [Code Security][48], and [Feature Flags][50] also need the Agent for Remote Configuration.
 
@@ -255,7 +255,7 @@ For unsupported languages in OpenTelemetry setups, [configure telemetry tagging]
 
 ### Collector components
 
-The OpenTelemetry community maintains and supports the upstream OpenTelemetry Collector. Datadog supports the traces, metrics, and logs that it sends.
+The OpenTelemetry community maintains and supports the upstream OpenTelemetry Collector. Datadog supports the traces, metrics, and logs that it sends. The Datadog Exporter and Datadog Connector are community supported when they run in the upstream OpenTelemetry Collector.
 
 For the DDOT Collector and the Agent's Collector, Datadog supports components at three levels, based on who maintains a component and whether it comes with the Collector.
 

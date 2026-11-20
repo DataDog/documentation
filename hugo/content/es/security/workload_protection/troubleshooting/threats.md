@@ -1,15 +1,13 @@
 ---
-description: Solucione problemas de Workload Protection, incluyendo flares del Agente,
-  autopruebas y compatibilidad de complementos de red.
+description: Solucione problemas de Workload Protection, incluidos los flares del
+  Agent, las pruebas de autodiagnóstico y la compatibilidad de los plugins de red.
 title: Solución de problemas de Workload Protection
 ---
-Si experimenta problemas con Workload Protection, utilice las siguientes pautas de solución de problemas. Si necesita más ayuda, comuníquese con el [soporte de Datadog][1].
+Si experimenta problemas con Workload Protection, utilice las siguientes pautas de solución de problemas. Si necesita más asistencia, comuníquese con [soporte de Datadog][1].
 
-## Security Agent flare {#security-agent-flare}
+## Flare del Security Agent {#security-agent-flare}
 
-<div class="alert alert-warning">Desde Agent <code>7.77</code>, el <code>security-agent</code> componente de tiempo de ejecución para Workload Protection está obsoleto y ya no es necesario. El comando independiente <code>security-agent flare</code> el comando no funciona cuando el proceso del Security Agent no se está ejecutando. Utilice el core Agent <code>flare</code> en su lugar.</div>
-
-De forma similar al [Agent flare][3], puede enviar la información de solución de problemas necesaria al equipo de soporte de Datadog con un comando flare.
+De forma similar al [flare del Agent][3], puede enviar la información de solución de problemas necesaria al equipo de soporte de Datadog con un comando flare.
 
 El flare solicita confirmación antes de la carga, por lo que puede revisar el contenido antes de que el Security Agent lo envíe.
 
@@ -21,21 +19,21 @@ Si no tiene un ID de incidencia, ingrese la dirección de correo electrónico qu
 | --------     | -------                                                                             |
 | Docker       | `docker exec -it datadog-agent security-agent flare <CASE_ID>`                      |
 | Kubernetes   | `kubectl exec -it <POD_NAME> -c security-agent -- security-agent flare <CASE_ID>`   |
-| Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent flare <CASE_ID>`               |
+| Servidor         | `sudo /opt/datadog-agent/embedded/bin/security-agent flare <CASE_ID>`               |
 
-## Agent self tests {#agent-self-tests}
+## Pruebas de autodiagnóstico del Agent {#agent-self-tests}
 
-Para confirmar que Workload Protection puede detectar eventos del sistema, active manualmente las pruebas ejecutando el siguiente comando:
+Para confirmar que Workload Protection puede detectar eventos del sistema, ejecute manualmente las pruebas de autodiagnóstico con el siguiente comando:
 
 | Plataforma     | Comando                                                                             |
 | --------     | -------                                                                             |
 | Docker       | `docker exec -it datadog-agent system-probe runtime self-test`                    |
 | Kubernetes   | `kubectl exec -it <POD_NAME> -c system-probe -- system-probe runtime self-test` |
-| Host         | `sudo /opt/datadog-agent/embedded/bin/system-probe runtime self-test`             |
+| Servidor         | `sudo /opt/datadog-agent/embedded/bin/system-probe runtime self-test`             |
 
-El procedimiento de prueba crea algunos archivos temporales y reglas para su seguimiento, y luego activa esas reglas para confirmar que los eventos se propaguen correctamente.
+El procedimiento de pruebas de autodiagnóstico crea algunos archivos temporales y reglas para hacer un seguimiento de esos archivos, y luego activa esas reglas para confirmar que los eventos se propaguen correctamente.
 
-La siguiente respuesta aparece cuando las reglas se propagan.
+La siguiente respuesta aparece cuando se propagan las reglas.
 
 ```
 Runtime self test: OK
@@ -47,25 +45,25 @@ Los eventos aparecen en el {{< ui >}}Events Explorer{{< /ui >}}.
 
 Las detecciones basadas en red de Workload Protection dependen del subsistema de control de tráfico del kernel de Linux. Se sabe que este subsistema introduce condiciones de carrera si varios proveedores intentan insertar, reemplazar o eliminar filtros en el qdisc de entrada "clsact". Utilice la siguiente lista de verificación para confirmar que Workload Protection esté configurado correctamente:
 
-- Verifique si su proveedor utiliza clasificadores de control de tráfico eBPF. Si no es así, puede ignorar este párrafo.
+- Verifique si su proveedor utiliza clasificadores de control de tráfico eBPF. Si no lo hacen, puede ignorar este párrafo.
 - Verifique si su proveedor devuelve TC_ACT_OK o TC_ACT_UNSPEC después de otorgar acceso a un paquete de red. Si devuelven TC_ACT_UNSPEC, puede ignorar este párrafo.
 - Verifique a qué prioridad asigna su proveedor sus clasificadores eBPF:
   - Si utilizan la prioridad 1, las detecciones de red de Workload Protection no funcionan dentro de sus contenedores.
   - Si utilizan una prioridad de 2 a 10, asegúrese de configurar `runtime_security_config.network.classifier_priority` con un número estrictamente inferior a la prioridad elegida por su proveedor.
   - Si utilizan una prioridad de 11 o superior, puede ignorar este párrafo.
 
-Por ejemplo, existe una condición de carrera conocida con Cilium 1.9 y versiones anteriores con el Datadog Agent (versiones 7.36 a 7.39.1, excluyendo la 7.39.2) que puede ocurrir cuando se inicia un nuevo pod. La condición de carrera puede provocar la pérdida de conectividad dentro del pod, dependiendo de cómo esté configurado Cilium.
+Por ejemplo, existe una condición de carrera conocida con Cilium 1.9 y versiones anteriores con el Datadog Agent (versión 7.36 a 7.39.1, 7.39.2 excluido) que puede ocurrir cuando se inicia un nuevo pod. La condición de carrera puede provocar la pérdida de conectividad dentro del pod, dependiendo de cómo esté configurado Cilium.
 
-En última instancia, si el Datadog Agent o sus proveedores externos no pueden configurarse para evitar que ocurra el problema, debe deshabilitar las detecciones basadas en red de Workload Protection siguiendo los pasos a continuación:
+En última instancia, si el Datadog Agent o sus proveedores externos no pueden configurarse para evitar que ocurra el problema, debe deshabilitar las detecciones de red de Workload Protection siguiendo los pasos a continuación:
 
-- Agregue el siguiente parámetro a su archivo de configuración `system-probe.yaml` en instalaciones basadas en servidor:
+- Agregue el siguiente parámetro a su archivo de configuración `system-probe.yaml` en instalaciones basadas en servidores:
 
 ```yaml
 runtime_security_config:
   network:
     enabled: false
 ```
-- Agregue los siguientes valores si está utilizando el public Helm Chart para implementar el Datadog Agent:
+- Agregue los siguientes valores si está utilizando el Helm Chart público para implementar el Datadog Agent:
 
 ```yaml
 datadog:
@@ -80,9 +78,9 @@ datadog:
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
 
-## Solución de problemas de interrupciones en sesiones remotas o admisión de pods de Kubernetes {#troubleshooting-kubernetes-remote-session-or-pod-admission-disruptions}
+## Solución de problemas de sesiones remotas de Kubernetes o interrupciones en la admisión de pods {#troubleshooting-kubernetes-remote-session-or-pod-admission-disruptions}
 
-Workload Protection recopila identidades de usuario de Kubernetes y enriquece sus eventos de Workload Protection con el contexto necesario para diferenciar los accesos remotos a su infraestructura de la actividad generada por sus cargas de trabajo. Esta integración depende de un [Kubernetes Mutating Webhook][2] para instrumentar sesiones de `kubectl exec`. Si esta instrumentación interrumpe la admisión de pods o la creación de sesiones de `kubectl exec`, siga los pasos a continuación para deshabilitar la función.
+Workload Protection recopila identidades de usuario de Kubernetes y enriquece sus eventos de Workload Protection con el contexto necesario para diferenciar los accesos remotos a su infraestructura de la actividad generada por sus cargas de trabajo. Esta integración depende de un [webhook de mutación de Kubernetes][2] para instrumentar sesiones de `kubectl exec`. Si esta instrumentación interrumpe la admisión de pods o la creación de sesiones de `kubectl exec`, utilice los siguientes pasos para deshabilitar la función.
 
 {{< tabs >}}
 
@@ -153,13 +151,13 @@ Workload Protection recopila identidades de usuario de Kubernetes y enriquece su
 {{% /tab %}}
 {{< /tabs >}}
 
-## Deshabilitar Workload Protection {#disable-workload-protection}
+## Deshabilite Workload Protection {#disable-workload-protection}
 
-Para deshabilitar Workload Protection, siga los pasos correspondientes a la plataforma de su Agent.
+Para deshabilitar Workload Protection, siga los pasos correspondientes a la plataforma del Agent.
 
 ### Helm {#helm}
 
-En el Helm `values.yaml`, configure `securityAgent.runtime` en `enabled: false` de la siguiente manera:
+En el `values.yaml` de Helm, establezca `securityAgent.runtime` en `enabled: false` de la siguiente manera:
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="false" collapsible="true" >}}
 
@@ -174,18 +172,18 @@ securityAgent:
 
 ### Daemonset/Docker {#daemonsetdocker}
 
-Aplique el siguiente cambio de variable de entorno tanto a la implementación del System Probe como a la del Security Agent para un Daemonset:
+Aplique el siguiente cambio de variable de entorno tanto al System Probe como al despliegue del Security Agent para un Daemonset:
 
 {{< code-block lang="json" filename="daemon.json" disable_copy="false" collapsible="true" >}}
 
 DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
 {{< /code-block >}}
 
-### Host {#host}
+### Servidor {#host}
 
 Modifique `system-probe.yaml` y `security-agent.yaml` para deshabilitar la configuración de tiempo de ejecución:
 
-1. Deshabilite Workload Protection en `/etc/datadog-agent/system-probe.yaml`. Configure `runtime_security_config` en `enabled: false`:
+1. Deshabilite Workload Protection en `/etc/datadog-agent/system-probe.yaml`. Establezca `runtime_security_config` en `enabled: false`:
     {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################
@@ -211,7 +209,7 @@ Modifique `system-probe.yaml` y `security-agent.yaml` para deshabilitar la confi
     #
     # socket: /opt/datadog-agent/run/runtime-security.sock
     {{< /code-block >}}
-2. Deshabilite Workload Protection en `/etc/datadog-agent/security-agent.yaml`. Configure `runtime_security_config` en `enabled: false`:
+2. Deshabilite Workload Protection en `/etc/datadog-agent/security-agent.yaml`. Establezca `runtime_security_config` en `enabled: false`:
     {{< code-block lang="yaml" filename="security-agent.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################
