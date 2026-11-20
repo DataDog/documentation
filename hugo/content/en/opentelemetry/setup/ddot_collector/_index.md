@@ -40,7 +40,7 @@ The Datadog OpenTelemetry (DDOT) Collector is Datadog's version of the OpenTelem
 - **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
 - **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
 
-Datadog recommends running the Datadog Agent alongside the Collector. Some Datadog features need the Agent. See [Feature Compatibility][77]. For the OpenTelemetry Collector that runs alongside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
+Datadog recommends running the Datadog Agent alongside the Collector. Some Datadog features need the Datadog Agent. See [Feature Compatibility][77]. For the OpenTelemetry Collector that runs alongside the Datadog Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
 
@@ -157,7 +157,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{% /collapse-content %}}
 
-The DDOT Collector and the Agent's Collector both include the [DD Flare Extension][52]. With the Agent's Collector, the extension adds the Collector's diagnostic information to an Agent flare.
+The DDOT Collector and the Agent's Collector both include the [DD Flare Extension][52]. With the Agent's Collector, the extension adds the Collector's diagnostic information to a Datadog Agent flare.
 
 ## OpenTelemetry Collector versions
 

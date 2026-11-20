@@ -1,7 +1,9 @@
 ---
 title: OpenTelemetry API Support
-description: "Use the OpenTelemetry API with Datadog SDKs to send traces, metrics, and logs to Datadog while maintaining vendor-neutral instrumentation."
+description: "Use OpenTelemetry APIs with DDOT SDKs and Datadog SDKs to create traces, metrics, and logs while maintaining vendor-neutral instrumentation."
 aliases:
+  - /opentelemetry/instrument/dd_sdks/api_support/
+  - /opentelemetry/instrument/dd_otel_sdks/api_support/
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
   - /opentelemetry/instrument/api_support/
@@ -57,6 +59,8 @@ further_reading:
       tag: 'Blog'
 ---
 
+Use the OpenTelemetry Traces, Metrics, and Logs APIs to add custom instrumentation with any Datadog SDK. This is the recommended approach, rather than Datadog-specific APIs, whenever an equivalent OpenTelemetry API exists. With DDOT SDKs (Java, .NET, Node.js, Python, and Go), the resulting telemetry follows OpenTelemetry Semantic Conventions and is exported over OTLP. The Datadog SDKs for Ruby, PHP, and Rust also support the OpenTelemetry APIs, but they aren't DDOT SDKs. Select a signal in the **Signal** filter to see the instructions for each API.
+
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
 <!-- ============================================== -->
@@ -65,7 +69,7 @@ further_reading:
 
 ## Overview
 
-Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tags, record events, and more.
+Use OpenTelemetry tracing APIs with DDOT SDKs and Datadog SDKs to create custom spans, add tags, record events, and more.
 
 {% if equals($prog_lang, "java") %}
 {% partial file="opentelemetry/traces/java.mdoc.md" /%}
@@ -113,10 +117,20 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 
 ## Overview
 
-Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
+Use the OpenTelemetry Metrics API with DDOT SDKs and Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
-<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
-{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
+<!-- Native implementation (.NET, Node.js, Go, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
+
+The SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+
+{% alert level="info" %}
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+{% /alert %}
+{% /if %}
+
+<!-- Native implementation (Rust) -->
+{% if equals($prog_lang, "rust") %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -125,8 +139,14 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if includes($prog_lang, ["python", "ruby", "php"]) %}
+<!-- Exporter-based implementation (Python) -->
+{% if equals($prog_lang, "python") %}
+
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK detects the OTel SDK and configures its OTLP exporter to send metrics to your OpenTelemetry Collector.
+{% /if %}
+
+<!-- Exporter-based implementation (Ruby, PHP) -->
+{% if includes($prog_lang, ["ruby", "php"]) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
@@ -165,8 +185,17 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 {% if equals($prog_lang, "java") %}
 - **Datadog SDK**: `dd-trace-java` version 1.61.0 or later.
 {% /if %}
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-{% if includes($prog_lang, ["dot_net", "node_js", "python", "ruby", "go", "java"]) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "java"]) %}
+- **OpenTelemetry mode**: OTLP export requires the DDOT SDK versions listed in [Language support][501].
+- **An OpenTelemetry Collector**: Datadog recommends the [DDOT Collector][502]. DDOT SDKs also work well with the [upstream OpenTelemetry Collector][503]. The Collector must listen on port 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
+{% /if %}
+{% if includes($prog_lang, ["ruby", "php", "rust"]) %}
+- **An OTLP-compatible destination**: You must have a destination (Datadog Agent or OpenTelemetry Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
+{% /if %}
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
+- **Runtime metrics**: DDOT SDKs export runtime metrics over OTLP for supported languages and versions. See [Export runtime metrics over OTLP][504].
+{% /if %}
+{% if includes($prog_lang, ["python", "ruby"]) %}
 - **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 {% /if %}
 
@@ -178,10 +207,16 @@ Follow these steps to enable OTel Metrics API support in your application.
 1. Install the Datadog SDK. Follow the installation steps for your runtime:
    - [.NET Framework][202]
    - [.NET Core][203]
-2. Enable OTel metrics by setting the following environment variable:
+2. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
    export DD_METRICS_OTEL_ENABLED=true
+   export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "node_js") %}
@@ -189,10 +224,16 @@ Follow these steps to enable OTel Metrics API support in your application.
    ```sh
    npm install dd-trace
    ```
-2. Enable OTel metrics by setting the following environment variable:
+2. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
    export DD_METRICS_OTEL_ENABLED=true
+   export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 3. Instrument your application:
    ```javascript
    // On application start
@@ -209,10 +250,16 @@ Follow these steps to enable OTel Metrics API support in your application.
    ```sh
    pip install opentelemetry-sdk opentelemetry-exporter-otlp
    ```
-3. Enable OTel metrics by setting the following environment variable:
+3. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
    export DD_METRICS_OTEL_ENABLED=true
+   export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 4. Instrument your application:
    ```py
    ddtrace-run python my_app.py
@@ -254,10 +301,16 @@ Follow these steps to enable OTel Metrics API support in your application.
    ```sh
    go get github.com/DataDog/dd-trace-go/v2
    ```
-2. Enable OTel metrics by setting the following environment variable:
+2. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
    export DD_METRICS_OTEL_ENABLED=true
+   export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 3. Configure your application:
    ```go
    import (
@@ -340,10 +393,16 @@ Follow these steps to enable OTel Metrics API support in your application.
 {% if equals($prog_lang, "java") %}
 1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
 2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
-3. Enable OTel metrics by setting the following environment variable:
+3. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
    export DD_METRICS_OTEL_ENABLED=true
+   export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 {% /if %}
 
 ## Examples
@@ -773,22 +832,22 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 
 {% if equals($prog_lang, "dot_net") %}
 1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OtlpExporter` for metrics. The Datadog SDK handles this configuration automatically.
+2. Remove any code that manually configures the `OtlpExporter` for metrics. The DDOT SDK handles this configuration automatically.
 3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
-4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+4. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "node_js") %}
 1. Add the Datadog SDK (`dd-trace`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
+2. Remove any code that manually configures the `OTLPMetricsExporter`. The DDOT SDK handles this configuration automatically.
 3. Remove the `@opentelemetry/sdk-node` and `@opentelemetry/exporter-otlp` packages from your project's dependencies.
-4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+4. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "python") %}
 1. Add the Datadog SDK (`dd-trace-py`) to your project and enable its instrumentation (for example, `ddtrace-run`).
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
-3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+2. Remove any code that manually configures the `OTLPMetricsExporter`. The DDOT SDK handles this configuration automatically.
+3. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "ruby") %}
@@ -803,11 +862,11 @@ Runtime and trace metrics continue to be submitted using StatsD. Only custom met
 
 {% if equals($prog_lang, "go") %}
 1. Add the Datadog SDK (`dd-trace-go/v2`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
-3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+2. Remove any code that manually configures the `OTLPMetricsExporter`. The DDOT SDK handles this configuration automatically.
+3. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 
 {% alert level="warning" %}
-Runtime and trace metrics continue to be submitted using StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent using OTLP. The `dd-trace-go` implementation supports exporting OTLP metrics exclusively to a Datadog Agent or OpenTelemetry Collector. Multiple exporters are not supported.
+In OpenTelemetry mode, runtime metrics are exported over OTLP for [supported versions][504], and trace metrics are computed from spans in your OpenTelemetry Collector, for example with the Datadog Connector. The `dd-trace-go` implementation exports OTLP metrics to a single destination. Multiple exporters are not supported.
 {% /alert %}
 {% /if %}
 
@@ -830,10 +889,10 @@ Runtime and trace metrics continue to be submitted using StatsD. Only custom met
 {% if equals($prog_lang, "java") %}
 1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
 2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
-3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+3. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 
 {% alert level="warning" %}
-Runtime and trace metrics continue to be submitted using StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent using OTLP.
+In OpenTelemetry mode, runtime metrics are exported over OTLP for [supported versions][504], and trace metrics are computed from spans in your OpenTelemetry Collector, for example with the Datadog Connector.
 {% /alert %}
 {% /if %}
 
@@ -845,7 +904,12 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 
 - Verify `DD_METRICS_OTEL_ENABLED` is set to `true`.
 - Verify that your OTLP destination is configured correctly to receive metrics.
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "java"]) %}
+- Verify that your OpenTelemetry Collector has an OTLP receiver on port 4317 or 4318 and a metrics pipeline that exports to Datadog.
+{% /if %}
+{% if includes($prog_lang, ["ruby", "php", "rust"]) %}
 - If you are sending data to the Datadog Agent, verify OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
+{% /if %}
 {% if equals($prog_lang, "dot_net") %}
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Verify you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
 - If, after removing the OpenTelemetry SDK packages, your application fails to compile due to missing APIs in the [System.Diagnostics.Metrics namespace][206], you must update your application by either adding a direct NuGet package reference to `System.Diagnostics.DiagnosticSource` or upgrading the version of .NET. See [.NET version and instrument support](#net-version-and-instrument-support) for more information.
@@ -919,10 +983,20 @@ Here is the minimum version required for each instrument type:
 
 ## Overview
 
-Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
+Use the OpenTelemetry Logs API with DDOT SDKs and Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
-<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
-{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
+<!-- Native implementation (.NET, Node.js, Go, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "java"]) %}
+
+The SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
+
+{% alert level="info" %}
+You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The DDOT SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.
+{% /alert %}
+{% /if %}
+
+<!-- Native implementation (Rust) -->
+{% if equals($prog_lang, "rust") %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -931,8 +1005,14 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /alert %}
 {% /if %}
 
-<!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if includes($prog_lang, ["python", "ruby", "php"]) %}
+<!-- Exporter-based implementation (Python) -->
+{% if equals($prog_lang, "python") %}
+
+This approach works with the existing OpenTelemetry SDK. When you enable this feature, the DDOT SDK detects the OTel SDK and configures its OTLP exporter to send logs to your OpenTelemetry Collector.
+{% /if %}
+
+<!-- Exporter-based implementation (Ruby, PHP) -->
+{% if includes($prog_lang, ["ruby", "php"]) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
@@ -991,7 +1071,13 @@ If you run Ruby 3.1 or 3.2, pin `opentelemetry-logs-sdk` to `~> 0.4`. Version 0.
 - **OpenTelemetry OTLP Exporter**: The OTLP exporter package (`open-telemetry/exporter-otlp`).
 - **Monolog bridge** (optional, for PSR-3 and Monolog interoperability): `open-telemetry/opentelemetry-logger-monolog` version 1.0.0 or later.
 {% /if %}
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "java"]) %}
+- **OpenTelemetry mode**: OTLP export requires the DDOT SDK versions listed in [Language support][501].
+- **An OpenTelemetry Collector**: Datadog recommends the [DDOT Collector][502]. DDOT SDKs also work well with the [upstream OpenTelemetry Collector][503]. The Collector must listen on port 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
+{% /if %}
+{% if includes($prog_lang, ["ruby", "php", "rust"]) %}
+- **An OTLP-compatible destination**: You must have a destination (Datadog Agent or OpenTelemetry Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
+{% /if %}
 
 ## Setup
 
@@ -1001,10 +1087,16 @@ Follow these steps to enable OTel Logs API support in your application.
 1. Install the Datadog SDK. Follow the installation steps for your runtime:
    - [.NET Framework][202]
    - [.NET Core][203]
-2. Enable OTel logs export by setting the following environment variable:
+2. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
     ```sh
+    export OTEL_TRACES_EXPORTER=otlp
+    export DD_TRACE_OTEL_ENABLED=true
+    export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
+    export DD_METRICS_OTEL_ENABLED=true
     export DD_LOGS_OTEL_ENABLED=true
+    export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
     ```
+    For details, see [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "node_js") %}
@@ -1016,10 +1108,16 @@ Follow these steps to enable OTel Logs API support in your application.
     ```sh
     npm install @opentelemetry/api-logs
     ```
-3. Enable OTel logs export by setting the following environment variable:
+3. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
     ```sh
+    export OTEL_TRACES_EXPORTER=otlp
+    export DD_TRACE_OTEL_ENABLED=true
+    export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
+    export DD_METRICS_OTEL_ENABLED=true
     export DD_LOGS_OTEL_ENABLED=true
+    export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
     ```
+    For details, see [Activate OpenTelemetry mode][500].
 4. Initialize the Datadog SDK (`dd-trace`) at the beginning of your application, before any other modules are imported:
     ```javascript
     // This must be the first line of your application
@@ -1040,15 +1138,21 @@ Follow these steps to enable OTel Logs API support in your application.
     ```sh
     pip install opentelemetry-sdk opentelemetry-exporter-otlp>=1.15.0
     ```
-3. Enable OTel logs export by setting the following environment variable:
+3. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
     ```sh
+    export OTEL_TRACES_EXPORTER=otlp
+    export DD_TRACE_OTEL_ENABLED=true
+    export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
+    export DD_METRICS_OTEL_ENABLED=true
     export DD_LOGS_OTEL_ENABLED=true
+    export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
     ```
+    For details, see [Activate OpenTelemetry mode][500].
 4. Run your application using `ddtrace-run`:
     ```sh
     ddtrace-run python my_app.py
     ```
-    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OTLP destination.
+    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OpenTelemetry Collector.
 {% /if %}
 
 {% if equals($prog_lang, "go") %}
@@ -1056,10 +1160,16 @@ Follow these steps to enable OTel Logs API support in your application.
     ```sh
     go get github.com/DataDog/dd-trace-go/v2
     ```
-2. Enable OTel logs export by setting the following environment variable:
+2. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
     ```sh
+    export OTEL_TRACES_EXPORTER=otlp
+    export DD_TRACE_OTEL_ENABLED=true
+    export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
+    export DD_METRICS_OTEL_ENABLED=true
     export DD_LOGS_OTEL_ENABLED=true
+    export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
     ```
+    For details, see [Activate OpenTelemetry mode][500].
 3. Initialize the logger provider in your application:
     ```go
     import (
@@ -1120,10 +1230,16 @@ Follow these steps to enable OTel Logs API support in your application.
 {% if equals($prog_lang, "java") %}
 1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
 2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
-3. Enable OTel logs by setting the following environment variable:
+3. Activate OpenTelemetry mode and send telemetry to your OpenTelemetry Collector by setting the following environment variables:
    ```sh
+   export OTEL_TRACES_EXPORTER=otlp
+   export DD_TRACE_OTEL_ENABLED=true
+   export DD_TRACE_OTEL_SEMANTICS_ENABLED=true
+   export DD_METRICS_OTEL_ENABLED=true
    export DD_LOGS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-host>:4318
    ```
+   For details, see [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "ruby") %}
@@ -1688,9 +1804,9 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 
 {% if equals($prog_lang, "dot_net") %}
 1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OtlpExporter` for logs. The Datadog SDK handles this configuration automatically.
+2. Remove any code that manually configures the `OtlpExporter` for logs. The DDOT SDK handles this configuration automatically.
 3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
-4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+4. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "node_js") %}
@@ -1701,7 +1817,7 @@ If you are already using the OpenTelemetry SDK with a manual OTLP exporter confi
 2. Remove all manual OTel SDK initialization code (for example, `new LoggerProvider()`, `addLogRecordProcessor()`, `new OTLPLogExporter()`).
 3. Install the Datadog SDK: `npm install dd-trace`
 4. Keep the `@opentelemetry/api-logs` package.
-5. Set `DD_LOGS_OTEL_ENABLED=true` and initialize `dd-trace` at the top of your application.
+5. Activate OpenTelemetry mode, set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector (see [Activate OpenTelemetry mode][500]), and initialize `dd-trace` at the top of your application.
 
 Your existing code that uses `logs.getLogger()` continues to work.
 {% /if %}
@@ -1709,16 +1825,16 @@ Your existing code that uses `logs.getLogger()` continues to work.
 {% if equals($prog_lang, "python") %}
 1. Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
 2. Enable `ddtrace-run` auto-instrumentation for your application.
-3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+3. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 
-The Datadog SDK programmatically configures the OTel SDK for you.
+The DDOT SDK programmatically configures the OTel SDK for you.
 {% /if %}
 
 {% if equals($prog_lang, "go") %}
 1. Add the Datadog SDK (`dd-trace-go/v2`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OTLPLogExporter`. The Datadog SDK handles this configuration automatically.
+2. Remove any code that manually configures the `OTLPLogExporter`. The DDOT SDK handles this configuration automatically.
 3. Remove manual `LoggerProvider` setup and replace with `log.InitGlobalLoggerProvider()`.
-4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+4. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "rust") %}
@@ -1731,7 +1847,7 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 {% if equals($prog_lang, "java") %}
 1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
 2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
-3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+3. Activate OpenTelemetry mode and set `OTEL_EXPORTER_OTLP_ENDPOINT` to your OpenTelemetry Collector. See [Activate OpenTelemetry mode][500].
 {% /if %}
 
 {% if equals($prog_lang, "ruby") %}
@@ -1750,18 +1866,23 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 
 ### Existing Datadog log injection
 
-If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
+If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and the Datadog Agent to tail log files:
 
-1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3. Verify your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
+1. With DDOT SDKs, activate OpenTelemetry mode (see [Activate OpenTelemetry mode][500]). With the Datadog SDKs for Ruby, PHP, and Rust, set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+2. The SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
+3. Send OTLP logs to your OpenTelemetry Collector. With the Datadog SDKs for Ruby, PHP, and Rust, you can also send them to the Datadog Agent, which must be configured to receive OTLP logs (version 7.48.0 or later).
 4. Disable any file-based log collection for this service to avoid duplicate logs.
 
 ## Troubleshooting
 
 - Verify `DD_LOGS_OTEL_ENABLED` is set to `true`.
 - Verify that your OTLP destination is configured correctly to receive logs.
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "java"]) %}
+- Verify that your OpenTelemetry Collector has an OTLP receiver on port 4317 or 4318 and a logs pipeline that exports to Datadog.
+{% /if %}
+{% if includes($prog_lang, ["ruby", "php", "rust"]) %}
 - If you are sending data to the Datadog Agent, verify OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
+{% /if %}
 {% if equals($prog_lang, "dot_net") %}
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Verify you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the log data.
 {% /if %}
@@ -1868,3 +1989,9 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 <!-- PHP metrics -->
 [400]: /tracing/trace_collection/dd_libraries/php/#install-the-extension
+
+[500]: /opentelemetry/instrument/ddot_sdks/#enable-otlp-trace-export
+[501]: /opentelemetry/instrument/ddot_sdks/#language-support
+[502]: /opentelemetry/setup/ddot_collector/
+[503]: /opentelemetry/setup/collector_exporter/
+[504]: /tracing/metrics/runtime_metrics/#export-runtime-metrics-over-otlp
