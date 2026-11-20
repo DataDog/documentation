@@ -91,10 +91,13 @@ Go to **Datadog** > **Storage Management** > **Azure Blob Storage** > [**Enable 
 
 Register each storage account with Storage Management by calling the [Enable Storage Management for a bucket][402] endpoint. The App Registration must be connected to Datadog through the [Azure integration][403].
 
-Before running the following `curl` command, set `DD_API_KEY` and `DD_APP_KEY` to a Datadog [API key][405] and [application key][406]. The application key must have the **Cloud Inventory Write** [permission][407].
+Before running the following `curl` command, set these environment variables:
+- `DD_SITE`: Your [Datadog site][404], {{< region-param key="dd_site" code="true" >}}. To show the value for a different site, use the site selector on this page.
+- `DD_API_KEY`: A Datadog [API key][405].
+- `DD_APP_KEY`: A Datadog [application key][406] with the **Cloud Inventory Write** [permission][407].
 
 ```bash
-curl -X PUT "https://api.{{< region-param key="dd_site" >}}/api/v2/cloudinventoryservice/syncconfigs" \
+curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -118,7 +121,6 @@ curl -X PUT "https://api.{{< region-param key="dd_site" >}}/api/v2/cloudinventor
 ```
 
 To use the preceding `curl` command:
-- Check that the API host matches your [Datadog site][404]. If it doesn't, select your site in the site selector on this page or replace the host.
 - Replace `<CLIENT_ID>` with the **Application (client) ID** of the App Registration that has the **Storage Blob Data Reader** role on the inventory container.
 - Replace `<TENANT_ID>` with the **Directory (tenant) ID** of that App Registration.
 - Replace `<SUBSCRIPTION_ID>` with the ID of the Azure subscription that contains the storage account.
