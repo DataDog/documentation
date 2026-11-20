@@ -100,7 +100,7 @@ The source and the destination must be the same type of resource, such as two se
 Between the two stacks, the map shows CNM and Network Path data as separate lines:
 
 - **Network connections**: Traffic that CNM observes between the source and the destination.
-- **Network path**: The route from a host that the source runs on to a host that the destination runs on, or to a destination endpoint. The map shows each {{< tooltip text="hop" tooltip="A router or other network device that traffic passes through on the way to the destination." >}} along the route. Network Path {{< tooltip text="tests" tooltip="Network Path runs tests from a host to a destination and records the route that each test takes." >}} record each route.
+- **Network path**: The route from a host that the source runs on to a host that the destination runs on, or to a destination endpoint. The map shows each {{< tooltip text="hop" tooltip="A router or other network device that traffic passes through on the way to the destination." >}} along the route, which is based on Network Path {{< tooltip text="test results" tooltip="Network Path runs tests from a host to a destination and records the route that each test takes. The map uses test results from the selected time frame." >}}.
 
 For services, containers, and pods, the map shows a path only when the test's destination is a host that the destination resource runs on. Paths to other destinations, such as a load balancer in front of the destination, do not appear.
 
