@@ -439,7 +439,9 @@ If the token exchange returns `401`, no mapping matches the application's role. 
 
 ## Attribute requests to an application
 
-By default, AI Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header.
+By default, AI Gateway traces appear under the `datadog-ai-gateway` application. To change the application name, send the `x-dd-tag-ml_app: <VALUE>` request header. Use lowercase letters, digits, hyphens, and underscores in the value, because Agent Observability stores the name in lowercase and replaces spaces and most symbols with underscores.
+
+An application that propagates its Agent Observability trace context to AI Gateway is an exception to the default: without the header, the AI Gateway span uses that application's name.
 
 The application name can also define who can read captured prompts and responses. See [Restrict who can view captured content](/ai_gateway/security/#restrict-who-can-view-captured-content).
 

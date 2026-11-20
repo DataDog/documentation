@@ -29,6 +29,8 @@ Append one of the following paths to the base URL. The operations available depe
 | OpenAI Chat Completions | `POST /chat/completions` |
 | Anthropic Messages | `POST /messages` |
 
+A request in the Anthropic Messages format must include the `anthropic-version` header. AI Gateway adds the header only when it translates a request from another format into Messages.
+
 ## Select a model
 
 Set the `model` field in the request body to one of the following:

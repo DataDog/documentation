@@ -32,9 +32,11 @@ Adding a resource to another access policy does not remove access granted by the
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Model access{{< /ui >}}][8] and create a policy.
 2. Select the providers, models, and routing rules to include. A policy can contain only models, only routing rules, or both. Models alone grant direct access as `<PROVIDER_SLUG>/<MODEL_ID>`. Add a routing rule to grant access to its `router/<RULE_SLUG>` alias. Callers reach the rule's destinations through the alias only; the rule does not grant direct `<PROVIDER_SLUG>/<MODEL_ID>` access to them.
 3. Choose the users, teams, and service accounts, and their access level:
-   - **No access**: Cannot call the policy's models or routing rules.
+   - **Viewer**: Can see the policy but cannot call its models or routing rules.
    - **Runner**: Can call the policy's models and routing rules.
    - **Editor**: Can call the policy's models and routing rules and manage who else has access.
+
+   To take access away, select **Remove Access**. A new policy is open to everyone in your organization until you set its access, so set access before you save the policy.
 4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level. A provider may use a different name for fast mode.
 
 Access to a routing rule follows that rule's targets, so a change to the targets changes what its runners can reach. A routing rule that routes to another routing rule needs its own access. A request to `<PROVIDER_SLUG>/<MODEL_ID>` and a request to `router/<RULE_SLUG>` can be allowed or denied separately. Test both with the user or service account that sends them.
@@ -47,6 +49,7 @@ For tighter control over who can call models:
 - Create an access policy for each set of approved models.
 - Grant **Runner** only to the users, teams, and service accounts that need it.
 - Review policy membership and routing rule targets regularly.
+- Give the `ai_gateway_config_write` permission only to administrators. A user with it can create an access policy for any provider they can view.
 
 ## Reasoning effort and fast mode
 
@@ -72,7 +75,7 @@ Use access policies to control which callers can request higher reasoning effort
 
 New access policies have no reasoning ceiling and allow fast mode. Selecting {{< ui >}}Limit maximum reasoning level{{< /ui >}} initially sets the ceiling to {{< ui >}}Medium{{< /ui >}}; clearing it removes the ceiling. Existing policies retain their saved values.
 
-For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [access policy rules][reasoning-3] before changing which models everyone can call.
+For organization-wide settings, configure the same options under {{< ui >}}Policies > Org defaults{{< /ui >}}. Review the [Default policy](#default-policy) section before changing which models everyone can call.
 
 ### Set a reasoning ceiling
 
@@ -202,7 +205,6 @@ If a request unexpectedly succeeds, review every applicable access policy and th
 
 [reasoning-1]: /ai_gateway/getting_started/
 [reasoning-2]: https://app.datadoghq.com/llm/gateway/access
-[reasoning-3]: /ai_gateway/access_control/
 [reasoning-4]: https://developers.openai.com/api/docs/guides/reasoning
 [reasoning-5]: https://platform.claude.com/docs/en/build-with-claude/effort
 [reasoning-6]: https://app.datadoghq.com/llm/gateway

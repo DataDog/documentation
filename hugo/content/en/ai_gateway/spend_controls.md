@@ -28,7 +28,7 @@ A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, w
 | Block | Matching requests are rejected with HTTP `402` until the window resets. |
 | Alert-only | Requests continue. The monitor `AI Gateway budget: <BUDGET_NAME>` alerts at the warning threshold and at the limit. |
 
-When a budget is scoped to a [Datadog team][13], it applies to requests from that team's members. To select a team, send `x-ai-gateway-team: <TEAM_SLUG>` with the slug of a team the caller belongs to. The header selects which team's budgets apply; matching personal and organization-wide budgets also apply. A request without the header matches the budgets of every team the caller directly belongs to, and its full cost counts against each of them. Team selection does not grant model access. See [Error codes](/ai_gateway/troubleshooting/#error-codes) for invalid or unauthorized team selections.
+When a budget is scoped to a [Datadog team][13], it applies to requests from that team's members. The team must not allow open membership: the API rejects an open-membership team, and a per-team selector does not match one. To select a team, send `x-ai-gateway-team: <TEAM_SLUG>` with the slug of a team the caller belongs to. The header selects which team's budgets apply; matching personal and organization-wide budgets also apply. A request without the header matches the budgets of every team the caller directly belongs to, and its full cost counts against each of them. Team selection does not grant model access. See [Error codes](/ai_gateway/troubleshooting/#error-codes) for invalid or unauthorized team selections.
 
 Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
 
@@ -151,7 +151,7 @@ Use a dedicated test tag and a small allowance to check the configuration before
 4. In Alert-only mode (`NOTIFY`), confirm requests continue after an allowance is exhausted. In Block mode (`BLOCK`), confirm a new matching request returns HTTP `402` with `budget_exceeded`.
 5. Confirm another instance with available capacity can still send requests, unless a separate shared budget is also exhausted.
 
-A request counts against every matching budget. An available personal allowance does not bypass an exhausted team or organization allowance. Responses already in progress can complete after an allowance is reached.
+A request counts against every matching budget. An available personal allowance does not bypass an exhausted team or organization allowance. Responses already in progress can complete after an allowance is reached. AI Gateway checks a budget before a request and records the cost after the response completes, so the request that reaches the limit and requests running at the same time can take spend above the limit. Subscription provider traffic and operations that are not metered by tokens, such as web search and token counting, are not counted or blocked. If AI Gateway cannot complete a budget check, it allows the request.
 
 ### Troubleshoot budget accounting
 
@@ -181,9 +181,9 @@ A rate limit caps matching AI Gateway requests, input tokens, output tokens, or 
 | Mode | Behavior |
 |---|---|
 | Alert | Requests over the limit continue. The rate limit shows the {{< ui >}}Would limit{{< /ui >}} status. This is the default mode. |
-| Enforce | New requests over the limit are rejected with HTTP `429`. Streaming responses that are already in progress finish. |
+| Enforce | New requests over the limit are rejected with HTTP `429`. Streaming responses that are already in progress finish. If a routing rule has another destination that the rate limit does not match, AI Gateway falls back to that destination instead. |
 
-Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a few days, then switch to Enforce mode.
+Start in Alert mode and review the rate limit for a few days before you switch to Enforce mode. The {{< ui >}}Would limit{{< /ui >}} status reflects only the current rolling minute, so use the rate limit's monitor and its count of requests limited in the last 15 minutes.
 
 ### How rate limits are counted
 
@@ -193,6 +193,7 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 - Tokens and cost count when a response completes, so requests already in progress can take usage over a limit.
 - A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM_SLUG>`. Use the slug of a team the caller belongs to. Without the header, it applies to requests from users who directly belong to the team.
 - If a request falls back to another destination, it counts once against each rate limit.
+- If AI Gateway cannot complete a rate limit check, it allows the request.
 - Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
 - If AI Gateway cannot check a rate limit, it accepts the request.
 
@@ -218,7 +219,7 @@ Clients that retry on `429` should wait for the `Retry-After` duration before th
 
 ### Monitor rate limit usage
 
-The rate limit list shows rolling-minute usage and status for each rule. It also shows requests limited in the last 15 minutes. Usage turns orange at 80% of a limit and red when the limit is reached.
+The rate limit list shows rolling-minute usage and status for each rule. It also shows requests limited in the last 15 minutes. The count includes requests that fell back to another destination. Usage turns orange at 80% of a limit and red when the limit is reached.
 
 | Status | Meaning |
 |---|---|

@@ -20,10 +20,6 @@ Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_star
 ## Apply AI Guard policies
 <!-- vale Datadog.headings = YES -->
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
-
 Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the AI Gateway attachment defines which traffic it evaluates and how AI Gateway handles the result.
 
 For AI Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
@@ -150,6 +146,8 @@ There are two capture modes. **Metadata only** can optionally add *capture items
 
 When a request has no capture setting, or AI Gateway can't read the configuration, the request uses Metadata only with no capture items.
 
+In every mode, a span also records the request's tag values, the caller's email, and, for a failed provider call, the provider's error message.
+
 ### Capture items
 
 Capture items apply only under Metadata only. An item can require other items, because it already reveals what those items record. When you select an item in the UI, AI Gateway also selects what it requires, and clearing an item clears the items that depend on it. The API rejects a set that breaks a dependency.
@@ -200,7 +198,7 @@ Set the organization default mode and items in {{< ui >}}AI Gateway{{< /ui >}} >
 
 To apply a different mode or different items to selected requests, create an override under {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Data capture{{< /ui >}}. An override has a name, request filters, a mode, and, under Metadata only, its own items. An override does not inherit the organization default's items: an override set to Metadata only with no items records no items, even if the organization default selects some.
 
-An override can match a user, team, model, provider, or custom tag. Every filter in an override must match, and each filter takes one value. To match alternatives, create separate overrides. Custom tags match the exact `x-dd-tag-<KEY>` header value. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
+An override can match a user, team, model, provider, or custom tag. Every filter in an override must match, and each filter takes one value. To match alternatives, create separate overrides. Custom tags match the exact `x-dd-tag-<KEY>` header value, including case. A tag key must start with a lowercase letter and contain only lowercase letters, digits, underscores, periods, slashes, or hyphens. AI Gateway ignores a header with any other key, so an override on that key does not match. Model and provider filters match the actual destination, including destinations reached through routing rules and fallbacks.
 
 A team capture override requires the `x-ai-gateway-team: <TEAM_SLUG>` header to select that team. Unlike team budgets and rate limits, a team capture override does not match a request based on team membership alone.
 

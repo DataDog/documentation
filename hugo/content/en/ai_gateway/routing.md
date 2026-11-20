@@ -21,25 +21,29 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 ## Create a routing rule
 
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Routing{{< /ui >}}][7] and click {{< ui >}}New routing rule{{< /ui >}}.
-2. Enter a lowercase slug. The page shows the resulting `router/<RULE_SLUG>` identifier.
+2. Enter a slug using lowercase letters, numbers, and hyphens, up to 128 characters. You cannot change the slug after you create the rule. The page shows the resulting `router/<RULE_SLUG>` identifier.
 3. Configure the first routing step. Select one model, use {{< ui >}}Weighted{{< /ui >}} to assign traffic shares across [sessions](#sessions), use {{< ui >}}Smart{{< /ui >}} to let a decision model pick a destination for each session (see [Smart routing steps](#smart-routing-steps)), or select {{< ui >}}Another route{{< /ui >}} to link a routing rule. A model destination can use a specific provider account or any configured provider that serves that model.
 4. Optional: Add fallback steps in priority order.
-5. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the routing rule. See [Control model access](/ai_gateway/access_control/).
+5. Review the {{< ui >}}Access{{< /ui >}} stage and choose who can call the routing rule. The default, {{< ui >}}Decide later{{< /ui >}}, grants no access: requests to the rule return HTTP `403` with `no_permitted_target` until an access policy includes the rule. See [Control model access](/ai_gateway/access_control/).
 6. Review and save the rule, then copy its identifier into the `model` field of your requests.
 
 Configure [data capture](/ai_gateway/security/#configure-data-capture) through organization defaults and scoped overrides under {{< ui >}}Policies{{< /ui >}}.
 
 ## Model served by any provider
 
-A model served by any configured provider considers all enabled providers in your organization that serve that model. Only providers permitted by the caller's [model access](/ai_gateway/access_control/) settings are eligible. AI Gateway tries those providers in slug order and sends each one its provider model ID.
+A model served by any configured provider considers all enabled providers in your organization that serve that model. A caller who has access to the routing rule can use every provider the rule reaches, without direct access to those models. To let callers use a model only through a routing rule, for example one that limits reasoning effort, grant [access](/ai_gateway/access_control/) to the rule and not to the model. AI Gateway tries the providers in slug order and sends each one its provider model ID.
 
 ## Fallback behavior
 
 AI Gateway tries the next provider or fallback destination when the current one cannot serve the request or returns HTTP `401`, `402`, `403`, `408`, `429`, or `5xx`. A successful response, or any other `4xx` response (such as `400`, `404`, or `422`), is returned to the caller. If every attempt returns one of the fallback statuses, the caller receives the last of those responses. If no destination can serve the request, the request fails.
 
+Fallback applies before a response starts. If a streamed response fails after it has started, AI Gateway does not retry it on another destination.
+
 [Budgets](/ai_gateway/spend_controls/#set-budgets) in Block mode are checked per destination. If a budget blocks one destination, AI Gateway falls back to the next. If budgets block every destination, AI Gateway returns HTTP `402` until the budget window resets.
 
 [Rate limits](/ai_gateway/spend_controls/#set-rate-limits) in Enforce mode are also checked per destination. A rate limit scoped to one model or provider makes AI Gateway fall back to the next destination. A rate limit that matches every destination, such as an organization-wide limit, returns HTTP `429`.
+
+If destinations are blocked for different reasons, such as a budget on one and a rate limit on another, AI Gateway returns HTTP `400` with `no_eligible_target`.
 
 ## Smart routing steps
 
