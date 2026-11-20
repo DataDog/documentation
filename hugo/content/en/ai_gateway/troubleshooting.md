@@ -60,7 +60,10 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `503`. Datadog team membership could not be verified. Retry the request.
 
 `gateway_rate_limit`
-: HTTP `429`. A gateway [rate limit](/ai_gateway/spend_controls/#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`.
+: HTTP `429`. A gateway [rate limit](/ai_gateway/spend_controls/#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. For longer-window rejections, `X-Ai-Gateway-Ratelimit-Window` identifies the window. A provider `429` has no `X-Ai-Gateway-Error-Code`.
+
+`rate_limit_pricing_unavailable`
+: HTTP `400`. A matching spend rate limit in Enforce mode applies, but AI Gateway has no price for the target model. OpenAI, Anthropic, and Gemini return HTTP `400`; Gemini uses the canonical status `FAILED_PRECONDITION`. Set a usable price for a model billed per token in the [{{< ui >}}Model Catalog{{< /ui >}}][11]. You can also choose a priced model or switch the rate limit to Alert mode.
 
 `budget_exceeded`
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Increase the budget or wait for the window to reset.
