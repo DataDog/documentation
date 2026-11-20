@@ -38,7 +38,7 @@ Datadog creates AI Guard security signals when it detects a threat based on a co
 
 To help you prioritize your remediation efforts, AI Guard automatically assigns a severity level to every security signal. You can create [custom detection rules](#create-detection-rules) to customize severity levels and define specific security responses.
 
-Datadog automatically investigates the signals created by out-of-the-box AI Guard detection rules, and writes a verdict, severity, and title onto each signal. See [Dynamic signals](#dynamic-signals).
+Datadog automatically investigates the signals created by out-of-the-box AI Guard detection rules, and writes a verdict, severity, and title onto each signal. See the [Dynamic signals](#dynamic-signals) section.
 
 ## Dynamic signals {#dynamic-signals}
 
@@ -69,7 +69,7 @@ Each investigation produces the following result, shown in the signal side panel
 |---|---|
 | Verdict | `attack`: the conversation contains an attack against the AI application.<br>`false_positive`: the activity is benign.<br>`inconclusive`: the available evidence is not enough to decide. |
 | Confidence | `low`, `medium`, or `high`, based on the strength and completeness of the evidence. Not set for `inconclusive` verdicts. |
-| Severity | The security impact of the incident. See [Severity](#severity). Not set for `false_positive` verdicts. |
+| Severity | The security impact of the incident. See the [Severity](#severity) section. Not set for `false_positive` verdicts. |
 | Title | A short description of what happened, in 12 words or fewer. |
 | Summary | What the signal contains, followed by the outcome, the data exposed (if any), and the risk. |
 | Classification | The [MITRE ATLAS][14] tactic and techniques that match the attack. |
@@ -127,16 +127,16 @@ Click a signal to open its side panel. The investigation section shows the statu
 
 - **In progress**: the investigation is waiting for the conversation to complete or is running.
 - **Completed**: the result is available, and the signal is updated.
-- **Failed**: the investigation could not complete. The section shows the reason. See [Troubleshoot investigations](#troubleshoot-investigations).
+- **Failed**: the investigation could not complete. The section shows the reason. See the [Troubleshoot investigations](#troubleshoot-investigations) section.
 
 When the investigation completes, the side panel shows:
 
 - The investigation title and severity in the header, with the MITRE ATLAS tactic and techniques.
-- The verdict, the summary, and the confidence of the investigation.
+- The verdict, the summary, and the confidence of the investigation. The side panel labels an `attack` verdict as {{< ui >}}True positive{{< /ui >}}.
 - {{< ui >}}AI Guard Outcomes{{< /ui >}}: how far the attack progressed, the AI Guard detection, and whether the model complied.
 - The {{< ui >}}Investigation{{< /ui >}} and {{< ui >}}Evidence{{< /ui >}} tabs, with the full result and the evidence that supports it.
 
-{{< img src="security/ai_guard/dynamic_signals_side_panel.png" alt="An AI Guard signal side panel with a completed investigation: a high severity title, a true positive verdict with a summary, the AI Guard outcomes, and the Investigation and Evidence tabs" style="width:100%;" >}}
+{{< img src="security/ai_guard/dynamic_signals_side_panel.png" alt="An AI Guard signal side panel with a completed investigation, showing a high severity title, an attack verdict labeled True positive with a summary, the AI Guard outcomes, and the Investigation and Evidence tabs." style="width:100%;" >}}
 
 ### Notify on investigated signals
 
@@ -148,9 +148,9 @@ To get notified when an investigation finds an attack:
 1. Enter a **Name** for the notification rule.
 1. Select **Signal** as the source type.
 1. Select all severity levels. After the investigation, the signal severity is the investigation severity.
+   - To get notified only about the most severe attacks, select the `high` and `critical` severity levels instead of all levels.
 1. In the query, enter `ai_guard_rule:true @workflow.ai_guard.verdict:attack`.
    - To exclude low-confidence results, add `@workflow.ai_guard.confidence:(medium OR high)`.
-   - To get notified only about the most severe attacks, select the `high` and `critical` severity levels instead of all levels.
 1. Under **Destination**, add the recipients.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -158,7 +158,7 @@ For more information, see [Notification Rules][16].
 
 **Notes**:
 - A notification rule on `ai_guard_rule:true` alone notifies twice for each signal: when the signal is created, and again after the investigation.
-- Datadog sends notifications after the investigation only for signals that are still active. Automatic investigations run while the signal is still active.
+- If a signal is archived, or its rule no longer updates it (after the rule's keep-alive or maximum signal duration), Datadog doesn't send a notification for the investigation result. The investigation result is still added to the signal.
 - [Suppression rules][17] still apply.
 
 ### Troubleshoot investigations
@@ -168,7 +168,7 @@ When an investigation fails, the investigation section of the signal side panel 
 | Reason | Cause | Resolution |
 |---|---|---|
 | This signal is older than the 30-day span retention, so its evidence is no longer available. | The signal's spans have expired. | No action is possible for this signal. |
-| No spans for this signal are visible to the investigation. They may be restricted by data access controls. | The spans of the AI application are in a Restricted Dataset that AI Guard can't access. | Grant AI Guard access to the spans. See [Spans restricted by Data Access Control](#spans-restricted-by-data-access-control). |
+| No spans for this signal are visible to the investigation. They may be restricted by data access controls. | The spans of the AI application are in a Restricted Dataset that AI Guard can't access. | Grant AI Guard access to the spans. See the [Spans restricted by Data Access Control](#spans-restricted-by-data-access-control) section. |
 | The signal could not be found. | The signal was not available when the investigation ran. | No action is needed. If the issue persists, contact [Datadog support][13]. |
 | Not all of the signal's evidence could be retrieved. | The spans of the conversation could not be fully processed. | If the issue persists, contact [Datadog support][13]. |
 | Too many investigations were requested for this organization in the last hour. | The organization reached the limit of 50 investigations per clock hour. | The limit resets at the start of each hour. To increase the limit, contact [Datadog support][13]. |
@@ -198,11 +198,10 @@ The change applies to signals created after you save the policy. Signals that al
 
 ### Data access
 
-Investigations run as the **AI Guard** managed user of your organization, which has the following permissions:
+Investigations run as the **AI Guard** managed user of your organization. Its permissions include:
 
 - `apm_read`, to read the spans of the conversation
 - `security_monitoring_signals_read` and `security_monitoring_signals_write`, to read the signal and write the investigation result
-- `security_monitoring_dataset_read`
 
 Actions taken by AI Guard appear in [Audit Trail][22].
 
