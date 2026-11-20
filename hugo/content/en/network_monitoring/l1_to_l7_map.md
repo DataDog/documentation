@@ -142,7 +142,7 @@ The following signals appear on the map. Some signals set status, and the rest p
 
 #### How the map sets status
 
-When CNM has data for a resource or connection, the CNM signals set its status. The Network Path signals set the status only when the CNM status is Unknown, and only TCP tests count. A path with only UDP or ICMP tests has an Unknown status.
+When CNM has data for a resource or connection, the CNM signals set its status. The Network Path signals set the status only when the CNM status is Unknown. Only TCP tests affect status, so a path with only UDP or ICMP tests has an Unknown status.
 
 The CNM rules also account for how much traffic each rate covers. A rate measured on a few connections must be higher to change the status than the same rate measured on many. The hover summary lists each signal's value, but does not mark which signal set the status.
 
