@@ -34,7 +34,11 @@ To set this up for BigQuery, connect a BigQuery service account to Datadog and c
 
 ## Prerequisites
 
-Datadog connects to BigQuery through a Google Cloud service account. If you already have a service account connected to Datadog, skip to [Step 1](#step-1-prepare-the-google-cloud-resources). Otherwise, expand the section below to create one.
+Datadog Experiments uses the Google Cloud integration to authenticate access to BigQuery through a service account. Creating the service account in Google Cloud and connecting it to Datadog are separate steps.
+
+If the warehouse connection form displays **No GCP accounts found**, connect a service account to the same Datadog organization before continuing. This message is part of Experiments setup; it does not mean you need to configure Data Observability.
+
+If you already have a service account connected to Datadog, preserve any monitoring settings used by other teams and continue to [Step 1](#step-1-prepare-the-google-cloud-resources). Otherwise, create a service account below, then [connect it to Datadog](#connect-the-service-account-to-datadog).
 
 {% collapse-content title="Create a Google Cloud service account" level="h3" %}
 
@@ -46,16 +50,34 @@ Datadog connects to BigQuery through a Google Cloud service account. If you alre
     1. {% ui %}Service account ID{% /ui %}.
     1. {% ui %}Service account description{% /ui %}.
 1. Click {% ui %}Create and continue{% /ui %}.
-   1. **Note**: The {% ui %}Permissions{% /ui %} and {% ui %}Principals with access{% /ui %} settings are optional here. These are configured in [Step 2](#step-2-grant-permissions-to-the-datadog-service-account).
+   1. Leave {% ui %}Permissions{% /ui %} and {% ui %}Principals with access{% /ui %} unset at this stage. Configure Datadog's access in [Connect the service account to Datadog](#connect-the-service-account-to-datadog) and warehouse permissions in [Step 2](#step-2-grant-permissions-to-the-datadog-service-account).
 1. Click {% ui %}Done{% /ui %}.
 
-After you create the service account, continue to [Step 1](#step-1-prepare-the-google-cloud-resources) to set up the Google Cloud resources.
+After you create the service account, connect it to Datadog using the following steps.
 
 {% /collapse-content %}
 
+### Connect the service account to Datadog
+
+The Google Cloud integration also supports infrastructure monitoring and other observability capabilities. These are separate from warehouse-native experiment analysis. For an Experiments-only connection, review collection settings **before saving the account**.
+
 {% alert %}
-If you plan to use other Google Cloud observability functionality in Datadog, see [Datadog's Google Cloud Platform integration documentation][10] to determine which resources to enable.
+GCE instances discovered through the Google Cloud integration can count toward Datadog host billing, even without a Datadog Agent. See [Google Cloud integration billing][30]. Disabling integration metric collection does not disable Agents or other existing collection methods. Google Cloud query and storage charges can also apply when running experiment analysis.
 {% /alert %}
+
+1. In the Datadog organization where you use Experiments, open [Integrations][3] and select the Google Cloud integration.
+1. Select {% ui %}Add GCP Account{% /ui %}, then {% ui %}Manual{% /ui %}.
+1. Copy the {% ui %}Datadog Principal{% /ui %} value.
+1. In the Google Cloud console, open the service account you created. On its {% ui %}Permissions{% /ui %} tab, click {% ui %}Grant access{% /ui %}.
+1. Add the Datadog principal and grant it the {% ui %}Service Account Token Creator{% /ui %} role on this service account. Save the permission.
+1. Return to Datadog and enter the service account email under {% ui %}Add Service Account Email{% /ui %}.
+1. For an Experiments-only connection:
+   - Under {% ui %}Metric Collection{% /ui %}, disable collection for all services before saving. See [Google Cloud metric collection controls][29].
+   - Leave {% ui %}Resource Collection{% /ui %} disabled and do not configure log forwarding as part of this setup.
+1. Click {% ui %}Verify and Save Account{% /ui %}.
+1. Continue to [Step 1](#step-1-prepare-the-google-cloud-resources). After preparing the resources and granting warehouse permissions, return to the Experiments warehouse connection form in [Step 3](#step-3-configure-experiment-settings).
+
+If you reuse an account that already provides monitoring, do not disable its collection settings without coordinating with the teams that depend on them. If you also want Google Cloud observability, see [Datadog's Google Cloud integration documentation][10] to choose which resources to enable.
 
 ## Allow Datadog IP addresses
 
@@ -798,3 +820,5 @@ After you save your warehouse connection, [create experiment metrics][1] using y
 [26]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
 [27]: https://console.aws.amazon.com/redshiftv2/
 [28]: https://docs.aws.amazon.com/redshift/latest/mgmt/copy-unload-iam-role.html
+[29]: /getting_started/integrations/google_cloud/#limit-metric-collection-filters
+[30]: /account_management/billing/google_cloud/
