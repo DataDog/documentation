@@ -20627,6 +20627,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: OpenAI LLM Evaluations Integration
+      url: /api/latest/openai-llm-evaluations-integration/
+      identifier: openai-llm-evaluations-integration
+      generated: true
+    - name: Update an OpenAI LLM Evaluations account
+      url: /api/latest/openai-llm-evaluations-integration/update-an-openai-llm-evaluations-account/
+      identifier: openai-llm-evaluations-integration-update-an-openai-llm-evaluations-account
+      parent: openai-llm-evaluations-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAILLMEvaluationsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI LLM Evaluations account
+      url: /api/latest/openai-llm-evaluations-integration/get-an-openai-llm-evaluations-account/
+      identifier: openai-llm-evaluations-integration-get-an-openai-llm-evaluations-account
+      parent: openai-llm-evaluations-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAILLMEvaluationsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI LLM Evaluations account
+      url: /api/latest/openai-llm-evaluations-integration/delete-an-openai-llm-evaluations-account/
+      identifier: openai-llm-evaluations-integration-delete-an-openai-llm-evaluations-account
+      parent: openai-llm-evaluations-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAILLMEvaluationsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI LLM Evaluations account
+      url: /api/latest/openai-llm-evaluations-integration/create-an-openai-llm-evaluations-account/
+      identifier: openai-llm-evaluations-integration-create-an-openai-llm-evaluations-account
+      parent: openai-llm-evaluations-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAILLMEvaluationsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI LLM Evaluations accounts
+      url: /api/latest/openai-llm-evaluations-integration/list-openai-llm-evaluations-accounts/
+      identifier: openai-llm-evaluations-integration-list-openai-llm-evaluations-accounts
+      parent: openai-llm-evaluations-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAILLMEvaluationsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
