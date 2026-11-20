@@ -38,6 +38,8 @@ Private actions rely on two layers:
 
 The private action runner is the component you deploy in your environment to run private actions. It opens an outbound connection to Datadog, polls for action tasks, runs each task against the target service, and returns the result.
 
+{{< img src="actions/private_actions/private_action_runner_-_diagram_workflow.png" alt="Overview diagram illustrating how Private actions work" style="width:90%;" >}}
+
 The private action runner is available in the following forms:
 
 **Runner in the Datadog Agent (Recommended)**: A component of the Datadog Agent that you enable with a single configuration flag. This option is recommended for new deployments on commercial Datadog sites, particularly if you already use the Agent and want to manage the runner through the Agent life cycle. For installation steps, see [Set up a private action runner in the Datadog Agent][1].
@@ -68,7 +70,7 @@ To compare the two models and decide which one applies to your runner, see [Auth
 [2]: /actions/private_actions/set_up_standalone/
 [3]: /actions/private_actions/enroll_runner/
 [4]: /actions/private_actions/authorize_private_actions/
-[5]: /actions/private_actions/execution_policies/
+[5]: /actions/execution_policies/
 [6]: /actions/connections/
 [7]: /actions/private_actions/getting_started/
 [8]: /actions/connections/private_action_credentials/

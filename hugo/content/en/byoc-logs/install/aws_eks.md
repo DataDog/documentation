@@ -262,6 +262,8 @@ The following installation, verification, and uninstall commands apply to the BY
 
    # BYOC Logs node configuration
    config:
+     # A meaningful, stable name that identifies the cluster in Datadog.
+     cluster_id: <CLUSTER_ID>
      # The root URI where index data is stored. This should be an S3 path.
      # All indexes created in BYOC Logs are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes

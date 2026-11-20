@@ -46,9 +46,6 @@ When including or excluding multiple tags:
 
 For more information on tags, see the [Getting Started With Using Tags][2] guide.
 
-**Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
-`avg:mymetric{env:prod AND !region:us-east}`
-
 ### Boolean filtered query examples
 
 To use the examples below, click the code icon {{< ui >}}</>{{< /ui >}} to see the query editor in the UI, and then copy and paste the query example into the query editor.

@@ -39,11 +39,13 @@ title: Work Management
 ---
 <div class="alert alert-info">Work Management était précédemment connu sous le nom de Case Management. Les endpoints de l'API et les autorisations utilisent toujours <code>case</code> la terminologie.</div>
 
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Datadog Work Management offre un espace centralisé pour trier, suivre et remédier aux problèmes détectés par Datadog et les intégrations tierces. Après avoir créé un élément de travail, vous pouvez l'attribuer à un utilisateur, établissant ainsi des responsabilités claires qui persistent tout au long du cycle de vie de l'élément de travail.
 
 Lors de l'investigation, enrichissez l'élément de travail avec des graphiques, des logs et d'autres données de télémétrie provenant de Datadog et collaborez avec les membres de votre équipe dans la chronologie d'activité. Work Management s'intègre également à des outils tels que Jira, ServiceNow, PagerDuty, Slack et Microsoft Teams, vous permettant d'adapter les solutions Work Management aux processus de votre organisation.
+
+{{< callout url="https://www.datadoghq.com/product-preview/claude-agents-in-work-management/" btn_hidden="false" header="Inscrivez-vous à la Preview de l'intégration de Work Management avec Claude">}} Attribuez des éléments de travail à des agents gérés par Claude. Remplissez le formulaire pour demander l'accès.{{< /callout >}}
 
 ## Mise en route {#getting-started}
 {{< whatsnext desc="En savoir plus sur Work Management :">}}

@@ -10,7 +10,7 @@ further_reading:
   text: "Set Up the Agent's Collector"
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with the Agent's Collector"
+  text: "Add Components to the Agent's Collector"
 - link: "/opentelemetry/migrate/ddot_collector"
   tag: "Documentation"
   text: "Migrate to the Agent's Collector"
@@ -55,7 +55,7 @@ Remote Configuration for the Agent's Collector is <strong>in Preview</strong>. U
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Set up the Agent's Collector{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Use custom OpenTelemetry components{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Add components to the Agent's Collector{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Agent's Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 

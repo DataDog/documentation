@@ -539,4 +539,4 @@ For this connection type, you do not need to create a credential file since the 
 [1]: /actions/private_actions
 [2]: /agent/configuration/secrets-management/
 [3]: /actions/private_actions/set_up_agent_based/
-[6]: /actions/private_actions/execution_policies/
+[6]: /actions/execution_policies/

@@ -131,9 +131,17 @@
     "name": "Change Management",
     "description": "View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "chatgpt-enterprise-integration": {
+    "name": "ChatGPT Enterprise Integration",
+    "description": "Manage your Datadog ChatGPT Enterprise integration accounts and account resources\ndirectly through the Datadog API. See the\n[ChatGPT Enterprise integration page](https://docs.datadoghq.com/integrations/chatgpt-enterprise/) for\nmore information."
+  },
+  "claude-compliance-integration": {
+    "name": "Claude Compliance Integration",
+    "description": "Manage your Datadog Claude Compliance integration accounts and account resources\ndirectly through the Datadog API. See the\n[Claude Compliance integration page](https://docs.datadoghq.com/integrations/anthropic-compliance-logs/) for\nmore information."
+  },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS, GitHub, HCP Terraform, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
@@ -166,6 +174,10 @@
   "containers": {
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization.\nSee the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+  },
+  "coreweave-integration": {
+    "name": "CoreWeave Integration",
+    "description": "Manage your Datadog CoreWeave integration accounts and account resources\ndirectly through the Datadog API. See the\n[CoreWeave integration page](https://docs.datadoghq.com/integrations/coreweave/) for\nmore information."
   },
   "customer-org": {
     "name": "Customer Org",
@@ -355,6 +367,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
   },
+  "nebius-cloud-integration": {
+    "name": "Nebius Cloud Integration",
+    "description": "Manage your Datadog Nebius Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Nebius Cloud integration page](https://docs.datadoghq.com/integrations/nebius_cloud/) for\nmore information."
+  },
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
@@ -382,6 +398,10 @@
   "on-call-paging": {
     "name": "On-Call Paging",
     "description": "Trigger and manage [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\npages directly through the Datadog API."
+  },
+  "openai-codex-integration": {
+    "name": "OpenAI Codex Integration",
+    "description": "Manage your Datadog OpenAI Codex integration accounts and account resources\ndirectly through the Datadog API. See the\n[OpenAI Codex integration page](https://docs.datadoghq.com/integrations/openai-codex/) for\nmore information."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
@@ -429,7 +449,7 @@
   },
   "rum-insights": {
     "name": "RUM Insights",
-    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+    "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM &\nSession Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information."
   },
   "rum-managed-archives": {
     "name": "RUM Managed Archives",

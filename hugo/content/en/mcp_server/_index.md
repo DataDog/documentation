@@ -16,6 +16,9 @@ further_reading:
 - link: "mcp_server/code_execution"
   tag: "Documentation"
   text: "Code Execution with the MCP Server"
+- link: "account_management/rbac/mcp_access"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
@@ -58,6 +61,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=claude" src="integrations_logos/claude_app.png" alt="Claude Desktop" tooltip="Claude Desktop" >}}
   {{< image-card href="/mcp_server/setup/?tab=goose" src="integrations_logos/goose.svg" alt="Goose" tooltip="Goose" >}}
   {{< image-card href="/mcp_server/setup/?tab=opencode" src="integrations_logos/opencode.svg" alt="OpenCode" tooltip="OpenCode" >}}
+  {{< image-card href="/mcp_server/setup/?tab=pi" src="integrations_logos/pi.svg" alt="Pi" tooltip="Pi" >}}
   {{< image-card href="/mcp_server/setup/?tab=copilotcli" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
   {{< image-card href="/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
   {{< image-card href="/mcp_server/setup/?tab=grokbuild" src="integrations_logos/grok.png" alt="Grok Build" tooltip="Grok Build" >}}
@@ -97,6 +101,8 @@ Because your AI client controls what it sends to its model provider, limiting wh
 - [Log restriction queries][40] to limit a role's log access to the subset of logs matching a query.
 
 Write operations require the corresponding permission, such as `monitors_write`, and the MCP Server checks it on each tool call. A read-only user's call to a write-enabled tool is rejected.
+
+Administrators can also turn off the MCP Server or its write tools for the entire organization. They can restrict which actions each AI client can perform, even when a user can perform those actions elsewhere in Datadog. See [Access Control for MCP][41].
 
 ## Fair-use rate limits
 
@@ -157,3 +163,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /account_management/rbac/
 [39]: /account_management/rbac/data_access/
 [40]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[41]: /account_management/rbac/mcp_access/

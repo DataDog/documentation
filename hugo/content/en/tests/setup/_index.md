@@ -1,20 +1,27 @@
 ---
-title: Configure Test Optimization
-type: multi-code-lang
+title: Language Setup for Test Optimization
 aliases:
 - /continuous_integration/tests/setup/
 ---
+
+{{< skill-callout
+    title="Set up Test Optimization with an agent"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided Test Optimization setup."
+    action_name="copy_dd_orchestrator_test_optimization_setup_prompt"
+    lang="text" >}}
+Using the skill at https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, set up Datadog Test Optimization for this project
+{{< /skill-callout >}}
 
 For information about configuration options for [Test Optimization][1], choose your language:
 
 {{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
+  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
   {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}
   {{< image-card href="/tests/setup/python/" src="integrations_logos/python_avatar.svg" alt="python" >}}
   {{< image-card href="/tests/setup/ruby/" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
   {{< image-card href="/tests/setup/swift/" src="integrations_logos/swift_avatar.svg" alt="swift" >}}
-  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
   {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
 {{< /card-grid >}}
 

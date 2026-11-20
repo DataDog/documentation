@@ -6,19 +6,19 @@ type: multi-code-lang
 ---
 ## Compatibilidad con las capacidades de Application Security {#application-security-capabilities-support}
 
-Las siguientes capacidades de seguridad de aplicaciones son compatibles con la biblioteca .NET, para la versión del tracer especificada:
+Las siguientes capacidades de Application Security son compatibles con la biblioteca de .NET para la versión del tracer especificada:
 
-| Capacidad de seguridad de aplicaciones  | Versión mínima del tracer de .NET |
+| Capacidad de Application Security  | Versión mínima del tracer de .NET |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
-| Personalización de la respuesta a las solicitudes bloqueadas | 2.27.0 |
+| Personalice la respuesta a las solicitudes bloqueadas | 2.27.0 |
 | Software Composition Analysis (SCA) |  2.16.0  |
 | Code Security  | 2.42.0  |
-| Seguimiento automático de eventos de actividad del usuario | 2.32.0 |
+| Rastreo automático de eventos de actividad del usuario | 2.32.0 |
 | API Security | 2.42.0 |
 
-La versión mínima del tracer para obtener todas las capacidades de seguridad de aplicaciones admitidas para .NET es 2.42.0.
+La versión mínima del tracer para obtener todas las capacidades de Application Security admitidas para .NET es 2.42.0.
 
 **Nota**: Threat Protection requiere habilitar [Remote Configuration][3], que se incluye en la versión mínima del tracer indicada.
 
@@ -32,13 +32,13 @@ La versión mínima del tracer para obtener todas las capacidades de seguridad d
 | AWS Lambda        | {{< X >}}                |                               |               |
 | Azure App Service | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 
-**Nota**: Azure App Service es compatible **solo con aplicaciones web**. Las capacidades de seguridad de aplicaciones no son compatibles con Azure Functions.
+**Nota**: Azure App Service es compatible **solo con aplicaciones web**. Las capacidades de Application Security no son compatibles con Azure Functions.
 
-## Compatibilidad de lenguajes y frameworks {#language-and-framework-compatibility}
+## Compatibilidad de lenguaje y marco de trabajo {#language-and-framework-compatibility}
 
 ### Versiones de .NET compatibles {#supported-net-versions}
 
-Todas las versiones enumeradas en esta sección están generalmente disponibles (GA).
+Todas las versiones enumeradas en esta sección están disponibles de forma general (GA).
 
 Code Security admite los siguientes entornos de ejecución de .NET y .NET Core:
 
@@ -56,13 +56,15 @@ Code Security admite las siguientes versiones de .NET Framework:
 
 | Versión de .NET Framework | Fin de vida útil de Microsoft | Versión del paquete |
 | ---------------------- | --------------------- | --------------- |
+| 4.8.1                  |                       | más reciente          |
 | 4.8                    |                       | más reciente          |
 | 4.7.2                  |                       | más reciente          |
+| 4.7.1                  |                       | más reciente          |
 | 4.7                    |                       | más reciente          |
 | 4.6.2                  |                       | más reciente          |
 | 4.6.1                  | 2022-04-26        | más reciente          |
 
-Estos son compatibles con las siguientes arquitecturas:
+Estas son compatibles con las siguientes arquitecturas:
 - Linux (GNU) x86-64, ARM64
 - Alpine Linux (musl) x86-64, ARM64
 - Windows (msvc) x86, x86-64
@@ -71,13 +73,13 @@ Para obtener más información sobre los entornos de ejecución y los sistemas o
 
 ### Compatibilidad con marcos web {#web-framework-compatibility}
 
-**Las integraciones con frameworks web proporcionan:**
+**Las integraciones de marcos web proporcionan:**
 
 - Detalles de la solicitud HTTP de la fuente del atacante
-- etiquetas para la solicitud HTTP (código de estado, método, etc.)
-- Distributed Tracing para ver los flujos de ataque a través de sus aplicaciones
+- Etiquetas para la solicitud HTTP (código de estado, método, etc.)
+- Trazado distribuido para ver los flujos de ataque a través de sus aplicaciones
 
-##### Notas sobre las capacidades de seguridad de aplicaciones {#application-security-capability-notes}
+##### Notas sobre las capacidades de Application Security {#application-security-capability-notes}
 - **Software Composition Analysis** es compatible con todos los frameworks.
 - Si su framework no aparece en la lista a continuación, **Code Security** aún detecta vulnerabilidades de cookies inseguras.
 
@@ -98,8 +100,8 @@ Para obtener más información sobre los entornos de ejecución y los sistemas o
 - información de consulta (por ejemplo, una cadena de consulta saneada)
 - captura de errores y seguimientos de pila
 
-##### Notas sobre la capacidad de seguridad de la aplicación {#application-security-capability-notes-1}
-- **Threat Protection** también funciona en la capa de solicitud HTTP (entrada), por lo que funciona para todas las bases de datos de forma predeterminada, incluso aquellas que no figuran en la tabla a continuación.
+##### Notas sobre las capacidades de Application Security {#application-security-capability-notes-1}
+- **Threat Protection** también funciona en la capa de solicitudes HTTP (entrada), por lo que funciona de forma predeterminada con todas las bases de datos, incluso las que no figuran en la tabla siguiente.
 
 | Framework         | ¿Es compatible con Threat Detection?    | ¿Es compatible con Threat Protection? | ¿Code Security? |
 |-------------------|-----------------|---------------------|---|
@@ -111,15 +113,15 @@ Para obtener más información sobre los entornos de ejecución y los sistemas o
 
 ### Compatibilidad con frameworks de autenticación de usuarios {#user-authentication-frameworks-compatibility}
 
-Las integraciones con **frameworks de autenticación de usuarios proporcionan:**
+Las Integrations con **frameworks de autenticación de usuarios proporcionan:**
 
 - Eventos de inicio de sesión de usuario, incluidos los ID de usuario
-- Eventos de registro de usuario (aplicaciones que usan SignInManager integrado)
-- Monitoreo de la detección de Account Takeover en eventos de inicio de sesión de usuarios
+- Eventos de registro de usuario (aplicaciones que utilizan SignInManager integrado)
+- Monitoreo de detección de apropiación de cuentas para eventos de inicio de sesión de usuario
 
 | Framework         |
 |-------------------|
-| > .Net Core 2.1   |
+| > .NET Core 2.1   |
 
 [1]: /es/tracing/trace_collection/compatibility/dotnet-core/
 [2]: /es/tracing/trace_collection/compatibility/dotnet-framework/

@@ -27,11 +27,11 @@ El <code>ml_obs.*</code> Las entradas en esta página son <a href="/metrics/">M�
 Son distintos de otras dos cosas en Agent Observability:
 <ul>
 <li><strong>Datos operativos por tramo</strong> (costo, tokens, latencia, errores en cada traza o tramo individual): los valores sin procesar que estas métricas consolidan. Se almacenan con spans, siguen la <a href="/llm_observability/data_governance/#traces-and-spans">retención de trazas de Agent Observability</a> y se consultan desde el explorador de trazas en lugar de como métricas.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">Puntuaciones de evaluación</a></strong> (también llamadas "evals"): juicios de calidad y seguridad (por ejemplo, alucinación, fidelidad, LLM-as-a-judge personalizado) adjuntos a tramos individuales o filas de experimentos. Estos no se derivan de la telemetría operativa y siguen la <a href="/llm_observability/data_governance/">retención de trazas y experimentos de Agent Observability</a> en lugar de la retención de métricas de Datadog.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">Puntuaciones de evaluación</a></strong> (también llamadas "evals"): juicios de calidad y seguridad (por ejemplo, alucinación, fidelidad, LLM-as-a-judge personalizado) asociados a segmentos individuales o filas de experimentos sin conexión. Estas no se derivan de la telemetría operativa y siguen la <a href="/llm_observability/data_governance/">retención de trazas y experimentos sin conexión de Agent Observability</a> en lugar de la retención de métricas de Datadog.</li>
 </ul>
 </div>
 
-<div class="alert alert-info">Otras etiquetas establecidas en los tramos no están disponibles como etiquetas en las métricas de Agent Observability.</div>
+<div class="alert alert-info">Otras etiquetas configuradas en los segmentos no están disponibles como etiquetas en las métricas de Agent Observability, excepto las etiquetas de métricas de tokens y costos de LLM. Consulte <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Etiquetas personalizadas en métricas de costos y tokens</a> para obtener más información.</div>
 
 ### Métricas de tramos {#span-metrics}
 
