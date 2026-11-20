@@ -37,9 +37,9 @@ Worker version 2.26.0 gives you access to the following:
 
 #### New features
 
+- The [Spike Protection processor][70] is now available.
 - The Custom Processor now includes a `range` function that creates an array of integers from an inclusive start to an exclusive end, with an optional step.
 - The Datadog Agent source now accepts the v3 series metrics intake format used by Datadog Agent 7.81.0 and newer.
-- The [Spike Protection processor][70] is now available.
 
 #### Enhancements
 
