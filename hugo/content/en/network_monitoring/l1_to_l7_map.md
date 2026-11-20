@@ -222,6 +222,8 @@ From the summary, click **Explore connection** to open the connection in Connect
 
 The summary for a network path segment shows its **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**. From the summary, click **Explore connection** to investigate the segment in Connection View, with its two hops as the source and the destination. You can also click **View connection in Network Path**.
 
+<!-- TODO (screenshots): Check whether a network path segment's hover summary still offers Explore connection. The source/destination rules reject an endpoint as the source, and hops are often IP addresses. If the action is gone, remove it here and in step 4 of the Find where a connection degrades workflow. -->
+
 The summary for a hop that is a network device shows the device's status.
 
 {{< img src="network_performance_monitoring/l1_l7_map/network-path-segment-hover-summary.png" alt="A hover summary for a network path segment between two network devices, showing reachability, end-to-end latency, and packet loss" >}}
