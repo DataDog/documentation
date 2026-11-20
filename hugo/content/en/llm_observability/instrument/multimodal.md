@@ -91,7 +91,7 @@ ElevenLabs audio capture and billing have separate availability. Python billing 
 
 With LLM Observability and the ElevenLabs integration enabled, billing collection starts automatically after the WebSocket session ends. The tracer uses the existing SDK client and credentials to make up to five additional conversation-details requests in a 30-second retry window. Credentials must permit reading conversation details. Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` to disable these requests.
 
-Collection runs in the background, supports up to eight concurrent conversations, and does not keep the process alive. USD billing can be delayed or unavailable. For delivery that must survive process exit, submit application-verified post-call transcription webhook data with the explicit API. Absent cost fields remain unknown.
+Collection runs in the background and supports up to eight concurrent conversations. Python uses a daemon worker. Node.js retry waits do not keep the process alive, but an in-flight HTTP request can delay exit until completion or timeout. USD billing can be delayed or unavailable. For delivery that must survive process exit, configure a post-call transcription webhook. Submit application-verified data with the explicit API, passing the originating voice application. Absent cost fields remain unknown.
 
 Conversation charges include the reported LLM and platform amounts and have one conversation owner. Captured audio duration and `context_usage` are not billing measurements. See [conversation billing setup](/llm_observability/instrument/sdk/#submit-conversation-costs-unreleased) and [covered costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased).
 

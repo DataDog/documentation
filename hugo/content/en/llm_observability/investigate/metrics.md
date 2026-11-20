@@ -38,7 +38,7 @@ Agent Observability also stores two other kinds of data, which have their own re
 
 For ElevenLabs, `model_provider:elevenlabs` and `charge_scope:conversation` identify hosted conversation billing. `cost_source:provider` uses the reported USD total or complete USD component pair; `cost_source:user` uses an explicit user override. Unavailable totals do not emit a zero point. Explicit zeros are retained.
 
-Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Component enrichment updates the billing workflow without another total metric.
+Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Initial metric delivery has a deadline of 3 hours and 55 minutes from first acceptance; expired or uncertain delivery remains pending without automatic backfill. After successful initial metric delivery, missing-value enrichment can update the billing workflow for 24 hours from the same acceptance timestamp, without another total metric. Exact retries do not restart that window. Expired enrichment is rejected asynchronously. A late initial report receives a new acceptance timestamp.
 
 The `cost_component` tag on `ml_obs.span.llm.cost` identifies each cost contribution:
 

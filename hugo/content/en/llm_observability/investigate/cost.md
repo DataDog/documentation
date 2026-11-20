@@ -57,7 +57,11 @@ One dedicated conversation billing workflow owns the charge. For example, a tota
 
 The supported tracers automatically retrieve post-call billing when LLM Observability and ElevenLabs instrumentation are enabled. Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` to disable the additional requests. Collection is best effort; a closed client, missing permissions, capacity limits, process exit, or delayed provider billing can leave costs unavailable.
 
-You can also submit details your application already obtained, or data from an application-verified [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks). Billing can arrive after completion. Retries and missing-to-known enrichment are supported; changes to known amounts are rejected. Supply any user override on the first submission. Disable automatic collection when submitting overrides asynchronously, so an automatic observation does not arrive first.
+You can also submit details your application already obtained, or data from an application-verified [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks). Billing can arrive after completion. Exact retries are no-ops. Missing-to-known enrichment is accepted for 24 hours after the first known total is accepted; retries do not extend that deadline. Expired enrichment is rejected asynchronously. A late initial report starts its window when accepted, regardless of the conversation start time. Changes to known amounts are rejected. Supply any user override on the first submission. Disable automatic collection when submitting overrides asynchronously, so an automatic observation does not arrive first.
+
+Pass the originating voice application when submitting from a webhook service with a different configured application. The first accepted application owns the charge; later observations cannot reassign it.
+
+Initial cost-metric delivery must occur within 3 hours and 55 minutes of first acceptance. After that deadline, undelivered records remain pending for diagnosis and accounting, without automatic backfill.
 
 USD inputs are stored in nanodollars (USD multiplied by 1e9, rounded to the nearest nanodollar), while original USD amounts and provenance remain on the billing workflow. The [conversation cost metric](/llm_observability/investigate/metrics/#conversation-costs-unreleased) is attributed to when Datadog first accepts a known total.
 
