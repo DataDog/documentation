@@ -442,6 +442,87 @@ final class FeatureFlagEventObserver {
 }
 {{< /code-block >}}
 
+## Control flag evaluation telemetry and experiment participation
+
+Flag evaluation telemetry opt-out requires `dd-sdk-ios` version `3.21.0` or later. Experimentation opt-out requires version `3.22.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][3] for shared concepts.
+
+### Control flag evaluation telemetry
+
+In version `3.21.0` or later, enable telemetry opt-out when creating the client. Supply the user's preference as Boolean `true`:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let flagsClient = FlagsClient.create(configuration: .init(
+    enableEvaluationTelemetryOptOutParameter: true
+))
+let context = FlagsEvaluationContext(targetingKey: "user-123", attributes: [
+    "dd_evaluation_telemetry_opt_out": .bool(true)
+])
+try await flagsClient.setEvaluationContext(context)
+{{< /code-block >}}
+
+The latest context update suppresses telemetry immediately, including during a pending or failed assignment refresh. The control also suppresses telemetry while the initial cached policy is unknown. It does not delete previously recorded events or RUM annotations.
+
+### Configure the client
+
+After initializing Datadog and enabling Flags, configure both controls when you first create the client. The following example requires version `3.22.0` or later. It suppresses flag evaluation telemetry and immediately excludes the user from experiment allocations:
+
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let flagsClient = FlagsClient.create(configuration: .init(
+    enableEvaluationTelemetryOptOutParameter: true,
+    experimentationOptOutMode: .immediate
+))
+
+let preferenceTimestamp = "2026-10-30T12:00:00Z" // Use the user's stored preference.
+var context = FlagsEvaluationContext(targetingKey: "user-123", attributes: [
+    "tier": .string("premium"),
+    "dd_evaluation_telemetry_opt_out": .bool(true),
+    "dd_experimentation_opt_out_at": .string(preferenceTimestamp)
+])
+
+try await flagsClient.setEvaluationContext(context)
+{{< /code-block >}}
+
+Run the asynchronous call from an async function and handle errors using the application's default experience. Configure an existing client at its original creation site; creating it again with the same name retains its original configuration.
+
+When enabled, flag evaluation opt-out suppresses new evaluation events, aggregated counts, and automatic RUM flag annotations. Only Boolean `true` activates the context attribute. It does not change flag values or suppress experiment exposures, and it does not delete previously recorded telemetry.
+
+Version `3.22.0` adds `FlagsError.invalidContext` and `FlagEvaluationError.invalidContext`. Update exhaustive error switches when upgrading.
+
+### Choose an experimentation policy
+
+| Mode | Behavior with a valid opt-out timestamp |
+| --- | --- |
+| `.disabled` | Ignore the timestamp. This is the default. |
+| `.immediate` | Exclude all experiment allocations. Ordinary feature allocations remain available. |
+| `.futureExperimentsOnly` | Exclude allocations activated at or after the timestamp, or without activation metadata. Earlier allocations remain eligible. |
+
+Future-experiments-only mode checks allocation activation time, not previous enrollment. An older allocation can assign a user for the first time. Both enabled modes take effect immediately; a future timestamp does not schedule a preference change.
+
+Store the timestamp when the user chooses to opt out. Reuse it across application restarts and clients that share the preference. Use a valid timestamp with a timezone, such as `2026-10-30T12:00:00Z`. Invalid timestamps in an enabled mode prevent assignment requests and cause evaluations to return the application default with an invalid-context error.
+
+Enabled experimentation modes require backend support for the selected policy. During context changes, evaluations return application defaults until matching assignments are available. This also applies when the context has no opt-out timestamp.
+
+### Update the preference
+
+Update the context on the existing client instead of creating another client. Preserve the targeting key and other application attributes. To resume flag evaluation telemetry, set `dd_evaluation_telemetry_opt_out` to Boolean `false`. To permit experimentation again, remove `dd_experimentation_opt_out_at`.
+
+{{< code-block lang="swift" >}}
+var updatedAttributes = context.attributes
+updatedAttributes["dd_evaluation_telemetry_opt_out"] = .bool(false)
+updatedAttributes.removeValue(forKey: "dd_experimentation_opt_out_at")
+context = FlagsEvaluationContext(
+    targetingKey: context.targetingKey,
+    attributes: updatedAttributes
+)
+try await flagsClient.setEvaluationContext(context)
+{{< /code-block >}}
+
+These controls do not replace an application consent system. Assignment requests and permitted experiment exposures can still contain user data.
+
 ## Advanced configuration
 
 The `Flags.enable()` API accepts optional configuration with options listed below.
@@ -563,3 +644,5 @@ final class CheckoutFlagTests: XCTestCase {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /account_management/api-app-keys/#client-tokens
+
+[3]: /feature_flags/concepts/opt_out/

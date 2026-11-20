@@ -7,10 +7,10 @@ code_lang_weight: 55
 description: .NET MAUI 애플리케이션 Error Tracking을 설정하세요.
 further_reading:
 - link: /real_user_monitoring/error_tracking/
-  tag: 설명서
+  tag: 문서
   text: Error Tracking 시작하기
 - link: /real_user_monitoring/error_tracking/explorer
-  tag: 설명서
+  tag: 문서
   text: Explorer에서 Error Tracking 데이터 시각화
 title: .NET MAUI 충돌 보고 및 Error Tracking
 type: multi-code-lang
@@ -46,11 +46,9 @@ C# 오류 추적은 RUM을 활성화하는 즉시 자동으로 활성화되며 �
 })
 ```
 
-{% alert level="info" %}
-`NativeCrashReportEnabled = true`인 경우, 애플리케이션 충돌을 유발하는 처리되지 않은 C# 예외가 **두 번** 보고됩니다. 한 번은 `AppDomain.UnhandledException`에 의해 캡처된 C# 오류, 다른 한 번은 플랫폼의 충돌 보고기에 의해 캡처된 네이티브 iOS 또는 Android 충돌로 보고됩니다. 두 이벤트는 동일한 RUM 세션 및 보기를 공유하므로 탐색기에서 상호 연결할 수 있습니다.
-
-둘 중 하나만 유지하려면 [`ErrorEventMapper`][5]를 사용하여 워크플로에 적합하지 않은 복사본을 삭제합니다(예: `Source` 또는 `Stacktrace` 콘텐츠 기준 필터링).
-{% /alert %}
+<div class="alert alert-info">
+다음과 같은 조건이면 <code>NativeCrashReportEnabled = true</code>애플리케이션을 비정상 종료시키는 처리되지 않은 C# 예외가 <strong>두 번</strong> 보고됩니다. 한 번은 <code>AppDomain.UnhandledException</code>이 캡처한 C# 오류를 보고합니다. 다른 한 번은 플랫폼의 충돌 리포터에서 캡처한 네이티브 iOS 또는 Android 충돌을 보고합니다. 두 이벤트 모두 동일한 RUM 세션과 보기를 공유하므로 탐색기에서 서로 연관 지어 분석할 수 있습니다.<br><br>두 보고 중 하나만 유지하려면 <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a>를 사용하여 워크플로에 맞지 않는 보고 복사본은 삭제하세요. 예를 들어 <code>Source</code> 또는 <code>Stacktrace</code> 콘텐츠를 기준으로 필터링합니다.
+</div>
 
 ## 설정 {#setup}
 
@@ -78,7 +76,7 @@ npm install -g @datadog/datadog-ci
 
 `datadog-ci version`을 사용하여 설치를 확인합니다.
 
-#### 2. Datadog API 키 설정 {#2-set-your-datadog-api-key}
+#### 2. Datadog API key 설정 {#2-set-your-datadog-api-key}
 
 `dotnet publish`를 실행하는 셸에서 키를 내보냅니다.
 
@@ -99,7 +97,7 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
   -p:DatadogUploadSymbols=true
 ```
 
-`.dSYM``.app` 옆에 생성된 번들이 업로드됩니다. dSYM은 기기 빌드(`-r ios-arm64`)에 대해서만 생성되며, 시뮬레이터 빌드(`iossimulator-arm64`)는 업로드를 건너뜁니다.
+`.dSYM``.app` 옆에 생성된 번들이 업로드됩니다. dSYM은 장치 빌드(`-r ios-arm64`)에 대해서만 생성되며, 시뮬레이터 빌드(`iossimulator-arm64`)는 업로드를 건너뜁니다.
 
 ### 구성 {#configuration}
 
@@ -134,7 +132,7 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
 
 관리형 C# 예외 스택 트레이스는 메서드 이름으로만 해석됩니다. 파일 이름과 줄 번호는 아직 사용할 수 없습니다.
 
-.NET MAUI 릴리스 빌드는 배포 전에 C#을 AOT 컴파일하므로, 기기 런타임에서 프레임을 소스 위치로 다시 매핑할 수 없습니다.
+.NET MAUI 릴리스 빌드는 배포 전에 C#을 AOT 컴파일하므로, 장치 런타임에서 프레임을 소스 위치로 다시 매핑할 수 없습니다.
 - iOS의 경우, 최소 런타임에서 Portable PDB 파일을 전혀 읽을 수 없습니다. 
 - Android의 경우, AOT 컴파일된 프레임은 `Unknown Source`를 보고합니다. 
 이러한 프레임을 해석하려면 앱의 Portable PDB(`.pdb`)와 서버 측의 플랫폼 네이티브 디버그 정보를 결합해야 하는데, 이 기능은 지원되지 않습니다. Portable PDB 파일은 Datadog에 업로드되지 않으며, 이를 앱에 번들로 포함해도 보고된 스택 트레이스에 파일/줄 정보가 추가되지 않습니다.
@@ -151,8 +149,8 @@ dSYM 번들(iOS)은 각각 최대 **2 GB**까지 가능합니다.
 
 SDK는 다음 동작으로 충돌 보고를 처리합니다.
 
-- SDK가 초기화된 후에만 충돌을 감지할 수 있습니다. `MauiProgram.CreateMauiApp`에서 최대한 빨리 SDK를 초기화합니다.
-- RUM 충돌은 RUM 조회에 연결해야 합니다. RUM 조회 페이지가 표시되기 전(또는 사용자가 앱을 백그라운드로 전환한 후)에 충돌이 발생하면, 해당 충돌은 음소거되어 보고되지 않습니다. 이를 완화하려면 `DdRumConfiguration`에서 `TrackBackgroundEvents = true`를 설정합니다.
+- SDK가 초기화된 후에만 충돌을 탐지할 수 있습니다. `MauiProgram.CreateMauiApp`에서 최대한 빨리 SDK를 초기화합니다.
+- RUM 충돌은 RUM 조회에 연결해야 합니다. RUM 조회 페이지가 표시되기 전(또는 사용자가 앱을 백그라운드로 전환한 후)에 충돌이 발생하면, 해당 충돌은 뮤트되어 보고되지 않습니다. 이를 완화하려면 `DdRumConfiguration`에서 `TrackBackgroundEvents = true`를 설정합니다.
 - 샘플링된 세션에서 발생한 충돌만 보관됩니다.
 
 ### Android NDK 충돌 심볼 {#android-ndk-crash-symbols}
@@ -165,8 +163,8 @@ MAUI 앱에서 네이티브 `.so` 파일은 일반적으로 .NET 런타임(`libm
 
 충돌 보고 및 Error Tracking 구성을 검증하려면 충돌을 유발하고 Datadog에서 오류가 나타나는지 확인해야 합니다.
 
-1. 실제 기기나 에뮬레이터에서 애플리케이션을 실행합니다(dSYM은 iOS의 기기 빌드에 대해서만 생성됩니다).
-2. 처리되지 않은 예외를 발생시키는 코드를 실행합니다. 예를 들면 다음과 같습니다.
+1. 실제 장치나 에뮬레이터에서 애플리케이션을 실행합니다(dSYM은 iOS의 장치 빌드에 대해서만 생성됩니다).
+2. 처리되지 않은 예외를 발생시키는 코드를 실행합니다. 예:
 
    ```csharp
    void OnButtonClicked(object sender, EventArgs e)
@@ -176,7 +174,7 @@ MAUI 앱에서 네이티브 `.so` 파일은 일반적으로 .NET 런타임(`libm
    ```
 
 3. 충돌이 발생한 후 애플리케이션을 다시 시작하고 SDK가 충돌 보고서를 업로드할 때까지 기다립니다.
-4. [{{< ui >}}Error Tracking{{< /ui >}}][1]에서 이벤트를 확인합니다. 기기 빌드에서 발생한 네이티브 iOS 충돌의 경우 프레임 심볼화가 수행됩니다.
+4. [{{< ui >}}Error Tracking{{< /ui >}}][1]에서 이벤트를 확인합니다. 장치 빌드에서 발생한 네이티브 iOS 충돌의 경우 프레임 심볼화가 수행됩니다.
 
 ## 문제 해결 {#troubleshooting}
 
@@ -187,7 +185,7 @@ MAUI 앱에서 네이티브 `.so` 파일은 일반적으로 .NET 런타임(`libm
 셸에서 키를 내보냅니다. `export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>`. `echo $DATADOG_API_KEY`로 확인합니다.
 
 **`Skipping dSYM upload — file not found`**
-dSYM은 기기 빌드에 대해서만 생성됩니다(`-r ios-arm64`). 시뮬레이터 빌드는 dSYM을 생성하지 않습니다.
+dSYM은 장치 빌드에 대해서만 생성됩니다(`-r ios-arm64`). 시뮬레이터 빌드는 dSYM을 생성하지 않습니다.
 
 **게시 중에는 Datadog 출력이 표시되지 않습니다**
 터미널 로거는 정보성 메시지를 숨깁니다. `-v n -tl:off`를 `dotnet publish` 명령에 추가합니다.
@@ -203,4 +201,3 @@ dSYM은 기기 빌드에 대해서만 생성됩니다(`-r ios-arm64`). 시뮬레
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /ko/real_user_monitoring/application_monitoring/maui/setup
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /ko/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events

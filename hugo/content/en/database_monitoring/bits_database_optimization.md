@@ -70,7 +70,7 @@ In addition to the [prerequisites](#prerequisites), SQL Server requires:
 
 ### Recommended
 
-- **Datadog Agent 7.86 or later.** Upgrading the Agent helps Bits Database Optimization produce higher-quality optimizations for SQL Server. During the Preview, the Datadog team can provide a custom Agent build.
+- **Datadog Agent 7.86 or later.** Upgrading the Agent helps Bits Database Optimization produce higher-quality optimizations for SQL Server.
 
 ### Limitations
 

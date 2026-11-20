@@ -47,13 +47,21 @@ content_filters:
 <!-- Linux - Overview -->
 {% if equals($platform, "linux") %}
 
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route logs and metrics to different destinations.
+
+The Worker supports major Linux distributions, such as:
+
+- Amazon Linux
+- CentOS
+- Debian
+- Red Hat Enterprise Linux (RHEL)
+- Ubuntu
+
 {% alert level="danger" %}
 For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
 {% /alert %}
 
 {% /if %}
-
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics, and then route them to different destinations.
 
 <!-- Kubernetes - Overview -->
 {% if equals($platform, "kubernetes") %}
@@ -270,7 +278,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
-1. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
+1. Select one of the options in the dropdown to provide the expected log or metrics volume for the pipeline:
     |   Option   | Description |
     | ---------- | ----------- |
     | Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
@@ -436,7 +444,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% /if %}
 
-3. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
+3. Select one of the options in the dropdown to provide the expected log or metrics volume for the pipeline:
 
     |   Option   | Description |
     | ---------- | ----------- |

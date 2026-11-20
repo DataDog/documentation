@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "bandits",
+    "id": "4b1f3c2e-8d5a-4f6b-9c7e-1a2b3c4d5e6f",
+    "attributes": {
+      "name": "bandit-14bb9543f523edde-renamed",
+      "variants": [
+        {
+          "feature_flag_variant_id": "550e8400-e29b-41d4-a716-446655440002"
+        },
+        {
+          "feature_flag_variant_id": "8385917b-53d3-23de-914c-c0250ef24884",
+          "is_fallback": true
+        }
+      ]
+    }
+  }
+}

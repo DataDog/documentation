@@ -74,6 +74,16 @@
     },
     {
       "group": "action_connection",
+      "suffix": "_4037152040",
+      "description": "Create a GitHub App Action Connection"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_700388414",
+      "description": "Create a GitHub personal access token Action Connection"
+    },
+    {
+      "group": "action_connection",
       "suffix": "",
       "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
     },
@@ -93,6 +103,16 @@
       "group": "action_connection",
       "suffix": "_426384263",
       "description": "Update a GCP Action Connection with a versioned AWS Secrets Manager reference"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_397154390",
+      "description": "Update a GitHub App Action Connection without replacing its secret"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_525672300",
+      "description": "Update a GitHub personal access token Action Connection without replacing its secret"
     },
     {
       "group": "action_connection",
@@ -528,6 +548,13 @@
       "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
+  "CreateTerraformCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an HCP Terraform persona mapping returns \"Created\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -580,6 +607,13 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
+  "UpdateCustomCostsFile": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Custom Costs file returns \"OK\" response"
     }
   ],
   "UpdateCostGCPUsageCostConfig": [
@@ -875,6 +909,13 @@
       "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
     }
   ],
+  "CreateBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create bandit returns \"Created\" response"
+    }
+  ],
   "CreateExperimentMetricGroup": [
     {
       "group": "experiments",
@@ -936,6 +977,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
+  "PatchBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update bandit returns \"OK\" response"
     }
   ],
   "UpdateExperimentAnalysisPlanAttributes": [
@@ -1006,6 +1054,16 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3184074211",
+      "description": "Create an environment with full evaluation data false returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2722766232",
+      "description": "Create an environment with full evaluation data true returns \"Created\" response"
     }
   ],
   "UpdateSavedFilterAttributes": [
@@ -1060,6 +1118,28 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
+  "UpdateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_681909188",
+      "description": "Update an environment to disable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_169745239",
+      "description": "Update an environment to enable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_628630684",
+      "description": "Update an environment to preserve disabled full evaluation data when omitted returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4250936367",
+      "description": "Update an environment to preserve enabled full evaluation data when omitted returns \"OK\" response"
     }
   ],
   "UpdateAllocationsForFeatureFlagInEnvironment": [
@@ -2090,6 +2170,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_33892008",
+      "description": "Validate an observability pipeline with named and unnamed parse grok include rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3928499240",
       "description": "Validate an observability pipeline with parse grok processor include rules returns \"OK\" response"
     },
@@ -2131,6 +2216,13 @@
       "group": "okta_integration",
       "suffix": "",
       "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
+  "CreateOnCallPageComment": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call Page comment returns \"No Content\" response"
     }
   ],
   "CreateOnCallEscalationPolicy": [
@@ -3125,6 +3217,13 @@
       "group": "spans_metrics",
       "suffix": "",
       "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateEmailAccessPolicy": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create an email access policy returns \"Created\" response"
     }
   ],
   "CreateBackfilledDegradation": [

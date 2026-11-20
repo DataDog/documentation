@@ -14,9 +14,6 @@ code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-    - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: "Source Code"
-      text: 'Source code'
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
@@ -29,6 +26,9 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
       tag: "Learning Center"
       text: "Configure and manage the APM SDK for your applications"
+    - link: 'https://github.com/DataDog/dd-trace-js'
+      tag: "Source Code"
+      text: 'Source code'
 ---
 ## Compatibility requirements
 

@@ -17,6 +17,8 @@ Email subscriptions on status pages are **double opt-in**. After entering an ema
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
+For **private** status pages, visitors can subscribe only with an email address that matches the page's email rules.
+
 {{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
 ### Enable email subscriptions
@@ -33,7 +35,7 @@ Two settings control email subscriptions:
 
 {{< img src="incident_response/status_pages/status_pages_enable_email.png" alt="Status page email subscription settings showing the Notify subscribers and Show subscribe option to visitors toggles" style="width:80%;" >}}
 
-Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a private audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
+Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a specific audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
 
 ### Add or import subscribers
 

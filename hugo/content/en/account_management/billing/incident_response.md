@@ -30,14 +30,14 @@ View and manage seat usage for each product in the [Seat Management][4] section 
 
 A **seat** is a license for a user to actively participate in the on-call or incident management process in Datadog. 
 
-Any user can claim a seat for On-Call, Incident Management, or Incident Response as they perform actions that require a seat. Billing admins can also assign seats ahead of time to simplify the process for their teams.
+Any user can claim a seat for On-Call, Incident Management, or Incident Response as they perform actions that require a seat. Billing admins can also [assign seats](#assign-seats) ahead of time to simplify the process for their teams.
 
 A user needs an **On-Call seat** if they perform any of the following:
 - Participate in an [on-call schedule][5]
 - Are included in an [escalation policy][6]
 - Have set up [notification preferences][7] to receive pages
 
-In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules.
+In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules. However, if a user without a seat performs an action that requires an On-Call seat, Datadog automatically assigns them a billable seat. Actions taken through the [On-Call API][10] also assign a seat, without a confirmation prompt. If no one in your organization has an On-Call seat yet, the first automatic assignment enables On-Call seats and Datadog sends your organization a notification email. For more information, see [Billing and overages](#billing-and-overages).
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
@@ -156,3 +156,4 @@ Your monthly bill contains the following:
 [7]: /incident_response/on-call/notification_preferences/#notification-preferences
 [8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin
+[10]: /api/latest/on-call

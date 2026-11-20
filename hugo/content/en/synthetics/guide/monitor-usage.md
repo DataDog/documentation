@@ -41,7 +41,7 @@ You can graph and monitor these metrics against static thresholds as well as use
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/billing/usage_metrics/#types-of-usage
+[1]: /account_management/billing/usage_metrics/estimated_usage_metrics/#types-of-usage
 [2]: /synthetics/api_tests
 [3]: /synthetics/multistep
 [4]: /synthetics/browser_tests

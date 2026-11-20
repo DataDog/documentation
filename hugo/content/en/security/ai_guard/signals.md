@@ -11,6 +11,9 @@ further_reading:
 - link: /security/detection_rules/
   tag: Documentation
   text: Detection Rules
+- link: "https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/"
+  tag: "Blog"
+  text: "Detect when your AI agent copies a self-replicating prompt injection"
 ---
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
