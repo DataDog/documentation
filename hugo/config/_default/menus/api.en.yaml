@@ -14540,6 +14540,19 @@ menu:
       url: /api/latest/data-deletion/
       identifier: data-deletion
       generated: true
+    - name: Forces a data deletion request
+      url: /api/latest/data-deletion/forces-a-data-deletion-request/
+      identifier: data-deletion-forces-a-data-deletion-request
+      parent: data-deletion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ForceDataDeletionRequest
+        unstable:
+          - v2
+        order: 4
     - name: Cancels a data deletion request
       url: /api/latest/data-deletion/cancels-a-data-deletion-request/
       identifier: data-deletion-cancels-a-data-deletion-request
