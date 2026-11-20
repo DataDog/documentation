@@ -413,6 +413,10 @@ To configure Datadog using SST v3, follow these steps:
 
 {{% svl-tracing-env %}}
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

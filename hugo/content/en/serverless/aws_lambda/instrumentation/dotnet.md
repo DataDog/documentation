@@ -323,6 +323,10 @@ When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second 
 
 You can then add custom spans and span tags using the .NET tracer. For instructions on how to add spans, see [.NET custom instrumentation][10].
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

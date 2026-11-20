@@ -400,6 +400,10 @@ To configure Datadog using SST v3, follow these steps:
 
 <div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

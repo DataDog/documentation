@@ -483,6 +483,10 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 
 {{% svl-tracing-env %}}
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

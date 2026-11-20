@@ -82,6 +82,26 @@ Help me monitor my AWS Lambda functions with Datadog.
   {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
 {{< /card-grid >}}
 
+## Memory requirements
+
+The Datadog Lambda extension and the Datadog SDK layer run inside your function, so they add to the memory used by every invocation. For example, on Python the extension and tracer together use about 70 MB. Datadog does not change your function's memory size or timeout, so a function with little headroom, such as one using the AWS default of 128 MB, can run out of memory or time out after it is instrumented.
+
+Datadog recommends a memory size of **at least 256 MB** for instrumented functions. Before you instrument a function below 256 MB, raise its memory size and check its memory use and duration after instrumentation.
+
+When Datadog instruments functions for you from the AWS integration or Fleet Automation, it skips functions with less than 256 MB of memory that are not yet instrumented, and lists them as skipped with the reason `lambda_low_memory`. To instrument one of these functions, raise its memory size to 256 MB or more. Datadog instruments it on the next pass.
+
+The following installation tools still instrument functions with less than 256 MB of memory, but show a warning. To silence the warning after you confirm that a function has enough headroom, use the option for your tool:
+
+| Tool | Option to silence the warning |
+|---|---|
+| [Datadog CLI][10] (`datadog-ci lambda instrument`) | `--suppress-low-memory-warning` flag |
+| [Serverless Framework plugin][11] | `suppressLowMemoryWarning: true` under `custom.datadog` |
+| [AWS CDK construct][12] (`DatadogLambda`) | `suppressLowMemoryWarning: true` |
+| [CloudFormation macro][13] | `suppressLowMemoryWarning: true` parameter |
+| [Terraform module][14] (`terraform-aws-lambda-datadog`) | `suppress_low_memory_warning = true` |
+
+The Terraform module reports the warning as a Terraform check warning. For the AWS CDK construct, the CloudFormation macro, and the Terraform module, a function that does not set a memory size uses the AWS default of 128 MB and receives the warning. The Serverless Framework uses a default memory size of 1024 MB.
+
 ## Advanced configurations
 
 After you're done with instrumentation and you've set up telemetry collection, you can use [Configure Serverless Monitoring for AWS Lambda][3] to:
@@ -103,3 +123,8 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
 [9]: /mcp_server/tools/#serverless_onboarding
+[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-lambda
+[11]: /serverless/libraries_integrations/plugin/
+[12]: /serverless/libraries_integrations/cdk/
+[13]: /serverless/libraries_integrations/macro/
+[14]: https://github.com/DataDog/terraform-aws-lambda-datadog

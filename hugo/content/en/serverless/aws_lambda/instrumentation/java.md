@@ -309,6 +309,10 @@ module "lambda-datadog" {
 
 {{% svl-tracing-env %}}
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}

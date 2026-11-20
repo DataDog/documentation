@@ -365,6 +365,10 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 }
 ```
 
+## Memory requirements
+
+{{% svl-lambda-memory %}}
+
 ## FIPS compliance
 
 {{% svl-lambda-fips %}}
