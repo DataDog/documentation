@@ -33,27 +33,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
   schemas:
     APIErrorResponse:
       description: Error response object.
@@ -16762,6 +16741,11 @@ components:
           type: array
         description:
           description: The description of the widget.
+          type: string
+        palette:
+          description: >-
+            Color palette to apply to the widget. Supported values include `datadog16`, `datadog32`, `semantic`, `classic`, and `dog_classic`. A guide to the available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: datadog16
           type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"

@@ -83,3 +83,11 @@ entries:
       - UpdateDashboard
       - UpdatePublicDashboard
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41954
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add optional color palette to scatterplot widget definition
