@@ -23,3 +23,18 @@ entries:
     operations:
       - GetIssueImpact
     title: Document the GetIssueImpact preview endpoint for Error Tracking
+  - change_type: added
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41747
+    operations:
+      - SnoozeIssue
+    title: Document the SnoozeIssue preview endpoint for Error Tracking
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41747
+    operations:
+      - GetIssue
+      - SearchIssues
+      - UpdateIssueAssignee
+      - UpdateIssueState
+    title: Document the SnoozeIssue preview endpoint for Error Tracking

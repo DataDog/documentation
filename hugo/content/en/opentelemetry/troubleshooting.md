@@ -332,13 +332,13 @@ To verify the configuration:
 
 ## Port binding errors and connection failures
 
-**Symptom**: You experience port conflicts or binding issues when deploying the DDOT Collector, or applications cannot connect to the DDOT Collector.
+**Symptom**: You experience port conflicts or binding issues when deploying the Agent's Collector, or applications cannot connect to the Agent's Collector.
 
 **Cause**: This typically occurs due to port naming conflicts, incorrect port configurations, or when multiple services attempt to use the same ports.
 
 **Resolution**:
 
-The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
+The Datadog Operator automatically binds the Agent's Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
 To explicitly override the default ports, use the `features.otelCollector.ports` parameter:
 

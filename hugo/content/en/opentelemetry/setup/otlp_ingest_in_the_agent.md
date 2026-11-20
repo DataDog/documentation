@@ -21,7 +21,7 @@ further_reading:
 
 The Datadog Agent's OTLP endpoint is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to the Datadog Agent. It's part of the core Datadog Agent, so you don't run a separate Collector. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP.
 
-The Datadog Agent's OTLP endpoint allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
+The Datadog Agent's OTLP endpoint allows you to use observability features in the Datadog Agent. Some Datadog products, such as App and API Protection, Continuous Profiler, and Ingestion Rules, don't support data from applications instrumented with upstream OpenTelemetry SDKs. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 

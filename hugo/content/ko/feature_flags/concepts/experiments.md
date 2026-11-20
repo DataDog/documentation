@@ -3,19 +3,19 @@ description: Feature Flags의 타겟팅 규칙이 Datadog Experiment를 무작�
   알아보세요.
 further_reading:
 - link: /experiments/
-  tag: 문서
-  text: Datadog Experiments 소개
+  tag: 설명서
+  text: Datadog Experiments에 대해 알아보기
 - link: /experiments/plan_and_launch_experiments
-  tag: 문서
-  text: 실험 계획 및 시작하기
+  tag: 설명서
+  text: 실험 계획 및 시작
 - link: /experiments/concepts/subject_types
-  tag: 문서
+  tag: 설명서
   text: Experiments의 대상 유형
 - link: /feature_flags/concepts/targeting_rules
-  tag: 문서
+  tag: 설명서
   text: Feature Flags 타겟팅 규칙 및 필터
 - link: /feature_flags/concepts/evaluation_context
-  tag: 문서
+  tag: 설명서
   text: Feature Flags 평가 컨텍스트
 title: Feature Flags 및 실험
 ---
@@ -23,7 +23,7 @@ title: Feature Flags 및 실험
 
 Datadog Feature Flags는 [Datadog Experiment][1]를 무작위화하는 기본 방법입니다. 플래그를 실험에 연결하면 Datadog은 해당 플래그에 Experiment 타겟팅 규칙을 추가합니다. 해당 규칙에 대한 평가는 대상을 변형에 할당하고 Datadog이 실험을 분석하는 데 사용하는 노출 이벤트를 기록합니다.
 
-## 플래그를 실험에 연결 {#link-a-flag-to-an-experiment}
+## 실험에 플래그 연결 {#link-a-flag-to-an-experiment}
 
 워크플로의 다음 두 위치 중 하나에서 플래그를 실험에 연결할 수 있습니다.
 
@@ -42,6 +42,10 @@ SDK가 대상에 대한 플래그의 실험 타겟팅 규칙을 평가할 때마
 
 Datadog은 대상 식별자를 기준으로 노출과 메트릭을 결합합니다. [평가 컨텍스트][5]에 SDK가 설정하는 `targetingKey`는 실험에 구성된 [대상 유형 속성][6](예: `@usr.id`)과 일치해야 합니다. 그렇지 않으면 Datadog이 메트릭 이벤트를 올바른 노출과 연결할 수 없습니다.
 
+## 대상 기본 설정 {#subject-preferences}
+
+Experimentation 옵트아웃을 통해 대상을 실험 할당에서 즉시 또는 할당 활성화 시간을 기준으로 제외할 수 있습니다. 플래그 평가 옵트아웃은 별도로 적용되며 이로 인해 실험 할당이 방지되지 않습니다. [플래그 평가 및 Experimentation 옵트아웃][8]을 참조하세요.
+
 ## 자체 무작위화 사용 {#bring-your-own-randomization}
 
 Datadog Feature Flags가 아닌 다른 시스템으로 대상을 무작위화하는 경우, 이 플래그-실험 통합은 적용되지 않습니다. Datadog은 여전히 실험을 분석할 수 있습니다. 대신 데이터 웨어하우스에서 노출 레코드를 읽는 [Exposure SQL Model][7]을 정의하세요.
@@ -57,3 +61,4 @@ Datadog Feature Flags가 아닌 다른 시스템으로 대상을 무작위화하
 [5]: /ko/feature_flags/concepts/evaluation_context/
 [6]: /ko/experiments/concepts/subject_types/
 [7]: /ko/experiments/concepts/exposure_sql/
+[8]: /ko/feature_flags/concepts/opt_out/

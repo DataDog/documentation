@@ -39,7 +39,7 @@ Par défaut, Datadog détecte automatiquement les anomalies de coûts pour chaqu
 
 Pour personnaliser la détection d'anomalies :
 
-1. Dans l'onglet [{{< ui >}}Anomalies{{< /ui >}}][1], cliquez sur {{< ui >}}Configure{{< /ui >}}.
+1. Dans l'onglet [{{< ui >}}Anomalies{{< /ui >}}][1], cliquez sur {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Detection rules{{< /ui >}}.
 1. Dans le panneau {{< ui >}}Configure Cost Anomalies{{< /ui >}}, sélectionnez un fournisseur. Une coche indique que le fournisseur utilise des paramètres personnalisés et un cercle vide indique qu'il utilise les paramètres par défaut de Datadog.
 1. Ajustez les paramètres suivants pour le fournisseur sélectionné :
    - **Detection dimension** : la dimension sur laquelle Datadog détecte les anomalies de coûts (par exemple, le service ou la description des frais). Ce paramètre est obligatoire.
@@ -113,6 +113,34 @@ Voici un exemple de la façon de marquer une anomalie de coûts comme significat
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-unexpected-1.png" alt="Formulaire pour marquer une anomalie comme inattendue avec un champ d'explication" style="width:80;" >}}
 
+## Notifications d'anomalies en temps réel {#real-time-anomaly-notifications}
+
+Les notifications d'anomalies en temps réel vous alertent dans les 15 minutes suivant une augmentation inattendue des coûts estimés de l'IA ou des [coûts de calcul cloud en temps réel][6]. Les anomalies de coût détectées à partir des données de facturation mettent plus de temps à apparaître, car les données de facturation sont généralement disponibles 2 à 3 jours après l'utilisation.
+
+Les notifications d'anomalies en temps réel nécessitent des données de coût estimées : des données de coût des LLM provenant d'Agent Observability pour les coûts de l'IA, ou [Real-Time Costs][6] pour les coûts de calcul cloud. Pour connaître toutes les exigences, consultez les [prérequis du moniteur d'anomalies en temps réel][8].
+
+Pour configurer les notifications d'anomalies en temps réel :
+
+1. Dans l'onglet [{{< ui >}}Anomalies{{< /ui >}}][1], cliquez sur {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
+1. Sélectionnez {{< ui >}}AI providers{{< /ui >}} et activez {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}}, ou sélectionnez {{< ui >}}Cloud/SaaS providers{{< /ui >}} et activez {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. L'option {{< ui >}}Cloud/SaaS providers{{< /ui >}} couvre AWS, Azure et Google Cloud.
+1. Sous {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, vous pouvez, si vous le souhaitez, regrouper les alertes par deux tags maximum et filtrer les coûts.
+1. Définissez l'impact financier minimal. Datadog envoie une notification uniquement lorsque le coût de l'anomalie sur les 24 prochaines heures est susceptible de dépasser la valeur la plus élevée entre :
+   - Un montant dans la devise de votre organisation : un nombre entier supérieur à 0 (par défaut : 500)
+   - Un pourcentage du coût de référence : 0 à 100 % (par défaut : 5 %)
+1. Sous {{< ui >}}Choose who to notify{{< /ui >}}, ajoutez des adresses e-mail ou des canaux Slack.
+1. Cliquez sur {{< ui >}}Save configuration{{< /ui >}}. Les modifications s'appliquent aux anomalies détectées après l'enregistrement.
+
+Les anomalies en temps réel sont envoyées uniquement sous forme de notifications. Elles n'apparaissent pas dans l'onglet {{< ui >}}Anomalies{{< /ui >}} et n'affectent pas les anomalies détectées à partir des données de facturation finalisées.
+
+L'enregistrement du formulaire crée des moniteurs d'anomalies en temps réel tagués `ccm_realtime_anomaly_notifications:true` :
+
+- Si vous ne regroupez pas les alertes, Datadog crée un seul moniteur.
+- Si vous regroupez les alertes par tags, Datadog crée un moniteur pour chaque tag. Par exemple, le regroupement par deux tags crée deux moniteurs, chacun regroupé par l'un des tags, et non un seul moniteur regroupé par les deux.
+
+Pour arrêter les notifications d'anomalies en temps réel, désactivez {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}} ou {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}, puis cliquez sur {{< ui >}}Save configuration{{< /ui >}}. Datadog supprime les moniteurs que le formulaire a créés pour ce type de coût. Les moniteurs que vous avez créés séparément ne sont pas affectés.
+
+Pour un message de notification personnalisé ou plus d'une configuration par fournisseur, [créez plutôt un moniteur d'anomalies en temps réel][7].
+
 ## Dépannage {#troubleshooting}
 
 Si vous ne voyez pas les anomalies attendues :
@@ -131,3 +159,6 @@ Pour obtenir davantage d'aide, contactez [Datadog Support][4].
 [3]: /fr/cloud_cost_management/setup/
 [4]: /fr/help/
 [5]: /fr/cloud_cost_management/cloud_cost_skill/
+[6]: /fr/cloud_cost_management/cost_changes/real_time_costs/
+[7]: /fr/cloud_cost_management/cost_changes/monitors/#create-a-real-time-anomaly-monitor
+[8]: /fr/cloud_cost_management/cost_changes/monitors/#prerequisites

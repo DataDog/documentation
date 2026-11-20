@@ -261,7 +261,7 @@ If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP 
 
 ### Error: 413 Request Entity Too Large
 
-If you receive a `413 Request Entity Too Large` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog metrics intake endpoint's limit of 512 KiB (compressed).
+If you receive a `413 Request Entity Too Large` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog metrics intake endpoint's limit of 5.1 MiB (uncompressed).
 
 This error usually occurs when the OpenTelemetry SDK batches too much telemetry data in a single request payload.
 

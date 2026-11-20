@@ -8,22 +8,22 @@ algolia:
   - rollup
   - rspack
   - bundler
-description: Datadog ビルドプラグインを JavaScript バンドラーに統合して、ソースマップのアップロード、アクション名の難読化解除、およびその他の
-  RUM タスクをビルド時に自動化します。
+description: Datadog ビルドプラグインを JavaScript バンドラーと統合して、ソースマップのアップロード、プライバシー許可リストの生成、その他の
+  RUM タスクをビルド時に自動化できます。
 further_reading:
 - link: https://github.com/DataDog/build-plugins
   tag: ソースコード
   text: Datadog ビルドプラグイン GitHub リポジトリ
 - link: /real_user_monitoring/application_monitoring/browser/setup/client
   tag: ドキュメント
-  text: RUM ブラウザクライアント側のセットアップ
+  text: RUM ブラウザのクライアントサイド設定
 title: ビルドプラグイン
 ---
 ## 概要 {#overview}
 
-Datadog ビルドプラグインは JavaScript バンドラーと統合され、ビルドプロセス中に一般的な RUM タスクを自動化します。webpack、Vite、esbuild、Rollup、および Rspack で利用可能です。
+Datadog ビルドプラグインを JavaScript バンドラーと統合することで、ビルドプロセス中に一般的な RUM タスクを自動化できます。これは、Webpack、Vite、esbuild、Rollup、および Rspack で利用可能です。
 
-ビルドプラグインは RUM ブラウザ SDK を補完するものです。[ブラウザモニタリングのセットアップ][1] で説明されているように、引き続き SDK を設定する必要があります。
+ビルドプラグインは RUM ブラウザ SDK を補完するものです。[ブラウザモニタリングのセットアップ][1]で説明されているように、引き続き SDK の設定は必要です。
 
 ## インストール {#installation}
 
@@ -91,7 +91,7 @@ require('esbuild').build({
 ```
 
 {{% /tab %}}
-{{% tab "ロールアップ" %}}
+{{% tab "Rollup" %}}
 
 ```bash
 npm install --save-dev @datadog/rollup-plugin
@@ -133,15 +133,15 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-## 構成{#configuration}
+## 構成 {#configuration}
 
 以下の共有設定オプションは、すべてのプラグインに適用されます。
 
-| パラメーター | 型 | 必須 | デフォルト | 説明 |
+| パラメーター | タイプ | 必須 | デフォルト | 説明 |
 |-----------|------|----------|---------|-------------|
-| `auth.apiKey` | 文字列 | はい (ソースマップのみ) | なし | Datadog API キー。`DATADOG_API_KEY` 環境変数で設定することもできます。|
-| `auth.site` | 文字列 | いいえ | `datadoghq.com` | Datadog サイト。`DATADOG_SITE` または `DD_SITE` 環境変数で設定することもできます。|
-| `logLevel` | 文字列 | いいえ | `warn` | ログの冗長性レベル。`debug`、`info`、`warn`、`error`、または `none` のいずれか。|
+| `auth.apiKey` | 文字列 | はい (ソースマップのみ) | なし | ご使用の Datadog API key。`DATADOG_API_KEY` 環境変数で設定することもできます。|
+| `auth.site` | 文字列 | いいえ | `datadoghq.com` | ご使用の Datadog サイト。`DATADOG_SITE` または `DD_SITE` 環境変数で設定することもできます。|
+| `logLevel` | 文字列 | いいえ | `warn` | ログの詳細レベル。`debug`、`info`、`warn`、`error`、または `none` のいずれか。|
 
 以下の例は、完全な設定構造を示しています。
 
@@ -166,17 +166,17 @@ datadogWebpackPlugin({
 })
 ```
 
-`sourcemaps` と `errorTracking.sourcemaps` は相互に排他的です。選択したマッチング方法に基づいて、いずれか一方を設定してください。詳細は [ソースマップ][2] を参照してください。
+`sourcemaps` と `errorTracking.sourcemaps` は相互に排他的です。選択した照合方法に基づいて、いずれか一方を設定してください。詳細は[ソースマップ][2]をご覧ください。
 
 ## 利用可能なプラグイン {#available-plugins}
 
-{{< whatsnext desc="個別のビルドプラグインを設定します：" >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>ソースマップ</u>：ビルド中にソースマップをDatadogへ自動的にアップロードし、難読化解除されたスタックトレースを有効にします。{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation" >}}<u>アクション名の難読化解除</u>：縮小されたビルドで読み取り可能なアクション名を復元します。{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>ソースコードコンテキスト</u>：Error Tracking のスタックトレース内にソースコードをインラインで表示します。{{< /nextlink >}}
+{{< whatsnext desc="個々のビルドプラグインを設定します。" >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>ソースマップ</u>: ビルド中にソースマップを Datadog に自動的にアップロードし、難読化を解除したスタックトレースを有効にします。{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>プライバシープラグイン</u>: ビルド時に安全な文字列の許可リストを生成し、機密データをマスキングしながら、アクション名や Session Replay テキストは利用できるようにします。{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>ソースコードコンテキスト</u>: Error Tracking のスタックトレース内にソースコードをインラインで表示します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

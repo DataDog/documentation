@@ -104,3 +104,46 @@ entries:
       - UpdateMetricCollection
       - UpdateMetricSQLModel
     title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - GetBandit
+      - GetBanditResults
+      - GetBanditTrafficSummary
+      - ListBandits
+    title: Add the bandit reads to the Experiments API
+  - change_type: modified
+    date: '2026-11-16'
+    link: https://github.com/DataDog/documentation/pull/41734
+    operations:
+      - ListExposureSQLModels
+    title: Add the bandit reads to the Experiments API
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41858
+    operations:
+      - GetExperimentResults
+    title: Expose EVSI forecast context in experiment results
+  - change_type: added
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41898
+    operations:
+      - CreateBandit
+      - DeleteBandit
+      - ListBanditPolicies
+      - PatchBandit
+      - PauseBandit
+      - RefreshBandit
+      - ResumeBandit
+      - StartBandit
+      - StopBandit
+    title: Add the bandit writes, lifecycle and policy history to the 
+      Experiments API
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41898
+    operations:
+      - GetBandit
+    title: Add the bandit writes, lifecycle and policy history to the 
+      Experiments API
