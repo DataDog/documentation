@@ -79,7 +79,11 @@ The **Announced deprecations** table lists each deprecated model, sorted by shut
 - **Calls**: The number of calls to the model in the analysis window
 - **Status**: The time left before the shutdown, shown as `<N> days left`, or `Shut down on <DATE>` if the model has already shut down
 
-A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window and rises as that date approaches. This insight type does not include an impact assessment or a recommended fix.
+Datadog checks the shutdown dates that OpenAI and Anthropic announce. A coverage note after the table describes how Datadog counted the calls and names any deprecated model that the table leaves out.
+
+Severity is based on the earliest shutdown date relative to the end of the analysis window: **High** if a model has already shut down or shuts down within 30 days, **Medium** if it shuts down within 90 days, and **Low** otherwise.
+
+This insight type does not include an impact assessment. When it includes a recommended fix, the fix lists the call sites to change for each deprecated model and, when the provider names one, the replacement model.
 
 Migrate each call site to a supported model before the deprecated model's shutdown date, and validate quality, latency, and cost on the replacement model.
 
