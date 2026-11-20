@@ -2,112 +2,118 @@
 aliases:
 - /ko/developers/metrics/metrics_units
 - /ko/developers/metrics/units/
+description: 그래프와 위젯에서 값이 적절한 자릿수로 표시되도록 메트릭 단위를 설정하세요.
 further_reading:
 - link: /dashboards/
-  tag: 설명서
+  tag: 문서
   text: 데이터를 시각화하여 인사이트 확보
 - link: /dashboards/guide/unit-override/
-  tag: 설명서
+  tag: 문서
   text: 단위 재정의로 시각화 맞춤 설정
 title: 메트릭 단위
 ---
-
-## 개요
+## 개요 {#overview}
 
 메트릭 단위는 시계열 그래프, 쿼리 값 위젯 및 상위 목록 등에 표시됩니다.
 
-{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis 대시 매트릭 단위" style="width:100%;">}}
+{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis 대시보드의 메트릭 단위" style="width:100%;">}}
 
-시계열 그래프에서 그래프 위 아무데나 커서를 가리켜 해당 단위를 볼 수 있습니다. 단위는 직접 지정되어야 하지만 단위가 지정되지 않으면 자릿수 표기법(예: 천, 백만, 10억 등에 대해 각각 K, M, G)이 사용됩니다. 단위가 지정된 경우 원본 데이터가 자동으로 해당 자릿수를 사용하여 읽기 가능한 표시 단위로 전환됩니다.
+시계열 그래프에서는 그래프 위로 마우스를 가져가 관련 단위를 확인할 수 있습니다. 단위는 수동으로 지정해야 하지만, 단위가 설정되지 않은 경우 자릿수 표기법(예: 천, 백만, 십억을 각각 나타내는 k, M, G)이 사용됩니다. 단위가 설정되면 원시 데이터는 해당 자릿수에 따라 읽기 쉬운 표시 단위로 자동 변환됩니다.
 
-예를 들어 3,000,000,000인 데이터 포인트가 있는 경우:
+예를 들어 데이터 포인트 값이 3,000,000,000인 경우 다음과 같습니다.
 
-* 이 데이터 포인트에 단위를 지정하지 않으면 "3G"가 표시됩니다.
-* 이 데이터 포인트를 바이트로 지정한 경우 "3GB"가 표시됩니다.
+* 이 데이터 포인트의 단위를 지정하지 않은 경우 '3G'가 표시됩니다.
+* 이 데이터 포인트의 단위를 바이트로 지정한 경우 '3GB'가 표시됩니다.
 
-그래프 우상단의 전체 화면 버튼을 클릭하면 하단에 단위가 표시됩니다.
+기본 제공 통합을 통해 전송되는 메트릭에
+단위가 이미 정의되어 있는지는 해당 통합의 Data Collected
+표에서 확인할 수 있습니다. 메트릭 이름 뒤에 *Shown as \<unit\>*가 표시되면 해당
+통합에서 이미 단위를 설정한 것입니다. 이 표기가 없는 메트릭은 단위가 기본적으로 설정되어 있지 않으므로
+다음 단계에 따라 수동으로 단위를 설정해야 합니다.
 
-{{< img src="metrics/units/metrics_units.png" alt="전체 화면 모드에서 메트릭 그래프의 단위" style="width:100%;">}}
+그래프 오른쪽 상단의 전체 화면 버튼을 클릭하면 하단에 표시된 단위를 확인할 수 있습니다.
 
-메트릭 그래프에서 컨텍스트 메뉴(세로 점 3개)를 클릭하여 **Metrics Info** 옵션을 찾습니다. 그러면 해당 메트릭 설명이 포함된 패널이 열립니다. 이 패널에서 메트릭 이름을 클릭하면 메트릭 요약 페이지에서 해당 메트릭이 열리며 추가 분석 또는 편집할 수 있습니다.
+{{< img src="metrics/units/metrics_units.png" alt="전체 화면 모드의 메트릭 그래프 단위" style="width:100%;">}}
 
-{{< img src="metrics/units/metrics_info.png" alt="확장 컨텍스트 메뉴(세로 점 3개)의 Metrics Info 옵션" style="width:100%;">}}
+메트릭 그래프에서 컨텍스트 메뉴(세로 점 3개)를 클릭하여 {{< ui >}}Metrics Info{{< /ui >}} 옵션을 찾습니다. 그러면 메트릭에 대한 설명이 포함된 패널이 열립니다. 이 패널에서 메트릭 이름을 클릭하면 메트릭 요약 페이지가 열리며, 여기서 메트릭을 추가로 분석하거나 편집할 수 있습니다.
 
-메트릭 단위를 변경하려면 [메트릭 요약][1] 페이지로 이동한 다음 메트릭을 선택하세요. **메타데이터**에서 **편집**을 클릭한 다음 드롭다운 메뉴에서 `bit` 또는 `byte` 등 단위를 선택하세요.
+{{< img src="metrics/units/metrics_info.png" alt="확장된 컨텍스트 메뉴(세로 점 3개)의 Metrics Info 옵션" style="width:100%;">}}
 
-## 단위 목록
+메트릭 단위를 변경하려면 [메트릭 요약][1] 페이지로 이동하여 메트릭을 선택합니다. {{< ui >}}Edit{{< /ui >}} 아래의 {{< ui >}}Metadata{{< /ui >}}를 클릭하고 드롭다운 메뉴에서 `bit` 또는 `byte`와 같은 단위를 선택합니다.
+
+## 단위 목록 {#unit-list}
 
 다음 단위는 Datadog에 제출된 메트릭과 연결되어 있을 수 있습니다.
 
 | 유형        | 단위                                                                                                                                                                                                                                                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 바이트       | bit / byte (b) / kibibyte(KiB) / mebibyte (MiB) / gibibyte (GB) / tebibyte (TiB) / pebibyte (PiB) / exbibyte (EiB)                                                                                                                                                                                                         |
-| 시간        | nanosecond (ns) / microsecond (μs) / millisecond (ms) / second (s) / minute (min) / hour (hr) / day / week (wk)                                                                                                                                                                                                            |
-| 백분율  | percent_nano (n%) / percent (%) / apdex / fraction                                                                                                                                                                                                                                                                         |
-| 네트워크     | connection (conn) / request (req) / packet (pkt) / segment (seg) / response (rsp) / message (msg) / payload / timeout / datagram / route / session / hop                                                                                                                                                                   |
-| 시스템      | process (proc) / thread / host / node / fault / service (svc) / instance / cpu                                                                                                                                                                                                                                             |
-| 디스크        | file / inode / sector / block (blk)                                                                                                                                                                                                                                                                                        |
-| 일반     | buffer / error (err) / read (rd) / write (wr) / occurrence / event / time / unit / operation (op) / item / task / worker / resource (res) / garbage collection (gc) / email / sample (smpl) / stage / monitor / location / check / attempt / device (dev) / update (up) / method (mthd) / job / container / execution / throttle / invocation / user / success / build / prediction / exception |
-| DB          | table / index (idx) / lock / transaction (tx) / query / row / key / command (cmd) / offset / record / object / cursor / assertion (assert) / scan / document / shard / flush / merge / refresh / fetch / column (col) / commit / wait / ticket / question                                                                  |
-| 캐시       | hit / miss / eviction / get / set                                                                                                                                                                                                                                                                                          |
-| 화폐       | dollar ($) / cent (¢) / microdollar (μ$) / euro (€) / pound (£) / pence (p) / yen (¥)                                                                                                                                                                                                                                      |
-| 메모리      | page (pg) / split                                                                                                                                                                                                                                                                                                          |
-| 주파수   | hertz (Hz) / kilohertz (kHz) / megahertz (MHz) / gigahertz (GHz)                                                                                                                                                                                                                                                           |
-| 기록     | entry                                                                                                                                                                                                                                                                                                                      |
-| 온도 | decidegree celsius (d°C) / degree celsius (°C) / degree fahrenheit (°F)                                                                                                                                                                                                                                                    |
-| CPU         | nanocore (ncores) / microcore (μcores) / millicore (mcores) / core / kilocore (Kcores) / megacore (Mcores) / gigacore (Gcores) / teracore (Tcores) / petacore (Pcores) / exacore (Ecores)                                                                                                                                  |
-| 전력       | nanowatt (nW) / microwatt (μW) / milliwatt (mW) / deciwatt (dW) / watt / kilowatt / megawatt / gigawatt / terrawatt                                                                                                                                                                                                        |
-| 전류     | milliampere (mA) / ampere (A)                                                                                                                                                                                                                                                                                              |
-| 퍼텐셜   | millivolt (mV) / volt (V)                                                                                                                                                                                                                                                                                                  |
+| 바이트       | 비트 / 바이트(b) / 키비바이트(KiB) / 메비바이트(MiB) / 기비바이트(GiB) / 테비바이트(TiB) / 페비바이트(PiB) / 엑스비바이트(EiB)                                                                                                                                                                                                         |
+| 시간        | 나노초(ns) / 마이크로초(μs) / 밀리초(ms) / 초(s) / 분(min) / 시간(hr) / 일 / 주(wk)                                                                                                                                                                                                            |
+| 백분율  | 나노퍼센트(n%) / 퍼센트(%) / Apdex / 비율                                                                                                                                                                                                                                                                          |
+| 네트워크 | 연결(conn) / 요청(req) / 패킷(pkt) / 세그먼트(seg) / 응답(rsp) / 메시지(msg) / 페이로드 / 타임아웃 / 데이터그램 / 경로 / 세션 / 홉                                                                                                                                                                   |
+| 시스템      | 프로세스(proc) / 스레드 / 호스트 / 노드 / 결함 / 서비스(svc) / 인스턴스 / cpu                                                                                                                                                                                                                                             |
+| 디스크        | 파일 / 아이노드 / 섹터 / 블록(blk)                                                                                                                                                                                                                                                                                        |
+| 일반     | 버퍼 / 오류(err) / 읽기(rd) / 쓰기(wr) / 발생 횟수 / 이벤트 / 시간 / 단위 / 작업(op) / 항목 / 태스크 / 워커 / 리소스(res) / 가비지 컬렉션(gc) / 이메일 / 샘플(smpl) / 단계 / 모니터 / 위치 / 검사 / 시도 / 장치(dev) / 업데이트(up) / 메서드(mthd) / 작업 / 컨테이너 / 실행 / 스로틀링 / 호출 / 사용자 / 성공 / 빌드 / 예측 / 예외 |
+| DB          | 표 / 인덱스(idx) / 잠금 / 트랜잭션(tx) / 쿼리 / 행 / 키 / 명령(cmd) / 오프셋 / 레코드 / 오브젝트 / 커서 / 어설션(assert) / 스캔 / 문서 / 샤드 / 플러시 / 병합 / 새로 고침 / 가져오기 / 열(col) / 커밋 / 대기 / 티켓 / 질문                                                                  |
+| 캐시       | 적중 / 미스 / 제거 / 가져오기 / 설정                                                                                                                                                                                                                                                                                          |
+| 통화       | 달러($) / 센트(¢) / 마이크로달러(μ$) / 유로(€) / 파운드(£) / 펜스(p) / 엔(¥)                                                                                                                                                                                                                                      |
+| 메모리      | 페이지(pg) / 분할                                                                                                                                                                                                                                                                                                          |
+| 주파수   | 헤르츠(Hz) / 킬로헤르츠(kHz) / 메가헤르츠(MHz) / 기가헤르츠(GHz)                                                                                                                                                                                                                                                           |
+| 로깅     | 항목                                                                                                                                                                                                                                                                                                                      |
+| 온도 | 데시섭씨(d°C) / 섭씨(°C) / 화씨(°F)                                                                                                                                                                                                                                                    |
+| CPU         | 나노코어(ncores) / 마이크로코어(μcores) / 밀리코어(mcores) / 코어 / 킬로코어(Kcores) / 메가코어(Mcores) / 기가코어(Gcores) / 테라코어(Tcores) / 페타코어(Pcores) / 엑사코어(Ecores)                                                                                                                                  |
+| 전력       | 나노와트(nW) / 마이크로와트(μW) / 밀리와트(mW) / 데시와트(dW) / 와트 / 킬로와트 / 메가와트 / 기가와트 / 테라와트                                                                                                                                                                                                        |
+| 전류     | 밀리암페어(mA) / 암페어(A)                                                                                                                                                                                                                                                                                              |
+| 전위   | 밀리볼트(mV) / 볼트(V)                                                                                                                                                                                                                                                                                                  |
 | APM         | 스팬                                                                                                                                                                                                                                                                                                                       |
-| 신서틱(Synthetic)  | run / step                                                                                                                                                                                                                                                                                                                 |
+| SYNTHETICS  | 실행 / 단계                                                                                                                                                                                                                                                                                                                 |
 
-## 숫자 형식
+## 숫자 형식 {#number-formatting}
 
-### 단위 없는 숫자 형식
+### 단위 없는 숫자 형식 {#unitless-formatting}
 
-단위 없는 메트릭의 경우 Datadog에서는 [SI 접두어][2] `K`, `M`, `G` 및 `T`을(를) 사용합니다. `T` 이후 숫자는 지수로 표기합니다. 지수 표기법은 매우 작은 숫자에도 사용됩니다. 기본적으로 Datadog는 소수점 두 번째 자리에서 반올림합니다. 지수 표기법의 경우 소수점 0자리를 사용합니다.
+단위 없는 메트릭의 경우 Datadog은 [SI 접두사][2] `k`, `M`, `G` 및 `T`를 사용합니다. `T`를 초과하는 숫자는 지수 표기법으로 변환되며, 매우 작은 숫자에도 지수 표기법이 사용됩니다. 기본적으로 Datadog은 소수점 둘째 자리까지 반올림합니다. 지수 표기법에서는 기본적으로 소수점 이하 자릿수를 표시하지 않습니다.
 
-#### 예시
+#### 예시 {#examples}
 
 | 원시 값              | 형식 값 |
 |------------------------|-----------|
 | 1                      | 1         |
 | 2.7182818284           | 2.72      |
-| 1337                   | 1.34K     |
+| 1337                   | 1.34k     |
 | 31536000               | 31.54M    |
 | 4294967296             | 4.29G     |
 | 18446744073709552000   | 2e19      |
 | 0.001                  | 1e-3      |
 | 2.3283064365386963e-10 | 2e-10     |
-| 잘못됨                | N/A       |
+| 유효하지 않음                | 해당 없음       |
 
-### 단위 처리
+### 단위 처리 {#unit-handling}
 
-그래프 단위는 가독성을 위해 자동으로 서식이 지정됩니다. 단위 표시 방식을 사용자 설정하려면 [단위 재지정으로 시각화 사용자 설정하기][3]를 참조하세요.
+단위는 가독성을 위해 그래프에서 자동으로 형식이 지정됩니다. 단위 레이블 표시 방식을 맞춤 설정하려면 [단위 재정의를 통한 시각화 맞춤 설정][3]을 참조하세요.
 
-#### 예시
+#### 예시 {#examples-1}
 
-| 단위       | 과    | 원시 값            | 형식 값    |
+| 단위       | 계열    | 원시 값            | 형식 값    |
 |------------|-----------|----------------------|--------------|
 | 바이트       | 바이트     | 1                    | 1B          |
 | 키비바이트   | 바이트     | 1234235              | 1.18GiB     |
-| 키비바이트   | 바이트     | 45457878236741230000 | 40374.71EiB |
-| 헤르쯔      | 주파수 | 6345223              | 6.35MHz     |
+| kibibyte   | bytes     | 45457878236741230000 | 40374.71 EiB |
+| 헤르츠      | 주파수 | 6345223              | 6.35MHz     |
 | 센트       | 화폐     | 1337                 | 13.37$      |
 | 나노초 | 시간      | 0                    | 0s           |
-| 초     | 시간      | 0.03212              | 32.12ms      |
+| second     | time      | 0.03212              | 32.12ms      |
 
-### 시간 형식
+### 시간 형식 {#time-formatting}
 
-분과 연도 사이의 시간 단위는 더 쉽게 읽을 수 있도록 더 여러 개의 단위로 나뉘어 집니다. 다음 원칙이 적용됩니다.
+분부터 연도까지의 시간은 가독성을 높이기 위해 여러 단위로 나누어 표시합니다. 다음 규칙이 적용됩니다.
 
 - 짧은 시간은 십진법 형식으로 표시됩니다.
 - 가장 작은 시간 단위는 나노초입니다.
 - 긴 시간은 십진법으로 기간(일수) 형식으로 표시됩니다.
 
 
-#### 예시
+#### 예시 {#examples-2}
 
 | 원시 초 | 형식 값               |
 |-------------|-------------------------|
@@ -118,10 +124,10 @@ title: 메트릭 단위
 | 3671        | 1h 1m                   |
 | 86390       | 1d                      |
 | 96400       | 1d 3h                   |
-| 52596400    | 608.75 days             |
+| 52596400    | 608.75 일             |
 
 
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

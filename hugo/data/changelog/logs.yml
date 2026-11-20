@@ -1,0 +1,24 @@
+entries:
+  - change_type: modified
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40826
+    operations:
+      - ListLogs
+    title: Document requestId in v1 logs search responses
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40851
+    operations:
+      - AggregateLogs
+      - ListLogs
+      - ListLogsGet
+    title: Correct logs search maximum page size to 5000
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AggregateLogs
+      - ListLogs
+      - ListLogsGet
+      - SubmitLog
+    title: Document rate-limit headers on the shared 429 responses

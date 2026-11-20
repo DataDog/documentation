@@ -212,7 +212,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. Vérifiez l'installation {#4-verify-the-installation}
 
-Ouvrez le [Kubernetes Explorer][9] et filtrez par le nom de votre cluster OpenTelemetry. Toutes les sections principales de ressources Kubernetes devraient se remplir, ainsi que **Custom Resources > CRD**. La section **Custom Resources > Resources** n'est pas prise en charge avec cette configuration.
+Ouvrez le [Kubernetes Explorer][9] et filtrez par le nom de votre cluster OpenTelemetry. Toutes les sections principales de ressources Kubernetes devraient se remplir, ainsi que **Custom Resources > CRD**. Pour peupler également **Custom Resources > Resources**, consultez [Collect custom resources][17].
 
 #### 5. Corrélez les logs, les métriques et les traces avec Kubernetes Explorer (facultatif) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
@@ -279,17 +279,16 @@ Pour un exemple complet de collecteur de télémétrie d'application, consultez 
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /fr/account_management/api-app-keys/#api-keys
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[17]: /fr/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{% tab "Pile Kube OpenTelemetry" %}}
 
 Vous pouvez remplir Kubernetes Explorer en utilisant le chart Helm `opentelemetry-kube-stack` au lieu du Datadog Agent.
 
-<div class="alert alert-info">La configuration de référence dans cet onglet utilise l'exportateur Datadog. Pour les nouveaux déploiements, utilisez l'onglet <strong>OpenTelemetry Collector</strong> pour envoyer les données de ressources Kubernetes directement à Datadog via OTLP HTTP.</div>
+Le chart Helm [`opentelemetry-kube-stack`][1] installe l'opérateur OpenTelemetry et gère les collecteurs en tant que `OpenTelemetryCollector`Custom Resources (CR). Datadog maintient une référence [`values-otlp-http.yaml`][2] qui configure deux collecteurs :
 
-Le chart Helm [`opentelemetry-kube-stack`][1] installe l'opérateur OpenTelemetry et gère les collecteurs en tant que `OpenTelemetryCollector`Custom Resources (CR). Datadog maintient une référence [`values.yaml`][2] qui configure deux collecteurs :
-
-- **`cluster`** (Deployment) : récupère les métriques kube-state-metrics, surveille les objets Kubernetes et active `orchestrator_explorer` pour remplir Kubernetes Explorer.
+- **`cluster`** (Déploiement) : Extrait kube-state-metrics et utilise le récepteur `k8s_objects` pour surveiller les objets Kubernetes, qu'il envoie à Datadog via OTLP HTTP pour peupler le Kubernetes Explorer.
 - **`daemon`** (DaemonSet) : collecte les métriques du host et du kubelet, et expose un endpoint OTLP pour les données de télémétrie des applications.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Cette fonctionnalité n'est pas disponible pour {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
@@ -311,7 +310,7 @@ Recommandations :
 
 #### Démarrage rapide (installateur interactif) {#quickstart-interactive-installer}
 
-Le dépôt [`opentelemetry-examples`][6] fournit un installateur interactif qui gère toutes les étapes ci-dessous. Depuis `guides/kubernetes/configuration/opentelemetry-kube-stack/` :
+Le dépôt [`opentelemetry-examples`][6] fournit un installateur interactif qui gère l'installation complète. Depuis `guides/kubernetes/configuration/opentelemetry-kube-stack/` :
 
 ```sh
 ./install
@@ -321,84 +320,22 @@ L'installateur demande votre clé d'API Datadog, votre [site Datadog][7], votre 
 
 #### Installation avec des fichiers de valeurs {#install-with-values-files}
 
-Si vous n'avez pas utilisé l'installateur interactif ci-dessus, suivez les étapes ci-dessous pour effectuer une installation manuelle.
-
-##### 1. Installez cert-manager (si ce n'est pas déjà fait) {#1-install-cert-manager-if-not-already-present}
-
-```sh
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace \
-  --set crds.enabled=true
-```
-
-##### 2. Créez le secret Datadog {#2-create-the-datadog-secret}
-
-Définissez `DD_SITE` sur votre [site Datadog][7] (la valeur par défaut est `datadoghq.com`) :
-
-```sh
-export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="datadoghq.com"  # for example us3.datadoghq.com, datadoghq.eu
-
-kubectl create namespace opentelemetry-operator-system \
-  --dry-run=client -o yaml | kubectl apply -f -
-
-kubectl create secret generic datadog-secret \
-  --namespace opentelemetry-operator-system \
-  --from-literal="api-key=$DD_API_KEY" \
-  --from-literal="dd-site=$DD_SITE" \
-  --dry-run=client -o yaml | kubectl apply -f -
-```
-
-##### 3. Créez une surcouche de déploiement {#3-create-a-deployment-overlay}
-
-La référence `values.yaml` est la base ; les paramètres spécifiques au déploiement (plateforme de cluster, environnement, nom du cluster) se trouvent dans un fichier de surcouche. Depuis `guides/kubernetes/configuration/opentelemetry-kube-stack/`, copiez l'exemple qui correspond à votre plateforme :
-
-```sh
-mkdir -p deployment
-
-# EKS, GKE, or AKS (resource detector auto-populates k8s.cluster.name):
-cp examples/eks-deployment/values.yaml deployment/values.yaml
-cp examples/gcp-deployment/values.yaml deployment/values.yaml
-cp examples/aks-deployment/values.yaml deployment/values.yaml
-
-# Other platforms (set the cluster name manually):
-cp examples/manually-set-k8s-cluster-name/values.yaml deployment/values.yaml
-```
-
-Pour les plateformes autres qu'EKS/GKE/AKS, modifiez `deployment/values.yaml` et remplacez `my_k8s_cluster` et `production` par le nom de votre cluster et votre environnement de déploiement.
-
-##### 4. Déployez les collecteurs de référence {#4-deploy-the-reference-collectors}
-
-Installez ou mettez à niveau le chart avec la base `values.yaml` et votre superposition :
-
-```sh
-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-helm repo update
-
-helm upgrade --install opentelemetry-kube-stack \
-  open-telemetry/opentelemetry-kube-stack \
-  --namespace opentelemetry-operator-system \
-  --values ./values.yaml \
-  --values ./deployment/values.yaml
-```
-
-Les deux collecteurs utilisent par défaut des limites de `500m` CPU et `1Gi` de mémoire, ainsi que des demandes de `200m` CPU et `500Mi` de mémoire. Effectuez une mise à l'échelle pour les grands clusters.
+Pour installer manuellement au lieu d'utiliser l'installateur interactif, suivez les étapes [Installation avec des fichiers de valeurs][10] dans le dépôt `opentelemetry-examples`.
 
 #### Vérifiez l'installation {#verify-the-installation}
 
-Ouvrez le [Kubernetes Explorer][8] et filtrez par le nom de votre cluster. Toutes les sections principales de ressources Kubernetes devraient se remplir, ainsi que **Custom Resources > CRD**. La section **Custom Resources > Resources** n'est pas prise en charge avec cette configuration.
+Ouvrez le [Kubernetes Explorer][8] et filtrez par le nom de votre cluster. Toutes les sections principales de ressources Kubernetes devraient se remplir, ainsi que **Custom Resources > CRD**. Pour peupler également **Custom Resources > Resources**, consultez [Collect custom resources][9].
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
-[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values-otlp-http.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.1
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 [7]: /fr/getting_started/site/
 [8]: https://app.datadoghq.com/orchestration/overview
+[9]: /fr/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
+[10]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#install-with-values-files
 
 {{% /tab %}}
 {{< /tabs >}}

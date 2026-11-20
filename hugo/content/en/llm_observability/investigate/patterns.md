@@ -106,7 +106,7 @@ The topic table provides a hierarchical view of all discovered topics. Each topi
 - {{< ui >}}Tokens{{< /ui >}} — token usage for interactions in this topic
 - {{< ui >}}Errors{{< /ui >}} — error count and rate
 - {{< ui >}}Latency{{< /ui >}} — median latency for interactions in this topic
-- {{< ui >}}Online Evals{{< /ui >}} — evaluation results if online evaluations are configured
+- {{< ui >}}Evaluations{{< /ui >}} — evaluation results if online evaluators are configured
  
 
 Expand parent topics to see their sub-topics and examine specific areas of your application's traffic.
@@ -122,7 +122,7 @@ The detail view includes:
 - {{< ui >}}Pattern Summary{{< /ui >}}: Highlights traffic trends, online evaluation health, operational outliers, dataset coverage gaps, and recommended next steps.
 - {{< ui >}}Scorecard{{< /ui >}}: Summarizes traffic volume and share, cost, error rate, median latency, and dataset coverage.
 - {{< ui >}}Dataset Coverage Detail{{< /ui >}}: Shows coverage status and attribution by dataset. Review recommended cases to close coverage gaps, or open the managed dataset when automatic dataset curation is enabled.
-- {{< ui >}}Evaluations{{< /ui >}}: Summarizes each online evaluation with its key result and a chart over time. Open matching spans to investigate specific results.
+- {{< ui >}}Evaluations{{< /ui >}}: Summarizes each online evaluator with its key result and a chart over time. Open matching spans to investigate specific results.
 - {{< ui >}}Interactions{{< /ui >}}: Lists the inputs and outputs assigned to the topic, along with their sub-topic, timestamp, recommendation status, and evaluation results. Filter with a full-text or facet query, configure evaluation columns, or click a row to open its trace details.
 
 {{< img src="llm_observability/patterns_topic_details_scorecard.png" alt="The topic detail view showing the scorecard, dataset coverage details, and interactions table." style="width:100%;" >}}

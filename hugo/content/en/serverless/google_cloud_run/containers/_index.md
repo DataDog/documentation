@@ -29,16 +29,16 @@ further_reading:
 
 Use agentic onboarding to set up monitoring for your Cloud Run containers with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Pup CLI" %}}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.
@@ -46,7 +46,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {{% /tab %}}
 {{% tab "MCP server" %}}
 
-Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run containers with AI assistance. After you connect, try a prompt like:
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run containers with AI assistance. After you connect, try a prompt like:
 
 ```
 Help me monitor my GCP Cloud Run services with Datadog using Terraform.
@@ -79,4 +79,4 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 
 [1]: /serverless/google_cloud_run/containers/in_container
 [2]: /serverless/google_cloud_run/containers/sidecar
-[3]: /agentic_onboarding/setup
+[3]: /agentic_onboarding/

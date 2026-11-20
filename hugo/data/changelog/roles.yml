@@ -1,0 +1,33 @@
+entries:
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40980
+    operations:
+      - ListRoleTemplates
+    title: 'Document role template permission relationship in List Role Templates
+      API '
+  - change_type: modified
+    date: '2026-10-23'
+    link: https://github.com/DataDog/documentation/pull/40979
+    operations:
+      - UpdateRole
+    title: Document team count in Update a Role API responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AddPermissionToRole
+      - AddUserToRole
+      - CloneRole
+      - CreateRole
+      - DeleteRole
+      - GetRole
+      - ListPermissions
+      - ListRolePermissions
+      - ListRoleTemplates
+      - ListRoleUsers
+      - ListRoles
+      - RemovePermissionFromRole
+      - RemoveUserFromRole
+      - UpdateRole
+    title: Document rate-limit headers on the shared 429 responses

@@ -1,4 +1,6 @@
 ---
+aliases:
+- /es/integrations/guide/servicenow-service-graph-connector-setup/
 cascade:
   algolia:
     category: Guide
@@ -43,6 +45,7 @@ title: Guías de integración
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Solución de problemas de la integración de AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}Configurar filtros de nombres de métricas de AWS con la API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitorear los detalles de facturación de AWS{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-service-quotas" tag=" AWS" >}}Haga un seguimiento de las cuotas de servicio de AWS{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog no tiene autorización para realizar sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams con Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Uso de Amazon CloudFormation{{< /nextlink >}}
@@ -85,7 +88,6 @@ title: Guías de integración
 {{< header-list header="Guías de ServiceNow" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}Configure ServiceNow ITOM e ITSM{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}Configurar el enriquecimiento de CMDB de ServiceNow{{< /nextlink >}}
-   {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}Configurar el conector Service Graph de ServiceNow{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="Guías de bases de datos" >}}

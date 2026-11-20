@@ -42,6 +42,9 @@ further_reading:
 - link: /integrations/github
   tag: ドキュメント
   text: GitHub インテグレーションについて
+- link: /integrations/gitlab-source-code/
+  tag: ドキュメント
+  text: GitLab インテグレーションについて
 - link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
   tag: ブログ
   text: Backstage の YAML ファイルを Datadog にインポートする
@@ -53,9 +56,11 @@ further_reading:
   text: Datadog Catalog でカスタムエンティティを使用してアーキテクチャをモデル化する
 title: エンティティモデル
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Catalog は、エンティティに関する関連メタデータを保存および表示するために定義スキーマを使用します。スキーマには、有効な値のみが受け入れられることを保証するための組み込みの検証ルールがあります。選択したサービスについて、Catalog のサイドパネルの [**Definition**] (定義) タブで警告を確認できます。
+
+`links` フィールドを使用して、GitHub または GitLab リポジトリへのソースコードリンクを追加します。
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="Catalog のコンポーネントが互いに、そしてクラウド環境とどのように接続しているかを示すフローチャート " style="width:100%;" >}}
 
@@ -312,7 +317,7 @@ inheritFrom:<entity_kind>:<name>
 - YAML ファイルに `inheritFrom:<entity_kind>:<name>` の指定が存在しない。
 
 ### v3.0 への移行 {#migrating-to-v30}
-v3.0 は、これまでのバージョンと同様の方法で、Github、API、Terraform、Backstage、ServiceNow、UI などを利用してメタデータを作成できます。ただし、v3.0 には新しい [API エンドポイント][5] と新しい [Terraform リソース][6] があります。
+v3.0 は、これまでのバージョンと同様の方法で、GitHub、GitLab、API、Terraform、Backstage、ServiceNow、UI などを利用してメタデータを作成できます。ただし、v3.0 には新しい [API エンドポイント][5] と新しい [Terraform リソース][6] があります。
 
 既存のサービス YAML ファイルを v1、v2、v2.1、または v2.2 から v3 に移行する方法については、[サービス定義を v3 に移行する][7] を参照してください。
 

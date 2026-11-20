@@ -13,10 +13,10 @@ further_reading:
   text: Configurer des sources de données pour DORA Metrics
 - link: /metrics/
   tag: Documentation
-  text: Découvrez les métriques
+  text: En savoir plus sur les métriques
 - link: /getting_started/tagging/
   tag: Documentation
-  text: Commencez avec les balises
+  text: Débuter avec les tags
 title: Données DORA Metrics collectées
 ---
 ## Présentation {#overview}
@@ -25,15 +25,15 @@ DORA Metrics génère des événements qui ont des champs et des tags associés.
 
 | Type d'événement | Description |
 | :--- | :--- |
-|Déploiement | Un déploiement de code unique identifié par les balises env, service et version.<br><br>Les déploiements peuvent être [marqués comme ayant échoué][17] et sont utilisés pour calculer la fréquence de déploiement, le taux d'échec de changement et le temps de récupération après un déploiement ayant échoué.
-|Pull Request | Une pull request incluse dans un déploiement. Contient des métadonnées telles que l'auteur, les relecteurs, les étiquettes et le temps passé à rédiger, relire et fusionner. Les commits sont imbriqués dans leur pull request associée.<br><br>Les pull requests sont utilisées pour analyser les flux de travail de revue de code et le temps de cycle au niveau des PR.
+|Déploiement | Un déploiement de code identifié de manière unique par des tags d'environnement, de service et de version.<br><br>Les déploiements peuvent être [marqués comme ayant échoué][17] et sont utilisés pour calculer la fréquence de déploiement, le taux d'échec des changements et le temps de récupération après un déploiement ayant échoué.
+|Pull Request | Une pull request incluse dans un déploiement. Contient des métadonnées telles que l'auteur, les relecteurs, les libellés et le temps passé à rédiger, relire et fusionner. Les commits sont imbriqués dans leur pull request associée.<br><br>Les pull requests sont utilisées pour analyser les flux de travail de revue de code et le temps de cycle au niveau des PR.
 |Commit | Un événement généré pour chaque commit individuel inclus dans un déploiement. Contient des métadonnées et est automatiquement lié au déploiement correspondant. Les commits sont imbriqués dans leur pull request associée.<br><br>Les commits sont utilisés pour calculer le délai de changement.
 
 **Remarque** : Les événements DORA Metrics ont une période de rétention de 2 ans.
 
-### Balises par défaut {#default-tags}
+### Tags par défaut {#default-tags}
 
-Tous les événements contiennent les tags suivants si ils sont disponibles :
+Tous les événements contiennent les tags suivants, s'ils sont disponibles :
 
 - `service`
 - `team`
@@ -42,9 +42,9 @@ Tous les événements contiennent les tags suivants si ils sont disponibles :
 - `source`
 - `repository_id`
 
-Pour plus d'informations sur l'utilisation des balises, consultez [Commencez avec les balises][6].
+Pour plus d'informations sur l'utilisation des tags, consultez [Débuter avec les tags][6].
 
-### Balises personnalisées {#custom-tags}
+### Tags personnalisés {#custom-tags}
 
 Les événements de déploiement peuvent être enrichis avec des tags personnalisées pour filtrer les métriques DORA Metrics. Il existe deux sources potentielles pour ces tags :
 
@@ -60,11 +60,11 @@ Pour plus d'informations sur l'utilisation des tags personnalisés dans DORA Met
 | Champ                      | Description                |
 |----------------------------|----------------------------|
 | `Duration` | Durée du déploiement. |
-| `Avg Change Lead Time`      | La durée moyenne du [délai de changement](#commit-fields) de tous les commits.  |
-| `Avg Time to PR Ready`          | La durée moyenne du [temps avant que la PR soit prête](#commit-fields) de tous les commits. |
-| `Avg Review Time`       | La durée moyenne du [temps de revue](#commit-fields) de tous les commits. |
-| `Avg Merge Time`       | La durée moyenne du [temps de fusion](#commit-fields) de tous les commits. |
-| `Avg Time to Deploy`       | La durée moyenne du [temps jusqu'au déploiement](#commit-fields) de tous les commits. |
+| `Avg Change Lead Time`      | Le [délai de changement](#commit-fields) moyen de tous les commits.  |
+| `Avg Time to PR Ready`          | Le [temps moyen nécessaire pour que la PR soit prête](#commit-fields) pour tous les commits. |
+| `Avg Review Time`       | Le [temps de revue](#commit-fields) moyen de tous les commits. |
+| `Avg Merge Time`       | Le [temps de fusion](#commit-fields) moyen de tous les commits. |
+| `Avg Time to Deploy`       | Le [temps jusqu'au déploiement](#commit-fields) moyen pour tous les commits. |
 | `Number of Commits`        | Nombre total de commits inclus dans un déploiement. |
 | `Deployment Type` | Type de déploiement (`standard`, `rollback` ou `rollforward`). |
 | `Change Failure` | Booléen indiquant si un déploiement est marqué comme un échec de changement. |
@@ -75,30 +75,30 @@ Pour plus d'informations sur l'utilisation des tags personnalisés dans DORA Met
 
 | Champ  | Description                |
 |------------|----------------------------|
-| `PR Cycle Time`       | Durée totale du premier commit à la fusion. |
-| `Time to PR Ready`       | Durée du premier commit jusqu'à ce que la PR soit marquée comme prête pour revue. |
-| `Review Time`       | Durée entre le moment où la PR est marquée comme prête pour revue et son approbation. |
+| `PR Cycle Time`       | Durée totale du premier commit jusqu'à la fusion. |
+| `Time to PR Ready`       | Durée entre le premier commit ou la création de la pull request, selon ce qui survient en premier, et le moment où la pull request est marquée comme prête à être examinée. |
+| `Review Time`       | Durée entre le moment où la PR est marquée comme prête pour examen et son approbation. |
 | `Merge Time`       | Durée entre l'approbation de la PR et sa fusion. |
 | `Time to Deploy`       | Durée entre la fusion et le début du déploiement. |
-| `Deploy Time`       | Durée entre le début du déploiement et la fin du déploiement. |
+| `Deploy Time`       | Durée entre le début et la fin du déploiement. |
 | `Number of Commits`       | Nombre de commits inclus dans la pull request. |
 | `Number of Reviewers`       | Nombre de relecteurs ayant examiné la pull request. |
-| `Number of Files Changed` | Nombre de fichiers modifiés dans la pull request. Uniquement disponible pour GitHub. |
-| `Number of Lines Added` | Nombre de lignes ajoutées dans la pull request. Uniquement disponible pour GitHub. |
-| `Number of Lines Deleted` | Nombre de lignes supprimées dans la pull request. Uniquement disponible pour GitHub. |
-| `Total Number of Lines Changed` | Nombre total de lignes ajoutées et supprimées dans la pull request. Uniquement disponible pour GitHub. |
-| `Time to First Human Review` | Durée jusqu'à ce que la pull request reçoive sa première revue par un humain. Uniquement disponible pour GitHub. |
-| `Number of Comments` | Nombre de commentaires sur la pull request. Uniquement disponible pour GitHub. |
-| `Number of Human Comments` | Nombre de commentaires humains sur la pull request. Uniquement disponible pour GitHub. |
+| `Number of Files Changed` | Nombre de fichiers modifiés dans la pull request. Disponible uniquement pour GitHub. |
+| `Number of Lines Added` | Nombre de lignes ajoutées dans la pull request. Disponible uniquement pour GitHub. |
+| `Number of Lines Deleted` | Nombre de lignes supprimées dans la pull request. Disponible uniquement pour GitHub. |
+| `Total Number of Lines Changed` | Nombre total de lignes ajoutées et supprimées dans la pull request. Disponible uniquement pour GitHub. |
+| `Time to First Human Review` | Durée jusqu'à ce que la pull request reçoive son premier examen par un humain. Disponible uniquement pour GitHub. |
+| `Number of Comments` | Nombre de commentaires sur la pull request. Disponible uniquement pour GitHub. |
+| `Number of Human Comments` | Nombre de commentaires rédigés par des personnes sur la pull request. Disponible uniquement pour GitHub. |
 | `Fully Automated` | Booléen indiquant si la pull request a été créée et fusionnée sans intervention humaine. |
 | `Creator Bot Type` | Type de bot ayant créé la pull request. |
 | `Creator Bot Name` | Nom du bot ayant créé la pull request. |
 | `Time CI Failing` | Durée totale pendant laquelle la CI est restée dans un état d'échec à travers les commits de la pull request. Nécessite CI Visibility. |
 | `Test Session Duration` | Durée totale des sessions de test pour le commit de tête ou de fusion de la pull request. Nécessite Test Optimization. |
-| `Test Session Duration After Approval` | Durée totale des sessions de test pour le commit de tête ou de fusion de la pull request après l'approbation de celle-ci. Nécessite Test Optimization. |
-| `Time to Pass` | Durée entre la première tentative CI et la première exécution réussie du pipeline pour le commit de tête ou de fusion de la pull request. Nécessite CI Visibility. |
-| `Time to Pass After Approval` | Durée entre la première tentative CI après l'approbation de la pull request et la première exécution réussie du pipeline pour le commit de tête ou de fusion de la pull request. Nécessite CI Visibility. |
-| `Patch Coverage` | Pourcentage de lignes nouvelles ou modifiées dans le commit de tête ou de fusion de la pull request qui sont couvertes par des tests. Nécessite Code Coverage. |
+| `Test Session Duration After Approval` | Durée totale des sessions de test pour le commit de tête ou de fusion de la pull request après son approbation. Nécessite Test Optimization. |
+| `Time to Pass` | Durée entre la première tentative de CI et la première exécution réussie du pipeline pour le commit de tête ou de fusion de la pull request. Nécessite CI Visibility. |
+| `Time to Pass After Approval` | Durée entre la première tentative de CI après l'approbation de la pull request et la première exécution réussie du pipeline pour le commit de tête ou de fusion de la pull request. Nécessite CI Visibility. |
+| `Patch Coverage` | Pourcentage de lignes nouvelles ou modifiées dans le commit de tête ou le commit de fusion de la pull request qui sont couvertes par des tests. Nécessite Code Coverage. |
 
 
 ### Champs de commit {#commit-fields}
@@ -108,11 +108,11 @@ Pour plus d'informations sur l'utilisation des tags personnalisés dans DORA Met
 | `Change Lead Time`       | Durée nécessaire pour qu'un commit soit mis en production. |
 | `Time to PR Ready`       | Durée entre la création du commit et le moment où la PR est marquée comme prête pour examen. |
 | `Review Time`       | Durée entre le moment où la PR est marquée comme prête pour examen et son approbation. |
-| `Merge Time`       | Durée entre l'approbation de la PR et sa fusion. |
+| `Merge Time`       | Durée entre l’approbation de la PR et sa fusion. |
 | `Time to Deploy`       | Durée entre la fusion et le début du déploiement. |
 | `Deploy Time`       | Durée entre le début du déploiement et la fin du déploiement. |
 | `Has Failed Jobs` | Booléen indiquant si une exécution de job CI a échoué pour le commit, y compris les échecs qui ont réussi après une nouvelle tentative. Nécessite CI Visibility. |
-| `Has Failed Tests` | Booléen indiquant si une exécution de test a échoué en raison d'un test non instable dans le commit. Nécessite Test Optimization. |
+| `Has Failed Tests` | Booléen indiquant si une exécution de test a échoué à cause d’un test stable dans le commit. Nécessite Test Optimization. |
 | `Has New Flaky Tests` | Booléen indiquant si de nouveaux tests instables ont été détectés dans les sessions de test du commit. Nécessite Test Optimization. |
 
 ## Pour aller plus loin {#further-reading}
@@ -124,7 +124,7 @@ Pour plus d'informations sur l'utilisation des tags personnalisés dans DORA Met
 [3]: /fr/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /fr/getting_started/tagging/
-[7]: /fr/api/latest/dora-metrics/
+[7]: /fr/api/latest/delivery-performance/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/fr/metrics/
 [10]: /fr/delivery_performance/dora_metrics/setup/

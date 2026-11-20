@@ -1,132 +1,198 @@
 ---
 aliases:
 - /ja/monitors/create/types/error_tracking/
-description: エラー追跡モニタータイプについて説明します。
+description: Error Tracking モニタータイプについて学習します。
 further_reading:
 - link: /error_tracking/issue_states/
   tag: ドキュメント
-  text: Learn about Error Tracking states and how they impact monitors
+  text: Error Tracking の状態とそれがモニターに与える影響について学習します
 - link: /error_tracking/
   tag: ドキュメント
-  text: Learn about Error Tracking for Web, Mobile, and Backend
+  text: web、モバイル、バックエンドの Error Tracking について学習します
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
-  text: モニターステータスを確認
-title: エラー追跡モニター
+  text: モニターステータスのチェック
+title: Error Tracking モニター
 ---
+## 概要 {#overview}
 
-## 概要
+Datadog [Error Tracking][1] は、web、モバイル、バックエンドのアプリケーション全体で、自動的にすべてのエラーを問題ごとにグループ化します。問題にグループ化されたエラーを表示することで、最も影響の大きい問題を優先順位付けして特定できるため、サービスのダウンタイムを最小限に抑え、ユーザーの不満を軽減する上で役立ちます。
 
-Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
+組織で Error Tracking を有効にすると、Error Tracking モニターを作成して、web やモバイルのアプリケーション、バックエンドサービス、ログで発生した問題が新規の場合、影響が大きい場合、または再び悪化し始めた場合にアラートを受け取ることができます。
 
-With [Error Tracking][1] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
+## Error Tracking モニターを作成する{#create-an-error-tracking-monitor}
 
-## エラー追跡モニターを作成する
+Datadog で Error Tracking モニターを作成するには、[[{{< ui >}}Monitors{{< /ui >}}] (モニター) > [{{< ui >}}New Monitor{{< /ui >}}] (新規モニター) > [{{< ui >}}Error Tracking{{< /ui >}}]][3] に移動します。
 
-Datadog でエラー追跡モニターを作成するには、[**Monitors** > **New Monitor** > **Error Tracking**][3] に移動します。
+<div class="alert alert-info">アカウントごとに Error Tracking モニター 1000 個というデフォルトの上限があります。アカウントのこの上限を引き上げるには、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
-<div class="alert alert-info"><strong>注</strong>: アカウント当たり上限 1000 件のエラー追跡モニターがデフォルトで設定されています。この制限を増やすには、<a href="/help/">サポートまでお問い合わせ</a>ください。</div>
+### アラート条件を選択する {#select-the-alerting-condition}
 
-### アラート条件を選択する
+Error Tracking モニターに設定できるアラート条件には、次の 2 種類があります。
 
-There are two types of alerting conditions you can configure your Error Tracking monitor with:
-
-| Alerting&nbsp;condition     | 説明    | 
+| アラート条件     | 説明    |
 | ---  | ----------- |
-|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
-|New Issue| Alert when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
+|New Issue (新しい問題)| 問題が初めて発生したとき、または回帰が発生したときにアラートを送信します。たとえば、新しいエラーによって 2 人を超えるユーザーが影響を受けた場合に、サービスに対してアラートを送信します。|
+|High Impact (大きい影響)| 影響を受けるエンドユーザー数が多い問題についてアラートを送信します。たとえば、このエラーによって 500 人を超えるユーザーが影響を受けた場合に、サービスに対してアラートを送信します。|
 
-### 検索クエリを定義する
+### アラート条件を定義する {#define-alert-conditions}
 
 {{< tabs >}}
-{{% tab "Count" %}}
 
-1. ドロップダウンメニューから **RUM Events**、**Traces**、または **Logs** を選択し、監視するメトリクス (カウント、ファセット、またはメジャー) を選択します。
-   - エラーの発生については、課題 ID に基づいた全体のカウントで監視します。
-   - 影響を受けたユーザーについては、課題 ID に基づくユーザーメールの一意のカウント、またはメジャーで監視します。
-   - 影響を受けたセッションについては、課題 ID に基づくセッション ID の一意のカウントで監視します。
-   - メジャーで監視します。メジャーを選択すると、モニターは (メトリクスモニターと同様に) RUM ファセットの数値に対してアラートを発出します。集計タイプ (`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+{{% tab "New Issue" %}}
+#### アラート対象の問題 {#issues-to-alert-on}
 
-   最も頻繁に使用されるファセットにアクセスするための 3 つのクイックフィルターオプションがあります。
+New Issue モニターは、[{{< ui >}}For Review{{< /ui >}}] (レビュー待ち) 状態にあり、アラート条件を満たす問題についてアラートを送信します。回帰は自動的に [For Review] 状態に移行するため、デフォルトで New Issue モニターの監視対象となります。状態の詳細については、[問題の状態][1]を参照してください。
 
-   - **Error Occurrences**: エラーカウントが `above` または `above or equal to` のときにトリガーします。
-   - **Impacted Users**: 影響を受けたユーザーのメール数が `above` または `above or equal to` のときにトリガーします。
-   - **Impacted Sessions**: 影響を受けたセッション ID の数が `above` または `above or equal to` のときにトリガーします。
+[{{< ui >}}All{{< /ui >}}] (すべて)、[{{< ui >}}Browser{{< /ui >}}] (ブラウザ)、[{{< ui >}}Mobile{{< /ui >}}] (モバイル)、または [{{< ui >}}Backend{{< /ui >}}] (バックエンド) の問題を選択し、問題のエラー発生について、[Error Tracking Explorer の検索][2]と同じロジックで検索クエリを作成します。
 
-   ドロップダウンメニューから **Traces** または **Logs** を選択した場合、**Error Occurrences** オプションのみが利用可能です。
+<div class="alert alert-info">New Issue モニターでは、モニターの作成後または最後の編集後に作成または回帰した問題のみが対象となります。これらのモニターには 24 時間のルックバック期間があります。</div>
 
-2. [RUM エクスプローラー検索][1]、[APM エクスプローラー検索][3]または[ログエクスプローラー検索][4]と同じロジックで、課題のエラー発生状況を検索するクエリを作成します。
-3. オプションで、アラートのグループ化ストラテジーを構成します。詳細については、[モニターの構成][2]を参照してください。
+#### アラートしきい値を定義する {#define-alert-threshold}
 
-<div class="alert alert-info"><strong>注</strong>: APM のカウントモニターは、インテリジェント保持フィルターではなく、<a href="/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter/">カスタム保持フィルター</a>により保持されているスパンに基づいてのみ作成できます。</div>
+次のいずれかのオプションを選択します。
 
-### アラートの条件を設定する
+{{% collapse-content title="すべての新しい問題についてアラートを送信" level="p" %}}
 
-エラーカウントが `above` または `above or equal to` のときにトリガーします。メトリクスがしきい値を超えるたびにアラートがトリガーされます。
 
-[1]: /ja/real_user_monitoring/explorer/search/
-[2]: /ja/monitors/configuration/#alert-grouping/
-[3]: /ja/tracing/trace_explorer/?tab=listview#filtering
-[4]: /ja/logs/explorer/search/
+新しい問題が検出されるとモニターがトリガーされます (過去 1 日間のエラー数が 0 より大きい場合)。
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="アラートメトリクスを定義" level="p" %}}
+
+1. 監視するメトリクスを選択します。最も頻繁に使用されるファセットにアクセスするための 3 つの推奨フィルターオプションがあります。
+
+    - {{< ui >}}Error Occurrences{{< /ui >}} (エラー発生数): エラー数が `above` の場合にトリガーされます。
+    - {{< ui >}}Impacted Users{{< /ui >}} (影響を受けたユーザー): 影響を受けたユーザーのメール数が `above` の場合にトリガーされます。
+    - {{< ui >}}Impacted Sessions{{< /ui >}} (影響を受けたセッション): 影響を受けたセッション ID 数が `above` の場合にトリガーされます。
+
+    [{{< ui >}}All{{< /ui >}}] または [{{< ui >}}Backend{{< /ui >}}] の問題を選択した場合は、[{{< ui >}}Error Occurrences{{< /ui >}}] オプションのみ利用可能です。
+
+    監視に使用するカスタムメジャーを指定することもできます。カスタムメジャーを選択した場合、ファセットの一意の値の数が `above` になると、モニターがアラートを通知します。
+
+2. クエリに一致する問題ごとに通知を受け取り、必要に応じて他の属性で結果をグループ化できます (例: クエリに一致する各問題について環境ごとに通知を受け取るなど)。
+
+3. 各評価時に、過去 1 日間 (デフォルト) または任意の期間のデータをクエリします。
+
+4. モニターをトリガーするしきい値を選択します (デフォルトは 0 で、初回発生時にトリガーされます)。
+
+{{% /collapse-content %}}
+
+
+#### プログラムによる管理 {#programmatic-management}
+
+Terraform または公開 API を使用するカスタムスクリプトでモニターを管理している場合は、モニタークエリにいくつかの句を指定する必要があります。
+* [{{< ui >}}All{{< /ui >}}]、[{{< ui >}}Browser{{< /ui >}}]、[{{< ui >}}Mobile{{< /ui >}}]、および [{{< ui >}}Backend{{< /ui >}}] のいずれかの問題を対象ソースとして追加します。フィルターの直後に `.source()` 句を追加し、`"all"`、`"browser"`、`"mobile"`、または `"backend"` を指定します。**注**: 一度に 1 つのみ使用できます。
+* New Issue モニターには必ず `.new()` 句を使用してください。
+
+例:
+
+```yaml
+error-tracking("{filter}").source("backend").new().rollup("count").by("issue.id").last("1d") > 0
+```
+
+[1]: /ja/error_tracking/issue_states
+[2]: /ja/error_tracking/explorer
+[3]: /ja/monitors/configuration/#alert-grouping/
 {{% /tab %}}
 
-{{% tab "新しい課題" %}}
+{{% tab "High Impact" %}}
+#### アラート対象の問題 {#issues-to-alert-on-1}
 
-1. 課題が最初に発生した後、モニターが新しい課題とみなすまでの期間を選択または入力します。選択されたしきい値は、指定された時間枠で評価されます。特定の期間を過ぎると、モニターはアラートを停止し、緑色に変わります。
+High Impact モニターは、[{{< ui >}}For Review{{< /ui >}}] または [{{< ui >}}Reviewed{{< /ui >}}] (レビュー済み) であり、アラート条件を満たす問題についてアラートを送信します。[問題の状態][1]についての詳細をご覧ください。
 
-   上部の問題リストには、個別の時間枠セレクターがあります。この時間枠で新しいと思われる問題を見つけるために使用できます。
-2. **RUM Events**、**Traces**、または **Logs** を選択し、カウントまたは[メジャー][1]で監視することを選択します。
-   - 特定の課題 ID の発生カウントを監視します。
-   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. [RUM エクスプローラー検索][2]、[APM エクスプローラー検索][3]または[ログエクスプローラー検索][5]と同じロジックで、課題のエラー発生状況を検索するクエリを作成します。
-4. オプションで、アラートのグループ化ストラテジーを構成します。詳細については、[モニターの構成][4]を参照してください。
+[{{< ui >}}All{{< /ui >}}]、[{{< ui >}}Browser{{< /ui >}}]、[{{< ui >}}Mobile{{< /ui >}}]、または [{{< ui >}}Backend{{< /ui >}}] の問題を選択し、問題のエラー発生について、[Error Tracking Explorer の検索][2]と同じロジックで検索クエリを作成します。
 
-### アラートの条件を設定する
+#### アラートしきい値を定義する {#define-alert-threshold-1}
+1. 監視するメトリクスを選択します。最も頻繁に使用されるファセットにアクセスするための 3 つの推奨フィルターオプションがあります。
 
-エラーの数が `above` または `above or equal to` のとき、モニターがトリガーします。
+    - {{< ui >}}Error Occurrences{{< /ui >}}: エラー数が `above` の場合にトリガーされます。
+    - {{< ui >}}Impacted Users{{< /ui >}} (影響を受けたユーザー): 影響を受けたユーザーのメール数が `above` の場合にトリガーされます。
+    - {{< ui >}}Impacted Sessions{{< /ui >}} (影響を受けたセッション): 影響を受けたセッション ID 数が `above` の場合にトリガーされます。
 
-- モニターのメトリクスを評価する時間幅を 5 分から 48 時間の間で設定します (`5 minutes`、`15 minutes`、`1 hour`、`custom` など)。
-- アラートのしきい値 > `<NUMBER>` を設定します。
-- 警告のしきい値 > `<NUMBER>` を設定します。
+    [{{< ui >}}All{{< /ui >}}] または [{{< ui >}}Backend{{< /ui >}}] の問題を選択した場合は、[{{< ui >}}Error Occurrences{{< /ui >}}] オプションのみ利用可能です。
 
-[1]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[2]: /ja/real_user_monitoring/explorer/search/
-[3]: /ja/tracing/trace_explorer/?tab=listview#filtering
-[4]: /ja/monitors/configuration/#alert-grouping/
-[5]: /ja/logs/explorer/search/
+    監視に使用するカスタムメジャーを指定することもできます。カスタムメジャーを選択した場合、ファセットの一意の値の数が `above` になると、モニターがアラートを通知します。
+
+2. クエリに一致する問題ごとに通知を受け取り、必要に応じて他の属性で結果をグループ化できます (例: クエリに一致する各問題について環境ごとに通知を受け取るなど)。
+
+3. 各評価時に、過去 1 日間 (デフォルト) または任意の期間のデータをクエリします。
+
+4. モニターをトリガーするしきい値を選択します (デフォルトは 0 で、初回発生時にトリガーされます)。
+
+#### プログラムによる管理 {#programmatic-management-1}
+
+Terraform または公開 API を使用するカスタムスクリプトでモニターを管理している場合は、モニタークエリにいくつかの句を指定する必要があります。
+* [{{< ui >}}All{{< /ui >}}]、[{{< ui >}}Browser{{< /ui >}}]、[{{< ui >}}Mobile{{< /ui >}}]、および [{{< ui >}}Backend{{< /ui >}}] のいずれかの問題を対象ソースとして追加します。フィルターの直後に `.source()` 句を追加し、`"all"`、`"browser"`、`"mobile"`、または `"backend"` を指定します。**注**: 一度に 1 つのみ使用できます。
+* High Impact モニターでは必ず `.impact()` 句を使用してください。
+
+例:
+
+```yaml
+error-tracking("{filter}").source("browser").impact().rollup("count").by("issue.id").last("1d") > 0
+```
+
+[1]: /ja/error_tracking/issue_states
+[2]: /ja/error_tracking/explorer
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 高度なアラート条件
+### 通知 {#notifications}
 
-評価頻度などの高度なアラートオプションについて、詳しくは[モニターの構成][4]をご覧ください。
+通知タイトルにトリガーとなったタグを表示するには、[{{< ui >}}Include triggering tags in notification title{{< /ui >}}] (通知タイトルにトリガーとなったタグを含める) をクリックします。
 
-### 通知
+[一致する属性変数][7]に加えて、アラートメッセージの通知では、次の Error Tracking 固有の変数を
+使用できます。
 
-通知タイトルにトリガータグを表示するには、**Include triggering tags in notification title** をクリックします。
+* `{{issue.attributes.error.type}}`
+* `{{issue.attributes.error.message}}`
+* `{{issue.attributes.error.stack}}`
+* `{{issue.attributes.error.file}}`
+* `{{issue.attributes.error.is_crash}}`
+* `{{issue.attributes.error.category}}`
+* `{{issue.attributes.error.handling}}`
 
-For more information about the **Configure notifications and automations** section, see [Notifications][5].
+[{{< ui >}}Configure notifications and automations{{< /ui >}}] (通知と自動化を設定) セクションの詳細については、[通知][5]を参照してください。
 
+問題ごとに通知を受け取るには、マルチアラートを選択します。Error Tracking モニターでは、これが想定される動作です。
 
-### Muting monitors
-Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+### モニターをミュートする {#muting-monitors}
+Error Tracking モニターは[問題の状態][2]を利用して、アラートを優先度の高い事項に集中させ、重要でない問題によって注意がそらされないようにします。
 
-**Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
+[{{< ui >}}Ignored{{< /ui >}}] (無視) 状態の問題は、追加の調査や対応が不要なエラーです。問題を [{{< ui >}}Ignored{{< /ui >}}] としてマークすると、これらの問題はモニターの通知から自動的にミュートされます。
 
+## トラブルシューティング {#troubleshooting}
 
-## その他の参考資料
+### New Issue モニターが問題の経過時間を考慮しない {#new-issue-monitors-do-not-take-into-account-issue-age}
+`issue.age` および `issue.regression.age` は、アラートの見逃しにつながる可能性があるため、デフォルトでは追加されません。たとえば、問題が最初に `env:staging` で発生し、その 1 週間後に `env:prod` で初めて発生した場合、その問題は 1 週間経過したものと見なされ、`env:prod` で初めて発生した際にアラートがトリガーされません。
+
+そのため、Datadog では `issue.age` および `issue.regression.age` の使用を推奨していません。ただし、状態に基づくモニターの動作が適していない場合は、これらのフィルターを手動で指定して使用できます。
+
+**注**: モニターで `issue.age` および `issue.regression.age` を使用する予定の場合、このフィルターキーは製品間で一貫していません。たとえば、`@issue.age` や `issue.age` になる可能性があります。
+
+### New Issue モニターでノイズが発生しすぎる {#new-issue-monitors-are-generating-too-much-noise}
+New Issue モニターは、アラート基準を満たし、[{{< ui >}}For Review{{< /ui >}}] とマークされた問題についてアラートを送信します。問題が適切にトリアージされていない ([{{< ui >}}Reviewed{{< /ui >}}]、[{{< ui >}}Ignored{{< /ui >}}]、または [{{< ui >}}Resolved{{< /ui >}}] (解決済み) とマークされていない) 場合、問題が OK 状態と ALERT 状態の間で変動すると、同じ問題に対して New Issue モニターが複数回トリガーされることがあります。
+
+モニターで発生するノイズが多すぎる場合、次の調整を検討してください。
+- **アラートをトリアージする**: 適切なタイミングで問題を [{{< ui >}}Reviewed{{< /ui >}}]、[{{< ui >}}Ignored{{< /ui >}}]、または [{{< ui >}}Resolved{{< /ui >}}] に設定します。
+- **評価時間枠を拡大する**: デフォルトの評価期間は 1 日です。エラーが頻繁に発生しない場合 (たとえば、1 日おきなど)、モニターが OK 状態と ALERT 状態の間で切り替わることがあります。評価期間を拡大すると、再度トリガーされるのを防ぎ、モニターを ALERT 状態に維持するのに役立ちます。
+- **アラートのしきい値を引き上げる**: デフォルトのしきい値は `0` に設定されており、新しい問題が最初に発生した時点でアラートが出ます。単発または散発的なエラーによるノイズを減らすには、しきい値を引き上げ、エラーが複数回発生した場合にのみアラートを送信するようにしてください。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/error_tracking/
-[2]: /ja/error_tracking/issue_states/
+[1]: /ja/error_tracking/issue_states
+[2]: /ja/error_tracking/explorer
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /ja/monitors/configuration/#advanced-alert-conditions
 [5]: /ja/monitors/notify/
 [6]: /ja/logs/
+[7]: /ja/monitors/notify/variables/#matching-attributetag-variables

@@ -58,17 +58,48 @@ SCA supports two complementary detection modes:
 
 When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you have not rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
 
-## Vulnerability database
+## Detection coverage by component type
+
+Static and runtime detection analyze different parts of an application. Knowing what each detection mode covers helps you choose a setup and know where to look when a vulnerability affects your stack.
+
+| Component | Static SCA | Runtime SCA |
+|---|---|---|
+| Open source libraries | Detected when listed in a supported lockfile or manifest. | Detected when a service loads the library. |
+| Go and .NET runtimes | Detected. | Detected. |
+| Other language runtimes, such as the PHP interpreter and the JVM | Not detected. | Not detected. |
+| Operating system packages and standalone binaries | Not detected. | Not detected. |
+
+To detect vulnerabilities in operating system packages, container images, and language runtimes installed through an operating system package manager, use [Cloud Security Vulnerabilities][35]. Cloud Security Vulnerabilities supports [official operating system vendor packages only][38], so it doesn't detect language runtimes compiled from source.
+
+## Vulnerability intelligence
+
+The vulnerability data behind SCA findings determines which vulnerabilities Datadog detects, how fast new vulnerabilities appear, and which findings to prioritize first.
+
+### Vulnerability sources
+
+The range of sources behind the Datadog vulnerability database determines which vulnerabilities SCA can detect and how soon newly published vulnerabilities appear in your findings.
 
 Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research.
 
 Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
 
-## Public exploit sources
+### Public exploit sources
 
 Datadog identifies whether a vulnerability has a known public exploit by aggregating data from multiple public sources, including CISA (Known Exploited Vulnerabilities Catalog), Exploit-DB, NIST (National Vulnerability Database), and GitHub (public exploit references).
 
 When Datadog identifies a public exploit for a vulnerability from any of these sources, it flags the finding to help you prioritize remediation.
+
+### Emerging vulnerabilities
+
+Emerging vulnerabilities are high-severity, widely discussed vulnerabilities that need immediate attention from security teams. Datadog Security Research tracks emerging vulnerabilities and flags affected findings, so you can find and prioritize exposure without waiting for your next scan.
+
+Datadog Security Research classifies a vulnerability as emerging based on the [emerging vulnerability criteria][36]. For each emerging vulnerability, Datadog:
+
+- Publishes an article in the [Security Research Feed][37] with analysis, matches in your environment, and remediation guidance.
+- Flags matching SCA findings as emerging. In the Vulnerabilities Explorer, the {{< ui >}}Emerging Vulnerability{{< /ui >}} facet filters for these findings.
+- Shows a banner on the {{< ui >}}Vulnerabilities{{< /ui >}} tab when emerging vulnerabilities affect your repositories or services.
+
+To check exposure to an emerging vulnerability, open the vulnerability article in the Security Research Feed, or search the [CVE Explorer][27] for the CVE.
 
 ## Key capabilities
 
@@ -337,3 +368,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [32]: /bits_ai/bits_code/automations
 [33]: https://app.datadoghq.com/code
 [34]: https://app.datadoghq.com/code/automations
+[35]: /security/cloud_security_management/vulnerabilities/
+[36]: /security/research_feed/#criteria-for-emerging-vulnerabilities
+[37]: /security/research_feed/
+[38]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility/

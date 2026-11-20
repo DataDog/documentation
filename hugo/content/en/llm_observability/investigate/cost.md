@@ -4,7 +4,7 @@ aliases:
 - /llm_observability/monitoring/cost/
 description: Monitor your LLM tokens and costs.
 ---
-{{< img src="llm_observability/Cost_LLMO.png" alt="Cost view for an app in Agent Observability." style="width:100%;" >}}
+{{< img src="llm_observability/ao_cost_overview.png" alt="Cost Overview in Agent Observability." style="width:100%;" >}}
 
 Agent Observability automatically calculates an estimated cost for each LLM request, using providers' public pricing models and token counts annotated on LLM/embedding spans.
 
@@ -49,17 +49,63 @@ If only `input_tokens` is provided, Datadog treats all input tokens as non-cache
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
-<div class="alert alert-info">Datadog only supports monitoring costs for text-based models.</div>
-
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
-You can find cost metrics in [Agent Observability Metrics][5]. The unit for Agent Observability estimated cost metrics is **nanodollars**. 
+
+Find the available cost and token metrics in [Agent Observability Metrics][5]. Estimated cost metrics are measured in **nanodollars**, and token metrics are measured in **tokens**.
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
 - `source:user` — manually provided
 
+### Cost and token breakdowns
+
+`ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` are Count metrics that partition cost and token usage by the following tags. Cost includes LLM and embedding spans, plus user-provided tool-span costs. Token usage includes LLM spans only. For embedding token usage, use `ml_obs.span.embedding.input.tokens`.
+
+Automatic OpenAI Realtime token breakdowns require `ddtrace` 4.17.0 or later for Python. For Node.js, use `dd-trace` 6.25.0 or later (v6), or 5.136.0 or later (v5). See [multimodal instrumentation][11] for supported integrations.
+
+Provider tool charges are charges for built-in tools, such as web search, on LLM spans. User-provided tool-span costs are costs you manually supply on tool spans.
+
+| Tag | Values | Description |
+|-----|--------|-------------|
+| `io_type` | `input`, `output`, `unknown` | Input or output contribution. |
+| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Cache category for input values. Omitted for other directions. |
+| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Reasoning category for output values when the data establishes the category. Non-token tool charges omit this tag. |
+| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Token modality. `other` applies only to non-token cost contributions, such as provider tool charges and user-provided tool-span costs. |
+| `ttl` | `5m`, `1h` | Cache-write lifetime when that breakdown is available. Omitted for other contributions. |
+
+For applicable breakdown tags, unavailable details use `unknown`. An `unknown` value does not mean zero usage. For example, if a provider does not report cache usage, input tokens are tagged `input_type:unknown`. When cache or reasoning usage cannot be assigned to individual modalities, the values keep their known category and use `token_modality:unknown`.
+
+### Choose between total and breakdown metrics
+
+Use total metrics for per-span statistics, and breakdown metrics to compare usage across categories.
+
+#### Analyze totals per span
+
+Use the `ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` distributions for per-span averages and percentiles. Each distribution records one total observation per applicable span. Total cost includes LLM and embedding spans, plus user-provided tool-span costs. Total tokens include LLM spans only.
+
+For example, chart average cost and average token usage per span:
+
+```text
+avg:ml_obs.span.llm.total.cost{ml_app:my-app}
+avg:ml_obs.span.llm.total.tokens{ml_app:my-app}
+```
+
+#### Analyze usage by category
+
+Use `ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` to compare cost and token usage across categories. Use `sum` with `.as_count()` to aggregate contributions. These metrics do not provide per-span averages or percentiles.
+
+For example, the following queries chart cost by input or output and modality, and input tokens by cache category and modality:
+
+```text
+sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
+sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
+```
+
+For a span with a valid total cost or token count, its breakdown values add up to that total. When a total is unavailable for cost or tokens, the breakdown metrics retain the available input or output values. The corresponding total distribution receives no observation.
+
+Do not add breakdown metrics to their matching `.total.*` metrics when calculating totals, because that counts the same usage twice.
 
 ## Custom tags on cost and tokens metrics
 
@@ -91,13 +137,22 @@ Many LLM providers cache reused prompt prefixes to reduce repeated processing. T
 {{< img src="llm_observability/cost_tags_cache.png" alt="Dashboard comparing cache read, cache write, and non-cached input tokens grouped by a custom prompt_version tag." style="width:100%;" >}}
 
 ## View costs in Agent Observability
-View your app in Agent Observability and select {{< ui >}}Cost{{< /ui >}} on the left. The _Cost view_ features:
-- A high-level overview of your LLM usage over time including {{< ui >}}Total Cost{{< /ui >}}, {{< ui >}}Cost Change{{< /ui >}}, {{< ui >}}Total Tokens{{< /ui >}}, and {{< ui >}}Token Change{{< /ui >}}
-- {{< ui >}}Breakdown by Token Type{{< /ui >}}: A breakdown of token usage, along with associated costs
-- {{< ui >}}Breakdown by Provider/Model{{< /ui >}} or {{< ui >}}Prompt ID/Version{{< /ui >}}: Cost and token usage broken down by LLM provider and model, or by individual prompts or prompt versions (powered by [Prompt Tracking][6])
+In Agent Observability, select {{< ui >}}Cost{{< /ui >}} from the left navigation to open the _Cost Overview_. This page shows your estimated AI spend across all your LLM applications, providers, and models for the selected time range.
+
+The Cost Overview includes:
+- {{< ui >}}Spend breakdown{{< /ui >}}: A Sankey diagram of your {{< ui >}}Total Estimated Spend{{< /ui >}}, compared with the previous period. Select {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}}, or {{< ui >}}Custom Tags{{< /ui >}} to analyze which applications, providers, or [custom tags](#custom-tags-on-cost-and-tokens-metrics) account for your spend. Each entry shows the amount spent, its share of the total spend, and the change from the previous period.
+- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] that identify specific ways to reduce spend, such as prompts that don't use the provider's prompt cache. Each insight lists the affected application and estimated savings. [Frontier model sizing][9] highlights premium-model spend to prioritize trials with lower-cost models.
+- {{< ui >}}Cost Trend{{< /ui >}}: A timeseries of spend across one or all applications. Group it by application, service, model name, model provider, or custom tags, and add filters to narrow the results.
+- {{< ui >}}Wasted Spend{{< /ui >}}: Spend on failed calls, low-quality responses, and issues found by [Insights][8], broken down by application. For waste identified by Insights, open the finding to review the root cause, affected traces, and recommended fix. See [how Insights measures wasted spend][10].
+- {{< ui >}}Cache Efficiency{{< /ui >}}: Net savings from prompt caching, along with cache hit ratio, cache reuse ratio, and non-cached input cost. For accurate cache metrics, provide the complete [cache token breakdown](#how-token-counts-are-calculated).
+
+To view costs for a single application, click the application in the Cost Overview Sankey diagram. Alternatively, select it from {{< ui >}}Applications{{< /ui >}} and open the {{< ui >}}Cost{{< /ui >}} tab. The application's _Cost view_ features:
+- {{< ui >}}Filter{{< /ui >}}: Options to narrow the Cost view to specific attributes
+- {{< ui >}}Total Cost (Estimated){{< /ui >}} and {{< ui >}}Total Tokens{{< /ui >}}: Summaries broken down by token type, including output, non-cached input, cache read input, cache write input, and embedding tokens
+- {{< ui >}}Cost Trend{{< /ui >}}: Spend over time, grouped by model, provider, token type, or custom tags
 - {{< ui >}}Most Expensive LLM Calls{{< /ui >}}: A list of your most expensive requests
 
-{{< img src="llm_observability/cost_tracking_trace.png" alt="Cost data in trace detail." style="width:100%;" >}}
+{{< img src="llm_observability/cost_tracking_trace_v2.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
 Cost data is also available within your application’s traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the full trace and for each individual LLM call.
@@ -168,5 +223,8 @@ How to fix:
 [3]: /llm_observability/instrument/api/#metrics
 [4]: https://github.com/pydantic/genai-prices/tree/main?tab=readme-ov-file#providers
 [5]: /llm_observability/investigate/metrics/#llm-cost-metrics
-[6]: /llm_observability/instrument/prompt_tracking
 [7]: /llm_observability/instrument/sdk/#adding-custom-tags-to-cost-and-tokens-metrics
+[8]: /llm_observability/investigate/insights/
+[9]: /llm_observability/investigate/insights/#frontier-model-sizing
+[10]: /llm_observability/investigate/insights/#wasted-spend
+[11]: /llm_observability/instrument/multimodal/#automatic-instrumentation

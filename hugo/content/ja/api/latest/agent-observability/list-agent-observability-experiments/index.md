@@ -1,3 +1,3 @@
 ---
-title: Agent Observabilityの実験を一覧表示してください
+title: Agent Observability 実験の一覧表示
 ---

@@ -2,7 +2,7 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 
 These restrictions are imposed on customers who have signed Datadog's BAA:
 
-* Users cannot request support through Zendesk Live Chat.
+* Users cannot request support through Live Chat.
 * Users cannot [share][502] logs or security signals from the Datadog explorer.
 * Users cannot use third-party powered generative AI services (except those listed as a HIPAA-eligible service).
 

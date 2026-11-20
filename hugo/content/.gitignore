@@ -46,7 +46,7 @@
 /*/error_tracking/error_grouping.md
 /*/experiments/guide/connecting_a_data_warehouse.md
 /*/logs/error_tracking/error_grouping.md
-/*/opentelemetry/instrument/dd_sdks/api_support.md
+/*/opentelemetry/instrument/ddot_sdks/api_support.md
 /*/profiler/enabling/_index.md
 /*/real_user_monitoring/application_monitoring/android/advanced_configuration.md
 /*/real_user_monitoring/application_monitoring/android/data_collected.md
@@ -113,6 +113,10 @@
 /*/real_user_monitoring/application_monitoring/cpp/data_collected.md
 /*/real_user_monitoring/application_monitoring/cpp/setup.md
 /*/real_user_monitoring/application_monitoring/cpp/troubleshooting.md
+/*/real_user_monitoring/application_monitoring/electron/advanced_configuration.md
+/*/real_user_monitoring/application_monitoring/electron/data_collected.md
+/*/real_user_monitoring/application_monitoring/electron/setup.md
+/*/real_user_monitoring/application_monitoring/electron/troubleshooting.md
 /*/observability_pipelines/configuration/install_the_worker/_index.md
 /en/session_replay/_index.md
 /*/session_replay/privacy_options.md
@@ -127,3 +131,6 @@
 /*/tracing/live_debugger/_index.md
 /*/session_replay/_index.md
 /*/dd_e2e/cdocs/components/skill_callout.md
+/*/serverless/azure_container_apps/otel_managed_agent/_index.md
+/*/product_analytics/tracking_plans.md
+/*/tests/test_parallelization/setup.md

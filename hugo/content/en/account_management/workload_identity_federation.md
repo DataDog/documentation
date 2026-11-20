@@ -27,9 +27,8 @@ Workload Identity Federation lets you authenticate the Datadog Terraform provide
 
 AWS is the only supported cloud provider.
 
-Workload Identity Federation is available for the following:
-
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<p>Workload Identity Federation is available for the following:</p>
 <ul>
 <li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
 <li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
@@ -37,9 +36,7 @@ Workload Identity Federation is available for the following:
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<ul>
-<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
-</ul>
+<div class="alert alert-danger">Workload Identity Federation is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## How it works: AWS authentication process
@@ -67,6 +64,10 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 <div class="alert alert-info">If the delegated authentication flow fails, the Agent falls back to the API key configured in your <code>datadog.yaml</code> file. This fallback behavior allows you to onboard with limited risk to your existing configuration.</div>
 
 ## Set up Workload Identity Federation for AWS
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Workload Identity Federation is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 **Requirements**:
 - Datadog Terraform provider version 3.70 or later.

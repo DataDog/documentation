@@ -299,13 +299,11 @@ CI 작업에서 설정되거나 자동 계측 단계에서 내보낸 변수는 �
 | `TEAMCITY_VERSION`           | TeamCity 서버 버전입니다.                                                                        |
 | `TEAMCITY_BUILDCONF_NAME`    | 현재 빌드가 속한 빌드 구성의 이름입니다.                                           |
 | `BUILD_URL`                  | 현재 빌드의 링크입니다.                                                                             |
-| `DATADOG_BUILD_ID`           | [Datadog TeamCity 통합][102]에서 설정한 사용자 지정 변수입니다.                                             |
 
 모든 빌드에 대해 TeamCity에서 설정한 환경 변수의 전체 목록은 [공식 TeamCity 설명서][101]를 참조하세요.
 
 
 [101]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[102]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 
 {{% /tab %}}
 {{% tab "Travis CI" %}}

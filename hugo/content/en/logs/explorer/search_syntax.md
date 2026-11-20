@@ -37,16 +37,17 @@ There are two types of terms:
 
 * A **single term** is a single word such as `test` or `hello`.
 
-* A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
+* A **sequence** is a group of words surrounded by double quotes, such as `"hello world"`.
 
-To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
+**Note**: Use straight double quotes (`"`) for sequences. Search ignores curly quotation marks (`“ ”`), which some text editors and chat apps insert automatically. For example, `“hello world”` matches logs that contain `hello` and `world` in any order.
 
-|              |                                                                                                        |                              |
-|--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
-| **Operator** | **Description**                                                                                        | **Example**                  |
-| `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
-| `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
-| `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
+To combine multiple terms into a complex query, use any of the following case-sensitive Boolean operators:
+
+| Operator | Description                                                                                                  | Example                        |
+|----------|--------------------------------------------------------------------------------------------------------------|--------------------------------|
+| `AND`    | **Intersection**: Both terms are in the selected events. If no operator is specified, `AND` is the default.  | `authentication AND failure`   |
+| `OR`     | **Union**: Either term is in the selected events.                                                            | `authentication OR password`   |
+| `-`      | **Exclusion**: The following term isn't in the event. Applies to each individual raw text search.            | `authentication AND -password` |
 
 ## Full-text search
 
@@ -81,9 +82,7 @@ The following characters are considered special and require escaping with the `\
 - `/` is not considered a special character and doesn't need to be escaped.
 - `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 
-You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
-
-To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
+Special characters in a log message aren't searchable. To search for them, parse them into an attribute with the [Grok Parser][1], then search on that attribute.
 
 ## Attributes search
 
@@ -133,50 +132,74 @@ Users can use the `CIDR()` function to query attributes in logs using CIDR notat
 - `CIDR(@network.client.ip,13.0.0.0/8)` matches and filters logs that have IP addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block.
 - `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` matches and filters logs that have any IP addresses in an array attribute `network.ip.list` that fall under the 13.0.0.0/8 or 15.0.0.0/8 CIDR blocks.
 - `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` would match and filter reject events from palo alto firewall that originate in the 13.0.0.0/8 subnet
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` will show all VPC logs that do not originate in subnet 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 because you want to analyze network traffic in your environments between subnets
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` shows all VPC logs that do not originate in subnet 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 because you want to analyze network traffic in your environments between subnets
 
 The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, log widgets in Dashboards, log monitors, and log configurations.
 
 ## Wildcards
 
-You can use wildcards with free text search. However, it only searches for terms in the log message, the text in the `content` column in Log Explorer. See [Full-text search](#full-text-search) if you want to search for a value in a log attribute.
+Wildcards work in free-text search, which searches the log message (the `content` column in Log Explorer). To search log attributes with wildcards, use full-text search as described in the [Full-text search](#full-text-search) section.
 
 ### Multi-character wildcard
 
-To perform a multi-character wildcard search in the log message (the `content` column in Log Explorer), use the `*` symbol as follows:
+Use the `*` symbol to match any number of characters, including zero. In the log message, `*` matches characters within a single word. For example:
 
-* `service:web*` matches every log message that has a service starting with `web`.
-* `web*` matches all log messages starting with `web`.
-* `*web` matches all log messages that end with `web`.
+* `web*` matches log messages that contain a word starting with `web`, such as `web` or `webserver`.
+* `*web` matches log messages that contain a word ending with `web`, such as `myweb`.
+* `*web*` matches log messages that contain a word with `web` anywhere in it, such as `mywebserver`.
 
-**Note**: Wildcards only work as wildcards outside of double quotes. For example, `"*test*"` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
+For how search defines a word, see the [How free-text search splits words](#how-free-text-search-splits-words) section.
 
-Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
-<p> </p>
-<p></p>
+A single `*` doesn't match across words. For example, `waiting*time` doesn't match the log message `waiting until next renew time`. To match across words, use one of the following:
+
+* **Double wildcard (`**`)**: Matches any characters, including spaces and punctuation between words. For example, `waiting**time` matches `waiting until next renew time`.
+* **Escaped space (`\ `)**: Matches consecutive words, and each word can contain wildcards. For example, `waiting\ un*` matches `waiting until next renew time`.
+
+Wildcards take effect only outside double quotes. Inside double quotes, `*` is treated like other punctuation and ignored, so `"*test*"` searches for the word `test`.
+
+**Tip**: Single-word searches without wildcards or double quotes are the fastest. Wildcard and quoted searches take longer, especially across a large volume of logs. To speed these searches up, combine them with selective filters such as `service` or `host`.
+
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. For example, this query returns all the services that end with the string `mongo`:
 
 ```
 service:*mongo
 ```
 
-Wildcard searches can also be used to search in the plain text of a log that is not part of a log attribute. For example, this query returns all logs with content (message) that contain the string `NETWORK`:
-
-```
-*NETWORK*
-```
-
-However, this search term does not return logs that contain the string `NETWORK` if it is in a log attribute and not part of the log message.
+Without an attribute prefix, a wildcard search such as `*NETWORK*` searches only the log message, not log attributes.
 
 ### Search wildcard
 
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
-<p> </p>
+
+## How free-text search splits words
+
+Free-text search matches whole words. Datadog splits both the log message and your query into words according to the [Unicode word boundary rules][9]. Spaces and most punctuation separate words, and the separators themselves aren't searchable. For example, `hello` matches `Hello, world!`, and `"hello world"` matches `hello-world`. The same rules apply to full-text searches that use `*:`.
+
+Some punctuation separates words only in certain contexts. The following table shows how periods, colons, commas, apostrophes, underscores, and hyphens split text:
+
+| Pattern                    | Example       | Resulting words        |
+|----------------------------|---------------|------------------------|
+| Letter, period, letter     | `my.friend`   | `my.friend`            |
+| Period, space              | `my. friend`  | `my`, `friend`         |
+| Letter, period, number     | `version.2`   | `version`, `2`         |
+| Number, period, letter     | `5.star`      | `5`, `star`            |
+| Number, period, number     | `192.168.1.1` | `192.168.1.1`          |
+| Number, comma, number      | `3,456`       | `3,456`                |
+| Letter, colon, letter      | `metric:cpu`  | `metric:cpu`           |
+| Letter, colon, number      | `RequestId:5` | `RequestId`, `5`       |
+| Letter, apostrophe, letter | `don't`       | `don't`                |
+| Letter, underscore, letter | `hello_world` | `hello_world`          |
+| Letter, hyphen, letter     | `hello-world` | `hello`, `world`       |
+
+Because Datadog treats `my.friend` as a single word, the query `friend` doesn't match it. To match part of a word, use a wildcard as described in the [Multi-character wildcard](#multi-character-wildcard) section. For example, `*friend` matches `my.friend`.
+
+Straight (`'`) and curly (`‘` or `’`) apostrophes are different characters, so `don't` doesn't match `don’t`. To match both, use a wildcard such as `don*`.
 
 ## Numerical values
 
-In order to search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
-For instance, retrieve all logs that have a response time over 100ms with:
-<p> </p>
+To search on a numerical attribute, first [add it as a facet][2]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
+
+For example, retrieve all logs that have a response time over 100 ms with:
 
 ```
 @http.response_time:>100
@@ -250,3 +273,4 @@ Calculated fields function like log attributes and can be used for search, aggre
 [6]: /logs/explorer/saved_views/
 [7]: /logs/explorer/facets/#facet-panel
 [8]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[9]: https://www.unicode.org/reports/tr29/#Word_Boundaries

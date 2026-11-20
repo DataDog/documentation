@@ -1,0 +1,8 @@
+{
+  "data": {
+    "type": "batchMigrationResource",
+    "attributes": {
+      "input": "index=wineventlog EventCode=4625 | stats count by user"
+    }
+  }
+}

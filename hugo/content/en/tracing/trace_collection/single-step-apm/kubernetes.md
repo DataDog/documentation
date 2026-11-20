@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
+Use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your Kubernetes applications with the Datadog SDKs.
 
 {{< skill-callout
     title="Set up APM with an agent"
@@ -269,9 +269,9 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 Use one of the following setup methods:
 
-- **[Configure with workload targeting (recommended)](#target-specific-workloads)**:
+- **[Configure with Agent targeting rules](?tab=targetingrulesv764#target-specific-workloads)**:
 
-  By default, Single Step Instrumentation instruments all services in all namespaces. Use workload targeting to limit instrumentation to specific namespaces, pods, or workloads, and apply custom configurations.
+  Use `ddTraceConfigs` in Agent-configured targets to enable products for groups of namespaces or pods.
 
 - **[Set environment variables][7]**:
 
@@ -288,10 +288,11 @@ SSI supports multiple injection modes, which control how the injector and APM li
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
+| `auto` | **Default.** The Cluster Agent selects the best injection mode for your cluster and workloads. The selection logic can change between Agent versions. | Agent 7.76.0+ |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
-| `csi` | **In Preview.** Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
+| `csi` | Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
 
-Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot.
+Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. If you are deploying with the Datadog Operator, set `spec.global.csi.enabled: true` in your `datadog-agent.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot. In `auto` mode, the Cluster Agent selects the CSI driver only when it is installed and safe to use in your cluster.
 
 #### Configure injection mode globally
 
@@ -307,7 +308,7 @@ datadog:
       injectionMode: <mode>
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto` (default), `init_container`, `csi`.
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -315,13 +316,14 @@ Supported values: `init_container`, `csi`.
 To set the injection mode cluster-wide, add `injectionMode` to your `datadog-agent.yaml`:
 
 ```yaml
-features:
-  apm:
-    instrumentation:
-      injectionMode: <mode>
+spec:
+  features:
+    apm:
+      instrumentation:
+        injectionMode: <mode>
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto` (default), `init_container`, `csi`.
 
 If you are using Datadog Operator earlier than 1.25.0, use the [pod annotation](#configure-injection-mode-per-pod) to override the injection mode for specific pods.
 
@@ -338,15 +340,128 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto`, `init_container`, `csi`.
 
 ### Target specific workloads
 
-By default, SSI instruments all services in all namespaces in your cluster. Depending on your Agent version, use one of the following configuration methods to refine which services are instrumented and how.
+By default, SSI instruments all services in all namespaces in your cluster. To refine which workloads are instrumented, define instrumentation rules in Datadog, or configure targeting in your Agent configuration or with a `DatadogInstrumentation` resource. Instrumentation rules in Datadog allow or block instrumentation for matching pods without changes to your Agent configuration. The methods available to you depend on your Agent or Cluster Agent version.
 
 {{< tabs >}}
+{{% tab "Instrumentation rules in Datadog (v7.84.2+)" %}}
 
-{{% tab "Agent v7.64+ (Recommended)" %}}
+<div class="alert alert-info">Instrumentation rules for Kubernetes are in Preview. <a href="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/">Sign up for access.</a></div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies.
+
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title.
+
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="The APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards above an empty list of instrumentation rules" style="width:100%;" >}}
+
+#### Prerequisites for instrumentation rules
+
+- **Cluster Agent**: v7.84.2 or later on each cluster, with [Remote Configuration][101] enabled. Clusters that meet these requirements are eligible for instrumentation rules.
+- **Permissions**: The **APM Workload Selection Write** [permission][103], which is required to create and manage instrumentation rules and cluster groups.
+
+#### Set the default behavior
+
+The default behavior controls whether the workload targeting in your Agent configuration (`targets` and `enabledNamespaces`) still applies when you use instrumentation rules in Datadog. Regardless of the default behavior, some pods are excluded from instrumentation, and other targeting methods can take precedence over instrumentation rules. See the [Exceptions to instrumentation rules](#exceptions-to-instrumentation-rules) and [Configuration precedence](#configuration-precedence) sections.
+
+<div class="alert alert-warning">If SSI is enabled cluster-wide without <code>targets</code>, set the default behavior to <strong>Allow everything else</strong> before you create rules. Otherwise, your first rule turns off cluster-wide instrumentation, so pods that do not match a rule are no longer instrumented.</div>
+
+1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
+1. Select one of the following options:
+   - {{< ui >}}No default{{< /ui >}} (initial setting): Workload targeting in your Agent configuration still applies, but a rule defined in Datadog can override it. Pods that match neither a rule nor your Agent configuration are not instrumented.
+   - {{< ui >}}Block everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Pods that do not match an allow rule are not instrumented.
+   - {{< ui >}}Allow everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Pods that do not match a block rule are instrumented.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+{{< img src="tracing/trace_collection/k8s-default-behavior.png" alt="The Kubernetes Default Behavior options: No default, Block everything else, and Allow everything else" style="width:50%;" >}}
+
+#### Create cluster groups
+
+Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules.
+
+To create a cluster group:
+
+1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Clusters in Scope{{< /ui >}} card and click {{< ui >}}Manage cluster groups{{< /ui >}}.
+1. Click {{< ui >}}New Cluster Group{{< /ui >}} and enter a name for the group.
+1. Click {{< ui >}}Add Clusters{{< /ui >}}, then search for and select the clusters to add.
+
+   <div class="alert alert-info">Cluster groups are static. New clusters are not added to existing groups automatically. Instead, they appear in the <strong>All clusters</strong> group until you add them to a group. A cluster can belong to more than one group.</div>
+
+   {{< img src="tracing/trace_collection/k8s-add-clusters.png" alt="The new cluster group form, with two of four clusters selected in the Add Clusters list" style="width:80%;" >}}
+
+1. Click {{< ui >}}Save Group{{< /ui >}}.
+
+Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that do not belong to any other group, so you can see which clusters are left to group. You cannot edit its cluster list.
+
+If you delete a cluster group, Datadog removes the group's rules, and the Cluster Agent stops applying them the next time it polls Remote Configuration.
+
+To change the order of cluster groups, drag a group by its handle in the group list. Group order affects [how instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
+
+{{< img src="tracing/trace_collection/k8s-cluster-groups.png" alt="The Cluster Groups page for Kubernetes, showing a Canary group ordered above the All clusters group, with the clusters in the All clusters group listed" style="width:100%;" >}}
+
+#### Create instrumentation rules
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. In the Create instrumentation rule window, click {{< ui >}}Generate with Bits{{< /ui >}} and describe which pods to instrument. Bits AI generates the corresponding rule.
+
+To create an instrumentation rule:
+
+1. On the [Instrumentation Rules][102] page, click {{< ui >}}New Rule{{< /ui >}}. Alternatively, on the Cluster Groups page, select a group, open its {{< ui >}}Rules{{< /ui >}} tab, and click {{< ui >}}Create a new rule{{< /ui >}}.
+1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See the [Supported Kubernetes attributes](#supported-kubernetes-attributes) section.
+1. Under {{< ui >}}Set cluster targeting{{< /ui >}}, select {{< ui >}}All clusters{{< /ui >}} or {{< ui >}}Select cluster groups{{< /ui >}}.
+
+   If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
+
+   {{< img src="tracing/trace_collection/k8s-create-rule.png" alt="The Create instrumentation rule window for Kubernetes, with a condition of Namespace Name equals default, the Allow Instrumentation action, and Select cluster groups chosen with the Canary group selected" style="width:100%;" >}}
+
+1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
+1. Click {{< ui >}}Create Rule{{< /ui >}}.
+
+Datadog deploys rules to eligible clusters through Remote Configuration within 50 seconds. After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][102] page shows the rollout status of the current rules.
+
+#### How instrumentation rules are evaluated
+
+For each pod, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
+
+1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules that use the {{< ui >}}All clusters{{< /ui >}} targeting option. These rules apply to every eligible cluster, including clusters in cluster groups.
+
+If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+
+<div class="alert alert-info">Pod SDK annotations and <code>DatadogInstrumentation</code> resources take precedence over instrumentation rules, regardless of the default behavior. For the full order, see the <a href="#configuration-precedence">Configuration precedence</a> section.</div>
+
+#### Exceptions to instrumentation rules
+
+The following pods are not instrumented, regardless of instrumentation rules or the default behavior:
+
+- Pods in the `kube-system` namespace
+- Pods in the namespace where the Datadog Agent is installed
+- Pods in namespaces listed in `disabledNamespaces`
+- Pods labeled `admission.datadoghq.com/enabled: "false"`
+
+#### Supported Kubernetes attributes
+
+Instrumentation rules for Kubernetes support the following attributes. A pod must match all of a rule's conditions for the rule to apply. For label attributes, specify a label key and the value to match.
+
+| Attribute | Description | Operators | Example |
+| --------- | ----------- | --------- | ------- |
+| Namespace Name | The name of the pod's namespace. | `equals`, `not equals`, `prefix`, `contains` | `default`, `production` |
+| Namespace Label | A label on the pod's namespace. | `equals`, `not equals`, `prefix` | Label key `team`, value `checkout` |
+| Pod Label | A label on the pod. | `equals`, `not equals`, `prefix` | Label key `app`, value `web` |
+
+[101]: /remote_configuration/
+[102]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[103]: /account_management/rbac/permissions/
+
+{{% /tab %}}
+
+{{% tab "Targeting Rules (v7.64+)" %}}
 
 Create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
@@ -546,7 +661,80 @@ For a full list of products you can enable through SSI, see [Enable SDK-dependen
 
 {{% /tab %}}
 
-{{% tab "Agent <=v7.63 (Legacy)" %}}
+{{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
+
+Use a `DatadogInstrumentation` custom resource to enable SSI and configure SDKs for a specific set of workloads.
+
+This method requires Datadog Agent and Cluster Agent **v7.85.0 or later**, with the `DatadogInstrumentation` CRD installed using either:
+
+- Datadog Operator **v1.31.0 or later**.
+- Datadog Helm chart **v3.255.0 or later**.
+
+##### Create a resource targeting your workload {#enable-apm-with-datadoginstrumentation}
+
+Create and apply a `DatadogInstrumentation` resource in the same namespace of the workload you wish to target. This example instruments the `checkout` Deployment in the `apps` namespace with the default Java SDK:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: checkout-apm
+  namespace: apps
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout
+  config:
+    apm:
+      ddTraceVersions:
+        java: "default"
+      ddTraceConfigs:
+        - name: DD_SERVICE
+          value: checkout
+        - name: DD_ENV
+          value: production
+```
+
+Replace the workload name, namespace, tracer language, and service tags with the correct values for your application. `targetRef` identifies the workload by its API version, kind, and name. Only one `DatadogInstrumentation` custom resource can target a given workload at a time. If a resource already exists for that workload, add `config.apm` to that resource.
+Once applied, new pods part of the targeted workload will be instrumented with the tracer and config defined in your resource.
+
+Supported target kinds are `Deployment`, `StatefulSet`, `DaemonSet`, `Job`, `CronJob`, and Argo `Rollout`.
+
+##### Configuration settings
+
+Set the following fields under `spec.config.apm`:
+
+| Field | Description |
+|-------|-------------|
+| `enabled` | Set to `false` to [disable instrumentation for the workload](#disable-instrumentation-with-datadoginstrumentation). |
+| `ddTraceVersions` | Maps SDK language identifiers to versions. Specify `java`, `js` (Node.js), `python`, `dotnet`, `ruby`, `php`, or `c`, subject to [SSI compatibility requirements][36]. Only the listed SDKs are injected. Use `"default"` for the Agent's default SDK version, or pin a specific version. If omitted, the Agent uses its default set of supported SDKs. |
+| `ddTraceConfigs` | A list of SDK environment variables. Each `name` must start with `DD_`. Use `value` for a literal string or `valueFrom` for a Kubernetes environment variable reference. |
+
+For example, add these entries to `ddTraceConfigs` to enable Continuous Profiler and read the service name from a pod label:
+
+```yaml
+ddTraceConfigs:
+  - name: DD_PROFILING_ENABLED
+    value: "auto"
+  - name: DD_SERVICE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.labels['app.kubernetes.io/name']
+```
+
+The referenced label must exist on the application pods. For more SDK options, see [Library configuration][7].
+
+##### Precedence over other targeting methods
+
+A matching DDI configuration takes precedence over lower-priority sources, including when `spec.config.apm.enabled` is `false`. Pod SDK annotations can override it. To manage a workload only with DDI, remove conflicting annotations from the pod spec. For the full order, see the [Configuration precedence](#configuration-precedence) section.
+
+[7]: /tracing/trace_collection/library_config/
+[36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+
+{{% /tab %}}
+
+{{% tab "Legacy (<=v7.63)" %}}
 
 #### Enable or disable instrumentation for namespaces
 
@@ -715,6 +903,16 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Configuration precedence
+
+For pods eligible for admission, the Cluster Agent selects APM configuration in this order, from highest to lowest precedence:
+
+1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
+1. The workload's `DatadogInstrumentation` APM configuration.
+1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled.
+1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`. These settings are ignored if the [default behavior](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior) for instrumentation rules is {{< ui >}}Block everything else{{< /ui >}} or {{< ui >}}Allow everything else{{< /ui >}}.
+1. Cluster-wide instrumentation, when enabled without `apm.instrumentation.targets` and without instrumentation rules in Datadog.
+
 ### Change the default image registry
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
@@ -757,7 +955,8 @@ To use SSI with a private container registry:
 2. Tag the images according to your configuration.
 
    The versions you mirror must match the versions configured in your workloads, which might be set in one of the following ways:
-   - globally in the Agent config using `ddTraceVersions`, or
+   - per-workload in `spec.config.apm.ddTraceVersions` in a DDI resource,
+   - in Agent-configured targets using `ddTraceVersions`, or
    - per-pod using annotations like `admission.datadoghq.com/java-lib.version`.
 
    If no version is explicitly configured, the default version (`0`) is used.
@@ -810,9 +1009,31 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Use instrumentation rules to target specific workloads (recommended)
+#### Disable instrumentation with DatadogInstrumentation
 
-With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+Set `spec.config.apm.enabled` to `false` in the workload's DDI resource, keeping its `targetRef` and any checks or logs configuration:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: checkout-apm
+  namespace: apps
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout
+  config:
+    apm:
+      enabled: false
+```
+
+Apply the resource, confirm its status reflects the change, and restart the workload. Existing pods remain instrumented until replaced.
+
+#### Use targeting rules to target specific workloads
+
+With targeting rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. For configuration details, see the [Advanced options](#advanced-options) section.
 
 #### Use the Datadog Admission Controller
 
@@ -836,7 +1057,12 @@ As an alternative, or for a version of the agent that does not support instrumen
 
 ### Remove APM for all services on the infrastructure
 
-To stop producing traces, uninstall APM and restart the infrastructure:
+To stop SSI across the cluster:
+
+1. Set `spec.config.apm.enabled: false` in each DDI resource, or remove its APM section.
+1. Remove pod SDK-selection annotations and disable any Remote Configuration instrumentation policies.
+1. Disable Agent-configured instrumentation as shown below.
+1. Replace the application pods after applying the configuration changes.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
@@ -876,9 +1102,9 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 
 ## Best practices
 
-After you enable SSI, all supported processes in the cluster are automatically instrumented and begin producing traces within minutes.
+For precise control over APM enablement, use [DatadogInstrumentation (DDI)](#target-specific-workloads) to instrument specific workloads. Start with a few workloads, verify traces, then expand to additional workloads.
 
-To control where APM is activated and reduce overhead, consider the following best practices.
+If you use Agent-configured targeting rules, the following examples show how to control instrumentation with labels and namespace selectors.
 
 {{% collapse-content title="Use opt-in labels for controlled APM rollout" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
@@ -986,7 +1212,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/glossary/#instrumentation
-[4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/?tab=agentv764recommended#configure-instrumentation-for-namespaces-and-pods
+[4]: /tracing/trace_collection/single-step-apm/kubernetes/#target-specific-workloads
 [5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
 [7]: /tracing/trace_collection/library_config/
 [11]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes

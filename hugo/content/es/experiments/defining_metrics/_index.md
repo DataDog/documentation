@@ -13,7 +13,7 @@ title: Crear métricas de experimento
 ---
 ## Descripción general {#overview}
 
-Cree las métricas que desea medir en sus experimentos. Puede utilizar datos de Real User Monitoring (RUM), Product Analytics o su propio almacén de datos para crear métricas de Datadog Experiments.
+Cree las métricas que desea medir en sus experimentos. Puede utilizar datos de Real User Monitoring (RUM), Product Analytics, Agent Observability o su propio almacén de datos para crear métricas de Datadog Experiments.
 
 <div class="alert alert-info">Si su organización utiliza roles personalizados, debe tener los <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">permisos de Product Analytics</a> adecuados para crear métricas de experimento.</div>
 
@@ -69,9 +69,73 @@ Si no ve la propiedad que necesita, escriba el nombre de la propiedad en el camp
 {{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="El panel Filter by se abre dentro de la sección Metric definition, mostrando All Properties seleccionadas, Event properties como Application Id, Service, Browser Name y Country en el centro, un filtro By Data Type con opciones Numerical, String y Boolean a la izquierda, y una sección Custom property en la parte inferior con un campo de texto que muestra el marcador de posición 'e.g. @context.tracking' y un botón Add." style="width:90%;" >}}
 
 {{% /tab %}}
-{{% tab "Almacén" %}}
+{{% tab "Agent Observability" %}}
+
+<div class="alert alert-info"><strong>Nota</strong>: Los experimentos en línea para Agent Observability están en versión preliminar (Preview). Comuníquese con su representante de Datadog para solicitar acceso.</div>
 
 ### Requisitos previos {#prerequisites-1}
+
+Antes de crear una métrica de experimento a partir de datos de Agent Observability:
+
+- [Instrumente su aplicación LLM con Agent Observability][14] y envíe trazas a Datadog.
+- Para utilizar datos de costo o token, asegúrese de que sus trazas incluyan el uso de tokens. Datadog utiliza información sobre el uso de tokens, el modelo y el proveedor para calcular [costos estimados][15].
+- Para utilizar una evaluación, envíe o configure una [evaluación de Agent Observability][16] personalizada con un valor `score` numérico.
+- Agregue una etiqueta `subject_identifier` a cada traza o evaluación. El valor debe coincidir con el `targetingKey` que utiliza para evaluar el feature flag del experimento. Para obtener instrucciones de configuración, consulte [Run an Online Experiment on an LLM Application][17].
+
+<div class="alert alert-warning"><strong>Tipo de evaluación admitido</strong>: Las métricas de experimento solo admiten evaluaciones de Agent Observability con un <code>score</code> tipo de métrica. Los tipos de evaluación booleana, categórica y otros no están disponibles en el selector de métricas.</div>
+
+### Crear una métrica a partir de datos de Agent Observability {#create-a-metric-from-agent-observability-data}
+
+Para crear la métrica:
+
+1. Navegue a la [página de métricas][1] en Datadog Product Analytics.
+1. Seleccione la pestaña {{< ui >}}Metrics{{< /ui >}} y haga clic en {{< ui >}}Create Metric{{< /ui >}}.
+1. Agregue un {{< ui >}}Metric name{{< /ui >}} y, opcionalmente, un {{< ui >}}Description{{< /ui >}}.
+1. En la sección {{< ui >}}Metric definition{{< /ui >}}, haga clic en {{< ui >}}Select an event{{< /ui >}}.
+1. Elija una de las siguientes fuentes de Agent Observability.
+
+#### Tramos de Agent {#agent-spans}
+
+Seleccione la pestaña {{< ui >}}Agent Spans{{< /ui >}}, luego seleccione una de las siguientes opciones:
+
+- {{< ui >}}Total estimated cost{{< /ui >}}: Costo estimado promedio en las trazas de Agent Observability completadas.
+- {{< ui >}}Total tokens{{< /ui >}}: Uso total de tokens promedio en las trazas de Agent Observability completadas.
+
+Las plantillas de costo y token usan de forma predeterminada {{< ui >}}Average of{{< /ui >}} su propiedad de traza correspondiente. Puede cambiar la agregación, seleccionar otra propiedad o ruta de propiedad personalizada, agregar filtros o crear una proporción.
+
+<div class="alert alert-info">Los valores de costo estimado de Agent Observability usan nanodólares (1 nanodólar = 10⁻⁹ USD). Para obtener detalles sobre los cálculos de costos y los modelos admitidos, consulte <a href="/llm_observability/investigate/cost/">Costo</a>.</div>
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="El selector de eventos Crear métrica con tramos de Agent seleccionado, que muestra todos los eventos de tramos de Agent, costo estimado total y tokens totales, con costo estimado total seleccionado y su descripción mostrada." style="width:90%;" >}}
+
+#### Evaluaciones {#evaluations}
+
+Seleccione la pestaña {{< ui >}}Evaluations{{< /ui >}}, luego:
+
+1. Busque y seleccione la evaluación de puntaje personalizada que desea medir.
+1. Revise los detalles de la evaluación, como su aplicación de ML, contexto, prompt y modelo.
+1. Configure la agregación y cualquier filtro. Las métricas de evaluación usan el puntaje promedio de forma predeterminada.
+
+Antes de crear la métrica de experimento, ejecute la evaluación en al menos un tramo. Una evaluación aparece en el selector solo después de haberse ejecutado.
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="El selector de eventos Crear métrica con Evaluaciones seleccionado, que muestra las evaluaciones faithfulness, user_score y verbosity score, con faithfulness seleccionado." style="width:90%;" >}}
+
+#### Guarde la métrica {#save-the-metric}
+
+Después de configurar cualquiera de las fuentes:
+
+1. (Opcional) En {{< ui >}}Additional settings{{< /ui >}}, marque la métrica como certificada, ajuste su configuración de experimento o configure sus unidades.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[14]: /es/llm_observability/instrument/
+[15]: /es/llm_observability/investigate/cost/
+[16]: /es/llm_observability/investigate/evaluations/
+[17]: /es/experiments/guide/run_online_experiment_on_llm_application/
+
+{{% /tab %}}
+{{% tab "Almacén" %}}
+
+### Requisitos previos {#prerequisites-2}
 
 Para crear una métrica a partir de los datos de su almacén, debe [conectar su almacén a Datadog][8]. Datadog es compatible con BigQuery, Databricks, Redshift y Snowflake.
 

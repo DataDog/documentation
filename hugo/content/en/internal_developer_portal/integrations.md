@@ -1,6 +1,6 @@
 ---
 title: Integrations
-description: Connect Internal Developer Portal with third-party tools including PagerDuty, Opsgenie, GitHub, Jira, and CI/CD platforms to enrich Catalog metadata and automate actions.
+description: Connect Internal Developer Portal with third-party tools including PagerDuty, Opsgenie, GitHub, GitLab, Jira, and CI/CD platforms to enrich Catalog metadata and automate actions.
 aliases:
   - /tracing/software_catalog/integrations
   - /tracing/service_catalog/integrations
@@ -103,7 +103,7 @@ Once you've completed these steps, an **On Call** information box appears in the
 | [GitLab][12] | Manage issues, merge requests, branches, and commits. | `Approve merge request`, `Cherry pick commit` <br> [See all available actions.][42] |
 | Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Catalog or Action Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
 
-You can also use GitHub to manage entity definitions and configure the GitHub integration to automatically pull definitions into Catalog. Learn more about [creating entity definitions and importing them from GitHub][83].
+You can also use GitHub or GitLab to manage entity definitions and configure the GitHub integration or GitLab integration to automatically pull definitions into Catalog. Learn more about [creating entity definitions and importing them from GitHub or GitLab][83].
 
 ## CI/CD
 
@@ -174,7 +174,7 @@ Datadog's Infrastructure integrations and [Resource Catalog][54] provides a comp
 [62]: https://support.atlassian.com/opsgenie/docs/api-key-management/
 [63]: https://support.pagerduty.com/docs/service-directory
 [82]: /internal_developer_portal/catalog/entity_model
-[83]: /internal_developer_portal/catalog/set_up/create_entities#github-integration
+[83]: /internal_developer_portal/catalog/set_up/create_entities#github-and-gitlab-integrations
 [84]: /internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
 [85]: /internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage
 

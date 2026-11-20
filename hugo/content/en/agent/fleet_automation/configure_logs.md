@@ -20,16 +20,16 @@ further_reading:
 - link: "/logs/guide/log-collection-troubleshooting-guide/"
   tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
-site_support_id: fleet-automation-standard-features
 ---
 
 Use [Fleet Automation][2] to manage [custom log collection][4] settings on your Agents remotely at scale. Instead of editing `conf.d` configuration files host by host, scope a change by host information or tag and deploy it to all matching Agents at once. Before deploying, review the configuration diff for each Agent in scope.
 
 ## Prerequisites
 
-- [Remote Configuration][1] enabled for your organization
+- [Remote Configuration][1] enabled for your organization and for the API key your Agents use. Both are enabled by default.
+- [Remote updates][10] enabled on each target VM Agent (`remote_updates: true`).
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][5].
-- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
+- Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs.
 - Log collection enabled on the target Agents (`logs_enabled: true` in `datadog.yaml`). Fleet Automation deploys the configuration file either way, but the Agent does not start collecting logs until log collection is enabled. See [Host Agent Log Collection][8].
 
 <div class="alert alert-info">
@@ -37,8 +37,6 @@ Configuring custom logs on Agents in containerized workloads is not supported. F
 </div>
 
 ## Configure custom logs across multiple Agents
-
-<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</div>
 
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][2] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
@@ -50,6 +48,8 @@ Configuring custom logs on Agents in containerized workloads is not supported. F
     - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}}.
 
     <div class="alert alert-tip">Toggle between <strong>Visual</strong> and <strong>YAML</strong> mode when filling out the log collection configuration. Use <strong>YAML</strong> mode to paste in YAML directly.</div>
+
+    <div class="alert alert-tip">To check how your changes affect a specific Agent, preview its configuration diff in the <strong>Configuration Summary</strong> panel.</div>
 
 1. Review the deployment plan. Fleet Automation generates a configuration diff for each affected Agent so you can verify the exact changes.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track progress from the [Deployments page][3].
@@ -86,3 +86,4 @@ If the deployment succeeded but no logs arrive, see the [Log Collection Troubles
 [7]: /logs/guide/log-collection-troubleshooting-guide/
 [8]: /agent/logs/
 [9]: https://app.datadoghq.com/fleet
+[10]: /agent/guide/setup_remote_config/#enable-remote-agent-management

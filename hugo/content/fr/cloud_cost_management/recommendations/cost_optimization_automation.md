@@ -100,11 +100,11 @@ L'onglet {{< ui >}}Remediation{{< /ui >}} répertorie toutes les automatisations
 - Renommer une automatisation
 - Supprimer une automatisation
 
-## Historique d'exécution {#execution-history}
+## Historique des exécutions {#execution-history}
 
 Ouvrez une automatisation et sélectionnez l'onglet {{< ui >}}Activity{{< /ui >}} pour voir les exécutions passées et à venir. Chaque enregistrement d'exécution comprend :
 
-- Heure et statut de l'exécution (succès, échec ou approbation en attente)
+- Horodatage et statut de l'exécution (succès, échec ou approbation en attente)
 - Les ressources sur lesquelles une action a été effectuée
 - Économies estimées réalisées par l'exécution
 - Un lien vers l'exécution de Workflow Automation sous-jacente

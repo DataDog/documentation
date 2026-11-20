@@ -13,7 +13,7 @@ aliases:
 - /ja/tracing/llm_observability/trace_an_llm_application
 - /ja/llm_observability/setup
 - /ja/llm_observability/instrumentation/sdk/
-description: Python、Node.js、Java 向けの Agent Observability SDK のリファレンスドキュメントです。自動および手動のインスツルメンテーションについて説明しています。
+description: Python、Node.js、Java、および Go (実験的) 向け Agent Observability SDK のリファレンスドキュメント。自動および手動のインスツルメンテーションについて説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: ブログ
@@ -23,6 +23,10 @@ title: Agent Observability SDK リファレンス
 ## 概要 {#overview}
 
 Agent Observability SDK は、LLM アプリケーションの可観測性とインサイトを提供するために、自動インスツルメンテーションおよび手動インスツルメンテーション API を提供します。
+
+SDK は Python、Node.js、Java、および Go (実験的) で利用可能です。機能の対応状況は言語によって異なります。お使いの言語のタブが表示されていないセクションは、その SDK ではサポートされていません。
+
+Go SDK は **実験的**です。`dd-trace-go` には LLM プロバイダーのインテグレーションが存在しないため、手動インスツルメンテーションのみが用意されています。
 
 ## セットアップ {#setup}
 
@@ -53,6 +57,15 @@ Agent Observability SDK は、LLM アプリケーションの可観測性とイ�
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+<div class="alert alert-warning">Go SDK は実験的です。将来のリリースで API が変更される可能性があります。</div>
+
+- 最新の `dd-trace-go/v2` モジュールがインストールされています。Agent Observability SDK は `dd-trace-go` v2.3.0 以降 (すべての機能を使用するには v2.10.0 以降を推奨) でサポートされています:
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2
+   ```
+   **注**: `dd-trace-go` v2.8.0 以降には Go 1.25 以降が必要です。v2.3.0 から v2.7.0 までのバージョンには Go 1.24 以降が必要です。
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% collapse-content title="コマンドラインセットアップ" level="h4" expanded=false id="command-line-setup" %}}
@@ -72,7 +85,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_SITE`
 : 必須 - _文字列_
-<br />LLM データ送信先の Datadog サイト。使用するサイトは {{< region-param key="dd_site" code="true" >}}です。
+<br />LLM データ送信先の Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}です。
 
 `DD_LLMOBS_ENABLED`
 : 必須 - _整数または文字列_
@@ -80,7 +93,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ML_APP`
 : オプション - _文字列_
-<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、[アプリケーション命名ガイドライン](#application-naming-guidelines)を参照してください。特定のルートスパンに対してこの値を上書きするには、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のルートスパンに対してこの値を上書きするには、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
 <br />**注**: バージョン `ddtrace==3.14.0` より前では、これは**必須フィールド**です。
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -89,7 +102,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_SAMPLE_RATE`
 : オプション - _浮動小数点数_ - **デフォルト**: `1.0`
-<br />Agent Observability によって保持されるトレースの割合。[トレースサンプリング](#trace-sampling)を参照してください。
+<br />Agent Observability によって保持されるトレースの割合。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 `DD_API_KEY`
 : オプション - _文字列_
@@ -117,7 +130,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_SITE`
 : 必須 - _文字列_
-<br />LLM データを送信する Datadog サイト。使用するサイトは {{< region-param key="dd_site" code="true" >}}です。
+<br />LLM データを送信する Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}です。
 
 `DD_LLMOBS_ENABLED`
 : 必須 - _整数または文字列_
@@ -125,7 +138,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ML_APP`
 : オプション - _文字列_
-<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、[アプリケーション命名ガイドライン](#application-naming-guidelines)を参照してください。特定のルートスパンに対してこの値を上書きするには、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のルートスパンに対してこの値を上書きするには、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
 <br />**注**: バージョン `dd-trace@5.66.0` より前では、これは**必須フィールド**です。
 
 `DD_LLMOBS_AGENTLESS_ENABLED`
@@ -134,7 +147,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_SAMPLE_RATE`
 : オプション - _浮動小数点数_ - **デフォルト**: `1.0`
-<br />Agent Observability によって保持されるトレースの割合。[トレースサンプリング](#trace-sampling)を参照してください。
+<br />Agent Observability によって保持されるトレースの割合。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 `DD_API_KEY`
 : オプション - _文字列_
@@ -158,7 +171,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_SITE`または `dd.site`
 : 必須 - _文字列_
-<br />LLM データ送信先の Datadog サイト。使用するサイトは {{< region-param key="dd_site" code="true" >}}です。
+<br />LLM データ送信先の Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}です。
 
 `DD_LLMOBS_ENABLED` または `dd.llmobs.enabled`
 : 必須 - _整数または文字列_
@@ -166,7 +179,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_LLMOBS_ML_APP`または `dd.llmobs.ml.app`
 : オプション - _文字列_
-<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、[アプリケーション命名ガイドライン](#application-naming-guidelines)を参照してください。特定のルートスパンに対してこの値を上書きするには、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のルートスパンに対してこの値を上書きするには、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、[`DD_SERVICE`][1] の値、またはアップストリームサービスから伝播された `DD_LLMOBS_ML_APP` の値がデフォルトで使用されます。
 <br />**注**: `dd-trace-java` のバージョン 1.54.0 より前では、これは**必須フィールド**です。
 
 `DD_LLMOBS_AGENTLESS_ENABLED`または `dd.llmobs.agentless.enabled`
@@ -175,11 +188,49 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_LLMOBS_SAMPLE_RATE`または `dd.llmobs.sample.rate`
 : オプション - _浮動小数点数_ - **デフォルト**: `1.0`
-<br />Agent Observability によって保持されるトレースの割合。`dd-trace-java` 1.66.0 以降が必要です。[トレースサンプリング](#trace-sampling)を参照してください。
+<br />Agent Observability によって保持されるトレースの割合。`dd-trace-java` 1.66.0 以降が必要です。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 `DD_API_KEY`または `dd.api.key`
 : オプション - _文字列_
 <br />Datadog API キー。Datadog Agent を使用していない場合にのみ必要です。
+
+[1]: /ja/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+Go SDK にはトレーサーがアプリケーションコードから開始されるため、`ddtrace-run` に相当するコマンドラインラッパーはありません。以下のパラメーターを環境変数として指定し、`tracer.Start()` を呼び出します。「[コード内のセットアップ](#in-code-setup)」を参照してください。
+
+{{< code-block lang="shell">}}
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+#### コマンドラインセットアップ用の環境変数{#environment-variables-for-command-line-setup-2}
+
+`DD_SITE`
+: 必須 - _文字列_
+<br />LLM データ送信先の Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}です。
+
+`DD_LLMOBS_ENABLED`
+: 必須 - _整数または文字列_
+<br />Agent Observability へのデータ送信を有効にするための切り替えスイッチ。`1` または `true` に設定する必要があります。`tracer.WithLLMObsEnabled(true)` に相当します。
+
+`DD_LLMOBS_ML_APP`
+: オプション - _文字列_
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のルートスパンに対してこの値を上書きするには、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、[`DD_SERVICE`][1] の値がデフォルト設定されます。`tracer.WithLLMObsMLApp()` に相当します。
+
+`DD_LLMOBS_AGENTLESS_ENABLED`
+: オプション - _整数または文字列_ - **デフォルト**: `false`
+<br />Datadog Agent を使用していない場合にのみ必要です。その場合は、`1` または `true` に設定する必要があります。`tracer.WithLLMObsAgentlessEnabled()` に相当します。
+
+`DD_LLMOBS_PROJECT_NAME`
+: オプション - _文字列_
+<br />[データセットと実験](/llm_observability/improve/experiments/)がグループ化されるプロジェクトの名前。`tracer.WithLLMObsProjectName()` に相当します。
+
+`DD_API_KEY`
+: オプション - _文字列_
+<br />Datadog API キー。Datadog Agent を使用していない場合にのみ必要です。
+
+**注**: Go SDK は `DD_LLMOBS_SAMPLE_RATE` をサポートしていません。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 [1]: /ja/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
@@ -197,7 +248,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 `LLMObs.enable()` 関数を使用して Agent Observability を有効にします。
 
 <div class="alert alert-info">
-このセットアップ方法を <code>ddtrace-run</code> コマンドと一緒に使用しないでください。
+このセットアップ方法を <code>ddtrace-run</code> コマンドに追記します。
 </div>
 
 {{< code-block lang="python" >}}
@@ -214,7 +265,7 @@ LLMObs.enable(
 
 `ml_app`
 : オプション - _文字列_
-<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、[アプリケーション命名ガイドライン](#application-naming-guidelines)を参照してください。特定のトレースに対してこの値をオーバーライドするには、[複数アプリケーションのトレース](#tracing-multiple-applications)を参照してください。指定しない場合、`DD_LLMOBS_ML_APP` の値がデフォルト設定されます。
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のトレースに対してこの値をオーバーライドするには、「[複数アプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、`DD_LLMOBS_ML_APP` の値がデフォルト設定されます。
 
 `integrations_enabled`- **デフォルト**: `true`
 : オプション - _boolean_
@@ -226,7 +277,7 @@ LLMObs.enable(
 
 `site`
 : オプション - _文字列_
-<br />LLM データを送信する Datadog サイト。使用するサイトは {{< region-param key="dd_site" code="true" >}}指定しない場合、`DD_SITE` の値がデフォルト設定されます。
+<br />LLM データを送信する Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}指定しない場合、`DD_SITE` の値がデフォルト設定されます。
 
 `api_key`
 : オプション - _文字列_
@@ -242,7 +293,7 @@ LLMObs.enable(
 
 `sample_rate`
 : オプション - _浮動小数点数_
-<br />Agent Observability によって保持されるトレースの割合。`ddtrace` 4.12.0 以降が必要です。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。[トレースサンプリング](#trace-sampling)を参照してください。
+<br />Agent Observability によって保持されるトレースの割合。`ddtrace` 4.12.0 以降が必要です。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 `capture_intent`
 : オプション - _Boolean_ - **デフォルト**: `false`
@@ -254,7 +305,7 @@ LLMObs.enable(
 {{% tab "Node.js" %}}
 
 <div class="alert alert-info">
-このセットアップ方法を <code>dd-trace/initialize.mjs</code> コマンドと一緒に使用しないでください。
+このセットアップ方法を <code>dd-trace/initialize.mjs</code> コマンドに追記します。
 </div>
 
 `init()` 関数を使用して Agent Observability を有効にします。
@@ -276,7 +327,7 @@ const llmobs = tracer.llmobs;
 
 `mlApp`
 : オプション - _文字列_
-<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、[アプリケーション命名ガイドライン](#application-naming-guidelines)を参照してください。特定のトレースに対してこの値をオーバーライドするには、[複数アプリケーションのトレース](#tracing-multiple-applications)を参照してください。指定しない場合、`DD_LLMOBS_ML_APP` の値がデフォルト設定されます。
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のトレースに対してこの値をオーバーライドするには、「[複数アプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、`DD_LLMOBS_ML_APP` の値がデフォルト設定されます。
 
 `agentlessEnabled`
 : オプション - _boolean_ - **デフォルト**: `false`
@@ -284,13 +335,13 @@ const llmobs = tracer.llmobs;
 
 `sampleRate`
 : オプション - _数値_
-<br />Agent Observability によって保持されるトレースの割合。`dd-trace` 5.110.0 以降が必要です。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。[トレースサンプリング](#trace-sampling)を参照してください。
+<br />Agent Observability によって保持されるトレースの割合。`dd-trace` 5.110.0 以降が必要です。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。「[トレースサンプリング](#trace-sampling)」を参照してください。
 
 **一般的なトレーサー設定のオプション**:
 
 `site`
 : オプション - _文字列_
-<br />LLM データを送信する Datadog サイト。使用するサイトは {{< region-param key="dd_site" code="true" >}}指定しない場合、`DD_SITE` の値がデフォルト設定されます。
+<br />LLM データを送信する Datadog サイト。ご利用のサイトは {{< region-param key="dd_site" code="true" >}}指定しない場合、`DD_SITE` の値がデフォルト設定されます。
 
 `env`
 : オプション - _文字列_
@@ -309,6 +360,54 @@ const llmobs = tracer.llmobs;
 <br />Datadog API キー。Datadog Agent を使用していない場合にのみ必要です。
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+Agent Observability オプションを `tracer.Start()` に渡して、Agent Observability を有効にします。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"log"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+		tracer.WithLLMObsAgentlessEnabled(true),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
+
+##### オプション {#options}
+
+`tracer.WithLLMObsEnabled`
+: オプション - _bool_
+<br />Agent Observability へのデータ送信を有効にするための切り替えスイッチ。指定しない場合、`DD_LLMOBS_ENABLED` の値がデフォルト設定されます。
+
+`tracer.WithLLMObsMLApp`
+: オプション - _文字列_
+<br />すべてのトレースとスパンがグループ化される、LLM アプリケーション、サービス、またはプロジェクトの名前。これは、異なるアプリケーションや実験を区別するのに役立ちます。使用可能な文字やその他の制約については、「[アプリケーション命名ガイドライン](#application-naming-guidelines)」を参照してください。特定のトレースに対してこの値をオーバーライドするには、「[複数アプリケーションのトレース](#tracing-multiple-applications)」を参照してください。指定しない場合、`DD_LLMOBS_ML_APP` の値がデフォルト設定されます。
+
+`tracer.WithLLMObsAgentlessEnabled`
+: オプション - _bool_ - **デフォルト**: `false`
+<br />Datadog Agent を使用していない場合のみ必要で、その場合はこれを `true` に設定する必要があります。指定しない場合、`DD_LLMOBS_AGENTLESS_ENABLED` の値がデフォルト設定されます。
+
+`tracer.WithLLMObsProjectName`
+: オプション - _文字列_
+<br />[データセットと実験](/llm_observability/improve/experiments/)がグループ化されるプロジェクトの名前。指定しない場合、`DD_LLMOBS_PROJECT_NAME` の値がデフォルト設定されます。
+
+`DD_SITE`、`DD_API_KEY`、`DD_ENV`、および `DD_SERVICE` を環境変数として設定します。`DD_API_KEY` は Datadog Agent を使用していない場合にのみ必要です。
+
+**注**: Agent モードで[データセットと実験](/llm_observability/improve/experiments/)を使用する場合は、Datadog Agent v7.72.0 以降が必要です。これより古い Agent バージョンでは、データセットおよび実験のエンドポイントが正しくプロキシされません。
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
@@ -320,7 +419,7 @@ SDK をインストールしてアプリケーションを実行すると、自�
 
 ## トレースのサンプリング {#trace-sampling}
 
-<div class="alert alert-info">トレースのサンプリングは、Python SDK (<code>ddtrace</code> 4.12.0 以降)、Node.js SDK（<code>dd-trace</code> 5.110.0 以降)、Java SDK（<code>dd-trace-java</code> 1.66.0 以降)。</div>
+<div class="alert alert-info">トレースのサンプリングは、Python SDK (<code>ddtrace</code> 4.12.0 以降)、Node.js SDK (<code>dd-trace</code> 5.110.0 以降)、および Java SDK (<code>dd-trace-java</code> 1.66.0 以降)。Go SDK ではサポートされていません。</div>
 
 トレースのサンプリングは、Agent Observability が保持するトレースの割合を設定します。Agent Observability の課金は送信するスパンの量に基づいているため、サンプルレートの設定は Agent Observability のコストを制御する 1 つの方法です。SDK はルートスパンでサンプリングの決定を行い、[分散型トレーシング](#distributed-tracing)を通じてダウンストリームサービスで作成されたスパンを含む、そのルートスパンのすべての子スパンに適用します。
 
@@ -328,8 +427,8 @@ SDK をインストールしてアプリケーションを実行すると、自�
 
 サンプルレートは、以下のいずれかの方法で設定できます。
 
-- **環境変数** (`DD_LLMOBS_SAMPLE_RATE`): は、[コマンドラインのセットアップ](#command-line-setup) と [コード内でのセットアップ](#in-code-setup) の両方に適用されます。Java では、`dd.llmobs.sample.rate` システムプロパティで同じ値を設定します。
-- **コード内パラメーター** (`sample_rate` in Python, `sampleRate` in Node.js): は、Python では `LLMObs.enable()` に、Node.js では `llmobs` の下で渡され、[コード内でのセットアップ](#in-code-setup)で SDK を有効化する際に使用されます。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。Java SDK にはコード内の同等の機能はありません。
+- **環境変数** (`DD_LLMOBS_SAMPLE_RATE`): は、[コマンドラインのセットアップ](#command-line-setup) と [コード内でのセットアップ](#in-code-setup) の両方に適用されます。Java では、`dd.llmobs.sample.rate` システムプロパティによって同じ値が設定されます。
+- **コード内パラメーター** (`sample_rate` in Python, `sampleRate` in Node.js): は、Python では `LLMObs.enable()` に、Node.js では `llmobs` の下で渡され、[コード内でのセットアップ](#in-code-setup)で SDK を有効化する際に使用されます。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。Java および Go SDK には、コード内に相当する設定はありません。
 
 サンプルレートは、`0.0` (トレースを一切保持しない) から `1.0` (すべてのトレースを保持する) までの浮動小数点数です。デフォルトは `1.0` です。範囲外の値は無視されます。
 
@@ -384,7 +483,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 -jar path/to/your/app.jar
 {{< /code-block >}}
 
-または、同等の `dd.llmobs.sample.rate` システムプロパティを設定してください:
+または、同等の `dd.llmobs.sample.rate` システムプロパティを設定します。
 
 {{< code-block lang="shell" >}}
 java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
@@ -399,7 +498,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 {{< tabs >}}
 {{% tab "Python" %}}
 
-LLM 操作をキャプチャするために、関数デコレータを使用してワークフローを簡単にインスツルメントすることができます。
+LLM 操作をキャプチャするために、関数デコレーターを使用してワークフローを簡単にインスツルメントすることができます。
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs.decorators import workflow
@@ -425,14 +524,14 @@ with LLMObs.llm(model="gpt-4o"):
 {{< /code-block >}}
 
 
-利用可能なスパンの種類のリストについては、[スパンの種類のドキュメント][1]を参照してください。関数内の操作をより詳細にトレースする方法については、[インラインメソッドを使用したスパンのトレース](#tracing-spans-using-inline-methods)を参照してください。
+利用可能なスパンの種類のリストについては、[スパンの種類のドキュメント][1]を参照してください。関数内の操作をより詳細にトレースする方法については、「[インラインメソッドを使用したスパンのトレース](#tracing-spans-using-inline-methods)」を参照してください。
 
 [1]: /ja/llm_observability/quickstart/terms/
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-スパンをトレースするには、トレースしたい関数の関数ラッパーとして `llmobs.wrap(options, function)` を使用します。利用可能なスパンの種類のリストについては、[スパンの種類のドキュメント][1]を参照してください。関数内の操作をより詳細にトレースする方法については、[インラインメソッドを使用したスパンのトレース](#tracing-spans-using-inline-methods)を参照してください。
+スパンをトレースするには、トレースしたい関数の関数ラッパーとして `llmobs.wrap(options, function)` を使用します。利用可能なスパンの種類のリストについては、[スパンの種類のドキュメント][1]を参照してください。関数内の操作をより詳細にトレースする方法については、「[インラインメソッドを使用したスパンのトレース](#tracing-spans-using-inline-methods)」を参照してください。
 
 ### スパンの種類 {#span-kinds}
 
@@ -442,7 +541,7 @@ with LLMObs.llm(model="gpt-4o"):
 
 ### 自動関数引数/出力/名前キャプチャ {#automatic-function-argumentoutputname-capturing}
 
-`llmobs.wrap` (TypeScript の場合は [`llmobs.decorate`](#function-decorators-in-typescript) も) では、トレースされている関数の入力、出力、および名前を自動的にキャプチャしようとします。スパンに手動でアノテーションを付ける必要がある場合は、[スパンの強化](#enriching-spans)を参照してください。アノテーションを付けた入力と出力により、自動キャプチャがオーバーライドされます。さらに、関数名をオーバーライドするには、オプションオブジェクトの `name` プロパティを `llmobs.wrap` 関数に渡します。
+`llmobs.wrap` (TypeScript の場合は [`llmobs.decorate`](#function-decorators-in-typescript) も) では、トレースされている関数の入力、出力、および名前を自動的にキャプチャしようとします。スパンに手動でアノテーションを付ける必要がある場合は、「[スパンの強化](#enriching-spans)」を参照してください。アノテーションを付けた入力と出力により、自動キャプチャがオーバーライドされます。さらに、関数名をオーバーライドするには、オプションオブジェクトの `name` プロパティを `llmobs.wrap` 関数に渡します。
 
 {{< code-block lang="javascript" >}}
 function processMessage () {
@@ -479,7 +578,7 @@ app.use(myAgentMiddleware)
 
 {{< /code-block >}}
 
-アプリケーションがコールバック関数を使用しない場合は、代わりにインラインでトレースされたブロックを使用することをお勧めします。詳細については、[インラインメソッドを使用したトレースのスパン](#tracing-spans-using-inline-methods)を参照してください。
+アプリケーションがコールバック関数を使用しない場合は、代わりにインラインでトレースされたブロックを使用することをお勧めします。詳細については、「[インラインメソッドを使用したトレースのスパン](#tracing-spans-using-inline-methods)」を参照してください。
 
 {{< code-block lang="javascript" >}}
 const express = require('express')
@@ -527,17 +626,105 @@ app.use(myAgentMiddleware)
 
 [1]: /ja/llm_observability/quickstart/terms/#span-kinds
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+### スパンの開始 {#starting-a-span-1}
+
+各スパンの種類には、`llmobs` パッケージに独自のコンストラクターがあります。サポートされているスパンの種類のリストについては、[スパンの種類のドキュメント][1] を参照してください。
+
+各コンストラクターは `context.Context` を受け取り、開始されたスパンと、そのスパンを保持する新しい `context.Context` を返します。返されたコンテキストを次の呼び出しに渡すことで、スパンが自動的にネストされます。「[スパンのネスト](#nesting-spans)」を参照してください。
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+| スパンの種類 | コンストラクター | アノテーションメソッド |
+|---|---|---|
+| `llm` | `llmobs.StartLLMSpan` | `AnnotateLLMIO` |
+| `workflow` | `llmobs.StartWorkflowSpan` | `AnnotateTextIO` |
+| `agent` | `llmobs.StartAgentSpan` | `AnnotateTextIO` |
+| `tool` | `llmobs.StartToolSpan` | `AnnotateTextIO` |
+| `task` | `llmobs.StartTaskSpan` | `AnnotateTextIO` |
+| `embedding` | `llmobs.StartEmbeddingSpan` | `AnnotateEmbeddingIO` |
+| `retrieval` | `llmobs.StartRetrievalSpan` | `AnnotateRetrievalIO` |
+
+各コンストラクターは、次の `llmobs.StartSpanOption` 値を受け入れます。
+
+{{% collapse-content title="スパンの開始オプション" level="h4" expanded=false id="go-start-span-options" %}}
+
+`llmobs.WithMLApp`
+: オプション - _文字列_
+<br />操作が属する ML アプリケーションの名前。トレーサーの起動時に指定された ML アプリを上書きします。「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
+
+`llmobs.WithSessionID`
+: オプション - _文字列_
+<br />基盤となるユーザーセッションの ID。「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
+
+`llmobs.WithModelName`
+: オプション - _文字列_ - **デフォルト**: `"custom"`
+<br />呼び出されたモデルの名前。`llm` および `embedding` 以外のスパンの種類では無視されます。
+
+`llmobs.WithModelProvider`
+: オプション - _文字列_ - **デフォルト**: `"custom"`
+<br />モデルプロバイダーの名前。`llm` および `embedding` 以外のスパンの種類では無視されます。
+<br />**注**: 米ドルでの推定コストを表示するには、モデルプロバイダーを[サポートされているプロバイダー](#use-case-using-a-common-model-provider)に設定してください。
+
+`llmobs.WithStartTime`
+: オプション - `time.Time`
+<br />スパンの明示的な開始時刻。デフォルトは現在時刻です。
+
+`llmobs.WithIntegration`
+: オプション - _文字列_
+<br />スパンを生成したインテグレーションの名前。
+
+{{% /collapse-content %}}
+
+### スパンの終了 {#finishing-a-span-1}
+
+トレースを送信して Datadog で表示できるようにするには、スパンを終了させる必要があります。関数が早期にリターンしたりパニックが発生したりした場合でもスパンが確実に終了するように、`defer` を使用します。
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+`Finish` は次の `llmobs.FinishSpanOption` 値を受け入れます。
+
+`llmobs.WithError`
+: オプション - _エラー_
+<br />スパンをエラーとしてマークし、エラーメッセージ、種類、スタックトレースを記録します。「[エラーのアノテーション付け](#annotating-errors)」を参照してください。
+
+`llmobs.WithFinishTime`
+: オプション - `time.Time`
+<br />スパンの明示的な終了時刻。デフォルトは現在時刻です。
+
+### アクティブなスパンの取得 {#retrieving-the-active-span}
+
+`llmobs.SpanFromContext` は、アクティブな Agent Observability スパンを `*llmobs.AnySpan` として返します。`As*` メソッドを使用して具体的なスパンの種類に変換し、その種類のアノテーションメソッドにアクセスします。
+
+{{< code-block lang="go" >}}
+if span, ok := llmobs.SpanFromContext(ctx); ok {
+	if llmSpan, ok := span.AsLLM(); ok {
+		llmSpan.AnnotateLLMIO(nil, []llmobs.LLMMessage{{Role: "assistant", Content: "..."}})
+	}
+}
+{{< /code-block >}}
+
+**注**: Go SDK にはデコレーターや関数ラッパー API がないため、関数引数、戻り値、名前は自動的にキャプチャされません。入力と出力を明示的にアノテーション付けします。「[スパンの拡張](#enriching-spans)」を参照してください。
+
+[1]: /ja/llm_observability/quickstart/terms/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### LLM 呼び出し{#llm-calls}
 
 <div class="alert alert-info">LLM プロバイダーや、<a href="/llm_observability/instrument/auto_instrumentation/">Datadog の LLM インテグレーション</a>によってサポートされているフレームワークを使用している場合、これらの操作をトレースするために LLM スパンを手動で開始する必要はありません。</div>
 
-<div class="alert alert-info">LLM スパンを手動でインスツルメントする場合は、スパンにアノテーションを付けて、トークン数 ( <code>input_tokens</code>,<code>output_tokens</code>、および <code>total_tokens</code>) を自分で記録する必要があります。詳細については、<a href="#enriching-spans">スパンの強化</a>を参照してください。</div>
+<div class="alert alert-info">LLM スパンを手動でインスツルメントする場合は、スパンにアノテーションを付けて、トークン数 ( <code>input_tokens</code>、<code>output_tokens</code>、および <code>total_tokens</code>) を自分で記録する必要があります。詳細については、「<a href="#enriching-spans">スパンの強化</a>」を参照してください。</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
-LLM 呼び出しをトレースするには、関数デコレータ `ddtrace.llmobs.decorators.llm()` を使用します。
+LLM 呼び出しをトレースするには、関数デコレーター `ddtrace.llmobs.decorators.llm()` を使用します。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="llm-span-arguments" %}}
 
@@ -556,11 +743,11 @@ LLM 呼び出しをトレースするには、関数デコレータ `ddtrace.llm
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -602,11 +789,11 @@ LLM 呼び出しをトレースするには、スパンの種類を `llm` と指
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -651,11 +838,11 @@ LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -681,6 +868,63 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartLLMSpan` を使用して LLM 呼び出しをトレースし、`AnnotateLLMIO` でプロンプトと完了を記録します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func invokeModel(ctx context.Context, userInput string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	completion := callProvider(userInput) // user application logic to invoke LLM
+
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{
+			{Role: "system", Content: "You are a helpful assistant"},
+			{Role: "user", Content: userInput},
+		},
+		[]llmobs.LLMMessage{
+			{Role: "assistant", Content: completion},
+		},
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+	)
+	return completion
+}
+{{< /code-block >}}
+
+#### ツール呼び出しとツール結果{#tool-calls-and-tool-results}
+
+また、`llmobs.LLMMessage` には、モデルが要求したツール呼び出しと、モデルに返された結果を含めることもできます。
+
+{{< code-block lang="go" >}}
+args, _ := json.Marshal(map[string]any{"city": "Paris"})
+
+span.AnnotateLLMIO(
+	[]llmobs.LLMMessage{{Role: "user", Content: "What is the weather in Paris?"}},
+	[]llmobs.LLMMessage{{
+		Role: "assistant",
+		ToolCalls: []llmobs.ToolCall{
+			{Name: "get_weather", Arguments: args, ToolID: "call_1", Type: "function"},
+		},
+	}},
+)
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -688,7 +932,7 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-ワークフローのスパンをトレースするには、関数デコレータ `ddtrace.llmobs.decorators.workflow()` を使用します。
+ワークフローのスパンをトレースするには、関数デコレーター `ddtrace.llmobs.decorators.workflow()` を使用します。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="workflow-span-arguments" %}}
 `name`
@@ -697,11 +941,11 @@ public class MyJavaClass {
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -730,11 +974,11 @@ def process_message():
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -765,11 +1009,11 @@ LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -790,6 +1034,29 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartWorkflowSpan` を使用してワークフローのスパンをトレースし、`AnnotateTextIO` で入力と出力を記録します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func executeWorkflow(ctx context.Context, question string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+	defer span.Finish()
+
+	answer := workflowFn(ctx, question) // user application logic
+
+	span.AnnotateTextIO(question, answer)
+	return answer
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -797,7 +1064,7 @@ public class MyJavaClass {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-エージェントの実行をトレースするには、関数デコレータ `ddtrace.llmobs.decorators.agent()` を使用します。
+エージェントの実行をトレースするには、関数デコレーター `ddtrace.llmobs.decorators.agent()` を使用します。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="agent-span-arguments" %}}
 
@@ -807,11 +1074,11 @@ public class MyJavaClass {
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 {{% /collapse-content %}}
 
 #### 例 {#example-8}
@@ -838,11 +1105,11 @@ def react_agent():
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -873,14 +1140,37 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 {{% /collapse-content %}}
 
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartAgentSpan` を使用してエージェントのスパンをトレースし、`AnnotateTextIO` で入力と出力を記録します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func runAgent(ctx context.Context, task string) string {
+	span, ctx := llmobs.StartAgentSpan(ctx, "research-agent")
+	defer span.Finish()
+
+	result := agentLoop(ctx, task) // user application logic
+
+	span.AnnotateTextIO(task, result)
+	return result
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -888,7 +1178,7 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-ツール呼び出しをトレースするには、関数デコレータ `ddtrace.llmobs.decorators.tool()` を使用します。
+ツール呼び出しをトレースするには、関数デコレーター `ddtrace.llmobs.decorators.tool()` を使用します。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="tool-span-arguments" %}}
 
@@ -898,11 +1188,11 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -930,11 +1220,11 @@ def call_weather_api():
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -965,14 +1255,37 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 {{% /collapse-content %}}
 
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartToolSpan` を使用してツールのスパンをトレースし、`AnnotateTextIO` で入力と出力を記録します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func getWeather(ctx context.Context, city string) string {
+	span, ctx := llmobs.StartToolSpan(ctx, "get_weather")
+	defer span.Finish()
+
+	result := weatherAPI(ctx, city) // user application logic
+
+	span.AnnotateTextIO(city, result)
+	return result
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -980,7 +1293,7 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-タスクのスパンをトレースするには、関数デコレータ `LLMObs.task()` を使用します。
+タスクのスパンをトレースするには、関数デコレーター `LLMObs.task()` を使用します。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -990,11 +1303,11 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1022,11 +1335,11 @@ def sanitize_input():
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1057,15 +1370,38 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。非 null の値を指定すると、アプリケーションの開始時に指定された ML アプリ名がオーバーライドされます。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 
 {{% /collapse-content %}}
 
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartTaskSpan` を使用してタスクのスパンをトレースし、`AnnotateTextIO` で入力と出力を記録します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func parseInput(ctx context.Context, raw string) string {
+	span, ctx := llmobs.StartTaskSpan(ctx, "parse-input")
+	defer span.Finish()
+
+	parsed := parse(ctx, raw) // user application logic
+
+	span.AnnotateTextIO(raw, parsed)
+	return parsed
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1073,9 +1409,9 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-埋め込み操作をトレースするには、関数デコレータ `LLMObs.embedding()` を使用します。
+埋め込み操作をトレースするには、関数デコレーター `LLMObs.embedding()` を使用します。
 
-**注**: 埋め込みスパンの入力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。埋め込み入力を指定する方法の詳細については、[スパンの強化](#enriching-spans)を参照してください。
+**注**: 埋め込みスパンの入力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。埋め込み入力を指定する方法の詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1092,11 +1428,11 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1116,7 +1452,7 @@ def perform_embedding():
 {{% tab "Node.js" %}}
 埋め込み操作をトレースするには、スパンの種類を `embedding` と指定し、必要に応じてオプションオブジェクトに引数を指定します。
 
-**注**: 埋め込みスパンの入力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。埋め込み入力を指定する方法の詳細については、[スパンの強化](#enriching-spans)を参照してください。
+**注**: 埋め込みスパンの入力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。埋め込み入力を指定する方法の詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="embedding-span-arguments" %}}
 
@@ -1134,11 +1470,11 @@ def perform_embedding():
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1154,15 +1490,65 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartEmbeddingSpan` を使用してエンベディングスパンをトレースします。`AnnotateEmbeddingIO` は、入力として `llmobs.EmbeddedDocument` のスライスを、出力として文字列を受け取ります。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func embedQuery(ctx context.Context, query string) []float64 {
+	span, _ := llmobs.StartEmbeddingSpan(ctx, "embed-query",
+		llmobs.WithModelName("text-embedding-3-small"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	vector := embed(query) // user application logic
+
+	span.AnnotateEmbeddingIO(
+		[]llmobs.EmbeddedDocument{{Text: query}},
+		"[0.023, -0.918, ...]",
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens: 8,
+		}),
+	)
+	return vector
+}
+{{< /code-block >}}
+
+`llmobs.EmbeddedDocument` には次のフィールドがあります。
+
+`Text`
+: 必須 - _文字列_
+<br />ドキュメントのテキストコンテンツ。
+
+`Name`
+: オプション - _文字列_
+<br />ドキュメントの名前またはタイトル。
+
+`ID`
+: オプション - _文字列_
+<br />ドキュメントの一意の識別子。
+
+`Score`
+: オプション - _float64_
+<br />通常 `0.0` から `1.0` の間になるドキュメントの関連度スコア。
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 取得 {#retrievals}
 
 {{< tabs >}}
 {{% tab "Python" %}}
-取得スパンをトレースするには、関数デコレータ `ddtrace.llmobs.decorators.retrieval()` を使用します。
+取得スパンをトレースするには、関数デコレーター `ddtrace.llmobs.decorators.retrieval()` を使用します。
 
-**注**: 取得スパンの出力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。取得出力を指定する方法の詳細については、[スパンの強化](#enriching-spans)を参照してください。
+**注**: 取得スパンの出力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。取得出力を指定する方法の詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1172,11 +1558,11 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 
 `session_id`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `ml_app`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1203,7 +1589,7 @@ def get_relevant_docs(question):
 
 取得スパンをトレースするには、スパンの種類を `retrieval` と指定し、必要に応じてオプションオブジェクトに次の引数を指定します。
 
-**注**: 取得スパンの出力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。取得出力を指定する方法の詳細については、[スパンの強化](#enriching-spans)を参照してください。
+**注**: 取得スパンの出力のアノテーションを付けるには、ほかのスパンタイプとは異なるフォーマットが必要です。取得出力を指定する方法の詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 {{% collapse-content title="引数" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
@@ -1213,17 +1599,17 @@ def get_relevant_docs(question):
 
 `sessionId`
 : オプション - _文字列_
-<br/>基盤となるユーザーセッションの ID。詳細については、[ユーザーセッションの追跡](#tracking-user-sessions)を参照してください。
+<br/>基盤となるユーザーセッションの ID。詳細については、「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
 
 `mlApp`
 : オプション - _文字列_
-<br/>操作が属する ML アプリケーションの名前。詳細については、[複数のアプリケーションのトレース](#tracing-multiple-applications)を参照してください。
+<br/>操作が属する ML アプリケーションの名前。詳細については、「[複数のアプリケーションのトレース](#tracing-multiple-applications)」を参照してください。
 
 {{% /collapse-content %}}
 
 #### 例 {#example-17}
 
-ここには、スパンにアノテーションを付ける例も含まれています。詳細については、[スパンの強化](#enriching-spans)を参照してください。
+ここには、スパンにアノテーションを付ける例も含まれています。詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 {{< code-block lang="javascript" >}}
 function getRelevantDocs (question) {
@@ -1242,6 +1628,52 @@ function getRelevantDocs (question) {
 getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`llmobs.StartRetrievalSpan` を使用してリトリーバルスパンをトレースします。`AnnotateRetrievalIO` は、入力として文字列を、出力として `llmobs.RetrievedDocument` のスライスを受け取ります。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func searchDocs(ctx context.Context, query string) []Doc {
+	span, _ := llmobs.StartRetrievalSpan(ctx, "search-docs")
+	defer span.Finish()
+
+	docs := vectorSearch(query) // user application logic
+
+	span.AnnotateRetrievalIO(
+		query,
+		[]llmobs.RetrievedDocument{
+			{Text: "Paris is the capital of France.", Name: "geography.md", ID: "doc-1", Score: 0.91},
+		},
+	)
+	return docs
+}
+{{< /code-block >}}
+
+`llmobs.RetrievedDocument` には次のフィールドがあります。
+
+`Text`
+: 必須 - _文字列_
+<br />ドキュメントのテキストコンテンツ。
+
+`Name`
+: オプション - _文字列_
+<br />ドキュメントの名前またはタイトル。
+
+`ID`
+: オプション - _文字列_
+<br />ドキュメントの一意の識別子。
+
+`Score`
+: オプション - _float64_
+<br />通常 `0.0` から `1.0` の間になるドキュメントの関連度スコア。
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1306,13 +1738,42 @@ public class MyJavaClass {
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+スパンコンストラクターは、開始されたスパンを保持する新しい `context.Context` を返します。新しいスパンが現在のスパンの子となるように、そのコンテキストを次のコンストラクターに渡します。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func handleRequest(ctx context.Context) {
+	workflowSpan, ctx := llmobs.StartWorkflowSpan(ctx, "workflow-1")
+	defer workflowSpan.Finish()
+
+	// child of workflow-1, because it receives the workflow's context
+	llmSpan, ctx := llmobs.StartLLMSpan(ctx, "llm-1", llmobs.WithModelName("gpt-5.1"))
+	defer llmSpan.Finish()
+
+	// APM spans can be mixed into the same trace
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "post-process")
+	defer apmSpan.Finish()
+}
+{{< /code-block >}}
+
+**注**: 親子関係はコンテキスト上で維持されます。親スパンを持たないコンテキストで開始されたスパンは、新しいトレースのルートになります。ゴルーチンを起動する際は、親のコンストラクターから返されたコンテキストを渡すことで、そのスパンが正しい親にアタッチされるようにします。
+{{% /tab %}}
 {{< /tabs >}}
 
 
 ## スパンの強化 {#enriching-spans}
 
 <div class="alert alert-info">
-このページの <code>metrics</code> パラメーターは、個々のスパンに属性として付加された数値を指します。<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームメトリクス</a>ではありません。認識された特定のキー ( <code>input_tokens</code>,<code>output_tokens</code>、および <code>total_tokens</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.tokens</code>など) をダッシュボードやモニターで使用するために生成します。
+ここでの <code>metrics</code> パラメーターは、個々のスパンに属性として付加された数値を指します。<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームメトリクス</a>ではありません。認識された特定のキー ( <code>input_tokens</code>、<code>output_tokens</code>、および <code>total_tokens</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.tokens</code>など) をダッシュボードやモニターで使用するために生成します。
 </div>
 
 {{< tabs >}}
@@ -1325,11 +1786,11 @@ SDK には、入力、出力、およびメタデータでスパンを強化す�
 
 `span`
 : オプション - _スパン_ - **デフォルト**: 現在のアクティブなスパン
-<br />アノテーションを付けるスパン。`span` が指定されていない場合 (関数デコレータを使用する場合など)、SDK は現在のアクティブなスパンにアノテーションを付けます。
+<br />アノテーションを付けるスパン。`span` が指定されていない場合 (関数デコレーターを使用する場合など)、SDK は現在のアクティブなスパンにアノテーションを付けます。
 
 `input_data`
 : オプション - _JSON のシリアライズ可能な型、または辞書のリスト_
-<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または次の形式の辞書のリスト : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` とオプションのキー `"tool_id"`、`"type"` を持つ呼び出し辞書のオプションのリストであり、`"tool_results"` は、必須キー `"result"` と、関数呼び出しシナリオ用のオプションのキー `"name"`、`"tool_id"`、`"type"` を持つツール結果辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と `"content"` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{"text": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
+<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または次の形式の辞書のリスト : `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` とオプションのキー `"tool_id"`、`"type"` を持つ呼び出し辞書のオプションのリストであり、`"tool_results"` は、必須キー `"result"` と、関数呼び出しシナリオ用のオプションのキー `"name"`、`"tool_id"`、`"type"` を持つツール結果辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と `"content"` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{"text": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
 
 `output_data`
 : オプション - _JSON のシリアライズ可能な型、または辞書のリスト_
@@ -1349,11 +1810,11 @@ SDK には、入力、出力、およびメタデータでスパンを強化す�
 
 `tags`
 : オプション - _辞書_
-<br />ユーザーがタグとしてスパンに追加できる、JSON のシリアライズ可能なキーと値のペアの辞書です。キーの例: `session`、`env`、`system`、および `version`。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />ユーザーがタグとしてスパンに追加できる、JSON のシリアライズ可能なキーと値のペアの辞書です。キーの例: `session`、`env`、`system`、および `version`。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `cost_tags`
 : オプション - _文字列のリスト_
-<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト (`tags` で設定済み、または同じスパンに以前にアノテーションされたもの)。既存のタグキーを参照していないエントリはスキップされます。詳細については、[コストモニタリング](#cost-monitoring)を参照してください。
+<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト (`tags` で設定済み、または同じスパンに以前にアノテーションされたもの)。既存のタグキーを参照していないエントリーはスキップされます。詳細については、「[コストモニタリング](#cost-monitoring)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1457,7 +1918,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-メッセージに `audio_parts` または `image_parts` の注釈が付いている場合、トレースを表示する画面では、インラインオーディオプレーヤーおよび画像がレンダリングされます。レンダリングされた例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に設定するインテグレーションについては、[マルチモーダルサポート](/llm_observability/instrument/multimodal/) を参照してください。
+メッセージに `audio_parts` または `image_parts` のアノテーションが付いている場合、トレースビューではインラインオーディオプレーヤーおよび画像としてレンダリングされます。レンダリング例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に入力するインテグレーションについては、「[マルチモーダルサポート](/llm_observability/instrument/multimodal/)」を参照してください。
 
 {{% /tab %}}
 
@@ -1479,7 +1940,7 @@ SDK には、入力、出力、メタデータを使用してスパンにアノ�
 
 `inputData`
 : オプション - _JSON のシリアライズ可能な型、またはオブジェクトのリスト_
-<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と `content` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{text: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
+<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または : `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と `content` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{text: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
 
 `outputData`
 オプション - _JSON のシリアライズ可能な型、またはオブジェクトのリスト_
@@ -1495,11 +1956,11 @@ SDK には、入力、出力、メタデータを使用してスパンにアノ�
 
 `tags`
 : オプション - _オブジェクト_
-<br />スパンのコンテキストに関するタグとしてユーザーが追加できる、JSON のシリアライズ可能なキーと値のペアのオブジェクト (`session`、`environment`、`system`、`versioning` など)。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />スパンのコンテキストに関するタグとしてユーザーが追加できる、JSON のシリアライズ可能なキーと値のペアのオブジェクト (`session`、`environment`、`system`、`versioning` など)。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `costTags`
 : オプション - _文字列の配列_
-<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト (`tags` で設定済み、または同じスパンに以前にアノテーションされたもの)。既存のタグキーを参照していないエントリはスキップされます。詳細については、[コストモニタリング](#cost-monitoring)を参照してください。
+<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト (`tags` で設定済み、または同じスパンに以前にアノテーションされたもの)。既存のタグキーを参照していないエントリーはスキップされます。詳細については、「[コストモニタリング](#cost-monitoring)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1594,9 +2055,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-メッセージに `audioParts` または `imageParts` の注釈が付いている場合、トレースを表示する画面では、インラインオーディオプレーヤーおよび画像がレンダリングされます。レンダリングされた例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に設定するインテグレーションについては、[マルチモーダルサポート](/llm_observability/instrument/multimodal/) を参照してください。
+メッセージに `audioParts` または `imageParts` のアノテーションが付いている場合、トレースビューではインラインオーディオプレーヤーおよび画像としてレンダリングされます。レンダリング例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に入力するインテグレーションについては、「[マルチモーダルサポート](/llm_observability/instrument/multimodal/)」を参照してください。
 
-OpenAI の音声チャット補完では、`audioParts` も [Datadog の LLM インテグレーション](/llm_observability/instrument/auto_instrumentation/) によって自動的にキャプチャされるため、手動で注釈を付ける必要はありません。Node.js SDK は `imageParts` を自動的にキャプチャしません。上記のように注釈を付けてください。
+OpenAI の音声チャット補完では、`audioParts` も [Datadog の LLM インテグレーション](/llm_observability/instrument/auto_instrumentation/) によって自動的にキャプチャされるため、手動でアノテーションを付ける必要はありません。Node.js SDK は `imageParts` を自動的にキャプチャしません。上記のようにアノテーションを追加します。
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1611,11 +2072,11 @@ SDK には、入力、出力、メトリクス、メタデータを使用して�
 引数が null または空の場合、処理は何も行われません。たとえば、`inputData` が空ではない文字列で、`outputData` が null の場合は、`inputData` のみが記録されます。
 
 `inputData`
-: オプション - _文字列_ または _List<LLMObs.LLMMessage>_
+: オプション - _文字列_ または _リスト<LLMObs.LLMMessage>_
 <br />文字列 (非 LLM スパン用)、または LLM スパン用の `LLMObs.LLMMessage` のリスト。
 
 `outputData`
-: オプション - _文字列_ または _List<LLMObs.LLMMessage>_
+: オプション - _文字列_ または _リスト<LLMObs.LLMMessage>_
 <br />文字列 (非 LLM スパン用)、または LLM スパン用の `LLMObs.LLMMessage` のリスト。
 
 #### LLM メッセージ {#llm-messages}
@@ -1665,7 +2126,7 @@ public class MyJavaClass {
 ##### 引数 {#arguments-1}
 
 `metrics`
-: 必須 - _Map<String, Number>_
+: 必須 - _マップ<String, Number>_
 <br />スパンで記述された操作に関連するメトリクスを記録するためにユーザーが追加できる、JSON のシリアライズ可能なキーと数値のマップ (たとえば、`input_tokens`、`output_tokens`、または`total_tokens`)。
 
 #### 単一のメトリクスを追加 {#add-a-single-metric}
@@ -1715,7 +2176,7 @@ public class MyJavaClass {
 ##### 引数 {#arguments-3}
 
 `tags`
-: 必須 - _Map<String, Object>_
+: 必須 - _マップ<String, Object>_
 <br /> スパンのコンテキストを説明するためにユーザーがタグとして追加できる JSON のシリアライズ可能なキーと値のペアのマップ (たとえば、`session`、`environment`、`system`、または`version`)。
 
 #### 単一のタグを追加 {#add-a-single-tag}
@@ -1811,7 +2272,7 @@ public class MyJavaClass {
 `LLMObsSpan` インターフェイスの `setMetadata()` メンバーメソッドは、次の引数を受け付けます。
 
 `metadata`
-: 必須 - _Map<String, Object>_
+: 必須 - _マップ<String, Object>_
 <br />スパンによって記述された入力または出力操作に関連するメタデータを含む、JSON のシリアライズ可能なキーと値のペアのマップです。
 
 #### 例 {#example-21}
@@ -1837,6 +2298,145 @@ public class MyJavaClass {
 
 [1]: /ja/getting_started/tagging/
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+各スパンの種類は、その入力と出力をアノテーション付けするための型付きメソッドを公開し、すべてのスパンは、次の `llmobs.AnnotateOption` 値を受け入れる汎用の `Annotate` メソッドを公開します。
+
+### 入力と出力のアノテーション付け {#annotating-inputs-and-outputs-1}
+
+スパンの種類に一致するアノテーションメソッドを使用します。
+
+- `AnnotateLLMIO(input, output []llmobs.LLMMessage, opts ...)` (`llm` スパン)
+- `AnnotateEmbeddingIO(input []llmobs.EmbeddedDocument, output string, opts ...)` (`embedding` スパン)
+- `AnnotateRetrievalIO(input string, output []llmobs.RetrievedDocument, opts ...)` (`retrieval` スパン)
+- `AnnotateTextIO(input, output string, opts ...)` (`workflow`、`agent`、`tool`、および `task` スパン)
+
+`llmobs.LLMMessage` には次のフィールドがあります。
+
+`Role`
+: 必須 - _文字列_
+<br /> メッセージ作成者の役割 (例: `system`、`user`、または `assistant`)。
+
+`Content`
+: 必須 - _文字列_
+<br /> メッセージのテキストコンテンツ。
+
+`ToolCalls`
+: オプション - _[]llmobs.ToolCall_
+<br />このメッセージで行われたツール呼び出し。
+
+`ToolResults`
+: オプション - _[]llmobs.ToolResult_
+<br />このメッセージ内のツール呼び出しの結果。
+
+### メトリクスの追加 {#adding-metrics-1}
+
+`llmobs.WithAnnotatedMetrics` を `map[string]float64` と併用します。`llmobs` パッケージは、認識されたキーの定数をエクスポートします。
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+	llmobs.MetricKeyInputTokens:            50,
+	llmobs.MetricKeyOutputTokens:           120,
+	llmobs.MetricKeyTotalTokens:            170,
+	llmobs.MetricKeyCacheReadInputTokens:   22,
+	llmobs.MetricKeyCacheWriteInputTokens:  15,
+	llmobs.MetricKeyReasoningOutputTokens:  30,
+	llmobs.MetricKeyTimeToFirstToken:       0.25,
+	llmobs.MetricKeyBillableCharacterCount: 900,
+}))
+{{< /code-block >}}
+
+| 定数 | キー |
+|---|---|
+| `llmobs.MetricKeyInputTokens` | `input_tokens` |
+| `llmobs.MetricKeyOutputTokens` | `output_tokens` |
+| `llmobs.MetricKeyTotalTokens` | `total_tokens` |
+| `llmobs.MetricKeyCacheReadInputTokens` | `cache_read_input_tokens` |
+| `llmobs.MetricKeyCacheWriteInputTokens` | `cache_write_input_tokens` |
+| `llmobs.MetricKeyReasoningOutputTokens` | `reasoning_output_tokens` |
+| `llmobs.MetricKeyBillableCharacterCount` | `billable_character_count` |
+| `llmobs.MetricKeyTimeToFirstToken` | `time_to_first_token` |
+
+このリストにないキーはカスタムメトリクスとして受け入れられます。これには、[手動コスト追跡](#use-case-using-a-custom-model)に使用される `input_cost` および `output_cost` キーが含まれます。
+
+### タグの追加 {#adding-tags-1}
+
+`llmobs.WithAnnotatedTags` を `map[string]string` と併用します。
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+	"team":        "nlp",
+	"host":        "host_name",
+	"feature":     "chatbot",
+	"user_handle": "poodle@dog.com",
+}))
+{{< /code-block >}}
+
+### エラーのアノテーション付け {#annotating-errors-1}
+
+スパンをエラーとしてマークするには、`llmobs.WithError` を `Finish` に渡します。SDK はエラーメッセージ、タイプ、スタックトレースを記録します。
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (string, error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+
+	completion, err := invokeProvider(ctx)
+	if err != nil {
+		span.Finish(llmobs.WithError(err))
+		return "", err
+	}
+
+	span.Finish()
+	return completion, nil
+}
+{{< /code-block >}}
+
+単一の `defer` を保持するには、名前付き戻り値でエラーをキャプチャします。
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (completion string, err error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+	defer func() { span.Finish(llmobs.WithError(err)) }()
+
+	completion, err = invokeProvider(ctx)
+	return completion, err
+}
+{{< /code-block >}}
+
+**注**: `llmobs.WithError(nil)` はノーオペレーションであるため、上記の遅延呼び出しでは成功したスパンはエラーとしてマークされません。
+
+### メタデータのアノテーション付け {#annotating-metadata-1}
+
+パラメーターやその他のコンテキストデータを記録するには、`llmobs.WithAnnotatedMetadata` を `map[string]any` と併用します。
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetadata(map[string]any{
+	"temperature": 0.7,
+	"max_tokens":  200,
+}))
+{{< /code-block >}}
+
+### その他のアノテーションオプション {#other-annotation-options}
+
+`llmobs.WithAnnotatedSessionID`
+: オプション - _文字列_
+<br />基盤となるユーザーセッションの ID。「[ユーザーセッションの追跡](#tracking-user-sessions)」を参照してください。
+
+`llmobs.WithAnnotatedPrompt`
+: オプション - _llmobs.Prompt_
+<br />構造化プロンプトのメタデータ。`dd-trace-go` v2.8.0+ が必要です。「[プロンプト追跡](#prompt-tracking)」を参照してください。
+
+`llmobs.WithAnnotatedToolDefinitions`
+: オプション - _[]llmobs.ToolDefinition_
+<br />この呼び出しでモデルが利用できるツール定義。`dd-trace-go` v2.8.0+ が必要です。
+
+`llmobs.WithAnnotatedCostTagKeys`
+: オプション - _[]string_
+<br />コストおよびトークンメトリクスに伝播させるスパンタグキー。`dd-trace-go` v2.10.0+ が必要です。「[コストおよびトークンメトリクスへのカスタムタグの追加](#adding-custom-tags-to-cost-and-tokens-metrics)」を参照してください。
+
+`llmobs.WithAnnotatedIntent`
+: オプション - _文字列_
+<br />ツールが呼び出された理由の説明。`tool` スパンに記録されます。`dd-trace-go` v2.8.0+ が必要です。
+{{% /tab %}}
 {{< /tabs >}}
 
 ### 自動インスツルメンテーションスパンのアノテーション付け{#annotating-auto-instrumented-spans}
@@ -1860,11 +2460,11 @@ SDK の `LLMObs.annotation_context()` メソッドは、アノテーションコ
 
 `tags`
 : オプション - _辞書_
-<br />ユーザーがタグとしてスパンに追加できる、JSON のシリアライズ可能なキーと値のペアの辞書です。キーの例: `session`、`env`、`system`、および `version`。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />ユーザーがタグとしてスパンに追加できる、JSON のシリアライズ可能なキーと値のペアの辞書です。キーの例: `session`、`env`、`system`、および `version`。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `cost_tags`
 : オプション - _文字列のリスト_
-<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト。各エントリでは、スパン開始時に `tags` に存在するキー (同じコンテキストまたは親コンテキストに提供されたもの) を指定する必要があります。`LLMObs.annotate()` で後から追加されたタグキーは保持されません。詳細については、[コストモニタリング](#cost-monitoring)を参照してください。
+<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト。各エントリーでは、スパン開始時に `tags` に存在するキー (同じコンテキストまたは親コンテキストに提供されたもの) を指定する必要があります。`LLMObs.annotate()` で後から追加されたタグキーは保持されません。詳細については、「[コストモニタリング](#cost-monitoring)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1906,7 +2506,7 @@ SDK の `llmobs.annotationContext()` は、コールバック関数のスコー�
 
 `llmobs.annotationContext()` メソッドは、最初の引数で次のオプションを受け付けます。
 
-{{% collapse-content title="Options (オプション)" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="オプション" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : オプション - _str_
@@ -1914,11 +2514,11 @@ SDK の `llmobs.annotationContext()` は、コールバック関数のスコー�
 
 `tags`
 : オプション - _オブジェクト_
-<br />ユーザーがスパンにタグとして追加できる JSON のシリアライズ可能なキーと値のペアのオブジェクトです。キーの例: : `session`、`env`、`system`、および `version`。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />ユーザーがスパンにタグとして追加できる JSON のシリアライズ可能なキーと値のペアのオブジェクトです。キーの例: : `session`、`env`、`system`、および `version`。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `costTags`
 : オプション - _文字列の配列_
-<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト。各エントリでは、スパン開始時に `tags` に存在するキー (同じコンテキストまたは親コンテキストに提供されたもの) を指定する必要があります。`llmobs.annotate()` で後から追加されたタグキーは保持されません。詳細については、[コストモニタリング](#cost-monitoring)を参照してください。
+<br />生成された LLM コストおよびトークンメトリクスにカスタムタグとして伝播するタグキーのリスト。各エントリーでは、スパン開始時に `tags` に存在するキー (同じコンテキストまたは親コンテキストに提供されたもの) を指定する必要があります。`llmobs.annotate()` で後から追加されたタグキーは保持されません。詳細については、「[コストモニタリング](#cost-monitoring)」を参照してください。
 
 {{% /collapse-content %}}
 
@@ -1952,7 +2552,7 @@ function ragWorkflow(userQuestion) {
 
 {{< tabs >}}
 {{% tab "Python" %}}
-LLM 呼び出しの前にプロンプトメタデータをアタッチするには、`LLMObs.annotation_context(prompt=...)` を使用します。スパンアノテーションの詳細については、[スパンの強化](#enriching-spans)を参照してください。
+LLM 呼び出しの前にプロンプトメタデータをアタッチするには、`LLMObs.annotation_context(prompt=...)` を使用します。スパンアノテーションの詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 #### 引数 {#arguments-8}
 
@@ -1969,7 +2569,7 @@ LLM 呼び出しの前にプロンプトメタデータをアタッチするに�
 サポートされているキー:
 
 - `id` (str): このプロンプトの論理識別子。`ml_app` ごとに一意である必要があります。デフォルトは `{ml_app}-unnamed_prompt` です。
-- `version` (str): プロンプトのバージョンタグ (例: "1.0.0")。詳細については、[バージョン追跡](#version-tracking)を参照してください。
+- `version` (str): プロンプトのバージョンタグ (例: "1.0.0")。詳細については、「[バージョン追跡](#version-tracking)」を参照してください。
 - `variables`(Dict[str, str]): テンプレートのプレースホルダーに入力するために使用される変数。
 - `template`(str): プレースホルダーを含むテンプレート文字列 (例: `"Translate {{text}} to {{lang}}")。
 - `chat_template`(List[Message]): マルチメッセージテンプレート形式。`{ "role": "<role>", "content": "<template string with placeholders>" }` オブジェクトのリストを指定します。
@@ -2015,11 +2615,11 @@ chain = translation_template | llm
 
 {{% tab "Node.js" %}}
 
-LLM 呼び出しの前にプロンプトメタデータをアタッチするには、`llmobs.annotationContext({ prompt: ... }, () => { ... })` を使用します。スパンアノテーションの詳細については、[スパンの強化](#enriching-spans)を参照してください。
+LLM 呼び出しの前にプロンプトメタデータをアタッチするには、`llmobs.annotationContext({ prompt: ... }, () => { ... })` を使用します。スパンアノテーションの詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
 
 #### 引数 {#arguments-9}
 
-{{% collapse-content title="Options (オプション)" level="h5" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="オプション" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : 必須 - オブジェクト
@@ -2032,10 +2632,10 @@ LLM 呼び出しの前にプロンプトメタデータをアタッチするに�
 サポートされているプロパティ:
 
 - `id` (文字列): このプロンプトの論理識別子。`ml_app` ごとに一意である必要があります。デフォルトは `{ml_app}-unnamed_prompt` です。
-- `version` (文字列): プロンプトのバージョンタグ (例: "1.0.0")。詳細については、[バージョン追跡](#version-tracking)を参照してください。
+- `version` (文字列): プロンプトのバージョンタグ (例: "1.0.0")。詳細については、「[バージョン追跡](#version-tracking)」を参照してください。
 - `variables`(Record<string, string>): テンプレートのプレースホルダーに入力するために使用される変数。
 - `template`(文字列 | List[Message]): プレースホルダーを含むテンプレート文字列 (例: `"Translate {{text}} to {{lang}}"`). Alternatively, a list of `{ "role": "<role>", "content": "<template string with placeholders>" }` オブジェクトのリスト。
-- `tags`(Record<string, string>): プロンプト実行にアタッチするタグ。
+- `tags`(Record<string, string>): プロンプトの実行に追加するタグ。
 - `contextVariables`(string[]): グラウンドトゥルース/コンテキストコンテンツを含む変数キー。[ハルシネーションの検出](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)に使用されます。
 - `queryVariables`(string[]): ユーザーのクエリを含む変数キー。[ハルシネーションの検出](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)に使用されます。
 
@@ -2068,6 +2668,62 @@ function answerQuestion(text) {
 
 {{% /tab %}}
 
+{{% tab "Go (実験的)" %}}
+`llmobs.WithAnnotatedPrompt` を使用して、プロンプトのメタデータを LLM スパンにアタッチします。`dd-trace-go` v2.8.0+ が必要です。スパンアノテーションの詳細については、「[スパンの強化](#enriching-spans)」を参照してください。
+
+{{% collapse-content title="プロンプト構造" level="h5" expanded=false id="go-prompt-structure" %}}
+
+`llmobs.Prompt` には次のフィールドがあります。
+
+- `ID` (_文字列_): このプロンプトの論理識別子。ML アプリごとに一意である必要があります。
+- `Version`(_文字列_): プロンプトのバージョンタグ (例: `"1.0.0"`)。「[バージョン追跡](#version-tracking)」を参照してください。
+- `Label`(_文字列_): プロンプトのデプロイメントラベル (例: `"production"` または `"staging"`)。
+- `Template`(_文字列_): プレースホルダーを含むテンプレート文字列 (例: `"Translate {{text}} to {{lang}}\"`. Mutually exclusive with `ChatTemplate`; if both are set, `Template` は削除されます。
+- `ChatTemplate` (_[]llmobs.LLMMessage_): マルチメッセージテンプレート形式。`Template` とは相互に排他的です。
+- `Variables`(_map[string]string_): テンプレートのプレースホルダーに入力するために使用される変数。
+- `Tags`(_map[string]string_): プロンプトの実行に追加するタグ。
+- `RAGContextVariables` (_[]string_): グラウンドトゥルースまたはコンテキストコンテンツを含む変数キー。[ハルシネーションの検出](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)に使用されます。
+- `RAGQueryVariables` (_[]string_): ユーザーのクエリを含む変数キー。[ハルシネーションの検出](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination)に使用されます。
+
+{{% /collapse-content %}}
+
+#### 例: チャットテンプレートプロンプト{#example-chat-template-prompt}
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func answerQuestion(ctx context.Context, text string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "answer-question",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedPrompt(llmobs.Prompt{
+		ID:      "translation-template",
+		Version: "1.0.0",
+		ChatTemplate: []llmobs.LLMMessage{
+			{Role: "user", Content: "Translate to {{lang}}: {{text}}"},
+		},
+		Variables: map[string]string{"lang": "fr", "text": text},
+		Tags:      map[string]string{"team": "nlp"},
+	}))
+
+	completion := callProvider(text) // user application logic
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{{Role: "user", Content: "Translate to fr: " + text}},
+		[]llmobs.LLMMessage{{Role: "assistant", Content: completion}},
+	)
+	return completion
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### 注 {#notes}
@@ -2075,7 +2731,7 @@ function answerQuestion(text) {
 - アノテーションは、正しい LLM スパンに適用されるようにするため、プロバイダー呼び出しの直前に配置します。
 - アプリケーション内の異なるプロンプトを区別するために、固有のプロンプト `id` を使用してください。
 - 次のようなプレースホルダー構文を使用してテンプレートを静的に保ち (例: `{{variable_name}}`) and define dynamic content in the `variables` セクションで動的コンテンツを定義します。
-- ブロック内で複数の自動インスツルメンテーション LLM 呼び出しを行う場合、アノテーションコンテキストを使用して同じプロンプトメタデータを呼び出し全体に適用します。[自動インスツルメンテーションスパンのアノテーション付け](#annotating-auto-instrumented-spans)を参照してください。
+- ブロック内で複数の自動インスツルメンテーション LLM 呼び出しを行う場合、アノテーションコンテキストを使用して同じプロンプトメタデータを呼び出し全体に適用します。「[自動インスツルメンテーションスパンのアノテーション付け](#annotating-auto-instrumented-spans)」を参照してください。
 
 ### バージョン追跡 {#version-tracking}
 
@@ -2120,7 +2776,7 @@ LLMObs.enable(
 
 自動インスツルメンテーションを使用している場合、トークンとコストメトリクスは自動的にスパンに表示されます。手動でインスツルメントする場合は、次のガイダンスに従ってください。
 
-<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームの Agent Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>,<code>output_tokens</code>,<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
+<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームの Agent Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>、<code>output_tokens</code>、<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
 
 ### ユースケース: 一般的なモデルプロバイダーの使用 {#use-case-using-a-common-model-provider}
 Datadog では、OpenAI、Azure OpenAI、Anthropic、Google Gemini などの一般的なモデルプロバイダーがサポートされています。これらのプロバイダーを使用する場合、LLM リクエストにモデル名、モデルプロバイダー、およびトークン使用量によりアノテーション付けするだけで済みます。Datadog では、プロバイダーの価格に基づいて推定コストが自動的に計算されます。
@@ -2199,6 +2855,38 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		llmobs.MetricKeyInputTokens:           50,
+		llmobs.MetricKeyOutputTokens:          120,
+		llmobs.MetricKeyTotalTokens:           170,
+		llmobs.MetricKeyCacheReadInputTokens:  22, // optional
+		llmobs.MetricKeyCacheWriteInputTokens: 15, // optional
+	}))
+	return resp
+}
+{{< /code-block >}}
+
+**注**: `dd-trace-go` には LLM プロバイダーのインテグレーションがないため、トークン数は自動的に取得されません。すべての `llm` および `embedding` スパンで記録してください。そうしないと、Datadog はコストを見積もることができません。
+{{% /tab %}}
 {{< /tabs >}}
 
 ### ユースケース: カスタムモデルの使用 {#use-case-using-a-custom-model}
@@ -2276,12 +2964,39 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("my-custom-model"),
+		llmobs.WithModelProvider("my-company"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		"input_cost":  0.0021,
+		"output_cost": 0.0048,
+	}))
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### コストおよびトークンメトリクスへのカスタムタグの追加 {#adding-custom-tags-to-cost-and-tokens-metrics}
 デフォルトでは、LLM コストおよびトークンメトリクスには、`model_name`、`model_provider`、`ml_app` などの固定された OOTB タグが含まれています。チーム、顧客、機能など、アプリケーション固有の属性で LLM の支出を分析するには、スパンの既存のタグキーの一部を、それらのメトリクスにカスタムタグとして伝播するよう指定します。カスタムダッシュボードやモニターなどの使用例については、[コストおよびトークンメトリクスへのカスタムタグ][15]を参照してください。
 
-各エントリは文字列であり、アノテーションを適用する時点で、スパンの `tags` パラメーターを通じてすでに提供されているキーを指定する必要があります。単一のスパンにアノテーションを付ける場合、キーは同じアノテーション呼び出し内の `tags` を通じて提供するか、同じスパンに対する以前のアノテーションで提供できます。アノテーションコンテキストを使用する場合、スパン開始時に `tags` に存在するキーのみが対象となります。後から個別のスパンアノテーションを通じて追加されたキーは保持されません。既存のタグキーを参照していないエントリはスキップされます。
+各エントリーは文字列であり、アノテーションを適用する時点で、スパンの `tags` パラメーターを通じてすでに提供されているキーを指定する必要があります。単一のスパンにアノテーションを付ける場合、キーは同じアノテーション呼び出し内の `tags` を通じて提供するか、同じスパンに対する以前のアノテーションで提供できます。アノテーションコンテキストを使用する場合、スパン開始時に `tags` に存在するキーのみが対象となります。後から個別のスパンアノテーションを通じて追加されたキーは保持されません。既存のタグキーを参照していないエントリーはスキップされます。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2318,6 +3033,44 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+`dd-trace-go` v2.10.0+ が必要です。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+		llmobs.WithAnnotatedTags(map[string]string{
+			"team":          "nlp",
+			"customer_tier": "enterprise",
+			"host":          "host_name",
+		}),
+		llmobs.WithAnnotatedCostTagKeys([]string{"team", "customer_tier"}),
+	)
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 この方法でアノテーションコンテキストを通じてタグを伝播し、コンテキスト内で開始されたすべての自動インスツルメンテーションスパンに適用することもできます。
@@ -2353,13 +3106,16 @@ llmobs.annotationContext({
 
 Agent Observability SDK には、評価を Datadog にエクスポートおよび送信するためのメソッドが用意されています。
 
-<div class="alert alert-info">豊富な結果メタデータを使用して、再利用可能なクラスベースの評価機能 (<code>BaseEvaluator</code>,<code>BaseSummaryEvaluator</code>) を構築する方法については、<a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">評価開発者ガイド</a>を参照してください。</div>
+<div class="alert alert-info">豊富な結果メタデータを使用して、再利用可能なクラスベースの評価機能 (<code>BaseEvaluator</code>、<code>BaseSummaryEvaluator</code>) を構築する方法については、「<a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">評価開発者ガイド</a>」を参照してください。</div>
 
 評価は単一のスパンに結合する必要があります。ターゲットスパンは、次の 2 つの方法のいずれかを使用して特定できます。
 - _タグベースの結合_ - 単一のスパンに設定された一意のキーと値のタグペアを使用して、評価を結合します。タグのキーと値ペアが複数のスパンに一致する場合、またはどのスパンにも一致しない場合、評価の結合は失敗します。
 - _直接スパン参照_ - スパンの一意のトレース ID とスパン ID の組み合わせを使用して、評価を結合します。
 
 ### スパンのエクスポート {#exporting-a-span}
+
+<div class="alert alert-info">Go SDK にはスパンのエクスポートメソッドがありません。代わりにスパンを直接 <code>llmobs.SubmitEvaluationFromSpan</code> に渡します。「<a href="#submitting-evaluations">評価の送信</a>」を参照してください。</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 `LLMObs.export_span()`は、スパンからスパンのコンテキストを抽出するために使用できます。このメソッドは、評価をそれに対応するスパンに関連付けるのに役立ちます。
@@ -2369,7 +3125,7 @@ Agent Observability SDK には、評価を Datadog にエクスポートおよ�
 
 `span`
 : オプション - _スパン_
-<br />スパンのコンテキスト (スパンおよびトレース ID) を抽出するスパン。指定しない場合 (関数デコレータを使用する場合など)、SDK により現在のアクティブスパンがエクスポートされます。
+<br />スパンのコンテキスト (スパンおよびトレース ID) を抽出するスパン。指定しない場合 (関数デコレーターを使用する場合など)、SDK により現在のアクティブスパンがエクスポートされます。
 
 #### 例 {#example-24}
 
@@ -2455,7 +3211,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 `tags`
 : オプション - _辞書_
-<br />評価に関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書です。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />評価に関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書です。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `assessment`
 : オプション - _文字列_
@@ -2553,7 +3309,7 @@ def llm_call():
 
 `tags`
 : オプション - _辞書_
-<br />評価に関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書です。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />評価に関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書です。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `assessment`
 : オプション - _文字列_
@@ -2608,8 +3364,8 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 <br />評価の値。文字列 (カテゴリ評価用) または double (スコア評価用) である必要があります。
 
 `tags`
-: オプション - _Map<String, Object>_
-<br />評価をタグ付けするために使用される文字列のキーと値のペアの辞書。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+: オプション - _マップ<String, Object>_
+<br />評価をタグ付けするために使用される文字列のキーと値のペアの辞書。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 {{% /collapse-content %}}
 
 #### 例 {#example-28}
@@ -2640,11 +3396,81 @@ public class MyJavaClass {
 
 [1]: /ja/getting_started/tagging/
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+Go SDK には、評価を送信するための 2 つの関数が用意されています。どちらも、渡す値の Go 型から評価タイプを推論します。: `bool` は `boolean` 評価になり、`string` は `categorical` になり、数値型はすべて `score` になります。
+
+**注**: Go SDK は `json` 評価をサポートしていません。
+
+### スパンの直接参照 {#direct-span-reference}
+
+`llmobs.SubmitEvaluationFromSpan` はスパン自体を受け取るため、個別のエクスポート手順は不要です。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func evaluate(ctx context.Context) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("claude-opus-4-6"),
+		llmobs.WithModelProvider("anthropic"),
+	)
+	defer span.Finish()
+
+	// ... user application logic
+
+	llmobs.SubmitEvaluationFromSpan("correctness", "correct", span) // categorical
+	llmobs.SubmitEvaluationFromSpan("relevance_score", 0.95, span)  // score
+	llmobs.SubmitEvaluationFromSpan("is_safe", true, span)          // boolean
+}
+{{< /code-block >}}
+
+### タグベースの結合 {#tag-based-joining}
+
+`llmobs.SubmitEvaluationFromTag` は、一致するタグのキーと値のペアを持つスパンに評価を結合します。ペアが複数のスパンに一致する場合、またはどのスパンにも一致しない場合、評価の結合は失敗します。
+
+{{< code-block lang="go" >}}
+joinTag := llmobs.JoinTag{Key: "session_id", Value: sessionID}
+
+llmobs.SubmitEvaluationFromTag("user_feedback", "positive", joinTag)
+llmobs.SubmitEvaluationFromTag("user_rating", 4.2, joinTag)
+llmobs.SubmitEvaluationFromTag("thumbs_up", true, joinTag)
+{{< /code-block >}}
+
+### オプション {#options-1}
+
+どちらの関数も、以下の `llmobs.EvaluationOption` 値を受け入れます。
+
+`llmobs.WithEvaluationTags`
+: オプション - _[]string_
+<br />評価に追加する、`key:value` 文字列としてフォーマットされたタグのリスト。
+
+`llmobs.WithEvaluationMLApp`
+: オプション - _文字列_
+<br />ML アプリケーションの名前。SDK 用に構成された ML アプリがデフォルトになります。
+
+`llmobs.WithEvaluationTimestamp`
+: オプション - `time.Time`
+<br />評価が生成された時刻。デフォルトは現在時刻です。
+
+{{< code-block lang="go" >}}
+llmobs.SubmitEvaluationFromSpan("is_safe", true, span,
+	llmobs.WithEvaluationTags([]string{"evaluator:custom", "env:prod"}),
+	llmobs.WithEvaluationMLApp("<YOUR_ML_APP_NAME>"),
+)
+{{< /code-block >}}
+
+**注**: これらの関数はエラーを返しません。失敗はトレーサーのデバッグログを通じて報告されます。これらを表示するには `DD_TRACE_DEBUG=1` を設定します。
+{{% /tab %}}
 {{< /tabs >}}
 
 ### エンドユーザーフィードバックの送信 {#submitting-end-user-feedback}
 
-エンドユーザーフィードバックは、LLM アプリケーションのユーザーからの入力 (高評価や低評価、ユーザーがエージェントによる変更を受け入れたかどうか、自由記述のコメントなど) を収集します。評価とは異なり、フィードバックには送信者の ID が含まれ、スパン、トレース、セッション、または顧客定義のエンティティを対象にできます。詳細については、[エンドユーザーフィードバック](/llm_observability/evaluations/end_user_feedback/)を参照してください。
+エンドユーザーフィードバックは、LLM アプリケーションのユーザーからの入力 (高評価や低評価、ユーザーがエージェントによる変更を受け入れたかどうか、自由記述のコメントなど) を収集します。評価とは異なり、フィードバックには送信者の ID が含まれ、スパン、トレース、セッション、または顧客定義のエンティティを対象にできます。詳細については、「[エンドユーザーフィードバック](/llm_observability/evaluations/end_user_feedback/)」を参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2687,7 +3513,7 @@ public class MyJavaClass {
 
 `feedback_join_key`
 : オプション - _文字列_
-<br />インシデント ID やチケット ID など、このフィードバックに関連付けられた顧客定義のキー。フィードバックをスパンに関連付けるには、まず同じ値を持つ `feedback_join_key` タグを付けてスパンにアノテーションを付けてください。[スパンの拡張](#enriching-spans)を参照してください。
+<br />インシデント ID やチケット ID など、このフィードバックに関連付けられた顧客定義のキー。フィードバックをスパンに関連付けるには、まず同じ値を持つ `feedback_join_key` タグを付けてスパンにアノテーションを付けてください。「[スパンの拡張](#enriching-spans)」を参照してください。
 
    **注**: `span`、`span_id`、`trace_id`、`session_id`、または `feedback_join_key` のいずれか 1 つのみを指定する必要があります。複数指定した場合、または何も指定しなかった場合は、`ValueError` が発生します。
 
@@ -2701,7 +3527,7 @@ public class MyJavaClass {
 
 `tags`
 : オプション - _辞書_
-<br />フィードバックに関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />フィードバックに関してユーザーがタグとして追加できる文字列のキーと値のペアの辞書。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `assessment`
 : オプション - _文字列_
@@ -2803,7 +3629,7 @@ def llm_call():
 
 `tags`
 : オプション - _オブジェクト_
-<br />フィードバックに関してユーザーがタグとして追加できる文字列のキーと値のペアのオブジェクト。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />フィードバックに関してユーザーがタグとして追加できる文字列のキーと値のペアのオブジェクト。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `assessment`
 : オプション - _文字列_
@@ -2882,7 +3708,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 `tags(Map<String, Object> tags)`または `tag(String key, Object value)`
 : オプション
-<br />フィードバックのタグ付けに使用するキーと値のペア。タグの詳細については、[タグの概要](/getting_started/tagging/)を参照してください。
+<br />フィードバックのタグ付けに使用するキーと値のペア。タグの詳細については、「[タグの概要](/getting_started/tagging/)」を参照してください。
 
 `assessment(Assessment assessment)`
 : オプション
@@ -3169,6 +3995,47 @@ public class MyJavaClass {
 }
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+新しいトレースまたは新しいプロセス内のスパンの root スパンを開始する際には、基盤となるユーザーセッションの文字列 ID を持つ `llmobs.WithSessionID` を渡します。オプションで、`user_handle`、`user_name`、および `user_id` タグを追加することもできます。
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func processChat(ctx context.Context, sessionID, message string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "incoming-chat",
+		llmobs.WithSessionID(sessionID),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+		"user_handle": "poodle@dog.com",
+		"user_id":     "1234",
+		"user_name":   "poodle",
+	}))
+
+	response := answerChat(ctx, message) // user application logic
+	span.AnnotateTextIO(message, response)
+	return response
+}
+{{< /code-block >}}
+
+既存のスパンのセッション ID を `llmobs.WithAnnotatedSessionID` で設定することもできます。
+
+### セッショントラッキングタグ {#session-tracking-tags-1}
+
+| タグ | 説明 |
+|---|---|
+| `session_id` | 単一のユーザーセッション、たとえばチャットセッションを表す ID。|
+| `user_handle` | チャットセッションのユーザーのハンドル。|
+| `user_name` | チャットセッションのユーザーの名前。|
+| `user_id` | チャットセッションのユーザーの ID。|
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 分散トレーシング {#distributed-tracing}
@@ -3196,13 +4063,13 @@ patch(<INTEGRATION_NAME>=True)
 
 `span`
 : オプション - _スパン_ - **デフォルト**: `The current active span.`
-<br />指定されたリクエストヘッダーにそのコンテキストを挿入するスパン。関数デコレータを含む任意のスパン、デフォルトでは現在のアクティブスパンになります。
+<br />指定されたリクエストヘッダーにそのコンテキストを挿入するスパン。関数デコレーターを含む任意のスパン、デフォルトでは現在のアクティブスパンになります。
 
 ### 分散ヘッダーの有効化 {#activating-distributed-headers}
 
 `LLMObs.activate_distributed_headers()` メソッドは HTTP ヘッダーを受け取り、新しいサービスで有効にするトレースコンテキスト属性を抽出します。
 
-**注**: 下流サービスでスパンを開始する前に `LLMObs.activate_distributed_headers()` を呼び出す必要があります。以前に開始されたスパン (関数デコレータのスパンを含む) は、分散トレースに取り込まれません。
+**注**: 下流サービスでスパンを開始する前に `LLMObs.activate_distributed_headers()` を呼び出す必要があります。以前に開始されたスパン (関数デコレーターのスパンを含む) は、分散トレースに取り込まれません。
 
 このメソッドは次の引数を受け付けます。
 
@@ -3249,6 +4116,64 @@ tracer.use('http', false) // disable the http integration
 
 [1]: /ja/tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
+{{% tab "Go (実験的)" %}}
+Agent Observability スパンコンテキストは標準の APM 分散トレースヘッダーで伝送されるため、個別の inject または extract API はありません。`tracer.Inject` および `tracer.Extract` を使用して APM コンテキストを伝播するか、インスツルメントされた [HTTP インテグレーション][1]を使用します。その後、ダウンストリームサービス内の Agent Observability スパンは、アップストリームの親スパンに自動的にアタッチされます。
+
+### 例 {#example-35}
+
+{{< code-block lang="go" filename="client.go" >}}
+package main
+
+import (
+	"context"
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func clientSendRequest(ctx context.Context, req *http.Request) error {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "client-send-request")
+	defer span.Finish()
+
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "http.request")
+	defer apmSpan.Finish()
+
+	// inject the trace context into the outgoing request headers
+	return tracer.Inject(apmSpan.Context(), tracer.HTTPHeadersCarrier(req.Header))
+}
+{{< /code-block >}}
+
+{{< code-block lang="go" filename="server.go" >}}
+package main
+
+import (
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func serverHandler(w http.ResponseWriter, r *http.Request) {
+	var opts []tracer.StartSpanOption
+	if sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header)); err == nil {
+		opts = append(opts, tracer.ChildOf(sctx))
+	}
+	// if extraction fails, the span starts a new trace
+
+	apmSpan, ctx := tracer.StartSpanFromContext(r.Context(), "http.handler", opts...)
+	defer apmSpan.Finish()
+
+	// this span joins the distributed trace and the upstream parent span
+	span, _ := llmobs.StartTaskSpan(ctx, "process-request")
+	defer span.Finish()
+}
+{{< /code-block >}}
+
+**注**: ダウンストリームサービスで Agent Observability スパンを開始する前に、アップストリームコンテキストを抽出してください。事前に開始されたスパンは、分散トレースにはキャプチャされません。
+
+[1]: /ja/tracing/trace_collection/compatibility/go/
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -3258,9 +4183,9 @@ tracer.use('http', false) // disable the http integration
 {{% tab "Python" %}}
 ### インラインメソッドを使用したスパンのトレース {#tracing-spans-using-inline-methods}
 
-各スパンの種類について、`ddtrace.llmobs.LLMObs` クラスには、特定のコードブロックが含む操作を自動的にトレースするための対応するインラインメソッドが用意されています。これらのメソッドは、対応する関数デコレータと同じ引数シグネチャを持ち、指定されていない場合は `name` がスパンの種類 (`llm`、`workflow` など) にデフォルト設定されます。これらのメソッドは、囲まれたコードブロックが完了した後にスパンを自動的に終了させるためのコンテキストマネージャーとして使用できます。
+各スパンの種類について、`ddtrace.llmobs.LLMObs` クラスには、特定のコードブロックが含む操作を自動的にトレースするための対応するインラインメソッドが用意されています。これらのメソッドは、対応する関数デコレーターと同じ引数シグネチャを持ち、指定されていない場合は `name` がスパンの種類 (`llm`、`workflow` など) にデフォルト設定されます。これらのメソッドは、囲まれたコードブロックが完了した後にスパンを自動的に終了させるためのコンテキストマネージャーとして使用できます。
 
-#### 例 {#example-35}
+#### 例 {#example-36}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3279,7 +4204,7 @@ def process_message():
 2. ほかの関数の引数としてスパンオブジェクトを渡します。
 3. `span.finish()` メソッドを使用してスパンを手動で停止します。**注**: スパンは手動で終了する必要があります。そうしないと、送信されません。
 
-#### 例 {#example-36}
+#### 例 {#example-37}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3366,11 +4291,11 @@ function processMessage () {
 }
 {{< /code-block >}}
 
-### TypeScript における関数デコレータ {#function-decorators-in-typescript}
+### TypeScript における関数デコレーター {#function-decorators-in-typescript}
 
-Node.js Agent Observability SDK には、TypeScript アプリケーション用の関数デコレータとして機能する `llmobs.decorate` 関数が用意されています。この関数のトレース動作は `llmobs.wrap` と同じです。
+Node.js Agent Observability SDK には、TypeScript アプリケーション用の関数デコレーターとして機能する `llmobs.decorate` 関数が用意されています。この関数のトレース動作は `llmobs.wrap` と同じです。
 
-#### 例 {#example-37}
+#### 例 {#example-38}
 
 {{< code-block lang="javascript" >}}
 // index.ts
@@ -3413,6 +4338,40 @@ function processMessage () {
 processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go (実験的)" %}}
+### 複数のアプリケーションのトレース {#tracing-multiple-applications-2}
+
+SDK では、同じサービスからの複数の LLM アプリケーションのトレースがサポートされています。
+
+環境変数 `DD_LLMOBS_ML_APP` を、生成されるすべてのスパンがデフォルトでグループ化される LLM アプリケーションの名前に設定できます。
+
+この構成をオーバーライドして特定の root スパンに異なる LLM アプリケーション名を使用するには、新しいトレースの root スパンまたは新しいプロセス内のスパンを開始する際に `llmobs.WithMLApp` を渡します。
+
+{{< code-block lang="go">}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "process-message",
+	llmobs.WithMLApp("<NON_DEFAULT_ML_APP_NAME>"),
+)
+defer span.Finish()
+{{< /code-block >}}
+
+### サーバーレス環境における強制フラッシュ {#force-flushing-in-serverless-environments-2}
+
+トレーサーはバックグラウンドでスパンをフラッシュします。バッファリングされたスパンが送信されるよう、プロセスが終了する前に `tracer.Stop()` を呼び出します。短命なプロセスやサーバーレスハンドラーでは、これを保証するために `main` 内の `defer tracer.Stop()` を使用してください。
+
+{{< code-block lang="go">}}
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 

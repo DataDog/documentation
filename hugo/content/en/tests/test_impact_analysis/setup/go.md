@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-Test Impact Analysis is only supported on `orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`.
+Test Impact Analysis requires `ddtest >= 1.14.0`.
 
 ## Setup
 
@@ -30,10 +30,10 @@ Prior to setting up Test Impact Analysis, set up [Test Optimization for Go][1]. 
 
 ## Run tests with Test Impact Analysis enabled
 
-After completing setup, run your tests by using `go test` with the following code coverage options:
+After completing setup, run your tests by using `ddtest instrument go test` with the following code coverage options:
 
 ```bash
-orchestrion go test ./... -cover -covermode=count -coverpkg ./...
+ddtest instrument go test -cover -covermode=count -coverpkg=./... ./...
 ```
 
 1. `-cover`: The Test Impact Analysis feature uses the built-in Go's code coverage processor, so you need to enable code coverage collection in the `go test` command.

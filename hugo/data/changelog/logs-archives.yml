@@ -1,0 +1,25 @@
+entries:
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40947
+    operations:
+      - CreateLogsArchive
+      - GetLogsArchive
+      - ListLogsArchives
+      - UpdateLogsArchive
+    title: Default logs archive compression to ZSTD
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AddReadRoleToArchive
+      - CreateLogsArchive
+      - DeleteLogsArchive
+      - GetLogsArchive
+      - GetLogsArchiveOrder
+      - ListArchiveReadRoles
+      - ListLogsArchives
+      - RemoveRoleFromArchive
+      - UpdateLogsArchive
+      - UpdateLogsArchiveOrder
+    title: Document rate-limit headers on the shared 429 responses

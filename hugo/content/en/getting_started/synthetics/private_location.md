@@ -46,9 +46,9 @@ Your private locations test results display identically to your managed location
 4. Click {{< ui >}}Save Location and Generate Configuration File{{< /ui >}} to generate the configuration file associated with your private location on your worker. 
 5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
-    - If you want to block reserved IPs, toggle {{< ui >}}Block reserved IPs{{< /ui >}} and enter the IP ranges. 
+    - {{< ui >}}Block reserved IPs{{< /ui >}} is on by default, which limits the private location's access to reserved IPs. To allow access to specific endpoints, enter IP ranges and/or domain names.  
 
-    For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+    For more information, see [Private Locations Configuration Options][6], [Run Synthetic Tests from Private Locations][7], and [Private Location Network Security Hardening][17]. 
 
 6. Copy and paste your private location configuration file to your working directory.
 
@@ -106,7 +106,7 @@ Use your new private location just like a managed location in your Synthetic tes
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/settings/private-locations
-[6]: /synthetics/private_locations/configuration/#configuration-options
+[6]: /synthetics/platform/private_locations/configuration/#all-configuration-options
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /getting_started/synthetics/browser_test
@@ -117,3 +117,4 @@ Use your new private location just like a managed location in your Synthetic tes
 [14]: https://www.datadoghq.com/legal/eula/
 [15]: https://www.datadoghq.com/support/
 [16]: /synthetics/guide/kerberos-authentication/
+[17]: /synthetics/platform/private_locations/network_security/

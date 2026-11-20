@@ -5,7 +5,7 @@ further_reading:
   text: Pipelines d'automatisation
 - link: /security/ticketing_integrations
   tag: Documentation
-  text: Intégrations de tickets
+  text: Intégrations de gestion des tickets
 - link: /incident_response/work_management
   tag: Documentation
   text: Work Management
@@ -80,7 +80,7 @@ Configurez des règles de création de tickets pour créer automatiquement des t
   {{% /tab %}}
   {{% tab "Work Management" %}}
   - **Projet Work Management** : Sélectionnez un projet Work Management existant ou créez-en un.
-  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cases créés automatiquement.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cas créés automatiquement.
   {{% /tab %}}
   {{< /tabs >}}
   {{< /site-region >}}
@@ -98,7 +98,7 @@ Configurez des règles de création de tickets pour créer automatiquement des t
   {{% /tab %}}
   {{% tab "Work Management" %}}
   - **Projet Work Management** : Sélectionnez un projet Work Management existant ou créez-en un.
-  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cases créés automatiquement.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cas créés automatiquement.
   {{% /tab %}}
   {{< /tabs >}}
   {{< /site-region >}}
@@ -108,21 +108,23 @@ Configurez des règles de création de tickets pour créer automatiquement des t
 
 **Note** : Les règles de création de tickets ne créent des tickets que pour les nouveaux résultats. Datadog ne crée pas de tickets rétroactifs pour les résultats existants lorsque vous créez une règle.
 
+Vous pouvez également créer des règles de création de tickets avec l'[API][7] ou la ressource Terraform [`datadog_security_findings_ticket_creation_rule`][8].
+
 ## Identifier les tickets créés automatiquement {#identify-automatically-created-tickets}
 
 {{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Fenêtre contextuelle de ticket Work Management affichant un cas créé par une règle d'automatisation, indiqué par une icône d'éclair, et un lien pour afficher toutes les découvertes avec des tickets créés à partir de la même règle" style="width:60%;" >}}
 
 Les tickets créés par une règle sont marqués d'un indicateur en forme d'éclair dans le panneau latéral des résultats et dans les vues de l'Explorer. Le survol de l'indicateur affiche l'Automation Rule responsable du ticket et fournit un lien vers celle-ci.
 
-## Rule matching order{#rule-matching-order}
+## Ordre de correspondance des règles {#rule-matching-order}
 
 Lorsqu'il identifie un résultat, Datadog évalue ce résultat par rapport à votre séquence de règles de création de tickets. En commençant par la première règle, s'il y a une correspondance, Datadog crée un ticket en utilisant la configuration de cette règle et cesse toute évaluation ultérieure. Si aucune correspondance n'est trouvée, Datadog passe à la règle suivante. Ce processus se poursuit jusqu'à ce qu'une correspondance soit trouvée ou que toutes les règles aient été vérifiées sans succès.
 
-## Daily ticket limit{#daily-ticket-limit}
+## Limite quotidienne de tickets {#daily-ticket-limit}
 
 Chaque règle dispose d'une limite quotidienne de tickets configurable qui est réinitialisée à minuit UTC. Lorsque la limite est atteinte, Datadog crée un dernier ticket dans le même projet expliquant que la règle a atteint sa limite quotidienne, puis cesse de créer des tickets pour le reste de la journée. Les résultats qui dépassent la limite ne font pas l'objet d'une création de ticket rétroactive lorsque la limite est réinitialisée, mais vous pouvez créer des tickets pour eux manuellement.
 
-## Broken rules{#broken-rules}
+## Règles rompues {#broken-rules}
 
 Si une erreur de configuration de projet empêche la création de ticket (par exemple, si le projet Jira connecté n'est plus valide), Datadog désactive automatiquement la règle et la marque comme rompue.
 
@@ -130,7 +132,7 @@ Si une erreur de configuration de projet empêche la création de ticket (par ex
 
 Pour reprendre la création automatique de tickets, corrigez la configuration du projet et réactivez la règle.
 
-## Disabled or deleted rules{#disabled-or-deleted-rules}
+## Règles désactivées ou supprimées {#disabled-or-deleted-rules}
 
 Lorsque vous désactivez ou supprimez une règle de création de ticket, les tickets précédemment créés restent attachés à leurs résultats. Ils ne sont ni détachés ni supprimés.
 
@@ -140,3 +142,5 @@ Lorsque vous désactivez ou supprimez une règle de création de ticket, les tic
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /fr/security/ticketing_integrations/
+[7]: /fr/api/latest/security-monitoring/create-a-ticket-creation-rule/
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_ticket_creation_rule

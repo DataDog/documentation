@@ -142,6 +142,10 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
 : *Permissions required: `Security Monitoring Findings Write`*
 
+`override_datadog_security_findings_severity`
+: Sets or clears the manual severity override on up to 100 security findings. Action `set` requires a severity (`critical`, `high`, `medium`, `low`, or `info`); action `clear` removes the manual override. Supports an optional description. Findings whose severity is set by an automation rule are skipped and listed as warnings in the response.
+: *Permissions required: `Security Monitoring Findings Write`*
+
 `list_datadog_security_findings_automation_rules`
 : Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
 : *Permissions required: `Security Pipelines Read`*

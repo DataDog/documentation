@@ -4,46 +4,72 @@ aliases:
 further_reading:
 - link: /security/automation_pipelines
   tag: Documentación
-  text: Automation Pipelines
-title: Reglas de silenciamiento
+  text: Pipelines de automatización
+- link: https://www.datadoghq.com/blog/datadog-iac-security/
+  tag: Blog
+  text: Evite que las configuraciones erróneas de la nube lleguen a producción con
+    Datadog IaC Security
+products:
+- icon: cloud-security-management
+  name: Cloud Security
+  url: /security/cloud_security_management/
+- icon: security-code-security
+  name: Code Security
+  url: /security/code_security/
+- icon: app-sec
+  name: App and API Protection
+  url: /security/application_security/
+- icon: security-workload-security
+  name: Workload Protection
+  url: /security/workload_protection/
+title: Silenciar reglas
 ---
+{{< product-availability >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Automation Pipelines está en vista previa. Para inscribirte en la vista previa de las reglas de silenciamiento, haz clic en <strong>Solicitar acceso</strong>.
-{{< /callout >}}
+Configure reglas de silencio para optimizar las alertas de seguridad filtrando automáticamente los hallazgos que no son urgentes. Este enfoque ayuda a reducir el ruido de falsos positivos conocidos y riesgos aceptados, lo que le permite concentrarse en abordar las amenazas más críticas.
 
-Configura las reglas de silenciamiento para agilizar las alertas de seguridad filtrando automáticamente los hallazgos no urgentes. Este enfoque ayuda a reducir el ruido de los falsos positivos conocidos y los riesgos aceptados, lo que te permite centrarte en abordar las amenazas más críticas.
+## Crear una regla de silencio {#create-a-mute-rule}
 
-## Crea una regla de silenciamiento
+1. En Datadog, vaya a **Security** > **Settings** > [Findings Automation][2]. Haga clic en **Add a New Rule**, luego seleccione **Mute**. Se abre la página Create a New Rule.
+1. En **Rule name**, ingrese un nombre descriptivo para la regla; por ejemplo, "Compensating control in place for account payment-prod".
+1. Agregue los criterios de su regla en los siguientes campos:
+    - **Cualquiera de estos tipos**: Los tipos de hallazgos que la regla debe verificar. Los tipos disponibles incluyen:
+      - Vulnerabilidad de código en tiempo de ejecución
+      - Vulnerabilidad de código estático
+      - Vulnerabilidad de biblioteca
+      - Secreto
+      - Infraestructura como código
+      - Vulnerabilidad de imagen de contenedor
+      - Vulnerabilidad de servidor
+      - Configuración incorrecta
+      - Ruta de ataque
+      - Riesgo de identidad
+      - Seguridad de API
+      - Actividad de carga de trabajo
+    - **Cualquiera de estas etiquetas o atributos**: Las etiquetas o atributos del recurso que deben coincidir para que se aplique la regla.
+1. Para agregar criterios de gravedad a la regla, haga clic en **Add Severity**.
+1. Especifique el motivo y la duración del silencio:
+    - **Motivo del silencio**: El motivo para silenciar el hallazgo. Los motivos disponibles incluyen:
+      - Falso positivo
+      - Riesgo aceptado
+      - Pendiente de corrección
+      - Sin corrección
+      - Duplicado
+      - Otro
+    - **Rule expiration**: La fecha en la que expira la regla.
+    - **Further description for muting reason**: Cuadro opcional para detalles adicionales.
+1. Haga clic en **Guardar**. La regla se aplica a los nuevos hallazgos de inmediato y comienza a verificar los hallazgos existentes dentro de la próxima hora.
 
-1. En la página [Automation Pipelines][2], haz clic en **Añadir una nueva regla** y selecciona **Silenciar**.
-1. Introduce un nombre descriptivo para la regla, por ejemplo, **Avisos de anomalías de infraestructura de la nube**.
-1. Utiliza las siguientes casillas para configurar los criterios de la regla:
-    - **Cualquiera de estos tipos**: Los tipos de hallazgos para los que la norma se debe check. Los tipos disponibles incluyen los siguientes:
-      - **Configuración errónea**
-      - **Ruta de ataque**
-      - **Riesgo de identidad**
-      - **Averiguación de seguridad de la API**
-    - **Cualquiera de estas etiquetas (tags) o atributos**: Las etiquetas (tags) o los atributos de recursos que deben coincidir para que se aplique la regla.
-1. Para añadir criterios de gravedad a la regla, haz clic en **Añadir gravedad**.
-1. Especifica el motivo y la duración del silenciamiento:
-    - **Motivo para silenciar**: El motivo para silenciar el hallazgo. Los motivos disponibles son los siguientes:
-      - **Falso positivo**
-      - **Riesgo aceptado**
-      - **Pendiente de arreglo**
-      - **Sin arreglo**
-      - **Duplicado**
-      - **Otros**
-    - **Vencimiento de la regla**: La fecha de vencimiento de la regla. 
-    - **Descripción adicional de motivo de silenciamiento**: Casilla opcional para detalles adicionales.
-1. Haz clic en **Guardar**. La regla se aplica de inmediato a los nuevos hallazgos y comienza a check hallazgos existentes en la siguiente hora.
+También puede crear reglas de silencio con la [API][3] o el recurso de Terraform [`datadog_security_findings_mute_rule`][4].
 
-## Orden de coincidencia de las reglas
+## Pedido de coincidencia de reglas {#rule-matching-order}
 
-Cuando Datadog identifica una vulnerabilidad, la evalúa comparándola con tu secuencia de reglas de silenciamiento. Empezando por la primera regla, si hay una coincidencia, Datadog silencia la vulnerabilidad durante el tiempo especificado y deja de evaluar más. Si no se produce ninguna coincidencia, Datadog pasa a la siguiente regla. Esto proceso continúa hasta que se encuentre una coincidencia o todas las reglas se check sin una coincidencia.
+Cuando Datadog identifica un hallazgo, lo evalúa con respecto a su secuencia de reglas de silencio. Comenzando con la primera regla, si hay una coincidencia, Datadog silencia el hallazgo durante la duración especificada y deja de evaluar más. Si no ocurre ninguna coincidencia, Datadog pasa a la siguiente regla. Este proceso continúa hasta que se encuentra una coincidencia o se revisan todas las reglas sin encontrar ninguna.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=mute
+[3]: /es/api/latest/security-monitoring/create-a-mute-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_mute_rule

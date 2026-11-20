@@ -1,6 +1,6 @@
 ---
 title: Kafka Console Setup
-description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
+description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to read messages, create topics, and delete topics.
 aliases:
 - /data_streams/kafka/data_collection
 further_reading:
@@ -31,7 +31,7 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 
 ## Setup
 
-Enable Kafka Console by setting `enable_kafka_console: true` in the [Kafka Consumer][12] integration. On Agent versions 7.83 and earlier, the flag is named `enable_cluster_monitoring`.
+Enable Kafka Console by setting `enable_cluster_monitoring: true` in the [Kafka Consumer][12] integration.
 
 For additional environment-specific guidance on configuring the integration, go to the [Kafka Console setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions.
 
@@ -39,19 +39,9 @@ For additional environment-specific guidance on configuring the integration, go 
 
 You can copy the setup instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
 
-## Enable message inspection
+## Enable Kafka actions
 
-This section applies only if you want to view Kafka message payloads in the {{< ui >}}Messages{{< /ui >}} section. Skip it if you do not plan to use message inspection.
-
-### Additional ACL permission
-
-In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires the `READ` permission for topics:
-
-| Resource Name | Resource Type | Operation |
-|---------------|---------------|-----------|
-| `*`           | `TOPIC`       | `Read`    |
-
-The `*` resource name grants `Read` access to all topics. To restrict the Agent to specific topics, replace `*` with those topic names.
+Kafka actions let you read messages, create topics, and delete topics from Kafka Console. This section applies only if you want to use these actions. Skip it if you only need monitoring.
 
 ### Remote configuration
 
@@ -61,9 +51,31 @@ The `*` resource name grants `Read` access to all topics. To restrict the Agent 
 2. At the [Agent level][10].
 3. At the [API key level][11].
 
-### User permission
+### Additional ACL permissions
 
-To view Kafka messages, a user must have the `Data Streams Monitoring Capture Messages` permission.
+The Datadog Agent runs each action on your Kafka cluster. In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), grant the Agent user the ACLs for each action you plan to use:
+
+| Action         | Resource Name | Resource Type | Operation |
+|----------------|---------------|---------------|-----------|
+| Read messages  | `*`           | `TOPIC`       | `Read`    |
+| Create a topic | `*`           | `TOPIC`       | `Create`  |
+| Delete a topic | `*`           | `TOPIC`       | `Delete`  |
+
+The `*` resource name applies the operation to all topics. To restrict an action to specific topics, replace `*` with those topic names.
+
+### User permissions
+
+Each action requires a user permission:
+
+| Action         | Permission                                   |
+|----------------|----------------------------------------------|
+| Read messages  | `Data Streams Monitoring Capture Messages`   |
+| Create a topic | `Data Streams Monitoring Kafka Create Topic` |
+| Delete a topic | `Data Streams Monitoring Kafka Delete Topic` |
+
+Datadog records each Kafka action in [Audit Trail][13] under the Data Streams Monitoring category. Each entry includes the user, topic, and cluster.
+
+<div class="alert alert-warning">Deleting a topic permanently removes the topic and all of its messages. Grant the <code>Data Streams Monitoring Kafka Delete Topic</code> permission only to users who manage your Kafka topics.</div>
 
 You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a role on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
@@ -76,9 +88,9 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
-3. Enter a descriptive name for your role (for example, "Data Streams Messages Access").
-4. In the {{< ui >}}Search Permissions{{< /ui >}} field, type `Data Streams Monitoring Capture Messages`.
-5. Select the permission from the search results to enable it for this role.
+3. Enter a descriptive name for your role (for example, "Kafka Actions Access").
+4. In the {{< ui >}}Search Permissions{{< /ui >}} field, enter the name of a permission from the [User permissions](#user-permissions) table (for example, `Data Streams Monitoring Capture Messages`).
+5. Select the permission from the search results to enable it for this role. Repeat for each permission you want to grant the role.
 6. Click {{< ui >}}Save{{< /ui >}}.
 7. Confirm your role was created successfully by searching for it in the roles list.
 
@@ -110,3 +122,4 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 [10]: /remote_configuration/#enable-remote-configuration
 [11]: /account_management/api-app-keys/
 [12]: /integrations/kafka-consumer/?tab=containerized
+[13]: /account_management/audit_trail/

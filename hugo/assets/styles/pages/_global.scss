@@ -428,6 +428,22 @@ h5 {
     }
 }
 
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner anchor offset
+@include media-breakpoint-down(md) {
+    .announcement body:has(.announcement-banner--hide-mobile) .main,
+    body.announcement:has(.announcement-banner--hide-mobile) .main {
+        h2,
+        h3,
+        h4,
+        h5 {
+            &:before {
+                margin-top: -80px;
+                height: 80px;
+            }
+        }
+    }
+}
+
 .main {
     &:lang(ja) {
         padding-left: 15px;

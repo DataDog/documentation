@@ -1,16 +1,18 @@
 ---
 aliases:
 - /fr/observability_pipelines/environment_variables/
+description: Trouvez les variables d'environnement disponibles pour les sources, les
+  processeurs et les destinations d'Observability Pipelines.
 disable_toc: false
 title: Variables d'environnement
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-Certains composants des pipelines d'observabilité nécessitent la configuration de variables d'environnement. Ce document répertorie les variables d'environnement pour les différentes sources, processeurs et destinations.
+Certains composants d'Observability Pipelines nécessitent la configuration de variables d'environnement. Ce document répertorie les variables d'environnement pour les différentes sources, processeurs et destinations.
 
-**Remarque** : Lorsque vous configurez un pipeline et installez le Worker, si vous entrez des identifiants secrets et choisissez ensuite d'utiliser des variables d'environnement, la variable d'environnement est l'identifiant saisi précédé de `DD_OP`. Par exemple, si vous avez saisi `PASSWORD_1` pour un identifiant de mot de passe, la variable d'environnement pour ce mot de passe est `DD_OP_PASSWORD_1`.
+**Remarque** : Lorsque vous configurez un pipeline et installez le Worker, si vous saisissez des identifiants secrets puis choisissez d'utiliser des variables d'environnement, la variable d'environnement est l'identifiant saisi précédé de `DD_OP`. Par exemple, si vous avez saisi `PASSWORD_1` pour un identifiant de mot de passe, la variable d'environnement pour ce mot de passe est `DD_OP_PASSWORD_1`.
 
-## Variables d'environnement des composants {#component-environment-variables}
+## Variables d'environnement du composant {#component-environment-variables}
 
 {{< tabs >}}
 {{% tab "Sources" %}}
@@ -30,10 +32,10 @@ Certains composants des pipelines d'observabilité nécessitent la configuration
 ### Google Pub/Sub {#google-pubsub}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/google_pubsub %}}
 
-### Client HTTP {#http-client}
+### HTTP Client {#http-client}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_client %}}
 
-### Serveur HTTP {#http-server}
+### HTTP Server {#http-server}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/http_server %}}
 
 ### Kafka {#kafka}
@@ -41,6 +43,9 @@ Certains composants des pipelines d'observabilité nécessitent la configuration
 
 ### Logstash {#logstash}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
+
+### MySQL {#mysql}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
 
 ### OpenTelemetry {#opentelemetry}
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
@@ -65,10 +70,10 @@ Certains composants des pipelines d'observabilité nécessitent la configuration
 
 {{% tab "Processeurs" %}}
 
-### Ajouter des variables d'environnement {#add-environment-variables}
+### Ajoutez des variables d'environnement {#add-environment-variables}
 
-- Liste autorisée
-  - La liste autorisée est une liste de variables d'environnement séparées par des virgules dont vous souhaitez extraire les valeurs et les utiliser avec ce processeur.
+- Liste d'autorisation
+  - La liste d'autorisation est une liste, séparée par des virgules, de variables d'environnement dont vous souhaitez extraire les valeurs et les utiliser avec ce processeur.
   - Stocké dans la variable d'environnement `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
 
 {{% /tab %}}
@@ -85,6 +90,9 @@ Certains composants des pipelines d'observabilité nécessitent la configuration
 
 ### Databricks (Zerobus) {#databricks-zerobus}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
+
+### Datadog APM {#datadog-apm}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Logs {#datadog-logs}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
@@ -106,7 +114,7 @@ Certains composants des pipelines d'observabilité nécessitent la configuration
 ### Google SecOps {#google-secops}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
-### Client HTTP {#http-client-1}
+### HTTP Client {#http-client-1}
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
 
 ### Kafka {#kafka-1}

@@ -1,0 +1,26 @@
+<!-- field-desc-inline: /api/latest/rendering-shapes/get-a-downtime/ -->
+<div class="schema-table__row _schema-table__row_d7636a" data-field-name="rrule" data-depth="5">
+  <div class="schema-table__cell-name _schema-table__cell-name_d7636a" style="--schema-table-indent: 100px">
+    <span class="schema-table__name-group _schema-table__name-group_d7636a"
+      ><code class="schema-table__name _schema-table__name_d7636a">rrule</code></span
+    >
+  </div>
+  <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+    <span class="schema-table__type _schema-table__type_d7636a">string</span>
+  </div>
+  <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+    <div class="schema-table__description _schema-table__description_d7636a">
+      <p>
+        The <code>RRULE</code> standard for defining recurring events. For example, to have a recurring event on the
+        first day of each month, set the type to <code>rrule</code> and set the <code>FREQ</code> to
+        <code>MONTHLY</code> and <code>BYMONTHDAY</code> to <code>1</code>. Most common <code>rrule</code> options from
+        the <a href="https://tools.ietf.org/html/rfc5545">iCalendar Spec</a> are supported.
+      </p>
+      <p>
+        <strong>Note</strong>: Attributes specifying the duration in <code>RRULE</code> are not supported (for example,
+        <code>DTSTART</code>, <code>DTEND</code>, <code>DURATION</code>). More examples available in this
+        <a href="https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api">downtime guide</a>.
+      </p>
+    </div>
+  </div>
+</div>

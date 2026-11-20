@@ -1,84 +1,84 @@
 ---
-description: Découvrez comment interroger et visualiser les déploiements CD Visibility.
+description: Découvrez comment interroger et visualiser les déploiements de CD Visibility.
 further_reading:
 - link: /continuous_delivery/features
   tag: Documentation
-  text: Découvrir les fonctionnalités de CD Visibility
+  text: Découvrez les fonctionnalités de CD Visibility
 - link: /continuous_delivery/deployments/
   tag: Documentation
   text: En savoir plus sur Deployment Visibility
 - link: /continuous_delivery/explorer/saved_views
   tag: Documentation
-  text: En savoir plus sur les vues enregistrées
-title: Explorer les déploiements CD Visibility
+  text: En savoir plus sur Saved Views
+title: Découvrez les déploiements de CD Visibility
 ---
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Rejoignez la version Preview !" >}}
-CD Visibility est en version Preview. Si cette fonctionnalité vous intéresse, remplissez le formulaire pour demander l'accès.
+{{< callout btn_hidden="true" header="faux" >}}
+CD Visibility est en préversion. L'accès est limité aux organisations déjà inscrites.
 {{< /callout >}}
 
-## Déploiements
+## Deployments {#deployments}
 
-Pour obtenir une vue d'ensemble de vos déploiements, accédez à [**Software Delivery** > **CD Visibility** > **Deployments**][6].
+Pour obtenir une vue d'ensemble de vos déploiements, accédez à [**Software Delivery** > **CD Visibility** > **Deployments**][6].
 
-La [page **Déploiements**][6] affiche des statistiques agrégées par service et environnement sur la période sélectionnée, ainsi que le statut de la dernière exécution du déploiement. Depuis cette page, vous pouvez visualiser tous vos déploiements de service et vérifier leur santé. Les métriques affichées représentent notamment le nombre d'exécutions et d'échecs, le taux d'échec, la durée médiane et le 95e centile de la durée. Ces données permettent d'identifier les déploiements qui ont une plus forte probabilité d'échec ainsi que les déploiements dont l'exécution est la plus longue. Vous pouvez consulter le statut, la révision et l'heure du dernier résultat de déploiement pour évaluer l'impact de vos récents changements.
+La page [**Deployments**][6] affiche des statistiques agrégées par services et environnements sur la période sélectionnée, ainsi que le statut de la dernière exécution de déploiement. Utilisez cette page pour voir tous vos déploiements de services et avoir un aperçu de leur état de santé.
+Les métriques affichées incluent le nombre d'exécutions et d'échecs, le taux d'échec, la durée médiane et la durée au 95e percentile. Ces informations révèlent quels déploiements ont une probabilité d'échec plus élevée et quels déploiements prennent le plus de temps à être exécutés. L'effet des derniers changements peut être observé en vérifiant le statut, la révision et l'heure du dernier résultat de déploiement.
 
-<div class="alert alert-info">Les déploiements sans service configuré et les exécutions partielles de déploiement sont exclus des statistiques agrégées sur la page Deployments. Vous pouvez rechercher ces déploiements sur la page Deployment Executions avec la requête suivante : <code>@deployment.partial_deployment:* OR -@deployment.service:*</code>.</div>
+<div class="alert alert-info">Les déploiements sans services configurés et les exécutions de déploiement partielles sont exclus de l'agrégation des statistiques de la page Deployments. Vous pouvez rechercher ces déploiements sur la page Deployment Executions : <code>@deployment.partial_deployment:* OR -@deployment.service:*</code>.</div>
 
-{{< img src="/continuous_delivery/search/deployments_2.png" text="La page Deployments dans Datadog" style="width:100%" >}}
+{{< img src="/continuous_delivery/search/deployments_2.png" text="The Deployments page in Datadog" style="width:100%" >}}
 
-Si vous déployez des services dans un environnement de différentes façons, vous pouvez développer les rangées des déploiements pour afficher des statistiques filtrées par nom de déploiement.
+Si vous disposez de différentes manières de déployer un service dans un environnement, vous pouvez déplier les lignes de déploiement pour voir des statistiques filtrées par nom de déploiement.
 
-La page **Deployment** affiche des informations générales, notamment :
+La page {{< ui >}}Deployment{{< /ui >}} vous fournit des informations générales, notamment :
 
-- Une vue d'ensemble de la santé des différents services et environnements, avec des statistiques agrégées
-- Une vue permettant de détecter et de corriger les problèmes immédiats et urgents, comme des déploiements défectueux en production 
-- Des renseignements sur le déploiement de chaque service, son évolution, les résultats obtenus et les tendances
+- Une vue d'ensemble de l'état de santé des différents services et environnements, avec des statistiques agrégées.
+- Une fenêtre pour repérer et corriger les problèmes immédiats et urgents, comme les déploiements défaillants en production.
+- La manière dont chaque déploiement de service a été exécuté, au fil du temps, ainsi que les résultats et les tendances.
 
-### Détails du déploiement
+### Détails du déploiement {#deployment-details}
 
-Cliquez sur un déploiement de service spécifique pour afficher la page **Deployment Details**. Celle-ci vous permet de visualiser les données du déploiement de service que vous avez sélectionné sur un intervalle donné.
+Cliquez sur un déploiement de service spécifique pour voir la page {{< ui >}}Deployment Details{{< /ui >}}, qui fournit des vues des données pour le déploiement de service que vous avez sélectionné sur une période donnée.
 
-{{< img src="continuous_delivery/search/deployments_page_2.png" alt="Page Deployment pour un seul déploiement" style="width:100%;">}}
+{{< img src="continuous_delivery/search/deployments_page_2.png" alt="Page d'un déploiement donné" style="width:100%;">}}
 
-Obtenez de précieuses informations sur le déploiement de service sélectionné, comme le nombre de déploiements réussis et échoués, la durée moyenne du déploiement, le nombre de rollbacks et le taux d'échec. La partie inférieure de la page comporte un tableau indiquant les exécutions de déploiement pour le service, en fonction du filtre d'environnement sélectionné.
+Obtenez des informations sur le déploiement de service sélectionné, telles que le nombre de déploiements réussis et échoués au fil du temps, la durée moyenne de déploiement, le nombre de retours en arrière et le taux d'échec. La partie inférieure de la page affiche un tableau avec les exécutions de déploiement pour le service, en fonction du filtre d'environnement sélectionné.
 
-## Exécutions de déploiement
+## Deployment Executions {#deployment-executions}
 
-La [page **Deployment Executions**][4] affiche chaque exécution d'un déploiement lors de l'intervalle sélectionné. Utilisez les facettes à gauche de la page pour filtrer la liste des exécutions de déploiement, et cliquez sur une exécution pour afficher des détails supplémentaires à son sujet dans le volet latéral Deployment Execution Details.
+La [page **Deployment Executions**][4] affiche toutes les exécutions d'un déploiement au cours de la période sélectionnée. Utilisez les facettes à gauche pour filtrer la liste des exécutions de déploiement et cliquez sur une exécution pour afficher des détails supplémentaires dans le panneau latéral Deployment Execution Details.
 
-{{< img src="continuous_delivery/search/details_side_panel.png" alt="Volet latéral Deployment Details de la page Deployments" style="width:100%;">}}
+{{< img src="continuous_delivery/search/details_side_panel.png" alt="Panneau latéral Deployment Details sur la page Deployments" style="width:100%;">}}
 
-Lorsqu'un déploiement est correctement associé à un pipeline dans CI Visibility, le volet des exécutions de déploiement comporte un nouvel onglet **Pipeline**. Cet onglet vous permet de visualiser la trace du pipeline, mais également de cliquer sur le lien **View Full Pipeline** en haut de la vue pour accéder à CI Visibility :
+Lorsqu'un déploiement est correctement associé à un pipeline dans CI Visibility, le panneau des exécutions de déploiement contient un nouvel onglet {{< ui >}}Pipeline{{< /ui >}} à partir duquel la trace du pipeline est visible. Depuis cet onglet, vous pouvez accéder à CI Visibility en cliquant sur le lien {{< ui >}}View Full Pipeline{{< /ui >}} en haut :
 
-{{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Volet des exécutions de déploiements avec l'onglet Pipeline" style="width:100%;">}}
+{{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Panneau des exécutions de déploiement avec l'onglet Pipeline" style="width:100%;">}}
 
-Des étapes de configuration supplémentaires peuvent être nécessaires pour pouvoir associer un déploiement à un pipeline de CI. Pour en savoir plus, consultez la page de configuration de votre fournisseur CD.
+Une configuration supplémentaire peut être nécessaire pour associer un déploiement à un pipeline CI. Pour plus d'informations, consultez la page de configuration de votre fournisseur CD.
 
-Depuis la [page Deployment Executions][4], vous pouvez [rechercher et filtrer](#rechercher-et-filtrer-des-executions), [analyser](#analyser-des-executions), [visualiser](#visualiser-des-executions) et [exporter](#exporter-des-executions) des exécutions de déploiement à différents niveaux en utilisant n'importe quel tag.
+La [page Deployment Executions][4] vous permet de [rechercher et filtrer](#search-and-filter), [analyser](#analyze), [visualiser](#visualize) et [exporter](#export) les exécutions de déploiement à plusieurs niveaux à l'aide de n'importe quel tag.
 
-{{< img src="continuous_delivery/explorer/deployment_executions_2.png" alt="Résultats d'exécutions de déploiement s'affichant dans le CD Visibility Explorer" width="100%" >}}
+{{< img src="continuous_delivery/explorer/deployment_executions_2.png" alt="Résultats des exécutions de déploiement affichés dans CD Visibility Explorer" width="100%" >}}
 
-### Rechercher et filtrer des exécutions
+### Rechercher et filtrer {#search-and-filter}
 
-Vous pouvez restreindre, élargir ou modifier les données affichées en affichant un sous-ensemble d'exécutions de déploiement. Pour ce faire, cliquez sur les facettes sur la gauche, ou rédigez votre propre requête personnalisée dans la barre de recherche. Lorsque vous sélectionnez ou désélectionnez des facettes, la barre de recherche reflète automatiquement vos changements. De même, vous pouvez modifier la requête de la barre de recherche ou écrire une nouvelle requête dans la barre de recherche pour sélectionner et désélectionner les facettes à gauche. Pour découvrir comment créer des requêtes, consultez la section [Syntaxe de recherche][2].
+Vous pouvez restreindre, élargir ou réorienter votre recherche vers un sous-ensemble d'exécutions de déploiement en cliquant sur les facettes à gauche ou en saisissant votre propre requête dans la barre de recherche. Lorsque vous sélectionnez et désélectionnez des facettes, la barre de recherche reflète automatiquement vos modifications. De même, vous pouvez modifier la requête dans la barre de recherche ou en rédiger une nouvelle pour sélectionner et désélectionner les facettes à gauche. Pour savoir comment créer des requêtes, consultez [Syntaxe de recherche][2].
 
-### Analyser des exécutions
+### Analyser {#analyze}
 
-Pour déduire ou consolider des informations, regroupez les exécutions de déploiement interrogées dans des entités de niveau supérieur telles que des champs, des patterns et des transactions. Il n'est pas nécessaire d'utiliser des [facettes][3] pour rechercher des attributs. Les facettes vous permettent toutefois d'accomplir ce qui suit :
+Pour obtenir ou consolider des informations, regroupez les exécutions de déploiement correspondant à votre requête en entités de niveau supérieur, telles que des champs, des modèles et des transactions. Les [facettes][3] ne sont pas nécessaires pour rechercher des attributs, mais vous pouvez les utiliser pour effectuer les actions suivantes :
 
-- Rechercher des déploiements dans vos environnements et surveiller leur progression
-- Étudier chaque résultat de déploiement afin d'identifier et de diagnostiquer les échecs
+- Recherchez et suivez la progression des déploiements dans vos environnements.
+- Examinez chaque résultat de déploiement pour identifier les déploiements en échec et résoudre les problèmes associés.
 
-### Visualiser des exécutions
+### Visualiser {#visualize}
 
-Sélectionnez un type de visualisation pour afficher les résultats de vos filtres et agrégations, afin de mieux comprendre vos exécutions de déploiement. Par exemple, vous pouvez afficher les résultats de vos déploiements dans une liste pour organiser les données associées dans des colonnes. Vous avez également la possibilité de consulter les résultats de vos déploiements dans un graphique de série temporelle, afin de mesurer l'évolution de vos données de déploiement.
+Sélectionnez un type de visualisation pour afficher les résultats de vos filtres et agrégations et mieux comprendre vos exécutions de déploiement. Par exemple, vous pouvez afficher vos résultats de déploiement dans une liste pour organiser vos données de déploiement en colonnes. Ou bien, affichez les résultats de déploiement dans un graphique de série temporelle pour mesurer vos données de déploiement au fil du temps.
 
-### Exporter des exécutions
+### Exporter {#export}
 
-Exportez votre [vue][5] sur la [page Deployment Executions][4] pour la réutiliser plus tard ou dans un autre contexte.
+Exportez votre [vue][5] depuis la [page Deployment Executions][4] pour la réutiliser ultérieurement ou dans d'autres contextes.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

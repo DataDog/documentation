@@ -51,7 +51,7 @@ Common use cases include:
 
 Before using Archive Search:
 
-1. Configure an external archive (Amazon S3, Azure Storage, or Google Cloud Storage). See [Log Archives][3].
+1. Configure an external archive (Amazon S3, Azure Storage, or Google Cloud Storage). See [Log Archives][3]. For Observability Pipelines, see [Observability Pipelines archives][11] instead.
 1. Ensure Datadog has permission to read from the archive, see [Cloud-specific permissions](#cloud-specific-permissions).
    * **Amazon S3:** IAM role delegation
    * **Azure Storage:** Azure AD with *Storage Blob Data Contributor* role
@@ -103,6 +103,8 @@ To retain more data or access logs in other Datadog products, choose one of the 
   Retain more than 100,000 logs, set a custom retention period (for example, 7, 15, or 30 days), and access results across the platform immediately.
 - **Rehydrate after completion**:
   During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
+
+When you rehydrate results, you can store them in Standard Indexing or, if your organization uses [Flex Logs][10], in Flex storage.
 
 ## Analyze results
 
@@ -247,3 +249,5 @@ In order to search log events from your archives, Datadog uses a service account
 [7]: /logs/log_configuration/archives/?tab=awss3#archive-lookup-attribute
 [8]: /logs/log_configuration/archives/?tab=awss3#archive-partition-attribute
 [9]: /logs/log_configuration/archives/?tab=awss3#compression
+[10]: /logs/log_configuration/flex_logs/
+[11]: /logs/log_configuration/archives/#observability-pipelines-archives

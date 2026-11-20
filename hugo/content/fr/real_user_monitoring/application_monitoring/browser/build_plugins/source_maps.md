@@ -26,8 +26,8 @@ Le plugin s'intègre au processus de build, détecte tous les fichiers `.js` ave
 
 ## Prérequis {#prerequisites}
 
-- Une clé Datadog API, définie avec `auth.apiKey` ou la variable d'environnement `DATADOG_API_KEY`.
-- Maps source activées dans la configuration de votre bundler. Le plugin télécharge les maps source mais ne les génère pas. Consultez [Upload JavaScript Source Maps][3] pour la configuration de génération de maps source spécifique au bundler.
+- Une clé d'API Datadog, définie avec `auth.apiKey` ou la variable d'environnement `DATADOG_API_KEY`.
+- Maps source activées dans la configuration de votre bundler. Le plugin télécharge les maps source mais ne les génère pas. Consultez [Importer des maps source JavaScript][3] pour la configuration de génération de maps source spécifique au bundler.
 - Pour les téléchargements par ID de débogage, activez l'injection d'ID de débogage dans le plugin de build.
 - Pour les téléchargements par service et version, initialisez le SDK RUM avec les paramètres `service` et `version` qui correspondent à la configuration du plugin.
 - Le plugin de build Datadog installé et enregistré auprès de votre bundler. Consultez [Build Plugins][4] pour les instructions d'installation.
@@ -41,8 +41,7 @@ Les variables d'environnement suivantes remplacent les valeurs de configuration 
 
 Choisissez une méthode de correspondance pour le téléchargement des maps source : ID de débogage ou service et version. Ces méthodes de téléchargement sont mutuellement exclusives.
 
-{{< tabs >}}
-{{% tab "ID de débogage (recommandé)" %}}
+### ID de débogage (recommandé) {#debug-id-recommended}
 
 Les ID de débogage associent chaque bundle JavaScript à sa map source sans dépendre de l'URL du bundle, du service ou de la version. Utilisez cette méthode pour les nouvelles configurations.
 
@@ -60,7 +59,11 @@ Configurez les options suivantes dans `sourcemaps` :
 
 Définissez `debugId` et `upload` sur `true` pour injecter des ID de débogage et télécharger des maps source pendant la build :
 
+{{< tabs >}}
+{{% tab "Webpack" %}}
+
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -80,7 +83,102 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{% tab "Service et version" %}}
+{{% tab "Vite" %}}
+
+```javascript
+// vite.config.js
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    datadogVitePlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "esbuild" %}}
+
+```javascript
+// esbuild.config.js
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+  plugins: [
+    datadogEsbuildPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{{% /tab %}}
+{{% tab "Cumul" %}}
+
+```javascript
+// rollup.config.js
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+  plugins: [
+    datadogRollupPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{% tab "Rspack" %}}
+
+```javascript
+// rspack.config.js
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogRspackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Service et version {#service-and-version}
 
 Configurez l'objet `errorTracking.sourcemaps` pour télécharger des maps source en utilisant la correspondance de service et de version :
 
@@ -94,6 +192,7 @@ Configurez l'objet `errorTracking.sourcemaps` pour télécharger des maps source
 | `maxConcurrency` | Nombre | Non | `20` | Nombre maximal de téléchargements simultanés de maps source. |
 
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -115,12 +214,9 @@ module.exports = {
 };
 ```
 
+<div class="alert alert-info">Cet exemple utilise webpack. L'objet de configuration est identique pour tous les bundlers pris en charge, seuls l'importation et le nom de la fonction du plugin diffèrent. Consultez <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> pour obtenir les instructions d'installation pour votre bundler.</div>
+
 Pour afficher également le code source en ligne dans les traces de pile d'Error Tracking, associez les téléchargements de maps source de service et de version au plugin [Source Code Context][5].
-
-{{% /tab %}}
-{{< /tabs >}}
-
-<div class="alert alert-info">Ces exemples utilisent webpack. L'objet de configuration est identique pour tous les bundlers pris en charge — seuls le nom de l'import et celui de la fonction du plugin diffèrent. Consultez <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> pour obtenir les instructions d'installation pour votre bundler.</div>
 
 ## Pour aller plus loin {#further-reading}
 

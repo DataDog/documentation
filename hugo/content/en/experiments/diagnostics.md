@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
+- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
+  tag: "Blog"
+  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview
@@ -212,6 +215,6 @@ The SQL you define depends on how the experiment is randomized. For experiments 
 [4]: /experiments/concepts/subject_types/#product-analytics-and-rum-metrics
 [5]: /experiments/concepts/subject_types/#warehouse-metrics
 [6]: /source_code/
-[7]: /bits_ai/bits_chat/#web-application
+[7]: /bits_ai/bits_chat/usage/#web-application
 [8]: /experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional
 [9]: /help/

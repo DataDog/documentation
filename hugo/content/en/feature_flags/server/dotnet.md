@@ -25,7 +25,7 @@ This page describes how to instrument your .NET application with the Datadog Fea
 
 Starting in tracer version 3.54.0, new setups load flag configuration from the Datadog-managed CDN by default. This guide explains how to install the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
-<div class="alert alert-warning">In version 3.54.0, agentless mode changes only flag configuration. Experiment exposure events still require a compatible local Agent or telemetry relay; direct Event Platform Proxy (EVP) fallback is not supported. Evaluation metrics require a separately configured OpenTelemetry export path. Without a telemetry path, only configuration delivery and local flag evaluation work.</div>
+<div class="alert alert-info">Use tracer 3.56.0 or later for direct experiment exposure delivery in agentless mode. Tracer 3.54.0 requires a compatible local Agent or telemetry relay for exposures. Evaluation metrics use a separately configured OpenTelemetry export path.</div>
 
 ## Prerequisites
 
@@ -33,12 +33,12 @@ For agentless configuration delivery, install the Datadog .NET tracer version **
 
 Set these environment variables in the application process before startup:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_API_KEY=<YOUR_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 Use a Datadog [API key][5] and the site that hosts your organization, such as `datadoghq.com`. No Feature Flags enablement or source setting is required for a new setup. Initialize the Datadog OpenFeature provider in your application to start polling; installing or initializing the tracer alone does not start CDN polling. Evaluations use locally cached configuration and do not make network requests.
 
@@ -304,6 +304,12 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
+## Evaluation events and privacy
+
+With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
+
+Provider versions through `Datadog.FeatureFlags.OpenFeature` 2.3.2 do not emit aggregated EVP flag evaluation events. Experiment exposures and the `feature_flag.evaluations` OTLP metric are separate signals. See [Server-Side Evaluation Events and Privacy][11] for evaluation-event support in other server SDKs.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
@@ -381,6 +387,7 @@ Verify the following to ensure that Remote Configuration is working:
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
 - The SDK can communicate with the Agent
+- The Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][10].
 
 ### Async evaluation errors
 
@@ -403,7 +410,10 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [7]: /feature_flags/concepts/flag_graphs/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [9]: /feature_flags/concepts/configuration_sources/
+[10]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[11]: /feature_flags/guide/server_evaluation_events/

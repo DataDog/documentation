@@ -11,6 +11,8 @@ aliases:
 - /ja/security/application_security/getting_started
 - /ja/security/application_security/threats
 - /ja/security/application_security/setup/standalone
+cascade:
+  site_support_id: application_security_override
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
 further_reading:
 - link: https://www.datadoghq.com/blog/secure-api-with-datadog
@@ -39,7 +41,8 @@ further_reading:
   text: Datadog App and API Protection でアカウント乗っ取りを軽減
 - link: https://learn.datadoghq.com/courses/app-protection-block-attacks
   tag: ラーニングセンター
-  text: App & API Protection でアプリケーション攻撃をブロックする
+  text: App and API Protection でアプリケーション攻撃をブロックする
+site_support_id: application_security_override
 title: App and API Protection
 ---
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
@@ -52,7 +55,7 @@ AI Guard はプレビュー版です。AI アプリおよびエージェント�
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローおよびフレームグラフが表示される Datadog のセキュリティシグナルパネル" width="75%">}}
 
-**App & API Protection (AAP)** は、統合された可視性とセキュリティをアプリケーションと API に提供し、最新のワークロード全体で脅威を検出、調査、防止するのに役立ちます。
+**App and API Protection (AAP)** は、統合された可視性とセキュリティをアプリケーションと API に提供し、最新のワークロード全体で脅威を検出、調査、防止するのに役立ちます。
 
 公開 API、内部サービス、ユーザー向けアプリケーションのいずれを防御する場合でも、AAP はリアルタイムの OOTB 脅威検出、ポスチャ評価、アプリ内保護をチームに提供します。
 

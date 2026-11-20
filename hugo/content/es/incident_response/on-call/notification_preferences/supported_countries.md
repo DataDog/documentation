@@ -1,6 +1,6 @@
 ---
 description: Una lista de países admitidos para notificaciones por SMS y llamadas
-  telefónicas en Datadog On-Call, incluidos sus códigos de país.
+  telefónicas en Datadog On-Call, incluyendo sus códigos de país.
 disable_toc: false
 further_reading:
 - link: /incident_response/on-call/notification_preferences/
@@ -16,11 +16,11 @@ Datadog On-Call admite múltiples canales de notificación para sus métodos de 
 La compatibilidad con notificaciones por SMS y llamadas telefónicas varía según el país debido a las regulaciones y restricciones locales. Utilice la siguiente tabla para verificar si su país es compatible antes de agregar un método de contacto telefónico a su perfil de On-Call.
 
 <div class="alert alert-info">
-Si su país no aparece en la siguiente tabla, comuníquese con <a href="https://docs.datadoghq.com/help/">Soporte de Datadog</a> para solicitar soporte de número de teléfono para ese país.
+Si su país no aparece en la siguiente tabla, comuníquese con <a href="https://docs.datadoghq.com/help/">Datadog Support</a> para solicitar soporte de número de teléfono para ese país.
 </div>
 
 <div class="alert alert-info">
-Para obtener la mejor experiencia, descargue la <a href="https://docs.datadoghq.com/mobile">aplicación móvil</a> de Datadog y utilice las notificaciones push como su método principal para recibir avisos. Las notificaciones por SMS y llamadas telefónicas también están disponibles, pero las restricciones de los operadores locales y las regulaciones regionales pueden afectar su confiabilidad.
+Para obtener la mejor experiencia, descargue Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> y utilice las notificaciones push como su método principal para recibir avisos. Las notificaciones por SMS y llamadas telefónicas también están disponibles, pero las restricciones de los operadores locales y las regulaciones regionales pueden afectar su confiabilidad.
 </div>
 
 | País | Código de país |
@@ -124,13 +124,14 @@ Para obtener la mejor experiencia, descargue la <a href="https://docs.datadoghq.
 | Reino Unido | +44 |
 | Estados Unidos | +1 |
 | Uruguay* | +598 |
+| Vietnam | +84 |
 
-* Soporte parcial: su capacidad para recibir o responder a notificaciones en estos países podría ser limitada. Datadog envía solicitudes de notificación a sus proveedores asociados en estos países, pero las restricciones de los operadores locales o las regulaciones gubernamentales pueden limitar la entrega.
+\* Soporte parcial: su capacidad para recibir o responder a notificaciones en estos países podría ser limitada. Datadog envía solicitudes de notificación a sus proveedores asociados en estos países, pero las restricciones de los operadores locales o las regulaciones gubernamentales pueden limitar la entrega.
 
-** Disponible bajo solicitud: las notificaciones por SMS y llamadas telefónicas para estos países son compatibles, pero no están habilitadas de forma predeterminada. Contacte a <a href="https://docs.datadoghq.com/help/">Datadog Support</a> para solicitar acceso.
+\*\* Disponible bajo solicitud: se admiten las notificaciones por SMS y llamadas telefónicas para estos países, pero no están habilitadas de forma predeterminada. Contacte a <a href="https://docs.datadoghq.com/help/">Datadog Support</a> para solicitar acceso.
 
 <div class="alert alert-info">
-No todos los países enumerados en la tabla están disponibles durante una prueba. Si necesita probar las notificaciones por SMS o llamadas telefónicas para un país que no está disponible durante su prueba, contacte a <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
+No todos los países enumerados en la tabla están disponibles durante una prueba. Si necesita probar notificaciones por SMS o llamadas telefónicas para un país que no está disponible durante su prueba, contacte a <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 
 [1]: /es/incident_response/on-call/notification_preferences/#supported-contact-methods

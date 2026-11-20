@@ -227,6 +227,41 @@ EvaluationContext context = new MutableContext("user-123")
 
 The `targetingKey` (for example, `user-123`) is the primary identifier used for consistent flag evaluations and percentage-based rollouts. It's typically a user ID, session ID, or device ID.
 
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `dd-openfeature` version `1.68.0` or later. Experimentation opt-out requires `dd-openfeature` version `1.69.0` or later. The combined example requires `1.69.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][21] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass both preferences in a context for each evaluation:
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new Provider());
+
+MutableContext context = new MutableContext("user-123")
+    .add("dd_evaluation_telemetry_opt_out", true)
+    .add("dd_experimentation_opt_out_at", "2026-10-30T12:00:00Z");
+boolean enabled = api.getClient().getBooleanValue("new-checkout", false, context);
+```
+
+Replace the example timestamp with the subject's stored preference. Preserve existing configuration delivery and Java agent requirements for the selected setup.
+
+For programmatic configuration, use `new Provider.Options().enableEvaluationTelemetryOptOutParameter(true)` and `.experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)`. Import `ExperimentationOptOutMode` from `com.datadog.openfeature`. Explicit options override deployment settings. `DEFAULT` uses deployment settings; `DISABLED` overrides them.
+
+Use `future_experiments_only` or `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` to retain allocations activated strictly before the timestamp. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
+
+Telemetry opt-out suppresses new evaluation events and counts, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Do not update the global context for individual requests. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][22] for how inherited context values apply.
+
 ## Evaluate flags
 
 Evaluate feature flags using the OpenFeature client. All flag types are supported: Boolean, string, integer, double, and object.
@@ -343,6 +378,7 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use a custom agentless endpoint][10] for advanced testing, local development, or an operator-managed proxy
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
+- [Start the Agent before the application][18] when you use Agent Remote Configuration
 
 In agentless mode, Java prefers a compatible local telemetry relay for experiment exposure and aggregated flag evaluation events. It sends both event types directly when no compatible relay is available. The direct path uses the application `DD_API_KEY` and `DD_SITE` settings. For no-Agent serverless environments, you can use [`serverless-init`][17] as the local telemetry relay.
 
@@ -377,7 +413,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` is an optional OpenFeature event. Check the Datadog provider documentation to verify this event is supported in your version.
+After the provider is ready, it emits `PROVIDER_CONFIGURATION_CHANGED` for each new flag configuration that it receives.
 
 ### Multiple clients
 
@@ -402,6 +438,10 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 {{< /code-block >}}
 
 The `Provider` instance is shared globally. Client names are for organizational purposes only and don't create separate provider instances. All clients use the same underlying Datadog provider and flag configurations.
+
+## Record exposures in your own data store
+
+Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-java-agent` and `dd-openfeature` 1.68.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][20].
 
 ## Best practices
 
@@ -469,6 +509,10 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
     details.getReason()
 );
 {{< /code-block >}}
+
+## Evaluation events and privacy
+
+Use `dd-openfeature` and `dd-java-agent` 1.68.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][19] for the data collected, opt-out scope, and delivery requirements.
 
 ## Testing
 
@@ -643,6 +687,7 @@ When the selected configuration path supports exposures, exposures appear only f
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
 2. Verify the Agent API key and connectivity.
+3. If you use Agent Remote Configuration, verify that the Agent was available when the application started. If it was not, restart the application. See [Agent availability][18].
 
 ## Further reading
 
@@ -664,3 +709,8 @@ When the selected configuration path supports exposures, exposures appear only f
 [15]: /serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /serverless/google_cloud_run/containers/in_container/java/
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /feature_flags/concepts/configuration_sources/#agent-availability
+[19]: /feature_flags/guide/server_evaluation_events/
+[20]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[21]: /feature_flags/concepts/opt_out/
+[22]: /feature_flags/concepts/opt_out/#configure-server-sdks

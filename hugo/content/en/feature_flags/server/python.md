@@ -41,7 +41,7 @@ Before setting up the Python Feature Flags SDK, ensure you have:
 
 Set the following environment variables:
 
-{{< code-block lang="bash" >}}
+```bash
 # Required: Agentless configuration delivery
 export DD_API_KEY=<YOUR_API_KEY>
 export DD_SITE={{< region-param key="dd_site" code="true" >}}
@@ -52,7 +52,7 @@ export DD_METRICS_OTEL_ENABLED=true
 
 # Recommended: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
-{{< /code-block >}}
+```
 
 No Feature Flags enablement or source setting is required. Register the provider as shown in [Initialize the SDK](#initialize-the-sdk) to begin polling. Installing or initializing `ddtrace` alone does not create Feature Flags CDN traffic.
 
@@ -258,7 +258,11 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][9] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposures and EVP flag evaluation events. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+With `ddtrace` 4.16.0 or later and the `agentless` source, experiment exposures and EVP flag evaluation events prefer a compatible local relay, such as [`serverless-init`][11]. If no compatible route is available, they can use direct intake with the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed event delivery.
+
+## Evaluation events and privacy
+
+Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path without disabling experiment exposures or the separate `feature_flag.evaluations` OTLP metric. Use `ddtrace` 4.16.0 or later for the privacy and direct-delivery behavior in [Server-Side Evaluation Events and Privacy][13].
 
 ## Cleanup
 
@@ -339,6 +343,7 @@ Verify the following:
 - The Agent has a valid API key for the target organization.
 - `DD_SERVICE` and `DD_ENV` are configured in the application process.
 - The SDK can communicate with the Agent.
+- The Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][12].
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
@@ -351,7 +356,10 @@ Verify the following:
 [9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[13]: /feature_flags/guide/server_evaluation_events/

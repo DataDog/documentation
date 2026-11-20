@@ -3,35 +3,38 @@ disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/soar/
   tag: Blog
-  text: Automatiza la protección de identidades, la contención de amenazas y la inteligencia
-    sobre amenazas con los flujos de trabajo SOAR de Datadog
+  text: Automatice la protección de identidad, la contención de amenazas y la inteligencia
+    de amenazas con los flujos de trabajo de Datadog SOAR
 - link: https://www.datadoghq.com/blog/security-operational-metrics/
   tag: Blog
-  text: Mide y optimiza la eficacia del equipo de seguridad con las métricas operativas
+  text: Mida y optimice la eficiencia del equipo de seguridad con las métricas operativas
     de seguridad de Cloud SIEM
 title: Responder (SOAR) e informar
 ---
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation está en versión preliminar en su sitio de Datadog seleccionado ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
 
-## Información general
+## Descripción general {#overview}
 
-Security Orchestration, Automation, and Response (SOAR) de Datadog te ayuda a orquestar operaciones de seguridad, investigar señales y remediar amenazas utilizando [Workflow Automation (automatización de procesos)][1]. Por ejemplo, puedes [ejecutar un workflow (UI) / proceso (generic)][2] para:
+Datadog Security Orchestration, Automation, and Response (SOAR) le ayuda a orquestar las operaciones de seguridad, investigar señales y remediar amenazas mediante [Workflow Automation][1]. Por ejemplo, puede [ejecutar un flujo de trabajo][2] para:
 
-- Bloquea una dirección IP de tu entorno.
-- Desactiva una cuenta de usuario.
-- Busca una dirección IP en un proveedor externo de inteligencia sobre amenazas.
-- Envía mensajes de Slack a tus compañeros para que te ayuden en tu investigación.
-- Asigna señales para investigación.
-- Enriquece automáticamente los casos y cierra los casos duplicados.
+- Bloquear una dirección IP de su entorno.
+- Deshabilitar una cuenta de usuario.
+- Buscar una dirección IP con un proveedor de inteligencia de amenazas externo.
+- Enviar mensajes de Slack a sus colegas para obtener ayuda con su investigación.
+- Asignar señales para investigación.
+- Enriquecer casos automáticamente y cerrar casos duplicados.
 
-SOAR también incluye [planos][4] personalizables y listos para usar que te ayudarán a crear workflows (UI) / procesos (generic) para corregir las amenazas. Por ejemplo:
+SOAR también incluye [plantillas][4] personalizables listas para usar que le ayudarán a crear flujos de trabajo para remediar amenazas. Por ejemplo:
 
-- Un workflow (UI) / proceso (generic) de Gestión de identidad y acceso (IAM) que automatiza las respuestas a los inicios de sesión sospechosos y las cuentas comprometidas.
-- Un workflow (UI) / proceso (generic) Endpoint Detection and Response (EDR) que acelera la investigación y contención de las amenazas a los endpoints.
-- Un workflow (UI) / proceso (generic) enriquecimiento de inteligencia de amenazas que enriquece las alertas con datos externos para que puedas priorizar y responder con mayor eficacia.
+- Un flujo de trabajo de Identity and Access Management (IAM) que automatiza las respuestas a inicios de sesión sospechosos y cuentas comprometidas.
+- Un flujo de trabajo de Endpoint Detection and Response (EDR) que acelera la investigación y contención de amenazas en puntos de conexión.
+- Un flujo de trabajo de Threat Intelligence Enrichment que enriquece las Alerts con datos externos para que pueda priorizar y responder de manera más eficaz.
 
-Cloud SIEM también proporciona [métricas operativas de seguridad][3], para que puedas determinar la eficiencia y eficacia de tus procesos de seguridad.
+Cloud SIEM también proporciona [métricas operativas de seguridad][3] para que pueda determinar la eficiencia y eficacia de sus procesos de seguridad.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

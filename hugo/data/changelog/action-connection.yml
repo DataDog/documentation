@@ -1,0 +1,30 @@
+entries:
+  - change_type: modified
+    date: '2026-11-05'
+    link: https://github.com/DataDog/documentation/pull/41418
+    operations:
+      - CreateActionConnection
+      - GetActionConnection
+      - UpdateActionConnection
+    title: Add AWS Secrets Manager support to Action Platform connections
+  - change_type: modified
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41503
+    operations:
+      - CreateActionConnection
+      - GetActionConnection
+      - UpdateActionConnection
+    title: Add GitHub Action Connection support
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateActionConnection
+      - DeleteActionConnection
+      - GetActionConnection
+      - GetAppKeyRegistration
+      - ListAppKeyRegistrations
+      - RegisterAppKey
+      - UnregisterAppKey
+      - UpdateActionConnection
+    title: Add AI Gateway route permissions and safe editing

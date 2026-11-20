@@ -16,11 +16,15 @@ further_reading:
   text: Workflow Automation
 title: Outils MCP de Workflow Automation
 ---
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation est en préversion sur votre site Datadog sélectionné ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 ## Présentation {#overview}
 
 Le [Datadog MCP Server][1] permet aux agents IA de créer et de gérer des workflows via le [Model Context Protocol (MCP)][2].
 
-La suite d'outils `workflows` donne aux clients IA tels que Claude Code, Cursor et OpenAI Codex accès à vos workflows, à Action Catalog, au workflow schema et aux données d'exécution. En utilisant le langage naturel, vous pouvez créer et mettre à jour des workflows, valider leurs spécifications, exécuter des workflows publiés et étudier les résultats d'exécution.
+La suite d'outils `workflows` donne aux clients IA tels que Claude Code, Cursor et OpenAI Codex accès à vos workflows, à Action Catalog, au schéma de workflow et aux données d'exécution. En utilisant le langage naturel, vous pouvez créer et mettre à jour des workflows, valider leurs spécifications, exécuter des workflows publiés et étudier les résultats d'exécution.
 
 ## Cas d'utilisation {#use-cases}
 
@@ -64,7 +68,7 @@ Les outils MCP de Workflow Automation utilisent les autorisations Datadog exista
 
 ## Outils disponibles {#available-tools}
 
-L'ensemble d'outils `workflows` expose les outils suivants, regroupés par la partie du cycle de vie du workflow qu'ils prennent en charge. Cela inclut la recherche et l'inspection de workflows, la découverte de spécifications et d'actions, la création et la gestion de workflows, la validation de spécifications, l'exécution et l'inspection d'exécutions, ainsi que le débogage d'étapes. Lorsque vous effectuez une demande d'automatisation en langage naturel, votre client IA appelle ces outils en votre nom. Il enchaîne leurs résultats pour produire le résultat souhaité. Consultez la [Datadog MCP Server tools reference][5] pour obtenir tous les détails sur chaque outil, y compris les autorisations et des exemples de demandes.
+L'ensemble d'outils `workflows` expose les outils suivants, regroupés par la partie du cycle de vie du workflow qu'ils prennent en charge. Cela inclut la recherche et l'inspection de workflows, la découverte de spécifications et d'actions, la création et la gestion de workflows, la validation de spécifications, l'exécution et l'inspection d'exécutions, ainsi que le débogage d'étapes. Lorsque vous effectuez une demande d'automatisation en langage naturel, votre client IA appelle ces outils en votre nom. Il enchaîne leurs résultats pour produire le résultat souhaité. Consultez la [référence des outils du Datadog MCP Server][5] pour obtenir tous les détails sur chaque outil, y compris les autorisations et des exemples de demandes.
 
 ### Découverte de workflows {#workflow-discovery}
 
@@ -94,7 +98,7 @@ L'ensemble d'outils `workflows` expose les outils suivants, regroupés par la pa
 - [`cancel_datadog_workflow_instance`][20]
 - [`get_datadog_workflow_step_data`][21]
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

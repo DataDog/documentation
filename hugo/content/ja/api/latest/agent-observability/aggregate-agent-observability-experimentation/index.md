@@ -1,3 +1,3 @@
 ---
-title: Agent Observability実験の集約
+title: Agent Observability Experimentation の集計
 ---

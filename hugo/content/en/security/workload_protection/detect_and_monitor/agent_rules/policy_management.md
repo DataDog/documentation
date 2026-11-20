@@ -177,8 +177,6 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [5]: /security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/workload_protection/detect_and_monitor/agent_rules/#ootb-rules
-[8]: /security/workload_protection/
-[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
 [12]: /security/workload_protection/respond_and_report/#automated-response

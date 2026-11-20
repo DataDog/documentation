@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/metrics/summary/"
     tag: "Documentation"
-    text: "Metrics Summary"
+    text: "Metrics Catalog"
   - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
@@ -39,6 +39,21 @@ To access this feature, click {{< ui >}}Ask{{< /ui >}} in the search field and t
 {{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
 
 To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Preferences{{< /ui >}} and toggle off the Natural Language Queries feature.
+
+## Sessions
+
+Metrics Explorer automatically keeps a history of your recent investigations, making it easier to explore and share different questions without rebuilding previous work.
+
+Use Sessions to:
+
+- **Start a separate investigation:** Click {{< ui >}}New Session{{< /ui >}} to explore another question without losing your current work.
+- **Return to previous work:** Select or search for a recent session to continue an investigation.
+- **Preserve an important investigation:** Pin and rename a session so it is easier to recognize and find later.
+- **Explore an alternative:** Duplicate a session and modify the copy while preserving the original.
+- **Share an investigation:** Copy a session link to share it with another user.
+- **Remove an unused session:** Delete a session you no longer need.
+
+{{< img src="metrics/explorer/09282026_metric_explorer_sessions.png" alt="Metrics Explorer sessions example" style="width:80%;" >}}
 
 ## Graphing
 
@@ -73,7 +88,7 @@ You can optionally add functions to your query using the function button. Not al
 
 ### Split graph
 
-Use the {{< ui >}}Split Graph{{< /ui >}} button to view the data split into individual graphs by values for tags such as region, service, or environment.
+Use the {{< ui >}}Split Graph{{< /ui >}} button to select one or more tags, such as region, service, or environment, and view one graph per combination of tag values. Saving to a dashboard creates a [split graph widget][12] for one tag or a group of graphs for multiple tags, with all split tags in the group title.
 
 ### Export
 
@@ -106,3 +121,4 @@ For more information, see the [Quick Graphs][7] documentation.
 [9]: /monitors/
 [10]: /dashboards/
 [11]: /account_management/rbac/permissions/#access-management
+[12]: /dashboards/widgets/split_graph/

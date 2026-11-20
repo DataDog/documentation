@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
   tag: "Blog"
   text: "Unify remediation and communication with Datadog Incident Response"
+- link: "https://www.datadoghq.com/blog/fedramp-high-incident-response/"
+  tag: "Blog"
+  text: "Run incident response in your FedRAMP High environment"
 cascade:
     algolia:
         rank: 70

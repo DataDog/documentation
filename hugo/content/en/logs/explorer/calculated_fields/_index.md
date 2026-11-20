@@ -2,9 +2,6 @@
 title: Calculated Fields
 disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
-  tag: Blog
-  text: Accelerate investigations with AI-powered log parsing
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Calculated Fields Formulas"
@@ -14,12 +11,18 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
-- link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
-  tag: "Blog"
-  text: "Transform and enrich your logs at query time with Calculated Fields"
 - link: "https://learn.datadoghq.com/courses/enhance-log-querying"
   tag: "Learning Center"
   text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Accelerate investigations with AI-powered log parsing
+- link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
+  tag: "Blog"
+  text: "Transform and enrich your logs at query time with Calculated Fields"
+- link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+  tag: "Blog"
+  text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 
 ---
 

@@ -2,49 +2,52 @@
 further_reading:
 - link: /gpu_monitoring/setup
   tag: Documentación
-  text: Configurar GPU Monitoring
+  text: Configure el seguimiento de GPU
 - link: https://www.datadoghq.com/blog/datadog-gpu-monitoring/
   tag: Blog
-  text: Optimiza y soluciona los problemas de la infraestructura de IA con Datadog
-    GPU Monitoring
-private: true
-title: GPU Monitoring
+  text: Optimice y solucione problemas de infraestructura de IA con Datadog GPU Monitoring
+- link: https://www.datadoghq.com/blog/monitor-tas-and-gang-scheduling-for-ai-training-in-kubernetes/
+  tag: Blog
+  text: Haga un seguimiento de TAS y de la programación de grupos para el entrenamiento
+    de IA en Kubernetes.
+- link: https://www.datadoghq.com/architecture/gpu-monitoring/
+  tag: Centro de arquitectura
+  text: Arquitectura de referencia de seguimiento de GPU
+title: Seguimiento de GPU
 ---
+## Descripción general {#overview}
+El [seguimiento de GPU][1] de Datadog proporciona una vista centralizada de la salud, el costo y el rendimiento de su flota de GPU. Permite a los equipos tomar mejores decisiones de aprovisionamiento, optimizar y solucionar problemas de rendimiento de cargas de trabajo de IA, y eliminar los costos de GPU inactivos sin tener que configurar manualmente herramientas de proveedores individuales (como DCGM de NVIDIA). El seguimiento de GPU admite flotas implementadas en los principales proveedores de nube (AWS, GCP, Azure, Oracle Cloud), alojadas en instalaciones locales o aprovisionadas a través de plataformas de GPU como servicio como Coreweave y Lambda Labs. 
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring/" >}}
-GPU Monitoring está en vista previa. Para unirse a la vista previa, haz clic en <strong>Solicitar acceso</strong> y completa el formulario.
-{{< /callout >}}
+Puede acceder a información sobre su flota de GPU implementando el Datadog Agent en sus servidores acelerados por GPU. Para obtener instrucciones de configuración, consulte [Set up GPU Monitoring][2].
 
-## Información general
-[GPU Monitoring][1] de Datadog proporciona una visión centralizada del estado, costo y rendimiento de la flota de GPU. GPU Monitoring permite a los equipos tomar mejores decisiones de aprovisionamiento, solucionar problemas de cargas de trabajo fallidas y eliminar costos de GPU inactiva sin tener que configurar manualmente herramientas de proveedores individuales (como DCGM de NVIDIA). Puedes acceder a la información de tu flota de GPU mediante el despliegue del Datadog Agent.
+## Capacidades clave {#key-capabilities}
+### Tome decisiones de asignación y aprovisionamiento de GPU basadas en datos {#make-data-driven-gpu-allocation-and-provisioning-decisions}
+Con una vista integral de toda su flota y la capacidad disponible, el seguimiento de GPU de Datadog le ayuda a asignar y administrar su infraestructura y capacidad de manera justa en toda su organización. 
 
-Para obtener instrucciones de configuración, consulta [Configurar GPU Monitoring][2].
+{{< img src="gpu_monitoring/funnel-3.png" alt="Visualización de embudo titulada 'Su flota de GPU de un vistazo'. Muestra los dispositivos totales, activos y efectivos. Resalta los núcleos de GPU subutilizados y los dispositivos inactivos." style="width:100%;" >}}
 
-### Tomar decisiones de asignación y aprovisionamiento de GPU basadas en datos
-Gracias a la visibilidad de la utilización de la GPU por el host, nodo o pod, es posible identificar los puntos conflictivos o la subutilización de la costosa infraestructura de GPU.
+También puede comprender la disponibilidad actual de sus dispositivos y pronosticar cuántos dispositivos se necesitan para ciertos equipos o cargas de trabajo para evitar fallas en las cargas de trabajo debido a la contención de recursos.
 
-{{< img src="gpu_monitoring/funnel-2.png" alt="Visualización del embudo titulada 'Tu flota de GPU de un vistazo.' Muestra dispositivos totales, asignados, activos y eficaces. Pone de relieve los núcleos de GPU subutilizados y los dispositivos inactivos." style="width:100%;" >}}
+{{< img src="gpu_monitoring/device_allocation.png" alt="Gráficos para ayudar a visualizar la asignación de GPU. Un gráfico de líneas titulado 'Asignación de dispositivos a lo largo del tiempo', que traza los recuentos de dispositivos totales/asignados/activos, incluido un pronóstico futuro de 4 semanas. Un gráfico de anillos titulado 'Desglose de instancias de proveedores de nube', que muestra la prevalencia de instancias de proveedores de nube en toda la flota. Un 'Desglose por tipo de dispositivo' que muestra los dispositivos asignados/totales para varios dispositivos GPU." style="width:100%;" >}}
 
-### Solucionar cargas de trabajo fallidas debido a la contención de recursos
-Conoce tu disponibilidad actual de dispositivos y prevé cuántos dispositivos se necesitan para determinados equipos o cargas de trabajo para evitar cargas de trabajo fallidas por contención de recursos.
+### Maximice el rendimiento del modelo y de la aplicación {#maximize-model-and-application-performance}
+Con la telemetría de recursos del seguimiento de GPU, puede analizar tendencias en los recursos y métricas de GPU (incluida la utilización de GPU, la energía y la memoria) por servidor, nodo o pod a lo largo del tiempo, lo que le ayuda a comprender los efectos de los dispositivos en el rendimiento de su modelo y aplicación. Por ejemplo, puede identificar puntos críticos o la subutilización de infraestructura de GPU costosa que podrían ser cuellos de botella para la ejecución de sus cargas de trabajo.
 
-{{< img src="gpu_monitoring/device_allocation.png" alt="Gráficos para ayudar a visualizar la asignación de GPU. Gráfica lineal titulada 'Asignación de dispositivos en el tiempo', en la que se grafican counts de dispositivos totales/asignados/activos, incluida una previsión futura a 4 semanas. Un gráfico de anillos titulado 'Desglose de instancias de proveedores en la nube', en que se muestra el predominio de instancias de proveedores en la nube en toda la flota. Un 'Desglose por tipo de dispositivo' en que se muestran dispositivos asignados/totales para distintas GPU." style="width:100%;" >}}
+{{< img src="gpu_monitoring/device_metrics.png" alt="Vista detallada de un dispositivo, que muestra visualizaciones de series temporales configurables para la actividad de SM, la utilización de memoria, la energía y la actividad del motor." style="width:100%;" >}}
 
-### Identificar y eliminar los costos de GPU desperdiciada e inactiva
-Identifica el gasto total en infraestructura de GPU y atribuye esos costos a cargas de trabajo e instancias específicas. Correlaciona directamente el uso de la GPU con los pods o procesos relacionados.
+### Detecte problemas de hardware de forma proactiva {#proactively-detect-hardware-issues}
+Las GPU son un recurso costoso y escaso que tienen tasas de falla más altas que los servidores estándar. La solución de seguimiento de GPU de Datadog proporciona monitores listos para usar y recomendaciones proactivas para ayudarle a detectar y solucionar problemas de hardware antes de que afecten sus cargas de trabajo críticas.
 
-{{< img src="gpu_monitoring/fleet_costs.png" alt="Vista detallada de un clúster, en el que se muestra la visualización de embudo de dispositivos (totales/asignados/activos/eficaces),  el costo total de la nube, el costo de la nube inactiva y la visualización y los detalles de distintas entidades conectadas  (pods, procesadores, trabajos SLURM)." style="width:100%;" >}}
+### Identifique y elimine los costos de GPU inactivos y desperdiciados {#identify-and-eliminate-wasted-idle-gpu-costs}
+Identifique el gasto total en infraestructura de GPU y atribuya esos costos a cargas de trabajo e instancias específicas. Correlacione directamente el uso de la GPU con los pods o procesos relacionados.
 
-### Maximizar el rendimiento del modelo y la aplicación
-Con la telemetría de recursos de GPU Monitoring, puedes analizar las tendencias de los recursos y las métricas de la GPU (incluida la utilización de la GPU, la potencia y la memoria) a lo largo del tiempo, lo que te ayudará a comprender sus efectos en el rendimiento de tu modelo y tu aplicación.
+{{< img src="gpu_monitoring/fleet_costs.png" alt="Vista detallada de un clúster, que muestra una visualización de embudo de dispositivos (total/asignados/activos/efectivos), costo total en la nube, costo de nube inactiva, y visualizaciones y detalles de varias entidades conectadas (pods, procesadores, trabajos SLURM)." style="width:100%;" >}}
 
-{{< img src="gpu_monitoring/device_metrics.png" alt="Vista detallada de un dispositivo, en la que se muestran visualizaciones de series temporales configurables de la actividad de SM, la utilización de la memoria, la potencia y la actividad del motor." style="width:100%;" >}}
+## ¿Listo para comenzar? {#ready-to-start}
 
-## ¿Estás listo para comenzar?
+Consulte [Set up GPU Monitoring][2] para obtener instrucciones sobre cómo configurar el seguimiento de GPU de Datadog.
 
-Consulta [Configurar GPU Monitoring][2] para obtener instrucciones sobre cómo configurar GPU Monitoring de Datadog.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -191,5 +191,5 @@ To update a deployment's status from the Datadog UI:
 [1]: https://app.datadoghq.com/ci/settings/dora
 [2]: /delivery_performance/dora_metrics/calculation/#change-failure-rate
 [3]: /delivery_performance/dora_metrics/calculation/#failed-deployment-recovery-time
-[4]: /api/latest/dora-metrics/#patch-a-deployment-event
+[4]: /api/latest/delivery-performance/#mark-a-deployment-as-failed-by-id
 [5]: https://app.datadoghq.com/ci/dora?detail=deployments

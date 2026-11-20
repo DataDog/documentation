@@ -26,6 +26,11 @@ cascade:
     path: /security/workload_protection/windows_expressions
   aliases:
   - /security/threats/windows_expressions
+- _target:
+    path: /security/workload_protection/workload_protection_agent_config
+  aliases:
+  - /security/workload_protection/setup/advanced_configuration
+  - /security/workload_protection/setup/agent_variables
 description: Détectez et répondez aux menaces à l'exécution sur vos hosts, conteneurs
   et charges de travail serverless avec Datadog Workload Protection.
 further_reading:
@@ -57,7 +62,7 @@ Workload Protection ne se limite pas à la détection des menaces à l'exécutio
 
 - **Posture de sécurité à l'exécution :** Workload Protection améliore votre posture de sécurité en identifiant les pratiques d'exécution non sécurisées et les dérives de configuration sensibles, vous aidant à détecter les faiblesses avant qu'elles ne puissent être exploitées.
 
-- **Infrastructure Monitoring :** Workload Protection suit tout type de comportement à l'exécution, qu'il soit lié à la sécurité ou non. Du débogage de charges de travail personnalisées à la surveillance des processus au niveau du système et des sessions utilisateur à distance, il offre une visibilité en temps réel sur le fonctionnement de vos environnements.
+- **Surveillance d'infrastructure :** Workload Protection suit tout type de comportement à l'exécution, qu'il soit lié à la sécurité ou non. Du débogage de charges de travail personnalisées à la surveillance des processus au niveau du système et des sessions utilisateur à distance, il offre une visibilité en temps réel sur le fonctionnement de vos environnements.
 
 {{< img src="security/workload_protection/k8s_remote_access.png" alt="Répartition des sessions utilisateur à distance Kubernetes" width="100%">}}
 

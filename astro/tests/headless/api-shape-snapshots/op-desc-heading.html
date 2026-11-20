@@ -1,0 +1,12 @@
+<!-- op-desc-heading: /api/latest/rendering-shapes/search-security-findings/ -->
+<h3 class="api-endpoint__overview-heading _api-endpoint__overview-heading_071384">Overview</h3>
+<p>
+  Get a list of security findings that match a search query.
+  <a href="https://docs.datadoghq.com/security/guide/findings-schema/">See the schema for security findings</a>.
+</p>
+<h3>Query Syntax</h3>
+<p>
+  The API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed
+  by @ when queried. Tags are queried without a prefix.
+</p>
+<p>Example: <code>@severity:(critical OR high) @status:open team:platform</code></p>

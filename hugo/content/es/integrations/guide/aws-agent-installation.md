@@ -161,7 +161,7 @@ La instrumentación de Lambda no necesita permisos de escritura de Secrets Manag
 
 ## Cómo funciona {#how-it-works}
 
-La instrumentación se basa en una **regla de instrumentación**: una cuenta de AWS vinculada a una consulta que describe qué recursos cubrir. Datadog evalúa la consulta, instrumenta cada recurso cubierto dentro de su propia cuenta y lo mantiene instrumentado:
+Una **regla de instrumentación** es la selección guardada de **Scope to** para una cuenta de AWS. Determina qué recursos instrumenta Datadog automáticamente, incluidos los recursos que coincidan con la selección más adelante. Datadog evalúa la selección, instrumenta cada recurso cubierto dentro de su propia cuenta y lo mantiene instrumentado:
 
 1. Usted escribe una consulta que describe los recursos a cubrir, selecciona recursos específicos o agrega todos los recursos elegibles.
 1. Datadog evalúa la regla con respecto a su cuenta y registra qué recursos cubre.
@@ -209,6 +209,8 @@ Datadog conserva sus capas y variables de entorno existentes. Para funciones de 
 Para ajustar lo que recopila la extensión, establezca las variables de entorno estándar de Datadog en la función. Para obtener la lista completa, consulte [Configure Serverless Monitoring for AWS Lambda][14]. Para saber qué recopila la instrumentación y qué funciones de monitoreo de Lambda habilita, consulte [Serverless Monitoring for AWS Lambda][13].
 
 ## Instalar la instrumentación de Datadog {#install-datadog-instrumentation}
+
+<div class="alert alert-info">Esta función solo está disponible para clientes de prueba y clientes que la habilitaron durante su prueba. Esto se aplica tanto a la configuración de la integración de AWS como a Fleet Automation.</div>
 
 Puede iniciar la instrumentación desde dos puntos de entrada, dependiendo de cuánto control desee sobre qué recursos se instrumentan:
 
