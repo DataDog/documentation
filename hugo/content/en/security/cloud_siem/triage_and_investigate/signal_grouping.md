@@ -18,63 +18,68 @@ further_reading:
 
 ## Overview
 
-When a [Notification Rule][1] sends security signals to a case project, Datadog creates a case for each signal. If the same detection fires many times for the same user or IP address, you get many cases about the same activity.
+When a [Notification rule][1] sends security signals to a case project, Datadog creates a case for each signal. If the same detection fires multiple times for the same user or IP address, you get duplicate cases about the same activity.
 
-With signal grouping, Datadog first looks for related signals that are already in a case. If it finds one, it adds the new signal to that case instead of creating a new one.
+With signal grouping, Datadog first looks for related signals that are already associated with a case. If it finds one, it adds the new signal to that case instead of creating a new one.
 
 Signal grouping has two parts:
 
-- **Grouping strategies** define when two signals are related. You configure them once for your organization.
-- **Automatic case creation** uses the grouping strategies you select to decide which case a new signal goes to.
+- **Grouping strategies** define when two signals are related to the same activity. You configure grouping strategies once for your organization.
+- **Automatic case creation** uses the grouping strategies you configured to decide which case to associate a new signal with.
 
-For example, a detection rule grouped by `@usr.id` fires three times in a few hours for the same user. Without grouping, you get three cases. With grouping, the three signals are in one case.
+For example, a detection rule grouped by `@usr.id` fires three times in one hour for the same user. Without grouping, you get three cases. With grouping, you get one case with three signals associated with it.
 
 ## Grouping strategies
 
-A grouping strategy defines when two signals are related. Datadog provides the following strategy:
+A grouping strategy defines when signals are related to the same activity.
 
 ### Repeated detection
 
-Repeated detection groups signals that have:
+By default, Datadog provides the repeated detection strategy, which groups signals that have all of the same:
 
-- the same detection rule,
-- the same rule version, and
-- the same group-by values, for example the same `@usr.id` or `@network.client.ip`.
+- Detection rule
+- Rule version
+- Group-by values (for example, the same `@usr.id` or `@network.client.ip`)
 
-Datadog looks for related signals in a time window before the new signal, called the lookback. You can set the lookback to 1, 6, 24, or 48 hours. The default is 24 hours.
+Datadog looks for related signals in a time window, called the lookback, before the new signal. You can set the lookback to 1, 6, 24, or 48 hours. The default is 24 hours.
 
-Repeated detection only applies to Cloud SIEM log detection signals that have group-by values. Signals without group-by values always get their own case.
-
-A new rule version counts as a different detection, because it can match different conditions. Signals from before and after a rule change are not grouped together.
+<div class="alert alert-info">
+  <ul>
+    <li>Repeated detection only applies to Cloud SIEM log detection signals that have group-by values. Signals without group-by values always get their own case.</li>
+    <li>A new rule version counts as a different detection, because it can match different conditions. Signals from before and after a rule change are not grouped together.</li>
+  </ul>
+</div>
 
 ## Turn on signal grouping
 
+### Permissions
+
+| Action                                                | Required permissions                       |
+|-------------------------------------------------------|--------------------------------------------|
+| View grouping strategies                              | `Security Signals Read`                    |
+| Change the configuration of a grouping strategy       | `Signal Grouping Strategies Write`         |
+| View the strategies used by automatic case creation   | `Cases Read` and `Security Signals Read`   |
+| Select the strategies used by automatic case creation | `Cases Write` and `Security Signals Write` |
+
+See [Role Based Access Control][3] for more information.
+
 ### Configure a grouping strategy
 
-1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Grouping Strategies{{< /ui >}}.
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Grouping Strategies{{< /ui >}}.
 1. Open {{< ui >}}Repeated detection{{< /ui >}} and select the lookback you want.
 
 ### Select strategies for automatic case creation
 
-1. Navigate to the Cloud SIEM [Security cases settings][2] page.
-1. Select the grouping strategies that automatic case creation uses, and save.
+1. In Datadog, go to the Cloud SIEM [Security cases settings][2] page.
+1. Select the grouping strategies that automatic case creation uses, and click {{< ui >}}Save{{< /ui >}}.
 
-Some things to know:
-
-- If no strategy is selected, automatic case creation creates one case for each signal.
-- The selected strategies apply to all case projects in your organization.
-- Changes only apply to new signals. Existing cases are not changed.
-
-### Permissions
-
-| Action | Required permissions |
-| --- | --- |
-| View grouping strategies | `Security Signals Read` |
-| Change the configuration of a grouping strategy | `Signal Grouping Strategies Write` |
-| View the strategies used by automatic case creation | `Cases Read` and `Security Signals Read` |
-| Select the strategies used by automatic case creation | `Cases Write` and `Security Signals Write` |
-
-See [Role Based Access Control][3] for more information.
+<div class="alert alert-info">
+  <ul>
+    <li>If you don't have a grouping strategy selected, automatic case creation creates one case for each signal.</li>
+    <li>The selected strategies apply to all case projects in your organization.</li>
+    <li>Changes only apply to new signals. Existing cases don't change.</li>
+  </ul>
+</div>
 
 ## How Datadog picks a case
 
