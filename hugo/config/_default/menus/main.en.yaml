@@ -5785,6 +5785,12 @@ menu:
       identifier: data_jobs
       parent: data_observability_heading
       weight: 80000
+    - name: Optimize
+      url: data_observability/optimize
+      pre: data-observability-wui
+      identifier: data_observability_optimize
+      parent: data_observability_heading
+      weight: 85000
     - name: CI/CD
       url: data_observability/cicd
       pre: data-observability-wui
