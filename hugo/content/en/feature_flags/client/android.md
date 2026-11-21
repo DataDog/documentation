@@ -459,6 +459,68 @@ val provider = FlagsClient.Builder()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
+## Verify flag responses with response signing
+
+{{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
+Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
+
+The response signing SDK option is experimental. Its name and behavior can change before general availability.
+{{< /callout >}}
+
+Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][5].
+
+<!-- TODO: confirm the minimum version. -->
+Response signing requires `dd-sdk-android-flags` version `X.Y.Z` or later.
+
+<!-- TODO: confirm that the experimental option name matches the released SDK API. -->
+To enable response signing, set `experimentalResponseSigning` in the global Flags configuration. The option requires opt-in to the experimental API with `@OptIn(ExperimentalFlagsApi::class)`:
+
+{{< code-block lang="kotlin" >}}
+@OptIn(ExperimentalFlagsApi::class)
+fun enableFlags() {
+    val config = FlagsConfiguration.Builder()
+        .experimentalResponseSigning(ResponseSigningMode.REQUIRED)
+        .build()
+
+    Flags.enable(config)
+}
+{{< /code-block >}}
+
+The response signing option accepts these modes:
+
+`off` (default)
+: The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+
+`required`
+: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+
+`observe`
+: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
+<!-- TODO: confirm that `observe` is a supported production mode at launch, and its final name. -->
+
+You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+### Confirm that response signing works
+
+1. Route your test device through an HTTPS debugging proxy that you trust, or use a network inspector.
+1. Find the flag assignment request.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` header.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
+1. Confirm that the client state is `Ready` and that flag evaluations return assigned values.
+
+To see SDK messages in Logcat, set `Datadog.setVerbosity(Log.WARN)` or a lower level.
+<!-- TODO: confirm the user-visible log message or telemetry for a verified response. -->
+
+### Verification failures
+
+In `REQUIRED` mode, the client rejects a response that fails verification. It does not retry the request without signing.
+
+- If no verified assignments are available for the evaluation context, the client state is `Error` and evaluations return the default value.
+- Verified assignments stay in memory until their signature expires. After that, after an app restart, or after a change to the evaluation context, the client needs a new verified response. The SDK does not read or write the on-disk cache in this mode.
+- Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
+
+In `OBSERVE` mode, the client records the verification outcome and accepts otherwise valid responses.
+
 ## Direct FlagsClient integration (advanced)
 
 For most applications, the OpenFeature API described above is the recommended approach. However, you can use the Datadog `FlagsClient` directly if you have specific requirements that the OpenFeature abstraction doesn't support.
@@ -711,3 +773,5 @@ class CheckoutFlagsTest {
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
 
 [4]: /feature_flags/concepts/opt_out/
+
+[5]: /feature_flags/guide/prevent_response_tampering/
