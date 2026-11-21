@@ -41,5 +41,5 @@ The table below outlines the available RUM recommendation types. Only applicatio
 | Improve initial page load time by reducing bundle size | A large JavaScript bundle is impacting the initial load and paint of the page. |
 
 
-[1]: /real_user_monitoring/rum_without_limits/
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [2]: https://app.datadoghq.com/rum/optimization

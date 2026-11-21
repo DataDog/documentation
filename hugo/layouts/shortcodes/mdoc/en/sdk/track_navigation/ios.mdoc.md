@@ -1,64 +1,8 @@
-### Custom views
-
-In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
-
-- `.startView(viewController:)`
-- `.stopView(viewController:)`
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your `UIViewController`:
-let rum = RUMMonitor.shared()
-
-override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    rum.startView(viewController: self)
-}
-
-override func viewDidDisappear(_ animated: Bool) {
-  super.viewDidDisappear(animated)
-  rum.stopView(viewController: self)
-}
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-@import DatadogRUM;
-// in your `UIViewController`:
-
-DDRUMMonitor *rum = [DDRUMMonitor shared];
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [rum startViewWithViewController:self name:nil attributes:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-    [rum stopViewWithViewController:self attributes:nil];
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Automatically track views
+## Automatically track views
 
 You can automatically track views with UIKit and SwiftUI.
 
-#### UIKit
+### UIKit
 
 To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
@@ -74,11 +18,10 @@ public protocol UIKitRUMViewsPredicate {
 {% /tab %}
 {% tab label="Objective-C" %}
 
-```swift
-@objc
-public protocol DDUIKitRUMViewsPredicate: AnyObject {
-    func rumView(for viewController: UIViewController) -> DDRUMView?
-}
+```objective-c
+@protocol DDUIKitRUMViewsPredicate <NSObject>
+- (DDRUMView * _Nullable)rumViewFor:(UIViewController * _Nonnull)viewController;
+@end
 ```
 
 {% /tab %}
@@ -178,7 +121,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 **Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
 
-#### SwiftUI
+### SwiftUI
 
 To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
 
@@ -239,8 +182,98 @@ class CustomSwiftUIPredicate: SwiftUIRUMViewsPredicate {
 
 **Notes:**
 - Datadog recommends enabling UIKit view tracking as well, even if your app is built entirely with SwiftUI.
-- Tab bars are not tracked automatically. Use [manual tracking](#custom-views) for each tab view to track them.
+- Tab bars are not tracked automatically. Use [manual tracking](#manually-track-views) for each tab view to track them.
 - If you use both automatic and manual tracking, you may see duplicate events. To avoid this, rely on a single instrumentation method or use a custom predicate to filter out duplicates.
 
-[1]: https://app.datadoghq.com/rum/application/create
-[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
+## Manually track views
+
+In addition to [tracking views automatically](#automatically-track-views), you can track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
+
+- `.startView(viewController:)`
+- `.stopView(viewController:)`
+
+For example:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogRUM
+
+// in your `UIViewController`:
+let rum = RUMMonitor.shared()
+
+override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    rum.startView(viewController: self)
+}
+
+override func viewDidDisappear(_ animated: Bool) {
+  super.viewDidDisappear(animated)
+  rum.stopView(viewController: self)
+}
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogRUM;
+// in your `UIViewController`:
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [[DDRUMMonitor shared] startViewWithViewController:self name:nil attributes:@{}];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+
+    [[DDRUMMonitor shared] stopViewWithViewController:self attributes:@{}];
+}
+```
+
+{% /tab %}
+{% /tabs %}
+
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
+
+### Instrument SwiftUI views
+
+You can also instrument views of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
+
+To instrument a `SwiftUI.View`, add the following method to your view declaration:
+
+```swift
+import SwiftUI
+import DatadogRUM
+
+struct FooView: View {
+
+    var body: some View {
+        FooContent {
+            ...
+        }
+        .trackRUMView(name: "Foo")
+    }
+}
+```
+
+The `trackRUMView(name:)` method starts and stops a view when the `SwiftUI` view appears and disappears from the screen.
+
+For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=ios#view-attributes).
+
+## Views instrumentation versus app life cycle
+
+RUM integrates with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
+
+**UIKit Views**: When [automatically tracking UIKit views](#uikit) using `UIKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear(animated:)` event of the `UIViewController` life cycle. The view is stopped at `viewDidDisappear(animated:)`.
+**SwiftUI Views**: When [tracking SwiftUI views](#swiftui) with the `.trackRUMView(name:)` view modifier, RUM starts the view at the `onAppear(perform:)` callback and stops it at `onDisappear(perform:)`.
+**Manual View Tracking**: When tracking views manually using `RUMMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
+
+When the application leaves the foreground, RUM automatically stops the current view, leaving no active view. Since RUM's data model requires an active view to track other events, by default, all events tracked in the background are skipped due to the absence of a view. To capture these events instead, see [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios).
+
+**Note**: If you're tracking views manually, you need to decide on your own whether the view should be stopped when the app leaves the foreground.
+
+[1]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift

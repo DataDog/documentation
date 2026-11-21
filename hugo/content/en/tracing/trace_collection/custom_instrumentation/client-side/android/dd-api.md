@@ -1086,5 +1086,5 @@ The following methods in `DatadogTracerBuilder` can be used when initializing th
 
 [6]: https://square.github.io/okhttp/interceptors/
 
-[7]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
+[7]: /error_tracking/frontend/mobile/android/?tab=us#upload-your-mapping-file
 

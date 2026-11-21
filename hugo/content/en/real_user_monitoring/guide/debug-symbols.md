@@ -5,7 +5,7 @@ description: "Debug and deobfuscate stack traces in RUM using debug symbols to i
 
 The [RUM Debug Symbols page][1] lists all the debug symbols that are uploaded for a given type of RUM application. You can use this page to investigate obfuscated stack traces.
 
-<div class="alert alert-info">To automatically associate stack traces with your service and version for source code resolution, use the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context">Source Code Context build plugin</a>.</div>
+<div class="alert alert-info">To automatically associate stack traces with your service and version for source code resolution, use the <a href="/real_user_monitoring/setup/additional_plugins/#source-code-context">Source Code Context build plugin</a>.</div>
 
 The following error message appears when a stack trace is not properly deobfuscated in RUM or Error Tracking: _The stack trace could not be deobfuscated because no debug symbols could be found for this application. If you are not obfuscating your application, ignore this message. Otherwise, upload your debug symbols to see deobfuscated stack traces. You can view all your uploaded symbols on the RUM Debug Symbols page._
 
@@ -26,7 +26,7 @@ Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your a
 If there are no debug symbols for your application, [upload them][2].
 
 <div class="alert alert-danger">
-Ensure that the size of each debug symbol does not exceed the limit of <strong>500 MB</strong>, otherwise the upload is rejected.
+Make sure that the size of each debug symbol does not exceed the limit of <strong>500 MB</strong>, otherwise the upload is rejected. JavaScript source maps can be up to <strong>800 MB</strong> each, compressed.
 For iOS dSYMs, individual files up to <strong>2 GB</strong> are supported. 
 </div>
 
@@ -48,4 +48,4 @@ The [RUM Debug Symbols page][1] displays the values of these tags. If you find a
 
 
 [1]: https://app.datadoghq.com/source-code/setup/rum
-[2]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
+[2]: /error_tracking/frontend/mobile/android/?tab=us#upload-your-mapping-file

@@ -65,7 +65,7 @@ See [Database Monitoring][14] for setup and advanced options.
 [2]: /real_user_monitoring/guide/setup-rum-deployment-tracking/
 [3]: /integrations/launchdarkly/#setup
 [4]: /api/latest/events/
-[5]: /real_user_monitoring/feature_flag_tracking/
+[5]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
 [6]: /change_tracking/change_types/feature_flags/
 [7]: /database_monitoring/schema_explorer/
 [8]: /database_monitoring/connect_dbm_and_apm/

@@ -1,5 +1,5 @@
 ---
-title: Define Services And Track UI Components In Your Browser Application
+title: Define Services and Track UI Components in Your Browser Application
 description: "Organize large browser applications by defining services and tracking UI components for better team ownership and troubleshooting."
 disable_toc: false
 further_reading:
@@ -126,14 +126,14 @@ Components are tracked using custom vitals [mentioned above][10]:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
-[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
-[5]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing
-[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#overview
-[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#measure-component-level-performance-with-custom-vitals
-[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[2]: /real_user_monitoring/setup/install/?platform=browser
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser#manually-track-views
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#all-performance-telemetry
+[5]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#track-additional-performance-timings
+[6]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#measure-component-level-performance-with-custom-vitals
+[8]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser#manually-track-views
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tabs=webpackjs#upload-your-source-maps
 [10]: #track-components-in-web-pages
-[11]: /real_user_monitoring/ownership_of_views/
+[11]: /real_user_monitoring/enrich_rum_data/define_view_owners/

@@ -99,7 +99,7 @@ When no matching operation represents a critical action, follow [Create operatio
 
 Each operation row also shows its execution count and success rate, calculated using the `rum.measure.operation` metric, and its p75 latency, calculated using the `rum.measure.operation.duration` metric.
 
-<div class="alert alert-tip">If Bits AI is enabled for your organization, launch a <a href="/real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring">Bits Investigation</a> from an operation to troubleshoot failures or latency regressions.</div>
+<div class="alert alert-tip">If Bits AI is enabled for your organization, launch a <a href="/real_user_monitoring/investigate_problems/troubleshoot_with_ai/optimize_performance/#operations-monitoring">Bits Investigation</a> from an operation to troubleshoot failures or latency regressions.</div>
 
 Click an operation to open its performance side panel. The panel shows:
 - The list of SLOs and monitors configured for the operation
@@ -149,16 +149,16 @@ Click **Manage Tests** to add or remove tests from the suite, or **New Test** to
 [4]: /session_replay/
 [5]: /journey_monitoring/variants/
 [6]: /product_analytics/charts/funnel_analysis/
-[7]: /real_user_monitoring/operations_monitoring/
+[7]: /real_user_monitoring/track_critical_operations/
 [8]: /internal_developer_portal/catalog/
 [9]: /error_tracking/
 [10]: /synthetics/test_suites/
-[11]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
+[11]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser
 [12]: /product_analytics/charts/journey_paths/
 [13]: /synthetics/test_suites/#service-level-objectives
 [14]: /journey_monitoring/configuring_journeys/#review-matching-operations
 [15]: /journey_monitoring/status/#rum-operation-slos
-[18]: /real_user_monitoring/rum_without_limits/
+[18]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [19]: /service_level_objectives/
 [20]: /journey_monitoring/configuring_journeys/#step-3-add-synthetic-test-coverage
 [21]: /journey_monitoring/configuring_journeys/#review-matching-tests

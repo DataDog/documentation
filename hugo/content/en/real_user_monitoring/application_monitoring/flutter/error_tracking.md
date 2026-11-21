@@ -15,27 +15,9 @@ Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][2] or see the [Flutter setup documentation][3].
 
-### Add native crash reporting
-
-Update your initialization snippet to enable native crash reporting for iOS and Android by setting `nativeCrashReportEnabled` to `true`.
-
-For example:
-
-```dart
-final configuration = DdSdkConfiguration(
-  clientToken: 'DD_CLIENT_TOKEN'
-  env: 'DD_ENV'
-  site: DatadogSite.us1,
-  trackingConsent: TrackingConsent.granted,
-  nativeCrashReportEnabled: true, // Set this flag
-  loggingConfiguration: LoggingConfiguration(),
-  rumConfiguration: 'DD_APP_ID',
-);
-DatadogSdk.instance.initialize(configuration);
-```
+To enable native crash reporting for iOS and Android, see [Track errors and crashes][11].
 
 If your application suffers a fatal crash, once your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
-
 
 ## Upload symbol files to Datadog
 
@@ -89,10 +71,11 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
+[3]: /real_user_monitoring/setup/install/?platform=flutter
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/flutter-symbols
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [8]: https://docs.flutter.dev/deployment/flavors
 [9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
 [10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html
+[11]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=flutter

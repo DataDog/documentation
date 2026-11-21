@@ -3836,7 +3836,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
-[59]: /real_user_monitoring/rum_without_limits/
+[59]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [60]: /security/detection_rules/
 [61]: /security/suppressions/
 [62]: /experiments/
@@ -3850,7 +3850,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
-[73]: /real_user_monitoring/operations_monitoring/
+[73]: /real_user_monitoring/track_critical_operations/
 [74]: /sheets/
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
@@ -3875,7 +3875,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
-[98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
+[98]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
 [101]: /gpu_monitoring/

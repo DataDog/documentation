@@ -207,6 +207,52 @@ module.exports = config;
 
 Alternatively, use the `datadog-ci react-native inject-debug-id` command to manually attach a unique Debug ID to your application bundle and sourcemap. See the [command documentation][5] for usage instructions.
 
+#### Upload source maps for EAS updates
+
+When creating an [EAS update](https://docs.expo.dev/eas-update/introduction/), you need to upload the corresponding sourcemaps to Datadog. This helps ensure accurate error tracking and symbolication.
+
+##### 1. Create the EAS update
+
+Run the update command as usual:
+
+```
+eas update --channel [channel-name] --message "[message]"
+```
+
+This generates a `dist` folder at the root of your project.
+
+##### 2. Locate the sourcemaps
+
+Inside the `dist` folder, find the generated bundles and sourcemaps:
+
+* Example paths:
+
+  * `./dist/_expo/static/js/ios`
+  * `./dist/_expo/static/js/android`
+
+* File pairs you may see:
+
+  * Hermes: `.hbc` (bundle) and `.hbc.map` (sourcemap)
+  * JSC: `.js` or `.jsbundle` (bundle) and `*.map` (sourcemap)
+
+##### 3. Upload the sourcemaps
+
+Install the latest version of `datadog-ci`.
+For each platform (Android & iOS), upload the debug symbols using:
+
+```
+npx datadog-ci react-native upload \
+  --platform [ios OR android] \
+  --service com.example.service \
+  --bundle [BUNDLE_FILE] \
+  --sourcemap [SOURCEMAP_FILE] \
+  --release-version [YOUR_RELEASE_VERSION] \
+  --build-version [YOUR_BUILD_VERSION]
+```
+
+The sourcemaps include a unique debug ID generated from the bundle's contents.
+This ID changes with every EAS update. As a result, **even if the service, release, and build version stay the same, Datadog receives a new sourcemap upload**.
+
 ### Step 7 - Add git repository data (EAS only)
 
 If you're using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files:
@@ -399,7 +445,7 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 {{% collapse-content title="Check source map file size limits" level="h3" expanded=false id="check-source-map-size" %}}
 
-Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
+Source maps are limited in size to **800 MB** each, compressed. Mapping files are limited to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 To compute the size of your source maps and bundle, run the following command:
 
@@ -428,7 +474,7 @@ If a `build` directory does not already exist, create it first by running `mkdir
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/
+[3]: /real_user_monitoring/setup/install/?platform=react_native
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
 [6]: https://www.npmjs.com/package/react-native-performance-limiter

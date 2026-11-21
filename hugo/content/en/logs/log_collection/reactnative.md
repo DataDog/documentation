@@ -294,4 +294,4 @@ export type LogWithErrorArguments = [
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /logs/processing/attributes_naming_convention/
 [5]: /tagging/
-[6]: /real_user_monitoring/reactnative/?tab=us
+[6]: /real_user_monitoring/setup/install/?platform=react_native

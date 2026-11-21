@@ -1,12 +1,24 @@
-## Clear all data
+## Configure the session sample rate
 
-Use `clearAllData` to clear all data that has not been sent to Datadog.
+Use the `sessionSampleRate` parameter of your RUM configuration to set the percentage of sessions the SDK sends to Datadog: `100` for all, `0` for none. Only tracked sessions send RUM events. The default is `100`:
 
-```js
-DdSdkReactNative.clearAllData();
+```javascript
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    TrackingConsent.GRANTED,
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            sessionSampleRate: 100,
+        }
+    }
+);
 ```
 
-## Retrieve the RUM session ID
+You can adjust the session sample rate, but Datadog recommends using [retention filters][1] to control retained volume. For the full parameter reference, see [Initialization parameters][2].
+
+## Retrieve the session ID
 
 Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
 
@@ -18,26 +30,5 @@ import { DdRum } from '@datadog/mobile-react-native';
 const rumSessionId = await DdRum.getCurrentSessionId();
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/react_native
-[3]: https://jestjs.io/
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /getting_started/tagging/#define-tags
-[6]: /getting_started/site/
-[7]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
-[8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
-[9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
-[10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/react-navigation/react-navigation
-[13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[16]: https://reactnative.dev/docs/global-requestIdleCallback
-[17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
-[18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
-[20]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
-[21]: #rum-configuration
-[22]: #logs-configuration
-[23]: #trace-configuration
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=react_native#initialization-parameters

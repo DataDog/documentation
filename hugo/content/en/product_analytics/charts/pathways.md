@@ -29,7 +29,7 @@ Build a pathways chart around a single view, then choose whether to show the ste
 
 1. {{< ui >}}Select a step{{< /ui >}} in your user journey to explore, and use the adjacent dropdown to display steps {{< ui >}}before{{< /ui >}} or {{< ui >}}after{{< /ui >}} it.
 
-   <div class="alert alert-tip">Pathways charts support <a href="/real_user_monitoring/explorer/search_syntax/#wildcards">Datadog wildcards</a>, so you can match multiple views with a single entry, such as <code>/department/*</code>.</div>
+   <div class="alert alert-tip">Pathways charts support <a href="/real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/#wildcards">Datadog wildcards</a>, so you can match multiple views with a single entry, such as <code>/department/*</code>.</div>
 
 1. (Optional) Filter chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} criteria.
 

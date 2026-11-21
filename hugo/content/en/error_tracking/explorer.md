@@ -119,7 +119,7 @@ You can directly export your search query from the explorer to create an Error T
 [1]: /events
 [2]: /error_tracking/issue_team_ownership
 [3]: /error_tracking/suspected_causes
-[4]: /real_user_monitoring/explorer/search/#event-types
+[4]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#event-types
 [5]: /error_tracking/issue_states
 [6]: /error_tracking/regression_detection
 [7]: /monitors/types/error_tracking

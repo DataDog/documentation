@@ -36,7 +36,7 @@ Journey status does not require both input types. A single high-burn SLO from ei
 
 ### RUM operation SLOs
 
-<div class="alert alert-info">Creating RUM operations requires an active trial or paid subscription to <a href="/real_user_monitoring/rum_without_limits/">RUM without Limits&trade;</a>. After you link an operation to a journey, its SLOs can contribute to journey status.</div>
+<div class="alert alert-info">Creating RUM operations requires an active trial or paid subscription to <a href="/real_user_monitoring/">RUM without Limits&trade;</a>. After you link an operation to a journey, its SLOs can contribute to journey status.</div>
 
 The RUM operation input has a high burn rate when at least one SLO on a linked operation has a high burn rate. It is healthy when at least one operation SLO is included and every included SLO has a low burn rate or is OK.
 
@@ -75,7 +75,7 @@ View journey status in the [catalog][12], [map][13], and details report:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/operations_monitoring/
+[1]: /real_user_monitoring/track_critical_operations/
 [2]: /journey_monitoring/details_report/#synthetic-monitoring--testing
 [3]: /service_level_objectives/#slo-burn-rate-indicator
 [4]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/

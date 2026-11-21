@@ -208,7 +208,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[3]: /real_user_monitoring/application_monitoring/browser/setup/
+[3]: /real_user_monitoring/setup/install/?platform=browser
 [4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -409,7 +409,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [3]: https://docs.cypress.io/api/plugins/after-spec-api
 [4]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[6]: /real_user_monitoring/application_monitoring/browser/setup/
+[6]: /real_user_monitoring/setup/install/?platform=browser
 [7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 

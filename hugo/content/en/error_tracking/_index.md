@@ -42,7 +42,7 @@ Additional features are available depending on the source of the error. See [sup
     {{< nextlink href="error_tracking/frontend/mobile/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/flutter" >}}Flutter{{< /nextlink >}}
-    {{< nextlink href="error_tracking/frontend/mobile/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/kotlin-multiplatform/" >}}Kotlin Multiplatform{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -64,7 +64,7 @@ For details, see the product-specific Error Tracking documentation:
 
 [1]: /tracing/error_tracking#setup
 [2]: /logs/error_tracking#setup
-[3]: /real_user_monitoring/error_tracking#setup
+[3]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/#setup
 [4]: /error_tracking/backend/exception_replay
 [5]: /error_tracking/explorer
 [6]: /error_tracking/frontend/browser

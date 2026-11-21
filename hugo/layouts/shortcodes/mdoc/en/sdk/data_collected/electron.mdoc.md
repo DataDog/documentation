@@ -23,8 +23,8 @@ Every event has attributes. See the [Shared attributes](#shared-attributes) sect
 
 Main process events are not attached to a view.
 
-[dc-events-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#custom-duration-vitals
-[dc-events-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#operation-monitoring
+[dc-events-1]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=electron#custom-duration-vitals
+[dc-events-2]: /real_user_monitoring/track_critical_operations/
 
 ## Execution context
 
@@ -110,13 +110,13 @@ The SDK stores events on disk before uploading them to Datadog. Events are prese
 
 The [tracking consent][10] decides what the SDK keeps and sends. While consent is `'pending'`, the SDK keeps data on disk until the end user decides. It deletes data kept while consent is pending if no decision is made before the next launch. When consent is `'not-granted'`, the SDK does not store new data.
 
-[1]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#global-context
-[3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#modify-or-drop-rum-events
-[4]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#trace-sampling-rules
+[1]: /real_user_monitoring/setup/data_collected/?platform=browser
+[2]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=electron
+[3]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=electron
+[4]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=electron#trace-sampling-rules
 [5]: /getting_started/tagging/unified_service_tagging/
-[6]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#initialization-parameters
 [7]: /data_security/real_user_monitoring/#geolocation
-[8]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#user-and-account-information
-[9]: /real_user_monitoring/application_monitoring/electron/error_tracking/#prepare-your-source-maps
-[10]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
+[8]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=electron
+[9]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=electron#prepare-your-source-maps
+[10]: /real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=electron#tracking-consent

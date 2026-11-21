@@ -1,8 +1,12 @@
-### Track user actions
+## Automatically track user interactions
 
-You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
+The Unity SDK doesn't track user interactions automatically. Track actions manually as described in the following section.
 
-To manually register instantaneous RUM actions such as `RumActionType.Tap`, use `DdRum.AddAction()`. For continuous RUM actions such as `RumActionType.Scroll`, use `DdRum.StartAction()` or `DdRum.StopAction()`.
+## Manually track actions and send custom events
+
+You can track specific user actions such as taps, clicks, and scrolls.
+
+To register instantaneous RUM actions such as `RumActionType.Tap`, use `AddAction`. For continuous RUM actions such as `RumActionType.Scroll`, use `StartAction` and `StopAction`.
 
 For example:
 
@@ -10,11 +14,13 @@ For example:
 void DownloadResourceTapped(string resourceName) {
     DatadogSdk.Instance.Rum.AddAction(
         RumActionType.Tap,
-        resourceName,
+        resourceName
     );
 }
 ```
 
-When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be the same for the Datadog Unity SDK to match an action's start with its completion.
+When using `StartAction` and `StopAction`, the action `type` must be the same for the Datadog Unity SDK to match an action's start with its completion.
 
-[1]: https://app.datadoghq.com/rum/application/create
+For the attributes collected, see [Data Collected][1].
+
+[1]: /real_user_monitoring/setup/data_collected/?platform=unity
