@@ -194,7 +194,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 Select a detection method:
 
-- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model's training includes a weekend and typically takes **3 to 7 days** for a monitor that runs more than once a day, or **about 9 days** for a monitor that runs once a day. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model's training includes a weekend and typically takes **3 to 7 days**. A monitor that runs once a day trains for **about 9 days**. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
 - {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause

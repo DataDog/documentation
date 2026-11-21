@@ -16,13 +16,13 @@ further_reading:
 
 By default, [Data Observability monitors][1] use an anomaly detection model tailored to common patterns in data quality metrics such as table freshness and row count.
 
-The model learns from the metric's history to set expected bounds. When an observed value falls outside those bounds, an [AI reviewer](#ai-review-of-flagged-points) checks the point. The monitor alerts unless the reviewer finds that the value matches the metric's normal behavior.
+The model learns from the metric's history to set expected bounds. When an observed value moves outside those bounds, an [AI reviewer](#ai-review-of-flagged-points) checks the point. The monitor alerts unless the reviewer finds that the value matches the metric's normal behavior.
 
 ## Training period
 
 When you create an anomaly detection monitor, it enters a training period. During training, the monitor collects historical values to learn the metric's baseline behavior. It does not trigger alerts during this period, and the monitor chart appears in blue.
 
-Training typically takes 3 to 7 days for a monitor that runs more than once a day, or about 9 days for a monitor that runs once a day. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior. A monitor leaves training when it has both of the following:
+Training typically takes 3 to 7 days for a monitor that runs more than once a day. A monitor that runs once a day typically trains for about 9 days. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior. A monitor leaves training when it has both of the following:
 
 - At least nine evaluations over at least 3 days.
 - A full weekend and a full weekday of evaluations, or more than 7 days of history.
@@ -30,8 +30,9 @@ Training typically takes 3 to 7 days for a monitor that runs more than once a da
 Some monitors follow different rules:
 
 - **Freshness**: The monitor stays in training until it observes at least one table update. If it has observed only one update, it stays in training until three times the longest observed time between updates has passed since that update.
-- **Row Count**: If the row count stays flat from the weekend into Monday, the monitor stays in training until the count changes, for up to 8 days of history.
-- **Custom SQL with the Default model, and metrics that have only returned one value**: The monitor stays in training until it has at least 7 days of history.
+- **Row Count**: In its first 7 days, the monitor stays in training on Saturdays and Sundays until it has evaluated on three weekend days. If the row count has stayed flat since before Monday, the monitor stays in training until the count changes or Monday ends (UTC). This hold ends after 8 days of history.
+- **Custom SQL with the Default model**: The monitor stays in training until it has at least 7 days of history.
+- **Single-value metrics**: If the metric has only returned one value, the monitor stays in training until it has at least 7 days of history.
 - **Job duration** (Preview): The monitor leaves training after at least five runs over at least 1 day that include a full weekday of runs. It doesn't wait for a weekend.
 
 After training completes, the monitor can alert. The chart shows the observed values over time, with bounds above and below the line as a shaded area showing expected values. The color shows the current state:
@@ -98,28 +99,28 @@ See [Annotate bounds][2] on the Data Observability Monitor page for available an
 ## Model configuration
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+Model configuration settings are in Preview.
 {{< /callout >}}
 
 The [model configuration settings][3] change how the model sets bounds:
 
-- {{< ui >}}Sensitivity{{< /ui >}} multiplies the width of the bounds that the model computes from the metric's history. The default is `3`. Lower values narrow the bounds and produce more alerts, and higher values widen them.
-- {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} take raw values in the metric's units, such as rows or seconds. They set the smallest distance between the predicted value and each bound, and the model can still set wider bounds. For integer metrics such as Row Count, the model rounds the value up to a whole number.
+- {{< ui >}}Sensitivity{{< /ui >}} sets a multiplier on the width of the bounds that the model computes from the metric's history. The default multiplier is `3`. Move the slider toward {{< ui >}}More alerts{{< /ui >}} to narrow the bounds, or toward {{< ui >}}Fewer alerts{{< /ui >}} to widen them.
+- {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} set the smallest distance between the predicted value and each bound. The model can still set wider bounds. Enter values in the metric's own units, such as rows for Row Count or percentage points for Nullness. For integer metrics such as Row Count, the model rounds the value up to a whole number.
 - {{< ui >}}Model Instructions{{< /ui >}} don't change the bounds. The AI reviewer reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
 
 ## AI review of flagged points
 
-Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value was within them. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
+Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value didn't. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
 
-The reviewer analyzes the metric's history and compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
+The reviewer analyzes the metric's history. It compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
 
 - If the reviewer finds earlier normal periods that match the flagged value's pattern and timing, it dismisses the point. The monitor widens the bounds at that point to include the observed value and doesn't alert.
-- If the reviewer confirms the anomaly, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
-- If the review doesn't complete, for example because it times out or the monitor has reached its daily review limit, the monitor alerts on the original bounds.
+- If the reviewer doesn't dismiss the point, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
+- If the review doesn't run or doesn't finish, the point keeps its original bounds and the monitor alerts as usual. For example, this happens when the monitor has reached its daily review limit or the review times out.
 
 The reviewer can only dismiss flagged points. It doesn't narrow the bounds or create alerts. To get alerts on values that fall within the bounds, adjust {{< ui >}}Sensitivity{{< /ui >}} or annotate the bounds with {{< ui >}}Missed alert{{< /ui >}}.
 
-The reviewer dismisses a Row Count value of `0` only when the metric's history shows that zeros are routine, for example earlier zeros that recurred and recovered. This applies even when the monitor's Model Instructions describe the value as expected.
+The reviewer dismisses a Row Count value of `0` only when the metric's history shows that zeros are routine. For example, the metric has dropped to zero and recovered several times before. This applies even when the monitor's {{< ui >}}Model Instructions{{< /ui >}} describe the value as expected.
 
 ### Model Instructions
 
