@@ -47,6 +47,18 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
    {{< nextlink href="/data_observability/cicd/" >}}CI/CD: Prevent data-quality issues before they're merged.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Programmatic access
+
+- **MCP Server**: The `data-observability` toolset of the [Datadog MCP Server][1] gives AI agents access to the data catalog, lineage, data quality monitors, and recommendations.
+- **Data Observability API**: Use the [Data Observability API][2] to run a monitor with a {{< ui >}}Manual{{< /ui >}} schedule and check the run's status. These endpoints are in Preview.
+- **Monitors API**: Data quality monitors use the monitor type `data-quality alert`. Create, update, and delete them with the [Monitors API][3].
+- **OpenLineage**: Send job and lineage events from in-house tools and custom pipelines with [custom jobs using OpenLineage][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /mcp_server/tools/#data-observability
+[2]: /api/latest/data-observability/
+[3]: /api/latest/monitors/
+[4]: /data_observability/jobs_monitoring/openlineage/
