@@ -52,6 +52,8 @@ The following table lists minimum SDK versions required for adaptive sampling:
 | PHP         | [v1.4.0][17]             |
 | Rust        | [v0.4.0][20]             |
 
+**Ruby**: Standalone Sidekiq and Solid Queue tracing integrations do not automatically start Remote Configuration. See [Ruby application requirements][21] for the Rack startup requirement and local sampling configuration.
+
 ## Limitations
 
 Limits apply to service and environment combinations depending on the sampling configuration:
@@ -206,3 +208,4 @@ To restrict access:
 [18]: https://app.datadoghq.com/apm/traces/ingestion-control
 [19]: /account_management/rbac/granular_access/
 [20]: https://github.com/DataDog/dd-trace-rs/releases/tag/datadog-opentelemetry-v0.4.0
+[21]: /tracing/guide/remote_config/#ruby-application-requirements
