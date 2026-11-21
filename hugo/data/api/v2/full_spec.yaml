@@ -61550,8 +61550,6 @@ components:
           format: date-time
           nullable: true
           type: string
-        bucketing_mode:
-          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
@@ -61635,17 +61633,6 @@ components:
         - value_type
         - variants
       type: object
-    FeatureFlagBucketingMode:
-      description: >-
-        How subjects are assigned to variants. `DATADOG` is the native scheme. `EPPO` reproduces the assignments that Eppo made for a flag migrated from Eppo, so its subjects keep their variants. Set when the flag is created and never changed.
-      enum:
-        - DATADOG
-        - EPPO
-      example: DATADOG
-      type: string
-      x-enum-varnames:
-        - DATADOG
-        - EPPO
     FeatureFlagChangeEvent:
       description: A change made to a feature flag.
       properties:
@@ -62126,8 +62113,6 @@ components:
           format: date-time
           nullable: true
           type: string
-        bucketing_mode:
-          $ref: "#/components/schemas/FeatureFlagBucketingMode"
         created_at:
           description: The timestamp when the feature flag was created.
           example: "2023-01-01T00:00:00Z"
