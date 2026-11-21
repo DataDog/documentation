@@ -14,6 +14,8 @@ Set up the Datadog Agent on employee desktops and laptops to collect [End User D
 - Windows 10 and later
 - macOS 11 and later
 
+    <div class="alert alert-info">Shutdown-cause reporting requires Apple silicon (ARM64). See <a href="/infrastructure/end_user_device_monitoring/setup/macos/#feature-availability">macOS feature availability</a> for details.</div>
+
 ## Permissions
 
 The following permissions control access to End User Device Monitoring:
