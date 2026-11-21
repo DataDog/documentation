@@ -522,7 +522,7 @@ After sending your events, use the following pages to verify that Datadog receiv
 
 ## Send runs from tools without OpenLineage support
 
-If a tool doesn't emit OpenLineage events, you can send its runs to Datadog from a separate process that reads the tool's run history. A typical poller works as follows:
+If a tool doesn't emit OpenLineage events, you can poll its run history and send the runs to Datadog. A typical poller works as follows:
 
 1. On a schedule, read the runs that started or finished since the last poll from the tool's API, database, or log files.
 2. For each new run, send a `START` event with `eventTime` set to the time the run started in the tool.
@@ -556,7 +556,7 @@ Datadog resolves datasets into a hierarchy of account, database, schema, and tab
 | AWS Glue   | `arn:aws:glue:{region}:{accountId}`              | `{database}.{table}`          |
 | S3         | `s3://{bucket}`                                  | `{path}`                      |
 
-To link a Snowflake output to a table in the catalog, use the `snowflake://{org}-{account}` namespace and the fully qualified `{database}.{schema}.{table}` name. If a Snowflake name doesn't have exactly three parts, Datadog links the dataset to the Snowflake account node instead of a table.
+To link a Snowflake dataset to a table in the catalog, use the `snowflake://{org}-{account}` namespace and the fully qualified `{database}.{schema}.{table}` name. If a Snowflake name doesn't have exactly three parts, Datadog links the dataset to the Snowflake account node instead of a table.
 
 For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
@@ -581,9 +581,9 @@ The following example shows a job reading from a PostgreSQL table and writing to
 
 ### Column-level lineage
 
-To send column-level lineage, include a [`schema` facet][13] on each input and output dataset, and a [`columnLineage` facet][14] on each output. Every column that `columnLineage` names must also appear in the `schema` facet of its dataset.
+To send column-level lineage, include a [`schema` facet][13] on each input and output dataset, and a [`columnLineage` facet][14] on each output. Every column that `columnLineage` names must also appear in the `schema` facet of its dataset. Every input dataset that `columnLineage` references must also appear in the event's `inputs`.
 
-Datadog builds column-level lineage only for datasets in a recognized namespace, such as the BigQuery, Snowflake, Redshift, PostgreSQL, Databricks, AWS Glue, and S3 namespaces in the table above. Datasets with a custom namespace get table-level lineage only, even when the event includes a `columnLineage` facet.
+Datadog builds column-level lineage only for datasets in a recognized namespace. For example, the BigQuery, Snowflake, Redshift, PostgreSQL, Databricks, AWS Glue, and S3 namespaces in the preceding table support it. Trino datasets and datasets in an unrecognized namespace get table-level lineage only, even when the event includes a `columnLineage` facet.
 
 The following example maps the `order_id` and `amount` columns of a PostgreSQL table to the matching columns of a Snowflake table:
 

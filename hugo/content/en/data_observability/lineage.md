@@ -75,7 +75,7 @@ The toolbar on the right of the canvas provides {{< ui >}}zoom in{{< /ui >}}, {{
 
 The time selector in the top-right corner (`1w`, `Past 1 Week`, and so on) sets the window used to evaluate lineage. Datadog derives relationships from query history and job runs within this window: widen it to surface older or less frequent dependencies, narrow it to show only what's active.
 
-Job run details on the graph also follow the selected time frame. Job nodes show the number of runs, the number of failed runs, and the average duration for runs in that window. A job node's status badge reflects the same runs: for example, {{< ui >}}Last run failed{{< /ui >}}, the share of runs that failed, or a change in average duration compared with the period of equal length before the selected time frame.
+Job run details on the graph also follow the selected time frame. Job nodes show the number of runs, the number of failed runs, and the average duration for runs in that window. A job node's status badge reflects the same runs. For example, it can show {{< ui >}}Last run failed{{< /ui >}}, the share of runs that failed, or a change in average duration. Datadog compares the average duration with the period of equal length before the selected time frame.
 
 ## Lineage Controls
 
@@ -119,7 +119,7 @@ Grouping is most useful for zooming out: group by {{< ui >}}Schemas{{< /ui >}} t
 
 ## Stale assets
 
-Datadog removes an asset or a lineage edge from Data Observability after 35 days without new metadata about it, from either an integration or an OpenLineage event. An asset that no source reports anymore, such as a dropped table or a retired job, leaves the graph after that period.
+Datadog removes an asset or a lineage edge from Data Observability when it receives no new metadata about it for 35 days. Metadata can come from an integration or from an OpenLineage event. For example, a dropped table or a retired job leaves the graph 35 days after a source last reported it.
 
 To remove a stale asset sooner, delete it from the catalog:
 
@@ -127,7 +127,7 @@ To remove a stale asset sooner, delete it from the catalog:
 2. In the page header, open the three-dot menu and select {{< ui >}}Delete asset{{< /ui >}}.
 3. Click {{< ui >}}Delete{{< /ui >}} to confirm.
 
-Deleting an asset removes it and all of its descendants from Data Observability, including the lineage graph. If a source still reports the asset, it reappears on the next sync. Deleting an asset requires the `Data Observability Catalog Write` [permission][3].
+Deleting an asset removes it and all of its descendants from Data Observability, including the lineage graph. The deletion can take a few minutes. If a source still reports the asset, it can reappear on the next sync. Deleting an asset requires the `Data Observability Catalog Write` [permission][3].
 
 ## Common workflows
 
