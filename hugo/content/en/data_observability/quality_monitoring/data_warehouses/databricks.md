@@ -105,7 +105,7 @@ When Databricks masks query text for the service principal, the Databricks integ
 Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
 
 - **Lineage from query text**: Datadog parses query text from query history to add lineage between your tables, and skips queries whose text is redacted. Lineage from `system.access.column_lineage` doesn't use query text.
-- **Queries page and recommendations**: Datadog shows a Databricks query on the {{< ui >}}Queries{{< /ui >}} page, and generates optimization recommendations for it, only when it can read the query text.
+- **Queries page and recommendations**: Datadog lists a Databricks query on the {{< ui >}}Queries{{< /ui >}} page only when it can read the query text. Optimization recommendations also need the query text.
 
 Table-level metrics such as freshness, row count, and column statistics read table data and metadata rather than query text, so they work without this membership.
 
