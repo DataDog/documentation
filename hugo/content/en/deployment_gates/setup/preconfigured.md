@@ -10,7 +10,7 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
+With a **preconfigured** Deployment Gate, the gate and its rules are stored in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
 Looking to define rules in your deployment configuration? See [Inline Deployment Gates][5].
 
@@ -35,43 +35,30 @@ Each gate requires one or more rules to evaluate. All rules must pass for the ga
 
 1. {{< ui >}}Name{{< /ui >}}: A descriptive label that appears on the [Deployment Gates Evaluations][7] page (for example, `Check all P0 monitors`).
 2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}} or {{< ui >}}Faulty Deployment Detection{{< /ui >}}.
-3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for the available options.
+3. Additional settings based on the selected rule type. See the [Rules](#rules) section for the available settings.
 4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
 
-## Rule types
+## Rules
 
-For the full schema and all available options, see the [Deployment Gates API reference][4].
+This section lists the settings for each rule type. For how each rule type is evaluated, see [Rules in the Deployment Gates overview][8]. For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either a search query or an explicit list of monitors. These selection methods are mutually exclusive. The rule can fail if at any time during the evaluation period:
+For how monitor rules are evaluated, see [Monitor rules][1].
 
-- No monitor groups match the configured selection.
-- An explicit monitor ID does not exist or is unavailable to your organization.
-- More than 300 monitors match the configured selection.
-- Any matching monitor group is in `ALERT` or `NO_DATA` state.
+Settings for preconfigured monitor rules:
 
-##### Configuration settings
+- {{< ui >}}Monitors matching query{{< /ui >}}: Enter a monitor search query. For syntax and examples, see [Monitor search queries][2]. Can't be used with {{< ui >}}Specific monitors{{< /ui >}}.
+- {{< ui >}}Specific monitors{{< /ui >}}: Select individual monitors and, optionally, the exact groups to evaluate for each monitor. Only the selected groups are evaluated, so alerts on other groups don't fail the rule. If you don't select any groups, all groups for that monitor are evaluated. Can't be used with {{< ui >}}Monitors matching query{{< /ui >}}.
+- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the selected monitors are evaluated.
 
-- {{< ui >}}Monitors matching query{{< /ui >}}: Enter a query based on the [Search Monitor syntax][1]. Filter on monitor tags:
-  - Monitor static tags: `service:transaction-backend`
-  - Tags within the monitor's query: `scope:"service:transaction-backend"`
-  - Tags within a [monitor grouping][2]: `group:"service:transaction-backend"`
-- {{< ui >}}Specific monitors{{< /ui >}}: Select individual monitors and, optionally, the exact groups to evaluate for each monitor. When no groups are selected, all groups for that monitor are evaluated.
-- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the selected monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
-
-##### Example queries
-
-- `env:prod service:transaction-backend`
-- `env:prod (service:transaction-backend OR group:"service:transaction-backend" OR scope:"service:transaction-backend")`
-- `tag:"use_deployment_gates" team:payment`
-- `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
-
-##### Specific monitors API example
+Example `options` object for a preconfigured monitor rule with specific monitor IDs, created through the API:
 
 ```json
 "options": {
   "monitor_ids": [
+    // Each id is a monitor's numeric ID, as a string.
+    // Each groups entry must exactly match a group name on that monitor.
     {"id": "12345678", "groups": []},
     {"id": "87654321", "groups": ["service:api", "env:prod"]}
   ],
@@ -79,40 +66,19 @@ The Monitor rule evaluates the state of a set of monitors over a configurable pe
 }
 ```
 
-Each `id` is a decimal monitor ID. Group values are exact group names. Do not send `query` with `monitor_ids`.
-
-**Notes**:
-- `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
-- An explicit monitor ID that does not exist or is unavailable to your organization causes the rule to fail. If the monitor exists but is excluded because it is muted or its selected groups have no data, the rule applies the no-matching-groups behavior.
-- Muted monitors are automatically excluded from both selection modes.
-
-[1]: /monitors/manage/search/
-[2]: /monitors/manage/#triggered-monitors
+[1]: /deployment_gates/#monitor-rules
+[2]: /deployment_gates/#monitor-search-queries
 {{% /tab %}}
 {{% tab "Watchdog Faulty Deployment Detection" %}}
-This rule type uses [Watchdog Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
+For how Watchdog Faulty Deployment Detection (FDD) rules are evaluated, see [Watchdog Faulty Deployment Detection rules][1].
 
-- New types of errors.
-- Significant increases in error rates compared to previous versions.
+Settings for preconfigured FDD rules:
 
-The analysis is automatically performed for all APM-instrumented services, and no prior setup is required.
+- {{< ui >}}Allowed Resources{{< /ui >}}: A comma-separated list of APM resources to include in the analysis. Can't be used with {{< ui >}}Excluded Resources{{< /ui >}}.
+- {{< ui >}}Excluded Resources{{< /ui >}}: A comma-separated list of APM resources to exclude from the analysis. Can't be used with {{< ui >}}Allowed Resources{{< /ui >}}.
+- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the analysis runs.
 
-##### Configuration settings
-
-- {{< ui >}}Operation Name{{< /ui >}}: Auto-populated from the service's [APM primary operation][3] settings.
-- {{< ui >}}Duration{{< /ui >}}: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- {{< ui >}}Allowed Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed. Mutually exclusive with {{< ui >}}Excluded Resources{{< /ui >}}.
-- {{< ui >}}Excluded Resources{{< /ui >}} (optional): A comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints). Mutually exclusive with {{< ui >}}Allowed Resources{{< /ui >}}.
-
-**Notes**:
-- The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. To consider only a single primary tag, specify it when [requesting a gate evaluation](#evaluate-a-gate-from-your-pipeline).
-- New errors and error rate increases are detected at the resource level.
-- This rule type does not support services marked as `database` or `inferred service`.
-
-[1]: /watchdog/faulty_deployment_detection/
-[2]: /tracing/services/resource_page/
-[3]: /tracing/guide/configuring-primary-operation/#primary-operations
-[4]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
+[1]: /deployment_gates/#watchdog-faulty-deployment-detection-rules
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -587,3 +553,4 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [5]: /deployment_gates/setup/inline
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
 [7]: https://app.datadoghq.com/ci/deployment-gates/evaluations
+[8]: /deployment_gates/#rules
