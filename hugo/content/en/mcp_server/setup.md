@@ -941,7 +941,7 @@ Administrators can disable an AI client or remove specific scopes from it for th
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
 <pre><code>{
