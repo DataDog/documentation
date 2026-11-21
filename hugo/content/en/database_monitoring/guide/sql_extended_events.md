@@ -46,6 +46,9 @@ Supported Agent versions
 : 7.67.0+
 
 ## Setup
+
+<div class="alert alert-info">If you created the <code>datadog_query_completions</code> session with an earlier version of this guide, drop it and create it again with the definition below. Its new filters keep stored procedures called through RPC, which the earlier <code>sql_text</code> filter dropped.</div>
+
 {{< tabs >}}
 {{% tab "Non-Azure SQL Server" %}}
 
@@ -72,8 +75,8 @@ ADD EVENT sqlserver.rpc_completed ( -- capture remote procedure call completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        statement <> N''
     )
 ),
 ADD EVENT sqlserver.sql_batch_completed( -- capture batch completions
@@ -87,8 +90,8 @@ ADD EVENT sqlserver.sql_batch_completed( -- capture batch completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        batch_text <> N''
     )
 ),
 ADD EVENT sqlserver.module_end( -- capture stored procedure completions
@@ -103,8 +106,8 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        statement <> N''
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
@@ -224,8 +227,8 @@ ADD EVENT sqlserver.rpc_completed ( -- capture remote procedure call completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        statement <> N''
     )
 ),
 ADD EVENT sqlserver.sql_batch_completed( -- capture batch completions
@@ -239,8 +242,8 @@ ADD EVENT sqlserver.sql_batch_completed( -- capture batch completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        batch_text <> N''
     )
 ),
 ADD EVENT sqlserver.module_end( -- capture stored procedure completions
@@ -255,8 +258,8 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
         sqlserver.request_id
     )
     WHERE (
-        sql_text <> '' AND
-        duration > 1000000 -- in microseconds, limit to queries with duration greater than 1 second
+        duration > 1000000 AND -- in microseconds, limit to queries with duration greater than 1 second
+        statement <> N''
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
@@ -374,13 +377,15 @@ To reduce event volume, you can add filters to the `WHERE` clause. For example:
 
   ```sql
   WHERE (
-      sql_text <> '' AND
       duration > 1000000 AND
+      statement <> N'' AND -- use batch_text <> N'' for sql_batch_completed
       -- Add custom filters here
       database_name = 'YourImportantDB' AND -- Only track specific databases
       username <> 'datadog' -- Exclude Datadog Agent queries or specific users
   )
   ```
+
+Don't filter on `sql_text`: it's empty for stored procedures called through RPC, so a `sql_text` filter drops their events.
 
 ### Performance considerations
 
