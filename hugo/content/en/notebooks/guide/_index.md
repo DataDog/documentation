@@ -6,6 +6,7 @@ disable_toc: true
 ---
 
 {{< whatsnext desc="General guides:" >}}
+    {{< nextlink href="/notebooks/guide/notebooks_api/" >}}Work with notebooks through the API{{< /nextlink >}}
     {{< nextlink href="/notebooks/guide/build_diagrams_with_mermaidjs" >}}Build diagrams with Mermaid JS{{< /nextlink >}}
     {{< nextlink href="/notebooks/guide/version_history" >}}Version History{{< /nextlink >}}
     {{< nextlink href="/notebooks/guide/template_variables_analysis_notebooks" >}}Template Variable Support in Analysis Notebooks{{< /nextlink >}}
