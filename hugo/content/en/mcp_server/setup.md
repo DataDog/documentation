@@ -424,13 +424,14 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
         "datadog": {
           "url": "{{< region-param key="mcp_server_endpoint" >}}",
           "headers": {
-            "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-            "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
+            "Authorization": "Bearer &lt;YOUR_ACCESS_TOKEN&gt;"
           }
         }
       }
     }
     </code></pre>
+
+    Replace `<YOUR_ACCESS_TOKEN>` with a [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67]. For other header-based options, see [Authentication](#authentication).
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -963,7 +964,7 @@ Use a PAT for an individual user or a SAT for a [service account][13]. For scope
 
 ### API and application keys
 
-Alternatively, provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+Alternatively, provide a Datadog [API key and application key][1] as `dd-api-key` and `dd-application-key` HTTP headers:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -974,8 +975,8 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
       "type": "http",
       "url": "{{< region-param key="mcp_server_endpoint" >}}",
       "headers": {
-          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
+          "dd-api-key": "&lt;YOUR_API_KEY&gt;",
+          "dd-application-key": "&lt;YOUR_APPLICATION_KEY&gt;"
       }
     }
   }
