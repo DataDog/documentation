@@ -64,7 +64,7 @@ A wrong application ID silently drops events server-side. Double-check the value
 
 For native iOS crashes, the `.dSYM` bundle must be uploaded to Datadog. See [Get symbolicated stack traces][6] for the full pipeline.
 
-Managed C# stack traces resolve to method names only; file names and line numbers are not available. See [Managed C# stack traces][7] for details.
+For managed C# stack traces, filenames and line numbers are resolved server-side from the Portable PDB files uploaded with `datadog-ci`. Without them, frames show method names only. See [How C# symbolication works][12] and [Managed C# stack traces][7] for details.
 
 ## C# errors and native crashes appear twice
 
@@ -102,3 +102,4 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 [9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#known-limitation-gesture-driven-navigation
 [10]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#add-view-attributes
 [11]: /real_user_monitoring/application_monitoring/maui/error_tracking/#troubleshooting
+[12]: /real_user_monitoring/application_monitoring/maui/error_tracking/#how-c-symbolication-works

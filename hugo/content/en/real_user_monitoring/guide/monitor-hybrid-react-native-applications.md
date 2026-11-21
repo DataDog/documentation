@@ -300,11 +300,11 @@ RUM.Configuration(
         return resourceEvent
     },
     actionEventMapper: { actionEvent in
-        if actionEvent.context?.contextInfo["_dd.resource.drop_action"] != nil {
+        if actionEvent.context?.contextInfo["_dd.action.drop_action"] != nil {
             return nil
         }
         // You can add your custom event mapper logic here
-        return resourceEvent
+        return actionEvent
     }
 )
 ```

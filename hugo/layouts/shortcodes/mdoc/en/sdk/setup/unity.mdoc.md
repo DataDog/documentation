@@ -6,7 +6,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Unity SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
 
 {% alert level="info" %}
-Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
+Datadog supports Unity Monitoring for iOS, Android, and WebGL for Unity LTS 2022+.
 {% /alert %}
 
 Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
