@@ -1604,6 +1604,11 @@ menu:
       identifier: bits_ai_bits_chat_usage
       parent: bits_ai_bits_chat
       weight: 201
+    - name: Bits CLI
+      url: bits_ai/bits_chat/bits_cli
+      identifier: bits_ai_bits_chat_bits_cli
+      parent: bits_ai_bits_chat
+      weight: 202
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
