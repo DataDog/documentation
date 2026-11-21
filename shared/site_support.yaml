@@ -496,10 +496,6 @@ site_support_ids:
     regions: [gov, gov2]
   synthetics_safari:
     regions: [gov, gov2]
-  tag_enrichment:
-    regions: [gov, gov2]
-    url_paths:
-      - /tracing/services/tag_enrichment/**
   test_optimization:
     regions: [gov, gov2]
     url_paths:
