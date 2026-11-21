@@ -27,6 +27,13 @@ To upgrade to Worker version 2.26.0:
 <li><strong>Generate Metrics processors with indexed group-by fields</strong>: Tag keys use the last field name followed by trailing array indexes: <code>items[0]</code> produces <code>items_0</code>, <code>items[-1]</code> produces <code>items_-1</code>, and <code>http.items[2].status[4]</code> produces <code>status_4</code>. Update dashboards, monitors, alerts, notebooks, and other queries to use the new keys. Historical datapoints remain available under the old keys.</li>
 <li><strong>Histograms received without a sum</strong>, such as those from the OpenTelemetry and Prometheus sources: For these histograms, the Prometheus destination omits the <code>_sum</code> series. Update Prometheus queries that calculate averages to handle a missing sum. The Datadog Metrics destination estimates the sum and average from the histogram buckets. Histogram quantile queries are unaffected.</li>
 <li><strong>Custom Processor scripts that call <code>to_unix_timestamp</code> with <code>unit: "nanoseconds"</code></strong>: Before you upgrade, change these calls to <code>to_unix_timestamp!(ts, unit: "nanoseconds")</code>. With this form, an out-of-range conversion stops processing and drops the event. To use a fallback value instead, change the calls to <code>to_unix_timestamp(ts, unit: "nanoseconds") ?? 0</code> after you upgrade, because this form doesn't compile on earlier Worker versions. Calls that use other units are unaffected.</li>
+<li><strong>Integration Pipelines processor metrics (Preview)</strong>: Before you upgrade, update dashboards and monitors that use these metrics and tags:<ul>
+<li><code>pipelines.integration_pipelines_ingested_events_total</code> is renamed to <code>pipelines.sawmill_ingested_events_total</code>.</li>
+<li><code>pipelines.integration_pipelines_ingested_event_bytes_total</code> is renamed to <code>pipelines.sawmill_ingested_event_bytes_total</code>.</li>
+<li>The <code>integration_id</code> tag is renamed to <code>sawmill_pipeline_id</code>. Named pipelines also have a <code>sawmill_pipeline_name</code> tag.</li>
+<li>The telemetry <code>component_type</code> is renamed to <code>sawmill</code>. The pipeline configuration type remains <code>integration_pipelines</code>.</li>
+<li><code>pipelines.integration_pipelines_modified_events_total</code> and <code>pipelines.integration_pipelines_modified_event_bytes_total</code> are removed. To count transformed events and bytes, use the <code>is_transformed:true</code> tag on the ingested metrics. To get an integration pipeline's total, sum both <code>is_transformed</code> values, and use that total to calculate the percentage of transformed events. These metrics count the events each selected integration pipeline processes, not unique logs entering the processor. Byte counts measure events before normalization.</li>
+</ul></li>
 </ul></div>
 
 Worker version 2.26.0 gives you access to the following:
@@ -73,6 +80,12 @@ Worker version 2.26.0 gives you access to the following:
     - Shuts down promptly while connecting, retrying, or waiting on an acknowledgment-enabled stream.
     - Honors configured TLS verification, server name, application protocol, and proxy settings.
 - The WebSocket source now rejects a handshake response that specifies an unrequested subprotocol.
+- The Integration Pipelines processor (Preview) now:
+    - Processes date, service, and status remapping consistently with Datadog Log Management.
+    - Resolves each filter key to its designated root field or tag, not both, consistently with Datadog Log Management. String truncation limits count UTF-16 code units.
+    - Keeps source-set timestamps at the top level so date remappers can replace them. A top-level `timestamp` parsed earlier, for example with `parse_timestamp`, is treated as source-set and can be overwritten by date remappers. String and numeric payload dates are unaffected.
+    - Selects built-in pipelines from all `source:` tags, including events with multiple source tags.
+    - Uses top-level `ddsource`, `ddtags`, and `ddsourcecategory` values when present. Copies inside a JSON `message` remain available as attributes.
 - Search queries now:
     - Ignore full-text prefixes, terms, and phrases that contain no words.
     - Match phrases consistently when another phrase has already matched the same field.
