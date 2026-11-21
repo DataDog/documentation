@@ -5,6 +5,8 @@ aliases:
   - /cloudprem/operate/monitoring/
 ---
 
+All Datadog products are free when used to monitor your BYOC Logs cluster.
+
 ## Dashboards
 
 BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
