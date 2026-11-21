@@ -28,7 +28,7 @@ The left side of the page lists the versions of the pipeline, with the latest ve
 
 Select a version to see its pipeline graph. The header of the graph shows the version number, the user or service account that created it, and the date and time it was created.
 
-{{< img src="observability_pipelines/version_history/version_history_tab.webp" alt="The Version History tab showing a list of three versions and the pipeline graph for Version 2, with added and removed components highlighted" style="width:100%;" >}}
+{{< img src="observability_pipelines/version_history/version_history_tab.png" alt="The Version History tab showing a list of three versions and the pipeline graph for Version 2, with added and removed components highlighted" style="width:100%;" >}}
 
 ## Review changes in a version
 
@@ -68,13 +68,13 @@ For a removed component, the diff shows the full configuration as removed lines.
 
 For a modified component, the diff highlights the lines that changed.
 
-{{< img src="observability_pipelines/version_history/modified_component_diff.webp" alt="The diff for a modified Spike Protection processor, with the changed display name highlighted" style="width:80%;" >}}
+{{< img src="observability_pipelines/version_history/modified_component_diff.png" alt="The diff for a modified Spike Protection processor, with the changed display name highlighted" style="width:80%;" >}}
 
 ### Compare the full pipeline configuration
 
 To compare the entire configuration of a version with the previous version, click **View Diff**. A side-by-side view of the pipeline's JSON configuration opens, with the previous version on the left and the selected version on the right. Changed lines are highlighted.
 
-{{< img src="observability_pipelines/version_history/view_diff.webp" alt="The View Diff window showing the JSON configuration of Version 2 compared with Version 1" style="width:100%;" >}}
+{{< img src="observability_pipelines/version_history/view_diff.png" alt="The View Diff window showing the JSON configuration of Version 2 compared with Version 1" style="width:100%;" >}}
 
 ## Further reading
 
