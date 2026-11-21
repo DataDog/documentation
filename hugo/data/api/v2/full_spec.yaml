@@ -50537,9 +50537,19 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/EventAttributes"
+        host:
+          description: The host associated with the event.
+          example: "example-host"
+          type: string
         message:
           description: The message of the event.
           type: string
+        service:
+          description: The service associated with the event.
+          example: "example-service"
+          type: string
+        status:
+          $ref: "#/components/schemas/EventStatusType"
         tags:
           description: An array of tags associated with the event.
           example: ["team:A"]
@@ -189729,7 +189739,10 @@ paths:
                   value:
                     data:
                       - attributes:
+                          host: "example-host"
                           message: "Test event"
+                          service: "example-service"
+                          status: "info"
                           tags:
                             - "env:prod"
                           timestamp: "2019-01-02T09:42:36.320Z"
@@ -189948,7 +189961,10 @@ paths:
                   value:
                     data:
                       - attributes:
+                          host: "example-host"
                           message: "Test event"
+                          service: "example-service"
+                          status: "info"
                           tags:
                             - "env:prod"
                           timestamp: "2019-01-02T09:42:36.320Z"
