@@ -81,13 +81,13 @@ The Data Observability crawler requires additional permissions to monitor Glue I
 }
 ```
 
-The IAM policy that Datadog shows during setup is broader than this one. It also includes permissions for Athena queries and other features, and grants `s3:GetObject` on all S3 objects. The policy above grants `s3:GetObject` only on Iceberg metadata files. Add the [Athena IAM permissions](#add-athena-iam-permissions) only if you [query tables with Amazon Athena](#query-tables-with-amazon-athena).
+The IAM policy that Datadog shows during setup is broader than this one. It also includes permissions for Athena queries and other features, and grants `s3:GetObject` on all S3 objects. The policy above grants `s3:GetObject` only on Iceberg metadata files. Add the [Athena IAM permissions](#add-athena-iam-permissions) only if you configure Datadog to query tables with Amazon Athena.
 
 ### (Optional) Restrict access to specific databases and tables
 
-The policy above grants access to all Glue resources. To monitor only specific databases or tables, move the Glue Data Catalog actions into their own statement and replace `Resource: ["*"]` in that statement with explicit ARNs of the databases or tables to monitor, as in the example policies below.
+The policy above grants access to all Glue resources. To monitor only specific databases or tables, move the Glue Data Catalog actions into their own statement. In that statement, replace `Resource: ["*"]` with explicit ARNs of the databases or tables to monitor, as in the example policies below.
 
-If you turn on {{< ui >}}Job Monitoring{{< /ui >}}, keep `glue:GetJobs` and `glue:GetJobRuns` on `Resource: ["*"]` instead of scoping them to specific job ARNs. Datadog lists every Glue job in the account and reads the runs of each one. If `glue:GetJobs` is denied, or `glue:GetJobRuns` is denied for any job, Datadog reports the whole Glue job sync as failed with an access denied error.
+If you turn on {{< ui >}}Job Monitoring{{< /ui >}}, keep `glue:GetJobs` and `glue:GetJobRuns` on `Resource: ["*"]` instead of scoping them to specific job ARNs. Datadog lists every Glue job in each selected region and reads the runs of each one. If `glue:GetJobs` is denied, or `glue:GetJobRuns` is denied for any job, Datadog reports the whole Glue job sync as failed with an access denied error.
 
 AWS Glue IAM permissions are hierarchical. To access a table, the policy must include the catalog, the database, and the table. Omitting any level results in an access denied error.
 

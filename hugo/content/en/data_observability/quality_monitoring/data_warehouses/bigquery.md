@@ -107,13 +107,13 @@ Once the service account has been created and the necessary roles and APIs have 
 
 ### (Optional) Set a query origin project
 
-After you turn on {{< ui >}}Enable Data Observability{{< /ui >}}, you can select a project under {{< ui >}}Query Origin Project{{< /ui >}}. The list shows the projects available to the service account. Datadog runs the queries that read your table and view definitions from `INFORMATION_SCHEMA.TABLES` in the selected project. Leave the field empty to run these queries in the service account's default project.
+After you turn on {{< ui >}}Enable Data Observability{{< /ui >}}, you can select a project under {{< ui >}}Query Origin Project{{< /ui >}}. The list shows the projects available to the service account. Datadog runs the queries that read your table and view definitions from `INFORMATION_SCHEMA.TABLES` in the selected project. The service account needs the [Job User][3] role in that project. Leave the field empty to run these queries in the service account's default project.
 
 You can change the project later in the BigQuery configuration in [Data Observability Settings][8].
 
 ## Custom SQL query cost
 
-Custom SQL monitors run their queries in BigQuery through your service account, and BigQuery bills these queries like any other query. With on-demand pricing, cost depends on the bytes each query processes. With capacity-based pricing, cost depends on the slots each query uses. To reduce the data a query scans, filter on a partitioned column.
+Custom SQL monitors run their queries in BigQuery through your service account, and BigQuery bills these queries like any other query. With on-demand pricing, BigQuery bills by the bytes each query processes. With capacity-based pricing, the queries use slot time from your reserved capacity. To reduce the data a query scans, filter on the table's partitioning column. For the cost of other monitor types, see [Data Observability Integration Overhead][15].
 
 ## Next steps
 
@@ -139,3 +139,4 @@ After the initial sync completes, create a [Data Observability monitor][14] to s
 [12]: https://cloud.google.com/resource-manager/reference/rest
 [13]: https://cloud.google.com/bigquery/docs/reference/rest
 [14]: /monitors/types/data_observability/
+[15]: /data_observability/integration_overhead/

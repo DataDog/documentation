@@ -127,7 +127,7 @@ ClickHouse tables support [schema change monitors][6]. To detect changes, Datado
 
 ## Monitor dbt Cloud jobs
 
-If you run dbt Cloud jobs on a ClickHouse connection, [connect dbt Cloud to Datadog][7] to monitor those runs in Jobs Monitoring. Datadog matches the dbt models to your ClickHouse tables when the dbt Cloud connection uses the same host as the ClickHouse Cloud HTTPS URL that you configured in Datadog. The models then connect to those tables in lineage.
+If you run dbt Cloud jobs on a ClickHouse connection, [connect dbt Cloud to Datadog][7] to monitor those runs in Jobs Monitoring. To connect the dbt models to your ClickHouse tables in lineage, use the same host in both places. The host of the dbt Cloud connection must match the host in the ClickHouse Cloud HTTPS URL that you configured in Datadog.
 
 ## Troubleshooting
 

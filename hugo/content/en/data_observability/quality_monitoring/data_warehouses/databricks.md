@@ -46,14 +46,16 @@ GRANT USE SCHEMA ON CATALOG system TO `<application_id>`;
 GRANT SELECT ON CATALOG system TO `<application_id>`;
 ```
 
-These grants cover the whole `system` catalog. Datadog reads the following system tables:
+These grants cover the whole `system` catalog. For Quality Monitoring, Datadog reads the following system tables:
 
 - The `system.information_schema` views, for catalog, schema, table, column, and tag metadata.
 - `system.access.column_lineage`, for column-level lineage between your tables.
 
 Datadog doesn't read the audit log system table (`system.access.audit`).
 
-Datadog reads query history through the Databricks [Query History API][5] to build lineage from query text and to give you visibility into the queries running against your tables. To read the query text, the service principal also needs the group membership described in [Step 3](#step-3---grant-access-to-query-text).
+Datadog reads query history through the Databricks [Query History API][3]. It uses query history to build lineage from query text and to show the queries that run against your tables. To read the query text, the service principal also needs the group membership described in [Step 3](#step-3---grant-access-to-query-text).
+
+The Query History API returns only the queries that the service principal can view. To include queries that other users run on a SQL warehouse, grant the service principal the CAN MONITOR permission on that warehouse.
 
 Then, grant read-only access to the scope of data you want to monitor:
 
@@ -91,14 +93,19 @@ These permissions are needed for the following reasons:
 
 ### Step 3 - Grant access to query text
 
-Databricks masks SQL query text for any principal that is not an account administrator or a member of the `databricks_pii_access` account-level group. For a masked principal, query text is returned as `<Redacted>` in the `statement_text` column of `system.query.history`, the [Query History API][5], the [List Queries API][6], and audit log events that capture SQL statement text.
+Databricks masks SQL query text for any principal that is not an account administrator or a member of the `databricks_pii_access` account-level group. For a masked principal, query text is returned as `<Redacted>` in:
 
-Without this membership, Datadog still monitors your SQL warehouses and jobs on [serverless compute][7] and still collects query history, but the text of every query is `<Redacted>`. The {{< ui >}}Queries{{< /ui >}} page then shows a message that Databricks is masking SQL query text for the workspace.
+- The `statement_text` column of the `system.query.history` system table
+- The [Query History API][3]
+- The [List Queries API][4]
+- Audit log events that capture SQL statement text
+
+When Databricks masks query text for the service principal, the Databricks integration tile in Datadog shows a message about masked query text.
 
 Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
 
-- **Lineage from query text**: Datadog skips redacted queries when it parses query history for lineage. Lineage from `system.access.column_lineage` doesn't use query text.
-- **Query text and recommendations**: The text of each query on the {{< ui >}}Queries{{< /ui >}} page, and the optimization recommendations that Datadog generates for SQL warehouse queries.
+- **Lineage from query text**: Datadog parses query text from query history to add lineage between your tables, and skips queries whose text is redacted. Lineage from `system.access.column_lineage` doesn't use query text.
+- **Queries page and recommendations**: Datadog shows a Databricks query on the {{< ui >}}Queries{{< /ui >}} page, and generates optimization recommendations for it, only when it can read the query text.
 
 Table-level metrics such as freshness, row count, and column statistics read table data and metadata rather than query text, so they work without this membership.
 
@@ -111,7 +118,7 @@ To create the group and add the service principal:
    - If you manage groups with SCIM or an external identity provider, create the group there instead.
 1. Add the service principal from [Step 1](#step-1---connect-the-databricks-integration-tile) to the group.
 
-For more details, see the Databricks documentation on [managing account-level groups][8].
+For more details, see the Databricks documentation on [managing account-level groups][5].
 
 ## Workspaces that share a metastore
 
@@ -119,17 +126,17 @@ Datadog identifies Unity Catalog catalogs and tables by their metastore, not by 
 
 ## Control data access
 
-Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception and need careful configuration. For details, see [Data sent to Datadog][9].
+Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception and need careful configuration. For details, see [Data sent to Datadog][6].
 
 ### Limit what the service principal can read
 
 - **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
-- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][10] to sensitive columns for the Datadog service principal. Freshness and row count checks don't read column values, so masking doesn't affect them. Column-level metrics on masked columns reflect the masked values, not the originals.
+- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][7] to sensitive columns for the Datadog service principal. Freshness and row count checks don't read column values, so masking doesn't affect them. Column-level metrics on masked columns reflect the masked values, not the originals.
 - **Configure only the monitors you need**: Datadog runs column-level queries and Custom SQL queries only for the monitors you configure.
 
 ### Audit queries run by Datadog
 
-Databricks records every query that the service principal runs in the [query history system table][4] (`system.query.history`). To review them, filter on `executed_by` equal to the service principal's application ID:
+Databricks records every query that the service principal runs in the [query history system table][8] (`system.query.history`). To review them, filter on `executed_by` equal to the service principal's application ID:
 
 ```sql
 SELECT start_time, statement_text
@@ -144,7 +151,7 @@ To see query text in `statement_text`, you must be an account admin or a member 
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
-After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and Custom SQL metrics.
+After the initial sync completes, create a [Data Observability monitor][9] to start alerting on freshness, row count, column-level metrics, and Custom SQL metrics.
 
 ## Further reading
 
@@ -152,11 +159,10 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 
 [1]: /data_observability/jobs_monitoring/databricks/
 [2]: /integrations/databricks/
-[3]: /monitors/types/data_observability/
-[4]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
-[5]: https://docs.databricks.com/api/workspace/queryhistory/list
-[6]: https://docs.databricks.com/api/workspace/queries/list
-[7]: https://docs.databricks.com/aws/en/compute/serverless/
-[8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
-[9]: /data_observability/quality_monitoring/#data-sent-to-datadog
-[10]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
+[3]: https://docs.databricks.com/api/workspace/queryhistory/list
+[4]: https://docs.databricks.com/api/workspace/queries/list
+[5]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[6]: /data_observability/quality_monitoring/#data-sent-to-datadog
+[7]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
+[8]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[9]: /monitors/types/data_observability/
