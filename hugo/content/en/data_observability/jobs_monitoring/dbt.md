@@ -179,7 +179,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 ## In-progress runs
 
-On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists runs that are still in progress with a `RUNNING` status. Their duration counts up while the run continues. To show only in-progress runs, select `RUNNING` in the {{< ui >}}Filter status{{< /ui >}} menu. In-progress runs appear when the selected time frame extends to the present.
+On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists runs that are still in progress with a `RUNNING` status. Their duration counts up while the run continues. To show only in-progress runs, select {{< ui >}}RUNNING{{< /ui >}} in the {{< ui >}}Filter status{{< /ui >}} menu. In-progress runs appear when the selected time frame extends to the present.
 
 ## Exposures
 
