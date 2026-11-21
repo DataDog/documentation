@@ -1,6 +1,6 @@
 ---
 title: Insights
-description: Agent Observability Insights identifies recurring cost and reliability problems in existing traces and recommends fixes.
+description: Agent Observability Insights identifies recurring cost and reliability problems in existing traces and, depending on the insight type, recommends fixes.
 further_reading:
 - link: "/llm_observability/investigate/cost/"
   tag: "Documentation"
@@ -20,12 +20,10 @@ further_reading:
 
 Agent Observability Insights automatically analyzes the traces Agent Observability receives from your application to find recurring cost and reliability problems. Use Insights to prioritize what to fix without reviewing traces one at a time.
 
-Each insight includes:
+Each insight includes a root cause that describes the recurring behavior, and trace and span evidence that supports the finding. Depending on the insight type, an insight can also include:
 
-- A root cause that describes the recurring behavior
-- An impact assessment based on affected calls or sessions
-- Trace and span evidence that supports the finding
-- A recommended fix and a way to validate it
+- An impact assessment, such as recoverable spend or affected calls or sessions
+- A recommended fix, with a way to validate it
 
 <div class="alert alert-info">Insights require no additional configuration. Datadog analyzes traces that your application already sent to Agent Observability.</div>
 
@@ -46,6 +44,7 @@ Datadog groups findings with the same root cause into one insight. Later analyse
 | Reliability | Tool call errors | Recurring tool failures with a shared cause that block tasks, degrade results, or add recovery work. |
 | Reliability | Tool call retry loops | Repeated calls to the same tool that use nearly identical arguments and do not make progress. |
 | Reliability | Prompt rule violations | Agent behavior that breaks an explicit rule in a prompt, skill, or tool description. |
+| Reliability | Model deprecations | Models the application still calls whose provider has announced a shutdown date. |
 
 ### Frontier model sizing
 
@@ -71,9 +70,29 @@ An isolated transient error followed by successful recovery does not qualify. Re
 
 Apply the recommended fix for the cause, such as correcting argument validation, configuring the required permissions, or changing how the tool handles rate limits. Replay the affected requests and verify that the errors stop and the task succeeds.
 
+### Model deprecations
+
+Model deprecation insights identify models that the application still calls after their provider announced a shutdown date. Datadog raises this insight regardless of how much the application spends on those models.
+
+The **Announced deprecations** table lists each deprecated model, sorted by shutdown date with the earliest first. The table includes the following columns:
+
+- **Provider**: The model provider
+- **Model**: The deprecated model
+- **Shutdown date**: The date the provider announced for the shutdown
+- **Calls**: The number of calls to the model in the analysis window
+- **Status**: The time left before the shutdown, shown as `<N> days left`, or `Shut down on <DATE>` if the model has already shut down
+
+Datadog checks the shutdown dates that OpenAI and Anthropic announce. A coverage note after the table describes how Datadog counted the calls and names any deprecated model that the table leaves out.
+
+Severity is based on the earliest shutdown date relative to the end of the analysis window: **High** if a model has already shut down or shuts down within 30 days, **Medium** if it shuts down within 90 days, and **Low** otherwise.
+
+This insight type does not include an impact assessment. When it includes a recommended fix, the fix lists the call sites to change for each deprecated model and, when the provider names one, the replacement model.
+
+Migrate each call site to a supported model before the deprecated model's shutdown date, and validate quality, latency, and cost on the replacement model.
+
 ## Understand impact and evidence
 
-Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem.
+Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem. Model deprecations insights show the deprecated models and the next shutdown date instead of affected calls or sessions.
 
 Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
 
@@ -90,21 +109,21 @@ Use the linked evidence to identify the discarded work and apply the insight's r
 1. In Datadog, go to [**AI Observability > Agent Observability > Insights**][1].
 2. Use the overview and filters to prioritize insights by application, type, severity, status, or impact.
 3. Open an insight to review the finding.
-4. Apply and validate the recommended fix. You can use **Fix with Bits** or an MCP-compatible coding agent. With Work Management read and write access, you can also create or link a Jira ticket or Linear issue.
+4. Apply and validate the recommended fix, if the insight includes one. You can use **Fix with Bits** or an MCP-compatible coding agent. With Work Management read and write access, you can also create or link a Jira ticket or Linear issue.
 5. Set the status to **For Review**, **In Progress**, **Completed**, or **Ignored** to record your decision. Datadog sets the status to **Automatically Resolved** when later analysis no longer finds the problem.
 
 Insights appear on an application's overview page. Cost Insights also appear on the **Cost** page next to the related spend.
 
 ## Use Insights with a coding agent
 
-Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an insight's root cause, evidence, recommended fix, and validation guidance to implement and test a change.
+Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an insight's root cause and evidence to implement and test a change. When the insight includes a recommended fix and validation guidance, the agent can retrieve those as well.
 
 ### Automate insight reviews and fixes
 
 Set up a recurring workflow in your coding agent to review and fix insights. For example:
 
 ```text
-Use Datadog MCP to list Agent Observability insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix, and update the insight status based on the result.
+Use Datadog MCP to list Agent Observability insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix if the insight includes one, and update the insight status based on the result.
 ```
 
 ## Further reading
