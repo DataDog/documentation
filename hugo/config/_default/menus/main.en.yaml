@@ -1679,36 +1679,56 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 8
+    - name: Bits Maintenance
+      url: bits_ai/bits_maintenance
+      identifier: bits_maintenance
+      parent: bits_ai
+      weight: 9
+    - name: Setup
+      url: bits_ai/bits_maintenance/setup
+      identifier: bits_maintenance_setup
+      parent: bits_maintenance
+      weight: 901
+    - name: Campaigns and Plans
+      url: bits_ai/bits_maintenance/campaigns_plans
+      identifier: bits_maintenance_campaigns_plans
+      parent: bits_maintenance
+      weight: 902
+    - name: Upgrade Instructions and Memories
+      url: bits_ai/bits_maintenance/instructions_memories
+      identifier: bits_maintenance_instructions_memories
+      parent: bits_maintenance
+      weight: 903
     - name: Bits Release
       url: bits_release/
       identifier: bits_release
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Infrastructure Actions
       url: bits_ai/bits_remediation/infrastructure_actions
       identifier: bits_remediation_infrastructure_actions
       parent: bits_remediation
-      weight: 1001
+      weight: 1101
     - name: Bits Guardrails
       url: bits_ai/bits_remediation/guardrails
       identifier: bits_remediation_guardrails
       parent: bits_remediation
-      weight: 1002
+      weight: 1102
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 11
+      weight: 12
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 12
+      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
