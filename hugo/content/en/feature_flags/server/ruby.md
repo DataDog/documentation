@@ -318,6 +318,30 @@ gem 'opentelemetry-exporter-otlp-metrics', '>= 0.4.0'
 
 Set `DD_METRICS_OTEL_ENABLED=true` and configure the exporter as described in [Set Up Server-Side Flag Evaluation Metrics][5]. Enabling agentless delivery does not configure metrics export.
 
+## Configure evaluation telemetry and exposures
+
+These provider options require `datadog` version `<RUBY_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
+
+| Provider option | When set to `false` |
+| --- | --- |
+| `evaluation_telemetry_enabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `exposures_enabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `Datadog::OpenFeature::ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
+
+Pass the options to `Datadog::OpenFeature::Provider.new`:
+
+```ruby
+OpenFeature::SDK.set_provider_and_wait(
+  Datadog::OpenFeature::Provider.new(evaluation_telemetry_enabled: false, exposures_enabled: false)
+)
+```
+
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposures_enabled` to `false`, it keeps recording exposures, and `Datadog::OpenFeature::ExposureHook` still receives them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
+
 ## Evaluation events and privacy
 
 Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][14] for the data collected, opt-out scope, and delivery requirements.

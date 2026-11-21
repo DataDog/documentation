@@ -294,6 +294,37 @@ See [Server-Side Evaluation Events and Privacy][9] for targeting-key hashing, co
 
 Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][7].
 
+## Configure evaluation telemetry and exposures
+
+These provider options require `dd-trace-go/v2` version `<GO_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
+
+| Provider option | When set to `false` |
+| --- | --- |
+| `EvaluationTelemetryEnabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `ExposuresEnabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to hooks created with `ddopenfeature.NewExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
+
+Set the options in `ProviderConfig`. Each takes a `*bool`. A nil pointer keeps the default:
+
+```go
+evaluationTelemetry := false
+exposures := false
+
+provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{
+    EvaluationTelemetryEnabled: &evaluationTelemetry,
+    ExposuresEnabled:           &exposures,
+})
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `ExposuresEnabled` to `false`, it keeps recording exposures, and hooks created with `ddopenfeature.NewExposureHook` still receive them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.

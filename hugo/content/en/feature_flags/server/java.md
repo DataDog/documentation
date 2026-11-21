@@ -449,6 +449,33 @@ The `Provider` instance is shared globally. Client names are for organizational 
 
 Use `com.datadog.openfeature.ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][19].
 
+## Configure evaluation telemetry and exposures
+
+These provider options require `dd-openfeature` version `<JAVA_RELEASE_VERSION>` or later. Both are enabled by default and apply only to the provider that you configure.
+
+| Provider option | When set to `false` |
+| --- | --- |
+| `evaluationTelemetryEnabled` | The provider sends no flag evaluation events, records no `feature_flag.evaluations` metric, and adds no flag evaluation data to APM spans. |
+| `exposuresEnabled` | Evaluations through the provider are not recorded as exposures. The provider sends no exposures to Datadog and reports none to `ExposureHook`. These evaluations don't count toward exposure deduplication for other providers. |
+
+The two options are independent. Neither changes flag values or assignment. The provider reads them when it is created.
+
+Set the options on `Provider.Options`:
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI.getInstance().setProviderAndWait(new Provider(new Provider.Options()
+    .evaluationTelemetryEnabled(false)
+    .exposuresEnabled(false)));
+```
+
+For process-wide control, use the existing environment variables:
+
+- `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposuresEnabled` to `false`, it keeps recording exposures, and `ExposureHook` still receives them.
+- `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
+
 ## Best practices
 
 ### Initialize early
