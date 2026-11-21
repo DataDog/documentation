@@ -111,6 +111,10 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /containers/bits_remediation/**
+  byoc-apm:
+    regions: [gov, gov2]
+    url_paths:
+      - /byoc-apm/**
   byoc-logs:
     regions: [gov, gov2]
     url_paths:
