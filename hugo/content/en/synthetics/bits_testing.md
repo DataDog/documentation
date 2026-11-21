@@ -20,6 +20,9 @@ further_reading:
 - link: "/synthetics/guide/rum-to-synthetics/"
   tag: "Documentation"
   text: "Generate Synthetic Tests From Session Replay"
+- link: "/account_management/billing/ai_credits/"
+  tag: "Documentation"
+  text: "AI Credits"
 - link: "https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products"
   tag: "Pricing"
   text: "Synthetic Monitoring pricing"
@@ -32,6 +35,8 @@ further_reading:
 ## Overview
 
 Bits Testing is an AI agent that explores your application to map its most critical user journeys. It recommends ways to increase test coverage, and it can generate the Synthetic tests needed to close coverage gaps.
+
+Learn how your Bits Testing usage is billed on [AI Credits][14].
 
 ## Access Bits Testing
 
@@ -176,3 +181,4 @@ Alternatively, run Bits Testing from a [private location](#run-bits-testing-from
 [10]: /synthetics/guide/rum-to-synthetics/#generate-a-test-from-a-session-replay
 [12]: /synthetics/platform/private_locations/configuration/
 [13]: /account_management/rbac/permissions/#synthetic-monitoring
+[14]: /account_management/billing/ai_credits/
