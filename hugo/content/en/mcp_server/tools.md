@@ -1061,6 +1061,30 @@ Queries the current alert and warn state of data quality monitor groups.
 
 - Which tables are currently failing their data quality checks?
 
+### `inspect_data_observability_monitor_annotations`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
+Returns a data quality monitor's metric values, anomaly bounds, and existing bound annotations for one data entity, including the intervals where values fell outside the bounds. Use this tool to find the time range to annotate before you call `upsert_data_observability_monitor_annotations`. Requires `monitor_id` and `entity_id`. The default time range is the last seven days, and the range can't exceed 14 days.
+
+- Show the annotations on monitor `12345` for this table.
+- When did this monitor's values last fall outside the anomaly bounds?
+
+### `upsert_data_observability_monitor_annotations`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Write` and `Monitors Read` and `Timeseries` and `APM Read`*\
+Creates, updates, or extends bound annotations on a data quality monitor for one data entity. Set `action` to `create`, `update`, or `extend`. Requires `action`, `monitor_id`, `entity_id`, `annotations`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the change, then call it again with `dry_run` set to `false` to apply it. The annotation types are `new_baseline` (accept the current behavior, but alert on a comparable change in the future), `expected_occasionally` (accept similar behavior when it recurs, and alert only on a larger anomaly), `false_negative` (mark behavior inside the bounds that should have alerted), and `ignore` (remove invalid measurements from the model's history).
+
+- Mark the latest anomaly on monitor `12345` as expected so a similar change doesn't alert again.
+- Ignore the measurements from yesterday's bad backfill on this table.
+- Extend the existing annotation on this monitor through today.
+
+### `delete_data_observability_monitor_annotations`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Write` and `APM Read`*\
+Deletes bound annotations from a data quality monitor by annotation ID. Requires `monitor_id`, `entity_id`, `ids`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the annotations to delete, then call it again with `dry_run` set to `false` to delete them.
+
+- Remove the annotation I added to monitor `12345` for this table.
+
 ### `get_entity_tags` / `update_entity_tags`
 *Toolset: **data-observability***\
 *Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
@@ -1106,6 +1130,14 @@ Lists cost and performance optimization recommendations for data jobs and querie
 Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
 
 - Get the details of recommendation `abc123`.
+
+### `update_data_observability_recommendation_status`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Catalog Write`*\
+Sets the status of a Data Observability recommendation to `FOR_REVIEW`, `REVIEWED`, `IGNORED`, or `RESOLVED`. For example, set a recommendation to `RESOLVED` after you apply it, or to `IGNORED` to dismiss it. Requires `recommendation_id` and `status`.
+
+- Mark recommendation `abc123` as resolved.
+- Dismiss the recommendations I reviewed for this Databricks job.
 
 ## Database Monitoring
 
