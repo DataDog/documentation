@@ -43,11 +43,11 @@ Datadog measures the number of monitored tables each hour and bills the average 
 |---|---|
 | Freshness, row count, and column metric monitors, such as nullness and uniqueness | One per table, regardless of how many of these monitors the table has, or whether they apply to the table or to its columns. |
 | [Custom SQL][6] | One per Custom SQL monitor, added to the count from other monitors. |
-| [Source to target][7] | Counts toward the target table only. |
-| [Schema change][8] | Not billed. |
+| [Source to target][7] (Preview) | Counts toward the target table only. |
+| [Schema change][8] (Preview) | Not billed. |
 | Any monitor that uses [Group by][9] | The number of groups doesn't affect the count. A group-by monitor on one table counts as one monitored table. |
 
-For example, a table has a freshness monitor, a row count monitor, and three Custom SQL monitors. The freshness and row count monitors count as one monitored table, and each Custom SQL monitor adds one more, for a total of four monitored tables.
+For example, a table has a freshness monitor, a row count monitor, and three Custom SQL monitors. The freshness and row count monitors count as one monitored table. Each Custom SQL monitor adds one more, for a total of four monitored tables.
 
 ### Included at no additional charge
 
@@ -55,7 +55,7 @@ The following are included with Quality Monitoring and don't add monitored table
 
 - Syncing tables, schemas, and metadata from your warehouses and databases.
 - [Lineage][10], including column-level lineage for tables that you don't monitor.
-- Connecting more integrations. You are billed for the tables you monitor and for any Jobs Monitoring usage.
+- Connecting more integrations. Datadog bills for the tables you monitor and for any Jobs Monitoring usage, regardless of how many integrations you connect.
 
 ## Jobs Monitoring
 
@@ -67,7 +67,7 @@ Jobs Monitoring is billed in three categories. Each category covers different jo
 | Databricks Serverless | Lakeflow jobs on Databricks serverless compute | Per DBU |
 | Orchestrators | Airflow DAGs and tasks, dbt jobs and models, AWS Glue jobs, and custom jobs | Per job, per hour (Data Observability Job Hours) |
 
-Jobs Monitoring usage is based on all the job execution data that Datadog ingests. A job that you exclude from your [job monitors][11], or that no monitor covers, still counts toward usage.
+Jobs Monitoring usage doesn't depend on your [job monitors][11]. A job that you exclude from a job monitor, or that no monitor covers, still counts toward usage.
 
 ### Clusters
 
@@ -77,13 +77,13 @@ For example, suppose Datadog observes the following host counts in one hour:
 
 | Interval | Unique hosts |
 |---|---|
-| 1:00-1:05 PM | 100 |
-| 1:05-1:10 PM | 300 |
-| 1:10-1:15 PM | 150 |
-| 1:15-1:20 PM | 50 |
-| 1:20-2:00 PM (eight intervals) | 0 |
+| 1:00 p.m. to 1:05 p.m. | 100 |
+| 1:05 p.m. to 1:10 p.m. | 300 |
+| 1:10 p.m. to 1:15 p.m. | 150 |
+| 1:15 p.m. to 1:20 p.m. | 50 |
+| 1:20 p.m. to 2:00 p.m. (eight intervals) | 0 |
 
-The samples add up to 600, and 600 / 12 = 50 host hours for that hour. If this pattern repeats every day for 30 days, usage for the month is 1,500 Data Observability Job Host Hours.
+The samples add up to 600, and 600 / 12 = 50 host hours for that hour. If this pattern occurs once a day for 30 days, usage for the month is 50 × 30 = 1500 Data Observability Job Host Hours.
 
 ### Orchestrators
 
@@ -109,14 +109,14 @@ Usage is the total number of DBUs consumed in Databricks by the serverless job r
 
 Jobs Monitoring can generate usage in other Datadog products:
 
-- Job execution traces from the Clusters category generate APM span ingestion and span indexing usage. Each Jobs Monitoring host includes an allotment of 0.205 GB of ingested spans and 1,370 indexed spans per hour. Usage beyond the allotment can incur additional charges. See [APM Billing][12].
+- Job execution traces from the Clusters category generate APM span ingestion and span indexing usage. Each Jobs Monitoring host includes an allotment of 0.205 GB of ingested spans and 1370 indexed spans per hour. Usage beyond the allotment can incur additional charges. See [APM Billing][12].
 - For jobs on Kubernetes, the Clusters category generates container monitoring usage. Each Jobs Monitoring host includes an allotment of 10 containers. See [Containers Billing][13].
 - Log collection is optional. Logs that you collect with Jobs Monitoring are billed through [Log Management][14].
-- Hosts where Jobs Monitoring is enabled don't require Infrastructure Monitoring and aren't billed as Infrastructure hosts, except for Spark on Kubernetes. For Spark on Kubernetes, any node that runs the Datadog Agent counts as an Infrastructure host, and only nodes that are actively running Spark jobs count toward Data Observability Job Host Hours.
+- Hosts where Jobs Monitoring is enabled don't require Infrastructure Monitoring and aren't billed as Infrastructure hosts, except for Spark on Kubernetes. For Spark on Kubernetes, any node that runs the Datadog Agent counts as an Infrastructure host. Only nodes that are actively running Spark jobs count toward Data Observability Job Host Hours.
 
 ## Databricks workspaces connected to more than one organization
 
-If you connect the same Databricks workspace to more than one [Datadog organization][15], Datadog bills each of those organizations for the Data Observability usage from that workspace.
+If you connect a Databricks workspace to more than one [Datadog organization][15], Datadog bills each organization for that workspace's Data Observability usage.
 
 ## Further reading
 
