@@ -93518,9 +93518,12 @@ components:
       description: Object containing the definition of a metric's distinct volume.
       properties:
         distinct_volume:
-          description: Distinct volume for the given metric.
+          description: |-
+            Distinct volume for the given metric. This value is `null` for standard metrics in organizations on
+            Metric Name Pricing.
           example: 10
           format: int64
+          nullable: true
           type: integer
       type: object
     MetricDistinctVolumeType:
@@ -93601,9 +93604,10 @@ components:
       description: Object containing the definition of a metric's ingested and indexed volume.
       properties:
         indexed_volume:
-          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour.
+          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour. This value is `null` when no estimated usage data is available for the metric.
           example: 10
           format: int64
+          nullable: true
           type: integer
         indexed_volume_delta:
           description: |-
@@ -93613,9 +93617,10 @@ components:
           format: int64
           type: integer
         ingested_volume:
-          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour.
+          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour. This value can be `null` when ingested volume is not available for the metric.
           example: 20
           format: int64
+          nullable: true
           type: integer
         ingested_volume_delta:
           description: |-
@@ -100641,6 +100646,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Source"
+        - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentBitSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentdSource"
         - $ref: "#/components/schemas/ObservabilityPipelineGooglePubSubSource"
@@ -100656,6 +100662,73 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
+    ObservabilityPipelineCrowdStrikeFdrSource:
+      description: |-
+        The `crowdstrike_fdr` source ingests CrowdStrike Falcon Data Replicator (FDR) data.
+        It reads file notifications from the CrowdStrike-managed SQS queue for your FDR feed and downloads the referenced objects from the CrowdStrike-managed S3 bucket.
+
+        **Supported pipeline types:** logs
+      properties:
+        access_key_id_key:
+          description: Name of the environment variable or secret that holds the AWS access key ID that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID
+          type: string
+        client_concurrency:
+          description: Number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+          example: 4
+          format: int64
+          maximum: 9007199254740991
+          minimum: 1
+          type: integer
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: crowdstrike-fdr-source
+          type: string
+        max_number_of_messages:
+          description: Maximum number of SQS messages to receive per poll. Each message can reference multiple files. Defaults to 1.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
+        region:
+          description: AWS region of the FDR feed's SQS queue and S3 bucket.
+          example: us-west-1
+          type: string
+        secret_access_key_key:
+          description: Name of the environment variable or secret that holds the AWS secret access key that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSourceType"
+        url_key:
+          description: Name of the environment variable or secret that holds the URL of the FDR feed's SQS queue.
+          example: CROWDSTRIKE_FDR_SQS_URL
+          type: string
+        visibility_timeout_secs:
+          description: Number of seconds a received SQS message is hidden from other consumers. Set it higher than the time needed to download and process the largest FDR file. Defaults to 300.
+          example: 300
+          format: int64
+          maximum: 43200
+          minimum: 0
+          type: integer
+      required:
+        - id
+        - type
+        - region
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineCrowdStrikeFdrSourceType:
+      default: crowdstrike_fdr
+      description: The source type. Always `crowdstrike_fdr`.
+      enum:
+        - crowdstrike_fdr
+      example: crowdstrike_fdr
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE_FDR
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
@@ -120501,6 +120574,319 @@ components:
         - new_advisories
         - avoided_advisories
       type: object
+    RemediationGroupAttributes:
+      description: |-
+        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
+        depending on its grouping definition.
+      properties:
+        findings:
+          $ref: "#/components/schemas/RemediationGroupFindings"
+        grouping_definition_id:
+          description: |-
+            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
+          example: sca.package_update
+          type: string
+        image_update:
+          $ref: "#/components/schemas/RemediationGroupImageUpdate"
+        package_update:
+          $ref: "#/components/schemas/RemediationGroupPackageUpdate"
+        title:
+          description: Title of the group, which describes the change to make.
+          example: Update lodash to 4.17.21 in github.com/acme/api
+          type: string
+      required:
+        - grouping_definition_id
+        - title
+        - findings
+      type: object
+    RemediationGroupCaseRelationship:
+      description: Relationship to the case that tracks the group's remediation.
+      properties:
+        data:
+          $ref: "#/components/schemas/RemediationGroupCaseRelationshipData"
+      required:
+        - data
+      type: object
+    RemediationGroupCaseRelationshipData:
+      description: The group's case, or null when the group has no case yet.
+      nullable: true
+      properties:
+        id:
+          description: Unique identifier of the case.
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
+        type:
+          $ref: "#/components/schemas/CaseDataType"
+      required:
+        - id
+        - type
+      type: object
+    RemediationGroupData:
+      description: A remediation group.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RemediationGroupAttributes"
+        id:
+          description: |-
+            Remediation key of the group: the grouping definition ID, a colon, and the group's dimensions
+            encoded in base64url. It identifies the group across searches.
+          example: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+          type: string
+        relationships:
+          $ref: "#/components/schemas/RemediationGroupRelationships"
+        type:
+          $ref: "#/components/schemas/RemediationGroupType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    RemediationGroupFindingType:
+      description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
+      enum:
+        - library_vulnerability
+        - host_and_container_vulnerability
+      example: library_vulnerability
+      type: string
+      x-enum-varnames:
+        - LIBRARY_VULNERABILITY
+        - HOST_AND_CONTAINER_VULNERABILITY
+    RemediationGroupFindings:
+      description: |-
+        Counts of the group's open findings. The counts include every finding in the group, including findings that
+        don't match `filter[query]`.
+      properties:
+        by_severity:
+          $ref: "#/components/schemas/RemediationGroupFindingsBySeverity"
+        total:
+          description: Number of open findings in the group.
+          example: 12
+          format: int64
+          type: integer
+      required:
+        - total
+        - by_severity
+      type: object
+    RemediationGroupFindingsBySeverity:
+      description: |-
+        Number of the group's findings for each value of their `@severity` attribute. The response includes every
+        level, including levels with a count of zero.
+      properties:
+        critical:
+          description: Number of critical findings.
+          example: 2
+          format: int64
+          type: integer
+        high:
+          description: Number of high findings.
+          example: 5
+          format: int64
+          type: integer
+        info:
+          description: Number of info findings.
+          example: 0
+          format: int64
+          type: integer
+        low:
+          description: Number of low findings.
+          example: 1
+          format: int64
+          type: integer
+        medium:
+          description: Number of medium findings.
+          example: 4
+          format: int64
+          type: integer
+        none:
+          description: Number of findings with no severity.
+          example: 0
+          format: int64
+          type: integer
+        unknown:
+          description: Number of findings with an unknown severity.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - critical
+        - high
+        - medium
+        - low
+        - info
+        - none
+        - unknown
+      type: object
+    RemediationGroupImageUpdate:
+      description: |-
+        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
+        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
+        them by `grouping_location`, `remediation_kind`, and `action`.
+      properties:
+        action:
+          description: |-
+            Name of the container image, base image, or package to upgrade. The value comes from the first of these
+            attributes that the findings have: `@remediation.container_image.latest_major.name`,
+            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
+          example: alpine
+          type: string
+        advisory_count:
+          description: Number of distinct values of `@advisory.id` across the group's findings.
+          example: 25
+          format: int64
+          type: integer
+        exploitable_cve_count:
+          description: |-
+            Number of distinct values of `@advisory.id` across the group's findings that have
+            `@risk.has_exploit_available` set to `true`.
+          example: 2
+          format: int64
+          type: integer
+        file_count:
+          description: Number of distinct values of `@code_location.filename` across the group's findings.
+          example: 1
+          format: int64
+          type: integer
+        grouping_location:
+          description: |-
+            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
+            the value is the findings' `@container_image.name`.
+          example: Dockerfile
+          type: string
+        location_is_filename:
+          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
+          example: true
+          type: boolean
+        remediation_kind:
+          description: |-
+            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
+            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
+            `package_update` otherwise.
+          example: image_update
+          type: string
+        target_version:
+          description: |-
+            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
+            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
+            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
+            or when the recommended versions can't be ordered.
+          example: 3.20.3
+          type: string
+      required:
+        - grouping_location
+        - location_is_filename
+        - remediation_kind
+        - action
+        - advisory_count
+        - exploitable_cve_count
+        - file_count
+      type: object
+    RemediationGroupInclude:
+      description: Related resource to add to `included`.
+      enum:
+        - case
+      example: case
+      type: string
+      x-enum-varnames:
+        - CASE
+    RemediationGroupPackageUpdate:
+      description: |-
+        A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
+        gathers the open vulnerabilities of direct dependencies that have a recommended fix, and groups them by
+        `@git.repository_id`, `@vulnerability.stack.ecosystem`, and `@remediation.recommended.name`.
+      properties:
+        advisory_count:
+          description: Number of distinct values of `@advisory.id` across the group's findings.
+          example: 3
+          format: int64
+          type: integer
+        ecosystem:
+          description: Package ecosystem, the findings' `@vulnerability.stack.ecosystem`.
+          example: npm
+          type: string
+        exploitable_cve_count:
+          description: |-
+            Number of distinct values of `@advisory.id` across the group's findings that have
+            `@risk.has_exploit_available` set to `true`.
+          example: 1
+          format: int64
+          type: integer
+        file_count:
+          description: |-
+            Number of distinct values of `@package.declaration.block.filename`, the files that declare the package.
+          example: 2
+          format: int64
+          type: integer
+        package_name:
+          description: Name of the package to update, the findings' `@remediation.recommended.name`.
+          example: lodash
+          type: string
+        repository_id:
+          description: Repository that depends on the package, the findings' `@git.repository_id`.
+          example: github.com/acme/api
+          type: string
+        target_version:
+          description: |-
+            Version to update the package to, the highest `@remediation.recommended.version` across the group's
+            findings. Omitted when no version is recommended or when the recommended versions can't be ordered.
+          example: 4.17.21
+          type: string
+      required:
+        - repository_id
+        - ecosystem
+        - package_name
+        - advisory_count
+        - exploitable_cve_count
+        - file_count
+      type: object
+    RemediationGroupRelationships:
+      description: Relationships of a remediation group.
+      properties:
+        case:
+          $ref: "#/components/schemas/RemediationGroupCaseRelationship"
+      required:
+        - case
+      type: object
+    RemediationGroupType:
+      default: remediation_groups
+      description: Remediation groups resource type.
+      enum:
+        - remediation_groups
+      example: remediation_groups
+      type: string
+      x-enum-varnames:
+        - REMEDIATION_GROUPS
+    RemediationGroupsMeta:
+      description: Metadata of the search.
+      properties:
+        page:
+          $ref: "#/components/schemas/RemediationGroupsPageMeta"
+      required:
+        - page
+      type: object
+    RemediationGroupsPageMeta:
+      description: Pagination of the search.
+      properties:
+        number:
+          description: Page number, starting at 1.
+          example: 1
+          format: int64
+          type: integer
+        size:
+          description: Page size.
+          example: 50
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Number of groups that match the search across all pages.
+          example: 134
+          format: int64
+          type: integer
+      required:
+        - number
+        - size
+        - total_filtered_count
+      type: object
     ReorderRetentionFiltersRequest:
       description: A list of retention filters to reorder.
       properties:
@@ -129733,6 +130119,25 @@ components:
         - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
         - ISSUE_WATCHES
+    SearchRemediationGroupsResponse:
+      description: A page of remediation groups.
+      properties:
+        data:
+          description: Remediation groups of the page.
+          items:
+            $ref: "#/components/schemas/RemediationGroupData"
+          type: array
+        included:
+          description: Cases of the page's groups, when the request has `include=case`.
+          items:
+            $ref: "#/components/schemas/FindingCaseResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RemediationGroupsMeta"
+      required:
+        - data
+        - meta
+      type: object
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -182600,7 +183005,9 @@ paths:
         END
         ```
 
-        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.
+        This endpoint is only accessible for
+        [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the US2-FED site.
       operationId: GetMonthlyCostAttribution
       parameters:
         - description: |-
@@ -259521,6 +259928,237 @@ paths:
       x-menu-order: 4
       x-unstable: |-
         **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/remediation_groups:
+    get:
+      description: |-
+        Search the remediation groups of your organization. A remediation group gathers the open security findings
+        that one change fixes, such as updating a package in a repository or upgrading an image.
+
+        Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
+        group returns:
+
+        | Grouping definition    | Finding type                       | Kind object      |
+        | ---------------------- | ---------------------------------- | ---------------- |
+        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
+        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
+
+        Groups are computed from the attributes of security findings, described in the
+        [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
+        each kind object lists the findings its grouping definition reads and the attribute each field comes from.
+
+        The search includes all open findings, regardless of when they were first detected.
+
+        This endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or
+        `appsec_vm_read` permission.
+      operationId: SearchRemediationGroups
+      parameters:
+        - description: |-
+            Returns only groups whose grouping definition covers this `@finding_type` value. To match more than one
+            finding type, repeat the parameter.
+          example: ["library_vulnerability"]
+          in: query
+          name: filter[finding_type]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/RemediationGroupFindingType"
+            type: array
+        - description: |-
+            Returns only groups with at least one open finding that matches the query. Use the security findings
+            search syntax with attributes from the
+            [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/), prefixed by `@`.
+            For example, `@severity:(critical OR high)` returns groups with at least one critical or high finding.
+            The group's counts still include every finding in the group. The query can be at most 2048 bytes after
+            JSON encoding, and the parameter can appear only once.
+          example: "@severity:(critical OR high)"
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Comma-separated list of sort fields. Prefix a field with `-` to sort in descending order.
+            `findings.by_severity` sorts by the critical count, then high, medium, low, info, none, and unknown.
+            `findings.total` sorts by the total finding count. By default, groups are sorted by critical count,
+            then high count, then total finding count, all in descending order.
+          example: "-findings.by_severity,-findings.total"
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: Number of groups in a page.
+          example: 50
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Page to return, starting at 1.
+          example: 1
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 1
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Adds each group's case to `included`. `case` is the only supported value.
+          in: query
+          name: include
+          required: false
+          schema:
+            $ref: "#/components/schemas/RemediationGroupInclude"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                cloud_vm_group_without_case:
+                  summary: A host and container vulnerability group with no case yet
+                  value:
+                    data:
+                      - attributes:
+                          findings:
+                            by_severity:
+                              critical: 1
+                              high: 9
+                              info: 0
+                              low: 10
+                              medium: 20
+                              none: 0
+                              unknown: 0
+                            total: 40
+                          grouping_definition_id: cloudvm.image_update
+                          image_update:
+                            action: alpine
+                            advisory_count: 25
+                            exploitable_cve_count: 2
+                            file_count: 1
+                            grouping_location: Dockerfile
+                            location_is_filename: true
+                            remediation_kind: image_update
+                            target_version: 3.20.3
+                          title: Upgrade alpine to 3.20.3
+                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
+                        relationships:
+                          case:
+                            data:
+                        type: remediation_groups
+                    meta:
+                      page:
+                        number: 1
+                        size: 50
+                        total_filtered_count: 134
+                default:
+                  summary: A library vulnerability group with a case, with include=case
+                  value:
+                    data:
+                      - attributes:
+                          findings:
+                            by_severity:
+                              critical: 2
+                              high: 5
+                              info: 0
+                              low: 1
+                              medium: 4
+                              none: 0
+                              unknown: 0
+                            total: 12
+                          grouping_definition_id: sca.package_update
+                          package_update:
+                            advisory_count: 3
+                            ecosystem: npm
+                            exploitable_cve_count: 1
+                            file_count: 2
+                            package_name: lodash
+                            repository_id: github.com/acme/api
+                            target_version: 4.17.21
+                          title: Update lodash to 4.17.21 in github.com/acme/api
+                        id: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                        relationships:
+                          case:
+                            data:
+                              id: c1234567-89ab-cdef-0123-456789abcdef
+                              type: cases
+                        type: remediation_groups
+                    included:
+                      - attributes:
+                          created_at: "2026-11-02T09:00:00.000Z"
+                          creation_source: CS_SECURITY_REMEDIATION
+                          insights:
+                            - ref: /security/issues?si-tab=remediation&remediation=sca.package_update%3AeyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                              resource_id: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                              type: REMEDIATION_GROUP
+                          key: SECREM-123
+                          modified_at: "2026-11-16T14:30:00.000Z"
+                          priority: P2
+                          status: IN_PROGRESS
+                          status_group: SG_IN_PROGRESS
+                          status_name: In Progress
+                          title: Update lodash to 4.17.21 in github.com/acme/api
+                          type: SECURITY_REMEDIATION
+                        id: c1234567-89ab-cdef-0123-456789abcdef
+                        type: cases
+                    meta:
+                      page:
+                        number: 1
+                        size: 50
+                        total_filtered_count: 134
+              schema:
+                $ref: "#/components/schemas/SearchRemediationGroupsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: page[size] must be between 1 and 100
+                        status: "400"
+                        title: Bad Request
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_findings_read
+            - cases_read
+        - AuthZ:
+            - appsec_vm_read
+            - cases_read
+      summary: Search remediation groups
+      tags:
+        - "Security Monitoring"
+      x-menu-order: 190
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        pageStart: 1
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_read
+          - appsec_vm_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
