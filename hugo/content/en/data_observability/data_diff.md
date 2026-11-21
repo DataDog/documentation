@@ -22,13 +22,13 @@ Data Diff is in Preview. To request access, contact your Datadog representative.
 
 ## Overview
 
-Data Diff compares two datasets row by row. Each diff has a source dataset and a target dataset, and each dataset is a Snowflake table or a SQL query. Datadog matches rows across the two datasets on the primary key columns you choose, compares the values in the columns you map, and reports each difference as one of the following:
+Data Diff compares two datasets row by row. Each diff has a source dataset and a target dataset, and a Snowflake dataset can be a table or a SQL query. Datadog matches rows across the two datasets on the primary key columns you choose and compares the values in the columns you map. It reports each difference as one of the following:
 
-- {{< ui >}}Removed{{< /ui >}}: the row exists only in the source.
-- {{< ui >}}Added{{< /ui >}}: the row exists only in the target.
-- {{< ui >}}Modified{{< /ui >}}: the primary key exists in both datasets, and at least one compared value differs.
+- {{< ui >}}Removed{{< /ui >}}: The row exists only in the source.
+- {{< ui >}}Added{{< /ui >}}: The row exists only in the target.
+- {{< ui >}}Modified{{< /ui >}}: The primary key exists in both datasets, and at least one compared value differs.
 
-Use Data Diff to confirm that a migration or replication job copied a table correctly, or to compare a table with a historical snapshot of itself.
+Use Data Diff to confirm that a migration or replication job copied a table correctly. You can also compare a table with an earlier version of itself.
 
 ## Requirements
 
@@ -47,7 +47,7 @@ Data Diff is off by default. A user with the Data Observability Data Diff Config
 
 While Data Diff is off, the [Data Diff page][3] shows a {{< ui >}}Data Diff Settings{{< /ui >}} button that opens the same settings page.
 
-If you turn Data Diff off later, no one in the organization can create or run diffs, and scheduled diffs stop running. Results from past runs stay visible.
+If you turn Data Diff off later, no one in the organization can create or run diffs. A diff's page still shows the results of its past runs.
 
 ### Choose where results are stored
 
@@ -56,7 +56,10 @@ Under {{< ui >}}Storage{{< /ui >}} on the Data Diff settings page, choose where 
 - {{< ui >}}Store in Datadog{{< /ui >}}: Datadog stores the results. This is the default.
 - {{< ui >}}Store in a data warehouse{{< /ui >}}: Datadog writes the results to a database and schema in a connected Snowflake account. Select the {{< ui >}}Account{{< /ui >}}, enter the {{< ui >}}Database{{< /ui >}} and {{< ui >}}Schema{{< /ui >}}, and click {{< ui >}}Save changes{{< /ui >}}.
 
-With warehouse storage, Datadog creates a table named `DIFF_RESULTS` in that schema if the table doesn't exist. Datadog then inserts, reads, and deletes result rows in that table through its connection to the Snowflake account. The Snowflake role that Datadog uses for that account needs privileges to create a table in the schema and to read, insert, and delete rows in the table.
+With warehouse storage, Datadog creates a table named `DIFF_RESULTS` in that schema if the table doesn't exist. Datadog then inserts, reads, and deletes result rows in that table through its connection to the Snowflake account. The Snowflake role that Datadog uses for that account needs privileges to:
+
+- Create a table in the schema.
+- Read, insert, and delete rows in the `DIFF_RESULTS` table.
 
 Viewing the storage settings requires the Data Observability Data Diff Config Read permission. Changing them requires the Data Observability Data Diff Config Write permission.
 
@@ -72,7 +75,7 @@ Data Diff has its own permissions. The default roles column lists which of the D
 | Data Observability Data Diff Config Read | `data_observability_diff_config_read` | View whether Data Diff is turned on and where results are stored. | Read Only, Standard, Admin |
 | Data Observability Data Diff Config Write | `data_observability_diff_config_write` | Turn Data Diff on or off and configure where results are stored. | Admin |
 
-A user with the Data Observability Data Diff Read permission but without the Data Observability Data Diff Row-Level Data Read permission sees the {{< ui >}}Left only{{< /ui >}}, {{< ui >}}Right only{{< /ui >}}, and {{< ui >}}Modified{{< /ui >}} counts for each run, but not the rows.
+With only the Data Observability Data Diff Read permission, a user sees how many rows each run found, but not the rows. These counts are labeled {{< ui >}}Left only{{< /ui >}} for removed rows, {{< ui >}}Right only{{< /ui >}} for added rows, and {{< ui >}}Modified{{< /ui >}}. To see the rows, a user also needs the Data Observability Data Diff Row-Level Data Read permission.
 
 To give these permissions to other users, add them to a custom role. See [Role Based Access Control][4].
 
@@ -80,8 +83,8 @@ To give these permissions to other users, add them to a custom role. See [Role B
 
 Start a diff from any of these places:
 
-- **The Data Diff page**: In Data Observability, go to {{< ui >}}Changes{{< /ui >}} > {{< ui >}}Data Diff{{< /ui >}} and click {{< ui >}}Create Data Diff{{< /ui >}}.
-- **A table page in the [Data Catalog][5]**: Open the {{< ui >}}Data Diff{{< /ui >}} tab and click {{< ui >}}Create Data Diff{{< /ui >}}, or select {{< ui >}}Create Data Diff{{< /ui >}} from the page's actions menu. Datadog fills in the table as the source dataset.
+- **The Data Diff page**: Go to the [Data Diff page][3] and click {{< ui >}}Create Data Diff{{< /ui >}}.
+- **A table page in the [Data Catalog][5]**: Open the {{< ui >}}Data Diff{{< /ui >}} tab and click {{< ui >}}Create Data Diff{{< /ui >}}. You can also select {{< ui >}}Create Data Diff{{< /ui >}} from the page's actions menu. Datadog fills in the table as the source dataset.
 
 Then configure the diff:
 
@@ -95,7 +98,7 @@ Then configure the diff:
    - {{< ui >}}AT{{< /ui >}}: A date and time. Datadog uses [Snowflake Time Travel][6] to read the table as it existed at that time.
 5. Configure the {{< ui >}}Target Dataset{{< /ui >}} the same way. To swap the source and target, click {{< ui >}}Switch{{< /ui >}}.
 6. Review the column mapping. See [Map columns](#map-columns).
-7. Optionally, expand {{< ui >}}Advanced Diff Options{{< /ui >}} and set the {{< ui >}}Differing row limit{{< /ui >}}: the maximum number of differing rows a run collects, from 0 to 1,000,000. Leave it blank or enter 0 to use the default of 10,000.
+7. Optionally, expand {{< ui >}}Advanced Diff Options{{< /ui >}} and set the {{< ui >}}Differing row limit{{< /ui >}}. This limit is the maximum number of differing rows a run collects, from 0 to 1,000,000. Leave it blank or enter 0 to use the default of 10,000.
 8. Click {{< ui >}}Create Data Diff{{< /ui >}}. Datadog saves the diff, starts its first run, and opens the diff page.
 
 ### Map columns
@@ -119,10 +122,10 @@ Each run queries your Snowflake accounts through their Data Observability connec
 1. Datadog reads the column names and types of both datasets.
 2. Datadog compares the datasets:
    - If the source and target are in the same Snowflake account, Datadog joins them in Snowflake and reads back only the rows that differ.
-   - If the source and target are in different Snowflake accounts, Datadog splits the primary key values into ranges and compares row counts and checksums for each range on both sides. Datadog then reads rows only from the ranges that don't match.
+   - If the source and target are in different Snowflake accounts, Datadog splits the primary key values into ranges. For each range, it compares row counts and checksums on both sides, then reads rows only from the ranges that don't match.
 3. Datadog saves the results to the configured storage.
 
-A diff runs one run at a time. If a scheduled run starts while another run of the same diff is in progress, Datadog skips it. If you start a run while another run of the same diff is in progress, Datadog cancels the new run with a message that another run of the diff was in progress.
+Only one run of a diff executes at a time. If a scheduled run starts while another run of the same diff is in progress, Datadog skips it. If you start a run while another run of the same diff is in progress, Datadog cancels the new run. The canceled run's message says that another run of the diff was in progress.
 
 After you change a diff's schedule, the new schedule can take up to five minutes to take effect.
 
@@ -139,7 +142,8 @@ To cancel a pending or running run, open the diff and click {{< ui >}}Cancel dif
 ## Comparison rules
 
 - Datadog excludes rows with a NULL value in any primary key column from the comparison.
-- Datadog compares numeric values to six decimal places. Differences smaller than that aren't reported. A numeric value with a magnitude of 1e32 or more, or a non-finite floating-point value, fails the run.
+- Datadog compares decimal and floating-point values to six decimal places. Differences past the sixth decimal place aren't reported. Integer values are compared exactly.
+- A decimal or floating-point value with a magnitude of 1e32 or more fails the run. A non-finite floating-point value, such as NaN or infinity, also fails the run.
 - During a run, Datadog can execute a SQL dataset's query more than once. Use queries that return stable, deterministic results. Volatile functions, or changes to the underlying data between reads, can make the result inconsistent.
 - {{< ui >}}AT{{< /ui >}} reads historical data with the table's current schema. The time you choose must be within the table's Time Travel retention period, or the run fails.
 
@@ -151,11 +155,14 @@ The diff page shows:
 
 - A timeline of the diff's runs, and the next scheduled run for a scheduled diff. Select a run to view its results.
 - {{< ui >}}Configuration{{< /ui >}}: The datasets, filters, differing row limit, and column mapping that the selected run used.
-- The results of the selected run. Toggle {{< ui >}}Removed{{< /ui >}}, {{< ui >}}Modified{{< /ui >}}, and {{< ui >}}Added{{< /ui >}} to choose which rows to show, and select {{< ui >}}Show unchanged columns{{< /ui >}} to include columns whose values match. If the datasets match, the page shows {{< ui >}}No differences found{{< /ui >}}.
+- The results of the selected run:
+  - Toggle {{< ui >}}Removed{{< /ui >}}, {{< ui >}}Modified{{< /ui >}}, and {{< ui >}}Added{{< /ui >}} to choose which rows to show.
+  - To include columns whose values match, turn on the toggle that shows unchanged columns.
+  - If the datasets match, the page shows {{< ui >}}No differences found{{< /ui >}}.
 
 ### Truncated results
 
-If a run stops before it compares every row, the results show a {{< ui >}}Result Truncated{{< /ui >}} badge. Hover over the badge to see the reason:
+If a run doesn't compare every row, the results show a {{< ui >}}Result Truncated{{< /ui >}} badge. Hover over the badge to see the reason:
 
 | Reason | Meaning |
 |---|---|

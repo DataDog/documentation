@@ -5790,7 +5790,7 @@ menu:
       pre: data-observability-wui
       identifier: data_observability_data_diff
       parent: data_observability_heading
-      weight: 85000
+      weight: 87500
     - name: CI/CD
       url: data_observability/cicd
       pre: data-observability-wui
