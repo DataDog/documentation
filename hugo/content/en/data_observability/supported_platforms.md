@@ -28,7 +28,7 @@ In the tables on this page:
 
 ## Data warehouses, data lakes, and databases
 
-The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns refer to the metric types of [Data Observability monitors][1]. The **Schema change** column refers to [schema change monitors][2]. The **Query history** column means that Datadog collects the queries that run on the platform.
+The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns are the metric types of [Data Observability monitors][1]. The **Schema change** column covers [schema change monitors][2]. The **Query history** column means that Datadog collects the queries that run on the platform.
 
 | Platform | Freshness | Row count | Custom SQL | Column metrics | Schema change | Lineage | Query history |
 |---|---|---|---|---|---|---|---|
@@ -40,10 +40,10 @@ The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns
 | [Microsoft Fabric Warehouse][8] | Preview (column) | Preview | Preview | Preview | | Preview | Preview |
 | [AWS Glue (Iceberg tables)][9] | Yes | Yes | | | | | |
 | [Amazon Athena][10] | | | | | | Preview | Preview |
-| [PostgreSQL][11] | | Preview | Preview | Preview | | | |
+| [PostgreSQL][11] | Preview (column) | Preview | Preview | Preview | | | |
 
-- Freshness marked **(column)** is measured from a timestamp column. Table-level freshness isn't available.
-- For Microsoft Fabric Warehouse, lineage and query history require the Contributor role or higher on the workspace, and the {{< ui >}}Collect query history{{< /ui >}} option turned on.
+- Freshness marked **(column)** is measured from a datetime column. Table-level freshness isn't available.
+- Lineage and query history for Microsoft Fabric Warehouse require the Contributor role or higher on the workspace. They also require the {{< ui >}}Collect query history{{< /ui >}} option in the integration settings.
 - Querying AWS Glue tables with Amazon Athena is in Preview. It adds group-by and custom filters on metrics, and monitoring for Glue tables that don't use the Iceberg table format.
 - Amazon Athena query history builds lineage between the AWS Glue tables that your queries read and write.
 
@@ -56,14 +56,14 @@ The **Jobs Monitoring** column means that [Jobs Monitoring][12] collects runs of
 | [Databricks][14] | Yes | Yes |
 | [Airflow][15] | Yes | Yes |
 | [dbt Core and dbt Cloud][16] | Yes | Yes |
-| [AWS Glue jobs][17] | Preview | Preview |
-| [Azure Data Factory][18] | Preview | Preview |
+| [AWS Glue jobs][17] | Yes | Yes |
+| [Azure Data Factory][18] | Yes | Yes |
 | [Apache Spark on Kubernetes][19] | Yes | Yes |
 | [Apache Spark on Amazon EMR][20] | Yes | Yes |
 | [Apache Spark on Google Dataproc][21] | Yes | |
 | [Custom jobs (OpenLineage)][22] | Yes | Yes |
 
-- For AWS Glue jobs, lineage is available for jobs that run with the Spark engine.
+- For AWS Glue jobs, lineage is available for jobs that run with the Spark engine, through an optional setup step.
 - For Apache Spark on Kubernetes and Amazon EMR, lineage requires OpenLineage collection, which is an optional setup step.
 
 ## ELT and BI tools
@@ -74,8 +74,8 @@ ELT and BI tools add lineage between your warehouse tables and the tool's connec
 |---|---|---|
 | [Airbyte][24] | ELT | Yes |
 | [Fivetran][25] | ELT | Yes |
-| [Hightouch][26] | ELT | Preview |
-| [Hex][27] | BI | Preview |
+| [Hightouch][26] | Reverse ETL | Yes |
+| [Hex][27] | BI | Yes |
 | [Looker][28] | BI | Yes |
 | [Tableau][29] | BI | Yes |
 | [Sigma][30] | BI | Yes |
@@ -84,7 +84,7 @@ ELT and BI tools add lineage between your warehouse tables and the tool's connec
 
 ## Request Preview access
 
-Datadog enables Data Observability Preview features for each organization individually. There is no self-serve sign-up. To request access, contact your Datadog representative or [Datadog Support][33].
+Datadog enables Data Observability Preview features for each organization. To request access, contact your Datadog representative or [Datadog Support][33].
 
 After Datadog enables a Preview feature for your organization, follow the setup steps on that feature's page.
 
