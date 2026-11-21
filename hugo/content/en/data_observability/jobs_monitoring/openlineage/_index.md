@@ -8,9 +8,10 @@ further_reading:
     - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
       tag: 'Documentation'
       text: 'Set up Datadog Agent for OpenLineage Proxy'
+    - link: '/monitors/types/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Monitor'
 ---
-
-<div class="alert alert-info"> Custom jobs using OpenLineage is in Preview.</div>
 
 ## Overview
 

@@ -12,11 +12,10 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Learn about Product Analytics"
+- link: "https://www.datadoghq.com/blog/export-pipelines/"
+  tag: "Blog"
+  text: "Export RUM and Product Analytics data with Export Pipelines"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/export-pipelines/" btn_hidden="false" header="Join the Preview!">}}
-Export Pipelines is in Preview.
-{{< /callout >}}
 
 ## Overview
 

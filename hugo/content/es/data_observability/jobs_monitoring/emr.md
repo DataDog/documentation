@@ -1,74 +1,76 @@
 ---
 aliases:
 - /es/data_jobs/emr
-description: 'Configurar Data Observability: Jobs Monitoring para aplicaciones Apache
-  Spark en clústeres de Amazon EMR utilizando AWS Secrets Manager y acciones de arranque.'
+description: 'Configure Data Observability: Jobs Monitoring para aplicaciones de Apache
+  Spark en clústeres de Amazon EMR mediante AWS Secrets Manager y acciones de arranque.'
 further_reading:
 - link: /data_jobs
   tag: Documentación
   text: 'Data Observability: Jobs Monitoring'
-title: 'Activar Data Observability: Jobs Monitoring para Spark en Amazon EMR'
+- link: /monitors/types/data_observability/
+  tag: Documentación
+  text: Seguimiento de Data Observability
+title: 'Habilite Data Observability: Jobs Monitoring para Spark en Amazon EMR'
 ---
+[Data Observability: Jobs Monitoring][9] brinda visibilidad sobre el rendimiento y la confiabilidad de las aplicaciones de Apache Spark en Amazon EMR.
 
-[Data Observability: Jobs Monitoring][9] ofrece visibilidad del rendimiento y de la fiabilidad de las aplicaciones Apache Spark en Amazon EMR.
+Si está utilizando [EMR on EKS][13], siga estas [instrucciones para configurar Jobs Monitoring en Kubernetes][14].
 
-Si utilizas [EMR en EKS][13], sigue estas [instrucciones para configurar DJM en Kubernetes][14].
+## Requisitos {#requirements}
 
-## Requisitos
+Se requiere [Amazon EMR Release 6.0.1][10] o posterior.
 
-Se requiere [Amazon EMR versión 6.0.1][10] o posterior.
+## Configuración {#setup}
 
-## Instalación
+Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Amazon EMR.
 
-Sigue estos pasos para activar Data Observability: Jobs Monitoring para Amazon EMR.
+1. [Almacene su clave de API de Datadog](#store-your-datadog-api-key-in-aws-secrets-manager-recommended) en AWS Secrets Manager (recomendado).
+1. [Otorgue permisos al perfil de instancia de EMR EC2](#grant-permissions-to-emr-ec2-instance-profile).
+1. [Cree y configure su clúster de EMR](#create-and-configure-your-emr-cluster).
+1. [Especifique el etiquetado de servicio por aplicación Spark](#specify-service-tagging-per-spark-application).
 
-1. [Almacena tu clave de API Datadog](#store-your-datadog-api-key-in-aws-secrets-manager-recommended) en AWS Secrets Manager (recomendado).
-1. [Concede permisos al perfil de la instancia EC2 EMR](#grant-permissions-to-emr-ec2-instance-profile).
-1. [Crea y configura tu clúster EMR](#create-and-configure-your-emr-cluster).
-1. [Especifica el etiquetado de servicios por aplicación Spark](#specify-service-tagging-per-spark-application).
+### Almacene su clave de API de Datadog en AWS Secrets Manager (recomendado) {#store-your-datadog-api-key-in-aws-secrets-manager-recommended}
+1. Tome nota de su [clave de API de Datadog][1].
+1. En [AWS Secrets Manager][2], elija {{< ui >}}Store a new secret{{< /ui >}}.
+   - En {{< ui >}}Secret type{{< /ui >}}, seleccione {{< ui >}}Other type of secret{{< /ui >}}.
+   - En {{< ui >}}Key/value pairs{{< /ui >}}, agregue su clave de API de Datadog como un par clave-valor, donde la clave es `dd_api_key`.
+      {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Store a new secret. Una sección titulada \"Key/value pairs\". A la izquierda, un cuadro de texto que contiene \"dd_api_key\". A la derecha, un cuadro de texto que contiene una clave de API oculta." style="width:80%;" >}}
+   - Luego, haga clic en **Next**.
+1. En la página {{< ui >}}Configure secret{{< /ui >}}, ingrese un {{< ui >}}Secret name{{< /ui >}}. Puede usar `datadog/dd_api_key`. Luego, haga clic en {{< ui >}}Next{{< /ui >}}.
+1. En la página {{< ui >}}Configure rotation{{< /ui >}}, puede activar la [rotación automática][3] si lo desea. Luego, haga clic en {{< ui >}}Next{{< /ui >}}.
+1. En la página {{< ui >}}Review{{< /ui >}}, revise los detalles de su secreto. Luego, haga clic en {{< ui >}}Store{{< /ui >}}.
+1. En AWS Secrets Manager, abra el secreto que creó. Tome nota del {{< ui >}}Secret ARN{{< /ui >}}.
 
-### Almacenar tu clave de API Datadog en AWS Secrets Manager (recomendado)
-1. Toma nota de tu [clave de API Datadog][1].
-1. En [AWS Secrets Manager][2], elige **Almacenar un nuevo secreto**.
-   - En **Tipo de secreto**, selecciona **Otro tipo de secreto**.
-   - En **Pares clave/valor**, añade tu clave de API Datadog como par clave-valor, donde la clave es `dd_api_key`.
-      {{< img src="data_jobs/emr/key_value.png" alt="AWS Secrets Manager, Almacenar un nuevo secreto. Una sección llamada 'Pares clave/valor'. A la izquierda, un cuadro de texto que contiene 'dd_api_key'. A la derecha, un cuadro de texto que contiene una clave de API ofuscada" style="width:80%;" >}}
-   - A continuación, haz clic en **Next** (Siguiente).
-1. En la página **Configurar secreto**, introduce un **Nombre secreto**. Puedes utilizar `datadog/dd_api_key`. A continuación, haz clic en **Next** (Siguiente).
-1. En la página **Configurar rotación**, puedes activar opcionalmente la [rotación automática][3]. A continuación, haz clic en **Next** (Siguiente).
-1. En la página **Revisar**, revisa tus datos secretos. A continuación, haz clic en **Store** (Almacenar).
-1. En AWS Secrets Manager, abre el secreto que creaste. Toma nota del **ARN secreto**.
+### Otorgue permisos al perfil de instancia de EMR EC2 {#grant-permissions-to-emr-ec2-instance-profile}
+El perfil de instancia de EMR EC2 es un rol de IAM asignado a cada instancia de EC2 en un clúster de Amazon EMR cuando se inicia la instancia. Siga [la guía de Amazon][11] para preparar este rol según la necesidad de su aplicación de interactuar con otros servicios de AWS. Es posible que se requieran los siguientes permisos adicionales para Data Observability: Jobs Monitoring.
 
-### Concede permisos al perfil de la instancia EC2 EMR
-El perfil de la instancia EC2 de EMR es un rol IAM asignado a cada instancia EC2 en un clúster de Amazon EMR cuando se inicia la instancia. Sigue [la guía de Amazon][11] para preparar este rol en función de la necesidad de tu aplicación de interactuar con otros servicios AWS. Los siguientes permisos adicionales pueden ser necesarios para Data Observability: Jobs Monitoring.
-
-#### Permisos para obtener el valor secreto utilizando AWS Secrets Manager
-
-<div class="alert alert-danger">
-Estos permisos son <strong>necesarios</strong> si utilizas AWS Secrets Manager.
-</div>
-
-1. En tu [consola de AWS IAM][5], haz clic en **Access management** > **Roles** (Gestión de acceso > Roles) en la barra de navegación izquierda.
-1. Haz clic en el rol IAM que quieres utilizar como perfil de la instancia para tu clúster EMR.
-1. En la página siguiente, en la pestaña **Permisos**, busca la sección **Políticas de permisos** y haz clic en **Add permissions** > **Create inline policy** (Añadir permisos > Crear política en línea).
-1. En la página **Especificar permisos**, busca la sección **Seleccionar un servicio**. En **servicio**, selecciona **Secrets Manager**.
-   {{< img src="data_jobs/emr/specify_permissions.png" alt="Consola de AWS IAM, página Especificar permisos." style="width:80%;" >}}
-   - A continuación, en **Acciones permitidas**, selecciona `GetSecretValue`. Se trata de una acción de **Lectura**.
-   - En **Recursos**, selecciona **Específicos**. A continuación, junto a **Secreto**, haz clic en **Add ARNs** (Añadir ARN) y añade el ARN del secreto que creaste en el primer paso de esta página.
-   - Haz clic en **Siguiente**.
-1. En la página siguiente, dale un nombre a tu política. A continuación, haz clic en **Create policy** (Crear política).
-
-#### Permisos para describir clústeres
+#### Permisos para obtener el valor del secreto mediante AWS Secrets Manager {#permissions-to-get-secret-value-using-aws-secrets-manager}
 
 <div class="alert alert-danger">
-Estos permisos son <strong>necesarios</strong> si <strong>NO</strong> utilizas el rol por defecto, <code>EMR_EC2_DefaultRole</code>.
+Estos permisos son <strong>obligatorios</strong> si utiliza AWS Secrets Manager.
 </div>
 
-1. En tu [consola de AWS IAM][5], haz clic en **Access management** > **Roles** (Gestión de acceso > Roles) en la barra de navegación izquierda.
-1. Haz clic en el rol IAM que quieres utilizar como perfil de la instancia para tu clúster EMR.
-1. En la página siguiente, en la pestaña **Permisos**, busca la sección **Políticas de permisos** y haz clic en **Add permissions** > **Create inline policy** (Añadir permisos > Crear política en línea).
-1. En la página **Especificar permisos**, activa la pestaña **JSON**.
-   - A continuación, copia y pega la siguiente política en el **Editor de políticas**.
+1. En su [consola de AWS IAM][5], haga clic en {{< ui >}}Access management{{< /ui >}} > {{< ui >}}Roles{{< /ui >}} en la barra de navegación izquierda.
+1. Haga clic en el rol de IAM que planea usar como perfil de instancia para su clúster de EMR.
+1. En la página siguiente, en la pestaña {{< ui >}}Permissions{{< /ui >}}, busque la sección {{< ui >}}Permissions policies{{< /ui >}}. Haga clic en {{< ui >}}Add permissions{{< /ui >}} > {{< ui >}}Create inline policy{{< /ui >}}.
+1. En la página {{< ui >}}Specify permissions{{< /ui >}}, busque la sección {{< ui >}}Select a service{{< /ui >}}. En {{< ui >}}Service{{< /ui >}}, seleccione {{< ui >}}Secrets Manager{{< /ui >}}.
+   {{< img src="data_jobs/emr/specify_permissions.png" alt="Consola de AWS IAM, página Specify Permissions." style="width:80%;" >}}
+   - Luego, en {{< ui >}}Actions allowed{{< /ui >}}, seleccione `GetSecretValue`. Esta es una acción {{< ui >}}Read{{< /ui >}}.
+   - En {{< ui >}}Resources{{< /ui >}}, seleccione {{< ui >}}Specific{{< /ui >}}. Luego, junto a {{< ui >}}Secret{{< /ui >}}, haga clic en {{< ui >}}Add ARNs{{< /ui >}} y agregue el ARN del secreto que creó en el primer paso de esta página.
+   - Haga clic en **Next**.
+1. En la página siguiente, asigne un nombre a su política. Luego, haga clic en {{< ui >}}Create policy{{< /ui >}}.
+
+#### Permisos para describir el clúster {#permissions-to-describe-cluster}
+
+<div class="alert alert-danger">
+Estos permisos son <strong>obligatorios</strong> si <strong>NO</strong> está utilizando el rol predeterminado, <code>EMR_EC2_DefaultRole</code>.
+</div>
+
+1. En su [consola de AWS IAM][5], haga clic en {{< ui >}}Access management{{< /ui >}} > {{< ui >}}Roles{{< /ui >}} en la barra de navegación izquierda.
+1. Haga clic en el rol de IAM que planea usar como perfil de instancia para su clúster de EMR.
+1. En la página siguiente, en la pestaña {{< ui >}}Permissions{{< /ui >}}, busque la sección {{< ui >}}Permissions policies{{< /ui >}}. Haga clic en {{< ui >}}Add permissions{{< /ui >}} > {{< ui >}}Create inline policy{{< /ui >}}.
+1. En la página {{< ui >}}Specify permissions{{< /ui >}}, active la pestaña {{< ui >}}JSON{{< /ui >}}.
+   - Luego, copie y pegue la siguiente política en el {{< ui >}}Policy editor{{< /ui >}}
    ```json
    {
       "Version": "2012-10-17",
@@ -88,16 +90,16 @@ Estos permisos son <strong>necesarios</strong> si <strong>NO</strong> utilizas e
       ]
    }
    ```
-   - Haz clic en **Siguiente**.
-1. En la página siguiente, dale un nombre a tu política. A continuación, haz clic en **Create policy** (Crear política).
+   - Haga clic en **Next**.
+1. En la página siguiente, asigne un nombre a su política. Luego, haga clic en {{< ui >}}Create policy{{< /ui >}}.
 
-Toma nota del nombre del rol IAM que planeas utilizar como perfil de la instancia para tu clúster EMR.
+Tome nota del nombre del rol de IAM que planea usar como perfil de instancia para su clúster de EMR.
 
-### Crear y configurar tu clúster EMR
+### Cree y configure su clúster de EMR {#create-and-configure-your-emr-cluster}
 
-Cuando crees un nuevo clúster EMR en la [consola de Amazon EMR][4], añade una acción de arranque en la página **Crear clúster**:
+Cuando cree un nuevo clúster de EMR en la [consola de Amazon EMR][4], agregue una acción de arranque en la página {{< ui >}}Create Cluster{{< /ui >}}:
 
-1. Guarda el siguiente script en un bucket S3 que tu clúster EMR pueda leer. Toma nota de la ruta a este script.
+1. Guarde el siguiente script en un bucket de S3 que su clúster de EMR pueda leer. Tome nota de la ruta a este script.
 
    ```shell
    #!/bin/bash
@@ -105,50 +107,55 @@ Cuando crees un nuevo clúster EMR en la [consola de Amazon EMR][4], añade una 
    # Set required parameter DD_SITE
    export DD_SITE={{< region-param key="dd_site" code="true" >}}
 
-   # Set required parameter DD_API_KEY with Datadog API key.
-   # The commands below assumes the API key is stored in AWS Secrets Manager, with the secret name as datadog/dd_api_key and the key as dd_api_key.
-   # IMPORTANT: Modify if you choose to manage and retrieve your secret differently.
+   # Establezca el parámetro obligatorio DD_API_KEY con la clave de API de Datadog.
+   # Los comandos a continuación asumen que la clave de API está almacenada en AWS Secrets Manager, con el nombre del secreto como datadog/dd_api_key y la clave como dd_api_key.
+   # IMPORTANTE: Modifique si decide administrar y recuperar su secreto de manera diferente.
    SECRET_NAME=datadog/dd_api_key
    export DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
-   # Optional: uncomment to send spark driver and worker logs to Datadog
+   # Opcional: quite el comentario para enviar los registros del controlador y del trabajador de Spark a Datadog
    # export DD_EMR_LOGS_ENABLED=true
 
-   # Download and run the latest init script
+   # Recopile datos de linaje de Spark con OpenLineage para que pueda ver las tablas anteriores y posteriores
+   # de sus trabajos y visualizar canalizaciones completas de Spark. Establezca en false para deshabilitar.
+   export DD_OPENLINEAGE_ENABLED=true
+
+   # Descargue y ejecute el script de inicio más reciente
    curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true
 
    ```
 
-   Opcionalmente, el script puede configurarse añadiendo las siguientes variables de entorno:
-   El script anterior configura los parámetros requeridos, y descarga y ejecuta el último script init para Data Observability: Jobs Monitoring en EMR. Si quieres vincular tu script a una versión específica, puedes sustituir el nombre del archivo en la URL por `install-emr-0.13.5.sh` para utilizar la versión `0.13.5`, por ejemplo. Puedes encontrar el código fuente utilizado para generar este script y los cambios entre versiones del script en el [repositorio del Datadog Agent][12].
+   Optionally, the script can be configured adding the following environment variables:
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Observability: Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
-   Opcionalmente, el script puede configurarse añadiendo las siguientes variables de entorno:
+   Optionally, the script can be configured by adding the following environment variables:
 
-| Variable                 | Descripción                                                                                                                                                      | Valor predeterminado |
+| Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| DD_TAGS                  | Añade etiquetas (tags) a las métricas de rendimiento del clúster EMR y de Spark. Pares clave:valor separados por comas o espacios. Sigue las [convenciones de etiquetado de Datadog][15]. Ejemplo: `env:staging,team:data_engineering` |         |
-| DD_ENV                   | Define la etiqueta de entorno `env` en métricas, trazas (trazas) y logs de este clúster.   |         |
-| DD_EMR_LOGS_ENABLED      | Envía logs de controladores y workers de Spark a Datadog.                                                                                                                  | falso   |
-| DD_LOGS_CONFIG_PROCESSING_RULES | Filtra los logs recopilados con reglas de procesamiento. Consulta [Recopilación avanzada de logs][16] para obtener más información. |         |
+| DD_TAGS                  | Add tags to EMR cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
+| DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
+| DD_OPENLINEAGE_ENABLED   | Collect Spark lineage data with OpenLineage to see upstream and downstream tables of your jobs and visualize entire Spark pipelines. Set to `true` to enable. | false   |
 
 [15]: /es/getting_started/tagging/
 [16]: /es/agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
-1. En la página **Crear clúster**, busca la sección **Acciones de arranque**. Haz clic en **Add** (Añadir) para abrir el cuadro de diálogo **Añadir acción de bootstrap**.
-   {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Consola de Amazon EMR, cuadro de diálogo 'Crear clúster - Añadir acción de arranque'. Campos de texto para nombre, localización del script y argumentos." style="width:80%;" >}}
-   - En **Nombre**, colócale un nombre a tu acción de arranque. Puedes utilizar `datadog_agent`.
-   - En **Localización del script**, introduce la ruta donde almacenaste el script init en S3.
-   - Haz clic en **Add bootstrap action** (Añadir acción de arranque).
+1. On the **Create Cluster** page, find the {{< ui >}}Bootstrap actions{{< /ui >}} section. Click {{< ui >}}Add{{< /ui >}} to bring up the {{< ui >}}Add bootstrap action{{< /ui >}} dialog.
+   {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Consola de Amazon EMR, Create Cluster, cuadro de diálogo Add Bootstrap Action. Campos de texto para el nombre, la ubicación del script y los argumentos." style="width:80%;" >}}
+   - Para {{< ui >}}Name{{< /ui >}}, asigne un nombre a su acción de arranque. Puede usar `datadog_agent`.
+   - Para {{< ui >}}Script location{{< /ui >}}, ingrese la ruta donde almacenó el script de inicialización en S3.
+   - Haga clic en {{< ui >}}Add bootstrap action{{< /ui >}}.
 
-1. En la página **Crear clúster**, busca la sección **Roles de Identity and Access Management (IAM)**. En el menú desplegable **perfil de instancia**, selecciona el rol IAM al que hayas concedido permisos en [Conceder permisos al perfil de la instancia EC2 EMR](#grant-permissions-to-emr-ec2-instance-profile).
+1. En la página **Create Cluster**, busque la sección **Identity and Access Management (IAM) roles**. Para el menú desplegable {{< ui >}}instance profile{{< /ui >}}, seleccione el rol de IAM al que ha otorgado permisos en [Otorgue permisos al perfil de instancia de EMR EC2](#grant-permissions-to-emr-ec2-instance-profile).
 
-Cuando se crea tu clúster, esta acción de arranque instala el Datadog Agent y descarga el rastreador Java en cada nodo del clúster.
+Cuando se crea su clúster, esta acción de arranque instala el Datadog Agent y descarga el rastreador de Java en cada nodo del clúster.
 
-### Especificar el etiquetado de servicios por cada aplicación Spark
+### Especifique el etiquetado de servicio por aplicación Spark {#specify-service-tagging-per-spark-application}
 
-El etiquetado te permite filtrar, agregar y comparar mejor tu telemetría en Datadog. Puedes configurar etiquetas (tags) pasando las opciones `-Ddd.service`, `-Ddd.env`, `-Ddd.version` y `-Ddd.tags` a las propiedades `extraJavaOptions` de tu controlador y ejecutor Spark.
+El etiquetado le permite filtrar, agregar y comparar mejor su telemetría en Datadog. Puede configurar etiquetas pasando las opciones `-Ddd.service`, `-Ddd.env`, `-Ddd.version` y `-Ddd.tags` a las propiedades `extraJavaOptions` de su controlador y ejecutor de Spark.
 
-En Datadog, el nombre de cada trabajo corresponde al valor que definiste para `-Ddd.servicio`.
+En Datadog, el nombre de cada trabajo corresponde al valor que estableció para `-Ddd.service`.
 
 ```shell
 spark-submit \
@@ -157,21 +164,21 @@ spark-submit \
  application.jar
 ```
 
-## Validación
+## Validación {#validation}
 
-En Datadog, consulta la página [Data Observability: Jobs Monitoring][8] para ver una lista de todos tus trabajos de procesamiento de datos.
+En Datadog, consulte la página [Data Observability: Jobs Monitoring][8] para ver una lista de todos sus trabajos de procesamiento de datos.
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
 {{% djm-install-troubleshooting %}}
 
-## Configuración avanzada
+## Configuración avanzada{#advanced-configuration}
 
-### Etiquetar tramos (spans) en tiempo de ejecución
+### Etiquetar tramos en tiempo de ejecución {#tag-spans-at-runtime}
 
 {{% djm-runtime-tagging %}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -180,7 +187,6 @@ En Datadog, consulta la página [Data Observability: Jobs Monitoring][8] para ve
 [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
 [4]: https://console.aws.amazon.com/emr
 [5]: https://console.aws.amazon.com/iam/
-[7]: /es/getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /es/data_jobs
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html

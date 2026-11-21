@@ -16,3 +16,37 @@ entries:
       - PatchDORADeployment
       - PatchDORADeploymentByVersion
     title: Rename DORA Metrics API section to Delivery Performance
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateAIImpactUserActivity
+      - CreateDORADeployment
+      - CreateDORAFailure
+      - CreateDORAIncident
+      - DeleteDORADeployment
+      - DeleteDORAFailure
+      - GetDORADeployment
+      - GetDORAFailure
+      - ListDORADeployments
+      - ListDORAFailures
+      - PatchDORADeployment
+      - PatchDORADeploymentByVersion
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateAIImpactUserActivity
+      - CreateDORADeployment
+      - CreateDORAFailure
+      - CreateDORAIncident
+      - DeleteDORADeployment
+      - DeleteDORAFailure
+      - GetDORADeployment
+      - GetDORAFailure
+      - ListDORADeployments
+      - ListDORAFailures
+      - PatchDORADeployment
+      - PatchDORADeploymentByVersion
+    title: Document rate-limit headers on the shared 429 responses

@@ -29,6 +29,8 @@ Debido a que estos enlaces son definidos por el usuario, usted tiene control sob
 
 Para maximizar el valor de esta integración, documente detalladamente los servicios, dependencias y sistemas involucrados, y proporcione instrucciones claras y paso a paso para resolver el problema. Los Runbooks bien estructurados y específicos permiten a Bits realizar investigaciones más precisas y efectivas.
 
+Bits sigue los enlaces a los que tiene acceso en el mensaje del monitor, como Notebooks y [páginas de Confluence][3].
+
 {{< img src="bits_ai/optimization_example.png" alt="Ejemplo de seguimiento con pasos de optimización aplicados" style="width:100%;" >}}
 
 ## Bits.md {#bitsmd}
@@ -36,6 +38,9 @@ Para maximizar el valor de esta integración, documente detalladamente los servi
 Puede guiar de manera proactiva cómo Bits investiga su entorno creando un archivo `bits.md` en [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` es un archivo Markdown que proporciona contexto estructurado sobre su entorno a Bits. Sirve como guía ligera para mejorar la precisión de la investigación, la construcción de consultas y la alineación de terminología. Agregue conocimiento específico del equipo, como convenciones de etiquetado, patrones arquitectónicos, términos del glosario y mejores prácticas de investigación.
+
+- **Dónde se aplica**: En la configuración de `bits.md`, use las opciones {{< ui >}}Investigations{{< /ui >}} y {{< ui >}}Chat{{< /ui >}} para elegir qué productos de Bits usan el archivo.
+- **Enlaces**: Bits puede seguir enlaces en `bits.md` a los que tiene acceso.
 
 ### Ejemplo de bits.md {#sample-bitsmd}
 
@@ -125,3 +130,4 @@ Para administrar las memorias, incluyendo verlas y eliminarlas, vaya a la column
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: /es/bits_ai/bits_investigation/configure/#confluence

@@ -50,7 +50,9 @@ Rule health insights are in Preview.
 
 Rules may become less effective as your business needs change over time. Monitoring rules for drifting logic is inherently difficult: if a rule results in few signals, that might be by design, or it might be missing issues it was intended to catch.
 
-In the [Detection Rules explorer][8], and the side panel that appears when you click an out-of-the-box rule in that explorer, you can view information about the health of the rule:
+In the [Detection Rules explorer][8], you can use the **Health Status** facet or search for `healthStatus:needs_attention` to filter for rules that Cloud SIEM has detected potential issues with.
+
+In the Detection Rules explorer and the side panel that appears when you click an out-of-the-box rule in that explorer, you can view information about the health of the rule:
 - {{< ui >}}Health Insights{{< /ui >}}: Provides information on whether the fields that are part of a rule appear properly in the logs Cloud SIEM ingests. Datadog categorizes supported rules as either {{< ui >}}Monitoring{{< /ui >}} or {{< ui >}}Needs attention{{< /ui >}}.
 - {{< ui >}}Signal activity{{< /ui >}}: A graph of how many signals the rule has created over the past 30 days.
 

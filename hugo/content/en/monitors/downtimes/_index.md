@@ -54,7 +54,10 @@ Search or use the dropdown menu to choose which monitors to silence. If the fiel
 
 Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be a maximum of 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
+If any SLOs have the same tags as a new downtime, you can create a matching SLO status correction from the downtime editor. For more information, see [Create corrections from monitor downtimes][4].
+
 [3]: /monitors/manage/#monitor-tags
+[4]: /service_level_objectives/#create-corrections-from-monitor-downtimes
 {{% /tab %}}
 {{< /tabs >}}
 

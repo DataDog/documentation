@@ -1,8 +1,7 @@
 ---
-title: Configurar Data Streams Monitoring
+title: Configuración de Data Streams Monitoring
 ---
-
-### Por lenguaje
+### Por lenguaje {#by-language}
 
 {{< card-grid card_width="225px" >}}
   {{< image-card href="/data_streams/java/" src="integrations_logos/java.png" alt="java" >}}
@@ -11,10 +10,11 @@ title: Configurar Data Streams Monitoring
   {{< image-card href="/data_streams/nodejs/" src="integrations_logos/node.png" alt="Node" >}}
   {{< image-card href="/data_streams/go" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/data_streams/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/data_streams/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
 
-### Por tecnología
+### Por tecnología {#by-technology}
 
 {{< card-grid card_width="225px" >}}
   {{< image-card href="/data_streams/setup/technologies/kafka/" src="integrations_logos/kafka.png" alt="Kafka" >}}

@@ -49,7 +49,7 @@ Automated fixes from Bits Remediation is in Preview. To sign up, click <strong>R
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [2]: https://app.datadoghq.com/containers
-[3]: /infrastructure/containers/explorer
+[3]: /containers/monitoring/containers_explorer/
 [4]: https://app.datadoghq.com/container-images
 [5]: /security/cloud_security_management
 [6]: /infrastructure/containers/container_images/

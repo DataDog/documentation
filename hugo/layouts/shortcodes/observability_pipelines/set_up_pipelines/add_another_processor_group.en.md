@@ -1,4 +1,4 @@
-If you want to add another group of processors for a destination:
+To add another group of processors for a destination:
 1. Click the plus sign (**+**) at the bottom of the existing processor group.
 1. Click the name of the processor group to update it.
 1. Optionally, enter a group filter. Only data that match the filter query are sent through the processors in the group. See [Search Syntax][11] for more information.

@@ -40,7 +40,7 @@ Découvrez comment Serverless Monitoring permet à vos équipes de rester agiles
 
 [Datadog Serverless Monitoring][1] offre une visibilité complète sur tous les services gérés sur lesquels reposent vos applications serverless. Elle regroupe au sein d'une unique vue des métriques en temps réel, des logs et des traces fournis par votre service de calcul sans serveur, ainsi que les API entièrement gérées, files d'attente, flux et datastores associés.
 
-Datadog fournit des solutions pour le monitoring de [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps) et [Google Cloud Run](#google-cloud-run).
+Datadog fournit des solutions pour le monitoring de [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), [Google Cloud Run](#google-cloud-run) et [Vercel](#vercel).
 
 ### AWS Lambda {#aws-lambda}
 
@@ -92,6 +92,14 @@ Google Cloud Run est une solution de calcul légère, asynchrone et basée sur l
 
 Datadog fournit également une solution pour [instrumenter vos applications Cloud Run][12] avec un agent serverless pour activer le traçage, les métriques personnalisées et la collecte directe de logs.
 
+### Vercel {#vercel}
+
+Vercel est une plateforme de déploiement de frameworks frontend et de fonctions serverless, comme les applications Next.js. L'[intégration Vercel][15] collecte des logs, des métriques et des traces via les Log Drains et Trace Drains de Vercel. Elle ne nécessite aucune bibliothèque Datadog ni aucune modification de code. La vue de l'application {{< ui >}}Serverless{{< /ui >}} affiche les requêtes, les erreurs et les logs de chaque projet Vercel.
+
+Les erreurs dans les logs de Vercel Functions sont regroupées en problèmes dans [Error Tracking][16]. Cela inclut la sortie `console.error`, les erreurs enregistrées avec Pino ou Winston, les exceptions non interceptées et les plantages de fonctions. Error Tracking fonctionne uniquement à partir des logs, sans traces, mais Error Tracking pour les logs doit être activé dans votre organisation. Les problèmes utilisent le nom du projet Vercel comme `service` et apparaissent sur la page de chaque projet dans la vue de l'application {{< ui >}}Serverless{{< /ui >}}. Consultez [Vercel Error Tracking][17] pour savoir ce que le pipeline de logs de l'intégration extrait.
+
+Pour commencer, installez [Datadog depuis la Marketplace Vercel][18], puis suivez la [configuration de l'intégration Vercel][19].
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -110,3 +118,8 @@ Datadog fournit également une solution pour [instrumenter vos applications Clou
 [12]: /fr/serverless/google_cloud_run
 [13]: /fr/integrations/amazon_step_functions
 [14]: /fr/serverless/step_functions/installation
+[15]: /fr/integrations/vercel/
+[16]: /fr/error_tracking/backend/logs/
+[17]: /fr/integrations/vercel/#error-tracking
+[18]: https://vercel.com/marketplace/datadog
+[19]: /fr/integrations/vercel/#setup

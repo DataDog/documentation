@@ -152,7 +152,9 @@ In containerized environments the problem might be that you have locked down the
 IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. The following options may remedy this issue:
 
  * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well.
- * Use the hostname discovered by cloud-init, by [setting `providers.eks.ec2.useHostnameFromFile` to true][9].
+ * Use the hostname discovered by cloud-init:
+     * With Helm, [set `providers.eks.ec2.useHostnameFromFile` to `true`[9].
+     * With Datadog Operator version 1.29.0 or later, set the `agent.datadoghq.com/cluster-provider` annotation to `eks-ec2-use-hostname-from-file` on the `DatadogAgent`, or on a [DatadogAgentProfile][31] targeting the affected nodes. See the [providers documentation][32].
  * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
 
 ### EC2 hostname with IMDS
@@ -187,7 +189,7 @@ You can use the AWS integration to collect data from CloudWatch, or install a Da
 
 If you removed the AWS integration, but continue to run a Datadog Agent on your EC2 instances, the hosts in your Datadog account continues to have the old host-tags associated with it that were collected from AWS. This is intended behavior, and it does not indicate that the AWS integration or Amazon EC2 integration is still enabled.
 
-You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
+You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the Metrics Catalog and creating a notebook scoped to that host.
 
 By default, host-level tags remain permanently attached to AWS hosts. If you want to permanently remove AWS host tags from a host, you can do this by the following methods:
    - Use the [Remove host tags API endpoint][11] to remove all user-assigned tags for a single host
@@ -223,3 +225,5 @@ By default, host-level tags remain permanently attached to AWS hosts. If you wan
 [28]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
 [29]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
 [30]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+[31]: /containers/datadog_operator/datadog_agent_profiles
+[32]: /containers/datadog_operator/providers

@@ -4,21 +4,21 @@ aliases:
 - /ko/observability_pipelines/destinations/opentelemetry/traces/
 - /ko/observability_pipelines/destinations/opentelemetry/metrics/
 - /ko/observability_pipelines/destinations/prometheus/
-description: Observability Pipelines Worker에서 사용할 수 있는 대상에 대해 알아봅니다.
+description: Observability Pipelines Worker에서 사용할 수 있는 목적지를 알아봅니다.
 disable_toc: false
 further_reading:
 - link: logs/processing/pipelines
-  tag: 설명서
+  tag: 문서
   text: 로그 처리 파이프라인
 title: 대상
 ---
 ## 개요 {#overview}
 
-Observability Pipelines Worker를 사용하여 처리된 로그와 메트릭을 다양한 대상으로 보냅니다. 대부분의 Observability Pipelines 대상은 이벤트를 배치 단위로 다운스트림 통합으로 전송합니다. 자세한 내용은 [Event batching](#event-batching)을 참조하세요. 일부 Observability Pipelines 대상에는 템플릿 구문을 지원하는 필드도 있으므로 특정 필드를 기준으로 해당 필드의 값을 설정할 수 있습니다. 자세한 내용은 [Template syntax](#template-syntax)를 참조하세요.
+Observability Pipelines Worker를 사용하여 처리된 로그와 메트릭을 다양한 목적지로 전송하세요. 대부분의 Observability Pipelines 대상은 이벤트를 배치 단위로 다운스트림 통합으로 전송합니다. 자세한 내용은 [Event batching](#event-batching)을 참조하세요. 일부 Observability Pipelines 대상에는 템플릿 구문을 지원하는 필드도 있으므로 특정 필드를 기준으로 해당 필드의 값을 설정할 수 있습니다. 자세한 내용은 [Template syntax](#template-syntax)를 참조하세요.
 
 **참고**:
 - 파이프라인에는 총 20개의 대상을 추가할 수 있습니다.
-- 파이프라인에 동일한 유형의 대상을 여러 개 추가하는 경우 [시크릿 관리][4]를 사용해야 합니다. 예를 들어, 각각 다른 두 개의 HTTP 클라이언트에 대해 두 개의 HTTP 클라이언트 대상을 추가하는 경우 HTTP 클라이언트 URI에 시크릿 식별자를 사용해야 합니다. 각각 다른 두 개의 HTTP 클라이언트 URI를 저장할 때는 기본 `DESTINATION_HTTP_CLIENT_URI`를 사용할 수 없습니다.
+- 파이프라인에 동일한 유형의 목적지를 여러 개 추가하는 경우 [Secrets Management][4]를 사용해야 합니다. 예를 들어, 각각 다른 두 개의 HTTP 클라이언트에 대해 두 개의 HTTP 클라이언트 대상을 추가하는 경우 HTTP 클라이언트 URI에 시크릿 식별자를 사용해야 합니다. 각각 다른 두 개의 HTTP 클라이언트 URI를 저장할 때는 기본 `DESTINATION_HTTP_CLIENT_URI`를 사용할 수 없습니다.
 
 ## 대상 {#destinations}
 
@@ -102,19 +102,19 @@ Observability Pipelines Worker가 템플릿 구문으로 지정된 필드를 확
 
 다음 표에는 템플릿 구문을 지원하는 대상과 필드, 그리고 Worker가 해당 필드를 확인할 수 없을 때의 동작이 나와 있습니다.
 
-| 대상       | 템플릿 구문을 지원하는 필드                        | 필드를 확인할 수 없는 경우의 동작                                                                                 |
+| 목적지       | 템플릿 구문을 지원하는 필드                        | 필드를 확인할 수 없는 경우의 동작                                                                                 |
 |-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | 인덱스(대량 모드)<br><br>유형, 데이터 세트, 네임스페이스(데이터 스트림 모드) | Worker가 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker가 로그를 삭제합니다. |
+| Amazon Opensearch | Index(Bulk mode)<br><br>Type, Dataset, Namespace(Data streams mode) | Worker는 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker는 로그를 삭제합니다. |
 | Datadog Archives  | Prefix                              | Worker는 `OP_UNRESOLVED_TEMPLATE_LOGS/`이라는 폴더를 생성하고 해당 위치에 로그를 기록합니다.                                |
 | Azure Blob        | Prefix                              | Worker는 `OP_UNRESOLVED_TEMPLATE_LOGS/`이라는 폴더를 생성하고 해당 위치에 로그를 기록합니다.                                |
-| Elasticsearch     | 인덱스(대량 모드)<br><br>유형, 데이터 세트, 네임스페이스(데이터 스트림 모드) | Worker가 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker가 로그를 삭제합니다. |
-| Google Chronicle  | Log type                            | 기본값으로 `DATADOG` 로그 유형을 사용합니다.                                                                                            |
+| Elasticsearch     | Index(Bulk mode)<br><br>Type, Dataset, Namespace(Data streams mode) | Worker는 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker는 로그를 삭제합니다. |
+| Google SecOps     | Log type                            | 기본값으로 `DATADOG` 로그 유형이 사용됩니다.                                                                                            |
 | Google Cloud      | Prefix                              | Worker는 `OP_UNRESOLVED_TEMPLATE_LOGS/`이라는 폴더를 생성하고 해당 위치에 로그를 기록합니다.                                |
-| Opensearch        | 인덱스(대량 모드)<br><br>유형, 데이터 세트, 네임스페이스(데이터 스트림 모드) | Worker가 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker가 로그를 삭제합니다. |
-| Prometheus*        | 테넌트 ID                           | Worker가 메트릭을 삭제합니다.  |
+| Opensearch        | Index(Bulk mode)<br><br>Type, Dataset, Namespace(Data streams mode) | Worker는 `datadog-op` 인덱스에 로그를 씁니다.<br><br>이 필드 중 하나라도 확인할 수 없으면 Worker는 로그를 삭제합니다. |
+| Prometheus*        | Tenant ID                           | Worker는 메트릭을 삭제합니다.  |
 | Splunk HEC        | Index<br>Source type                | Worker는 Splunk에 구성된 기본 인덱스로 로그를 전송합니다.<br>Worker는 기본적으로 `httpevent` 소스 유형을 사용합니다. |
 
-*템플릿에는 `prefix-`와 같은 리터럴 접두사가 있어야 합니다.{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}`는 거부됩니다. Worker가 오류를 기록하고 파이프라인이 시작되지 않습니다.
+*템플릿에는 `prefix-와 같은 리터럴 접두사가 있어야 합니다.{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}`는 거부됩니다. Worker는 오류를 기록하고 파이프라인이 시작되지 않습니다.
 
 #### 예시 {#example}
 
@@ -126,7 +126,7 @@ Observability Pipelines Worker가 템플릿 구문으로 지정된 필드를 확
 
 #### 이벤트 필드 {#event-fields}
 
-스팬 전체에서 값을 읽으려면 `{{ <field_name> }}`를 사용합니다. 예를 들면 다음과 같습니다.
+'{{ <field_name> }}'을 사용하여 개별 로그 이벤트 필드에 접근합니다. 예시는 다음과 같습니다.
 
 ```
 {{ application_id }}
@@ -134,7 +134,7 @@ Observability Pipelines Worker가 템플릿 구문으로 지정된 필드를 확
 
 #### strftime 지정자 {#strftime-specifiers}
 
-날짜 및 시간에는 [strftime 지정자][3]를 사용합니다. 예를 들면 다음과 같습니다.
+날짜 및 시간에는 [strftime 지정자][3]를 사용합니다. 예시는 다음과 같습니다.
 
 ```
 year=%Y/month=%m/day=%d

@@ -1,23 +1,23 @@
 ---
-title: Migrate to the Datadog Distribution of OTel Collector
+title: Migrate to the Agent's Collector
 aliases:
 - /opentelemetry/agent/migration/
 - /opentelemetry/guide/migrate/ddot_collector
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
-  text: "Install the Datadog Distribution of OTel Collector"
+  text: "Set Up the Agent's Collector"
 ---
 
-If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Distribution of OpenTelemetry (DDOT) Collector. The DDOT Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
+Move your pipeline from an upstream OpenTelemetry (OTel) Collector to the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. The Agent's Collector gives you Agent features, such as integrations and Live Containers, alongside your OpenTelemetry pipeline. To keep the Agent out of your pipeline, [migrate to the DDOT Collector][12] instead.
 
-To migrate to the DDOT Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
+To migrate, set up the Agent's Collector and configure your applications to send their telemetry to it.
 
 <div class="alert alert-info">
-The DDOT Collector supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>), the <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a> deployment is available in Preview. If you have an existing gateway architecture, migrate DaemonSet collectors to DDOT by following the instructions in the current guide. Then migrate your gateway layer to DDOT by following <a href="https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/?code-lang=kubernetes_gateway">DDOT Kubernetes Gateway installation guide</a>.
+The Agent's Collector supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>). The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a> deployment is available in Preview. If you have a gateway architecture, first migrate your DaemonSet Collectors with this guide. Then migrate your gateway layer with <a href="https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/?code-lang=kubernetes_gateway">Set Up the Agent's Collector as a Gateway on Kubernetes</a>.
 </div>
 
 ## Prerequisites
@@ -26,7 +26,7 @@ Before starting the migration process, ensure you have:
 
 - A valid Datadog account
 - An OpenTelemetry-instrumented application ready to send telemetry data
-- Access to your current OpenTelemetry Collector configurations
+- Access to your current upstream OpenTelemetry Collector configurations
 - Administrative access to your Kubernetes cluster (Kubernetes v1.29+ is required)
   - **Note**: EKS Fargate environments are not supported
 - Helm v3+
@@ -35,12 +35,12 @@ Before starting the migration process, ensure you have:
 
 Before you begin, review your configuration to see if your existing config is supported by default:
 
-1. Examine your existing OpenTelemetry Collector configuration file (`otel-config.yaml`).
+1. Examine your existing upstream OpenTelemetry Collector configuration file (`otel-config.yaml`).
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
-1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
-1. If your configuration uses `span_name_as_resource_name` or `span_name_remappings`, review the [New Operation Name Mappings guide][11]. The DDOT Collector enables these new mappings by default.
+1. If your setup uses components not included in the Agent by default, follow [Add Components to the Agent's Collector][4].
+1. If your configuration uses `span_name_as_resource_name` or `span_name_remappings`, review the [New Operation Name Mappings guide][11]. The Agent's Collector enables these new mappings by default.
 
-<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
+<div class="alert alert-info">The Agent's Collector can use different configuration defaults than the upstream OpenTelemetry Collector. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from the upstream Collector.</div>
 
 ### Example configuration
 
@@ -94,7 +94,7 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+In this case, follow [Add Components to the Agent's Collector][4].
 
 [4]: /opentelemetry/setup/ddot_collector/custom_components
 {{% /tab %}}
@@ -141,14 +141,14 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you can proceed to installing the DDOT Collector.
+In this case, you can proceed to installing the Agent's Collector.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Agent with OpenTelemetry Collector
+## Install the Agent's Collector {#install-the-agent-with-opentelemetry-collector}
 
-Follow these steps to install the DDOT Collector.
+Follow these steps to install the Agent's Collector.
 
 ### Add the Datadog Helm Repository
 
@@ -186,7 +186,7 @@ datadog:
    {{< /code-block >}}
    Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-1. Enable the OpenTelemetry Collector and configure the essential ports:
+1. Enable the Agent's Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
   ...
@@ -239,9 +239,9 @@ datadog:
     release: helm_release
 {{< /code-block >}}
 
-## Deploy the Agent with OpenTelemetry Collector
+## Deploy the Agent's Collector {#deploy-the-agent-with-opentelemetry-collector}
 
-1. Install or upgrade the Datadog Agent with OpenTelemetry Collector to your Kubernetes environment:
+1. Install or upgrade the Datadog Agent and the Agent's Collector in your Kubernetes environment:
    ```sh
    helm upgrade -i <RELEASE_NAME> datadog/datadog \
      -f datadog-values.yaml \
@@ -249,11 +249,11 @@ datadog:
    ```
 1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
 1. Select the {{< ui >}}OTel Collector Version{{< /ui >}} facet.
-1. Select an Agent and inspect its configuration to verify the new Agent with OpenTelemetry Collector is installed successfully.
+1. Select an Agent and inspect its configuration to verify that the Agent's Collector is installed successfully.
 
 ## Configure your application
 
-To configure your existing application to use Datadog Agent instead of standalone Collector, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with DDOT Collector deployed as a DaemonSet, so the current host needs to be targeted.
+To send telemetry from your existing application to the Datadog Agent instead of the upstream Collector, set the correct OTLP endpoint hostname. The Datadog Agent runs as a DaemonSet, so your application needs to target the current host.
 
 1. Go to your application's Deployment manifest file (`deployment.yaml`).
 1. Add following environment variables to configure the OTLP endpoint:
@@ -274,7 +274,7 @@ env:
 
 ### Operation name mapping differences
 
-If you previously used `span_name_as_resource_name` or `span_name_remappings` configurations in your standalone Collector, you need to adapt your configuration.
+If you previously used `span_name_as_resource_name` or `span_name_remappings` configurations in your upstream Collector, you need to adapt your configuration.
 
 1. Remove these configurations from your Datadog Exporter and Connector settings.
 2. Enable the `enable_operation_and_resource_name_logic_v2` feature flag in your Agent configuration.
@@ -332,12 +332,12 @@ After configuring your application, verify that data is flowing correctly to Dat
    ```
 1. Confirm that telemetry data is being received in your Datadog account. Check logs, traces and metrics to ensure correct data collection and correlation.
 
-## Uninstall standalone Collector
+## Uninstall the upstream Collector
 
-After you've confirmed that all data is being collected correctly in Datadog, you can remove the standalone OpenTelemetry Collector:
+After you've confirmed that all data is being collected correctly in Datadog, you can remove the upstream OpenTelemetry Collector:
 
 1. Ensure all required data is being collected and displayed in Datadog.
-1. Uninstall the open source OpenTelemetry Collector from your environment:
+1. Uninstall the upstream OpenTelemetry Collector from your environment:
    ```sh
    kubectl delete deployment old-otel-collector
    ```
@@ -357,3 +357,4 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [9]: https://app.datadoghq.com/organization-settings/application-keys
 [10]: /getting_started/site/
 [11]: /opentelemetry/guide/migrate/migrate_operation_names/
+[12]: /opentelemetry/migrate/upstream_to_ddot_collector/

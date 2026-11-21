@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "GitHub personal access token Connection exampleactionconnection",
+      "integration": {
+        "type": "Github",
+        "credentials": {
+          "type": "GithubPersonalAccessToken",
+          "access_token": "example-token",
+          "hostname": "github.example.com"
+        }
+      }
+    }
+  }
+}

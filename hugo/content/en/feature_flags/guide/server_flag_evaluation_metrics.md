@@ -22,34 +22,27 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP event egress use the standard tracer URL on port 8126. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+<div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP events use a compatible local relay or, in supported agentless SDK versions, direct intake. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
+
+For the SDK versions that send EVP events, their privacy controls, and direct delivery, see [Server-Side Evaluation Events and Privacy][8].
 
 ## Prerequisites
 
 Before setting up flag evaluation metrics, confirm the following:
 
 - [Server-side feature flags][1] are already configured.
-- For Agent-backed deployments, Datadog Agent 7.32.0 or later is running and can receive OTLP metrics.
+- For deployments that send metrics through a Datadog Agent, Datadog Agent 7.32.0 or later is running and can receive OTLP metrics.
 - For no-Agent serverless deployments, your platform has a supported serverless telemetry path configured.
 - For Java, Node.js, and Python serverless environments, see [Send feature flag telemetry][7].
-- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
-- Your server-side tracer meets the minimum version for flag evaluation metrics support:
+- Your application uses the SDK versions in the [server getting-started guides][1] or later.
 
-| Language | Minimum tracer version |
-| -------- | ---------------------- |
-| .NET     | 3.44.0                 |
-| Go       | 2.8.0                  |
-| Java     | 1.62.0                 |
-| Node.js  | 5.99.0                 |
-| PHP      | 1.21.1                 |
-| Python   | 4.7.0                  |
-| Ruby     | 2.32.0                 |
+Agentless delivery and this metric use independent paths. An SDK that uses agentless delivery can still emit the metric. Configure the required OTLP path through a Datadog Agent or a supported serverless telemetry setup.
 
-Agentless configuration delivery and this metric use independent paths. An agentless SDK can emit the metric when you configure the required OTLP path through a supported Agent-backed or serverless telemetry setup.
+Keep the application's existing flag configuration source. Enabling metrics does not require Agent delivery. Do not add `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`; it can switch an application from agentless delivery to Agent delivery when no source is set explicitly.
 
 ## Step 1: Configure an OTLP receiver
 
-Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For deployments that send metrics through a Datadog Agent, enable the Agent's OTLP receiver, which is off by default. For setup instructions, see [Set Up the Agent's OTLP Endpoint][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
 
 You only need to enable the protocol your application uses (gRPC on port 4317, or HTTP on port 4318).
 
@@ -72,7 +65,7 @@ The Java provider records `feature_flag.evaluations` through the OpenTelemetry S
 {{% tab "Gradle (Groovy)" %}}
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
-    implementation platform('io.opentelemetry:opentelemetry-bom:1.47.0')
+    implementation platform('io.opentelemetry:opentelemetry-bom:1.66.0')
     implementation 'io.opentelemetry:opentelemetry-sdk-metrics'
     implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
 }
@@ -82,7 +75,7 @@ dependencies {
 {{% tab "Gradle (Kotlin)" %}}
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
-    implementation(platform("io.opentelemetry:opentelemetry-bom:1.47.0"))
+    implementation(platform("io.opentelemetry:opentelemetry-bom:1.66.0"))
     implementation("io.opentelemetry:opentelemetry-sdk-metrics")
     implementation("io.opentelemetry:opentelemetry-exporter-otlp")
 }
@@ -96,7 +89,7 @@ dependencies {
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-bom</artifactId>
-            <version>1.47.0</version>
+            <version>1.66.0</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
@@ -174,7 +167,6 @@ services:
 
   app-go:
     environment:
-      - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
       - DD_METRICS_OTEL_ENABLED=true
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://datadog-agent:4318
     depends_on:
@@ -196,7 +188,7 @@ After deploying, confirm metrics are reaching Datadog:
 
 By default, `feature_flag.evaluations` retains only one hour of data. To retain a longer history:
 
-1. Go to [Metrics Summary][4] and search for `feature_flag.evaluations`.
+1. Go to the [Metrics Catalog][4] and search for `feature_flag.evaluations`.
 2. Select the metric and enable **Historical Metrics**.
 
 This is an opt-in setting and is not enabled automatically for OTLP metrics.
@@ -226,7 +218,8 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [1]: /feature_flags/server/
 [2]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /dashboards/
 [6]: /feature_flags/server/java/#installation
 [7]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[8]: /feature_flags/guide/server_evaluation_events/

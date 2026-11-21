@@ -5,41 +5,41 @@ further_reading:
   text: Azure App Service
 - link: /integrations/azure_app_service_environment/
   tag: Documentación
-  text: Entorno de Azure App Service
-title: Instrumentar Azure App Service con serverless-init - Contenedores de Linux
+  text: Azure App Service Environment
+title: Instrumente Azure App Service con serverless-init - Linux Containers
 ---
+## Descripción general {#overview}
 
-## Información general
+<div class="alert alert-info">Para instrumentar sus contenedores de Azure App Service con un sidecar (recomendado), consulte <a href="/serverless/azure_app_services/azure_app_services_container">Instrumente Azure App Service</a>.</div>
 
-<div class="alert alert-info">Para instrumentar tus contenedores Azure App Service con un sidecar (recomendado), consulta <a href="/serverless/azure_app_services/azure_app_services_container">Instrumentar Azure App Service</a>.</div>
+Este método de instrumentación utiliza `serverless-init` y proporciona las siguientes capacidades de monitoreo adicionales para cargas de trabajo de Azure App Service en contenedores Linux:
 
-Este método de instrumentación utiliza `serverless-init` y ofrece las siguientes capacidades de monitorización adicionales para las cargas de trabajo de Azure App Service en contenedores de Linux:
+- Rastreo APM totalmente distribuido mediante instrumentación automática.
+- Vistas de servicio y de traza de APM personalizadas que muestran métricas y metadatos relevantes de Azure App Service.
+- Soporte para instrumentación APM manual para personalizar los spans.
+- `Trace_ID` inyección en los registros de la aplicación.
+- Soporte para enviar métricas personalizadas mediante DogStatsD.
+- Las [métricas mejoradas][18] se distinguen con el espacio de nombres `azure.app_services.enhanced.*`.
 
-- Rastreo totalmente distribuido de APM mediante la instrumentación automática.
-- Vistas personalizadas de servicios y trazas (traces) de APM que incluyen las métricas y los metadatos pertinentes de Azure App Service.
-- Compatibilidad con la instrumentación manual de APM para personalizar tramos (spans).
-- Inyección del `Trace_ID` en los logs de aplicación.
-- Compatibilidad con el envío de métricas personalizadas mediante DogStatsD.
+### Requisitos previos {#prerequisites}
 
-### Requisitos previos
+Asegúrese de tener una [clave de API de Datadog][6] y de utilizar un lenguaje de programación [compatible con un SDK de Datadog][2].
 
-Asegúrate de que dispones de una [clave de la API de Datadog][6] y de que utilizas un lenguaje de programación [compatible con una biblioteca de rastreo de Datadog][2].
+## Instrumente su aplicación {#instrument-your-application}
 
-## Instrumentar tu solicitud
-
-### Archivo Docker
+### Dockerfile {#dockerfile}
 
 Datadog publica nuevas versiones de la imagen de contenedor serverless-init en Docker Hub, gcr.io de Google y ECR de AWS:
 
 | dockerhub.io | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
-| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.AWS/Datadog/serverless-init |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-Las imágenes se etiquetan en función del control de versiones semántico, y cada nueva versión recibe tres etiquetas (tags):
+Las imágenes se etiquetan según el versionado semántico, y cada nueva versión recibe tres etiquetas relevantes:
 
-* `1`, `1-alpine`: utilízalas para hacer un seguimiento de las últimas versiones secundarias, sin cambios importantes.
-* `1.x.x`, `1.x.x-alpine`: utilízalas para fijar una versión precisa de la biblioteca.
-* `latest`, `latest-alpine`: utilízalas para hacer un seguimiento de la última versión, que puede incluir cambios importantes.
+* `1`, `1-alpine`: utilícelas para realizar un seguimiento de las versiones menores más recientes, sin cambios incompatibles
+* `1.x.x`, `1.x.x-alpine`: utilícelas para fijar una versión precisa de la biblioteca
+* `latest`, `latest-alpine`: utilícelas para seguir la versión más reciente, que puede incluir cambios incompatibles
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -47,7 +47,7 @@ Las imágenes se etiquetan en función del control de versiones semántico, y ca
 {{% svl-init-nodejs %}}
 
 {{< /programming-lang >}}
-{{< programming-lang lang="Python" >}}
+{{< programming-lang lang="python" >}}
 
 {{% svl-init-python %}}
 
@@ -79,59 +79,59 @@ Las imágenes se etiquetan en función del control de versiones semántico, y ca
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 2. Configurar la aplicación
+### 2. Configure su aplicación {#2-configure-your-application}
 
-Una vez que el contenedor se ha creado y enviado al registro, el último paso consiste en configurar las variables de entorno obligatorias del Datadog Agent:
-- `DD_API_KEY`: Clave de API Datadog utilizada para enviar datos a tu cuenta Datadog. Debe configurarse como [secreto Azure][7] para mayor privacidad y seguridad.
-- `DD_SITE`: el endpoint y el sitio web de Datadog. Selecciona tu sitio en la parte derecha de esta página. Tu sitio es: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: defínela como `true` para habilitar el rastreo.
+Una vez que el contenedor esté compilado y enviado a su registro, el último paso es configurar las variables de entorno necesarias para el Datadog Agent:
+- `DD_API_KEY`: clave de API de Datadog, utilizada para enviar datos a su cuenta de Datadog. Debe configurarse como un [Azure Secret][7] por privacidad y seguridad.
+- `DD_SITE`: punto de conexión y sitio web de Datadog. Seleccione su sitio en el lado derecho de esta página. Su sitio es: {{< region-param key="dd_site" code="true" >}}.
+- `DD_TRACE_ENABLED`: Establezca en `true` para habilitar el rastreo.
 
-Para obtener más información sobre las variables de entorno y sus funciones, consulta [Configuraciones adicionales](#additional-configurations).
+Para obtener más variables de entorno y su función, consulte [Configuración adicional](#additional-configurations).
 
-### 3. Resultados
+### 3. Resultados {#3-results}
 
-Una vez completado el despliegue, tus métricas y trazas se envían a Datadog. En Datadog, navega hasta **Infrastructure->Serverless** (Infraestructura->Serverless) para ver tus métricas y trazas serverless.
+Una vez completada la implementación, sus métricas y trazas se envían a Datadog. En Datadog, navegue a {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Serverless{{< /ui >}} para ver sus métricas y trazas sin servidor.
 
-## Despliegue
+## Despliegue {#deployment}
 
 {{% aas-workflow-linux %}}
 
-## Configuraciones adicionales
+## Configuración adicional {#additional-configurations}
 
-- **Rastreo avanzado:** el Datadog Agent ya proporciona un rastreo básico para los marcos más populares. Sigue la [guía de rastreo avanzado][2] para obtener más información.
+- **Rastreo avanzado:** El Datadog Agent ya proporciona rastreo básico para frameworks populares. Siga la [guía de rastreo avanzado][2] para obtener más información.
 
-- **Logs:** si utilizas la [integración de Azure][1], tus logs ya se recopilan. Como alternativa, puedes definir la variable de entorno `DD_LOGS_ENABLED` como `true` para capturar los logs de aplicación directamente a través de la instrumentación serverless.
+- **Registros:** Si utiliza la [integración de Azure][1], sus registros ya se están recopilando. Alternativamente, puede establecer la variable de entorno `DD_LOGS_ENABLED` en `true` para capturar los registros de la aplicación directamente a través de la instrumentación sin servidor.
 
-- **Métricas personalizadas:** puedes enviar métricas personalizadas mediante un [cliente de DogStatsD][3]. Para monitorizar Cloud Run y otras aplicaciones serverless, utiliza métricas de [distribución][8]. Las distribuciones ofrecen las agregaciones predeterminadas `avg`, `sum`, `max`, `min` y `count`. En la página Metric Summary (Resumen de métrica), puedes habilitar las agregaciones percentiles (p50, p75, p90, p95, p99) y también gestionar etiquetas. Para monitorizar una distribución para un tipo de métrica gauge, utiliza `avg` tanto para las [agregaciones temporales como espaciales][9]. Para monitorizar una distribución para un tipo de métrica count, utiliza `sum` tanto para las agregaciones temporales como espaciales.
+- **Custom Metrics:** Puede enviar métricas personalizadas utilizando un [cliente DogStatsD][3]. Para monitorear Cloud Run y otras aplicaciones sin servidor, utilice métricas de [distribución][8]. Las distribuciones proporcionan agregaciones de `avg`, `sum`, `max`, `min` y `count` de forma predeterminada. En la página {{< ui >}}Metrics Catalog{{< /ui >}}, puede habilitar agregaciones de percentiles (p50, p75, p90, p95, p99) y también administrar etiquetas. Para monitorear una distribución de un tipo de métrica gauge, utilice `avg` para las [agregaciones de tiempo y espacio][9]. Para monitorear una distribución de un tipo de métrica de conteo (count), utilice `sum` para las agregaciones de tiempo y espacio.
 
-- **Muestreo de trazas:** para gestionar la frecuencia de muestreo de las solicitudes rastreadas de APM en aplicaciones serverless, define la variable de entorno DD_TRACE_SAMPLE_RATE en la función como un valor entre 0,000 (no se rastrea ninguna solicitud de la aplicación de contenedor) y 1,000 (se rastrean todas las solicitudes de la aplicación de contenedor).
+- **Muestreo de trazas:**  Para administrar la tasa de muestreo de solicitudes rastreadas por APM para aplicaciones sin servidor, establezca la variable de entorno DD_TRACE_SAMPLE_RATE en la función con un valor entre 0.000 (sin rastreo de solicitudes de Container App) y 1.000 (rastrear todas las solicitudes de Container App).
 
-Las métricas se calculan en función del 100 % del tráfico de la aplicación, y son precisas independientemente de la configuración del muestreo.
+Las métricas se calculan en función del 100 % del tráfico de la aplicación y siguen siendo precisas independientemente de cualquier configuración de muestreo.
 
-### Variables de entorno
+### Variables de entorno {#environment-variables}
 
 | Variable | Descripción |
 | -------- | ----------- |
-|`DD_API_KEY`| La [clave de la API de Datadog][6]: **obligatoria**.|
-| `DD_SITE` | El [sitio de Datadog][4]: **obligatorio**. |
-| `DD_LOGS_ENABLED` | Cuando es true, envía logs (stdout y stderr) a Datadog. Por defecto, es false. |
-| `DD_LOGS_INJECTION`| Enriquece todos los logs con datos de trazas (trace) de los generadores de logs compatibles en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulta la documentación adicional para [Python][14], [Go][15], y [Ruby][16]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controla la frecuencia de muestreo de la ingesta de trazas entre `0.0` y `1.0`.|
-| `DD_SERVICE`      | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_VERSION`      | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_ENV`          | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_SOURCE`       | Consulta [Etiquetado de servicios unificado][5].                                       |
-| `DD_TAGS`         | Consulta [Etiquetado de servicios unificado][5].                                       |
+|`DD_API_KEY`| [Clave de API de Datadog][6] - **Obligatoria**|
+| `DD_SITE` | [Sitio de Datadog][4] - **Obligatorio** |
+| `DD_LOGS_ENABLED` | Si se establece en true, se envían los registros (stdout y stderr) a Datadog. El valor predeterminado es false. |
+| `DD_LOGS_INJECTION`| Enriquezca todos los registros con datos de trazas para los registradores compatibles en [Java][10], [Node.js][11], [.NET][12] y [PHP][13]. Consulte la documentación adicional para [Python][14], [Go][15] y [Ruby][16]. |
+| `DD_TRACE_SAMPLE_RATE`|  Controla la tasa de muestreo de ingesta de trazas entre `0.0` y `1.0`.|
+| `DD_SERVICE`      | Consulte [unified service tagging][5].                                       |
+| `DD_VERSION`      | Consulte [unified service tagging][5].                                       |
+| `DD_ENV`          | Consulte [unified service tagging][5].                                       |
+| `DD_SOURCE`       | Consulte [unified service tagging][5].                                       |
+| `DD_TAGS`         | Consulte [unified service tagging][5].                                       |
 
-## Resolución de problemas
+## Solución de problemas {#troubleshooting}
 
-Si no recibes datos de trazas o métricas personalizadas como esperabas, habilita **App Service logs** (Logs de App Service) para recibir logs de depuración.
+Si no está recibiendo trazas o datos de métricas personalizadas como esperaba, habilite {{< ui >}}App Service logs{{< /ui >}} para recibir registros de depuración.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
 
-Comparte el contenido del **flujo (stream) de logs** con el [servicio de asistencia de Datadog][17].
+Comparta el contenido de {{< ui >}}Log stream{{< /ui >}} con [Datadog Support][17].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -153,3 +153,4 @@ Comparte el contenido del **flujo (stream) de logs** con el [servicio de asisten
 [15]: /es/tracing/other_telemetry/connect_logs_and_traces/go
 [16]: /es/tracing/other_telemetry/connect_logs_and_traces/ruby
 [17]: /es/help
+[18]: /es/integrations/azure-app-services/#metrics

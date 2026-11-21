@@ -159,9 +159,10 @@ By default, Bits Code has **no internet access** during agent execution. To conf
 
 The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
-| Language | Domains |
+| Category | Domains |
 |---|---|
 | Clojure/JVM | `repo.clojars.org` |
+| Datadog documentation | `docs.datadoghq.com` |
 | Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
 | JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com`, `repo.yarnpkg.com` |

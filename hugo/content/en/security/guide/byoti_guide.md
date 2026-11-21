@@ -45,7 +45,7 @@ ip_address,additional_data,category,intention,source
 Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from [Amazon S3, Azure storage, or Google Cloud storage][10].
 
 <div class="alert alert-info">
-<p>**Usage notes:**</p>
+<p><strong>Usage notes:</strong></p>
 <ul>
 <li>If a primary key is duplicated, it is skipped and an error message about the key is displayed.</li>
 <li>Signals are not enriched. Enrichment only applies to traces.</li>

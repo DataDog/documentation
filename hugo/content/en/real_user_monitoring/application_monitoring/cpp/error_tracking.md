@@ -8,6 +8,9 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
+- link: "https://www.datadoghq.com/blog/monitor-native-apps-datadog-rum/"
+  tag: "Blog"
+  text: "Monitor C and C++ applications with Datadog RUM"
 ---
 
 ## Overview

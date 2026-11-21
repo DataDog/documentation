@@ -1747,7 +1747,7 @@ menu:
         operationids:
           - QueryTimeseriesData
         unstable: []
-        order: 15
+        order: 13
     - name: Query scalar data across multiple products
       url: /api/latest/metrics/query-scalar-data-across-multiple-products/
       identifier: metrics-query-scalar-data-across-multiple-products
@@ -1759,7 +1759,7 @@ menu:
         operationids:
           - QueryScalarData
         unstable: []
-        order: 16
+        order: 14
     - name: List distinct metric volumes by metric name
       url: /api/latest/metrics/list-distinct-metric-volumes-by-metric-name/
       identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -1830,9 +1830,8 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRulesForMetric
-        unstable:
-          - v2
-        order: 23
+        unstable: []
+        order: 21
     - name: Update a tag indexing rule exemption
       url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
       identifier: metrics-update-a-tag-indexing-rule-exemption
@@ -1845,7 +1844,7 @@ menu:
           - UpdateTagIndexingRuleExemption
         unstable:
           - v2
-        order: 26
+        order: 24
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
       identifier: metrics-create-a-tag-indexing-rule-exemption
@@ -1858,7 +1857,7 @@ menu:
           - CreateTagIndexingRuleExemption
         unstable:
           - v2
-        order: 25
+        order: 23
     - name: Get a tag indexing rule exemption
       url: /api/latest/metrics/get-a-tag-indexing-rule-exemption/
       identifier: metrics-get-a-tag-indexing-rule-exemption
@@ -1871,7 +1870,7 @@ menu:
           - GetTagIndexingRuleExemption
         unstable:
           - v2
-        order: 24
+        order: 22
     - name: Delete a tag indexing rule exemption
       url: /api/latest/metrics/delete-a-tag-indexing-rule-exemption/
       identifier: metrics-delete-a-tag-indexing-rule-exemption
@@ -1884,7 +1883,7 @@ menu:
           - DeleteTagIndexingRuleExemption
         unstable:
           - v2
-        order: 35
+        order: 33
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
@@ -1896,7 +1895,7 @@ menu:
         operationids:
           - GetMetricTagCardinalityDetails
         unstable: []
-        order: 13
+        order: 11
     - name: Tag Configuration Cardinality Estimator
       url: /api/latest/metrics/tag-configuration-cardinality-estimator/
       identifier: metrics-tag-configuration-cardinality-estimator
@@ -1908,7 +1907,7 @@ menu:
         operationids:
           - EstimateMetricsOutputSeries
         unstable: []
-        order: 11
+        order: 9
     - name: Related Assets to a Metric
       url: /api/latest/metrics/related-assets-to-a-metric/
       identifier: metrics-related-assets-to-a-metric
@@ -1920,7 +1919,7 @@ menu:
         operationids:
           - ListMetricAssets
         unstable: []
-        order: 12
+        order: 10
     - name: List tags by metric name
       url: /api/latest/metrics/list-tags-by-metric-name/
       identifier: metrics-list-tags-by-metric-name
@@ -1955,9 +1954,8 @@ menu:
           - v2
         operationids:
           - UpdateTagIndexingRule
-        unstable:
-          - v2
-        order: 21
+        unstable: []
+        order: 19
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
       identifier: metrics-get-a-tag-indexing-rule
@@ -1968,9 +1966,8 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRule
-        unstable:
-          - v2
-        order: 20
+        unstable: []
+        order: 18
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
       identifier: metrics-delete-a-tag-indexing-rule
@@ -1981,9 +1978,8 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRule
-        unstable:
-          - v2
-        order: 22
+        unstable: []
+        order: 20
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
       identifier: metrics-reorder-tag-indexing-rules
@@ -1994,9 +1990,8 @@ menu:
           - v2
         operationids:
           - ReorderTagIndexingRules
-        unstable:
-          - v2
-        order: 19
+        unstable: []
+        order: 17
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
       identifier: metrics-create-a-tag-indexing-rule
@@ -2007,9 +2002,8 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRule
-        unstable:
-          - v2
-        order: 18
+        unstable: []
+        order: 16
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
       identifier: metrics-list-tag-indexing-rules
@@ -2020,9 +2014,8 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRules
-        unstable:
-          - v2
-        order: 17
+        unstable: []
+        order: 15
     - name: List tag indexing rule exemptions
       url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
       identifier: metrics-list-tag-indexing-rule-exemptions
@@ -2035,7 +2028,7 @@ menu:
           - ListTagIndexingRuleExemptions
         unstable:
           - v2
-        order: 34
+        order: 32
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -2046,9 +2039,8 @@ menu:
           - v2
         operationids:
           - GetHistoricalMetricsConfiguration
-        unstable:
-          - v2
-        order: 28
+        unstable: []
+        order: 26
     - name: Delete a historical metrics configuration
       url: /api/latest/metrics/delete-a-historical-metrics-configuration/
       identifier: metrics-delete-a-historical-metrics-configuration
@@ -2059,9 +2051,8 @@ menu:
           - v2
         operationids:
           - DeleteHistoricalMetricsConfiguration
-        unstable:
-          - v2
-        order: 29
+        unstable: []
+        order: 27
     - name: Enable historical metrics ingestion
       url: /api/latest/metrics/enable-historical-metrics-ingestion/
       identifier: metrics-enable-historical-metrics-ingestion
@@ -2072,9 +2063,8 @@ menu:
           - v2
         operationids:
           - CreateHistoricalMetricsConfiguration
-        unstable:
-          - v2
-        order: 27
+        unstable: []
+        order: 25
     - name: Update a derived metric
       url: /api/latest/metrics/update-a-derived-metric/
       identifier: metrics-update-a-derived-metric
@@ -2086,7 +2076,7 @@ menu:
         operationids:
           - UpdateDerivedMetric
         unstable: []
-        order: 32
+        order: 30
     - name: Get a derived metric
       url: /api/latest/metrics/get-a-derived-metric/
       identifier: metrics-get-a-derived-metric
@@ -2098,7 +2088,7 @@ menu:
         operationids:
           - GetDerivedMetric
         unstable: []
-        order: 31
+        order: 29
     - name: Delete a derived metric
       url: /api/latest/metrics/delete-a-derived-metric/
       identifier: metrics-delete-a-derived-metric
@@ -2110,7 +2100,7 @@ menu:
         operationids:
           - DeleteDerivedMetric
         unstable: []
-        order: 33
+        order: 31
     - name: Create a derived metric
       url: /api/latest/metrics/create-a-derived-metric/
       identifier: metrics-create-a-derived-metric
@@ -2122,34 +2112,10 @@ menu:
         operationids:
           - CreateDerivedMetric
         unstable: []
-        order: 30
-    - name: Configure tags for multiple metrics
-      url: /api/latest/metrics/configure-tags-for-multiple-metrics/
-      identifier: metrics-configure-tags-for-multiple-metrics
-      parent: metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateBulkTagsMetricsConfiguration
-        unstable: []
-        order: 9
-    - name: Delete tags for multiple metrics
-      url: /api/latest/metrics/delete-tags-for-multiple-metrics/
-      identifier: metrics-delete-tags-for-multiple-metrics
-      parent: metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteBulkTagsMetricsConfiguration
-        unstable: []
-        order: 10
-    - name: Get a list of metrics
-      url: /api/latest/metrics/get-a-list-of-metrics/
-      identifier: metrics-get-a-list-of-metrics
+        order: 28
+    - name: List all metrics with volumes and query activity
+      url: /api/latest/metrics/list-all-metrics-with-volumes-and-query-activity/
+      identifier: metrics-list-all-metrics-with-volumes-and-query-activity
       parent: metrics
       generated: true
       params:
@@ -3416,8 +3382,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 86
     - name: Test an existing rule
       url: /api/latest/security-monitoring/test-an-existing-rule/
@@ -3441,8 +3406,7 @@ menu:
           - v2
         operationids:
           - RestoreSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
@@ -3516,6 +3480,32 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 79
+    - name: Get a rule proposal
+      url: /api/latest/security-monitoring/get-a-rule-proposal/
+      identifier: security-monitoring-get-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 189
+    - name: Start a rule proposal
+      url: /api/latest/security-monitoring/start-a-rule-proposal/
+      identifier: security-monitoring-start-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 188
     - name: Bulk convert rules to Terraform
       url: /api/latest/security-monitoring/bulk-convert-rules-to-terraform/
       identifier: security-monitoring-bulk-convert-rules-to-terraform
@@ -4555,6 +4545,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Search remediation groups
+      url: /api/latest/security-monitoring/search-remediation-groups/
+      identifier: security-monitoring-search-remediation-groups
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRemediationGroups
+        unstable:
+          - v2
+        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -4565,8 +4568,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsSeverity
-        unstable:
-          - v2
+        unstable: []
         order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
@@ -5152,8 +5154,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsAssignee
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
@@ -6309,9 +6310,9 @@ menu:
           - TriggerTests
         unstable: []
         order: 16
-    - name: Search Synthetic tests
-      url: /api/latest/synthetics/search-synthetic-tests/
-      identifier: synthetics-search-synthetic-tests
+    - name: Search Synthetic tests with filters
+      url: /api/latest/synthetics/search-synthetic-tests-with-filters/
+      identifier: synthetics-search-synthetic-tests-with-filters
       parent: synthetics
       generated: true
       params:
@@ -6655,6 +6656,58 @@ menu:
           - GetUsageAttributionTypes
         unstable: []
         order: 10
+    - name: Get your temporary grant request
+      url: /api/latest/usage-metering/get-your-temporary-grant-request/
+      identifier: usage-metering-get-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMyTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 21
+    - name: Cancel your temporary grant request
+      url: /api/latest/usage-metering/cancel-your-temporary-grant-request/
+      identifier: usage-metering-cancel-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 22
+    - name: Create a temporary grant request
+      url: /api/latest/usage-metering/create-a-temporary-grant-request/
+      identifier: usage-metering-create-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 19
+    - name: List your temporary grant requests
+      url: /api/latest/usage-metering/list-your-temporary-grant-requests/
+      identifier: usage-metering-list-your-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMyTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 20
     - name: Get available fields for usage summary
       url: /api/latest/usage-metering/get-available-fields-for-usage-summary/
       identifier: usage-metering-get-available-fields-for-usage-summary
@@ -6693,6 +6746,19 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Get a usage quota
+      url: /api/latest/usage-metering/get-a-usage-quota/
+      identifier: usage-metering-get-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetQuota
+        unstable:
+          - v2
+        order: 27
     - name: Delete a usage quota
       url: /api/latest/usage-metering/delete-a-usage-quota/
       identifier: usage-metering-delete-a-usage-quota
@@ -6756,6 +6822,18 @@ menu:
           - GetUsageObservabilityPipelines
         unstable: []
         order: 3
+    - name: Get monthly usage by resource
+      url: /api/latest/usage-metering/get-monthly-usage-by-resource/
+      identifier: usage-metering-get-monthly-usage-by-resource
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUsageMonthlyResources
+        unstable: []
+        order: 28
     - name: Get hourly usage for Lambda traced invocations
       url: /api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/
       identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
@@ -6840,6 +6918,58 @@ menu:
           - GetUsageApplicationSecurityMonitoring
         unstable: []
         order: 2
+    - name: Revoke a requested temporary grant
+      url: /api/latest/usage-metering/revoke-a-requested-temporary-grant/
+      identifier: usage-metering-revoke-a-requested-temporary-grant
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRequestedTemporaryGrant
+        unstable:
+          - v2
+        order: 26
+    - name: Decide a temporary grant request
+      url: /api/latest/usage-metering/decide-a-temporary-grant-request/
+      identifier: usage-metering-decide-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 25
+    - name: Get an organization temporary grant request
+      url: /api/latest/usage-metering/get-an-organization-temporary-grant-request/
+      identifier: usage-metering-get-an-organization-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 24
+    - name: List organization temporary grant requests
+      url: /api/latest/usage-metering/list-organization-temporary-grant-requests/
+      identifier: usage-metering-list-organization-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 23
     - name: Get Monthly Cost Attribution
       url: /api/latest/usage-metering/get-monthly-cost-attribution/
       identifier: usage-metering-get-monthly-cost-attribution
@@ -7658,6 +7788,742 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Gateway
+      url: /api/latest/ai-gateway/
+      identifier: ai-gateway
+      generated: true
+    - name: Get an AI Gateway routing rule
+      url: /api/latest/ai-gateway/get-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-get-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 28
+    - name: Update an AI Gateway routing rule
+      url: /api/latest/ai-gateway/update-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-update-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 29
+    - name: Create an AI Gateway routing rule
+      url: /api/latest/ai-gateway/create-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-create-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 27
+    - name: List AI Gateway routing rules
+      url: /api/latest/ai-gateway/list-ai-gateway-routing-rules/
+      identifier: ai-gateway-list-ai-gateway-routing-rules
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRoutingRules
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an AI Gateway routing rule
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-routing-rule/
+      identifier: ai-gateway-delete-an-ai-gateway-routing-rule
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayRoutingRule
+        unstable:
+          - v2
+        order: 30
+    - name: Get an AI Gateway rate limit counter summary
+      url: /api/latest/ai-gateway/get-an-ai-gateway-rate-limit-counter-summary/
+      identifier: ai-gateway-get-an-ai-gateway-rate-limit-counter-summary
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimitInstancesSummary
+        unstable:
+          - v2
+        order: 47
+    - name: List AI Gateway rate limit counters
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counters/
+      identifier: ai-gateway-list-ai-gateway-rate-limit-counters
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimitInstances
+        unstable:
+          - v2
+        order: 46
+    - name: Update an AI Gateway rate limit
+      url: /api/latest/ai-gateway/update-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-update-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 43
+    - name: Get an AI Gateway rate limit
+      url: /api/latest/ai-gateway/get-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-get-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 42
+    - name: Archive an AI Gateway rate limit
+      url: /api/latest/ai-gateway/archive-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-archive-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 44
+    - name: Get AI Gateway rate limit usage
+      url: /api/latest/ai-gateway/get-ai-gateway-rate-limit-usage/
+      identifier: ai-gateway-get-ai-gateway-rate-limit-usage
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimitUsage
+        unstable:
+          - v2
+        order: 45
+    - name: List AI Gateway rate limit counter summaries
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counter-summaries/
+      identifier: ai-gateway-list-ai-gateway-rate-limit-counter-summaries
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimitInstancesSummaries
+        unstable:
+          - v2
+        order: 55
+    - name: Create an AI Gateway rate limit
+      url: /api/latest/ai-gateway/create-an-ai-gateway-rate-limit/
+      identifier: ai-gateway-create-an-ai-gateway-rate-limit
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayRateLimit
+        unstable:
+          - v2
+        order: 41
+    - name: List AI Gateway rate limits
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limits/
+      identifier: ai-gateway-list-ai-gateway-rate-limits
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimits
+        unstable:
+          - v2
+        order: 40
+    - name: Set a model pricing override
+      url: /api/latest/ai-gateway/set-a-model-pricing-override/
+      identifier: ai-gateway-set-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 25
+    - name: Get a model pricing override
+      url: /api/latest/ai-gateway/get-a-model-pricing-override/
+      identifier: ai-gateway-get-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 24
+    - name: Delete a model pricing override
+      url: /api/latest/ai-gateway/delete-a-model-pricing-override/
+      identifier: ai-gateway-delete-a-model-pricing-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModelPricing
+        unstable:
+          - v2
+        order: 23
+    - name: Update a model for an AI Gateway provider
+      url: /api/latest/ai-gateway/update-a-model-for-an-ai-gateway-provider/
+      identifier: ai-gateway-update-a-model-for-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModel
+        unstable:
+          - v2
+        order: 21
+    - name: Delete a model from an AI Gateway provider
+      url: /api/latest/ai-gateway/delete-a-model-from-an-ai-gateway-provider/
+      identifier: ai-gateway-delete-a-model-from-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModel
+        unstable:
+          - v2
+        order: 22
+    - name: Add multiple models to an AI Gateway provider
+      url: /api/latest/ai-gateway/add-multiple-models-to-an-ai-gateway-provider/
+      identifier: ai-gateway-add-multiple-models-to-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkCreateAiGatewayModels
+        unstable:
+          - v2
+        order: 20
+    - name: Add a model to an AI Gateway provider
+      url: /api/latest/ai-gateway/add-a-model-to-an-ai-gateway-provider/
+      identifier: ai-gateway-add-a-model-to-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayModel
+        unstable:
+          - v2
+        order: 19
+    - name: List models for an AI Gateway provider
+      url: /api/latest/ai-gateway/list-models-for-an-ai-gateway-provider/
+      identifier: ai-gateway-list-models-for-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModels
+        unstable:
+          - v2
+        order: 18
+    - name: Update an AI Gateway provider
+      url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
+      identifier: ai-gateway-update-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayProvider
+        unstable:
+          - v2
+        order: 16
+    - name: Get an AI Gateway provider
+      url: /api/latest/ai-gateway/get-an-ai-gateway-provider/
+      identifier: ai-gateway-get-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayProvider
+        unstable:
+          - v2
+        order: 15
+    - name: Delete an AI Gateway provider
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-provider/
+      identifier: ai-gateway-delete-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayProvider
+        unstable:
+          - v2
+        order: 17
+    - name: Create an AI Gateway provider
+      url: /api/latest/ai-gateway/create-an-ai-gateway-provider/
+      identifier: ai-gateway-create-an-ai-gateway-provider
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayProvider
+        unstable:
+          - v2
+        order: 14
+    - name: List AI Gateway providers
+      url: /api/latest/ai-gateway/list-ai-gateway-providers/
+      identifier: ai-gateway-list-ai-gateway-providers
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayProviders
+        unstable:
+          - v2
+        order: 13
+    - name: List models available from a provider integration
+      url: /api/latest/ai-gateway/list-models-available-from-a-provider-integration/
+      identifier: ai-gateway-list-models-available-from-a-provider-integration
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayProviderModels
+        unstable:
+          - v2
+        order: 12
+    - name: Get an AI Gateway routing policy
+      url: /api/latest/ai-gateway/get-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-get-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayPolicy
+        unstable:
+          - v2
+        order: 10
+    - name: Delete an AI Gateway routing policy
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-delete-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayPolicy
+        unstable:
+          - v2
+        order: 11
+    - name: Create or replace an AI Gateway routing policy
+      url: /api/latest/ai-gateway/create-or-replace-an-ai-gateway-routing-policy/
+      identifier: ai-gateway-create-or-replace-an-ai-gateway-routing-policy
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertAiGatewayPolicy
+        unstable:
+          - v2
+        order: 9
+    - name: List AI Gateway routing policies
+      url: /api/latest/ai-gateway/list-ai-gateway-routing-policies/
+      identifier: ai-gateway-list-ai-gateway-routing-policies
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayPolicies
+        unstable:
+          - v2
+        order: 8
+    - name: List AI Gateway models by canonical ID
+      url: /api/latest/ai-gateway/list-ai-gateway-models-by-canonical-id/
+      identifier: ai-gateway-list-ai-gateway-models-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModelsByCanonical
+        unstable:
+          - v2
+        order: 7
+    - name: Update an AI Gateway model group
+      url: /api/latest/ai-gateway/update-an-ai-gateway-model-group/
+      identifier: ai-gateway-update-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 34
+    - name: Get an AI Gateway model group
+      url: /api/latest/ai-gateway/get-an-ai-gateway-model-group/
+      identifier: ai-gateway-get-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 33
+    - name: Delete an AI Gateway model group
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-model-group/
+      identifier: ai-gateway-delete-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 35
+    - name: Create an AI Gateway model group
+      url: /api/latest/ai-gateway/create-an-ai-gateway-model-group/
+      identifier: ai-gateway-create-an-ai-gateway-model-group
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayModelGroup
+        unstable:
+          - v2
+        order: 32
+    - name: List AI Gateway model groups
+      url: /api/latest/ai-gateway/list-ai-gateway-model-groups/
+      identifier: ai-gateway-list-ai-gateway-model-groups
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayModelGroups
+        unstable:
+          - v2
+        order: 31
+    - name: Replace AI Gateway governance controls
+      url: /api/latest/ai-gateway/replace-ai-gateway-governance-controls/
+      identifier: ai-gateway-replace-ai-gateway-governance-controls
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayGovernance
+        unstable:
+          - v2
+        order: 37
+    - name: Get AI Gateway governance controls
+      url: /api/latest/ai-gateway/get-ai-gateway-governance-controls/
+      identifier: ai-gateway-get-ai-gateway-governance-controls
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayGovernance
+        unstable:
+          - v2
+        order: 36
+    - name: Replace an AI Gateway data capture override
+      url: /api/latest/ai-gateway/replace-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-replace-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 54
+    - name: Delete an AI Gateway data capture override
+      url: /api/latest/ai-gateway/delete-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-delete-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 53
+    - name: Create an AI Gateway data capture override
+      url: /api/latest/ai-gateway/create-an-ai-gateway-data-capture-override/
+      identifier: ai-gateway-create-an-ai-gateway-data-capture-override
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayDataCaptureOverride
+        unstable:
+          - v2
+        order: 52
+    - name: Get the AI Gateway data capture configuration
+      url: /api/latest/ai-gateway/get-the-ai-gateway-data-capture-configuration/
+      identifier: ai-gateway-get-the-ai-gateway-data-capture-configuration
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayDataCaptureConfiguration
+        unstable:
+          - v2
+        order: 51
+    - name: Get an AI Gateway budget instance summary
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budget-instance-summary/
+      identifier: ai-gateway-get-an-ai-gateway-budget-instance-summary
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudgetInstancesSummary
+        unstable:
+          - v2
+        order: 39
+    - name: Reset a budget instance's spend
+      url: /api/latest/ai-gateway/reset-a-budget-instances-spend/
+      identifier: ai-gateway-reset-a-budget-instances-spend
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResetAiGatewayBudgetInstanceSpend
+        unstable:
+          - v2
+        order: 48
+    - name: List AI Gateway budget instance dimension values
+      url: /api/latest/ai-gateway/list-ai-gateway-budget-instance-dimension-values/
+      identifier: ai-gateway-list-ai-gateway-budget-instance-dimension-values
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgetInstanceDimensions
+        unstable:
+          - v2
+        order: 49
+    - name: Override a budget instance's capacity
+      url: /api/latest/ai-gateway/override-a-budget-instances-capacity/
+      identifier: ai-gateway-override-a-budget-instances-capacity
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - OverrideAiGatewayBudgetInstanceCapacity
+        unstable:
+          - v2
+        order: 50
+    - name: List AI Gateway budget instances
+      url: /api/latest/ai-gateway/list-ai-gateway-budget-instances/
+      identifier: ai-gateway-list-ai-gateway-budget-instances
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgetInstances
+        unstable:
+          - v2
+        order: 38
+    - name: Get an AI Gateway budget's current period
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budgets-current-period/
+      identifier: ai-gateway-get-an-ai-gateway-budgets-current-period
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudgetCurrentPeriod
+        unstable:
+          - v2
+        order: 6
+    - name: Update an AI Gateway budget
+      url: /api/latest/ai-gateway/update-an-ai-gateway-budget/
+      identifier: ai-gateway-update-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAiGatewayBudget
+        unstable:
+          - v2
+        order: 5
+    - name: Get an AI Gateway budget
+      url: /api/latest/ai-gateway/get-an-ai-gateway-budget/
+      identifier: ai-gateway-get-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayBudget
+        unstable:
+          - v2
+        order: 3
+    - name: Archive an AI Gateway budget
+      url: /api/latest/ai-gateway/archive-an-ai-gateway-budget/
+      identifier: ai-gateway-archive-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAiGatewayBudget
+        unstable:
+          - v2
+        order: 4
+    - name: Create an AI Gateway budget
+      url: /api/latest/ai-gateway/create-an-ai-gateway-budget/
+      identifier: ai-gateway-create-an-ai-gateway-budget
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAiGatewayBudget
+        unstable:
+          - v2
+        order: 2
+    - name: List AI Gateway budgets
+      url: /api/latest/ai-gateway/list-ai-gateway-budgets/
+      identifier: ai-gateway-list-ai-gateway-budgets
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayBudgets
+        unstable:
+          - v2
+        order: 1
+    - name: AI Guard
+      url: /api/latest/ai-guard/
+      identifier: ai-guard
+      generated: true
+    - name: Evaluate an AI Guard request
+      url: /api/latest/ai-guard/evaluate-an-ai-guard-request/
+      identifier: ai-guard-evaluate-an-ai-guard-request
+      parent: ai-guard
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EvaluateAIGuardRequest
+        unstable:
+          - v2
+        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
@@ -8077,6 +8943,32 @@ menu:
       url: /api/latest/agent-health/
       identifier: agent-health
       generated: true
+    - name: Get an Agent Health issue
+      url: /api/latest/agent-health/get-an-agent-health-issue/
+      identifier: agent-health-get-an-agent-health-issue
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAgentHealthIssue
+        unstable:
+          - v2
+        order: 3
+    - name: List Agent Health issues
+      url: /api/latest/agent-health/list-agent-health-issues/
+      identifier: agent-health-list-agent-health-issues
+      parent: agent-health
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAgentHealthIssues
+        unstable:
+          - v2
+        order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
       identifier: agent-health-list-active-agent-health-issues
@@ -9344,6 +10236,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Anthropic Usage And Costs Integration
+      url: /api/latest/anthropic-usage-and-costs-integration/
+      identifier: anthropic-usage-and-costs-integration
+      generated: true
+    - name: Update an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/update-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-update-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/get-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-get-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/delete-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-delete-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/create-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-create-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Anthropic Usage and Costs accounts
+      url: /api/latest/anthropic-usage-and-costs-integration/list-anthropic-usage-and-costs-accounts/
+      identifier: anthropic-usage-and-costs-integration-list-anthropic-usage-and-costs-accounts
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnthropicUsageAndCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -9929,6 +10890,49 @@ menu:
           - ListInvestigations
         unstable: []
         order: 2
+    - name: Bits Security Analyst
+      url: /api/latest/bits-security-analyst/
+      identifier: bits-security-analyst
+      generated: true
+    - name: Get a Bits Security Analyst investigation
+      url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
+      identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Count Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/count-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-count-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CountSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 2
+    - name: List Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/list-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-list-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 1
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
       identifier: ci-visibility-github-accounts
@@ -10340,18 +11344,6 @@ menu:
       url: /api/latest/csm-threats/
       identifier: csm-threats
       generated: true
-    - name: Update a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/update-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-update-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 15
     - name: Get a Workload Protection agent rule (US1-FED)
       url: /api/latest/csm-threats/get-a-workload-protection-agent-rule-us1-fed/
       identifier: csm-threats-get-a-workload-protection-agent-rule-us1-fed
@@ -10364,30 +11356,6 @@ menu:
           - GetCloudWorkloadSecurityAgentRule
         unstable: []
         order: 13
-    - name: Delete a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/delete-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-delete-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 16
-    - name: Create a Workload Protection agent rule (US1-FED)
-      url: /api/latest/csm-threats/create-a-workload-protection-agent-rule-us1-fed/
-      identifier: csm-threats-create-a-workload-protection-agent-rule-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateCloudWorkloadSecurityAgentRule
-        unstable: []
-        order: 14
     - name: Get all Workload Protection agent rules (US1-FED)
       url: /api/latest/csm-threats/get-all-workload-protection-agent-rules-us1-fed/
       identifier: csm-threats-get-all-workload-protection-agent-rules-us1-fed
@@ -10400,18 +11368,6 @@ menu:
           - ListCloudWorkloadSecurityAgentRules
         unstable: []
         order: 12
-    - name: Download the Workload Protection policy (US1-FED)
-      url: /api/latest/csm-threats/download-the-workload-protection-policy-us1-fed/
-      identifier: csm-threats-download-the-workload-protection-policy-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DownloadCloudWorkloadPolicyFile
-        unstable: []
-        order: 17
     - name: Update a Workload Protection policy
       url: /api/latest/csm-threats/update-a-workload-protection-policy/
       identifier: csm-threats-update-a-workload-protection-policy
@@ -11587,10 +12543,304 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: ChatGPT Enterprise Integration
+      url: /api/latest/chatgpt-enterprise-integration/
+      identifier: chatgpt-enterprise-integration
+      generated: true
+    - name: Update a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/update-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-update-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/get-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-get-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/delete-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-delete-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a ChatGPT Enterprise integration account
+      url: /api/latest/chatgpt-enterprise-integration/create-a-chatgpt-enterprise-integration-account/
+      identifier: chatgpt-enterprise-integration-create-a-chatgpt-enterprise-integration-account
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateChatGPTEnterpriseIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List ChatGPT Enterprise integration accounts
+      url: /api/latest/chatgpt-enterprise-integration/list-chatgpt-enterprise-integration-accounts/
+      identifier: chatgpt-enterprise-integration-list-chatgpt-enterprise-integration-accounts
+      parent: chatgpt-enterprise-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListChatGPTEnterpriseIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
+    - name: Claude Compliance Integration
+      url: /api/latest/claude-compliance-integration/
+      identifier: claude-compliance-integration
+      generated: true
+    - name: Update a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/update-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-update-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/get-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-get-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/delete-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-delete-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/create-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-create-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Claude Compliance integration accounts
+      url: /api/latest/claude-compliance-integration/list-claude-compliance-integration-accounts/
+      identifier: claude-compliance-integration-list-claude-compliance-integration-accounts
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListClaudeComplianceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/get-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-get-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/delete-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-delete-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 28
+    - name: Create an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/create-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-create-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 27
+    - name: List HCP Terraform persona mappings
+      url: /api/latest/cloud-authentication/list-hcp-terraform-persona-mappings/
+      identifier: cloud-authentication-list-hcp-terraform-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 25
+    - name: Get a Custom OIDC provider
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
+      identifier: cloud-authentication-get-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 18
+    - name: Delete a Custom OIDC provider
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-provider/
+      identifier: cloud-authentication-delete-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 20
+    - name: Create a Custom OIDC provider
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
+      identifier: cloud-authentication-create-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 19
+    - name: List all Custom OIDC providers
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-providers/
+      identifier: cloud-authentication-list-all-custom-oidc-providers
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthProviders
+        unstable:
+          - v2
+        order: 17
+    - name: Get a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-get-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 22
+    - name: Delete a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-delete-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 24
+    - name: Create a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-create-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 23
+    - name: List all Custom OIDC persona mappings
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-persona-mappings/
+      identifier: cloud-authentication-list-all-custom-oidc-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 21
     - name: Get a GitHub cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
@@ -11747,6 +12997,58 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 14
+    - name: Delete an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/delete-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 16
+    - name: Create an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/create-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 15
+    - name: List AWS cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-aws-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-aws-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 13
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
@@ -12171,6 +13473,18 @@ menu:
           - ListCostGCPUsageCostConfigs
         unstable: []
         order: 11
+    - name: Update Custom Costs file
+      url: /api/latest/cloud-cost-management/update-custom-costs-file/
+      identifier: cloud-cost-management-update-custom-costs-file
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomCostsFile
+        unstable: []
+        order: 78
     - name: Get Custom Costs file
       url: /api/latest/cloud-cost-management/get-custom-costs-file/
       identifier: cloud-cost-management-get-custom-costs-file
@@ -13013,6 +14327,75 @@ menu:
         operationids:
           - ListContainers
         unstable: []
+        order: 1
+    - name: CoreWeave Integration
+      url: /api/latest/coreweave-integration/
+      identifier: coreweave-integration
+      generated: true
+    - name: Update a CoreWeave integration account
+      url: /api/latest/coreweave-integration/update-a-coreweave-integration-account/
+      identifier: coreweave-integration-update-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a CoreWeave integration account
+      url: /api/latest/coreweave-integration/get-a-coreweave-integration-account/
+      identifier: coreweave-integration-get-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a CoreWeave integration account
+      url: /api/latest/coreweave-integration/delete-a-coreweave-integration-account/
+      identifier: coreweave-integration-delete-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a CoreWeave integration account
+      url: /api/latest/coreweave-integration/create-a-coreweave-integration-account/
+      identifier: coreweave-integration-create-a-coreweave-integration-account
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCoreWeaveCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List CoreWeave integration accounts
+      url: /api/latest/coreweave-integration/list-coreweave-integration-accounts/
+      identifier: coreweave-integration-list-coreweave-integration-accounts
+      parent: coreweave-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCoreWeaveCloudIntegrationAccounts
+        unstable:
+          - v2
         order: 1
     - name: Customer Org
       url: /api/latest/customer-org/
@@ -13943,6 +15326,36 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: End User Device Monitoring
+      url: /api/latest/end-user-device-monitoring/
+      identifier: end-user-device-monitoring
+      generated: true
+    - name: Get a device
+      url: /api/latest/end-user-device-monitoring/get-a-device/
+      identifier: end-user-device-monitoring-get-a-device
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevice
+        unstable:
+          - v2
+        order: 2
+    - name: Get all devices
+      url: /api/latest/end-user-device-monitoring/get-all-devices/
+      identifier: end-user-device-monitoring-get-all-devices
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevices
+        unstable:
+          - v2
+        order: 1
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs
@@ -14032,6 +15445,32 @@ menu:
           - UpdateIssueState
         unstable: []
         order: 3
+    - name: Snooze an issue
+      url: /api/latest/error-tracking/snooze-an-issue/
+      identifier: error-tracking-snooze-an-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SnoozeIssue
+        unstable:
+          - v2
+        order: 7
+    - name: Get the impact of an error tracking issue
+      url: /api/latest/error-tracking/get-the-impact-of-an-error-tracking-issue/
+      identifier: error-tracking-get-the-impact-of-an-error-tracking-issue
+      parent: error-tracking
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIssueImpact
+        unstable:
+          - v2
+        order: 6
     - name: Update the assignee of an issue
       url: /api/latest/error-tracking/update-the-assignee-of-an-issue/
       identifier: error-tracking-update-the-assignee-of-an-issue
@@ -14261,6 +15700,18 @@ menu:
           - ListExperimentMetricGroups
         unstable: []
         order: 11
+    - name: List experiment holdouts
+      url: /api/latest/experiments/list-experiment-holdouts/
+      identifier: experiments-list-experiment-holdouts
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentHoldouts
+        unstable: []
+        order: 55
     - name: Get experiment diagnostics
       url: /api/latest/experiments/get-experiment-diagnostics/
       identifier: experiments-get-experiment-diagnostics
@@ -14777,6 +16228,175 @@ menu:
           - ListExposureSQLModels
         unstable: []
         order: 20
+    - name: Get bandit traffic summary
+      url: /api/latest/experiments/get-bandit-traffic-summary/
+      identifier: experiments-get-bandit-traffic-summary
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditTrafficSummary
+        unstable:
+          - v2
+        order: 59
+    - name: Stop bandit
+      url: /api/latest/experiments/stop-bandit/
+      identifier: experiments-stop-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StopBandit
+        unstable:
+          - v2
+        order: 66
+    - name: Start bandit
+      url: /api/latest/experiments/start-bandit/
+      identifier: experiments-start-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartBandit
+        unstable:
+          - v2
+        order: 63
+    - name: Resume bandit
+      url: /api/latest/experiments/resume-bandit/
+      identifier: experiments-resume-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ResumeBandit
+        unstable:
+          - v2
+        order: 65
+    - name: Get bandit results
+      url: /api/latest/experiments/get-bandit-results/
+      identifier: experiments-get-bandit-results
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBanditResults
+        unstable:
+          - v2
+        order: 58
+    - name: Refresh bandit
+      url: /api/latest/experiments/refresh-bandit/
+      identifier: experiments-refresh-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RefreshBandit
+        unstable:
+          - v2
+        order: 67
+    - name: List bandit policies
+      url: /api/latest/experiments/list-bandit-policies/
+      identifier: experiments-list-bandit-policies
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBanditPolicies
+        unstable:
+          - v2
+        order: 68
+    - name: Pause bandit
+      url: /api/latest/experiments/pause-bandit/
+      identifier: experiments-pause-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PauseBandit
+        unstable:
+          - v2
+        order: 64
+    - name: Update bandit
+      url: /api/latest/experiments/update-bandit/
+      identifier: experiments-update-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchBandit
+        unstable:
+          - v2
+        order: 61
+    - name: Get bandit
+      url: /api/latest/experiments/get-bandit/
+      identifier: experiments-get-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetBandit
+        unstable:
+          - v2
+        order: 57
+    - name: Delete bandit
+      url: /api/latest/experiments/delete-bandit/
+      identifier: experiments-delete-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteBandit
+        unstable:
+          - v2
+        order: 62
+    - name: Create bandit
+      url: /api/latest/experiments/create-bandit/
+      identifier: experiments-create-bandit
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBandit
+        unstable:
+          - v2
+        order: 60
+    - name: List bandits
+      url: /api/latest/experiments/list-bandits/
+      identifier: experiments-list-bandits
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListBandits
+        unstable:
+          - v2
+        order: 56
     - name: Create experiment
       url: /api/latest/experiments/create-experiment/
       identifier: experiments-create-experiment
@@ -15085,6 +16705,30 @@ menu:
           - GetSavedFilter
         unstable: []
         order: 23
+    - name: Export feature flag change history
+      url: /api/latest/feature-flags/export-feature-flag-change-history/
+      identifier: feature-flags-export-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportFeatureFlagHistory
+        unstable: []
+        order: 26
+    - name: List feature flag change history
+      url: /api/latest/feature-flags/list-feature-flag-change-history/
+      identifier: feature-flags-list-feature-flag-change-history
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFeatureFlagHistory
+        unstable: []
+        order: 25
     - name: Stop a progressive rollout
       url: /api/latest/feature-flags/stop-a-progressive-rollout/
       identifier: feature-flags-stop-a-progressive-rollout
@@ -17960,7 +19604,7 @@ menu:
           - PinModelLabRun
         unstable:
           - v2
-        order: 10
+        order: 12
     - name: Unpin a Model Lab run
       url: /api/latest/model-lab-api/unpin-a-model-lab-run/
       identifier: model-lab-api-unpin-a-model-lab-run
@@ -17973,7 +19617,7 @@ menu:
           - UnpinModelLabRun
         unstable:
           - v2
-        order: 11
+        order: 13
     - name: List Model Lab run artifacts
       url: /api/latest/model-lab-api/list-model-lab-run-artifacts/
       identifier: model-lab-api-list-model-lab-run-artifacts
@@ -17986,7 +19630,7 @@ menu:
           - ListModelLabRunArtifacts
         unstable:
           - v2
-        order: 14
+        order: 16
     - name: Get a Model Lab run
       url: /api/latest/model-lab-api/get-a-model-lab-run/
       identifier: model-lab-api-get-a-model-lab-run
@@ -17999,7 +19643,7 @@ menu:
           - GetModelLabRun
         unstable:
           - v2
-        order: 8
+        order: 10
     - name: Delete a Model Lab run
       url: /api/latest/model-lab-api/delete-a-model-lab-run/
       identifier: model-lab-api-delete-a-model-lab-run
@@ -18012,7 +19656,7 @@ menu:
           - DeleteModelLabRun
         unstable:
           - v2
-        order: 9
+        order: 11
     - name: List Model Lab runs
       url: /api/latest/model-lab-api/list-model-lab-runs/
       identifier: model-lab-api-list-model-lab-runs
@@ -18025,7 +19669,7 @@ menu:
           - ListModelLabRuns
         unstable:
           - v2
-        order: 7
+        order: 9
     - name: Star a Model Lab project
       url: /api/latest/model-lab-api/star-a-model-lab-project/
       identifier: model-lab-api-star-a-model-lab-project
@@ -18052,6 +19696,32 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Add an owner to a Model Lab project
+      url: /api/latest/model-lab-api/add-an-owner-to-a-model-lab-project/
+      identifier: model-lab-api-add-an-owner-to-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddModelLabProjectOwner
+        unstable:
+          - v2
+        order: 7
+    - name: Remove an owner from a Model Lab project
+      url: /api/latest/model-lab-api/remove-an-owner-from-a-model-lab-project/
+      identifier: model-lab-api-remove-an-owner-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveModelLabProjectOwner
+        unstable:
+          - v2
+        order: 8
     - name: List Model Lab project artifacts
       url: /api/latest/model-lab-api/list-model-lab-project-artifacts/
       identifier: model-lab-api-list-model-lab-project-artifacts
@@ -18064,7 +19734,7 @@ menu:
           - ListModelLabProjectArtifacts
         unstable:
           - v2
-        order: 15
+        order: 17
     - name: Get a Model Lab project
       url: /api/latest/model-lab-api/get-a-model-lab-project/
       identifier: model-lab-api-get-a-model-lab-project
@@ -18129,7 +19799,7 @@ menu:
           - ListModelLabRunFacetValues
         unstable:
           - v2
-        order: 13
+        order: 15
     - name: List Model Lab run facet keys
       url: /api/latest/model-lab-api/list-model-lab-run-facet-keys/
       identifier: model-lab-api-list-model-lab-run-facet-keys
@@ -18142,7 +19812,7 @@ menu:
           - ListModelLabRunFacetKeys
         unstable:
           - v2
-        order: 12
+        order: 14
     - name: Get Model Lab artifact content
       url: /api/latest/model-lab-api/get-model-lab-artifact-content/
       identifier: model-lab-api-get-model-lab-artifact-content
@@ -18155,7 +19825,76 @@ menu:
           - GetModelLabArtifactContent
         unstable:
           - v2
-        order: 16
+        order: 18
+    - name: Nebius Cloud Integration
+      url: /api/latest/nebius-cloud-integration/
+      identifier: nebius-cloud-integration
+      generated: true
+    - name: Update a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/update-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-update-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/get-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-get-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/delete-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-delete-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Nebius Cloud integration account
+      url: /api/latest/nebius-cloud-integration/create-a-nebius-cloud-integration-account/
+      identifier: nebius-cloud-integration-create-a-nebius-cloud-integration-account
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateNebiusCloudIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Nebius Cloud integration accounts
+      url: /api/latest/nebius-cloud-integration/list-nebius-cloud-integration-accounts/
+      identifier: nebius-cloud-integration-list-nebius-cloud-integration-accounts
+      parent: nebius-cloud-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNebiusCloudIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Network Device Monitoring
       url: /api/latest/network-device-monitoring/
       identifier: network-device-monitoring
@@ -18810,6 +20549,54 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Create On-Call Page comment
+      url: /api/latest/on-call/create-on-call-page-comment/
+      identifier: on-call-create-on-call-page-comment
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageComment
+        unstable: []
+        order: 30
+    - name: Get On-Call Page
+      url: /api/latest/on-call/get-on-call-page/
+      identifier: on-call-get-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallPage
+        unstable: []
+        order: 29
+    - name: Create On-Call Page
+      url: /api/latest/on-call/create-on-call-page/
+      identifier: on-call-create-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
+    - name: List On-Call Pages
+      url: /api/latest/on-call/list-on-call-pages/
+      identifier: on-call-list-on-call-pages
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallPages
+        unstable: []
+        order: 28
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18886,6 +20673,18 @@ menu:
           - ResolveOnCallPage
         unstable: []
         order: 4
+    - name: Reroute On-Call Page
+      url: /api/latest/on-call-paging/reroute-on-call-page/
+      identifier: on-call-paging-reroute-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RerouteOnCallPage
+        unstable: []
+        order: 5
     - name: Escalate On-Call Page
       url: /api/latest/on-call-paging/escalate-on-call-page/
       identifier: on-call-paging-escalate-on-call-page
@@ -18910,17 +20709,74 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
-    - name: Create On-Call Page
-      url: /api/latest/on-call-paging/create-on-call-page/
-      identifier: on-call-paging-create-on-call-page
-      parent: on-call-paging
+    - name: OpenAI Codex Integration
+      url: /api/latest/openai-codex-integration/
+      identifier: openai-codex-integration
+      generated: true
+    - name: Update an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/update-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-update-an-openai-codex-integration-account
+      parent: openai-codex-integration
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateOnCallPage
-        unstable: []
+          - UpdateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/get-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-get-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/delete-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-delete-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/create-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-create-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Codex integration accounts
+      url: /api/latest/openai-codex-integration/list-openai-codex-integration-accounts/
+      identifier: openai-codex-integration-list-openai-codex-integration-accounts
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAICodexIntegrationAccounts
+        unstable:
+          - v2
         order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
@@ -20008,6 +21864,58 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Managed Archives
+      url: /api/latest/rum-managed-archives/
+      identifier: rum-managed-archives
+      generated: true
+    - name: Create or update an archive configuration
+      url: /api/latest/rum-managed-archives/create-or-update-an-archive-configuration/
+      identifier: rum-managed-archives-create-or-update-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMArchiveConfig
+        unstable: []
+        order: 3
+    - name: Get an archive configuration
+      url: /api/latest/rum-managed-archives/get-an-archive-configuration/
+      identifier: rum-managed-archives-get-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMArchiveConfig
+        unstable: []
+        order: 2
+    - name: Delete an archive configuration
+      url: /api/latest/rum-managed-archives/delete-an-archive-configuration/
+      identifier: rum-managed-archives-delete-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMArchiveConfig
+        unstable: []
+        order: 4
+    - name: List archive configurations
+      url: /api/latest/rum-managed-archives/list-archive-configurations/
+      identifier: rum-managed-archives-list-archive-configurations
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMArchiveConfigs
+        unstable: []
+        order: 1
     - name: RUM Operations
       url: /api/latest/rum-operations/
       identifier: rum-operations
@@ -20132,6 +22040,82 @@ menu:
           - CreateRUMOperation
         unstable: []
         order: 2
+    - name: RUM Recovery
+      url: /api/latest/rum-recovery/
+      identifier: rum-recovery
+      generated: true
+    - name: Search archived sessions
+      url: /api/latest/rum-recovery/search-archived-sessions/
+      identifier: rum-recovery-search-archived-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRUMArchiveSessions
+        unstable: []
+        order: 1
+    - name: Cancel a batch recovery request
+      url: /api/latest/rum-recovery/cancel-a-batch-recovery-request/
+      identifier: rum-recovery-cancel-a-batch-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMRecoveryBatchRequest
+        unstable: []
+        order: 6
+    - name: Get recovery request progress
+      url: /api/latest/rum-recovery/get-recovery-request-progress/
+      identifier: rum-recovery-get-recovery-request-progress
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoveryRequest
+        unstable: []
+        order: 3
+    - name: Create a recovery request
+      url: /api/latest/rum-recovery/create-a-recovery-request/
+      identifier: rum-recovery-create-a-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMRecoveryRequest
+        unstable: []
+        order: 2
+    - name: List batch recovery requests
+      url: /api/latest/rum-recovery/list-batch-recovery-requests/
+      identifier: rum-recovery-list-batch-recovery-requests
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMRecoveryBatchRequests
+        unstable: []
+        order: 4
+    - name: Estimate recoverable sessions
+      url: /api/latest/rum-recovery/estimate-recoverable-sessions/
+      identifier: rum-recovery-estimate-recoverable-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoverySessionCount
+        unstable: []
+        order: 5
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
       identifier: rum-remote-config
@@ -20751,6 +22735,19 @@ menu:
         unstable:
           - v2
         order: 10
+    - name: Delete a user profile
+      url: /api/latest/rum-audience-management/delete-a-user-profile/
+      identifier: rum-audience-management-delete-a-user-profile
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserProfile
+        unstable:
+          - v2
+        order: 11
     - name: Query users
       url: /api/latest/rum-audience-management/query-users/
       identifier: rum-audience-management-query-users
@@ -20816,7 +22813,7 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Rum Metrics
+    - name: RUM Metrics
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
       generated: true
@@ -20880,7 +22877,7 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
-    - name: Rum Replay Heatmaps
+    - name: RUM Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
       generated: true
@@ -20932,7 +22929,7 @@ menu:
           - ListReplayHeatmapSnapshots
         unstable: []
         order: 2
-    - name: Rum Replay Playlists
+    - name: RUM Replay Playlists
       url: /api/latest/rum-replay-playlists/
       identifier: rum-replay-playlists
       generated: true
@@ -21044,7 +23041,7 @@ menu:
           - ListRumReplayPlaylists
         unstable: []
         order: 2
-    - name: Rum Replay Sessions
+    - name: RUM Replay Sessions
       url: /api/latest/rum-replay-sessions/
       identifier: rum-replay-sessions
       generated: true
@@ -21060,7 +23057,7 @@ menu:
           - GetSegments
         unstable: []
         order: 1
-    - name: Rum Replay Viewership
+    - name: RUM Replay Viewership
       url: /api/latest/rum-replay-viewership/
       identifier: rum-replay-viewership
       generated: true
@@ -21112,7 +23109,7 @@ menu:
           - ListRumReplaySessionWatchers
         unstable: []
         order: 4
-    - name: Rum Retention Filters
+    - name: RUM Retention Filters
       url: /api/latest/rum-retention-filters/
       identifier: rum-retention-filters
       generated: true
@@ -21562,82 +23559,6 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
-    - name: Salesforce Integration
-      url: /api/latest/salesforce-integration/
-      identifier: salesforce-integration
-      generated: true
-    - name: Delete a connected Salesforce organization
-      url: /api/latest/salesforce-integration/delete-a-connected-salesforce-organization/
-      identifier: salesforce-integration-delete-a-connected-salesforce-organization
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteSalesforceOrganization
-        unstable: []
-        order: 2
-    - name: Get all connected Salesforce organizations
-      url: /api/latest/salesforce-integration/get-all-connected-salesforce-organizations/
-      identifier: salesforce-integration-get-all-connected-salesforce-organizations
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSalesforceOrganizations
-        unstable: []
-        order: 1
-    - name: Update a Salesforce incident template
-      url: /api/latest/salesforce-integration/update-a-salesforce-incident-template/
-      identifier: salesforce-integration-update-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentTemplate
-        unstable: []
-        order: 5
-    - name: Delete a Salesforce incident template
-      url: /api/latest/salesforce-integration/delete-a-salesforce-incident-template/
-      identifier: salesforce-integration-delete-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentTemplate
-        unstable: []
-        order: 6
-    - name: Create a Salesforce incident template
-      url: /api/latest/salesforce-integration/create-a-salesforce-incident-template/
-      identifier: salesforce-integration-create-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentTemplate
-        unstable: []
-        order: 4
-    - name: Get all Salesforce incident templates
-      url: /api/latest/salesforce-integration/get-all-salesforce-incident-templates/
-      identifier: salesforce-integration-get-all-salesforce-incident-templates
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentTemplates
-        unstable: []
-        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards
@@ -23308,6 +25229,42 @@ menu:
           - ListComponents
         unstable: []
         order: 10
+    - name: Delete an email access policy
+      url: /api/latest/status-pages/delete-an-email-access-policy/
+      identifier: status-pages-delete-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEmailAccessPolicy
+        unstable: []
+        order: 39
+    - name: Create an email access policy
+      url: /api/latest/status-pages/create-an-email-access-policy/
+      identifier: status-pages-create-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEmailAccessPolicy
+        unstable: []
+        order: 37
+    - name: List email access policies
+      url: /api/latest/status-pages/list-email-access-policies/
+      identifier: status-pages-list-email-access-policies
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEmailAccessPolicies
+        unstable: []
+        order: 38
     - name: Update status page
       url: /api/latest/status-pages/update-status-page/
       identifier: status-pages-update-status-page
@@ -24046,6 +26003,75 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Temporal Cloud OpenMetrics Integration
+      url: /api/latest/temporal-cloud-openmetrics-integration/
+      identifier: temporal-cloud-openmetrics-integration
+      generated: true
+    - name: Update a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/update-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-update-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/get-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-get-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/delete-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-delete-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/create-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-create-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Temporal Cloud OpenMetrics accounts
+      url: /api/latest/temporal-cloud-openmetrics-integration/list-temporal-cloud-openmetrics-accounts/
+      identifier: temporal-cloud-openmetrics-integration-list-temporal-cloud-openmetrics-accounts
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporalCloudOpenMetricsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization

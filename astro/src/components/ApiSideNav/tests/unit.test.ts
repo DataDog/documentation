@@ -1,0 +1,307 @@
+import { describe, it, expect } from "vitest";
+import { Window } from "happy-dom";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
+import preactRenderer from "@astrojs/preact/server.js";
+import ApiSideNav from "../ApiSideNav.astro";
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+
+async function createContainer() {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({
+    renderer: preactRenderer,
+    name: "@astrojs/preact",
+  });
+  return container;
+}
+
+const dashboards: ApiCategory = {
+  name: "Dashboards",
+  slug: "dashboards",
+  description: "",
+  operations: [
+    {
+      operationId: "getDashboard",
+      summary: "Get a dashboard",
+      slug: "get-a-dashboard",
+      menuOrder: 1,
+      versions: ["v1"] as const,
+      method: "GET",
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
+    },
+    {
+      operationId: "createDashboard",
+      summary: "Create a dashboard",
+      slug: "create-a-dashboard",
+      menuOrder: 2,
+      versions: ["v1"] as const,
+      method: "POST",
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
+    },
+  ],
+};
+
+const monitors: ApiCategory = {
+  name: "Monitors",
+  slug: "monitors",
+  description: "",
+  operations: [
+    {
+      operationId: "createMonitor",
+      summary: "Create a monitor",
+      slug: "create-a-monitor",
+      menuOrder: 1,
+      versions: ["v1"] as const,
+      method: "POST",
+      deprecated: false,
+      unstable: false,
+      regionUrls: {},
+    },
+  ],
+};
+
+const categories: ApiCategoryStub[] = [dashboards, monitors].map(
+  ({ operations: _operations, ...stub }) => stub,
+);
+
+describe("ApiSideNav component", () => {
+  it("renders a link for every category", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories },
+    });
+
+    expect(html).toContain("Dashboards");
+    expect(html).toContain("/api/latest/dashboards/");
+    expect(html).toContain("Monitors");
+    expect(html).toContain("/api/latest/monitors/");
+  });
+
+  it("renders no operation links when no active category is provided", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories },
+    });
+
+    expect(html).not.toMatch(/<a[^>]*api-side-nav__operation/);
+    expect(html).not.toContain("Get a dashboard");
+    expect(html).not.toContain("Create a monitor");
+  });
+
+  it("renders only the active category's operations", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories, activeCategory: dashboards },
+    });
+
+    expect(html).toContain("Get a dashboard");
+    expect(html).toContain("Create a dashboard");
+    expect(html).not.toContain("Create a monitor");
+
+    // One link per operation in dashboards (2), and no extra ones.
+    const matches = html.match(/<a[^>]*api-side-nav__operation\b/g) ?? [];
+    expect(matches.length).toBe(dashboards.operations.length);
+  });
+
+  it("links each operation to its own page (not a hash anchor)", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories, activeCategory: dashboards },
+    });
+
+    expect(html).toContain("/api/latest/dashboards/get-a-dashboard/");
+    expect(html).not.toContain("#get-a-dashboard");
+  });
+
+  it("flags the current category with the active modifier", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories, activeCategory: dashboards },
+    });
+
+    expect(html).toMatch(/api-side-nav__category--active/);
+  });
+
+  it("flags the current operation with the active modifier when its slug is passed", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: {
+        categories,
+        activeCategory: dashboards,
+        currentOperationSlug: "get-a-dashboard",
+      },
+    });
+
+    expect(html).toMatch(/api-side-nav__operation--active/);
+    // The non-active operation link should still be present without the modifier.
+    expect(html).toContain("Create a dashboard");
+  });
+
+  describe("Overview section", () => {
+    const overviewPages = [
+      { title: "Authorization Scopes", slug: "scopes" },
+      { title: "Rate Limits", slug: "rate-limits" },
+      { title: "Using the API", slug: "using-the-api" },
+    ];
+
+    it("renders an Overview link ahead of the spec categories", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages },
+      });
+
+      expect(html).toContain("Overview");
+      expect(html).toContain("/api/latest/");
+      // Overview is pinned first, above every spec category.
+      expect(html.indexOf("Overview")).toBeLessThan(html.indexOf("Dashboards"));
+    });
+
+    it("collapses the sub pages when the current page is outside the section", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, activeCategory: dashboards },
+      });
+
+      expect(html).toContain("Overview");
+      expect(html).not.toContain("Rate Limits");
+      expect(html).not.toContain("Using the API");
+    });
+
+    it("lists the sub pages when the API root is the current page", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, isOverviewSection: true },
+      });
+
+      expect(html).toContain("Rate Limits");
+      expect(html).toContain("/api/latest/rate-limits/");
+      expect(html).toContain("Using the API");
+      expect(html).toContain("Authorization Scopes");
+    });
+
+    it("flags Overview as active on the API root, with no sub page active", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, isOverviewSection: true },
+      });
+
+      expect(html).toMatch(/api-side-nav__category--active/);
+      expect(html).not.toMatch(/api-side-nav__operation--active/);
+    });
+
+    it("flags the current sub page with the active modifier", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: {
+          categories,
+          overviewPages,
+          isOverviewSection: true,
+          activeOverviewPageSlug: "rate-limits",
+        },
+      });
+
+      expect(html).toMatch(/api-side-nav__operation--active/);
+      // Sibling sub pages stay listed without the modifier.
+      expect(html).toContain("Using the API");
+    });
+
+    it("renders nothing extra when no overview pages are supplied", async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories },
+      });
+
+      expect(html).not.toContain("Overview");
+    });
+  });
+
+  describe("Changelog link", () => {
+    const overviewPages = [{ title: "Rate Limits", slug: "rate-limits" }];
+    const parserWindow = new Window();
+
+    async function renderNav(
+      props: Record<string, unknown>,
+    ): Promise<Document> {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, ...props },
+      });
+      return new parserWindow.DOMParser().parseFromString(
+        html,
+        "text/html",
+      ) as unknown as Document;
+    }
+
+    function topLevelLinks(doc: Document): Element[] {
+      return [...doc.querySelectorAll(".api-side-nav__list > li > a")];
+    }
+
+    function changelogLink(doc: Document): Element | undefined {
+      return topLevelLinks(doc).find(
+        (link) => link.textContent?.trim() === "Changelog",
+      );
+    }
+
+    it("sits right after Overview, ahead of the spec categories", async () => {
+      const doc = await renderNav({});
+      expect(
+        topLevelLinks(doc).map((link) => link.textContent?.trim()),
+      ).toEqual(["Overview", "Changelog", "Dashboards", "Monitors"]);
+      expect(changelogLink(doc)?.getAttribute("href")).toBe("/api/changelog/");
+    });
+
+    it("is active and current on a changelog page", async () => {
+      const doc = await renderNav({ isChangelogSection: true });
+      const link = changelogLink(doc);
+      expect(link?.classList.contains("api-side-nav__category--active")).toBe(
+        true,
+      );
+      expect(link?.getAttribute("aria-current")).toBe("page");
+      expect(
+        doc.querySelectorAll(".api-side-nav__category--active").length,
+      ).toBe(1);
+    });
+
+    it("is inactive elsewhere", async () => {
+      const doc = await renderNav({ activeCategory: dashboards });
+      const link = changelogLink(doc);
+      expect(link?.classList.contains("api-side-nav__category--active")).toBe(
+        false,
+      );
+      expect(link?.hasAttribute("aria-current")).toBe(false);
+    });
+  });
+
+  it("renders the SearchBar in the dedicated slot at the top of the nav", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories },
+    });
+
+    expect(html).toMatch(/api-side-nav__search/);
+    // The Preact island's input is server-rendered too, so the markup is present.
+    expect(html).toContain("search-bar__input");
+  });
+
+  it("emits an inline script that scrolls the active section into view", async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: {
+        categories,
+        activeCategory: dashboards,
+        currentOperationSlug: "get-a-dashboard",
+      },
+    });
+
+    expect(html).toContain(".api-side-nav__category--active");
+    expect(html).toContain("scrollTop");
+    // The script must come after the list so the active section is already parsed.
+    const listEnd = html.lastIndexOf("</ul>");
+    const scriptStart = html.indexOf("scrollTop");
+    expect(scriptStart).toBeGreaterThan(listEnd);
+  });
+});
