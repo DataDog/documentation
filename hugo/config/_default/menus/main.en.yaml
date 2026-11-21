@@ -5714,6 +5714,16 @@ menu:
       identifier: data_obs_postgres
       parent: transactional_databases
       weight: 1000000
+    - name: MySQL
+      url: data_observability/quality_monitoring/transactional_databases/mysql
+      identifier: data_obs_mysql
+      parent: transactional_databases
+      weight: 2000000
+    - name: SQL Server
+      url: data_observability/quality_monitoring/transactional_databases/sql_server
+      identifier: data_obs_sql_server
+      parent: transactional_databases
+      weight: 3000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
       identifier: elt_integrations
