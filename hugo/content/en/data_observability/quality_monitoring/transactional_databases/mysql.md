@@ -37,9 +37,9 @@ Before you begin, make sure you have:
 
 ## Enable Remote Configuration
 
-Data Observability uses [Remote Configuration][4] to deliver monitor queries to the Agent. When you create a data quality monitor in Datadog, its query is pushed to the Agent that owns the instance, and the Agent's MySQL check runs it against your database on the monitor's schedule.
+Data Observability uses [Remote Configuration][4] to deliver monitor queries to the Agent. When you create a data quality monitor in Datadog, Datadog sends its query to the Agent that owns the instance. The Agent's MySQL check runs the query against your database on the monitor's schedule.
 
-Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but any monitor you create against them stays empty because the Agent never receives the query to run.
+Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but monitors you create on them stay empty. The Agent never receives the queries to run.
 
 Remote Configuration is on by default in most environments, but it has to be enabled in all three of the following places. Confirm each one:
 
@@ -61,7 +61,7 @@ Each Agent's Remote Configuration status is also listed on the [Remote Configura
 
 ## Set up the Datadog database user
 
-1. Create the `datadog` user and grant its base permissions as described in [Grant the Agent access][11] for self-hosted MySQL, or in the equivalent step of the [setup guide for your hosting type][3]. If Database Monitoring already runs against this instance, the user exists, so skip this step.
+1. Create the `datadog` user and grant its base permissions. Follow [Grant the Agent access][11] for self-hosted MySQL, or the equivalent step in the [setup guide for your hosting type][3]. If Database Monitoring already runs against this instance, the user exists, so skip this step.
 
 2. Grant `SELECT` on each database you want to track. Data Observability needs it to compute row counts, column-level metrics, and custom SQL results:
 
@@ -71,7 +71,7 @@ Each Agent's Remote Configuration status is also listed on the [Remote Configura
 
    `SELECT` also makes the tables visible to schema collection, which only collects tables the user holds a privilege on. The `REFERENCES` privilege that Database Monitoring recommends for schema collection is not enough for Data Observability, because it does not allow reading table data.
 
-3. If the `datadog` user also runs Database Monitoring, raise its connection limit by one. Data Observability uses one additional connection, so the limit of `5` from the Database Monitoring setup becomes `6`:
+3. If the `datadog` user also runs Database Monitoring, increase its connection limit by one. Data Observability uses one additional connection, so the limit of `5` from the Database Monitoring setup becomes `6`:
 
    ```sql
    ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 6;
@@ -79,12 +79,14 @@ Each Agent's Remote Configuration status is also listed on the [Remote Configura
 
 ### Restrict to specific tables (optional)
 
-To limit collection to a subset of tables, grant `SELECT` on each table instead of on the whole database:
+To limit Data Observability to a subset of tables, grant `SELECT` on each table instead of on the whole database:
 
 ```sql
 GRANT SELECT ON <DATABASE_NAME>.orders TO datadog@'%';
 GRANT SELECT ON <DATABASE_NAME>.users TO datadog@'%';
 ```
+
+If the `datadog` user also holds the `REFERENCES` privilege on other tables for Database Monitoring schema collection, those tables still appear in Data Observability. Monitors on them fail, because the user can't read their data.
 
 ## Configure the MySQL integration
 
@@ -172,7 +174,7 @@ After your tables appear in the catalog, you can [create Data Observability moni
 
 Table freshness monitors are not available for MySQL tables. To track freshness, create a freshness monitor on a datetime column.
 
-Monitors run on the schedule you set in [Monitor schedule][16]. Monitors set to {{< ui >}}Manual{{< /ui >}} don't run on MySQL, so select {{< ui >}}Scheduled{{< /ui >}}. Keep `SELECT` privileges in place for the `datadog` user on all referenced tables; monitors fail if access is revoked.
+Monitors run on the schedule you set in [Monitor schedule][16]. Monitors set to {{< ui >}}Manual{{< /ui >}} don't run on MySQL, so select {{< ui >}}Scheduled{{< /ui >}}. Keep `SELECT` privileges in place for the `datadog` user on all referenced tables. Monitors fail if access is revoked.
 
 A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui >}}. Monitor queries run only while the Agent is running, so if the Agent stops, your monitors record no values until it restarts. If a monitor reports no data, check that:
 

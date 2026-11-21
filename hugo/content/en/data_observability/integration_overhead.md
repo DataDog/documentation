@@ -23,14 +23,14 @@ further_reading:
 
 Data Observability monitors your data through two products, each with a different overhead profile:
 
-- **Quality Monitoring** evaluates data-quality metrics (such as freshness, row count, and column statistics) on a schedule. Depending on the warehouse and metric, an evaluation either reads table metadata or runs a SQL query against your data, so its cost is measured in **warehouse compute** (for example, Snowflake credits, Databricks DBUs, or BigQuery bytes scanned). On PostgreSQL, MySQL, and SQL Server, the Datadog Agent runs these queries against your database, so the cost is load on your database server.
+- **Quality Monitoring** evaluates data-quality metrics (such as freshness, row count, and column statistics) on a schedule. Depending on the warehouse and metric, an evaluation either reads table metadata or runs a SQL query against your data. Its cost is measured in **warehouse compute** (for example, Snowflake credits, Databricks DBUs, or BigQuery bytes scanned). On PostgreSQL, MySQL, and SQL Server, the Datadog Agent runs these queries against your database, so the cost is load on your database server.
 - **Jobs Monitoring** observes the performance of your jobs by running the **Datadog Agent** on your compute (for example, Databricks or Spark clusters). The Agent shares a small amount of the CPU and memory you already provision for your workloads.
 
 This page describes both overhead sources and how to control them. Actual cost depends heavily on your environment: warehouse size, the amount of data scanned, how often monitors run, and warehouse auto-stop settings. This page focuses on what consumes resources, not a single benchmark number.
 
 ## Quality Monitoring overhead
 
-A Data Observability monitor evaluates its metric on the schedule you set in [Monitor schedule][1]: {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or a {{< ui >}}Custom schedule{{< /ui >}} cron expression that runs as often as every 15 minutes. A {{< ui >}}Manual{{< /ui >}} (Preview) monitor runs only when triggered through the API, and doesn't run on PostgreSQL, MySQL, or SQL Server. Each time a monitor runs, Data Observability collects the metric value, either by reading table metadata or by running a query against your data. How each metric is collected depends on the platform. Data Observability support for ClickHouse Cloud, Microsoft Fabric Warehouse, PostgreSQL, MySQL, and SQL Server is in Preview.
+A Data Observability monitor evaluates its metric on the schedule you set in [Monitor schedule][1]. Preset schedules range from {{< ui >}}Hourly{{< /ui >}} to {{< ui >}}Daily{{< /ui >}}, and a {{< ui >}}Custom schedule{{< /ui >}} can run as often as every 15 minutes. A {{< ui >}}Manual{{< /ui >}} (Preview) monitor runs only when triggered through the API. Manual monitors don't run on PostgreSQL, MySQL, or SQL Server. Each time a monitor runs, Data Observability collects the metric value, either by reading table metadata or by running a query against your data. How each metric is collected depends on the platform. Data Observability support for ClickHouse Cloud, Microsoft Fabric Warehouse, PostgreSQL, MySQL, and SQL Server is in Preview.
 
 {{< tabs >}}
 {{% tab "Snowflake" %}}
@@ -58,17 +58,17 @@ On Databricks, every metric is collected by running a SQL statement on the SQL w
 
 On BigQuery, **row count** and **table freshness** are read through BigQuery's table metadata API (equivalent to a `tables.get` call). No query runs and no bytes are scanned, so these checks incur no BigQuery query cost.
 
-**Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, and column-level freshness) and **Custom SQL** run as BigQuery SQL against your tables and are billed by the data they process—bytes scanned under on-demand pricing, or slot time under capacity pricing. Column metrics on the same table that share the same filter and grouping are combined into a single query.
+**Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, and column-level freshness) and **Custom SQL** run as BigQuery SQL against your tables and are billed by the data they process: bytes scanned under on-demand pricing, or slot time under capacity pricing. Column metrics on the same table that share the same filter and grouping are combined into a single query.
 
 {{% /tab %}}
 {{% tab "Redshift" %}}
 
-On Redshift, every metric is collected by running a SQL query on the provisioned cluster or Serverless workgroup you connect, so each evaluation uses Redshift compute.
+On Redshift, Datadog collects every metric by running a SQL query on the provisioned cluster or Serverless workgroup you connect. Each evaluation uses Redshift compute.
 
 | Metric | Statement run on Redshift | Notes |
 |---|---|---|
 | **Row count** | `SELECT COUNT(1) FROM <table>` | An aggregate query against the table. |
-| **Table freshness** | *(no query)* | Redshift has no table freshness monitor. Use column-level freshness instead. |
+| **Table freshness** | *(no query)* | Redshift doesn't support table freshness monitors. Use column-level freshness instead. |
 | **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, column freshness) | Aggregate `SELECT` over the column | An aggregate query against the table. Column metrics on the same table that share the same filter and grouping are combined into a single query. |
 | **Custom SQL** | Your query, run as written | Cost is whatever your query costs to run. |
 
@@ -89,7 +89,7 @@ On Microsoft Fabric Warehouse, every metric is collected by running a T-SQL quer
 | Metric | Statement run on the SQL endpoint | Notes |
 |---|---|---|
 | **Row count** | `SELECT COUNT_BIG(1) FROM <table>` | An aggregate query against the table. |
-| **Table freshness** | *(no query)* | Fabric doesn't expose a table-level last-modified time, so there is no table freshness monitor. Use column-level freshness instead. |
+| **Table freshness** | *(no query)* | Fabric doesn't expose a table-level last-modified time, so Datadog doesn't collect table freshness on Fabric. Use column-level freshness instead. |
 | **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, column freshness) | Aggregate `SELECT` over the column | An aggregate query against the table. Column metrics on the same table that share the same filter and grouping are combined into a single query. |
 | **Custom SQL** | Your query, run as written | Cost is whatever your query costs to run. |
 
@@ -101,7 +101,7 @@ On PostgreSQL, the Datadog Agent runs every monitor query against your database 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
 | **Row count** | `SELECT COUNT(1) FROM <table>` | An aggregate query against the table. |
-| **Table freshness** | *(no query)* | PostgreSQL has no table freshness monitor. Use column-level freshness instead. |
+| **Table freshness** | *(no query)* | PostgreSQL doesn't support table freshness monitors. Use column-level freshness instead. |
 | **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, column freshness) | Aggregate `SELECT` over the column | An aggregate query against the table. Column metrics on the same table that share the same filter and grouping are combined into a single query. |
 | **Custom SQL** | Your query, run as written | Cost is whatever your query costs to run. |
 
@@ -110,12 +110,12 @@ Separately from monitor queries, the Agent collects schema metadata every 600 se
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-On MySQL, the Datadog Agent runs every monitor query against your database through its MySQL check. Datadog delivers the queries to the Agent over Remote Configuration, and the Agent runs the queries that are due one at a time over a single connection. If the same database user also runs Database Monitoring, Data Observability uses one additional connection.
+On MySQL, the Datadog Agent runs every monitor query against your database through its MySQL check. Datadog delivers the queries to the Agent over Remote Configuration. The Agent runs the queries that are due one at a time over a single connection. If the same database user also runs Database Monitoring, Data Observability uses one additional connection.
 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
 | **Row count** | `SELECT COUNT(1) FROM <database>.<table>` | An aggregate query against the table. |
-| **Table freshness** | *(no query)* | MySQL has no table freshness monitor. Use column-level freshness instead. |
+| **Table freshness** | *(no query)* | MySQL doesn't support table freshness monitors. Use column-level freshness instead. |
 | **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, column freshness) | Aggregate `SELECT` over the column | An aggregate query against the table. Column metrics on the same table that share the same filter and grouping are combined into a single query. |
 | **Custom SQL** | Your query, run as written | Cost is whatever your query costs to run. |
 
@@ -129,7 +129,7 @@ On SQL Server, the Datadog Agent runs every monitor query against your database 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
 | **Row count** | `SELECT COUNT_BIG(1) FROM <table>` | An aggregate query against the table. |
-| **Table freshness** | *(no query)* | SQL Server has no table freshness monitor. Use column-level freshness instead. |
+| **Table freshness** | *(no query)* | SQL Server doesn't support table freshness monitors. Use column-level freshness instead. |
 | **Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, column freshness) | Aggregate `SELECT` over the column | An aggregate query against the table. Column metrics on the same table that share the same filter and grouping are combined into a single query. |
 | **Custom SQL** | Your query, run as written | Cost is whatever your query costs to run. |
 
@@ -142,9 +142,9 @@ Separately from monitor queries, the Agent collects schema metadata every 600 se
 
 Warehouse compute consumed by Quality Monitoring scales with:
 
-- **Cadence**: an hourly monitor reruns its query 24 times as often as a daily monitor, and a custom schedule that runs every 15 minutes reruns it 96 times a day.
+- **Cadence**: an hourly monitor reruns its query 24 times as often as a daily monitor. A custom schedule that runs every 15 minutes reruns it 96 times a day.
 - **Number of distinct queries**: cost scales with the number of distinct *(table, filter, grouping)* combinations being monitored, not the raw number of metrics. Multiple column metrics on the same table are batched into one query.
-- **Data scanned per query**: column-statistic queries (and Custom SQL) are aggregates that scan table data, so larger tables and partitions cost more on every warehouse. Row count runs `COUNT` against the table on Databricks, Redshift, Microsoft Fabric Warehouse, PostgreSQL, MySQL, and SQL Server. On Snowflake, BigQuery, and ClickHouse Cloud, it is a metadata read that does not grow with table size, except for ClickHouse tables with no stored row count. Table freshness is lightweight where it is available: metadata reads on Snowflake, BigQuery, and ClickHouse Cloud, and metadata commands on Databricks. On the other platforms, track freshness with column-level freshness, which is an aggregate over the column.
+- **Data scanned per query**: column-statistic queries (and Custom SQL) are aggregates that scan table data, so larger tables and partitions cost more. Row count runs `COUNT` against the table on Databricks, Redshift, Microsoft Fabric Warehouse, PostgreSQL, MySQL, and SQL Server. On Snowflake, BigQuery, and ClickHouse Cloud, it is a metadata read that does not grow with table size. ClickHouse tables with no stored row count are the exception. Table freshness is lightweight where it is available: metadata reads on Snowflake, BigQuery, and ClickHouse Cloud, and metadata commands on Databricks. On the other platforms, track freshness with column-level freshness, which is an aggregate over the column.
 - **Warehouse warm time**: on warehouse-based platforms (Snowflake, Databricks), the dominant factor on most bills is how long your warehouse stays running. Frequent checks against a warehouse with a long idle timeout keep it warm and accrue cost even between queries. BigQuery on-demand is serverless and bills only by bytes scanned, so it has no warm-time cost. On ClickHouse Cloud, a query against an idle service wakes it up.
 
 Data Observability runs these queries with bounded concurrency and a per-query timeout. A backlog of monitors does not flood your warehouse with unbounded parallel queries.
@@ -195,7 +195,7 @@ Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agen
 
 These integrations capture run, job, and dataset metadata and emit events at run lifecycle points. The cost is proportional to the number of runs, tasks, and the metadata collected, not to your data volume.
 
-- **Airflow**: the [`apache-airflow-providers-openlineage`][5] provider runs in your Airflow schedulers and workers and emits an event at task and DAG lifecycle points. Its [configuration reference][6] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
+- **Airflow**: the [`apache-airflow-providers-openlineage`][5] provider runs in your Airflow schedulers and workers and emits an event at task and DAG life cycle points. Its [configuration reference][6] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
 - **dbt**: for dbt Core, the [`openlineage-dbt`][7] wrapper (`dbt-ol`) follows dbt's structured logs and emits events as the run progresses. Because it reads logs rather than instrumenting execution, it does not affect dbt's performance. dbt Cloud sends job-run events to Datadog through a webhook, with no component running in your environment.
 - **Custom pipelines**: you emit events yourself with the OpenLineage client or a raw HTTP call, so the overhead is whatever your emitting code does.
 

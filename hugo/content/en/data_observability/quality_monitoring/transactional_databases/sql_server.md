@@ -24,7 +24,7 @@ Data Observability for SQL Server is in Preview. Contact your Datadog representa
 
 The SQL Server integration for Datadog Data Observability tracks table metadata, providing visibility into schemas, table dimensions, and row volumes across your environment. You can then create data quality monitors on your SQL Server tables.
 
-SQL Server is collected through the [Datadog Agent][1] rather than through a direct cloud connection like the [data warehouse integrations][2]. Table metadata comes from the schema collection that runs as part of [Database Monitoring][3], so Database Monitoring must be enabled on each SQL Server instance you want to track. This page covers only the configuration Data Observability adds on top of Database Monitoring.
+SQL Server is collected through the [Datadog Agent][1] rather than through a direct cloud connection like the [data warehouse integrations][2]. Table metadata comes from the schema collection that runs as part of [Database Monitoring][3]. Database Monitoring must be enabled on each SQL Server instance you want to track. This page covers only the configuration Data Observability adds on top of Database Monitoring.
 
 ## Prerequisites
 
@@ -38,9 +38,9 @@ Before you begin, make sure you have:
 
 ## Enable Remote Configuration
 
-Data Observability uses [Remote Configuration][4] to deliver monitor queries to the Agent. When you create a data quality monitor in Datadog, its query is pushed to the Agent that owns the instance, and the Agent's SQL Server check runs it against your database on the monitor's schedule.
+Data Observability uses [Remote Configuration][4] to deliver monitor queries to the Agent. When you create a data quality monitor in Datadog, Datadog sends its query to the Agent that owns the instance. The Agent's SQL Server check runs the query against your database on the monitor's schedule.
 
-Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but any monitor you create against them stays empty because the Agent never receives the query to run.
+Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but monitors you create on them stay empty. The Agent never receives the queries to run.
 
 Remote Configuration is on by default in most environments, but it has to be enabled in all three of the following places. Confirm each one:
 
@@ -80,6 +80,8 @@ To limit access to specific tables, grant `SELECT` on each table instead of on t
 USE [<DATABASE_NAME>];
 GRANT SELECT ON [<SCHEMA_NAME>].[orders] TO datadog;
 ```
+
+Schema collection still lists the database's other tables, but monitors on tables without a `SELECT` grant fail.
 
 ## Configure the SQL Server integration
 
@@ -136,7 +138,7 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
-Schema collection (`collect_schemas`) is disabled by default on SQL Server and requires `dbm: true`. It populates your tables in Data Observability. By default, it collects up to 300 tables from each database. To track more tables, raise `collect_schemas.max_tables`. For the SQL Server versions that schema collection supports, see [Collecting schemas][12].
+Schema collection (`collect_schemas`) is disabled by default on SQL Server and requires `dbm: true`. It populates your tables in Data Observability. By default, it collects up to 300 tables from each database. To track more tables, increase `collect_schemas.max_tables`. For the SQL Server versions that schema collection supports, see [Collecting schemas][12].
 
 [Restart the Agent][9] to apply the changes.
 
@@ -184,7 +186,7 @@ After your tables appear in the catalog, you can [create Data Observability moni
 
 Table freshness monitors are not available for SQL Server tables. To track freshness, create a freshness monitor on a datetime column.
 
-Monitors run on the schedule you set in [Monitor schedule][16]. Monitors set to {{< ui >}}Manual{{< /ui >}} don't run on SQL Server, so select {{< ui >}}Scheduled{{< /ui >}}. Keep `SELECT` privileges in place for the `datadog` user on all referenced tables; monitors fail if access is revoked.
+Monitors run on the schedule you set in [Monitor schedule][16]. Monitors set to {{< ui >}}Manual{{< /ui >}} don't run on SQL Server, so select {{< ui >}}Scheduled{{< /ui >}}. Keep `SELECT` privileges in place for the `datadog` user on all referenced tables. Monitors fail if access is revoked.
 
 A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui >}}. Monitor queries run only while the Agent is running, so if the Agent stops, your monitors record no values until it restarts. If a monitor reports no data, check that:
 
@@ -195,7 +197,7 @@ A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui 
 ## Known limitations
 
 - Data Observability lists SQL Server tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Monitors on tables from those instances have no data. To fix this, add `data_observability.enabled: true` to the instance and grant the `SELECT` privileges in [Grant read access to your data](#grant-read-access-to-your-data).
-- If more than one SQL Server instance in an Agent's configuration has `data_observability.enabled: true` and the same `host` value, the Agent runs no monitor queries for that host. Enable `data_observability` on one instance for each host, such as an instance that uses `database_autodiscovery`.
+- If more than one instance in `sqlserver.d/conf.yaml` has `data_observability.enabled: true` and the same `host` value, the Agent runs no monitor queries for that host. Enable `data_observability` on one instance for each host, such as an instance that uses `database_autodiscovery`. This limitation doesn't apply to Azure SQL Database instances (`azure.deployment_type: sql_database`), which the Agent matches by both host and database.
 
 ## Further reading
 
