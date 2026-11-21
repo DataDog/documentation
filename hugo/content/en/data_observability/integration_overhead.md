@@ -58,7 +58,7 @@ On Databricks, every metric is collected by running a SQL statement on the SQL w
 
 On BigQuery, **row count** and **table freshness** are read through BigQuery's table metadata API (equivalent to a `tables.get` call). No query runs and no bytes are scanned, so these checks incur no BigQuery query cost.
 
-**Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, and column-level freshness) and **Custom SQL** run as BigQuery SQL against your tables and are billed by the data they process: bytes scanned under on-demand pricing, or slot time under capacity pricing. Column metrics on the same table that share the same filter and grouping are combined into a single query.
+**Column metrics** (Nullness, Uniqueness, Cardinality, Percent Zero, Percent Negative, Min, Max, Mean, Sum, Standard Deviation, and column-level freshness) and **Custom SQL** run as BigQuery SQL against your tables. BigQuery bills these queries by the data they process: bytes scanned under on-demand pricing, or slot time under capacity pricing. Column metrics on the same table that share the same filter and grouping are combined into a single query.
 
 {{% /tab %}}
 {{% tab "Redshift" %}}
