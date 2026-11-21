@@ -2964,16 +2964,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Compensation
+      url: incident_response/on-call/compensation/
+      parent: oncall
+      identifier: oncall_compensation
+      weight: 6
     - name: Handover automation
       url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
-      weight: 6
+      weight: 7
     - name: Notification Preferences
       url: incident_response/on-call/notification_preferences/
       parent: oncall
       identifier: oncall_notification_preferences
-      weight: 7
+      weight: 8
     - name: Supported Countries
       url: incident_response/on-call/notification_preferences/supported_countries/
       identifier: oncall_notification_preferences_countries
@@ -2983,7 +2988,7 @@ menu:
       url: incident_response/on-call/integrations/
       parent: oncall
       identifier: oncall_integrations
-      weight: 8
+      weight: 9
     - name: ServiceNow
       url: incident_response/on-call/integrations/servicenow/
       parent: oncall_integrations
@@ -2993,7 +2998,7 @@ menu:
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 9
+      weight: 10
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
