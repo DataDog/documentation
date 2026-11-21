@@ -76,6 +76,12 @@ Use this option if you want Datadog to create and maintain the webhook in dbt Cl
 
 This mode requires a dbt Cloud token with {{< ui >}}Developer{{< /ui >}} permissions for the dbt Cloud Enterprise plan or {{< ui >}}Account Admin{{< /ui >}} permissions for the dbt Cloud Team plan.
 
+## How Datadog collects dbt Cloud runs
+
+Datadog creates dbt Cloud job runs from the webhook events. When a run starts, Datadog records it as running. When the run completes or errors, Datadog uses the API token to fetch the run's artifacts and adds its model results and lineage.
+
+Datadog processes runs whose dbt Cloud connection uses Snowflake, BigQuery, Databricks, Redshift, or [ClickHouse][3]. Runs on other connection types don't appear in Datadog.
+
 ## What's next
 
 After your next dbt job run, you should start seeing job run and lineage data in [Datadog Data Observability][2], as shown below.
@@ -84,6 +90,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 [1]: https://app.datadoghq.com/data-obs/settings/integrations
 [2]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
+[3]: /data_observability/quality_monitoring/data_warehouses/clickhouse/
 
 {{% /tab %}}
 
@@ -170,6 +177,16 @@ After your next dbt job run, you should start seeing job run and lineage data in
 {{% /tab %}}
 {{< /tabs >}}
 
+## In-progress runs
+
+On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists runs that are still in progress with a `RUNNING` status. Their duration counts up while the run continues. To show only in-progress runs, select `RUNNING` in the {{< ui >}}Filter status{{< /ui >}} menu. In-progress runs appear when the selected time frame extends to the present.
+
+## Exposures
+
+Datadog reads [dbt exposures][1] from the artifacts of successful dbt Cloud job runs and shows each exposure in lineage, downstream of the tables it depends on. Runs triggered by pull requests don't update exposures. Datadog doesn't read exposures from dbt Core projects.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.getdbt.com/docs/build/exposures

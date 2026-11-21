@@ -441,6 +441,16 @@ In Datadog, view the [Data Observability: Jobs Monitoring][6] page to see a list
 
 If some jobs are not visible, navigate to the [Configuration][9] page to understand why. This page lists all your Databricks jobs not yet configured with the Agent on their clusters, along with guidance for completing setup.
 
+## Nested jobs
+
+A Databricks job can trigger another job with a Run Job task. Jobs Monitoring shows the parent job and the child job as separate jobs, each with its own runs. The span of the parent's Run Job task includes a span link to the run of the child job it triggered.
+
+The parent job's run also records the clusters that its child jobs run on, including the clusters of jobs that those child jobs trigger in turn. Logs for the parent run include logs from these clusters.
+
+Cluster utilization metrics and cluster logs come from the Datadog Agent on each cluster, so the clusters that child jobs run on need the Agent too. The [Datadog managed global init script](#install-the-datadog-agent) installs the Agent on every cluster in the workspace when the cluster starts, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
+
+If the user or service principal that connects Datadog to the workspace can't view a child job, Datadog leaves that job's clusters out of the parent run, and the Databricks integration tile shows a warning that lists the affected parent jobs. To fix it, grant `CAN VIEW` on the child job. See [Workspace permissions](#workspace-permissions).
+
 ## Troubleshooting
 
 If you don't see any data in Jobs Monitoring after installing the product, follow these steps.
