@@ -47,7 +47,7 @@ Some tools return content that users or monitored systems can set, such as tags,
 
 ## Core tools
 
-The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+The default toolset for logs, metrics, traces, profiling, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 
 ### `search_datadog_events`
 *Toolset: **core***\
@@ -108,6 +108,15 @@ Fetches a complete trace from Datadog APM using a trace ID.
 - Retrieve trace details including database queries for ID xyz789.
 
 **Note**: Large traces with thousands of spans may be truncated (and indicated as such) without a way to retrieve all spans.
+
+### `get_profiling_overview`
+*Toolsets: **core**, **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a profiling overview combining flame graph and call graph summaries for the selected profiles and profile type. Includes top stack traces, functions, and call relationships. Use it as a starting point for profiling investigations. Scope the tag query to one service for service-specific conclusions; broader queries aggregate matching profiles.
+
+- Summarize CPU hotspots and function call relationships for `service:checkout-api env:prod` over the last hour.
+- Summarize allocation hotspots for `service:payments` over the last 30 minutes.
+- Show wall time hotspots for `service:checkout-api` over the last hour.
 
 ### `search_datadog_dashboards`
 *Toolset: **core***\
@@ -2489,6 +2498,15 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 
 ## Profiling
 Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
+
+### `get_profiling_overview`
+*Toolsets: **core**, **profiling***\
+*Permissions Required: `Continuous Profiler Read`*\
+Returns a profiling overview combining flame graph and call graph summaries for the selected profiles and profile type. Includes top stack traces, functions, and call relationships. Use it as a starting point for profiling investigations. Scope the tag query to one service for service-specific conclusions; broader queries aggregate matching profiles.
+
+- Summarize CPU hotspots and function call relationships for `service:checkout-api env:prod` over the last hour.
+- Summarize allocation hotspots for `service:payments` over the last 30 minutes.
+- Show wall time hotspots for `service:checkout-api` over the last hour.
 
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
