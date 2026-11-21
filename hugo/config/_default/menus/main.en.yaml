@@ -5774,11 +5774,21 @@ menu:
       identifier: quality_monitoring_monitors
       parent: quality_monitoring
       weight: 350000
-    - name: Guides
+    - name: How-To Guides
       url: data_observability/quality_monitoring/guides
       identifier: quality_monitoring_guides
       parent: quality_monitoring
       weight: 400000
+    - name: Anomaly Detection
+      url: data_observability/quality_monitoring/guides/anomaly_detection
+      identifier: quality_monitoring_guides_anomaly_detection
+      parent: quality_monitoring_guides
+      weight: 401
+    - name: Monitors with the API or Terraform
+      url: data_observability/quality_monitoring/guides/monitors_as_code
+      identifier: quality_monitoring_guides_monitors_as_code
+      parent: quality_monitoring_guides
+      weight: 402
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
