@@ -133,6 +133,38 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 | `@trace.tool_calls:>=4` | Traces with 4 or more tool calls |
 | `@trace.number_of_tools:<5` | Traces that call fewer than 5 different tools |
 
+## Live mode
+
+<div class="alert alert-info">Live mode is in Preview.</div>
+
+When you use live mode, Datadog displays spans as soon as your LLM applications send them, before they are indexed. All ingested spans from the last 15 minutes (rolling window) are available, including spans that [trace sampling][10] or [tag-based sampling rules][11] later drop. After 15 minutes, you can only search the spans that sampling kept.
+
+**Note**: Live mode shows only spans that are sent with the APM trace. If you send data through the Datadog Agent, spans from traces that [APM ingestion sampling][12] doesn't keep go to Datadog through a separate intake. These spans don't appear in live mode, but you can find them in the Trace Explorer after they are indexed. In agentless mode, all spans are sent with the APM trace.
+
+Use live mode to watch a deployment roll out, confirm that new instrumentation is reporting, or follow a test session as it happens.
+
+Switch between live mode and indexed search by using the time selector in the top right-hand corner of the [Trace Explorer][1]. Live mode is the {{< ui >}}15 minutes{{< /ui >}} option marked with a lightning icon. Any other option searches indexed spans.
+
+### Requirements
+
+Live mode requires the Python ddtrace SDK (`ddtrace` 4.11.0 or later), with the Datadog Agent or agentless. Other SDKs and [OpenTelemetry instrumentation][9] only support displaying spans in the Trace Explorer after indexing and sampling, not in live mode.
+
+**Note**: Live mode requires the ddtrace SDK to send APM traces with the `v0.4` trace API. Live mode is not supported with the `v0.5` trace API.
+
+### Limitations
+
+Live mode reads spans before Datadog enriches them after ingestion. As a result, live mode does not support these fields:
+
+- [Evaluations](#evaluation-queries) (`@evaluation.*`) and [end-user feedback][8] (`@feedback.*`)
+- [Trace-level attributes](#trace-level-queries) (`@trace.*` and `@child.*`). The {{< ui >}}Traces{{< /ui >}} view still works in live mode and lists root spans.
+
+The Trace Explorer hides these facets and columns while live mode is on. To query them, choose a time range longer than 15 minutes.
+
+Live mode is best-effort:
+
+- Long string values, such as large span inputs and outputs, can be truncated in live mode. The full values are available after the span is indexed.
+- Very large traces, and traces that arrive more than 15 minutes after they end, might not appear in live mode.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -145,3 +177,7 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 [6]: /tracing/trace_explorer/query_syntax/
 [7]: /llm_observability/instrument/sdk/#annotating-metadata
 [8]: /llm_observability/investigate/evaluations/end_user_feedback
+[9]: /llm_observability/instrument/otel_instrumentation/
+[10]: /llm_observability/instrument/sdk/#trace-sampling
+[11]: /llm_observability/instrument/sdk/#tag-based-sampling-rules
+[12]: /tracing/trace_pipeline/ingestion_mechanisms/
