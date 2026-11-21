@@ -119,7 +119,7 @@ Grouping is most useful for zooming out: group by {{< ui >}}Schemas{{< /ui >}} t
 
 ## Stale assets
 
-Datadog removes an asset or a lineage edge from Data Observability when it receives no new metadata about it for 35 days. Metadata can come from an integration or from an OpenLineage event. For example, a dropped table or a retired job leaves the graph 35 days after a source last reported it.
+By default, Datadog removes an asset or a lineage edge from Data Observability when it receives no new metadata about it for 35 days. Metadata can come from an integration or from an OpenLineage event. For example, a dropped table or a retired job leaves the graph 35 days after a source last reported it.
 
 To remove a stale asset sooner, delete it from the catalog:
 
