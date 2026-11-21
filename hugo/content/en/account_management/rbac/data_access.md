@@ -259,7 +259,7 @@ Data Access Control supports granting access to users through Datadog roles or t
 
 ### Agents
 
-Autonomous Bits AI agents, such as Bits AI Security Analyst, have their own identity in Datadog. They cannot see data in a Restricted Dataset unless you grant them access. To let an agent work with restricted data, grant access the same way you do for a team or role: add the agent to the Restricted Datasets it needs. For example, add Bits AI Security Analyst to a Restricted Dataset for security logs so its investigations can query those logs.
+Autonomous Bits AI agents, such as Bits AI Security Analyst or AI Guard, have their own identity in Datadog. They cannot see data in a Restricted Dataset unless you grant them access. To let an agent work with restricted data, grant access the same way you do for a team or role: add the agent to the Restricted Datasets it needs. For example, add Bits AI Security Analyst to a Restricted Dataset for security logs so its investigations can query those logs. To let AI Guard [investigate AI Guard signals][15], add it to the Restricted Datasets that contain the APM traces of your AI applications. If AI Guard isn't listed under {{< ui >}}Agents and Automated Processes{{< /ui >}}, search for it in the access selector.
 
 Only agents that support access configuration appear in the access selector, under {{< ui >}}Agents and Automated Processes{{< /ui >}}. Grant an agent [unrestricted access](#unrestricted-user-groups) only when it needs every record of a telemetry type.
 
@@ -300,3 +300,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/
 [14]: /llm_observability/data_governance/access_control/
+[15]: /security/ai_guard/signals/#dynamic-signals
