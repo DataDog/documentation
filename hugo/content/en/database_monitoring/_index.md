@@ -144,6 +144,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 
 {{< card-grid >}}
   {{< image-card href="/database_monitoring/setup_db2/selfhosted" src="integrations_logos/ibm_db2.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_db2/ec2" src="integrations_logos/ibm_db2.png" alt="AWS EC2" title="AWS EC2" >}}
 {{< /card-grid >}}
 <p></p>
 

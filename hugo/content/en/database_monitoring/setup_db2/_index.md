@@ -19,20 +19,21 @@ Database Monitoring for IBM Db2 is available in Preview for organizations using 
 ### IBM Db2 versions supported
 <!-- vale Datadog.headings = YES -->
 
-| IBM Db2 version | Self-hosted |
-| --------------- | ----------- |
-| 11.1            | {{< X >}}   |
-| 11.5            | {{< X >}}   |
-| 12.1            | {{< X >}}   |
+| IBM Db2 version | Self-hosted | AWS EC2   |
+| --------------- | ----------- | --------- |
+| 11.1            | {{< X >}}   | {{< X >}} |
+| 11.5            | {{< X >}}   | {{< X >}} |
+| 12.1            | {{< X >}}   | {{< X >}} |
 
 Database Monitoring supports IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
 ### Setup instructions by hosting type
 
-To set up Database Monitoring on a self-hosted IBM Db2 database, select **Self-hosted**:
+Select your hosting type to set up Database Monitoring for IBM Db2:
 
 {{< card-grid card_width="300px" >}}
   {{< image-card href="/database_monitoring/setup_db2/selfhosted" src="integrations_logos/ibm_db2.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_db2/ec2" src="integrations_logos/ibm_db2.png" alt="AWS EC2" title="AWS EC2" >}}
 {{< /card-grid >}}
 
 ## Further reading
