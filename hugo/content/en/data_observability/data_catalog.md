@@ -62,32 +62,40 @@ Use the facets panel next to the results to filter the list without typing a que
 
 - **Platform**: The integration the asset comes from. This facet appears when you haven't selected an integration.
 - **Asset type**: The kind of asset, shown with a readable name such as {{< ui >}}Table{{< /ui >}} or {{< ui >}}Metabase question{{< /ui >}}.
-- **Attributes**: Fields such as account, database, and schema, depending on the integrations you have connected.
+- **Attributes**: Facets such as {{< ui >}}Account{{< /ui >}}, {{< ui >}}Database{{< /ui >}}, and {{< ui >}}Schema{{< /ui >}}. The attributes listed depend on the integrations you have connected.
 - **Tags**: Tag keys, grouped by source. Tags added in Datadog are listed under {{< ui >}}Custom tags{{< /ui >}}.
 
 ## Asset pages
 
-Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, {{< ui >}}Schema{{< /ui >}}, {{< ui >}}Columns{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs, and a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table.
+Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs. It also has a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table. The {{< ui >}}Summary{{< /ui >}} tab of a table page also lists the table's columns.
 
 ### Schema change and query tabs
 
-- **Schema Changes**: The [schema changes][2] Datadog detected on the asset. Database, schema, table, and column pages have this tab. The tab is unavailable for an asset whose account isn't configured in Data Observability.
+- **Schema Changes**: The [schema changes][2] Datadog detected on the asset. Database, schema, table, and column pages have this tab, and so do Snowflake and BigQuery account pages. The tab is disabled for an asset whose account isn't configured in Data Observability.
 - **Queries**: The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab.
 
 ### Navigation tree
 
-The sidebar on an asset page shows where the asset sits in its integration's hierarchy, such as account, database, schema, and table. Click {{< ui >}}Hide Search{{< /ui >}} or {{< ui >}}Show Search{{< /ui >}} to close or open the sidebar, and drag its right edge to resize it.
+The sidebar on an asset page shows the asset's integration as a tree, with levels such as account, database, schema, and table. Select a node in the tree to open its page. To close or open the sidebar, click {{< ui >}}Hide Search{{< /ui >}} or {{< ui >}}Show Search{{< /ui >}} next to the tabs. To resize the sidebar, drag its right edge.
 
-Each collapsed node in the tree shows:
+Each node that isn't expanded shows:
 
-- **Monitor count**: The number of monitors on the node or on anything beneath it. Alerting monitors are counted separately, in red. Hover over the count to see the total and the number alerting.
-- **Lineage indicator**: Shown when the asset has downstream dependencies.
+- **Monitor count**: The number of monitors on the node or on anything beneath it. Alerting monitors appear in a separate red count, and the other monitors appear in a gray count. Hover over the counts to see the total and the number alerting.
+- **Lineage indicator**: An arrow icon, shown when the asset has downstream dependencies.
 
-By default, the tree is {{< ui >}}Sorted by recommended{{< /ui >}}: nodes with the most monitors come first, then nodes with more downstream dependencies, then the rest by name. Click the sort button next to the tree's search box to sort alphabetically.
+When you expand a node, its children show these details instead.
+
+By default, the tree uses recommended sorting. Nodes with more monitors come first, then nodes with more downstream dependencies, and nodes that are still tied are sorted by name. To sort the tree alphabetically, click the sort button next to the tree's search box. The sort button is disabled while you search the tree.
 
 ### Delete an asset
 
-To remove an asset that no longer belongs in the catalog, open the actions menu on the asset's page and select {{< ui >}}Delete asset{{< /ui >}}. Deleting an asset removes it and all of its descendants from Data Observability, and can take a few minutes. If Datadog still ingests the asset from its integration, it can reappear after the next sync. Deleting an asset requires the {{< ui >}}Data Observability Catalog Write{{< /ui >}} permission.
+To remove an asset from the catalog:
+
+1. On the asset's page, click the vertical three-dot menu in the header.
+2. Select {{< ui >}}Delete asset{{< /ui >}}.
+3. Click {{< ui >}}Delete{{< /ui >}} to confirm.
+
+Deleting an asset removes it and all of its descendants from Data Observability, and can take a few minutes. If Datadog still ingests the asset from its integration, it can reappear after the next sync. Deleting an asset requires the `Data Observability Catalog Write` permission.
 
 [1]: /data_observability/lineage/
 [2]: /monitors/types/data_observability/#browse-detected-schema-changes
