@@ -71,7 +71,7 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 
 ## Workflows Overview dashboard
 
-The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and runs. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
 {{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 

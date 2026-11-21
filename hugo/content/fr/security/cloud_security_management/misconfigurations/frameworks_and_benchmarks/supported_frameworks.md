@@ -31,23 +31,24 @@ Cloud Security Misconfigurations comporte plus de 1 000 règles de conformité i
 | [AWS Foundational Security Best Practices][13]  | v1.0.0                         | `aws-fsbp`                          | Cloud                    |
 | [Brazil LGPD][44]                               | 2018                           | `lgpd`                              | Cloud                    |
 | [California CCPA/CPRA][38]                      | Nov 2022                       | `ccpa`                              | Cloud                    |
-| [CIS AlmaLinux 9][16]                           | v2.0.0                         | `cis-almalinux9`                    | Infrastructure           |
+| [CIS AlmaLinux 9][16]                           | v3.0.0                         | `cis-almalinux9`                    | infrastructure           |
 | [CIS Amazon Linux 2023][25]                     | v1.0.0                         | `cis-al2023`                        | Infrastructure           |
-| [CIS Amazon Linux 2][25]                        | v3.0.0                         | `cis-amzn2`                         | Infrastructure           |
+| [CIS Amazon Linux 2][25]                        | v4.0.0                         | `cis-amzn2`                         | infrastructure           |
 | [CIS AWS Foundations Benchmark*][2]             | v5.0.0, v4.0.0, v3.0.0, v1.5.0 | `cis-aws`                           | Cloud                    |
 | [CIS Azure Foundations Benchmark][3]            | v4.0.0, v2.0.0                 | `cis-azure`                         | Cloud                    |
-| [CIS Docker Benchmark][4]                       | v1.2                           | `cis-docker`                        | Infrastructure           |
+| [CIS Docker Benchmark][4]                       | v1.9.0                         | `cis-docker`                        | infrastructure           |
 | [CIS GCP Foundations Benchmark][22]             | v3.0.0                         | `cis-gcp`                           | Cloud                    |
 | [CIS GKE][34]                                   | v1.6.0                         | `cis-gke`                           | Cloud                    |
 | [CIS Kubernetes (AKS) Benchmark**][5]           | v1.4.0                         | `cis-aks`                           | Cloud et Infrastructure |
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.7.0, v1.4.0                 | `cis-eks`                           | Cloud et Infrastructure |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | Infrastructure           |
-| [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | Infrastructure           |
-| [CIS Red Hat Linux 8][24]                       | v3.0.0                         | `cis-rhel8`                         | Infrastructure           |
-| [CIS Red Hat Linux 9][24]                       | v2.0.0                         | `cis-rhel9`                         | Infrastructure           |
-| [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infrastructure           |
-| [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infrastructure           |
-| [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | Infrastructure           |
+| [CIS Red Hat Linux 7][24]                       | v4.0.0                         | `cis-rhel7`                         | infrastructure           |
+| [CIS Red Hat Linux 8][24]                       | v4.0.0                         | `cis-rhel8`                         | infrastructure           |
+| [CIS Red Hat Linux 9][24]                       | v3.0.0                         | `cis-rhel9`                         | infrastructure           |
+| [CIS Red Hat Linux 10][24]                      | v1.0.1                         | `cis-rhel10`                        | infrastructure           |
+| [CIS Ubuntu 20.04][23]                          | v3.0.0                         | `cis-ubuntu2004`                    | infrastructure           |
+| [CIS Ubuntu 22.04][23]                          | v3.0.0                         | `cis-ubuntu2204`                    | infrastructure           |
+| [CIS Ubuntu 24.04][23]                          | v2.0.0                         | `cis-ubuntu2404`                    | infrastructure           |
 | [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | Cloud                    |
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Contrôles essentiels de Cloud Security][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |

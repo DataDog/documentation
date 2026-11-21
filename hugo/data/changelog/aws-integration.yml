@@ -25,3 +25,45 @@ entries:
       - ListAWSAccounts
       - UpdateAWSAccount
     title: Add resource_type_tag_filters to AWS metrics config
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41196
+    operations:
+      - ListAWSAccounts
+    title: Add AWS cloud authentication intake mapping endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - PreviewAWSMetricNameFilter
+      - ValidateAWSCCMConfig
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateAWSAccount
+      - CreateAWSAccountCCMConfig
+      - CreateAWSEventBridgeSource
+      - CreateAWSTagFilter
+      - CreateNewAWSExternalID
+      - DeleteAWSAccount
+      - DeleteAWSAccountCCMConfig
+      - DeleteAWSEventBridgeSource
+      - DeleteAWSTagFilter
+      - GetAWSAccount
+      - GetAWSAccountCCMConfig
+      - GetAWSIntegrationIAMPermissions
+      - GetAWSIntegrationIAMPermissionsResourceCollection
+      - GetAWSIntegrationIAMPermissionsStandard
+      - GetAWSMetricNameFilterPreview
+      - ListAWSAccounts
+      - ListAWSEventBridgeSources
+      - ListAWSNamespaces
+      - ListAWSTagFilters
+      - ListAvailableAWSNamespaces
+      - PreviewAWSMetricNameFilter
+      - UpdateAWSAccount
+      - UpdateAWSAccountCCMConfig
+      - ValidateAWSCCMConfig
+    title: Document rate-limit headers on the shared 429 responses

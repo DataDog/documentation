@@ -1,3 +1,3 @@
 ---
-title: Métriques du RUM
+title: RUM Metrics
 ---

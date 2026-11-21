@@ -1,0 +1,50 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "crowdstrike-fdr-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "service:my-service",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "crowdstrike-fdr-source",
+            "type": "crowdstrike_fdr",
+            "region": "us-west-2",
+            "url_key": "CROWDSTRIKE_FDR_SQS_URL",
+            "access_key_id_key": "CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID",
+            "secret_access_key_key": "CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY",
+            "visibility_timeout_secs": 300,
+            "client_concurrency": 4,
+            "max_number_of_messages": 1
+          }
+        ]
+      },
+      "name": "Pipeline with CrowdStrike FDR Source"
+    },
+    "type": "pipelines"
+  }
+}

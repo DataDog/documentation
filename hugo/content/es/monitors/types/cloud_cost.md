@@ -3,9 +3,6 @@ description: Haga un seguimiento de los cambios de costos, umbrales, pronóstico
   anomalías en sus costos de la nube, incluidos los aumentos de costos de IA en tiempo
   real.
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
-  tag: Blog
-  text: Administre y optimice sus costos de OCI con Datadog Cloud Cost Management
 - link: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview
   tag: Documentación
   text: Cloud Cost Management
@@ -18,6 +15,9 @@ further_reading:
 - link: /monitors/status/
   tag: Documentación
   text: Consulte el estado de su seguimiento
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Administre y optimice sus costos de OCI con Datadog Cloud Cost Management
 - link: https://www.datadoghq.com/blog/ccm-cost-monitors/
   tag: Blog
   text: Reaccione rápidamente a los sobrecostos con los monitores de costos para Datadog
@@ -26,6 +26,9 @@ further_reading:
   tag: Blog
   text: Faculte a los ingenieros para que se hagan cargo de los costos de Google Cloud
     con Datadog
+- link: https://www.datadoghq.com/blog/how-kubernetes-dra-can-improve-gpu-utilization-and-cut-costs/
+  tag: Blog
+  text: Cómo Kubernetes DRA puede mejorar la utilización de GPU y reducir costos
 title: Monitor de costos de Cloud Cost
 ---
 ## Descripción general {#overview}

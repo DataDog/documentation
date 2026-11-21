@@ -22,10 +22,6 @@ algolia:
   tags: ['dashboard reporter', 'agentic reporting', 'scheduled report', 'product analytics agent']
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/product-analytics-dashboard-reporter-agent/" btn_hidden="false" header="Join the Preview!">}}
-Dashboard Reporter Agent is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The Dashboard Reporter Agent monitors the Product Analytics dashboards you choose and sends your team a scheduled report in Slack, Microsoft Teams, or email. Each report summarizes what changed, what needs attention, and what to do next, so you don't have to open each dashboard to check. As you ship more features, one agent can monitor many dashboards, including dashboards for past launches that no longer get regular attention.
@@ -114,7 +110,8 @@ You can open a report in Datadog and ask the agent follow-up questions. For exam
 
 ### Ask Bits AI in Slack
 
-If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can ask Bits Chat about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
+If your reports go to Slack and the Datadog Slack integration has Bits AI enabled, you can ask Bits Chat about a report without leaving Slack. Mention `@Datadog` with your question, for example, `@Datadog Why did checkout conversion drop this week?` For setup, see [Use Bits Chat in Slack][5].
+
 
 ## Manage Dashboard Reporter agents
 
@@ -127,7 +124,7 @@ You can change an agent's dashboards, report format, destination, or cadence.
 1. From the Agents page, click the agent.
 2. Make your changes in one of the following ways:
    - **Ask the agent**: Describe the change in the chat. For example: `Add the Checkout Funnel dashboard and send reports on Mondays at 9:00 AM.`
-   - **Edit the instructions**: To change dashboards, report format, or destination, click the {{< ui >}}Instructions{{< /ui >}} panel and edit it in Markdown. To change the cadence, expand the {{< ui >}}Automation{{< /ui >}} panel.
+   - **Edit the configuration**: On the Agents page, or from a subscribed dashboard, hover over the agent and click {{< ui >}}Edit{{< /ui >}}. You can modify the subscribed dashboards, report format, cadence or destination.
 
 ### Pause or resume an agent
 

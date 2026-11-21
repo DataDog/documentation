@@ -29,7 +29,7 @@ title: Types de métriques
 ---
 ## Présentation {#overview}
 
-Chaque métrique soumise à Datadog doit avoir un type. Le type d'une métrique affecte la manière dont les valeurs de la métrique sont affichées lors d'une requête, ainsi que les possibilités de représentation graphique associées dans Datadog à l'aide de [modificateurs][1] et de [fonctions][2] supplémentaires. Le type d'une métrique est affiché dans le panneau latéral des détails pour la métrique donnée sur la [page Metrics Summary][3].
+Chaque métrique soumise à Datadog doit avoir un type. Le type d'une métrique affecte la manière dont les valeurs de la métrique sont affichées lors d'une requête, ainsi que les possibilités de représentation graphique associées dans Datadog à l'aide de [modificateurs][1] et de [fonctions][2] supplémentaires. Le type d’une métrique est affiché dans le panneau latéral des détails de cette métrique sur la [page Metrics Catalog][3].
 
 **Note** : La modification du type de métrique dans ce panneau latéral de détails peut modifier le comportement de la métrique dans toutes les visualisations et tous les monitors existants, rendant potentiellement les données historiques dénuées de sens.
 

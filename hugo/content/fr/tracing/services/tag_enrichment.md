@@ -10,10 +10,6 @@ further_reading:
   text: Catalog
 title: Enrichissement de tags
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
-L'enrichissement de tags est en préversion. Pour demander l'accès, remplissez ce formulaire.
-{{< /callout >}}
-
 ## Présentation {#overview}
 
 Utilisez des règles d'enrichissement de tags pour ajouter des tags à votre télémétrie sans modification du code ni redéploiement. Vous pouvez utiliser des valeurs provenant des métadonnées de service que vous avez déjà définies dans le Catalogue, la valeur d'un autre tag ou une valeur fixe.

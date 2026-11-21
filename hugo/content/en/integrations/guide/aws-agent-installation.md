@@ -71,16 +71,17 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 | Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
 | Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
 | Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
-| Layer versions | Datadog selects and updates them | You set them, and they stay fixed until you change them |
 | How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
 | Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
-| Removing instrumentation | Remove from Datadog | Delete the CloudFormation stack in that region |
+| Removing instrumentation | Remove from Datadog, before you delete the CloudFormation stack. Deleting the stack does not remove instrumentation | Delete the CloudFormation stack in that region |
+
+<div class="alert alert-warning">Instrumentation through the AWS integration is not remote instrumentation, and you remove it differently. Don't follow the remote instrumentation removal steps for functions instrumented through the AWS integration: deleting the CloudFormation stack leaves the instrumentation in place and takes away the permissions Datadog needs to remove it. See <a href="#remove-datadog-instrumentation">Remove Datadog instrumentation</a>.</div>
 
 Both products deploy a CloudFormation stack in your account. The stack for remote instrumentation also creates a CloudTrail trail and supporting resources. For what the stack in this guide creates, including the EventBridge resources that send change events to Datadog, see [How Datadog instrumentation through the AWS integration works][6].
 
 Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place, or when you want to narrow the function list by region, runtime, and memory size.
 
-Use remote instrumentation when you want to match on the tags in `DD_TAGS`, or when you want to set the layer versions applied to your functions and keep them fixed. Both products can match on AWS resource tags.
+Use remote instrumentation when you want to match on the tags in `DD_TAGS`. Both products can match on AWS resource tags.
 
 ## Prerequisites
 
@@ -202,7 +203,17 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 ## What Datadog changes on a Lambda function
 
-Datadog preserves your existing layers and environment variables. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
+<div class="alert alert-warning">Lambda instrumentation writes to your functions. Datadog updates the configuration of every function the rule covers: it adds layers, sets environment variables, and, depending on the runtime, changes the handler or sets an execution wrapper. The Datadog extension, and the tracing layer where the runtime has one, run inside your function, so they add memory use and CPU time to every invocation, and add to cold start duration. Datadog does not change a function's memory size or timeout, so a function that has little headroom can run out of memory or time out after it is instrumented.</div>
+
+### Functions with low memory
+
+New Lambda rules exclude functions with less than 256 MB of memory. The **Exclude low-memory functions** option is selected by default and adds `@memory_size:>=256` to the rule's query. Choosing **Install on all resources** during AWS integration setup creates a Lambda rule with the same filter. Rules saved without the filter cover functions of any memory size.
+
+Before you cover a function that is near its memory or duration limit, raise its memory size or timeout, or exclude it from the rule. The Datadog layers also count toward the AWS quota on the total unzipped size of a function and its layers, so a function close to that quota can't take them. For production accounts, try a rule on a small set of functions first, and check their memory use and duration before you widen it.
+
+### Configuration changes
+
+Datadog preserves your existing layers and environment variables. The exceptions are `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED`, which Datadog sets to match the rule's APM and Logs settings. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
 
 **No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so no Datadog credential is stored in your account for Lambda instrumentation. Datadog sets up this authentication for you, so there is nothing to configure.
 
@@ -214,12 +225,14 @@ To tune what the extension collects, set the standard Datadog environment variab
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
-- **AWS integration setup (instrument all eligible resources)**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], next to log and resource collection. Then select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear.
+- **AWS integration setup**: When you [set up the AWS integration][5], turn on **Grant Datadog permission to manage installations** on the [AWS integration page][7], next to log and resource collection. Then choose how to install:
+  - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs for EC2 and Lambda, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
+  - **Install on all resources**: Select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear. For Lambda, this covers functions with at least 256 MB of memory. See [Functions with low memory](#functions-with-low-memory).
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
 
 <!-- TODO(DOCS-14545): per AWS team, surfacing the install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
 
-The instrumentation toggle appears during setup, with a workload selector listing **EC2 Instances**, **Lambda Functions**, and **EKS Clusters**. Only **EC2 Instances** and **Lambda Functions** can be selected:
+When you choose **Install on all resources**, a workload selector lists **EC2 Instances**, **Lambda Functions**, and **EKS Clusters**. Only **EC2 Instances** and **Lambda Functions** can be selected:
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) workload toggle turned on." style="width:80%;" >}}
 
@@ -228,8 +241,9 @@ The instrumentation toggle appears during setup, with a workload selector listin
 To install from the AWS Install Agents page:
 
 1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
-1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size.
+1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size. New Lambda rules exclude functions with less than 256 MB of memory unless you clear **Exclude low-memory functions**.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
+1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and remain until you edit the rule.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
@@ -254,7 +268,7 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, Datadog updates layer versions automatically.
+The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, edit the rule to change layer versions or to turn APM and Logs on or off.
 
 ## Remove Datadog instrumentation
 
@@ -262,6 +276,20 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 
 - **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Layers and environment variables you added yourself are left in place.
+
+<div class="alert alert-danger">Remove instrumentation in Datadog before you delete the CloudFormation stack or remove the AWS integration. Unlike remote instrumentation, deleting the stack does not remove instrumentation. It removes the permissions Datadog uses to uninstall, so the instrumentation stays on your resources and Datadog can no longer remove it.</div>
+
+To remove all instrumentation from an AWS account:
+
+1. Open the [AWS Install Agents page][8] and select the account.
+1. Select **Lambda Functions** and click **Remove all**. Repeat for **EC2 Instances**.
+1. Review the summary and click **Uninstall Agent**.
+1. Wait for Datadog to report that the resources are uninstrumented. Only then delete the CloudFormation stack or remove the AWS integration, if you still want to.
+
+If the stack is already deleted, Datadog can't clean up. On the AWS Install Agents page, click **Remove all** and **Uninstall Agent** anyway, so that Datadog does not instrument the resources again if the stack is recreated. Then remove the instrumentation yourself:
+
+- **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, remove `DD_SITE`, `DD_ORG_UUID`, and `DD_LAMBDA_HANDLER`, and restore `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to the values they had before, or remove them if the function didn't set them. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
+- **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources listed in [Created as needed, for EC2 instances][21]. Leave `AmazonSSMManagedInstanceCore` attached to an instance's existing role unless you know Datadog added it, because Systems Manager needs it to reach the instance.
 
 ## Troubleshooting
 
@@ -291,6 +319,10 @@ AWS limits a function to five layers, and Datadog adds two layers, or one for OS
 
 Java and .NET instrumentation sets `AWS_LAMBDA_EXEC_WRAPPER`. When a function already sets that variable to something other than the Datadog wrapper, Datadog skips the function rather than overwrite your wrapper. To instrument the function through the AWS integration, remove the custom wrapper from the function. If the function needs its own wrapper, instrument it yourself instead; see [Instrumenting AWS Lambda][18].
 
+### A Lambda function with less than 256 MB of memory is not instrumented
+
+New Lambda rules exclude these functions by default, so they appear as excluded rather than ineligible. To cover them, clear **Exclude low-memory functions** on the rule. See [Functions with low memory](#functions-with-low-memory) before you do.
+
 ### A Lambda function appears as ineligible
 
 Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisites](#aws-lambda-functions). The most common reasons are a container image package type, an unsupported runtime or architecture, a function outside the commercial `aws` partition, and Lambda@Edge functions. Lambda@Edge replicas and the functions they replicate are both excluded.
@@ -318,3 +350,5 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
 [19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[20]: https://docs.datadoghq.com/agent/guide/how-do-i-uninstall-the-agent/
+[21]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances

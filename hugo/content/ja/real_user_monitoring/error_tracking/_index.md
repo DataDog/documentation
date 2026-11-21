@@ -1,44 +1,44 @@
 ---
 algolia:
   tags:
-  - エラー追跡
-description: Web アプリケーションやモバイルアプリケーションから収集したエラーを検索し、管理する方法をご紹介します。
+  - error tracking
+description: Web アプリケーションやモバイルアプリケーションから収集されたエラーを検索および管理する方法を紹介します。
 further_reading:
 - link: https://www.datadoghq.com/blog/error-tracking/
-  tag: GitHub
-  text: Datadog Error Tracking で、アプリケーションの問題を解明
+  tag: ブログ
+  text: Datadog Error Tracking で、アプリケーションの問題を解明する
 - link: https://www.datadoghq.com/blog/ios-crash-reporting-datadog
-  tag: GitHub
-  text: Datadog RUM で iOS のクラッシュを効率的にデバッグする
+  tag: ブログ
+  text: Datadog RUM を使用して、iOS のクラッシュを効率的にデバッグする
 - link: https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/
-  tag: GitHub
-  text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
+  tag: ブログ
+  text: Datadog のテクニカルソリューションチームが RUM、Session Replay、Error Tracking を使用して顧客の問題を解決する方法
 - link: https://www.datadoghq.com/blog/error-tracking-logs/
   tag: ブログ
-  text: Datadog Error Tracking でログのエラーを追跡し、トリアージする
+  text: Datadog Error Tracking を使用して、ログ内のエラーを追跡し、トリアージする
 - link: /real_user_monitoring/error_tracking/explorer
   tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+  text: Error Tracking エクスプローラーについて
 - link: /monitors/types/error_tracking/
   tag: ドキュメント
-  text: エラー追跡モニターを作成する
-title: Web アプリケーションとモバイルアプリケーションのエラー追跡
+  text: Error Tracking モニターを作成する
+title: Web アプリケーションやモバイルアプリケーション向けの Error Tracking
 ---
+## 概要 {#overview}
 
-## 概要
-
-{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Error Tracking Explorer の問題の詳細画面" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="Error Tracking エクスプローラーにおける課題の詳細" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
-RUM エラーの課題には、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの場所、バージョン、クラッシュレポートに含まれるカスタム属性を含む) が含まれます。
+RUM エラーからの問題には、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの所在地、バージョン、クラッシュレポートに含めたカスタム属性など) が含まれます。
 
-Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**Digital Experience** > **Error Tracking**][1] に移動します。
+[Error Tracking エクスプローラー][3]のドキュメントで、Error Tracking の主な機能をひととおりご確認ください。RUM の Error Tracking エクスプローラーを表示するには、[{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][1] に移動してください。
 
-## セットアップ
+## セットアップ{#setup}
 
-{{< whatsnext desc="RUM 用の Datadog Error Tracking を始めるには、対応するドキュメントを参照してください。" >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
+{{< whatsnext desc="RUM 用の Datadog Error Tracking を開始するには、対応するドキュメントを参照してください。" >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}ブラウザ{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/application_monitoring/electron/error_tracking" >}}Electron{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
@@ -46,9 +46,10 @@ Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/maui" >}}.NET MAUI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

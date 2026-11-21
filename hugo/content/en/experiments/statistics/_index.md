@@ -13,4 +13,6 @@ Datadog Experiments provides statistical tools for estimating lift, choosing ana
     {{< nextlink href="/experiments/statistics/minimum_detectable_effect" >}}Minimum Detectable Effects: Determine the smallest detectable difference for a statistically significant result{{< /nextlink >}}
     {{< nextlink href="/experiments/statistics/multiple_testing_correction" >}}Multiple Testing Correction: Control the family-wise error rate across multiple metrics and variants{{< /nextlink >}}
     {{< nextlink href="/experiments/statistics/global_lift" >}}Global Lift: Estimate how an experiment affects metric totals across your entire user population{{< /nextlink >}}
+    {{< nextlink href="/experiments/statistics/lift_and_interval_calculations" >}}Lift and Interval Calculations: Reproduce the lift estimates and intervals for each analysis method{{< /nextlink >}}
+    {{< nextlink href="/experiments/statistics/expected_regret_and_evsi" >}}Expected Regret and EVSI: Decide whether to stop a Bayesian experiment or collect more data{{< /nextlink >}}
 {{< /whatsnext >}}

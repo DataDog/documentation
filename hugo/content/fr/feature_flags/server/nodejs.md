@@ -302,6 +302,7 @@ Utilisez [Server SDK Configuration Sources][6] comme référence canonique pour 
 - [Configurer la livraison agentless][9], y compris l'interrogation, le délai d'expiration de la requête et les paramètres d'endpoints
 - [Utiliser un endpoint agentless personnalisé][7] pour les tests avancés, le développement local ou un proxy géré par l'opérateur
 - [Utiliser Agent Remote Configuration][10] pour conserver la livraison gérée par l'agent
+- [Démarrez l'Agent avant l'application][12] lorsque vous utilisez Agent Remote Configuration
 - [Migrer une Remote Configuration existante][8] et supprimer le paramètre obsolète `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`
 
 En mode agentless, Node.js utilise un relais de télémétrie local compatible lorsqu'il est disponible. Il envoie directement les événements d'exposition aux expériences lorsqu'aucun relais compatible n'est disponible. Pour les environnements serverless sans agent, vous pouvez utiliser [`serverless-init`][11] comme relais de télémétrie local.
@@ -383,3 +384,4 @@ L'extrait ci-dessus utilise Vitest pour sa prise en charge ESM de premier ordre.
 [9]: /fr/feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [10]: /fr/feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /fr/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /fr/feature_flags/concepts/configuration_sources/#agent-availability

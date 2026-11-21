@@ -2,46 +2,46 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/browser-tests/
   tag: ブログ
-  text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
+  text: Datadog Browser Tests によるユーザーエクスペリエンスのモニタリング
 - link: synthetics/browser_tests
-  tag: Documentation
-  text: Synthetic ブラウザテストについて
-title: ブラウザテストでのポップアップの処理
+  tag: ドキュメント
+  text: Synthetic ブラウザテストについて学ぶ
+title: ブラウザテストでポップアップを処理する
 ---
-## 概要
+## 概要 {#overview}
 
-Synthetic の[ブラウザテスト][5]で、モーダルやアプリケーションウィンドウなどのポップアップを管理する方法について説明します。
+このガイドでは、Synthetic [ブラウザテスト][5] において、モーダルやアプリケーションウィンドウなどのポップアップを管理する方法を説明します。
 
-## モーダル
+## モーダル {#modals}
 
-### JavaScript
+### JavaScript {#javascript}
 
-Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を処理します。 
+Synthetic ブラウザテストは、[JavaScript モーダル][1] を自動的に処理します。
 
- - `alert` モーダルは OK の場合は即座に却下されます。
- - Google Chrome または Microsoft Edge のテストでは、`prompt` モーダルが `Lorem Ipsum` で埋められます。
- - 確認を求める `confirm` モーダルは受け付けられます。
+ OK の場合、- `alert` モーダルは、直ちに閉じられます。
+ - `prompt` モーダルには、Google Chrome または Microsoft Edge でのテスト時に `Lorem Ipsum` が入力されます。
+ - `confirm` 確認を求めるモーダルは、承諾されます。
 
-### 基本認証
+### 基本認証 {#basic-authentication}
 
-基本認証ポップアップの場合、ブラウザテスト構成の [**Advanced Options**][2] で関連する資格情報を指定します。
+基本認証のポップアップでは、ブラウザテストの設定にある [{{< ui >}}Advanced Options{{< /ui >}}][2] で、対応する認証情報を指定してください。
 
 {{< img src="synthetics/guide/popup/http_authentication.png" alt="基本認証ポップアップ" style="width:90%" >}}
 
-## アプリケーションポップアップ
+## アプリケーションのポップアップ {#application-pop-ups}
 
-### 固定ポップアップ
+### アンカー付きポップアップ {#anchored-pop-ups}
 
-ユーザージャーニーの特定の時点でポップアップが表示された場合、閉じるためのステップを記録し、[対応するオプション][3]を使いそのステップを失敗させることができます。それにより、テストはポップアップが表示された際の対応を学ぶことができます。ポップアップが表示されない場合、ステップは失敗しますが、テスト全体が失敗に終わることはありません。
+ジャーニーの特定のポイントでポップアップが表示される場合は、それを閉じるステップを記録してください。ステップの詳細オプションで、[{{< ui >}}If this step fails, continue to next step{{< /ui >}}] を選択してください。次に、[{{< ui >}}If this step fails, mark test as failed{{< /ui >}}] (デフォルトで選択されています) のチェックを外してください。ポップアップが表示されない場合、そのステップは失敗しますが、テスト全体は失敗しません。詳細については、[オプションのステップ][3] セクションを参照してください。
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="ポップアップを処理するためにステップの失敗を許可する" style="width:60%" >}}
+{{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="[continue to next step] が選択され、[mark test as failed] のチェックが外れているステップの詳細オプション。" style="width:60%" >}}
 
-### ポップアップの移動
+### 表示タイミングが変動するポップアップ {#moving-pop-ups}
 
-セッション中にポップアップが表示される時間を予測できない場合は、ブラウザテストの実行中にポップアップが表示されないようにするルールを作成してもらえないか、ポップアップを出すサードパーティーに確認してください。例えば、テストの [**Advanced Options** セクション][2]に挿入できるクッキーなどがあるかもしれません。
+セッション内でこれらのポップアップが表示されるタイミングが予測できない場合は、ポップアップを提供しているサードパーティに問い合わせて、ブラウザテストの実行中にポップアップが表示されないようにするルールを作成できるかどうかを確認してください。たとえば、テストの [{{< ui >}}Advanced Options{{< /ui >}} セクション][2] に入力できる Cookie を提供してもらうことができます。
 
-または、次のいずれかの方法でポップアップが閉じたままテストが続行できるようにします。
-  * ブラウザテストの開始時に [JavaScript アサーション][4]を作成し、ポップアップを定期的に閉じるようにします。
+あるいは、以下のいずれかの方法でポップアップを確実に閉じ、テストがジャーニーを継続できるようにしてください。
+  * ブラウザテストの冒頭に [JavaScript アサーション][4] を作成し、定期的にポップアップを閉じるようにしてください。
 
     ```javascript
     if (document.querySelector("<ELEMENT>")) {
@@ -59,14 +59,14 @@ Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を�
     }
     ```
 
-  * ポップアップを閉じるためのステップを記録し、他のブラウザテストのステップの間に追加し、それぞれに対し[**このステップの失敗を許可** オプション][3]を選択します。
+  * ポップアップを閉じるステップを記録し、他のブラウザテストの各ステップの間に追加してください。各ステップで、[{{< ui >}}If this step fails, continue to next step{{< /ui >}}] を選択してください。次に、[{{< ui >}}If this step fails, mark test as failed{{< /ui >}}] (デフォルトで選択されています) のチェックを外してください。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://javascript.info/alert-prompt-confirm
 [2]: /ja/synthetics/browser_tests/#test-configuration
 [3]: /ja/synthetics/browser_tests/advanced_options/#optional-step
-[4]: /ja/synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[4]: /ja/synthetics/browser_tests/test_steps#test-your-ui-with-custom-javascript
 [5]: /ja/synthetics/browser_tests

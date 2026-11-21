@@ -29,6 +29,21 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 Datadog supports official OS packages from vendors listed above. Third-party or self-compiled packages are not supported.
 </div>
 
+{{% collapse-content title="Linux kernel packages in container images" level="h3" %}}
+
+Datadog doesn't report vulnerabilities for the kernel header and development packages listed below in container images. Containers use the host's kernel, so these packages can't introduce kernel vulnerabilities into a running container. This applies to images scanned with the Agent, Agentless scanning, or the CLI. The CLI's own output and `--fail-on` check can still include these packages. These packages still appear in the image's Software Bill of Materials (SBOM).
+
+**Not reported in container images:** header and development packages built from the main Linux kernel source:
+- On Debian and Ubuntu: `linux-libc-dev`, `linux-kbuild-*`, and `linux-headers-*` for the standard kernel and its HWE, AWS, GCP, Azure, and Oracle variants.
+- On RPM-based distributions such as RHEL, Amazon Linux, and SUSE: `kernel-headers`, `kernel-devel`, and `kernel-syms`.
+
+**Still reported:**
+- Kernel vulnerabilities on hosts, where the kernel runs.
+- All packages in a container image that also contains a kernel package, such as `linux-image-*`, `linux-modules-*`, or `kernel-core`.
+- All packages in a container image that also contains any other package built from the main kernel source that Datadog doesn't recognize as a header or development package.
+- Packages with similar names that aren't part of the kernel, such as `linux-firmware`, `linux-pam`, and `util-linux`.
+{{% /collapse-content %}}
+
 {{% collapse-content title="Windows limitations" level="h3" %}}
 - Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.
 - Datadog can't track vulnerability fixes that Windows applies outside of KB updates.

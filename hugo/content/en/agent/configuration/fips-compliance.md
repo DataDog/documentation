@@ -47,7 +47,7 @@ Supported products (Agent 7.65.0 and above):
 - Orchestrator Explorer
 - Runtime Security
 - Serverless Monitoring
-- Datadog [DDOT Collector][4]
+- [Agent's Collector][4] (the OpenTelemetry Collector that runs alongside the Agent as a separate process)
 
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
@@ -204,4 +204,4 @@ You, the Datadog customer, are responsible for **host** security and hardening.
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [3]: /integrations/guide/fips-integrations
-[4]: /opentelemetry/setup/ddot_collector
+[4]: /opentelemetry/setup/agent/#agents-collector

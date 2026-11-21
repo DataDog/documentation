@@ -12,7 +12,7 @@ further_reading:
 - link: /actions/private_actions/set_up_agent_based/
   tag: Documentación
   text: Configurar un ejecutor de Private Actions
-- link: /actions/private_actions/execution_policies/
+- link: /actions/execution_policies/
   tag: Documentación
   text: Políticas de ejecución
 - link: /actions/connections/
@@ -77,5 +77,5 @@ Para obtener las instrucciones de configuración completas (creación, edición 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/actions/private_actions/enroll_runner/
-[2]: /es/actions/private_actions/execution_policies/
+[2]: /es/actions/execution_policies/
 [3]: /es/actions/connections/
