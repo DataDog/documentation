@@ -4,7 +4,7 @@ description: "Use the Infrastructure overlay in Cloudcraft to view resources gro
 further_reading:
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
-  text: "Observability overlay"
+  text: "Agent overlay"
 - link: "/datadog_cloudcraft/overlays/security/"
   tag: "Documentation"
   text: "Security overlay"
@@ -17,7 +17,7 @@ further_reading:
 
 The Infrastructure overlay provides a broad overview of your cloud environment by grouping resources into a provider-specific hierarchy. This is the default view when opening a Cloudcraft diagram.
 
-{{< img src="datadog_cloudcraft/infra_overlay_5.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/infra_overlay_6.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
 
 ## Use cases
 
@@ -30,11 +30,11 @@ The Infrastructure overlay is ideal for:
 
 ## Resource grouping
 
-Resources are grouped by a provider-specific hierarchy. Use the **Group by** controls at the top of the diagram to customize the grouping.
+Resources are grouped by a provider-specific hierarchy. Use the **Group by** controls in **Full Map Controls** at the bottom of the diagram to customize the grouping.
 
 ## Interact with resources
 
-Click any resource to open a side panel with additional details, including:
+Click any resource to open a mini panel, then click **View Full Details** to open a side panel with additional details, including:
 
 - Resource type and name
 - Associated tags
