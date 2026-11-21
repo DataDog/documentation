@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   run_static_asset_validation:
-    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
+    if: github.head_ref != 'guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
 
@@ -21,13 +21,15 @@ jobs:
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
+          # The PR merge commit and its base parent, so the diff below has both sides.
+          fetch-depth: 2
           sparse-checkout: |
             .github/
 
       - name: Get list of added static files
         id: getfile
         run: |
-          echo $(git diff --diff-filter=AM --name-only ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }} hugo/static | xargs) > files.txt
+          echo $(git diff --diff-filter=AM --name-only HEAD^1 HEAD -- hugo/static | xargs) > files.txt
           
       - name: Validate filenames
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
