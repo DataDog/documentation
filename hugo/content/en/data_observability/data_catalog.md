@@ -30,7 +30,7 @@ The catalog stays in sync with [supported data sources](/data_observability/qual
 When you open the catalog at [/data-obs/catalog](https://app.datadoghq.com/data-obs/catalog), you see a list of all assets across your connected integrations. Each asset card displays:
 
 - **Asset type**: table, schema, dashboard, job, etc.
-- **Name** and path (e.g., `account > database > schema`)
+- **Name** and path (for example, `account > database > schema`)
 - **Integration and account**: the source system and account it was synced from
 - **Description**: pulled from the source system if available
 - **Links to the source system**: direct references back to the origin platform so you can navigate from the catalog to the source in one click
@@ -54,9 +54,43 @@ Wildcards and unions are also supported:
 - **Union**: `data_owner:(team-a OR team-b)` matches assets owned by either team
 - **Intersection**: `dim_zendesk AND data_owner:TS-OPS-ANALYTICS`
 
-Recent searches are saved and surfaced in the dropdown for quick reuse.
+Recent searches are saved and surfaced in the dropdown for reuse.
+
+### Filter with facets
+
+Use the facets panel next to the results to filter the list without typing a query. Select one or more values in a facet to narrow the results:
+
+- **Platform**: The integration the asset comes from. This facet appears when you haven't selected an integration.
+- **Asset type**: The kind of asset, shown with a readable name such as {{< ui >}}Table{{< /ui >}} or {{< ui >}}Metabase question{{< /ui >}}.
+- **Attributes**: Fields such as account, database, and schema, depending on the integrations you have connected.
+- **Tags**: Tag keys, grouped by source. Tags added in Datadog are listed under {{< ui >}}Custom tags{{< /ui >}}.
+
+## Asset pages
+
+Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, {{< ui >}}Schema{{< /ui >}}, {{< ui >}}Columns{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs, and a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table.
+
+### Schema change and query tabs
+
+- **Schema Changes**: The [schema changes][2] Datadog detected on the asset. Database, schema, table, and column pages have this tab. The tab is unavailable for an asset whose account isn't configured in Data Observability.
+- **Queries**: The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab.
+
+### Navigation tree
+
+The sidebar on an asset page shows where the asset sits in its integration's hierarchy, such as account, database, schema, and table. Click {{< ui >}}Hide Search{{< /ui >}} or {{< ui >}}Show Search{{< /ui >}} to close or open the sidebar, and drag its right edge to resize it.
+
+Each collapsed node in the tree shows:
+
+- **Monitor count**: The number of monitors on the node or on anything beneath it. Alerting monitors are counted separately, in red. Hover over the count to see the total and the number alerting.
+- **Lineage indicator**: Shown when the asset has downstream dependencies.
+
+By default, the tree is {{< ui >}}Sorted by recommended{{< /ui >}}: nodes with the most monitors come first, then nodes with more downstream dependencies, then the rest by name. Click the sort button next to the tree's search box to sort alphabetically.
+
+### Delete an asset
+
+To remove an asset that no longer belongs in the catalog, open the actions menu on the asset's page and select {{< ui >}}Delete asset{{< /ui >}}. Deleting an asset removes it and all of its descendants from Data Observability, and can take a few minutes. If Datadog still ingests the asset from its integration, it can reappear after the next sync. Deleting an asset requires the {{< ui >}}Data Observability Catalog Write{{< /ui >}} permission.
 
 [1]: /data_observability/lineage/
+[2]: /monitors/types/data_observability/#browse-detected-schema-changes
 
 ## Further reading
 
