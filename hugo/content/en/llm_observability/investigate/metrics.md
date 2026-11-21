@@ -29,6 +29,31 @@ Agent Observability also stores two other kinds of data, which have their own re
 
 <div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics. The exceptions are LLM token and cost metric tags, and <a href="#gateway-metrics">AI Gateway tags</a>. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
+### Conversation costs (unreleased)
+
+| Metric Name | Description | Metric Type | Tags |
+|-------------|-------------|-------------|------|
+| `ml_obs.span.llm.cost` | Disjoint cost contributions in nanodollars, including reported conversation charges. | Count | `ml_app`, `service`, `env`, `version`, `model_provider`, `charge_scope`, `cost_source`, `cost_component` |
+| `ml_obs.span.conversation.cost` | Accepted conversation total in nanodollars (USD × 1e9), once per conversation. | Count | `ml_app`, `service`, `env`, `version`, `model_provider`, `charge_scope`, `cost_source` |
+
+For ElevenLabs, `model_provider:elevenlabs` and `charge_scope:conversation` identify hosted conversation billing. `cost_source:provider` uses the reported USD total or complete USD component pair; `cost_source:user` uses an explicit user override. Unavailable totals do not emit a zero point. Explicit zeros are retained.
+
+Use **sum** aggregation with `.as_count()` for period totals, then divide by `1e9` to display USD. Points use the first time a known total is accepted by Datadog, so delayed billing appears when reported. Retries do not add another contribution. Initial metric delivery has a deadline of 3 hours and 55 minutes from first acceptance; expired or uncertain delivery remains pending without automatic backfill. After successful initial metric delivery, missing-value enrichment can update the billing workflow for 24 hours from the same acceptance timestamp, without another total metric. Exact retries do not restart that window. Expired enrichment is rejected asynchronously. A late initial report receives a new acceptance timestamp.
+
+The `cost_component` tag on `ml_obs.span.llm.cost` identifies each cost contribution:
+
+| Value | Covered charges |
+|-------|-----------------|
+| `llm` | The LLM portion of a conversation charge, or ordinary token-priced LLM and embedding costs. |
+| `platform` | Non-token platform charges reported by the hosted provider. |
+| `unattributed` | Tool costs, or the accepted conversation total when the complete LLM/platform breakdown is unavailable or does not match after rounding. |
+
+Conversation contributions use separate `llm` and `platform` components only when both are known and their rounded sum equals the accepted total. These contributions sum to the total once. The partition is fixed when Datadog first accepts a known total; late component details enrich the billing workflow but do not rewrite the metric. Token metrics and their `token_modality` tags are unchanged.
+
+Query either cost metric family with `sum` and `.as_count()`. Do not add `ml_obs.span.llm.cost` to `ml_obs.span.conversation.cost`, because they include the same conversation charges.
+
+Platform charges are separate from token counts and token-modality pricing. Do not add the conversation total to its LLM/platform breakdowns. See [provider-reported conversation costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased) for availability and covered charges.
+
 ### Span metrics
 
 | Metric Name | Description | Metric Type | Tags |
@@ -86,7 +111,7 @@ Use these Count metrics to group usage and spend by token modality, I/O directio
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.span.llm.cost` | Estimated cost from LLM and embedding spans, plus user-provided tool-span costs | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `input_without_output`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_match`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `source`, `span_kind`, `token_modality`, `ttl`, `version` |
+| `ml_obs.span.llm.cost` | LLM and embedding costs, user-provided tool costs, and provider-reported conversation charges | Count | `context_tier`, `cost_component`, `cost_estimate_status`, `env`, `error`, `input_type`, `input_without_output`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_match`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `source`, `span_kind`, `token_modality`, `ttl`, `version` |
 | `ml_obs.span.llm.tokens` | Input and output token usage from LLM spans | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `token_modality`, `ttl`, `version` |
 
 Embedding tokens are available through `ml_obs.span.embedding.input.tokens`. Tags appear when the corresponding span data or breakdown is available. These metrics also support [custom tags][12]. For breakdown tag values and query examples, see the [Metrics section of the Cost page][11].

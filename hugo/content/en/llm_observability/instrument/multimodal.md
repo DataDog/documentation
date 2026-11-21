@@ -80,6 +80,21 @@ Audio in streamed chat completions is not captured.
 
 Integrations don't fetch images referenced by a remote URL or a file ID. They capture only images that the application sends inline as base64 data. When an integration cannot capture media, it records a text marker such as `[image]` or `[audio]` in the message.
 
+## Conversation billing (unreleased)
+
+ElevenLabs audio capture and billing have separate availability. Python billing uses `LLMObs.submit_conversation_cost`; Node.js billing uses `llmobs.submitConversationCost`. Both require Datadog backend support and a released tracer exposing that API.
+
+| Billing API | Minimum tracer version | Verified provider SDK schema |
+| --- | --- | --- |
+| Python `submit_conversation_cost` | Unreleased | `elevenlabs` 2.70.0 and 2.75.0 |
+| Node.js `submitConversationCost` | Unreleased | `@elevenlabs/elevenlabs-js` 2.75.0 |
+
+With LLM Observability and the ElevenLabs integration enabled, billing collection starts automatically after the WebSocket session ends. The tracer uses the existing SDK client and credentials to make up to five additional conversation-details requests in a 30-second retry window. Credentials must permit reading conversation details. Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` to disable these requests.
+
+Collection runs in the background and supports up to eight concurrent conversations. Python uses a daemon worker. Node.js retry waits do not keep the process alive, but an in-flight HTTP request can delay exit until completion or timeout. USD billing can be delayed or unavailable. For delivery that must survive process exit, configure a post-call transcription webhook. Submit application-verified data with the explicit API, passing the originating voice application. Absent cost fields remain unknown.
+
+Conversation charges include the reported LLM and platform amounts and have one conversation owner. Captured audio duration and `context_usage` are not billing measurements. See [conversation billing setup](/llm_observability/instrument/sdk/#submit-conversation-costs-unreleased) and [covered costs](/llm_observability/investigate/cost/#provider-reported-conversation-costs-unreleased).
+
 ## OpenTelemetry instrumentation
 
 Datadog extracts media from [OpenTelemetry spans][2] that contain the following [GenAI message parts][7]. No additional instrumentation is needed if your application already emits these parts:
