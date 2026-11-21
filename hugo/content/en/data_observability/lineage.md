@@ -25,6 +25,8 @@ Lineage shows how data flows through your stack—from source systems and wareho
 
 Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Azure Data Factory, Fivetran, Hightouch, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
 
+Lineage doesn't extend from an external table to the files it reads. For example, the Cloud Storage files behind a BigQuery external table don't appear upstream of that table.
+
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
 To open Lineage, go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Lineage{{< /ui >}}.
@@ -73,6 +75,8 @@ The toolbar on the right of the canvas provides {{< ui >}}zoom in{{< /ui >}}, {{
 
 The time selector in the top-right corner (`1w`, `Past 1 Week`, and so on) sets the window used to evaluate lineage. Datadog derives relationships from query history and job runs within this window: widen it to surface older or less frequent dependencies, narrow it to show only what's active.
 
+Job run details on the graph also follow the selected time frame. Job nodes show the number of runs, the number of failed runs, and the average duration for runs in that window. A job node's status badge reflects the same runs: for example, {{< ui >}}Last run failed{{< /ui >}}, the share of runs that failed, or a change in average duration compared with the period of equal length before the selected time frame.
+
 ## Lineage Controls
 
 The {{< ui >}}Lineage Controls{{< /ui >}} panel on the left configures the shape and contents of the graph.
@@ -113,6 +117,18 @@ Filtering does not change the anchor or the depth—it only hides nodes from the
 
 Grouping is most useful for zooming out: group by {{< ui >}}Schemas{{< /ui >}} to see how data flows across a warehouse, then drill down to {{< ui >}}Tables{{< /ui >}} or {{< ui >}}Columns{{< /ui >}} after you find the area of interest.
 
+## Stale assets
+
+Datadog removes an asset or a lineage edge from Data Observability after 35 days without new metadata about it, from either an integration or an OpenLineage event. An asset that no source reports anymore, such as a dropped table or a retired job, leaves the graph after that period.
+
+To remove a stale asset sooner, delete it from the catalog:
+
+1. Go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}} and open the asset.
+2. In the page header, open the three-dot menu and select {{< ui >}}Delete asset{{< /ui >}}.
+3. Click {{< ui >}}Delete{{< /ui >}} to confirm.
+
+Deleting an asset removes it and all of its descendants from Data Observability, including the lineage graph. If a source still reports the asset, it reappears on the next sync. Deleting an asset requires the `Data Observability Catalog Write` [permission][3].
+
 ## Common workflows
 
 ### Root cause analysis
@@ -150,3 +166,4 @@ Most integrated sources support column-level lineage.
 
 [1]: /data_observability/quality_monitoring/
 [2]: /data_observability/jobs_monitoring/
+[3]: /account_management/rbac/permissions/#permissions-list

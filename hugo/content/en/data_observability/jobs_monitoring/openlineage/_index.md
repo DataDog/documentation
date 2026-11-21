@@ -520,6 +520,19 @@ After sending your events, use the following pages to verify that Datadog receiv
 - [**Lineage**][9]: Search for your job name to see the job and its connections to any datasets included in the event.
 - [**OpenLineage events**][12]: Check the validation status of your events: `Ok`, `Warning`, or `Error`. Select an event to view the exact payload Datadog received, or filter by validation status to troubleshoot events that did not process successfully. Start here if the results don't appear as expected in the other two views.
 
+## Send runs from tools without OpenLineage support
+
+If a tool doesn't emit OpenLineage events, you can send its runs to Datadog from a separate process that reads the tool's run history. A typical poller works as follows:
+
+1. On a schedule, read the runs that started or finished since the last poll from the tool's API, database, or log files.
+2. For each new run, send a `START` event with `eventTime` set to the time the run started in the tool.
+3. When the run ends, send a `COMPLETE` or `FAIL` event with `eventTime` set to the time the run ended in the tool. For a failed run, include the `errorMessage` run facet with the tool's error.
+4. Track which events you already sent, so a run isn't reported twice.
+
+Datadog takes a run's start time from the `eventTime` of its `START` event, and its end time from the `eventTime` of its `COMPLETE` or `FAIL` event. Set `eventTime` from the times the tool recorded so that run durations in Datadog match the tool.
+
+Send both events for a run with the same `runId`. To keep the `runId` stable when the poller restarts, derive it from the tool's own run identifier, for example with `uuid.uuid5(uuid.NAMESPACE_URL, "<TOOL_NAME>/<TOOL_RUN_ID>")` in Python. Datadog treats a second `START` event that has the same `runId` and a different `eventTime` as a retry of that run.
+
 ## Correlate logs with job runs
 
 To correlate your application logs with a job run in Datadog, emit your logs with the OpenLineage run ID in the `@openlineage.run_id` attribute. Set its value to the same `runId` you send in your OpenLineage run events. Datadog uses this attribute to associate logs with the matching job run.
@@ -543,6 +556,8 @@ Datadog resolves datasets into a hierarchy of account, database, schema, and tab
 | AWS Glue   | `arn:aws:glue:{region}:{accountId}`              | `{database}.{table}`          |
 | S3         | `s3://{bucket}`                                  | `{path}`                      |
 
+To link a Snowflake output to a table in the catalog, use the `snowflake://{org}-{account}` namespace and the fully qualified `{database}.{schema}.{table}` name. If a Snowflake name doesn't have exactly three parts, Datadog links the dataset to the Snowflake account node instead of a table.
+
 For platforms not listed here, follow the [OpenLineage naming conventions][8].
 
 The following example shows a job reading from a PostgreSQL table and writing to a Snowflake table:
@@ -563,6 +578,65 @@ The following example shows a job reading from a PostgreSQL table and writing to
 ```
 
 **Note**: If a dataset namespace is not recognized, Datadog still creates a lineage node for it but does not surface it in the Data Observability product. Use a recognized namespace format to have datasets appear in the catalog and lineage graph.
+
+### Column-level lineage
+
+To send column-level lineage, include a [`schema` facet][13] on each input and output dataset, and a [`columnLineage` facet][14] on each output. Every column that `columnLineage` names must also appear in the `schema` facet of its dataset.
+
+Datadog builds column-level lineage only for datasets in a recognized namespace, such as the BigQuery, Snowflake, Redshift, PostgreSQL, Databricks, AWS Glue, and S3 namespaces in the table above. Datasets with a custom namespace get table-level lineage only, even when the event includes a `columnLineage` facet.
+
+The following example maps the `order_id` and `amount` columns of a PostgreSQL table to the matching columns of a Snowflake table:
+
+```json
+"inputs": [
+  {
+    "namespace": "postgres://db.example.com:5432",
+    "name": "mydb.public.raw_orders",
+    "facets": {
+      "schema": {
+        "_producer": "<YOUR_PRODUCER_ID>",
+        "_schemaURL": "https://openlineage.io/spec/facets/1-1-1/SchemaDatasetFacet.json",
+        "fields": [
+          { "name": "order_id", "type": "integer" },
+          { "name": "amount", "type": "numeric" }
+        ]
+      }
+    }
+  }
+],
+"outputs": [
+  {
+    "namespace": "snowflake://myorg-myaccount",
+    "name": "ANALYTICS.PUBLIC.ORDERS",
+    "facets": {
+      "schema": {
+        "_producer": "<YOUR_PRODUCER_ID>",
+        "_schemaURL": "https://openlineage.io/spec/facets/1-1-1/SchemaDatasetFacet.json",
+        "fields": [
+          { "name": "order_id", "type": "NUMBER" },
+          { "name": "amount", "type": "NUMBER" }
+        ]
+      },
+      "columnLineage": {
+        "_producer": "<YOUR_PRODUCER_ID>",
+        "_schemaURL": "https://openlineage.io/spec/facets/1-2-0/ColumnLineageDatasetFacet.json",
+        "fields": {
+          "order_id": {
+            "inputFields": [
+              { "namespace": "postgres://db.example.com:5432", "name": "mydb.public.raw_orders", "field": "order_id" }
+            ]
+          },
+          "amount": {
+            "inputFields": [
+              { "namespace": "postgres://db.example.com:5432", "name": "mydb.public.raw_orders", "field": "amount" }
+            ]
+          }
+        }
+      }
+    }
+  }
+]
+```
 
 ## Supported facets
 
@@ -606,6 +680,8 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | `errorMessage` | Generates error spans with `error.message` and `error.stack` tags                  |
 | `tags`         | Adds custom tags to the job or run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
+| `schema`       | Creates column nodes for datasets in a recognized namespace. See [Column-level lineage](#column-level-lineage). |
+| `columnLineage` | Creates column-level lineage edges from input columns to output columns. See [Column-level lineage](#column-level-lineage). |
 
 **Note**: Each tag in the [`tags` facet][2] must include a `key`, `value`, and `source`.
 
@@ -632,3 +708,5 @@ Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 [10]: /logs/log_collection/
 [11]: /tracing/trace_explorer/?tab=listview
 [12]: https://app.datadoghq.com/data-obs/settings/open-lineage
+[13]: https://openlineage.io/docs/spec/facets/dataset-facets/schema
+[14]: https://openlineage.io/docs/spec/facets/dataset-facets/column_lineage_facet
