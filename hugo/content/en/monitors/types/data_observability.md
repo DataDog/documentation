@@ -187,7 +187,7 @@ The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value ret
 
 The `dd_value` alias is not case-sensitive, so a warehouse that returns `DD_VALUE` works. A `NULL` value is recorded as `0`. A query can end with a semicolon.
 
-To track a value for each group, return group columns alongside `dd_value`, for example with a `GROUP BY` clause. Each column other than `dd_value` is a group column, and each returned row is evaluated as its own group. When validation returns rows, Datadog detects the group columns from the result. If you skip validation or it returns no rows, enter the group columns in the {{< ui >}}Group by{{< /ui >}} field, separated by commas (for example, `column_a, column_b`).
+To track a value for each group, return group columns alongside `dd_value`, for example with a `GROUP BY` clause. Each column other than `dd_value` is a group column, and each returned row is evaluated as its own group. When validation returns rows, Datadog detects the group columns from the result. If you skip validation, or validation passes without returning sample rows, enter the group columns yourself. Use the {{< ui >}}Group by{{< /ui >}} field, and separate the columns with commas (for example, `column_a, column_b`).
 
 If validation fails, the error describes the problem:
 
@@ -197,7 +197,7 @@ If validation fails, the error describes the problem:
 | `The query result must be numeric` | The `dd_value` column contains a value that can't be read as a number. |
 | `No rows were returned` | The query returned no rows. |
 | `Custom SQL monitors can't group by timestamp values` | A group column contains timestamp values. |
-| `More groups were returned than are allowed` | The query returned more groups than the monitor's group limit. |
+| `More groups were returned than are allowed` | The query returned more groups than the group limit allows. For the limit, see [Group by](#group-by). |
 
 <div class="alert alert-warning">Datadog stores the <code>dd_value</code> result and the value of each grouped column. Avoid grouping by columns that contain sensitive data. For details, see <a href="/data_observability/quality_monitoring/#data-sent-to-datadog">Data sent to Datadog</a>.</div>
 
@@ -215,7 +215,7 @@ If validation fails, the error describes the problem:
 Select a detection method:
 
 - {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
-- {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`more than`, `more than or equal to`, `less than`, `less than or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
+- {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`more than`, `more than or equal to`, `less than`, `less than or equal to`, `equal to`, or `not equal to`) and define an {{< ui >}}Alert threshold{{< /ui >}} (required) and optionally a {{< ui >}}Warning threshold{{< /ui >}}. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
 
@@ -249,7 +249,7 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand t
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
-| {{< ui >}}Alert direction{{< /ui >}} | Controls which side of the expected bounds triggers an alert: {{< ui >}}Above or below{{< /ui >}} (the default), {{< ui >}}Above{{< /ui >}}, or {{< ui >}}Below{{< /ui >}}. For example, select {{< ui >}}Below{{< /ui >}} on a Row Count monitor to alert on drops but not on spikes. In the API, set this value with the `model_bounds_override` option (`UPPER_ONLY` or `LOWER_ONLY`). |
+| {{< ui >}}Alert direction{{< /ui >}} | Controls which side of the expected bounds triggers an alert: {{< ui >}}Above or below{{< /ui >}} (the default), {{< ui >}}Above{{< /ui >}}, or {{< ui >}}Below{{< /ui >}}. For example, select {{< ui >}}Below{{< /ui >}} on a Row Count monitor to alert on drops but not on spikes. In the API, set `monitor_options.model_configuration.model_bounds_override` to `UPPER_ONLY` for {{< ui >}}Above{{< /ui >}} or `LOWER_ONLY` for {{< ui >}}Below{{< /ui >}}. Leave it unset to alert on both sides. |
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
 | {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
 
@@ -357,21 +357,21 @@ A {{< ui >}}WHERE{{< /ui >}} clause is not accepted for this metric type. Includ
 
 The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
 
-The {{< ui >}}Anomalies{{< /ui >}} detection method learns the usual difference between the source and the target from the monitor's history. A difference that already exists when you create the monitor becomes part of the expected range, so the monitor does not alert on it. To require the two sides to match, select {{< ui >}}Thresholds{{< /ui >}}, set the comparison to `not equal to`, and set the {{< ui >}}Critical{{< /ui >}} threshold to `0`.
+The {{< ui >}}Anomalies{{< /ui >}} detection method learns the usual difference between the source and the target from the monitor's history. A difference that already exists when you create the monitor becomes part of the expected range, so the monitor does not alert on it. To require the two sides to match, select {{< ui >}}Thresholds{{< /ui >}}, set the comparison to `not equal to`, and set the {{< ui >}}Alert threshold{{< /ui >}} to `0`.
 
 ## Schema change monitors
 
 <div class="alert alert-info">Schema change monitors are in Preview.</div>
 
-A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard, such as when a column is dropped, a table is renamed, or a column switches to a different data type.
+A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard. For example, the monitor can alert on a dropped column, a renamed table, or a column that switches to a different data type.
 
 Schema change monitors detect four kinds of change across databases, schemas, tables, and columns:
 
 | Change type | `change_type` value | Description |
 |---|---|---|
 | Added | `added` | A schema, table, or column was created. |
-| Removed | `removed` | A database, schema, table, or column was dropped. |
-| Renamed | `renamed` | A table was renamed. A renamed column appears as one removed column and one added column. |
+| Removed | `removed` | A database, schema, table, or column was dropped. When a database, schema, or table is dropped, each object inside it is also reported as removed. |
+| Renamed | `renamed` | A table was renamed. Datadog detects a rename when a new table with the same columns and data types replaces the old table in the same schema. Otherwise, the rename appears as one removed table and one added table. A renamed column appears as one removed column and one added column. |
 | Type changed | `type_changed` | A column's data type changed, such as from `INTEGER` to `STRING`, or a table's type changed. |
 
 Schema changes are detected for Snowflake, BigQuery, Databricks, Redshift, and [ClickHouse Cloud][17].
@@ -398,14 +398,14 @@ The search under {{< ui >}}Choose entities within the warehouse to monitor{{< /u
 | `change_type` | The kind of change: `added`, `removed`, `renamed`, or `type_changed`. |
 | `entity_type` | The kind of object that changed: `database`, `database_schema`, `database_table`, or `database_column`. |
 
-Combine fields with `AND` or `OR`, and prefix a field with `-` to exclude it. A search that can't be parsed, or that contains a field schema change monitors don't support, such as `name`, matches no changes. The monitor then doesn't alert.
+Combine fields with `AND` or `OR`, and prefix a field with `-` to exclude it. A search that can't be parsed matches no changes, so the monitor doesn't alert. A term that uses a field not listed in this table, such as `name:orders`, also matches no changes, and so does text without a field name. To match by name, use the `table` or `column` field.
 
 To alert on a single kind of change, filter on `change_type`. For example:
 
 | Goal | Search |
 |---|---|
 | Alert only when an object is removed | `change_type:removed` |
-| Alert only when a column is removed | `change_type:removed AND entity_type:database_column` |
+| Alert on removed columns, including the columns of a dropped table | `change_type:removed AND entity_type:database_column` |
 | Alert on every change except additions | `-change_type:added` |
 
 ### Browse detected schema changes
@@ -472,7 +472,7 @@ The monitor recovers automatically when a later run succeeds.
 
 <div class="alert alert-info">Job duration monitors are in Preview.</div>
 
-The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. When the job platform reports that a run has started, the check also evaluates the run while it is in progress. An alert can then fire before the run finishes. Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
+The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. For some technologies, the check also evaluates runs that are still in progress, so an alert can fire before the run finishes. See [How job duration is evaluated](#how-job-duration-is-evaluated). Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
 
 Choose a {{< ui >}}Detection method{{< /ui >}}:
 
@@ -505,7 +505,8 @@ The preview graph shows the durations of recent completed runs for the selected 
 
 #### How job duration is evaluated
 
-- **Runs in progress**: A run is evaluated while it is in progress only when its job platform reports to Datadog that the run has started. While the run continues, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. If an alert fires during a run, the monitor's status page shows how long the run has been in progress. For custom OpenLineage jobs, send a `START` event when each run begins. Deferrable Airflow tasks are evaluated when they complete.
+- **Runs in progress**: Runs of Airflow DAGs and tasks, AWS Glue jobs, dbt jobs, and custom OpenLineage jobs are evaluated while they are in progress. Evaluation starts after the job platform reports to Datadog that the run has started. For custom OpenLineage jobs, send a `START` event when each run begins. While a run continues, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. If an alert fires during a run, the monitor's status page shows how long the run has been in progress.
+- **Evaluated at completion**: Deferrable Airflow tasks, Azure Data Factory pipelines, Databricks jobs, and Spark batch jobs are evaluated when the run completes.
 - **Completed runs**: When a run finishes, its final duration replaces the in-progress value. The monitor evaluates runs from the past 10 days.
 - **Recovery**: The monitor recovers when a later run finishes within the threshold or the learned bound.
 - **dbt**: dbt Cloud jobs are evaluated while they run if the dbt Cloud webhook sends the {{< ui >}}Run started{{< /ui >}} event. See [Configure webhooks][18]. dbt Cloud models and tests are evaluated when the run completes. dbt Core jobs that send OpenLineage events are evaluated while they run.
@@ -544,7 +545,7 @@ Detect rows dropped between a source table and its destination after a replicati
 
 1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
 2. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
-3. Select {{< ui >}}Thresholds{{< /ui >}} as the detection method, set the comparison to `less than`, and set the {{< ui >}}Critical{{< /ui >}} threshold to `0`. The monitor alerts when the target has fewer rows than the source.
+3. Select {{< ui >}}Thresholds{{< /ui >}} as the detection method, set the comparison to `less than`, and set the {{< ui >}}Alert threshold{{< /ui >}} to `0`. The monitor alerts when the target has fewer rows than the source.
 
 {{% /tab %}}
 {{% tab "Long-running job" %}}
