@@ -844,27 +844,44 @@ Gets the configuration and metadata that Datadog records for a single cloud reso
 
 ## Code Execution
 
-Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs. Investigate findings, explore data, or modify supported resources in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes read-only JavaScript authored by an AI agent in a Datadog-managed sandbox. The code receives a `dd.*` namespace for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs. It returns a structured value to the agent. Combining queries in one script reduces tool calls for investigations and data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
+### `execute_code_write`
+*Toolsets: **core**, **code-exec***\
+*Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
+
+Teams access is read-only. Dashboard and notebook creation and updates require the dedicated MCP tools; code execution supports reading and deleting those resources. See [What the sandbox can access][107] for details.
+
+The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][106] before retrying a script.
+
+- Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
+- Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
+- Create a case for the current incident, assign it to the on-call team, and include links to the relevant traces and logs.
+
 ### `search_datadog_sdk`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
-Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution separately checks your permissions.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
 - What does the `dd.time` namespace provide?
+- Look up the operation and request and response types for creating a monitor.
+
+[106]: /mcp_server/code_execution/#review-and-retry-write-operations-safely
+[107]: /mcp_server/code_execution/#what-the-sandbox-can-access
 
 ## Dashboards
 
