@@ -293,6 +293,12 @@ print(details.error?.code);
 
 `FlagDetails.error` is set when the SDK returns the default value because the provider is not ready, the flag is not found, or the assignment value does not match the typed evaluation method. Successful details include the evaluated value plus assignment metadata, such as `variant` and `reason`, when Datadog returned it.
 
+<!-- Publication gate: confirm the first SDK release supporting CACHED before merging this addition. -->
+
+In SDK versions that support the `CACHED` evaluation reason, a successful evaluation from flags restored from persistent storage reports `CACHED`. After a network response replaces those flags, successful evaluations use the reasons supplied by that response.
+
+`CACHED` describes where the evaluated assignment came from. It does not mean the configuration is fresh or matches a newly requested evaluation context.
+
 ## Advanced configuration
 
 `DatadogFlagsConfiguration` controls SDK behavior:
