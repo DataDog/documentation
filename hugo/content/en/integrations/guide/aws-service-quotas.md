@@ -45,11 +45,17 @@ Datadog collects quota limits for every AWS service that reports quotas for your
 | Amazon CloudWatch Logs | `logs` |
 | AWS KMS | `kms` |
 
-`aws.servicequota.percentage_used` is tagged with `service_code`, `quota_code`, `quota_name`, `region`, and `adjustable`, along with your account tags. Use it in [dashboards][3] and [monitors][4] like any other metric.
+`aws.servicequota.percentage_used` is tagged with `service_code`, `quota_code`, `quota_name`, `region`, `adjustable`, and `rate_quota`, along with your account tags. Use it in [dashboards][3] and [monitors][4] like any other metric.
 
-The out-of-the-box [AWS Service Quota Usage][6] dashboard shows this data for your accounts, filterable by service, region, account, and whether the quota can be raised. Clone it to add your own widgets.
+The out-of-the-box [AWS Service Quota Usage][6] dashboard shows this data for your accounts, filterable by service, region, account, and whether the quota can be raised. API rate quotas have their own section. Clone it to add your own widgets.
 
 **Note**: AWS does not publish a usage metric for every quota, so Datadog reports a percentage only for quotas that have one. Quotas without a usage metric, and quotas for services outside this list, still have their limits collected.
+
+### API rate quotas
+
+Some quotas limit how many API calls an account can make per second, such as the AWS KMS `CreateGrant` request rate. Datadog tags these quotas with `rate_quota:true` and all other quotas with `rate_quota:false`.
+
+For these quotas, Datadog divides each minute's call count by 60 and compares the per-second rate with the limit. Each value is a one-minute average, so AWS can throttle calls during a short burst even when the value is below 100%. Values above 100% mean the account made more calls than the limit allows during that minute.
 
 ## Query quota limits
 
