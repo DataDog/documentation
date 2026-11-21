@@ -129,17 +129,6 @@ The reviewer dismisses a Row Count value of `0` only when the metric's history s
 - Instructions that name specific tables, columns, or group values apply only to the series that match them.
 - Instructions can cover every point, for example by asking not to alert on the monitor at all. The reviewer then treats every flagged point as expected.
 
-### Data the reviewer receives
-
-The reviewer uses a large language model. For each flagged point, it receives the following:
-
-- The metric type, and the metric's history of values with their expected upper and lower bounds.
-- Bound annotations on the series that end before the flagged point, with their types and time ranges.
-- Identifiers for your organization, the monitor, and the series.
-- If the monitor has Model Instructions: the instructions, the name of the monitored table or column, its entity type and platform, and the series' group tag keys and values.
-
-The reviewer doesn't receive rows from your tables, table descriptions, or the text of Custom SQL queries.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
