@@ -18,7 +18,7 @@ further_reading:
 Data Observability uses two kinds of network connections:
 
 - **Datadog connects to your data platform.** For data warehouse integrations and the Databricks APIs, Datadog connects to your account with the credentials you provide. If your platform restricts inbound access by IP address, add Datadog's IP ranges to your allowlist.
-- **Your environment sends data to Datadog.** OpenLineage emitters and the Datadog Agent send job runs, lineage events, and telemetry to Datadog over HTTPS. If your network restricts outbound traffic, allow the Datadog domains they use.
+- **Your environment sends data to Datadog.** OpenLineage emitters and the Datadog Agent send job runs, lineage events, monitor results, and telemetry to Datadog over HTTPS. If your network restricts outbound traffic, allow the Datadog domains they use.
 
 To see the values for your [Datadog site][1], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
 
@@ -28,12 +28,13 @@ To see the values for your [Datadog site][1], click the {{< ui >}}DATADOG SITE{{
 | [Databricks APIs](#databricks-apis) | Datadog to your Databricks workspace | IP addresses in the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} |
 | [OpenLineage emitters](#openlineage-emitters) | Your environment to Datadog | `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} |
 | [Datadog Agent on Spark clusters](#datadog-agent-on-spark-clusters) | Your cluster to Datadog | The standard Agent destinations, and `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} if you collect Spark lineage with OpenLineage |
+| [Datadog Agent for PostgreSQL](#postgresql) (Preview) | Your Agent host to Datadog | The standard Agent destinations, including Remote Configuration and Database Monitoring, and `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} |
 
 ## Data warehouse integrations
 
 For data warehouse integrations, Datadog connects to your warehouse to sync metadata and query history and to run monitor queries. Only the resulting metric values are sent to Datadog, not row-level data from your tables. For custom SQL monitors, Datadog stores the values that your query returns. See [Data sent to Datadog][2].
 
-If your warehouse restricts network access by IP address, add the IP addresses in the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}} to the following location:
+If your warehouse restricts network access by IP address, add Datadog's IP addresses to the location in the following table. Use the addresses in the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 | Warehouse | Where to add the IP addresses |
 |---|---|
@@ -47,9 +48,9 @@ IP ranges are different for each Datadog site. Confirm that you use the IP range
 
 ## Databricks APIs
 
-Jobs Monitoring for Databricks uses the Databricks APIs to collect traces for job runs, along with tags and other metadata. If you control access to the Databricks APIs with IP access lists, add Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} to the IP access list of your workspace.
+Jobs Monitoring for Databricks uses the Databricks APIs to collect traces for job runs, along with tags and other metadata. If you use IP access lists for these APIs, allow Datadog's {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}}.
 
-Monitoring jobs on serverless compute doesn't require the Datadog Agent. Datadog reads these jobs from the Unity Catalog system tables through the SQL warehouse you provide during setup. See [Jobs Monitoring for Databricks][8].
+Monitoring jobs on serverless compute doesn't require the Datadog Agent. Datadog reads job data from the Unity Catalog system tables through the SQL warehouse that you provide during setup. See [Jobs Monitoring for Databricks][8].
 
 To monitor workspaces that use Databricks Private Link, see [Private Link Connectivity][9].
 
@@ -62,15 +63,27 @@ The following sources send OpenLineage events to the Data Observability intake d
 - [AWS Glue][12], when you send Spark lineage from Glue jobs
 - [Custom jobs using OpenLineage][13]
 
-Events are sent over HTTPS (port 443) to the `/api/v1/lineage` path. If your network restricts outbound traffic, allow `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} by domain name from the hosts that run your emitters.
+Emitters send events over HTTPS (port 443) to the `/api/v1/lineage` path. If your network restricts outbound traffic, allow `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} by domain name from the hosts that run your emitters.
 
-If you [set up the Datadog Agent as an OpenLineage proxy][14], your applications send events to the Agent, and the Agent forwards them to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. In this setup, allow the domain from the Agent's host.
+If you [set up the Datadog Agent as an OpenLineage proxy][14], your applications send events to the Agent. The Agent forwards them to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. In this setup, allow the domain from the Agent's host.
 
 ## Datadog Agent on Spark clusters
 
 Jobs Monitoring for Spark on [Databricks][8] clusters, [Amazon EMR][15], [Google Cloud Dataproc][16], and [Kubernetes][17] runs the Datadog Agent on your cluster. The Agent sends metrics, traces, and logs (if you enable log collection) to the standard Agent destinations. For the list of destinations, see [Network Traffic][18].
 
-If you collect Spark lineage with OpenLineage on Amazon EMR or Kubernetes, the Datadog Java tracer sends lineage events through the local Agent, and the Agent forwards them to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. Allow this domain for outbound traffic from your cluster.
+If you collect Spark lineage with OpenLineage on Amazon EMR or Kubernetes, the Datadog Java tracer sends lineage events to the local Agent. The Agent forwards them to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. Allow this domain for outbound traffic from your cluster.
+
+When you enable OpenLineage on Amazon EMR, the bootstrap action downloads the OpenLineage Spark JAR from Maven Central (`repo1.maven.org`). If an OpenLineage Spark JAR is already in `/usr/lib/spark/jars`, the bootstrap action skips the download.
+
+## PostgreSQL
+
+Data Observability for [PostgreSQL][19] is in Preview. Datadog doesn't connect to your database directly. The Datadog Agent runs on a host that can reach your database and makes the following outbound connections:
+
+- Table metadata: `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}
+- Monitor queries, which the Agent receives through [Remote Configuration][20]: `config.`{{< region-param key="dd_site" code="true" >}}
+- Monitor query results: `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}
+
+The Agent also sends metrics to the standard Agent destinations. See [Network Traffic][18].
 
 ## Further reading
 
@@ -94,3 +107,5 @@ If you collect Spark lineage with OpenLineage on Amazon EMR or Kubernetes, the D
 [16]: /data_observability/jobs_monitoring/dataproc/
 [17]: /data_observability/jobs_monitoring/kubernetes/
 [18]: /agent/configuration/network/
+[19]: /data_observability/quality_monitoring/transactional_databases/postgres/
+[20]: /remote_configuration/
