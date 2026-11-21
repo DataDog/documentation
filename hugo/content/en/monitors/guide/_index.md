@@ -33,6 +33,7 @@ cascade:
 {{< whatsnext desc="Monitor configuration:" >}}
     {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}Best practices for Live Process Monitoring{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/relative-thresholds" >}}Relative thresholds (Preview){{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Monitoring Sparse Metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
