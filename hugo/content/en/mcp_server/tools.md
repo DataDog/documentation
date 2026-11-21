@@ -1064,7 +1064,7 @@ Queries the current alert and warn state of data quality monitor groups.
 ### `inspect_data_observability_monitor_annotations`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
-Returns a data quality monitor's metric values, anomaly bounds, and existing bound annotations for one data entity, including the intervals where values fell outside the bounds. Use this tool to find the time range to annotate before you call `upsert_data_observability_monitor_annotations`. Requires `monitor_id` and `entity_id`. The default time range is the last seven days, and the range can't exceed 14 days.
+Returns a data quality monitor's metric values, anomaly bounds, and existing bound annotations for one data entity. The response includes the intervals where values fell outside the bounds. Use this tool to find the time range to annotate before you call `upsert_data_observability_monitor_annotations`. Requires `monitor_id` and `entity_id`. The default time range is the last seven days, and the range can't exceed 14 days.
 
 - Show the annotations on monitor `12345` for this table.
 - When did this monitor's values last fall outside the anomaly bounds?
@@ -1072,7 +1072,7 @@ Returns a data quality monitor's metric values, anomaly bounds, and existing bou
 ### `upsert_data_observability_monitor_annotations`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Write` and `Monitors Read` and `Timeseries` and `APM Read`*\
-Creates, updates, or extends bound annotations on a data quality monitor for one data entity. Set `action` to `create`, `update`, or `extend`. Requires `action`, `monitor_id`, `entity_id`, `annotations`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the change, then call it again with `dry_run` set to `false` to apply it. The annotation types are `new_baseline` (accept the current behavior, but alert on a comparable change in the future), `expected_occasionally` (accept similar behavior when it recurs, and alert only on a larger anomaly), `false_negative` (mark behavior inside the bounds that should have alerted), and `ignore` (remove invalid measurements from the model's history).
+Creates, updates, or extends bound annotations on a data quality monitor for one data entity. Set `action` to `create`, `update`, or `extend`. Requires `action`, `monitor_id`, `entity_id`, `annotations`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the change, then call it again with `dry_run` set to `false` to apply it. Each annotation type matches an annotation option in the Datadog UI. `expected_occasionally` ({{< ui >}}Expected{{< /ui >}}) accepts similar behavior when it recurs, and alerts only on a larger anomaly. `new_baseline` ({{< ui >}}Reset for now{{< /ui >}}) accepts the current behavior, but alerts on a comparable change in the future. `false_negative` ({{< ui >}}Missed alert{{< /ui >}}) marks behavior inside the bounds that should have alerted. `ignore` ({{< ui >}}Ignore{{< /ui >}}) removes invalid measurements from the model's history.
 
 - Mark the latest anomaly on monitor `12345` as expected so a similar change doesn't alert again.
 - Ignore the measurements from yesterday's bad backfill on this table.
