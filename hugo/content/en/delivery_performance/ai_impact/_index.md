@@ -26,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-to-measure-developer-experience-in-the-ai-era/"
   tag: "Blog"
   text: "How to measure developer experience in the AI era"
+- link: "https://www.datadoghq.com/blog/monitor-openai-codex-with-datadog/"
+  tag: "Blog"
+  text: "Monitor OpenAI Codex usage and impact with Datadog"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}

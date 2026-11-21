@@ -17,12 +17,15 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
-  tag: "Blog"
-  text: "Use CIDR notation queries to filter your network traffic logs"
 - link: "https://learn.datadoghq.com/courses/log-investigations"
   tag: "Learning Center"
   text: "Track Logs for Alerting and Investigations"
+- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+  tag: "Blog"
+  text: "Use CIDR notation queries to filter your network traffic logs"
+- link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
+  tag: "Blog"
+  text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 
 ---
 

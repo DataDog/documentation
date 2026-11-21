@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloudcraft-security/"
   tag: "Blog"
   text: "Visually identify and prioritize security risks using Cloudcraft"
+- link: "https://www.datadoghq.com/blog/monitor-oci-government-cloud-datadog/"
+  tag: "Blog"
+  text: "Monitor OCI workloads in US government clouds with Datadog"
 ---
 
 ## Overview

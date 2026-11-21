@@ -57,6 +57,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
     tag: "Blog"
     text: "How we replaced our host vulnerability scanner with the Datadog Agent"
+  - link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+    tag: "Blog"
+    text: "Detect and respond to PHP2Shell with Datadog"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:

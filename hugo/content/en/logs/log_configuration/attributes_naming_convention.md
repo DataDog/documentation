@@ -19,6 +19,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
       tag: "Blog"
       text: "Use CIDR notation queries to filter your network traffic logs"
+    - link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+      tag: "Blog"
+      text: "Manage Kubernetes observability with DatadogInstrumentation"
 ---
 
 ## Overview

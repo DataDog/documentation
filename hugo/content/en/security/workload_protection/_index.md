@@ -24,6 +24,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-findings"
     tag: "Blog"
     text: "Surface and remediate runtime posture issues with Workload Protection Findings"
+  - link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+    tag: "Blog"
+    text: "Detect and respond to PHP2Shell with Datadog"
+  - link: "https://www.datadoghq.com/blog/check-ec2-workloads-imdsv2-readiness/"
+    tag: "Blog"
+    text: "How to check if your EC2 workloads are ready for IMDSv2"
 cascade:
 - _target:
     path: /security/workload_protection/backend_linux

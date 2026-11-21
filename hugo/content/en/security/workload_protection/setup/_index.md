@@ -6,6 +6,10 @@ aliases:
   - /security/workload_protection/supported_linux_distributions
   - /security/threats/supported_linux_distributions
 disable_toc: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/check-ec2-workloads-imdsv2-readiness/"
+  tag: "Blog"
+  text: "How to check if your EC2 workloads are ready for IMDSv2"
 ---
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
@@ -134,3 +138,7 @@ After you are granted access to Automated response, see the [Automated response]
 [4]: /security/workload_protection/respond_and_report/#automated-response
 [5]: /security/workload_protection/setup/advanced_configuration
 [6]: /security/workload_protection/#evaluating-activity
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

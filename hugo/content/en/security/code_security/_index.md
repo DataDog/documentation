@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+  tag: "Blog"
+  text: "Detect and respond to PHP2Shell with Datadog"
 aliases:
 - /code_analysis/
 ---

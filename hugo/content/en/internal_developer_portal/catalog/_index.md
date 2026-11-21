@@ -21,6 +21,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
   text: Turn feedback into action across your engineering org with Datadog Forms
+- link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+  tag: "Blog"
+  text: "Detect and respond to PHP2Shell with Datadog"
 algolia:
   tags: ['software catalog', 'catalog']
 ---

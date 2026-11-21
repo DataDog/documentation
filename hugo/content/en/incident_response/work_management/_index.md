@@ -26,6 +26,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/work-management/"
   tag: "Blog"
   text: "Centralize human and agentic work with Datadog Work Management"
+- link: "https://www.datadoghq.com/blog/detect-respond-php2shell-datadog/"
+  tag: "Blog"
+  text: "Detect and respond to PHP2Shell with Datadog"
+- link: "https://www.datadoghq.com/blog/end-user-device-monitoring/"
+  tag: "Blog"
+  text: "Monitor and troubleshoot employee devices with Datadog End User Device Monitoring"
 algolia:
   tags: ['inbox', 'work management', 'case management']
 ---

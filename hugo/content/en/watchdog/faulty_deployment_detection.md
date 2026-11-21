@@ -1,6 +1,10 @@
 ---
 title: Automatic Faulty Deployment Detection
 description: "Detect faulty code deployments within minutes using Watchdog's automatic analysis of new deployment performance compared to previous versions."
+further_reading:
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
 ---
 
 ## Overview
@@ -42,3 +46,7 @@ Watchdog attempts to determine if the new deployment is a plausible cause of the
 
 [2]: /events/explorer
 [3]: https://app.datadoghq.com/monitors/create
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
