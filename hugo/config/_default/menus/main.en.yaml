@@ -10826,6 +10826,11 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_expected_regret_and_evsi
       weight: 7
+    - name: Treatment Effect Heterogeneity
+      url: experiments/statistics/property_analysis
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_property_analysis
+      weight: 8
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
