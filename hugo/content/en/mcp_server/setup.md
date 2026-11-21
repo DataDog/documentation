@@ -818,6 +818,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+- `remote-actions`: Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 - `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics.
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40].
 - `sheets`: Tools for creating, reading, updating, and deleting [Datadog spreadsheets][75].
@@ -831,7 +832,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
-- `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
 ## Supported clients
 
@@ -1085,7 +1085,6 @@ After you change any of these settings, refresh the tool list in your AI client.
 [58]: /getting_started/profiler/
 [59]: https://chatgpt.com/
 [61]: https://partners.datadoghq.com/s/login/SelfRegister
-[62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
