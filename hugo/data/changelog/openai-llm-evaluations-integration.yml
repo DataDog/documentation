@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/42026
+    operations:
+      - CreateOpenAILLMEvaluationsIntegrationAccount
+      - DeleteOpenAILLMEvaluationsIntegrationAccount
+      - GetOpenAILLMEvaluationsIntegrationAccount
+      - ListOpenAILLMEvaluationsIntegrationAccounts
+      - UpdateOpenAILLMEvaluationsIntegrationAccount
+    title: Add Integration Accounts v2 API for OpenAI LLM Evaluations

@@ -107637,6 +107637,287 @@ components:
       required:
         - type
       type: object
+    OpenAILLMEvaluationsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the OpenAI LLM Evaluations integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthRequest"
+    OpenAILLMEvaluationsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the OpenAI LLM Evaluations integration account.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthResponse"
+    OpenAILLMEvaluationsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the OpenAI LLM Evaluations integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthUpdate"
+    OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a project-scoped OpenAI API key with Write permission for model capabilities. While `openai-llm-completions` is enabled, a key that cannot call the OpenAI chat completions endpoint is rejected with a `422` response.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a project-scoped OpenAI API key with Write permission for model capabilities. While `openai-llm-completions` is enabled, a key that cannot call the OpenAI chat completions endpoint is rejected with a `422` response. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an OpenAI LLM Evaluations integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI LLM Evaluations integration account.
+          example: openai-llm-evaluations-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountCreateData:
+      description: Data envelope for creating an OpenAI LLM Evaluations integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountCreateRequest:
+      description: Request payload to create an OpenAI LLM Evaluations integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountResponse:
+      description: Response payload for a single OpenAI LLM Evaluations integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountResponseAttributes:
+      description: Attributes of an OpenAI LLM Evaluations integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the OpenAI LLM Evaluations integration account.
+          example: openai-llm-evaluations-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountResponseData:
+      description: Data envelope of an OpenAI LLM Evaluations integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the OpenAI LLM Evaluations integration account.
+          example: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the OpenAI LLM Evaluations integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountSettingsResponse:
+      description: Settings configured on the OpenAI LLM Evaluations integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: >-
+        Settings for updating the OpenAI LLM Evaluations integration account. Only the fields provided are changed.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an OpenAI LLM Evaluations integration account. Every field is optional. Only the provided fields are changed. When `dataflows` is provided, only the dataflow IDs in the request are modified. Dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI LLM Evaluations integration account.
+          example: openai-llm-evaluations-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountSettingsUpdate"
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountUpdateData:
+      description: Data envelope for updating an OpenAI LLM Evaluations integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the OpenAI LLM Evaluations integration account to update.
+          example: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountUpdateRequest:
+      description: Request payload to update an OpenAI LLM Evaluations integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    OpenAILLMEvaluationsIntegrationAccountsResponse:
+      description: Response payload for a list of OpenAI LLM Evaluations integration accounts.
+      properties:
+        data:
+          description: List of OpenAI LLM Evaluations integration accounts.
+          items:
+            $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    OpenAILLMEvaluationsIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from OpenAI LLM Evaluations, keyed by dataflow ID. Each dataflow turns on a distinct type of collection. Set `enabled` to start or stop a dataflow. The default for each dataflow applies when the account is created. On update, omitted fields keep their current values.
+      properties:
+        openai-llm-completions:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsLLMCompletionsIntegrationDataflowRequest"
+        openai-project-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsProjectCloudCostDataIntegrationDataflowRequest"
+      type: object
+    OpenAILLMEvaluationsIntegrationDataflowsResponse:
+      description: Data Datadog collects from OpenAI LLM Evaluations, keyed by dataflow ID.
+      properties:
+        openai-llm-completions:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsLLMCompletionsIntegrationDataflowResponse"
+        openai-project-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAILLMEvaluationsProjectCloudCostDataIntegrationDataflowResponse"
+      type: object
+    OpenAILLMEvaluationsLLMCompletionsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Makes the key in `authentication` available to run evaluations in [LLM Observability](https://docs.datadoghq.com/llm_observability/). While this dataflow is enabled, a key that cannot call the OpenAI chat completions endpoint is rejected with a `422` response.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `true`. Set to `false` to stop collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAILLMEvaluationsLLMCompletionsIntegrationDataflowResponse:
+      description: >-
+        Makes the key in `authentication` available to run evaluations in [LLM Observability](https://docs.datadoghq.com/llm_observability/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    OpenAILLMEvaluationsProjectCloudCostDataIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Costs of the OpenAI project that the key in `authentication` belongs to, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Cost data appears in Cloud Cost Management within 24 hours after you enable this dataflow.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`. Set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAILLMEvaluationsProjectCloudCostDataIntegrationDataflowResponse:
+      description: >-
+        Costs of the OpenAI project that the key in `authentication` belongs to, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     OpenAPIEndpoint:
       description: Endpoint info extracted from an `OpenAPI` specification.
       properties:
@@ -211167,6 +211448,265 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-llm-evaluations/accounts:
+    get:
+      description: List OpenAI LLM Evaluations integration accounts.
+      operationId: ListOpenAILLMEvaluationsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            openai-llm-completions:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            openai-project-cloud-cost-data:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: openai-llm-evaluations-acme
+                          settings:
+                            custom_tags: team:ai,env:prod
+                        id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List OpenAI LLM Evaluations accounts
+      tags:
+        - OpenAI LLM Evaluations Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an OpenAI LLM Evaluations integration account.
+      operationId: CreateOpenAILLMEvaluationsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-llm-evaluations-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an OpenAI LLM Evaluations account
+      tags:
+        - OpenAI LLM Evaluations Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-llm-evaluations/accounts/{account_id}:
+    delete:
+      description: Delete an OpenAI LLM Evaluations integration account.
+      operationId: DeleteOpenAILLMEvaluationsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an OpenAI LLM Evaluations account
+      tags:
+        - OpenAI LLM Evaluations Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an OpenAI LLM Evaluations integration account.
+      operationId: GetOpenAILLMEvaluationsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-llm-evaluations-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an OpenAI LLM Evaluations account
+      tags:
+        - OpenAI LLM Evaluations Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an OpenAI LLM Evaluations integration account. Only the fields provided are changed.
+      operationId: UpdateOpenAILLMEvaluationsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-llm-evaluations-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAILLMEvaluationsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an OpenAI LLM Evaluations account
+      tags:
+        - OpenAI LLM Evaluations Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/snowflake/accounts:
     get:
       description: List Snowflake integration accounts.
@@ -289253,6 +289793,15 @@ tags:
       description: OpenAI Codex integration.
       url: https://docs.datadoghq.com/integrations/openai-codex/
     name: OpenAI Codex Integration
+  - description: |-
+      Manage your Datadog OpenAI LLM Evaluations integration accounts and account resources
+      directly through the Datadog API. See the
+      [OpenAI integration page](https://docs.datadoghq.com/integrations/openai/) for
+      more information.
+    externalDocs:
+      description: OpenAI integration.
+      url: https://docs.datadoghq.com/integrations/openai/
+    name: OpenAI LLM Evaluations Integration
   - description: |-
       Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
       directly through the Datadog API.

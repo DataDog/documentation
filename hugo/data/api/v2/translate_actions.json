@@ -3376,6 +3376,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an OpenAI Codex integration account."
   },
+  "ListOpenAILLMEvaluationsIntegrationAccounts": {
+    "description": "List OpenAI LLM Evaluations integration accounts.",
+    "summary": "List OpenAI LLM Evaluations accounts"
+  },
+  "CreateOpenAILLMEvaluationsIntegrationAccount": {
+    "description": "Create an OpenAI LLM Evaluations integration account.",
+    "summary": "Create an OpenAI LLM Evaluations account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI LLM Evaluations integration account."
+  },
+  "DeleteOpenAILLMEvaluationsIntegrationAccount": {
+    "description": "Delete an OpenAI LLM Evaluations integration account.",
+    "summary": "Delete an OpenAI LLM Evaluations account"
+  },
+  "GetOpenAILLMEvaluationsIntegrationAccount": {
+    "description": "Get an OpenAI LLM Evaluations integration account.",
+    "summary": "Get an OpenAI LLM Evaluations account"
+  },
+  "UpdateOpenAILLMEvaluationsIntegrationAccount": {
+    "description": "Update an OpenAI LLM Evaluations integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI LLM Evaluations account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI LLM Evaluations integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"
