@@ -122,6 +122,57 @@ Each tag is available when the AI Gateway span includes the related data. Metric
 
 Use `gateway_error_category` to group failures by HTTP status or broad cause. Use `error_type` to distinguish causes within a category, such as `early_close` and `stream_read_error` within `stream_error`.
 
+#### Gateway request metrics
+
+AI Gateway reports request counts across retries and fallbacks. Each request contributes one count, including requests rejected before a provider call.
+
+| Metric Name | Description | Metric Type | Tags |
+|-------------|-------------|-------------|------|
+| `ai_gateway.request.count` | Number of AI Gateway requests | Count | `dd.ai_gateway_frntr`, `env`, `gateway_model_canonical`, `gateway_outcome`, `gateway_provider_id`, `gateway_request_has_provider`, `gateway_router_id`, `gateway.streaming`, `ml_app`, `model_name`, `model_provider`, `service`, `team_attribution`, `team_id`, `user_id` |
+| `ai_gateway.request.failure.count` | Number of AI Gateway requests with a failed provider attempt, including requests that recover | Count | `dd.ai_gateway_frntr`, `env`, `gateway_initial_error_category`, `gateway_last_action`, `gateway_last_model`, `gateway_last_outcome`, `gateway_last_provider`, `gateway_last_provider_id`, `gateway_model_canonical`, `gateway_provider_id`, `gateway_request_has_provider`, `gateway_router_id`, `gateway.streaming`, `ml_app`, `model_name`, `model_provider`, `service`, `team_attribution`, `team_id`, `user_id` |
+
+For example, `A fails → B succeeds` contributes one count to each metric. So does `A fails → B fails → C succeeds`; the last targets are B and C, respectively.
+
+Use `ai_gateway.request.failure.count` to measure requests affected by a provider failure. To count requests that finish with an error, filter `ai_gateway.request.count` by `gateway_outcome:error`. Cancellations without a failed provider attempt are excluded from the failure metric.
+
+These tags describe request routing and outcomes:
+
+| Tag | Description |
+|-----|-------------|
+| `gateway_request_has_provider` | `true` if a provider call was attempted, or `false` otherwise. |
+| `gateway_outcome` | Request result: `ok`, `error`, `canceled`, or `unknown`. Available only on `ai_gateway.request.count`. |
+| `gateway_initial_error_category` | Error category of the first failed provider attempt. Uses the same categories as `gateway_error_category`. |
+| `gateway_last_provider_id` | ID of the last attempted provider account. |
+| `gateway_last_provider` | Model provider of the last attempted target. |
+| `gateway_last_model` | Model of the last attempted target. |
+| `gateway_last_action` | `fallback`, `retry`, `none`, or `unknown`. `none` means no retry or fallback call was attempted. |
+| `gateway_last_outcome` | Last provider attempt result: `ok`, `error`, `canceled`, or `unknown`. |
+
+The `gateway_initial_error_category` and `gateway_last_*` tags are available only on the failure metric. The last attempt result can differ from the request result if the gateway rejects the response or returns an earlier attempt's response.
+
+Provider and model tags identify the first failed target, or the first attempted target for requests without a failure. Model names use the provider-reported version when available, or the requested name otherwise. The `gateway_model_canonical` tag retains the catalog name. The `gateway_router_id` tag identifies the entry route. Requests without a provider call omit target tags, and direct calls omit the route tag. Only the tags listed above are available. Custom cost tags aren't included, and `span_kind` filters exclude request samples.
+
+Counts arrive after a request finishes and use its start time, so recent intervals can fill in later. Earlier traffic without request-level data has no request-metric history. Missing coverage is unknown, not zero. Traces used to inspect individual attempts follow span retention.
+
+Use `sum` with `.as_count()` for totals and `.fill(null)` to avoid interpolating missing intervals.
+
+Percentage of requests affected by a provider failure:
+
+```text
+100 * sum:ai_gateway.request.failure.count{*}.as_count().fill(null)
+  / sum:ai_gateway.request.count{*}.as_count().fill(null)
+```
+
+Use the same filters on shared tags for both metrics. A missing or zero request count does not establish a failure rate.
+
+Affected requests by last provider account and attempt result:
+
+```text
+sum:ai_gateway.request.failure.count{*} by {gateway_last_provider_id,gateway_last_outcome}.as_count().fill(null)
+```
+
+Filtering by a target tag excludes requests without that tag.
+
 #### Gateway pricing coverage
 
 Pricing coverage shows which AI Gateway calls have a complete cost estimate. Use it to assess how complete your cost totals are.
