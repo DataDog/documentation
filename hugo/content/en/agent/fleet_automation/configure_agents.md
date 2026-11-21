@@ -15,8 +15,7 @@ Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at 
 ## Prerequisites
 
 - [Remote Configuration][9] enabled for your organization and for the API key your Agents use. Both are enabled by default.
-- [Remote updates][12] enabled on each target VM Agent (`remote_updates: true`).
-- Agent version 7.73+ for Agent and OTel Collector configuration (version 7.76+ for configuring integrations and secrets). To upgrade your Agents, see [Upgrade Agents][10].
+- Agent version 7.73 or later. Configuring the OTel Collector requires Agent version 7.83.1 or later, and configuring integrations that use secrets requires Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][10].
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs.
 
 {{< callout url="https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/" header="Join the Preview!" >}}
@@ -99,4 +98,3 @@ For instructions on using mirrored or air-gapped repositories, see:
 [9]: /agent/guide/setup_remote_config
 [10]: /agent/fleet_automation/upgrade_agents/
 [11]: /agent/fleet_automation/supported_datadog_yaml_fields/
-[12]: /agent/guide/setup_remote_config/#enable-remote-agent-management
