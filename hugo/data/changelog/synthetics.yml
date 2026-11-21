@@ -87,3 +87,16 @@ entries:
       - UpdateTest
       - UpdateTestPauseStatus
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-21'
+    link: https://github.com/DataDog/documentation/pull/42012
+    operations:
+      - GetAPITest
+      - GetAPITestLatestResults
+      - GetBrowserTestLatestResults
+      - GetTest
+      - ListSyntheticsBrowserTestLatestResults
+      - ListSyntheticsTestLatestResults
+      - ListTests
+      - SearchTests
+    title: 'Improve Synthetics Code Execution discovery and search documentation '
