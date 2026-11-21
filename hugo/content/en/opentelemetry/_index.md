@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry in Datadog
+description: Send OpenTelemetry traces, metrics, and logs to Datadog. Use the recommended DDOT setup, the upstream OpenTelemetry setup if you use only OpenTelemetry project components, or another way to send your data.
 aliases:
 - /tracing/setup_overview/open_standards/
 - /opentelemetry/interoperability/
@@ -13,21 +14,12 @@ further_reading:
 - link: "/opentelemetry/setup/"
   tag: "Documentation"
   text: "Send Data to Datadog"
-- link: "/opentelemetry/setup/otlp_ingest_in_the_agent/"
-  tag: "Documentation"
-  text: "OTLP ingestion by the Datadog Agent"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
 - link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
   tag: "Blog"
   text: "Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context"
-- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
-  tag: "Blog"
-  text: Send metrics and traces from OpenTelemetry Collector to Datadog via Datadog Exporter
-- link: "https://www.datadoghq.com/blog/opentelemetry-logs-datadog-exporter/"
-  tag: "Blog"
-  text: "Forward logs from the OpenTelemetry Collector with the Datadog Exporter"
 - link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
   tag: "Blog"
   text: "Learn more about AWS's managed Lambda Layer for OpenTelemetry"
@@ -63,95 +55,79 @@ cascade:
 
 ## Overview
 
-[OpenTelemetry][1] (OTel) provides standardized protocols for collecting and routing telemetry data. Datadog supports multiple ways to collect and analyze telemetry data from OpenTelemetry-instrumented applications, whether you're using existing Datadog infrastructure or prefer a vendor-neutral setup.
+Use Datadog to monitor service health and investigate problems with your [OpenTelemetry][1] (OTel) data. Bring traces, metrics, logs, and infrastructure data together to understand where a problem occurs and what might be causing it.
 
-### Why OpenTelemetry with Datadog?
+- **Monitor your services**: Track request rates, errors, and latency, and create dashboards and alerts from your OpenTelemetry data.
+- **Investigate across signals**: Follow a slow request across services, examine related logs, and check resource usage on the hosts and containers involved.
+- **Keep your OpenTelemetry instrumentation**: Send data over OTLP, the OpenTelemetry Protocol, from upstream OpenTelemetry SDKs and Collectors. Or adopt Datadog OpenTelemetry (DDOT) components one at a time.
 
-Datadog provides advanced observability for all your application telemetry, regardless of its source. By supporting OpenTelemetry, Datadog offers:
+Datadog maps the `service.name`, `deployment.environment.name`, and `service.version` resource attributes to [unified service tags][2], so you can filter telemetry by service, environment, and version. For correlation requirements and configuration, see [Correlate OpenTelemetry Data][3].
 
-- **Flexibility and choice**: Use standardized instrumentation while maintaining freedom to adapt as your technology needs evolve.
-- **Comprehensive language support**: Consistently monitor applications across your entire tech stack.
-- **Unified instrumentation**: Maintain a single approach to instrumentation across your systems.
-- **Powerful analytics**: Combine OpenTelemetry's standardization with Datadog's robust analysis, visualization, and alerting capabilities.
+## Choose a setup
 
-Whether you're already using OpenTelemetry or considering adoption, Datadog provides flexible options to meet your needs.
+Every setup has two parts: an SDK in your application, and a route that sends your data to Datadog. Datadog recommends the DDOT setup. If you use only OpenTelemetry project components, use the upstream OpenTelemetry setup. You can also mix components from the two setups: for example, a DDOT SDK can send to an upstream Collector. See [Send OpenTelemetry Data to Datadog][13]. To choose your SDK first, see [Instrument Your Applications][15].
 
-### Key decisions
+### DDOT (recommended)
 
-There are two key decisions to make when using OpenTelemetry with Datadog:
+Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog builds and supports. Each one takes the place of an upstream component, so you can adopt them one at a time. DDOT components send standard OTLP, so you can also send your data to other OTLP-compatible backends.
 
-- [How to instrument your applications](#instrument-your-applications)
-- [How to send your data to Datadog](#send-opentelemetry-data-to-datadog)
+{{< img src="/opentelemetry/setup/otel-path-ddot.png" alt="DDOT setup. In your application, the DDOT SDK sends OTLP to the DDOT Collector in your infrastructure, which sends your telemetry to Datadog. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
 
-SDK and deployment choices determine which Datadog capabilities and support options are available. DDOT SDKs are Datadog's version of OpenTelemetry SDKs, with additional Datadog-specific capabilities. Upstream OpenTelemetry SDKs also work well with Datadog, and are maintained and supported by the OpenTelemetry community.
+| Component | What it does |
+|---|---|
+| [DDOT SDKs][4] (Preview) | Instrument your application. A DDOT SDK is Datadog's version of the OpenTelemetry SDK for your language. |
+| [DDOT Collector][5] (Preview) | Receives your telemetry, processes it, and sends it to Datadog. It's an OpenTelemetry Collector that Datadog builds. |
+| [Full-Host Profiler][6] (Preview) | Profiles every process on a host. |
 
-For more information, read [Feature Compatibility][9].
+Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. Datadog recommends [running the Datadog Agent alongside them][7]. Some Datadog features need the Agent. See [Feature Compatibility][14].
 
-## Instrument your applications
-
-Datadog supports traces, metrics, and logs from DDOT SDKs and upstream OpenTelemetry SDKs. Both use OpenTelemetry APIs, Semantic Conventions, OTLP, and standard OpenTelemetry configuration and deployment tooling.
-
-- **[Datadog OpenTelemetry SDKs (DDOT SDKs)][12]** are Datadog's version of OpenTelemetry SDKs and are in Preview. Choose this approach for Datadog support of your instrumentation and for additional Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, Database Monitoring, and Data Streams Monitoring. Availability varies by language and capability; some capabilities require the Datadog Agent.
-- **[Upstream OpenTelemetry SDKs][11]** are maintained and supported by the OpenTelemetry community. Choose this approach if your organization's policy allows only upstream OpenTelemetry components, or for languages that DDOT SDKs don't cover yet.
-
-You can switch between DDOT SDKs and upstream SDKs while keeping OpenTelemetry API instrumentation, standard configuration, and telemetry. Switching to upstream SDKs removes the Datadog-specific capabilities.
-
-Run one SDK per application process to avoid duplicate instrumentation. SDK installation and telemetry routing are separate: both DDOT SDKs and upstream SDKs export OTLP to an OpenTelemetry Collector or another OTLP-compatible backend.
-
-For more information, see [Instrument Your Applications][8] and [Feature Compatibility][9].
-
-## Send OpenTelemetry data to Datadog
-
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data into Datadog.
-
-<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
-
-### Option 1: Use the Datadog Agent and the Agent's Collector
-
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview of the Agent's Collector, an OpenTelemetry Collector deployed with the Datadog Agent." style="width:100%;" >}}
-
-**Best for**: Users looking to gain both OTel vendor neutrality and Datadog ecosystem innovations, such as:
-
-- Fleet Automation
-- Live Container Monitoring
-- Kubernetes Explorer
-- Live Processes
-- Cloud Network Monitoring
-- Universal Service Monitoring
-- {{< translate key="integration_count" >}}+ Datadog integrations
+**Best for**: Teams that want Datadog to build and support their OpenTelemetry components.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/agent/" >}}Learn more about using the Datadog Agent with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/getting_started/kubernetes/?tab=ddot" >}}Install DDOT with the Kubernetes quickstart{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/" >}}Learn about the DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Option 2: Use the OpenTelemetry Collector
+### Upstream OpenTelemetry
 
-{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to a host running the OpenTelemetry Collector, which forwards data to Datadog over OTLP." style="width:100%;" >}}
+Use the [upstream OpenTelemetry SDK][8] and the [upstream OpenTelemetry Collector][9], and send OTLP to the Datadog OTLP intake. Every component comes from the OpenTelemetry project.
 
-**Best for**: New or existing OTel users who want to manage their own OpenTelemetry Collector.
+{{< img src="/opentelemetry/setup/otel-path-upstream.png" alt="Upstream OpenTelemetry setup. In your application, the upstream OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector in your infrastructure, which sends OTLP over HTTP to Datadog." style="width:100%;" >}}
 
-- Standard OpenTelemetry pipeline that exports to Datadog over OTLP
-- Flexible configuration options like tail-based sampling and data transformations
-- A choice of Collector: the [DDOT Collector](/opentelemetry/setup/ddot_collector/), which Datadog builds and supports, or the upstream OpenTelemetry Collector
+**Best for**: Teams that already run an upstream OpenTelemetry Collector, or that use only OpenTelemetry project components.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/getting_started/kubernetes/?tab=upstream" >}}Install upstream OpenTelemetry with the Kubernetes quickstart{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Set up the upstream OpenTelemetry Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Additional setup options
+## Other setups
 
-Running a Datadog Agent or OpenTelemetry Collector isn't always feasible, especially for serverless workloads, managed platforms, and environments with strict resource constraints. In these cases, you can send your OpenTelemetry data directly to Datadog using [direct OTLP ingestion][10].
+| If you | Use |
+|---|---|
+| Can't run a Collector, such as on serverless functions or managed platforms | [Direct OTLP ingest][10]: Your applications send OTLP straight to Datadog. |
+| Already run the Datadog Agent | [The Datadog Agent][11]: The Agent receives OTLP at the Agent's OTLP endpoint, or runs the [Agent's Collector][16], an OpenTelemetry Collector that runs alongside the Agent. |
+| Run a Collector that uses the Datadog Exporter | [Datadog Exporter][12]: Keep your existing configuration. |
 
-For all available methods, see [Send OpenTelemetry Data to Datadog][7].
+To compare every setup, see [Send OpenTelemetry Data to Datadog][13]. To check which Datadog features each setup supports, see [Feature Compatibility][14].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/
-[7]: /opentelemetry/setup
-[8]: /opentelemetry/instrument/
-[9]: /opentelemetry/compatibility/
+[2]: /getting_started/tagging/unified_service_tagging/
+[3]: /opentelemetry/correlate/
+[4]: /opentelemetry/instrument/ddot_sdks/
+[5]: /opentelemetry/setup/ddot_collector/
+[6]: /profiler/enabling/full_host/
+[7]: /opentelemetry/setup/ddot_collector/kubernetes/#install-the-core-datadog-agent-alongside-ddot
+[8]: /opentelemetry/instrument/upstream_otel_sdks/
+[9]: /opentelemetry/setup/collector_exporter/
 [10]: /opentelemetry/setup/otlp_ingest/
-[11]: /opentelemetry/instrument/upstream_otel_sdks/
-[12]: /opentelemetry/instrument/ddot_sdks/
+[11]: /opentelemetry/setup/agent/
+[12]: /opentelemetry/setup/collector_exporter/datadog_exporter/
+[13]: /opentelemetry/setup/
+[14]: /opentelemetry/compatibility/
+[15]: /opentelemetry/instrument/
+[16]: /opentelemetry/setup/agent/#agents-collector

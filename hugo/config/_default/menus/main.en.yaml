@@ -168,7 +168,7 @@ menu:
       weight: 16
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
-      url: getting_started/opentelemetry/
+      url: opentelemetry/getting_started/kubernetes/
       parent: getting_started
       weight: 17
     - name: Profiler
@@ -703,20 +703,10 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /opentelemetry/getting_started/
+      url: /opentelemetry/getting_started/kubernetes/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
-    - name: Datadog Example Application
-      url: /opentelemetry/getting_started/datadog_example
-      parent: otel_guides_getting_started
-      weight: 101
-      identifier: otel_guides_getting_started_datadog_example
-    - name: OpenTelemetry Demo Application
-      url: /opentelemetry/getting_started/otel_demo_to_datadog
-      parent: otel_guides_getting_started
-      weight: 102
-      identifier: otel_guides_getting_started_otel_demo_to_datadog
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -1027,16 +1017,16 @@ menu:
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 10
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog/
+      parent: otel_guides
+      weight: 1000
+      identifier: otel_guides_otel_demo_to_datadog
     - name: Produce Delta Temporality Metrics
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
       weight: 1001
       identifier: otel_guides_otlp_delta_temporality
-    - name: Visualize Histograms as Heatmaps
-      url: /opentelemetry/guide/otlp_histogram_heatmaps
-      parent: otel_guides
-      weight: 1002
-      identifier: otel_guides_otlp_histogram_heatmaps
     - name: Instrument Unsupported Runtimes
       url: /opentelemetry/guide/instrument_unsupported_runtimes
       parent: otel_guides
