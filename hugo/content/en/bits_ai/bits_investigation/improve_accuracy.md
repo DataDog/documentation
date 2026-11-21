@@ -61,14 +61,14 @@ Review monitor messages periodically. A stale runbook link is worse than no link
 
 At the end of an investigation, tell Bits whether the conclusion was right. Confirm what's correct, not just what's wrong; positive feedback still becomes a memory Bits reuses. When Bits gets it wrong, name the actual root cause, the services or metrics involved, and link the telemetry that proves it. "That's wrong" gives Bits nothing to change.
 
-Both positive feedback and corrections become **memories**, which Bits selectively reuses in similar future investigations. Review or delete them from the {{< ui >}}Memories{{< /ui >}} column on the [Monitor Management][8] page, and check periodically that older corrections still hold (services get renamed, causes get fixed).
+Both positive feedback and corrections become **memories**, which Bits selectively reuses in similar future investigations. Review or delete them in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Memories{{< /ui >}}][12], and check periodically that older corrections still hold (services get renamed, causes get fixed).
 
 ## Enable Auto-Investigate on your critical monitors
 
-On the [Supported Monitors][8] page, scope {{< ui >}}Auto-Investigate{{< /ui >}} to monitors where an investigation is worth running, and where you have the bandwidth to keep its context accurate:
+In [{{< ui >}}Monitors{{< /ui >}}][8], turn on automatic investigations for monitors where an investigation is worth running, and where you have the bandwidth to keep its context accurate:
 
-- Filter by [`priority:p1`][9] (or `p2`) for monitors most likely to represent a real incident.
-- Filter by [`notification:*`][10] for monitors that already page a person or channel.
+- Filter by `priority:p1` (or `p2`) for monitors most likely to represent a real incident.
+- Filter by `notification:*` for monitors that already page a person or channel.
 
 [Enable {{< ui >}}Auto-Investigate{{< /ui >}}][13] on this filtered list. Turning it on for every monitor spreads investigations across noisy, low-priority alerts and dilutes the signal you actually care about. It also means you can't realistically curate `bits.md` rules, runbooks, and feedback for all of them.
 
@@ -111,8 +111,7 @@ After chat reflects the change, re-run a known investigation to confirm the conc
 [5]: /integrations/github/
 [6]: /source_code/service-mapping
 [7]: /bits_ai/bits_investigation/configure/#integrate-with-third-party-observability-and-scm-platforms
-[8]: https://app.datadoghq.com/bits-ai/monitors/supported
-[9]: https://app.datadoghq.com/bits-ai/monitors/supported?q=priority%3Ap1&auto_only=false
-[10]: https://app.datadoghq.com/bits-ai/monitors/supported?q=notification%3A%2A&auto_only=false
+[8]: https://app.datadoghq.com/monitors
 [12]: /bits_ai/bits_investigation/configure/#send-investigation-findings-to-itsm-and-collaboration-platforms
 [13]: /bits_ai/bits_investigation/investigate_issues/#enable-automatic-investigations
+[12]: https://app.datadoghq.com/bits/settings/memories
