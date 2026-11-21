@@ -204,6 +204,14 @@ To run a subset of tests:
 
 **Note**: You can run a maximum of 50 tests at a time with {{< ui >}}Run Tests Now{{< /ui >}}.
 
+## Restrict access
+
+Use [granular access control][5] to limit who can view, run, or edit a test suite. Test suites use the same access levels as tests: Viewer, Runner, and Editor.
+
+- **Runner** access on a suite lets a user run the whole suite with {{< ui >}}Run Suite Now{{< /ui >}}.
+- Tests don't inherit access from the suites that include them. Running a test on its own, including with {{< ui >}}Run Tests Now{{< /ui >}}, still depends on that test's access level.
+- To run a suite, a user also needs the `synthetics_write` [permission][6].
+
 ## Troubleshooting
 
 If some tests fail to appear in a suite:
@@ -226,3 +234,5 @@ If execution results look incomplete:
 [2]: /synthetics/notifications/
 [3]: /synthetics/platform/downtime/
 [4]: /synthetics/bits_testing/
+[5]: /account_management/rbac/granular_access
+[6]: /account_management/rbac/permissions/#synthetic-monitoring
