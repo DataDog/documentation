@@ -121,6 +121,14 @@ ClickHouse tables support [Data Observability monitors][5], including custom SQL
 - **Cost**: Monitor queries run on your ClickHouse Cloud service and use its compute. A query on an idle service wakes the service up.
 - **Cost control**: You control cost by choosing which monitors to create. Deleting a monitor stops its queries.
 
+## Detect schema changes
+
+ClickHouse tables support [schema change monitors][6]. To detect changes, Datadog compares the databases, tables, and columns it reads from ClickHouse system tables with the previous read. The comparison uses the full ClickHouse column type, so a change such as `String` to `Nullable(String)` counts as a type change.
+
+## Monitor dbt Cloud jobs
+
+If you run dbt Cloud jobs on a ClickHouse connection, [connect dbt Cloud to Datadog][7] to monitor those runs in Jobs Monitoring. Datadog matches the dbt models to your ClickHouse tables when the dbt Cloud connection uses the same host as the ClickHouse Cloud HTTPS URL that you configured in Datadog. The models then connect to those tables in lineage.
+
 ## Troubleshooting
 
 If {{< ui >}}Test connection{{< /ui >}} fails, use the error to find the fix:
@@ -133,9 +141,9 @@ If {{< ui >}}Test connection{{< /ui >}} fails, use the error to find the fix:
 | Empty result | No tables are visible to the user. Grant `SELECT` on the databases or tables you want to monitor. |
 | Connection failure | Datadog can't reach your service. Add the `webhooks` IP ranges to your service's IP Access List, as described in [Allow Datadog IP addresses](#allow-datadog-ip-addresses), and check the URL. |
 | Connection timeout | The service was idle and is waking up. Try again in a minute. |
-| Server error | ClickHouse returned an error. Try again, and contact [Datadog support][6] if the problem persists. |
+| Server error | ClickHouse returned an error. Try again, and contact [Datadog support][8] if the problem persists. |
 
-After a successful connection, your ClickHouse tables appear in the [Data Observability Catalog][7] after the first hourly metadata read.
+After a successful connection, your ClickHouse tables appear in the [Data Observability Catalog][9] after the first hourly metadata read.
 
 If the integration tile isn't available in your organization, confirm that a Datadog representative has enabled Preview access for your organization.
 
@@ -148,5 +156,7 @@ If the integration tile isn't available in your organization, confirm that a Dat
 [3]: /api/latest/ip-ranges/
 [4]: https://app.datadoghq.com/integrations/clickhouse-cloud-data-observability
 [5]: /monitors/types/data_observability/
-[6]: /help/
-[7]: https://app.datadoghq.com/data-obs/catalog?platform=clickhouse
+[6]: /monitors/types/data_observability/#schema-change-monitors
+[7]: /data_observability/jobs_monitoring/dbt/
+[8]: /help/
+[9]: https://app.datadoghq.com/data-obs/catalog?platform=clickhouse
