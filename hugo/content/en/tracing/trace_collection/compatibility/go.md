@@ -64,6 +64,7 @@ Supported frameworks have changed between v1 and v2 of the Go Tracer
 | [Gin][6]          | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gin-gonic/gin/v2][80]               |
 | [Gorilla Mux][8] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gorilla/mux/v2][81]                |
 | [gRPC][10]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2][82]     |
+| [Connect RPC][115] | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/connectrpc.com/connect/v2][116] |
 | [chi][13]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/go-chi/chi/v2][83] |
 | [echo v4][15]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/labstack/echo.v4/v2][84]           |
 | [Fiber][18]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gofiber/fiber.v2/v2][85]              |
@@ -184,6 +185,8 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [73]: https://github.com/bradfitz/gomemcache/memcache
 [112]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2
 [114]: https://github.com/globalsign/mgo
+[115]: https://connectrpc.com/
+[116]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/connectrpc.com/connect/v2
 {{% /tab %}}
 {{% tab "v1" %}}
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
