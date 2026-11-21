@@ -95,8 +95,13 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
          <td>
            <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
            <p>Tests in the {{< ui >}}Disabled{{< /ui >}} state are excluded from this automation and are never automatically moved to {{< ui >}}Fixed{{< /ui >}}. Because disabled tests are skipped in CI, Datadog has no signal about whether they are still flaky. To make a disabled test eligible again, change its state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}}.</p>
-           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
-           <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
+           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks the test's runs on the repository's default branch over the last 7 days. Runs on other branches, such as feature branches, are not used to confirm that the test is fixed. Datadog keeps the test in its current state when:</p>
+           <ul>
+             <li>All of the test's runs on the default branch failed. The test may be broken rather than fixed.</li>
+             <li>The test did not run on the default branch, but ran on other branches. Datadog has no default branch results to confirm the fix.</li>
+           </ul>
+           <p>The test becomes eligible again after it passes on the default branch, or after it does not run on any branch for 7 days. The default branch check helps prevent quarantined tests that still fail from breaking CI again. You can configure the default branch of your repositories under <a href="https://app.datadoghq.com/source-code/repositories">Repository Settings</a>.</p>
+           <p>The {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer shows tests with a 100% failure rate over the last 7 days across all branches. Filter on <code>broken_test:true</code> to show these tests. Because the facet includes runs on all branches, a test can stay out of {{< ui >}}Fixed{{< /ui >}} even when <code>broken_test</code> is <code>false</code>, for example when it fails on the default branch but passes on feature branches.</p>
          </td>
        </tr>
      </tbody>
@@ -272,6 +277,14 @@ To fix a disabled test, do one of the following:
 
 - Trigger the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests). It retries the test even while it is disabled, and moves it to {{< ui >}}Fixed{{< /ui >}} once the fix is confirmed and merged.
 - Manually change the test's state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}} using the [state drop-down](#change-a-flaky-tests-state). Datadog then automatically moves the test to {{< ui >}}Fixed{{< /ui >}} the next time the automation runs, unless the test flakes again.
+
+### Active or quarantined flaky tests are not automatically moved to Fixed
+
+Before Datadog moves an {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}} test to {{< ui >}}Fixed{{< /ui >}}, it checks the test's runs on the repository's default branch over the last 7 days. For details, see the {{< ui >}}Fixed{{< /ui >}} action in [Configure policies to automate the flaky test lifecycle](#configure-policies-to-automate-the-flaky-test-lifecycle). If a test that stopped flaking more than 30 days ago keeps its state, check the following:
+
+- **The test fails on the default branch.** In the [Test Optimization Explorer][19], search for the test's runs on the default branch over the last 7 days with the `@test.fingerprint_fqn` and `@git.branch` facets, for example `@test.fingerprint_fqn:<FINGERPRINT> @git.branch:main`. Replace `<FINGERPRINT>` with the test's identifier and `main` with your default branch. If all of the runs failed, fix the test, then use the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix.
+- **The test runs only on other branches.** For example, your CI runs the test only on merge queue or release branches. Run the test on the default branch, or use the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests).
+- **The default branch of the repository is not the one you expect.** Check the default branch configured for the repository under [Repository Settings][2].
 
 ### Slack notifications are not delivered
 
