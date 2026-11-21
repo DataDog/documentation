@@ -513,6 +513,67 @@ For setup, configuration formats, and optional tracking, see [Browser Rules-Base
 
 To browse your organization's flags and override them locally while you develop, compose the `DatadogDevtools` wrapper into your provider stack and use the **Feature Flags** tab in the [Datadog Browser SDK developer extension][3].
 
+## Verify flag responses with response signing
+
+{{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
+Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
+{{< /callout >}}
+
+Response signing lets the SDK verify that each flag assignment response comes from Datadog and was not changed or replayed. For details on the trust model, see [Response Signing][10].
+
+<!-- TODO: confirm the minimum version. -->
+Response signing requires `@datadog/openfeature-browser` version `X.Y.Z` or later.
+
+To enable response signing, set `responseSigning` when you create the provider:
+
+{{< code-block lang="javascript" >}}
+const provider = new DatadogProvider({
+  clientToken: '<CLIENT_TOKEN>',
+  env: '<ENV_NAME>',
+  responseSigning: { mode: 'required' },
+})
+{{< /code-block >}}
+
+The response signing option accepts these modes:
+
+`off` (default)
+: The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+
+`required`
+: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+
+`observe`
+: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
+<!-- TODO: confirm that `observe` is a supported production mode at launch, and its final name. -->
+
+You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+### Confirm that response signing works
+
+1. Open your browser developer tools and select the **Network** tab.
+1. Find the flag assignment request.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` header.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
+1. Confirm that flag evaluations return assigned values, not reason `ERROR`.
+
+At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions that support response signing.
+
+If you use `flaggingProxy` or a custom `flagConfigurationFetch`, the proxy and the fetch implementation must keep the request URL, body, and headers unchanged. They must also return the exact response bytes. The proxy must allow the `x-datadog-feature-flags-*` request and response headers in CORS.
+<!-- TODO: confirm proxy support for signing at launch. -->
+
+### Verification failures
+
+In `required` mode, the provider rejects a response that fails verification. It does not retry the request without signing.
+
+- The provider emits a `PROVIDER_ERROR` event. The event message starts with `Response signing:` and names the reason, for example `Response signing: missing-proof`.
+- If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR` and error code `GENERAL`.
+- Verified assignments stay in memory until their signature expires. After that, or after a page reload, the provider needs a new verified response. It does not use the persistent cache or `initialFlagsConfiguration` in this mode.
+- Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
+
+Error messages do not contain the client token, the evaluation context, the response, or certificate data.
+
+In `observe` mode, verification failures do not emit provider errors or change evaluation reasons.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
@@ -571,3 +632,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [8]: /feature_flags/guide/proxy_sdk_traffic/
 
 [9]: /feature_flags/concepts/opt_out/
+
+[10]: /feature_flags/concepts/response_signing/
