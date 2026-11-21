@@ -20,7 +20,6 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/flag_key_obfuscation" >}}Flag Key Obfuscation{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/monthly_flag_configuration_requests" >}}Monthly Flag Configuration Requests (MFCR){{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/permissions" >}}Permissions and Access Control{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/concepts/response_signing" >}}Response Signing{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/saved_filters" >}}Saved Filters{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/scheduled_rollouts" >}}Scheduled Rollouts{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/stale_flags" >}}Stale Flags{{< /nextlink >}}

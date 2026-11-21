@@ -519,7 +519,7 @@ To browse your organization's flags and override them locally while you develop,
 Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
 {{< /callout >}}
 
-Response signing lets the SDK verify that each flag assignment response comes from Datadog and was not changed or replayed. For details on the trust model, see [Response Signing][10].
+Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][10].
 
 <!-- TODO: confirm the minimum version. -->
 Response signing requires `@datadog/openfeature-browser` version `X.Y.Z` or later.
@@ -633,4 +633,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 
 [9]: /feature_flags/concepts/opt_out/
 
-[10]: /feature_flags/concepts/response_signing/
+[10]: /feature_flags/guide/prevent_response_tampering/

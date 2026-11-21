@@ -6898,51 +6898,46 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_permissions
       weight: 314
-    - name: Response Signing
-      url: feature_flags/concepts/response_signing
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_response_signing
-      weight: 315
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 316
+      weight: 315
     - name: Scheduled Rollouts
       url: feature_flags/concepts/scheduled_rollouts
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 317
+      weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 318
+      weight: 317
     - name: Targeting Attributes
       url: feature_flags/concepts/targeting_attributes
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_attributes
-      weight: 319
+      weight: 318
     - name: Targeting Rules and Filters
       url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
-      weight: 320
+      weight: 319
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 321
+      weight: 320
     - name: Variants and Flag Types
       url: feature_flags/concepts/variants_and_flag_types
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_variants
-      weight: 322
+      weight: 321
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 323
+      weight: 322
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
