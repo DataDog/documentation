@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Cloudcraft supports overlays that integrate data from multiple sources, enriching your diagrams with real-time insights. These views let you group and filter resources by key attributes, helping you focus on different parts of your architecture for troubleshooting, cost optimization, or security analysis. Each overlay is designed to address a specific operational goal, making it easy to adapt the diagram to your needs.
+Cloudcraft supports overlays that integrate data from multiple sources, enriching your diagrams with real-time insights. These views let you group and filter resources by key attributes, helping you focus on different parts of your architecture for troubleshooting, cost optimization, or security analysis. Each overlay is designed to address a specific operational goal, so you can adapt the diagram to your needs.
 
 ## Available overlays
 
@@ -24,6 +24,7 @@ Cloudcraft provides the following built-in overlays:
 - [Cloud Cost Management (CCM)][4]: Discover savings opportunities with cost recommendations shown directly on resources.
 - [Monitors][5] (Preview): View monitor states for your resources and services, and investigate alerting monitors with Bits Investigation.
 - [APM][6]: Visualize distributed APM traces between cloud resources on your diagram (AWS only, Preview).
+- [Logs][7]: View and search logs from cloud resources on your diagram.
 
 ## Further reading
 
@@ -35,4 +36,5 @@ Cloudcraft provides the following built-in overlays:
 [4]: /datadog_cloudcraft/overlays/ccm/
 [5]: /datadog_cloudcraft/overlays/monitors/
 [6]: /datadog_cloudcraft/overlays/apm/
+[7]: /datadog_cloudcraft/overlays/logs/
 
