@@ -78,9 +78,9 @@ This mode requires a dbt Cloud token with {{< ui >}}Developer{{< /ui >}} permiss
 
 ## How Datadog collects dbt Cloud runs
 
-Datadog creates dbt Cloud job runs from the webhook events. When a run starts, Datadog records it as running. When the run completes or errors, Datadog uses the API token to fetch the run's artifacts and adds its model results and lineage.
+Datadog creates dbt Cloud job runs from the webhook events. When a run starts, Datadog shows it as running. When the run finishes, Datadog fetches the run's artifacts with the API token and adds the run's model results and lineage.
 
-Datadog processes runs whose dbt Cloud connection uses Snowflake, BigQuery, Databricks, Redshift, or [ClickHouse][3]. Runs on other connection types don't appear in Datadog.
+Datadog processes runs whose dbt Cloud connection uses Snowflake, BigQuery, Databricks, Redshift, or ClickHouse. Runs on other connection types don't appear in Datadog. Data Observability for [ClickHouse Cloud][3] is in Preview.
 
 ## What's next
 
@@ -183,7 +183,10 @@ On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists 
 
 ## Exposures
 
-Datadog reads [dbt exposures][1] from the artifacts of successful dbt Cloud job runs and shows each exposure in lineage, downstream of the tables it depends on. Runs triggered by pull requests don't update exposures. Datadog doesn't read exposures from dbt Core projects.
+Datadog shows [dbt exposures][1] in lineage, downstream of the tables they depend on. Datadog reads exposures from successful runs:
+
+- **dbt Cloud**: Datadog reads exposures from the run's artifacts. Runs triggered by pull requests don't update exposures.
+- **dbt Core**: Datadog reads exposures from the OpenLineage events that `openlineage-dbt` 1.52.0 or later sends.
 
 ## Further reading
 

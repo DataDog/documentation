@@ -443,13 +443,13 @@ If some jobs are not visible, navigate to the [Configuration][9] page to underst
 
 ## Nested jobs
 
-A Databricks job can trigger another job with a Run Job task. Jobs Monitoring shows the parent job and the child job as separate jobs, each with its own runs. The span of the parent's Run Job task includes a span link to the run of the child job it triggered.
+A Databricks job can trigger another job with a Run Job task. Jobs Monitoring shows the parent job and the child job as separate jobs, each with its own runs. The span of the parent's Run Job task includes a span link to the run of the child job that it triggered.
 
-The parent job's run also records the clusters that its child jobs run on, including the clusters of jobs that those child jobs trigger in turn. Logs for the parent run include logs from these clusters.
+The parent job's run also records the clusters that its child jobs run on. This includes the clusters of jobs that those child jobs trigger in turn. Logs for the parent run include logs from these clusters.
 
-Cluster utilization metrics and cluster logs come from the Datadog Agent on each cluster, so the clusters that child jobs run on need the Agent too. The [Datadog managed global init script](#install-the-datadog-agent) installs the Agent on every cluster in the workspace when the cluster starts, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
+The clusters that child jobs run on need the Datadog Agent too. The Agent on each cluster sends that cluster's utilization metrics and logs. The [Datadog managed global init script](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent) installs the Agent on every cluster in the workspace at startup, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
 
-If the user or service principal that connects Datadog to the workspace can't view a child job, Datadog leaves that job's clusters out of the parent run, and the Databricks integration tile shows a warning that lists the affected parent jobs. To fix it, grant `CAN VIEW` on the child job. See [Workspace permissions](#workspace-permissions).
+The user or service principal that connects Datadog to the workspace needs `CAN VIEW` on each child job. Without it, Datadog leaves that job's clusters out of the parent run. The Databricks integration tile then shows a warning that lists the affected parent jobs. See [Workspace permissions](#workspace-permissions).
 
 ## Troubleshooting
 

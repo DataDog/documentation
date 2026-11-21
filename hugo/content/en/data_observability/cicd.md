@@ -43,11 +43,12 @@ Drift Detection compares the data produced by your models before and after your 
 
 Datadog doesn't run checks or post a comment on a pull request in the following cases:
 
-- None of the changed files are inside the configured dbt project folder, or inside a directory listed in the directories filter.
-- None of the changed files maps to a dbt model in the Data Observability Catalog. For example, the pull request changes only YAML files, macros, or documentation.
+- None of the changed files are inside the configured dbt project folder.
+- The directories filter is set, and none of the changed files are inside a listed directory.
+- None of the changed files map to a dbt model in the Data Observability Catalog. For example, the pull request changes only YAML files, macros, or documentation.
 - The dbt model filter excludes every changed model.
 
-Checks support dbt models and seeds. If a pull request changes only dbt snapshots, Datadog posts a result that says snapshots aren't supported.
+Checks support dbt models and seeds. If a pull request changes only dbt snapshots, the check result says that snapshots aren't supported.
 
 ## Setup
 
@@ -59,25 +60,23 @@ Checks support dbt models and seeds. If a pull request changes only dbt snapshot
 
 ### 2. Select your dbt project and repository
 
-1. From the CI/CD settings, click {{< ui >}}Add CI/CD Checks{{< /ui >}}.
-2. Select the dbt project you want to add checks for.
-3. Select the main job for the project. This is the job with the most knowledge of your dbt schema.
-4. If Datadog doesn't automatically infer the repository from your source-control provider, select it manually.
+1. In the CI/CD settings, find the dbt project you want to add checks for and click {{< ui >}}Configure checks{{< /ui >}}. The {{< ui >}}Project{{< /ui >}} field shows the selected project.
+2. Under {{< ui >}}Source Control{{< /ui >}}, check the {{< ui >}}Repository{{< /ui >}} field. Datadog fills it in when it detects the repository from the selected dbt project. Otherwise, select the repository.
 
 {{< img src="data_observability/cicd/cicd-connection.png" alt="The CI/CD feature creation page" style="width:100%;" >}}
 
 #### dbt project folder
 
-If your dbt project doesn't live at the root of your repository, set {{< ui >}}dbt project folder{{< /ui >}} to the folder that contains `dbt_project.yml`, relative to the repository root. Leave the field empty to use the repository root.
+If your dbt project isn't at the root of your repository, set {{< ui >}}dbt project folder{{< /ui >}} to the folder that contains `dbt_project.yml`. Enter the path relative to the repository root. Leave the field empty to use the repository root.
 
-If the dbt metadata that Datadog ingests for the project includes the project's folder in the selected repository, Datadog fills in the field for new checks and marks it {{< ui >}}Detected{{< /ui >}}. If you change the folder, click {{< ui >}}Use detected{{< /ui >}} to restore the detected value.
+Datadog can detect the folder from the dbt metadata it receives for the project and the selected repository. When it does, Datadog fills in the field for new checks and marks it {{< ui >}}Detected{{< /ui >}}. If you change the folder, click {{< ui >}}Use detected{{< /ui >}} to restore the detected value.
 
 ### 3. Limit which changes trigger checks (optional)
 
-By default, a change to any dbt model in the project can trigger checks. To narrow this, use the trigger settings:
+By default, a change to any dbt model in the project can trigger checks. To narrow this, use the fields under {{< ui >}}Trigger Settings{{< /ui >}}:
 
 - {{< ui >}}dbt model filter{{< /ui >}}: Only models that match the filter can trigger checks.
-- {{< ui >}}Directories filter{{< /ui >}}: Only changes to files under the listed directories can trigger checks. Enter each path relative to the dbt project folder (for example, `models/marts`) and click {{< ui >}}Add path{{< /ui >}}. A directory matches the files inside it and its subdirectories: `models/mart` doesn't match `models/marts/orders.sql`.
+- {{< ui >}}Directories filter{{< /ui >}}: Only changes to files under the listed directories can trigger checks. Enter each path relative to the dbt project folder (for example, `models/marts`) and click {{< ui >}}Add path{{< /ui >}}. A directory matches only the files inside it and its subdirectories. For example, `models/mart` doesn't match `models/marts/orders.sql`.
 
 ### 4. Configure checks
 
