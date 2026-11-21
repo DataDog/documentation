@@ -18,6 +18,8 @@ As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datad
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. The extension works with the recommended OTLP HTTP exporter setup and with the Datadog Exporter.
 
+The Datadog Extension connects upstream Collectors to Fleet Automation.
+
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
 ## Key features
