@@ -34,21 +34,6 @@ These become Cloud SIEM detection rules that generate security signals.
 To migrate operational content, such as Splunk alerts on error rates, log searches, or dashboards, use [Migration Tools][4] instead.
 They turn alerts into Datadog monitors and translate queries deterministically.
 
-### Translate a single rule
-
-| Method                                                        | Use case                                                                                                                                       |
-|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits Security Assistant in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs. |
-| [MCP Server tool][1]                                          | Translate a single rule from an AI agent with the `propose_datadog_security_detection_rule` tool. Returns a proposed rule without creating it. |
-| [Rule proposal API][2]                                        | Translate a single rule with an API call. Returns a proposed rule without creating it.                                                         |
-
-### Migrate rules in bulk
-
-| Method                                                       | Use case                                                                                              |
-|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| [Bulk migration UI](#bulk-migrate-detection-rules-in-the-ui) | Upload a CSV export of your third-party SIEM rules, then review and publish a proposal for each rule. |
-| [Batch migration API][3]                                     | Run the same bulk migration with API calls instead of the UI.                                         |
-
 ## Prerequisites
 
 <div class="alert alert-warning">Before you migrate, send the logs your source rules query to Datadog. See <a href="/security/cloud_siem/ingest_and_enrich/">Ingest and Enrich</a>. Datadog uses these logs to map each source rule's fields and queries to Cloud SIEM. <strong>Without them, translations are less accurate.</strong></div>
@@ -61,7 +46,15 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 | {{< ui >}}Security Rules Read{{< /ui >}} (`security_monitoring_rules_read`)   | View migrations, proposals, and their statuses.                                                  |
 | {{< ui >}}Security Rules Write{{< /ui >}} (`security_monitoring_rules_write`) | Create, update, start, cancel, and delete migrations, publish rules, and translate single rules. |
 
-## Translate a single rule in the rule editor
+### Translate a single rule
+
+| Method                                                        | Use case                                                                                                                                       |
+|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits Security Assistant in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs. |
+| [MCP Server tool][1]                                          | Translate a single rule from an AI agent with the `propose_datadog_security_detection_rule` tool. Returns a proposed rule without creating it. |
+| [Rule proposal API][2]                                        | Translate a single rule with an API call. Returns a proposed rule without creating it.                                                         |                                  |
+
+### Translate a single rule in the rule editor
 
 1. Open the [rule editor][7].
 2. Click {{< ui >}}Bits Security Assistant{{< /ui >}} to open the chat.
@@ -82,7 +75,14 @@ Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minute
 | where distinct_ip_count>1
 ```
 
-## Bulk migrate detection rules in the UI
+## Migrate rules in bulk
+
+| Method                                                       | Use case                                                                                              |
+|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [Bulk migration UI](#bulk-migrate-detection-rules-in-the-ui) | Upload a CSV export of your third-party SIEM rules, then review and publish a proposal for each rule. |
+| [Batch migration API][3]                                     | Run the same bulk migration with API calls instead of the UI.       
+
+### Bulk migrate detection rules in the UI
 
 Export your rules from the source platform and upload them to Datadog. Datadog generates a detection rule proposal for each rule, which you review before you publish it to Cloud SIEM.
 
@@ -94,7 +94,7 @@ Export your rules from the source platform and upload them to Datadog. Datadog g
 4. Name the migration and deselect any rules you don't want to migrate.
 5. Click {{< ui >}}Start Migration{{< /ui >}}. Large migrations can take a few hours to complete.
 
-### Review and publish proposals
+## Review and publish proposals
 
 Open a migration from the [Migrations][9] page to follow its progress. Proposals appear as Datadog translates them, so you can start reviewing before the migration completes. Tabs group proposals by status:
 
