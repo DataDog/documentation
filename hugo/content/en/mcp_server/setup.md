@@ -431,7 +431,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     }
     </code></pre>
 
-    Replace `<YOUR_ACCESS_TOKEN>` with a [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67]. For other header-based options, see [Authentication](#authentication).
+    Replace `<YOUR_ACCESS_TOKEN>` with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2]. For other header-based options, see [Authentication](#authentication).
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -440,6 +440,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 1. The status indicator in the settings displays a green tick when the connection is successful.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /account_management/personal-access-tokens/
+[2]: /account_management/service-access-tokens/
 
 {{% /collapse-content %}}
 
