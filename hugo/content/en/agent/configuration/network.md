@@ -102,8 +102,13 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Data Observability][35]
+: `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+The Agent sends OpenLineage events to this domain when it runs as an OpenLineage proxy, including Spark lineage events from the Java tracer. For the other network requirements of Data Observability, see [Network Requirements for Data Observability][35].
+
 [18]: /database_monitoring/
 [19]: /infrastructure/end_user_device_monitoring/
+[35]: /data_observability/network/
 
 {{% /site-region %}}
 
