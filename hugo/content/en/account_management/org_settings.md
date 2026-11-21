@@ -10,7 +10,9 @@ further_reading:
       text: "User management"
 ---
 ## Overview
-The Organization Settings section is available to [Administrators][1] by clicking {{< ui >}}Organization Settings{{< /ui >}} from the account menu in the bottom of the left side navigation or by selecting {{< ui >}}Organization Settings{{< /ui >}} from the header dropdown at the top of the Personal Settings page.
+To open the Organization Settings section, click {{< ui >}}Organization Settings{{< /ui >}} from the account menu in the bottom of the left side navigation. You can also select {{< ui >}}Organization Settings{{< /ui >}} from the header dropdown at the top of the Personal Settings page.
+
+What you can view and change in Organization Settings depends on your role's permissions. Users with the [Datadog Admin role][1] can manage all settings. Every role can view the {{< ui >}}Roles{{< /ui >}} tab, but only users with the User Access Manage permission can create or edit roles.
 
 {{< img src="account_management/org_settings/nav.png" alt="Navigate to your Organization Settings in Datadog" style="width:80%;" >}}
 
