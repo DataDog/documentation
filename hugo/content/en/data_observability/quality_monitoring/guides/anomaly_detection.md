@@ -1,6 +1,6 @@
 ---
 title: Anomaly Detection for Data Observability Monitors
-description: "Understand how the anomaly detection model works for Data Observability monitors, including training, model states, seasonality, and metric-specific behaviors."
+description: "Understand how the anomaly detection model works for Data Observability monitors, including training, model states, seasonality, metric-specific behaviors, and the AI review of flagged points."
 further_reading:
   - link: '/data_observability/quality_monitoring/'
     tag: 'Documentation'
@@ -16,13 +16,23 @@ further_reading:
 
 By default, [Data Observability monitors][1] use an anomaly detection model tailored to common patterns in data quality metrics such as table freshness and row count.
 
-The model learns from the metric's history to set expected bounds. When an observed value falls outside those bounds, the monitor triggers an alert.
+The model learns from the metric's history to set expected bounds. When an observed value falls outside those bounds, an [AI reviewer](#ai-review-of-flagged-points) checks the point. The monitor alerts unless the reviewer finds that the value matches the metric's normal behavior.
 
 ## Training period
 
 When you create an anomaly detection monitor, it enters a training period. During training, the monitor collects historical values to learn the metric's baseline behavior. It does not trigger alerts during this period, and the monitor chart appears in blue.
 
-Training typically takes between 3 and 9 days. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior.
+Training typically takes 3 to 7 days for a monitor that runs more than once a day, or about 9 days for a monitor that runs once a day. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior. A monitor leaves training when it has both of the following:
+
+- At least nine evaluations over at least 3 days.
+- A full weekend and a full weekday of evaluations, or more than 7 days of history.
+
+Some monitors follow different rules:
+
+- **Freshness**: The monitor stays in training until it observes at least one table update. If it has observed only one update, it stays in training until three times the longest observed time between updates has passed since that update.
+- **Row Count**: If the row count stays flat from the weekend into Monday, the monitor stays in training until the count changes, for up to 8 days of history.
+- **Custom SQL with the Default model, and metrics that have only returned one value**: The monitor stays in training until it has at least 7 days of history.
+- **Job duration** (Preview): The monitor leaves training after at least five runs over at least 1 day that include a full weekday of runs. It doesn't wait for a weekend.
 
 After training completes, the monitor can alert. The chart shows the observed values over time, with bounds above and below the line as a shaded area showing expected values. The color shows the current state:
 
@@ -85,9 +95,55 @@ Annotations have two effects:
 
 See [Annotate bounds][2] on the Data Observability Monitor page for available annotation types and how to apply them.
 
+## Model configuration
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+{{< /callout >}}
+
+The [model configuration settings][3] change how the model sets bounds:
+
+- {{< ui >}}Sensitivity{{< /ui >}} multiplies the width of the bounds that the model computes from the metric's history. The default is `3`. Lower values narrow the bounds and produce more alerts, and higher values widen them.
+- {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} take raw values in the metric's units, such as rows or seconds. They set the smallest distance between the predicted value and each bound, and the model can still set wider bounds. For integer metrics such as Row Count, the model rounds the value up to a whole number.
+- {{< ui >}}Model Instructions{{< /ui >}} don't change the bounds. The AI reviewer reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
+
+## AI review of flagged points
+
+Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value was within them. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
+
+The reviewer analyzes the metric's history and compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
+
+- If the reviewer finds earlier normal periods that match the flagged value's pattern and timing, it dismisses the point. The monitor widens the bounds at that point to include the observed value and doesn't alert.
+- If the reviewer confirms the anomaly, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
+- If the review doesn't complete, for example because it times out or the monitor has reached its daily review limit, the monitor alerts on the original bounds.
+
+The reviewer can only dismiss flagged points. It doesn't narrow the bounds or create alerts. To get alerts on values that fall within the bounds, adjust {{< ui >}}Sensitivity{{< /ui >}} or annotate the bounds with {{< ui >}}Missed alert{{< /ui >}}.
+
+The reviewer dismisses a Row Count value of `0` only when the metric's history shows that zeros are routine, for example earlier zeros that recurred and recovered. This applies even when the monitor's Model Instructions describe the value as expected.
+
+### Model Instructions
+
+{{< ui >}}Model Instructions{{< /ui >}}, one of the Preview [model configuration settings][3], give the reviewer plain-language context about behavior you expect, such as `Don't alert on large increases during US holidays`. The reviewer reads them only for flagged points:
+
+- If the instructions describe the flagged point as expected, the reviewer dismisses it, even when the metric's history alone doesn't support a dismissal.
+- Instructions that name specific tables, columns, or group values apply only to the series that match them.
+- Instructions can cover every point, for example by asking not to alert on the monitor at all. The reviewer then treats every flagged point as expected.
+
+### Data the reviewer receives
+
+The reviewer uses a large language model. For each flagged point, it receives the following:
+
+- The metric type, and the metric's history of values with their expected upper and lower bounds.
+- Bound annotations on the series that end before the flagged point, with their types and time ranges.
+- Identifiers for your organization, the monitor, and the series.
+- If the monitor has Model Instructions: the instructions, the name of the monitored table or column, its entity type and platform, and the series' group tag keys and values.
+
+The reviewer doesn't receive rows from your tables, table descriptions, or the text of Custom SQL queries.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/data_observability/
 [2]: /monitors/types/data_observability/#annotate-bounds
+[3]: /monitors/types/data_observability/#model-configuration
