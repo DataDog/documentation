@@ -4545,6 +4545,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Search remediation groups
+      url: /api/latest/security-monitoring/search-remediation-groups/
+      identifier: security-monitoring-search-remediation-groups
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRemediationGroups
+        unstable:
+          - v2
+        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -6297,9 +6310,9 @@ menu:
           - TriggerTests
         unstable: []
         order: 16
-    - name: Search Synthetic tests
-      url: /api/latest/synthetics/search-synthetic-tests/
-      identifier: synthetics-search-synthetic-tests
+    - name: Search Synthetic tests with filters
+      url: /api/latest/synthetics/search-synthetic-tests-with-filters/
+      identifier: synthetics-search-synthetic-tests-with-filters
       parent: synthetics
       generated: true
       params:
