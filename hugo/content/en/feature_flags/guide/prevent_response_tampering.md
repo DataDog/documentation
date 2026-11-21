@@ -17,6 +17,8 @@ algolia:
 
 {{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
 Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
+
+The response signing SDK option is experimental. Its name and behavior can change before general availability.
 {{< /callout >}}
 
 ## Summary
@@ -132,11 +134,13 @@ Each response carries its own leaf certificate and intermediate chain. The SDK p
 
 Set the response signing option in your SDK to `required`. Datadog enables signing for your organization during Preview. No other configuration is necessary.
 
+<!-- TODO: confirm that the experimental option name matches the released SDK API. -->
+
 | SDK | Option | Setup instructions |
 | --- | --- | --- |
-| Browser (`@datadog/openfeature-browser`) | `responseSigning: { mode: 'required' }` | [JavaScript client setup][3] |
-| iOS (`dd-sdk-ios`) | `responseSigning: .init(mode: .required)` | [iOS client setup][1] |
-| Android (`dd-sdk-android-flags`) | `.responseSigning(ResponseSigningMode.REQUIRED)` | [Android client setup][2] |
+| Browser (`@datadog/openfeature-browser`) | `experimentalResponseSigning: { mode: 'required' }` | [JavaScript client setup][3] |
+| iOS (`dd-sdk-ios`) | `experimentalResponseSigning: .init(mode: .required)` | [iOS client setup][1] |
+| Android (`dd-sdk-android-flags`) | `.experimentalResponseSigning(ResponseSigningMode.REQUIRED)` (requires `@OptIn(ExperimentalFlagsApi::class)`) | [Android client setup][2] |
 
 If you do not enable response signing, nothing changes. The SDK sends the same requests and receives the same responses as before.
 

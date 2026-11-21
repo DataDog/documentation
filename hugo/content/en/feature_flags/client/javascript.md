@@ -517,6 +517,8 @@ To browse your organization's flags and override them locally while you develop,
 
 {{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
 Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
+
+The response signing SDK option is experimental. Its name and behavior can change before general availability.
 {{< /callout >}}
 
 Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][10].
@@ -524,13 +526,14 @@ Response signing protects flag assignments from response tampering and replay. T
 <!-- TODO: confirm the minimum version. -->
 Response signing requires `@datadog/openfeature-browser` version `X.Y.Z` or later.
 
-To enable response signing, set `responseSigning` when you create the provider:
+<!-- TODO: confirm that the experimental option name matches the released SDK API. -->
+To enable response signing, set `experimentalResponseSigning` when you create the provider:
 
 {{< code-block lang="javascript" >}}
 const provider = new DatadogProvider({
   clientToken: '<CLIENT_TOKEN>',
   env: '<ENV_NAME>',
-  responseSigning: { mode: 'required' },
+  experimentalResponseSigning: { mode: 'required' },
 })
 {{< /code-block >}}
 
@@ -556,6 +559,7 @@ You do not need to configure keys or certificates. The SDK contains the Datadog 
 1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
 1. Confirm that flag evaluations return assigned values, not reason `ERROR`.
 
+<!-- TODO: confirm the name of `responseSigningVersion` after the experimental API rename. -->
 At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions that support response signing.
 
 If you use `flaggingProxy` or a custom `flagConfigurationFetch`, the proxy and the fetch implementation must keep the request URL, body, and headers unchanged. They must also return the exact response bytes. The proxy must allow the `x-datadog-feature-flags-*` request and response headers in CORS.
