@@ -830,17 +830,47 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Cloud Resources
 
-Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure with [Cloudcraft][106]. Resource lookup uses the [Resource Catalog][86] and covers AWS, Azure, Google Cloud, and OCI.
+
+<div class="alert alert-info">Tools marked <em>Preview</em> are available only when you request <code>cloud-resources</code> by name. Preview tools are not included in <code>toolsets=all</code>.</div>
 
 ### `get_cloud_resource_details`
 *Toolset: **cloud-resources***\
 *Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
-Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. For EC2 instances, load balancers, target groups, Auto Scaling groups, and security groups, also returns linked resources. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
 
 - Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
 - What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
 - Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
 - What tags are set on this resource, and is it owned by a team?
+- Which targets sit behind this load balancer?
+
+### `get_cloud_infrastructure_diagram_scope`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read`*\
+Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. The diagram is shown in your conversation, with a link to open it in [Cloudcraft][106].
+
+- Diagram AWS account 123456789012.
+- What does the us-east-1 environment look like?
+
+### `get_cloud_infrastructure_overlay_data`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (`Cloud Cost Management Read`, `Monitors Read`, `Security Monitoring Findings Read`, or `Hosts Read`)*\
+Finds the resources that have overlay data within a diagram's scope: cost savings and monthly cost, monitor states, security findings, or changes in a time window, including deleted resources. Use the results to choose which resources to highlight or walk through in a diagram.
+
+- What are the top 3 cost savings opportunities in account prod-main? Show them on the diagram.
+- Which resources in us-east-1 have alerting monitors?
+- Which resources in prod have the most critical security findings?
+- What changed in account prod-main over the last 24 hours?
+
+### `design_cloud_infrastructure`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read` (also `Hosts Read` when extending real infrastructure)*\
+Designs infrastructure that does not exist yet, either from scratch or on top of your real infrastructure, and shows it as a hypothetical diagram.
+
+- Design a LAMP stack on EKS.
+- What would the production account look like in three regions?
+- Add a second load balancer in front of these instances.
 
 ## Code Execution
 
@@ -3883,6 +3913,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [103]: /mcp_server/setup#required-permissions
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+[106]: /cloudcraft/
 
 ## Further reading
 
