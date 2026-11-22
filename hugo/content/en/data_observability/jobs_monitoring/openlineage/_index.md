@@ -525,6 +525,8 @@ After sending your events, use the following pages to verify that Datadog receiv
 - [**Lineage**][9]: Search for your job name to see the job and its connections to any datasets included in the event.
 - [**OpenLineage events**][12]: Check the validation status of your events: `Ok`, `Warning`, or `Error`. Select an event to view the exact payload Datadog received, or filter by validation status to troubleshoot events that did not process successfully. Start here if the results don't appear as expected in the other two views.
 
+<!-- SCREENSHOT: Data Observability Settings > OpenLineage, the OpenLineage events list with sample custom job events in the Ok, Warning, and Error validation states, and one selected event with the payload Datadog received. -->
+
 ## Send runs from tools without OpenLineage support
 
 If a tool doesn't emit OpenLineage events, you can poll its run history and send each run to Datadog as OpenLineage events. A typical poller works as follows:
@@ -549,6 +551,8 @@ Each event needs the following fields. On the [OpenLineage events][12] page, Dat
 To add lineage, include `inputs` and `outputs` in the event. See [Dataset naming conventions](#dataset-naming-conventions).
 
 Datadog takes a run's start time from the `eventTime` of its `START` event, and its end time from the `eventTime` of its `COMPLETE` or `FAIL` event. Set `eventTime` from the times the tool recorded so that run durations in Datadog match the tool. Job duration monitors evaluate a run while it's in progress, starting when its `START` event arrives. See [How job duration is evaluated][13].
+
+{{< img src="data_observability/openlineage/openlineage_poller_event_times.png" alt="Diagram of a poller that reads a tool's run on two polls and sends START, then COMPLETE or FAIL, with the start and end times the tool recorded." style="width:100%;" >}}
 
 To keep the `runId` stable when the poller restarts, derive it from the tool's own run identifier, for example with `uuid.uuid5(uuid.NAMESPACE_URL, "<TOOL_NAME>/<TOOL_RUN_ID>")` in Python. Datadog treats a second `START` event that has the same `runId` and a different `eventTime` as a retry of that run. If you resend a `START` event, keep its original `eventTime`.
 
