@@ -28,7 +28,7 @@ Data Observability monitors your data through two products, each with a differen
 
 This page describes both overhead sources and how to control them. Actual cost depends heavily on your environment: warehouse size, the amount of data scanned, how often monitors run, and warehouse auto-stop settings. This page focuses on what consumes resources, not a single benchmark number.
 
-Datadog bills for Data Observability separately from this overhead. See [Data Observability Billing][12].
+Datadog bills for Data Observability separately from this overhead.
 
 ## Quality Monitoring overhead
 
@@ -208,7 +208,7 @@ For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineag
 
 ## Estimating your actual costs
 
-The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management. To see which queries drive usage in your warehouse, use the [Queries page][13].
+The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
 
 [1]: /monitors/types/data_observability/#monitor-schedule
 [5]: /tracing/troubleshooting/agent_apm_resource_usage/
@@ -218,8 +218,6 @@ The behaviors described on this page are environment-dependent. Actual cost depe
 [9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
 [10]: https://openlineage.io/docs/integrations/dbt
 [11]: /data_observability/jobs_monitoring/openlineage/
-[12]: /account_management/billing/data_observability/
-[13]: /data_observability/optimize/#analyze-warehouse-queries
 
 ## Further reading
 

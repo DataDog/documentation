@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Observability for SQL Server is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
+Data Observability for SQL Server is in Preview. Contact your Datadog representative to enable it for your organization.
 {{< /callout >}}
 
 ## Overview
@@ -33,9 +33,9 @@ Before you begin, make sure you have:
 - [Database Monitoring for SQL Server][3] set up on the instance, with the `datadog` login created as described in the setup guide for your hosting type.
 - Datadog Agent `7.86.0` or later installed on a host that can reach your SQL Server instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][4] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
-- Outbound network access from the Agent host to Datadog. See [Network Requirements for Data Observability][18].
+- Outbound network access from the Agent host to Datadog.
 - Permission to create database users and grant privileges in each database you want to track.
-- Preview access enabled for your organization. See [Request Preview access][19].
+- Preview access enabled for your organization by a Datadog representative.
 
 ## Enable Remote Configuration
 
@@ -182,7 +182,7 @@ If your tables do not appear, verify that:
 2. `dbm: true` and `collect_schemas.enabled: true` are set on the instance.
 3. The `datadog` login can connect to each database you want to track, and the `datadog` user exists in each of those databases.
 4. On Azure SQL Database, each database has its own instance in `sqlserver.d/conf.yaml`, and `database_identifier.template` includes `$database`.
-5. Preview access is enabled for your organization. See [Request Preview access][19].
+5. A Datadog representative has enabled Preview access for your organization.
 
 ## Create data quality monitors
 
@@ -228,5 +228,3 @@ A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui 
 [15]: /monitors/types/data_observability/
 [16]: /monitors/types/data_observability/#monitor-schedule
 [17]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
-[18]: /data_observability/network/
-[19]: /data_observability/supported_platforms/#request-preview-access

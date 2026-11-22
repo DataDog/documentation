@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Observability for MySQL is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
+Data Observability for MySQL is in Preview. Contact your Datadog representative to enable it for your organization.
 {{< /callout >}}
 
 ## Overview
@@ -32,9 +32,9 @@ Before you begin, make sure you have:
 
 - Datadog Agent `7.86.0` or later installed on a host that can reach your MySQL instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][4] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
-- Outbound network access from the Agent host to Datadog. See [Network Requirements for Data Observability][18].
+- Outbound network access from the Agent host to Datadog.
 - Permission to create MySQL users and grant privileges.
-- Preview access enabled for your organization. See [Request Preview access][19].
+- Preview access enabled for your organization by a Datadog representative.
 
 ## Enable Remote Configuration
 
@@ -165,7 +165,7 @@ If your tables do not appear, verify that:
    mysql -h <MYSQL_HOST> -u datadog -p -e 'SELECT 1 FROM <DATABASE_NAME>.orders LIMIT 1'
    ```
 
-4. Preview access is enabled for your organization. See [Request Preview access][19].
+4. A Datadog representative has enabled Preview access for your organization.
 
 ## Create data quality monitors
 
@@ -211,5 +211,3 @@ A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui 
 [15]: /monitors/types/data_observability/
 [16]: /monitors/types/data_observability/#monitor-schedule
 [17]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
-[18]: /data_observability/network/
-[19]: /data_observability/supported_platforms/#request-preview-access
