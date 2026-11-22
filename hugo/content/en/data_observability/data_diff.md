@@ -30,7 +30,7 @@ Data Diff compares two datasets row by row. Each diff has a source dataset and a
 
 Use Data Diff to confirm that a migration or replication job copied a table correctly. You can also compare a table with an earlier version of itself.
 
-To alert when a metric such as row count differs between a source and a target on a schedule, use a [source to target monitor][1] instead. Data Diff finds the individual rows that differ.
+To alert on a schedule when a metric such as row count differs between two assets, use a [source to target monitor][1]. Data Diff finds the individual rows that differ.
 
 ## Prerequisites
 
@@ -72,7 +72,7 @@ GRANT USAGE ON SCHEMA <RESULTS_DATABASE>.<RESULTS_SCHEMA> TO ROLE DATADOG_ROLE;
 GRANT CREATE TABLE ON SCHEMA <RESULTS_DATABASE>.<RESULTS_SCHEMA> TO ROLE DATADOG_ROLE;
 ```
 
-The Datadog role creates `DIFF_RESULTS` and owns it, so it needs no other grants on the table. If a future grant on the schema transfers ownership of new tables to another role, also grant `SELECT`, `INSERT`, and `DELETE` on `<RESULTS_DATABASE>.<RESULTS_SCHEMA>.DIFF_RESULTS` to the Datadog role after Datadog creates the table.
+The Datadog role creates `DIFF_RESULTS` and owns it, so it needs no other grants on the table. Some schemas have a future grant that gives ownership of new tables to another role. In that case, grant the Datadog role `SELECT`, `INSERT`, and `DELETE` on `DIFF_RESULTS` after Datadog creates it.
 
 Viewing the storage settings requires the Data Observability Data Diff Config Read permission. Changing them requires the Data Observability Data Diff Config Write permission.
 
@@ -116,11 +116,11 @@ Then configure the diff:
 
 ### Map columns
 
-After you select both datasets, Datadog suggests a column mapping and a primary key. To make the suggestion, Datadog sends the diff's name and description, the table names or SQL queries, the WHERE filters, the column names and types, and catalog attributes such as descriptions to a Datadog-hosted AI model. Row values aren't sent. If Datadog can't suggest a mapping, it matches columns by name. Review the primary key before you create the diff.
+After you select both datasets, Datadog suggests a column mapping and a primary key. Datadog makes the suggestion with a Datadog-hosted AI model. The model receives the diff's name and description, the dataset tables or queries, and the {{< ui >}}WHERE{{< /ui >}} filters. It also receives column names, column types, and catalog attributes such as descriptions. It doesn't receive row values. If Datadog can't suggest a mapping, it matches columns by name. Review the primary key before you create the diff.
 
 The mapping has three groups:
 
-- {{< ui >}}Primary Keys{{< /ui >}}: Column pairs that uniquely identify each row in the source and the target. A diff needs at least one primary key pair, with a column selected on both sides. If a key value appears more than once in a dataset, Datadog compares the rows for that key as a group and reports extra copies as {{< ui >}}Removed{{< /ui >}} or {{< ui >}}Added{{< /ui >}} rows.
+- {{< ui >}}Primary Keys{{< /ui >}}: Column pairs that uniquely identify each row in the source and the target. A diff needs at least one primary key pair, with a column selected on both sides. If a key value appears more than once in a dataset, Datadog matches the rows for that key as a group. It reports extra copies as {{< ui >}}Removed{{< /ui >}} or {{< ui >}}Added{{< /ui >}} rows.
 - {{< ui >}}Compare columns{{< /ui >}}: Column pairs whose values Datadog compares.
 - {{< ui >}}Ignore columns{{< /ui >}}: Columns with no match on the other side. Datadog doesn't compare them. To compare one, select a column for the other side.
 
@@ -156,7 +156,7 @@ To cancel a pending or running run, open the diff and click {{< ui >}}Cancel dif
 
 ## Comparison rules
 
-- Datadog excludes rows with a NULL value in any primary key column from the comparison. A run can show {{< ui >}}No differences found{{< /ui >}} while such rows exist, so check that the primary key columns have no NULL values before you rely on a match.
+- Datadog excludes rows with a NULL value in any primary key column from the comparison. A run can still show {{< ui >}}No differences found{{< /ui >}} when such rows exist. Before you rely on a match, check that the primary key columns have no NULL values.
 - Two NULL values match. A NULL value and an empty string don't match.
 - String values are compared exactly, so differences in case count.
 - Timestamps are compared to the microsecond. `TIMESTAMP_LTZ` and `TIMESTAMP_TZ` values are compared in UTC, and `TIMESTAMP_NTZ` values are compared as stored.
