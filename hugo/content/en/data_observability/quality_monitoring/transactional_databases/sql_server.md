@@ -31,7 +31,7 @@ SQL Server is collected through the [Datadog Agent][1] rather than through a dir
 Before you begin, make sure you have:
 
 - [Database Monitoring for SQL Server][3] set up on the instance, with the `datadog` login created as described in the setup guide for your hosting type.
-- Datadog Agent `7.84.0` or later installed on a host that can reach your SQL Server instances. See [Agent installation][1] for your platform.
+- Datadog Agent `7.86.0` or later installed on a host that can reach your SQL Server instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][4] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
 - Permission to create database users and grant privileges in each database you want to track.
 - Preview access enabled for your organization by a Datadog representative.
@@ -62,7 +62,7 @@ Each Agent's Remote Configuration status is also listed on the [Remote Configura
 
 ## Grant read access to your data
 
-The Database Monitoring setup lets the `datadog` login read server state and object definitions, but not the data in your tables. Data Observability needs `SELECT` on the tables you monitor to compute row counts, column-level metrics, and custom SQL results.
+The Database Monitoring setup lets the `datadog` login read server state and object definitions, but not the data in your tables. Data Observability needs `SELECT` on the tables you monitor to compute row counts, column-level metrics, and Custom SQL results.
 
 Run the following in each database you want to track, and repeat the `GRANT` statement for each schema:
 
@@ -74,11 +74,13 @@ GRANT SELECT ON SCHEMA::[<SCHEMA_NAME>] TO datadog;
 
 If the `datadog` user already exists in the database, skip the `CREATE USER` statement. A schema-level grant also applies to tables created in the schema later.
 
+On Azure SQL Database, `USE` can't switch to another database. Connect to each database you want to track and run the statements without the `USE` line.
+
 To limit access to specific tables, grant `SELECT` on each table instead of on the schema:
 
 ```sql
 USE [<DATABASE_NAME>];
-GRANT SELECT ON [<SCHEMA_NAME>].[orders] TO datadog;
+GRANT SELECT ON [<SCHEMA_NAME>].[<TABLE_NAME>] TO datadog;
 ```
 
 Schema collection still lists the database's other tables, but monitors on tables without a `SELECT` grant fail.
@@ -138,7 +140,11 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
-Schema collection (`collect_schemas`) is disabled by default on SQL Server and requires `dbm: true`. It populates your tables in Data Observability. By default, it collects up to 300 tables from each database. To track more tables, increase `collect_schemas.max_tables`. For the SQL Server versions that schema collection supports, see [Collecting schemas][12].
+Schema collection (`collect_schemas`) is disabled by default on SQL Server and requires `dbm: true`. It populates your tables in Data Observability. By default, it collects up to 300 tables from each database, in schema and table name order. To track more tables, increase `collect_schemas.max_tables`. For the SQL Server versions that schema collection supports, see [Collecting schemas][12].
+
+To also add views, set `collect_schemas.collect_views: true`. The Agent sends view definitions as written, without obfuscation. By default, it collects up to 1,000 views from each database (`collect_schemas.max_views`).
+
+On Azure SQL Database, add one instance for each database instead of using `database_autodiscovery`. On each instance, set `database`, keep the `azure` block from your Database Monitoring setup (`deployment_type: sql_database`), and include `$database` in `database_identifier.template`, for example `$azure_name-$database`. Without `$database`, the databases on a logical server share one identifier in Datadog.
 
 [Restart the Agent][9] to apply the changes.
 
@@ -167,14 +173,15 @@ Until this section is healthy, your tables still sync but your monitors cannot r
 
 ## Explore your table metadata
 
-The Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`). After the first collection, you can [view your SQL Server tables][14] in the Data Observability catalog.
+The Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`). After the first collection, you can [view your SQL Server tables][14] in the Data Catalog.
 
 If your tables do not appear, verify that:
 
 1. The Agent status shows the `sqlserver` check reporting successfully.
 2. `dbm: true` and `collect_schemas.enabled: true` are set on the instance.
-3. The `datadog` login can connect to each database you want to track.
-4. A Datadog representative has enabled Preview access for your organization.
+3. The `datadog` login can connect to each database you want to track, and the `datadog` user exists in each of those databases.
+4. On Azure SQL Database, each database has its own instance in `sqlserver.d/conf.yaml`, and `database_identifier.template` includes `$database`.
+5. A Datadog representative has enabled Preview access for your organization.
 
 ## Create data quality monitors
 
@@ -182,7 +189,7 @@ After your tables appear in the catalog, you can [create Data Observability moni
 
 - **Row count**: Alert on volume fluctuations, such as sudden drops or plateauing trends.
 - **Column-level metrics**: Monitor column attributes such as null ratios, cardinalities, or distribution shifts.
-- **Custom SQL**: Alert on any `SELECT` query written in T-SQL. The query must return exactly one numeric value aliased as `dd_value`.
+- **Custom SQL**: Alert on any `SELECT` query written in T-SQL. Alias the numeric result as `dd_value`. Other columns that the query returns become groups, as described in [Custom SQL][17].
 
 Table freshness monitors are not available for SQL Server tables. To track freshness, create a freshness monitor on a datetime column.
 
@@ -219,3 +226,4 @@ A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui 
 [14]: https://app.datadoghq.com/data-obs/catalog
 [15]: /monitors/types/data_observability/
 [16]: /monitors/types/data_observability/#monitor-schedule
+[17]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type

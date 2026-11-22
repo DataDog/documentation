@@ -96,7 +96,7 @@ On Microsoft Fabric Warehouse, every metric is collected by running a T-SQL quer
 {{% /tab %}}
 {{% tab "PostgreSQL" %}}
 
-On PostgreSQL, the Datadog Agent runs every monitor query against your database through its Postgres check. Datadog delivers the queries to the Agent over Remote Configuration, and the Agent runs the queries that are due one at a time.
+On PostgreSQL, the Datadog Agent runs every monitor query against your database through its Postgres check. Datadog delivers the queries to the Agent over Remote Configuration, and the Agent runs the queries that are due one at a time. For setup, see [PostgreSQL][2].
 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
@@ -110,7 +110,7 @@ Separately from monitor queries, the Agent collects schema metadata every 600 se
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-On MySQL, the Datadog Agent runs every monitor query against your database through its MySQL check. Datadog delivers the queries to the Agent over Remote Configuration. The Agent runs the queries that are due one at a time over a single connection. If the same database user also runs Database Monitoring, Data Observability uses one additional connection.
+On MySQL, the Datadog Agent runs every monitor query against your database through its MySQL check. Datadog delivers the queries to the Agent over Remote Configuration. The Agent runs the queries that are due one at a time over a single connection. If the same database user also runs Database Monitoring, Data Observability uses one additional connection. For setup, see [MySQL][3].
 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
@@ -124,7 +124,7 @@ Separately from monitor queries, the Agent collects schema metadata every 600 se
 {{% /tab %}}
 {{% tab "SQL Server" %}}
 
-On SQL Server, the Datadog Agent runs every monitor query against your database through its SQL Server check. Datadog delivers the queries to the Agent over Remote Configuration, and the Agent runs the queries that are due one at a time. Queries against the same database share one connection.
+On SQL Server, the Datadog Agent runs every monitor query against your database through its SQL Server check. Datadog delivers the queries to the Agent over Remote Configuration, and the Agent runs the queries that are due one at a time. Queries against the same database share one connection. For setup, see [SQL Server][4].
 
 | Metric | Statement the Agent runs | Notes |
 |---|---|---|
@@ -177,7 +177,7 @@ On Databricks **classic** clusters (all-purpose or job clusters), the Agent is i
 
 The Agent is a lightweight process that shares the CPU and memory you already provision for your workloads. It does not add separate, Datadog-provisioned compute to classic clusters.
 
-Jobs Monitoring traces are coarse-grained. The Spark integration emits one span per application, job, stage, SQL execution, and streaming micro-batch, plus one span for each *failed* task. Successful tasks are aggregated into stage-level metrics instead of emitting individual spans. As a result, trace volume scales with a job's number of stages and jobs, not its task count or data volume. Trace throughput therefore stays low for typical jobs. The larger contributors to the Agent's footprint are Spark metric collection and, if enabled, log collection. For the Datadog SDK's resource profile, see [APM Agent resource usage][2].
+Jobs Monitoring traces are coarse-grained. The Spark integration emits one span per application, job, stage, SQL execution, and streaming micro-batch, plus one span for each *failed* task. Successful tasks are aggregated into stage-level metrics instead of emitting individual spans. As a result, trace volume scales with a job's number of stages and jobs, not its task count or data volume. Trace throughput therefore stays low for typical jobs. The larger contributors to the Agent's footprint are Spark metric collection and, if enabled, log collection. For the Datadog SDK's resource profile, see [APM Agent resource usage][5].
 
 The cluster Agent issues no queries against your warehouse, so it adds no warehouse cost on its own.
 
@@ -187,32 +187,35 @@ The cluster Agent issues no queries against your warehouse, so it adds no wareho
 
 ### Databricks cost data
 
-Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data is read from Datadog's own cost metrics; collecting it does not add queries to your monitored clusters. Populating Databricks cost requires the Datadog Databricks cost integration, which reads from Databricks system tables through a SQL warehouse you grant access to. For the required permissions, see the [Jobs Monitoring for Databricks setup][3].
+Jobs Monitoring can surface the DBU cost of your Databricks jobs. This cost data is read from Datadog's own cost metrics; collecting it does not add queries to your monitored clusters. Populating Databricks cost requires the Datadog Databricks cost integration, which reads from Databricks system tables through a SQL warehouse you grant access to. For the required permissions, see the [Jobs Monitoring for Databricks setup][6].
 
 ### OpenLineage-based integrations
 
-Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agent. Instead, an open source [OpenLineage][4] integration emits lineage events to Datadog. These components are maintained by the OpenLineage and Apache Airflow projects, and their configuration and performance are documented in their respective project documentation. The overhead is the integration's, not the Datadog Agent's.
+Apache Airflow, dbt, and custom pipelines are monitored without the Datadog Agent. Instead, an open source [OpenLineage][7] integration emits lineage events to Datadog. These components are maintained by the OpenLineage and Apache Airflow projects, and their configuration and performance are documented in their respective project documentation. The overhead is the integration's, not the Datadog Agent's.
 
 These integrations capture run, job, and dataset metadata and emit events at run lifecycle points. The cost is proportional to the number of runs, tasks, and the metadata collected, not to your data volume.
 
-- **Airflow**: the [`apache-airflow-providers-openlineage`][5] provider runs in your Airflow schedulers and workers and emits an event at task and DAG life cycle points. Its [configuration reference][6] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
-- **dbt**: for dbt Core, the [`openlineage-dbt`][7] wrapper (`dbt-ol`) follows dbt's structured logs and emits events as the run progresses. Because it reads logs rather than instrumenting execution, it does not affect dbt's performance. dbt Cloud sends job-run events to Datadog through a webhook, with no component running in your environment.
+- **Airflow**: the [`apache-airflow-providers-openlineage`][8] provider runs in your Airflow schedulers and workers and emits an event at task and DAG life cycle points. Its [configuration reference][9] documents options that affect overhead, such as selectively enabling OpenLineage and limiting collected metadata.
+- **dbt**: for dbt Core, the [`openlineage-dbt`][10] wrapper (`dbt-ol`) follows dbt's structured logs and emits events as the run progresses. Because it reads logs rather than instrumenting execution, it does not affect dbt's performance. dbt Cloud sends job-run events to Datadog through a webhook, with no component running in your environment.
 - **Custom pipelines**: you emit events yourself with the OpenLineage client or a raw HTTP call, so the overhead is whatever your emitting code does.
 
-For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineage][8]. See the OpenLineage documentation for the full set of tuning and overhead controls.
+For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineage][11]. See the OpenLineage documentation for the full set of tuning and overhead controls.
 
 ## Estimating your actual costs
 
 The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
 
 [1]: /monitors/types/data_observability/#monitor-schedule
-[2]: /tracing/troubleshooting/agent_apm_resource_usage/
-[3]: /data_observability/jobs_monitoring/databricks/
-[4]: https://openlineage.io/docs/integrations/about
-[5]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/
-[6]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
-[7]: https://openlineage.io/docs/integrations/dbt
-[8]: /data_observability/jobs_monitoring/openlineage/
+[2]: /data_observability/quality_monitoring/transactional_databases/postgres/
+[3]: /data_observability/quality_monitoring/transactional_databases/mysql/
+[4]: /data_observability/quality_monitoring/transactional_databases/sql_server/
+[5]: /tracing/troubleshooting/agent_apm_resource_usage/
+[6]: /data_observability/jobs_monitoring/databricks/
+[7]: https://openlineage.io/docs/integrations/about
+[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/
+[9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
+[10]: https://openlineage.io/docs/integrations/dbt
+[11]: /data_observability/jobs_monitoring/openlineage/
 
 ## Further reading
 

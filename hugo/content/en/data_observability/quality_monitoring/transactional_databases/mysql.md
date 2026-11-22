@@ -30,7 +30,7 @@ MySQL is collected through the [Datadog Agent][1] rather than through a direct c
 
 Before you begin, make sure you have:
 
-- Datadog Agent `7.84.0` or later installed on a host that can reach your MySQL instances. See [Agent installation][1] for your platform.
+- Datadog Agent `7.86.0` or later installed on a host that can reach your MySQL instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][4] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
 - Permission to create MySQL users and grant privileges.
 - Preview access enabled for your organization by a Datadog representative.
@@ -63,11 +63,13 @@ Each Agent's Remote Configuration status is also listed on the [Remote Configura
 
 1. Create the `datadog` user and grant its base permissions. Follow [Grant the Agent access][11] for self-hosted MySQL, or the equivalent step in the [setup guide for your hosting type][3]. If Database Monitoring already runs against this instance, the user exists, so skip this step.
 
-2. Grant `SELECT` on each database you want to track. Data Observability needs it to compute row counts, column-level metrics, and custom SQL results:
+2. Grant `SELECT` on each database you want to track. Data Observability needs it to compute row counts, column-level metrics, and Custom SQL results:
 
    ```sql
    GRANT SELECT ON <DATABASE_NAME>.* TO datadog@'%';
    ```
+
+   If you created the `datadog` user with a host other than `'%'`, use that host in the `GRANT` and `ALTER USER` statements on this page.
 
    `SELECT` also makes the tables visible to schema collection, which only collects tables the user holds a privilege on. The `REFERENCES` privilege that Database Monitoring recommends for schema collection is not enough for Data Observability, because it does not allow reading table data.
 
@@ -150,7 +152,7 @@ Until this section is healthy, your tables still sync but your monitors cannot r
 
 ## Explore your table metadata
 
-The Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`). After the first collection, you can [view your MySQL tables][14] in the Data Observability catalog.
+The Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`). After the first collection, you can [view your MySQL tables][14] in the Data Catalog.
 
 If your tables do not appear, verify that:
 
@@ -170,7 +172,7 @@ After your tables appear in the catalog, you can [create Data Observability moni
 
 - **Row count**: Alert on volume fluctuations, such as sudden drops or plateauing trends.
 - **Column-level metrics**: Monitor column attributes such as null ratios, cardinalities, or distribution shifts.
-- **Custom SQL**: Alert on any `SELECT` query. The query must return exactly one numeric value aliased as `dd_value`.
+- **Custom SQL**: Alert on any `SELECT` query. Alias the numeric result as `dd_value`. Other columns that the query returns become groups, as described in [Custom SQL][17].
 
 Table freshness monitors are not available for MySQL tables. To track freshness, create a freshness monitor on a datetime column.
 
@@ -184,7 +186,8 @@ A monitor that has not received a result yet shows {{< ui >}}No data yet{{< /ui 
 
 ## Known limitations
 
-Data Observability lists MySQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Monitors on tables from those instances have no data. To fix this, add `data_observability.enabled: true` to the instance and grant the `SELECT` privileges in [Set up the Datadog database user](#set-up-the-datadog-database-user).
+- Data Observability lists MySQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Monitors on tables from those instances have no data. To fix this, add `data_observability.enabled: true` to the instance and grant the `SELECT` privileges in [Set up the Datadog database user](#set-up-the-datadog-database-user).
+- Monitors run only on databases whose names contain letters, digits, underscores (`_`), and dollar signs (`$`). The Agent skips monitor queries for databases with other characters in their names.
 
 ## Further reading
 
@@ -206,3 +209,4 @@ Data Observability lists MySQL tables from instances where `dbm` and `collect_sc
 [14]: https://app.datadoghq.com/data-obs/catalog
 [15]: /monitors/types/data_observability/
 [16]: /monitors/types/data_observability/#monitor-schedule
+[17]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
