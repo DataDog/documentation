@@ -36,7 +36,7 @@ Datadog creates migrated monitors only on warehouses that are connected to Data 
 
 Monitors on Metaplane connections to other platforms aren't migrated.
 
-The migration doesn't copy credentials from your Metaplane connections. You can connect with the same user, role, or service account that Metaplane uses if it meets the requirements on the setup page, including the authentication method and grants. PostgreSQL connects through the Datadog Agent instead of a direct connection.
+The migration doesn't copy credentials from your Metaplane connections. You can connect with the user, role, or service account that Metaplane uses. It must meet the requirements on the setup page, including the authentication method and grants. PostgreSQL connects through the Datadog Agent instead of a direct connection.
 
 Grant the Datadog user, role, or service account access to every database and schema that your Metaplane monitors cover. Then confirm that those tables appear in the [Data Catalog][9]. The migration still creates monitors on tables that Datadog hasn't synced, but it doesn't migrate their history.
 
@@ -44,7 +44,7 @@ Keep each integration connected until the migration finishes. Datadog matches Me
 
 ### Set up notification integrations
 
-Metaplane alert destinations become notification handles in the migrated monitors. For Slack, PagerDuty, Microsoft Teams, and webhook handles to deliver alerts, set up the matching Datadog integration: [Slack][10], [PagerDuty][11], [Microsoft Teams][12], or [Webhooks][13]. To reduce the handles you need to edit after the migration, give each Datadog Microsoft Teams handle and webhook the name of the matching Metaplane destination, with spaces replaced by hyphens. For details, see [Notifications](#notifications).
+Metaplane alert destinations become notification handles in the migrated monitors. For Slack, PagerDuty, Microsoft Teams, and webhook handles to deliver alerts, set up the matching Datadog integration: [Slack][10], [PagerDuty][11], [Microsoft Teams][12], or [Webhooks][13]. To avoid editing handles after the migration, name each Datadog Microsoft Teams handle and webhook after its Metaplane destination. Replace spaces in the name with hyphens. For details, see [Notifications](#notifications).
 
 ## Migration process
 
@@ -119,7 +119,7 @@ For a multi-threshold monitor, the migration creates one sub-monitor per thresho
 | Alert only above or only below the expected range (anomaly monitors) | The migrated monitor alerts on the same side of the expected range as in Metaplane. Freshness monitors keep the default, and alert on both sides. |
 | Schedule | See [Schedules and time zones](#schedules-and-time-zones). |
 
-If your Metaplane organization allowed more groups per monitor than your Datadog organization does, the dry run reports both limits. To raise the Datadog limit before the monitors are created, contact [Datadog Support][2].
+If your Metaplane organization allowed more groups per monitor than your Datadog organization does, the dry run reports both limits. To increase the Datadog limit before the monitors are created, contact [Datadog Support][2].
 
 When the migration combines monitors that have different sensitivities, the Datadog monitor uses the default sensitivity of 3. When the combined monitors alert on different sides of the expected range, the Datadog monitor alerts on both sides.
 
