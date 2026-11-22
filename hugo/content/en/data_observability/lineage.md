@@ -23,9 +23,9 @@ further_reading:
 
 Lineage shows how data flows through your stack—from source systems and warehouse tables, through transformations and jobs, to the dashboards and applications that consume it. Use it to trace quality issues to their root cause, assess the blast radius of a failing job or a planned schema change, and route incidents to the right owner.
 
-Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Azure Data Factory, Fivetran, Hightouch, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
+Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Azure Data Factory, Fivetran, Hightouch, Looker, Tableau, and others). Anything in the [Data Catalog][3] can appear in the graph.
 
-Lineage doesn't extend from an external table to the files it reads. For example, the Cloud Storage files behind a BigQuery external table don't appear upstream of that table.
+Lineage stops at BigQuery external tables. The Cloud Storage files that an external table reads don't appear upstream of it.
 
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
@@ -121,13 +121,7 @@ Grouping is most useful for zooming out: group by {{< ui >}}Schemas{{< /ui >}} t
 
 By default, Datadog removes an asset or a lineage edge from Data Observability when it receives no new metadata about it for 35 days. Metadata can come from an integration or from an OpenLineage event. For example, a dropped table or a retired job leaves the graph 35 days after a source last reported it.
 
-To remove a stale asset sooner, delete it from the catalog:
-
-1. Go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}} and open the asset.
-2. In the page header, open the three-dot menu and select {{< ui >}}Delete asset{{< /ui >}}.
-3. Click {{< ui >}}Delete{{< /ui >}} to confirm.
-
-Deleting an asset removes it and all of its descendants from Data Observability, including the lineage graph. The deletion can take a few minutes. If a source still reports the asset, it can reappear on the next sync. Deleting an asset requires the `Data Observability Catalog Write` [permission][3].
+To remove a stale asset sooner, open it in the [Data Catalog][3] and select {{< ui >}}Delete asset{{< /ui >}}. Deleting an asset also removes it and all of its descendants from the lineage graph. If a source still reports the asset, it can reappear after the next sync.
 
 ## Common workflows
 
@@ -154,7 +148,7 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 
 ### Tracing a column end-to-end
 
-Most integrated sources support column-level lineage.
+Most integrated sources support column-level lineage. To send column-level lineage from your own jobs, see [Column-level lineage][4].
 
 1. In the search bar, change the asset type to {{< ui >}}Column{{< /ui >}} and search for the column to trace.
 2. Anchor on the result.
@@ -166,4 +160,5 @@ Most integrated sources support column-level lineage.
 
 [1]: /data_observability/quality_monitoring/
 [2]: /data_observability/jobs_monitoring/
-[3]: /account_management/rbac/permissions/#permissions-list
+[3]: /data_observability/data_catalog/
+[4]: /data_observability/jobs_monitoring/openlineage/#column-level-lineage
