@@ -43,6 +43,8 @@ After training completes, the monitor can alert. The chart shows the observed va
 | Green | Normal | The observed value is within expected bounds. |
 | Red | Alerting | The observed value fell outside expected bounds. |
 
+<!-- SCREENSHOT: The monitor status page of a Row Count monitor that has finished training, with the chart's observed values, the shaded expected bounds, and a point outside the bounds in the alerting color. -->
+
 ## Alert state
 
 When an anomaly is found, the model will remain in alert state for some time, until either the observed value returns to the original expected bounds or the anomaly has persisted long enough that the model considers it a new normal state. To resolve the monitor manually and return it to normal state, use [annotations][2].
