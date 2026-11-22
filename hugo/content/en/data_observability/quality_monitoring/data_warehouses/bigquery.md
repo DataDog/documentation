@@ -20,7 +20,7 @@ Datadog monitors tables and views that Dataform creates like any other BigQuery 
 
 ## Prerequisites
 
-If your Google Cloud project restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+If your Google Cloud project restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}. For the endpoint and port that Datadog connects to, see [Network Requirements for Data Observability][16].
 
 ## Configure the BigQuery integration in Datadog
 
@@ -140,3 +140,4 @@ After the initial sync completes, create a [Data Observability monitor][14] to s
 [13]: https://cloud.google.com/bigquery/docs/reference/rest
 [14]: /monitors/types/data_observability/
 [15]: /data_observability/integration_overhead/
+[16]: /data_observability/network/
