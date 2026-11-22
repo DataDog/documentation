@@ -90,6 +90,8 @@ Datadog removes recommendations in {{< ui >}}For Review{{< /ui >}} that no longe
 
 Optimize shows one platform at a time: {{< ui >}}Databricks{{< /ui >}}, {{< ui >}}Snowflake{{< /ui >}}, {{< ui >}}BigQuery{{< /ui >}}, or {{< ui >}}Spark{{< /ui >}}. If you've set up more than one of these platforms, select one from the platform selector.
 
+<!-- SCREENSHOT: Optimize page, Databricks selected with sample job recommendations in For Review, showing the platform selector, the Total potential savings and Total opportunities summary, the filters, the Edit defaults and Notifications buttons, the status tabs, and the recommendations table with its Status column. -->
+
 The summary at the top of the page shows:
 
 - {{< ui >}}Total potential savings{{< /ui >}}: The estimated yearly savings of the open recommendations.
@@ -129,6 +131,8 @@ Click a recommendation to open its details. From the details panel, apply the ch
 
 - Click {{< ui >}}Copy fix prompt{{< /ui >}} to copy a prompt that describes the recommended change, then paste it into your coding agent.
 - For job recommendations, click {{< ui >}}Fix with Bits{{< /ui >}} to have [Bits Code][9] start a session that makes the change. If a session for the recommendation already exists, the button opens it. The button reads {{< ui >}}View fix and create PR{{< /ui >}} until the session has a pull request, and {{< ui >}}View fix{{< /ui >}} after.
+
+<!-- SCREENSHOT: Recommendation details panel in Optimize, a sample Databricks job recommendation, showing the estimated monthly savings, the issue type, the recommended change, and the Copy fix prompt and Fix with Bits buttons. -->
 
 To use {{< ui >}}Fix with Bits{{< /ui >}}:
 
@@ -180,6 +184,8 @@ The Queries page has these tabs:
 - {{< ui >}}Recommendations{{< /ui >}}: Appears for Snowflake, BigQuery, and Databricks, and opens [Optimize](#review-recommendations) for that platform.
 
 Click a query in the {{< ui >}}Explore{{< /ui >}} tab to open its details. The details panel shows the SQL text, charts of the query's runs over time, its recommendations, and its individual runs. It also lists the query's {{< ui >}}Input Tables{{< /ui >}} and {{< ui >}}Output Tables{{< /ui >}}.
+
+<!-- SCREENSHOT: Queries page, Explore tab with Snowflake selected and sample queries, with one query's details panel open, showing the tabs, the facets, the normalized query table, and the details panel with the SQL text, the runs chart, and the Input Tables and Output Tables lists. -->
 
 For Databricks, the service principal needs access to query text. Datadog skips queries whose text Databricks redacts, so they don't appear on the Queries page. See [Grant access to query text][7].
 
