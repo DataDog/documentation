@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
   tag: "Blog"
   text: "Coordinate product launches with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## What is Journey Monitoring?

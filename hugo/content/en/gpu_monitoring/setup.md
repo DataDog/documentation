@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
   tag: "Blog"
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
+- link: "https://www.datadoghq.com/blog/how-kubernetes-dra-can-improve-gpu-utilization-and-cut-costs/"
+  tag: "Blog"
+  text: "How Kubernetes DRA can improve GPU utilization and cut costs"
 ---
 
 This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
