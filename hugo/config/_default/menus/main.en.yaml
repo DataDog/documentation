@@ -5774,16 +5774,16 @@ menu:
       identifier: quality_monitoring_monitors
       parent: quality_monitoring
       weight: 350000
-    - name: Guides
-      url: data_observability/quality_monitoring/guides
-      identifier: quality_monitoring_guides
-      parent: quality_monitoring
-      weight: 400000
     - name: Migrate from Metaplane
       url: data_observability/quality_monitoring/guides/metaplane_migration
       identifier: quality_monitoring_guides_metaplane_migration
       parent: quality_monitoring_guides
       weight: 3000000
+    - name: Guides
+      url: data_observability/quality_monitoring/guides
+      identifier: quality_monitoring_guides
+      parent: quality_monitoring
+      weight: 400000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
