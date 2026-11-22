@@ -11,6 +11,9 @@ further_reading:
  - link: '/data_observability/quality_monitoring/guides/metaplane_migration/'
    tag: 'Guide'
    text: 'Migrate from Metaplane to Data Observability'
+ - link: '/account_management/billing/data_observability/'
+   tag: 'Documentation'
+   text: 'Data Observability Billing'
  - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
    tag: "Blog"
    text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
