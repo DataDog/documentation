@@ -201,12 +201,11 @@ If validation fails, the error describes the problem:
 
 <div class="alert alert-warning">Datadog stores the <code>dd_value</code> result and the value of each grouped column. Avoid grouping by columns that contain sensitive data. For details, see <a href="/data_observability/quality_monitoring/#data-sent-to-datadog">Data sent to Datadog</a>.</div>
 
-**Note**: Each Custom SQL monitor counts as an individual monitored table. See [Data Observability Billing][22].
+**Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
 {{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
 
 [17]: /data_observability/quality_monitoring/transactional_databases/postgres/
-[22]: /account_management/billing/data_observability/#monitored-tables-by-monitor-type
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -340,8 +339,6 @@ Use a source to target monitor to:
 
 Source to target monitors are available in all regions except GovCloud.
 
-To find the individual rows that differ between two Snowflake datasets, use [Data Diff][23], which is in Preview.
-
 ### Create a source to target monitor
 
 1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
@@ -388,7 +385,7 @@ Schema change monitors detect four kinds of change across databases, schemas, ta
 | Renamed | `renamed` | A table was renamed. Datadog detects a rename when a new table with the same columns and data types replaces the old table in the same schema. Otherwise, the rename appears as one removed table and one added table. A renamed column appears as one removed column and one added column. |
 | Type changed | `type_changed` | A column's data type changed, such as from `INTEGER` to `STRING`, or a table's type changed. |
 
-Schema changes are detected for Snowflake, BigQuery, Databricks, Redshift, and ClickHouse Cloud. Data Observability for ClickHouse Cloud is in Preview. For the capabilities available on each platform, see [Supported Platforms][24].
+Schema changes are detected for Snowflake, BigQuery, Databricks, Redshift, and ClickHouse Cloud. Data Observability for ClickHouse Cloud is in Preview.
 
 ### Create a schema change monitor
 
@@ -518,7 +515,7 @@ The preview graph shows the durations of recent completed runs for the selected 
 
 #### How job duration is evaluated
 
-- **Runs in progress**: Runs of Airflow DAGs and tasks, AWS Glue jobs, dbt jobs, and custom OpenLineage jobs are evaluated while they are in progress. Evaluation starts after the job platform reports to Datadog that the run has started. For custom OpenLineage jobs, send a `START` event when each run begins. To send runs from a tool that doesn't emit OpenLineage events, see [Send runs from tools without OpenLineage support][25]. While a run continues, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. If an alert fires during a run, the monitor's status page shows how long the run has been in progress.
+- **Runs in progress**: Runs of Airflow DAGs and tasks, AWS Glue jobs, dbt jobs, and custom OpenLineage jobs are evaluated while they are in progress. Evaluation starts after the job platform reports to Datadog that the run has started. For custom OpenLineage jobs, send a `START` event when each run begins. While a run continues, Datadog receives updates on how long the run has taken so far. The monitor compares that elapsed time against the threshold, or against the job's learned bound when you use {{< ui >}}Anomalies{{< /ui >}}. If an alert fires during a run, the monitor's status page shows how long the run has been in progress.
 - **Evaluated at completion**: Deferrable Airflow tasks, Azure Data Factory pipelines, Databricks jobs, and Spark batch jobs are evaluated when the run completes.
 - **Completed runs**: When a run finishes, its final duration replaces the in-progress value. The monitor evaluates runs from the past 10 days.
 - **Recovery**: The monitor recovers when a later run finishes within the threshold or the learned bound.
@@ -612,6 +609,3 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [18]: /data_observability/quality_monitoring/guides/anomaly_detection/
 [19]: /api/latest/monitors/
 [21]: /data_observability/jobs_monitoring/dbt/#configure-webhooks
-[23]: /data_observability/data_diff/
-[24]: /data_observability/supported_platforms/#data-warehouses-data-lakes-and-databases
-[25]: /data_observability/jobs_monitoring/openlineage/#send-runs-from-tools-without-openlineage-support
