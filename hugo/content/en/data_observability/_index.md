@@ -49,7 +49,7 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
 
 ## Programmatic access
 
-- **MCP Server**: The `data-observability` toolset of the [Datadog MCP Server][1] gives AI agents access to the data catalog, lineage, query history, data quality monitors, Spark job runs, and recommendations. To enable it, add `data-observability` to the `toolsets` parameter, or use `toolsets=all`. See [Toolsets][2].
+- **MCP Server**: The `data-observability` toolset of the [Datadog MCP Server][1] gives AI agents access to your data catalog, lineage, query history, and data quality monitors. It also covers Spark job runs and recommendations. To enable it, add `data-observability` to the `toolsets` parameter, or use `toolsets=all`. See [Toolsets][2].
 - **Data Observability API**: Use the [Data Observability API][3] to run a monitor with a {{< ui >}}Manual{{< /ui >}} schedule and check the run's status. These endpoints are in Preview and are subject to change.
 - **Monitors API and Terraform**: Data quality monitors use the monitor type `data-quality alert`, and job monitors use `data-jobs alert`. Create, update, and delete them with the [Monitors API][4] or the [`datadog_monitor` resource][5] of the Datadog Terraform provider.
 - **OpenLineage**: Send job and lineage events from in-house tools and custom pipelines with [custom jobs using OpenLineage][6].
