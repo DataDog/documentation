@@ -5783,7 +5783,12 @@ menu:
       url: data_observability/quality_monitoring/guides/monitors_as_code
       identifier: quality_monitoring_guides_monitors_as_code
       parent: quality_monitoring_guides
-      weight: 2000000
+      weight: 500000
+    - name: Anomaly Detection
+      url: data_observability/quality_monitoring/guides/anomaly_detection
+      identifier: quality_monitoring_guides_anomaly_detection
+      parent: quality_monitoring_guides
+      weight: 1000000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
