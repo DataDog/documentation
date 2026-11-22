@@ -21,6 +21,8 @@ Use these integrations to:
 - **Monitor data freshness** to detect stale or delayed data
 - **Track table metrics** such as row counts and table sizes over time
 
+For the capabilities available on each platform, see [Supported Platforms][1].
+
 {{< whatsnext desc="Connect to these data lake catalogs:" >}}
    {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena Query History{{< /nextlink >}}
@@ -29,3 +31,5 @@ Use these integrations to:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /data_observability/supported_platforms/

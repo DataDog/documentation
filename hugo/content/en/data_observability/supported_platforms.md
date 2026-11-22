@@ -36,13 +36,14 @@ The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns
 | [Databricks][4] | Yes | Yes | Yes | Yes | Preview | Yes | Yes |
 | [BigQuery][5] | Yes | Yes | Yes | Yes | Preview | Yes | Yes |
 | [Amazon Redshift][6] | Yes (column) | Yes | Yes | Yes | Preview | Yes | Yes |
-| [ClickHouse Cloud][7] | Preview | Preview | Preview | Preview | | | |
+| [ClickHouse Cloud][7] | Preview | Preview | Preview | Preview | Preview | | |
 | [Microsoft Fabric Warehouse][8] | Preview (column) | Preview | Preview | Preview | | Preview | Preview |
-| [AWS Glue (Iceberg tables)][9] | Yes | Yes | | | | | |
+| [AWS Glue (Iceberg tables)][9] | Preview | Preview | | | | | |
 | [Amazon Athena][10] | | | | | | Preview | Preview |
 | [PostgreSQL][11] | Preview (column) | Preview | Preview | Preview | | | |
 
 - Freshness marked **(column)** is measured from a datetime column. Table-level freshness isn't available.
+- **Lineage** means that Datadog builds lineage from the platform's own metadata or query history. On platforms where this cell is blank, dbt and OpenLineage jobs that read or write your tables can still add them to lineage.
 - Lineage and query history for Microsoft Fabric Warehouse require the Contributor role or higher on the workspace. They also require the {{< ui >}}Collect query history{{< /ui >}} option in the integration settings.
 - Querying AWS Glue tables with Amazon Athena is in Preview. It adds group-by and custom filters on metrics, and monitoring for Glue tables that don't use the Iceberg table format.
 - Amazon Athena query history builds lineage between the AWS Glue tables that your queries read and write.
@@ -74,8 +75,8 @@ ELT and BI tools add lineage between your warehouse tables and the tool's connec
 |---|---|---|
 | [Airbyte][24] | ELT | Yes |
 | [Fivetran][25] | ELT | Yes |
-| [Hightouch][26] | Reverse ETL | Yes |
-| [Hex][27] | BI | Yes |
+| [Hightouch][26] | Reverse ETL | Preview |
+| [Hex][27] | BI | Preview |
 | [Looker][28] | BI | Yes |
 | [Tableau][29] | BI | Yes |
 | [Sigma][30] | BI | Yes |
@@ -84,9 +85,11 @@ ELT and BI tools add lineage between your warehouse tables and the tool's connec
 
 ## Request Preview access
 
-Datadog enables Data Observability Preview features for each organization. To request access, contact your Datadog representative or [Datadog Support][33].
+Datadog enables most Data Observability Preview features for each organization. To request access, contact your Datadog representative or [Datadog Support][33].
 
 After Datadog enables a Preview feature for your organization, follow the setup steps on that feature's page.
+
+PostgreSQL is the exception. You turn it on yourself in Data Observability Settings. See [PostgreSQL][11].
 
 ## Agent requirements
 
@@ -94,7 +97,7 @@ Some sources are collected through the Datadog Agent and require a minimum Agent
 
 | Source | Requirements |
 |---|---|
-| [PostgreSQL][11] | Datadog Agent 7.81.0 or later. [Remote Configuration][34] must be enabled for your organization, for the Agent's API key, and on the Agent. |
+| [PostgreSQL][11] | Datadog Agent 7.82.0 or later. [Remote Configuration][34] must be enabled for your organization, for the Agent's API key, and on the Agent. |
 | [Apache Spark on Kubernetes][19] | Datadog Agent 7.64.0 or later, and Java tracer 1.38.0 or later. To collect lineage with OpenLineage, Java tracer 1.48.0 or later. |
 
 ## Further reading

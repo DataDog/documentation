@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Observability for PostgreSQL is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
+Data Observability for PostgreSQL is in Preview. To turn it on, go to <a href="https://app.datadoghq.com/data-obs/settings/integrations">Data Observability Settings</a>, expand <strong>PostgreSQL</strong>, and turn on <strong>Sync PostgreSQL to Data Observability</strong>. If PostgreSQL isn't listed, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
 {{< /callout >}}
 
 ## Overview
