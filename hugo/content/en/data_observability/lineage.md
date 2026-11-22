@@ -77,6 +77,8 @@ The time selector in the top-right corner (`1w`, `Past 1 Week`, and so on) sets 
 
 Job run details on the graph also follow the selected time frame. Job nodes show the number of runs, the number of failed runs, and the average duration for runs in that window. A job node's status badge reflects the same runs. For example, it can show {{< ui >}}Last run failed{{< /ui >}}, the share of runs that failed, or a change in average duration. Datadog compares the average duration with the period of equal length before the selected time frame.
 
+<!-- SCREENSHOT: Lineage graph, a sample pipeline with an upstream job whose latest run failed, showing the job node's run count, failed run count, average duration, and the Last run failed status badge. -->
+
 ## Lineage Controls
 
 The {{< ui >}}Lineage Controls{{< /ui >}} panel on the left configures the shape and contents of the graph.
