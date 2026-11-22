@@ -382,7 +382,7 @@ Schema change monitors detect four kinds of change across databases, schemas, ta
 | Renamed | `renamed` | A table was renamed. Datadog detects a rename when a new table with the same columns and data types replaces the old table in the same schema. Otherwise, the rename appears as one removed table and one added table. A renamed column appears as one removed column and one added column. |
 | Type changed | `type_changed` | A column's data type changed, such as from `INTEGER` to `STRING`, or a table's type changed. |
 
-Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
+Schema changes are detected for Snowflake, BigQuery, Databricks, Redshift, and ClickHouse Cloud. Data Observability for ClickHouse Cloud is in Preview.
 
 ### Create a schema change monitor
 
