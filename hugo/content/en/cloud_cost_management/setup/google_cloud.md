@@ -288,4 +288,4 @@ The following out-of-the-box tags are available:
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
 [20]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export
 [21]: https://cloud.google.com/docs/cuds-spend-based
-[22]: /cloud_cost_management/planning/commitment_programs/#commitments-inventory
+[22]: /cloud_cost_management/planning/google_cloud_commitment_programs/#commitments-inventory
