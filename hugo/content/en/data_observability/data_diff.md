@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Diff is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
+Data Diff is in Preview. To request access, contact your Datadog representative.
 {{< /callout >}}
 
 ## Overview
@@ -36,7 +36,7 @@ To alert on a schedule when a metric such as row count differs between two asset
 
 ## Prerequisites
 
-- Preview access for your organization. See [Request Preview access][9].
+- Preview access for your organization. To request access, contact your Datadog representative.
 - A Snowflake account connected to Data Observability. See [Snowflake][2].
 - `SELECT` access for the Datadog role on the source and target tables, and on every table that a SQL dataset reads. The `grant_database_access` procedure in the [Snowflake setup][3] grants this access for each database you list.
 - Data Diff turned on for your organization. See [Turn on Data Diff](#turn-on-data-diff).
@@ -216,4 +216,3 @@ Open the diff and click the actions menu:
 [6]: /account_management/rbac/
 [7]: /data_observability/data_catalog/
 [8]: https://docs.snowflake.com/en/sql-reference/constructs/at-before
-[9]: /data_observability/supported_platforms/#request-preview-access
