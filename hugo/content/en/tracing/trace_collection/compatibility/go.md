@@ -77,6 +77,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [AWS SDK][20]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go/aws/v2][86]                |
 | [AWS SDK v2][75]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/aws/aws-sdk-go-v2/aws/v2][113]                |
 | [Elasticsearch][22]     | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/olivere/elastic.v5/v2][87]                   |
+| [ClickHouse (clickhouse-go v2.48+)][115] | Fully Supported | [`github.com/DataDog/dd-trace-go/contrib/ClickHouse/clickhouse-go.v2/v2`][116] |
 | [Cassandra][24]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/gocql/gocql/v2][88]                       |
 | [GraphQL][26]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/graph-gophers/graphql-go/v2][89]          |
 | [HTTP][28]              | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/net/http/v2][90]                          |
@@ -184,6 +185,8 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [73]: https://github.com/bradfitz/gomemcache/memcache
 [112]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2
 [114]: https://github.com/globalsign/mgo
+[115]: https://github.com/ClickHouse/clickhouse-go
+[116]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/contrib/ClickHouse/clickhouse-go.v2/v2
 {{% /tab %}}
 {{% tab "v1" %}}
 **Note**: The [integrations documentation][5] provides a detailed overview of the supported packages and their APIs, along with usage examples.
