@@ -205,6 +205,8 @@ If validation fails, the error describes the problem:
 
 {{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}
 
+[17]: /data_observability/quality_monitoring/transactional_databases/postgres/
+[22]: /account_management/billing/data_observability/#monitored-tables-by-monitor-type
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -496,6 +498,7 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 
 {{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="A Job duration check using the Anomalies detection method, with a graph of recent run durations." style="width:100%;" >}}
 
+[20]: /data_observability/quality_monitoring/guides/anomaly_detection/#training-period
 {{% /tab %}}
 {{% tab "Thresholds" %}}
 
@@ -608,9 +611,7 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [17]: /data_observability/quality_monitoring/transactional_databases/postgres/
 [18]: /data_observability/quality_monitoring/guides/anomaly_detection/
 [19]: /api/latest/monitors/
-[20]: /data_observability/quality_monitoring/guides/anomaly_detection/#training-period
 [21]: /data_observability/jobs_monitoring/dbt/#configure-webhooks
-[22]: /account_management/billing/data_observability/#monitored-tables-by-monitor-type
 [23]: /data_observability/data_diff/
 [24]: /data_observability/supported_platforms/#data-warehouses-data-lakes-and-databases
 [25]: /data_observability/jobs_monitoring/openlineage/#send-runs-from-tools-without-openlineage-support
