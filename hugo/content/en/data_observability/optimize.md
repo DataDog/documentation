@@ -114,7 +114,7 @@ To choose the platform and filters that Optimize opens with, click {{< ui >}}Edi
 Savings are estimates in each platform's own cost terms:
 
 - **Snowflake**: Credits, estimated from the credits your warehouses consume. To show savings in dollars, set {{< ui >}}Savings display{{< /ui >}} to {{< ui >}}Dollars{{< /ui >}} and enter your cost per credit. The default rate is $2 per credit. Datadog stores your rate in your browser.
-- **BigQuery**: Dollars, estimated at Google Cloud list prices from the bytes billed for on-demand queries, or from the slot time of queries that run in a reservation.
+- **BigQuery**: Dollars, estimated at Google Cloud list prices. On-demand queries are priced by bytes billed. Queries that run in a reservation are priced by slot time.
 - **Databricks SQL**: Dollars from [Cloud Cost Management][8] when it has cost data for the SQL warehouse. Otherwise, Datadog estimates the cost from the query's DBU usage at Databricks list prices.
 - **Spark and Databricks jobs**: Dollars, from the estimated compute cost of the job's runs.
 
