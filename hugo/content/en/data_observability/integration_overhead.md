@@ -28,6 +28,8 @@ Data Observability monitors your data through two products, each with a differen
 
 This page describes both overhead sources and how to control them. Actual cost depends heavily on your environment: warehouse size, the amount of data scanned, how often monitors run, and warehouse auto-stop settings. This page focuses on what consumes resources, not a single benchmark number.
 
+Datadog bills for Data Observability separately from this overhead. See [Data Observability Billing][12].
+
 ## Quality Monitoring overhead
 
 A Data Observability monitor evaluates its metric on the schedule you set in [Monitor schedule][1]. Preset schedules range from {{< ui >}}Hourly{{< /ui >}} to {{< ui >}}Daily{{< /ui >}}, and a {{< ui >}}Custom schedule{{< /ui >}} can run as often as every 15 minutes. A {{< ui >}}Manual{{< /ui >}} (Preview) monitor runs only when triggered through the API. Manual monitors don't run on PostgreSQL, MySQL, or SQL Server. Each time a monitor runs, Data Observability collects the metric value, either by reading table metadata or by running a query against your data. How each metric is collected depends on the platform. Data Observability support for ClickHouse Cloud, Microsoft Fabric Warehouse, PostgreSQL, MySQL, and SQL Server is in Preview.
@@ -203,7 +205,7 @@ For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineag
 
 ## Estimating your actual costs
 
-The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management.
+The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management. To see which queries drive usage in your warehouse, use the [Queries page][13].
 
 [1]: /monitors/types/data_observability/#monitor-schedule
 [2]: /data_observability/quality_monitoring/transactional_databases/postgres/
@@ -216,6 +218,8 @@ The behaviors described on this page are environment-dependent. Actual cost depe
 [9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/configurations-ref.html
 [10]: https://openlineage.io/docs/integrations/dbt
 [11]: /data_observability/jobs_monitoring/openlineage/
+[12]: /account_management/billing/data_observability/
+[13]: /data_observability/optimize/#analyze-warehouse-queries
 
 ## Further reading
 
