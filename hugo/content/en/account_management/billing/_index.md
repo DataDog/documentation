@@ -108,7 +108,6 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
     {{< nextlink href="account_management/billing/ci_visibility/" >}}CI/CD Optimization{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/data_observability/" >}}Data Observability{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
@@ -117,6 +116,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
     {{< nextlink href="account_management/billing/usage_attribution/" >}}Usage attribution{{< /nextlink >}}
     {{< nextlink href="account_management/billing/ai_credits/" >}}AI Credits{{< /nextlink >}}
     {{< nextlink href="account_management/billing/ai_credit_limits/" >}}AI Credit Limits{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/data_observability/" >}}Data Observability{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

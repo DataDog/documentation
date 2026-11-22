@@ -33,7 +33,7 @@ Datadog charges are separate from the compute that Data Observability uses in yo
 
 ### Monitored tables
 
-A table, view, or materialized view becomes a monitored table when you add a monitor to it or to one of its columns. Tables that Datadog syncs from your warehouses and databases don't count as monitored tables until you add a monitor. There is no minimum number of monitored tables.
+A table, view, or materialized view becomes a monitored table when you add a monitor to it or to one of its columns. Tables that Datadog syncs from your warehouses and databases don't count as monitored tables until you add a monitor. Draft monitors and monitors that return no data don't add monitored tables. There is no minimum number of monitored tables.
 
 Datadog measures the number of monitored tables each hour and bills the average over the month.
 
@@ -41,7 +41,7 @@ Datadog measures the number of monitored tables each hour and bills the average 
 
 | Monitor | Monitored tables |
 |---|---|
-| Freshness, row count, and column metric monitors, such as nullness and uniqueness | One per table, regardless of how many of these monitors the table has, or whether they apply to the table or to its columns. |
+| Freshness, Row Count, and Column Metric monitors, such as Nullness and Uniqueness | One per table, regardless of how many of these monitors the table has, or whether they apply to the table or to its columns. |
 | [Custom SQL][6] | One per Custom SQL monitor, added to the count from other monitors. |
 | [Source to target][7] (Preview) | Counts toward the target table only. |
 | [Schema change][8] (Preview) | Not billed. |
@@ -65,7 +65,7 @@ Jobs Monitoring is billed in three categories. Each category covers different jo
 |---|---|---|
 | Clusters | Databricks jobs on classic compute, and Apache Spark jobs on Kubernetes, Amazon EMR, and Google Dataproc | Per host, per hour (Data Observability Job Host Hours) |
 | Databricks Serverless | Lakeflow jobs on Databricks serverless compute | Per DBU |
-| Orchestrators | Airflow DAGs and tasks, dbt jobs and models, AWS Glue jobs, and custom jobs | Per job, per hour (Data Observability Job Hours) |
+| Orchestrators | Airflow DAGs, dbt jobs, AWS Glue jobs, Azure Data Factory pipelines, and custom jobs | Per job, per hour (Data Observability Job Hours) |
 
 Jobs Monitoring usage doesn't depend on your [job monitors][11]. A job that you exclude from a job monitor, or that no monitor covers, still counts toward usage.
 
@@ -87,7 +87,9 @@ The samples add up to 600, and 600 / 12 = 50 host hours for that hour. If this p
 
 ### Orchestrators
 
-Usage is the sum of the durations of all job runs in the month, rounded up to the next full hour.
+Usage is the sum of the durations of all job runs in the month, rounded up to the next full hour. Datadog measures each run in seconds, with a minimum of one second.
+
+Each run counts once, for the duration of the top-level run: the Airflow DAG run, the dbt job run, the AWS Glue job run, the Azure Data Factory pipeline run, or the custom job run. Airflow tasks, dbt models and tests, and other steps inside a run don't add usage. A dbt Cloud job run counts on its own, including when an Airflow DAG triggers it.
 
 For example, suppose Datadog observes the following runs in one month:
 

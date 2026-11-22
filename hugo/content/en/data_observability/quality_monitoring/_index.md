@@ -19,6 +19,9 @@ further_reading:
   - link: '/monitors/types/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Monitor'
+  - link: '/account_management/billing/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Billing'
   - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
     tag: "Blog"
     text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
