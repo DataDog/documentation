@@ -33,8 +33,8 @@ Datadog creates migrated monitors only on warehouses that are connected to Data 
 - [Amazon Redshift][6]
 - [PostgreSQL][7] (Preview)
 - [ClickHouse Cloud][8] (Preview)
-- [MySQL][26] (Preview)
-- [SQL Server][27] (Preview)
+- MySQL (Preview)
+- SQL Server (Preview)
 
 Monitors on Metaplane connections to other platforms aren't migrated.
 
@@ -83,8 +83,6 @@ After reviewing the dry run, Datadog creates the monitors. Running the migration
 By default, each Metaplane monitor becomes one Datadog monitor. Partition monitors and manual monitors with several thresholds follow the rules in [Partition monitors](#partition-monitors) and [Detection method](#detection-method).
 
 Datadog can instead combine compatible monitors on the same type of asset in the same schema, or column monitors on the same table. The combined Datadog monitor covers several tables or columns. Monitors are compatible when they have the same metric type, filters, group-by columns, model type, thresholds, schedule, and alert destinations. Custom SQL monitors are never combined.
-
-For how monitors count toward billing, see [Data Observability Billing][28].
 
 ## Monitor mapping
 
@@ -256,6 +254,3 @@ After Datadog creates the monitors and migrates their history, check them before
 [23]: /monitors/types/data_observability/#annotate-bounds
 [24]: /data_observability/quality_monitoring/guides/anomaly_detection/#seasonality
 [25]: https://app.datadoghq.com/monitors/manage
-[26]: /data_observability/quality_monitoring/transactional_databases/mysql/
-[27]: /data_observability/quality_monitoring/transactional_databases/sql_server/
-[28]: /account_management/billing/data_observability/#monitored-tables
