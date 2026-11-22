@@ -180,7 +180,7 @@ To configure the Redshift integration in Datadog:
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Redshift deployment.
 
-After the initial sync completes, create a [Data Observability monitor][2] to start alerting on freshness, column-level metrics, and custom SQL metrics.
+After the initial sync completes, create a [Data Observability monitor][2] to start alerting on row count, column-level metrics (including column freshness), and Custom SQL metrics.
 
 ## Further reading
 
