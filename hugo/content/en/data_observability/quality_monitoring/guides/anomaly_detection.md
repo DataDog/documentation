@@ -10,7 +10,7 @@ further_reading:
     text: 'Data Observability Monitor'
 ---
 
-**Note**: This page applies to anomaly-based Data Observability monitors only. If your monitor uses the **Threshold** detection method, this content does not apply.
+**Note**: This page applies to anomaly-based Data Observability monitors only. If your monitor uses the {{< ui >}}Thresholds{{< /ui >}} detection method, this content does not apply.
 
 ## Overview
 
@@ -33,7 +33,7 @@ Some monitors follow different rules:
 - **Row Count**: In its first 7 days, the monitor stays in training on Saturdays and Sundays until it has evaluated on three weekend days. If the row count has stayed flat since before Monday, the monitor stays in training until the count changes or Monday ends (UTC). This hold ends after 8 days of history.
 - **Custom SQL with the Default model**: The monitor stays in training until it has at least 7 days of history.
 - **Single-value metrics**: If the metric has only returned one value, the monitor stays in training until it has at least 7 days of history.
-- **Job duration** (Preview): The monitor leaves training after at least five runs over at least 1 day that include a full weekday of runs. It doesn't wait for a weekend.
+- **Job duration** (Preview): Each job leaves training when it has at least five completed runs over at least 1 day, and either a full weekday (Monday through Friday) of runs or more than 7 days of history. It doesn't wait for a weekend. While a job has less than 7 days of history, the model raises its upper bound toward four times the job's longest run. This extra margin shrinks to zero by day 7.
 
 After training completes, the monitor can alert. The chart shows the observed values over time, with bounds above and below the line as a shaded area showing expected values. The color shows the current state:
 
@@ -59,13 +59,13 @@ Freshness monitors alert when the time since the last refresh is longer than exp
 
 Row count monitors alert not only when there is an unusual change, but also when a row count flatlines, meaning it has not changed for longer than normal. A stalled row count may indicate a broken pipeline.
 
-### Percentage (e.g. nullness, uniqueness)
+### Percentage (such as nullness and uniqueness)
 
 Percentage metrics are scaled from 0 to 100. If the metric has never been 0 or 100, a change to these values triggers an alert.
 
 ### Custom SQL
 
-For Custom SQL monitors, select a model type for your metric: **Freshness**, **Percentage** or **Default**.  The **Default** model infers the range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
+For Custom SQL monitors, select a model type for your metric: {{< ui >}}Freshness{{< /ui >}}, {{< ui >}}Percentage{{< /ui >}}, or {{< ui >}}Default{{< /ui >}}. The {{< ui >}}Default{{< /ui >}} model infers the range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
 
 ## Seasonality
 
@@ -108,15 +108,17 @@ The [model configuration settings][3] change how the model sets bounds:
 - {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} set the smallest distance between the predicted value and each bound. The model can still set wider bounds. Enter values in the metric's own units, such as rows for Row Count or percentage points for Nullness. For integer metrics such as Row Count, the model rounds the value up to a whole number.
 - {{< ui >}}Model Instructions{{< /ui >}} don't change the bounds. The AI reviewer reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
 
+{{< ui >}}Alert after N consecutive anomalies{{< /ui >}} also leaves the bounds unchanged. It sets how many flagged evaluations in a row the monitor needs before it alerts.
+
 ## AI review of flagged points
 
-Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value didn't. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
+Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value didn't. This includes job duration monitors that use {{< ui >}}Anomalies{{< /ui >}}. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
 
 The reviewer analyzes the metric's history. It compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
 
 - If the reviewer finds earlier normal periods that match the flagged value's pattern and timing, it dismisses the point. The monitor widens the bounds at that point to include the observed value and doesn't alert.
 - If the reviewer doesn't dismiss the point, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
-- If the review doesn't run or doesn't finish, the point keeps its original bounds and the monitor alerts as usual. For example, this happens when the monitor has reached its daily review limit or the review times out.
+- If the review doesn't run or doesn't finish, the point keeps its original bounds and the monitor alerts as usual. For example, this happens when the monitor has reached its daily review limit or the review times out. The review also doesn't run for organizations whose settings don't allow AI model providers, such as HIPAA-enabled organizations.
 
 The reviewer can only dismiss flagged points. It doesn't narrow the bounds or create alerts. To get alerts on values that fall within the bounds, adjust {{< ui >}}Sensitivity{{< /ui >}} or annotate the bounds with {{< ui >}}Missed alert{{< /ui >}}.
 
