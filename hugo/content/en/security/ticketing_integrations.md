@@ -209,6 +209,7 @@ The following steps create a bidirectional ticket for a Security finding.
 
 **Notes**:
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
+- Jira ticket status changes only sync back to a Datadog case status when that Jira status has been explicitly mapped to a case status in the ticketing integration configuration. Status changes on unmapped Jira statuses are not reflected on the Datadog case.
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow ticket" level="h4" expanded=false %}}
