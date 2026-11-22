@@ -168,6 +168,10 @@ To edit, pause, or delete a rule, click {{< ui >}}Notifications{{< /ui >}} and u
 
 ## Analyze warehouse queries
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The Queries page is in Preview.
+{{< /callout >}}
+
 The Queries page shows the queries that run in your data warehouses. Use it to find failing and long-running queries, and to see which queries drive usage. It uses the query history that Datadog collects from your [Snowflake][4], [BigQuery][5], [Amazon Redshift][13], and [Databricks][6] integrations. Query history for [Amazon Athena][14] and [Microsoft Fabric Warehouse][15] is in Preview.
 
 To open it, go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Queries{{< /ui >}}. If more than one platform has query activity, select one from the platform selector.
