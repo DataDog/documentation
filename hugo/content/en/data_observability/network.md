@@ -20,6 +20,8 @@ Data Observability uses two kinds of network connections:
 - **Datadog connects to your data platform.** For data warehouse integrations and the Databricks APIs, Datadog connects to your account over HTTPS with the credentials you provide. If your platform restricts inbound access by IP address, add Datadog's webhook IP addresses to your allowlist.
 - **Your environment connects to Datadog.** OpenLineage emitters and the Datadog Agent send job runs, lineage events, monitor results, and telemetry to Datadog over HTTPS on port 443. Your hosts open these connections, and Datadog doesn't open connections back to them. If your network restricts outbound traffic, allow the Datadog domains they use.
 
+{{< img src="data_observability/network/network_connection_direction.png" alt="Diagram of who opens each connection: Datadog connects to your warehouse and Databricks APIs, and your emitters and Agent connect out to the intake." style="width:100%;" >}}
+
 For Amazon Redshift, Amazon Athena, and AWS Glue, Datadog calls AWS APIs with your connected AWS account instead of connecting to your network. See [AWS integrations](#aws-integrations).
 
 To see the values for your [Datadog site][1], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
