@@ -28,6 +28,8 @@ Data Diff compares two datasets row by row. Each diff has a source dataset and a
 - {{< ui >}}Added{{< /ui >}}: The row exists only in the target.
 - {{< ui >}}Modified{{< /ui >}}: The primary key exists in both datasets, and at least one compared value differs.
 
+{{< img src="data_observability/data_diff/data_diff_row_classification.png" alt="Diagram of a diff that matches two orders tables on order_id: one row exists only in the source, one only in the target, and one has a changed status." style="width:100%;" >}}
+
 Use Data Diff to confirm that a migration or replication job copied a table correctly. You can also compare a table with an earlier version of itself.
 
 To alert on a schedule when a metric such as row count differs between two assets, use a [source to target monitor][1]. Data Diff finds the individual rows that differ.
