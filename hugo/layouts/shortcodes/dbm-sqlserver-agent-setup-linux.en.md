@@ -1,8 +1,10 @@
 To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
 
-On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+On Linux, the Agent includes Microsoft ODBC Driver 18 for SQL Server, so no extra driver setup is needed.
 
-Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
+To use a different driver, such as a host install of the [Microsoft ODBC driver][2], register it in `embedded/etc/odbcinst.ini` inside the Agent install directory: `/opt/datadog-agent` for package installs, or `/opt/datadog-packages/datadog-agent/stable` for Fleet Automation installs. Starting with Agent 7.NN, this file already registers the bundled drivers, so add your driver's section instead of replacing the file.
+
+Use the `odbc` connector and set `driver` to the driver's section name in `odbcinst.ini`.
 
 Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. See the [sample conf file][3] for all available configuration options.
 

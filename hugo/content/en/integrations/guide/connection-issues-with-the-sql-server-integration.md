@@ -59,7 +59,7 @@ To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
     UsageCount=1
     ```
-2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+2. Add your driver's section from `/etc/odbcinst.ini` to `embedded/etc/odbcinst.ini` inside the Agent install directory: `/opt/datadog-agent` for package installs, or `/opt/datadog-packages/datadog-agent/stable` for Fleet Automation installs. Starting with Agent 7.NN, this file already registers the bundled drivers, so add to it instead of replacing it. If you use DSNs, copy `odbc.ini` into the same directory.
 3. If needed, install the pyodbc module. This can be done by running pip install pyodbc within your Agent's python environment. For example:
 
     ```shell
