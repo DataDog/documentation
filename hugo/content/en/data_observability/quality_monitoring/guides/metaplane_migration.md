@@ -210,6 +210,8 @@ The following limits apply:
 
 Metaplane and Datadog use different anomaly detection models. The chart of a migrated monitor shows the bounds that Metaplane calculated for the migrated history. After the migration, the Datadog model calculates the bounds, so their width and shape can change from the migration date onward.
 
+<!-- SCREENSHOT: Status page of a migrated anomaly monitor, sample data with migrated history before the migration date, showing the bounds from the migrated history and the bounds the Datadog model calculates after the migration date. -->
+
 The Datadog model learns from the metric's history, including the migrated observed values, and adjusts for seasonal patterns, trends, and annotations. It needs at least two complete cycles of history to detect a seasonal pattern. Hour-of-day patterns use about the last month of history, and day-of-month patterns use up to 400 days. A monitor with little history, for example because its model was reset in Metaplane, gives the model fewer cycles to learn from. For details, see [Seasonality][24] in the anomaly detection guide.
 
 To tune bounds on a migrated monitor, adjust its [model configuration][18] or [annotate its bounds][23].
