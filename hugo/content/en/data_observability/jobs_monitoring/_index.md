@@ -62,7 +62,7 @@ Data Observability: Jobs Monitoring also supports Apache Spark jobs on the follo
 
 ### Easily identify unreliable and inefficient jobs
 
-View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized.
+View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized. To review cost and performance recommendations for these jobs, see [Optimize][4].
 
 ### Receive alerts on problematic jobs
 
@@ -95,3 +95,4 @@ To determine why a stage is taking a long time to complete, you can use the {{< 
 [1]: https://app.datadoghq.com/monitors/templates
 [2]: /data_observability/lineage/
 [3]: /monitors/types/data_observability/#job-monitors
+[4]: /data_observability/optimize/

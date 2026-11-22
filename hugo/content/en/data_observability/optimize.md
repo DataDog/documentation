@@ -40,10 +40,10 @@ For Databricks, Optimize also shows cluster recommendations from [Cloud Cost Man
 ### Query and warehouse recommendations
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Query and warehouse recommendations are in Preview.
+Query and warehouse recommendations are in Preview. Contact your Datadog representative to enable them for your organization.
 {{< /callout >}}
 
-Datadog generates query and warehouse recommendations from the query history and warehouse usage that it collects through your warehouse integrations.
+Datadog generates query and warehouse recommendations from the query history and warehouse usage that it collects through your warehouse integrations. Query recommendations analyze the last 30 days of query history. Warehouse recommendations analyze the last seven days of warehouse activity.
 
 | Platform | Query recommendations | Warehouse recommendations |
 |---|---|---|
@@ -53,9 +53,24 @@ Datadog generates query and warehouse recommendations from the query history and
 
 A query recommendation can propose a SQL rewrite, a table layout change, or a change to the compute that runs the query.
 
+Query recommendations depend on the following access in your warehouse:
+
+- **Snowflake**: To analyze a query's operator statistics and explain plan, the Datadog role needs `MONITOR` or `OPERATE` on the warehouse that ran the query. Without it, Datadog bases the recommendation on the query text, run statistics, and table metadata. `MONITOR` is the narrower privilege. Grant it on each warehouse that runs the queries you want analyzed:
+
+  ```sql
+  GRANT MONITOR ON WAREHOUSE <WAREHOUSE_NAME> TO ROLE <DATADOG_ROLE>;
+  ```
+
+  Snowflake keeps operator statistics for 14 days, so Datadog analyzes older queries without them.
+- **Databricks**: The service principal needs access to query text. Datadog skips queries whose text Databricks redacts. See [Grant access to query text][7].
+
 ## How Datadog generates recommendations
 
-Datadog checks for new job and query recommendations once a week, and for new warehouse recommendations once a day. Each recommendation includes:
+Datadog checks for new job and query recommendations once a week, and for new warehouse recommendations once a day.
+
+Datadog uses AI to generate job and query recommendations, so it generates them only for organizations that can use Datadog AI features. Job and query recommendations aren't available in GovCloud or for HIPAA-enabled organizations. Warehouse recommendations don't use AI.
+
+Each recommendation includes:
 
 - **Estimated monthly savings**: The current monthly cost of the resource, the estimated cost after the change, and the percentage saved.
 - **Estimated duration**: For recommendations that also reduce duration, the current and estimated duration.
@@ -94,7 +109,14 @@ To narrow the list, use the filters:
 
 To choose the platform and filters that Optimize opens with, click {{< ui >}}Edit defaults{{< /ui >}}.
 
-Snowflake recommendations report cost in credits. To show savings in dollars, set {{< ui >}}Savings display{{< /ui >}} to {{< ui >}}Dollars{{< /ui >}} and enter your cost per credit. Datadog stores the rate in your browser.
+### Cost units
+
+Savings are estimates in each platform's own cost terms:
+
+- **Snowflake**: Credits, estimated from the credits your warehouses consume. To show savings in dollars, set {{< ui >}}Savings display{{< /ui >}} to {{< ui >}}Dollars{{< /ui >}} and enter your cost per credit. The default rate is $2 per credit. Datadog stores your rate in your browser.
+- **BigQuery**: Dollars, estimated at Google Cloud list prices from the bytes billed for on-demand queries, or from the slot time of queries that run in a reservation.
+- **Databricks SQL**: Dollars from [Cloud Cost Management][8] when it has cost data for the SQL warehouse. Otherwise, Datadog estimates the cost from the query's DBU usage at Databricks list prices.
+- **Spark and Databricks jobs**: Dollars, from the estimated compute cost of the job's runs.
 
 Recommendations also appear in other parts of Data Observability:
 
@@ -106,14 +128,14 @@ Recommendations also appear in other parts of Data Observability:
 Click a recommendation to open its details. From the details panel, apply the change in one of these ways:
 
 - Click {{< ui >}}Copy fix prompt{{< /ui >}} to copy a prompt that describes the recommended change, then paste it into your coding agent.
-- For job recommendations, click {{< ui >}}Fix with Bits{{< /ui >}} to have [Bits Code][7] start a session that makes the change. If a session for the recommendation already exists, the button opens it. The button reads {{< ui >}}View fix and create PR{{< /ui >}} until the session has a pull request, and {{< ui >}}View fix{{< /ui >}} after.
+- For job recommendations, click {{< ui >}}Fix with Bits{{< /ui >}} to have [Bits Code][9] start a session that makes the change. If a session for the recommendation already exists, the button opens it. The button reads {{< ui >}}View fix and create PR{{< /ui >}} until the session has a pull request, and {{< ui >}}View fix{{< /ui >}} after.
 
 To use {{< ui >}}Fix with Bits{{< /ui >}}:
 
-- Set up [Bits Code][8].
-- Report the job's Git repository and commit on its spans with [Source Code Integration][9].
+- Set up [Bits Code][10].
+- Report the job's Git repository and commit on its spans with [Source Code Integration][11].
 
-{{< ui >}}Fix with Bits{{< /ui >}} isn't available for cluster sizing changes.
+{{< ui >}}Fix with Bits{{< /ui >}} isn't available for cluster sizing changes. Bits Code sessions consume [AI Credits][12].
 
 ### Track status
 
@@ -142,7 +164,7 @@ To edit, pause, or delete a rule, click {{< ui >}}Notifications{{< /ui >}} and u
 
 ## Analyze warehouse queries
 
-The Queries page shows the queries that run in your data warehouses. Use it to find failing and long-running queries, and to see which queries drive usage. It uses the query history that Datadog collects from your [Snowflake][4], [BigQuery][5], [Amazon Redshift][10], and [Databricks][6] integrations. Query history for [Amazon Athena][11] and [Microsoft Fabric Warehouse][12] is in Preview.
+The Queries page shows the queries that run in your data warehouses. Use it to find failing and long-running queries, and to see which queries drive usage. It uses the query history that Datadog collects from your [Snowflake][4], [BigQuery][5], [Amazon Redshift][13], and [Databricks][6] integrations. Query history for [Amazon Athena][14] and [Microsoft Fabric Warehouse][15] is in Preview.
 
 To open it, go to {{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Queries{{< /ui >}}. If more than one platform has query activity, select one from the platform selector.
 
@@ -159,11 +181,11 @@ The Queries page has these tabs:
 
 Click a query in the {{< ui >}}Explore{{< /ui >}} tab to open its details. The details panel shows the SQL text, charts of the query's runs over time, its recommendations, and its individual runs. It also lists the query's {{< ui >}}Input Tables{{< /ui >}} and {{< ui >}}Output Tables{{< /ui >}}.
 
-For Databricks, the service principal needs access to query text. Otherwise, Databricks returns the query text as redacted. See [Grant access to query text][13].
+For Databricks, the service principal needs access to query text. Datadog skips queries whose text Databricks redacts, so they don't appear on the Queries page. See [Grant access to query text][7].
 
 ### View the queries for a table
 
-Tables from Snowflake, BigQuery, and Amazon Redshift have a {{< ui >}}Queries{{< /ui >}} tab in the [Data Catalog][14]. Select {{< ui >}}Reads{{< /ui >}} to see the queries that read from the table. Select {{< ui >}}Writes{{< /ui >}} to see the queries that write to it. Click {{< ui >}}View Query Explorer{{< /ui >}} to open these queries in the {{< ui >}}Explore{{< /ui >}} tab of the Queries page.
+Tables from Snowflake, BigQuery, and Amazon Redshift have a {{< ui >}}Queries{{< /ui >}} tab in the [Data Catalog][16]. Select {{< ui >}}Reads{{< /ui >}} to see the queries that read from the table. Select {{< ui >}}Writes{{< /ui >}} to see the queries that write to it. Click {{< ui >}}View Query Explorer{{< /ui >}} to open these queries in the {{< ui >}}Explore{{< /ui >}} tab of the Queries page.
 
 ## Further reading
 
@@ -175,11 +197,13 @@ Tables from Snowflake, BigQuery, and Amazon Redshift have a {{< ui >}}Queries{{<
 [4]: /data_observability/quality_monitoring/data_warehouses/snowflake/
 [5]: /data_observability/quality_monitoring/data_warehouses/bigquery/
 [6]: /data_observability/quality_monitoring/data_warehouses/databricks/
-[7]: /bits_ai/bits_code/
-[8]: /bits_ai/bits_code/setup/
-[9]: /source_code/
-[10]: /data_observability/quality_monitoring/data_warehouses/redshift/
-[11]: /data_observability/quality_monitoring/data_lakes/amazon_athena/
-[12]: /data_observability/quality_monitoring/data_warehouses/fabric/
-[13]: /data_observability/quality_monitoring/data_warehouses/databricks/#step-3---grant-access-to-query-text
-[14]: /data_observability/data_catalog/
+[7]: /data_observability/quality_monitoring/data_warehouses/databricks/#step-3---grant-access-to-query-text
+[8]: /cloud_cost_management/setup/saas_costs/?tab=databricks#setup
+[9]: /bits_ai/bits_code/
+[10]: /bits_ai/bits_code/setup/
+[11]: /source_code/
+[12]: /account_management/billing/ai_credits/
+[13]: /data_observability/quality_monitoring/data_warehouses/redshift/
+[14]: /data_observability/quality_monitoring/data_lakes/amazon_athena/
+[15]: /data_observability/quality_monitoring/data_warehouses/fabric/
+[16]: /data_observability/data_catalog/
