@@ -530,7 +530,7 @@ If a tool doesn't emit OpenLineage events, you can poll its run history and send
 
 1. On a schedule, read the runs that started or ended since the last poll from the tool's API, database, or log files.
 2. For each run that started, send a `START` event with `eventTime` set to the time the run started in the tool.
-3. For each run that ended, send a `COMPLETE` or `FAIL` event with `eventTime` set to the time the run ended in the tool. If a run started and ended between two polls, send its `START` event first. For a failed run, add the `errorMessage` run facet with the tool's error in `message` and the language of the failed code in `programmingLanguage`, as in the failure example in [Step 3](#step-3-send-a-complete-or-fail-event).
+3. For each run that ended, send a `COMPLETE` or `FAIL` event with `eventTime` set to the time the run ended in the tool. If a run started and ended between two polls, send its `START` event first. For a failed run, add the `errorMessage` run facet. Set `message` to the tool's error and `programmingLanguage` to the language of the code that failed. See the failure example in [Step 3](#step-3-send-a-complete-or-fail-event).
 4. Record which events you sent, so the next poll doesn't send them again.
 
 Each event needs the following fields. On the [OpenLineage events][12] page, Datadog marks an event that's missing one of them with the `Error` status.
