@@ -32,7 +32,7 @@ Use custom jobs when you need to:
 
 - A Datadog API key. See [API and Application Keys][6].
 - Your Datadog [site URL][3]. The examples on this page use `datadoghq.com`; replace the hostname with the intake endpoint for your site.
-- Outbound HTTPS access from the hosts that send events to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}. See [Network Requirements for Data Observability][16].
+- Outbound HTTPS access from the hosts that send events to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
 
 ## Step 1: Send a `START` event
 
@@ -760,4 +760,3 @@ Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 [13]: /monitors/types/data_observability/#how-job-duration-is-evaluated
 [14]: https://openlineage.io/docs/spec/facets/dataset-facets/schema
 [15]: https://openlineage.io/docs/spec/facets/dataset-facets/column_lineage_facet
-[16]: /data_observability/network/#openlineage-emitters
