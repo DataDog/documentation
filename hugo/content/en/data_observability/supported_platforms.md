@@ -43,7 +43,7 @@ The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns
 | [PostgreSQL][11] | Preview (column) | Preview | Preview | Preview | | | |
 
 - Freshness marked **(column)** is measured from a datetime column. Table-level freshness isn't available.
-- **Lineage** means that Datadog builds lineage from the platform's own metadata or query history. On platforms where this cell is blank, dbt and OpenLineage jobs that read or write your tables can still add them to lineage.
+- **Lineage** means that Datadog builds lineage from the platform's own metadata or query history. Where this cell is blank, lineage can still come from dbt or OpenLineage jobs that read or write the platform's tables.
 - Lineage and query history for Microsoft Fabric Warehouse require the Contributor role or higher on the workspace. They also require the {{< ui >}}Collect query history{{< /ui >}} option in the integration settings.
 - Querying AWS Glue tables with Amazon Athena is in Preview. It adds group-by and custom filters on metrics, and monitoring for Glue tables that don't use the Iceberg table format.
 - Amazon Athena query history builds lineage between the AWS Glue tables that your queries read and write.
