@@ -1072,7 +1072,7 @@ Returns a data quality monitor's metric values, anomaly bounds, and existing bou
 ### `upsert_data_observability_monitor_annotations`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Write` and `Monitors Read` and `Timeseries` and `APM Read`*\
-Creates, updates, or extends bound annotations on a data quality monitor for one data entity. Set `action` to `create`, `update`, or `extend`. Requires `action`, `monitor_id`, `entity_id`, `annotations`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the change, then call it again with `dry_run` set to `false` to apply it. Each annotation type matches an annotation option in the Datadog UI. `expected_occasionally` ({{< ui >}}Expected{{< /ui >}}) accepts similar behavior when it recurs, and alerts only on a larger anomaly. `new_baseline` ({{< ui >}}Reset for now{{< /ui >}}) accepts the current behavior, but alerts on a comparable change in the future. `false_negative` ({{< ui >}}Missed alert{{< /ui >}}) marks behavior inside the bounds that should have alerted. `ignore` ({{< ui >}}Ignore{{< /ui >}}) removes invalid measurements from the model's history.
+Creates, updates, or extends bound annotations on a data quality monitor for one data entity. Set `action` to `create`, `update`, or `extend`. Requires `action`, `monitor_id`, `entity_id`, `annotations`, and `dry_run`. Call the tool with `dry_run` set to `true` to preview the change, then call it again with `dry_run` set to `false` to apply it. Each annotation type matches an annotation option in the Datadog UI. `expected_occasionally` ({{< ui >}}Expected{{< /ui >}}) expands the bounds to include the marked behavior permanently. A larger anomaly can still alert. `new_baseline` ({{< ui >}}Reset for now{{< /ui >}}) marks the behavior as OK, but alerts if it happens again. `false_negative` ({{< ui >}}Missed alert{{< /ui >}}) contracts the bounds to alert on behavior that stayed inside them. `ignore` ({{< ui >}}Ignore{{< /ui >}}) excludes the marked data when the model calculates bounds. For how annotations work in the UI, see [Annotate bounds][106].
 
 - Mark the latest anomaly on monitor `12345` as expected so a similar change doesn't alert again.
 - Ignore the measurements from yesterday's bad backfill on this table.
@@ -3915,6 +3915,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [103]: /mcp_server/setup#required-permissions
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+[106]: /monitors/types/data_observability/#annotate-bounds
 
 ## Further reading
 

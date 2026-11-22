@@ -49,16 +49,18 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
 
 ## Programmatic access
 
-- **MCP Server**: The `data-observability` toolset of the [Datadog MCP Server][1] gives AI agents access to the data catalog, lineage, data quality monitors, and recommendations.
-- **Data Observability API**: Use the [Data Observability API][2] to run a monitor with a {{< ui >}}Manual{{< /ui >}} schedule and check the run's status. These endpoints are in Preview.
-- **Monitors API**: Data quality monitors use the monitor type `data-quality alert`. Create, update, and delete them with the [Monitors API][3].
-- **OpenLineage**: Send job and lineage events from in-house tools and custom pipelines with [custom jobs using OpenLineage][4].
+- **MCP Server**: The `data-observability` toolset of the [Datadog MCP Server][1] gives AI agents access to the data catalog, lineage, query history, data quality monitors, Spark job runs, and recommendations. To enable it, add `data-observability` to the `toolsets` parameter, or use `toolsets=all`. See [Toolsets][2].
+- **Data Observability API**: Use the [Data Observability API][3] to run a monitor with a {{< ui >}}Manual{{< /ui >}} schedule and check the run's status. These endpoints are in Preview and are subject to change.
+- **Monitors API and Terraform**: Data quality monitors use the monitor type `data-quality alert`, and job monitors use `data-jobs alert`. Create, update, and delete them with the [Monitors API][4] or the [`datadog_monitor` resource][5] of the Datadog Terraform provider.
+- **OpenLineage**: Send job and lineage events from in-house tools and custom pipelines with [custom jobs using OpenLineage][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /mcp_server/tools/#data-observability
-[2]: /api/latest/data-observability/
-[3]: /api/latest/monitors/
-[4]: /data_observability/jobs_monitoring/openlineage/
+[2]: /mcp_server/setup/#toolsets
+[3]: /api/latest/data-observability/
+[4]: /api/latest/monitors/
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[6]: /data_observability/jobs_monitoring/openlineage/
