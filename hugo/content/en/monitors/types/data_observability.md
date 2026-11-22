@@ -183,7 +183,7 @@ The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value ret
     - {{< ui >}}Freshness{{< /ui >}}: The query returns the difference (in seconds) between the current time and the last time an event occurred.
     - {{< ui >}}Percentage{{< /ui >}}: The query returns a percentage value between 0 and 100.
 2. Write a SQL query that returns a numeric value in a column aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`. To track a single value, return one row.
-3. Click {{< ui >}}Validate{{< /ui >}}. For data warehouses, Datadog runs the query against your warehouse and checks the result.
+3. Click {{< ui >}}Validate{{< /ui >}}. For data warehouses, Datadog runs the query against your warehouse and checks the result. For databases that connect through the Datadog Agent, such as [PostgreSQL][17], Datadog checks the query's syntax without running it.
 
 The `dd_value` alias is not case-sensitive, so a warehouse that returns `DD_VALUE` works. A `NULL` value is recorded as `0`. A query can end with a semicolon.
 
@@ -214,7 +214,7 @@ If validation fails, the error describes the problem:
 
 Select a detection method:
 
-- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model's training includes a weekend and typically takes **3 to 7 days**. A monitor that runs once a day trains for **about 9 days**. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state. For how training and seasonality work, see [Anomaly Detection for Data Observability Monitors][18].
 - {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`more than`, `more than or equal to`, `less than`, `less than or equal to`, `equal to`, or `not equal to`) and define an {{< ui >}}Alert threshold{{< /ui >}} (required) and optionally a {{< ui >}}Warning threshold{{< /ui >}}. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
@@ -239,7 +239,7 @@ In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select
 ### Model configuration
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
+The following model configuration settings are in Preview.
 {{< /callout >}}
 
 For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
@@ -249,7 +249,6 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand t
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
-| {{< ui >}}Alert direction{{< /ui >}} | Controls which side of the expected bounds triggers an alert: {{< ui >}}Above or below{{< /ui >}} (the default), {{< ui >}}Above{{< /ui >}}, or {{< ui >}}Below{{< /ui >}}. For example, select {{< ui >}}Below{{< /ui >}} on a Row Count monitor to alert on drops but not on spikes. In the API, set `monitor_options.model_configuration.model_bounds_override` to `UPPER_ONLY` for {{< ui >}}Above{{< /ui >}} or `LOWER_ONLY` for {{< ui >}}Below{{< /ui >}}. Leave it unset to alert on both sides. |
 | {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
 | {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
 
@@ -258,13 +257,18 @@ Use the following guidelines to tune a monitor:
 - To get more or fewer alerts across the whole series, adjust {{< ui >}}Sensitivity{{< /ui >}}. Bounds scale with how much the metric normally varies.
 - To avoid alerts on deviations smaller than a fixed amount, such as fewer than 1,000 rows from the predicted value, set a minimum bound size.
 - To correct how the model handled specific points, such as a missed alert or a false alert, annotate the bounds. See the [Annotate bounds](#annotate-bounds) section.
+- To alert only when the metric rises above the expected bounds, or only when it falls below them, define the monitor with the [Monitors API][19] or Terraform. In `monitor_options.model_configuration`, set `model_bounds_override` to `UPPER_ONLY` to alert above the bounds or `LOWER_ONLY` to alert below them. Leave it unset to alert on both sides.
 
 ### Monitor schedule
 
 Set how often the monitor evaluates your data:
 
-- {{< ui >}}Scheduled{{< /ui >}}: The monitor runs on a fixed cadence. Under {{< ui >}}Run this monitor{{< /ui >}}, select {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or {{< ui >}}Custom schedule{{< /ui >}}.
-- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule to accumulate enough historical data for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics. A new manual monitor shows no values until its first triggered run. Changes to your data, such as a fix for the issue behind an alert, appear in the monitor only after its next triggered run.
+- {{< ui >}}Scheduled{{< /ui >}}: The monitor runs on a fixed cadence. Under {{< ui >}}Run this monitor{{< /ui >}}, select {{< ui >}}Default schedule{{< /ui >}}, {{< ui >}}Hourly{{< /ui >}}, {{< ui >}}Every 3 hours{{< /ui >}}, {{< ui >}}Every 6 hours{{< /ui >}}, {{< ui >}}Every 12 hours{{< /ui >}}, {{< ui >}}Daily{{< /ui >}}, or {{< ui >}}Custom schedule{{< /ui >}}.
+- {{< ui >}}Manual{{< /ui >}} (Preview): The monitor runs only when triggered programmatically. Trigger these monitors using the [Data Observability API][10] on a schedule to accumulate enough historical data for modeling to be useful. The UI does not support default metrics such as row counts and freshness, so this workflow applies to custom or column-level metrics. A new manual monitor shows no values until its first triggered run. Changes to your data, such as a fix for the issue behind an alert, appear in the monitor only after its next triggered run. Manual monitors don't run on databases that connect through the Datadog Agent, such as [PostgreSQL][17].
+
+{{< ui >}}Default schedule{{< /ui >}} is selected for new data quality monitors. The monitor runs each time Datadog collects metrics from the warehouse, which is typically every hour, and the option shows the resulting cadence. Source to target monitors don't offer {{< ui >}}Default schedule{{< /ui >}} and start with {{< ui >}}Hourly{{< /ui >}}.
+
+When you edit a monitor and switch it between {{< ui >}}Scheduled{{< /ui >}} and {{< ui >}}Manual{{< /ui >}}, the values collected on the previous schedule no longer appear after you save. Datadog keeps them, and they appear again if you switch back.
 
 To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and enter a cron expression in the {{< ui >}}Cron tab{{< /ui >}} field. Cron expressions are evaluated in UTC. A custom schedule can run as often as every 15 minutes. {{< ui >}}Next 3 Runs{{< /ui >}} lists the upcoming runs in your Datadog time zone, so you can confirm the expression before saving it.
 
@@ -315,7 +319,9 @@ Observed value {{observed}} is within the expected range.
 
 ## Source to target monitors
 
-<div class="alert alert-info">Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.
+{{< /callout >}}
 
 A source to target monitor compares the same metric on two data assets and alerts when the two values diverge. Other Data Observability monitors track whether a single asset is fresh or complete. A source to target monitor tracks whether the copy that landed in a destination matches what left the source.
 
@@ -361,7 +367,9 @@ The {{< ui >}}Anomalies{{< /ui >}} detection method learns the usual difference 
 
 ## Schema change monitors
 
-<div class="alert alert-info">Schema change monitors are in Preview.</div>
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Schema change monitors are in Preview.
+{{< /callout >}}
 
 A schema change monitor alerts when the structure of your data changes, rather than when its contents change. Use it to catch an upstream change before it breaks a downstream pipeline or dashboard. For example, the monitor can alert on a dropped column, a renamed table, or a column that switches to a different data type.
 
@@ -374,20 +382,20 @@ Schema change monitors detect four kinds of change across databases, schemas, ta
 | Renamed | `renamed` | A table was renamed. Datadog detects a rename when a new table with the same columns and data types replaces the old table in the same schema. Otherwise, the rename appears as one removed table and one added table. A renamed column appears as one removed column and one added column. |
 | Type changed | `type_changed` | A column's data type changed, such as from `INTEGER` to `STRING`, or a table's type changed. |
 
-Schema changes are detected for Snowflake, BigQuery, Databricks, Redshift, and [ClickHouse Cloud][17].
+Schema changes are detected for Snowflake, BigQuery, Databricks, and Redshift.
 
 ### Create a schema change monitor
 
 1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Schema Change{{< /ui >}}][11].
 2. Under {{< ui >}}Choose data to monitor{{< /ui >}}, select the warehouse to watch.
-3. Optionally, under {{< ui >}}Choose entities within the warehouse to monitor{{< /ui >}}, enter a search to limit the changes that the monitor alerts on. See [Filter schema changes](#filter-schema-changes).
+3. Optionally, enter a search to limit the changes that the monitor alerts on. See [Filter schema changes](#filter-schema-changes).
 4. Configure notifications as described in [Configure monitor](#configure-monitor).
 
 A schema change monitor does not take a metric type or a detection method because it alerts on a structural change rather than on a measured value crossing a bound.
 
 ### Filter schema changes
 
-The search under {{< ui >}}Choose entities within the warehouse to monitor{{< /ui >}} accepts the following fields:
+The schema change search accepts the following fields:
 
 | Field | Matches |
 |---|---|
@@ -470,7 +478,9 @@ The monitor recovers automatically when a later run succeeds.
 
 ### Job duration
 
-<div class="alert alert-info">Job duration monitors are in Preview.</div>
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Job duration monitors are in Preview.
+{{< /callout >}}
 
 The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. For some technologies, the check also evaluates runs that are still in progress, so an alert can fire before the run finishes. See [How job duration is evaluated](#how-job-duration-is-evaluated). Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
 
@@ -481,7 +491,7 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 
 {{< ui >}}Anomalies{{< /ui >}} is the default and recommended method because it reduces false positives and the configuration overhead of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
 
-- A job needs 24 hours of completed-run history before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
+- Each job starts in a training period and isn't evaluated until it has at least five completed runs over at least 1 day, including a full weekday (Monday through Friday) of runs. Job duration monitors don't wait for a weekend. See [Training period][20].
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
 {{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="A Job duration check using the Anomalies detection method, with a graph of recent run durations." style="width:100%;" >}}
@@ -509,7 +519,7 @@ The preview graph shows the durations of recent completed runs for the selected 
 - **Evaluated at completion**: Deferrable Airflow tasks, Azure Data Factory pipelines, Databricks jobs, and Spark batch jobs are evaluated when the run completes.
 - **Completed runs**: When a run finishes, its final duration replaces the in-progress value. The monitor evaluates runs from the past 10 days.
 - **Recovery**: The monitor recovers when a later run finishes within the threshold or the learned bound.
-- **dbt**: dbt Cloud jobs are evaluated while they run if the dbt Cloud webhook sends the {{< ui >}}Run started{{< /ui >}} event. See [Configure webhooks][18]. dbt Cloud models and tests are evaluated when the run completes. dbt Core jobs that send OpenLineage events are evaluated while they run.
+- **dbt**: dbt Cloud jobs are evaluated while they run if the dbt Cloud webhook sends the {{< ui >}}Run started{{< /ui >}} event. See [Configure webhooks][21]. dbt Cloud models and tests are evaluated when the run completes. dbt Core jobs that send OpenLineage events are evaluated while they run.
 
 ## Example monitors
 
@@ -562,7 +572,7 @@ Alert when a nightly job runs past its expected window, while the job is still r
 
 ## Annotate bounds
 
-For monitors using the **Anomaly** detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data. For job duration monitors, use annotations to teach the model which job run durations are expected.
+For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, you can annotate bound ranges to provide feedback and improve the model over time. Unlike infrastructure metrics, data quality metrics are often business-specific, so use annotations to teach the model what behavior is normal for your data. For job duration monitors, use annotations to teach the model which job run durations are expected.
 
 {{< img src="/monitors/monitor_types/data_observability/annotate_bounds.png" alt="Hover menu for annotating a monitor bound." style="width:90%;" >}}
 
@@ -595,5 +605,8 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [14]: /data_observability/jobs_monitoring/
 [15]: https://app.datadoghq.com/data-obs/monitors/create/data-jobs
 [16]: /data_observability/jobs_monitoring/openlineage/
-[17]: /data_observability/quality_monitoring/data_warehouses/clickhouse/
-[18]: /data_observability/jobs_monitoring/dbt/#configure-webhooks
+[17]: /data_observability/quality_monitoring/transactional_databases/postgres/
+[18]: /data_observability/quality_monitoring/guides/anomaly_detection/
+[19]: /api/latest/monitors/
+[20]: /data_observability/quality_monitoring/guides/anomaly_detection/#training-period
+[21]: /data_observability/jobs_monitoring/dbt/#configure-webhooks
