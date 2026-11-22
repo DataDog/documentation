@@ -69,6 +69,7 @@ Checks support dbt models and seeds. If a pull request changes only dbt snapshot
 1. In the CI/CD settings, find the dbt project you want to add checks for and click {{< ui >}}Configure checks{{< /ui >}}. The {{< ui >}}Project{{< /ui >}} field shows the selected project.
 2. Under {{< ui >}}Source Control{{< /ui >}}, check the {{< ui >}}Repository{{< /ui >}} field. Datadog fills it in when it detects the repository from the selected dbt project. Otherwise, select the repository.
 
+<!-- SCREENSHOT (replace cicd-connection.png): CI/CD checks configuration form for a sample dbt project, showing the Project field, the Repository field under Source Control, the dbt project folder field with the Detected label, and the dbt model filter and Directories filter under Trigger Settings. -->
 {{< img src="data_observability/cicd/cicd-connection.png" alt="The CI/CD feature creation page" style="width:100%;" >}}
 
 #### dbt project folder
