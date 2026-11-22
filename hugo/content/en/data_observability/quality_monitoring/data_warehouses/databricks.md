@@ -22,7 +22,7 @@ The Databricks integration connects Datadog to your Databricks workspace to sync
 
 ## Prerequisites
 
-If your Databricks workspace restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}. For the endpoint and port that Datadog connects to, see [Network Requirements for Data Observability][11].
+If your Databricks workspace restricts network access by IP, add the Datadog webhook IPs to your allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
 
 ## Set up your account in Databricks
 
@@ -109,7 +109,7 @@ When Databricks masks query text for the service principal, the Databricks integ
 Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
 
 - **Lineage from query text**: Datadog parses query text from query history to add lineage between your tables, and skips queries whose text is redacted. Lineage from `system.access.column_lineage` doesn't use query text.
-- **Queries page and recommendations**: Datadog lists a Databricks query on the {{< ui >}}Queries{{< /ui >}} page only when it can read the query text. Optimization recommendations also need the query text. See [Optimize][12].
+- **Queries page and recommendations**: Datadog lists a Databricks query on the {{< ui >}}Queries{{< /ui >}} page only when it can read the query text. Optimization recommendations also need the query text.
 
 Table-level metrics such as freshness, row count, and column statistics read table data and metadata rather than query text, so they work without this membership.
 
@@ -171,5 +171,3 @@ After the initial sync completes, create a [Data Observability monitor][10] to s
 [8]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
 [9]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
 [10]: /monitors/types/data_observability/
-[11]: /data_observability/network/
-[12]: /data_observability/optimize/

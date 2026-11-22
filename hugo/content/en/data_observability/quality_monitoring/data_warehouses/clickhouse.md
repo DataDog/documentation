@@ -28,11 +28,11 @@ Before you begin, make sure you have:
 
 - A ClickHouse Cloud service with an HTTPS endpoint. Example: `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443`
 - Administrator access to your ClickHouse Cloud service to create a role and a user.
-- Preview access enabled for your organization. See [Request Preview access][11].
+- Preview access enabled for your organization by a Datadog representative.
 
 ## Allow Datadog IP addresses
 
-Add Datadog's IP addresses to your service's IP Access List in ClickHouse Cloud. Use the addresses in the `webhooks` section of the [IP Ranges][3] page. Without these addresses, Datadog cannot connect to your service. For the endpoint and port that Datadog connects to, see [Network Requirements for Data Observability][12].
+Add Datadog's IP addresses to your service's IP Access List in ClickHouse Cloud. Use the addresses in the `webhooks` section of the [IP Ranges][3] page. Without these addresses, Datadog cannot connect to your service.
 
 <div class="alert alert-warning">IP ranges are different for each Datadog site. On the {{< region-param key="ip_ranges_url" link="true" text="IP Ranges" >}} page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
 
@@ -145,7 +145,7 @@ If {{< ui >}}Test connection{{< /ui >}} fails, use the error to find the fix:
 
 After a successful connection, your ClickHouse tables appear in the [Data Catalog][10] after the first hourly metadata read.
 
-If the integration tile isn't available in your organization, confirm that Preview access is enabled for your organization. See [Request Preview access][11].
+If the integration tile isn't available in your organization, confirm that a Datadog representative has enabled Preview access for your organization.
 
 ## Further reading
 
@@ -161,5 +161,3 @@ If the integration tile isn't available in your organization, confirm that Previ
 [8]: /data_observability/jobs_monitoring/dbt/
 [9]: /help/
 [10]: https://app.datadoghq.com/data-obs/catalog?platform=clickhouse
-[11]: /data_observability/supported_platforms/#request-preview-access
-[12]: /data_observability/network/
