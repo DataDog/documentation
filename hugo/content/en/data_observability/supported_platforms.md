@@ -89,8 +89,6 @@ Datadog enables most Data Observability Preview features for each organization. 
 
 After Datadog enables a Preview feature for your organization, follow the setup steps on that feature's page.
 
-PostgreSQL is the exception. You turn it on yourself in Data Observability Settings. See [PostgreSQL][11].
-
 ## Agent requirements
 
 Some sources are collected through the Datadog Agent and require a minimum Agent version:
