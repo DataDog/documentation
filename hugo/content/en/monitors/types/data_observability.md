@@ -457,13 +457,13 @@ Each check is grouped by the attributes that identify a job in the selected tech
 | Technology | Job types | Required group by |
 |---|---|---|
 | Airflow | DAG | `name`, `env` |
-| Airflow | Task | `name`, `dag_name` |
-| AWS Glue | Job | `name` |
-| Azure Data Factory | Pipeline | `name` |
-| Databricks | Job | `name`, `workspace_name` |
+| Airflow | Task | `name`, `dag_name`, `env` |
+| AWS Glue | Job | `name`, `env`, `account`, `region` |
+| Azure Data Factory | Pipeline | `name`, `tenant`, `subscription`, `factory` |
+| Databricks | Job | `job_name`, `workspace_name` |
 | dbt | Job, Model, Test | `name`, `project`, `env` |
-| Spark | Batch Job | `name` |
-| [Custom OpenLineage][16] | Each job that sends custom OpenLineage events | `name`, `operation_name` |
+| Spark | Batch Job | `job_name`, `env` |
+| [Custom OpenLineage][16] | Each job that sends custom OpenLineage events | `integration`, `name`, `env` |
 
 ### Job failure
 
