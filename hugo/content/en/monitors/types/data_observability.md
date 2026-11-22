@@ -272,6 +272,8 @@ When you edit a monitor and switch it between {{< ui >}}Scheduled{{< /ui >}} and
 
 To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and enter a cron expression in the {{< ui >}}Cron tab{{< /ui >}} field. Cron expressions are evaluated in UTC. A custom schedule can run as often as every 15 minutes. {{< ui >}}Next 3 Runs{{< /ui >}} lists the upcoming runs in your Datadog time zone, so you can confirm the expression before saving it.
 
+<!-- SCREENSHOT: Monitor schedule section of a new data quality monitor, Scheduled with Custom schedule selected and a sample cron expression, showing the Run this monitor menu, the Cron tab field, and the Next 3 Runs list. -->
+
 For the preset intervals, {{< ui >}}Starting from{{< /ui >}} sets the time of day of the runs in your Datadog time zone. Datadog converts that time to UTC with your time zone's current offset. Schedules are saved in UTC and don't adjust for daylight saving time. If your time zone observes daylight saving time, the local time of each run shifts by one hour when the clocks change.
 
 ### Set alert conditions
