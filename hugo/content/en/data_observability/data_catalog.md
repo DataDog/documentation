@@ -67,12 +67,12 @@ Use the facets panel next to the results to filter the list without typing a que
 
 ## Asset pages
 
-Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs. It also has a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table. The {{< ui >}}Summary{{< /ui >}} tab of a table page also lists the table's columns.
+Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs. It also has a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table. The {{< ui >}}Summary{{< /ui >}} tab of a table page also lists the table's columns. Snowflake account, database, schema, table, and column pages have a {{< ui >}}Data Diff{{< /ui >}} tab, which is in Preview. See [View results][8].
 
 ### Schema change and query tabs
 
-- **Schema Changes**: The [schema changes][5] Datadog detected on the asset. Database, schema, table, and column pages have this tab, and so do Snowflake and BigQuery account pages. The tab is disabled for an asset whose account isn't configured in Data Observability. Viewing detected changes doesn't require a monitor. To get alerts when a schema changes, create a [schema change monitor][6]. Schema change monitors are in Preview.
-- **Queries**: The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab.
+- **Schema Changes**: The [schema changes][5] Datadog detected on the asset. Database, schema, table, and column pages have this tab, and so do Snowflake and BigQuery account pages. The tab is disabled for an asset whose account isn't configured in Data Observability. Viewing detected changes doesn't require a monitor. To get alerts when a schema changes, create a [schema change monitor][6]. Schema change monitors are in Preview. For the platforms that detect schema changes, see [Supported Platforms][9].
+- **Queries**: The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab. To open these queries on the Queries page, see [View the queries for a table][10].
 
 ### Navigation tree
 
@@ -99,6 +99,8 @@ Deleting an asset removes it and all of its descendants from Data Observability,
 
 Deleting an asset requires the `Data Observability Catalog Write` [permission][7]. The Datadog Standard and Admin roles include it. Without it, {{< ui >}}Delete asset{{< /ui >}} appears in the menu but is disabled.
 
+By default, Datadog also removes an asset when it receives no new metadata about it for 35 days. See [Stale assets][11].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -110,3 +112,7 @@ Deleting an asset requires the `Data Observability Catalog Write` [permission][7
 [5]: /monitors/types/data_observability/#browse-detected-schema-changes
 [6]: /monitors/types/data_observability/#schema-change-monitors
 [7]: /account_management/rbac/permissions/#permissions-list
+[8]: /data_observability/data_diff/#view-results
+[9]: /data_observability/supported_platforms/#data-warehouses-data-lakes-and-databases
+[10]: /data_observability/optimize/#view-the-queries-for-a-table
+[11]: /data_observability/lineage/#stale-assets
