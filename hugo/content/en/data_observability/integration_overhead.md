@@ -109,6 +109,7 @@ On PostgreSQL, the Datadog Agent runs every monitor query against your database 
 
 Separately from monitor queries, the Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`).
 
+[2]: /data_observability/quality_monitoring/transactional_databases/postgres/
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -123,6 +124,7 @@ On MySQL, the Datadog Agent runs every monitor query against your database throu
 
 Separately from monitor queries, the Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`).
 
+[3]: /data_observability/quality_monitoring/transactional_databases/mysql/
 {{% /tab %}}
 {{% tab "SQL Server" %}}
 
@@ -137,6 +139,7 @@ On SQL Server, the Datadog Agent runs every monitor query against your database 
 
 Separately from monitor queries, the Agent collects schema metadata every 600 seconds by default (`collect_schemas.collection_interval`), as part of Database Monitoring.
 
+[4]: /data_observability/quality_monitoring/transactional_databases/sql_server/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -208,9 +211,6 @@ For setup and the Datadog-optimized transport, see [Custom Jobs using OpenLineag
 The behaviors described on this page are environment-dependent. Actual cost depends on your warehouse size and pricing model, the data scanned, and how often monitors run. On warehouse-based platforms, it also depends on your auto-stop configuration. To estimate costs, validate against your own usage: your warehouse's query history or billing views, or Datadog Cloud Cost Management. To see which queries drive usage in your warehouse, use the [Queries page][13].
 
 [1]: /monitors/types/data_observability/#monitor-schedule
-[2]: /data_observability/quality_monitoring/transactional_databases/postgres/
-[3]: /data_observability/quality_monitoring/transactional_databases/mysql/
-[4]: /data_observability/quality_monitoring/transactional_databases/sql_server/
 [5]: /tracing/troubleshooting/agent_apm_resource_usage/
 [6]: /data_observability/jobs_monitoring/databricks/
 [7]: https://openlineage.io/docs/integrations/about
