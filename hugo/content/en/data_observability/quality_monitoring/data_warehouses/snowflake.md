@@ -289,6 +289,8 @@ After you save, Datadog begins syncing your information schema and query history
 
 After the initial sync completes, create a [Data Observability monitor][5] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
 
+To compare two Snowflake tables or queries row by row, for example after a migration, use [Data Diff][9].
+
 ## Troubleshoot permissions
 
 If Datadog is unable to see expected databases, schemas, or tables in your Snowflake account, follow these steps to verify that the Datadog role has the correct access.
@@ -333,3 +335,4 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 [6]: https://docs.snowflake.com/en/user-guide/object-tagging
 [7]: /api/latest/ip-ranges/
 [8]: /data_observability/cicd/#drift-detection
+[9]: /data_observability/data_diff/
