@@ -128,6 +128,8 @@ The mapping has three groups:
 
 To compare columns that have different names, select the matching column on the other side of the pair. Use {{< ui >}}Make Primary Key{{< /ui >}} and {{< ui >}}Remove from primary keys{{< /ui >}} to move a pair into or out of the primary key.
 
+<!-- SCREENSHOT: Create Data Diff form with sample Snowflake source and target tables selected, showing the Source Dataset and Target Dataset sections and the column mapping with Primary Keys, Compare columns, and Ignore columns. -->
+
 ## Run a diff
 
 To start a run, open the diff and click {{< ui >}}Run Diff{{< /ui >}}. Scheduled diffs also run on their schedule. A run's status is {{< ui >}}Pending{{< /ui >}}, {{< ui >}}Running{{< /ui >}}, {{< ui >}}Succeeded{{< /ui >}}, {{< ui >}}Failed{{< /ui >}}, or {{< ui >}}Cancelled{{< /ui >}}.
@@ -180,6 +182,8 @@ The diff page shows:
   - Toggle {{< ui >}}Removed{{< /ui >}}, {{< ui >}}Modified{{< /ui >}}, and {{< ui >}}Added{{< /ui >}} to choose which rows to show.
   - To include columns whose values match, turn on the toggle that shows unchanged columns.
   - If the datasets match, the page shows {{< ui >}}No differences found{{< /ui >}}.
+
+<!-- SCREENSHOT: A diff page with sample data, showing the run timeline, the Configuration panel, and results with the Removed, Modified, and Added toggles and a modified value highlighted. -->
 
 ### Truncated results
 
