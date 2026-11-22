@@ -491,7 +491,7 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 
 {{< ui >}}Anomalies{{< /ui >}} is the default and recommended method because it reduces false positives and the configuration overhead of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
 
-- Each job starts in a training period and isn't evaluated until it has at least five completed runs over at least 1 day, including a full weekday (Monday through Friday) of runs. Job duration monitors don't wait for a weekend. See [Training period][20].
+- Each job starts in a training period and isn't evaluated until it has at least five completed runs over at least 1 day, and either a full weekday (Monday through Friday) of runs or more than 7 days of history. Job duration monitors don't wait for a weekend. See [Training period][20].
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
 {{< img src="monitors/monitor_types/data_observability/job_monitor_duration_anomalies.png" alt="A Job duration check using the Anomalies detection method, with a graph of recent run durations." style="width:100%;" >}}
