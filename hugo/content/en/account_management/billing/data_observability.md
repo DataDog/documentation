@@ -89,7 +89,15 @@ The samples add up to 600, and 600 / 12 = 50 host hours for that hour. If this p
 
 Usage is the sum of the durations of all job runs in the month, rounded up to the next full hour. Datadog measures each run in seconds, with a minimum of one second.
 
-Each run counts once, for the duration of its top-level run. The top-level run is the Airflow DAG run, the dbt job run, the AWS Glue job run, the Azure Data Factory pipeline run, or the custom job run. Airflow tasks, dbt models and tests, and other steps inside a run don't add usage. A dbt Cloud job run counts on its own, including when an Airflow DAG triggers it.
+Each run counts once, for the duration of its top-level run. Steps inside a run don't add usage.
+
+| Job type | Duration that counts |
+|---|---|
+| Airflow | The DAG run. Tasks inside the DAG run don't add usage. |
+| dbt | The job run. Models and tests inside the job run don't add usage. A dbt Cloud job run counts on its own, including when an Airflow DAG triggers it. |
+| AWS Glue | The job run. |
+| Azure Data Factory | The pipeline run. |
+| Custom jobs | The job run. |
 
 For example, suppose Datadog observes the following runs in one month:
 
