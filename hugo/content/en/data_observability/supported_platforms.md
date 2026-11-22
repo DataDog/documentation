@@ -38,7 +38,7 @@ The **Freshness**, **Row count**, **Custom SQL**, and **Column metrics** columns
 | [Amazon Redshift][6] | Yes (column) | Yes | Yes | Yes | Preview | Yes | Yes |
 | [ClickHouse Cloud][7] | Preview | Preview | Preview | Preview | Preview | | |
 | [Microsoft Fabric Warehouse][8] | Preview (column) | Preview | Preview | Preview | | Preview | Preview |
-| [AWS Glue (Iceberg tables)][9] | Preview | Preview | | | | | |
+| [AWS Glue (Iceberg tables)][9] | Yes | Yes | | | | | |
 | [Amazon Athena][10] | | | | | | Preview | Preview |
 | [PostgreSQL][11] | Preview (column) | Preview | Preview | Preview | | | |
 
@@ -75,8 +75,8 @@ ELT and BI tools add lineage between your warehouse tables and the tool's connec
 |---|---|---|
 | [Airbyte][24] | ELT | Yes |
 | [Fivetran][25] | ELT | Yes |
-| [Hightouch][26] | Reverse ETL | Preview |
-| [Hex][27] | BI | Preview |
+| [Hightouch][26] | Reverse ETL | Yes |
+| [Hex][27] | BI | Yes |
 | [Looker][28] | BI | Yes |
 | [Tableau][29] | BI | Yes |
 | [Sigma][30] | BI | Yes |

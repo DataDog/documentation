@@ -13,10 +13,6 @@ further_reading:
     text: 'Data Observability Monitors'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Quality monitoring for AWS Glue Iceberg tables is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
-{{< /callout >}}
-
 ## Overview
 
 If you're [using the Iceberg framework in AWS Glue][5], you can see metadata from your Iceberg tables in Datadog through the [AWS Glue integration][6]. Use this data to monitor table schemas, data freshness, row counts, and table sizes.
