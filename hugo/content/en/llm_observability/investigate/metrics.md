@@ -272,7 +272,7 @@ The following metrics are deprecated, and are maintained only for backward compa
 [6]: /data_security/data_retention_periods/
 [7]: /llm_observability/data_governance/#traces-and-spans
 [8]: /llm_observability/data_governance/
-[9]: /llm_observability/configure/ai_gateway/
+[9]: /ai_gateway/
 [10]: #gateway-streaming-latency
 [11]: /llm_observability/investigate/cost/#metrics
 [12]: /llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics

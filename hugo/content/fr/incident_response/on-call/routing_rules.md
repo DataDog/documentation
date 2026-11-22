@@ -12,6 +12,8 @@ title: Règles de routage
 
 Les règles de routage déterminent la manière dont les alertes sont dirigées au sein de votre équipe. Au lieu d'envoyer toutes les alertes via une politique d'escalade unique, vous pouvez créer des règles qui acheminent les alertes en fonction de métadonnées telles que la priorité, les tags, le statut du monitor ou l'heure de la journée.
 
+Les règles de routage sont configurées par Team. Il n'existe pas de règles de routage à l'échelle de l'organisation ; chaque Team définit donc les siennes.
+
 ## Créer une règle de routage {#create-a-routing-rule}
 
 Les règles sont évaluées de haut en bas. La dernière règle doit être une règle de repli qui achemine toutes les alertes ne correspondant à aucune règle vers une politique d'escalade.
@@ -35,9 +37,9 @@ Pour créer une règle de routage :
 
 1. Sous **Set targets**, cliquez sur **Add** et sélectionnez un type de cible. Le type de cible détermine ce qui se passe lorsqu'une alerte correspond à la règle :
    - **Page escalation policy** : sélectionnez une [politique d'escalade][3] et définissez l'urgence sur `DYNAMIC` (selon le statut de l'alerte), `HIGH` ou `LOW`.
-   - **Send Slack message** (Preview) : sélectionnez un espace de travail et un canal Slack.
-   - **Send Microsoft Teams message** (Preview) : sélectionnez un tenant Teams, une équipe et un canal.
-   - **Run Workflow** (Preview) : sélectionnez un [Workflow][4] existant.
+   - **Send Slack message** : sélectionnez un espace de travail et un canal Slack.
+   - **Send Microsoft Teams message** : sélectionnez un locataire Teams, une équipe et un canal.
+   - **Run Workflow** : sélectionnez un [Workflow][4] existant.
    - **Sync with a ServiceNow Incident** (Preview) : sélectionnez une connexion ServiceNow. Datadog crée un incident ServiceNow pour chaque Page et le maintient synchronisé. Consultez [Intégrer ServiceNow à Datadog On-Call][5].
 
 1. Si vous avez sélectionné **Page escalation policy**, vous pouvez également configurer [Acknowledgment timeout](#acknowledgment-timeout) :

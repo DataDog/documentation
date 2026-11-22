@@ -55,3 +55,43 @@ entries:
     operations:
       - ListTeamHierarchyMembers
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AddMemberTeam
+      - AddTeamHierarchyLink
+      - CreateTeam
+      - CreateTeamConnections
+      - CreateTeamLink
+      - CreateTeamMembership
+      - CreateTeamNotificationRule
+      - DeleteTeam
+      - DeleteTeamConnections
+      - DeleteTeamLink
+      - DeleteTeamMembership
+      - DeleteTeamNotificationRule
+      - GetTeam
+      - GetTeamHierarchyLink
+      - GetTeamLink
+      - GetTeamLinks
+      - GetTeamMemberships
+      - GetTeamNotificationRule
+      - GetTeamNotificationRules
+      - GetTeamPermissionSettings
+      - GetTeamSync
+      - GetUserMemberships
+      - ListMemberTeams
+      - ListTeamConnections
+      - ListTeamHierarchyLinks
+      - ListTeamHierarchyMembers
+      - ListTeams
+      - RemoveMemberTeam
+      - RemoveTeamHierarchyLink
+      - SyncTeams
+      - UpdateTeam
+      - UpdateTeamLink
+      - UpdateTeamMembership
+      - UpdateTeamNotificationRule
+      - UpdateTeamPermissionSetting
+    title: Document rate-limit headers on the shared 429 responses

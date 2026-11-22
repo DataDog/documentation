@@ -18,6 +18,9 @@ further_reading:
   - link: "/cloud_cost_management/"
     tag: "Documentation"
     text: "Learn about Cloud Cost Management"
+  - link: "/cloud_cost_management/cloud_cost_skill/#savings-analysis"
+    tag: "Documentation"
+    text: "Find savings opportunities with the Cloud Cost skill in Bits Chat"
   - link: "/integrations/guide/aws-integration-and-cloudwatch-faq/"
     tag: "Documentation"
     text: "AWS Integration and CloudWatch FAQ"
@@ -414,6 +417,12 @@ multifiltersearch:
       recommendation_type: Delete AKS Cluster
       recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: AKS Cluster
+      recommendation_type: Downsize AKS Node Pool
+      recommendation_description: Identifies AKS node pools with GPUs where pods requested only part of the GPU capacity, even on their busiest day, and recommends running fewer nodes.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: Azure
       resource_type: App Service Plan
@@ -600,6 +609,12 @@ multifiltersearch:
       recommendation_type: Enable Auto-Pause on Serverless SQL Server Database
       recommendation_description: Identifies serverless SQL Server Databases with auto-pause disabled that sat idle for long stretches, and recommends enabling auto-pause so compute stops billing while they are idle.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: SQL Elastic Pool
+      recommendation_type: Delete Empty Azure SQL Elastic Pool
+      recommendation_description: Identifies Azure SQL elastic pools that have held no databases for at least two weeks, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: SQL Elastic Pool
@@ -732,6 +747,12 @@ multifiltersearch:
       recommendation_type: Delete Idle BigQuery Dataset
       recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: GCP
+      resource_type: BigQuery Project
+      recommendation_type: Migrate BigQuery Project to Capacity Pricing
+      recommendation_description: Identifies Google Cloud projects whose on-demand BigQuery queries scan many bytes for the slot time they use and recommends running them on Enterprise edition capacity with autoscaling and no commitment.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
       resource_type: Compute Address
@@ -780,6 +801,12 @@ multifiltersearch:
       recommendation_type: Reduce Minimum Capacity
       recommendation_description: A Compute Instance Group Autoscaler with a minimum capacity of instances that can be reduced.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: GKE Node Pool
+      recommendation_type: Downsize GKE Node Pool
+      recommendation_description: Identifies GKE node pools with GPUs where pods requested only part of the GPU capacity, even on their busiest day, and recommends running fewer nodes.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: GCP
       resource_type: CloudSQL Instance
@@ -896,6 +923,8 @@ Recommendations support [Tag Pipelines][11], allowing you to filter, group, and 
 
 You can also query your recommendations from an AI agent with the [`cost_recommendations`][17] tool in the Datadog MCP Server.
 
+To find savings beyond these rule-based recommendations, run a [savings analysis][20] in Bits Chat. Click {{< ui >}}Optimize{{< /ui >}} in the filter bar to analyze the scope that your filters describe. Bits Chat investigates the scope's cost and usage data. It then writes savings opportunities, each with an owner, an estimated savings range, and supporting evidence. You can also start a savings analysis from the {{< ui >}}Ask Bits for new savings opportunities{{< /ui >}} banner.
+
 ## Recommendation categories
 
 Below are the available cloud cost recommendation categories and their descriptions.
@@ -997,6 +1026,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 
 - **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
 - **Copy Fix Prompt**: For recommendations where a prompt fix is available, click {{< ui >}}Copy Fix Prompt{{< /ui >}} in the recommendation side panel. This copies a ready-to-use prompt to your clipboard, describing the recommendation, the affected resource, and the suggested change. Paste the prompt into the AI coding agent you already use, such as Cursor, GitHub Copilot, or Claude Code. The agent can then implement the change in your repository. This differs from [Bits Code][14], which automatically opens a pull request for a narrower set of recommendation types. No additional setup is required.
+- **[Savings analysis in Bits Chat][20]**: Click {{< ui >}}Optimize{{< /ui >}} in the filter bar to have Bits Chat find savings opportunities in the filtered scope. Bits Chat can create Work Management work items or Notebooks so that each owning team can act on them.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
 - **[Cost Optimization Automations][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
 - **[Notifications][16]**: Set up notification rules that send a recurring Slack or Microsoft Teams summary of matching recommendations, without taking any action.
@@ -1030,3 +1060,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [17]: /mcp_server/tools/#cost_recommendations
 [18]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
 [19]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+[20]: /cloud_cost_management/cloud_cost_skill/#savings-analysis

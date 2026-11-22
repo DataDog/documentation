@@ -123,12 +123,15 @@ Real-time anomaly notifications require estimated cost data: LLM cost data from 
 To set up real-time anomaly notifications:
 
 1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
+
+   {{< img src="cloud_cost/anomalies/real-time-notifications-form.png" alt="The real-time notifications form, with AI providers selected and options to notify by email, Slack, or Microsoft Teams." style="width:80;" >}}
+
 1. Select {{< ui >}}AI providers{{< /ui >}} and turn on {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}}, or select {{< ui >}}Cloud/SaaS providers{{< /ui >}} and turn on {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. The {{< ui >}}Cloud/SaaS providers{{< /ui >}} option covers AWS, Azure, and Google Cloud.
 1. Under {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, optionally group alerts by up to two tags and filter the cost.
 1. Set the minimum cost impact. Datadog sends a notification only when the anomaly cost over the next 24 hours is likely to exceed the higher of:
    - An amount in your organization's currency: a whole number greater than 0 (default: 500)
    - A percentage of the baseline cost: 0-100% (default: 5%)
-1. Under {{< ui >}}Choose who to notify{{< /ui >}}, add email addresses or Slack channels.
+1. Under {{< ui >}}Choose who to notify{{< /ui >}}, add email addresses, Slack channels, or Microsoft Teams channels.
 1. Click {{< ui >}}Save configuration{{< /ui >}}. Changes apply to anomalies detected after you save.
 
 Real-time anomalies are sent only as notifications. They don't appear on the {{< ui >}}Anomalies{{< /ui >}} tab and don't affect anomalies detected from finalized billing data.
