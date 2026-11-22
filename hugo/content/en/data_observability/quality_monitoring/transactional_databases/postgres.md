@@ -30,7 +30,7 @@ PostgreSQL is collected through the [Datadog Agent][1] rather than through a dir
 
 Before you begin, make sure you have:
 
-- Datadog Agent `7.81.0` or later installed on a host that can reach your PostgreSQL instances. See [Agent installation][1] for your platform.
+- Datadog Agent `7.82.0` or later installed on a host that can reach your PostgreSQL instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][8] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
 - Superuser access to your PostgreSQL instance, to create the Datadog user and grant privileges.
 - Preview access enabled for your organization by a Datadog representative.
@@ -66,12 +66,12 @@ If [Database Monitoring][2] is already running against this database, most of th
 1. **Check your Agent version.** Run `datadog-agent status` and read the version from the header and from the Postgres check line in the Collector section:
 
    ```text
-   Agent (v7.81.0)
+   Agent (v7.82.0)
    ...
      postgres (23.9.1)
    ```
 
-   If the Agent is older than `7.81.0`, [upgrade the Agent][6]. Upgrading only the Postgres check with `datadog-agent integration install` is not sufficient: the Remote Configuration handler that delivers monitor queries ships with the Agent itself, not with the check.
+   If the Agent is older than `7.82.0`, [upgrade the Agent][6]. Upgrading only the Postgres check with `datadog-agent integration install` is not sufficient: the Remote Configuration handler that delivers monitor queries ships with the Agent itself, not with the check.
 
    Database Monitoring does not require Remote Configuration, so it may be disabled on an Agent that is otherwise healthy. Confirm it is enabled before you continue: see [Enable Remote Configuration](#enable-remote-configuration).
 
