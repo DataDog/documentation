@@ -40,7 +40,7 @@ For Databricks, Optimize also shows cluster recommendations from [Cloud Cost Man
 ### Query and warehouse recommendations
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Query and warehouse recommendations are in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
+Query and warehouse recommendations are in Preview. Contact your Datadog representative to enable them for your organization.
 {{< /callout >}}
 
 Datadog generates query and warehouse recommendations from the query history and warehouse usage that it collects through your warehouse integrations. Query recommendations analyze the last 30 days of query history. Warehouse recommendations analyze the last seven days of warehouse activity.
