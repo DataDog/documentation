@@ -74,7 +74,7 @@ Select an asset to open its page. The tabs on an asset page depend on the asset 
 ### Schema change and query tabs
 
 - **Schema Changes**: The [schema changes][5] Datadog detected on the asset. Database, schema, table, and column pages have this tab, and so do Snowflake and BigQuery account pages. The tab is disabled for an asset whose account isn't configured in Data Observability. Viewing detected changes doesn't require a monitor. To get alerts when a schema changes, create a [schema change monitor][6]. Schema change monitors are in Preview. For the platforms that detect schema changes, see [Supported Platforms][9].
-- **Queries**: The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab. To open these queries on the Queries page, see [View the queries for a table][10].
+- **Queries** (Preview): The top queries that read from or write to the asset, on separate {{< ui >}}Reads{{< /ui >}} and {{< ui >}}Writes{{< /ui >}} tabs. Snowflake, BigQuery, and Redshift table and column pages have this tab. To open these queries on the Queries page, see [View the queries for a table][10].
 
 ### Navigation tree
 
