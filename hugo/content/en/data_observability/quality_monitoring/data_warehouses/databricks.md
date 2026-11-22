@@ -32,7 +32,7 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
    **Note**: Workspace Admin permissions are not required for Quality Monitoring. Each Databricks workspace supports one service principal for Data Observability, so you can't assign separate service principals to different monitor types in the same workspace.
 
-2. In the integration tile, provide the ID of a Pro or Serverless [SQL warehouse][3] for Datadog to query, and grant the service principal `CAN USE` on that warehouse. Datadog runs Quality Monitoring queries on this warehouse. Classic SQL warehouses are not supported.
+2. In the integration tile, provide the ID of a Pro or Serverless [SQL warehouse][3] for Datadog to query. Grant the service principal `CAN USE` on that warehouse. Datadog runs Quality Monitoring queries on this warehouse. Classic SQL warehouses are not supported.
 3. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
 4. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
