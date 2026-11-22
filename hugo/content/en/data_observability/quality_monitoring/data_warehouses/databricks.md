@@ -34,6 +34,9 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
 2. In the integration tile, provide the ID of a Pro or Serverless [SQL warehouse][3] for Datadog to query. Grant the service principal `CAN USE` on that warehouse. Datadog runs Quality Monitoring queries on this warehouse. Classic SQL warehouses are not supported.
 3. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
+
+   <!-- SCREENSHOT: Databricks integration tile, a sample workspace being added, showing the field for the SQL warehouse ID and the Data Observability toggle turned on. -->
+
 4. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
 ### Step 2 - Grant access
