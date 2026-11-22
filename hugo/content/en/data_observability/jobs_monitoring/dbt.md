@@ -109,7 +109,7 @@ Follow the steps below to connect dbt Core to Datadog.
 1. Install the `openlineage-dbt` package. Reference [Using dbt with Amazon MWAA][3] for setting up this package in your virtual environment.
 
    ```shell
-   pip3 install openlineage-dbt>=1.39.0
+   pip3 install "openlineage-dbt>=1.39.0"
    ```
 
 ## Set the environment variables
@@ -181,15 +181,19 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists runs that are still in progress with a `RUNNING` status. Their duration counts up while the run continues. To show only in-progress runs, select {{< ui >}}RUNNING{{< /ui >}} in the {{< ui >}}Filter status{{< /ui >}} menu. In-progress runs appear when the selected time frame extends to the present.
 
+Job duration monitors can alert on a dbt job while it's still running. See [How job duration is evaluated][2].
+
 ## Exposures
 
-Datadog shows [dbt exposures][1] in lineage, downstream of the tables they depend on. Datadog reads exposures from successful runs:
+Datadog shows [dbt exposures][1] in lineage, downstream of the tables they depend on. Where Datadog reads exposures depends on how you run dbt:
 
-- **dbt Cloud**: Datadog reads exposures from the run's artifacts. Runs triggered by pull requests don't update exposures.
-- **dbt Core**: Datadog reads exposures from the OpenLineage events that `openlineage-dbt` 1.52.0 or later sends.
+- **dbt Cloud**: Datadog reads exposures from the manifest of each successful run. Runs triggered by pull requests, such as the CI job that [CI/CD checks][3] use, don't update exposures.
+- **dbt Core**: Datadog reads exposures from the `dbt_exposures` facet that `openlineage-dbt` 1.52.0 and later add to the datasets of models that complete. Earlier versions don't send exposures. To upgrade, run `pip3 install --upgrade "openlineage-dbt>=1.52.0"`.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.getdbt.com/docs/build/exposures
+[2]: /monitors/types/data_observability/#how-job-duration-is-evaluated
+[3]: /data_observability/cicd/

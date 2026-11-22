@@ -19,6 +19,10 @@ further_reading:
       text: 'Jobs Monitoring'
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+CI/CD checks are in Preview.
+{{< /callout >}}
+
 ## Overview
 
 {{< img src="data_observability/cicd/cicd-overview.png" alt="The CI/CD feature report page" style="width:100%;" >}}
@@ -43,9 +47,11 @@ Drift Detection compares the data produced by your models before and after your 
 
 Datadog doesn't run checks or post a comment on a pull request in the following cases:
 
+- The pull request is closed or merged.
+- The pull request is a draft, and `Run on Draft Pull/Merge Requests` is disabled. This setting applies to each check separately.
 - None of the changed files are inside the configured dbt project folder.
 - The directories filter is set, and none of the changed files are inside a listed directory.
-- None of the changed files map to a dbt model in the Data Observability Catalog. For example, the pull request changes only YAML files, macros, or documentation.
+- None of the changed files map to a dbt model in the Data Catalog. For example, the pull request changes only YAML files, macros, or documentation.
 - The dbt model filter excludes every changed model.
 
 Checks support dbt models and seeds. If a pull request changes only dbt snapshots, the check result says that snapshots aren't supported.
@@ -75,8 +81,19 @@ Datadog can detect the folder from the dbt metadata it receives for the project 
 
 By default, a change to any dbt model in the project can trigger checks. To narrow this, use the fields under {{< ui >}}Trigger Settings{{< /ui >}}:
 
-- {{< ui >}}dbt model filter{{< /ui >}}: Only models that match the filter can trigger checks.
-- {{< ui >}}Directories filter{{< /ui >}}: Only changes to files under the listed directories can trigger checks. Enter each path relative to the dbt project folder (for example, `models/marts`) and click {{< ui >}}Add path{{< /ui >}}. A directory matches only the files inside it and its subdirectories. For example, `models/mart` doesn't match `models/marts/orders.sql`.
+- {{< ui >}}dbt model filter{{< /ui >}}: Only models that match the filter can trigger checks. Enter a search query for the project's dbt models, for example `name:*prod*`. The form shows how many dbt models match.
+- {{< ui >}}Directories filter{{< /ui >}}: Only changes to files under the listed directories can trigger checks. Enter each path relative to the dbt project folder and click {{< ui >}}Add path{{< /ui >}}. A directory matches the files inside it and its subdirectories, and paths are case-sensitive.
+
+For example, if the dbt project folder is `analytics` and the directories filter lists `models/marts`:
+
+| Changed file | Can trigger checks |
+| ------------ | ------------------ |
+| `analytics/models/marts/orders.sql` | Yes |
+| `analytics/models/marts/finance/revenue.sql` | Yes |
+| `analytics/models/staging/stg_orders.sql` | No |
+| `analytics/models/marts_legacy/orders.sql` | No. `models/marts` matches only the `marts` directory, not other names that start with `marts`. |
+
+If you set both filters, a changed model must pass both.
 
 ### 4. Configure checks
 

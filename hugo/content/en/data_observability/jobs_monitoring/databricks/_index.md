@@ -447,7 +447,7 @@ A Databricks job can trigger another job with a Run Job task. Jobs Monitoring sh
 
 The parent job's run also records the clusters that its child jobs run on. This includes the clusters of jobs that those child jobs trigger in turn. Logs for the parent run include logs from these clusters.
 
-The clusters that child jobs run on need the Datadog Agent too. The Agent on each cluster sends that cluster's utilization metrics and logs. The [Datadog managed global init script](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent) installs the Agent on every cluster in the workspace at startup, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
+The clusters that child jobs run on need the Datadog Agent too. The Agent on each cluster sends that cluster's utilization metrics and logs. The [Datadog managed global init script][36] installs the Agent on every cluster in the workspace at startup, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
 
 The user or service principal that connects Datadog to the workspace needs `CAN VIEW` on each child job. Without it, Datadog leaves that job's clusters out of the parent run. The Databricks integration tile then shows a warning that lists the affected parent jobs. See [Workspace permissions](#workspace-permissions).
 
@@ -638,3 +638,4 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
 [34]: https://docs.databricks.com/aws/en/compute/serverless/
 [35]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[36]: ?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent
