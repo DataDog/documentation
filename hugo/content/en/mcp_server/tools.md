@@ -1119,7 +1119,7 @@ Retrieves the Spark SQL physical execution plan for a stage, including join stra
 ### `list_data_observability_recommendations`
 *Toolset: **data-observability***\
 *Permissions Required: `APM Read`*\
-Lists cost and performance optimization recommendations for data jobs and queries (Spark, Databricks, Snowflake, BigQuery), with estimated cost and duration savings. Returns lightweight summaries with cursor pagination.
+Lists cost and performance optimization recommendations for data jobs and queries (Spark, Databricks, Snowflake, BigQuery), with estimated cost and duration savings. Returns lightweight summaries with cursor pagination. These are the recommendations shown in [Optimize][107].
 
 - What cost-saving recommendations do I have for my Databricks jobs?
 - Are there any recommendations for reducing data skew in my Spark jobs?
@@ -1134,7 +1134,7 @@ Retrieves full details of a specific Data Observability recommendation by ID, in
 ### `update_data_observability_recommendation_status`
 *Toolset: **data-observability***\
 *Permissions Required: `Data Observability Catalog Write`*\
-Sets the status of a Data Observability recommendation to `FOR_REVIEW`, `REVIEWED`, `IGNORED`, or `RESOLVED`. For example, set a recommendation to `RESOLVED` after you apply it, or to `IGNORED` to dismiss it. Requires `recommendation_id` and `status`.
+Sets the status of a Data Observability recommendation to `FOR_REVIEW`, `REVIEWED`, `IGNORED`, or `RESOLVED`. For example, set a recommendation to `RESOLVED` after you apply it, or to `IGNORED` to dismiss it. Requires `recommendation_id` and `status`. These values correspond to the {{< ui >}}For Review{{< /ui >}}, {{< ui >}}Reviewed{{< /ui >}}, {{< ui >}}Ignored{{< /ui >}}, and {{< ui >}}Resolved{{< /ui >}} statuses in [Optimize][108].
 
 - Mark recommendation `abc123` as resolved.
 - Dismiss the recommendations I reviewed for this Databricks job.
@@ -3916,6 +3916,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /monitors/types/data_observability/#annotate-bounds
+[107]: /data_observability/optimize/
+[108]: /data_observability/optimize/#track-status
 
 ## Further reading
 
