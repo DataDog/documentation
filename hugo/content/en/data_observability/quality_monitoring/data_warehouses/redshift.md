@@ -23,7 +23,8 @@ Before you begin, make sure you have:
 - An [AWS account connected in Datadog][3].
   - Log forwarding is not required for Data Observability.
 - A Redshift superuser or database user with the ability to create roles and grant privileges.
-- If your Redshift cluster or workgroup restricts network access by IP, add Datadog webhook IPs to your VPC security group inbound rules. For the list of IPs, see the `webhooks` section of the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+
+Datadog runs queries through the [Amazon Redshift Data API][4] with your connected AWS account, so your cluster or workgroup doesn't need an inbound rule for Datadog. See [Network Requirements for Data Observability][5].
 
 ## Set up your account in Redshift
 
@@ -189,3 +190,5 @@ After the initial sync completes, create a [Data Observability monitor][2] to st
 [1]: https://app.datadoghq.com/data-obs/settings/integrations
 [2]: /monitors/types/data_observability/
 [3]: /integrations/amazon-web-services/
+[4]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
+[5]: /data_observability/network/

@@ -596,6 +596,8 @@ If you are controlling Databricks API access with [IP access lists][13], allow-l
 
 To monitor workspaces that use [Databricks Private Link][14] connectivity, see [Private Link Connectivity][15].
 
+For the other network connections that Data Observability uses, see [Network Requirements for Data Observability][36].
+
 [15]: /data_observability/jobs_monitoring/databricks/private_link
 
 ## Further Reading
@@ -628,3 +630,4 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
 [34]: https://docs.databricks.com/aws/en/compute/serverless/
 [35]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[36]: /data_observability/network/

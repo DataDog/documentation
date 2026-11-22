@@ -32,6 +32,7 @@ Before you begin, make sure you have:
 
 - Datadog Agent `7.81.0` or later installed on a host that can reach your PostgreSQL instances. See [Agent installation][1] for your platform.
 - [Remote Configuration][8] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
+- Outbound network access from the Agent host to Datadog. See [Network Requirements for Data Observability][15].
 - Superuser access to your PostgreSQL instance, to create the Datadog user and grant privileges.
 - Preview access enabled for your organization by a Datadog representative.
 
@@ -275,3 +276,4 @@ Data Observability lists all PostgreSQL tables from instances where `dbm` and `c
 [12]: /account_management/rbac/permissions/#permissions-list
 [13]: /agent/configuration/agent-configuration-files/#main-configuration-file
 [14]: /agent/guide/setup_remote_config/#agent-remote-configuration-status
+[15]: /data_observability/network/#postgresql
