@@ -24,7 +24,7 @@ Before you begin, make sure you have:
   - Log forwarding is not required for Data Observability.
 - A Redshift superuser or database user with the ability to create roles and grant privileges.
 
-Datadog runs queries through the [Amazon Redshift Data API][4] with your connected AWS account, so your cluster or workgroup doesn't need an inbound rule for Datadog. See [Network Requirements for Data Observability][5].
+Datadog runs queries through the [Amazon Redshift Data API][4] with your connected AWS account. Your cluster or workgroup doesn't need an inbound rule for Datadog. See [Network Requirements for Data Observability][5].
 
 ## Set up your account in Redshift
 

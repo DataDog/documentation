@@ -52,7 +52,7 @@ For [Microsoft Fabric][7] (Preview), Datadog connects to each warehouse's SQL en
 
 ## AWS integrations
 
-For [Amazon Redshift][8], [Amazon Athena][9], and [AWS Glue][10], Datadog calls AWS APIs with the IAM role in your [connected AWS account][11]. Datadog runs Redshift queries through the [Amazon Redshift Data API][12], so your cluster or workgroup doesn't need an inbound rule for Datadog.
+For [Amazon Redshift][8], [Amazon Athena][9], and [AWS Glue][10], Datadog calls AWS APIs with the IAM role in your [connected AWS account][11]. Datadog runs Redshift queries through the [Amazon Redshift Data API][12]. Your cluster or workgroup doesn't need an inbound rule for Datadog.
 
 To send Spark lineage from AWS Glue jobs, see [OpenLineage emitters](#openlineage-emitters).
 
@@ -75,7 +75,7 @@ The following sources send OpenLineage events to the Data Observability intake d
 
 Emitters send events over HTTPS (port 443) to the `/api/v1/lineage` path. If your network restricts outbound traffic, allow `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} by domain name from the hosts that run your emitters.
 
-If you [set up the Datadog Agent as an OpenLineage proxy][19], your applications send events to the Agent over HTTP on the Agent's trace port (`8126` by default). The Agent forwards them to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} over HTTPS. In this setup, allow the domain from the Agent's host. If the Agent runs on a different host than your applications, also allow traffic from your applications to the Agent on that port.
+If you [set up the Datadog Agent as an OpenLineage proxy][19], your applications send events to the Agent over HTTP. The Agent listens on its trace port, `8126` by default, and forwards the events to `data-obs-intake.`{{< region-param key="dd_site" code="true" >}} over HTTPS. In this setup, allow the domain from the Agent's host. If the Agent runs on a different host than your applications, also allow traffic from your applications to the Agent on that port.
 
 ## Datadog Agent on Spark clusters
 
