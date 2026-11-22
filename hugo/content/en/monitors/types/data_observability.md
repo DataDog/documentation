@@ -480,10 +480,6 @@ The monitor recovers automatically when a later run succeeds.
 
 ### Job duration
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Job duration monitors are in Preview.
-{{< /callout >}}
-
 The {{< ui >}}Job duration{{< /ui >}} check alerts when a run takes too long. For some technologies, the check also evaluates runs that are still in progress, so an alert can fire before the run finishes. See [How job duration is evaluated](#how-job-duration-is-evaluated). Use it to catch a pipeline that is stuck or running late while there is still time to act, even if the run eventually succeeds.
 
 Choose a {{< ui >}}Detection method{{< /ui >}}:
