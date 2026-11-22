@@ -69,6 +69,8 @@ Use the facets panel next to the results to filter the list without typing a que
 
 Select an asset to open its page. The tabs on an asset page depend on the asset type. For example, a table page has {{< ui >}}Summary{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, {{< ui >}}Lineage{{< /ui >}}, and {{< ui >}}Schema Changes{{< /ui >}} tabs. It also has a {{< ui >}}dbt{{< /ui >}} tab when a dbt model builds the table. The {{< ui >}}Summary{{< /ui >}} tab of a table page also lists the table's columns. Snowflake account, database, schema, table, and column pages have a {{< ui >}}Data Diff{{< /ui >}} tab, which is in Preview. See [View results][8].
 
+<!-- SCREENSHOT: Data Catalog table page, a sample table with monitors and downstream dependencies, showing the Summary, Monitors, Lineage, and Schema Changes tabs, the column list on the Summary tab, and the navigation tree sidebar with red and gray monitor counts and lineage indicators. -->
+
 ### Schema change and query tabs
 
 - **Schema Changes**: The [schema changes][5] Datadog detected on the asset. Database, schema, table, and column pages have this tab, and so do Snowflake and BigQuery account pages. The tab is disabled for an asset whose account isn't configured in Data Observability. Viewing detected changes doesn't require a monitor. To get alerts when a schema changes, create a [schema change monitor][6]. Schema change monitors are in Preview. For the platforms that detect schema changes, see [Supported Platforms][9].
