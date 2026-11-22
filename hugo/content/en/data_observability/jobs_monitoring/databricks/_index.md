@@ -441,15 +441,13 @@ In Datadog, view the [Data Observability: Jobs Monitoring][6] page to see a list
 
 If some jobs are not visible, navigate to the [Configuration][9] page to understand why. This page lists all your Databricks jobs not yet configured with the Agent on their clusters, along with guidance for completing setup.
 
-To review recommendations that reduce the cost and duration of your Databricks jobs, see [Optimize][36].
-
 ## Nested jobs
 
 A Databricks job can trigger another job with a Run Job task. Jobs Monitoring shows the parent job and the child job as separate jobs, each with its own runs. The span of the parent's Run Job task includes a span link to the run of the child job that it triggered.
 
 The parent job's run also records the clusters that its child jobs run on. This includes the clusters of jobs that those child jobs trigger in turn. Logs for the parent run include logs from these clusters.
 
-The clusters that child jobs run on need the Datadog Agent too. The Agent on each cluster sends that cluster's utilization metrics and logs. The [Datadog managed global init script][37] installs the Agent on every cluster in the workspace at startup, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
+The clusters that child jobs run on need the Datadog Agent too. The Agent on each cluster sends that cluster's utilization metrics and logs. The [Datadog managed global init script][36] installs the Agent on every cluster in the workspace at startup, except clusters in **Standard** access mode. If you install the Agent with a cluster policy or on specific clusters, apply the same setup to the child jobs' clusters.
 
 The user or service principal that connects Datadog to the workspace needs `CAN VIEW` on each child job. Without it, Datadog leaves that job's clusters out of the parent run. The Databricks integration tile then shows a warning that lists the affected parent jobs. See [Workspace permissions](#workspace-permissions).
 
@@ -608,8 +606,6 @@ If you are controlling Databricks API access with [IP access lists][13], allow-l
 
 To monitor workspaces that use [Databricks Private Link][14] connectivity, see [Private Link Connectivity][15].
 
-For the other network connections that Data Observability uses, see [Network Requirements for Data Observability][38].
-
 [15]: /data_observability/jobs_monitoring/databricks/private_link
 
 ## Further Reading
@@ -642,6 +638,4 @@ For the other network connections that Data Observability uses, see [Network Req
 [33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
 [34]: https://docs.databricks.com/aws/en/compute/serverless/
 [35]: /data_observability/quality_monitoring/data_warehouses/databricks/
-[36]: /data_observability/optimize/#job-recommendations
-[37]: ?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent
-[38]: /data_observability/network/
+[36]: ?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent
