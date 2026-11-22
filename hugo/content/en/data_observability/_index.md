@@ -46,6 +46,7 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
    {{< nextlink href="/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
    {{< nextlink href="/data_observability/optimize/" >}}Optimize: Review recommendations that reduce the cost and duration of jobs, queries, and warehouses.{{< /nextlink >}}
    {{< nextlink href="/data_observability/cicd/" >}}CI/CD: Prevent data-quality issues before they're merged.{{< /nextlink >}}
+   {{< nextlink href="/data_observability/supported_platforms/" >}}Supported Platforms: Check which capabilities each data platform and job technology supports.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

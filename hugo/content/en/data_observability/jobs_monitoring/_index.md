@@ -58,11 +58,13 @@ Data Observability: Jobs Monitoring also supports Apache Spark jobs on the follo
   {{< image-card href="/data_observability/jobs_monitoring/dataproc/" src="integrations_logos/google_cloud_dataproc.png" alt="GCP Dataproc" >}}
 {{< /card-grid >}}
 
+For the capabilities that each job technology supports, see [Supported Platforms][4].
+
 ## Explore Data Observability: Jobs Monitoring
 
 ### Easily identify unreliable and inefficient jobs
 
-View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized. To review cost and performance recommendations for these jobs, see [Optimize][4].
+View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized. To review cost and performance recommendations for these jobs, see [Optimize][5].
 
 ### Receive alerts on problematic jobs
 
@@ -95,4 +97,5 @@ To determine why a stage is taking a long time to complete, you can use the {{< 
 [1]: https://app.datadoghq.com/monitors/templates
 [2]: /data_observability/lineage/
 [3]: /monitors/types/data_observability/#job-monitors
-[4]: /data_observability/optimize/
+[4]: /data_observability/supported_platforms/
+[5]: /data_observability/optimize/
