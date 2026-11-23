@@ -189,7 +189,7 @@ In Resource View, the details pane shows the following for the explored or filte
 
 - The resource's status, such as **HEALTHY** or **CRITICAL**.
 - **View details**, which opens the resource's side panel over the map to show more data, such as logs and traces.
-- A link to open the resource in its product, such as **View in APM** for a service. Use the dropdown next to the link to open the resource in another product.
+- A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a pod. Use the dropdown next to the link to open the resource in another product.
 - Infrastructure context, such as the environment, availability zone, VPC, data center, and security groups.
 - The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
