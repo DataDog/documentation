@@ -108,6 +108,8 @@ let flagsConfig = Flags.Configuration(
 )
 {{< /code-block >}}
 
+If you use [`flagSelection`][2] to load a subset of flags, your proxy must return the `DD-Flag-Selection-Ignored` response header to the app unchanged. Datadog sets this header when it ignores a selection and returns the full flag configuration. If your proxy drops the header, the full configuration still loads, but the SDK cannot report that the selection was ignored.
+
 ### Event upload proxy
 
 To route exposure and evaluation event uploads through your proxy, set `customExposureEndpoint` and `customEvaluationEndpoint`.
@@ -130,6 +132,7 @@ Your proxy must forward each request to the corresponding Datadog intake endpoin
 | `/api/v2/flagevaluation` | `https://api.datadoghq.com/api/v2/flagevaluation` |
 
 [1]: /getting_started/site/
+[2]: /feature_flags/client/ios/#load-a-subset-of-flags
 
 {{% /tab %}}
 
