@@ -21,7 +21,7 @@ Control access at the organization level with the following permissions:
 | Permission | Description |
 |------------|-------------|
 | **Feature Flag Config Read** | View feature flag configuration |
-| **Feature Flag Config Write** | Create and modify feature flag configuration |
+| **Feature Flag Config Write** | Create, clone, and modify feature flag configuration |
 | **Feature Flag Environment Config Read** | View environment configuration |
 | **Feature Flag Environment Config Write** | Create and modify environments |
 | **Feature Flag Approvals Override** | Disable approvals on existing flags and override the approvals workflow |
@@ -44,6 +44,12 @@ Grant one of the following access levels to individual users, service accounts, 
 
 Users without granular access can still view the flag if they have read permissions at the organization level.
 
+## Cloning permissions
+
+[Cloning a flag][5] requires **Feature Flag Config Read**, **Feature Flag Config Write**, **Feature Flag Environment Config Read**, and access to view the source flag.
+
+The clone copies the source flag's granular access controls and adds the person creating the clone as an **Editor**. If the source has no granular access restrictions, the clone has none.
+
 ## Experiment approval permissions
 
 Experiment approvals also require access to the experiment. Submitting or applying an experiment action requires `product_analytics_experiments_write` and Editor access to the experiment. Approving a request without applying it, or rejecting a request, requires flag Editor access or **Feature Flag Approvals Override**. Neither action requires permission to edit the experiment. See [Experiment Approvals][4] for the full permission matrix and a role configuration that allows submission without approval.
@@ -56,3 +62,4 @@ Experiment approvals also require access to the experiment. Submitting or applyi
 [2]: /feature_flags/concepts/approvals/#submit-changes-for-review
 [3]: /feature_flags/concepts/approvals/#approve-reject-or-apply
 [4]: /experiments/approvals/#permissions
+[5]: /feature_flags/concepts/cloning/
