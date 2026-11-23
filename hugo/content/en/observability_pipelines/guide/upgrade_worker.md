@@ -70,8 +70,8 @@ Worker version 2.26.1 gives you access to the following:
     - Reports the failed source's error when the Worker stops all sources because one of them failed or panicked.
 - Fixed the Worker panic `Replacing unknown sink from fanout` on configuration reload when a component ID is reused by a different kind of component, or when a failed reload restores a removed component.
 - TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously these clients had their connection rejected with a `session id context uninitialized` error.
-- The Custom Processor now:
-    - Includes the message passed to `abort` in the error details when it drops an event.
+- For the Custom Processor:
+    - The `Event mapping aborted.` debug log now includes the reason why the mapping was aborted in its error field.
     - Returns an error for field paths with array indexes outside the `isize` range.
 
 ## Worker version 2.26.0
