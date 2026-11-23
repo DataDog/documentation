@@ -66,7 +66,7 @@ For an added component, the diff shows the full configuration as new lines.
 
 For a removed component, the diff shows the full configuration as removed lines.
 
-{{< img src="observability_pipelines/version_history/removed_component_diff.png" alt="The diff for a removed Spike Protection processor group, with the configuration shown as removed lines" style="width:80%;" >}}
+{{< img src="observability_pipelines/version_history/removed_component_diff.png" alt="The diff for a removed Spike Protection processor group, with the configuration shown as removed lines." style="width:80%;" >}}
 
 For a modified component, the diff highlights the lines that changed.
 
