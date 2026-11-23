@@ -114,28 +114,18 @@ The limit of signals per case only applies to signal grouping. You can still add
 
 ## See why a signal was grouped
 
-When automatic case creation creates or updates a case, Datadog adds an entry to the case timeline. The entry title shows what happened:
+Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows the signal that triggered the update, the grouping strategies that found related signals, and the result. If a strategy found more related signals than its limit, the entry says so.
 
-| Entry | Message | When |
-| --- | --- | --- |
-| {{< ui >}}Case created{{< /ui >}} | Datadog automatically created this case from a signal. | Datadog creates a new case. |
-| {{< ui >}}Rollover case created{{< /ui >}} | Datadog automatically created this case from a signal because the original case reached its grouping limit of 100 signals. | The eligible case is full, so Datadog creates a rollover case. |
-| {{< ui >}}Signal added{{< /ui >}} | Datadog automatically added a signal to this case. | Datadog adds the new signal to an existing case. |
-| {{< ui >}}Signal added{{< /ui >}} | Datadog matched a signal that's already in this case. | The new signal is already in this case. |
-| {{< ui >}}Case rolled over{{< /ui >}} | This case reached its grouping limit of 100 signals, so Signal Grouping now adds later signals to a new case. | This case is full, so Datadog creates a rollover case. |
+The result is one of the following:
 
-When related signals don't fit in one rollover case, Datadog creates more rollover cases. The timeline entry of each extra rollover case says that the triggering signal is not in that case.
-
-If grouping strategies are selected, the entry also shows what signal grouping found:
-
-| Message | Meaning |
+| Result | Meaning |
 | --- | --- |
-| Signal Grouping found no related signals based on the current settings. | No strategy finds a related signal in the lookback, or the signal is missing a value the strategies need, such as group-by values. |
-| Signal Grouping selected this case using N strategies and added N related signals. | A related signal is in this case, so Datadog adds the new signal to it. |
-| Signal Grouping added N related signals using N strategies. | Datadog adds the related signals to a new case. |
-| The search reached its limit, so some related signals may not be included. | A strategy finds more related signals than its limit. See the [Limits](#limits) section. |
-
-Hover over the number of strategies to see which ones found related signals. Hover over the number of signals to see the signals Datadog added.
+| No grouping strategy selected | Datadog created one case for the signal. |
+| No related signals found | No strategy found a related signal in the lookback, or the signal is missing a value the strategies need, such as group-by values. Datadog created a new case. |
+| New case with related signals | Related signals were found, but none were in an eligible case. Datadog created a new case and added them. |
+| Existing case updated | A related signal was in an eligible case. Datadog added the signal to that case. |
+| Signal already in case | The signal was already in an eligible case, so it stays there. |
+| Previous case is full | The eligible case was full. Datadog created a new rollover case for the remaining related signals found. The full case also gets a timeline entry that says later signals go to a new case. |
 
 ## Further reading
 
