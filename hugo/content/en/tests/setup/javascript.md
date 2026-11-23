@@ -267,7 +267,15 @@ Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your t
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 ```
 
-**Note**: If you set a value for `NODE_OPTIONS` in your test command, preserve `-r dd-trace/ci/init` with `${NODE_OPTIONS:-}`.
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. Use the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:ui": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" cypress run"
+  }
+}
+{{< /code-block >}}
 
 ### Adding custom tags to tests
 
@@ -454,7 +462,7 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 ### Cypress tests do not appear in Datadog
 
-Automatic instrumentation is expected to work without changes to your Cypress configuration. If your Cypress tests do not appear in Datadog after following the setup instructions, an unexpected Cypress configuration might prevent automatic instrumentation. [Contact Datadog Support](/help/) with details of your Cypress configuration so the issue can be investigated. As a workaround, try registering the Datadog plugin and browser support manually as described below.
+Datadog instruments Cypress tests automatically, without changes to your Cypress configuration. If your Cypress tests don't appear in Datadog after you follow the steps in [Instrument your tests](#instrument-your-tests), some Cypress configurations can prevent automatic instrumentation. To work around this, register the Datadog plugin and support file manually.
 
 #### Register the Datadog plugin
 
@@ -474,9 +482,9 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-#### Load the Datadog browser support
+#### Import the Datadog support file
 
-Add the following import at the top level of your configured support file. Keep any existing support code:
+Add the following line to the top level of your Cypress support file. Keep any existing support code:
 
 {{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
 require('dd-trace/ci/cypress/support')
@@ -513,7 +521,7 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-Run your tests again with the reporting configuration from the setup instructions. If they still do not appear in Datadog, continue troubleshooting with Datadog Support.
+Run your tests again with the reporting configuration from the setup instructions. If your Cypress tests still don't appear in Datadog, [contact Datadog Support][28] with details of your Cypress configuration.
 
 ### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
