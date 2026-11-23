@@ -102,7 +102,7 @@ Per-source and shared processors are in Preview. Contact your account manager to
 
 When you have multiple sources for a pipeline, you might want to modify events from specific sources or all sources before the Worker sends them through different branches, which have their own processor groups. By using per-source and shared processors, you can avoid having to add the same processors to each branch's processor group.
 
-For example, the log pipeline in the following image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client. The Worker sends logs from those sources to two different branches.
+For example, the log pipeline in the following image has three sources: Datadog Agent, Amazon Data Firehose, and HTTP/S Client. The Worker sends all logs from those sources to two different branches.
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources and two branches that send logs to Datadog, Datadog Archives, and CrowdStrike NG-SIEM." style="width:100%;" >}}
 
