@@ -10,7 +10,7 @@ description: Reenvíe todos sus registros ingeridos al almacenamiento a largo pl
 further_reading:
 - link: /logs/archives/rehydrating
   tag: Documentación
-  text: Obtenga información sobre cómo acceder a su contenido de registro archivado
+  text: Obtenga información sobre cómo acceder al contenido de sus registros archivados
     en Datadog
 - link: /logs/explorer/
   tag: Documentación
@@ -22,11 +22,11 @@ title: Archivos de registros
 ---
 ## Descripción general {#overview}
 
-Configure su cuenta de Datadog para reenviar todos los registros ingeridos, ya sean [indexados][1] o no, a un sistema de almacenamiento en la nube propio. Mantenga sus registros en un archivo optimizado para almacenamiento durante períodos más largos y cumpla con los requisitos de cumplimiento, sin perder la capacidad de auditoría para investigaciones ad hoc, con [Rehydration][2] o [Archive Search][16].
+Configure su cuenta de Datadog para reenviar todos los registros ingeridos (ya sean [indexados][1] o no) a un sistema de almacenamiento en la nube propio. Mantenga sus registros en un archivo optimizado para almacenamiento durante períodos de tiempo más largos y cumpla con los requisitos de cumplimiento, manteniendo al mismo tiempo la auditabilidad para investigaciones puntuales, con [Rehydration][2] o [Archive Search][16].
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Pestaña Archives en la página Log Forwarding" style="width:100%;">}}
 
-Navegue a la [página {{< ui >}}Log Archiving & Forwarding{{< /ui >}}][3] para configurar un archivo para reenviar los registros ingeridos a su propio bucket de almacenamiento alojado en la nube.
+Vaya a la [página {{< ui >}}Log Archiving & Forwarding{{< /ui >}}][3] para configurar un archivo y reenviar los registros ingeridos a su propio bucket de almacenamiento alojado en la nube.
 
 1. Si aún no lo ha hecho, configure una [integración](#set-up-an-integration) de Datadog para su proveedor de nube.
 2. Cree un [bucket de almacenamiento](#create-a-storage-bucket).
@@ -43,9 +43,9 @@ Las siguientes métricas informan sobre los registros que se han archivado corre
 - datadog.archives.logs.count
 
 
-## Configurar un archivo {#configure-an-archive}
+## Configure un archivo {#configure-an-archive}
 
-### Configurar una integración {#set-up-an-integration}
+### Configure una integración {#set-up-an-integration}
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -60,7 +60,7 @@ Si aún no está configurado, configure la [integración de AWS][1] para la cuen
 
 Configure la [integración de Azure][1] dentro de la suscripción que contiene su nueva cuenta de almacenamiento, si aún no lo ha hecho. Esto implica [crear un registro de aplicación que Datadog pueda usar][2] para integrarse.
 
-**Nota:** No se admite el archivado en Azure ChinaCloud ni en Azure GermanyCloud. El archivado en Azure GovCloud se admite en Preview. Para solicitar acceso, contacte a soporte de Datadog.
+**Nota:** No se admite el archivado en Azure ChinaCloud ni en Azure GermanyCloud. El archivado en Azure GovCloud está disponible en Preview. Para solicitar acceso, contacte a soporte de Datadog.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /es/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -87,7 +87,7 @@ Configure la [integración de Google Cloud][1] para el proyecto que contiene su 
 Vaya a su [consola de AWS][1] y [cree un bucket de S3][2] al cual enviar sus archivos.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger"> Los archivos de Datadog no admiten nombres de buckets con puntos (.) cuando se integran con un punto de conexión FIPS de S3 que utiliza direccionamiento de estilo de servidor virtual. Obtenga más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Los archivos de Datadog no admiten nombres de bucket con puntos (.) cuando se integran con un punto de conexión FIPS de S3 que utiliza direccionamiento de estilo de servidor virtual. Obtenga más información en la documentación de AWS. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> y <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notas:**
@@ -103,10 +103,10 @@ Vaya a su [consola de AWS][1] y [cree un bucket de S3][2] al cual enviar sus arc
 
 {{% tab "Almacenamiento de Azure" %}}
 
-* Vaya a [Azure Portal][1] y [cree una cuenta de almacenamiento][2] a la cual enviar sus archivos. Asigne un nombre a su cuenta de almacenamiento, seleccione el tipo de cuenta de rendimiento estándar o {{< ui >}}Block blobs{{< /ui >}} premium, y seleccione el nivel de acceso {{< ui >}}hot{{< /ui >}} o {{< ui >}}cool{{< /ui >}}.
-* Cree un servicio {{< ui >}}container{{< /ui >}} en esa cuenta de almacenamiento. Tome nota del nombre del contenedor, ya que deberá agregarlo en la página de archivos de Datadog.
+* Vaya a [Azure Portal][1] y [cree una cuenta de almacenamiento][2] a la cual enviar sus archivos. Asigne un nombre a su cuenta de almacenamiento, seleccione rendimiento estándar o el tipo de cuenta {{< ui >}}Block blobs{{< /ui >}} prémium, y seleccione el nivel de acceso {{< ui >}}hot{{< /ui >}} o {{< ui >}}cool{{< /ui >}}.
+* Cree un servicio {{< ui >}}container{{< /ui >}} en esa cuenta de almacenamiento. Tome nota del nombre del contenedor, ya que deberá agregarlo en la página Archive de Datadog.
 
-**Nota:** No establezca [políticas de inmutabilidad][3] porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente una incidencia de tiempo de espera).
+**Nota:** No establezca [políticas de inmutabilidad][3] porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente por un tiempo de espera agotado).
 
 [1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
 [2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
@@ -117,7 +117,7 @@ Vaya a su [consola de AWS][1] y [cree un bucket de S3][2] al cual enviar sus arc
 
 Vaya a su [cuenta de Google Cloud][1] y [cree un bucket de GCS][2] al cual enviar sus archivos. En {{< ui >}}Choose how to control access to objects{{< /ui >}}, seleccione {{< ui >}}Set object-level and bucket-level permissions{{< /ui >}}.
 
-**Nota:** No agregue una [política de retención][3] porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente una incidencia de tiempo de espera).
+**Nota:** No agregue una [política de retención][3] porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente por un tiempo de espera agotado).
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -127,7 +127,7 @@ Vaya a su [cuenta de Google Cloud][1] y [cree un bucket de GCS][2] al cual envia
 
 ### Establezca los permisos {#set-permissions}
 
-Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden crear, modificar o eliminar configuraciones de archivos de registros.
+Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden crear, modificar o eliminar configuraciones de archivo de registros.
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -178,7 +178,7 @@ Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden cre
 {{% /tab %}}
 {{% tab "Almacenamiento de Azure" %}}
 
-1. Otorgue permiso a la aplicación de Datadog para escribir y leer en su cuenta de almacenamiento.
+1. Otorgue a la aplicación de Datadog permiso para escribir en su cuenta de almacenamiento y leer de ella.
 2. Seleccione su cuenta de almacenamiento en la [página Storage Accounts][1], vaya a {{< ui >}}Access Control (IAM){{< /ui >}} y seleccione {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 3. Ingrese el rol llamado **Storage Blob Data Contributor**, seleccione la aplicación de Datadog que creó para integrarse con Azure y guarde.
 
@@ -194,14 +194,14 @@ Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden cre
 
    {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Agregue el rol Storage Object Admin a su cuenta de servicio de Google Cloud de Datadog." style="width:75%;">}}
 
-El rol {{< ui >}}Storage Object Admin{{< /ui >}} es la configuración recomendada por Datadog. Si su organización requiere un rol personalizado de privilegios mínimos, se necesitan los siguientes permisos individuales para las cargas de registros archivados:
+El rol {{< ui >}}Storage Object Admin{{< /ui >}} es la configuración recomendada por Datadog. Si su organización requiere un rol personalizado de privilegios mínimos, se necesitan los siguientes permisos individuales para las cargas al archivo de registros:
 
 - `storage.objects.create`
 - `storage.objects.get`
 - `storage.objects.list`
 - `storage.objects.delete`
 
-`storage.objects.delete` es necesario para admitir reintentos de escritura de archivo, donde Datadog sobrescribe un objeto existente en el bucket. Los permisos de carga multipart (`storage.multipartUploads.*`) no son necesarios.
+`storage.objects.delete` es necesario para admitir reintentos de escritura en el archivo de registros, en los que Datadog sobrescribe un objeto existente en el bucket. Los permisos de carga multipart (`storage.multipartUploads.*`) no son necesarios.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
@@ -209,19 +209,19 @@ El rol {{< ui >}}Storage Object Admin{{< /ui >}} es la configuración recomendad
 
 ### Dirija sus registros a un bucket {#route-your-logs-to-a-bucket}
 
-Navegue a la [página Log Archiving & Forwarding][6] y seleccione {{< ui >}}Add a new archive{{< /ui >}} en la pestaña {{< ui >}}Archives{{< /ui >}}.
+Navegue a la [página de Log Archiving & Forwarding][6] y seleccione {{< ui >}}Add a new archive{{< /ui >}} en la pestaña {{< ui >}}Archives{{< /ui >}}.
 
 **Notas:**
-* Solo los usuarios de Datadog con el [`logs_write_archive`permiso ][5] pueden completar este y el siguiente paso.
-* Archivar registros en Azure Blob Storage requiere una App Registration. Consulte las instrucciones [en la página de integración de Azure][7] y establezca "site" en "US" en el lado derecho de la página de documentación. Las App Registrations creadas solo para archivar registros necesitan únicamente el rol "Storage Blob Data Contributor". Si su bucket de almacenamiento se encuentra en una suscripción supervisada a través de un Datadog Resource, se muestra una advertencia que indica que la App Registration es redundante. Puede ignorar esta advertencia.
-* Si su bucket restringe el acceso a la red a direcciones IP específicas, agregue las direcciones IP del webhook desde el {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
-* Para los **sitios US1-FED y US2-FED**, puede configurar Datadog para enviar registros a un destino fuera del entorno Datadog GovCloud. Datadog no es responsable de ningún registro que salga del entorno Datadog GovCloud. Además, Datadog no es responsable de ninguna obligación o requisito que usted pueda tener con respecto a FedRAMP, DoD Impact Levels, ITAR, cumplimiento de exportaciones, residencia de datos o regulaciones similares aplicables a estos registros después de que abandonen el entorno GovCloud.
+* Solo los usuarios de Datadog con el [permiso `logs_write_archive`][5] pueden completar este y el siguiente paso.
+* El archivado de registros en Azure Blob Storage requiere un App Registration. Consulte las instrucciones [en la página de integración de Azure][7] y establezca el "sitio" en el lado derecho de la página de documentación en "US". Los App Registrations creados solo para fines de archivado necesitan el rol "Storage Blob Data Contributor". Si su bucket de almacenamiento se encuentra en una suscripción supervisada a través de un Datadog Resource, se muestra una advertencia que indica que el App Registration es redundante. Puede ignorar esta advertencia.
+* Si su bucket restringe el acceso a la red a determinadas direcciones IP, agregue las direcciones IP del webhook desde el {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
+* Para los sitios **US1-FED y US2-FED**, puede configurar Datadog para enviar registros a un destino fuera del entorno de Datadog GovCloud. Datadog no es responsable de ningún registro que salga del entorno de Datadog GovCloud. Además, Datadog no es responsable de ninguna obligación o requisito que usted pueda tener con respecto a FedRAMP, niveles de impacto del DoD, ITAR, cumplimiento de exportaciones, residencia de datos o regulaciones similares aplicables a estos registros después de que abandonen el entorno de GovCloud.
 
 | Servicio                  | Pasos                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Amazon S3**               | - Seleccione la combinación de cuenta y rol de AWS apropiada para su bucket de S3.<br>- Ingrese el nombre de su bucket.<br>**Opcional**: Ingrese un directorio como prefijo para todo el contenido de sus archivos de registro. |
-| **Azure Storage**        | - Seleccione el tipo de archivo {{< ui >}}Azure Storage{{< /ui >}}, y el tenant y el cliente de Azure para la Datadog App que tiene el rol Storage Blob Data Contributor en su cuenta de almacenamiento.<br>- Ingrese el nombre de su cuenta de almacenamiento y el nombre del contenedor para su archivo.<br>**Opcional**: Ingrese un directorio como prefijo para todo el contenido de sus archivos de registro. |
-| **Google Cloud Storage** | - Seleccione el tipo de archivo {{< ui >}}Google Cloud Storage{{< /ui >}} y la cuenta de servicio de GCS que tiene permisos para escribir en su bucket de almacenamiento.<br>- Ingrese el nombre de su bucket.<br>**Opcional**: Ingrese un directorio como prefijo para todo el contenido de sus archivos de registro. |
+| **Amazon S3**               | - Seleccione la combinación de cuenta y rol de AWS adecuada para su bucket de S3.<br>- Ingrese el nombre de su bucket.<br>**Opcional**: Ingrese un directorio de prefijo para todo el contenido de sus archivos de registro. |
+| **Azure Storage**        | - Seleccione el tipo de archivo {{< ui >}}Azure Storage{{< /ui >}} y el inquilino y cliente de Azure para la Datadog App que tiene el rol Storage Blob Data Contributor en su cuenta de almacenamiento.<br>- Ingrese el nombre de su cuenta de almacenamiento y el nombre del contenedor para su archivo.<br>**Opcional**: Ingrese un directorio de prefijo para todo el contenido de sus archivos de registro. |
+| **Google Cloud Storage** | - Seleccione el tipo de archivo {{< ui >}}Google Cloud Storage{{< /ui >}} y la cuenta de servicio de GCS que tiene permisos para escribir en su bucket de almacenamiento.<br>- Ingrese el nombre de su bucket.<br>**Opcional**: Ingrese un directorio de prefijo para todo el contenido de sus archivos de registro. |
 
 ### Configuración avanzada {#advanced-settings}
 
@@ -231,18 +231,18 @@ Navegue a la [página Log Archiving & Forwarding][6] y seleccione {{< ui >}}Add 
 
 Utilice este paso de configuración opcional para:
 
-* Incluir todas las etiquetas de registro en sus archivos (opción activada de forma predeterminada en todos los archivos nuevos). **Nota**: Esto aumenta el tamaño de los archivos resultantes.
-* Agregar etiquetas a los registros rehidratados de acuerdo con su política de Restriction Queries. Consulte el permiso [`logs_read_data`][13].
+* Incluir todas las etiquetas de registro en sus archivos (activado de forma predeterminada en todos los archivos nuevos). **Nota**: Esto aumenta el tamaño de los archivos resultantes.
+* Agregar etiquetas en los registros rehidratados de acuerdo con su política de Restriction Queries. Consulte el permiso [`logs_read_data`][13].
 
 #### Definir tamaño máximo de escaneo {#define-maximum-scan-size}
 
-Utilice este paso de configuración opcional para definir el volumen máximo de datos de registro (en GB) que se puede escanear durante Archive Search o Rehydration en sus archivos de registro.
+Utilice este paso de configuración opcional para definir el volumen máximo de datos de registro (en GB) que se puede escanear para Archive Search o la rehidratación en sus archivos de registro.
 
-Para los archivos con un tamaño máximo de escaneo definido, todos los usuarios deben estimar el tamaño del escaneo antes de poder iniciar Archive Search o Rehydration. Si el tamaño de escaneo estimado es mayor que lo permitido para ese archivo, los usuarios deben reducir el rango de tiempo de su solicitud. Reducir el rango de tiempo disminuirá el tamaño del escaneo y permitirá al usuario iniciar Archive Search o Rehydration.
+Para los archivos con un tamaño máximo de escaneo definido, todos los usuarios deben estimar el tamaño del escaneo antes de poder iniciar una búsqueda en Archive Search o una rehidratación. Si el tamaño de escaneo estimado es mayor que el permitido para ese archivo, los usuarios deben reducir el rango de tiempo de su solicitud. Reducir el rango de tiempo reducirá el tamaño del escaneo y permitirá al usuario iniciar una búsqueda en Archive Search o una rehidratación.
 
-**Nota**: Para reducir el volumen de datos escaneados durante [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) y [Lookup Attributes](#archive-lookup-attribute) en su archivo. Los atributos de partición reducen el contexto de la búsqueda al omitir segmentos de datos irrelevantes, mientras que los atributos de búsqueda aceleran la localización de entradas de registro específicas.
+**Nota**: Para reducir el volumen de datos escaneados durante [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) y [Lookup Attributes](#archive-lookup-attribute) en su archivo. Los atributos de partición reducen el contexto de búsqueda al omitir segmentos de datos irrelevantes, mientras que los atributos de búsqueda aceleran la localización de entradas de registro específicas.
 
-Para ambos tipos de atributos, ingrese etiquetas y [atributos reservados][19] como `env`, `service` o `trace_id` sin el prefijo `@`. Anteponga el prefijo `@` a todos los demás atributos.
+Para ambos tipos de atributos, ingrese etiquetas y [atributos reservados][19] como `env`, `service` o `trace_id` sin el prefijo `@`. Anteponga `@` a todos los demás atributos.
 
 #### Atributo de partición de archivo {#archive-partition-attribute}
 
@@ -250,29 +250,29 @@ Los atributos de partición organizan los registros archivados en grupos basados
 
 Puede configurar hasta **2 atributos de partición** por archivo.
 
-* **Usar para**: Atributos de baja cardinalidad como `service`, `source`, `env` o `status` que utiliza con frecuencia como filtros de búsqueda.
+* **Se usa para**: Atributos de baja cardinalidad como `service`, `source`, `env` o `status` que utiliza con frecuencia como filtros de búsqueda.
 * **Cómo funciona**: Los registros que comparten los mismos valores de atributo de partición se ubican juntos en el almacenamiento. Datadog omite particiones completas que no coinciden con su consulta, lo que reduce drásticamente el volumen de datos escaneados.
 
 #### Atributo de búsqueda de archivo {#archive-lookup-attribute}
 
-Los atributos de búsqueda crean una ruta rápida hacia los registros con valores específicos. Úselos para identificadores de alta cardinalidad para acelerar las investigaciones dirigidas con [Archive Search][16].
+Los atributos de búsqueda crean una ruta rápida hacia los registros con valores específicos. Úselos con identificadores de alta cardinalidad para acelerar las investigaciones específicas con [Archive Search][16].
 
 Puede configurar hasta **2 atributos de búsqueda** por archivo.
 
-* **Usar para**: Atributos de alta cardinalidad como `trace_id`, `@usr.id`, `@http.request_id` o `@transaction_id`.
-* **Cómo funciona**: Datadog crea un índice para estos atributos al momento de la escritura, lo que permite que Archive Search localice registros específicos sin escanear el archivo completo.
+* **Se usa para**: Atributos de alta cardinalidad como `trace_id`, `@usr.id`, `@http.request_id` o `@transaction_id`.
+* **Cómo funciona**: Datadog crea un índice para estos atributos al momento de la escritura, lo que permite que Archive Search identifique registros específicos sin tener que escanear todo el archivo.
 
 **Atributos de partición frente a atributos de búsqueda**
 
 | | Partición | Búsqueda |
 |---|---|---|
-| **Cardinalidad** | Baja (decenas a cientos de valores) | Alta (millones de valores) |
+| **Cardinalidad** | Baja (de decenas a cientos de valores) | Alta (millones de valores) |
 | **Atributos típicos** | `service`, `source`, `env`, `status` | `trace_id`, `@usr.id`, `@http.request_id`, `@transaction_id` |
-| **Cómo ayuda** | Omite particiones completas que no coinciden con su consulta | Localiza entradas de registro específicas sin escanear el archivo completo |
-| **Se usa principalmente para** | Filtrado amplio por entorno o servicio | Investigaciones puntuales sobre identificadores específicos |
+| **Cómo ayuda** | Omite particiones completas que no coinciden con su consulta | Identifica entradas de registro específicas sin escanear todo el archivo |
+| **Ideal para** | Filtrado amplio por entorno o servicio | Investigaciones ad hoc sobre identificadores específicos |
 | **Límite** | Hasta 2 por archivo | Hasta 2 por archivo |
 
-Para obtener el máximo rendimiento de búsqueda, combine ambos: los atributos de partición reducen el contexto de búsqueda a los segmentos de datos relevantes, mientras que los atributos de búsqueda le permiten encontrar registros específicos dentro de esos segmentos al instante.
+Para obtener el máximo rendimiento de búsqueda, combine ambos: los atributos de partición delimitan el contexto de búsqueda a los segmentos de datos relevantes, mientras que los atributos de búsqueda le permiten encontrar registros específicos dentro de esos segmentos al instante.
 
 {{< site-region region="us3" >}}
 
@@ -290,22 +290,22 @@ Las reglas de firewall no son compatibles.
 
 #### Compression {#compression}
 
-De forma predeterminada, Datadog archiva los registros mediante compresión **zstd** (Zstandard) (`.json.zst`), la cual ofrece mejores tasas de compresión y velocidades de descompresión más rápidas en comparación con gzip. También puede configurar la compresión **gzip** (`.json.gz`).
+De forma predeterminada, Datadog archiva los registros mediante la compresión **zstd** (Zstandard) (`.json.zst`), la cual ofrece mejores tasas de compresión y velocidades de descompresión más rápidas en comparación con gzip. También puede configurar la compresión **gzip** (`.json.gz`).
 
 
 Para configurar la compresión, seleccione {{< ui >}}Compression Type{{< /ui >}} al crear o editar un archivo en la [página de Log Archiving & Forwarding][6]:
 
-- {{< ui >}}zstd{{< /ui >}} (predeterminado): Mejor tasa de compresión y velocidad de descompresión. Recomendado para archivos nuevos, especialmente si planea utilizar [Archive Search][16].
-- {{< ui >}}gzip{{< /ui >}}: Ampliamente admitido y compatible con la mayoría de las herramientas.
+- {{< ui >}}zstd{{< /ui >}} (predeterminado): mejor tasa de compresión y velocidad de descompresión. Recomendado para archivos nuevos, especialmente si planea utilizar [Archive Search][16].
+- {{< ui >}}gzip{{< /ui >}}: ampliamente admitido y compatible con la mayoría de las herramientas.
 
-**Nota**: Cambiar el formato de compresión de un archivo existente solo afecta a los nuevos archivos que se almacenen en él. Los archivos que ya están almacenados en su bucket permanecen en su formato original.
+**Nota**: cambiar el formato de compresión de un archivo existente solo afecta a los nuevos archivos que se generen a partir de ese momento. Los archivos que ya están almacenados en su bucket permanecen en su formato original.
 
 #### Clase de almacenamiento {#storage-class}
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-Puede seleccionar una clase de almacenamiento para su archivo o [establecer una configuración de ciclo de vida en su bucket de S3][1] para transferir automáticamente sus archivos de logs a las clases de almacenamiento óptimas.
+Puede seleccionar una clase de almacenamiento para su archivo o [establecer una configuración de ciclo de vida en su bucket de S3][1] para realizar la transición automática de sus archivos de registro a clases de almacenamiento óptimas.
 
 [Archive Search][2] solo admite las siguientes clases de almacenamiento:
 
@@ -313,7 +313,7 @@ Puede seleccionar una clase de almacenamiento para su archivo o [establecer una 
 * S3 Standard-IA
 * S3 One Zone-IA
 * S3 Glacier Instant Retrieval
-* S3 Intelligent-Tiering, solo si [los dos niveles opcionales de acceso asincrónico al archivo][3] están deshabilitados.
+* S3 Intelligent-Tiering, solo si [ambos niveles opcionales de acceso asincrónico al archivo][3] están deshabilitados.
 
 Si su archivo utiliza otra clase de almacenamiento, primero debe moverlo a una de las clases de almacenamiento admitidas anteriormente.
 
@@ -351,8 +351,8 @@ El archivado y [Archive Search][1] admiten los siguientes niveles de acceso:
 Al crear o actualizar un archivo S3 en Datadog, puede configurar opcionalmente {{< ui >}}Advanced Encryption{{< /ui >}}. Hay tres opciones disponibles en el menú desplegable {{< ui >}}Encryption Type{{< /ui >}}:
 
 - {{< ui >}}Default S3 Bucket-Level Encryption{{< /ui >}} (Predeterminado): Datadog no anula la configuración de cifrado predeterminada de su bucket de S3.
-- {{< ui >}}Amazon S3 managed keys{{< /ui >}}: Fuerza el cifrado del lado del servidor mediante claves administradas por Amazon S3 ([SSE-S3][17]), independientemente del cifrado predeterminado del bucket de S3.
-- {{< ui >}}AWS Key Management Service{{< /ui >}}: Fuerza el cifrado del lado del servidor mediante una clave administrada por el cliente (CMK) de [AWS KMS][18], independientemente del cifrado predeterminado del bucket de S3. Deberá proporcionar el ARN de la CMK.
+- {{< ui >}}Amazon S3 managed keys{{< /ui >}}: Fuerza el cifrado del lado del servidor mediante claves administradas de Amazon S3 ([SSE-S3][17]), independientemente de la configuración de cifrado predeterminada del bucket de S3.
+- {{< ui >}}AWS Key Management Service{{< /ui >}}: Fuerza el cifrado del lado del servidor mediante una clave administrada por el cliente (CMK) de [AWS KMS][18], independientemente de la configuración de cifrado predeterminada del bucket de S3. Deberá proporcionar el ARN de la CMK.
 
 {{< tabs >}}
 {{% tab "Cifrado predeterminado a nivel de bucket de S3" %}}
@@ -443,7 +443,7 @@ Asegúrese de haber completado los siguientes pasos para crear una CMK válida y
 
 ### Validación {#validation}
 
-Una vez que configure correctamente los ajustes de archivo en su cuenta de Datadog, sus pipelines de procesamiento comienzan a enriquecer todos los logs ingeridos en Datadog. Estos logs se reenvían posteriormente a su archivo.
+Una vez que los ajustes de su archivo se hayan configurado correctamente en su cuenta de Datadog, sus canalizaciones de procesamiento comenzarán a enriquecer todos los logs ingeridos en Datadog. Estos logs se reenvían posteriormente a su archivo.
 
 Sin embargo, después de crear o actualizar sus configuraciones de archivo, pueden pasar varios minutos antes de que se intente la siguiente carga de archivo. La frecuencia con la que se cargan los archivos puede variar. **Vuelva a consultar su bucket de almacenamiento en 15 minutos** para asegurarse de que los archivos se estén cargando correctamente desde su cuenta de Datadog.
 
@@ -451,26 +451,32 @@ Después de eso, si el archivo aún está en estado pendiente, verifique sus fil
 
 {{< img src="logs/archives/archive_errors_details.png" alt="Verifique que sus archivos estén configurados correctamente" style="width:100%;">}}
 
-Pase el cursor sobre el archivo para ver los detalles del error y las medidas que debe tomar para resolver el problema. También se genera un evento en el [Events Explorer][15]. Puede crear un monitor para hacer un seguimiento de estos eventos y detectar y solucionar fallas rápidamente.
+Pase el cursor sobre el archivo para ver los detalles del error y las acciones que debe realizar para resolver el problema. También se genera un evento en el [Events Explorer][15]. Puede crear un monitor para estos eventos a fin de detectar y solucionar fallas rápidamente.
 
-## Múltiples archivos {#multiple-archives}
+## Archivos de Observability Pipelines {#observability-pipelines-archives}
 
-Si se definen múltiples archivos, los logs ingresan al primer archivo según el filtro.
+Cuando habilita Archive Search en un destino de archivo de Observability Pipelines, Datadog crea el Log Archive después de implementar la canalización. Para obtener instrucciones de configuración, consulte la documentación de destino de [Datadog Archives (Amazon S3)][20], [Google Cloud Storage][21] o [Azure Storage][22]. Estos archivos se enumeran en la pestaña {{< ui >}}Observability Pipelines Archives{{< /ui >}} en la [página de Log Archiving & Forwarding][3].
 
-{{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Los logs ingresan al primer archivo cuyo filtro coincida con ellos." style="width:100%;">}}
+Administre la configuración del bucket para estos archivos en Observability Pipelines. En Datadog, puede editar sus permisos, etiquetas y [tamaño máximo de escaneo](#define-maximum-scan-size).
 
-Es importante ordenar sus archivos cuidadosamente. Por ejemplo, si crea un primer archivo filtrado con la etiqueta `env:prod` y un segundo archivo sin ningún filtro (el equivalente a `*`), todos sus logs de producción irían a un bucket o una ruta de almacenamiento, y el resto iría al otro.
+## Archivos múltiples {#multiple-archives}
+
+Si se definen varios archivos, los logs entran en el primer archivo según el filtro.
+
+{{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Los logs entran en el primer archivo con cuyo filtro coincidan." style="width:100%;">}}
+
+Es importante ordenar sus archivos cuidadosamente. Por ejemplo, si crea un primer archivo filtrado con la etiqueta `env:prod` y un segundo archivo sin ningún filtro (el equivalente a `*`), todos sus logs de producción irían a un bucket o ruta de almacenamiento, y el resto iría al otro.
 
 ## Formato de los archivos {#format-of-the-archives}
 
-Los archivos de logs que Datadog reenvía a su bucket de almacenamiento están en formato JSON comprimido. Dependiendo de su [configuración de compresión](#compression), los archivos utilizan compresión zstd (`.json.zst`, predeterminada) o gzip (`.json.gz`). Con el prefijo que indique (o `/` si no indica ninguno), los archivos se almacenan en una estructura de directorios que muestra la fecha y la hora en que se generaron, como la siguiente:
+Los archivos de logs que Datadog reenvía a su bucket de almacenamiento están en formato JSON comprimido. Dependiendo de su [configuración de compresión](#compression), los archivos utilizan compresión zstd (`.json.zst`, predeterminada) o gzip (`.json.gz`). Utilizando el prefijo que indique (o `/` si no hay ninguno), los archivos se almacenan en una estructura de directorios que indica en qué fecha y a qué hora se generaron, como la siguiente:
 
 ```
 /my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
 /my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<UUID>.json.gz
 ```
 
-Esta estructura de directorios simplifica la consulta de sus archivos históricos de logs por fecha.
+Esta estructura de directorios simplifica el proceso de consultar sus archivos de logs históricos según su fecha.
 
 ## Lecturas adicionales {#further-reading}
 
@@ -499,3 +505,6 @@ Esta estructura de directorios simplifica la consulta de sus archivos histórico
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 [19]: /es/logs/explorer/search_syntax/#reserved-attributes
+[20]: /es/observability_pipelines/destinations/datadog_archives/#archive-search
+[21]: /es/observability_pipelines/destinations/google_cloud_storage/#archive-search
+[22]: /es/observability_pipelines/destinations/azure_storage/#archive-search

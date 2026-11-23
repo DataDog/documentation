@@ -36,6 +36,10 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /account_management/billing/ai_credits/**
+  ai_gateway:
+    regions: [gov, gov2]
+    url_paths:
+      - /ai_gateway/**
   ai_impact:
     regions: [gov, gov2]
   alibaba-cloud:
@@ -340,6 +344,10 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /journey_monitoring/**
+  lambda_microvm:
+    regions: [gov, gov2]
+    url_paths:
+      - /serverless/aws_lambda/lambda_microvm/**
   launchdarkly:
     regions: [gov, gov2]
     url_paths:

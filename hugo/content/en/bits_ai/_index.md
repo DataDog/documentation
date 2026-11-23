@@ -2,7 +2,6 @@
 title: Bits AI
 description: "Learn about Bits AI, your agentic teammate in Datadog that automates development, security, and operational workflows."
 disable_toc: false
-is_beta: true
 aliases:
     - /bits_ai/query_examples/
 further_reading:
@@ -32,9 +31,60 @@ further_reading:
       text: "Bits AI Agents"
 ---
 
-Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
+## Overview
 
-Learn about Bits AI pricing on [AI Credits][1].
+Bits AI is your agentic teammate in Datadog. Bits assists you with operational workflows across development, security, and DevOps, and can operate autonomously as your first on-call responder. You can chat and collaborate with Bits in real time, or delegate tasks such as alert investigations, code fixes, or security triage.
+
+In Datadog, Bits AI is the central place to work with Bits. From Bits AI, you can:
+
+- Chat with Bits to search and act across Datadog in natural language
+- Assign Bits to work autonomously across your environment
+- Build custom automations that run agents on a schedule or in response to a trigger
+- Manage Bits AI settings and usage for your organization
+
+Learn about Bits AI pricing in [AI Credits][1].
+
+## Bits Chat
+
+Use Bits Chat to search and act across Datadog in natural language. For example, ask Bits to investigate an incident, explore your telemetry, build a dashboard, or query your data with DDSQL.
+
+Bits Chat uses your Datadog role to fetch data, so it can only access the resources that you have permission to view or modify.
+
+For more information, see [Bits Chat][2].
+
+## Autonomous Ops
+
+Bits Autonomous Operations (Autonomous Ops) lets you assign Bits as the first on-call responder for your systems. You define one or more scopes for Bits to watch. When an issue occurs in a scope, Bits triages it. Then, Bits decides whether to handle the issue or hand it off to someone on your team, based on the [guardrails][11] that you set.
+
+For each issue, Bits:
+
+1. Triages the alert to decide whether it needs action.
+1. Investigates the root cause.
+1. Recommends next steps, and can take remediation actions within the guardrails that you define.
+1. Verifies that the issue is resolved.
+
+For more information, see [Bits Autonomous Operations][8].
+
+## Custom automations
+
+Custom automations orchestrate agents built with [Bits Agent Builder][10] to do specific tasks.
+
+You can build a custom automation for almost any task in Datadog that requires an agent step. For example, a custom automation can send your team's Slack channel a daily summary of error rates for a service. Or, a custom automation can review the logs for each new security signal, decide if the signal is a false positive, then notify the team if the signal needs follow-up.
+
+To create and manage custom automations in Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Custom Automations{{< /ui >}}][12]. From there, you can create automations, turn them on or off, review each automation run, and manage the agents that your automations use.
+
+You can also build and manage custom automations with [Bits Chat][2] or with a coding agent.
+
+<div class="alert alert-info">For a preconfigured agent that handles ongoing operational work, use <a href="#autonomous-ops">Autonomous Ops</a> instead of a custom automation.</div>
+
+## Settings
+
+Use Settings to control what Bits knows about your organization, how Bits connects to your tools, and how your team uses Bits:
+
+- **Knowledge** settings, such as Bits.md, skills, and memories, give Bits context about your organization.
+- **Administration** settings control integrations, guardrails, action history, credit usage, and rate limits.
+
+For more information, see [Bits AI Settings][4].
 
 ## Features
 
@@ -53,3 +103,9 @@ Learn about Bits AI pricing on [AI Credits][1].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/billing/ai_credits/
+[2]: /bits_ai/bits_chat/
+[4]: /bits_ai/bits_settings/
+[8]: /bits_ai/bits_autonomous_operations/
+[10]: /actions/agents/
+[11]: /bits_ai/bits_remediation/guardrails/
+[12]: https://app.datadoghq.com/bits/automations/activity

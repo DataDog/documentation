@@ -6,7 +6,7 @@ further_reading:
   text: "Datadog and OpenTelemetry Compatibility"
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components"
+  text: "Add Components to the Agent's Collector"
 - link: /opentelemetry/instrument/
   tag: "Documentation"
   text: "Instrument Your Application with OpenTelemetry"

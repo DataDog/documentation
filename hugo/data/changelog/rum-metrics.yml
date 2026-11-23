@@ -9,3 +9,13 @@ entries:
       - ListRumMetrics
       - UpdateRumMetric
     title: Document RUM-based metrics API behavior and constraints
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateRumMetric
+      - DeleteRumMetric
+      - GetRumMetric
+      - ListRumMetrics
+      - UpdateRumMetric
+    title: Document rate-limit headers on the shared 429 responses

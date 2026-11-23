@@ -18,9 +18,9 @@ title: Ejecute pruebas de aplicaciones móviles desde redes restringidas
 ---
 ## Descripción general {#overview}
 
-Es posible que algunas de sus aplicaciones no estén disponibles en la internet pública porque acceden a entornos de desarrollo o locales, o porque son aplicaciones internas destinadas a usuarios dentro de su red corporativa (por ejemplo, su intranet corporativa o VPN).
+Algunas de sus aplicaciones podrían no estar disponibles en la internet pública porque acceden a entornos de desarrollo o locales, o son aplicaciones internas destinadas a usuarios dentro de su red corporativa (por ejemplo, su intranet corporativa o VPN).
 
-{{< img src="/mobile_app_testing/mobile_app_restricted_networks.png" alt="Diagrama que muestra las pruebas de aplicaciones móviles detrás de un firewall o en redes restringidas" style="width:100%;">}}
+{{< img src="/mobile_app_testing/mobile_app_restricted_networks.png" alt="Diagrama que muestra la prueba de aplicaciones móviles detrás de un firewall o en redes restringidas" style="width:100%;">}}
 
 Para probar estas aplicaciones, agregue los siguientes rangos de direcciones IP a la lista de permitidos de su empresa. Esto garantiza que las solicitudes de sus aplicaciones en Datadog Mobile App Testing tengan éxito.
 
@@ -76,7 +76,9 @@ La siguiente es la lista de rangos de IP asociados con los dispositivos reales u
 
 ### Pasos HTTP {#http-steps}
 
-A continuación se muestra la lista de rangos de IP necesarios para ejecutar pasos HTTP en Synthetic Mobile Application Tests. Puede ignorar estos rangos si sus pruebas no utilizan pasos HTTP.
+Los pasos HTTP solo pueden llegar a direcciones IP públicas. Las solicitudes a direcciones IPv4 privadas o reservadas (como `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` y `127.0.0.0/8`) y a todas las direcciones IPv6 están bloqueadas, independientemente de su lista de permitidos. Esta restricción no se aplica a las solicitudes que su aplicación envía desde el dispositivo.
+
+A continuación se muestra la lista de rangos de IP necesarios para ejecutar pasos HTTP dentro de Synthetic Mobile Application Tests. Puede ignorar estos rangos si sus pruebas no utilizan pasos HTTP.
 
 `52.13.151.244/32`<br>
 `54.201.250.26/32`<br>
@@ -101,17 +103,17 @@ A continuación se muestra la lista de rangos de IP necesarios para ejecutar pas
 
 Si experimenta problemas con Mobile App Testing en redes restringidas, utilice las siguientes pautas de solución de problemas. Si necesita más asistencia, comuníquese con [soporte de Datadog][1].
 
-### No se puede iniciar el grabador {#unable-to-launch-recorder}
+### No se puede iniciar la grabadora {#unable-to-launch-recorder}
 
-Para iniciar Mobile Application Testing (MAT) Recorder, Datadog necesita establecer conexiones TURN UDP/TCP para habilitar las conexiones WebRTC. Si el usuario se encuentra detrás de una red restrictiva (como un firewall estricto o una VPN), estas conexiones pueden fallar y generar el error "Device unexpectedly disconnected":
+Para iniciar Mobile Application Testing (MAT) Recorder, Datadog necesita establecer conexiones TURN UDP/TCP para habilitar las conexiones WebRTC. Si el usuario se encuentra detrás de una red restrictiva (como un firewall estricto o una VPN), estas conexiones pueden fallar, lo que genera el error "Device unexpectedly disconnected":
 
 {{< img src="/mobile_app_testing/restricted_networks/device_disconnected_error.png" alt="Captura de pantalla del inicio de un dispositivo móvil, que muestra el error de desconexión." style="width:100%;" >}}
 
-Para verificar si las conexiones TURN UDP/TCP son exitosas, ejecute una prueba de red con [Twilio Network Test][2]. El resultado de la prueba confirma si la conectividad con los servidores TURN es exitosa o no. Si la conexión es exitosa, verá un mensaje como "Successfully established a UDP connection to Twilio":
+Para verificar si las conexiones UDP/TCP TURN se establecieron correctamente, ejecute una prueba de red con [Twilio Network Test][2]. El resultado de la prueba confirma si la conectividad con los servidores TURN es exitosa o no. Si la conexión es exitosa, verá un mensaje como "Successfully established a UDP connection to Twilio":
 
 {{< img src="/mobile_app_testing/restricted_networks/twilio_test.png" alt="Captura de pantalla de una prueba exitosa con Twilio Network Test." style="width:100%;" >}}
 
-Si la prueba falla, Twilio genera un registro que indica errores debido a que no se pudo establecer una conexión. Por ejemplo:
+Si la prueba falla, Twilio genera un registro de salida que indica errores debido a la imposibilidad de establecer una conexión. Por ejemplo:
 
 ```
 [3:09:13 PM] Test "TURN UDP Connectivity" started...
