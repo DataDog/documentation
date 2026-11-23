@@ -188,7 +188,7 @@ The following table shows the span type mapping logic. The chart lists mappings 
 
 In the table above, if a span is a "client" kind and contains [`db.system` attribute][9], the following mapping applies for the span type in Datadog. Setting a `span.type` attribute on your span overrides this logic.
 
-Current OpenTelemetry semantic conventions rename `db.system` to `db.system.name`. When you send traces to the Datadog OTLP intake, `db.system.name` is treated the same as `db.system` for operation and resource naming.
+Current OpenTelemetry semantic conventions rename `db.system` to `db.system.name`. When you send traces to the Datadog OTLP intake, `db.system.name` is treated the same as `db.system` for operation and resource naming. If a span has both attributes, `db.system.name` takes precedence.
 
 | `db.system`                            | Datadog span.type |
 | -------------------------------------- | ----------------- |

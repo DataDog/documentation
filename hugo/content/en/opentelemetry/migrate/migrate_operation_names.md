@@ -58,7 +58,7 @@ For example, with the new logic active, a span previously named `go.opentelemetr
 
 **Note**: `<attribute>` placeholders like `<db.system>` represent the value of the corresponding span attribute.
 
-**Note**: Current OpenTelemetry semantic conventions rename `db.system` to `db.system.name`. When you send traces to the Datadog OTLP intake, `db.system.name` is treated the same as `db.system` for operation and resource naming.
+**Note**: Current OpenTelemetry semantic conventions rename `db.system` to `db.system.name`. When you send traces to the Datadog OTLP intake, `db.system.name` is treated the same as `db.system` for operation and resource naming. If a span has both attributes, `db.system.name` takes precedence.
 
 ## Prerequisites
 
