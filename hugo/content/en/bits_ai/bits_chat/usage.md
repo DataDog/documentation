@@ -46,9 +46,7 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 
 Ask Bits Chat to make a code change, and it creates a dedicated [code channel][4] for the task. In the code channel, [Bits Code][5] works on the change alongside you and your team.
 
-## Microsoft Teams (Preview)
-
-<div class="alert alert-info">Bits Chat in Microsoft Teams is in Preview.</div>
+## Microsoft Teams
 
 Ask Bits questions about your system or active incident from a Microsoft Teams channel. Bits Chat replies in the channel thread so your team can keep the question, context, and answer in one place.
 
