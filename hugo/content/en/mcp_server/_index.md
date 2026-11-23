@@ -72,6 +72,10 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 {{< img src="mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
 
+{{< callout url="#" btn_hidden="true" header="Try Bits CLI" >}}
+  Want a Datadog agent in your terminal without configuring an MCP connection? <a href="/bits_ai/bits_chat/bits_cli/">Bits CLI</a> brings Bits Chat to your project directory, with Datadog tools built in and browser sign-in. Install it with Homebrew and run <code>bits</code>:<br><code>brew install datadog-labs/pack/bits</code>
+{{< /callout >}}
+
 
 ## Disclaimers
 

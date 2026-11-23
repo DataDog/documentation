@@ -23,6 +23,14 @@ Bits CLI brings Bits to your terminal. Ask Bits a question in natural language, 
 
 {{< img src="bits_ai/bits_chat/bits_cli.png" alt="The Bits CLI start screen in a terminal, showing the version, site, and authentication method, a list of recent conversations to resume, and the Ask Bits prompt." style="width:80%;" >}}
 
+To try Bits CLI on macOS or Linux, run:
+
+```shell
+brew install datadog-labs/pack/bits && bits
+```
+
+For Windows and other install options, see [Install](#install).
+
 The source code, releases, and issue tracker for Bits CLI are in the [bits-cli GitHub repository][1].
 
 Use Bits CLI to:
