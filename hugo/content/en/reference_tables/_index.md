@@ -204,6 +204,40 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 
 {{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
 
+{{% collapse-content title="Databricks" level="h3" id="databricks" %}}
+
+First, [configure the Databricks integration][14] with access to the table or view to ingest.
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Databricks Account{{< /ui >}}: The connected workspace.
+   - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+Use a view to limit ingestion to the rows and columns you need.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
+
+First, [configure the Snowflake integration and grant read permissions][15] for the source data.
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: The connected Snowflake account.
+   - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
+
+**Note**: If the form displays {{< ui >}}Snowflake Table Name{{< /ui >}} instead of {{< ui >}}Query{{< /ui >}}, enter the source table or view name. Use a view to select the data to ingest.
+
+{{% /collapse-content %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -340,3 +374,7 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
 [13]: /reference_tables/#permissions
+
+[14]: /integrations/databricks/#reference-table-configuration
+[15]: /integrations/snowflake-web/#reference-tables
+[16]: https://app.datadoghq.com/reference-tables
