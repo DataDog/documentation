@@ -26,20 +26,20 @@ Bits Maintenance is in Preview. Use this form to request access.
 
 ## Campaigns
 
-A campaign can upgrade one software project across many clusters, or several software projects on one cluster. For a project campaign, you can customize the [rollout order][3]—for example, development clusters first, then staging, then production.
+A campaign can upgrade one software project across many clusters, or several software projects on one cluster.
 
 ### Project campaigns vs. cluster campaigns
 
 There are two types of campaigns: project campaigns and cluster campaigns. Each type indicates the starting point for the campaign:
 
 - Project campaign: Start by choosing a software project, and upgrade its installations across all or selected clusters.
-    - Project campaigns can define a [rollout order][3].
+    - Project campaigns can define a [rollout order][3]—for example, development clusters first, then staging, then production.
 - Cluster campaign: Start by choosing a cluster, and upgrade all or selected software projects on it.
 
 ### Create a campaign
 
 To create a campaign in Datadog:
-1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Campaigns{{< /ui >}}.
+1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Campaigns{{< /ui >}}][5].
 1. Click {{< ui >}}Create Campaign{{< /ui>}}.
 1. Choose a [campaign type](#project-campaigns-vs-cluster-campaigns): {{< ui >}}Project{{< /ui>}} or {{< ui >}}Cluster{{< /ui>}}.
 1. Fill in the required fields, then click {{< ui >}}Create Campaign{{< /ui>}}.
@@ -53,7 +53,7 @@ You can view plan steps in an interactive workflow diagram:
 
 ### Custom steps
 
-You can add custom steps to a plan that has not yet started. 
+You can add custom steps to a plan that is awaiting approval. 
 
 A custom step can be:
 - Human: requires a person to perform an action before the plan continues.
@@ -62,8 +62,8 @@ A custom step can be:
 When you create a custom step, Datadog saves it. You can then reuse it later, in other plans.
 
 To add a custom step to a plan:
-1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}. 
-1. Select a plan that has not yet started (that is, a plan that is awaiting approval).
+1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}][6]. 
+1. Select a plan that is awaiting approval.
 1. Click {{< ui >}}Revise Plan{{< /ui>}}.
 1. In the interactive workflow diagram, hover over an arrow and click {{< ui >}}Insert custom step{{< /ui>}}.
 1. Add an existing custom step your team has already created, or create one:
@@ -81,3 +81,5 @@ To add a custom step to a plan:
 [2]: /actions/workflows/
 [3]: /bits_ai/bits_maintenance/setup/#step-7-optional-create-a-rollout-order
 [4]: /bits_ai/bits_maintenance/setup/#step-6-recommended-create-an-operational-profile
+[5]: https://app.datadoghq.com/bits-ai/maintenance/campaigns
+[6]: https://app.datadoghq.com/bits-ai/maintenance/plans

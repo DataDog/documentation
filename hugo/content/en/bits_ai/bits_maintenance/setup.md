@@ -173,12 +173,14 @@ For each cluster you'd like to enroll with Bits Maintenance:
 
 ## Step 5: Enroll clusters
 
-To use Bits Maintenance, you must enroll clusters you have already onboarded in Datadog. After you enroll a cluster, Bits Maintenance reviews it to understand which software packages are running.
+To use Bits Maintenance, you must enroll clusters you have already onboarded in Datadog.
 
 To enroll clusters:
 1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Cluster Enrollment{{< /ui>}}.
 1. In the list of clusters, click the checkbox next to each cluster you'd like to enroll.
 1. Click {{< ui >}}Enroll Selected{{< /ui>}}.
+
+After you enroll a cluster, Bits Maintenance scans it to understand which software packages are running. Bits regularly re-scans your enrolled clusters to understand their software inventory. You can also manually trigger a re-scan.
 
 ## Step 6 (Recommended): Create an operational profile
 
@@ -204,7 +206,7 @@ To create a rollout order:
     - The {{< ui >}}Cluster assignment preview{{< /ui>}} shows the sequence in which clusters would actually be deployed using this rollout order.
 1. Click {{< ui >}}Save Rollout Order{{< /ui>}}.
 
-You can also create a rollout order when [configuring a project campaign][5].
+After creating a rollout order, you can select it when [configuring a project campaign][5]. You can also create a rollout order at this time.
 
 ## Further reading
 

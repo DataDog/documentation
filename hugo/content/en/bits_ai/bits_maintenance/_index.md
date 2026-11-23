@@ -38,14 +38,14 @@ When an OSS project your team uses releases a new version, Bits Maintenance:
 
 ## Supported OSS projects
 
-Bits Maintenance supports a specific set of OSS Kubernetes projects, including Redis, cert-manager, Argo CD, and others. See the full list of supported projects on {{< ui >}}Bits Maintenance{{< /ui >}} > {{< ui >}}Coverage{{< /ui >}}.
+Bits Maintenance supports a specific set of OSS Kubernetes projects, including Redis, cert-manager, Argo CD, and others. See the full list of supported projects on [{{< ui >}}Bits Maintenance{{< /ui >}} > {{< ui >}}Coverage{{< /ui >}}][5].
 
 Bits monitors each supported project. For each release, it collects and analyzes source code, release notes, documentation, and Helm charts. This knowledge, combined with your cluster data, allows Bits to assess how new software releases affect your clusters specifically.
 
 ## Ways to work with Bits Maintenance
 
 You can work with Bits Maintenance:
-- In the Datadog web application
+- In the Datadog web application, at 
 - Using the [Datadog MCP][3], which has Bits Maintenance tools and skills
 - Through [Bits Chat][1] and Slack (with `@Datadog`)
 
@@ -60,3 +60,4 @@ You can work with Bits Maintenance:
 [2]: /bits_ai/bits_maintenance/campaigns_plans/
 [3]: /mcp_server/
 [4]: /bits_ai/bits_maintenance/instructions_memories/#upgrade-instructions
+[5]: https://app.datadoghq.com/bits-ai/maintenance/coverage
