@@ -31,14 +31,14 @@ content_filters:
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. You can run Agentless Scanning in one of two modes:
 
-- **Datadog Hosted (SaaS)**: Datadog runs the scanners in its own infrastructure. You attach scanning permissions to your existing Datadog AWS integration role, and you don't deploy any scanner infrastructure. AWS only.
+- **Datadog-hosted (SaaS)**: Datadog runs the scanners in its own infrastructure. You attach scanning permissions to your existing Datadog AWS integration role, and you don't deploy any scanner infrastructure. Supports AWS only.
 - **Self-hosted**: You deploy the scanners in your own cloud account, where they read your disk contents and send only scan results to Datadog. Supports AWS, Azure, and GCP.
 
 Both modes use the same scanning engine and produce the same findings. To compare them, see [Choose where scanners run][8]. Select a mode in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page to see the setup instructions for that mode.
 
 <!-- Self-hosted -->
 {% if equals($agentless_scanner_hosting, "self_hosted") %}
-Self-hosted Agentless Scanning runs entirely within your infrastructure, sending minimal data to Datadog, and leaving your sensitive data in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
+Self-hosted scanners run entirely within your infrastructure, so sensitive data stays in your environment. Because scanning runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
 
 Setup takes approximately 30 minutes per cloud account:
 
@@ -52,10 +52,10 @@ Setup takes approximately 30 minutes per cloud account:
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
 {% alert %}
-Datadog-hosted scanning is in Preview and supports AWS accounts only. To request access, [join the Preview](https://www.datadoghq.com/product-preview/agentless-saas-mode/). To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
+Datadog-hosted scanning is in Preview and supports AWS accounts only. To request access, [join the Preview](https://www.datadoghq.com/product-preview/agentless-saas-mode/). To scan Azure subscriptions or Google Cloud projects, select {% ui %}Self-hosted{% /ui %} in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
 {% /alert %}
 
-With Datadog Hosted (SaaS) Agentless Scanning, Datadog runs the scanners in its own infrastructure. You attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan, and Datadog does the rest. You don't deploy, update, or pay for any scanner infrastructure in your account.
+Attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan. Datadog runs the scans, and you don't deploy, update, or pay for any scanner infrastructure in your account.
 
 Datadog reads your disk contents in its scanning environment, in the region of your Datadog site, and doesn't retain them. If you enable Sensitive Data Scanner, Datadog also reads the contents of your Amazon S3 buckets in its scanning environment. Before you begin, review [Datadog-hosted data residency][27].
 {% /if %}
@@ -73,7 +73,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
   - An {% ui %}Application key{% /ui %} with either `Integrations Manage` or `Org Management` permissions is required for you to enable scanning features through the Datadog API.
 - **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. Datadog automatically applies these permissions, listed below for transparency, during installation.
 
-<!-- AWS -->
+<!-- Self-hosted > AWS -->
 {% if equals($host, "aws") %}
 {% collapse-content title="AWS scanning permissions" level="h3" %}
 Scanning permissions:
@@ -105,8 +105,9 @@ Only when Sensitive Data Scanning (DSPM) is enabled:
 - `s3:ListBucket`
 {% /collapse-content %}
 {% /if %}
+<!-- end Self-hosted > AWS -->
 
-<!-- Azure -->
+<!-- Self-hosted > Azure -->
 {% if equals($host, "azure") %}
 {% collapse-content title="Azure scanning permissions" level="h3" %}
 - `Microsoft.Compute/virtualMachines/read`
@@ -125,8 +126,9 @@ Only when Sensitive Data Scanning (DSPM) is enabled:
 - `Microsoft.Web/sites/publish/Action`
 {% /collapse-content %}
 {% /if %}
+<!-- end Self-hosted > Azure -->
 
-<!-- Google Cloud -->
+<!-- Self-hosted > Google Cloud -->
 {% if equals($host, "google_cloud") %}
 {% collapse-content title="GCP scanning permissions" level="h3" %}
 - `compute.disks.create`
@@ -146,6 +148,7 @@ Only when Sensitive Data Scanning (DSPM) is enabled:
 - `compute.snapshots.setLabels`
 {% /collapse-content %}
 {% /if %}
+<!-- end Self-hosted > Google Cloud -->
 {% /if %}
 <!-- end Self-hosted -->
 
@@ -155,11 +158,11 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
 
 - **AWS integration**: The AWS account you want to scan is integrated with Datadog through the [Datadog AWS integration][11]. Datadog uses the integration's IAM role to scan your account.
 - **[API and Application Keys][1]**: An {% ui %}API key{% /ui %} and an {% ui %}Application key{% /ui %} for your Datadog organization.
-- **Cloud permissions**: Setup attaches a managed IAM policy with the following permissions, and the AWS managed `SecurityAudit` policy, to the Datadog integration role. Setup doesn't create any compute or networking resources in your account.
+- **Cloud permissions**: Setup attaches a managed IAM policy with the following permissions, and the AWS managed `SecurityAudit` policy, to the Datadog integration role. The CloudFormation stack also creates a Lambda function and its IAM execution role, which the stack uses to call the Datadog API during deployment. Setup doesn't create any scanner compute or networking resources in your account.
 
 <!-- TODO(DOCS-16346): Confirm with SME whether Remote Configuration or an RC-enabled API key is required for Datadog-hosted scanning, and which application key permissions are required. -->
 
-{% collapse-content title="Datadog Hosted (SaaS) Agentless Scanning permissions" level="h3" %}
+{% collapse-content title="Datadog-hosted (SaaS) Agentless Scanning permissions" level="h3" %}
 - `ebs:GetSnapshotBlock`
 - `ebs:ListChangedBlocks`
 - `ebs:ListSnapshotBlocks`
@@ -182,7 +185,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
 - `s3:GetObject`
 - `s3:ListBucket`
 
-For the full policy, including resource and condition scoping, see the [Datadog-hosted CloudFormation template][10].
+For the full policy, including resource and condition scoping, see the [Datadog-hosted IAM policy][28].
 {% /collapse-content %}
 {% /if %}
 <!-- end Datadog-hosted -->
@@ -197,7 +200,7 @@ Select your cloud provider in the {% ui %}Cloud provider{% /ui %} filter at the 
 
 ### Choose your setup
 
-<!-- AWS -->
+<!-- Self-hosted > AWS -->
 {% if equals($host, "aws") %}
 
 
@@ -311,9 +314,9 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 {% /if %}
-<!-- end AWS -->
+<!-- end Self-hosted > AWS -->
 
-<!-- Azure -->
+<!-- Self-hosted > Azure -->
 {% if equals($host, "azure") %}
 
 
@@ -387,9 +390,9 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 {% /if %}
-<!-- end Azure -->
+<!-- end Self-hosted > Azure -->
 
-<!-- Google Cloud -->
+<!-- Self-hosted > Google Cloud -->
 {% if equals($host, "google_cloud") %}
 
 
@@ -445,7 +448,7 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 {% /if %}
-<!-- end Google Cloud -->
+<!-- end Self-hosted > Google Cloud -->
 
 {% /if %}
 <!-- end Self-hosted -->
@@ -463,19 +466,19 @@ To enable scanning for an AWS account, attach the Agentless Scanning permissions
 {% tabs %}
 
 {% tab label="CloudFormation" %}
-The [Datadog-hosted CloudFormation template][10] attaches a managed IAM policy with the scanning permissions, and the AWS managed `SecurityAudit` policy, to your Datadog integration role.
+The [Datadog-hosted CloudFormation template][10] attaches a managed IAM policy with the scanning permissions, and the AWS managed `SecurityAudit` policy, to your Datadog integration role. The stack also creates a Lambda function and its IAM execution role, which call the Datadog API during deployment.
 
 1. On the [Cloud Security Setup][4] page, click {% ui %}Cloud Integrations{% /ui %} > {% ui %}AWS{% /ui %}.
 1. Open the AWS account you want to scan:
-   - **Account already integrated with Datadog**: Click the account to open the side panel.
-   - **New AWS account**: At the bottom of the AWS section, click {% ui %}Add AWS accounts by following these steps{% /ui %} and complete the [AWS integration][11] setup. Then, click the new account to open the side panel.
+   - **Account already integrated with Datadog**: Click the account's row to open the side panel. Clicking the account ID opens the AWS integration page in a new tab instead.
+   - **New AWS account**: At the bottom of the AWS section, click {% ui %}Add AWS accounts by following these steps{% /ui %} and complete the [AWS integration][11] setup. Then, click the new account's row to open the side panel.
 1. On the {% ui %}Features{% /ui %} tab, click {% ui %}Configure Agentless Scanning{% /ui %} or {% ui %}Manage{% /ui %} to open the Agentless Scanning Setup modal.
 1. In the {% ui %}How would you like to set up Agentless scanning?{% /ui %} section, select {% ui %}CloudFormation{% /ui %}.
 1. Select the AWS region where you want to create the CloudFormation stack.
-1. Select an API key.
+1. Under {% ui %}Add Datadog API Key{% /ui %}, click {% ui %}Select API Key{% /ui %} and select a key.
 1. Under {% ui %}Create Application Key{% /ui %}, click {% ui %}Create{% /ui %}.
 1. Under {% ui %}Choose Scanning Method{% /ui %}, select {% ui %}Datadog-hosted (SaaS){% /ui %}.
-1. Under {% ui %}Enable Features{% /ui %}, toggle the features you want to enable. Vulnerability Management is enabled by default. Sensitive Data Scanner for Cloud Storage is optional.
+1. Under {% ui %}Enable Features{% /ui %}, toggle the features you want to enable. {% ui %}Enable Agentless Vulnerability management{% /ui %} is always on. Optionally, turn on {% ui %}Enable Code Locations and DSPM (Sensitive Data Scanning){% /ui %} or {% ui %}Enable CIS Host (Linux) Benchmarks{% /ui %}.
 1. Click {% ui %}Launch CloudFormation Template{% /ui %}. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click {% ui %}Done{% /ui %}.
 
@@ -483,22 +486,22 @@ The [Datadog-hosted CloudFormation template][10] attaches a managed IAM policy w
 
 The CloudFormation stack uses the following parameters:
 
-- **DatadogAPIKey** and **DatadogAPPKey**: Your Datadog API key and application key.
-- **DatadogSite**: Your Datadog site ({% region-param key="dd_site" code=true /%}).
-- **DatadogIntegrationRoleName**: The name of the IAM role that the Datadog AWS integration uses in this account.
-- **AgentlessVulnerabilityScanning**: Set to `true` to scan hosts, containers, and Lambda functions for vulnerabilities.
-- **AgentlessSensitiveDataScanning**: Set to `true` to scan Amazon S3 buckets with [Sensitive Data Scanner][14].
-- **AgentlessComplianceHostScanning**: Set to `true` to scan hosts for compliance.
+- `DatadogAPIKey` and `DatadogAPPKey`: Your Datadog API key and application key.
+- `DatadogSite`: Your Datadog site ({% region-param key="dd_site" code=true /%}).
+- `DatadogIntegrationRoleName`: The name of the IAM role that the Datadog AWS integration uses in this account.
+- `AgentlessVulnerabilityScanning`: Set to `true` to scan hosts, containers, and Lambda functions for vulnerabilities.
+- `AgentlessSensitiveDataScanning`: Set to `true` to scan Amazon S3 buckets with [Sensitive Data Scanner][14].
+- `AgentlessComplianceHostScanning`: Set to `true` to scan hosts for compliance.
 {% /tab %}
 
 {% tab label="CloudFormation StackSet (multi-account)" %}
 For AWS Organizations with multiple accounts, use a CloudFormation StackSet to attach the Agentless Scanning permissions to the Datadog integration role in all member accounts. This approach automates onboarding and configures new accounts added to your AWS Organization.
 
-#### Prerequisites {% #datadog-hosted-stackset-prerequisites %}
+#### Additional prerequisites for StackSet {% #datadog-hosted-stackset-prerequisites %}
 
 - Access to the AWS management account
 - [Trusted Access with AWS Organizations](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html) must be enabled for CloudFormation StackSets
-- Each member account is integrated with Datadog through the [Datadog AWS integration][11]
+- Every member account is integrated with Datadog through the [Datadog AWS integration][11]
 
 #### Deploy the StackSet {% #datadog-hosted-deploy-the-stackset %}
 
@@ -522,7 +525,7 @@ You can attach the scanning permissions to the Datadog integration role with Ter
 
 {% /tabs %}
 
-After you attach the permissions, Datadog detects them automatically and begins scanning the account on the next scan cycle. Next, [verify your setup](#verify-your-setup).
+After you attach the permissions, Datadog detects them automatically and begins scanning the account on the next scan cycle. Next, see the [Verify your setup](#verify-your-setup) section.
 {% /if %}
 <!-- end Datadog-hosted -->
 
@@ -548,26 +551,29 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 <!-- Self-hosted -->
 {% if equals($agentless_scanner_hosting, "self_hosted") %}
 
-<!-- AWS -->
+<!-- Self-hosted > AWS -->
 {% if equals($host, "aws") %}
 1. On the [Cloud Security Setup][4] page, click {% ui %}Cloud Integrations{% /ui %} > {% ui %}AWS{% /ui %}.
 1. If required, use filters to find the account you want to stop Agentless Scanning for. Click the account to open the side panel that contains its settings.
 1. On the {% ui %}Features{% /ui %} tab, under {% ui %}Requires setup of the Agentless Scanners:{% /ui %} switch the toggles to the off position.
 {% /if %}
+<!-- end Self-hosted > AWS -->
 
-<!-- Azure -->
+<!-- Self-hosted > Azure -->
 {% if equals($host, "azure") %}
 1. On the [Cloud Security Setup][4] page, click {% ui %}Cloud Integrations{% /ui %} > {% ui %}Azure{% /ui %}.
 1. Expand the tenant containing the subscription where you want to disable Agentless Scanning. Click the subscription to open the side panel that contains its settings.
 1. On the {% ui %}Features{% /ui %} tab, under {% ui %}Requires setup of the Agentless Scanners:{% /ui %} switch the toggles to the off position.
 {% /if %}
+<!-- end Self-hosted > Azure -->
 
-<!-- Google Cloud -->
+<!-- Self-hosted > Google Cloud -->
 {% if equals($host, "google_cloud") %}
 1. On the [Cloud Security Setup][4] page, click {% ui %}Cloud Integrations{% /ui %} > {% ui %}GCP{% /ui %}.
 1. Expand the account containing the project where you want to disable Agentless Scanning. Click the project to open the side panel that contains its settings.
 1. On the {% ui %}Features{% /ui %} tab, under {% ui %}Requires setup of the Agentless Scanners:{% /ui %} switch the toggles to the off position.
 {% /if %}
+<!-- end Self-hosted > Google Cloud -->
 
 {% /if %}
 <!-- end Self-hosted -->
@@ -586,7 +592,7 @@ To stop scanning an AWS account, delete the CloudFormation stack that attached t
 
 Select the deployment method you used to install Agentless Scanning:
 
-<!-- AWS -->
+<!-- Self-hosted > AWS -->
 {% if equals($host, "aws") %}
 {% tabs %}
 
@@ -600,9 +606,9 @@ To uninstall Agentless Scanning, remove the scanner module from your Terraform c
 
 {% /tabs %}
 {% /if %}
-<!-- end AWS -->
+<!-- end Self-hosted > AWS -->
 
-<!-- Azure -->
+<!-- Self-hosted > Azure -->
 {% if equals($host, "azure") %}
 {% tabs %}
 
@@ -637,9 +643,9 @@ To uninstall Agentless Scanning, remove the scanner module from your Terraform c
 
 {% /tabs %}
 {% /if %}
-<!-- end Azure -->
+<!-- end Self-hosted > Azure -->
 
-<!-- Google Cloud -->
+<!-- Self-hosted > Google Cloud -->
 {% if equals($host, "google_cloud") %}
 {% tabs %}
 
@@ -666,7 +672,7 @@ To uninstall Agentless Scanning, remove the scanner module from your Terraform c
 
 {% /tabs %}
 {% /if %}
-<!-- end Google Cloud -->
+<!-- end Self-hosted > Google Cloud -->
 {% /if %}
 <!-- end Self-hosted -->
 
@@ -692,3 +698,4 @@ To uninstall Agentless Scanning, remove the scanner module from your Terraform c
 [25]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=gcp
 [26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 [27]: /security/cloud_security_management/setup/agentless_scanning#datadog-hosted-data-residency
+[28]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/datadog_agentless_saas_policy.json

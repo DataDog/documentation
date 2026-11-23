@@ -136,7 +136,7 @@ options:
 - label: Datadog application
   id: datadog_application
 
-- label: Datadog Hosted (SaaS)
+- label: Datadog-hosted (SaaS)
   id: datadog_hosted
 
 - label: Datadog Archives

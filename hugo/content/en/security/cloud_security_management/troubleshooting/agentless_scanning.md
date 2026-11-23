@@ -20,12 +20,12 @@ After deploying Agentless Scanning, results do not appear immediately. First res
 If no results appear after two hours:
 
 - Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
-- For self-hosted scanners:
-  - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
-  - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
-- For Datadog-hosted scanning, verify the following:
+- For **self-hosted scanning**, verify the following:
+  - The scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
+  - [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
+- For **Datadog-hosted scanning**, verify the following:
   - The Datadog integration role is set up in your AWS account, and Datadog is collecting data from the account through the [AWS integration][13].
-  - The Agentless Scanning IAM policy is attached to the Datadog integration role.
+  - The Agentless Scanning managed IAM policy and the AWS managed `SecurityAudit` policy are attached to the Datadog integration role.
   - Scanning is enabled for the account:
     - If you set up scanning using CloudFormation, check the account's Agentless Scanning settings on the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, or use the [Agentless Scanning API][14].
     - If you set up scanning using Terraform, check the [`datadog_agentless_scanning_aws_scan_options`][15] resource for the account.
