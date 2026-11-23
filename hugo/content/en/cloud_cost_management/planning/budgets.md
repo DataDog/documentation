@@ -18,10 +18,11 @@ further_reading:
 ## Overview
 Set up budgets and enable engineering teams to visualize how they are tracking against budgets.
 
-You can create two types of budgets:
+You can create three types of budgets:
 
 - {{< ui >}}Basic{{< /ui >}}: A flat, single-level budget for tracking your cloud costs.
 - {{< ui >}}Hierarchical{{< /ui >}}: A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, if your organization has departments made up of many teams, you can budget on the department (parent) and team (child) levels and track budget health at both levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
+- {{< ui >}}AI Spend Limits{{< /ui >}}: A daily or monthly limit on each user's AI model and agent spend. See [AI spend limits](#ai-spend-limits).
 
 ## Set up budgets
 
@@ -83,6 +84,18 @@ To create a hierarchical budget:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## AI spend limits
+
+<div class="alert alert-info">AI spend limits are in Preview.</div>
+
+AI spend limits cap each user's daily or monthly AI model and agent spend. To create one, navigate to [**Cloud Cost > Plan > Budgets**][1], click {{< ui >}}New Budget{{< /ui >}}, and select {{< ui >}}AI Spend Limits{{< /ui >}}. Set a limit per user, a Cloud Cost query grouped by `user_email`, and an optional monthly ceiling for all users. Saving creates a [monitor][5] that alerts when a user reaches the limit. It also creates a [workflow][6] that sends that user a Slack direct message in the workspace you choose, or an email otherwise. If your organization has no Slack integration, the workflow sends email only. Creating an AI spend limit requires the `ccm_budget_write` permission. To send notifications, you also need `monitors_write` and `workflows_write`.
+
+{{< img src="cloud_cost/budgets/ai-spend-limit-create.png" alt="Form to create an AI spend limit with a $3,000 monthly limit per user email, a Cloud Cost query for AI providers grouped by user_email, and a Slack workspace" style="width:100%;" >}}
+
+Open a spend limit to see total and forecasted spend against the budget ceiling, and each user's spend, limit, and triggered alerts.
+
+{{< img src="cloud_cost/budgets/ai-spend-limit-status.png" alt="AI spend limit status page showing actual and forecasted cost against a $20k monthly ceiling, 2 of 38 users over their limit, and a table of each user's spend, limit, status, and alerts" style="width:100%;" >}}
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
@@ -215,6 +228,7 @@ To remove an override, clear the cell. The cell reverts to the gray Bits forecas
 | View budgets | `cloud_cost_management_read` |
 | Create, edit, or delete a budget | `ccm_budget_write` |
 | Edit custom forecast values | `ccm_forecast_write` |
+| Create an AI spend limit | `ccm_budget_write` (add `monitors_write` and `workflows_write` to send notifications) |
 
 For the full list of CCM permissions, see the [Permissions documentation][4].
 
@@ -225,3 +239,5 @@ For the full list of CCM permissions, see the [Permissions documentation][4].
 [2]: /cloud_cost_management/cost_changes/monitors/
 [3]: /cloud_cost_management/planning/forecasting
 [4]: /cloud_cost_management/setup/permissions
+[5]: /monitors/
+[6]: /actions/workflows/
