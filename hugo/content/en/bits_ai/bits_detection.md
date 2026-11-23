@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Monitoring coverage drifts as engineers add endpoints, move dependencies, and change user flows. A service can look healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps that coverage current. Your existing monitors stay in place, and Bits Detection works alongside them.
+Monitor coverage drifts as engineers add endpoints, move dependencies, and change user flows. A service can look healthy at the top level while one critical path is failing. Bits Detection identifies which endpoints need coverage, sets detection logic from observed production behavior, and keeps that coverage current. Your existing monitors stay in place, and Bits Detection works alongside them.
 
 Bits Detection manages monitoring in three stages:
 

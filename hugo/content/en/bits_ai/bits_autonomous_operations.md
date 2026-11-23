@@ -26,14 +26,14 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 
 ## Prerequisites
 
-- [Create monitors][7] that alert when your systems might be unhealthy. Bits triages alerts from these monitors to identify unique issues that warrant deeper investigation.
-- To let Bits create pull requests for code fixes, [enable automatic code fixes][16].
+- [Create monitors][7] that alert when your systems might be unhealthy.
+- [Enable automatic code fixes][16] to let Bits create pull requests for code fixes.
 - To let Bits take infrastructure actions after you approve them:
   1. Set up the type of action that you want Bits to take:
      - For Kubernetes, see [Kubernetes actions][20].
      - For Amazon EC2, Amazon ECS, and AWS Lambda, see [AWS actions][21].
   1. [Create one or more guardrails][18] to authorize Bits to take action.
-- (Recommended) Install the [Slack integration][19] and add Bits to your team's ops channel. With Slack, you can create scopes that watch alerts in a Slack channel, and approve remediation actions from Slack.
+- (Recommended) Install the [Slack integration][19] and add Bits to your team's ops channel.
 
 ## Scopes
 
