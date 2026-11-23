@@ -735,7 +735,7 @@ Searches your organization's teams, roles, and active users for approvers to nam
 ### `create_bits_guardrail`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Write`*\
-Creates a guardrail with a trust level, one or more actions from `list_bits_guardrail_actions` (all for the same type of infrastructure), the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
+Creates a guardrail with a trust level, one or more actions from `list_bits_guardrail_actions` (all for the same type of infrastructure), the resource tags it applies to, and, for ask guardrails, its approvers. For an ask guardrail, you can also choose Slack channels where Bits posts approval requests when it needs to take a covered action. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
 
 - Require approval from the SRE team before Bits restarts or rolls back Kubernetes deployments tagged `env:prod`.
 - Prevent Bits from scaling Kubernetes deployments tagged `team:payments`.
