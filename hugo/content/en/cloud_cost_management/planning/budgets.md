@@ -120,7 +120,7 @@ To create an AI spend limit:
 
 AI spend limits notify each user when their AI model and agent spend reaches their limit. Users get a Slack direct message, or an email when Slack isn't available. Behind the scenes, each spend limit is backed by a [monitor][5] and a [workflow][6] that Datadog creates when you save it.
 
-To see total and forecasted spend, and each user's spend, limit, and alerts, open the spend limit from the [Budgets page][1].
+Spend limits that use Cloud Cost have a status page. Open the spend limit from the [Budgets page][1] to see total and forecasted spend, and each user's spend, limit, and alerts.
 
 {{< img src="cloud_cost/budgets/ai-spend-limit-status.png" alt="AI spend limit status page showing actual and forecasted cost against a $20k monthly ceiling, 2 of 38 users over their limit, and a table of each user's spend, limit, status, and alerts" style="width:100%;" >}}
 
