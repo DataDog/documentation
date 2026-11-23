@@ -31958,6 +31958,11 @@ components:
         dd_resource_key:
           description: Datadog resource key identifying the recommended resource.
           type: string
+        extra_fields:
+          description: Selected recommendation fields. Omitted when no requested fields match.
+          items:
+            $ref: "#/components/schemas/CostRecommendationExtraField"
+          type: array
         potential_daily_savings:
           $ref: "#/components/schemas/CostRecommendationDataAttributesPotentialDailySavings"
         recommendation_type:
@@ -32001,6 +32006,20 @@ components:
       type: string
       x-enum-varnames:
         - RECOMMENDATION
+    CostRecommendationExtraField:
+      description: A recommendation field selected by the request's `extra_fields` patterns.
+      properties:
+        path:
+          description: Dotted path of the matched field in the recommendation event's custom attributes.
+          example: tags.env
+          type: string
+        value:
+          description: Matched JSON value. Paths through arrays return the matched values as an array.
+          example: prod
+      required:
+        - path
+        - value
+      type: object
     CostTag:
       description: A Cloud Cost Management tag.
       properties:
@@ -119627,6 +119646,8 @@ components:
       example:
         data:
           attributes:
+            extra_fields:
+              - tags.env
             scope: ccm
             sort:
               - expression: "@potential_daily_savings"
@@ -119661,6 +119682,20 @@ components:
     RecommendationsFilterRequestDataAttributes:
       description: Attributes used to filter and sort cost recommendations.
       properties:
+        extra_fields:
+          description: |-
+            Additional fields to return from the recommendation event's custom attributes, selected
+            by dotted paths such as `tags.env` or wildcard patterns such as `*target*`.
+            Arrays are traversed without indexes. Matched objects and arrays are returned whole.
+            A maximum of 256 selectors can be requested. Selectors that match nothing return no field.
+          example:
+            - tags.env
+            - "*target*"
+          items:
+            description: A dotted field path or wildcard pattern.
+            type: string
+          maxItems: 256
+          type: array
         filter:
           description: |-
             Filter expression applied to the recommendations. When supplied, this attribute overrides
@@ -181543,6 +181578,8 @@ paths:
                 value:
                   data:
                     attributes:
+                      extra_fields:
+                        - tags.env
                       scope: ccm
                       sort:
                         - expression: "@potential_daily_savings"
@@ -181562,6 +181599,9 @@ paths:
                     data:
                       - attributes:
                           dd_resource_key: "arn:aws:ec2:us-east-1:123456789012:instance/i-1234567890abcdef0"
+                          extra_fields:
+                            - path: tags.env
+                              value: prod
                           potential_daily_savings:
                             amount: 1.23
                             currency: USD
