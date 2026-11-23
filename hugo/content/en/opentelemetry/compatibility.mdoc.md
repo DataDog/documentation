@@ -231,7 +231,6 @@ point the frontmatter at them, and update each row.
 - [Remote Configuration of the Collector][3]
 -
   {% if equals($otel_destination, "agents_collector") %}{% tooltip contents="This feature is in Preview." %}Preview{% /tooltip %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
 {% /table %}
 
 ## DDOT SDK setups {% #ddot-sdk-setups %}
@@ -240,7 +239,7 @@ DDOT SDKs export traces, metrics, and logs over standard OTLP. These signals don
 
 Datadog recommends that you run the Datadog Agent with DDOT SDKs. Features marked **With Agent** need it:
 
-- **Remote Configuration**: For [App and API Protection][22], [Code Security][48], [Feature Flags][50], [Dynamic Instrumentation][49], [Live Debugger][51], and [remotely configured head sampling][52], the Agent proxies Remote Configuration. It doesn't change how your OTLP telemetry flows.
+- **Remote Configuration**: For [Dynamic Instrumentation][49], [Live Debugger][51], and [remotely configured head sampling][52], the Agent proxies Remote Configuration. With an upstream OpenTelemetry Collector, [App and API Protection][22] and [Feature Flags][50] also need it. The Agent doesn't change how your OTLP telemetry flows.
 - **Host data**: For [Cloud Network Monitoring][18], [Live Container Monitoring][19], [Live Processes][20], and [Universal Service Monitoring][21], the Agent collects data from the host.
 - **Database and broker monitoring**: For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application while the Agent monitors the database or message broker. You can run the Agent on those hosts instead of alongside your applications.
 
