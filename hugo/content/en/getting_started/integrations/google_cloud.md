@@ -373,11 +373,6 @@ Each filter is a Google Cloud [project label][69] in the form `key:value`. Keys 
 
 {{% /collapse-content %}}
 
-**Notes**:
-- Projects with IDs that start with `sys` are not monitored, and filters cannot include them.
-- If you limit monitoring to the selected projects during [Quick Start](#quickstart-setup) setup, Datadog saves the selected project IDs as project ID filters. Projects that the service account gains access to later are not monitored until you add them to the filters.
-- To set filters through the API, use the `project_filter_configs` attribute of the [Google Cloud STS service account API][70]. When updating a service account, omit the attribute to keep the current filters, or send an empty list to remove them.
-
 ### Limit metric collection filters
 
 You can choose which services and resources to collect metrics from. This can help control costs by reducing the number of API calls made on your behalf.
@@ -579,4 +574,3 @@ Expanded BigQuery monitoring provides granular visibility into your BigQuery env
 [67]: https://docs.datadoghq.com/logs/guide/google-cloud-log-forwarding
 [68]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses/bigquery/
 [69]: https://cloud.google.com/resource-manager/docs/labels-overview
-[70]: /api/latest/gcp-integration/#update-sts-service-account
