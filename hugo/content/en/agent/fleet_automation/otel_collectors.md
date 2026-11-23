@@ -52,7 +52,21 @@ In [Fleet View][1], filter for OTel Collectors and select a Collector to open it
 - Pipeline and topology views of the Collector
 - [Audit Trail events][6], such as configuration changes, upgrades, and flares (Agent's Collector only)
 
-To check the health of your Collectors, see [Monitor Agent and OTel Collector health][7].
+## Monitor OTel Collector health
+
+{{< callout url="https://www.datadoghq.com/product-preview/otel-collector-health-in-fleet-automation/" header="Join the Preview!" >}}
+OTel Collector health is in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
+To show health signals for a Collector, enable the Collector's [internal telemetry][16]. If you use the OpAMP extension, see [Send the Collector's internal telemetry][17].
+
+With OTel Collector health signals, you can:
+
+- Detect silent telemetry drops and anomalies that affect your OTel pipelines and services.
+- Diagnose and fix issues with running configurations and pipeline topologies, with guided troubleshooting context.
+- Identify and mitigate emerging pipeline risks across your fleet at a glance.
+
+To view health signals in Fleet View, see [Monitor Agent and OTel Collector health][7].
 
 ## Visualize OTel pipelines
 
@@ -71,14 +85,14 @@ To access these views:
 The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
 
 - Validate telemetry routing between configured receivers, processors, and exporters.
-- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
+- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle. The toggle requires the Collector's [internal telemetry][16].
 - Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
 
 ### Topology view
 
-<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology">Configure gateway topology</a>.</div>
+<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#5-optional-configure-gateway-topology">Configure gateway topology</a>.</div>
 
 The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
 
@@ -113,8 +127,6 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 1. Scope the configuration to the target Collectors. Filter by host information or tags to target a specific group.
 1. Update the target fields, or replace the entire YAML configuration.
 
-   **[Placeholder: Add a screenshot of the Configure OTel with YAML step.]**
-
 1. Review the deployment plan to confirm the scoped Collectors and deployment settings, such as rollout concurrency.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track its progress on the [Deployments page][11].
 
@@ -127,8 +139,6 @@ You can send a flare from the Agent's Collector after you enable Remote Configur
 ## Upgrade the Agent's Collector
 
 To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
-
-**[Placeholder: Confirm that upgrading the Agent also upgrades its Collector.]**
 
 ## Further Reading
 
@@ -147,3 +157,5 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 [13]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [14]: /agent/fleet_automation/upgrade_agents/
 [15]: /opentelemetry/integrations/opamp_extension/
+[16]: /opentelemetry/integrations/datadog_extension/#4-enable-the-collectors-internal-telemetry
+[17]: /opentelemetry/integrations/opamp_extension/#3-send-the-collectors-internal-telemetry
