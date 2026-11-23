@@ -39,6 +39,7 @@ The pipeline graph for a version shows the changes since the previous version. F
 | **Added** | The component is new in this version. |
 | **Removed** | The component was in the previous version, but is not in this version. |
 | **Modified** | The component is in both versions, but its configuration changed. |
+| **Moved**    | The component is in both versions but in different positions in the configuration. |
 
 ### See a summary of changes
 
