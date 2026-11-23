@@ -521,6 +521,48 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 | {{< ui >}}Missed alert{{< /ui >}} | Contract bounds to alert on this behavior. |
 | {{< ui >}}Ignore{{< /ui >}} | Exclude annotated data when modeling bounds. |
 
+## Run a monitor with the API
+
+<div class="alert alert-info">The Data Observability API endpoints are in Preview and subject to change.</div>
+
+Use the [Data Observability API][10] to run a data quality monitor from your own pipeline and act on the result. For example, run a monitor after an Airflow task or dbt job loads a table, and stop downstream jobs if the monitor alerts. This workflow suits monitors with a {{< ui >}}Manual{{< /ui >}} [schedule](#monitor-schedule), which evaluate only when you trigger them.
+
+A run takes two calls:
+
+1. [Run a data observability monitor][17] with `POST /api/v2/data-observability/monitors/<MONITOR_ID>/run`. The response returns the run ID in `data.id`. The monitor ID is the number at the end of the monitor's URL.
+2. [Get the run status][18] with `GET /api/v2/data-observability/monitors/runs/<RUN_ID>/status`. The monitor evaluates asynchronously, so poll this endpoint until `data.attributes.status` is no longer `pending`.
+
+A finished run reports one of the following statuses:
+
+| Status | Description |
+|---|---|
+| `ok` | The metric is within the monitor's thresholds or expected bounds. |
+| `warn` | The metric crossed the warning threshold. |
+| `alert` | The metric crossed the alert threshold or fell outside the expected bounds. |
+| `error` | The run could not be evaluated. `data.attributes.error_message` explains why, for example when the run produced no metric data. |
+
+Both endpoints authenticate with an [API key and an application key][19]. The application key needs the `data_observability_monitors_write` or `monitors_write` permission.
+
+The following script runs a monitor, waits up to 20 minutes for the result, and exits with a non-zero code unless the status is `ok`. Use it as a step in your CI or orchestration tool to stop the pipeline when the monitor alerts. Set `DD_SITE` to your Datadog site (for example, {{< region-param key="dd_site" code="true" >}}).
+
+```shell
+API="https://api.${DD_SITE}/api/v2/data-observability/monitors"
+AUTH=(-H "DD-API-KEY: ${DD_API_KEY}" -H "DD-APPLICATION-KEY: ${DD_APP_KEY}")
+
+RUN_ID=$(curl -sf -X POST "${API}/${MONITOR_ID}/run" "${AUTH[@]}" | jq -r '.data.id')
+
+for attempt in $(seq 1 40); do
+  STATUS=$(curl -sf "${API}/runs/${RUN_ID}/status" "${AUTH[@]}" | jq -r '.data.attributes.status')
+  [ "${STATUS}" != "pending" ] && break
+  sleep 30
+done
+
+echo "Monitor ${MONITOR_ID} run ${RUN_ID} finished with status: ${STATUS}"
+[ "${STATUS}" = "ok" ]
+```
+
+For request and response schemas and client library examples, see the [Data Observability API reference][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -541,3 +583,6 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [14]: /data_observability/jobs_monitoring/
 [15]: https://app.datadoghq.com/data-obs/monitors/create/data-jobs
 [16]: /data_observability/jobs_monitoring/openlineage/
+[17]: /api/latest/data-observability/#run-a-data-observability-monitor
+[18]: /api/latest/data-observability/#get-data-observability-monitor-run-status
+[19]: /account_management/api-app-keys/
