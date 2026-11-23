@@ -2597,6 +2597,123 @@ menu:
       url: /api/latest/notebooks/
       identifier: notebooks
       generated: true
+    - name: Update a notebook widget
+      url: /api/latest/notebooks/update-a-notebook-widget/
+      identifier: notebooks-update-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookWidget
+        unstable:
+          - v2
+        order: 12
+    - name: Get a notebook widget
+      url: /api/latest/notebooks/get-a-notebook-widget/
+      identifier: notebooks-get-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookWidget
+        unstable:
+          - v2
+        order: 11
+    - name: List notebook widgets
+      url: /api/latest/notebooks/list-notebook-widgets/
+      identifier: notebooks-list-notebook-widgets
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookWidgets
+        unstable:
+          - v2
+        order: 10
+    - name: Update a notebook task
+      url: /api/latest/notebooks/update-a-notebook-task/
+      identifier: notebooks-update-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookTask
+        unstable:
+          - v2
+        order: 9
+    - name: Get a notebook task
+      url: /api/latest/notebooks/get-a-notebook-task/
+      identifier: notebooks-get-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookTask
+        unstable:
+          - v2
+        order: 8
+    - name: List notebook tasks
+      url: /api/latest/notebooks/list-notebook-tasks/
+      identifier: notebooks-list-notebook-tasks
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookTasks
+        unstable:
+          - v2
+        order: 7
+    - name: Get a notebook section
+      url: /api/latest/notebooks/get-a-notebook-section/
+      identifier: notebooks-get-a-notebook-section
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookSection
+        unstable:
+          - v2
+        order: 6
+    - name: List notebook sections
+      url: /api/latest/notebooks/list-notebook-sections/
+      identifier: notebooks-list-notebook-sections
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookSections
+        unstable:
+          - v2
+        order: 5
+    - name: Update notebook content
+      url: /api/latest/notebooks/update-notebook-content/
+      identifier: notebooks-update-notebook-content
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookContent
+        unstable:
+          - v2
+        order: 4
     - name: Update a notebook
       url: /api/latest/notebooks/update-a-notebook/
       identifier: notebooks-update-a-notebook
@@ -2605,9 +2722,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - UpdateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Get a notebook
       url: /api/latest/notebooks/get-a-notebook/
@@ -2617,9 +2736,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 5
     - name: Delete a notebook
       url: /api/latest/notebooks/delete-a-notebook/
@@ -2641,9 +2762,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Get all notebooks
       url: /api/latest/notebooks/get-all-notebooks/
@@ -4545,6 +4668,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Search remediation groups
+      url: /api/latest/security-monitoring/search-remediation-groups/
+      identifier: security-monitoring-search-remediation-groups
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRemediationGroups
+        unstable:
+          - v2
+        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -6297,9 +6433,9 @@ menu:
           - TriggerTests
         unstable: []
         order: 16
-    - name: Search Synthetic tests
-      url: /api/latest/synthetics/search-synthetic-tests/
-      identifier: synthetics-search-synthetic-tests
+    - name: Search Synthetic tests with filters
+      url: /api/latest/synthetics/search-synthetic-tests-with-filters/
+      identifier: synthetics-search-synthetic-tests-with-filters
       parent: synthetics
       generated: true
       params:
@@ -23763,6 +23899,30 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
+    - name: Get Agent Observability Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-agent-observability-scanning-group/
+      identifier: sensitive-data-scanner-get-agent-observability-scanning-group
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScanningGroup
+        unstable: []
+        order: 11
+    - name: List Agent Observability Scanning Groups
+      url: /api/latest/sensitive-data-scanner/list-agent-observability-scanning-groups/
+      identifier: sensitive-data-scanner-list-agent-observability-scanning-groups
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTargetScanningGroups
+        unstable: []
+        order: 10
     - name: List standard patterns
       url: /api/latest/sensitive-data-scanner/list-standard-patterns/
       identifier: sensitive-data-scanner-list-standard-patterns

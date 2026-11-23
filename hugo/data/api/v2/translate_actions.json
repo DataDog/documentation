@@ -1363,7 +1363,7 @@
     "summary": "Get commitments coverage (scalar)"
   },
   "GetCommitmentsCoverageTimeseries": {
-    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type for both hours and cost. AWS and Azure report Reserved Instances, Savings Plans, On-Demand, and Spot. GCP reports Flex Committed Use Discounts and On-Demand.",
     "summary": "Get commitments coverage (timeseries)"
   },
   "GetCommitmentsOnDemandHotspotsScalar": {
@@ -1531,7 +1531,7 @@
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.",
+    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for\n[parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\nThis endpoint is not available in the US2-FED site.",
     "summary": "Get Monthly Cost Attribution"
   },
   "ListAllCSMAgents": {
@@ -1833,7 +1833,7 @@
     "summary": "Get all deployment gates"
   },
   "CreateDeploymentGate": {
-    "description": "Endpoint to create a deployment gate.",
+    "description": "Create a deployment gate for a specific environment or for all environments using `*`.\nA gate for all environments and a gate for a specific environment cannot coexist for the\nsame organization, service, and identifier. A conflicting creation returns 400 Bad Request.",
     "summary": "Create deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
@@ -5017,6 +5017,64 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "CreateNotebook": {
+    "description": "Create a notebook from its full Markdown document and metadata. The leading H1 supplies the title.\nJSON requests may also supply an explicit title attribute; if both are supplied, they must agree.\nCreation without a title returns 422. Other metadata comes from JSON attributes or YAML frontmatter\nin text/markdown requests. For older documents, a non-blank frontmatter title is accepted when no\nnon-blank leading H1 is supplied.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json. Full-document responses include the title H1 in both representations;\nMarkdown responses omit title from frontmatter.",
+    "summary": "Create a notebook",
+    "request_description": "Notebook create request body.",
+    "request_schema_description": "Request body for creating a notebook."
+  },
+  "GetNotebook": {
+    "description": "Get a notebook by ID.\n\nUse `Accept: text/markdown` to retrieve the full notebook, with its title as a leading H1 and other\nmetadata as YAML frontmatter. JSON attributes.markdown includes the same title H1.\nUse the JSON response to retrieve the notebook resource, relationships, and\nrequest-specific metadata.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook"
+  },
+  "UpdateNotebook": {
+    "description": "Update notebook metadata, optionally replacing the full Markdown document. Omitted attributes are\nunchanged. JSON requests supply metadata as attributes; text/markdown requests supply other metadata\nas YAML frontmatter. A supplied markdown attribute or a text/markdown body replaces the whole body\nand consumes its leading H1 as the title. When no title is supplied, the existing title is preserved.\nIf explicit JSON title and document title disagree and exactly one matches the stored title, the\nother wins; if both change to different values, return 422. Use POST /content with op=replace to\nreplace the document without changing metadata other than the title.\nRead-only fields in frontmatter are ignored; unknown writable fields are rejected.\nReturns the full notebook.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook",
+    "request_description": "Notebook update request body.",
+    "request_schema_description": "Request body for updating a notebook."
+  },
+  "UpdateNotebookContent": {
+    "description": "Append, replace, edit, or remove notebook content, optionally within a section.\n\nJSON requests require `Content-Type: application/json` and supply all operation fields in the\nbody. Operation-related query parameters are rejected, even when they match the body. Supply one\nappend, replace, or remove operation, or an ordered atomic batch of 1 to 100 edit operations.\nMixed batches and multiple non-edit operations are rejected.\n\nMarkdown requests require `Content-Type: text/markdown` and an explicit `op` query parameter.\nThe body contains the Markdown to append or replace, or the literal `new_text` for an edit.\nA remove operation requires an empty body. `old_text` and `expected_match_count` apply only to\nedits. Supply `scope[type]` and `scope[id]` together. Each operation query parameter may occur\nonly once.\n\nOmit the scope to target the whole notebook. An explicit `notebooks` scope must match the ID in\nthe URL. To replace a section, use `op=replace` with `scope[type]=notebook_sections` and the\nsection ID. The replacement must start with a heading, which keeps the section ID. Empty\nreplacements, including those containing only white space, remove the section. Section-scoped\nedits must preserve a leading heading unless they remove the section entirely.\nAn append operation adds content after the selected section and its nested sections.\nReplacing or removing a section can change the surrounding heading hierarchy. An unavailable\nscope returns an error instead of targeting the whole notebook.\n\nWhole-document replacement consumes a leading H1 as the notebook title. Whole-document edits\nmatch the same projection, including that H1, so editing it can rename the notebook. Append and\nsection-scoped operations retain their headings as body content and preserve the notebook title.\nOther notebook metadata is unchanged, including when frontmatter is supplied. Edit operations\nmatch exact text in the Markdown document and treat replacement text literally.\nEdit, replace, remove, and scoped append operations check for conflicting changes before writing.\nSend the most recently observed `document_revision` with the request.\n\nEvery successful operation returns 200 and the full resulting notebook, including operations\nthat make no changes or remove the entire body. Responses negotiate JSON or Markdown\nindependently of the request format. JSON responses and all errors use `application/vnd.api+json`.",
+    "summary": "Update notebook content",
+    "request_description": "JSON operations request or single-operation Markdown body. JSON requires a body; Markdown remove\nrequires an empty body.",
+    "request_schema_description": "Canonical content operations request. Supply one append, replace, or remove, or an atomic batch\nconsisting only of edits."
+  },
+  "ListNotebookSections": {
+    "description": "List the notebook sections in document order. JSON returns section metadata without markdown\nunless requested through fields[notebook_sections]. Markdown returns an outline of section\nheadings with stable HTML anchors, without section content.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook sections"
+  },
+  "GetNotebookSection": {
+    "description": "Get one section by its stable ID. A section includes its heading and descendants up to the next\nheading at the same or a higher level.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook section"
+  },
+  "ListNotebookTasks": {
+    "description": "List the notebook tasks in document order.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook tasks"
+  },
+  "GetNotebookTask": {
+    "description": "Get one task by its stable ID.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook task"
+  },
+  "UpdateNotebookTask": {
+    "description": "Update task text or completion state. Supplying text replaces all inline content with plain\ntext, removing formatting, links, and mentions. Use POST /content edits for formatted changes.\nSupply at least one of text or checked. Returns the updated task; request bodies must be JSON.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook task",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a task."
+  },
+  "ListNotebookWidgets": {
+    "description": "List the notebook widgets in document order. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook widgets"
+  },
+  "GetNotebookWidget": {
+    "description": "Get one widget by its stable ID. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook widget"
+  },
+  "UpdateNotebookWidget": {
+    "description": "Update the widget definition or notebook-owned graph_size, time, or split_by. Supply at least one\nwritable field. Definitions are replaced as a whole; title belongs in definition.title. Null\nclears graph_size, time, or split_by. Request and response bodies must be JSON. Returns the\nupdated widget.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook widget",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a widget."
+  },
   "GetOIDCDiscoveryDocument": {
     "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
     "summary": "Get OpenID Connect provider metadata"
@@ -5910,17 +5968,17 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
@@ -5928,7 +5986,7 @@
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
@@ -5948,7 +6006,7 @@
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
@@ -6969,6 +7027,10 @@
     "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
     "summary": "List ownership history by owner type"
   },
+  "SearchRemediationGroups": {
+    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository or upgrading an image.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition    | Finding type                       | Kind object      |\n| ---------------------- | ---------------------------------- | ---------------- |\n| `sca.package_update`   | `library_vulnerability`            | `package_update` |\n| `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
+    "summary": "Search remediation groups"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -7600,6 +7662,14 @@
   "ListStandardPatterns": {
     "description": "Returns all standard patterns.",
     "summary": "List standard patterns"
+  },
+  "ListTargetScanningGroups": {
+    "description": "List the Agent Observability scanning groups, with their rules included.\nThe list always includes the default Agent Observability scanning group.\nScanning groups of logs, RUM, events, and APM are listed by the List Scanning Groups endpoint.",
+    "summary": "List Agent Observability Scanning Groups"
+  },
+  "GetScanningGroup": {
+    "description": "Get an Agent Observability scanning group, with its rules included.\nScanning groups of logs, RUM, events, and APM are reported as not found.",
+    "summary": "Get Agent Observability Scanning Group"
   },
   "SubmitMetrics": {
     "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
@@ -8259,7 +8329,7 @@
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
   "ListSyntheticsBrowserTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "description": "Get the latest result summaries for a given Synthetic browser test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a browser test's latest results"
   },
   "GetSyntheticsBrowserTestResult": {
@@ -8320,7 +8390,7 @@
     "summary": "Get parent suites for a test"
   },
   "ListSyntheticsTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic test.",
+    "description": "Get the latest result summaries for a given Synthetic test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a test's latest results"
   },
   "GetSyntheticsTestResult": {

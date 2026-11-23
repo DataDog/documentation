@@ -196,3 +196,22 @@ entries:
       - ValidateCsvBudget
       - ValidateQuery
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/42005
+    operations:
+      - SearchCostRecommendations
+    title: Document extra fields in cost recommendations
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42087
+    operations:
+      - GetCommitmentsCommitmentList
+      - GetCommitmentsCoverageScalar
+      - GetCommitmentsCoverageTimeseries
+      - GetCommitmentsOnDemandHotspotsScalar
+      - GetCommitmentsSavingsScalar
+      - GetCommitmentsSavingsTimeseries
+      - GetCommitmentsUtilizationScalar
+      - GetCommitmentsUtilizationTimeseries
+    title: Fix Cloud Cost Management commitments response schemas

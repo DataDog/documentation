@@ -4,65 +4,97 @@ aliases:
 further_reading:
 - link: /security/notifications/rules/
   tag: Documentación
-  text: Establecer y configurar reglas de notificación
+  text: Cree y configure reglas de notificación
 - link: /security/notifications/variables/
   tag: Documentación
-  text: Más información sobre las variables de notificación para personalizar las
-    notificaciones
+  text: Obtenga más información sobre las variables de notificación para personalizar
+    las notificaciones
 - link: /security/detection_rules/
   tag: Documentación
-  text: Explorar las reglas de detección de seguridad
+  text: Explore las reglas de detección de seguridad
 products:
 - icon: siem
   name: Cloud SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: Cloud Security Management
+  name: Cloud Security
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: Application Security Management
+  name: App and API Protection
   url: /security/application_security/
-title: Notificaciones
+- icon: security-code-security
+  name: Code Security
+  url: /security/code_security/
+- icon: security-workload-security
+  name: Workload Protection
+  url: /security/workload_protection/
+title: Notifications
 ---
-
 {{< product-availability >}}
 
-## Información general
+## Descripción general {#overview}
 
-Las notificaciones te permiten mantener informado a tu equipo cuando se genera una señal de seguridad. Una señal de seguridad se genera cuando al menos un caso definido en una [regla de detección][2] coincide en un periodo determinado.
+Las notificaciones le ayudan a mantener a su equipo informado cuando se detecta un hallazgo o una señal de seguridad. Los hallazgos y las señales de seguridad se generan cuando al menos un caso definido en una [regla de detección][2] coincide durante un período de tiempo determinado. Al alertar a su equipo con prontitud, las notificaciones permiten tomar medidas inmediatas para abordar posibles problemas de seguridad, lo que mejora la postura general de seguridad de su organización.
 
-## Tipos de notificación
+## Tipos de notificaciones {#notification-types}
 
-Las notificaciones pueden configurarse para [reglas de detección] individuales(#detection-rules) y también de forma más amplia con [reglas de notificación](#notification-rules).
+Las notificaciones se pueden configurar para [reglas de detección](#detection-rules) individuales y también de manera más amplia con [reglas de notificación](#notification-rules).
 
-### Normas de detección
+### Reglas de detección {#detection-rules}
 
-Cuando [creas o modificas una regla de detección][2], puedes definir las notificaciones que se envían. Por ejemplo, puedes añadir casos de reglas para determinar cuándo una regla de detección activa una señal de seguridad. También puedes personalizar el mensaje de notificación en la sección [**Di lo que está pasando**](#say-whats-happening).
+Cuando [crea o modifica una regla de detección][2], puede definir las notificaciones que se envían. Por ejemplo, puede añadir casos de regla para determinar cuándo una regla de detección activa una señal de seguridad. 
 
-#### Di lo que está pasando
+También puede personalizar el mensaje de notificación usando Markdown y [variables de notificación][1]. Esto le permite proporcionar detalles adicionales sobre la señal haciendo referencia a sus etiquetas y atributos de evento. También puede añadir etiquetas a la señal generada, por ejemplo, `attack:sql-injection-attempt`.
 
-Utiliza la sección **Di lo que está pasando** para personalizar el mensaje de notificación con Markdown y [variables de notificación][1]. Esto te permite proporcionar detalles adicionales sobre la señal haciendo referencia a sus atributos de etiquetas (tags) y evento. También puedes añadir etiquetas a la señal generada, por ejemplo, `attack:sql-injection-attempt`.
+### Reglas de notificación {#notification-rules}
 
-### Reglas de notificación
+Las reglas de notificación le permiten establecer preferencias generales de alerta que abarcan múltiples reglas de detección, hallazgos y señales en lugar de tener que configurar preferencias de notificación para reglas de detección individuales. Por ejemplo, puede configurar una regla de notificación para enviar una notificación si se activa cualquier señal de gravedad `CRITICAL` o `HIGH`. Consulte [Notification Rules][3] para obtener más información sobre su preparación y configuración.
 
-Las reglas de notificación te permiten establecer preferencias generales de alerta que incluyen múltiples reglas de detección y señales en lugar de tener que establecer preferencias de notificación para reglas de detección individuales. Por ejemplo, puedes configurar una regla de notificación para que envíes una notificación si se activa cualquier señal de gravedad `CRITICAL` o `HIGH`. Consulta [Reglas de notificación][3] para obtener más información sobre la configuración.
+## Canales de notificación {#notification-channels}
 
-## Canales de notificación
+Las notificaciones se pueden enviar a personas y equipos a través de Slack, Jira, PagerDuty, webhooks, casos, correo electrónico y más. También puede usar [enrutamiento dinámico][6] para entregar automáticamente notificaciones de hallazgos al equipo responsable según la etiqueta `team` adjunta al hallazgo.
 
-Las notificaciones pueden enviarse a individuos y equipos a través de correo electrónico, Slack, Jira, PagerDuty, webhooks, etc.
-
-### Correo electrónico
-
-{{% notifications-email %}}
-
-### Integraciones
+### Integrations {#integrations}
 
 {{% notifications-integrations %}}
 
-## Referencias adicionales
+#### Cree un webhook para la automatización de seguridad {#create-a-webhook-for-security-automation}
+
+Puede usar webhooks para enviar alertas a otras plataformas, como SOAR. Para configurar un webhook:
+
+1. Vaya a la integración [Webhooks][4].
+1. Haga clic en {{< ui >}}\+ New{{< /ui >}} en la sección {{< ui >}}Webhooks{{< /ui >}}.
+1. Ingrese un nombre para el webhook.
+1. Ingrese la URL del webhook.
+1. En la sección {{< ui >}}Payload{{< /ui >}}, seleccione {{< ui >}}Security Signal{{< /ui >}}.
+  {{< img src="security/security_signal_payload.png" alt="La carga útil de los webhooks para señales de seguridad" style="width:100%;" >}}
+1. Consulte la documentación de [integración de Webhooks][5] para obtener más información sobre cómo agregar variables, variables personalizadas, encabezados personalizados y codificación como formulario.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
+
+Para usar el webhook, agregue `@webhook-<WEBHOOK_NAME>` a la sección de notificaciones de la regla.
+
+### Teams {#teams}
+
+{{% notifications-teams %}}
+
+### Incidencias {#cases}
+
+{{% notifications-cases %}}
+
+También puede agregar señales relacionadas a un caso existente, en lugar de crear un caso nuevo para cada señal. Consulte [Agrupar señales en casos][7].
+
+### Correo electrónico {#email}
+
+{{% notifications-email %}}
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/notifications/variables/
 [2]: /es/security/detection_rules/#creating-and-managing-detection-rules
 [3]: /es/security/notifications/rules/
+[4]: https://app.datadoghq.com/integrations/webhooks
+[5]: /es/integrations/webhooks/
+[6]: /es/security/notifications/rules/#dynamic-routing
+[7]: /es/security/cloud_siem/triage_and_investigate/signal_grouping/

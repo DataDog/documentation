@@ -36,6 +36,10 @@ site_support_ids:
     regions: [gov, gov2]
     url_paths:
       - /account_management/billing/ai_credits/**
+  ai_gateway:
+    regions: [gov, gov2]
+    url_paths:
+      - /ai_gateway/**
   ai_impact:
     regions: [gov, gov2]
   alibaba-cloud:

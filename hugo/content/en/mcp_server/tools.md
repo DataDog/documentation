@@ -612,53 +612,6 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 - Delete the `web-store` service remapping rule.
 
-## Chat
-
-Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
-
-The `chat` toolset is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
-
-**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
-
-### `send_message_to_chat`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
-
-Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
-
-- Ask Bits Chat what's causing the latency spike on the checkout service.
-- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
-- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
-
-### `get_chat_message_result`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
-
-- Get the result of a pending Bits Chat response.
-- Check whether a Bits Chat request needs an action before it can continue.
-
-### `get_chat_conversation_history`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Retrieves the full history of a Bits Chat conversation by its ID.
-
-- Get the full conversation history for conversation `abc-123-def`.
-- Show the history of the Bits Chat conversation about the payment outage.
-
-### `list_chat_conversations`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Lists all Bits Chat conversations for the current user.
-
-- List past Bits Chat conversations.
-- Show recent Bits Chat conversations.
-
 ## Audit Trail
 
 Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
@@ -812,6 +765,53 @@ Creates a [Work Management][38] project with default settings, given a name and 
 Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
+
+## Chat
+
+Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
+
+The `chat` toolset is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
+
+**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_chat`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
+
+Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
+
+- Ask Bits Chat what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
+- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
+
+### `get_chat_message_result`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
+
+- Get the result of a pending Bits Chat response.
+- Check whether a Bits Chat request needs an action before it can continue.
+
+### `get_chat_conversation_history`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full history of a Bits Chat conversation by its ID.
+
+- Get the full conversation history for conversation `abc-123-def`.
+- Show the history of the Bits Chat conversation about the payment outage.
+
+### `list_chat_conversations`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Lists all Bits Chat conversations for the current user.
+
+- List past Bits Chat conversations.
+- Show recent Bits Chat conversations.
 
 ## Cloud Cost Management
 
@@ -1953,90 +1953,21 @@ When audit logs aren't available, the tool ranks clients by a client-side reques
 - Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
 - Rank the top 5 clients by API server request volume in cluster `prod` during the incident window.
 
-## Metrics Governance
+### `kubernetes-ops-center-api-server-metrics`
+*Toolset: **kubernetes-ops-center***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
+Reports Kubernetes API server health metrics for a cluster in a single response. Use this tool to determine whether the API server is returning errors, rate limiting clients, or shedding load through API Priority and Fairness. The tool returns:
+- The rate of requests that the API server answered with a `5xx` status code
+- The rate of rate-limited (`429`) requests, by verb and resource
+- The maximum number of in-flight requests, by request kind
+- The rate of requests rejected by flow control, by priority level and reason
+- The maximum number of requests waiting in flow control queues, by priority level
 
-Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+The query window defaults to the last 10 minutes and can span up to 4 hours. The tool relies on metrics from the [Kubernetes API server metrics integration][107].
 
-### `estimate_datadog_metric_cardinality`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
-
-- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
-- How many timeseries would `custom.api.latency` have with no tags retained?
-- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
-
-### `get_metric_cardinality_profile`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
-
-- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
-- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
-- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
-
-### `get_metric_governance_status`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
-
-- Show the governance status for `custom.checkout.requests`.
-- Which tag indexing rule applies to `custom.api.latency`?
-- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
-
-### `get_metric_tag_configuration`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
-
-- Which tags are enabled for `custom.checkout.requests`?
-- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
-- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
-
-### `get_metric_tags`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
-
-- List the indexed and ingested tags for `custom.checkout.requests`.
-- Which tags were observed on `custom.api.latency` in the last four hours?
-- Show a sample value for each tag on `custom.orders.count`.
-
-### `get_metric_volume`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
-
-- Show the indexed and ingested volume for `custom.checkout.requests`.
-- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
-- Get the distinct volume for `system.cpu.user`.
-
-### `get_tag_indexing_rules`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
-
-- List all tag indexing rules in priority order.
-- Which rules match metrics with the `custom.checkout.*` naming pattern?
-- Show the next page of tag indexing rules.
-
-### `manage_metric_tag_configuration`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Write`*\
-Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
-
-- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
-- Update `custom.api.latency` to exclude the `request_id` tag.
-- Delete the direct tag configuration for `custom.orders.count`.
-
-### `manage_tag_indexing_rule`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Write`*\
-Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
-
-- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
-- Move the checkout metrics rule to the highest priority.
-- Add an exemption for `custom.checkout.debug` with a reason.
+- Is the API server in cluster `prod` healthy?
+- Which verbs and resources are being rate limited by the API server in cluster `staging`?
+- Were requests rejected by API Priority and Fairness in cluster `prod` during the incident window?
 
 ## Live Debugger
 
@@ -2217,6 +2148,91 @@ Places an archive immediately before or after another archive in the evaluation 
 
 - Move the production archive before the catch-all archive.
 
+## Metrics Governance
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
@@ -2347,6 +2363,107 @@ Creates a pipeline from a name and a configuration in the [Observability Pipelin
 
 - Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
 - Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
+## On-Call
+
+Tools for [Datadog On-Call][106], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
+
+<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>).</div>
+
+### `list_oncall_pages`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Searches On-Call pages and returns their status, urgency, responders, and timestamps. Filter by fields such as `status`, `urgency`, `team`, `service`, `tags`, and responder name or email.
+
+- Which pages are still unresolved for the `payments` team?
+- List the high-urgency pages created in the last 24 hours.
+
+### `get_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call page by its UUID or page key, including its status, title, responders, and related resources.
+
+- Show me the details of page `PAGE-123`.
+- Who responded to this page, and is it resolved?
+
+### `create_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Page`*\
+Pages a team or a single user through On-Call. Paging a team notifies whoever the team's escalation policy has on call. Paging a user notifies only that user, through their own notification rules, with no escalation. Set the urgency to `low` or `high`, and optionally add a description and tags. Adding a `service:<name>` tag associates the page with that service.
+
+- Page the `payments` team with high urgency: checkout error rate is above 5%.
+- Send a low-urgency page to the `payments` team about elevated latency on `checkout-api`, tagged `service:checkout-api`.
+
+<div class="alert alert-warning">This tool notifies real people. Confirm the target and urgency before your agent creates a page.</div>
+
+### `list_oncall_schedules`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists On-Call schedules, optionally filtered by name, team, user, tags, or schedule type. Use this tool to find a schedule's ID before calling the other schedule tools.
+
+- List the On-Call schedules for the `payments` team.
+- Find the schedule named `Platform Primary`.
+
+### `get_oncall_schedule`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call schedule by its ID, including its name, time zone, tags, and layers.
+
+- Show me the layers and time zone of the `Platform Primary` schedule.
+
+### `get_oncall_schedule_calendar`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves the calendar for an On-Call schedule over a time window of up to 45 days, including each shift, who covers it, and any overrides applied.
+
+- Who is covering the `Platform Primary` schedule over the holidays?
+- Show me next week's shifts for the `payments` schedule.
+
+### `get_oncall_schedule_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns who is on call for a schedule, including their name and email. Returns the current rotation position by default, and can also return the previous and next positions or evaluate a specific point in time.
+
+- Who is on call for the `Platform Primary` schedule?
+- Who is next on call for the `payments` schedule?
+
+### `get_oncall_team_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns the current on-call responders for a team: the responders who would be notified first, plus the rest of the escalation chain. Optionally provide page tags to evaluate a specific routing rule.
+
+- Who would get paged if I paged the `payments` team?
+- Who is on call for the `payments` team for `env:prod` and `service:checkout-api`?
+
+### `list_oncall_schedule_overrides`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists the overrides on an On-Call schedule within a time window of up to 45 days, including who is covering and who they are covering for.
+
+- What overrides are scheduled on the `Platform Primary` schedule this month?
+
+### `create_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Overrides an On-Call schedule for a time window, putting a specific user on call instead of whoever the rotation would pick. Use this tool to record shift swaps and ad-hoc cover.
+
+- Put Alex on call for the `Platform Primary` schedule from Friday 6 PM to Monday 9 AM.
+- I'm covering Sam's shift on the `payments` schedule tomorrow. Record the swap.
+
+### `remove_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Removes an override from an On-Call schedule. An override that has not started yet is deleted. An override that is in progress ends immediately and remains visible as inactive.
+
+- Remove my override on the `Platform Primary` schedule for this weekend.
+
+### `get_oncall_analytics`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Aggregates On-Call event data over a time window of up to 90 days to measure page volume, acknowledgment and resolution times, escalation activity, and shift duration. Optionally filter and group results by event attributes, such as team, urgency, or schedule.
+
+- How many pages did each team receive in the last 30 days?
+- What is the p90 time to resolve high-urgency pages for the `payments` team this quarter?
 
 ## Onboarding
 
@@ -3883,6 +4000,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [103]: /mcp_server/setup#required-permissions
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+[106]: /incident_response/on-call/
+[107]: /integrations/kube_apiserver_metrics/
 
 ## Further reading
 
