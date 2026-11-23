@@ -1,9 +1,15 @@
-### Activate Test Impact Analysis for the test service
+### Enable Test Impact Analysis
 
-You, or a user in your organization with the **Intelligent Test Runner Activation** (`intelligent_test_runner_activation_write`) permission, must activate Test Impact Analysis on the [Test Service Settings][101] page.
+You, or a user in your organization with the `Test Optimization Settings Write` permission, must enable Test Impact Analysis in the CI/CD Optimization settings:
+
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][101].
+1. Choose where to apply the setting:
+   - Select the **Organization** tab to enable Test Impact Analysis for every repository by default.
+   - Select the **Repository-specific** tab to enable Test Impact Analysis for a single repository, or to apply an override to one of its test services.
+1. Under **General**, toggle **Test Impact Analysis** on.
 
 <figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog." width="100%">
+<img src="{{ .Site.Params.img_url}}images/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." width="100%">
 </figure>
 
-[101]: https://app.datadoghq.com/ci/settings/test-service
+[101]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

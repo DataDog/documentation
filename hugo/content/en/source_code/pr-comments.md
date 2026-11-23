@@ -29,7 +29,15 @@ PR comments are enabled by default when first onboarding to [CI Visibility][7] i
 
 {{< img src="source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
-To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][12].
+To disable PR comments for CI Visibility:
+
+1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][12].
+1. Choose where to apply the setting:
+   - Select the {{< ui >}}Organization{{< /ui >}} tab to disable PR Comments for every repository by default.
+   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to disable PR Comments for a single repository.
+1. Under {{< ui >}}General{{< /ui >}}, toggle {{< ui >}}PR Comments{{< /ui >}} off.
+
+The {{< ui >}}PR Comments{{< /ui >}} setting controls PR comments for both CI Visibility and Test Optimization.
 
 ## PR comments for Code Security
 
@@ -51,7 +59,7 @@ PR comments are enabled by default when first onboarding to [Test Optimization][
 
 {{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
-To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][14].
+To disable PR comments for Test Optimization, toggle {{< ui >}}PR Comments{{< /ui >}} off in [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][12], as described in [PR comments for CI Visibility](#pr-comments-for-ci-visibility). This also disables PR comments for CI Visibility.
 
 ## Further reading
 
@@ -62,6 +70,5 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 [9]: /tests/
 [10]: /source_code/source-code-management/
 [11]: /pr_gates
-[12]: https://app.datadoghq.com/ci/settings/ci-visibility
+[12]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [13]: https://app.datadoghq.com/security/configuration/code-security/settings
-[14]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
