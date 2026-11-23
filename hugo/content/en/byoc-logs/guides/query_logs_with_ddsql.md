@@ -199,7 +199,6 @@ WHERE events > 100
 ORDER BY events DESC
 ```
 
-For the full list of supported syntax and functions, see the [DDSQL Reference][1].
 
 ## Limitations and recommendations
 
