@@ -96,10 +96,12 @@ To create an AI spend limit:
 1. Enter your spend limit information using the details below.
 
    - {{< ui >}}Name{{< /ui >}}: Enter a name for your spend limit.
-   - {{< ui >}}Active period{{< /ui >}}: Set the start and end months. Alerts and the status page only cover spend inside this period.
    - {{< ui >}}Limit spend for{{< /ui >}}: Set the limit for each user, per day or per month.
-   - {{< ui >}}From sources{{< /ui >}}: Select the AI providers to include. The query is grouped by `user_email`.
-   - {{< ui >}}Monthly ceiling{{< /ui >}} (optional): Set a total for all users, the same every month.
+   - {{< ui >}}From sources{{< /ui >}}: Choose where spend comes from:
+     - {{< ui >}}Cloud Cost{{< /ui >}}: Costs from the AI providers you select, grouped by `user_email`.
+     - {{< ui >}}Metrics{{< /ui >}}: Any metric query, grouped by a user email tag. It defaults to the [LLM Observability][2] cost metric `ml_obs.span.llm.total.cost`, grouped by `dd.user_email`.
+   - {{< ui >}}Active period{{< /ui >}} (Cloud Cost only): Set the start and end months. Alerts and the status page only cover spend inside this period.
+   - {{< ui >}}Monthly ceiling{{< /ui >}} (Cloud Cost only, optional): Set a total for all users, the same every month.
    - {{< ui >}}Slack notification{{< /ui >}}: Select the Slack workspace where users get a direct message.
 
    {{< img src="cloud_cost/budgets/ai-spend-limit-create.png" alt="Form to create an AI spend limit with a $3,000 monthly limit per user email, a Cloud Cost query for AI providers grouped by user_email, and a Slack workspace" style="width:100%;" >}}
@@ -107,6 +109,7 @@ To create an AI spend limit:
 1. Click {{< ui >}}Save AI Spend Limit{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
+[2]: /llm_observability/
 
 {{% /tab %}}
 {{< /tabs >}}
