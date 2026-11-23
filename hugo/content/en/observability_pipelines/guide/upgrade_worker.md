@@ -72,7 +72,7 @@ Worker version 2.26.1 gives you access to the following:
 - TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously these clients had their connection rejected with a `session id context uninitialized` error.
 - For the Custom Processor:
     - The `Event mapping aborted.` debug log now includes the reason why the mapping was aborted in its error field.
-    - Returns an error for field paths with array indexes outside the `isize` range.
+    - Field paths with array indexes outside the `isize` range are rejected instead of silently wrapping to a different index.
 
 ## Worker version 2.26.0
 
