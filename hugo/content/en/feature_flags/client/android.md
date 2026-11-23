@@ -516,11 +516,14 @@ The SDK writes response signing warnings and errors to Logcat. To see them, set 
 
 In `REQUIRED` mode, the client rejects a response that fails verification. It does not retry the request without signing.
 
+- The fetch fails with `FlagsResponseSigningException`. Its `reason` property is a `ResponseSigningFailureReason` value, such as `ResponseSigningFailureReason.INVALID_SIGNATURE`. `reason.code` is the [reason code][6], such as `invalid-signature`. A signing failure is not reported as a network error. `FlagsResponseSigningException` and `ResponseSigningFailureReason` are part of the experimental API.
+- The SDK logs `Flag response signing failed (<code>): <what failed>. <fix hint>.` once for each reason code, as an error.
 - If no verified assignments are available for the evaluation context, the client state is `Error` and evaluations return the default value.
+- If the Datadog site does not support response signing, the client sends no flag request, and every fetch fails with `FlagsResponseSigningException` with the reason `unsupported-site`.
 - The client keeps verified assignments in memory only. It does not read or write the on-disk cache in this mode. After an app restart, or after a change to the evaluation context, evaluations return default values until a new verified response arrives.
 - Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
 
-In `OBSERVE` mode, the client records the verification outcome and accepts otherwise valid responses.
+In `OBSERVE` mode, the client accepts otherwise valid responses and logs the same message as a warning.
 
 ### Signature expiry
 
@@ -795,3 +798,5 @@ class CheckoutFlagsTest {
 [4]: /feature_flags/concepts/opt_out/
 
 [5]: /feature_flags/guide/prevent_response_tampering/
+
+[6]: /feature_flags/guide/prevent_response_tampering/#verification-failures

@@ -147,15 +147,28 @@ If you do not enable response signing, nothing changes. The SDK sends the same r
 
 ## Verification failures
 
-With signing enabled, the SDK rejects a response if any of these conditions is true:
+With signing enabled, the SDK rejects a response if any check fails. A request that was redirected also fails. The SDK reports each failure with a reason code. All three SDKs use the same reason codes.
 
-- The response has no signature.
-- The certificate chain does not lead to the pinned Datadog root.
-- A certificate in the chain is expired or not yet valid.
-- The leaf certificate does not contain the Datadog Feature Flags EKU.
-- The signature does not match the request or the response body.
-- The signature has expired.
-- The request was redirected.
+| Reason code | Meaning | What to check |
+| --- | --- | --- |
+| `missing-proof` | The response has no signature headers. | A proxy, CDN, or custom endpoint removed the signature headers, or Datadog did not enable response signing for your organization. |
+| `invalid-proof` | The signature headers are present but not valid. | A proxy or CDN changed the response headers. |
+| `invalid-certificate` | The certificate chain does not lead to the pinned Datadog root, or a certificate rule fails. For example, the leaf has no Datadog Feature Flags EKU. | The response did not come from Datadog, or the network intercepts TLS. Contact Datadog Support. |
+| `invalid-signature` | The signature does not match the request and the response. | The response changed in transit. |
+| `expired-proof` | The signature is expired or not yet valid. | Check the device clock. |
+| `response-too-large` | The response body is larger than the size limit for signed responses. | Contact Datadog Support. |
+| `unsupported-request` | The SDK cannot sign this request. | Use the default flags endpoint and request options. |
+| `unavailable-crypto` | The platform cryptography API is not available. | Browser: use a secure (HTTPS) context. Mobile: use a supported OS version. |
+| `missing-anchor` | The SDK has no trusted root for this Datadog site. | Use a Datadog site that supports response signing. |
+| `unsupported-site` | Response signing is not available on this Datadog site. | Use a Datadog site that supports response signing. |
+
+The iOS and Android SDKs log each failure once for each reason code, in this format:
+
+```text
+Flag response signing failed (<code>): <what failed>. <fix hint>.
+```
+
+The browser SDK puts a message in the same format in `PROVIDER_ERROR` events and in the evaluation details. For the error types on each platform, see the setup section for your SDK.
 
 When the SDK rejects a response, it does not apply the response. The SDK does not retry the request without signing. An attacker cannot force a downgrade to unsigned responses.
 
@@ -174,11 +187,9 @@ Each signature expires a few minutes after Datadog issues it. The `expireVerifie
 - `false` (default): The SDK continues to serve the last verified flags. The provider reports a stale state (`PROVIDER_STALE` in OpenFeature). Your application decides when to fetch again.
 - `true`: The SDK stops serving the verified flags. The provider reports an error state, and evaluations return default values.
 
-In both settings, a new verified response restores the ready state.
+In both settings, a new verified response restores the ready state. The SDK detects expiry with a timer at the expiry time and with a check at each flag read.
 
 <div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags</code> to <code>true</code>.</div>
-
-For SDK-specific error messages and events, see the setup section for your SDK.
 
 ## Limits of response signing
 
@@ -230,6 +241,8 @@ No. Response signing does not support proxies or custom flag endpoints. The SDK 
 
 <!-- TODO: confirm the list of supported Datadog sites before publication. -->
 Response signing is available on all Datadog sites where client-side Feature Flags is available.
+
+If you set `required` mode on a site that does not support response signing, the SDK sends no flag request and reports the reason `unsupported-site`. Evaluations return default values. In `observe` mode on such a site, the SDK logs a warning and sends ordinary, unsigned requests.
 
 ## Further reading
 

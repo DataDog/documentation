@@ -617,11 +617,14 @@ The SDK writes response signing warnings and errors to the Xcode console. To see
 
 In `.required` mode, the client rejects a response that fails verification. It does not retry the request without signing.
 
-- A response without a valid signature fails with an `invalidResponse` error. If no verified assignments are available for the evaluation context, evaluations return the default value.
+- The evaluation context completion returns `FlagsError.responseSigningFailed(reason:)`. `reason` is the [reason code][5], such as `invalid-signature`. `responseSigningFailed` is part of the experimental API.
+- The SDK logs `Flag response signing failed (<code>): <what failed>. <fix hint>.` once for each reason code, as an error.
+- If no verified assignments are available for the evaluation context, evaluations return the default value.
+- If the Datadog site does not support response signing, the client sends no flag request, enters its error state, and returns `FlagsError.responseSigningFailed(reason: "unsupported-site")` on every fetch.
 - The client keeps verified assignments in memory only. It does not read or write the on-disk cache in this mode. After an app restart, or after a change to the evaluation context, evaluations return default values until a new verified response arrives.
 - Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
 
-In `.observe` mode, the client records the verification outcome and accepts otherwise valid responses.
+In `.observe` mode, the client accepts otherwise valid responses and logs the same message as a warning.
 
 ### Signature expiry
 
@@ -720,3 +723,5 @@ final class CheckoutFlagTests: XCTestCase {
 [3]: /feature_flags/concepts/opt_out/
 
 [4]: /feature_flags/guide/prevent_response_tampering/
+
+[5]: /feature_flags/guide/prevent_response_tampering/#verification-failures

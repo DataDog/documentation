@@ -564,8 +564,9 @@ At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions
 
 In `'required'` mode, the provider rejects a response that fails verification. It does not retry the request without signing.
 
-- The provider emits a `PROVIDER_ERROR` event. The event message starts with `Response signing:` and names the reason.
-- If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR` and error code `GENERAL`.
+- The provider emits a `PROVIDER_ERROR` event with error code `GENERAL`. The event message has the format `Flag response signing failed (<code>): <what failed>. <fix hint>.`, where `<code>` is a [reason code][11].
+- If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR`, error code `GENERAL`, and the same message.
+- If the Datadog site does not support response signing, the provider sends no flag request, enters its error state, and reports the reason `unsupported-site`.
 - The provider keeps verified assignments in memory only. It does not use the persistent cache or `initialFlagsConfiguration` in this mode. After a page reload, evaluations return default values until the first verified response arrives.
 - Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
 
@@ -580,7 +581,7 @@ Each signature expires a few minutes after Datadog issues it. In `'required'` mo
 - `false` (default): The provider continues to serve the last verified flags. Its status changes from `READY` to `STALE`, and it emits one `PROVIDER_STALE` event. Your application decides when to fetch again.
 - `true`: The provider stops serving the verified flags. Its status changes to `ERROR`, it emits one `PROVIDER_ERROR` event, and evaluations return default values with reason `ERROR`.
 
-In both settings, a new verified response changes the status to `READY` and emits `PROVIDER_READY`. The provider detects expiry at the next flag evaluation.
+In both settings, a new verified response changes the status to `READY` and emits `PROVIDER_READY`. The provider detects expiry with a timer at the expiry time and with a check at each flag evaluation.
 
 {{< code-block lang="javascript" >}}
 experimentalResponseSigning: { mode: 'required', expireVerifiedFlags: true }
@@ -648,3 +649,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [9]: /feature_flags/concepts/opt_out/
 
 [10]: /feature_flags/guide/prevent_response_tampering/
+
+[11]: /feature_flags/guide/prevent_response_tampering/#verification-failures
