@@ -81,7 +81,7 @@ A remediation groups the open findings that a single change resolves:
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
 
-Findings with no available fix also appear in the Remediation Inbox, but they have no remediation to act on.
+Findings with no available fix also appear in the Remediation Inbox, but they are not actionable: no remediation is available, so there is no fix to generate or apply.
 
 ## How remediations are prioritized
 
@@ -206,6 +206,8 @@ Datadog updates the status of remediation cases automatically:
 
 ## Enable remediation capabilities
 
+Fix with Bits, pull request status, and linked pull requests support only GitHub repositories. Other Git providers are not supported.
+
 | Capability | What it enables | How to enable |
 |---|---|---|
 | Third-party tickets | Create Jira, ServiceNow, or Linear tickets from remediations. | Set up the [Jira][17], [ServiceNow][18], or [Linear][19] integration. See [Create a case or ticket](#create-a-case-or-ticket). |
@@ -214,8 +216,6 @@ Datadog updates the status of remediation cases automatically:
 | Pull request status | Status and authors of linked pull requests. | Install the [GitHub integration][9] and give Datadog access to the repository. |
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
 | Fix verification from your coding agent | Check fixes before you commit. | Set up the [Code Security MCP Server][7]. |
-
-**Note**: Fix with Bits, pull request status, and linked pull requests support only GitHub repositories.
 
 ## Further reading
 
