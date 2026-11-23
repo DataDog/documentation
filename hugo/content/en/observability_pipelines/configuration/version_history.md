@@ -58,7 +58,7 @@ Each change in the list shows the component name, the component type (source, pr
 To compare the configuration of a single component between versions:
 
 1. Click the **</>** icon on the component.
-1. Click **Diff** to see the configuration in the previous version next to the configuration in the selected version. Removed lines are highlighted in red, and added lines are highlighted in green. Click **JSON** to see the component's configuration without the comparison.
+1. Click **Diff** to see the configuration in the previous version next to the configuration in the selected version. The comparison highlights removed lines in red and added lines in green. Click **JSON** to see the component's configuration without the comparison.
 
 For an added component, the diff shows the full configuration as new lines.
 
