@@ -1363,7 +1363,7 @@
     "summary": "Get commitments coverage (scalar)"
   },
   "GetCommitmentsCoverageTimeseries": {
-    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type for both hours and cost. AWS and Azure report Reserved Instances, Savings Plans, On-Demand, and Spot. GCP reports Flex Committed Use Discounts and On-Demand.",
     "summary": "Get commitments coverage (timeseries)"
   },
   "GetCommitmentsOnDemandHotspotsScalar": {
