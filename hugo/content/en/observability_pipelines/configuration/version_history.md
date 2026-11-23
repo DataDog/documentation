@@ -47,6 +47,7 @@ The **Since Version N** summary at the top of the graph shows how many component
 
 1. Click the summary (for example, **5 added 4 removed**).
 1. Use the **Show** dropdown menu to filter the list by type of change.
+1. Click on an item to see the related component.
 
 Each change in the list shows the component name, the component type (source, processor group, processor, or destination), and whether it was added, removed, or modified.
 
