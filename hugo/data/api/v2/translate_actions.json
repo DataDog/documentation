@@ -5910,17 +5910,17 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
@@ -5928,7 +5928,7 @@
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
@@ -5948,7 +5948,7 @@
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
