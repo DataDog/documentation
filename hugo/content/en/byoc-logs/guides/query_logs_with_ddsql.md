@@ -56,7 +56,7 @@ Add a separate data source cell for each set of logs you want to query or join. 
 
 ### Write a SQL query
 
-1. Type `/sql` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
+1. In your notebook, type `/sql` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
 1. Write your query, using the data source cell name as the table name.
 1. Click {{< ui >}}Run{{< /ui >}}.
 
@@ -77,6 +77,8 @@ The following examples use the `app_logs` and `access_logs` data source cells de
 
 ### Latency statistics per service
 
+Use this query to compare average, maximum, and percentile latency across services.
+
 ```sql
 SELECT service,
        COUNT(*) AS events,
@@ -90,6 +92,8 @@ ORDER BY p99_ms DESC
 ```
 
 ### Bucket logs by latency
+
+Use this query to group logs into latency ranges and count the logs in each range.
 
 ```sql
 SELECT CASE
@@ -111,6 +115,8 @@ ORDER BY latency_bucket
 
 ### Server error rate per service
 
+Use this query to find which services return the highest share of 5xx responses.
+
 ```sql
 SELECT service,
        COUNT(*) AS requests,
@@ -123,6 +129,8 @@ ORDER BY error_pct DESC
 
 ### Log volume per minute
 
+Use this query to count logs in one-minute intervals and spot spikes or drops in volume.
+
 ```sql
 SELECT DATE_TRUNC('minute', timestamp) AS minute,
        COUNT(*) AS events
@@ -132,6 +140,8 @@ ORDER BY minute
 ```
 
 ### Classify requests by user agent
+
+Use this query to group requests by client type, such as bots or mobile devices, based on the user agent.
 
 ```sql
 SELECT CASE
@@ -152,6 +162,8 @@ ORDER BY requests DESC
 ```
 
 ### Top three hosts per service
+
+Use this query to rank hosts by log volume within each service and return the top three.
 
 ```sql
 SELECT service, host, events
@@ -188,6 +200,8 @@ ORDER BY x.server_error_pct DESC
 ```
 
 ### Combine queries with a common table expression
+
+Use a common table expression (CTE) to define an intermediate result and query it by name. This query keeps only services with more than 100 logs.
 
 ```sql
 WITH per_service AS (
