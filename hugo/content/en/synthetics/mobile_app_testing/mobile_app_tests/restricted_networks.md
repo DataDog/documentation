@@ -76,6 +76,8 @@ The following is the list of IP ranges associated with the real devices used for
 
 ### HTTP steps
 
+HTTP steps can reach only public IP addresses. Requests to private or reserved IPv4 addresses (such as `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, and `127.0.0.0/8`) and to all IPv6 addresses are blocked, regardless of your allowlist. This restriction doesn't apply to requests that your application sends from the device.
+
 Below is the list of IP ranges required for executing HTTP steps within Synthetic Mobile Application Tests. You may disregard these ranges if your tests do not use HTTP steps.
 
 `52.13.151.244/32`<br>

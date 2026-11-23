@@ -21,3 +21,24 @@ entries:
       - UpdateScanningGroup
       - UpdateScanningRule
     title: Document empty meta in Sensitive Data Scanner responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateScanningGroup
+      - CreateScanningRule
+      - DeleteScanningGroup
+      - DeleteScanningRule
+      - ListScanningGroups
+      - ListStandardPatterns
+      - ReorderScanningGroups
+      - UpdateScanningGroup
+      - UpdateScanningRule
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: added
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41726
+    operations:
+      - GetScanningGroup
+      - ListTargetScanningGroups
+    title: Add Sensitive Data Scanner group endpoints for LLM Observability

@@ -51,7 +51,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
     <li><code>ec2:CreateTags</code></li>
     <li><code>ec2:DeleteSnapshot</code></li>
     <li><code>ec2:DeregisterImage</code></li>
-    <li><code>ec2:DescribeSnapshotAttribute</code></li>
+    <li><code>ec2:DescribeImages</code></li>
     <li><code>ec2:DescribeSnapshots</code></li>
     <li><code>ec2:DescribeVolumes</code></li>
     <li><code>ecr:BatchGetImage</code></li>
@@ -82,7 +82,11 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
     <li><code>Microsoft.Compute/disks/read</code></li>
     <li><code>Microsoft.Compute/disks/beginGetAccess/action</code></li>
     <li><code>Microsoft.Compute/disks/endGetAccess/action</code></li>
+    <li><code>Microsoft.Compute/galleries/images/versions/read</code></li>
     <li><code>Microsoft.ContainerRegistry/registries/pull/read</code></li>
+    <li><code>Microsoft.ContainerRegistry/registries/repositories/content/read</code> (data action)</li>
+    <li><code>Microsoft.Web/sites/read</code></li>
+    <li><code>Microsoft.Web/sites/publish/Action</code></li>
   </ul>
   {{< /collapse-content >}}
 
@@ -146,7 +150,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Copy the new application key Datadog generates.
 1. Choose to either:
    - Use an existing scanner, then select the scanner you want to use.
-   - Deploy a nwe scanner.
+   - Deploy a new scanner.
 1. Toggle the features you want to enable, such as {{< ui >}}Agentless Vulnerability Management{{< /ui >}} or {{< ui >}}Sensitive Data Scanning for Cloud Storage{{< /ui >}}.
 1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click {{< ui >}}Done{{< /ui >}}.
@@ -174,7 +178,7 @@ This setup deploys the delegate role required for [cross-account scanning](/secu
 1. Select {{< ui >}}Service-managed permissions{{< /ui >}}.
 1. Under {{< ui >}}Specify template{{< /ui >}}, select {{< ui >}}Amazon S3 URL{{< /ui >}} and enter the following URL:
    ```
-   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.9.1/datadog_agentless_delegate_role_stackset.yaml
+   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.22.1/datadog_agentless_delegate_role_stackset.yaml
    ```
 1. Enter a {{< ui >}}StackSet name{{< /ui >}} (for example, `DatadogAgentlessScanningStackSet`).
 1. Configure the {{< ui >}}ScannerInstanceRoleARN{{< /ui >}} parameter, which is the ARN of the IAM role attached to your Agentless scanner instances.

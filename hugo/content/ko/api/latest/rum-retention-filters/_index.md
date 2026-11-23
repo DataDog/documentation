@@ -1,3 +1,3 @@
 ---
-title: Rum 보존 필터
+title: RUM 보존 필터
 ---

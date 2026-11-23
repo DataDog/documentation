@@ -83,9 +83,27 @@ Para cada métrica, la {{< ui >}}Global lift{{< /ui >}} pestaña muestra:
 - **Cobertura**: La proporción estimada del total de su métrica global asociada con la población elegible del experimento (excluyendo el efecto del experimento).
 - **Lift global**: El cambio estimado en los totales generales de sus métricas si el tratamiento se lanzara a todos los usuarios elegibles. Datadog calcula el lift global como el producto de la cobertura y el lift local (relativo) del experimento.
 
-## Resultados de holdout {#holdout-results}
+### Detalles estadísticos {#statistical-details}
 
-Para un [holdout][10], la tarjeta de resultados compara el grupo que recibió los cambios desplegados con el grupo de control. Los resultados preliminares ofrecen una primera evaluación mientras se despliegan los cambios. El análisis principal mide el efecto combinado durante la fase de análisis. Consulte [Interpretar resultados][11].
+La pestaña {{< ui >}}Statistical details{{< /ui >}} (icono de calculadora) de la tarjeta de resultados de la métrica muestra estadísticas adicionales del [método de análisis][2] del experimento, además de las medias de los grupos y las estimaciones de lift. Cuando [CUPED][15] está activado, las estadísticas utilizan los resultados ajustados por CUPED. Consulte [Cálculos de lift e intervalo][12] y [Arrepentimiento esperado y EVSI][13] para conocer la metodología completa.
+
+Para el análisis de muestra fija, secuencial y secuencial híbrido, la pestaña incluye:
+
+- **Standard Error**: El error estándar de la estimación de lift relativo, en puntos porcentuales. Un valor más pequeño significa una estimación más precisa.
+- **p-value**: Los valores más pequeños significan una evidencia más sólida de un efecto real. Para la interpretación técnica de cada método de análisis, consulte [Cálculos de lift e intervalo][14].
+- **z-score**: La cantidad de errores estándar entre la estimación de lift y cero. El signo muestra la dirección del cambio, no si es deseable.
+
+Para el análisis bayesiano, la pestaña incluye:
+
+- **Prob. Beats Control**: La probabilidad posterior de que el tratamiento mueva la métrica en la dirección deseada.
+- **Min. Expected Regret**: El lift que pierde si la variante que parece mejor resulta ser la elección incorrecta, promediado según la probabilidad de que así sea. Datadog lo muestra como un porcentaje del valor de control.
+- **EVSI**: El valor esperado de la información de la muestra, como porcentaje del valor de control. El EVSI cuantifica cuánto disminuiría el arrepentimiento esperado mínimo si el experimento continuara ejecutándose con su tráfico reciente. Si el EVSI es pequeño en comparación con el arrepentimiento esperado mínimo, se espera que recopilar más datos aporte poco valor. La descripción emergente del encabezado de la columna muestra el período y el tráfico que Datadog supone.
+
+Un guion (—) significa que una estadística no está disponible. Para EVSI, pase el cursor sobre el guion para ver por qué.
+
+## Resultados del grupo de reserva {#holdout-results}
+
+Para un [grupo de reserva][10], la tarjeta de resultados compara el grupo en el que se implementaron los cambios con el grupo de control. Los resultados preliminares ofrecen una lectura temprana mientras se implementan los cambios. El análisis principal mide el efecto combinado durante la fase de análisis. Consulte [Interpretar resultados][11].
 
 ## Exploración de resultados {#exploring-results}
 
@@ -128,3 +146,7 @@ Para métricas basadas en datos de [RUM][4] o [Product Analytics][5], haga clic 
 [9]: /es/experiments/diagnostics/
 [10]: /es/experiments/holdouts/
 [11]: /es/experiments/holdouts/#interpret-results
+[12]: /es/experiments/statistics/lift_and_interval_calculations/
+[13]: /es/experiments/statistics/expected_regret_and_evsi/
+[14]: /es/experiments/statistics/lift_and_interval_calculations/#calculate-the-interval
+[15]: /es/experiments/statistics/cuped/

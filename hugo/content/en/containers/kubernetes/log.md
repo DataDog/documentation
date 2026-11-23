@@ -169,9 +169,9 @@ The Datadog Agent in Kubernetes is deployed by a DaemonSet (managed by the Datad
 
 When "Container Collect All" is enabled you can configure which containers you want to collect logs from. This can be useful to prevent the collection of the Datadog Agent logs, if desired. You can do this by passing configurations to the Datadog Agent to control what it pulls, or by passing configurations to the Kubernetes Pod to exclude certain logs more explicitly.
 
-When filtering out logs through methods like `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude`, the Agent ignores log collection regardless of explicitly defined log collection configurations in [Autodiscovery annotations][19], the [`DatadogInstrumentation` CRD][23], or [Autodiscovery configuration files][20].
+Exclusions such as `DD_CONTAINER_EXCLUDE_LOGS` or `ad.datadoghq.com/logs_exclude` take precedence over explicit log collection configuration, including configuration from the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], and [Autodiscovery configuration files][20].
 
-When "Container Collect All" is disabled (default) you don't need to add any filtering because everything is excluded by default. To include collection for only selected pods, you can enable the log configuration by [Autodiscovery annotations][19], the [`DatadogInstrumentation` CRD][23], or [Autodiscovery configuration files][20] for the desired pods.
+When "Container Collect All" is disabled (the default), the Agent collects logs only from containers that have an explicit log configuration. To collect logs from selected workloads, configure them with the [`DatadogInstrumentation` CRD][23], [Autodiscovery annotations][19], or [Autodiscovery configuration files][20].
 
 See [Container Discovery Management][8] to learn more about filtering.
 
@@ -187,11 +187,64 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 
 [Autodiscovery][10] enables you to use templates to configure log collection and other capabilities on containers. Use one of the following methods to configure log collection:
 
-- [Autodiscovery annotations](#autodiscovery-annotations) (recommended)
-- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd) (new)
+- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd) (recommended)
+- [Autodiscovery annotations](#autodiscovery-annotations)
 - [Autodiscovery configuration files](#autodiscovery-configuration-files)
 
 Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
+
+<!-- vale Datadog.headings = NO -->
+### `DatadogInstrumentation` CRD {#datadoginstrumentation-crd}
+<!-- vale Datadog.headings = YES -->
+
+Use a `DatadogInstrumentation` resource to configure log collection without modifying application pod templates. This method requires [Agent log collection](#log-collection) to be enabled. Create the resource in the same namespace as the target workload.
+
+The following example collects logs from the `app` container in the `example` Deployment:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: java-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: example
+  config:
+    logs:
+      - containerName: app
+        source: java
+        service: example-app
+        tags:
+          - foo:bar
+```
+
+Save the resource as `java-logs.yaml`, apply it, and check its status:
+
+```shell
+kubectl apply -f java-logs.yaml
+kubectl describe datadoginstrumentation java-logs -n <WORKLOAD_NAMESPACE>
+```
+
+#### Configure multiple containers
+
+To collect logs from both the `app` and `proxy` containers in the same Deployment, replace the `logs` section under `spec.config` with:
+
+```yaml
+logs:
+  - containerName: app
+    source: java
+    service: example-app
+    tags:
+      - foo:bar
+  - containerName: proxy
+    source: nginx
+    service: example-proxy
+```
+
+Apply the updated resource to change log collection without restarting application pods.
 
 ### Autodiscovery annotations
 
@@ -270,30 +323,6 @@ spec:
     # (...)
     - name: '<CONTAINER_NAME_2>'
 # (...)
-```
-
-### DatadogInstrumentation CRD
-
-Instead of annotating your pods or deployments, you can use a [`DatadogInstrumentation` custom resource][23] to configure log collection. The following examples is for the `app` container part of the `example` Deployment:
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: example-logs
-  namespace: <WORKLOAD_NAMESPACE>
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: example
-  config:
-    logs:
-      - containerName: app
-        source: java
-        service: example-app
-        tags:
-          - foo:bar
 ```
 
 ### Autodiscovery configuration files
@@ -421,7 +450,7 @@ To match a log configuration to a set of containers with more granularity than t
 
 ## Advanced log collection
 
-Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
+Use `spec.config.logs` in a `DatadogInstrumentation` resource or Autodiscovery log annotations to apply advanced log processing, for example:
 
 * [Filter logs before sending them to Datadog][5].
 * [Scrub sensitive data from your logs][6].
@@ -431,11 +460,39 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_NAME>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
+To collect logs from a file, set `type: file` and `path` in a `DatadogInstrumentation` log entry or an Autodiscovery log annotation. The Agent adds the same container tags as it does for logs from the container output streams. For additional guidance, see the [Recommended configurations](#recommended-configurations) section.
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
-For example, you can do this with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory, where a volume and volumeMount have set this as a `hostPath`.
+For example, use a shared `hostPath` volume for an application that writes to `/var/log/example/app.log`:
+
+{{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Apply the following resource in the namespace of the targeted workload. The `logger` workload must also write its logs to `/var/log/example` on a `hostPath` volume, as shown in the **Annotations** tab:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: logger-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: logger
+  config:
+    logs:
+      - containerName: busybox
+        type: file
+        path: /var/log/example/app.log
+        source: example-source
+        service: example-service
+```
+
+{{% /tab %}}
+{{% tab "Annotations" %}}
 
 ```yaml
 apiVersion: v1
@@ -465,7 +522,10 @@ spec:
          path: /var/log/example
 ```
 
-The equivalent volume and volumeMount path need to be set in the Agent container so it can read that same log file.
+{{% /tab %}}
+{{< /tabs >}}
+
+For either method, mount the same host directory into the Agent container so it can read the log file:
 
 ```yaml
   containers:
@@ -484,16 +544,31 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 #### Recommended configurations
 - This strategy can work for a given pod, but can become cumbersome with multiple apps using this strategy. You can also run into issues if multiple replicas are using the same log path. If possible, Datadog recommends taking advantage of the [Autodiscovery template variable][17] `%%kube_pod_name%%`. For example, you can set your `path` to reference this variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. Your application pod then needs to write its log files with respect to this new path as well. You can use the [Downward API][18] to help your application determine its Pod name.
 
-- When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed, explicitly enable this in the annotation. For example:
+- File log configurations replace automatic collection of `stdout` and `stderr` for that container. To collect both, add a second log entry for the container output streams. For `DatadogInstrumentation`, use the following `spec.config.logs` entries:
+
   ```yaml
-  ad.datadoghq.com/<CONTAINER_IMAGE>.logs: |
+  logs:
+    - containerName: busybox
+      type: file
+      path: /var/log/example/app.log
+      source: file
+      service: example-service
+    - containerName: busybox
+      source: container
+      service: example-service
+  ```
+
+  For annotations, use:
+
+  ```yaml
+  ad.datadoghq.com/<CONTAINER_NAME>.logs: |
     [
       {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
       {"source":"container","service":"example-service"}
     ]
   ```
 
-- When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
+- Set `source` and `service` explicitly for file log entries because they have no default values.
 
 ## Troubleshooting
 
@@ -507,9 +582,9 @@ For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 [2]: /agent/kubernetes/
 [3]: /integrations/#cat-autodiscovery
 [4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[5]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
-[6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
-[7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
+[5]: /agent/logs/advanced_log_collection/?tab=annotations#filter-logs
+[6]: /agent/logs/advanced_log_collection/?tab=annotations#scrub-sensitive-data-from-your-logs
+[7]: /agent/logs/advanced_log_collection/?tab=annotations#manually-aggregate-multi-line-logs
 [8]: /agent/guide/autodiscovery-management/
 [9]: /containers/guide/kubernetes_daemonset/#log-collection
 [10]: /getting_started/containers/autodiscovery

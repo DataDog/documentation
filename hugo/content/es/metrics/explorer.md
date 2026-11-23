@@ -5,7 +5,7 @@ description: Explore todas sus métricas y realice análisis.
 further_reading:
 - link: /metrics/summary/
   tag: Documentación
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: Documentación
   text: Distribución de métricas
@@ -87,7 +87,7 @@ Opcionalmente, puede agregar funciones a su consulta usando el botón de funcion
 
 ### Gráfico dividido {#split-graph}
 
-Utilice el botón {{< ui >}}Split Graph{{< /ui >}} para visualizar los datos divididos en gráficos individuales por valores de etiquetas como región, servicio o entorno.
+Utilice el botón {{< ui >}}Split Graph{{< /ui >}} para seleccionar una o más etiquetas, como región, servicio o entorno, y vea un gráfico por cada combinación de valores de etiqueta. Guardar en un panel crea un [widget de gráfico dividido][12] para una etiqueta o un grupo de gráficos para varias etiquetas, con todas las etiquetas usadas para dividir los gráficos en el título del grupo.
 
 ### Exportar {#export}
 
@@ -120,3 +120,4 @@ Para obtener más información, consulte la [documentación de Quick Graphs][7].
 [9]: /es/monitors/
 [10]: /es/dashboards/
 [11]: /es/account_management/rbac/permissions/#access-management
+[12]: /es/dashboards/widgets/split_graph/

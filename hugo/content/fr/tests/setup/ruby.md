@@ -4,7 +4,7 @@ aliases:
 - /fr/continuous_integration/tests/ruby
 - /fr/continuous_integration/tests/setup/ruby
 code_lang: ruby
-code_lang_weight: 40
+code_lang_weight: 50
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentation
@@ -102,7 +102,7 @@ Pour configurer la bibliothèque Test Optimization, définissez les variables d'
 : Active Test Optimization.<br/>
 **Par défaut**: `false`
 
-`DD_ENV` (Optionnel)
+`DD_ENV` (facultatif)
 : Nom de l'environnement où les tests sont exécutés.<br/>
 **Par défaut**: `(empty)`<br/>
 **Exemples**: `local`, `ci`
@@ -112,7 +112,7 @@ Pour configurer la bibliothèque Test Optimization, définissez les variables d'
 **Par défaut**: Le nom du dépôt<br/>
 **Exemple**: `my-ruby-app`
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Requis pour le mode Agentless)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (requis pour le mode Agentless)
 : Active le mode Agentless pour envoyer les résultats des tests directement à Datadog.<br/>
 **Par défaut** : `false`
 
@@ -301,7 +301,7 @@ Le nom de la session de test doit être unique au sein d'un dépôt pour vous ai
 
 #### Quand utiliser `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name} :
 
-Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme une liste de fichiers à exécuter, Datadog considère que les sessions ne sont pas liées entre elles. Exemple :
+Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme une liste de fichiers à exécuter, Datadog considère que les sessions ne sont pas liées entre elles. Par exemple :
 
 -   `bundle exec rspec my_spec.rb my_other_spec.rb`
 

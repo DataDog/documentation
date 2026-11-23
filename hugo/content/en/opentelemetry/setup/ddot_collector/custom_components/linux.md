@@ -1,5 +1,5 @@
 ---
-title: Linux
+title: Add Components to the Agent's Collector on Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 2

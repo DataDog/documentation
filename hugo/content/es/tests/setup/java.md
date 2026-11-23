@@ -4,7 +4,7 @@ aliases:
 - /es/continuous_integration/tests/java
 - /es/continuous_integration/tests/setup/java
 code_lang: java
-code_lang_weight: 10
+code_lang_weight: 20
 further_reading:
 - link: /tests/containers/
   tag: Documentación
@@ -165,20 +165,20 @@ Luego, establezca las siguientes variables de entorno comunes para configurar el
 : Nombre del servicio o biblioteca bajo prueba.<br/>
 **Predeterminado**: `unnamed-java-app`
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Requerido para el modo Agentless)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Obligatorio para el modo Agentless)
 : Habilita el modo Agentless para enviar los resultados de las pruebas directamente a Datadog.<br/>
 **Predeterminado**: `false`
 
-`DD_API_KEY` (Requerido para el modo Agentless)
-: La clave de Datadog API utilizada para autenticar la carga de resultados de prueba. Esta variable no habilita el modo Agentless.<br/>
+`DD_API_KEY` (Obligatorio para el modo Agentless)
+: La clave de API de Datadog utilizada para autenticar la carga de resultados de prueba. Esta variable no habilita el modo Agentless.<br/>
 **Predeterminado**: `(empty)`
 
 `DD_SITE` (Opcional para el modo Agentless)
 : El [sitio de Datadog][4] al cual cargar los resultados de las pruebas. Establezca esta configuración cuando utilice un sitio distinto a US1.<br/>
 **Predeterminado**: `datadoghq.com`
 
-`DD_TRACE_AGENT_URL` (Solo cuando se utiliza el Datadog Agent)
-: URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
+`DD_TRACE_AGENT_URL` (Solo cuando se usa el Datadog Agent)
+: La URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
 **Predeterminado**: `http://localhost:8126`
 
 `DD_TEST_SESSION_NAME` (Opcional)
@@ -248,7 +248,7 @@ if (span != null) {
 // ...
 ```
 
-Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas.
+Para crear filtros o campos `group by` para estas etiquetas, primero debe crear facetas.
 
 Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Adding Tags][2] de la documentación de instrumentación personalizada de Java.
 
