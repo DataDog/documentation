@@ -208,6 +208,7 @@ Worker version 2.25.0 gives you access to the following:
 #### New features
 
 - The [Azure Data Explorer destination][68] is now available.
+- [Log Anomaly Detection][72] is now available.
 
 #### Enhancements
 
@@ -1197,3 +1198,4 @@ Worker version 2.7.0 gives you access to the following:
 [69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
 [70]: /observability_pipelines/processors/spike_protection/
 [71]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.1
+[72]: /observability_pipelines/log_anomaly_detection/
