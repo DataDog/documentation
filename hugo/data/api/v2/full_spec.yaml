@@ -1592,6 +1592,15 @@ components:
         example: 42
         format: int64
         type: integer
+    ModelLabUserIDPathParameter:
+      description: The UUID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        format: uuid
+        type: string
     NDMPageNumber:
       description: Specific page number to return. Defaults to 0.
       in: query
@@ -14772,6 +14781,253 @@ components:
       required:
         - type
       type: object
+    AnthropicUsageAndCostsCloudCostMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Anthropic costs by model, workspace, and service tier, in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Requires Cloud Cost Management on your Datadog organization. Without it, this dataflow collects no data. Cost data appears in Cloud Cost Management within 24 to 48 hours of enabling this dataflow.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`. Set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    AnthropicUsageAndCostsCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        Anthropic costs by model, workspace, and service tier, in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Requires Cloud Cost Management on your Datadog organization. Without it, this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    AnthropicUsageAndCostsDailyUsageDoraMetricsIntegrationDataflowResponse:
+      description: >-
+        Daily Claude usage data used for DORA Metrics. This dataflow is always on and cannot be turned off, which is why it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Anthropic Usage and Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthRequest"
+    AnthropicUsageAndCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Anthropic Usage and Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthResponse"
+    AnthropicUsageAndCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Anthropic Usage and Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthUpdate"
+    AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an Anthropic Admin API key (Platform plan) or an Analytics API key with the `read:analytics` scope (Enterprise plan). An invalid key, or an Analytics key without the `read:analytics` scope, is rejected with a `422` response.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            Anthropic Admin API key with permission to read usage and cost data, or an Analytics API key with the `read:analytics` scope. Generate an Admin API key in the Anthropic Console under **Settings > Admin Keys**.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an Anthropic Admin API key (Platform plan) or an Analytics API key with the `read:analytics` scope (Enterprise plan). An invalid key, or an Analytics key without the `read:analytics` scope, is rejected with a `422` response. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            Anthropic Admin API key with permission to read usage and cost data, or an Analytics API key with the `read:analytics` scope. Generate an Admin API key in the Anthropic Console under **Settings > Admin Keys**.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an Anthropic Usage and Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Anthropic Usage and Costs integration account.
+          example: anthropic-acme
+          type: string
+      required:
+        - name
+        - authentication
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountCreateData:
+      description: Data envelope for creating an Anthropic Usage and Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountCreateRequest:
+      description: Request payload to create an Anthropic Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountResponse:
+      description: Response payload for a single Anthropic Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountResponseAttributes:
+      description: Attributes of an Anthropic Usage and Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Anthropic Usage and Costs integration account.
+          example: anthropic-acme
+          type: string
+      required:
+        - name
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountResponseData:
+      description: Data envelope of an Anthropic Usage and Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Anthropic Usage and Costs integration account.
+          example: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an Anthropic Usage and Costs integration account. Every field is optional. Only the provided fields are changed. When `dataflows` is provided, only the dataflow IDs in the request are modified. Dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Anthropic Usage and Costs integration account.
+          example: anthropic-acme
+          type: string
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating an Anthropic Usage and Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Anthropic Usage and Costs integration account to update.
+          example: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update an Anthropic Usage and Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    AnthropicUsageAndCostsIntegrationAccountsResponse:
+      description: Response payload for a list of Anthropic Usage and Costs integration accounts.
+      properties:
+        data:
+          description: List of Anthropic Usage and Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    AnthropicUsageAndCostsIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Anthropic Usage and Costs, keyed by dataflow ID. Datadog always collects usage metrics. Each dataflow in this object adds another type of collection. Set `enabled` to start or stop a dataflow. The default for each dataflow applies when the account is created. On update, omitted fields keep their current values. If a dataflow depends on a Datadog product, its description names that product. If you enable a dataflow without that product, Datadog stores the setting but collects no data.
+      properties:
+        anthropic-cloud-cost-metrics:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsCloudCostMetricsIntegrationDataflowRequest"
+      type: object
+    AnthropicUsageAndCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from Anthropic Usage and Costs, keyed by dataflow ID.
+      properties:
+        anthropic-cloud-cost-metrics:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsCloudCostMetricsIntegrationDataflowResponse"
+        anthropic-usage-metrics:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsUsageMetricsIntegrationDataflowResponse"
+        claude-daily-usage-dora-metrics:
+          $ref: "#/components/schemas/AnthropicUsageAndCostsDailyUsageDoraMetricsIntegrationDataflowResponse"
+      type: object
+    AnthropicUsageAndCostsUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Anthropic usage metrics, such as input, output, and cache token consumption by model, workspace, and service tier. With an Analytics API key, usage is also broken down by user, product, context window, inference geography, and speed. This dataflow is always on and cannot be turned off, which is why it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     AnyValue:
       description: Represents any valid JSON value.
       nullable: true
@@ -26446,6 +26702,201 @@ components:
           $ref: "#/components/schemas/CircleCIIntegrationType"
       required:
         - type
+      type: object
+    ClaudeComplianceComplianceLogsIntegrationDataflowResponse:
+      description: >-
+        Audit activity logs from the Anthropic Compliance API, such as SSO sign-ins, API key lifecycle events, member and role changes, and Claude chat and file access. [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/) uses these logs to detect security-sensitive activity. Requires an Anthropic Enterprise plan with the Compliance API enabled in the organization's Data and privacy settings. Without it, this dataflow collects no data. This dataflow is always on and cannot be turned off, so it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    ClaudeComplianceIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Claude Compliance integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthRequest"
+    ClaudeComplianceIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Claude Compliance integration account.
+      oneOf:
+        - $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthResponse"
+    ClaudeComplianceIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Claude Compliance integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthUpdate"
+    ClaudeComplianceIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an Anthropic Admin API key with the `read:compliance_activities` scope, or a dedicated Compliance Access key.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Claude Compliance.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    ClaudeComplianceIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    ClaudeComplianceIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    ClaudeComplianceIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use an Anthropic Admin API key with the `read:compliance_activities` scope, or a dedicated Compliance Access key. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Claude Compliance.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    ClaudeComplianceIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Claude Compliance integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the Claude Compliance integration account.
+          example: claude-compliance-acme
+          type: string
+      required:
+        - name
+        - authentication
+      type: object
+    ClaudeComplianceIntegrationAccountCreateData:
+      description: Data envelope for creating a Claude Compliance integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    ClaudeComplianceIntegrationAccountCreateRequest:
+      description: Request payload to create a Claude Compliance integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    ClaudeComplianceIntegrationAccountResponse:
+      description: Response payload for a single Claude Compliance integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    ClaudeComplianceIntegrationAccountResponseAttributes:
+      description: Attributes of a Claude Compliance integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Claude Compliance integration account.
+          example: claude-compliance-acme
+          type: string
+      required:
+        - name
+      type: object
+    ClaudeComplianceIntegrationAccountResponseData:
+      description: Data envelope of a Claude Compliance integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Claude Compliance integration account.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    ClaudeComplianceIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Claude Compliance integration account. Every field is optional. Only the provided fields are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the Claude Compliance integration account.
+          example: claude-compliance-acme
+          type: string
+      type: object
+    ClaudeComplianceIntegrationAccountUpdateData:
+      description: Data envelope for updating a Claude Compliance integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Claude Compliance integration account to update.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ClaudeComplianceIntegrationAccountUpdateRequest:
+      description: Request payload to update a Claude Compliance integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    ClaudeComplianceIntegrationAccountsResponse:
+      description: Response payload for a list of Claude Compliance integration accounts.
+      properties:
+        data:
+          description: List of Claude Compliance integration accounts.
+          items:
+            $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    ClaudeComplianceIntegrationDataflowsResponse:
+      description: Data Datadog collects from Claude Compliance, keyed by dataflow ID.
+      properties:
+        anthropic-compliance-logs:
+          $ref: "#/components/schemas/ClaudeComplianceComplianceLogsIntegrationDataflowResponse"
       type: object
     ClickupAPIKey:
       description: The definition of the `ClickupAPIKey` object.
@@ -93067,9 +93518,12 @@ components:
       description: Object containing the definition of a metric's distinct volume.
       properties:
         distinct_volume:
-          description: Distinct volume for the given metric.
+          description: |-
+            Distinct volume for the given metric. This value is `null` for standard metrics in organizations on
+            Metric Name Pricing.
           example: 10
           format: int64
+          nullable: true
           type: integer
       type: object
     MetricDistinctVolumeType:
@@ -93150,9 +93604,10 @@ components:
       description: Object containing the definition of a metric's ingested and indexed volume.
       properties:
         indexed_volume:
-          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour.
+          description: Estimated average hourly number of indexed time series for the given metric over the last hour. For organizations on Metric Name Pricing, this represents the estimated sum of indexed data points over the last hour. This value is `null` when no estimated usage data is available for the metric.
           example: 10
           format: int64
+          nullable: true
           type: integer
         indexed_volume_delta:
           description: |-
@@ -93162,9 +93617,10 @@ components:
           format: int64
           type: integer
         ingested_volume:
-          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour.
+          description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour. This value can be `null` when ingested volume is not available for the metric.
           example: 20
           format: int64
+          nullable: true
           type: integer
         ingested_volume_delta:
           description: |-
@@ -94784,9 +95240,16 @@ components:
           example: active-project
           type: string
         owner_id:
-          description: The UUID of the project owner.
+          description: The UUID of the user that created the project. The creator is always an owner of the project.
           nullable: true
           type: string
+        owner_ids:
+          description: The UUIDs of the project's owners besides its creator, in the order they became owners.
+          example: ["00000000-0000-0000-0000-000000000001"]
+          items:
+            format: uuid
+            type: string
+          type: array
         tags:
           description: The list of tags associated with the project.
           items:
@@ -100183,6 +100646,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource"
         - $ref: "#/components/schemas/ObservabilityPipelineAmazonS3Source"
+        - $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentBitSource"
         - $ref: "#/components/schemas/ObservabilityPipelineFluentdSource"
         - $ref: "#/components/schemas/ObservabilityPipelineGooglePubSubSource"
@@ -100198,6 +100662,73 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
         - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
+    ObservabilityPipelineCrowdStrikeFdrSource:
+      description: |-
+        The `crowdstrike_fdr` source ingests CrowdStrike Falcon Data Replicator (FDR) data.
+        It reads file notifications from the CrowdStrike-managed SQS queue for your FDR feed and downloads the referenced objects from the CrowdStrike-managed S3 bucket.
+
+        **Supported pipeline types:** logs
+      properties:
+        access_key_id_key:
+          description: Name of the environment variable or secret that holds the AWS access key ID that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID
+          type: string
+        client_concurrency:
+          description: Number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+          example: 4
+          format: int64
+          maximum: 9007199254740991
+          minimum: 1
+          type: integer
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: crowdstrike-fdr-source
+          type: string
+        max_number_of_messages:
+          description: Maximum number of SQS messages to receive per poll. Each message can reference multiple files. Defaults to 1.
+          example: 1
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
+        region:
+          description: AWS region of the FDR feed's SQS queue and S3 bucket.
+          example: us-west-1
+          type: string
+        secret_access_key_key:
+          description: Name of the environment variable or secret that holds the AWS secret access key that CrowdStrike generated for the FDR feed.
+          example: CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineCrowdStrikeFdrSourceType"
+        url_key:
+          description: Name of the environment variable or secret that holds the URL of the FDR feed's SQS queue.
+          example: CROWDSTRIKE_FDR_SQS_URL
+          type: string
+        visibility_timeout_secs:
+          description: Number of seconds a received SQS message is hidden from other consumers. Set it higher than the time needed to download and process the largest FDR file. Defaults to 300.
+          example: 300
+          format: int64
+          maximum: 43200
+          minimum: 0
+          type: integer
+      required:
+        - id
+        - type
+        - region
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineCrowdStrikeFdrSourceType:
+      default: crowdstrike_fdr
+      description: The source type. Always `crowdstrike_fdr`.
+      enum:
+        - crowdstrike_fdr
+      example: crowdstrike_fdr
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE_FDR
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
@@ -100337,6 +100868,10 @@ components:
         name:
           description: A descriptive name for this remap rule.
           example: "Parse JSON from message field"
+          type: string
+        sample:
+          description: A sample event used to test the VRL script in the pipeline editor.
+          example: '{"message":"{\"service\":\"api\"}"}'
           type: string
         source:
           description: The VRL script source code that defines the processing logic.
@@ -100508,7 +101043,7 @@ components:
           type: array
         routes:
           description: A list of routing rules that forward matching logs to Datadog using dedicated API keys.
-          example: [{"api_key_key": "API_KEY_IDENTIFIER", "include": "service:api", "route_id": "datadog-logs-route-us1", "site": "us1"}]
+          example: [{"api_key_key": "API_KEY_IDENTIFIER", "include": "service:api", "name": "Production logs", "route_id": "datadog-logs-route-us1", "site": "us1"}]
           items:
             $ref: "#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute"
           maxItems: 100
@@ -100531,6 +101066,10 @@ components:
         include:
           description: A Datadog search query that determines which logs are forwarded using this route.
           example: service:api
+          type: string
+        name:
+          description: A human-readable name for this route.
+          example: Production logs
           type: string
         route_id:
           description: Unique identifier for this route within the destination.
@@ -120035,6 +120574,319 @@ components:
         - new_advisories
         - avoided_advisories
       type: object
+    RemediationGroupAttributes:
+      description: |-
+        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
+        depending on its grouping definition.
+      properties:
+        findings:
+          $ref: "#/components/schemas/RemediationGroupFindings"
+        grouping_definition_id:
+          description: |-
+            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
+          example: sca.package_update
+          type: string
+        image_update:
+          $ref: "#/components/schemas/RemediationGroupImageUpdate"
+        package_update:
+          $ref: "#/components/schemas/RemediationGroupPackageUpdate"
+        title:
+          description: Title of the group, which describes the change to make.
+          example: Update lodash to 4.17.21 in github.com/acme/api
+          type: string
+      required:
+        - grouping_definition_id
+        - title
+        - findings
+      type: object
+    RemediationGroupCaseRelationship:
+      description: Relationship to the case that tracks the group's remediation.
+      properties:
+        data:
+          $ref: "#/components/schemas/RemediationGroupCaseRelationshipData"
+      required:
+        - data
+      type: object
+    RemediationGroupCaseRelationshipData:
+      description: The group's case, or null when the group has no case yet.
+      nullable: true
+      properties:
+        id:
+          description: Unique identifier of the case.
+          example: c1234567-89ab-cdef-0123-456789abcdef
+          type: string
+        type:
+          $ref: "#/components/schemas/CaseDataType"
+      required:
+        - id
+        - type
+      type: object
+    RemediationGroupData:
+      description: A remediation group.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RemediationGroupAttributes"
+        id:
+          description: |-
+            Remediation key of the group: the grouping definition ID, a colon, and the group's dimensions
+            encoded in base64url. It identifies the group across searches.
+          example: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+          type: string
+        relationships:
+          $ref: "#/components/schemas/RemediationGroupRelationships"
+        type:
+          $ref: "#/components/schemas/RemediationGroupType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
+    RemediationGroupFindingType:
+      description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
+      enum:
+        - library_vulnerability
+        - host_and_container_vulnerability
+      example: library_vulnerability
+      type: string
+      x-enum-varnames:
+        - LIBRARY_VULNERABILITY
+        - HOST_AND_CONTAINER_VULNERABILITY
+    RemediationGroupFindings:
+      description: |-
+        Counts of the group's open findings. The counts include every finding in the group, including findings that
+        don't match `filter[query]`.
+      properties:
+        by_severity:
+          $ref: "#/components/schemas/RemediationGroupFindingsBySeverity"
+        total:
+          description: Number of open findings in the group.
+          example: 12
+          format: int64
+          type: integer
+      required:
+        - total
+        - by_severity
+      type: object
+    RemediationGroupFindingsBySeverity:
+      description: |-
+        Number of the group's findings for each value of their `@severity` attribute. The response includes every
+        level, including levels with a count of zero.
+      properties:
+        critical:
+          description: Number of critical findings.
+          example: 2
+          format: int64
+          type: integer
+        high:
+          description: Number of high findings.
+          example: 5
+          format: int64
+          type: integer
+        info:
+          description: Number of info findings.
+          example: 0
+          format: int64
+          type: integer
+        low:
+          description: Number of low findings.
+          example: 1
+          format: int64
+          type: integer
+        medium:
+          description: Number of medium findings.
+          example: 4
+          format: int64
+          type: integer
+        none:
+          description: Number of findings with no severity.
+          example: 0
+          format: int64
+          type: integer
+        unknown:
+          description: Number of findings with an unknown severity.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - critical
+        - high
+        - medium
+        - low
+        - info
+        - none
+        - unknown
+      type: object
+    RemediationGroupImageUpdate:
+      description: |-
+        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
+        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
+        them by `grouping_location`, `remediation_kind`, and `action`.
+      properties:
+        action:
+          description: |-
+            Name of the container image, base image, or package to upgrade. The value comes from the first of these
+            attributes that the findings have: `@remediation.container_image.latest_major.name`,
+            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
+          example: alpine
+          type: string
+        advisory_count:
+          description: Number of distinct values of `@advisory.id` across the group's findings.
+          example: 25
+          format: int64
+          type: integer
+        exploitable_cve_count:
+          description: |-
+            Number of distinct values of `@advisory.id` across the group's findings that have
+            `@risk.has_exploit_available` set to `true`.
+          example: 2
+          format: int64
+          type: integer
+        file_count:
+          description: Number of distinct values of `@code_location.filename` across the group's findings.
+          example: 1
+          format: int64
+          type: integer
+        grouping_location:
+          description: |-
+            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
+            the value is the findings' `@container_image.name`.
+          example: Dockerfile
+          type: string
+        location_is_filename:
+          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
+          example: true
+          type: boolean
+        remediation_kind:
+          description: |-
+            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
+            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
+            `package_update` otherwise.
+          example: image_update
+          type: string
+        target_version:
+          description: |-
+            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
+            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
+            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
+            or when the recommended versions can't be ordered.
+          example: 3.20.3
+          type: string
+      required:
+        - grouping_location
+        - location_is_filename
+        - remediation_kind
+        - action
+        - advisory_count
+        - exploitable_cve_count
+        - file_count
+      type: object
+    RemediationGroupInclude:
+      description: Related resource to add to `included`.
+      enum:
+        - case
+      example: case
+      type: string
+      x-enum-varnames:
+        - CASE
+    RemediationGroupPackageUpdate:
+      description: |-
+        A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
+        gathers the open vulnerabilities of direct dependencies that have a recommended fix, and groups them by
+        `@git.repository_id`, `@vulnerability.stack.ecosystem`, and `@remediation.recommended.name`.
+      properties:
+        advisory_count:
+          description: Number of distinct values of `@advisory.id` across the group's findings.
+          example: 3
+          format: int64
+          type: integer
+        ecosystem:
+          description: Package ecosystem, the findings' `@vulnerability.stack.ecosystem`.
+          example: npm
+          type: string
+        exploitable_cve_count:
+          description: |-
+            Number of distinct values of `@advisory.id` across the group's findings that have
+            `@risk.has_exploit_available` set to `true`.
+          example: 1
+          format: int64
+          type: integer
+        file_count:
+          description: |-
+            Number of distinct values of `@package.declaration.block.filename`, the files that declare the package.
+          example: 2
+          format: int64
+          type: integer
+        package_name:
+          description: Name of the package to update, the findings' `@remediation.recommended.name`.
+          example: lodash
+          type: string
+        repository_id:
+          description: Repository that depends on the package, the findings' `@git.repository_id`.
+          example: github.com/acme/api
+          type: string
+        target_version:
+          description: |-
+            Version to update the package to, the highest `@remediation.recommended.version` across the group's
+            findings. Omitted when no version is recommended or when the recommended versions can't be ordered.
+          example: 4.17.21
+          type: string
+      required:
+        - repository_id
+        - ecosystem
+        - package_name
+        - advisory_count
+        - exploitable_cve_count
+        - file_count
+      type: object
+    RemediationGroupRelationships:
+      description: Relationships of a remediation group.
+      properties:
+        case:
+          $ref: "#/components/schemas/RemediationGroupCaseRelationship"
+      required:
+        - case
+      type: object
+    RemediationGroupType:
+      default: remediation_groups
+      description: Remediation groups resource type.
+      enum:
+        - remediation_groups
+      example: remediation_groups
+      type: string
+      x-enum-varnames:
+        - REMEDIATION_GROUPS
+    RemediationGroupsMeta:
+      description: Metadata of the search.
+      properties:
+        page:
+          $ref: "#/components/schemas/RemediationGroupsPageMeta"
+      required:
+        - page
+      type: object
+    RemediationGroupsPageMeta:
+      description: Pagination of the search.
+      properties:
+        number:
+          description: Page number, starting at 1.
+          example: 1
+          format: int64
+          type: integer
+        size:
+          description: Page size.
+          example: 50
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Number of groups that match the search across all pages.
+          example: 134
+          format: int64
+          type: integer
+      required:
+        - number
+        - size
+        - total_filtered_count
+      type: object
     ReorderRetentionFiltersRequest:
       description: A list of retention filters to reorder.
       properties:
@@ -129267,6 +130119,25 @@ components:
         - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
         - ISSUE_WATCHES
+    SearchRemediationGroupsResponse:
+      description: A page of remediation groups.
+      properties:
+        data:
+          description: Remediation groups of the page.
+          items:
+            $ref: "#/components/schemas/RemediationGroupData"
+          type: array
+        included:
+          description: Cases of the page's groups, when the request has `include=case`.
+          items:
+            $ref: "#/components/schemas/FindingCaseResponseData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RemediationGroupsMeta"
+      required:
+        - data
+        - meta
+      type: object
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -154022,6 +154893,131 @@ components:
           description: List of OCI tenancy product resource objects.
           items:
             $ref: "#/components/schemas/TenancyProductsData"
+          type: array
+      required:
+        - data
+      type: object
+    TerraformCloudAuthIssuerURL:
+      description: HCP Terraform workload identity token issuer. Use `https://app.terraform.io` for HCP Terraform in the US or `https://app.eu.terraform.io` for HCP Terraform in Europe.
+      enum:
+        - https://app.terraform.io
+        - https://app.eu.terraform.io
+      example: https://app.terraform.io
+      type: string
+      x-enum-varnames:
+        - US
+        - EU
+    TerraformCloudAuthPersonaMappingAttributesResponse:
+      description: Stored HCP Terraform persona mapping attributes.
+      properties:
+        account_identifier:
+          description: Handle of the mapped Datadog account, resolved when the mapping was created.
+          example: test@example.com
+          type: string
+        account_uuid:
+          description: UUID of the mapped Datadog user or service account.
+          example: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+          type: string
+        audience:
+          description: Audience to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. Datadog computes this value as `datadog/<organization UUID>`.
+          example: datadog/abcdef12-3456-7890-abcd-ef1234567890
+          readOnly: true
+          type: string
+        issuer_url:
+          description: HCP Terraform workload identity token issuer. Empty for mappings created before the issuer was required.
+          example: https://app.terraform.io
+          type: string
+        sub_pattern:
+          description: Pattern matched against the `sub` claim of HCP Terraform workload identity tokens.
+          example: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+          type: string
+      required:
+        - sub_pattern
+        - account_identifier
+        - account_uuid
+      type: object
+    TerraformCloudAuthPersonaMappingCreateAttributes:
+      additionalProperties: false
+      description: Attributes for creating an HCP Terraform persona mapping.
+      properties:
+        account_identifier:
+          description: Handle or email address of the Datadog user or service account that matching tokens authenticate as. Its permissions must not exceed the caller's.
+          example: test@example.com
+          type: string
+        issuer_url:
+          $ref: "#/components/schemas/TerraformCloudAuthIssuerURL"
+        sub_pattern:
+          description: |-
+            Pattern matched against the `sub` claim of HCP Terraform workload identity tokens. Use `organization:<org>:project:<project>:workspace:<workspace>:run_phase:<plan|apply>` for workspace runs, or `organization:<org>:module:<module>:operation:test_run` for module test runs. Segments are HCP Terraform names, not IDs.
+            Any segment except the organization can be `*` to match any value.
+          example: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+          type: string
+      required:
+        - issuer_url
+        - sub_pattern
+        - account_identifier
+      type: object
+    TerraformCloudAuthPersonaMappingCreateData:
+      additionalProperties: false
+      description: Data for creating an HCP Terraform persona mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    TerraformCloudAuthPersonaMappingCreateRequest:
+      additionalProperties: false
+      description: Request to create an HCP Terraform persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateData"
+      required:
+        - data
+      type: object
+    TerraformCloudAuthPersonaMappingDataResponse:
+      description: HCP Terraform persona mapping resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingAttributesResponse"
+        id:
+          description: Unique identifier of the persona mapping.
+          example: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+          type: string
+        type:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TerraformCloudAuthPersonaMappingResponse:
+      description: Response containing a single HCP Terraform persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingDataResponse"
+      required:
+        - data
+      type: object
+    TerraformCloudAuthPersonaMappingType:
+      default: terraform_cloud_auth_config
+      description: Type identifier for an HCP Terraform persona mapping.
+      enum:
+        - terraform_cloud_auth_config
+      example: terraform_cloud_auth_config
+      type: string
+      x-enum-varnames:
+        - TERRAFORM_CLOUD_AUTH_CONFIG
+    TerraformCloudAuthPersonaMappingsResponse:
+      description: Response containing a list of HCP Terraform persona mappings.
+      properties:
+        data:
+          description: Configured HCP Terraform persona mappings.
+          items:
+            $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingDataResponse"
           type: array
       required:
         - data
@@ -182009,7 +183005,9 @@ paths:
         END
         ```
 
-        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.
+        This endpoint is only accessible for
+        [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+        This endpoint is not available in the US2-FED site.
       operationId: GetMonthlyCostAttribution
       parameters:
         - description: |-
@@ -208424,6 +209422,277 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/anthropic-usage-and-costs/accounts:
+    get:
+      description: List Anthropic Usage and Costs integration accounts.
+      operationId: ListAnthropicUsageAndCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            anthropic-cloud-cost-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            anthropic-usage-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            claude-daily-usage-dora-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: anthropic-acme
+                        id: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Anthropic Usage and Costs accounts
+      tags:
+        - Anthropic Usage And Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an Anthropic Usage and Costs integration account.
+      operationId: CreateAnthropicUsageAndCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          anthropic-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          claude-daily-usage-dora-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: anthropic-acme
+                      id: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an Anthropic Usage and Costs account
+      tags:
+        - Anthropic Usage And Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/anthropic-usage-and-costs/accounts/{account_id}:
+    delete:
+      description: Delete an Anthropic Usage and Costs integration account.
+      operationId: DeleteAnthropicUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an Anthropic Usage and Costs account
+      tags:
+        - Anthropic Usage And Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an Anthropic Usage and Costs integration account.
+      operationId: GetAnthropicUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          anthropic-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          claude-daily-usage-dora-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: anthropic-acme
+                      id: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an Anthropic Usage and Costs account
+      tags:
+        - Anthropic Usage And Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an Anthropic Usage and Costs integration account. Only the fields provided are changed.
+      operationId: UpdateAnthropicUsageAndCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          anthropic-usage-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          claude-daily-usage-dora-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: anthropic-acme
+                      id: 9b4c7e2a-1d6f-4a3b-8e5c-0f2d7a9b6c18
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/AnthropicUsageAndCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an Anthropic Usage and Costs account
+      tags:
+        - Anthropic Usage And Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/chatgpt-enterprise/accounts:
     get:
       description: List ChatGPT Enterprise integration accounts.
@@ -208674,6 +209943,237 @@ paths:
       summary: Update a ChatGPT Enterprise integration account
       tags:
         - ChatGPT Enterprise Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/claude-compliance/accounts:
+    get:
+      description: List Claude Compliance integration accounts.
+      operationId: ListClaudeComplianceIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            anthropic-compliance-logs:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: claude-compliance-acme
+                        id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Claude Compliance integration accounts
+      tags:
+        - Claude Compliance Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Claude Compliance integration account.
+      operationId: CreateClaudeComplianceIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-compliance-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: claude-compliance-acme
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Claude Compliance integration account
+      tags:
+        - Claude Compliance Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/claude-compliance/accounts/{account_id}:
+    delete:
+      description: Delete a Claude Compliance integration account.
+      operationId: DeleteClaudeComplianceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Claude Compliance integration account
+      tags:
+        - Claude Compliance Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Claude Compliance integration account.
+      operationId: GetClaudeComplianceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-compliance-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: claude-compliance-acme
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Claude Compliance integration account
+      tags:
+        - Claude Compliance Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Claude Compliance integration account. Only the fields provided are changed.
+      operationId: UpdateClaudeComplianceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          anthropic-compliance-logs:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: claude-compliance-acme
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Claude Compliance integration account
+      tags:
+        - Claude Compliance Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -228183,7 +229683,7 @@ paths:
       summary: Get Model Lab artifact content
       tags:
         - Model Lab API
-      x-menu-order: 16
+      x-menu-order: 18
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228246,7 +229746,7 @@ paths:
       summary: List Model Lab run facet keys
       tags:
         - Model Lab API
-      x-menu-order: 12
+      x-menu-order: 14
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228318,7 +229818,7 @@ paths:
       summary: List Model Lab run facet values
       tags:
         - Model Lab API
-      x-menu-order: 13
+      x-menu-order: 15
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228429,7 +229929,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Filter by owner UUID.
+        - description: Filter by owner UUID. Matches projects the user created and projects the user was added to as an owner.
           in: query
           name: filter[owner_id]
           required: false
@@ -228613,7 +230113,99 @@ paths:
       summary: List Model Lab project artifacts
       tags:
         - Model Lab API
-      x-menu-order: 15
+      x-menu-order: 17
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/model-lab-api/projects/{project_id}/owners/{user_id}:
+    delete:
+      description: |-
+        Remove a user from the owners of a Model Lab project. Removing a user who
+        isn't an owner has no effect. The project's creator is always an owner and
+        can't be removed.
+      operationId: RemoveModelLabProjectOwner
+      parameters:
+        - $ref: "#/components/parameters/ModelLabProjectIDPathParameter"
+        - $ref: "#/components/parameters/ModelLabUserIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Remove an owner from a Model Lab project
+      tags:
+        - Model Lab API
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Add a user as an owner of a Model Lab project. The user must belong to the
+        project's organization. The project's creator is always an owner, so adding
+        the creator, or a user who is already an owner, has no effect.
+        A project can have at most 50 owners besides its creator.
+      operationId: AddModelLabProjectOwner
+      parameters:
+        - $ref: "#/components/parameters/ModelLabProjectIDPathParameter"
+        - $ref: "#/components/parameters/ModelLabUserIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Add an owner to a Model Lab project
+      tags:
+        - Model Lab API
+      x-menu-order: 7
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228850,7 +230442,7 @@ paths:
       summary: List Model Lab runs
       tags:
         - Model Lab API
-      x-menu-order: 7
+      x-menu-order: 9
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228886,7 +230478,7 @@ paths:
       summary: Delete a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 9
+      x-menu-order: 11
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -228950,7 +230542,7 @@ paths:
       summary: Get a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 8
+      x-menu-order: 10
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229010,7 +230602,7 @@ paths:
       summary: List Model Lab run artifacts
       tags:
         - Model Lab API
-      x-menu-order: 14
+      x-menu-order: 16
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229052,7 +230644,7 @@ paths:
       summary: Unpin a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 11
+      x-menu-order: 13
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -229093,7 +230685,7 @@ paths:
       summary: Pin a Model Lab run
       tags:
         - Model Lab API
-      x-menu-order: 10
+      x-menu-order: 12
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -258337,6 +259929,237 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/remediation_groups:
+    get:
+      description: |-
+        Search the remediation groups of your organization. A remediation group gathers the open security findings
+        that one change fixes, such as updating a package in a repository or upgrading an image.
+
+        Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
+        group returns:
+
+        | Grouping definition    | Finding type                       | Kind object      |
+        | ---------------------- | ---------------------------------- | ---------------- |
+        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
+        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
+
+        Groups are computed from the attributes of security findings, described in the
+        [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
+        each kind object lists the findings its grouping definition reads and the attribute each field comes from.
+
+        The search includes all open findings, regardless of when they were first detected.
+
+        This endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or
+        `appsec_vm_read` permission.
+      operationId: SearchRemediationGroups
+      parameters:
+        - description: |-
+            Returns only groups whose grouping definition covers this `@finding_type` value. To match more than one
+            finding type, repeat the parameter.
+          example: ["library_vulnerability"]
+          in: query
+          name: filter[finding_type]
+          required: false
+          schema:
+            items:
+              $ref: "#/components/schemas/RemediationGroupFindingType"
+            type: array
+        - description: |-
+            Returns only groups with at least one open finding that matches the query. Use the security findings
+            search syntax with attributes from the
+            [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/), prefixed by `@`.
+            For example, `@severity:(critical OR high)` returns groups with at least one critical or high finding.
+            The group's counts still include every finding in the group. The query can be at most 2048 bytes after
+            JSON encoding, and the parameter can appear only once.
+          example: "@severity:(critical OR high)"
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            type: string
+        - description: |-
+            Comma-separated list of sort fields. Prefix a field with `-` to sort in descending order.
+            `findings.by_severity` sorts by the critical count, then high, medium, low, info, none, and unknown.
+            `findings.total` sorts by the total finding count. By default, groups are sorted by critical count,
+            then high count, then total finding count, all in descending order.
+          example: "-findings.by_severity,-findings.total"
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: Number of groups in a page.
+          example: 50
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: Page to return, starting at 1.
+          example: 1
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 1
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: Adds each group's case to `included`. `case` is the only supported value.
+          in: query
+          name: include
+          required: false
+          schema:
+            $ref: "#/components/schemas/RemediationGroupInclude"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                cloud_vm_group_without_case:
+                  summary: A host and container vulnerability group with no case yet
+                  value:
+                    data:
+                      - attributes:
+                          findings:
+                            by_severity:
+                              critical: 1
+                              high: 9
+                              info: 0
+                              low: 10
+                              medium: 20
+                              none: 0
+                              unknown: 0
+                            total: 40
+                          grouping_definition_id: cloudvm.image_update
+                          image_update:
+                            action: alpine
+                            advisory_count: 25
+                            exploitable_cve_count: 2
+                            file_count: 1
+                            grouping_location: Dockerfile
+                            location_is_filename: true
+                            remediation_kind: image_update
+                            target_version: 3.20.3
+                          title: Upgrade alpine to 3.20.3
+                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
+                        relationships:
+                          case:
+                            data:
+                        type: remediation_groups
+                    meta:
+                      page:
+                        number: 1
+                        size: 50
+                        total_filtered_count: 134
+                default:
+                  summary: A library vulnerability group with a case, with include=case
+                  value:
+                    data:
+                      - attributes:
+                          findings:
+                            by_severity:
+                              critical: 2
+                              high: 5
+                              info: 0
+                              low: 1
+                              medium: 4
+                              none: 0
+                              unknown: 0
+                            total: 12
+                          grouping_definition_id: sca.package_update
+                          package_update:
+                            advisory_count: 3
+                            ecosystem: npm
+                            exploitable_cve_count: 1
+                            file_count: 2
+                            package_name: lodash
+                            repository_id: github.com/acme/api
+                            target_version: 4.17.21
+                          title: Update lodash to 4.17.21 in github.com/acme/api
+                        id: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                        relationships:
+                          case:
+                            data:
+                              id: c1234567-89ab-cdef-0123-456789abcdef
+                              type: cases
+                        type: remediation_groups
+                    included:
+                      - attributes:
+                          created_at: "2026-11-02T09:00:00.000Z"
+                          creation_source: CS_SECURITY_REMEDIATION
+                          insights:
+                            - ref: /security/issues?si-tab=remediation&remediation=sca.package_update%3AeyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                              resource_id: sca.package_update:eyJlY29zeXN0ZW0iOiJucG0iLCJyZWNvbW1lbmRlZF9uYW1lIjoibG9kYXNoIiwicmVwb3NpdG9yeV9pZCI6ImdpdGh1Yi5jb20vYWNtZS9hcGkifQ
+                              type: REMEDIATION_GROUP
+                          key: SECREM-123
+                          modified_at: "2026-11-16T14:30:00.000Z"
+                          priority: P2
+                          status: IN_PROGRESS
+                          status_group: SG_IN_PROGRESS
+                          status_name: In Progress
+                          title: Update lodash to 4.17.21 in github.com/acme/api
+                          type: SECURITY_REMEDIATION
+                        id: c1234567-89ab-cdef-0123-456789abcdef
+                        type: cases
+                    meta:
+                      page:
+                        number: 1
+                        size: 50
+                        total_filtered_count: 134
+              schema:
+                $ref: "#/components/schemas/SearchRemediationGroupsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: page[size] must be between 1 and 100
+                        status: "400"
+                        title: Bad Request
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_findings_read
+            - cases_read
+        - AuthZ:
+            - appsec_vm_read
+            - cases_read
+      summary: Search remediation groups
+      tags:
+        - "Security Monitoring"
+      x-menu-order: 190
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        pageStart: 1
+        resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_findings_read
+          - appsec_vm_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-
@@ -277051,7 +278874,10 @@ paths:
           - synthetics_create_edit_trigger
   /api/v2/synthetics/tests/browser/{public_id}/results:
     get:
-      description: Get the latest result summaries for a given Synthetic browser test.
+      description: |-
+        Get the latest result summaries for a given Synthetic browser test.
+        To filter tests across your organization by monitor status, state, or tags, use
+        the Search Synthetic tests with filters endpoint.
       operationId: ListSyntheticsBrowserTestLatestResults
       parameters:
         - description: The public ID of the Synthetic browser test for which to search results.
@@ -278025,7 +279851,10 @@ paths:
           - synthetics_read
   /api/v2/synthetics/tests/{public_id}/results:
     get:
-      description: Get the latest result summaries for a given Synthetic test.
+      description: |-
+        Get the latest result summaries for a given Synthetic test.
+        To filter tests across your organization by monitor status, state, or tags, use
+        the Search Synthetic tests with filters endpoint.
       operationId: ListSyntheticsTestLatestResults
       parameters:
         - description: The public ID of the Synthetic test for which to search results.
@@ -286611,6 +288440,241 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/terraform/persona_mapping:
+    get:
+      description: List all HCP Terraform persona mappings in the organization. Each mapping associates an HCP Terraform workload identity token issuer and `sub` claim pattern with a Datadog user or service account.
+      operationId: ListTerraformCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_identifier: test@example.com
+                          account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                          audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                          issuer_url: https://app.terraform.io
+                          sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                        id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                        type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: List HCP Terraform persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Create an HCP Terraform persona mapping. The mapping associates a Datadog user or service account with workload identity tokens from an HCP Terraform issuer whose `sub` claim matches `sub_pattern`.
+
+        The response includes the `audience` value to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. The API returns a 409 error if the pattern duplicates an existing mapping, or if it can match the same token as an existing mapping for a different account.
+      operationId: CreateTerraformCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_identifier: test@example.com
+                      issuer_url: https://app.terraform.io
+                      sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                    type: terraform_cloud_auth_config
+            schema:
+              $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                        audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                        issuer_url: https://app.terraform.io
+                        sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                      id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                      type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Create an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/terraform/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete an HCP Terraform persona mapping by ID. Workload identity tokens that matched only this mapping can no longer be exchanged.
+      operationId: DeleteTerraformCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Delete an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an HCP Terraform persona mapping by ID.
+      operationId: GetTerraformCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+                        audience: datadog/abcdef12-3456-7890-abcd-ef1234567890
+                        issuer_url: https://app.terraform.io
+                        sub_pattern: "organization:example-org:project:Default Project:workspace:example-workspace:run_phase:*"
+                      id: 6f1c7a52-3d2e-4f8b-9a41-0c5d8e7b2f19
+                      type: terraform_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/TerraformCloudAuthPersonaMappingResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: Get an HCP Terraform persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/workflows:
     get:
       description: List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -287343,6 +289407,15 @@ tags:
   - description: Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time.
     name: Annotations
   - description: |-
+      Manage your Datadog Anthropic Usage and Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [Anthropic Usage and Costs integration page](https://docs.datadoghq.com/integrations/anthropic-usage-and-costs/) for
+      more information.
+    externalDocs:
+      description: Anthropic Usage and Costs integration.
+      url: https://docs.datadoghq.com/integrations/anthropic-usage-and-costs/
+    name: Anthropic Usage And Costs Integration
+  - description: |-
       Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps.
     name: App Builder
   - description: |-
@@ -287438,7 +289511,16 @@ tags:
       url: https://docs.datadoghq.com/integrations/chatgpt-enterprise/
     name: ChatGPT Enterprise Integration
   - description: |-
-      Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
+      Manage your Datadog Claude Compliance integration accounts and account resources
+      directly through the Datadog API. See the
+      [Claude Compliance integration page](https://docs.datadoghq.com/integrations/anthropic-compliance-logs/) for
+      more information.
+    externalDocs:
+      description: Claude Compliance integration.
+      url: https://docs.datadoghq.com/integrations/anthropic-compliance-logs/
+    name: Claude Compliance Integration
+  - description: |-
+      Configure AWS, GitHub, HCP Terraform, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
     name: Cloud Authentication
   - description: |-
       The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/).

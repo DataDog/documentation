@@ -115,9 +115,12 @@
   margin: 0;
 }
 
-.api-code-example__accordion
-  .api-code-example__code-block
-  :global(.code-block) {
+/*
+ * :global is used here to target CodeBlock's unhashed `code-block` class.
+ * CSS modules would otherwise hash it, so this rule would not match the
+ * element and could not override its margin-bottom.
+ */
+.api-code-example__code-block :global(.code-block) {
   margin-bottom: 0;
 }
 

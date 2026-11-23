@@ -849,7 +849,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
@@ -858,7 +858,7 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ### `search_datadog_sdk`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
@@ -1029,6 +1029,23 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 
 - Show me the metric history for monitor `12345`.
 - What are the anomaly bounds for this freshness monitor?
+
+### `get_data_observability_monitor_errors`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read`*\
+Returns the latest metric collection error for each table covered by a data quality monitor. Errors can include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this tool to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`. To check a single table, provide `entity_id`. Otherwise, the tool checks up to 500 tables.
+
+- Show the latest metric collection errors for monitor `12345`.
+- Why does this data quality monitor show No Data?
+- Check monitor `12345` for collection errors on this table.
+
+### `get_data_entity_monitor_health`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries`*\
+Returns the status of every data quality monitor on a data entity, such as a table, including any metric collection errors. Requires `entity_id`.
+
+- Show the health of all data quality monitors on this table.
+- Are any monitors on this table reporting metric collection errors?
 
 ### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\

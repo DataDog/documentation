@@ -4545,6 +4545,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Search remediation groups
+      url: /api/latest/security-monitoring/search-remediation-groups/
+      identifier: security-monitoring-search-remediation-groups
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRemediationGroups
+        unstable:
+          - v2
+        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -6297,9 +6310,9 @@ menu:
           - TriggerTests
         unstable: []
         order: 16
-    - name: Search Synthetic tests
-      url: /api/latest/synthetics/search-synthetic-tests/
-      identifier: synthetics-search-synthetic-tests
+    - name: Search Synthetic tests with filters
+      url: /api/latest/synthetics/search-synthetic-tests-with-filters/
+      identifier: synthetics-search-synthetic-tests-with-filters
       parent: synthetics
       generated: true
       params:
@@ -10223,6 +10236,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Anthropic Usage And Costs Integration
+      url: /api/latest/anthropic-usage-and-costs-integration/
+      identifier: anthropic-usage-and-costs-integration
+      generated: true
+    - name: Update an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/update-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-update-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/get-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-get-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/delete-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-delete-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/create-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-create-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Anthropic Usage and Costs accounts
+      url: /api/latest/anthropic-usage-and-costs-integration/list-anthropic-usage-and-costs-accounts/
+      identifier: anthropic-usage-and-costs-integration-list-anthropic-usage-and-costs-accounts
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnthropicUsageAndCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -12530,10 +12612,131 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Claude Compliance Integration
+      url: /api/latest/claude-compliance-integration/
+      identifier: claude-compliance-integration
+      generated: true
+    - name: Update a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/update-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-update-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/get-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-get-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/delete-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-delete-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/create-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-create-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Claude Compliance integration accounts
+      url: /api/latest/claude-compliance-integration/list-claude-compliance-integration-accounts/
+      identifier: claude-compliance-integration-list-claude-compliance-integration-accounts
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListClaudeComplianceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/get-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-get-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/delete-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-delete-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 28
+    - name: Create an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/create-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-create-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 27
+    - name: List HCP Terraform persona mappings
+      url: /api/latest/cloud-authentication/list-hcp-terraform-persona-mappings/
+      identifier: cloud-authentication-list-hcp-terraform-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 25
     - name: Get a Custom OIDC provider
       url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
       identifier: cloud-authentication-get-a-custom-oidc-provider
@@ -19401,7 +19604,7 @@ menu:
           - PinModelLabRun
         unstable:
           - v2
-        order: 10
+        order: 12
     - name: Unpin a Model Lab run
       url: /api/latest/model-lab-api/unpin-a-model-lab-run/
       identifier: model-lab-api-unpin-a-model-lab-run
@@ -19414,7 +19617,7 @@ menu:
           - UnpinModelLabRun
         unstable:
           - v2
-        order: 11
+        order: 13
     - name: List Model Lab run artifacts
       url: /api/latest/model-lab-api/list-model-lab-run-artifacts/
       identifier: model-lab-api-list-model-lab-run-artifacts
@@ -19427,7 +19630,7 @@ menu:
           - ListModelLabRunArtifacts
         unstable:
           - v2
-        order: 14
+        order: 16
     - name: Get a Model Lab run
       url: /api/latest/model-lab-api/get-a-model-lab-run/
       identifier: model-lab-api-get-a-model-lab-run
@@ -19440,7 +19643,7 @@ menu:
           - GetModelLabRun
         unstable:
           - v2
-        order: 8
+        order: 10
     - name: Delete a Model Lab run
       url: /api/latest/model-lab-api/delete-a-model-lab-run/
       identifier: model-lab-api-delete-a-model-lab-run
@@ -19453,7 +19656,7 @@ menu:
           - DeleteModelLabRun
         unstable:
           - v2
-        order: 9
+        order: 11
     - name: List Model Lab runs
       url: /api/latest/model-lab-api/list-model-lab-runs/
       identifier: model-lab-api-list-model-lab-runs
@@ -19466,7 +19669,7 @@ menu:
           - ListModelLabRuns
         unstable:
           - v2
-        order: 7
+        order: 9
     - name: Star a Model Lab project
       url: /api/latest/model-lab-api/star-a-model-lab-project/
       identifier: model-lab-api-star-a-model-lab-project
@@ -19493,6 +19696,32 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Add an owner to a Model Lab project
+      url: /api/latest/model-lab-api/add-an-owner-to-a-model-lab-project/
+      identifier: model-lab-api-add-an-owner-to-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddModelLabProjectOwner
+        unstable:
+          - v2
+        order: 7
+    - name: Remove an owner from a Model Lab project
+      url: /api/latest/model-lab-api/remove-an-owner-from-a-model-lab-project/
+      identifier: model-lab-api-remove-an-owner-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveModelLabProjectOwner
+        unstable:
+          - v2
+        order: 8
     - name: List Model Lab project artifacts
       url: /api/latest/model-lab-api/list-model-lab-project-artifacts/
       identifier: model-lab-api-list-model-lab-project-artifacts
@@ -19505,7 +19734,7 @@ menu:
           - ListModelLabProjectArtifacts
         unstable:
           - v2
-        order: 15
+        order: 17
     - name: Get a Model Lab project
       url: /api/latest/model-lab-api/get-a-model-lab-project/
       identifier: model-lab-api-get-a-model-lab-project
@@ -19570,7 +19799,7 @@ menu:
           - ListModelLabRunFacetValues
         unstable:
           - v2
-        order: 13
+        order: 15
     - name: List Model Lab run facet keys
       url: /api/latest/model-lab-api/list-model-lab-run-facet-keys/
       identifier: model-lab-api-list-model-lab-run-facet-keys
@@ -19583,7 +19812,7 @@ menu:
           - ListModelLabRunFacetKeys
         unstable:
           - v2
-        order: 12
+        order: 14
     - name: Get Model Lab artifact content
       url: /api/latest/model-lab-api/get-model-lab-artifact-content/
       identifier: model-lab-api-get-model-lab-artifact-content
@@ -19596,7 +19825,7 @@ menu:
           - GetModelLabArtifactContent
         unstable:
           - v2
-        order: 16
+        order: 18
     - name: Nebius Cloud Integration
       url: /api/latest/nebius-cloud-integration/
       identifier: nebius-cloud-integration

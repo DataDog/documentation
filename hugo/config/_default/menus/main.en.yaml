@@ -727,33 +727,28 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Using OTel SDK
-      url: opentelemetry/instrument/otel_sdks/
-      identifier: otel_sdks
-      parent: otel-instrumentation
-      weight: 301
-    - name: Using Datadog SDK
-      url: /opentelemetry/instrument/dd_sdks
+    - name: DDOT SDKs
+      url: /opentelemetry/instrument/ddot_sdks/
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
+      weight: 301
+    - name: Upstream OpenTelemetry SDKs
+      url: /opentelemetry/instrument/upstream_otel_sdks/
+      identifier: otel_sdks
+      parent: otel-instrumentation
       weight: 302
-    - name: OTLP Export
-      url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
-      identifier: otel-otlp-export-dd-sdk
-      parent: otel-dd-sdk-parent
-      weight: 3020
     - name: APIs
-      url: /opentelemetry/instrument/dd_sdks/api_support
+      url: /opentelemetry/instrument/ddot_sdks/api_support/
       identifier: otel-api-dd-sdk
       parent: otel-dd-sdk-parent
       weight: 3021
     - name: Instrumentation Libraries
-      url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
+      url: /opentelemetry/instrument/ddot_sdks/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
       parent: otel-dd-sdk-parent
       weight: 3022
     - name: Configuration
-      url: opentelemetry/config/environment_variable_support/
+      url: /opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
       parent: otel-dd-sdk-parent
       weight: 3023
@@ -6073,11 +6068,6 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
-    - name: AI Gateway
-      url: llm_observability/configure/ai_gateway
-      parent: llm_obs_configure
-      identifier: llm_obs_ai_gateway
-      weight: 604
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -6160,6 +6150,62 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: AI Gateway
+      url: ai_gateway/
+      pre: llm-observability
+      identifier: ai_gateway
+      parent: ai_observability_heading
+      weight: 40000
+    - name: Get Started
+      url: ai_gateway/getting_started/
+      parent: ai_gateway
+      identifier: ai_gateway_getting_started
+      weight: 1
+    - name: Connect Providers
+      url: ai_gateway/providers/
+      parent: ai_gateway
+      identifier: ai_gateway_providers
+      weight: 2
+    - name: Connect Applications
+      url: ai_gateway/applications/
+      parent: ai_gateway
+      identifier: ai_gateway_applications
+      weight: 3
+    - name: Send Requests
+      url: ai_gateway/requests/
+      parent: ai_gateway
+      identifier: ai_gateway_requests
+      weight: 4
+    - name: Route Requests
+      url: ai_gateway/routing/
+      parent: ai_gateway
+      identifier: ai_gateway_routing
+      weight: 5
+    - name: Control Model Access
+      url: ai_gateway/access_control/
+      parent: ai_gateway
+      identifier: ai_gateway_access_control
+      weight: 6
+    - name: Control Spend and Usage
+      url: ai_gateway/spend_controls/
+      parent: ai_gateway
+      identifier: ai_gateway_spend_controls
+      weight: 7
+    - name: Security and Data Capture
+      url: ai_gateway/security/
+      parent: ai_gateway
+      identifier: ai_gateway_security
+      weight: 8
+    - name: Observe AI Gateway Activity
+      url: ai_gateway/observability/
+      parent: ai_gateway
+      identifier: ai_gateway_observability
+      weight: 9
+    - name: Troubleshooting
+      url: ai_gateway/troubleshooting/
+      parent: ai_gateway
+      identifier: ai_gateway_troubleshooting
+      weight: 10
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
@@ -6782,111 +6828,116 @@ menu:
       parent: feature_flags
       identifier: feature_flags_concepts
       weight: 3
-    - name: Environments
-      url: feature_flags/concepts/environments
+    - name: Approvals
+      url: feature_flags/concepts/approvals
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_environments
+      identifier: feature_flags_concepts_approvals
       weight: 301
-    - name: Variants and Flag Types
-      url: feature_flags/concepts/variants_and_flag_types
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_variants
-      weight: 302
-    - name: Evaluation Context
-      url: feature_flags/concepts/evaluation_context
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_evaluation_context
-      weight: 303
-    - name: Targeting Rules and Filters
-      url: feature_flags/concepts/targeting_rules
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_targeting_rules
-      weight: 304
-    - name: Targeting Attributes
-      url: feature_flags/concepts/targeting_attributes
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_targeting_attributes
-      weight: 305
-    - name: Evaluation Tester
-      url: feature_flags/concepts/evaluation_tester
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_evaluation_tester
-      weight: 306
-    - name: Scheduled Rollouts
-      url: feature_flags/concepts/scheduled_rollouts
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 307
-    - name: Saved Filters
-      url: feature_flags/concepts/saved_filters
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_saved_filters
-      weight: 308
-    - name: Traffic Splitting and Randomization
-      url: feature_flags/concepts/traffic_splitting
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_traffic_splitting
-      weight: 309
-    - name: Experiments
-      url: feature_flags/concepts/experiments
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_experiments
-      weight: 310
-    - name: Flag Evaluation and Experimentation Opt-Out
-      url: feature_flags/concepts/opt_out
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_opt_out
-      weight: 311
-    - name: Distribution Channels
-      url: feature_flags/concepts/distribution_channels
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_distribution_channels
-      weight: 312
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 313
-    - name: Monthly Flag Configuration Requests
-      url: feature_flags/concepts/monthly_flag_configuration_requests
+      weight: 302
+    - name: Distribution Channels
+      url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_mfcr
-      weight: 314
-    - name: Flag History
-      url: feature_flags/concepts/flag_history
+      identifier: feature_flags_concepts_distribution_channels
+      weight: 303
+    - name: Environments
+      url: feature_flags/concepts/environments
       parent: feature_flags_concepts
-      identifier: feature_flags_history
-      weight: 315
+      identifier: feature_flags_concepts_environments
+      weight: 304
+    - name: Evaluation Context
+      url: feature_flags/concepts/evaluation_context
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_context
+      weight: 305
+    - name: Evaluation Results
+      url: feature_flags/concepts/evaluation_results
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_results
+      weight: 306
+    - name: Evaluation Tester
+      url: feature_flags/concepts/evaluation_tester
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_evaluation_tester
+      weight: 307
+    - name: Experiments
+      url: feature_flags/concepts/experiments
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_experiments
+      weight: 308
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
+      weight: 309
+    - name: Flag Evaluation and Experimentation Opt-Out
+      url: feature_flags/concepts/opt_out
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_opt_out
+      weight: 310
+    - name: Flag History
+      url: feature_flags/concepts/flag_history
+      parent: feature_flags_concepts
+      identifier: feature_flags_history
+      weight: 311
+    - name: Flag Key Obfuscation
+      url: feature_flags/concepts/flag_key_obfuscation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_flag_key_obfuscation
+      weight: 312
+    - name: Monthly Flag Configuration Requests
+      url: feature_flags/concepts/monthly_flag_configuration_requests
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_mfcr
+      weight: 313
+    - name: Permissions and Access Control
+      url: feature_flags/concepts/permissions
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_permissions
+      weight: 314
+    - name: Saved Filters
+      url: feature_flags/concepts/saved_filters
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_saved_filters
+      weight: 315
+    - name: Scheduled Rollouts
+      url: feature_flags/concepts/scheduled_rollouts
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_scheduled_rollouts
       weight: 316
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
       weight: 317
-    - name: Flag Key Obfuscation
-      url: feature_flags/concepts/flag_key_obfuscation
+    - name: Targeting Attributes
+      url: feature_flags/concepts/targeting_attributes
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_flag_key_obfuscation
+      identifier: feature_flags_concepts_targeting_attributes
       weight: 318
-    - name: Permissions and Access Control
-      url: feature_flags/concepts/permissions
+    - name: Targeting Rules and Filters
+      url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
-      identifier: feature_flags_concepts_permissions
+      identifier: feature_flags_concepts_targeting_rules
+      weight: 319
+    - name: Traffic Splitting and Randomization
+      url: feature_flags/concepts/traffic_splitting
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_traffic_splitting
+      weight: 320
+    - name: Variants and Flag Types
+      url: feature_flags/concepts/variants_and_flag_types
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_variants
       weight: 321
-    - name: Approvals
-      url: feature_flags/concepts/approvals
-      parent: feature_flags_concepts
-      identifier: feature_flags_concepts_approvals
-      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 323
+      weight: 322
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -7360,26 +7411,31 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
       weight: 319
+    - name: Spike Protection
+      url: observability_pipelines/processors/spike_protection
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_spike_protection
+      weight: 320
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 320
+      weight: 321
     - name: Tag Allow/Block List
       url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_allow_block_list
-      weight: 321
+      weight: 322
     - name: Tags
       url: observability_pipelines/processors/tags/
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 322
+      weight: 323
     - name: Tag Cardinality Control
       url: observability_pipelines/processors/tag_cardinality_control
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
-      weight: 323
+      weight: 324
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
@@ -8203,56 +8259,61 @@ menu:
       parent: security_platform
       identifier: security_inbox
       weight: 5
+    - name: Remediation Inbox
+      url: security/remediation_inbox
+      parent: security_platform
+      identifier: security_remediation_inbox
+      weight: 6
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
       identifier: security_threat_intelligence
-      weight: 6
+      weight: 7
     - name: Events Forwarding
       url: security/events_forwarding
       parent: security_platform
       identifier: security_events_forwarding
-      weight: 7
+      weight: 8
     - name: Audit Trail
       url: security/audit_trail
       parent: security_platform
       identifier: security_audit_trail
-      weight: 8
+      weight: 9
     - name: Access Control
       url: security/access_control
       parent: security_platform
       identifier: security_access_control
-      weight: 9
+      weight: 10
     - name: Ticketing Integrations
       url: security/ticketing_integrations
       parent: security_platform
       identifier: security_ticketing_integrations
-      weight: 10
+      weight: 11
     - name: Assignee Management
       url: security/assignee_management
       parent: security_platform
       identifier: security_assignee_management
-      weight: 11
+      weight: 12
     - name: Severity Adjustment
       url: security/manual_severity_adjustment
       parent: security_platform
       identifier: security_manual_severity_adjustment
-      weight: 12
+      weight: 14
     - name: Research Feed
       url: security/research_feed
       parent: security_platform
       identifier: security_research_feed
-      weight: 12
+      weight: 13
     - name: Security MCP Tools
       url: security/mcp_server
       parent: security_platform
       identifier: security_mcp_server
-      weight: 13
+      weight: 15
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 14
+      weight: 16
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -8304,6 +8365,11 @@ menu:
       parent: cloud_siem_open_cybersecurity_schema_framework
       identifier: cloud_siem_ocsf_processor
       weight: 10401
+    - name: OCSF Log Quality
+      url: security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/validation
+      parent: cloud_siem_open_cybersecurity_schema_framework
+      identifier: cloud_siem_ocsf_validation
+      weight: 10402
     - name: Detect and Monitor
       url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
@@ -8404,6 +8470,11 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
       weight: 305
+    - name: Group Signals into Cases
+      url: security/cloud_siem/triage_and_investigate/signal_grouping
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_signal_grouping
+      weight: 306
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
@@ -9068,11 +9139,16 @@ menu:
       identifier: ai_guard_sensitive_data_redaction
       parent: ai_guard
       weight: 4
+    - name: Control Evaluations in Code
+      url: /security/ai_guard/middleware/
+      identifier: ai_guard_middleware
+      parent: ai_guard
+      weight: 5
     - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 5
+      weight: 6
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security

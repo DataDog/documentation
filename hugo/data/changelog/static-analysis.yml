@@ -45,3 +45,39 @@ entries:
       - UpdateAiCustomRuleset
       - UpdateCustomRuleset
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateAiCustomRule
+      - CreateAiCustomRuleRevision
+      - CreateAiCustomRuleset
+      - CreateAiMemoryViolationResult
+      - CreateCustomRule
+      - CreateCustomRuleRevision
+      - CreateCustomRuleset
+      - CreateSCAResolveVulnerableSymbols
+      - CreateSCAResult
+      - CreateSCAScan
+      - DeleteAiCustomRule
+      - DeleteAiCustomRuleset
+      - DeleteAiMemoryViolationResult
+      - DeleteCustomRule
+      - DeleteCustomRuleset
+      - GetAiCustomRule
+      - GetAiCustomRuleRevision
+      - GetAiCustomRuleset
+      - GetCustomRule
+      - GetCustomRuleRevision
+      - GetCustomRuleset
+      - GetSCAScan
+      - ListAiCustomRuleRevisions
+      - ListAiCustomRulesets
+      - ListAiMemoryViolationResults
+      - ListAiPrompts
+      - ListCustomRulesets
+      - ListSCALicenses
+      - RevertCustomRuleRevision
+      - UpdateAiCustomRuleset
+      - UpdateCustomRuleset
+    title: Document rate-limit headers on the shared 429 responses
