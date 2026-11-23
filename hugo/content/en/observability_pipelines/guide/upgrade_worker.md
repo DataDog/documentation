@@ -39,13 +39,7 @@ Worker version 2.26.1 gives you access to the following:
 
 - Destinations now include the retry attempt number in their retry logs. Continuous retry
   failures are logged as errors every 10 attempts.
-- The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
-  triggered the shutdown. The value is `none` for an expected shutdown, such as after a shutdown signal or after all sources finish. Otherwise, the value is one of the following:
-    - `source_aborted`
-    - `transform_aborted`
-    - `sink_aborted`
-    - `api_failed`
-    - `reload_failed_to_restore`
+- The `pipelines.stopped_total` metric is now available. It tells you the number of times the Worker instance has stopped and includes the `reason` tag to identify what triggered the shutdown.
 
 #### Fixes
 
