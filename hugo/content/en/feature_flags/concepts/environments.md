@@ -40,6 +40,10 @@ Manage environments from **Feature Flags > Settings > Environments**:
 1. Navigate to [**Feature Flags > Settings > Environments**][1].
 2. Hover over the environment you want to delete, then click the trash icon.
 
+## Require subject authorization
+
+Use [Subject Authorization][2] to require a backend-issued credential before Datadog returns assignments for a subject in an environment. Configure this setting through the environment API. The provider registration and authorization policy are local to each Datadog site.
+
 ## Default environments
 
 By default, Datadog creates three environments for your organization:
@@ -101,3 +105,4 @@ This applies to Python, Go, Java, Node.js, Ruby, and .NET server SDKs. See [Serv
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/feature-flags/settings/environments
+[2]: /feature_flags/concepts/subject_authorization/

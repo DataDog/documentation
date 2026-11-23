@@ -6817,6 +6817,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
       weight: 317
+    - name: Subject Authorization
+      url: feature_flags/concepts/subject_authorization
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_subject_authorization
+      weight: 318
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
