@@ -40,7 +40,7 @@ Worker version 2.26.1 gives you access to the following:
 - Destinations now include the retry attempt number in their retry logs. Continuous retry
   failures are logged as errors every 10 attempts.
 - The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
-  triggered the shutdown. The value is `none` for a expected shutdown, such as after a shutdown signal or after all sources finish. Otherwise, the value is one of:
+  triggered the shutdown. The value is `none` for an expected shutdown, such as after a shutdown signal or after all sources finish. Otherwise, the value is one of the following:
     - `source_aborted`
     - `transform_aborted`
     - `sink_aborted`
@@ -67,12 +67,12 @@ Worker version 2.26.1 gives you access to the following:
       such as `pipelines.stopped_total` are sent to Datadog.
     - Keeps pipelines running when the configuration file in its data directory changes, such as
       when Kubernetes reapplies volume ownership after a node restart.
-    - Reports the failed source's error when the Worker stops all sources because one of them failed or panicked.
-- Fixed the Worker panic `Replacing unknown sink from fanout` on configuration reload when a component ID is reused by a different kind of component, or when a failed reload restores a removed component.
-- TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously these clients had their connection rejected with a `session id context uninitialized` error.
+    - Reports the failed source's error when the Worker stops all sources because one source failed or panicked.
+- The Worker no longer panics with the `Replacing unknown sink from fanout` error when a configuration reload reuses a component ID for a different type of component, or when a failed reload restores a removed component.
+- TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously, the Worker rejected these connections with a `session id context uninitialized` error.
 - For the Custom Processor:
-    - The `Event mapping aborted.` debug log now includes the reason why the mapping was aborted in its error field.
-    - Field paths with array indexes outside the `isize` range are rejected instead of silently wrapped to a different index.
+    - The `Event mapping aborted.` debug log now includes the abort reason in its error field.
+    - Field paths with array indexes outside the `isize` range return an error instead of silently wrapping to a different index.
 
 ## Worker version 2.26.0
 
