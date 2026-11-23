@@ -14,6 +14,65 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.26.1
+
+To upgrade to Worker version 2.26.1:
+
+- Docker: Run the `docker pull` command for the [2.26.1 image][71].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.1`.
+
+Worker version 2.26.1 gives you access to the following:
+
+#### Security
+
+- Pipeline load errors that the Worker reports to Datadog now go through the same sensitive-value
+  redaction as shutdown errors. Secrets referenced by pipeline settings don't appear in the
+  deployment error shown in the Observability Pipelines UI.
+
+#### New features
+
+- The Custom Processor now includes `log10` and `pow` functions. For example, `10 * log10!(mw)`
+  converts milliwatts to dBm, and `pow!(10, dbm / 10)` converts back.
+
+#### Enhancements
+
+- Destinations now include the retry attempt number in their retry logs. Sustained retryable
+  failures are logged as errors every 10 attempts.
+- The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
+  triggered the shutdown, for example `source_aborted` or `reload_failed_to_restore`. The value is
+  `none` for a normal shutdown.
+
+#### Fixes
+
+- Live Capture now:
+    - Limits each publish request to about 4 MB of captured events, instead of 25 events.
+    - Keeps capturing when the intake rejects a batch, dropping the rejected batch with a warning.
+      The capture fails only if no batch could be published.
+    - Includes the HTTP status reason and the intake's response in publish errors.
+- The Datadog BYOC Logs destination now truncates log events that are too large to fit in a single
+  request, instead of dropping them:
+    - Shortens `message` so the whole log fits the payload limit
+      (`DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES`, 5 MB by default), and appends
+      `...TRUNCATED...`.
+    - Tags truncated logs `truncated:single_line` and counts them in the
+      `datadog_logs_events_truncated_total` metric.
+    - Still drops logs with no string `message` field, or whose other fields alone exceed the limit.
+- The Worker now:
+    - Keeps its internal telemetry running for 5 seconds after pipelines stop, so shutdown metrics
+      such as `pipelines.stopped_total` reach Datadog.
+    - Keeps pipelines running when the configuration file in the Worker's data directory changes,
+      for example when Kubernetes re-applies volume ownership after a node restart.
+    - Completes configuration updates that reuse a component ID for a different component type, and
+      restores components removed by a failed update.
+    - Reports the failing source's error when it shuts down because a source failed.
+- The Splunk HEC source now completes TLS handshakes for clients that resume a previous TLS session
+  when certificate verification is enabled.
+- The Custom Processor now:
+    - Includes the message passed to `abort` in the error details when it drops an event.
+    - Returns an error for field paths with array indexes outside the `isize` range.
+
 ## Worker version 2.26.0
 
 To upgrade to Worker version 2.26.0:
@@ -1138,3 +1197,4 @@ Worker version 2.7.0 gives you access to the following:
 [68]: /observability_pipelines/destinations/azure_data_explorer/
 [69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
 [70]: /observability_pipelines/processors/spike_protection/
+[71]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.1
