@@ -473,9 +473,9 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for [APM][50], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules.
+Tools for [APM][50], including investigating errors and latency across services and traces, finding optimization opportunities, and reviewing ingestion and retention configuration.
 
-<div class="alert alert-info">The <code>apm</code> toolset is not enabled by default. Add <code>apm</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,apm</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
+<div class="alert alert-info">Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. To use them, add <code>apm</code> to the <code>toolsets</code> parameter by name. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -499,9 +499,19 @@ Analyzes the trace dependencies of a service resource to find downstream service
 *Permissions Required: `APM Read`*\
 Analyzes latency bottlenecks across traces in an anomaly period using self-time calculations. Identifies which service and resource combinations consume the most self-time, detects cascading call patterns, and surfaces root causes of latency spikes.
 
-- Summarize the latency bottlenecks for the checkout service between 2pm and 3pm today.
+- Summarize the latency bottlenecks for the checkout service between 2 PM and 3 PM today.
 - What is consuming the most self-time in the payments service during this latency spike?
-- Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
+- Identify which endpoints are the top bottlenecks for `service:api` between 10 AM and 10:30 AM.
+
+### `apm_query_trace`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
+
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_search_recommendations`
 *Toolset: **apm***\
@@ -526,15 +536,51 @@ Discovers available tag keys on spans within a time range.
 - What tags are available on spans for `service:checkout`?
 - Show me the tag keys I can filter by in APM.
 
-### `apm_query_trace`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Read`*\
-Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
+### `apm_get_config`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Retrieves the [runtime configuration][106] applied through Remote Configuration for one service and environment, including every sampling rule the service applies, whether your organization or Adaptive Sampling set it. Request specific keys, or omit them to return the full configuration.
 
-- Which service accounted for the most self-time in trace `abc123`?
-- Get the attributes for span `xyz789` along with the root span's attributes.
-- How many database calls happened in this trace, and which one took the longest?
-- Which of the child spans under span `xyz789` was slowest?
+- What runtime configuration is applied to the checkout service in prod?
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists the remote sampling rules your organization created, each setting a fixed sample rate for spans that match a service, environment, and resource. Filter by service, environment, or both. Rates that Adaptive Sampling sets don't appear here. To see every rule a service applies, use `apm_get_config`.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `check_adaptive_sampling_service_eligibility`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Checks whether a service and environment can use [Adaptive Sampling][107]. Returns whether the service is eligible, its onboarding and target state, prerequisites, and any blockers.
+
+- Can the checkout service in prod use Adaptive Sampling?
+- What's blocking the payments service from onboarding to Adaptive Sampling?
+
+### `get_adaptive_sampling_target`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Retrieves the organization-wide Adaptive Sampling target, including whether one is configured and its strategy and value.
+
+- What is my organization's Adaptive Sampling target?
+
+### `search_apm_retention_filters`
+*Toolset: **apm***\
+*Permissions Required: `APM Retention Filters Read`*\
+Lists the organization's [retention filters][108] in execution order, or retrieves one filter by ID. Retention filters decide which spans are indexed and stay searchable in the Trace Explorer. A span is kept by the first filter it matches, so the order determines which rate applies. Filter the list by name, query, or enabled status.
+
+- Why aren't errors from the checkout service showing up in the Trace Explorer?
+- List the enabled retention filters in my organization.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
 
 ### `apm_get_primary_tag_keys`
 *Toolset: **apm** (Preview)*\
@@ -542,14 +588,6 @@ Runs a read-only SQL query against a trace's spans to answer a specific question
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
-
-### `search_apm_sampling_rules`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Remote Configuration Read`*\
-Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
-
-- Show me the sampling rules for the checkout service in prod.
-- List all remote sampling rules in my organization.
 
 ### `create_apm_sampling_rule`
 *Toolset: **apm** (Preview)*\
@@ -573,14 +611,6 @@ Changes the sample rate of an existing remote sampling rule, identified by its s
 Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
 - Remove the sampling rule for `GET /health` on the checkout service in prod.
-
-### `search_apm_service_remapping_rules`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Read`*\
-Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
-
-- List all service remapping rules in my organization.
-- Which remapping rule renames the `postgres` inferred service?
 
 ### `create_apm_service_remapping_rule`
 *Toolset: **apm** (Preview)*\
@@ -3883,6 +3913,9 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [103]: /mcp_server/setup#required-permissions
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+[106]: /tracing/trace_collection/runtime_config/
+[107]: /tracing/trace_pipeline/adaptive_sampling/
+[108]: /tracing/trace_pipeline/trace_retention/#retention-filters
 
 ## Further reading
 
