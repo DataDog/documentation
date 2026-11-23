@@ -26,7 +26,7 @@ Datadog evaluates MCP access in layers. A request through the MCP Server succeed
 | 2 | [{{< ui >}}MCP Write Access{{< /ui >}} organization setting](#enable-or-disable-mcp-write-access) | Entire organization | Off |
 | 3 | [IP allowlist](#restrict-network-access) | Entire organization | Off |
 | 4 | [{{< ui >}}MCP Read{{< /ui >}} and {{< ui >}}MCP Write{{< /ui >}} role permissions](#control-mcp-access-for-specific-users) | Per role | - Datadog Read Only role: MCP Read<br>- Datadog Standard and Admin roles: MCP Read and MCP Write |
-| 5 | [OAuth application scopes](#restrict-actions-for-a-specific-ai-client), or [access token scopes](#scopes-apply-only-to-oauth-connections) for connections that don't use OAuth | Per AI client (OAuth) or per token | - OAuth: All requested scopes allowed<br>- Access tokens: Scopes selected when the token is created |
+| 5 | [OAuth application scopes](#restrict-actions-for-a-specific-ai-client), or [access token scopes](#limit-connections-that-dont-use-oauth) for connections that don't use OAuth | Per AI client (OAuth) or per token | - OAuth: All requested scopes allowed<br>- Access tokens: Scopes selected when the token is created |
 | 6 | [Standard Datadog access controls](#standard-access-controls-apply-to-mcp) | Per user, resource, and dataset | Same as in the Datadog UI and API |
 
 The MCP Server never grants a user more access than they already have in Datadog. Each layer can only narrow access further.
@@ -114,7 +114,7 @@ To let agents read data across Datadog but only write to Notebooks:
 
 Users can still perform other write actions in the Datadog UI, subject to their role permissions.
 
-### Scopes apply only to OAuth connections
+### Limit connections that don't use OAuth
 
 Application scopes restrict MCP connections that authenticate through OAuth. A user who configures an AI client with a personal or service access token, or with an API key and application key, bypasses the OAuth application's scopes. That connection has the access of the token or key instead.
 
