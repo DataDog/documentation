@@ -81,7 +81,7 @@ Send a request to the [Search logs endpoint][2] (`POST /api/v2/logs/events/searc
 
 ## Query BYOC Logs with DDSQL
 
-In [Datadog Notebooks][5], you can query BYOC Logs indexes with [DDSQL][6] (Preview). Add a Logs data source cell with a query such as `index:byoc--cluster-1--application`, then query the cell from a SQL analysis cell. For example:
+In [Datadog Notebooks][5], you can query BYOC Logs indexes with [DDSQL][6] (Preview). Add a Logs data source cell named `app_logs` with a query such as `index:byoc--cluster-1--application`, then query the cell by name from a SQL analysis cell. For example:
 
 ```sql
 SELECT service, COUNT(*) AS events
