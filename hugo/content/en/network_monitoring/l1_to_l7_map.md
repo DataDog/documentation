@@ -76,9 +76,9 @@ The rest of the layout depends on the view: Resource View or Connection View.
 
 #### Resource View layout
 
-{{< img src="network_performance_monitoring/l1_l7_map/resource-view-layout.png" alt="Resource View for a host, with its services, containers, and pods stacked above it, and its upstream and downstream connections" style="width:60%;" >}}
-
 In Resource View, the map centers on and highlights the selected resource, called the _explored resource_. Its composition stack appears in the middle of the map. When you explore a service, the stack shows the containers, pods, and hosts that the service runs on. When you explore a container, pod, or host, the stack also shows the services that run on it.
+
+{{< img src="network_performance_monitoring/l1_l7_map/resource-view-layout.png" alt="Resource View for a host, with its services, containers, and pods stacked above it, and its upstream and downstream connections" style="width:60%;" >}}
 
 The explored resource's connections appear on either side of the stack:
 
@@ -89,9 +89,9 @@ Upstream and downstream resources are the same type as the explored resource, su
 
 #### Connection View layout
 
-{{< img src="network_performance_monitoring/l1_l7_map/connection-view-two-stacks.png" alt="Connection View for two services, with each service's composition stack below it and a CNM connection line between them" style="width:60%;" >}}
-
 In Connection View, the map shows the source's composition stack on the left and the destination's on the right. When the destination is an endpoint, the map shows only the source's stack.
+
+{{< img src="network_performance_monitoring/l1_l7_map/connection-view-two-stacks.png" alt="Connection View for two services, with each service's composition stack below it and a CNM connection line between them" style="width:60%;" >}}
 
 The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an {{< tooltip text="external endpoint" tooltip="A destination identified by an IP address or a hostname and port, rather than by a service, container, pod, or host." >}}, which can be the destination for any type of source.
 
