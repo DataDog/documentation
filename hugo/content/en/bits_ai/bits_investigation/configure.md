@@ -13,7 +13,7 @@ Set up integrations to extend Bits Investigation's capabilities:
 
 Bits Investigation integrates with source code, third-party observability, and ITSM platforms to incorporate external data and code context into investigations.
 
-<div class="alert alert-info">You can connect Bits Investigation to any MCP server to give it access to more data. This feature is in Preview. To learn more, contact your account team.</div>
+<div class="alert alert-info">You can connect Bits Investigation to any MCP server to give it access to more data. This feature is in Preview. <a href="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities/">Request access here</a>.</div>
 
 ### Source code
 
