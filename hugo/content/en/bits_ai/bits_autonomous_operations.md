@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Bits Autonomous Operations (Autonomous Ops) is your agentic SRE teammate that can handle on-call for you. Bits watches a scope that you specify and takes each issue from detection through resolution. Bits triages the issue, investigates the root cause, and then recommends next steps or takes remediation actions within the guardrails that you set. After an action runs, Bits verifies that the issue is resolved.
+Through Autonomous Operations, Bits joins your team as a first responder for production alerts: Bits triages alerts, investigates the issues that need attention, and proposes next steps. When a remediation action is approved, Bits runs it and verifies whether the issue is resolved, reducing the time from alert to resolution and keeping your systems healthy.
 
 Autonomous Ops connects [Bits Detection][1], [Bits Investigation][2], and [Bits Remediation][3]. It can handle application issues, such as rising error rates or latency on an endpoint, and infrastructure issues across hosts, containers, and serverless functions.
 
