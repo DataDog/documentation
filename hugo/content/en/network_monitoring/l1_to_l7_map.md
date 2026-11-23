@@ -100,13 +100,14 @@ Between the two stacks, the map shows CNM and Network Path data as separate line
 - **Network connections**: Traffic that CNM observes between the source and the destination.
 - **Network path**: The route from a host that the source runs on to a host that the destination runs on, or to a destination endpoint. The map shows each {{< tooltip text="hop" tooltip="A router or other network device that traffic passes through on the way to the destination." >}} along the route, which is based on Network Path {{< tooltip text="test results" tooltip="Network Path runs tests from a host to a destination and records the route that each test takes. The map uses test results from the selected time frame." >}}.
 
+{{< img src="network_performance_monitoring/l1_l7_map/connection-view-network-path.png" alt="A network path from a host to an endpoint through two AS groups, with segment latencies and a CNM connection line above it" >}}
+
 When the source and the destination are services, containers, or pods, the map shows a path only when the test's destination is a host that the destination runs on. Paths to other destinations, such as a load balancer in front of the destination, do not appear.
 
 When Network Path tests more than one pair of hosts, the map shows the least healthy path. The other paths collapse into a **+N more** item. The least healthy path does not necessarily run between the least healthy hosts in the two stacks.
 
 The map groups hops in the same {{< tooltip text="autonomous system (AS)" tooltip="A network that one organization operates, such as an internet service provider or a cloud provider." >}}. Each line between two hops or AS groups is a _network path segment_.
 
-{{< img src="network_performance_monitoring/l1_l7_map/connection-view-network-path.png" alt="A network path from a host to an endpoint through two AS groups, with segment latencies and a CNM connection line above it" >}}
 
 ### Map status and network signals
 
