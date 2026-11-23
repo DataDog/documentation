@@ -97,9 +97,15 @@ Downtimes have their own permissions, separate from Synthetic tests and default 
 - **Synthetics Downtime Read** (`synthetics_downtime_read`): View downtimes.
 - **Synthetics Downtime Write** (`synthetics_downtime_write`): Create, edit, and delete downtimes.
 
-<!-- TO CONFIRM: Which managed roles get which permission. Draft assumes Admin and Standard get read and write, and Read Only gets read. -->
+The [Datadog managed roles][5] include the downtime permissions:
 
-The [Datadog managed roles][5] include the downtime permissions. If you use [custom roles][6], add **Synthetics Downtime Read** and **Synthetics Downtime Write** to the roles that need access to downtimes.
+| Role | Synthetics Downtime Read | Synthetics Downtime Write |
+|------|--------------------------|---------------------------|
+| Datadog Admin Role | {{< X >}} | {{< X >}} |
+| Datadog Standard Role | {{< X >}} | {{< X >}} |
+| Datadog Read Only Role | {{< X >}} | |
+
+If you use [custom roles][6], add **Synthetics Downtime Read** and **Synthetics Downtime Write** to the roles that need access to downtimes.
 
 The **Synthetics Downtime Read** permission also gives access to the Synthetic Monitoring {{< ui >}}Settings{{< /ui >}} page, where you manage downtimes.
 
@@ -112,41 +118,40 @@ The **Synthetics Downtime Read** permission also gives access to the Synthetic M
 Use [granular access control][7] to limit who can view or edit a downtime based on roles, teams, or individual users. Downtimes support two access levels:
 
 - {{< ui >}}Viewer{{< /ui >}}: View the downtime and add it to tests you can edit.
-- {{< ui >}}Editor{{< /ui >}}: Edit or delete the downtime, and add tests to it or remove tests from it.
+- {{< ui >}}Editor{{< /ui >}}: Edit or delete the downtime, and add tests to it or remove tests from it. These actions also require {{< ui >}}Editor{{< /ui >}} access to every test associated with the downtime.
 
 Downtimes you don't have {{< ui >}}Viewer{{< /ui >}} access to are hidden from you.
 
-<!-- TO CONFIRM: Where the permissions modal opens from (downtime form, three-dot menu, or both) and the exact button labels. Add a screenshot of the downtime permissions modal. -->
-<!-- TO CONFIRM: Do new downtimes default to the author's team? -->
+To restrict access to a downtime:
 
-1. Open the downtime from the {{< ui >}}Downtimes{{< /ui >}} page.
+1. Open the permissions section of the downtime form.
 2. Click {{< ui >}}Edit Access{{< /ui >}}.
+  {{< img src="synthetics/settings/grace_2.png" alt="The Permissions section of a form showing Unrestricted access, with the description Everyone in my org has full access and an Edit Access button" style="width:100%;" >}}
 3. Click {{< ui >}}Restrict Access{{< /ui >}}.
 4. Select teams, roles, or users.
 5. Click {{< ui >}}Add{{< /ui >}}.
-6. Select the access level for each team, role, or user.
+6. Select the level of access you want to associate with each of them.
 7. Click {{< ui >}}Done{{< /ui >}}.
 
 ### Access required for each action
 
 Downtimes and tests each have their own access settings. The following table lists the access each action requires, in addition to the RBAC permissions above.
 
-<!-- TO CONFIRM: Editing or deleting a downtime. Option 1 (test focus) also requires Editor access to every test already associated with the downtime. Option 4 (independent after association) requires only Editor access to the downtime. Draft uses Option 4. -->
 <!-- TO CONFIRM: Does the bulk "Add to Downtime" action on the Tests page follow the same rules as the test form? -->
 
 | Action | Downtime access | Test access |
 |--------|-----------------|-------------|
 | View a downtime | Viewer | None |
 | Create a downtime with tests | None (requires `synthetics_downtime_write`) | Editor on each selected test |
-| Edit or delete a downtime | Editor | None |
-| Add a test from the downtime form | Editor | Editor on the test you add |
-| Remove a test from the downtime form | Editor | None |
+| Edit or delete a downtime | Editor | Editor on every associated test |
+| Add a test from the downtime form | Editor | Editor on the test you add and every associated test |
+| Remove a test from the downtime form | Editor | Editor on every associated test |
 | Add a downtime from the test form | Viewer | Editor |
 | Remove a downtime from the test form | None | Editor |
 
 Adding a downtime to your test doesn't require access to other tests already associated with that downtime.
 
-**Note**: A user with {{< ui >}}Editor{{< /ui >}} access to a downtime can change when its associated tests run, even without access to those tests. Restrict access to downtimes that apply to critical tests.
+**Note**: Editing a downtime changes when its associated tests run. If you can't edit one of the associated tests, you can't edit or delete the downtime. Ask a user with {{< ui >}}Editor{{< /ui >}} access to that test to remove it from the downtime, then make your change.
 
 ## Best practices
 
