@@ -4,8 +4,6 @@ description: "Define which remediation actions Bits can take, where they apply, 
 site_support_id: bits_remediation
 ---
 
-{{< callout >}} Bits Guardrails are in Preview.{{< /callout >}}
-
 Guardrails let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them. For example, an {{< ui >}}Ask{{< /ui >}} guardrail for `rollbackDeployment` scoped to `service:checkout` notifies predefined approvers before Bits rolls back a deployment for the checkout service.
 
 Bits can take a remediation action only when a guardrail covers both the action and the resource it targets. If no guardrail covers an action, Bits can recommend the action but can't run it. For more information about how to enable Bits to take action on your infrastructure, see [Infrastructure Actions][5].
