@@ -464,6 +464,8 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 Datadog instruments Cypress tests automatically, without changes to your Cypress configuration. If your Cypress tests don't appear in Datadog after you follow the steps in [Instrument your tests](#instrument-your-tests), some Cypress configurations can prevent automatic instrumentation. To work around this, register the Datadog plugin and support file manually.
 
+**Note**: The examples in this section use Cypress 10 or later. For Cypress versions earlier than 10, register the Datadog plugin in `cypress/plugins/index.js` instead of `setupNodeEvents`, following the [pre-v10 plugin configuration in the Cypress migration guide][29]. Import the Datadog support file from your configured support file, which defaults to `cypress/support/index.js`.
+
 #### Register the Datadog plugin
 
 Add the Datadog plugin to `setupNodeEvents` in your `cypress.config.js` file. Preserve any existing plugin setup and return the configuration from the Datadog plugin:
@@ -1006,3 +1008,4 @@ The test session name should be unique within a repository to help you distingui
 [25]: /getting_started/site/
 [26]: https://microsoft.github.io/lage/docs/introduction
 [27]: https://nx.dev/docs/features/run-tasks
+[29]: https://docs.cypress.io/app/references/migration-guide#setupNodeEvents
