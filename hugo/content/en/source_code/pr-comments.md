@@ -33,8 +33,8 @@ To disable PR comments for CI Visibility:
 
 1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][12].
 1. Choose where to apply the setting:
-   - Select the {{< ui >}}Organization{{< /ui >}} tab to disable PR Comments for every repository by default.
-   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to disable PR Comments for a single repository.
+   - Select the {{< ui >}}Organization{{< /ui >}} tab to disable PR comments for every repository by default.
+   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to disable PR comments for a single repository.
 1. Under {{< ui >}}General{{< /ui >}}, toggle {{< ui >}}PR Comments{{< /ui >}} off.
 
 The {{< ui >}}PR Comments{{< /ui >}} setting controls PR comments for both CI Visibility and Test Optimization.
@@ -59,7 +59,7 @@ PR comments are enabled by default when first onboarding to [Test Optimization][
 
 {{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
-To disable PR comments for Test Optimization, toggle {{< ui >}}PR Comments{{< /ui >}} off in [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][12], as described in [PR comments for CI Visibility](#pr-comments-for-ci-visibility). This also disables PR comments for CI Visibility.
+To disable PR comments for Test Optimization, toggle {{< ui >}}PR Comments{{< /ui >}} off in [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][12], as described in the [PR comments for CI Visibility](#pr-comments-for-ci-visibility) section. This setting also disables PR comments for CI Visibility.
 
 ## Further reading
 

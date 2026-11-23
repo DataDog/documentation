@@ -9,7 +9,7 @@ You, or a user in your organization with the `Test Optimization Settings Write` 
 1. Under **General**, toggle **Test Impact Analysis** on.
 
 <figure class="text-center">
-<img src="{{ .Site.Params.img_url}}images/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." width="100%">
+<img src="{{ .Site.Params.img_url}}images/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="The Test Impact Analysis toggle turned on in the Organization tab of the CI/CD Optimization Repositories settings page." width="100%">
 </figure>
 
 [101]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
