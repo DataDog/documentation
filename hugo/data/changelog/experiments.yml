@@ -147,3 +147,76 @@ entries:
       - GetBandit
     title: Add the bandit writes, lifecycle and policy history to the 
       Experiments API
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - ArchiveExperimentProtocol
+      - ArchiveExposureSQLModel
+      - CancelExperiment
+      - ConcludeExperiment
+      - CreateBandit
+      - CreateExperiment
+      - CreateExperimentMetricGroup
+      - CreateExperimentMetricGroupFromCollection
+      - CreateExperimentProtocol
+      - CreateExposureSQLModel
+      - CreateMetric
+      - CreateMetricCollection
+      - CreateMetricSQLModel
+      - CreateSubjectType
+      - DeleteBandit
+      - DeleteExperiment
+      - DeleteExperimentMetricGroup
+      - DeleteExperimentProtocol
+      - DeleteMetric
+      - DeleteMetricCollection
+      - DeleteSubjectType
+      - GetBandit
+      - GetBanditResults
+      - GetBanditTrafficSummary
+      - GetExperiment
+      - GetExperimentAnalysisPlan
+      - GetExperimentDiagnostics
+      - GetExperimentProtocol
+      - GetExperimentResults
+      - GetExperimentTrafficSummary
+      - GetExposureSQLModel
+      - GetMetric
+      - GetMetricCollection
+      - GetMetricSQLModel
+      - GetSubjectType
+      - ListBanditPolicies
+      - ListBandits
+      - ListExperimentHoldouts
+      - ListExperimentMetricGroups
+      - ListExperimentProtocols
+      - ListExperiments
+      - ListExposureSQLModels
+      - ListMetricCollections
+      - ListMetricSQLModels
+      - ListMetrics
+      - ListSubjectTypes
+      - PatchBandit
+      - PatchExperiment
+      - PatchExperimentProtocol
+      - PatchSubjectType
+      - PauseBandit
+      - PublishExperimentProtocol
+      - RefreshBandit
+      - RefreshExperimentResults
+      - RefreshExperimentResultsForOrg
+      - ReplaceExperimentProtocol
+      - ResumeBandit
+      - SetDefaultSubjectType
+      - StartBandit
+      - StartExperiment
+      - StopBandit
+      - UnarchiveExposureSQLModel
+      - UpdateExperimentAnalysisPlanAttributes
+      - UpdateExperimentMetricGroup
+      - UpdateExposureSQLModel
+      - UpdateMetric
+      - UpdateMetricCollection
+      - UpdateMetricSQLModel
+    title: Document rate-limit headers on the shared 429 responses

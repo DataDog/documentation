@@ -17,3 +17,30 @@ entries:
       - ListNotebooks
       - UpdateNotebook
     title: Allow network device flows in dashboard formula queries
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateNotebook
+      - DeleteNotebook
+      - GetNotebook
+      - ListNotebooks
+      - UpdateNotebook
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: added
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42061
+    operations:
+      - CreateNotebook
+      - GetNotebook
+      - GetNotebookSection
+      - GetNotebookTask
+      - GetNotebookWidget
+      - ListNotebookSections
+      - ListNotebookTasks
+      - ListNotebookWidgets
+      - UpdateNotebook
+      - UpdateNotebookContent
+      - UpdateNotebookTask
+      - UpdateNotebookWidget
+    title: Publish the Notebooks v2 API documentation preview

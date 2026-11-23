@@ -473,7 +473,7 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## Amazon ECS
 
-Tools for searching and describing [Amazon ECS][107] resources and retrieving task definitions across all AWS accounts and regions that Datadog monitors. The tools find resources that Datadog has collected in the last hour, or in the last 24 hours for tasks and task definitions. To also search the logs, events, metrics, and monitors of your ECS workloads, enable the `core` toolset alongside `ecs` (`toolsets=core,ecs`).
+Tools for searching and describing [Amazon ECS][109] resources and retrieving task definitions across all AWS accounts and regions that Datadog monitors. The tools find resources that Datadog has collected in the last hour, or in the last 24 hours for tasks and task definitions. To also search the logs, events, metrics, and monitors of your ECS workloads, enable the `core` toolset alongside `ecs` (`toolsets=core,ecs`).
 
 <div class="alert alert-warning">If your organization requires HIPAA-compliant tools, you can't use the ECS tools: the MCP Server doesn't list them or run them for your organization.</div>
 
@@ -484,7 +484,7 @@ Responses from these tools can include values from the user's ECS resources that
 ### `search_datadog_ecs_resources`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Searches for [Amazon ECS][107] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Supports filtering by tags such as cluster, service, environment, team, or task status, and can return specific tag keys with each result. Results are paginated.
+Searches for [Amazon ECS][109] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Supports filtering by tags such as cluster, service, environment, team, or task status, and can return specific tag keys with each result. Results are paginated.
 
 - Show me the running tasks in the `prod` ECS cluster.
 - Find ECS services in `us-east-1` that belong to the `payments` team.
@@ -494,7 +494,7 @@ Searches for [Amazon ECS][107] resources, including clusters, services, tasks, t
 ### `describe_datadog_ecs_resource`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Gets detailed information about a specific [Amazon ECS][107] resource, including tags, related resources, and a deep link to the [ECS Explorer][106]. Type-specific details include capacity providers for clusters, deployments and load balancers for services, and health status and stop reason for tasks. Identify a resource by its ARN from a previous search or by providing resource identifiers (cluster name, resource name, and optionally region and AWS account ID). For the full task definition, use `get_datadog_ecs_task_definition`.
+Gets detailed information about a specific [Amazon ECS][109] resource, including tags, related resources, and a deep link to the [ECS Explorer][108]. Type-specific details include capacity providers for clusters, deployments and load balancers for services, and health status and stop reason for tasks. Identify a resource by its ARN from a previous search or by providing resource identifiers (cluster name, resource name, and optionally region and AWS account ID). For the full task definition, use `get_datadog_ecs_task_definition`.
 
 - Describe ECS service `billing-api` in cluster `prod`.
 - Why did ECS task `arn:aws:ecs:us-east-1:123456789012:task/prod/0123456789abcdef` stop?
@@ -503,7 +503,7 @@ Gets detailed information about a specific [Amazon ECS][107] resource, including
 ### `get_datadog_ecs_task_definition`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Retrieves the full task definition for an [Amazon ECS][107] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags and some container definition fields to reduce response size.
+Retrieves the full task definition for an [Amazon ECS][109] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags and some container definition fields to reduce response size.
 
 To help protect credentials, Datadog masks values in task definitions when it collects them. Environment variables, log configuration options, and commands can contain credentials under any name, so Datadog keeps only the values that it knows are safe:
 
@@ -523,7 +523,7 @@ Concise mode leaves out the task definition's tags and these fields of each cont
 - Show me the port mappings and IAM roles in the task definition that this task runs.
 - Get a concise version of the task definition for ECS service `billing-api` in cluster `prod`.
 
-**Note**: The tool returns a task definition revision only if Datadog still has it. You must also be able to see that revision, or a newer revision of the same family, in the [ECS Explorer][106]. Datadog collects a revision when a task runs it, or when the revision is registered while Datadog is collecting ECS resources from the AWS account. Datadog keeps a revision for about 7 days after it last collects it. An older `ACTIVE` revision that no task has run in that time may not be available.
+**Note**: The tool returns a task definition revision only if Datadog still has it. You must also be able to see that revision, or a newer revision of the same family, in the [ECS Explorer][108]. Datadog collects a revision when a task runs it, or when the revision is registered while Datadog is collecting ECS resources from the AWS account. Datadog keeps a revision for about 7 days after it last collects it. An older `ACTIVE` revision that no task has run in that time may not be available.
 
 ## APM
 
@@ -903,7 +903,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
@@ -912,7 +912,7 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ### `search_datadog_sdk`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
@@ -1083,6 +1083,23 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 
 - Show me the metric history for monitor `12345`.
 - What are the anomaly bounds for this freshness monitor?
+
+### `get_data_observability_monitor_errors`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read`*\
+Returns the latest metric collection error for each table covered by a data quality monitor. Errors can include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this tool to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`. To check a single table, provide `entity_id`. Otherwise, the tool checks up to 500 tables.
+
+- Show the latest metric collection errors for monitor `12345`.
+- Why does this data quality monitor show No Data?
+- Check monitor `12345` for collection errors on this table.
+
+### `get_data_entity_monitor_health`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries`*\
+Returns the status of every data quality monitor on a data entity, such as a table, including any metric collection errors. Requires `entity_id`.
+
+- Show the health of all data quality monitors on this table.
+- Are any monitors on this table reporting metric collection errors?
 
 ### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\
@@ -1990,6 +2007,22 @@ When audit logs aren't available, the tool ranks clients by a client-side reques
 - Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
 - Rank the top 5 clients by API server request volume in cluster `prod` during the incident window.
 
+### `kubernetes-ops-center-api-server-metrics`
+*Toolset: **kubernetes-ops-center***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
+Reports Kubernetes API server health metrics for a cluster in a single response. Use this tool to determine whether the API server is returning errors, rate limiting clients, or shedding load through API Priority and Fairness. The tool returns:
+- The rate of requests that the API server answered with a `5xx` status code
+- The rate of rate-limited (`429`) requests, by verb and resource
+- The maximum number of in-flight requests, by request kind
+- The rate of requests rejected by flow control, by priority level and reason
+- The maximum number of requests waiting in flow control queues, by priority level
+
+The query window defaults to the last 10 minutes and can span up to 4 hours. The tool relies on metrics from the [Kubernetes API server metrics integration][107].
+
+- Is the API server in cluster `prod` healthy?
+- Which verbs and resources are being rate limited by the API server in cluster `staging`?
+- Were requests rejected by API Priority and Fairness in cluster `prod` during the incident window?
+
 ## Metrics Governance
 
 Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
@@ -2384,6 +2417,107 @@ Creates a pipeline from a name and a configuration in the [Observability Pipelin
 
 - Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
 - Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
+## On-Call
+
+Tools for [Datadog On-Call][106], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
+
+<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>).</div>
+
+### `list_oncall_pages`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Searches On-Call pages and returns their status, urgency, responders, and timestamps. Filter by fields such as `status`, `urgency`, `team`, `service`, `tags`, and responder name or email.
+
+- Which pages are still unresolved for the `payments` team?
+- List the high-urgency pages created in the last 24 hours.
+
+### `get_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call page by its UUID or page key, including its status, title, responders, and related resources.
+
+- Show me the details of page `PAGE-123`.
+- Who responded to this page, and is it resolved?
+
+### `create_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Page`*\
+Pages a team or a single user through On-Call. Paging a team notifies whoever the team's escalation policy has on call. Paging a user notifies only that user, through their own notification rules, with no escalation. Set the urgency to `low` or `high`, and optionally add a description and tags. Adding a `service:<name>` tag associates the page with that service.
+
+- Page the `payments` team with high urgency: checkout error rate is above 5%.
+- Send a low-urgency page to the `payments` team about elevated latency on `checkout-api`, tagged `service:checkout-api`.
+
+<div class="alert alert-warning">This tool notifies real people. Confirm the target and urgency before your agent creates a page.</div>
+
+### `list_oncall_schedules`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists On-Call schedules, optionally filtered by name, team, user, tags, or schedule type. Use this tool to find a schedule's ID before calling the other schedule tools.
+
+- List the On-Call schedules for the `payments` team.
+- Find the schedule named `Platform Primary`.
+
+### `get_oncall_schedule`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call schedule by its ID, including its name, time zone, tags, and layers.
+
+- Show me the layers and time zone of the `Platform Primary` schedule.
+
+### `get_oncall_schedule_calendar`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves the calendar for an On-Call schedule over a time window of up to 45 days, including each shift, who covers it, and any overrides applied.
+
+- Who is covering the `Platform Primary` schedule over the holidays?
+- Show me next week's shifts for the `payments` schedule.
+
+### `get_oncall_schedule_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns who is on call for a schedule, including their name and email. Returns the current rotation position by default, and can also return the previous and next positions or evaluate a specific point in time.
+
+- Who is on call for the `Platform Primary` schedule?
+- Who is next on call for the `payments` schedule?
+
+### `get_oncall_team_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns the current on-call responders for a team: the responders who would be notified first, plus the rest of the escalation chain. Optionally provide page tags to evaluate a specific routing rule.
+
+- Who would get paged if I paged the `payments` team?
+- Who is on call for the `payments` team for `env:prod` and `service:checkout-api`?
+
+### `list_oncall_schedule_overrides`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists the overrides on an On-Call schedule within a time window of up to 45 days, including who is covering and who they are covering for.
+
+- What overrides are scheduled on the `Platform Primary` schedule this month?
+
+### `create_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Overrides an On-Call schedule for a time window, putting a specific user on call instead of whoever the rotation would pick. Use this tool to record shift swaps and ad-hoc cover.
+
+- Put Alex on call for the `Platform Primary` schedule from Friday 6 PM to Monday 9 AM.
+- I'm covering Sam's shift on the `payments` schedule tomorrow. Record the swap.
+
+### `remove_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Removes an override from an On-Call schedule. An override that has not started yet is deleted. An override that is in progress ends immediately and remains visible as inactive.
+
+- Remove my override on the `Platform Primary` schedule for this weekend.
+
+### `get_oncall_analytics`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Aggregates On-Call event data over a time window of up to 90 days to measure page volume, acknowledgment and resolution times, escalation activity, and shift duration. Optionally filter and group results by event attributes, such as team, urgency, or schedule.
+
+- How many pages did each team receive in the last 30 days?
+- What is the p90 time to resolve high-urgency pages for the `payments` team this quarter?
 
 ## Onboarding
 
@@ -3920,8 +4054,10 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [103]: /mcp_server/setup#required-permissions
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
-[106]: /containers/monitoring/amazon_elastic_container_explorer/
-[107]: /containers/amazon_ecs/
+[106]: /incident_response/on-call/
+[107]: /integrations/kube_apiserver_metrics/
+[108]: /containers/monitoring/amazon_elastic_container_explorer/
+[109]: /containers/amazon_ecs/
 
 ## Further reading
 

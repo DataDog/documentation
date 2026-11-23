@@ -11,9 +11,9 @@ further_reading:
 
 ## Overview
 
-When using OpenTelemetry with Datadog, you might see unclear or lengthy operation names in your traces, and some traces might not appear in your service pages. This happens because of missing mappings between OpenTelemetry SDK information and Datadog operation names, which are span attributes that classify [entry points into a service][1].
+When using upstream OpenTelemetry SDKs with Datadog, you might see unclear or lengthy operation names in your traces, and some traces might not appear in your service pages. This happens because of missing mappings between OpenTelemetry SDK information and Datadog APM operation names, which are span attributes that classify [entry points into a service][1].
 
-Datadog has introduced new logic for generating operation names for OpenTelemetry traces, controlled by the `enable_operation_and_resource_name_logic_v2` feature flag. This new logic improves trace visibility in service pages and standardizes operation naming according to the rules outlined below.
+Datadog has introduced new logic for generating operation names for OpenTelemetry traces, controlled by the `enable_operation_and_resource_name_logic_v2` feature flag. This new logic improves trace visibility in APM service pages and standardizes operation naming according to the rules outlined below.
 
 <div class="alert alert-warning">
 <strong>Breaking Change:</strong> When this new logic is active (either by opting-in or future default), it is a breaking change for monitors or dashboards that reference operation names based on the old conventions. You must update your monitors and dashboards to use the new naming conventions described in <a href="#new-mapping-logic">New mapping logic</a>. If you cannot update them yet, you can <a href="#disabling-the-new-logic-opt-out">opt out</a> .
@@ -25,7 +25,7 @@ The `enable_operation_and_resource_name_logic_v2` feature flag controls this new
 
 - **Agent's Collector**: Datadog Agent v7.65+
 - **Upstream OpenTelemetry Collector**: v0.126.0+
-- **Agent's OTLP endpoint**: Datadog Agent v7.66+
+- **Datadog Agent's OTLP endpoint**: Datadog Agent v7.66+
 
 If you are using an earlier version and want to use the new logic without upgrading, you can [explicitly enable the new logic](#enabling-the-new-logic-opt-in).
 
@@ -58,6 +58,8 @@ For example, with the new logic active, a span previously named `go.opentelemetr
 
 **Note**: `<attribute>` placeholders like `<db.system>` represent the value of the corresponding span attribute.
 
+**Note**: Current OpenTelemetry semantic conventions rename `db.system` to `db.system.name`. When you send traces to the Datadog OTLP intake, `db.system.name` is treated the same as `db.system` for operation and resource naming. If a span has both attributes, `db.system.name` takes precedence.
+
 ## Prerequisites
 
 Before enabling the new logic (either by opting-in or by upgrading to a version where it is default), remove any existing legacy span name configurations that might conflict:
@@ -85,7 +87,7 @@ connectors:
 {{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
-1. Remove `span_name_as_resource_name` and `span_name_remappings` from your Agent's OTLP ingest configuration (`otlp_config` in `datadog.yaml`):
+1. Remove `span_name_as_resource_name` and `span_name_remappings` from your Datadog Agent's OTLP ingest configuration (`otlp_config` in `datadog.yaml`):
 {{< highlight py "hl_lines=4-6" >}}
 # Remove the highlighted lines if they exist in your configuration
 otlp_config:
@@ -95,7 +97,7 @@ otlp_config:
       "old_name1": "new_name"
 {{< /highlight >}}
 
-2. Remove these environment variables if previously set for the Agent:
+2. Remove these environment variables if previously set for the Datadog Agent:
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_AS_RESOURCE_NAME`
    - `DD_OTLP_CONFIG_TRACES_SPAN_NAME_REMAPPINGS`
 
@@ -120,14 +122,14 @@ otelcol --config=config.yaml --feature-gates=datadog.EnableOperationAndResourceN
 
 Enable the feature for OTLP ingest using one of these methods:
 
-- Add the feature flag to your Agent configuration (`datadog.yaml`):
+- Add the feature flag to your Datadog Agent configuration (`datadog.yaml`):
 
    ```yaml
    # datadog.yaml
    apm_config:
      features: ["enable_operation_and_resource_name_logic_v2"]
    ```
-- Set the environment variable for the Agent process:
+- Set the environment variable for the Datadog Agent process:
 
    ```shell
    export DD_APM_FEATURES="enable_operation_and_resource_name_logic_v2"
@@ -155,7 +157,7 @@ otelcol --config=config.yaml --feature-gates=-datadog.EnableOperationAndResource
 
 Disable the feature for OTLP ingest using one of these methods:
 
-- Add the disable flag to your Agent configuration (`datadog.yaml`):
+- Add the disable flag to your Datadog Agent configuration (`datadog.yaml`):
 
    ```yaml
    # datadog.yaml
@@ -163,7 +165,7 @@ Disable the feature for OTLP ingest using one of these methods:
      features: ["disable_operation_and_resource_name_logic_v2"]
    ```
 
-- Set the environment variable for the Agent process:
+- Set the environment variable for the Datadog Agent process:
 
    ```shell
    export DD_APM_FEATURES="disable_operation_and_resource_name_logic_v2"
