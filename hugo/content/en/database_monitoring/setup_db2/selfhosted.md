@@ -33,7 +33,7 @@ Supported platforms
 : IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
 Network access
-: Allow the Agent to reach each Db2 server's direct address on the Db2 service port (`50000` by default). Allow outbound HTTPS connections to [Datadog][23]. On Amazon EC2, configure security groups and VPC routing to allow connections from the Agent host to the Db2 servers. The Agent can run on a database server or a separate instance.
+: Allow the Agent to reach each Db2 server's direct address on the Db2 service port (`50000` by default). Allow outbound HTTPS connections to [Datadog][23]. On Amazon EC2, configure security groups and VPC routing to allow connections from the Agent host to the Db2 servers.
 
 ## Data collected
 
@@ -111,6 +111,11 @@ Select the Agent's deployment method:
 
    For Windows, follow the IBM Db2 integration's [Windows driver installation instructions][13].
 
+[6]: /agent/
+[7]: /integrations/ibm-db2/#dependencies
+[8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
+[13]: /integrations/ibm-db2/#windows
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -133,6 +138,11 @@ Installing `ibm_db` downloads the IBM CLI driver, so the image build requires ne
 
 Continue with the shared check and driver configuration in [Step 4](#step-4-configure-the-agent), then [run the Agent container](#run-the-agent-in-docker). For other Docker Agent options, see the [Docker Agent documentation][21]. To configure the check with container labels instead of a mounted configuration file, follow the [Docker Autodiscovery instructions][9] and specify `ibm_db2` as the integration name.
 
+[8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
+[9]: /containers/docker/integrations/
+[21]: /containers/docker/
+[24]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html#create-container-image-install-docker
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -142,12 +152,17 @@ For integration configuration, follow the [Kubernetes Autodiscovery][12] or [clu
 
 Set up the [secret backend][10] on the Agent that runs the check. With cluster checks, this is the Cluster Checks Runner, which also needs the custom image and the [automatic client reroute (ACR) configuration](#disable-automatic-client-reroute).
 
+[10]: /agent/configuration/secrets-management/
+[11]: /containers/cluster_agent/clusterchecks/
+[12]: /containers/kubernetes/integrations/
+[22]: /containers/kubernetes/
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Step 4: Configure the Agent
 
-For a Linux host or the Docker example below, save this configuration on the Agent host in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. Create the directory if it does not exist. For other host platforms, see the [Agent configuration directory][20]. For Kubernetes, apply the instance settings using the configuration method selected in Step 3.
+For a Linux host or a [Docker Agent](#run-the-agent-in-docker), save this configuration on the Agent host in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. Create the directory if it does not exist. For other host platforms, see the [Agent configuration directory][20]. For Kubernetes, apply the instance settings using the configuration method selected in Step 3.
 
 Configure one check instance per database per server. Database Monitoring requires `host` and `port`. This example monitors the same database name on two servers with distinct, fixed addresses:
 
@@ -253,6 +268,8 @@ docker exec dd-agent agent status
 
 Follow the [Kubernetes Agent status instructions][26]. With cluster checks, check the status of the Cluster Checks Runner that runs the Db2 check.
 
+[26]: /agent/configuration/agent-commands/#agent-information
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -309,14 +326,7 @@ For all integration options, see the [sample configuration][19].
 [3]: https://www.ibm.com/docs/en/db2/12.1.x?topic=parameters-mon-act-metrics-monitoring-activity-metrics
 [4]: https://www.ibm.com/docs/en/db2/12.1.x?topic=parameters-mon-req-metrics-monitoring-request-metrics
 [5]: /integrations/ibm-db2/#database-permissions
-[6]: /agent/
-[7]: /integrations/ibm-db2/#dependencies
-[8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
-[9]: /containers/docker/integrations/
 [10]: /agent/configuration/secrets-management/
-[11]: /containers/cluster_agent/clusterchecks/
-[12]: /containers/kubernetes/integrations/
-[13]: /integrations/ibm-db2/#windows
 [14]: /integrations/ibm-db2/#connect-to-a-fixed-server
 [15]: /integrations/ibm-db2/#disable-automatic-client-reroute
 [16]: /integrations/ibm-db2/#high-availability-disaster-recovery-hadr
@@ -324,9 +334,5 @@ For all integration options, see the [sample configuration][19].
 [18]: /database_monitoring/guide/database_identifier/
 [19]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [20]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
-[21]: /containers/docker/
-[22]: /containers/kubernetes/
 [23]: /agent/configuration/network/#destinations
-[24]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-container-image.html#create-container-image-install-docker
-[25]: /agent/faq/template_variables/
-[26]: /agent/configuration/agent-commands/#agent-information
+[25]: /containers/guide/template_variables/
