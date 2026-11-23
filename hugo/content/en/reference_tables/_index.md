@@ -202,6 +202,30 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
+{{% collapse-content title="BigQuery" level="h3" id="bigquery" %}}
+
+First, [configure the Google Cloud integration and grant BigQuery permissions][21]. If BigQuery is not listed as a source, contact [support][5] to check availability.
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}BigQuery{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Service Account Email{{< /ui >}}: A service account registered with the Google Cloud integration.
+   - {{< ui >}}Project ID{{< /ui >}}: The project to run the query in. The available projects depend on the selected service account.
+   - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
+   - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+If the service account is missing, click {{< ui >}}Add GCP Account with BigQuery Access{{< /ui >}} to configure it. If no projects are available, add the project to the service account's Google Cloud integration configuration.
+
+Queries executed by Datadog incur BigQuery charges. Select only the rows and columns you need.
+
+To edit {{< ui >}}Location{{< /ui >}} or {{< ui >}}SQL Query{{< /ui >}}, open the table and click {{< ui >}}Update Config{{< /ui >}}. The table name, service account, project, and primary key cannot be changed after creation.
+
+If ingestion fails, check the service account's permissions, the dataset location, and the SQL query. Correct the location or query with {{< ui >}}Update Config{{< /ui >}}.
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
 First, [configure the Databricks integration][14] with access to the table or view to ingest.
@@ -419,3 +443,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 [19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
 [20]: https://app.datadoghq.com/event/explorer
+[21]: /integrations/google-cloud-bigquery/#reference-tables
