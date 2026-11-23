@@ -10666,6 +10666,14 @@ components:
         source:
           $ref: "#/components/schemas/AiGatewayModelPricingSource"
           description: Source of the pricing data.
+        tiers:
+          description: |-
+            Custom prices that replace the base rates for the requests they select. Only valid for custom pricing.
+            At most 16 tiers, and no two may share the same `service_tier` and `context_min_tokens`.
+          items:
+            $ref: "#/components/schemas/AiGatewayModelPricingTier"
+          maxItems: 16
+          type: array
         version:
           $ref: "#/components/schemas/AiGatewayModelPricingVersion"
       required:
@@ -10680,6 +10688,14 @@ components:
           $ref: "#/components/schemas/AiGatewayModelPricingRequiredRates"
         source:
           $ref: "#/components/schemas/AiGatewayModelPricingCustomRequestSource"
+        tiers:
+          description: |-
+            Custom prices that replace the base rates for the requests they select. Only valid for custom pricing.
+            At most 16 tiers, and no two may share the same `service_tier` and `context_min_tokens`.
+          items:
+            $ref: "#/components/schemas/AiGatewayModelPricingTier"
+          maxItems: 16
+          type: array
         version:
           $ref: "#/components/schemas/AiGatewayModelPricingVersion"
       required:
@@ -10727,21 +10743,25 @@ components:
       properties:
         cache_read_cost_per_mtok:
           description: Cost per million tokens for cache reads.
+          example: 0.6
           format: double
           minimum: 0
           type: number
         cache_write_cost_per_mtok:
           description: Cost per million tokens for cache writes.
+          example: 7.5
           format: double
           minimum: 0
           type: number
         non_cached_input_cost_per_mtok:
           description: Cost per million tokens for non-cached input.
+          example: 6.0
           format: double
           minimum: 0
           type: number
         output_cost_per_mtok:
           description: Cost per million tokens for output.
+          example: 22.5
           format: double
           minimum: 0
           type: number
@@ -10874,6 +10894,30 @@ components:
       x-enum-varnames:
         - PRICED
         - UNPRICED
+    AiGatewayModelPricingTier:
+      additionalProperties: false
+      description: |-
+        Custom price for requests at or above `context_min_tokens` input tokens, in `service_tier` when it is set.
+        Each tier needs a `service_tier`, a positive `context_min_tokens`, or both. Rates it omits keep the base custom rate.
+      properties:
+        context_min_tokens:
+          description: Minimum input tokens for the price to apply.
+          example: 200000
+          format: int64
+          minimum: 0
+          type: integer
+        rates:
+          $ref: "#/components/schemas/AiGatewayModelPricingRates"
+          description: Rates that replace the base custom rates. At least one is required.
+        service_tier:
+          description: Provider service tier the price applies to. Lowercase letters, digits, `_` and `-`.
+          example: priority
+          maxLength: 64
+          pattern: "^[a-z0-9_-]+$"
+          type: string
+      required:
+        - rates
+      type: object
     AiGatewayModelPricingType:
       description: Model pricing resource type.
       enum:
@@ -11475,6 +11519,7 @@ components:
       required:
         - name
         - slug
+        - known_provider
       type: object
     AiGatewayProviderCreateCredentialSource:
       default: integration_account
@@ -12671,6 +12716,14 @@ components:
           example: "2026-08-24T12:00:00Z"
           format: date-time
           type: string
+        description:
+          description: Description of the routing rule. Absent when unset.
+          example: Routes coding traffic to the fastest available model.
+          type: string
+        display_name:
+          description: Human-readable name of the routing rule. Absent when unset; show the slug instead.
+          example: Coding fallback
+          type: string
         route_id:
           description: Stable numeric route identifier used by scoped policies and `ai-gateway-route` restriction policies.
           example: 123
@@ -12696,6 +12749,20 @@ components:
     AiGatewayRoutingRuleCreateAttributes:
       description: Attributes used to create an AI Gateway routing rule.
       properties:
+        description:
+          description: |-
+            Optional description of what the routing rule is for. Up to 500 characters. Line breaks are allowed.
+            Leading and trailing spaces are trimmed, and a blank value is the same as none.
+          example: Routes coding traffic to the fastest available model.
+          nullable: true
+          type: string
+        display_name:
+          description: |-
+            Optional human-readable name shown in place of the slug. Up to 100 characters on one line. Need not be unique.
+            Leading and trailing spaces are trimmed, and a blank value is the same as none.
+          example: Coding fallback
+          nullable: true
+          type: string
         initial_bindings:
           description: |-
             Reserved for initial View and Edit permissions. Supplying this attribute returns HTTP 400 and doesn't
@@ -12753,6 +12820,20 @@ components:
     AiGatewayRoutingRuleReplaceAttributes:
       description: Partial route update. Omit tiers to preserve the entire graph, including hidden selections. Saved target IDs retain omitted settings. Replacing tiers must explicitly retain or remove every hidden occurrence.
       properties:
+        description:
+          description: |-
+            Optional description of what the routing rule is for. Up to 500 characters.
+            Omit it or send null to keep the saved description. Send an empty string to clear it.
+          example: Routes coding traffic to the fastest available model.
+          nullable: true
+          type: string
+        display_name:
+          description: |-
+            Optional human-readable name shown in place of the slug. Up to 100 characters on one line.
+            Omit it or send null to keep the saved display name. Send an empty string to clear it.
+          example: Coding fallback
+          nullable: true
+          type: string
         expected_updated_at:
           description: Saved route revision. A mismatched value returns 409 without changes.
           example: "2026-08-24T12:00:00Z"

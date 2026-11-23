@@ -176,3 +176,22 @@ entries:
       - UpdateAiGatewayRoutingRule
       - UpsertAiGatewayPolicy
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42114
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayProvider
+      - CreateAiGatewayRoutingRule
+      - GetAiGatewayModelPricing
+      - GetAiGatewayProvider
+      - GetAiGatewayRoutingRule
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayRoutingRules
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+      - UpdateAiGatewayRoutingRule
+    title: Document missing AI Gateway control plane fields
