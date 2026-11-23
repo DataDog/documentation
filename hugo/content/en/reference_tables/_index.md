@@ -216,7 +216,9 @@ First, [configure the Databricks integration][14] with access to the table or vi
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
 
-Use a view to limit ingestion to the rows and columns you need.
+If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to configure it.
+
+Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
 {{% /collapse-content %}}
 
@@ -232,9 +234,9 @@ First, [configure the Snowflake integration and grant read permissions][15] for 
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
 
-Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
+If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to configure it.
 
-**Note**: If the form displays {{< ui >}}Snowflake Table Name{{< /ui >}} instead of {{< ui >}}Query{{< /ui >}}, enter the source table or view name. Use a view to select the data to ingest.
+Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
 {{% /collapse-content %}}
 
