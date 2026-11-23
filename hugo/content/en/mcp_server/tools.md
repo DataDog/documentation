@@ -688,6 +688,67 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
 
+## Bits Detection
+
+Tools for [Bits Detection][107], including previewing, enabling, updating, and disabling detection scopes for services and teams, and resolving Slack channels for alert notifications.
+
+### `list_bits_detection_scopes`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read`*\
+Lists the scopes enrolled in Bits Detection alert triage, including each scope's triage policy and coverage details. Optionally checks whether a specific alert is covered by an existing scope without returning the full scope list.
+
+- List the Bits Detection scopes in my organization.
+
+### `get_bits_detection_scope`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves a Bits Detection scope's query, triage policy, and coverage. Use `list_bits_detection_scopes` to find the scope's ID.
+
+- Show me the details of the Bits Detection scope for the `payments` team.
+- What is the triage policy for this Bits Detection scope?
+
+### `preview_bits_detection_scope`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read` and `Monitors Read`*\
+Previews which services and existing monitors match a scope query, along with the number of alerts from the past seven days. This tool does not save a scope or create monitors. Use it before `enable_bits_detection_scope` to confirm what a scope would cover.
+
+- Preview which services a Bits Detection scope for `team:payments` would cover.
+- How many alerts did services matching `service:checkout*` have in the past week?
+
+### `enable_bits_detection_scope`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Enrolls a channel or monitor tag based query in Bits Detection alert triage, including notification destinations and automatic investigations. 
+
+- Enable Bits Detection for the `checkout` service and send alerts to `#checkout-alerts`.
+
+### `update_bits_detection_scope`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Replaces a Bits Detection scope's query and triage policy. Fields you omit reset to their defaults, so include any existing policy settings you want to keep. Use `get_bits_detection_scope` to read the current settings first.
+
+- Update the Bits Detection scope for the `payments` team to also include the `billing` service.
+
+**Note**: Setting notification destinations for Bits Detection monitors also requires the `Monitor Configuration Policy Write` permission.
+
+### `disable_bits_detection_scope`
+*Toolset: **bits-experimental***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Deletes a Bits Detection scope's triage and monitor coverage configuration.
+
+- Disable Bits Detection for the `checkout` service.
+- Remove the Bits Detection scope for the `legacy-api` team.
+
+<div class="alert alert-warning">This tool deletes the scope's configuration. Confirm the scope before your agent disables it.</div>
+
+### `resolve_bits_detection_slack_channel`
+*Toolset: **bits-experimental***\
+*Permissions Required: `User Access Read`*\
+Resolves a Slack channel name to its Datadog notification handle for use as a Bits Detection notification destination. If the channel name exists in more than one Slack workspace, the tool returns all matching handles.
+
+- Find the Datadog notification handle for the `#checkout-alerts` Slack channel.
+- Which Slack workspaces have a channel named `#payments-oncall`?
+
 ## Cases (Work Management)
 
 Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
@@ -3985,6 +4046,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
+[107]: /bits_ai/bits_detection/
 
 ## Further reading
 
