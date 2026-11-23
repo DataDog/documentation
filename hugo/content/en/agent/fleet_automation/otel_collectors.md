@@ -49,7 +49,21 @@ In [Fleet View][1], filter for OTel Collectors and select a Collector to open it
 - Pipeline and topology views of the Collector
 - [Audit Trail events][6], such as configuration changes, upgrades, and flares (Agent's Collector only)
 
-To check the health of your Collectors, see [Monitor Agent and OTel Collector health][7].
+## Monitor OTel Collector health
+
+{{< callout url="https://www.datadoghq.com/product-preview/otel-collector-health-in-fleet-automation/" header="Join the Preview!" >}}
+OTel Collector health is in Preview. If you're interested in this feature, complete the form to request access.
+{{< /callout >}}
+
+To show health signals for a Collector, enable the Collector's [internal telemetry][16].
+
+With OTel Collector health signals, you can:
+
+- Detect silent telemetry drops and anomalies that affect your OTel pipelines and services.
+- Diagnose and fix issues with running configurations and pipeline topologies, with guided troubleshooting context.
+- Identify and mitigate emerging pipeline risks across your fleet at a glance.
+
+To view health signals in Fleet View, see [Monitor Agent and OTel Collector health][7].
 
 ## Visualize OTel pipelines
 
@@ -68,14 +82,14 @@ To access these views:
 The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
 
 - Validate telemetry routing between configured receivers, processors, and exporters.
-- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
+- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle. The toggle requires the Collector's [internal telemetry][16].
 - Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
 
 ### Topology view
 
-<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology">Configure gateway topology</a>.</div>
+<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#5-optional-configure-gateway-topology">Configure gateway topology</a>.</div>
 
 The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
 
@@ -139,3 +153,4 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 [12]: /agent/fleet_automation/configure_agents/#edit-the-configuration-of-a-single-agent-or-its-collector
 [13]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [14]: /agent/fleet_automation/upgrade_agents/
+[16]: /opentelemetry/integrations/datadog_extension/#4-enable-the-collectors-internal-telemetry
