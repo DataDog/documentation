@@ -165,20 +165,25 @@ To act on several findings at once, select them and use:
 
 Bulk selection is available on ungrouped tables and inside expanded groups. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
+## Group findings by fix
+
+The **Remediations** tab groups findings by the fix that resolves them, such as one package upgrade in a repository or one container image update. For more information, see [Remediation Inbox][26].
+
 ## Report on your inbox
 
-The **Reporting** tab shows a dashboard of Security Inbox trends over time, so you can track whether remediation is keeping pace with detection.
+The **Dashboard** tab shows Security Inbox trends over time, so you can track whether remediation is keeping pace with detection.
 
-## Use the security context map to identify and mitigate vulnerabilities
+## Investigate attack paths with Context Graph
 
-The security context map for [Attack Paths](#supported-finding-types) provides a comprehensive view to help identify and address potential breach points. It maps interconnected misconfigurations, permission gaps, and vulnerabilities that attackers might exploit.
+For supported Cloud Security attack-path findings, the **Context Graph** in the finding side panel shows the resources and relationships involved in the detected risk.
 
-Key features include:
+1. In the **Finding Type** list,  beside **attack_path**, click **Only** to filter the Security Inbox findings.
+1. Click a finding to view it in a side panel. If the Security Inbox has grouping applied, open a group, then click a finding in the group to view it.
+1. Scroll to the **Context Graph** to inspect the resources and relationships associated with the finding.
 
-- **Risk assessment**: The map enables security teams to assess the broader impact of vulnerabilities and misconfigurations. This includes evaluating whether security policies---such as access paths and permissions---need updating, and understanding the compliance implications of exposure, particularly when sensitive data is at risk within the blast radius.
-- **Actionable context for immediate response**: The map includes service ownership information and other relevant context, allowing teams to make informed, real-time decisions. Teams can take action directly from the map by running integrated workflows, sharing security issue links, and accessing the AWS console view of resources for efficient remediation, all without switching tools.
+{{< img src="security/csm/security_graph.png" alt="Graph showing relationships between AWS EC2 instances, IAM roles, and S3 buckets" width="100%">}}
 
-{{< img src="security/security_context_map.png" alt="The security context map showing a publicly accessible AWS EC2 instance with a critical misconfiguration" width="100%">}}
+Use the graph, alongside the finding's description and remediation guidance, to understand the risk and plan remediation. For more information, see [Investigate attack paths with Security Graph][25].
 
 ## Customize Security Inbox
 
@@ -219,3 +224,5 @@ For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Ru
 [22]: /ddsql_editor/
 [23]: /security/assignee_management/
 [24]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
+[25]: /security/cloud_security_management/security_graph/
+[26]: /security/remediation_inbox/

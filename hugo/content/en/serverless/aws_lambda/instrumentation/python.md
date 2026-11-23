@@ -23,6 +23,8 @@ algolia:
 
 ## Setup
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Python AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
@@ -422,6 +424,8 @@ To configure Datadog using SST v3, follow these steps:
 {{% svl-lambda-vpc %}}
 
 ## Durable Function
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 {{% svl-lambda-durable-function %}}
 

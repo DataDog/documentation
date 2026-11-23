@@ -9,7 +9,7 @@ on:
 permissions: {}
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -46,6 +46,14 @@ jobs:
             // Skip if not targeting master
             if (pr.base.ref !== 'master') {
               console.log(`Base branch is ${pr.base.ref}. Skipping check.`);
+              return;
+            }
+
+            // Phrase translation PRs are approved by PRApprover, not the documentation team
+            if (pr.user.login === 'dd-guacbot-683343[bot]' && pr.head.ref.startsWith('guacbot/phrase-translations-')) {
+              console.log('Phrase translation PR. Documentation team approval not required.');
+              core.setOutput('approval_status', true);
+              core.setOutput('team_requested', false);
               return;
             }
 

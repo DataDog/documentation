@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-remapping/
   tag: Blog
   text: Connectez l’ensemble de vos données de service avec Service Remapping
-site_support_id: service_remapping_rules
 title: Règles Service Remapping
 ---
 ## Présentation {#overview}

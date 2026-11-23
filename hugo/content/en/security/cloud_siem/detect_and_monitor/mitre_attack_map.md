@@ -28,7 +28,7 @@ To view detection rules against the MITRE ATT&CK Framework:
 
 The default view of the map shows all Datadog out-of-the-box and custom rules for active sources, broken down into different attack techniques. Active sources are the sources of logs found and analyzed in the Cloud SIEM index.
 
-**Note**: For the legacy SKU, all ingested logs are analyzed by Cloud SIEM unless [security filters][2] have been set up.
+**Note**: For [Cloud SIEM Legacy][5], all ingested logs are analyzed by Cloud SIEM unless [Security Filters][2] have been set up.
 
 To view the map for all sources, in the {{< ui >}}Visualize{{< /ui >}} dropdown menu, select {{< ui >}}All Sources{{< /ui >}}. This shows all out-of-the-box rules, including those that are not currently used to detect threats from your logs.
 
@@ -39,7 +39,7 @@ Click the rule density buttons to visualize the map for a specific number of rul
 To view more information about a technique and the rules monitoring the technique:
 
 1. On the [MITRE ATT&CK Map][3] page, click on a technique tile.
-1. Click {{< ui >}}Create Custom Rule{{< /ui >}} if you want to create a custom rule for this technique. See [Detection Rules][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
+1. Click {{< ui >}}Create Custom Rule{{< /ui >}} if you want to create a custom rule for this technique. See [Create a Custom Rule][4] for more information on creating custom rules. **Note**: For the custom rule to show within active sources, the appropriate source tag must be defined in the detection rule.
 1. In the {{< ui >}}Rules monitoring this Technique{{< /ui >}} section, you can:
 	1. Enter a search query to filter to specific rules.
   1. Sort by the creation date, rule type, rule name, source, or highest severity.
@@ -72,4 +72,5 @@ Note the following formatting details:
 [1]: https://app.datadoghq.com/security/siem/rules
 [2]: /security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/
 [3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
-[4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
+[4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule
+[5]: /security/cloud_siem/guide/determine-cloud-siem-product/

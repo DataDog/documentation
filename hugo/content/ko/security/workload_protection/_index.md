@@ -26,6 +26,11 @@ cascade:
     path: /security/workload_protection/windows_expressions
   aliases:
   - /security/threats/windows_expressions
+- _target:
+    path: /security/workload_protection/workload_protection_agent_config
+  aliases:
+  - /security/workload_protection/setup/advanced_configuration
+  - /security/workload_protection/setup/agent_variables
 description: Datadog Workload Protection을 사용하여 호스트, 컨테이너 및 서버리스 워크로드 전반에서 런타임 위협을
   탐지하고 대응하세요.
 further_reading:

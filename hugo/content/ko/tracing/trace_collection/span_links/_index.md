@@ -49,14 +49,21 @@ Datadog은 순방향 및 역방향 스팬 링크를 모두 지원하므로 사�
 
 ## 스팬 링크 생성{#creating-span-links}
 
-애플리케이션이 다음으로 계측된 경우:
+스팬 링크를 생성하는 방법은 애플리케이션이 계측되는 방식에 따라 다릅니다.
 
-- OpenTelemetry SDK - 해당 언어에 대한 OpenTelemetry 수동 계측 설명서를 따릅니다. 예를 들어, [Java용 링크가 포함된 스팬 생성][3]을 확인하세요.
-- Datadog SDK - [스팬 링크 추가][1] 예시를 따릅니다.
+### Datadog SDK {#datadog-sdk}
+
+Python, Node.js, Go 및 PHP SDK는 스팬 링크를 추가하기 위한 API를 제공합니다. [Python][10], [Node.js][11], [Go][12] 또는 [PHP][1]에 대한 예제를 참조하십시오.
+
+Java, .NET 및 Ruby의 경우 OpenTelemetry API를 사용하여 스팬 링크를 추가하십시오. Datadog SDK는 OpenTelemetry API로 생성된 스팬 링크를 Datadog으로 전송합니다. Datadog SDK와 함께 OpenTelemetry API를 사용하려면 [OpenTelemetry API를 사용한 사용자 지정 계측][13]을 참조하십시오. 스팬 링크 API에 대해서는 [Java][3], [.NET][14] 또는 [Ruby][15]에 대한 OpenTelemetry 문서를 참조하십시오.
+
+### OpenTelemetry SDK {#opentelemetry-sdk}
+
+사용 중인 언어에 대한 OpenTelemetry 계측 문서를 따르십시오. 예를 들어, [Java용 스팬 API][3]를 참조하십시오.
 
 ## 최소 지원{#minimum-support}
 
-**참고***: 이 섹션은 Datadog APM 클라이언트 라이브러리(OpenTelemetry API 사용)를 통해 스팬 링크를 생성하기 위한 최소 지원을 문서화합니다. OpenTelemetry SDK에서 생성된 스팬 링크는 [OTLP Ingest][8]를 통해 Datadog으로 전송됩니다.
+**참고**: 이 섹션은 Datadog APM 클라이언트 라이브러리(OpenTelemetry API 사용)를 통해 스팬 링크를 생성하기 위한 최소 지원을 문서화합니다. OpenTelemetry SDK에서 생성된 스팬 링크는 [OTLP Ingest][8]를 통해 Datadog으로 전송됩니다.
 
 [Datadog SDK][7]를 사용하여 스팬 링크를 생성하려면 Agent v7.52.0 이상이 필요합니다. 스팬 링크에 대한 지원은 다음 릴리스에서 도입되었습니다.
 
@@ -79,12 +86,18 @@ Datadog의 [Trace Explorer][4]에서 스팬 링크를 볼 수 있습니다.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/tracing/trace_collection/custom_instrumentation/php/#adding-span-links
+[1]: /ko/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=php#adding-span-links-php
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
-[3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
+[3]: https://opentelemetry.io/docs/languages/java/api/#span
 [4]: /ko/tracing/trace_explorer/trace_view/?tab=spanlinks#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [8]: https://docs.datadoghq.com/ko/opentelemetry/interoperability/otlp_ingest_in_the_agent
 [9]: /ko/tracing/trace_collection/custom_instrumentation/?tab=datadogapi
+[10]: /ko/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=python#adding-span-links-python
+[11]: /ko/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=node_js#adding-span-links-nodejs
+[12]: /ko/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=go#adding-span-links-go
+[13]: /ko/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api
+[14]: https://opentelemetry.io/docs/languages/dotnet/instrumentation/#create-activities-with-links
+[15]: https://opentelemetry.io/docs/languages/ruby/instrumentation/#add-span-links

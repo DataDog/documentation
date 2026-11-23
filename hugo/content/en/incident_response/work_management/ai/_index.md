@@ -23,8 +23,6 @@ For setup instructions and full details on the `cases` toolset, see the [Datadog
 
 ## Custom agents
 
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} Work Management integration with custom agents is in Preview.{{< /callout >}}
-
 Assign work items to specialized agents built with [Bits Agent Builder][3] to automate the full work item lifecycle, from initial triage to follow-up and resolution. For example use cases, agent archetypes, and manual and automated assignment, see [Custom Agents][4].
 
 [1]: /mcp_server

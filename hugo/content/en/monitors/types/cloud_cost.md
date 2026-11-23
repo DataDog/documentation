@@ -1,10 +1,7 @@
 ---
 title: Cloud Cost Monitor
-description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs.'
+description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs, including real-time AI and cloud compute cost increases.'
 further_reading:
-    - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
-      tag: Blog
-      text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
     - link: 'https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview'
       tag: 'Documentation'
       text: 'Cloud Cost Management'
@@ -17,12 +14,18 @@ further_reading:
     - link: '/monitors/status/'
       tag: 'Documentation'
       text: 'Consult your monitor status'
+    - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+      tag: Blog
+      text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
     - link: 'https://www.datadoghq.com/blog/ccm-cost-monitors/'
       tag: 'Blog'
       text: 'React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management'
     - link: 'https://www.datadoghq.com/blog/google-cloud-cost-management/'
       tag: 'Blog'
       text: 'Empower engineers to take ownership of Google Cloud costs with Datadog'
+    - link: "https://www.datadoghq.com/blog/how-kubernetes-dra-can-improve-gpu-utilization-and-cut-costs/"
+      tag: "Blog"
+      text: "How Kubernetes DRA can improve GPU utilization and cut costs"
 ---
 
 ## Overview
@@ -35,9 +38,14 @@ Cloud Cost Monitors help you proactively identify cost changes, and understand i
 
 In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up.
 
-Cloud Cost monitors use a 30-minute evaluation frequency and a 48-hour delayed evaluation window, since cost data may not be available until 48 hours after usage. For example, a 7-day lookback evaluated on January 15 examines cost data from January 6 to January 13.
+Choose the setup that matches the cost data you want to alert on:
+
+-   [Create a monitor](#create-a-monitor) for changes, thresholds, forecasts, budgets, and finalized cost anomalies. These monitors use finalized billing data, a 30-minute evaluation frequency, and a 48-hour delayed evaluation window, since billing data may not be available until 48 hours after usage. For example, a 7-day lookback evaluated on January 15 examines cost data from January 6 to January 13.
+-   [Create a real-time anomaly monitor](#create-a-real-time-anomaly-monitor) to alert within 15 minutes when estimated AI cost (from [Agent Observability][102]) or estimated cloud compute cost (from [Real-Time Costs][105]) increases unexpectedly.
 
 ## Create a monitor
+
+This procedure covers Cloud Cost monitors that use finalized billing data: changes, thresholds, forecasts, budgets, and finalized anomaly monitors. To alert on estimated AI or cloud compute cost within 15 minutes, see the [Create a real-time anomaly monitor](#create-a-real-time-anomaly-monitor) section.
 
 To create a Cloud Cost monitor in Datadog, navigate to [{{< ui >}}Cloud Cost > Analyze > Cost Monitors{{< /ui >}}][4] and click {{< ui >}}\+ New Cost Monitor{{< /ui >}}.
 
@@ -52,7 +60,7 @@ You can select from the following monitor types:
 | Monitor Type | Cost Metric-based | Purpose                                                                                                                                                                                                                                                   | Example                                                                                            |
 | ------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                     |
-| Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
+| Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Finalized monitors exclude incomplete days and require at least 1 month of cloud cost data, because historical data is required to train the algorithm. [Real-time anomaly monitors](#create-a-real-time-anomaly-monitor) alert on estimated AI or cloud compute cost within 15 minutes. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data, or alert within 15 minutes when AI or cloud compute cost increases unexpectedly. |
 | Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                |
 | Forecast     | Yes               | Alert if forecasted costs exceeds a threshold.                                                                                                                                                                                                            | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
 | Budget       | No                | Alert if actual or [forecasted][8] costs exceed your [budget][7].                                                                                                                                                                                         | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.      |
@@ -99,6 +107,8 @@ If you are using the {{< ui >}}Percentage Change{{< /ui >}}, you can filter out 
 {{% /tab %}}
 
 {{% tab "Anomalies" %}}
+
+These conditions apply when {{< ui >}}Alert on{{< /ui >}} is {{< ui >}}finalized{{< /ui >}}. To alert on estimated AI or cloud compute cost within 15 minutes, see the [Create a real-time anomaly monitor](#create-a-real-time-anomaly-monitor) section.
 
 For the {{< ui >}}Cost Anomalies{{< /ui >}} monitor type, you can trigger an alert if the observed cost is `above`, `below`, or `above or below` a threshold compared to historical data.
 
@@ -147,6 +157,48 @@ Choose which teams, roles, users, or service accounts are allowed to **view** or
 
 You can also turn on {{< ui >}}Audit Notifications{{< /ui >}} to alert the monitor creator and recipients whenever the monitor is changed.
 
+<a id="create-a-real-time-ai-anomaly-monitor"></a>
+
+## Create a real-time anomaly monitor
+
+Real-time anomaly monitors detect unexpected increases in estimated cost and alert within 15 minutes, before the cost appears in your billing data. Datadog identifies anomalies from a rolling 8-hour evaluation window of estimated cost.
+
+Real-time anomaly monitors support two cost types:
+
+| Cost type | Providers | Estimated cost source |
+|---|---|---|
+| {{< ui >}}AI cost{{< /ui >}} | OpenAI, Anthropic, Amazon Bedrock, Gemini, Vertex AI | [Agent Observability][102] ([`ml_obs.span.llm.total.cost`][104]) |
+| {{< ui >}}Cloud / SaaS cost{{< /ui >}} | AWS (Amazon EC2), Azure (Virtual Machines), Google Cloud (Compute Engine) | [Real-Time Costs][105] (`aws.cost.net.amortized.realtime.estimated`, `azure.cost.amortized.realtime.estimated`, `gcp.cost.amortized.realtime.estimated`) |
+
+To set up real-time anomaly notifications for your whole organization from a single form, see [Real-time anomaly notifications][106]. Create a monitor instead when you need a custom notification message or more than one configuration per provider.
+
+### Prerequisites
+
+Real-time anomaly monitors require:
+
+- Estimated cost data for the cost type you want to monitor:
+  - **AI cost**: LLM cost data from [Agent Observability][102]. Datadog estimates cost from token counts and provider pricing. See [Agent Observability costs][103].
+  - **Cloud compute cost**: [Real-Time Costs][105] set up for the provider, including the Datadog Agent on your instances. See the [Real-Time Costs requirements][107].
+- At least 3 days of cost data. Datadog recommends 21 days for better detection quality.
+
+The {{< ui >}}real time{{< /ui >}} option appears after any real-time metric reports. Each cloud provider appears in the {{< ui >}}Scope to{{< /ui >}} list after its own metric reports.
+
+### Configure the monitor
+
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Cost Monitors{{< /ui >}}][4] and click {{< ui >}}\+ New Cost Monitor{{< /ui >}}.
+2. Select {{< ui >}}Cost Anomalies{{< /ui >}}.
+3. Set {{< ui >}}Alert on{{< /ui >}} to {{< ui >}}real time{{< /ui >}}, then select the cost type: {{< ui >}}AI cost{{< /ui >}} or {{< ui >}}Cloud / SaaS cost{{< /ui >}}.
+4. Scope the monitor:
+   - For {{< ui >}}AI cost{{< /ui >}}, optionally select {{< ui >}}Providers{{< /ui >}}. By default, the monitor covers all AI providers, including any that your organization starts using later.
+   - For {{< ui >}}Cloud / SaaS cost{{< /ui >}}, select AWS, Azure, or Google Cloud in {{< ui >}}Scope to{{< /ui >}}.
+5. Optionally, filter the cost with {{< ui >}}Filter cost to{{< /ui >}}, and group by up to two tags with {{< ui >}}Detect anomalies on{{< /ui >}}.
+6. Set the minimum cost impact. The monitor alerts only when Datadog detects an anomaly and the anomaly cost over the next 24 hours is likely to exceed the higher of:
+   - An amount in your organization's currency: a whole number greater than 0 (default: 500)
+   - A percentage of the baseline cost: 0-100% (default: 5%)
+7. [Configure notifications][6].
+
+To monitor finalized cloud billing data instead, set {{< ui >}}Alert on{{< /ui >}} to {{< ui >}}finalized{{< /ui >}} and follow [Create a monitor](#create-a-monitor). Finalized anomaly monitors use the agile anomaly algorithm, exclude incomplete days, and require at least 1 month of cloud cost history.
+
 ## Other actions you can take
 
 {{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-other-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
@@ -169,3 +221,9 @@ You can also turn on {{< ui >}}Audit Notifications{{< /ui >}} to alert the monit
 [6]: /monitors/notify/
 [7]: /cloud_cost_management/planning/budgets/
 [8]: /cloud_cost_management/planning/forecasting/
+[102]: /llm_observability/
+[103]: /llm_observability/investigate/cost/
+[104]: /llm_observability/investigate/metrics/
+[105]: /cloud_cost_management/cost_changes/real_time_costs/
+[106]: /cloud_cost_management/cost_changes/anomalies/#real-time-anomaly-notifications
+[107]: /cloud_cost_management/cost_changes/real_time_costs/#requirements

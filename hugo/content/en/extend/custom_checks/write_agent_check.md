@@ -49,7 +49,7 @@ class HelloCheck(AgentCheck):
   def check(self, instance):
     self.gauge('hello.world', 1)
 {{< /code-block >}}
-6. [Restart the Agent][3] and wait for a new metric named `hello.world` to show up in the [Metric Summary][4].
+6. [Restart the Agent][3] and wait for a new metric named `hello.world` to show up in the [Metrics Catalog][4].
 
 If you're having issues getting your custom check working, check the file permissions. The check file must be readable and executable by the Agent user. For more troubleshooting steps, see [Troubleshoot an Agent Check][7].
 
@@ -159,7 +159,7 @@ instances:
   - ipaddress: 1.2.3.4
 {{< /code-block >}}
 
-1. [Restart your Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `coreapp.update.value` that sends the metrics from your load balancer.
+1. [Restart your Agent][3]. Within a minute, you should see a new metric show up in the [Metrics Catalog][4] called `coreapp.update.value` that sends the metrics from your load balancer.
 1. [Create a dashboard][6] for this metric.
 
 ## Agent versioning
@@ -189,7 +189,7 @@ class HelloCheck(AgentCheck):
 [1]: http://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/configuration/agent-configuration-files/#check-configuration-files
 [3]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /dashboards/
 [7]: /agent/troubleshooting/agent_check_status/

@@ -8,19 +8,15 @@ aliases:
 - /ja/security/application_security/setup/threat_detection
 disable_sidebar: true
 disable_toc: false
-title: App と API Protection を有効にする
+title: App and API Protection の有効化
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection は、Datadog Government サイト US1-FED でプレビュー版として提供されています。
-</div>
-{{< /site-region >}}
+サポートされている以下のすべてのプラットフォームおよび環境で App and API Protection を有効にする方法を学びます。
 
-以下のすべてのサポート対象プラットフォームおよび環境で App and API Protection を有効にする方法を学びます。
+コーディングアシスタントを使ってアプリケーションをセットアップする方法については、[Agentic Onboarding][1] をご覧ください。
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">お使いの環境が見当たりませんか？</p>
-  <span>お使いの環境が見当たらない場合は、<a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">こちら</a>からリクエストをお送りください。</span>
+  <span>お使いの環境が見当たらない場合は、<a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">こちら</a>からリクエストを送信してください。</span>
 </div>
 
 ## 言語 {#languages}
@@ -88,3 +84,5 @@ App and API Protection は、Datadog Government サイト US1-FED でプレビ�
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
+
+[1]: /ja/security/application_security/agentic_onboarding/

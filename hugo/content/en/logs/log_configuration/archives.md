@@ -242,6 +242,8 @@ For archives with a maximum scan size defined, all users need to estimate the sc
 
 **Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
+For both attribute types, enter tags and [reserved attributes][19] such as `env`, `service`, or `trace_id` without the `@` prefix. Prefix all other attributes with `@`.
+
 #### Archive Partition Attribute {#archive-partition-attribute}
 
 Partition attributes organize archived logs into groups based on common field values. Use them for broad filters to skip irrelevant archive segments and reduce scan volume during [Archive Search][16].
@@ -257,7 +259,7 @@ Lookup attributes create a fast path to logs with specific values. Use them for 
 
 You can configure up to **2 lookup attributes** per archive.
 
-* **Use for**: High-cardinality attributes such as `trace_id`, `container_id`, `user_id`, or `request_id`.
+* **Use for**: High-cardinality attributes such as `trace_id`, `@usr.id`, `@http.request_id`, or `@transaction_id`.
 * **How it works**: Datadog builds an index for these attributes at write time, allowing Archive Search to pinpoint specific logs without scanning the full archive.
 
 **Partition vs. Lookup attributes**
@@ -265,7 +267,7 @@ You can configure up to **2 lookup attributes** per archive.
 | | Partition | Lookup |
 |---|---|---|
 | **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
-| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `@usr.id`, `@http.request_id`, `@transaction_id` |
 | **How it helps** | Skips entire partitions that don't match your query | Pinpoints specific log entries without scanning the full archive |
 | **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
 | **Limit** | Up to 2 per archive | Up to 2 per archive |
@@ -451,6 +453,12 @@ After that, if the archive is still in a pending state, check your inclusion fil
 
 Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][15]. You can create a monitor for these events to detect and remediate failures quickly.
 
+## Observability Pipelines archives
+
+When you enable Archive Search on an Observability Pipelines archive destination, Datadog creates the Log Archive after you deploy the pipeline. For setup instructions, see the [Datadog Archives (Amazon S3)][20], [Google Cloud Storage][21], or [Azure Storage][22] destination documentation. These archives are listed in the {{< ui >}}Observability Pipelines Archives{{< /ui >}} tab on the [Log Archiving & Forwarding page][3].
+
+Manage the bucket configuration for these archives in Observability Pipelines. In Datadog, you can edit their permissions, tags, and [maximum scan size](#define-maximum-scan-size).
+
 ## Multiple archives
 
 If multiple archives are defined, logs enter the first archive based on filter.
@@ -496,5 +504,9 @@ This directory structure simplifies the process of querying your historical log 
 [16]: /logs/explorer/archive_search/?tab=amazons3
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[19]: /logs/explorer/search_syntax/#reserved-attributes
+[20]: /observability_pipelines/destinations/datadog_archives/#archive-search
+[21]: /observability_pipelines/destinations/google_cloud_storage/#archive-search
+[22]: /observability_pipelines/destinations/azure_storage/#archive-search
 
 

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "name": "test-rum-no-default-rf-5c67ebb32077e1d9",
+      "type": "browser",
+      "create_default_retention_filters": false
+    },
+    "type": "rum_application_create"
+  }
+}

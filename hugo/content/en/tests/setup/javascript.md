@@ -2,7 +2,7 @@
 title: JavaScript and TypeScript Tests
 code_lang: javascript
 type: multi-code-lang
-code_lang_weight: 20
+code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/javascript
   - /continuous_integration/tests/javascript
@@ -64,10 +64,6 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
-
-<div class="alert alert-danger">
-  <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
-</div>
 
 {{% /tab %}}
 
@@ -265,99 +261,21 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 {{% tab "Cypress" %}}
 
-### Cypress version 10 or later
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
-Use the Cypress API documentation to [learn how to use plugins][1] for `cypress>=10`.
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=ui-tests yarn test:ui
+```
 
-In your `cypress.config.js` file, set the following:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. Use the `${NODE_OPTIONS:-}` clause:
 
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents: require('dd-trace/ci/cypress/plugin'),
-    supportFile: 'cypress/support/e2e.js'
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:ui": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" cypress run"
   }
-})
+}
 {{< /code-block >}}
-
-Add the following line to the **top level** of your `supportFile`:
-
-{{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
-// Your code can be before this line
-// require('./commands')
-require('dd-trace/ci/cypress/support')
-// Also supported:
-// import 'dd-trace/ci/cypress/support'
-// Your code can also be after this line
-// Cypress.Commands.add('login', (email, pw) => {})
-{{< /code-block >}}
-
-If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      // your previous code is before this line
-      return require('dd-trace/ci/cypress/plugin')(on, config)
-    }
-  }
-})
-{{< /code-block >}}
-
-#### Cypress `after:run` event
-Datadog requires the [`after:run`][2] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      require('dd-trace/ci/cypress/plugin')(on, config)
-      // other plugins
-      on('after:run', (details) => {
-        // other 'after:run' handlers
-        // important that this function call is returned
-        return require('dd-trace/ci/cypress/after-run')(details)
-      })
-    }
-  }
-})
-{{< /code-block >}}
-
-#### Cypress `after:spec` event
-Datadog requires the [`after:spec`][3] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:spec` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-spec'`:
-
-{{< code-block lang="javascript" filename="cypress.config.js" >}}
-const { defineConfig } = require('cypress')
-
-module.exports = defineConfig({
-  e2e: {
-    setupNodeEvents(on, config) {
-      require('dd-trace/ci/cypress/plugin')(on, config)
-      // other plugins
-      on('after:spec', (...args) => {
-        // other 'after:spec' handlers
-        // Important that this function call is returned
-        // Important that all the arguments are passed
-        return require('dd-trace/ci/cypress/after-spec')(...args)
-      })
-    }
-  }
-})
-{{< /code-block >}}
-
-Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
-
-{{< code-block lang="shell" >}}
-DD_TEST_SESSION_NAME=ui-tests yarn test:ui
-{{< /code-block >}}
-
 
 ### Adding custom tags to tests
 
@@ -404,9 +322,6 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
-[1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
-[2]: https://docs.cypress.io/api/plugins/after-run-api
-[3]: https://docs.cypress.io/api/plugins/after-spec-api
 [4]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
@@ -543,6 +458,73 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 {{< /tabs >}}
 
+## Troubleshooting
+
+### Cypress tests do not appear in Datadog
+
+Datadog instruments Cypress tests automatically, without changes to your Cypress configuration. If your Cypress tests don't appear in Datadog after you follow the steps in [Instrument your tests](#instrument-your-tests), some Cypress configurations can prevent automatic instrumentation. To work around this, register the Datadog plugin and support file manually.
+
+**Note**: The examples in this section use Cypress 10 or later. For Cypress versions earlier than 10, register the Datadog plugin in `cypress/plugins/index.js` instead of `setupNodeEvents`, following the [pre-v10 plugin configuration in the Cypress migration guide][29]. Import the Datadog support file from your configured support file, which defaults to `cypress/support/index.js`.
+
+#### Register the Datadog plugin
+
+Add the Datadog plugin to `setupNodeEvents` in your `cypress.config.js` file. Preserve any existing plugin setup and return the configuration from the Datadog plugin:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // Register your other plugins here.
+      return require('dd-trace/ci/cypress/plugin')(on, config)
+    },
+    supportFile: 'cypress/support/e2e.js'
+  }
+})
+{{< /code-block >}}
+
+#### Import the Datadog support file
+
+Add the following line to the top level of your Cypress support file. Keep any existing support code:
+
+{{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
+require('dd-trace/ci/cypress/support')
+// For ES modules, use:
+// import 'dd-trace/ci/cypress/support'
+{{< /code-block >}}
+
+#### Preserve existing Cypress event handlers
+
+Datadog uses the Cypress `after:run` and `after:spec` events. If you register your own handlers for these events, call the corresponding Datadog handler from your existing handler. Return its result and pass through all event arguments:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      const updatedConfig = require('dd-trace/ci/cypress/plugin')(on, config)
+
+      on('after:run', (details) => {
+        // Run your existing after:run handler here.
+        return require('dd-trace/ci/cypress/after-run')(details)
+      })
+
+      on('after:spec', (...args) => {
+        // Run your existing after:spec handler here.
+        return require('dd-trace/ci/cypress/after-spec')(...args)
+      })
+
+      return updatedConfig
+    },
+    supportFile: 'cypress/support/e2e.js'
+  }
+})
+{{< /code-block >}}
+
+Run your tests again with the reporting configuration from the setup instructions. If your Cypress tests still don't appear in Datadog, [contact Datadog Support][28] with details of your Cypress configuration.
+
 ### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
 When using `dd-trace`, you might encounter the following error message:
@@ -675,33 +657,41 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 ## Browser testing media upload
 
-Test Optimization can upload test failure screenshots from Cypress, Playwright, and WebdriverIO. It can also upload failed test videos from Cypress and Playwright.
+Test Optimization can upload test failure screenshots and videos from Cypress, Playwright, and WebdriverIO.
 
 {{< tabs >}}
 {{% tab "Cypress" %}}
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. Use them to inspect browser state at the time of failure.
+Test Optimization uploads screenshots that Cypress captures when a test fails. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.112.0 or later][1] on the v5 release line, or [`dd-trace` v6.1.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][3] is set to `true` (the default).
+[`screenshotOnRunFailure`][3] defaults to `true`, so Cypress captures failure screenshots by default. Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
 
-### Upload failed test videos
+- Unset (default): Upload the failure screenshots that Cypress captures.
+- `1`: Capture and upload failure screenshots, even if `screenshotOnRunFailure` is `false`.
+- `0`: Don't upload screenshots. Cypress may still capture them according to your configuration.
 
-When enabled, Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
+### Upload test failure videos
+
+Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-video-videos-tab.png" alt="A Cypress failed test video displayed in the Videos tab of the Test Optimization test suite details page." style="width:100%;" >}}
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-video-player.png" alt="The video player displaying a Cypress failed test video." style="width:100%;" >}}
 
-To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Cypress configuration, set [`video`][4] or `e2e.video` to `true`.
+To record videos, set [`video`][4] to `true` in your Cypress configuration. Use `DD_TEST_FAILURE_VIDEOS_ENABLED` to control uploads:
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+- Unset (default): Upload the videos that Cypress records for failed test suites.
+- `1`: Record and upload videos from failed test suites, even if `video` in Cypress is `false`.
+- `0`: Don't upload videos. Cypress may still record them according to your configuration.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
 [3]: https://docs.cypress.io/app/references/configuration#Screenshots
 [4]: https://docs.cypress.io/app/guides/screenshots-and-videos#Videos
 {{% /tab %}}
@@ -710,32 +700,40 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
+Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.116.0 or later][1] on the v5 release line, or [`dd-trace` v6.5.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][3] under `use` to one of the following values:
+Playwright doesn't capture screenshots by default. To capture them, set [`screenshot`][3] under `use` in your Playwright configuration to one of the following values:
 
-- `'on'`: Capture screenshot after each test.
-- `'only-on-failure'`: Capture screenshot after each test failure.
-- `'on-first-failure'`: Capture screenshot after each test's first failure.
+- `'on'`: Capture a screenshot after each test. Test Optimization uploads only screenshots from failed tests.
+- `'only-on-failure'`: Capture a screenshot after each test failure.
+- `'on-first-failure'`: Capture a screenshot after each test's first failure.
 
-**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
+Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
 
-### Upload failed test videos
+- Unset (default): Upload the failure screenshots that Playwright captures.
+- `1`: Capture and upload failure screenshots, regardless of the `screenshot` setting in Playwright. Requires Playwright 1.38 or later.
+- `0`: Don't upload screenshots. Playwright may still capture them according to your configuration.
 
-When enabled, Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
+### Upload test failure videos
+
+Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-video-videos-tab.png" alt="A Playwright failed test video displayed in the Videos tab of the Test Optimization test details page." style="width:100%;" >}}
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-video-player.png" alt="The video player displaying a Playwright failed test video." style="width:100%;" >}}
 
-To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`video`][4] under `use` to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`.
+Playwright doesn't record videos by default. To record them, set [`video`][4] under `use` in your Playwright configuration to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`. Use `DD_TEST_FAILURE_VIDEOS_ENABLED` to control uploads:
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+- Unset (default): Upload the videos that Playwright records for failed tests.
+- `1`: Record and upload videos from failed tests, regardless of the `video` setting. Requires Playwright 1.38 or later.
+- `0`: Don't upload videos. Playwright may still record them according to your configuration.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
 [3]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 [4]: https://playwright.dev/docs/videos#record-video
 {{% /tab %}}
@@ -744,16 +742,26 @@ To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` env
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
+Test Optimization automatically captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A browser test failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-Use [`dd-trace` v5.125.0 or later][1] on the v5 release line, or [`dd-trace` v6.14.0 or later][2] on the v6 release line.
+Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. No additional WebdriverIO configuration is required.
+No additional WebdriverIO configuration is required. To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`.
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.125.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.14.0
+### Upload test failure videos
+
+WebdriverIO video recording and uploads are disabled by default. To enable them for WebdriverIO 9 or later with Mocha or Jasmine:
+
+1. Install [FFmpeg][3] with the `libvpx` encoder and make the `ffmpeg` executable available on the test process's `PATH`.
+2. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1`.
+
+To disable video recording and uploads, unset `DD_TEST_FAILURE_VIDEOS_ENABLED` or set it to `0`.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
+[3]: https://ffmpeg.org/download.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -873,9 +881,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ## Known limitations
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, `vitest`, and `webdriverio` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, Playwright, or WebdriverIO, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
@@ -1000,3 +1008,4 @@ The test session name should be unique within a repository to help you distingui
 [25]: /getting_started/site/
 [26]: https://microsoft.github.io/lage/docs/introduction
 [27]: https://nx.dev/docs/features/run-tasks
+[29]: https://docs.cypress.io/app/references/migration-guide#setupNodeEvents

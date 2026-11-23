@@ -1,59 +1,58 @@
 ---
-title: Métricas personalizadas de aplicaciones serverless de AWS Lambda
+title: Custom Metrics desde aplicaciones Serverless de AWS Lambda
 ---
+## Descripción general {#overview}
 
-## Información general
+Existen algunas formas diferentes de enviar Custom Metrics a Datadog desde una función Lambda.
 
-Hay varias formas de enviar métricas personalizadas a Datadog desde una función de Lambda.
+- **[Crear Custom Metrics a partir de registros o trazas](#creating-custom-metrics-from-logs-or-traces)**: Si sus funciones Lambda ya envían datos de trazas o registros a Datadog y los datos que desea consultar están capturados en un registro o una traza existente, puede generar Custom Metrics a partir de registros y trazas sin volver a implementar la aplicación ni realizar cambios en su código.
+- **[Envío de Custom Metrics mediante Datadog Lambda Extension](#with-the-datadog-lambda-extension)**: Si desea enviar Custom Metrics directamente desde su función Lambda, Datadog recomienda usar [Datadog Lambda Extension][1].
+- **[Envío de Custom Metrics mediante Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: Si envía telemetría desde su función Lambda a través de Datadog Forwarder Lambda, puede enviar Custom Metrics mediante registros usando las funciones auxiliares proporcionadas por Datadog.
+- **[(Obsoleto) Envío de Custom Metrics desde registros de CloudWatch](#deprecated-cloudwatch-logs)**: El método para enviar Custom Metrics mediante la impresión de un registro con el formato `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` ha quedado obsoleto. Datadog recomienda usar [Datadog Lambda Extension](#with-the-datadog-lambda-extension) en su lugar.
+- **(Obsoleto) Envío de Custom Metrics mediante la biblioteca de Datadog para Lambda**: La biblioteca de Datadog para Lambda, disponible para Python, Node.js y Go, permite enviar Custom Metrics de forma sincrónica desde el entorno de ejecución a Datadog al bloquear la invocación cuando `DD_FLUSH_TO_LOG` se establece en `false`. Además de la sobrecarga de rendimiento, los envíos de métricas también pueden presentar errores intermitentes por problemas transitorios de red, ya que no se realizan reintentos. Datadog recomienda usar [Datadog Lambda Extension](#with-the-datadog-lambda-extension) en su lugar.
+- **(No recomendado) Uso de una biblioteca de terceros**: La mayoría de las bibliotecas de terceros no envían las métricas como distribuciones, lo que puede dar lugar a recuentos inferiores a los reales. También pueden producirse errores intermitentes por problemas transitorios de red, ya que no se realizan reintentos.
 
-- **[Creación de métricas personalizadas a partir de logs o trazas (traces)](#creating-custom-metrics-from-logs-or-traces)**: si tus funciones de Lambda ya envían datos de trazas o logs a Datadog, y los datos que quieres consultar se encuentran en un log o una traza existente, puedes generar métricas personalizadas a partir de logs y trazas sin volver a desplegar ni hacer cambios en el código de tu aplicación.
-- **[Envío de métricas personalizadas mediante la Datadog Lambda Extension](#with-the-datadog-lambda-extension)**: si quieres enviar métricas personalizadas directamente desde tu función de Lambda, Datadog recomienda utilizar la [Datadog Lambda Extension][1].
-- **[Envío de métricas personalizadas mediante la función de Lambda del Datadog Forwarder](#with-the-datadog-forwarder)**: si envías telemetría desde tu función de Lambda a través de la función de Lambda del Datadog Forwarder, puedes enviar métricas personalizados a través de logs con las funciones auxiliares que ofrece Datadog.
-- **[(Obsoleto) Envío de métricas personalizadas desde logs de CloudWatch](#deprecated-cloudwatch-logs)**: el método para enviar métricas personalizadas mediante la impresión de un log formateado como `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` ha quedado en desuso. Datadog recomienda utilizar la [Datadog Lambda Extension](#with-the-datadog-lambda-extension) en su lugar.
-- **(Obsoleto) Envío de métricas personalizadas mediante la biblioteca Lambda de Datadog**: la biblioteca Lambda de Datadog para Python, Node.js y Go admite el envío de métricas personalizadas de forma sincrónica desde el tiempo de ejecución a Datadog con el bloqueo de la invocación cuando `DD_FLUSH_TO_LOG` se define como `false`. Además de la sobrecarga del rendimiento, los envíos de métricas también pueden sufrir errores intermitentes debido a la falta de reintentos por problemas transitorios de red. Datadog recomienda utilizar la [Datadog Lambda Extension](#with-the-datadog-lambda-extension) en su lugar.
-- **(No recomendado) Uso de una biblioteca de terceros**: la mayoría de las bibliotecas de terceros no envían métricas como distribuciones y pueden dar lugar a resultados mal contabilizados. También pueden sufrir errores intermitentes debido a la falta de reintentos por problemas transitorios de red.
+### Entender las métricas de distribución {#understanding-distribution-metrics}
 
-### Comprender las métricas de distribución
+Cuando Datadog recibe múltiples puntos de métricas de tipo count o gauge que comparten la misma marca de tiempo y conjunto de etiquetas, solo cuenta el más reciente. Esto funciona para aplicaciones basadas en servidores porque el Agent de Datadog agrega los puntos de métrica y les asigna una etiqueta `host` única.
 
-Cuando Datadog recibe varios puntos de métricas count o gauge que comparten la misma marca de tiempo y el mismo conjunto de etiquetas, solo cuenta el punto más reciente. Esto funciona para las aplicaciones basadas en hosts porque el Datadog Agent agrega los puntos de métricas y les aplica una etiqueta `host` única.
+Una función Lambda puede iniciar muchos entornos de ejecución concurrentes cuando aumenta el tráfico. La función puede enviar puntos de métricas de tipo count o gauge que se sobrescriben entre sí y producen recuentos inferiores a los reales. Para evitar este problema, las Custom Metrics generadas por funciones Lambda se envían como [distribuciones][2] porque los puntos de métricas de distribución se agregan en el backend de Datadog y cada punto de métrica cuenta.
 
-Una función de Lambda puede iniciar muchos entornos de ejecución de forma simultánea cuando hay un aumento de tráfico. La función puede llegar a enviar puntos de métricas count o gauge que se sobrescriben entre sí y generan resultados mal contabilizados. Para evitar este problema, las métricas personalizadas generadas a partir de funciones de Lambda se envían como [distribuciones][2], ya que los puntos de las métricas de distribución se agregan en el backend de Datadog y todos ellos se cuentan.
+Las distribuciones proporcionan agregaciones de `avg`, `sum`, `max`, `min`, `count` de forma predeterminada. En la página {{< ui >}}Metrics Catalog{{< /ui >}}, puede habilitar agregaciones de percentiles (p50, p75, p90, p95, p99) y también [administrar etiquetas][3]. Para monitorear una distribución de una métrica de tipo gauge, use `avg` tanto para las [agregaciones de tiempo como para las de espacio][4]. Para monitorear una distribución de una métrica de tipo count, use `sum` tanto para las [agregaciones de tiempo como para las de espacio][4]. Consulte la guía [Query to the Graph][5] para saber cómo funcionan las agregaciones de tiempo y espacio.
 
-Las distribuciones ofrecen las agregaciones `avg`, `sum`, `max`, `min` y `count` de forma predeterminada. En la página Metric Summary (Resumen de métrica), puedes habilitar agregaciones percentiles (p50, p75, p90, p95, p99) y también [gestionar etiquetas][3]. Para monitorizar la distribución de un tipo de métrica gauge, utiliza `avg` tanto para las [agregaciones temporales como espaciales][4]. Para monitorizar la distribución de un tipo de métrica count, utiliza `sum` tanto para las [agregaciones temporales como espaciales][4]. Lee la guía [Consulta al gráfico][5] para saber cómo funcionan las agregaciones temporales y espaciales.
+### Envío de muchos puntos de datos {#submitting-many-data-points}
 
-### Envío de muchos puntos de datos
-
-Cuando se utiliza el Forwarder para enviar muchos puntos de datos para la misma métrica y el mismo conjunto de etiquetas, por ejemplo, dentro de un gran bucle `for`, puede haber un impacto notable en el rendimiento de Lambda y también un impacto en el coste de CloudWatch. Para evitar la sobrecarga, puedes agregar los puntos de datos en tu aplicación. Consulta el siguiente ejemplo de Python:
+Al usar el Forwarder para enviar muchos puntos de datos para la misma métrica y el mismo conjunto de etiquetas, por ejemplo, dentro de un bucle `for` grande, puede haber un impacto notable en el rendimiento de Lambda y también un impacto en los costos de CloudWatch. Puede agregar los puntos de datos en su aplicación para evitar la sobrecarga; consulte el siguiente ejemplo de Python:
 
 ```python
 def lambda_handler(event, context):
 
-    # Ineficiente cuando event['Records'] contiene muchos registros
+    # Inefficient when event['Records'] contains many records
     for record in event['Records']:
       lambda_metric("record_count", 1)
 
-    # Implementación mejorada
+    # Improved implementation
     record_count = 0
     for record in event['Records']:
       record_count += 1
     lambda_metric("record_count", record_count)
 ```
 
-## Creación de métricas personalizadas a partir de logs o trazas
+## Creación de Custom Metrics a partir de registros o trazas {#creating-custom-metrics-from-logs-or-traces}
 
-Con las métricas basadas en logs, puedes registrar un recuento de logs que coincidan con una consulta o resumir un valor numérico contenido en un log, como la duración de una solicitud. Las métricas basadas en logs son una forma rentable de resumir los datos de los logs de todo el flujo (stream) de la ingesta. Obtén más información sobre la [creación de métricas basadas en logs][6].
+Con las métricas basadas en registros, puede registrar un recuento de registros que coincidan con una consulta o resumir un valor numérico contenido en un registro, como la duración de una solicitud. Las métricas basadas en registros son una forma rentable de resumir los datos de registro de todo el flujo de ingesta. Obtenga más información sobre [cómo crear métricas basadas en registros][6].
 
-También puedes generar métricas a partir de todos los tramos (spans) ingeridos, independientemente de si están indexados por un filtro de retención. Obtén más información sobre la [creación de métricas basadas en tramos][7].
-## Con la Datadog Lambda Extension
+También puede generar métricas a partir de todos los tramos ingeridos, independientemente de si están indexados por un filtro de retención. Obtenga más información sobre [cómo crear métricas basadas en tramos][7].
+## Con Datadog Lambda Extension {#with-the-datadog-lambda-extension}
 
-{{< img src="serverless/serverless_custom_metrics.png" alt="Recopilación de métricas personalizadas desde AWS Lambda" >}}
+{{< img src="serverless/serverless_custom_metrics.png" alt="Recopilación de Custom Metrics de AWS Lambda" >}}
 
-Datadog recomienda utilizar la [Datadog Lambda Extension][1] para enviar métricas personalizadas como [**distribución**](#understanding-distribution-metrics) desde los tiempos de ejecución de Lambda admitidos.
+Datadog recomienda usar [Datadog Lambda Extension][1] para enviar Custom Metrics como [**distribuciones**](#understanding-distribution-metrics) desde los entornos de ejecución de Lambda compatibles.
 
-1. Sigue las [instrucciones de instalación serverless][8] generales para tu tiempo de ejecución de Lambda.
-1. Si no te interesa recopilar las trazas de tu función de Lambda, define la variable de entorno `DD_TRACE_ENABLED` como `false`.
-1. Si no te interesa recopilar los logs de tu función de Lambda, define la variable de entorno `DD_SERVERLESS_LOGS_ENABLED` como `false`.
-1. Sigue el código de ejemplo o las instrucciones que se indican más abajo para enviar tu métrica personalizada.
+1. Siga las [instrucciones generales de instalación de Serverless][8] adecuadas para el entorno de ejecución de su función Lambda.
+1. Si no le interesa recopilar trazas de su función Lambda, establezca la variable de entorno `DD_TRACE_ENABLED` en `false`.
+1. Si no le interesa recopilar registros de su función Lambda, establezca la variable de entorno `DD_SERVERLESS_LOGS_ENABLED` en `false`.
+1. Siga el código de ejemplo o las instrucciones a continuación para enviar su métrica personalizada.
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
@@ -63,9 +62,9 @@ from datadog_lambda.metric import lambda_metric
 
 def lambda_handler(event, context):
     lambda_metric(
-        "coffee_house.order_value",             # Nombre de la métrica
-        12.45,                                  # Valor de la métrica
-        tags=['product:latte', 'order:online']  # Etiquetas asociadas
+        "coffee_house.order_value",             # Metric name
+        12.45,                                  # Metric value
+        tags=['product:latte', 'order:online']  # Associated tags
     )
 ```
 {{< /programming-lang >}}
@@ -76,10 +75,10 @@ const { sendDistributionMetric } = require('datadog-lambda-js');
 
 async function myHandler(event, context) {
     sendDistributionMetric(
-        'coffee_house.order_value', // Nombre de la métrica
-        12.45,                      // Valor de la métrica
-        'product:latte',            // Primera etiqueta
-        'order:online'              // Segunda etiqueta
+        'coffee_house.order_value', // Metric name
+        12.45,                      // Metric value
+        'product:latte',            // First tag
+        'order:online'              // Second tag
     );
 }
 ```
@@ -100,16 +99,16 @@ func main() {
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Distribution(
-    "coffee_house.order_value",     // Nombre de la métrica
-    12.45,                          // Valor de la métrica
-    "product:latte", "order:online" // Etiquetas asociadas
+    "coffee_house.order_value",     // Metric name
+    12.45,                          // Metric value
+    "product:latte", "order:online" // Associated tags
   )
 }
 ```
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Instala la última versión de [java-dogstatsd-client][1] y, luego, sigue el código de ejemplo que aparece abajo para enviar tus métricas personalizadas como [**distribución**](#understanding-distribution-metrics).
+Instale la versión más reciente de [java-dogstatsd-client][1] y luego siga el código de ejemplo a continuación para enviar sus Custom Metrics como [**distribuciones**](#understanding-distribution-metrics).
 
 ```java
 package com.datadog.lambda.sample.java;
@@ -161,12 +160,12 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Instala la última versión de [dogstatsd-csharp-client][1] y, luego, sigue el código de ejemplo que aparece abajo para enviar tus métricas personalizadas como [**métricas de distribución**](#understanding-distribution-metrics).
+Instale la versión más reciente de [dogstatsd-csharp-client][1] y luego siga el código de ejemplo a continuación para enviar sus Custom Metrics como [**métricas de distribución**](#understanding-distribution-metrics).
 
 ```csharp
 using System.IO;
 
-// importa el cliente statsd
+// import the statsd client
 using StatsdClient;
 
 namespace Example
@@ -175,7 +174,7 @@ namespace Example
   {
     static Function()
     {
-        // crea la instancia del cliente statsd
+        // instantiate the statsd client
         var dogstatsdConfig = new StatsdConfig
         {
             StatsdServerName = "127.0.0.1",
@@ -187,9 +186,9 @@ namespace Example
 
     public Stream MyHandler(Stream stream)
     {
-        // envía una métrica de distribución
+        // submit a distribution metric
         DogStatsd.Distribution("my.custom.dotnet.metric", 1, tags: new[] { "tag:value" });
-        // la lógica de tu función
+        // your function logic
     }
   }
 }
@@ -199,23 +198,23 @@ namespace Example
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-1. [Instala][1] el cliente DogStatsD para tu tiempo de ejecución.
-2. Sigue el [código de ejemplo][2] para enviar tus métricas personalizadas como [**distribución**](#understanding-distribution-metrics).
+1. [Instale][1] el cliente de DogStatsD para su entorno de ejecución
+2. Siga el [código de ejemplo][2] para enviar sus Custom Metrics como [**distribuciones**](#understanding-distribution-metrics)
 
 
-[1]: /es/developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
-[2]: /es/developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
+[1]: /es/extend/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[2]: /es/extend/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Con el Datadog Forwarder
+## Con el Datadog Forwarder {#with-the-datadog-forwarder}
 
-Datadog recomienda utilizar la [función de Lambda del Datadog Forwarder][9] para enviar métricas personalizados desde tiempos de ejecución de Lambda que no son compatibles con la Lambda Datadog Extension.
+Datadog recomienda utilizar [Datadog Forwarder Lambda][9] para enviar Custom Metrics desde entornos de ejecución de Lambda que no son compatibles con Datadog Lambda Extension.
 
-1. Sigue las [instrucciones de instalación serverless][8] generales para instrumentar tu función de Lambda con la función de Lambda del Datadog Forwarder.
-1. Si no te interesa recopilar las trazas de tu función de Lambda, define la variable de entorno `DD_TRACE_ENABLED` como `false` en tu función de Lambda.
-1. Si no te interesa recopilar los logs de tu función de Lambda, define el parámetro del stack tecnológico de CloudFormation `DdForwardLog` como `false` en el Forwarder.
-1. Importa y utiliza una función auxiliar de la biblioteca Lambda de Datadog, como `lambda_metric` o `sendDistributionMetric`, para enviar tus métricas personalizadas con el código de ejemplo que aparece abajo.
+1. Siga las [instrucciones generales de instalación de Serverless][8] para instrumentar su función Lambda mediante la función Datadog Forwarder Lambda.
+1. Si no le interesa recopilar trazas de su función Lambda, establezca la variable de entorno `DD_TRACE_ENABLED` en `false` en su propia función Lambda.
+1. Si no le interesa recopilar registros de su función Lambda, establezca el parámetro de pila de CloudFormation del Forwarder `DdForwardLog` en `false`.
+1. Importe y utilice la función auxiliar de la biblioteca Datadog Lambda, como `lambda_metric` o `sendDistributionMetric`, para enviar sus Custom Metrics siguiendo el código de ejemplo a continuación.
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
 {{< programming-lang lang="python" >}}
@@ -225,17 +224,17 @@ from datadog_lambda.metric import lambda_metric
 
 def lambda_handler(event, context):
     lambda_metric(
-        "coffee_house.order_value",             # Nombre de la métrica
-        12.45,                                  # Valor de la métrica
-        tags=['product:latte', 'order:online']  # Etiquetas asociadas
+        "coffee_house.order_value",             # Metric name
+        12.45,                                  # Metric value
+        tags=['product:latte', 'order:online']  # Associated tags
     )
 
-    # Envía una métrica con una marca de tiempo que esté dentro de los últimos 20 minutos
+    # Submit a metric with a timestamp that is within the last 20 minutes
     lambda_metric(
-        "coffee_house.order_value",             # Nombre de la métrica
-        12.45,                                  # Valor de la métrica
-        timestamp=int(time.time()),             # Unix epoch en segundos
-        tags=['product:latte', 'order:online']  # Etiquetas asociadas
+        "coffee_house.order_value",             # Metric name
+        12.45,                                  # Metric value
+        timestamp=int(time.time()),             # Unix epoch in seconds
+        tags=['product:latte', 'order:online']  # Associated tags
     )
 ```
 {{< /programming-lang >}}
@@ -246,19 +245,19 @@ const { sendDistributionMetric } = require('datadog-lambda-js');
 
 async function myHandler(event, context) {
     sendDistributionMetric(
-        'coffee_house.order_value', // Nombre de la métrica
-        12.45,                      // Valor de la métrica
-        'product:latte',            // Primera etiqueta
-        'order:online'              // Segunda etiqueta
+        'coffee_house.order_value', // Metric name
+        12.45,                      // Metric value
+        'product:latte',            // First tag
+        'order:online'              // Second tag
     );
 
-    // Envía una métrica con una marca de tiempo que esté dentro de los últimos 20 minutos
+    // Submit a metric with a timestamp that is within the last 20 minutes
     sendDistributionMetricWithDate(
-        'coffee_house.order_value', // Nombre de la métrica
-        12.45,                      // Valor de la métrica
-        new Date(Date.now()),       // Fecha
-        'product:latte',            // Primera etiqueta
-        'order:online',             // Segunda etiqueta
+        'coffee_house.order_value', // Metric name
+        12.45,                      // Metric value
+        new Date(Date.now()),       // date
+        'product:latte',            // First tag
+        'order:online',             // Second tag
     );
 }
 ```
@@ -279,17 +278,17 @@ func main() {
 
 func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Distribution(
-    "coffee_house.order_value",     // Nombre de la métrica
-    12.45,                          // Valor de la métrica
-    "product:latte", "order:online" // Etiquetas asociadas
+    "coffee_house.order_value",     // Metric name
+    12.45,                          // Metric value
+    "product:latte", "order:online" // Associated tags
   )
 
-  // Envía una métrica con una marca de tiempo que esté dentro de los últimos 20 minutos
+  // Submit a metric with a timestamp that is within the last 20 minutes
   ddlambda.MetricWithTimestamp(
-    "coffee_house.order_value",     // Nombre de la métrica
-    12.45,                          // Valor de la métrica
-    time.Now(),                     // Marca de tiempo
-    "product:latte", "order:online" // Etiquetas asociadas
+    "coffee_house.order_value",     // Metric name
+    12.45,                          // Metric value
+    time.Now(),                     // Timestamp
+    "product:latte", "order:online" // Associated tags
   )
 }
 ```
@@ -301,20 +300,20 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 require 'datadog/lambda'
 
 def handler(event:, context:)
-    # Solo tienes que envolver el controlador de tu función (no las funciones auxiliares).
+    # You only need to wrap your function handler (Not helper functions).
     Datadog::Lambda.wrap(event, context) do
         Datadog::Lambda.metric(
-          'coffee_house.order_value',         # Nombre de la métrica
-          12.45,                              # Valor de la métrica
-          "product":"latte", "order":"online" # Etiquetas asociadas
+          'coffee_house.order_value',         # Metric name
+          12.45,                              # Metric value
+          "product":"latte", "order":"online" # Associated tags
         )
 
-        # Envía una métrica con una marca de tiempo que esté dentro de los últimos 20 minutos
+        # Submit a metric with a timestamp that is within the last 20 minutes
         Datadog::Lambda.metric(
-          'coffee_house.order_value',         # Nombre de la métrica
-          12.45,                              # Valor de la métrica
-          time: Time.now.utc,                 # Marca de tiempo
-          "product":"latte", "order":"online" # Etiquetas asociadas
+          'coffee_house.order_value',         # Metric name
+          12.45,                              # Metric value
+          time: Time.now.utc,                 # Timestamp
+          "product":"latte", "order":"online" # Associated tags
         )
     end
 end
@@ -333,9 +332,9 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
             myTags.put("order", "online");
 
         dd.metric(
-            "coffee_house.order_value", // Nombre de la métrica
-            12.45,                      // Valor de la métrica
-            myTags);                    // Etiquetas asociadas
+            "coffee_house.order_value", // Metric name
+            12.45,                      // Metric value
+            myTags);                    // Associated tags
     }
 }
 ```
@@ -343,14 +342,14 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="other" >}}
 
-Escribe una función reutilizable que genere logs de tus métricas personalizadas en el siguiente formato:
+Escriba una función reutilizable que registre sus Custom Metrics en el siguiente formato:
 
 ```json
 {
-    "m": "Nombre de la métrica",
-    "v": "Valor de la métrica",
-    "e": "Marca de tiempo Unix (segundos)",
-    "t": "Matriz de etiquetas"
+    "m": "Metric name",
+    "v": "Metric value",
+    "e": "Unix timestamp (seconds)",
+    "t": "Array of tags"
 }
 ```
 
@@ -368,21 +367,21 @@ Por ejemplo:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## [OBSOLETO] Logs de CloudWatch
+## [OBSOLETO] Registros de CloudWatch {#deprecated-cloudwatch-logs}
 
-**Este método de envío de métricas personalizadas ya no es compatible y está deshabilitado para todos los clientes nuevos. Migra a una de las soluciones recomendadas.**
+**Este método de envío de Custom Metrics ya no es compatible y está deshabilitado para todos los clientes nuevos. Migre a una de las soluciones recomendadas.**
 
-**Nota**: Si vas a migrar a una de las soluciones recomendadas, tendrás que empezar a instrumentar tus métricas personalizadas con **nombres de métrica nuevos** cuando las envíes a Datadog. No puede existir de forma simultánea el mismo nombre de métrica tanto como tipo de métrica de distribución como de no distribución.
+**Nota**: Si está migrando a una de las soluciones recomendadas, deberá comenzar a instrumentar sus Custom Metrics con **nuevos nombres de métricas** al enviarlas a Datadog. El mismo nombre de métrica no puede existir simultáneamente para métricas de distribución y métricas que no son de distribución.
 
-Esto requiere los siguientes permisos de AWS en tu [política de IAM de Datadog][10].
+Esto requiere los siguientes permisos de AWS en su [política de IAM de Datadog][10].
 
 | Permiso de AWS            | Descripción                                                 |
 | ------------------------- | ----------------------------------------------------------- |
-| `logs:DescribeLogGroups`  | Enumera los grupos de logs disponibles.                                  |
-| `logs:DescribeLogStreams` | Enumera los flujos de logs disponibles para un grupo.                     |
-| `logs:FilterLogEvents`    | Recupera eventos de log específicos de un flujo para generar métricas. |
+| `logs:DescribeLogGroups`  | Enumere los grupos de registro disponibles.                                  |
+| `logs:DescribeLogStreams` | Enumere los flujos de registro disponibles para un grupo.                     |
+| `logs:FilterLogEvents`    | Obtenga eventos de registro específicos para un flujo con el fin de generar métricas. |
 
-Para enviar métricas personalizadas a Datadog desde tus logs de Lambda, imprime una línea de log en el siguiente formato:
+Para enviar Custom Metrics a Datadog desde sus registros de Lambda, imprima una línea de registro usando el siguiente formato:
 
 ```text
 MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>
@@ -390,14 +389,14 @@ MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<T
 
 Donde:
 
-- `MONITORING` indica a la integración de Datadog que debe recopilar esta entrada de log.
+- `MONITORING` indica a la integración de Datadog que debe recopilar esta entrada de registro.
 - `<UNIX_EPOCH_TIMESTAMP>` está en segundos, no en milisegundos.
-- `<METRIC_VALUE>` DEBE ser un número (entero o flotante).
+- `<METRIC_VALUE>` DEBE ser un número (es decir, entero o flotante).
 - `<METRIC_TYPE>` es `count`, `gauge`, `histogram` o `check`.
-- `<METRIC_NAME>` identifica tu métrica de forma exclusiva y sigue la [política de nomenclatura de métricas][11].
-- `<TAG_LIST>` es opcional, se separa por comas y debe ir precedido de `#`. La etiqueta `function_name:<name_of_the_function>` se aplica automáticamente a las métricas personalizadas.
+- `<METRIC_NAME>` identifica de forma única su métrica y sigue la [política de nomenclatura de métricas][11].
+- `<TAG_LIST>` es opcional, está separado por comas y debe ir precedido por `#`. La etiqueta `function_name:<name_of_the_function>` se aplica automáticamente a las Custom Metrics.
 
-**Nota**: La suma de cada marca de tiempo se utiliza para counts y el último valor de una marca de tiempo dada se utiliza para gauges. No se recomienda imprimir una sentencia de log cada vez que aumenta una métrica, ya que esto hace que el análisis de logs tarde más. Actualiza continuamente el valor de la métrica en tu código e imprime una sentencia de log para esa métrica antes de que la función termine de ejecutarse.
+**Nota**: Para las métricas de tipo count se usa la suma de los valores de cada marca de tiempo; para las de tipo gauge se usa el último valor de una marca de tiempo determinada. No se recomienda imprimir una línea de registro cada vez que incremente una métrica, ya que esto aumenta el tiempo necesario para analizar sus registros. Actualice continuamente el valor de la métrica en su código e imprima una línea de registro para esa métrica antes de que finalice la función.
 
 [1]: /es/serverless/libraries_integrations/extension/
 [2]: /es/metrics/distributions/

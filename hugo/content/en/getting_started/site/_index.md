@@ -66,13 +66,15 @@ For example, to see the documentation for the Datadog for Government sites, sele
 
 ## Access the Datadog for Government sites
 
+To get started with Datadog for Government, email [fed-sales@datadoghq.com][4]. For information about security and compliance controls and frameworks, see the [Security page][1].
+
 ### US1-FED
 
-The Datadog for Government site (US1-FED) is Datadog's FedRAMP High Certified site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP High Certified site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure.
 
 ### US2-FED
 
-The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. US2-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For more information, email [fedramp@datadoghq.com][4].
+The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. US2-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure.
 
 ## Further Reading
 
@@ -81,4 +83,4 @@ The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. U
 [1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
-[4]: mailto:fedramp@datadoghq.com
+[4]: mailto:fed-sales@datadoghq.com

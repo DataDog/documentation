@@ -7,6 +7,9 @@ further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Observability: Jobs Monitoring'
+    - link: '/monitors/types/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Monitor'
 ---
 
 [Data Observability: Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
@@ -164,6 +167,8 @@ Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLinea
    ddTraceConfigs:
      - name: DD_DATA_JOBS_ENABLED
        value: "true"
+     - name: DD_INTEGRATIONS_ENABLED
+       value: "false"
      - name: DD_DATA_JOBS_OPENLINEAGE_ENABLED
        value: "true"
    ```
@@ -205,6 +210,8 @@ features:
           ddTraceConfigs:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
+            - name: DD_INTEGRATIONS_ENABLED
+              value: "false"   # in client mode, see the note below
         - name: spark-executor
           namespaceSelector:
             matchNames:
@@ -217,6 +224,8 @@ features:
           ddTraceConfigs:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
+            - name: DD_INTEGRATIONS_ENABLED
+              value: "false"
 ```
 
 ```shell
@@ -248,6 +257,8 @@ datadog:
           ddTraceConfigs:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
+            - name: DD_INTEGRATIONS_ENABLED
+              value: "false"   # in client mode, see the note below
         - name: spark-executor
           namespaceSelector:
             matchNames:
@@ -260,6 +271,8 @@ datadog:
           ddTraceConfigs:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
+            - name: DD_INTEGRATIONS_ENABLED
+              value: "false"
 ```
 
 ```shell
@@ -270,6 +283,10 @@ helm upgrade <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
 {{< /tabs >}}
 
 After applying the configuration, restart the targeted pods. SSI injects the init container into each pod on startup.
+
+`DD_INTEGRATIONS_ENABLED=false` keeps the Spark instrumentation and disables all other tracer integrations (for example, AWS SDK, JDBC, or HTTP clients) in the targeted pods, so only Jobs Monitoring data is sent. Remove it if you also want APM traces from these integrations.
+
+<div class="alert alert-warning">In client mode, the <code>spark-driver</code> target matches your submitter pod. If that pod also runs an application that sends its own APM traces, do not set <code>DD_INTEGRATIONS_ENABLED</code> to <code>false</code> on that target.</div>
 
 ## Validation
 

@@ -114,7 +114,14 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 ## ECS Fargate {#ecs-fargate}
 
-ECS Fargate プラットフォーム v1.4.0 を使用する場合、[Amazon ECS Exec][5] を有効にすることで、実行中の Linux コンテナへのアクセスを許可するように ECS タスクとサービスを構成できます。Amazon ECS Exec が有効化されたら、次のコマンドを実行してフレアを送信します。
+ECS Fargateの場合、Datadogは[Datadogサイトからフレアを送信すること](#send-a-flare-from-the-datadog-site)を推奨しています。Fleet Automationでは、タスクARNでタスクを特定してください。このプロセスでは、ECSタスクやサービスに変更を加える必要はありません。
+
+あるいは、Remote Configurationが利用できない場合や、他のAgentコマンドを実行する必要がある場合は、[Amazon ECS Exec][5]を使用してください。ECS Fargateプラットフォームv1.4.0。使用するには、以下を行います。
+
+1. タスク定義にECS Exec権限を追加します。
+2. サービスでECS Execを有効にします。
+3. タスクを再デプロイします。
+4. 次のコマンドを実行してフレアを送信します。
 
 ```bash
 aws ecs execute-command --cluster <CLUSTER_NAME> \
@@ -123,8 +130,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
     --interactive \
     --command "agent flare <CASE_ID>"
 ```
-
-**注:** ECS Exec は新しいタスクに対してのみ有効にできます。ECS Exec を使用するには、既存のタスクを再作成する必要があります。
 
 [1]: /ja/agent/basic_agent_usage/#gui
 [2]: /ja/agent/basic_agent_usage/windows/#agent-v6

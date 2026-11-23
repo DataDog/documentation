@@ -3,14 +3,14 @@ description: Datadog에서 게이트와 규칙을 미리 생성한 다음, 배�
 further_reading:
 - link: /deployment_gates/setup/jit
   tag: 설명서
-  text: JIT (Just-In-Time) Deployment Gates 설정하기
+  text: JIT(Just-In-Time) Deployment Gates 설정하기
 - link: /deployment_gates/explore
   tag: 설명서
   text: Deployment Gates 탐색기에 대해 알아보기
 - link: /api/latest/deployment-gates
   tag: API 참조
   text: Deployment Gates API 참조
-title: 사전 구성된 Deployment Gates를 설정
+title: 사전 구성된 Deployment Gates 설정하기
 ---
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates는 미리 보기로 제공되고 있습니다. 이 기능에 관심이 있다면 양식을 작성하여 액세스 권한을 요청하세요.
@@ -18,7 +18,7 @@ Deployment Gates는 미리 보기로 제공되고 있습니다. 이 기능에 �
 
 **사전 구성된** Deployment Gates를 사용하면 게이트와 규칙이 Datadog에 저장되며, 평가 시 서비스 및 환경을 기준으로 참조됩니다. 사전 구성된 게이트는 여러 배포에서 규칙을 공유하거나, Terraform에서 구성을 관리하거나, CI 사용자가 아닌 사용자가 Datadog UI에서 규칙을 편집하도록 하려는 경우에 적합합니다.
 
-배포 구성에서 규칙을 인라인으로 정의하려면 [JIT (Just-In-Time) Deployment Gates][5]를 참조하세요.
+배포 구성에서 규칙을 인라인으로 정의하려면 [JIT(Just-In-Time) Deployment Gates][5]를 참조하세요.
 
 ## 게이트 생성 {#create-a-gate}
 
@@ -50,19 +50,21 @@ Deployment Gates는 미리 보기로 제공되고 있습니다. 이 기능에 �
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-Monitor 규칙은 구성 가능한 기간 동안 모니터 집합의 상태를 평가합니다. 평가 기간 중 언제든지 다음 상황이 발생하면 실패합니다.
+Monitor 규칙은 구성 가능한 기간 동안 모니터 집합의 상태를 평가합니다. 검색 쿼리 또는 명시적인 모니터 목록을 통해 모니터를 선택합니다. 이러한 선택 방법은 상호 배타적입니다. 평가 기간 중 언제든지 다음 상황이 발생하면 규칙 실패로 이어질 수 있습니다.
 
-- 쿼리와 일치하는 모니터가 없는 경우
-- 쿼리와 일치하는 모니터가 50개를 초과하는 경우
-- 일치하는 모니터 중 하나라도 `ALERT` 또는 `NO_DATA` 상태인 경우
+- 구성된 선택 항목과 일치하는 모니터 그룹이 존재하지 않습니다.
+- 명시적인 모니터 ID가 존재하지 않거나 조직에서 사용할 수 없습니다.
+- 구성된 선택 항목과 일치하는 모니터가 300개를 초과합니다.
+- 일치하는 모니터 그룹 중 하나라도 `ALERT` 또는 `NO_DATA` 상태입니다.
 
 ##### 구성 설정 {#configuration-settings}
 
-- {{< ui >}}Search Query{{< /ui >}}: [Search Monitor 구문][1]을 기반으로 평가할 모니터를 찾는 데 사용되는 쿼리입니다. 다음 모니터 태그를 기준으로 필터링할 수 있습니다.
+- {{< ui >}}Monitors matching query{{< /ui >}}: [모니터 검색 구문][1]을(를) 기반으로 쿼리를 입력합니다. 다음 모니터 태그를 기준으로 필터링할 수 있습니다.
   - 모니터 정적 태그: `service:transaction-backend`
   - 모니터 쿼리 내 태그: `scope:"service:transaction-backend"`
   - [모니터 그룹][2] 내 태그: `group:"service:transaction-backend"`
-- {{< ui >}}Duration{{< /ui >}}: 일치하는 모니터를 평가할 기간(초)입니다. 기본값은 0입니다. 이 경우 모니터가 즉시 평가됩니다. 최댓값은 7,200초(2시간)입니다.
+- {{< ui >}}Specific monitors{{< /ui >}}: 개별 모니터를 선택하고, (선택 사항) 각 모니터별로 평가하려는 정확한 그룹을 선택합니다. 그룹을 선택하지 않으면 해당 모니터의 모든 그룹을 대상으로 평가가 이루어집니다.
+- {{< ui >}}Duration{{< /ui >}}: 선택한 모니터를 평가할 기간(초)입니다. 기본값은 0입니다. 이 경우 모니터가 즉시 평가됩니다. 최댓값은 7,200초(2시간)입니다.
 
 ##### 쿼리 예시 {#example-queries}
 
@@ -71,9 +73,24 @@ Monitor 규칙은 구성 가능한 기간 동안 모니터 집합의 상태를 �
 - `tag:"use_deployment_gates" team:payment`
 - `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
+##### 특정 모니터 API 예시 {#specific-monitors-api-example}
+
+```json
+"options": {
+  "monitor_ids": [
+    {"id": "12345678", "groups": []},
+    {"id": "87654321", "groups": ["service:api", "env:prod"]}
+  ],
+  "duration": 300
+}
+```
+
+각 `id`는 10진수 모니터 ID입니다. 그룹 값은 정확한 그룹 이름입니다. `query`와 `monitor_ids`를 함께 전송하지 마세요.
+
 **참고**:
-- `group`필터는 일치하는 그룹만 평가합니다.
-- 음소거된 모니터는 평가에서 자동으로 제외됩니다. 쿼리에는 항상 `muted:false`가 포함됩니다.
+- `group` 쿼리 필터와 `monitor_ids[].groups`는 일치하는 그룹만 평가합니다.
+- 명시적인 모니터 ID가 존재하지 않거나 조직에서 사용할 수 없는 경우 규칙 실패로 이어집니다. 모니터가 존재하지만 음소거 상태이거나 선택한 그룹에 데이터가 없어 제외되는 경우, 규칙은 일치하는 그룹 없음 동작을 적용합니다.
+- 음소거된 모니터는 두 가지 선택 모드에서 자동으로 제외됩니다.
 
 [1]: /ko/monitors/manage/search/
 [2]: /ko/monitors/manage/#triggered-monitors
@@ -82,14 +99,14 @@ Monitor 규칙은 구성 가능한 기간 동안 모니터 집합의 상태를 �
 이 규칙 유형은 Watchdog의 [APM Faulty Deployment Detection][1] 분석을 사용하여 배포된 버전과 동일한 서비스의 이전 버전을 비교합니다. 분석을 통해 탐지되는 사항은 다음과 같습니다.
 
 - 새로운 유형의 오류
-- 이전 버전 대비 오류율이 크게 증가한 경우
+- 이전 버전 대비 오류율의 상당한 증가
 
 이 분석은 모든 APM 계측 서비스에 대해 자동으로 수행되며, 사전 설정이 필요하지 않습니다.
 
 ##### 구성 설정 {#configuration-settings-1}
 
 - {{< ui >}}Operation Name{{< /ui >}}: 서비스의 [APM 기본 작업][3] 설정에서 자동으로 입력됩니다.
-- {{< ui >}}Duration{{< /ui >}}: 분석이 실행되는 시간(초)입니다. 분석 신뢰도를 위해 이 값은 배포 시작 후 900초(15분) 이상으로 설정하는 것이 좋습니다. 최댓값은 7,200초(2시간)입니다.
+- {{< ui >}}Duration{{< /ui >}}: 분석이 실행되는 시간(초)입니다. 최적의 분석 신뢰도를 위해 이 값은 배포 시작 후 900초(15분) 이상으로 설정하는 것이 좋습니다. 최댓값은 7,200초(2시간)입니다.
 - {{< ui >}}Allowed Resources{{< /ui >}} (필요시): 분석에 포함할 쉼표로 구분된 [APM 리소스][2]입니다. 지정된 경우 목록에 있는 리소스만 분석됩니다. {{< ui >}}Excluded Resources{{< /ui >}}와 상호 배타적입니다.
 - {{< ui >}}Excluded Resources{{< /ui >}} (선택 사항): 무시할 쉼표로 구분된 [APM 리소스][2]입니다(예: 낮은 볼륨 또는 낮은 우선순위 엔드포인트). {{< ui >}}Allowed Resources{{< /ui >}}와 상호 배타적입니다.
 
@@ -124,7 +141,7 @@ Deployment Gate에 APM Faulty Deployment Detection 규칙이 포함된 경우 �
 - 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 대기합니다.
 - 평가를 기다릴 최대 시간을 구성할 수 있습니다.
 - 오류에 대한 자동 재시도 기능이 내장되어 있습니다.
-- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `--fail-on-error`을 지원합니다.
+- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `--fail-on-error`를 지원합니다.
 
 `deployment gate` 명령은 datadog-ci 버전 v3.17.0 이상에서 사용할 수 있습니다.
 
@@ -193,8 +210,8 @@ spec:
 ```
 
 - 분석 템플릿은 Rollout 리소스(예: `service`, `env`, `version`)로부터 인수를 받을 수 있습니다. 자세한 내용은 [공식 Argo Rollouts 문서][4]를 참조하세요.
-- `ttlSecondsAfterFinished`는 완료된 작업을 5분 후에 제거합니다.
-게이트 평가가 실패할 경우 작업을 재시도하지 않아야 하므로 - `backoffLimit`은 0으로 설정됩니다.
+- `ttlSecondsAfterFinished` 완료된 작업을 5분 후에 제거합니다.
+- `backoffLimit` 은 0으로 설정됩니다. 게이트 평가가 실패할 경우 작업이 재시도되어서는 안 되기 때문입니다.
 
 분석 템플릿을 생성한 후 Argo Rollouts 전략에서 이를 참조하세요.
 
@@ -283,7 +300,7 @@ Deployment Gate에 APM Faulty Deployment Detection 규칙이 포함된 경우 �
 - 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 대기합니다.
 - 평가를 기다릴 최대 시간을 구성할 수 있습니다.
 - 오류에 대한 자동 재시도 기능이 내장되어 있습니다.
-- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `fail-on-error`을 지원합니다.
+- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `fail-on-error`를 지원합니다.
 
 **필수 환경 변수**:
 

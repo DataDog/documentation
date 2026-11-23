@@ -75,6 +75,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+    pointer-events: none;
     .grey {
         &:before,
         &:after {
@@ -422,6 +423,22 @@ h5 {
             &:before {
                 margin-top: -110px;
                 height: 110px;
+            }
+        }
+    }
+}
+
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner anchor offset
+@include media-breakpoint-down(md) {
+    .announcement body:has(.announcement-banner--hide-mobile) .main,
+    body.announcement:has(.announcement-banner--hide-mobile) .main {
+        h2,
+        h3,
+        h4,
+        h5 {
+            &:before {
+                margin-top: -80px;
+                height: 80px;
             }
         }
     }

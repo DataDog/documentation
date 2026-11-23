@@ -98,10 +98,10 @@ Span Input: {{span_input}}
 
 8. [{{< ui >}}User Prompt{{< /ui >}}] (ユーザープロンプト) フィールドで、変数を追加して、スパン、トレース、またはセッションのどの部分を評価するかを指定します。任意のスパン属性を追加できます。たとえば、スパン入力 (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` トレース全体を読み取るパスなどです。詳細なリファレンスについては、「[プロンプトテンプレート][15]」を参照してください。ユーザープロンプトを直接編集するには、プロンプトを選択してテキストを編集します。
 
-   右側のパネル (スパンスコープでは [{{< ui >}}Filtered Spans{{< /ui >}}] (フィルターされたスパン)、トレーススコープでは [{{< ui >}}Filtered Traces{{< /ui >}}] (フィルターされたトレース)、セッションスコープでは [{{< ui >}}Filtered Sessions{{< /ui >}}] (フィルターされたセッション) を使用して、スパンデータを変数として追加することもできます。
+   右側のパネル (スパンスコープでは [{{< ui >}}Filtered Spans{{< /ui >}}] (フィルターされたスパン)、トレーススコープでは [{{< ui >}}Filtered Traces{{< /ui >}}] (フィルターされたトレース)、セッションスコープでは [{{< ui >}}Filtered Sessions{{< /ui >}}] (フィルターされたセッション)) を使用して、スパンデータを変数として追加することもできます。
    1. アカウントとアプリケーションを選択して、スパン、トレース、またはセッションを右側に表示します。
    2. 右側のスパンのいずれかを選択して、その JSON を表示します。
-   3. [{{< ui >}}+{{< /ui >}}] を選択して、JSON をユーザープロンプトに追加します。
+   3. [{{< ui >}}\+{{< /ui >}}] を選択して、JSON をユーザープロンプトに追加します。
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="カスタム評価設定の右ペインにある JSON ビューのメニューの内容。メッセージに変数を追加するオプションが表示されています。" style="width:40%;" >}}
 
@@ -111,9 +111,9 @@ OpenAI、Azure OpenAI、Vertex AI、Anthropic、または Amazon Bedrock モデ�
 
 Anthropic または Amazon Bedrock モデルの場合は、代わりに[キーワード検索出力](#keyword-search-output)を設定できます。
 
-AI Gateway では、[構造化出力](#structured-output)と[キーワード検索出力](#keyword-search-output)の両方がサポートされています。Datadog では、モデルでサポートされる場合は構造化出力を使用し、そうでない場合は代わりにキーワード検索出力を使用することを推奨しています。
+カスタムプロバイダーでは、[構造化出力](#structured-output)と[キーワード検索出力](#keyword-search-output)の両方がサポートされています。Datadog では、モデルでサポートされる場合は構造化出力を使用し、そうでない場合は代わりにキーワード検索出力を使用することを推奨しています。
 
-{{% collapse-content title="構造化出力 (OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、AI Gateway、Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="構造化出力 (OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、カスタムプロバイダー、Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. 評価出力タイプを選択します。
 
    - [{{< ui >}}Boolean{{< /ui >}}]: true または false の結果 (例: 「モデルは指示に従いましたか?」)
@@ -359,7 +359,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="後処理 (OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、AI Gateway、Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="後処理 (OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、カスタムプロバイダー、Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
 1. {{< ui >}}JSON{{< /ui >}} 出力タイプを選択します。
 
 2. 評価器の評価、値、およびリーズニングを指定するための JavaScript 関数を指定します。後処理を行うと、Boolean、Score、または Categorical 構造化出力のみを使用した場合よりも複雑な評価を実施できます。
@@ -464,7 +464,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="キーワード検索出力 (Anthropic、Amazon Bedrock、AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="キーワード検索出力 (Anthropic、Amazon Bedrock、カスタムプロバイダー)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. {{< ui >}}Boolean{{< /ui >}} 出力タイプを選択します。
    <div class="alert alert-info">キーワード検索出力では、<strong>Boolean</strong> 出力タイプのみが使用可能です。</div>
 

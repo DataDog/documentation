@@ -1,0 +1,419 @@
+entries:
+  - change_type: added
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40553
+    operations:
+      - UpdateFindingsSeverity
+    title: Add endpoint to override the severity of security findings
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40553
+    operations:
+      - UpdateFindingsAssignee
+    title: Add endpoint to override the severity of security findings
+  - change_type: modified
+    date: '2026-09-29'
+    link: https://github.com/DataDog/documentation/pull/40282
+    operations:
+      - CreateCases
+      - CreateJiraIssues
+      - CreateLinearIssues
+      - CreateServiceNowTickets
+    title: Rename Case Management API documentation to Work Management
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40745
+    operations:
+      - CancelSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - DeleteSecurityMonitoringBatchMigration
+      - DeleteSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrations
+      - PublishSecurityMonitoringBatchMigration
+      - StartSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigrationResource
+    title: Add Cloud SIEM batch migration endpoints as unstable
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - CreateSecurityMonitoringIntegrationConfig
+      - GetContentPacksStates
+      - UpdateSecurityMonitoringIntegrationConfig
+      - ValidateSecurityMonitoringIntegrationCredentials
+    title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-10-09'
+    link: https://github.com/DataDog/documentation/pull/40506
+    operations:
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - CreateSecurityMonitoringRule
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - GetSuppressionsAffectingFutureRule
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+      - ValidateSecurityMonitoringRule
+    title: Add SQL rule fields to security monitoring rule queries
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41026
+    operations:
+      - CreateStaticAnalysisServerAnalysis
+    title: Fix static analysis analyze request and custom rule response spec 
+      drift
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41014
+    operations:
+      - GetHistoricalJob
+      - ListHistoricalJobs
+    title: Add failure reason to historical job responses
+  - change_type: added
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41112
+    operations:
+      - GetSecurityMonitoringRuleProposal
+      - StartSecurityMonitoringRuleProposal
+    title: Add Cloud SIEM rule proposal endpoints as unstable
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41112
+    operations:
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrationResources
+      - UpdateSecurityMonitoringBatchMigrationResource
+    title: Add Cloud SIEM rule proposal endpoints as unstable
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41157
+    operations:
+      - GetRuleVersionHistory
+      - RestoreSecurityMonitoringRule
+    title: Make rule version history endpoints GA
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - AttachJiraIssue
+      - CreateJiraIssues
+    title: Add on-call GET pages endpoints
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41521
+    operations:
+      - AttachCase
+      - AttachJiraIssue
+      - AttachLinearIssue
+      - AttachServiceNowTicket
+      - CreateCases
+      - CreateJiraIssues
+      - CreateLinearIssues
+      - CreateServiceNowTickets
+      - DetachCase
+      - MuteSecurityFindings
+      - UpdateFindingsAssignee
+      - UpdateFindingsSeverity
+    title: Generate pup commands for security findings triage endpoints
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - ActivateContentPack
+      - BatchGetSecurityMonitoringDatasetDependencies
+      - BulkEditSecurityMonitoringSignals
+      - BulkEditSecurityMonitoringSignalsAssignee
+      - BulkEditSecurityMonitoringSignalsState
+      - CancelSecurityMonitoringBatchMigration
+      - CreateSecurityFindingsAutomationDueDateRule
+      - CreateSecurityFindingsAutomationInboxRule
+      - CreateSecurityFindingsAutomationMuteRule
+      - CreateSecurityFindingsAutomationSeverityModifierRule
+      - CreateSecurityFindingsAutomationTicketCreationRule
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - CreateSecurityMonitoringDataset
+      - CreateStaticAnalysisAst
+      - CreateStaticAnalysisServerAnalysis
+      - DeactivateContentPack
+      - DeleteSecurityFindingsAutomationSeverityModifierRule
+      - DeleteSecurityMonitoringBatchMigration
+      - DeleteSecurityMonitoringBatchMigrationResources
+      - DeleteSecurityMonitoringDataset
+      - EditSecurityMonitoringSignal
+      - GetContentPacksStates
+      - GetFinding
+      - GetSBOM
+      - GetSecurityFindingsAutomationSeverityModifierRule
+      - GetSecurityMonitoringDataset
+      - GetSecurityMonitoringDatasetByVersion
+      - GetSecurityMonitoringDatasetVersionHistory
+      - GetSecurityMonitoringRuleProposal
+      - GetStaticAnalysisDefaultRulesets
+      - GetStaticAnalysisNodeTypes
+      - GetStaticAnalysisRuleset
+      - GetStaticAnalysisTreeSitterWasm
+      - ListAssetsSBOMs
+      - ListFindings
+      - ListScannedAssetsMetadata
+      - ListSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrations
+      - ListSecurityMonitoringDatasets
+      - ListStaticAnalysisCodegenRulesets
+      - ListVulnerabilities
+      - ListVulnerableAssets
+      - MuteSecurityFindings
+      - PatchSignalNotificationRule
+      - PatchVulnerabilityNotificationRule
+      - PublishSecurityMonitoringBatchMigration
+      - ReorderSecurityFindingsAutomationDueDateRules
+      - ReorderSecurityFindingsAutomationInboxRules
+      - ReorderSecurityFindingsAutomationMuteRules
+      - ReorderSecurityFindingsAutomationSeverityModifierRules
+      - ReorderSecurityFindingsAutomationTicketCreationRules
+      - SendSecurityMonitoringNotificationPreview
+      - StartSecurityMonitoringBatchMigration
+      - StartSecurityMonitoringRuleProposal
+      - UpdateFindingsSeverity
+      - UpdateSecurityFindingsAutomationDueDateRule
+      - UpdateSecurityFindingsAutomationInboxRule
+      - UpdateSecurityFindingsAutomationMuteRule
+      - UpdateSecurityFindingsAutomationSeverityModifierRule
+      - UpdateSecurityFindingsAutomationTicketCreationRule
+      - UpdateSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigrationResource
+      - UpdateSecurityMonitoringDataset
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41681
+    operations:
+      - CreateSecurityMonitoringRule
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+    title: Add workload_hardening to security monitoring rule types
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41769
+    operations:
+      - GetIndicatorOfCompromise
+      - ListIndicatorsOfCompromise
+    title: Document mute fields in List indicators of compromise response
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - ActivateContentPack
+      - ActivateIntegration
+      - AddSecurityMonitoringSignalToIncident
+      - AttachCase
+      - AttachJiraIssue
+      - AttachLinearIssue
+      - AttachServiceNowTicket
+      - BatchGetSecurityMonitoringDatasetDependencies
+      - BulkConvertExistingSecurityMonitoringRules
+      - BulkCreateSampleLogGenerationSubscriptions
+      - BulkDeleteSecurityMonitoringRules
+      - BulkEditSecurityMonitoringSignals
+      - BulkEditSecurityMonitoringSignalsAssignee
+      - BulkEditSecurityMonitoringSignalsState
+      - BulkExportSecurityMonitoringRules
+      - BulkExportSecurityMonitoringTerraformResources
+      - CancelHistoricalJob
+      - CancelSecurityMonitoringBatchMigration
+      - ConvertExistingSecurityMonitoringRule
+      - ConvertJobResultToSignal
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - ConvertSecurityMonitoringTerraformResource
+      - CreateCases
+      - CreateCustomFramework
+      - CreateIoCTriageState
+      - CreateJiraIssues
+      - CreateLinearIssues
+      - CreateSampleLogGenerationSubscription
+      - CreateSecurityFilter
+      - CreateSecurityFindingsAutomationDueDateRule
+      - CreateSecurityFindingsAutomationInboxRule
+      - CreateSecurityFindingsAutomationMuteRule
+      - CreateSecurityFindingsAutomationSeverityModifierRule
+      - CreateSecurityFindingsAutomationTicketCreationRule
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - CreateSecurityMonitoringCriticalAsset
+      - CreateSecurityMonitoringDataset
+      - CreateSecurityMonitoringIntegrationConfig
+      - CreateSecurityMonitoringRule
+      - CreateSecurityMonitoringSuppression
+      - CreateServiceNowTickets
+      - CreateSignalNotificationRule
+      - CreateStaticAnalysisAst
+      - CreateStaticAnalysisServerAnalysis
+      - CreateVulnerabilityNotificationRule
+      - DeactivateContentPack
+      - DeactivateIntegration
+      - DeleteCustomFramework
+      - DeleteHistoricalJob
+      - DeleteSampleLogGenerationSubscription
+      - DeleteSecurityFilter
+      - DeleteSecurityFindingsAutomationDueDateRule
+      - DeleteSecurityFindingsAutomationInboxRule
+      - DeleteSecurityFindingsAutomationMuteRule
+      - DeleteSecurityFindingsAutomationSeverityModifierRule
+      - DeleteSecurityFindingsAutomationTicketCreationRule
+      - DeleteSecurityMonitoringBatchMigration
+      - DeleteSecurityMonitoringBatchMigrationResources
+      - DeleteSecurityMonitoringCriticalAsset
+      - DeleteSecurityMonitoringDataset
+      - DeleteSecurityMonitoringIntegrationConfig
+      - DeleteSecurityMonitoringRule
+      - DeleteSecurityMonitoringSuppression
+      - DeleteSignalNotificationRule
+      - DeleteVulnerabilityNotificationRule
+      - DetachCase
+      - DisableSecurityFindingsAutomationDefaultInboxRule
+      - EditSecurityMonitoringSignal
+      - EditSecurityMonitoringSignalAssignee
+      - EditSecurityMonitoringSignalIncidents
+      - EditSecurityMonitoringSignalState
+      - EnableSecurityFindingsAutomationDefaultInboxRule
+      - ExportSecurityMonitoringTerraformResource
+      - GetContentPacksStates
+      - GetCriticalAssetsAffectingRule
+      - GetCustomFramework
+      - GetEntityContext
+      - GetEntityContextRecentlyUpdated
+      - GetEntraIdAzureAppRegistrations
+      - GetHistoricalJob
+      - GetIndicatorOfCompromise
+      - GetInvestigationLogQueriesMatchingSignal
+      - GetMatchingSignals
+      - GetResourceEvaluationFilters
+      - GetRuleVersionHistory
+      - GetSBOM
+      - GetSecretsRules
+      - GetSecurityFilter
+      - GetSecurityFindingsAutomationDefaultInboxRule
+      - GetSecurityFindingsAutomationDueDateRule
+      - GetSecurityFindingsAutomationInboxRule
+      - GetSecurityFindingsAutomationMuteRule
+      - GetSecurityFindingsAutomationSeverityModifierRule
+      - GetSecurityFindingsAutomationTicketCreationRule
+      - GetSecurityMonitoringCriticalAsset
+      - GetSecurityMonitoringDataset
+      - GetSecurityMonitoringDatasetByVersion
+      - GetSecurityMonitoringDatasetVersionHistory
+      - GetSecurityMonitoringHistsignal
+      - GetSecurityMonitoringHistsignalsByJobId
+      - GetSecurityMonitoringIntegrationConfig
+      - GetSecurityMonitoringRule
+      - GetSecurityMonitoringRuleProposal
+      - GetSecurityMonitoringSignal
+      - GetSecurityMonitoringSuppression
+      - GetSignalEntities
+      - GetSignalNotificationRule
+      - GetSignalNotificationRules
+      - GetSingleEntityContext
+      - GetStaticAnalysisDefaultRulesets
+      - GetStaticAnalysisNodeTypes
+      - GetStaticAnalysisRuleset
+      - GetStaticAnalysisTreeSitterWasm
+      - GetSuggestedActionsMatchingSignal
+      - GetSuppressionVersionHistory
+      - GetSuppressionsAffectingFutureRule
+      - GetSuppressionsAffectingRule
+      - GetVulnerabilityNotificationRule
+      - GetVulnerabilityNotificationRules
+      - ImportSecurityVulnerabilities
+      - ListAssetsSBOMs
+      - ListHistoricalJobs
+      - ListIndicatorsOfCompromise
+      - ListMultipleRulesets
+      - ListSampleLogGenerationSubscriptions
+      - ListScannedAssetsMetadata
+      - ListSecurityFilterVersions
+      - ListSecurityFilters
+      - ListSecurityFindings
+      - ListSecurityFindingsAutomationDefaultInboxRules
+      - ListSecurityFindingsAutomationDueDateRules
+      - ListSecurityFindingsAutomationInboxRules
+      - ListSecurityFindingsAutomationMuteRules
+      - ListSecurityFindingsAutomationSeverityModifierRules
+      - ListSecurityFindingsAutomationTicketCreationRules
+      - ListSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrations
+      - ListSecurityMonitoringCriticalAssets
+      - ListSecurityMonitoringDatasets
+      - ListSecurityMonitoringHistsignals
+      - ListSecurityMonitoringIntegrationConfigs
+      - ListSecurityMonitoringRules
+      - ListSecurityMonitoringSignals
+      - ListSecurityMonitoringSuppressions
+      - ListStaticAnalysisCodegenRulesets
+      - ListVulnerabilities
+      - ListVulnerableAssets
+      - MuteSecurityFindings
+      - PatchSignalNotificationRule
+      - PatchVulnerabilityNotificationRule
+      - PublishSecurityMonitoringBatchMigration
+      - ReorderSecurityFindingsAutomationDueDateRules
+      - ReorderSecurityFindingsAutomationInboxRules
+      - ReorderSecurityFindingsAutomationMuteRules
+      - ReorderSecurityFindingsAutomationSeverityModifierRules
+      - ReorderSecurityFindingsAutomationTicketCreationRules
+      - RestoreSecurityMonitoringRule
+      - RunHistoricalJob
+      - SearchSecurityFindings
+      - SearchSecurityMonitoringHistsignals
+      - SearchSecurityMonitoringSignals
+      - SendSecurityMonitoringNotificationPreview
+      - StartSecurityMonitoringBatchMigration
+      - StartSecurityMonitoringRuleProposal
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateCustomFramework
+      - UpdateFindingsAssignee
+      - UpdateFindingsSeverity
+      - UpdateResourceEvaluationFilters
+      - UpdateSecurityFilter
+      - UpdateSecurityFindingsAutomationDueDateRule
+      - UpdateSecurityFindingsAutomationInboxRule
+      - UpdateSecurityFindingsAutomationMuteRule
+      - UpdateSecurityFindingsAutomationSeverityModifierRule
+      - UpdateSecurityFindingsAutomationTicketCreationRule
+      - UpdateSecurityMonitoringBatchMigration
+      - UpdateSecurityMonitoringBatchMigrationResource
+      - UpdateSecurityMonitoringCriticalAsset
+      - UpdateSecurityMonitoringDataset
+      - UpdateSecurityMonitoringIntegrationConfig
+      - UpdateSecurityMonitoringRule
+      - UpdateSecurityMonitoringSuppression
+      - ValidateSecurityMonitoringIntegrationConfig
+      - ValidateSecurityMonitoringIntegrationCredentials
+      - ValidateSecurityMonitoringRule
+      - ValidateSecurityMonitoringSuppression
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: added
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/42017
+    operations:
+      - SearchRemediationGroups
+    title: Add the search remediation groups endpoint as unstable
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42092
+    operations:
+      - EditSecurityMonitoringSignal
+      - EditSecurityMonitoringSignalAssignee
+      - EditSecurityMonitoringSignalIncidents
+      - EditSecurityMonitoringSignalState
+    title: Add hasCase and cases to security signal triage update response

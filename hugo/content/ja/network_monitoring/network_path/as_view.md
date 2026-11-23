@@ -21,9 +21,11 @@ title: 自律システムビュー
 
 BGP ルーティングの問題やプロバイダー特有の問題は、直接の制御外にあるため、診断が困難です。AS ビューは、これらの見えない層を可視化し、「これはピアリングの問題ですか」または「トラフィックは別のトランジットプロバイダーに移動しましたか」のような質問に答えるためのデータを、手動のルート追跡や BGP テーブルの解析なしで提供します。
 
-始めるには、Network Path エクスプローラーに移動し、[**[Autonomous Systems (AS)]**][1] (自律システム (AS)) をクリックしてください。
+始めるには、Network Path エクスプローラーに移動し、[{{< ui >}}Autonomous Systems (AS){{< /ui >}}][1] をクリックしてください。
 
-## ダッシュボード {#dashboard}
+また、Datadog MCP Server の [`list_autonomous_system_statuses`][4] ツールと [`get_autonomous_system_status`][3] ツールを使用して、AI agent から自律システムの健全性をチェックすることもできます。これらのツールは、各 AS のレイテンシー、パケットロス、および可視性を 7 日間のベースラインと比較します。
+
+## Dashboard {#dashboard}
 
 ダッシュボードは、いくつかの視点からパフォーマンスデータを表示します。
 
@@ -69,15 +71,15 @@ Issues Detected (検出された問題)
 
 ## 自律システムの詳細{#autonomous-system-details}
 
-リスト内の自律システムをクリックすると、その詳細が開きます。詳細ビューには、[**Traffic**] (トラフィック) タブ、[**Neighbors**] (ネイバー) タブ、パスリストがあります。
+リスト内の自律システムをクリックすると、その詳細が開きます。詳細ビューには、{{< ui >}}Traffic{{< /ui >}} タブ、{{< ui >}}Neighbors{{< /ui >}} タブ、およびパスリストが含まれています。
 
 ### トラフィック{#traffic}
 
-[**Traffic**] タブには、選択した AS を通じて**上流**ソースから**下流**の送信先に流れるトラフィックの関係図が表示されます。トラフィックノードにカーソルを合わせると、その集約パスと発生回数が表示され、任意の AS をクリックすると[パスリスト](#path-list)内のパスにフィルタリングされます。
+{{< ui >}}Traffic{{< /ui >}} タブには、選択した AS を通じて {{< ui >}}Upstream{{< /ui >}} ソースから {{< ui >}}Downstream{{< /ui >}} の送信先に流れるトラフィックの関係図が表示されます。トラフィックノードにカーソルを合わせると、その集約パスと発生回数が表示され、任意の AS をクリックすると[パスリスト](#path-list)内のパスにフィルタリングされます。
 
 ### ネイバー{#neighbors}
 
-[**Neighbors**] タブには、選択した AS に隣接する上流および下流の自律システムの完全なビジュアライゼーションが表示されます。グラフ内の任意の AS をクリックすると、[パスリスト](#path-list)内のパスにフィルタリングされます。
+{{< ui >}}Neighbors{{< /ui >}} タブには、選択した AS に隣接する上流および下流の自律システムの完全なビジュアライゼーションが表示されます。グラフ内の任意の AS をクリックすると、[パスリスト](#path-list)内のパスにフィルタリングされます。
 
 ### パスリスト{#path-list}
 
@@ -104,3 +106,5 @@ Avg RTT (平均 RTT)
 
 [1]: https://app.datadoghq.com/network-path/autonomous-systems
 [2]: /ja/network_monitoring/network_path/path_view/
+[3]: /ja/mcp_server/tools/#get_autonomous_system_status
+[4]: /ja/mcp_server/tools/#list_autonomous_system_statuses

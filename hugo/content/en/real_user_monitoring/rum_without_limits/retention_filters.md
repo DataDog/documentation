@@ -2,9 +2,6 @@
 title: Retain Data with Retention Filters
 description: Learn how retention filters work in RUM without Limits.
 further_reading:
-  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
-    tag: Guide
-    text: Retention Filter Best Practices
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
     text: RUM without Limits
@@ -14,12 +11,15 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
     tag: Documentation
     text: Control Costs with Retention Quotas
-  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-    tag: "Blog"
-    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
+    tag: Guide
+    text: Retention Filter Best Practices
   - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
     tag: 'Learning Center'
     text: 'Interactive Lab: RUM Retention Filters'
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
 ---
 
 {{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
@@ -86,11 +86,7 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-exclusion-filters/" btn_hidden="false" header="Join the Preview!">}}
-Exclusion filters are in Preview.
-{{< /callout >}}
-
-{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters-excluded-errors.png" alt="The Exclusion Filters group expanded, showing the predefined Excluded errors from Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
 
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
 
@@ -103,9 +99,9 @@ An exclusion filter is made of an event type and a query, like retention filters
 - An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes or tags shared by every event, such as `@device.type` or `@geo.country`.
 - An exclusion filter has no retention rate. It either matches an event or it does not, so the **order of exclusion filters does not matter**.
 
-### Excluding errors ignored in Error Tracking
+### Reusing Error Tracking exclusions
 
-A predefined exclusion filter at the top of the list targets the errors you [ignored or excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
+A predefined exclusion filter at the top of the list targets the errors you [excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
 
 You can enable or disable this filter, but you cannot edit it or delete it.
 
@@ -221,7 +217,7 @@ To **find sessions with indexed APM traces** in the RUM Explorer, query `@sessio
 
 Consider a configuration where you set up a unique RUM retention filter configured as follows:
 
-{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:80%" >}}
 
 If you have configured the SDK to sample 40% of traces, then the outcome is the following:
 
@@ -235,9 +231,38 @@ Cross-product retention filters are also available on the <a href="/real_user_mo
 
 <div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
 
+## Suggested retention filters
+
+Datadog provides suggested retention filters for each RUM application. The suggestions are based on the application's platform, enabled capabilities, and ingested data. The following categories are covered:
+
+- Dynamic session sampling
+- Sessions with errors
+- Sessions with slow performance
+- Sessions with user activity
+- Sessions with added-on products, such as [Session Replay][11] and [RUM Frontend Profiling][12]
+- Sessions from specific versions
+
+{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Suggested Filters side panel, with suggested retention filters grouped by category. Each suggestion has a View Filter button if it is already configured, or an Add Filter button if it is not." style="width:80%" >}}
+
+For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days and refreshes them every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
+
+Datadog marks a suggestion as configured when a matching retention filter exists, including filters that existed before you opened the panel, so you can see which suggestion your configuration already covers.
+
+To review and apply suggestions:
+
+1. Go to the application's {{< ui >}}Retention Filters{{< /ui >}} page.
+1. Click {{< ui >}}View All Recommendations{{< /ui >}}.
+1. Click {{< ui >}}Add Filter{{< /ui >}} next to a suggestion.
+1. Review and edit the pre-filled query and retention rate.
+1. Save the filter.
+
+Datadog adds the filter to the bottom of the custom retention filters list. Filters are evaluated from top to bottom, so filters at the top of the list evaluate a session before filters at the bottom. If a filter higher in the list matches the session's events first, the new filter does not apply to them. To give the new filter priority, [move it higher in the list](#reorder-filters). You can also dismiss suggestions that do not apply and revisit them later.
+
+Creating a filter from a suggestion requires the `RUM Retention Filters Write` permission.
+
 ## Best practices
 
-See [Retention Filter Best Practices][5].
+For suggested filter queries, retention rates, and use cases, see [Retention Filter Best Practices][5].
 
 ## API
 
@@ -261,3 +286,5 @@ Analyze performance with [metrics][8].
 [8]: /real_user_monitoring/rum_without_limits/metrics
 [9]: /real_user_monitoring/rum_without_limits/retention_quotas
 [10]: /error_tracking/issue_states/#excluding-an-issue
+[11]: /session_replay/
+[12]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser

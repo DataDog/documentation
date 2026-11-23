@@ -12,6 +12,9 @@ further_reading:
   tag: Blog
   text: Acheminer les données OTel des applications IA vers ClickHouse et Datadog
     à l'aide d'Observability Pipelines
+- link: https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/
+  tag: Architecture Center
+  text: Optimisation du Sensitive Data Scanner pour les Observability Pipelines
 products:
 - icon: logs
   name: Logs
@@ -44,7 +47,8 @@ Pour configurer le processeur :
 1. Dans le menu déroulant, sélectionnez la règle de bibliothèque que vous souhaitez utiliser.
 1. Les mots-clés recommandés sont automatiquement ajoutés en fonction de la règle de bibliothèque sélectionnée. Une fois la règle d'analyse ajoutée, vous pouvez [ajouter des mots-clés supplémentaires ou supprimer des mots-clés recommandés](#add-additional-keywords).
 1. Dans la section {{< ui >}}Define rule target and conditions{{< /ui >}}, sélectionnez si vous souhaitez analyser {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}} ou {{< ui >}}Exclude Attributes{{< /ui >}} dans le menu déroulant.
-    - Si vous analysez l'événement entier, vous pouvez éventuellement exclure des attributs spécifiques de l'analyse. Utilisez la [notation de chemin](#path-notation-example) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés contenant des données imbriquées, toutes les données imbriquées sont exclues.
+    - Si vous analysez l'événement entier, vous pouvez éventuellement exclure des attributs spécifiques afin que les actions de correspondance ne leur soient pas appliquées. Utilisez la [notation de chemin](#path-notation-example) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés contenant des données imbriquées, toutes les données imbriquées sont exclues.
+        - Si une valeur détectée dans un attribut exclu apparaît également dans un attribut analysé du même événement, le processeur traite la correspondance comme un faux positif et l'ignore. Pour continuer à rechercher cette valeur dans d'autres attributs, sélectionnez plutôt {{< ui >}}Specific Attributes{{< /ui >}} et listez uniquement les attributs que vous souhaitez analyser.
     - Si vous analysez des attributs spécifiques, indiquez les attributs que vous souhaitez analyser. Utilisez la [notation de chemin](#path-notation-example) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés avec des données imbriquées, toutes les données imbriquées sont analysées.
 1. Pour {{< ui >}}Define actions on match{{< /ui >}}, sélectionnez l'action que vous souhaitez effectuer pour les informations correspondantes. **Remarque** : La rédaction, la rédaction partielle et le hachage sont tous des actions irréversibles.
     - {{< ui >}}Redact{{< /ui >}} : Remplace toutes les valeurs correspondantes par le texte que vous spécifiez dans le champ {{< ui >}}Replacement text{{< /ui >}}.
@@ -84,7 +88,8 @@ Après avoir ajouté des règles d'analyse depuis la bibliothèque, vous pouvez 
 1. Saisissez des exemples de données dans le champ {{< ui >}}Add sample data{{< /ui >}} pour vérifier que votre motif regex est valide.
 1. Pour {{< ui >}}Create keyword dictionary{{< /ui >}}, ajoutez des mots-clés afin d'affiner la précision de la détection lors de la correspondance avec des conditions regex. Par exemple, si vous recherchez un numéro de carte de crédit Visa à seize chiffres, vous pouvez ajouter des mots-clés tels que `visa`, `credit` et `card`. Vous pouvez également exiger que ces mots-clés se trouvent à un nombre spécifié de caractères d'une correspondance. Par défaut, les mots-clés doivent se trouver dans les 30 caractères précédant une valeur correspondante.
 1. Dans la section {{< ui >}}Define rule target and conditions{{< /ui >}}, sélectionnez si vous souhaitez analyser {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}} ou {{< ui >}}Exclude Attributes{{< /ui >}} dans le menu déroulant.
-    - Si vous analysez l'événement entier, vous pouvez éventuellement exclure des attributs spécifiques de l'analyse. Utilisez la [notation de chemin](#path-notation-example) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés contenant des données imbriquées, toutes les données imbriquées sont exclues.
+    - Si vous analysez l'événement entier, vous pouvez éventuellement exclure des attributs spécifiques afin que les actions de correspondance ne leur soient pas appliquées. Utilisez la [notation de chemin](#path-notation-example) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés contenant des données imbriquées, toutes les données imbriquées sont exclues.
+        - Si une valeur détectée dans un attribut exclu apparaît également dans un attribut analysé du même événement, le processeur traite la correspondance comme un faux positif et l'ignore. Pour continuer à rechercher cette valeur dans d'autres attributs, sélectionnez plutôt {{< ui >}}Specific Attributes{{< /ui >}} et listez uniquement les attributs que vous souhaitez analyser.
     - Si vous analysez des attributs spécifiques, indiquez les attributs que vous souhaitez analyser. Utilisez la [notation de chemin](#path-notation-example-custom) (`outer_key.inner_key`) pour accéder aux clés imbriquées. Pour les attributs spécifiés avec des données imbriquées, toutes les données imbriquées sont analysées.
 1. Pour {{< ui >}}Define actions on match{{< /ui >}}, sélectionnez l'action que vous souhaitez effectuer pour les informations correspondantes. **Remarque** : La rédaction, la rédaction partielle et le hachage sont tous des actions irréversibles.
     - {{< ui >}}Redact{{< /ui >}} : Remplace toutes les valeurs correspondantes par le texte que vous spécifiez dans le champ {{< ui >}}Replacement text{{< /ui >}}.

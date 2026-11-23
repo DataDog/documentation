@@ -2,15 +2,18 @@
 title: Query BYOC Logs with the Datadog MCP Server
 description: Learn how to query logs stored in BYOC Logs indexes using the Datadog MCP server
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
-  tag: "Blog"
-  text: "Introducing the Datadog MCP server"
 - link: "/ide_plugins/vscode/?tab=cursor#installation"
   tag: "Documentation"
   text: "Datadog Extension for VS Code & Cursor"
 - link: "/byoc-logs/operate/search_logs/"
   tag: "Documentation"
   text: "Search Logs in BYOC Logs"
+- link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
+  tag: "Blog"
+  text: "Introducing the Datadog MCP server"
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 aliases:
   - /cloudprem/guides/query_logs_with_mcp/
 ---
@@ -54,7 +57,7 @@ To find your BYOC Logs index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
 2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
-3. Your BYOC Logs indexes are listed there, in the format `byoc--<cluster_name>--<index_name>`.
+3. Your BYOC Logs indexes are listed there, in the format `byoc--<cluster_id>--<index_name>`.
 
 You can also find your index names in the [BYOC Logs console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
 
@@ -106,7 +109,7 @@ When using AI-powered tools with `search_datadog_logs`, you can ask questions in
 
 ## Important notes
 
-- The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_name>--<index_name>`).
+- The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_id>--<index_name>`).
 - When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
 - BYOC Logs data is queryable in real-time as soon as it is indexed.
 - Query syntax follows standard [Datadog log search syntax][4].

@@ -33,7 +33,7 @@ Events search uses the [logs search syntax][1]. Like logs search, events search 
 : Show events from the `kafka` service.
 
 `status:error`
-: Show events with an `error` status (supports: `error`, `warning`, `info`, `ok`).
+: Show events with an `error` status (supports: `emergency`, `alert`, `critical`, `error`, `warn`, `notice`, `info`, `debug`, `ok`).
 
 `availability-zone:us-east-1a`
 : Show events in the `us-east-1a` AWS availability zone (AZ).

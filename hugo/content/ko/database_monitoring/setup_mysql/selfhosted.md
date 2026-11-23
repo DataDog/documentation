@@ -2,79 +2,80 @@
 description: 자체 호스팅 MySQL에 대한 데이터베이스 모니터링을 설치하고 설정합니다.
 further_reading:
 - link: /integrations/mysql/
-  tag: 설명서
+  tag: 문서
   text: 기본 MySQL 통합
 title: 자체 호스팅 MySQL에 대한 데이터베이스 모니터링 설정
 ---
+데이터베이스 모니터링은 InnoDB 스토리지 엔진에 대한 쿼리 메트릭, 쿼리 샘플, 실행 계획, 연결 데이터, 시스템 메트릭, 텔레메트리를 노출하여 MySQL에 대한 높은 가시성을 제공합니다.
 
-데이터베이스 모니터링은 InnoDB 스토리지 엔진에 대한 쿼리 메트릭, 쿼리 샘플, 설명 계획, 연결 데이터, 시스템 메트릭, 텔레메트리를 표시하여 MySQL 데이터베이스에 대해 구체적인 가시성을 제공합니다.
+**참고**: MariaDB를 사용하는 경우 대신 [MariaDB 설정][15]를 참조하세요.
 
-Agent는 읽기 전용 사용자로 로그인하여 데이터베이스에서 직접 텔레메트리를 수집합니다. MySQL 데이터베이스로데이터베이스 모니터링을 활성화하려면 다음대로 설정하세요.
+Agent는 읽기 전용 사용자로 로그인하여 데이터베이스에서 직접 텔레메트리를 수집합니다. MySQL 데이터베이스에서 데이터베이스 모니터링을 활성화하려면 다음 설정을 수행하세요.
 
-1. [데이터베이스 파라미터 설정](#configure-mysql-settings)
-1. [에이전트에 데이터베이스 접근 권한 부여](#grant-the-agent-access)
+1. [데이터베이스 파라미터 구성](#configure-mysql-settings)
+1. [Agent에 데이터베이스 액세스 권한 부여](#grant-the-agent-access)
 1. [Agent 설치](#install-the-agent)
 
-## 시작 전 참고 사항
+## 시작 전 참고 사항 {#before-you-begin}
 
 지원되는 MySQL 버전
-: 5.6, 5.7, 또는 8.0+
+: 5.6, 5.7, 8.0+ 또는 9 (MySQL 9는 Agent 7.84 이상 필요)
 
 지원되는 MariaDB 버전
-: 10.5, 10.6, 10.11 또는 11.1 <br/><br/>
-MariaDB용 데이터베이스 모니터링 는 [알려진 제한 사항][13]과 함께 지원됩니다.
+: 10.5, 10.6, 10.11, 11.1, 12 또는 13 (MariaDB 12 및 13은 Agent 7.84 이상 필요) <br/><br/>
+MariaDB용 데이터베이스 모니터링은 [알려진 제한 사항][13]과 함께 지원됩니다.
 
-지원되는 에이전트 버전
-: 7.36.1+
+지원되는 Agent 버전
+: 7.36.1 이상
 
-성능에 미치는 영향
-: 데이터베이스 모니터링에 대한 기본 에이전트 설정은 변경하지 않는 것이 좋으나 수집 간격 및 쿼리 샘플링 속도와 같은 설정은 필요에 맞게 조정할 수 있습니다. 대부분의 워크로드에서 에이전트는 데이터베이스에서 쿼리 실행 시간의 1% 미만, CPU의 1% 미만을 나타냅니다. <br/><br/>
-데이터베이스 모니터링은 기본 에이전트 위에서 통합으로 실행됩니다([벤치마크 참조][1]).
+성능 영향
+: Database Monitoring을 위한 기본 Agent 구성은 보수적이지만, 수집 간격 및 쿼리 샘플링 비율과 같은 구성을 조정하여 환경에 맞게 최적화할 수 있습니다. 대부분의 워크로드에서 Agent는 데이터베이스 쿼리 실행 시간의 1% 미만, CPU 사용량의 1% 미만을 차지합니다. <br/><br/>
+Database Monitoring은 기본 Agent 위에서 실행되는 통합 기능입니다([벤치마크 참조][1]).
 
 프록시, 로드 밸런서 및 연결 풀러
-: Datadog 에이전트는 모니터링되는 호스트에 직접 연결해야 합니다. 자체 호스팅 데이터베이스의 경우 `127.0.0.1` 또는 소켓을 사용하는 것이 좋습니다. 에이전트는 프록시, 로드 밸런서 또는 연결 풀러를 통해 데이터베이스에 연결해서는 안 됩니다. 에이전트가 실행되는 동안 다른 호스트에 연결하면(장애 조치, 로드밸런싱 등의 경우) 에이전트가 두 호스트 간의 통계 차이를 계산하여 부정확한 메트릭을 생성합니다.
+: Datadog Agent는 모니터링 대상 호스트에 직접 연결되어야 합니다. 자체 호스팅 데이터베이스의 경우 `127.0.0.1` 또는 소켓을 사용하세요. Agent는 프록시, 로드 밸런서, 연결 풀러를 통해 데이터베이스에 연결해서는 안 됩니다. Agent가 실행 중에 다른 호스트로 연결을 전환하는 경우(예: 장애 조치, 로드 밸런싱 등), 서로 다른 두 호스트의 통계 차이를 계산하게 되어 부정확한 메트릭이 생성됩니다.
 
 데이터 보안 고려 사항
-: 에이전트가 데이터베이스에서 수집하는 데이터와 데이터 보안을 유지하는 방법에 대한 자세한 내용은 [민감한 정보][2]를 참조하세요.
+: Agent가 데이터베이스에서 수집하는 데이터와 이를 안전하게 보호하는 방법에 대해서는 [민감한 정보][2]를 참조하세요.
 
-## MySQL 설정 구성
+## MySQL 설정 구성{#configure-mysql-settings}
 
-쿼리 메트릭, 샘플, 설명 계획을 수집하려면  [MySQL 성능 스키마][3]를 활성화하고 명령줄 또는 설정 파일 (예: `mysql.conf`)에서 다음 [성능 스키마 옵션][4]을 설정합니다:
+쿼리 메트릭, 샘플, 실행 계획을 수집하려면 [MySQL 성능 스키마][3]를 활성화하고 명령줄 또는 설정 파일(예: `mysql.conf`)에서 다음 [성능 스키마 옵션][4]을 설정합니다:
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
-| Parameter | Value | Description |
+| 파라미터 | 값 | 설명 |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 필수. 성능 스키마를 활성화합니다. |
-| `max_digest_length` | `4096` | 더 대규모의 쿼리 수집에 필요합니다. 기본값을 사용하면 `1024`자 이상의 쿼리가 수집됩니다. |
+| `performance_schema` | `ON` | 필수입니다. 성능 스키마를 활성화합니다. |
+| `max_digest_length` | `4096` | 더 긴 쿼리 수집에 필요합니다. 기본값을 유지하면 `1024`자를 초과하는 쿼리는 수집되지 않습니다. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length`와 일치해야 합니다. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length`와 일치해야 합니다. |
-| `performance-schema-consumer-events-statements-current` | `ON` | 필수. 현재 실행 중인 쿼리 모니터링을 활성화합니다. |
-| `performance-schema-consumer-events-waits-current` | `ON` | 필수. 대기 이벤트 수집을 활성화합니다. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 권장. 모든 스레드에서 더 많은 최근 쿼리 추적을 활성화합니다. 활성화하면 빈도수가 낮은 쿼리에서 실행 상세정보를 캡처할 가능성이 더 커집니다. |
-| `performance-schema-consumer-events-statements-history` | `ON` | 선택 사항. 스레드별 최근 쿼리 기록 추적을 활성화합니다. 활성화하면 빈도수가 낮은 쿼리에서 실행 상세정보를 캡처할 가능성이 더 커집니다. |
+| `performance-schema-consumer-events-statements-current` | `ON` | 필수입니다. 현재 실행 중인 쿼리에 대한 모니터링을 활성화합니다. |
+| `performance-schema-consumer-events-waits-current` | `ON` | 필수입니다. 대기 이벤트 수집을 활성화합니다. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | 권장됩니다. 모든 스레드에서 더 많은 수의 최근 쿼리 추적을 활성화합니다. 이 기능을 활성화하면 드물게 발생하는 쿼리의 실행 세부 정보를 캡처할 가능성이 높아집니다. |
+| `performance-schema-consumer-events-statements-history` | `ON` | 선택 사항입니다. 스레드별 최근 쿼리 기록 추적을 활성화합니다. 이 기능을 활성화하면 드물게 발생하는 쿼리의 실행 세부 정보를 캡처할 가능성이 높아집니다. |
 {{% /tab %}}
 {{% tab "MySQL 5.6" %}}
-| 파라미타 | 값 | 설명 |
+| 파라미터 | 값 | 설명 |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 필수. 성능 스키마를 활성화합니다. |
-| `max_digest_length` | `4096` | 더 많은 양의 쿼리 수집에 필요합니다. 기본값을 사용하면 `1024`자 이상의 쿼리가 수집되지 않습니다. |
+| `performance_schema` | `ON` | 필수입니다. 성능 스키마를 활성화합니다. |
+| `max_digest_length` | `4096` | 더 긴 쿼리 수집에 필요합니다. 기본값을 유지하면 `1024`자를 초과하는 쿼리는 수집되지 않습니다. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length`와 일치해야 합니다. |
-| `performance-schema-consumer-events-statements-current` | `ON` | 필수. 현재 실행 중인 쿼리 모니터링을 활성화합니다. |
-| `performance-schema-consumer-events-waits-current` | `ON` | 필수. 대기 이벤트 수집을 활성화합니다. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 권장. 모든 스레드에서 더 많은 최근 쿼리 추적을 활성화합니다. 활성화하면 빈도수가 낮은 쿼리에서 실행 상세정보를 캡처할 가능성이 더 커집니다. |
-| `performance-schema-consumer-events-statements-history` | `ON` | 선택 사항. 스레드별 최근 쿼리 기록 추적을 활성화합니다. 활성화하면 빈도수가 낮은 쿼리에서 실행 상세정보를 캡처할 가능성이 더 커집니다. |
+| `performance-schema-consumer-events-statements-current` | `ON` | 필수입니다. 현재 실행 중인 쿼리에 대한 모니터링을 활성화합니다. |
+| `performance-schema-consumer-events-waits-current` | `ON` | 필수입니다. 대기 이벤트 수집을 활성화합니다. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | 권장됩니다. 모든 스레드에서 더 많은 수의 최근 쿼리 추적을 활성화합니다. 이 기능을 활성화하면 드물게 발생하는 쿼리의 실행 세부 정보를 캡처할 가능성이 높아집니다. |
+| `performance-schema-consumer-events-statements-history` | `ON` | 선택 사항입니다. 스레드별 최근 쿼리 기록 추적을 활성화합니다. 이 기능을 활성화하면 드물게 발생하는 쿼리의 실행 세부 정보를 캡처할 가능성이 높아집니다. |
 {{% /tab %}}
 {{< /tabs >}}
 
 
-**참고**: Agent 액세스 권한 부여의 일부로 Agent가 런타임에 동적으로 `performance-schema-consumer-*` 설정을 사용하도록 허용합니다. [런타임 설정 컨슈머](#runtime-setup-consumers)를 참조하세요.
+**참고**: Agent 액세스 권한 부여의 일부로 Agent가 런타임에 `performance-schema-consumer-*` 설정을 동적으로 활성화하도록 허용할 것을 권장합니다. [런타임 설정 컨슈머](#runtime-setup-consumers)를 참조하세요.
 
-## 에이전트에 접근 권한 부여
+## Agent에 액세스 권한 부여 {#grant-the-agent-access}
 
-Datadog 에이전트가 통계와 쿼리를 수집하려면 데이터베이스에 대한 읽기 전용 액세스가 필요합니다.
+Datadog Agent가 통계와 쿼리를 수집하려면 데이터베이스에 대한 읽기 전용 액세스가 필요합니다.
 
-다음 지침은 `datadog@'%'`를 사용하는 모든 호스트에서 로그인할 수 있도록 Agent에 권한을 부여합니다. `datadog@'localhost'`를 사용하여 로컬 호스트에서만 로그인하도록 `datadog` 사용자를 제한할 수 있습니다. 자세한 정보는 [MySQL 설명서][5]를 참조하세요.
+다음 지침에 따라 Agent가 `datadog@'%'`를 사용하여 모든 호스트에서 로그인할 수 있는 권한을 부여합니다. `datadog@'localhost'`를 사용하여 `datadog` 사용자가 로컬호스트를 통해서만 로그인하도록 제한할 수 있습니다. 자세한 내용은 [MySQL 설명서][5]를 참조하세요.
 
 {{< tabs >}}
 {{% tab "MySQL ≥ 5.7" %}}
@@ -104,14 +105,14 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{< /tabs >}}
 
-다음 스키마를 생성하세요.
+다음 스키마를 생성합니다.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
 ```
 
-에이전트가 설명 계획을 수집할 수 있도록 `explain_statement` 절차를 생성합니다.
+Agent가 실행 계획을 수집할 수 있도록 `explain_statement` 프로시저를 생성합니다.
 
 ```sql
 DELIMITER $$
@@ -126,7 +127,7 @@ END $$
 DELIMITER ;
 ```
 
-또한 설명 계획을 수집하려는 **모든 스키마에서** 이 절차를 생성합니다. `<YOUR_SCHEMA>`를 해당 데이터베이스 스키마로 변경하세요.
+또한 실행 계획을 수집하려는 **모든 스키마**에 이 프로시저를 생성합니다. `<YOUR_SCHEMA>`를 데이터베이스 스키마로 바꿉니다.
 
 ```sql
 DELIMITER $$
@@ -142,17 +143,17 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-인덱스 메트릭을 수집하려면, `datadog` 사용자에게 추가 권한을 부여합니다.
+인덱스 메트릭을 수집하려면 `datadog` 사용자에게 추가 권한을 부여합니다.
 
 ```sql
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 
-에이전트 v7.65부터 Datadog 에이전트에서 MySQL 데이터베이스에서 스키마 정보를 수집할 수 있습니다. 이 수집을 위해 에이전트 권한을 부여하는 방법에 대한 자세한 내용은 아래의 [스키마 수집][14] 섹션을 참조하세요.
+Agent v7.65부터 Datadog Agent는 MySQL 데이터베이스에서 스키마 정보를 수집할 수 있습니다. 이 수집 작업에 필요한 Agent 권한 부여 방법에 대한 자세한 내용은 아래의 [스키마 수집][14] 섹션을 참조하세요.
 
 
-### 런타임 설정 컨슈머
-다음 절차를 생성하여 에이전트가 런타임에 `performance_schema.events_*` 컨슈머를 실행할 수 있는 기능을 제공하도록 합니다.
+### 런타임 설정 컨슈머 {#runtime-setup-consumers}
+Datadog은 Agent가 런타임에 `performance_schema.events_*` 컨슈머를 실행할 수 있도록 다음 프로시저를 생성할 것을 권장합니다.
 
 ```SQL
 DELIMITER $$
@@ -166,20 +167,20 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### 비밀번호를 안전하게 저장하기
+### 비밀번호 안전하게 저장 {#securely-store-your-password}
 {{% dbm-secret %}}
 
-## 에이전트 설치
+## Agent 설치 {#install-the-agent}
 
-DataDog Agent를 설치하면 MySQL에 데이터베이스 모니터링에 필요한 MySQL 검사도 설치됩니다. MySQL 데이터베이스 호스트에 대한 Agent를 아직 설치하지 않은 경우 [Agent 설치 지침][6]을 참조하세요.
+Datadog Agent를 설치하면 MySQL용 Database Monitoring에 필요한 MySQL 검사도 함께 설치됩니다. MySQL 데이터베이스 호스트에 아직 Agent를 설치하지 않았다면 [Agent 설치 지침][6]을 참조하세요.
 
-호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
+호스트에서 실행 중인 Agent에 대해 이 검사를 구성하려면 다음 단계를 따르세요.
 
-[Agent의 설정 디렉터리][7] 루트에 있는 `conf.d/` 폴더에서 `mysql.d/conf.yaml` 파일을 편집하여 MySQL [메트릭](#metric-collection)과 [로그](#log-collection-optional) 수집을 시작하세요. 커스텀 메트릭을 포함하여 사용 가능한 모든 설정 옵션은 [sample mysql.d/conf.yaml][8]에서 확인하세요.
+[Agent 구성 디렉터리][7] 루트의 `conf.d/` 폴더에 있는 `mysql.d/conf.yaml` 파일을 편집하여 MySQL [메트릭](#metric-collection) 및 [로그](#log-collection-optional) 수집을 시작합니다. 사용자 지정 메트릭 옵션을 포함하여 사용 가능한 모든 구성 옵션은 [샘플 mysql.d/conf.yaml][8]을 참조하세요.
 
-### 메트릭 수집
+### 메트릭 수집 {#metric-collection}
 
-이 설정 블록을 `mysql.d/conf.yaml`에 추가하여 MySQL 메트릭을 수집하세요.
+이 구성 블록을 `mysql.d/conf.yaml`에 추가하여 MySQL 메트릭을 수집합니다.
 
 ```yaml
 init_config:
@@ -192,18 +193,18 @@ instances:
     password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
 
-`datadog` 사용자는 MySQL 통합 설정에서 `localhost` 대신 `host: 127.0.0.1`로 설정되어야 합니다. 또는, `sock`를 사용합니다.
+`datadog` 사용자는 MySQL 통합 구성에서 `host: 127.0.0.1` 대신 `localhost`로 설정해야 합니다. 또는 `sock`을 사용할 수 있습니다.
 
 MySQL 메트릭을 Datadog으로 전송하기 위해 [Agent를 재시작합니다.][9]
 
-### 로그 수집 (선택 사항)
+### 로그 수집(선택 사항) {#log-collection-optional}
 
 Agent가 데이터베이스에서 수집한 텔레메트리 외에도 데이터베이스 로그를 Datadog으로 직접 전송하도록 선택할 수있습니다.
 
-1. 기본적으로 MySQL은 읽기 위해 루트 액세스 권한이 필요한 모든 항목을 `/var/log/syslog`에서 기록합니다. 로그에 더 쉽게 액세스할 수 있도록 하려면 다음 단계를 따르세요:
+1. 기본적으로 MySQL은 모든 항목을 `/var/log/syslog`에 기록하며, 이를 읽으려면 루트 액세스 권한이 필요합니다. 로그에 더 쉽게 액세스하려면 다음 단계를 따르세요.
 
-   1. `/etc/mysql/conf.d/mysqld_safe_syslog.cnf`을 편집하여 모든 행에 코멘트를 추가합니다.
-   2. `/etc/mysql/my.cnf`를 편집하여 원하는 로깅 설정을 사용하세요. 예를 들어, 일반, 오류 및 느린 쿼리 로그를 사용하도록 설정하려면 다음 구성을 사용합니다:
+   1. `/etc/mysql/conf.d/mysqld_safe_syslog.cnf`를 편집하고 모든 줄에 코멘트를 추가합니다.
+   2. `/etc/mysql/my.cnf`를 편집하여 원하는 로깅 설정을 활성화합니다. 예를 들어 일반, 오류, 느린 쿼리 로그를 활성화하려면 다음 구성을 사용합니다.
 
      ```conf
        [mysqld_safe]
@@ -219,8 +220,8 @@ Agent가 데이터베이스에서 수집한 텔레메트리 외에도 데이터�
      ```
 
    3. 파일을 저장하고 MySQL을 다시 시작합니다.
-   4.  Agent가 `/var/log/mysql` 디렉토리 및 내부의 모든 파일에 대한 읽기 권한을 가지고 있는지 확인합니다. 이러한 파일이 고려되었는지, 사용 권한이 올바르게 설정되었는지 확인하기 위해 `logrotate` 설정을 다시 확인하세요.
-      `/etc/logrotate.d/mysql-server`에는 다음과 유사한 내용이 있습니다:
+   4. Agent가 `/var/log/mysql` 디렉터리와 디렉터리 내 모든 파일에 대한 읽기 권한이 있는지 확인합니다. `logrotate` 구성을 다시 확인하여 해당 파일이 고려 대상에 포함되어 있고 권한이 올바르게 설정되었는지 확인합니다.
+      `/etc/logrotate.d/mysql-server`에는 다음과 유사한 내용이 포함되어야 합니다.
 
      ```text
        /var/log/mysql.log /var/log/mysql/mysql.log /var/log/mysql/mysql_slow.log {
@@ -232,13 +233,13 @@ Agent가 데이터베이스에서 수집한 텔레메트리 외에도 데이터�
        }
      ```
 
-2. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
+2. 로그 수집은 기본적으로 Datadog Agent에서 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화하세요.
 
    ```yaml
    logs_enabled: true
    ```
 
-3. MySQL 로그 수집을 시작하려면 이 설정 블록을 `mysql.d/conf.yaml` 파일에 추가합니다:
+3. 이 구성 블록을 `mysql.d/conf.yaml` 파일에 추가해 MySQL 로그 수집을 시작합니다:
 
    ```yaml
    logs:
@@ -281,20 +282,20 @@ Agent가 데이터베이스에서 수집한 텔레메트리 외에도 데이터�
        #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
-4. [에이전트를 재시작합니다] [9].
+4. [Agent를 재시작][9]합니다.
 
-## 검증
+## 검증 {#validate}
 
-[에이전트 상태 하위 명령][10]을 실행하고 점검 섹션에서 `mysql`을 찾거나 [데이터베이스][11] 페이지를 참조하여 시작하세요!
+[Agent의 상태 하위 명령][10]을 실행하고 Checks 섹션에서 `mysql`을 찾거나 [Databases][11] 페이지를 참조하여 시작하세요!
 
-## 에이전트 설정 예시
+## Agent 구성 예시 {#example-agent-configurations}
 {{% dbm-mysql-agent-config-examples %}}
 
-## 트러블슈팅
+## 문제 해결 {#troubleshooting}
 
-설명에 따라 통합 및 Agent를 설치 및 설정하였으나 제대로 작동하지 않는 경우 [트러블슈팅][12]을 참조하세요.
+설명에 따라 통합 및 Agent를 설치 및 설정하였으나 제대로 작동하지 않는 경우 [문제 해결][12]을 참조하세요.
 
-## 참고 자료
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -310,5 +311,5 @@ Agent가 데이터베이스에서 수집한 텔레메트리 외에도 데이터�
 [10]: /ko/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /ko/database_monitoring/troubleshooting/?tab=mysql
-[13]: /ko/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
 [14]: /ko/database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas
+[15]: /ko/database_monitoring/setup_mariadb/

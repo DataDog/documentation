@@ -213,7 +213,7 @@ fun HomeScreen(){
  }
 }
 ```
-In the example above, the custom names are used for the interactive elements in Rum actions tracking.
+In the example above, the custom names are used for the interactive elements in RUM actions tracking.
 
 {{< img src="real_user_monitoring/android/android-actions-tracking-1.png" alt="Component name in actions tracking" style="width:90%;">}}
 

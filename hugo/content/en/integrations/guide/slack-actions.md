@@ -11,20 +11,20 @@ further_reading:
 Slack actions are available in any Slack workspace with the Datadog App installed. Type `/dd` in the workspace to open an action tray listing all available actions. Alternatively, type the full command directly.
 
 ## Incidents
-Use the following commands for incidents navigation. All commands can use `/dd in` as an alias for `/dd incident`. For more details, see [Integrate Slack with Datadog Incident Management][2].
+Use the following commands for incidents navigation. All commands can use `/dd inc` as an alias for `/dd incident`. For more details, see [Integrate Slack with Datadog Incident Management][2].
 
 | Command | Description|
 | ------------------ | ---------- |
-| `/dd in` or `/dd incident` | Declare an incident.|
-| `/dd in test` | Declare a test incident.|
-| `/dd in update` or `/dd in edit`| Update the incident's title, state, severity, and attributes.|
-| `/dd in responders`| Manage the incident's response team.|
-| `/dd in investigate` | Trigger Bits Investigation. |
-| `/dd in summary` | Generate the incident's summary with AI. Not available in Gov and Gov2 regions.|
-| `/dd in notify` | Notify @-handles about the incident. |
-| `/dd in list` | List open incidents.|
-| `/dd in private`| Archive the current channel, create a private channel, and add all existing responders.|
-| `/dd in public` | Make the incident and its timeline visible to anyone with incident-read permissions. |
+| `/dd inc` or `/dd incident` | Declare an incident.|
+| `/dd inc test` | Declare a test incident.|
+| `/dd inc update` or `/dd inc edit`| Update the incident's title, state, severity, and attributes.|
+| `/dd inc responders`| Manage the incident's response team.|
+| `/dd inc investigate` | Trigger Bits Investigation. |
+| `/dd inc summary` | Generate the incident's summary with AI. Not available in Gov and Gov2 regions.|
+| `/dd inc notify` | Notify @-handles about the incident. |
+| `/dd inc list` | List open incidents.|
+| `/dd inc private`| Archive the current channel, create a private channel, and add all existing responders.|
+| `/dd inc public` | Make the incident and its timeline visible to anyone with incident-read permissions. |
 | `/dd followup` | Create a new follow-up.|
 | `/dd followup list`  | List Incident Follow-ups.|
 | `/dd task` | Create an incident task.|

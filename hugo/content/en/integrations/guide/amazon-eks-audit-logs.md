@@ -83,4 +83,4 @@ To create a rule, navigate to the in-app [Rule Setup and Configuration][13] page
 [11]: /security/default_rules/#cat-cloud-siem
 [12]: /security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/#create-a-rule

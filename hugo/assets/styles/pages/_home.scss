@@ -21,14 +21,68 @@
         }
     }
 
+    .home-enablement-banner {
+        // temporary banner. see changes to .guides before removing
+        background-color: $gray-lighter;
+        z-index: 1;
+        position: relative;
+        top: -60px;
+        border-radius: 3px 3px 0 0;
+        padding: 0 16px;
+        a {
+            color: $brand-primary;
+            text-decoration: none;
+            line-height: 1.4;
+            font-size: 14px;
+            font-weight: 600;
+            &:hover,
+            &:focus {
+                color: darken($brand-primary, 10%);
+                text-decoration: none;
+            }
+        }
+        p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            .icon-container {
+                &::before {
+                    content: '';
+                }
+                margin-right: 5px;
+                position: relative;
+                top: 3px;
+                display: none;
+            }
+        }
+        @media (min-width: 768px) {
+            margin: -20px auto 0 auto;
+            top: -20px;
+            p .icon-container {
+                display: inline;
+            }
+        }
+        @media (min-width: 992px) {
+            margin: -60px auto 0 auto;
+            top: 0px;
+        }
+        @media (min-width: 1200px) {
+            max-width: 1000px;
+        }
+
+    }
+
     .guides {
         margin: -60px auto 0 auto;
         background-color: white;
-        border-radius: 3px;
+        border-radius: 0 0 3px 3px;
         box-shadow: 0px 1px 1px rgba(30, 5, 36, 0.16), 0px 1px 4px rgba(30, 5, 36, 0.24);
         position: relative;
         @media (min-width: 768px) {
-            margin: -60px auto 0 auto;
+            margin: -20px auto 0 auto;
+        }
+        @media (min-width: 992px) {
+            margin: 0px auto 0 auto;
         }
         @media (min-width: 1200px) {
             max-width: 1000px;

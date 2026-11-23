@@ -18,6 +18,9 @@ further_reading:
 - link: "/synthetics/guide/version_history/"
   tag: "Guide"
   text: "Version History for Synthetic Monitoring"
+- link: "/synthetics/guide/mobile-test-auth-tokens/"
+  tag: "Guide"
+  text: "Inject and Auto-Refresh Auth Tokens in Mobile Application Tests"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -55,8 +58,8 @@ You may create a test using one of the following options:
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
   2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Mobile Application Test.<br /><br>
-       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
+  3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your mobile application test.<br /><br>
+       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of mobile application test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
@@ -68,13 +71,13 @@ You may create a test using one of the following options:
   1. Set [retry conditions](#test-retries) for your test.
   1. Set the [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and {{< ui >}}alert conditions{{< /ui >}} for your test monitor. 
   1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
-  1. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Mobile Application Test.
+  1. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your mobile application test.
 
 ### Snippets
 
-When configuring a new Mobile Application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
+When configuring a new mobile application test, use snippets to automatically populate your OS versions, device sizes, manufacturers, and uptime, instead of manually selecting these options. The following snippets are available:
 
-* {{< ui >}}Device Size{{< /ui >}}: Automatically perform your Mobile Application tests on a specifically sized screen across devices:
+* {{< ui >}}Device Size{{< /ui >}}: Automatically perform your mobile application tests on a specifically sized screen across devices:
 
   - {{< ui >}}Multi-screen size{{< /ui >}}
   - {{< ui >}}Tablet{{< /ui >}}
@@ -82,11 +85,11 @@ When configuring a new Mobile Application test, use snippets to automatically po
   - {{< ui >}}Standard Screen (iOS only){{< /ui >}}
   - {{< ui >}}Small Screen (iOS only){{< /ui >}}
 
-* {{< ui >}}OS Version{{< /ui >}}: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
+* {{< ui >}}OS Version{{< /ui >}}: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your mobile application.
 
 * {{< ui >}}Device Manufacturer (Android only){{< /ui >}}: Automatically test your Android apps across multiple device manufacturers.
 
-* {{< ui >}}Uptime{{< /ui >}}: Automatically configure a test with the shortest frequency available (every 15 minutes).
+* {{< ui >}}Uptime{{< /ui >}}: Automatically configure a test with the shortest frequency available (every 5 minutes).
 
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
@@ -98,7 +101,7 @@ You can configure advanced options when creating a mobile test to dynamically ad
 #### Test behavior options:
 
 {{< ui >}}Auto-accept alerts{{< /ui >}}
-: When enabled, automatically accepts all OS system alerts during test execution.
+: When enabled, on iOS, automatically accepts all OS system alerts during test execution. On Android, this option grants the permissions your app requests, so permission prompts don't appear. Other Android system dialogs aren't dismissed.
 
 {{< ui >}}Allow application crash{{< /ui >}}
 : When enabled, prevents the test from failing if an application crash is detected. You must include a step to restart the application after the expected crash to continue the test.
@@ -109,7 +112,14 @@ You can configure advanced options when creating a mobile test to dynamically ad
 
 #### Application arguments:
 
-You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
+Pass `key:value` pairs to your application when the test starts to change app behavior programmatically.
+
+Your application code must read and process these key-value pairs:
+
+- **Android**: Datadog passes the pairs as extras of the launch intent. Read them with `getIntent().getExtras()` in the launching activity.
+- **iOS**: Datadog passes the pairs as environment variables, not as launch arguments. Read them from `ProcessInfo.processInfo.environment`.
+
+For example, [inject an auto-refreshing auth token][17] to skip your app's login flow.
 
 **Examples:**
 
@@ -130,7 +140,7 @@ For Android tests, add the appropriate `key:value` pairs in the Advanced Options
 
 {{% tab "iOS (Process Arguments)" %}}
 
-For iOS tests, add the appropriate `key:value` pairs in the Advanced Options section:
+For iOS tests, add the `key:value` pairs in the {{< ui >}}Process Arguments{{< /ui >}} field of the Advanced Options section. Your app receives them as environment variables:
 
 ```json
 {
@@ -302,3 +312,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices
+[17]: /synthetics/guide/mobile-test-auth-tokens/

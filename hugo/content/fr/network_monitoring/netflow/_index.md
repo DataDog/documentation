@@ -2,6 +2,9 @@
 aliases:
 - /fr/network_monitoring/devices/netflow/
 further_reading:
+- link: https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/
+  tag: Architecture Center
+  text: Architecture de référence pour l'observabilité des réseaux hybrides multi-cloud
 - link: /network_monitoring/devices/profiles
   tag: Documentation
   text: Utiliser des profils avec le Network Device Monitoring
@@ -15,6 +18,10 @@ further_reading:
   tag: Blog
   text: Surveiller et résoudre des problèmes de performances réseau avec des interruptions
     SNMP
+- link: https://www.datadoghq.com/blog/understanding-netflow-duplication/
+  tag: Blog
+  text: 'Comprendre la duplication NetFlow : pourquoi elle se produit et comment la
+    dédupliquer'
 title: NetFlow Monitoring
 ---
 ## Présentation {#overview}
@@ -94,7 +101,7 @@ Datadog enrichit les ports dans NetFlow avec les données de l'IANA (Internet As
 
 Vous pouvez également ajouter vos propres enrichissements personnalisés pour mapper les ports et les protocoles à des applications spécifiques (par exemple, si un service personnalisé s'exécute sur un port spécifique). Cela permet aux ingénieurs réseau et à leurs équipes d'interpréter et d'interroger plus facilement les données NetFlow avec des noms lisibles par l'homme.
 
-Depuis l'onglet {{< ui >}}Configuration{{< /ui >}} dans NetFlow, cliquez sur {{< ui >}}+ Add Enrichment{{< /ui >}} pour télécharger le fichier CSV contenant vos enrichissements personnalisés.
+Depuis l'onglet {{< ui >}}Configuration{{< /ui >}} dans NetFlow, cliquez sur {{< ui >}}\+ Add Enrichment{{< /ui >}} pour importer le fichier CSV contenant vos enrichissements personnalisés.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="La nouvelle fenêtre modale de mappage d'enrichissement dans l'onglet de configuration NetFlow." width="100%" >}}
 
@@ -102,7 +109,7 @@ Depuis l'onglet {{< ui >}}Configuration{{< /ui >}} dans NetFlow, cliquez sur {{<
 
 Vous pouvez également ajouter vos propres enrichissements personnalisés pour mapper les IP et les CIDR à des tags personnalisés (par exemple, pour catégoriser les services s'exécutant sur des adresses IP spécifiques). Cela permet aux ingénieurs réseau et à leurs équipes d'interpréter et d'interroger plus facilement les données NetFlow avec des noms lisibles par l'homme.
 
-Depuis la [{{< ui >}}Enrichment{{< /ui >}} page des paramètres][10], cliquez sur {{< ui >}}+ Add Enrichment{{< /ui >}} pour ajouter des mappages manuellement ou téléchargez un fichier CSV pour ajouter des mappages en masse.
+Depuis la [{{< ui >}}Enrichment{{< /ui >}} page des paramètres][10], cliquez sur {{< ui >}}\+ Add Enrichment{{< /ui >}} pour ajouter des mappages manuellement ou importer un fichier CSV afin d'ajouter des mappages en masse.
 
 ### Enrichissement IP privé DNS inverse {#reverse-dns-private-ip-enrichment}
 
@@ -110,7 +117,7 @@ Activez l'enrichissement IP privé DNS inverse pour effectuer des recherches DNS
 
 Par défaut, l'enrichissement IP DNS inverse dans votre [`datadog.yaml` fichier][7] est désactivé. Pour l'activer, consultez la section [Configuration](#configuration) de cette page.
 
-Recherchez DNS dans le menu {{< ui >}}+ Filter{{< /ui >}} pour localiser les flux associés à l'enrichissement IP DNS inverse :
+Recherchez DNS dans le menu {{< ui >}}\+ Filter{{< /ui >}} pour localiser les flux associés à l'enrichissement IP DNS inverse :
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Menu de filtrage amélioré pour afficher les facettes de destination et de source DNS inverse" width="100%" >}}
 

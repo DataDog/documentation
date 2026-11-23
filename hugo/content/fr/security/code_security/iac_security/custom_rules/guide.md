@@ -2,6 +2,10 @@
 description: Référez-vous au contrat Rego, aux entrées analysées, aux bibliothèques
   partagées, aux champs de résultats et aux pratiques de test pour les règles IaC
   personnalisées.
+further_reading:
+- link: https://www.datadoghq.com/blog/custom-iac-security-rules/
+  tag: Blog
+  text: Appliquer des règles personnalisées dans l'analyse Datadog IaC Security
 title: Référence des règles IaC personnalisées
 ---
 Cette référence pour les règles personnalisées IaC décrit le contrat de règle, les entrées analysées et les modèles spécifiques à la plateforme.
@@ -214,7 +218,7 @@ Incluez la phase de construction et l'instruction originale dans le localisateur
 
 ### Kubernetes {#kubernetes}
 
-Les vérifications Kubernetes s'appliquent souvent aux Pods et aux spécifications de pod imbriquées dans des charges de travail telles que les Deployments. Utilisez `spec_info` pour localiser la spécification de pod effective :
+Les checks Kubernetes s'appliquent souvent aux Pods et aux spécifications de pod imbriquées dans des charges de travail telles que les Deployments. Utilisez `spec_info` pour localiser la spécification de pod effective :
 
 ```rego
 import data.generic.k8s as k8s_lib
@@ -267,7 +271,7 @@ Les versions des fournisseurs peuvent déplacer la configuration dans des ressou
 
 ## Corrélation des ressources {#resource-correlation}
 
-Certaines vérifications comparent plusieurs ressources, modules, jobs ou charges de travail. Évitez les jointures sans contrainte dans `input.document`, car elles peuvent associer des ressources non liées et produire des résultats en double.
+Certains checks comparent plusieurs ressources, modules, jobs ou charges de travail. Évitez les jointures sans contrainte dans `input.document`, car elles peuvent associer des ressources non liées et produire des résultats en double.
 
 Préservez les contraintes de document, d'espace de noms, de workflow, de phase de construction et de référence de ressource lors de l'adaptation d'une règle existante.
 
@@ -280,7 +284,7 @@ Testez au moins les éléments suivants :
 - Valeurs manquantes et explicites lorsque les valeurs par défaut sont importantes.
 - Ressources multiples dans un seul fichier.
 - Syntaxe alternative prise en charge par la plateforme, telle que les alias de module Ansible ou les formulaires de déclenchement GitHub Actions.
-- Ressources associées dans des portées distinctes lorsque la règle effectue une corrélation.
+- Ressources associées dans des périmètres distincts lorsque la règle effectue une corrélation.
 
 ## Validation {#validation}
 
@@ -291,6 +295,10 @@ L'éditeur vérifie plus que la syntaxe Rego. Avant d'évaluer un échantillon, 
 - N'appelle pas de fonctions intégrées restreintes telles que `http.send` ou `opa.runtime`.
 
 Corrigez toutes les erreurs signalées avant d'interpréter une évaluation sans résultat. Les erreurs de validation signifient que la politique n'a pas été exécutée avec succès.
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /fr/security/code_security/iac_security/custom_rules/

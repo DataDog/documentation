@@ -32,7 +32,7 @@ Les liens de span aident à tracer les opérations dans les systèmes distribué
 Datadog prend en charge les liens de span vers l'avant et vers l'arrière, permettant aux utilisateurs de visualiser et de naviguer dans les relations de span entre les traces dans les deux sens.
 
 - Liens vers l'avant : Un span peut être lié à un autre span qui se produit plus tard dans le temps, qu'il appartienne à la même trace ou à une trace différente. Cela vous permet de naviguer des opérations antérieures vers les suivantes entre les traces.
-- Liens vers l'arrière : De même, un span peut être lié à un span qui s'est produit plus tôt dans le temps, soit au sein de la même trace, soit entre différentes traces. Cela vous permet de remonter des opérations ultérieures vers les précédentes.
+- Liens vers l'arrière : De même, un span peut être lié à un span qui s'est produit plus tôt dans le temps, soit au sein de la même trace, soit entre différentes traces. Cela vous permet de tracer des opérations ultérieures vers les précédentes.
 
 ## Cas d'utilisation courants {#common-use-cases}
 
@@ -50,14 +50,21 @@ Exemple :
 
 ## Création de liens de span {#creating-span-links}
 
-Si votre application est instrumentée avec :
+La façon dont vous créez des liens de span dépend de la manière dont votre application est instrumentée.
 
-- Le SDK OpenTelemetry, suivez la documentation d'instrumentation manuelle OpenTelemetry pour votre langage. Par exemple, [Créer des spans avec des liens pour Java][3].
-- Le SDK Datadog, suivez les exemples [Ajout de liens de span][1].
+### Datadog SDK {#datadog-sdk}
+
+Les SDK Python, Node.js, Go et PHP fournissent une API pour ajouter des liens de span. Consultez les exemples pour [Python][10], [Node.js][11], [Go][12] ou [PHP][1].
+
+Pour Java, .NET et Ruby, ajoutez des liens de span avec l'API OpenTelemetry. Le SDK Datadog envoie à Datadog les liens de span créés avec l'API OpenTelemetry. Pour utiliser l'API OpenTelemetry avec le SDK Datadog, consultez [Instrumentation personnalisée avec l'API OpenTelemetry][13]. Pour l'API des liens de span, consultez la documentation OpenTelemetry pour [Java][3], [.NET][14] ou [Ruby][15].
+
+### OpenTelemetry SDK {#opentelemetry-sdk}
+
+Suivez la documentation d'instrumentation OpenTelemetry pour votre langage. Par exemple, consultez l'[API de span pour Java][3].
 
 ## Support minimal {#minimum-support}
 
-**Remarque*** : Cette section documente le support minimal pour la génération de liens de span avec les bibliothèques clientes Datadog APM (avec l'API OpenTelemetry). Les liens de span générés par le SDK OpenTelemetry sont envoyés à Datadog via [l'ingestion OTLP][8].
+**Remarque** : Cette section documente la prise en charge minimale pour la génération de liens de span avec les bibliothèques clientes Datadog APM (avec l'API OpenTelemetry). Les liens de span générés par le SDK OpenTelemetry sont envoyés à Datadog via [l'ingestion OTLP][8].
 
 L'Agent v7.52.0 ou supérieur est requis pour générer des liens de span en utilisant les [SDK Datadog][7]. Le support des liens de span a été introduit dans les versions suivantes :
 
@@ -80,12 +87,18 @@ Vous pouvez afficher les liens de span depuis le [Trace Explorer][4] dans Datado
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/trace_collection/custom_instrumentation/php/#adding-span-links
+[1]: /fr/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=php#adding-span-links-php
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
-[3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
+[3]: https://opentelemetry.io/docs/languages/java/api/#span
 [4]: /fr/tracing/trace_explorer/trace_view/?tab=spanlinks#more-information
 [5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 [7]: https://docs.datadoghq.com/fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [8]: https://docs.datadoghq.com/fr/opentelemetry/interoperability/otlp_ingest_in_the_agent
 [9]: /fr/tracing/trace_collection/custom_instrumentation/?tab=datadogapi
+[10]: /fr/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=python#adding-span-links-python
+[11]: /fr/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=node_js#adding-span-links-nodejs
+[12]: /fr/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=go#adding-span-links-go
+[13]: /fr/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api
+[14]: https://opentelemetry.io/docs/languages/dotnet/instrumentation/#create-activities-with-links
+[15]: https://opentelemetry.io/docs/languages/ruby/instrumentation/#add-span-links

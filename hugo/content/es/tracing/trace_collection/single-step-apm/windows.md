@@ -102,24 +102,14 @@ Para instrumentar aplicaciones Java y .NET en todo su servidor Windows:
 
 ### Instalación de Agent existente {#existing-agent-installation}
 
-Si ya tiene instalado un Datadog Agent, use Fleet Automation para habilitar la SSI.
+Si ya tiene instalado un Datadog Agent, habilite SSI de forma remota desde Datadog. No necesita ejecutar comandos en cada servidor.
 
-1. En Datadog, vaya a [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][6].
-1. Haga clic en {{< ui >}}Configure Agents{{< /ui >}}.
-1. Aplique filtros para seleccionar los agentes que desea configurar, luego haga clic en **Siguiente**.
-
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="La pantalla de filtrado de agente en Fleet Automation, con opciones para definir el contexto por entorno, sistema operativo y nombre de host" style="width:100%;" >}}
-
-1. Haga clic en el mosaico {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}, luego haga clic en {{< ui >}}Next{{< /ui >}}.
-
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="La pantalla de selección de productos en Fleet Automation, que muestra el mosaico de Application Performance Monitoring (APM)" style="width:80%;" >}}
-
-1. En la pantalla {{< ui >}}Configure SDKs Installation{{< /ui >}}, haga clic en {{< ui >}}Yes{{< /ui >}} para instalar automáticamente el SDK. Seleccione {{< ui >}}Use latest version{{< /ui >}}, o desmarque para especificar versiones individuales de SDK.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="La pantalla Configurar instalación de SDK en Fleet Automation, con opciones para habilitar la instalación automática de SDK y seleccionar versiones." style="width:60%;" >}}
-
-1. Haga clic en {{< ui >}}Next{{< /ui >}}.
-1. Revise su configuración y haga clic en {{< ui >}}Deploy Configuration{{< /ui >}}.
+1. En Datadog, vaya a [**APM > Instrument a Service**][6].
+1. En {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, seleccione {{< ui >}}Deploy on existing hosts{{< /ui >}} para instrumentar sus servicios de forma remota a través del Datadog Agent.
+1. En {{< ui >}}Which hosts should we instrument?{{< /ui >}}, utilice los filtros de contexto ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) para acotar la lista de servidores. Luego, seleccione los Agents que desea instrumentar en la pestaña {{< ui >}}Eligible for deployment{{< /ui >}}. Los servidores que no se pueden instrumentar aparecen en la pestaña {{< ui >}}Excluded from deployment{{< /ui >}}.
+1. En {{< ui >}}Configure SDKs installation{{< /ui >}}, haga clic en {{< ui >}}Yes{{< /ui >}} para que Datadog instale automáticamente los SDK de rastreo. Para fijar versiones específicas del SDK en lugar de la más reciente, expanda {{< ui >}}Customize library versions{{< /ui >}}.
+1. En {{< ui >}}Configure rollout strategy{{< /ui >}}, elija qué porcentaje de Agents implementar a la vez. Datadog muestra las etapas resultantes y una duración estimada. Las implementaciones se pausan automáticamente si tres Agents consecutivos fallan o si los errores alcanzan el 10% del total. Puede volver a ejecutar la implementación más tarde.
+1. En {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, verifique {{< ui >}}Configuration Summary{{< /ui >}} (alterne entre {{< ui >}}Summary{{< /ui >}} y {{< ui >}}YAML{{< /ui >}}), y luego haga clic en {{< ui >}}Apply Instrumentation{{< /ui >}}.
 1. Configure las reglas de instrumentación.
 
    La SSI a nivel de servidor instrumenta automáticamente todas las aplicaciones Java en el servidor y todas las aplicaciones .NET que se ejecutan en IIS. Para instrumentar aplicaciones .NET que se ejecutan fuera de IIS, debe [definir una regla de instrumentación](#define-instrumentation-rules) que las permita. También puede usar reglas de instrumentación para un control granular sobre qué aplicaciones Java en el servidor o aplicaciones .NET en IIS se instrumentan.
@@ -161,6 +151,8 @@ Para habilitar productos, [configure variables de entorno][3] en la configuraci�
 {{< /site-region >}}
 
 Las reglas de instrumentación le permiten controlar qué procesos son instrumentados automáticamente por SSI en los hosts Windows. Se requieren reglas para instrumentar aplicaciones .NET que se ejecutan fuera de IIS. También son útiles para un control granular sobre qué aplicaciones Java en el servidor o aplicaciones .NET en IIS son instrumentadas.
+
+**Nota**: Puede usar Bits AI para crear reglas de instrumentación con lenguaje natural. Describa qué procesos desea instrumentar y Bits AI generará la regla correspondiente.
 
 Para configurar las reglas de instrumentación:
 
@@ -243,5 +235,5 @@ Si encuentra problemas al habilitar APM con SSI, consulte la [guía de solución
 [3]: /es/tracing/trace_collection/library_config/
 [4]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[6]: https://app.datadoghq.com/fleet/agent-management
+[6]: https://app.datadoghq.com/apm/instrumentation
 [7]: https://app.datadoghq.com/apm/services

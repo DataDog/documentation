@@ -23,16 +23,16 @@ further_reading:
 
 Use agentic onboarding to set up monitoring for your Cloud Run functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Pup CLI" %}}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run function:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run function:
 
 ```shell
-npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions
+npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run-functions
 ```
 
 Omit `--product` to run interactively, or add `--site` to target your Datadog site.
@@ -40,7 +40,7 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {{% /tab %}}
 {{% tab "MCP server" %}}
 
-Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run functions with AI assistance. After you connect, try a prompt like:
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run functions with AI assistance. After you connect, try a prompt like:
 
 ```
 Help me monitor my GCP Cloud Run functions with Datadog using Terraform.
@@ -62,4 +62,4 @@ Then, select your runtime below for instructions on how to instrument your appli
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/google-cloud-platform/
-[2]: /agentic_onboarding/setup
+[2]: /agentic_onboarding/

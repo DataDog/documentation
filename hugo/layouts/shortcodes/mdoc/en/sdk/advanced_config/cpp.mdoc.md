@@ -322,8 +322,8 @@ A parallel API is available for associating an account (such as an organization,
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `acc.id` | String | (Required) Unique account identifier. |
-| `acc.name` | String | (Optional) Account name, displayed in the Datadog UI. |
+| `account.id` | String | (Required) Unique account identifier. |
+| `account.name` | String | (Optional) Account name, displayed in the Datadog UI. |
 
 {% tabs %}
 {% tab label="C++" %}
@@ -366,10 +366,10 @@ config.SetDiagnosticThreshold(datadog::DiagnosticLevel::Error);
 
 ```c
 /* Emit all messages (debug, status, warning, error) */
-dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
+dd_core_config_set_diagnostic_threshold(config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 
 /* Emit only errors */
-dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_ERROR);
+dd_core_config_set_diagnostic_threshold(config, DD_DIAGNOSTIC_LEVEL_ERROR);
 ```
 
 {% /tab %}
@@ -399,11 +399,11 @@ void my_handler(const dd_diagnostic_message_t* message, void* userdata) {
 }
 
 /* Wire up the handler and supply a context pointer */
-dd_core_config_set_diagnostic_handler(&config, my_handler);
-dd_core_config_set_diagnostic_handler_userdata(&config, &my_logger);
+dd_core_config_set_diagnostic_handler(config, my_handler);
+dd_core_config_set_diagnostic_handler_userdata(config, &my_logger);
 
 /* Pass NULL to suppress all diagnostic output */
-dd_core_config_set_diagnostic_handler(&config, NULL);
+dd_core_config_set_diagnostic_handler(config, NULL);
 ```
 
 {% /tab %}
@@ -435,10 +435,10 @@ config.SetApplicationStoragePath(".");
 
 ```c
 /* Recommended: use a dedicated directory owned by your application */
-dd_core_config_set_application_storage_path(&config, "/var/data/myapp");
+dd_core_config_set_application_storage_path(config, "/var/data/myapp");
 
 /* Accepted: explicitly use the current working directory */
-dd_core_config_set_application_storage_path(&config, ".");
+dd_core_config_set_application_storage_path(config, ".");
 ```
 
 {% /tab %}
@@ -490,9 +490,9 @@ config.SetBatchProcessingLevel(datadog::BatchProcessingLevel::High);
 {% tab label="C" %}
 
 ```c
-dd_core_config_set_batch_size(&config, DD_BATCH_SIZE_SMALL);
-dd_core_config_set_upload_frequency(&config, DD_UPLOAD_FREQUENCY_FREQUENT);
-dd_core_config_set_batch_processing_level(&config, DD_BATCH_PROCESSING_LEVEL_HIGH);
+dd_core_config_set_batch_size(config, DD_BATCH_SIZE_SMALL);
+dd_core_config_set_upload_frequency(config, DD_UPLOAD_FREQUENCY_FREQUENT);
+dd_core_config_set_batch_processing_level(config, DD_BATCH_PROCESSING_LEVEL_HIGH);
 ```
 
 {% /tab %}

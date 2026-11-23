@@ -23,7 +23,7 @@ title: Source du Datadog Agent
 Utilisez la source Datadog Agent d'Observability Pipelines pour recevoir des logs ou des métriques du Datadog Agent.
 
 **Remarques** :
-- Si vous utilisez le collecteur Datadog Distribution of OpenTelemetry (DDOT) pour collecter des logs ou des métriques, vous devez [utiliser la source OpenTelemetry pour envoyer ces données à Observability Pipelines][4].
+- Si vous utilisez le Collector de l'Agent, l'OpenTelemetry Collector qui s'exécute parallèlement au Datadog Agent en tant que processus distinct, pour collecter des logs ou des métriques, vous devez [utiliser la source OpenTelemetry pour envoyer ces données à Observability Pipelines][4].
 - Le Datadog Agent envoie des logs et des métriques marqués avec `ddsource` et `ddtags`, et non `source` et `tags`. Lorsque vous définissez des requêtes ou des filtres de processeur pour ces événements, utilisez plutôt `ddsource` et `ddtags`.
 
 ## Prérequis {#prerequisites}
@@ -32,11 +32,11 @@ Utilisez la source Datadog Agent d'Observability Pipelines pour recevoir des log
 
 ## Configuration {#setup}
 
-<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement l'identifiant de l'adresse du Datadog Agent et, le cas échéant, la phrase secrète de la clé TLS. Ne <b>saisissez pas</b> les valeurs réelles.</div>
+<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement l'identifiant de l'adresse du Datadog Agent et, le cas échéant, la phrase secrète de la clé TLS. Ne saisissez <b>pas</b> les valeurs réelles. Consultez <a href="/observability_pipelines/configuration/secrets_management/">Secrets Management</a> pour obtenir les instructions de configuration.</div>
 
 Configurez cette source lorsque vous [configurez un pipeline][1]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][6], en utilisant l'[API][7] ou avec [Terraform][8]. Les instructions de cette section concernent la configuration de la source dans l'UI.
 
-Après avoir sélectionné la source Datadog Agent dans l'interface utilisateur du pipeline, saisissez l'identifiant de votre adresse de Datadog Agent. Si vous le laissez vide, le [default](#secret-defaults) est utilisé.
+Après avoir sélectionné la source Datadog Agent dans l'interface utilisateur du pipeline, saisissez l'identifiant de votre adresse de Datadog Agent. Cet identifiant fait référence à l'adresse de liaison sur laquelle le Worker écoute les connexions entrantes de l'Agent, telle que `<OPW_HOST>:8282`. Si vous laissez le champ de l'identifiant vide, la [valeur par défaut](#secret-defaults) est utilisée.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 

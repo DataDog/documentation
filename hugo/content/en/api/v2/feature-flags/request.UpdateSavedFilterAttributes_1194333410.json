@@ -1,0 +1,22 @@
+{
+  "data": {
+    "type": "saved-filters",
+    "attributes": {
+      "name": "patchSavedFilterTest-combined-157e7ff3",
+      "description": "Combined synthetic test update.",
+      "targeting_rules": [
+        {
+          "conditions": [
+            {
+              "operator": "ONE_OF",
+              "attribute": "org_id",
+              "value": [
+                "test-org-1"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

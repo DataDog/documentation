@@ -52,12 +52,14 @@ Para los tokens de acceso personal, consulte [Tokens de acceso personal][2].
 ## Crear un token de acceso de servicio {#create-a-service-access-token}
 
 1. Vaya a [**Configuración de la organización** > **Cuentas de servicio**][3] y haga clic en una cuenta de servicio.
-2. En el panel de detalles, bajo **Tokens de acceso**, haga clic en {{< ui >}}+ New Token{{< /ui >}}.
+2. En el panel de detalles, en **Access Tokens**, haga clic en {{< ui >}}\+ New Token{{< /ui >}}.
 3. Ingrese un {{< ui >}}Name{{< /ui >}} para el token.
 4. Seleccione una {{< ui >}}Expiration Date{{< /ui >}}: **1 día**, **1 mes**, **1 año**, **Nunca**,
    o **Personalizado**. Seleccione **Nunca** para un token sin fecha de vencimiento.
 5. Haga clic en {{< ui >}}Select Scopes{{< /ui >}} para definir a qué puede acceder el token. Otorgue solo los
    permisos que requiera su flujo de trabajo, luego haga clic en {{< ui >}}Save{{< /ui >}}.
+
+**Nota:** Cada cuenta de servicio puede tener hasta 500 SATs.
 
 <div class="alert alert-warning">Datadog muestra el secreto del token solo una vez al momento de la creación.
 Cópielo y guárdelo de forma segura. No podrá recuperarlo más tarde.</div>
@@ -80,7 +82,7 @@ Pase el SAT como un token Bearer en el encabezado `Authorization`. Este método 
 clave de API:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "Authorization: Bearer <YOUR_SAT>"
 ```
 
@@ -89,7 +91,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 Pase el SAT en el encabezado `dd-application-key`:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "dd-application-key: <YOUR_SAT>"
 ```
 
@@ -137,7 +139,7 @@ después de la creación. Para cambiar el vencimiento, revoque el token y cree u
 | Permiso | Descripción |
 |------------|-------------|
 | `service_account_write` | Crear SATs para cuentas de servicio que usted administra |
-| `org_app_keys_read` | Ver SATs para todas las cuentas de servicio en la organización |
+| `org_app_keys_read` | Visualizar SATs para todas las cuentas de servicio en la organización |
 | `org_app_keys_write` | Crear, editar y revocar SATs para cualquier cuenta de servicio |
 
 Para obtener más información, consulte [Access Control basado en roles][5].

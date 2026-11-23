@@ -1,0 +1,37 @@
+entries:
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40731
+    operations:
+      - ListScorecardOutcomes
+    title: Scope Scorecards Outcomes Test And Document Pagination
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateScorecardCampaign
+      - DeleteScorecardCampaign
+      - GetScorecardCampaign
+      - ListScorecardCampaigns
+      - ListScorecards
+      - UpdateScorecardCampaign
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateScorecardCampaign
+      - CreateScorecardOutcomesBatch
+      - CreateScorecardRule
+      - DeleteScorecardCampaign
+      - DeleteScorecardRule
+      - GetScorecardCampaign
+      - ListScorecardCampaigns
+      - ListScorecardOutcomes
+      - ListScorecardRules
+      - ListScorecardScores
+      - ListScorecards
+      - UpdateScorecardCampaign
+      - UpdateScorecardOutcomes
+      - UpdateScorecardRule
+    title: Document rate-limit headers on the shared 429 responses

@@ -1,7 +1,7 @@
 # Allows ddoghq/datadog-api-spec CI to look up its generated documentation PR.
 issuer: https://token.actions.githubusercontent.com
 
-subject: repo:ddoghq/datadog-api-spec:pull_request
+subject: repo:ddoghq@230443989/datadog-api-spec@1405341541:pull_request
 
 claim_pattern:
   base_ref: master

@@ -13,7 +13,6 @@ further_reading:
 Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
-- [**Skills:**](#skills) Reusable procedures Bits can invoke during an investigation
 - [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks
@@ -31,6 +30,8 @@ Because these links are user-defined, you have control over what Bits reviews, e
 
 To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits to conduct more accurate and effective investigations.
 
+Bits follows the links in the monitor message that it has access to, such as Notebooks and [Confluence pages][3].
+
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ## Bits.md
@@ -38,6 +39,9 @@ To maximize the value of this integration, document the services, dependencies, 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+
+- **Where it applies**: In the `bits.md` settings, use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which Bits products use the file.
+- **Links**: Bits can follow links in `bits.md` that it has access to.
 
 ### Sample bits.md
 
@@ -104,14 +108,6 @@ Rule:
 
 {{< /code-block >}}
 
-## Skills
-
-[Skills][3] are named, reusable procedures that you create and manage centrally, then make available to Bits products, including Bits Investigation. A skill packages instructions (and, where relevant, the tools or queries needed to carry them out) for a specific task, such as how to diagnose a particular subsystem, or how to query a specific external tool your team relies on.
-
-Bits Investigation automatically invokes a skill when its name and description match the situation at hand, the same way Bits Code discovers and invokes custom skills in your repository. This makes skills a good place to put a procedure you'd otherwise have to repeat across multiple monitors' runbooks or restate in `bits.md`, and to keep it consistent across investigations, chat, and other Bits products that draw on the same skill.
-
-To create or manage skills, go to [{{< ui >}}Actions{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][3].
-
 ## Feedback and memories
 
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
@@ -135,4 +131,4 @@ To manage memories, including viewing and deleting them, go to the {{< ui >}}Mem
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
-[3]: https://app.datadoghq.com/actions/skills
+[3]: /bits_ai/bits_investigation/configure/#confluence

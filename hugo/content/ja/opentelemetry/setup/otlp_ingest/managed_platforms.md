@@ -20,6 +20,8 @@ Datadog はマネージドプラットフォーム専用の OTLP エンドポイ
 
 <div class="alert alert-danger">マネージドプラットフォームのエンドポイントに送信されたホストメタデータは、<a href="/infrastructure/list/">インフラストラクチャーホストリスト</a>には反映されません。</div>
 
+ダイレクトOTLPインテークに関するホスト名の推奨については、[Hostname and Tagging][19] を参照してください。
+
 各エンドポイントは、以下のシグナルパスをサポートしています。
 
 | シグナル  | パス          |
@@ -121,3 +123,4 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY}"
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
+[19]: /ja/opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector

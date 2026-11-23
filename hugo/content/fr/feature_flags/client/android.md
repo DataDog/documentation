@@ -20,7 +20,7 @@ title: Feature Flags Android et Android TV
 ---
 ## Présentation {#overview}
 
-Cette page décrit comment instrumenter votre application Android ou Android TV avec le Datadog Feature Flags SDK. Les Datadog Feature Flags offrent un moyen unifié de contrôler à distance la disponibilité des fonctionnalités dans votre application, d'expérimenter en toute sécurité et de proposer de nouvelles expériences en toute confiance.
+Cette page décrit comment instrumenter votre application Android ou Android TV avec le Datadog Feature Flags SDK. Datadog Feature Flags offre un moyen unifié de contrôler à distance la disponibilité des fonctionnalités dans votre application, d'expérimenter en toute sécurité et de proposer de nouvelles expériences en toute confiance.
 
 Le Datadog Feature Flags SDK pour Android est basé sur [OpenFeature][1], une norme ouverte pour la gestion des Feature Flags. Ce guide explique comment installer le SDK, configurer le fournisseur Datadog et évaluer les indicateurs dans votre application.
 
@@ -43,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -95,13 +99,12 @@ val configuration = Configuration.Builder(
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 ```
 
-## Activer les Feature Flags {#enable-flags}
+## Activez les indicateurs {#enable-flags}
 
 Après avoir initialisé Datadog, activez `Flags` pour l'attacher à l'instance actuelle du Datadog Android SDK et préparer la création du fournisseur et l'évaluation des Feature Flags :
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
@@ -295,6 +298,113 @@ val stateJob = lifecycleScope.launch {
 
 Annulez le job de collecte lorsque le composant d'observation s'arrête. Par exemple, effectuez la collecte à partir de `lifecycleScope` dans un `Activity` ou `Fragment` Android, ou à partir de `viewModelScope` dans un `ViewModel`.
 
+## Contrôlez la télémétrie d'évaluation des indicateurs et la participation aux expériences {#control-flag-evaluation-telemetry-and-experiment-participation}
+
+Le refus de la télémétrie d'évaluation des indicateurs nécessite la version `3.16.0` ou ultérieure. Le refus de participer à Experimentation nécessite la version `3.17.0` ou ultérieure. Utilisez la même version de `dd-sdk-android-flags` et `dd-sdk-android-flags-openfeature`. Les deux contrôles sont indépendants et désactivés par défaut. Voir [Désactivation de la télémétrie d'évaluation des indicateurs et de la participation à Experimentation][4] pour les concepts communs.
+
+### Contrôlez la télémétrie d'évaluation des indicateurs {#control-flag-evaluation-telemetry}
+
+Dans la version `3.16.0` ou ultérieure, activez le refus de la télémétrie sur le client sous-jacent. Fournissez la préférence de l'utilisateur sous forme de booléen typé dans le contexte OpenFeature :
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+    .asOpenFeatureProvider()
+val initialContext = ImmutableContext(
+    targetingKey = "user-123",
+    attributes = mapOf("dd_evaluation_telemetry_opt_out" to Value.Boolean(true))
+)
+OpenFeatureAPI.setProviderAndWait(provider, initialContext = initialContext)
+{{< /code-block >}}
+
+Exécutez `setProviderAndWait` à partir d'une coroutine. Mettez à jour la préférence avec `OpenFeatureAPI.setEvaluationContext`, tout en préservant la clé de ciblage et les autres attributs. La dernière préférence supprime immédiatement la télémétrie, y compris lors d'un rafraîchissement d'affectation en attente ou ayant échoué.
+
+Pour le client Flags natif, utilisez le setter typé au lieu d'un attribut de contexte de chaîne :
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.setEvaluationTelemetryOptOut
+
+val flagsClient = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .build()
+flagsClient.setEvaluationTelemetryOptOut(true)
+{{< /code-block >}}
+
+Appelez `setEvaluationTelemetryOptOut(false)` pour reprendre la télémétrie. Mettez à jour cette décision lorsque l'utilisateur ou la préférence change. Le contexte de ciblage natif contient des chaînes ; une chaîne `"true"` n'active pas la suppression.
+
+### Configurez le fournisseur {#configure-the-provider}
+
+Après avoir initialisé Datadog et activé Flags, configurez les deux contrôles avant de construire le client. L'exemple suivant nécessite la version `3.17.0` ou ultérieure. Il supprime la télémétrie d'évaluation des indicateurs et exclut immédiatement l'utilisateur des allocations d'expériences :
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.ExperimentationOptOutMode
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)
+    .build()
+    .asOpenFeatureProvider()
+
+val preferenceTimestamp = "2026-10-30T12:00:00Z" // Use the user's stored preference.
+val attributes = mapOf(
+    "tier" to Value.String("premium"),
+    "dd_evaluation_telemetry_opt_out" to Value.Boolean(true),
+    "dd_experimentation_opt_out_at" to Value.String(preferenceTimestamp)
+)
+OpenFeatureAPI.setProviderAndWait(
+    provider,
+    initialContext = ImmutableContext(targetingKey = "user-123", attributes = attributes)
+)
+{{< /code-block >}}
+
+Exécutez `setProviderAndWait` à partir d'une coroutine. Configurez le client lors de sa création initiale ; ne créez pas un autre client avec le même nom pour modifier ces options.
+
+Lorsqu'elle est activée, la désactivation de la télémétrie d'évaluation des indicateurs supprime les nouveaux événements d'évaluation, les décomptes agrégés et les annotations automatiques des indicateurs RUM. Utilisez `Value.Boolean(true)`, pas la chaîne `"true"`. Il ne modifie pas les valeurs des indicateurs, ne supprime pas les expositions aux expérimentations et n'efface pas la télémétrie précédemment enregistrée.
+
+### Choisissez une politique d'expérimentation {#choose-an-experimentation-policy}
+
+| Mode | Comportement avec un horodatage de refus valide |
+| --- | --- |
+| `ExperimentationOptOutMode.DISABLED` | Ignorer l'horodatage. C'est le comportement par défaut. |
+| `ExperimentationOptOutMode.IMMEDIATE` | Exclure toutes les allocations d'expériences. Les allocations de fonctionnalités ordinaires restent disponibles. |
+| `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` | Exclure les allocations activées à partir de l'horodatage, ou sans métadonnées d'activation. Les allocations antérieures restent éligibles. |
+
+Le mode future-experiments-only vérifie l'heure d'activation de l'allocation, et non l'inscription précédente. Une allocation plus ancienne peut affecter un utilisateur pour la première fois. Les deux modes activés prennent effet immédiatement ; un horodatage futur ne planifie pas de changement de préférence.
+
+Stockez l'horodatage lorsque l'utilisateur choisit de se désinscrire. Réutilisez-le lors des redémarrages de l'application et entre les clients qui partagent la préférence. Utilisez un horodatage valide avec un fuseau horaire, tel que `2026-10-30T12:00:00Z`. Des horodatages non valides dans un mode activé empêchent les demandes d'affectation et font en sorte que les évaluations renvoient la valeur par défaut de l'application avec une erreur de contexte non valide.
+
+Les modes d'expérimentation activés nécessitent une prise en charge par le backend pour la politique sélectionnée. Lors des changements de contexte, les évaluations renvoient les valeurs par défaut de l'application jusqu'à ce que des affectations correspondantes soient disponibles. Cela s'applique également lorsque le contexte n'a pas d'horodatage de refus.
+
+La version `3.17.0` ajoute `ErrorCode.INVALID_CONTEXT`. Mettez à jour les expressions Kotlin `when` exhaustives lors de la mise à niveau.
+
+### Mettez à jour la préférence {#update-the-preference}
+
+Mettez à jour le contexte sur le client existant au lieu de créer un autre client. Conservez la clé de ciblage et les autres attributs de l'application. Pour reprendre la télémétrie d'évaluation des indicateurs, définissez `dd_evaluation_telemetry_opt_out` sur le booléen `false`. Pour autoriser à nouveau l'expérimentation, supprimez `dd_experimentation_opt_out_at`.
+
+{{< code-block lang="kotlin" >}}
+val updatedAttributes = attributes.toMutableMap()
+updatedAttributes["dd_evaluation_telemetry_opt_out"] = Value.Boolean(false)
+updatedAttributes.remove("dd_experimentation_opt_out_at")
+OpenFeatureAPI.setEvaluationContext(
+    ImmutableContext(targetingKey = "user-123", attributes = updatedAttributes)
+)
+{{< /code-block >}}
+
+Ces contrôles ne remplacent pas un système de consentement d'application. Les demandes d'affectation et les expositions aux expériences autorisées peuvent toujours contenir des données utilisateur.
+
 ## Configuration avancée {#advanced-configuration}
 
 ### Configuration globale {#global-configuration}
@@ -303,14 +413,22 @@ L'`Flags.enable()`API accepte une configuration facultative avec les options lis
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
 
+`initializationTimeout(timeoutMs)`
+: Délai maximal, en millisecondes, pour que le premier contexte d'évaluation soit prêt. Le délai d'attente couvre le chargement des données mises en cache, la récupération des affectations, la lecture et le décodage de la réponse, le stockage des affectations et la publication de l'état prêt. Il ne modifie pas le délai d'attente du client HTTP. L'opération d'affectation se poursuit après le délai d'attente et peut faire passer le client à `Ready` lorsqu'elle se termine.
+
+Le délai d'attente s'applique uniquement au premier appel `setEvaluationContext`. Cet appel consomme le délai d'attente même si l'opération échoue ou ne démarre jamais. Les appels ultérieurs n'ont pas de minuteur d'initialisation. La valeur par défaut est `5_000` millisecondes. Définissez-le sur zéro ou sur une valeur négative pour désactiver le délai d'attente. Lorsque le délai d'attente expire, le client devient `Stale` si des affectations correspondantes sont disponibles dans le cache. Sinon, il devient `Error`.
+
+<div class="alert alert-info"><code>initializationTimeout</code> est disponible dans <code>dd-sdk-android-flags</code> 3.14.0 et versions ultérieures.</div>
+
 `trackExposures()`
-: Lorsque `true` (par défaut), le SDK enregistre automatiquement un _événement d'exposition_ lorsqu'un Feature Flag est évalué. Ces événements contiennent des métadonnées sur le Feature Flag auquel il a été accédé, la variante qui a été servie et dans quel contexte : Ils sont envoyés à Datadog afin que vous puissiez analyser ultérieurement l'adoption des Feature Flags. Si vous n'avez besoin que d'une évaluation locale sans télémétrie, vous pouvez la désactiver avec : `trackExposures(false)`.
+: Lorsque `true` (par défaut), le SDK enregistre automatiquement un _événement d'exposition_ lorsqu'un Feature Flag est évalué. Ces événements contiennent des métadonnées sur le Feature Flag auquel il a été accédé, la variante qui a été servie et dans quel contexte : Ils sont envoyés à Datadog afin que vous puissiez analyser ultérieurement l'adoption des Feature Flags. Si vous avez uniquement besoin d'une évaluation locale sans télémétrie, vous pouvez la désactiver avec: `trackExposures(false)`.
 
 `rumIntegrationEnabled()`
 : Lorsque `true` (par défaut), les évaluations des Feature Flags sont suivies dans RUM, ce qui permet de les corréler avec les sessions utilisateur. Cela permet des analyses telles que _« Les utilisateurs de la variante B rencontrent-ils plus d'erreurs ? »_. Si votre application n'utilise pas RUM, ce Feature Flag n'a aucun effet et peut être laissé en toute sécurité à sa valeur par défaut. Utilisez `rumIntegrationEnabled(false)` pour désactiver l'intégration RUM.
@@ -320,9 +438,9 @@ Flags.enable(config)
 
   Le comportement exact du mode Graceful dépend de votre configuration de build :
 
-  * **Builds de version** : Le SDK applique toujours le mode Graceful : toute utilisation incorrecte est uniquement consignée en interne si `Datadog.setVerbosity()` est configuré.
-  * **Builds de débogage** avec `gracefulModeEnabled = true` (par défaut) : Le SDK consigne toujours des avertissements dans la console.
-  * **Builds de débogage** avec `gracefulModeEnabled = false` : Le SDK déclenche `IllegalStateException` en cas d'utilisation incorrecte de l'API, imposant une approche de type fail-fast qui aide à détecter rapidement les erreurs de configuration.
+  * **Versions de production** : le SDK applique toujours Graceful Mode : toute utilisation incorrecte est uniquement consignée en interne si `Datadog.setVerbosity()` est configuré.
+  * **Versions de débogage** avec `gracefulModeEnabled = true` (par défaut) : le SDK consigne toujours les avertissements dans la console.
+  * **Versions de débogage** avec `gracefulModeEnabled = false` : le SDK génère `IllegalStateException` en cas d'utilisation incorrecte de l'API, imposant une approche « fail-fast » qui aide à détecter rapidement les erreurs de configuration.
 
   Vous pouvez ajuster `gracefulModeEnabled()` en fonction de votre phase de développement ou de QA.
 
@@ -341,13 +459,13 @@ val provider = FlagsClient.Builder()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
-## Intégration directe de FlagsClient (avancé) {#direct-flagsclient-integration-advanced}
+## Intégration directe de FlagsClient (avancée) {#direct-flagsclient-integration-advanced}
 
-Pour la plupart des applications, l'API OpenFeature décrite ci-dessus est l'approche recommandée. Cependant, vous pouvez utiliser directement le `FlagsClient` Datadog si vous avez des besoins spécifiques non pris en charge par l'abstraction OpenFeature.
+Pour la plupart des applications, l'API OpenFeature décrite ci-dessus est l'approche recommandée. Cependant, vous pouvez utiliser le `FlagsClient` Datadog directement si vous avez des besoins spécifiques que l'abstraction OpenFeature ne prend pas en charge.
 
-**Utilisez FlagsClient directement uniquement si vous :**
+**N'utilisez FlagsClient directement que si vous :**
 
-- Avez besoin de **contextes d'évaluation indépendants multiples** dans la même application (par exemple, des contextes différents pour des utilisateurs différents dans une application multi-utilisateurs)
+- Avez besoin de **plusieurs contextes d'évaluation indépendants** dans la même application (par exemple, des contextes différents pour des utilisateurs différents dans une application multi-utilisateurs)
 - Souhaitez travailler directement avec des **types Kotlin natifs** (`JSONObject` au lieu de `Value.Structure`)
 - Avez besoin d'un **contrôle précis** sur le cycle de vie du client et la configuration par instance
 
@@ -403,9 +521,9 @@ flagsClient.setEvaluationContext(
 
 Cette méthode récupère les attributions des Feature Flags depuis le serveur de manière asynchrone en arrière-plan. L'opération est non bloquante et sûre pour les threads. Les mises à jour des Feature Flags sont disponibles pour les évaluations ultérieures une fois l'opération en arrière-plan terminée.
 
-### Observer les changements d'état du client direct {#observe-direct-client-state-changes}
+### Observer les changements d'état directs du client {#observe-direct-client-state-changes}
 
-<div class="alert alert-info">L'observation de l'état du client direct avec <code>flagsClient.state</code> est disponible dans <code>dd-sdk-android-flags</code> 3.4.0 et versions ultérieures.</div>
+<div class="alert alert-info">Observation directe de l'état du client avec <code>flagsClient.state</code> est disponible dans <code>dd-sdk-android-flags</code> 3.4.0 et versions ultérieures.</div>
 
 Utilisez `flagsClient.state` pour vérifier l'état actuel du client direct ou enregistrer un écouteur pour les changements d'état :
 
@@ -442,7 +560,7 @@ val currentState = flagsClient.state.getCurrentState()
 
 L'écouteur reçoit l'état actuel lors de son enregistrement, puis reçoit les futurs changements d'état. Veillez à ce que le callback soit rapide et déléguez les tâches longues à un autre thread. Appelez `flagsClient.state.removeListener(listener)` lorsque le composant d'observation s'arrête.
 
-### Évaluer les Feature Flags (FlagsClient) {#evaluate-flags-flagsclient}
+### Évaluer les indicateurs (FlagsClient) {#evaluate-flags-flagsclient}
 
 {{% collapse-content title="Feature Flags booléens" level="h4" %}}
 {{< code-block lang="kotlin" >}}
@@ -504,7 +622,7 @@ print(details.errorCode)  // The error that occurred during evaluation, if any
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-### Comparaison d'API {#api-comparison}
+### Comparaison des API {#api-comparison}
 
 Ce tableau met en évidence les différences clés entre les API OpenFeature et `FlagsClient` pour vous aider à choisir l'intégration qui correspond à vos besoins.
 
@@ -512,16 +630,16 @@ Ce tableau met en évidence les différences clés entre les API OpenFeature et 
 |---------|----------------|-----------------|
 | **Standard d'API** | OpenFeature (neutre vis-à-vis du fournisseur) | Spécifique à Datadog |
 | **Contexte d'évaluation** | Global/statique | Par instance de client |
-| **Flags structurés** | `Value.Structure` | `JSONObject` |
-| **Sécurité de type** | Types `Value` OpenFeature | Types natifs Kotlin |
-| **Verrouillage fournisseur** | Faible (neutre vis-à-vis du fournisseur)| Plus élevé (spécifique à Datadog)|
-| **Gestion d'état** | Observation basée sur les flux| Enregistrement manuel de listeners|
+| **Indicateurs de fonctionnalité structurés** | `Value.Structure` | `JSONObject` |
+| **Sécurité des types** | Types OpenFeature `Value` | Types natifs Kotlin |
+| **Dépendance vis-à-vis du fournisseur** | Faible (neutre vis-à-vis du fournisseur) | Plus élevée (spécifique à Datadog) |
+| **Gestion de l'état** | Observation basée sur les flux | Enregistrement manuel des écouteurs |
 
 ## Tests {#testing}
 
-Vous pouvez effectuer des tests sur un environnement de test Datadog dédié avec le fournisseur Datadog réel, ou le remplacer par un `FeatureProvider` en mémoire pour contrôler directement les valeurs des flags dans le code de test. Cette section présente l'approche en mémoire, qui permet de garder les tests hermétiques et hors ligne. Le SDK OpenFeature Kotlin en amont ne fournit pas de [`InMemoryProvider`][3], les tests utilisent donc un petit `FeatureProvider` personnalisé. L'exemple ci-dessous remplace le fournisseur de `OpenFeatureAPI` — si votre code de production utilise directement le wrapper `FlagsClient` de Datadog, votre test doit effectuer des assertions via le même client `OpenFeatureAPI` que celui utilisé par le wrapper, et non `FlagsClient`.
+Vous pouvez effectuer des tests sur un environnement de test Datadog dédié avec le fournisseur Datadog réel, ou le remplacer par un `FeatureProvider` en mémoire pour contrôler directement les valeurs des indicateurs de fonctionnalité dans le code de test. Cette section présente l'approche en mémoire, qui permet de garder les tests hermétiques et hors ligne. Le SDK OpenFeature Kotlin en amont ne fournit pas de [`InMemoryProvider`][3] ; les tests utilisent donc un petit `FeatureProvider` personnalisé. L'exemple ci-dessous remplace le fournisseur de `OpenFeatureAPI` : si votre code de production utilise directement le wrapper `FlagsClient` de Datadog, votre test doit effectuer une assertion via le même client `OpenFeatureAPI` que celui utilisé par le wrapper, et non `FlagsClient`.
 
-Ajoutez `kotlinx-coroutines-test` à votre configuration de test (le `initialize` du SDK est une fonction `suspend`) :
+Ajoutez `kotlinx-coroutines-test` à votre configuration de test (le `initialize` du SDK est une fonction `suspend`) :
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
@@ -582,7 +700,7 @@ class CheckoutFlagsTest {
 }
 {{< /code-block >}}
 
-`OpenFeatureAPI` est un singleton à l'échelle du processus, réinitialisez-le donc entre les classes de test si les tests partagent une JVM. Enveloppez `setProviderAndWait` dans `runTest { ... }` — il ne peut pas être appelé depuis une méthode `@Before` simple car il est `suspend`.
+`OpenFeatureAPI` est un singleton à l'échelle du processus ; réinitialisez-le donc entre les classes de test si les tests partagent une JVM. Enveloppez `setProviderAndWait` dans `runTest { ... }` — il ne peut pas être appelé depuis une méthode `@Before` simple car il est `suspend`.
 
 ## Pour aller plus loin {#further-reading}
 
@@ -591,3 +709,5 @@ class CheckoutFlagsTest {
 [1]: https://openfeature.dev/
 [2]: /fr/account_management/api-app-keys/#client-tokens
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
+
+[4]: /fr/feature_flags/concepts/opt_out/

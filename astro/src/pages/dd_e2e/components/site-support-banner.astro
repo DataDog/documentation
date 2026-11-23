@@ -1,0 +1,48 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
+import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
+
+const title = "SiteSupportBanner";
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
+    <SiteSupportBanner pathname={Astro.url.pathname} />
+    <div class="prose">
+      <h1>SiteSupportBanner</h1>
+
+      <p>
+        This page's path is covered by a test-only <code>url_paths</code> entry, so
+        it carries a site-support banner for US1-FED and US2-FED. The banner renders
+        in the content column, directly above the page title, matching where Hugo
+        puts it. Switch the site selector to either of those sites to reveal it.
+      </p>
+
+      <p>
+        Every unsupported site renders its own hidden variant, so the banner can
+        name the reader's own site without any client-side substitution. The
+        entry lives in <code>tests/fixtures/siteSupport/dd_e2e.yaml</code> and merges
+        into the dataset outside the live build.
+      </p>
+
+      <RegionSelectorIsland />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+</style>

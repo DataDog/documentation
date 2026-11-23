@@ -112,7 +112,7 @@ For more details on the measures collected and step-by-step graph configurations
 
 Incident Management integrates closely with other Datadog products, including:
 
-- [Datadog Status Pages][26] to create public or private status pages and connect them to incidents.
+- [Datadog Status Pages][26] to create public, internal, or private status pages and connect them to incidents.
 - [Datadog On-Call][27] to escalate pages into incidents and manually or automatically page teams from an incident.
 - [Datadog Notebooks][28] to draft and review [postmortems][34].
 - [Datadog Workflow Automation][29] to build and execute automations.
@@ -123,7 +123,6 @@ Incident Management integrates with third-party applications, including:
 
 - [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident [postmortems][34].
-- [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Microsoft Teams][23] to create channels and video meetings for incidents.
 - [PagerDuty][12] and [OpsGenie][13] to page your on-call engineers and auto-resolve pages upon incident resolution.
@@ -155,7 +154,6 @@ Incident Management integrates with third-party applications, including:
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
 [20]: /incident_response/incident_management/investigate/describe
-[21]: /coterm
 [22]: /integrations/confluence/
 [23]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /integrations/zoom-incident-management/

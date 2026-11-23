@@ -8,6 +8,9 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
+- link: "https://www.datadoghq.com/blog/monitor-native-apps-datadog-rum/"
+  tag: "Blog"
+  text: "Monitor C and C++ applications with Datadog RUM"
 ---
 
 ## Overview
@@ -48,17 +51,18 @@ core->Start();
 ```c
 #include "datadog.h"
 
-dd_core_config_t config;
-dd_core_config_init(&config, "<client_token>", "<service_name>", "<environment>");
-dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_config_t* config =
+    dd_core_config_create("<client_token>", "<service_name>", "<environment>");
+dd_core_t* core = dd_core_create(config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_config_destroy(config);
 
 /* Register crash reporting */
 dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, NULL);
 
 /* Register RUM */
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
+dd_rum_config_t* rum_config = dd_rum_config_create("<rum_application_id>");
+dd_rum_t* rum = dd_rum_init(core, rum_config);
+dd_rum_config_destroy(rum_config);
 
 dd_core_start(core);
 ```
@@ -111,10 +115,10 @@ auto crash_reporting = datadog::CrashReporting::Register(core, crash_config);
 {{% tab "C (FFI)" %}}
 
 ```c
-dd_crash_reporting_config_t crash_config;
-dd_crash_reporting_config_init(&crash_config);
-dd_crash_reporting_config_set_handler_exe_path(&crash_config, "/path/to/crashpad_handler");
-dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, &crash_config);
+dd_crash_reporting_config_t* crash_config = dd_crash_reporting_config_create();
+dd_crash_reporting_config_set_handler_exe_path(crash_config, "/path/to/crashpad_handler");
+dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, crash_config);
+dd_crash_reporting_config_destroy(crash_config);
 ```
 
 {{% /tab %}}

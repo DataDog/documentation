@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "type": "execution_policy",
+    "attributes": {
+      "name": "Cassette Execution Policy Updated",
+      "effect": "deny",
+      "action_pattern": {
+        "integration": "INTEGRATION_SLACK",
+        "action_fqns": [
+          "*"
+        ]
+      },
+      "scope": {
+        "slack": {
+          "rules": [
+            {
+              "channel_name_selectors": [
+                "incident-denied"
+              ]
+            }
+          ]
+        }
+      },
+      "targets": [
+        {
+          "name": "Incident workspace",
+          "agent_tags": [
+            "slack_workspace_id:T01234567"
+          ]
+        }
+      ]
+    }
+  }
+}

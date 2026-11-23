@@ -7,28 +7,28 @@ code_lang_weight: 1
 further_reading:
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: Documentación
-  text: Utiliza componentes personalizados de OpenTelemetry con Datadog Agent
-title: Instalar el recolector DDOT como un DaemonSet de Kubernetes
+  text: Utilice componentes personalizados de OpenTelemetry con el Datadog Agent
+title: Instale el DDOT Collector como un DaemonSet de Kubernetes
 type: multi-code-lang
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Sigue esta guía para desplegar la Datadog Distribution of OpenTelemetry (DDOT) Collector como un DaemonSet de Kubernetes utilizando Helm o Datadog Operator.
+Siga esta guía para implementar el Datadog Distribution of OpenTelemetry (DDOT) Collector como un DaemonSet de Kubernetes utilizando Helm o el Datadog Operator.
 
 <div class="alert alert-info">
-  <strong>¿Necesitas componentes adicionales de OpenTelemetry?</strong> Si necesitas componentes adicionales a los incluidos en el paquete predeterminado, sigue <a href="/opentelemetry/setup/ddot_collector/custom_components">Utiliza componentes personalizados de OpenTelemetry</a> para extender las capacidades de Datadog Agent. Para una lista de componentes incluidos por defecto, consulta <a href="/opentelemetry/agent/#opentelemetry-collector-components">componentes del recolector de OpenTelemetry</a>.
+  <strong>¿Necesita componentes adicionales de OpenTelemetry?</strong> Si necesita componentes más allá de los incluidos en el paquete predeterminado, siga <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> para extender las capacidades del Datadog Agent. Para obtener una lista de los componentes incluidos de forma predeterminada, consulte <a href="/opentelemetry/agent/#opentelemetry-collector-components">Componentes del Collector de OpenTelemetry</a>.
 </div>
 
 ## Requisitos {#requirements}
 
-Para completar esta guía, necesitas lo siguiente:
+Para completar esta guía, necesita lo siguiente:
 
-**Cuenta de Datadog**:
-1. [Crea una cuenta de Datadog][1] si no tienes una.
-1. Encuentra o crea tu [clave de API de Datadog][2].
+**Una cuenta de Datadog**:
+1. [Cree una cuenta de Datadog][1] si no tiene una.
+1. Busque o cree su [clave de Datadog API][2].
 
 **Software**:
-Instala y configura lo siguiente en tu máquina:
+Instale y configure lo siguiente en su máquina:
 
 - Un clúster de Kubernetes (v1.29+)
 - [Helm (v3+)][54]
@@ -36,22 +36,22 @@ Instala y configura lo siguiente en tu máquina:
 
 **Red**: {{% otel-network-requirements %}}
 
-## Instala Datadog Agent con OpenTelemetry Collector {#install-the-datadog-agent-with-opentelemetry-collector}
+## Instale el Datadog Agent con el OpenTelemetry Collector {#install-the-datadog-agent-with-opentelemetry-collector}
 
-<div class="alert alert-info">Esta instalación es necesaria para las configuraciones de Datadog SDK + DDOT y OpenTelemetry SDK + DDOT. Aunque el SDK de Datadog implementa la API de OpenTelemetry, aún requiere el recolector DDOT para procesar y enviar métricas y registros OTLP.</div>
+<div class="alert alert-info">Esta instalación es necesaria tanto para las configuraciones de Datadog SDK + DDOT como de OpenTelemetry SDK + DDOT. Aunque el Datadog SDK implementa la API de OpenTelemetry, todavía requiere el DDOT Collector para procesar y reenviar métricas y registros de OTLP.</div>
 
-### Selecciona el método de instalación {#select-installation-method}
+### Seleccione el método de instalación {#select-installation-method}
 
-Elige uno de los siguientes métodos de instalación:
+Elija uno de los siguientes métodos de instalación:
 
-- [Operador de Datadog][55]: Un enfoque [nativo de Kubernetes][56] que reconcilia y mantiene automáticamente tu configuración de Datadog. Informa el estado de despliegue, salud y errores en su estado de Recurso Personalizado, y limita el riesgo de mala configuración gracias a opciones de configuración de nivel superior.
-- [Helm chart][4]: Una forma sencilla de desplegar el Agente de Datadog. Proporciona capacidades de versionado, retroceso y plantillas, haciendo que los despliegues sean consistentes y más fáciles de replicar.
+- [Datadog Operator][55]: un enfoque [nativo de Kubernetes][56] que reconcilia y mantiene automáticamente su configuración de Datadog. Informa sobre el estado de la implementación, el estado de salud y los errores en el estado de "Custom Resource", y limita el riesgo de una configuración incorrecta gracias a opciones de configuración de nivel superior.
+- [Helm chart][4]: una forma sencilla de implementar el Datadog Agent. Proporciona capacidades de control de versiones, reversión y creación de plantillas, lo que hace que las implementaciones sean consistentes y más fáciles de replicar.
 
 {{< tabs >}}
-{{% tab "Operador de Datadog" %}}
-### Instala el Operador de Datadog {#install-the-datadog-operator}
+{{% tab "Datadog Operator" %}}
+### Instale el Datadog Operator {#install-the-datadog-operator}
 
-Puedes instalar el Datadog Operator en tu clúster usando el [Helm chart del Datadog Operator][1]:
+Puede instalar el Datadog Operator en su clúster utilizando el [Helm chart del Datadog Operator][1]:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -62,9 +62,9 @@ helm install datadog-operator datadog/datadog-operator
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
 {{% /tab %}}
 {{% tab "Helm" %}}
-### Agrega el Repositorio de Helm de Datadog {#add-the-datadog-helm-repository}
+### Agregue el repositorio de Helm de Datadog {#add-the-datadog-helm-repository}
 
-Para agregar el repositorio de Datadog a tus repositorios de Helm:
+Para agregar el repositorio de Datadog a sus repositorios de Helm:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -74,23 +74,23 @@ helm repo update
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configura la clave de API de Datadog {#set-up-datadog-api-key}
+### Configure la clave de Datadog API {#set-up-datadog-api-key}
 
-1. Obtén la [clave de API de Datadog][2].
-1. Almacena la clave de API como un secreto de Kubernetes:
+1. Obtenga la [clave de API][2] de Datadog.
+1. Almacene la clave de API como un secreto de Kubernetes:
    ```shell
    kubectl create secret generic datadog-secret \
      --from-literal api-key=<DD_API_KEY>
    ```
-   Reemplaza `<DD_API_KEY>` con tu clave de API de Datadog real.
+   Reemplace `<DD_API_KEY>` con su clave de Datadog API real.
 
-### Configura Datadog Agent {#configure-the-datadog-agent}
+### Configure el Datadog Agent {#configure-the-datadog-agent}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Después de implementar el Datadog Operator, crea el recurso `DatadogAgent` que activa la implementación del Datadog Agent, Cluster Agent y Runners de Cluster Checks (si se utilizan) en tu clúster de Kubernetes. El Datadog Agent se implementa como un DaemonSet, ejecutando un pod en cada nodo de tu clúster.
+Después de implementar el Datadog Operator, cree el recurso `DatadogAgent` que activa la implementación del Datadog Agent, el Cluster Agent y los Cluster Checks Runners (si se utilizan) en su clúster de Kubernetes. El Datadog Agent se implementa como un DaemonSet, ejecutando un pod en cada nodo de su clúster.
 
-1. Utiliza el archivo `datadog-agent.yaml` para especificar tu configuración de despliegue `DatadogAgent`
+1. Utilice el archivo `datadog-agent.yaml` para especificar su configuración de implementación `DatadogAgent`.
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
    apiVersion: datadoghq.com/v2alpha1
@@ -107,14 +107,14 @@ Después de implementar el Datadog Operator, crea el recurso `DatadogAgent` que 
            keyName: api-key
 {{< /code-block >}}
 
-  - Reemplaza `<CLUSTER_NAME>` con un nombre para tu clúster.
-  - Reemplaza `<DATADOG_SITE>` con tu [sitio de Datadog][1]. Tu sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrate de que se seleccione el **DATADOG SITE** correcto a la derecha.)
+  - Reemplace `<CLUSTER_NAME>` con un nombre para su clúster.
+  - Reemplace `<DATADOG_SITE>` con su [sitio de Datadog][1]. Su sitio es {{< region-param key="dd_site" code="true" >}}. (Asegúrese de que el {{< ui >}}DATADOG SITE{{< /ui >}} correcto esté seleccionado a la derecha.)
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">Para FED, también configura <code>useFIPSAgent: true</code> bajo <code>spec.global</code> para usar la imagen del Datadog Agent compatible con FIPS. Vea <a href="/agent/configuration/fips-compliance/">cumplimiento de FIPS</a>.</div>
+<div class="alert alert-info">Para FED, también establezca <code>useFIPSAgent: true</code> en <code>spec.global</code> para usar la imagen del Agent compatible con FIPS. Consulte <a href="/agent/configuration/fips-compliance/">cumplimiento de FIPS</a>.</div>
 {{% /site-region %}}
 
-2. Habilite el recolector de OpenTelemetry:
+2. Habilite el OpenTelemetry Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   # Enable Features
@@ -123,11 +123,11 @@ Después de implementar el Datadog Operator, crea el recurso `DatadogAgent` que 
       enabled: true
 {{< /code-block >}}
 
-Datadog Operator vincula automáticamente el recolector de OpenTelemetry a los puertos `4317` (nombrado `otel-grpc`) y `4318` (nombrado `otel-http`) por defecto.
+El Datadog Operator vincula automáticamente el OpenTelemetry Collector a los puertos `4317` (llamado `otel-grpc`) y `4318` (llamado `otel-http`) de forma predeterminada.
 
-3. (Opcional) Habilita características adicionales de Datadog:
+3. (Opcional) Habilite funciones adicionales de Datadog:
 
-<div class="alert alert-warning">Habilitar estas características puede incurrir en cargos adicionales. Revisa la <a href="https://www.datadoghq.com/pricing/">página de precios</a> y habla con tu Gerente de Éxito del Cliente antes de continuar.</div>
+<div class="alert alert-warning">Habilitar estas funciones puede generar cargos adicionales. Revise la <a href="https://www.datadoghq.com/pricing/">página de precios</a> y hable con su Customer Success Manager antes de continuar.</div>
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   # Enable Features
@@ -147,27 +147,27 @@ Datadog Operator vincula automáticamente el recolector de OpenTelemetry a los p
       enabled: true
 {{< /code-block >}}
 
-Al habilitar características adicionales de Datadog, siempre utiliza los archivos de configuración de Datadog Agent o del recolector de OpenTelemetry en lugar de depender de las variables de entorno de Datadog.
+Al habilitar funciones adicionales de Datadog, utilice siempre los archivos de configuración del Agente de Datadog o del OpenTelemetry Collector en lugar de depender de las variables de entorno de Datadog.
 
-**Nota**: A partir de Datadog Operator `v1.22.0`, el contenedor DDOT utiliza la imagen `ddot-collector` en lugar de la imagen de Datadog Agent `-full`.
-- Al sobrescribir la etiqueta de imagen del Datadog Agent de nodo, utiliza una etiqueta >= `7.67.0` para que el contenedor OTel sea programado (la imagen `ddot-collector` solo es compatible con >= `7.67.0`).
-- La imagen `ddot-collector` no tiene variante `-full`. Si necesitas una imagen `-full`, establece `spec.override.nodeAgent.image.name` como una imagen completa de Datadog Agent (por ejemplo, `registry.datadoghq.com/agent:7.72.1-full`).
+**Nota**: A partir del operador `v1.22.0`, el contenedor DDOT usa la imagen `ddot-collector` en lugar de la imagen de Agent `-full`.
+- Al anular la etiqueta de la imagen de Agent de nodo, use una etiqueta >= `7.67.0` para que el contenedor OTel esté programado (la imagen `ddot-collector` solo es compatible en >= `7.67.0`).
+- La imagen `ddot-collector` no tiene una variante `-full`. Si necesita una imagen `-full`, establezca `spec.override.nodeAgent.image.name` en una imagen de Agent completa (por ejemplo, `registry.datadoghq.com/agent:7.72.1-full`).
 
 [1]: /es/getting_started/site
 [2]: /es/containers/guide/changing_container_registry/
 {{% /tab %}}
 {{% tab "Helm" %}}
-Utiliza un archivo YAML para especificar los parámetros del Helm chart para el [Datadog Agent chart][1].
+Use un archivo YAML para especificar los parámetros del Helm chart para el [Datadog Agent chart][1].
 
-1. Crea un archivo `datadog-values.yaml` vacío:
+1. Cree un archivo `datadog-values.yaml` vacío:
 
 ```shell
 touch datadog-values.yaml
 ```
 
-<div class="alert alert-info">Los parámetros no especificados utilizan los valores predeterminados de <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
+<div class="alert alert-info">Los parámetros no especificados usan los valores predeterminados de <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
 
-2. Configura el secreto de la clave de API de Datadog:
+2. Configure el secreto de la clave de Datadog API:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -175,13 +175,13 @@ datadog:
   apiKeyExistingSecret: datadog-secret
 {{< /code-block >}}
 
-Establece `<DATADOG_SITE>` en tu [sitio de Datadog][2]. De lo contrario, se establece en `datadoghq.com`, el sitio US1.
+Establezca `<DATADOG_SITE>` en su [sitio de Datadog][2]. De lo contrario, el valor predeterminado es `datadoghq.com`, el sitio US1.
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">Para FED, también configura <code>useFIPSAgent: true</code> en la raíz de tu <code>datadog-values.yaml</code> para usar la imagen de Datadog Agent compatible con FIPS. Vea <a href="/agent/configuration/fips-compliance/">cumplimiento de FIPS</a>.</div>
+<div class="alert alert-info">Para FED, también establezca <code>useFIPSAgent: true</code> en la raíz de su <code>datadog-values.yaml</code> para usar la imagen del Agent compatible con FIPS. Consulte <a href="/agent/configuration/fips-compliance/">cumplimiento de FIPS</a>.</div>
 {{% /site-region %}}
 
-3. Habilita el recolector de OpenTelemetry y configura los puertos esenciales:
+3. Habilite el OpenTelemetry Collector y configure los puertos esenciales:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -197,11 +197,11 @@ datadog:
         name: otel-http
 {{< /code-block >}}
 
-Establece el `hostPort` para exponer el puerto del contenedor a la red externa. Esto permite configurar el exportador OTLP para apuntar a la dirección IP del nodo donde se asigna Datadog Agent.
+Establezca el `hostPort` para exponer el puerto del contenedor a la red externa. Esto permite configurar el exportador OTLP para que apunte a la dirección IP del nodo donde está asignado el Datadog Agent.
 
-Si no deseas exponer el puerto, puedes utilizar el servicio de Datadog Agent en su lugar:
-   - Elimina el <code>hostPort</code> entradas de tu <code>datadog-values.yaml</code> archivo.
-   - En el archivo de despliegue de tu aplicación (`deployment.yaml`), configura el exportador OTLP para usar el servicio de Datadog Agent:
+Si no desea exponer el puerto, puede utilizar el servicio del Agent en su lugar:
+   - Elimine las <code>hostPort</code> entradas de su <code>datadog-values.yaml</code> archivo.
+   - En el archivo de despliegue de su aplicación (`deployment.yaml`), configure el exportador OTLP para utilizar el servicio del Agent:
       ```yaml
       env:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
@@ -210,9 +210,9 @@ Si no deseas exponer el puerto, puedes utilizar el servicio de Datadog Agent en 
           value: 'grpc'
       ```
 
-4. (Opcional) Habilita características adicionales de Datadog:
+4. (Opcional) Habilite funciones adicionales de Datadog:
 
-<div class="alert alert-warning">Habilitar estas características puede incurrir en cargos adicionales. Revisa la <a href="https://www.datadoghq.com/pricing/">página de precios</a> y habla con tu Gerente de Éxito del Cliente antes de continuar.</div>
+<div class="alert alert-warning">Habilitar estas funciones puede generar cargos adicionales. Revise la <a href="https://www.datadoghq.com/pricing/">página de precios</a> y hable con su Customer Success Manager antes de continuar.</div>
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -227,11 +227,11 @@ datadog:
     processCollection: true
 {{< /code-block >}}
 
-Al habilitar características adicionales de Datadog, siempre utilice los archivos de configuración del Agente de Datadog o del recolector de OpenTelemetry en lugar de depender de las variables de entorno de Datadog.
+Al habilitar funciones adicionales de Datadog, utilice siempre los archivos de configuración del Agente de Datadog o del OpenTelemetry Collector en lugar de depender de las variables de entorno de Datadog.
 
-5. (Opcional) Recopilar etiquetas de pod y usarlas como etiquetas para adjuntar a métricas, trazas y registros:
+5. (Opcional) Recopile etiquetas de pod y utilícelas como etiquetas para adjuntarlas a métricas, trazas y registros:
 
-<div class="alert alert-warning">Las métricas personalizadas pueden afectar la facturación. Consulte la <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">página de facturación de métricas personalizadas</a> para más información.</div>
+<div class="alert alert-warning">Las métricas personalizadas pueden afectar la facturación. Consulte la <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">página de facturación de métricas personalizadas</a> para obtener más información.</div>
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
@@ -242,7 +242,7 @@ datadog:
 {{< /code-block >}}
 
 {{% collapse-content title="Archivo datadog-values.yaml completado" level="p" %}}
-Tu `datadog-values.yaml` archivo debería verse algo así:
+Su archivo `datadog-values.yaml` debería verse más o menos así:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 datadog:
   site: datadoghq.com
@@ -279,16 +279,18 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configura el recolector de OpenTelemetry {#configure-the-opentelemetry-collector}
+### Configure el OpenTelemetry Collector {#configure-the-opentelemetry-collector}
+
+Debido a que el DDOT Collector se ejecuta dentro del Datadog Agent, los atributos del nombre de host en la telemetría entrante pueden resolverse con un nombre diferente al del Agent. El procesador `infraattributes` puede aplicar el nombre de host del Agent en su lugar. Consulte [Hostname and Tagging][58] para obtener la configuración recomendada.
 
 {{< tabs >}}
-{{% tab "Operador de Datadog" %}}
-Datadog Operator proporciona una configuración de muestra del OpenTelemetry Collector que puedes usar como punto de partida. Si necesitas modificar esta configuración, Datadog Operator admite dos formas de proporcionar una configuración personalizada de OpenTelemetry Collector:
+{{% tab "Datadog Operator" %}}
+El Datadog Operator proporciona una configuración de ejemplo del OpenTelemetry Collector que puede utilizar como punto de partida. Si necesita modificar esta configuración, el Datadog Operator admite dos formas de proporcionar una configuración personalizada del Collector:
 
-- **Configuración en línea**: Agrega tu configuración personalizada del OpenTelemetry Collector directamente en el campo `features.otelCollector.conf.configData`.
-- **Configuración basada en ConfigMap**: Almacena la configuración de tu OpenTelemetry Collector en un ConfigMap y haz referencia a ella en el campo `features.otelCollector.conf.configMap`. Este enfoque te permite mantener la configuración del Collector desacoplada del recurso `DatadogAgent`.
+- **Configuración en línea**: agregue su configuración personalizada del Collector directamente en el campo `features.otelCollector.conf.configData`.
+- **Configuración basada en ConfigMap**: almacene la configuración de su Collector en un ConfigMap y haga referencia a ella en el campo `features.otelCollector.conf.configMap`. Este enfoque le permite mantener la configuración del Collector desacoplada del recurso `DatadogAgent`.
 
-####  Configuración en línea del Collector {#inline-collector-configuration}
+####  Configuración del Collector en línea {#inline-collector-configuration}
 
 En el fragmento a continuación, la configuración del Collector se coloca directamente bajo el parámetro `features.otelCollector.conf.configData`:
 
@@ -335,6 +337,7 @@ En el fragmento a continuación, la configuración del Collector se coloca direc
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -346,7 +349,7 @@ En el fragmento a continuación, la configuración del Collector se coloca direc
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -356,10 +359,10 @@ En el fragmento a continuación, la configuración del Collector se coloca direc
 
 {{% otel-infraattributes-prereq %}}
 
-Cuando apliques el archivo `datadog-agent.yaml` que contiene este recurso `DatadogAgent`, el Operador monta automáticamente la configuración del Collector en el DaemonSet del Agente.
+Cuando aplica el archivo `datadog-agent.yaml` que contiene este recurso `DatadogAgent`, el Operator monta automáticamente la configuración del Collector en el DaemonSet del Agent.
 
-{{% collapse-content title="Archivo datadog-agent.yaml completado con configuración del Collector en línea" level="p" %}}
-El `datadog-agent.yaml` completado con configuración del Collector en línea debería verse algo así:
+{{% collapse-content title="Archivo datadog-agent.yaml completado con la configuración del Collector en línea" level="p" %}}
+El `datadog-agent.yaml` completado con la configuración del Collector en línea debería verse más o menos así:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -427,6 +430,7 @@ spec:
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -438,7 +442,7 @@ spec:
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -451,14 +455,13 @@ spec:
 
 Para configuraciones más complejas o que se actualizan con frecuencia, almacenar la configuración del Collector en un ConfigMap puede simplificar el control de versiones.
 
-1. Crea un ConfigMap que contenga la configuración del Collector:
+1. Cree un ConfigMap que contenga la configuración de su Collector:
 
 {{< code-block lang="yaml" filename="configmap.yaml" collapsible="false" >}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -490,6 +493,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -501,7 +505,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -511,7 +515,7 @@ data:
 
 <div class="alert alert-danger">El campo para la configuración del Collector en el ConfigMap debe llamarse <code>otel-config.yaml</code>.</div>
 
-2. Referencia el ConfigMap `otel-agent-config-map` en tu recurso `DatadogAgent` usando el parámetro `features.otelCollector.conf.configMap`:
+2. Haga referencia al ConfigMap `otel-agent-config-map` en su recurso `DatadogAgent` utilizando el parámetro `features.otelCollector.conf.configMap`:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
   ...
   # Enable Features
@@ -530,10 +534,10 @@ data:
           name: otel-agent-config-map
 {{< /code-block >}}
 
-El Operador monta automáticamente `otel-config.yaml` del ConfigMap en el DaemonSet del Collector de OpenTelemetry del Agente.
+El Operator monta automáticamente `otel-config.yaml` desde el ConfigMap en el DaemonSet del OpenTelemetry Collector del Agent.
 
 {{% collapse-content title="Archivo datadog-agent.yaml completado con la configuración del Collector en el ConfigMap" level="p" %}}
-El `datadog-agent.yaml` completado con la configuración del Collector definida como ConfigMap debería verse algo así:
+El `datadog-agent.yaml` completado con la configuración del Collector definida como ConfigMap debería verse más o menos así:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -579,7 +583,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -611,6 +614,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -622,7 +626,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -633,9 +637,9 @@ data:
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-El Helm chart de Datadog ofrece una configuración de ejemplo del Collector de OpenTelemetry que puedes utilizar como punto de partida. Esta sección te guía a través de las canalizaciones predefinidas y los componentes de OpenTelemetry incluidos.
+El chart de Helm de Datadog proporciona una configuración de ejemplo del OpenTelemetry Collector que puede utilizar como punto de partida. Esta sección lo guía a través de las canalizaciones predefinidas y los componentes de OpenTelemetry incluidos.
 
-Esta es la configuración completa del Collector de OpenTelemetry en `otel-config.yaml`:
+Esta es la configuración completa del OpenTelemetry Collector en `otel-config.yaml`:
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 receivers:
@@ -665,6 +669,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -676,7 +681,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -692,13 +697,13 @@ service:
 
 #### Componentes clave {#key-components}
 
-Para enviar datos de telemetría a Datadog, los siguientes componentes están definidos en la configuración:
+Para enviar datos de telemetría a Datadog, los siguientes componentes se definen en la configuración:
 
-{{< img src="/opentelemetry/embedded_collector/components-3.jpg" alt="Diagrama que representa el patrón de despliegue del Agente" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-3.jpg" alt="Diagrama que representa el patrón de implementación del Agent" style="width:100%;" >}}
 
 ##### Conector de Datadog {#datadog-connector}
 
-El [conector de Datadog][6] calcula las métricas de trazas de APM de Datadog.
+El [conector de Datadog][6] calcula las métricas de traza de Datadog APM.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 connectors:
@@ -706,9 +711,9 @@ connectors:
     traces:
 {{< /code-block >}}
 
-##### Exportador de Datadog {#datadog-exporter}
+##### Datadog Exporter {#datadog-exporter}
 
-El [exportador de Datadog][7] exporta trazas, métricas y registros a Datadog.
+El [Datadog exporter][7] exporta trazas, métricas y registros a Datadog.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 exporters:
@@ -721,11 +726,11 @@ exporters:
         flush_timeout: 10s
 {{< /code-block >}}
 
-**Nota**: Si `key` no está especificado o se establece como un secreto, o si `site` no está especificado, el sistema utiliza valores de la configuración principal del Agente. Por defecto, el Agente principal establece el sitio en `datadoghq.com` (US1).
+**Nota**: Si `key` no se especifica o se establece como un secreto, o si `site` no se especifica, el sistema utiliza los valores de la configuración principal del Agent. De forma predeterminada, el Agent principal establece el sitio en `datadoghq.com` (US1).
 
 ##### Receptor de Prometheus {#prometheus-receiver}
 
-El [receptor de Prometheus][8] recopila métricas de salud del OpenTelemetry Collector para la canalización de métricas.
+El [receptor de Prometheus][8] recopila métricas de estado del OpenTelemetry Collector para la canalización de métricas.
 
 {{< code-block lang="yaml" filename="otel-config.yaml" disable_copy="false" collapsible="true" >}}
 receivers:
@@ -738,45 +743,45 @@ receivers:
             - targets: ["0.0.0.0:8888"]
 {{< /code-block >}}
 
-Para más información, consulte la documentación de [Métricas de Salud del Collector][8].
+Para obtener más información, consulte la documentación de [Métricas de estado del OpenTelemetry Collector][8].
 
-### Despliegue el Agente con el OpenTelemetry Collector {#deploy-the-agent-with-the-opentelemetry-collector}
+### Implemente Agent con OpenTelemetry Collector {#deploy-the-agent-with-the-opentelemetry-collector}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Despliega el Datadog Agent con el archivo de configuración:
+Implemente el Datadog Agent con el archivo de configuración:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
 
-Esto despliega el Datadog Agent como un DaemonSet con el DDOT OpenTelemetry Collector. El Collector se ejecuta en el mismo servidor que tu aplicación, siguiendo el [Agent deployment pattern][1]. El [patrón de despliegue del Gateway][2] está en vista previa; para instrucciones de instalación, sigue la [guía de instalación del Gateway de DDOT en Kubernetes][3].
+Esto implementa el Datadog Agent como un DaemonSet con el OpenTelemetry Collector de DDOT. El Collector se ejecuta en el mismo servidor que su aplicación, siguiendo el [patrón de implementación del Agent][1]. Para el [patrón de implementación de Gateway][2], siga la [guía de instalación de DDOT Kubernetes Gateway][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
 [3]: /es/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{% tab "Helm" %}}
-Para instalar o actualizar el Datadog Agent con OpenTelemetry Collector en tu entorno de Kubernetes, usa uno de los siguientes comandos de Helm:
+Para instalar o actualizar el Datadog Agent con OpenTelemetry Collector en su entorno de Kubernetes, utilice uno de los siguientes comandos de Helm:
 
-- Para la configuración predeterminada del OpenTelemetry Collector:
+- Para la configuración predeterminada de OpenTelemetry Collector:
    ```shell
    helm upgrade -i <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
    ```
 
-- Para la configuración personalizada del OpenTelemetry Collector:
+- Para la configuración personalizada de OpenTelemetry Collector:
    ```shell
    helm upgrade -i <RELEASE_NAME> datadog/datadog \
      -f datadog-values.yaml \
      --set-file datadog.otelCollector.config=otel-config.yaml
    ```
-   Este comando te permite especificar tu propio archivo `otel-config.yaml`.
+   Este comando le permite especificar su propio archivo `otel-config.yaml`.
 
-Reemplaza `<RELEASE_NAME>` por el nombre de la release de Helm que estás utilizando.
+Reemplace `<RELEASE_NAME>` con el nombre de la versión de Helm que esté utilizando.
 
-<div class="alert alert-info">Puedes ver advertencias durante el proceso de despliegue. Puedes ignorar estas advertencias.</div>
+<div class="alert alert-info">Es posible que vea advertencias durante el proceso de implementación. Estas advertencias pueden ignorarse.</div>
 
-Este Helm chart despliega el Datadog Agent como un DaemonSet con el OpenTelemetry Collector. El Collector se despliega en el mismo servidor que tu aplicación, siguiendo el [Agent deployment pattern][1]. El [patrón de despliegue del Gateway][2] está en vista previa; para instrucciones de instalación, sigue la [guía de instalación del Gateway de DDOT en Kubernetes][3].
+Este Helm chart implementa el Datadog Agent con OpenTelemetry Collector como un DaemonSet. El Collector se implementa en el mismo servidor que su aplicación, siguiendo el [patrón de implementación del Agent][1]. Para el [patrón de implementación de Gateway][2], siga la [guía de instalación de DDOT Kubernetes Gateway][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -784,25 +789,25 @@ Este Helm chart despliega el Datadog Agent como un DaemonSet con el OpenTelemetr
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% collapse-content title="Diagrama de despliegue" level="p" %}}
-{{< img src="/opentelemetry/embedded_collector/deployment-2.png" alt="Diagrama que representa el patrón de despliegue del Agent." style="width:100%;" >}}
+{{% collapse-content title="Diagrama de implementación" level="p" %}}
+{{< img src="/opentelemetry/embedded_collector/deployment-2.png" alt="Diagrama que representa el patrón de implementación del Agent" style="width:100%;" >}}
 {{% /collapse-content %}}
 
-## Envía tu telemetría a Datadog {#send-your-telemetry-to-datadog}
+## Envíe su telemetría a Datadog {#send-your-telemetry-to-datadog}
 
-Para enviar tus datos de telemetría a Datadog:
+Para enviar sus datos de telemetría a Datadog:
 
-1. [Instrumenta tu aplicación](#instrument-the-application)
-2. [Configura la aplicación](#configure-the-application)
-3. [Correlaciona los datos de observabilidad](#correlate-observability-data)
-4. [Ejecuta tu aplicación](#run-the-application)
+1. [Instrumente su aplicación](#instrument-the-application)
+2. [Configure la aplicación](#configure-the-application)
+3. [Correlacione los datos de observabilidad](#correlate-observability-data)
+4. [Ejecute su aplicación](#run-the-application)
 
-### Instrumenta la aplicación {#instrument-the-application}
+### Instrumente la aplicación {#instrument-the-application}
 
-Instrumenta tu aplicación [usando la API de OpenTelemetry][12].
+Instrumente su aplicación [usando la API de OpenTelemetry][12].
 
 {{% collapse-content title="Ejemplo de aplicación instrumentada con la API de OpenTelemetry" level="p" %}}
-Como ejemplo, puedes usar la [aplicación de muestra de Calendario][9] que ya está instrumentada para ti. El siguiente código instrumenta el método [CalendarService.getDate()][10] utilizando las anotaciones y la API de OpenTelemetry:
+Como ejemplo, puede usar la [aplicación de muestra Calendar][9] que ya está instrumentada para usted. El siguiente código instrumenta el método [CalendarService.getDate()][10] usando las anotaciones y la API de OpenTelemetry:
    {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="false" >}}
 @WithSpan(kind = SpanKind.CLIENT)
 public String getDate() {
@@ -813,11 +818,11 @@ public String getDate() {
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-### Configura la aplicación {#configure-the-application}
+### Configure la aplicación {#configure-the-application}
 
-Tu contenedor de aplicación debe enviar datos al DDOT Collector en el mismo servidor. Dado que el Collector se ejecuta como un DaemonSet, necesitas especificar el servidor local como el punto de conexión de OTLP.
+El contenedor de su aplicación debe enviar datos al Collector de DDOT en el mismo servidor. Dado que el Collector se ejecuta como un DaemonSet, debe especificar el servidor local como el punto de conexión de OTLP.
 
-Si la variable de entorno `OTEL_EXPORTER_OTLP_ENDPOINT` no está ya configurada, añádela al archivo de manifiesto de despliegue de tu aplicación:
+Si la variable de entorno `OTEL_EXPORTER_OTLP_ENDPOINT` aún no está configurada, agréguela al archivo de manifiesto de implementación de su aplicación:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 env:
   ...
@@ -833,13 +838,13 @@ env:
     value: 'grpc'
    {{< /code-block >}}
 
-### Correlaciona los datos de observabilidad {#correlate-observability-data}
+### Correlacione los datos de observabilidad {#correlate-observability-data}
 
-[unified service tagging][14] une los datos de observabilidad en Datadog para que puedas navegar a través de métricas, trazas y registros con etiquetas consistentes.
+[Unified service tagging][14] vincula los datos de observabilidad en Datadog para que pueda navegar entre métricas, trazas y registros con etiquetas consistentes.
 
-En entornos contenedorizados, establece `env`, `service` y `version` usando las variables de entorno de Atributos de Recursos de OpenTelemetry. El DDOT Collector detecta esta configuración de etiquetado y la aplica a los datos que recopila de los contenedores.
+En entornos contenerizados, configure `env`, `service` y `version` utilizando variables de entorno de atributos de recursos de OpenTelemetry. El Collector de DDOT detecta esta configuración de etiquetado y la aplica a los datos que recopila de los contenedores.
 
-Añade las siguientes variables de entorno al manifiesto de despliegue de tu aplicación:
+Agregue las siguientes variables de entorno al manifiesto de implementación de su aplicación:
 
 {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: apps/v1
@@ -858,57 +863,57 @@ spec:
             value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
 {{< /code-block >}}
 
-<div class="alert alert-info">Alternativamente, puedes usar <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">etiquetas específicas de Kubernetes de Datadog</a> para configurar el etiquetado de servicio unificado. No uses ambos enfoques, ya que esto crea etiquetas duplicadas.</div>
+<div class="alert alert-info">Alternativamente, puede usar <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">etiquetas de Kubernetes específicas de Datadog</a> para configurar unified service tagging. No utilice ambos enfoques, ya que esto crea etiquetas duplicadas.</div>
 
-### Ejecuta la aplicación {#run-the-application}
+### Ejecute la aplicación {#run-the-application}
 
-Vuelve a implementar tu aplicación para aplicar los cambios realizados en el manifiesto de implementación. Una vez que la configuración actualizada esté activa, la Etiquetación de Servicio Unificada estará completamente habilitada para tus métricas, trazas y registros.
+Vuelva a implementar su aplicación para aplicar los cambios realizados en el manifiesto de implementación. Una vez que la configuración actualizada esté activa, unified service tagging estará completamente habilitado para sus métricas, trazas y registros.
 
-## Explora los datos de observabilidad en Datadog {#explore-observability-data-in-datadog}
+## Explore los datos de observabilidad en Datadog {#explore-observability-data-in-datadog}
 
-Utiliza Datadog para explorar los datos de observabilidad de tu aplicación.
+Utilice Datadog para explorar los datos de observabilidad de su aplicación.
 
 ### Fleet Automation {#fleet-automation}
 
-Explora la configuración de tu Datadog Agent y Collector.
+Explore la configuración de su Datadog Agent y Collector.
 
-{{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Revisa la configuración de tu Datadog Agent y Collector desde la página de Fleet Automation." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Revise la configuración de su Agent y Collector desde la página de Fleet Automation." style="width:100%;" >}}
 
-### Monitoreo de contenedores en vivo {#live-container-monitoring}
+### Monitoreo en vivo de contenedor {#live-container-monitoring}
 
-Monitorea la salud de tu contenedor utilizando las capacidades de Container Monitoring en vivo.
+Haga un seguimiento del estado de sus contenedores utilizando las capacidades de Container Monitoring.
 
-{{< img src="/opentelemetry/embedded_collector/containers.png" alt="Monitorea la salud de tu contenedor desde la página de Contenedores." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/containers.png" alt="Haga un seguimiento del estado de sus contenedores desde la página de Containers." style="width:100%;" >}}
 
-### Salud de nodos de infraestructura {#infrastructure-node-health}
+### Estado de salud del nodo de infraestructura {#infrastructure-node-health}
 
-Visualiza métricas de tiempo de ejecución e infraestructura para observar, monitorear y medir el rendimiento de tus nodos.
+Vea las métricas de tiempo de ejecución y de infraestructura para visualizar, monitorear y medir el rendimiento de sus nodos.
 
-{{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="Visualiza métricas de tiempo de ejecución e infraestructura desde la Host List." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="Visualice las métricas de tiempo de ejecución y de infraestructura desde la lista de servidores." style="width:100%;" >}}
 
-### Logs {#logs}
+### Registros {#logs}
 
-Visualiza registros para monitorear y solucionar problemas de las operaciones de la aplicación y del sistema.
+Visualice los registros para monitorear y solucionar problemas de las operaciones del sistema y de la aplicación.
 
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="Visualiza registros desde el Log Explorer." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/logs.png" alt="Visualice los registros desde el Log Explorer." style="width:100%;" >}}
 
 ### Trazas {#traces}
 
-Visualiza trazas y tramos para observar el estado y rendimiento de las solicitudes procesadas por tu aplicación, con métricas de infraestructura correlacionadas en la misma traza.
+Visualice las trazas y los spans para observar el estado y el rendimiento de las solicitudes procesadas por su aplicación, con métricas de infraestructura correlacionadas en la misma traza.
 
-{{< img src="/opentelemetry/embedded_collector/traces.png" alt="Visualiza trazas desde el Trace Explorer." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/traces.png" alt="Visualice las trazas desde el Trace Explorer." style="width:100%;" >}}
 
 ### Métricas de tiempo de ejecución {#runtime-metrics}
 
-Monitorea las métricas de tiempo de ejecución (JVM) de tus aplicaciones.
+Monitoree las métricas de tiempo de ejecución (JVM) de sus aplicaciones.
 
-{{< img src="/opentelemetry/embedded_collector/metrics.png" alt="Visualiza las métricas de JVM desde el JVM Metrics dashboard" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/metrics.png" alt="Visualice las métricas de JVM desde el JVM Metrics dashboard" style="width:100%;" >}}
 
-### Métricas de salud del Collector {#collector-health-metrics}
+### Métricas de estado del Collector {#collector-health-metrics}
 
-Visualiza las métricas del DDOT Collector para monitorear la salud del Collector.
+Visualice las métricas del DDOT Collector para hacer un seguimiento del estado del Collector.
 
-{{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="Visualiza las métricas de salud del Collector desde el OTel dashboard." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="Visualice las métricas de estado del Collector desde el OTel dashboard." style="width:100%;" >}}
 
 ## Lecturas adicionales {#further-reading}
 
@@ -970,3 +975,4 @@ Visualiza las métricas del DDOT Collector para monitorear la salud del Collecto
 [55]: /es/containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: /es/opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog

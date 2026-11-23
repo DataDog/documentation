@@ -82,7 +82,7 @@ The {{< ui >}}Configuration{{< /ui >}} column tells you whether or not your serv
 
 To reduce the ingestion volume at the Agent level, configure `DD_APM_TARGET_TPS` (set to `10` by default) to reduce the share of head-based sampling volume. Read more about the [default sampling mechanism][7].
 
-**Note**: This configuration option only goes into effect when using **Datadog SDKs**. If the OTLP Ingest in the Agent collects data from applications instrumented with OpenTelemetry, modifying `DD_APM_TARGET_TPS` does not change sampling rates that are applied in SDKs.
+**Note**: This configuration option only goes into effect when using **Datadog SDKs**. If the Agent's OTLP endpoint receives data from applications instrumented with OpenTelemetry, modifying `DD_APM_TARGET_TPS` does not change sampling rates that are applied in SDKs.
 
 Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 - Configure `DD_APM_ERROR_TPS` to reduce the share of error sampling.

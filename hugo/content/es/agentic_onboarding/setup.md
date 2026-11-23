@@ -1,6 +1,6 @@
 ---
-description: Instrumente sus aplicaciones con Datadog utilizando la AI Setup CLI o
-  el Datadog MCP Server.
+description: Instrumente sus aplicaciones con Datadog utilizando la CLI de Pup o el
+  Datadog MCP Server.
 further_reading:
 - link: https://www.datadoghq.com/blog/serverless-agentic-onboarding/
   tag: Blog
@@ -11,16 +11,21 @@ title: Agentic Onboarding Setup.
 
 Agentic Onboarding is a set of AI-driven tools that automate instrumentación de Datadog for your applications and infrastructure:
 
-- [AI Setup CLI](#ai-setup-cli): Configure Datadog from a terminal, without a coding assistant.
+- [Pup CLI](#pup-cli): Configure Datadog desde una terminal con `pup setup`, sin un asistente de codificación.
 - [Datadog MCP Server](#mcp-server): Configure Datadog a través de un asistente de codificación (como Claude Code o Cursor), que maneja la detección y configuración del framework desde su IDE.
 
 Ambas rutas son complementarias y utilizan la misma cuenta de Datadog. Puede instalar el Datadog MCP Server en su IDE y ejecutar la CLI en una terminal.
 
-## AI Setup CLI {#ai-setup-cli}
+## Pup CLI {#pup-cli}
 
-El Datadog AI Setup CLI es una herramienta de terminal independiente. Úsela cuando no desee instalar un Datadog MCP Server, o para tareas que el MCP setup no admite, como crear una cuenta de Datadog.
+La [Pup CLI][20] configura Datadog desde su terminal. No necesita su propio asistente de codificación o modelo de IA, por lo que la configuración no utiliza los tokens de su modelo. Utilice la CLI cuando:
 
-La CLI puede:
+- No tenga acceso a su propio asistente de codificación o modelo de IA.
+- No desee gastar los tokens de su modelo en la configuración.
+- No desee instalar un servidor MCP.
+- Necesita crear una cuenta de Datadog, lo cual la configuración de MCP no admite.
+
+La Pup CLI puede:
 
 - Crear una cuenta de Datadog de principio a fin desde la terminal
 - Vincular una cuenta de Datadog existente a su entorno local
@@ -29,72 +34,136 @@ La CLI puede:
 
 ### Requisitos previos {#prerequisites}
 
-- Node.js 22 o posterior
+- Node.js 22 o posterior. `pup setup` ejecuta el paquete de configuración de Datadog con `npx`, por lo que necesita Node.js incluso si instaló Pup con Homebrew o un binario precompilado.
 
 ### Productos compatibles {#supported-products}
 
-La CLI puede configurar los siguientes productos:
+La Pup CLI puede configurar los siguientes productos. Pase el valor de la columna `--product` al flag `--product`:
 
-| Product | Identifier |
+| Producto | `--product` |
 |---------|------------|
+| Agent Observability | `llm-obs` |
+| Amazon ECS | `ecs` |
 | App and API Protection | `app_and_api_protection` |
 | Code Coverage | `ci_code_coverage` |
 | Docker | `docker` |
-| Seguimiento de errores | `error-tracking` |
-| Infrastructure Monitoring | `infra-monitoring` |
+| Error Tracking | `error-tracking` |
+| Infrastructure Monitoring (Kubernetes) | `infra-monitoring` |
 | Linux | `linux` |
-| Agent Observability | `llm-obs` |
 | OpenTelemetry | `otel` |
 | Product Analytics | `product-analytics` |
 | Real User Monitoring (RUM) | `rum` |
 | Serverless Monitoring | `serverless` |
 | Studio | `studio` |
-| Optimización de pruebas | `test-optimization` |
+| Test Optimization | `test-optimization` |
 
-### Install and run the CLI {#install-and-run-the-cli}
+#### Flags específicos del producto {#product-specific-flags}
 
-1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. Tiene dos opciones, dependiendo de si ya tiene una cuenta de Datadog:
+Algunos productos aceptan flags adicionales opcionales junto con `--product`. Cada flag toma un valor:
 
-    **Opción 1: Configuración interactiva.** Si aún no tiene una cuenta de Datadog, o desea elegir su producto de forma interactiva, ejecute sin el flag `--product`. La CLI lo guía a través de la configuración de la cuenta y la elección del producto.
+| `--product` | Flags |
+|-------------|-------|
+| `ci_code_coverage`, `llm-obs`, `serverless`, `test-optimization` | `--api-key`: clave de API de Datadog. |
+| `docker` | `--products`: productos separados por comas para habilitar: `infra`, `apm`, `logs`. El valor predeterminado son los tres.<br>`--library-versions`: versiones de las bibliotecas de rastreo, como `java:v1,python:v4`.<br>`--env`: etiqueta de entorno. Establece `DD_ENV`. |
+| `ecs` | `--ecs-launch-type`: `fargate` o `ec2`.<br>`--ecs-deployment-method`: `cli`, `terraform`, `cdk` o `cloudformation`. |
+| `error-tracking`, `product-analytics`, `rum`, `studio` | `--rum-application-id` (alias: `--app-id`): ID de la aplicación RUM. |
+| `infra-monitoring` | `--enabled-products` (alias: `--k8s-products`): Productos separados por comas para habilitar, como `infrastructure,logs,apm,otel`.<br>`--k8s-distro`: Distribución de Kubernetes, como `gke`, `eks`, `aks` o `minikube`.<br>`--k8s-cluster-name`: Nombre del clúster.<br>`--k8s-env-name`: Etiqueta de entorno.<br>`--k8s-library-versions`: Versiones de la biblioteca de Tracer, como `java:v1,python:v4`.<br>`--k8s-target-namespaces`: Espacios de nombres separados por comas para incluir.<br>`--k8s-disabled-namespaces`: Espacios de nombres separados por comas para excluir.<br>`--k8s-registry`: Registro de contenedores para imágenes de Datadog, como un registro espejo o un registro privado. |
+| `linux` | `--products`: Productos separados por comas para habilitar: `infra`, `apm`, `logs`, `otel`. El valor predeterminado es `infra,apm,logs`.<br>`--env`: Etiqueta de entorno. Establece `DD_ENV`. |
+| `llm-obs` | `--llm-obs-app`: Nombre de la aplicación LLM. Establece `DD_LLMOBS_ML_APP`. |
+| `product-analytics`, `rum` | `--rum-client-token`: Token de cliente RUM. |
+| `rum` | `--rum-framework`: `react`, `vue`, `angular`, `nextjs`, `browser`, `react-native` o `expo`. |
+| `serverless` | `--serverless-compute-type`: `aws-lambda`, `gcp-cloud-run`, `gcp-cloud-run-functions` o `azure-container-apps`.<br>`--serverless-runtime`: `nodejs`, `python`, `java`, `ruby`, `dotnet`, `go` o `php` (`php` solo es compatible con Cloud Run y Container Apps).<br>`--development-framework`: `aws-cdk`, `aws-sam`, `serverless-framework`, `terraform`, `ci` o `other`.<br>`--use-otel true`: Instrumente con el SDK de OpenTelemetry y envíe los datos directamente a la ingesta OTLP de Datadog. |
 
-    ```shell
-    npx @datadog/ai-setup-cli --site datadoghq.com
-    ```
+Por ejemplo:
 
-    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, or `ap2.datadoghq.com`.
+```shell
+npx @datadog/pup setup --site datadoghq.com --product ecs --ecs-launch-type fargate --ecs-deployment-method terraform
+```
 
-    **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
+### Ejecute el comando de configuración {#run-the-setup-command}
 
-    ```shell
-    npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
-    ```
+Ejecute `pup setup` con `npx`, pasando `--site` para apuntar a su [sitio de Datadog][16] ({{< region-param key=dd_site code="true" >}}). No necesita instalar Pup primero, porque `npx` lo descarga. Si Pup ya está [instalado][20], ejecute `pup setup` directamente en lugar de `npx @datadog/pup setup`, usando los mismos flags.
 
-    - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of the [supported products](#supported-products).
+Si ha iniciado sesión con [`pup auth login`][22], `pup setup` utiliza ese inicio de sesión.
+
+Tiene dos opciones, dependiendo de si ya tiene una cuenta de Datadog:
+
+   {{< tabs >}}
+   {{% tab "Configuración interactiva" %}}
+1. Utilice esta opción si no tiene una cuenta de Datadog, o si desea que la CLI recomiende productos basados en el análisis de su código. La CLI lo guía a través de la configuración de la cuenta, el análisis del repositorio y las recomendaciones de productos.
+
+   ```shell
+   npx @datadog/pup setup --site datadoghq.com
+   ```
+   Reemplace el valor de `--site` con el sitio de Datadog para su cuenta: ({{< region-param key=dd_site code="true" >}}).
+
+1. Presione <kbd>Enter</kbd> en la pantalla de bienvenida y elija si tiene una cuenta de Datadog. Se abre un navegador para OAuth (o para la creación de una cuenta si aún no tiene una). Complete el flujo y otorgue acceso a su cuenta de Datadog.
+1. Ingrese la ruta al repositorio que desea instrumentar.
+1. Con su consentimiento, la CLI analiza el repositorio en modo de solo lectura para detectar su stack.
+1. Según el stack detectado, la CLI recomienda hasta tres productos de Datadog compatibles. Las recomendaciones están seleccionadas de forma predeterminada. Deseleccione recomendaciones individuales, confirme la selección o elija **Ver todas las opciones de configuración** para usar la lista completa de opciones de configuración en su lugar.
+   
+   {{% /tab %}}
+   
+   {{% tab "Configuración directa" %}}
+1. Utilice esta opción si ya tiene una cuenta de Datadog y sabe qué producto desea instalar. Agregue la bandera `--product` para ir directamente a la configuración y omitir el análisis del repositorio y las recomendaciones de productos.
+
+   ```shell
+   npx @datadog/pup setup --site datadoghq.com --product <PRODUCT>
+   ```
+
+   - Reemplace el valor de `--site` con el sitio de Datadog para su cuenta: ({{< region-param key=dd_site code="true" >}}).
+   - Reemplace `<PRODUCT>` con uno de los productos enumerados en la sección [Productos compatibles](#supported-products).
+   - Opcionalmente, añada cualquiera de los [flags específicos del producto](#product-specific-flags) para ese producto.
 
 1. Presione <kbd>Enter</kbd> en la pantalla de bienvenida y elija si tiene una cuenta de Datadog. Se abre un navegador para OAuth (o para la creación de una cuenta si aún no tiene una). Complete el flujo y otorgue acceso a su cuenta de Datadog.
 
-1. If you ran the CLI without `--product`, select what to set up from the product menu. (La configuración directa con `--product` omite este menú).
+   {{% /tab %}}
+   {{< /tabs >}}
 
-   {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' agrupados por Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications y CI Testing." style="width:80%;" >}}
+#### Configure y verifique su configuración {#configure-and-verify-your-setup}
 
-   La CLI detecta los frameworks de su proyecto, aplica la configuración requerida y aprovisiona las variables de entorno necesarias. El progreso se informa etapa por etapa.
-
-   {{< img src="agentic_onboarding/setup-example.png" alt="CLI que muestra 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' con pasos de progreso." style="width:80%;" >}}
-
-   Cuando se completa la configuración, la CLI enumera los productos que instrumentó y proporciona enlaces a la interfaz de usuario de Datadog para verificar los datos entrantes.
-
-   {{< img src="agentic_onboarding/success.png" alt="CLI que muestra 'Setup complete!' con marcas de verificación junto a RUM, Error Tracking y Product Analytics." style="width:80%;" >}}
+1. Si la CLI no puede generar recomendaciones o no encuentra una coincidencia sólida para su repositorio, lo dirige a la lista completa de opciones de configuración.
+   {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' agrupados por infraestructura y Backend monitoring, Frontend Monitoring, LLM-Based applications y CI Testing." style="width:80%;" >}}
+1. La CLI detecta los frameworks de su proyecto, aplica la configuración requerida y aprovisiona las variables de entorno necesarias. El progreso se informa etapa por etapa.
+   {{< img src="agentic_onboarding/setup-example.png" alt="CLI que muestra 'Instrumenting your app, etapa 1 de 3: Datadog RUM (Real User Monitoring)' con pasos de progreso." style="width:80%;" >}}
+1. Cuando se completa la configuración, la CLI lista los productos que instrumentó y proporciona enlaces a la interfaz de usuario de Datadog para verificar los datos entrantes.
 
 1. Commit los cambios en su repositorio. Puede editar las variables de entorno de Datadog (claves de API, ID de aplicación) para su entorno específico.
 
-Después de que la CLI finalice, consulte [Next steps](#next-steps).
+Una vez que la CLI finaliza, consulte la sección [Próximos pasos](#next-steps) para confirmar que los datos están fluyendo.
 
-## Datadog MCP Server {#mcp-server}
+### Modo headless {#headless-mode}
+
+El modo headless está diseñado para configuraciones desatendidas. Un agente de codificación de IA, un trabajo de CI o un script pueden ejecutar la CLI directamente en su repositorio y completar la instrumentación de Datadog por sí mismos. No es necesario que una persona esté presente para aprobar mensajes o realizar elecciones interactivas.
+
+El modo headless se activa automáticamente cuando un [agente de codificación de IA compatible][21] inicia `pup setup`, o cuando no hay una terminal interactiva, como en un trabajo de CI. Para habilitarlo manualmente, añada `--headless`:
+
+```shell
+DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
+  npx @datadog/pup setup \
+  --headless \
+  --site datadoghq.com \
+  --product rum
+```
+
+En modo headless:
+
+- `--site` es opcional. Si lo omite, `pup setup` utiliza la variable de entorno `DD_SITE`, luego el sitio de su inicio de sesión o archivo de configuración de Pup, y después `datadoghq.com`.
+- `--product` es opcional. Si lo omite, `pup setup` analiza el repositorio y configura el producto más recomendado. Para ver las recomendaciones sin cambiar nada, añada `--recommend-only`, que las muestra en formato JSON y finaliza.
+
+El modo headless inicia sesión con la primera de estas opciones que esté disponible:
+
+1. Su inicio de sesión de Pup, o la variable de entorno `DD_ACCESS_TOKEN`. Si cualquiera de los dos está presente, `pup setup` ignora `DD_API_KEY` y `DD_APP_KEY`.
+1. Las `DD_API_KEY` y `DD_APP_KEY` [variables de entorno][19]. Proporcione ambas variables juntas.
+1. OAuth del navegador. El comando de configuración abre un navegador para que pueda iniciar sesión. Este es el único paso en modo headless que requiere la intervención del usuario y necesita un callback en localhost. En máquinas remotas o ejecuciones totalmente desatendidas, utilice una de las otras opciones.
+
+Al ejecutar `pup setup` en modo headless, usted confirma que la carga del código fuente y la ejecución automática de comandos están autorizadas para el proyecto de destino. Esto se aplica tanto si agrega `--headless` como si el modo headless se activa automáticamente.
+
+## MCP Server {#mcp-server}
 
 El Datadog MCP Server expone el conjunto de herramientas `onboarding` a cualquier asistente de codificación compatible con MCP. Después de instalar y autenticar el servidor, instrumenta un proyecto escribiendo un one-line prompt. El Agent lee su código, llama a las herramientas MCP (con su permiso), aplica cambios y verifica el resultado.
 
-### Prerequisites {#prerequisites-1}
+### Requisitos previos {#prerequisites-1}
 
 - Un asistente de codificación compatible con MCP, como [Claude Code][17] o [Cursor][18]
 - Una cuenta de Datadog
@@ -115,7 +184,7 @@ El Datadog MCP Server expone el conjunto de herramientas `onboarding` a cualquie
 | App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP, and proxies (Envoy, HAProxy) for Linux, Windows, Kubernetes, Docker, GCP Cloud Run, and AWS Lambda, AWS Fargate/ECS |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
-### Paso 1: Install the Datadog MCP Server {#step-1-install-the-mcp-server}
+### Paso 1: Instalar el MCP Server {#step-1-install-the-mcp-server}
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
@@ -127,7 +196,7 @@ En una sesión activa de Claude Code, ejecute:
 {{% tab "Cursor" %}}
 **Option 1: Install deeplink (recommended)**
 
-Haga clic en el install deeplink para su [Datadog site][1], luego confirme {{< ui >}}Install{{< /ui >}} para el **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+Haga clic en el install deeplink para su [sitio de Datadog][1], luego confirme {{< ui >}}Install{{< /ui >}} para el `datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}` server cuando Cursor se abra.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -158,11 +227,11 @@ Cualquier MCP client que admita transporte HTTP puede conectarse al Datadog MCP 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Paso 2: Authenticate the Datadog MCP Server {#step-2-authenticate-the-mcp-server}
+### Paso 2: Autenticar el MCP Server {#step-2-authenticate-the-mcp-server}
 
-1. Después de instalar el Datadog MCP Server, su coding assistant le pedirá que se autentique. Presione <kbd>Enter</kbd> para abrir la pantalla de OAuth de Datadog en su navegador.
-1. Una vez completada la autenticación, elija {{< ui >}}Open{{< /ui >}} para volver a su IDE y otorgar al servidor MCP acceso a su cuenta de Datadog.
-1. Confirme que las herramientas MCP aparezcan bajo **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
+1. Después de instalar el MCP Server, su coding assistant le pedirá que se autentique. Presione <kbd>Enter</kbd> para abrir la pantalla de OAuth de Datadog en su navegador.
+1. Una vez completada la autenticación, elija {{< ui >}}Open{{< /ui >}} para volver a su IDE y otorgar al MCP Server acceso a su cuenta de Datadog.
+1. Confirme que las herramientas MCP aparezcan bajo el `datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}` server.
 
 ### Paso 3: Instrumente su proyecto {#step-3-instrument-your-project}
 
@@ -191,9 +260,7 @@ Envíe el prompt que corresponda al producto que desea configurar:
 
 {{% /tab %}}
 
-{{% tab "App and API Protection (Preview)" %}}
-<div class="alert alert-info">El agentic onboarding para App and API Protection está en Public Preview.</div>
-
+{{% tab "App and API Protection" %}}
 {{< code-block lang="text" >}}Add Datadog App and API Protection to my project{{< /code-block >}}
 {{% /tab %}}
 
@@ -202,30 +269,30 @@ Envíe el prompt que corresponda al producto que desea configurar:
 **AWS Lambda**
 {{< code-block lang="text" >}}Add Datadog for AWS Lambda to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
 
 **Contenedores de GCP Cloud Run**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run containers to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
 
 **Funciones de GCP Cloud Run**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run functions to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
 
 **Azure Container Apps**
 {{< code-block lang="text" >}}Add Datadog for Azure Container Apps to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-El agente detecta su stack, solicita permiso antes de cada llamada a la tool, aplica cambios localmente (sin hacer commit de ellos) e imprime los pasos de verificación.
+El agente detecta su stack, solicita permiso antes de cada llamada a la herramienta, aplica cambios localmente (sin hacer commit de ellos) e imprime los pasos de verificación.
 
-Una vez que el agente termine, haga commit de los cambios en su repositorio y establezca cualquier variable de entorno nueva (claves de API, IDs de aplicación) en su entorno de producción. Luego consulte [Next steps](#next-steps) para confirmar que los datos fluyen.
+Una vez que el agente termine, haga commit de los cambios en su repositorio y establezca cualquier variable de entorno nueva (claves de API, IDs de aplicación) en su entorno de producción. Luego, consulte la sección [Próximos pasos](#next-steps) para confirmar que los datos están fluyendo.
 
 ## Próximos pasos {#next-steps}
 
@@ -234,9 +301,14 @@ Confirme que los datos fluyen en Datadog UI para el producto que configuró:
 - [Error Tracking][6]
 - [App and API Protection][11]
 - [RUM > Applications][7]
-- [Infrastructure > Hosts][8]
+- [Infraestructura > Hosts][8]
 - [Serverless > Functions][9]
 - [Logs > Live Tail][10]
+
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
@@ -245,9 +317,9 @@ Confirme que los datos fluyen en Datadog UI para el producto que configuró:
 [10]: https://app.datadoghq.com/logs/livetail
 [11]: https://app.datadoghq.com/security/appsec
 [16]: /es/getting_started/site/
-[17]: https://www.anthropic.com/claude-code
+[17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
-
-## Lecturas adicionales {#further-reading}
-
-{{< partial name="whats-next/whats-next.html" >}}
+[19]: /es/account_management/api-app-keys/
+[20]: /es/cli/
+[21]: /es/cli/#agent-mode
+[22]: /es/cli/#authentication

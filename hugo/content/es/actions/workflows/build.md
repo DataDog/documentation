@@ -136,18 +136,26 @@ Puede configurar su flujo de trabajo para que le envíe una notificación en cas
 - PagerDuty
 - Correo electrónico
 
+Notifications se configuran desde el editor de flujo de trabajo, en cualquiera de los siguientes lugares:
+- Haga clic en el nombre del flujo de trabajo en la parte superior del editor para abrir el menú emergente del título del flujo de trabajo, luego desplácese hacia abajo hasta la sección {{< ui >}}Notifications{{< /ui >}}.
+- Haga clic en {{< ui >}}cog icon{{< /ui >}} en la esquina superior derecha del editor y seleccione {{< ui >}}Edit permissions{{< /ui >}}. La sección {{< ui >}}Notifications{{< /ui >}} se encuentra en la parte inferior del modal.
+
+Los cambios realizados desde el menú emergente del título del flujo de trabajo se guardan inmediatamente. Los cambios realizados desde el modal {{< ui >}}Edit permissions{{< /ui >}} se aplican cuando hace clic en {{< ui >}}Save{{< /ui >}}.
+
 Para agregar una notificación:
-1. En el panel de configuración del flujo de trabajo, desplácese hacia abajo hasta la sección {{< ui >}}Notifications{{< /ui >}}.
+1. Abra la sección {{< ui >}}Notifications{{< /ui >}} usando uno de los métodos descritos anteriormente.
 1. Para agregar una notificación si el flujo de trabajo tiene éxito:
-   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}Notify on success{{< /ui >}}.
+   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}On success{{< /ui >}}, o haga clic en {{< ui >}}Add success notification{{< /ui >}} si aún no hay Notifications de éxito configuradas.
    1. Seleccione la integración que desea usar para las notificaciones.
    1. Complete los campos obligatorios para la integración especificada.
-   1. Haga clic en {{< ui >}}Save{{< /ui >}} para guardar su flujo de trabajo.
+   1. Haga clic en {{< ui >}}Save{{< /ui >}} para agregar la Notifications.
 1. Para agregar una notificación si el flujo de trabajo falla:
-   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}On failure{{< /ui >}}, o haga clic en {{< ui >}}Add failure notification{{< /ui >}} si aún no hay Notifications de error configuradas.
    1. Seleccione la integración que desea usar para las notificaciones.
    1. Complete los campos obligatorios para la integración especificada.
-   1. Haga clic en {{< ui >}}Save{{< /ui >}} para guardar su flujo de trabajo.
+   1. Haga clic en {{< ui >}}Save{{< /ui >}} para agregar la Notifications.
+
+Para editar o eliminar una Notifications existente, haga clic en ella en la sección {{< ui >}}Notifications{{< /ui >}} y actualice sus campos, o use su icono de eliminar para quitarla.
 
 ## Manejo de errores {#error-handling}
 

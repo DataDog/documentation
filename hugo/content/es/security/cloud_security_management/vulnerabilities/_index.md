@@ -118,7 +118,7 @@ Para habilitar este mapeo de código a la nube, agregue anotaciones de imagen OC
 Para configurar la vinculación de fuentes, consulte [Vincular Dockerfile a vulnerabilidades][22] en la guía de escaneo de imágenes de contenedor de CI/CD.
 
 ## Automatización e integración con Jira {#automation-and-jira-integration}
-Haga que Cloud Security Vulnerabilities sea parte de su flujo de trabajo diario configurando [{{< ui >}}security notification rules{{< /ui >}}][17] y [pipelines de automatización (en vista previa)][20]:
+Haga que Cloud Security Vulnerabilities sea parte de su flujo de trabajo diario configurando [{{< ui >}}security notification rules{{< /ui >}}][17] y [automation pipelines][20]:
 - Reciba una alerta tras la detección de una vulnerabilidad explotable para su contexto
 - Cree tickets de Jira automáticamente
 - Configure SLAs para remediar vulnerabilidades
@@ -151,11 +151,10 @@ Evalúe rápidamente el impacto de una vulnerabilidad emergente crítica buscand
 [12]: /es/security/cloud_security_management/setup/agent
 [13]: /es/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /es/security/cloud_security_management/troubleshooting/vulnerabilities/
-[16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
-[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[20]: /es/security/automation_pipelines/
 [21]: /es/security/cloud_security_management/setup/ci_cd
 [22]: /es/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score

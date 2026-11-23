@@ -8,9 +8,10 @@ further_reading:
   - link: '/integrations/amazon-web-services/'
     tag: 'Documentation'
     text: 'AWS Integration'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitor'
 ---
-
-<div class="alert alert-info">Jobs Monitoring for AWS Glue is in Preview.</div>
 
 ## Overview
 

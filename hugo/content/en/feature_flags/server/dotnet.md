@@ -21,79 +21,62 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog .NET tracer (`dd-trace-dotnet`).
+The Datadog .NET SDK receives flag configuration directly from Datadog by default and evaluates flags locally. No Datadog Agent is required. The provider implements [OpenFeature][1].
 
-This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+## Getting started
 
-## Prerequisites
+Install the Datadog .NET tracer 3.57.0 or later with [automatic instrumentation][8]. Keep the native profiler enabled even if APM tracing is disabled. Installing the OpenFeature provider package alone does not load the tracer.
 
-Before setting up the .NET Feature Flags SDK, ensure you have:
+Create a Boolean flag named `my-flag`. Enable its **Server** distribution channel and enable it in the target environment.
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog [API key][5]** configured on the Agent
-- **Datadog .NET SDK** (`dd-trace-dotnet`):
-  - Version 3.36.0 or later for .NET 6+
-  - Version 3.38.0 or later for .NET Framework 4.6.2+
+Install the provider, which includes the OpenFeature SDK dependency:
 
-Set the following environment variables:
+```bash
+dotnet add package Datadog.FeatureFlags.OpenFeature --version 2.3.2
+```
 
-{{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+Set the application API key and flag environment before startup:
 
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
+```bash
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
+```
 
-# Required: Service identification
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+Register the provider and evaluate the flag:
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
+```csharp
+using Datadog.FeatureFlags.OpenFeature;
+using OpenFeature;
 
-## Installation
+await Api.Instance.SetProviderAsync(new DatadogProvider());
+var client = Api.Instance.GetClient();
+bool enabled = await client.GetBooleanValueAsync("my-flag", false);
+Console.WriteLine(enabled);
+```
 
-Install the Datadog [.NET SDK][3] and [OpenFeature SDK][4] using NuGet:
+No Feature Flags enablement or source setting is required for a new setup. Provider initialization starts configuration polling and waits up to 30 seconds for the first configuration. If the wait expires, polling continues and evaluations return default values until configuration arrives. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][11].
 
-{{< code-block lang="bash" >}}
-dotnet add package Datadog.FeatureFlags.OpenFeature
-dotnet add package OpenFeature
-{{< /code-block >}}
+With agentless delivery, the SDK sends experiment exposures through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][6]. Provider versions through 2.3.2 do not emit aggregated flag evaluation events.
 
-Or add them to your `.csproj` file:
+## Use Agent delivery
 
-{{< code-block lang="xml" filename="MyProject.csproj" >}}
-<ItemGroup>
-  <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
-  <PackageReference Include="OpenFeature" />
-</ItemGroup>
-{{< /code-block >}}
+To keep Agent delivery, configure a Datadog Agent with [Remote Configuration][2] and an API key. Set this application variable before startup:
 
-If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
 
-{{< code-block lang="bash" >}}
-dotnet add package OpenTelemetry
-dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
-{{< /code-block >}}
-
-Or add them to your `.csproj` file:
-
-{{< code-block lang="xml" filename="MyProject.csproj" >}}
-<ItemGroup>
-  <PackageReference Include="OpenTelemetry" />
-  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
-</ItemGroup>
-{{< /code-block >}}
+Keep automatic instrumentation loaded and register the provider as shown above. See [Server SDK Configuration Sources][9] for Agent requirements and migration instructions.
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog .NET tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider activates the selected configuration source in the Datadog .NET tracer.
 
 ### Blocking initialization
 
-Use `SetProviderAsync` with `await` to block evaluation until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
+Use `SetProviderAsync` with `await` to wait for the initial flag configuration or the initialization timeout. The default timeout is 30 seconds. If the wait expires, polling continues and evaluations return default values until configuration arrives. Verify a known flag's evaluation details before relying on its configured value.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -111,7 +94,7 @@ var client = Api.Instance.GetClient("my-service");
 
 ### Non-blocking initialization
 
-Use `SetProvider` to register the provider without waiting. Flag evaluations return default values until the configuration is received.
+Start `SetProviderAsync` without awaiting it to register the provider in the background. Flag evaluations return default values until the configuration is received.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -119,7 +102,7 @@ using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
-Api.Instance.SetProvider(provider);
+_ = Api.Instance.SetProviderAsync(provider);
 
 // Create an OpenFeature client
 var client = Api.Instance.GetClient("my-service");
@@ -251,10 +234,11 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 ## Waiting for provider initialization
 
-By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
+With non-blocking registration, evaluations return default values until the first flag configuration is received. Event handlers can report provider life cycle changes:
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 using OpenFeature.Constant;
 
 var taskCompletionSource = new TaskCompletionSource<bool>();
@@ -274,7 +258,7 @@ Api.Instance.AddHandler(ProviderEventTypes.ProviderError, (eventDetails) =>
 
 // Set provider
 var provider = new DatadogProvider();
-Api.Instance.SetProvider(provider);
+_ = Api.Instance.SetProviderAsync(provider);
 
 // Wait for provider to be ready (with timeout)
 var timeout = Task.Delay(TimeSpan.FromSeconds(30));
@@ -289,6 +273,8 @@ if (completedTask == timeout)
 var client = Api.Instance.GetClient();
 {{< /code-block >}}
 
+Initialization can complete after its timeout while configuration polling continues. A provider-ready event alone does not prove that configuration arrived. Check a known flag's evaluation details and verify that it resolves without `ProviderNotReady`.
+
 ## Cleanup
 
 When your application exits, shut down the OpenFeature API to clean up resources:
@@ -296,6 +282,12 @@ When your application exits, shut down the OpenFeature API to clean up resources
 {{< code-block lang="csharp" >}}
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
+
+## Evaluation events and privacy
+
+With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
+
+Provider versions through `Datadog.FeatureFlags.OpenFeature` 2.3.2 do not emit aggregated EVP flag evaluation events. Experiment exposures and the `feature_flag.evaluations` OTLP metric are separate signals. See [Server-Side Evaluation Events and Privacy][12] for evaluation-event support in other server SDKs.
 
 ## Testing
 
@@ -357,30 +349,24 @@ To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` 
 
 ## Troubleshooting
 
-### Provider not enabled
+### Agentless delivery not working
 
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment or application configuration:
+- Verify that tracer 3.57.0 or later is loaded and the OpenFeature provider is initialized.
+- Check `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process.
+- Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false`. Leave `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` unset for a new setup, or explicitly set it to `agentless`. Remove the legacy `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting when migrating.
+- Allow outbound HTTPS to `ufc-server.ff-cdn.<DD_SITE>`.
+- Enable `DD_TRACE_DEBUG=true` and check tracer logs for authentication, timeout, or malformed configuration errors.
 
-{{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-For containerized applications, add this to your Docker or Kubernetes configuration:
-
-{{< code-block lang="yaml" filename="docker-compose.yml" >}}
-environment:
-  - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-  - DD_SERVICE=my-service
-  - DD_ENV=production
-{{< /code-block >}}
+Before the first valid configuration, evaluations return caller defaults. After successful initialization, transient delivery failures retain the last valid configuration.
 
 ### Remote Configuration not working
 
 Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is the [required version](#prerequisites)
+- Datadog Agent is version 7.55 or later. See [Server SDK Configuration Sources][9].
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
 - The SDK can communicate with the Agent
+- The Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][10].
 
 ### Async evaluation errors
 
@@ -401,7 +387,13 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /feature_flags/concepts/flag_graphs/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[9]: /feature_flags/concepts/configuration_sources/
+[10]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[11]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[12]: /feature_flags/guide/server_evaluation_events/

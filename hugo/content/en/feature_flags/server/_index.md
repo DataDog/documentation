@@ -27,31 +27,13 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs receive flag configuration and evaluate flags locally. Some SDKs use a Datadog tracer for configuration delivery or telemetry.
+Datadog Feature Flags server SDKs use agentless delivery: they receive flag configuration directly from the Datadog-managed CDN and evaluate flags locally. Agentless delivery does not require a Datadog Agent.
 
-Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
+The SDKs implement the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/). Register the Datadog provider with OpenFeature to use its evaluation API.
 
-## Configuration delivery
+## Getting started
 
-Agentless [configuration delivery][8] is the default in server SDK versions that support it. The SDK fetches flag configuration directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
-
-The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
-
-| SDK | Recommended agentless version |
-|---|---|
-| Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
-| Node.js `dd-trace` | 6.12.0 |
-| Python `ddtrace` | 4.14.0 |
-
-Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
-
-Agentless delivery changes only the flag configuration source. Java and Node.js support direct exposure delivery. Java, Node.js, and Python can also use a compatible local telemetry relay.
-
-The listed versions provide the current capabilities described on each language page. Other server SDKs use Agent Remote Configuration.
-
-## Choose a language
-
-Select your language or framework to view SDK-specific setup instructions:
+Choose a language for the minimum installation, configuration, and evaluation example:
 
 {{< card-grid card_width="200px" >}}
   {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
@@ -63,85 +45,72 @@ Select your language or framework to view SDK-specific setup instructions:
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
 
-For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, version requirements, and telemetry egress.
+Use the following SDK versions or later. These are the baselines for the language guides and shared instructions.
 
-## Prerequisites
-
-Requirements depend on the selected SDK and configuration source. Standard requirements include:
-
-- The language-specific tracer or OpenFeature provider versions listed on the SDK page
-- A Datadog [API key][2]
-
-Java CDN delivery requires the Java agent in the application process. It does not require APM tracing or a separate Datadog Agent service.
-
-Source-specific requirements are:
-
-| Source | Requirements |
+| SDK | Minimum version for this guide |
 |---|---|
-| `agentless` (default where supported) | Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process. No Agent is required for flag configuration. |
-| `remote_config` | Datadog Agent 7.55 or later with Remote Configuration enabled, the API key configured on the Agent, and Remote Configuration enabled for your organization in [{{< ui >}}Organization Settings{{< /ui >}}][3]. Java also requires compatible `dd-openfeature` and `dd-java-agent` versions. |
+| Java `dd-openfeature` | 1.69.0 |
+| Node.js `dd-trace` | 6.24.0 |
+| Python `ddtrace` | 4.17.0 |
+| .NET tracer and `Datadog.FeatureFlags.OpenFeature` | 3.57.0 and 2.3.2 |
+| Ruby `datadog` | 2.49.0 |
+| Go `dd-trace-go` | 2.12.0 |
+| PHP `datadog/dd-trace` | 1.28.0 |
 
-## Agentless configuration
+Create a flag with the **Server** distribution channel enabled. Configure a Datadog [API key][2] and the flag environment in the application process:
 
-On a [supported SDK version](#configuration-delivery), configure the application process:
+```bash
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
+```
 
-{{< code-block lang="bash" >}}
-# Required for direct configuration delivery
-DD_API_KEY=<DATADOG_API_KEY>
-DD_SITE={{< region-param key="dd_site" code="true" >}}
-DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
-No Feature Flags enablement or source setting is required. See [Java Feature Flags][10], [Node.js Feature Flags][9], or [Python Feature Flags][11] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+Then initialize the provider and evaluate the flag as shown on the language page. No Feature Flags enablement or source setting is required for new setups, except PHP:
 
-## Agent Remote Configuration
+```bash
+# PHP requires explicit source selection before startup.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+```
 
-For Java, Node.js, and Python, set the source explicitly to retain Agent-managed delivery:
+Java uses the standalone `dd-openfeature` dependency. .NET still requires the tracer to be loaded with automatic instrumentation. PHP still requires the native extension. See each language guide for runtime requirements.
 
-{{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
-{{< /code-block >}}
+`DD_SERVICE` and `DD_VERSION` are optional attribution settings. Metrics, tracing, and custom polling settings are not required to receive flags.
 
-Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
+## Collect traces with flag evaluations
 
-See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
+Use this optional setup to inspect request errors and latency by flag variant. Configure APM tracing, then enable [APM trace enrichment][13] for a supported SDK. The SDK attaches flag evaluation data to the active request trace.
 
-Existing Java, Node.js, and Python implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+For Java, load `dd-java-agent` 1.69.0 or later to collect traces and attach flag evaluations. See [Collect traces with flag evaluations in Java][16]. Keep the application's existing flag configuration source when adding tracing.
 
-### Remote Configuration polling interval
+To add only Feature Flags to an existing OpenTelemetry setup, use [Option B: Run the Datadog SDK alongside OpenTelemetry][17]. This keeps the existing tracing provider and exporter.
 
-The Agent polls Datadog for configuration updates at a configurable interval:
+## Optional telemetry
 
-{{< code-block lang="bash" >}}
-# Optional: Configure the Agent polling interval (default: 60s)
-DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=10s
-{{< /code-block >}}
+Configuration delivery, event delivery, metrics, and APM tracing use separate paths:
 
-## Advanced application configuration
+- [Send feature flag telemetry][15]: experiment exposures and aggregated flag evaluation events, with supported direct delivery or a local relay.
+- [Server-side evaluation events and privacy][19]: evaluation-event collection controls, targeting-key hashing, and direct-delivery limits.
+- [Server-side flag evaluation metrics][6]: the separate `feature_flag.evaluations` OTLP metric.
+- [APM trace enrichment][13]: flag evaluation data attached to APM traces.
 
-Configure your application with the standard Datadog environment variables. These are common across all server-side SDKs:
+Set `DD_FEATURE_FLAGS_ENABLED=false` to disable Feature Flags. See [Activation and billing][14] for when delivery starts.
 
-{{< code-block lang="bash" >}}
-# Required: Service identification
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-DD_VERSION=<YOUR_APP_VERSION>
+## Migrate from Agent delivery
 
-# Optional: Disable Feature Flags and both delivery paths
-# DD_FEATURE_FLAGS_ENABLED=false
+An existing deployment can remain on Agent delivery because of legacy enablement settings. Follow [Migrate an existing Remote Configuration setup][7] to move credentials into the application, select agentless delivery, and verify updates.
 
-# Optional: Enable flag evaluation metrics
-# See "Set Up Server-Side Flag Evaluation Metrics" documentation
-{{< /code-block >}}
+## Use Agent delivery
 
-<div class="alert alert-info">In the Java, Node.js, and Python versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
+To keep Agent delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][1] enabled and an API key. Set this variable in the application:
 
-For telemetry, metrics, and graphing options, see:
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
 
-- <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Send feature flag telemetry</a> for exposure and Event Platform Proxy (EVP) flag evaluation event delivery
-- <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the separate <code>feature_flag.evaluations</code> OTLP metric
-- <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for graphing options
-- <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment for Feature Flags</a> for attaching evaluation data to APM traces
+For Java, also load `dd-java-agent` 1.69.0 or later with `-javaagent`. Use `dd-openfeature` 1.69.0 or later. See the [Java Remote Configuration setup][12].
+
+See [Server SDK Configuration Sources][8] for Agent requirements, source precedence, and delivery settings.
 
 ## Testing with in-memory providers
 
@@ -190,6 +159,12 @@ const evaluationContext = {
 };
 {{< /code-block >}}
 
+## Opt out individual subjects
+
+Configure evaluation telemetry and experiment participation independently for each subject. Support and release requirements differ by SDK. See [Flag Evaluation and Experimentation Opt-Out][18] for the support matrix, mode behavior, and language-specific examples.
+
+Supply preferences in each evaluation's context. Do not change a shared global context for individual server requests.
+
 ## Further reading
 
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
@@ -206,3 +181,14 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [9]: /feature_flags/server/nodejs/
 [10]: /feature_flags/server/java/
 [11]: /feature_flags/server/python/
+
+[6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[12]: /feature_flags/server/java/#use-agent-delivery
+[13]: /feature_flags/guide/apm_trace_enrichment/
+[14]: /feature_flags/concepts/configuration_sources/#activation-and-billing
+
+[15]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[16]: /feature_flags/server/java/#collect-traces-with-flag-evaluations
+[17]: /feature_flags/implementation_patterns/opentelemetry/#option-b-run-the-datadog-sdk-alongside-opentelemetry
+[18]: /feature_flags/concepts/opt_out/
+[19]: /feature_flags/guide/server_evaluation_events/

@@ -1,52 +1,38 @@
 ---
 algolia:
   tags:
-  - puertas de cd
+  - cd gates
+description: Reduzca los incidentes de despliegue evaluando automáticamente monitores
+  y anomalías de APM para detener las versiones cuando se detecten regresiones de
+  rendimiento.
 further_reading:
 - link: /deployment_gates/setup
   tag: Documentación
-  text: Configurar puertas de despliegue
+  text: Configure Deployment Gates
 - link: /deployment_gates/explore
   tag: Documentación
-  text: Conoce el explorer de puertas de despliegue
-- link: entrega_continua
+  text: Obtenga información sobre el Deployment Gates explorer.
+- link: continuous_delivery
   tag: Documentación
-  text: Más información sobre la visibilidad de la entrega continua
+  text: Aprenda sobre Continuous Delivery Visibility
 - link: continuous_delivery/deployments
   tag: Documentación
-  text: Aprende a configurar CD Visibility
+  text: Aprenda a configurar CD Visibility
 title: Puertas de despliegue
 ---
+Deployment Gates le permiten reducir la probabilidad y el impacto de los incidentes causados por los despliegues.
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Las puertas de despliegue no están disponibles en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
+Al realizar un despliegue en producción, puede utilizar Deployment Gates para evaluar el impacto de los nuevos cambios mediante [monitors][1] y anomalías de APM.
+Cuando se detectan anomalías o regresiones de rendimiento, puede detener automáticamente la versión, evitando que el código inestable llegue a una base de usuarios más amplia. Además, puede utilizar Deployment Gates como punto de entrada para investigar el problema.
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Las puertas de despliegue están en vista previa. Si estás interesado en esta función, completa el formulario para solicitar acceso.
-{{< /callout >}}
+Para obtener instrucciones de configuración, consulte [Set up Deployment Gates][2]. Una vez completada la configuración, puede realizar un seguimiento y analizar las evaluaciones de Deployment Gates a través de la página [Deployment Gates Evaluations][3]:
 
-Las puertas de despliegue proporcionan un control basado en datos sobre tus lanzamientos de producción. Evalúan la telemetría de Datadog, como los monitores específicos y las anomalías de APM, para determinar el estado de las nuevas versiones en tiempo real.
+{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" text="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
 
-Al monitorizar los indicadores clave con puertas de despliegue, puedes detener automáticamente una versión si se detectan anomalías o regresiones de rendimiento, evitando que un código inestable llegue a una base de usuarios más amplia.
-
-El producto consta de dos componentes principales:
-
-- Se define una [puerta][1] para un servicio y un entorno. Cada puerta se evalúa en función de un conjunto de reglas.
-- Una regla es un tipo de evaluación que forma parte de una puerta. Puedes crear este tipo de reglas:
-  - [Monitores][2]
-  - [Detección de despliegue defectuoso de APM] [3]
-
-Para obtener instrucciones de configuración, consulta [Configurar puertas de despliegue][4]. Una vez finalizada la configuración, puedes rastrear y analizar las evaluaciones de las puertas a través de la page (página)  [Evaluaciones de las puertas de despliegue][5]:
-
-{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" text="La page (página) de evaluaciones de las puertas de despliegue en Datadog" style="width:100%" >}}
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/deployment_gates/setup/#create-a-deployment-gate
-[2]: /es/deployment_gates/setup/?tab=monitors#rule-types
-[3]: /es/deployment_gates/setup/?tab=apmfaultydeploymentdetection#rule-types
-[4]: /es/deployment_gates/setup
-[5]: /es/deployment_gates/explore
+[1]: /es/monitors/
+[2]: /es/deployment_gates/setup
+[3]: /es/deployment_gates/explore

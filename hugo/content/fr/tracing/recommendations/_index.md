@@ -12,10 +12,10 @@ description: Apprenez à optimiser les performances et la fiabilité de votre ap
 further_reading:
 - link: /tracing/
   tag: Documentation
-  text: Découvrez l'Application Performance Monitoring (APM)
+  text: Découvrez Application Performance Monitoring (APM)
 - link: /tracing/guide/apm_dashboard/
   tag: Documentation
-  text: Guide du dashboard APM
+  text: Guide du Dashboard APM
 - link: /cloud_cost_management/recommendations/
   tag: Documentation
   text: Cloud Cost Recommendations
@@ -69,9 +69,9 @@ multifiltersearch:
     scope: Databases
   - category: Reliability
     recommendation_description: Une application backend déclenche des tentatives de
-      réessai rapides sans appliquer de backoff adéquat, maintenant une pression élevée
-      sur les dépendances en difficulté et risquant des pannes prolongées en empêchant
-      la récupération du système lors de défaillances transitoires.
+      réessai rapides sans appliquer de délai d'attente (backoff) adéquat, maintenant
+      une pression élevée sur les dépendances en difficulté et risquant des pannes
+      prolongées en empêchant la récupération du système lors de défaillances transitoires.
     recommendation_prerequisite: APM
     recommendation_type: Aggressive Retries
     scope: Backend services
@@ -88,56 +88,6 @@ multifiltersearch:
       défaillances en cascade en amont.
     recommendation_prerequisite: APM + RUM
     recommendation_type: Dependency Timeouts
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un service effectue un travail coûteux et répété sur
-      le chemin de la requête qui pourrait être servi à partir d'un cache à courte
-      durée de vie, réduisant la latence de suivi et la charge en aval.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Missing Cache
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un service présente une latence de suivi extrême causée
-      par des spans en aval lents sur le chemin critique, souvent en raison d'une
-      latence de dépendance illimitée ou d'appels séquentiels qui pourraient s'exécuter
-      simultanément.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Tail Latency
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un service consacre une part importante du temps de
-      requête à un travail de sérialisation ou de parsing lié au CPU, ajoutant une
-      latence évitable et une surcharge de CPU.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Excessive Serialization
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un service accepte des paramètres de requête sans
-      limites de taille ou de plage, permettant à des entrées surdimensionnées d'entraîner
-      un travail coûteux en aval, une latence de suivi et des délais d'attente.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Unbounded Payload
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Le traitement des requêtes est sérialisé derrière
-      une primitive de synchronisation ou une section critique longue, provoquant
-      une latence de suivi en cas de concurrence.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Resource Contention
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: Un service épuise de manière répétée son pool de connexions
-      vers une dépendance en aval, mettant les requêtes en file d'attente et provoquant
-      des pics de latence ou des échecs sous charge.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Connection Pool Exhaustion
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: Un service fait apparaître des résultats attendus
-      sous forme d'erreurs dans APM, gonflant ainsi les taux d'erreur des endpoints
-      et masquant de réelles régressions de fiabilité.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Error Misclassification
     scope: Backend services
   headers:
   - filter_by: true
@@ -200,13 +150,13 @@ Pour examiner les recommandations qui nécessitent votre attention :
 
 Après avoir examiné la recommandation, vous pouvez utiliser le menu déroulant {{< ui >}}FOR REVIEW{{< /ui >}} pour changer le statut de la recommandation en {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}} ou {{< ui >}}RESOLVED{{< /ui >}}.
 
-**Remarque** : Sur l'APM Home page[5], les sections {{< ui >}}Watchdog{{< /ui >}} et {{< ui >}}Error Tracking{{< /ui >}} respectent également le filtre de service sélectionné (ou vos services personnalisés lorsqu'aucun filtre n'est défini), correspondant à la manière dont les recommandations sont délimitées. Lorsqu'un service est sélectionné et qu'aucune alerte ou aucun problème ne correspond, la section affiche un état vide avec un bouton {{< ui >}}Clear filter{{< /ui >}}, et le lien Error Tracking {{< ui >}}View all{{< /ui >}} est pré-filtré sur ce service.
+**Remarque** : Sur l'[APM Home page][5], les sections {{< ui >}}Watchdog{{< /ui >}} et {{< ui >}}Error Tracking{{< /ui >}} respectent également le filtre de service sélectionné (ou vos services personnalisés lorsqu'aucun filtre n'est défini), correspondant à la manière dont les recommandations sont délimitées. Lorsqu'un service est sélectionné et qu'aucune alerte ou aucun problème ne correspond, la section affiche un état vide avec un bouton {{< ui >}}Clear filter{{< /ui >}}, et le lien Error Tracking {{< ui >}}View all{{< /ui >}} est pré-filtré sur ce service.
 
 ## Affichage des recommandations sur un dashboard {#viewing-recommendations-on-a-dashboard}
 
 Ajoutez un widget Liste avec APM Recommendations comme source de données pour examiner les recommandations parallèlement aux métriques de performance de votre équipe.
 
-{{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="Un widget Liste configuré avec APM Recommendations comme source de données, affichant les recommandations par priorité, service, summary, issue et status." style="width:100%;" >}}
+{{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="Un widget Liste configuré avec APM Recommendations comme source de données, affichant les recommandations par priorité, service, résumé, problème et statut." style="width:100%;" >}}
 
 1. Sur n'importe quel dashboard, créez un widget et sélectionnez {{< ui >}}List{{< /ui >}} comme visualisation.
 2. Sélectionnez {{< ui >}}APM Recommendations{{< /ui >}} comme source de données.
@@ -218,9 +168,9 @@ Ajoutez un widget Liste avec APM Recommendations comme source de données pour e
 
 {{< multifilter-search >}}
 
-**Remarque** : Si vous utilisez à la fois APM et Database Monitoring (DBM), vous pourriez voir moins de Missing Index recommendations ici que sur la DBM Recommendations page [2]. APM Recommendations n'affichent que les Missing Index issues que Datadog peut associer à un service d'application instrumenté. Missing Index recommendations qui ne peuvent être associées à un service spécifique n'apparaissent que dans DBM.
+**Remarque** : Si vous utilisez à la fois APM et Database Monitoring (DBM), vous pourriez voir moins de recommandations Missing Index ici que sur la [page DBM Recommendations][2]. APM Recommendations n'affichent que les Missing Index issues que Datadog peut associer à un service d'application instrumenté. Les recommandations Missing Index qui ne peuvent être associées à un service spécifique n'apparaissent que dans DBM.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

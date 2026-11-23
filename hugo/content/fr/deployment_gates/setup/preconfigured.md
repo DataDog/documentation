@@ -51,19 +51,21 @@ Pour le schéma complet et toutes les options disponibles, consultez la [référ
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-La règle Monitor évalue l'état d'un ensemble de monitors sur une période configurable. Elle échoue si, à tout moment pendant la période d'évaluation :
+La règle Monitor évalue l'état d'un ensemble de monitors sur une période configurable. Sélectionnez des monitors à l'aide d'une requête de recherche ou d'une liste explicite de monitors. Ces méthodes de sélection sont mutuellement exclusives. La règle peut échouer si, à tout moment pendant la période d'évaluation :
 
-- Aucun monitor ne correspond à la requête.
-- Plus de 50 monitors correspondent à la requête.
-- Tout monitor correspondant est dans l'état `ALERT` ou `NO_DATA`.
+- Aucun groupe de monitors ne correspond à la sélection configurée.
+- Un ID de monitor explicite n'existe pas ou n'est pas disponible pour votre organisation.
+- Plus de 300 monitors correspondent à la sélection configurée.
+- Tout groupe de monitors correspondant est dans l'état `ALERT` ou `NO_DATA`.
 
 ##### Paramètres de configuration {#configuration-settings}
 
-- {{< ui >}}Search Query{{< /ui >}}: La requête utilisée pour trouver les monitors à évaluer, basée sur la [syntaxe de recherche de monitor][1]. Filtrer sur les tags de monitor :
+- {{< ui >}}Monitors matching query{{< /ui >}} : Saisissez une requête basée sur la [syntaxe de recherche de monitor][1]. Filtrer sur les tags de monitor :
   - Tags statiques de monitor : `service:transaction-backend`
   - Tags dans la requête du monitor : `scope:"service:transaction-backend"`
   - Tags dans un [regroupement de monitors][2] : `group:"service:transaction-backend"`
-- {{< ui >}}Duration{{< /ui >}}: La période de temps (en secondes) pendant laquelle les monitors correspondants sont évalués. La valeur par défaut est 0 (les monitors sont évalués instantanément). Le maximum est de 7200 secondes (2 heures).
+- {{< ui >}}Specific monitors{{< /ui >}} : Sélectionnez des monitors individuels et, éventuellement, les groupes exacts à évaluer pour chaque monitor. Lorsqu'aucun groupe n'est sélectionné, tous les groupes de ce monitor sont évalués.
+- {{< ui >}}Duration{{< /ui >}} : La période de temps (en secondes) pendant laquelle les monitors sélectionnés sont évalués. La valeur par défaut est 0 (les monitors sont évalués instantanément). Le maximum est de 7200 secondes (2 heures).
 
 ##### Exemples de requêtes {#example-queries}
 
@@ -72,9 +74,24 @@ La règle Monitor évalue l'état d'un ensemble de monitors sur une période con
 - `tag:"use_deployment_gates" team:payment`
 - `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
+##### Exemple d'API pour des monitors spécifiques {#specific-monitors-api-example}
+
+```json
+"options": {
+  "monitor_ids": [
+    {"id": "12345678", "groups": []},
+    {"id": "87654321", "groups": ["service:api", "env:prod"]}
+  ],
+  "duration": 300
+}
+```
+
+Chaque `id` est un ID de monitor décimal. Les valeurs de groupe sont des noms de groupe exacts. N'envoyez pas `query` avec `monitor_ids`.
+
 **Remarques** :
-- `group`Les filtres évaluent uniquement les groupes correspondants.
-- Les monitors mis en sourdine sont automatiquement exclus de l'évaluation (la requête inclut toujours `muted:false`).
+- `group` les filtres de requête et `monitor_ids[].groups` évaluent uniquement les groupes correspondants.
+- Un ID de monitor explicite qui n'existe pas ou qui n'est pas disponible pour votre organisation entraîne l'échec de la règle. Si le monitor existe mais est exclu car mis en sourdine ou si ses groupes sélectionnés ne contiennent aucune donnée, la règle applique le comportement en l'absence de groupes correspondants.
+- Les monitors mis en sourdine sont automatiquement exclus des deux modes de sélection.
 
 [1]: /fr/monitors/manage/search/
 [2]: /fr/monitors/manage/#triggered-monitors
@@ -92,7 +109,7 @@ L'analyse est effectuée automatiquement pour tous les services instrumentés pa
 - {{< ui >}}Operation Name{{< /ui >}}: Rempli automatiquement à partir des paramètres de [l'opération principale APM][3] du service.
 - {{< ui >}}Duration{{< /ui >}}: La période de temps (en secondes) pendant laquelle l'analyse s'exécute. Pour une confiance optimale dans l'analyse, cette valeur doit être d'au moins 900 secondes (15 minutes) après le début d'un déploiement. Le maximum est de 7200 secondes (2 heures).
 - {{< ui >}}Allowed Resources{{< /ui >}} (facultatif) : Une liste séparée par des virgules de [ressources APM][2] à inclure dans l'analyse. Lorsqu'elles sont spécifiées, seules les ressources listées sont analysées. Mutuellement exclusif avec {{< ui >}}Excluded Resources{{< /ui >}}.
-- {{< ui >}}Excluded Resources{{< /ui >}} (facultatif) : Une liste séparée par des virgules de [ressources APM][2] à ignorer (telles que les points de terminaison à faible volume ou à faible priorité). Mutuellement exclusif avec {{< ui >}}Allowed Resources{{< /ui >}}.
+- {{< ui >}}Excluded Resources{{< /ui >}} (facultatif) : Une liste séparée par des virgules de [ressources APM][2] à ignorer (telles que les endpoints à faible volume ou à faible priorité). Mutuellement exclusif avec {{< ui >}}Allowed Resources{{< /ui >}}.
 
 **Remarques** :
 - La règle est évaluée pour chaque valeur de [tag principal supplémentaire][4] ainsi que pour une analyse globale. Pour ne prendre en compte qu'un seul tag principal, spécifiez-le lors de la [demande d'évaluation de la porte](#evaluate-a-gate-from-your-pipeline).
@@ -112,7 +129,7 @@ Une fois la porte configurée, demandez une évaluation lors du déploiement du 
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande datadog-ci" %}}
-La commande [datadog-ci][1] `deployment gate` exécute l'évaluation en une seule commande :
+La commande [datadog-ci][1] `deployment gate` exécute l'évaluation en une seule commande :
 
 ```bash
 datadog-ci deployment gate --service transaction-backend --env staging --identifier default
@@ -431,11 +448,11 @@ Le script :
   - 5xx : erreur serveur, réessaie avec un délai.
   - 4xx : erreur client, l'évaluation échoue.
   - 2xx : évaluation lancée.
-- Interroge l'endpoint du statut de l'évaluation avec le `evaluation_id` jusqu'à ce que l'évaluation soit terminée :
+- Interroge l'endpoint du statut de l'évaluation avec le `evaluation_id` jusqu'à ce que l'évaluation soit terminée :
   - 5xx : erreur serveur, réessaie avec un délai.
   - 404 : évaluation pas encore lancée, réessaie avec un délai.
   - 4xx (sauf 404) : erreur client, l'évaluation échoue.
-  - 2xx : vérifiez `gate_status` et réessayez avec un délai si ce n'est pas terminé.
+  - 2xx : vérifiez `gate_status` et réessayez avec un délai si ce n'est pas terminé.
 - Interroge toutes les 15 secondes jusqu'à ce que l'évaluation soit terminée ou que le temps d'interrogation maximal (10800 secondes = 3 heures par défaut) soit atteint.
 - Si toutes les tentatives sont épuisées pour la requête initiale (réponses 5xx), le script traite cela comme un succès pour être résilient aux défaillances de l'API.
 
@@ -490,7 +507,7 @@ Attributs facultatifs :
 
 **Note** : Une réponse HTTP 404 peut signifier que la porte n'a pas été trouvée, ou que la porte a été trouvée mais ne contient aucune règle.
 
-Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état HTTP 202 est renvoyé :
+Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état HTTP 202 est renvoyé :
 
 ```json
 {
@@ -506,7 +523,7 @@ Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état H
 
 Le champ `data.attributes.evaluation_id` contient l'identifiant unique de cette évaluation Deployment Gate.
 
-Récupérez le statut d'une évaluation Deployment Gate en interrogeant l'endpoint de statut avec l'identifiant d'évaluation :
+Récupérez le statut d'une évaluation Deployment Gate en interrogeant l'endpoint de statut avec l'identifiant d'évaluation :
 
 ```bash
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
@@ -563,7 +580,7 @@ Lors de l'intégration des portes de déploiement dans votre workflow Continuous
 
 1. Créez une porte pour un service et réglez {{< ui >}}Evaluation Mode{{< /ui >}} sur {{< ui >}}Dry Run{{< /ui >}}.
 2. Ajoutez l'évaluation Deployment Gate à votre processus de déploiement. Tant que la porte est en mode Dry Run, l'API renvoie toujours `pass` et les déploiements ne sont pas affectés par le résultat de la porte.
-3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand la Deployment Gate aurait échoué et pour quelle raison.
+3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand Deployment Gate aurait échoué et pour quelle raison.
 4. Lorsque vous êtes certain que le comportement de la porte est conforme à vos attentes, modifiez la porte et passez le mode d'évaluation de {{< ui >}}Dry Run{{< /ui >}} à {{< ui >}}Active{{< /ui >}}. Ensuite, l'API commence à renvoyer le statut réel et les déploiements commencent à être promus ou annulés en fonction du résultat de la Deployment Gate.
 
 ## Pour aller plus loin {#further-reading}

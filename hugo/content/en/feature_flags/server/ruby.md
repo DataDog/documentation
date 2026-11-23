@@ -20,85 +20,62 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Ruby tracer (`datadog` gem).
+The Datadog Ruby SDK receives flag configuration directly from Datadog by default and evaluates flags locally. It integrates with [OpenFeature][3], an open standard for feature flag management.
 
-## Prerequisites
+## Getting started
 
-Before setting up the Ruby Feature Flags SDK, ensure you have:
+Use Ruby 3.1 or later with `datadog` 2.49.0 or later and `openfeature-sdk` 0.5.1 or later. The `datadog` gem includes the native extension required for flag evaluation. Production support is limited to [supported Linux operating systems][2]. For JRuby, use the [Java SDK](#use-the-java-sdk-on-jruby).
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration][1] enabled
-- **Datadog [API key][4]** configured on the Agent
-- **Datadog Ruby SDK** `datadog` version 2.24.0 or later
-- **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration
-- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later for provider hooks, exposure logging, and flag evaluation metrics support
-- **OpenTelemetry metrics gems** for [flag evaluation metrics][5]: `opentelemetry-metrics-sdk` version 0.8.0 or later, and `opentelemetry-exporter-otlp-metrics` version 0.4.0 or later
-- **Service and environment configured** - Feature flags are targeted by service and environment
-- **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
+1. Add these dependencies to your `Gemfile`, then run `bundle install`:
 
-<div class="alert alert-info">The Datadog Ruby tracer supports older Ruby runtimes for APM. Applications on older Ruby versions, including Ruby 2.5, can continue to use Datadog APM, but cannot use Datadog Feature Flags through OpenFeature until they upgrade to Ruby 3.1 or later. The OpenFeature Ruby SDK versions that expose the provider hook surface required for complete Feature Flags telemetry require Ruby 3.1 or later.</div>
+   ```ruby
+   gem 'datadog', '~> 2.49'
+   gem 'openfeature-sdk', '>= 0.5.1'
+   ```
 
-## Installing and initializing
+2. Set your Datadog [API key][4] and flag environment in the application process:
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
+   ```bash
+   export DD_API_KEY='<DATADOG_API_KEY>'
+   export DD_ENV='<YOUR_ENVIRONMENT>'
+   ```
 
-```shell
-gem install datadog openfeature-sdk
-```
+   If your organization uses a site other than `datadoghq.com`, set `DD_SITE`:
 
-To emit flag evaluation metrics, add the OpenTelemetry metrics gems to your application bundle:
+   ```bash
+   export DD_SITE={{< region-param key="dd_site" code="true" >}}
+   ```
 
-```ruby
-gem "opentelemetry-metrics-sdk", ">= 0.8"
-gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
-```
+3. Enable a Boolean flag named `my-flag` for your environment with the **Server** distribution channel. Register the provider and evaluate the flag:
 
-You can enable Feature Flags with environment variables:
+   ```ruby
+   require 'datadog'
+   require 'open_feature/sdk'
+   require 'datadog/open_feature/provider'
 
-```shell
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+   OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+   client = OpenFeature::SDK.build_client
+   enabled = client.fetch_boolean_value(flag_key: 'my-flag', default_value: false)
+   ```
 
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-```
+No Datadog Agent, APM instrumentation, enablement setting, or source setting is required. Provider registration starts configuration delivery. Installing the gem or constructing the provider alone does not start polling.
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+For existing installations that use Agent delivery, follow [Migrate an existing setup](#migrate-an-existing-setup) before using these instructions.
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+## Initialize the provider
 
-Or enable the provider in code:
+`set_provider_and_wait` waits for the first valid configuration. The default initialization timeout is 30 seconds. If initialization fails, the method raises `OpenFeature::SDK::ProviderInitializationError`.
 
-```ruby
-require 'datadog'
-require 'open_feature/sdk'
-require 'datadog/open_feature/provider'
+Handle that exception if the application must start with caller-provided defaults. Polling continues after a temporary delivery failure, and the provider can recover when valid configuration arrives. For non-blocking initialization, use `OpenFeature::SDK.set_provider`. Evaluations return defaults until configuration is available.
 
-INITIALIZATION_TIMEOUT = 30
-
-# Configure Datadog with feature flagging enabled
-Datadog.configure do |config|
-  config.remote.enabled = true
-  config.remote.boot_timeout_seconds = INITIALIZATION_TIMEOUT
-  config.open_feature.enabled = true
-end
-
-# Configure OpenFeature SDK with Datadog provider and wait for initialization
-OpenFeature::SDK.configure do |config|
-  config.set_provider_and_wait(
-    Datadog::OpenFeature::Provider.new,
-    timeout: INITIALIZATION_TIMEOUT
-  )
-end
-
-# Create OpenFeature client
-client = OpenFeature::SDK.build_client
-```
-
-Using `set_provider_and_wait` blocks your application from proceeding until the provider is fully initialized or the timeout is reached. This ensures flags are ready before your application starts handling requests. If you prefer non-blocking initialization, use `set_provider` instead. If you do, the client returns default values until Remote Configuration loads in the background.
+To change the initialization timeout, use `config.feature_flags.initialization_timeout_ms` or `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS`. The OpenFeature method does not accept a `timeout:` argument.
 
 ## Set the evaluation context
 
@@ -117,6 +94,47 @@ context = OpenFeature::SDK::EvaluationContext.new(
 ```
 
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
+
+## Control flag evaluation telemetry and experiment participation
+
+Telemetry opt-out requires `datadog` version `2.47.0` or later. Experimentation opt-out requires `datadog` version `2.49.0` or later. The combined example requires `2.49.0` or later. Both controls are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][15] for shared behavior.
+
+Set these variables before constructing the provider:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Initialize the provider during startup. Pass the subject's preferences with each evaluation:
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+Replace the example timestamp with the subject's stored preference.
+
+The equivalent provider options are `enable_evaluation_telemetry_opt_out_parameter: true` and `experimentation_opt_out_mode: :immediate`. Explicit provider options override deployment settings. Use `:disabled` to override an enabled deployment policy, or omit the option to use deployment settings.
+
+Use `future_experiments_only` or `experimentation_opt_out_mode: :future_experiments_only` to retain allocations activated strictly before the timestamp. Both enabled modes reject malformed subject timestamps with `INVALID_CONTEXT` and return the application default. Future-experiments-only mode checks allocation activation, not prior enrollment.
+
+Telemetry opt-out suppresses each of these that the application enables: new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][16] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -190,7 +208,7 @@ batch_size = client.fetch_number_value(
 
 ### Object flags
 
-For structured data, use `fetch_object_value()`. This method returns a hash. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
+For structured data, use `fetch_object_value()`. This method returns a hash. Use object flags when multiple configuration properties belong together.
 
 ```ruby
 config = client.fetch_object_value(
@@ -242,6 +260,68 @@ if maintenance_mode
 end
 ```
 
+## Record exposures in your own data store
+
+Use `Datadog::OpenFeature::ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][13] for minimum SDK requirements and other details.
+
+## Advanced configuration
+
+`DD_SERVICE` and `DD_VERSION` add service and application version information. They are optional for receiving flag configuration. The environment selects the flag configuration.
+
+The SDK polls every 30 seconds and uses a 5-second request timeout by default. After receiving valid configuration, it retains that configuration during temporary delivery errors. See [Configuration Sources][6] for polling and custom endpoint settings.
+
+### Send exposures and evaluation events
+
+With agentless delivery, Ruby prefers a compatible local Event Platform Proxy (EVP) relay for experiment exposures and aggregated flag evaluation events. If a compatible relay is unavailable, it sends both event types directly to Datadog. Direct delivery uses the application's `DD_API_KEY` and `DD_SITE` settings.
+
+For serverless telemetry options, see [Send feature flag telemetry][12]. Flag evaluation metrics use a separate OpenTelemetry export path.
+
+### Agent delivery
+
+To receive flag configuration through an Agent, select Remote Configuration explicitly:
+
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+export DD_REMOTE_CONFIGURATION_ENABLED=true
+export DD_ENV='<YOUR_ENVIRONMENT>'
+```
+
+Use Datadog Agent 7.55 or later with [Remote Configuration][1] enabled. Configure the API key on the Agent. Register the provider with the same application code from [Getting started](#getting-started).
+
+Selecting `remote_config` enables the Feature Flags subscription when the Datadog SDK starts, even before provider registration. This source uses the Agent for configuration and event delivery.
+
+### Migrate an existing setup
+
+Legacy `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` or `config.open_feature.enabled = true` preserves Remote Configuration when no source is explicitly selected. A legacy value of `false` disables Feature Flags.
+
+To migrate to agentless delivery:
+
+1. Upgrade to `datadog` 2.49.0 or later.
+2. Set `DD_API_KEY` in the application process and preserve the flag environment in `DD_ENV`.
+3. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
+4. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`.
+5. Remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` and any `config.open_feature.enabled` assignment.
+6. Restart the application and verify a known flag after provider initialization.
+
+To keep Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` before removing the legacy settings. To disable Feature Flags, use `DD_FEATURE_FLAGS_ENABLED=false`.
+
+See [Migrate an existing Remote Configuration setup][7] for verification and rollback steps.
+
+### Flag evaluation metrics
+
+Flag evaluation metrics use a separate OpenTelemetry pipeline. Add the metrics gems to the application bundle:
+
+```ruby
+gem 'opentelemetry-metrics-sdk', '>= 0.8.0'
+gem 'opentelemetry-exporter-otlp-metrics', '>= 0.4.0'
+```
+
+Set `DD_METRICS_OTEL_ENABLED=true` and configure the exporter as described in [Set Up Server-Side Flag Evaluation Metrics][5]. Enabling agentless delivery does not configure metrics export.
+
+## Evaluation events and privacy
+
+Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][14] for the data collected, opt-out scope, and delivery requirements.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `Datadog::OpenFeature::Provider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships with `openfeature-sdk`, so no additional gem is required.
@@ -287,35 +367,70 @@ end
 
 To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the provider instance. The same pattern applies to Minitest — replace the `around` hook with `setup`/`teardown` methods.
 
-## Troubleshooting
+## Use the Java SDK on JRuby
 
-### Feature flags always return default values
+The Ruby SDK does not support Feature Flags on JRuby. On JRuby, the Ruby SDK writes a warning to the log and does not enable Feature Flags. Use the [Java SDK][8] instead. JRuby calls the Java SDK through its Java integration.
 
-If feature flags unexpectedly always return default values, check the following:
+Use `dd-openfeature` 1.69.0 or later and the dependencies listed in [Java SDK compatibility requirements][9]. Standalone agentless delivery does not require `dd-java-agent`.
 
-- Verify Remote Configuration is enabled in your Datadog Agent configuration
-- Ensure the service and environment are configured (either through `DD_SERVICE` and `DD_ENV` environment variables or `config.service` and `config.env` in Ruby)
-- Check that `config.remote.enabled = true` and `config.open_feature.enabled = true` are set in your Ruby application's Datadog configuration
-- Verify the `datadog` gem version includes OpenFeature support (2.24.0 or later)
+1. Get the `dd-openfeature` JAR file and its dependencies. For example, use Maven to copy them to a directory.
+2. Set the API key and flag environment before starting JRuby. If your organization uses a site other than `datadoghq.com`, set `DD_SITE`.
+3. Load the JAR files in your application with `require` and register the provider.
 
-### Remote Configuration connection issues
+```shell
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
 
-Check the Datadog Ruby tracer logs for Remote Configuration status:
-
-```ruby
-# Enable startup and debug logging
-Datadog.configure do |config|
-  config.diagnostics.startup_logs.enabled = true
-  config.diagnostics.debug = true
-  config.remote.enabled = true
-  config.open_feature.enabled = true
-end
+jruby app.rb
 ```
 
-Look for messages about:
-- Remote Configuration worker starting
-- Feature flags configuration being received
-- OpenFeature component initialization
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'com.datadog.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+For Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` and load a compatible `dd-java-agent` with the JVM option `-javaagent`. For example, run `jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb`. See [Java SDK configuration][8] for the Agent requirements.
+
+For provider events, error handling, and the evaluation methods, see the [Java SDK][8] page. JRuby uses the same classes and methods.
+
+## Troubleshooting
+
+If the application runs on JRuby, use the Java SDK. See [Use the Java SDK on JRuby][10].
+
+### Agentless delivery not working
+
+- Verify that `datadog` 2.49.0 or later is installed and the application registers the Datadog OpenFeature provider.
+- Check `DD_API_KEY` and `DD_ENV` in the application process. If your organization uses a site other than `datadoghq.com`, check `DD_SITE`.
+- Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false`.
+- Leave `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` unset for a new setup, or set it to `agentless`. Remove legacy enablement settings when migrating.
+- Allow outbound HTTPS to `ufc-server.ff-cdn.<DD_SITE>`.
+- Enable `DD_TRACE_DEBUG=true` and check tracer logs for authentication, timeout, or configuration errors.
+
+Before the first valid configuration, evaluations return caller-provided defaults. After successful initialization, temporary delivery errors retain the last valid configuration.
+
+### Remote configuration connection issues
+
+- Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is set to `remote_config`.
+- Verify that Remote Configuration is enabled in the Agent and the Ruby tracer.
+- Verify that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][11].
+- Check the API key on the Agent and `DD_ENV` in the application.
+- Confirm that the application can reach the Agent. Enable `DD_TRACE_DEBUG=true` and check the tracer logs for Remote Configuration errors.
 
 ## Further reading
 
@@ -326,3 +441,14 @@ Look for messages about:
 [3]: https://openfeature.dev/
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /feature_flags/concepts/configuration_sources/
+[7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[8]: /feature_flags/server/java/
+[9]: /feature_flags/server/java/#getting-started
+[10]: #use-the-java-sdk-on-jruby
+[11]: /feature_flags/concepts/configuration_sources/#agent-availability
+[12]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[13]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[14]: /feature_flags/guide/server_evaluation_events/
+[15]: /feature_flags/concepts/opt_out/
+[16]: /feature_flags/concepts/opt_out/#configure-server-sdks

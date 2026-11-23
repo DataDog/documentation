@@ -1,31 +1,70 @@
 ---
+description: Aprenda a enviar registros a New Relic usando el Observability Pipelines
+  Worker.
 disable_toc: false
-title: Destino New Relic
+products:
+- icon: logs
+  name: Registros
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+title: Destino de New Relic
 ---
+{{< product-availability >}}
 
-Utiliza el destino New Relic de Observability Pipelines para enviar logs a New Relic.
+## Descripción general {#overview}
 
-## Configuración
+Utilice el destino de New Relic de Observability Pipelines para enviar registros a New Relic.
 
-Configura el destino New Relic y sus variables de entorno cuando [configures un pipeline][1]. La siguiente información se configura en la interfaz de usuario del pipeline.
+## Configuración {#setup}
 
-### Configurar el destino
+<div class="alert alert-danger">Para la gestión de secretos: Ingrese únicamente los identificadores para el ID de cuenta y la licencia. <b>No</b> ingrese los valores reales.</div>
 
-{{% observability_pipelines/destination_settings/new_relic %}}
+Configure el destino de New Relic cuando [configure un pipeline][3]. Puede configurar un pipeline en la [UI][1], utilizando la [API][4] o con [Terraform][5]. Los pasos de esta sección se configuran en la interfaz de usuario.
 
-### Configurar las variables de entorno
+Después de seleccionar el destino de New Relic en la UI del pipeline:
+
+1.  Ingrese el identificador para su ID de cuenta. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1.  Ingrese el identificador para su licencia. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1. Seleccione la región del centro de datos ({{< ui >}}US{{< /ui >}} o {{< ui >}}EU{{< /ui >}}) de su cuenta de New Relic.
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+### Almacenamiento en búfer opcional {#optional-buffering}
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Valores predeterminados de Secret {#secret-defaults}
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Gestión de secretos" %}}
+
+- Identificador de su ID de cuenta de New Relic:
+	- El identificador predeterminado es `DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+- Identificador de su licencia de New Relic:
+	- El identificador predeterminado es `DESTINATION_NEW_RELIC_LICENSE_KEY`.
+
+{{% /tab %}}
+
+{{% tab "Variables de entorno" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
 
-## Cómo funciona el destino
+{{% /tab %}}
+{{< /tabs >}}
 
-### Procesamiento de eventos por lotes
+## Cómo funciona el destino {#how-the-destination-works}
 
-Un lote de eventos se descarga cuando se cumple uno de estos parámetros. Consulta [procesamiento de eventos por lotes][2] para obtener más información.
+### Procesamiento por lotes de eventos {#event-batching}
 
-| Eventos máximos     | Bytes máximos       | Tiempo de espera (segundos)   |
-|----------------|-----------------|---------------------|
-| 100            | 1,000,000       | 1                   |
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Agrupamiento de eventos de destino][2] para obtener más información.
+
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
+|----------------|-------------------|---------------------|
+| 100            | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /es/observability_pipelines/destinations/#event-batching
+[3]: /es/observability_pipelines/configuration/set_up_pipelines/
+[4]: /es/api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

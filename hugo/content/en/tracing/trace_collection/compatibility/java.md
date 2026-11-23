@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 27 and upward</td>
+    <td>from 28 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 26</td>
+    <td>from 18 to 27</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -260,6 +260,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Datanucleus JDO     | 4.0+             | Fully Supported                                        | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+             | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+            | Fully Supported                                        | `graphql-java`                                 |
+| Guidewire (PolicyCenter, BillingCenter) | 10.0+ | Fully Supported                                        | `guidewire`, `guidewire-wsi`   |
 | Hazelcast (client)  | 3.6+             | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+             | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+             | Fully Supported                                        | `hystrix`                                      |
@@ -528,7 +529,7 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [5]: /tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
-[10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[10]: /opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=java
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472

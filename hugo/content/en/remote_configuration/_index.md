@@ -80,6 +80,9 @@ Workload Protection
 : - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 : - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
+Network Path
+: - (Preview) Create and update Network Path scheduled tests and dynamic test filters from the Datadog UI, without restarting the Agent. See [Create tests in the UI][49].
+
 Observability Pipelines
 : - Remotely deploy and update [Observability Pipelines Workers][4] (OPW): Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
@@ -126,7 +129,11 @@ Enabling Remote Configuration impacts the following products. Each product defin
 
 ## Enable Remote Configuration
 
-In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
+In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page.
+{{< site-region region="gov,gov2" >}}
+**Note**: On US1-FED and US2-FED, Remote Configuration is not enabled by default.
+{{< /site-region >}}
+To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your {{< ui >}}Organization Settings{{< /ui >}} page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 1. Follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
@@ -138,11 +145,14 @@ Consult the documentation below for instructions specific to the product you're 
 | Product                 | Setup instructions                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
+| App and API Protection (AAP) | [App and API Protection setup][33]                                                                         |
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
 | Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
+| Network Path            | [Create tests in the UI][49]                                                                |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
+| Data Observability      | [PostgreSQL](/data_observability/quality_monitoring/transactional_databases/postgres/#enable-remote-configuration) |
 | Private Action Runner   | [Private Actions Overview](/actions/private_actions/)                                                          |
 | Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
 
@@ -210,3 +220,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [46]: /account_management/rbac/permissions/#serverless
 [47]: /containers/autoscaling
 [48]: /feature_flags/
+[49]: /network_monitoring/network_path/setup/#create-tests-in-the-ui

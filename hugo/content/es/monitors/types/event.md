@@ -2,98 +2,117 @@
 aliases:
 - /es/monitors/monitor_types/event
 - /es/monitors/create/types/event/
-description: Monitor de eventos recopilados por Datadog
+description: Haga un seguimiento de los eventos recopilados por Datadog
 further_reading:
 - link: /events/
   tag: Documentación
-  text: Descripción general de gestión de eventos
+  text: Descripción general de Event Management
 - link: /monitors/notify/
   tag: Documentación
-  text: Configurar tus notificaciones de monitor
+  text: Configure las notificaciones de seguimiento
 - link: /monitors/downtimes/
   tag: Documentación
-  text: Programar una caída del sistema para silenciar un monitor
-- link: /monitors/manage/status/
+  text: Programe un tiempo de inactividad para silenciar un seguimiento
+- link: /monitors/status/
   tag: Documentación
-  text: Comprobar el estado del monitor
-title: Monitor de eventos
+  text: Verifique el estado de su seguimiento
+title: Seguimiento de eventos
 ---
+## Descripción general {#overview}
 
-## Información general
+Datadog crea automáticamente eventos a partir de varios productos, incluidos seguimientos, Watchdog y Error Tracking. También puede realizar un seguimiento de los eventos generados desde el Agent y las integraciones instaladas, e ingerir eventos de fuentes, incluidos eventos de alerta de terceros, solicitudes de cambio, implementaciones y cambios de configuración.
 
-Datadog crea automáticamente eventos a partir de varios productos, incluidos monitores, Watchdog y rastreo de errores. También puedes rastrear de eventos generados a partir del Agent, integraciones integradas e ingesta de eventos de fuentes, incluidos eventos de alertas de terceros, solicitudes de cambio, despliegues y cambios de configuración.
+<div class="alert alert-info">Los seguimientos de eventos no alertan sobre <a href="/monitors/status/events/">eventos de seguimiento</a> ya que esto puede crear un bucle infinito.</a></div>
 
-Los monitores de eventos alertan sobre los eventos incorporados que coinciden con una consulta de búsqueda, lo que te permite centrar la atención en los eventos que más importan a tu equipo.
+Los seguimientos de eventos alertan sobre eventos ingeridos que coinciden con una consulta de búsqueda, lo que le permite centrar la atención en los eventos que son más importantes para su equipo.
 
-## Creación de un monitor
+## Creación de un seguimiento {#monitor-creation}
 
-Para crear un [monitor de evento][1] en Datadog, navega hasta [**Monitors** > **New Monitor** > **Event**][3] (Monitores > Nuevo monitor > Evento).
+Para crear un seguimiento de eventos en Datadog, navegue a [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Event{{< /ui >}}][1].
 
-<div class="alert alert-info"><strong>Nota</strong>: Existe un límite predeterminado de 1000 monitores de evento por cada cuenta. Si estás por alcanzar este límite, considera la posibilidad de utilizar <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">alertas múltiples</a> o <a href="/help/">ponte en contacto con el servicio de asistencia</a>.</div>
+<div class="alert alert-info">Existe un límite predeterminado de 1000 seguimientos de eventos por cuenta. Si alcanza este límite, considere usar <a href="/monitors/configuration/#set-alert-aggregation">alertas múltiples</a> o <a href="/help/">Contact Support</a>.</div>
 
-### Definir la consulta de búsqueda
+### Defina la consulta de búsqueda {#define-the-search-query}
 
-A medida que se define la consulta de búsqueda, el gráfico superior se actualiza.
+A medida que define la consulta de búsqueda, el gráfico superior se actualiza.
 
-1. Crea una consulta de búsqueda utilizando la [sintaxis de búsqueda de Event Explorer][2].
-2. Elige monitorizar un recuento de eventos o una faceta:
-    * **Monitorizar en base a un número de eventos**: utiliza la barra de búsqueda (opcional) y **no** selecciones una faceta. Datadog evalúa el número de eventos en un marco temporal seleccionado y luego lo compara con las condiciones del umbral.
-    * **Monitorizar en base a una faceta**: si seleccionas una faceta, el monitor alerta sobre el recuento de valor único de la faceta.
-3. Configura la estrategia de agrupación de alertas (opcional):
-    * **Alerta simple**: las alertas simples agregan todas las fuentes de información. Recibirás una alerta cuando el valor agregado cumpla las condiciones establecidas. Esto funciona mejor para monitorizar una métrica de un solo host o la suma de una métrica a través de muchos hosts. Esta estrategia puede seleccionarse para reducir el ruido de notificación.
-    * **Alerta múltiple**: las alertas múltiples aplican la alerta a cada fuente según tus parámetros de grupo, hasta 1000 grupos coincidentes. Se genera un evento de alerta para cada grupo que cumpla las condiciones establecidas. Por ejemplo, puedes agrupar por `host` para recibir alertas separadas para cada host.
+1. Construya una consulta de búsqueda utilizando la [sintaxis de búsqueda del Event Explorer][2].
+2. Elija hacer un seguimiento según un recuento de eventos, faceta, etiquetas o atributos:
+    * Datadog evalúa la cantidad de eventos durante un período de tiempo seleccionado y luego la compara con las condiciones de umbral.
+    * Para algunos atributos y etiquetas, Datadog evalúa los valores agregados (por ejemplo, promedio, mediana, mínimo o suma).
+    * {{< ui >}}Monitor over a facet{{< /ui >}}: Si se selecciona una faceta, el seguimiento alerta sobre el recuento de valores únicos de la faceta.
+      
+3. Agrupe eventos por múltiples dimensiones (opcional): 
 
-4. Agrupar eventos por múltiples dimensiones (opcional):
-
-   Todos los eventos que coinciden con la consulta se agregan a grupos basados en el valor de hasta cuatro facetas. Cuando hay varias dimensiones, los valores máximos se determinan según la primera dimensión, luego según la segunda dimensión dentro de los valores máximos de la primera dimensión, y así sucesivamente, hasta la última dimensión. El límite de dimensiones depende del número total de dimensiones:
-   * **1 faceta**: 1000 valores máximos
-   * **2 facetas**: 30 valores principales por faceta (900 grupos como máximo)
+   Todos los eventos que coinciden con la consulta se agregan en grupos según el valor de hasta cuatro facetas de evento. Cuando hay múltiples dimensiones, los valores principales se determinan de acuerdo con la primera dimensión, luego de acuerdo con la segunda dimensión dentro de los valores principales de la primera dimensión, y así sucesivamente hasta la última dimensión. El límite de dimensiones depende del número total de dimensiones:
+   * **1 faceta**: 1000 valores principales
+   * **2 facetas**: 30 valores principales por faceta (como máximo 900 grupos)
    * **3 facetas**: 10 valores principales por faceta (como máximo 1000 grupos)
-   * **4 facetas**: 5 valores principales por faceta (625 grupos como máximo)
+   * **4 facetas**: 5 valores principales por faceta (como máximo 625 grupos)
 
-### Definir condiciones de alerta
+   Si hay varias consultas o fórmulas definidas en un seguimiento de eventos, puede seleccionar el número de valores principales o inferiores para cada dimensión.
 
-* El recuento era `above`, `above or equal to`, `below`, o `below or equal to`
-* `<THRESHOLD_NUMBER>`
-* durante los últimos `5 minutes`, `15 minutes`, `1 hour`, etc. o `custom` para fijar un valor entre 5 minutos y 48 horas.
+   El límite total para los valores principales es 1,000, independientemente del número de facetas. Si aumenta el valor principal a un número mayor que 1,000, Datadog ajusta los valores principales para las otras dimensiones para garantizar que el número de combinaciones resultantes sea menor que 1,000. Los valores principales predeterminados para cada agrupación son 10, con la excepción de la cuarta faceta, que tiene como valor predeterminado los cinco valores principales.
 
-**Nota**: Algunos proveedores introducen un retraso significativo entre el momento en que se **publica** un evento y el momento en que se inicia el evento. En este caso, Datadog retrocede la fecha de evento hasta el momento en que se produce, lo que podría situar una entrada de evento fuera del intervalo de evaluación actual del monitor. La ampliación de tu intervalo de evaluación puede ayudar a tener en cuenta la diferencia horaria. Si necesitas ayuda para ajustar tu configuración de monitor adecuadamente, ponte en contacto con el [soporte de Datadog][3].
+   Como ejemplo, un seguimiento de eventos con cuatro agrupaciones en la consulta de búsqueda podría tener:
+   * **Primera faceta**: 10 valores principales
+   * **Segunda faceta**: 10 valores principales
+   * **Tercera faceta**: 5 valores principales
+   * **Cuarta faceta**: 2 valores principales
 
-#### Condiciones de alerta avanzadas
+### Establecer condiciones de alerta {#set-alert-conditions}
 
-Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (resolución automática, retraso en la evaluación, etc.), consulta la página [Configuración del monitor][4].
+Activar cuando la consulta cumpla una de las siguientes condiciones en comparación con un valor de umbral:
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
 
-### Notificaciones
+**Nota**: Algunos proveedores introducen un retraso significativo entre el momento en que se **publica** un evento y el momento en que se inicia. En este caso, Datadog retroactúa el evento a la hora en que ocurrió, lo que podría situar un evento entrante fuera de la ventana de evaluación actual del seguimiento. Ampliar su ventana de evaluación puede ayudar a compensar la diferencia horaria.
 
-Para obtener instrucciones detalladas sobre la sección **Configure notifications and automations** (Configurar notificaciones y automatizaciones), consulta la página [Notificaciones][5].
+#### Condiciones de alerta avanzadas {#advanced-alert-conditions}
 
-#### Variables de plantilla de evento
+Para obtener instrucciones detalladas sobre las opciones de alerta avanzadas (resolución automática, retraso de evaluación, etc.), consulte la página de [Monitor configuration][4].
 
-Los monitores de evento tienen variables de plantilla específicos que puedes incluir en el mensaje de notificación:
+### Notifications {#notifications}
+
+Para obtener instrucciones detalladas sobre la sección {{< ui >}}Configure notifications & automations{{< /ui >}}, consulte la página de [Notifications][5].
+
+#### Variables de plantilla de eventos {#event-template-variables}
+
+Los seguimientos de eventos tienen variables de plantilla específicas que puede incluir en el mensaje de notificación:
 
 | Variable de plantilla          | Definición                                                                     |
 |----------------------------|--------------------------------------------------------------------------------|
-| `{{event.id}}`             | El ID del evento.                                                           |
-| `{{event.title}}`          | El título del evento.                                                        |
-| `{{event.text}}`           | El texto del evento.                                                         |
-| `{{event.host.name}}`      | El nombre del host que generó el evento.                                 |
-| `{{event.tags}}`           | Una lista de etiquetas adjuntas al evento.                                          |
-| `{{event.tags.<TAG_KEY>}}` | El valor de una clave de etiqueta específica adjunta al evento. Consulta el ejemplo siguiente. |
+| `{{event.id}}`             | The ID of the event.                                                           |
+| `{{event.title}}`          | The title of the event.                                                        |
+| `{{event.text}}`           | The text of the event.                                                         |
+| `{{event.host.name}}`      | The name of the host that generated the event.                                 |
+| `{{event.tags}}`           | A list of tags attached to the event.                                          |
+| `{{event.tags.<TAG_KEY>}}` | El valor de una clave de etiqueta específica adjunta al evento. Consulte el ejemplo a continuación. |
 
-##### Sintaxis de etiquetas `key:value`
+##### Sintaxis de `key:value` etiquetas {#tags-keyvalue-syntax}
 
-Para las etiquetas `env:test` , `env:staging` y `env:prod`:
+Para las etiquetas `env:test`, `env:staging` y `env:prod`:
 
 * `env` es la clave de etiqueta.
 * `test`, `staging` y `prod` son los valores de etiqueta.
 
-La variable de plantilla es `{{event.tags.env}}`. El resultado de utilizar esta variable de plantilla es `test`, `staging`, o `prod`.
+La variable de plantilla es `{{event.tags.env}}`. The result of using this template variable is `test`, `staging`, or `prod`.
 
-## Lectura adicional
+###  Agregación de notificaciones {#notification-aggregation}
+
+Configure la estrategia de agrupación de alertas:
+    * {{< ui >}}Simple-Alert{{< /ui >}}: Las alertas simples se agregan sobre todas las fuentes de informes. Usted recibe una alerta cuando el valor agregado cumple con las condiciones establecidas. Esto funciona mejor para hacer un seguimiento de una métrica desde un solo servidor o la suma de una métrica en muchos servidores. Esta estrategia puede seleccionarse para reducir el ruido de las notificaciones.
+    * {{< ui >}}Multi Alert{{< /ui >}}: Las alertas múltiples aplican la alerta a cada fuente de acuerdo con sus parámetros de grupo, hasta 1000 grupos coincidentes. Se genera un evento de alerta para cada grupo que cumple con las condiciones establecidas. Por ejemplo, puede agrupar por `host` para recibir alertas separadas para cada servidor.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/event
+[1]: https://app.datadoghq.com/monitors/create/event
 [2]: /es/events/explorer/searching
 [3]: /es/help/
 [4]: /es/monitors/configuration/#advanced-alert-conditions

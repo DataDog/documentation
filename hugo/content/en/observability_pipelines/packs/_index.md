@@ -266,6 +266,14 @@ multifiltersearch:
       source: "Google Cloud"
       destination: "Any destination"
       description: "GCP VPC Firewall logs record allowed and denied traffic."
+    - pack: "[Gigamon GigaVUE AMI CEF](/observability_pipelines/packs/gigamon_gigavue_ami_cef/)"
+      source: "Gigamon"
+      destination: "Any destination"
+      description: "Gigamon AMI captures application traffic metadata from GigaVUE in CEF."
+    - pack: "[Gigamon GigaVUE AMI JSON](/observability_pipelines/packs/gigamon_gigavue_ami_json/)"
+      source: "Gigamon"
+      destination: "Any destination"
+      description: "Gigamon AMI captures application traffic metadata from GigaVUE in JSON."
     - pack: "[Google Cloud Audit](/observability_pipelines/packs/google_cloud_audit/)"
       source: "Google Cloud"
       destination: "Any destination"
@@ -445,6 +453,8 @@ Making these decisions typically requires coordination across multiple teams and
 
 Observability Pipelines Packs provide predefined configurations to help you make these decisions quickly and consistently. Packs apply Datadog-recommended best practices for specific log sources such as Akamai, AWS CloudTrail, Cloudflare, Fastly, Palo Alto Firewall, and Zscaler.
 
+**Note**: Packs are not available for [per-source and shared processors][4].
+
 ### What Packs do
 
 Each Pack includes source-specific configurations that define:
@@ -494,3 +504,4 @@ Search or filter the table by source or destination. Select a pack name for deta
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /observability_pipelines/processors/#per-source-and-shared-processors

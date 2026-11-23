@@ -27,7 +27,7 @@ This guide covers the practices with the biggest impact on accuracy:
 
 ## Strengthen your knowledge sources
 
-Bits Investigation reads from four places during an investigation: `bits.md`, monitor messages and runbooks, Skills, and past feedback. The more specific each one is, the more accurate future investigations get. Start by using Bits Investigation and observing its results. This gives you direction on where to focus your tuning.
+Bits Investigation reads from four places during an investigation: `bits.md`, monitor messages and runbooks, and past feedback. The more specific each one is, the more accurate future investigations get. Start by using Bits Investigation and observing its results. This gives you direction on where to focus your tuning.
 
 ### Write specific rules
 
@@ -56,12 +56,6 @@ Add to the monitor message:
 Also scope or group the monitor query by `service`. This is what lets Bits pivot into APM, logs, RUM, and [Catalog][2] for the right service. Without the `service` tag, Bits falls back on weaker signals like the monitor name.
 
 Review monitor messages periodically. A stale runbook link is worse than no link, since it points Bits at the wrong dashboard or a decommissioned service.
-
-### Package repeatable procedures as Skills
-
-A multi-step diagnostic procedure, or the specific way your team queries a third-party tool, doesn't fit cleanly in one monitor's runbook or a `bits.md` line. Capture it as a [Skill][11] instead, created at [{{< ui >}}Actions{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][11].
-
-Bits Investigation invokes a skill automatically when its name and description match the situation. Use a skill when you'd otherwise repeat the same instructions across monitors, or when a procedure needs to stay consistent across Bits Investigation, Bits Chat, and other Bits products.
 
 ### Give feedback on investigations
 
@@ -120,6 +114,5 @@ After chat reflects the change, re-run a known investigation to confirm the conc
 [8]: https://app.datadoghq.com/bits-ai/monitors/supported
 [9]: https://app.datadoghq.com/bits-ai/monitors/supported?q=priority%3Ap1&auto_only=false
 [10]: https://app.datadoghq.com/bits-ai/monitors/supported?q=notification%3A%2A&auto_only=false
-[11]: https://app.datadoghq.com/actions/skills
 [12]: /bits_ai/bits_investigation/configure/#send-investigation-findings-to-itsm-and-collaboration-platforms
 [13]: /bits_ai/bits_investigation/investigate_issues/#enable-automatic-investigations

@@ -10,6 +10,9 @@ further_reading:
   - link: "/continuous_integration/pipelines/gitlab/"
     tag: "Documentation"
     text: "Set up CI Visibility for GitLab"
+  - link: "/continuous_integration/pipelines/azure/"
+    tag: "Documentation"
+    text: "Set up CI Visibility for Azure Pipelines"
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
     text: "Troubleshooting CI Visibility"
@@ -21,24 +24,29 @@ Automatic job retries save developer time by re-running failures that are likely
 
 Automatic retries reduce the number of pipelines that developers re-run by hand, shorten feedback loops, and keep pipeline success metrics focused on non-transient failures.
 
-<div class="alert alert-info">Automatic job retries are available for <a href="/continuous_integration/pipelines/github/">GitHub Actions</a> and <a href="/continuous_integration/pipelines/gitlab/">GitLab</a>.</div>
+<div class="alert alert-info">Automatic job retries are available for <a href="/continuous_integration/pipelines/github/">GitHub Actions</a>, <a href="/continuous_integration/pipelines/gitlab/">GitLab</a>, and <a href="/continuous_integration/pipelines/azure/">Azure Pipelines</a>.</div>
 
 ## How automatic job retries work
 
 When a job in your CI pipeline fails:
 1. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
-   - This is the same AI error classifier used by [CI jobs failure analysis][6], which reads indexed job logs to decide whether a failure is transient.
+   - This is the same AI error classifier used by [Logs Analysis][6], which reads relevant job logs to decide whether a failure is transient.
 1. If the failure is classified as retriable, Datadog requests a retry through the provider's API.
 1. Datadog retries each failing job up to a maximum number of attempts (set by Datadog) to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
-1. Datadog records the retry outcome on the original pipeline in CI Visibility.
+1. Datadog records the retry outcome on the original pipeline in CI/CD Optimization.
+
+**Note**: Retry behavior depends on the provider (see [Provider-specific behavior](#provider-specific-behavior)). On Azure Pipelines, Datadog retries a stage instead of a single job: each stage at most once, and only if every failed job in the stage is classified as retriable.
+
+To see the jobs Datadog retried, open [**CI/CD Optimization** > **Executions**][13], filtered on `@ci.job.retry_reason:auto_retry`.
 
 ## Prerequisites
 
 To use automatic job retries:
-- CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
+- CI Visibility must be enabled for your [GitHub Actions][1], [GitLab][2], or [Azure Pipelines][9] integration.
 - For GitHub Actions, the [Datadog GitHub App][8] must have the **Actions: Write** permission.
+- For Azure Pipelines, your Azure DevOps organization must be connected through the [Azure DevOps Source Code integration][10]. The integration's service principal must have the **Queue builds** permission for the project's pipelines. Without this permission, Azure DevOps rejects the retry. To grant it, see [Set pipeline permissions][12] in the Azure DevOps documentation.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
-- Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
+- Logs Analysis must be configured for the repositories where you'd like to use automatic retries (see [Logs Analysis for GitHub Actions][4], [Logs Analysis for GitLab][5], or [Logs Analysis for Azure Pipelines][11]).
 - To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
 
 ## Enable automatic job retries
@@ -65,9 +73,13 @@ GitHub Actions imposes two provider-level limitations that shape how retries wor
 - **Retries happen after the workflow finishes.** The GitHub API does not allow retrying an individual job while the rest of the workflow is still running. Datadog waits for the workflow to reach a final state before issuing retries.
 - **All failed jobs are retried together, even those classified as non-retriable.** The GitHub API does not support retrying a single job when other jobs in the workflow have also failed. Datadog reruns every failed job in the workflow through a single GitHub API call. This may increase your GitHub Actions compute usage.
 
+To see the jobs Datadog retried on GitHub Actions, open [**CI/CD Optimization** > **Executions**][101].
+
 ### Protected branches
 
 The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app org-wide Maintainer-level access. Review your organization's policies before expanding permissions.
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Agithub%20%40ci.job.retry_reason%3Aauto_retry
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
@@ -78,6 +90,26 @@ As soon as a job fails in GitLab, Datadog re-runs that specific job (if it is cl
 
 Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
 
+To see the jobs Datadog retried on GitLab, open [**CI/CD Optimization** > **Executions**][101].
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Agitlab%20%40ci.job.retry_reason%3Aauto_retry
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+### Azure Pipelines automatic job retries
+
+On Azure Pipelines, Datadog retries stages instead of individual jobs:
+
+- **Datadog retries the stage that contains the failed jobs.** Azure Pipelines re-runs only the failed jobs in that stage. Jobs that passed are not re-run.
+- **Every failed job in the stage must be retriable.** If any failed job in the stage is classified as non-retriable, Datadog does not retry the stage.
+- **Retries happen after the pipeline run finishes.** Datadog waits for the run to reach a final state before it retries a stage.
+- **Datadog retries each stage at most once.** If the retried jobs fail again, Datadog does not retry the stage a second time.
+
+After a retry, the Azure DevOps UI still shows the run's original requester and does not indicate that Datadog retried the stage. To see the jobs Datadog retried on Azure Pipelines, open [**CI/CD Optimization** > **Executions**][101].
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.provider.name%3Aazurepipelines%20%40ci.job.retry_reason%3Aauto_retry
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,6 +119,7 @@ A failed job is not retried when:
 
 - The AI classifier categorizes the failure as non-retriable (for example, compilation errors or asserted test failures).
 - The job has already been retried manually or by provider-native retry rules.
+- On Azure Pipelines, the stage has already been retried, or another failed job in the same stage is classified as non-retriable.
 
 **Note:** On GitHub Actions, non-retriable failed jobs may still be re-run if another job in the same workflow is classified as retriable. Datadog issues a single "rerun failed jobs" GitHub API call, which re-runs every failed job in the workflow—including non-retriable ones.
 
@@ -97,8 +130,13 @@ A failed job is not retried when:
 [1]: /continuous_integration/pipelines/github/
 [2]: /continuous_integration/pipelines/gitlab/
 [3]: /integrations/guide/source-code-integration/
-[4]: /continuous_integration/pipelines/github/#collect-job-logs
-[5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
+[4]: /continuous_integration/pipelines/github/#logs-analysis
+[5]: /continuous_integration/pipelines/gitlab/#logs-analysis
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /continuous_integration/pipelines/github/#configure-a-github-app
+[9]: /continuous_integration/pipelines/azure/
+[10]: /integrations/azure-devops-source-code/
+[11]: /continuous_integration/pipelines/azure/#logs-analysis
+[12]: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions?view=azure-devops#set-pipeline-permissions-in-azure-pipelines
+[13]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Ajob%20%40ci.job.retry_reason%3Aauto_retry

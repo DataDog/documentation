@@ -212,7 +212,7 @@ Dans le menu déroulant {{< ui >}}If data is missing to evaluate{{< /ui >}}, sé
 ### Configuration du modèle {#model-configuration}
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Les paramètres de configuration du modèle suivants sont en Preview. Contactez votre représentant Datadog pour les activer pour votre organisation.
+Les paramètres de configuration du modèle suivants sont en avant-première. Contactez votre représentant Datadog pour les activer pour votre organisation.
 {{< /callout >}}
 
 Pour les monitors utilisant la méthode de détection {{< ui >}}Anomalies{{< /ui >}}, développez {{< ui >}}Model configuration{{< /ui >}} pour affiner le comportement du modèle :
@@ -222,6 +222,8 @@ Pour les monitors utilisant la méthode de détection {{< ui >}}Anomalies{{< /ui
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | Le nombre d'évaluations ayant échoué consécutivement avant que le monitor n'envoie une alerte. Configurez ce paramètre pour supprimer les pics isolés. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Limite la précision avec laquelle le modèle suit vos données sur la borne supérieure. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Limite la précision avec laquelle le modèle suit vos données sur la borne inférieure. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Contrôle la largeur des limites attendues. Déplacez le curseur vers {{< ui >}}Fewer alerts{{< /ui >}} pour des limites plus larges, ou vers {{< ui >}}More alerts{{< /ui >}} pour des limites plus étroites. Les tailles minimales des limites configurées s'appliquent toujours. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Fournit un contexte en langage clair, jusqu'à 500 caractères, sur le comportement de la métrique que vous attendez et pour lequel vous ne souhaitez pas recevoir d'alertes. Par exemple : `Don't alert on large increases during US holidays`. |
 
 ### Planning du monitor {#monitor-schedule}
 
@@ -313,7 +315,7 @@ Lorsque le type de métrique est {{< ui >}}Custom SQL{{< /ui >}}, fournissez une
 
 ### Évaluation {#evaluation}
 
-La différence entre la source et la cible est enregistrée en tant que métrique distincte ; un monitor source vers cible est donc évalué par les mêmes méthodes de détection que tout autre Data Observability monitor, y compris la détection d'anomalies. Les deux côtés sont mesurés selon un planning synchronisé, de sorte que les deux valeurs sont capturées en même temps plutôt que de suivre la cadence de collecte par défaut de chaque entrepôt.
+La différence entre la source et la cible est enregistrée en tant que métrique distincte ; un monitor source vers cible est donc évalué par les mêmes méthodes de détection que tout autre monitor Data Observability, y compris la détection d'anomalies. Les deux côtés sont mesurés selon un planning synchronisé, de sorte que les deux valeurs sont capturées en même temps plutôt que de suivre la cadence de collecte par défaut de chaque entrepôt.
 
 ## Monitors de changement de schéma {#schema-change-monitors}
 

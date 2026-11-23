@@ -1,0 +1,15 @@
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-placeholder-bg);
+  outline: 2px solid var(--color-placeholder-outline);
+  outline-offset: -2px;
+  color: var(--color-placeholder-text);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+}

@@ -20,6 +20,8 @@ Datadog은 관리형 플랫폼을 위한 전용 OTLP 수집 엔드포인트를 �
 
 <div class="alert alert-danger">관리형 플랫폼 엔드포인트로 전송된 호스트 메타데이터는 <a href="/infrastructure/list/">Infrastructure Host List</a>에 표시되지 않습니다.</div>
 
+직접 OTLP 인테이크를 위한 호스트 이름 및 태깅에 대한 권장 사항은 [호스트 이름 및 태깅][19]을 참조하십시오.
+
 각 엔드포인트는 다음 신호 경로를 지원합니다.
 
 | 신호  | 경로          |
@@ -121,3 +123,4 @@ Collector에서 사용할 수 있는 샘플링 제어(테일 기반 샘플링, �
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
+[19]: /ko/opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector

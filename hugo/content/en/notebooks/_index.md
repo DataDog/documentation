@@ -43,6 +43,7 @@ You can create a notebook in two places:
 
 - From the left-hand navigation bar, click {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}New Notebook{{< /ui >}}.
 - On the upper-right-hand corner of the [Notebooks List page][1], click {{< ui >}}New Notebook{{< /ui >}}.
+- From the Notebooks left side panel, click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Notebook{{< /ui >}} to create the notebook inside that folder. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
 
 ### Notebook templates
 
@@ -164,7 +165,7 @@ To comment on a graph or an image, click on the comment icon to the right of the
 | **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking {{< ui >}}Resolve{{< /ui >}}. |
 | **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
 | **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
-| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the cog menu, select {{< ui >}}Notifications{{< /ui >}}. |
+| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>), select {{< ui >}}Notifications{{< /ui >}}. |
 
 ## Multiplayer experience in Notebooks
 
@@ -221,7 +222,7 @@ You can switch between modes from within the notebook by selecting the dropdown 
 
 ### Version history
 
-From a notebook, click the cog icon and click {{< ui >}}Version history{{< /ui >}} to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
+From a notebook, click the version history icon (<i class="icon-clock-historical-wui"></i>) to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
 
 ### Graph snapshots
 
@@ -262,9 +263,31 @@ You must have edit access to restore general access to a restricted notebook. Co
 1. Select {{< ui >}}My Org{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
+## Downloading a notebook
+
+To download a notebook as a PDF, click the three-dot ellipsis menu (<i class="icon-kebab-wui"></i>) in the upper right of the notebook. Then, select a {{< ui >}}Download as PDF{{< /ui >}} option. All graphs in the notebook must finish loading before you can download it.
+
+**Note**: PDF export is available only in the Datadog UI, for one notebook at a time. There is no API for exporting notebooks to PDF.
+
+## Organizing notebooks with folders
+
+Use folders to group related notebooks, such as a team's runbooks or a service's investigations. Folders can be nested, and a notebook can belong to only one folder at a time. Browse folders in the side panel of the [Notebooks List page][1] or from a notebook's breadcrumbs. Folders are public: everyone in your organization can see them. Notebooks keep their own [permissions](#permissions) when you add them to a folder.
+
+{{< img src="notebooks/folders_list.png" alt="The All Folders page, listing folders with their contents, author, team, and last modified date, next to the Notebooks side panel" style="width:100%;" >}}
+
+| Task                  | How |
+|-----------------------|-----|
+| Create a folder       | Open the {{< ui >}}New Notebook{{< /ui >}} menu and select {{< ui >}}Create Folder{{< /ui >}}. To create a subfolder, hover over a folder in the side panel and click {{< ui >}}\+{{< /ui >}} > {{< ui >}}Create Folder{{< /ui >}}. |
+| Add notebooks         | Click {{< ui >}}Add to Folder{{< /ui >}} in a notebook's breadcrumbs or after selecting notebooks in the Notebooks List, or drag notebooks onto a folder in the side panel. Adding a notebook that is already in a folder moves it. |
+| Manage a folder       | Use the folder's actions menu to rename, move, or delete it. Click the star icon to add the folder to {{< ui >}}Starred{{< /ui >}}. To take a notebook out of a folder without deleting it, select {{< ui >}}Remove from folder{{< /ui >}}. |
+
+Deleting a folder never deletes its notebooks. By default, the folder's notebooks and subfolders move up to its parent folder, or to the top level. If you clear the bubble-up option when deleting, its subfolders are deleted too, and their notebooks no longer belong to a folder.
+
+You can also manage folders programmatically. Folder operations are available through the Datadog MCP Server and the API.
+
 ## Finding notebooks
 
-The [Notebooks List][1] page is the place to find all of your notebooks.
+The [Notebooks List][1] page is the place to find all of your notebooks. To browse notebooks by folder, use the side panel. For more information, see [Organizing notebooks with folders](#organizing-notebooks-with-folders).
 
 <!-- TODO Add updated image from new notebooks -->
 
