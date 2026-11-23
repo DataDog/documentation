@@ -70,7 +70,7 @@ service:
 
 The Collector automatically attaches `service.name`, `service.version`, and `service.instance.id` (a randomly generated UUID) to its internal telemetry. You don't need to set these manually.
 
-### 4. (Optional) Configure gateway topology (preview)
+### 4. (Optional) Configure gateway topology
 
 When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
 
@@ -247,7 +247,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `hostname` | Custom hostname for the Collector. | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint. | `localhost:9875` |
 | `http.path` | HTTP server path for metadata. | `/metadata` |
-| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#4-optional-configure-gateway-topology-preview). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
+| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#4-optional-configure-gateway-topology). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
 | `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
 | `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
 | `gateway_destination` | Set on any Collector that forwards telemetry to a downstream gateway. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |

@@ -58,7 +58,7 @@ Use the search bar at the top of Fleet View to find specific Agents, OTel Collec
 
 ## Monitor Agent and OTel Collector health
 
-<div class="alert alert-info">Agent and OTel Collector health signals are in Preview. They aren't available for the Agent's Collector.</div>
+<div class="alert alert-info">Agent and OTel Collector health signals are in Preview.</div>
 
 With Agent and OTel Collector health signals, you can:
 
