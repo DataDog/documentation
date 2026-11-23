@@ -107,25 +107,35 @@ Datadog follows these rules:
 | Limit | Value |
 | --- | --- |
 | Lookback for repeated detection | 1, 6, 24, or 48 hours. |
-| Related signals per strategy | Each strategy keeps the 100 most recent related signals it finds in the lookback. |
-| Signals per case | Signal grouping adds up to 100 signals to a case. When a case is full, Datadog creates a new rollover case for the remaining related signals. |
+| Related signals per strategy | Each strategy keeps the 99 most recent related signals it finds in the lookback, plus the new signal. |
+| Signals per case | Signal grouping adds up to 100 signals to a case. A case is also full when it has 500 insights. When a case is full, Datadog creates a new rollover case for the remaining related signals. |
 
 The limit of signals per case only applies to signal grouping. You can still add more signals to the case in other ways.
 
 ## See why a signal was grouped
 
-Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows the signal that triggered the update, the grouping strategies that ran and what they found, and the result. If a strategy found more related signals than its limit, the entry says so.
+When automatic case creation creates or updates a case, Datadog adds an entry to the case timeline. The entry title shows what happened:
 
-The result is one of the following:
+| Entry | Message | When |
+| --- | --- | --- |
+| {{< ui >}}Case created{{< /ui >}} | Datadog automatically created this case from a signal. | Datadog created a new case. |
+| {{< ui >}}Rollover case created{{< /ui >}} | Datadog automatically created this case from a signal because the original case reached its grouping limit of 100 signals. | The eligible case was full, so Datadog created a rollover case. |
+| {{< ui >}}Signal added{{< /ui >}} | Datadog automatically added a signal to this case. | Datadog added the new signal to an existing case. |
+| {{< ui >}}Signal added{{< /ui >}} | Datadog matched a signal that's already in this case. | The new signal was already in this case. |
+| {{< ui >}}Case rolled over{{< /ui >}} | This case reached its grouping limit of 100 signals, so Signal Grouping now adds later signals to a new case. | This case was full, and Datadog created a rollover case. |
 
-| Result | Meaning |
+When related signals don't fit in one rollover case, Datadog creates more rollover cases. Their entry says that the signal that triggered the case isn't in it.
+
+If grouping strategies are selected, the entry also shows what signal grouping found:
+
+| Message | Meaning |
 | --- | --- |
-| No grouping strategy selected | Datadog created one case for the signal. |
-| Strategy does not apply | The signal is missing a value the strategy needs, such as group-by values or a rule version. Datadog created a new case. |
-| No related signals found | No related signal was found in the lookback. Datadog created a new case. |
-| New case with related signals | Related signals were found, but none were in an eligible case. Datadog created a new case and added them. |
-| Existing case updated | A related signal was in an eligible case. Datadog added the signal to that case. |
-| Previous case is full | The eligible case was full. Datadog created a new rollover case for the remaining related signals found. |
+| Signal Grouping found no related signals based on the current settings. | No strategy found a related signal in the lookback, or the signal is missing a value the strategies need, such as group-by values. |
+| Signal Grouping selected this case using N strategies and added N related signals. | A related signal was in this case, so Datadog added the new signal to it. |
+| Signal Grouping added N related signals using N strategies. | Datadog added the related signals to a new case. |
+| The search reached its limit, so some related signals may not be included. | A strategy found more related signals than its limit. See [Limits](#limits). |
+
+Hover over the number of strategies to see which ones found related signals. Hover over the number of signals to see the signals Datadog added.
 
 ## Further reading
 
