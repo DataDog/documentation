@@ -174,7 +174,7 @@ Subscription providers support the following coding agents:
 
 **Note**: Anthropic Console API credentials do not provide access to a Claude subscription. Requests sent with an Anthropic API key are billed per token.
 
-Each user authenticates to AI Gateway with their own Datadog [personal access token][subscription-1] in the `dd-application-key` header, not an API key or application key. For details on how the headers work, see the [Authenticate requests](/ai_gateway/applications/#authenticate-requests) section.
+Each user authenticates to AI Gateway with their own Datadog [personal access token][subscription-1] in the `dd-application-key` header, not an API key or application key. For details on how the headers work, see the [Authenticate requests](/ai_gateway/requests/#authenticate-requests) section.
 
 ### Create a subscription provider
 
@@ -214,7 +214,7 @@ Point Claude Code to AI Gateway, then sign in with your Claude account:
    }
    ```
 
-   AI Gateway reads your personal access token from the `dd-application-key` header and removes the token before it forwards the request to Anthropic. The `x-ai-gateway-provider` header routes every request to the subscription provider. For more about these headers, see the [Authenticate requests](/ai_gateway/applications/#authenticate-requests) section.
+   AI Gateway reads your personal access token from the `dd-application-key` header and removes the token before it forwards the request to Anthropic. The `x-ai-gateway-provider` header routes every request to the subscription provider. For more about these headers, see the [Authenticate requests](/ai_gateway/requests/#authenticate-requests) section.
 
    To use environment variables instead, set `ANTHROPIC_BASE_URL` and `ANTHROPIC_CUSTOM_HEADERS`, with each header in `ANTHROPIC_CUSTOM_HEADERS` on its own line.
 
@@ -240,7 +240,7 @@ Add AI Gateway as a model provider in Codex, then sign in with your ChatGPT acco
    http_headers = { "x-ai-gateway-provider" = "<PROVIDER_SLUG>" }
    ```
 
-   With `requires_openai_auth = true`, Codex sends your ChatGPT credentials in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes the token before it forwards the request. For more about these headers, see the [Authenticate requests](/ai_gateway/applications/#authenticate-requests) section.
+   With `requires_openai_auth = true`, Codex sends your ChatGPT credentials in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes the token before it forwards the request. For more about these headers, see the [Authenticate requests](/ai_gateway/requests/#authenticate-requests) section.
 
 2. Set the `DD_PAT` environment variable to your Datadog [personal access token][subscription-1].
 3. Run `codex login` and sign in with your ChatGPT account. To sign in from another device, such as your phone, run `codex login --device-auth`.
@@ -324,7 +324,7 @@ Provider status updates after model synchronization or AI Gateway requests. Revi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [providers-1]: /ai_gateway/getting_started/#prerequisites
-[providers-2]: /ai_gateway/applications/#authenticate-requests
+[providers-2]: /ai_gateway/requests/#authenticate-requests
 [providers-3]: /integrations/google_cloud_platform/
 [providers-4]: /integrations/azure/
 [providers-5]: https://app.datadoghq.com/llm/gateway/providers

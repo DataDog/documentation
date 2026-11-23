@@ -11,23 +11,71 @@ further_reading:
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
 
-Send requests to the base URL for your [Datadog site][12]:
+Every request to AI Gateway needs a Datadog credential, the base URL for your Datadog site, and a model identifier. For a complete request example, see [Get Started](/ai_gateway/getting_started/#send-a-request). To set up a specific client, such as Claude Code, Codex, or an SDK, see [Connect Applications](/ai_gateway/applications/).
+
+## Authenticate requests
+
+AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
+
+For Claude Code and Codex, [Trajectory](/ai_gateway/applications/#connect-claude-code-and-codex-with-trajectory) signs you in to Datadog, so you do not need a long-lived token for them.
+
+| Credential | Request headers |
+|---|---|
+| [Personal access token][requests-1] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
+| [Personal access token][requests-1], for coding agents signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
+| [Service access token (SAT)][requests-2] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+| [Workload Identity Federation][requests-3] token | `Authorization: Bearer <WIF_TOKEN>` |
+
+Coding agents signed in with a subscription send two headers:
+
+- `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
+- `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
+
+`dd-application-key` is the standard Datadog application key header. It also accepts personal access tokens, without an API key.
+
+For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](/ai_gateway/applications/#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
+
+## Base URL
+
+Send requests to the base URL for your Datadog site, followed by the path of the [request format](#supported-request-formats):
 
 ```text
 https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
 ```
 
-[Authenticate requests](/ai_gateway/applications/#authenticate-requests) with a Datadog personal access token or service access token. For a complete request example, see [Get Started](/ai_gateway/getting_started/#send-a-request).
+Clients that add `/v1` to the base URL themselves, such as Claude Code and the Anthropic SDK, use `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai` instead.
+
+The URLs on this page match the site chosen in the {{< ui >}}Datadog Site{{< /ui >}} selector. To find your site, see [Datadog sites][12].
+
+## Request headers
+
+AI Gateway reads these request headers. Clients set them through their own header settings, such as `ANTHROPIC_CUSTOM_HEADERS` in Claude Code, `http_headers` in Codex, or `default_headers` in an SDK.
+
+| Header | Required | Purpose |
+|---|---|---|
+| `Authorization: Bearer <TOKEN>` | Yes | Your Datadog credential. See [Authenticate requests](#authenticate-requests). |
+| `dd-application-key: <PERSONAL_ACCESS_TOKEN>` | For subscription agents | Your Datadog personal access token, when `Authorization` carries a [subscription](/ai_gateway/providers/#use-subscription-providers) credential. |
+| `x-ai-gateway-provider: <PROVIDER_SLUG>` | No | Sends a model ID without its provider prefix to this provider. Ignored for `router/<RULE_SLUG>` models. |
+| `x-ai-gateway-team: <TEAM_SLUG>` | No | Attributes the request to a team you belong to. See [Select a team](/ai_gateway/applications/#select-a-team). |
+| `x-dd-tag-ml_app: <APPLICATION_NAME>` | No | Names the application in Agent Observability. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). |
+| `x-dd-tag-<KEY>: <VALUE>` | No | Adds a custom tag that budgets, rate limits, and data capture overrides can match. |
+| `x-session-id: <SESSION_ID>` | No | Identifies the conversation, so routing keeps it on one destination. Coding agents send their own session IDs. See [Sessions](/ai_gateway/routing/#sessions). |
 
 ## Supported request formats
 
-Append one of the following paths to the base URL. The operations available depend on the model and provider account; the provider page shows the operations and request examples for your account.
+Append one of the following paths to the [base URL](#base-url). The operations available depend on the model and provider account; the provider page shows the operations and request examples for your account.
 
-| Request format | Path |
-|---|---|
-| OpenAI Responses | `POST /responses` |
-| OpenAI Chat Completions | `POST /chat/completions` |
-| Anthropic Messages | `POST /messages` |
+| Request format | Method and path | Notes |
+|---|---|---|
+| OpenAI Responses | `POST /responses` | |
+| OpenAI Chat Completions | `POST /chat/completions` | |
+| Anthropic Messages | `POST /messages` | |
+| Gemini generateContent | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent`, or `:streamGenerateContent` to stream | Also accepted under `/ai/v1beta1`. See [Native Gemini and decision APIs](#native-gemini-and-decision-apis). |
+| Claude on Vertex AI | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict`, or `:streamRawPredict` to stream | Anthropic Messages body. Not translated. |
+| Decisions | `POST /decisions` | |
+| System One | `POST /systemone` | |
+
+A format that AI Gateway accepts still has to be supported by the provider and model that serve the request. AI Gateway translates between some formats, but not all formats translate into each other. Check the operations listed for the model on its provider page, and see [API translation](#api-translation).
 
 A request in the Anthropic Messages format must include the `anthropic-version` header. AI Gateway adds the header only when it translates a request from another format into Messages.
 
@@ -96,7 +144,7 @@ Common supported features include user and assistant text, system instructions, 
 | Multiple candidates, audio, and video | These are outside the supported translation subset. |
 | Reasoning effort | Values map where supported, but the target model must accept the requested level. An explicit thinking-token budget is not equivalent to a reasoning-effort level. |
 | Provider-specific settings | Settings such as Google safety configuration, cached content, or top-k can fail when the destination has no supported mapping. An unsupported mapping does not imply that the destination model lacks the capability. |
-| Hosted tools | Support depends on the API pair. Hosted web search translates between Responses and Messages with supported search settings. Other server-side tools, compaction, and cross-API token-counting endpoints are unsupported. |
+| Hosted tools | Support depends on the API pair. Hosted web search translates between Responses and Messages with supported search settings, except on Amazon Bedrock Messages targets, where a request with the search tool fails. Other server-side tools, compaction, and cross-API token-counting endpoints are unsupported. |
 | Hosted search on Chat or Google targets | A declared search tool is omitted with `web_search_omitted`; a tool choice that requires hosted search fails translation. Check warnings before relying on search. |
 | Response metadata | Google `generateContent` translation rejects nonempty Responses `metadata`, the `user` field, and the `safety_identifier` field. Client correlation context in `client_metadata` is separate and is omitted from translated Google and Chat requests. |
 
@@ -348,7 +396,7 @@ For AI Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Pr
 [12]: /getting_started/site/
 
 [translation-1]: /ai_gateway/providers/#add-a-provider
-[translation-2]: /ai_gateway/applications/#authenticate-requests
+[translation-2]: /ai_gateway/requests/#authenticate-requests
 [translation-3]: /ai_gateway/routing/
 [translation-4]: /getting_started/site/
 [translation-5]: https://app.datadoghq.com/llm/gateway
@@ -362,3 +410,6 @@ For AI Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Pr
 [inference_apis-7]: https://docs.baseten.co/reference/inference-api/system-one
 [inference_apis-8]: https://app.datadoghq.com/llm/gateway
 [inference_apis-9]: /ai_gateway/troubleshooting/#error-codes
+[requests-1]: /account_management/personal-access-tokens/
+[requests-2]: /account_management/service-access-tokens/
+[requests-3]: /account_management/workload_identity_federation/
