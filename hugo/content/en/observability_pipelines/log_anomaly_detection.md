@@ -23,6 +23,8 @@ The Observability Pipelines Worker can detect anomalies in logs sent to your des
 
 The Worker looks for these anomalies after logs have gone through all processors but before they are sent to their destinations. Anomaly detection gives you an aggregated view of your anomalies so that you can act on them. For example, if you see a large number of aggregated `status:warn` logs, you can add a [Sample processor][1] to sample those logs before they are sent to your destination.
 
+**Note**: Log Anomaly Detection is available for Worker versions 2.25.0 and later.
+
 ## How anomalies are detected
 
 The Worker sends the following data to Datadog:
