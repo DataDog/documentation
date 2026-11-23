@@ -49,7 +49,7 @@ There are two types of rules: [monitor rules](#monitor-rules) and [Watchdog Faul
 
 Each rule watches health indicators for a configurable evaluation period of up to 2 hours.
 
-For how to configure each rule type, see the Rules section of [Set Up Inline Deployment Gates][10] or [Set Up Preconfigured Deployment Gates][11].
+To configure each rule type, see the Rules sections of [Set Up Inline Deployment Gates][10] and [Set Up Preconfigured Deployment Gates][11].
 
 ### Monitor rules
 

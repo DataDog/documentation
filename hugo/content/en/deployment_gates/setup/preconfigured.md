@@ -57,14 +57,17 @@ Example `options` object for a preconfigured monitor rule with specific monitor 
 ```json
 "options": {
   "monitor_ids": [
-    // Each id is a monitor's numeric ID, as a string.
-    // Each groups entry must exactly match a group name on that monitor.
     {"id": "12345678", "groups": []},
     {"id": "87654321", "groups": ["service:api", "env:prod"]}
   ],
   "duration": 300
 }
 ```
+
+In each `monitor_ids` entry:
+
+- `id` is the monitor's numeric ID, as a string.
+- Each `groups` value must exactly match a group name on that monitor.
 
 [1]: /deployment_gates/#monitor-rules
 [2]: /deployment_gates/#monitor-search-queries
