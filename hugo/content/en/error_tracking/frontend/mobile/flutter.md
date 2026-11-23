@@ -109,7 +109,7 @@ See the [RUM Debug Symbols][10] page to view all uploaded symbols.
 
 ## Limitations
 
-Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
+Mapping files are limited in size to **800 MB** each, while dSYM files are limited to **2 GB** each, uncompressed, in zip uploads of up to **800 MB**.
 
 ## Test your implementation
 

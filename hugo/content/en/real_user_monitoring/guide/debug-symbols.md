@@ -26,8 +26,8 @@ Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your a
 If there are no debug symbols for your application, [upload them][2].
 
 <div class="alert alert-danger">
-Make sure that the size of each debug symbol does not exceed the limit of <strong>500 MB</strong>, otherwise the upload is rejected. JavaScript source maps can be up to <strong>800 MB</strong> each, compressed.
-For iOS dSYMs, individual files up to <strong>2 GB</strong> are supported. 
+Make sure that the size of each debug symbol file (source map or mapping file) does not exceed the limit of <strong>800 MB</strong>, otherwise the upload is rejected. For browser applications, the source map and its minified file count together against the limit.
+For iOS dSYMs, each zip archive you upload is limited to <strong>800 MB</strong>, and each file inside it can be up to <strong>2 GB</strong> uncompressed. Uploads time out after 2 minutes, so uploading very large files requires a fast connection.
 </div>
 
 ### Debug symbol tags do not match

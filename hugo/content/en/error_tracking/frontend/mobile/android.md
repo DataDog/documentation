@@ -854,7 +854,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ## Limitations
 
 ### File sizing
-[Mapping files](#upload-your-mapping-file) are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+[Mapping files](#upload-your-mapping-file) are limited in size to **800 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
@@ -869,6 +869,20 @@ datadog {
         "com.squareup.picasso" to "picasso"
     )
 }
+```
+
+If your mapping file is still too large, compress it before upload by setting the `dd-compress-mapping-file` Gradle property (requires Datadog Android Gradle plugin 1.30.0 or later). The 800 MB limit then applies to the compressed file, and the file must be smaller than **2 GB** after decompression.
+
+Set the property in `gradle.properties`:
+
+```properties
+dd-compress-mapping-file=true
+```
+
+Alternatively, set it on the command line when running the upload task:
+
+```bash
+./gradlew uploadMappingRelease -Pdd-compress-mapping-file
 ```
 
 ### Collection

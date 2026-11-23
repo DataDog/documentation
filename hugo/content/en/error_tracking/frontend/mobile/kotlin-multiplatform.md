@@ -383,7 +383,7 @@ Use the following guides to see how you can upload mapping files (Android) or dS
 
 ### File sizing
 
-Mapping files are limited in size to **500 MB** each, while dSYM files are limited to **2 GB**.
+Mapping files are limited in size to **800 MB** each, while dSYM files are limited to **2 GB** each, uncompressed, in zip uploads of up to **800 MB**.
 
 ### Collection
 

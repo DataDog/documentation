@@ -64,7 +64,7 @@ npx @datadog/datadog-ci dsyms upload appDsyms.zip
 
 If your organization is not on the US1 site, also set the `DATADOG_SITE` environment variable.
 
-Mapping files are limited to 500 MB each, and dSYM files are limited to 2 GB. For more options, see the [Android][7] and [iOS][8] Error Tracking documentation.
+Mapping files are limited to 800 MB each. dSYM files are limited to 2 GB each, uncompressed, in zip uploads of up to 800 MB. For more options, see the [Android][7] and [iOS][8] Error Tracking documentation.
 
 [1]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android#automated-error-reporting
 [2]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=ios#automatically-report-errors

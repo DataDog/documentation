@@ -121,7 +121,7 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
 ## Limitations
 
-Source maps are limited in size to **800 MB** each, compressed. Mapping files are limited to **500 MB** each, while dSYM files can go up to **2 GB** each.
+Source maps and mapping files are limited in size to **800 MB** each. Each dSYM file is limited to **2 GB** uncompressed, and each zip archive of dSYM files that you upload is limited to **800 MB**.
 
 To compute the size of your source maps and bundle, run the following command:
 

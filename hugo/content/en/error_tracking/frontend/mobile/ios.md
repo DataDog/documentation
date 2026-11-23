@@ -700,7 +700,7 @@ To disable app hang monitoring, update the initialization snippet and set the `a
 
 Crash reports are collected in a raw format and mostly contain memory addresses. To map these addresses into legible symbol information (a process called symbolication), Datadog requires `.dSYM` files, which are generated in your application's build or distribution process.
 
-**Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each.
+**Note:** Error Tracking supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture. `.dSYM` files are limited in size to **2 GB** each, uncompressed, and each zip archive you upload is limited to **800 MB**.
 
 To help you debug errors, Datadog uses a unique generated build ID to deobfuscate stack traces, matching them with their corresponding mapping files. This process occurs regardless of whether the mapping files were uploaded during pre-production or production builds, ensuring the correct information is available for efficient QA processes when reviewing crashes and errors in Datadog.
 
@@ -832,7 +832,7 @@ See the [RUM Debug Symbols][20] page to view all uploaded symbols.
 
 ## Limitations
 
-- `.dSYM` files are limited in size to **2 GB** each.
+- `.dSYM` files are limited in size to **2 GB** each, uncompressed, and each zip archive you upload is limited to **800 MB**.
 - Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, iPadOS, tvOS, watchOS, and visionOS devices.
 
 ## Test your implementation

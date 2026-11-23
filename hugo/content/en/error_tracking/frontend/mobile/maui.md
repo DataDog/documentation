@@ -232,7 +232,7 @@ On Android, Release builds report IL offsets, so C# frames show the exact line.
 
 ### File sizing
 
-dSYM bundles (iOS) can go up to **2 GB** each.
+dSYM bundles (iOS) can go up to **2 GB** each, uncompressed, and each zip archive you upload is limited to **800 MB**.
 
 ### Collection
 

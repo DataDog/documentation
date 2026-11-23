@@ -207,7 +207,7 @@ Use the [Datadog Upload dSYMs GitHub Action][7] in your GitHub Action jobs:
 {% /tab %}
 {% /tabs %}
 
-`.dSYM` files are limited to 2 GB each, and symbols are not available for crashes on simulators. For these limitations and other options, see [iOS Crash Reporting and Error Tracking][1].
+`.dSYM` files are limited to 2 GB each, uncompressed, in zip uploads of up to 800 MB, and symbols are not available for crashes on simulators. For these limitations and other options, see [iOS Crash Reporting and Error Tracking][1].
 
 [1]: /error_tracking/frontend/mobile/ios/
 [2]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift

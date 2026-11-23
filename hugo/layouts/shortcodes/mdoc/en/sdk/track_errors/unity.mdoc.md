@@ -39,7 +39,7 @@ Native crash reports mostly contain memory addresses. To map these addresses to 
 
    For Android, export an Android project instead of building the APK directly, and build from the exported project.
 
-Re-uploading files doesn't override existing ones if the build ID hasn't changed. Mapping files are limited to 500 MB each, and dSYM files to 2 GB each. To view uploaded symbols, see the [{% ui %}RUM Debug Symbols{% /ui %}][3] page. For all options, see [Unity Crash Reporting and Error Tracking][4].
+Re-uploading files doesn't override existing ones if the build ID hasn't changed. Mapping files are limited to 800 MB each. dSYM files are limited to 2 GB each, uncompressed, in zip uploads of up to 800 MB. To view uploaded symbols, see the [{% ui %}RUM Debug Symbols{% /ui %}][3] page. For all options, see [Unity Crash Reporting and Error Tracking][4].
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=unity
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci

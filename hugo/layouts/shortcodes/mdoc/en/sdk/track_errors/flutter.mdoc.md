@@ -56,7 +56,7 @@ Datadog matches stack traces with symbol files using their `service`, `version`,
    datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms
    ```
 
-Re-uploading a file doesn't override the existing one if the version hasn't changed. Mapping files are limited to 500 MB each, and dSYM files to 2 GB each.
+Re-uploading a file doesn't override the existing one if the version hasn't changed. Mapping files are limited to 800 MB each. dSYM files are limited to 2 GB each, uncompressed, in zip uploads of up to 800 MB.
 
 For all options, including build flavors and build numbers, see the `datadog-ci` [Flutter Symbols documentation][5] and [Flutter Crash Reporting and Error Tracking][1]. To view uploaded symbols, see the [RUM Debug Symbols][6] page.
 

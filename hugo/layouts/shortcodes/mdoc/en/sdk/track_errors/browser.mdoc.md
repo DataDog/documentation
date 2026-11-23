@@ -240,7 +240,7 @@ throw error
 
 If your JavaScript source code is minified, upload your source maps to Datadog to deobfuscate stack traces. For any given error, you can then access the file path, line number, and code snippet for each frame of the related stack trace.
 
-1. Configure your JavaScript bundler to generate source maps that include the related source code in the `sourcesContent` attribute. The compressed size of each source map plus the related minified file must not exceed **800 MB**.
+1. Configure your JavaScript bundler to generate source maps that include the related source code in the `sourcesContent` attribute. The size of each source map plus the related minified file must not exceed **800 MB**.
 2. Upload the source maps with one of the following methods:
 
    {% tabs %}
