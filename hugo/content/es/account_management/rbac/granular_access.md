@@ -1,57 +1,58 @@
 ---
-description: Controle el acceso a recursos individuales de Datadog, como dashboards,
-  monitores y notebooks, por equipos, roles o usuarios para una gestión de permisos
+description: Controle el acceso a recursos individuales de Datadog, como Dashboards,
+  monitores y Notebooks, por equipos, roles o usuarios para una gestión de permisos
   detallada.
 title: Granular Access Control
 ---
-## Gestionar el acceso a recursos individuales {#manage-access-to-individual-resources}
+## Gestione el acceso a recursos individuales {#manage-access-to-individual-resources}
 
 Algunos recursos le permiten restringir el acceso a recursos individuales por roles, [Teams][1] o usuarios.
 
-Utilice los diferentes principales para controlar los patrones de acceso en su organización y fomentar el intercambio de conocimientos y la colaboración:
-- Utilice Teams para asignar el acceso a grupos funcionales en sus organizaciones. Por ejemplo, restrinja la edición de un dashboard al equipo de aplicaciones que lo posee.
-- Utilice roles para asignar el acceso a personas. Por ejemplo, restrinja la edición de métodos de pago a los administradores de facturación.
+Utilice las diferentes entidades para controlar los patrones de acceso en su organización y fomentar el intercambio de conocimientos y la colaboración:
+- Utilice Teams para asignar el acceso a grupos funcionales en sus organizaciones. Por ejemplo, restrinja la edición de un dashboard al equipo de la aplicación que lo posee.
+- Utilice roles para asignar el acceso a perfiles de usuario. Por ejemplo, restrinja la edición de métodos de pago a los administradores de facturación.
 - Asigne acceso a usuarios individuales solo cuando sea necesario.
 
 
-| Recursos compatibles con Access Control granular | Acceso basado en equipos | Acceso basado en roles | Acceso basado en usuarios / cuentas de servicio |
+| Recursos admitidos con control de acceso granular | Acceso basado en equipos | Acceso basado en roles | Acceso basado en usuarios / cuentas de servicio |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Cuentas de AWS][11]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Registros de aplicaciones de Azure][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [AWS Accounts][11]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Azure App Registrations][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Proyectos de Work Management][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Conexiones][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Grupos de conexión][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Conexiones entre organizaciones][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Severidad dinámica][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Experimentos][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Dynamic Severity][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Cuentas de servicio de Google][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Cuentas de integración][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Servicios de integración][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Webhooks de integración][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Pipelines de logs][24]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Logs Pipelines][24]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Observability Pipelines][23]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [On-Call][22]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Private Action Runner][18]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Tablas de referencia][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [RUM apps][19]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Aplicaciones RUM][19]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][6]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Pruebas Synthetic][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Flujos de trabajo][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 
-### Elevar el acceso a recursos individuales {#elevate-access-to-individual-resources}
+### Elevar el nivel de acceso a recursos individuales {#elevate-access-to-individual-resources}
 
-Un usuario con el permiso `user_access_manage` puede elevar su acceso a cualquier recurso individual que admita restricciones basadas en equipo, rol y el usuario o la cuenta de servicio. No se admiten recursos con restricciones de acceso basadas únicamente en roles. Para obtener acceso, haga clic en el botón {{< ui >}}Elevate Access{{< /ui >}} en el modal de Access Control granular.
+Un usuario con el permiso `user_access_manage` puede elevar su nivel de acceso a cualquier recurso individual que admita restricciones basadas en equipo, rol y usuario o cuenta de servicio. No se admiten recursos con restricciones de acceso basadas únicamente en roles. Para obtener acceso, haga clic en el botón {{< ui >}}Elevate Access{{< /ui >}} en la ventana modal de control de acceso granular.
 
 [1]: /es/account_management/teams/
 [2]: /es/dashboards/configure/#permissions
@@ -80,3 +81,4 @@ Un usuario con el permiso `user_access_manage` puede elevar su acceso a cualquie
 [25]: /es/getting_started/feature_flags/
 [26]: /es/security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
 [27]: /es/experiments/
+[28]: /es/incident_response/status_pages/#granular-access-control

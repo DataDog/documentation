@@ -1,0 +1,49 @@
+# Conformance cases for the url_paths globs in shared/site_support.yaml.
+#
+# Astro matches url_paths with picomatch. Hugo has no glob function, so it
+# translates each pattern to a regular expression. These cases pin down the
+# behavior both sites must agree on:
+#
+#   - Astro: astro/src/config/siteSupportGlobs.test.ts
+#   - Hugo: layouts/partials/site_support_banner/url_path_matchers.html runs
+#     these cases on every build and fails the build on a mismatch.
+#
+# Paths are already normalized: no locale prefix and no trailing slash.
+cases:
+  - pattern: /a
+    matches: [/a]
+    does_not_match: [/a/b, /ab, /b/a]
+
+  # A trailing /** covers the base path and everything beneath it.
+  - pattern: /a/**
+    matches: [/a, /a/b, /a/b/c]
+    does_not_match: [/ab, /ab/c, /b/a]
+
+  # * stays inside one segment.
+  - pattern: /a/*
+    matches: [/a/b, /a/bcd]
+    does_not_match: [/a, /a/b/c]
+
+  - pattern: /a/*/c
+    matches: [/a/b/c]
+    does_not_match: [/a/c, /a/b/d/c, /a/b/cd]
+
+  - pattern: /a/b*
+    matches: [/a/b, /a/bc]
+    does_not_match: [/a/b/c, /a/cb]
+
+  # A /**/ in the middle matches zero or more segments.
+  - pattern: /a/**/c
+    matches: [/a/c, /a/b/c, /a/b/d/c]
+    does_not_match: [/a/b/cd, /a/bc, /ac]
+
+  # Regex metacharacters in the literal part are literal.
+  - pattern: /a.b/**
+    matches: [/a.b, /a.b/c]
+    does_not_match: [/aXb, /aXb/c]
+
+  # Hyphens and underscores are distinct, which is why one product needed two
+  # keys under Hugo's old path-segment matching.
+  - pattern: /agentless-scanning/**
+    matches: [/agentless-scanning, /agentless-scanning/setup]
+    does_not_match: [/agentless_scanning, /agentless_scanning/setup]

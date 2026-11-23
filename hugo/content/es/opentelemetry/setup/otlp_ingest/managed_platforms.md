@@ -71,6 +71,7 @@ Todos los puntos de conexión siguen el patrón `https://{subdomain}.integration
 | LiveCloudKit | `livekit` | — |
 | Modal | `modal` | [Modal OpenTelemetry][14] |
 | MuleSoft | `mulesoft` | [MuleSoft Telemetry Exporter][15] |
+| Neon | `neon` | — |
 | Netlify | `netlify` | — |
 | OpenTofu | `opentofu` | — |
 | Retool | `retool` | [Monitoreo de rendimiento de Retool][16] |

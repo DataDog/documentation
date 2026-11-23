@@ -8,6 +8,12 @@ further_reading:
 
 If you experience unexpected behavior using OpenTelemetry with Datadog, this guide may help you resolve the issue. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
+## DDOT SDK configuration
+
+DDOT SDK startup logs report the effective values of important OpenTelemetry configuration settings. Use this information to check whether the SDK applied the configuration you intended when troubleshooting missing telemetry or unexpected behavior. The settings reported depend on the SDK language and version. A configuration log does not confirm successful telemetry delivery.
+
+For instructions to enable and locate these logs, see [Tracer Startup Logs][18].
+
 ## Incorrect or unexpected hostnames
 
 When using OpenTelemetry with Datadog, you might encounter various hostname-related issues. The following sections cover common scenarios and their solutions.
@@ -286,7 +292,7 @@ To verify the configuration:
 
 **Resolution**:
 
-When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
+When you use the Agent's OTLP endpoint, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
 
 To verify the configuration:
 
@@ -303,8 +309,8 @@ To verify the configuration:
 
 - **Upstream Collector with the OTLP HTTP exporter**: Add the `span_metrics` connector. It generates the trace metrics that power the Catalog and service pages. It must be an exporter in your traces pipeline and a receiver in a metrics pipeline that exports to Datadog. It must also receive spans before any sampling, so that it counts all spans. See [Span metrics connector][10] and [Trace forward connector][15].
 - **Upstream Collector with the Datadog Exporter**: Add the Datadog Connector to calculate trace metrics. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Datadog Exporter and Connector][11].
-- **DDOT Collector or the Collector in the Agent**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Install the DDOT Collector on Kubernetes][16] or [Set Up the Collector in the Datadog Agent][14].
-- **OTLP Ingest in the Agent**: The Agent computes trace metrics by default. Check that APM is enabled in the Agent. Also check that your SDK doesn't set the `_dd.stats_computed` resource attribute, which tells the Agent to skip the computation. See [OTLP Ingest in the Agent][17].
+- **DDOT Collector or the Agent's Collector**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Install the DDOT Collector on Kubernetes][16] or [Set Up the Agent's Collector][14].
+- **Agent's OTLP endpoint**: The Agent computes trace metrics by default. Check that APM is enabled in the Agent. Also check that your SDK doesn't set the `_dd.stats_computed` resource attribute, which tells the Agent to skip the computation. See [Agent's OTLP endpoint][17].
 - **SDKs sending straight to the OTLP intake, with no Collector**: Datadog doesn't compute trace metrics by default for traces sent to the OTLP traces intake endpoint. Add the `compute_stats=true` header to your exporter configuration. The intake computes trace metrics only from the spans it receives, so sampling before the intake lowers them. Don't combine this header with the `span_metrics` connector in a Collector. See [Traces endpoint][12].
 - **All setups**: Set the `service.name` and `deployment.environment.name` resource attributes. Without `service.name`, OpenTelemetry SDKs report a default name such as `unknown_service`. See [Unified service tagging][13].
 
@@ -326,13 +332,13 @@ To verify the configuration:
 
 ## Port binding errors and connection failures
 
-**Symptom**: You experience port conflicts or binding issues when deploying the DDOT Collector, or applications cannot connect to the DDOT Collector.
+**Symptom**: You experience port conflicts or binding issues when deploying the Agent's Collector, or applications cannot connect to the Agent's Collector.
 
 **Cause**: This typically occurs due to port naming conflicts, incorrect port configurations, or when multiple services attempt to use the same ports.
 
 **Resolution**:
 
-The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
+The Datadog Operator automatically binds the Agent's Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
 To explicitly override the default ports, use the `features.otelCollector.ports` parameter:
 
@@ -371,5 +377,6 @@ features:
 [13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [14]: /opentelemetry/setup/ddot_collector/install/
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
-[16]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[16]: /opentelemetry/setup/ddot_collector/kubernetes/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
+[18]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration

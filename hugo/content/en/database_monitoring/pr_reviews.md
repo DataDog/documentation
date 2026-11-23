@@ -11,7 +11,7 @@ further_reading:
 - link: "/database_monitoring/query_metrics/"
   tag: "Documentation"
   text: "Exploring Query Metrics"
-- link: "/source_code/features/#pr-comments"
+- link: "/source_code/pr-comments/"
   tag: "Documentation"
   text: "Source Code Integration PR comments"
 ---

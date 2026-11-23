@@ -53,6 +53,10 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 
 Bits AI can run investigations on the following Security log sources:
 - 1Password
+- Abnormal Security
+- Airtable (Crest Data Systems)
+- Amazon ELB
+- Amazon FSx
 - Amazon GuardDuty, where supported [finding types][6] cover:
   - Anomalous and compromised IAM credentials
   - EC2 and resource credential exfiltration and misuse
@@ -62,32 +66,71 @@ Bits AI can run investigations on the following Security log sources:
   - S3 anomalous behavior, data exposure, malicious callers, and penetration test activity
   - CloudTrail or S3 defense evasion
   - Attack sequences correlating IAM credential and S3 data compromise
+- Apache
+- Asana
 - Atlassian Event Logs
 - Auth0
 - AWS CloudTrail
 - Azure
+- Check Point Harmony Email & Collaboration
+- Cisco Duo
+- Cisco Umbrella DNS
 - Claude Compliance Logs
 - Cloudflare
 - Confluence Audit Records
 - CrowdStrike
+- Datadog Audit Trail
+- Datadog Code Security
+- Datadog Supply Chain Firewall
+- Delinea Privilege Manager
+- DNSFilter
 - Email phishing
+- Forcepoint Secure Web Gateway
+- Forcepoint Security Service Edge
 - GCP
 - GitHub
 - GitLab
 - Google Workspace
+- GuardDog
+- HashiCorp Vault
+- iboss
 - Jira Audit Records
 - JumpCloud
+- Keeper
+- Keycloak
 - Kubernetes
+- Linux Audit Logs
 - Microsoft 365
 - Microsoft Defender for EDR
 - Microsoft Entra ID
+- MySQL
+- Netskope
+- NGINX Ingress Controller
 - Okta
+- OneLogin
+- Oracle Cloud Infrastructure
+- Oracle Fusion
+- OSSEC Security
+- Palo Alto Networks Firewall
+- PingFederate
+- PingOne
+- PostgreSQL
 - Salesforce
 - SentinelOne
 - Slack
 - Snowflake
+- Suricata
+- Symantec VIP
+- Tailscale
+- Trellix Endpoint Security
+- Twilio
+- Twistlock
 - Windows
+- Workday
+- Zeek
 - Zendesk
+- Zoom
+- Zscaler
 
 <div class="alert alert-info">In rare cases, an out-of-the-box rule for a supported source is ineligible for Bits investigations because the investigation requires additional non-SIEM telemetry. To view these rules, go to <strong>Security</strong> > <strong>Settings</strong> > <strong>Bits Security Analyst</strong> > <strong>Analyst Configuration</strong>, then turn on <strong>Show currently ineligible rules</strong>.</div>
 
@@ -240,6 +283,10 @@ To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Se
 
 You can create security notification rules to get a notification when Bits Security Analyst completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
 
+## Access investigations through the API
+
+Use the [Bits Security Analyst API][9], in Preview, to list investigations, look up the investigations of a signal, and get an investigation's verdict, conclusion, evidence, and suggested next steps. AI agents connected to the [Datadog MCP Server][10] can use the same API through [code execution][11].
+
 ## Disable Bits Security Analyst
 
 1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
@@ -258,3 +305,6 @@ You can create security notification rules to get a notification when Bits Secur
 [6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
 [7]: /security/notifications/rules/#create-notification-rules
 [8]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst/knowledge-sources
+[9]: /api/latest/bits-security-analyst/
+[10]: /mcp_server/
+[11]: /mcp_server/code_execution/

@@ -1,6 +1,8 @@
 ---
 aliases:
 - /ja/agent/docker/prometheus
+description: Datadog Agent を使用して、コンテナ化された Docker アプリケーションから Prometheus および OpenMetrics
+  メトリクスを収集します。
 further_reading:
 - link: /agent/docker/log/
   tag: ドキュメント
@@ -16,28 +18,27 @@ further_reading:
   text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/docker/tag/
   tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当て
+  text: コンテナから送信された全データにタグを割り当てる
 title: Docker Prometheus および OpenMetrics メトリクスの収集
 ---
+Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを使用して、コンテナ内で実行されているアプリケーションから公開されている Prometheus および OpenMetrics メトリクスを収集します。
 
-Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、コンテナ内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
+## 概要 {#overview}
 
-## 概要
+バージョン 6.5.0 以降、Agent には、Prometheus エンドポイントをスクレイピングできる [OpenMetrics][3] と [Prometheus][4] チェックが含まれています。Datadog では、OpenMetrics チェックの方が効率的であり、Prometheus テキスト形式を完全にサポートしているため、その使用を推奨します。カスタムチェックの記述を含む `OpenMetricsCheck` インターフェイスの高度な使用方法については、[開発ツール][5] のセクションを参照してください。Prometheus チェックを使用するのは、メトリクスエンドポイントでテキスト形式がサポートされていない場合だけにしてください。
 
-バージョン 6.5.0 より、Agent には [OpenMetrics][3] および [Prometheus][4] チェックが用意され、Prometheus エンドポイントをスクレイピングできます。Prometheus テキスト形式を効率よくフルにサポートできるため、Datadog では OpenMetrics チェックの 使用をお勧めします。カスタムチェックの記述を含む `OpenMetricsCheck` インターフェイスの高度な使用方法については、[開発ツール][5]のセクションを参照してください。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
-
-このページでは、これらのチェックの基本的な使用方法について説明します。これにより、Datadog 内のすべての Prometheus 公開メトリクスをインポートできるようになります。
+このページでは、これらのチェックの基本的な使い方を説明し、Prometheus で公開されているすべてのメトリクスを Datadog に取り込めるようにします。
 
 このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
-## セットアップ
+## セットアップ {#setup}
 
-### インストール
+### インストール {#installation}
 
-以下のコマンドで、`<DATADOG_API_KEY>` を自身のオーガニゼーションの API キーに置き換えて、その他のコンテナに隣接する Docker Agent を起動します。
+以下のコマンドの `<DATADOG_API_KEY>` を組織の API キーに置き換えて、他のコンテナと並行して Docker Agent を起動します。
 
 {{< tabs >}}
-{{% tab "標準" %}}
+{{% tab "標準的な方法" %}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -47,7 +48,7 @@ docker run -d --cgroupns host \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -59,7 +60,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
     -v /cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
@@ -68,17 +69,17 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     -e DD_SITE="<YOUR_DATADOG_SITE>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
+**注**: Datadog サイトは {{< region-param key="dd_site" code="true" >}}です。
 
-### 構成
+### 構成 {#configuration}
 
-Agent は、Docker 上で実行されているかどうかを検出し、すべてのコンテナラベルの中から Datadog-OpenMetrics ラベルを自動検索します。オートディスカバリーは、ファイルの種類に応じて、ラベルが以下の例のようになっていることを前提とします。
+Agent は Docker 上で実行されているかどうかを検出し、すべてのコンテナラベルから Datadog-OpenMetrics ラベルを自動的に検索します。Autodiscovery では、ファイルタイプに応じてラベルが以下の例のようになることが想定されます。
 
 {{< tabs >}}
 {{% tab "Dockerfile" %}}
@@ -89,7 +90,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}]'
 ```
 
-#### 複数のエンドポイントの例
+#### 複数のエンドポイントの例 {#multiple-endpoints-example}
 
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics","openmetrics"]'
@@ -142,27 +143,27 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "Docker 実行コマンド" %}}
+{{% tab "Docker run コマンド" %}}
 
 ```shell
-# 単一メトリクス
+# single metric
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}]"
 ```
 
-**`com.datadoghq.ad.instances` におけるメトリクスのフォーマット例**
+**`com.datadoghq.ad.instances`** におけるメトリクスフォーマットの例
 
 ```shell
-# 複数メトリクス
+# multiple metrics
 -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}, {\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}]"
 ```
 
 ```shell
-# ベースタイプのすべてのメトリクス
+# all metrics of a base type
 -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[\"<METRIC_BASE_TO_FETCH>.*\"]}]"
 ```
 
 ```shell
-# すべてのメトリクス
+# all metrics
 -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[\".*\"]}]"
 ```
 
@@ -175,30 +176,30 @@ labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-コンフィギュレーションには次のプレースホルダー値を使用します。
+次の構成プレースホルダー値を使用します。
 
 | プレースホルダー             | 説明                                                                                                                               |
 |-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `<PROMETHEUS_PORT>`     | Prometheus のエンドポイントにアクセスするための接続先ポート。代わりに[オートディスカバリーテンプレート変数][6] `%%port%%` を使用することも可能です。 |
-| `<PROMETHEUS_ENDPOINT>` | コンテナによって処理されたメトリクスの URL パス (Prometheus 形式)。                                                                   |
-| `<NAMESPACE>`           | Datadog で表示するときに、すべてのメトリクスの前にネームスペースを付加します。                                                                      |
-| `<METRIC_TO_FETCH>`     | Prometheus エンドポイントから取得される Prometheus メトリクスキー。                                                                        |
-| `<NEW_METRIC_NAME>`     | Datadog の `<METRIC_TO_FETCH>` メトリクスキーを `<NEW_METRIC_NAME>` に変換します。                                                          |
+| `<PROMETHEUS_PORT>`     | Prometheus エンドポイントにアクセスするために接続するポート。代わりに、[Autodiscovery テンプレート変数][6] `%%port%%` を使用することもできます。|
+| `<PROMETHEUS_ENDPOINT>` | コンテナによって提供される Prometheus 形式のメトリクスの URL パス。                                                                  |
+| `<NAMESPACE>`           | Datadog で表示する際にすべてのメトリクス名の先頭に付与するネームスペースを設定します。                                                                     |
+| `<METRIC_TO_FETCH>`     | Prometheus エンドポイントから取得する Prometheus メトリクスキー。                                                                       |
+| `<NEW_METRIC_NAME>`     | Datadog で `<METRIC_TO_FETCH>` メトリクスキーを `<NEW_METRIC_NAME>` に変換します。                                                         |
 
 
-`metrics` の構成は、カスタムメトリクスとして取得するメトリクスのリストです。取得する各メトリクスと Datadog で希望するメトリクス名をキー値のペアで、例えば `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}` のように記載します。代わりに、正規表現として解釈されるメトリクス名の文字列のリストを提供し、現在の名前で必要なメトリクスをもたらすことができます。**注:** 正規表現では、多くのカスタムメトリクスを送信できる可能性があります。
+`metrics` 構成は、カスタムメトリクスとして取得するメトリクスのリストです。取得する各メトリクスと、Datadog での希望するメトリクス名を、キーと値のペアとして含めてください (例: `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}` など)。その代わりに、希望するメトリクスを現在の名前で取得するため、正規表現として解釈されるメトリクス名の文字列リストを提供することもできます。**注:** 正規表現を使うと、大量のカスタムメトリクスが送信される可能性があります。
 
-`namespace` や `metrics` など、インスタンスで利用可能なパラメーターの一覧は、[構成例 openmetrics.d/conf.yaml][7] を参照してください。
+`namespace` や `metrics` など、インスタンスで利用可能なパラメーターの完全なリストについては、[構成例 openmetrics.d/conf.yaml][7] を参照してください。
 
-## はじめに
+## はじめに{#getting-started}
 
-### シンプルなメトリクスの収集
+### シンプルなメトリクスの収集 {#simple-metric-collection}
 
-コンテナ内で動作する Prometheus によって公開されたメトリクスの収集を開始するには、次の手順に従います。
+コンテナ内で実行されている Prometheus によって公開されたメトリクスの収集を開始するには、次の手順に従います。
 
 1. Datadog Agent を起動します。
     {{< tabs >}}
-    {{% tab "Standard" %}}
+    {{% tab "標準的な方法" %}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -207,22 +208,22 @@ docker run -d --cgroupns host \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
     -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest
+    registry.datadoghq.com/agent:latest
 ```
     {{% /tab %}}
     {{% tab "Windows" %}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-    gcr.io/datadoghq/agent:latest \
+    registry.datadoghq.com/agent:latest \
     -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
 ```
     {{% /tab %}}
     {{< /tabs >}}
 
-2. OpenMetrics チェック用の Autodiscovery Labels を使用して、Agent が収集するサンプルメトリクスを公開する Prometheus コンテナを起動します。
+2. OpenMetrics チェック用の Autodiscovery ラベルを使用して、Agent が収集するサンプルメトリクスを公開する Prometheus コンテナを起動します。
 
-   &nbsp;以下のラベルは、Agent が `promhttp_metric_handler_requests`、`promhttp_metric_handler_requests_in_flight`、および `go_memory` で始まるすべての公開メトリクスを収集することを意味します。
+    以下のラベルにより、Agent はメトリクス `promhttp_metric_handler_requests`、`promhttp_metric_handler_requests_in_flight`、および `go_memory` で始まるすべての公開メトリクスを収集します。
 
     ```yaml
     labels:
@@ -241,23 +242,23 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
           }
         ]
     ```
-   これらのラベルで Prometheus コンテナのサンプルを起動するには、次を実行します。
+    To launch an example Prometheus container with these labels you can run:
 
     ```shell
     docker run -d -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests":"handler.requests"},{"promhttp_metric_handler_requests_in_flight":"handler.requests.in_flight"},"go_memory.*"]}]' prom/prometheus
     ```
 
-3. [Metric summary][8] ページにアクセスし、収集したメトリクスを確認します。
+3. 収集されたメトリクスを確認するには、[Metrics Catalog][8] ページに移動します。
 
     {{< img src="integrations/guide/prometheus_docker/openmetrics_v2_collected_metric_docker.png" alt="Docker で収集された Prometheus メトリクス">}}
 
-## カスタムインテグレーションを公式インテグレーションに
+## カスタムインテグレーションを公式インテグレーションに{#from-custom-to-official-integration}
 
-デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
+デフォルトでは、Prometheus の汎用チェックで取得されたすべてのメトリクスは、カスタムメトリクスとみなされます。市販のソフトウェアを監視していて、公式の統合に値すると考える場合は、遠慮なく[投稿でお知らせ][5]ください。
 
-公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][9] インテグレーションを参照します。
+公式の統合には、それぞれ専用のディレクトリがあります。汎用チェックには、デフォルト構成およびメトリクスメタデータをハードコーディングするためのデフォルトインスタンスメカニズムがあります。たとえば、[kube-proxy][9] インテグレーションを参照してください。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -265,8 +266,8 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 [2]: /ja/integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /ja/developers/custom_checks/prometheus/
+[5]: /ja/extend/custom_checks/prometheus/
 [6]: https://docs.datadoghq.com/ja/agent/guide/template_variables/
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[8]: https://app.datadoghq.com/metric/summary
+[8]: https://app.datadoghq.com/metric/catalog
 [9]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

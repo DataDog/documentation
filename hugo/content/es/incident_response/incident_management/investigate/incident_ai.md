@@ -40,6 +40,19 @@ Cuando un incidente cambia a resuelto, Incident AI publica un resumen final. Est
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Ejemplo de resumen de incidente en Slack" style="width:100%;" >}}
 
+## Resúmenes y transcripciones de reuniones {#meeting-summaries}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Los resúmenes de reuniones y las transcripciones de reuniones en vivo no están disponibles para el sitio de Datadog seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+Para las reuniones de incidentes, Incident AI puede generar resúmenes y guardar transcripciones en vivo en los notebooks de Datadog:
+
+- **Resúmenes de reuniones**: Durante una reunión, Incident AI publica periódicamente resúmenes en vivo en la línea de tiempo del incidente y en el canal de chat del incidente. Cuando termina la reunión, publica un resumen final.
+- **Transcripciones de reuniones en vivo**: Un notebook de Datadog captura la conversación con los nombres de los oradores y las marcas de tiempo en su zona horaria. El notebook se actualiza durante la reunión y permanece disponible después.
+
+Para configurar los resúmenes y las transcripciones de reuniones, consulte la página de integración de [Zoom][4], [Google Meet][5] o [Microsoft Teams][6]. Para revisar los resúmenes, ver las transcripciones, volver a invitar al transcriptor y obtener información sobre cómo se conservan los datos de las reuniones, consulte [Resúmenes y transcripciones de reuniones][7].
+
 ## Detección de incidentes relacionados {#related-incident-detection}
 
 Incident AI marca automáticamente los incidentes relacionados si se declaran dentro de los 20 minutos entre sí, lo que le ayuda a identificar problemas sistémicos más amplios.
@@ -88,7 +101,7 @@ Cuando se activa, el agente extrae automáticamente la línea de tiempo del inci
 
 Cuando se inicia, la investigación se integra en la interfaz web del incidente y Bits Investigation aparece como responsable de respuesta en la sección "Responder Roles" de la página.
 
-Para obtener un recorrido completo del flujo de trabajo de investigación, consulte [Bits Investigation][4].
+Para obtener un recorrido completo del flujo de trabajo de investigación, consulte [Bits Investigation][8].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -97,4 +110,8 @@ Para obtener un recorrido completo del flujo de trabajo de investigación, consu
 [1]: /es/incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /es/incident_response/incident_management/setup_and_configuration/templates
 [3]: /es/incident_response/incident_management/post_incident/postmortems
-[4]: /es/bits_ai/bits_investigation
+[4]: /es/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
+[5]: /es/incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
+[6]: /es/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
+[7]: /es/incident_response/incident_management/investigate/meeting_summaries_and_transcripts
+[8]: /es/bits_ai/bits_investigation

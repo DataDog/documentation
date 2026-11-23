@@ -1,6 +1,6 @@
 ---
-description: Instrumentez vos applications avec Datadog à l'aide de l'AI Setup CLI
-  ou du Datadog MCP Server.
+description: Instrumentez vos applications avec Datadog en utilisant Pup CLI ou le
+  Datadog MCP Server.
 further_reading:
 - link: https://www.datadoghq.com/blog/serverless-agentic-onboarding/
   tag: Blog
@@ -11,16 +11,21 @@ title: Agentic Onboarding Setup.
 
 Agentic Onboarding est un ensemble d'outils pilotés par IA qui automatisent l'instrumentation Datadog pour vos applications et votre infrastructure :
 
-- [AI Setup CLI](#ai-setup-cli) : Configurez Datadog depuis un terminal, sans assistant de codage.
+- [Pup CLI](#pup-cli) : Configurez Datadog depuis un terminal avec `pup setup`, sans assistant de codage.
 - [MCP Server](#mcp-server) : Configurez Datadog via un assistant de codage (tel que Claude Code ou Cursor), qui gère la détection et la configuration du framework depuis votre IDE.
 
 Les deux chemins sont complémentaires et utilisent le même compte Datadog. Vous pouvez installer le Datadog MCP Server dans votre IDE et exécuter la CLI dans un terminal.
 
-## AI Setup CLI {#ai-setup-cli}
+## Pup CLI {#pup-cli}
 
-Le Datadog AI Setup CLI est un outil de terminal autonome. Utilisez-la lorsque vous ne souhaitez pas installer le MCP Server, ou pour des tâches que le MCP Setup ne prend pas en charge, telles que la création d'un compte Datadog.
+La [Pup CLI][20] configure Datadog depuis votre terminal. Elle n'a pas besoin de votre propre assistant de codage ni de votre propre modèle d'IA ; la configuration ne consomme donc pas les tokens de votre modèle. Utilisez la CLI lorsque :
 
-La CLI peut :
+- Vous n'avez pas accès à votre propre assistant de codage ou modèle d'IA.
+- Vous ne voulez pas utiliser les tokens de votre modèle pour la configuration.
+- Vous ne voulez pas installer un serveur MCP.
+- Vous devez créer un compte Datadog, ce que la configuration MCP ne prend pas en charge.
+
+La Pup CLI peut :
 
 - Créer un compte Datadog de bout en bout depuis le terminal
 - Lier un compte Datadog existant à votre environnement local
@@ -29,21 +34,22 @@ La CLI peut :
 
 ### Prérequis {#prerequisites}
 
-- Node.js 22 ou version ultérieure
+- Node.js 22 ou version ultérieure. `pup setup` exécute le package de configuration de Datadog avec `npx` ; cette commande nécessite donc Node.js, même si vous avez installé Pup avec Homebrew ou un binaire précompilé.
 
 ### Produits pris en charge {#supported-products}
 
-La CLI permet de configurer les produits suivants :
+La Pup CLI peut configurer les produits suivants. Passez la valeur de la colonne `--product` à l'indicateur `--product` :
 
-| Product | Identifier |
+| Produit | `--product` |
 |---------|------------|
+| Agent Observability | `llm-obs` |
+| Amazon ECS | `ecs` |
 | App and API Protection | `app_and_api_protection` |
 | Code Coverage | `ci_code_coverage` |
 | Docker | `docker` |
 | Error Tracking | `error-tracking` |
-| Infrastructure Monitoring | `infra-monitoring` |
+| Infrastructure Monitoring (Kubernetes) | `infra-monitoring` |
 | Linux | `linux` |
-| Agent Observability | `llm-obs` |
 | OpenTelemetry | `otel` |
 | Product Analytics | `product-analytics` |
 | Real User Monitoring (RUM) | `rum` |
@@ -51,16 +57,43 @@ La CLI permet de configurer les produits suivants :
 | Studio | `studio` |
 | Test Optimization | `test-optimization` |
 
-### Installer et exécuter la CLI {#install-and-run-the-cli}
+#### Indicateurs spécifiques au produit {#product-specific-flags}
 
-Exécutez l'interface de ligne de commande avec `npx`, en transmettant `--site` pour cibler votre [site Datadog][16] ({{< region-param key=dd_site code="true" >}}). Vous disposez de deux options, selon que vous possédez déjà un compte Datadog ou non :
+Certains produits acceptent des indicateurs supplémentaires et facultatifs avec `--product`. Chaque indicateur prend une valeur :
+
+| `--product` | Indicateurs |
+|-------------|-------|
+| `ci_code_coverage`, `llm-obs`, `serverless`, `test-optimization` | `--api-key` : Clé d'API Datadog. |
+| `docker` | `--products` : Produits séparés par des virgules à activer : `infra`, `apm`, `logs`. Les trois sont activés par défaut.<br>`--library-versions` : Versions de la bibliothèque de traçage, telles que `java:v1,python:v4`.<br>`--env` : Tag d'environnement. Définit `DD_ENV`. |
+| `ecs` | `--ecs-launch-type` : `fargate` ou `ec2`.<br>`--ecs-deployment-method` : `cli`, `terraform`, `cdk` ou `cloudformation`. |
+| `error-tracking`, `product-analytics`, `rum`, `studio` | `--rum-application-id` (alias : `--app-id`) : Identifiant d'application RUM. |
+| `infra-monitoring` | `--enabled-products` (alias : `--k8s-products`) : Produits séparés par des virgules à activer, tels que `infrastructure,logs,apm,otel`.<br>`--k8s-distro` : Distribution Kubernetes, telle que `gke`, `eks`, `aks` ou `minikube`.<br>`--k8s-cluster-name` : Nom du cluster.<br>`--k8s-env-name` : Tag d'environnement.<br>`--k8s-library-versions` : Versions de la bibliothèque de traçage, telles que `java:v1,python:v4`.<br>`--k8s-target-namespaces` : Espaces de noms séparés par des virgules à inclure.<br>`--k8s-disabled-namespaces` : Espaces de noms séparés par des virgules à exclure.<br>`--k8s-registry` : Registre de conteneurs pour les images Datadog, tel qu'un miroir ou un registre privé. |
+| `linux` | `--products` : Produits séparés par des virgules à activer : `infra`, `apm`, `logs`, `otel`. La valeur par défaut est `infra,apm,logs`.<br>`--env` : Tag d'environnement. Définit `DD_ENV`. |
+| `llm-obs` | `--llm-obs-app` : Nom de l'application LLM. Définit `DD_LLMOBS_ML_APP`. |
+| `product-analytics`, `rum` | `--rum-client-token` : Jeton client RUM. |
+| `rum` | `--rum-framework` : `react`, `vue`, `angular`, `nextjs`, `browser`, `react-native` ou `expo`. |
+| `serverless` | `--serverless-compute-type` : `aws-lambda`, `gcp-cloud-run`, `gcp-cloud-run-functions` ou `azure-container-apps`.<br>`--serverless-runtime` : `nodejs`, `python`, `java`, `ruby`, `dotnet`, `go` ou `php` (`php` est pris en charge pour Cloud Run et Container Apps uniquement).<br>`--development-framework` : `aws-cdk`, `aws-sam`, `serverless-framework`, `terraform`, `ci` ou `other`.<br>`--use-otel true` : Instrumentez avec le SDK OpenTelemetry en envoyant directement les données au point d'ingestion OTLP de Datadog. |
+
+Par exemple :
+
+```shell
+npx @datadog/pup setup --site datadoghq.com --product ecs --ecs-launch-type fargate --ecs-deployment-method terraform
+```
+
+### Exécutez la commande de configuration {#run-the-setup-command}
+
+Exécutez `pup setup` avec `npx`, en transmettant `--site` pour cibler votre [site Datadog][16] ({{< region-param key=dd_site code="true" >}}). Vous n'avez pas besoin d'installer Pup au préalable, car `npx` le télécharge. Si Pup est déjà [installé][20], exécutez `pup setup` directement au lieu de `npx @datadog/pup setup`, en utilisant les mêmes indicateurs.
+
+Si vous vous êtes connecté avec [`pup auth login`][22], `pup setup` utilise cette connexion.
+
+Vous disposez de deux options, selon que vous possédez déjà un compte Datadog ou non :
 
    {{< tabs >}}
    {{% tab "Configuration interactive" %}}
 1. Utilisez cette option si vous n'avez pas de compte Datadog, ou si vous souhaitez que l'interface de ligne de commande recommande des produits basés sur l'analyse de votre code. L'interface de ligne de commande vous guide à travers la configuration du compte, l'analyse du dépôt et les recommandations de produits.
 
    ```shell
-   npx @datadog/ai-setup-cli --site datadoghq.com
+   npx @datadog/pup setup --site datadoghq.com
    ```
    Remplacez la valeur de `--site` par le site Datadog correspondant à votre compte : ({{< region-param key=dd_site code="true" >}}).
 
@@ -75,11 +108,12 @@ Exécutez l'interface de ligne de commande avec `npx`, en transmettant `--site` 
 1. Utilisez cette option si vous possédez déjà un compte Datadog et savez quel produit vous souhaitez installer. Ajoutez l'indicateur `--product` pour passer directement à la configuration et ignorer l'analyse du dépôt ainsi que les recommandations de produits.
 
    ```shell
-   npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
+   npx @datadog/pup setup --site datadoghq.com --product <PRODUCT>
    ```
 
    - Remplacez la valeur de `--site` par le site Datadog correspondant à votre compte : ({{< region-param key=dd_site code="true" >}}).
    - Remplacez `<PRODUCT>` par l'un des produits listés dans la section [Produits pris en charge](#supported-products).
+   - Ajoutez éventuellement l'un des [indicateurs spécifiques au produit](#product-specific-flags) pour ce produit.
 
 1. Appuyez sur <kbd>Entrée</kbd> sur l'écran d'accueil et choisissez si vous possédez un compte Datadog. Un navigateur s'ouvre pour l'OAuth (ou pour la création de compte si vous n'en avez pas encore). Terminez le flux et accordez l'accès à votre compte Datadog.
 
@@ -88,7 +122,7 @@ Exécutez l'interface de ligne de commande avec `npx`, en transmettant `--site` 
 
 #### Configurez et vérifiez votre configuration {#configure-and-verify-your-setup}
 
-1. Si l'interface de ligne de commande ne peut pas générer de recommandations ou ne trouve pas de correspondance pertinente pour votre dépôt, elle vous dirige vers la liste complète des options de configuration. Pour une configuration directe avec `--product`, commencez par ce menu.
+1. Si l'interface de ligne de commande ne peut pas générer de recommandations ou ne trouve pas de correspondance pertinente pour votre dépôt, elle vous dirige vers la liste complète des options de configuration.
    {{< img src="agentic_onboarding/product-selection.png" alt="Menu de l'interface de ligne de commande « Que souhaitez-vous configurer ? » regroupés par surveillance de l'infrastructure et du backend, surveillance du frontend, applications basées sur LLM et tests CI." style="width:80%;" >}}
 1. L'interface de ligne de commande détecte les frameworks de votre projet, applique la configuration requise et provisionne toutes les variables d'environnement nécessaires. La progression est signalée phase par phase.
    {{< img src="agentic_onboarding/setup-example.png" alt="Interface de ligne de commande affichant « Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring) » avec les étapes de progression." style="width:80%;" >}}
@@ -102,21 +136,28 @@ Une fois l'interface de ligne de commande terminée, consultez la section [Étap
 
 Le mode sans interface est conçu pour les configurations sans surveillance. Un agent de codage IA, un job CI ou un script peut exécuter l'interface de ligne de commande directement dans votre dépôt et effectuer l'instrumentation Datadog de manière autonome. Aucune personne n'a besoin d'être présente pour approuver les invites ou faire des choix interactifs.
 
-Utilisez `--headless` pour ignorer l'interface utilisateur interactive. Cela nécessite à la fois `--site` et `--product` :
+Le mode headless s'active automatiquement lorsqu'un [agent de codage IA pris en charge][21] démarre `pup setup`, ou lorsqu'il n'y a pas de terminal interactif, comme dans un job CI. Pour l'activer manuellement, ajoutez `--headless` :
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
-  npx @datadog/ai-setup-cli \
+  npx @datadog/pup setup \
   --headless \
   --site datadoghq.com \
   --product rum
 ```
 
-Définissez les [variables d'environnement][19] `DD_API_KEY` et `DD_APP_KEY` pour vous authentifier sans interaction utilisateur. Fournissez les deux variables ensemble.
+En mode headless :
 
-Alternativement, omettez les clés d'API et d'application pour vous authentifier avec OAuth via le navigateur. OAuth est la seule partie d'une exécution sans interface qui pourrait nécessiter une interaction utilisateur, et elle requiert un rappel localhost. Pour les environnements distants ou entièrement sans surveillance, utilisez plutôt les variables d'environnement `DD_API_KEY` et `DD_APP_KEY`.
+- `--site` est facultatif. Si vous l'omettez, `pup setup` utilise la variable d'environnement `DD_SITE`, puis le site de votre connexion Pup ou de votre fichier de configuration, et enfin `datadoghq.com`.
+- `--product` est facultatif. Si vous l'omettez, `pup setup` analyse le dépôt et configure le produit le plus recommandé. Pour voir les recommandations sans rien modifier, ajoutez `--recommend-only`, qui les affiche au format JSON, puis se termine.
 
-En utilisant `--headless`, vous confirmez que le téléchargement du code source et l'exécution automatique des commandes sont autorisés pour le projet cible.
+Le mode headless se connecte avec la première option disponible parmi celles-ci :
+
+1. Votre connexion Pup, ou la variable d'environnement `DD_ACCESS_TOKEN`. Si l'une ou l'autre est présente, `pup setup` ignore `DD_API_KEY` et `DD_APP_KEY`.
+1. Les [variables d'environnement][19] `DD_API_KEY` et `DD_APP_KEY`. Fournissez les deux variables ensemble.
+1. Authentification OAuth via le navigateur. La commande de configuration ouvre un navigateur pour vous permettre de vous connecter. Il s'agit de la seule étape en mode headless qui nécessite une intervention de l'utilisateur, et elle requiert un callback localhost. Sur des machines distantes ou lors d'exécutions entièrement sans surveillance, utilisez l'une des autres options.
+
+En exécutant `pup setup` en mode headless, vous confirmez que le téléversement du code source et l'exécution automatique des commandes sont autorisés pour le projet cible. Cela s'applique que vous ajoutiez `--headless` ou que le mode headless s'active automatiquement.
 
 ## Serveur MCP {#mcp-server}
 
@@ -228,22 +269,22 @@ Envoyez l'invite qui correspond au produit que vous souhaitez configurer :
 **AWS Lambda**
 {{< code-block lang="text" >}}Add Datadog for AWS Lambda to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda{{< /code-block >}}
 
 **Conteneurs GCP Cloud Run**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run containers to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run{{< /code-block >}}
 
 **Fonctions GCP Cloud Run**
 {{< code-block lang="text" >}}Add Datadog for GCP Cloud Run functions to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run-functions{{< /code-block >}}
 
 **Azure Container Apps**
 {{< code-block lang="text" >}}Add Datadog for Azure Container Apps to my project{{< /code-block >}}
 
-{{< code-block lang="shell" >}}npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
+{{< code-block lang="shell" >}}npx @datadog/pup setup --product serverless --serverless-compute-type=azure-container-apps{{< /code-block >}}
 
 {{% /tab %}}
 
@@ -279,3 +320,6 @@ Confirmez que les données circulent dans l'interface utilisateur Datadog pour l
 [17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
 [19]: /fr/account_management/api-app-keys/
+[20]: /fr/cli/
+[21]: /fr/cli/#agent-mode
+[22]: /fr/cli/#authentication

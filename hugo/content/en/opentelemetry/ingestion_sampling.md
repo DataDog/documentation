@@ -41,7 +41,7 @@ With this method, the Datadog Agent receives traces directly from OpenTelemetry 
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="OpenTelemetry APM Metrics computation using the Datadog Agent" style="width:100%;" >}}
 
-Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions on [OTLP Ingestion by the Datadog Agent][15].
+Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions in [Set Up the Agent's OTLP Endpoint][15].
 
 ## Reducing ingestion volume
 
@@ -67,7 +67,7 @@ Use the [ingestion volume control guide][8] to read more about the implications 
 
 #### Trace metric extrapolation for Datadog SDKs
 
-DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
+DDOT SDKs record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
 
 Use these minimum versions for automatic extrapolation:
 
@@ -178,7 +178,7 @@ For more information, see [Unified Service Tagging][18].
 [20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [21]: https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/#sampling-threshold-value-th
 [22]: https://github.com/open-telemetry/oteps/blob/main/text/trace/0235-sampling-threshold-in-trace-state.md
-[23]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/#sampling-and-trace-metrics
+[23]: /opentelemetry/instrument/ddot_sdks/#sampling-and-trace-metrics
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
 [25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0

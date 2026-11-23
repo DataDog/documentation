@@ -163,7 +163,7 @@ _Requiere: Ruby 3.1+_ y [habilitación manual][2]
 
 Tamaño de objetos vivos en heap (Vista previa, v2.18.0+)
 : La cantidad de memoria del montón asignada por cada método que aún no ha sido recolectada por el recolector de basura. Esto es útil para investigar el uso general de memoria de su servicio e identificar posibles fugas de memoria.<br />
-_Requiere: Ruby 3.1+_ y [habilitación manual][2] (Actualmente no es compatible con Ruby 4)
+_Requiere: Ruby 3.1+_ y [habilitación manual][2]
 
 Generación de perfiles de GVL (en Línea de tiempo) (v2.11.0+)
 : Registra el tiempo en que se impide que los hilos trabajen debido a otros hilos de "vecinos ruidosos", incluidos los hilos en segundo plano. Esto es útil para investigar picos de latencia en la aplicación al usar la visualización de línea de tiempo.<br />

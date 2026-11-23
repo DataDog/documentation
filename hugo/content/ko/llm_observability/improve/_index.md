@@ -10,7 +10,3 @@ title: Agent Observability를 사용한 애플리케이션 개선
     {{< nextlink href="/llm_observability/improve/offline_experiments" >}}Offline Experiments{{< /nextlink >}}
     {{< nextlink href="/llm_observability/improve/online_experiments" >}}Online Experiments{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< whatsnext desc="데이터를 확인할 수 있는 사용자 제어:" >}}
-    {{< nextlink href="/llm_observability/improve/access_control" >}}Data Access Control{{< /nextlink >}}
-{{< /whatsnext >}}
