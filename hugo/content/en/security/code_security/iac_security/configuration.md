@@ -323,15 +323,11 @@ When plan scanning is enabled:
 - After a push, the IaC scan waits until every expected plan for the commit is uploaded. It then scans the commit once with all of its plans.
 - If the upload does not specify how many plans to expect, the commit is scanned at its first plan.
 - A plan uploaded later for the same commit, for example from a pipeline re-run, triggers a new scan.
-- A commit whose expected plans are not all uploaded is not scanned. It is dropped after 7 days.
+- A commit whose expected plans are not all uploaded is never scanned.
 
 ### Where to configure plan scanning
 
 Like other IaC Security settings, you can set `iac.global-config.plan-scanning` in the org-level or repository-level configuration in Datadog, or in the repository's `code-security.datadog.yaml` file. The file takes precedence over the repository-level configuration, which takes precedence over the org-level configuration. A property that is not set at one level inherits its value from the broader level. For details, see [How configurations merge][4].
-
-### Limitations
-
-A rescan updates results only while the commit is still the latest commit of its branch.
 
 ## Legacy configuration
 
