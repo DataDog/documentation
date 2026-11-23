@@ -728,10 +728,9 @@ Lists the Bits remediation actions that a guardrail can cover, with each action'
 ### `search_bits_guardrail_approvers`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Teams Read` and `User Access Read`*\
-Searches your organization's teams, roles, and active users that can approve actions under an ask guardrail. It returns each match as an approver value to use with `create_bits_guardrail` and `update_bits_guardrail`.
+Searches your organization's teams, roles, and active users for approvers to name on an ask guardrail. Use it while creating or updating a guardrail to find the approver values that `create_bits_guardrail` and `update_bits_guardrail` require.
 
-- Find the SRE team so it can approve pod restarts.
-- Which roles can approve actions under an ask guardrail?
+- Find the SRE team so I can add it as an approver on the production guardrail.
 
 ### `create_bits_guardrail`
 *Toolset: **bits-guardrails***\
