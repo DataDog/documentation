@@ -848,10 +848,13 @@ Gets the configuration and metadata that Datadog records for a single cloud reso
 ### `get_cloud_infrastructure_diagram_scope`
 *Toolset: **cloud-resources** (Preview)*\
 *Permissions Required: `Cloudcraft Read`*\
-Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. The diagram is shown in your conversation, with a link to open it in [Cloudcraft][106].
+Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. Also takes highlights, stories, an overlay, or a design when determining the scope. The diagram is shown in your conversation, with a link to open it in [Cloudcraft][106].
 
 - Diagram AWS account 123456789012.
-- What does the us-east-1 environment look like?
+- Walk me through how traffic reaches the checkout service in prod.
+- Highlight the load balancers in front of the API service.
+- Show me what changed in account prod-main over the last 24 hours.
+- Draw my Azure subscription prod.
 
 ### `get_cloud_infrastructure_overlay_data`
 *Toolset: **cloud-resources** (Preview)*\
@@ -861,7 +864,6 @@ Finds the resources that have overlay data within a diagram's scope: cost saving
 - What are the top 3 cost savings opportunities in account prod-main? Show them on the diagram.
 - Which resources in us-east-1 have alerting monitors?
 - Which resources in prod have the most critical security findings?
-- What changed in account prod-main over the last 24 hours?
 
 ### `design_cloud_infrastructure`
 *Toolset: **cloud-resources** (Preview)*\
