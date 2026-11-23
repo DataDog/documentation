@@ -695,6 +695,67 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
 
+## Bits Guardrails
+
+Tools for [Bits Guardrails][112], the Bits AI SRE configuration that decides whether an agent may take a remediation action on its own (allow), must get approval from a human first (ask), or may not take it at all (deny). A guardrail covers a set of actions and can be limited to targets with matching resource tags. When several guardrails match an action, the strictest one applies.
+
+Write tools change how much oversight Bits AI SRE has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
+
+### `list_bits_guardrails`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
+
+- Which remediation actions can Bits AI SRE take without approval?
+- List the guardrails that cover Kubernetes pod restarts.
+
+### `get_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Retrieves a guardrail by ID. Beyond what `list_bits_guardrails` returns, the result includes the looser guardrails that this one makes ineffective.
+
+- Show me the details of guardrail `abc123`.
+- Which guardrails does the production deny guardrail override?
+
+### `list_bits_guardrail_actions`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists the Bits AI SRE remediation actions that a guardrail can cover, with each action's ID and the infrastructure it runs on.
+
+- What remediation actions can a guardrail cover?
+- List the Kubernetes actions that guardrails can control.
+
+### `search_bits_guardrail_approvers`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Teams Read` and `User Access Read`*\
+Searches your organization's teams, roles, and active users that can approve actions under an ask guardrail. It returns each match as an approver value to use with `create_bits_guardrail` and `update_bits_guardrail`.
+
+- Find the SRE team so it can approve pod restarts.
+- Which roles can approve actions under an ask guardrail?
+
+### `create_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Creates a guardrail with a trust level, the actions it covers, the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new allow guardrail has no effect where an ask or deny guardrail already matches.
+
+- Require approval from the SRE team before Bits AI SRE restarts pods tagged `env:prod`.
+- Prevent Bits AI SRE from scaling down deployments tagged `team:payments`.
+
+### `update_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read` and `Guardrails Write`*\
+Updates a guardrail. Only the fields you provide change, and omitted fields keep their current values.
+
+- Change the staging pod-restart guardrail from ask to allow.
+- Add the platform team as an approver on guardrail `abc123`.
+
+### `delete_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Deletes a guardrail. Deleting an ask or deny guardrail can let a looser guardrail take effect for the same actions.
+
+- Delete the guardrail for the decommissioned checkout cluster.
+
 ## Cases (Work Management)
 
 Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
@@ -4132,6 +4193,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [109]: /containers/monitoring/amazon_elastic_container_explorer/
 [110]: /containers/amazon_ecs/
 [111]: /bits_ai/bits_detection/
+[112]: /bits_ai/bits_remediation/guardrails/
 
 ## Further reading
 
