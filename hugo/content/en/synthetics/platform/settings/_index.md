@@ -118,7 +118,11 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ## Downtimes
 
-Downtimes use their own permissions, `synthetics_downtime_read` and `synthetics_downtime_write`. You don't need the default settings permissions to view or manage downtimes. For more information, see [Scheduled Downtime][25].
+<!-- vale Datadog.words_case_sensitive = NO -->
+
+Downtimes use their own permissions, **Synthetics Downtime Read** and **Synthetics Downtime Write**. You don't need the default settings permissions to view or manage downtimes. For more information, see [Scheduled Downtime][25].
+
+<!-- vale Datadog.words_case_sensitive = YES -->
 
 ## Private locations
 

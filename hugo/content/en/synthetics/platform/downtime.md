@@ -90,20 +90,22 @@ To apply an existing downtime to multiple tests or test suites at once:
 
 ## Permissions
 
-<!-- TO CONFIRM: Which default roles get these permissions? Draft assumes Admin and Standard get read and write, and Read Only gets read. -->
+<!-- vale Datadog.words_case_sensitive = NO -->
 
 Downtimes have their own permissions, separate from Synthetic tests and default settings:
 
-- `synthetics_downtime_read`: View downtimes.
-- `synthetics_downtime_write`: Create, edit, and delete downtimes.
+- **Synthetics Downtime Read** (`synthetics_downtime_read`): View downtimes.
+- **Synthetics Downtime Write** (`synthetics_downtime_write`): Create, edit, and delete downtimes.
 
-By default, users with the [Datadog Admin and Datadog Standard roles][5] have both permissions. If you use [custom roles][6], add `synthetics_downtime_read` and `synthetics_downtime_write` to the roles that need access to downtimes.
+<!-- TO CONFIRM: Which managed roles get which permission. Draft assumes Admin and Standard get read and write, and Read Only gets read. -->
 
-The `synthetics_downtime_read` permission also gives access to the Synthetic Monitoring {{< ui >}}Settings{{< /ui >}} page, where you manage downtimes.
+The [Datadog managed roles][5] include the downtime permissions. If you use [custom roles][6], add **Synthetics Downtime Read** and **Synthetics Downtime Write** to the roles that need access to downtimes.
 
-<!-- TO CONFIRM: Cutoff date, and whether the docs should state it. The ticket says enforcement happens after January 31, 2027. -->
+The **Synthetics Downtime Read** permission also gives access to the Synthetic Monitoring {{< ui >}}Settings{{< /ui >}} page, where you manage downtimes.
 
-<div class="alert alert-warning">Until [CUTOFF DATE], Datadog also accepts the <code>synthetics_read</code> and <code>synthetics_write</code> permissions for downtimes. After that date, only <code>synthetics_downtime_read</code> and <code>synthetics_downtime_write</code> grant access. Update your custom roles before the cutoff date.</div>
+<div class="alert alert-warning">Starting January 31, 2027, only the <strong>Synthetics Downtime Read</strong> and <strong>Synthetics Downtime Write</strong> permissions grant access to downtimes. Until then, the <strong>Synthetics Read</strong> and <strong>Synthetics Write</strong> permissions also grant access. If your organization uses custom roles, add the downtime permissions to them before January 31, 2027 to keep access to downtimes.</div>
+
+<!-- vale Datadog.words_case_sensitive = YES -->
 
 ### Restrict access
 
