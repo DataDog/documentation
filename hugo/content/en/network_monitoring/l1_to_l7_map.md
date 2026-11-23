@@ -158,7 +158,7 @@ The following signals appear on the map. Some signals set status, and the rest p
 
 To open the map, navigate to [**Network Monitoring > L1 to L7**][7].
 
-{{< img src="network_performance_monitoring/l1_l7_map/landing-page-views.png" alt="The L1 to L7 Map page, with a toggle to select Resource View or Connection View and a search field." style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/landing-page.png" alt="The L1 to L7 Map page, with a toggle to select Resource View or Connection View and a search field." style="width:70%;" >}}
 
 On the L1 to L7 Map page, select a view:
 
