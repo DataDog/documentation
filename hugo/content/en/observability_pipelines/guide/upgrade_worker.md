@@ -68,7 +68,7 @@ Worker version 2.26.1 gives you access to the following:
     - Keeps pipelines running when the configuration file in its data directory changes, such as
       when Kubernetes reapplies volume ownership after a node restart.
     - Reports the failed source's error when the Worker stops all sources because one source failed or panicked.
-- The Worker no longer panics with the `Replacing unknown sink from fanout` error when a configuration reload reuses a component ID for a different type of component, or when a failed reload restores a removed component.
+    - No longer panics with the `Replacing unknown sink from fanout` error when a configuration reload reuses a component ID for a different type of component, or when a failed reload restores a removed component.
 - TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously, the Worker rejected these connections with a `session id context uninitialized` error.
 - For the Custom Processor:
     - The `Event mapping aborted.` debug log now includes the abort reason in its error field.
