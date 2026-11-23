@@ -98,7 +98,7 @@ Datadog follows these rules:
 
 - Closed cases are never reopened. If the only related case is closed, Datadog creates a new case.
 - If the new signal is already in an {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} case, it stays in that case.
-- When a case is full, Datadog creates a new rollover case. See [Limits](#limits).
+- When a case is full, Datadog creates a new rollover case. See the [Limits](#limits) section.
 - Adding a signal does not change the case title, priority, or assignee.
 - The [Signal Attachment Settings][4] still apply to the signals added to a case.
 
@@ -118,22 +118,22 @@ When automatic case creation creates or updates a case, Datadog adds an entry to
 
 | Entry | Message | When |
 | --- | --- | --- |
-| {{< ui >}}Case created{{< /ui >}} | Datadog automatically created this case from a signal. | Datadog created a new case. |
-| {{< ui >}}Rollover case created{{< /ui >}} | Datadog automatically created this case from a signal because the original case reached its grouping limit of 100 signals. | The eligible case was full, so Datadog created a rollover case. |
-| {{< ui >}}Signal added{{< /ui >}} | Datadog automatically added a signal to this case. | Datadog added the new signal to an existing case. |
-| {{< ui >}}Signal added{{< /ui >}} | Datadog matched a signal that's already in this case. | The new signal was already in this case. |
-| {{< ui >}}Case rolled over{{< /ui >}} | This case reached its grouping limit of 100 signals, so Signal Grouping now adds later signals to a new case. | This case was full, and Datadog created a rollover case. |
+| {{< ui >}}Case created{{< /ui >}} | Datadog automatically created this case from a signal. | Datadog creates a new case. |
+| {{< ui >}}Rollover case created{{< /ui >}} | Datadog automatically created this case from a signal because the original case reached its grouping limit of 100 signals. | The eligible case is full, so Datadog creates a rollover case. |
+| {{< ui >}}Signal added{{< /ui >}} | Datadog automatically added a signal to this case. | Datadog adds the new signal to an existing case. |
+| {{< ui >}}Signal added{{< /ui >}} | Datadog matched a signal that's already in this case. | The new signal is already in this case. |
+| {{< ui >}}Case rolled over{{< /ui >}} | This case reached its grouping limit of 100 signals, so Signal Grouping now adds later signals to a new case. | This case is full, so Datadog creates a rollover case. |
 
-When related signals don't fit in one rollover case, Datadog creates more rollover cases. Their entry says that the signal that triggered the case isn't in it.
+When related signals don't fit in one rollover case, Datadog creates more rollover cases. The timeline entry of each extra rollover case says that the triggering signal is not in that case.
 
 If grouping strategies are selected, the entry also shows what signal grouping found:
 
 | Message | Meaning |
 | --- | --- |
-| Signal Grouping found no related signals based on the current settings. | No strategy found a related signal in the lookback, or the signal is missing a value the strategies need, such as group-by values. |
-| Signal Grouping selected this case using N strategies and added N related signals. | A related signal was in this case, so Datadog added the new signal to it. |
-| Signal Grouping added N related signals using N strategies. | Datadog added the related signals to a new case. |
-| The search reached its limit, so some related signals may not be included. | A strategy found more related signals than its limit. See [Limits](#limits). |
+| Signal Grouping found no related signals based on the current settings. | No strategy finds a related signal in the lookback, or the signal is missing a value the strategies need, such as group-by values. |
+| Signal Grouping selected this case using N strategies and added N related signals. | A related signal is in this case, so Datadog adds the new signal to it. |
+| Signal Grouping added N related signals using N strategies. | Datadog adds the related signals to a new case. |
+| The search reached its limit, so some related signals may not be included. | A strategy finds more related signals than its limit. See the [Limits](#limits) section. |
 
 Hover over the number of strategies to see which ones found related signals. Hover over the number of signals to see the signals Datadog added.
 
