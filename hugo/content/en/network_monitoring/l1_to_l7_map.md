@@ -24,9 +24,11 @@ site_support_id: network_l1_l7_map
 The L1 to L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<!-- TODO: The landing page title in the demo org still reads "L1/L7 Explore" (2026-11-23). When it reads "L1 to L7 Map", retake landing-page-views.png under a new filename. Also replace landing-page-search.png, which is a placeholder from the staging prototype, with a new screenshot of the landing page search menu open to Search by type. -->
+<!-- TODO: The landing page title in the demo org still reads "L1/L7 Explore" (2026-11-23). When it reads "L1 to L7 Map", retake landing-page-views.png under a new filename. -->
 
 ## Overview
+
+{{< img src="network_performance_monitoring/l1_l7_map/l1-to-l7-map-overview.png" alt="The L1 to L7 Map in Resource View for a service, with its upstream and downstream connections, its composition stack, and the details pane" >}}
 
 The L1 to L7 Map brings application, infrastructure, and network context together on one map. Use it to:
 
@@ -41,8 +43,6 @@ The L1 to L7 Map differs from other network maps in Datadog:
 - The [Device Topology Map][13] shows the physical connections between network devices. The L1 to L7 Map shows network devices as hops on a network path.
 
 To start using the map, see the [Navigate the L1 to L7 Map](#navigate-the-l1-to-l7-map) section. For step-by-step workflows, see the [Investigate an issue with the L1 to L7 Map](#investigate-an-issue-with-the-l1-to-l7-map) section.
-
-{{< img src="network_performance_monitoring/l1_l7_map/l1-to-l7-map-overview.png" alt="The L1 to L7 Map in Resource View for a service, with its upstream and downstream connections, its composition stack, and the details pane" >}}
 
 ## Prerequisites
 
@@ -167,8 +167,6 @@ On the L1 to L7 Map page, select a view:
 - **Resource View**: Start with one service, container, pod, or host. In the search field, select a resource type (**Service**, **Container**, **Pod**, or **Host**) and search for the resource. You can also select a resource from the **Popular across your network** list.
 - **Connection View**: Search for and select a **Source** and a **Destination**.
 
-{{< img src="network_performance_monitoring/l1_l7_map/landing-page-search.png" alt="The L1 to L7 Map page in Resource View, with the search menu open to resource types and popular resources" style="width:70%;" >}}
-
 #### Open the map from another product
 
 You can also open the map from other Datadog products, with a resource or connection selected. **Explore Relationships** opens the resource in Resource View, and **Explore connection** opens the connection in Connection View.
@@ -196,7 +194,7 @@ In Resource View, the details pane shows the following for the explored or filte
 - The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
 
-{{< img src="network_performance_monitoring/l1_l7_map/details-pane-resource-view-wide.png" alt="The details pane to the right of the map for a service, with its status, View details and View in APM buttons, tags, and a metric chart" style="width:80%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/details-pane-resource-view-context.png" alt="The details pane beside the map in Resource View, with the service's status, View details and View in APM buttons, tags, and a chart" >}}
 
 #### Details pane in Connection View
 
@@ -207,7 +205,7 @@ In Connection View, the details pane shows the following for the connection betw
 - The connection's metrics from CNM and Network Path, with charts over the selected time frame. The charts use each product's own data, so their values can differ from the values in the map's hover summaries.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
-{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view-wide.png" alt="The details pane to the right of the map in Connection View, with source and destination statuses and a View connection in CNM button" style="width:80%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view-context.png" alt="The details pane beside the map in Connection View, with the source and destination statuses and a View connection in CNM button" >}}
 
 ### Change what the map shows
 
@@ -242,7 +240,11 @@ Hover over any item on the map to see its summary. The actions available from th
 
 #### Resource summaries
 
-The summary for a resource shows its type, status, and available metrics. The summary labels a Healthy status as **OK** and a Degraded status as **WARNING**. From the summary, you can:
+The summary for a resource shows its type, status, and available metrics. The summary labels a Healthy status as **OK** and a Degraded status as **WARNING**.
+
+{{< img src="network_performance_monitoring/l1_l7_map/resource-summary-hover.png" alt="A container's hover summary with a WARNING status, its failed setup, reset, and retransmit rates, and Filter and Explore buttons" style="width:50%;" >}}
+
+From the summary, you can:
 
 - Click **Filter** to narrow the map. The explored resource stays at the center of the map.
     - For a resource in the composition stack, the map narrows to that resource, called the _filtered resource_, and its related resources, such as the pod and host that it runs on. The details pane shows the filtered resource.
@@ -253,33 +255,35 @@ The summary for a resource shows its type, status, and available metrics. The su
 
 **Note**: Endpoints do not have the **Explore** action. To investigate a connection to an endpoint, click **Add as destination**.
 
-{{< img src="network_performance_monitoring/l1_l7_map/resource-summary-hover.png" alt="A container's hover summary with a WARNING status, its failed setup, reset, and retransmit rates, and Filter and Explore buttons" style="width:50%;" >}}
-
 #### Network connection summaries
 
-The summary for a network connection shows its **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput from CNM. From the summary, click **Explore connection** to open the connection in Connection View, or click **View in CNM**.
-
-In Resource View, if Network Path also tests the connection, the summary adds its **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**, and a **View in Network Path** link.
+The summary for a network connection shows its **Failed setup rate**, **Reset rate**, **Retransmit rate**, and **Sent** throughput from CNM. In Resource View, if Network Path also tests the connection, the summary adds its **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**.
 
 {{< img src="network_performance_monitoring/l1_l7_map/connection-summary-hover.png" alt="A connection's hover summary in Resource View, with CNM and Network Path signals and buttons to explore it or open it in either product" >}}
+
+From the summary, click **Explore connection** to open the connection in Connection View, or click **View in CNM**. When Network Path tests the connection, you can also click **View in Network Path**.
 
 #### Network path segment summaries
 
 The summary for a network path segment shows the signals of the whole path: **End-to-end latency**, **Probe loss rate**, and **Unanswered run rate**. Every segment of the path shows the same values. To compare segments, use the latency label on each segment's line. A segment where all probes failed shows **FAILED** on a dotted line.
 
-From the summary, click **View in Network Path** to open the Network Path explorer, filtered to the hosts at the ends of the path. When the source and the destination are services, containers, or pods, you can also click **Explore connection** to open Connection View for the hosts at the ends of the path.
-
 {{< img src="network_performance_monitoring/l1_l7_map/path-segment-summary-hover.png" alt="A network path segment's hover summary, with probe loss rate, unanswered run rate, end-to-end latency, and a View in Network Path button" >}}
+
+From the summary, click **View in Network Path** to open the Network Path explorer, filtered to the hosts at the ends of the path. When the source and the destination are services, containers, or pods, you can also click **Explore connection** to open Connection View for the hosts at the ends of the path.
 
 #### Network path hop summaries
 
-The summary for a hop shows its IP address, AS name, AS number, city, country, and **Hop RTT Latency**. For a hop that is a network device monitored by NDM, the summary also links to the device's details. Click the hop to open the device's side panel.
+The summary for a hop shows its IP address, AS name, AS number, city, country, and **Hop RTT Latency**.
 
-{{< img src="network_performance_monitoring/l1_l7_map/path-hop-summary-hover.png" alt="A network path hop's hover summary, with its IP address, AS name and number, location, hop latency, and traversed count" style="width:50%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/path-hop-summary-hover-wide.png" alt="A network path hop's hover summary, with its IP address, AS name and number, location, hop latency, and traversed count" style="width:70%;" >}}
+
+For a hop that is a network device monitored by NDM, the summary also links to the device's details. Click the hop to open the device's side panel.
 
 ### Click items on the map
 
 When you click a resource, its side panel opens over the map. For example, clicking a host opens the host side panel. When you click a hop that is a network device, the device's side panel from NDM opens.
+
+{{< img src="network_performance_monitoring/l1_l7_map/resource-side-panel.png" alt="The APM side panel for a service, opened over the L1 to L7 Map after clicking the service on the map" >}}
 
 When you click a **+N more** item, the details pane shows a searchable list of the resources, connections, or network paths that the item represents.
 
