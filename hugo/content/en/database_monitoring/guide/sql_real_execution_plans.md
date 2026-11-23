@@ -585,6 +585,7 @@ The Agent doesn't send every plan in the session:
 - It skips plans larger than `max_plan_size_bytes`.
 - It skips plans after the plans held on a collection reach about 64 MB in total.
 - It skips plans that have no runtime statistics.
+- It skips the plans of the statistics updates that SQL Server runs while it compiles a statement.
 
 The session only captures the executions that match its `WHERE` clause. With a `ring_buffer` target, the session can also lose plans between two reads of the Agent.
 
