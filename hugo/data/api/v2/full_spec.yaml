@@ -71601,10 +71601,16 @@ components:
       properties:
         anomalyDetectionOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions"
+        complianceRuleOptions:
+          $ref: "#/components/schemas/CloudConfigurationComplianceRuleOptions"
+        decreaseCriticalityBasedOnEnv:
+          $ref: "#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv"
         detectionMethod:
           $ref: "#/components/schemas/SecurityMonitoringRuleDetectionMethod"
         evaluationWindow:
           $ref: "#/components/schemas/SecurityMonitoringRuleEvaluationWindow"
+        hardcodedEvaluatorType:
+          $ref: "#/components/schemas/SecurityMonitoringRuleHardcodedEvaluatorType"
         impossibleTravelOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions"
         keepAlive:
@@ -71649,6 +71655,14 @@ components:
             description: Dataset ID.
             type: string
           type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the job, keyed by dataset ID. Pinned when the job is created.
+          readOnly: true
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -71675,6 +71689,10 @@ components:
             description: Index name.
             type: string
           type: array
+        metric:
+          deprecated: true
+          description: "(Deprecated) The target field to aggregate over when using the sum or max\naggregations. Use the `metrics` field instead."
+          type: string
         metrics:
           description: Group of target fields to aggregate over when using the sum, max, geo data, or new value aggregations. The sum, max, and geo data aggregations only accept one value in this list, whereas the new value aggregation accepts up to five values.
           items:
@@ -81682,6 +81700,14 @@ components:
           description: Index used to load the data.
           example: cloud_siem
           type: string
+        isBackfillJob:
+          description: Whether the job was run by Datadog to reprocess past data.
+          readOnly: true
+          type: boolean
+        isShadowDeployed:
+          description: Whether the job is a shadow deployment run by Datadog.
+          readOnly: true
+          type: boolean
         message:
           description: Message for generated results.
           example: A large number of failed login attempts.
@@ -81692,6 +81718,13 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/HistoricalJobOptions"
+        projectedPerQuery:
+          description: Fields projected for each query, copied from the rule the job was created from.
+          items:
+            description: Projected field.
+            type: string
+          readOnly: true
+          type: array
         queries:
           description: Queries for selecting logs analyzed by the job. Up to 10 queries are allowed.
           items:
@@ -135406,6 +135439,8 @@ components:
         condition:
           description: "A case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries."
           type: string
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
@@ -135557,6 +135592,9 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations"
         baselineUserLocationsDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocationsDuration"
+        detectIpTransition:
+          description: If true, the rule detects transitions between IP addresses of the same user. At least one of `baselineUserLocations` and `detectIpTransition` must be true.
+          type: boolean
       type: object
     SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
       description: "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access."
@@ -135644,6 +135682,12 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter"
         instantaneousBaseline:
           $ref: "#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline"
+        instantaneousBaselineTimeoutMinutes:
+          description: Maximum time in minutes to build the instantaneous baseline. Only used when `instantaneousBaseline` is true.
+          format: int32
+          maximum: 360
+          minimum: 0
+          type: integer
         learningDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration"
         learningMethod:
@@ -138244,6 +138288,8 @@ components:
     SecurityMonitoringThirdPartyRuleCaseCreate:
       description: Case when a signal is generated by a third party rule.
       properties:
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
