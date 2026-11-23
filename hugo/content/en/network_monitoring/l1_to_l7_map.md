@@ -89,9 +89,9 @@ Upstream and downstream resources are the same type as the explored resource, su
 
 #### Connection View layout
 
-{{< img src="network_performance_monitoring/l1_l7_map/connection-view-layout.png" alt="Connection View from a host to an endpoint, with the host's composition stack, a CNM connection line, and a path through two AS groups" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/connection-view-two-stacks.png" alt="Connection View for two services, with each service's composition stack below it and a CNM connection line between them" style="width:60%;" >}}
 
-In Connection View, the map shows the source's composition stack on the left and the destination's on the right.
+In Connection View, the map shows the source's composition stack on the left and the destination's on the right. When the destination is an endpoint, the map shows only the source's stack.
 
 The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an {{< tooltip text="external endpoint" tooltip="A destination identified by an IP address or a hostname and port, rather than by a service, container, pod, or host." >}}, which can be the destination for any type of source.
 
@@ -105,6 +105,8 @@ When the source and the destination are services, containers, or pods, the map s
 When Network Path tests more than one pair of hosts, the map shows the least healthy path. The other paths collapse into a **+N more** item. The least healthy path does not necessarily run between the least healthy hosts in the two stacks.
 
 The map groups hops in the same {{< tooltip text="autonomous system (AS)" tooltip="A network that one organization operates, such as an internet service provider or a cloud provider." >}}. Each line between two hops or AS groups is a _network path segment_.
+
+{{< img src="network_performance_monitoring/l1_l7_map/connection-view-network-path.png" alt="A network path from a host to an endpoint through two AS groups, with segment latencies and a CNM connection line above it" >}}
 
 ### Map status and network signals
 
