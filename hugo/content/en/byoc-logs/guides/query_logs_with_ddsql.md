@@ -32,7 +32,7 @@ Use [DDSQL][1] in [Datadog Notebooks][2] to run SQL queries on logs stored in BY
 
 ## Query BYOC Logs
 
-To query BYOC Logs with DDSQL, add a data source cell that selects your BYOC Logs logs, then query that cell from an analysis cell.
+To query BYOC Logs with DDSQL, add a data source cell that selects logs from your BYOC Logs index, then query that cell from an analysis cell.
 
 ### Add a BYOC Logs data source
 
