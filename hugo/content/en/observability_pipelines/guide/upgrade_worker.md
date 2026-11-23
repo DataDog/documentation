@@ -39,9 +39,7 @@ Worker version 2.26.1 gives you access to the following:
 
 - Destinations now include the retry attempt number in their retry logs. Continuous retry
   failures are logged as errors every 10 attempts.
-- The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
-  triggered the shutdown, such as `source_aborted` or `reload_failed_to_restore`. The value is
-  `none` for a normal shutdown.
+- The `pipelines.stopped_total` metric is now available. It tells you the number of times the Worker instance has stopped and includes the `reason` tag to identify what triggered the shutdown.
 
 #### Fixes
 
@@ -63,14 +61,12 @@ Worker version 2.26.1 gives you access to the following:
       such as `pipelines.stopped_total` are sent to Datadog.
     - Keeps pipelines running when the configuration file in its data directory changes, such as
       when Kubernetes reapplies volume ownership after a node restart.
-    - Completes configuration updates that reuse a component ID for a different component type and
-      restores components removed by a failed update.
-    - Reports the source's error when it fails.
-- The Splunk HEC source now completes TLS handshakes for clients that resume a previous TLS session
-  when certificate verification is enabled.
-- The Custom Processor now:
-    - Includes the message passed to `abort` in the error details when it drops an event.
-    - Returns an error for field paths with array indexes outside the `isize` range.
+    - Reports the failed source's error when the Worker stops all sources because one source failed or panicked.
+    - No longer panics with the `Replacing unknown sink from fanout` error when a configuration reload reuses a component ID for a different type of component, or when a failed reload restores a removed component.
+- TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously, the Worker rejected these connections with a `session id context uninitialized` error.
+- For the Custom Processor:
+    - The `Event mapping aborted.` debug log now includes the abort reason in its error field.
+    - Field paths with array indexes outside the `isize` range return an error instead of silently wrapping to a different index.
 
 ## Worker version 2.26.0
 
