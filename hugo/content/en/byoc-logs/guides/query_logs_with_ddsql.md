@@ -1,6 +1,6 @@
 ---
 title: Query BYOC Logs with DDSQL in Notebooks
-description: Learn how to query logs stored in BYOC Logs indexes with DDSQL in Datadog Notebooks
+description: Learn how to query logs stored in BYOC Logs indexes with DDSQL in Datadog Notebooks.
 further_reading:
 - link: "/ddsql_reference/"
   tag: "Documentation"
