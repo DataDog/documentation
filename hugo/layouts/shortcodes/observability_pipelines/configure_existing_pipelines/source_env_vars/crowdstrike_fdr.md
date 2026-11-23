@@ -7,5 +7,5 @@
 - CrowdStrike FDR AWS secret access key:
     - The AWS secret access key for your FDR feed.
     - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY`.
-- CrowdStrike FDR TLS passphrase (when enabled):
+- CrowdStrike FDR TLS passphrase (when TLS is enabled):
     - The default environment variable is `DD_OP_SOURCE_CROWDSTRIKE_FDR_KEY_PASS`.

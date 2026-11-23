@@ -19,36 +19,47 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' CrowdStrike Falcon Data Replicator (FDR) source to receive logs directly from your CrowdStrike FDR feed. CrowdStrike stores FDR data in a CrowdStrike-managed Amazon S3 bucket and sends a notification for each new batch of files to a CrowdStrike-managed Amazon SQS queue. The Worker polls the queue, reads the files listed in each notification, and then deletes the message from the queue.
+CrowdStrike Falcon Data Replicator (FDR) exports raw event data from the CrowdStrike Falcon platform. Use Observability Pipelines' CrowdStrike FDR source to receive logs directly from an FDR feed that uses a CrowdStrike hosted storage bucket. CrowdStrike stores FDR data in a CrowdStrike-managed Amazon S3 bucket and sends a notification for each new batch of files to a CrowdStrike-managed Amazon SQS queue. The Worker polls the queue, reads the files listed in each notification, and then deletes the message from the queue.
 
 **Note**: The CrowdStrike FDR source requires Worker version 2.26.0 or later.
 
-<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not point more than one pipeline, or another tool, at the same FDR queue, or each consumer receives only part of the data.</div>
+<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not point more than one pipeline, or another tool, at the same FDR queue, or each consumer receives only part of the data. If another tool already reads from your FDR feed, stop that tool before you set up this source.</div>
 
-### Direct ingestion versus the FDR replicator
+### Choose a setup based on where FDR stores your data
 
-You can collect FDR data in one of two ways:
+An FDR feed stores data in either a CrowdStrike hosted storage bucket or an S3 bucket that you own. The Observability Pipelines source you use depends on which storage the feed uses.
 
-- **Direct ingestion (recommended)**: Use the CrowdStrike FDR source to read from CrowdStrike's bucket and queue. You don't need to copy the data. The rest of this page covers this option.
-- **FDR replicator**: Use CrowdStrike's [FDR replicator][10] to copy the data into an S3 bucket that you own, then collect it with the [Amazon S3 source][1]. Use this option if you need your own copy of the data. Storing the copy adds storage and data transfer costs.
+| | CrowdStrike hosted storage bucket | Customer-owned bucket |
+|---|---|---|
+| Source | CrowdStrike FDR source | [Amazon S3 source][1] |
+| Authentication | Feed client ID and secret | Your AWS credentials or an IAM role |
 
-To use the FDR replicator:
-
-1. In the replicator's `falcon_data_replicator.ini` file, set `TARGET_BUCKET` and `TARGET_REGION` in the `[Destination Data]` section to your existing S3 bucket and its region.
-1. Configure the bucket to send event notifications to an SQS queue. See the [Amazon S3 source prerequisites][11].
-1. Set up the [Amazon S3 source][1] with that SQS queue.
+The rest of this page covers the CrowdStrike hosted storage bucket. For a customer-owned bucket, set up the [Amazon S3 source][1] with the SQS queue that receives the bucket's event notifications.
 
 ## Prerequisites
 
-To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed and the following information from CrowdStrike:
+To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. The source authenticates with the feed's client ID and secret. Because CrowdStrike manages the bucket and queue, assuming an IAM role is not supported.
 
-- The SQS queue URL
-- The AWS region of the SQS queue and S3 bucket
-- The AWS access key ID and secret access key for the feed
+To create a feed:
 
-The source authenticates with the feed's access key ID and secret access key. Assuming an IAM role is not supported.
+1. In the CrowdStrike Falcon console, navigate to **Support and resources** > **Resources and tools** > **Falcon data replicator**.
+    {{< img src="observability_pipelines/sources/crowdstrike_fdr_navigation.png" alt="The CrowdStrike Falcon console with the Support and resources menu open and Falcon data replicator selected" style="width:100%;" >}}
+1. Click **Create feed**.
+1. Enter a feed name and select a feed status. You can turn the feed on later from the FDR feeds page.
+1. For **Storage**, select **CrowdStrike hosted storage bucket**, then select the events to include in the feed.
+1. On the review page, click **Create feed**.
+    {{< img src="observability_pipelines/sources/crowdstrike_fdr_feed_review.png" alt="The Create feed review page, with Storage set to CrowdStrike hosted storage bucket" style="width:100%;" >}}
+1. On the **Copy feed credentials** page, copy the values in the following table. You need them when you set up the source.
+    {{< img src="observability_pipelines/sources/crowdstrike_fdr_feed_credentials.png" alt="The Copy feed credentials page, showing the client ID, secret, storage location, notifications URL, and storage region with example values" style="width:100%;" >}}
 
-To create a feed and get this information, in the CrowdStrike Falcon console, navigate to **Support and resources** > **Falcon Data Replicator** and create a feed.
+<div class="alert alert-warning">CrowdStrike shows the feed secret only once. Copy it before you close the page. To get a new secret, you must reset the feed credentials.</div>
+
+| CrowdStrike value | Observability Pipelines setting | Default secret identifier |
+|---|---|---|
+| Notifications URL | {{< ui >}}SQS Queue URL Key{{< /ui >}} | `SOURCE_CROWDSTRIKE_FDR_SQS_URL` |
+| Client ID | {{< ui >}}AWS Access Key ID Key{{< /ui >}} | `SOURCE_CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID` |
+| Secret | {{< ui >}}AWS Secret Access Key Key{{< /ui >}} | `SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY` |
+| Storage region | {{< ui >}}AWS Region{{< /ui >}} | Not applicable. Select the region in the UI. |
 
 ## Setup
 
@@ -61,13 +72,11 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 1. Enter the identifier for your SQS queue URL in {{< ui >}}SQS Queue URL Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your AWS access key ID in {{< ui >}}AWS Access Key ID Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed.
+1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed. This field is required.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
-
-Click {{< ui >}}Advanced Options{{< /ui >}} to configure these settings.
 
 #### SQS settings
 
@@ -115,7 +124,6 @@ After you add the source, add the [CrowdStrike FDR pack][6] to parse your FDR ev
 
 For [component metrics][7] and [source buffer metrics][8] emitted by all sources, see the [Pipelines Usage Metrics][9] documentation. To filter or group by CrowdStrike FDR source metrics, use the tag `component_type:crowdstrike_fdr`.
 
-
 ### CrowdStrike FDR metrics
 
 - Use the `component_id` tag to filter or group by individual components.
@@ -154,5 +162,3 @@ For [component metrics][7] and [source buffer metrics][8] emitted by all sources
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-[10]: https://github.com/CrowdStrike/FDR
-[11]: /observability_pipelines/sources/amazon_s3/#prerequisites
