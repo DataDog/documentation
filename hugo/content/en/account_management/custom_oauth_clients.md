@@ -21,8 +21,8 @@ further_reading:
   text: "Audit Trail"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Custom OAuth Clients is in Preview">}}
-Custom OAuth Clients is in Preview for selected organizations. To request access, contact your Customer Success Manager.
+{{< callout url="https://www.datadoghq.com/product-preview/custom-oauth-clients/" btn_hidden="false" header="Join the Preview!">}}
+Custom OAuth Clients is in Preview for selected organizations. To request access, complete the signup form.
 {{< /callout >}}
 
 {{< site-region region="gov,gov2" >}}
