@@ -55,12 +55,6 @@ View all your configuration policies in the [{{< ui >}}Configuration{{< /ui >}}]
 
 Click the three-dot menu to the right of any policy name to enable or disable the policy, or edit, duplicate, or delete it.
 
-## Monitor policy drift
-
-<!-- what counts as drift, where per-host status appears, and what Fleet Automation does when it detects drift. -->
-
-<TODO>
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
