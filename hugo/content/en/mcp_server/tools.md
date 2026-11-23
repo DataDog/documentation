@@ -697,7 +697,7 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Bits Guardrails
 
-Tools for [Bits Guardrails][112]. Guardrails define which remediation actions Bits can take, where those actions apply, and who needs to approve them. Each guardrail covers a set of actions, is scoped to resources by tags, and sets whether Bits can take the action on its own (allow), needs approval first (ask), or can recommend the action but not take it (deny). When several guardrails match an action, the strictest one applies.
+Tools for [Bits Guardrails][112]. Guardrails define which remediation actions Bits can take, where those actions apply, and who needs to approve them. Each guardrail covers a set of actions, is scoped to resources by tags, and sets whether Bits needs approval before taking the action (ask) or can recommend the action but not take it (deny). When several guardrails match an action, the strictest one applies.
 
 Write tools change how much oversight Bits has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
 
@@ -706,7 +706,7 @@ Write tools change how much oversight Bits has over remediation actions. The `cr
 *Permissions Required: `Guardrails Read`*\
 Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
 
-- Which remediation actions can Bits take without approval?
+- Which remediation actions need approval before Bits can take them?
 - List the guardrails that cover Kubernetes pod restarts.
 
 ### `get_bits_guardrail`
@@ -736,7 +736,7 @@ Searches your organization's teams, roles, and active users that can approve act
 ### `create_bits_guardrail`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Write`*\
-Creates a guardrail with a trust level, the actions it covers, the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new allow guardrail has no effect where an ask or deny guardrail already matches.
+Creates a guardrail with a trust level, the actions it covers, the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
 
 - Require approval from the SRE team before Bits restarts pods tagged `env:prod`.
 - Prevent Bits from scaling down deployments tagged `team:payments`.
@@ -746,7 +746,7 @@ Creates a guardrail with a trust level, the actions it covers, the resource tags
 *Permissions Required: `Guardrails Read` and `Guardrails Write`*\
 Updates a guardrail. Only the fields you provide change, and omitted fields keep their current values.
 
-- Change the staging pod-restart guardrail from ask to allow.
+- Change the staging pod-restart guardrail from ask to deny.
 - Add the platform team as an approver on guardrail `abc123`.
 
 ### `delete_bits_guardrail`
