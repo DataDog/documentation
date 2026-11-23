@@ -174,7 +174,7 @@ test.describe("ApiEndpoint date version switching", () => {
     );
     const selector = page.locator(".api-endpoint__version-select--pill");
     await expect(selector).toBeVisible();
-    await expect(selector.getByRole("button")).toHaveText("v1 (latest)");
+    await expect(selector.getByRole("button")).toHaveText("v1 (default)");
     await expect(endpoint.locator(".api-endpoint__version-select")).toHaveCount(
       0,
     );

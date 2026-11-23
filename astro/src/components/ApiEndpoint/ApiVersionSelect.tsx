@@ -92,7 +92,7 @@ export default function ApiVersionSelect({
         options={[
           {
             value: BASE,
-            label: `${majorVersion} (${appearance === "pill" ? "latest" : "default"})`,
+            label: `${majorVersion} (default)`,
           },
           ...dates.map((date) => ({
             value: date,
