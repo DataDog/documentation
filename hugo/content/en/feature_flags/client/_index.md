@@ -38,7 +38,7 @@ The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscati
 
 ## Authorize assignment downloads
 
-Use [Subject Authorization][4] to require a backend-issued credential before Datadog returns flag assignments for a subject. See the concept page for supported SDK versions and setup requirements.
+Use [Subject Authorization][4] to restrict feature flag assignment downloads to authenticated users or accounts.
 
 ## Telemetry options by platform
 

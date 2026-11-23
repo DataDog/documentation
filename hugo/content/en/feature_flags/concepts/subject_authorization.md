@@ -72,6 +72,8 @@ After publishing keys, allow at least 15 minutes for propagation. After enabling
 
 After authenticating a subject, issue a JWT from your backend with a `PS256` signature. Include the signing key's `kid` in the JWT header. If you include `typ`, set it to `JWT`.
 
+The complete encoded token must be 8192 bytes or smaller.
+
 For example, the decoded JWT payload contains:
 
 ```json
