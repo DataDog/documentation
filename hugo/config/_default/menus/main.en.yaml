@@ -1709,6 +1709,11 @@ menu:
       identifier: bits_ai_skills_library
       parent: bits_ai
       weight: 12
+    - name: Bits AI Settings
+      url: bits_ai/bits_settings
+      identifier: bits_ai_settings
+      parent: bits_ai
+      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
