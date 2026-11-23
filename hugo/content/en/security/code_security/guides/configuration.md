@@ -92,7 +92,7 @@ For each field in a configuration, merge behavior depends on the field type:
 | Field type | Merge behavior | Example fields |
 |---|---|---|
 | Lists | Concatenated, with duplicates removed | `use-rulesets`, `ignore-rulesets`, `ignore-rules`, `ignore-paths`, `only-paths`, `ignore-platforms`, `only-platforms` |
-| Scalar values (strings, numbers, booleans) | The value from the highest-precedence configuration is used | `use-default-rulesets`, `use-gitignore`, `max-file-size-kb`, `category`, `global-config.plan-scanning.enabled` |
+| Scalar values (strings, numbers, booleans) | The value from the highest-precedence configuration is used | `use-default-rulesets`, `use-gitignore`, `max-file-size-kb`, `category` |
 | Maps | Recursively merged | `ruleset-configs`, `rule-configs`, `arguments` |
 
 For the full list of fields, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], and [Infrastructure as Code (IaC) Security Configuration][3].
@@ -124,8 +124,6 @@ iac:
   global-config:
     ignore-paths:
       - "examples/"
-    plan-scanning:
-      enabled: true
 ```
 
 #### Repo-level
@@ -155,8 +153,6 @@ iac:
   global-config:
     ignore-paths:
       - "generated/"
-    plan-scanning:
-      enabled: false
 ```
 
 #### Merged result
@@ -193,14 +189,12 @@ iac:
     ignore-paths:
       - "examples/"
       - "generated/"
-    plan-scanning:
-      enabled: false
 ```
 
 The example demonstrates each merge rule from the table above:
 
 - **Lists concatenate**: `use-rulesets` merges to `[A, B]`; the SCA `ignore-paths` merges to `["vendor/", "third_party/"]`; the IaC `ignore-rules` merges to `[A, B]`.
-- **Scalars use the highest-precedence value**: `maxCount: 22` (repo-level) overrides `maxCount: 10` (org-level), and `enabled: false` (repo-level) overrides `enabled: true` (org-level). Scalars that are set only at the org level, such as `use-default-rulesets: false`, keep their value.
+- **Scalars use the highest-precedence value**: `maxCount: 22` (repo-level) overrides `maxCount: 10` (org-level).
 - **Maps merge recursively**: The `foo` rule config keeps `ignore-paths` from the org level while applying `maxCount: 22` from the repo level. New entries like `bar` are added from the repo level.
 
 ## Further reading
