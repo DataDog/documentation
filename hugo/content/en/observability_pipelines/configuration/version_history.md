@@ -51,7 +51,7 @@ The **Since Version N** summary at the top of the graph shows how many component
 
 Each change in the list shows the component name, the component type (source, processor group, processor, or destination), and whether it was added, removed, or modified.
 
-{{< img src="observability_pipelines/version_history/changes_dropdown.png" alt="The changes summary dropdown listing the added and removed sources, processor groups, and destinations" style="width:60%;" >}}
+{{< img src="observability_pipelines/version_history/changes_dropdown.png" alt="The changes summary dropdown listing the added and removed sources, processor groups, and destinations." style="width:60%;" >}}
 
 ### Compare the configuration of a component
 
