@@ -2,9 +2,9 @@
 title: Bits Autonomous Operations
 description: "Assign ongoing operational work to Bits so it can detect, investigate, and remediate issues in a single operational loop."
 further_reading:
-- link: "/bits_ai/bits_autonomous_operations/setup/"
+- link: "/bits_ai/bits_autonomous_operations/best_practices/"
   tag: "Documentation"
-  text: "Set Up and Manage Bits Autonomous Operations"
+  text: "Best Practices for Adopting Bits Autonomous Operations"
 - link: "/bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
@@ -27,7 +27,7 @@ Autonomous Ops connects [Bits Detection][1], [Bits Investigation][2], and [Bits 
 
 You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog MCP Server][4]. 
 
-For a walkthrough of setup, remediation approvals, and ongoing management, see [Set Up and Manage Bits Autonomous Operations][26].
+For adoption recommendations and answers to common questions, see [Best Practices for Adopting Bits Autonomous Operations][26].
 
 ## Prerequisites
 
@@ -135,4 +135,4 @@ To review Bits activity:
 [23]: https://app.datadoghq.com/bits/settings/usage
 [24]: https://app.datadoghq.com/bits/autonomous-ops/scopes
 [25]: https://app.datadoghq.com/bits/autonomous-ops/activity
-[26]: /bits_ai/bits_autonomous_operations/setup/
+[26]: /bits_ai/bits_autonomous_operations/best_practices/

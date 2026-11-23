@@ -1599,9 +1599,9 @@ menu:
       identifier: bits_ai_autonomous_operations
       parent: bits_ai
       weight: 1
-    - name: Setup and Management
-      url: bits_ai/bits_autonomous_operations/setup
-      identifier: bits_ai_autonomous_operations_setup
+    - name: Best Practices
+      url: bits_ai/bits_autonomous_operations/best_practices
+      identifier: bits_ai_autonomous_operations_best_practices
       parent: bits_ai_autonomous_operations
       weight: 101
     - name: Bits Chat
