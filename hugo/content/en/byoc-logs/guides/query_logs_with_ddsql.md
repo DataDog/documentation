@@ -55,7 +55,7 @@ Add a separate data source cell for each set of logs you want to query or join. 
 1. Write your query, using the data source cell name as the table name.
 1. Click {{< ui >}}Run{{< /ui >}}.
 
-Reference reserved attributes, such as `timestamp`, `host`, `service`, `status`, and `message`, by name. Reference other attributes in double quotes with the `@` prefix, such as `"@latency_ms"`.
+Reference reserved attributes, such as `timestamp`, `host`, `service`, `status`, and `message`, by name. Reference other attributes in double quotes with the `@` prefix, such as `"@latency_ms"`. For example:
 
 ```sql
 SELECT service, COUNT(*) AS events
