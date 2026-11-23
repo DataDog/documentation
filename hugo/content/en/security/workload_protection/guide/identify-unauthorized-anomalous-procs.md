@@ -1,5 +1,7 @@
 ---
 title: Identifying Unauthorized and Anomalous Processes
+aliases:
+  - /security/cloud_security_management/guide/identify-unauthorized-anomalous-procs
 disable_toc: false
 further_reading:
 - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"

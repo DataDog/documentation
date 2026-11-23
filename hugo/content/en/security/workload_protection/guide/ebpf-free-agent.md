@@ -1,5 +1,7 @@
 ---
 title: Threat Detection for Linux Without eBPF Support
+aliases:
+  - /security/cloud_security_management/guide/ebpf-free-agent
 disable_toc: false
 ---
 
@@ -12,11 +14,11 @@ This guide also describes some advantages of the ptrace solution.
 Workload Protection includes two Agent options for threat detection and response:
 
 - eBPF solution
-- eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).
+- eBPF-less solution with ptrace: For environments where eBPF is unavailable (older kernels, or platforms such as AWS Fargate).
 
 {{% collapse-content title="eBPF solution" level="h3" %}}
 
-Datadog has built all its security products around [eBPF (extended Berkeley Packet Filter)][1]. Some of the benfits of eBPF are:
+Datadog has built all its security products around [eBPF (extended Berkeley Packet Filter)][1]. Some of the benefits of eBPF are:
 
 - eBPF improves safety by validating each program through the Linux kernel verifier. This ensures that a program can’t crash, fall into infinite loops, or harm the system.
 - eBPF is JIT (Just In Time) compiled and the output bytecode is executed on a eBPF VM sandbox. This prevents any kernel crash and provides competitive performance.
@@ -54,12 +56,12 @@ A ptrace-based solution achieves a balance between robust threat detection and u
 
 You can set up the eBPF-less Agent on various platforms, including Docker and Linux hosts.
 
-This section covers Docker and Linux hosts. For steps on setting up an Amazon Fargate environment where eBPF is disabled, see [AWS Fargate Configuration Guide for Datadog Security][3].
+This section covers Docker and Linux hosts. For steps on setting up an AWS Fargate environment where eBPF is disabled, see [Setting up Workload Protection on AWS Fargate][3].
 
 ### eBPF-less Agent requirements
 
 - The eBPF-less Agent is designed for environments where eBPF is disabled, using ptrace for runtime security, and supports arm64/amd64 architectures.
-- Custom installation commands and configurations are required for deploying the eBPF-less Agent. Specific instructions are provided in this section for Docker and Linux host installations.
+- The eBPF-less mode ships in the standard Datadog Agent. Enable it with the configuration provided in this section for Docker and Linux host installations.
 
 The eBPF-less solution includes two tracing modes for applications:
 
@@ -111,7 +113,7 @@ docker run -d --name dd-agent \
 {{% /tab %}}
 
 {{% tab "Linux host" %}}
-To install the Agent to a Linux host, use the following install script to install the custom build:
+To install the Agent on a Linux host, use the following install script:
 
 ```shell
 DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" \
@@ -119,18 +121,9 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Next, modify the `/etc/datadog-agent/system-probe.yaml` file to enable CWS and eBPF-less mode as follow:
+Next, modify the `/etc/datadog-agent/system-probe.yaml` file to enable Workload Protection and eBPF-less mode as follows. The same configuration applies if you install the Agent `.deb` or `.rpm` package manually:
 
-{{< code-block lang="java" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
-runtime_security_config:
-  enabled: true
-  ebpfless:
-    enabled: true
-{{< /code-block >}}
-
-Alternatively, to manually install the `.deb/.rmp` provided custom build packages, modify the `/etc/datadog-agent/system-probe.yaml` file to enable CWS and eBPF-less mode as follows:
-
-{{< code-block lang="java" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
   enabled: true
   ebpfless:
@@ -140,17 +133,13 @@ runtime_security_config:
 
 {{< /tabs >}}
 
-
-
-
-
 ## Deploy eBPF-less Agent
 
 Ensure you perform the following configuration requirements before deploying the Agent:
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
-2. Install/update the Agent with Cloud Security enabled. For steps, see [Setting up Cloud Security on the Agent][4].
-3. Specify additional configurations from the previous **eBPF-less agent setup** sections to install the custom version and enable eBPF-less mode.
+2. Install or update the Agent with Workload Protection enabled. For steps, see [Setting up Workload Protection][4].
+3. Apply the additional configuration from the previous **eBPF-less setup steps** section to enable eBPF-less mode.
 
 
 ## Verify setup
@@ -186,7 +175,7 @@ This tracer communicates with system-probe (part of the Datadog Agent) on localh
 
 {{< tabs >}}
 {{% tab "Wrap mode" %}}
-In wrap mode, the Datadog wrapper launchs the application. Here is an example:
+In wrap mode, the Datadog wrapper launches the application. Here is an example:
 
 ```shell
 sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace -- /usr/bin/your_application
@@ -202,7 +191,7 @@ sudo /opt/datadog-agent/embedded/bin/cws-instrumentation trace --uid 100 --gid 1
 
 The following examples show how the tracer can be integrated within applications for different deployment types.
 
-<div class="alert alert-info">On older 3.4 kernels, the seccomp profile is not available and should be disabled with the <code>–disable-seccomp</code> option.</div>
+<div class="alert alert-info">On older 3.4 kernels, the seccomp profile is not available and should be disabled with the <code>--disable-seccomp</code> option.</div>
 
 #### Linux systemd service
 
@@ -300,7 +289,7 @@ You also have to connect the container to Datadog on port 5678 by doing one of t
 The wrap mode is recommended because the attach mode has the following limitations:
 
 - It misses all initialization made by the application until Datadog attaches to it.
-- - When attaching, Datadog cannot set up a seccomp profile.
+- When attaching, Datadog cannot set up a seccomp profile.
 - More performance overhead.
 - If the traced application restarts, Datadog must ensure that the tracer restarts also.
 
@@ -324,7 +313,7 @@ If you already have an init script, here is an example of how to integrate the w
 
 ```shell
 [Unit]
-Description=Datadog CWS instrumentation attach to my application
+Description=Datadog Workload Protection instrumentation attached to my application
 After=datadog-agent-sysprobe.service my-app.service
 
 [Service]
@@ -392,7 +381,7 @@ To attach the wrapper to a Docker image running an application, use the followin
 ```shell
 FROM registry.datadoghq.com/agent:7
 
-ENTRYPOINT ["/opt/datadog-agent/embedded/bin/cws-instrumentation", "trace", "--pid", "$PID"]
+ENTRYPOINT ["sh", "-c", "exec /opt/datadog-agent/embedded/bin/cws-instrumentation trace --pid \"$PID\""]
 ```
 
 Next, provide the host PID for connecting to Docker as an environment variable.
@@ -411,7 +400,7 @@ To attach to an application, you’ll need the following:
 
 [1]: https://ebpf.io/what-is-ebpf/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: /security/guide/aws_fargate_config_guide/?tab=amazonecs
-[4]: /security/cloud_security_management/setup/agent
+[3]: /security/workload_protection/setup/fargate/?tab=amazonecs
+[4]: /security/workload_protection/setup/
 [5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: https://docs.docker.com/network/

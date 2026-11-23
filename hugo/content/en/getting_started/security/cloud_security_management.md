@@ -84,7 +84,7 @@ For information on disabling Cloud Security, see the following:
 [14]: /security/default_rules/#cat-cloud-security-management
 [16]: /security/cloud_security_management/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
-[18]: /security/cloud_security_management/guide/tuning-rules/
+[18]: /security/workload_protection/guide/tuning-rules/
 [19]: /security/cloud_security_management/misconfigurations/custom_rules
 [20]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-a-custom-detection-rule
 [21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
@@ -97,5 +97,5 @@ For information on disabling Cloud Security, see the following:
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports
 [32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[33]: /security/workload_protection/troubleshooting/threats/#disable-csm-threats
+[33]: /security/workload_protection/troubleshooting/threats/#disable-workload-protection
 [34]: /security/cloud_security_management/setup/cloud_integrations

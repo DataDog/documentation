@@ -1,6 +1,10 @@
 ---
 title: Troubleshooting Workload Protection
 description: Troubleshoot Workload Protection, including Agent flares, self tests, and network plugin compatibility.
+aliases:
+  - /security/cloud_security_management/troubleshooting/threats
+  - /security_platform/cloud_workload_security/troubleshooting/
+  - /security_platform/cloud_security_management/troubleshooting/
 ---
 
 If you experience issues with Workload Protection, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
@@ -48,16 +52,14 @@ The network based detections of Workload Protection rely on the traffic control 
 - Check if your vendor returns TC_ACT_OK or TC_ACT_UNSPEC after granting access to a network packet. If they return TC_ACT_UNSPEC, you can ignore this paragraph.
 - Check which priority your vendor attaches their eBPF classifiers to:
   - If they use priority 1, Workload Protection network detections do not work inside your containers.
-  - If they use priority 2 to 10, make sure to configure `runtime_security_config.network.classifier_priority` to a number strictly below the priority chosen by your vendor.
+  - If they use priority 2 to 10, make sure to configure `event_monitoring_config.network.classifier_priority` (`DD_EVENT_MONITORING_CONFIG_NETWORK_CLASSIFIER_PRIORITY`) to a number strictly below the priority chosen by your vendor.
   - If they use priority 11 or higher, you can ignore this paragraph.
-
-For example, there is a known race with Cilium 1.9 and lower with the Datadog Agent (version 7.36 to 7.39.1, 7.39.2 excluded) that may happen when a new pod is started. The race can lead to loss of connectivity inside the pod, depending on how Cilium is configured.
 
 Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should disable the network based detections of Workload Protection by following the steps below:
 
 - Add the following parameter to your `system-probe.yaml` configuration file on host based installations:
 ```yaml
-runtime_security_config:
+event_monitoring_config:
   network:
     enabled: false
 ```
@@ -71,7 +73,7 @@ datadog:
 ```
 - Add the following environment variable if you're deploying the Datadog Agent container manually:
 ```bash
-DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
+DD_EVENT_MONITORING_CONFIG_NETWORK_ENABLED=false
 ```
 
 ## Troubleshooting Kubernetes remote session or pod admission disruptions
@@ -153,25 +155,23 @@ To disable Workload Protection, follow the steps for your Agent platform.
 
 ### Helm
 
-In the Helm `values.yaml`, set `securityAgent.runtime` to `enabled: false` as follows:
+In the Helm `values.yaml`, set `datadog.securityAgent.runtime` to `enabled: false` as follows:
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="false" collapsible="true" >}}
 
 # values.yaml file
 datadog:
-
-# Set to false to Disable CWS
-securityAgent:
-  runtime:
-    enabled: false
+  # Set to false to disable Workload Protection
+  securityAgent:
+    runtime:
+      enabled: false
 {{< /code-block >}}
 
 ### Daemonset/Docker
 
 Apply the following environment variable change to both the System Probe and the Security Agent deployment for a Daemonset:
 
-{{< code-block lang="json" filename="daemon.json" disable_copy="false" collapsible="true" >}}
-
+{{< code-block lang="shell" disable_copy="false" collapsible="true" >}}
 DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
 {{< /code-block >}}
 
