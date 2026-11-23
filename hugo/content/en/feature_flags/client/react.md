@@ -70,7 +70,7 @@ Define who or what the flag evaluation applies to using an evaluation context. T
 
 <div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
-Set the provider along with the evaluation context:
+Include all targeting attributes available at startup in the evaluation context you pass when you register the provider. The provider uses this context for its first flag configuration request. Use `OpenFeature.setContext()` to [update the evaluation context](#update-the-evaluation-context) when it changes after initialization.
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
