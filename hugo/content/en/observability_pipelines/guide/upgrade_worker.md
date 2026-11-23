@@ -27,9 +27,12 @@ Worker version 2.26.1 gives you access to the following:
 
 #### Security
 
-- The Worker now redacts secrets from the pipeline load errors it reports to Datadog. Secrets
-  referenced in pipeline settings don't appear in deployment errors in the Observability Pipelines
-  UI.
+- The Worker now redacts secrets from the pipeline load errors it reports to Datadog. Secrets
+  referenced in pipeline settings don't appear in deployment errors in the Observability Pipelines
+  UI.
+
+  UI.
+
 
 #### New features
 
