@@ -189,7 +189,7 @@ With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in i
 Sensitive Data Scanner is optional. You can turn it off and still use Datadog-hosted scanning for vulnerabilities. To turn it off after setup:
 
 - **CloudFormation**: Turn off Sensitive Data Scanner in Datadog. For instructions, see [Set up Sensitive Data Scanner][20].
-- **Terraform**: Set the `sensitive_data_scanning_enabled` variable to `false`, then apply the configuration.
+- **Terraform**: In the `datadog_agentless_scanning_aws_scan_options` resource, set `sensitive_data` to `false`, then apply the configuration.
 
 ### Datadog-hosted on-demand scanning {#datadog-hosted-on-demand-scanning}
 
