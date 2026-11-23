@@ -424,13 +424,14 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
         "datadog": {
           "url": "{{< region-param key="mcp_server_endpoint" >}}",
           "headers": {
-            "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-            "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
+            "Authorization": "Bearer &lt;YOUR_ACCESS_TOKEN&gt;"
           }
         }
       }
     }
     </code></pre>
+
+    Replace `<YOUR_ACCESS_TOKEN>` with a [Personal Access Token (PAT)][1] or [Service Access Token (SAT)][2]. For other header-based options, see [Authentication](#authentication).
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -439,6 +440,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 1. The status indicator in the settings displays a green tick when the connection is successful.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /account_management/personal-access-tokens/
+[2]: /account_management/service-access-tokens/
 
 {{% /collapse-content %}}
 
@@ -832,6 +836,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+- `on-call`: Tools for [Datadog On-Call][96], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
 ## Supported clients
@@ -941,7 +946,7 @@ Administrators can disable an AI client or remove specific scopes from it for th
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
 <pre><code>{
@@ -964,7 +969,7 @@ Use a PAT for an individual user or a SAT for a [service account][13]. For scope
 
 ### API and application keys
 
-Alternatively, provide a Datadog [API key and application key][1] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+Alternatively, provide a Datadog [API key and application key][1] as `dd-api-key` and `dd-application-key` HTTP headers:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -975,8 +980,8 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
       "type": "http",
       "url": "{{< region-param key="mcp_server_endpoint" >}}",
       "headers": {
-          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
+          "dd-api-key": "&lt;YOUR_API_KEY&gt;",
+          "dd-application-key": "&lt;YOUR_APPLICATION_KEY&gt;"
       }
     }
   }
@@ -1120,3 +1125,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [93]: /account_management/rbac/mcp_access/#restrict-actions-for-a-specific-ai-client
 [94]: https://pi.dev/
 [95]: https://github.com/datadog-labs/pi-plugin
+[96]: /incident_response/on-call/

@@ -1833,7 +1833,7 @@
     "summary": "Get all deployment gates"
   },
   "CreateDeploymentGate": {
-    "description": "Endpoint to create a deployment gate.",
+    "description": "Create a deployment gate for a specific environment or for all environments using `*`.\nA gate for all environments and a gate for a specific environment cannot coexist for the\nsame organization, service, and identifier. A conflicting creation returns 400 Bad Request.",
     "summary": "Create deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
@@ -3183,6 +3183,30 @@
     "summary": "Update an incident timestamp override",
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
+  },
+  "ListAnthropicUsageAndCostsIntegrationAccounts": {
+    "description": "List Anthropic Usage and Costs integration accounts.",
+    "summary": "List Anthropic Usage and Costs accounts"
+  },
+  "CreateAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Create an Anthropic Usage and Costs integration account.",
+    "summary": "Create an Anthropic Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Anthropic Usage and Costs integration account."
+  },
+  "DeleteAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Delete an Anthropic Usage and Costs integration account.",
+    "summary": "Delete an Anthropic Usage and Costs account"
+  },
+  "GetAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Get an Anthropic Usage and Costs integration account.",
+    "summary": "Get an Anthropic Usage and Costs account"
+  },
+  "UpdateAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Update an Anthropic Usage and Costs integration account. Only the fields provided are changed.",
+    "summary": "Update an Anthropic Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Anthropic Usage and Costs integration account."
   },
   "ListChatGPTEnterpriseIntegrationAccounts": {
     "description": "List ChatGPT Enterprise integration accounts.",
@@ -7581,6 +7605,14 @@
     "description": "Returns all standard patterns.",
     "summary": "List standard patterns"
   },
+  "ListTargetScanningGroups": {
+    "description": "List the Agent Observability scanning groups, with their rules included.\nThe list always includes the default Agent Observability scanning group.\nScanning groups of logs, RUM, events, and APM are listed by the List Scanning Groups endpoint.",
+    "summary": "List Agent Observability Scanning Groups"
+  },
+  "GetScanningGroup": {
+    "description": "Get an Agent Observability scanning group, with its rules included.\nScanning groups of logs, RUM, events, and APM are reported as not found.",
+    "summary": "Get Agent Observability Scanning Group"
+  },
   "SubmitMetrics": {
     "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
     "summary": "Submit metrics",
@@ -8239,7 +8271,7 @@
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
   "ListSyntheticsBrowserTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "description": "Get the latest result summaries for a given Synthetic browser test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a browser test's latest results"
   },
   "GetSyntheticsBrowserTestResult": {
@@ -8300,7 +8332,7 @@
     "summary": "Get parent suites for a test"
   },
   "ListSyntheticsTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic test.",
+    "description": "Get the latest result summaries for a given Synthetic test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a test's latest results"
   },
   "GetSyntheticsTestResult": {
