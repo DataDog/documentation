@@ -71,7 +71,7 @@ A remediation groups the open findings that a single change resolves:
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
 
-Findings with no available fix also appear in the Remediation Inbox, but they are not actionable: no remediation is available, so there is no fix to generate or apply.
+Every remediation has an available fix, but not always one that AI can generate.
 
 ## How remediations are prioritized
 
