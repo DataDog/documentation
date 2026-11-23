@@ -342,6 +342,32 @@ For process-wide control, use the existing environment variables:
 - `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposures_enabled` to `false`, it keeps recording exposures, and `Datadog::OpenFeature::ExposureHook` still receives them.
 - `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
+### Record the exposure at a later evaluation
+
+Some applications assign a variant before the subject experiences it. For example, an application chooses which version of a notification to send, and the subject sees that version when they open the notification. To record the exposure at the later evaluation only, register a second provider under its own OpenFeature domain with both options set to `false`. Keep the default provider for all other evaluations:
+
+```ruby
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+OpenFeature::SDK.set_provider_and_wait(
+  Datadog::OpenFeature::Provider.new(evaluation_telemetry_enabled: false, exposures_enabled: false),
+  domain: "no-exposures"
+)
+
+client = OpenFeature::SDK.build_client
+no_exposures_client = OpenFeature::SDK.build_client(domain: "no-exposures")
+user = OpenFeature::SDK::EvaluationContext.new(targeting_key: "user-123")
+
+# When sending the notification: the variant, with no exposure or evaluation telemetry.
+planned = no_exposures_client.fetch_string_value(flag_key: "digest-subject-line", default_value: "control", evaluation_context: user)
+
+# When the subject opens the notification: the same variant, and the exposure.
+seen = client.fetch_string_value(flag_key: "digest-subject-line", default_value: "control", evaluation_context: user)
+```
+
+- Both providers use the same flag configuration, so for the same flag, targeting key, and attributes, they return the same variant.
+- Evaluations through the `no-exposures` client don't mark the subject as exposed, so the later evaluation through the default client still records the exposure.
+- Experiment results count only recorded exposures. If a subject experiences a variant without an evaluation through the default provider, the subject is missing from the results. Use the `no-exposures` client only for evaluations that come before an evaluation that records the exposure.
+
 ## Evaluation events and privacy
 
 Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][13] for the data collected, opt-out scope, and delivery requirements.

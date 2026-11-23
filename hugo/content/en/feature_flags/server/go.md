@@ -390,6 +390,48 @@ For process-wide control, use the existing environment variables:
 - `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `ExposuresEnabled` to `false`, it keeps recording exposures, and hooks created with `ddopenfeature.NewExposureHook` still receive them.
 - `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
+### Record the exposure at a later evaluation
+
+Some applications assign a variant before the subject experiences it. For example, an application chooses which version of a notification to send, and the subject sees that version when they open the notification. To record the exposure at the later evaluation only, register a second provider under its own OpenFeature domain with both options set to `false`. Keep the default provider for all other evaluations:
+
+```go
+noExposures := false
+
+provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
+if err != nil {
+    log.Fatal(err)
+}
+noExposuresProvider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{
+    EvaluationTelemetryEnabled: &noExposures,
+    ExposuresEnabled:           &noExposures,
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+if err := openfeature.SetProviderAndWait(provider); err != nil {
+    log.Fatal(err)
+}
+if err := openfeature.SetNamedProviderAndWait("no-exposures", noExposuresProvider); err != nil {
+    log.Fatal(err)
+}
+
+client := openfeature.NewClient("my-service")
+noExposuresClient := openfeature.NewClient("no-exposures")
+evalCtx := openfeature.NewEvaluationContext("user-123", nil)
+
+// When sending the notification: the variant, with no exposure or evaluation telemetry.
+planned, err := noExposuresClient.StringValue(ctx, "digest-subject-line", "control", evalCtx)
+
+// When the subject opens the notification: the same variant, and the exposure.
+seen, err := client.StringValue(ctx, "digest-subject-line", "control", evalCtx)
+```
+
+- Both providers use the same flag configuration, so for the same flag, targeting key, and attributes, they return the same variant.
+- Evaluations through the `no-exposures` client don't mark the subject as exposed, so the later evaluation through the default client still records the exposure.
+- Experiment results count only recorded exposures. If a subject experiences a variant without an evaluation through the default provider, the subject is missing from the results. Use the `no-exposures` client only for evaluations that come before an evaluation that records the exposure.
+- With Remote Configuration, both providers receive the same configuration updates. With agentless delivery, each provider polls on its own schedule, so the two providers can briefly hold different configurations right after a flag change.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.

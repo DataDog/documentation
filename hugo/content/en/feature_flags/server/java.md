@@ -470,6 +470,40 @@ For process-wide control, use the existing environment variables:
 - `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposuresEnabled` to `false`, it keeps recording exposures, and `ExposureHook` still receives them.
 - `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
 
+### Record the exposure at a later evaluation
+
+Some applications assign a variant before the subject experiences it. For example, an application chooses which version of a notification to send, and the subject sees that version when they open the notification. To record the exposure at the later evaluation only, register a second provider under its own OpenFeature domain with both options set to `false`. Keep the default provider for all other evaluations:
+
+```java
+import com.datadog.openfeature.Provider;
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+api.setProviderAndWait(new Provider());
+api.setProviderAndWait("no-exposures", new Provider(new Provider.Options()
+    .evaluationTelemetryEnabled(false)
+    .exposuresEnabled(false)));
+
+Client client = api.getClient();
+Client noExposuresClient = api.getClient("no-exposures");
+
+MutableContext user = new MutableContext("user-123");
+
+// When sending the notification: the variant, with no exposure or evaluation telemetry.
+String planned = noExposuresClient.getStringValue("digest-subject-line", "control", user);
+
+// When the subject opens the notification: the same variant, and the exposure.
+String seen = client.getStringValue("digest-subject-line", "control", user);
+```
+
+- Both providers use the same flag configuration, so for the same flag, targeting key, and attributes, they return the same variant.
+- Evaluations through the `no-exposures` client don't mark the subject as exposed, so the later evaluation through the default client still records the exposure.
+- Experiment results count only recorded exposures. If a subject experiences a variant without an evaluation through the default provider, the subject is missing from the results. Use the `no-exposures` client only for evaluations that come before an evaluation that records the exposure.
+- Both providers share one flag configuration in the process. The second provider doesn't download the configuration again.
+- If you set `experimentationOptOutMode`, set the same value on both providers.
+
 ## Best practices
 
 ### Initialize early
