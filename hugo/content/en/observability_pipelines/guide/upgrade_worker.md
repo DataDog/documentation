@@ -40,8 +40,12 @@ Worker version 2.26.1 gives you access to the following:
 - Destinations now include the retry attempt number in their retry logs. Continuous retry
   failures are logged as errors every 10 attempts.
 - The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
-  triggered the shutdown, such as `source_aborted` or `reload_failed_to_restore`. The value is
-  `none` for a normal shutdown.
+  triggered the shutdown. The value is `none` for a expected shutdown, such as after a shutdown signal or after all sources finish. Otherwise, the value is one of:
+    - `source_aborted`
+    - `transform_aborted`
+    - `sink_aborted`
+    - `api_failed`
+    - `reload_failed_to_restore`
 
 #### Fixes
 
@@ -63,11 +67,9 @@ Worker version 2.26.1 gives you access to the following:
       such as `pipelines.stopped_total` are sent to Datadog.
     - Keeps pipelines running when the configuration file in its data directory changes, such as
       when Kubernetes reapplies volume ownership after a node restart.
-    - Completes configuration updates that reuse a component ID for a different component type and
-      restores components removed by a failed update.
-    - Reports the source's error when it fails.
-- The Splunk HEC source now completes TLS handshakes for clients that resume a previous TLS session
-  when certificate verification is enabled.
+    - Reports the failed source's error when the Worker stops all sources because one of them failed or panicked.
+- Fixed the Worker panic `Replacing unknown sink from fanout` on configuration reload when a component ID is reused by a different kind of component, or when a failed reload restores a removed component.
+- TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously these clients had their connection rejected with a `session id context uninitialized` error.
 - The Custom Processor now:
     - Includes the message passed to `abort` in the error details when it drops an event.
     - Returns an error for field paths with array indexes outside the `isize` range.
