@@ -697,16 +697,16 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Bits Guardrails
 
-Tools for [Bits Guardrails][112], the Bits AI SRE configuration that decides whether an agent may take a remediation action on its own (allow), must get approval from a human first (ask), or may not take it at all (deny). A guardrail covers a set of actions and can be limited to targets with matching resource tags. When several guardrails match an action, the strictest one applies.
+Tools for [Bits Guardrails][112]. Guardrails define which remediation actions Bits can take, where those actions apply, and who needs to approve them. Each guardrail covers a set of actions, is scoped to resources by tags, and sets whether Bits can take the action on its own (allow), needs approval first (ask), or can recommend the action but not take it (deny). When several guardrails match an action, the strictest one applies.
 
-Write tools change how much oversight Bits AI SRE has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
+Write tools change how much oversight Bits has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
 
 ### `list_bits_guardrails`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Read`*\
 Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
 
-- Which remediation actions can Bits AI SRE take without approval?
+- Which remediation actions can Bits take without approval?
 - List the guardrails that cover Kubernetes pod restarts.
 
 ### `get_bits_guardrail`
@@ -720,7 +720,7 @@ Retrieves a guardrail by ID. Beyond what `list_bits_guardrails` returns, the res
 ### `list_bits_guardrail_actions`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Read`*\
-Lists the Bits AI SRE remediation actions that a guardrail can cover, with each action's ID and the infrastructure it runs on.
+Lists the Bits remediation actions that a guardrail can cover, with each action's ID and the infrastructure it runs on.
 
 - What remediation actions can a guardrail cover?
 - List the Kubernetes actions that guardrails can control.
@@ -738,8 +738,8 @@ Searches your organization's teams, roles, and active users that can approve act
 *Permissions Required: `Guardrails Write`*\
 Creates a guardrail with a trust level, the actions it covers, the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new allow guardrail has no effect where an ask or deny guardrail already matches.
 
-- Require approval from the SRE team before Bits AI SRE restarts pods tagged `env:prod`.
-- Prevent Bits AI SRE from scaling down deployments tagged `team:payments`.
+- Require approval from the SRE team before Bits restarts pods tagged `env:prod`.
+- Prevent Bits from scaling down deployments tagged `team:payments`.
 
 ### `update_bits_guardrail`
 *Toolset: **bits-guardrails***\
