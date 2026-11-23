@@ -48,12 +48,14 @@ The following tags are automatically added to logs by the Datadog Agent:
 
 ## Filter tags before ingestion
 
-Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can filter selected tags before the Agent sends logs to Datadog, which can help reduce the size of log payloads. Log tag filtering is available in Agent 7.86.0 and later.
+Log tag filtering requires Agent 7.86.0 or later. Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can filter selected tags before the Agent sends logs to Datadog, which can help reduce the size of log payloads.
 
 Choose the filter scope based on where you want the rule to apply:
 
 * Use a global filter to apply the same rules to every supported log source processed by the Agent.
 * Use a per-source filter to target one log source or create an exception to a global filter.
+
+Tag filters apply to logs collected by the Agent's logs pipeline. They don't apply to logs from serverless-init, OTLP ingestion, or the Datadog Distribution of OpenTelemetry (DDOT) Collector.
 
 Before filtering a tag, review whether it supports pipelines, indexes, archives, monitors, dashboards, or other workflows.
 
@@ -118,7 +120,7 @@ datadog:
 
 ### Per-source filters
 
-Add `tag_filters` to a log source in its integration configuration to limit the filter to that source. The following example removes the `dirname` tag only from logs collected from `/var/log/my-app/*.log`:
+Add `tag_filters` to a log source in its integration configuration file, such as `conf.d/<INTEGRATION_NAME>.d/conf.yaml`, to limit the filter to that source. The following example removes the `dirname` tag only from logs collected from `/var/log/my-app/*.log`:
 
 ```yaml
 logs:
@@ -137,6 +139,15 @@ Patterns use `key:value` syntax. Keys must match exactly, values can contain `*`
 
 **Note**: The Agent sends `source`, `service`, and `host` separately from the tag list. Filtering these tags does not remove their values from the log.
 
+### Apply and verify filters
+
+After you change tag filters, [restart the Agent][1]. To confirm the filters are applied:
+
+* Run `datadog-agent status -v`. The **Logs Agent** section lists the effective `Tag Filters` for each source that has filters applied.
+* Run `datadog-agent stream-logs`. The streamed logs show tags after filtering, matching what the Agent sends to Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/configuration/agent-commands/#restart-the-agent
