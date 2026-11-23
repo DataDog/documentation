@@ -1,64 +1,33 @@
 ---
-disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
-  tag: Blog
-  text: Datadog presenta los servicios Log Management y APM de Datadog que cumplen
-    con el PCI
-title: Cumplimiento del estándar PCI DSS
+- link: https://trust.datadoghq.com/
+  tag: Datadog Trust Center
+  text: Conozca la postura de seguridad de Datadog y revise la documentación de seguridad
+title: Compliance de PCI DSS
 ---
+## Descripción general {#overview}
 
-{{% site-region region="us3,us5,eu,ap1,gov" %}}
-<div class="alert alert-danger">
-La conformidad con el PCI DSS para APM y Log Management sólo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
-</div>
-{{% /site-region %}}
+El Estándar de Seguridad de Datos de la Industria de Tarjetas de Pago (PCI DSS) tiene requisitos rigurosos de monitoreo y seguridad de datos para todos los comerciantes, proveedores de servicios e instituciones financieras. Para cumplir con estos requisitos, las organizaciones a menudo separan los datos regulados por PCI (como los datos del titular de la tarjeta) y los datos no regulados en diferentes aplicaciones para fines de monitoreo y Compliance.
 
-{{% site-region region="us" %}}
-<div class="alert alert-danger">
-El cumplimiento con el PCI DSS para APM y Log Management sólo está disponible para organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
-</div>
+**Las herramientas y políticas de Datadog cumplen con PCI v4.0.1**. Para comprender todo el contexto del entorno de Datadog y cómo se relaciona con las responsabilidades del cliente bajo los controles PCI-DSS relevantes, descargue la Customer Responsibility Matrix y la Attestation of Compliance (AoC) desde el [Datadog Trust Center][1].
 
-## Información general
+La Attestation of Compliance (AoC) de Datadog refleja las herramientas y políticas que tenemos implementadas para mantener un entorno Connected PCI como proveedor de servicios. La plataforma Datadog admite conexiones a entornos de datos de titulares de tarjetas (CDE) como un entorno Connected PCI, pero no sirve como un CDE en sí mismo para almacenar, procesar o transmitir datos de titulares de tarjetas (CHD).
+Es su responsabilidad evitar que cualquier CHD ingrese a la plataforma Datadog. 
 
-El Estándar de Seguridad de Datos de la Industria de Tarjetas de Pago (PCI DSS) impone rigurosos requisitos de seguridad de datos y monitorización a todos los comerciantes, proveedores de servicios e instituciones financieras. Para cumplir estos requisitos, las organizaciones han tenido que separar en diferentes aplicaciones los datos regulados por el PCI, de los no regulados, para su monitorización.
+## Herramientas recomendadas para el Compliance con PCI {#recommended-tools-for-pci-compliance}
 
-Datadog ofrece Log Management and Application Performance Monitoring (APM) conformes con el PCI, en el [sitio US1][1], para que puedas recopilar en un único lugar todos tus logs, estén o no regulados por el PCI. Consulta [Configurar una organización de Datadog que cumpla el PCI](#set-up-a-pci-compliant-datadog-organization) para saber cómo empezar.
+Para ayudar a mantener el Compliance con PCI, **Datadog recomienda encarecidamente** el uso de las siguientes herramientas y el siguiente proceso:
+- [**Sensitive Data Scanner**][2]: descubra, clasifique y oculte datos confidenciales de titulares de tarjetas
+- [**Audit Trail**][3]: busque y analice eventos de auditoría detallados por hasta 90 días para la retención y el archivo a largo plazo
+- [**File Integrity Monitoring**][4]: supervise los cambios en archivos y directorios clave
+- [**Cloud Security**][5]: realice un seguimiento de la conformidad con los requisitos de los estándares de la industria y otros controles
 
-## Establecer una organización de Datadog que cumpla el estándar PCI
-
-{{< tabs >}}
-
-{{% tab "Log Management" %}}
-
-<div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> debe estar activado y permanecer activado para cumplir el estándar PCI DSS.
-</div>
-
-Para crear una organización de Datadog que cumpla el estándar PCI, sigue estos pasos:
-
-{{% pci-logs %}}
-
-{{% /tab %}}
-
-{{% tab "APM" %}}
-
-<div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> debe estar activado y permanecer activado para cumplir el estándar PCI DSS.
-</div>
-
-Para crear una organización de Datadog que cumpla el estándar PCI, sigue estos pasos:
-
-{{% pci-apm %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-[1]: /es/getting_started/site/
-
-{{% /site-region %}}
-
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://trust.datadoghq.com/?itemUid=53e1508c-665e-45a8-9ce0-03fdf9ae1efb&source=click
+[2]: /es/security/sensitive_data_scanner/
+[3]: /es/account_management/audit_trail/
+[4]: /es/security/workload_protection/
+[5]: /es/security/cloud_security_management/#track-your-organizations-health

@@ -1,0 +1,22 @@
+entries:
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateSCIMGroup
+      - CreateSCIMUser
+      - DeleteSCIMGroup
+      - DeleteSCIMUser
+      - GetSCIMGroup
+      - GetSCIMResourceType
+      - GetSCIMSchema
+      - GetSCIMUser
+      - ListSCIMGroups
+      - ListSCIMResourceTypes
+      - ListSCIMSchemas
+      - ListSCIMUsers
+      - PatchSCIMGroup
+      - PatchSCIMUser
+      - UpdateSCIMGroup
+      - UpdateSCIMUser
+    title: Document rate-limit headers on the shared 429 responses

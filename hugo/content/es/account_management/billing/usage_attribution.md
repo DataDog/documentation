@@ -25,7 +25,7 @@ Los administradores o usuarios con el permiso de lectura de uso pueden acceder a
 
 Esta función no admite el uso de productos que no se pueden etiquetar durante la instrumentación. Por ejemplo, Incident Management Users, Parallel Testing Slots y Audit Trail.
 
-**Nota**: Para desglosar la facturación de CI Pipeline y Test Optimization por equipo u otras etiquetas organizacionales, consulte [Enriquecimiento de facturación][5] en la documentación de facturación de CI Visibility.
+**Nota**: Para desglosar la facturación de CI Pipeline y Test Optimization por equipo u otras etiquetas organizacionales, consulte [Enriquecimiento de facturación][5] en la documentación de facturación de CI/CD Optimization.
 
 ## Primeros pasos {#getting-started}
 

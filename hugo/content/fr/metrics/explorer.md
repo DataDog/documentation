@@ -87,7 +87,7 @@ Vous pouvez éventuellement ajouter des fonctions à votre requête en utilisant
 
 ### Graphique scindé {#split-graph}
 
-Utilisez le bouton {{< ui >}}Split Graph{{< /ui >}} pour afficher les données fractionnées en graphiques individuels par valeurs pour des tags tels que la région, le service ou l'environnement.
+Utilisez le bouton {{< ui >}}Split Graph{{< /ui >}} pour sélectionner un ou plusieurs tags, tels que la région, le service ou l'environnement, et afficher un graphique par combinaison de valeurs de tags. L'enregistrement dans un dashboard crée un [widget de graphique scindé][12] pour un tag ou un groupe de graphiques pour plusieurs tags, avec tous les tags utilisés pour scinder les graphiques dans le titre du groupe.
 
 ### Exporter {#export}
 
@@ -120,3 +120,4 @@ Pour plus d'informations, consultez la documentation sur les [Quick Graphs][7].
 [9]: /fr/monitors/
 [10]: /fr/dashboards/
 [11]: /fr/account_management/rbac/permissions/#access-management
+[12]: /fr/dashboards/widgets/split_graph/
