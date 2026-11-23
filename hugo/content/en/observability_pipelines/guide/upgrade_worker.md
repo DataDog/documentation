@@ -27,46 +27,45 @@ Worker version 2.26.1 gives you access to the following:
 
 #### Security
 
-- Pipeline load errors that the Worker reports to Datadog now go through the same sensitive-value
-  redaction as shutdown errors. Secrets referenced by pipeline settings don't appear in the
-  deployment error shown in the Observability Pipelines UI.
+- The Worker now redacts secrets from the pipeline load errors it reports to Datadog. Secrets
+  referenced in pipeline settings don't appear in deployment errors in the Observability Pipelines
+  UI.
 
 #### New features
 
-- The Custom Processor now includes `log10` and `pow` functions. For example, `10 * log10!(mw)`
-  converts milliwatts to dBm, and `pow!(10, dbm / 10)` converts back.
+- The Custom Processor now includes `log10` and `pow` functions. For example, `10 * log10!(<mw>)` converts milliwatts to dBm, and `pow!(10, <dbm> / 10)` converts dBm to milliwatts.
 
 #### Enhancements
 
-- Destinations now include the retry attempt number in their retry logs. Sustained retryable
+- Destinations now include the retry attempt number in their retry logs. Continuous retry
   failures are logged as errors every 10 attempts.
 - The Worker's `pipelines.stopped_total` metric now includes a `reason` tag that identifies what
-  triggered the shutdown, for example `source_aborted` or `reload_failed_to_restore`. The value is
+  triggered the shutdown, such as `source_aborted` or `reload_failed_to_restore`. The value is
   `none` for a normal shutdown.
 
 #### Fixes
 
 - Live Capture now:
-    - Limits each publish request to about 4 MB of captured events, instead of 25 events.
-    - Keeps capturing when the intake rejects a batch, dropping the rejected batch with a warning.
-      The capture fails only if no batch could be published.
+    - Limits each publish request to approximately 4 MB of captured events.
+    - Keeps capturing when the intake rejects a batch, and drops the rejected batch with a warning.
+      The capture fails only if no batches are published.
     - Includes the HTTP status reason and the intake's response in publish errors.
-- The Datadog BYOC Logs destination now truncates log events that are too large to fit in a single
-  request, instead of dropping them:
-    - Shortens `message` so the whole log fits the payload limit
-      (`DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES`, 5 MB by default), and appends
-      `...TRUNCATED...`.
-    - Tags truncated logs `truncated:single_line` and counts them in the
+- The Datadog BYOC Logs destination now handles log events that are too large for a single
+  request in the following ways:
+    - Shortens the `message` field so the log fits within the payload limit, and appends
+      `...TRUNCATED...`. The default limit is 5 MB. To change it, set
+      `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES`.
+    - Truncated logs are tagged with `truncated:single_line` and included in the
       `datadog_logs_events_truncated_total` metric.
-    - Still drops logs with no string `message` field, or whose other fields alone exceed the limit.
+    - Drops logs that have no string `message` field or whose other fields alone exceed the limit.
 - The Worker now:
     - Keeps its internal telemetry running for 5 seconds after pipelines stop, so shutdown metrics
-      such as `pipelines.stopped_total` reach Datadog.
-    - Keeps pipelines running when the configuration file in the Worker's data directory changes,
-      for example when Kubernetes re-applies volume ownership after a node restart.
-    - Completes configuration updates that reuse a component ID for a different component type, and
+      such as `pipelines.stopped_total` are sent to Datadog.
+    - Keeps pipelines running when the configuration file in its data directory changes, such as
+      when Kubernetes reapplies volume ownership after a node restart.
+    - Completes configuration updates that reuse a component ID for a different component type and
       restores components removed by a failed update.
-    - Reports the failing source's error when it shuts down because a source failed.
+    - Reports the source's error when it fails.
 - The Splunk HEC source now completes TLS handshakes for clients that resume a previous TLS session
   when certificate verification is enabled.
 - The Custom Processor now:
