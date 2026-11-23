@@ -207,7 +207,7 @@ In Connection View, the details pane shows the following for the connection betw
 - The connection's metrics from CNM and Network Path, with charts over the selected time frame. The charts use each product's own data, so their values can differ from the values in the map's hover summaries.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
-{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view-wide.png" alt="The details pane to the right of the map in Connection View, with the source and destination statuses, a View connection in CNM button, and a chart" style="width:80%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view-wide.png" alt="The details pane to the right of the map in Connection View, with source and destination statuses and a View connection in CNM button" style="width:80%;" >}}
 
 ### Change what the map shows
 
