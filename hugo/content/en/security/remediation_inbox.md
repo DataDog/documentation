@@ -215,6 +215,8 @@ Datadog updates the status of remediation cases automatically:
 | Code owners | Owners and teams on each remediation. | Add a `CODEOWNERS` file to your repositories and set up [Source Code Integration][10]. |
 | Fix verification from your coding agent | Check fixes before you commit. | Set up the [Code Security MCP Server][7]. |
 
+**Note**: Fix with Bits, pull request status, and linked pull requests support only GitHub repositories.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
