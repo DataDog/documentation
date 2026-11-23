@@ -8,3 +8,12 @@ entries:
       - GetAllCaseTypes
       - UpdateCaseType
     title: Rename Case Management API documentation to Work Management
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateCaseType
+      - DeleteCaseType
+      - GetAllCaseTypes
+      - UpdateCaseType
+    title: Document rate-limit headers on the shared 429 responses

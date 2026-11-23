@@ -1,5 +1,5 @@
 ---
-description: Synthetic テストで作成された推定使用量メトリクスについて説明します。
+description: Synthetic テストから生成される推定使用量メトリクスについて説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: ブログ
@@ -11,36 +11,38 @@ further_reading:
   tag: ドキュメント
   text: マルチステップ API テストを作成する
 - link: /synthetics/browser_tests
-  tag: Documentation
+  tag: ドキュメント
   text: ブラウザテストを作成する
 title: 推定使用量メトリクスを使用する
 ---
+## 概要 {#overview}
 
-## 概要 
+Synthetic テストには、使用量を追跡するために使用できる[推定使用量メトリクス][1]が用意されています。これらのメトリクスの主な用途は以下のとおりです。
 
-Synthetic テストには[推定使用量メトリクス][1]が付属しており、使用量を追跡できます。このメトリクスにより、特に次のことが可能になります。
+* 使用量の経時的変化を把握します。
+* Synthetic Monitoring の使用量への影響度が最も高いチーム、アプリケーション、サービスを可視化します。
+* 請求に影響する可能性がある予期しない使用量の急増時に、アラートを送信します。
 
-* Understand how your usage evolves over time.
-* Synthetics の使用量に最も寄与しているチーム、アプリケーション、またはサービスを視覚化します。
-* 請求に影響を与える可能性のある予期しない使用量の急増について警告します。
+Synthetic Monitoring の使用量を可視化したり、使用量についてアラートを送信したりするには、次のクエリを使用します。
 
-Synthetics の使用量を視覚化または警告するには、次のクエリを使用します。
+* [シングル API テスト][2]および[マルチステップ API テスト][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
-* [単一][2]および[マルチステップ API テスト][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
+* [ブラウザテスト][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`
 
-* [ブラウザテスト][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
+  **注:** ブラウザの {{< tooltip glossary="テスト実行">}}の料金は、ステップ数に応じて決まります。詳細については、[料金に関するドキュメント][7]を参照してください。
 
-より高いレベルの調整を行うには、これらのメトリクスを、`team` や `application など、テストに関連付けられたタグでスコープまたはグループ化します。
+さらに細かく絞り込むには、`team` や `application` など、テストに関連付けられたタグを使って、これらのメトリクスのスコープを設定するか、グループ化します。
 
-これらのメトリクスを静的なしきい値に対してグラフ化して監視したり、[異常検出][5]や[予測][6]などの機械学習ベースのアルゴリズムを使用して、予想される使用量の増加についてアラートを受け取らないようにすることができます。
+これらのメトリクスを静的なしきい値を基準にグラフ化およびモニターできるほか、[異常検知][5]や[予測][6]といった機械学習ベースのアルゴリズムを使用して、使用量の増大が予想されるものである場合にアラートが送信されないようにすることができます。
 
-## その他の参考資料
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/billing/usage_metrics/#types-of-usage
+[1]: /ja/account_management/billing/usage_metrics/estimated_usage_metrics/#types-of-usage
 [2]: /ja/synthetics/api_tests
 [3]: /ja/synthetics/multistep
 [4]: /ja/synthetics/browser_tests
 [5]: /ja/monitors/types/anomaly/
 [6]: /ja/monitors/types/forecasts
+[7]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#synthetic-monitoring-api--browser-what-counts-as-a-browser-test-run

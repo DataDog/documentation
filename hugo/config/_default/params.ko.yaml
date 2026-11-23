@@ -10,6 +10,5 @@ disclaimer: "이 페이지는 아직 영어로 제공되지 않습니다. 현재
 #   custom_classes: 'dash-announcement-banner'
 #   external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 translate_status_banner: "이 번역은 최신 버전이 아닙니다. 최신 영어 버전을 보려면 여기를 클릭"
-site_support_banner: "이 제품은 선택한 <a href=\"/getting_started/site\">Datadog 사이트</a>에서는 지원되지 않습니다."
 us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
 us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."

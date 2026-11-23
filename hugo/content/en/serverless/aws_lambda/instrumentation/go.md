@@ -24,6 +24,8 @@ aliases:
 
 **Note**: Datadog recommends using v2 of the Go tracer to instrument AWS Lambda functions. See the [migration instructions](https://github.com/DataDog/dd-trace-go/tree/main/contrib/aws/datadog-lambda-go) for guidance on upgrading from v1 to v2.
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.

@@ -22,10 +22,6 @@ algolia:
   tags: ['dashboard reporter', 'agentic reporting', 'scheduled report', 'product analytics agent']
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/product-analytics-dashboard-reporter-agent/" btn_hidden="false" header="Join the Preview!">}}
-Dashboard Reporter Agent is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 The Dashboard Reporter Agent monitors the Product Analytics dashboards you choose and sends your team a scheduled report in Slack, Microsoft Teams, or email. Each report summarizes what changed, what needs attention, and what to do next, so you don't have to open each dashboard to check. As you ship more features, one agent can monitor many dashboards, including dashboards for past launches that no longer get regular attention.
