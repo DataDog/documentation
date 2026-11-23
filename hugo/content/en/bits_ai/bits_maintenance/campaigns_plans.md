@@ -46,7 +46,7 @@ To create a campaign in Datadog:
 
 ## Plans
 
-A plan describes one installation of a software project (one stage of a campaign). Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
+A plan describes the upgrade of one installation of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
 
 You can view plan steps in an interactive workflow diagram:
 <!-- TODO: plan screenshot -->
@@ -57,7 +57,7 @@ You can add custom steps to a plan that is awaiting approval.
 
 A custom step can be:
 - Human: requires a person to perform an action before the plan continues.
-- Workflow: runs a [Workflow Automation][2], and waits for it to complete before the plan continues.
+- Workflow: executes a [Datadog workflow][2], and waits for it to complete before the plan continues.
 
 When you create a custom step, Datadog saves it. You can then reuse it later, in other plans.
 
