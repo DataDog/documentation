@@ -2014,6 +2014,22 @@ When audit logs aren't available, the tool ranks clients by a client-side reques
 - Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
 - Rank the top 5 clients by API server request volume in cluster `prod` during the incident window.
 
+### `kubernetes-ops-center-api-server-metrics`
+*Toolset: **kubernetes-ops-center***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
+Reports Kubernetes API server health metrics for a cluster in a single response. Use this tool to determine whether the API server is returning errors, rate limiting clients, or shedding load through API Priority and Fairness. The tool returns:
+- The rate of requests that the API server answered with a `5xx` status code
+- The rate of rate-limited (`429`) requests, by verb and resource
+- The maximum number of in-flight requests, by request kind
+- The rate of requests rejected by flow control, by priority level and reason
+- The maximum number of requests waiting in flow control queues, by priority level
+
+The query window defaults to the last 10 minutes and can span up to 4 hours. The tool relies on metrics from the [Kubernetes API server metrics integration][107].
+
+- Is the API server in cluster `prod` healthy?
+- Which verbs and resources are being rate limited by the API server in cluster `staging`?
+- Were requests rejected by API Priority and Fairness in cluster `prod` during the incident window?
+
 ## Metrics Governance
 
 Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
@@ -4046,7 +4062,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [104]: /cli/
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
-[107]: /bits_ai/bits_detection/
+[107]: /integrations/kube_apiserver_metrics/
+[108]: /bits_ai/bits_detection/
 
 ## Further reading
 

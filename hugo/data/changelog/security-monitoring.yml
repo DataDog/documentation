@@ -408,3 +408,12 @@ entries:
     operations:
       - SearchRemediationGroups
     title: Add the search remediation groups endpoint as unstable
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42092
+    operations:
+      - EditSecurityMonitoringSignal
+      - EditSecurityMonitoringSignalAssignee
+      - EditSecurityMonitoringSignalIncidents
+      - EditSecurityMonitoringSignalState
+    title: Add hasCase and cases to security signal triage update response

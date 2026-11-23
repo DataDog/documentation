@@ -379,6 +379,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "notebooks": {
+    "name": "Notebooks",
+    "description": "Create, read, and edit Datadog notebooks using Notebooks Flavored Markdown, which builds on GitHub\nFlavored Markdown with encodings for notebook content. Full-document Markdown includes the title as\na leading H1; JSON attributes.title represents the same stored title.\n\nWork with a whole notebook or individual sections, tasks, and widgets. Apply scoped content\noperations and update task state and widget definitions by ID.\nSee the [Notebooks API guide](https://docs.datadoghq.com/notebooks/guide/notebooks_api/) and\n[Markdown reference](https://docs.datadoghq.com/notebooks/notebooks_flavored_markdown/) for examples."
+  },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
     "description": "Configure OAuth2 clients for Datadog.\nSupports RFC 7591 Dynamic Client Registration and management of OAuth2 client scopes restrictions."
