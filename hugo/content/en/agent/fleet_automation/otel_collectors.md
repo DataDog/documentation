@@ -36,13 +36,11 @@ Remote flare collection from the Agent's Collector is not supported on US1-FED o
 
 For every kind of Collector, you can view its version, distribution, and configuration, and see how telemetry data flows through its pipelines. For the Agent's Collector, you can [configure](#configure-the-agents-collector), [send flares](#send-a-remote-flare-from-the-agents-collector), and [upgrade](#upgrade-the-agents-collector) it from Fleet Automation. These capabilities use [Remote Configuration][2], so they aren't available for the DDOT Collector or upstream Collectors.
 
-The DDOT Collector appears automatically. Upstream OpenTelemetry Collectors appear when you configure the [Datadog Extension][3] or the [OpAMP extension][15].
-
 ## Prerequisites
 
 - **Agent's Collector**: No setup is needed. The configuration view is enabled by default.
 - **DDOT Collector**: The Datadog Extension is enabled automatically. Don't configure it manually.
-- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] (recommended) or the [OpAMP extension][15] to your Collector configuration. The OpAMP extension doesn't support the Topology view.
+- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] (recommended) or the [OpAMP extension][15] to your Collector configuration.
 
 ## Examine an OpenTelemetry Collector
 
@@ -51,10 +49,10 @@ In [Fleet View][1], filter for OTel Collectors and select a Collector to open it
 - The Collector version
 - The distribution of the Collector
 - The configuration YAML of the Collector
-- Pipeline and topology views of the Collector (the OpAMP extension doesn't support the Topology view)
+- Pipeline and topology views of the Collector
 - [Audit Trail events][6], such as configuration changes, upgrades, and flares (Agent's Collector only)
 
-To check the health of your Collectors, see [Monitor Agent and OTel Collector health][7]. Health signals aren't available for the Agent's Collector.
+To check the health of your Collectors, see [Monitor Agent and OTel Collector health][7].
 
 ## Visualize OTel pipelines
 
@@ -80,7 +78,7 @@ The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a sin
 
 ### Topology view
 
-<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. The OpAMP extension doesn't support the Topology view. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology-preview">Configure gateway topology</a>.</div>
+<div class="alert alert-info">To show gateway Collectors in the Topology view, configure the Datadog Extension on each Collector in the pipeline. See <a href="/opentelemetry/integrations/datadog_extension/#4-optional-configure-gateway-topology">Configure gateway topology</a>.</div>
 
 The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
 
@@ -107,8 +105,11 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 
 ### Configure the Agent's Collector on multiple hosts
 
-1. In Fleet Automation, open the [Configuration][10] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
-1. Click {{< ui >}}Configure OTel with YAML{{< /ui >}}.
+1. In Fleet Automation, open the [Configuration][10] tab.
+1. On the {{< ui >}}Configure OTel with YAML{{< /ui >}} card, click {{< ui >}}Configure{{< /ui >}}.
+
+   {{< img src="/agent/fleet_automation/fa-configure-otel-yaml.png" alt="Fleet Automation Configuration tab with the Configure OTel with YAML card highlighted among the agent configuration options." style="width:100%;" >}}
+
 1. Scope the configuration to the target Collectors. Filter by host information or tags to target a specific group.
 1. Update the target fields, or replace the entire YAML configuration.
 
@@ -135,7 +136,6 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 
 [1]: https://app.datadoghq.com/fleet
 [2]: /agent/guide/setup_remote_config
-[3]: /opentelemetry/integrations/datadog_extension/
 [4]: /opentelemetry/integrations/datadog_extension/#setup
 [6]: /agent/fleet_automation/fleet_view/#view-audit-trail-events
 [7]: /agent/fleet_automation/fleet_view/#monitor-agent-and-otel-collector-health

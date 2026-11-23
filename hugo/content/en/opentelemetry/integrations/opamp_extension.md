@@ -16,16 +16,15 @@ further_reading:
   text: "Open Agent Management Protocol (OpAMP) specification"
 ---
 
-**[Placeholder: Release stage of the OpAMP extension in Datadog, and a Preview label or request form if it applies.]**
+{{< callout header="false" btn_hidden="true" >}}
+The OpAMP extension is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-The [OpenTelemetry OpAMP extension][1] connects an upstream OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
+The [OpenTelemetry OpAMP extension][1] connects an upstream OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2] and acts as an alternative to the [Datadog Extension][4]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
 
-The OpAMP extension is an alternative to the [Datadog Extension][4], which Datadog recommends. The OpAMP extension doesn't support:
-
-- The [Topology view][5] in Fleet Automation
-- Remote configuration of the Collector
+The OpAMP extension doesn't support remote configuration of the Collector.
 
 The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the upstream OpenTelemetry Collector, and you can add it to [custom builds][6]. Upstream, the extension's stability level is alpha.
 
@@ -96,8 +95,6 @@ service:
 
 Send the Collector's internal metrics to Datadog to monitor Collector health and pipeline throughput. Datadog recommends pushing them directly to the OTLP metrics intake endpoint. Scraping them with the Prometheus receiver is an alternative. For both setups, see [Collector Health Metrics][8].
 
-**[Placeholder: Whether Fleet Automation needs this internal telemetry, for example for health signals or the Show traffic toggle. If it doesn't, mark this step optional.]**
-
 ## Complete OpAMP extension configuration example
 
 The following example combines the OpAMP extension with internal telemetry sent to the [Datadog OTLP metrics intake endpoint][9]:
@@ -150,7 +147,6 @@ To see which Fleet Automation features each kind of Collector supports, see [Fle
 [2]: https://opentelemetry.io/docs/specs/opamp/
 [3]: /opentelemetry/fleet_automation/
 [4]: /opentelemetry/integrations/datadog_extension/
-[5]: /opentelemetry/fleet_automation/#topology-view
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /opentelemetry/integrations/collector_health_metrics/

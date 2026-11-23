@@ -39,7 +39,7 @@ To see which Fleet Automation features each kind of Collector supports, see [Man
 - Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
 - Agent integration configuration is enabled by default in Agent version 7.49.0 or later. To enable it manually on older versions, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
 
-<div class="alert alert-info">To display the configuration and pipelines of an upstream OpenTelemetry Collector, Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> (recommended) or the <a href="/opentelemetry/integrations/opamp_extension/">OpAMP extension</a>. The OpAMP extension doesn't support the Topology view. For requirements by Collector type, see <a href="/agent/fleet_automation/otel_collectors/#prerequisites">Manage OpenTelemetry Collectors</a>.</div>
+<div class="alert alert-info">To display the configuration and pipelines of an upstream OpenTelemetry Collector, Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> (recommended) or the <a href="/opentelemetry/integrations/opamp_extension/">OpAMP extension</a>. For requirements by Collector type, see <a href="/agent/fleet_automation/otel_collectors/#prerequisites">Manage OpenTelemetry Collectors</a>.</div>
 
 ## Examine a Datadog Agent or OpenTelemetry Collector
 
@@ -58,7 +58,7 @@ Use the search bar at the top of Fleet View to find specific Agents, OTel Collec
 
 ## Monitor Agent and OTel Collector health
 
-<div class="alert alert-info">Agent and OTel Collector health signals are in Preview. They aren't available for the Agent's Collector.</div>
+<div class="alert alert-info">Agent and OTel Collector health signals are in Preview.</div>
 
 With Agent and OTel Collector health signals, you can:
 
