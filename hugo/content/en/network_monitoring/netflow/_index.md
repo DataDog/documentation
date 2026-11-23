@@ -98,7 +98,7 @@ Go to [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{
 
 To add a single mapping manually, click the down arrow next to {{< ui >}}\+ Add Enrichment{{< /ui >}} and select {{< ui >}}Single Entry{{< /ui >}}.
 
-To set the application name for flows to or from a private IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings for private IP addresses take priority over all other sources of application names. For the full order, see the [Application name assignment](#application-name-assignment) section.
+To set the application name for flows to or from an IP address, add an `application_name` tag to the mapping (for example, `application_name:client_device`). Custom IP mappings take priority over all other sources of application names. For the full order, see the [Application name assignment](#application-name-assignment) section.
 
 #### Reverse DNS private IP enrichment
 
@@ -222,7 +222,7 @@ To export App-ID data, enable {{< ui >}}PAN-OS Field Types{{< /ui >}} in the fir
 
 Datadog assigns an application name to each endpoint of a flow (the source and destination, or the initiator and responder). Each name comes from the first source in this list that has a match:
 
-1. [Custom IP enrichment](#custom-ip-enrichment) mappings for private IP addresses
+1. [Custom IP enrichment](#custom-ip-enrichment) mappings
 2. [Custom port enrichment](#custom-port-enrichment) mappings
 3. [Deep packet inspection (DPI)](#deep-packet-inspection), for the responder only (the endpoint that receives the connection, usually the server)
 4. [Reverse DNS](#reverse-dns-private-ip-enrichment) hostname
