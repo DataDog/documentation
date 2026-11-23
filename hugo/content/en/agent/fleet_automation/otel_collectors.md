@@ -110,8 +110,6 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 1. Scope the configuration to the target Collectors. Filter by host information or tags to target a specific group.
 1. Update the target fields, or replace the entire YAML configuration.
 
-   **[Placeholder: Add a screenshot of the Configure OTel with YAML step.]**
-
 1. Review the deployment plan to confirm the scoped Collectors and deployment settings, such as rollout concurrency.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment. Track its progress on the [Deployments page][11].
 
@@ -124,8 +122,6 @@ You can send a flare from the Agent's Collector after you enable Remote Configur
 ## Upgrade the Agent's Collector
 
 To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
-
-**[Placeholder: Confirm that upgrading the Agent also upgrades its Collector.]**
 
 ## Further Reading
 
