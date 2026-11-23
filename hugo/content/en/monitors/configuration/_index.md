@@ -173,7 +173,7 @@ To configure a relative threshold in **Set alert conditions**:
 2. Select a historical aggregation and a lookback window from 1 week to 6 months. The historical window must be at least as long as the monitor's evaluation window.
 3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above `1.5x` the historical average and recover at or below `1.2x` that average.
 
-The evaluation and historical aggregations can differ, including percentile and average aggregations for distribution metrics. With a `p95:` metric variable, `.rollup("percentile")` calculates the p95 across the window's distribution data, while `.rollup("avg")` averages the p95 timeseries values. See [Percentile queries][8] for examples.
+The evaluation and historical aggregations can differ, including percentile and average aggregations for distribution metrics. With a `p95:` metric variable, `.rollup("percentile")` calculates the p95 across the window's distribution data, while `.rollup("avg")` averages the p95 timeseries values. See [Percentile queries in the Relative Thresholds guide][8] for examples.
 
 Historical thresholds are recalculated daily at midnight UTC and remain constant between updates. The monitor's evaluation frequency continues to control how often Datadog compares current values to those thresholds.
 

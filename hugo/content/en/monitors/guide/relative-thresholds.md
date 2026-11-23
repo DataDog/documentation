@@ -38,7 +38,7 @@ Relative thresholds support historical windows from 1 week to 6 months.
 
 **Historical thresholds are recalculated daily at midnight UTC.** The calculated threshold remains constant between updates, while the monitor continues evaluating current metric values at its configured evaluation frequency.
 
-This provides a stable baseline that adjusts to longer-term changes without reacting immediately to every short-term fluctuation.
+Daily recalculation provides a stable baseline that adjusts to longer-term changes without reacting immediately to every short-term fluctuation.
 
 ### Grouped monitors
 
@@ -54,7 +54,7 @@ For example, a monitor grouped by `service` might have the following values:
 
 Each service is evaluated independently against its own threshold.
 
-This allows a single monitor to cover services with different normal operating characteristics without requiring separate static thresholds.
+Per-group thresholds allow a single monitor to cover services with different normal operating characteristics without requiring separate static thresholds.
 
 ## Configure a relative threshold
 
@@ -66,9 +66,9 @@ To configure a relative threshold:
 4. Select the threshold aggregation and lookback window.
 5. Set a multiplier that determines how much the current value can deviate from the historical baseline. This can be smaller than one (less than the baseline) or larger than one (greater than the baseline).
 6. Optionally, configure a recovery threshold.
-7. Review the resulting thresholds and monitor behavior before saving.
+7. Verify the calculated thresholds in the preview graph before saving.
 
-For example, set the alert threshold to `1.5x` the historical baseline to detect an increase. Set it to `0.7x` and choose the below direction to detect a drop.
+For example, set the alert threshold to `1.5x` the historical baseline to detect an increase. Set it to `0.7x` to detect a drop.
 
 ### Query syntax
 
