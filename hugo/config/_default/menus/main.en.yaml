@@ -9134,6 +9134,11 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
     - name: Manage Policies
       url: /security/ai_guard/policies/
       identifier: ai_guard_policies
