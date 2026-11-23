@@ -578,10 +578,9 @@ The response signing SDK option is experimental. Its name and behavior can chang
 
 Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][4].
 
-<!-- TODO: confirm the minimum version. -->
+<!-- TODO: set the first SDK release version that includes response signing. -->
 Response signing requires `dd-sdk-ios` version `X.Y.Z` or later.
 
-<!-- TODO: confirm that the experimental option name matches the released SDK API. -->
 To enable response signing, set `experimentalResponseSigning` in the Flags configuration:
 
 {{< code-block lang="swift" >}}
@@ -590,19 +589,19 @@ Flags.enable(with: .init(
 ))
 {{< /code-block >}}
 
-The response signing option accepts these modes:
+`ResponseSigningConfiguration` has these properties:
 
-`off` (default)
-: The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+`mode`
+: `.off` (default): The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+: `.required`: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+: `.observe`: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
 
-`required`
-: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
-
-`observe`
-: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
-<!-- TODO: confirm that `observe` is a supported production mode at launch, and its final name. -->
+`expireVerifiedFlags`
+: `false` (default) or `true`. Applies to `.required` mode only. Sets what the client does when the signature of the last verified response expires. See [Signature expiry](#signature-expiry).
 
 You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+Response signing does not support proxies or custom flag endpoints, such as `customFlagsEndpoint`. Send flag configuration requests directly to Datadog.
 
 ### Confirm that response signing works
 
@@ -612,18 +611,34 @@ You do not need to configure keys or certificates. The SDK contains the Datadog 
 1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
 1. Confirm that the client state is `ready` and that flag evaluations return assigned values.
 
-To see SDK messages in the Xcode console, set `Datadog.verbosityLevel = .debug`.
-<!-- TODO: confirm the user-visible log message or telemetry for a verified response. -->
+The SDK writes response signing warnings and errors to the Xcode console. To see them, set `Datadog.verbosityLevel = .debug`.
 
 ### Verification failures
 
-In `required` mode, the client rejects a response that fails verification. It does not retry the request without signing.
+In `.required` mode, the client rejects a response that fails verification. It does not retry the request without signing.
 
 - A response without a valid signature fails with an `invalidResponse` error. If no verified assignments are available for the evaluation context, evaluations return the default value.
-- Verified assignments stay in memory until their signature expires. After that, after an app restart, or after a change to the evaluation context, the client needs a new verified response. The SDK does not read or write the on-disk cache in this mode.
+- The client keeps verified assignments in memory only. It does not read or write the on-disk cache in this mode. After an app restart, or after a change to the evaluation context, evaluations return default values until a new verified response arrives.
 - Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
 
-In `observe` mode, the client records the verification outcome and accepts otherwise valid responses.
+In `.observe` mode, the client records the verification outcome and accepts otherwise valid responses.
+
+### Signature expiry
+
+Each signature expires a few minutes after Datadog issues it. In `.required` mode, `expireVerifiedFlags` sets what the client does when the signature of the last verified response expires:
+
+- `false` (default): The client continues to serve the last verified flags. Its state changes to `stale`. Your application decides when to fetch again.
+- `true`: The client stops serving the verified flags. Its state changes to `error`, and evaluations return default values.
+
+In both settings, a new verified response changes the state to `ready`.
+
+{{< code-block lang="swift" >}}
+Flags.enable(with: .init(
+    experimentalResponseSigning: .init(mode: .required, expireVerifiedFlags: true)
+))
+{{< /code-block >}}
+
+<div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags: true</code>.</div>
 
 ## Testing
 

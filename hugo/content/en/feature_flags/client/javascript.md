@@ -523,10 +523,9 @@ The response signing SDK option is experimental. Its name and behavior can chang
 
 Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][10].
 
-<!-- TODO: confirm the minimum version. -->
+<!-- TODO: set the first SDK release version that includes response signing. -->
 Response signing requires `@datadog/openfeature-browser` version `X.Y.Z` or later.
 
-<!-- TODO: confirm that the experimental option name matches the released SDK API. -->
 To enable response signing, set `experimentalResponseSigning` when you create the provider:
 
 {{< code-block lang="javascript" >}}
@@ -537,19 +536,19 @@ const provider = new DatadogProvider({
 })
 {{< /code-block >}}
 
-The response signing option accepts these modes:
+`experimentalResponseSigning` accepts these options:
 
-`off` (default)
-: The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+`mode`
+: `'off'` (default): The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+: `'required'`: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+: `'observe'`: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
 
-`required`
-: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
-
-`observe`
-: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
-<!-- TODO: confirm that `observe` is a supported production mode at launch, and its final name. -->
+`expireVerifiedFlags`
+: `false` (default) or `true`. Applies to `'required'` mode only. Sets what the provider does when the signature of the last verified response expires. See [Signature expiry](#signature-expiry).
 
 You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+Response signing does not support `flaggingProxy`, other proxies, or custom flag endpoints. Send flag configuration requests directly to Datadog. If you set a custom `flagConfigurationFetch`, it must send the request without change and return the exact response bytes.
 
 ### Confirm that response signing works
 
@@ -559,24 +558,35 @@ You do not need to configure keys or certificates. The SDK contains the Datadog 
 1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
 1. Confirm that flag evaluations return assigned values, not reason `ERROR`.
 
-<!-- TODO: confirm the name of `responseSigningVersion` after the experimental API rename. -->
 At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions that support response signing.
-
-If you use `flaggingProxy` or a custom `flagConfigurationFetch`, the proxy and the fetch implementation must keep the request URL, body, and headers unchanged. They must also return the exact response bytes. The proxy must allow the `x-datadog-feature-flags-*` request and response headers in CORS.
-<!-- TODO: confirm proxy support for signing at launch. -->
 
 ### Verification failures
 
-In `required` mode, the provider rejects a response that fails verification. It does not retry the request without signing.
+In `'required'` mode, the provider rejects a response that fails verification. It does not retry the request without signing.
 
-- The provider emits a `PROVIDER_ERROR` event. The event message starts with `Response signing:` and names the reason, for example `Response signing: missing-proof`.
+- The provider emits a `PROVIDER_ERROR` event. The event message starts with `Response signing:` and names the reason.
 - If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR` and error code `GENERAL`.
-- Verified assignments stay in memory until their signature expires. After that, or after a page reload, the provider needs a new verified response. It does not use the persistent cache or `initialFlagsConfiguration` in this mode.
+- The provider keeps verified assignments in memory only. It does not use the persistent cache or `initialFlagsConfiguration` in this mode. After a page reload, evaluations return default values until the first verified response arrives.
 - Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
 
 Error messages do not contain the client token, the evaluation context, the response, or certificate data.
 
-In `observe` mode, verification failures do not emit provider errors or change evaluation reasons.
+In `'observe'` mode, verification failures do not emit provider errors or change evaluation reasons.
+
+### Signature expiry
+
+Each signature expires a few minutes after Datadog issues it. In `'required'` mode, `expireVerifiedFlags` sets what the provider does when the signature of the last verified response expires:
+
+- `false` (default): The provider continues to serve the last verified flags. Its status changes from `READY` to `STALE`, and it emits one `PROVIDER_STALE` event. Your application decides when to fetch again.
+- `true`: The provider stops serving the verified flags. Its status changes to `ERROR`, it emits one `PROVIDER_ERROR` event, and evaluations return default values with reason `ERROR`.
+
+In both settings, a new verified response changes the status to `READY` and emits `PROVIDER_READY`. The provider detects expiry at the next flag evaluation.
+
+{{< code-block lang="javascript" >}}
+experimentalResponseSigning: { mode: 'required', expireVerifiedFlags: true }
+{{< /code-block >}}
+
+<div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags: true</code>.</div>
 
 ## Testing
 

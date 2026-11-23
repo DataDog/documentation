@@ -28,7 +28,7 @@ You can route either or both of these request types through a proxy on your own 
 
 <div class="alert alert-info">The code samples on this page use the US1 site (<code>datadoghq.com</code>) as an example. Replace the Datadog domains with the corresponding values for your <a href="/getting_started/site/">Datadog site</a>.</div>
 
-<div class="alert alert-info">If you enable <a href="/feature_flags/guide/prevent_response_tampering/">response signing</a>, the flag configuration proxy must forward the <code>x-datadog-feature-flags-*</code> request and response headers and return the response body without change. For browser applications, the proxy must also allow these headers in CORS. A changed response fails verification.</div>
+<div class="alert alert-info"><a href="/feature_flags/guide/prevent_response_tampering/">Response signing</a> does not support proxies. If you route flag configuration requests through a proxy, keep response signing off.</div>
 
 ## Configure the proxy
 
