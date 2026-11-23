@@ -86,12 +86,16 @@ To connect Claude Code for every session, add the AI Gateway settings to the `en
     "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
     "ANTHROPIC_AUTH_TOKEN": "<DATADOG_ACCESS_TOKEN>",
     "ANTHROPIC_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
     "ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code"
   }
 }
 ```
 
-This file holds your token, so keep it out of shared project settings and source control. Make sure `ANTHROPIC_API_KEY` isn't set in your shell, because Claude Code can use it instead of the AI Gateway token.
+Set each model variable to an approved AI Gateway model or routing rule. Claude Code uses the Sonnet, Opus, Haiku, and Fable aliases for subagents and background tasks, so a request through an unmapped alias reaches AI Gateway without a provider prefix and fails with `model_not_found`. This file holds your token, so keep it out of shared project settings and source control. Make sure `ANTHROPIC_API_KEY` isn't set in your shell, because Claude Code can use it instead of the AI Gateway token.
 
 To try AI Gateway in one terminal instead, export the settings and start Claude Code:
 
