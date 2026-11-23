@@ -1833,7 +1833,7 @@
     "summary": "Get all deployment gates"
   },
   "CreateDeploymentGate": {
-    "description": "Endpoint to create a deployment gate.",
+    "description": "Create a deployment gate for a specific environment or for all environments using `*`.\nA gate for all environments and a gate for a specific environment cannot coexist for the\nsame organization, service, and identifier. A conflicting creation returns 400 Bad Request.",
     "summary": "Create deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
