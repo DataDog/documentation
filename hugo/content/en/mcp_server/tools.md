@@ -707,7 +707,7 @@ Write tools change how much oversight Bits has over remediation actions. The `cr
 Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
 
 - Which remediation actions need approval before Bits can take them?
-- List the guardrails that cover Kubernetes pod restarts.
+- List the guardrails that cover Kubernetes deployment restarts.
 
 ### `get_bits_guardrail`
 *Toolset: **bits-guardrails***\
@@ -735,17 +735,17 @@ Searches your organization's teams, roles, and active users for approvers to nam
 ### `create_bits_guardrail`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Write`*\
-Creates a guardrail with a trust level, the actions it covers, the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
+Creates a guardrail with a trust level, one or more actions from `list_bits_guardrail_actions` (all for the same type of infrastructure), the resource tags it applies to, and, for ask guardrails, its approvers. Optionally notifies Slack channels when the guardrail applies. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
 
-- Require approval from the SRE team before Bits restarts pods tagged `env:prod`.
-- Prevent Bits from scaling down deployments tagged `team:payments`.
+- Require approval from the SRE team before Bits restarts or rolls back Kubernetes deployments tagged `env:prod`.
+- Prevent Bits from scaling Kubernetes deployments tagged `team:payments`.
 
 ### `update_bits_guardrail`
 *Toolset: **bits-guardrails***\
 *Permissions Required: `Guardrails Read` and `Guardrails Write`*\
 Updates a guardrail. Only the fields you provide change, and omitted fields keep their current values.
 
-- Change the staging pod-restart guardrail from ask to deny.
+- Change the staging deployment-restart guardrail from ask to deny.
 - Add the platform team as an approver on guardrail `abc123`.
 
 ### `delete_bits_guardrail`
