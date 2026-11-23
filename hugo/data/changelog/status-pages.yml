@@ -152,3 +152,47 @@ entries:
       - CreateStatusPage
       - UpdateStatusPage
     title: Use a valid PNG in status page image examples
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateEmailAccessPolicy
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - DeleteComponent
+      - DeleteDegradation
+      - DeleteDegradationTemplate
+      - DeleteEmailAccessPolicy
+      - DeleteMaintenanceTemplate
+      - DeleteStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListEmailAccessPolicies
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - PatchMaintenanceUpdate
+      - PublishStatusPage
+      - SoftDeleteDegradationUpdate
+      - UnpublishStatusPage
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Document rate-limit headers on the shared 429 responses

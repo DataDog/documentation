@@ -11,10 +11,9 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: Documentation
   text: API Fleet Automation
-site_support_id: fleet-automation-standard-features
-title: Champs de configuration de datadog.yaml pris en charge
+title: Champs de configuration datadog.yaml pris en charge
 ---
-Fleet Automation prend en charge un sous-ensemble de `datadog.yaml` champs lorsque vous [configurez des Agents][1]. Chaque modification que vous fournissez est validée par rapport à un schéma, et tout champ non répertorié ici est rejeté avec une erreur de validation de schéma.
+Fleet Automation prend en charge un sous-ensemble de `datadog.yaml` champs lorsque vous [configurez des Agents][1]. Chaque modification que vous apportez est validée par rapport à un schéma, et tout champ non répertorié ici est rejeté avec une erreur de validation du schéma.
 
 Développez une section ci-dessous pour voir chaque champ pris en charge avec son type, sa description et ses valeurs valides.
 

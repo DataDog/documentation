@@ -14,6 +14,7 @@
 
 import { describe, it, expect } from "vitest";
 import { API_VERSIONS, getOpenApiDocument } from "@lib/api/specParser";
+import { topLevelSchemaToFields } from "@lib/api/refResolver";
 
 /** Walk every schema object in a spec, guarding against shared/cyclic nodes. */
 function eachSchema(
@@ -94,5 +95,34 @@ describe("type column invariants across the full spec", () => {
     // A format with no type would render as the format alone with nothing to
     // fall back to, so the base type has to come from somewhere.
     expect(orphans).toEqual([]);
+  });
+});
+
+describe("union option labels against the full spec", () => {
+  // The reported case in WEB-9138: a `multipart/form-data` body whose schema
+  // is a root-level `oneOf`, one titled branch per upload type.
+  it("labels the srcmap upload variants by their spec titles", () => {
+    const spec = getOpenApiDocument("v2") as any;
+    const schema =
+      spec.paths["/api/v2/srcmap"].post.requestBody.content[
+        "multipart/form-data"
+      ].schema;
+
+    const names = topLevelSchemaToFields(spec, schema).map(
+      (field) => field.name,
+    );
+
+    expect(names).toEqual([
+      "JavaScript Source Map",
+      "React Native Source Map",
+      "ProGuard/R8 Mapping File",
+      "iOS dSYM Archive",
+      "Flutter Symbol File",
+      "Android NDK Symbol File",
+      "Unity IL2CPP Mapping File",
+      "ELF Symbol File",
+      "Windows PE/PDB Symbol File",
+      "Repository Metadata",
+    ]);
   });
 });

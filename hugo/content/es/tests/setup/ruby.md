@@ -4,7 +4,7 @@ aliases:
 - /es/continuous_integration/tests/ruby
 - /es/continuous_integration/tests/setup/ruby
 code_lang: ruby
-code_lang_weight: 40
+code_lang_weight: 50
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentación
@@ -102,7 +102,7 @@ Para configurar la biblioteca Test Optimization, establezca las siguientes varia
 : Habilita Test Optimization.<br/>
 **Predeterminado**: `false`
 
-`DD_ENV` (Opcional)
+`DD_ENV` (opcional)
 : Nombre del entorno donde se ejecutan las pruebas.<br/>
 **Predeterminado**: `(empty)`<br/>
 **Ejemplos**: `local`, `ci`
@@ -117,18 +117,18 @@ Para configurar la biblioteca Test Optimization, establezca las siguientes varia
 **Predeterminado**: `false`
 
 `DD_API_KEY` (Requerido para el modo Agentless)
-: La clave de Datadog API utilizada para autenticar la carga de resultados de prueba. Esta variable no habilita el modo Agentless.<br/>
+: La clave de API de Datadog utilizada para autenticar la carga de resultados de prueba. Esta variable no habilita el modo Agentless.<br/>
 **Predeterminado**: `(empty)`
 
-`DD_SITE` (Opcional para el modo Agentless)
+`DD_SITE` (opcional para el modo Agentless)
 : El [sitio de Datadog][11] al que se cargarán los resultados de las pruebas. Establezca esta configuración cuando utilice un sitio distinto a US1.<br/>
 **Predeterminado**: `datadoghq.com`
 
-`DD_TRACE_AGENT_URL` (Solo cuando se utiliza el Datadog Agent)
-: URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
+`DD_TRACE_AGENT_URL` (Solo cuando se usa el Datadog Agent)
+: La URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
 **Predeterminado**: `http://127.0.0.1:8126`
 
-`DD_TEST_SESSION_NAME` (Opcional)
+`DD_TEST_SESSION_NAME` (opcional)
 : Identifica un grupo de pruebas, como `unit-tests`, `integration-tests` o `smoke-tests`.<br/>
 **Predeterminado**: El nombre del trabajo de CI y el comando de prueba, o el comando de prueba si el nombre del trabajo de CI no está disponible.<br/>
 **Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
@@ -150,7 +150,7 @@ Datadog::CI.active_test&.set_tag("test_owner", "my_team")
 # ...
 ```
 
-Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][2] de la documentación de instrumentación personalizada de Ruby.
+Para crear filtros o campos `group by` para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][2] de la documentación de instrumentación personalizada de Ruby.
 
 ## Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests}
 
@@ -295,7 +295,7 @@ Use `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de prueba y el g
 -   `ui-tests`
 -   `backend-tests`
 
-Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado es el nombre del trabajo de CI y el comando de prueba. Si el nombre del trabajo de CI no está disponible, se utiliza el comando de prueba.
+Si `DD_TEST_SESSION_NAME` no se especifica, el valor predeterminado es el nombre del trabajo de CI y el comando de prueba. Si el nombre del trabajo de CI no está disponible, se utiliza el comando de prueba.
 
 El nombre de la sesión de prueba debe ser único dentro de un repositorio para ayudarle a distinguir diferentes grupos de pruebas.
 

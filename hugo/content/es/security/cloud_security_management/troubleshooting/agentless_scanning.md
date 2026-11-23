@@ -22,6 +22,12 @@ Si no aparecen resultados después de dos horas:
 - Confirme que [Remote Configuration][3] esté habilitada en la clave de API que utilizó para configurar Agentless Scanning. Los escáneres reciben sus instrucciones de escaneo a través de Remote Configuration.
 - Verifique que la integración en la nube esté configurada correctamente. En la página [{{< ui >}}Cloud Security Setup{{< /ui >}}][4], verifique que su cuenta de nube aparezca con Agentless Scanning habilitado.
 
+## Habilite Remote Configuration en la clave de API {#enable-remote-configuration-on-the-api-key}
+
+Para autenticar y autorizar al Agent a recibir configuración, habilite Remote Configuration en la clave de API correspondiente. Solo los usuarios que tienen el permiso de RBAC [`api_keys_write`][9] pueden habilitar Remote Configuration en la clave de API.
+
+**Nota:** Si tiene el permiso de RBAC [`api_keys_write`][9], pero le faltan los permisos de Remote Configuration a nivel de [Organization][10], no puede habilitar Remote Configuration en una clave de API nueva o existente. Solo tiene permiso para deshabilitar Remote Configuration en una clave de API existente. Para ver y administrar las claves de API de su organización, consulte [API Keys][11] en Datadog.
+
 ## GCP: Error al crear el bucket de estado (storage.buckets.create 403) {#gcp-failed-to-create-state-bucket-storagebucketscreate-403}
 
 Si la configuración de GCP Cloud Shell falla en **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** con un error como:
@@ -82,3 +88,6 @@ Agentless Scanning no está disponible en GovCloud y no cumple con FIPS.
 [6]: /es/security/cloud_security_management/vulnerabilities
 [7]: /es/security/cloud_security_management/setup/agentless_scanning/deployment_methods
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
+[9]: /es/account_management/rbac/permissions#api-and-application-keys
+[10]: https://app.datadoghq.com/organization-settings/remote-config
+[11]: https://app.datadoghq.com/organization-settings/api-keys

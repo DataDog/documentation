@@ -3,12 +3,15 @@ aliases:
 - /ko/llm_observability/monitoring/prompt_tracking/
 description: 프롬프트 추적을 사용하여 프롬프트 템플릿과 버전을 추적하세요.
 further_reading:
+- link: https://learn.datadoghq.com/courses/llm-obs-investigations
+  tag: 학습 센터
+  text: LLM Observability로 조사하기
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: 블로그
   text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하기
-- link: https://learn.datadoghq.com/courses/llm-obs-investigations
-  tag: 학습 센터
-  text: LLM Observability로 조사
+- link: https://www.datadoghq.com/blog/agent-observability-prompt-management/
+  tag: 블로그
+  text: Datadog으로 LLM prompt를 관리하고 배포하세요
 title: 프롬프트 추적
 ---
 ## 개요 {#overview}

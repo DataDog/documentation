@@ -49,17 +49,63 @@ Si seul `input_tokens` est fourni, Datadog traite tous les tokens d'entrée comm
 ## Fournisseurs pris en charge {#supported-providers}
 Datadog calcule automatiquement le coût des requêtes LLM effectuées auprès des fournisseurs pris en charge suivants en utilisant les informations tarifaires accessibles au public dans leur documentation officielle.
 
-<div class="alert alert-info">Datadog prend uniquement en charge le suivi des coûts des modèles textuels.</div>
-
 Datadog prend en charge l'estimation des coûts pour [plus de 800 modèles][4], notamment ceux d'OpenAI, de Hugging Face, de Gemini et d'Anthropic, ainsi que les modèles proposés sur OpenRouter.
 
 ## Métriques {#metrics}
-Vous pouvez trouver les métriques de coût dans [Agent Observability Metrics][5]. Les métriques de coût estimé d'Agent Observability sont exprimées en **nanodollars**. 
+
+Trouvez les métriques de coût et de jetons disponibles dans [Agent Observability Metrics][5]. Les métriques de coût estimé sont mesurées en **nanodollars**, et les métriques de jetons sont mesurées en **jetons**.
 
 Les métriques de coût incluent un tag `source` pour indiquer l'origine de la valeur :
 - `source:auto` — calculé automatiquement
 - `source:user` — fourni manuellement
 
+### Répartitions des coûts et des jetons {#cost-and-token-breakdowns}
+
+`ml_obs.span.llm.cost` et `ml_obs.span.llm.tokens` sont des métriques Count qui répartissent les coûts et l'utilisation des jetons selon les tags suivants. Le coût inclut les spans LLM et d'embedding, ainsi que les coûts des spans d'outils fournis par l'utilisateur. L'utilisation des jetons inclut uniquement les spans LLM. Pour l'utilisation des jetons d'embedding, utilisez `ml_obs.span.embedding.input.tokens`.
+
+Les répartitions automatiques des jetons OpenAI Realtime nécessitent `ddtrace` 4.17.0 ou une version ultérieure pour Python. Pour Node.js, utilisez `dd-trace` 6.25.0 ou une version ultérieure (v6), ou 5.136.0 ou une version ultérieure (v5). Consultez [l'instrumentation multimodale][11] pour les intégrations prises en charge.
+
+Les frais facturés par le fournisseur pour les outils intégrés, tels que la recherche sur le Web, figurent sur les spans LLM. Les coûts des spans d'outils fournis par l'utilisateur sont des coûts que vous indiquez manuellement sur les spans d'outils.
+
+| Tag | Valeurs | Description |
+|-----|--------|-------------|
+| `io_type` | `input`, `output`, `unknown` | Contribution d'entrée ou de sortie. |
+| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Catégorie de cache pour les valeurs d'entrée. Omis pour les autres directions. |
+| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Catégorie de raisonnement pour les valeurs de sortie lorsque les données établissent la catégorie. Les frais d'outils sans jetons omettent ce tag. |
+| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Modalité de jeton. `other` s'applique uniquement aux contributions aux coûts hors jetons, telles que les frais d'outils du fournisseur et les coûts des spans d'outils fournis par l'utilisateur. |
+| `ttl` | `5m`, `1h` | Durée de vie de l'écriture en cache lorsque cette répartition est disponible. Omis pour les autres contributions. |
+
+Pour les tags de répartition applicables, les détails indisponibles utilisent `unknown`. Une valeur `unknown` ne signifie pas une utilisation nulle. Par exemple, si un fournisseur ne signale pas l'utilisation du cache, les jetons d'entrée sont tagués `input_type:unknown`. Lorsque l'utilisation du cache ou du raisonnement ne peut pas être attribuée à des modalités individuelles, les valeurs conservent leur catégorie connue et utilisent `token_modality:unknown`.
+
+### Choisissez entre les métriques totales et les métriques de répartition {#choose-between-total-and-breakdown-metrics}
+
+Utilisez les métriques totales pour les statistiques par span, et les métriques de répartition pour comparer l'utilisation entre les catégories.
+
+#### Analysez les totaux par span {#analyze-totals-per-span}
+
+Utilisez les distributions `ml_obs.span.llm.total.cost` et `ml_obs.span.llm.total.tokens` pour les moyennes et les centiles par span. Chaque distribution enregistre une observation totale par span applicable. Le coût total inclut les spans LLM et d'embedding, ainsi que les coûts des spans d'outils fournis par l'utilisateur. Les jetons totaux incluent uniquement les spans LLM.
+
+Par exemple, tracez le coût moyen et l'utilisation moyenne des jetons par span :
+
+```text
+avg:ml_obs.span.llm.total.cost{ml_app:my-app}
+avg:ml_obs.span.llm.total.tokens{ml_app:my-app}
+```
+
+#### Analysez l'utilisation par catégorie {#analyze-usage-by-category}
+
+Utilisez `ml_obs.span.llm.cost` et `ml_obs.span.llm.tokens` pour comparer le coût et l'utilisation des jetons entre les catégories. Utilisez `sum` avec `.as_count()` pour agréger les contributions. Ces métriques ne fournissent pas de moyennes ou de centiles par span.
+
+Par exemple, les requêtes suivantes tracent le coût par entrée ou sortie et modalité, et les jetons d'entrée par catégorie de cache et modalité :
+
+```text
+sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
+sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
+```
+
+Pour un span dont le coût total ou le nombre de jetons est valide, les valeurs de répartition s'additionnent pour former ce total. Lorsqu'un total n'est pas disponible pour le coût ou les jetons, les métriques de répartition conservent les valeurs d'entrée ou de sortie disponibles. La distribution totale correspondante ne reçoit aucune observation.
+
+N'ajoutez pas les métriques de répartition aux métriques `.total.*` correspondantes lors du calcul des totaux, car cela compterait deux fois la même utilisation.
 
 ## Tags personnalisés sur les métriques de coût et de tokens {#custom-tags-on-cost-and-tokens-metrics}
 
@@ -95,9 +141,9 @@ Dans Agent Observability, sélectionnez {{< ui >}}Cost{{< /ui >}} dans la naviga
 
 Cost Overview comprend :
 - {{< ui >}}Spend breakdown{{< /ui >}} : un diagramme de Sankey de vos {{< ui >}}Total Estimated Spend{{< /ui >}}, comparé à la période précédente. Sélectionnez {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}} ou {{< ui >}}Custom Tags{{< /ui >}} pour déterminer quelles applications, quels fournisseurs ou quels [tags personnalisés](#custom-tags-on-cost-and-tokens-metrics) sont à l'origine de vos dépenses. Chaque entrée indique le montant dépensé, sa part dans les dépenses totales et l'évolution par rapport à la période précédente.
-- {{< ui >}}Cost Savings Opportunity{{< /ui >}} : des [Insights][8] qui identifient des moyens concrets de réduire les dépenses, comme les prompts qui n'utilisent pas le cache de prompts du fournisseur. Chaque insight indique l'application concernée et les économies estimées.
+- {{< ui >}}Cost Savings Opportunity{{< /ui >}} : des [Insights][8] qui identifient des moyens concrets de réduire les dépenses, comme les prompts qui n'utilisent pas le cache de prompts du fournisseur. Chaque insight indique l'application concernée et les économies estimées. [Le dimensionnement des modèles Frontier][9] met en évidence les dépenses liées aux modèles premium afin de privilégier les essais avec des modèles moins coûteux.
 - {{< ui >}}Cost Trend{{< /ui >}} : une série temporelle des dépenses pour une application ou pour toutes les applications. Regroupez-la par application, service, nom de modèle, fournisseur de modèle ou tag personnalisé, et ajoutez des filtres pour affiner les résultats.
-- {{< ui >}}Wasted Spend{{< /ui >}} : les dépenses liées aux appels ayant échoué, aux réponses de faible qualité et aux problèmes détectés par [Insights][8], ventilées par application.
+- {{< ui >}}Wasted Spend{{< /ui >}} : les dépenses liées aux appels ayant échoué, aux réponses de faible qualité et aux problèmes détectés par [Insights][8], ventilées par application. Pour le gaspillage identifié par Insights, ouvrez le constat pour examiner la cause première, les traces affectées et la correction recommandée. Consultez [comment Insights mesure les dépenses inutiles][10].
 - {{< ui >}}Cache Efficiency{{< /ui >}} : les économies nettes réalisées grâce à la mise en cache des prompts, ainsi que le taux de succès du cache, le taux de réutilisation du cache et le coût des entrées non mises en cache. Pour obtenir des métriques de cache précises, fournissez la [ventilation complète des jetons de cache](#how-token-counts-are-calculated).
 
 Pour afficher les coûts d'une seule application, cliquez sur l'application dans le diagramme de Sankey de Cost Overview. Vous pouvez également la sélectionner dans {{< ui >}}Applications{{< /ui >}} et ouvrir l'onglet {{< ui >}}Cost{{< /ui >}}. La _vue Cost_ de l'application propose :
@@ -179,3 +225,6 @@ Comment corriger :
 [5]: /fr/llm_observability/investigate/metrics/#llm-cost-metrics
 [7]: /fr/llm_observability/instrument/sdk/#adding-custom-tags-to-cost-and-tokens-metrics
 [8]: /fr/llm_observability/investigate/insights/
+[9]: /fr/llm_observability/investigate/insights/#frontier-model-sizing
+[10]: /fr/llm_observability/investigate/insights/#wasted-spend
+[11]: /fr/llm_observability/instrument/multimodal/#automatic-instrumentation

@@ -5,7 +5,7 @@ further_reading:
 - link: "/actions/private_actions/set_up_agent_based"
   tag: "Documentation"
   text: "Set up a private action runner in the Datadog Agent"
-- link: "/actions/private_actions/execution_policies"
+- link: "/actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
 - link: "/actions/private_actions/reference"
@@ -350,6 +350,6 @@ inside the runner.
 
 [1]: /actions/private_actions/set_up_agent_based/
 [2]: /actions/private_actions/set_up_standalone/
-[3]: /actions/private_actions/execution_policies/
+[3]: /actions/execution_policies/
 [4]: /actions/connections/private_action_credentials/
 [5]: /actions/connections/
