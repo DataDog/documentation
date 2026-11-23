@@ -169,7 +169,7 @@ A relative threshold uses historical data from the same monitor query as its bas
 
 To configure a relative threshold in **Set alert conditions**:
 
-1. Select a relative threshold and choose the alert direction.
+1. Select a relative threshold. A multiplier greater than one detects increases; a multiplier less than one detects drops.
 2. Select a historical aggregation and a lookback window from 1 week to 6 months. The historical window must be at least as long as the monitor's evaluation window.
 3. Set the multiplier and, optionally, a critical recovery threshold. For example, alert above `1.5x` the historical average and recover at or below `1.2x` that average.
 
