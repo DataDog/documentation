@@ -338,7 +338,7 @@ Filter changes apply the next time Datadog discovers projects for the service ac
 
 {{% collapse-content title="Limit monitored projects by project ID" level="h4" %}}
 
-Each filter is a project ID or a project ID pattern. Use `*` to match any number of characters and `?` to match a single character. Start a filter with `!` to exclude matching projects. Filters without a wildcard match a project ID exactly. You can add up to 15,000 project ID filters.
+Each filter is a project ID or a project ID pattern. Use `*` to match any number of characters and `?` to match a single character. Start a filter with `!` to exclude matching projects. Filters without a wildcard match a project ID exactly.
 
 **Example filters**:
 
