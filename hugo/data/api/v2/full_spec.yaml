@@ -244797,6 +244797,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/accounts/query:
     post:
@@ -244860,6 +244864,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/analytics/list:
     post:
@@ -245774,6 +245782,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/facet_info:
     post:
@@ -245826,6 +245838,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/query:
     post:
@@ -245887,6 +245903,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/{user_id}:
     delete:
@@ -245972,6 +245992,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connection:
     post:
@@ -246025,6 +246049,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
     put:
       description: Update an existing data connection by adding, updating, or deleting fields
@@ -246080,6 +246108,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connection/{id}:
     delete:
@@ -246113,6 +246145,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connections:
     get:
@@ -246151,6 +246187,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-catalog/skus:
     get:

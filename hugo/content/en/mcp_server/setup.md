@@ -136,7 +136,7 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace][1]. 
 1. Install the Datadog plugin:
     <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain as an environment variable before starting Claude Code. To connect without OAuth, such as in a CI environment, use the [manual configuration](#claudecode-manual) with an access token instead of the plugin.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
@@ -163,6 +163,9 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
          }
        }
     }</code></pre>
+
+   To connect without OAuth, pass a [Personal or Service Access Token](#personal-or-service-access-token) as a header:
+    <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}} --header "Authorization: Bearer &lt;YOUR_ACCESS_TOKEN&gt;"</code></pre>
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -232,7 +235,7 @@ Install the Datadog plugin from the [`awesome-copilot`][1] plugin marketplace. T
 1. Install the Datadog plugin:
     <pre><code>copilot plugin install datadog@awesome-copilot</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Copilot.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain as an environment variable before starting Copilot. To connect without OAuth, such as in a CI environment, use the [manual configuration](#copilot-manual) with an access token instead of the plugin.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
@@ -259,6 +262,8 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
          }
        }
     }</code></pre>
+
+   To connect without OAuth, add a `headers` object to the JSON configuration with `"Authorization": "Bearer <YOUR_ACCESS_TOKEN>"`. Use a [Personal or Service Access Token](#personal-or-service-access-token).
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -313,7 +318,6 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Devin, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Marketplace{{< /ui >}} and search for `Datadog`.
 1. Select your Datadog site for the {{< ui >}}Server URL{{< /ui >}}; for example, your selected site is {{< region-param key="dd_site_name" code="true" >}}.
-1. Enter your Datadog API and application keys.
 1. Install and enable the server, and complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -417,7 +421,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /collapse-content %}}
 
 {{% collapse-content title="JetBrains AI Assistant" level="h4" expanded=false id="jetbrains-ai-assistant" %}}
-1. Go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}AI Assistant{{< /ui >}} > {{< ui >}}Model Context Protocol (MCP){{< /ui >}} and add the following block:
+1. Go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}AI Assistant{{< /ui >}} > {{< ui >}}Model Context Protocol (MCP){{< /ui >}} and add the following block. Replace `<YOUR_ACCESS_TOKEN>` with a [Personal or Service Access Token](#personal-or-service-access-token) scoped to the permissions you need:
 
     <pre><code>{
       "mcpServers": {
@@ -900,7 +904,7 @@ To control which networks can connect to the Datadog MCP Server, enable the [IP 
 
 ## Authentication
 
-For most users, OAuth 2.0 is the recommended authentication method, and your MCP client handles it during setup. Use one of the header-based methods below only when you cannot complete the OAuth flow, for example on a server or in a CI environment.
+For most users, OAuth 2.0 is the recommended authentication method, and your MCP client handles it during setup. Use a Personal or Service Access Token only when you cannot complete the OAuth flow, for example on a server or in a CI environment.
 
 ### OAuth 2.0 (recommended)
 
@@ -943,7 +947,7 @@ Administrators can disable an AI client or remove specific scopes from it for th
 
 ### Personal or Service Access Token
 
-For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
+For header-based authentication, use a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67]. Pass the token as a bearer token in the `Authorization` header. No API key is required.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -964,35 +968,21 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
-Use a PAT for an individual user or a SAT for a [service account][13]. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
+Use a PAT for an individual user. For shared or automated workflows, use a SAT from a [service account][13] that has only the required permissions. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
+
+To limit what a token-based connection can do:
+
+- Select only the scopes the agent needs. Scopes are required for PATs and SATs.
+- Set an expiration date. PATs always expire. SATs can be created with no expiration, so set an expiration date unless the workflow requires a long-lived token.
+- Enter the token in your MCP client's configuration yourself. Never paste it into a prompt or ask the agent to write it into a file. If your client can read header values from environment variables, reference the token from an environment variable or secrets manager instead of storing it in plaintext. See [Keep credentials out of AI agent conversations][97].
+
+**Note**: An AI client's [OAuth application scopes][93] do not apply to token-based connections. These connections have the access of the token. See [Access Control for MCP][91].
 
 ### API and application keys
 
-Alternatively, provide a Datadog [API key and application key][1] as `dd-api-key` and `dd-application-key` HTTP headers:
+<div class="alert alert-warning">Datadog does not recommend API and application keys for MCP Server connections. Application keys are unscoped by default and never expire. Use a <a href="#personal-or-service-access-token">Personal or Service Access Token</a> instead.</div>
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
-
-<pre><code>{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "{{< region-param key="mcp_server_endpoint" >}}",
-      "headers": {
-          "dd-api-key": "&lt;YOUR_API_KEY&gt;",
-          "dd-application-key": "&lt;YOUR_APPLICATION_KEY&gt;"
-      }
-    }
-  }
-}
-</code></pre>
-
-[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
-{{< /site-region >}}
-
-For security, use a scoped API key and application key from a [service account][13] that has only the required permissions.
-
-**Note**: An AI client's [OAuth application scopes][93] do not apply to connections that use API and application keys or access tokens. These connections have the access of the key or token.
+The MCP Server still accepts `dd-api-key` and `dd-application-key` headers for existing configurations. To migrate, create a PAT or SAT with the scopes your agent needs, replace both headers with an `Authorization: Bearer` header, and then revoke the [application key][1] if nothing else uses it.
 
 ### Adding OAuth clients
 
@@ -1125,3 +1115,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [94]: https://pi.dev/
 [95]: https://github.com/datadog-labs/pi-plugin
 [96]: /incident_response/on-call/
+[97]: /account_management/rbac/mcp_access/#keep-credentials-out-of-ai-agent-conversations
