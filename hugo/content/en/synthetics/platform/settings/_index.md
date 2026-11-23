@@ -118,7 +118,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ## Downtimes
 
-For more information, see [Scheduled Downtime][25].
+Downtimes use their own permissions, `synthetics_downtime_read` and `synthetics_downtime_write`. You don't need the default settings permissions to view or manage downtimes. For more information, see [Scheduled Downtime][25].
 
 ## Private locations
 

@@ -88,6 +88,64 @@ To apply an existing downtime to multiple tests or test suites at once:
 
 {{< img src="synthetics/settings/bulk_add_downtimes.png" alt="The Synthetic Monitoring Tests page with two tests selected and the Add to Downtime button highlighted in the bulk actions bar" style="width:90%;" >}}
 
+## Permissions
+
+<!-- TO CONFIRM: Which default roles get these permissions? Draft assumes Admin and Standard get read and write, and Read Only gets read. -->
+
+Downtimes have their own permissions, separate from Synthetic tests and default settings:
+
+- `synthetics_downtime_read`: View downtimes.
+- `synthetics_downtime_write`: Create, edit, and delete downtimes.
+
+By default, users with the [Datadog Admin and Datadog Standard roles][5] have both permissions. If you use [custom roles][6], add `synthetics_downtime_read` and `synthetics_downtime_write` to the roles that need access to downtimes.
+
+The `synthetics_downtime_read` permission also gives access to the Synthetic Monitoring {{< ui >}}Settings{{< /ui >}} page, where you manage downtimes.
+
+<!-- TO CONFIRM: Cutoff date, and whether the docs should state it. The ticket says enforcement happens after January 31, 2027. -->
+
+<div class="alert alert-warning">Until [CUTOFF DATE], Datadog also accepts the <code>synthetics_read</code> and <code>synthetics_write</code> permissions for downtimes. After that date, only <code>synthetics_downtime_read</code> and <code>synthetics_downtime_write</code> grant access. Update your custom roles before the cutoff date.</div>
+
+### Restrict access
+
+Use [granular access control][7] to limit who can view or edit a downtime based on roles, teams, or individual users. Downtimes support two access levels:
+
+- {{< ui >}}Viewer{{< /ui >}}: View the downtime and add it to tests you can edit.
+- {{< ui >}}Editor{{< /ui >}}: Edit or delete the downtime, and add tests to it or remove tests from it.
+
+Downtimes you don't have {{< ui >}}Viewer{{< /ui >}} access to are hidden from you.
+
+<!-- TO CONFIRM: Where the permissions modal opens from (downtime form, three-dot menu, or both) and the exact button labels. Add a screenshot of the downtime permissions modal. -->
+<!-- TO CONFIRM: Do new downtimes default to the author's team? -->
+
+1. Open the downtime from the {{< ui >}}Downtimes{{< /ui >}} page.
+2. Click {{< ui >}}Edit Access{{< /ui >}}.
+3. Click {{< ui >}}Restrict Access{{< /ui >}}.
+4. Select teams, roles, or users.
+5. Click {{< ui >}}Add{{< /ui >}}.
+6. Select the access level for each team, role, or user.
+7. Click {{< ui >}}Done{{< /ui >}}.
+
+### Access required for each action
+
+Downtimes and tests each have their own access settings. The following table lists the access each action requires, in addition to the RBAC permissions above.
+
+<!-- TO CONFIRM: Editing or deleting a downtime. Option 1 (test focus) also requires Editor access to every test already associated with the downtime. Option 4 (independent after association) requires only Editor access to the downtime. Draft uses Option 4. -->
+<!-- TO CONFIRM: Does the bulk "Add to Downtime" action on the Tests page follow the same rules as the test form? -->
+
+| Action | Downtime access | Test access |
+|--------|-----------------|-------------|
+| View a downtime | Viewer | None |
+| Create a downtime with tests | None (requires `synthetics_downtime_write`) | Editor on each selected test |
+| Edit or delete a downtime | Editor | None |
+| Add a test from the downtime form | Editor | Editor on the test you add |
+| Remove a test from the downtime form | Editor | None |
+| Add a downtime from the test form | Viewer | Editor |
+| Remove a downtime from the test form | None | Editor |
+
+Adding a downtime to your test doesn't require access to other tests already associated with that downtime.
+
+**Note**: A user with {{< ui >}}Editor{{< /ui >}} access to a downtime can change when its associated tests run, even without access to those tests. Restrict access to downtimes that apply to critical tests.
+
 ## Best practices
 
 - Use consistent tagging to simplify applying downtime across groups of tests.
@@ -98,6 +156,10 @@ To apply an existing downtime to multiple tests or test suites at once:
 
 You can create, update, list, and delete Synthetic Monitoring downtimes through the [Synthetics API][4]. Use the API to integrate downtime management into your deployment pipelines or automation scripts.
 
+<!-- TO CONFIRM: Exact resource type name for restriction policies, and whether Terraform supports it at launch. -->
+
+To manage access to a downtime programmatically, use the [Restriction Policies API][8] with the `synthetics-downtime` resource type.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -106,3 +168,7 @@ You can create, update, list, and delete Synthetic Monitoring downtimes through 
 [2]: https://app.datadoghq.com/synthetics/settings/downtimes
 [3]: https://app.datadoghq.com/synthetics/tests
 [4]: /api/latest/synthetics/#list-synthetics-downtimes
+[5]: /account_management/rbac/#datadog-default-roles
+[6]: /account_management/rbac/#custom-roles
+[7]: /account_management/rbac/granular_access/
+[8]: /api/latest/restriction-policies/
