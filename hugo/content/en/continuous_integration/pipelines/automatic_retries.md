@@ -35,6 +35,8 @@ When a job in your CI pipeline fails:
 1. Datadog retries each failing job up to a maximum number of attempts (set by Datadog) to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
 1. Datadog records the retry outcome on the original pipeline in CI/CD Optimization.
 
+**Note**: Retry behavior depends on the provider (see [Provider-specific behavior](#provider-specific-behavior)). On Azure Pipelines, Datadog retries a stage instead of a single job: each stage at most once, and only if every failed job in the stage is classified as retriable.
+
 To see the jobs Datadog retried, open [**CI/CD Optimization** > **Executions**][13], filtered on `@ci.job.retry_reason:auto_retry`.
 
 ## Prerequisites
