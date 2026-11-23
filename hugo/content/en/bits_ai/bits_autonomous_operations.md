@@ -27,8 +27,8 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 ## Prerequisites
 
 - [Create monitors][7] that alert when your systems might be unhealthy.
-- [Enable automatic code fixes][16] to let Bits create pull requests for code fixes.
-- To let Bits take infrastructure actions after you approve them:
+- (Optional) [Enable automatic code fixes][16] to let Bits create pull requests for code fixes.
+- (Optional) To let Bits take infrastructure actions after you approve them:
   1. Set up the type of action that you want Bits to take:
      - For Kubernetes, see [Kubernetes actions][20].
      - For Amazon EC2, Amazon ECS, and AWS Lambda, see [AWS actions][21].
@@ -109,6 +109,42 @@ To review Bits activity:
 1. After the fixes are applied, click the {{< ui >}}Verify resolution{{< /ui >}} next step. Bits checks whether the issue is resolved. For more information, see [Validate that issues are resolved][12].
 1. (Recommended) Use the thumbs-up or thumbs-down buttons on the conclusion and the next steps to give Bits feedback on the investigation.
 
+## Adoption best practices
+
+- **Start with a focused scope.** Choose one team's services, a set of production monitors, or an ops channel with clear ownership. Avoid mixing unrelated services and response procedures during the initial rollout.
+- **Provide operational context.** Describe important customer workflows, checks to perform when an alert fires, and runbooks to follow. Update scope guidance when investigations miss context or focus on the wrong issues.
+- **Review results before expanding coverage.** Check whether Bits prioritizes meaningful issues, supports its conclusions with evidence, and proposes appropriate fixes. Use feedback to refine guidance, and review credit usage before adding scopes.
+
+For example, add scope guidance such as:
+
+> Prioritize production errors affecting checkout. Check recent deployments and upstream dependencies. Follow the checkout incident runbook, and include the affected services and customer impact in the investigation conclusion.
+
+## Frequently asked questions
+
+### Do existing alert notifications continue?
+
+Yes. Bits triages alerts alongside your existing notifications. Keep your team's notification and response procedures in place as you evaluate Autonomous Ops. If your team works in Slack, see [Set up Bits in Slack][26].
+
+### Can investigations run without remediation actions?
+
+Yes. You can use investigations and recommendations without enabling one-click infrastructure actions. Configure those actions when your team is ready. See [Infrastructure Actions][27] for requirements.
+
+### What controls which actions Bits can run?
+
+[Guardrails][18] define which infrastructure actions Bits can run, the resources they apply to, and who can approve them. A guardrail must cover both the action and its target resource. An {{< ui >}}Ask{{< /ui >}} guardrail requires approval from a designated approver before Bits runs an action. Scope guidance does not grant that authorization.
+
+### How does this differ from automatic investigations on individual monitors?
+
+[Scopes](#scopes) let you manage automated work across resources, monitor queries, or Slack channels, with shared guidance for the scope. Define coverage around your team's operational responsibilities instead of configuring automated work monitor by monitor.
+
+### What happens when a scope reaches its credit limit?
+
+The scope completes work already in progress and pauses new runs until the applicable limit increases or the next billing cycle begins. For instructions on managing quotas, see [Manage credit usage](#manage-credit-usage).
+
+### What if Bits dismisses an important alert or recommends an inappropriate action?
+
+Review the alert and relevant telemetry using your team's response procedures, and update scope guidance with missing context. For investigations, give feedback using the [review workflow](#review-bits-activity). If a proposed action is inappropriate, do not approve it; follow your team's procedures to resolve the issue.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -130,3 +166,5 @@ To review Bits activity:
 [23]: https://app.datadoghq.com/bits/settings/usage
 [24]: https://app.datadoghq.com/bits/autonomous-ops/scopes
 [25]: https://app.datadoghq.com/bits/autonomous-ops/activity
+[26]: /bits_ai/bits_chat/usage/#slack
+[27]: /bits_ai/bits_remediation/infrastructure_actions/
