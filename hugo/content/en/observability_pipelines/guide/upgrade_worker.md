@@ -31,9 +31,6 @@ Worker version 2.26.1 gives you access to the following:
   referenced in pipeline settings don't appear in deployment errors in the Observability Pipelines
   UI.
 
-  UI.
-
-
 #### New features
 
 - The Custom Processor now includes `log10` and `pow` functions. For example, `10 * log10!(<mw>)` converts milliwatts to dBm, and `pow!(10, <dbm> / 10)` converts dBm to milliwatts.
