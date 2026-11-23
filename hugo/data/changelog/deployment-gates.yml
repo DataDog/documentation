@@ -44,3 +44,12 @@ entries:
       - UpdateDeploymentGate
       - UpdateDeploymentRule
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42085
+    operations:
+      - CreateDeploymentGate
+      - GetDeploymentGate
+      - ListDeploymentGates
+      - UpdateDeploymentGate
+    title: Document all-environment deployment gate API contract
