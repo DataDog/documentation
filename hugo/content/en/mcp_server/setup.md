@@ -263,7 +263,7 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
        }
     }</code></pre>
 
-   To connect without OAuth, use the JSON configuration and add a `headers` object with `"Authorization": "Bearer <YOUR_ACCESS_TOKEN>"`, using a [Personal or Service Access Token](#personal-or-service-access-token).
+   To connect without OAuth, add a `headers` object to the JSON configuration with `"Authorization": "Bearer <YOUR_ACCESS_TOKEN>"`. Use a [Personal or Service Access Token](#personal-or-service-access-token).
 
 1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
@@ -421,7 +421,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /collapse-content %}}
 
 {{% collapse-content title="JetBrains AI Assistant" level="h4" expanded=false id="jetbrains-ai-assistant" %}}
-1. Go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}AI Assistant{{< /ui >}} > {{< ui >}}Model Context Protocol (MCP){{< /ui >}} and add the following block. Replace `<YOUR_ACCESS_TOKEN>` with a [Personal Access Token](#personal-or-service-access-token) scoped to the permissions you need:
+1. Go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}AI Assistant{{< /ui >}} > {{< ui >}}Model Context Protocol (MCP){{< /ui >}} and add the following block. Replace `<YOUR_ACCESS_TOKEN>` with a [Personal or Service Access Token](#personal-or-service-access-token) scoped to the permissions you need:
 
     <pre><code>{
       "mcpServers": {
@@ -928,13 +928,12 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
-Use a PAT for an individual user or a SAT for a [service account][13]. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
+Use a PAT for an individual user. For shared or automated workflows, use a SAT from a [service account][13] that has only the required permissions. For scopes, token management, and other authentication methods, see the [PAT][66] and [SAT][67] documentation.
 
 To limit what a token-based connection can do:
 
 - Select only the scopes the agent needs. Scopes are required for PATs and SATs.
-- Set an expiration date. PATs always expire. SATs can be created with no expiration, so set one unless the workflow requires a long-lived token.
-- For shared or automated workflows, use a SAT from a service account that has only the required permissions, rather than a PAT tied to an individual.
+- Set an expiration date. PATs always expire. SATs can be created with no expiration, so set an expiration date unless the workflow requires a long-lived token.
 - Enter the token in your MCP client's configuration yourself. Never paste it into a prompt or ask the agent to write it into a file. If your client can read header values from environment variables, reference the token from an environment variable or secrets manager instead of storing it in plaintext. See [Keep credentials out of AI agent conversations][94].
 
 **Note**: An AI client's [OAuth application scopes][93] do not apply to token-based connections. These connections have the access of the token. See [Access Control for MCP][91].

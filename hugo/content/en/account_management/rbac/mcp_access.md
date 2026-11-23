@@ -121,7 +121,7 @@ Application scopes restrict MCP connections that authenticate through OAuth. A u
 When an AI client cannot use OAuth, such as on a server or in a CI environment, connect it with an access token:
 
 - Use a [Personal Access Token (PAT)][7] for an individual user. Every PAT requires scopes and an expiration date, so the token carries only the permissions the agent needs and stops working when it expires.
-- Use a [Service Access Token (SAT)][17] for a [service account][8] that has only the required permissions. Select only the scopes the agent needs, and set an expiration date. SATs can be created with no expiration, so choose one deliberately.
+- Use a [Service Access Token (SAT)][17] for a [service account][8] that has only the required permissions. Select only the scopes the agent needs. SATs can be created with no expiration, so set an expiration date unless the workflow requires a long-lived token.
 
 <div class="alert alert-warning">Datadog does not recommend API and application keys for MCP connections. Application keys are unscoped by default and never expire. If an AI client uses an API key and application key, replace them with a PAT or SAT.</div>
 
@@ -129,7 +129,7 @@ To limit who can create these credentials, restrict the {{< ui >}}User App Keys{
 
 ## Keep credentials out of AI agent conversations
 
-Never share a token, API key, or application key with an AI agent in plaintext. This includes pasting a credential into a prompt, or asking an agent to write one into a configuration file. Anything you send to an agent becomes part of its context. The agent can repeat it in output, write it to files or logs, or send it to its model provider.
+Never share a token, API key, or application key with an AI agent. This includes pasting a credential into a prompt, or asking an agent to write one into a configuration file. Anything you send to an agent becomes part of its context. The agent can repeat it in output, write it to files or logs, or send it to its model provider.
 
 Instead:
 
