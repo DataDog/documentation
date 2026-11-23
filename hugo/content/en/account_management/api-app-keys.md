@@ -19,6 +19,8 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 Application keys are unique to the organization where they are created. A user who belongs to more than one organization, such as a parent organization and its child organizations, needs a separate application key in each.
 
+<div class="alert alert-info">For new integrations, including AI agents and MCP clients, use a <a href="/account_management/personal-access-tokens/">Personal Access Token</a> or <a href="/account_management/service-access-tokens/">Service Access Token</a> instead of an application key. Access tokens do not need an API key, require scopes, and can expire. To connect the Datadog MCP Server, see <a href="/mcp_server/setup/#authentication">MCP Server authentication</a>.</div>
+
 ### One-Time Read mode
 
 One-Time Read (OTR) mode is a security feature that limits the visibility of application key secrets to creation time only. When OTR mode is enabled, application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
