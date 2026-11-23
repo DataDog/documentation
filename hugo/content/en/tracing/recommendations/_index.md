@@ -107,7 +107,7 @@ Certain recommendations rely on specific Datadog products. Use the {{< ui >}}Rec
 
 If you plan to use [Bits Code][3] to implement recommendations, you must [complete its setup][4].
 
-To use Code Aware (Preview), you must also have [Source Code Integration][6] set up for your services.
+To use Code Aware (Preview), you must have [Source Code Integration][6] set up for your services.
 
 ## How it works
 
@@ -121,7 +121,7 @@ Datadog correlates these sources to identify opportunities to improve performanc
 
 Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
 
-With Code Aware (Preview), Datadog validates recommendations against your source code before they reach you. Recommendations that don't hold up in your code are filtered out, and those that do are marked as validated. This helps you spend less time triaging and more time acting on changes that matter.
+With Code Aware (Preview), Datadog validates recommendations against your source code before they reach you. Recommendations that don't hold up in your code are filtered out, and those that do display a {{< ui >}}Validated{{< /ui >}} badge. This helps you spend less time triaging and more time acting on changes that matter.
 
 ## Using recommendations
 
