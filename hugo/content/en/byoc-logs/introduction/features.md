@@ -75,7 +75,7 @@ BYOC Logs does not support the following features:
   - Calculated fields, including inline calculated fields in DDSQL queries
   - Grok extraction (query-time parsing)
 
-  ## Further reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
