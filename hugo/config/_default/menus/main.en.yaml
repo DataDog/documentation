@@ -4551,6 +4551,11 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 803
+    - name: Outcomes
+      url: cloud_cost_management/planning/outcomes
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_outcomes
+      weight: 804
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
