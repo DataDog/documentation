@@ -108,7 +108,6 @@ When Network Path tests more than one pair of hosts, the map shows the least hea
 
 The map groups hops in the same {{< tooltip text="autonomous system (AS)" tooltip="A network that one organization operates, such as an internet service provider or a cloud provider." >}}. Each line between two hops or AS groups is a _network path segment_.
 
-
 ### Map status and network signals
 
 Each resource and connection on the map has a status: **Healthy**, **Degraded**, **Critical**, or **Unknown**. The map uses CNM and Network Path signals to determine status over the selected time frame. CNM evaluates TCP connection signals, such as failed setups, resets, and retransmits. Network Path evaluates TCP test runs for signals such as probe loss and unanswered runs. UDP and ICMP tests do not affect status.
@@ -197,7 +196,7 @@ In Resource View, the details pane shows the following for the explored or filte
 - The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
 
-{{< img src="network_performance_monitoring/l1_l7_map/details-pane-resource-view.png" alt="The details pane for a service, with its status, View details and View in APM buttons, infrastructure tags, and a metric chart" style="width:50%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/details-pane-resource-view-wide.png" alt="The details pane to the right of the map for a service, with its status, View details and View in APM buttons, tags, and a metric chart" style="width:80%;" >}}
 
 #### Details pane in Connection View
 
@@ -208,7 +207,7 @@ In Connection View, the details pane shows the following for the connection betw
 - The connection's metrics from CNM and Network Path, with charts over the selected time frame. The charts use each product's own data, so their values can differ from the values in the map's hover summaries.
 - **Related resources**, a searchable list of the resources on both sides of the connection, sorted by status.
 
-{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view.png" alt="The details pane in Connection View, with the source and destination statuses, a View connection in CNM button, and a metric chart" style="width:50%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/details-pane-connection-view-wide.png" alt="The details pane to the right of the map in Connection View, with the source and destination statuses, a View connection in CNM button, and a chart" style="width:80%;" >}}
 
 ### Change what the map shows
 
