@@ -33832,7 +33832,9 @@ components:
         - attributes
       type: object
     CreateDeploymentGateParamsDataAttributes:
-      description: Parameters for creating a deployment gate.
+      description: |-
+        Parameters for creating a deployment gate. For the same organization, service, and identifier,
+        a gate for all environments cannot coexist with gates for specific environments.
       properties:
         dry_run:
           default: false
@@ -33840,7 +33842,7 @@ components:
           example: false
           type: boolean
         env:
-          description: The environment of the deployment gate.
+          description: Required environment of the deployment gate. Use `*` to apply the gate to all environments.
           example: "production"
           type: string
         identifier:
@@ -44798,7 +44800,7 @@ components:
         - id
       type: object
     DeploymentGateResponseDataAttributes:
-      description: Basic information about a deployment gate.
+      description: Basic information about a deployment gate. The environment is `*` for a gate that applies to all environments.
       properties:
         created_at:
           description: The timestamp when the deployment gate was created.
@@ -44812,7 +44814,7 @@ components:
           example: false
           type: boolean
         env:
-          description: The environment of the deployment gate.
+          description: The environment of the deployment gate. `*` means all environments.
           example: "production"
           type: string
         identifier:
@@ -187216,12 +187218,24 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Endpoint to create a deployment gate.
+        Create a deployment gate for a specific environment or for all environments using `*`.
+        A gate for all environments and a gate for a specific environment cannot coexist for the
+        same organization, service, and identifier. A conflicting creation returns 400 Bad Request.
       operationId: CreateDeploymentGate
       requestBody:
         content:
           application/json:
             examples:
+              all-environments:
+                summary: Create a gate for all environments
+                value:
+                  data:
+                    attributes:
+                      dry_run: false
+                      env: "*"
+                      identifier: pre
+                      service: my-service
+                    type: deployment_gate
               default:
                 value:
                   data:
