@@ -49,14 +49,10 @@ The Datadog Cluster Agent in your cluster runs each action. Datadog sends the ac
 
 Kubernetes Actions uses the following permissions:
 
-- **Kubernetes Actions Read**: View actions and their history. All users who run actions need this permission.
-- **Kubernetes Actions Write**: Run actions on resources that belong to one of the user's teams.
-- **Kubernetes Actions Admin**: Run actions on any resource, whatever its team. Grant this permission only to users who need it.
+- **Kubernetes Actions Read**: View actions and their history.
+- **Kubernetes Actions Write**: Run actions.
 
-To run an action, a user needs Kubernetes Actions Read and one of the following:
-
-- Kubernetes Actions Admin
-- Kubernetes Actions Write, and membership in the team that owns the resource. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section.
+To run an action, a user needs both permissions and must be a member of the team that owns the resource. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section.
 
 If a user doesn't have the required permissions, the action is unavailable in Kubernetes Explorer. Hover over the action to see the permissions that it requires.
 
@@ -326,7 +322,12 @@ You can stop sending actions through Remote Configuration. This option requires 
 
 To let users view the full manifest of a ConfigMap, the Cluster Agent needs to read ConfigMaps. This permission gives the Cluster Agent read access to all ConfigMaps in the cluster. Do this step only if your users need to see ConfigMap keys and values.
 
-1. Find the name of the Cluster Agent service account, as described in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section.
+1. Find the name of the Cluster Agent service account:
+
+   ```bash
+   kubectl -n <NAMESPACE> get deploy -l app.kubernetes.io/component=cluster-agent \
+     -o jsonpath='{.items[0].spec.template.spec.serviceAccountName}'
+   ```
 
 1. Create a file named `datadog-kubernetes-actions-configmaps.yaml` with the following content. Replace `<SERVICE_ACCOUNT>` and `<NAMESPACE>` with your values.
 
@@ -399,7 +400,7 @@ Kubernetes Actions doesn't run actions on protected system namespaces, such as `
 
 ### View the full manifest of a ConfigMap
 
-To limit the risk of storing sensitive data in Datadog, the Agent collects ConfigMap metadata only. The Agent removes the `data`, `binaryData`, and `managedFields` fields in your cluster, before it sends the ConfigMap to Datadog. To see the keys and values of a ConfigMap, request the full manifest from the Cluster Agent.
+To limit the risk of storing sensitive data in Datadog, the Agent collects ConfigMap metadata only. The Agent removes the `data`, `binaryData`, and `managedFields` fields in your cluster before it sends the ConfigMap to Datadog. To see the keys and values of a ConfigMap, request the full manifest from the Cluster Agent.
 
 Viewing the full manifest is a Kubernetes action. It uses the same permissions and team checks as the other actions.
 
