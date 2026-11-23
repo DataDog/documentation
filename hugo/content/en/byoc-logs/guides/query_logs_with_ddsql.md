@@ -205,7 +205,7 @@ ORDER BY events DESC
 ## Limitations and recommendations
 
 - Inline calculated fields are not supported. To derive values, use SQL expressions in an analysis cell, such as `CASE` statements or arithmetic.
-- Regular expression functions and `UNNEST` can time out on large fields such as `message`. Apply them to shorter attributes, such as URLs or user agents.
+- Regular expression functions and `UNNEST` can time out on large fields, such as `message`. Apply them to shorter attributes, such as URLs or user agents.
 - To use network address functions on an IP address attribute, cast the attribute to `inet` first. For example: `CAST("@client_ip" AS inet) << CAST('10.0.0.0/8' AS inet)`.
 
 ## Further reading
