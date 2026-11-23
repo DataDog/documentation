@@ -197,6 +197,8 @@ $$z\_{\text\"obs\"}=θ↖{\\^}/√{v\_θ}$$
 
 $$\text\"p-value\"=2(1-Φ(|z\_{\text\"obs\"}|))$$
 
+Datadog reports $z\_{\text\"obs\"}$ as the z-score for all frequentist methods. Sequential and sequential hybrid analysis calculate their p-values differently, as described in the following sections.
+
 In the example, the 95% interval for absolute lift is $0.02±1.96×0.0044$, or **[0.011, 0.029]**. For relative lift, it is $0.20±1.96×0.0485$, or **[10.5%, 29.5%]**.
 
 <div class="alert alert-warning">Repeatedly checking a fixed-sample result and stopping when the interval excludes zero increases the false-positive rate. To check results while the experiment is running, use sequential or sequential hybrid analysis.</div>
@@ -233,11 +235,13 @@ Datadog uses the normal-mixture boundary with estimated sampling variances and, 
 
 The sequential p-value is obtained by inverting the sequential boundary: finding the significance level at which the interval reaches zero. It is not the fixed-sample normal-tail p-value calculated from $z\_{\text\"obs\"}$.
 
+The sequential p-value remains valid when you check results repeatedly. Under the same approximations, if the treatment has no effect, the probability that the p-value ever drops to $α$ or below is at most $α$. Early in an experiment, the boundary is wide and the p-value is often 1. A p-value of 1 means there isn't enough evidence yet, not that there is evidence of no effect.
+
 ### Sequential hybrid analysis
 
 The hybrid method uses sequential inference while the experiment is running or has ended early, and fixed-sample inference when it reaches its planned end. It divides the significance budget between these two branches.
 
-For an overall significance level $α$, each branch uses $α/2$. For example, an overall 95% level uses a 97.5% interval within the selected branch. The reported branch p-value is multiplied by two and capped at one.
+For an overall significance level $α$, each branch uses $α/2$. For example, an overall 95% level uses a 97.5% interval within the selected branch. The reported branch p-value is multiplied by two and capped at one. This adjustment gives the hybrid p-value the same guarantee as the sequential p-value. If the treatment has no effect, the probability that it ever drops to $α$ or below is at most $α$.
 
 In the example, the sequential branch uses $b(t,0.025)≈3.30$ before the planned end. It gives **[0.005, 0.035]** for absolute lift and **[4.0%, 36.0%]** for relative lift. At the planned end, the fixed-sample branch uses $z\_{0.9875}≈2.24$. It gives **[0.010, 0.030]** for absolute lift and **[9.1%, 30.9%]** for relative lift.
 
@@ -305,7 +309,9 @@ The posterior also gives the probability of a positive effect:
 
 $$P(Θ>0∣\text\"data\")=Φ(m\_{\text\"post\"}/√{v\_{\text\"post\"}})$$
 
-A positive effect means the metric increased. Whether that is desirable depends on the metric: an increase in conversion and an increase in latency have different business interpretations.
+A positive effect means the metric increased. Whether that is desirable depends on the metric: an increase in conversion and an increase in latency have different business interpretations. The {{< ui >}}Prob. Beats Control{{< /ui >}} statistic on the experiment results page accounts for this. The statistic reports $P(Θ>0∣\text\"data\")$ for metrics that should increase and $P(Θ<0∣\text\"data\")$ for metrics that should decrease.
+
+The posterior also gives the minimum expected regret and the expected value of sample information (EVSI). For these calculations, see [Expected Regret and EVSI][10].
 
 #### Student's t prior
 
@@ -346,3 +352,4 @@ A narrow interval is informative only when the experiment design, data, and stat
 [7]: https://doi.org/10.1007/s00362-012-0429-2
 [8]: /experiments/statistics/analysis_methods/
 [9]: /experiments/statistics/cuped/
+[10]: /experiments/statistics/expected_regret_and_evsi/

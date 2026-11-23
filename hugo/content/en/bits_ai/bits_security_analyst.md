@@ -53,6 +53,10 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 
 Bits AI can run investigations on the following Security log sources:
 - 1Password
+- Abnormal Security
+- Airtable (Crest Data Systems)
+- Amazon ELB
+- Amazon FSx
 - Amazon GuardDuty, where supported [finding types][6] cover:
   - Anomalous and compromised IAM credentials
   - EC2 and resource credential exfiltration and misuse
@@ -62,32 +66,71 @@ Bits AI can run investigations on the following Security log sources:
   - S3 anomalous behavior, data exposure, malicious callers, and penetration test activity
   - CloudTrail or S3 defense evasion
   - Attack sequences correlating IAM credential and S3 data compromise
+- Apache
+- Asana
 - Atlassian Event Logs
 - Auth0
 - AWS CloudTrail
 - Azure
+- Check Point Harmony Email & Collaboration
+- Cisco Duo
+- Cisco Umbrella DNS
 - Claude Compliance Logs
 - Cloudflare
 - Confluence Audit Records
 - CrowdStrike
+- Datadog Audit Trail
+- Datadog Code Security
+- Datadog Supply Chain Firewall
+- Delinea Privilege Manager
+- DNSFilter
 - Email phishing
+- Forcepoint Secure Web Gateway
+- Forcepoint Security Service Edge
 - GCP
 - GitHub
 - GitLab
 - Google Workspace
+- GuardDog
+- HashiCorp Vault
+- iboss
 - Jira Audit Records
 - JumpCloud
+- Keeper
+- Keycloak
 - Kubernetes
+- Linux Audit Logs
 - Microsoft 365
 - Microsoft Defender for EDR
 - Microsoft Entra ID
+- MySQL
+- Netskope
+- NGINX Ingress Controller
 - Okta
+- OneLogin
+- Oracle Cloud Infrastructure
+- Oracle Fusion
+- OSSEC Security
+- Palo Alto Networks Firewall
+- PingFederate
+- PingOne
+- PostgreSQL
 - Salesforce
 - SentinelOne
 - Slack
 - Snowflake
+- Suricata
+- Symantec VIP
+- Tailscale
+- Trellix Endpoint Security
+- Twilio
+- Twistlock
 - Windows
+- Workday
+- Zeek
 - Zendesk
+- Zoom
+- Zscaler
 
 <div class="alert alert-info">In rare cases, an out-of-the-box rule for a supported source is ineligible for Bits investigations because the investigation requires additional non-SIEM telemetry. To view these rules, go to <strong>Security</strong> > <strong>Settings</strong> > <strong>Bits Security Analyst</strong> > <strong>Analyst Configuration</strong>, then turn on <strong>Show currently ineligible rules</strong>.</div>
 

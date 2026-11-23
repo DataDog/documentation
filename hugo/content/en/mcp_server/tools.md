@@ -849,7 +849,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
@@ -858,7 +858,7 @@ Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code rec
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ### `search_datadog_sdk`
-*Toolset: **code-exec***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
 
@@ -1029,6 +1029,23 @@ Retrieves data quality metric timeseries for a given monitor ID, including anoma
 
 - Show me the metric history for monitor `12345`.
 - What are the anomaly bounds for this freshness monitor?
+
+### `get_data_observability_monitor_errors`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read`*\
+Returns the latest metric collection error for each table covered by a data quality monitor. Errors can include SQL errors, permission errors, and warehouse timeouts. Each entry includes the table, error level, message, and timestamp. Use this tool to investigate a monitor that reports OK or No Data while its query is failing. Requires `monitor_id`. To check a single table, provide `entity_id`. Otherwise, the tool checks up to 500 tables.
+
+- Show the latest metric collection errors for monitor `12345`.
+- Why does this data quality monitor show No Data?
+- Check monitor `12345` for collection errors on this table.
+
+### `get_data_entity_monitor_health`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `APM Read` and `Timeseries`*\
+Returns the status of every data quality monitor on a data entity, such as a table, including any metric collection errors. Requires `entity_id`.
+
+- Show the health of all data quality monitors on this table.
+- Are any monitors on this table reporting metric collection errors?
 
 ### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\
@@ -2286,7 +2303,7 @@ Creates a copy of a notebook, including its content, time frame, template variab
 
 ## Observability Pipelines
 
-Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
+Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines. To update pipelines, use Bits in the pipeline builder. You can also update or delete pipelines with [Pup][104] or the [Observability Pipelines API][88], but these updates go live immediately on your Workers and can break running pipelines. See [Manage Pipelines with AI Agents][105].
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -2330,6 +2347,107 @@ Creates a pipeline from a name and a configuration in the [Observability Pipelin
 
 - Create a logs pipeline that receives logs from the Datadog Agent, drops debug logs, and sends the rest to Datadog.
 - Build a pipeline that collects Splunk HEC logs, redacts credit card numbers, and routes them to Amazon S3 and Splunk.
+
+## On-Call
+
+Tools for [Datadog On-Call][106], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
+
+<div class="alert alert-info">The <code>on-call</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access. After your organization has access, add <code>on-call</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,on-call</code>).</div>
+
+### `list_oncall_pages`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Searches On-Call pages and returns their status, urgency, responders, and timestamps. Filter by fields such as `status`, `urgency`, `team`, `service`, `tags`, and responder name or email.
+
+- Which pages are still unresolved for the `payments` team?
+- List the high-urgency pages created in the last 24 hours.
+
+### `get_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call page by its UUID or page key, including its status, title, responders, and related resources.
+
+- Show me the details of page `PAGE-123`.
+- Who responded to this page, and is it resolved?
+
+### `create_oncall_page`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Page`*\
+Pages a team or a single user through On-Call. Paging a team notifies whoever the team's escalation policy has on call. Paging a user notifies only that user, through their own notification rules, with no escalation. Set the urgency to `low` or `high`, and optionally add a description and tags. Adding a `service:<name>` tag associates the page with that service.
+
+- Page the `payments` team with high urgency: checkout error rate is above 5%.
+- Send a low-urgency page to the `payments` team about elevated latency on `checkout-api`, tagged `service:checkout-api`.
+
+<div class="alert alert-warning">This tool notifies real people. Confirm the target and urgency before your agent creates a page.</div>
+
+### `list_oncall_schedules`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists On-Call schedules, optionally filtered by name, team, user, tags, or schedule type. Use this tool to find a schedule's ID before calling the other schedule tools.
+
+- List the On-Call schedules for the `payments` team.
+- Find the schedule named `Platform Primary`.
+
+### `get_oncall_schedule`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves an On-Call schedule by its ID, including its name, time zone, tags, and layers.
+
+- Show me the layers and time zone of the `Platform Primary` schedule.
+
+### `get_oncall_schedule_calendar`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Retrieves the calendar for an On-Call schedule over a time window of up to 45 days, including each shift, who covers it, and any overrides applied.
+
+- Who is covering the `Platform Primary` schedule over the holidays?
+- Show me next week's shifts for the `payments` schedule.
+
+### `get_oncall_schedule_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns who is on call for a schedule, including their name and email. Returns the current rotation position by default, and can also return the previous and next positions or evaluate a specific point in time.
+
+- Who is on call for the `Platform Primary` schedule?
+- Who is next on call for the `payments` schedule?
+
+### `get_oncall_team_responders`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Returns the current on-call responders for a team: the responders who would be notified first, plus the rest of the escalation chain. Optionally provide page tags to evaluate a specific routing rule.
+
+- Who would get paged if I paged the `payments` team?
+- Who is on call for the `payments` team for `env:prod` and `service:checkout-api`?
+
+### `list_oncall_schedule_overrides`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Lists the overrides on an On-Call schedule within a time window of up to 45 days, including who is covering and who they are covering for.
+
+- What overrides are scheduled on the `Platform Primary` schedule this month?
+
+### `create_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Overrides an On-Call schedule for a time window, putting a specific user on call instead of whoever the rotation would pick. Use this tool to record shift swaps and ad-hoc cover.
+
+- Put Alex on call for the `Platform Primary` schedule from Friday 6 PM to Monday 9 AM.
+- I'm covering Sam's shift on the `payments` schedule tomorrow. Record the swap.
+
+### `remove_oncall_schedule_override`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Respond` or `On-Call Write`*\
+Removes an override from an On-Call schedule. An override that has not started yet is deleted. An override that is in progress ends immediately and remains visible as inactive.
+
+- Remove my override on the `Platform Primary` schedule for this weekend.
+
+### `get_oncall_analytics`
+*Toolset: **on-call***\
+*Permissions Required: `On-Call Read`*\
+Aggregates On-Call event data over a time window of up to 90 days to measure page volume, acknowledgment and resolution times, escalation activity, and shift duration. Optionally filter and group results by event attributes, such as team, urgency, or schedule.
+
+- How many pages did each team receive in the last 30 days?
+- What is the p90 time to resolve high-urgency pages for the `payments` team this quarter?
 
 ## Onboarding
 
@@ -3864,6 +3982,9 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [101]: /gpu_monitoring/
 [102]: /gpu_monitoring/mcp_tools/
 [103]: /mcp_server/setup#required-permissions
+[104]: /cli/
+[105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
+[106]: /incident_response/on-call/
 
 ## Further reading
 
