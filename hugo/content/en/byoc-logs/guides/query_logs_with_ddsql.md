@@ -40,7 +40,7 @@ To query BYOC Logs with DDSQL, add a data source cell that selects your BYOC Log
    ```
 
    To query all indexes in a cluster, use `index:byoc--<CLUSTER_NAME>`.
-1. Rename the cell to a short name, such as `app_logs`. In SQL queries, you use this name as the table name.
+1. Rename the cell to a short name, such as `app_logs`. Use this name as the table name in SQL queries.
 
 Add a separate data source cell for each set of logs you want to query or join. The examples on this page use two data sources:
 
