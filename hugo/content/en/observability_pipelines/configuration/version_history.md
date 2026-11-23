@@ -75,7 +75,7 @@ For a modified component, the diff highlights the lines that changed.
 
 To compare the entire configuration of a version with the previous version, click **View Diff**. A side-by-side view of the pipeline's JSON configuration opens, with the previous version on the left and the selected version on the right. Changed lines are highlighted.
 
-{{< img src="observability_pipelines/version_history/view_diff.png" alt="The View Diff window showing the JSON configuration of Version 2 compared with Version 1" style="width:100%;" >}}
+{{< img src="observability_pipelines/version_history/view_diff.png" alt="The View Diff window showing the JSON configuration of Version 2 compared with Version 1." style="width:100%;" >}}
 
 ## Further reading
 
