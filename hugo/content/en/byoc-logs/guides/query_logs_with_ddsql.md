@@ -66,6 +66,8 @@ ORDER BY events DESC
 
 ## Example queries
 
+The following examples use the `app_logs` and `access_logs` data source cells described in the [Add a BYOC Logs data source](#add-a-byoc-logs-data-source) section. Replace the table and attribute names with your own.
+
 ### Latency statistics per service
 
 ```sql
