@@ -91,7 +91,7 @@ SECURITY DEFINER
 SET search_path = pg_catalog, pg_temp;
 ```
 
-To enable column statistics collection on the Agent, add the following to your Postgres instance config:
+The Agent collects column statistics automatically once the function exists. On Agent versions earlier than 7.87.0, add the following to your Postgres instance config:
 
 ```yaml
 instances:
