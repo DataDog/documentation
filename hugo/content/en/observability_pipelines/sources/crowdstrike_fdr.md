@@ -74,6 +74,8 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed. This field is required.
 
+{{< img src="observability_pipelines/sources/crowdstrike_fdr_settings.png" alt="The CrowdStrike FDR source settings in the pipeline UI, showing the SQS Queue URL Key, AWS Access Key ID Key, AWS Secret Access Key Key, AWS Region, and optional settings" style="width:45%;" >}}
+
 {{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
