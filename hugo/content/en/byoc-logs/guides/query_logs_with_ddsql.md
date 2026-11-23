@@ -57,7 +57,7 @@ Add a separate data source cell for each set of logs you want to query or join. 
 ### Write a SQL query
 
 1. In your notebook, type `/sql` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
-1. Write your query, using the data source cell name as the table name.
+1. Write your query. Use the data source cell name as the table name.
 1. Click {{< ui >}}Run{{< /ui >}}.
 
 Reference reserved attributes, such as `timestamp`, `host`, `service`, `status`, and `message`, by name. Reference other attributes in double quotes with the `@` prefix, such as `"@latency_ms"`. For example:
