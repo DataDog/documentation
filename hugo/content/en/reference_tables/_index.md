@@ -202,8 +202,6 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-{{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
-
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
 First, [configure the Databricks integration][14] with access to the table or view to ingest.
@@ -217,6 +215,43 @@ First, [configure the Databricks integration][14] with access to the table or vi
 3. Click {{< ui >}}Save{{< /ui >}}.
 
 Use a view to limit ingestion to the rows and columns you need.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Salesforce" level="h3" id="salesforce" %}}
+
+First, [configure the Salesforce integration][17] with read access to the objects and fields to ingest.
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Salesforce{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Salesforce Org{{< /ui >}}: The connected Salesforce org.
+   - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
+   - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
+
+To investigate ingestion errors, search for `source:salesforce` in the [Events Explorer][20].
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="ServiceNow" level="h3" id="servicenow" %}}
+
+First, [configure the ServiceNow integration and a scheduled Query Builder query][18].
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}ServiceNow{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Instance{{< /ui >}}: The connected ServiceNow instance.
+   - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
+   - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+Additional fields must use paths supported by the ServiceNow Table API. The column name combines the root table name with the last two parts of the path. For example, `vendor.manufacturer.name` with root table `cmdb_ci_server` creates `cmdb_ci_server_manufacturer_name`.
+
+Data populates after the scheduled Query Builder query runs. To investigate ingestion errors, search for `source:servicenow` in the [Events Explorer][20].
 
 {{% /collapse-content %}}
 
@@ -378,3 +413,7 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [14]: /integrations/databricks/#reference-table-configuration
 [15]: /integrations/snowflake-web/#reference-tables
 [16]: https://app.datadoghq.com/reference-tables
+[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
+[20]: https://app.datadoghq.com/event/explorer
