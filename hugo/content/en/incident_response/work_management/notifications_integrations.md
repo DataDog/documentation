@@ -156,19 +156,20 @@ In Project Settings, you can manage membership, configure the auto-closing of wo
 - Two-way syncing requires [webhook support][6].
 {{% /collapse-content %}}
 
-## GitHub pull requests
+## GitHub pull request sync
 
-Link GitHub pull requests to work items to track code changes alongside the work they address. You can also enable automatic status updates for each project.
+The **Sync work item statuses with linked GitHub PRs** toggle syncs statuses; it does not link pull requests to work items.
 
 ### Prerequisites
 
-Configure the [GitHub integration][10] for your Datadog organization, grant it access to the repositories containing your pull requests, and enable pull request events.
+- Install the [GitHub integration][10] with read access to your pull requests.
+- Enable [Source Code Integration][11] so that Datadog can process GitHub webhook events.
 
 ### Link pull requests
 
-To link a pull request manually, open the work item, click **Add Resource**, paste the GitHub pull request URL, and click **Add**. If the work item already has resources, click **Add link** in the **Resources** section instead.
+To link a pull request manually, open the work item, click **Add Resource**, paste the GitHub pull request URL, and click **Add**. If the work item already has resources, click **Add link** in the **Resources** section. You can also paste a GitHub pull request URL in a work item comment.
 
-To link automatically, include the work item key, such as `PROJ-123`, in the pull request title, description, or source branch name. A work item can have multiple linked pull requests.
+For organizations with automatic linking enabled, Datadog checks the pull request title, description, and source branch name when the pull request is opened. It links any work item whose key, such as `PROJ-123`, appears in those fields. Datadog also detects keys added later to the title or description.
 
 ### Enable status syncing
 
@@ -176,16 +177,16 @@ To link automatically, include the work item key, such as `PROJ-123`, in the pul
 1. Select **Integrations** > **GitHub**.
 1. Enable **Sync work item statuses with linked GitHub PRs**.
 
-Status updates flow from GitHub to Work Management. Changing a work item status does not change the pull request state.
+Status updates flow from GitHub to Work Management. Changing a work item status does not change the pull request state, and closed work items are not updated or reopened.
 
-| Pull request event | Work item status |
+| Pull request action | Work item status |
 | --- | --- |
-| A linked pull request is opened, reopened, or marked ready for review | **In Progress**. Opening a draft pull request also triggers this update. |
-| A linked pull request is merged or closed without merging | **In Progress** if another linked, non-draft pull request is open. Otherwise, **Closed** if at least one linked pull request is merged. If neither condition applies, the status stays unchanged. |
+| Opened, reopened, or marked ready for review | **In Progress**. This includes opening a pull request as a draft. |
+| Linked to the work item, merged, or closed | Datadog evaluates all linked pull requests. Any non-draft open pull request sets the work item to **In Progress**. Otherwise, at least one merged pull request sets it to **Closed**. If neither condition applies, the status stays unchanged. |
 
-Linking an existing pull request also evaluates the linked pull requests, unless the work item is closed. An open, non-draft pull request sets the status to **In Progress**. Otherwise, a merged pull request sets it to **Closed**. If there are only draft or unmerged closed pull requests, the status stays unchanged.
+**Draft pull requests**: Linking an existing draft pull request or converting a pull request to a draft does not change the work item status. A draft does not prevent closure when another linked pull request is merged and no non-draft pull requests are open.
 
-Draft pull requests do not prevent closure when another linked pull request has merged and no non-draft pull requests remain open. Converting a pull request to a draft does not trigger a status update.
+**Multiple pull requests**: A non-draft open pull request takes precedence over a merged pull request. Closing a pull request without merging leaves the work item status unchanged unless another linked pull request determines the status.
 
 ## Incident auto-escalation
 
@@ -231,3 +232,4 @@ Slack thread mirroring is enabled by default for all Work Management projects. T
 [8]: /incident_response/work_management/notifications_integrations#notifications
 [9]: /integrations/slack/?tab=datadogforslack
 [10]: /integrations/github/
+[11]: /integrations/guide/source-code-integration
