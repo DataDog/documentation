@@ -85,14 +85,6 @@ The rule deprecation process is as follows:
 [4]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: /agent/supported_platforms/?tab=linux
-[7]: /security/notifications/
 [13]: https://app.datadoghq.com/security/configuration/compliance/rules
-[14]: /integrations/slack/
-[15]: /integrations/jira/
-[16]: /integrations/pagerduty
-[17]: /integrations/servicenow/
-[18]: /integrations/microsoft_teams/
-[19]: /integrations/webhooks/
 [20]: /security/cloud_security_management/misconfigurations/custom_rules/
-[21]: /security/notifications/rules/
 [23]: /security/detection_rules/#clone-a-rule

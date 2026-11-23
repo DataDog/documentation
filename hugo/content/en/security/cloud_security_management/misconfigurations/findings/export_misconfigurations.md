@@ -6,7 +6,7 @@ further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
-- link: "security/cspm/frameworks_and_benchmarks"
+- link: "security/cloud_security_management/misconfigurations/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 ---

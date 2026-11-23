@@ -13,7 +13,7 @@ You can use resource tags to create filters that include or exclude resources fr
 
 **Notes**:
 
-- Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
+- Resource evaluation filters can only be used with cloud resources that are scanned by cloud integrations.
 - Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog.
 
 | Format                       | Value        |
@@ -28,9 +28,9 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 **Examples**:
 
 - `!env:staging` excludes resources that have the `env:staging` tag.
-- `datadog:monitored, env:prod*` collects metrics for resources that have at least one of these tags.
+- `datadog:monitored, env:prod*` evaluates resources that have at least one of these tags.
 - `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
-- `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
+- `datadog:monitored, !region:us-east1` evaluates resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
 
 ## Exclude cloud resources from evaluation
 

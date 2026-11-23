@@ -3,13 +3,13 @@ title: Create Custom Compliance Frameworks
 aliases:
   - /security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
 further_reading:
-- link: "security/cspm/setup"
+- link: "security/cloud_security_management/setup"
   tag: "Documentation"
   text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
-- link: "security/cspm/findings"
+- link: "security/cloud_security_management/misconfigurations/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
 - link: "https://www.datadoghq.com/blog/cloud-security-playbook/"
@@ -49,10 +49,5 @@ Next, add requirements to the framework:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/compliance
-[2]: /dashboards/template_variables/
-[3]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
-[4]: /api/latest/security-monitoring/#update-an-existing-rule
-[5]: https://app.datadoghq.com/security/configuration/compliance/rules
 [6]: https://app.datadoghq.com/security/compliance/home
 [7]: /glossary/#security-posture-score

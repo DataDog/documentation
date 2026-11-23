@@ -5,13 +5,13 @@ aliases:
   - /security/cspm/frameworks_and_benchmarks
   - /security/misconfigurations/frameworks_and_benchmarks
 further_reading:
-- link: "security/cspm/setup"
+- link: "security/cloud_security_management/setup"
   tag: "Documentation"
   text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
-- link: "security/cspm/findings"
+- link: "security/cloud_security_management/misconfigurations/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
 - link: "security/application_security/api_posture/compliance"
@@ -72,22 +72,9 @@ Then, on the Compliance page, you can use the {{< ui >}}Show hidden frameworks{{
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/default_rules/
+[1]: /security/default_rules/
 [2]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/supported_frameworks/
 [3]: /glossary/#security-posture-score
 [4]: /dashboards
-[11]: /security/cloud_siem/
-[12]: /integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
-[14]: /integrations/slack/
-[15]: /integrations/jira/
-[16]: /integrations/pagerduty
-[17]: /integrations/servicenow/
-[18]: /integrations/microsoft_teams/
-[19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance
-[21]: /security/cloud_security_management/misconfigurations/detection_rules
-[26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
-[28]: /dashboards/template_variables/
-[29]: /api/latest/security-monitoring/#update-an-existing-rule
 [30]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks/custom_frameworks

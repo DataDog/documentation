@@ -169,4 +169,3 @@ After running the workflow, additional information is shown on the side panel. Y
 [5]: /integrations/slack/
 [6]: /integrations/jira/
 [7]: /actions/workflows/variables/#context-variables
-[8]: /api/latest/security-monitoring/#get-a-finding

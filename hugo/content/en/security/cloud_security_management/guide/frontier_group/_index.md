@@ -26,7 +26,7 @@ Automated inference on who owns a particular resource and should be responsible 
 [1]: /security/cloud_security_management/review_remediate/ownership_agent/
 [2]: /security/cloud_security_management/review_remediate/ownership_preferences/
 
-### 1-click CSPM remediation
+### 1-click Misconfigurations remediation
 
 ***Status:*** *available for frontier partners*<br>
 Automated (except human-in-the-loop) remediation on running cloud resources and the IaC definitions of those resources.
@@ -48,8 +48,10 @@ More accurate public access evaluations of containers through EKS and runtime da
 
 ### Critical assets
 
-***Status:*** *coming soon*<br>
-Automatic critical asset inference based on observability data, overridable through manual queries.
+***Status:*** *generally available*<br>
+Automatic critical asset inference based on observability data, which you can curate by adding or removing resources. See [Crown Jewels][3] for an overview of detection signals and how to use the list to prioritize findings.
+
+[3]: /security/cloud_security_management/crown_jewels/
 
 ## Further reading
 

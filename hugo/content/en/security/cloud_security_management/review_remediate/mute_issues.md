@@ -13,6 +13,9 @@ products:
   - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
+  - name: Cloud Security Vulnerabilities
+    url: /security/cloud_security_management/vulnerabilities/
+    icon: cloud-security-management
 ---
 
 {{< product-availability >}}
