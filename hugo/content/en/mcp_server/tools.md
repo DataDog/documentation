@@ -3454,6 +3454,24 @@ Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. U
 - Remove my last created spreadsheet.
 - Remove spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
 
+## Signals
+
+### `get_signals_for_scope`
+*Toolset: **signals***\
+*Permissions Required: `events_read`, `timeseries_query`, and `monitors_read`*\
+Retrieves Watchdog stories and monitor alert histories for one service. Results cover only the requested scope, not upstream or downstream services. Specify `service`; optionally filter by `env` and additional `tags`.
+
+Availability is restricted to enabled organizations and sites. Adding `signals` to the `toolsets` parameter does not grant access.
+
+- Show Watchdog stories and monitor alert histories for the checkout service in prod over the last hour.
+- Investigate the payments service from 09:00 to 10:00 UTC today, filtered by `team:payments`.
+
+**Time windows**: `from` and `to` accept ISO 8601 or relative times and default to `now-4h` and `now`. A past window searches data available at request time, not an archived snapshot. Stories can include later updates, resolution times, or observations. Do not use the response as evidence of what was known at a historical cutoff. Monitor histories can include preceding alert state from a one-hour lookback.
+
+**Partial results and access**: Check `stories_error` and `monitors_error` before interpreting empty results. Source failures are not evidence that no signals exist. Monitor results require per-monitor view authorization using current monitor tags. Denied monitors and their histories are omitted. Missing authorization metadata can also withhold monitors and set `monitors_error`.
+
+**Output limits**: `max_tokens` is an approximate output budget, not a limit on backend work. It defaults to 10,000 and is capped at 20,000. Check `metadata.is_truncated`, `stories_omitted`, and `monitors_omitted`. Omission counts describe budget exclusions, not authorization exclusions. Narrow the service filters or time window, or increase the budget. The tool has no pagination.
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], [DORA metrics][66], and [Deployment Gates][2]).
