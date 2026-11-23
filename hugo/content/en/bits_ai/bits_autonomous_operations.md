@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Through Autonomous Operations, Bits joins your team as a first responder for production alerts: Bits triages alerts, investigates the issues that need attention, and proposes next steps. When a remediation action is approved, Bits runs it and verifies whether the issue is resolved, reducing the time from alert to resolution and keeping your systems healthy.
+With Autonomous Operations, Bits joins your team as a first responder for production alerts: Bits triages alerts, investigates the issues that need attention, and proposes next steps. When a remediation action is approved, Bits runs it and verifies whether the issue is resolved, reducing the time from alert to resolution and keeping your systems healthy.
 
 Autonomous Ops connects [Bits Detection][1], [Bits Investigation][2], and [Bits Remediation][3]. It can handle application issues, such as rising error rates or latency on an endpoint, and infrastructure issues across hosts, containers, and serverless functions.
 
