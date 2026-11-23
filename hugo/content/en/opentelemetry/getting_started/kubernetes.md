@@ -17,7 +17,7 @@ further_reading:
 
 Monitor your Kubernetes applications and infrastructure in Datadog with OpenTelemetry. This quickstart installs a Collector, adds instrumentation to your application, and shows you where to find your services, traces, and logs in Datadog.
 
-Use DDOT components, which Datadog recommends, or upstream OpenTelemetry components. The installation steps are the same; select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
+Use DDOT components, which Datadog recommends, or upstream OpenTelemetry components. The installation steps are the same. Select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
 
 This quickstart runs on Kubernetes, and so does the DDOT Collector. On other platforms, use an upstream OpenTelemetry Collector or the Datadog Agent. See [Send OpenTelemetry Data to Datadog][17].
 
@@ -90,7 +90,7 @@ Replace the placeholders:
    ./install
    ```
 
-2. Wait for the OpenTelemetry Operator to be ready, then list the pods. It only instruments pods that start after it's ready.
+2. Wait for the OpenTelemetry Operator to be ready, then list the pods. The OpenTelemetry Operator only instruments pods that start after it's ready.
 
    ```shell
    kubectl rollout status deployment/opentelemetry-kube-stack-opentelemetry-operator -n opentelemetry-operator-system --timeout=5m

@@ -33,7 +33,7 @@ The DDOT Collector is in Preview.
 
 The Datadog OpenTelemetry (DDOT) Collector is Datadog's version of the OpenTelemetry Collector. It's open source, and Datadog builds and maintains it. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration.
 
-{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="An instrumented application sends OTLP to the DDOT Collector, which exports to Datadog, with a recommended Datadog Agent alongside." style="width:100%;" >}}
 
 - **Use OpenTelemetry tooling**: Deploy the Collector on Kubernetes with the OpenTelemetry Operator or Helm charts.
 - **Configure your pipelines**: Receive telemetry from [DDOT SDKs][67], upstream OpenTelemetry SDKs, and other sources. Process it, and route it to Datadog and to other destinations.

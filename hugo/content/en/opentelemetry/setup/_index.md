@@ -40,7 +40,7 @@ To check which Datadog features each option supports, see [Feature Compatibility
 
 ## DDOT Collector (recommended) {#ddot-collector}
 
-{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an upstream OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. A recommended Datadog Agent runs alongside the Collector." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="An instrumented application sends OTLP to the DDOT Collector, which exports to Datadog, with a recommended Datadog Agent alongside." style="width:100%;" >}}
 
 Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with OpenTelemetry tooling, such as the OpenTelemetry Operator or Helm charts. It receives, processes, and sends your telemetry to Datadog. Datadog recommends [running the Datadog Agent alongside it][3].
 
@@ -53,7 +53,7 @@ Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with OpenTelemet
 
 ## Upstream OpenTelemetry Collector
 
-{{< img src="/opentelemetry/setup/otel-route-upstream-collector.png" alt="Your application, instrumented with OpenTelemetry, sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to the Datadog OTLP intake." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-route-upstream-collector.png" alt="An instrumented application sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to the Datadog OTLP intake." style="width:100%;" >}}
 
 Your upstream OpenTelemetry Collector sends OTLP over HTTP to the Datadog OTLP intake. If your Collector uses the Datadog Exporter, see [Datadog Exporter][4].
 
@@ -65,7 +65,7 @@ Your upstream OpenTelemetry Collector sends OTLP over HTTP to the Datadog OTLP i
 
 ## Direct OTLP ingest
 
-{{< img src="/opentelemetry/setup/otel-route-direct-otlp.png" alt="Your application, instrumented with OpenTelemetry, sends OTLP straight to the Datadog OTLP intake, with no Collector or Agent in between." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-route-direct-otlp.png" alt="An instrumented application sends OTLP directly to the Datadog OTLP intake, with no Collector or Agent." style="width:100%;" >}}
 
 Your applications send OTLP directly to Datadog, without a Collector or Agent. This option omits the enrichment, processing, and centralized sampling that those components provide.
 
@@ -77,9 +77,9 @@ Your applications send OTLP directly to Datadog, without a Collector or Agent. T
 
 ## Datadog Agent
 
-{{< img src="/opentelemetry/setup/otel-route-datadog-agent.png" alt="Your application, instrumented with OpenTelemetry, sends OTLP to the Datadog Agent, which receives it at the Agent's OTLP endpoint or with the Agent's Collector, and sends it to Datadog." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-route-datadog-agent.png" alt="An instrumented application sends OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 
-The Datadog Agent receives OTLP from your applications at the [Agent's OTLP endpoint][5], or runs an OpenTelemetry Collector alongside it, the [Agent's Collector][6]. You also get Agent-based features, such as integrations and Live Container Monitoring.
+The Datadog Agent receives OTLP from your applications at the [Agent's OTLP endpoint][5], or runs the [Agent's Collector][6], an OpenTelemetry Collector that runs alongside the Agent. You also get Agent-based features, such as integrations and Live Container Monitoring.
 
 **Best for**: Teams that already run the Datadog Agent.
 

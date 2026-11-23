@@ -15,7 +15,7 @@ The DDOT Collector is in Preview.
 
 ## Overview
 
-Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. You don't need the Datadog Agent.
+Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. Datadog recommends that you also [add the Datadog Agent](#install-the-core-datadog-agent-alongside-ddot).
 
 To install the Collector and instrument an application with Datadog's installer script, see the [Kubernetes quickstart][73].
 
