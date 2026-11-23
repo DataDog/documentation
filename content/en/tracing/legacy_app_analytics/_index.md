@@ -101,7 +101,9 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-App Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
+<div class="alert alert-danger">Trace analytics (App Analytics) is removed in version 2.0.0 of the PHP tracing client. The <code>DD_TRACE_ANALYTICS_ENABLED</code>, <code>DD_TRACE_&lt;INTEGRATION&gt;_ANALYTICS_ENABLED</code>, and <code>DD_TRACE_&lt;INTEGRATION&gt;_ANALYTICS_SAMPLE_RATE</code> settings (and their <code>DD_&lt;INTEGRATION&gt;_ANALYTICS_*</code> aliases) no longer exist. Use <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a> and <a href="/tracing/trace_pipeline/trace_retention/">retention filters</a> instead.</div>
+
+For versions 1.x and earlier, App Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
@@ -253,6 +255,8 @@ Integration names can be found on the [integrations table][1]. **Note:** On Linu
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
+<div class="alert alert-danger">The per-integration App Analytics settings are removed in version 2.0.0 of the PHP tracing client. The following applies to versions 1.x and earlier.</div>
+
 In addition to setting globally, you can enable or disable App Analytics for individual integrations using the following setting:
 
 * Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
@@ -334,6 +338,8 @@ Integration names can be found on the [integrations table][1]. **Note:** On Linu
 [1]: /tracing/setup/dotnet/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
+
+<div class="alert alert-danger">The per-integration App Analytics settings are removed in version 2.0.0 of the PHP tracing client. The following applies to versions 1.x and earlier.</div>
 
 Database tracing is not captured by App Analytics by default. You can enable or disable App Analytics for individual integrations using the following setting:
 
@@ -446,6 +452,8 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
+
+<div class="alert alert-danger">In version 2.0.0 of the PHP tracing client, the <code>analytics.event</code> tag is no longer mapped to <code>_dd1.sr.eausr</code>, and <code>Tag::ANALYTICS_KEY</code> remains only as a deprecated no-op. The following applies to versions 1.x and earlier.</div>
 
 Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 

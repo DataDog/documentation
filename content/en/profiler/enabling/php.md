@@ -82,6 +82,8 @@ To begin profiling applications:
     php datadog-setup.php --enable-profiling --php-bin=all
     ```
 
+    Starting with `dd-trace-php` version 2.0.0, the profiler is part of the `ddtrace.so` extension, and profiling is disabled by default (`DD_PROFILING_ENABLED` defaults to `false`). The `--enable-profiling` flag sets `datadog.profiling.enabled = On`. If you configure the extension manually instead of with `datadog-setup.php`, set `DD_PROFILING_ENABLED=true` or `datadog.profiling.enabled=On`.
+
 4. **Optional:** Configure the profiler using config mode through the `datadog-setup.php`:
 
     ```shell
@@ -95,19 +97,7 @@ To begin profiling applications:
 
     See the [configuration docs][4] for more INI settings.
 
-5. Validate the profiler extension is loaded and enabled by executing `php -v` and validate that you see `datadog-profiling` in the output.
-
-    ```shell
-    php -v
-    ```
-
-    ```
-    PHP 8.4.13 (cli) (built: Sep  5 2025 11:52:54) (ZTS)
-    Copyright (c) The PHP Group
-    Zend Engine v4.4.13, Copyright (c) Zend Technologies
-        with Zend OPcache v8.4.13, Copyright (c), by Zend Technologies
-        with datadog-profiling v1.13.0, Copyright Datadog, by Datadog
-    ```
+5. Validate that profiling is enabled. Find the INI file that `datadog-setup.php` updated, for example by running `php --ini`, and confirm that it contains `datadog.profiling.enabled = On`, or that `DD_PROFILING_ENABLED=true` is set for your service. If you upgraded from a version earlier than 2.0.0 and `datadog-setup.php` found `datadog-profiling.so` loaded, it sets `datadog.profiling.enabled = On` unless the INI file already sets `datadog.profiling.enabled`.
 
 6. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
 

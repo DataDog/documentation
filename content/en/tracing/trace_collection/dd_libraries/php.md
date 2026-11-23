@@ -77,7 +77,7 @@ This command installs the extension to all the PHP binaries found in the host or
 
 Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. To see the generated traces, go to the [APM Traces page][4].
 
-When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
+Starting with version 2.0.0, the tracer, the profiler, and AppSec (Application Security) ship as a single `ddtrace.so` extension. The separate `datadog-profiling.so` and `ddappsec.so` extensions are no longer shipped. To enable AppSec, use the `--enable-appsec` flag or set `DD_APPSEC_ENABLED`. Profiling is disabled by default (`DD_PROFILING_ENABLED` defaults to `false`). To enable it, use the `--enable-profiling` flag, which sets `datadog.profiling.enabled = On`, or set `DD_PROFILING_ENABLED=true`.
 
 <div class="alert alert-info">
 It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
@@ -123,9 +123,31 @@ Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI
 
 To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
 
-Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
+After the installation is completed, restart PHP (PHP-FPM or the Apache SAPI).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
+
+### Upgrading from 1.x to 2.0
+
+Version 2.0.0 includes breaking changes. For the full list, see the [upgrade guide][16]. Supported PHP versions are unchanged: PHP 7.0 and newer (profiling requires PHP 7.1 or newer). Key changes:
+
+Single extension
+: The profiler and AppSec are part of `ddtrace.so`. Loading an old `ddappsec.so` together with `ddtrace.so` is a fatal startup error. If you configure the extensions manually, remove `extension=ddappsec.so` and `extension=datadog-profiling.so` from your INI files. `datadog-setup.php` deletes a leftover `ddappsec.so` and comments out `datadog-profiling.so` entries for you. PECL builds include profiling and AppSec only when configured with `--enable-ddtrace-profiling` and `--enable-ddtrace-appsec`.
+
+Profiling is opt-in
+: `DD_PROFILING_ENABLED` defaults to `false`. When you upgrade an installation that loaded `datadog-profiling.so`, `datadog-setup.php` keeps profiling enabled by setting `datadog.profiling.enabled = On`, unless the INI file already sets `datadog.profiling.enabled`. If you configure the extension manually, set `DD_PROFILING_ENABLED=true` (or `datadog.profiling.enabled=On`) to keep profiling.
+
+Trace submission
+: The sidecar is the default trace sender on all PHP versions. In 1.x it was the default only on PHP 8.3 and newer and on Windows. Set `DD_TRACE_SIDECAR_TRACE_SENDER=0` to use the in-process sender instead (not available on Windows). The sidecar sends traces with the V1 trace payload protocol when the Agent supports it (Agent 7.79 or newer) and falls back to v0.4 otherwise. Datadog recommends Agent 7.79 or newer because conversion to v0.4 has a performance penalty. Set `DD_TRACE_AGENT_PROTOCOL_VERSION=0.4` to always send v0.4.
+
+Client-side stats
+: Trace metrics are computed by the tracer by default. Stats are computed only with the sidecar trace sender. Set `DD_TRACE_STATS_COMPUTATION_ENABLED=false` to let the Agent compute them.
+
+Trace analytics removed
+: The `DD_TRACE_ANALYTICS_ENABLED`, `DD_TRACE_<INTEGRATION>_ANALYTICS_ENABLED`, and `DD_TRACE_<INTEGRATION>_ANALYTICS_SAMPLE_RATE` settings (and their `DD_<INTEGRATION>_ANALYTICS_*` aliases) are removed. Use [ingestion controls][17] and [retention filters][18] instead.
+
+Span data and deprecated APIs
+: `SpanData::$meta` and `SpanData::$metrics` are deprecated views onto the new `SpanData::$attributes`. Several functions, including `DDTrace\trace_id()`, `DDTrace\current_context()`, `dd_trace_function()`, and `dd_trace_method()`, raise `E_DEPRECATED`. To find uses of deprecated APIs before you migrate, set `DD_TRACE_DEBUG=1` and show `E_DEPRECATED` messages.
 
 ## Removing
 
@@ -492,3 +514,6 @@ For Apache, run:
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
 [14]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [15]: /tracing/guide/resource_based_sampling/
+[16]: https://github.com/DataDog/dd-trace-php/blob/ddtrace-2.0.0/UPGRADE-2.0.md
+[17]: /tracing/trace_pipeline/ingestion_controls/
+[18]: /tracing/trace_pipeline/trace_retention/

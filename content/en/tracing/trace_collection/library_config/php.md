@@ -153,6 +153,18 @@ The Agent connection timeout (in milliseconds).
 **Default**: `8126`<br>
 The Agent port number. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
+`DD_TRACE_AGENT_PROTOCOL_VERSION`
+: **Default**: `1.0`<br>
+The trace payload protocol version. Valid values are `1.0` (use the V1 trace payload protocol when the Agent supports it, which requires Agent 7.79 or newer, and fall back to v0.4 otherwise) and `0.4` (always send v0.4). The in-process trace sender always uses v0.4. Conversion to v0.4 has a performance penalty, so Datadog recommends upgrading the Agent. Added in version `2.0.0`.
+
+`DD_TRACE_SIDECAR_TRACE_SENDER`
+: **Default**: `true`<br>
+Whether the sidecar sends traces. Starting with version `2.0.0`, the sidecar is the default trace sender on all PHP versions. In version `1.x`, the default was `true` on PHP 8.3 and newer and on Windows, and `false` otherwise. Set to `0` to use the in-process sender (not available on Windows).
+
+`DD_TRACE_STATS_COMPUTATION_ENABLED`
+: **Default**: `true`<br>
+Whether the tracer computes trace metrics (client-side stats). Stats are computed only with the sidecar trace sender. Set to `false` to let the Agent compute trace metrics. In version `1.x`, the default was `false`. Starting with version `2.0.0`, the default is `true`.
+
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
 **Default**: `500`<br>
@@ -409,8 +421,8 @@ Valid values are: `true` or `false`.<br>
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
-**Default**: `1`<br>
-Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. For version `0.81.0` and below it defaulted to `0`.
+**Default**: `0`<br>
+Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Profiler][4]. Starting with version `2.0.0`, the profiler is part of `ddtrace.so` and profiling is opt-in, so the default is `0`. In versions `0.82.0` to `1.x`, the default was `1` when the profiler was loaded. For version `0.81.0` and below it defaulted to `0`.
 
 `DD_PROFILING_ENDPOINT_COLLECTION_ENABLED`
 : **INI**: `datadog.profiling.endpoint_collection_enabled`. INI available since `0.82.0`.<br>
