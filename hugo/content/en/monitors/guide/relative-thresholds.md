@@ -63,9 +63,9 @@ To configure a relative threshold:
 1. Create or edit a [metric monitor][1].
 2. Define the metric and its evaluation window.
 3. In the alert conditions, select a relative threshold.
-4. Select the historical aggregation and lookback window.
-5. Set a multiplier that determines how much the current value can deviate from the historical baseline.
-6. Configure the alert direction and, optionally, a recovery threshold.
+4. Select the threshold aggregation and lookback window.
+5. Set a multiplier that determines how much the current value can deviate from the historical baseline. This can be smaller than one (less than the baseline) or larger than one (greater than the baseline).
+6. Optionally, configure a recovery threshold.
 7. Review the resulting thresholds and monitor behavior before saving.
 
 For example, set the alert threshold to `1.5x` the historical baseline to detect an increase. Set it to `0.7x` and choose the below direction to detect a drop.
@@ -98,6 +98,8 @@ formula("<EXPRESSION>").rollup("<AGGREGATION>").last("<WINDOW>").multiplier(<FAC
 - `multiplier`: An optional numeric multiplier applied to the aggregated historical value.
 
 The multiplier applies to the result of the historical aggregation, rather than to individual datapoints. For a `1.5x` threshold, use `.multiplier(1.5)` in the query.
+
+Define the optional recovery query in `options.thresholds.critical_recovery_query` using the same syntax as `options.thresholds.critical_query`.
 
 ### API example
 
