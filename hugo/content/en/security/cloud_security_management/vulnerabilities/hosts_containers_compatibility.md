@@ -64,8 +64,6 @@ Cloud Security Vulnerabilities supports vulnerability scanning for the following
 | PHP      | composer                  | composer.lock                                                        | {{< X >}}         | {{< X >}}         | {{< X >}}         |
 | Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package | {{< X >}}         | {{< X >}}         | {{< X >}}         |
 
-**Note**: Agent-based vulnerability management in application libraries is available in Agent versions [7.64 or newer][2].
+**Note**: Agent-based vulnerability management in application libraries requires Agent version 7.70 or later. For setup instructions, see [Setting up Cloud Security on the Agent][1].
 
-
-[1]: /security/code_security/software_composition_analysis/
-[2]: https://github.com/DataDog/datadog-agent/releases
+[1]: /security/cloud_security_management/setup/agent/
