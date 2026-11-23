@@ -61,7 +61,7 @@ To compare the configuration of a single component between versions:
 
 For an added component, the diff shows the full configuration as new lines.
 
-{{< img src="observability_pipelines/version_history/source_diff.png" alt="The diff for an added HTTP/S Server source, with the configuration shown as added lines" style="width:80%;" >}}
+{{< img src="observability_pipelines/version_history/source_diff.png" alt="The diff for an added HTTP/S Server source, with the configuration shown as added lines." style="width:80%;" >}}
 
 For a removed component, the diff shows the full configuration as removed lines.
 
