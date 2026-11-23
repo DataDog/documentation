@@ -33832,7 +33832,9 @@ components:
         - attributes
       type: object
     CreateDeploymentGateParamsDataAttributes:
-      description: Parameters for creating a deployment gate.
+      description: |-
+        Parameters for creating a deployment gate. For the same organization, service, and identifier,
+        a gate for all environments cannot coexist with gates for specific environments.
       properties:
         dry_run:
           default: false
@@ -33840,7 +33842,7 @@ components:
           example: false
           type: boolean
         env:
-          description: The environment of the deployment gate.
+          description: Required environment of the deployment gate. Use `*` to apply the gate to all environments.
           example: "production"
           type: string
         identifier:
@@ -44798,7 +44800,7 @@ components:
         - id
       type: object
     DeploymentGateResponseDataAttributes:
-      description: Basic information about a deployment gate.
+      description: Basic information about a deployment gate. The environment is `*` for a gate that applies to all environments.
       properties:
         created_at:
           description: The timestamp when the deployment gate was created.
@@ -44812,7 +44814,7 @@ components:
           example: false
           type: boolean
         env:
-          description: The environment of the deployment gate.
+          description: The environment of the deployment gate. `*` means all environments.
           example: "production"
           type: string
         identifier:
@@ -136189,6 +136191,39 @@ components:
           format: date-time
           type: string
       type: object
+    SecurityMonitoringSignalCase:
+      description: A case linked to a security signal.
+      properties:
+        assigneeId:
+          description: The UUID of the user assigned to the case.
+          example: 773b045d-ccf8-4808-bd3b-955ef6a8c940
+          type: string
+        assigneeName:
+          description: The name of the user assigned to the case.
+          example: John Doe
+          type: string
+        id:
+          description: The unique ID of the case.
+          example: 3dbe4ef2-8d2d-4e3d-9e8e-4a5b6c7d8e9f
+          type: string
+        key:
+          description: The key of the case.
+          example: SEC-1234
+          type: string
+        status:
+          description: The status of the case.
+          example: OPEN
+          type: string
+        title:
+          description: The title of the case.
+          example: Suspicious login activity
+          type: string
+      type: object
+    SecurityMonitoringSignalCases:
+      description: Cases linked to the security signal.
+      items:
+        $ref: "#/components/schemas/SecurityMonitoringSignalCase"
+      type: array
     SecurityMonitoringSignalIncidentIds:
       description: Array of incidents that are associated with this signal.
       example:
@@ -136718,6 +136753,11 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringSignalArchiveReason"
         assignee:
           $ref: "#/components/schemas/SecurityMonitoringTriageUser"
+        cases:
+          $ref: "#/components/schemas/SecurityMonitoringSignalCases"
+        hasCase:
+          description: Whether the signal is linked to at least one case.
+          type: boolean
         incident_ids:
           $ref: "#/components/schemas/SecurityMonitoringSignalIncidentIds"
         state:
@@ -187559,12 +187599,24 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Endpoint to create a deployment gate.
+        Create a deployment gate for a specific environment or for all environments using `*`.
+        A gate for all environments and a gate for a specific environment cannot coexist for the
+        same organization, service, and identifier. A conflicting creation returns 400 Bad Request.
       operationId: CreateDeploymentGate
       requestBody:
         content:
           application/json:
             examples:
+              all-environments:
+                summary: Create a gate for all environments
+                value:
+                  data:
+                    attributes:
+                      dry_run: false
+                      env: "*"
+                      identifier: pre
+                      service: my-service
+                    type: deployment_gate
               default:
                 value:
                   data:
@@ -268524,6 +268576,8 @@ paths:
                       attributes:
                         assignee:
                           uuid: 00000000-0000-0000-0000-000000000001
+                        cases: []
+                        hasCase: false
                         incident_ids: []
                         state: archived
                       id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
@@ -268748,6 +268802,8 @@ paths:
                       attributes:
                         assignee:
                           uuid: 00000000-0000-0000-0000-000000000001
+                        cases: []
+                        hasCase: false
                         incident_ids: []
                         state: archived
                       id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
