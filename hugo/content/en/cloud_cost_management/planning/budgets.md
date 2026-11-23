@@ -83,19 +83,45 @@ To create a hierarchical budget:
 [2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
 
 {{% /tab %}}
+
+{{% tab "AI Spend Limits" %}}
+
+<div class="alert alert-info">AI spend limits are in Preview.</div>
+
+To create an AI spend limit:
+
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1].
+1. Click {{< ui >}}New Budget{{< /ui >}}.
+1. Click {{< ui >}}AI Spend Limits{{< /ui >}}.
+1. Enter your spend limit information using the details below.
+
+   - {{< ui >}}Name{{< /ui >}}: Enter a name for your spend limit.
+   - {{< ui >}}Active period{{< /ui >}}: Set the start and end months. Alerts and the status page only cover spend inside this period.
+   - {{< ui >}}Limit spend for{{< /ui >}}: Set the limit for each user, per day or per month.
+   - {{< ui >}}From sources{{< /ui >}}: Select the AI providers to include. The query is grouped by `user_email`.
+   - {{< ui >}}Monthly ceiling{{< /ui >}} (optional): Set a total for all users, the same every month.
+   - {{< ui >}}Slack notification{{< /ui >}}: Select the Slack workspace where users get a direct message.
+
+   {{< img src="cloud_cost/budgets/ai-spend-limit-create.png" alt="Form to create an AI spend limit with a $3,000 monthly limit per user email, a Cloud Cost query for AI providers grouped by user_email, and a Slack workspace" style="width:100%;" >}}
+
+1. Click {{< ui >}}Save AI Spend Limit{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/cost/plan/budgets
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## AI spend limits
 
 <div class="alert alert-info">AI spend limits are in Preview.</div>
 
-AI spend limits cap each user's daily or monthly AI model and agent spend. To create one, navigate to [**Cloud Cost > Plan > Budgets**][1], click {{< ui >}}New Budget{{< /ui >}}, and select {{< ui >}}AI Spend Limits{{< /ui >}}. Set a limit per user, a Cloud Cost query grouped by `user_email`, and an optional monthly ceiling for all users. Saving creates a [monitor][5] that alerts when a user reaches the limit. It also creates a [workflow][6] that sends that user a Slack direct message in the workspace you choose, or an email otherwise. If your organization has no Slack integration, the workflow sends email only. Creating an AI spend limit requires the `ccm_budget_write` permission. To send notifications, you also need `monitors_write` and `workflows_write`.
+AI spend limits notify each user when their AI model and agent spend reaches their limit. Users get a Slack direct message, or an email when Slack isn't available. Behind the scenes, each spend limit is backed by a [monitor][5] and a [workflow][6] that Datadog creates when you save it.
 
-{{< img src="cloud_cost/budgets/ai-spend-limit-create.png" alt="Form to create an AI spend limit with a $3,000 monthly limit per user email, a Cloud Cost query for AI providers grouped by user_email, and a Slack workspace" style="width:100%;" >}}
-
-Open a spend limit to see total and forecasted spend against the budget ceiling, and each user's spend, limit, and triggered alerts.
+To see total and forecasted spend, and each user's spend, limit, and alerts, open the spend limit from the [Budgets page][1].
 
 {{< img src="cloud_cost/budgets/ai-spend-limit-status.png" alt="AI spend limit status page showing actual and forecasted cost against a $20k monthly ceiling, 2 of 38 users over their limit, and a table of each user's spend, limit, status, and alerts" style="width:100%;" >}}
+
+**Note**: To send notifications, you need the `monitors_write` and `workflows_write` permissions in addition to `ccm_budget_write`.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
