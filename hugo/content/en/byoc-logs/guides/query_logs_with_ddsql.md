@@ -17,7 +17,12 @@ further_reading:
 
 ## Overview
 
-Use [DDSQL][1] in [Datadog Notebooks][2] to run SQL queries on logs stored in BYOC (Bring Your Own Cloud) Logs indexes. With DDSQL, you can aggregate, bucket, and rank log data, apply string, time, and network functions, use window functions, and join logs from multiple BYOC Logs clusters in a single query.
+Use [DDSQL][1] in [Datadog Notebooks][2] to run SQL queries on logs stored in BYOC (Bring Your Own Cloud) Logs indexes. With DDSQL, you can:
+
+- Aggregate, bucket, and rank log data
+- Apply string, time, and network functions
+- Use window functions
+- Join logs from more than one BYOC Logs cluster in a single query
 
 ## Prerequisites
 
