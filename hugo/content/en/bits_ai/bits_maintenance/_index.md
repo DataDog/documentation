@@ -45,7 +45,7 @@ Bits monitors each supported project. For each release, it collects and analyzes
 ## Ways to work with Bits Maintenance
 
 You can work with Bits Maintenance:
-- In the Datadog web application, at 
+- In the Datadog web application
 - Using the [Datadog MCP][3], which has Bits Maintenance tools and skills
 - Through [Bits Chat][1] and Slack (with `@Datadog`)
 
