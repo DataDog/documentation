@@ -91,7 +91,7 @@ Upstream and downstream resources are the same type as the explored resource, su
 
 In Connection View, the map shows the source's composition stack on the left and the destination's on the right. When the destination is an endpoint, the map shows only the source's stack.
 
-{{< img src="network_performance_monitoring/l1_l7_map/connection-view-two-stacks.png" alt="Connection View for two services, with each service's composition stack below it and a CNM connection line between them" style="width:60%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/connection-view-two-stacks-centered.png" alt="Connection View for two services, with each service's composition stack below it and a CNM connection line between them" style="width:60%;" >}}
 
 The source and the destination must be the same type of resource, such as two services or two pods. The one exception is an {{< tooltip text="external endpoint" tooltip="A destination identified by an IP address or a hostname and port, rather than by a service, container, pod, or host." >}}, which can be the destination for any type of source.
 
