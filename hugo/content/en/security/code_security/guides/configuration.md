@@ -33,6 +33,7 @@ The configuration file must begin with a `schema-version` key, followed by top-l
 | `v1.5` | SAST, SCA, IaC Security, Secret Scanning | Secret Scanning file configuration |
 | `v1.6` | SAST, SCA, IaC Security, Secret Scanning | Experimental AST-based filtering for Secret Scanning |
 | `v1.7` | SAST, SCA, IaC Security, Secret Scanning | SCA ecosystem and package exclusions |
+| `v1.8` | SAST, SCA, IaC Security, Secret Scanning | IaC Terraform plan scanning settings |
 
 Use `schema-version: {{< version key="code_security_schema_version" >}}` for all new configurations. Each field also has its own minimum `schema-version`. Use the highest version required by the fields you configure. The minimum version for each field is listed on the product configuration pages: [SAST][1], [SCA][2], [IaC Security][3], and [Secret Scanning][4].
 
@@ -91,7 +92,7 @@ For each field in a configuration, merge behavior depends on the field type:
 | Field type | Merge behavior | Example fields |
 |---|---|---|
 | Lists | Concatenated, with duplicates removed | `use-rulesets`, `ignore-rulesets`, `ignore-rules`, `ignore-paths`, `only-paths`, `ignore-platforms`, `only-platforms` |
-| Scalar values (strings, numbers, booleans) | The value from the highest-precedence configuration is used | `use-default-rulesets`, `use-gitignore`, `max-file-size-kb`, `category` |
+| Scalar values (strings, numbers, booleans) | The value from the highest-precedence configuration is used | `use-default-rulesets`, `use-gitignore`, `max-file-size-kb`, `category`, `global-config.plan-scanning.enabled` |
 | Maps | Recursively merged | `ruleset-configs`, `rule-configs`, `arguments` |
 
 For the full list of fields, see [Static Code Analysis (SAST) Configuration][1], [Software Composition Analysis (SCA) Configuration][2], and [Infrastructure as Code (IaC) Security Configuration][3].
@@ -123,6 +124,8 @@ iac:
   global-config:
     ignore-paths:
       - "examples/"
+    plan-scanning:
+      enabled: true
 ```
 
 #### Repo-level
@@ -152,6 +155,8 @@ iac:
   global-config:
     ignore-paths:
       - "generated/"
+    plan-scanning:
+      enabled: false
 ```
 
 #### Merged result
@@ -188,12 +193,14 @@ iac:
     ignore-paths:
       - "examples/"
       - "generated/"
+    plan-scanning:
+      enabled: false
 ```
 
 The example demonstrates each merge rule from the table above:
 
 - **Lists concatenate**: `use-rulesets` merges to `[A, B]`; the SCA `ignore-paths` merges to `["vendor/", "third_party/"]`; the IaC `ignore-rules` merges to `[A, B]`.
-- **Scalars use the highest-precedence value**: `maxCount: 22` (repo-level) overrides `maxCount: 10` (org-level).
+- **Scalars use the highest-precedence value**: `maxCount: 22` (repo-level) overrides `maxCount: 10` (org-level), and `enabled: false` (repo-level) overrides `enabled: true` (org-level). Scalars that are set only at the org level, such as `use-default-rulesets: false`, keep their value.
 - **Maps merge recursively**: The `foo` rule config keeps `ignore-paths` from the org level while applying `maxCount: 22` from the repo level. New entries like `bar` are added from the repo level.
 
 ## Further reading

@@ -78,6 +78,9 @@ iac:
       - Terraform
       - Kubernetes
       - CICD
+    # Terraform plan scanning settings.
+    plan-scanning:
+      enabled: true
   # Per-rule configurations.
   rule-configs:
     terraform-aws-s3-bucket-without-encryption:
@@ -140,6 +143,7 @@ The `global-config` object controls repository-wide settings:
 | `ignore-categories` | Array | Rule types to ignore. | `v1.2` |
 | `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. | `v1.3` |
 | `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. | `v1.3` |
+| `plan-scanning` | Object | Terraform plan scanning settings. See [Terraform plan scanning](#terraform-plan-scanning). | `v1.8` |
 
 ### Severities
 
@@ -293,6 +297,42 @@ iac:
           - libbpf/ci/run-qemu
 {{< /code-block >}}
 
+## Terraform plan scanning
+
+IaC Security can scan Terraform plans in addition to Terraform source files. Upload the plans for a repository with the `datadog-ci terraform upload plan` command of the [`datadog-ci` CLI][5], then turn on plan scanning for that repository under the `iac.global-config.plan-scanning` key:
+
+{{< code-block lang="yaml" >}}
+schema-version: {{< version key="code_security_schema_version" >}}
+iac:
+  global-config:
+    plan-scanning:
+      # Scan the Terraform plans uploaded for this repository.
+      enabled: true
+{{< /code-block >}}
+
+The `plan-scanning` object supports the following properties:
+
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `enabled` | Boolean | Scans the Terraform plans uploaded for the repository with `datadog-ci terraform upload plan`. Plans uploaded for a repository where plan scanning is disabled are ignored. | `false` | `v1.8` |
+
+### Scan timing
+
+When plan scanning is enabled:
+
+- After a push, the IaC scan waits until every expected plan for the commit is uploaded. It then scans the commit once with all of its plans.
+- If the upload does not specify how many plans to expect, the commit is scanned at its first plan.
+- A plan uploaded later for the same commit, for example from a pipeline re-run, triggers a new scan.
+- A commit whose expected plans are not all uploaded is not scanned. It is dropped after 7 days.
+
+### Where to configure plan scanning
+
+Like other IaC Security settings, you can set `iac.global-config.plan-scanning` in the org-level or repository-level configuration in Datadog, or in the repository's `code-security.datadog.yaml` file. The file takes precedence over the repository-level configuration, which takes precedence over the org-level configuration. A property that is not set at one level inherits its value from the broader level. For details, see [How configurations merge][4].
+
+### Limitations
+
+A rescan updates results only while the commit is still the latest commit of its branch.
+
 ## Legacy configuration
 
 IaC Security previously used a different configuration file (`dd-iac-scan.config`) and schema. This schema is deprecated and does not receive new updates, but it is [documented][2] in the `datadog-iac-scanner` repository.
@@ -396,3 +436,5 @@ In the previous example, findings on the highlighted block are ignored.
 [1]: /security/code_security/guides/configuration/
 [2]: https://github.com/DataDog/datadog-iac-scanner/blob/main/legacy_config.md
 [3]: /security/code_security/iac_security/iac_rules/
+[4]: /security/code_security/guides/configuration/#how-configurations-merge
+[5]: https://github.com/DataDog/datadog-ci
