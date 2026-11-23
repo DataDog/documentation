@@ -57,6 +57,8 @@ Microsoft Entra ID can authenticate to Datadog in two ways:
 
 This setup moves back and forth between the Microsoft Entra admin center and Datadog. Keep both open.
 
+To connect a tenant in Datadog, your user needs the `workload_identity_federation_read`, `user_access_read`, `user_access_invite`, and `user_access_manage` permissions.
+
 ### Start the configuration in Entra ID
 
 1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel.
