@@ -52,7 +52,7 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 
 ## Set up the Datadog Agent
 
-If you're using the Datadog Agent, you must run Agent v6.4+.
+If you're using the Datadog Agent, you must run Agent v7.46+.
 
 {{< tabs >}}
 {{% tab "Host " %}}
@@ -93,12 +93,10 @@ If you're using the Docker containerized Agent, add and set the following enviro
 If you're deploying the Agent in Kubernetes, make the following changes in your Helm chart in addition to the [Cloud Security configuration for Agent][5]:
 
 ```yaml
-clusterAgent:
-  enabled: false
 datadog:
 [...]
   processAgent:
-    enabled: false
+    processCollection: false
     containerCollection: false
 [...]
   env:

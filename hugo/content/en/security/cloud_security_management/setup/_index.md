@@ -31,7 +31,7 @@ further_reading:
 To get started with Cloud Security, review the following:
 
 - [Enable Agentless Scanning](#enable-agentless-scanning)
-- [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
+- [Deploy the Agent for deeper context](#deploy-the-agent-for-deeper-context)
 - [Enable additional features](#enable-additional-features)
   - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
@@ -131,10 +131,10 @@ For information on disabling Cloud Security, see the following:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agentless_scanning/enable
-[2]: /security/cloud_security_management/agentless_scanning
+[2]: /security/cloud_security_management/setup/agentless_scanning
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs
 [6]: /security/cloud_security_management/identity_risks
-[7]: /security/cloud_security_management/setup/cloud_accounts
+[7]: /security/cloud_security_management/setup/cloud_integrations
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/cloud_security_management/setup/ci_cd

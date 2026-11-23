@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/ecs_ec2/
 ---
 
-Use the following instructions to enable Misconfigurations and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Cloud Security Vulnerabilities.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -94,6 +94,18 @@ Add the following environment variables to your `datadog-agent` container defini
         {
           "name": "DD_SBOM_HOST_ENABLED",
           "value": "true"
+        },
+        {
+          "name": "DD_SBOM_CONTAINER_IMAGE_ANALYZERS",
+          "value": "os languages"
+        },
+        {
+          "name": "DD_SBOM_HOST_ANALYZERS",
+          "value": "os languages"
+        },
+        {
+          "name": "HOST_ROOT",
+          "value": "/host/root"
         }
       ],
       "linuxParameters": {
@@ -109,7 +121,7 @@ Add the following environment variables to your `datadog-agent` container defini
             "CHOWN"
           ]
         }
-      },
+      }
     }
   ],
   ...
@@ -165,7 +177,7 @@ Add the following environment variables to your `datadog-agent` container defini
 
 If the Agent fails to extract the SBOM from the container image, increase the Agent memory in the container definition:
 
-```yaml
+```json
 {
     "containerDefinitions": [
         {
@@ -178,7 +190,8 @@ If the Agent fails to extract the SBOM from the container image, increase the Ag
 }
 ```
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When `DD_SBOM_CONTAINER_IMAGE_ANALYZERS` and `DD_SBOM_HOST_ANALYZERS` are omitted, Datadog only scans OS packages.
+
+### Supported application library package managers
+
+{{% csm-language-package-managers %}}
