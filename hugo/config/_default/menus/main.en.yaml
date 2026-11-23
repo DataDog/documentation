@@ -2979,11 +2979,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Analytics
+      url: incident_response/on-call/analytics/
+      parent: oncall
+      identifier: oncall_analytics
+      weight: 8
     - name: Integrations
       url: incident_response/on-call/integrations/
       parent: oncall
       identifier: oncall_integrations
-      weight: 8
+      weight: 9
     - name: ServiceNow
       url: incident_response/on-call/integrations/servicenow/
       parent: oncall_integrations
@@ -2993,7 +2998,7 @@ menu:
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 9
+      weight: 10
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
