@@ -24,9 +24,7 @@ site_support_id: network_l1_l7_map
 The L1 to L7 Map is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-<!-- TODO: The two landing page images (investigation-modes.png, landing-page-search.png) are placeholders. The demo landing page title still reads "L1/L7 Explore" (2026-11-23). When it reads "L1 to L7 Map", retake both under new filenames: the landing page, and the landing page with the search menu open to Search by type. -->
-
-<!-- TODO: Labels not yet checked against the demo org: Explore Relationships (entry points in other products), View in Kubernetes, Add as source, and the Groups facet names. -->
+<!-- TODO: The landing page title in the demo org still reads "L1/L7 Explore" (2026-11-23). When it reads "L1 to L7 Map", retake landing-page-views.png under a new filename. Also replace landing-page-search.png, which is a placeholder from the staging prototype, with a new screenshot of the landing page search menu open to Search by type. -->
 
 ## Overview
 
@@ -160,7 +158,7 @@ The following signals appear on the map. Some signals set status, and the rest p
 
 To open the map, navigate to [**Network Monitoring > L1 to L7**][7].
 
-{{< img src="network_performance_monitoring/l1_l7_map/investigation-modes.png" alt="The L1 to L7 Map page, with options to select Resource View or Connection View and a search field" style="width:70%;" >}}
+{{< img src="network_performance_monitoring/l1_l7_map/landing-page-views.png" alt="The L1 to L7 Map page, with a toggle to select Resource View or Connection View and a search field" style="width:70%;" >}}
 
 On the L1 to L7 Map page, select a view:
 
@@ -191,7 +189,7 @@ In Resource View, the details pane shows the following for the explored or filte
 
 - The resource's status, such as **HEALTHY** or **CRITICAL**.
 - **View details**, which opens the resource's side panel over the map to show more data, such as logs and traces.
-- A link to open the resource in its product, such as **View in APM** for a service or **View in Kubernetes** for a pod. Use the dropdown next to the link to open the resource in another product.
+- A link to open the resource in its product, such as **View in APM** for a service. Use the dropdown next to the link to open the resource in another product.
 - Infrastructure context, such as the environment, availability zone, VPC, data center, and security groups.
 - The resource's metrics from CNM, Network Path, and other products, such as APM and Infrastructure, with charts over the selected time frame.
 - **Related resources**, a searchable list of the resources on the map, sorted by status.
