@@ -33,6 +33,9 @@ The clone copies the source flag's [granular access controls][4], including acce
 
 1. Open the [Feature Flags list][2].
 2. Open the flag's actions menu and select **Clone**. Alternatively, open the flag's details page and select **Settings > Clone**.
+
+   {{< img src="feature_flags/concepts/clone-flag-from-overview.png" alt="Feature Flags overview with a flag's actions menu open and the Clone option highlighted." style="width:100%;" >}}
+
 3. Enter a name for the clone. Datadog generates a flag key from the name. To customize the key, click the pencil icon next to it and confirm your change. The key cannot be changed after creation.
 4. Review the variants, targeting rules, and default variant for each environment. Only the name and key are editable in this dialog.
 5. Click **Clone flag**.
