@@ -119,7 +119,6 @@ The reviewer analyzes the metric's history. It compares the flagged value with e
 
 - If the reviewer finds earlier periods that match the flagged value's pattern and timing, it prevents the alert. The monitor widens the bounds at that point to include the observed value.
 - If the reviewer doesn't dismiss the point, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
-- If the review doesn't run or doesn't finish, the point keeps its original bounds and the monitor alerts as usual. For example, this happens when the monitor has reached its daily review limit or the review times out. The review also doesn't run for organizations whose settings don't allow AI model providers, such as HIPAA-enabled organizations.
 
 The reviewer can only dismiss flagged points. It doesn't narrow the bounds or create alerts. To get alerts on values that fall within the bounds, adjust {{< ui >}}Sensitivity{{< /ui >}} or annotate the bounds with {{< ui >}}Missed alert{{< /ui >}}.
 
