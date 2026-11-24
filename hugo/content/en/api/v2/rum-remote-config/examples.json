@@ -1,5 +1,5 @@
 {
-  "GetRumSdkConfig": {
+  "GetRUMSdkConfig": {
     "responses": {
       "200": {
         "json": {
@@ -136,7 +136,7 @@
       "html": ""
     }
   },
-  "UpdateRumSdkConfig": {
+  "UpdateRUMSdkConfig": {
     "responses": {
       "200": {
         "json": {

@@ -32,3 +32,22 @@ entries:
       - UpdatePermanentRetentionFilter
       - UpdateRetentionFilter
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - CreateExclusionFilter
+      - CreateRetentionFilter
+      - DeleteExclusionFilter
+      - DeleteRetentionFilter
+      - GetExclusionFilter
+      - GetPermanentRetentionFilter
+      - GetRetentionFilter
+      - ListExclusionFilters
+      - ListPermanentRetentionFilters
+      - ListRetentionFilters
+      - OrderRetentionFilters
+      - UpdateExclusionFilter
+      - UpdatePermanentRetentionFilter
+      - UpdateRetentionFilter
+    title: Uppercase RUM acronym in tags, operationIds and schemas

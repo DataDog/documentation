@@ -117,7 +117,7 @@
   },
   "csm-threats": {
     "name": "CSM Threats",
-    "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: The `/api/v2/security_monitoring/cloud_workload_security` endpoints are deprecated. Use the `/api/v2/remote_config/products/cws` endpoints on all sites, including US1-FED."
+    "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
     "name": "Work Management",
@@ -455,6 +455,10 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-audience-management": {
+    "name": "RUM Audience Management",
+    "description": "Auto-generated tag RUM Audience Management"
+  },
   "rum-config": {
     "name": "RUM Config",
     "description": "Manage the [Real User Monitoring (RUM)](https://docs.datadoghq.com/real_user_monitoring/)\nconfiguration for your organization."
@@ -467,6 +471,10 @@
     "name": "RUM Managed Archives",
     "description": "Configure Managed Archives for RUM applications. Your organization must have Managed Archives enabled.\n\nRequires `rum_rehydration_filter_read` to list or get configurations, or `rum_rehydration_filter_write` to create, update, or delete them."
   },
+  "rum-metrics": {
+    "name": "RUM Metrics",
+    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
   "rum-operations": {
     "name": "RUM Operations",
     "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
@@ -478,38 +486,6 @@
   "rum-remote-config": {
     "name": "RUM Remote Config",
     "description": "Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration."
-  },
-  "rum-retention-quotas": {
-    "name": "RUM Retention Quotas",
-    "description": "Manage RUM retention quota configurations for your organization's RUM applications."
-  },
-  "reference-tables": {
-    "name": "Reference Tables",
-    "description": "View and manage Reference Tables in your organization."
-  },
-  "report-schedules": {
-    "name": "Report Schedules",
-    "description": "Create and manage scheduled reports. A scheduled report renders a dashboard or integration\ndashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,\nor Microsoft Teams."
-  },
-  "reporting-and-sharing": {
-    "name": "Reporting And Sharing",
-    "description": "The Reporting and Sharing endpoints allow you to create snapshots of graph widgets and other shareable resources."
-  },
-  "restriction-policies": {
-    "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
-  },
-  "roles": {
-    "name": "Roles",
-    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).\n\nRoles can also be managed in bulk through the Datadog UI, which provides\nthe capability to assign a single permission to multiple roles simultaneously."
-  },
-  "rum-audience-management": {
-    "name": "Rum Audience Management",
-    "description": "Auto-generated tag Rum Audience Management"
-  },
-  "rum-metrics": {
-    "name": "RUM Metrics",
-    "description": "Manage configuration of [RUM-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
   "rum-replay-heatmaps": {
     "name": "RUM Replay Heatmaps",
@@ -531,9 +507,33 @@
     "name": "RUM Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
+  "rum-retention-quotas": {
+    "name": "RUM Retention Quotas",
+    "description": "Manage RUM retention quota configurations for your organization's RUM applications."
+  },
   "rum-teams-ownership": {
-    "name": "Rum Teams Ownership",
+    "name": "RUM Teams Ownership",
     "description": "Manage teams ownership mappings between RUM views and the teams that own them.\nSee <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>."
+  },
+  "reference-tables": {
+    "name": "Reference Tables",
+    "description": "View and manage Reference Tables in your organization."
+  },
+  "report-schedules": {
+    "name": "Report Schedules",
+    "description": "Create and manage scheduled reports. A scheduled report renders a dashboard or integration\ndashboard on a recurring cadence and delivers it to a set of recipients over email, Slack,\nor Microsoft Teams."
+  },
+  "reporting-and-sharing": {
+    "name": "Reporting And Sharing",
+    "description": "The Reporting and Sharing endpoints allow you to create snapshots of graph widgets and other shareable resources."
+  },
+  "restriction-policies": {
+    "name": "Restriction Policies",
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
+  },
+  "roles": {
+    "name": "Roles",
+    "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).\n\nRoles can also be managed in bulk through the Datadog UI, which provides\nthe capability to assign a single permission to multiple roles simultaneously."
   },
   "scim": {
     "name": "SCIM",

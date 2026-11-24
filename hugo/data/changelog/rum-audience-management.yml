@@ -52,3 +52,19 @@ entries:
       - QueryUsers
       - UpdateConnection
     title: Document permissions on Product Analytics audience operations
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - CreateConnection
+      - DeleteConnection
+      - DeleteUserProfile
+      - GetAccountFacetInfo
+      - GetMapping
+      - GetUserFacetInfo
+      - ListConnections
+      - QueryAccounts
+      - QueryEventFilteredUsers
+      - QueryUsers
+      - UpdateConnection
+    title: Uppercase RUM acronym in tags, operationIds and schemas
