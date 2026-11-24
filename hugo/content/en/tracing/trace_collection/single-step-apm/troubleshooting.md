@@ -17,7 +17,7 @@ Single Step Instrumentation (SSI) helps instrument applications by automatically
 
 ## Troubleshooting methods
 
-You can investigate injection issues in the Datadog UI with the Instrumentation Errors page or Fleet Automation, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs](#injector-debug-logs).
+You can investigate injection issues in the Datadog UI with the Instrumentation Errors page, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs](#injector-debug-logs).
 
 ### Troubleshoot injection with Instrumentation Errors
 
