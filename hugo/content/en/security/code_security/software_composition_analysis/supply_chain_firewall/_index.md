@@ -154,7 +154,7 @@ Organization policies control two kinds of settings:
 
 Edit the organization policy to block or allow specific package versions, and to change how SCFW handles warnings and recently published packages.
 
-Editing the organization policy requires the {{< ui >}}Vulnerability Management Write{{< /ui >}} permission, `appsec_vm_write`.
+Editing the organization policy requires the {{< ui >}}Vulnerability Management Write{{< /ui >}} permission, `appsec_vm_write`. For more information, see [Datadog Role Permissions][6].
 
 1. In the organization with your SCFW API and application keys, open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Supply Chain Firewall Settings{{< /ui >}}.
 1. In the {{< ui >}}Policy Configuration{{< /ui >}} editor, edit the policy YAML. For details about available fields, see the [Policy schema](#policy-schema) section.
@@ -240,7 +240,7 @@ SCFW might block a package your team needs, or allow a package you expected SCFW
 
 The SCFW Explorer includes every installation command inspected by an SCFW CLI configured with Datadog credentials.
 
-1. Open the {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Supply Chain Firewall{{< /ui >}} tab.
+1. Open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Supply Chain Firewall{{< /ui >}}.
 
    Each row shows the outcome, the time, the package name and version, the host, and the repository.
 
@@ -285,3 +285,4 @@ Then remove the `scfw` binary, for example by deleting it from `/usr/local/bin`,
 [3]: /security/code_security/dev_tool_int/scfw_github_action/
 [4]: /integrations/supply-chain-firewall/
 [5]: https://raw.githubusercontent.com/DataDog/schema/main/code-security/scfw/v1.0/schema.json
+[6]: /account_management/rbac/permissions/
