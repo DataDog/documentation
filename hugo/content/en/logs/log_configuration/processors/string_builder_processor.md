@@ -19,7 +19,7 @@ The template is defined by both raw text and blocks with the syntax `%{attribute
 * This processor only accepts attributes with values or an array of values in the block (see examples in the UI section below.
 * If an attribute cannot be used (object or array of object), it is replaced by an empty string or the entire operation is skipped depending on your selection.
 * If a target attribute already exists, it is overwritten by the result of the template.
-* Results of a template cannot exceed 256 characters.
+* Results of a template cannot exceed 1024 characters.
 
 ## Use cases
 - Display a message that includes the user and action, such as GSuite logs where the String Builder constructs an attribute containing `Actor %{usr.email} performed an event %{evt.name}`.

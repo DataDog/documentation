@@ -4,11 +4,11 @@ aliases:
 - /ko/continuous_integration/tests/java
 - /ko/continuous_integration/tests/setup/java
 code_lang: java
-code_lang_weight: 10
+code_lang_weight: 20
 further_reading:
 - link: /tests/containers/
   tag: 설명서
-  text: 컨테이너 내 테스트를 위한 환경 변수 전달
+  text: 컨테이너 내 테스트를 위한 환경 변수 전달하기
 - link: /tests/explorer
   tag: 설명서
   text: 테스트 결과 및 성능 확인
@@ -114,7 +114,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-`DD_TRACER_FOLDER`(필수)
+`DD_TRACER_FOLDER` (필수)
 : 다운로드한 Java 트레이서가 위치한 폴더 경로입니다.
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (필수)
@@ -123,7 +123,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-`DD_TRACER_FOLDER`(필수)
+`DD_TRACER_FOLDER` (필수)
 : 다운로드한 Java 트레이서가 위치한 폴더 경로입니다.
 
 `GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (필수)
@@ -132,7 +132,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% /tab %}}
 {{% tab "SBT" %}}
 
-`DD_TRACER_FOLDER`(필수)
+`DD_TRACER_FOLDER` (필수)
 : 다운로드한 Java 트레이서가 위치한 폴더 경로입니다.
 
 `SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (필수)
@@ -141,7 +141,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% /tab %}}
 {{% tab "기타" %}}
 
-`DD_TRACER_FOLDER`(필수)
+`DD_TRACER_FOLDER` (필수)
 : 다운로드한 Java 트레이서가 위치한 폴더 경로입니다.
 
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (필수)
@@ -152,20 +152,20 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
 그런 다음, 다음 공통 환경 변수를 설정하여 SDK와 보고 방법을 구성하세요.
 
-`DD_CIVISIBILITY_ENABLED=true`(필수)
+`DD_CIVISIBILITY_ENABLED=true` (필수)
 : Test Optimization을 활성화합니다.<br/>
-**기본**: `false`
+**기본값**: `false`
 
-`DD_ENV`(선택 사항)
+`DD_ENV` (선택 사항)
 : 테스트가 실행되는 환경의 이름입니다.<br/>
-**기본**: `(empty)`<br/>
+**기본값**: `(empty)`<br/>
 **예시**: `local`, `ci`
 
 `DD_SERVICE`(선택 사항)
 : 테스트 중인 서비스 또는 라이브러리의 이름입니다.<br/>
-**기본**: `unnamed-java-app`
+**기본값**: `unnamed-java-app`
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true`(Agentless 모드 사용 시 필수)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Agentless 모드 사용 시 필수)
 : 테스트 결과를 Datadog으로 직접 전송하는 Agentless 모드를 활성화합니다.<br/>
 **기본값**: `false`
 
@@ -184,7 +184,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 `DD_TEST_SESSION_NAME`(선택 사항)
 : `unit-tests`, `integration-tests` 또는 `smoke-tests`와 같은 테스트 그룹을 식별합니다.<br/>
 **기본값**: CI 작업 이름 및 테스트 명령, 또는 CI 작업 이름을 사용할 수 없는 경우 테스트 명령입니다.<br/>
-**예**: `unit-tests`, `integration-tests`, `smoke-tests`
+**예시**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 평소와 같이 테스트를 실행하세요(예: `mvn test`, `mvn verify`, `./gradlew clean test` 또는 `sbt test`).
 
@@ -308,7 +308,7 @@ if (span != null) {
 
 #### 도메인 모델 {#domain-model}
 
-API는 테스트 세션, 테스트 모듈, 테스트 스위트 및 테스트란 네 개의 개념을 기반으로 합니다.
+API는 테스트 세션, 테스트 모듈, 테스트 모음 및 테스트란 네 개의 개념을 기반으로 합니다.
 
 ##### 테스트 세션 {#test-session}
 
@@ -487,7 +487,7 @@ static Stream<Arguments> randomArguments() {
 
 #### `DD_TEST_SESSION_NAME` 사용 시점 {#when-to-use-dd-test-session-name}
 
-Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 임시 폴더와 같이 실행할 때마다 변경되는 문자열이 포함되어 있으면 Datadog은 해당 세션들이 서로 관련이 없다고 간주합니다. 예:
+Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 임시 폴더와 같이 실행할 때마다 변경되는 문자열이 포함되어 있으면 Datadog은 해당 세션들이 서로 관련이 없다고 간주합니다. 예를 들면 다음과 같습니다.
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 

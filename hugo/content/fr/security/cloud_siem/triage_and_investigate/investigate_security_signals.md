@@ -11,7 +11,7 @@ further_reading:
   text: Surveiller 1Password avec Datadog Cloud SIEM
 - link: https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026
   tag: Blog
-  text: 'Nouveautés dans Cloud SIEM : enquêtes assistées par IA, renseignement sur
+  text: 'Nouveautés dans Cloud SIEM : enquêtes assistées par IA, renseignement sur
     les menaces amélioré et opérations de sécurité évolutives'
 - link: /bits_ai/bits_security_analyst/
   tag: Documentation
@@ -85,7 +85,7 @@ Utilisez les actions groupées pour trier plusieurs signaux. Pour utiliser les a
 1. Cliquez sur la case à cocher à gauche des signaux sur lesquels vous souhaitez effectuer une action groupée. Pour sélectionner tous les signaux dans la liste du Signals Explorer, cochez la case à côté de l'en-tête de colonne {{< ui >}}Status{{< /ui >}}.
 1. Cliquez sur le menu déroulant {{< ui >}}Bulk Actions{{< /ui >}} au-dessus du tableau des signaux et sélectionnez l'action que vous souhaitez effectuer.
 
-**Remarque** : Le Signals Explorer cesse de se mettre à jour dynamiquement lors de l'exécution d'une action groupée.
+**Remarque** : Le Signals Explorer cesse de se mettre à jour dynamiquement lors de l'exécution d'une action groupée.
 
 {{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="Le Signals Explorer affichant l'option d'action groupée" style="width:55%;" >}}
 
@@ -214,6 +214,10 @@ Sur la page des paramètres [Security cases][13] de Cloud SIEM, vous pouvez gér
   - **Lors de la mise à jour d'un cas** :
     - **Statut du signal** : Choisissez soit d'attribuer au signal un statut correspondant à celui du cas, soit de le laisser tel quel.
 
+- **Signal Grouping**
+
+  Sélectionnez les stratégies de regroupement que la création automatique de cas utilise pour ajouter des signaux associés à un cas existant. Consultez [Regrouper les signaux dans des cas][15].
+
 ### Déclarer un incident {#declare-an-incident}
 
 Qu'il soit basé sur un seul signal ou suite à l'investigation d'un cas, certaines activités malveillantes exigent une réponse. Vous pouvez déclarer des incidents dans Datadog pour réunir les équipes de développement, d'exploitation et de sécurité afin de traiter un événement de sécurité critique. [Incident Management][7] fournit un cadre et un workflow pour aider les équipes à identifier et à atténuer efficacement les incidents.
@@ -268,3 +272,4 @@ Vous pouvez également lancer cette requête directement depuis le panneau des s
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
 [14]: /fr/bits_ai/bits_security_analyst/
+[15]: /fr/security/cloud_siem/triage_and_investigate/signal_grouping/

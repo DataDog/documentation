@@ -1594,6 +1594,11 @@ menu:
       identifier: bits_ai_agent_builder_improve_with_traces
       parent: bits_ai_agent_builder
       weight: 101
+    - name: Bits Autonomous Operations
+      url: bits_ai/bits_autonomous_operations
+      identifier: bits_ai_autonomous_operations
+      parent: bits_ai
+      weight: 1
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
@@ -1604,6 +1609,11 @@ menu:
       identifier: bits_ai_bits_chat_usage
       parent: bits_ai_bits_chat
       weight: 201
+    - name: Bits CLI
+      url: bits_ai/bits_chat/bits_cli
+      identifier: bits_ai_bits_chat_bits_cli
+      parent: bits_ai_bits_chat
+      weight: 202
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
@@ -1709,6 +1719,11 @@ menu:
       identifier: bits_ai_skills_library
       parent: bits_ai
       weight: 12
+    - name: Bits AI Settings
+      url: bits_ai/bits_settings
+      identifier: bits_ai_settings
+      parent: bits_ai
+      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2979,21 +2994,31 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Analytics
+      url: incident_response/on-call/analytics/
+      parent: oncall
+      identifier: oncall_analytics
+      weight: 8
     - name: Integrations
       url: incident_response/on-call/integrations/
       parent: oncall
       identifier: oncall_integrations
-      weight: 8
+      weight: 9
     - name: ServiceNow
       url: incident_response/on-call/integrations/servicenow/
       parent: oncall_integrations
       identifier: oncall_integrations_servicenow
       weight: 801
+    - name: Jira
+      url: incident_response/on-call/integrations/jira/
+      parent: oncall_integrations
+      identifier: oncall_integrations_jira
+      weight: 802
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 9
+      weight: 10
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
@@ -4294,21 +4319,26 @@ menu:
       parent: network_path
       identifier: network_path_as_view
       weight: 505
+    - name: On-Demand Tests
+      url: network_monitoring/network_path/on_demand_tests/
+      parent: network_path
+      identifier: network_path_on_demand_tests
+      weight: 506
     - name: Monitors
       url: monitors/types/network_path/
       parent: network_path
       identifier: network_path_monitor
-      weight: 506
+      weight: 507
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 507
+      weight: 508
     - name: Terms and Concepts
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 508
+      weight: 509
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -6068,11 +6098,6 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
-    - name: AI Gateway
-      url: llm_observability/configure/ai_gateway
-      parent: llm_obs_configure
-      identifier: llm_obs_ai_gateway
-      weight: 604
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -6155,6 +6180,62 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: AI Gateway
+      url: ai_gateway/
+      pre: llm-observability
+      identifier: ai_gateway
+      parent: ai_observability_heading
+      weight: 40000
+    - name: Get Started
+      url: ai_gateway/getting_started/
+      parent: ai_gateway
+      identifier: ai_gateway_getting_started
+      weight: 1
+    - name: Connect Providers
+      url: ai_gateway/providers/
+      parent: ai_gateway
+      identifier: ai_gateway_providers
+      weight: 2
+    - name: Connect Applications
+      url: ai_gateway/applications/
+      parent: ai_gateway
+      identifier: ai_gateway_applications
+      weight: 3
+    - name: Send Requests
+      url: ai_gateway/requests/
+      parent: ai_gateway
+      identifier: ai_gateway_requests
+      weight: 4
+    - name: Route Requests
+      url: ai_gateway/routing/
+      parent: ai_gateway
+      identifier: ai_gateway_routing
+      weight: 5
+    - name: Control Model Access
+      url: ai_gateway/access_control/
+      parent: ai_gateway
+      identifier: ai_gateway_access_control
+      weight: 6
+    - name: Control Spend and Usage
+      url: ai_gateway/spend_controls/
+      parent: ai_gateway
+      identifier: ai_gateway_spend_controls
+      weight: 7
+    - name: Security and Data Capture
+      url: ai_gateway/security/
+      parent: ai_gateway
+      identifier: ai_gateway_security
+      weight: 8
+    - name: Observe AI Gateway Activity
+      url: ai_gateway/observability/
+      parent: ai_gateway
+      identifier: ai_gateway_observability
+      weight: 9
+    - name: Troubleshooting
+      url: ai_gateway/troubleshooting/
+      parent: ai_gateway
+      identifier: ai_gateway_troubleshooting
+      weight: 10
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
@@ -7120,16 +7201,21 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_network_traffic
       weight: 109
+    - name: Version History
+      url: observability_pipelines/configuration/version_history/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_version_history
+      weight: 110
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 110
+      weight: 111
     - name: Manage Pipelines with AI Agents
       url: observability_pipelines/configuration/manage_pipelines_with_ai_agents/
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_manage_pipelines_with_ai_agents
-      weight: 111
+      weight: 112
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -7360,26 +7446,31 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
       weight: 319
+    - name: Spike Protection
+      url: observability_pipelines/processors/spike_protection
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_spike_protection
+      weight: 320
     - name: Split Array
       url: observability_pipelines/processors/split_array
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
-      weight: 320
+      weight: 321
     - name: Tag Allow/Block List
       url: observability_pipelines/processors/tag_allow_block_list
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_allow_block_list
-      weight: 321
+      weight: 322
     - name: Tags
       url: observability_pipelines/processors/tags/
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tags
-      weight: 322
+      weight: 323
     - name: Tag Cardinality Control
       url: observability_pipelines/processors/tag_cardinality_control
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_tag_cardinality_control
-      weight: 323
+      weight: 324
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
@@ -7540,16 +7631,21 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_replay
       weight: 6
+    - name: Log Anomaly Detection
+      url: observability_pipelines/log_anomaly_detection/
+      parent: observability_pipelines
+      identifier: observability_pipelines_log_anomaly_detection
+      weight: 7
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
       identifier: observability_pipelines_logs_search_syntax
-      weight: 7
+      weight: 8
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 8
+      weight: 9
     - name: Buffering and Backpressure
       url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
@@ -7564,7 +7660,7 @@ menu:
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 9
+      weight: 10
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
@@ -7589,7 +7685,7 @@ menu:
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 10
+      weight: 11
     - name: Upgrade Worker Guide
       url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
@@ -8359,31 +8455,36 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_sequence_rule
       weight: 2029
+    - name: Migrate Detection Rules
+      url: security/cloud_siem/detect_and_monitor/migrate_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_migrate_detection_rules
+      weight: 203
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_version_history
-      weight: 203
+      weight: 204
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
-      weight: 204
+      weight: 205
     - name: Dynamic Severity
       url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_dynamic_severity
-      weight: 205
+      weight: 206
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 206
+      weight: 207
     - name: MITRE ATT&CK Map
       url: security/cloud_siem/detect_and_monitor/mitre_attack_map
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_mitre_attack_map
-      weight: 207
+      weight: 208
     - name: Triage and Investigate
       url: security/cloud_siem/triage_and_investigate
       parent: cloud_siem
@@ -8414,6 +8515,11 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
       weight: 305
+    - name: Group Signals into Cases
+      url: security/cloud_siem/triage_and_investigate/signal_grouping
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_signal_grouping
+      weight: 306
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
@@ -8716,6 +8822,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 104
+    - name: Link Images to Dockerfiles
+      url: security/cloud_security_management/setup/dockerfile_labels
+      parent: csm_setup
+      identifier: csm_setup_dockerfile_labels
+      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -9068,6 +9179,11 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
     - name: Manage Policies
       url: /security/ai_guard/policies/
       identifier: ai_guard_policies

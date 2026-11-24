@@ -4,13 +4,13 @@ aliases:
 description: 프라이빗 위치를 구성합니다.
 further_reading:
 - link: getting_started/synthetics/private_location
-  tag: 문서
+  tag: 설명서
   text: 프라이빗 위치로 시작하기
 - link: synthetics/private_locations/dimensioning
-  tag: 문서
+  tag: 설명서
   text: 프라이빗 위치 규모 측정
 - link: synthetics/platform/private_locations/network_security
-  tag: 문서
+  tag: 설명서
   text: 프라이빗 위치 네트워크 보안 강화
 title: 프라이빗 위치 구성
 ---
@@ -154,7 +154,7 @@ API 테스트 실행의 최대 지속 시간(밀리초)입니다. 기본값은 1
 
 ### 네트워크 보안 구성 {#network-security-configuration}
 
-프라이빗 위치는 구성에서 송신을 제한하지 않는 한 호스트가 도달할 수 있는 모든 네트워크 주소에 도달할 수 있습니다. 새 프라이빗 위치에 대해 생성된 구성 파일은 `enableDefaultBlockedIpRanges`를 `true`로 설정합니다. Worker의 기본값은 `false`입니다. 다음 옵션을 사용하여 송신을 제한하세요.
+프라이빗 위치는 구성에서 송신을 제한하지 않는 한 호스트가 도달할 수 있는 모든 네트워크 주소에 도달할 수 있습니다. 기본적으로 워커는 예약된 IP 범위와 사설 IP 범위를 차단합니다(`enableDefaultBlockedIpRanges`의 값은 `true`). 이 기본값은 워커 버전 1.77.0부터 적용되며, 이전 버전의 기본값은 `false`입니다. 다음 옵션을 사용하여 송신을 제한하세요.
 
 `allowedIPRanges`, `blockedIPRanges`, `enableDefaultBlockedIpRanges`, `allowedDomainNames`, `blockedDomainNames`
 
@@ -280,8 +280,8 @@ API 테스트의 모든 오류 재시도
 
 `--enableDefaultBlockedIpRanges`
 : **유형**: 불리언 <br>
-**기본값**: `false`<br>
-`--allowedIPRanges` 또는 `--allowedDomainNames` 파라미터로 명시적으로 설정된 경우를 제외하고, 예약된 IP 범위(IANA [IPv4][4] 및 [IPv6][5] 특수 목적 주소 레지스트리)를 사용하는 엔드포인트에 사용자가 Synthetic 테스트를 생성하지 못하도록 하세요. 새 프라이빗 위치에 대해 생성된 구성 파일은 이 파라미터를 `true`로 설정합니다. Worker의 기본값은 `false`입니다. [프라이빗 위치 네트워크 보안 강화][6]를 참조하세요.
+**기본값**: `true` (워커 버전 1.77.0부터; 이전 버전에서는 `false`)<br>
+`--allowedIPRanges` 또는 `--allowedDomainNames` 파라미터로 명시적으로 설정된 경우를 제외하고, 예약된 IP 범위(IANA [IPv4][4] 및 [IPv6][5] 특수 목적 주소 레지스트리)를 사용하는 엔드포인트에 사용자가 Synthetic 테스트를 생성하지 못하도록 하세요. [프라이빗 위치 네트워크 보안 강화][6]를 참조하세요.
 
 `--allowedDomainNames`
 : **유형**: 배열 <br>

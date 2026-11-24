@@ -4,7 +4,7 @@ aliases:
 - /ja/continuous_integration/tests/ruby
 - /ja/continuous_integration/tests/setup/ruby
 code_lang: ruby
-code_lang_weight: 40
+code_lang_weight: 50
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: ドキュメント
@@ -21,7 +21,7 @@ further_reading:
 title: Ruby テスト
 type: multi-code-lang
 ---
-## 互換性{#compatibility}
+## 互換性 {#compatibility}
 
 サポート対象言語:
 
@@ -183,7 +183,7 @@ require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 利用可能なインスツルメンテーション方法の全リストについては、[トレースドキュメント][6] を参照してください。
 
-## Git のメタデータを収集する{#collecting-git-metadata}
+## Git のメタデータを収集する {#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
@@ -282,7 +282,7 @@ Datadog::CI.active_test_session&.passed!
 Datadog::CI.active_test_session&.finish
 ```
 
-## ベストプラクティス{#best-practices}
+## ベストプラクティス {#best-practices}
 
 ### テストセッション名 `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
 
@@ -301,7 +301,7 @@ Datadog::CI.active_test_session&.finish
 
 #### `DD_TEST_SESSION_NAME` を使用するタイミング{#when-to-use-dd-test-session-name}
 
-Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。テストコマンドに、実行するファイルのリストなど、実行ごとに変化する文字列が含まれている場合、Datadog はそれらのセッションを互いに無関係なものとみなします。たとえば、以下のような場合です。
+Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。テストコマンドに、実行するファイルのリストなど、実行ごとに変化する文字列が含まれている場合、Datadog はそれらのセッションを互いに無関係なものとみなします。例:
 
 -   `bundle exec rspec my_spec.rb my_other_spec.rb`
 

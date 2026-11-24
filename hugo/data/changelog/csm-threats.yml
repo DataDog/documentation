@@ -58,3 +58,20 @@ entries:
       - UpdateCSMThreatsAgentPolicy
       - UpdateCSMThreatsAgentRule
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42102
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentPolicy
+      - DeleteCSMThreatsAgentRule
+      - DownloadCSMThreatsPolicy
+      - GetCSMThreatsAgentPolicy
+      - GetCSMThreatsAgentRule
+      - ListCSMThreatsAgentPolicies
+      - ListCSMThreatsAgentRules
+      - UpdateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentRule
+    title: Document permissions for Workload Protection agent rule and policy 
+      endpoints

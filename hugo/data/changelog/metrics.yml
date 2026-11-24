@@ -239,3 +239,10 @@ entries:
       - UpdateDerivedMetric
       - UpdateMetricMetadata
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41923
+    operations:
+      - ListTagConfigurations
+      - ListVolumesByMetricName
+    title: Mark metric volume attributes as nullable in ListVolumesByMetricName

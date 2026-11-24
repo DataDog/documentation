@@ -21,152 +21,87 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management. It receives flag updates from the Datadog-managed CDN or Agent Remote Configuration. Use `dd-trace-go/v2` 2.11.0 or later for the agentless setup and telemetry behavior described here.
+The Datadog Go SDK receives flag configuration directly from Datadog by default and evaluates flags locally. No Datadog Agent or tracer startup is required. The provider implements [OpenFeature][1].
 
-This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+## Getting started
 
-## Prerequisites
+Use `dd-trace-go` 2.12.0 or later and a Go runtime supported by that release. Create a Boolean flag named `my-flag`. Enable its **Server** distribution channel and enable it in the target environment.
 
-For agentless delivery, install **`dd-trace-go/v2` 2.11.0 or later** and configure a Datadog [API key][3] in the application. A Datadog Agent is not required to fetch flag configuration.
+Install the provider and OpenFeature SDK:
 
-Set these environment variables before starting the application:
-
-{{< code-block lang="bash" >}}
-DD_API_KEY=<DATADOG_API_KEY>
-DD_SITE={{< region-param key="dd_site" code="true" >}}
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
-
-The default configuration source is `agentless`. Creating the provider with `NewDatadogProvider` starts CDN polling. Starting the tracer alone does not start agentless flag configuration requests.
-
-<!-- vale Datadog.headings = NO -->
-### Use Agent Remote Configuration
-<!-- vale Datadog.headings = YES -->
-
-For Agent-based delivery, use Datadog Agent 7.55 or later with [Remote Configuration][2] enabled and an API key configured on the Agent. Select the source explicitly:
-
-{{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
-DD_SERVICE=<YOUR_SERVICE_NAME>
-DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
-
-Existing applications with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` retain Remote Configuration when no source is selected. See [configuration source migration][7] before removing that deprecated setting. Set `DD_FEATURE_FLAGS_ENABLED=false` to disable the provider and return caller-provided default values.
-
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
-
-## Installation
-
-Install the Datadog OpenFeature provider package:
-
-{{< code-block lang="bash" >}}
-go get github.com/DataDog/dd-trace-go/v2/openfeature
-{{< /code-block >}}
-
-You also need the OpenFeature Go SDK:
-
-{{< code-block lang="bash" >}}
+```bash
+go get github.com/DataDog/dd-trace-go/v2/openfeature@v2.12.0
 go get github.com/open-feature/go-sdk/openfeature
-{{< /code-block >}}
+```
 
-## Initialize the SDK
+Set the application [API key][3] and flag environment before startup:
 
-Register the Datadog OpenFeature provider. If you also use tracing, start the Datadog Go tracer first. The provider can fetch flag configuration without starting the tracer.
+```bash
+export DD_API_KEY='<DATADOG_API_KEY>'
+export DD_ENV='<YOUR_ENVIRONMENT>'
+```
 
-When using Remote Configuration, start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
+If your organization uses a site other than `datadoghq.com`, set `DD_SITE`. For the selected site, use {{< region-param key="dd_site" code="true" >}}.
 
-### Blocking initialization
+Register the provider and evaluate the flag:
 
-Use `SetProviderAndWait` to block evaluation until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
-
-{{< code-block lang="go" >}}
+```go
 package main
 
 import (
+    "context"
     "log"
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
     ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
     "github.com/open-feature/go-sdk/openfeature"
 )
 
 func main() {
-    // Start the Datadog tracer if the application also uses tracing
-    tracer.Start()
-    defer tracer.Stop()
-
-    // Create the Datadog OpenFeature provider
     provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
     if err != nil {
-        log.Fatalf("Failed to create provider: %v", err)
+        log.Fatal(err)
     }
-    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
-        defer ddProvider.Shutdown()
-    }
+    defer openfeature.Shutdown()
 
-    // Register the provider and wait for initialization (default 10s timeout)
     if err := openfeature.SetProviderAndWait(provider); err != nil {
-        log.Fatalf("Failed to set provider: %v", err)
+        log.Print(err)
+        return
     }
-
-    // Create the OpenFeature client
     client := openfeature.NewClient("my-service")
-
-    // Your application code here
+    enabled, err := client.BooleanValue(context.Background(), "my-flag", false,
+        openfeature.NewEvaluationContext("user-123", nil))
+    if err != nil {
+        log.Print(err)
+    }
+    log.Println(enabled)
 }
-{{< /code-block >}}
+```
 
-To specify a custom timeout, use `SetProviderAndWaitWithContext`:
+No `tracer.Start()`, Feature Flags enablement, or source setting is required for a new setup. Keep the provider for the application lifetime and shut it down when the application exits. For an existing Agent setup, follow [Migrate an existing Remote Configuration setup][8].
 
-{{< code-block lang="go" >}}
+## Initialization options
+
+`SetProviderAndWait` waits for the first configuration. The provider timeout defaults to 10 seconds. To set an application deadline, use `SetProviderWithContextAndWait`:
+
+```go
 ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 defer cancel()
+err := openfeature.SetProviderWithContextAndWait(ctx, provider)
+```
 
-if err := openfeature.SetProviderAndWaitWithContext(ctx, provider); err != nil {
-    log.Fatalf("Failed to set provider: %v", err)
-}
-{{< /code-block >}}
+Use `openfeature.SetProvider(provider)` for background initialization. Evaluations return caller-provided defaults until configuration arrives.
 
-### Non-blocking initialization
+## Use Agent delivery
 
-Use `SetProvider` to register the provider without waiting. Flag evaluations return default values until the configuration is received.
+To keep Agent delivery, configure Datadog Agent 7.55 or later with [Remote Configuration][2] and an API key. Set this application variable before startup:
 
-{{< code-block lang="go" >}}
-package main
+```bash
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
 
-import (
-    "log"
+Register the provider as shown above. If the application uses APM, retain its tracer startup and shutdown. Start the Agent before the application. See [Agent availability][6].
 
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-    ddopenfeature "github.com/DataDog/dd-trace-go/v2/openfeature"
-    "github.com/open-feature/go-sdk/openfeature"
-)
-
-func main() {
-    // Start the Datadog tracer if the application also uses tracing
-    tracer.Start()
-    defer tracer.Stop()
-
-    // Create the Datadog OpenFeature provider
-    provider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
-    if err != nil {
-        log.Fatalf("Failed to create provider: %v", err)
-    }
-    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
-        defer ddProvider.Shutdown()
-    }
-
-    // Register the provider without waiting
-    openfeature.SetProvider(provider)
-
-    // Create the OpenFeature client
-    client := openfeature.NewClient("my-service")
-
-    // Your application code here
-    // Flag evaluations return defaults until configuration is received
-}
-{{< /code-block >}}
+With agentless delivery, the SDK sends experiment exposures and aggregated flag evaluation events through a compatible local relay when available. Otherwise, it uses direct HTTPS intake with the application API key. The `feature_flag.evaluations` OTLP metric requires a separate [metrics setup][4].
 
 ## Create a client
 
@@ -199,7 +134,7 @@ The targeting key is used for consistent traffic distribution (percentage rollou
 
 ## Control flag evaluation telemetry and experiment participation
 
-Both controls require `dd-trace-go/v2` version `2.12.0` or later. They are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][11] for shared behavior.
+Both controls require `dd-trace-go/v2` version `2.12.0` or later. They are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out][10] for shared behavior.
 
 Set these variables before constructing the provider:
 
@@ -241,7 +176,7 @@ For programmatic configuration, set `ProviderConfig.EnableEvaluationTelemetryOpt
 
 Use `future_experiments_only` to retain allocations activated strictly before the stored timestamp. Future-experiments-only mode checks allocation activation, not prior enrollment. Invalid subject timestamps return the default with `INVALID_CONTEXT` in either enabled mode. Invalid activation metadata returns `PARSE_ERROR` for the affected flag when an opted-out subject uses future-experiments-only mode.
 
-Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][12] for how inherited context values apply.
+Telemetry opt-out suppresses new evaluation events, evaluation metrics, and automatic flag span annotations. Exposures remain enabled for eligible allocations. Supply a separate context for each request. To resume telemetry, supply Boolean `false` or remove the attribute. To permit experimentation again, remove the timestamp. See [Configure server SDKs][11] for how inherited context values apply.
 
 ## Evaluate flags
 
@@ -345,9 +280,9 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 ## Configure polling and initialization timeouts
 
-See [Server SDK Configuration Sources][8] for custom endpoints, source selection, and migration. Agentless polling defaults to 30 seconds, with a 5-second request timeout. Go falls back to those defaults for invalid values; supported upper limits are 3600 seconds for polling and 300 seconds for requests.
+See [Server SDK Configuration Sources][12] for custom endpoints, source selection, and migration. Agentless polling defaults to 30 seconds, with a 5-second request timeout. Go falls back to those defaults for invalid values; supported upper limits are 3600 seconds for polling and 300 seconds for requests.
 
-Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the default 10-second initialization wait. A deadline passed to `SetProviderAndWaitWithContext` takes precedence.
+Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_INITIALIZATION_TIMEOUT_MS` to a positive number of milliseconds to change the default 10-second initialization wait. A deadline passed to `SetProviderWithContextAndWait` takes precedence.
 
 ## Evaluation events and privacy
 
@@ -357,7 +292,7 @@ See [Server-Side Evaluation Events and Privacy][9] for targeting-key hashing, co
 
 ## Record exposures in your own data store
 
-Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. This requires `dd-trace-go` 2.12.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][10].
+Use `ddopenfeature.NewExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. See [Record Feature Flag Exposures in Your Own Data Store][7].
 
 ## Testing
 
@@ -433,14 +368,14 @@ func TestNewCheckoutFlow(t *testing.T) {
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
 [6]: /feature_flags/concepts/configuration_sources/#agent-availability
-[10]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
-[8]: /feature_flags/concepts/configuration_sources/
+[8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [9]: /feature_flags/guide/server_evaluation_events/
-[11]: /feature_flags/concepts/opt_out/
-[12]: /feature_flags/concepts/opt_out/#configure-server-sdks
+[10]: /feature_flags/concepts/opt_out/
+[11]: /feature_flags/concepts/opt_out/#configure-server-sdks
+[12]: /feature_flags/concepts/configuration_sources/

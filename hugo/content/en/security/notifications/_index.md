@@ -81,6 +81,8 @@ To use the webhook, add `@webhook-<WEBHOOK_NAME>` to the rule's notification sec
 
 {{% notifications-cases %}}
 
+You can also add related signals to an existing case, instead of creating a new case for each signal. See [Group Signals into Cases][7].
+
 ### Email
 
 {{% notifications-email %}}
@@ -95,3 +97,4 @@ To use the webhook, add `@webhook-<WEBHOOK_NAME>` to the rule's notification sec
 [4]: https://app.datadoghq.com/integrations/webhooks
 [5]: /integrations/webhooks/
 [6]: /security/notifications/rules/#dynamic-routing
+[7]: /security/cloud_siem/triage_and_investigate/signal_grouping/

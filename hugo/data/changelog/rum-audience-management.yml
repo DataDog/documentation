@@ -37,3 +37,18 @@ entries:
       - QueryUsers
       - UpdateConnection
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-22'
+    link: https://github.com/DataDog/documentation/pull/42079
+    operations:
+      - CreateConnection
+      - DeleteConnection
+      - GetAccountFacetInfo
+      - GetMapping
+      - GetUserFacetInfo
+      - ListConnections
+      - QueryAccounts
+      - QueryEventFilteredUsers
+      - QueryUsers
+      - UpdateConnection
+    title: Document permissions on Product Analytics audience operations
