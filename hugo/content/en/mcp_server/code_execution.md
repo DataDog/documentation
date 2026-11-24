@@ -42,7 +42,7 @@ The `code-exec` toolset provides:
 
 | Tool | Description |
 | --- | --- |
-| [`execute_code`][1] | Runs read-only JavaScript in the sandbox for investigations and analysis, and returns a structured result. |
+| [`execute_code`][1] | Runs JavaScript with read-only API access in the sandbox for investigations and analysis, and returns a structured result. |
 | [`execute_code_write`][7] | Runs JavaScript in the sandbox to create, update, or delete supported Datadog resources, and returns a structured result. |
 | [`search_datadog_sdk`][2] | Looks up SDK operations, request types, and response types. |
 
