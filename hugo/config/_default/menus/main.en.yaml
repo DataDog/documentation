@@ -1598,137 +1598,137 @@ menu:
       url: bits_ai/bits_autonomous_operations
       identifier: bits_ai_autonomous_operations
       parent: bits_ai
-      weight: 1
-    - name: Bits Chat
-      url: bits_ai/bits_chat
-      identifier: bits_ai_bits_chat
-      parent: bits_ai
       weight: 2
-    - name: Use Bits Chat
-      url: bits_ai/bits_chat/usage
-      identifier: bits_ai_bits_chat_usage
-      parent: bits_ai_bits_chat
-      weight: 201
-    - name: Bits CLI
-      url: bits_ai/bits_chat/bits_cli
-      identifier: bits_ai_bits_chat_bits_cli
-      parent: bits_ai_bits_chat
-      weight: 202
-    - name: Bits Code
-      url: bits_ai/bits_code
-      parent: bits_ai
-      identifier: bits_ai_dev_agent
-      weight: 3
-    - name: Setup
-      url: bits_ai/bits_code/setup
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_setup
-      weight: 301
-    - name: Automations
-      url: bits_ai/bits_code/automations
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_automations
-      weight: 302
-    - name: Code Channels in Slack
-      url: bits_ai/bits_code/slack_code_channels
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_slack_code_channels
-      weight: 303
-    - name: Bits Data Analysis
-      url: bits_ai/bits_data_analysis
-      identifier: bits_data_analysis
-      parent: bits_ai
-      weight: 4
-    - name: Bits Database Optimization
-      url: database_monitoring/bits_database_optimization
-      identifier: bits_ai_database_optimization
-      parent: bits_ai
-      weight: 5
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai_autonomous_operations
-      weight: 101
+      weight: 201
     - name: Bits Investigation
       url: bits_ai/bits_investigation
       identifier: bits_ai_sre
       parent: bits_ai_autonomous_operations
-      weight: 102
+      weight: 202
     - name: Investigate Issues
       url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
-      weight: 701
+      weight: 20201
     - name: Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 702
+      weight: 20202
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 703
+      weight: 20203
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 704
+      weight: 20204
     - name: Improve Bits Investigation Accuracy
       url: bits_ai/bits_investigation/improve_accuracy
       identifier: bits_ai_sre_improve_accuracy
       parent: bits_ai_sre
-      weight: 705
+      weight: 20205
     - name: MCP, API, CLI
       url: bits_ai/bits_investigation/mcp_api_cli
       identifier: bits_ai_sre_mcp_api_cli
       parent: bits_ai_sre
-      weight: 706
-    - name: Bits Live Debugger
-      url: tracing/live_debugger/bits-live-debugger
-      identifier: bits_ai_live_debugger
-      parent: bits_ai
-      weight: 8
-    - name: Bits Release
-      url: bits_release/
-      identifier: bits_release
-      parent: bits_ai
-      weight: 9
+      weight: 20206
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
       parent: bits_ai_autonomous_operations
-      weight: 103
+      weight: 203
     - name: Infrastructure Actions
       url: bits_ai/bits_remediation/infrastructure_actions
       identifier: bits_remediation_infrastructure_actions
       parent: bits_remediation
-      weight: 1001
+      weight: 20301
     - name: Bits Guardrails
       url: bits_ai/bits_remediation/guardrails
       identifier: bits_remediation_guardrails
       parent: bits_remediation
-      weight: 1002
+      weight: 20302
+    - name: Bits Chat
+      url: bits_ai/bits_chat
+      identifier: bits_ai_bits_chat
+      parent: bits_ai
+      weight: 3
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 301
+    - name: Bits CLI
+      url: bits_ai/bits_chat/bits_cli
+      identifier: bits_ai_bits_chat_bits_cli
+      parent: bits_ai_bits_chat
+      weight: 302
+    - name: Bits Code
+      url: bits_ai/bits_code
+      parent: bits_ai
+      identifier: bits_ai_dev_agent
+      weight: 4
+    - name: Setup
+      url: bits_ai/bits_code/setup
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_setup
+      weight: 401
+    - name: Automations
+      url: bits_ai/bits_code/automations
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_automations
+      weight: 402
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 403
+    - name: Bits Data Analysis
+      url: bits_ai/bits_data_analysis
+      identifier: bits_data_analysis
+      parent: bits_ai
+      weight: 5
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      identifier: bits_ai_database_optimization
+      parent: bits_ai
+      weight: 6
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger
+      identifier: bits_ai_live_debugger
+      parent: bits_ai
+      weight: 7
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 8
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 11
-    - name: Skills Library
-      url: bits_ai/skills_library
-      identifier: bits_ai_skills_library
-      parent: bits_ai_settings
-      weight: 1301
+      weight: 9
     - name: Bits AI Settings
       url: bits_ai/bits_settings
       identifier: bits_ai_settings
       parent: bits_ai
-      weight: 13
+      weight: 10
+    - name: Skills Library
+      url: bits_ai/skills_library
+      identifier: bits_ai_skills_library
+      parent: bits_ai_settings
+      weight: 1001
     - name: AI Credit Limits
       url: account_management/billing/ai_credit_limits/
       identifier: bits_ai_settings_ai_credit_limits
       parent: bits_ai_settings
-      weight: 1302
+      weight: 1002
     - name: Dashboards
       url: dashboards/
       pre: dashboard
