@@ -107,7 +107,7 @@ The [model configuration settings][3] change how the model sets bounds:
 
 - {{< ui >}}Sensitivity{{< /ui >}} adjusts the width of the bounds that the model computes. The default value is `3`. Move the slider toward {{< ui >}}More alerts{{< /ui >}} to narrow the bounds, or toward {{< ui >}}Fewer alerts{{< /ui >}} to widen them.
 - {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} set the smallest distance between the predicted value and each bound. The model can still set wider bounds. Enter values in the metric's own units, such as rows for Row Count or percentage points for Nullness. For integer metrics such as Row Count, the model rounds the value up to a whole number.
-- {{< ui >}}Model Instructions{{< /ui >}} don't change the bounds. The AI reviewer reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
+- {{< ui >}}Model Instructions{{< /ui >}} inform the AI reviewer, which reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
 
 {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} also leaves the bounds unchanged. It sets how many flagged evaluations in a row the monitor needs before it alerts.
 
