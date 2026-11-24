@@ -1724,6 +1724,11 @@ menu:
       identifier: bits_ai_settings
       parent: bits_ai
       weight: 13
+    - name: AI Credit Limits
+      url: account_management/billing/ai_credit_limits/
+      identifier: bits_ai_settings_ai_credit_limits
+      parent: bits_ai_settings
+      weight: 1302
     - name: Dashboards
       url: dashboards/
       pre: dashboard
