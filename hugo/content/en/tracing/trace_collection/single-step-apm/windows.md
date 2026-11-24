@@ -43,7 +43,7 @@ If you do not have a Datadog Agent installed, follow these steps to install the 
 
    **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 
-1. Configure instrumentation rules. <!-- TODO: Confirm with PM whether .NET applications outside of IIS still require an allow rule, or whether host-wide SSI instruments them by default. -->
+1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
