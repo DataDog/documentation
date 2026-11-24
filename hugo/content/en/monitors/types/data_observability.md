@@ -37,6 +37,8 @@ Data quality monitors support the following metric types:
 | Row Count | Tracks the number of rows in a table or view. |
 | Custom SQL | Tracks a custom metric value returned by a SQL query. |
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 **Column-level metric types:**
 | Metric type | Description |
 |---|---|
@@ -47,6 +49,8 @@ Data quality monitors support the following metric types:
 | Percent Zero | Tracks the percentage of values equal to zero. |
 | Percent Negative | Tracks the percentage of negative values. |
 | Min / Max / Mean / Sum / Standard Deviation | Tracks statistical measures across column values. |
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
 
@@ -150,6 +154,8 @@ The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your 
 
 {{< ui >}}Column{{< /ui >}} metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 | Metric | Description |
 |---|---|
 | {{< ui >}}Uniqueness{{< /ui >}} | The percentage of values in a column that are unique. |
@@ -164,6 +170,8 @@ The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your 
 | {{< ui >}}Sum{{< /ui >}} | The sum of all values in a column. |
 
 <div class="alert alert-info">Some column metrics are only available for specific column types. Numeric metrics (Percent Zero, Percent Negative, Min, Max, Mean, Standard Deviation, Sum) require numeric columns.</div>
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 {{% /tab %}}
 {{% tab "Custom SQL" %}}
@@ -247,8 +255,12 @@ To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and supp
 
 Choose an aggregation type:
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 - {{< ui >}}Simple Alert{{< /ui >}}: Send a single notification when any monitored table or column meets the condition.
 - {{< ui >}}Multi Alert{{< /ui >}}: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 ### Example notification
 
@@ -510,12 +522,16 @@ For monitors using the **Anomaly** detection method, you can annotate bound rang
 
 On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a time range on the chart, and choose one of the following annotations:
 
+<!-- vale Datadog.tense = NO -->
+
 | Annotation | Description |
 |---|---|
 | {{< ui >}}Expected{{< /ui >}} | Expand bounds to include the marked behavior permanently. |
 | {{< ui >}}Reset for now{{< /ui >}} | Mark behavior as OK, but alert if it happens again. |
 | {{< ui >}}Missed alert{{< /ui >}} | Contract bounds to alert on this behavior. |
 | {{< ui >}}Ignore{{< /ui >}} | Exclude annotated data when modeling bounds. |
+
+<!-- vale Datadog.tense = YES -->
 
 ## Further Reading
 
