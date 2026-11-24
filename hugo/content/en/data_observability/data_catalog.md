@@ -20,9 +20,6 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
       tag: "Blog"
       text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
-    - link: "https://www.datadoghq.com/blog/data-security-posture-management/"
-      tag: "Blog"
-      text: "Map sensitive data with Datadog Data Security Posture Management"
 ---
 
 The Data Catalog is a searchable, centralized inventory of data assets (tables, schemas, databases, and pipeline jobs) automatically populated from your connected integrations.

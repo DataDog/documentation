@@ -12,9 +12,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
     text: "Dynamically control custom metrics volume with Metrics without Limits™"
-  - link: "https://www.datadoghq.com/blog/engineering/how-we-scaled-metrics-aggregation/"
-    tag: "Blog"
-    text: "How we scaled metrics aggregation by moving durable state into storage"
 algolia:
   tags: ['metrics without limits']
 ---
