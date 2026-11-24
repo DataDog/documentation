@@ -35,9 +35,7 @@ Use the search bar or the facets to filter findings. The search bar autocomplete
 
 - Sensitive data category and matched rule
 - Resource type: Snowflake, PostgreSQL, or Amazon S3
-- Account name, environment, team, and region
-- Database, schema, and table, for Snowflake and PostgreSQL
-- Bucket and object path, for Amazon S3
+- Account name
 
 To filter on a value from the list, click a tag or a category on a row, then choose to filter on the value or to exclude it.
 
