@@ -121,7 +121,7 @@ Datadog correlates these sources to identify opportunities to improve performanc
 
 Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
 
-With Code Aware (Preview), Datadog validates recommendations against your source code before they reach you. Recommendations that don't hold up in your code are filtered out, and those that do display a {{< ui >}}Validated{{< /ui >}} badge. This helps you spend less time triaging and more time acting on changes that matter.
+With Code Aware (Preview), Datadog validates recommendations against your source code. Datadog hides recommendations that don't apply to your code and marks the rest with a {{< ui >}}Validated{{< /ui >}} badge.
 
 ## Using recommendations
 
