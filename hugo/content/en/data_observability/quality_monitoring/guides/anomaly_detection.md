@@ -99,10 +99,6 @@ See [Annotate bounds][2] on the Data Observability Monitor page for available an
 
 ## Model configuration
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Model configuration settings are in Preview.
-{{< /callout >}}
-
 The [model configuration settings][3] change how the model sets bounds:
 
 - {{< ui >}}Sensitivity{{< /ui >}} adjusts the width of the bounds that the model computes. The default value is `3`. Move the slider toward {{< ui >}}More alerts{{< /ui >}} to narrow the bounds, or toward {{< ui >}}Fewer alerts{{< /ui >}} to widen them.
