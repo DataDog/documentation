@@ -32,7 +32,7 @@ Datadog role permissions control who can send requests to AI Gateway and who can
 | AI Gateway Config Write (`ai_gateway_config_write`) | Create, edit, and delete AI Gateway configuration. | Datadog Admin Role |
 
 - AI Gateway rejects requests from callers without `ai_gateway_usage` before it evaluates access policies.
-- `ai_gateway_usage` does not grant access to any model. A caller can use a model or routing rule only when the default policy or an access policy includes it. If neither does, AI Gateway denies the request.
+- `ai_gateway_usage` does not grant access to any model on its own. A caller can use a model or routing rule only when the default policy or an access policy includes it. If neither does, AI Gateway denies the request.
 - Users without `ai_gateway_config_read` cannot see AI Gateway configuration in Datadog.
 
 Because every user with the Datadog Standard Role has `ai_gateway_usage`, every resource in the default policy is available to all of them. To limit model use to specific users, teams, or service accounts, leave those resources out of the default policy and grant access through access policies.
