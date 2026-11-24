@@ -20,9 +20,9 @@ further_reading:
 - link: /opentelemetry/config/otlp_receiver
   tag: Documentation
   text: Activer le récepteur OTLP
-- link: /opentelemetry/setup/ddot_collector/install/
+- link: /opentelemetry/setup/ddot_collector/kubernetes/
   tag: Documentation
-  text: Installer le collecteur DDOT (recommandé)
+  text: Installez le DDOT Collector sur Kubernetes (recommandé)
 - link: /opentelemetry/compatibility/
   tag: Documentation
   text: Compatibilité des fonctionnalités
@@ -34,14 +34,14 @@ title: Configurer le Collector OpenTelemetry
 ---
 ## Présentation {#overview}
 
-Envoyez des traces, des métriques et des logs à Datadog en utilisant le Collector OpenTelemetry. Les configurations intégrées à cette page sont testées avec la distribution OpenTelemetry Collector Contrib v0.161.0 et utilisent un pipeline de télémétrie basé sur OTLP avec les composants clés suivants :
+Envoyez des traces, des métriques et des logs à Datadog en utilisant le Collector OpenTelemetry. Les configurations présentées sur cette page sont testées avec la distribution OpenTelemetry Collector Contrib v0.161.0 et utilisent un pipeline de télémétrie basé sur OTLP avec les composants clés suivants :
 
 - **Exportateur HTTP OTLP** : envoie la télémétrie aux endpoints d'ingestion OTLP de Datadog.
-- **Connecteur de métriques de span** : génère des métriques RED (taux, erreurs, durée) à partir des données de trace pour alimenter les fonctionnalités APM telles que Catalog et Service Page.
+- **Connecteur de métriques de span** : génère des métriques RED (taux, erreur, durée) à partir des données de trace pour alimenter les fonctionnalités APM telles que le Catalog et la Service Page. Pour d'autres méthodes de calcul de ces métriques, consultez [Trace Metrics][14].
 - **Processeur de détection de ressources** : détecte les attributs des ressources de host et de cloud, que Datadog utilise pour la résolution du nom de host et le marquage.
 - **Extension Datadog** : Transmet la configuration du Collector à Datadog pour Fleet Automation. Elle n'exporte pas de données de télémétrie.
 
-Il s'agit de la configuration recommandée pour un Collector que vous gérez vous-même. Si vous souhaitez une distribution de Collector maintenue et prise en charge par Datadog, utilisez plutôt la [distribution Datadog du Collector OTel (DDOT)][12].
+Il s'agit de la configuration recommandée pour un Collector que vous gérez vous-même. Si vous souhaitez un Collector développé et pris en charge par Datadog, utilisez plutôt le [DDOT Collector][12].
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Un SDK OpenTelemetry envoie des données OTLP à un Collector OpenTelemetry, qui les exporte vers Datadog via OTLP HTTP." style="width:100%;" >}}
 
@@ -474,7 +474,7 @@ docker run \
 
 Utilisez le [chart Helm officiel d'OpenTelemetry Collector][102] pour déployer le Collector en tant que DaemonSet dans Kubernetes. Les exemples de fichiers de valeurs sont testés avec le chart v0.147.1, fixent le Collector à la version v0.154.0 et configurent les montages, les variables d'environnement, les ressources RBAC et l'exposition des ports requis.
 
-Pour collecter des métriques à l'échelle du cluster ou envoyer des données de ressources Kubernetes à Kubernetes Explorer, déployez un Collector de cluster en parallèle du DaemonSet. Consultez [Métriques Kubernetes][13].
+Pour collecter des métriques à l'échelle du cluster ou envoyer des données de ressources Kubernetes à Kubernetes Explorer, déployez un Collector de cluster en parallèle du DaemonSet. Consultez [Métriques Kubernetes][110].
 
 1. Créez un secret Kubernetes avec votre clé d'API Datadog :
 
@@ -519,6 +519,7 @@ Pour collecter des métriques à l'échelle du cluster ou envoyer des données d
 [107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
 [108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[110]: /fr/opentelemetry/integrations/kubernetes_metrics/
 
 {{% /tab %}}
 
@@ -929,7 +930,7 @@ Une fois que votre application envoie des données de télémétrie au Collector
 
 ### Connecteur de métriques de span {#span-metrics-connector}
 
-Le connecteur `span_metrics` génère des métriques RED à partir des données de trace. Ces métriques alimentent les fonctionnalités APM, notamment Catalog, Service Page et Resource Page. Le connecteur est configuré avec des dimensions qui permettent à Datadog de calculer les tags de host, les services pairs et les noms d'opération à partir de vos traces.
+Le connecteur `span_metrics` génère des métriques RED à partir des données de trace. Ces métriques alimentent les fonctionnalités APM, notamment le Catalog, la Service Page et la Resource Page. Le connecteur est configuré avec des dimensions qui permettent à Datadog de calculer les tags de host, les services pairs et les noms d'opération à partir de vos traces. Pour comparer le connecteur avec d'autres sources de métriques de trace, consultez [Trace Metrics][14].
 
 Chaque configuration spécifique de l'environnement dans [Configurer et déployer le Collector](#2-configure-and-deploy-the-collector) inclut le bloc de connecteur `span_metrics` complet. Conservez toutes ses dimensions lors de l'adaptation de la configuration afin que Datadog puisse déduire les tags de host, les services pairs, les noms d'opération et les noms de ressource requis.
 
@@ -969,7 +970,7 @@ Exemple avec les métriques d'instrumentation activées :
 }
 ```
 
-<div class="alert alert-info">La configuration recommandée du Collector OpenTelemetry utilise le connecteur <code>span_metrics</code> pour générer les métriques RED qui alimentent les vues APM. Le format <code>trace_metrics.instrumentation_metrics_calc</code> et <code>raw_instrumentation_metrics_drop</code> prennent en charge une configuration alternative pour les installations qui dérivent les métriques de trace APM à partir des métriques d'instrumentation HTTP à la place. N'activez pas <code>instrumentation_metrics_calc</code> aux côtés du connecteur <code>span_metrics</code> car cela calcule les métriques de trace à partir des deux sources.</div>
+<div class="alert alert-info">Le <code>trace_metrics.instrumentation_metrics_calc</code> et <code>raw_instrumentation_metrics_drop</code> Les champs contrôlent si les métriques d’instrumentation HTTP alimentent les métriques de trace APM et si Datadog les conserve en tant que Custom Metrics. N'activez pas <code>instrumentation_metrics_calc</code> aux côtés du connecteur <code>span_metrics</code> connecteur, car Datadog calcule alors les métriques de trace à partir des deux sources. Pour chaque combinaison de ces champs, consultez <a href="/opentelemetry/integrations/trace_metrics/#use-http-metrics-from-the-sdk">Trace Metrics</a>.</div>
 
 ### Connecteur de transfert de traces {#trace-forward-connector}
 
@@ -1016,6 +1017,7 @@ Datadog applique les limites suivantes lors de l'ingestion de données OTLP. Les
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /fr/opentelemetry/setup/ddot_collector/install/
+[12]: /fr/opentelemetry/setup/ddot_collector/
 [13]: /fr/opentelemetry/integrations/kubernetes_metrics/
+[14]: /fr/opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

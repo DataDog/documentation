@@ -5,7 +5,7 @@ further_reading:
   text: Compatibilité entre Datadog et OpenTelemetry
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: Documentation
-  text: Utiliser des composants OpenTelemetry personnalisés
+  text: Ajoutez des composants au collecteur de l'Agent
 - link: /opentelemetry/instrument/
   tag: Documentation
   text: Instrumenter votre application avec OpenTelemetry
@@ -25,7 +25,7 @@ Ce guide relève de <strong>Composants personnalisés</strong> <a href="/opentel
 
 ## Prérequis {#prerequisites}
 
-- Un backend compatible OpenTelemetry configuré pour envoyer des données à Datadog. Consultez [Send OpenTelemetry Data to Datadog][4] pour connaître les options de configuration, notamment le collecteur DDOT, le collecteur OpenTelemetry ou l'ingestion OTLP directe.
+- Un backend compatible OpenTelemetry configuré pour envoyer des données à Datadog. Consultez [Envoyer des données OpenTelemetry à Datadog][4] pour connaître les options de configuration, notamment le DDOT Collector, l'OpenTelemetry Collector ou l'ingestion OTLP directe.
 - [Bun][2] installé (v1.0 ou version ultérieure).
 - Une application Bun que vous souhaitez instrumenter.
 

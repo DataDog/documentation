@@ -49,17 +49,63 @@ Si solo se proporciona `input_tokens`, Datadog trata todos los tokens de entrada
 ## Proveedores admitidos {#supported-providers}
 Datadog calcula automáticamente el costo de las solicitudes de LLM realizadas a los siguientes proveedores admitidos utilizando la información de precios disponible públicamente en la documentación oficial de estos proveedores.
 
-<div class="alert alert-info">Datadog solo admite el seguimiento de costos para modelos basados en texto.</div>
-
 Datadog admite costos estimados para [más de 800 modelos][4], desde OpenAI, Hugging Face, Gemini, Anthropic hasta modelos servidos por OpenRouter.
 
 ## Métricas {#metrics}
-Puede encontrar métricas de costos en [Métricas de Agent Observability][5]. La unidad de las métricas de costo estimado de Agent Observability es el **nanodólar**. 
+
+Encuentre las métricas de costo y tokens disponibles en [Métricas de Agent Observability][5]. Las métricas de costo estimado se miden en **nanodólares** y las métricas de tokens se miden en **tokens**.
 
 Las métricas de costo incluyen una etiqueta `source` para indicar el origen del valor:
 - `source:auto` — calculado automáticamente
 - `source:user` — proporcionado manualmente
 
+### Desgloses de costo y tokens {#cost-and-token-breakdowns}
+
+`ml_obs.span.llm.cost` y `ml_obs.span.llm.tokens` son métricas de conteo que dividen el uso de costos y tokens mediante las siguientes etiquetas. El costo incluye tramos de LLM y de incrustación, además de los costos de los tramos de herramientas proporcionados por el usuario. El uso de tokens incluye solo tramos de LLM. Para el uso de tokens de incrustación, utilice `ml_obs.span.embedding.input.tokens`.
+
+Los desgloses automáticos de tokens de OpenAI Realtime requieren `ddtrace` 4.17.0 o posterior para Python. Para Node.js, utilice `dd-trace` 6.25.0 o posterior (v6), o 5.136.0 o posterior (v5). Consulte [instrumentación multimodal][11] para conocer las integraciones compatibles.
+
+Los cargos por herramientas del proveedor son cargos por herramientas integradas, como la búsqueda web, en los tramos de LLM. Los costos de los tramos de herramientas proporcionados por el usuario son costos que usted suministra manualmente en los tramos de herramientas.
+
+| Etiqueta | Valores | Descripción |
+|-----|--------|-------------|
+| `io_type` | `input`, `output`, `unknown` | Contribución de entrada o salida. |
+| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Categoría de caché para valores de entrada. Omitido para otras direcciones. |
+| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Categoría de razonamiento para valores de salida cuando los datos establecen la categoría. Los cargos por herramientas que no son de tokens omiten esta etiqueta. |
+| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Modalidad de token. `other` se aplica únicamente a las contribuciones de costos que no corresponden a tokens, como los cargos por herramientas del proveedor y los costos de los tramos de herramientas proporcionados por el usuario. |
+| `ttl` | `5m`, `1h` | Tiempo de vida de escritura en caché cuando ese desglose está disponible. Omitido para otras contribuciones. |
+
+Para las etiquetas de desglose aplicables, los detalles no disponibles utilizan `unknown`. Un valor `unknown` no significa uso cero. Por ejemplo, si un proveedor no informa el uso de caché, los tokens de entrada se etiquetan como `input_type:unknown`. Cuando el uso de caché o razonamiento no se puede asignar a modalidades individuales, los valores mantienen su categoría conocida y utilizan `token_modality:unknown`.
+
+### Elija entre métricas totales y de desglose {#choose-between-total-and-breakdown-metrics}
+
+Utilice las métricas totales para estadísticas por tramo y las métricas de desglose para comparar el uso entre categorías.
+
+#### Analice los totales por tramo {#analyze-totals-per-span}
+
+Utilice las distribuciones `ml_obs.span.llm.total.cost` y `ml_obs.span.llm.total.tokens` para obtener promedios y percentiles por tramo. Cada distribución registra una observación total por tramo aplicable. El costo total incluye los tramos de LLM y de incrustación, además de los costos de los tramos de herramientas proporcionados por el usuario. Los tokens totales incluyen solo los tramos de LLM.
+
+Por ejemplo, grafique el costo promedio y el uso promedio de tokens por tramo:
+
+```text
+avg:ml_obs.span.llm.total.cost{ml_app:my-app}
+avg:ml_obs.span.llm.total.tokens{ml_app:my-app}
+```
+
+#### Analice el uso por categoría {#analyze-usage-by-category}
+
+Utilice `ml_obs.span.llm.cost` y `ml_obs.span.llm.tokens` para comparar el costo y el uso de tokens entre categorías. Utilice `sum` con `.as_count()` para agregar contribuciones. Estas métricas no proporcionan promedios ni percentiles por tramo.
+
+Por ejemplo, las siguientes consultas grafican el costo por entrada o salida y modalidad, y los tokens de entrada por categoría de caché y modalidad:
+
+```text
+sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
+sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
+```
+
+Para un tramo con un costo total o recuento de tokens válido, sus valores de desglose suman ese total. Cuando no hay un total disponible para el costo o los tokens, las métricas de desglose conservan los valores de entrada o salida disponibles. La distribución total correspondiente no recibe ninguna observación.
+
+No sume las métricas de desglose a las métricas `.total.*` correspondientes al calcular los totales, ya que eso cuenta el mismo uso dos veces.
 
 ## Etiquetas personalizadas en métricas de costo y tokens {#custom-tags-on-cost-and-tokens-metrics}
 
@@ -95,9 +141,9 @@ En Agent Observability, seleccione {{< ui >}}Cost{{< /ui >}} en la navegación i
 
 Cost Overview incluye:
 - {{< ui >}}Spend breakdown{{< /ui >}}: Un diagrama de Sankey de sus {{< ui >}}Total Estimated Spend{{< /ui >}}, comparado con el período anterior. Seleccione {{< ui >}}By app{{< /ui >}}, {{< ui >}}By provider{{< /ui >}} o {{< ui >}}Custom Tags{{< /ui >}} para analizar qué aplicaciones, proveedores o [etiquetas personalizadas](#custom-tags-on-cost-and-tokens-metrics) representan su gasto. Cada entrada muestra el monto gastado, su participación en el gasto total y el cambio respecto al período anterior.
-- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] que identifican formas específicas de reducir el gasto, como prompts que no utilizan el caché de prompts del proveedor. Cada insight enumera la aplicación afectada y los ahorros estimados.
+- {{< ui >}}Cost Savings Opportunity{{< /ui >}}: [Insights][8] que identifican formas específicas de reducir el gasto, como prompts que no utilizan el caché de prompts del proveedor. Cada insight enumera la aplicación afectada y los ahorros estimados. [Frontier model sizing][9] destaca el gasto en modelos premium para priorizar pruebas con modelos de menor costo.
 - {{< ui >}}Cost Trend{{< /ui >}}: Una visualización de series temporales del gasto en una o todas las aplicaciones. Agrúpela por aplicación, servicio, nombre de modelo, proveedor de modelo o etiquetas personalizadas, y agregue filtros para limitar los resultados.
-- {{< ui >}}Wasted Spend{{< /ui >}}: Gasto en llamadas fallidas, respuestas de baja calidad y problemas encontrados por [Insights][8], desglosado por aplicación.
+- {{< ui >}}Wasted Spend{{< /ui >}}: Gasto en llamadas fallidas, respuestas de baja calidad y problemas encontrados por [Insights][8], desglosado por aplicación. Para el desperdicio identificado por Insights, abra el hallazgo para revisar la causa raíz, las trazas afectadas y la solución recomendada. Consulte [cómo mide Insights el gasto desperdiciado][10].
 - {{< ui >}}Cache Efficiency{{< /ui >}}: Ahorros netos por almacenamiento en caché de prompts, junto con la tasa de aciertos de caché, la tasa de reutilización de caché y el costo de entrada no almacenada en caché. Para obtener métricas de caché precisas, proporcione el [desglose completo de tokens de caché](#how-token-counts-are-calculated).
 
 Para visualizar los costos de una sola aplicación, haga clic en la aplicación en el diagrama de Sankey de Cost Overview. Alternativamente, selecciónela desde {{< ui >}}Applications{{< /ui >}} y abra la pestaña {{< ui >}}Cost{{< /ui >}}. La _Cost view_ de la aplicación incluye:
@@ -179,3 +225,6 @@ Cómo solucionar el problema:
 [5]: /es/llm_observability/investigate/metrics/#llm-cost-metrics
 [7]: /es/llm_observability/instrument/sdk/#adding-custom-tags-to-cost-and-tokens-metrics
 [8]: /es/llm_observability/investigate/insights/
+[9]: /es/llm_observability/investigate/insights/#frontier-model-sizing
+[10]: /es/llm_observability/investigate/insights/#wasted-spend
+[11]: /es/llm_observability/instrument/multimodal/#automatic-instrumentation

@@ -65,7 +65,7 @@ When recording ends, Datadog finalizes the transcript, and the timeline entry ch
 
 ### Transcript notebook access
 
-Datadog manages transcript notebook access using the incident's visibility and responder list, and access follows the incident. For example, if an organization-visible incident becomes private, access is limited to incident responders. A responder who loses access to an incident also loses access to its transcript, which can contain sensitive information.
+Datadog sets access to the transcript notebook based on the incident's visibility and responder list, and updates access when either changes. For example, if an organization-visible incident becomes private, access is limited to incident responders. A responder who loses access to an incident also loses access to its transcript, which can contain sensitive information.
 
 The following table shows who has access to the transcript notebook:
 
@@ -78,7 +78,7 @@ Re-inviting the Datadog Transcriber returns the notebook to Viewer access until 
 
 ## Retention and deletion
 
-<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes the data it holds. This retention period does not apply to live meeting transcripts, which remain in their Datadog notebook for as long as the notebook exists.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a 7-day retention period, the subprocessor automatically deletes the data it holds. This retention period does not apply to live meeting transcripts, which remain in their Datadog notebook for as long as the notebook exists.</div>
 
 To remove meeting summaries and transcripts:
 

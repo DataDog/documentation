@@ -4,7 +4,7 @@ aliases:
 - /ja/continuous_integration/tests/java
 - /ja/continuous_integration/tests/setup/java
 code_lang: java
-code_lang_weight: 10
+code_lang_weight: 20
 further_reading:
 - link: /tests/containers/
   tag: ドキュメント
@@ -27,7 +27,7 @@ further_reading:
 title: Java テスト
 type: multi-code-lang
 ---
-## 互換性{#compatibility}
+## 互換性 {#compatibility}
 
 サポート対象テストフレームワーク:
 
@@ -87,7 +87,7 @@ Datadog Java トレーサーの構成は、CI プロバイダーによって異�
 
 ### SDK のダウンロード{#downloading-sdk}
 
-SDK のダウンロードは、サーバーごとに 1 回だけ行う必要があります。
+SDK のダウンロードは、サーバーごとに 1 回のみ行う必要があります。
 
 SDK がすでにサーバー上にローカルで存在する場合、直接テストの実行に進むことができます。
 
@@ -107,7 +107,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
 ### テストの実行{#running-your-tests}
 
-テストプロセスを開始する前に、これらの変数を設定してください。並列テストランナーの場合、すべてのワーカーが継承するように親プロセスで設定してください。
+テストプロセスを開始する前に、これらの変数を設定します。並列テストランナーの場合、すべてのワーカーが継承するように親プロセスで設定してください。
 
 まず、ビルドツールに必要な以下の環境変数を設定します。
 
@@ -115,7 +115,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% tab "Maven" %}}
 
 `DD_TRACER_FOLDER` (必須)
-: ダウンロードした Java トレーサーがあるフォルダーへのパス。
+: ダウンロードした Java トレーサーがあるフォルダーのパス。
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar`(必須)
 : Maven ビルドプロセスに SDK をインジェクトします。
@@ -124,7 +124,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% tab "Gradle" %}}
 
 `DD_TRACER_FOLDER` (必須)
-: ダウンロードした Java トレーサーがあるフォルダーへのパス。
+: ダウンロードした Java トレーサーがあるフォルダーのパス。
 
 `GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar`(必須)
 : Gradle ランチャープロセスに SDK をインジェクトします。
@@ -133,7 +133,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% tab "SBT" %}}
 
 `DD_TRACER_FOLDER` (必須)
-: ダウンロードした Java トレーサーがあるフォルダーへのパス。
+: ダウンロードした Java トレーサーがあるフォルダーのパス。
 
 `SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar`(必須)
 : テストを実行する JVM に SDK をインジェクトします。
@@ -142,7 +142,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{% tab "その他" %}}
 
 `DD_TRACER_FOLDER` (必須)
-: ダウンロードした Java トレーサーがあるフォルダーへのパス。
+: ダウンロードした Java トレーサーがあるフォルダーのパス。
 
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar`(必須)
 : テストを実行する JVM に SDK をインジェクトします。
@@ -188,7 +188,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
 通常と同じ方法でテストを実行します (例: `mvn test`、`mvn verify`、`./gradlew clean test`、または `sbt test`)。
 
-## 構成{#configuration}
+## 構成 {#configuration}
 
 ほとんどの場合、デフォルトの構成値でうまくいきます。
 
@@ -421,7 +421,7 @@ public class ManualTest {
 
 最後に必ず ``datadog.trace.api.civisibility.DDTestSession#end`` を呼び出して、すべてのテスト情報を Datadog に渡してください。
 
-## ベストプラクティス{#best-practices}
+## ベストプラクティス {#best-practices}
 
 ### 決定論的なテストパラメーターの表現{#deterministic-test-parameters-representation}
 
@@ -487,13 +487,13 @@ static Stream<Arguments> randomArguments() {
 
 #### `DD_TEST_SESSION_NAME` を使用するタイミング{#when-to-use-dd-test-session-name}
 
-Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。一時フォルダーなど、実行ごとに変化する文字列がテストコマンドに含まれる場合、Datadog はそれらのセッションを互いに無関係なものとみなします。たとえば、以下のとおりです。
+Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。一時フォルダーなど、実行ごとに変化する文字列がテストコマンドに含まれる場合、Datadog はそれらのセッションを互いに無関係なものとみなします。例:
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
 テストコマンドが実行ごとに異なる場合、Datadog は `DD_TEST_SESSION_NAME` を使用することを推奨します。
 
-## トラブルシューティング{#troubleshooting}
+## トラブルシューティング {#troubleshooting}
 
 ### SDK で Test Optimization を有効にした後、Datadog にテストが表示されない{#the-tests-are-not-appearing-in-datadog-after-enabling-test-optimization-in-the-sdk}
 
@@ -515,7 +515,7 @@ Datadog がテストセッション間の対応関係を確立するためにチ
 
 Test Optimization はデフォルトで、コンパイラープラグインがアタッチされた状態で Java コードのコンパイルを実行できるようになっています。
 
-このプラグインはパフォーマンスのオーバーヘッドを削減するためだけのものなので、オプションです。
+このプラグインはパフォーマンスのオーバーヘッドを削減するためのみのものなので、オプションです。
 
 ビルドの構成によっては、プラグインを追加することで、コンパイルのプロセスが妨げられる場合があります。
 
@@ -529,7 +529,7 @@ Test Optimization はデフォルトで、コンパイラープラグインが�
 この場合は、`-javaagent` 引数のリストに `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` を追加することで、プラグインのインジェクションを無効にできます。
 (または `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED` 環境変数を false に設定してください)。
 
-このプラグインはパフォーマンスのオーバーヘッドを削減するためだけのものなので、オプションです。
+このプラグインはパフォーマンスのオーバーヘッドを削減するためのみのものなので、オプションです。
 
 ### SDK をアタッチしてプロジェクトをビルドするとテストが失敗する{#tests-fail-when-building-a-project-with-the-sdk-attached}
 
@@ -545,7 +545,7 @@ Test Optimization はデフォルトで、コンパイラープラグインが�
 
 すべてのインテグレーションを無効にするには、`-javaagent` 引数のリストに `dd.trace.enabled=false` を追加してください (または `DD_TRACE_ENABLED=false` 環境変数を設定してください)。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

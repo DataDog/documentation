@@ -12,106 +12,105 @@ further_reading:
   text: Solucionar problemas de Serverless Monitoring
 - link: serverless/custom_metrics/
   tag: Documentación
-  text: Envío de métricas personalizadas desde aplicaciones serverless
-title: Instrumentación de aplicaciones serverless de Go
+  text: Envío de Custom Metrics desde aplicaciones Serverless
+title: Instrumentación de aplicaciones Serverless de Go
 ---
+<div class="alert alert-danger">Si sus funciones Lambda de Go todavía usan el runtime <code>go1.x</code> y no puede migrar al <code>provided.al2</code> runtime, debe <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrumentar usando el Datadog Forwarder</a>. De lo contrario, siga las instrucciones de esta guía para instrumentar usando Datadog Lambda Extension.</div>
 
-<div class="alert alert-danger">Si tus funciones de Go Lambda todavía utilizan el tiempo de ejecución <code>go1.x</code> y no puedes migrar al tiempo de ejecución <code>provided.al2</code>, debes <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrumentar utilizando Datadog Forwarder</a>. De lo contrario, sigue las instrucciones de esta guía para instrumentar utilizando Datadog Lambda Extension.</div>
+<div class="alert alert-info">La versión 67+ de la Datadog Lambda Extension está optimizada para reducir significativamente la duración del arranque en frío. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Leer más</a>.</div>
 
-<div class="alert alert-info">La versión 67+ de Datadog Lambda Extension está optimizada para reducir significativamente la duración del arranque en frío. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Más información</a>.</div>
+## Configuración {#setup}
 
-{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
-La incorporación del Agent para Datadog Serverless está en la vista previa. Utiliza tu herramienta de codificación de IA favorita, como Cursor o Claude, para agregar en bloque la monitorización de Datadog a tus funciones Lambda.
-{{< /callout >}}
+**Nota**: Datadog recomienda usar la v2 del trazador de Go para instrumentar funciones AWS Lambda. Consulte las [instrucciones de migración](https://github.com/DataDog/dd-trace-go/tree/main/contrib/aws/datadog-lambda-go) para obtener orientación sobre cómo actualizar de la v1 a la v2.
 
-## Instalación
-
-**Nota**: Datadog recomienda utilizar el rastreador de Go v2 para instrumentar las funciones de AWS Lambda. Consulta las [Instrucciones para la migración del rastreador de Go](https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/migration/#migration-instructions) para obtener orientación sobre la actualización de v1 a v2.
+{{% svl-lambda-memory %}}
 
 {{< tabs >}}
-{{% tab "Interfaz de usuario de Datadog" %}}
-Puedes instrumentar tu aplicación de Go AWS Lambda directamente dentro de Datadog. Ve a  la page (página) [Serverless > AWS Lambda][2] y selecciona [**Instrument Functions**][3] (Instrumentar funciones).
+{{% tab "Datadog UI" %}}
+Puede instrumentar su aplicación de Go para AWS Lambda directamente en Datadog. Navegue a la página [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] y seleccione [{{< ui >}}Settings{{< /ui >}}][3]. En la sección {{< ui >}}Remote Instrumentation{{< /ui >}}, seleccione la pestaña {{< ui >}}AWS Lambda{{< /ui >}}.
 
-Para obtener más información, consulta [Instrumentación remota para AWS Lambda][1].
+Para obtener más información, consulte [Instrumentación remota para AWS Lambda][1].
 
 [1]: /es/serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
-La Datadog CLI modifica la configuración de las funciones de Lambda existentes para permitir la instrumentación sin tener que volver a desplegar. Es la forma más rápida de empezar a trabajar con la monitorización serverless de Datadog.
+Datadog CLI modifica las configuraciones de las funciones Lambda existentes para habilitar la instrumentación sin necesidad de una nueva implementación. Es la forma más rápida de comenzar con Serverless Monitoring de Datadog.
 
-1. Instalar el cliente de la Datadog CLI
+1. Instale el cliente de Datadog CLI
 
     ```sh
     npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
-2. Si es la primera vez que usas la monitorización serverless de Datadog, inicia la Datadog CLI en el modo interactivo para recibir instrucciones sobre cómo realizar la primera instalación. Esto te permitirá entrar en materia rápidamente y saltarte los demás pasos. Si deseas instalar Datadog de forma permanente en tus aplicaciones de producción, omite ese paso y dirígete directamente a los siguientes para ejecutar el comando de la Datadog CLI en tus pipelines de CI/CD _después_ de haber desplegado como lo haces normalmente.
+2. Si es nuevo en Serverless Monitoring de Datadog, inicie Datadog CLI en modo interactivo para que lo guíe en su primera instalación para un inicio rápido, y puede ignorar los pasos restantes. Para instalar Datadog de forma permanente para sus aplicaciones de producción, omita este paso y siga los restantes para ejecutar el comando de Datadog CLI en sus pipelines de CI/CD _después_ de su despliegue normal.
 
     ```sh
     datadog-ci lambda instrument -i
     ```
 
-3. Configurar las credenciales de AWS
+3. Configure las credenciales de AWS
 
-    La Datadog CLI necesita acceder al servicio AWS Lambda y depende del SDK de AWS para JavaScript a la hora de [configurar las credenciales][1]. Asegúrate de que tus credenciales de AWS estén configuradas con el mismo método que utilizarás para invocar la AWS CLI.
+    La CLI de Datadog requiere acceso al servicio AWS Lambda y depende del SDK de JavaScript de AWS para [resolver las credenciales][1]. Asegúrese de que sus credenciales de AWS estén configuradas utilizando el mismo método que usaría al invocar AWS CLI.
 
-4. Configurar el sitio de Datadog
+4. Configure el sitio de Datadog
 
     ```sh
     export DATADOG_SITE="<DATADOG_SITE>"
     ```
 
-    Reemplaza `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}} (asegúrate de seleccionar el sitio [SITE] correcto del lado derecho).
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (asegúrese de que el SITE correcto esté seleccionado a la derecha).
 
-5. Configurar la clave de la API de Datadog
+5. Configure la clave de API de Datadog
 
-    Datadog recomienda guardar la clave de la API de Datadog en AWS Secrets Manager para una mayor seguridad y una rotación más sencilla. La clave debe almacenarse en una cadena de texto sin formato (no en un blob JSON). Además, asegúrate de que tus funciones de Lambda tengan el permiso de IAM obligatorio `secretsmanager:GetSecretValue`.
+    Datadog recomienda guardar la clave de API de Datadog en AWS Secrets Manager por seguridad y para facilitar su rotación. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Asegúrese de que sus funciones Lambda tengan el permiso de IAM `secretsmanager:GetSecretValue` requerido.
 
     ```sh
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
     ```
 
-    Si quieres hacer un testeo rápido, también puedes configurar la clave de la API de Datadog en texto sin formato:
+    For quick testing purposes, you can also set the Datadog API key in plaintext:
 
     ```sh
     export DATADOG_API_KEY="<DATADOG_API_KEY>"
     ```
 
-6. Instrumentación de tus funciones Lambda
+6. Instrumente sus funciones Lambda
 
-    **Nota**: Antes que nada, instrumenta tus funciones de Lambda en un entorno de desarrollo o de prueba. Si el resultado de la instrumentación no es satisfactorio, ejecuta `uninstrument` con los mismos argumentos para revertir los cambios.
+    **Nota**: ¡Instrumente las funciones Lambda primero en un entorno de desarrollo o de pruebas (staging)! Si el resultado de la instrumentación no es satisfactorio, ejecute `uninstrument` con los mismos argumentos para revertir los cambios.
 
-    Para instrumentar tus funciones Lambda, ejecuta el siguiente comando.
+    Para instrumentar las funciones Lambda, ejecute el siguiente comando.
 
     ```sh
     datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e {{< latest-lambda-layer-version layer="extension" >}}
-    ```
+    
 
-    Para rellenar los parámetros:
-    - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tus funciones de Lambda. Otra posibilidad es usar `--functions-regex` para instrumentar automáticamente varias funciones cuyos nombres coincidan con una expresión regular determinada.
-    - Sustituye `<aws_region>` por el nombre de la región AWS.
+```
 
-    Si necesitas parámetros adicionales, consulta la [documentación acerca de la CLI][2].
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
+
+    Additional parameters can be found in the [CLI documentation][2].
 
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/es/serverless/serverless_integrations/cli
 {{% /tab %}}
-{{% tab "Marco serverless" %}}
+{{% tab "Serverless Framework" %}}
 
-El complemento [Datadog Serverless Plugin][1] configura automáticamente tus funciones para enviar métricas, trazas (traces) y logs a Datadog mediante la [Datadog Lambda Extension][2].
+El [Datadog Serverless Plugin][1] configura automáticamente sus funciones para enviar métricas, trazas y registros a Datadog a través de la [Datadog Lambda Extension][2].
 
-Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
+Para instalar y configurar el Datadog Serverless Plugin, siga estos pasos:
 
-### Instala el Datadog Serverless Plugin:
+### Instale el Datadog Serverless Plugin: {#install-the-datadog-serverless-plugin}
 
 ```sh
 serverless plugin install --name serverless-plugin-datadog
 ```
 
-### Actualiza tu archivo `serverless.yml`:
+### Actualice su `serverless.yml`: {#update-your-serverlessyml}
 
 ```yaml
 custom:
@@ -120,11 +119,11 @@ custom:
     apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
 ```
 
-Para rellenar los parámetros, haz lo siguiente:
-- Reemplaza `<DATADOG_SITE>` por el [sitio de Datadog][3] al que quieres enviar la telemetría.
-- Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS en el que almacenas la [clave de la API de Datadog][4] de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar `apiKey` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
+Para completar los marcadores de posición:
+- Reemplace `<DATADOG_SITE>` con su [sitio de Datadog][3] al cual enviar la telemetría.
+- Reemplace `<DATADOG_API_KEY_SECRET_ARN>` con el ARN del secreto de AWS donde su [clave de API de Datadog][4] está almacenada de forma segura. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar `apiKey` en su lugar y configurar la clave de API de Datadog en texto plano.
 
-Para obtener más información y parámetros adicionales, consulta la [documentación acerca del complemento][1].
+Para obtener más información y configuraciones adicionales, consulte la [documentación del plugin][1].
 
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/es/serverless/libraries_integrations/extension
@@ -133,11 +132,11 @@ Para obtener más información y parámetros adicionales, consulta la [documenta
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para instalar Datadog en tus funciones mediante capas de Lambda. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través de la [Datadog Lambda Extension][2].
+El [Datadog CloudFormation macro][1] transforma automáticamente su plantilla de aplicación SAM para instalar Datadog en sus funciones mediante capas de Lambda, y configura sus funciones para enviar métricas, trazas y registros a Datadog a través de la [Datadog Lambda Extension][2].
 
-1. Instalar la macro de CloudFormation de Datadog
+1. Instale el Datadog CloudFormation macro
 
-    Ejecuta el siguiente comando con tus [credenciales de AWS][3] para desplegar un stack tecnológico de CloudFormation que instale el recurso de AWS de la macro. Solo tienes que instalar la macro **una vez** en una región determinada de tu cuenta. Luego, debes reemplazar `create-stack` por `update-stack` para actualizar la macro a la versión más reciente.
+    Ejecute el siguiente comando con sus [credenciales de AWS][3] para implementar una pila de CloudFormation que instale el recurso de AWS de la macro. Solo necesita instalar la macro **una vez** para una región determinada en su cuenta. Reemplace `create-stack` con `update-stack` para actualizar la macro a la versión más reciente.
 
     ```sh
     aws cloudformation create-stack \
@@ -146,11 +145,11 @@ La [macro de CloudFormation de Datadog][1] transforma automáticamente tu planti
       --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
     ```
 
-    Con estos pasos, la macro ya está desplegada y lista para usar.
+    The macro is now deployed and ready to use.
 
-2. Instrumentación de tus funciones Lambda
+2. Instrumente las funciones Lambda
 
-    Añade la transformación `DatadogServerless` **después** de la transformación `AWS::Serverless` en la sección `Transform` de tu archivo `template.yml` para SAM.
+    Agregue la transformación `DatadogServerless` **después** de la transformación `AWS::Serverless` en la sección `Transform` para SAM en su archivo `template.yml`.
 
     ```yaml
     Transform:
@@ -163,11 +162,11 @@ La [macro de CloudFormation de Datadog][1] transforma automáticamente tu planti
           apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
     ```
 
-    Para rellenar los parámetros:
-    - Sustituye `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}} (asegúrate de haber seleccionado el SITIO correcto del lado derecho).
-    - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS en el que almacenas la [clave de la API de Datadog][4] de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar `apiKey` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (asegúrese de que el SITE correcto esté seleccionado a la derecha).
+    - Reemplace `<DATADOG_API_KEY_SECRET_ARN>` con el ARN del secreto de AWS donde su [clave de API de Datadog][4] está almacenada de forma segura. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar `apiKey` en su lugar y establecer la clave de API de Datadog en texto plano.
 
-    Obtén más información y parámetros adicionales en la [documentación de la macro][1].
+    More information and additional parameters can be found in the [macro documentation][1].
 
 
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/macro
@@ -182,19 +181,19 @@ La [macro de CloudFormation de Datadog][1] transforma automáticamente tu planti
 
 {{% tab "Imagen de contenedor" %}}
 
-1. Instalar la Datadog Lambda Extension
+1. Instale Datadog Lambda Extension
 
     ```dockerfile
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
-    Reemplaza `<TAG>` por un número de versión específico (por ejemplo, `{{< latest-lambda-layer-version layer="extension" >}}`) o por `latest`. Alpine también es compatible con números de versión específicos (como `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) o con `latest-alpine`. Puedes ver una lista completa de posibles etiquetas (tags) en el [repositorio de Amazon ECR][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. Puede ver una lista completa de las etiquetas posibles en el [repositorio de Amazon ECR][1].
 
-2. Configurar las variables de entorno obligatorias
+2. Establezca las variables de entorno requeridas
 
-    - Configura `DD_SITE` como {{< region-param key="dd_site" code="true" >}} (asegúrate de seleccionar el sitio [SITE] correcto del lado derecho).
-    - Configura `DD_API_KEY_SECRET_ARN` con el ARN del secreto de AWS en el que almacenas la [clave de la API de Datadog][2] de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar `DD_API_KEY` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
-    - De manera opcional, puedes configurar `DD_UNIVERSAL_INSTRUMENTATION: true` para aprovechar las ventajas de las [configuraciones avanzadas][3], como capturar las cargas útiles de solicitud y respuesta de Lambda e inferir tramos (spans) de APM de los eventos de Lambda entrantes.
+    - Establezca `DD_SITE` en {{< region-param key="dd_site" code="true" >}} (asegúrese de que el SITE correcto esté seleccionado a la derecha).
+    - Establezca `DD_API_KEY_SECRET_ARN` en el ARN del secreto de AWS donde su [clave de API de Datadog][2] está almacenada de forma segura. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar `DD_API_KEY` en su lugar y establecer la clave de API de Datadog en texto plano.
+    - Opcionalmente, establezca `DD_UNIVERSAL_INSTRUMENTATION: true` para aprovechar las [configuraciones avanzadas][3], como capturar las cargas útiles de solicitud y respuesta de Lambda e inferir spans de APM a partir de eventos entrantes de Lambda.
 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -202,16 +201,16 @@ La [macro de CloudFormation de Datadog][1] transforma automáticamente tu planti
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-El módulo de Terraform [`lambda-datadog`][1] envuelve el recurso [`aws_lambda_function`][2] y configura automáticamente tu función de Lambda para Datadog Serverless Monitoring mediante las siguientes acciones:
+El módulo de Terraform [`lambda-datadog`][1] envuelve el recurso [`aws_lambda_function`][2] y configura automáticamente su función Lambda para Datadog Serverless Monitoring mediante:
 
-- adición de las capas de Lambda de Datadog,
-- redireccionamiento del controlador de Lambda,
-- habilitación de la recopilación de métricas, trazas y logs y su envío a Datadog.
+- Agregar Datadog Lambda layers
+- Redirigir el controlador de Lambda
+- Habilitar la recopilación y el envío de métricas, trazas y registros a Datadog
 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "4.0.0"
+  version = "4.10.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -227,23 +226,23 @@ module "lambda-datadog" {
 }
 ```
 
-1. Reemplaza el recurso `aws_lambda_function` por el módulo de Terraform `lambda-datadog`. Luego, especifica el origen `source` y la versión `version` del módulo.
+1. Reemplace el recurso `aws_lambda_function` con el módulo de Terraform `lambda-datadog`. Luego, especifique la `source` y `version` del módulo.
 
-2. Configura los argumentos de `aws_lambda_function`:
+2. Establezca los argumentos `aws_lambda_function`:
 
    Todos los argumentos disponibles en el recurso `aws_lambda_function` están disponibles en este módulo de Terraform. Los argumentos definidos como bloques en el recurso `aws_lambda_function` se redefinen como variables con sus argumentos anidados.
 
-   Por ejemplo, en `aws_lambda_function`, `environment` está definido como un bloque con un argumento `variables`. En el módulo de Terraform `lambda-datadog`, el valor de `environment_variables` se pasa al argumento `environment.variables` en `aws_lambda_function`. Consulta las [entradas][3] para ver una lista completa de las variables de este módulo.
+   Por ejemplo, en `aws_lambda_function`, `environment` se define como un bloque con un argumento `variables`. En el módulo de Terraform `lambda-datadog`, el valor para `environment_variables` se pasa al argumento `environment.variables` en `aws_lambda_function`. Consulte [inputs][3] para obtener una lista completa de las variables en este módulo.
 
-3. Rellena los parámetros de las variables de entorno de la siguiente manera:
+3. Complete los marcadores de posición de las variables de entorno:
 
-   - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS en el que almacenas la clave de la API de Datadog de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar la variable de entorno `DD_API_KEY` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
-   - Reemplaza `<ENVIRONMENT>` por el entorno de la función de Lambda, como `prod` o `staging`.
-   - Reemplaza `<SERVICE_NAME>` por el nombre del servicio de la función de Lambda.
-   - Reemplaza `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}}. (Asegúrate de seleccionar el [sitio de Datadog][4] correcto en esta página).
-   - Reemplaza `<VERSION>` por el número de versión de la función de Lambda.
+   - Reemplace `<DATADOG_API_KEY_SECRET_ARN>` con el ARN del secreto de AWS donde se almacena de forma segura su clave de API de Datadog. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar en su lugar la variable de entorno `DD_API_KEY` y establecer su clave de API de Datadog en texto plano.
+   - Reemplace `<ENVIRONMENT>` con el entorno de la función Lambda, como `prod` o `staging`
+   - Reemplace `<SERVICE_NAME>` con el nombre del servicio de la función Lambda
+   - Reemplace `<DATADOG_SITE>` con {{< region-param key="dd_site" code="true" >}}. (Asegúrese de que el [sitio de Datadog][4] correcto esté seleccionado en esta página).
+   - Reemplace `<VERSION>` con el número de versión de la función Lambda
 
-4. Selecciona la versión de la capa de Datadog Extension Lambda que desees utilizar. Si se deja en blanco, se utilizará la última versión de la capa.
+4. Seleccione la versión de la capa de Lambda de Datadog Extension que desea utilizar. Si se deja en blanco, se utilizará la versión más reciente de la capa.
 
 ```
   datadog_extension_layer_version = {{< latest-lambda-layer-version layer="extension" >}}
@@ -256,7 +255,7 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{% tab "SST v3" %}}
 
-Para configurar Datadog utilizando SST v3, sigue estos steps (UI) / pasos (generic):
+Para configurar Datadog usando SST v3, siga estos pasos:
 
 ```ts
 const app = new sst.aws.Function("MyApp", {
@@ -275,21 +274,21 @@ const app = new sst.aws.Function("MyApp", {
 });
 ```
 
-Rellena los parámetros de las variables de entorno de la siguiente manera:
+Complete los marcadores de posición de las variables de entorno:
 
-  - Reemplaza `<DATADOG_API_KEY_SECRET_ARN>` por el ARN del secreto de AWS en el que almacenas la clave de la API de Datadog de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar la variable de entorno `DD_API_KEY` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
-  - Reemplaza `<ENVIRONMENT>` por el entorno de la función de Lambda, como `prod` o `staging`.
-  - Reemplaza `<SERVICE_NAME>` por el nombre del servicio de la función de Lambda.
-  - Sustituye `<DATADOG_SITE>` por {{< region-param key="dd_site" code="true" >}}. (Asegúrate de seleccionar el [sitio de Datadog ][1] correcto en esta page (página)).
-  - Reemplaza `<VERSION>` por el número de versión de la función de Lambda.
+  - Reemplace `<DATADOG_API_KEY_SECRET_ARN>` con el ARN del secreto de AWS donde se almacena de forma segura su clave de API de Datadog. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar en su lugar la variable de entorno `DD_API_KEY` y establecer su clave de API de Datadog en texto plano.
+  - Reemplace `<ENVIRONMENT>` con el entorno de la función Lambda, como `prod` o `staging`
+  - Reemplace `<SERVICE_NAME>` con el nombre del servicio de la función Lambda
+  - Reemplace `<DATADOG_SITE>` con {{< region-param key="dd_site" code="true" >}}. (Asegúrese de que el [sitio de Datadog][1] correcto esté seleccionado en esta página).
+  - Reemplace `<VERSION>` con el número de versión de la función Lambda
 
 [1]: /es/getting_started/site/
 
 {{% /tab %}}
 {{% tab "Personalizado" %}}
-### Instalar la Datadog Lambda Extension
+### Instale Datadog Lambda Extension {#install-the-datadog-lambda-extension}
 
-[Añade la capa de Lambda][1] de la Datadog Lambda Extension a tus funciones de Lambda, con el formato del ARN definido según tu región y arquitectura de AWS:
+[Agregue la capa de Lambda][1] de Datadog Lambda Extension a sus funciones de Lambda, utilizando el formato ARN basado en su región y arquitectura de AWS:
 
 ```sh
 # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -305,33 +304,35 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
 
-Reemplaza `<AWS_REGION>` por una región de AWS válida, como `us-east-1`.
+Reemplace `<AWS_REGION>` con una región de AWS válida, como `us-east-1`.
 
-### Configurar las variables de entorno obligatorias
+### Configure las variables de entorno requeridas {#configure-the-required-environment-variables}
 
-- Configura `DD_SITE` como {{< region-param key="dd_site" code="true" >}} (asegúrate de seleccionar el sitio [SITE] correcto del lado derecho).
-- Configura `DD_API_KEY_SECRET_ARN` con el ARN del secreto de AWS en el que almacenas la [clave de la API de Datadog][2] de forma segura. La clave debe estar almacenada en una cadena de texto sin formato (no en un blob JSON). Además, el permiso `secretsmanager:GetSecretValue` es obligatorio. Si quieres hacer un testeo rápido, puedes usar `DD_API_KEY` en lugar del ARN y configurar la clave de la API de Datadog en texto sin formato.
+- Establezca `DD_SITE` en {{< region-param key="dd_site" code="true" >}} (asegúrese de que el SITE correcto esté seleccionado a la derecha).
+- Establezca `DD_API_KEY_SECRET_ARN` en el ARN del secreto de AWS donde su [clave de API de Datadog][2] está almacenada de forma segura. La clave debe almacenarse como una cadena de texto plano (no como un blob JSON). Se requiere el permiso `secretsmanager:GetSecretValue`. Para pruebas rápidas, puede usar `DD_API_KEY` en su lugar y establecer la clave de API de Datadog en texto plano.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instalar la biblioteca Lambda de Datadog
+{{% svl-tracing-env %}}
+
+### Instale la biblioteca de Datadog para Lambda {#install-the-datadog-lambda-library}
 
 ```
 go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
-### Actualizar el código de la función de Lambda
+### Actualice el código de su función Lambda {#update-your-lambda-function-code}
 
 ```go
 package main
 
 import (
-    "context"
-    "net/http"
-    "time"
+	"context"
+	"net/http"
+	"time"
 
   ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
   "github.com/aws/aws-lambda-go/events"
@@ -341,48 +342,48 @@ import (
 )
 
 func main() {
-    // Wrap your lambda handler
-    lambda.Start(ddlambda.WrapFunction(myHandler, nil))
+	// Wrap your lambda handler
+	lambda.Start(ddlambda.WrapFunction(myHandler, nil))
 }
 
 func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, error) {
-    // Trace an HTTP request
-    req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
-    client := http.Client{}
-    client = httptrace.WrapClient(&client)
-    client.Do(req)
+	// Trace an HTTP request
+	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
+	client := http.Client{}
+	client = httptrace.WrapClient(&client)
+	client.Do(req)
 
-    // Submit a custom metric
-    ddlambda.Metric(
-        "coffee_house.order_value",      // Metric name
-        12.45,                           // Metric value
-        "product:latte", "order:online", // Associated tags
-    )
+	// Submit a custom metric
+	ddlambda.Metric(
+		"coffee_house.order_value",      // Metric name
+		12.45,                           // Metric value
+		"product:latte", "order:online", // Associated tags
+	)
 
-    // Create a custom span
-    s, _ := tracer.StartSpanFromContext(ctx, "child.span")
-    time.Sleep(100 * time.Millisecond)
-    s.Finish()
-    return "ok", nil
+	// Create a custom span
+	s, _ := tracer.StartSpanFromContext(ctx, "child.span")
+	time.Sleep(100 * time.Millisecond)
+	s.Finish()
+	return "ok", nil
 }
 ```
 
-## Cumplimiento de FIPS
+## Cumplimiento de FIPS {#fips-compliance}
 
 {{% svl-lambda-fips %}}
 
-## AWS Lambda y VPC
+## AWS Lambda y VPC {#aws-lambda-and-vpc}
 
 {{% svl-lambda-vpc %}}
 
-## ¿Qué toca hacer ahora?
+## ¿Qué sigue? {#whats-next}
 
-- Añade etiquetas personalizadas a tu telemetría utilizando la variable de entorno `DD_TAGS` 
-- Configura [recopilación de cargas útiles][8] para capturar las cargas útiles de solicitud y respuesta JSON de tus funciones.
-- Si utilizas la extensión Lambda de Datadog, desactiva los logs Lambda de Datadog Forwarder.
-- Consulta [Configurar Serverless Monitoring para AWS Lambda][3] para obtener más funciones.
+- Agregue etiquetas personalizadas a su telemetría usando la variable de entorno `DD_TAGS`
+- Configure [la recopilación de cargas útiles][8] para capturar las cargas útiles JSON de solicitud y respuesta de sus funciones
+- Si está utilizando Datadog Lambda Extension, desactive los registros Lambda del Datadog Forwarder
+- Consulte [Configure Serverless Monitoring for AWS Lambda][3] para obtener más capacidades
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

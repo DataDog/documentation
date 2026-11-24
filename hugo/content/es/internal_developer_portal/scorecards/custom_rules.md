@@ -6,7 +6,7 @@ aliases:
 - /es/software_catalog/scorecards/custom_rules
 description: Cree reglas personalizadas de Scorecard con una consulta DDSQL, la API
   de Scorecards o Workflow Automation para codificar las expectativas de su organización
-  para los componentes de software.
+  respecto de los componentes de software.
 further_reading:
 - link: /internal_developer_portal/catalog/
   tag: Documentación
@@ -32,12 +32,12 @@ Las reglas personalizadas le permiten codificar las expectativas de su organizac
 ## Crear reglas personalizadas {#create-custom-rules}
 
 1. Navegue a la página [{{< ui >}}Scorecards{{< /ui >}}][4] y haga clic en {{< ui >}}Create Rule{{< /ui >}}.
-2. Especifique el nombre de la regla, el Scorecard al que pertenece, una descripción de la regla, el equipo propietario y a qué nivel pertenece la regla.
+2. Especifique el nombre de la regla, el scorecard al que pertenece, una descripción de la regla, el equipo propietario y a qué nivel pertenece la regla.
 3. En {{< ui >}}Define evaluation logic{{< /ui >}}, elija cómo evalúa Datadog la regla:
    - {{< ui >}}Write a DDSQL Query{{< /ui >}}: utilice esta opción para reglas que evalúan datos disponibles en Datadog. Consulte [Evaluar reglas personalizadas mediante DDSQL](#evaluate-custom-rules-using-ddsql).
    - {{< ui >}}Use a Workflow or Scorecards API{{< /ui >}}: utilice esta opción para evaluar entidades y enviar resultados desde fuera de Scorecards. Consulte [Evaluar reglas personalizadas mediante Workflow Automation](#evaluate-custom-rules-using-workflow-automation) y [Evaluar reglas personalizadas mediante la API de Scorecards o la interfaz de usuario](#evaluate-custom-rules-using-the-scorecards-api-or-the-ui).
 
-El contexto define a qué entidades se aplica una regla. Para las reglas que utilizan un flujo de trabajo o la API de Scorecards, especifique el contexto después de elegir el método de evaluación. El contexto debe incluir al menos un tipo de entidad y puede utilizar metadatos de las definiciones de entidad en IDP Catalog, como `kind`, `team` o `tier`. Para las reglas que utilizan DDSQL, defina el contexto en la cláusula `WHERE` de la consulta. Para obtener más información, consulte [Contexto de las reglas de Scorecard][5].
+El contexto define a qué entidades se aplica una regla. Para las reglas que utilizan un flujo de trabajo o la API de Scorecards, especifique el contexto después de elegir el método de evaluación. El contexto debe incluir al menos un tipo de entidad y puede utilizar metadatos de las definiciones de entidad en IDP Catalog, como `kind`, `team` o `tier`. Para las reglas que utilizan DDSQL, defina el contexto en la cláusula `WHERE` de la consulta. Para obtener más información, consulte [Definir el contexto de las reglas de Scorecard][5].
 
 Para cambiar la forma en que se evalúa una regla existente, edite la regla y seleccione una opción diferente en {{< ui >}}Define evaluation logic{{< /ui >}}. Si cambia una regla a DDSQL, debe ejecutar una prueba exitosa antes de poder guardarla, y Datadog eliminará cualquier flujo de trabajo vinculado de la regla. Si cambia una regla de DDSQL a un flujo de trabajo o a la API de Scorecards, Datadog eliminará la consulta DDSQL de la regla.
 
@@ -46,14 +46,14 @@ Para cambiar la forma en que se evalúa una regla existente, edite la regla y se
 Su consulta debe:
 
 - Devolver un `entity_kind`, un `entity_key` y un `state` para cada entidad.
-- Establezca `state` en `pass`, `fail` o `skip`.
-- Use la cláusula `WHERE` para definir el contexto de la regla.
+- Establecer `state` en `pass`, `fail` o `skip`.
+- Usar la cláusula `WHERE` para definir el contexto de la regla.
 
 Después de seleccionar {{< ui >}}Write a DDSQL Query{{< /ui >}}:
 
-{{< img src="/internal_developer_portal/scorecards/custom_rule_ddsql.png" alt="La página New Rule con una consulta DDSQL que verifica si cada servicio tiene un enlace a la documentación, un resultado de prueba exitoso y una vista previa de las entidades que cumplen y no cumplen la regla." style="width:100%;" >}}
+{{< img src="/internal_developer_portal/scorecards/custom_rule_ddsql.png" alt="La página New Rule con una consulta DDSQL que verifica si cada servicio tiene un enlace a documentos, un resultado de prueba exitoso y una vista previa de las entidades que pasan y fallan." style="width:100%;" >}}
 
-1. Escriba su consulta en el editor. Reemplace cada marcador de posición en la plantilla de consulta o copie una consulta completa desde la pestaña {{< ui >}}Examples{{< /ui >}} en el panel {{< ui >}}DDSQL Help{{< /ui >}}. Use la pestaña {{< ui >}}Data Sources{{< /ui >}} para ver las fuentes de datos y columnas disponibles.
+1. Escriba su consulta en el editor. Reemplace cada marcador de posición en la plantilla de consulta, o copie una consulta completa desde la pestaña {{< ui >}}Examples{{< /ui >}} en el panel {{< ui >}}DDSQL Help{{< /ui >}}. Use la pestaña {{< ui >}}Data Sources{{< /ui >}} para ver las fuentes de datos y columnas disponibles.
    - Opcionalmente, haga clic en {{< ui >}}Ask Bits{{< /ui >}} para abrir Bits Chat y redactar una consulta a partir de su prompt.
 2. Haga clic en {{< ui >}}Run Test{{< /ui >}} para evaluar la consulta en todas las entidades dentro del contexto. Debe ejecutar una prueba exitosa antes de poder guardar la regla.
 3. Revise los resultados en el panel {{< ui >}}Preview{{< /ui >}}.
@@ -65,27 +65,33 @@ Después de seleccionar {{< ui >}}Write a DDSQL Query{{< /ui >}}:
 
 ## Evaluar reglas personalizadas mediante la API de Scorecards o la interfaz de usuario {#evaluate-custom-rules-using-the-scorecards-api-or-the-ui}
 
-Para agregar y evaluar reglas personalizadas mediante la [API de Scorecards][2]: 
+Puede enviar resultados para una regla personalizada desde sus propios sistemas a través de la API de Scorecards, o establecerlos manualmente para cada entidad en la interfaz de usuario de Scorecards.
 
-1. Especifique el nombre, el Scorecard, la descripción, el propietario, el nivel y el contexto de la regla. Pase estos valores a `/scorecard/rules`.
+### Usar la API de Scorecards {#use-the-scorecards-api}
+
+Para agregar y evaluar reglas personalizadas mediante la [API de Scorecards][2]:
+
+1. Especifique el nombre, el scorecard, la descripción, el propietario, el nivel y el contexto de la regla. Pase estos valores a `/scorecard/rules`.
 2. Para cada tupla `{rule, entity}` que evalúe, envíe un resultado de `pass`, `fail` o `skip` a `/scorecard/outcomes/batch`. Opcionalmente, incluya un comentario que describa el motivo del resultado.
 3. Vea una descripción general de los resultados y comentarios en el panel de Scorecards.
 
-Después de la configuración inicial, las reglas también se pueden habilitar o deshabilitar a través de la API.
+Después de la configuración inicial, las reglas también pueden habilitarse o deshabilitarse a través de la API.
 
-Después de crear la regla como se describe en la sección [Crear reglas personalizadas](#create-custom-rules), evalúela en la interfaz de usuario de Scorecards:
+### Usar la interfaz de usuario de Scorecards {#use-the-scorecards-ui}
 
-1. Navegue hasta la regla que creó y seleccione {{< ui >}}Edit Outcome{{< /ui >}} junto a la entidad que desea evaluar.
+Para evaluar una regla personalizada manualmente en la interfaz de usuario de Scorecards, primero cree la regla como se describe en [Crear reglas personalizadas](#create-custom-rules). Luego:
+
+1. Navegue a la regla que creó y seleccione {{< ui >}}Edit Outcome{{< /ui >}} junto a la entidad que desea evaluar.
 2. Seleccione el resultado relevante de `pass`, `fail` o `skip` y agregue un comentario opcional que describa el motivo del resultado. 
 3. Vea una descripción general de los resultados y comentarios en el panel de Scorecards.
 
 ## Evaluar reglas personalizadas mediante Workflow Automation {#evaluate-custom-rules-using-workflow-automation}
 
-Workflow Automation le permite automatizar la evaluación de sus reglas personalizadas en Datadog mediante la [acción {{< ui >}}Update scorecard rule outcome{{< /ui >}}][6]. 
+Workflow Automation le permite automatizar la evaluación de sus reglas personalizadas en Datadog mediante la acción [{{< ui >}}Update scorecard rule outcome{{< /ui >}}][6]. 
 
 ### Crear un flujo de trabajo {#create-workflow}
 
-Después de crear su regla personalizada, elija la opción {{< ui >}}Add Workflow{{< /ui >}} cuando se le solicite configurar sus criterios de evaluación. Desde allí, puede crear un flujo de trabajo desde cero o utilizar una plantilla.
+Después de crear su regla personalizada, elija la opción {{< ui >}}Add Workflow{{< /ui >}} cuando se le solicite configurar sus criterios de evaluación. Desde ahí, puede crear un flujo de trabajo desde cero o utilizar una plantilla.
 
 {{% collapse-content title="Desde cero" level="h4" expanded=false id="workflow-from-scratch" %}}
 
@@ -93,14 +99,14 @@ Después de crear su regla personalizada, elija la opción {{< ui >}}Add Workflo
 
 Para crear un flujo de trabajo desde cero: 
 
-1. Establezca un horario para que se ejecute su flujo de trabajo.
-1. Haga clic en el icono de más ({{< ui >}}+{{< /ui >}}) para agregar un paso.
+1. Establezca un horario para la ejecución de su flujo de trabajo.
+1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) para añadir un paso.
 1. Seleccione la [acción {{< ui >}}List entity definitions{{< /ui >}}][7] para obtener todas las entidades definidas en Catalog.
-1. Haga clic en el icono de más ({{< ui >}}+{{< /ui >}}) para agregar un paso.
-1. Seleccione la [{{< ui >}}For loop{{< /ui >}}][8] para iterar sobre cada entidad una por una.
-1. Seleccione la acción necesaria para obtener sus datos de evaluación (por ejemplo, {{< ui >}}List monitors{{< /ui >}} o {{< ui >}}Get repository content{{< /ui >}} de GitHub). 
-1. Transforme los datos devueltos utilizando una función de JavaScript personalizada para generar resultados de aprobado/reprobado para cada entidad.
-1. Utilice la [acción {{< ui >}}Update scorecard rule outcome{{< /ui >}}][6] para enviar resultados a Scorecards.
+1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) para añadir un paso.
+1. Seleccione [{{< ui >}}For loop{{< /ui >}}][8] para iterar sobre cada entidad una por una.
+1. Seleccione la acción necesaria para obtener sus datos de evaluación (por ejemplo: {{< ui >}}List monitors{{< /ui >}} o {{< ui >}}Get repository content{{< /ui >}} de GitHub). 
+1. Transforme los datos devueltos mediante una función de JavaScript personalizada para generar resultados de aprobado/reprobado para cada entidad.
+1. Utilice la [acción {{< ui >}}Update scorecard rule outcome{{< /ui >}}][6] para enviar los resultados a Scorecards.
 1. Ejecute el flujo de trabajo para ver cómo aparecen sus evaluaciones en Scorecards para su regla personalizada.
 1. Publique el flujo de trabajo; los flujos de trabajo no publicados no se ejecutan automáticamente. 
 
@@ -110,10 +116,10 @@ Para crear un flujo de trabajo desde cero:
 
 En lugar de crear un flujo de trabajo desde cero, puede comenzar con una plantilla de Scorecards: 
 
-1. Explore las [plantillas de Scorecards][9] y seleccione una. 
+1. Explore [plantillas de Scorecards][9] y seleccione una. 
 1. Edite la plantilla para crear su flujo de trabajo personalizado. 
    
-   **Nota**: Todas las plantillas de Scorecards incluyen la [{{< ui >}}Update scorecard rule outcome{{< /ui >}} acción][6] para enviar resultados a Scorecards. No elimine este paso.
+   **Nota**: Todas las plantillas de Scorecards incluyen la [acción {{< ui >}}Update scorecard rule outcome{{< /ui >}}][6] para enviar los resultados a Scorecards. No elimine este paso.
 
 1. Ejecute el flujo de trabajo para ver cómo aparecen sus evaluaciones en Scorecards para su regla personalizada.
 1. Publique el flujo de trabajo; los flujos de trabajo no publicados no se ejecutan automáticamente. 
@@ -122,11 +128,11 @@ En lugar de crear un flujo de trabajo desde cero, puede comenzar con una plantil
 
 Después de crear el flujo de trabajo, este se vincula automáticamente a la regla de Scorecard. Haga clic en el enlace para abrir el flujo de trabajo, realizar cambios y ver detalles como el propietario, el historial de ejecución y la fecha de última modificación.
 
-{{< img src="/internal_developer_portal/scorecards/linked-workflow.png" alt="El panel detallado para un Scorecard individual, que resalta la automatización de flujo de trabajo vinculada" style="width:100%;" >}}
+{{< img src="/internal_developer_portal/scorecards/linked-workflow.png" alt="El panel detallado de un Scorecard individual, que resalta la automatización del flujo de trabajo vinculado" style="width:100%;" >}}
 
-Todos los Workflows creados desde la página {{< ui >}}Scorecards{{< /ui >}} o desde un blueprint de Scorecards se etiquetan automáticamente con `source: scorecards` para su búsqueda y filtrado. 
+Todos los flujos de trabajo creados desde la página {{< ui >}}Scorecards{{< /ui >}} o desde una plantilla de Scorecards se etiquetan automáticamente con `source: scorecards` para su búsqueda y filtrado. 
 
-**Nota**: Hacer clic en el botón rojo de desvincular en una regla de Scorecard desvincula el flujo de trabajo de la regla, pero no despublica automáticamente el flujo de trabajo. Para evitar que las evaluaciones se ejecuten, también debe despublicar cualquier flujo de trabajo desvinculado.
+**Nota**: Hacer clic en el botón rojo de desvincular en una regla de Scorecard elimina el flujo de trabajo de la regla, pero no despublica automáticamente el flujo de trabajo. Para evitar que se ejecuten las evaluaciones, también debe despublicar cualquier flujo de trabajo desvinculado.
 
 ### Vincular flujo de trabajo existente {#link-existing-workflow}
 

@@ -92,7 +92,8 @@ If your monitor is behaving as expected, but producing unwanted notifications, t
 If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
 - Check [email preferences][17] for the recipient and ensure that {{< ui >}}Notification from monitor alerts{{< /ui >}} is checked.
-- Check the [event stream][18] for events with the string `Error delivering notification`.
+- Search the [Events Explorer][18] for `@evt.type:integration_sync_failure`. Datadog uses this event type for errors that occur when sending to an integration, such as failed notifications to Slack, Microsoft Teams, PagerDuty, Opsgenie, or webhooks. Titles vary by integration, so review the event title and message to identify the affected destination.
+- Email notifications do not create these events.
 
 ### Opsgenie multi-notifications
 
@@ -119,7 +120,7 @@ If you are using multiple `@opsgenie-[...]` notifications in your monitor, we se
 [15]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#template-variables
 [16]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#conditional-variables
 [17]: /account_management/#preferences
-[18]: /events/stream
+[18]: /events/explorer/
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
 [20]: /notebooks
 [21]: /dashboards/functions/rollup/#rollups-in-monitors

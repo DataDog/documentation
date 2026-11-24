@@ -401,6 +401,52 @@ describe("topLevelSchemaToFields", () => {
       ["status", false],
     ]);
   });
+
+  it("names a top-level oneOf branch by its title", () => {
+    const spec = {
+      components: {
+        schemas: {
+          JsSourceMap: {
+            type: "object",
+            title: "JavaScript Source Map",
+            properties: { source_map: { type: "string", format: "binary" } },
+          },
+          IosSymbols: {
+            type: "object",
+            title: "iOS dSYM Archive",
+            properties: {
+              symbols_archive: { type: "string", format: "binary" },
+            },
+          },
+        },
+      },
+    };
+    const schema = {
+      oneOf: [
+        { $ref: "#/components/schemas/JsSourceMap" },
+        { $ref: "#/components/schemas/IosSymbols" },
+      ],
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.map((field) => field.name)).toEqual([
+      "JavaScript Source Map",
+      "iOS dSYM Archive",
+    ]);
+  });
+
+  it('keeps "Option N" for a top-level oneOf branch with no name', () => {
+    const spec = {};
+    const schema = {
+      oneOf: [
+        { type: "object", properties: { a: { type: "string" } } },
+        { type: "object", properties: { b: { type: "string" } } },
+      ],
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields.map((field) => field.name)).toEqual(["Option 1", "Option 2"]);
+  });
 });
 
 describe("getBestDiscriminant", () => {
@@ -464,6 +510,60 @@ describe("getBestDiscriminant", () => {
 });
 
 describe("unionOptionLabels", () => {
+  it("names a branch by its title", () => {
+    const items = [
+      { type: "object", title: "JavaScript Source Map", properties: {} },
+      { type: "object", title: "iOS dSYM Archive", properties: {} },
+    ];
+    expect(unionOptionLabels({}, items)).toEqual([
+      "JavaScript Source Map",
+      "iOS dSYM Archive",
+    ]);
+  });
+
+  it("prefers a title over the discriminant", () => {
+    const items = [
+      {
+        type: "object",
+        title: "Toplist widget",
+        properties: { type: { type: "string", enum: ["toplist"] } },
+      },
+      {
+        type: "object",
+        properties: { type: { type: "string", enum: ["note"] } },
+      },
+    ];
+    expect(unionOptionLabels({}, items)).toEqual([
+      "Toplist widget",
+      "<type=note>",
+    ]);
+  });
+
+  it("resolves a $ref branch before reading its title", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Repo: { type: "object", title: "Repository Metadata" },
+        },
+      },
+    };
+    const items = [{ $ref: "#/components/schemas/Repo" }];
+    expect(unionOptionLabels(spec, items)).toEqual(["Repository Metadata"]);
+  });
+
+  it('falls back to "Object N" for branches sharing a title', () => {
+    const items = [
+      { type: "object", title: "Metadata" },
+      { type: "object", title: "Metadata" },
+      { type: "object", title: "Other" },
+    ];
+    expect(unionOptionLabels({}, items)).toEqual([
+      "Object 1",
+      "Object 2",
+      "Other",
+    ]);
+  });
+
   it('falls back to "Object N" for branches without a unique name', () => {
     const items = [
       { type: "object", properties: { type: { type: "string", enum: ["a"] } } },

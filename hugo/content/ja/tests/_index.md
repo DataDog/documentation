@@ -191,7 +191,7 @@ DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test/health
-[2]: https://app.datadoghq.com/ci/settings/test-optimization
+[2]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [3]: /ja/continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: https://app.datadoghq.com/notebook/list

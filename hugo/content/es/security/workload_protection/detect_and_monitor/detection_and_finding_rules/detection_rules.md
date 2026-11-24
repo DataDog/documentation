@@ -84,6 +84,8 @@ Puede definir una regla de Agent y una regla de detección coincidentes de una d
 - {{< ui >}}Assisted rule creator{{< /ui >}}: En Datadog, inicie una [regla de detección][4] de Workload Protection personalizada y utilice el asistente para configurar tanto la expresión de Agent como la lógica de la regla de detección de backend.
 - {{< ui >}}Manual rule creator{{< /ui >}}: Desde [Configuración de Agent][12], abra o cree una política y elija {{< ui >}}Manual rule creator{{< /ui >}} para crear primero la regla de Agent, luego agregue una regla de detección que haga referencia a ella. Para conocer los pasos de la interfaz de usuario y la implementación, consulte [Gestión de políticas][11].
 
+Las reglas del Agent utilizan expresiones de Datadog Security Language (SECL) para hacer coincidir eventos. Para la sintaxis de SECL, consulte la [guía de SECL][15]. Para obtener orientación sobre cuándo usar patrones o expresiones regulares en lugar de coincidencias exactas, consulte los [consejos para la creación de reglas][16].
+
 [1]: /es/security/workload_protection/investigate_and_triage/agent_events
 [2]: /es/security/workload_protection/investigate_and_triage/security_signals
 [3]: /es/security/default_rules/#cat-workload-security
@@ -98,3 +100,4 @@ Puede definir una regla de Agent y una regla de detección coincidentes de una d
 [12]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [13]: /es/security/workload_protection/backend_linux
 [14]: /es/security/workload_protection/backend_windows
+[15]: /es/security/workload_protection/detect_and_monitor/agent_rules/secl_guide

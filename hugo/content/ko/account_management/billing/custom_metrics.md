@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: /account_management/billing/metric_name_pricing/
   tag: 설명서
-  text: 사용자 지정 메트릭을 위한 Metric Name 요금제
+  text: Custom Metrics를 위한 Metric Name 요금제
 - link: /metrics/custom_metrics/
   tag: 설명서
   text: 사용자 지정 메트릭에 관해 자세히 알아보기
@@ -18,9 +18,9 @@ title: Custom Metrics 청구
 ---
 ## 개요 {#overview}
 
-**참고**: 이 페이지에서는 카디널리티 기반 Custom Metrics 청구 모델을 설명합니다. 계약에서 Metric Name 요금제 SKU를 사용하는 경우에는 대신 [사용자 지정 메트릭을 위한 Metric Name 요금제][15]를 참조하세요.
+**참고**: 이 페이지에서는 카디널리티 기반 Custom Metrics 청구 모델을 설명합니다. 계약에서 Metric Name 요금제 SKU를 사용하는 경우에는 대신 [Custom Metrics를 위한 Metric Name 요금제][15]를 참조하세요.
 
-메트릭이 [Datadog 통합 {{< translate key="integration_count" >}} 이상][1] 중 하나에서 제출되지 않은 경우, 해당 메트릭은 [사용자 지정 메트릭][2]으로 간주합니다. 일부 표준 통합도 사용자 지정 메트릭을 발생시킬 가능성이 있습니다. 자세한 내용은 [사용자 지정 메트릭 및 표준 통합][14]을 참조하세요.
+메트릭이 하나 [이상의 {{< translate key="integration_count" >}} Datadog 통합][1] 중에서 제출되지 않은 경우, 해당 메트릭은 [사용자 지정 메트릭][2]으로 간주합니다. 일부 표준 통합도 사용자 지정 메트릭을 발생시킬 가능성이 있습니다. 자세한 내용은 [사용자 지정 메트릭 및 표준 통합][14]을 참조하세요.
 
 **사용자 지정 메트릭은 메트릭 이름 및 태그 값(호스트 태그 포함)의 조합으로 고유하게 식별됩니다**. 일반적으로 [DogStatsD][3]를 사용하거나 [사용자 지정 Agent Check][4]를 통해서 전송한 모든 메트릭은 사용자 지정 메트릭입니다.
 
@@ -37,7 +37,7 @@ Metrics without Limits™ 사용자의 경우, 사용량 페이지에 _수집된
 - `endpoint`(값 `endpoint:X` 또는 `endpoint:Y`)
 - `status`(값 `status:200` 또는 `status:400`)
 
-데이터에서 `endpoint:X`가 두 호스트 모두로 지원되지만 `host:B`에서만 실패한다고 가정하겠습니다. 또한 `endpoint:Y`에 대한 요청은 항상 성공하며 아래에 표시된 것과 같이 `host:B`에만 표시된다고 가정합니다.
+데이터에서 `endpoint:X`가 두 호스트 모두에서 지원되지만 `host:B`에서만 실패한다고 가정하겠습니다. 또한 `endpoint:Y`에 대한 요청은 항상 성공하며 아래에 표시된 것과 같이 `host:B`에만 표시된다고 가정합니다.
 
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="요청 지연 시간" style="width:80%;">}}
 
@@ -74,7 +74,7 @@ Metrics without Limits™ 사용자의 경우, 사용량 페이지에 _수집된
 
 `temperature`에서 보고되는 사용자 지정 메트릭의 수는 가장 세분화된 태그인 `city`에 따라 달라집니다.
 
-온도 메트릭을 `state`(값은 `NY`, `Florida`로 2개)로 태그하려 한다고 합시다. 이 말은 온도를 `country`, `region`, `state` 및 `city` 태그로 태그한다는 의미입니다. 주(state) 태그를 추가해도 시(city) 태그가 제공해 이미 데이터 세트에 있는 세분화 정도가 커지지 않습니다.
+온도 메트릭을 `state`(값은 `NY`, `Florida`로 2개)로 태그하려 한다고 가정하겠습니다. 이 말은 온도를 `country`, `region`, `state` 및 `city` 태그로 태그한다는 의미입니다. 주(state) 태그를 추가해도 시(city) 태그가 제공해 이미 데이터 세트에 있는 세분화 정도가 커지지 않습니다.
 
 플로리다의 온도를 얻으려면 다음과 같은 사용자 지정 메트릭을 다시 조합할 수 있습니다.
 
@@ -88,7 +88,7 @@ Metrics without Limits™ 사용자의 경우, 사용량 페이지에 _수집된
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits}
 
-[Metrics without Limits™][3]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][3]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하므로, Datadog에 계속 모든 데이터를 전송하면서 (모든 데이터가 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지할 태그의 허용 목록을 지정할 수 있습니다. Datadog이 구성된 메트릭에서 수집하는 데이터 볼륨은 인덱싱 후 남은 더 적은 데이터 볼륨과 다르므로, Usage 페이지와 Metrics Catalog 페이지에서 서로 다른 두 볼륨을 확인할 수 있습니다.
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -153,7 +153,7 @@ Metrics without Limits™를 사용하여 `endpoint` 및 `status` 태그만 유�
 
 `temperature`에서 보고되는 사용자 지정 메트릭의 수는 가장 세분화된 태그인 `city`에 따라 달라집니다.
 
-온도 메트릭을 `state`(값은 `NY`, `Florida`로 2개)로 태그하려 한다고 합시다. 이 말은 온도를 `country`, `region`, `state` 및 `city`로 태깅한다는 의미입니다. 주(state) 태그를 추가해도 시(city) 태그가 제공해 이미 데이터 세트에 있는 세분화 정도가 커지지 않습니다.
+온도 메트릭을 `state`(값은 `NY`, `Florida`로 2개)로 태그하려 한다고 가정하겠습니다. 이 말은 온도를 `country`, `region`, `state` 및 `city`로 태깅한다는 의미입니다. 주(state) 태그를 추가해도 시(city) 태그가 제공해 이미 데이터 세트에 있는 세분화 정도가 커지지 않습니다.
 
 플로리다의 온도를 얻으려면 다음과 같은 사용자 지정 메트릭을 다시 조합할 수 있습니다.
 
@@ -167,7 +167,7 @@ Metrics without Limits™를 사용하여 `endpoint` 및 `status` 태그만 유�
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits-1}
 
-[Metrics without Limits™][4]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][4]를 사용하여 태그를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하므로, Datadog에 계속 모든 데이터를 전송하면서 (모든 데이터가 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지할 태그의 허용 목록을 지정할 수 있습니다. Datadog이 구성된 메트릭에서 수집하는 데이터 볼륨은 인덱싱 후 남은 더 적은 데이터 볼륨과 다르므로, Usage 페이지와 Metrics Catalog 페이지에서 서로 다른 두 볼륨을 확인할 수 있습니다.
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -243,7 +243,7 @@ Metrics without Limits™를 사용하여 구성된 메트릭의 경우(태그�
 
 ##### 백분위수 집계 추가 {#adding-percentile-aggregations}
 
-분포 메트릭에 백분위수 집계(`p50`, `p75`, `p90`, `p95` 및 `p99`)를 포함할 수 있습니다. 이러한 추가적인 백분위수 집계를 포함하면 고유한 메트릭 이름 및 태그 값 조합의 다섯 배에 해당하는 추가적인 볼륨이 발생합니다(**5\*4 = 20개의 사용자 지정 메트릭**). 따라서 이 백분위수 집계를 포함한 분산 메트릭에서 발생하는 사용자 지정 메트릭의 총 개수는 **2 * (5\*4) = 40개의 사용자 지정 메트릭**입니다.
+분포 메트릭에 백분위수 집계(`p50`, `p75`, `p90`, `p95` 및 `p99`)를 포함할 수 있습니다. 이러한 추가적인 백분위수 집계를 포함하면 고유한 메트릭 이름 및 태그 값 조합의 다섯 배에 해당하는 추가적인 볼륨이 발생합니다(**5\*4 = 20개의 사용자 지정 메트릭**). 따라서 이 백분위수 집계를 포함한 분포 메트릭에서 발생하는 사용자 지정 메트릭의 총 개수는 **2 * (5\*4) = 40개의 사용자 지정 메트릭**입니다.
 
 이 표는 분포 메트릭에 백분위수 집계를 추가했을 때 발생하는 영향을 요약한 것입니다. 
 
@@ -255,7 +255,7 @@ Metrics without Limits™를 사용하여 구성된 메트릭의 경우(태그�
 
 ### Metrics without Limits™로 태그 구성 {#configure-tags-with-metrics-without-limits-2}
 
-[Metrics without Limits™][2]를 사용하여 태그 및 집계를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하기 때문에 Datadog에 계속 모든 데이터를 전송하면서(모든 것이 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지되기를 바라지 않는 태그의 허용 목록을 지정할 수 있습니다. 이제 Datadog이 구성된 메트릭에 대하여 수집하는 데이터의 볼륨이 인덱싱한, 더 작은 크기의 나머지 볼륨과 다르기 때문에 사용량 페이지와 Metrics Catalog 페이지에 두 개의 서로 다른 볼륨이 표시되게 됩니다. 
+[Metrics without Limits™][2]를 사용하여 태그 및 집계를 구성해 사용자 지정 메트릭 볼륨에 영향을 미칠 수 있습니다. Metrics without Limits™는 수집 비용을 인덱싱 비용과 분리하므로, Datadog에 계속 모든 데이터를 전송하면서 (모든 데이터가 수집됨) Datadog 플랫폼에서 쿼리 가능한 상태로 유지할 태그의 허용 목록을 지정할 수 있습니다. Datadog이 구성된 메트릭에서 수집하는 데이터 볼륨은 인덱싱 후 남은 더 적은 데이터 볼륨과 다르므로, Usage 페이지와 Metrics Catalog 페이지에서 서로 다른 두 볼륨을 확인할 수 있습니다.
  
 - **수집된 사용자 지정 메트릭**: 수집된 모든 태그에 기반한 원래 사용자 지정 메트릭 볼륨(코드를 통해 전송됨)
 - **인덱싱된 사용자 지정 메트릭**: Datadog 플랫폼에서 쿼리 가능한 상태로 유지되는 사용자 지정 메트릭의 볼륨(Metrics without Limits™ 구성 기반) 
@@ -296,9 +296,9 @@ Metrics without Limits™를 사용하여 구성된 메트릭의 경우(태그/�
 
 관리 사용자([Datadog Admin 역할][7]이 있는 사용자)는 시간당 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭의 월별 평균 개수를 확인할 수 있습니다. 맨 위의 사용자 지정 메트릭 표에는 [사용량 세부 정보 페이지][8]의 **인덱싱된** 사용자 지정 메트릭 평균 개수도 나열됩니다. 자세한 내용은 [사용량 세부 정보][9] 설명서를 참조하세요.
 
-특정 메트릭 이름의 사용자 지정 메트릭 개수를 실시간 추적하는 것과 관련한 자세한 내용은 [Metrics Catalog 페이지][10]에서 메트릭 이름을 클릭하여 참조하세요. 메트릭의 세부 정보 사이드 패널에서 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭 개수를 조회할 수 있습니다. 
+특정 메트릭 이름에 대한 사용자 지정 메트릭 개수를 더 빠르게 확인하려면 [Metrics Catalog 페이지][10]에서 해당 메트릭 이름을 클릭하세요. 메트릭의 세부 정보 사이드 패널에서 **수집된** 사용자 지정 메트릭 및 **인덱싱된** 사용자 지정 메트릭 개수를 조회할 수 있습니다.
 
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="Metrics Catalog 사이드 패널" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="수집된 사용자 지정 메트릭과 인덱싱된 사용자 지정 메트릭을 보여주는 Metrics Catalog 페이지의 메트릭 세부 정보 사이드 패널입니다." style="width:80%;">}}
 
 
 ## 할당 {#allocation}

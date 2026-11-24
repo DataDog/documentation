@@ -85,7 +85,7 @@ AI Guard for coding agents doesn't use the Datadog Agent or the Datadog SDK. Tra
 1. Run the Trajectory installer in observe mode. This command sets the [privacy mode](#privacy-mode) to `unredacted`, which stores the full prompts and tool content in Datadog:
 
    ```bash
-   bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security-mode observe --security-privacy unredacted
+   bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security --security-mode observe --security-privacy unredacted
    ```
 
    When prompted, select your Datadog site. The installer stores both keys in the operating system keychain. Then it turns on AI Guard for each supported coding agent that it finds.

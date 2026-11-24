@@ -1,0 +1,17 @@
+entries:
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - BatchRowsQuery
+      - CreateReferenceTable
+      - CreateReferenceTableUpload
+      - DeleteRows
+      - DeleteTable
+      - GetRowsByID
+      - GetTable
+      - ListReferenceTableRows
+      - ListTables
+      - UpdateReferenceTable
+      - UpsertRows
+    title: Document rate-limit headers on the shared 429 responses

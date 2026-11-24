@@ -102,7 +102,7 @@ Add skills from the [Skills Library][18] to give an agent task-specific knowledg
 Agents load skills automatically through the [Datadog MCP Server][8], which is enabled by default. If you disable the Datadog MCP Server on an agent, the agent cannot use its skills.
 
 To add a skill:
-* In the **Skills** section of the agent configuration, click the plus ({{< ui >}}+{{< /ui >}}) icon and select the skill.
+* In the **Skills** section of the agent configuration, click the plus ({{< ui >}}\+{{< /ui >}}) icon and select the skill.
 
 {{< img src="/actions/agents/agent-builder-add-skills.png" alt="The Bits Agent Builder editor with the Skills section highlighted, showing the plus button for adding a skill" style="width:80%;" >}}
 

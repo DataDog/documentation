@@ -4,10 +4,6 @@ description: "Set up and run infrastructure actions from Bits Investigation."
 site_support_id: bits_remediation
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
-  One-click infrastructure actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 During an investigation, Bits can recommend and take action on your infrastructure, such as rolling back a Kubernetes deployment or rebooting an EC2 instance. An infrastructure action can resolve an infrastructure-related root cause, or reduce the impact of an issue while you work on a longer-term fix. To let Bits run a recommended action, click {{< ui >}}Approve{{< /ui >}} in the investigation or in a Slack notification.
 
 Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. Guardrails define which actions Bits can take, where those actions apply, and who needs to approve them.
@@ -214,7 +210,9 @@ The following table lists the Kubernetes actions that Bits supports. You allow a
 
 ## AWS actions
 
-{{< callout >}} AWS actions are in Preview. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities" >}}
+  AWS actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 Bits runs AWS actions through your Datadog AWS integration. This means you don't need a Private Action Runner or a separate connection for them.
 
