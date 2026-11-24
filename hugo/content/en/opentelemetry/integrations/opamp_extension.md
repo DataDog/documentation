@@ -92,7 +92,7 @@ To reduce this noise and make individual Collectors easier to identify:
 
 ### 3. Send the Collector's internal telemetry
 
-Send the Collector's internal metrics to Datadog to monitor Collector health and pipeline throughput. Datadog recommends pushing them directly to the OTLP metrics intake endpoint. Scraping them with the Prometheus receiver is an alternative. For both setups, see [Collector Health Metrics][8].
+Send the Collector's internal metrics to Datadog to monitor Collector health and pipeline throughput. You can push them directly to the OTLP metrics intake endpoint, or scrape them with the Prometheus receiver. For both setups, see [Collector Health Metrics][8].
 
 ## OpAMP extension configuration example
 
