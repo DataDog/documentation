@@ -20,22 +20,20 @@ further_reading:
 
 Use Change Tracking as the first step in your investigation:
 
-- **Changes come to you.** On the pages where you already investigate, such as dashboards, monitor status pages, service pages, and the RUM Explorer, Datadog surfaces the changes most likely to be related to what you are looking at.
+- **See changes on the pages you already use.** On dashboards, monitor status pages, service pages, and the RUM Explorer, Datadog surfaces the changes most likely to be related to what you are looking at.
 - **You find the relevant changes.** When the change you need is not on the page in front of you, search for it by symptom, build your own view of change data, or ask Bits AI.
 
 ## Find relevant changes where you're working
 
 When you open a page that is scoped to a service, Datadog surfaces that service's changes alongside your telemetry.
 
-On dashboards and monitor status pages, Datadog ranks changes by relevance, so that the changes most likely to explain what you are seeing appear first. Relevance is based on how close the change is in time to the behavior you are looking at, how strongly it is associated with the service in view, and the type of change. When only a few changes are likely to be faulty, a banner calls them out. See [Faulty change banners](#faulty-change-banners).
+On dashboards and monitor status pages, Datadog ranks changes by likely cause, so that the changes most likely to explain what you are seeing appear first. When only a few changes are likely to be faulty, a banner calls them out. See [Faulty change banners](#faulty-change-banners).
 
 You do not need to configure this. Any change type you already send is eligible. See [Tracked Change Types][1].
 
-<!-- TODO: Confirm the UI name of the dashboard triage card (Q5). -->
-
 | Where | What you see | Requirements |
 | --- | --- | --- |
-| [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. The triage card summarizes the changes most relevant to the current view. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
+| [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
 | [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
 | [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | APM data for the service. |
 | [RUM Explorer][6] | Change markers at the top of RUM Explorer graphs (for example, when you group by errors), for correlating frontend regressions with frontend deployments and feature flag changes. | [RUM deployment tracking][7], and [RUM feature flag tracking][8] for flag changes. |
@@ -43,21 +41,22 @@ You do not need to configure this. Any change type you already send is eligible.
 ### On a dashboard
 
 <!-- TODO: Recapture screenshot with the current dashboard overlays UI. -->
+<!-- TODO: Confirm with product that the Automatic and Manual overlay controls are GA, and whether the dashboard Investigate popover (anomaly cards with a "Relevant changes" section) is GA. If it is, document it here. -->
 {{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active-2.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
 
 1. Navigate to your dashboard.
-1. Click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page to turn on the change timeline and change overlays on supported widgets.
-1. The {{< ui >}}Service{{< /ui >}} search bar defaults to {{< ui >}}Most Relevant{{< /ui >}}, the service referenced most often in the dashboard's queries. Use the search bar to pick a different service.
-1. Use the {{< ui >}}Show On{{< /ui >}} dropdown to limit overlays to relevant widgets or show them on every widget.
+1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
+1. By default, overlays use {{< ui >}}Automatic{{< /ui >}} mode, which shows the changes relevant to each widget's filters.
+1. To choose the changes yourself, switch to {{< ui >}}Manual{{< /ui >}}. Then select a change type and filters, such as {{< ui >}}Service{{< /ui >}} and {{< ui >}}Environment{{< /ui >}}. The service that Datadog detects from your dashboard is marked {{< ui >}}MOST RELEVANT{{< /ui >}}.
 1. Hover over a change indicator or overlay for a summary, or click it to open the side panel.
 
 ### On a monitor status page
 
-<!-- TODO: Recapture screenshot showing the progressive (collapsed by default) timeline. Confirm the expand control label. -->
+<!-- TODO: Recapture screenshot of the current monitor change timeline. -->
 {{< img src="/change_tracking/change-tracking-monitor-status-page-2.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
 
 1. Go to the monitor status page for the monitor you are investigating.
-1. Expand the change timeline at the top of the page. The timeline is collapsed by default.
+1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
 1. For monitors with multiple graphs, filter to an individual group first.
 1. Read the timeline together with the event graphs to line up changes with the alert.
 1. Click a change indicator to open the side panel.
@@ -102,7 +101,6 @@ From the side panel, you can:
 - Open the deployment in your CI/CD system.
 - View the latest commits in your repository.
 - Compare two deployments to see what differs between them.
-- Follow custom links that your organization has configured on the deployment side panel.
 
 ### Read the Change Analysis
 
