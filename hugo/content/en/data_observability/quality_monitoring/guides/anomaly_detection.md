@@ -122,7 +122,6 @@ The reviewer analyzes the metric's history. It compares the flagged value with e
 
 The reviewer can only dismiss flagged points. It doesn't narrow the bounds or create alerts. To get alerts on values that fall within the bounds, adjust {{< ui >}}Sensitivity{{< /ui >}} or annotate the bounds with {{< ui >}}Missed alert{{< /ui >}}.
 
-The reviewer dismisses a Row Count value of `0` only when the metric's history shows that zeros are routine. For example, the metric has dropped to zero and recovered several times before. This applies even when the monitor's {{< ui >}}Model Instructions{{< /ui >}} describe the value as expected.
 
 ### Model Instructions
 
