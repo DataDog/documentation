@@ -33,7 +33,7 @@ An entry point is a server or consumer operation (`span.kind:server` or `span.ki
 
 Your existing monitors stay in place. Baseline Monitors does not change or delete monitors that your team creates.
 
-### Baseline Monitors and Bits Detection
+### Related features
 
 Baseline Monitors and [Bits Detection][1] both create monitors for your APM services, but they solve different problems:
 
@@ -42,7 +42,7 @@ Baseline Monitors and [Bits Detection][1] both create monitors for your APM serv
 
 You can use both features at the same time.
 
-## Enable Baseline Monitors
+## Setup
 
 ### Permissions
 
@@ -55,7 +55,7 @@ You can use both features at the same time.
 
 Users without the required permission can view the settings but cannot change them.
 
-### Turn on Baseline Monitors
+### Turn on the feature
 
 1. Go to [**Monitors > Settings > Automation & Agents**][2].
 1. In the **Baseline Monitors** section, select the **Org** scope and turn on **Baseline Monitors**.
@@ -69,7 +69,7 @@ Datadog creates the first monitors within about one hour.
 
 To stop Baseline Monitors, turn the setting off for the organization, or remove the team or service. Datadog applies the change on its next run.
 
-## How Baseline Monitors works
+## How it works
 
 Datadog checks each enabled organization **every hour**. In each check, Datadog creates the monitors that are missing, tunes the existing monitors, and deletes the monitors that are no longer needed.
 
@@ -152,13 +152,13 @@ If the team of a monitor has no notification channels, the alert goes to no one.
 
 To stop all Baseline Monitor notifications for your organization, set the Baseline notification rule to inactive. If you delete the rule, Datadog creates it again.
 
-## View Baseline Monitors
+## View the monitors
 
 To list Baseline Monitors, go to [**Monitors > List**][7] and search for `tag:managed_monitor:true`.
 
 **Note**: The **Auto-managed** filter in the left panel shows both Baseline Monitors and Bits Detection monitors. To see only Baseline Monitors, use the search above.
 
-## Edit Baseline Monitors
+## Edit the monitors
 
 You can edit, publish, or mute a Baseline Monitor in the same way as any other monitor. After you edit a Baseline Monitor:
 
