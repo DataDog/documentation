@@ -106,8 +106,8 @@ replaces:
 The build process replaces the `otel-agent` binary inside the Datadog Agent OCI package and pushes the result directly to your registry using the `build-ddot-byoc` tool. This process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
 The build requires:
-- `AGENT_OCI`: the source Datadog Agent OCI package URL (for example, `install.datadoghq.com/agent-package:7.78.2-1`)
-- `OUTPUT_OCI`: your destination registry and image reference. The tag must exactly match the tag used in `AGENT_OCI` (for example, `<YOUR-REGISTRY>/agent-package:7.78.2-1`)
+- `AGENT_OCI`: the source Datadog Agent OCI package URL (for example, `install.datadoghq.com/agent-package:{{% version key="agent_version" %}}-1`)
+- `OUTPUT_OCI`: your destination registry and image reference. The tag must exactly match the tag used in `AGENT_OCI` (for example, `<YOUR-REGISTRY>/agent-package:{{% version key="agent_version" %}}-1`)
 
 <div class="alert alert-warning">The tag for <code>OUTPUT_OCI</code> must exactly match the version tag of <code>AGENT_OCI</code>. The installer uses this tag to verify compatibility between the custom OCI package and the installed Agent version. A mismatched tag will cause the installation to fail.</div>
 
