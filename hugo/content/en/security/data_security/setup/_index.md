@@ -27,7 +27,7 @@ Data Security scans data stores that another Datadog service already monitors. B
 |---|---|---|
 | Snowflake | Data Observability, with the Snowflake integration | [Set up Data Security for Snowflake][1] |
 | PostgreSQL | Database Monitoring, with Datadog Agent 7.86.0 or later | [Set up Data Security for PostgreSQL][2] |
-| Amazon S3 | Agentless Scanning on AWS, with scanners in your AWS account or hosted by Datadog | [Set up Data Security for Amazon S3][3] |
+| Amazon S3 | Agentless Scanning on AWS, with scanners in your AWS account | [Set up Data Security for Amazon S3][3] |
 
 ## Prerequisites
 
