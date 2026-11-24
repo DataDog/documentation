@@ -97,7 +97,7 @@ APM Recommendations help you improve your applications' performance and reliabil
 
 {{< img src="/tracing/recommendations/apm_recommendations-3.png" alt="APM Recommendations page with summary cards for reliability and performance issues and a list of recommendations to review" style="width:100%;" >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/apm-code-aware" header="Join the Code Aware Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/apm-recommendations-code-aware/" header="Join the Code Aware Preview!" >}}
 Code Aware validates recommendations against your source code, so you see only the recommendations that apply to your services.
 {{< /callout >}}
 
