@@ -862,7 +862,7 @@ Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with re
 *Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
 Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
 
-Teams access is read-only. Dashboard and notebook creation and updates require the dedicated MCP tools; code execution supports reading and deleting those resources. See [What the sandbox can access][107] for details.
+Teams access is read-only. To create or update dashboards and notebooks, use `upsert_datadog_dashboard` and the notebook tools. Code execution supports reading and deleting those resources. See [What the sandbox can access][107] for details.
 
 The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][106] before retrying a script.
 
