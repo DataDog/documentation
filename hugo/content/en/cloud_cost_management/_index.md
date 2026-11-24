@@ -49,12 +49,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/flexible-sheets-cloud-cost-management/"
     tag: "Blog"
     text: "Analyze cloud costs with flexible spreadsheets in Datadog Sheets"
-  - link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-    tag: "Blog"
-    text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
-  - link: "https://www.datadoghq.com/blog/find-ec2-spot-savings-with-datadog/"
-    tag: "Blog"
-    text: "Find EC2 Spot savings with Datadog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

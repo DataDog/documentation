@@ -9,12 +9,6 @@ further_reading:
 - link: /logs/explorer/search_syntax/
   tag: "Documentation"
   text: Log Management Search Syntax
-- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
-  tag: "Blog"
-  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
-  tag: "Blog"
-  text: "Build and troubleshoot Observability Pipelines with AI agents"
 products:
 - name: Logs
   icon: logs

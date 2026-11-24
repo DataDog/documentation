@@ -8,9 +8,6 @@ further_reading:
   - link: '/getting_started/containers/datadog_operator'
     tag: 'guide'
     text: 'Getting Started with the Datadog Operator'
-  - link: "https://www.datadoghq.com/blog/simplify-byoc-cluster-operations-with-datadog-operator/"
-    tag: "Blog"
-    text: "Simplify BYOC cluster operations with Datadog Operator"
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'

@@ -11,9 +11,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/"
   tag: "blog"
   text: "Transform and enrich your logs with Datadog Observability Pipelines"
-- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
-  tag: "Blog"
-  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 ## Overview

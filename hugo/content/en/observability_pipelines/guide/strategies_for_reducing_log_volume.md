@@ -9,9 +9,6 @@ further_reading:
 - link: "/observability_pipelines/processors/"
   tag: "documentation"
   text: "Observability Pipelines processors"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
-  tag: "Blog"
-  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview

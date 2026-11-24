@@ -4,9 +4,6 @@ further_reading:
 - link: "/byoc-logs/configure/ingress/"
   tag: "Documentation"
   text: "BYOC Logs Ingress Configuration"
-- link: "https://www.datadoghq.com/blog/simplify-byoc-cluster-operations-with-datadog-operator/"
-  tag: "Blog"
-  text: "Simplify BYOC cluster operations with Datadog Operator"
 aliases:
   - /cloudprem/introduction/network/
 ---

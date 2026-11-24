@@ -69,9 +69,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
-- link: "https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/"
-  tag: "Blog"
-  text: "Investigate the person behind the risk with Datadog Cloud SIEM"
 
 ---
 

@@ -47,9 +47,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
   tag: "Blog"
   text: "Build and run Datadog workflows from Bits Chat or AI agents"
-- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-  tag: "Blog"
-  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 {{< site-region region="gov2" >}}

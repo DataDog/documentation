@@ -34,9 +34,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
-- link: "https://www.datadoghq.com/blog/datadog-byoc-minio-aistor/"
-  tag: "Blog"
-  text: "Bring Datadog BYOC to your on-premises data with MinIO AIStor"
 algolia:
   tags: ["mcp", "mcp server"]
   rank: 90

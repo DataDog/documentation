@@ -7,10 +7,6 @@ aliases:
 - /bits_ai/bits_ai_sre/take_action/
 - /bits_ai/bits_investigation/take_action/
 site_support_id: bits_remediation
-further_reading:
-- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-  tag: "Blog"
-  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 ## Overview of Bits Remediation
@@ -121,7 +117,3 @@ If you verify right after an action runs, the status might show **Not resolved y
 [7]: /bits_ai/bits_remediation/infrastructure_actions/
 [8]: https://app.datadoghq.com/bits-ai/settings/action-history
 [9]: /bits_ai/bits_remediation/guardrails/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

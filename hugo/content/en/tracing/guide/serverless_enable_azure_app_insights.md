@@ -5,9 +5,6 @@ further_reading:
 - link: "/integrations/azure/"
   tag: "Documentation"
   text: "Microsoft Azure integration"
-- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-  tag: "Blog"
-  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/azure-app-insights-integration/" header="Join the Preview" >}}

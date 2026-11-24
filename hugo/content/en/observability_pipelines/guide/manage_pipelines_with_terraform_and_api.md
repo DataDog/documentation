@@ -9,9 +9,6 @@ further_reading:
 - link: "/api/latest/observability-pipelines/"
   tag: "documentation"
   text: "Observability Pipelines API"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
-  tag: "Blog"
-  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
