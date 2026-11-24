@@ -53,6 +53,10 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 | Manage configuration as code with Terraform | [Manage with Terraform](/ai_gateway/terraform/) |
 | Diagnose failed or missing requests | [Troubleshooting](/ai_gateway/troubleshooting/) |
 
+## MCP Gateway
+
+To give agents and coding assistants governed access to your organization's MCP servers, see [MCP Gateway](/ai_gateway/mcp_gateway/). MCP Gateway routes tool calls to MCP servers through one endpoint, with its own access controls and permissions.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
