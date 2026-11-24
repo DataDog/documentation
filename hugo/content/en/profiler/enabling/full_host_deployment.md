@@ -155,7 +155,7 @@ Apply the updated `DatadogAgent` custom resource through your usual workflow.
 
 The Full-Host Profiler infers most configuration from the Datadog Agent configuration. For optional overrides, see [Configuration for Datadog Agent deployments](#configuration-for-datadog-agent-deployments).
 
-After you apply the updated custom resource, the Operator rolls out a new Agent DaemonSet revision with the Full-Host Profiler sidecar. Wait for that rollout to complete before verifying profiles.
+After you apply the updated custom resource, the Datadog Operator rolls out a new Agent DaemonSet revision with the Full-Host Profiler sidecar. Wait for that rollout to complete before verifying profiles.
 
 **Seccomp (optional)**: Seccomp provides extra hardening by restricting the syscalls available to the Full-Host Profiler container. It isn't required to run in this preview.
 
