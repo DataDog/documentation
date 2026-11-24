@@ -120,7 +120,7 @@ In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
 
 After making changes, click {{< ui >}}Save{{< /ui >}}, then redeploy your log pipeline for the changes to take effect.
 
-{{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab listing two enabled custom pipelines with edit, disable, clone, delete, and reorder actions." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab of the Manage Sawmill panel, listing two enabled custom pipelines with reorder handles." style="width:100%;" >}}
 
 ## CPU sizing
 
