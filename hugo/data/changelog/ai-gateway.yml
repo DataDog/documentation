@@ -214,3 +214,22 @@ entries:
       - UpdateAiGatewayModelGroup
       - UpdateAiGatewayProvider
     title: Add missing AI Gateway model operations
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42181
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayModelGroup
+      - CreateAiGatewayProvider
+      - GetAiGatewayModelGroup
+      - GetAiGatewayModelPricing
+      - GetAiGatewayProvider
+      - ListAiGatewayModelGroups
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelGroup
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+    title: Remove pricing source names from AI Gateway model responses
