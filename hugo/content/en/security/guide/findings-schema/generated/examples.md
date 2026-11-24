@@ -1637,6 +1637,49 @@ build:
 ```
 
 {{% /tab %}}
+{{% tab "Security Testing" %}}
+
+```json
+{
+  "api_endpoint": {
+    "method": "GET",
+    "operation_name": "http.request",
+    "path": "/api/v2/users/{userID}/profile",
+    "resource_name": "GET /api/v2/users/{userID}/profile"
+  },
+  "base_severity": "high",
+  "description": "A security test requested another user's profile with a valid session for a different user, and the endpoint returned it instead of rejecting the request.",
+  "detection_changed_at": 1738575599859,
+  "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
+  "finding_type": "security_testing",
+  "first_seen_at": 1738575592659,
+  "is_in_security_inbox": false,
+  "last_seen_at": 1738624280889,
+  "metadata": {
+    "schema_version": "2"
+  },
+  "origin": [
+    "security_testing"
+  ],
+  "resource_id": "ImNoYXRib3QtYXBpInwiR0VUIC9hcGkvdjIvdXNlcnMve3VzZXJJRH0vcHJvZmlsZSJ8Imh0dHAucmVxdWVzdCI=",
+  "resource_name": "ImNoYXRib3QtYXBpInwiR0VUIC9hcGkvdjIvdXNlcnMve3VzZXJJRH0vcHJvZmlsZSJ8Imh0dHAucmVxdWVzdCI=",
+  "resource_type": "endpoint",
+  "rule": {
+    "id": "sec-test-001",
+    "name": "Broken object level authorization",
+    "type": "security_test"
+  },
+  "service": {
+    "name": "chatbot-api"
+  },
+  "severity": "high",
+  "status": "open",
+  "title": "Another user's profile is readable with a valid session",
+  "workflow": {}
+}
+```
+
+{{% /tab %}}
 {{% tab "Sensitive Data" %}}
 
 ```json

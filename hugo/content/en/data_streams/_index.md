@@ -74,7 +74,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
 #### Support for OpenTelemetry
-Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
+Data Streams Monitoring is not available with upstream OpenTelemetry SDKs. To use Data Streams Monitoring, instrument your services with a Datadog SDK, or with a [DDOT SDK][16] alongside the Datadog Agent. See [OpenTelemetry Compatibility][11].
 
 ## Setup
 
@@ -186,3 +186,4 @@ In the Pathways tab, the message **latency values may be approximate for these p
 [13]: /data_streams/java#manual-instrumentation
 [14]: /data_streams/manual_instrumentation/
 [15]: /help/
+[16]: /opentelemetry/instrument/ddot_sdks/

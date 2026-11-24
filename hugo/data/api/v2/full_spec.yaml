@@ -231,6 +231,15 @@ components:
       schema:
         maxLength: 256
         type: string
+    AiGatewayModelCanonicalIDQuery:
+      description: Canonical model identifier. It can contain `/`, such as `openai/gpt-4o`.
+      example: openai/gpt-4o
+      in: query
+      name: canonical
+      required: true
+      schema:
+        maxLength: 256
+        type: string
     AiGatewayModelGroupID:
       description: Model group ID, or "default" for the explicit organization-wide access policy.
       example: "7"
@@ -2510,6 +2519,14 @@ components:
       required: false
       schema:
         type: string
+    SecurityAgentOutreachPolicyDomain:
+      description: The allowed email domain to remove, for example `example.com`. Case-insensitive.
+      example: example.com
+      in: path
+      name: domain
+      required: true
+      schema:
+        type: string
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -3270,6 +3287,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -6670,20 +6708,15 @@ components:
           example: my-hostname
           type: string
         resource_kind:
-          description: >-
-            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
-          example: host
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueResourceKind"
         resource_type:
           description: The type of the affected resource. Omitted when empty.
           example: host
           type: string
         severity:
-          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
-          example: high
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueSeverity"
         state:
-          description: The state of the issue. Only issues with state `open` are returned.
+          description: The state of the issue, such as `open`.
           example: open
           type: string
         tags:
@@ -6753,6 +6786,23 @@ components:
         - type
         - attributes
       type: object
+    AgentHealthIssueResourceKind:
+      description: >-
+        The kind of affected resource. The meaning of `resource_id` depends on this: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+      enum:
+        - host
+        - deployment
+        - cluster
+        - cluster_agent
+        - otel
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - DEPLOYMENT
+        - CLUSTER
+        - CLUSTER_AGENT
+        - OTEL
     AgentHealthIssueResourceType:
       description: The Agent Health issue resource type.
       enum:
@@ -6769,6 +6819,20 @@ components:
       required:
         - data
       type: object
+    AgentHealthIssueSeverity:
+      description: The severity of the issue.
+      enum:
+        - low
+        - medium
+        - high
+        - unknown
+      example: high
+      type: string
+      x-enum-varnames:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - UNKNOWN
     AgentHealthIssueTags:
       description: Tags associated with the issue. Omitted when empty.
       example:
@@ -6829,15 +6893,18 @@ components:
           $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
       required:
         - data
+        - meta
       type: object
     AgentHealthIssuesResponseMeta:
       description: >-
-        Aggregate counts for the matching Agent Health issues. Present only when `count_by=issue_type` is requested.
+        Pagination metadata for the matching Agent Health issues. Always present. Includes per-issue-type counts only when `count_by=issue_type` is requested.
       example:
         page:
           counts_by_issue_type:
             invalid_config: 8382
             read-only_filesystem_error: 82
+          limit: 100
+          offset: 0
           total_count: 25526
       properties:
         page:
@@ -6846,11 +6913,13 @@ components:
         - page
       type: object
     AgentHealthIssuesResponsePage:
-      description: Counts for the matching Agent Health issues.
+      description: Pagination details and counts for the matching Agent Health issues.
       example:
         counts_by_issue_type:
           invalid_config: 8382
           read-only_filesystem_error: 82
+        limit: 100
+        offset: 0
         total_count: 25526
       properties:
         counts_by_issue_type:
@@ -6862,14 +6931,25 @@ components:
             invalid_config: 8382
             read-only_filesystem_error: 82
           type: object
+        limit:
+          description: The maximum number of issues returned, echoing the requested `page[limit]`.
+          example: 100
+          format: int64
+          type: integer
+        offset:
+          description: The number of issues skipped, echoing the requested `page[offset]`.
+          example: 0
+          format: int64
+          type: integer
         total_count:
           description: The total number of open issues matching the filters.
           example: 25526
           format: int64
           type: integer
       required:
+        - limit
+        - offset
         - total_count
-        - counts_by_issue_type
       type: object
     AgentHealthRemediation:
       description: Remediation for the issue. Omitted when no remediation is available.
@@ -6922,6 +7002,8 @@ components:
           description: Whether the script requires root privileges.
           example: true
           type: boolean
+      required:
+        - requires_root
       type: object
     AgentHealthRemediationStep:
       description: A step to remediate the issue.
@@ -6929,12 +7011,16 @@ components:
         order:
           description: The order in which to perform the step.
           example: 1
-          format: int64
+          format: int32
+          maximum: 2147483647
           type: integer
         text:
           description: The instructions for the step.
           example: Open datadog.yaml
           type: string
+      required:
+        - order
+        - text
       type: object
     AgentHealthRemediationSteps:
       description: Steps to remediate the issue.
@@ -9506,12 +9592,14 @@ components:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
       example: OPENAI_CHAT_COMPLETIONS
       type: string
       x-enum-varnames:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
     AiGatewayDataCaptureMode:
       description: Controls whether AI Gateway captures request and response content in addition to metadata.
       enum:
@@ -13221,6 +13309,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
       example: OPENAI_CHAT_COMPLETIONS
@@ -13232,6 +13322,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
     AiGatewayZDRMode:
@@ -26614,7 +26706,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26647,7 +26740,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26944,7 +27038,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -26977,7 +27072,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -69023,6 +69119,256 @@ components:
       required:
         - data
       type: object
+    GitHubCostsCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        GitHub costs, including Actions, storage, and Copilot, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Reported costs are estimates based on list prices and usage data and include discounts when available, but not negotiated rates. Requires Cloud Cost Management on your Datadog organization and a GitHub account on the enhanced billing platform. Without them, this dataflow collects no data. This dataflow is always on and cannot be turned off, so it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    GitHubCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthRequest"
+    GitHubCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the GitHub Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthResponse"
+    GitHubCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthUpdate"
+    GitHubCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    GitHubCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a GitHub Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountCreateData:
+      description: Data envelope for creating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountCreateRequest:
+      description: Request payload to create a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponse:
+      description: Response payload for a single GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponseAttributes:
+      description: Attributes of a GitHub Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/GitHubCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountResponseData:
+      description: Data envelope of a GitHub Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the GitHub Costs integration account.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    GitHubCostsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsResponse:
+      description: Settings configured on the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the GitHub Costs integration account. Only the provided fields are changed.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      type: object
+    GitHubCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a GitHub Costs integration account. Every field is optional. Only the provided fields are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsUpdate"
+      type: object
+    GitHubCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the GitHub Costs integration account to update.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountsResponse:
+      description: Response payload for a list of GitHub Costs integration accounts.
+      properties:
+        data:
+          description: List of GitHub Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from GitHub Costs, keyed by dataflow ID.
+      properties:
+        github-cloud-cost-metrics:
+          $ref: "#/components/schemas/GitHubCostsCloudCostMetricsIntegrationDataflowResponse"
+      type: object
     GitHubOIDCClaimPatterns:
       additionalProperties: false
       description: |-
@@ -71810,10 +72156,16 @@ components:
       properties:
         anomalyDetectionOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions"
+        complianceRuleOptions:
+          $ref: "#/components/schemas/CloudConfigurationComplianceRuleOptions"
+        decreaseCriticalityBasedOnEnv:
+          $ref: "#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv"
         detectionMethod:
           $ref: "#/components/schemas/SecurityMonitoringRuleDetectionMethod"
         evaluationWindow:
           $ref: "#/components/schemas/SecurityMonitoringRuleEvaluationWindow"
+        hardcodedEvaluatorType:
+          $ref: "#/components/schemas/SecurityMonitoringRuleHardcodedEvaluatorType"
         impossibleTravelOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions"
         keepAlive:
@@ -71858,6 +72210,14 @@ components:
             description: Dataset ID.
             type: string
           type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the job, keyed by dataset ID. Pinned when the job is created.
+          readOnly: true
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -71884,6 +72244,10 @@ components:
             description: Index name.
             type: string
           type: array
+        metric:
+          deprecated: true
+          description: "(Deprecated) The target field to aggregate over when using the sum or max\naggregations. Use the `metrics` field instead."
+          type: string
         metrics:
           description: Group of target fields to aggregate over when using the sum, max, geo data, or new value aggregations. The sum, max, and geo data aggregations only accept one value in this list, whereas the new value aggregation accepts up to five values.
           items:
@@ -81891,6 +82255,14 @@ components:
           description: Index used to load the data.
           example: cloud_siem
           type: string
+        isBackfillJob:
+          description: Whether the job was run by Datadog to reprocess past data.
+          readOnly: true
+          type: boolean
+        isShadowDeployed:
+          description: Whether the job is a shadow deployment run by Datadog.
+          readOnly: true
+          type: boolean
         message:
           description: Message for generated results.
           example: A large number of failed login attempts.
@@ -81901,6 +82273,13 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/HistoricalJobOptions"
+        projectedPerQuery:
+          description: Fields projected for each query, copied from the rule the job was created from.
+          items:
+            description: Projected field.
+            type: string
+          readOnly: true
+          type: array
         queries:
           description: Queries for selecting logs analyzed by the job. Up to 10 queries are allowed.
           items:
@@ -110012,7 +110391,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -110045,7 +110425,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -123185,18 +123566,16 @@ components:
       type: object
     RemediationGroupAttributes:
       description: |-
-        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
-        depending on its grouping definition.
+        Attributes of a remediation group. Each group includes one kind object, depending on its grouping definition.
       properties:
         findings:
           $ref: "#/components/schemas/RemediationGroupFindings"
         grouping_definition_id:
-          description: |-
-            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
+          description: Grouping definition that formed the group, such as `sca.package_update`.
           example: sca.package_update
           type: string
-        image_update:
-          $ref: "#/components/schemas/RemediationGroupImageUpdate"
+        owners:
+          $ref: "#/components/schemas/RemediationGroupOwners"
         package_update:
           $ref: "#/components/schemas/RemediationGroupPackageUpdate"
         title:
@@ -123207,6 +123586,7 @@ components:
         - grouping_definition_id
         - title
         - findings
+        - owners
       type: object
     RemediationGroupCaseRelationship:
       description: Relationship to the case that tracks the group's remediation.
@@ -123255,12 +123635,10 @@ components:
       description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
       enum:
         - library_vulnerability
-        - host_and_container_vulnerability
       example: library_vulnerability
       type: string
       x-enum-varnames:
         - LIBRARY_VULNERABILITY
-        - HOST_AND_CONTAINER_VULNERABILITY
     RemediationGroupFindings:
       description: |-
         Counts of the group's open findings. The counts include every finding in the group, including findings that
@@ -123326,70 +123704,6 @@ components:
         - none
         - unknown
       type: object
-    RemediationGroupImageUpdate:
-      description: |-
-        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
-        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
-        them by `grouping_location`, `remediation_kind`, and `action`.
-      properties:
-        action:
-          description: |-
-            Name of the container image, base image, or package to upgrade. The value comes from the first of these
-            attributes that the findings have: `@remediation.container_image.latest_major.name`,
-            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
-          example: alpine
-          type: string
-        advisory_count:
-          description: Number of distinct values of `@advisory.id` across the group's findings.
-          example: 25
-          format: int64
-          type: integer
-        exploitable_cve_count:
-          description: |-
-            Number of distinct values of `@advisory.id` across the group's findings that have
-            `@risk.has_exploit_available` set to `true`.
-          example: 2
-          format: int64
-          type: integer
-        file_count:
-          description: Number of distinct values of `@code_location.filename` across the group's findings.
-          example: 1
-          format: int64
-          type: integer
-        grouping_location:
-          description: |-
-            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
-            the value is the findings' `@container_image.name`.
-          example: Dockerfile
-          type: string
-        location_is_filename:
-          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
-          example: true
-          type: boolean
-        remediation_kind:
-          description: |-
-            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
-            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
-            `package_update` otherwise.
-          example: image_update
-          type: string
-        target_version:
-          description: |-
-            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
-            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
-            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
-            or when the recommended versions can't be ordered.
-          example: 3.20.3
-          type: string
-      required:
-        - grouping_location
-        - location_is_filename
-        - remediation_kind
-        - action
-        - advisory_count
-        - exploitable_cve_count
-        - file_count
-      type: object
     RemediationGroupInclude:
       description: Related resource to add to `included`.
       enum:
@@ -123398,6 +123712,42 @@ components:
       type: string
       x-enum-varnames:
         - CASE
+    RemediationGroupOwnerList:
+      description: |-
+        Owners of the group's open findings. `items` lists at most 5 owners, the owners of the most findings first,
+        then by name. `total` counts every distinct owner, so the list is cut when `total` is larger than the number
+        of items.
+      properties:
+        items:
+          description: Owners of the most findings in the group, at most 5.
+          example:
+            - "@acme/payments"
+            - "@acme/platform"
+          items:
+            type: string
+          type: array
+        total:
+          description: Number of distinct owners across the group's findings.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - items
+        - total
+      type: object
+    RemediationGroupOwners:
+      description: |-
+        Who should fix the group: the code owners of the group's findings, from their `@git.codeowners` attribute,
+        and their Datadog teams, from their `team` tag. A group with no owners has empty `items` and a `total` of 0.
+      properties:
+        codeowners:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+        teams:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+      required:
+        - codeowners
+        - teams
+      type: object
     RemediationGroupPackageUpdate:
       description: |-
         A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
@@ -134083,6 +134433,248 @@ components:
         - data
         - meta
       type: object
+    SecurityAgentOutreachDomainAddRequest:
+      description: Request to add one allowed email domain.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachDomainAddRequestData:
+      description: The email domain to allow.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachDomainAddRequestDataAttributes:
+      description: The email domain to allow.
+      properties:
+        domain:
+          description: |-
+            The email domain to allow: a fully qualified domain name, like `example.com`. Lowercased
+            before being stored.
+          example: acme.com
+          type: string
+      required:
+        - domain
+      type: object
+    SecurityAgentOutreachDomainAddType:
+      default: outreach_policy_domain_add
+      description: Type of an allowed outreach domain add request.
+      enum:
+        - outreach_policy_domain_add
+      example: outreach_policy_domain_add
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_DOMAIN_ADD
+    SecurityAgentOutreachMode:
+      description: |-
+        The organization's outreach mode. `off` disables user outreach. `manual` only sends outreach an analyst
+        triggers. `automated` auto-sends automated interviews for rules with outreach enabled, to users whose email
+        domain is allowed.
+      enum:
+        - "off"
+        - manual
+        - automated
+      example: automated
+      type: string
+      x-enum-varnames:
+        - "OFF"
+        - MANUAL
+        - AUTOMATED
+    SecurityAgentOutreachModeAttributes:
+      description: Attributes of a mode-only policy update.
+      properties:
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachModeResponse:
+      description: Response with the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeResponseData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachModeResponseData:
+      description: The organization's outreach mode.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateData:
+      description: Data of a mode-only policy update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateRequest:
+      description: Request to set the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicy:
+      description: The organization's outreach policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachPolicyAttributes:
+      description: Attributes of the organization's outreach policy.
+      properties:
+        allowed_domains:
+          description: Email domains user outreach can be sent to, at most 20. `null` when none are allowed.
+          example:
+            - example.com
+          items:
+            type: string
+          nullable: true
+          type: array
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+        rules:
+          description: |-
+            The stored per-rule automation state, including rules that are explicitly disabled. `null` when the
+            organization has no stored rule state.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRule"
+          nullable: true
+          type: array
+        suggested_domains:
+          description: |-
+            Domains the caller could allow next: their own email domain when it is not allowed yet and is not a
+            consumer mailbox provider. Read-only, never stored. `null` when there is no suggestion.
+          example:
+            - acme.com
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachPolicyResponse:
+      description: Response with the organization's outreach policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicy"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicyType:
+      default: outreach_policy
+      description: Type of the outreach policy resource.
+      enum:
+        - outreach_policy
+      example: outreach_policy
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY
+    SecurityAgentOutreachRule:
+      description: The outreach automation state of one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRuleUpdate:
+      description: The outreach automation state to set for one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode. Required.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule. Must be non-empty.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRulesUpdateAttributes:
+      description: Attributes of an outreach policy rules update request.
+      properties:
+        rules:
+          description: The rules to upsert, at least one.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRuleUpdate"
+          type: array
+      required:
+        - rules
+      type: object
+    SecurityAgentOutreachRulesUpdateRequest:
+      description: Request to upsert the outreach automation state of detection rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachRulesUpdateRequestData:
+      description: The rules to upsert.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachRulesUpdateType:
+      default: outreach_policy_rules_update
+      description: Type of an outreach policy rules update request.
+      enum:
+        - outreach_policy_rules_update
+      example: outreach_policy_rules_update
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_RULES_UPDATE
     SecurityAutomationRulesLinks:
       description: Pagination links for the list of automation rules.
       properties:
@@ -137747,6 +138339,8 @@ components:
         condition:
           description: "A case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries."
           type: string
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
@@ -137898,6 +138492,9 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations"
         baselineUserLocationsDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocationsDuration"
+        detectIpTransition:
+          description: If true, the rule detects transitions between IP addresses of the same user. At least one of `baselineUserLocations` and `detectIpTransition` must be true.
+          type: boolean
       type: object
     SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
       description: "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access."
@@ -137985,6 +138582,12 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter"
         instantaneousBaseline:
           $ref: "#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline"
+        instantaneousBaselineTimeoutMinutes:
+          description: Maximum time in minutes to build the instantaneous baseline. Only used when `instantaneousBaseline` is true.
+          format: int32
+          maximum: 360
+          minimum: 0
+          type: integer
         learningDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration"
         learningMethod:
@@ -140585,6 +141188,8 @@ components:
     SecurityMonitoringThirdPartyRuleCaseCreate:
       description: Case when a signal is generated by a third party rule.
       properties:
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
@@ -168820,9 +169425,9 @@ paths:
         (`high`, `medium`, `low`, then other values), then `first_seen_at` descending with
         missing timestamps last, then issue ID ascending.
 
-        Set `count_by=issue_type` to include `meta.page`, where `total_count` is the number of
-        open issues matching the filters and `counts_by_issue_type` holds the per-type counts.
-        `meta` is omitted when `count_by` is not requested.
+        The response always includes `meta.page` with the applied `limit`, `offset`, and
+        `total_count` (the number of open issues matching the filters). Set `count_by=issue_type`
+        to also include `counts_by_issue_type` with per-issue-type counts.
 
         Each filter accepts up to 50 comma-separated exact values of at most 256 characters
         each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
@@ -168830,13 +169435,35 @@ paths:
       operationId: ListAgentHealthIssues
       parameters:
         - description: >-
-            Set to `issue_type` to include `meta.page` with `total_count` and per-issue-type counts. If you don't set this parameter, the response omits `meta`. Only `issue_type` is supported.
+            Set to `issue_type` to also include `counts_by_issue_type` in `meta.page` with per-issue-type counts. Pagination metadata is always included. Only `issue_type` is supported.
           example: issue_type
           in: query
           name: count_by
           required: false
           schema:
             $ref: "#/components/schemas/AgentHealthIssuesCountBy"
+        - description: >-
+            The maximum number of issues to return. Defaults to 100, with a minimum of 1 and a maximum of 1000.
+          example: 100
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The number of issues to skip before returning results. Defaults to 0, with a minimum of 0.
+          example: 0
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
         - description: |-
             Filter by a comma-separated list of exact `severity` values, up to 50 values
             of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
@@ -168929,6 +169556,8 @@ paths:
                       page:
                         counts_by_issue_type:
                           invalid_config: 8382
+                        limit: 100
+                        offset: 0
                         total_count: 25526
               schema:
                 $ref: "#/components/schemas/AgentHealthIssuesResponse"
@@ -168962,23 +169591,23 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 2
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agenthealth/issues/{issue_id}:
     get:
       description: |-
         Get an Agent Health issue and its available remediation in your organization.
-        Only open issues are returned. The `remediation` attribute is omitted when
-        the issue has no remediation.
+        The `remediation` attribute is omitted when the issue has no remediation.
 
-        Returns `404` if the issue does not exist, is not open, belongs to another
-        organization, or you do not have access to its data. This response does not
-        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+        Returns `404` if the issue does not exist, belongs to another organization, or
+        you do not have access to its data. This response does not reveal whether the
+        issue exists. Returns `403` if you lack the `hosts_read` permission.
       operationId: GetAgentHealthIssue
       parameters:
         - description: |-
@@ -169030,6 +169659,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AgentHealthIssueResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -169063,9 +169698,6 @@ paths:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -175760,6 +176392,10 @@ paths:
         - Case Management Type
       x-displayName: Get all work item types
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a work item type.
       operationId: CreateCaseType
@@ -175809,6 +176445,10 @@ paths:
         - Case Management Type
       x-displayName: Create a work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/custom_attributes:
     get:
       description: Get all custom attributes
@@ -175843,6 +176483,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/cases/types/{case_type_id}:
     delete:
       description: Delete a work item type
@@ -175863,6 +176507,10 @@ paths:
         - Case Management Type
       x-displayName: Delete a work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the name, emoji, or description of an existing work item type.
       operationId: UpdateCaseType
@@ -175960,6 +176608,10 @@ paths:
         - Case Management Attribute
       x-displayName: Get custom attribute configs for work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a custom attribute configuration for a work item type.
       operationId: CreateCustomAttributeConfig
@@ -176018,6 +176670,10 @@ paths:
         - Case Management Attribute
       x-displayName: Create custom attribute config for work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
     delete:
       description: Delete custom attribute config
@@ -176040,6 +176696,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.
       operationId: UpdateCustomAttributeConfig
@@ -176637,6 +177297,10 @@ paths:
         - Case Management
       x-displayName: Add a comment to a work item
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete work item comment
@@ -176662,6 +177326,10 @@ paths:
         - Case Management
       x-displayName: Delete work item comment
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
     put:
       description: Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.
       operationId: UpdateCaseComment
@@ -177479,12 +178147,18 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
+            - notebooks_write
       summary: Create investigation notebook for case
       tags:
         - Case Management
       x-displayName: Create investigation notebook for work item
       x-menu-order: 57
+      x-permission:
+        operator: AND
+        permissions:
+          - cases_read
+          - notebooks_write
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a work item
@@ -178075,12 +178749,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Unwatch a case
       tags:
         - Case Management
       x-displayName: Unwatch a work item
       x-menu-order: 66
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.
       operationId: WatchCase
@@ -178104,12 +178782,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Watch a case
       tags:
         - Case Management
       x-displayName: Watch a work item
       x-menu-order: 65
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -214021,6 +214703,249 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts:
+    get:
+      description: List GitHub Costs integration accounts.
+      operationId: ListGitHubCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            github-cloud-cost-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: github-costs-acme
+                          settings:
+                            enterprise_name: enterprise-name
+                            tags: "env:prod,team:example"
+                        id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub Costs integration accounts
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub Costs integration account.
+      operationId: CreateGitHubCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts/{account_id}:
+    delete:
+      description: Delete a GitHub Costs integration account.
+      operationId: DeleteGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a GitHub Costs integration account.
+      operationId: GetGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a GitHub Costs integration account. Only the fields provided are changed.
+      operationId: UpdateGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/nebius-cloud/accounts:
     get:
       description: List Nebius Cloud integration accounts.
@@ -246692,6 +247617,173 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model-pricing:
+    delete:
+      description: >-
+        Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: >-
+        Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.
+      operationId: GetAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: >-
+        Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              custom:
+                summary: Set custom pricing
+                value:
+                  data:
+                    attributes:
+                      pricing_config:
+                        rates:
+                          cache_read_cost_per_mtok: 0.02
+                          cache_write_cost_per_mtok: 0.25
+                          non_cached_input_cost_per_mtok: 0.2
+                          output_cost_per_mtok: 1.0
+                        source:
+                          type: custom
+                        version: 1
+                    id: 7/openai/gpt-4o
+                    type: model-pricing
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelPricingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Set a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 58
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/providers/{provider_id}/models:
     get:
       description: >-
@@ -246955,7 +248047,7 @@ paths:
   /api/v2/providers/{provider_id}/models/{canonical}/pricing:
     delete:
       description: >-
-        Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: DeleteAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -246989,7 +248081,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: >-
-        Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
+        Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
       operationId: GetAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247042,7 +248134,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -254250,11 +255342,19 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a RUM-based metric
@@ -254280,7 +255380,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM-based metric
@@ -254327,7 +255431,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM-based metric
@@ -254406,13 +255514,25 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM-based metric
@@ -264552,15 +265672,14 @@ paths:
     get:
       description: |-
         Search the remediation groups of your organization. A remediation group gathers the open security findings
-        that one change fixes, such as updating a package in a repository or upgrading an image.
+        that one change fixes, such as updating a package in a repository.
 
         Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
         group returns:
 
-        | Grouping definition    | Finding type                       | Kind object      |
-        | ---------------------- | ---------------------------------- | ---------------- |
-        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
-        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
+        | Grouping definition  | Finding type            | Kind object      |
+        | -------------------- | ----------------------- | ---------------- |
+        | `sca.package_update` | `library_vulnerability` | `package_update` |
 
         Groups are computed from the attributes of security findings, described in the
         [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
@@ -264640,42 +265759,6 @@ paths:
           content:
             application/json:
               examples:
-                cloud_vm_group_without_case:
-                  summary: A host and container vulnerability group with no case yet
-                  value:
-                    data:
-                      - attributes:
-                          findings:
-                            by_severity:
-                              critical: 1
-                              high: 9
-                              info: 0
-                              low: 10
-                              medium: 20
-                              none: 0
-                              unknown: 0
-                            total: 40
-                          grouping_definition_id: cloudvm.image_update
-                          image_update:
-                            action: alpine
-                            advisory_count: 25
-                            exploitable_cve_count: 2
-                            file_count: 1
-                            grouping_location: Dockerfile
-                            location_is_filename: true
-                            remediation_kind: image_update
-                            target_version: 3.20.3
-                          title: Upgrade alpine to 3.20.3
-                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
-                        relationships:
-                          case:
-                            data:
-                        type: remediation_groups
-                    meta:
-                      page:
-                        number: 1
-                        size: 50
-                        total_filtered_count: 134
                 default:
                   summary: A library vulnerability group with a case, with include=case
                   value:
@@ -264692,6 +265775,16 @@ paths:
                               unknown: 0
                             total: 12
                           grouping_definition_id: sca.package_update
+                          owners:
+                            codeowners:
+                              items:
+                                - "@acme/payments"
+                                - "@acme/platform"
+                              total: 2
+                            teams:
+                              items:
+                                - payments
+                              total: 1
                           package_update:
                             advisory_count: 3
                             ecosystem: npm
@@ -266903,7 +267996,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a batch migration in the `draft` status, together with 1 to 100 initial
@@ -266996,7 +268089,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}:
     delete:
       description: |-
@@ -267037,7 +268130,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
         Update the name, description, or tags of a batch migration, in any status. At least
@@ -267123,7 +268216,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/cancel:
     post:
       description: |-
@@ -267165,7 +268258,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/publish:
     post:
       description: |-
@@ -267260,7 +268353,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/resources:
     delete:
       description: |-
@@ -267316,7 +268409,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         List the resources of a batch migration, including the input of each source rule and,
@@ -267412,7 +268505,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the
@@ -267490,7 +268583,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/resources/{resource_id}:
     patch:
       description: |-
@@ -267568,7 +268661,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/start:
     post:
       description: |-
@@ -267620,7 +268713,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: |-
@@ -271066,7 +272159,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules/proposals/{proposal_id}:
     get:
       description: |-
@@ -271159,7 +272252,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules/test:
     post:
       description: |-
@@ -272348,6 +273441,383 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy:
+    get:
+      description: |-
+        Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule
+        automation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains
+        that could be allowed next.
+      operationId: GetSecurityAgentOutreachPolicy
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                        suggested_domains:
+                          - acme.com
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get the user outreach policy
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    put:
+      description: |-
+        Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an
+        analyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users
+        whose email domain is allowed).
+      operationId: UpdateSecurityAgentOutreachMode
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      mode: automated
+                    type: outreach_policy
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateRequest"
+        description: The new outreach mode.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        mode: automated
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachModeResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update the outreach mode
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains:
+    post:
+      description: |-
+        Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The
+        domain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.
+        An organization can allow at most 20 domains.
+      operationId: AddSecurityAgentOutreachPolicyDomain
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      domain: acme.com
+                    type: outreach_policy_domain_add
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequest"
+        description: The email domain to allow.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain allowed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - acme.com
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Add an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains/{domain}:
+    delete:
+      description: Remove one allowed email domain, by its name.
+      operationId: RemoveSecurityAgentOutreachPolicyDomain
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentOutreachPolicyDomain"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain removed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Remove an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 8
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/rules:
+    post:
+      description: |-
+        Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;
+        rules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews
+        in `automated` mode.
+      operationId: UpdateSecurityAgentOutreachPolicyRules
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      rules:
+                        - is_enabled: true
+                          rule_id: abc-def-ghi
+                        - is_enabled: false
+                          rule_id: jkl-mno-pqr
+                    type: outreach_policy_rules_update
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequest"
+        description: The rules to upsert.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy after the update
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update outreach policy rules
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 6
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
@@ -294505,6 +295975,15 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/google_cloud_platform
     name: GCP Integration
+  - description: |-
+      Manage your Datadog GitHub Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [GitHub Costs integration page](https://docs.datadoghq.com/integrations/github-costs/) for
+      more information.
+    externalDocs:
+      description: GitHub Costs integration.
+      url: https://docs.datadoghq.com/integrations/github-costs/
+    name: GitHub Costs Integration
   - description: |-
       Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
       directly through the Datadog API.

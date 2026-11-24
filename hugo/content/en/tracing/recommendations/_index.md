@@ -97,11 +97,17 @@ APM Recommendations help you improve your applications' performance and reliabil
 
 {{< img src="/tracing/recommendations/apm_recommendations-3.png" alt="APM Recommendations page with summary cards for reliability and performance issues and a list of recommendations to review" style="width:100%;" >}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/apm-recommendations-code-aware/" header="Join the Code Aware Preview!" >}}
+Code Aware validates recommendations against your source code, so you see only the recommendations that apply to your services.
+{{< /callout >}}
+
 ## Prerequisites
 
 Certain recommendations rely on specific Datadog products. Use the {{< ui >}}Recommendation Prerequisite{{< /ui >}} dropdown to filter recommendations by the Datadog products in your setup.
 
 If you plan to use [Bits Code][3] to implement recommendations, you must [complete its setup][4].
+
+To use Code Aware (Preview), you must have [Source Code Integration][6] set up for your services.
 
 ## How it works
 
@@ -114,6 +120,8 @@ Recommendations are based on data collected from different parts of your stack:
 Datadog correlates these sources to identify opportunities to improve performance, reliability, and user experience.
 
 Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
+
+With Code Aware (Preview), Datadog validates recommendations against your source code. Datadog hides recommendations that don't apply to your code and marks the rest with a {{< ui >}}Validated{{< /ui >}} badge.
 
 ## Using recommendations
 
@@ -157,3 +165,4 @@ Add a List widget with APM Recommendations as its data source to review recommen
 [3]: /bits_ai/bits_code/
 [4]: /bits_ai/bits_code/setup/
 [5]: https://app.datadoghq.com/apm/home
+[6]: /source_code/
