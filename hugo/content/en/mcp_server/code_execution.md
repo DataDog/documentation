@@ -88,17 +88,17 @@ To use write operations:
 
 ## Review and retry write operations safely
 
-<div class="alert alert-warning">
-<p><code>execute_code_write</code> can overwrite or delete data, and rerunning a script can duplicate changes. The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step.</p>
-<p>Scripts are not transactions. Completed writes remain if a later operation fails or times out. A lost response can leave the result of a write unknown.</p>
-<p>Before retrying:</p>
-<ol>
-<li>Review the tool result, including partial-failure diagnostics.</li>
-<li>Inspect the affected resources to determine which operations completed.</li>
-<li>Retry only incomplete operations instead of rerunning the whole script.</li>
-</ol>
-<p>For sensitive changes, ask the agent to show its plan before writing. Use narrowly scoped prompts and request a compact result with affected resource IDs and completed actions.</p>
-</div>
+<div class="alert alert-warning"><code>execute_code_write</code> can overwrite or delete data, and rerunning a script can duplicate changes. Scripts are not transactions. Completed writes remain if a later operation fails or times out, and a lost response can leave the result of a write unknown.</div>
+
+The AI client's normal approval behavior applies. The MCP Server does not add a separate confirmation step.
+
+Before retrying a script:
+
+1. Review the tool result, including partial-failure diagnostics.
+1. Inspect the affected resources to determine which operations completed.
+1. Retry only incomplete operations instead of rerunning the whole script.
+
+For sensitive changes, ask the agent to show its plan before writing. Use narrowly scoped prompts, and request a compact result with affected resource IDs and completed actions.
 
 ## Write examples
 
