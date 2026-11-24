@@ -14,8 +14,6 @@ further_reading:
 
 Change Tracking collects the changes happening across your systems, such as code deployments, feature flag flips, infrastructure and configuration edits, or schema changes. It puts them next to your telemetry, so that the first question of an investigation ("what changed?") is already answered when you arrive on the page.
 
-{{< img src="/change_tracking/change-tracking-overview-2.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
-
 With Change Tracking, you can:
 
 - See the changes to a service and its dependencies alongside the graphs you are already looking at.
