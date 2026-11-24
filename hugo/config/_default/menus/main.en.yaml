@@ -1687,8 +1687,8 @@ menu:
     - name: Bits Live Debugger
       url: tracing/live_debugger/bits-live-debugger
       identifier: bits_ai_live_debugger
-      parent: bits_ai
-      weight: 8
+      parent: bits_ai_dev_agent
+      weight: 304
     - name: Bits Release
       url: bits_release/
       identifier: bits_release
