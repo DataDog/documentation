@@ -83,22 +83,25 @@ Select your environment to see compatibility requirements and limitations:
 
 {{% /tab %}}
 
-{{% tab "Windows IIS" %}}
+{{% tab "Windows" %}}
+
+<!-- TODO: Confirm status, minimum Agent version, and minimum Java SDK version for host-wide Windows SSI with PM. -->
 
 ### Compatibility
 
 - **Status**: GA
-- **Supported runtimes**: .NET only
+- **Supported runtimes**: Java and .NET
 
 ### Requirements
 
 - Datadog Agent v7.67.1 or higher
 - Datadog .NET SDK v3.19.0 or higher
-- Applications running in IIS
 
 ### Limitations
 
-- **IIS only**: Only .NET applications running in IIS are supported.
+- **.NET outside of IIS**: .NET applications running outside of IIS are instrumented only when an [instrumentation rule][1] allows them.
+
+[1]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
 
 {{% /tab %}}
 {{< /tabs >}}

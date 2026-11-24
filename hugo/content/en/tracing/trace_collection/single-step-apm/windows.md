@@ -30,53 +30,14 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
-You can enable APM on Windows in the following ways:
-* Instrument only .NET applications on IIS
-* Instrument all Java and .NET applications across your entire Windows host
-
-{{< tabs >}}
-{{% tab "IIS" %}}
-
-To instrument only .NET applications running on IIS:
-
-1. From an administrator PowerShell session on your Windows host, run one of the following commands. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2] and `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
-
-   Use the PowerShell installer:
-
-   ```powershell
-   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '<YOUR_DD_SITE>'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
-   ```
-
-   Alternatively, install with the MSI:
-
-   ```powershell
-   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /norestart /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DD_API_KEY>" SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3"'
-   if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
-   ```
-
-   To install a different .NET version, change `dotnet:3`, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
-
-   **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
-
-1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
-
-The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
-
-**Generate the command from Datadog**: To get a command pre-filled with your API key and site, go to [Install the Datadog Agent on Windows][1] and, in the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}. To pin the .NET SDK version, select {{< ui >}}Customize Library Versions{{< /ui >}} under {{< ui >}}Instrumentation Configuration{{< /ui >}}. Then copy and run the generated command.
-
-[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-
-{{% tab "Host-wide (Preview)" %}}
+<!-- TODO: Confirm with PM whether host-wide instrumentation is GA when the IIS option is removed. If so, remove this Preview alert and the Preview references in the steps. -->
 
 <div class="alert alert-info">
 <strong>Join the Preview!</strong><br>
-Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this tab appear in Datadog only after you are enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request access</a> to join the Preview.
+Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this section appear in Datadog only after you are enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request access</a> to join the Preview.
 </div>
 
-To instrument Java and .NET applications across your entire Windows host:
+To install the Agent and instrument Java and .NET applications on your Windows host:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
 1. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}.
@@ -88,16 +49,14 @@ To instrument Java and .NET applications across your entire Windows host:
    1. Under .NET, choose the version you want to use.
 
 1. Copy and run the provided installation command on your Windows host. Datadog generates this command in-app after you are enrolled in the Preview.
-1. Configure instrumentation rules.
+
+   **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
+
+1. Configure instrumentation rules. <!-- TODO: Confirm with PM whether .NET applications outside of IIS still require an allow rule, or whether host-wide SSI instruments them by default. -->
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
 1. Restart the services you want instrumented.
-
-[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
@@ -145,10 +104,6 @@ To enable products, [set environment variables][3] in your application configura
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-<div class="alert alert-info">Instrumentation rules apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
 {{< /site-region >}}
 
 Instrumentation rules let you control which processes SSI automatically instruments on Windows hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
