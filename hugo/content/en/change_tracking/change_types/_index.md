@@ -39,6 +39,31 @@ See [Track Feature Flag Changes][6] for setup and advanced options.
 | Kubernetes deployment scale events | Kubernetes integration | Enable [Kubernetes audit logging][13]. |
 | CrashLoopBackOff pod crashes | Kubernetes integration | Add a `service` label to your Kubernetes YAML where possible. |
 
+<!-- TODO: Confirm these identifiers with the Change Tracking team. aws_dynamodb, aws_elasticache, aws_ecs_cluster, aws_ecs_service, aws_ecs_task, aws_kinesis_stream, and aws_route53_resource_record_set don't match the Resource Changes supported list. Also confirm whether the AWS row is still in Preview. -->
+
+Change Tracking supports changes to the following AWS resource types:
+
+- `aws_autoscaling_group`
+- `aws_cloudfront_distribution`
+- `aws_dynamodb`
+- `aws_ec2_instance`
+- `aws_ecs_cluster`
+- `aws_ecs_service`
+- `aws_ecs_task`
+- `aws_elasticache`
+- `aws_elb_load_balancer`
+- `aws_elbv2_load_balancer`
+- `aws_kinesis_stream`
+- `aws_lambda_function`
+- `aws_rds_cluster`
+- `aws_rds_instance`
+- `aws_route53_resource_record_set`
+- `aws_s3_bucket`
+- `aws_sns_topic`
+- `aws_sqs_queue`
+
+For the resource types that Resource Changes collects across AWS, Azure, and Google Cloud, see [Resource Changes supported resources][16].
+
 ### Database changes
 
 | Change type | Comes from | How to enable |
@@ -76,3 +101,4 @@ See [Database Monitoring][14] for setup and advanced options.
 [13]: /integrations/kubernetes_audit_logs/
 [14]: /database_monitoring/
 [15]: /tracing/
+[16]: /infrastructure/resource_catalog/resource_changes/#supported-resources
