@@ -7265,6 +7265,10 @@
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
   },
+  "GetAWSIdentityCenterAWSAccounts": {
+    "description": "Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and\nwhether users have been collected from them. Collected users are a prerequisite for creating or enabling the\nAWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management\naccounts and any accounts that users were collected from.",
+    "summary": "Get AWS IAM Identity Center account prerequisites"
+  },
   "GetEntraIdAzureAppRegistrations": {
     "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
     "summary": "Get Entra ID Azure App Registration prerequisites"
