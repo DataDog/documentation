@@ -309,16 +309,9 @@ When enabled, Bits Investigation initiates investigations directly on On-Call pa
 
 Start and monitor [Bits Code][30] sessions from your mobile device. Track a session's progress, see when Bits Code needs your input, and take action without returning to your computer.
 
-{{< tabs >}}
-{{% tab "iOS" %}}
+<div class="alert alert-warning">Bits Code is available only in the iOS app. It is not yet available on Android.</div>
 
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="mobile/ios_bits_code.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="A Bits Code session in the iOS Datadog mobile app, showing a summary of the fix and the code diff side by side">}}
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
