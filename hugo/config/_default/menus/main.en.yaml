@@ -5998,6 +5998,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations
       weight: 406
+    - name: Provided by Datadog
+      url: llm_observability/investigate/evaluations/evaluators_provided_by_datadog
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluators_provided_by_datadog
+      weight: 40500
     - name: Custom LLM-as-a-Judge
       url: llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
       parent: llm_obs_evaluations
