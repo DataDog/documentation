@@ -1932,7 +1932,6 @@ Creates a Bits Detection scope that triages and automatically investigates alert
 Replaces a Bits Detection scope's query and triage policy. Fields you omit reset to their defaults, so include any existing policy settings you want to keep. Use `get_bits_detection_scope` to read the current settings first.
 
 - Update the Bits Detection scope for `team:payments` to also triage alerts from monitors tagged `team:billing`.
-- Turn off automatic investigations for the `#checkout-alerts` Bits Detection scope.
 
 ### `disable_bits_detection_scope`
 *Toolset: **investigator***\
