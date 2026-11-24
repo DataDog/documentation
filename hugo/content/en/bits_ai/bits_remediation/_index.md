@@ -72,7 +72,7 @@ To run triage actions from an investigation:
 
 ## Infrastructure actions
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities/" >}}
   Autonomous remediation and AWS actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 

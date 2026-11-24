@@ -814,7 +814,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
-- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
+- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting, and for managing [Bits Detection][99] scopes that triage and investigate alerts automatically.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
@@ -1118,3 +1118,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [96]: /incident_response/on-call/
 [97]: /account_management/rbac/mcp_access/#keep-credentials-out-of-ai-agent-conversations
 [98]: /containers/amazon_ecs/
+[99]: /bits_ai/bits_detection/

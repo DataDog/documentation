@@ -7,6 +7,7 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/feature_flags/concepts/approvals" >}}Approvals{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/cloning" >}}Cloning Feature Flags{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/configuration_sources" >}}Configuration Sources for Server SDKs{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/distribution_channels" >}}Distribution Channels{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/environments" >}}Environments{{< /nextlink >}}
