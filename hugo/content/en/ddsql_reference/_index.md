@@ -1209,14 +1209,14 @@ FROM aws.ec2_instance
 
 Template variables let you change query filters without editing SQL.
 
-### Filter rows with `matches`
+### Filter rows with `dd.matches`
 
-Use `matches(column, $var)` in a `WHERE` clause to compare a column or expression with the variable's selected values. For example, for a variable named `env`:
+Use `dd.matches(column, $var)` in a `WHERE` clause to compare a column or expression with the variable's selected values. For example, for a variable named `env`:
 
 {{< code-block lang="sql" >}}
 SELECT *
 FROM aws.ec2_instance
-WHERE matches(tags->'env', $env);
+WHERE dd.matches(tags->'env', $env);
 {{< /code-block >}}
 
 | Selected values | Matches |
@@ -1232,7 +1232,7 @@ WHERE matches(tags->'env', $env);
 
 Pass `$env` directly, without single quotes or `.value`. The column or expression determines what is filtered; the variable's tag is not added.
 
-For non-text columns, cast the expression to `VARCHAR` first, for example `matches(CAST(status_code AS VARCHAR), $status)`.
+For non-text columns, cast the expression to `VARCHAR` first, for example `dd.matches(CAST(status_code AS VARCHAR), $status)`.
 
 Use `$env` for a lowercase variable name. Enclose names containing uppercase letters, spaces, or punctuation in double quotes, for example `$"aws-region"`.
 
