@@ -462,9 +462,7 @@ OpenFeatureAPI.setProviderAndWait(provider)
 ## Verify flag responses with response signing
 
 {{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
-Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.
-
-The response signing SDK option is experimental. Its name and behavior can change before general availability.
+Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.<br><br>The response signing SDK option is experimental. Its name and behavior can change before general availability.
 {{< /callout >}}
 
 Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][5].
