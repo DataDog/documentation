@@ -185,32 +185,7 @@ The REST endpoints differ from the MCP endpoint in the following ways:
 
 ## Errors
 
-MCP Gateway returns the following errors on the MCP endpoint and the REST endpoints:
-
-| Case | MCP endpoint | REST endpoints |
-|---|---|---|
-| Missing or invalid credentials | HTTP `401` | HTTP `401` |
-| The caller does not have `mcp_gateway_usage` | The request is refused | The request is refused |
-| MCP Gateway is not enabled for the organization | HTTP `403` with an empty body | HTTP `403` with an empty body |
-| The tool name is unknown or outside the chosen servers, or the caller is not allowed to use the tool | `-32602` `unknown tool`, HTTP `400` | HTTP `404` |
-| The server does not have a tool with that name, or it rejects the arguments | `-32602` `unknown tool or invalid arguments`, HTTP `400` | HTTP `400` |
-| Invalid cursor | `-32602` `invalid cursor`, HTTP `400` | HTTP `400` |
-| A slug in `?slug=` matches no server the caller can use | `-32602` `unknown server slug`, HTTP `400` | Does not apply |
-| More than 20 slugs in `?slug=` | `-32602` `at most 20 server slugs may be named`, HTTP `400` | Does not apply |
-| The server failed or timed out, or MCP Gateway could not check access | `-32603` `upstream MCP server request failed`, HTTP `200` | HTTP `502` |
-| MCP protocol version older than `2026-07-28`, or no `MCP-Protocol-Version` header | `-32022`, HTTP `400` | Does not apply |
-| Malformed `search` or `slug` query parameter | HTTP `400` | Ignored |
-| The request body is not a JSON object, or is larger than 1 MiB | Does not apply | HTTP `400` or `413` |
-
-A call refused by server access or a policy returns the same `unknown tool` response as a call to a tool name that matches no server. To find out why a call was refused, check the tool call's outcome in Agent Observability. See the [Tool call outcomes][7] section of Observe MCP Tool Activity.
-
-### A server's tools are missing from the list
-
-`tools/list` succeeds even when one server cannot be listed. If a server's tools are missing:
-
-- Confirm that the server is enabled and connected, and that the caller's own account is connected for a server with per-user credentials.
-- Confirm the caller's [access][5] to the server or to a policy that lists its tools.
-- Check the server itself. MCP Gateway leaves out a server that takes more than 10 seconds to list its tools, or that returns more than 1,500 tools or 4,000,000 bytes.
+A call refused by server access or a policy returns the same `unknown tool` response as a call to a tool name that matches no server. For the error that each endpoint returns in each case, and for tools that are missing from the list, see the [MCP Gateway tool calls][7] section of Troubleshoot AI Gateway.
 
 ## Limitations
 
@@ -231,4 +206,4 @@ MCP Gateway has the following limitations:
 [4]: /ai_gateway/mcp_gateway/servers/
 [5]: /ai_gateway/mcp_gateway/access_control/
 [6]: /ai_gateway/mcp_gateway/connect/
-[7]: /ai_gateway/mcp_gateway/observability/#tool-call-outcomes
+[7]: /ai_gateway/troubleshooting/#mcp-gateway-tool-calls

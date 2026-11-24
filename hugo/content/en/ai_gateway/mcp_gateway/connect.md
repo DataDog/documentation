@@ -132,20 +132,7 @@ For how each tool behaves, see the [Search mode][7] section of Call Tools Throug
 
 ## Troubleshooting
 
-No servers are listed
-: The page shows {{< ui >}}No servers yet{{< /ui >}} when no server is shared with you. Ask an administrator to give you access to a server. A server with a shared credential also stays hidden until an administrator connects it, and a disabled server is hidden from everyone.
-
-The page says you don't have access to MCP Gateway
-: Your role does not have the `mcp_gateway_usage` permission.
-
-A server still shows Not connected after you authorize
-: Reload the page. If the banner says the server's authorization page didn't grant access, click {{< ui >}}Authorize{{< /ui >}} again and approve access at the server.
-
-The connect button is unavailable
-: Datadog could not load how the server connects. Reload the page.
-
-Your client lists no tools from a server
-: Confirm that the server's card shows {{< ui >}}Connected{{< /ui >}}, then start a new session in your client. If the client cannot connect at all, see the [Errors][8] section of Call Tools Through MCP Gateway.
+If a server is missing from {{< ui >}}My servers{{< /ui >}}, stays {{< ui >}}Not connected{{< /ui >}}, or its tools do not appear in your client, see the [MCP Gateway tool calls][8] section of Troubleshoot AI Gateway.
 
 ## Further reading
 
@@ -158,4 +145,4 @@ Your client lists no tools from a server
 [5]: /ai_gateway/mcp_gateway/access_control/
 [6]: /ai_gateway/mcp_gateway/tools/#authenticate
 [7]: /ai_gateway/mcp_gateway/tools/#search-mode
-[8]: /ai_gateway/mcp_gateway/tools/#errors
+[8]: /ai_gateway/troubleshooting/#mcp-gateway-tool-calls

@@ -72,6 +72,7 @@ MCP Gateway permissions are separate from the `ai_gateway_*` permissions. A user
 | Connect your own account and set up an MCP client | [Connect to MCP Servers][7] |
 | List and call tools from an MCP client or a script | [Call Tools][8] |
 | Review tool calls, errors, and latency | [Observe MCP Tool Activity][5] |
+| Diagnose missing servers, missing tools, and failed tool calls | [Troubleshooting][9] |
 
 ## Further reading
 
@@ -85,3 +86,4 @@ MCP Gateway permissions are separate from the `ai_gateway_*` permissions. A user
 [6]: /ai_gateway/mcp_gateway/servers/
 [7]: /ai_gateway/mcp_gateway/connect/
 [8]: /ai_gateway/mcp_gateway/tools/
+[9]: /ai_gateway/troubleshooting/#mcp-gateway-tool-calls

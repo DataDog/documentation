@@ -6216,16 +6216,11 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_terraform
       weight: 11
-    - name: Troubleshooting
-      url: ai_gateway/troubleshooting/
-      parent: ai_gateway
-      identifier: ai_gateway_troubleshooting
-      weight: 12
     - name: MCP Gateway
       url: ai_gateway/mcp_gateway/
       parent: ai_gateway
       identifier: ai_gateway_mcp_gateway
-      weight: 13
+      weight: 12
     - name: Register MCP Servers
       url: ai_gateway/mcp_gateway/servers/
       parent: ai_gateway_mcp_gateway
@@ -6251,6 +6246,11 @@ menu:
       parent: ai_gateway_mcp_gateway
       identifier: ai_gateway_mcp_gateway_observability
       weight: 5
+    - name: Troubleshooting
+      url: ai_gateway/troubleshooting/
+      parent: ai_gateway
+      identifier: ai_gateway_troubleshooting
+      weight: 13
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
