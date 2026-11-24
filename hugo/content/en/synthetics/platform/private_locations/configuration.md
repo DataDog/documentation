@@ -152,7 +152,7 @@ Maximum duration for API test execution, in milliseconds. Default is one minute 
 
 ### Network security configuration
 
-A private location can reach any network address that its host can reach, unless its configuration restricts egress. By default, the worker blocks reserved and private IP ranges (`enableDefaultBlockedIpRanges` is `true`). This default applies from worker version 1.77.0; earlier versions default to `false`. Restrict egress with the following options:
+A private location can reach any network address that its host can reach, unless its configuration restricts egress. By default, the worker blocks reserved and private IP ranges (`enableDefaultBlockedIpRanges` is `true`). This default applies from worker version 1.76.0; earlier versions default to `false`. Restrict egress with the following options:
 
 `allowedIPRanges`, `blockedIPRanges`, `enableDefaultBlockedIpRanges`, `allowedDomainNames`, `blockedDomainNames`
 
@@ -278,7 +278,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
-**Default**: `true` (from worker version 1.77.0; `false` in earlier versions)<br>
+**Default**: `true` (from worker version 1.76.0; `false` in earlier versions)<br>
 Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registries), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. See [Private Location Network Security Hardening][6].
 
 `--allowedDomainNames`

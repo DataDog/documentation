@@ -3,7 +3,7 @@ description: Ruby 애플리케이션용 Datadog Feature Flags를 설정하세요
 further_reading:
 - link: /feature_flags/server/
   tag: 설명서
-  text: 서버 측 Feature Flags
+  text: Server-Side Feature Flags
 - link: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
   tag: 설명서
   text: Ruby 트레이싱
@@ -18,7 +18,7 @@ further_reading:
   text: Feature Flags에 대한 APM 트레이스 보강 설정
 - link: /feature_flags/concepts/flag_graphs/
   tag: 개념
-  text: Feature Flag 그래프
+  text: Feature Flags 그래프
 - link: /feature_flags/concepts/configuration_sources/
   tag: 개념
   text: 서버 SDK 구성 소스
@@ -26,11 +26,11 @@ title: Ruby Feature Flags
 ---
 ## 개요 {#overview}
 
-이 페이지에서는 Datadog Feature Flags SDK를 사용하여 Ruby 애플리케이션을 계측하는 방법을 설명합니다. Ruby SDK는 Feature Flag 관리를 위한 오픈 표준인 [OpenFeature][3]와 통합됩니다. `datadog` 2.46.0 이상에서는 기본적으로 Datadog 관리 CDN에서 직접 플래그 구성을 로드합니다.
+이 페이지에서는 Datadog Feature Flags SDK를 사용하여 Ruby 애플리케이션을 계측하는 방법을 설명합니다. Ruby SDK는 Feature Flags 관리를 위한 오픈 표준인 [OpenFeature][3]와 통합됩니다. `datadog` 2.46.0 이상에서는 기본적으로 Datadog 관리 CDN에서 직접 플래그 구성을 로드합니다.
 
 구성 전달 또는 로컬 플래그 평가에는 Datadog Agent가 필요하지 않습니다. Agent 관리 전달을 유지하려면 [Agent Remote Configuration](#agent-configuration-delivery)을 선택하세요.
 
-<div class="alert alert-warning">실험 노출 이벤트 및 집계된 EVP(이벤트 플랫폼 프록시) 플래그 평가 이벤트에는 호환되는 Datadog Agent 또는 로컬 텔레메트리 릴레이가 필요합니다. Ruby는 릴레이를 사용할 수 없을 때 직접 이벤트 전달을 지원하지 않습니다. 여기에서 <code>feature_flag.evaluations</code> 메트릭에는 별도로 구성된 OpenTelemetry 내보내기 경로가 필요합니다. <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Feature Flag 텔레메트리 전송</a>을 참조하세요.</div>
+<div class="alert alert-warning">실험 노출 이벤트 및 집계된 EVP(이벤트 플랫폼 프록시) 플래그 평가 이벤트에는 호환되는 Datadog Agent 또는 로컬 텔레메트리 릴레이가 필요합니다. Ruby는 릴레이를 사용할 수 없을 때 직접 이벤트 전달을 지원하지 않습니다. 여기에서 <code>feature_flag.evaluations</code> 메트릭에는 별도로 구성된 OpenTelemetry 내보내기 경로가 필요합니다. <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Feature Flags 텔레메트리 전송</a>을 참조하세요.</div>
 
 ## 전제 조건 {#prerequisites}
 
@@ -94,7 +94,7 @@ client = OpenFeature::SDK.build_client
 
 이 예시는 `ProviderInitializationError`를 포착하여 애플리케이션이 호출자가 제공한 기본값으로 계속 실행될 수 있도록 합니다. 일시적인 전달 실패로 인해 초기화 시간이 초과되면 폴링이 계속되며 유효한 구성이 도착하면 공급자가 복구될 수 있습니다. 비차단 초기화에는 대신 `OpenFeature::SDK.set_provider`를 사용하세요. 구성을 사용할 수 있을 때까지 평가는 기본값을 반환합니다.
 
-SDK는 기본적으로 30초마다 폴링하며 5초의 요청 시간 제한을 사용합니다. 유효한 구성을 수신한 후에는 일시적인 전달 오류가 발생해도 해당 구성을 유지합니다. 폴링 및 사용자 지정 엔드포인트 설정은 [Configuration Sources][6]를 참조하세요. Ruby는 상한선 없이 양의 정수 폴링 간격을 허용하지만, 요청 시간 제한은 1~300초 사이여야 합니다.
+SDK는 기본적으로 30초마다 폴링하며 5초의 요청 시간 제한을 사용합니다. 유효한 구성을 수신한 후에는 일시적인 전달 오류가 발생해도 해당 구성을 유지합니다. 폴링 및 사용자 지정 엔드포인트 설정은 [구성 소스][6]를 참조하세요. Ruby는 상한선 없이 양의 정수 폴링 간격을 허용하지만, 요청 시간 제한은 1~300초 사이여야 합니다.
 
 ### Agent 구성 전달 {#agent-configuration-delivery}
 
@@ -134,7 +134,7 @@ gem 'opentelemetry-exporter-otlp-metrics', '>= 0.4.0'
 
 플래그 타겟팅을 위해 사용자 또는 엔터티를 식별하는 평가 컨텍스트를 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 속성이 포함됩니다.
 
-<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
+<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 기본형 값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
@@ -148,13 +148,54 @@ context = OpenFeature::SDK::EvaluationContext.new(
 
 타겟팅 키는 일관된 트래픽 분산(백분율 롤아웃)에 사용됩니다. 추가 속성을 사용하면 위 예시의 '미국 사용자에 대해 활성화(enable for users in the US)' 또는 '프리미엄 등급 사용자에 대해 활성화(enable for premium tier users)'와 같은 타겟팅 규칙을 설정할 수 있습니다.
 
+## 플래그 평가 텔레메트리 및 실험 참여 제어 {#control-flag-evaluation-telemetry-and-experiment-participation}
+
+텔레메트리 옵트아웃에는 `datadog` 버전 `2.47.0` 이상이 필요합니다. Experimentation 옵트아웃에는 `datadog` 버전 `2.49.0` 이상이 필요합니다. 결합된 예제에는 `2.49.0` 이상이 필요합니다. 두 제어 항목은 독립적이며 기본적으로 비활성화되어 있습니다. 공유 동작은 [플래그 평가 및 Experimentation 옵트아웃][14]을 참조하세요.
+
+공급자를 구성하기 전에 이러한 변수를 설정하세요.
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+시작 중에 공급자를 초기화하세요. 각 평가 시 주체의 기본 설정을 전달하세요.
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+예제 타임스탬프를 주체의 저장된 기본 설정으로 바꾸세요.
+
+해당 공급자 옵션은 `enable_evaluation_telemetry_opt_out_parameter: true` 및 `experimentation_opt_out_mode: :immediate`입니다. 명시적 공급자 옵션은 배포 설정을 재정의합니다. `:disabled`을 사용하여 활성화된 배포 정책을 재정의하거나, 옵션을 생략하여 배포 설정을 사용하세요.
+
+`future_experiments_only` 또는 `experimentation_opt_out_mode: :future_experiments_only`를 사용하여 타임스탬프 이전에 활성화된 할당만 유지하세요. 두 활성화 모드 모두 형식이 잘못된 주체 타임스탬프를 `INVALID_CONTEXT`으로 거부하고 애플리케이션 기본값을 반환합니다. Future-experiments-only 모드는 이전 등록이 아닌 할당 활성화를 확인합니다.
+
+텔레메트리 옵트아웃은 애플리케이션이 활성화한 새 평가 이벤트, 평가 메트릭 및 자동 플래그 스팬 주석을 억제합니다. 노출은 적격 할당에 대해 계속 활성화됩니다. 각 요청에 대해 별도의 컨텍스트를 제공하세요. 텔레메트리를 재개하려면 Boolean `false`을 제공하거나 속성을 제거하세요. 실험을 다시 허용하려면 타임스탬프를 제거하세요. 상속된 컨텍스트 값이 적용되는 방법은 [Configure server SDKs][15]를 참조하세요.
+
 ## 플래그 평가 {#evaluate-flags}
 
 `OpenFeature` 클라이언트를 생성한 후 앱 전체에서 플래그 값을 읽기 시작할 수 있습니다. 플래그 평가는 로컬에 캐시된 데이터를 사용하므로 플래그를 평가할 때 네트워크 요청이 발생하지 않습니다.
 
 각 플래그는 고유한 문자열 _키_로 식별됩니다. 플래그는 예상되는 유형과 일치하는 값을 반환하는 유형화된 메서드를 사용하여 평가됩니다. 각 플래그가 존재하지 않거나 평가할 수 없는 경우, SDK는 제공된 기본값을 반환합니다.
 
-### 불리언 플래그 {#boolean-flags}
+### Boolean 플래그 {#boolean-flags}
 
 on/off 또는 true/false 조건을 나타내는 플래그에는 `fetch_boolean_value()`를 사용합니다.
 
@@ -254,11 +295,11 @@ puts "Error Code: #{details.error_code}"
 puts "Error Message: #{details.error_message}"
 ```
 
-Feature Flag 세부 정보는 평가 동작을 디버깅하고 사용자가 특정 값을 받은 이유를 이해하는 데 도움이 됩니다.
+Feature Flags 세부 정보는 평가 동작을 디버깅하고 사용자가 특정 값을 받은 이유를 이해하는 데 도움이 됩니다.
 
 ## 컨텍스트 없는 평가 {#evaluation-without-context}
 
-평가 컨텍스트를 제공하지 않고도 플래그를 평가할 수 있습니다. 이는 사용자별 타겟팅이 필요하지 않은 전역 플래그에 유용합니다.
+평가 컨텍스트를 제공하지 않고도 Feature Flags를 평가할 수 있습니다. 이는 사용자별 타겟팅이 필요하지 않은 전역 플래그에 유용합니다.
 
 ```ruby
 # Global feature flag - no context needed
@@ -274,7 +315,11 @@ end
 
 ## 자체 데이터 저장소에 노출 기록 {#record-exposures-in-your-own-data-store}
 
-`Datadog::OpenFeature::ExposureHook`을 사용하여 자체 로그, 데이터 웨어하우스 또는 분석 파이프라인에 노출을 기록하세요. 이 기능은 각 플래그 평가 후 공급자가 Datadog에 사용하는 것과 동일한 노출 결정으로 코드를 호출합니다. Datadog으로 노출 전송을 중지하려면 `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`를 설정하세요. 최소 SDK 요구 사항 및 기타 자세한 내용은 [자체 데이터 저장소에 Feature Flag 노출 기록][12]을 참조하세요.
+`Datadog::OpenFeature::ExposureHook`을 사용하여 자체 로그, 데이터 웨어하우스 또는 분석 파이프라인에 노출을 기록하세요. 이 기능은 각 플래그 평가 후 공급자가 Datadog에 사용하는 것과 동일한 노출 결정으로 코드를 호출합니다. Datadog으로 노출 전송을 중지하려면 `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`를 설정하세요. 최소 SDK 요구 사항 및 기타 자세한 내용은 [자체 데이터 저장소에 Feature Flags 노출 기록][12]을 참조하세요.
+
+## 평가 이벤트 및 개인정보 보호 {#evaluation-events-and-privacy}
+
+EVP 플래그 평가 이벤트에서 타겟팅 키 해싱 및 환경 제어 컨텍스트 수집을 위해 `datadog` 2.46.0 이상을 사용하세요. 이 이벤트는 기본적으로 활성화되어 있습니다. 이 이벤트 경로만 비활성화하려면 `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`을 설정하세요. 수집되는 데이터, 옵트아웃 범위 및 전달 요구 사항에 대해서는 [서버 측 평가 이벤트 및 개인정보 보호][13]를 참조하세요.
 
 ## 테스트 {#testing}
 
@@ -405,3 +450,6 @@ JAR 파일만으로는 플래그 전달을 활성화할 수 없습니다. Datado
 [10]: #use-the-java-sdk-on-jruby
 [11]: /ko/feature_flags/concepts/configuration_sources/#agent-availability
 [12]: /ko/feature_flags/guide/record_exposures_in_your_own_data_store/
+[13]: /ko/feature_flags/guide/server_evaluation_events/
+[14]: /ko/feature_flags/concepts/opt_out/
+[15]: /ko/feature_flags/concepts/opt_out/#configure-server-sdks

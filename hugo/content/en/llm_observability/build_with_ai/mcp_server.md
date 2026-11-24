@@ -89,9 +89,9 @@ After adding the configuration, run `codex mcp login datadog` to complete the OA
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-### Authenticate with API keys
+### Authenticate without OAuth
 
-The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datadog [API key and application key][6] as the `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
+The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, pass a Datadog [Personal Access Token (PAT)][13] or [Service Access Token (SAT)][14] as a bearer token in the `Authorization` header:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <pre><code>{
@@ -100,8 +100,7 @@ The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datado
       "type": "http",
       "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core",
       "headers": {
-          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
-          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
+          "Authorization": "Bearer &lt;YOUR_ACCESS_TOKEN&gt;"
       }
     }
   }
@@ -113,7 +112,7 @@ The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datado
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-For security, scope the API key and application key to a [service account][7] with only the required permissions.
+Use a PAT for an individual user or a SAT for a [service account][7]. For other authentication methods, including [API and application keys][6], see [MCP Server authentication][15].
 
 ## Agent skills
 
@@ -540,3 +539,6 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [10]: /llm_observability/investigate/annotation_queues
 [11]: /llm_observability/investigate/insights/
 [12]: /llm_observability/investigate/patterns/
+[13]: /account_management/personal-access-tokens/
+[14]: /account_management/service-access-tokens/
+[15]: /mcp_server/setup/#authentication

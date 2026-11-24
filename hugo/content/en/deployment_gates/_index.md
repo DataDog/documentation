@@ -16,6 +16,9 @@ further_reading:
 - link: "continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn how to set up CD Visibility"
+- link: "https://www.datadoghq.com/blog/deployment-gates/"
+  tag: "Blog"
+  text: "Catch incidents and pause faulty deployments automatically with Datadog Deployment Gates"
 algolia:
   tags: ["cd gates"]
 ---
@@ -47,15 +50,38 @@ A Deployment Gate configuration can be:
 
 There are two types of rules: [monitor rules](#monitor-rules) and [Watchdog Faulty Deployment Detection rules](#watchdog-faulty-deployment-detection-rules). A single gate can combine multiple rules of different types.
 
-Rules can watch health indicators over a configurable period ranging from 1 minute to 2 hours.
+Each rule watches health indicators for a configurable evaluation period of up to 2 hours.
+
+To configure each rule type, see the Rules sections of [Set Up Inline Deployment Gates][10] and [Set Up Preconfigured Deployment Gates][11].
 
 ### Monitor rules
 
-A monitor rule checks the state of one or more [monitors][1] you have already set up in Datadog. The rule fails if a monitor enters an `Alert` or `No Data` status.
+A monitor rule checks the state of one or more [monitors][1] you have already set up in Datadog. Select monitors with either a [search query](#monitor-search-queries) or a list of specific monitors.
+
+A monitor rule fails if any monitor it evaluates is in `ALERT` or `NO_DATA` state at any time during the evaluation period. It also fails if there's nothing to evaluate (for example, the query matches no monitors, or every matching monitor is muted), a specific monitor ID doesn't exist in your organization, or the rule includes more than 300 monitors.
+
+{{% collapse-content title="Monitor search queries" level="h4" id="monitor-search-queries" %}}
+Monitor search queries use the [Search Monitor syntax][4]. You can filter on static tags (`service:transaction-backend`), tags in the monitor's query (`scope:"service:transaction-backend"`), or [monitor grouping][6] tags (`group:"service:transaction-backend"`).
+
+<div class="alert alert-info">Static tag filters (such as <code>env</code> or <code>team</code>) and <code>scope</code> filters select which monitors to evaluate, including all of their groups. A <code>group</code> filter also limits evaluation to the matching groups in each monitor, so alerts on other groups don't fail the rule.</div>
+
+Example queries:
+
+- `env:prod service:transaction-backend`
+- `env:prod (service:transaction-backend OR group:"service:transaction-backend" OR scope:"service:transaction-backend")`
+- `tag:"use_deployment_gates" team:payment`
+- `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
+{{% /collapse-content %}}
+
+<br>
 
 ### Watchdog Faulty Deployment Detection rules
 
-A [Watchdog Faulty Deployment Detection][2] rule compares the deployed version against previous versions of the same service. The rule fails if the analysis detects new types of errors or a significant increase in error rates.
+A [Watchdog Faulty Deployment Detection][2] (FDD) rule compares the deployed version against previous versions of the same service. The rule fails if the analysis detects new types of errors or significant increases in error rates on any [resource][7].
+
+FDD rules support APM-instrumented services that set the `version` tag through [Unified Service Tagging][13]. Services marked as `database` or `inferred service` are not supported. To scope the analysis, you can list resources to include or to exclude (such as low-priority endpoints).
+
+The rule runs a separate analysis for each [additional primary tag][12] value, plus an aggregate analysis. To analyze only one primary tag value, specify it as `primary_tag` in the evaluation request attributes.
 
 ## Evaluations
 
@@ -86,6 +112,13 @@ An active gate returns its true verdict (`pass` or `fail`) to your pipeline. An 
 [1]: /monitors/
 [2]: /watchdog/faulty_deployment_detection/
 [3]: /deployment_gates/setup
+[4]: /monitors/manage/search/
 [5]: https://app.datadoghq.com/ci/deployment-gates/evaluations
+[6]: /monitors/manage/#triggered-monitors
+[7]: /tracing/services/resource_page/
 [8]: /deployment_gates/setup/inline
 [9]: /deployment_gates/setup/preconfigured
+[10]: /deployment_gates/setup/inline/#rules
+[11]: /deployment_gates/setup/preconfigured/#rules
+[12]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
+[13]: /getting_started/tagging/unified_service_tagging/

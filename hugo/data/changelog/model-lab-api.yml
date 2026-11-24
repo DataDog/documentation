@@ -44,3 +44,26 @@ entries:
       - PinModelLabRun
       - UnpinModelLabRun
     title: Add Model Lab project owner endpoints
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AddModelLabProjectOwner
+      - DeleteModelLabRun
+      - GetModelLabArtifactContent
+      - GetModelLabProject
+      - GetModelLabRun
+      - ListModelLabProjectArtifacts
+      - ListModelLabProjectFacetKeys
+      - ListModelLabProjectFacetValues
+      - ListModelLabProjects
+      - ListModelLabRunArtifacts
+      - ListModelLabRunFacetKeys
+      - ListModelLabRunFacetValues
+      - ListModelLabRuns
+      - PinModelLabRun
+      - RemoveModelLabProjectOwner
+      - StarModelLabProject
+      - UnpinModelLabRun
+      - UnstarModelLabProject
+    title: Document rate-limit headers on the shared 429 responses

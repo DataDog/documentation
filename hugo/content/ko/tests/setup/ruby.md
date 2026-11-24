@@ -4,11 +4,11 @@ aliases:
 - /ko/continuous_integration/tests/ruby
 - /ko/continuous_integration/tests/setup/ruby
 code_lang: ruby
-code_lang_weight: 40
+code_lang_weight: 50
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: 설명서
-  text: 컨테이너 내 테스트를 위한 환경 변수 전달
+  text: 컨테이너 내 테스트를 위한 환경 변수 전달하기
 - link: /continuous_integration/tests
   tag: 설명서
   text: 테스트 결과 및 성능 확인
@@ -100,11 +100,11 @@ Test Optimization 라이브러리를 설정하려면 테스트 프로세스를 �
 
 `DD_CIVISIBILITY_ENABLED=true` (필수)
 : Test Optimization을 활성화합니다.<br/>
-**기본**: `false`
+**기본값**: `false`
 
-`DD_ENV`(선택 사항)
+`DD_ENV` (선택 사항)
 : 테스트가 실행되는 환경의 이름입니다.<br/>
-**기본**: `(empty)`<br/>
+**기본값**: `(empty)`<br/>
 **예시**: `local`, `ci`
 
 `DD_SERVICE`(선택 사항)
@@ -112,7 +112,7 @@ Test Optimization 라이브러리를 설정하려면 테스트 프로세스를 �
 **기본값**: 리포지토리 이름<br/>
 **예시**: `my-ruby-app`
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true`(Agentless 모드 사용 시 필수)
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Agentless 모드 사용 시 필수)
 : 테스트 결과를 Datadog으로 직접 전송하기 위해 Agentless 모드를 활성화합니다.<br/>
 **기본값**: `false`
 
@@ -131,7 +131,7 @@ Test Optimization 라이브러리를 설정하려면 테스트 프로세스를 �
 `DD_TEST_SESSION_NAME`(선택 사항)
 : `unit-tests`, `integration-tests` 또는 `smoke-tests`와 같은 테스트 그룹을 식별합니다.<br/>
 **기본값**: CI 작업 이름 및 테스트 명령, 또는 CI 작업 이름을 사용할 수 없는 경우 테스트 명령입니다.<br/>
-**예**: `unit-tests`, `integration-tests`, `smoke-tests`
+**예시**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 다른 모든 [Datadog 트레이서 설정][5] 옵션도 사용할 수 있습니다.
 
@@ -196,13 +196,13 @@ RSpec, Minitest 또는 Cucumber를 사용하는 경우 **수동 테스트 API를
 
 ### 도메인 모델 {#domain-model}
 
-API는 테스트 세션, 테스트 모듈, 테스트 스위트 및 테스트란 네 개의 개념을 기반으로 합니다.
+API는 테스트 세션, 테스트 모듈, 테스트 모음 및 테스트란 네 개의 개념을 기반으로 합니다.
 
 #### 테스트 세션 {#test-session}
 
 테스트 세션은 테스트 명령 실행을 나타냅니다.
 
-테스트 세션을 시작하려면 `Datadog::CI.start_test_session`을(를) 호출하고 Datadog 서비스와 태그(예: 사용 중인 테스트 프레임워크
+테스트 세션을 시작하려면 `Datadog::CI.start_test_session` 호출 후 Datadog 서비스와 태그(예: 사용 중인 테스트 프레임워크
 등)를 전달하세요.
 
 모든 테스트가 완료되면 세션을 닫고 세션 트레이스를 백엔드로 전송하는 `Datadog::CI::TestSession#finish`를
@@ -301,7 +301,7 @@ Datadog::CI.active_test_session&.finish
 
 #### `DD_TEST_SESSION_NAME` 사용 시점 {#when-to-use-dd-test-session-name}
 
-Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 실행할 파일 목록과 같이 실행할 때마다 변경되는 문자열이 포함되어 있는 경우, Datadog은 해당 세션들이 서로 관련이 없는 것으로 간주합니다. 예:
+Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 실행할 파일 목록과 같이 실행할 때마다 변경되는 문자열이 포함되어 있는 경우, Datadog은 해당 세션들이 서로 관련이 없는 것으로 간주합니다. 예를 들면 다음과 같습니다.
 
 -   `bundle exec rspec my_spec.rb my_other_spec.rb`
 
