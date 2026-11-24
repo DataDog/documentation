@@ -4647,7 +4647,7 @@ menu:
       parent: single_step_apm
       identifier: single_step_apm_kubernetes
       weight: 2013
-    - name: Windows IIS
+    - name: Windows
       url: tracing/trace_collection/single-step-apm/windows
       parent: single_step_apm
       identifier: single_step_apm_windows
