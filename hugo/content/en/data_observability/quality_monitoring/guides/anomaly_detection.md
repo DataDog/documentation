@@ -115,7 +115,7 @@ The [model configuration settings][3] change how the model sets bounds:
 
 Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged outlier to an AI reviewer before they alert.
 
-The reviewer analyzes the metric's history. It compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
+The reviewer re-analyzes the metric's history. It compares the flagged value with earlier behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
 
 - If the reviewer finds earlier periods that match the flagged value's pattern and timing, it prevents the alert. The monitor widens the bounds at that point to include the observed value.
 - If the reviewer doesn't dismiss the point, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
