@@ -131,7 +131,7 @@ kubectl create secret generic byoc-postgres \
 
 Use the database connection parameters required by your PostgreSQL service, including TLS parameters where required. URL-encode special characters in the username and password.
 
-## Create the cluster {#create-the-byoc-cluster}
+## Create the BYOC cluster {#create-the-byoc-cluster}
 
 Save the following configuration as `byoc-cluster.yaml`. Replace `<AWS_ACCOUNT_ID>`, `<BYOC_ROLE>`, `<PIPELINE_ID>`, and `<S3_BUCKET>`. Set the AWS region to match the bucket and set `spec.datadog.site` to your [Datadog site][13]. Replace `<SOURCE_PORT_NAME>` and `<SOURCE_PORT>` with the [port name and numeric port][19] for the source you configured in the pipeline.
 
