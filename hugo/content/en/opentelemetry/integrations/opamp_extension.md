@@ -46,7 +46,6 @@ extensions:
         endpoint: ${env:DD_OPAMP_ENDPOINT}
         headers:
           DD-API-KEY: ${env:DD_API_KEY}
-    instance_uid: ${env:OTELCOL_INSTANCE_UID}
 
 service:
   extensions: [opamp]
@@ -56,14 +55,13 @@ Set the following environment variables:
 
 - `DD_OPAMP_ENDPOINT`: The Datadog OpAMP endpoint for your [Datadog site][10].
 - `DD_API_KEY`: Your [Datadog API key][7].
-- `OTELCOL_INSTANCE_UID`: A stable identifier for this Collector. See [Set a stable Collector identity](#2-set-a-stable-collector-identity).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Set `DD_OPAMP_ENDPOINT` to the OpAMP endpoint for your Datadog site: {{< region-param key="opamp_endpoint" code="true" >}}.
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-**[Placeholder: Confirm whether the OpAMP endpoint is available on US1-FED and US2-FED.]**
+The OpAMP endpoint isn't available on US1-FED or US2-FED.
 {{< /site-region >}}
 
 The extension's `reports_health`, `reports_effective_config`, and `reports_available_components` capabilities are on by default. Don't turn them off. Fleet Automation uses them as follows:
@@ -74,22 +72,23 @@ The extension's `reports_health`, `reports_effective_config`, and `reports_avail
 | `reports_effective_config` | The Collector's configuration and recommendations based on it | Recommendations that depend on the configuration don't appear. |
 | `reports_available_components` | Recommendations based on the Collector's components and versions | Recommendations that depend on components don't appear. |
 
-### 2. Set a stable Collector identity
+### 2. (Optional) Identify individual Collectors
 
-Fleet Automation identifies each Collector by its OpAMP `instance_uid`. If you don't set `instance_uid`, the extension generates a new one each time the Collector starts, and each restart appears in Fleet Automation as a new Collector.
+Fleet Automation identifies each Collector by its OpAMP `instance_uid`. If you don't set `instance_uid`, the extension generates a new one each time the Collector starts. After each deployment, Fleet Automation lists Collectors that no longer run, and Collector health shows them as no longer reporting.
 
-To keep one record per Collector, set `instance_uid` to a UUIDv7, in canonical 36-character string format, that is unique to each Collector and stays the same across restarts.
+To reduce this noise and make individual Collectors easier to identify:
 
-**[Placeholder: How to generate and persist `instance_uid`, for example on Kubernetes.]**
+- Tag your Collectors under `service.telemetry.resource`:
 
-Optionally, set the Collector's `service.instance.id` resource attribute to the same value. The Collector's internal telemetry then uses the same identity as Fleet Automation:
+  ```yaml
+  service:
+    telemetry:
+      resource:
+        deployment.environment.name: production
+        k8s.cluster.name: <CLUSTER_NAME>
+  ```
 
-```yaml
-service:
-  telemetry:
-    resource:
-      service.instance.id: ${env:OTELCOL_INSTANCE_UID}
-```
+- Give each Collector a persistent instance ID with the [OpAMP Supervisor][12], which generates and stores the ID. On Kubernetes, this requires a custom image that includes both the Supervisor and the Collector, and persistent storage for the ID. For gateway Collectors, you can leave `instance_uid` unset.
 
 ### 3. Send the Collector's internal telemetry
 
@@ -107,13 +106,10 @@ extensions:
         endpoint: ${env:DD_OPAMP_ENDPOINT}
         headers:
           DD-API-KEY: ${env:DD_API_KEY}
-    instance_uid: ${env:OTELCOL_INSTANCE_UID}
 
 service:
   extensions: [opamp]
   telemetry:
-    resource:
-      service.instance.id: ${env:OTELCOL_INSTANCE_UID}
     metrics:
       readers:
         - periodic:
@@ -153,3 +149,4 @@ To see which Fleet Automation features each kind of Collector supports, see [Fle
 [9]: /opentelemetry/setup/otlp_ingest/metrics/
 [10]: /getting_started/site
 [11]: https://app.datadoghq.com/fleet
+[12]: https://opentelemetry.io/docs/collector/management/
