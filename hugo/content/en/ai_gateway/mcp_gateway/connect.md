@@ -18,8 +18,8 @@ The {{< ui >}}My servers{{< /ui >}} page shows the MCP servers your organization
 
 ## Before you begin
 
-- You need the `mcp_gateway_usage` permission. See the [MCP Gateway prerequisites](/ai_gateway/mcp_gateway/#prerequisites).
-- An administrator must [register the servers](/ai_gateway/mcp_gateway/servers/) and [give you access](/ai_gateway/mcp_gateway/access_control/) to them.
+- You need the `mcp_gateway_usage` permission. See the [MCP Gateway prerequisites][3].
+- An administrator must [register the servers][4] and [give you access][5] to them.
 - Your MCP client must support remote MCP servers over HTTP, and MCP protocol version `2026-07-28` or later.
 
 ## Find your servers
@@ -103,7 +103,7 @@ URL: https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/mcp
 
 ### Sign in
 
-The client configuration contains no credential. MCP Gateway supports OAuth sign-in with Datadog: a client that supports MCP authorization finds the Datadog authorization server from the gateway URL and prompts you to sign in. For scripts and clients that cannot sign in with OAuth, see [Authenticate](/ai_gateway/mcp_gateway/tools/#authenticate).
+The client configuration contains no credential. MCP Gateway supports OAuth sign-in with Datadog: a client that supports MCP authorization finds the Datadog authorization server from the gateway URL and prompts you to sign in. For scripts and clients that cannot sign in with OAuth, see the [Authenticate][6] section of Call Tools Through MCP Gateway.
 
 After you sign in, your client lists the tools of every server you can use, named `<SERVER_SLUG>__<TOOL_NAME>`.
 
@@ -128,7 +128,7 @@ https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/mcp?search=tru
 https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/mcp?slug=<SERVER_SLUG>&search=true
 ```
 
-See [Search mode](/ai_gateway/mcp_gateway/tools/#search-mode) for how each tool behaves.
+For how each tool behaves, see the [Search mode][7] section of Call Tools Through MCP Gateway.
 
 ## Troubleshooting
 
@@ -145,7 +145,7 @@ The connect button is unavailable
 : Datadog could not load how the server connects. Reload the page.
 
 Your client lists no tools from a server
-: Confirm that the server's card shows {{< ui >}}Connected{{< /ui >}}, then start a new session in your client. If the client cannot connect at all, see [Errors](/ai_gateway/mcp_gateway/tools/#errors).
+: Confirm that the server's card shows {{< ui >}}Connected{{< /ui >}}, then start a new session in your client. If the client cannot connect at all, see the [Errors][8] section of Call Tools Through MCP Gateway.
 
 ## Further reading
 
@@ -153,3 +153,9 @@ Your client lists no tools from a server
 
 [1]: https://app.datadoghq.com/llm/gateway/mcp/portal
 [2]: /getting_started/site/
+[3]: /ai_gateway/mcp_gateway/#prerequisites
+[4]: /ai_gateway/mcp_gateway/servers/
+[5]: /ai_gateway/mcp_gateway/access_control/
+[6]: /ai_gateway/mcp_gateway/tools/#authenticate
+[7]: /ai_gateway/mcp_gateway/tools/#search-mode
+[8]: /ai_gateway/mcp_gateway/tools/#errors

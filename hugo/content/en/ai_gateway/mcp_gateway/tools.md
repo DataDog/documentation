@@ -21,9 +21,9 @@ MCP Gateway is an MCP server that combines the tools of your organization's regi
 
 ## Before you begin
 
-- The caller needs the `mcp_gateway_usage` permission. See the [MCP Gateway prerequisites](/ai_gateway/mcp_gateway/#prerequisites).
-- At least one [registered](/ai_gateway/mcp_gateway/servers/), enabled, and connected server that the caller [can use](/ai_gateway/mcp_gateway/access_control/).
-- To set up an MCP client instead of sending requests yourself, see [Connect to MCP Servers](/ai_gateway/mcp_gateway/connect/).
+- The caller needs the `mcp_gateway_usage` permission. See the [MCP Gateway prerequisites][3].
+- At least one [registered][4], enabled, and connected server that the caller [can use][5].
+- To set up an MCP client instead of sending requests yourself, see [Connect to MCP Servers][6].
 
 ## Endpoints
 
@@ -35,9 +35,9 @@ https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/mcp
 
 | Endpoint | Use |
 |---|---|
-| `POST /mcp` | The MCP endpoint, for MCP clients |
-| `GET /mcp/api/tools` | [REST endpoint](#rest-endpoints) that lists tools, for scripts |
-| `POST /mcp/api/tools/<TOOL_NAME>` | [REST endpoint](#rest-endpoints) that calls a tool, for scripts |
+| `POST /mcp` | The MCP endpoint, for MCP clients. |
+| `GET /mcp/api/tools` | REST endpoint that lists tools, for scripts. See the [REST endpoints](#rest-endpoints) section. |
+| `POST /mcp/api/tools/<TOOL_NAME>` | REST endpoint that calls a tool, for scripts. See the [REST endpoints](#rest-endpoints) section. |
 
 The MCP endpoint uses the Streamable HTTP transport and is stateless: it keeps no session between requests. It requires MCP protocol version `2026-07-28` or later, which it reads from the `MCP-Protocol-Version` request header. MCP Gateway serves tools only. It does not serve MCP resources or prompts.
 
@@ -68,7 +68,7 @@ On the MCP endpoint, query parameters choose the servers and the tool names a cl
 | `/mcp` | Every server the caller can use | `<SERVER_SLUG>__<TOOL_NAME>` |
 | `/mcp?slug=<SERVER_SLUG>` | One server | The server's own tool names |
 | `/mcp?slug=<SLUG_1>,<SLUG_2>` | The named servers, up to 20 | `<SERVER_SLUG>__<TOOL_NAME>` |
-| Any of the above with `search=true` | The same servers | Four [search mode](#search-mode) tools |
+| Any of the previous URLs with `search=true` | The same servers | Four tools, described in the [Search mode](#search-mode) section |
 
 The parameter is `slug`, singular. If a slug matches no server the caller can use, listing tools fails with `unknown server slug`. A call to a tool on a server outside the chosen servers is refused as an unknown tool.
 
@@ -185,6 +185,8 @@ The REST endpoints differ from the MCP endpoint in the following ways:
 
 ## Errors
 
+MCP Gateway returns the following errors on the MCP endpoint and the REST endpoints:
+
 | Case | MCP endpoint | REST endpoints |
 |---|---|---|
 | Missing or invalid credentials | HTTP `401` | HTTP `401` |
@@ -200,17 +202,19 @@ The REST endpoints differ from the MCP endpoint in the following ways:
 | Malformed `search` or `slug` query parameter | HTTP `400` | Ignored |
 | The request body is not a JSON object, or is larger than 1 MiB | Does not apply | HTTP `400` or `413` |
 
-A call refused by server access or a policy returns the same `unknown tool` response as a call to a tool name that matches no server. To find out why a call was refused, check the tool call's [outcome](/ai_gateway/mcp_gateway/observability/#tool-call-outcomes) in Agent Observability.
+A call refused by server access or a policy returns the same `unknown tool` response as a call to a tool name that matches no server. To find out why a call was refused, check the tool call's outcome in Agent Observability. See the [Tool call outcomes][7] section of Observe MCP Tool Activity.
 
 ### A server's tools are missing from the list
 
 `tools/list` succeeds even when one server cannot be listed. If a server's tools are missing:
 
 - Confirm that the server is enabled and connected, and that the caller's own account is connected for a server with per-user credentials.
-- Confirm the caller's [access](/ai_gateway/mcp_gateway/access_control/) to the server or to a policy that lists its tools.
+- Confirm the caller's [access][5] to the server or to a policy that lists its tools.
 - Check the server itself. MCP Gateway leaves out a server that takes more than 10 seconds to list its tools, or that returns more than 1,500 tools or 4,000,000 bytes.
 
 ## Limitations
+
+MCP Gateway has the following limitations:
 
 - MCP Gateway serves tools only.
 - Request and result metadata (`_meta`) is not forwarded between the client and the server. This includes progress tokens, so tools cannot report progress.
@@ -223,3 +227,8 @@ A call refused by server access or a policy returns the same `unknown tool` resp
 
 [1]: /getting_started/site/
 [2]: /account_management/personal-access-tokens/
+[3]: /ai_gateway/mcp_gateway/#prerequisites
+[4]: /ai_gateway/mcp_gateway/servers/
+[5]: /ai_gateway/mcp_gateway/access_control/
+[6]: /ai_gateway/mcp_gateway/connect/
+[7]: /ai_gateway/mcp_gateway/observability/#tool-call-outcomes

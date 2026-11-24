@@ -17,24 +17,24 @@ further_reading:
 MCP Gateway is in Preview.
 {{< /callout >}}
 
-MCP Gateway puts your organization's [Model Context Protocol (MCP)][1] servers behind one Datadog endpoint. An administrator registers each server once, stores its credentials in Datadog, and decides who can use the server and which of its tools. Users add one URL to their MCP client, sign in with Datadog, and call the tools they are allowed to use.
+MCP Gateway puts your organization's [Model Context Protocol (MCP)][1] servers behind one Datadog endpoint. An administrator registers each server one time, stores its credentials in Datadog, and decides who can use the server and which of its tools. Users add one URL to their MCP client, sign in with Datadog, and call the tools they are allowed to use.
 
 Because every tool call passes through one control point, you can:
 
 - Give agents and coding assistants one URL for every approved MCP server
 - Keep server credentials in Datadog instead of in each user's client configuration
-- Control who can use each server, down to individual tools, with [server access and policies](/ai_gateway/mcp_gateway/access_control/)
+- Control who can use each server, down to individual tools, with [server access and policies][4]
 - Let users connect their own accounts to servers that need per-user credentials
-- Review tool calls, errors, and latency on the [Overview](/ai_gateway/mcp_gateway/observability/) page, in Agent Observability, and in Audit Trail
+- Review tool calls, errors, and latency on the [Overview][5] page, in Agent Observability, and in Audit Trail
 
-MCP Gateway is part of AI Gateway, but it handles different traffic. AI Gateway routes model requests to LLM providers at `/ai/v1`. MCP Gateway routes tool calls to MCP servers at `/mcp`. MCP Gateway has its own permissions and its own pages under {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}MCP Gateway{{< /ui >}}. It is also separate from the [Datadog MCP Server][2], which gives agents access to your Datadog data.
+MCP Gateway is part of AI Gateway, but it handles different traffic. AI Gateway routes model requests to large language model (LLM) providers at `/ai/v1`. MCP Gateway routes tool calls to MCP servers at `/mcp`. MCP Gateway has its own permissions and its own pages under {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}MCP Gateway{{< /ui >}}. It is also separate from the [Datadog MCP Server][2], which gives agents access to your Datadog data.
 
 ## How it works
 
-1. An administrator [registers an MCP server](/ai_gateway/mcp_gateway/servers/) with its URL, a short slug, and an authentication method.
+1. An administrator [registers an MCP server][6] with its URL, a short slug, and an authentication method.
 2. The administrator connects a shared credential that every permitted user calls through, or lets each user connect their own account.
-3. The administrator sets [who can use the server and its tools](/ai_gateway/mcp_gateway/access_control/).
-4. Users [add the gateway URL to their MCP client](/ai_gateway/mcp_gateway/connect/) and sign in with Datadog.
+3. The administrator sets [who can use the server and its tools][4].
+4. Users [add the gateway URL to their MCP client][7] and sign in with Datadog.
 5. MCP Gateway lists the tools each user can use, named `<SERVER_SLUG>__<TOOL_NAME>`, and forwards each call to the server with the stored credential.
 6. MCP Gateway records each tool call as a span in Agent Observability and as an event in Audit Trail.
 
@@ -67,11 +67,11 @@ MCP Gateway permissions are separate from the `ai_gateway_*` permissions. A user
 
 | Task | Guide |
 |---|---|
-| Add an MCP server, connect its credential, and check its tools | [Register MCP Servers](/ai_gateway/mcp_gateway/servers/) |
-| Decide who can use each server and tool | [Control Server and Tool Access](/ai_gateway/mcp_gateway/access_control/) |
-| Connect your own account and set up an MCP client | [Connect to MCP Servers](/ai_gateway/mcp_gateway/connect/) |
-| List and call tools from an MCP client or a script | [Call Tools](/ai_gateway/mcp_gateway/tools/) |
-| Review tool calls, errors, and latency | [Observe MCP Tool Activity](/ai_gateway/mcp_gateway/observability/) |
+| Add an MCP server, connect its credential, and check its tools | [Register MCP Servers][6] |
+| Decide who can use each server and tool | [Control Server and Tool Access][4] |
+| Connect your own account and set up an MCP client | [Connect to MCP Servers][7] |
+| List and call tools from an MCP client or a script | [Call Tools][8] |
+| Review tool calls, errors, and latency | [Observe MCP Tool Activity][5] |
 
 ## Further reading
 
@@ -80,3 +80,8 @@ MCP Gateway permissions are separate from the `ai_gateway_*` permissions. A user
 [1]: https://modelcontextprotocol.io/
 [2]: /mcp_server/
 [3]: /account_management/rbac/
+[4]: /ai_gateway/mcp_gateway/access_control/
+[5]: /ai_gateway/mcp_gateway/observability/
+[6]: /ai_gateway/mcp_gateway/servers/
+[7]: /ai_gateway/mcp_gateway/connect/
+[8]: /ai_gateway/mcp_gateway/tools/

@@ -26,8 +26,8 @@ The MCP Gateway {{< ui >}}Overview{{< /ui >}} page charts the spans. MCP Gateway
 
 ## Before you begin
 
-- You need the `mcp_gateway_config_read` permission to open the {{< ui >}}Overview{{< /ui >}} page. See the [MCP Gateway prerequisites](/ai_gateway/mcp_gateway/#prerequisites).
-- Tool calls appear after users [call tools](/ai_gateway/mcp_gateway/tools/) through MCP Gateway.
+- You need the `mcp_gateway_config_read` permission to open the {{< ui >}}Overview{{< /ui >}} page. See the [MCP Gateway prerequisites][5].
+- Tool calls appear after users [call tools][6] through MCP Gateway.
 
 ## Review the Overview page
 
@@ -40,18 +40,18 @@ Five cards summarize the selected period and compare it with the period of the s
 | Card | Description |
 |---|---|
 | {{< ui >}}Tool calls{{< /ui >}} | The number of tool calls, including failed and refused calls. |
-| {{< ui >}}Error rate{{< /ui >}} | The percentage of tool calls whose [outcome](#tool-call-outcomes) is not `ok`. |
+| {{< ui >}}Error rate{{< /ui >}} | The percentage of tool calls whose outcome is not `ok`. See the [Tool call outcomes](#tool-call-outcomes) section. |
 | {{< ui >}}p95 latency{{< /ui >}} | The 95th percentile of tool call duration, as measured by MCP Gateway. |
 | {{< ui >}}Active users{{< /ui >}} | The number of distinct users who called a tool. |
 | {{< ui >}}Servers used{{< /ui >}} | The number of distinct servers that tool calls reached. |
 
-The charts below the cards are grouped into three sections:
+The charts after the cards are grouped into three sections:
 
 | Section | Chart | Description |
 |---|---|---|
 | {{< ui >}}Usage{{< /ui >}} | {{< ui >}}Tool calls over time{{< /ui >}} | Tool calls grouped by {{< ui >}}Server{{< /ui >}}, {{< ui >}}Tool{{< /ui >}}, or {{< ui >}}User{{< /ui >}} |
 | {{< ui >}}Usage{{< /ui >}} | {{< ui >}}Top tools by calls{{< /ui >}} and {{< ui >}}Top users by calls{{< /ui >}} | The 10 most-called tools and the 10 users with the most calls |
-| {{< ui >}}Errors{{< /ui >}} | {{< ui >}}Errors over time by type{{< /ui >}} | Failed calls grouped by [outcome](#tool-call-outcomes) |
+| {{< ui >}}Errors{{< /ui >}} | {{< ui >}}Errors over time by type{{< /ui >}} | Failed calls grouped by outcome |
 | {{< ui >}}Errors{{< /ui >}} | {{< ui >}}Error rate by server{{< /ui >}} | The percentage of each server's calls that failed |
 | {{< ui >}}Latency{{< /ui >}} | {{< ui >}}Latency over time{{< /ui >}} | Average, p75, p90, and p95 tool call duration |
 | {{< ui >}}Latency{{< /ui >}} | {{< ui >}}Latency by tool{{< /ui >}} | The 10 tools with the highest average duration |
@@ -62,11 +62,11 @@ To investigate, click a chart series, a ranking row, or a table row. The Agent O
 
 ### Interpret the Overview
 
-- **Error rate is not a server health metric.** It counts every outcome except `ok`. That includes calls refused by server access or a policy, calls to unknown tools, calls with arguments the server rejected, and calls where the tool reported its own failure. To review server health, check the `upstream_error` and `timeout` series in {{< ui >}}Errors over time by type{{< /ui >}}.
-- **Charts by server leave out calls that did not reach a server.** Refused calls and calls to unknown tools are not attributed to a server. {{< ui >}}Servers used{{< /ui >}}, {{< ui >}}Error rate by server{{< /ui >}}, and the {{< ui >}}Server{{< /ui >}} grouping exclude them, so the totals by server can be lower than {{< ui >}}Tool calls{{< /ui >}}.
-- **Rankings are not weighted by volume.** In {{< ui >}}Error rate by server{{< /ui >}}, a server with one call that failed ranks at 100%. {{< ui >}}Latency by tool{{< /ui >}} ranks by average duration, not by number of calls.
-- **Latency includes calls that ended early.** Refused calls and calls to unknown tools end quickly and lower the percentiles.
-- **Search mode lookups are not tool calls.** In [search mode](/ai_gateway/mcp_gateway/tools/#search-mode), `tool_search`, `list_tools`, and `get_tool_definition` are not counted. A tool called through `execute_tool` is counted under the tool's own name.
+- **Error rate**: The error rate counts every outcome except `ok`, so it is not a server health metric. It includes calls refused by server access or a policy, calls to unknown tools, calls with arguments the server rejected, and calls where the tool reported its own failure. To review server health, check the `upstream_error` and `timeout` series in {{< ui >}}Errors over time by type{{< /ui >}}.
+- **Charts by server**: Calls that did not reach a server are left out. Refused calls and calls to unknown tools are not attributed to a server. {{< ui >}}Servers used{{< /ui >}}, {{< ui >}}Error rate by server{{< /ui >}}, and the {{< ui >}}Server{{< /ui >}} grouping exclude them, so the totals by server can be lower than {{< ui >}}Tool calls{{< /ui >}}.
+- **Rankings**: The rankings are not weighted by volume. In {{< ui >}}Error rate by server{{< /ui >}}, a server with one call that failed ranks at 100%. {{< ui >}}Latency by tool{{< /ui >}} ranks by average duration, not by number of calls.
+- **Latency**: The percentiles include calls that ended early. Refused calls and calls to unknown tools take little time and lower the percentiles.
+- **Search mode**: Lookups are not counted as tool calls. This applies to `tool_search`, `list_tools`, and `get_tool_definition`. See the [Search mode][7] section of Call Tools Through MCP Gateway. A tool called through `execute_tool` is counted under the tool's own name.
 
 ## Find tool calls in Agent Observability
 
@@ -78,20 +78,20 @@ dd.mcp_gateway_frntr:true
 
 Add tags to narrow the search, for example `mcp_tool:<SERVER_SLUG>__<TOOL_NAME>` or `gateway_outcome:policy_denied`.
 
-Each span is named for the tool, in the form `<SERVER_SLUG>__<TOOL_NAME>`. By default, spans appear under the `datadog-mcp-gateway` application. Spans are sent asynchronously and on a best-effort basis: a call can take some time to appear, and a span can be missing when MCP Gateway is under heavy load. When you need a record of each call, use [Audit Trail](#review-tool-calls-in-audit-trail).
+Each span is named for the tool, in the form `<SERVER_SLUG>__<TOOL_NAME>`. By default, spans appear under the `datadog-mcp-gateway` application. Spans are sent asynchronously and on a best-effort basis: a call can take some time to appear, and a span can be missing when MCP Gateway is under heavy load. When you need a record of each call, use Audit Trail, described in the [Review tool calls in Audit Trail](#review-tool-calls-in-audit-trail) section.
 
 | Tag | Description |
 |---|---|
 | `mcp_tool` | The tool name in the form `<SERVER_SLUG>__<TOOL_NAME>`. This form is used even when the client connected to one server and called the tool by its own name. |
 | `mcp_server_namespace` | The slug of the server that the call reached. Absent when the call did not reach a server. |
 | `mcp_server_id` | The ID of the server that the call reached. Absent when the call did not reach a server. |
-| `gateway_outcome` | How the call ended. See [Tool call outcomes](#tool-call-outcomes). |
+| `gateway_outcome` | How the call ended. See the [Tool call outcomes](#tool-call-outcomes) section. |
 | `gateway_ingress` | `mcp` for the MCP endpoint, or `api` for the REST endpoints. |
 | `gateway_scope` | `single` when the client connected to one server's URL, or `mux` otherwise. |
 | `user_id`, `user_handle`, `user_email` | The user who made the call. |
 | `error_type` | The outcome of a failed call. |
 | `mcp_policy_decision` | `allow` or `deny`: the result of the access check. |
-| `mcp_policy_id` | The ID of each [policy](/ai_gateway/mcp_gateway/access_control/) that lists the tool. Absent when server access decided. |
+| `mcp_policy_id` | The ID of each [policy][8] that lists the tool. Absent when server access decided. |
 | `mcp_tool_blocked` | `true` when a policy refused the call. |
 
 ### Tool call outcomes
@@ -147,3 +147,7 @@ Each event includes the tool name, the tool's name on its server, the call's dur
 [2]: https://app.datadoghq.com/llm/gateway/mcp/overview
 [3]: https://app.datadoghq.com/llm/traces
 [4]: /llm_observability/
+[5]: /ai_gateway/mcp_gateway/#prerequisites
+[6]: /ai_gateway/mcp_gateway/tools/
+[7]: /ai_gateway/mcp_gateway/tools/#search-mode
+[8]: /ai_gateway/mcp_gateway/access_control/

@@ -26,16 +26,16 @@ A tool in a policy follows only its policies. A tool in no policy follows its se
 
 ## Before you begin
 
-- Review the [MCP Gateway prerequisites](/ai_gateway/mcp_gateway/#prerequisites). You need `mcp_gateway_config_read` to view access and `mcp_gateway_config_write` to change it.
-- [Register and connect](/ai_gateway/mcp_gateway/servers/) the servers you want to govern.
+- Review the [MCP Gateway prerequisites][3]. You need `mcp_gateway_config_read` to view access and `mcp_gateway_config_write` to change it.
+- [Register and connect][4] the servers you want to govern.
 - Users who call tools need the `mcp_gateway_usage` permission in addition to the access described on this page.
 
 ## How access is decided
 
 | Tool | Who can use it |
 |---|---|
-| No policy lists the tool | Users with **Runner** or **Editor** access to the tool's server |
-| One or more policies list the tool | Users with **Runner** or **Editor** access to at least one of those policies |
+| No policy lists the tool | Users with {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access to the tool's server |
+| One or more policies list the tool | Users with {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access to at least one of those policies |
 
 A policy replaces server access for the tools it lists, in both directions:
 
@@ -50,9 +50,9 @@ Servers and policies use the same access levels:
 
 | Access level | On a server | On a policy |
 |---|---|---|
-| **Viewer** | Cannot use the server's tools | Cannot use the policy's tools |
-| **Runner** | Can use the server's tools that no policy lists | Can use the policy's tools |
-| **Editor** | Can use the server's tools, change the server, and change who has access to it | Can use the policy's tools, and change the policy and who has access to it |
+| {{< ui >}}Viewer{{< /ui >}} | Cannot use the server's tools | Cannot use the policy's tools |
+| {{< ui >}}Runner{{< /ui >}} | Can use the server's tools that no policy lists | Can use the policy's tools |
+| {{< ui >}}Editor{{< /ui >}} | Can use the server's tools, change the server, and change who has access to it | Can use the policy's tools, and change the policy and who has access to it |
 
 A new server is restricted to the person who created it. A new policy can be used only by the person who created it until you give others access. The creator of a policy is always one of its editors.
 
@@ -73,12 +73,12 @@ The same panel appears on the {{< ui >}}Access{{< /ui >}} step when you add a se
 1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}MCP Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}}][2] and click {{< ui >}}New policy{{< /ui >}}. Alternatively, select tools on a server's {{< ui >}}Tools{{< /ui >}} tab and click {{< ui >}}Create policy{{< /ui >}}.
 2. Enter a {{< ui >}}Name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}. The {{< ui >}}Slug{{< /ui >}} is suggested from the name and cannot be changed after you create the policy.
 3. Under {{< ui >}}Tools{{< /ui >}}, click {{< ui >}}Add tools{{< /ui >}}. Choose a {{< ui >}}Server{{< /ui >}}, select its tools, and repeat for each server the policy covers.
-4. Under {{< ui >}}Who can use these tools{{< /ui >}}, click {{< ui >}}Edit access{{< /ui >}}. Add the users, teams, and roles who need the tools, and give them **Runner** access. The summary reads {{< ui >}}Only you{{< /ui >}} until you add someone.
+4. Under {{< ui >}}Who can use these tools{{< /ui >}}, click {{< ui >}}Edit access{{< /ui >}}. Add the users, teams, and roles who need the tools, and give them {{< ui >}}Runner{{< /ui >}} access.
 5. Click {{< ui >}}Create policy{{< /ui >}}.
 
-The policy applies as soon as you create it.
+Until you add someone, the {{< ui >}}Who can use these tools{{< /ui >}} summary reads {{< ui >}}Only you{{< /ui >}}. The policy applies as soon as you create it.
 
-<div class="alert alert-warning">When you create a policy, <strong>Restore Full Access</strong> in the access dialog removes every restriction from the new policy. Everyone in your organization can then use the policy's tools, and anyone with <code>mcp_gateway_config_write</code> can change or delete the policy.</div>
+<div class="alert alert-danger">When you create a policy, <strong>Restore Full Access</strong> in the access dialog removes every restriction from the new policy. Everyone in your organization can then use the policy's tools, and anyone with <code>mcp_gateway_config_write</code> can change or delete the policy.</div>
 
 A policy can list only tools that MCP Gateway has already found on a server. If a tool is not offered, open the server's {{< ui >}}Tools{{< /ui >}} tab, click {{< ui >}}Refresh{{< /ui >}}, and try again.
 
@@ -115,7 +115,7 @@ On a server's {{< ui >}}Tools{{< /ui >}} tab, the {{< ui >}}Access{{< /ui >}} co
 
 ## Required permissions
 
-In addition to the `mcp_gateway_config_write` permission, each change requires **Editor** access to the resources it affects:
+In addition to the `mcp_gateway_config_write` permission, each change requires {{< ui >}}Editor{{< /ui >}} access to the resources it affects:
 
 | Task | Editor access required on |
 |---|---|
@@ -130,10 +130,10 @@ Adding or removing a policy's tools depends on the servers, not on the policy. A
 ## What users see
 
 - **Listing tools**: A tool the user cannot use is left out of the list. A server with no tools the user can use is left out entirely.
-- **Calling tools**: A call to a tool the user cannot use is refused as an unknown tool, the same response as for a tool name that matches no server. The reason is recorded on the tool call's span as the outcome `policy_denied` or `server_access_denied`. See [Tool call outcomes](/ai_gateway/mcp_gateway/observability/#tool-call-outcomes).
-- **My servers**: The {{< ui >}}My servers{{< /ui >}} page lists the servers a user has **Runner** or **Editor** access to. A user who reaches a server's tools only through a policy sees those tools in their client, but does not see the server on {{< ui >}}My servers{{< /ui >}}.
+- **Calling tools**: A call to a tool the user cannot use is refused as an unknown tool, the same response as for a tool name that matches no server. The reason is recorded on the tool call's span as the outcome `policy_denied` or `server_access_denied`. See the [Tool call outcomes][5] section of Observe MCP Tool Activity.
+- **My servers**: The {{< ui >}}My servers{{< /ui >}} page lists the servers a user has {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access to. A user who reaches a server's tools only through a policy sees those tools in their client, but does not see the server on {{< ui >}}My servers{{< /ui >}}.
 
-MCP Gateway serves a tool only when its server is enabled and connected. For a server with per-user credentials, a user needs **Runner** or **Editor** access to the server to connect their own account, so a policy alone does not give them the server's tools.
+MCP Gateway serves a tool only when its server is enabled and connected. For a server with per-user credentials, a user needs {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access to the server to connect their own account, so a policy alone does not give them the server's tools.
 
 If MCP Gateway cannot check a user's access, it lists and calls nothing for that request, and the client receives an upstream error.
 
@@ -146,14 +146,16 @@ If MCP Gateway cannot check a user's access, it lists and calls nothing for that
 
 Use a test server with a shared credential, and a test user who has `mcp_gateway_usage` and no access to that server.
 
-1. As the test user, list tools through the [gateway URL](/ai_gateway/mcp_gateway/tools/). Confirm that the server's tools are not listed.
-2. As an administrator, create a policy that lists one of the server's tools, and give the test user **Runner** access to the policy.
+1. As the test user, list tools through the [gateway URL][6]. Confirm that the server's tools are not listed.
+2. As an administrator, create a policy that lists one of the server's tools, and give the test user {{< ui >}}Runner{{< /ui >}} access to the policy.
 3. As the test user, list tools again. Confirm that the list includes the tool in the policy and no other tool from that server.
 4. Call the tool and confirm that it returns a result. Call a second tool on the same server and confirm that the call is refused as an unknown tool.
 5. As an administrator, remove the test user from the policy. Confirm that the tool is no longer listed for the test user.
-6. Find the calls in [Agent Observability](/ai_gateway/mcp_gateway/observability/#find-tool-calls-in-agent-observability) and check each call's outcome.
+6. Find the calls in Agent Observability and check each call's outcome. See the [Find tool calls in Agent Observability][7] section of Observe MCP Tool Activity.
 
 ## Limits
+
+MCP Gateway applies the following limits to each policy:
 
 | Item | Limit |
 |---|---|
@@ -168,3 +170,8 @@ Use a test server with a shared credential, and a test user who has `mcp_gateway
 
 [1]: https://app.datadoghq.com/llm/gateway/mcp
 [2]: https://app.datadoghq.com/llm/gateway/mcp/policies
+[3]: /ai_gateway/mcp_gateway/#prerequisites
+[4]: /ai_gateway/mcp_gateway/servers/
+[5]: /ai_gateway/mcp_gateway/observability/#tool-call-outcomes
+[6]: /ai_gateway/mcp_gateway/tools/
+[7]: /ai_gateway/mcp_gateway/observability/#find-tool-calls-in-agent-observability
