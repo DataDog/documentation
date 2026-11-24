@@ -7,7 +7,7 @@ further_reading:
   text: "Infrastructure overlay"
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
-  text: "Observability overlay"
+  text: "Agent overlay"
 - link: "/datadog_cloudcraft/overlays/security/"
   tag: "Documentation"
   text: "Security overlay"
@@ -36,7 +36,7 @@ You can also filter by region to focus on specific parts of your infrastructure.
 
 ### Resource details
 
-Click a resource to open the side panel, which displays:
+Click a resource to open a mini panel, then click {{< ui >}}View Full Details{{< /ui >}} to open the side panel, which displays:
 
 - Cost breakdown for the last 30 days
 - Tag information associated with the resource
@@ -44,7 +44,7 @@ Click a resource to open the side panel, which displays:
 
 **Note**: The time range defaults to the last 30 days and is not configurable.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view_2.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view_3.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
 
 ## Recommendations view
 
@@ -57,7 +57,7 @@ Use the filter at the bottom of the screen to narrow recommendations by:
 
 ### Resource details
 
-Clicking a resource opens a detailed side panel with:
+Clicking a resource opens a mini panel. Click {{< ui >}}View Full Details{{< /ui >}} to open a detailed side panel with:
 
 - Current and projected monthly costs
 - A description of recommended changes
@@ -66,7 +66,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_6.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_7.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
 
 ## Further reading
 

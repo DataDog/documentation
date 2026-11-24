@@ -7,7 +7,7 @@ further_reading:
   text: "Infrastructure overlay"
 - link: "/datadog_cloudcraft/overlays/observability/"
   tag: "Documentation"
-  text: "Observability overlay"
+  text: "Agent overlay"
 - link: "/datadog_cloudcraft/overlays/security/"
   tag: "Documentation"
   text: "Security overlay"
@@ -26,7 +26,7 @@ site_support_id: cloudcraft_apm_overlay
 
 The APM overlay displays distributed APM traces as arcs between cloud resources on your Cloudcraft diagram. This helps you understand service-to-service request flows across your infrastructure without leaving the architecture view.
 
-To open the overlay, click the {{< ui >}}APM{{< /ui >}} tab in the overlay selector at the top of your diagram.
+To open the overlay, click {{< ui >}}APM{{< /ui >}} in the overlay menu on the left side of your diagram.
 
 ### Supported resource types
 
@@ -37,7 +37,7 @@ The APM overlay shows connections for resources that include a Cloud Resource ID
 - Lambda
 - RDS
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_apm_overlay_diagram.png" alt="APM overlay in Cloudcraft showing green trace arcs connecting services across an AWS architecture diagram, with the Traces count and legend visible in the bottom left." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_apm_overlay_diagram_2.png" alt="APM overlay in Cloudcraft showing trace arcs connecting services across an AWS architecture diagram, with the Traces count and legend visible in the bottom right." style="width:100%;" >}}
 
 ## Prerequisites
 

@@ -25,29 +25,29 @@ Each resource or service with associated monitors displays an icon showing:
 
 When only one monitor is in the highest state, the diagram displays the monitor icon instead of a count.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_diagram.png" alt="Cloudcraft diagram with the Monitors overlay showing monitor icons and counts on resources" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_diagram_2.png" alt="Cloudcraft diagram with the Monitors overlay showing monitor icons and counts on resources" style="width:100%;" >}}
 
 ## Filter monitors
 
 Use the legend at the bottom of the diagram to filter monitors by alerting status and monitor priority.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_legend.png" alt="Monitors overlay legend in Cloudcraft with filter options for alerting status and monitor priority." style="width:50%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_legend_2.png" alt="Monitors overlay legend in Cloudcraft with filter options for alerting status and monitor priority." style="width:50%;" >}}
 
 ## Investigate monitors
 
-### Hover panel
+### Mini panel
 
-Hover over a resource or service with monitors to see a count breakdown of associated monitors by status. The hover panel includes an {{< ui >}}Investigate with Bits Investigation{{< /ui >}} button that loads the three most recent alerting events for the selected monitor. From there, you can initiate an investigation or view an existing one.
+Click a resource or service with monitors to open a mini panel. For a resource, the mini panel lists the resource's monitors, along with its account, region, and tags. For a service, it shows the service's health status and service information. Click {{< ui >}}Investigate with Bits{{< /ui >}} to initiate a [Bits Investigation][1] investigation or view an existing one.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_hover_panel.png" alt="Cloudcraft Monitors overlay hover panel showing a monitor count breakdown by status and the Investigate with Bits Investigation button." style="width:80%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_mini_panel.png" alt="Cloudcraft Monitors overlay mini panel for an EC2 instance, listing its monitors, account, region, and tags, with the Investigate with Bits and View Full Details buttons." style="width:80%;" >}}
 
 For more information, see [Bits Investigation][1].
 
 ### Side panel
 
-Click a monitor pin on the diagram to open a side panel listing all monitors associated with that resource or service. For resource monitors, you can also initiate or view a [Bits Investigation][1] investigation for any alerting monitor from this panel.
+In the mini panel, click {{< ui >}}View Full Details{{< /ui >}} to open a side panel listing all monitors associated with that resource or service, along with a summary of their states. For resource monitors, you can also initiate or view a [Bits Investigation][1] investigation for any alerting monitor from this panel.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_side_panel.png" alt="Cloudcraft Monitors overlay side panel showing a list of monitors associated with a resource." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_monitors_overlay_side_panel_2.png" alt="Cloudcraft Monitors overlay side panel showing a monitoring summary and a list of monitors associated with a service." style="width:100%;" >}}
 
 ## Further reading
 

@@ -19,7 +19,7 @@ Cloudcraft supports overlays that integrate data from multiple sources, enrichin
 Cloudcraft provides the following built-in overlays: 
 
 - [Infrastructure][1]: View resources grouped by Account, Region, and VPC for architecture diagrams and troubleshooting.
-- [Observability][2]: See where the Datadog Agent is installed and which features are enabled per host.
+- [Agent][2]: See where the Datadog Agent is installed and which features are enabled per host.
 - [Security][3]: Identify security exposures, misconfigurations, and vulnerabilities in your architecture.
 - [Cloud Cost Management (CCM)][4]: Discover savings opportunities with cost recommendations shown directly on resources.
 - [Monitors][5] (Preview): View monitor states for your resources and services, and investigate alerting monitors with Bits Investigation.

@@ -3416,7 +3416,7 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_infrastructure
       weight: 101
-    - name: Observability
+    - name: Agent
       url: datadog_cloudcraft/overlays/observability/
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_observability
