@@ -115,7 +115,7 @@ The Full-Host Profiler is built as an OpenTelemetry Collector distribution for h
 
 The Full-Host Profiler is supported in two ways:
 
-- **With the Datadog Agent, including DDOT deployments**: The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, deployed with the Datadog Helm chart or the Datadog Operator. It infers its configuration from the Agent, and the Agent enriches profiles with Datadog infrastructure metadata.
+- **With the Datadog Agent, including with the Agent's Collector**: The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, deployed with the Datadog Helm chart or the Datadog Operator. It infers its configuration from the Agent, and the Agent enriches profiles with Datadog infrastructure metadata.
 - **Standalone**: The Full-Host Profiler runs as its own OpenTelemetry Collector DaemonSet, deployed with the OpenTelemetry Helm chart or the OpenTelemetry Operator, and sends profiles directly to Datadog. No Datadog Agent or DDOT Collector is required.
 
 In both cases, the Full-Host Profiler runs in its own profiling-focused container rather than inside the DDOT Collector. Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the profiler separate avoids granting that access to a larger general-purpose Collector distribution, and reduces the amount of code running with host-level privileges.
