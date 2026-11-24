@@ -10,7 +10,7 @@ If you're a more advanced Datadog user, you may want to use [the API][1] to quer
 
 ## Examples
 
-If, for example, you want to query general data from all your hosts that include the `env:prod` and `role:elasticsearch` tag, you can make the following API call with Python's `requests` library:
+If, for example, you want to query general data from all your hosts that include the `env:prod` and `role:elasticsearch` tags, use the `tag:` prefix for an exact match. You can make the following API call with Python's `requests` library:
 
 ```python
 import requests
@@ -18,7 +18,7 @@ s = requests.session()
 s.params = {
   'api_key': '<DATADOG_API_KEY>',
   'application_key': '<YOUR_APPLICATION_KEY>',
-  'filter': 'env:prod,role:elasticsearch'
+  'filter': 'tag:env:prod,tag:role:elasticsearch'
 }
 infra_link = 'https://app.datadoghq.com/api/v1/hosts'
 infra_content = s.request(
@@ -51,6 +51,22 @@ def iterate_all_hosts():
 for host in iterate_all_hosts():
     print(host['host_name'])
 ```
+
+## Filter syntax
+
+The `filter` parameter takes one or more terms, separated by spaces or commas. A host must match all terms.
+
+| Term | Matches | Example |
+|---|---|---|
+| `<text>` | Partial, case-insensitive match on host name, alias, tags, apps, and Agent metadata. Text shorter than 3 characters only matches a field that is exactly that text. | `web-prod` |
+| `tag:<key>:<value>` | Hosts with that exact tag | `tag:env:prod` |
+| `field:apps:<app>` | Hosts running that app | `field:apps:nginx` |
+| `field:metadata_platform:<value>` | Hosts with that platform. The same syntax works for `metadata_agent_version`, `metadata_machine`, and `metadata_processor`, for example `field:metadata_machine:<value>`. | `field:metadata_platform:linux` |
+| `exists:tag:<key>` | Hosts that have a tag with that key | `exists:tag:team` |
+| `exists:field:<field>` | Hosts with a non-empty value for that field | `exists:field:metadata_platform` |
+| `!<term>` | Excludes hosts that match the term | `!tag:env:staging` |
+
+Filters do not support `AND`, `OR`, or `NOT` keywords or `*` wildcards. To look up a single host, filter on its full host name and check `name`, `host_name`, and `aliases` in the response. A search with no match returns an empty `host_list`, not a `404`.
 
 [1]: /api/
 [2]: https://app.datadoghq.com/infrastructure
