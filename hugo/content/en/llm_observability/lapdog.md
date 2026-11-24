@@ -78,6 +78,70 @@ Run any command with `ddtrace` auto-instrumentation pointed at the local agent. 
 
 **Note**: `lapdog claude` and `lapdog codex` are proxy-backed: the local Lapdog agent sits in the live model-request path. Keep Lapdog running until the coding agent exits. If you stop or kill Lapdog mid-session, the launched coding agent can stop making progress on model calls. Restart the coding agent after restarting Lapdog. `lapdog pi` and hook-only setups fail open if Lapdog goes down: the coding agent keeps running, but capture data is lost.
 
+## Instrument your application
+
+Lapdog receives spans from the Agent Observability SDKs on `localhost:8126`, the default Datadog Agent address, so your application needs no API key or agent URL. To send to a Lapdog on another port or host, set `DD_TRACE_AGENT_URL`, for example `DD_TRACE_AGENT_URL=http://localhost:8127`.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Install the SDK:
+
+```shell
+pip install ddtrace
+```
+
+Run your application with auto-instrumentation:
+
+```shell
+DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> \
+DD_LLMOBS_AGENTLESS_ENABLED=0 \
+ddtrace-run python app.py
+```
+
+Or enable the SDK in code:
+
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(ml_app="<YOUR_ML_APP_NAME>", agentless_enabled=False)
+```
+
+You can also run `lapdog python app.py`, which sets up the same instrumentation for you.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+Install the SDK:
+
+```shell
+npm install dd-trace
+```
+
+Run your application with auto-instrumentation:
+
+```shell
+DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> \
+DD_LLMOBS_AGENTLESS_ENABLED=0 \
+node --import dd-trace/initialize.mjs app.js
+```
+
+Or enable the SDK in code, before you import any LLM libraries:
+
+```javascript
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: '<YOUR_ML_APP_NAME>',
+    agentlessEnabled: false,
+  },
+});
+```
+
+You can also run `lapdog node app.js`, which sets up the same instrumentation for you.
+{{% /tab %}}
+{{< /tabs >}}
+
+For manual instrumentation, supported LLM libraries, and SDK options, see the [Agent Observability SDK reference][2].
+
 ## View sessions
 
 While a session is running, open [lapdog.datadoghq.com](https://lapdog.datadoghq.com). The dashboard reads directly from your local agent on `localhost:8126`; no login or Datadog account is needed.
@@ -94,6 +158,78 @@ DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude
 
 Forwarded spans are tagged `source:lapdog` so you can distinguish development sessions from production traffic.
 
+## Self-host Lapdog for your team
+
+By default, Lapdog keeps traces in memory, so restarting it clears them. To keep traces and share them with your team, run a self-hosted Lapdog server. The server stores spans on disk with ClickHouse, which it downloads and manages for you. Teammates keep running Lapdog on their laptops and forward what it captures to the server.
+
+Self-hosting requires `ddapm-test-agent` 1.71.0 or later, on macOS or Linux.
+
+<div class="alert alert-warning">The self-hosted server has no authentication: anyone who can reach it can read and send spans. Run it on a private network or VPN, or put it behind your own authenticating proxy or firewall.</div>
+
+### Start the server
+
+On a machine your team can reach, start the server and bind it to a network address:
+
+```shell
+lapdog server start --host 0.0.0.0 --retention 30d --max-disk 20GB
+```
+
+The server listens on port `8126` by default (`--port` changes it). Run `lapdog server start --help` for every option.
+
+To run it in a container instead, use the published test agent image:
+
+```shell
+docker run -d -p 8126:8126 -v lapdog-data:/data \
+  -e LAPDOG_SERVER_HOST=0.0.0.0 -e LAPDOG_SERVER_DATA_DIR=/data \
+  ghcr.io/datadog/dd-apm-test-agent/ddapm-test-agent lapdog server start --foreground
+```
+
+Every flag has a matching `LAPDOG_SERVER_*` environment variable. In Docker, set options with `-e` rather than flags, so `docker exec <CONTAINER> lapdog server status` finds the server.
+
+### Forward traces from your laptop
+
+On each laptop, point the local Lapdog at the server:
+
+```shell
+lapdog forward http://<SERVER_HOST>:8126
+```
+
+Applications keep sending to `localhost:8126` with no extra configuration, and the local Lapdog also sends what it receives to the server. Because the browser only talks to `localhost`, the server doesn't need HTTPS.
+
+Coding-agent sessions (Claude Code, Codex, and Pi) stay on your laptop unless you opt in:
+
+```shell
+lapdog forward http://<SERVER_HOST>:8126 --include-coding-agents
+```
+
+You can also set up forwarding from the dashboard: click the trace source badge in the header and select {{< ui >}}Self-hosted{{< /ui >}}. While forwarding, the badge shows {{< ui >}}This laptop → Self-hosted{{< /ui >}}. Searches cover both your laptop's memory and the server, without counting a span twice.
+
+To check forwarding, run `lapdog forward`. To stop it, run `lapdog forward off`.
+
+### Retention and disk usage
+
+The server stores spans in daily partitions:
+
+- Days older than the retention period (30 days by default) are dropped.
+- While stored data exceeds the disk cap, or the disk is nearly full, the oldest days are dropped. The cap defaults to 20 GB or half the free disk, whichever is smaller. If only today is left, the server rejects new spans until there's room.
+
+Change either setting while the server runs:
+
+```shell
+lapdog server config set retention 14d
+lapdog server config set max-disk 50GB
+```
+
+### Open the dashboard against the server
+
+To read from the server without a local Lapdog, open the dashboard with the server's URL:
+
+```text
+https://lapdog.datadoghq.com/?backendUrl=https://<SERVER_HOST>
+```
+
+Browsers block a secure page from calling a plain-HTTP address on another machine, so the server must be served over HTTPS for this. Put a TLS-terminating proxy in front of it. Forwarding from a laptop doesn't need HTTPS.
+
 ## Useful commands
 
 | Command | What it does |
@@ -105,6 +241,11 @@ Forwarded spans are tagged `source:lapdog` so you can distinguish development se
 | `lapdog start` | Start the local agent in the background |
 | `lapdog stop` | Stop the background agent |
 | `lapdog status` | Show whether the agent is running |
+| `lapdog server start` | Start a self-hosted Lapdog server |
+| `lapdog server status` | Show the server's disk usage, retention, and health |
+| `lapdog server stop` | Stop the self-hosted server |
+| `lapdog forward <URL>` | Also send traces to a self-hosted server |
+| `lapdog forward off` | Stop sending traces to the self-hosted server |
 
 For the full list of options, run `lapdog --help`.
 
@@ -159,3 +300,4 @@ Follow these steps to remove Lapdog and the state it writes to your home directo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md
+[2]: /llm_observability/instrument/sdk
