@@ -640,30 +640,6 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: Update a dashboard
-      url: /api/latest/dashboards/update-a-dashboard/
-      identifier: dashboards-update-a-dashboard
-      parent: dashboards
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - UpdateDashboard
-        unstable: []
-        order: 4
-    - name: Get a dashboard
-      url: /api/latest/dashboards/get-a-dashboard/
-      identifier: dashboards-get-a-dashboard
-      parent: dashboards
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - GetDashboard
-        unstable: []
-        order: 2
     - name: Delete a dashboard
       url: /api/latest/dashboards/delete-a-dashboard/
       identifier: dashboards-delete-a-dashboard
@@ -675,7 +651,7 @@ menu:
         operationids:
           - DeleteDashboard
         unstable: []
-        order: 5
+        order: 4
     - name: Send shared dashboard invitation email
       url: /api/latest/dashboards/send-shared-dashboard-invitation-email/
       identifier: dashboards-send-shared-dashboard-invitation-email
@@ -687,7 +663,7 @@ menu:
         operationids:
           - SendPublicDashboardInvitation
         unstable: []
-        order: 11
+        order: 10
     - name: Get all invitations for a shared dashboard
       url: /api/latest/dashboards/get-all-invitations-for-a-shared-dashboard/
       identifier: dashboards-get-all-invitations-for-a-shared-dashboard
@@ -699,7 +675,7 @@ menu:
         operationids:
           - GetPublicDashboardInvitations
         unstable: []
-        order: 12
+        order: 11
     - name: Revoke shared dashboard invitations
       url: /api/latest/dashboards/revoke-shared-dashboard-invitations/
       identifier: dashboards-revoke-shared-dashboard-invitations
@@ -711,7 +687,7 @@ menu:
         operationids:
           - DeletePublicDashboardInvitation
         unstable: []
-        order: 14
+        order: 13
     - name: Update a shared dashboard
       url: /api/latest/dashboards/update-a-shared-dashboard/
       identifier: dashboards-update-a-shared-dashboard
@@ -723,7 +699,7 @@ menu:
         operationids:
           - UpdatePublicDashboard
         unstable: []
-        order: 10
+        order: 9
     - name: Get a shared dashboard
       url: /api/latest/dashboards/get-a-shared-dashboard/
       identifier: dashboards-get-a-shared-dashboard
@@ -735,7 +711,7 @@ menu:
         operationids:
           - GetPublicDashboard
         unstable: []
-        order: 9
+        order: 8
     - name: Revoke a shared dashboard URL
       url: /api/latest/dashboards/revoke-a-shared-dashboard-url/
       identifier: dashboards-revoke-a-shared-dashboard-url
@@ -747,7 +723,7 @@ menu:
         operationids:
           - DeletePublicDashboard
         unstable: []
-        order: 13
+        order: 12
     - name: Create a shared dashboard
       url: /api/latest/dashboards/create-a-shared-dashboard/
       identifier: dashboards-create-a-shared-dashboard
@@ -759,19 +735,7 @@ menu:
         operationids:
           - CreatePublicDashboard
         unstable: []
-        order: 8
-    - name: Create a new dashboard
-      url: /api/latest/dashboards/create-a-new-dashboard/
-      identifier: dashboards-create-a-new-dashboard
-      parent: dashboards
-      generated: true
-      params:
-        versions:
-          - v1
-        operationids:
-          - CreateDashboard
-        unstable: []
-        order: 1
+        order: 7
     - name: Restore deleted dashboards
       url: /api/latest/dashboards/restore-deleted-dashboards/
       identifier: dashboards-restore-deleted-dashboards
@@ -783,7 +747,7 @@ menu:
         operationids:
           - RestoreDashboards
         unstable: []
-        order: 7
+        order: 6
     - name: Get all dashboards
       url: /api/latest/dashboards/get-all-dashboards/
       identifier: dashboards-get-all-dashboards
@@ -807,7 +771,7 @@ menu:
         operationids:
           - DeleteDashboards
         unstable: []
-        order: 6
+        order: 5
     - name: Downtimes
       url: /api/latest/downtimes/
       identifier: downtimes
