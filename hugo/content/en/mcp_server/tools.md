@@ -873,7 +873,7 @@ The AI client's normal approval behavior applies; the MCP Server does not add a 
 ### `search_datadog_sdk`
 *Toolset: **code-exec***\
 *Permissions Required: None*\
-Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution separately checks your permissions.
+Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution checks your permissions separately.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
