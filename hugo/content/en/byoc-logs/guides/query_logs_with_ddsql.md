@@ -56,7 +56,7 @@ Add a separate data source cell for each set of logs you want to query or join. 
 
 ### Write a SQL query
 
-1. In your notebook, type `/sql` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
+1. In a notebook, type `/sql` and press <kbd>Enter</kbd>, or click the {{< ui >}}SQL Query{{< /ui >}} tile at the bottom of the page.
 1. Write your query. Use the data source cell name as the table name.
 1. Click {{< ui >}}Run{{< /ui >}}.
 
