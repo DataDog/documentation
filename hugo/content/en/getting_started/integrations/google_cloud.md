@@ -336,6 +336,8 @@ By default, Datadog monitors every project the service account can access, inclu
 
 Each filter is a project ID or a project ID pattern. Use `*` to match any number of characters and `?` to match a single character. Start a filter with `!` to exclude matching projects. Filters without a wildcard match a project ID exactly.
 
+{{< img src="integrations/google_cloud_platform/project_id_filter.png" alt="The Limit Monitored Projects section of the Projects tab in the Datadog Google Cloud integration page, with the project ID filter prod-* entered in the Filter by Project ID field" style="width:80%;" >}}
+
 **Example filters**:
 
 `prod-*` `shared-*`
@@ -354,7 +356,9 @@ Each filter is a project ID or a project ID pattern. Use `*` to match any number
 
 {{% collapse-content title="Limit monitored projects by project label" level="h4" %}}
 
-Each filter is a Google Cloud [project label][69] in the form `key:value`. Keys are matched exactly, and the `*` and `?` wildcards apply only to values, so `key:*` matches any value of that label, including an empty one. Start a filter with `!` to exclude matching projects. Every filter needs both a key and a value, so a key on its own (such as `!testing`) is not valid. You can add up to 100 project label filters.
+Each filter is a Google Cloud [project label][69] in the form `key:value`. Keys are matched exactly, and the `*` and `?` wildcards apply only to values, so `key:*` matches any value of that label, including an empty one. Start a filter with `!` to exclude matching projects. Every filter needs both a key and a value, so a key on its own (such as `!testing`) is not valid.
+
+{{< img src="integrations/google_cloud_platform/project_label_filter.png" alt="The Limit Monitored Projects section of the Projects tab in the Datadog Google Cloud integration page, with the project label filter env:prod entered in the Filter by Project Label field" style="width:80%;" >}}
 
 **Example filters**:
 
