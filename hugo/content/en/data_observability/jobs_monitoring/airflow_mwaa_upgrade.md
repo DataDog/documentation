@@ -15,7 +15,7 @@ For these Airflow versions, the Apache Airflow constraints files pin older `apac
 
 To use provider versions that include these fixes, pin the upgraded versions in a constraints file and in `requirements.txt`. Which constraints file you edit depends on your current `requirements.txt`:
 
-- **If `requirements.txt` has no `--constraint` line**, create a `constraints.txt` file that contains only the OpenLineage pins. Your other packages resolve the same way they did before. MWAA pins `apache-airflow` to your environment's version during the install, so Airflow itself is not upgraded.
+- **If `requirements.txt` has no `--constraint` line**, create a `constraints.txt` file that contains only the OpenLineage pins. The file doesn't constrain your other packages. MWAA pins `apache-airflow` to your environment's version during the install, so Airflow itself is not upgraded.
 - **If `requirements.txt` already has a `--constraint` line**, update the OpenLineage pins in that constraints file.
 
 <div class="alert alert-warning">Don't download the full Apache Airflow constraints file to use as a new constraints file. Its pins often conflict with your other packages, such as a newer <code>boto3</code>. For Airflow 2.8.1 and 2.9.2, its <code>sqlparse</code> pin also conflicts with the upgraded <code>apache-airflow-providers-common-sql</code>. When pip can't resolve the requirements, MWAA installs none of the packages in <code>requirements.txt</code>, and the environment update still reports success.</div>
@@ -31,6 +31,8 @@ If your MWAA environment runs an Airflow version that is not listed in this guid
 1. Add the OpenLineage provider pin and any required OpenLineage dependency pins to a constraints file: either a new `constraints.txt` that contains only those pins, or the constraints file your `requirements.txt` already references.
 2. Pin the same versions in `requirements.txt`, and make sure its first line references the constraints file.
 3. Upload both files to your MWAA S3 bucket and update the MWAA environment.
+
+Depending on the Airflow version, MWAA may apply its own constraints when `requirements.txt` doesn't specify a constraints file. After you add a `--constraint` line, pip uses your constraints file instead.
 
 Datadog recommends using the newest compatible provider release available for your Airflow version. Review the [OpenLineage provider changelog][9] before updating, because provider releases can change the minimum supported Airflow version or required dependency versions.
 
@@ -216,7 +218,7 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
 
 ## Troubleshooting
 
-- If no OpenLineage events arrive after the update, check the `requirements_install_*` log stream for `ERROR` lines, such as a pip `ResolutionImpossible` error. When pip fails, MWAA installs none of the packages in `requirements.txt`, including your own packages.
+- If no OpenLineage events arrive after the update, check the `requirements_install_*` log stream for `ERROR` lines, such as a pip `ResolutionImpossible` error. When pip fails, MWAA installs none of the packages in `requirements.txt`, including your own packages. The usual cause is a pin that conflicts with the constraints in use. These are your constraints file or, depending on the Airflow version, constraints that MWAA applies when you don't specify any.
 - If dependency resolution fails, verify that the same package versions are pinned in both `constraints.txt` and `requirements.txt`. Also verify that `constraints.txt` doesn't pin the same package twice, such as `openlineage-sql` and `openlineage_sql`.
 - If you created `constraints.txt` from the full Apache Airflow constraints file, its older pins can conflict with your other requirements. Replace it with a file that contains only the OpenLineage pins for your Airflow version. For Airflow 2.8.1 and 2.9.2, a full constraints file must also set `sqlparse==0.5.1`.
 - If MWAA installs older versions, verify that `requirements.txt` points to `--constraint /usr/local/airflow/dags/constraints.txt` and that the file exists in your S3 `dags/` path.
