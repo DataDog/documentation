@@ -109,7 +109,7 @@ The [model configuration settings][3] change how the model sets bounds:
 - {{< ui >}}Minimum upper bound size{{< /ui >}} and {{< ui >}}Minimum lower bound size{{< /ui >}} set the smallest distance between the predicted value and each bound. The model can still set wider bounds. Enter values in the metric's own units, such as rows for Row Count or percentage points for Nullness. For integer metrics such as Row Count, the model rounds the value up to a whole number.
 - {{< ui >}}Model Instructions{{< /ui >}} inform the AI reviewer, which reads them when a value falls outside the bounds. See [Model Instructions](#model-instructions).
 
-{{< ui >}}Alert after N consecutive anomalies{{< /ui >}} also leaves the bounds unchanged. It sets how many flagged evaluations in a row the monitor needs before it alerts.
+{{< ui >}}Alert after N consecutive anomalies{{< /ui >}} sets how many flagged evaluations in a row the monitor needs before it alerts.
 
 ## AI review of flagged points
 
