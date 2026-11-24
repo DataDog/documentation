@@ -44,7 +44,9 @@ Use Outcomes to understand what your spend delivers.
 
 The Outcomes page shows each outcome your organization tracks as a card, so you can see at a glance how much each unit of value costs and which way it's trending.
 
-{{< img src="cloud_cost/planning/outcomes-overview.png" alt="The Outcomes page in Cloud Cost Management showing suggested outcomes such as cost per 1M OpenAI tokens, cost per 1M Anthropic tokens, cost per Anthropic user, and cost per OpenAI user" style="width:100%;" >}}
+{{< img src="cloud_cost/planning/outcomes-overview-1.png" alt="The Outcomes page grouped by team, showing tracked outcomes such as cost per customer support ticket, cost per PR merged, and cost per active Anthropic user, each with its cost per unit, change from the previous period, and a trend graph" style="width:100%;" >}}
+
+Use the {{< ui >}}Showing{{< /ui >}}, {{< ui >}}Grouped by{{< /ui >}}, and {{< ui >}}Narrowed to{{< /ui >}} filters to focus on the outcomes you care about. For example, group by `team` to see each team's outcomes together, and use the time frame selector to change the reporting period.
 
 Each card shows:
 
@@ -52,13 +54,13 @@ Each card shows:
   - _Example: `$14.98 / 1M tokens` means you spent $14.98 for every million tokens processed._
 - {{< ui >}}vs. previous period{{< /ui >}}: The percentage change in cost per unit compared to the previous period. A green, downward arrow means each unit costs less than before. A red, upward arrow means each unit costs more.
 - {{< ui >}}Trend graph{{< /ui >}}: The cost per unit over time. Hover over the graph to see the value on a given day.
-- {{< ui >}}Created by{{< /ui >}}: Whether Datadog suggested the outcome or someone in your organization created it.
+- {{< ui >}}Created by{{< /ui >}}: Whether Datadog suggested the outcome or someone in your organization created it, along with any teams or tags assigned to it.
 
 ## Suggested outcomes
 
 Suggested outcomes give you a head start. Datadog looks at the cost data in your organization and suggests outcomes you're likely to care about, so you can begin tracking unit economics without building queries yourself. For example, if you've set up [AI Costs][2] for OpenAI or Anthropic, you may see suggestions such as cost per 1M OpenAI tokens, cost per 1M Anthropic tokens, cost per OpenAI user, and cost per Anthropic user.
 
-{{< img src="cloud_cost/planning/outcomes-suggested-card.png" alt="A suggested outcome card for cost per 1M Anthropic tokens, showing a 47% decrease compared to the previous period, a trend graph, and a Start tracking button" style="width:70%;" >}}
+{{< img src="cloud_cost/planning/outcomes-suggested-1.png" alt="Suggested outcomes created by Datadog, including cost per 1M OpenAI tokens, cost per 1M Anthropic tokens, cost per Anthropic user, and cost per OpenAI user, each with Dismiss and Start tracking buttons" style="width:100%;" >}}
 
 Click {{< ui >}}Start tracking{{< /ui >}} to add a suggestion to your organization's outcomes, or click {{< ui >}}Dismiss{{< /ui >}} to hide one that isn't relevant to you.
 
@@ -66,18 +68,18 @@ Click {{< ui >}}Start tracking{{< /ui >}} to add a suggestion to your organizati
 
 Custom outcomes let you measure the value of anything you spend money on. Instead of exporting cost and usage data into a spreadsheet to calculate cost per unit by hand, you can pair a slice of your spend with any metric in Datadog and track the ratio over time.
 
-{{< img src="cloud_cost/planning/outcomes-create.png" alt="The outcome editor with steps to name the feature, define the cost by filtering on provider and org type, define the outcome with a metric query, and add tags, next to a preview of the total cost and cost per Anthropic user" style="width:100%;" >}}
+{{< img src="cloud_cost/planning/outcomes-create-1.png" alt="The outcome editor with steps to name the feature, define the cost by filtering on provider and org type, define the outcome with a metric query, and add teams and tags, next to a preview of the total cost and cost per Anthropic user" style="width:100%;" >}}
 
 1. Go to [**Cloud Cost > Plan > Outcomes**][1] and click {{< ui >}}New Outcome{{< /ui >}}.
 2. {{< ui >}}Name the feature to track{{< /ui >}}: Give your outcome a descriptive name, such as `Cost per active Anthropic user`.
 3. {{< ui >}}Define the cost{{< /ui >}}: Choose the costs you want to measure. Use {{< ui >}}Simple filtering{{< /ui >}} to pick values such as {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Org Type{{< /ui >}}, or {{< ui >}}Model{{< /ui >}}, and click {{< ui >}}+ Filter{{< /ui >}} to add more tags. For more control, use {{< ui >}}Advanced filtering{{< /ui >}} to write a cost query.
 4. {{< ui >}}Define the outcome{{< /ui >}}: Query the metric that represents the result you're paying for, such as merged pull requests, successful chat sessions, or active users. Add a {{< ui >}}Display label{{< /ui >}} to name the unit, and use {{< ui >}}Add Query{{< /ui >}} or {{< ui >}}Add Formula{{< /ui >}} to combine metrics.
-5. {{< ui >}}Add tags{{< /ui >}}: Assign the outcome to the teams that own it, so the right people can find and track it.
-6. Check the {{< ui >}}Preview{{< /ui >}} panel, then click {{< ui >}}Save{{< /ui >}}.
+5. {{< ui >}}Add tags{{< /ui >}}: Assign the outcome to the {{< ui >}}Teams{{< /ui >}} that own it, and add any {{< ui >}}Tags{{< /ui >}} you want to filter by, so the right people can find and track it.
+6. Check the {{< ui >}}Preview{{< /ui >}} panel, then click {{< ui >}}Save Outcome{{< /ui >}}.
 
 The {{< ui >}}Preview{{< /ui >}} panel updates as you edit, so you can confirm your outcome looks right before you save it. It shows the total cost for your filters graphed alongside your outcome metric, and the resulting cost per unit.
 
-_Example: $37.3k in enterprise Anthropic spend across 46 active users works out to $810.03 per Anthropic user._
+_Example: $37.3k in enterprise Anthropic spend across 46 active users works out to $809.92 per Anthropic user._
 
 ## Use cases
 
