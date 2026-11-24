@@ -21,25 +21,35 @@ You can investigate injection issues in the Datadog UI with the Instrumentation 
 
 ### Troubleshoot injection with Instrumentation Errors
 
-The [Instrumentation Errors][15] page lists the processes that SSI tried to instrument and could not, grouped by error type. The page shows only processes that restarted after you enabled SSI, and hides processes that are no longer running. For each process, the page shows the hosts it runs on and the steps to resolve the error. Use the Instrumentation Errors page as the first stop after you install SSI and restart your services.
+The [Instrumentation Errors][15] page lists the processes that SSI could not instrument, grouped by error type. The list includes only processes that restarted after you enabled SSI, and excludes processes that are no longer running. For each process, you can see the hosts where the process runs and the steps to resolve the error.
 
 <!-- TODO: Confirm prerequisites with PM (minimum Agent version, Kubernetes support at GA, Datadog site availability). Permissions: confirm whether APM read access is enough to view the page. -->
 
 Instrumentation Errors supports SSI on Linux hosts, Windows hosts, and Kubernetes.
 
-#### Find processes with instrumentation errors
+#### View and resolve instrumentation errors
 
 1. Go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Errors{{< /ui >}}][15].
-1. Narrow the list with the {{< ui >}}Env{{< /ui >}}, {{< ui >}}Deployment type{{< /ui >}}, and {{< ui >}}Language{{< /ui >}} filters. To filter on other attributes, click {{< ui >}}Add filter{{< /ui >}}. To find a specific process, search by host, service, or process.
-1. To show one kind of error, select it from the {{< ui >}}Error type{{< /ui >}} dropdown.
 
-Each entry in the list shows:
-- The error type and the process language
-- A message that describes the error, such as `Python 3.6 or older is not supported (detected Python 3.6.8)`
-- The process command and the number of hosts where the error occurs
-- When SSI last attempted to instrument the process
+   Each entry shows the error type, the process language, the error message, the process command, the number of hosts where the error occurs, and when SSI last attempted to instrument the process.
 
-{{< img src="tracing/trace_collection/ssi-instrumentation-errors-list.png" alt="The Instrumentation Errors page, filtered to the Prod environment and Linux, listing processes with Incompatible Runtime and Incorrect Installation errors" style="width:100%;" >}}
+1. (Optional) Filter the list to the processes you want to investigate:
+   - Use the {{< ui >}}Env{{< /ui >}}, {{< ui >}}Deployment type{{< /ui >}}, and {{< ui >}}Language{{< /ui >}} filters, or click {{< ui >}}Add filter{{< /ui >}} to filter on other attributes.
+   - Search by host, service, or process.
+   - Select an error type from the {{< ui >}}Error type{{< /ui >}} dropdown.
+
+   {{< img src="tracing/trace_collection/ssi-instrumentation-errors-list.png" alt="The Instrumentation Errors page, filtered to the Prod environment and Linux, listing processes with Incompatible Runtime and Incorrect Installation errors" style="width:100%;" >}}
+
+1. Click a process to open its details panel. Alternatively, hover over the process and click {{< ui >}}View next steps{{< /ui >}}.
+1. On the {{< ui >}}Setup Status{{< /ui >}} tab, review the error in the {{< ui >}}Errors for Review{{< /ui >}} section. Each error shows how many times SSI attempted to instrument the process and when Datadog first detected the error. For process details and the host where the process runs, open the {{< ui >}}Process Overview{{< /ui >}} tab. <!-- TODO: Confirm the Process Overview tab ships at GA. -->
+
+   {{< img src="tracing/trace_collection/ssi-instrumentation-errors-next-steps.png" alt="The Setup Status tab for a Python process with an Incompatible Runtime error, showing next steps to check the runtime version and upgrade to a supported version" style="width:100%;" >}}
+
+1. Follow the next steps for the error. For a summary of each error type and its resolution, see the [Instrumentation error types](#instrumentation-error-types) section.
+1. (Optional) To resolve the error with an AI coding agent, click {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into your agent. The prompt includes the error, the process and host details, and the next steps. It instructs the agent to make the smallest change needed and to ask before restarting a production service.
+1. After you apply the fix, restart the service. SSI injects the SDK when the process starts. <!-- TODO: Confirm how long it takes for a resolved error to clear from the list. -->
+
+To remove a process from the list without resolving its error, hover over the process and click {{< ui >}}Skip{{< /ui >}}. Skipping a process is separate from the Skipped error type. <!-- TODO: Confirm whether the Skip button is renamed with the Skipped -> Blocked change. -->
 
 #### Instrumentation error types
 
@@ -55,21 +65,6 @@ The Instrumentation Errors page reports the following error types:
 | {{< ui >}}Skipped{{< /ui >}} (instrumentation rule) | An [instrumentation rule][17] blocks injection for the process. The entry shows the conditions of the matching rule. | `rejected by workload selection` | To instrument the process, change or remove the rule. |
 | {{< ui >}}Internal Error{{< /ui >}} | Injection failed for a reason that you cannot fix in your environment. | `failed to get process arguments` | Restart the process to retry injection. If the error continues, send an Agent flare and contact [Datadog Support][18]. |
 | {{< ui >}}Crash{{< /ui >}} | The process crashed during injection. | `The process terminated due to signal 'SIGSEGV'` | Restart the process to retry injection. If the error continues, send an Agent flare and contact [Datadog Support][18]. |
-
-After you resolve an error, restart the service. SSI injects the SDK when the process starts.
-
-#### Resolve an instrumentation error
-
-1. In the Instrumentation Errors list, click a process to open its details panel. <!-- TODO: Confirm whether users click the row or a "View next steps" button. -->
-1. On the {{< ui >}}Process Overview{{< /ui >}} tab, review the process details and the host the process runs on. <!-- TODO: Confirm the Process Overview tab ships at GA. -->
-1. On the {{< ui >}}Setup Status{{< /ui >}} tab, find the error in the {{< ui >}}Errors for Review{{< /ui >}} section. Each error shows how many times SSI attempted to instrument the process and when Datadog first detected the error.
-1. Click {{< ui >}}View next steps{{< /ui >}} and follow the steps to resolve the error.
-1. (Optional) To resolve the error with an AI coding agent, click {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into your agent. The prompt includes the error, the process and host details, and the next steps. It instructs the agent to make the smallest change needed and to ask before restarting a production service.
-1. After you apply the fix, restart the service so that SSI can instrument it. <!-- TODO: Confirm how long it takes for a resolved error to clear from the list. -->
-
-To hide an error that you do not plan to resolve, click {{< ui >}}Skip{{< /ui >}} on the error. The {{< ui >}}Skip{{< /ui >}} action is separate from the Skipped error type, which SSI reports when it does not inject into a process. <!-- TODO: Confirm what Skip does (hides the error, or stops SSI from retrying?) and whether the button is renamed with the Skipped -> Blocked change. -->
-
-{{< img src="tracing/trace_collection/ssi-instrumentation-errors-next-steps.png" alt="The Setup Status tab for a Python process with an Incompatible Runtime error, showing next steps to check the runtime version and upgrade to a supported version" style="width:100%;" >}}
 
 ### Troubleshoot injection in Datadog Fleet Automation
 
