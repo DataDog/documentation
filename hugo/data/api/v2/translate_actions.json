@@ -2383,7 +2383,7 @@
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
-    "description": "Creates a new environment for organizing feature flags.",
+    "description": "Creates an environment for organizing feature flags. A non-null subject authorization provider ID\nmust be registered in the current organization and site, even when authorization is disabled. An unknown\nID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.",
     "summary": "Create an environment",
     "request_description": "",
     "request_schema_description": "Request to create a new environment."
@@ -2397,7 +2397,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
@@ -6016,53 +6016,53 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Workload Protection agent rule.",
+    "description": "Get the details of a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListCSMThreatsAgentPolicies": {
-    "description": "Get the list of Workload Protection policies.",
+    "description": "Get the list of Workload Protection policies.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get all Workload Protection policies"
   },
   "CreateCSMThreatsAgentPolicy": {
-    "description": "Create a new Workload Protection policy with the given parameters.",
+    "description": "Create a new Workload Protection policy with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Create a Workload Protection policy",
     "request_description": "The definition of the new Agent policy",
     "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
-    "description": "Get the details of a specific Workload Protection policy.",
+    "description": "Get the details of a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Get a Workload Protection policy"
   },
   "UpdateCSMThreatsAgentPolicy": {
-    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.",
+    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
     "summary": "Update a Workload Protection policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
@@ -7230,11 +7230,11 @@
     "summary": "Start a batch migration"
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "**Note**: This endpoint is deprecated. Use [Get all Workload Protection agent rules](https://docs.datadoghq.com/api/latest/csm-threats/#get-all-workload-protection-agent-rules)\ninstead, on all sites including US1-FED.\n\nGet the list of agent rules.",
+    "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "**Note**: This endpoint is deprecated. Use [Get a Workload Protection agent rule](https://docs.datadoghq.com/api/latest/csm-threats/#get-a-workload-protection-agent-rule)\ninstead, on all sites including US1-FED.\n\nGet the details of a specific agent rule.",
+    "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
@@ -7274,10 +7274,6 @@
     "summary": "Create an entity context sync configuration",
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
-  },
-  "GetAWSIdentityCenterAWSAccounts": {
-    "description": "Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and\nwhether users have been collected from them. Collected users are a prerequisite for creating or enabling the\nAWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management\naccounts and any accounts that users were collected from.",
-    "summary": "Get AWS IAM Identity Center account prerequisites"
   },
   "GetEntraIdAzureAppRegistrations": {
     "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
