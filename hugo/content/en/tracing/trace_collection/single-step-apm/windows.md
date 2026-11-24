@@ -28,9 +28,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ### New Agent installation
 
-If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
-
-To install the Agent and instrument Java and .NET applications on your Windows host:
+If you do not have a Datadog Agent installed, follow these steps to install the Agent and instrument Java and .NET applications on your Windows host:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
 1. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}.
