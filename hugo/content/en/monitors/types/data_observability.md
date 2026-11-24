@@ -194,7 +194,7 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 Select a detection method:
 
-- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model needs a training period before it can alert. Training typically takes 3 to 7 days for a monitor that runs more than once a day, and 9 days for a monitor that runs once a day. Some metrics, such as Freshness and Job duration, follow different rules. See [Training period][17]. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
 - {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
@@ -217,10 +217,6 @@ The default limit is 500 groups per monitor. To increase this limit, [contact Su
 In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select what the monitor reports when no data is available for an evaluation.
 
 ### Model configuration
-
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
-{{< /callout >}}
 
 For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
 
@@ -541,3 +537,4 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [14]: /data_observability/jobs_monitoring/
 [15]: https://app.datadoghq.com/data-obs/monitors/create/data-jobs
 [16]: /data_observability/jobs_monitoring/openlineage/
+[17]: /data_observability/quality_monitoring/guides/anomaly_detection/#training-period

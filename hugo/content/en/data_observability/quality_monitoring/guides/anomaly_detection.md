@@ -42,7 +42,7 @@ After training completes, the monitor can alert. The chart shows the observed va
 | Green | Normal | The observed value is within expected bounds. |
 | Red | Alerting | The observed value fell outside expected bounds. |
 
-<!-- SCREENSHOT: The monitor status page of a Row Count monitor that has finished training, with the chart's observed values, the shaded expected bounds, and a point outside the bounds in the alerting color. -->
+{{< img src="data_observability/anomaly_detection/training_normal_alerting_states.png" alt="A monitor chart that shows the training period in blue, observed values within the shaded expected bounds in green, and a drop below the bounds in red." style="width:80%;" >}}
 
 ## Alert state
 
@@ -121,7 +121,7 @@ The reviewer can only dismiss flagged points. It doesn't narrow the bounds or cr
 
 ### Model Instructions
 
-{{< ui >}}Model Instructions{{< /ui >}}, one of the Preview [model configuration settings][3], give the reviewer plain-language context about behavior you expect, such as `Don't alert on large increases during US holidays`. The reviewer reads them only for flagged points:
+{{< ui >}}Model Instructions{{< /ui >}}, one of the [model configuration settings][3], give the reviewer plain-language context about behavior you expect, such as `Don't alert on large increases during US holidays`. The reviewer reads them only for flagged points:
 
 - If the instructions describe the flagged point as expected, the reviewer dismisses it, even when the metric's history alone doesn't support a dismissal.
 - Instructions that name specific tables, columns, or group values apply only to the series that match them.
