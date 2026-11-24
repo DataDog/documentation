@@ -79,14 +79,15 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    **If `requirements.txt` has no `--constraint` line**, download the Apache Airflow constraints file for Airflow 2.7.2 and update the OpenLineage pins in it. MWAA already applies this file when `requirements.txt` doesn't specify one, so your other packages keep the same versions.
 
    ```shell
-   curl -s "https://raw.githubusercontent.com/apache/airflow/constraints-2.7.2/constraints-3.11.txt" \
-     | sed -E \
-       -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==1.14.0/' \
-       -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.24.2/' \
-       -e 's/^openlineage-python==.*/openlineage-python==1.24.2/' \
-       -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.24.2/' \
-     > constraints.txt
-   echo "apache-airflow-providers-common-compat==1.2.2" >> constraints.txt
+   curl -fsSL -o airflow-constraints.txt \
+     "https://raw.githubusercontent.com/apache/airflow/constraints-2.7.2/constraints-3.11.txt" \
+   && sed -E \
+     -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==1.14.0/' \
+     -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.24.2/' \
+     -e 's/^openlineage-python==.*/openlineage-python==1.24.2/' \
+     -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.24.2/' \
+     airflow-constraints.txt > constraints.txt \
+   && echo "apache-airflow-providers-common-compat==1.2.2" >> constraints.txt
    ```
 
    The resulting `constraints.txt` pins these versions.
@@ -181,16 +182,17 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    **If `requirements.txt` has no `--constraint` line**, download the Apache Airflow constraints file for Airflow 2.9.2 and update the OpenLineage pins in it. MWAA already applies this file when `requirements.txt` doesn't specify one, so your other packages keep the same versions.
 
    ```shell
-   curl -s "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.11.txt" \
-     | sed -E \
-       -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==2.2.0/' \
-       -e 's/^apache-airflow-providers-common-sql==.*/apache-airflow-providers-common-sql==1.21.0/' \
-       -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.31.0/' \
-       -e 's/^openlineage-python==.*/openlineage-python==1.31.0/' \
-       -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.31.0/' \
-       -e 's/^sqlparse==.*/sqlparse==0.5.1/' \
-     > constraints.txt
-   echo "apache-airflow-providers-common-compat==1.4.0" >> constraints.txt
+   curl -fsSL -o airflow-constraints.txt \
+     "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.11.txt" \
+   && sed -E \
+     -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==2.2.0/' \
+     -e 's/^apache-airflow-providers-common-sql==.*/apache-airflow-providers-common-sql==1.21.0/' \
+     -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.31.0/' \
+     -e 's/^openlineage-python==.*/openlineage-python==1.31.0/' \
+     -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.31.0/' \
+     -e 's/^sqlparse==.*/sqlparse==0.5.1/' \
+     airflow-constraints.txt > constraints.txt \
+   && echo "apache-airflow-providers-common-compat==1.4.0" >> constraints.txt
    ```
 
    The resulting `constraints.txt` pins these versions. It also sets `sqlparse==0.5.1`, which `apache-airflow-providers-common-sql` 1.21.0 requires.
