@@ -609,5 +609,8 @@ options:
 - label: Agent’s Collector
   id: agents_collector
 
+- label: Datadog Agent
+  id: datadog_agent
+
 - label: Direct OTLP Ingest
   id: direct_otlp_ingest
