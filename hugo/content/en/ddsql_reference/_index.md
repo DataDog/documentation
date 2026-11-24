@@ -1205,7 +1205,7 @@ FROM aws.ec2_instance
 
 ## Template variables
 
-<div class="alert alert-info">Template variables in DDSQL Editor are in Preview. Contact <a href="/help/">Datadog support</a> to request access.</div>
+<div class="alert alert-info">Template variables in DDSQL Editor are in Preview, so their syntax and supported types are subject to change. You can use a variable only as the second argument of <code>dd.matches()</code>. Referencing <code>$var</code> anywhere else in a query is not supported. Contact <a href="/help/">Datadog support</a> to request access.</div>
 
 Template variables let you change query filters without editing SQL.
 
