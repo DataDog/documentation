@@ -38,7 +38,7 @@ When an OSS project your team uses releases a new version, Bits Maintenance:
 
 ## Supported OSS projects
 
-Bits Maintenance supports a specific set of OSS Kubernetes projects, including Redis, cert-manager, Argo CD, and others. See the full list of supported projects on [{{< ui >}}Bits Maintenance{{< /ui >}} > {{< ui >}}Coverage{{< /ui >}}][5].
+Bits Maintenance supports a specific set of OSS Kubernetes projects, including Redis, cert-manager, Argo CD, and others. See the full list of supported projects on [{{< ui >}}Bits Maintenance{{< /ui >}} > {{< ui >}}Coverage{{< /ui >}}][5]. To request support for a project, search for the project on the {{< ui >}}Coverage{{< /ui >}} page, then click {{< ui >}}Request Project Coverage{{< /ui >}}.
 
 Bits monitors each supported project. For each release, it collects and analyzes source code, release notes, documentation, and Helm charts. This knowledge, combined with your cluster data, allows Bits to assess how new software releases affect your clusters specifically.
 

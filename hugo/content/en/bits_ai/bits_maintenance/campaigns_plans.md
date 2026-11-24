@@ -22,11 +22,17 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-[Bits Maintenance][1] creates a [campaign](#campaigns) to coordinate the rollout of multiple installations of a software project across your fleet through ordered stages. Each stage of a campaign has a [plan](#plans).
+[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) coordinates an upgrade across your fleet. Each campaign is made up of [plans](#plans), one for each [installation](#installations) of a software project. A plan uses your team's [upgrade instructions][7], and lists the steps Bits takes to upgrade that installation.
 
 ## Campaigns
 
+Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages. Each stage of a campaign has a [plan](#plans).
+
 A campaign can upgrade one software project across many clusters, or several software projects on one cluster.
+
+### Installations
+
+An installation is one instance of a supported software project deployed in a Kubernetes cluster. Bits Maintenance tracks the workloads that make up that instance together. For example, the controller, webhook, and certificate authority (CA) injector deployed by one `cert-manager` Helm release count as one installation.
 
 ### Project campaigns vs. cluster campaigns
 
@@ -46,7 +52,7 @@ To create a campaign in Datadog:
 
 ## Plans
 
-A plan describes the upgrade of one installation of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Bits uses your [upgrade instructions][7] when building plans to tailor them to your organization's specific way of working.
+A plan describes the upgrade of one [installation](#installations) of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Bits uses your [upgrade instructions][7] when building plans to tailor them to your organization's specific way of working.
 
 Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
 
