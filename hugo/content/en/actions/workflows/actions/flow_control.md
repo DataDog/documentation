@@ -20,11 +20,11 @@ further_reading:
 <div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
 {{< /site-region >}}
 
-Use [Logic actions][1] to add control logic to your workflow. For example, you can ask a Decision action to classify an alert, branch from a condition, perform an action iteratively, include a sleep interval, and more.
+Use [Logic actions][1] to add control logic to your workflow. For example, you can make an AI decision, branch from a condition, perform an action iteratively, include a sleep interval, and more.
 
 ## Decision
 
-The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed condition can't, such as which team should handle an alert or how severe a support case is. It evaluates one or more questions against the context you provide in {{< ui >}}State{{< /ui >}} and returns an answer for each question. A Decision action times out after 60 seconds and accepts requests up to 1 MiB. Each organization can send up to 100,000 input tokens per minute.
+The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed condition can't. For example, it can pick the team that handles an alert, or rate how severe a support case is. It evaluates one or more questions against the context you provide in {{< ui >}}State{{< /ui >}} and returns an answer for each question. A Decision action times out after 60 seconds and accepts requests up to 1 MiB. Each organization can send up to 100,000 input tokens per minute.
 
 | Question type | Use it to | Answer |
 |---|---|---|
