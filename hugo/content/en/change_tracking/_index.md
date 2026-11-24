@@ -41,12 +41,6 @@ Click any change to open the side panel, where you can read what changed, compar
 
 For the full investigation path, including Semantic Search, Change Tracking widgets, and Bits AI, see [Investigate Relevant Changes][6].
 
-## Get started
-
-If you are already sending APM data and tagging your services with `service` and `version`, your deployments are already being tracked. Open a service page to see them.
-
-To track other types of changes, see [Tracked Change Types][1].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
