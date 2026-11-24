@@ -56,16 +56,12 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On the RUM Explorer
 
-<!-- TODO: Add RUM Explorer screenshot showing change markers. Confirm step labels in the app. -->
-
 1. Go to the [RUM Explorer][6].
 1. Visualize your RUM data as a timeseries, for example by grouping by errors.
 1. Find the change markers at the top of the graph. Each marker represents a frontend deployment or feature flag change.
 1. Hover over a marker for a summary, or click it to open the side panel.
 
 ### Faulty change banners
-
-<!-- TODO: Add screenshot of the faulty change banner and the view it opens. Add the faulty-deployment example narrative from product. Confirm the banner's open action label. -->
 
 On dashboards and monitor status pages, Datadog displays a banner when a small number of changes are likely causing the behavior you are looking at, such as an increase in errors. These changes are identified by [Watchdog Faulty Deployment Detection][9], which flags deployments that are likely causes of a symptom like an increased error rate.
 
