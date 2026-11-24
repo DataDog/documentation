@@ -1891,7 +1891,7 @@ Follows one GPU kernel of a training or inference workload over time, through th
 
 ## Investigations
 
-Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
+Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting, and for managing [Bits Detection][111] scopes that triage and investigate alerts automatically.
 
 ### `trigger_bits_ai_investigation`
 *Toolset: **investigator***\
@@ -1948,6 +1948,62 @@ Sends a steering message to a running Bits AI investigation to correct, redirect
 
 - Tell the running investigation to focus on the database layer instead.
 - Redirect investigation `abc-123-def` to also check recent deployments.
+
+### `list_bits_detection_scopes`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Lists the Bits Detection scopes that triage alerts, including each scope's query and triage policy. Optionally checks whether a specific alert is covered by an existing scope without returning the full scope list.
+
+- List the Bits Detection scopes in my organization.
+
+### `get_bits_detection_scope`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves a Bits Detection scope's query and triage policy. Use `list_bits_detection_scopes` to find the scope's ID.
+
+- Show me the details of the Bits Detection scope for the `payments` team.
+- What is the triage policy for this Bits Detection scope?
+
+### `preview_bits_detection_scope`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read` and `Monitors Read`*\
+Previews which existing monitors match a scope query, along with the number of alerts from the past seven days. This tool does not save a scope. Use it before `enable_bits_detection_scope` to confirm what a scope matches.
+
+- Preview which monitors a Bits Detection scope for `team:payments` would match.
+- How many alerts did monitors tagged `team:checkout` send in the past week?
+
+### `enable_bits_detection_scope`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Creates a Bits Detection scope that triages and automatically investigates alerts from a Slack channel or from monitors that match specific tags. Use `preview_bits_detection_scope` first to confirm what the scope matches, and `resolve_bits_detection_slack_channel` to find a Slack channel's notification handle.
+
+- Triage and investigate alerts posted to the `#checkout-alerts` Slack channel.
+- Create a scope that triages alerts from monitors tagged `team:payments`.
+
+### `update_bits_detection_scope`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Replaces a Bits Detection scope's query and triage policy. Fields you omit reset to their defaults, so include any existing policy settings you want to keep. Use `get_bits_detection_scope` to read the current settings first.
+
+- Update the Bits Detection scope for `team:payments` to also triage alerts from monitors tagged `team:billing`.
+
+### `disable_bits_detection_scope`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`, `Bits Investigations Write`, and `Monitors Write`*\
+Deletes a Bits Detection scope and its triage configuration.
+
+- Stop triaging alerts from the `#checkout-alerts` Slack channel.
+- Remove the Bits Detection scope for monitors tagged `team:legacy-api`.
+
+<div class="alert alert-warning">This tool deletes the scope's configuration. Confirm the scope before your agent disables it.</div>
+
+### `resolve_bits_detection_slack_channel`
+*Toolset: **investigator***\
+*Permissions Required: `User Access Read`*\
+Resolves a Slack channel name to its Datadog notification handle for use as a Bits Detection notification destination. If the channel name exists in more than one Slack workspace, the tool returns all matching handles.
+
+- Find the Datadog notification handle for the `#checkout-alerts` Slack channel.
+- Which Slack workspaces have a channel named `#payments-oncall`?
 
 ## Kubernetes
 
@@ -4075,6 +4131,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/#bulk-migrate-detection-rules-in-the-ui
 [109]: /containers/monitoring/amazon_elastic_container_explorer/
 [110]: /containers/amazon_ecs/
+[111]: /bits_ai/bits_detection/
 
 ## Further reading
 
