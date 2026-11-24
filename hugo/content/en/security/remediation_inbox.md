@@ -115,7 +115,7 @@ Use the filter bar to focus on the remediations your team can act on. Filters ap
 
 - **Ownership**: Filter by team, code owner, repository, or service to see the fixes your team owns.
 - **Risk**: Filter by severity or exploit availability to focus on the most urgent fixes.
-- **Finding type**: Filter by the type of finding, such as library vulnerabilities.
+- **Finding type**: Filter by the type of finding.
 - **Vulnerability**: Filter by CVE or package to track a specific issue across your environment.
 - **Triage**: Filter by the assignee of the remediation case to see the remediations assigned to you.
 
