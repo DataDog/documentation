@@ -39,8 +39,6 @@ See [Track Feature Flag Changes][6] for setup and advanced options.
 | Kubernetes deployment scale events | Kubernetes integration | Enable [Kubernetes audit logging][13]. |
 | CrashLoopBackOff pod crashes | Kubernetes integration | Add a `service` label to your Kubernetes YAML where possible. |
 
-<!-- TODO: Confirm these identifiers with the Change Tracking team. aws_dynamodb, aws_elasticache, aws_ecs_cluster, aws_ecs_service, aws_ecs_task, aws_kinesis_stream, and aws_route53_resource_record_set don't match the Resource Changes supported list. Also confirm whether the AWS row is still in Preview. -->
-
 Change Tracking supports changes to the following AWS resource types:
 
 - `aws_autoscaling_group`
