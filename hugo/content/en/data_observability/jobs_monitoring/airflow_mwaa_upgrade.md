@@ -176,7 +176,7 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    **If `requirements.txt` already has a `--constraint` line**, edit the constraints file it references. If the line references a URL, download that file and edit the local copy.
    - Set the pins shown above, replacing the existing pins for those packages. Add `apache-airflow-providers-common-compat==1.4.0` if the file doesn't pin it. The Apache Airflow constraints file doesn't include it.
    - The Apache Airflow constraints files list `openlineage-sql` as `openlineage_sql`. Replace that line instead of adding a second pin for the package, because duplicate pins cause the install to fail.
-   - Set `sqlparse==0.5.1`. `apache-airflow-providers-common-sql` 1.21.0 requires `sqlparse` 0.5.1 or later, and the Apache Airflow constraints file pins `sqlparse==0.4.4`.
+   - Set `sqlparse==0.5.1`. `apache-airflow-providers-common-sql` 1.21.0 requires `sqlparse` 0.5.1 or later, and the Apache Airflow constraints file pins `sqlparse==0.5.0`.
 
 2. Upload the constraints file to your MWAA S3 bucket:
 
