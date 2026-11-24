@@ -437,3 +437,9 @@ entries:
       - ValidateSecurityMonitoringRule
     title: Document historical job definition fields returned by SIEM historical
       jobs API
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42078
+    operations:
+      - SearchRemediationGroups
+    title: Document rate-limit headers on the shared 429 responses
