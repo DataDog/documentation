@@ -29,7 +29,7 @@ Training typically takes 3 to 7 days for a monitor that runs more than once a da
 
 Some monitors follow different rules:
 
-- **Freshness**: The monitor stays in training until it observes at least one table update. If it has observed only one update, it stays in training until three times the longest observed time between updates has passed since that update.
+- **Freshness**: The monitor stays in training until it observes at least one table update. If it has observed only one update, it continues training for three times longer than that update's time.
 - **Row Count**: In its first 7 days, the monitor stays in training on Saturdays and Sundays until it has evaluated on three weekend days. If the row count has stayed flat since before Monday, the monitor stays in training until the count changes or Monday ends (UTC). This hold ends after 8 days of history.
 - **Custom SQL with the Default model**: The monitor stays in training until it has at least 7 days of history.
 - **Single-value metrics**: If the metric has only returned one value, the monitor stays in training until it has at least 7 days of history.
