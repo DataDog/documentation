@@ -33,10 +33,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On a dashboard
 
-<!-- TODO: Recapture screenshot with the current dashboard overlays UI. -->
-<!-- TODO: Confirm with product that the Automatic and Manual overlay controls are GA, and whether the dashboard Investigate popover (anomaly cards with a "Relevant changes" section) is GA. If it is, document it here. -->
-{{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active-2.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
-
 1. Navigate to your dashboard.
 1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
 1. By default, overlays use {{< ui >}}Automatic{{< /ui >}} mode, which shows the changes relevant to each widget's filters.
@@ -45,9 +41,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On a monitor status page
 
-<!-- TODO: Recapture screenshot of the current monitor change timeline. -->
-{{< img src="/change_tracking/change-tracking-monitor-status-page-2.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
-
 1. Go to the monitor status page for the monitor you are investigating.
 1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
 1. For monitors with multiple graphs, filter to an individual group first.
@@ -55,8 +48,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 1. Click a change indicator to open the side panel.
 
 ### On a service page
-
-{{< img src="/change_tracking/change-tracking-service-page-2.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
 
 1. Go to the service page for the service you are investigating.
 1. Find the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
@@ -83,8 +74,6 @@ On dashboards and monitor status pages, Datadog displays a banner when a small n
 1. Click a change to open the side panel and investigate it.
 
 ## Open the change side panel
-
-<!-- TODO: Add screenshot of the change side panel. -->
 
 Click a change on a timeline, an overlay, or a widget to open the Change Tracking side panel.
 
