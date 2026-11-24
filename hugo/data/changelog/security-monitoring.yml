@@ -443,3 +443,10 @@ entries:
     operations:
       - SearchRemediationGroups
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42152
+    operations:
+      - SearchRemediationGroups
+    title: Remove the cloud VM grouping definition and document owners in the 
+      search remediation groups docs
