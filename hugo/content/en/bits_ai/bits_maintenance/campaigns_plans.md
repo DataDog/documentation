@@ -46,10 +46,14 @@ To create a campaign in Datadog:
 
 ## Plans
 
-A plan describes the upgrade of one installation of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
+A plan describes the upgrade of one installation of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Bits uses your [upgrade instructions][7] when building plans to tailor them to your organization's specific way of working.
+
+Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
 
 You can view plan steps in an interactive workflow diagram:
 <!-- TODO: plan screenshot -->
+
+After a plan is created, but before you have approved it, you can add [custom steps](#custom-steps) and remove any step that isn't a preflight or postflight check.
 
 ### Custom steps
 
@@ -79,7 +83,8 @@ To add a custom step to a plan:
 
 [1]: /bits_ai/bits_maintenance/
 [2]: /actions/workflows/
-[3]: /bits_ai/bits_maintenance/setup/#step-7-optional-create-a-rollout-order
-[4]: /bits_ai/bits_maintenance/setup/#step-6-recommended-create-an-operational-profile
+[3]: /bits_ai/bits_maintenance/setup/#step-8-optional-create-a-rollout-order
+[4]: /bits_ai/bits_maintenance/setup/#step-7-recommended-create-an-operational-profile
 [5]: https://app.datadoghq.com/bits-ai/maintenance/campaigns
 [6]: https://app.datadoghq.com/bits-ai/maintenance/plans
+[7]: /bits_ai/bits_maintenance/instructions_memories/#upgrade-instructions

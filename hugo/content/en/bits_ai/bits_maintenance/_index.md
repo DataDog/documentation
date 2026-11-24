@@ -42,6 +42,8 @@ Bits Maintenance supports a specific set of OSS Kubernetes projects, including R
 
 Bits monitors each supported project. For each release, it collects and analyzes source code, release notes, documentation, and Helm charts. This knowledge, combined with your cluster data, allows Bits to assess how new software releases affect your clusters specifically.
 
+Some projects are experimental, meaning Datadog is evaluating the data quality and upgrade reliability for that project. Experimental projects are marked with a flask icon next to the project name. You can use experimental projects with your usual reviews and approvals.
+
 ## Ways to work with Bits Maintenance
 
 You can work with Bits Maintenance:

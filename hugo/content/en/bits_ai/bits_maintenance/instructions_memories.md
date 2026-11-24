@@ -36,13 +36,17 @@ Bits Maintenance has a default upgrade runbook, which it combines with the instr
 To add upgrade instructions:
 1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Upgrade Instructions{{< /ui >}}.
 1. Click {{< ui >}}Create Instructions{{< /ui>}}.
-<!-- TODO -->
+1. Fill in the fields:
+    - {{< ui >}}Instructions name{{< /ui>}}: Enter an identifier for these upgrade instructions.
+    - {{< ui >}}Match upgrades by tags (optional){{< /ui>}}: To scope which clusters, projects, namespaces, or environments these upgrade instructions apply to, select one or more tags. Leave empty to apply to all upgrades.
+    - {{< ui >}}Your runbook{{< /ui>}}: Describe your upgrade process, such as who does what, in which order, and which repositories or workflows to use.
 1. Click {{< ui >}}Create Draft for Review{{< /ui >}}.
-<!-- TODO -->
+    - Bits Maintenance parses the instructions you entered into a plan template.
+<!-- TODO: finish these instructions. like, Review the proposed plan template...? -->
 
 ## Memories
 
-As Bits Maintenance builds or executes a plan, it may pause to ask you a question. It records your answer as a memory, so that you don't have to answer the same questions repeatedly.
+As Bits Maintenance builds or executes a plan, it may pause to ask you a question. If you click {{< ui >}}Remember this answer{{< /ui >}}, Bits records it as a memory so that you don't have to answer the same question repeatedly.
 
 To view the memories Bits has collected, or to delete a memory, navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Memories{{< /ui>}}.
 

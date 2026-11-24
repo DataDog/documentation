@@ -25,7 +25,7 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-To set up [Bits Maintenance][1], verify your organization's connections, configure the Agent on your clusters, and enroll those clusters. You can also create an operational profile and a rollout order to control how upgrades run.
+To set up [Bits Maintenance][1], verify your organization's connections, configure the Agent on your clusters, and enroll those clusters. You can also define specific upgrade instructions, create an operational profile, and set up a rollout order to control how upgrades run.
 
 ## Prerequisites
 
@@ -93,7 +93,11 @@ To enroll clusters:
 
 After you enroll a cluster, Bits Maintenance scans it to understand which software packages are running. Bits regularly re-scans your enrolled clusters to understand their software inventory. You can also manually trigger a re-scan.
 
-## Step 6 (Recommended): Create an operational profile
+## Step 6 (Recommended): Create upgrade instructions
+
+Upgrade instructions teach Bits Maintenance to work the way your organization already works. Follow the steps in [Add upgrade instructions][15] on the Upgrade Instructions and Memories page.
+
+## Step 7 (Recommended): Create an operational profile
 
 An operational profile determines whether Bits Maintenance can execute a [plan][3] without your approval. Without an operational profile defined, you must approve each plan before Bits can run it.
 
@@ -103,7 +107,7 @@ To create an operational profile:
 <!-- TODO: This was going to change big time? -->
 1. Click {{< ui >}}Save Changes{{< /ui>}}.
 
-## Step 7 (Optional): Create a rollout order
+## Step 8 (Optional): Create a rollout order
 
 A rollout order defines the sequence in which, for a [project campaign][4], upgrades are deployed across your clusters. You can set a certain rollout order as a default. 
 
@@ -137,3 +141,4 @@ After creating a rollout order, you can select it when [configuring a project ca
 [12]: /actions/private_actions/set_up_agent_based/?tab=kubernetesoperator#manual-installation
 [13]: /actions/private_actions/set_up_agent_based/#change-the-allowlist
 [14]: /actions/private_actions/execution_policies/
+[15]: /bits_ai/bits_maintenance/instructions_memories/#add-upgrade-instructions
