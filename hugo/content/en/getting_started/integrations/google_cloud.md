@@ -332,8 +332,6 @@ For deep dives into monitoring many of the more popular services, check out the 
 
 By default, Datadog monitors every project the service account can access, including projects it gains access to later. To monitor only some of these projects, add filters under {{< ui >}}Limit Monitored Projects{{< /ui >}} in the {{< ui >}}Projects{{< /ui >}} tab of the [Google Cloud integration page][11]. You can filter by project ID, by project label, or both.
 
-Filter changes apply the next time Datadog discovers projects for the service account: new projects that match are added, and monitored projects that no longer match are removed.
-
 {{% collapse-content title="Limit monitored projects by project ID" level="h4" %}}
 
 Each filter is a project ID or a project ID pattern. Use `*` to match any number of characters and `?` to match a single character. Start a filter with `!` to exclude matching projects. Filters without a wildcard match a project ID exactly.
