@@ -82,8 +82,9 @@ The `execute_code_write` tool is included in the `code-exec` toolset, the defaul
 
 To use write operations:
 
+1. Ask an organization administrator to enable **MCP Write Access** in Organization Settings. When it's disabled, the MCP Server hides write tools from all users. See [Write tools are missing](/mcp_server/setup/#write-tools-are-missing).
 1. Assign your role the `mcp_write` permission and the permissions required for the resources being modified. For example, creating a monitor requires `Monitors Write` in addition to `mcp_write`.
-1. Reauthorize the MCP connection in your AI client if needed to consent to the additional write scopes.
+1. If your AI client connected before your role had `mcp_write`, reauthorize the MCP connection to consent to the additional write scopes.
 
 ## Review and retry write operations safely
 
