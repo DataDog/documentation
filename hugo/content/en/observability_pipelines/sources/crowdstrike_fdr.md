@@ -38,31 +38,31 @@ The rest of this page covers the CrowdStrike hosted storage bucket. For a custom
 
 ## Prerequisites
 
-To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. See [Create a feed](https://docs.crowdstrike.com/access?ft:originId=l74bb59e) for instructions.
-  - When you select a storage option, choose **CrowdStrike hosted storage bucket**, then select the events to include in the feed.
-  - On the **Copy feed credentials** page, copy the values in the following table. You need them when you set up the source.
+To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. See [Create a feed][2] for instructions.
+  - For {{< ui >}}Storage{{< /ui >}}, choose **CrowdStrike hosted storage bucket**, then select the events to include in the feed.
+  - On the {{< ui >}}Copy feed credentials{{< /ui >}} page, copy the values in the following table. You need them when you set up the source.
     - The Observability Pipelines CrowdStrike FDR source authenticates with the feed's client ID and secret because CrowdStrike manages the bucket and queue, assuming an IAM role is not supported.
 
-  | CrowdStrike value | Observability Pipelines setting                | Default secret identifier                      |
-  |-------------------|------------------------------------------------|------------------------------------------------|
-  | Notifications URL | {{< ui >}}SQS Queue URL Key{{< /ui >}}         | `SOURCE_CROWDSTRIKE_FDR_SQS_URL`               |
-  | Client ID         | {{< ui >}}AWS Access Key ID Key{{< /ui >}}     | `SOURCE_CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID`     |
-  | Secret            | {{< ui >}}AWS Secret Access Key Key{{< /ui >}} | `SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY` |
-  | Storage region    | {{< ui >}}AWS Region{{< /ui >}}                | Not applicable. Select the region in the UI.   |
+    | CrowdStrike value | Observability Pipelines setting                | Default secret identifier                      |
+    |-------------------|------------------------------------------------|------------------------------------------------|
+    | Notifications URL | {{< ui >}}SQS Queue URL Key{{< /ui >}}         | `SOURCE_CROWDSTRIKE_FDR_SQS_URL`               |
+    | Client ID         | {{< ui >}}AWS Access Key ID Key{{< /ui >}}     | `SOURCE_CROWDSTRIKE_FDR_AWS_ACCESS_KEY_ID`     |
+    | Secret            | {{< ui >}}AWS Secret Access Key Key{{< /ui >}} | `SOURCE_CROWDSTRIKE_FDR_AWS_SECRET_ACCESS_KEY` |
+    | Storage region    | {{< ui >}}AWS Region{{< /ui >}}                | Not applicable. Select the region in the UI.   |
 
-<div class="alert alert-warning">CrowdStrike shows the feed secret only once. Copy it before you close the page. To get a new secret, you must reset the feed credentials.</div>
+    <div class="alert alert-warning">CrowdStrike shows the feed secret only once. Copy it before you close the page. To get a new secret, you must reset the feed credentials.</div>
 
 ## Setup
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the SQS URL, AWS access key ID, AWS secret access key, and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-Set up this source when you [set up a pipeline][2]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
+Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The instructions in this section are for setting up the source in the UI.
 
 After you select the CrowdStrike FDR source in the pipeline UI:
 
-1. Enter the identifier for your SQS queue URL in {{< ui >}}SQS Queue URL Key{{< /ui >}}. The identifier references your feed's notifications URL, such as `https://sqs.us-west-2.amazonaws.com/123456789012/cs-example-queue`. If you leave it blank, the [default](#secret-defaults) is used.
-1. Enter the identifier for your AWS access key ID in {{< ui >}}AWS Access Key ID Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
-1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your SQS queue URL in {{< ui >}}SQS Queue URL Key{{< /ui >}}. The identifier references your feed's notifications URL, such as `https://sqs.us-west-2.amazonaws.com/123456789012/cs-example-queue`. If you leave the identifier field blank, the [default][7] is used.
+1. Enter the identifier for your AWS access key ID in {{< ui >}}AWS Access Key ID Key{{< /ui >}}. If you leave it blank, the [default][7] is used.
+1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default][7] is used.
 1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed, such as `us-west-2`. Use the storage region shown on the feed credentials page. This field is required.
 
 {{< img src="observability_pipelines/sources/crowdstrike_fdr_settings.png" alt="The CrowdStrike FDR source settings in the pipeline UI, showing the SQS Queue URL Key, AWS Access Key ID Key, AWS Secret Access Key Key, AWS Region, and optional settings" style="width:45%;" >}}
@@ -115,11 +115,11 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 
 ## Process FDR logs with the CrowdStrike FDR pack
 
-After you add the source, add the [CrowdStrike FDR pack][6] to parse your FDR events, drop high-volume and low-signal events, and generate metrics.
+After you add the source, add the [CrowdStrike FDR pack][8] to parse your FDR events, drop high-volume and low-signal events, and generate metrics.
 
 ## Health metrics
 
-For [component metrics][7] and [source buffer metrics][8] emitted by all sources, see the [Pipelines Usage Metrics][9] documentation. To filter or group by CrowdStrike FDR source metrics, use the tag `component_type:crowdstrike_fdr`.
+For [component metrics][9] and [source buffer metrics][10] emitted by all sources, see the [Pipelines Usage Metrics][11] documentation. To filter or group by CrowdStrike FDR source metrics, use the tag `component_type:crowdstrike_fdr`.
 
 ### CrowdStrike FDR metrics
 
@@ -151,11 +151,13 @@ For [component metrics][7] and [source buffer metrics][8] emitted by all sources
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/sources/amazon_s3/
-[2]: /observability_pipelines/configuration/set_up_pipelines/
-[3]: https://app.datadoghq.com/observability-pipelines
-[4]: /api/latest/observability-pipelines/
-[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[6]: /observability_pipelines/packs/crowdstrike/
-[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[2]: https://docs.crowdstrike.com/access?ft:originId=l74bb59e
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: https://app.datadoghq.com/observability-pipelines
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: #secret-defaults
+[8]: /observability_pipelines/packs/crowdstrike/
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
