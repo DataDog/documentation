@@ -106,7 +106,7 @@ To customize which Static Code Analysis rules are configured in your repositorie
 
 ## Prioritize findings with runtime context
 
-Static Code Analysis findings show the services that run the affected code and the runtime risks those services carry, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}. Use the {{< ui >}}Runtime Context{{< /ui >}} and {{< ui >}}Risks{{< /ui >}} facets to focus on findings in live, exposed services. For more information, see [Runtime Context for Static Findings][18].
+Static Code Analysis findings show the services that run the affected code and the runtime risks those services carry, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on findings in live, exposed services. For more information, see [Runtime Context for Static Findings][18].
 
 ## Link findings to Datadog services and teams
 To link findings to Datadog services and teams, see the [Setup documentation][13].

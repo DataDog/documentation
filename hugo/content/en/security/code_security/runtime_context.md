@@ -32,7 +32,7 @@ Runtime context is available for:
 
 1. **Datadog maps findings to services.** Each finding maps to every service that its file is related to. SAST, Secret Scanning, and IaC Security findings share one mapping. See [How findings are mapped to services](#how-findings-are-mapped-to-services).
 2. **Mapped findings inherit runtime risks.** Each mapped finding inherits the runtime risks of its services. When a finding maps to more than one service, a risk applies if any of those services has it.
-3. **Unmapped findings are labeled.** Findings with no mapped service show {{< ui >}}No runtime context{{< /ui >}}. A missing mapping is never treated as low risk.
+3. **Unmapped findings are never treated as low risk.** Findings with no mapped service show no risk badges and keep their current severity.
 
 For SAST, Secret Scanning, and IaC Security findings, runtime risks are informational: they don't change the Datadog Severity Score.
 
@@ -42,7 +42,7 @@ For SAST, Secret Scanning, and IaC Security findings, runtime risks are informat
 | --- | --- | --- | --- | --- |
 | Service in Production | The service runs in a production environment, computed from the `env` and `environment` tags. | Yes | Yes | Yes |
 | Service Exposed to Attacks | A security signal has been detected on the service in the last 15 days. | Yes | No | Yes |
-| Access to Sensitive Data | The service handles sensitive data. | Yes | No | Yes |
+| Access to Sensitive Data | The service runs on infrastructure that has access to sensitive data. | Yes | No | Yes |
 | Privileged Access | The service runs with privileged access. | Yes | Yes | Yes |
 | Publicly Accessible | The service is reachable from the internet. | Yes | Yes | Yes |
 
@@ -52,25 +52,23 @@ For SAST, Secret Scanning, and IaC Security findings, runtime risks are informat
 
 In the SAST, Secret Scanning, and IaC Security explorers on the [{{< ui >}}Code Security Vulnerabilities{{< /ui >}}][5] page:
 
-- In the {{< ui >}}Runtime Context{{< /ui >}} facet group:
-  - Use the {{< ui >}}Runtime Context{{< /ui >}} facet to show findings {{< ui >}}With runtime context{{< /ui >}} or with {{< ui >}}No runtime context{{< /ui >}}.
-  - Use the {{< ui >}}Service{{< /ui >}} facet to filter by mapped service.
 - In the {{< ui >}}Risks{{< /ui >}} facet group, filter by each runtime risk that applies to the product, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}.
+- Each finding shows risk badges under its title, such as {{< ui >}}Service In Production{{< /ui >}} or {{< ui >}}Exposed to attacks{{< /ui >}}. IaC Security findings show {{< ui >}}In production{{< /ui >}}. Hover over a badge to see what it means.
 
-Each finding shows the risk badges of its services. Findings with no mapped service show {{< ui >}}No runtime context{{< /ui >}} and never match a runtime risk filter. If a risk filter returns no results, clear it to see more findings.
+Findings with no runtime context never match a runtime risk filter. If a risk filter returns no results, clear it to see more findings.
 
 ### In the finding side panel
 
-- **{{< ui >}}Related To{{< /ui >}}**: The service that the finding most likely runs in. If other services are also mapped, a count of the additional services appears. If no service is mapped, the panel shows {{< ui >}}No runtime context{{< /ui >}} with a {{< ui >}}Set up service mapping{{< /ui >}} link.
+- **{{< ui >}}Related To{{< /ui >}}**: The services linked to the finding. Hover over the label to see how Datadog links findings to services and how to fix an incorrect link. If no service is linked, SAST and Secret Scanning findings show {{< ui >}}Missing Service{{< /ui >}}, and IaC Security findings hide this row.
 - **Risk badges**: The panel header shows the runtime risks that apply to the product.
-- **{{< ui >}}Severity Breakdown{{< /ui >}}**: The base score, followed by one entry for each runtime risk with the reason it applies or doesn't apply. The {{< ui >}}Service in Production{{< /ui >}} entry lists the service's environments. The {{< ui >}}Service Exposed to Attacks{{< /ui >}} entry shows the number of attacks in the last 15 days and the top detected security activities. When more than one service is mapped, the breakdown is calculated for the service with the highest severity, and the panel names that service.
+- **{{< ui >}}Severity Breakdown{{< /ui >}}**: The base score, followed by one sentence for each runtime risk, for example: "This vulnerability has associated service(s) running in a production environment."
 
 ### On the Summary page
 
 On the [{{< ui >}}Code Security Summary{{< /ui >}}][6] page:
 
-- In the {{< ui >}}Code vulnerabilities{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to see a funnel of SAST findings: {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In your services{{< /ui >}}, {{< ui >}}In production{{< /ui >}}, and {{< ui >}}Exposed to attacks{{< /ui >}}. Counts for {{< ui >}}Publicly Accessible{{< /ui >}}, {{< ui >}}Access to Sensitive Data{{< /ui >}}, and {{< ui >}}Privileged Access{{< /ui >}} appear below the funnel.
-- In the {{< ui >}}Secrets{{< /ui >}} and {{< ui >}}Infrastructure as Code{{< /ui >}} sections, select {{< ui >}}Runtime context{{< /ui >}}. The Secrets funnel shows {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In your services{{< /ui >}}, and {{< ui >}}In production{{< /ui >}}. The IaC funnel adds {{< ui >}}Exposed to attacks{{< /ui >}}.
+- In the {{< ui >}}Code vulnerabilities{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to see a funnel of SAST findings: {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In your services{{< /ui >}}, {{< ui >}}In Production{{< /ui >}}, and {{< ui >}}Exposed to Attacks{{< /ui >}}. Counts for {{< ui >}}Publicly Accessible{{< /ui >}}, {{< ui >}}Access to Sensitive Data{{< /ui >}}, and {{< ui >}}Privileged Access{{< /ui >}} appear below the funnel.
+- In the {{< ui >}}Code vulnerabilities grouped{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to group SAST findings by repository and team.
 
 Click a funnel stage or a risk count to open the explorer filtered to those findings.
 
@@ -84,7 +82,7 @@ For IaC Security findings, a related service means that the IaC file is in that 
 
 ### Improve coverage
 
-If many findings show {{< ui >}}No runtime context{{< /ui >}}:
+If many findings have no runtime context:
 
 1. Make sure that each service built from the repository reports Git metadata, so Datadog can link the service to its repository. For example, set `DD_GIT_REPOSITORY_URL=github.com/<org>/<repo>` and `DD_GIT_COMMIT_SHA=$(git rev-parse HEAD)`. See [Datadog Source Code Integration][8].
 2. Add `codeLocations` to the service's definition in the [Software Catalog][9].

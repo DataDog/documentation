@@ -41,7 +41,7 @@ IaC Security integrates with your repositories to continuously scan for misconfi
 
 ### Prioritize misconfigurations with runtime context
 
-IaC Security findings show the services related to the affected file and the runtime risks those services carry, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}. A related service means that the IaC file is in that service's repository or deployment files. It does not confirm that the misconfiguration is present in the running service. Use the {{< ui >}}Runtime Context{{< /ui >}} and {{< ui >}}Risks{{< /ui >}} facets to focus on findings related to live, exposed services. For more information, see [Runtime Context for Static Findings][15].
+IaC Security findings show the services related to the affected file and the runtime risks those services carry, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}. A related service means that the IaC file is in that service's repository or deployment files. It does not confirm that the misconfiguration is present in the running service. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on findings related to live, exposed services. For more information, see [Runtime Context for Static Findings][15].
 
 ### Review and fix violations in pull requests
 

@@ -39,7 +39,7 @@ Diff-aware scanning, which is available for [Static Code Analysis][18], is not s
 
 ### Prioritize secrets with runtime context
 
-Secret Scanning findings show the services that run the affected file and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Runtime Context{{< /ui >}} and {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in live, exposed services. For more information, see [Runtime Context for Static Findings][19].
+Secret Scanning findings show the services that run the affected file and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in live, exposed services. For more information, see [Runtime Context for Static Findings][19].
 
 ### Detect secrets in Git history
 
