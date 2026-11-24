@@ -862,9 +862,9 @@ Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with re
 *Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
 Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
 
-Teams access is read-only. To create or update dashboards and notebooks, use `upsert_datadog_dashboard` and the notebook tools. Code execution supports reading and deleting those resources. See [What the sandbox can access][107] for details.
+Teams access is read-only. To create or update dashboards and notebooks, use `upsert_datadog_dashboard` and the notebook tools. Code execution supports reading and deleting those resources. See [What the sandbox can access][105] for details.
 
-The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][106] before retrying a script.
+The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][104] before retrying a script.
 
 - Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
 - Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
@@ -879,9 +879,6 @@ Looks up SDK operations, request types, and response types for `execute_code` an
 - Show me the available methods for aggregating spans.
 - What does the `dd.time` namespace provide?
 - Look up the operation and request and response types for creating a monitor.
-
-[106]: /mcp_server/code_execution/#review-and-retry-write-operations-safely
-[107]: /mcp_server/code_execution/#what-the-sandbox-can-access
 
 ## Dashboards
 
@@ -3881,6 +3878,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [101]: /gpu_monitoring/
 [102]: /gpu_monitoring/mcp_tools/
 [103]: /mcp_server/setup#required-permissions
+[104]: /mcp_server/code_execution/#review-and-retry-write-operations-safely
+[105]: /mcp_server/code_execution/#what-the-sandbox-can-access
 
 ## Further reading
 
