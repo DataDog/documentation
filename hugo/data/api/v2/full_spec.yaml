@@ -255166,11 +255166,19 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a RUM-based metric
@@ -255196,7 +255204,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM-based metric
@@ -255243,7 +255255,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM-based metric
@@ -255322,13 +255338,25 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM-based metric
