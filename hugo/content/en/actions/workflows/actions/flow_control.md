@@ -24,65 +24,15 @@ Use [Logic actions][1] to add control logic to your workflow. For example, you c
 
 ## Decision
 
-Use the {{< ui >}}Decision{{< /ui >}} action when the next step depends on a judgment call that a fixed condition can't make, such as which team should handle an alert or how severe a support case is. The Decision action evaluates questions against context you provide and returns a typed answer for each one. Use those answers as the input to an [If condition](#if-condition) or a [Switch statement](#switch-statement).
+The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed condition can't, such as which team should handle an alert or how severe a support case is. It evaluates one or more questions against the context you provide in {{< ui >}}State{{< /ui >}} and returns an answer for each question. A Decision action times out after 60 seconds and accepts requests up to 1 MiB. Each organization can send up to 100,000 input tokens per minute.
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">The Decision action is not available on the {{< region-param key=dd_site_name >}} site.</div>
-{{< /site-region >}}
+| Question type | Use it to | Answer |
+|---|---|---|
+| `noul` | Get the probability of a yes or no answer. | `noul`: the probability |
+| `choice` | Pick one of several named options. | `choice`: the selected option, plus `probabilities` for each option |
+| `score` | Rate against ordered levels, such as severity from low to critical. | `score`: the numeric score, plus `legend` and `probabilities` for each level |
 
-### Configure the Decision action
-
-1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
-1. Search for and select the {{< ui >}}Decision{{< /ui >}} action.
-1. In {{< ui >}}State{{< /ui >}}, enter the context for every question, such as the alert title and message from the trigger.
-1. In {{< ui >}}Questions{{< /ui >}}, add one or more questions, each keyed by a name. Each question has a `type` and `instructions`. Choice and score questions also need `criteria`.
-
-| Type | Use it to | `criteria` | Answer fields |
-|---|---|---|---|
-| `noul` | Get the probability of a yes or no answer. | None | `noul`: the probability |
-| `choice` | Pick one of several named options. | An object that maps each option name to its description. | `choice`: the selected option name. `probabilities`: the probability of each option. |
-| `score` | Rate against ordered levels. | A list of level descriptions, lowest level first. | `score`: the numeric score. `legend`: each score mapped to its level description. `probabilities`: the probability of each level. |
-
-Answers can also include a `confidence` value.
-
-The following example asks three questions about an alert:
-
-```json
-{
-  "route": {
-    "type": "choice",
-    "instructions": "Which team should handle this alert?",
-    "criteria": {
-      "infra": "Host, network, or Kubernetes problems",
-      "app": "Application errors or latency",
-      "security": "Suspicious access or a security signal"
-    }
-  },
-  "severity": {
-    "type": "score",
-    "instructions": "How severe is this alert?",
-    "criteria": [
-      "Low: no customer impact",
-      "Medium: degraded for some customers",
-      "High: a key feature is down",
-      "Critical: widespread outage"
-    ]
-  },
-  "customer_impact": {
-    "type": "noul",
-    "instructions": "Is this alert likely affecting customers?"
-  }
-}
-```
-
-### Branch on the answers
-
-Each answer is available at `Steps.<step_name>.answers.<question_name>`.
-
-- **Route to one of several paths:** add a Switch statement with the switch expression `{{ Steps.Decision.answers.route.choice }}`, and add a case for each option name: `infra`, `app`, and `security`.
-- **Act only on a likely yes:** add an If condition with the statement `{{ Steps.Decision.answers.customer_impact.noul }}` is greater than `0.8`. Send the false branch to a person for review.
-
-The Decision action times out after 60 seconds and accepts requests up to 1 MiB. Each organization can send up to 100,000 input tokens per minute.
+Use the answers as the input to an [If condition](#if-condition) or a [Switch statement](#switch-statement). Each answer is available at `Steps.<step_name>.answers.<question_name>`. For example, a Switch statement can route on `{{ Steps.Decision.answers.team.choice }}`.
 
 ## If condition
 
