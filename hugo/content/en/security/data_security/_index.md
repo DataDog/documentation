@@ -47,6 +47,10 @@ When a rule matches, Data Security creates a finding. A finding links a rule to 
 
 ### Data handling
 
+The following diagram shows where each scan runs and what Datadog receives. For Amazon S3, the diagram shows scanners in your AWS account.
+
+{{< img src="security/data_security/how_data_security_scans.png" alt="Diagram of the three scan paths. A Datadog-hosted scanner reads sampled Snowflake rows and scans them in memory. The Datadog Agent scans PostgreSQL rows and Agentless scanners scan Amazon S3 files in the customer environment. Only findings go to Data Security." style="width:100%;" >}}
+
 | | Snowflake | PostgreSQL | Amazon S3 |
 |---|---|---|---|
 | **Does scanned data leave your environment?** | Yes. Sampled rows are read by a Datadog-hosted scanner and held in memory only during the scan. Datadog stores only the match metadata. | No. The Agent scans the data in your environment and sends only the match metadata to Datadog. | With a scanner in your AWS account, no. The scanner reads files in your account and sends only the match metadata to Datadog. With a Datadog-hosted scanner, yes. Files are read by a scanner that runs in a disposable sandbox hosted by Datadog. Datadog stores only the match metadata. |

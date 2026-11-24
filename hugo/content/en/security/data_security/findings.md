@@ -25,9 +25,9 @@ The [Data Security explorer][1] shows where sensitive data sits across your Snow
 
 ## Find the accounts with sensitive data
 
-By default, the explorer lists the accounts where Data Security found sensitive data. To include the accounts with no findings, turn on {{< ui >}}All scanned resources{{< /ui >}}.
+By default, the {{< ui >}}Sensitive Data Only{{< /ui >}} toggle is on, and the explorer shows only the accounts where Data Security found sensitive data. To show all scanned accounts, including the accounts with no sensitive data, turn off {{< ui >}}Sensitive Data Only{{< /ui >}}.
 
-Results are sorted by severity, then by status.
+By default, the explorer sorts the accounts by last scan date.
 
 ### Filter findings
 
@@ -42,8 +42,6 @@ To filter on a value from the list, click a tag or a category on a row, then cho
 ## Explore an account
 
 Click an account to open it. The tree on the left shows the databases, schemas, and tables of the account, or the buckets and folders. The tree highlights the resources that hold sensitive data. Click a folder to filter the list, or click a table to open its side panel.
-
-The URL includes the selected account, resource type, and resource, so you can share a link to a specific table.
 
 ## Review a resource
 

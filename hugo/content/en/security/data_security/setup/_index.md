@@ -53,6 +53,10 @@ On the {{< ui >}}Snowflake{{< /ui >}} and {{< ui >}}Postgres{{< /ui >}} tabs, ea
 
 Click a row to open its side panel. The side panel lists the findings for each database and the setup issues to fix.
 
+### Scanning groups
+
+On the [Data Security configuration page][5], the {{< ui >}}Scanning Groups{{< /ui >}} section is read-only. Data Security applies all [library rules][7] in each scanning group.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -63,3 +67,4 @@ Click a row to open its side panel. The side panel lists the findings for each d
 [4]: https://www.datadoghq.com/product-preview/dspm/
 [5]: https://app.datadoghq.com/sensitive-data-scanner/configuration/data-security
 [6]: /account_management/rbac/permissions/
+[7]: /security/sensitive_data_scanner/scanning_rules/library_rules/

@@ -32,7 +32,9 @@ Datadog sends the list of tables to scan to the Agent through [Remote Configurat
 
 - [Database Monitoring][2] is set up on the PostgreSQL host.
 - The Agent that monitors the host runs Datadog Agent 7.86.0 or later.
-- Your Datadog role has the Integrations Manage permission, to turn on scanning. To upgrade or configure the Agent from Datadog, your role also needs the [Fleet Automation permissions][7].
+- [Schema collection][8] is enabled in the Database Monitoring configuration of the host. Schema collection is enabled by default with Agent 7.80.0 and later. Do not set `collect_schemas.enabled` to `false`.
+- Your Datadog role has the Integrations Manage permission, to turn on scanning.
+- Optional: to upgrade or configure the Agent from the side panel with Fleet Automation, your role also needs the [Fleet Automation permissions][7]. You can enable scanning without Fleet Automation.
 - [Remote Configuration][1] is enabled for your organization and connected on the Agent.
 
 ## Configure the Agent
@@ -61,6 +63,16 @@ remote_configuration:
 
 If Remote Agent Management is enabled and the Agent runs version 7.71.1 or later, you can push these settings from the side panel instead of editing the file.
 
+Optional: to make scans use TLS when the `postgres` integration instance does not require it, also set `enforce_ssl` to `true`:
+
+```yaml
+data_security:
+  enabled: true
+  enforce_ssl: true
+```
+
+With `enforce_ssl: true`, the Agent changes the `ssl` mode of the integration instance to `require` for scans when the mode is unset, `disable`, `allow`, or `prefer`. The Agent keeps the stricter modes `require`, `verify-ca`, and `verify-full`. The Agent does not scan a host that it connects to through a UNIX socket.
+
 After you edit `datadog.yaml`, [restart the Agent][6] to apply the settings.
 
 ### Grant read access to the tables
@@ -73,7 +85,13 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <SCHEMA_NAME> TO datadog;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <SCHEMA_NAME> GRANT SELECT ON TABLES TO datadog;
 ```
 
-`ALTER DEFAULT PRIVILEGES` covers the tables that the user who runs it creates later. If another user creates tables in the schema, add `FOR ROLE <TABLE_OWNER>` after `ALTER DEFAULT PRIVILEGES`.
+`ALTER DEFAULT PRIVILEGES` covers the tables that the user who runs it creates later. If another user creates tables in the schema, add `FOR ROLE <TABLE_OWNER>` after `ALTER DEFAULT PRIVILEGES`. For example, if the `app_owner` role creates the tables in the `sales` schema:
+
+```sql
+ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA sales GRANT SELECT ON TABLES TO datadog;
+```
+
+To run this command, you must be a member of the `app_owner` role or a superuser.
 
 Tables the `datadog` user can't read appear as setup issues in the side panel.
 
@@ -106,3 +124,4 @@ After the first scan, check the setup issues in the side panel. A missing read p
 [5]: /agent/fleet_automation/upgrade_agents/
 [6]: /agent/configuration/agent-commands/#restart-the-agent
 [7]: /agent/fleet_automation/#control-access-to-fleet-automation
+[8]: /database_monitoring/schema_explorer/?tab=postgres#tuning-schema-collection

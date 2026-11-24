@@ -54,7 +54,7 @@ Snowflake findings also appear in the Data Observability catalog. On a database,
 
 ## Snowflake cost
 
-Data Security run as `SELECT` queries against your tables and are billed as normal warehouse usage. It runs on the warehouse you set up for Data Observability (`DATADOG_WH` by default).
+Data Security scans run as `SELECT` queries against your tables and are billed as normal warehouse usage. They run on the warehouse you set up for Data Observability (`DATADOG_WH` by default).
 
 ## Disable scanning
 
