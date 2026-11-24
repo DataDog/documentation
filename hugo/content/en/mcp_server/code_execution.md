@@ -40,7 +40,7 @@ The MCP Server runs the script and returns only the joined result. The agent com
 
 The `core` and `execute_code` toolsets provide:
 
-| Tool | Description |
+| <span style="display:inline-block; min-width:20ch">Tool</span> | Description |
 | --- | --- |
 | [`execute_code`][1] | Runs JavaScript with read-only API access in the sandbox for investigations and analysis, and returns a structured result. |
 | [`execute_code_write`][7] | Runs JavaScript in the sandbox to create, update, or delete supported Datadog resources, and returns a structured result. |
