@@ -204,17 +204,17 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 
 For other integrations, see the [Salesforce][17] or [ServiceNow][18] setup instructions.
 
-[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
-[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[17]: /integrations/salesforce/#step-4-connect-your-org
+[18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
-First, [configure the Databricks integration][14] with access to the table or view to ingest.
+First, [configure the Databricks integration][14] with an account that has read access to the source data.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Databricks Account{{< /ui >}}: The connected workspace.
+   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
@@ -223,19 +223,19 @@ If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to 
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
-[14]: /integrations/databricks/#reference-table-configuration
+[14]: /integrations/databricks/#connect-to-a-new-databricks-workspace
 [16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
 
-First, [configure the Snowflake integration and grant read permissions][15] for the source data.
+First, [configure the Snowflake integration][15] with an account that has read access to the source data.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Snowflake Account{{< /ui >}}: The connected Snowflake account.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
@@ -244,7 +244,7 @@ If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to c
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
-[15]: /integrations/snowflake-web/#reference-tables
+[15]: /integrations/snowflake-web/#connect-your-snowflake-account
 [16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
