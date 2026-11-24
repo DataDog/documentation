@@ -15,6 +15,8 @@ If you experience issues with Agentless Scanning, use the following troubleshoot
 
 ## No results after deployment
 
+**Applies to**: Datadog-hosted and self-hosted scanning
+
 After deploying Agentless Scanning, results do not appear immediately. First results typically appear within 30 minutes of deployment. In rare cases, such as IAM configuration issues, it can take up to two hours.
 
 If no results appear after two hours:
@@ -33,13 +35,17 @@ If no results appear after two hours:
 
 ## Enable Remote Configuration on the API key
 
+**Applies to**: Self-hosted scanning
+
 To authenticate and authorize Agentless scanners to receive scan instructions, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
 
 **Note:** If you have [`api_keys_write`][9] RBAC permission, but are missing Remote Configuration [Organization][10] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key. To view and manage your organization's API Keys, see [API Keys][11] in Datadog.
 
-## GCP: Failed to create state bucket (storage.buckets.create 403)
+## Google Cloud: Failed to create state bucket (storage.buckets.create 403) {#gcp-failed-to-create-state-bucket-storagebucketscreate-403}
 
-If the GCP Cloud Shell setup fails at **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** with an error like:
+**Applies to**: Self-hosted scanning on Google Cloud
+
+If the Google Cloud Shell setup fails at **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** with an error like:
 
 ```
 Failed to create state bucket: datadog-agentless-tfstate-<project>
@@ -55,11 +61,15 @@ the identity running the script does not have permission to create or manage GCS
 
 ## Deployment fails due to VPC creation restrictions
 
+**Applies to**: Self-hosted scanning
+
 This issue applies to self-hosted scanners. If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
 
 To fix this, use the [**custom VPC**][8] option during setup to deploy the scanner into an existing VPC instead of creating a new one.
 
 ## Scanner instances appear as vulnerable hosts
+
+**Applies to**: Self-hosted scanning
 
 Self-hosted Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed within your cloud account to perform scans. This issue does not apply to Datadog-hosted scanning, which runs no scanner instances in your account. Because they run a standard operating system image (for example, the latest Ubuntu LTS), they may appear in vulnerability findings related to OS packages.
 
@@ -69,11 +79,15 @@ Scanner instances are tagged `DatadogAgentlessScanner:true`. To exclude them fro
 
 ## Hosts with the Datadog Agent are not scanned
 
+**Applies to**: Datadog-hosted and self-hosted scanning
+
 This is expected behavior. To prevent duplicate scanning, Agentless Scanning skips hosts where the Datadog Agent runs with both [Cloud Security Vulnerabilities][6] and Misconfigurations enabled.
 
 If the Agent has only one of these features enabled, Agentless Scanning still scans the host for the other one.
 
 ## Unexpected cross-region scanning costs
+
+**Applies to**: Self-hosted scanning
 
 In some self-hosted deployments, cross-region data transfer may contribute to cloud provider network costs, depending on how scanners and resources are distributed across regions.
 
@@ -83,9 +97,13 @@ See [Deploying Agentless Scanning][7] for detailed guidance on recommended deplo
 
 ## Unavailable for GovCloud and FIPS
 
+**Applies to**: Datadog-hosted and self-hosted scanning
+
 Agentless Scanning is not available in GovCloud and is not FIPS compliant. This applies to both self-hosted and Datadog-hosted scanning.
 
 ## Scans run in a different region than your resources
+
+**Applies to**: Datadog-hosted scanning
 
 With Datadog-hosted scanning, Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For details, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
 

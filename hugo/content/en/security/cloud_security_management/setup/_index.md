@@ -45,7 +45,7 @@ To get started with Cloud Security, review the following:
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
+The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and Google Cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
 
 You can run Agentless scanners in your own cloud account (self-hosted) or let Datadog run them for you (Datadog-hosted, in Preview for AWS). To compare the options, see [Choose where scanners run][10]. To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
@@ -118,7 +118,7 @@ Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail 
 
 ### Deploy using cloud integrations
 
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, GCP, and OCI resources. For more information, see [Deploying Cloud Security using Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, Google Cloud, and OCI resources. For more information, see [Deploying Cloud Security using Cloud Integrations][7].
 
 ## Disable Cloud Security
 

@@ -8,7 +8,7 @@ Complete the following steps to enable Agentless Scanning for your Azure subscri
 1. Expand the list of Azure subscriptions and locate the subscription where you want to deploy the Agentless scanner.
 1. Click the subscription where you want to deploy the Agentless scanner to open the side panel.
 1. On the {% ui %}Features{% /ui %} tab, click {% ui %}Configure Agentless Scanning{% /ui %} or {% ui %}Manage{% /ui %} to open the Agentless Scanning Setup modal.
-1. Under {% ui %}How would you like to set up Agentless Scanning?{% /ui %}, select {% ui %}Azure Resource Manager{% /ui %}.
+1. Under {% ui %}How would you like to set up Agentless scanning?{% /ui %}, select {% ui %}Azure Resource Manager{% /ui %}.
 1. Select an {% ui %}API key{% /ui %} that has [Remote Configuration](/remote_configuration) enabled.
 1. Select an application key.
 1. Click {% ui %}Launch Azure Resource Manager{% /ui %} to be redirected to the Azure portal.

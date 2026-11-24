@@ -20,12 +20,12 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS, Azure, and GCP cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your AWS, Azure, and Google Cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
 You can run Agentless scanners in one of two ways:
 
-- **Self-hosted**: Scanners run in your own cloud account.
 - **Datadog-hosted (SaaS)**: Datadog runs the scanners, and you grant Datadog permissions to scan your account. Supports AWS only.
+- **Self-hosted**: Scanners run in your own cloud account.
 
 Both modes use the same scanning engine and produce the same findings.
 
@@ -37,29 +37,20 @@ Both modes use the same scanning engine and produce the same findings.
 Datadog-hosted scanning supports AWS accounts only.
 {{< /callout >}}
 
-| | Self-hosted | Datadog-hosted (SaaS) |
+| | Datadog-hosted (SaaS) | Self-hosted |
 |---|---|---|
-| Where the scanner runs | In your cloud account | In Datadog's infrastructure |
-| What you deploy | Scanner instances and their networking; for AWS, this includes EC2 instances in an autoscaling group, a VPC, and a NAT gateway | A managed IAM policy and the AWS managed `SecurityAudit` policy, attached to your existing Datadog integration role. The CloudFormation stack also creates a Lambda function that calls the Datadog API during stack deployment. |
-| Where disk contents are read | In your cloud account | In a Datadog scanning environment, in the region of your Datadog site (see [Datadog-hosted data residency](#datadog-hosted-data-residency)) |
-| Supported cloud providers | AWS, Azure, Google Cloud | AWS |
-| Scanner updates | You update the scanner | Datadog updates the scanner automatically |
-| Cloud provider infrastructure cost | Compute and networking costs appear on your cloud provider bill | None |
+| Where the scanner runs | In Datadog's infrastructure | In your cloud account |
+| What you deploy | A managed IAM policy and the AWS managed `SecurityAudit` policy, attached to your existing Datadog integration role. The CloudFormation stack also creates a Lambda function that calls the Datadog API during stack deployment. | Scanner instances and their networking; for AWS, this includes EC2 instances in an autoscaling group, a VPC, and a NAT gateway |
+| Where disk contents are read | In a Datadog scanning environment, in the region of your Datadog site (see [Datadog-hosted data residency](#datadog-hosted-data-residency)) | In your cloud account |
+| Supported cloud providers | AWS | AWS, Azure, Google Cloud |
+| Scanner updates | Datadog updates the scanner automatically | You update the scanner |
+| Cloud provider infrastructure cost | None | Compute and networking costs appear on your cloud provider bill |
 | Scanning engine and findings | Same in both modes | Same in both modes |
 | Scan frequency | Every 12 hours | Every 12 hours |
 | AWS resource coverage | Same in both modes | Same in both modes |
 | Sensitive Data Scanner for Amazon S3 | Supported | Supported |
-| On-demand scanning | Supported for AWS | Not supported |
+| On-demand scanning | Not supported | Supported for AWS |
 | Datadog billing | Same in both modes | Same in both modes |
-
-### When to use self-hosted Agentless Scanning
-
-Use self-hosted scanning if any of the following apply:
-
-- You need to scan Azure or Google Cloud resources.
-- Your policies require that disk contents stay in your own cloud account.
-- Your policies restrict which region or cloud provider can process your data. Datadog-hosted scanning processes data in the region of your Datadog site, which can differ from the region and cloud provider of your resources.
-- You want direct control over scanner versions or scan scheduling.
 
 ### When to use Datadog-hosted (SaaS) Agentless Scanning
 
@@ -70,11 +61,64 @@ Use Datadog-hosted scanning if any of the following apply:
 - You want to avoid the infrastructure cost of running scanners in each region.
 - You want new resource types supported automatically, without updating a scanner.
 
+### When to use self-hosted Agentless Scanning
+
+Use self-hosted scanning if any of the following apply:
+
+- You need to scan Azure or Google Cloud resources.
+- Your policies require that disk contents stay in your own cloud account.
+- Your policies restrict which region or cloud provider can process your data. Datadog-hosted scanning processes data in the region of your Datadog site, which can differ from the region and cloud provider of your resources.
+- You want direct control over scanner versions or scan scheduling.
+
 ### Use both modes
 
 You can choose a mode for each AWS account instead of one mode for your whole organization. For example, you can use Datadog-hosted scanning in most accounts and self-hosted scanners where disk contents must stay in your cloud account.
 
 To switch an account that already uses a self-hosted scanner, see [Move an account from self-hosted to Datadog-hosted (SaaS) Agentless Scanning][17].
+
+## Datadog-hosted (SaaS) Agentless Scanning {#datadog-hosted-scanning}
+
+Datadog runs the scanners in its own infrastructure. This mode is in Preview and supports AWS only. For setup instructions, see [Enabling Agentless Scanning][19].
+
+### How Datadog-hosted scanning works {#datadog-hosted-how-it-works}
+
+1. Datadog discovers your resources through cloud provider APIs. This step reads metadata only.
+2. In your AWS account, Datadog creates a snapshot of each volume to scan. The snapshot stays in your account. Datadog never shares the snapshot with or copies it into a Datadog AWS account.
+3. Datadog reads the snapshot's blocks over HTTPS using the Amazon EBS direct APIs.
+4. Datadog presents the blocks to a scanning sandbox as a block device, and the sandbox mounts the partitions as read-only.
+5. Scanners analyze the mounted file systems and send findings and SBOMs to Datadog.
+6. Datadog deletes the snapshot and destroys the sandbox.
+
+Each scan runs in a new hardware-isolated microVM with its own kernel, which Datadog destroys when the scan ends. Datadog never runs code on your instances.
+
+### What Datadog-hosted scanning sends to Datadog {#datadog-hosted-what-data-is-sent-to-datadog}
+
+Datadog reads your disk contents in its scanning environment on demand, and does **not** retain any copy of them. Only findings and SBOMs persist in Datadog.
+
+### Datadog-hosted data residency {#datadog-hosted-data-residency}
+
+Scans run in the region of the Datadog site that your organization uses, not in the region where your resources are located. For example, if your organization uses the EU1 site, Datadog scans your resources in the EU, regardless of which AWS region your resources are in.
+
+If your resources are in a different region than your Datadog site, scanning can involve a cross-border data transfer. Review your privacy requirements before you enable scanning for these accounts. If your data must be processed in your own cloud account or region, use self-hosted scanning.
+
+### Datadog-hosted cloud provider cost {#datadog-hosted-cost}
+
+There is no scanner infrastructure cost on your cloud provider bill and no additional Datadog cost.
+
+### Datadog-hosted Cloud Storage scanning {#datadog-hosted-cloud-storage-scanning}
+
+You can enable [Sensitive Data Scanner][8] for Amazon S3 buckets during setup. Sensitive Data Scanner catalogs and classifies sensitive data in your cloud storage.
+
+With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in its scanning environment, in the same way as disk contents. Datadog does **not** retain your object contents or the matched data. For each match, Datadog stores only the location: the bucket, object path, matching rule, and position in the object. Because buckets often hold more sensitive data than disks, review your data handling requirements before you enable Sensitive Data Scanner.
+
+Sensitive Data Scanner is optional. You can turn it off and still use Datadog-hosted scanning for vulnerabilities. To turn it off after setup:
+
+- **CloudFormation**: Turn off Sensitive Data Scanner in Datadog. For instructions, see [Set up Sensitive Data Scanner][20].
+- **Terraform**: In the `datadog_agentless_scanning_aws_scan_options` resource, set `sensitive_data` to `false`, then apply the configuration.
+
+### Datadog-hosted on-demand scanning {#datadog-hosted-on-demand-scanning}
+
+The [On-Demand Scanning API][14] is not available for Datadog-hosted scanning. Datadog scans your resources automatically every 12 hours.
 
 ## Self-hosted Agentless Scanning {#self-hosted-scanning}
 
@@ -150,50 +194,6 @@ You can enable [Sensitive Data Scanner][8] for your Agentless Scanning resources
 ### Self-hosted on-demand scanning {#on-demand-scanning}
 
 By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API. For more information, see the [On-Demand Scanning API][14] documentation.
-
-## Datadog-hosted (SaaS) Agentless Scanning {#datadog-hosted-scanning}
-
-Datadog runs the scanners in its own infrastructure. This mode is in Preview and supports AWS only. For setup instructions, see [Enabling Agentless Scanning][19].
-
-### How Datadog-hosted scanning works {#datadog-hosted-how-it-works}
-
-1. Datadog discovers your resources through cloud provider APIs. This step reads metadata only.
-2. In your AWS account, Datadog creates a snapshot of each volume to scan. The snapshot stays in your account. Datadog never shares the snapshot with or copies it into a Datadog AWS account.
-3. Datadog reads the snapshot's blocks over HTTPS using the Amazon EBS direct APIs.
-4. Datadog presents the blocks to a scanning sandbox as a block device, and the sandbox mounts the partitions as read-only.
-5. Scanners analyze the mounted file systems and send findings and SBOMs to Datadog.
-6. Datadog deletes the snapshot and destroys the sandbox.
-
-Each scan runs in a new hardware-isolated microVM with its own kernel, which Datadog destroys when the scan ends. Datadog never runs code on your instances.
-
-### What Datadog-hosted scanning sends to Datadog {#datadog-hosted-what-data-is-sent-to-datadog}
-
-Datadog reads your disk contents in its scanning environment on demand, and does **not** retain any copy of them. Only findings and SBOMs persist in Datadog.
-
-### Datadog-hosted data residency {#datadog-hosted-data-residency}
-
-Scans run in the region of the Datadog site that your organization uses, not in the region where your resources are located. For example, if your organization uses the EU1 site, Datadog scans your resources in the EU, regardless of which AWS region your resources are in.
-
-If your resources are in a different region than your Datadog site, scanning can involve a cross-border data transfer. Review your privacy requirements before you enable scanning for these accounts. If your data must be processed in your own cloud account or region, use self-hosted scanning.
-
-### Datadog-hosted cloud provider cost {#datadog-hosted-cost}
-
-There is no scanner infrastructure cost on your cloud provider bill and no additional Datadog cost.
-
-### Datadog-hosted Cloud Storage scanning {#datadog-hosted-cloud-storage-scanning}
-
-You can enable [Sensitive Data Scanner][8] for Amazon S3 buckets during setup. Sensitive Data Scanner catalogs and classifies sensitive data in your cloud storage.
-
-With Datadog-hosted scanning, Datadog reads the contents of your S3 buckets in its scanning environment, in the same way as disk contents. Datadog does **not** retain your object contents or the matched data. For each match, Datadog stores only the location: the bucket, object path, matching rule, and position in the object. Because buckets often hold more sensitive data than disks, review your data handling requirements before you enable Sensitive Data Scanner.
-
-Sensitive Data Scanner is optional. You can turn it off and still use Datadog-hosted scanning for vulnerabilities. To turn it off after setup:
-
-- **CloudFormation**: Turn off Sensitive Data Scanner in Datadog. For instructions, see [Set up Sensitive Data Scanner][20].
-- **Terraform**: In the `datadog_agentless_scanning_aws_scan_options` resource, set `sensitive_data` to `false`, then apply the configuration.
-
-### Datadog-hosted on-demand scanning {#datadog-hosted-on-demand-scanning}
-
-The [On-Demand Scanning API][14] is not available for Datadog-hosted scanning. Datadog scans your resources automatically every 12 hours.
 
 ## Further reading
 

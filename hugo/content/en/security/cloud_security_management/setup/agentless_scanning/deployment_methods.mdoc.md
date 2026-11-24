@@ -36,9 +36,9 @@ Scanners send only the collected list of packages and host metadata (hostnames, 
 
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
-{% alert %}
-Datadog-hosted scanning is in Preview and supports AWS accounts only. To request access, [join the Preview](https://www.datadoghq.com/product-preview/agentless-saas-mode/). To scan Azure subscriptions or Google Cloud projects, select {% ui %}Self-hosted{% /ui %} in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
-{% /alert %}
+{% callout url="https://www.datadoghq.com/product-preview/agentless-saas-mode/" header="Datadog-hosted (SaaS) Agentless Scanning is in Preview" %}
+Datadog-hosted scanning supports AWS accounts only. To scan Azure subscriptions or Google Cloud projects, select {% ui %}Self-hosted{% /ui %} in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
+{% /callout %}
 
 Datadog runs and scales the scanners in its own infrastructure. You don't choose a scanner account, decide how many scanners to deploy, or plan which regions to deploy them in. Instead, you attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan.
 
@@ -49,7 +49,7 @@ Datadog reads your disk contents in its scanning environment, in the region of y
 {% if equals($agentless_scanner_hosting, "self_hosted") %}
 ## Cloud account and region configuration
 
-The deployment topology you use depends on how many cloud accounts (AWS accounts, Azure subscriptions, or GCP projects) you need to scan, and which regions they cover.
+The deployment topology you use depends on how many cloud accounts (AWS accounts, Azure subscriptions, or Google Cloud projects) you need to scan, and which regions they cover.
 
 - **Cloud accounts**: If you only need to scan a single account, deploy one or more scanners directly in that account. Otherwise, use a dedicated scanner account, and use delegate roles to grant it access to scan other accounts. This is called **cross-account scanning**.
 - **Regions**: A single scanner can scan hosts in any region, including regions other than its own. However, cross-region scanning incurs data transfer costs. Whether you deploy additional scanners depends on how many hosts you have in each region.
