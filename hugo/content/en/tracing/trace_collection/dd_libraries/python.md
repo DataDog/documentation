@@ -33,7 +33,7 @@ For a full list of Datadog's Python version and framework support (including leg
 
 ## Getting started
 
-<div class="alert alert-info"><strong>Recommended</strong>: Use <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI) to install and load the Python SDK without changing your application code. SSI manages SDK installation and versions in your Datadog Agent configuration instead of in each application. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
+<div class="alert alert-tip">Datadog recommends <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), which installs and loads the Python SDK without changes to your application code. SSI manages SDK installation and versions in your Datadog Agent configuration instead of in each application. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
 
 Before you begin, make sure you've already [installed and configured the Agent][13].
 
