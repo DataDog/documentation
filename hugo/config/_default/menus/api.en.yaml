@@ -26213,6 +26213,54 @@ menu:
           - GetTeamSync
         unstable: []
         order: 22
+    - name: Update an external team permission default
+      url: /api/latest/teams/update-an-external-team-permission-default/
+      identifier: teams-update-an-external-team-permission-default
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExternalTeamPermissionSettingDefault
+        unstable: []
+        order: 38
+    - name: Delete an external team permission default
+      url: /api/latest/teams/delete-an-external-team-permission-default/
+      identifier: teams-delete-an-external-team-permission-default
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExternalTeamPermissionSettingDefault
+        unstable: []
+        order: 39
+    - name: List a source's external team permission defaults
+      url: /api/latest/teams/list-a-sources-external-team-permission-defaults/
+      identifier: teams-list-a-sources-external-team-permission-defaults
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExternalTeamPermissionSettingDefaultsBySource
+        unstable: []
+        order: 37
+    - name: List external team permission defaults
+      url: /api/latest/teams/list-external-team-permission-defaults/
+      identifier: teams-list-external-team-permission-defaults
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExternalTeamPermissionSettingDefaults
+        unstable: []
+        order: 36
     - name: Create team connections
       url: /api/latest/teams/create-team-connections/
       identifier: teams-create-team-connections
