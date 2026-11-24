@@ -121,3 +121,10 @@ entries:
       - UpdateSavedFilterAttributes
       - UpdateVariantForFeatureFlag
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42166
+    operations:
+      - ExportFeatureFlagHistory
+      - ListFeatureFlagHistory
+    title: Fix the 403 response schema for feature flag history
