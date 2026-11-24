@@ -5,6 +5,9 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Overview'
+  - link: '/monitors/types/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Monitor'
 ---
 ## Overview
 

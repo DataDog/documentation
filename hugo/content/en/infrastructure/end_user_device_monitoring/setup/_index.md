@@ -7,13 +7,7 @@ further_reading:
      text: "End User Device Monitoring"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/end-user-device-monitoring/" btn_hidden="false" >}}
-End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
-{{< /callout >}}
-
 Set up the Datadog Agent on employee desktops and laptops to collect [End User Device Monitoring data][11].
-
-<div class="alert alert-danger">You must receive confirmation of Preview access before data appears in Datadog. After submitting your request, wait for an access confirmation before completing the setup steps below.</div>
 
 ## Supported platforms
 
@@ -46,11 +40,9 @@ The following permissions apply to the corresponding feature, not to basic End U
 
 ## Set up the Datadog Agent
 
-1. Confirm that you have received access to the Preview before continuing. If you have not received confirmation, [request access][12] and wait for approval.
-
-2. Follow the setup instructions for your platform:
-    - [macOS][14]
-    - [Windows][15]
+Follow the setup instructions for your platform:
+- [macOS][14]
+- [Windows][15]
 
 ## Next steps
 
@@ -58,7 +50,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 
 - [Live Processes][5]
 - [Logs][6]
-- [Network Path][7]
+- [Network Path][7] on [macOS][21] or [Windows][22]
 - [WiFi/WLAN integration][8]
 - [Windows Crash Detection integration][9]
 - [Windows Event Log][13]
@@ -69,7 +61,7 @@ Once devices start populating, start exploring End User Devices by:
 2. **Asking Bits about device health and trends.** Open [Bits Chat][16] and ask questions about the fleet in natural language. For example, ask which devices are using the most CPU, which laptops have low battery capacity, or which users lost connectivity.
 3. **Querying device data with the Datadog MCP Server.** Connect an AI client, such as Cursor or Claude, to the [Datadog MCP Server][17] to retrieve device metrics, logs, and related telemetry through that client. See [Set up the Datadog MCP Server][18] to get started.
 4. **Reviewing battery health.** Create a dashboard with [battery metrics][20] such as maximum capacity, cycle count, and charge status to identify laptops to replace.
-5. **Tracking latency to destinations.** Set up [Network Path][7] on monitored devices to measure latency from a device to a destination, such as a SaaS application, and find the hop where delay is introduced. Read [Trace network paths from user devices to SaaS applications][19] for examples.
+5. **Tracking latency to destinations.** Set up [Network Path][7] on monitored [macOS][21] or [Windows][22] devices to measure latency from a device to a destination, such as a SaaS application, and find the hop where delay is introduced. Basic dynamic tests select up to 20 destinations per hour from observed traffic (Agent v7.85 or later required). Read [Trace network paths from user devices to SaaS applications][19] for examples.
 
 
 ## Further reading
@@ -82,7 +74,6 @@ Once devices start populating, start exploring End User Devices by:
 [8]: /integrations/wlan/
 [9]: /integrations/wincrashdetect/
 [11]: /infrastructure/end_user_device_monitoring/
-[12]: https://www.datadoghq.com/product-preview/end-user-device-monitoring/
 [13]: /integrations/event-viewer/?tab=logs
 [14]: /infrastructure/end_user_device_monitoring/setup/macos/
 [15]: /infrastructure/end_user_device_monitoring/setup/windows/
@@ -93,3 +84,5 @@ Once devices start populating, start exploring End User Devices by:
 [20]: /integrations/battery/#data-collected
 [23]: /account_management/rbac/permissions/#custom-roles
 [24]: /account_management/rbac/permissions/#end-user-device-monitoring
+[21]: /infrastructure/end_user_device_monitoring/setup/macos/#set-up-network-path
+[22]: /infrastructure/end_user_device_monitoring/setup/windows/#set-up-network-path

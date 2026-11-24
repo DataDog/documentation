@@ -35,6 +35,8 @@ Follow Okta's [Create custom SAML app integrations][1] instructions to configure
 | Honor Force Authentication  | Yes                                                                                                                            |
 | SAML Issuer ID              | `http://www.okta.com/${org.externalKey}`                                                                                       |
 
+<div class="alert alert-info">The email address that Okta sends to Datadog must exactly match the user's handle in Datadog.</div>
+
 ## Attribute statements details
 
 | Name       | Name Format (optional) | Value                                             |

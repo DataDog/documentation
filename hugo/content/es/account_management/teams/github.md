@@ -10,6 +10,9 @@ further_reading:
   tag: Blog
   text: Mantenga actualizada la propiedad del servicio con la integración de GitHub
     de Datadog Teams
+- link: /account_management/teams/servicenow/
+  tag: Documentación
+  text: Aprovisione Datadog Teams con ServiceNow
 title: Aprovisione Datadog Teams con GitHub
 ---
 ## Descripción general {#overview}

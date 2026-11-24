@@ -90,7 +90,10 @@ The .NET Tracer supports macOS for CI Test Optimization only.
 
 | Operating System         | Version | Architectures | Support level           | Package version            |
 | -------------------------|---------|---------------|-------------------------|----------------------------|
-| macOS                    | 14.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
+| macOS                    | 15.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
+| macOS                    | 14.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.57.0                  |
+| macOS                    | 13.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.30.0                  |
+| macOS                    | 12.0    |  x64, arm64   | [EOL](#support-eol)     | <= 3.3.1                   |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
 | macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 
@@ -202,7 +205,7 @@ Version updates imply the following changes to runtime support:
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
-[13]: /opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[13]: /opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=net
 [15]: https://github.com/dotnet/runtime/pull/73760
 [16]: https://github.com/dotnet/runtime/issues/11885
 [17]: https://github.com/dotnet/runtime/issues/85777

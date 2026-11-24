@@ -150,6 +150,8 @@ Par défaut, les workers du pipeline Dataflow utilisent le [compte de service Co
       **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.
    1. Dans le champ **Output deadletter Pub/Sub topic**, sélectionnez le [sujet supplémentaire](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que vous avez créé précédemment pour recevoir les messages rejetés par la Datadog API.
    1. Spécifiez un chemin pour les fichiers temporaires dans votre bucket de stockage dans le champ **Temporary location**.
+1. Sous {{< ui >}}Optional Parameters{{< /ui >}}, cochez {{< ui >}}Include full Pub/Sub message in the payload{{< /ui >}}.<br />
+   **Remarque** : les règles de détection Cloud SIEM et le pack de contenu Google Cloud Audit Logs attendent que les champs des journaux d'audit soient imbriqués sous `@data`. Si vous ne cochez pas cette option, les journaux arrivent toujours dans Datadog, mais les règles de détection ne peuvent pas trouver de correspondance avec ces journaux.
 1. Si vous avez [créé plus tôt un secret dans Secret Manager](#create-a-secret-in-secret-manager) pour la valeur de votre clé d'API Datadog :
    1. Cliquez sur {{< ui >}}Optional Parameters{{< /ui >}} pour voir les champs supplémentaires.
    1. Saisissez le nom de la ressource du secret dans le champ **Google Cloud Secret Manager ID**.<br />

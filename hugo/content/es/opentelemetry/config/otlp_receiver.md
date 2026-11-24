@@ -7,11 +7,11 @@ further_reading:
   text: Configuración del OpenTelemetry Collector
 - link: /opentelemetry/otlp_ingest_in_the_agent/
   tag: Documentación
-  text: Ingesta de OTLP por parte del Datadog Agent
+  text: Configure el punto de conexión OTLP del Agent
 - link: https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/
   tag: Centro de arquitectura
   text: Receptor OTLP del Datadog Agent en Kubernetes
-title: Receptor OTLP
+title: Receptor de OTLP
 ---
 ## Descripción general {#overview}
 
@@ -21,7 +21,7 @@ Para obtener más información, consulte la documentación del proyecto OpenTele
 
 ## Configuración {#setup}
 
-Agregue las siguientes líneas a la configuración de su Collector de OpenTelemetry:
+Agregue las siguientes líneas a su configuración de Collector:
 
 {{% otel-endpoint-note %}}
 
@@ -41,9 +41,9 @@ Trazas, métricas y registros.
 
 ## Ejemplo de configuración completo {#full-example-configuration}
 
-Para obtener un ejemplo completo de configuración funcional con el exportador de Datadog, consulte [`otlp.yaml`][2].
+Para ver un ejemplo de configuración funcional completo con el exportador de Datadog, consulte [`otlp.yaml`][2].
 
-## Ejemplo de salida de registros {#example-logging-output}
+## Ejemplo de salida de registro {#example-logging-output}
 
 ```
 ResourceSpans #0

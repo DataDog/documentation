@@ -4,7 +4,7 @@ Path: `synthetics.attributes.result.steps`
 
 Access step data by index, name, or ID to reference specific steps in your notification messages. Use these reference methods when working with step-related variables throughout this documentation.
 
-Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.code`, `.failure.message`, `.request.method`, `.request.url`, `.response.cacheHeaders`, `.response.headers`, `.response.httpVersion`, `.response.bodySize`, `.response.body`, `.response.cdn`, `.response.statusCode`, `.code`, and `.url`.
+Every step exposes `.id`, `.status`, `.type`, `.duration`, `.failure.code`, and `.failure.message`. For the properties specific to this test type, see the [Step execution details][2] section.
 
 You can reference steps in three ways:
 
@@ -50,8 +50,6 @@ Use the step's unique identifier:
 Review the [conditional alerting][1] page for an example of how to use the `synthetics.attributes.result.step` variable in a Slack notification based on a failed step.
 {% /alert %}
 
-[1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step
-
 ### Accessing step properties
 
 Combine any reference method with a property:
@@ -59,3 +57,6 @@ Combine any reference method with a property:
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
 - `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
 - `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
+
+[1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step
+[2]: ?synthetics_variables=step_details#step-execution-details

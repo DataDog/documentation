@@ -7,6 +7,9 @@ further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Observability: Jobs Monitoring'
+    - link: '/monitors/types/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Monitor'
     - link: "https://www.datadoghq.com/blog/databricks-serverless-jobs-datadog/"
       tag: "Blog"
       text: "Detect issues and optimize spend with Databricks serverless job monitoring"
@@ -55,6 +58,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 1. If you created a **Databricks managed** service principal, click on its name. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
    1. Set {{< ui >}}Lifetime (days){{< /ui >}} to the maximum value allowed (730).
+   1. Set {{< ui >}}Scope{{< /ui >}} to `all-apis`.
 
    1. Click {{< ui >}}Generate{{< /ui >}}.
 

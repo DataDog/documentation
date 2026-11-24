@@ -26,6 +26,8 @@ If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Dat
 
 ## Setup
 
+{{% svl-lambda-memory %}}
+
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Java AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
@@ -215,7 +217,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "4.0.0"
+  version = "4.10.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"

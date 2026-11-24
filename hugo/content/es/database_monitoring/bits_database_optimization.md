@@ -48,6 +48,8 @@ Los candidatos a optimización se seleccionan automáticamente a partir de la te
 
 Las instancias incluidas en Continuous Optimizations se enumeran debajo del interruptor. Para eliminar una instancia, haga clic en el botón menos (**-**) en el lado derecho de su fila y luego haga clic en **Save**.
 
+{{< img src="database_monitoring/database_optimization_continuous_optimizations_toggle.png" alt="El panel de configuración de Bits Database Optimization, que muestra el interruptor de Continuous Optimizations y una lista de las instancias de base de datos incluidas con sus etiquetas." style="width:100%;">}}
+
 Cuando las optimizaciones continuas están habilitadas, Bits Database Optimization selecciona consultas elegibles de las instancias incluidas de forma continua hasta que se alcanza el límite de 50 consultas distintas por instancia de base de datos al mes. Las consultas se priorizan por la duración total de ejecución.
 
 Cada consulta analizada cuenta para este límite, incluso cuando no se encuentra ninguna optimización. Después de que una consulta ha sido analizada, no se vuelve a analizar en el mismo mes. El límite se restablece al inicio de cada mes (UTC).
