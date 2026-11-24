@@ -13,8 +13,6 @@ further_reading:
   text: "Feature Flag History"
 ---
 
-## Overview
-
 Clone a feature flag to reuse its configuration for another feature. For example, use an existing flag as a template for variants and targeting rules across your environments.
 
 ## Permissions
@@ -40,13 +38,11 @@ The clone copies the source flag's [granular access controls][4], including acce
 
    {{< img src="feature_flags/concepts/clone-flag-from-details.png" alt="Feature flag details page with the actions menu open next to Implementation and the Clone option highlighted." style="width:100%;" >}}
 
-3. Enter a name for the clone. Datadog generates a flag key from the name. To customize the key, click the pencil icon next to it and confirm your change. The key cannot be changed after creation.
+3. Enter a name for the clone. Datadog generates a flag key from the name. To customize the key, click the pencil icon next to it and confirm your change. The key must not belong to an active flag, and it cannot be changed after creation. To reuse an archived flag's key, confirm when prompted.
 4. Review the variants, targeting rules, and default variant for each environment. Only the name and key are editable in this dialog.
 5. Click **Clone flag**.
 
-The key must not belong to an active flag. To reuse an archived flag's key, confirm when prompted.
-
-Datadog opens the cloned flag's details page. The clone starts **disabled in every environment**. Review its configuration before enabling it. Its [version history][3] identifies the source flag by key.
+Datadog opens the cloned flag's details page. The clone starts disabled in every environment. Review its configuration before enabling it. Its [version history][3] identifies the source flag by key.
 
 ## Copied configuration
 
@@ -68,7 +64,6 @@ Copied variant overrides take precedence over targeting rules and default varian
 - **Progressive rollouts and canaries** are copied without their progress or scheduled start times. Start them from the cloned flag's details page.
 - **Scheduled targeting rules** lose their scheduled start times and take effect when you enable the clone in their environment.
 - **A/B experiments and their holdout rules** are not copied.
-- **Rules with unavailable variants** can be omitted. For example, a targeting rule that serves only a deleted variant is not copied. A rollout is omitted if a serving variant or its control variant no longer exists. Review the notices in the clone dialog, then recreate omitted rules on the clone using available variants.
 
 ## Further reading
 

@@ -46,9 +46,7 @@ Users without granular access can still view the flag if they have read permissi
 
 ## Cloning permissions
 
-[Cloning a flag][5] requires **Feature Flag Config Read**, **Feature Flag Config Write**, **Feature Flag Environment Config Read**, and access to view the source flag.
-
-The clone copies the source flag's granular access controls and adds the person creating the clone as an **Editor**. If the source has no granular access restrictions, the clone has none.
+To clone a flag, you need **Feature Flag Config Write** and access to view the source flag. See [Cloning Feature Flags][5] for the full permission requirements and how the clone copies granular access controls.
 
 ## Experiment approval permissions
 
@@ -62,4 +60,4 @@ Experiment approvals also require access to the experiment. Submitting or applyi
 [2]: /feature_flags/concepts/approvals/#submit-changes-for-review
 [3]: /feature_flags/concepts/approvals/#approve-reject-or-apply
 [4]: /experiments/approvals/#permissions
-[5]: /feature_flags/concepts/cloning/
+[5]: /feature_flags/concepts/cloning/#permissions
