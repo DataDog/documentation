@@ -181,7 +181,7 @@ ORDER BY service, events DESC
 
 ### Join logs from two BYOC Logs clusters
 
-This query compares application latency from one cluster with the HTTP server error rate from another cluster:
+Use this query to compare application latency from one cluster with the HTTP server error rate from another cluster.
 
 ```sql
 SELECT a.service,
