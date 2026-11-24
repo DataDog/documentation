@@ -289,7 +289,7 @@ DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces
 
 ### Collector components
 
-The OpenTelemetry community maintains and supports the upstream OpenTelemetry Collector. Datadog supports the traces, metrics, and logs it sends. The Datadog Exporter and Datadog Connector are community supported when they run in the upstream OpenTelemetry Collector.
+The OpenTelemetry community maintains and supports the upstream OpenTelemetry Collector. Datadog supports the traces, metrics, and logs it sends.
 
 For the DDOT Collector and the Agent's Collector, support depends on who maintains a component and whether it ships with the Collector:
 
