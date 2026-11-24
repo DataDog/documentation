@@ -582,7 +582,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 {{% collapse-content title="Using Microsoft.Extensions.AI (.NET)" level="h3" expanded=false id="using-microsoft-extensions-ai-dotnet" %}}
 
-[Microsoft.Extensions.AI][62] wraps the official [`OpenAI` .NET library][63] and emits spans that follow the OpenTelemetry 1.37+ GenAI semantic conventions, including streaming calls and tool calls. Use it instead of the `OpenAI` library's own experimental instrumentation, which doesn't capture message content by default and doesn't instrument streaming chat completions.
+[Microsoft.Extensions.AI][62] wraps the official [`OpenAI` .NET library][63]. It emits spans that follow the OpenTelemetry 1.37+ GenAI semantic conventions, including streaming calls and tool calls. Use it instead of the `OpenAI` library's own experimental instrumentation, which doesn't capture message content by default and doesn't instrument streaming chat completions.
 
 1. Add the packages. Install `Microsoft.Extensions.AI` and `Microsoft.Extensions.AI.OpenAI` at the same version. Each `Microsoft.Extensions.AI.OpenAI` version requires a minimum `OpenAI` package version, so pick one that supports the `OpenAI` version you're on. Otherwise, the restore fails with a `NU1605` package downgrade error.
 
@@ -603,7 +603,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
    Replace `<YOUR_API_KEY>` with your [Datadog API key][2]. The exporter adds the `/v1/traces` path to the endpoint.
 
-3. Configure the tracer provider and wrap your `OpenAI` chat client:
+3. Configure the tracer provider and wrap the `OpenAI` chat client:
 
    ```csharp
    using Microsoft.Extensions.AI;
