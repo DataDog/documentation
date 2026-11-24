@@ -125,7 +125,7 @@ If you already have a Datadog Agent installed, enable SSI remotely from Datadog.
 
    Check the **APM Agent** section of the output.
 
-1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they do not appear within a few minutes, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > {{< ui >}}Instrumentation Errors{{< /ui >}}. The Instrumentation Errors page lists processes that SSI could not instrument and the steps to fix them. For more help, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
