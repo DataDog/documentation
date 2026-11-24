@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The `code-exec` toolset in the Datadog MCP Server lets your AI agent write and run JavaScript against Datadog APIs in a single MCP tool call, instead of one tool call per API request. The agent's generated code runs inside a Datadog-managed sandbox. The only data sent back to the agent is the value the code returns. This keeps large API responses out of the model's context.
+Code execution in the Datadog MCP Server lets your AI agent write and run JavaScript against Datadog APIs in a single MCP tool call, instead of one tool call per API request. The agent's generated code runs inside a Datadog-managed sandbox. The only data sent back to the agent is the value the code returns. This keeps large API responses out of the model's context.
 
 Use code execution for investigations that span multiple Datadog products, or that need the agent to join, filter, or summarize data from several calls. An example is correlating error logs with APM latency for the same service and time window.
 
@@ -38,7 +38,7 @@ The MCP Server runs the script and returns only the joined result. The agent com
 
 ## Available tools
 
-The `code-exec` toolset provides:
+The `core` and `execute_code` toolsets provide:
 
 | Tool | Description |
 | --- | --- |
@@ -52,7 +52,7 @@ Generated code is JavaScript based on the public [Datadog API Client for TypeScr
 
 ## What the sandbox can access
 
-Code executed by the `code-exec` toolset runs against Datadog APIs using your user identity. Every API call is authorized independently with your existing [role permissions][4]. Code execution can't grant access beyond those permissions.
+Code execution scripts run against Datadog APIs using your user identity. Every API call is authorized independently with your existing [role permissions][4]. Code execution can't grant access beyond those permissions.
 
 - `execute_code` exposes read-only Datadog API calls for investigations and analysis.
 - `execute_code_write` can create, update, or delete supported resources, such as monitors, SLOs, log configurations, incidents, and cases. Use `search_datadog_sdk` with `target: "execute_code_write"` to confirm which operations are available.
@@ -64,23 +64,23 @@ Code executed by the `code-exec` toolset runs against Datadog APIs using your us
 
 ## Enable code execution
 
-The default `core` toolset enables code execution through `execute_code_write`.
+The default `core` toolset includes all three code execution tools: `execute_code`, `execute_code_write`, and `search_datadog_sdk`.
 
-To enable all three code execution tools, include `code-exec` in the `toolsets` query parameter when connecting your AI client. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
+To enable only code execution tools, set `toolsets=execute_code` when connecting your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Based on your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), this URL enables `core` and all three code execution tools:
+Based on your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), this URL enables only code execution tools:
 
-<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,code-exec</code></pre>
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=execute_code</code></pre>
 
-`code-exec` is included in `toolsets=all`, so you don't need to add it separately if you already enable all generally available toolsets.
+`toolsets=all` also includes all three code execution tools.
 
 [6]: /getting_started/site/
 {{< /site-region >}}
 
 ### Enable write operations
 
-The `execute_code_write` tool is included in the `code-exec` toolset, the default `core` toolset, and `toolsets=all`.
+The `execute_code_write` tool is included in the `core` and `execute_code` toolsets and in `toolsets=all`.
 
 To use write operations:
 
