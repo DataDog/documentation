@@ -149,7 +149,7 @@ With signing enabled, the SDK rejects a response if any check fails. A request t
 
 | Reason code | Meaning | What to check |
 | --- | --- | --- |
-| `missing-proof` | The response has no signature headers. | A proxy, CDN, or custom endpoint removed the signature headers, or Datadog did not enable response signing for your organization. |
+| `missing-proof` | One or more proof headers are absent, including the certificate chain header. | A proxy, CDN, or custom endpoint removed the signature headers, or Datadog did not enable response signing for your organization. |
 | `invalid-proof` | The signature headers are present but not valid. | A proxy or CDN changed the response headers. |
 | `invalid-certificate` | The certificate chain does not lead to the pinned Datadog root, or a certificate rule fails. For example, the leaf has no Datadog Feature Flags EKU. | The response did not come from Datadog, or the network intercepts TLS. Contact Datadog Support. |
 | `invalid-signature` | The signature does not match the request and the response. | The response changed in transit. |
