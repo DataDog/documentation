@@ -21,7 +21,7 @@ Data Security is in Preview. To request access, fill out the form.
 
 ## Overview
 
-Data Security scans Snowflake tables through the Snowflake integration you set up for Data Observability. A Datadog-hosted scanner reads a sample of 100 rows from the text columns of each table. It holds the rows in memory only during the scan and stores only the match metadata. Every table is scanned at least once a week.
+Data Security scans Snowflake tables through the Snowflake integration you set up for Data Observability. A Datadog-hosted scanner reads a sample of rows of each table. It holds the rows in memory only during the scan and stores only the match metadata. Every table is scanned at least once a week.
 
 ## Prerequisites
 
