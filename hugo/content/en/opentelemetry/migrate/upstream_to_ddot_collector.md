@@ -82,7 +82,7 @@ kubectl apply -f <COLLECTOR_FILE>
    ```
 
 1. If your values file sets `command.name`, remove it. The DDOT Collector image doesn't include the upstream binaries, such as `otelcol-contrib`.
-1. Find your release name and chart version. The `CHART` column shows the version, such as `opentelemetry-collector-0.177.0`:
+1. Find your release name and chart version. The `CHART` column shows the version, such as `opentelemetry-collector-{{% version key="otel_collector_chart_version" %}}`:
 
    ```shell
    helm list

@@ -70,7 +70,7 @@ Install the OpenTelemetry Operator with the [OpenTelemetry Operator Helm chart][
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 helm install opentelemetry-operator open-telemetry/opentelemetry-operator   \
-     --version 0.127.0                                                      \
+     --version {{< version key="otel_operator_chart_version" >}}                                                      \
      --set "manager.createRbacPermissions=true"                             \
      --set "manager.collectorImage.repository=datadog/ddot-collector"       \
      --set "manager.collectorImage.tag={{< version key="agent_version" >}}"
@@ -772,7 +772,7 @@ kubectl rollout status daemonset/node-collector-collector --timeout=5m
 Install the OpenTelemetry Collector chart with your values file:
 
 ```shell
-helm install node-collector open-telemetry/opentelemetry-collector --version 0.177.0 -f node-collector-values.yaml
+helm install node-collector open-telemetry/opentelemetry-collector --version {{< version key="otel_collector_chart_version" >}} -f node-collector-values.yaml
 ```
 
 Wait for the Collector to run on every node:
@@ -781,7 +781,7 @@ Wait for the Collector to run on every node:
 kubectl rollout status daemonset/node-collector-opentelemetry-collector-agent --timeout=5m
 ```
 
-To apply later changes, run `helm upgrade node-collector open-telemetry/opentelemetry-collector --version 0.177.0 -f node-collector-values.yaml`.
+To apply later changes, run `helm upgrade node-collector open-telemetry/opentelemetry-collector --version {{% version key="otel_collector_chart_version" %}} -f node-collector-values.yaml`.
 {{% /tab %}}
 {{< /tabs >}}
 
