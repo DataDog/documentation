@@ -8253,6 +8253,32 @@ menu:
         unstable:
           - v2
         order: 56
+    - name: Update a provider model by canonical ID
+      url: /api/latest/ai-gateway/update-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-update-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 60
+    - name: Delete a provider model by canonical ID
+      url: /api/latest/ai-gateway/delete-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-delete-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 59
     - name: Update an AI Gateway provider
       url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
       identifier: ai-gateway-update-an-ai-gateway-provider
