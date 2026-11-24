@@ -546,6 +546,39 @@ aws emr-serverless start-job-run \
     )
 ```
 
+### Link your Databricks jobs with Airflow tasks
+
+OpenLineage can inject Airflow's parent job information into Databricks job runs, linking each Databricks job to the Airflow task that triggered it. This works with both `DatabricksSubmitRunOperator` and `DatabricksRunNowOperator`.
+
+**Requirements**:
+- A recent `apache-airflow-providers-databricks`: 7.17.0 or later for `DatabricksSubmitRunOperator`, and 7.20.0 or later for `DatabricksRunNowOperator`.
+- Your Databricks jobs are monitored through [Data Observability: Jobs Monitoring][2].
+
+To enable injection, set the following in your Airflow configuration:
+
+```ini
+[openlineage]
+spark_inject_parent_job_info = True
+```
+
+Or set the equivalent environment variable:
+
+```shell
+AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
+```
+
+To enable injection for a single task, or to opt a task out, set `openlineage_inject_parent_job_info` on the operator:
+
+```python
+DatabricksRunNowOperator(
+    task_id="run_databricks_job",
+    job_id=<JOB_ID>,
+    openlineage_inject_parent_job_info=True,
+)
+```
+
+<div class="alert alert-info">If you manually set any <code>spark.openlineage.parent*</code> property on the job, injection is skipped for that job.</div>
+
 ### Backport OpenLineage lineage macros for older provider versions
 
 The `lineage_root_job_namespace`, `lineage_root_job_name`, and `lineage_root_run_id` macros that emit the outermost DAG identifiers for root-parent linking were added in `apache-airflow-providers-openlineage` 2.3.0. If you cannot upgrade the provider (for example, Amazon MWAA on Airflow 2.9.2 pins provider 2.2.0), define the missing macros as `user_defined_macros` on the DAG:
