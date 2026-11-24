@@ -204,12 +204,12 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
-First, [configure the Databricks integration][14] with access to the table or view to ingest.
+First, [configure the Databricks integration][14] with an account that has read access to the source data.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Databricks Account{{< /ui >}}: The connected workspace.
+   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
@@ -218,19 +218,19 @@ If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to 
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
-[14]: /integrations/databricks/#reference-table-configuration
+[14]: /integrations/databricks/#connect-to-a-new-databricks-workspace
 [16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Salesforce" level="h3" id="salesforce" %}}
 
-First, [configure the Salesforce integration][17] with read access to the objects and fields to ingest.
+First, [configure the Salesforce integration][17] with an account that has read access to the source objects and fields.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Salesforce{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Salesforce Org{{< /ui >}}: The connected Salesforce org.
+   - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above.
    - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
    - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
 3. Click {{< ui >}}Save{{< /ui >}}.
@@ -240,7 +240,7 @@ Test the query in the [Salesforce Developer Console][19]. Select fields directly
 To investigate ingestion errors, search for `source:salesforce` in the [Events Explorer][20].
 
 [16]: https://app.datadoghq.com/reference-tables
-[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+[17]: /integrations/salesforce/#step-4-connect-your-org
 [19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
 [20]: https://app.datadoghq.com/event/explorer
 
@@ -248,12 +248,12 @@ To investigate ingestion errors, search for `source:salesforce` in the [Events E
 
 {{% collapse-content title="ServiceNow" level="h3" id="servicenow" %}}
 
-First, [configure the ServiceNow integration and a scheduled Query Builder query][18].
+First, [configure the ServiceNow integration][18] with an account that can read the source data and run Query Builder queries. Create and schedule a Query Builder query for the data to ingest.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}ServiceNow{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Instance{{< /ui >}}: The connected ServiceNow instance.
+   - {{< ui >}}Instance{{< /ui >}}: Select the instance configured above.
    - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
    - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
@@ -264,19 +264,19 @@ Additional fields must use paths supported by the ServiceNow Table API. The colu
 Data populates after the scheduled Query Builder query runs. To investigate ingestion errors, search for `source:servicenow` in the [Events Explorer][20].
 
 [16]: https://app.datadoghq.com/reference-tables
-[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [20]: https://app.datadoghq.com/event/explorer
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
 
-First, [configure the Snowflake integration and grant read permissions][15] for the source data.
+First, [configure the Snowflake integration][15] with an account that has read access to the source data.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Snowflake Account{{< /ui >}}: The connected Snowflake account.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
@@ -285,7 +285,7 @@ If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to c
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
-[15]: /integrations/snowflake-web/#reference-tables
+[15]: /integrations/snowflake-web/#connect-your-snowflake-account
 [16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
