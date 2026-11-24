@@ -34,7 +34,7 @@ Choose where the scanners run:
 | **Does scanned data leave your AWS account?** | No | Yes. The scanner reads the files from Datadog's infrastructure. Datadog stores only the match metadata. |
 | **Cloud provider cost** | Compute and networking costs appear on your AWS bill. | No scanner instances run in your account. |
 
-Data Security scans CSV, JSON, Parquet, plain text, and ZIP files. It skips images, files without an extension, and other formats.
+Data Security scans CSV, JSON, Parquet, plain text, and ZIP files. It skips images, binary files, and other formats.
 
 ## Prerequisites
 
