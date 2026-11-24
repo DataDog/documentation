@@ -34,6 +34,8 @@ The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed cond
 
 Use the answers as the input to an [If condition](#if-condition) or a [Switch statement](#switch-statement). Each answer is available at `Steps.<step_name>.answers.<question_name>`. For example, a Switch statement can route on `{{ Steps.Decision.answers.team.choice }}`.
 
+{{< img src="actions/workflows/actions/flow_control/decision.png" alt="The workflow canvas with a Decision action selected and the configuration tab open. The State field holds context from earlier steps, and a choice question asks which memory limit to apply." >}}
+
 ## If condition
 
 You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an {{< ui >}}If condition{{< /ui >}} action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
