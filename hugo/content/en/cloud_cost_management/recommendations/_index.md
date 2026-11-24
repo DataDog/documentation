@@ -789,6 +789,12 @@ multifiltersearch:
       recommendation_type: Downsize Compute Instance
       recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Migrate
+      cloud_provider: GCP
+      resource_type: Compute Instance
+      recommendation_type: Migrate Old-Generation Compute Instance
+      recommendation_description: Identifies standalone N1 Compute Engine instances and recommends migrating them to a cheaper E2 or N2D machine type.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
       resource_type: Compute Instance Group
