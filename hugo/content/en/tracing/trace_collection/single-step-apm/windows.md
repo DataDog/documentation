@@ -30,13 +30,6 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
-<!-- TODO: Confirm with PM whether host-wide instrumentation is GA when the IIS option is removed. If so, remove this Preview alert and the Preview references in the steps. -->
-
-<div class="alert alert-info">
-<strong>Join the Preview!</strong><br>
-Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this section appear in Datadog only after you are enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request access</a> to join the Preview.
-</div>
-
 To install the Agent and instrument Java and .NET applications on your Windows host:
 
 1. In Datadog, go to [Install the Datadog Agent on Windows][1].
@@ -48,7 +41,7 @@ To install the Agent and instrument Java and .NET applications on your Windows h
    1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
 
-1. Copy and run the provided installation command on your Windows host. Datadog generates this command in-app after you are enrolled in the Preview.
+1. Copy and run the provided installation command on your Windows host.
 
    **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 

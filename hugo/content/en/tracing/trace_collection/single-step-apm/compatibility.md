@@ -85,7 +85,7 @@ Select your environment to see compatibility requirements and limitations:
 
 {{% tab "Windows" %}}
 
-<!-- TODO: Confirm status, minimum Agent version, and minimum Java SDK version for host-wide Windows SSI with PM. -->
+<!-- TODO: Confirm minimum Agent version and minimum Java SDK version for host-wide Windows SSI with PM. -->
 
 ### Compatibility
 
