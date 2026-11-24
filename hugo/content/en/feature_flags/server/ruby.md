@@ -337,7 +337,7 @@ OpenFeature::SDK.set_provider_and_wait(
 )
 ```
 
-For process-wide control, use the existing environment variables:
+For process-wide control, use these environment variables:
 
 - `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposures_enabled` to `false`, it keeps recording exposures, and `Datadog::OpenFeature::ExposureHook` still receives them.
 - `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.

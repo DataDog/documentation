@@ -465,7 +465,7 @@ OpenFeatureAPI.getInstance().setProviderAndWait(new Provider(new Provider.Option
     .exposuresEnabled(false)));
 ```
 
-For process-wide control, use the existing environment variables:
+For process-wide control, use these environment variables:
 
 - `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` stops sending exposures to Datadog. Unlike setting `exposuresEnabled` to `false`, it keeps recording exposures, and `ExposureHook` still receives them.
 - `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` stops only flag evaluation events.
