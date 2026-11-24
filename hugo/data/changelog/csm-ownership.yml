@@ -21,3 +21,31 @@ entries:
       - ListOwnershipHistoryByOwnerType
       - ListOwnershipInferences
     title: Move CSM Ownership endpoints to /api/v2/security/ownership
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateOwnershipFeedback
+      - GetOwnershipEvidence
+      - GetOwnershipInference
+      - GetOwnershipSettings
+      - GetOwnershipUntaggedFindings
+      - ListOwnershipHistory
+      - ListOwnershipHistoryByOwnerType
+      - ListOwnershipInferences
+      - PostOwnershipSettings
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateOwnershipFeedback
+      - GetOwnershipEvidence
+      - GetOwnershipInference
+      - GetOwnershipSettings
+      - GetOwnershipUntaggedFindings
+      - ListOwnershipHistory
+      - ListOwnershipHistoryByOwnerType
+      - ListOwnershipInferences
+      - PostOwnershipSettings
+    title: Document rate-limit headers on the shared 429 responses

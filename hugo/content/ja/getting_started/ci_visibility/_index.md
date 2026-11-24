@@ -159,7 +159,7 @@ Test Optimization を設定した後、パイプライン実行のサイドパ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/settings
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [2]: /ja/continuous_integration/pipelines/custom_commands/
 [3]: /ja/continuous_integration/pipelines/custom_tags_and_measures/
 [4]: /ja/continuous_integration/pipelines/?tab=githubactions#terminology

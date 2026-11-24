@@ -208,6 +208,8 @@ agent diagnose show-metadata agent-telemetry
 | postgres.schema_tables_count                | Total tables in Postgres schema                                                                                        |
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
+| **Configuration**                           |                                                                                                                        |
+| config.schema_violations                    | Number of settings in `datadog.yaml` or `system-probe.yaml` that don't match the configuration schema, tagged by configuration file, setting name, where the setting was set (for example, a configuration file or an environment variable), installation method, and error type. Configured values are not collected. |
 | **Events**                                  |                                                                                                                        |
 | agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |

@@ -37,6 +37,7 @@ The following products consume AI Credits:
 | [Bits Investigation][3] | Automatically investigate alerts, correlate telemetry, identify root causes, summarize impact, and apply remediations. |
 | [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
 | [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
+| [Bits Database Optimization][11] | Review and implement database query optimizations identified by Bits AI. |
 
 ## Pricing
 
@@ -50,7 +51,7 @@ See the [Datadog pricing page][5] for current rates. AI Credits are available in
 
 ### Billing cycle
 
-AI Credits reset on the first day of each calendar month. Unused Commit credits do not roll over to the next month.
+AI Credits reset on the first day of each calendar month, at 00:00 UTC. Unused Commit credits do not roll over to the next month.
 
 ### Overages
 
@@ -65,7 +66,7 @@ Usage tracking and product access are managed in [**Plan & Usage > AI Credits**]
 
 {{< img src="account_management/billing/view-ai-credit-usage.png" alt="The AI Credits page showing the AI Products toggle enabled, a Cost Overview section, and a Usage Overview section with a bar chart broken down by Bits Agent Builder, Bits Chat, Bits Code, and Bits Investigations AI Credits." >}}
 
-To cap AI Credit consumption at the organization or per-user level, see [AI Credit Limits][8].
+To cap AI Credit consumption at the organization, role, per-user, or service account level, see [AI Credit Limits][8].
 
 ### Disable specific products
 
@@ -80,6 +81,18 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 
 To manage permissions, go to [**Organization Settings > Roles**][7], select a role, and toggle the relevant permission.
 
+## Billing enrichment
+
+Billing enrichment adds tags to a user's AI Credit usage from a [reference table][9], using the user's email address as the join key. For example, add tags such as `vp_name` or `director_name` to break down AI Credit usage by your organizational structure.
+
+To set up billing enrichment:
+
+1. Create a [reference table][9] that contains a column of user email addresses, plus any other columns you want to expose as tags.
+2. In [**Bits AI > AI Credits Management > Billing Enrichment**][10], turn on **Enable billing enrichment**.
+3. Select the **Reference table**, the **Email matching column** that Datadog joins on, and the **Enrichment columns** to expose as tags. Leave enrichment columns empty to include all columns.
+
+Datadog adds tags from the reference table to usage it processes after you enable billing enrichment. Usage recorded before then isn't enriched.
+
 ## Monitor usage
 
 | Product | Metric | Description |
@@ -88,6 +101,10 @@ To manage permissions, go to [**Organization Settings > Roles**][7], select a ro
 | [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
 | [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
 | [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
+
+Each metric covers one product, while the [**AI Credits Management**][10] page shows the total for all products. These metrics are estimates. For billed usage, use [**Plan & Usage > AI Credits**][6].
+
+**Note:** The AI Credits Management page shows usage only for the organization you're logged in to. In a parent organization, the `datadog.estimated_usage.*.ai_credits` metrics also include usage from child organizations, tagged with `child_org_name`. To see metric usage for only the current organization, filter the metrics on `child_org_name:self`.
 
 ## Availability
 
@@ -108,3 +125,6 @@ AI Credits are available to all Datadog customers except:
 [6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles
 [8]: /account_management/billing/ai_credit_limits/
+[9]: /reference_tables/
+[10]: https://app.datadoghq.com/bits-ai/ai-credits-management
+[11]: /database_monitoring/bits_database_optimization/

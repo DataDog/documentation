@@ -1,4 +1,4 @@
 ---
-title: Rum Metrics
+title: RUM Metrics
 headless: true
 ---

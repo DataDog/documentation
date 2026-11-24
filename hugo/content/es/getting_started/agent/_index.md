@@ -32,7 +32,7 @@ Esta guía presenta el Datadog Agent y cubre:
 El Datadog Agent es un software que se ejecuta en sus servidores. Recopila eventos y métricas de los servidores y los envía a Datadog, donde puede analizar sus datos de monitoreo y rendimiento. 
 
 El Agent puede ejecutarse en:
-- Servidores locales (Windows, Linux, macOS) 
+- Hosts locales (Windows, Linux, macOS, AIX)
 - Entornos en contenedores (Docker, Kubernetes)
 - Centros de datos locales (on-premises) 
 

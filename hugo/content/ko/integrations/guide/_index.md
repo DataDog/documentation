@@ -45,6 +45,7 @@ title: 통합 지침
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}AWS 통합 문제 해결{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}API를 사용하여 AWS 메트릭 이름 필터 구성{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}AWS 청구 상세 내용 모니터링{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-service-quotas" tag=" AWS" >}}AWS 서비스 할당량을 모니터링하십시오{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}오류: Datadog은 sts:AssumeRole을 수행할 권한이 없음{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}Amazon Data Firehose를 사용한 AWS CloudWatch Metric Streams{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Amazon CloudFormation 사용{{< /nextlink >}}
@@ -69,7 +70,7 @@ title: 통합 지침
 {{< /header-list >}}
 
 {{< header-list header="Alibaba Cloud 가이드" >}}
-    {{< nextlink href="integrations/guide/alibaba-cloud-integration-troubleshooting" tag="Alibaba Cloud" >}}Alibaba Cloud 통합 문제 해결{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/alibaba-cloud-integration-troubleshooting" tag="Alibaba Cloud" >}}Alibaba Cloud 통합 문제 해결하기{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="OCI 가이드" >}}

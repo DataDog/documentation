@@ -37,7 +37,7 @@ aliases:
 
 Bits Chat helps you search and act across Datadog using natural language. Ask it to investigate an incident, explore your telemetry, build a dashboard, or query your data with DDSQL, and it answers in a conversational chat instead of sending you to build the query yourself.
 
-Bits Chat is available in the Datadog web application, the mobile app, and Slack. See [Use Bits Chat][1] to open it from each surface.
+Bits Chat is available in the Datadog web application, the mobile app, Slack, and Microsoft Teams. See [Use Bits Chat][1] to open it from each surface. To use Bits Chat in your terminal, try [Bits CLI][5].
 
 {{< img src="bits_ai/getting_started/bits_assistant_full_page.png" alt="Full-page Bits Chat interface with suggested tasks" style="width:100%;">}}
 
@@ -91,3 +91,4 @@ Use these insights to understand adoption patterns, identify power users for bes
 [2]: /account_management/rbac/?tab=datadogapplication#update-a-role
 [3]: https://app.datadoghq.com/ask
 [4]: https://app.datadoghq.com/ask/usage
+[5]: /bits_ai/bits_chat/bits_cli/

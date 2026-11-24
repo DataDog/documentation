@@ -4,7 +4,7 @@ description: "Understand Windows memory metrics and how they map to Datadog syst
 further_reading:
   - link: "/metrics/summary/"
     tag: "Documentation"
-    text: "Metrics Summary"
+    text: "Metrics Catalog"
   - link: "/metrics/explorer/"
     tag: "Documentation"
     text: "Metrics Explorer"

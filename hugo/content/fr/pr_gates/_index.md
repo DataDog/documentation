@@ -159,7 +159,7 @@ Vous pouvez voir toutes les règles définies par l'organisation.
 [9]: /fr/monitors/
 [10]: /fr/security/code_security/secret_scanning/
 [11]: /fr/tests/flaky_tests/
-[12]: /fr/source_code/features/#pr-comments
+[12]: /fr/source_code/pr-comments/
 [13]: /fr/integrations/gitlab-source-code/
 [14]: /fr/integrations/bitbucket-source-code/
 [15]: /fr/pr_gates/setup/

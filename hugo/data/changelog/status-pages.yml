@@ -31,3 +31,168 @@ entries:
       - UpdateMaintenanceTemplate
       - UpdateStatusPage
     title: Add visualization_layout to status page attributes
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41039
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Add rss_enabled to status page attributes
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41533
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Align status page attributes with API responses
+  - change_type: added
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41556
+    operations:
+      - CreateEmailAccessPolicy
+      - DeleteEmailAccessPolicy
+      - ListEmailAccessPolicies
+    title: Status Pages - Private pages API spec
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41556
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - PublishStatusPage
+      - UnpublishStatusPage
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Status Pages - Private pages API spec
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - CreateEmailAccessPolicy
+      - DeleteEmailAccessPolicy
+      - ListEmailAccessPolicies
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41718
+    operations:
+      - CreateStatusPage
+      - UpdateStatusPage
+    title: Use a valid PNG in status page image examples
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateEmailAccessPolicy
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - DeleteComponent
+      - DeleteDegradation
+      - DeleteDegradationTemplate
+      - DeleteEmailAccessPolicy
+      - DeleteMaintenanceTemplate
+      - DeleteStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListEmailAccessPolicies
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - PatchMaintenanceUpdate
+      - PublishStatusPage
+      - SoftDeleteDegradationUpdate
+      - UnpublishStatusPage
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Document rate-limit headers on the shared 429 responses

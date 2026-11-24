@@ -167,9 +167,9 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
 **Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Runtime Package Prioritization](#runtime-package-prioritization) para conocer los requisitos.
 
-**Nota**: El `languages` analizador requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en las bibliotecas de aplicaciones administradas por los administradores de paquetes a continuación, además de los paquetes del sistema operativo. Cuando se omite el campo `analyzers`, Datadog solo escanea los paquetes del SO para las imágenes de contenedor.
+**Nota**: El analizador `languages` requiere Datadog Agent **7.70 o superior**. Cuando está habilitado, detecta vulnerabilidades en las bibliotecas de aplicaciones administradas por los administradores de paquetes a continuación, además de los paquetes del sistema operativo. Cuando se omite el campo `analyzers`, Datadog solo escanea los paquetes del SO para las imágenes de contenedor.
 
-### Administradores de paquetes de bibliotecas de aplicaciones compatibles {#supported-application-library-package-managers}
+### Administradores de paquetes compatibles para bibliotecas de aplicaciones {#supported-application-library-package-managers}
 
 El analizador `languages` cubre los siguientes ecosistemas de paquetes:
 
@@ -178,15 +178,15 @@ El analizador `languages` cubre los siguientes ecosistemas de paquetes:
 | Ruby | Bundler, GemSpec |
 | Rust | Cargo, el binario de Rust |
 | PHP | Composer |
-| Java | Jar, Maven (pom.xml), bloqueo de Gradle, bloqueo de Sbt |
+| Java | Jar, Maven (pom.xml), Gradle lock, Sbt lock |
 | JavaScript | npm (package-lock.json), Yarn, pnpm, paquete de Node |
 | .NET | NuGet, .NET Core, PackagesProps |
 | Python | Paquete de Python (egg), pip, Pipenv, Poetry, uv, paquete de Conda, entorno de Conda |
 | Go | Go binario, módulos de Go |
-| C/C++ | Bloqueo de Conan |
+| C/C++ | Conan lock |
 | Swift / Objective-C | CocoaPods, Swift |
 | Dart | Bloqueo de PubSpec |
-| Elixir | Bloqueo de Mix |
+| Elixir | Mix lock |
 | Julia | Julia |
 
 ## Runtime Package Prioritization {#runtime-package-prioritization}
@@ -206,6 +206,7 @@ Cuando está habilitado, el Agent utiliza eBPF para observar el acceso a archivo
 **Requisitos**:
 - Datadog Agent **7.79.0 o superior**. En Kubernetes, utilice **7.81.0 o superior** para obtener la cobertura de señales más completa.
 - Solo Linux (dependencia de eBPF). Consulte [Workload Protection setup][11] para conocer las distribuciones y versiones de kernel compatibles.
+- En nodos Bottlerocket, el tipo de SELinux `spc_t` para `system-probe`. La política de SELinux de Bottlerocket limita un contenedor sin privilegios a los archivos de su propio pod. Sin este tipo, solo la propia imagen del Agent recibe señales de tiempo de ejecución. Las pestañas a continuación muestran cómo configurarlo.
 
 Las señales de tiempo de ejecución se aplican a los paquetes instalados por un administrador de paquetes del sistema operativo (`apt`, `yum` o `apk`) en los hallazgos de vulnerabilidades de imágenes de contenedor.
 
@@ -228,6 +229,21 @@ spec:
           enabled: true
 ```
 
+Si sus nodos ejecutan Bottlerocket, también configure el tipo de SELinux del pod del Agent del nodo. Esta anulación reemplaza el contexto de seguridad del pod, así que mantenga `runAsUser: 0`:
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
+```
+
 Aplique los cambios y reinicie el Agent.
 
 {{% /tab %}}
@@ -245,6 +261,20 @@ datadog:
     enrichment:
       usage:
         enabled: true
+```
+
+Si sus nodos ejecutan Bottlerocket, también agregue lo siguiente a su archivo `datadog-values.yaml`:
+
+```yaml
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: system_u
+          role: system_r
+          type: spc_t
+          level: s0
 ```
 
 Reinicie el Agent.
@@ -266,6 +296,18 @@ hostPID: true
   value: "true"
 - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
   value: "true"
+```
+
+Si sus nodos ejecutan Bottlerocket, también agregue `seLinuxOptions` al contexto de seguridad del contenedor `system-probe`:
+
+```yaml
+# system-probe container
+securityContext:
+  seLinuxOptions:
+    user: system_u
+    role: system_r
+    type: spc_t
+    level: s0
 ```
 
 Reinicie el Agent.

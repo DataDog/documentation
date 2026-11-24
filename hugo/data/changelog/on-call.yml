@@ -87,3 +87,63 @@ entries:
       - UpdateOnCallEscalationPolicy
       - UpdateUserNotificationRule
     title: Add on-call GET pages endpoints
+  - change_type: modified
+    date: '2026-11-04'
+    link: https://github.com/DataDog/documentation/pull/41377
+    operations:
+      - CreateUserNotificationChannel
+      - CreateUserNotificationRule
+      - GetUserNotificationChannel
+      - GetUserNotificationRule
+      - ListUserNotificationChannels
+      - ListUserNotificationRules
+      - UpdateUserNotificationRule
+    title: Fix On-Call notification channel response metadata
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41548
+    operations:
+      - GetOnCallPage
+      - ListOnCallPages
+    title: Add AI Gateway route permissions and safe editing
+  - change_type: added
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41838
+    operations:
+      - CreateOnCallPageComment
+    title: Add POST /api/v2/on-call/pages/page_id/comments endpoint
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateOnCallEscalationPolicy
+      - CreateOnCallPageComment
+      - CreateOnCallSchedule
+      - CreateScheduleOverrides
+      - CreateUserNotificationChannel
+      - CreateUserNotificationRule
+      - DeleteOnCallEscalationPolicy
+      - DeleteOnCallSchedule
+      - DeleteScheduleOverride
+      - DeleteUserNotificationChannel
+      - DeleteUserNotificationRule
+      - GetOnCallEscalationPolicy
+      - GetOnCallPage
+      - GetOnCallSchedule
+      - GetOnCallTeamRoutingRules
+      - GetScheduleOnCallResponders
+      - GetScheduleOnCallUser
+      - GetTeamOnCallUsers
+      - GetUserNotificationChannel
+      - GetUserNotificationRule
+      - ListOnCallEscalationPolicies
+      - ListOnCallPages
+      - ListOnCallSchedules
+      - ListScheduleOverrides
+      - ListUserNotificationChannels
+      - ListUserNotificationRules
+      - SetOnCallTeamRoutingRules
+      - UpdateOnCallEscalationPolicy
+      - UpdateOnCallSchedule
+      - UpdateUserNotificationRule
+    title: Document rate-limit headers on the shared 429 responses

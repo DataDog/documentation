@@ -1,313 +1,291 @@
 ---
-description: Créer des chaînes de requêtes pour surveiller des transactions complexes
-  sur vos services essentiels
+description: Enchaînez les requêtes pour surveiller des transactions complexes sur
+  vos services clés.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: Blog
-  text: Surveiller vos workflows grâce aux tests API à plusieurs étapes Datadog
-- link: https://learn.datadoghq.com/course/view.php?id=39
-  tag: Centre d'apprentissage
-  text: Présentation des tests Synthetic
-- link: /getting_started/synthetics/api_test
-  tag: Documentation
-  text: Débuter avec les tests API
+  text: Surveillez vos workflows avec les tests API à plusieurs étapes de Datadog
+- link: /synthetics/guide/version_history/
+  tag: Guide
+  text: Historique des versions de Synthetic Monitoring
 - link: /synthetics/private_locations
   tag: Documentation
-  text: Exécuter des tests API à plusieurs étapes sur des endpoints internes
+  text: Exécutez des tests API à plusieurs étapes sur des endpoints internes
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: Documentation
+  text: En savoir plus sur les monitors de test Synthetic
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
-  text: Créer et gérer des tests API Synthetic à plusieurs étapes avec Terraform
+  tag: Site externe
+  text: Créez et gérez des tests API à plusieurs étapes Synthetic avec Terraform
+- link: /synthetics/guide/export-tests-to-terraform
+  tag: Guide
+  text: Exportez les tests API Synthetic vers Terraform
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
+  tag: Centre d'apprentissage
+  text: Premiers pas avec Synthetic Monitoring et les tests de navigateur
 title: Tests API à plusieurs étapes
 ---
+## Présentation {#overview}
 
-## Présentation
+Les tests API à plusieurs étapes vous permettent d'enchaîner plusieurs [tests API][1] à la fois pour surveiller de manière proactive et garantir que les parcours complexes sur vos services clés sont disponibles à tout moment et depuis n'importe où. Si vous souhaitez effectuer des requêtes uniques vers vos services, utilisez les [tests API][1].
 
-Grâce aux tests API à plusieurs étapes, vous pouvez exécuter plusieurs [requêtes HTTP][1] à la suite afin d'effectuer une surveillance proactive et de vous assurer que les parcours complexes de vos services clés sont disponibles en tout temps et tout lieu. Si vous souhaitez transmettre à vos services des requêtes individuelles, utilisez plutôt des [tests API][2].
+Vous pouvez effectuer les opérations suivantes :
 
-Vous pouvez effectuer les opérations suivantes :
+* Exécutez des requêtes HTTP sur des endpoints d'API nécessitant une authentification (par exemple, via un jeton)
+* Surveillez les transactions métier clés au niveau de l'API
+* Simulez des parcours d'application mobile de bout en bout
 
-* Exécutez des requêtes HTTP sur des endpoints d'API nécessitant une authentification (par exemple, via un token).
-* Surveillez des transactions commerciales essentielles au niveau de l'API.
-* Simulez toutes les étapes des parcours utilisateur sur des applications mobiles.
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Étapes de test multiples dans un test API à plusieurs étapes" style="width:90%;" >}}
 
-{{< img src="synthetics/api_tests/ms_overview.png" alt="Présentation du test API à plusieurs étapes" style="width:90%;" >}}
+Si l'un de vos services commence à répondre plus lentement ou de manière inattendue (par exemple, corps de réponse ou code de statut inattendu), votre test peut [**alerter votre équipe**][2], [**bloquer votre pipeline CI**][3] ou même [**annuler le déploiement défectueux**][3].
 
-Si l'un de vos services est moins réactif ou si ses réponses ne correspondent pas à vos attentes (corps de réponse ou code de statut inattendu, etc.), votre test peut [**prévenir votre équipe**][3], [**bloquer votre pipeline de CI**][4] ou même [**annuler le déploiement à l'origine de l'erreur**][4].
+Les tests API à plusieurs étapes peuvent être exécutés depuis des emplacements [gérés](#select-locations) par Datadog et des [emplacements privés][4], permettant une **couverture complète de vos systèmes**, qu'ils soient externes ou internes.
 
-Les tests API à plusieurs étapes peuvent s'exécuter depuis des [emplacements gérés][5] par Datadog et des [emplacements privés][6]. Ainsi, vous bénéficiez d'une **couverture complète de vos systèmes**, en interne comme en externe.
+## Configuration {#configuration}
 
-## Configuration
+### Nommez et taguez votre test {#name-and-tag-your-test}
 
-### Nommer votre test et y ajouter des tags
+1. Nommez votre test API à plusieurs étapes.
+2. Ajoutez `env` et d'autres tags à votre test API à plusieurs étapes. Vous pouvez utiliser ces tags pour filtrer vos tests Synthetic sur la [page Synthetic Monitoring & Continuous Testing][5].
 
-1. Attribuez un nom à votre test API à plusieurs étapes.
-2. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test API à plusieurs étapes. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][7].
+### Sélectionnez des emplacements {#select-locations}
 
-### Sélectionner des emplacements
+Sélectionnez le {{< ui >}}Locations{{< /ui >}} pour votre test API à plusieurs étapes. Les tests API à plusieurs étapes peuvent être exécutés à partir d'emplacements gérés et d'[emplacements privés][4] selon que vous préférez exécuter le test depuis l'extérieur ou l'intérieur de votre réseau.
 
-Sélectionnez les **emplacements** de votre test API à plusieurs étapes. Les tests API peuvent être exécutés depuis des [emplacements gérés][5] et des [emplacements privés][6], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau.
+{{% managed-locations %}} 
 
-### Définir des étapes
+### Définissez les étapes {#define-steps}
 
-Pour créer une étape de requête HTTP, cliquez sur **Create Your First Step**.
+Pour créer une étape de requête API, cliquez sur {{< ui >}}Create Your First Step{{< /ui >}}.
 
-{{< img src="synthetics/api_tests/ms_create_request.png" alt="Créer les requêtes de votre test API à plusieurs étapes" style="width:100%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Créez les requêtes de votre test API à plusieurs étapes" style="width:90%;" >}}
 
-**Remarque :** par défaut, vous ne pouvez pas créer plus de 10 étapes. Pour augmenter cette limite, contactez l'<a href="https://docs.datadoghq.com/help/">assistance Datadog</a>.
+Par défaut, vous pouvez créer jusqu'à 10 étapes de test. Pour augmenter cette limite, contactez <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 
-#### Définir une requête
+#### Définissez la requête {#define-the-request}
 
-1. **Donnez un nom** à votre étape.
-2. Choisissez une valeur pour **HTTP Method** et indiquez l'**URL** à interroger. Les méthodes disponibles sont `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`. Les URL `http` et `https` sont prises en charge.
-3. Enrichissez votre requête HTTP en modifiant les réglages de la section **Advanced Options** (facultatif) :
-
+1. **Nommez** votre étape.
+2. Choisissez un type de requête :
+   
    {{< tabs >}}
+   {{% tab "HTTP" %}}
 
-   {{% tab "Options de requête" %}}
+   Consultez la [documentation sur les tests HTTP][101] pour créer une requête HTTP et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
 
-   * **Follow redirects** : activez cette option pour que votre test HTTP suive jusqu'à dix redirections lors de l'exécution de la requête.
-   * **Request headers** : définissez les en-têtes à ajouter à votre requête HTTP. Vous pouvez également remplacer les en-têtes par défaut (par exemple, l'en-tête `user-agent`).
-   * **Cookies** : définissez les cookies à ajouter à votre requête HTTP. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
+   [101]: /synthetics/api_tests/http_tests/
+
+   {{% /tab %}}
+   {{% tab "gRPC" %}}
+
+   Consultez la [documentation sur les tests gRPC][102] pour créer une requête gRPC et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
+
+   [102]: /synthetics/api_tests/grpc_tests/
 
    {{% /tab %}}
 
-   {{% tab "Authentification" %}}
+   {{% tab "SSL" %}}
 
-   * **HTTP Basic Auth** : ajoutez des identifiants d'authentification basique HTTP.
-   * **Digest Auth** : ajoutez des identifiants d'authentification Digest.
-   * **NTLM v1** : ajoutez vos identifiants d'authentification NTLM.
-   * **AWS Signature v4** : saisissez votre ID de clé d'accès et votre clé d'accès secrète. Datadog génère alors la signature pour votre requête. Cette option repose sur une implémentation de base de SigV4. Les signatures spécifiques (par exemple pour AWS S3) ne sont pas implémentées.
+   Consultez la [documentation sur les tests SSL][103] pour créer une requête SSL et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
 
-   {{% /tab %}}
-
-   {{% tab "Paramètres de requête" %}}
-
-   * **Encode parameters** : ajoutez le nom et la valeur des paramètres de requête nécessitant un encodage.
+   [103]: /synthetics/api_tests/ssl_tests/
 
    {{% /tab %}}
 
-   {{% tab "Corps de requête" %}}
+   {{% tab "DNS" %}}
 
-   * **Body type** : sélectionnez le type du corps de requête (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded` ou `None`) que vous voulez ajouter à votre requête HTTP.
-   * **Request body** : ajoutez le contenu du corps de votre requête HTTP. La taille du corps de la requête ne doit pas dépasser 50 Ko.
+   Consultez la [documentation sur les tests DNS][104] pour créer une requête DNS et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
 
-   {{% /tab %}}
-
-   {{% tab "Certificat" %}}
-
-   * **Ignore server certificate error** : activez cette option pour que votre test HTTP poursuive son processus de connexion même lorsque des erreurs de validation du certificat SSL surviennent.
-   * **Client certificate** : authentifiez-vous via mTLS en important votre certificat client et la clé privée associée.
+   [104]: /synthetics/api_tests/dns_tests/
 
    {{% /tab %}}
 
-   {{% tab "Proxy" %}}
+   {{% tab "WebSocket" %}}
 
-   * **Proxy URL** : indiquez l'URL du proxy que la requête HTTP doit utiliser (`http://<VOTRE_UTILISATEUR>:<VOTRE_MOT_DE_PASSE>@<VOTRE_IP>:<VOTRE_PORT>`).
-   * **Proxy Header** : ajoutez les en-têtes à inclure dans la requête HTTP envoyée au proxy.
+   Consultez la [documentation sur les tests WebSocket][105] pour créer une requête WebSocket et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
+
+   [105]: /synthetics/api_tests/websocket_tests/
 
    {{% /tab %}}
 
-   {{% tab "Confidentialité" %}}
+   {{% tab "TCP" %}}
 
-   * **Do not save response body** : sélectionnez cette option pour désactiver l'enregistrement du corps de la réponse au moment de l'exécution. Cela vous permet de vous assurer qu'aucune donnée sensible ne figure dans les résultats de test. Utilisez toutefois cette option avec précaution, car elle peut rendre plus difficile le dépannage des problèmes. Pour découvrir d'autres recommandations de sécurité, consultez la section [Sécurité de la surveillance Synthetic][1].
+   Consultez la [documentation sur les tests TCP][106] pour créer une requête TCP et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
 
-[1]: /fr/security/synthetics
+   [106]: /synthetics/api_tests/tcp_tests/
+
+   {{% /tab %}}
+
+   {{% tab "UDP" %}}
+
+   Consultez la [documentation sur les tests UDP][107] pour créer une requête UDP et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
+
+   [107]: /synthetics/api_tests/udp_tests/
+
+   {{% /tab %}}
+
+   {{% tab "ICMP" %}}
+
+   Consultez la [documentation sur les tests ICMP][108] pour créer une requête ICMP et ajouter des assertions pour une vérification de comportement ou une vérification de santé. Les assertions sont facultatives dans les tests API à plusieurs étapes.
+
+   [108]: /synthetics/api_tests/icmp_tests/
+
    {{% /tab %}}
 
    {{< /tabs >}}
 
-Cliquez sur **Test URL** pour tester la configuration de requête. Un aperçu de la réponse s'affiche alors.
+### Ajoutez des paramètres d'exécution {#add-execution-settings}
 
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Définir une requête pour votre test API à plusieurs étapes" style="width:90%;" >}}
+Sous {{< ui >}}Execution Settings{{< /ui >}}, les options suivantes sont disponibles :
 
-#### Ajouter des assertions
+#### Succès de l'étape : {#step-success}
 
-Les assertions définissent un résultat de test escompté. Lorsque vous cliquez sur **Test URL**, les assertions de base pour `response time`, `status code` et `header` `content-type` sont ajoutées en fonction de la réponse obtenue. Les assertions sont facultatives pour les tests API à plusieurs étapes.
+Cliquez sur {{< ui >}}If step succeeds, continue to next step{{< /ui >}} pour laisser votre test se poursuivre avec les étapes suivantes après des étapes réussies.  
 
-| Type          | Opérateur                                                                                               | Type de valeur                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][8], [`xpath`][9] | _Chaîne_ <br> _[Regex][10]_ <br> _Chaîne_, _[Regex][10]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _Chaîne_ <br> _[Regex][10]_                                      |
-| response time | `is less than`                                                                                         | _Nombre entier (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Nombre entier_                                                      |
+{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Capture d'écran des paramètres d'exécution montrant l'option « Continuer à l'étape suivante » en cas de réussite d'une étape" style="width:90%;" >}}
 
-**Remarque** : les tests HTTP peuvent décompresser les corps de réponse contenant les en-têtes `content-encoding` suivants : `br`, `deflate`, `gzip` et `identity`.
+Cliquez sur {{< ui >}}If step succeeds, exit test and mark it as passed{{< /ui >}} pour quitter le test après la réussite d'une étape. Cela empêche l'exécution d'étapes inutiles et évite de marquer le test comme échoué. 
 
-Vous pouvez créer jusqu'à 20 assertions par étape en cliquant sur **New assertion** ou directement sur l'aperçu de la réponse.
+{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Capture d'écran des paramètres d'exécution montrant l'option « Quitter et marquer comme réussi » en cas de réussite d'une étape" style="width:90%;" >}}
 
-{{< img src="synthetics/api_tests/assertions_multi.png" alt="Définir des assertions pour votre test API à plusieurs étapes" style="width:90%;" >}}
+#### Échec de l'étape {#step-failure}
 
-#### Ajouter des paramètres d'exécution
+Cliquez sur {{< ui >}}If step fails, continue to next step{{< /ui >}} pour poursuivre avec les étapes suivantes après l'échec d'une étape. Lorsque vous sélectionnez cette option, un menu {{< ui >}}and mark test as{{< /ui >}} apparaît. Conservez {{< ui >}}failed{{< /ui >}} (sélectionné par défaut) pour que le test échoue si cette étape échoue. Sélectionnez {{< ui >}}passed{{< /ui >}} afin qu'un échec de cette étape ne fasse pas échouer le test.
 
-Cliquez sur **Continue with test if this step fails** pour que votre test passe aux étapes suivantes en cas d'échec d'une étape.
+Poursuivre après une étape ayant échoué peut être utile pour les tâches de nettoyage lorsque vous souhaitez que les étapes suivantes se déroulent. Par exemple, un test crée une ressource, effectue plusieurs actions dessus, puis la supprime.
 
-Cette option permet à vos tests de s'auto-nettoyer. Par exemple, un test peut créer une ressource, effectuer un certain nombre d'actions sur cette ressource, puis finir par supprimer cette ressource. Si vous appliquez ce réglage à chaque étape intermédiaire, en cas d'échec d'une de ces étapes, la ressource est supprimée à la fin du test, et aucun faux positif n'est créé.
+Si l'une des étapes intermédiaires échoue, vous souhaitez que ce paramètre soit activé sur chaque étape intermédiaire pour garantir que la ressource soit supprimée à la fin du test et qu'aucun faux positif ne soit créé.
 
-Activez l'option **Consider entire test as failed if this step fails** pour chaque étape intermédiaire afin que votre test génère systématiquement une alerte lorsque la réponse de l'un des endpoints est inattendue.
+Le test génère une alerte si un endpoint ne répond pas comme prévu. En cas d'échec du test, votre test peut effectuer X nouvelles tentatives, espacées de Y ms. Personnalisez l'intervalle entre les nouvelles tentatives selon votre sensibilité aux alertes.
 
-##### Nouvelles tentatives
+{{< img src="synthetics/multistep_tests/step_failure.png" alt="Capture d'écran des paramètres d'exécution montrant l'échec d'une étape" style="width:90%;" >}}
 
-Votre test peut déclencher X nouvelles tentatives après Y ms en cas d'échec. Cet intervalle peut être personnalisé en fonction de vos préférences en matière d'alertes.
+#### Extrayez des variables de la réponse {#extract-variables-from-the-response}
 
-#### Extraire des variables depuis la réponse
+Vous pouvez également extraire des variables de la réponse de votre requête API en effectuant un parsing des en-têtes ou du corps de la réponse. La valeur de la variable est mise à jour à chaque exécution de l'étape de requête API.
 
-Vous pouvez également extraire des variables à partir de la réponse de votre requête HTTP en parsant les en-têtes ou le corps de la réponse. La valeur de la variable est mise à jour à chaque fois que l'étape de requête HTTP est exécutée.
+Pour commencer le parsing d'une variable, cliquez sur {{< ui >}}Extract a variable from response content{{< /ui >}} :
 
-Pour parser votre variable :
+1. Saisissez un {{< ui >}}Variable Name{{< /ui >}}. Le nom de votre variable ne peut utiliser que des lettres majuscules, des chiffres et des traits de soulignement, et doit comporter au moins trois caractères.
+2. Déterminez si vous souhaitez extraire votre variable des en-têtes de réponse ou du corps de réponse.
 
-1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom doit comporter au moins trois caractères et peut uniquement contenir des lettres majuscules, des chiffres et des underscores.
-2. Indiquez si la variable doit être extraite à partir des en-têtes ou du corps de la réponse :
+   * Extrayez la valeur de {{< ui >}}response header{{< /ui >}} : utilisez l'en-tête de réponse complet de votre requête API comme valeur de variable, ou analysez-le avec un [`regex`][8].
+   * Extrayez la valeur de {{< ui >}}response body{{< /ui >}} : utilisez le corps de réponse complet de votre requête API comme valeur de variable ou analysez-le avec un [`regex`][8], un [`JSONPath`][6] ou un [`XPath`][7].
 
-    * Extraire la valeur à partir du **Response Header** : utilisez l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [`regex`][10].
-    * Extraire la valeur à partir du **Response Body** : utilisez le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parsez le corps avec une [`regex`][10], une expression [`JSONPath`][8] ou une expression [`XPath`][9].
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extrayez des variables des requêtes API dans un test API à plusieurs étapes" style="width:90%;" >}}
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraire des variables depuis des requêtes HTTP dans un test API à plusieurs étapes" style="width:90%;" >}}
+Vous pouvez extraire jusqu'à dix variables par étape de test. Une fois créée, cette variable peut être utilisée dans les étapes suivantes de votre test API à plusieurs étapes. Pour plus d'informations, consultez [Utiliser des variables](#use-variables).
 
-Une fois la variable créée, vous pouvez l'utiliser dans les étapes ultérieures de votre test API à plusieurs étapes. Pour en savoir plus, consultez la rubrique [Utiliser des variables](#utiliser-des-variables).
+### Spécifiez la fréquence du test {#specify-test-frequency}
 
-### Indiquer la fréquence du test
+Les tests API à plusieurs étapes peuvent s'exécuter :
 
-Les tests API à plusieurs étapes peuvent être exécutés :
+* **Selon un planning** pour garantir que vos endpoints les plus importants sont toujours accessibles à vos utilisateurs. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test API à plusieurs étapes.
+* [**Au sein de vos pipelines CI/CD**][3] pour commencer à livrer sans craindre qu'un code défectueux n'impacte l'expérience de vos clients.
+* **On-demand** pour exécuter vos tests au moment le plus opportun pour vos équipes.
 
-* **Selon un programme**, pour vous assurer que vos utilisateurs peuvent toujours accéder à vos principaux endpoints. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test API à plusieurs étapes.
+{{% synthetics-alerting-monitoring %}}
 
-{{< img src="synthetics/api_tests/schedule.png" alt="Exécuter des tests API selon un programme" style="width:90%;" >}}
+{{% synthetics-downtimes %}}
 
-* [**Dans vos pipelines de CI/CD**][4], pour déployer votre code sans craindre de dégrader l'expérience de vos utilisateurs.
-* **À la demande**, afin d'exécuter les tests au moment le plus opportun pour vos équipes.
+{{% synthetics-variables %}}
 
-### Définir des conditions d'alerte
+### Extrayez des variables {#extract-variables}
 
-Définissez des conditions d'alerte afin de spécifier les circonstances dans lesquelles vous souhaitez qu'un test échoue et déclenche une alerte.
+En plus de créer des variables locales, vous pouvez [extraire des variables de n'importe quelle étape](#extract-variables-from-the-response) de votre test API à plusieurs étapes et [réinjecter les valeurs dans les étapes suivantes](#use-variables).
 
-#### Règle d'alerte
+### Utilisez des variables {#use-variables}
 
-Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if any assertion fails for X minutes from any n of N locations`, une alerte se déclenche uniquement si les deux conditions suivantes se vérifient :
-
-* Au moins un emplacement a donné lieu à un échec (au moins une assertion a échoué) au cours des *X* dernières minutes
-* À un moment au cours des *X* dernières minutes, au moins *n* emplacements ont donné lieu à un échec.
-
-#### Nouvelle tentative rapide
-
-Votre test peut déclencher `X` nouvelles tentatives après `Y` ms en cas d'échec. Cet intervalle peut être personnalisé en fonction de vos préférences en matière d'alertes.
-
-La disponibilité d'un emplacement est calculée pour chaque évaluation (quels que soient les résultats du dernier test avant l'évaluation). La disponibilité totale est calculée selon les conditions d'alerte configurées. Les notifications envoyées se basent sur la disponibilité totale.
-
-### Informer votre équipe
-
-Votre test envoie une notification selon les [conditions d'alerte](#definir-des-conditions-d-alerte) définies au préalable. Référez-vous à cette section pour définir les conditions et le message à envoyer à vos équipes.
-
-1. [Tout comme pour les monitors][11], sélectionnez les **utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
-
-2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][12] standard ainsi que les [variables conditionnelles][13] suivantes :
-
-    | Variable conditionnelle       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | S'affiche lorsque le test envoie une alerte.                                            |
-    | `{{^is_alert}}`            | S'affiche lorsque le test n'envoie pas d'alerte.                                          |
-    | `{{#is_recovery}}`         | S'affiche lorsque le test est rétabli depuis un état d'alerte.                             |
-    | `{{^is_recovery}}`         | S'affiche lorsque le test n'est pas rétabli depuis un état d'alerte.                           |
-
-3. Indiquez une fréquence de **renvoi du message de notification** en cas d'échec d'un test. Si vous ne souhaitez pas renvoyer de notification en cas d'échec, définissez l'option sur `Never renotify if the monitor has not been resolved`.
-
-Cliquez sur **Save** pour enregistrer votre test. Datadog se charge alors de son exécution.
-
-## Variables
-
-### Créer des variables locales
-
-#### Variables extraites
-
-Vous pouvez [extraire des variables à partir de n'importe quelle étape de votre test API à plusieurs étapes](#extraire-des-variables-depuis-la-reponse) et [réinjecter leurs valeurs dans les étapes suivantes](#utiliser-des-variables) de votre test.
-
-#### Variables provenant d'un pattern
-
-Vous pouvez créer des variables locales en cliquant sur **Create Local Variable** en haut à droite du formulaire de configuration de votre test. Vous pouvez définir leurs valeurs sur l'un des builtins disponibles ci-dessous :
-
-`{{ numeric(n) }}`
-: Génère une chaîne numérique de `n` chiffres.
-
-`{{ alphabetic(n) }}`
-: Génère une chaîne alphabétique de `n` lettres.
-
-`{{ alphanumeric(n) }}`
-: Génère une chaîne alphanumérique de `n` caractères.
-
-`{{ date(n, format) }}`
-: Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.
-
-`{{ timestamp(n, unit) }}` 
-: Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
-
-### Utiliser des variables
-
-Les [variables globales définies sur la page `Settings`][14] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests HTTP.
+Vous pouvez utiliser les [variables globales définies dans le {{< ui >}}Settings{{< /ui >}}][13] et les [variables définies localement](#create-local-variables) dans l'URL, les options avancées et les assertions de vos tests API.
 
 Pour afficher votre liste de variables, tapez `{{` dans le champ souhaité.
 
 {{< img src="synthetics/api_tests/use_variable.mp4" alt="Utilisation de variables dans les tests API à plusieurs étapes" video="true" width="90%" >}}
 
-## Échec de test
+### Sous-tests {#subtests}
 
-Un test est considéré comme `FAILED` si une étape ne répond pas à une ou plusieurs de ses assertions ou si la requête d'une étape a échoué prématurément. Dans certains cas, le test peut en effet échouer sans que les assertions n'aient pu être comparées à l'endpoint. Voici la liste des erreurs concernées :
+Les tests API à plusieurs étapes prennent en charge les sous-tests, ce qui vous permet de réutiliser des tests API à plusieurs étapes existants ou d'extraire des étapes pour en faire des composants réutilisables. Vous pouvez imbriquer des sous-tests jusqu'à deux niveaux de profondeur.
+
+Les étapes de sous-test ont une limite de 60 secondes. Une étape de sous-test expire si la durée combinée des étapes du sous-test, y compris les étapes d'attente, dépasse 60 secondes. Cela peut se produire même lorsque le sous-test réussit en tant que test autonome.
+
+- **Nouvelles tentatives** : Chaque nouvelle tentative de l'étape de sous-test dispose à nouveau de 60 secondes.
+- **Emplacements privés** : Le paramètre `apiRequestMaxTimeout` contrôle cette limite, en millisecondes (par défaut : `60000`). Consultez la section [Configuration avancée][20] de la page de configuration des emplacements privés.
+
+Pour exécuter un flux qui dure plus de 60 secondes, divisez-le en plusieurs étapes de sous-test ou ajoutez ses étapes directement au test parent.
+
+Pour utiliser un test API à plusieurs étapes existant comme sous-test, cliquez sur {{< ui >}}Subtest{{< /ui >}}, accédez à l'onglet {{< ui >}}From Existing Test{{< /ui >}} et sélectionnez un test API à plusieurs étapes dans le menu déroulant.
+
+Pour convertir des étapes de votre test API à plusieurs étapes actuel en sous-test, cliquez sur l'onglet {{< ui >}}Extract From Steps{{< /ui >}}, sélectionnez les étapes enregistrées que vous souhaitez extraire et cliquez sur {{< ui >}}Convert to Subtest{{< /ui >}}.
+
+{{< img src="synthetics/multistep_tests/subtest.png" alt="Interface utilisateur pour ajouter un sous-test à un test API à plusieurs étapes" width="60%" >}}
+
+Pour remplacer une variable de sous-test dans un test API à plusieurs étapes, définissez-la dans le test parent en utilisant le même nom. Une variable utilise toujours la première valeur qui lui est assignée.
+
+Si vous n'avez pas besoin d'exécuter un sous-test indépendamment, vous pouvez le mettre en pause. Il s'exécute toujours dans le cadre du test API à plusieurs étapes mais n'est pas exécuté seul.
+
+**Remarque :** Seuls les tests API à plusieurs étapes peuvent être ajoutés en tant que sous-tests. L'utilisation de [tests API][1] comme sous-tests n'est pas prise en charge.
+
+## Échec du test {#test-failure}
+
+Un test est considéré comme `FAILED` si une étape ne satisfait pas une ou plusieurs assertions ou si la requête d'une étape a échoué prématurément. Une étape échouée ne fait pas échouer le test lorsque son option {{< ui >}}and mark test as{{< /ui >}} est définie sur {{< ui >}}passed{{< /ui >}}. Pour plus d'informations, consultez la section [Échec d'étape](#step-failure). Dans certains cas, le test échoue avant de pouvoir vérifier les assertions par rapport à l'endpoint. Les causes possibles sont les suivantes :
 
 `CONNREFUSED`
-: Aucune connexion n'a pu être établie, en raison d'un refus explicite de la machine cible.
+: Aucune connexion n'a pu être établie car la machine cible l'a activement refusée.
 
 `CONNRESET`
-: La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.
+: La connexion a été brusquement fermée par le serveur distant. Les causes possibles incluent une erreur ou un plantage du serveur web lors de la réponse, ou une perte de connectivité du serveur web.
 
 `DNS`
-: L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée ou configuration des entrées DNS incorrecte.
+: Entrée DNS introuvable pour l'URL de test. Les causes possibles incluent une URL de test mal configurée ou une mauvaise configuration dans vos entrées DNS.
 
 `INVALID_REQUEST` 
-: La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
+: La configuration du test est invalide (par exemple, une faute de frappe dans l'URL).
 
 `SSL`
-: La connexion SSL n'a pas pu être établie. [Pour en savoir plus, consultez la page relative aux erreurs][15].
+: La connexion SSL n'a pas pu être effectuée. [Consultez la page d'erreur dédiée pour plus d'informations][14].
 
 `TIMEOUT`
-: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire :
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la durée de la requête a dépassé le délai d'expiration défini (par défaut, 60 secondes).
-  Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si rien d'autre que `Total response time` ne s'affiche, cela signifie que l'expiration est survenue durant la résolution DNS.
-  - Le message `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée de la requête et des assertions a atteint la durée maximale (60,5 secondes).
+: La requête n'a pas pu être terminée dans un délai raisonnable. Deux types de `TIMEOUT` peuvent se produire :
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indique que la durée de la requête a atteint le délai d'expiration défini pour le test (la valeur par défaut est de 60 s). 
+  Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si seul `Total response time` est affiché, le délai d'expiration s'est produit pendant la résolution DNS.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée de la requête et des assertions a atteint la durée maximale (30 minutes).
 
-`MALFORMED_RESPONSE` 
-: Le serveur à distance a répondu avec une charge utile non conforme aux spécifications HTTP.
+Pour obtenir une liste complète des autres codes d'erreur de test d'API, consultez [Erreurs de test d'API][19].
 
-## Autorisations
+## Autorisations {#permissions}
 
-Par défaut, seuls les utilisateurs disposant des [rôles Admin ou Standard Datadog][16] peuvent créer, modifier et supprimer des tests API Synthetic à plusieurs étapes. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][16]. 
+Par défaut, seuls les utilisateurs disposant des [rôles Datadog Admin et Datadog Standard][16] peuvent créer, modifier et supprimer des tests API Synthetic à plusieurs étapes. Pour obtenir les droits de création, de modification et de suppression des tests API Synthetic à plusieurs étapes, attribuez à votre utilisateur l'un de ces deux [rôles par défaut][16].
 
-Si vous utilisez la [fonctionnalités de rôle personnalisé][17], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write` pour la surveillance Synthetic.
+Si vous utilisez la [fonctionnalité de rôle personnalisé][17], ajoutez votre utilisateur à tout rôle personnalisé incluant les autorisations `synthetics_read` et `synthetics_write` pour Synthetic Monitoring.
 
-## Restreindre l'accès
+### Restreindre l'accès {#restrict-access}
 
-Les clients qui ont configuré des [rôles personnalisés][18] sur leur compte peuvent utiliser la fonctionnalité de restriction d'accès.
+La restriction d'accès est disponible pour les clients utilisant des [rôles personnalisés][18] sur leurs comptes.
 
-Vous pouvez limiter l'accès d'un test API à plusieurs étapes à certains rôles de votre organisation. Lors de la création du test API à plusieurs étapes, choisissez les rôles (en plus de votre utilisateur) auxquels vous souhaitez attribuer des autorisations de lecture/écriture pour votre test.
+Vous pouvez restreindre l'accès à un test API à plusieurs étapes en fonction des rôles de votre organisation. Lors de la création d'un test API à plusieurs étapes, choisissez les rôles (en plus de votre utilisateur) qui peuvent lire et modifier votre test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Définir des autorisations pour votre test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Définissez les autorisations de votre test" style="width:70%;" >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics/api_tests/http_tests
-[2]: /fr/synthetics/api_tests/
-[3]: /fr/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[4]: /fr/synthetics/cicd_integrations
-[5]: /fr/api/v1/synthetics/#get-all-locations-public-and-private
-[6]: /fr/synthetics/private_locations
-[7]: /fr/synthetics/search/#search
-[8]: https://restfulapi.net/json-jsonpath/
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[11]: /fr/monitors/notify/?tab=is_alert#notification
-[12]: http://daringfireball.net/projects/markdown/syntax
-[13]: /fr/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[14]: /fr/synthetics/settings/#global-variables
-[15]: /fr/synthetics/api_tests/errors/#ssl-errors
+[1]: /fr/synthetics/api_tests/
+[2]: /fr/synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
+[3]: /fr/synthetics/cicd_integrations
+[4]: /fr/synthetics/private_locations
+[5]: /fr/synthetics/search/#search-for-tests
+[6]: https://restfulapi.net/json-jsonpath/
+[7]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[9]: /fr/monitors/notify/?tab=is_alert#configure-notifications-and-automations
+[10]: http://daringfireball.net/projects/markdown/syntax
+[11]: /fr/monitors/notify/variables/?tab=is_alert#conditional-variables
+[12]: /fr/monitors/types/synthetic_monitoring/
+[13]: /fr/synthetics/settings/#global-variables
+[14]: /fr/synthetics/api_tests/errors/#ssl-errors
+[15]: /fr/synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
 [16]: /fr/account_management/rbac/
 [17]: /fr/account_management/rbac#custom-roles
 [18]: /fr/account_management/rbac/#create-a-custom-role
+[19]: /fr/synthetics/api_tests/errors/
+[20]: /fr/synthetics/platform/private_locations/configuration/#advanced-configuration

@@ -13,7 +13,7 @@ further_reading:
 Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
-- [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
+- [**Feedback and memories:**](#feedback-and-memories) Learnings from past investigations
 
 ## Runbooks
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
@@ -30,6 +30,8 @@ Because these links are user-defined, you have control over what Bits reviews, e
 
 To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits to conduct more accurate and effective investigations.
 
+Bits follows the links in the monitor message that it has access to, such as Notebooks and [Confluence pages][3].
+
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ## Bits.md
@@ -37,6 +39,9 @@ To maximize the value of this integration, document the services, dependencies, 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+
+- **Where it applies**: In the `bits.md` settings, use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which Bits products use the file.
+- **Links**: Bits can follow links in `bits.md` that it has access to.
 
 ### Sample bits.md
 
@@ -105,6 +110,20 @@ Rule:
 
 ## Feedback and memories
 
+Bits learns from past investigations in two complementary ways:
+- [**Automatic memories:**](#automatic-memories) Root causes and learnings that Bits stores on its own after each investigation
+- [**Feedback memories:**](#feedback-memories) Corrections and confirmations that you provide at the end of an investigation
+
+### Automatic memories
+
+{{< img src="bits_ai/automatic_memory_recalled.png" alt="Investigation tree showing a recalled memory feeding into hypothesis investigation, with the matching hypothesis verified" style="width:100%;" >}}
+
+Bits Investigation automatically stores the root cause and learnings from past investigations, then retrieves them the next time the same monitor alerts. Investigations start from what Bits already knows based on the past, which helps resolve issues faster and at a lower cost.
+
+Automatic memories don't require any action from you, and they work alongside the feedback memories described below.
+
+### Feedback memories
+
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
 
 {{< img src="bits_ai/help_bits_ai_learn_2.png" alt="Post-investigation root cause feedback flow" style="width:100%;" >}}
@@ -126,3 +145,4 @@ To manage memories, including viewing and deleting them, go to the {{< ui >}}Mem
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: /bits_ai/bits_investigation/configure/#confluence

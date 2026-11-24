@@ -20,7 +20,7 @@ Pour ajouter une requête HTTP :
 {{< tabs >}}
 {{% tab "Workflow Automation" %}}
 - Dans un nouveau workflow, cliquez sur {{< ui >}}Add step{{< /ui >}} et recherchez `Make request`. Sélectionnez l'action {{< ui >}}Make request{{< /ui >}} pour l'ajouter à votre workflow.
-- Dans un workflow existant, cliquez sur {{< ui >}}+{{< /ui >}} et recherchez `Make request`. Sélectionnez l'action {{< ui >}}Make request{{< /ui >}} pour l'ajouter à votre workflow.
+- Dans un workflow existant, cliquez sur {{< ui >}}\+{{< /ui >}} et recherchez `Make request`. Sélectionnez l'action {{< ui >}}Make request{{< /ui >}} pour l'ajouter à votre workflow.
 
 Spécifiez la méthode de requête et toute [authentification][1] nécessaire. Lisez les sections ci-dessous pour plus d'informations sur les options de configuration disponibles. Facultativement, la requête peut attendre des conditions que vous spécifiez dans la section {{< ui >}}Conditional wait{{< /ui >}}, et réessayer à un intervalle donné si la condition n'est pas satisfaite.
 
@@ -28,7 +28,7 @@ Spécifiez la méthode de requête et toute [authentification][1] nécessaire. L
 {{% /tab %}}
 
 {{% tab "App Builder" %}}
-1. Dans votre application, sous {{< ui >}}Data{{< /ui >}}, cliquez sur {{< ui >}}+ New{{< /ui >}} et sélectionnez {{< ui >}}Query{{< /ui >}}
+1. Dans votre application, sous {{< ui >}}Data{{< /ui >}}, cliquez sur {{< ui >}}\+ New{{< /ui >}} et sélectionnez {{< ui >}}Query{{< /ui >}}
 1. Recherchez `HTTP`, puis sélectionnez l'action {{< ui >}}Make request{{< /ui >}} pour l'ajouter à votre application.
 
 Spécifiez la méthode de requête et toute [authentification][1] nécessaire. Lisez les sections ci-dessous pour plus d'informations sur les options de configuration disponibles.
@@ -43,14 +43,14 @@ Si vous devez authentifier votre requête, utilisez l'élément {{< ui >}}Connec
 
 ### Créer une connexion AWS {#create-an-aws-connection}
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}AWS{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Account ID{{< /ui >}} et {{< ui >}}AWS Role Name{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
 ### Créer une connexion Azure {#create-an-azure-connection}
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}Azure{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Tenant ID{{< /ui >}}, {{< ui >}}Client ID{{< /ui >}} et {{< ui >}}Client Secret{{< /ui >}}.
 1. Facultativement, saisissez la {{< ui >}}Custom Scope{{< /ui >}} à demander à Microsoft lors de l'acquisition d'un jeton d'accès OAuth 2.0. Le périmètre d'une ressource est construite en utilisant l'URI d'identifiant pour la ressource et `.default`, séparés par une barre oblique (`/`). Par exemple, `{identifierURI}/.default`. Pour plus d'informations, consultez [la documentation Microsoft sur le périmètre .default][3].
@@ -60,20 +60,21 @@ Si vous devez authentifier votre requête, utilisez l'élément {{< ui >}}Connec
 
 La connexion d'authentification par jeton utilise un jeton d'accès (Bearer) pour authentifier la requête HTTP.
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}HTTP{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}.
 1. Saisissez le {{< ui >}}Base URL{{< /ui >}} pour l'authentification.
 1. Dans la liste déroulante {{< ui >}}Authentication Type{{< /ui >}}, sélectionnez {{< ui >}}Token Auth{{< /ui >}}.
-1. Saisissez un {{< ui >}}Token Name{{< /ui >}} et un {{< ui >}}Token Value{{< /ui >}}. Vous pouvez saisir plusieurs jetons. Pour référencer votre jeton dans un en-tête, un paramètre ou le corps de la requête, utilisez la syntaxe `{{ secretTokenName }}`.
-1. Facultativement, ajoutez des {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} et un {{< ui >}}Body{{< /ui >}} supplémentaires à votre requête.
+1. Saisissez un {{< ui >}}Token Name{{< /ui >}} et un {{< ui >}}Token Value{{< /ui >}}. Vous pouvez saisir plusieurs jetons.
+1. Configurez la manière dont les requêtes HTTP utilisant la connexion incluent le jeton. La connexion n'ajoute pas automatiquement le jeton aux requêtes. Dans {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} ou {{< ui >}}Body{{< /ui >}}, référencez le jeton avec la syntaxe `{{ secretTokenName }}`, replacing `secretTokenName` with the {{< ui >}}Token Name{{< /ui >}} de l'étape précédente. Par exemple, si le nom du jeton est `apiToken`, add an `Authorization` header with the value `Bearer {{ apiToken }}`.
+1. Ajoutez éventuellement d'autres {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} ou un {{< ui >}}Body{{< /ui >}} à votre requête.
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
 ### Créer une connexion d'authentification HTTP de base {#create-an-http-basic-authentication-connection}
 
 La connexion d'authentification de base utilise un en-tête d'autorisation avec un nom d'utilisateur et un mot de passe pour authentifier la requête HTTP.
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}HTTP{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}.
 1. Saisissez le {{< ui >}}Base URL{{< /ui >}} pour l'authentification.
@@ -85,7 +86,7 @@ La connexion d'authentification de base utilise un en-tête d'autorisation avec 
 
 La connexion HTTP en 2 étapes vous permet d'effectuer une requête préliminaire pour récupérer un jeton d'accès avec lequel authentifier la requête HTTP. Ceci est utile pour authentifier les applications JSON Web Token (JWT) et OAuth.
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}HTTP{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}.
 1. Saisissez le {{< ui >}}Base URL{{< /ui >}} pour l'authentification.
@@ -133,7 +134,7 @@ La connexion d'authentification TLS mutuelle (mTLS) vous permet d'utiliser une c
 
 <div class="alert alert-info">Le certificat client (<code>.crt</code>, <code>.pem</code>) et la clé privée (<code>.key</code>, <code>.pem</code>) doivent utiliser le format PEM.</div>
 
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}HTTP{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}.
 1. Saisissez le {{< ui >}}Base URL{{< /ui >}} pour l'authentification.
@@ -167,7 +168,7 @@ Vous pouvez utiliser une action HTTP privée pour interagir avec des services h�
 
 Pour configurer une requête HTTP privée :
 1. Ajoutez une action HTTP à votre application.
-1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}+{{< /ui >}}).
+1. Dans la section {{< ui >}}Connection{{< /ui >}}, cliquez sur l'icône plus ({{< ui >}}\+{{< /ui >}}).
 1. Sélectionnez {{< ui >}}HTTP{{< /ui >}}.
 1. Saisissez un {{< ui >}}Connection Name{{< /ui >}}.
 1. Saisissez le {{< ui >}}Base URL{{< /ui >}} du host dans votre réseau privé.
@@ -182,7 +183,7 @@ Pour configurer une requête HTTP privée :
 1. Cliquez sur {{< ui >}}Next, Confirm Access{{< /ui >}} et configurez l'accès à la requête.
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
-## Pour aller plus loin {#further-reading}
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

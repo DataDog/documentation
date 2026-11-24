@@ -1,6 +1,6 @@
 ---
 title: Monitoring Resource Performance
-description: "Track web resource performance including XHR, Fetch, images, CSS, and JavaScript assets with detailed timing data and provider identification."
+description: "Track web resource performance including XHR, Fetch, images, CSS, JavaScript assets, and WebSocket connections with detailed timing data and provider identification."
 aliases:
   - /real_user_monitoring/browser/monitoring_resource_performance/
 further_reading:
@@ -106,6 +106,71 @@ For matching requests, the SDK automatically extracts operation type, operation 
 
 **Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
 
+## Track WebSocket connections
+
+{{< callout header="Preview" btn_hidden="true" >}}
+WebSocket monitoring is in Preview. The `betaTrackWebSockets` option and the collected attributes may change before general availability. You do not need to request access. To enable it, set `betaTrackWebSockets` to `true`.
+{{< /callout >}}
+
+The Browser SDK can collect [WebSocket][11] connections. Each connection is reported as a RUM Resource event with `resource.type:websocket`. The event summarizes the tracked lifetime of the connection: how long it took to open, how long it stayed open, how it closed, and how many messages were exchanged in each direction. Use these events in the RUM Explorer to investigate failed, slow, or unexpectedly closed connections.
+
+This feature requires Browser SDK v7.16.0 or later.
+
+### Set up WebSocket tracking
+
+Set [`betaTrackWebSockets`][12] to `true` during SDK initialization. WebSocket collection runs only when resource collection is enabled (`trackResources: true`).
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: 'datadoghq.com',
+    trackResources: true,
+    betaTrackWebSockets: true
+})
+```
+
+The SDK reports connections that are still open when the user leaves the page or the session ends. The `resource.websocket.tracking_end_reason` attribute indicates why tracking stopped. See [WebSocket attributes][13].
+
+### Redact sensitive data in WebSocket URLs
+
+The SDK removes the query string from WebSocket URLs automatically. The rest of the URL, including the path and any credentials, is collected as-is. If it contains sensitive data, such as an identifier in the path, redact it with the [`beforeSend` callback][9].
+
+Datadog builds the WebSocket resource from events that the SDK sends, so you cannot modify the resource event itself. Instead, modify the SDK events of type `vital` where `vital.type` is `websocket`.
+
+You can modify the following properties of these events:
+
+| Attribute                             | Type   | Description                                                        |
+| ------------------------------------- | ------ | ------------------------------------------------------------------ |
+| `vital.websocket.url`                 | String | The URL of a WebSocket connection.                                 |
+| `vital.websocket.requested_protocols` | Array  | The subprotocols requested when opening a WebSocket connection.    |
+| `vital.websocket.selected_protocol`   | String | The subprotocol selected by the server for a WebSocket connection. |
+| `vital.websocket.close_reason`        | String | The reason a WebSocket connection was closed.                      |
+
+For example, to redact a room identifier from the WebSocket URL:
+
+```javascript
+datadogRum.init({
+    ...,
+    betaTrackWebSockets: true,
+    beforeSend: (event) => {
+        if (event.type === 'vital' && event.vital.type === 'websocket') {
+            // The URL is not present on every WebSocket event, so check that it exists
+            if (event.vital.websocket.url) {
+                event.vital.websocket.url = event.vital.websocket.url.replace(/\/rooms\/[^/]+/, '/rooms/REDACTED')
+            }
+        }
+        return true
+    }
+})
+```
+
+Apply the redaction to every `websocket` event, not only to a single event name. The SDK sends several `websocket` events per connection, and more than one of them includes the URL.
+
+**Note**: WebSocket events cannot be discarded with `beforeSend`. If `beforeSend` returns `false` for a WebSocket event, the SDK still sends the event and logs a warning to the browser console. To stop collecting WebSocket connections, remove `betaTrackWebSockets` from your configuration.
+
 ## Resource timing attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
@@ -127,7 +192,7 @@ Detailed network timing data for resources is collected from the Fetch and XHR n
 
 | Attribute                  | Type   | Description                                                                                       |
 | -------------------------- | ------ | ------------------------------------------------------------------------------------------------- |
-| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`). |
+| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`, `websocket`). |
 | `resource.method`          | string | The HTTP method (for example `POST`, `GET`).                                                      |
 | `resource.status_code`     | number | The response status code.                                                                         |
 | `resource.url`             | string | The resource URL.                                                                                 |
@@ -180,3 +245,6 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+[12]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#betatrackwebsockets
+[13]: /real_user_monitoring/application_monitoring/browser/data_collected/#websocket-attributes

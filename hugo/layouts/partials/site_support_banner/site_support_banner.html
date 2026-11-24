@@ -1,8 +1,8 @@
 {{/*  "Inserts a banner at the top of the page if a site is not supported"  */}}
 {{ $dot := . }}
 
-{{/*  "Translation support"  */}}
-{{$text := .Site.Params.site_support_banner | default "" | safeHTML }}
+{{/*  "Translation support: shared/i18n, mounted as Hugo's i18n folder"  */}}
+{{$text := i18n "site_support_banner" | safeHTML }}
 
 {{ $unsupported_product := partial "site_support_banner/get_unsupported_regions.html" . }}
 

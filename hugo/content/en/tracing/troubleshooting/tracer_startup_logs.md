@@ -302,6 +302,10 @@ If your logs contain only `CONFIGURATION` lines, a useful troubleshooting step i
 
 If an integration you are using is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration.
 
+## OpenTelemetry configuration
+
+DDOT SDK startup logs report the effective values of important OpenTelemetry configuration settings. Use this information to check whether the SDK applied the configuration you intended when troubleshooting missing telemetry or unexpected behavior. The settings reported depend on the SDK language and version. A configuration log does not confirm successful telemetry delivery.
+
 ## Disabling startup logs
 
 For each language, you can disable startup logs by setting the environment variable `DD_TRACE_STARTUP_LOGS=false`, but do this only if the logs emitted are posing a problem. If later you are sending [debug][8] logs, remember to enable startup logs and send all relevant logs together to speed up your support case triage.

@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/metrics/summary/"
   tag: "Documentation"
-  text: "Learn more about the Metrics Summary"
+  text: "Learn more about the Metrics Catalog"
 - link: "/metrics/explorer/"
   tag: "Documentation"
   text: "Using the Metrics Explorer to explore and analyze your metrics"
@@ -27,7 +27,7 @@ further_reading:
 This document lists some of the metrics available from Observability Pipelines. You can:
 
 - Create your own [dashboards][1], [notebooks][2], and [monitors][3] with these metrics.
-- Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
+- Use the [Metrics Catalog][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
@@ -108,7 +108,8 @@ CPU cores allocated
 
 CPU usage
 : **Metric**: `pipelines.cpu_usage_seconds_total`
-: **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
+: **Description:** The CPU time consumed by the Worker process, in seconds, in both user and system space. The per-second rate of this metric is the number of CPU cores the Worker uses. For example, a rate of `1.5` means the Worker keeps one and a half cores busy. To see how close the Worker is to its CPU limit, compare this rate against `pipelines.cpu_max_cores`.
+: **How it is measured:** The Worker adds up the CPU time of every thread it has run since it started, including threads that have exited. As a result, this metric covers all Worker activity: sources, processors, destinations, and background tasks.
 
 Data directory available bytes
 : **Metric**: `pipelines.data_dir_available_bytes`
@@ -137,6 +138,10 @@ These metrics track Observability Pipelines Worker lifecycle events.
 Worker reloads
 : **Metric**: `pipelines.reloaded_total`
 : **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
+
+Worker stops
+: **Metric**: `pipelines.stopped_total`
+: **Description:** The number of times the Worker instance has stopped. Use the `reason` tag to determine if the Worker was stopped because of an error. The `reason` value is:<br>&nbsp;&nbsp;&nbsp;&nbsp;- `none` when an error didn't trigger the stop, such as when the Worker received a shutdown signal.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `source_aborted`, `transform_aborted`, or `sink_aborted` when a source, processor, or destination failed while running.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `api_failed` when the Worker API failed to start.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `reload_failed_to_restore` when a configuration reload failed and the Worker couldn't restore the previous configuration.<br><br>**Note**: The metric is available for Worker version 2.26.1 and later.
 
 ## Component metrics
 
@@ -254,9 +259,9 @@ Data dropped intentionally or unintentionally
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
-: **Description**: The CPU time consumed by a component, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Available in Worker version 2.18 and later for Linux and MacOS.
-: **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
-: **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
+: **Description**: The CPU time consumed by a processor, in nanoseconds. Use this metric to attribute CPU cost to individual processors. Divide its per-second rate by 1,000,000,000 to get the number of CPU cores the processor uses. Available in Worker version 2.18 and later.
+: **How it is measured**: A processor can run on several threads at the same time. Each time the processor runs on a thread, the Worker adds that thread's CPU time for the run to this metric.
+: **Note**: In Worker version 2.26 and later, this metric is available for all processors. The sum of this metric across all processors, converted to seconds, does not match `pipelines.cpu_usage_seconds_total`, because this metric does not include CPU time from sources, destinations, or some Worker background tasks. In Worker versions 2.18 through 2.25, this metric is available only for the processors in the following lists.<ul><li><strong>Log processors</strong>:<ul><li>Custom Processor</li><li>Dedupe</li><li>Enrichment Table</li><li>Grok Parser</li><li>Parse JSON</li><li>Parse XML</li><li>Reduce</li><li>Remap to OCSF</li><li>Sensitive Data Scanner</li><li>Split Array</li><li>Throttle</li></ul></li><li><strong>Metrics processors</strong>:<ul><li>Aggregate</li><li>Tag Cardinality Limit</li></ul></li></ul>
 
 Utilization
 : **Metric**: `pipelines.utilization`
@@ -433,6 +438,6 @@ These metrics provide information about the adaptive concurrency controller, whi
 [2]: /notebooks/
 [3]: /getting_started/monitors/
 [4]: /getting_started/tagging/
-[5]: https://app.datadoghq.com/metric/summary
+[5]: https://app.datadoghq.com/metric/catalog
 [6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
 [7]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#find-the-component-id

@@ -29,6 +29,8 @@ Key features:
 
 <div class="alert alert-info">This page covers the Pup's core features. See the <a href="https://github.com/DataDog/pup/blob/main/README.md" target="_blank">Pup repository documentation</a> for the full list of features and commands.</div>
 
+To chat with Bits in your terminal, with access to your Datadog data and your local project files, see [Bits CLI][12].
+
 ## Installation
 
 ### Homebrew (macOS/Linux)
@@ -151,4 +153,5 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
 [9]: /api/latest/
 [10]: https://github.com/DataDog/pup#bearer-token-authentication-wasm--headless
-[11]: /agentic_onboarding/setup/#pup-cli
+[11]: /agentic_onboarding/#pup-cli
+[12]: /bits_ai/bits_chat/bits_cli/

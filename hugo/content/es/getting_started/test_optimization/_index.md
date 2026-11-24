@@ -2,188 +2,188 @@
 algolia:
   tags:
   - test visibility
-  - test de ci
-  - tests de ci
+  - ci test
+  - ci tests
   - flaky test
   - flaky tests
-  - ejecución de test
-  - tests de funcionamiento
-  - Tramo de tests
-  - Tramos de tests
+  - test run
+  - test runs
+  - test span
+  - test spans
 aliases:
 - /es/getting_started/test_visibility
-description: Comprende el rendimiento de los tests e identifica tests fallidos, regresiones
-  en el rendimiento y fallos en entornos CI.
+description: Comprenda el rendimiento de las pruebas e identifique pruebas inestables,
+  regresiones de rendimiento y fallas en los entornos de CI.
 further_reading:
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: Blog
-  text: Resolución de problemas en tests de extremo a extremo con CI Test Visibility
+  text: Solucione problemas de pruebas de extremo a extremo con CI Test Visibility
     y RUM
 - link: /tests/
   tag: Documentación
-  text: Más información sobre Test Optimization
+  text: Aprenda sobre Test Optimization
 - link: /tests/flaky_test_management/
   tag: Documentación
-  text: Más información sobre Gestión de tests defectuosos
+  text: Obtenga información sobre Flaky Test Management
 - link: /tests/developer_workflows
   tag: Documentación
-  text: Más información sobre cómo mejorar los flujos de trabajo de los desarrolladores
+  text: Obtenga información sobre cómo mejorar los flujos de trabajo de los desarrolladores
     en Datadog
-title: Empezando con Test Optimization
+- link: https://learn.datadoghq.com/courses/getting-started-test-optimization
+  tag: Centro de aprendizaje
+  text: Introducción a Test Optimization
+title: Introducción a Test Optimization
 ---
+## Descripción general {#overview}
 
-## Información general
+[Test Optimization][1] le permite comprender mejor su postura de prueba, identificar confirmaciones que introducen pruebas inestables, identificar regresiones de rendimiento y solucionar problemas complejos de fallas en las pruebas. 
 
-[Test Optimization][1] te permite comprender mejor tu postura ante los tests, identificar confirmaciones que introducen tests defectuosos, identificar regresiones de rendimiento y solucionar fallos de tests complejos. 
+{{< img src="getting_started/test_visibility/list.png" alt="Lista de servicios de pruebas en Test Optimization" style="width:100%;" >}}
 
-{{< img src="getting_started/test_visibility/list.png" alt="Lista de servicios de tests en Test Optimization" style="width:100%;" >}}
+Puede visualizar el rendimiento de sus ejecuciones de prueba como trazas, donde los tramos representan la ejecución de diferentes partes de la prueba.
 
-Puedes visualizar el rendimiento de tus ejecuciones de test como trazas (traces), donde los tramos (spans) representan la ejecución de diferentes partes del test.
+Test Optimization permite a los equipos de desarrollo depurar, optimizar y acelerar las pruebas de software en entornos de CI al proporcionar información sobre el rendimiento, la inestabilidad y las fallas de las pruebas. Test Optimization instrumenta automáticamente cada prueba e integra la selección inteligente de pruebas mediante [Test Impact Analysis][2], lo que mejora la eficiencia de las pruebas y reduce la redundancia. 
 
-Test Optimization permite a los equipos de desarrollo depurar, optimizar y acelerar los tests de software en entornos de CI, al proporcionar información sobre el rendimiento de los tests, los fallos y los errores. Test Optimization instrumenta automáticamente cada test e integra la selección inteligente de tests mediante el [Test Impact Analysis][2], lo que mejora la eficacia de los tests y reduce la redundancia. 
+Con datos históricos de pruebas, los equipos pueden comprender las regresiones de rendimiento, comparar el resultado de las pruebas de las ramas de funciones con las ramas predeterminadas y establecer puntos de referencia de rendimiento. Al usar Test Optimization, los equipos pueden mejorar sus [flujos de trabajo de desarrollador][14] y mantener una producción de código de calidad. 
 
-Con los datos históricos de los tests, los equipos pueden comprender las regresiones de rendimiento, comparar el resultado de los tests de las ramas de características con las ramas predeterminadas y establecer puntos de referencia de rendimiento. Gracias a la optimización de tests, los equipos pueden mejorar sus [flujos de trabajo de desarrollo][14] y mantener la calidad del código resultante. 
+## Configure un servicio de pruebas {#set-up-a-test-service}
 
-## Configurar un test de servicio
+Test Optimization rastrea el rendimiento y los resultados de sus pruebas de CI, y muestra los resultados de las ejecuciones de prueba.
 
-Test Optimization realiza un seguimiento del rendimiento y los resultados de tus tests CI, y muestra los resultados de las ejecuciones de los tests.
-
-Para empezar a instrumentar y ejecutar tests, consulta la documentación de uno de los siguientes idiomas.
+Para comenzar a instrumentar y ejecutar pruebas, consulte la documentación de uno de los siguientes lenguajes.
 
 {{< card-grid card_width="75px" >}}
   {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
+  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="Go" >}}
   {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}
   {{< image-card href="/tests/setup/python/" src="integrations_logos/python_avatar.svg" alt="python" >}}
   {{< image-card href="/tests/setup/ruby/" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
   {{< image-card href="/tests/setup/swift/" src="integrations_logos/swift_avatar.svg" alt="swift" >}}
-  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
-  {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
+  {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="subir pruebas junit a Datadog" >}}
 {{< /card-grid >}}
 
-</br>
+Test Optimization es compatible con cualquier proveedor de CI y no se limita a los admitidos por CI Visibility. Para obtener más información sobre las funciones admitidas, consulte [Test Optimization][3].
 
-Test Optimization es compatible con cualquier proveedor de CI y no se limita a los compatibles con CI Visibility. Para obtener más información sobre las funciones compatibles, consulta [Test Optimization][3].
+## Utilice datos de pruebas de CI {#use-ci-test-data}
 
-## Utilizar datos de tests CI
+Acceda a las métricas de sus pruebas (como ejecuciones, duración, distribución de la duración, tasa de éxito general, tasa de fallas y más) para comenzar a identificar tendencias y patrones importantes utilizando los datos recopilados de sus pruebas en todas las canalizaciones de CI.
 
-Accede a métricas de tus tests (como ejecuciones, duración, distribución de la duración, tasa global de éxito, tasa de fracaso y más) para empezar a identificar tendencias y patrones importantes utilizando los datos recopilados de tus tests a través de los pipelines de CI.
+{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Panel de Test Optimization listo para usar en Datadog" style="width:100%;" >}}
 
-{{< img src="getting_started/test_visibility/tests_dashboard.png" alt="Dashboard predefinido de Test Optimization en Datadog" style="width:100%;" >}}
+Puede crear [paneles][4] para monitorear pruebas inestables, regresiones de rendimiento y fallas que ocurren dentro de sus pruebas. Como alternativa, puede utilizar un [panel listo para usar][5] que contiene widgets con datos recopilados en Test Optimization para visualizar el estado y el rendimiento de sus sesiones, módulos, suites y pruebas de CI.
 
-Puedes crear [dashboards][4] para la monitorización de tests defectuosos, regresiones de rendimiento y fallos de tests que ocurran dentro de tus tests. Alternativamente, puedes utilizar un [dashboard predefinido][5] que contiene widgets rellenados con datos recopilados en Test Optimization para visualizar el estado y el rendimiento de tus sesiones de test CI, módulos, conjuntos y tests.
+## Administre las pruebas inestables {#manage-flaky-tests}
 
-## Gestión de tests defectuosos
+Una [prueba inestable][6] es una prueba que muestra un estado de aprobación y de falla en múltiples ejecuciones de prueba para la misma confirmación. Si confirma algo de código y lo ejecuta a través de CI, y una prueba falla, y vuelve a ejecutar el código a través de CI y la misma prueba ahora pasa, esa prueba no es confiable y se marca como inestable.
 
-Un [test defectuoso][6] es un test que muestra tanto un estado de aprobado como de suspenso en varias ejecuciones de la misma confirmación. Si confirmas un código y lo ejecutas a través de CI, y un test falla, y lo ejecuta a través de CI de nuevo y el mismo test ahora pasa, ese test no es fiable y está marcado como defectuoso.
+Puede acceder a la información de pruebas inestables en la sección {{< ui >}}Flaky Tests{{< /ui >}} de la página de resumen de una ejecución de prueba, o como una columna en su lista de servicios de pruebas en la [página {{< ui >}}Test List{{< /ui >}}][7].
 
-Puedes acceder a la información de los tests defectuosos en la sección **Tests defectuosos** de la página de resumen de una ejecución de test, o como una columna en tu lista de los servicios de test en la página [**Lista de tests**][7].
+{{< img src="getting_started/test_visibility/commit_flaky_tests.png" alt="Pruebas inestables que se pueden ignorar en la sección Commits de una ejecución de prueba" style="width:100%;" >}}
 
-{{< img src="getting_started/test_visibility/commit_flaky_tests.png" alt="Los tests defectuosos que se pueden ignorar en la sección Confirmaciones de una ejecución de test" style="width:100%;" >}}
+Para cada rama, la lista muestra la cantidad de nuevas pruebas inestables, la cantidad de confirmaciones afectadas por las pruebas, el tiempo total de prueba y los detalles de la última confirmación de la rama. 
 
-Para cada rama, la lista muestra el número de tests nuevos, el número de confirmaciones realizadas por los tests, el tiempo total de los tests y los detalles de la última confirmación de la rama. 
+Average duration
+: El tiempo promedio que tarda la prueba en ejecutarse.
 
-Duración media
-: El tiempo medio de ejecución del test.
+First flaked and Last flaked
+: La fecha y los SHA de confirmación de cuando la prueba mostró un comportamiento inestable por primera vez y más recientemente. 
 
-Primer error y Último error
-: la fecha y el SHA de confirmación de la primera y la última vez que el test mostró un comportamiento defectuoso. 
+Commits flaked
+: La cantidad de confirmaciones en las que la prueba mostró un comportamiento inestable. 
 
-Confirmación defectuosa
-: número de confirmaciones en las que el test ha mostrado un comportamiento defectuoso. 
+Failure rate
+: El porcentaje de ejecuciones de prueba que han fallado para esta prueba desde que se volvió inestable por primera vez. 
 
-Tasa de fallos
-: el porcentaje de ejecuciones de tests que han fallado para este test desde que se desconfiguró por primera vez.
+Trend
+: Una visualización que indica si una prueba inestable fue corregida o si todavía sigue siendo inestable.
 
-Tendencia
-: visualización que indica si un test defectuoso se ha solucionado o si sigue defectuoso.
+Test Optimization muestra los siguientes gráficos para ayudarle a comprender sus tendencias de pruebas inestables y el impacto de sus pruebas inestables en la sección {{< ui >}}Flaky Tests{{< /ui >}} de una confirmación:
 
-Test Optimization muestra los siguientes gráficos para que comprendas las tendencias de tus test defectuosos y el impacto de las mismas en la sección **Test defectuosos** de una confirmación:
+New Flaky Test Runs
+: Con qué frecuencia se detectan nuevas pruebas inestables.
 
-Nuevas ejecuciones de test defectuosos
-: frecuencia con la que se detectan nuevos tests defectuosos.
+Known Flaky Test Runs
+: Todas las fallas de las pruebas asociadas con las pruebas inestables que se están rastreando. Esto muestra cada vez que una prueba inestable "presenta un comportamiento inestable".
 
-Test defectuosos conocidos
-: todos los fallos de test asociados con los tests defectuosos que se están rastreando. Se muestra cada vez que un test defectuoso "falla".
+Para ignorar nuevas pruebas inestables para una confirmación en la que haya determinado que las pruebas inestables se detectaron por error, haga clic en una prueba que contenga un valor {{< ui >}}New Flaky{{< /ui >}} con una opción de menú desplegable y haga clic en {{< ui >}}Ignore flaky tests{{< /ui >}}. Para obtener más información, consulte [Gestión de pruebas inestables][8].
 
-Para ignorar nuevos tests defectuosos para una confirmación en la que has determinado que los tests defectuosos se detectaron por error, haz clic en un test que contenga un valor **Nuevo test defectuoso** con una opción desplegable y haz clic en **Ignore flaky tests** (Ignorar tests defectuosos). Para obtener más información, consulta [Gestión de tests defectuosos][8].
+## Examine los resultados en el Test Optimization Explorer {#examine-results-in-the-test-optimization-explorer}
 
-## Examina los resultados en el Test Optimization Explorer
-
-Test Optimization Explorer te permite crear visualizaciones y filtrar los tramos de test utilizando los datos recopilados de tus tests. Cada ejecución de test se notifica como una traza, que incluye tramos adicionales generados por la solicitud de test. 
+El Test Optimization Explorer le permite crear visualizaciones y filtrar spans de prueba utilizando los datos recopilados de sus pruebas. Cada ejecución de prueba se informa como una traza, que incluye tramos adicionales generados por la solicitud de prueba. 
 
 {{< tabs >}}
 {{% tab "Sesión" %}}
 
-Ve a [**Software Delivery** > **Test Optimization** > **Test Runs**][101] (Entrega de software > Test Optimization > Ejecuciones de tests) y selecciona `Session` para empezar a filtrar los resultados de tu tramo de sesión de test.
+Navegue a [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] y seleccione {{< ui >}}Session{{< /ui >}} para comenzar a filtrar los resultados de los tramos de su sesión de prueba. 
 
-{{< img src="/getting_started/test_visibility/session.png" alt="Resultados de sesión de test en el Test Optimization Explorer filtrados en el repositorio de Shopist" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/session.png" alt="Resultados de la sesión de prueba en el Test Optimization Explorer filtrados en el repositorio Shopist" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asession
 
 {{% /tab %}}
 {{% tab "Módulo" %}}
 
-Ve a [**Software Delivery** > **Test Optimization** > **Test Runs**][101] (Entrega de software > Test Optimization > Ejecuciones de tests) y selecciona `Module` para empezar a filtrar los resultados de tu tramo de módulo de test.
+Navegue a [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] y seleccione {{< ui >}}Module{{< /ui >}} para comenzar a filtrar los resultados de los tramos de su módulo de prueba. 
 
-{{< img src="/getting_started/test_visibility/module.png" alt="Resultados de módulo de test en el Test Optimization Explorer filtrados en el repositorio de Shopist" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/module.png" alt="Resultados del módulo de prueba en el Test Optimization Explorer filtrados en el repositorio Shopist" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Amodule
 
 {{% /tab %}}
-{{% tab "Conjunto" %}}
+{{% tab "Suite" %}}
 
-Ve a [**Software Delivery** > **Test Optimization** > **Test Runs**][101] (Entrega de software > Test Optimization > Ejecuciones de tests) y selecciona `Suite` para empezar a filtrar los resultados de tu tramo de conjunto de tests.
+Navegue a [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] y seleccione {{< ui >}}Suite{{< /ui >}} para comenzar a filtrar los resultados de los tramos de su conjunto de pruebas. 
 
-{{< img src="/getting_started/test_visibility/suite.png" alt="Resultados de conjunto de tests en el Test Optimization Explorer filtrados en el repositorio de Shopist" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/suite.png" alt="Resultados del conjunto de pruebas en el Test Optimization Explorer filtrados en el repositorio Shopist" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asuite
 
 {{% /tab %}}
-{{% tab "Test" %}}
+{{% tab "Prueba" %}}
 
-Ve a [**Software Delivery** > **Test Optimization** > **Test Runs**][101] (Entrega de software > Test Optimization > Ejecuciones de tests) y selecciona `Test` para empezar a filtrar los resultados de tu tramo de tests.
+Navegue a [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] y seleccione {{< ui >}}Test{{< /ui >}} para comenzar a filtrar los resultados de sus spans de prueba. 
 
-{{< img src="/getting_started/test_visibility/test.png" alt="Resultados de tests en el Test Optimization Explorer filtrados en el repositorio de Shopist" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/test.png" alt="Resultados de la prueba en el Test Optimization Explorer filtrados en el repositorio Shopist" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Atest
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Utiliza [facetas][9] para personalizar la consulta de búsqueda e identificar los cambios en el tiempo empleado en cada nivel de tu ejecución de test.
+Utilice [facetas][9] para personalizar la consulta de búsqueda e identificar cambios en el tiempo dedicado a cada nivel de su ejecución de prueba.
 
-Una vez que hagas clic en un test en la página **Test List** (Lista de tests), podrás ver una gráfica de llamas o una lista de tramos en la pestaña **Trace** (Traza).
+Una vez que haga clic en una prueba en la página {{< ui >}}Test List{{< /ui >}}, puede ver un gráfico de llama o una lista de tramos en la pestaña {{< ui >}}Trace{{< /ui >}}. 
 
-{{< img src="/getting_started/test_visibility/failed_test_trace.png" alt="Un stack trace de una ejecución de test fallida en la página Lista de tests" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/failed_test_trace.png" alt="Una traza de pila de una ejecución de prueba fallida en la página Test List" style="width:100%" >}}
 
-Puedes identificar cuellos de botella en tus ejecuciones de test y examinar niveles individuales ordenados de mayor a menor porcentaje de tiempo de ejecución.
+Puede identificar cuellos de botella en sus ejecuciones de prueba y examinar los niveles individuales clasificados desde el mayor al menor porcentaje de tiempo de ejecución.
 
-## Añadir medidas personalizadas a los tests
+## Agregue medidas personalizadas a las pruebas {#add-custom-measures-to-tests}
 
-Puede buscar y gestionar los eventos de test mediante programación utilizando el endpoint de la API de CI Visibility Tests. Para obtener más información, consulta [la documentación de la API][10].
+Puede buscar y administrar eventos de prueba mediante programación utilizando el punto de conexión de CI Visibility Tests API. Para obtener más información, consulte [la documentación de la API][10].
 
-Para mejorar los datos recopilados de tus tests de CI, puedes añadir mediante programación etiquetas (tags) o medidas (como el uso de memoria) directamente a tramos creados durante la ejecución del test. Para obtener más información, consulta [Añadir medidas personalizadas a tus tests][11].
+Para mejorar los datos recopilados de sus pruebas de CI, puede agregar mediante programación etiquetas o medidas (como el uso de memoria) directamente a los tramos creados durante la ejecución de la prueba. Para obtener más información, consulte [Agregue medidas personalizadas a sus pruebas][11].
 
-## Crear un monitor de CI
+## Cree un monitor de CI {#create-a-ci-monitor}
 
-Alerta a los equipos pertinentes de tu organización sobre las regresiones en el rendimiento de los tests cuando se produzcan fallos o aparezcan nuevos tests defectuosos. 
+Alerte a los equipos pertinentes de su organización sobre regresiones en el rendimiento de las pruebas cuando ocurran fallas o aparezcan nuevas pruebas inestables. 
 
-{{< img src="/getting_started/test_visibility/test_monitor.png" alt="Un monitor de test de CI que activa alertas cuando la cantidad de fallos de test supere un fallo" style="width:100%" >}}
+{{< img src="/getting_started/test_visibility/test_monitor.png" alt="Un monitor de pruebas de CI que activa alertas cuando la cantidad de fallas en las pruebas supera una falla" style="width:100%" >}}
 
-Para configurar un monitor que alerte cuando la cantidad de fallos en laos tests supere un umbral de 1 fallo:
+Para configurar un monitor que alerte cuando la cantidad de fallas en las pruebas supere un umbral de 1 falla:
 
-1. Ve a [**Monitors** > **New Monitor**][12] (Monitores > Nuevo monitor) y selecciona **CI**. 
-1. Selecciona un tipo de monitor común para los tests de CI para empezar, por ejemplo: `New Flaky Test` para activar alertas cuando se añaden nuevos tests defectuosos a tu base de código, `Test Failures` para activar alertas de fallos de test, o `Test Performance` para activar alertas de regresiones de rendimiento de test, o personaliza tu propia consulta de búsqueda. En este ejemplo, selecciona la faceta `Branch (@git.branch)` para filtrar los tests realizados en la rama `main`.
-1. En la sección `Evaluate the query over the`, selecciona los últimos 15 minutos. 
-1. Configura las condiciones de alerta para que se activen cuando el valor evaluado supere el umbral y especifique valores para los umbrales de alerta o advertencia, como `Alert threshold > 1`.
-1. Define la notificación del monitor.
-1. Establece permisos para el monitor.
-1. Haz clic en **Create** (Crear).
+1. Navegue a [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][12] y seleccione {{< ui >}}CI{{< /ui >}}. 
+1. Seleccione un tipo de monitor común para pruebas de CI para comenzar, por ejemplo: `New Flaky Test` para activar alertas cuando se agreguen nuevas pruebas inestables a su base de código, `Test Failures` para activar alertas por fallas en las pruebas o `Test Performance` para activar alertas por regresiones en el rendimiento de las pruebas, o personalice su propia consulta de búsqueda. En este ejemplo, seleccione la `Branch (@git.branch)` faceta para filtrar sus ejecuciones de prueba en la `main` rama.
+1. En la `Evaluate the query over the` sección, seleccione los últimos 15 minutos. 
+1. Establezca las condiciones de alerta para que se activen cuando el valor evaluado esté por encima del umbral y especifique los valores para los umbrales de alerta o advertencia, como `Alert threshold > 1`.
+1. Defina la notificación del monitor.
+1. Establezca los permisos para el monitor.
+1. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
-Para más información, consulta la [documentación del monitor de CI][13]. 
+Para obtener más información, consulte la [documentación de CI Monitor][13]. 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

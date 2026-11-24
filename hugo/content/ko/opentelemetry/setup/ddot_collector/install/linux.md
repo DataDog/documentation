@@ -5,12 +5,12 @@ further_reading:
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: 설명서
   text: Datadog Agent와 함께 사용자 지정 OpenTelemetry 구성 요소 사용
-title: Linux에 DDOT Collector 설치
+title: Linux에서 Agent의 Collector 설정하기
 type: multi-code-lang
 ---
 ## 개요 {#overview}
 
-이 가이드에 따라 Linux 기반 베어메탈 호스트 및 가상 머신에 Datadog Distribution of OpenTelemetry(DDOT) Collector를 설치합니다.
+Linux 기반 베어메탈 호스트 및 가상 머신에서 Agent의 Collector를 설정하세요. Agent의 Collector는 Datadog Agent와 별도의 프로세스로 함께 실행되는 OpenTelemetry Collector입니다.
 
 ## 요구 사항 {#requirements}
 
@@ -18,7 +18,7 @@ type: multi-code-lang
 
 **Datadog 계정**:
 1. Datadog 계정이 없는 경우 [Datadog 계정을 생성][1]합니다.
-1. [Datadog API 키][2]를 확인하거나 생성합니다.
+1. [Datadog API key][2]를 확인하거나 생성합니다.
 
 **소프트웨어**:
 - 지원되는 Linux 배포판(예: Debian, Ubuntu, CentOS, RHEL, Fedora, SUSE)
@@ -30,25 +30,25 @@ type: multi-code-lang
 
 ## Datadog Agent와 OpenTelemetry Collector 설치 {#install-the-datadog-agent-with-opentelemetry-collector}
 
-<div class="alert alert-info">이 설치는 Datadog SDK + DDOT 및 OpenTelemetry SDK + DDOT 구성 모두에 필요합니다. Datadog SDK는 OpenTelemetry API를 구현하지만, OTLP 메트릭 및 로그를 처리하고 전달하기 위해서는 여전히 DDOT Collector가 필요합니다.</div>
+<div class="alert alert-info">이 설치는 Datadog SDK + Agent의 Collector 및 OpenTelemetry SDK + Agent의 Collector 구성 모두에 필요합니다. Datadog SDK는 OpenTelemetry API를 구현하지만, OTLP 메트릭 및 로그를 처리하고 전달하기 위해서는 여전히 Agent의 Collector가 필요합니다.</div>
 
 ### 설치 {#installation}
 
-Linux 호스트에 DDOT Collector를 설치하려면 다음 한 줄 설치 명령을 사용하세요.
+Linux 호스트에 Agent의 Collector를 설치하려면 다음 한 줄 설치 명령을 사용하세요.
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-이 명령은 핵심 Datadog Agent 패키지와 함께 실행되는 DDOT Collector를 모두 설치합니다.
+이 명령은 핵심 Datadog Agent 패키지와 그와 함께 실행되는 Agent의 Collector를 모두 설치합니다.
 
-**참고**: Agent v7.78 이상에서 Datadog Agent가 호스트에 이미 설치되어 있다면 다음 명령을 사용하여 DDOT Collector를 별도로 설치할 수 있습니다.
+**참고**: Agent v7.78 이상에서 Datadog Agent가 호스트에 이미 설치되어 있다면 다음 명령을 사용하여 Agent의 Collector를 별도로 설치할 수 있습니다.
 
 ```shell
 sudo datadog-agent otel install
 ```
 
-### 유효성 검사 {#validation}
+### 검증 {#validation}
 
 
 설치를 확인하려면 Agent의 [상태 명령][3]을 실행하세요.
@@ -99,8 +99,8 @@ OTel Agent
 
 ## Datadog Agent 구성 {#configure-the-datadog-agent}
 
-### DDOT Collector를 활성화 {#enable-the-ddot-collector}
-Datadog Agent 구성 파일은 `/etc/datadog-agent/datadog.yaml`에 자동으로 설치됩니다. 설치 스크립트는 DDOT Collector를 활성화하기 위해 `/etc/datadog-agent/datadog.yaml`에 다음 구성 설정을 추가합니다.
+### Agent의 Collector 활성화 {#enable-the-ddot-collector}
+Datadog Agent 구성 파일은 `/etc/datadog-agent/datadog.yaml`에 자동으로 설치됩니다. 설치 스크립트는 Agent의 Collector를 활성화하기 위해 `/etc/datadog-agent/datadog.yaml`에 다음 구성 설정을 추가합니다.
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
 otelcollector:
@@ -110,7 +110,7 @@ agent_ipc:
   config_refresh_interval: 60
 {{< /code-block >}}
 
-DDOT는 기본적으로 OpenTelemetry Collector를 포트 4317(grpc) 및 4318(http)에 자동으로 바인딩합니다.
+Agent의 Collector는 기본적으로 포트 4317(grpc) 및 4318(http)에 바인딩됩니다.
 
 ### (필요시) 추가 Datadog 기능 활성화 {#optional-enable-additional-datadog-features}
 
@@ -257,7 +257,7 @@ public String getDate() {
 
 ### 애플리케이션 구성 {#configure-the-application}
 
-애플리케이션은 동일한 호스트에서 실행 중인 DDOT Collector로 데이터를 전송해야 합니다. 애플리케이션에 `OTEL_EXPORTER_OTLP_ENDPOINT` 환경 변수가 설정되어 있는지 확인하세요.
+애플리케이션은 동일한 호스트에서 실행 중인 Agent의 Collector로 데이터를 전송해야 합니다. 애플리케이션에 `OTEL_EXPORTER_OTLP_ENDPOINT` 환경 변수가 설정되어 있는지 확인하세요.
 
 예시 애플리케이션을 사용하는 경우 [`run-otel-local.sh`][13]에서 필요한 환경 변수를 설정하고 애플리케이션을 실행합니다.
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -272,7 +272,7 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
 [Unified service tagging][10]은 Datadog의 관측 가능성 데이터를 연결하여 메트릭, 트레이스 및 로그를 일관된 태그로 탐색할 수 있도록 합니다.
 
 
-베어메탈 환경에서는 OpenTelemetry 리소스 속성 환경 변수를 통해 `env`, `service` 및 `version`을 설정합니다. DDOT Collector는 이러한 태깅 구성을 탐지하고 애플리케이션에서 수집한 데이터에 적용합니다.
+베어메탈 환경에서는 OpenTelemetry 리소스 속성 환경 변수를 통해 `env`, `service` 및 `version`을 설정합니다. Agent의 Collector는 이러한 태깅 구성을 탐지하고 애플리케이션에서 수집한 데이터에 적용합니다.
 
 예시 애플리케이션에서는 `run-otel-local.sh`에서 이 작업을 수행합니다.
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -289,11 +289,11 @@ Datadog을 사용하여 애플리케이션의 관측 가능성 데이터를 확�
 
 ### Fleet Automation {#fleet-automation}
 
-Datadog Agent, DDOT 및 업스트림 OpenTelemetry Collector 구성을 살펴보세요.
+Datadog Agent, Agent의 Collector 및 업스트림 OpenTelemetry Collector 구성을 살펴보세요.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Fleet Automation 페이지에서 Agent 및 Collector 구성 검토" style="width:100%;" >}}
 
-### 인프라 모니터링 {#infrastructure-monitoring}
+### Infrastructure Monitoring {#infrastructure-monitoring}
 
 런타임 및 인프라 메트릭을 조회하여 호스트 성능을 시각화, 모니터링 및 측정하세요.
 
@@ -319,7 +319,7 @@ Datadog Agent, DDOT 및 업스트림 OpenTelemetry Collector 구성을 살펴보
 
 ### Collector 상태 메트릭 {#collector-health-metrics}
 
-DDOT Collector의 상태를 모니터링하려면 Collector 메트릭을 조회하세요.
+Agent의 Collector 메트릭을 조회하여 Collector의 상태를 모니터링하세요.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="OTel 대시보드에서 Collector 상태 메트릭 조회" style="width:100%;" >}}
 

@@ -7,15 +7,18 @@ further_reading:
 - link: /monitors/
   tag: Documentación
   text: Más información sobre los monitores
+- link: https://learn.datadoghq.com/courses/understanding-slos
+  tag: Centro de aprendizaje
+  text: Comprender los Service Level Objectives (SLOs)
 - link: https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo
   tag: Blog
   text: Mejores prácticas para administrar sus SLO con Datadog
 - link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
   tag: Blog
   text: Mejore la precisión y el rendimiento de los SLO con Datadog Synthetic Monitoring.
-- link: https://learn.datadoghq.com/courses/understanding-slos
-  tag: Centro de aprendizaje
-  text: Comprender los Service Level Objectives (SLOs)
+- link: https://www.datadoghq.com/blog/rum-synthetic-slos-slis/
+  tag: Blog
+  text: Cree mejores SLO con RUM y SLI sintéticos
 title: SLO basados en monitores
 ---
 ## Descripción general {#overview}

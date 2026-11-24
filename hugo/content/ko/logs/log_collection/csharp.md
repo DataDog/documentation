@@ -6,26 +6,26 @@ further_reading:
   tag: 블로그
   text: C# 로그 수집, 사용자 지정 및 분석 방법
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-  tag: 설명서
+  tag: 문서
   text: .NET 로그와 트레이스 연결
 - link: /logs/log_configuration/processors
-  tag: 설명서
+  tag: 문서
   text: 로그 처리 방법 알아보기
 - link: /logs/log_configuration/parsing
-  tag: 설명서
+  tag: 문서
   text: 구문 분석에 대해 배우기
 - link: /logs/explorer/
-  tag: 설명서
+  tag: 문서
   text: 로그 탐색 방법 알아보기
 - link: /logs/explorer/#visualize
-  tag: 설명서
-  text: 로그 분석 실행하기
+  tag: 문서
+  text: 로그 분석 수행
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: 로그 수집 문제 해결 가이드
 - link: /glossary/#tail
   tag: 용어
-  text: '"테일링" 관련 용어 항목'
+  text: '''테일링'' 관련 용어집 항목'
 - link: https://github.com/DataDog/serilog-sinks-datadog-logs/
   tag: Github 패키지
   text: Serilog.Sinks.Datadog.Logs Package
@@ -299,7 +299,7 @@ JSON으로 로깅하는 이점에도 불구하고 원시 문자열 형식으로 
     ```
 3. Agent 사용자에게 로그 파일에 대한 읽기 액세스 권한이 있어야 합니다.
 4. [Agent를 재시작][5]합니다.
-5. [Agent의 상태 하위 명령][6]을 실행하고 `Checks` 섹션 아래에서 `csharp`를 찾아 로그가 Datadog에 제출되었는지 확인합니다.
+5. [Agent의 status 하위 명령][6]을 실행하고 {{< ui >}}Checks{{< /ui >}} 섹션에서 `csharp`를 찾아 로그가 Datadog에 성공적으로 전송되었는지 확인합니다.
 
 로그가 JSON 형식인 경우, Datadog이 자동으로 [로그 메시지를 구문 분석][7]하여 로그 속성을 추출합니다. [Log Explorer][8]를 사용하여 로그를 조회하고 문제를 해결하세요.
 
@@ -314,7 +314,7 @@ JSON으로 로깅하는 이점에도 불구하고 원시 문자열 형식으로 
 
 .NET APM 자동 계측 라이브러리를 사용하여 코드를 변경하지 않고 애플리케이션에서 Datadog으로 직접 로그를 스트리밍할 수 있습니다. 이 방식은 로그를 직접 Datadog으로 전송하므로, Datadog Agent가 제공하는 [민감한 데이터 스크러빙과 같은 기능][10]의 이점을 누릴 수 없습니다. 그 때문에 Datadog은 가능하면 파일 테일링 로깅을 사용할 것을 권장하지만, 해당 로깅이 불가능한 환경에서는(예를 들어 [Azure App Service][11]를 사용하는 경우) 이 방식이 유용합니다. 그래도 [Sensitive Data Scanner][12]가 수행하는 서버 측 스크러빙 기능은 이용할 수 있다는 점을 알아두는 것이 좋습니다.
 
-에이전트리스 로깅("직접 로그 제출"이라고도 함)은 다음 프레임워크를 지원합니다.
+에이전트리스 로깅('직접 로그 제출'이라고도 함)은 다음 프레임워크를 지원합니다.
 - Serilog(v1.0+)
 - NLog(v2.1+)
 - log4net(v1.0+)
@@ -323,7 +323,7 @@ JSON으로 로깅하는 이점에도 불구하고 원시 문자열 형식으로 
 이 경우 애플리케이션 코드를 수정할 필요도 없고, 애플리케이션에 추가적인 종속성을 설치할 필요도 없습니다.
 
 <div class="alert alert-danger">
-  <strong>참고:</strong> log4net 또는 NLog를 사용하는 경우 appender(log4net) 또는 로거(NLog)를 구성해야만 에이전트 리스 로깅을 활성화할 수 있습니다. 그런 경우, 이러한 추가 종속성을 추가하거나 아니면 대신 <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog 싱크를 사용한 에이전트리스 로깅</a>을 사용할 수 있습니다.
+  <strong>참고:</strong> log4net 또는 NLog를 사용하는 경우 어펜더(log4net) 또는 로거(NLog)를 구성해야만 에이전트리스 로깅을 활성화할 수 있습니다. 그런 경우, 이러한 추가 종속성을 추가하거나 아니면 대신 <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog 싱크를 사용한 에이전트리스 로깅</a>을 사용할 수 있습니다.
 </div>
 
 
@@ -358,7 +358,7 @@ Tracer 버전 3.24.0부터 기본적으로 활성화됩니다.
 **예시**: `Serilog;Log4Net;NLog`
 
 <div class="alert alert-danger">
-  <strong>참고:</strong> 로깅 프레임워크를 <code>Microsoft.Extensions.Logging</code>과 함께 사용하는 경우, 일반적으로 프레임워크 이름을 사용해야 합니다. 예를 들어 <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>을 사용하는 경우, <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>를 설정해야 합니다.
+  <strong>참고:</strong> 로깅 프레임워크를 <code>Microsoft.Extensions.Logging</code>과 함께 사용하는 경우, 일반적으로 프레임워크 이름을 사용해야 합니다. 예를 들어, <a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a>을 사용하는 경우 <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>를 설정해야 합니다.
 </div>
 
 이러한 환경 변수를 설정하고 나서 애플리케이션을 다시 시작하세요.
@@ -402,7 +402,7 @@ Tracer 버전 3.24.0부터 기본적으로 활성화됩니다.
 : 전송할 새 로그가 있는지 검사하기까지 기다리는 시간(초 단위)을 설정합니다.<br>
 **기본값**: `1`
 
-`Microsoft.Extensions.Logging` 통합을 사용하는 경우, `ILogger`에 기본 제공된 표준 기능을 사용하여 Datadog으로 전송되는 로그를 필터링할 수 있습니다. 키 `"Datadog"`으로 직접 제출 공급자를 식별한 다음, 각 네임스페이스에 최소 로그 수준을 설정합니다. 예를 들어 `appSettings.json`에 다음을 추가하면 수준이 `Warning` 미만인 로그가 Datadog으로 전송되지 않게 방지됩니다. .NET SDK v2.20.0에서 도입되었습니다.
+`Microsoft.Extensions.Logging` 통합을 사용하는 경우, `ILogger`에 내장된 표준 기능을 사용하여 Datadog으로 전송되는 로그를 필터링할 수 있습니다. 키 `"Datadog"`으로 직접 제출 공급자를 식별한 다음, 각 네임스페이스에 최소 로그 수준을 설정합니다. 예를 들어, `appSettings.json`에 다음을 추가하면 수준이 `Warning` 미만인 로그가 Datadog으로 전송되지 않습니다. .NET SDK v2.20.0에서 도입되었습니다.
 
 ```json
 {
@@ -419,7 +419,7 @@ Tracer 버전 3.24.0부터 기본적으로 활성화됩니다.
 ## Serilog 싱크를 사용한 에이전트리스 로깅 {#agentless-logging-with-serilog-sink}
 
 <div class="alert alert-info"> <code>0.2.0</code>부터는 <code>appsettings.json</code> 파일을 <a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> 패키지와 함께 사용하여 Datadog 싱크를 구성할 수 있습니다.
-자세한 내용은 <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> 패키지를 참조하세요.</div>
+자세한 내용은 <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs"><code>Serilog.Sinks.Datadog.Logs</code></a> 패키지를 참조하세요.</div>
 
 파일-테일링 로깅 또는 APM 에이전트리스 로깅을 사용할 수 없고, `Serilog` 프레임워크를 사용 중인 경우 Datadog [Serilog 싱크][19]를 사용하여 로그를 직접 Datadog으로 전송할 수 있습니다.
 
