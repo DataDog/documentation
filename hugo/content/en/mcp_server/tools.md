@@ -2549,7 +2549,7 @@ Tools for querying [Product Analytics][68] data, including event search, org voc
 ### `search_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Retrieves individual Product Analytics session, view, action, and server-side events that match a query in Datadog query syntax, so you can inspect their attributes. For example, `@type:server @event.name:order_completed` matches server-side `order_completed` events. It doesn't return counts or grouped results.
+Retrieves individual Product Analytics session, view, action, and server-side events that match a query in Datadog query syntax, so you can inspect their attributes. For example, `@type:server @event.name:order_completed` matches server-side `order_completed` events. For counts and grouped analysis, use `aggregate_product_analytics_events`.
 
 - Show me recent actions on the checkout page.
 - Show me the attributes of the most recent `order_completed` server-side event.
@@ -2567,7 +2567,7 @@ Looks up org-specific Product Analytics entities by name or keyword (feature fla
 ### `get_product_analytics_saved_chart`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read` and `Product Analytics Saved Widgets Read`*\
-Retrieves the full definition of a saved Product Analytics chart by ID, including its query parameters, filters, and time interval.
+Retrieves the full definition of a saved Product Analytics chart by ID, including its query parameters, filters, and time interval. Use `search_product_analytics_org_entities` first to find the chart ID.
 
 - Load the saved chart `abc-123-def` and show me its query parameters.
 - Reproduce the "weekly retention" saved chart with an updated time range.
@@ -2575,7 +2575,7 @@ Retrieves the full definition of a saved Product Analytics chart by ID, includin
 ### `create_product_analytics_saved_chart`
 *Toolset: **product-analytics***\
 *Permissions Required: `Product Analytics Saved Charts Write` or `RUM Apps Read`*\
-Saves a chart from a Product Analytics query, such as a timeseries, funnel, pathway, or retention chart, so you can reopen it in Product Analytics. Returns a link to the saved chart. The saved chart keeps the query's time range as fixed dates. Each call creates a new chart and does not change existing ones.
+Saves a chart returned by `aggregate_product_analytics_events`, `run_product_analytics_journey`, `run_product_analytics_pathway`, or `run_product_analytics_retention` so you can reopen it in Product Analytics, and returns a link to it. The saved chart keeps the query's time range as fixed dates. Each call creates a new chart and does not change existing ones.
 
 - Save this funnel as "Signup funnel, Sep 1-7".
 - Save the retention chart from the last answer.
@@ -2632,7 +2632,7 @@ Creates a labeled action: a named, reusable label for a user action that you can
 ### `get_product_analytics_segment`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Retrieves a segment by ID, including its name, description, tags, whether it contains users or accounts, the definition of each of its blocks and how they combine, and its stored member count.
+Retrieves a segment by ID, including its name, description, tags, whether it contains users or accounts, the definition of each of its blocks and how they combine, and its stored member count. Use `search_product_analytics_org_entities` to find the segment ID.
 
 - What does the "power users" segment contain?
 - How many accounts are in segment `abc-123`?
@@ -2658,7 +2658,7 @@ Updates a segment's name, description, or tags, or changes its definition by add
 ### `search_product_analytics_launches`
 *Toolset: **product-analytics***\
 *Permissions Required: `Product Analytics Read` or `RUM Apps Read`*\
-Lists Product Analytics launches. A launch tracks a feature launch's phase, KPIs, and tracking plan. Filter by name, phase (`plan`, `setup`, `ready`, or `launched`), or application. Returns a summary of each launch, without its KPIs or tracking plan.
+Lists Product Analytics launches. A launch tracks a feature launch's phase, KPIs, and tracking plan. Filter by name, phase (`plan`, `setup`, `ready`, or `launched`), or application. Returns a summary of each launch. Use `get_product_analytics_launch` for the full record.
 
 - Is there already a launch for the promo codes feature?
 - Which launches are in the `ready` phase?
