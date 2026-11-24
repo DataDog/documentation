@@ -71,7 +71,7 @@ A remediation groups the open findings that a single change resolves:
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
 
-Every remediation has an available fix, but not always one that AI can generate.
+Every remediation has an available fix, but AI can't generate every fix. For fixes AI can't generate, [create a case or ticket](#create-a-case-or-ticket) or [link a pull request](#link-a-pull-request) you opened yourself.
 
 ## How remediations are prioritized
 
