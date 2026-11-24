@@ -117,4 +117,4 @@ For sensitive changes, ask the agent to show its plan before writing. Use narrow
 [5]: /mcp_server/setup
 [7]: /mcp_server/tools/#execute_code_write
 [8]: /mcp_server/tools/#upsert_datadog_dashboard
-[9]: /mcp_server/tools/#create_datadog_notebook
+[9]: /mcp_server/tools/#notebooks
