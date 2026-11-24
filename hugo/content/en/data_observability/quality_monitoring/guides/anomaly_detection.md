@@ -113,7 +113,7 @@ The [model configuration settings][3] change how the model sets bounds:
 
 ## AI review of flagged points
 
-Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged point to an AI reviewer before they alert. A point is newly flagged when its value falls outside the expected bounds and the previous value didn't. This includes job duration monitors that use {{< ui >}}Anomalies{{< /ui >}}. Monitors that use the {{< ui >}}Thresholds{{< /ui >}} detection method don't use the reviewer.
+Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each newly flagged outlier to an AI reviewer before they alert.
 
 The reviewer analyzes the metric's history. It compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
 
