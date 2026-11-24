@@ -17,27 +17,18 @@ further_reading:
 
 Monitor your Kubernetes applications and infrastructure in Datadog with OpenTelemetry. This quickstart installs a Collector, adds instrumentation to your application, and shows you where to find your services, traces, and logs in Datadog.
 
-Use DDOT components, which Datadog recommends, or upstream OpenTelemetry components. The installation steps are the same. Select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
+Use DDOT components, which Datadog recommends and which are in Preview, or upstream OpenTelemetry components. The installation steps are the same. Select your setup in the **DDOT** or **Upstream** tab in step 1. To compare the two, see [Choose a setup][25].
 
 This quickstart runs on Kubernetes, and so does the DDOT Collector. On other platforms, use an upstream OpenTelemetry Collector or the Datadog Agent. See [Send OpenTelemetry Data to Datadog][17].
 
 ## Prerequisites
 
 - A Kubernetes cluster with cluster-admin access through `kubectl`.
-- [Helm][4] v4 or later, and `git`.
+- [Helm][4] v4 or later, and `curl`.
 - A [Datadog API key][5].
 - An application that runs in the cluster as a Deployment, written in Java, Python, Node.js, or .NET.
 
-## 1. Download the installer
-
-Clone the `opentelemetry-examples` repository and go to the installer's folder:
-
-```shell
-git clone https://github.com/DataDog/opentelemetry-examples.git
-cd opentelemetry-examples/guides/kubernetes/configuration/opentelemetry-kube-stack
-```
-
-## 2. Set your configuration
+## 1. Set your configuration
 
 Set these environment variables in the terminal you use for the rest of this quickstart:
 
@@ -55,7 +46,7 @@ export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 ```
 
-The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends running the Agent alongside DDOT. Some Datadog features need the Agent. See [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Agent, also set `DD_AGENT_ENABLED=false`.
+The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends running the Datadog Agent alongside DDOT for the Datadog-specific capabilities of DDOT SDKs, such as Live Debugger, Dynamic Instrumentation, and remotely configured sampling. The Datadog Agent acts mainly as a Remote Configuration proxy: your traces, metrics, and logs still go over OTLP to the Collector. See [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Datadog Agent, also set `DD_AGENT_ENABLED=false`. Without it, those capabilities aren't available.
 
 {{% /tab %}}
 {{% tab "Upstream" %}}
@@ -79,15 +70,15 @@ Replace the placeholders:
 | `DD_API_KEY` | Your Datadog API key. |
 | `DD_SITE` | The domain of your [Datadog site][6]. For {{< region-param key=dd_datacenter code="true" >}}, it's {{< region-param key="dd_site" code="true" >}}. |
 | `K8S_CLUSTER_TYPE` | `eks`, `gcp`, `aks`, or `other`. For `eks`, `gcp`, and `aks`, the Collectors detect the cluster name, so you can leave out `K8S_CLUSTER_NAME`. |
-| `K8S_CLUSTER_NAME` | Set it when `K8S_CLUSTER_TYPE` is `other`. A name for your cluster, in lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer. |
+| `K8S_CLUSTER_NAME` | Set it when `K8S_CLUSTER_TYPE` is `other`. A name for your Kubernetes cluster, in lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer. |
 | `DEPLOYMENT_ENVIRONMENT_NAME` | The `env` tag for all your data, such as `staging`, in lowercase letters, numbers, and hyphens. If you leave it out, the installer uses `production`. |
 
-## 3. Run the installer
+## 2. Run the installer
 
 1. Run the installer:
 
    ```shell
-   ./install
+   DD_INSTALL_SOURCE=docs bash -c "$(curl -fsSL https://raw.githubusercontent.com/DataDog/opentelemetry-examples/v0.1.0/guides/kubernetes/configuration/opentelemetry-kube-stack/install)"
    ```
 
 2. Wait for the OpenTelemetry Operator to be ready, then list the pods. The OpenTelemetry Operator only instruments pods that start after it's ready.
@@ -99,7 +90,7 @@ Replace the placeholders:
 
    Within a minute or two, these pods are `Running`: the OpenTelemetry Operator, kube-state-metrics, the `cluster` Collector, and one `daemon` Collector for each node.
 
-## 4. Instrument your application
+## 3. Instrument your application
 
 On the DDOT path, if your application already includes an SDK, see [Adapt an existing deployment][28] before you add the annotation.
 
@@ -114,9 +105,9 @@ On the DDOT path, if your application already includes an SDK, see [Adapt an exi
 
 2. Send a few requests to your application so it produces traces.
 
-## 5. Verify your data in Datadog
+## 4. Verify your data in Datadog
 
-Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, unless you set a different service name. `<ENVIRONMENT>` is the value you set in step 2.
+Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, unless you set a different service name. `<ENVIRONMENT>` is the value you set in step 1.
 
 | Check | Where to look | What you see |
 |---|---|---|
@@ -148,17 +139,17 @@ For more help, see [OpenTelemetry Troubleshooting][16].
 
 ## Change your configuration
 
-The installer installs the [OpenTelemetry Kube Stack][7] Helm chart with its own values files. To change the configuration, put your changes in a values file. Then, in the installer's folder and with the variables from step 2 set, run the installer again with your file:
+The installer installs the [OpenTelemetry Kube Stack][7] Helm chart with its own values files. To change the configuration, put your changes in a values file. Then, with the variables from step 1 set, run the installer again from the folder that contains your file:
 
 ```shell
-./install my-values.yaml
+DD_INSTALL_SOURCE=docs bash -c "$(curl -fsSL https://raw.githubusercontent.com/DataDog/opentelemetry-examples/v0.1.0/guides/kubernetes/configuration/opentelemetry-kube-stack/install)" install my-values.yaml
 ```
 
 The installer applies your file on top of its own values files. For what you can set, see the [installer's README][24].
 
 ## Next steps
 
-- **Instrument more services**: Annotate their Deployments as in [step 4](#4-instrument-your-application). To add custom spans and metrics, see [Instrument Your Applications][8].
+- **Instrument more services**: Annotate their Deployments as in [step 3](#3-instrument-your-application). To add custom spans and metrics, see [Instrument Your Applications][8].
 - **Tag your data**: Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version` in [Unified service tagging][18].
 - **Manage the Collector yourself (optional)**: To install and manage the Collector with your own Helm charts or OpenTelemetry Operator configuration instead of the installer, see [Install the DDOT Collector on Kubernetes][19] or [Set up the upstream OpenTelemetry Collector][20].
 
@@ -172,10 +163,10 @@ The installer applies your file on top of its own values files. For what you can
    kubectl patch deployment <DEPLOYMENT_NAME> -n <NAMESPACE> --type json -p '[{"op":"remove","path":"/spec/template/metadata/annotations/instrumentation.opentelemetry.io~1inject-<LANGUAGE>"}]'
    ```
 
-2. In the installer's folder, run the uninstall script, and type `yes` when it asks:
+2. Run the uninstall script, and type `yes` when it asks:
 
    ```shell
-   ./uninstall
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/DataDog/opentelemetry-examples/v0.1.0/guides/kubernetes/configuration/opentelemetry-kube-stack/uninstall)"
    ```
 
 ## Further reading
@@ -195,6 +186,6 @@ The installer applies your file on top of its own values files. For what you can
 [18]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [19]: /opentelemetry/setup/ddot_collector/kubernetes/
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
-[24]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
+[24]: https://github.com/DataDog/opentelemetry-examples/tree/v0.1.0/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
 [25]: /opentelemetry/#choose-a-setup
-[28]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
+[28]: https://github.com/DataDog/opentelemetry-examples/blob/v0.1.0/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
