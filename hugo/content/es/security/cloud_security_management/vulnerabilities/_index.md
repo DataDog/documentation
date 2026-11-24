@@ -19,9 +19,9 @@ further_reading:
   tag: Blog
   text: Mejore su flujo de trabajo de solución de problemas con Container Images en
     Datadog Container Monitoring
-- link: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+- link: /security/cloud_security_management/setup/dockerfile_labels
   tag: Documentación
-  text: Vincule un Dockerfile a las vulnerabilidades detectadas en producción
+  text: Vincular Container Images a Dockerfiles
 title: Cloud Security Vulnerabilities
 ---
 ## Descripción general {#overview}
@@ -39,7 +39,7 @@ Con Cloud Security Vulnerabilities, puede gestionar su estrategia de gestión de
 ## Capacidades clave {#key-capabilities}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">El Agentless Scanning no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El escaneo Agentless no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Implemente utilizando Agentless o Unified Datadog Agent
@@ -93,7 +93,7 @@ Utilice estas tablas para decidir con qué solución comenzar:
 Para obtener más información sobre la compatibilidad, consulte [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. Si necesita ayuda, consulte la [guía de solución de problemas][14] o comuníquese con support@datadoghq.com.
 
 ## Detecte, priorice y remedie continuamente las vulnerabilidades explotables {#continuously-detect-prioritize-and-remediate-exploitable-vulnerabilities}
-La página [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}}][1] le ayuda a investigar las vulnerabilidades detectadas en sus imágenes de contenedor, imágenes de host, hosts en ejecución y funciones sin servidor mediante capacidades de filtrado y agrupación.
+La página [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}}][1] le ayuda a investigar las vulnerabilidades detectadas en sus imágenes de contenedor, imágenes de servidor, servidores en ejecución y funciones sin servidor mediante capacidades de filtrado y agrupación.
 
 Concéntrese primero en las vulnerabilidades explotables, utilizando el Datadog Severity Score, que combina la puntuación base CVSS con muchos factores de riesgo, incluidos datos confidenciales, sensibilidad del entorno, exposición a ataques, disponibilidad de vulneraciones o fuentes de inteligencia de amenazas.
 
@@ -113,9 +113,10 @@ Para imágenes de contenedor de una sola etapa no aplanadas creadas a partir de 
 
 Cuando Datadog detecta un CVE en una imagen de contenedor en ejecución, puede vincular el CVE directamente al Dockerfile y la confirmación que introdujeron el paquete vulnerable. Esto cierra la brecha entre una alerta de producción y el cambio de código que la causó, brindando a los desarrolladores el contexto que necesitan para remediar en la fuente en lugar de buscar versiones de paquetes en los registros.
 
-Para habilitar este mapeo de código a la nube, agregue anotaciones de imagen OCI a sus imágenes de contenedor en el momento de la compilación. Datadog utiliza estas anotaciones para mostrar una vista previa del Dockerfile dentro del panel de Vulnerabilidades de imágenes de contenedor y para mostrar el repositorio, la confirmación y la ruta de archivo exactos asociados con la vulnerabilidad.
+Para habilitar este mapeo de código a la nube, agregue metadatos de la fuente de la imagen a sus Container Images. Datadog utiliza estos metadatos para mostrar una vista previa del Dockerfile en el panel Container Image Vulnerabilities. También muestra el repositorio, el commit y la ruta del archivo de la vulnerabilidad. Agregue los metadatos de una de estas dos maneras:
 
-Para configurar la vinculación de fuentes, consulte [Vincular Dockerfile a vulnerabilidades][22] en la guía de escaneo de imágenes de contenedor de CI/CD.
+- **Etiquetas de fuente de la imagen**: Fusione las solicitudes de extracción que Datadog abre desde la página Cloud Security Setup. También puede establecer las etiquetas en su Dockerfile o durante el tiempo de compilación. Consulte [Vincular Container Images a Dockerfiles][22].
+- **Anotaciones de imagen OCI**: Agregue anotaciones al compilar la imagen y escanéela con Datadog Security CLI. Consulte [Vincular Dockerfile a vulnerabilidades][25] en la guía de escaneo de imágenes de contenedor de CI/CD.
 
 ## Automatización e integración con Jira {#automation-and-jira-integration}
 Haga que Cloud Security Vulnerabilities sea parte de su flujo de trabajo diario configurando [{{< ui >}}security notification rules{{< /ui >}}][17] y [automation pipelines][20]:
@@ -156,9 +157,10 @@ Evalúe rápidamente el impacto de una vulnerabilidad emergente crítica buscand
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: /es/security/automation_pipelines/
 [21]: /es/security/cloud_security_management/setup/ci_cd
-[22]: /es/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[22]: /es/security/cloud_security_management/setup/dockerfile_labels/
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /es/security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
+[25]: /es/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 
 ## Lecturas adicionales {#further-reading}
 

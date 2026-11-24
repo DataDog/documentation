@@ -7,33 +7,43 @@ algolia:
   - ccm
   - finops
   - cloud cost skill
+  - savings analysis
+  - savings opportunities
   - bits ai assistant
   - bits assistant
   - mcp
-description: Bits Chat에서 Cloud Cost 스킬을 사용하여 Cloud Cost 결과를 조사하고, 설명하고, 공유하세요.
+description: Bits Chat에서 Cloud Cost 스킬을 사용하여 클라우드 비용 분석 결과를 조사하고 설명하고 공유하며, 비용 절감
+  기회를 찾으세요.
 further_reading:
 - link: /bits_ai/bits_chat/
   tag: 설명서
   text: Bits Chat
 - link: /mcp_server/
   tag: 설명서
-  text: Datadog MCP 서버
+  text: Datadog MCP Server
 - link: /cloud_cost_management/reporting/explorer/
   tag: 설명서
   text: Cost Explorer
 - link: /cloud_cost_management/planning/budgets/
   tag: 설명서
   text: 예산
+- link: /cloud_cost_management/recommendations/
+  tag: 설명서
+  text: Cloud Cost Recommendations
+- link: https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/
+  tag: 블로그
+  text: Bits Chat의 Cloud Cost 스킬을 사용하여 비용 관련 질문을 더 빠르게 해결하기
 title: Bits Chat의 Cloud Cost 스킬
 ---
 ## 개요 {#overview}
 
-Cloud Cost 스킬은 [Bits Chat][1]의 Cloud Cost Management 분석 워크플로입니다. 이 스킬은 근본 원인 분석, 예산 추적 및 일반 비용 질문에 대한 답변과 같은 FinOps 작업을 위해 설계되었습니다. 예를 들어 Bits Chat에 다음과 같은 요청을 보낼 수 있습니다.
+Cloud Cost 스킬은 [Bits Chat][1]의 Cloud Cost Management 분석 워크플로입니다. 이 스킬은 근본 원인 분석, 예산 추적, 절감 기회 찾기 및 일반 비용 질문에 대한 답변과 같은 FinOps 작업을 위해 설계되었습니다. 예를 들어 Bits Chat에 다음과 같은 요청을 보낼 수 있습니다.
 
 - [비용 모니터 경보][2], [비용 이상 징후][3] 및 [비용 변화][4] 조사하기
 - 지출을 발생시키는 팀, 서비스, 계정, 지역 또는 리소스 식별하기
 - 클라우드, SaaS, 맞춤형 또는 Datadog 비용에 대한 질문에 답하기
 - 실제 지출과 예상 지출을 [예산][5]과 비교하기
+- 팀, 서비스 또는 기타 범위 내에서 각각 소유자, 예상 절감액 및 뒷받침하는 증거가 포함된 절감 기회 찾기
 - CPU, 메모리, 요청량 또는 스토리지 크기와 같은 관측 가능한 메트릭과 비용 변화를 연관 지어 분석하기
 - 조사를 기록하여 인계하거나 나중에 참조할 수 있도록 [Notebooks][15] 생성하기
 
@@ -47,7 +57,7 @@ Bits Chat에서 Cloud Cost 스킬을 사용하려면 다음을 수행해야 합�
   - 문의하는 데이터에 대한 [Cloud Cost Management 권한][8]
   - (선택 사항) 조사 [Notebooks][15]을 생성하거나 편집하려면 [Notebook 권한][9]이 필요합니다.
 
-## Cloud Cost 스킬 {#start-an-investigation-with-the-cloud-cost-skill}로 조사를 시작하세요.
+## Cloud Cost 스킬로 조사 시작 {#start-an-investigation-with-the-cloud-cost-skill}
 
 {{< img src="cloud_cost/cc_skill_anomalies.png" alt="그래프마다 Investigate with Bits AI 버튼이 표시된 비용 이상 징후 그래프." style="width:80%;" >}}
 
@@ -55,13 +65,15 @@ Bits Chat에서 Cloud Cost 스킬을 사용하려면 다음을 수행해야 합�
 
 또는 Datadog 페이지의 내비게이션 바 오른쪽 상단에 있는 {{< ui >}}Ask Bits{{< /ui >}}를 클릭하여 Bits Chat을 열고 비용에 관한 질문을 할 수 있습니다.
 
+절감 기회를 찾으려면 [Cloud Cost Recommendations][17] 페이지에서 {{< ui >}}Optimize{{< /ui >}}를 클릭하세요. 자세한 내용은 [Savings analysis](#savings-analysis) 섹션을 참조하세요.
+
 프롬프트 예:
 
 - `Investigate why EC2 costs increased last week for team:payments.`
 - `Which teams are responsible for the highest S3 storage costs this month?`
 - `Why is the infrastructure budget projected to go over this month?`
 - `Show total cloud cost by provider for the last 30 complete days.`
-- `Find optimization opportunities for idle or over-provisioned cloud infrastructure.`
+- `Find savings opportunities for team:payments.`
 
 ### 비용 변화 조사 {#cost-change-investigations}
 
@@ -98,13 +110,42 @@ Cloud Cost 스킬로 비용 변화를 조사하면 Bits Chat은 간결한 요약
 - 예산 업데이트
 - 조사를 기록으로 남기기 위해 [Notebooks]에 캡처
 
-## 비용 분석을 위해 Datadog MCP 서버 사용하기 {#use-the-datadog-mcp-server-for-cost-analysis}
+### 절감 분석 {#savings-analysis}
 
-[Datadog MCP 서버][10]는 외부 AI 에이전트가 Datadog 데이터를 쿼리할 수 있도록 지원합니다. 이는 IDE, 터미널 기반의 어시스턴트 또는 사용자 지정 AI 워크플로에서 비용 질문을 하고 싶을 때 유용합니다.
+Bits Chat에 팀, 서비스 또는 기타 범위 내에서 절감 기회를 찾도록 요청하거나, [Cloud Cost Recommendations][17] 페이지의 필터 모음에서 {{< ui >}}Optimize{{< /ui >}}를 클릭하세요. Bits Chat은 해당 범위의 비용 및 사용량 데이터를 조사한 다음, 발견된 절감 기회를 요약합니다. 요약에는 일반적으로 다음이 포함됩니다:
 
-외부 AI 에이전트를 사용하려면 [Datadog MCP 서버를 설정][11]하세요. MCP 클라이언트가 도구 세트를 필터링하는 경우, Cloud Cost Management 데이터를 쿼리할 수 있는 메트릭 도구를 사용하려면 `core` 도구 세트를 포함하세요.
+- 해당 범위의 현재 연간 비용 및 총 예상 연간 절감액
+- 소유 팀, 예상 연간 절감액, 그리고 **Effort**, **Risk**, **Confidence** 등급이 포함된 비용 절감 기회 표
+- 해당 범위에 대한 기존 [Work Management][18] 작업 항목, Jira 이슈 및 관련 Cloud Cost Recommendations
 
-Cloud Cost Management 데이터는 다음과 같은 핵심 메트릭 도구에서 지원됩니다.
+초기 요약 후, Bits Chat은 다음을 수행할 수 있습니다.
+
+- 비용 절감 기회의 근거 설명
+- 각 소유 팀을 위한 상세 설명이 포함된 작업 항목 또는 [노트북][15] 생성
+- 대화창에 전체 상세 설명 표시
+
+## 비용 분석을 위해 Datadog MCP Server 사용하기 {#use-the-datadog-mcp-server-for-cost-analysis}
+
+[Datadog MCP Server][10]는 외부 AI 에이전트가 Datadog 데이터를 쿼리할 수 있도록 지원합니다. 이는 IDE, 터미널 기반의 어시스턴트 또는 사용자 지정 AI 워크플로에서 비용 질문을 하고 싶을 때 유용합니다.
+
+외부 AI 에이전트를 사용하려면 [Datadog MCP Server를 설정][11]하세요. MCP 클라이언트가 툴셋을 필터링하는 경우, 에이전트가 도구를 호출하기 전에 관련 툴셋을 활성화해야 합니다.
+
+- [`cost_recommendations`][16]을 사용하여 비용 절감 권장 사항을 나열하려면 `cost` 툴셋을 활성화하세요.
+- 메트릭 도구로 Cloud Cost Management 메트릭을 쿼리하려면 `core` 툴셋을 활성화하세요.
+
+### 비용 절감 권장 사항 나열 {#list-cost-saving-recommendations}
+
+`cost` 툴셋은 예상 일일 절감액(높은 순)을 기준으로 조직의 비용 절감 권장 사항을 나열하는 [`cost_recommendations`][16] 도구를 제공합니다. 클라우드 제공업체, 권장 사항 유형, 상태, 절감액 임계값 및 리소스 태그별 필터링을 지원합니다. 이 도구에는 `Cloud Cost Management Read` 권한이 필요합니다.
+
+`cost` 툴셋에 대한 예시 프롬프트:
+
+- `What are my top cloud cost-saving recommendations?`
+- `How much could I save per day, and how many open recommendations do I have?`
+- `Show me open AWS recommendations for my Kubernetes clusters.`
+
+### Cloud Cost Management 메트릭 쿼리 {#query-cloud-cost-management-metrics}
+
+`core` 툴셋은 Cloud Cost Management 데이터를 쿼리할 수 있는 메트릭 도구를 제공합니다:
 
 | MCP 도구                          | 사용량                                 |
 | --------------------------------- | ------------------------------------- |
@@ -113,15 +154,15 @@ Cloud Cost Management 데이터는 다음과 같은 핵심 메트릭 도구에�
 
 에이전트에게 Cloud Cost Management 메트릭(예: `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*` 또는 `datadog.cost.*`)에 대해 `use_cloud_cost`을 `true`로 설정하도록 요청하세요. 비용 변화를 설명하는 관측 메트릭(예: Kubernetes CPU 또는 S3 버킷 크기)에는 표준 메트릭 쿼리 동작을 사용하세요.
 
-MCP에 연결된 에이전트의 프롬프트 예:
+`core` 툴셋에 대한 예시 프롬프트:
 
 - `Use Datadog MCP to query cloud cost data. Set use_cloud_cost=true and show daily all.cost grouped by provider for the last 30 complete days.`
 - `Use get_datadog_metric_context with use_cloud_cost=true to find available tags for aws.cost.net.amortized.shared.resources.allocated, then group EC2 costs by team.`
 - `Compare this week's complete EC2 cost to the previous week and explain which teams or accounts changed the most.`
 
-연결 지침, 지원되는 클라이언트 및 도구 세트 구성은 [Datadog MCP 서버 설정][11]을 참조하세요. 전체 MCP 도구에 관한 자세한 정보는 [Datadog MCP 서버 도구][14]를 참조하세요.
+연결 지침, 지원되는 클라이언트 및 도구 세트 구성은 [Datadog MCP Server][11]을 참조하세요. 전체 MCP 도구에 관한 자세한 정보는 [Datadog MCP Server 도구][14]를 참조하세요.
 
-## 참고 자료 {#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -140,3 +181,6 @@ MCP에 연결된 에이전트의 프롬프트 예:
 [13]: /ko/mcp_server/tools/#get_datadog_metric_context
 [14]: /ko/mcp_server/tools/
 [15]: /ko/notebooks/
+[16]: /ko/mcp_server/tools/#cost_recommendations
+[17]: https://app.datadoghq.com/cost/optimize/recommendations
+[18]: /ko/incident_response/work_management/

@@ -666,53 +666,6 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 - Delete the `web-store` service remapping rule.
 
-## Chat
-
-Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
-
-The `chat` toolset is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
-
-**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
-
-### `send_message_to_chat`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
-
-Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
-
-- Ask Bits Chat what's causing the latency spike on the checkout service.
-- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
-- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
-
-### `get_chat_message_result`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
-
-- Get the result of a pending Bits Chat response.
-- Check whether a Bits Chat request needs an action before it can continue.
-
-### `get_chat_conversation_history`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Retrieves the full history of a Bits Chat conversation by its ID.
-
-- Get the full conversation history for conversation `abc-123-def`.
-- Show the history of the Bits Chat conversation about the payment outage.
-
-### `list_chat_conversations`
-
-*Toolset: **chat***\
-*Permissions Required: `Bits Chat Access`*\
-Lists all Bits Chat conversations for the current user.
-
-- List past Bits Chat conversations.
-- Show recent Bits Chat conversations.
-
 ## Audit Trail
 
 Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
@@ -866,6 +819,53 @@ Creates a [Work Management][38] project with default settings, given a name and 
 Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
+
+## Chat
+
+Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
+
+The `chat` toolset is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
+
+**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_chat`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
+
+Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
+
+- Ask Bits Chat what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
+- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
+
+### `get_chat_message_result`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
+
+- Get the result of a pending Bits Chat response.
+- Check whether a Bits Chat request needs an action before it can continue.
+
+### `get_chat_conversation_history`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full history of a Bits Chat conversation by its ID.
+
+- Get the full conversation history for conversation `abc-123-def`.
+- Show the history of the Bits Chat conversation about the payment outage.
+
+### `list_chat_conversations`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Lists all Bits Chat conversations for the current user.
+
+- List past Bits Chat conversations.
+- Show recent Bits Chat conversations.
 
 ## Cloud Cost Management
 
@@ -2023,91 +2023,6 @@ The query window defaults to the last 10 minutes and can span up to 4 hours. The
 - Which verbs and resources are being rate limited by the API server in cluster `staging`?
 - Were requests rejected by API Priority and Fairness in cluster `prod` during the incident window?
 
-## Metrics Governance
-
-Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
-
-### `estimate_datadog_metric_cardinality`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
-
-- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
-- How many timeseries would `custom.api.latency` have with no tags retained?
-- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
-
-### `get_metric_cardinality_profile`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
-
-- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
-- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
-- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
-
-### `get_metric_governance_status`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
-
-- Show the governance status for `custom.checkout.requests`.
-- Which tag indexing rule applies to `custom.api.latency`?
-- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
-
-### `get_metric_tag_configuration`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
-
-- Which tags are enabled for `custom.checkout.requests`?
-- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
-- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
-
-### `get_metric_tags`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
-
-- List the indexed and ingested tags for `custom.checkout.requests`.
-- Which tags were observed on `custom.api.latency` in the last four hours?
-- Show a sample value for each tag on `custom.orders.count`.
-
-### `get_metric_volume`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
-
-- Show the indexed and ingested volume for `custom.checkout.requests`.
-- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
-- Get the distinct volume for `system.cpu.user`.
-
-### `get_tag_indexing_rules`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read`*\
-Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
-
-- List all tag indexing rules in priority order.
-- Which rules match metrics with the `custom.checkout.*` naming pattern?
-- Show the next page of tag indexing rules.
-
-### `manage_metric_tag_configuration`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Write`*\
-Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
-
-- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
-- Update `custom.api.latency` to exclude the `request_id` tag.
-- Delete the direct tag configuration for `custom.orders.count`.
-
-### `manage_tag_indexing_rule`
-*Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Write`*\
-Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
-
-- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
-- Move the checkout metrics rule to the highest priority.
-- Add an exemption for `custom.checkout.debug` with a reason.
-
 ## Live Debugger
 
 Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
@@ -2286,6 +2201,91 @@ Permanently removes an archive's configuration and stops routing logs to that de
 Places an archive immediately before or after another archive in the evaluation order. Logs are routed to the first archive whose filter matches, so changing the order can change their destination.
 
 - Move the production archive before the catch-all archive.
+
+## Metrics Governance
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
 
 ## Networks
 
@@ -3116,6 +3116,22 @@ Deletes one or more custom detection rules by ID. Only custom (non-default) rule
 
 - Delete detection rule `abc-123-def`.
 - Remove these three test detection rules I created earlier.
+
+### `propose_datadog_security_detection_rule`
+*Toolset: **security** (Preview)*\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate many rules at once, use [bulk migration][108].
+
+- Translate this Splunk rule into a Cloud SIEM detection rule: `<SPL query>`.
+- Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
+
+### `get_datadog_security_detection_rule_proposal`
+*Toolset: **security** (Preview)*\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`. When it fails, returns the error.
+
+- Check the status of detection rule proposal `abc-123`.
+- Show me the proposed rule, then save it as disabled.
 
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
@@ -4056,6 +4072,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
 [107]: /integrations/kube_apiserver_metrics/
+[108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/#bulk-migrate-detection-rules-in-the-ui
 
 ## Further reading
 

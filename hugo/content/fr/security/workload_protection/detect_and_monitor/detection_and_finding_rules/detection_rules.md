@@ -36,7 +36,7 @@ Sélectionnez la méthode de détection que vous souhaitez utiliser :
 
 Définissez la requête qui sélectionne les [événements d'Agent][1] que la règle évalue. La requête de recherche détermine quels événements sont pris en compte pour décider s'il faut émettre un signal.
 
-Vous pouvez effectuer les opérations suivantes :
+Vous pouvez effectuer les opérations suivantes :
 
 - Filtrez sur des **champs spécifiques** dans les événements de l'Agent pour affiner la requête et rendre la détection plus précise. Par exemple, filtrez sur `@process.executable.path`, `@file.path` ou `@agent.rule_id`. Les règles de détection peuvent interroger n'importe quel champ du schéma d'événement backend. Consultez la [syntaxe backend Linux][13] et la [syntaxe backend Windows][14] pour obtenir l'ensemble complet des champs disponibles.
 - Combinez plusieurs conditions pour limiter la règle à un sous-ensemble de votre infrastructure ou de vos charges de travail.
@@ -84,6 +84,8 @@ Vous pouvez définir une règle de l'Agent et une règle de détection correspon
 - {{< ui >}}Assisted rule creator{{< /ui >}} : Dans Datadog, démarrez une [règle de détection][4] Workload Protection personnalisée et utilisez l'assistant pour configurer à la fois l'expression de l'Agent et la logique de la règle de détection backend.
 - {{< ui >}}Manual rule creator{{< /ui >}} : Depuis [Configuration de l'Agent][12], ouvrez ou créez une politique et choisissez {{< ui >}}Manual rule creator{{< /ui >}} pour créer d'abord la règle de l'Agent, puis ajoutez une règle de détection qui y fait référence. Pour les étapes de l'interface utilisateur et le déploiement, consultez [Gestion des politiques][11].
 
+Les règles de l'Agent utilisent des expressions du Datadog Security Language (SECL) pour identifier les événements correspondants. Pour la syntaxe SECL, consultez le [guide SECL][15]. Pour savoir quand utiliser des motifs ou des expressions régulières plutôt que des correspondances exactes, consultez les [conseils de création de règles][16].
+
 [1]: /fr/security/workload_protection/investigate_and_triage/agent_events
 [2]: /fr/security/workload_protection/investigate_and_triage/security_signals
 [3]: /fr/security/default_rules/#cat-workload-security
@@ -98,3 +100,4 @@ Vous pouvez définir une règle de l'Agent et une règle de détection correspon
 [12]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [13]: /fr/security/workload_protection/backend_linux
 [14]: /fr/security/workload_protection/backend_windows
+[15]: /fr/security/workload_protection/detect_and_monitor/agent_rules/secl_guide

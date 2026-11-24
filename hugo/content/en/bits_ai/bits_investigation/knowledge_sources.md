@@ -13,7 +13,7 @@ further_reading:
 Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
-- [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
+- [**Feedback and memories:**](#feedback-and-memories) Learnings from past investigations
 
 ## Runbooks
 Think of onboarding Bits as you would a new teammate: the more context you provide, the better it can investigate.
@@ -109,6 +109,20 @@ Rule:
 {{< /code-block >}}
 
 ## Feedback and memories
+
+Bits learns from past investigations in two complementary ways:
+- [**Automatic memories:**](#automatic-memories) Root causes and learnings that Bits stores on its own after each investigation
+- [**Feedback memories:**](#feedback-memories) Corrections and confirmations that you provide at the end of an investigation
+
+### Automatic memories
+
+{{< img src="bits_ai/automatic_memory_recalled.png" alt="Investigation tree showing a recalled memory feeding into hypothesis investigation, with the matching hypothesis verified" style="width:100%;" >}}
+
+Bits Investigation automatically stores the root cause and learnings from past investigations, then retrieves them the next time the same monitor alerts. Investigations start from what Bits already knows based on the past, which helps resolve issues faster and at a lower cost.
+
+Automatic memories don't require any action from you, and they work alongside the feedback memories described below.
+
+### Feedback memories
 
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
 

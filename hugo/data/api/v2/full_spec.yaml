@@ -2510,6 +2510,14 @@ components:
       required: false
       schema:
         type: string
+    SecurityAgentOutreachPolicyDomain:
+      description: The allowed email domain to remove, for example `example.com`. Case-insensitive.
+      example: example.com
+      in: path
+      name: domain
+      required: true
+      schema:
+        type: string
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -3270,6 +3278,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -6670,20 +6699,15 @@ components:
           example: my-hostname
           type: string
         resource_kind:
-          description: >-
-            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
-          example: host
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueResourceKind"
         resource_type:
           description: The type of the affected resource. Omitted when empty.
           example: host
           type: string
         severity:
-          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
-          example: high
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueSeverity"
         state:
-          description: The state of the issue. Only issues with state `open` are returned.
+          description: The state of the issue, such as `open`.
           example: open
           type: string
         tags:
@@ -6753,6 +6777,23 @@ components:
         - type
         - attributes
       type: object
+    AgentHealthIssueResourceKind:
+      description: >-
+        The kind of affected resource. The meaning of `resource_id` depends on this: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+      enum:
+        - host
+        - deployment
+        - cluster
+        - cluster_agent
+        - otel
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - DEPLOYMENT
+        - CLUSTER
+        - CLUSTER_AGENT
+        - OTEL
     AgentHealthIssueResourceType:
       description: The Agent Health issue resource type.
       enum:
@@ -6769,6 +6810,20 @@ components:
       required:
         - data
       type: object
+    AgentHealthIssueSeverity:
+      description: The severity of the issue.
+      enum:
+        - low
+        - medium
+        - high
+        - unknown
+      example: high
+      type: string
+      x-enum-varnames:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - UNKNOWN
     AgentHealthIssueTags:
       description: Tags associated with the issue. Omitted when empty.
       example:
@@ -6829,15 +6884,18 @@ components:
           $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
       required:
         - data
+        - meta
       type: object
     AgentHealthIssuesResponseMeta:
       description: >-
-        Aggregate counts for the matching Agent Health issues. Present only when `count_by=issue_type` is requested.
+        Pagination metadata for the matching Agent Health issues. Always present. Includes per-issue-type counts only when `count_by=issue_type` is requested.
       example:
         page:
           counts_by_issue_type:
             invalid_config: 8382
             read-only_filesystem_error: 82
+          limit: 100
+          offset: 0
           total_count: 25526
       properties:
         page:
@@ -6846,11 +6904,13 @@ components:
         - page
       type: object
     AgentHealthIssuesResponsePage:
-      description: Counts for the matching Agent Health issues.
+      description: Pagination details and counts for the matching Agent Health issues.
       example:
         counts_by_issue_type:
           invalid_config: 8382
           read-only_filesystem_error: 82
+        limit: 100
+        offset: 0
         total_count: 25526
       properties:
         counts_by_issue_type:
@@ -6862,14 +6922,25 @@ components:
             invalid_config: 8382
             read-only_filesystem_error: 82
           type: object
+        limit:
+          description: The maximum number of issues returned, echoing the requested `page[limit]`.
+          example: 100
+          format: int64
+          type: integer
+        offset:
+          description: The number of issues skipped, echoing the requested `page[offset]`.
+          example: 0
+          format: int64
+          type: integer
         total_count:
           description: The total number of open issues matching the filters.
           example: 25526
           format: int64
           type: integer
       required:
+        - limit
+        - offset
         - total_count
-        - counts_by_issue_type
       type: object
     AgentHealthRemediation:
       description: Remediation for the issue. Omitted when no remediation is available.
@@ -6922,6 +6993,8 @@ components:
           description: Whether the script requires root privileges.
           example: true
           type: boolean
+      required:
+        - requires_root
       type: object
     AgentHealthRemediationStep:
       description: A step to remediate the issue.
@@ -6929,12 +7002,16 @@ components:
         order:
           description: The order in which to perform the step.
           example: 1
-          format: int64
+          format: int32
+          maximum: 2147483647
           type: integer
         text:
           description: The instructions for the step.
           example: Open datadog.yaml
           type: string
+      required:
+        - order
+        - text
       type: object
     AgentHealthRemediationSteps:
       description: Steps to remediate the issue.
@@ -9506,12 +9583,14 @@ components:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
       example: OPENAI_CHAT_COMPLETIONS
       type: string
       x-enum-varnames:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
     AiGatewayDataCaptureMode:
       description: Controls whether AI Gateway captures request and response content in addition to metadata.
       enum:
@@ -13221,6 +13300,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
       example: OPENAI_CHAT_COMPLETIONS
@@ -13232,6 +13313,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
     AiGatewayZDRMode:
@@ -26614,7 +26697,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26647,7 +26731,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26944,7 +27029,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -26977,7 +27063,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -69023,6 +69110,256 @@ components:
       required:
         - data
       type: object
+    GitHubCostsCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        GitHub costs, including Actions, storage, and Copilot, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Reported costs are estimates based on list prices and usage data and include discounts when available, but not negotiated rates. Requires Cloud Cost Management on your Datadog organization and a GitHub account on the enhanced billing platform. Without them, this dataflow collects no data. This dataflow is always on and cannot be turned off, so it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    GitHubCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthRequest"
+    GitHubCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the GitHub Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthResponse"
+    GitHubCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthUpdate"
+    GitHubCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    GitHubCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a GitHub Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountCreateData:
+      description: Data envelope for creating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountCreateRequest:
+      description: Request payload to create a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponse:
+      description: Response payload for a single GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponseAttributes:
+      description: Attributes of a GitHub Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/GitHubCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountResponseData:
+      description: Data envelope of a GitHub Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the GitHub Costs integration account.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    GitHubCostsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsResponse:
+      description: Settings configured on the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the GitHub Costs integration account. Only the provided fields are changed.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      type: object
+    GitHubCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a GitHub Costs integration account. Every field is optional. Only the provided fields are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsUpdate"
+      type: object
+    GitHubCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the GitHub Costs integration account to update.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountsResponse:
+      description: Response payload for a list of GitHub Costs integration accounts.
+      properties:
+        data:
+          description: List of GitHub Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from GitHub Costs, keyed by dataflow ID.
+      properties:
+        github-cloud-cost-metrics:
+          $ref: "#/components/schemas/GitHubCostsCloudCostMetricsIntegrationDataflowResponse"
+      type: object
     GitHubOIDCClaimPatterns:
       additionalProperties: false
       description: |-
@@ -71810,10 +72147,16 @@ components:
       properties:
         anomalyDetectionOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleAnomalyDetectionOptions"
+        complianceRuleOptions:
+          $ref: "#/components/schemas/CloudConfigurationComplianceRuleOptions"
+        decreaseCriticalityBasedOnEnv:
+          $ref: "#/components/schemas/SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv"
         detectionMethod:
           $ref: "#/components/schemas/SecurityMonitoringRuleDetectionMethod"
         evaluationWindow:
           $ref: "#/components/schemas/SecurityMonitoringRuleEvaluationWindow"
+        hardcodedEvaluatorType:
+          $ref: "#/components/schemas/SecurityMonitoringRuleHardcodedEvaluatorType"
         impossibleTravelOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptions"
         keepAlive:
@@ -71858,6 +72201,14 @@ components:
             description: Dataset ID.
             type: string
           type: array
+        datasetVersions:
+          additionalProperties:
+            description: Dataset version.
+            format: int64
+            type: integer
+          description: Version of each dataset used by the job, keyed by dataset ID. Pinned when the job is created.
+          readOnly: true
+          type: object
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -71884,6 +72235,10 @@ components:
             description: Index name.
             type: string
           type: array
+        metric:
+          deprecated: true
+          description: "(Deprecated) The target field to aggregate over when using the sum or max\naggregations. Use the `metrics` field instead."
+          type: string
         metrics:
           description: Group of target fields to aggregate over when using the sum, max, geo data, or new value aggregations. The sum, max, and geo data aggregations only accept one value in this list, whereas the new value aggregation accepts up to five values.
           items:
@@ -81891,6 +82246,14 @@ components:
           description: Index used to load the data.
           example: cloud_siem
           type: string
+        isBackfillJob:
+          description: Whether the job was run by Datadog to reprocess past data.
+          readOnly: true
+          type: boolean
+        isShadowDeployed:
+          description: Whether the job is a shadow deployment run by Datadog.
+          readOnly: true
+          type: boolean
         message:
           description: Message for generated results.
           example: A large number of failed login attempts.
@@ -81901,6 +82264,13 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/HistoricalJobOptions"
+        projectedPerQuery:
+          description: Fields projected for each query, copied from the rule the job was created from.
+          items:
+            description: Projected field.
+            type: string
+          readOnly: true
+          type: array
         queries:
           description: Queries for selecting logs analyzed by the job. Up to 10 queries are allowed.
           items:
@@ -110012,7 +110382,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -110045,7 +110416,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -134083,6 +134455,248 @@ components:
         - data
         - meta
       type: object
+    SecurityAgentOutreachDomainAddRequest:
+      description: Request to add one allowed email domain.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachDomainAddRequestData:
+      description: The email domain to allow.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachDomainAddType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachDomainAddRequestDataAttributes:
+      description: The email domain to allow.
+      properties:
+        domain:
+          description: |-
+            The email domain to allow: a fully qualified domain name, like `example.com`. Lowercased
+            before being stored.
+          example: acme.com
+          type: string
+      required:
+        - domain
+      type: object
+    SecurityAgentOutreachDomainAddType:
+      default: outreach_policy_domain_add
+      description: Type of an allowed outreach domain add request.
+      enum:
+        - outreach_policy_domain_add
+      example: outreach_policy_domain_add
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_DOMAIN_ADD
+    SecurityAgentOutreachMode:
+      description: |-
+        The organization's outreach mode. `off` disables user outreach. `manual` only sends outreach an analyst
+        triggers. `automated` auto-sends automated interviews for rules with outreach enabled, to users whose email
+        domain is allowed.
+      enum:
+        - "off"
+        - manual
+        - automated
+      example: automated
+      type: string
+      x-enum-varnames:
+        - "OFF"
+        - MANUAL
+        - AUTOMATED
+    SecurityAgentOutreachModeAttributes:
+      description: Attributes of a mode-only policy update.
+      properties:
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachModeResponse:
+      description: Response with the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeResponseData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachModeResponseData:
+      description: The organization's outreach mode.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateData:
+      description: Data of a mode-only policy update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachModeUpdateRequest:
+      description: Request to set the organization's outreach mode.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicy:
+      description: The organization's outreach policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyAttributes"
+        id:
+          description: The organization ID.
+          example: "1234567"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicyType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachPolicyAttributes:
+      description: Attributes of the organization's outreach policy.
+      properties:
+        allowed_domains:
+          description: Email domains user outreach can be sent to, at most 20. `null` when none are allowed.
+          example:
+            - example.com
+          items:
+            type: string
+          nullable: true
+          type: array
+        mode:
+          $ref: "#/components/schemas/SecurityAgentOutreachMode"
+        rules:
+          description: |-
+            The stored per-rule automation state, including rules that are explicitly disabled. `null` when the
+            organization has no stored rule state.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRule"
+          nullable: true
+          type: array
+        suggested_domains:
+          description: |-
+            Domains the caller could allow next: their own email domain when it is not allowed yet and is not a
+            consumer mailbox provider. Read-only, never stored. `null` when there is no suggestion.
+          example:
+            - acme.com
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - mode
+      type: object
+    SecurityAgentOutreachPolicyResponse:
+      description: Response with the organization's outreach policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachPolicy"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachPolicyType:
+      default: outreach_policy
+      description: Type of the outreach policy resource.
+      enum:
+        - outreach_policy
+      example: outreach_policy
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY
+    SecurityAgentOutreachRule:
+      description: The outreach automation state of one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRuleUpdate:
+      description: The outreach automation state to set for one detection rule.
+      properties:
+        is_enabled:
+          description: Whether the rule auto-sends automated interviews in `automated` mode. Required.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule. Must be non-empty.
+          example: abc-def-ghi
+          type: string
+      required:
+        - rule_id
+        - is_enabled
+      type: object
+    SecurityAgentOutreachRulesUpdateAttributes:
+      description: Attributes of an outreach policy rules update request.
+      properties:
+        rules:
+          description: The rules to upsert, at least one.
+          items:
+            $ref: "#/components/schemas/SecurityAgentOutreachRuleUpdate"
+          type: array
+      required:
+        - rules
+      type: object
+    SecurityAgentOutreachRulesUpdateRequest:
+      description: Request to upsert the outreach automation state of detection rules.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequestData"
+      required:
+        - data
+      type: object
+    SecurityAgentOutreachRulesUpdateRequestData:
+      description: The rules to upsert.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityAgentOutreachRulesUpdateType:
+      default: outreach_policy_rules_update
+      description: Type of an outreach policy rules update request.
+      enum:
+        - outreach_policy_rules_update
+      example: outreach_policy_rules_update
+      type: string
+      x-enum-varnames:
+        - OUTREACH_POLICY_RULES_UPDATE
     SecurityAutomationRulesLinks:
       description: Pagination links for the list of automation rules.
       properties:
@@ -137747,6 +138361,8 @@ components:
         condition:
           description: "A case contains logical operations (`>`,`>=`, `&&`, `||`) to determine if a signal should be generated\nbased on the event counts in the previously defined queries."
           type: string
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
@@ -137898,6 +138514,9 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations"
         baselineUserLocationsDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocationsDuration"
+        detectIpTransition:
+          description: If true, the rule detects transitions between IP addresses of the same user. At least one of `baselineUserLocations` and `detectIpTransition` must be true.
+          type: boolean
       type: object
     SecurityMonitoringRuleImpossibleTravelOptionsBaselineUserLocations:
       description: "If true, signals are suppressed for the first 24 hours. In that time, Datadog learns the user's regular\naccess locations. This can be helpful to reduce noise and infer VPN usage or credentialed API access."
@@ -137985,6 +138604,12 @@ components:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsForgetAfter"
         instantaneousBaseline:
           $ref: "#/components/schemas/SecurityMonitoringRuleInstantaneousBaseline"
+        instantaneousBaselineTimeoutMinutes:
+          description: Maximum time in minutes to build the instantaneous baseline. Only used when `instantaneousBaseline` is true.
+          format: int32
+          maximum: 360
+          minimum: 0
+          type: integer
         learningDuration:
           $ref: "#/components/schemas/SecurityMonitoringRuleNewValueOptionsLearningDuration"
         learningMethod:
@@ -140585,6 +141210,8 @@ components:
     SecurityMonitoringThirdPartyRuleCaseCreate:
       description: Case when a signal is generated by a third party rule.
       properties:
+        customStatus:
+          $ref: "#/components/schemas/SecurityMonitoringRuleSeverity"
         name:
           description: Name of the case.
           type: string
@@ -168820,9 +169447,9 @@ paths:
         (`high`, `medium`, `low`, then other values), then `first_seen_at` descending with
         missing timestamps last, then issue ID ascending.
 
-        Set `count_by=issue_type` to include `meta.page`, where `total_count` is the number of
-        open issues matching the filters and `counts_by_issue_type` holds the per-type counts.
-        `meta` is omitted when `count_by` is not requested.
+        The response always includes `meta.page` with the applied `limit`, `offset`, and
+        `total_count` (the number of open issues matching the filters). Set `count_by=issue_type`
+        to also include `counts_by_issue_type` with per-issue-type counts.
 
         Each filter accepts up to 50 comma-separated exact values of at most 256 characters
         each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
@@ -168830,13 +169457,35 @@ paths:
       operationId: ListAgentHealthIssues
       parameters:
         - description: >-
-            Set to `issue_type` to include `meta.page` with `total_count` and per-issue-type counts. If you don't set this parameter, the response omits `meta`. Only `issue_type` is supported.
+            Set to `issue_type` to also include `counts_by_issue_type` in `meta.page` with per-issue-type counts. Pagination metadata is always included. Only `issue_type` is supported.
           example: issue_type
           in: query
           name: count_by
           required: false
           schema:
             $ref: "#/components/schemas/AgentHealthIssuesCountBy"
+        - description: >-
+            The maximum number of issues to return. Defaults to 100, with a minimum of 1 and a maximum of 1000.
+          example: 100
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The number of issues to skip before returning results. Defaults to 0, with a minimum of 0.
+          example: 0
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
         - description: |-
             Filter by a comma-separated list of exact `severity` values, up to 50 values
             of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
@@ -168929,6 +169578,8 @@ paths:
                       page:
                         counts_by_issue_type:
                           invalid_config: 8382
+                        limit: 100
+                        offset: 0
                         total_count: 25526
               schema:
                 $ref: "#/components/schemas/AgentHealthIssuesResponse"
@@ -168962,23 +169613,23 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 2
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agenthealth/issues/{issue_id}:
     get:
       description: |-
         Get an Agent Health issue and its available remediation in your organization.
-        Only open issues are returned. The `remediation` attribute is omitted when
-        the issue has no remediation.
+        The `remediation` attribute is omitted when the issue has no remediation.
 
-        Returns `404` if the issue does not exist, is not open, belongs to another
-        organization, or you do not have access to its data. This response does not
-        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+        Returns `404` if the issue does not exist, belongs to another organization, or
+        you do not have access to its data. This response does not reveal whether the
+        issue exists. Returns `403` if you lack the `hosts_read` permission.
       operationId: GetAgentHealthIssue
       parameters:
         - description: |-
@@ -169030,6 +169681,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AgentHealthIssueResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -169063,9 +169720,6 @@ paths:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -214021,6 +214675,249 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts:
+    get:
+      description: List GitHub Costs integration accounts.
+      operationId: ListGitHubCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            github-cloud-cost-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: github-costs-acme
+                          settings:
+                            enterprise_name: enterprise-name
+                            tags: "env:prod,team:example"
+                        id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub Costs integration accounts
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub Costs integration account.
+      operationId: CreateGitHubCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts/{account_id}:
+    delete:
+      description: Delete a GitHub Costs integration account.
+      operationId: DeleteGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a GitHub Costs integration account.
+      operationId: GetGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a GitHub Costs integration account. Only the fields provided are changed.
+      operationId: UpdateGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/nebius-cloud/accounts:
     get:
       description: List Nebius Cloud integration accounts.
@@ -244797,6 +245694,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/accounts/query:
     post:
@@ -244860,6 +245761,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/analytics/list:
     post:
@@ -245774,6 +246679,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/facet_info:
     post:
@@ -245826,6 +246735,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/query:
     post:
@@ -245887,6 +246800,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/users/{user_id}:
     delete:
@@ -245972,6 +246889,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connection:
     post:
@@ -246025,6 +246946,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
     put:
       description: Update an existing data connection by adding, updating, or deleting fields
@@ -246080,6 +247005,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connection/{id}:
     delete:
@@ -246113,6 +247042,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-analytics/{entity}/mapping/connections:
     get:
@@ -246151,6 +247084,10 @@ paths:
       tags:
         - Rum Audience Management
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/product-catalog/skus:
     get:
@@ -266863,7 +267800,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a batch migration in the `draft` status, together with 1 to 100 initial
@@ -266956,7 +267893,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}:
     delete:
       description: |-
@@ -266997,7 +267934,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
         Update the name, description, or tags of a batch migration, in any status. At least
@@ -267083,7 +268020,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/cancel:
     post:
       description: |-
@@ -267125,7 +268062,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/publish:
     post:
       description: |-
@@ -267220,7 +268157,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/resources:
     delete:
       description: |-
@@ -267276,7 +268213,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         List the resources of a batch migration, including the input of each source rule and,
@@ -267372,7 +268309,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Add 1 to 1000 resources to a `draft` batch migration. Returns `409 Conflict` if the
@@ -267450,7 +268387,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/resources/{resource_id}:
     patch:
       description: |-
@@ -267528,7 +268465,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/batch-migrations/{batch_id}/start:
     post:
       description: |-
@@ -267580,7 +268517,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
       description: |-
@@ -271026,7 +271963,7 @@ paths:
           - security_monitoring_rules_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules/proposals/{proposal_id}:
     get:
       description: |-
@@ -271119,7 +272056,7 @@ paths:
           - security_monitoring_rules_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
-        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules/test:
     post:
       description: |-
@@ -272308,6 +273245,383 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy:
+    get:
+      description: |-
+        Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule
+        automation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains
+        that could be allowed next.
+      operationId: GetSecurityAgentOutreachPolicy
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                        suggested_domains:
+                          - acme.com
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get the user outreach policy
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+    put:
+      description: |-
+        Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an
+        analyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users
+        whose email domain is allowed).
+      operationId: UpdateSecurityAgentOutreachMode
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      mode: automated
+                    type: outreach_policy
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachModeUpdateRequest"
+        description: The new outreach mode.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        mode: automated
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachModeResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update the outreach mode
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains:
+    post:
+      description: |-
+        Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The
+        domain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.
+        An organization can allow at most 20 domains.
+      operationId: AddSecurityAgentOutreachPolicyDomain
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      domain: acme.com
+                    type: outreach_policy_domain_add
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachDomainAddRequest"
+        description: The email domain to allow.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain allowed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - acme.com
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Add an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 7
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/allowed_domains/{domain}:
+    delete:
+      description: Remove one allowed email domain, by its name.
+      operationId: RemoveSecurityAgentOutreachPolicyDomain
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentOutreachPolicyDomain"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy with the domain removed
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Remove an allowed outreach domain
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 8
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/outreach_policy/rules:
+    post:
+      description: |-
+        Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;
+        rules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews
+        in `automated` mode.
+      operationId: UpdateSecurityAgentOutreachPolicyRules
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      rules:
+                        - is_enabled: true
+                          rule_id: abc-def-ghi
+                        - is_enabled: false
+                          rule_id: jkl-mno-pqr
+                    type: outreach_policy_rules_update
+            schema:
+              $ref: "#/components/schemas/SecurityAgentOutreachRulesUpdateRequest"
+        description: The rules to upsert.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The organization's outreach policy after the update
+                  value:
+                    data:
+                      attributes:
+                        allowed_domains:
+                          - example.com
+                        mode: automated
+                        rules:
+                          - is_enabled: true
+                            rule_id: abc-def-ghi
+                          - is_enabled: false
+                            rule_id: jkl-mno-pqr
+                      id: "1234567"
+                      type: outreach_policy
+              schema:
+                $ref: "#/components/schemas/SecurityAgentOutreachPolicyResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - bits_security_analyst_config_write
+      summary: Update outreach policy rules
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 6
+      "x-permission":
+        operator: OR
+        permissions:
+          - bits_security_analyst_config_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
@@ -294465,6 +295779,15 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/google_cloud_platform
     name: GCP Integration
+  - description: |-
+      Manage your Datadog GitHub Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [GitHub Costs integration page](https://docs.datadoghq.com/integrations/github-costs/) for
+      more information.
+    externalDocs:
+      description: GitHub Costs integration.
+      url: https://docs.datadoghq.com/integrations/github-costs/
+    name: GitHub Costs Integration
   - description: |-
       Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
       directly through the Datadog API.

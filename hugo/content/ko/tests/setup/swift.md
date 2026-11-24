@@ -4,7 +4,7 @@ aliases:
 - /ko/continuous_integration/tests/swift
 - /ko/continuous_integration/tests/setup/swift
 code_lang: swift
-code_lang_weight: 50
+code_lang_weight: 60
 further_reading:
 - link: /tests
   tag: 설명서
@@ -28,7 +28,7 @@ type: multi-code-lang
 | Objective-C | >= 2.0  |
 | Xcode       | >= 26.0 |
 
-지원 플랫폼:
+지원하는 플랫폼은 다음과 같습니다.
 
 | 플랫폼     | 버전  |
 | ------------ | -------- |
@@ -127,7 +127,7 @@ import DatadogSDKTesting
 import Testing
 {{< /code-block >}}
 
-2. 테스트 스위트 또는 독립형 테스트 함수에 `.datadogTesting` 특성을 추가합니다.
+2. 테스트 모음 또는 독립형 테스트 함수에 `.datadogTesting` 특성을 추가합니다.
 
 {{< code-block lang="swift" >}}
 @Suite(.datadogTesting)
@@ -174,7 +174,7 @@ DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme 
 
 `DD_TEST_RUNNER`
 : 테스트 계측을 활성화하거나 비활성화합니다. 테스트 프로세스 외부(예: CI 빌드)에서 정의된 환경 변수로 테스트 계측을 활성화 및 비활성화할 수 있도록 이 값을 `$(DD_TEST_RUNNER)`로 설정하세요.<br/>
-**기본**: `false`<br/>
+**기본값**: `false`<br/>
 **권장**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY`(필수)
@@ -191,7 +191,7 @@ DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme 
 **기본값**: 리포지토리 이름<br/>
 **예시**: `my-ios-app`
 
-`DD_ENV`(선택 사항)
+`DD_ENV` (선택 사항)
 : 테스트가 실행되는 환경의 이름입니다.<br/>
 **기본값**: CI 공급자가 탐지되면 `ci`이고, 그렇지 않으면 `none`입니다.<br/>
 **권장**: `$(DD_ENV)`<br/>
@@ -313,7 +313,7 @@ RUM을 사용하지 않는 경우, 애플리케이션 타겟을 Test SDK와 연�
 
 ### 환경 변수 {#environment-variables}
 
-`DD_TAGS` 환경 변수를 사용할 수 있습니다(또는 `Info.plist` 파일에서 [아래 설명된 대로](#using-infoplist-for-configuration) 사용할 수 있습니다). 공백으로 구분된 `key:tag` 쌍을 포함해야 합니다. 예:
+`DD_TAGS` 환경 변수를 사용할 수 있습니다(또는 `Info.plist` 파일에서 [아래 설명된 대로](#using-infoplist-for-configuration) 사용할 수 있습니다). 공백으로 구분된 `key:tag` 쌍을 포함해야 합니다. 예를 들면 다음과 같습니다.
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
@@ -344,7 +344,7 @@ DDTest.current?.setTag(key: "key1", value: "value1")
 
 **참고**: OpenTelemetry는 Swift에서만 지원됩니다.
 
-Datadog Swift 테스트 프레임워크는 내부적으로 [OpenTelemetry][6]를 트레이싱 기술로 사용합니다. `DDInstrumentationControl.openTelemetryTracer`을(를) 사용하여 OpenTelemetry 트레이서에 접근하고 모든 OpenTelemetry API를 사용할 수 있습니다. 예를 들어, 태그나 속성을 추가하려면 다음과 같이 합니다.
+Datadog Swift 테스트 프레임워크는 내부적으로 [OpenTelemetry][6]를 트레이싱 기술로 사용합니다. `DDInstrumentationControl.openTelemetryTracer` 사용을 통해 OpenTelemetry 트레이서에 접근하고 모든 OpenTelemetry API를 사용할 수 있습니다. 예를 들어, 태그나 속성을 추가하려면 다음과 같이 합니다.
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -671,7 +671,7 @@ UI 테스트 러너 번들에 Entitlements를 추가한 다음 `App Sandbox = NO
 
 #### `DD_TEST_SESSION_NAME` 사용 시점 {#when-to-use-dd-test-session-name}
 
-Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 임시 폴더와 같이 실행할 때마다 변경되는 문자열이 포함되어 있으면 Datadog은 해당 세션들이 서로 관련이 없다고 간주합니다. 예:
+Datadog은 테스트 세션 간의 대응 관계를 설정하기 위해 일련의 파라미터를 검사합니다. 테스트를 실행하는 데 사용된 테스트 명령이 그중 하나입니다. 테스트 명령에 임시 폴더와 같이 실행할 때마다 변경되는 문자열이 포함되어 있으면 Datadog은 해당 세션들이 서로 관련이 없다고 간주합니다. 예를 들면 다음과 같습니다.
 
 - `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
