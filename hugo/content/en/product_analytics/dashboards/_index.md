@@ -8,9 +8,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
-- link: "https://www.datadoghq.com/blog/agentic-reporting-product-analytics/"
-  tag: "Blog"
-  text: "Let your product dashboards report to you with the Dashboard Reporter Agent"
 ---
 
 ## Overview

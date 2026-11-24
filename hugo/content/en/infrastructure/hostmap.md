@@ -5,18 +5,15 @@ aliases:
   - /infrastructure/containermap/
   - /guides/hostmap
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-host-map"
+  tag: "Blog"
+  text: "A new Host Map for modern infrastructure"
 - link: "/infrastructure/livecontainers/"
   tag: "Documentation"
   text: "Get real-time visibility of all of the containers across your environment"
 - link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Understand what is going on at any level of your system"
-- link: "https://www.datadoghq.com/blog/datadog-host-map"
-  tag: "Blog"
-  text: "A new Host Map for modern infrastructure"
-- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-  tag: "Blog"
-  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, helping you to understand and diagnose your infrastructure.

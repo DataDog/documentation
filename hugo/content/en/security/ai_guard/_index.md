@@ -14,9 +14,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/runtime-security-for-ai-agents/"
     tag: "Blog"
     text: "Agents make decisions at runtime—your security controls should too"
-  - link: "https://www.datadoghq.com/blog/data-security-posture-management/"
-    tag: "Blog"
-    text: "Map sensitive data with Datadog Data Security Posture Management"
 ---
 
 {{< site-region region="gov,gov2" >}}

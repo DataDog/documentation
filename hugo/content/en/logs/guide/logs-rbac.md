@@ -6,15 +6,12 @@ further_reading:
 - link: "/logs/guide/logs-rbac-permissions/"
   tag: "Documentation"
   text: "Learn more about RBAC permissions for Logs"
-- link: "/account_management/rbac/permissions/#log-management"
-  tag: "Documentation"
-  text: "Datadog Role Permissions"
 - link: "/api/latest/logs-restriction-queries/"
   tag: "API"
   text: "Logs Restriction Queries"
-- link: "https://www.datadoghq.com/blog/datadog-byoc-minio-aistor/"
-  tag: "Blog"
-  text: "Bring Datadog BYOC to your on-premises data with MinIO AIStor"
+- link: "/account_management/rbac/permissions/#log-management"
+  tag: "Documentation"
+  text: "Datadog Role Permissions"
 
 ---
 

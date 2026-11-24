@@ -14,9 +14,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
-- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
-  tag: "Blog"
-  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 
 ---
 

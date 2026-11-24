@@ -8,9 +8,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
   tag: "Blog"
   text: "Coordinate product launches with Datadog"
-- link: "https://www.datadoghq.com/blog/agentic-reporting-product-analytics/"
-  tag: "Blog"
-  text: "Let your product dashboards report to you with the Dashboard Reporter Agent"
 ---
 
 ## What is Journey Monitoring?

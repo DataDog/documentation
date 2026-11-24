@@ -41,9 +41,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-database-research/"
   tag: "Blog"
   text: "How microservice architectures have shaped the usage of database technologies"
-- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
-  tag: "Blog"
-  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

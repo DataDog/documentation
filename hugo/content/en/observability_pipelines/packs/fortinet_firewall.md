@@ -1,10 +1,6 @@
 ---
 title: Fortinet Firewall
 description: Learn more about the Fortinet Firewall pack.
-further_reading:
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
-  tag: "Blog"
-  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
@@ -18,7 +14,3 @@ What this pack does:
 - Drops DNS, health, and internal flows
 - Normalizes fields, adds protocol context
 - Keeps threats, denied, and anomalous logs
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

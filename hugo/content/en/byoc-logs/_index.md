@@ -8,9 +8,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-byoc-minio-aistor/"
   tag: "Blog"
   text: "Bring Datadog BYOC to your on-premises data with MinIO AIStor"
-- link: "https://www.datadoghq.com/blog/simplify-byoc-cluster-operations-with-datadog-operator/"
-  tag: "Blog"
-  text: "Simplify BYOC cluster operations with Datadog Operator"
 aliases:
   - /cloudprem/
 ---
