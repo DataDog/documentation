@@ -129,7 +129,6 @@ The reviewer can only dismiss flagged points. It doesn't narrow the bounds or cr
 
 - If the instructions describe the flagged point as expected, the reviewer dismisses it, even when the metric's history alone doesn't support a dismissal.
 - Instructions that name specific tables, columns, or group values apply only to the series that match them.
-- Instructions can cover every point, for example by asking not to alert on the monitor at all. The reviewer then treats every flagged point as expected.
 
 ## Further reading
 
