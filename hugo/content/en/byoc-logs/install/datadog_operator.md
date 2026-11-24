@@ -1,6 +1,6 @@
 ---
 title: Install BYOC Logs with the Datadog Operator
-description: Deploy a new BYOC cluster and Observability Pipelines Workers on AWS EKS with the Datadog Operator.
+description: Deploy a new BYOC cluster and Observability Pipelines Workers on Amazon EKS with the Datadog Operator.
 further_reading:
 - link: "/containers/datadog_operator/crd_byoccluster/"
   tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Datadog Operator v1.33.0 or later to deploy a new BYOC cluster on AWS EKS. A `DatadogBYOCCluster` custom resource declares the BYOC engine components and the Observability Pipelines Workers that send logs to them. The Operator creates and reconciles their Kubernetes resources, configures the Worker-to-indexer connection, and reports their availability.
+Use Datadog Operator v1.33.0 or later to deploy a new BYOC cluster on Amazon EKS. A `DatadogBYOCCluster` custom resource declares the BYOC engine components and the Observability Pipelines Workers that send logs to them. The Operator creates and reconciles their Kubernetes resources, configures the Worker-to-indexer connection, and reports their availability.
 
 This guide covers new deployments on AWS using the [reverse connection to Datadog][1]. The Operator does not support BYOC Ingress configuration. If your deployment requires Ingress, contact your Datadog representative. For GCP or Azure, use the [Helm installation guides][2].
 
@@ -23,7 +23,7 @@ The Operator uses default images for the BYOC engine and Workers. Upgrading the 
 
 ## Prerequisites
 
-- Access to BYOC Logs and Observability Pipelines in your Datadog organization.
+- BYOC Logs and Observability Pipelines enabled in your Datadog organization. To request access to BYOC Logs, contact your Datadog account team or [Datadog Support][22].
 - An EKS cluster that meets the [BYOC Kubernetes cluster requirements][21], with `kubectl` access and Helm installed.
 - An S3 bucket and a PostgreSQL database reachable from the BYOC pods. The Operator does not provision these services. See the [AWS prerequisites][4].
 - An IAM role with the [required S3 permissions][5] and an IRSA trust policy for the BYOC service account.
@@ -36,7 +36,7 @@ The example uses one replica per required component. Size [resources, replicas, 
 
 For this example, configure the [IRSA role][6] to trust `system:serviceaccount:byoc:byoc-demo` with audience `sts.amazonaws.com`. Set its ARN in `spec.provider.aws.irsaRoleARN`. The Operator creates the `byoc-demo` service account in the `byoc` namespace.
 
-## Install the Operator
+## Install the Datadog Operator {#install-the-operator}
 
 The BYOC controller is disabled by default. Enable it and install both the `DatadogBYOCCluster` and `DatadogObservabilityPipelinesWorker` CRDs. You create the `DatadogBYOCCluster` resource; the Operator creates and manages its Worker resources.
 
@@ -76,7 +76,7 @@ watchNamespaces:
   - ""
 ```
 
-Use Datadog Operator Helm chart version 2.33.0 or later with the chart's default Operator image. The chart version and Operator image version are separate version numbers.
+Use a Helm chart for Datadog Operator v1.33.0 or later with the chart's default Operator image. The chart version and Operator image version are separate version numbers.
 
 `watchNamespaces: [""]` watches all namespaces, including the `byoc` namespace used in this guide. To restrict the watch scope, list the namespaces to manage, including `byoc`. If you omit this setting, the Operator watches only its installation namespace.
 
@@ -84,11 +84,13 @@ For a new Operator installation, run:
 
 ```shell
 helm install datadog-operator datadog/datadog-operator \
-  --version 2.33.0 \
+  --devel \
   --namespace datadog \
   --create-namespace \
   --values operator-values.yaml
 ```
+
+The `--devel` flag includes pre-release chart versions, such as release candidates. Without this flag, Helm selects the latest stable chart. To pin a specific chart version, use `--version`; this option takes precedence over `--devel`.
 
 If an Operator is already installed, enable `datadogBYOCCluster` and the two BYOC-related CRDs in its existing values file. Upgrade that release in its existing namespace. Preserve other enabled controllers and CRDs. Don't apply the `false` settings from the previous example. Include `byoc` in its watch scope. See [Operator installation][9].
 
@@ -131,7 +133,7 @@ kubectl create secret generic byoc-postgres \
 
 Use the database connection parameters required by your PostgreSQL service, including TLS parameters where required. URL-encode special characters in the username and password.
 
-## Create the BYOC cluster
+## Create the cluster {#create-the-byoc-cluster}
 
 Save the following configuration as `byoc-cluster.yaml`. Replace `<AWS_ACCOUNT_ID>`, `<BYOC_ROLE>`, `<PIPELINE_ID>`, and `<S3_BUCKET>`. Set the AWS region to match the bucket and set `spec.datadog.site` to your [Datadog site][13]. Replace `<SOURCE_PORT_NAME>` and `<SOURCE_PORT>` with the [port name and numeric port][19] for the source you configured in the pipeline.
 
@@ -259,3 +261,4 @@ Deleting the cluster doesn't delete the corresponding S3 bucket or PostgreSQL da
 [19]: /containers/datadog_operator/crd_byoccluster/#pipelines-and-ports
 [20]: https://app.datadoghq.com/byoc-logs
 [21]: /byoc-logs/install/#kubernetes-cluster-requirements
+[22]: /help/
