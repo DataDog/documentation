@@ -23,7 +23,7 @@ CrowdStrike Falcon Data Replicator (FDR) exports raw event data from the CrowdSt
 
 **Note**: The CrowdStrike FDR source requires Worker version 2.26.0 or later.
 
-<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not connect multiple log pipelines or tools to the same FDR queue. Otherwise, each consumer receives only part of the data. If another tool already reads from your FDR feed, stop it before setting up this source.</div>
+<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not connect multiple log pipelines or tools to the same FDR queue. If multiple consumers read from the same queue, each one receives only part of the data. If another tool already reads from your FDR feed, stop it before setting up this source.</div>
 
 ### Choose a setup based on where FDR stores your data
 
@@ -38,10 +38,9 @@ The rest of this page covers the CrowdStrike hosted storage bucket. For a custom
 
 ## Prerequisites
 
-To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. See [Create a feed][2] for instructions.
-  - For {{< ui >}}Storage{{< /ui >}}, choose **CrowdStrike hosted storage bucket**, then select the events to include in the feed.
+To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. The Observability Pipelines CrowdStrike FDR source authenticates with the feed's client ID and secret. Because CrowdStrike manages the bucket and queue, assuming an IAM role is not supported. To create the feed, follow CrowdStrike's [Create a feed][2] instructions with these settings:
+  - For {{< ui >}}Storage{{< /ui >}}, choose {{< ui >}}CrowdStrike hosted storage bucket{{< /ui >}} then select the events to include in the feed.
   - On the {{< ui >}}Copy feed credentials{{< /ui >}} page, copy the values in the following table. You need them when you set up the source.
-    - The Observability Pipelines CrowdStrike FDR source authenticates with the feed's client ID and secret because CrowdStrike manages the bucket and queue, assuming an IAM role is not supported.
 
     | CrowdStrike value | Observability Pipelines setting                | Default secret identifier                      |
     |-------------------|------------------------------------------------|------------------------------------------------|
@@ -63,7 +62,7 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 1. Enter the identifier for your SQS queue URL in {{< ui >}}SQS Queue URL Key{{< /ui >}}. The identifier references your feed's notifications URL, such as `https://sqs.us-west-2.amazonaws.com/123456789012/cs-example-queue`. If you leave the identifier field blank, the [default][7] is used.
 1. Enter the identifier for your AWS access key ID in {{< ui >}}AWS Access Key ID Key{{< /ui >}}. If you leave it blank, the [default][7] is used.
 1. Enter the identifier for your AWS secret access key in {{< ui >}}AWS Secret Access Key Key{{< /ui >}}. If you leave it blank, the [default][7] is used.
-1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed, such as `us-west-2`. Use the storage region shown on the feed credentials page. This field is required.
+1. Select the {{< ui >}}AWS Region{{< /ui >}} of your FDR feed, such as `us-west-2`. Use the storage region from the {{< ui >}}Copy feed credentials{{< /ui >}} page.
 
 {{< img src="observability_pipelines/sources/crowdstrike_fdr_settings.png" alt="The CrowdStrike FDR source settings in the pipeline UI, showing the SQS Queue URL Key, AWS Access Key ID Key, AWS Secret Access Key Key, AWS Region, and optional settings" style="width:45%;" >}}
 
@@ -76,9 +75,10 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 - {{< ui >}}Visibility timeout{{< /ui >}}: Enter the number of seconds a received SQS message is hidden from other receivers while the Worker processes its files.
     - Minimum value is `0`. Maximum value is `43200` (12 hours). Default is `300` (5 minutes).
     - If the Worker takes longer than the timeout to process the files in a message, the message is delivered again, which can result in duplicate logs. Increase the visibility timeout value if your feed contains large files.
-- {{< ui >}}Number of receivers{{< /ui >}}: Enter the number of concurrent tasks polling the SQS queue. Defaults is the number of Worker threads.
+- {{< ui >}}Number of receivers{{< /ui >}}: Enter the number of concurrent tasks polling the SQS queue.
+    - Minimum value is `1`. Default is the number of Worker threads.
 - {{< ui >}}Messages per poll{{< /ui >}}: Enter the maximum number of SQS messages to receive in each poll.
-    - Minimum is `1`. Maximum is `10`. Default is `1`.
+    - Minimum value is `1`. Maximum value is `10`. Default is `1`.
     - SQS can return fewer messages than the maximum. This setting limits the number of notifications per request, not the number of files in each notification.
 
 #### Configure TLS
