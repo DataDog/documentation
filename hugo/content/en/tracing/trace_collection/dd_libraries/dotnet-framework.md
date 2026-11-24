@@ -61,7 +61,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 
 ## Installation and getting started
 
-<div class="alert alert-tip">Datadog recommends <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), which installs and loads the .NET SDK without changes to your application code. SSI manages SDK installation and versions in your Datadog Agent configuration instead of in each application. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
+<div class="alert alert-tip">Datadog recommends <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), which installs and loads the .NET SDK without changes to your application code. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
 
 <div class="alert alert-info">
   To set up Datadog APM in Serverless environments, such as AWS Lambda or Azure Functions, see <a href="/serverless">Serverless</a>.
