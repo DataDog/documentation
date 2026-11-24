@@ -113,7 +113,6 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 ### Prerequisites for configuring the Agent's Collector
 
 - [Remote Configuration][2] enabled for your organization and the Agent's API key
-- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
 - Agent version 7.82+ with the [Agent's Collector][9] enabled
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
 
@@ -138,7 +137,7 @@ You can send a flare from the Agent's Collector after you enable Remote Configur
 
 ## Upgrade the Agent's Collector
 
-To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
+The Agent's Collector is bundled with the Agent, so upgrading the Agent also upgrades its Collector. To upgrade Agents remotely, see [Upgrade Agents][14].
 
 ## Further Reading
 
@@ -149,7 +148,6 @@ To upgrade Agents and their Collectors remotely, see [Upgrade Agents][14].
 [4]: /opentelemetry/integrations/datadog_extension/#setup
 [6]: /agent/fleet_automation/fleet_view/#view-audit-trail-events
 [7]: /agent/fleet_automation/fleet_view/#monitor-agent-and-otel-collector-health
-[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
 [9]: /opentelemetry/setup/ddot_collector/install/
 [10]: https://app.datadoghq.com/fleet/agent-management
 [11]: https://app.datadoghq.com/fleet/deployments
