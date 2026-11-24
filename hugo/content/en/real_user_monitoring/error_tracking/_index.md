@@ -2,12 +2,6 @@
 title: Error Tracking for Web and Mobile Applications
 description: Learn how to search and manage errors collected from your web and mobile applications.
 further_reading:
-- link: "/real_user_monitoring/error_tracking/explorer"
-  tag: "Documentation"
-  text: "Learn about the Error Tracking Explorer"
-- link: "/monitors/types/error_tracking/"
-  tag: "Documentation"
-  text: "Create an Error Tracking monitor"
 - link: "https://www.datadoghq.com/blog/error-tracking/"
   tag: "Blog"
   text: "Make sense of application issues with Datadog Error Tracking"
@@ -20,9 +14,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/error-tracking-logs/"
   tag: "Blog"
   text: "Track and triage errors in your logs with Datadog Error Tracking"
-- link: "https://www.datadoghq.com/blog/monitor-native-apps-datadog-rum/"
-  tag: "Blog"
-  text: "Monitor C and C++ applications with Datadog RUM"
+- link: "/real_user_monitoring/error_tracking/explorer"
+  tag: "Documentation"
+  text: "Learn about the Error Tracking Explorer"
+- link: "/monitors/types/error_tracking/"
+  tag: "Documentation"
+  text: "Create an Error Tracking monitor"
 algolia:
   tags: ['error tracking']
 ---

@@ -9,9 +9,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
   tag: "Blog"
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
-- link: "https://www.datadoghq.com/blog/online-experiments-agent-observability/"
-  tag: "Blog"
-  text: "Compare AI agent changes with Online Experiments in Agent Observability"
 ---
 
 This guide describes how to set up and use Agent Observability offline experiments with the Python or Node.js SDK. See [runnable Node.js experiment examples][7].

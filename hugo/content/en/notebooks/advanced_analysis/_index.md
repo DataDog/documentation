@@ -18,9 +18,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
   tag: "Learning Center"
   text: "Using Datadog Notebooks for Centralized Reporting"
-- link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
-  tag: "Blog"
-  text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 
 ---
 

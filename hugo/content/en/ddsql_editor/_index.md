@@ -20,9 +20,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/advanced-analysis-tools/"
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
-- link: "https://www.datadoghq.com/blog/prompt-cache-investigation-ccm-agent-observability/"
-  tag: "Blog"
-  text: "How we investigated prompt cache misses with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}

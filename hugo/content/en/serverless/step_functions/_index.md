@@ -22,9 +22,6 @@ further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"
     text: "Disable Serverless Monitoring"
-  - link: "https://www.datadoghq.com/blog/serverless-ai-agents/"
-    tag: "Blog"
-    text: "Default to serverless for AI agents, then let production data decide what moves"
 ---
 
 AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows. In addition to getting CloudWatch metrics from Datadog's [AWS Step Functions integration][2], Datadog also provides AWS Step Function tracing, logs, and [enhanced metrics][3] through the collection of CloudWatch logs.
