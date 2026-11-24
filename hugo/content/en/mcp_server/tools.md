@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 ## Overview
@@ -593,7 +596,7 @@ Discovers available tag keys on spans within a time range.
 ### `apm_get_config`
 *Toolset: **apm***\
 *Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
-Retrieves the [runtime configuration][112] applied through Remote Configuration for one service and environment, including every sampling rule the service applies, whether your organization or Adaptive Sampling set it. Request specific keys, or omit them to return the full configuration.
+Retrieves the [runtime configuration][113] applied through Remote Configuration for one service and environment, including every sampling rule the service applies, whether your organization or Adaptive Sampling set it. Request specific keys, or omit them to return the full configuration.
 
 - What runtime configuration is applied to the checkout service in prod?
 
@@ -608,7 +611,7 @@ Lists the remote sampling rules your organization created, each setting a fixed 
 ### `check_adaptive_sampling_service_eligibility`
 *Toolset: **apm***\
 *Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
-Checks whether a service and environment can use [Adaptive Sampling][113]. Returns whether the service is eligible, its onboarding and target state, prerequisites, and any blockers.
+Checks whether a service and environment can use [Adaptive Sampling][114]. Returns whether the service is eligible, its onboarding and target state, prerequisites, and any blockers.
 
 - Can the checkout service in prod use Adaptive Sampling?
 - What's blocking the payments service from onboarding to Adaptive Sampling?
@@ -623,7 +626,7 @@ Retrieves the organization-wide Adaptive Sampling target, including whether one 
 ### `search_apm_retention_filters`
 *Toolset: **apm***\
 *Permissions Required: `APM Retention Filters Read`*\
-Lists the organization's [retention filters][114] in execution order, or retrieves one filter by ID. Retention filters decide which spans are indexed and stay searchable in the Trace Explorer. A span is kept by the first filter it matches, so the order determines which rate applies. Filter the list by name, query, or enabled status.
+Lists the organization's [retention filters][115] in execution order, or retrieves one filter by ID. Retention filters decide which spans are indexed and stay searchable in the Trace Explorer. A span is kept by the first filter it matches, so the order determines which rate applies. Filter the list by name, query, or enabled status.
 
 - Why aren't errors from the checkout service showing up in the Trace Explorer?
 - List the enabled retention filters in my organization.
@@ -724,6 +727,66 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Provide an Audit Trail query to see who created new monitors in the past 2 weeks.
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
+
+## Bits Guardrails
+
+Tools for [Bits Guardrails][112]. Guardrails define which remediation actions Bits can take, where those actions apply, and who needs to approve them. Each guardrail covers a set of actions, is scoped to resources by tags, and sets whether Bits needs approval before taking the action (ask) or can recommend the action but not take it (deny). When several guardrails match an action, the strictest one applies.
+
+Write tools change how much oversight Bits has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
+
+### `list_bits_guardrails`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
+
+- Which remediation actions need approval before Bits can take them?
+- List the guardrails that cover Kubernetes deployment restarts.
+
+### `get_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Retrieves a guardrail by ID. Beyond what `list_bits_guardrails` returns, the result includes the looser guardrails that this one makes ineffective.
+
+- Show me the details of guardrail `abc123`.
+- Which guardrails does the production deny guardrail override?
+
+### `list_bits_guardrail_actions`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists the Bits remediation actions that a guardrail can cover, with each action's ID and the infrastructure it runs on.
+
+- What remediation actions can a guardrail cover?
+- List the Kubernetes actions that guardrails can control.
+
+### `search_bits_guardrail_approvers`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Teams Read` and `User Access Read`*\
+Searches your organization's teams, roles, and active users for approvers to name on an ask guardrail. Use it while creating or updating a guardrail to find the approver values that `create_bits_guardrail` and `update_bits_guardrail` require.
+
+- Find the SRE team so I can add it as an approver on the production guardrail.
+
+### `create_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Creates a guardrail with a trust level, one or more actions from `list_bits_guardrail_actions` (all for the same type of infrastructure), the resource tags it applies to, and, for ask guardrails, its approvers. For an ask guardrail, you can also choose Slack channels where Bits posts approval requests when it needs to take a covered action. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
+
+- Require approval from the SRE team before Bits restarts or rolls back Kubernetes deployments tagged `env:prod`.
+- Prevent Bits from scaling Kubernetes deployments tagged `team:payments`.
+
+### `update_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read` and `Guardrails Write`*\
+Updates a guardrail. Only the fields you provide change, and omitted fields keep their current values.
+
+- Change the staging deployment-restart guardrail from ask to deny.
+- Add the platform team as an approver on guardrail `abc123`.
+
+### `delete_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Deletes a guardrail. Deleting an ask or deny guardrail can let a looser guardrail take effect for the same actions.
+
+- Delete the guardrail for the decommissioned checkout cluster.
 
 ## Cases (Work Management)
 
@@ -4162,9 +4225,10 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [109]: /containers/monitoring/amazon_elastic_container_explorer/
 [110]: /containers/amazon_ecs/
 [111]: /bits_ai/bits_detection/
-[112]: /tracing/trace_collection/runtime_config/
-[113]: /tracing/trace_pipeline/adaptive_sampling/
-[114]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[112]: /bits_ai/bits_remediation/guardrails/
+[113]: /tracing/trace_collection/runtime_config/
+[114]: /tracing/trace_pipeline/adaptive_sampling/
+[115]: /tracing/trace_pipeline/trace_retention/#retention-filters
 
 ## Further reading
 
