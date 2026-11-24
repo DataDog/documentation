@@ -93,6 +93,36 @@ ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA sales GRANT SELECT ON TABL
 
 To run this command, you must be a member of the `app_owner` role or a superuser.
 
+#### Grant read access to all schemas
+
+To grant read access to every schema at once, use one of the following methods.
+
+On PostgreSQL 14 and later, grant the predefined `pg_read_all_data` role to the `datadog` user. The user can then read every table in every schema and database of the instance, including tables created later:
+
+```sql
+GRANT pg_read_all_data TO datadog;
+```
+
+On any version, run the following block in each database to scan. It runs the commands above for each schema, except the system schemas:
+
+```sql
+DO $$
+DECLARE
+  schema_name text;
+BEGIN
+  FOR schema_name IN
+    SELECT nspname FROM pg_namespace
+    WHERE nspname NOT LIKE 'pg\_%' AND nspname <> 'information_schema'
+  LOOP
+    EXECUTE format('GRANT USAGE ON SCHEMA %I TO datadog', schema_name);
+    EXECUTE format('GRANT SELECT ON ALL TABLES IN SCHEMA %I TO datadog', schema_name);
+    EXECUTE format('ALTER DEFAULT PRIVILEGES IN SCHEMA %I GRANT SELECT ON TABLES TO datadog', schema_name);
+  END LOOP;
+END $$;
+```
+
+The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema.
+
 Tables the `datadog` user can't read appear as setup issues in the side panel.
 
 ## Enable scanning

@@ -54,7 +54,7 @@ The following diagram shows where each scan runs and what Datadog receives. For 
 | | Snowflake | PostgreSQL | Amazon S3 |
 |---|---|---|---|
 | **Does scanned data leave your environment?** | Yes. Sampled rows are read by a Datadog-hosted scanner and held in memory only during the scan. Datadog stores only the match metadata. | No. The Agent scans the data in your environment and sends only the match metadata to Datadog. | With a scanner in your AWS account, no. The scanner reads files in your account and sends only the match metadata to Datadog. With a Datadog-hosted scanner, yes. Files are read by a scanner that runs in a disposable sandbox hosted by Datadog. Datadog stores only the match metadata. |
-| **Sample size** | 100 rows per table | A sample of rows per table | Up to 1,000 files per bucket |
+| **Sample size** | A sample of rows per table | A sample of rows per table | Up to 1,000 files per bucket |
 | **Scan frequency** | Every table at least once a week | Continuously, a few tables at a time | Each bucket at most once every 7 days |
 
 Because Data Security scans a sample, a resource with no finding is not guaranteed to be free of sensitive data.
