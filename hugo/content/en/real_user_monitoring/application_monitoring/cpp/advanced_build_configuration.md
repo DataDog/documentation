@@ -4,7 +4,7 @@ description: >-
   Configure the Datadog C++ SDK build for non-CMake projects, customize CMake
   options, and understand platform-specific linker requirements.
 further_reading:
-- link: /real_user_monitoring/application_monitoring/cpp/setup
+- link: /real_user_monitoring/setup/install/?platform=cpp
   tag: Documentation
   text: C / C++ Monitoring Setup
 - link: "https://github.com/DataDog/dd-sdk-cpp"
@@ -210,7 +210,7 @@ If using `DD_CRASH_MODE=crashpad`, you'll also need to copy the crashpad handler
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/cpp/setup
+[1]: /real_user_monitoring/setup/install/?platform=cpp
 [2]: https://github.com/DataDog/dd-sdk-cpp/blob/main/cmake/DatadogConvenience.cmake
 [3]: https://github.com/DataDog/dd-sdk-cpp
 [4]: https://github.com/DataDog/dd-sdk-cpp/releases

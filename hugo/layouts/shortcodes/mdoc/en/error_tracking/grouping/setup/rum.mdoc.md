@@ -176,5 +176,5 @@ configuration.errorEventMapper = event => {
 
 [3]: /real_user_monitoring/application_monitoring/browser/
 [4]: /real_user_monitoring/application_monitoring/#get-started
-[5]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
+[5]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=browser
 [6]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0

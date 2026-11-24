@@ -2,7 +2,7 @@
 title: Electron Monitoring
 description: Collect RUM and Error Tracking data from your Electron applications.
 further_reading:
-- link: /real_user_monitoring/application_monitoring/electron/advanced_configuration
+- link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron
   tag: Documentation
   text: RUM Electron Advanced Configuration
 - link: https://github.com/DataDog/electron-sdk
@@ -26,9 +26,9 @@ RUM for Electron monitors both layers of your application:
 To get started with RUM for Electron, create an application and configure the Electron SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/electron/setup">}}<u>Setup</u>: Learn how to set up the Electron SDK and send data to Datadog.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/install/?platform=electron">}}<u>Setup</u>: Learn how to set up the Electron SDK and send data to Datadog.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/electron/error_tracking">}}<u>Error Tracking</u>: Track main process errors and crashes, and get deobfuscated stack traces.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/electron/advanced_configuration">}}<u>Advanced Configuration</u>: Configure sampling, tracking consent, and event enrichment.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/electron/data_collected">}}<u>Data Collected</u>: Review data collected by the RUM Electron SDK.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/electron/troubleshooting">}}<u>Troubleshooting</u>: Resolve common setup and runtime issues.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron">}}<u>Advanced Configuration</u>: Configure initialization parameters and allowed renderer hosts.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/data_collected/?platform=electron">}}<u>Data Collected</u>: Review data collected by the RUM Electron SDK.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/reference/troubleshooting/?platform=electron">}}<u>Troubleshooting</u>: Resolve common setup and runtime issues.{{< /nextlink >}}
 {{< /whatsnext >}}

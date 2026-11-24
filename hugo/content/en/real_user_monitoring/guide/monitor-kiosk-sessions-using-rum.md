@@ -3,7 +3,7 @@ title: Monitor Kiosk Sessions Using RUM
 
 description: Guide for monitoring kiosk sessions with RUM.
 further_reading:
-- link: '/real_user_monitoring/platform/dashboards/'
+- link: '/real_user_monitoring/administer_and_extend_rum/dashboards/'
   tag: 'Documentation'
   text: 'RUM Dashboards'
 
@@ -68,7 +68,7 @@ This feature requires RUM iOS SDK version >= 1.18.0. See installation instructio
 RUMMonitor.shared().stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/
+[1]: /real_user_monitoring/setup/install/?platform=ios
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -79,7 +79,7 @@ This feature requires RUM Android SDK version >= 1.19.0. See installation instru
 GlobalRumMonitor.get().stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/android/
+[1]: /real_user_monitoring/setup/install/?platform=android
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -90,7 +90,7 @@ This feature requires RUM Flutter SDK version >= 1.4.0. See installation instruc
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup/
+[1]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=flutter
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -101,7 +101,7 @@ This feature requires RUM React Native SDK version >= 1.6.0. See installation in
 DdRum.stopSession()
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+[1]: /real_user_monitoring/setup/install/?platform=react_native
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -110,9 +110,9 @@ DdRum.stopSession()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
-[2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
-[4]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#track-user-sessions
-[5]: /real_user_monitoring/reactnative/#user-information
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#clear-user-information
+[2]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
+[3]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android#set-user-information
+[4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter#set-user-information
+[5]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=react_native
 [6]: /real_user_monitoring/application_monitoring/browser/

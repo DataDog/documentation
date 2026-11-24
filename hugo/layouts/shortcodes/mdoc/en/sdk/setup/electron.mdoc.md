@@ -16,19 +16,6 @@ Before you begin, you need:
 - A Datadog account with RUM enabled
 - Electron 39 or later, on Linux, macOS, or Windows
 
-## Create the application in Datadog
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][setup-create-1].
-2. Select **Electron** as the application type.
-3. Copy the client token and application ID. You need them to initialize the SDK.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][setup-create-2] instead.
-{% /alert %}
-
-[setup-create-1]: https://app.datadoghq.com/rum/application/create
-[setup-create-2]: https://app.datadoghq.com/error-tracking/settings/setup/client
-
 ## Install the SDK
 
 Add `@datadog/electron-sdk` to your application:
@@ -86,8 +73,8 @@ Windows opened before `init` completes are not tracked until you reload them. Th
 
 To wait for the end user's consent, don't defer `init`. Call it at startup with `trackingConsent: 'pending'` instead. See [Set tracking consent][setup-init-2].
 
-[setup-init-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
-[setup-init-2]: /real_user_monitoring/application_monitoring/electron/setup/#set-tracking-consent
+[setup-init-1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#allowed-renderer-hosts
+[setup-init-2]: #set-tracking-consent
 
 ## Set up renderer processes
 
@@ -100,10 +87,10 @@ Renderer processes are monitored by the Browser SDK.
 Sampling, Session Replay, and profiling options are set in the main process `init` call, and the main process manages sessions. The values set in the renderer for these options, including `sessionPersistence`, are ignored.
 {% /alert %}
 
-For details on `allowedRendererHosts`, see [Advanced Configuration][setup-renderer-2].
+For details on `allowedRendererHosts`, see [Allowed renderer hosts][setup-renderer-2].
 
-[setup-renderer-1]: /real_user_monitoring/application_monitoring/browser/setup/
-[setup-renderer-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
+[setup-renderer-1]: /real_user_monitoring/setup/install/?platform=browser
+[setup-renderer-2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#allowed-renderer-hosts
 
 ## Configure your bundler
 
@@ -237,17 +224,4 @@ setTrackingConsent(accepted ? 'granted' : 'not-granted');
 
 The SDK does not restore the consent at the next launch, so pass it at each launch. Set the consent in the main process. For the possible values and their effects, see [Tracking consent][setup-consent-1].
 
-[setup-consent-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#tracking-consent
-
-## Next steps
-
-After you run your app, navigate to the [RUM Explorer][setup-next-1] to see sessions from your application.
-
-- [Advanced Configuration][setup-next-2]: Configure sampling, event enrichment, and renderer options.
-- [Error Tracking][setup-next-3]: Track main process errors and crashes.
-- [Data Collected][setup-next-4]: Review the data collected by the SDK.
-
-[setup-next-1]: /real_user_monitoring/explorer/
-[setup-next-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration
-[setup-next-3]: /real_user_monitoring/application_monitoring/electron/error_tracking
-[setup-next-4]: /real_user_monitoring/application_monitoring/electron/data_collected
+[setup-consent-1]: /real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=electron#tracking-consent

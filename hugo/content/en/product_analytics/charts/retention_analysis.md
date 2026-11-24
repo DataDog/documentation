@@ -99,4 +99,4 @@ Reading the **Aug 17 2026** row of the above graph from left to right:
 - 41% of those users also completed the return event within the same week.
 - 23% completed the return event after 1 week, 20% after 2 weeks, and 11% after 3 weeks.
 
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information

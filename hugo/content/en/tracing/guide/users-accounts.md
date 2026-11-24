@@ -2,7 +2,7 @@
 title: Setting and Querying User and Account Information in Traces
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/correlate_with_other_telemetry/apm/"
+- link: "/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/"
   tag: "Documentation"
   text: "Connect RUM and APM"
 - link: "/standard-attributes/"
@@ -101,9 +101,9 @@ This enables proactive monitoring and ensures you can respond quickly when high-
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/#identify-user-session
-[2]: /real_user_monitoring/browser/advanced_configuration/#identify-account
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
+[2]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-account-information
+[3]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [4]: /standard-attributes/?search=usr.id
 [5]: /tracing/trace_collection/custom_instrumentation/
 [6]: /tracing/trace_collection/trace_context_propagation/#baggage

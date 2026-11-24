@@ -32,7 +32,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 {{% tab "Swift Package Manager (SPM)" %}}
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.17.0"))
 ```
 
 In your project, link the following libraries:

@@ -6,7 +6,7 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Learn about Product Analytics"
-- link: "/real_user_monitoring/rum_without_limits/"
+- link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
   tag: "Documentation"
   text: "Learn about RUM without Limits"
 - link: "/real_user_monitoring/"

@@ -3,13 +3,15 @@ This partial contains setup instructions for the Unity SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Unity SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][2] for specific steps.
+This page describes how to instrument your Unity applications with the Datadog Unity SDK.
+
+The Unity SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][2], and [Product Analytics][11].
 
 {% alert level="info" %}
 Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 {% /alert %}
 
-Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][7].
+Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support][3].
 
 
 ## Setup
@@ -20,7 +22,7 @@ Datadog does not support Desktop (Windows, Mac, or Linux) or console deployments
 
 2. Add the Datadog SDK Unity package from its Git URL at [https://github.com/DataDog/unity-package][6]. The package URL is `https://github.com/DataDog/unity-package.git`.
 
-3. (Android only) Configure your project to use [Gradle templates][8], and enable both {% ui %}Custom Main Template{% /ui %} and {% ui %}Custom Gradle Properties Template{% /ui %}.
+3. (Android only) Configure your project to use [Gradle templates][7], and enable both {% ui %}Custom Main Template{% /ui %} and {% ui %}Custom Gradle Properties Template{% /ui %}.
 
 4. (Android only) If you build and receive `Duplicate class` errors (common in Unity 2022.x), add the following code to the `dependencies` block of your `mainTemplate.gradle`:
 
@@ -34,7 +36,7 @@ constraints {
 
 #### WebGL
 
-1. Create a custom WebGL template, following the instructions provided by [Unity][9], or by using the minimally modified version in Datadog's [GitHub repo][10].
+1. Create a custom WebGL template, following the instructions provided by [Unity][8], or by using the minimally modified version in Datadog's [GitHub repo][9].
 
 2. If you are using your own WebGL template, or have added a new WebGL template, modify it to include the Datadog Browser SDK delivered by CDN.
 
@@ -42,15 +44,6 @@ constraints {
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js"></script>
 ```
-{% /step %}
-
-{% step title="Specify application details in the UI" %}
-1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}][11].
-2. Choose {% ui %}Unity{% /ui %} as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
-
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][12].
 {% /step %}
 
 {% step title="Configure Datadog settings in Unity" %}
@@ -84,16 +77,10 @@ The following parameters are available:
 | {% ui %}Track Non-Fatal App Hangs{% /ui %} | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
 | {% ui %}First Party Hosts{% /ui %} | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
-#### Sample RUM sessions
-
-You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the {% ui %}Session Sample Rate{% /ui %} as a percentage between 0 and 100 in the {% ui %}Project Settings{% /ui %} window in Unity.
+You can adjust the {% ui %}Session Sample Rate{% /ui %}, but Datadog recommends using [retention filters][12] to control retained volume.
 {% /step %}
 
-{% /stepper %}
-
-## Using Datadog
-
-### Setting tracking consent
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
 To be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
 
@@ -110,7 +97,17 @@ and needs to be set to `TrackingConsent.Granted` before Datadog sends any inform
 DatadogSdk.Instance.SetTrackingConsent(TrackingConsent.Granted);
 ```
 
-### Logging
+{% /step %}
+
+{% step title="Enable RUM to start sending data" %}
+
+Select {% ui %}Enable RUM{% /ui %} in the Datadog section of your {% ui %}Project Settings{% /ui %} and set your {% ui %}RUM Application ID{% /ui %}. See [Enable the Datadog RUM Module][13] for the next steps.
+
+{% /step %}
+
+{% /stepper %}
+
+## Logging
 
 You can intercept and send logs from Unity's default debug logger by enabling the option and threshold in your projects settings.
 
@@ -150,36 +147,6 @@ logger.Debug("Hello with attributes", new()
 });
 ```
 
-### Real User Monitoring (RUM)
-
-#### Manual Scene (View) Tracking
-
-To manually track new Scenes (`Views` in Datadog), use the `StartView` and `StopView` methods:
-
-```csharp
-public void Start()
-{
-    DatadogSdk.Instance.Rum.StartView("My View", new()
-    {
-        { "view_attribute": "active" }
-    });
-}
-```
-
-Starting a new view automatically ends the previous view.
-
-#### Automatic Scene Tracking
-
-You can also set {% ui %}Enable Automatic Scene Tracking{% /ui %} in your {% ui %}Project Settings{% /ui %} to enable automatically tracking active scenes. This uses Unity's `SceneManager.activeSceneChanged` event to automatically start new scenes.
-
-#### Web Requests / Resource Tracking
-
-Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][3].
-
-To enable Datadog Distributed Tracing, you must set the {% ui %}First Party Hosts{% /ui %} in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the {% ui %}Tracing Sampling Rate{% /ui %}.
-
-{% ui %}First Party Hosts{% /ui %} does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
-
 ## Sending data when device is offline
 
 RUM helps ensure availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
@@ -190,14 +157,13 @@ This means that even if users open your application while offline, no data is lo
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/unity/
-[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
+[3]: /help/
 [4]: https://github.com/googlesamples/unity-jar-resolver
 [5]: https://openupm.com/packages/com.google.external-dependency-manager/
 [6]: https://github.com/DataDog/unity-package
-[7]: /help/
-[8]: https://docs.unity3d.com/Manual/gradle-templates.html
-[9]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
-[10]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
-[11]: https://app.datadoghq.com/rum/application/create
-[12]: /account_management/api-app-keys/#client-tokens
-
+[7]: https://docs.unity3d.com/Manual/gradle-templates.html
+[8]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
+[9]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
+[11]: /product_analytics/
+[12]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[13]: /real_user_monitoring/setup/enable_rum/?platform=unity

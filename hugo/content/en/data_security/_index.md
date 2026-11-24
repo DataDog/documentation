@@ -161,7 +161,7 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[21]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser
 [22]: /session_replay/privacy_options?platform=browser
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/

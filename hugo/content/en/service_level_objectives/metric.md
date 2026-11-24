@@ -71,7 +71,7 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/tracing/generate_metrics/
-[2]: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics
+[2]: https://docs.datadoghq.com/real_user_monitoring/measure_health_with_metrics/create_custom_metrics
 [3]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/#overview
 [4]: /service_level_objectives
 [5]: https://app.datadoghq.com/slo

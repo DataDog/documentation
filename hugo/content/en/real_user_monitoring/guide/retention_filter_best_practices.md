@@ -2,13 +2,13 @@
 title: Retention Filter Best Practices
 description: Learn the best practices for sequencing your retention filters to store the RUM data you need.
 further_reading:
-  - link: '/real_user_monitoring/rum_without_limits/retention_filters'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
     tag: Documentation
     text: Retention Filters
-  - link: '/real_user_monitoring/rum_without_limits/'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/'
     tag: Documentation
     text: RUM without Limits
-  - link: '/real_user_monitoring/rum_without_limits/metrics'
+  - link: '/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/'
     tag: Documentation
     text: Analyze Performance with Metrics
   - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
@@ -128,6 +128,6 @@ Below we describe the set of default filters, suggested filters, and their typic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
-[2]: /real_user_monitoring/rum_without_limits/retention_filters/#how-it-works
-[3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-events-with-a-filter-query
-[4]: /real_user_monitoring/rum_without_limits/retention_filters#exclusion-filters
+[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#how-it-works
+[3]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#excluding-events-with-a-filter-query
+[4]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#exclusion-filters

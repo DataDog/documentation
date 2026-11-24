@@ -1834,4 +1834,4 @@ The following chart shows how Datadog applies different image masking strategies
 [3]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
 [4]: /help
 [5]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
-[6]: /real_user_monitoring/application_monitoring/browser/build_plugins/privacy/
+[6]: /real_user_monitoring/setup/additional_plugins/?platform=browser

@@ -47,6 +47,6 @@ Journey Monitoring write access is sufficient to create a journey. Datadog creat
 [3]: /real_user_monitoring/
 [4]: /synthetics/
 [5]: /synthetics/test_suites/
-[6]: /real_user_monitoring/operations_monitoring/
+[6]: /real_user_monitoring/track_critical_operations/
 [7]: /synthetics/test_suites/#service-level-objectives
 [8]: /session_replay/

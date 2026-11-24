@@ -71,4 +71,4 @@ This approach applies across different funnel types:
 
 [1]: /product_analytics/
 [2]: /session_replay/
-[3]: /real_user_monitoring/frustration_signals/
+[3]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser

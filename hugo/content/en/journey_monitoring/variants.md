@@ -54,7 +54,7 @@ In the journey details report, hover over the variant and click the delete icon.
 [3]: /journey_monitoring/details_report/#traffic-and-conversion-trends
 [4]: /product_analytics/charts/funnel_analysis/
 [5]: /error_tracking/
-[6]: /real_user_monitoring/operations_monitoring/
+[6]: /real_user_monitoring/track_critical_operations/
 [7]: /journey_monitoring/configuring_journeys/#step-3-add-synthetic-test-coverage
 [8]: /journey_monitoring/configuring_journeys/#define-start-and-end-conditions
 [9]: /product_analytics/data_collected/

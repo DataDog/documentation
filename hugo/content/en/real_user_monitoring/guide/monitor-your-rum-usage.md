@@ -6,7 +6,7 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Real User Monitoring'
-- link: '/real_user_monitoring/explorer/'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn how to query RUM events'
 - link: '/monitors/'
@@ -79,7 +79,7 @@ To create an anomaly detection monitor to be alerted of unexpected session count
    An unexpected amount of sessions has been captured for application.id {{application.id}}.
 
    1. [Check the session count in the RUM Explorer for this application](https://app.datadoghq.com/rum/explorer?query=%40type%3Asession%20%40application.id%{{application.id}}&viz=timeseries&from_ts=1649824870521&to_ts=1649828470521&live=true).
-   2. [Investigate whether this session count is unexpected in a specific geography or device using the query engine](https://docs.datadoghq.com/real_user_monitoring/explorer/group/).
+   2. [Investigate whether this session count is unexpected in a specific geography or device using the query engine](https://docs.datadoghq.com/real_user_monitoring/investigate_problems/explore_retained_data/group/).
    ```
 
 7. Set permissions and notification settings for this monitor.

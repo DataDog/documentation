@@ -1,9 +1,4 @@
-### Identifying your users
-
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user.
-* Know which users are the most impacted by errors.
-* Monitor performance for your most important users.
+## Set user information
 
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
@@ -11,11 +6,16 @@ Adding user information to your RUM sessions makes it possible to:
 | `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
 | `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
-To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
+To identify user sessions, set the `datadogUserInfo` global field after initializing the SDK. For example:
 
 ```text
     m.global.setField("datadogUserInfo", { id: 42, name: "Abcd Efg", email: "abcd.efg@example.com"})
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/roku/setup
+## Add user properties
+
+The Roku SDK doesn't provide a separate API to add user properties. To update the user information, set the `datadogUserInfo` field again with the complete set of values.
+
+## Clear user information
+
+The Roku SDK doesn't provide an API to clear user information.

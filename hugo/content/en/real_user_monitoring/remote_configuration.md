@@ -35,7 +35,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.1+
 
-<div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
+<div class="alert alert-danger">If your network or proxy uses an allowlist, add the <code>sdk-configuration.</code> host for your Datadog site, listed in <a href="/real_user_monitoring/setup/#additional-endpoints-for-remote-configuration">Additional endpoints for Remote Configuration</a>, in addition to the RUM intake host. For Browser applications, also add this host to your Content Security Policy. The Browser SDK's `proxy` initialization parameter does not apply to Remote Configuration requests, while the iOS and Android proxy configuration does.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
 
 ## How it works
@@ -52,7 +52,7 @@ A remote configuration applies to all users and sessions initialized with its ID
 
 ## Permissions
 
-Remote configuration uses the same permissions as RUM applications. To enable, edit, or publish a configuration, you need the `RUM Apps Write` permission. For more information, see [Real User Monitoring permissions][1].
+Remote configuration uses the same permissions as RUM applications. To enable, edit, or publish a configuration, you need the `RUM Apps Write` permission. For more information, see [Real User Monitoring permissions][1]. If an application's access is restricted, only users with edit access to that application can enable, edit, or publish its remote configuration. See [Configure Permissions][4].
 
 ## Setup
 
@@ -244,6 +244,10 @@ Changes to RUM remote configurations appear in [Datadog Audit Trail][3], where y
 {{% /tab %}}
 {{< /tabs >}}
 
+## Next step
+
+Continue to [Additional Plugins and Integrations](/real_user_monitoring/setup/additional_plugins/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -251,3 +255,4 @@ Changes to RUM remote configurations appear in [Datadog Audit Trail][3], where y
 [1]: /account_management/rbac/permissions/#real-user-monitoring
 [2]: /remote_configuration/
 [3]: /account_management/audit_trail/
+[4]: /real_user_monitoring/administer_and_extend_rum/configure_permissions/

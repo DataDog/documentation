@@ -1,6 +1,9 @@
 ---
 title: Android Crash Reporting and Error Tracking
 description: Set up Error Tracking for your Android applications to monitor crashes, exceptions, and application errors.
+aliases:
+- /real_user_monitoring/application_monitoring/android/error_tracking
+- /real_user_monitoring/mobile_and_tv_monitoring/android/error_tracking
 type: multi-code-lang
 code_lang: android
 code_lang_weight: 10
@@ -11,10 +14,10 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
   text: Source code for dd-sdk-android
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 
@@ -851,7 +854,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ## Limitations
 
 ### File sizing
-[Mapping files](#upload-your-mapping-file) are limited in size to **500 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+[Mapping files](#upload-your-mapping-file) are limited in size to **800 MB** each. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
@@ -866,6 +869,20 @@ datadog {
         "com.squareup.picasso" to "picasso"
     )
 }
+```
+
+If your mapping file is still too large, compress it before upload by setting the `dd-compress-mapping-file` Gradle property (requires Datadog Android Gradle plugin 1.30.0 or later). The 800 MB limit then applies to the compressed file, and the file must be smaller than **2 GB** after decompression.
+
+Set the property in `gradle.properties`:
+
+```properties
+dd-compress-mapping-file=true
+```
+
+Alternatively, set it on the command line when running the upload task:
+
+```bash
+./gradlew uploadMappingRelease -Pdd-compress-mapping-file
 ```
 
 ### Collection
@@ -926,20 +943,20 @@ val inputStream = context.getRawResAsRumResource(id)
 [1]: /error_tracking/
 [2]: https://app.datadoghq.com/rum/error-tracking
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/application_monitoring/android/setup/#setup
+[4]: /real_user_monitoring/setup/install/?platform=android
 [5]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[8]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
-[9]: /real_user_monitoring/application_monitoring/android/data_collected/
+[8]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android
+[9]: /real_user_monitoring/setup/data_collected/?platform=android
 [10]: /getting_started/tagging/using_tags/
-[11]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[12]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[11]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
+[12]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
 [13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/
 [14]: https://square.github.io/okhttp/features/interceptors/
-[15]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#custom-views
+[15]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views
 [16]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
-[17]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[17]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android#automatically-track-network-requests
 [18]: https://developer.android.com/topic/performance/vitals/anr
 [19]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [20]: https://developer.android.com/tools/releases/platforms#11
@@ -947,4 +964,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 [24]: https://app.datadoghq.com/source-code/setup/rum
-[25]: /real_user_monitoring/application_monitoring/android/setup/#track-background-events
+[25]: /real_user_monitoring/setup/install/?platform=android

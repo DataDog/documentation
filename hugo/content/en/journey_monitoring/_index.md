@@ -72,13 +72,13 @@ Use the [Journey Monitoring API][14] to query, create, update, and delete journe
 [2]: /synthetics/
 [3]: /product_analytics/
 [4]: /session_replay/
-[5]: /real_user_monitoring/rum_without_limits/
+[5]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
 [8]: /journey_monitoring/variants/
 [9]: /journey_monitoring/suggested_journeys/
 [10]: /journey_monitoring/details_report/#traffic-and-conversion-trends
-[11]: /real_user_monitoring/operations_monitoring/
+[11]: /real_user_monitoring/track_critical_operations/
 [12]: /synthetics/test_suites/
 [13]: /journey_monitoring/configuring_journeys/
 [14]: /api/latest/dem/
