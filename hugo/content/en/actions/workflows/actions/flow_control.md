@@ -28,7 +28,7 @@ The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed cond
 
 | Question type | Use it to | Answer |
 |---|---|---|
-| `noul` | Get the probability of a yes or no answer. | `noul`: the probability |
+| `noul` | Answer a yes or no question. | `noul`: the probability that the answer is yes, from 0 to 1 |
 | `choice` | Pick one of several named options. | `choice`: the selected option, plus `probabilities` for each option |
 | `score` | Rate against ordered levels, such as severity from low to critical. | `score`: the numeric score, plus `legend` and `probabilities` for each level |
 
