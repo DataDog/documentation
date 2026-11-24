@@ -1647,13 +1647,13 @@ menu:
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
-      parent: bits_ai
-      weight: 6
+      parent: bits_ai_autonomous_operations
+      weight: 101
     - name: Bits Investigation
       url: bits_ai/bits_investigation
       identifier: bits_ai_sre
-      parent: bits_ai
-      weight: 7
+      parent: bits_ai_autonomous_operations
+      weight: 102
     - name: Investigate Issues
       url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
@@ -1697,8 +1697,8 @@ menu:
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
-      parent: bits_ai
-      weight: 10
+      parent: bits_ai_autonomous_operations
+      weight: 103
     - name: Infrastructure Actions
       url: bits_ai/bits_remediation/infrastructure_actions
       identifier: bits_remediation_infrastructure_actions
@@ -1717,8 +1717,8 @@ menu:
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
-      parent: bits_ai
-      weight: 12
+      parent: bits_ai_settings
+      weight: 1301
     - name: Bits AI Settings
       url: bits_ai/bits_settings
       identifier: bits_ai_settings
