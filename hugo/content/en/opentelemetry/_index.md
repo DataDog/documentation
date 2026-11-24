@@ -59,7 +59,7 @@ Use Datadog to monitor service health and investigate problems with your [OpenTe
 
 - **Monitor your services**: Track request rates, errors, and latency, and create dashboards and alerts from your OpenTelemetry data.
 - **Investigate across signals**: Follow a slow request across services, examine related logs, and check resource usage on the hosts and containers involved.
-- **Keep your OpenTelemetry instrumentation**: Adopt Datadog OpenTelemetry (DDOT) components one at a time, or send data over the OpenTelemetry Protocol (OTLP) from upstream OpenTelemetry SDKs and Collectors.
+- **Keep your OpenTelemetry instrumentation**: Adopt Datadog OpenTelemetry (DDOT) components one at a time, or send data over the OpenTelemetry Protocol (OTLP) from upstream OpenTelemetry SDKs and Collectors. DDOT components work in place of their upstream equivalents, so you can switch between them.
 
 Datadog maps the `service.name`, `deployment.environment.name`, and `service.version` resource attributes to [unified service tags][2], so you can filter telemetry by service, environment, and version. For correlation requirements and configuration, see [Correlate OpenTelemetry Data][3].
 
