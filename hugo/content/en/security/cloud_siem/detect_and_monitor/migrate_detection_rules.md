@@ -52,8 +52,7 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 ### Translate a single rule in the rule editor
 
 1. Open the [rule editor][7].
-2. Click {{< ui >}}Bits Security Assistant{{< /ui >}} to open the chat.
-3. Paste the source rule and describe what you want.
+2. In {{< ui >}}What do you want to detect?{{< /ui >}} at the top of the rule editor, paste the source rule, describe what you want, and press Enter. Bits Security Assistant opens in a side panel on the right.
 
    For example, this prompt changes the rule's threshold and time window:
 
@@ -66,8 +65,8 @@ They turn alerts into Datadog monitors and translate queries deterministically.
    | where distinct_ip_count>1
    ```
 
-4. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
-5. Check the {{< ui >}}Enabled{{< /ui >}} toggle at the top of the rule editor, then save the rule. An enabled rule starts generating signals as soon as you save it.
+3. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
+4. Check the {{< ui >}}Enabled{{< /ui >}} toggle at the top of the rule editor, then save the rule. An enabled rule starts generating signals as soon as you save it.
 
 {{< img src="security/cloud_siem/migrate_detection_rules/rule_editor_chat.png" alt="The Cloud SIEM rule editor with the Bits Security Assistant chat open. The chat shows a Splunk rule pasted as a prompt and the assistant's explanation, and the editor shows the generated query and condition." style="width:100%;" >}}
 
