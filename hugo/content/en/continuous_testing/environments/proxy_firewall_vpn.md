@@ -72,6 +72,52 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 {{< /site-region >}}
 
+### Restrict the hosts the tunnel can reach
+
+By default, tests that run through the testing tunnel can reach any host that the machine running `datadog-ci` can reach. In this case, `datadog-ci` prints a warning when the tunnel starts. To limit the tunnel to specific hosts, list them in the [`tunnelAllowedDomains`][5] option, available in versions `>=v5.29.0` of the package. The tunnel blocks connections to any other host and logs a warning for each blocked host.
+
+You can set the option in three places. The CLI parameter takes precedence over the environment variable, which takes precedence over the global configuration file.
+
+- Global configuration file: the `tunnelAllowedDomains` array.
+- Environment variable: `DATADOG_SYNTHETICS_TUNNEL_ALLOWED_DOMAINS`, with entries separated by `;`.
+- CLI parameter: `--tunnelAllowedDomains`, repeated for each entry.
+
+Entries follow these matching rules:
+
+- `example.com` matches the `example.com` host only. Matching ignores case and a trailing dot.
+- `*.example.com` matches any subdomain, such as `api.example.com`, but not `example.com`. To allow both, list both entries.
+- An IP address matches only when you list that IP address.
+
+Each entry must be a host name, a `*.` wildcard, or an IP address. URLs such as `https://example.com`, paths, and a `*` anywhere other than the `*.` prefix are invalid, and `datadog-ci` exits with an `INVALID_CONFIG` error before it runs any test.
+
+Browser tests also load resources such as scripts, fonts, and images through the tunnel. Add the hosts that serve these resources to the list, or the tunnel blocks them.
+
+For example, to allow a local application and the hosts of an internal staging environment, add the following to your global configuration file:
+
+```json
+{
+  "tunnel": true,
+  "tunnelAllowedDomains": ["localhost", "staging.example.com", "*.staging.example.com"]
+}
+```
+
+You can set the same list with the environment variable:
+
+```sh
+DATADOG_SYNTHETICS_TUNNEL_ALLOWED_DOMAINS="localhost;staging.example.com;*.staging.example.com"
+```
+
+Or with the CLI parameter:
+
+```sh
+datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel \
+  --tunnelAllowedDomains localhost \
+  --tunnelAllowedDomains staging.example.com \
+  --tunnelAllowedDomains "*.staging.example.com"
+```
+
+When you use `datadog-ci synthetics build-and-test`, the tunnel always allows the host of the local development server. If you do not set `tunnelAllowedDomains`, the tunnel allows only the development server host.
+
 ## Using the testing tunnel with multiple environments
 
 The testing tunnel can be configured to work with multiple environments, including `localhost`, by using the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. These fields allow you to substitute parts of the starting URL and resource URLs based on the provided regular expressions, enabling you to redirect requests to different environments during test execution.
@@ -102,3 +148,4 @@ You can learn more about these options in [Testing Multiple Environments][4].
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: /continuous_testing/cicd_integrations#use-the-cli
 [4]: /continuous_testing/environments/multiple_env
+[5]: /continuous_testing/cicd_integrations/configuration/?tab=npm#tunnelalloweddomains
