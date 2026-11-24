@@ -43,8 +43,8 @@ A typical workflow in the Remediation Inbox:
 
 1. Filter the inbox to the remediations your team owns. See the [Filter remediations](#filter-remediations) section.
 1. Open the top-ranked remediation to review its impact. See the [How remediations are prioritized](#how-remediations-are-prioritized) section.
-1. Assign an owner, and create a case or ticket to track the work.
-1. Fix the issue with AI, or link a pull request you opened yourself.
+1. Assign an owner and create a case or ticket to track the work.
+1. Fix the issue with AI or link a pull request you opened yourself.
 1. Track the remediation until its findings are resolved and the case closes.
 
 ## Prerequisites
