@@ -417,3 +417,23 @@ entries:
       - EditSecurityMonitoringSignalIncidents
       - EditSecurityMonitoringSignalState
     title: Add hasCase and cases to security signal triage update response
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42098
+    operations:
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - CreateSecurityMonitoringRule
+      - GetHistoricalJob
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - GetSuppressionsAffectingFutureRule
+      - ListHistoricalJobs
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - RunHistoricalJob
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+      - ValidateSecurityMonitoringRule
+    title: Document historical job definition fields returned by SIEM historical
+      jobs API
