@@ -1,5 +1,5 @@
 ---
-title: Migrate Detection Rules
+title: Migrate Detection Rules to Datadog
 description: Translate detection rules from third-party SIEMs into Cloud SIEM detection rules.
 further_reading:
 - link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
@@ -20,16 +20,11 @@ Detection rule migration is in Preview. Features, behavior, and supported source
 
 ## Overview
 
-Detection rule migration translates the detection logic of third-party SIEM rules into Cloud SIEM detection rules.
-Datadog uses AI to generate each detection rule from the source rule and the logs your organization sends.
-Each generated rule is a proposal. Datadog doesn't create a rule in Cloud SIEM until you publish or save it.
+Detection rule migration translates the detection logic of third-party SIEM rules that detect security threats, such as brute-force logins or privilege escalation, into Cloud SIEM detection rules. It supports Splunk and natural language.
 
-Detection rule migration supports Splunk and natural language.
+Datadog uses AI to generate a proposed detection rule from the source rule and the logs your organization sends. Datadog doesn't create the rule until you publish or save the proposal, and the rule generates security signals only after you enable it.
 
 All methods on this page use the same AI agent, so a rule gets the same translation whether you translate it alone or migrate it in bulk.
-
-Use detection rule migration for rules that detect security threats, such as brute-force logins or privilege escalation.
-These become Cloud SIEM detection rules that generate security signals.
 
 To migrate operational content, such as Splunk alerts on error rates, log searches, or dashboards, use [Migration Tools][4] instead.
 They turn alerts into Datadog monitors and translate queries deterministically.
@@ -59,21 +54,22 @@ They turn alerts into Datadog monitors and translate queries deterministically.
 1. Open the [rule editor][7].
 2. Click {{< ui >}}Bits Security Assistant{{< /ui >}} to open the chat.
 3. Paste the source rule and describe what you want.
+
+   For example, this prompt changes the rule's threshold and time window:
+
+   ```text
+   Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes instead of 2+ IPs in 5 minutes:
+
+   `cloudtrail` eventName=ConsoleLogin
+   | bin span=5m _time
+   | stats dc(src) as distinct_ip_count values(src) as src by _time, user_name
+   | where distinct_ip_count>1
+   ```
+
 4. Refine the draft in the chat or by editing the rule directly. Adjust settings such as the query, conditions, and description, and preview the matching logs. The chat and the rule editor stay in sync. For details on each setting, see [Create a Custom Rule][10].
 5. Check the {{< ui >}}Enabled{{< /ui >}} toggle at the top of the rule editor, then save the rule. An enabled rule starts generating signals as soon as you save it.
 
 {{< img src="security/cloud_siem/migrate_detection_rules/rule_editor_chat.png" alt="The Cloud SIEM rule editor with the Bits Security Assistant chat open. The chat shows a Splunk rule pasted as a prompt and the assistant's explanation, and the editor shows the generated query and condition." style="width:100%;" >}}
-
-For example, this step 3 prompt changes the rule's threshold and time window:
-
-```text
-Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes instead of 2+ IPs in 5 minutes:
-
-`cloudtrail` eventName=ConsoleLogin
-| bin span=5m _time
-| stats dc(src) as distinct_ip_count values(src) as src by _time, user_name
-| where distinct_ip_count>1
-```
 
 ## Migrate rules in bulk
 
@@ -88,11 +84,12 @@ Export your rules from the source platform and upload them to Datadog. Datadog g
 
 ### Migrate from Splunk
 
-1. Go to [Detection Rules][8], click the arrow next to {{< ui >}}New Rule{{< /ui >}}, and select {{< ui >}}Migrate from Splunk{{< /ui >}}.
+1. Go to [Detection Rules][8], click the arrow next to {{< ui >}}New Rule{{< /ui >}}, and click {{< ui >}}Migrate from Splunk{{< /ui >}}.
 2. Copy the export query, run it in Splunk, and export the results as a CSV file.
 3. Upload one or more CSV files.
 4. Name the migration and deselect any rules you don't want to migrate.
 5. Click {{< ui >}}Start Migration{{< /ui >}}. Large migrations can take a few hours to complete.
+6. [Review and publish the proposals](#review-and-publish-proposals), then [enable the published rules][11]. Published rules start disabled, so they don't generate signals until you enable them.
 
 ## Review and publish proposals
 

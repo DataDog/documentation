@@ -92,11 +92,11 @@ For logs that match the query, you can set conditions to determine whether it's 
 
 See [Custom Detection Rules][2] for more information.
 
-### Migrate detection rules
+### Migrate detection rules to Datadog
 
 Translate detection rules from a third-party SIEM, such as Splunk, into Cloud SIEM detection rules. Translate a single rule in the rule editor, or migrate rules in bulk and review a proposal for each one before you publish it.
 
-See [Migrate Detection Rules][9] for more information.
+See [Migrate Detection Rules to Datadog][9] for more information.
 
 ### Rule deprecation
 
