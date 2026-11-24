@@ -231,6 +231,15 @@ components:
       schema:
         maxLength: 256
         type: string
+    AiGatewayModelCanonicalIDQuery:
+      description: Canonical model identifier. It can contain `/`, such as `openai/gpt-4o`.
+      example: openai/gpt-4o
+      in: query
+      name: canonical
+      required: true
+      schema:
+        maxLength: 256
+        type: string
     AiGatewayModelGroupID:
       description: Model group ID, or "default" for the explicit organization-wide access policy.
       example: "7"
@@ -176414,6 +176423,10 @@ paths:
         - Case Management Type
       x-displayName: Get all work item types
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a work item type.
       operationId: CreateCaseType
@@ -176463,6 +176476,10 @@ paths:
         - Case Management Type
       x-displayName: Create a work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/custom_attributes:
     get:
       description: Get all custom attributes
@@ -176497,6 +176514,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/cases/types/{case_type_id}:
     delete:
       description: Delete a work item type
@@ -176517,6 +176538,10 @@ paths:
         - Case Management Type
       x-displayName: Delete a work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the name, emoji, or description of an existing work item type.
       operationId: UpdateCaseType
@@ -176614,6 +176639,10 @@ paths:
         - Case Management Attribute
       x-displayName: Get custom attribute configs for work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a custom attribute configuration for a work item type.
       operationId: CreateCustomAttributeConfig
@@ -176672,6 +176701,10 @@ paths:
         - Case Management Attribute
       x-displayName: Create custom attribute config for work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
     delete:
       description: Delete custom attribute config
@@ -176694,6 +176727,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.
       operationId: UpdateCustomAttributeConfig
@@ -177291,6 +177328,10 @@ paths:
         - Case Management
       x-displayName: Add a comment to a work item
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete work item comment
@@ -177316,6 +177357,10 @@ paths:
         - Case Management
       x-displayName: Delete work item comment
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
     put:
       description: Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.
       operationId: UpdateCaseComment
@@ -178133,12 +178178,18 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
+            - notebooks_write
       summary: Create investigation notebook for case
       tags:
         - Case Management
       x-displayName: Create investigation notebook for work item
       x-menu-order: 57
+      x-permission:
+        operator: AND
+        permissions:
+          - cases_read
+          - notebooks_write
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a work item
@@ -178729,12 +178780,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Unwatch a case
       tags:
         - Case Management
       x-displayName: Unwatch a work item
       x-menu-order: 66
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.
       operationId: WatchCase
@@ -178758,12 +178813,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Watch a case
       tags:
         - Case Management
       x-displayName: Watch a work item
       x-menu-order: 65
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -247589,6 +247648,173 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model-pricing:
+    delete:
+      description: >-
+        Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: >-
+        Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.
+      operationId: GetAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: >-
+        Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              custom:
+                summary: Set custom pricing
+                value:
+                  data:
+                    attributes:
+                      pricing_config:
+                        rates:
+                          cache_read_cost_per_mtok: 0.02
+                          cache_write_cost_per_mtok: 0.25
+                          non_cached_input_cost_per_mtok: 0.2
+                          output_cost_per_mtok: 1.0
+                        source:
+                          type: custom
+                        version: 1
+                    id: 7/openai/gpt-4o
+                    type: model-pricing
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelPricingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Set a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 58
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/providers/{provider_id}/models:
     get:
       description: >-
@@ -247852,7 +248078,7 @@ paths:
   /api/v2/providers/{provider_id}/models/{canonical}/pricing:
     delete:
       description: >-
-        Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: DeleteAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247886,7 +248112,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: >-
-        Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
+        Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
       operationId: GetAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247939,7 +248165,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"

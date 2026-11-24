@@ -5767,6 +5767,20 @@
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway provider."
   },
+  "DeleteAIGatewayModelPricingByCanonical": {
+    "description": "Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a model pricing override by canonical ID"
+  },
+  "GetAIGatewayModelPricingByCanonical": {
+    "description": "Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.",
+    "summary": "Get a model pricing override by canonical ID"
+  },
+  "UpdateAIGatewayModelPricingByCanonical": {
+    "description": "Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Set a model pricing override by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request body for setting model pricing."
+  },
   "ListAiGatewayModels": {
     "description": "List all model catalog entries for a provider. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "List models for an AI Gateway provider"
@@ -5794,15 +5808,15 @@
     "request_schema_description": "Request to update a model catalog entry."
   },
   "DeleteAiGatewayModelPricing": {
-    "description": "Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Delete a model pricing override"
   },
   "GetAiGatewayModelPricing": {
-    "description": "Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "description": "Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "Get a model pricing override"
   },
   "UpdateAiGatewayModelPricing": {
-    "description": "Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Set a model pricing override",
     "request_description": "",
     "request_schema_description": "Request body for setting model pricing."
