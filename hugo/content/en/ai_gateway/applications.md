@@ -58,7 +58,7 @@ Use the base URL for your [Datadog site][applications-12]. The paths differ beca
 ## Configure Claude Code
 <!-- vale Datadog.headings = YES -->
 
-For the Claude Code CLI, add the following to your Claude Code user settings file, `~/.claude/settings.json`. Do not add it to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4], and `<PROVIDER_SLUG>/<MODEL_ID>` with the model identifier you selected earlier.
+For the Claude Code CLI, merge the following settings into your Claude Code user settings file, `~/.claude/settings.json`. If the file already has an `env` block, add these keys to it. Do not add these settings to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4] and `<PROVIDER_SLUG>/<MODEL_ID>` with the model identifier you selected earlier.
 
 ```json
 {
@@ -82,7 +82,7 @@ For the Claude Code CLI, add the following to your Claude Code user settings fil
 
 This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved AI Gateway model or routing rule. See [Claude Code model configuration][applications-19].
 
-The `CLAUDE_CODE_USE_*` settings keep cloud-provider selectors in your shell from overriding AI Gateway.
+Setting each `CLAUDE_CODE_USE_*` variable to `"0"` prevents cloud-provider selectors in your shell from routing requests away from AI Gateway.
 
 Start `claude`, run `/status`, and confirm the AI Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces, see [Claude Code gateway configuration][applications-16].
 
@@ -458,7 +458,7 @@ The application name can also define who can read captured prompts and responses
 
 To attribute requests to a team you belong to, add `x-ai-gateway-team: <TEAM_SLUG>` to the client's request headers:
 
-- **Claude Code:** Set both headers on separate lines in `~/.claude/settings.json`: `"ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>"`.
+- **Claude Code:** In `~/.claude/settings.json`, separate the two headers with `\n`: `"ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>"`.
 - **Codex:** Add `"x-ai-gateway-team" = "<TEAM_SLUG>"` to the provider's `http_headers` map.
 - **SDK:** Add `"x-ai-gateway-team": "<TEAM_SLUG>"` to `default_headers`.
 
@@ -481,8 +481,8 @@ Team selection affects matching [budgets][applications-4], [rate limits][applica
 | Codex returns `websocket_not_supported` | Set `supports_websockets = false` on the selected provider. |
 | Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the AI Gateway model identifier. Restart Codex after changing the catalog. |
 | Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart Claude Code. |
-| Claude Code stops responding, then shows `Failed to authenticate. API Error: 401 {"errors":["Unauthorized"]}` | Claude Code retries a `401` from AI Gateway for about three minutes before it shows the error. Check that `ANTHROPIC_AUTH_TOKEN` is valid and not expired. |
-| Claude Code shows `Failed to authenticate` after you set `x-ai-gateway-team` | AI Gateway returned `403` with `you are not authorized to use the selected Datadog Team`. Check the team slug and that you belong to the team. |
+| Claude Code stops responding, then shows `Failed to authenticate. API Error: 401 {"errors":["Unauthorized"]}` | Claude Code retries a `401` from AI Gateway for about 3 minutes before it shows the error. Check that `ANTHROPIC_AUTH_TOKEN` is valid and not expired. |
+| Claude Code shows `Failed to authenticate` after you set `x-ai-gateway-team` | AI Gateway returns a `403` error with the message `you are not authorized to use the selected Datadog Team`. Check that the team slug is correct and that you belong to the team. |
 | Client does not use the configured AI Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
 See [AI Gateway troubleshooting][applications-7] for AI Gateway error codes.
