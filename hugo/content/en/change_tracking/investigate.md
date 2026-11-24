@@ -18,7 +18,7 @@ further_reading:
 Use Change Tracking as the first step in your investigation:
 
 - **See changes on the pages you already use.** On dashboards, monitor status pages, and service pages, Datadog surfaces the changes most likely to be related to what you are looking at.
-- **You find the relevant changes.** When the change you need is not on the page in front of you, build your own view of change data.
+- **Find changes that aren't on the page.** Build your own view of change data with Change Tracking widgets.
 
 ## Find relevant changes where you're working
 
