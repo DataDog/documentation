@@ -20,8 +20,8 @@ further_reading:
 
 Use Change Tracking as the first step in your investigation:
 
+- **See changes on the pages you already use.** On dashboards, monitor status pages, service pages, and the RUM Explorer, Datadog surfaces the changes most likely to be related to what you are looking at.
 - **Find changes that aren't on the page.** Search for them by symptom, build your own view of change data, or ask Bits AI.
->>>>>>> esther.kim/ct-reorg-3-rum-faulty-banners
 
 ## Find relevant changes where you're working
 
