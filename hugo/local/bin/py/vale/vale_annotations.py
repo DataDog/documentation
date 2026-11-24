@@ -4,6 +4,32 @@ import json
 import argparse
 import sys
 
+# Rule-specific suppressions: (Check, predicate) pairs. A finding is dropped
+# if its Check matches and predicate(filename, line) is True. Used for
+# findings that are correctly detected but can never be acted on, so surfacing
+# them in PR annotations is just noise -- e.g. Datadog.Prodname flags product
+# names in YAML frontmatter, but Hugo shortcodes don't render inside raw YAML
+# string values, so wrapping them there wouldn't work.
+def is_in_frontmatter(filename, line):
+    try:
+        with open(filename, encoding='utf-8') as f:
+            lines = f.readlines()
+    except OSError:
+        return False
+    start = 0
+    while start < len(lines) and lines[start].strip() == '':
+        start += 1
+    if start >= len(lines) or lines[start].strip() != '---':
+        return False
+    for i in range(start + 1, len(lines)):
+        if lines[i].strip() == '---':
+            return start + 1 <= line <= i + 1
+    return False
+
+SUPPRESSED_CHECKS = {
+    'Datadog.Prodname': is_in_frontmatter,
+}
+
 # Assigns the Vale log data to a dictionary
 def munge_logs(file_contents):
     log_array = []
@@ -55,6 +81,9 @@ if __name__ == '__main__':
         for entry in vale_data:
             vale_filename = entry['Filename']
             line = entry['Line']
+            suppress_predicate = SUPPRESSED_CHECKS.get(entry['Check'])
+            if suppress_predicate and suppress_predicate(vale_filename, line):
+                continue
             for git_filename, git_line_data in git_data.items():
                 if vale_filename == git_filename and line in git_line_data:
                     try:
