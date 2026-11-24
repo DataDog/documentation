@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/microsoft-teams/"
   tag: "Documentation"
   text: "Microsoft Teams integration"
+- link: "https://www.datadoghq.com/blog/agentic-reporting-product-analytics/"
+  tag: "Blog"
+  text: "Let your product dashboards report to you with the Dashboard Reporter Agent"
 ---
 
 Bits Chat has context on Datadog public documentation, telemetry, and ownership. Use Bits Chat to ask questions about your system or active incident. Bits Chat is available in the Datadog web application, the mobile app, Slack, and Microsoft Teams.

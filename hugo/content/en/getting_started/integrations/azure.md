@@ -11,15 +11,18 @@ further_reading:
     - link: 'https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/'
       tag: 'Guide'
       text: 'Why should I install the Datadog Agent on my cloud instances?'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-azure-integration'
+      tag: 'Learning Center'
+      text: 'Getting Started with the Datadog Azure Integration'
     - link: 'https://www.datadoghq.com/blog/azure-integration-onboarding/'
       tag: 'Blog'
       text: 'Accelerate your Azure integration setup with guided onboarding'
     - link: "https://www.datadoghq.com/blog/azure-secretless-authentication/"
       tag: "Blog"
       text: "Avoid Azure secret rotation with secretless authentication"
-    - link: 'https://learn.datadoghq.com/courses/getting-started-azure-integration'
-      tag: 'Learning Center'
-      text: 'Getting Started with the Datadog Azure Integration'
+    - link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+      tag: "Blog"
+      text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 ## Overview

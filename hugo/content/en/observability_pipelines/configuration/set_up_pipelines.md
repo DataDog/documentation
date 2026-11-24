@@ -20,6 +20,9 @@ further_reading:
 - link: "observability_pipelines/monitoring_and_troubleshooting/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 ## Overview

@@ -9,6 +9,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
   tag: "Learning Center"
   text: "Getting Started with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 
 ---
 

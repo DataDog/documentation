@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
   tag: "Blog"
   text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview

@@ -4,6 +4,10 @@ description: Learn how to update and deploy changes to an existing Observability
 disable_toc: false
 aliases:
   - /observability_pipelines/update_existing_pipelines/
+further_reading:
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 ## Overview
@@ -282,3 +286,7 @@ On the Worker installation page:
 [2]: /api/latest/observability-pipelines/#update-a-pipeline
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
 [4]: /observability_pipelines/configuration/export_pipeline_configuration/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

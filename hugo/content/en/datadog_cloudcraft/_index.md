@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloudcraft-security/"
   tag: "Blog"
   text: "Visually identify and prioritize security risks using Cloudcraft"
+- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+  tag: "Blog"
+  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 ## Overview

@@ -1,7 +1,10 @@
 ---
 title: Exploring Database Hosts
 description: Explore and dig into your database host health and configuration
-
+further_reading:
+- link: "https://www.datadoghq.com/blog/data-security-posture-management/"
+  tag: "Blog"
+  text: "Map sensitive data with Datadog Data Security Posture Management"
 ---
 
 {{< img src="database_monitoring/databases-list-4.png" alt="The Databases page in Datadog" style="width:100%;" >}}
@@ -181,3 +184,7 @@ The {{< ui >}}Configuration{{< /ui >}} tab of the host details panel provides a 
 {{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/databases
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

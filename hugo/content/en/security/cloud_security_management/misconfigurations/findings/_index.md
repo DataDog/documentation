@@ -12,6 +12,9 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
+- link: "https://www.datadoghq.com/blog/check-ec2-workloads-imdsv2-readiness/"
+  tag: "Blog"
+  text: "How to check if your EC2 workloads are ready for IMDSv2"
 ---
 
 The Cloud Security Misconfigurations [Findings page][1] allows you to:

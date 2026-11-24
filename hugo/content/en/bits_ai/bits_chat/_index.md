@@ -26,6 +26,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
   tag: "Blog"
   text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
+- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+  tag: "Blog"
+  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
+- link: "https://www.datadoghq.com/blog/flex-logs-bring-your-own-bucket/"
+  tag: "Blog"
+  text: "Retain more logs for longer with Flex Logs BYOBucket"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

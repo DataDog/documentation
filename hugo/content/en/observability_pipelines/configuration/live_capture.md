@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mitre-attack-enrichment-packs-observability-pipelines/"
   tag: "Blog"
   text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 products:
 - name: Logs
   icon: logs

@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2026/"
+  tag: "Blog"
+  text: "Key learnings from the 2026 State of Cloud Security study"
 aliases:
 - /code_analysis/
 ---

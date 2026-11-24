@@ -4,6 +4,10 @@ description: Learn how to use role-based and granular access control to restrict
 disable_toc: false
 aliases:
     - /observability_pipelines/access_control/
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
@@ -109,3 +113,7 @@ To restore full access to Live Capture for a pipeline:
 [4]: /account_management/rbac/granular_access/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /observability_pipelines/live_capture/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

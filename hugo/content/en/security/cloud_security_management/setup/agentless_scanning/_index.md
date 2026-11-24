@@ -16,6 +16,9 @@ further_reading:
   - link: "/security/cloud_security_management/troubleshooting/agentless_scanning"
     tag: "Documentation"
     text: "Troubleshooting Agentless Scanning"
+  - link: "https://www.datadoghq.com/blog/data-security-posture-management/"
+    tag: "Blog"
+    text: "Map sensitive data with Datadog Data Security Posture Management"
 ---
 
 ## Overview

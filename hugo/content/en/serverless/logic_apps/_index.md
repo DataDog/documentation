@@ -11,6 +11,9 @@ further_reading:
   - link: "/serverless/logic_apps/troubleshooting"
     tag: "Documentation"
     text: "Troubleshoot Serverless Monitoring for Azure Logic Apps"
+  - link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+    tag: "Blog"
+    text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/serverless-monitoring-for-azure-logic-apps/"

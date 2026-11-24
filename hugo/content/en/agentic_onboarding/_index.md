@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
   tag: "Blog"
   text: "Instrument serverless apps with agentic onboarding"
+- link: "https://www.datadoghq.com/blog/agentic-onboarding/"
+  tag: "Blog"
+  text: "Let your AI agent set up Datadog with Agentic Onboarding"
 ---
 
 ## Overview

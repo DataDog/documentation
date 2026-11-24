@@ -78,6 +78,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-microsoft-sentinel-packs/"
   tag: "Blog"
   text: "Transform and route security logs to Microsoft Sentinel tables using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+  tag: "Blog"
+  text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/datadog-byoc-minio-aistor/"
+  tag: "Blog"
+  text: "Bring Datadog BYOC to your on-premises data with MinIO AIStor"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 
 ---
 ## Overview
