@@ -23,7 +23,7 @@ CrowdStrike Falcon Data Replicator (FDR) exports raw event data from the CrowdSt
 
 **Note**: The CrowdStrike FDR source requires Worker version 2.26.0 or later.
 
-<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not point more than one pipeline, or another tool, at the same FDR queue, or each consumer receives only part of the data. If another tool already reads from your FDR feed, stop that tool before you set up this source.</div>
+<div class="alert alert-warning">An FDR feed supports only one consumer. Each SQS message is deleted after it is read, and messages cannot be replayed. Do not connect multiple log pipelines or tools to the same FDR queue. Otherwise, each consumer receives only part of the data. If another tool already reads from your FDR feed, stop it before setting up this source.</div>
 
 ### Choose a setup based on where FDR stores your data
 
@@ -76,7 +76,7 @@ After you select the CrowdStrike FDR source in the pipeline UI:
 - {{< ui >}}Visibility timeout{{< /ui >}}: Enter the number of seconds a received SQS message is hidden from other receivers while the Worker processes its files.
     - Minimum value is `0`. Maximum value is `43200` (12 hours). Default is `300` (5 minutes).
     - If the Worker takes longer than the timeout to process the files in a message, the message is delivered again, which can result in duplicate logs. Increase the visibility timeout value if your feed contains large files.
-- {{< ui >}}Number of receivers{{< /ui >}}: Enter the number of concurrent tasks polling the SQS queue. Defaults to the number of Worker threads.
+- {{< ui >}}Number of receivers{{< /ui >}}: Enter the number of concurrent tasks polling the SQS queue. Defaults is the number of Worker threads.
 - {{< ui >}}Messages per poll{{< /ui >}}: Enter the maximum number of SQS messages to receive in each poll.
     - Minimum is `1`. Maximum is `10`. Default is `1`.
     - SQS can return fewer messages than the maximum. This setting limits the number of notifications per request, not the number of files in each notification.
