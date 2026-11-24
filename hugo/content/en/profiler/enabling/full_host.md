@@ -128,28 +128,13 @@ For instructions for each option, see [Full-Host Profiler deployment instruction
 
 The Full-Host Profiler packages the upstream [OpenTelemetry eBPF Profiler][1] with components and defaults for sending profiles to Datadog. Compared to running the upstream profiler yourself, the Full-Host Profiler:
 
-- **Uploads debug symbols automatically**: When symbols are available locally, the profiler uploads them to Datadog. Native frames in languages such as C, C++, Go, and Rust are symbolized without a separate CI upload step. For stripped binaries, see [Debug symbols][10].
+- **Uploads debug symbols automatically**: When symbols are available locally, the profiler uploads them to Datadog. Native frames in languages such as C, C++, Go, and Rust are symbolized without a separate CI upload step. For stripped binaries, see [Debug symbols](#debug-symbols).
 - **Exports to Datadog with container tags**: Includes the Datadog export configuration and container tagging, so you don't need to configure these Collector components yourself.
 - **Uses defaults tested at scale**: Datadog tests the default configuration for overhead and stability across thousands of hosts.
 
 ### OpenTelemetry profiling maturity
 
 The OTLP Profiles signal isn't stable in OpenTelemetry. For its maturity status, see the [OpenTelemetry profiles announcement][5]. Datadog contributes to the OTLP Profiles signal, the OpenTelemetry eBPF Profiler, and the OpenTelemetry specification for [process][7] and [thread][8] context sharing, which supports trace-to-profile correlation.
-
-Datadog is a major contributor to the OpenTelemetry profiling ecosystem, including:
-
-- the OTLP Profiles signal, which reached alpha in April 2026 (see the [OpenTelemetry profiles alpha announcement][5] and [KubeCon talk][6])
-- the [OpenTelemetry eBPF Profiler][1]
-- OpenTelemetry specification work for [process][7] and [thread][8] context sharing, which supports trace-to-profile correlation
-
-### What Datadog adds
-
-The Full-Host Profiler packages upstream OpenTelemetry profiling components with Datadog integration and tested defaults, including:
-
-- symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, Go and Rust can be symbolized without a separate CI symbol-upload setup
-- curated defaults and components for Datadog export and container tagging
-- a version tested at scale on thousands of hosts for overhead and stability
-
 
 ## What's next?
 
@@ -164,7 +149,6 @@ After deploying the Full-Host Profiler, see [Getting Started with Profiler][9] t
 [3]: https://app.datadoghq.com/profiling
 [4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [5]: https://opentelemetry.io/blog/2026/profiles-alpha/
-[6]: https://www.youtube.com/watch?v=TKp2snmgvtQ
 [7]: https://github.com/open-telemetry/opentelemetry-specification/pull/4719
 [8]: https://github.com/open-telemetry/opentelemetry-specification/pull/4947
 [9]: /getting_started/profiler/
