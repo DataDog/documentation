@@ -81,7 +81,7 @@ Worker version 2.26.0 gives you access to the following:
 - The WebSocket source now rejects a handshake response that specifies an unrequested subprotocol.
 - The Sawmill processor now:
     - Remaps date, service, and status to match Datadog Log Management.
-    - Resolves each filter key to its designated root field or tag, not both, consistently with Datadog Log Management. String truncation limits count UTF-16 code units.
+    - Resolves each filter key to its designated root field or tag to match Datadog Log Management. String truncation limits count UTF-16 code units.
     - Keeps timestamps set by the source at the top level so date remappers can replace them. A top-level `timestamp` parsed earlier, such as with `parse_timestamp`, is considered set by the source and can be overwritten by date remappers. String and numeric payload dates are unaffected.
     - Selects built-in pipelines from all `source` tags, including events with multiple source tags.
     - Uses top-level `ddsource`, `ddtags`, and `ddsourcecategory` values when available. Copies inside a JSON `message` remain available as attributes.
