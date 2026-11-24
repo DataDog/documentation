@@ -184,7 +184,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
 4. Click {{< ui >}}Open Google Cloud Shell{{< /ui >}}, or go to [Google Cloud Shell][204].
 5. Paste the script into the shell prompt and run it.
 6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.<br>
-   Under {{< ui >}}Limit Monitored Projects{{< /ui >}} (optional), choose whether to monitor every project the service account can access, or only the selected projects. By default, Datadog also monitors projects the service account gains access to later. If you limit monitoring to the selected projects, then projects the service gains access to later are not monitored. To change this later, see [Limit monitored projects](#limit-monitored-projects).
+   Under {{< ui >}}Limit Monitored Projects{{< /ui >}} (optional), choose whether to monitor every project the service account can access, or only the selected projects. By default, Datadog also monitors projects the service account gains access to later. If you limit monitoring to the selected projects, then projects the service account gains access to later are not monitored. To change this later, see [Limit monitored projects](#limit-monitored-projects).
 7. Under {{< ui >}}Provide Service Account Details{{< /ui >}}:
    1. Give the service account a name.
    2. Select the project to contain the service account.
