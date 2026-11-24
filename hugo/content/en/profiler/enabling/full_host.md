@@ -142,9 +142,9 @@ Datadog is a major contributor to the OpenTelemetry profiling ecosystem, includi
 - the [OpenTelemetry eBPF Profiler][1]
 - OpenTelemetry specification work for [process][7] and [thread][8] context sharing, which supports trace-to-profile correlation
 
-### Datadog distribution features
+### What Datadog adds
 
-The Datadog Full-Host Profiler distribution packages upstream OpenTelemetry profiling components with Datadog integration and tested defaults, including:
+The Full-Host Profiler packages upstream OpenTelemetry profiling components with Datadog integration and tested defaults, including:
 
 - symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, Go and Rust can be symbolized without a separate CI symbol-upload setup
 - curated defaults and components for Datadog export and container tagging
