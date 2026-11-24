@@ -2821,13 +2821,13 @@ If you're using automatic instrumentation, token and cost metrics appear on your
 
 ### Submit conversation costs (unreleased)
 
-Automatic collection and these APIs require Datadog backend support and a tracer release containing this feature (unreleased). Only ElevenLabs is supported. Conversation billing is independent of token-based LLM span pricing.
+These APIs require Datadog backend support and a tracer release containing this feature (unreleased). Only ElevenLabs is supported. Conversation billing is independent of token-based LLM span pricing.
 
-With LLM Observability and ElevenLabs instrumentation enabled, the tracer automatically uses the conversation's existing SDK client and credentials to retrieve post-call billing. Credentials must permit reading conversation details. It makes up to five additional requests within a 30-second retry window, with SDK retries disabled and request timeouts of at most three seconds. Up to eight conversations collect concurrently; additional conversations are skipped. Collection runs in the background. Python uses a daemon worker. Node.js retry timers do not keep the process alive, but an in-flight HTTP request can delay exit until completion or timeout. Custom Node.js transports must honor cancellation; an unsettled request continues to occupy collection capacity. Collection errors do not affect the conversation. Closed clients, missing permissions, delayed billing, capacity limits, and process exit can leave costs unavailable.
+Configure an ElevenLabs [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks). Verify the signature against the raw request body with the ElevenLabs SDK before passing the event data to the methods below. These methods make no provider requests, and the tracer does not poll for billing after the conversation ends.
 
-Set `DD_LLMOBS_ELEVENLABS_CONVERSATION_COST_ENABLED=false` before starting the application to disable these requests. You can also use `ddtrace.config.elevenlabs["conversation_cost_enabled"] = False` in Python or `tracer.use('elevenlabs', { conversationCostEnabled: false })` in Node.js. Explicit submissions remain available.
+The conversation process can exit before the webhook arrives. The webhook handler must finish submitting and flushing its data before it exits. For short-lived handlers, follow your deployment platform's supported flush life cycle. A local queue result does not confirm backend acceptance; retain the verified event in a durable queue when delivery requires application-managed retries.
 
-For delivery that must survive process exit, use an application-verified post-call transcription webhook with the APIs below. These methods make no provider requests.
+In these examples, read the raw body and signature header from the incoming HTTP request. Load `webhook_secret` or `webhookSecret` from server-side secret storage. The ElevenLabs client verifies the signature locally.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2835,13 +2835,16 @@ For delivery that must survive process exit, use an application-verified post-ca
 ```python
 from ddtrace.llmobs import LLMObs
 
-# details is a completed response already obtained by your application.
-submitted = LLMObs.submit_conversation_cost(details)
-
-# In an application-verified post-call transcription webhook handler:
-submitted = LLMObs.submit_conversation_cost(
-    verified_event["data"], source="post_call_transcription", agent_service="voice-app"
+# elevenlabs is your ElevenLabs SDK client.
+verified_event = elevenlabs.webhooks.construct_event(
+    rawBody=raw_body.decode("utf-8"),
+    sig_header=signature_header,
+    secret=webhook_secret,
 )
+if verified_event.get("type") == "post_call_transcription":
+    submitted = LLMObs.submit_conversation_cost(
+        verified_event["data"], source="post_call_transcription", agent_service="voice-app"
+    )
 ```
 
 `LLMObs.submit_conversation_cost(conversation, *, provider="elevenlabs", source="conversation_details", total_cost=None, agent_service=None)` accepts an ElevenLabs SDK response model or raw response dictionary. `agent_service` overrides the configured application for this observation.
@@ -2852,14 +2855,14 @@ submitted = LLMObs.submit_conversation_cost(
 ```javascript
 const llmobs = require('dd-trace').llmobs
 
-// details is a completed response already obtained by your application.
-const submitted = llmobs.submitConversationCost(details)
-
-// In an application-verified post-call transcription webhook handler:
-llmobs.submitConversationCost(verifiedEvent.data, {
-  source: 'post_call_transcription',
-  mlApp: 'voice-app'
-})
+// elevenlabs is your ElevenLabs SDK client. Preserve rawBody for verification.
+const verifiedEvent = await elevenlabs.webhooks.constructEvent(rawBody, signatureHeader, webhookSecret)
+if (verifiedEvent.type === 'post_call_transcription') {
+  const submitted = llmobs.submitConversationCost(verifiedEvent.data, {
+    source: 'post_call_transcription',
+    mlApp: 'voice-app'
+  })
+}
 ```
 
 `llmobs.submitConversationCost(conversation, options)` accepts an SDK response object or raw webhook data. Options are `provider` (`'elevenlabs'`), `source` (`'conversation_details'` or `'post_call_transcription'`), `totalCost`, and `mlApp`.
@@ -2869,9 +2872,11 @@ llmobs.submitConversationCost(verifiedEvent.data, {
 
 Use the originating voice application for webhook submissions: `agent_service="voice-app"` in Python or `mlApp: 'voice-app'` in Node.js. Replace `voice-app` with the application used by the voice process, even if the webhook service uses another configured application. For a shared webhook endpoint, resolve the application from a trusted agent or conversation mapping. The first accepted application owns the charge; later observations cannot move it to another application.
 
-The application verifies webhook authenticity before submission. The automatic-collection opt-out does not disable these explicit methods. The return value is `false` when disabled, unfinished, or invalid, and when provider amounts are absent without an override. A `true` result describes local submission; delivery and conflict rejection are asynchronous. The active tenant routing context is retained.
+If your application already obtained completed conversation details, it can pass that response to the same method with the default `source="conversation_details"` or `source: 'conversation_details'`. No provider request is made by the submission API.
 
-An optional `total_cost` (Python) or `totalCost` (Node.js) supplies a finite, nonnegative USD total, including zero. Supply it on the first submission. Disable automatic collection when supplying an override asynchronously. Raw provider amounts remain unchanged. Repeated sources share one billing owner. Missing-value enrichment is accepted for 24 hours after Datadog first accepts a known total. Exact retries do not restart this window, and expired enrichment is rejected asynchronously without changing the accepted charge. A late initial report starts a new acceptance window; the conversation start time does not determine expiry. Conflicting known amounts are rejected. Do not also annotate the same conversation charge onto response spans.
+The application verifies webhook authenticity before submission. The return value is `false` when disabled, unfinished, or invalid, and when provider amounts are absent without an override. A `true` result describes local submission; delivery and conflict rejection are asynchronous. The active tenant routing context is retained.
+
+An optional `total_cost` (Python) or `totalCost` (Node.js) supplies a finite, nonnegative USD total, including zero. Supply it on the first submission. Raw provider amounts remain unchanged. Repeated sources share one billing owner. Missing-value enrichment is accepted for 24 hours after Datadog first accepts a known total. Exact retries do not restart this window, and expired enrichment is rejected asynchronously without changing the accepted charge. A late initial report starts a new acceptance window; the conversation start time does not determine expiry. Conflicting known amounts are rejected. Do not also annotate the same conversation charge onto response spans.
 
 Initial cost-metric delivery has a shorter deadline of 3 hours and 55 minutes after first acceptance. This allows transport time before metric intake rejects old timestamps. Undelivered or uncertain records remain pending after expiry; they are not automatically backfilled.
 
