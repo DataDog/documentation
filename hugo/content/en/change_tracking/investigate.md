@@ -33,10 +33,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On a dashboard
 
-<!-- TODO: Recapture screenshot with the current dashboard overlays UI. -->
-<!-- TODO: Confirm with product that the Automatic and Manual overlay controls are GA, and whether the dashboard Investigate popover (anomaly cards with a "Relevant changes" section) is GA. If it is, document it here. -->
-{{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active-2.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
-
 1. Navigate to your dashboard.
 1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
 1. By default, overlays use {{< ui >}}Automatic{{< /ui >}} mode, which shows the changes relevant to each widget's filters.
@@ -44,9 +40,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 1. Hover over a change indicator or overlay for a summary, or click it to open the side panel.
 
 ### On a monitor status page
-
-<!-- TODO: Recapture screenshot of the current monitor change timeline. -->
-{{< img src="/change_tracking/change-tracking-monitor-status-page-2.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
 
 1. Go to the monitor status page for the monitor you are investigating.
 1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
@@ -56,16 +49,12 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On a service page
 
-{{< img src="/change_tracking/change-tracking-service-page-2.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
-
 1. Go to the service page for the service you are investigating.
 1. Find the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
 1. Switch between {{< ui >}}Changes by Service{{< /ui >}} for changes to that service alone and {{< ui >}}Changes by Service + Dependencies{{< /ui >}} for changes to services it depends on.
 1. Click a change indicator to open the side panel.
 
 ### On the RUM Explorer
-
-<!-- TODO: Add RUM Explorer screenshot showing change markers. Confirm step labels in the app. -->
 
 1. Go to the [RUM Explorer][6].
 1. Visualize your RUM data as a timeseries, for example by grouping by errors.
@@ -74,8 +63,6 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### Faulty change banners
 
-<!-- TODO: Add screenshot of the faulty change banner and the view it opens. Add the faulty-deployment example narrative from product. Confirm the banner's open action label. -->
-
 On dashboards and monitor status pages, Datadog displays a banner when a small number of changes are likely causing the behavior you are looking at, such as an increase in errors. These changes are identified by [Watchdog Faulty Deployment Detection][9], which flags deployments that are likely causes of a symptom like an increased error rate.
 
 1. Find the faulty change banner at the top of the change timeline.
@@ -83,8 +70,6 @@ On dashboards and monitor status pages, Datadog displays a banner when a small n
 1. Click a change to open the side panel and investigate it.
 
 ## Open the change side panel
-
-<!-- TODO: Add screenshot of the change side panel. -->
 
 Click a change on a timeline, an overlay, or a widget to open the Change Tracking side panel.
 
@@ -95,8 +80,6 @@ From the side panel, you can investigate more details about the change and take 
 - Compare two deployments to see what differs between them.
 
 ### Read the Change Analysis
-
-<!-- TODO: Confirm whether deployment Change Analysis needs a Preview label. -->
 
 Change Analysis is an AI-generated summary in the change side panel that describes what a change did. It goes beyond noting that a new version deployed, and summarizes what moved in the code behind it.
 
@@ -109,17 +92,21 @@ To get the most from Change Analysis, set up [Source Code Integration][10] for t
 
 ## Search for changes you can't see
 
-<!-- TODO: Add "Explore changes with Change Explorer" (Preview) section after product sends links. -->
-
 ### Search by symptom with Semantic Search
-
-<!-- TODO: Confirm Semantic Search status (Preview, or GA for feature flags). -->
 
 {{< callout url="https://www.datadoghq.com/product-preview/semantic-search-changes/" btn_hidden="false" header="Join the Preview!" >}}
 Semantic Search for changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}}
 
 Semantic Search lets you describe the problem in your own words. For example, you can enter "my payment service is down, what change might have caused it?" and Semantic Search returns the most plausible match, instead of requiring you to know which service or change type to filter on.
+
+### Explore changes with Change Explorer
+
+{{< callout url="https://www.datadoghq.com/product-preview/change-explorer/" btn_hidden="false" header="Join the Preview!" >}}
+Change Explorer is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+{{< /callout >}}
+
+Use Change Explorer to search for changes outside of the change timeline on the page you're viewing.
 
 ### Build your own view with Change Tracking widgets
 
