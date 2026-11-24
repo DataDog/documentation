@@ -23,7 +23,9 @@ further_reading:
 
 ## Overview
 
-Outcomes measures the cost of each result your spend produces, such as tokens processed, active users, or completed orders. Total cloud spend tells you how much you're paying, but not what you're getting for it. A rising bill can mean your product is growing, or it can mean your infrastructure is getting less efficient. Outcomes connects your spend to the value it creates, so you can understand your {{< tooltip text="unit economics" tooltip="The cost to deliver one unit of value, such as one order, one active user, or one million tokens." >}}.
+[Cloud Cost Management (CCM) Outcomes][1] helps you understand your {{< tooltip text="unit economics" tooltip="The cost to deliver one unit of value, such as one order, one active user, or one million tokens." >}} by tracking what each unit of value costs you.
+
+An outcome pairs a slice of your spend with the result it produces, such as tokens processed, active users, or completed orders, and shows the cost per unit over time. Total spend tells you how much you're paying, but not what you're getting for it. When your bill goes up, Outcomes shows whether each unit also costs more. If it doesn't, your spend is growing with demand. If it does, your costs are becoming less efficient.
 
 With Outcomes, you can:
 
