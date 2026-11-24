@@ -548,6 +548,13 @@
       "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
+  "CreateTerraformCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an HCP Terraform persona mapping returns \"Created\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -2090,6 +2097,11 @@
       "group": "observability_pipelines",
       "suffix": "_253109967",
       "description": "Validate an observability pipeline with ClickHouse destination with all fields set returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_989273865",
+      "description": "Validate an observability pipeline with CrowdStrike FDR source returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",

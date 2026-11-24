@@ -18,9 +18,11 @@ core->Start();
 {% tab label="C" %}
 ```c
 /* Configure and register RUM */
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
+dd_rum_config_t* rum_config = dd_rum_config_create("<rum_application_id>");
+dd_rum_t* rum = dd_rum_init(core, rum_config);
+
+/* RUM keeps its own copy of the config, so destroy the config after registering RUM */
+dd_rum_config_destroy(rum_config);
 
 /* Start the core to begin collecting and uploading data */
 dd_core_start(core);
@@ -50,7 +52,7 @@ config.SetDiagnosticThreshold(datadog::DiagnosticLevel::Debug);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
+dd_core_config_set_diagnostic_threshold(config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 ```
 {% /tab %}
 {% /tabs %}

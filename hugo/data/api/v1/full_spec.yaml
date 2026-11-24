@@ -33,6 +33,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
   schemas:
     APIErrorResponse:
       description: Error response object.
@@ -20538,7 +20559,12 @@ components:
           type: array
       type: object
     SyntheticsListTestsResponse:
-      description: Object containing an array of Synthetic tests configuration.
+      description: |-
+        Synthetic test configurations.
+        Search responses also include `total` (matches before per-test access filtering) and `facets` (value counts).
+        `total` can report 10,000 even when more tests match. Do not treat that value as an exact total.
+        In TypeScript, these are available as `response.additionalProperties?.total` and
+        `response.additionalProperties?.facets`.
       properties:
         tests:
           description: Array of Synthetic tests configuration.
@@ -21638,7 +21664,15 @@ components:
         - MOBILE
         - NETWORK
     SyntheticsTestDetailsWithoutSteps:
-      description: Object containing details about your Synthetic test, without test steps.
+      description: |-
+        Synthetic test details, without steps.
+        Search results can also include `created_by`, `location_names`, `monitor_status`, `last_triggered_ts`,
+        `triage_score`, and `test_criticality`. In TypeScript, these retain their snake_case names under
+        `test.additionalProperties`.
+        `monitor_status` describes monitor health, with known values `OK`, `Alert`, and `No Data`.
+        `last_triggered_ts` is the monitor's last trigger time in Unix seconds.
+        `triage_score` ranges from 0 to 1. Higher values mean higher priority.
+        `test_criticality` groups scores into `low`, `medium`, `high`, or `very_high`.
       properties:
         config:
           $ref: "#/components/schemas/SyntheticsTestConfig"
@@ -34022,13 +34056,30 @@ paths:
         **Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.
       operationId: ListHosts
       parameters:
-        - description: String to filter search results.
+        - description: |-
+            String to filter search results. A filter is one or more terms separated by spaces or commas.
+            A host must match every term. Prefix a term with `!` to exclude matching hosts.
+
+            Term types:
+            - `<text>`: Partial, case-insensitive match against host name, alias, AWS ID and name, tags, apps, and
+              agent metadata. Text of fewer than 3 characters only matches a field whose value is exactly that text.
+            - `tag:<key>:<value>`: Exact match on a tag, for example `tag:env:prod`.
+            - `field:apps:<app>`: Exact match on an app name, for example `field:apps:nginx`.
+            - `field:metadata_agent_version:<value>`, `field:metadata_machine:<value>`,
+              `field:metadata_platform:<value>`, `field:metadata_processor:<value>`: Exact match on that metadata field.
+            - `exists:tag:<key>` or `exists:field:<field>`: Match hosts that have the tag key or a non-empty value
+              for the field, for example `exists:tag:env` or `exists:field:metadata_platform`.
+            - `exact:<value>`: Whole-value, case-sensitive match.
+
+            Boolean operators (`AND`, `OR`, `NOT`) and `*` wildcards are not supported.
           in: query
           name: filter
           required: false
           schema:
             type: string
-        - description: Sort hosts by this field.
+        - description: |-
+            Sort hosts by this field. Options include `name`, `aws_id`, `aws_name`, `up`, `apps`, `cpu`,
+            `iowait`, and `load`. Unrecognized values default to `cpu`..
           in: query
           name: sort_field
           required: false
@@ -42025,7 +42076,9 @@ paths:
           - synthetics_default_settings_read
   /api/v1/synthetics/tests:
     get:
-      description: Get the list of all Synthetic tests.
+      description: |-
+        Get the list of all Synthetic tests. To use query filters or get monitor-health metadata, use
+        the Search Synthetic tests with filters endpoint.
       operationId: ListTests
       parameters:
         - description: Used for pagination. The number of tests returned in the page.
@@ -42410,8 +42463,8 @@ paths:
   /api/v1/synthetics/tests/api/{public_id}:
     get:
       description: |-
-        Get the detailed configuration associated with
-        a Synthetic API test.
+        Get the detailed configuration of one Synthetic API test.
+        For bulk configuration reads, prefer paginated `SearchTests` requests with `include_full_config=true`.
       operationId: GetAPITest
       parameters:
         - description: The public ID of the test to get details from.
@@ -42866,6 +42919,8 @@ paths:
     get:
       description: |-
         Get the last 150 test results summaries for a given Synthetic browser test.
+        To filter tests across your organization by monitor status, state, or tags, use
+        the Search Synthetic tests with filters endpoint.
       operationId: GetBrowserTestLatestResults
       parameters:
         - description: |-
@@ -43341,28 +43396,47 @@ paths:
   /api/v1/synthetics/tests/search:
     get:
       description: |-
-        Search for Synthetic tests.
+        Search for Synthetic tests that match the `text` query. The response includes monitor health, facet counts,
+        and pagination metadata. `total` can report 10,000 even when more tests match.
+        Do not treat that value as an exact total. Access restrictions can return fewer tests than `count`, or none.
+        Increase `start` by `count` for each page.
+        In TypeScript, response-level `total` and `facets`, and test-level `monitor_status`
+        (known values: `OK`, `Alert`, `No Data`), are available through `additionalProperties`.
       operationId: SearchTests
       parameters:
-        - description: The search query.
+        - description: |-
+            Search query. Space-separated terms are combined with AND.
+            - `status:Alert` or `status:OK`: monitor health.
+            - `state:live` or `state:paused`: whether a test runs.
+            - `type:api`, `type:browser`, or `type:mobile`: test type.
+            - `team:<name>`, `<key>:<value>`, or `tag:<key>:<value>`: tags, for example `team:dashboards env:prod`.
+            - `test_criticality:(high OR very_high)`: tests with high or very high criticality.
+            - Free text, for example `checkout`: test names.
+
+            `status:Alert state:live` matches running tests with alerting monitors. Paused tests can remain alerting.
+          example: "status:Alert state:live"
           in: query
           name: text
           required: false
           schema:
             type: string
-        - description: If true, include the full configuration for each test in the response.
+        - description: |-
+            If true, include the full configuration, including assertions and multistep API steps.
+            If false or omitted, `config` contains only a reduced request summary.
+            In TypeScript, multistep steps are in `test.config?.additionalProperties?.steps`.
           in: query
           name: include_full_config
           required: false
           schema:
             type: boolean
-        - description: If true, return only facets instead of full test details.
+        - description: If true, return facet counts with an empty `tests` array and `total` set to 0.
           in: query
           name: facets_only
           required: false
           schema:
             type: boolean
-        - description: The offset from which to start returning results.
+        - description: |-
+            Zero-based result offset. Increase by `count` for each page, even if fewer tests are returned.
           in: query
           name: start
           required: false
@@ -43370,7 +43444,9 @@ paths:
             default: 0
             format: int64
             type: integer
-        - description: The maximum number of results to return.
+        - description: |-
+            Maximum number of tests per page. Access restrictions can return fewer tests or none,
+            even when more tests match.
           in: query
           name: count
           required: false
@@ -43378,7 +43454,12 @@ paths:
             default: 50
             format: int64
             type: integer
-        - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
+        - description: |-
+            Sort by `<field>,<direction>`, where direction is `asc` or `desc` (for example, `name,asc`).
+            Supported fields include `name`, `status`, `tags`, `triggered`, `created`, `modified`, `priority`,
+            `muted_elapsed`, `muted_left`, `creator`, `type`, `domain`, and `triage_score`.
+            `test_criticality` is an alias for `triage_score`.
+            `triggered,desc` sorts by the most recent monitor trigger time (`last_triggered_ts`).
           in: query
           name: sort
           required: false
@@ -43424,7 +43505,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - synthetics_read
-      summary: Search Synthetic tests
+      summary: Search Synthetic tests with filters
       tags:
         - Synthetics
       x-menu-order: 6
@@ -43861,6 +43942,8 @@ paths:
     get:
       description: |-
         Get the last 150 test results summaries for a given Synthetic API test.
+        To filter tests across your organization by monitor status, state, or tags, use
+        the Search Synthetic tests with filters endpoint.
       operationId: GetAPITestLatestResults
       parameters:
         - description: The public ID of the test for which to search results for.

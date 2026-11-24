@@ -11,9 +11,8 @@ rum_config.SetSessionSampleRate(100.0f);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_config_set_session_sample_rate(&rum_config, 100.0f);
+dd_rum_config_t* rum_config = dd_rum_config_create("<rum_application_id>");
+dd_rum_config_set_session_sample_rate(rum_config, 100.0f);
 ```
 {% /tab %}
 {% /tabs %}
@@ -42,7 +41,7 @@ static void on_rum_context(const dd_rum_context_message_t* msg, void* userdata) 
     // The current session ID is available in msg->session_id
 }
 
-dd_rum_config_set_context_receiver(&rum_config, on_rum_context);
+dd_rum_config_set_context_receiver(rum_config, on_rum_context);
 ```
 {% /tab %}
 {% /tabs %}

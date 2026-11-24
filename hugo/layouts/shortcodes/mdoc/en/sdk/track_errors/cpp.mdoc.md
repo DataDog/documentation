@@ -21,14 +21,15 @@ core->Start();
 ```c
 #include "datadog.h"
 
-dd_core_config_t config;
-dd_core_config_init(&config, "<client_token>", "<service_name>", "<environment>");
-dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_config_t* config =
+    dd_core_config_create("<client_token>", "<service_name>", "<environment>");
+dd_core_t* core = dd_core_create(config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_config_destroy(config);
 dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, NULL);
 
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
+dd_rum_config_t* rum_config = dd_rum_config_create("<rum_application_id>");
+dd_rum_t* rum = dd_rum_init(core, rum_config);
+dd_rum_config_destroy(rum_config);
 
 dd_core_start(core);
 ```

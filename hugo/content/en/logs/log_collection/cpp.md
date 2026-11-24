@@ -127,10 +127,12 @@ auto core = datadog::Core::Create(config, datadog::TrackingConsent::Granted);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_t config;
-dd_core_config_init(&config, "<client_token>", "<service>", "<env>");
-dd_core_config_set_application_storage_path(&config, "<app-storage-dir>");
-dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_config_t* config = dd_core_config_create("<client_token>", "<service>", "<env>");
+dd_core_config_set_application_storage_path(config, "<app-storage-dir>");
+dd_core_t* core = dd_core_create(config, DD_TRACKING_CONSENT_GRANTED);
+
+/* The core keeps its own copy of the config, so destroy the config after creating the core */
+dd_core_config_destroy(config);
 ```
 
 The C API requires explicit cleanup:
@@ -155,7 +157,7 @@ config.SetSite(datadog::Site::us3);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US3);
+dd_core_config_set_site(config, DD_SITE_US3);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -174,7 +176,7 @@ config.SetSite(datadog::Site::us5);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US5);
+dd_core_config_set_site(config, DD_SITE_US5);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -193,7 +195,7 @@ config.SetSite(datadog::Site::eu1);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_EU1);
+dd_core_config_set_site(config, DD_SITE_EU1);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -212,7 +214,7 @@ config.SetSite(datadog::Site::ap1);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_AP1);
+dd_core_config_set_site(config, DD_SITE_AP1);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -231,7 +233,7 @@ config.SetSite(datadog::Site::ap2);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_AP2);
+dd_core_config_set_site(config, DD_SITE_AP2);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -250,7 +252,7 @@ config.SetSite(datadog::Site::us1_fed);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US1_FED);
+dd_core_config_set_site(config, DD_SITE_US1_FED);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -269,7 +271,7 @@ config.SetSite(datadog::Site::us2_fed);
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US2_FED);
+dd_core_config_set_site(config, DD_SITE_US2_FED);
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -339,11 +341,13 @@ auto logger = logging->CreateLogger(
 {{% /tab %}}
 {{% tab "C (FFI)" %}}
 ```c
-dd_logger_config_t logger_config;
-dd_logger_config_init(&logger_config);
-dd_logger_config_set_name(&logger_config, "<logger_name>");
-dd_logger_config_set_remote_log_threshold(&logger_config, DD_LOG_LEVEL_INFO);
-dd_logger_t* logger = dd_logger_create(logging, &logger_config);
+dd_logger_config_t* logger_config = dd_logger_config_create();
+dd_logger_config_set_name(logger_config, "<logger_name>");
+dd_logger_config_set_remote_log_threshold(logger_config, DD_LOG_LEVEL_INFO);
+dd_logger_t* logger = dd_logger_create(logging, logger_config);
+
+/* The logger keeps its own copy of the config, so destroy the config after creating the logger */
+dd_logger_config_destroy(logger_config);
 ```
 
 The C API requires explicit cleanup:

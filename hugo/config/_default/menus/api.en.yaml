@@ -2597,6 +2597,123 @@ menu:
       url: /api/latest/notebooks/
       identifier: notebooks
       generated: true
+    - name: Update a notebook widget
+      url: /api/latest/notebooks/update-a-notebook-widget/
+      identifier: notebooks-update-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookWidget
+        unstable:
+          - v2
+        order: 12
+    - name: Get a notebook widget
+      url: /api/latest/notebooks/get-a-notebook-widget/
+      identifier: notebooks-get-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookWidget
+        unstable:
+          - v2
+        order: 11
+    - name: List notebook widgets
+      url: /api/latest/notebooks/list-notebook-widgets/
+      identifier: notebooks-list-notebook-widgets
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookWidgets
+        unstable:
+          - v2
+        order: 10
+    - name: Update a notebook task
+      url: /api/latest/notebooks/update-a-notebook-task/
+      identifier: notebooks-update-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookTask
+        unstable:
+          - v2
+        order: 9
+    - name: Get a notebook task
+      url: /api/latest/notebooks/get-a-notebook-task/
+      identifier: notebooks-get-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookTask
+        unstable:
+          - v2
+        order: 8
+    - name: List notebook tasks
+      url: /api/latest/notebooks/list-notebook-tasks/
+      identifier: notebooks-list-notebook-tasks
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookTasks
+        unstable:
+          - v2
+        order: 7
+    - name: Get a notebook section
+      url: /api/latest/notebooks/get-a-notebook-section/
+      identifier: notebooks-get-a-notebook-section
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookSection
+        unstable:
+          - v2
+        order: 6
+    - name: List notebook sections
+      url: /api/latest/notebooks/list-notebook-sections/
+      identifier: notebooks-list-notebook-sections
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookSections
+        unstable:
+          - v2
+        order: 5
+    - name: Update notebook content
+      url: /api/latest/notebooks/update-notebook-content/
+      identifier: notebooks-update-notebook-content
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookContent
+        unstable:
+          - v2
+        order: 4
     - name: Update a notebook
       url: /api/latest/notebooks/update-a-notebook/
       identifier: notebooks-update-a-notebook
@@ -2605,9 +2722,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - UpdateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Get a notebook
       url: /api/latest/notebooks/get-a-notebook/
@@ -2617,9 +2736,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 5
     - name: Delete a notebook
       url: /api/latest/notebooks/delete-a-notebook/
@@ -2641,9 +2762,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Get all notebooks
       url: /api/latest/notebooks/get-all-notebooks/
@@ -4545,6 +4668,19 @@ menu:
           - ListAssetsSBOMs
         unstable: []
         order: 129
+    - name: Search remediation groups
+      url: /api/latest/security-monitoring/search-remediation-groups/
+      identifier: security-monitoring-search-remediation-groups
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRemediationGroups
+        unstable:
+          - v2
+        order: 190
     - name: Override the severity of security findings
       url: /api/latest/security-monitoring/override-the-severity-of-security-findings/
       identifier: security-monitoring-override-the-severity-of-security-findings
@@ -6297,9 +6433,9 @@ menu:
           - TriggerTests
         unstable: []
         order: 16
-    - name: Search Synthetic tests
-      url: /api/latest/synthetics/search-synthetic-tests/
-      identifier: synthetics-search-synthetic-tests
+    - name: Search Synthetic tests with filters
+      url: /api/latest/synthetics/search-synthetic-tests-with-filters/
+      identifier: synthetics-search-synthetic-tests-with-filters
       parent: synthetics
       generated: true
       params:
@@ -8940,8 +9076,7 @@ menu:
           - v2
         operationids:
           - GetAgentHealthIssue
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: List Agent Health issues
       url: /api/latest/agent-health/list-agent-health-issues/
@@ -8953,8 +9088,7 @@ menu:
           - v2
         operationids:
           - ListAgentHealthIssues
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
@@ -10223,6 +10357,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Anthropic Usage And Costs Integration
+      url: /api/latest/anthropic-usage-and-costs-integration/
+      identifier: anthropic-usage-and-costs-integration
+      generated: true
+    - name: Update an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/update-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-update-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/get-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-get-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/delete-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-delete-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an Anthropic Usage and Costs account
+      url: /api/latest/anthropic-usage-and-costs-integration/create-an-anthropic-usage-and-costs-account/
+      identifier: anthropic-usage-and-costs-integration-create-an-anthropic-usage-and-costs-account
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAnthropicUsageAndCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Anthropic Usage and Costs accounts
+      url: /api/latest/anthropic-usage-and-costs-integration/list-anthropic-usage-and-costs-accounts/
+      identifier: anthropic-usage-and-costs-integration-list-anthropic-usage-and-costs-accounts
+      parent: anthropic-usage-and-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAnthropicUsageAndCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -10812,6 +11015,71 @@ menu:
       url: /api/latest/bits-security-analyst/
       identifier: bits-security-analyst
       generated: true
+    - name: Update outreach policy rules
+      url: /api/latest/bits-security-analyst/update-outreach-policy-rules/
+      identifier: bits-security-analyst-update-outreach-policy-rules
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachPolicyRules
+        unstable:
+          - v2
+        order: 6
+    - name: Remove an allowed outreach domain
+      url: /api/latest/bits-security-analyst/remove-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-remove-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 8
+    - name: Add an allowed outreach domain
+      url: /api/latest/bits-security-analyst/add-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-add-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 7
+    - name: Update the outreach mode
+      url: /api/latest/bits-security-analyst/update-the-outreach-mode/
+      identifier: bits-security-analyst-update-the-outreach-mode
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachMode
+        unstable:
+          - v2
+        order: 5
+    - name: Get the user outreach policy
+      url: /api/latest/bits-security-analyst/get-the-user-outreach-policy/
+      identifier: bits-security-analyst-get-the-user-outreach-policy
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentOutreachPolicy
+        unstable:
+          - v2
+        order: 4
     - name: Get a Bits Security Analyst investigation
       url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
       identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
@@ -12530,10 +12798,131 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Claude Compliance Integration
+      url: /api/latest/claude-compliance-integration/
+      identifier: claude-compliance-integration
+      generated: true
+    - name: Update a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/update-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-update-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/get-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-get-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/delete-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-delete-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Claude Compliance integration account
+      url: /api/latest/claude-compliance-integration/create-a-claude-compliance-integration-account/
+      identifier: claude-compliance-integration-create-a-claude-compliance-integration-account
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateClaudeComplianceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Claude Compliance integration accounts
+      url: /api/latest/claude-compliance-integration/list-claude-compliance-integration-accounts/
+      identifier: claude-compliance-integration-list-claude-compliance-integration-accounts
+      parent: claude-compliance-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListClaudeComplianceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Authentication
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/get-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-get-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 26
+    - name: Delete an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/delete-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-delete-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 28
+    - name: Create an HCP Terraform persona mapping
+      url: /api/latest/cloud-authentication/create-an-hcp-terraform-persona-mapping/
+      identifier: cloud-authentication-create-an-hcp-terraform-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 27
+    - name: List HCP Terraform persona mappings
+      url: /api/latest/cloud-authentication/list-hcp-terraform-persona-mappings/
+      identifier: cloud-authentication-list-hcp-terraform-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 25
     - name: Get a Custom OIDC provider
       url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
       identifier: cloud-authentication-get-a-custom-oidc-provider
@@ -16994,6 +17383,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: GitHub Costs Integration
+      url: /api/latest/github-costs-integration/
+      identifier: github-costs-integration
+      generated: true
+    - name: Update a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/update-a-github-costs-integration-account/
+      identifier: github-costs-integration-update-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/get-a-github-costs-integration-account/
+      identifier: github-costs-integration-get-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/delete-a-github-costs-integration-account/
+      identifier: github-costs-integration-delete-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/create-a-github-costs-integration-account/
+      identifier: github-costs-integration-create-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List GitHub Costs integration accounts
+      url: /api/latest/github-costs-integration/list-github-costs-integration-accounts/
+      identifier: github-costs-integration-list-github-costs-integration-accounts
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration
@@ -19401,7 +19859,7 @@ menu:
           - PinModelLabRun
         unstable:
           - v2
-        order: 10
+        order: 12
     - name: Unpin a Model Lab run
       url: /api/latest/model-lab-api/unpin-a-model-lab-run/
       identifier: model-lab-api-unpin-a-model-lab-run
@@ -19414,7 +19872,7 @@ menu:
           - UnpinModelLabRun
         unstable:
           - v2
-        order: 11
+        order: 13
     - name: List Model Lab run artifacts
       url: /api/latest/model-lab-api/list-model-lab-run-artifacts/
       identifier: model-lab-api-list-model-lab-run-artifacts
@@ -19427,7 +19885,7 @@ menu:
           - ListModelLabRunArtifacts
         unstable:
           - v2
-        order: 14
+        order: 16
     - name: Get a Model Lab run
       url: /api/latest/model-lab-api/get-a-model-lab-run/
       identifier: model-lab-api-get-a-model-lab-run
@@ -19440,7 +19898,7 @@ menu:
           - GetModelLabRun
         unstable:
           - v2
-        order: 8
+        order: 10
     - name: Delete a Model Lab run
       url: /api/latest/model-lab-api/delete-a-model-lab-run/
       identifier: model-lab-api-delete-a-model-lab-run
@@ -19453,7 +19911,7 @@ menu:
           - DeleteModelLabRun
         unstable:
           - v2
-        order: 9
+        order: 11
     - name: List Model Lab runs
       url: /api/latest/model-lab-api/list-model-lab-runs/
       identifier: model-lab-api-list-model-lab-runs
@@ -19466,7 +19924,7 @@ menu:
           - ListModelLabRuns
         unstable:
           - v2
-        order: 7
+        order: 9
     - name: Star a Model Lab project
       url: /api/latest/model-lab-api/star-a-model-lab-project/
       identifier: model-lab-api-star-a-model-lab-project
@@ -19493,6 +19951,32 @@ menu:
         unstable:
           - v2
         order: 6
+    - name: Add an owner to a Model Lab project
+      url: /api/latest/model-lab-api/add-an-owner-to-a-model-lab-project/
+      identifier: model-lab-api-add-an-owner-to-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddModelLabProjectOwner
+        unstable:
+          - v2
+        order: 7
+    - name: Remove an owner from a Model Lab project
+      url: /api/latest/model-lab-api/remove-an-owner-from-a-model-lab-project/
+      identifier: model-lab-api-remove-an-owner-from-a-model-lab-project
+      parent: model-lab-api
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveModelLabProjectOwner
+        unstable:
+          - v2
+        order: 8
     - name: List Model Lab project artifacts
       url: /api/latest/model-lab-api/list-model-lab-project-artifacts/
       identifier: model-lab-api-list-model-lab-project-artifacts
@@ -19505,7 +19989,7 @@ menu:
           - ListModelLabProjectArtifacts
         unstable:
           - v2
-        order: 15
+        order: 17
     - name: Get a Model Lab project
       url: /api/latest/model-lab-api/get-a-model-lab-project/
       identifier: model-lab-api-get-a-model-lab-project
@@ -19570,7 +20054,7 @@ menu:
           - ListModelLabRunFacetValues
         unstable:
           - v2
-        order: 13
+        order: 15
     - name: List Model Lab run facet keys
       url: /api/latest/model-lab-api/list-model-lab-run-facet-keys/
       identifier: model-lab-api-list-model-lab-run-facet-keys
@@ -19583,7 +20067,7 @@ menu:
           - ListModelLabRunFacetKeys
         unstable:
           - v2
-        order: 12
+        order: 14
     - name: Get Model Lab artifact content
       url: /api/latest/model-lab-api/get-model-lab-artifact-content/
       identifier: model-lab-api-get-model-lab-artifact-content
@@ -19596,7 +20080,7 @@ menu:
           - GetModelLabArtifactContent
         unstable:
           - v2
-        order: 16
+        order: 18
     - name: Nebius Cloud Integration
       url: /api/latest/nebius-cloud-integration/
       identifier: nebius-cloud-integration
@@ -20480,6 +20964,75 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
+    - name: OpenAI Codex Integration
+      url: /api/latest/openai-codex-integration/
+      identifier: openai-codex-integration
+      generated: true
+    - name: Update an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/update-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-update-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/get-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-get-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/delete-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-delete-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Codex integration account
+      url: /api/latest/openai-codex-integration/create-an-openai-codex-integration-account/
+      identifier: openai-codex-integration-create-an-openai-codex-integration-account
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAICodexIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Codex integration accounts
+      url: /api/latest/openai-codex-integration/list-openai-codex-integration-accounts/
+      identifier: openai-codex-integration-list-openai-codex-integration-accounts
+      parent: openai-codex-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAICodexIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
@@ -23478,6 +24031,30 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
+    - name: Get Agent Observability Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-agent-observability-scanning-group/
+      identifier: sensitive-data-scanner-get-agent-observability-scanning-group
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScanningGroup
+        unstable: []
+        order: 11
+    - name: List Agent Observability Scanning Groups
+      url: /api/latest/sensitive-data-scanner/list-agent-observability-scanning-groups/
+      identifier: sensitive-data-scanner-list-agent-observability-scanning-groups
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTargetScanningGroups
+        unstable: []
+        order: 10
     - name: List standard patterns
       url: /api/latest/sensitive-data-scanner/list-standard-patterns/
       identifier: sensitive-data-scanner-list-standard-patterns

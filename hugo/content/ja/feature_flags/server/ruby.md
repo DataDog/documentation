@@ -3,7 +3,7 @@ description: Ruby アプリケーション用に Datadog Feature Flags をセッ
 further_reading:
 - link: /feature_flags/server/
   tag: ドキュメント
-  text: サーバーサイドの Feature Flags
+  text: Server-Side Feature Flags
 - link: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
   tag: ドキュメント
   text: Ruby Tracing
@@ -65,7 +65,7 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
-新規セットアップの場合、Feature Flags の有効化やソース設定は必要ありません。OpenFeature に Datadog プロバイダーを登録してポーリングを開始します。トレーサーのインストールや `Datadog::OpenFeature::Provider.new` の構築だけでは、Agentless 構成のリクエストは開始されません。
+新規セットアップの場合、Feature Flags の有効化やソース設定は必要ありません。OpenFeature に Datadog プロバイダーを登録してポーリングを開始します。トレーサーのインストールや `Datadog::OpenFeature::Provider.new` の構築のみでは、Agentless 構成のリクエストは開始されません。
 
 ### プロバイダーを初期化する {#initialize-the-provider}
 
@@ -147,6 +147,47 @@ context = OpenFeature::SDK::EvaluationContext.new(
 ```
 
 ターゲティングキーは、一貫したトラフィックディストリビューション (パーセンテージロールアウト) に使用されます。追加の属性により、上記の例で「米国のユーザーに対して有効にする」や「プレミアム層のユーザーに対して有効にする」といったターゲティングルールが可能になります。
+
+## フラグ評価テレメトリおよび実験参加を制御する{#control-flag-evaluation-telemetry-and-experiment-participation}
+
+テレメトリのオプトアウトには、`datadog` バージョン `2.47.0` 以降が必要です。Experimentation のオプトアウトには、`datadog` バージョン `2.49.0` 以降が必要です。組み合わせの例には、`2.49.0` 以降が必要です。両方の制御は独立しており、デフォルトで無効になっています。共通の動作については、[フラグ評価と Experimentation のオプトアウト][14]を参照してください。
+
+プロバイダーを構築する前に、以下の変数を設定します。
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+起動時にプロバイダーを初期化します。評価のたびにサブジェクトの設定を渡します。
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+例のタイムスタンプを、サブジェクトについて保存されている設定に置き換えてください。
+
+同等のプロバイダーオプションは `enable_evaluation_telemetry_opt_out_parameter: true` と `experimentation_opt_out_mode: :immediate` です。明示的なプロバイダーオプションは、デプロイメント設定をオーバーライドします。有効になっているデプロイメントポリシーをオーバーライドするには `:disabled` を使用し、デプロイメント設定を使用するにはこのオプションを省略します。
+
+タイムスタンプより厳密に前にアクティブ化された割り当てを保持するには、`future_experiments_only` または `experimentation_opt_out_mode: :future_experiments_only` を使用します。どちらの有効モードでも、形式が正しくないサブジェクトのタイムスタンプは `INVALID_CONTEXT` で拒否され、アプリケーションのデフォルトが返されます。「今後の実験のみ」モードでは、以前の登録状況ではなく、割り当てのアクティブ化を確認します。
+
+テレメトリのオプトアウトにより、アプリケーションで有効になっている各項目 (新しい評価イベント、評価メトリクス、および自動フラグスパンアノテーション) が抑制されます。エクスポージャーは、対象となる割り当てに対して有効なままになります。リクエストごとに個別のコンテキストをs指定します。テレメトリを再開するには、ブール値 `false` を指定するか、この属性を削除します。実験を再度許可するには、タイムスタンプを削除します。継承されたコンテキスト値の適用方法については、[サーバー SDK の構成][15]を参照してください。
 
 ## フラグを評価する {#evaluate-flags}
 
@@ -238,7 +279,7 @@ timeout = config['timeout'] || 30
 
 ### フラグ評価の詳細 {#flag-evaluation-details}
 
-フラグの値だけでなく詳細情報が必要な場合は、`fetch_<type>_details` メソッドを使用します。これらのメソッドは、評価された値とその評価を説明するメタデータの両方を返します。
+フラグの値のみでなく詳細情報が必要な場合は、`fetch_<type>_details` メソッドを使用します。これらのメソッドは、評価された値とその評価を説明するメタデータの両方を返します。
 
 ```ruby
 details = client.fetch_boolean_details(
@@ -275,6 +316,10 @@ end
 ## 独自のデータストアにエクスポージャーを記録する {#record-exposures-in-your-own-data-store}
 
 独自のログ、データウェアハウス、または分析パイプラインにエクスポージャーを記録するには、`Datadog::OpenFeature::ExposureHook` を使用します。各フラグ評価の後、プロバイダーが Datadog に使用するものと同じエクスポージャーの判定に基づいてコードが呼び出されます。Datadog へのエクスポージャーの送信を停止するには、`DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false` を設定します。SDK の最小要件およびその他の詳細については、[独自のデータストアに Feature Flag のエクスポージャーを記録する][12]を参照してください。
+
+## 評価イベントとプライバシー {#evaluation-events-and-privacy}
+
+EVP フラグ評価イベントにおけるターゲティングキーのハッシュ化および環境制御のコンテキスト収集には、`datadog` 2.46.0 以降を使用してください。デフォルトでは、これらのイベントは有効になっています。このイベントパスのみを無効にするには、`DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` を設定してください。収集されるデータ、オプトアウトのスコープ、および配信要件については、[サーバーサイドの評価イベントとプライバシー][13]を参照してください。
 
 ## テスト {#testing}
 
@@ -362,7 +407,7 @@ context.add('tier', 'premium')
 enabled = client.getBooleanValue('checkout.new', false, context)
 ```
 
-JAR ファイルのみではフラグ配信は有効になりません。Datadog プロバイダーは `dd-java-agent` のクラスを使用します。JVM が `dd-java-agent` をロードしない場合、プロバイダーは初期化されません。その場合、フラグ評価はデフォルト値を返します。
+JAR ファイルのみではフラグ配信は有効になりません。Datadog プロバイダーは `dd-java-agent` のクラスを使用します。JVM が `dd-java-agent` を読み込まない場合、プロバイダーは初期化されません。その場合、フラグ評価はデフォルト値を返します。
 
 プロバイダーイベント、エラー処理、および評価メソッドについては、[Java SDK][8] ページを参照してください。JRuby は同じクラスとメソッドを使用します。
 
@@ -387,9 +432,9 @@ JAR ファイルのみではフラグ配信は有効になりません。Datadog
 - Agent と Ruby トレーサーで Remote Configuration が有効になっていることを確認します。
 - アプリケーションの起動時に Datadog Agent が利用可能であったことを確認します。Agent が利用可能になった後も問題が解消しない場合は、アプリケーションを再起動してください。[Agent の可用性][11]を参照してください。
 - Agent 上の API キーと、アプリケーション内の `DD_SERVICE` および `DD_ENV` を確認します。
-- アプリケーションが Agent にリーチできることを確認します。`DD_TRACE_DEBUG=true` を有効にし、 Remote Configuration エラーのトレーサーログを確認します。
+- アプリケーションが Agent にリーチできることを確認します。`DD_TRACE_DEBUG=true` を有効にし、Remote Configuration エラーのトレーサーログを確認します。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -405,3 +450,6 @@ JAR ファイルのみではフラグ配信は有効になりません。Datadog
 [10]: #use-the-java-sdk-on-jruby
 [11]: /ja/feature_flags/concepts/configuration_sources/#agent-availability
 [12]: /ja/feature_flags/guide/record_exposures_in_your_own_data_store/
+[13]: /ja/feature_flags/guide/server_evaluation_events/
+[14]: /ja/feature_flags/concepts/opt_out/
+[15]: /ja/feature_flags/concepts/opt_out/#configure-server-sdks

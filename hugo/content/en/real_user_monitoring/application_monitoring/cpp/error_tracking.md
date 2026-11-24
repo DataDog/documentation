@@ -68,10 +68,10 @@ auto crash_reporting = datadog::CrashReporting::Register(core, crash_config);
 {{% tab "C (FFI)" %}}
 
 ```c
-dd_crash_reporting_config_t crash_config;
-dd_crash_reporting_config_init(&crash_config);
-dd_crash_reporting_config_set_handler_exe_path(&crash_config, "/path/to/crashpad_handler");
-dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, &crash_config);
+dd_crash_reporting_config_t* crash_config = dd_crash_reporting_config_create();
+dd_crash_reporting_config_set_handler_exe_path(crash_config, "/path/to/crashpad_handler");
+dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, crash_config);
+dd_crash_reporting_config_destroy(crash_config);
 ```
 
 {{% /tab %}}

@@ -164,7 +164,7 @@ Time Saved
 
 [1]: /ja/tests/test_impact_analysis/
 [2]: /ja/tests/
-[3]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /ja/account_management/rbac/permissions/
 [5]: /ja/tests/code_coverage
 [6]: /ja/dashboards/
