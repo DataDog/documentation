@@ -26,6 +26,7 @@ Use these integrations to:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/fabric" >}}Microsoft Fabric Warehouse{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/azure_synapse" >}}Azure Synapse{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

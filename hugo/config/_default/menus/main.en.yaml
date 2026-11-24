@@ -5709,6 +5709,11 @@ menu:
       identifier: data_obs_fabric_warehouse
       parent: data_warehouses
       weight: 6000000
+    - name: Azure Synapse
+      url: data_observability/quality_monitoring/data_warehouses/azure_synapse
+      identifier: data_obs_azure_synapse
+      parent: data_warehouses
+      weight: 7000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
