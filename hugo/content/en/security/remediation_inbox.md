@@ -191,7 +191,7 @@ Findings that belong to a remediation case show the linked case in the SCA explo
 Datadog updates the status of remediation cases automatically:
 
 - A remediation case moves to **In Progress** when a fix starts, such as a Bits Code session or a linked pull request.
-- A remediation case closes when the remediation has no open findings. Findings leave a remediation when they are fixed, muted, or expired (no longer detected).
+- A remediation case closes when the remediation has no open findings. Findings leave a remediation when they are fixed, muted, or expired. A finding expires when scans no longer detect it and no fix was recorded.
 - A closed remediation case, including one closed manually, reopens if the remediation has open findings again within 30 days.
 
 ## Enable remediation capabilities
