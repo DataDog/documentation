@@ -9,10 +9,6 @@ aliases:
 site_support_id: bits_remediation
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
-  Bits Remediation includes capabilities in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 ## Overview of Bits Remediation
 
 Bits Remediation helps on-call engineers, SREs, and platform teams act on the root cause that [Bits Investigation][1] finds. From an investigation, Bits can generate code fixes, run triage actions, and take action on your infrastructure. Admins govern which actions Bits can take and who must approve them. After you approve and apply the changes, Bits verifies that the issue is resolved.
@@ -76,18 +72,22 @@ To run triage actions from an investigation:
 
 ## Infrastructure actions
 
-{{< callout >}} One-click actions are in Preview. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
+  Autonomous remediation and AWS actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 During an investigation, Bits can recommend remediation actions to take on your infrastructure, such as rolling back a Kubernetes deployment, rebooting an EC2 instance, or invoking an AWS Lambda function. An infrastructure action can resolve an infrastructure-related root cause, or reduce the impact of an issue while you work on a longer-term fix. For more information about the available actions, see the [Action Catalog][6].
 
-### Manual recommendations and one-click actions
+### Remediation modes
 
-Bits supports the following options for infrastructure actions:
+Bits supports the following modes for infrastructure actions:
 
 - **Manual recommendations**: From the {{< ui >}}Next Steps{{< /ui >}} section of an investigation, copy the suggested command (for example, a `kubectl patch` command) and run it in your own CLI.
-- **One-click actions (Preview)**: From the {{< ui >}}Next Steps{{< /ui >}} section of an investigation, click {{< ui >}}Approve{{< /ui >}} to let Bits execute the suggested remediation action directly from the investigation context. You can also configure Slack notifications to approve the remediation action from Slack. One-click actions are available for Kubernetes and AWS infrastructure. Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. For information about how to enable one-click infrastructure actions, see [Infrastructure Actions][7].
+- **One-click actions**: From the {{< ui >}}Next Steps{{< /ui >}} section of an investigation, click {{< ui >}}Approve{{< /ui >}} to let Bits execute the suggested remediation action directly from the investigation context. You can also configure Slack notifications to approve the remediation action from Slack. One-click actions are available for Kubernetes and AWS (Preview) infrastructure. Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. For information about how to enable one-click infrastructure actions, see [Infrastructure Actions][7].
 
   {{< img src="bits_ai/bits_remediation/kubernetes_action_approve.png" alt="A suggested Kubernetes remediation step that patches the same deployment across four production clusters, with an Approve button for each patch" style="width:100%;" >}}
+
+- **Autonomous remediation (Preview)**: When an {{< ui >}}Allow{{< /ui >}} [guardrail][9] covers an action and the resource it targets, Bits takes the action on its own, without waiting for human approval. If the guardrail has a Slack channel configured, Bits posts a notification there each time it takes an action without approval. Every autonomous action is also recorded in [Action History][8].
 
 ## Validate that issues are resolved
 
