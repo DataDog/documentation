@@ -201,8 +201,8 @@ Select a detection method:
 
 Add a {{< ui >}}WHERE{{< /ui >}} clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
 
-- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())` — only monitor rows from the past week.
-- `region = 'US'` — only monitor data for a specific region.
+- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())`: Monitor only rows from the past week.
+- `region = 'US'`: Monitor only data for a specific region.
 
 ### Group by
 
@@ -225,7 +225,7 @@ For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand t
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, job duration uses nanoseconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above, and a value of `60000000000` on a job duration monitor keeps it at least one minute above. The model can still set a wider bound. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the same units as {{< ui >}}Minimum upper bound size{{< /ui >}}. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
-| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations. The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
 | {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. An AI reviewer reads these instructions when a value falls outside the bounds. See [Model Instructions](/data_observability/quality_monitoring/guides/anomaly_detection/#model-instructions). |
 
 Use the following guidelines to tune a monitor:

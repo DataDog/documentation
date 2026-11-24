@@ -46,7 +46,7 @@ After training completes, the monitor can alert. The chart shows the observed va
 
 ## Alert state
 
-When an anomaly is found, the model will remain in alert state for some time, until either the observed value returns to the original expected bounds or the anomaly has persisted long enough that the model considers it a new normal state. To resolve the monitor manually and return it to normal state, use [annotations][2].
+When an anomaly is found, the model remains in alert state until either the observed value returns to the original expected bounds or the anomaly has persisted long enough that the model considers it a new normal state. To resolve the monitor manually and return it to normal state, use [annotations][2].
 
 ## Metric-specific behavior
 
