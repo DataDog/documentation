@@ -68,7 +68,7 @@ Copied variant overrides take precedence over targeting rules and default varian
 - **Progressive rollouts and canaries** are copied without their progress or scheduled start times. Start them from the cloned flag's details page.
 - **Scheduled targeting rules** lose their scheduled start times and take effect when you enable the clone in their environment.
 - **A/B experiments and their holdout rules** are not copied.
-- **Rules that cannot be recreated** on the clone are omitted. Review the notices in the clone dialog before creating the flag.
+- **Rules with unavailable variants** can be omitted. For example, a targeting rule that serves only a deleted variant is not copied. A rollout is omitted if a serving variant or its control variant no longer exists. Review the notices in the clone dialog, then recreate omitted rules on the clone using available variants.
 
 ## Further reading
 
