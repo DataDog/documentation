@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The Planning section of Cloud Cost Management helps you take control of your cloud spend by enabling you to set budgets, manage cloud commitment programs, and measure the unit economics of your spend. Use these tools to forecast, track, and optimize your costs, ensuring you stay within budget and maximize savings across your cloud providers.
+The Planning section of Cloud Cost Management helps you take control of your cloud spend. Set budgets, manage cloud commitment programs, and measure the unit economics of your spend. Use these tools to forecast, track, and optimize your costs, helping you stay within budget and maximize savings across your cloud providers.
 
 ## Key Features
 
