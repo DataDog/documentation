@@ -196,7 +196,7 @@ Datadog updates the status of remediation cases automatically:
 
 ## Enable remediation capabilities
 
-Fix with Bits, pull request status, and linked pull requests support only GitHub repositories. Other Git providers are not supported.
+Fix with Bits, pull request status, and linked pull requests are supported only for GitHub repositories.
 
 | Capability | What it enables | How to enable |
 |---|---|---|
