@@ -122,9 +122,9 @@ Par défaut, les [métriques d'utilisation des logs][10] sont disponibles pour s
 
 Consultez les [monitors de détection d'anomalies][11] pour connaître les étapes de création de monitors d'anomalies avec les métriques d'utilisation.
 
-**Remarque** : Datadog recommande de définir l'unité sur `byte` pour `datadog.estimated_usage.logs.ingested_bytes` dans la [page de résumé des métriques][12] :
+**Remarque** : Datadog recommande de définir l'unité sur `byte` pour `datadog.estimated_usage.logs.ingested_bytes` dans la [page Metrics Catalog][12] :
 
-{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="La page de résumé des métriques affichant le panneau latéral datadog.estimated_usage.logs.ingested_bytes avec l'unité définie sur octet" style="width:70%;">}}
+{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="La page Metrics Catalog affichant le panneau latéral datadog.estimated_usage.logs.ingested_bytes avec l'unité définie sur byte" style="width:70%;">}}
 
 #### Monitors de détection d'anomalies {#anomaly-detection-monitors}
 
@@ -247,7 +247,7 @@ Si vous souhaitez voir les activités des utilisateurs, comme qui a modifié la 
 [9]: /fr/logs/guide/logs-rbac/
 [10]: /fr/logs/logs_to_metrics/#logs-usage-metrics
 [11]: /fr/monitors/types/anomaly/
-[12]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
+[12]: https://app.datadoghq.com/metric/catalog?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [13]: https://app.datadoghq.com/monitors/create
 [14]: https://app.datadoghq.com/logs
 [15]: /fr/logs/explorer/search/

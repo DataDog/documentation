@@ -1,78 +1,83 @@
 ---
-description: Encadena solicitudes para monitorizar transacciones complejas en tus
-  servicios principales.
+description: Encadene solicitudes para monitorear transacciones sofisticadas en sus
+  servicios clave.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: Blog
-  text: Monitorizar tus flujos de trabajo con los tests de API multipaso de Datadog
+  text: Monitoree sus flujos de trabajo con pruebas de API en varios pasos de Datadog
 - link: /synthetics/guide/version_history/
   tag: Guía
-  text: Historial de versiones de Synthetic Monitoring Monitoring
+  text: Historial de versiones de Synthetic Monitoring
 - link: /synthetics/private_locations
   tag: Documentación
-  text: Ejecutar tests de API multipaso en endpoints internos
+  text: Ejecute pruebas de API en varios pasos en puntos de conexión internos
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de test Synthetic
+  text: Obtenga información sobre los monitores de prueba Synthetic
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Sitio externo
-  text: Crear y gestionar tests de API multipaso Synthetic con Terraform
-title: Tests de API multipaso
+  text: Cree y gestione pruebas Synthetic de API en varios pasos con Terraform
+- link: /synthetics/guide/export-tests-to-terraform
+  tag: Guía
+  text: Exporte pruebas Synthetic de API a Terraform
+- link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
+  tag: Centro de aprendizaje
+  text: Introducción a Synthetic Monitoring y a las pruebas en navegadores
+title: Pruebas de API de varios pasos
 ---
+## Descripción general {#overview}
 
-## Información general
+Las pruebas de API en varios pasos le permiten encadenar varias [pruebas de API][1] a la vez para monitorear de forma proactiva y garantizar que los recorridos sofisticados en sus servicios clave estén disponibles en cualquier momento y desde cualquier lugar. Si desea realizar solicitudes únicas a sus servicios, utilice [pruebas de API][1].
 
-Los tests de API multipaso te permiten encadenar varios [tests de API][1] a la vez para monitorizar proactivamente y garantizar que los sofisticados recorridos a tus servicios clave estén disponibles en cualquier momento y desde cualquier lugar. Si deseas realizar solicitudes individuales a tus servicios, utiliza [tests de API][1].
+Puede lograr lo siguiente:
 
-Puedes hacer lo siguiente:
+* Ejecute solicitudes HTTP en puntos de conexión de API que requieran autenticación (por ejemplo, mediante un token)
+* Monitoree transacciones comerciales clave a nivel de API
+* Simule recorridos de aplicaciones móviles de extremo a extremo
 
-* Ejecutar peticiones HTTP en endpoints de la API que requieran autenticación (por ejemplo, a través de un token).
-* Monitorizar las transacciones empresariales más importantes a nivel de API
-* Simular el recorrido de una aplicación móvil de principio a fin
+{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Varios pasos de prueba en una prueba de API en varios pasos" style="width:90%;" >}}
 
-{{< img src="synthetics/multistep_tests/multistep_test_steps.png" alt="Múltiples pasos de test en un test de API multipaso" style="width:90%;" >}}
+Si uno de sus servicios comienza a responder más lentamente, o de una manera inesperada (por ejemplo, un cuerpo de respuesta o código de estado inesperado), su prueba puede [**alertar a su equipo**][2], [**bloquear su canalización de CI**][3] o incluso [**revertir la implementación defectuosa**][3].
 
-Si uno de tus servicios empieza a responder más lentamente o de forma inesperada (por ejemplo, cuerpo de respuesta o código de estado inesperados), tu test puede [**alertar a tu equipo**][2], [**bloquear tu pipeline de CI**][3] o incluso [**revertir el despliegue defectuoso**][3].
+Las pruebas de API en varios pasos pueden ejecutarse desde ubicaciones [administradas](#select-locations) y [privadas][4] de Datadog, lo que permite una **cobertura total de sus sistemas**, tanto externos como internos.
 
-Los tests de API multipaso pueden ejecutarse desde Datadog [gestionado](#select-locations) y [ubicaciones privadas][4], lo que permite **una cobertura completa de tus sistemas**, tanto externos como internos.
+## Configuración {#configuration}
 
-## Configuración
+### Nombre y etiquete su prueba {#name-and-tag-your-test}
 
-### Dale un nombre y etiqueta (tag) a tu test
+1. Nombre su prueba de API en varios pasos.
+2. Agregue `env` y otras etiquetas a su prueba de API en varios pasos. Puede usar estas etiquetas para filtrar sus pruebas Synthetic en la [página Synthetic Monitoring & Continuous Testing][5].
 
-1. Dale un nombre a tu test de API multipaso.
-2. Añade `env` y otras etiquetas (tags) a tu test multipaso de API. Puedes utilizar estas etiquetas (tags) para filtrar a través de tus tests de Synthetic Monitoring en la [page (página) Synthetic Monitoring & Continuous Testing][5].
+### Seleccione ubicaciones {#select-locations}
 
-### Seleccionar localizaciones
-
-Selecciona las **Localizaciones** para tu test de la API multipasos. Los tests de la API multipasos pueden ejecutarse tanto desde ubicaciones gestionadas como desde [ubicaciones privadas][4] según tu preferencia por ejecutar el test desde fuera o dentro de tu red.
+Seleccione el {{< ui >}}Locations{{< /ui >}} para su prueba de API en varios pasos. Las pruebas de API en varios pasos pueden ejecutarse desde ubicaciones administradas y [privadas][4] según su preferencia para ejecutar la prueba desde fuera o dentro de su red.
 
 {{% managed-locations %}} 
 
-### Definir pasos
+### Defina los pasos {#define-steps}
 
-Para crear un paso de solicitud de API, haz clic en **Create Your First Step** (Crear tu primer paso).
+Para crear un paso de solicitud de API, haga clic en {{< ui >}}Create Your First Step{{< /ui >}}.
 
-{{< img src="synthetics/api_tests/ms_create_request.png" alt="Crea tus peticiones de tests de API multipaso" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Cree las solicitudes de su prueba de API en varios pasos" style="width:90%;" >}}
 
-De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar este límite, ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a>.
+De forma predeterminada, puede crear hasta 10 pasos de prueba. Para aumentar este límite, contacte a <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 
-#### Define la petición
+#### Defina la solicitud {#define-the-request}
 
-1. **Dale un nombre** a tu paso.
-2. Elige un tipo de solicitud:
-
+1. **Nombre** su paso.
+2. Elija un tipo de solicitud:
+   
    {{< tabs >}}
    {{% tab "HTTP" %}}
 
-   Consulta la [documentación de Tests de HTTP][101] para crear una solicitud de HTTP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de la API de varios pasos.
+   Consulte la [documentación de pruebas HTTP][101] para crear una solicitud HTTP y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
 
-   Consulta la [documentación de tests de gRPC][102] para crear una solicitud gRPC y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas gRPC][102] para crear una solicitud gRPC y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [102]: /synthetics/api_tests/grpc_tests/
 
@@ -80,7 +85,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "SSL" %}}
 
-   Consulta la [Documentación de tests de SSL][103] para crear una solicitud SSL y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas SSL][103] para crear una solicitud SSL y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [103]: /synthetics/api_tests/ssl_tests/
 
@@ -88,7 +93,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "DNS" %}}
 
-   Consulta la [Documentación de tests DNS][104] para crear una solicitud DNS y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas DNS][104] para crear una solicitud DNS y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [104]: /synthetics/api_tests/dns_tests/
 
@@ -96,7 +101,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "WebSocket" %}}
 
-   Consulta la [Documentación de tests de WebSocket][105] para crear una solicitud WebSocket y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas WebSocket][105] para crear una solicitud WebSocket y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [105]: /synthetics/api_tests/websocket_tests/
 
@@ -104,7 +109,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "TCP" %}}
 
-   Consulta la [documentación de tests de TCP][106] para crear una solicitud TCP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas TCP][106] para crear una solicitud TCP y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [106]: /synthetics/api_tests/tcp_tests/
 
@@ -112,7 +117,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "UDP" %}}
 
-   Consulta la [Documentación de tests UDP][107] para crear una solicitud UDP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas UDP][107] para crear una solicitud UDP y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [107]: /synthetics/api_tests/udp_tests/
 
@@ -120,7 +125,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% tab "ICMP" %}}
 
-   Consulta la [Documentación de tests ICMP][108] para crear una solicitud ICMP y añadir aserciones para un check de comportamiento o un check de estado. Las aserciones son opcionales en los tests de API de varios pasos.
+   Consulte la [documentación de pruebas ICMP][108] para crear una solicitud ICMP y agregar aserciones para una comprobación de comportamiento o una comprobación de estado. Las aserciones son opcionales en las pruebas de API en varios pasos.
 
    [108]: /synthetics/api_tests/icmp_tests/
 
@@ -128,128 +133,139 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{< /tabs >}}
 
-### Añadir configuración de ejecución
+### Agregue la configuración de ejecución {#add-execution-settings}
 
-En **Execution Settings** (Configuración de ejecución), se encuentran disponibles las siguientes opciones:
+En {{< ui >}}Execution Settings{{< /ui >}}, están disponibles las siguientes opciones:
 
-#### Éxito del paso:
+#### Éxito del paso: {#step-success}
 
-Haz clic en **If step succeeds, continue to next step** (Si el paso es exitoso, continuar con el siguiente paso) para que el test continúe con los pasos posteriores después de los pasos exitosos.  
+Haga clic en {{< ui >}}If step succeeds, continue to next step{{< /ui >}} para permitir que su prueba continúe con los pasos siguientes después de pasos exitosos.  
 
-{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Captura de pantalla de la configuración de ejecución que muestra las opciones de éxito del paso para continuar con el siguiente paso" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Captura de pantalla de la configuración de ejecución que muestra las opciones para continuar al siguiente paso cuando el paso se completa con éxito" style="width:90%;" >}}
 
-Haz clic en **If step succeeds, exit test and mark it as passed** (Si el paso es exitoso, salir del test y marcarlo como superado) para salir del test una vez que se complete el paso de manera exitosa. De este modo, no se ejecutan pasos innecesarios y se evita marcar el test como fallido. 
+Haga clic en {{< ui >}}If step succeeds, exit test and mark it as passed{{< /ui >}} para salir de la prueba después de completar un paso con éxito. Esto evita ejecutar pasos innecesarios y evita marcar la prueba como fallida. 
 
-{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Captura de pantalla de la configuración de ejecución que muestra la salida y marca como superado del paso exitoso" style="width:90%;" >}}
+{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Captura de pantalla de la configuración de ejecución que muestra la opción de salir y marcar la prueba como aprobada cuando el paso se completa con éxito" style="width:90%;" >}}
 
-#### Fallo del paso
+#### Error del paso {#step-failure}
 
-Haz clic en **If step fails, continue to next step** (Si el paso falla, continuar con el siguiente paso) para continuar con los pasos posteriores después de que se haya producido una falla en el paso. Esto puede resultar útil para tareas de limpieza cuando quieres que continúen los pasos posteriores. Por ejemplo, un test puede crear un recurso, realizar varias acciones en este y finalizar con su eliminación. 
+Haga clic en {{< ui >}}If step fails, continue to next step{{< /ui >}} para continuar con los pasos siguientes después de un error en el paso. Cuando selecciona esta opción, aparece un menú {{< ui >}}and mark test as{{< /ui >}}. Mantenga {{< ui >}}failed{{< /ui >}} (seleccionado de forma predeterminada) para que la prueba falle cuando este paso falle. Seleccione {{< ui >}}passed{{< /ui >}} para que un error en este paso no haga que la prueba falle.
 
-En el caso de que uno de los pasos intermedios falle, es conveniente que esta configuración esté activada en todos los pasos intermedios para garantizar que el recurso se elimina al final del test y que no se crean falsos positivos.
+Continuar después de un paso fallido puede ser útil para tareas de limpieza cuando desea que los pasos siguientes continúen. Por ejemplo, una prueba crea un recurso, realiza varias acciones en él y luego lo elimina.
 
-El test genera una alerta si un endpoint no responde como se esperaba. Tu test puede activar reintentos X veces después de Y ms en caso de un resultado de test fallido. Personaliza el intervalo de reintentos para adaptarlo a tu criterio de alerta.
+En caso de que uno de los pasos intermedios falle, desea tener esta configuración habilitada en cada paso intermedio para asegurarse de que el recurso se elimine al final de la prueba y que no se creen falsos positivos.
 
-{{< img src="synthetics/multistep_tests/step_failure.png" alt="Captura de pantalla de la configuración de ejecución que muestra el fallo del paso" style="width:90%;" >}}
+La prueba genera una alerta si un punto de conexión no responde como se espera. Su prueba puede activar reintentos X veces después de Y ms en caso de un resultado de prueba fallido. Personalice el intervalo de reintento para adaptarlo a su sensibilidad de alerta.
 
-#### Extraer variables de la respuesta
+{{< img src="synthetics/multistep_tests/step_failure.png" alt="Captura de pantalla de la configuración de ejecución que muestra el error del paso" style="width:90%;" >}}
 
-Opcionalmente, extrae variables de la respuesta de tu solicitud de API mediante el parseo de sus encabezados de respuesta o cuerpo. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud de API.
+#### Extraiga variables de la respuesta {#extract-variables-from-the-response}
 
-Para iniciar el parseo de una variable, haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta):
+Opcionalmente, extraiga variables de la respuesta de su solicitud de API mediante el parseo de sus encabezados o su cuerpo. El valor de la variable se actualiza cada vez que se ejecuta el paso de solicitud de API.
 
-1. Ingresa un **Variable Name** (Nombre de variable). El nombre de tu variable debe tener al menos tres caracteres, y solo puede contener mayúsculas, números y guiones bajos.
-2. Decide si prefieres extraer la variable de los encabezados o del cuerpo de la respuesta.
+Para comenzar el parseo de una variable, haga clic en {{< ui >}}Extract a variable from response content{{< /ui >}}:
 
-   * Extrae el valor del **encabezado de respuesta**: utiliza el encabezado de respuesta completa de tu solicitud de API como valor de la variable o analízala con un [`regex`][8].
-   * Extrae el valor del **cuerpo de respuesta**: utiliza el cuerpo de respuesta completo de tu solicitud de API como valor de la variable o analízalo con un [`regex`][8], un [`JSONPath`][6] o un [`XPath`][7].
+1. Ingrese un {{< ui >}}Variable Name{{< /ui >}}. El nombre de su variable solo puede usar letras mayúsculas, números y guiones bajos, y debe tener al menos tres caracteres.
+2. Decida si desea extraer su variable de los encabezados de respuesta o del cuerpo de respuesta.
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraer variables de solicitudes API en un test de API multipaso" style="width:90%;" >}}
+   * Extraiga el valor de {{< ui >}}response header{{< /ui >}}: utilice el encabezado de respuesta completo de su solicitud de API como valor de la variable o analícelo con un [`regex`][8].
+   * Extraiga el valor de {{< ui >}}response body{{< /ui >}}: utilice el cuerpo de respuesta completo de su solicitud de API como valor de la variable o analícelo con un [`regex`][8], un [`JSONPath`][6] o un [`XPath`][7].
 
-Puedes extraer hasta diez variables por paso de test. Una vez creada, esta variable se puede utilizar en los siguientes pasos de tu test de API multipaso. Para obtener más información, consulta [Usar variables](#usar-variables).
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extraiga variables de solicitudes de API en una prueba de API en varios pasos" style="width:90%;" >}}
 
-### Indicar la frecuencia del test
+Puede extraer hasta diez variables por paso de prueba. Una vez creada, esta variable puede utilizarse en los siguientes pasos de su prueba de API en varios pasos. Para obtener más información, consulte [Usar variables](#use-variables).
 
-Los tests de API multipaso se pueden ejecutar:
+### Especifique la frecuencia de la prueba {#specify-test-frequency}
 
-* **En un horario** para asegurar que tus endpoints más importantes son siempre accesibles para tus usuarios. Selecciona la frecuencia con la que deseas que Datadog ejecute tu test de API multipaso.
-* [**Dentro de tus pipelines de Continuous Integration Continuous Delivery**][3] para empezar a enviar sin temer que un código defectuoso pueda afectar a la experiencia de tus clientes.
-* **A petición** para ejecutar tus tests cuando sea más conveniente para tus equipos.
+Las pruebas de API en varios pasos pueden ejecutarse:
+
+* **Según un horario** para garantizar que sus puntos de conexión más importantes estén siempre accesibles para sus usuarios. Seleccione la frecuencia con la que desea que Datadog ejecute su prueba de API en varios pasos.
+* [**Dentro de sus canalizaciones de CI/CD**][3] para comenzar a realizar entregas sin temor a que un código defectuoso pueda afectar la experiencia de sus clientes.
+* **Bajo demanda** para ejecutar sus pruebas cuando tenga más sentido para sus equipos.
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 {{% synthetics-variables %}}
 
-### Extraer variables
+### Extraer variables {#extract-variables}
 
-Además de crear variables locales, puedes [extraer variables de cualquier paso](#extract-variables-from-the-response) de tu test de API multipaso y [reinyectar los valores en pasos posteriores](#use-variables).
+Además de crear variables locales, puede [extraer variables de cualquier paso](#extract-variables-from-the-response) de su prueba de API en varios pasos y [volver a inyectar los valores en pasos posteriores](#use-variables).
 
-### Usar variables
+### Usar variables {#use-variables}
 
-Puedes utilizar las [variables globales definidas en `Settings`][13] y las [variables definidas localmente](#create-local-variables) en la URL, las opciones avanzadas y las aserciones de tus tests de API.
+Puede utilizar las [variables globales definidas en el {{< ui >}}Settings{{< /ui >}}][13] y las [variables definidas localmente](#create-local-variables) en la URL, las opciones avanzadas y las aserciones de sus pruebas de API.
 
-Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
+Para mostrar su lista de variables, escriba `{{` en el campo deseado.
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Uso de variables en los tests de API multipaso" video="true" width="90%" >}}
+{{< img src="synthetics/api_tests/use_variable.mp4" alt="Uso de variables en pruebas de API de varios pasos" video="true" width="90%" >}}
 
-### Subtests
+### Subpruebas {#subtests}
 
-Los tests de API de varios steps (UI) / pasos (generic) admiten subtests, lo que te permite reutilizar tests de API de varios pasos existentes o extraer pasos en componentes reutilizables. Puedes anidar subtests hasta dos niveles de profundidad.
+Las pruebas de API de varios pasos admiten subpruebas, lo que le permite reutilizar pruebas de API de varios pasos existentes o extraer pasos en componentes reutilizables. Puede anidar subpruebas hasta con dos niveles de profundidad.
 
-Para utilizar un test de API de varios steps (UI) / pasos (generic) existente como subtest, haz clic en **Subtest**, ve a la pestaña **From Existing Test** (Desde un test existente) y selecciona un test de API de varios pasos en el menú desplegable.
+Los pasos de las subpruebas tienen un límite de 60 segundos. Se agota el tiempo de espera de un paso de subprueba si la duración combinada de los pasos de la subprueba, incluidos los pasos de espera, supera los 60 segundos. Esto puede suceder incluso cuando la subprueba pasa como una prueba independiente.
 
-Para convertir pasos de tu test de API de varios steps (UI) / pasos (generic) en un subtest, haz clic en la pestaña **Extract From Steps** (Extraer de pasos), selecciona los pasos grabados que desees extraer y haz clic en **Convert to Subtest** (Convertir en subtest).
+- **Reintentos**: cada reintento del paso de la subprueba dispone de otros 60 segundos.
+- **Ubicaciones privadas**: la configuración `apiRequestMaxTimeout` controla este límite, en milisegundos (predeterminado: `60000`). Consulte la sección [Configuración avanzada][20] de la página de configuración de ubicaciones privadas.
 
-{{< img src="synthetics/multistep_tests/subtest.png" alt="Interfaz de usuario para añadir un subtest a un test de API multipaso" width="60%" >}}
+Para ejecutar un flujo que tarde más de 60 segundos, divídalo en varios pasos de subprueba o agregue sus pasos directamente a la prueba principal.
 
-Para sustituir una variable de subtest en un test de API multipaso, defínela en el test matriz utilizando el mismo nombre. Una variable siempre utiliza el primer valor que se le asigna.
+Para usar una prueba de API en varios pasos existente como subprueba, haga clic en {{< ui >}}Subtest{{< /ui >}}, vaya a la pestaña {{< ui >}}From Existing Test{{< /ui >}} y seleccione una prueba de API en varios pasos en el menú desplegable.
 
-Si no necesitas ejecutar un subtest de forma independiente, puedes pausarlo. Sigue ejecutándose como parte del test de API multipaso, pero no se ejecuta por sí solo.
+Para convertir pasos de su prueba de API en varios pasos actual en una subprueba, haga clic en la pestaña {{< ui >}}Extract From Steps{{< /ui >}}, seleccione los pasos grabados que desea extraer y haga clic en {{< ui >}}Convert to Subtest{{< /ui >}}.
 
-**Nota:** Solo se pueden añadir tstes de API de varios steps (UI) / pasos (generic) como subtests. No se admite el uso de [tests de API][1] como subtests.
+{{< img src="synthetics/multistep_tests/subtest.png" alt="Interfaz de usuario para agregar una subprueba a una prueba de API en varios pasos" width="60%" >}}
 
-## Fallo del test
+Para anular una variable de subprueba en una prueba de API en varios pasos, defínala en la prueba principal usando el mismo nombre. Una variable siempre usa el primer valor que se le asigna.
 
-Un test se considera `FAILED` si un paso no satisface una o varias afirmaciones o si la solicitud de un paso falla prematuramente. En algunos casos, el test puede fallar sin poder probar las afirmaciones contra el endpoint, estas razones incluyen:
+Si no necesita ejecutar una subprueba de forma independiente, puede pausarla. Aún se ejecuta como parte de la prueba de API en varios pasos, pero no se ejecuta por sí sola.
+
+**Nota:** Solo se pueden agregar pruebas de API de varios pasos como subpruebas. No se admite el uso de [pruebas de API][1] como subpruebas.
+
+## Falla de prueba {#test-failure}
+
+Una prueba se considera `FAILED` si un paso no cumple con una o varias aserciones o si la solicitud de un paso falló prematuramente. Un paso fallido no hace que la prueba falle cuando su opción {{< ui >}}and mark test as{{< /ui >}} está establecida en {{< ui >}}passed{{< /ui >}}. Para obtener más información, consulte la sección [Error de paso](#step-failure). En algunos casos, la prueba falla antes de que pueda verificar las aserciones con el punto de conexión. Estas razones incluyen:
 
 `CONNREFUSED`
-: No se ha podido establecer una conexión, ya que la máquina de destino la ha rechazado continuamente.
+: No se pudo establecer ninguna conexión porque la máquina de destino la rechazó activamente.
 
 `CONNRESET`
-: el servidor remoto ha finalizado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o se haya bloqueado mientras respondía, o la pérdida de conectividad del servidor web.
+: El servidor remoto cerró abruptamente la conexión. Las posibles causas incluyen que el servidor web encuentre un error o se bloquee al responder, o la pérdida de conectividad del servidor web.
 
 `DNS`
-: Entrada DNS no encontrada para el test URL. Entre las posibles causas se incluyen un test URL mal configurado o una configuración incorrecta en tus entradas DNS.
+: No se encontró la entrada DNS para la URL de la prueba. Las posibles causas incluyen una URL de prueba mal configurada o una configuración incorrecta de las entradas DNS.
 
 `INVALID_REQUEST` 
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
+: La configuración de la prueba no es válida (por ejemplo, un error tipográfico en la URL).
 
 `SSL`
-: La connection (conexión) de SSL no se pudo realizar. [Consulta la page (página) de error dedicado para obtener más información][14].
+: No se pudo realizar la conexión SSL. [Consulte la página de error dedicada para obtener más información][14].
 
 `TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración de la solicitud y de las aserciones ha alcanzado la duración máxima (30 minutos).
+: La solicitud no pudo completarse en un tiempo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud alcanzó el tiempo de espera definido para la prueba (el valor predeterminado es 60 s). 
+  Para cada solicitud, solo se muestran las etapas completadas de la solicitud en la cascada de red. Por ejemplo, si solo se muestra `Total response time`, se agotó el tiempo de espera durante la resolución de DNS.
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración de la solicitud y las aserciones alcanzó la duración máxima (30 minutos).
 
-Para los pasos HTTP, consulta [errores comunes de step (UI) / paso (generic) de HTTP][14]. Para los pasos de gRPC, consulta [errores comunes de step (UI) / paso (generic) de gRPC][15].
+Para obtener una lista completa de otros códigos de error de pruebas de API, consulte [API Testing Errors][19].
 
-## Permisos
+## Permisos {#permissions}
 
-De forma predeterminada, sólo los usuarios con los roles [Administrador y Estándar de Datadog][16] pueden crear, editar y eliminar tests de API multipaso Synthetic. Para obtener acceso para crear, editar y eliminar tests de API multipaso Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][16].
+De forma predeterminada, solo los usuarios con los [roles Datadog Admin y Datadog Standard][16] pueden crear, editar y eliminar pruebas de API en varios pasos de Synthetic Monitoring. Para obtener acceso para crear, editar y eliminar pruebas de API en varios pasos de Synthetic Monitoring, asigne a su usuario uno de esos dos [roles predeterminados][16].
 
-Si utilizas la [función de rol personalizado][17], añade tu usuario a cualquier rol personalizado que incluya `synthetics_read` y permisos `synthetics_write` para Synthetic Monitoring.
+Si utiliza la [función de roles personalizados][17], agregue su usuario a cualquier rol personalizado que incluya los permisos `synthetics_read` y `synthetics_write` para Synthetic Monitoring.
 
-### Restringir el acceso
+### Restringir acceso {#restrict-access}
 
 La restricción de acceso está disponible para los clientes que utilizan [roles personalizados][18] en sus cuentas.
 
-Puedes restringir el acceso a un test de API multipaso en función de los roles de tu organización. Al crear un test de API multipaso, elige qué roles (además de tu usuario) pueden leer y redactar tu test.
+Puede restringir el acceso a una prueba de API en varios pasos según los roles de su organización. Al crear una prueba de API en varios pasos, elija qué roles (además de su usuario) pueden leer y escribir su prueba. 
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Establecer permisos para tu test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Establecer permisos para su prueba" style="width:70%;" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -266,9 +282,10 @@ Puedes restringir el acceso a un test de API multipaso en función de los roles 
 [11]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
 [12]: /es/monitors/types/synthetic_monitoring/
 [13]: /es/synthetics/settings/#global-variables
-[14]: /es/synthetics/api_tests/http_tests?tab=requestoptions#test-failure
+[14]: /es/synthetics/api_tests/errors/#ssl-errors
 [15]: /es/synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
 [16]: /es/account_management/rbac/
 [17]: /es/account_management/rbac#custom-roles
 [18]: /es/account_management/rbac/#create-a-custom-role
-[19]: /es/synthetics/api_tests/grpc_tests
+[19]: /es/synthetics/api_tests/errors/
+[20]: /es/synthetics/platform/private_locations/configuration/#advanced-configuration

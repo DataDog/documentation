@@ -28,70 +28,95 @@ further_reading:
   text: Configuración del SDK de Ruby
 title: Interoperabilidad de variables de entorno de OpenTelemetry
 ---
+Los SDK de DDOT implementan las API de OpenTelemetry para trazas, métricas y registros, y leen las variables de entorno estándar del SDK de OpenTelemetry (`OTEL_*`). Puede mantener su configuración de OpenTelemetry existente al adoptar los SDK de DDOT y utilizar solo algunas configuraciones de Datadog (`DD_*`) para las capacidades específicas de Datadog.
 
-Los SDKs de Datadog implementan las APIs de OpenTelemetry para trazas, métricas y logs. Esto te permite utilizar variables de entorno estándar de OpenTelemetry para configurar tu aplicación mientras recibes telemetría adicional de Datadog con cambios mínimos en tu configuración existente.
+Esta página describe las variables de entorno para configurar los SDK de DDOT, incluidas las diferencias de soporte por lenguaje. También cubre los SDK de Datadog para Ruby y PHP, los cuales leen estas variables de entorno de OpenTelemetry para las API de métricas y registros de OpenTelemetry, pero no son SDK de DDOT.
 
-Este página describe las variables de entorno de Datadog compatibles para la interoperabilidad de OpenTelemetry.
-
-Las reglas de precedencia en esta página describen cómo los *SDKs de Datadog* resuelven la configuración en atributos de recursos de OpenTelemetry (por ejemplo, `service.name`, `deployment.environment.name`, `service.version`).
+Las reglas de precedencia en esta página describen cómo los *SDK de DDOT* resuelven la configuración en atributos de recursos de OpenTelemetry (por ejemplo, `service.name`, `deployment.environment.name`, `service.version`).
 
 <div class="alert alert-danger">
-  Para evitar que aparezcan valores duplicados en Datadog para la misma clave de etiqueta, no configures las variables de entorno de Datadog (<code>DD_*</code>) y OpenTelemetry (<code>OTEL_*</code>) para el mismo concepto. Elige una convención.
+  Para evitar que aparezcan valores duplicados en Datadog para la misma clave de etiqueta, no configure variables de entorno de Datadog (<code>DD_*</code>) y de OpenTelemetry (<code>OTEL_*</code>) para el mismo concepto. Elija una convención.
   <br>
-  Consulta la <a href="/tracing/trace_collection/library_config/">página de configuración de SDK</a> pertinente para los valores predeterminados y más información.
+  Consulte la <a href="/tracing/trace_collection/library_config/">página de configuración del SDK</a> correspondiente para obtener valores predeterminados y más información.
 </div>
 
-## Requisitos de la red
+## Requisitos de red {#network-requirements}
 
 {{% otel-network-requirements %}}
 
-**Nota**: Incluso cuando `DD_METRICS_OTEL_ENABLED=true`, las métricas de tiempo de ejecución estándar se siguen emitiendo a través de DogStatsD.
+## Configurar señales {#configure-signals}
 
-## Configuración del SDK de Datadog
-Estas variables de entorno permiten al SDK de Datadog ingerir datos de la API de métricas y logs de OpenTelemetry. Para obtener guías sobre cómo instrumentar tu aplicación, consulta la [documentación de instrumentación específica del lenguaje][14].
+Configure trazas, métricas y registros en los SDK de DDOT con las siguientes variables de entorno. Establezca los valores explícitamente para las señales que recopile. Consulte [Soporte de la API de OpenTelemetry][14] para obtener instrucciones de configuración.
+
+Para conocer los valores predeterminados específicos del lenguaje y configuraciones adicionales, consulte:
+
+| Lenguaje del SDK | Referencia de configuración |
+|---|---|
+| .NET | [.NET Core][1] o [.NET Framework][2] |
+| Go | [Configuración del SDK de Go][3] |
+| Java | [Configuración del SDK de Java][4] |
+| Node.js | [Configuración del SDK de Node.js][5] |
+| PHP | [Configuración del SDK de PHP][6] |
+| Python | [Configuración del SDK de Python][7] |
+| Ruby | [Configuración del SDK de Ruby][8] |
 
 `DD_TRACE_OTEL_ENABLED`
-: **Descripción**: habilita la interoperabilidad de OpenTelemetry del SDK de Datadog para trazas. <br>
-**Por defecto**: `false`<br>
-**Notas**: El valor por defecto es `true` en el SDK de Java.
+: **Descripción**: Habilita la compatibilidad con la API de trazas de OpenTelemetry. <br>
+**Configuración**: Establezca `DD_TRACE_OTEL_ENABLED=true` para habilitar la compatibilidad con la API. Para exportar trazas a través de OTLP, también configure `OTEL_TRACES_EXPORTER=otlp`. Habilitar la compatibilidad con la API por sí solo no cambia el exportador de trazas. Consulte [Exportación de trazas OTLP del SDK de DDOT][17] para obtener instrucciones de configuración.
+
+`DD_TRACE_OTEL_SEMANTICS_ENABLED`
+: **Descripción**: Habilita las convenciones semánticas de OpenTelemetry para trazas. <br>
+**Predeterminado**: `false`<br>
+**Notas**: Para obtener orientación sobre la instrumentación HTTP y la versión del SDK, consulte [Semántica de trazas de OpenTelemetry][21].
 
 `DD_METRICS_OTEL_ENABLED`
-: **Descripción**: habilita los componentes de instrumentación automática del SDK de Datadog para recopilar y emitir métricas generadas por la API de métricas de OpenTelemetry. <br>
-**Predeterminado**: `false`
+: **Descripción**: Habilita la recopilación y exportación OTLP de métricas generadas por la API de métricas de OpenTelemetry. <br>
+**Configuración**: Establezca `DD_METRICS_OTEL_ENABLED=true` para habilitar el soporte de métricas y `OTEL_METRICS_EXPORTER=otlp` para seleccionar la exportación OTLP.
 
 `DD_LOGS_OTEL_ENABLED`
-: **Descripción**: habilita el SDK de Datadog para recopilar y exportar logs en el formato OpenTelemetry Protocol. <br>
-**Notas**: Para la mayoría de los lenguajes, esto habilita la compatibilidad con la API de logs de OpenTelemetry. Para .NET, permite interceptar los registradores integrados. <br>
-**Por defecto**: `false`
+: **Descripción**: Habilita al SDK para recopilar registros de las API y bibliotecas de registro compatibles y exportarlos en formato OTLP. <br>
+**Configuración**: Establezca `DD_LOGS_OTEL_ENABLED=true` para habilitar la recopilación de registros. Establezca `DD_LOGS_OTEL_ENABLED=false` para deshabilitar la recopilación automática de registros.
 
-## Configuración general de SDK
-Los SDK de Datadog admiten las siguientes opciones generales de SDK de OpenTelemetry. Para obtener más información, consulta la [documentación de OpenTelemetry][9] relacionada.
+### Exportar métricas de tiempo de ejecución a través de OTLP {#export-runtime-metrics-over-otlp}
+
+Para recopilar métricas de tiempo de ejecución y exportarlas a través de OTLP, utilice un SDK que cumpla con los [requisitos previos de métricas de tiempo de ejecución][20] y establezca:
+
+```text
+DD_RUNTIME_METRICS_ENABLED=true
+DD_METRICS_OTEL_ENABLED=true
+OTEL_METRICS_EXPORTER=otlp
+```
+
+Esta configuración habilita la recopilación de métricas de tiempo de ejecución y envía las métricas al punto de conexión de métricas OTLP configurado. Consulte la [configuración de OTLP específica de métricas][18] para ver los ajustes del punto de conexión.
+
+## Configuración general del SDK {#general-sdk-configuration}
+Los SDK de Datadog admiten las siguientes opciones generales del SDK de OpenTelemetry. Para obtener más información, consulte la [documentación de OpenTelemetry][9] relacionada.
 
 `OTEL_SERVICE_NAME`
 : **Convención de Datadog**: `DD_SERVICE`<br>
 Establece el atributo de recurso `service.name`<br>
-**Notas**: Al determinar el atributo de recurso `service.name` final, el kit de desarrollo de software (SDK) utiliza esta variable como entrada para determinar el `service.name` final. Consulta las notas de `service.name` en `OTEL_RESOURCE_ATTRIBUTES` para conocer el orden de precedencia completo.<br>
+**Notas**: Al determinar el atributo de recurso final `service.name`, el SDK utiliza esta variable como entrada para determinar el `service.name` final. Consulte las `service.name` notas en `OTEL_RESOURCE_ATTRIBUTES` para conocer el orden de precedencia completo.<br>
 
 `OTEL_LOG_LEVEL`
 : **Convención de Datadog**: `DD_LOG_LEVEL`<br>
-Nivel de log utilizado por el SDK registrador<br>
-**Notas**: Un nivel de log de depuración también se asigna a `DD_TRACE_DEBUG=true`<br>
-En los SDKs de Node.js y PHP se asigna a `DD_TRACE_LOG_LEVEL` <br>
-En el SDK de Go solo se admiten valores asignados entre `OTEL_LOG_LEVEL` y `DD_TRACE_DEBUG`:<br>
+Nivel de registro utilizado por el registrador del SDK<br>
+**Notas**: Un nivel de registro de debug también corresponde a `DD_TRACE_DEBUG=true`<br>
+En los SDK de Node.js y PHP, esto corresponde a `DD_TRACE_LOG_LEVEL` <br>
+En el SDK de Go, solo se admiten los valores correspondientes entre `OTEL_LOG_LEVEL` y `DD_TRACE_DEBUG`:<br>
   - `info`|`false`
   - `debug`|`true`<br>
-**No compatible con los SDK de Python.NET, Ruby, y Go<br>
+**No se admite en**: los SDK de Python, .NET, Ruby y Go<br>
 
 `OTEL_PROPAGATORS`
 : **Convención de Datadog**: `DD_TRACE_PROPAGATION_STYLE`<br>
-Los propagadores deben utilizarse como una lista separada por comas.<br>
-**Notas**: Los únicos valores compatibles con la mayoría de los SDK de Datadog son `tracecontext`, `b3`, `b3multi`, `none`, `datadog`. `xray` también es compatible con el SDK de Java.<br>
-Los valores deben ser deduplicados para registrar un `Propagator` solo una vez<br>
+Propagadores que se utilizarán, en una lista separada por comas<br>
+**Notas**: Los únicos valores admitidos para la mayoría de los SDK de Datadog son `tracecontext`, `b3`, `b3multi`, `none`, `datadog`. `xray` también es compatible con el SDK de Java<br>
+Se deben eliminar los valores duplicados para registrar un `Propagator` solo una vez<br>
 
 `OTEL_TRACES_SAMPLER & OTEL_TRACES_SAMPLER_ARG`
 : **Convención de Datadog**: `DD_TRACE_SAMPLE_RATE`<br>
-`OTEL_TRACES_SAMPLER`: muestreador a utilizar para trazas y `OTEL_TRACES_SAMPLER_ARG`: Valor de cadena a utilizar como argumento del muestreador.<br>
-**Notas**: El valor especificado solo se utiliza si `OTEL_TRACES_SAMPLER` está configurado. Cada tipo de muestreador define su propia entrada esperada, si la hay. Las entradas no válidas o no reconocidas DEBEN registrarse y, por lo demás, DEBEN ignorarse. En tales casos, la aplicación DEBE comportarse como si `OTEL_TRACES_SAMPLER_ARG` no estuviera activado.<br>
+`OTEL_TRACES_SAMPLER`: Muestreador que se utilizará para trazas y `OTEL_TRACES_SAMPLER_ARG`: Valor de cadena que se utilizará como argumento del muestreador<br>
+**Notas**: El valor especificado solo se utiliza si `OTEL_TRACES_SAMPLER` está configurado. Cada tipo de muestreador define su propia entrada esperada, si corresponde. La entrada no válida o no reconocida DEBE registrarse y DEBE ignorarse en todos los demás aspectos. En tales casos, la implementación DEBE comportarse como si `OTEL_TRACES_SAMPLER_ARG` no estuviera configurado<br>
 Valores asignados entre `OTEL_TRACES_SAMPLER` y `DD_TRACE_SAMPLE_RATE`:<br>
   - `parentbased_always_on`|`1.0`
   - `parentbased_always_off`|`0.0`
@@ -101,198 +126,196 @@ Valores asignados entre `OTEL_TRACES_SAMPLER` y `DD_TRACE_SAMPLE_RATE`:<br>
   - `traceidratio`|`${OTEL_TRACES_SAMPLER_ARG}`
 
 `OTEL_TRACES_EXPORTER`
-: **Convención de Datadog**: `DD_TRACE_ENABLED=false` <br>
-Exportador de trazas a utilizar<br>
-**Notas**: Solo se acepta el valor `none`<br>
+: **Descripción**: Selecciona el exportador de trazas. <br>
+**Configuración**: Establezca `otlp` para exportar trazas a través de OTLP. Para deshabilitar el rastreo de Datadog, establezca `DD_TRACE_ENABLED=false`. Siga [Exportación de trazas OTLP del SDK de DDOT][17] para configurar la exportación de trazas OTLP.
 
 `OTEL_METRICS_EXPORTER`
-: **Descripción**: especifica el exportador de métricas a utilizar. <br>
-**Notas**: Los únicos valores aceptados son `OpenTelemetry Protocol` y `none`. Un valor de `none` deshabilita la emisión de métricas de OpenTelemetry, así como las métricas de tiempo de ejecución de APM (equivalente a `DD_RUNTIME_METRICS_ENABLED=false`). <br>
-**Por defecto**: `OpenTelemetry Protocol`
+: **Descripción**: Especifica el exportador de métricas que se utilizará. <br>
+**Notas**: Los únicos valores aceptados son `otlp` y `none`. Un valor de `none` deshabilita la emisión de métricas de OTel, así como las métricas de tiempo de ejecución de APM (equivalente a `DD_RUNTIME_METRICS_ENABLED=false`) <br>
+**Valor predeterminado**: `otlp`
 
 `OTEL_RESOURCE_ATTRIBUTES`
 : **Convención de Datadog**: `DD_TAGS` <br>
-**Descripción**: pares clave-valor que se utilizarán como atributos del recurso de OpenTelemetry. <br>
-**Notas**: El kit de desarrollo de software (SDK) resuelve las configuraciones solapadas utilizando primero la configuración de Datadog (`DD_*`).
-    - `service.name` (corresponde a `DD_SERVICE`): el kit de desarrollo de software (SDK) resuelve el valor con la siguiente precedencia: <br>
+**Descripción**: Pares clave-valor que se utilizarán como atributos de recurso de OpenTelemetry. <br>
+**Notas**: El SDK resuelve los ajustes superpuestos utilizando primero la configuración de Datadog (`DD_*`).
+    - `service.name` (corresponde a `DD_SERVICE`): El SDK resuelve el valor con la siguiente precedencia: <br>
         1. Valor de `DD_SERVICE` <br>
-        2. Valor de la clave `service` en `DD_TAGS` <br>
-        3. Valor de `OTEL_SERVICE_NAME` <br>
+        2. Valor de `OTEL_SERVICE_NAME` <br>
+        3. Valor de la clave `service` en `DD_TAGS` <br>
         4. Valor de la clave `service.name` en `OTEL_RESOURCE_ATTRIBUTES`
-    - `deployment.environment.name` (se asigna a `DD_ENV`): el kit de desarrollo de software (SDK) resuelve el valor con la siguiente precedencia: <br>
+    - `deployment.environment.name` (corresponde a `DD_ENV`): El SDK resuelve el valor con la siguiente precedencia: <br>
         1. Valor de `DD_ENV` <br>
         2. Valor de la clave `env` en `DD_TAGS` <br>
         3. Valor de la clave `deployment.environment.name` en `OTEL_RESOURCE_ATTRIBUTES` <br>
         4. Valor de `deployment.environment` en `OTEL_RESOURCE_ATTRIBUTES`
-    - `service.version` (se asigna a `DD_VERSION`): el kit de desarrollo de software (SDK) resuelve el valor con la siguiente precedencia: <br>
+    - `service.version` (corresponde a `DD_VERSION`): El SDK resuelve el valor con la siguiente precedencia: <br>
         1. Valor de `DD_VERSION` <br>
         2. Valor de la clave `version` en `DD_TAGS` <br>
         3. Valor de la clave `service.version` en `OTEL_RESOURCE_ATTRIBUTES`
-    - **Atributos adicionales**: pueden añadirse a través de la configuración de `DD_TAGS`, o de `OTEL_RESOURCE_ATTRIBUTES` si `DD_TAGS` no está configurado.
+    - **Atributos adicionales**: Pueden agregarse a través de la configuración `DD_TAGS` o `OTEL_RESOURCE_ATTRIBUTES` si `DD_TAGS` no está establecido.
 
   <div class="alert alert-danger">
-    Aunque el kit de desarrollo de software (SDK) resuelve estos ajustes internamente para la telemetría emitida, el Datadog Agent recopila etiquetas de todas las fuentes configuradas sin anularlas. Configurar el servicio/entorno/versión utilizando múltiples entradas (por ejemplo, tanto <code>DD_ENV</code> como <code>OTEL_RESOURCE_ATTRIBUTES</code>) puede dar lugar a que aparezcan múltiples valores en Datadog (por ejemplo, <code>env:prod</code> y <code>env:dev</code>).
-    Para evitar valores duplicados, configura cada concepto utilizando una sola convención.
+    Aunque el SDK resuelve estos ajustes internamente para la telemetría emitida, el Datadog Agent recopila etiquetas de todas las fuentes configuradas sin que unas sobrescriban a otras. Configurar servicio/entorno/versión usando múltiples entradas (por ejemplo, ambos <code>DD_ENV</code> y <code>OTEL_RESOURCE_ATTRIBUTES</code>) puede hacer que aparezcan varios valores en Datadog (por ejemplo, <code>env:prod</code> y <code>env:dev</code>).
+    Para evitar duplicados, configure cada concepto usando solo una convención.
   </div>
 
 `OTEL_SDK_DISABLED`
-: **Descripción**: desactiva la interoperabilidad de OpenTelemetry del SDK de Datadog para todas las señales. <br>
+: **Descripción**: Deshabilita el soporte de OpenTelemetry para trazas, métricas y registros. <br>
 **Notas**: Cuando se establece en `true`, esto establece efectivamente `DD_TRACE_OTEL_ENABLED=false`, `DD_LOGS_OTEL_ENABLED=false` y `DD_METRICS_OTEL_ENABLED=false`.<br>
-**SDKs de Ruby y Go**: el SDK de OpenTelemetry se activa automáticamente en la importación y configuración, por lo que este ajuste no es aplicable.
+**SDK de Ruby y Go**: El SDK de OpenTelemetry se activa automáticamente al importarlo y configurarlo, por lo que este ajuste no es aplicable.
 
-## Configuración del exportador de OpenTelemetry Protocol
-Los SDK de Datadog admiten las siguientes opciones del  [Exportador de OpenTelemetry Protocol][13].
+## Configuración del exportador OTLP {#otlp-exporter-configuration}
+Los SDK de DDOT admiten las siguientes opciones de [OpenTelemetry OTLP Exporter][13].
 
-Las variables específicas de una señal (como `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) siempre tienen prioridad sobre sus variables homólogas generales (como `OTEL_EXPORTER_OTLP_PROTOCOL`).
+Las variables específicas de señal (como `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`) siempre tienen prioridad sobre sus contrapartes generales (como `OTEL_EXPORTER_OTLP_PROTOCOL`).
 
-### Configuración general de OpenTelemetry Protocol
+### Configuración general de OTLP {#general-otlp-configuration}
 
 `OTEL_EXPORTER_OTLP_PROTOCOL`
-: **Descripción**: especifica el protocolo de transporte a utilizar para todas las señales a menos que se anule. <br>
+: **Descripción**: Especifica el protocolo de transporte que se utilizará para todas las señales, a menos que se anule. <br>
 **Valores aceptados**: `grpc`, `http/protobuf`, `http/json`. <br>
-**Predeterminado**: dependiente del kit de desarrollo de software (SDK). El SDK de Datadog pretende coincidir con el protocolo por defecto del SDK de OpenTelemetry oficial correspondiente para ese lenguaje.
+**Predeterminado**: Dependiente del SDK. El SDK de Datadog tiene como objetivo coincidir con el protocolo predeterminado del SDK de OpenTelemetry oficial correspondiente para ese lenguaje.
 
 `OTEL_EXPORTER_OTLP_ENDPOINT`
-: **Descripción**: especifica la URL base para el envío de datos de OpenTelemetry Protocol a todas las señales a menos que se anule. <br>
-**Por defecto (gRPC)**: `http://localhost:4317`. <br>
-**Por defecto (HTTP)**: `http://localhost:4318`.
+: **Descripción**: Especifica la URL base para enviar datos OTLP para todas las señales, a menos que se anule. <br>
+**Predeterminado (gRPC)**: `http://localhost:4317`. <br>
+**Predeterminado (HTTP)**: `http://localhost:4318`.
 
 `OTEL_EXPORTER_OTLP_HEADERS`
-: **Descripción**: especifica una lista separada por comas de pares clave-valor que se utilizarán como encabezados en todas las solicitudes salientes de OpenTelemetry Protocol (por ejemplo, `api-key=key,other-config=value`).
+: **Descripción**: Especifica una lista separada por comas de pares clave-valor que se utilizarán como encabezados en todas las solicitudes OTLP salientes (por ejemplo, `api-key=key,other-config=value`).
 
 `OTEL_EXPORTER_OTLP_TIMEOUT`
-: **Descripción**: especifica el tiempo de espera (en milisegundos) para todas las solicitudes salientes de OpenTelemetry Protocol a menos que se anule. <br>
-**Predeterminado**: `10000` (10s).
+: **Descripción**: Especifica el tiempo de espera (en milisegundos) para todas las solicitudes OTLP salientes, a menos que se anule. <br>
+**Predeterminado**: `10000` (10 s).
 
-### Configuración de OpenTelemetry Protocol específica para métricas
+### Configuración de OTLP específica para métricas {#metrics-specific-otlp-configuration}
 
-Para más detalles sobre la especificación oficial de estas variables, consulta la [documentación del Exportador de métricas de OpenTelemetry Protocol][15].
+Para obtener más detalles sobre la especificación oficial de estas variables, consulte la [documentación de OpenTelemetry OTLP Metrics Exporter][15].
 
 `OTEL_EXPORTER_OTLP_METRICS_PROTOCOL`
-: **Descripción**: especifica el protocolo de transporte de OpenTelemetry Protocol a utilizar para los datos de métricas. Tiene prioridad sobre el protocolo general `OTEL_EXPORTER_OTLP_PROTOCOL`. <br>
+: **Descripción**: Especifica el protocolo de transporte OTLP que se utilizará para los datos de métricas. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_PROTOCOL` general. <br>
 **Valores aceptados**: `grpc`, `http/protobuf`, `http/json`. <br>
-**Por defecto**: dependiente del kit de desarrollo de software (SDK). El SDK de Datadog pretende coincidir con el protocolo por defecto del SDK de OpenTelemetry oficial correspondiente para ese lenguaje.
+**Predeterminado**: Dependiente del SDK. El SDK de Datadog tiene como objetivo coincidir con el protocolo predeterminado del SDK de OpenTelemetry oficial correspondiente para ese lenguaje.
 
 `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT`
-: **Descripción**: especifica la URL para el envío de datos de métricas de OpenTelemetry Protocol. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_ENDPOINT` general. <br>
-**Por defecto (gRPC)**: `http://localhost:4317`. <br>
-**Por defecto (HTTP)**: `http://localhost:4318/v1/metrics`. <br>
-**Notas**: Para protocolos HTTP, el kit de desarrollo de software (SDK) añadirá automáticamente `/v1/metrics` si se utiliza `OTEL_EXPORTER_OTLP_ENDPOINT` como alternativa.
+: **Descripción**: Especifica la URL para enviar datos de métricas OTLP. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_ENDPOINT` general. <br>
+**Predeterminado (gRPC)**: `http://localhost:4317`. <br>
+**Predeterminado (HTTP)**: `http://localhost:4318/v1/metrics`. <br>
+**Notas**: Para protocolos HTTP, el SDK añadirá automáticamente `/v1/metrics` si se utiliza el `OTEL_EXPORTER_OTLP_ENDPOINT` general como alternativa.
 
 `OTEL_EXPORTER_OTLP_METRICS_HEADERS`
-: **Descripción**: especifica una lista separada por comas de pares clave-valor que se utilizarán como encabezado en las solicitudes salientes de métricas de OpenTelemetry Protocol (por ejemplo, `api-key=key,other-config=value`). Tiene precedencia sobre el campo general `OTEL_EXPORTER_OTLP_HEADERS`.
+: **Descripción**: Especifica una lista de pares clave-valor separados por comas que se utilizarán como encabezados en las solicitudes de métricas OTLP salientes (por ejemplo, `api-key=key,other-config=value`). Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_HEADERS` general.
 
 `OTEL_EXPORTER_OTLP_METRICS_TIMEOUT`
-: **Descripción**: especifica el tiempo de espera (en milisegundos) para una única solicitud saliente de métricas de OpenTelemetry Protocol. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_TIMEOUT` general. <br>
-**Predeterminado**: `10000` (10s).
+: **Descripción**: Especifica el tiempo de espera (en milisegundos) para una única solicitud de métricas OTLP saliente. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_TIMEOUT` general. <br>
+**Predeterminado**: `10000` (10 s).
 
-### Configuración de OpenTelemetry Protocol específica para logs
+### Configuración de OTLP específica para registros {#logs-specific-otlp-configuration}
 
 `OTEL_EXPORTER_OTLP_LOGS_PROTOCOL`
-: **Descripción**: especifica el protocolo de transporte de OpenTelemetry Protocol para los logs. Tiene prioridad sobre `OTEL_EXPORTER_OTLP_PROTOCOL`.
+: **Descripción**: Especifica el protocolo de transporte OTLP para registros. Tiene prioridad sobre `OTEL_EXPORTER_OTLP_PROTOCOL`.
 : **Valores aceptados**: `grpc`, `http/protobuf`, `http/json` <br>
-: **Por defecto**: dependiente del kit de desarrollo de software (SDK). El SDK de Datadog pretende coincidir con el protocolo por defecto del SDK de OpenTelemetry oficial correspondiente para ese lenguaje
+: **Predeterminado**: dependiente del SDK. El SDK de Datadog tiene como objetivo coincidir con el protocolo predeterminado del SDK de OpenTelemetry oficial correspondiente para ese lenguaje.
 
 `OTEL_EXPORTER_OTLP_LOGS_ENDPOINT`
-: **Descripción**: especifica la URL de envío de los logs de OpenTelemetry Protocol. Tiene prioridad sobre `OTEL_EXPORTER_OTLP_ENDPOINT`.
-: **Por defecto (gRPC)**: `http://localhost:4317`
-: **Por defecto (HTTP)**: `http://localhost:4318/v1/logs`
+: **Descripción**: Especifica la URL para enviar registros OTLP. Tiene prioridad sobre `OTEL_EXPORTER_OTLP_ENDPOINT`.
+: **Predeterminado (gRPC)**: `http://localhost:4317`
+: **Predeterminado (HTTP)**: `http://localhost:4318/v1/logs`
 
 `OTEL_EXPORTER_OTLP_LOGS_HEADERS`
-: **Descripción**: especifica una lista separada por comas de pares clave-valor que se utilizarán como encabezado en las solicitudes salientes de logs de OpenTelemetry Protocol. Prevalece sobre la opción general `OTEL_EXPORTER_OTLP_HEADERS`.
+: **Descripción**: Especifica una lista separada por comas de pares clave-valor que se utilizarán como encabezados en las solicitudes de registros OTLP salientes. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_HEADERS` general.
 
 `OTEL_EXPORTER_OTLP_LOGS_TIMEOUT`
-: **Descripción**: especifica el tiempo de espera (en milisegundos) para una única solicitud saliente de logs de OpenTelemetry Protocol. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_TIMEOUT` general. <br>
-**Predeterminado**: `10000` (10s).
+: **Descripción**: Especifica el tiempo de espera (en milisegundos) para una sola solicitud de registros OTLP saliente. Tiene prioridad sobre el `OTEL_EXPORTER_OTLP_TIMEOUT` general. <br>
+**Predeterminado**: `10000` (10 s).
 
-## Configuración del SDK de métricas de OpenTelemetry
+## Configuración del SDK de métricas de OpenTelemetry {#opentelemetry-metrics-sdk-configuration}
 
 Los SDK de Datadog admiten las siguientes opciones del SDK de métricas de OpenTelemetry.
 
 `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE`
-: **Descripción**: especifica la agregación `temporality` a utilizar para cada tipo de instrumento. <br>
-**Valores aceptados**: `Cumulative`, `Delta`, `LowMemory`. Para más detalles, consulta la [especificación de OpenTelemetry][15]. <br>
-**Por defecto**: `delta` <br>
-**Notas**: Este valor por defecto `delta` es [la configuración recomendada de Datadog][16] y difiere del valor por defecto de la especificación de OpenTelemetry.
+: **Descripción**: Especifica la agregación `temporality` que se debe usar para cada tipo de instrumento. <br>
+**Valores aceptados**: `Cumulative`, `Delta`, `LowMemory`. Para obtener más detalles, consulte la [especificación de OpenTelemetry][15]. <br>
+**Predeterminado**: `delta` <br>
+**Notas**: Este valor predeterminado `delta` es la [configuración recomendada de Datadog][16] y difiere del valor predeterminado de la especificación de OpenTelemetry.
 
 `OTEL_METRIC_EXPORT_INTERVAL`
-: **Descripción**: especifica el intervalo de tiempo (en milisegundos) entre los intentos de exportación de métricas. <br>
-**Predeterminado**: `10000` (10s) <br>
-**Notas**: Este valor predeterminado es la configuración recomendada de Datadog y difiere del valor predeterminado de 60000ms de la especificación de OpenTelemetry.
+: **Descripción**: Especifica el intervalo de tiempo (en milisegundos) entre los intentos de exportación de métricas. <br>
+**Predeterminado**: `10000` (10 s) <br>
+**Notas**: Este valor predeterminado es la configuración recomendada de Datadog y difiere del valor predeterminado de 60000 ms de la especificación de OpenTelemetry.
 
 `OTEL_METRIC_EXPORT_TIMEOUT`
-: **Descripción**: especifica el tiempo máximo permitido (en milisegundos) para recopilar y exportar métricas. <br>
-**Predeterminado**: `7500` (7.5s) <br>
-**Notas**: Este valor predeterminado es la configuración recomendada por Datadog y difiere del valor predeterminado de 30000ms de la especificación de OpenTelemetry.
+: **Descripción**: Especifica el tiempo máximo permitido (en milisegundos) para recopilar y exportar métricas. <br>
+**Predeterminado**: `7500` (7,5 s) <br>
+**Notas**: Este valor predeterminado es la configuración recomendada de Datadog y difiere del valor predeterminado de 30000 ms de la especificación de OpenTelemetry.
 
-## Configuración del SDK de logs de OpenTelemetry
+## Configuración del SDK de logs de OpenTelemetry {#opentelemetry-logs-sdk-configuration}
 
 Los SDK de Datadog admiten las siguientes opciones del SDK de logs de OpenTelemetry.
 
 `OTEL_LOGS_EXPORTER`
-: **Descripción**: especifica el exportador de logs a utilizar. <br>
-**Valores aceptados**: `OpenTelemetry Protocol`, `none`. Un valor de `none` desactiva la emisión de logs de OpenTelemetry. <br>
-**Por defecto**: `OpenTelemetry Protocol`
+: **Descripción**: Configura el exportador de logs de OpenTelemetry. <br>
+**Configuración**: Siga [OpenTelemetry API Support][14] para configurar la exportación de logs. Para deshabilitar la recopilación automática de logs, establezca `DD_LOGS_OTEL_ENABLED=false`.
 
 `OTEL_BLRP_MAX_QUEUE_SIZE`
-: **Descripción**: el número máximo de registros de log a mantener en memoria. Los nuevos registros se eliminan cuando se alcanza el límite. <br>
-**Por defecto**: `2048`
+: **Descripción**: El número máximo de registros de log que se mantendrán en memoria. Los registros nuevos se descartan cuando se alcanza el límite. <br>
+**Predeterminado**: `2048`
 
 `OTEL_BLRP_SCHEDULE_DELAY`
-: **Descripción**: el intervalo de tiempo (en milisegundos) entre dos operaciones de exportación consecutivas. <br>
-**Predeterminado**: `1000` (1s)
+: **Descripción**: El intervalo de tiempo (en milisegundos) entre dos operaciones de exportación consecutivas. <br>
+**Predeterminado**: `1000` (1 s)
 
 `OTEL_BLRP_EXPORT_TIMEOUT`
-: **Descripción**: la duración máxima (en milisegundos) permitida para una sola exportación antes de la cancelación. <br>
-**Predeterminado**: `30000` (30s)
+: **Descripción**: La duración máxima (en milisegundos) permitida para una sola exportación antes de la cancelación. <br>
+**Predeterminado**: `30000` (30 s)
 
 `OTEL_BLRP_MAX_EXPORT_BATCH_SIZE`
-: **Descripción**: el número máximo de registros de log en una sola carga útil de OpenTelemetry Protocol. <br>
-**Por defecto**: `512`
+: **Descripción**: El número máximo de registros de log en una sola carga útil de OTLP. <br>
+**Predeterminado**: `512`
 
-## Java-específico Configuración
-Los SDK de Datadog admiten las siguientes opciones de configuración de OpenTelemetry específicas de Java. Para obtener más información, consulta la [documentación de OpenTelemetry sobre la configuración del Agent Java][10].
+## Configuración específica de Java {#java-specific-configuration}
+Los SDK de Datadog admiten las siguientes opciones de configuración de OpenTelemetry específicas de Java. Para obtener más información, consulte la [documentación de OpenTelemetry sobre la configuración del agente de Java][10].
 
 `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED`
 : **Convención de Datadog**: `!DD_INTEGRATIONS_ENABLED` <br>
-Establézcalo en `false` para desactivar toda la instrumentación en el Agent<br>
+Establezca en `false` para deshabilitar toda la instrumentación en el Agent<br>
 **Notas**: Valores asignados entre `OTEL_INSTRUMENTATION_COMMON_DEFAULT_ENABLED` y `DD_INTEGRATIONS_ENABLED`:<br>
   - `true`|`false`
   - `false`|`true`
 
 `OTEL_INSTRUMENTATION_[NAME]_ENABLED`
-: **Descripción**: Activa/desactiva la instrumentación drop-in OTel nombrada.<br>
+: **Descripción**: Habilita o deshabilita la instrumentación de sustitución directa de OTel indicada<br>
 
 `OTEL_JAVAAGENT_CONFIGURATION_FILE`
 : **Convención de Datadog**: `DD_TRACE_CONFIG` <br>
-Ruta al archivo de propiedades de Java válido que contiene la configuración del agent.<br>
-**Notas**: Cuando OTEL_JAVAAGENT_CONFIGURATION_FILE y DD_TRACE_CONFIG están ambos definidos se aplica la configuración de ambos archivos. Esta es una excepción a la regla habitual según la cual la configuración de Datadog prevalece sobre la de OpenTelemetry.<br>
+Ruta a un archivo de propiedades de Java válido que contiene la configuración del agente<br>
+**Notas**: Cuando OTEL_JAVAAGENT_CONFIGURATION_FILE y DD_TRACE_CONFIG están configurados, aplicamos la configuración de ambos archivos. Esta es una excepción a la regla habitual donde la configuración de Datadog anula la de OTel<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_REQUEST_HEADERS`
 : **Convención de Datadog**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
-Una lista separada por comas de nombres de encabezado HTTP. Las instrumentaciones de cliente HTTP capturan los valores de encabezado de solicitud HTTP para todos los nombres de encabezado configurados<br>
-**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OpenTelemetry sigue la convención de nombres de etiquetas de OpenTelemetry de `http.request.header.<header-name>` en lugar de la convención de Datadog de `http.request.headers.<header-name>`<br>
+Una lista separada por comas de nombres de encabezados HTTP. Las instrumentaciones del cliente HTTP capturan los valores de los encabezados de solicitud HTTP para todos los nombres de encabezado configurados<br>
+**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OTel sigue la convención de nombres de etiquetas de OTel de `http.request.header.<header-name>` en lugar de la convención de Datadog de `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_CLIENT_CAPTURE_RESPONSE_HEADERS`
 : **Convención de Datadog**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
-Una lista separada por comas de nombres de encabezado HTTP. Las instrumentaciones de cliente HTTP capturan los valores de encabezado de respuesta HTTP para todos los nombres de encabezado configurados<br>
-**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OpenTelemetry sigue la convención de nombres de etiquetas de OpenTelemetry de `http.response.header.<header-name>` en lugar de la convención de Datadog de `http.response.headers.<header-name>`<br>
+Una lista separada por comas de nombres de encabezados HTTP. Las instrumentaciones del cliente HTTP capturan los valores de los encabezados de respuesta HTTP para todos los nombres de encabezado configurados<br>
+**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OTel sigue la convención de nombres de etiquetas de OTel de `http.response.header.<header-name>` en lugar de la convención de Datadog de `http.response.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_REQUEST_HEADERS`
 : **Convención de Datadog**: `DD_TRACE_REQUEST_HEADER_TAGS` <br>
-Una lista separada por comas de nombres de encabezado HTTP. Las instrumentaciones del servidor HTTP capturan los valores de los encabezados de solicitud HTTP para todos los nombres de encabezados configurados<br>
-**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OpenTelemetry sigue la convención de nombres de etiquetas de OpenTelemetry de `http.request.header.<header-name>` en lugar de la convención de Datadog de `http.request.headers.<header-name>`<br>
+Una lista separada por comas de nombres de encabezados HTTP. Las instrumentaciones del servidor HTTP capturan los valores de los encabezados de solicitud HTTP para todos los nombres de encabezado configurados<br>
+**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OTel sigue la convención de nombres de etiquetas de OTel de `http.request.header.<header-name>` en lugar de la convención de Datadog de `http.request.headers.<header-name>`<br>
 
 `OTEL_INSTRUMENTATION_HTTP_SERVER_CAPTURE_RESPONSE_HEADERS`
 : **Convención de Datadog**: `DD_TRACE_RESPONSE_HEADER_TAGS` <br>
-Una lista separada por comas de nombres de encabezado HTTP. Las instrumentaciones del servidor HTTP capturan los valores de los encabezados de respuesta HTTP para todos los nombres de encabezado configurados.<br>
-**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OpenTelemetry sigue la convención de nombres de etiquetas de OpenTelemetry de `http.response.header.<header-name>` en lugar de la convención de Datadog de `http.response.headers.<header-name>`<br>
+Una lista separada por comas de nombres de encabezados HTTP. Las instrumentaciones del servidor HTTP capturan los valores de los encabezados de respuesta HTTP para todos los nombres de encabezado configurados<br>
+**Notas**: El etiquetado de encabezados configurado mediante variables de entorno de OTel sigue la convención de OTel para los nombres de etiquetas de `http.response.header.<header-name>` en lugar de la convención de Datadog de `http.response.headers.<header-name>`<br>
 
 `OTEL_JAVAAGENT_EXTENSIONS`
 : **Convención de Datadog**: `DD_TRACE_EXTENSIONS_PATH` <br>
-Una lista separada por comas de rutas a archivos jar de extensión, o carpetas que contienen archivos jar. Si apunta a una carpeta, cada archivo jar en esa carpeta se trata como una extensión separada e independiente. <br>
+Una lista separada por comas de rutas de acceso a archivos jar de extensión o a carpetas que contienen archivos jar. Si apunta a una carpeta, cada archivo jar de esa carpeta se trata como una extensión separada e independiente. <br>
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -309,6 +332,10 @@ Una lista separada por comas de rutas a archivos jar de extensión, o carpetas q
 [11]: https://opentelemetry.io/docs/specs/semconv/resource/#semantic-attributes-with-dedicated-environment-variable
 [12]: /es/tracing/trace_collection/library_config/_index
 [13]: https://opentelemetry.io/docs/specs/otel/protocol/exporter/
-[14]: /es/opentelemetry/instrument/api_support/
+[14]: /es/opentelemetry/instrument/ddot_sdks/api_support/
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
 [16]: /es/opentelemetry/guide/otlp_delta_temporality/
+[17]: /es/opentelemetry/instrument/ddot_sdks/#enable-otlp-trace-export
+[18]: #metrics-specific-otlp-configuration
+[20]: /es/tracing/metrics/runtime_metrics/#export-runtime-metrics-over-otlp
+[21]: /es/opentelemetry/instrument/ddot_sdks/#opentelemetry-trace-semantics

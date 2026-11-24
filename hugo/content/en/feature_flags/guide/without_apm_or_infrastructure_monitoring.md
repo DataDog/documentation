@@ -1,5 +1,5 @@
 ---
-title: Set Up Agent-Based Feature Flags Without APM Tracing or Infrastructure Monitoring
+title: Set Up Feature Flags with Agent Delivery Without APM Tracing or Infrastructure Monitoring
 description: Use server-side Feature Flags with APM tracing and Infrastructure Monitoring turned off.
 further_reading:
 - link: "/feature_flags/server/"
@@ -14,6 +14,8 @@ further_reading:
 ---
 
 ## Overview
+
+For a new deployment, use the [agentless delivery getting-started guides][5]. They do not require a Datadog Agent. This guide covers deployments that keep Agent delivery.
 
 Server-side Feature Flags can be deployed using the Datadog SDK and the Datadog Agent. By default, this setup also sends [APM][1] traces and [Infrastructure Monitoring][2] data. To only evaluate feature flags, turn both off.
 
@@ -61,7 +63,7 @@ DD_AGENT_HOST=<AGENT_ADDRESS>
 
 `DD_ENV` must match one of the environments set up for your flags in Datadog. If it doesn't match, flags return their default values.
 
-<div class="alert alert-info">PHP, and SDK versions earlier than Java 1.66.0, Node.js 6.12.0, Python 4.14.0, .NET 3.54.0, Go 2.11.0, and Ruby 2.44.0, don't support <code>DD_FEATURE_FLAGS_CONFIGURATION_SOURCE</code>. For these SDKs, set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> instead. For more information, see <a href="/feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup">Migrate an existing Remote Configuration setup</a>.</div>
+For an existing deployment with legacy enablement settings, follow [Migrate an existing Remote Configuration setup][10].
 
 ## Verify the setup
 
@@ -86,3 +88,5 @@ If every flag returns its default value, confirm that APM is enabled on the Agen
 [7]: /agent/configuration/infrastructure-modes/
 [8]: https://app.datadoghq.com/infrastructure/hosts
 [9]: https://app.datadoghq.com/apm/traces
+
+[10]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup

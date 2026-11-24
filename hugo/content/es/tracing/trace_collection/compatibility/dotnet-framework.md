@@ -4,145 +4,141 @@ aliases:
 - /es/tracing/setup_overview/compatibility_requirements/dotnet-framework
 code_lang: dotnet-framework
 code_lang_weight: 80
-description: Requisitos de compatibilidad para el rastreador .NET
+description: Requisitos de compatibilidad para el .NET Tracer
 further_reading:
 - link: tracing/trace_collection/dd_libraries/dotnet-framework
   tag: Documentación
-  text: Instrumentar tu aplicación
+  text: Instrumente su aplicación
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: Código fuente
   text: Ejemplos de instrumentación personalizada
-title: Requisitos de compatibilidad con .NET Framework
+title: Requisitos de compatibilidad de .NET Framework
 type: multi-code-lang
 ---
+El .NET Tracer de Datadog admite todos los lenguajes basados en .NET (por ejemplo, C#, F#, Visual Basic).
 
+El .NET Tracer es de código abierto. Para obtener más información, consulte el [repositorio de .NET Tracer][1].
 
-El rastreador Datadog .NET es compatible con todos los lenguajes basados en .NET (por ejemplo, C#, F#, Visual Basic).
+## Entornos de ejecución de .NET Framework compatibles {#supported-net-framework-runtimes}
 
-El rastreador .NET es de código abierto. Para más información, consulta el [repositorio del rastreador .NET][1].
+El .NET Tracer admite instrumentación automática y personalizada en las siguientes versiones de .NET Framework. También admite [.NET Core y .NET 5+][2]. El .NET Tracer no admite código que se ejecute en entornos de confianza parcial.
 
-## Tiempos de ejecución de .NET Framework compatibles
+| Versión de .NET Framework  | Fin de vida útil de Microsoft | Nivel de soporte       | Versión del paquete            | Fin de vida útil de Datadog |
+| ----------------------- | --------------------- | --------------------| -------------------------- | ------------------- |
+| 4.8.1                   |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.8                     |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.7.2                   |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.7.1                   |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.7                     |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.6.2                   |                       | [GA](#support-ga)   | más reciente                     |                     |
+| 4.6.1                   | 2022-04-26        | [GA](#support-ga)   | más reciente                     |                     |
+| 4.6                     | 2022-04-26        | [EOL](#support-eol) | < 2.0.0 (p. ej., [1.31.2][3]) | 2022-04-26      |
+| 4.5.2                   | 2022-04-26        | [EOL](#support-eol) | < 2.0.0 (p. ej., [1.31.2][3]) | 2022-04-26      |
+| 4.5.1                   | 2016-01-12      | [EOL](#support-eol) | < 2.0.0 (p. ej., [1.31.2][3]) | 2022-04-26      |
+| 4.5                     | 2016-01-12      | [EOL](#support-eol) | < 2.0.0 (p. ej., [1.31.2][3]) | 2022-04-26      |
 
-El rastreador .NET es compatible con la instrumentación automática y personalizada en las siguientes versiones de .NET Framework. También admite [.NET Core y .NET 5+][2]. El rastreador .NET no admite código que se ejecute en entornos de confianza parcial.
+Puede encontrar información adicional en la [Política de ciclo de vida de .NET Framework de Microsoft][4] y en la [política de soporte del tiempo de ejecución de .NET](#net-runtime-support-policy).
 
-| Versión de .NET Framework  | Fin del soporte de Microsoft | Nivel de compatibilidad                       | Versión del paquete            | Fin del soporte de Datadog |
-| ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
-| 4.8.1                   |                       | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.8                     |                       | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.7.2                   |                       | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.7                     |                       | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.6.2                   |                       | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.6.1                   | 04/26/2022            | [Disponible para el público en general](#support-ga)                   | Última versión                     |                     |
-| 4.6                     | 04/26/2022            | [Fin del soporte (EOL)](#support-eol)                 | < 2.0.0 (por ejemplo, [1.31.2][3]) | 04/26/2022          |
-| 4.5.2                   | 04/26/2022            | [Fin del soporte (EOL)](#support-eol)                 | < 2.0.0 (por ejemplo, [1.31.2][3]) | 04/26/2022          |
-| 4.5.1                   | 01/12/2016            | [Fin del soporte (EOL)](#support-eol)                 | < 2.0.0 (por ejemplo, [1.31.2][3]) | 04/26/2022          |
-| 4.5                     | 01/12/2016            | [Fin del soporte (EOL)](#support-eol)                 | < 2.0.0 (por ejemplo, [1.31.2][3]) | 04/26/2022          |
-
-Puedes encontrar información adicional en [la política de ciclo de vida de .NET Framework de Microsoft][4] y en [la política de compatibilidad del tiempo de ejecución de .NET](#net-runtime-support-policy).
-
-<div class="alert alert-info">
-  <div class="alert-info"><b>Nota:</b> A la hora de decidir qué versión del rastreador utilizar para una instrumentación automática, utiliza la versión de .NET Framework instalada en el servidor de aplicaciones. Por ejemplo, si compilas tu aplicación para que apunte a .NET Framework 4.5.1, pero la aplicación se ejecuta en un servidor que tiene instalado .NET Framework 4.8, utiliza la última versión del rastreador. Para determinar qué versión de .NET Framework está instalada en un equipo, sigue las <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">directrices proporcionadas por Microsoft</a>.
-  </div>
+<div class="alert alert-info">Al decidir qué versión del SDK de Datadog utilizar para la instrumentación automática, utilice la versión de .NET Framework instalada en el servidor de aplicaciones. Por ejemplo, si compila su aplicación para que tenga como destino .NET Framework 4.5.1, pero la aplicación se ejecuta en un servidor que tiene instalado .NET Framework 4.8, utilice la versión más reciente del SDK. Para determinar qué versión de .NET Framework está instalada en una máquina, siga la <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guía proporcionada por Microsoft</a>.
 </div>
 
-## Arquitecturas de procesador compatibles
+## Sistemas operativos compatibles {#supported-operating-systems}
 
-El rastreador de .NET es compatible con la instrumentación automática en las siguientes arquitecturas:
+El .NET Tracer admite la instrumentación automática de aplicaciones de .NET Framework en sistemas operativos Windows. Puede encontrar información adicional sobre los sistemas operativos compatibles con .NET Framework en los [requisitos del sistema de .NET Framework][12]
 
-| Arquitecturas de procesadores                                                 | Nivel de compatibilidad         | Versión del paquete                        |
-| ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [Disponible para el público en general](#support-ga)     | Última versión                                 |
-| Windows x64 (`win-x64`)                                                 | [Disponible para el público en general](#support-ga)     | Última versión                                 |
+### Windows {#windows}
 
-## Integraciones
+| Sistema operativo             | Versión      | Nivel de soporte       | Versión del paquete       |
+| -----------------------------|--------------|---------------------|-----------------------|
+| Windows Server               | 2012+        | [GA](#support-ga)   | más reciente                |
+| Windows Client               | 8.1+         | [GA](#support-ga)   | más reciente                |
+| Windows Server (x86)         | Todas las versiones | [EOL](#support-eol) | < 3.0.0 (p. ej., 2.48.0) |
+| Windows Server               | < 2012       | [EOL](#support-eol) | < 3.0.0 (p. ej., 2.48.0) |
 
-La [última versión del rastreador .NET][5] puede instrumentar automáticamente las siguientes bibliotecas:
+**Nota:** "Windows Server" incluye todas las ediciones y opciones de instalación:
+- **Ediciones:** Datacenter, Standard, Essentials, etc.
+- **Opciones de instalación:** Server Core, Server with Desktop Experience, Nano Server (solo imagen de contenedor)
+
+La instrumentación de aplicaciones de 32 bits (x86) es compatible con Windows de 64 bits (x64). No se admite Windows en ARM64.
+
+## Integrations {#integrations}
+
+La [versión más reciente del .NET Tracer][5] puede instrumentar automáticamente las siguientes bibliotecas:
 
 | Marco o biblioteca            | Paquete NuGet                                                                             | Nombre de la integración     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| .NET Remoting                   | Integrado                                                                                  | `Remoting`           |
+| .NET Remoting                   | integrado                                                                                  | `Remoting`           |
 | ADO.NET                         | Todas las integraciones de AdoNet                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
-| ASP.NET (incluidos los formularios web)   | Integrado                                                                                  | `AspNet`             |
+| ASP.NET (incluido Web Forms)   | integrado                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
-| API Web ASP.NET 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2` 3.0+                                                                 | `AwsDynamoDb`        |
-| Amazon Kinesis                  | `AWSSDK.Kinesis` 3.0+                                                                    | `AwsKinesis`         |
-| Amazon SNS                      | `AWSSDK.SNS` 3.0+                                                                        | `AwsSns`             |
-| Amazon SQS                      | `AWSSDK.SQS` 3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                    | `CosmosDb`           |
+| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                           | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
-| HttpClient/HttpMessageHandler | Integrado                                                                                  | `HttpMessageHandler` |
+| HttpClient / HttpMessageHandler | integrado                                                                                  | `HttpMessageHandler` |
 | IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | Integrado                                                                                  | `Msmq`               |
+| MSMQ                            | integrado                                                                                  | `Msmq`               |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
+| Process                         | integrado                                                                                  | `Process`            |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                                 | `RabbitMQ`           |
 | Redis (cliente de ServiceStack)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
-| Redis (cliente de StackExchange)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
+| Redis (cliente StackExchange)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `SqlClient`     |
-| WCF (servidor)                    | Integrado                                                                                  | `Wcf`                |
-| WebClient/WebRequest          | Integrado                                                                                  | `WebRequest`         |
+| WCF (servidor)                    | integrado                                                                                  | `Wcf`                |
+| WebClient / WebRequest          | integrado                                                                                  | `WebRequest`         |
 
-¿No ves la librería que buscas? En primer lugar, comprueba si la librería produce datos de observabilidad compatibles con OpenTelemetry (por ejemplo, [rastreo basado en actividad][11]). Si no es así, Datadog añade continuamente compatibilidad adicional. [Consulta al equipo de Datadog ][6] para obtener ayuda.
+**Nota**: Redis 6.0+ admite autenticación en línea en comandos como `HELLO`, `MIGRATE` y `ACL SETUSER`.
 
-## Integraciones basadas en OpenTelemetry
+  - **Datadog Trace Agent**: La versión mínima requerida y recomendada es `7.76.1` para garantizar que los parámetros de autenticación se ofusquen automáticamente en los metadatos de la traza.
+  - **Datadog Lambda Extension** (entornos Serverless): La versión mínima requerida es `v28.0.0`.
 
-Algunas bibliotecas proporcionan [Rastreo basado en actividad][11] integrado. Este es el mismo mecanismo en el que se basa OpenTelemetry.
+¿No encuentra la biblioteca que busca? Primero, verifique si la biblioteca genera datos de observabilidad compatibles con OpenTelemetry (consulte [Uso de bibliotecas de instrumentación de OpenTelemetry][11] para obtener más detalles). Si no, Datadog continúa agregando soporte adicional. [Consulte con el equipo de Datadog][6] para obtener ayuda.
 
-Para estas bibliotecas, establece `DD_TRACE_OTEL_ENABLED` en `true`, y el rastreador .NET capturará automáticamente sus trazas. Esto es compatible desde la [versión 2.21.0][4].
+## Versiones de Datadog Agent compatibles {#supported-datadog-agent-versions}
 
-La siguiente lista de librerías se han probado con esta configuración:
+| Versión de Datadog Agent | Versión del paquete |
+|-----------------------|-----------------|
+| [7.x][7]              | más reciente          |
+| [6.x][7]              | más reciente          |
+| [5.x][8]              | más reciente          |
 
-| Marco o biblioteca            | Paquete NuGet                                                                 | Nombre de la integración     | Instrucciones específicas         |
-| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
-| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | Consulta la sección `Azure SDK`  |
+## Política de soporte del tiempo de ejecución de .NET {#net-runtime-support-policy}
 
-### SDK de Azure
+El .NET Tracer depende del sistema operativo del servidor, el tiempo de ejecución de .NET Framework, ciertas bibliotecas de .NET Framework y el Datadog Agent/API. Estos sistemas de software de terceros admiten versiones específicas de .NET Framework. Cuando el software externo ya no admite una versión de .NET Framework, el .NET Tracer también limita su soporte para esa versión.
 
-El SDK de Azure proporciona soporte integrado para OpenTelemetry. Actívalo al establecer la variable de entorno `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` en `true` o al establecer el conmutador de contexto `Azure.Experimental.EnableActivitySource` en `true` en el código de tu aplicación. Consulta la [documentación del SDK de Azure][12] para obtener más detalles.
+### Niveles de soporte {#levels-of-support}
 
-## Versiones compatibles del Datadog Agent
-
-| **Versión del Datadog Agent**   | **Versión del paquete** |
-|-----------------------------|---------------------|
-| [7.x][7]                    | Última versión              |
-| [6.x][7]                    | Última versión              |
-| [5.x][8]                    | Última versión              |
-
-## Política de compatibilidad del tiempo de ejecución de .NET
-
-El rastreador .NET depende del sistema operativo del host, del tiempo de ejecución de .NET Framework, de determinadas bibliotecas de .NET Framework, y del Datadog Agent/API. Estos sistemas de software de terceros son compatibles con versiones específicas de .NET Framework. Cuando el software externo deja de ser compatible con una versión de .NET Framework, el rastreador .NET también limita su compatibilidad con esa versión.
-
-### Niveles de compatibilidad
-
-| **Nivel**                                              | **Compatibilidad dada**                                                                                                                                                          |
+| **Nivel**                                              | **Soporte proporcionado**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">No compatible</span>      |  Sin implementación. [Para solicitudes especiales, contacta con el servicio de atención al cliente][9].                                                             |
-| <span id="support-beta">Fase beta</span>                    |  Implementación inicial. Puede que aún no contenga todas las funciones. La compatibilidad de nuevas funciones y correcciones de errores y de seguridad se proporciona en la medida de lo posible.                                    |
-| <span id="support-ga">Disponible para el público en general (GA)</span> |  Implementación completa de todas las funciones. Compatibilidad completa para nuevas funciones, correcciones de errores y seguridad.                                                                                    |
-| <span id="support-maintenance">Mantenimiento</span>      |  Implementación completa de las funciones existentes. No recibe nuevas funciones. Compatible solo con las correcciones de errores y seguridad.                                                              |
-| <span id="support-eol">Fin del soporte (EOL)</span>        |  Sin compatibilidad.                                                                                                                                                                  |
+| <span id="support-unsupported">Sin soporte</span>      |  Sin implementación. [Comuníquese con el soporte al cliente para solicitudes especiales.][9]                                                             |
+| <span id="support-beta">Vista previa</span>                 |  Implementación inicial. Es posible que aún no contenga todas las funciones. El soporte para nuevas funciones, correcciones de errores y seguridad se proporciona en la medida de lo posible.                                    |
+| <span id="support-ga">Disponibilidad general (GA)</span> |  Implementación completa de todas las funciones. Soporte completo para nuevas funciones, correcciones de errores y seguridad.                                                                                    |
+| <span id="support-maintenance">Mantenimiento</span>      |  Implementación completa de las funciones existentes. No recibe nuevas funciones. Soporte solo para correcciones de errores y seguridad.                                                              |
+| <span id="support-eol">Fin de vida útil (EOL)</span>        |  Sin soporte.                                                                                                                                                                  |
 
-### Versionado del paquete
+### Control de versiones de paquetes {#package-versioning}
 
-Datadog APM para .NET Framework practica el [versionado semántico][10].
-Las actualizaciones de versión implican los siguientes cambios en la compatibilidad del tiempo de ejecución:
+Datadog APM para .NET Framework utiliza el [control de versiones semántico][10].
+Las actualizaciones de versión implican los siguientes cambios en el soporte de tiempo de ejecución:
 
-  - **Las actualizaciones de versiones principales** (por ejemplo, de `1.0.0` a `2.0.0`) pueden cambiar la compatibilidad para cualquier tiempo de ejecución de [Fase beta](#support-beta)/[Disponible para el público en general](#support-ga) a [Mantenimiento](#support-maintenance)/[Fin del soporte](#support-eol).
-  - **Las actualizaciones de versiones secundarias** (por ejemplo, de `1.0.0` a `1.1.0`) no reducirán el nivel de compatibilidad con un tiempo de ejecución, pero pueden añadir compatibilidad con otros.
-  - **Las actualizaciones de la versión del parche** (por ejemplo, de `1.0.0` a `1.0.1`) no modificarán la compatibilidad con ningún tiempo de ejecución.
+  - **Las actualizaciones de versión principal** (por ejemplo, de `1.0.0` a `2.0.0`) pueden cambiar el soporte para cualquier tiempo de ejecución de [Preview](#support-beta)/[GA](#support-ga) a [Maintenance](#support-maintenance)/[EOL](#support-eol).
+  - **Las actualizaciones de versión menor** (por ejemplo, de `1.0.0` a `1.1.0`) no reducirán el nivel de soporte para un tiempo de ejecución, pero pueden agregar soporte para uno.
+  - **Las actualizaciones de versión de parche** (por ejemplo, de `1.0.0` a `1.0.1`) no cambiarán el soporte para ningún tiempo de ejecución.
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -156,5 +152,5 @@ Las actualizaciones de versión implican los siguientes cambios en la compatibil
 [8]: /es/agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
-[11]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
-[12]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[11]: /es/opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=net
+[12]: https://learn.microsoft.com/en-us/dotnet/framework/get-started/system-requirements

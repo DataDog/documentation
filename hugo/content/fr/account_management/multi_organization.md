@@ -31,6 +31,8 @@ Il est possible de gérer plusieurs organisations enfants à partir d'un compte 
 
 La fonctionnalité de compte multi-organisation n'est pas activée par défaut. Contactez le [support Datadog][1] pour l'activer.
 
+Pour décider s'il convient d'utiliser une ou plusieurs organisations, consultez [Topologie des organisations][15].
+
 ## Fonctionnalités {#capabilities}
 
 Les utilisateurs peuvent être ajoutés à l'organisation parente et à plusieurs organisations enfants. Les utilisateurs basculent entre les organisations depuis le [menu des paramètres du compte utilisateur][2]. 
@@ -51,10 +53,13 @@ Les paramètres du compte, tels que les adresses IP autorisées, ne sont pas tra
     - Saisissez une ou plusieurs adresses e-mail.
     - Les utilisateurs invités se voient attribuer le [rôle Datadog Admin][5]. Vous pouvez inviter davantage d'utilisateurs dans
 Vous pouvez inviter davantage d'utilisateurs dans les Paramètres de l'organisation après avoir créé votre organisation.
+    - Les utilisateurs sont ajoutés à une organisation à la fois. Pour donner à un utilisateur l'accès à plusieurs organisations enfants, invitez-le séparément dans chaque organisation enfant.
     - Si l'utilisateur n'a pas de mot de passe, Datadog envoie une invitation par e-mail avec un lien pour définir un mot de passe et rejoindre la nouvelle organisation enfant.
 4. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
 La nouvelle organisation enfant hérite du plan de l'organisation parente et est ajoutée au compte de facturation de l'organisation parente. Si vous souhaitez mettre à jour la facturation de l'organisation enfant, [contactez votre représentant commercial][6].
+
+Une organisation enfant est créée sur le même [site Datadog][16] que son organisation parente. Pour regrouper des organisations situées sur d'autres sites Datadog sous le même compte de facturation, [contactez votre représentant commercial][6].
 
 ### Contenu {#content}
 
@@ -173,3 +178,5 @@ L'attribution de l'utilisation est une fonctionnalité avancée incluse dans le 
 [12]: /fr/account_management/plan_and_usage/usage_details/
 [13]: /fr/account_management/billing/usage_attribution/
 [14]: https://app.datadoghq.com/billing/usage-attribution
+[15]: /fr/account_management/organization_topology/
+[16]: /fr/getting_started/site/
