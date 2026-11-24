@@ -2544,15 +2544,15 @@ Searches recent process observations collected by [Live Processes][97], returnin
 
 ## Product Analytics
 
-Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, journey paths, pathways, and retention. Other tools in this toolset manage saved charts, labeled actions, segments, and launches.
+Tools for querying [Product Analytics][68] data, including event search, org vocabulary lookup, aggregations, journeys, journey paths, pathways, and retention. Other tools in this toolset manage saved charts, labeled actions, segments, and launches.
 
 ### `search_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Finds Product Analytics views and actions matching a natural-language description using semantic search, including org-curated labeled actions.
+Retrieves individual Product Analytics session, view, action, and server-side events that match a query in Datadog query syntax, so you can inspect their attributes. For example, `@type:server @event.name:order_completed` matches server-side `order_completed` events. For counts and grouped analysis, use `aggregate_product_analytics_events`.
 
-- Find the view and action for adding an item to the cart.
-- What's the event for completing checkout?
+- Show me recent actions on the checkout page.
+- Show me the attributes of the most recent `order_completed` server-side event.
 
 ### `search_product_analytics_org_entities`
 *Toolset: **product-analytics***\
@@ -2583,10 +2583,11 @@ Saves a chart returned by `aggregate_product_analytics_events`, `run_product_ana
 ### `aggregate_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Aggregates Product Analytics event data as a scalar or timeseries, supporting count, cardinality, average, sum, min, max, and percentile calculations with optional grouping.
+Aggregates Product Analytics event data, including server-side events, as a scalar or timeseries. Supports count, cardinality, average, sum, min, max, and percentile calculations with optional filtering and grouping.
 
 - How many sessions did we have today?
 - Show me daily active users over the past 30 days.
+- Count `@type:server` events grouped by `@event.name` to see which server-side events we send.
 
 ### `run_product_analytics_journey`
 *Toolset: **product-analytics***\
