@@ -74,7 +74,7 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 ### Restrict the hosts the tunnel can reach
 
-By default, tests that run through the testing tunnel can reach any host that the machine running `datadog-ci` can reach. In this case, `datadog-ci` prints a warning when the tunnel starts. To limit the tunnel to specific hosts, list them in the [`tunnelAllowedDomains`][5] option, available in versions `>=v5.29.0` of the package. The tunnel blocks connections to any other host and logs a warning for each blocked host.
+By default, tests that run through the testing tunnel can reach any host that the machine running `datadog-ci` can reach. `datadog-ci` prints a warning at tunnel startup when no allowlist is set. To limit the tunnel to specific hosts, list them in the [`tunnelAllowedDomains`][5] option, available in versions `>=v5.29.0` of the package. The tunnel blocks connections to any other host and logs a warning for each blocked host.
 
 You can set the option in three places. The CLI parameter takes precedence over the environment variable, which takes precedence over the global configuration file.
 
