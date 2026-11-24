@@ -11017,6 +11017,71 @@ menu:
       url: /api/latest/bits-security-analyst/
       identifier: bits-security-analyst
       generated: true
+    - name: Update outreach policy rules
+      url: /api/latest/bits-security-analyst/update-outreach-policy-rules/
+      identifier: bits-security-analyst-update-outreach-policy-rules
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachPolicyRules
+        unstable:
+          - v2
+        order: 6
+    - name: Remove an allowed outreach domain
+      url: /api/latest/bits-security-analyst/remove-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-remove-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 8
+    - name: Add an allowed outreach domain
+      url: /api/latest/bits-security-analyst/add-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-add-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 7
+    - name: Update the outreach mode
+      url: /api/latest/bits-security-analyst/update-the-outreach-mode/
+      identifier: bits-security-analyst-update-the-outreach-mode
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachMode
+        unstable:
+          - v2
+        order: 5
+    - name: Get the user outreach policy
+      url: /api/latest/bits-security-analyst/get-the-user-outreach-policy/
+      identifier: bits-security-analyst-get-the-user-outreach-policy
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentOutreachPolicy
+        unstable:
+          - v2
+        order: 4
     - name: Get a Bits Security Analyst investigation
       url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
       identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
