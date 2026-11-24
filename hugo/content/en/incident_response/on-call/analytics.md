@@ -26,62 +26,43 @@ To open On-Call Analytics, go to [**On-Call > Analytics**][1]. The page has two 
 
 ## Page Review
 
-{{< img src="incident_response/on-call/analytics/page-review.png" alt="The Page Review tab for all teams, showing Total Pages, MTTA, and MTTR above the Most Paged Teams widget" style="width:100%;" >}}
+{{< img src="incident_response/on-call/analytics/on-call-analytics-page-review.png" alt="The Page Review tab for all teams over the past week, showing Total Pages, MTTA, and MTTR in the On-Call Overview section" style="width:100%;" >}}
 
-The **Page Review** tab answers common questions about your on-call experience, such as which teams are paged most often and whether pages are acknowledged on time. Use the **Team** filter to review one or more teams, or leave it on **All teams** to review the whole organization, and select a time range, such as **Past 1 Week**.
+The **Page Review** tab is a prebuilt dashboard of paging activity. It answers common questions about your on-call experience, such as which teams are paged most often and whether pages are acknowledged on time. Filter by one or more teams, or leave it on **All teams** to review the whole organization, and select a time range. Headline metrics (total pages, MTTA, and MTTR) are compared to the previous period. Click **View Pages** to see the pages behind each one.
 
-### On-Call Overview
+Use Page Review to:
 
-The **On-Call Overview** section shows **Total Pages**, **Mean Time to Acknowledge (MTTA)**, and **Mean Time to Resolve (MTTR)**, each compared to the previous period. Click **View Pages** on a metric to see the pages behind it.
+- **Measure response times**: Track MTTA and MTTR over time, and review escalations and pages that auto-resolved without being acknowledged.
+- **Find noisy alerts**: Identify the services and monitors that page most often. A high number of auto-resolved pages, or a single monitor that generates most pages, often points to alerts you can tune.
+- **Compare paging load**: See which teams and responders receive the most pages, and how pages break down by source, target, and urgency.
+- **Spot interruptions outside working hours**: A heatmap shows high-urgency notifications by day and hour in each responder's local time zone.
 
-### Organization Overview
-
-The **Organization Overview** section shows where pages go. When no team filter is applied, **Most Paged Teams** shows the teams that receive the most pages. **Page Targets** breaks pages down by target type, and **Page Volume** shows the number of pages over time by urgency.
-
-### Pages Overview
-
-The **Pages Overview** section describes the pages themselves. **Most Paged Users** lists the responders who receive the most pages, **Page Sources** shows what triggered them, such as monitors or Incident Management, and **Page Urgencies** shows the split between high-urgency and low-urgency pages. **Longest Running Active Pages** lists pages that are still open, with their urgency, service, status, team, and assignee.
-
-### Paging Health
-
-The **Paging Health** section helps you assess whether your paging response works as intended. It shows **Page Escalations** by escalation type, pages that were **re-assigned** from or to the selected teams, and pages that were **not acknowledged and auto-resolved**. **Frequently Paging Services** and **Frequently Paging Monitors** list the sources that generate the most pages. A high number of auto-resolved pages, or a single monitor that generates most of them, often points to alerts that you can tune to reduce noise.
-
-### Notifications Overview
-
-The **Notifications Overview** section shows when, how, and how often team members were notified. Two timeseries show notifications sent for high-urgency and low-urgency pages, broken down by channel, such as email or push. A heatmap shows high-urgency notifications by day of the week and hour of the day, in each user's local time zone, so you can identify patterns in how people are interrupted, including outside working hours.
+**Note**: The **Most Paged Teams** widget appears only when no team filter is applied.
 
 ## Explorer
 
-The **Explorer** tab lets you query On-Call events directly and build your own visualizations.
-
-### Select an event type
-
-Use the **Type** dropdown to select the event type to query:
+The **Explorer** tab lets you query On-Call events and build your own visualizations. Select an event type from the **Type** dropdown:
 
 | Category | Event types |
 |----------|-------------|
 | **Page events** | Created, Acknowledged, Acknowledgement Timeout, Escalated, Re-assigned, Resolved, On Hold, Released |
 | **Others** | Notification Sent, Shift Change |
 
-The columns and facets in the Explorer change based on the event type. For example, **Acknowledged** events include the user who acknowledged the page, the page duration, and the time to first acknowledgement.
+The columns and facets in the Explorer change based on the event type. For example, **Acknowledged** events include the user who acknowledged the page, the page duration, and the time to first acknowledgment.
 
-### Search and filter events
+Filter events with a query such as `page.target.team_handle:<TEAM_HANDLE>` or with the facets panel, then display the results as a list, timeseries, top list, bar chart, or table. Click an event in the list view to see all of its attributes.
 
-1. Enter a query in the search bar, for example `page.target.team_handle:<TEAM_HANDLE>`.
-2. Use the facets panel on the left to filter by attributes such as **Source**, **Service**, or reassignment details.
-3. Select a time range in the top-right corner.
+{{< img src="incident_response/on-call/analytics/on-call-analytics-explorer.png" alt="The Explorer tab showing Acknowledged events for one team as a top list, grouped by the name of the user who acknowledged each page" style="width:100%;" >}}
 
-### Visualize events
+For example, to see which responders acknowledge a team's pages and how long they take:
 
-Under **Visualize as**, select how to display the results:
+1. From the **Type** dropdown, select **Acknowledged**.
+2. Enter `page.target.team_handle:<TEAM_HANDLE>` in the search bar.
+3. Under **Visualize as**, select **Top List**.
+4. In the **by** field, select **Page Acknowledged by User Name**.
+5. To compare response times, replace **All Events** with the **Time to 1st Acknowledge** and change **Count of** to an average.
 
-- **List**: Individual events. Click an event to open a side panel with all of its attributes, including the page key, status, responders, target team, and tags.
-- **Timeseries**: Event counts over time.
-- **Top List**: The top values for an attribute.
-- **Bar Chart**: Event counts as bars.
-- **Table**: Aggregated values grouped by one or more attributes.
-
-To export the results of your query, click **Download as CSV**.
+To export events, visualize as a List or Table and click **Download as CSV**. To reuse a visualization elsewhere, click **Save to Dashboards**, or click **More...** and select **Save to Notebook**. Saving to a dashboard or notebook isn't available for the list view.
 
 ## Further reading
 
