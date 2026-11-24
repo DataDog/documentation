@@ -18,24 +18,17 @@ further_reading:
 
 ## Overview
 
-Use Change Tracking as the first step in your investigation:
-
-- **See changes on the pages you already use.** On dashboards, monitor status pages, service pages, and the RUM Explorer, Datadog surfaces the changes most likely to be related to what you are looking at.
-- **Find changes that aren't on the page.** Search for them by symptom, build your own view of change data, or ask Bits AI.
+Changes appear on the pages where you already investigate: dashboards, monitor status pages, service pages, and the RUM Explorer. You can also search for changes by symptom, build your own view of change data with Change Tracking widgets, or ask Bits AI. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
 
 ## Find relevant changes where you're working
 
-When you open a page that is scoped to a service, Datadog surfaces that service's changes alongside your telemetry.
-
 On dashboards and monitor status pages, Datadog ranks changes by likely cause, so that the changes most likely to explain what you are seeing appear first. When only a few changes are likely to be faulty, a banner calls them out. See [Faulty change banners](#faulty-change-banners).
-
-You do not need to configure this. Any change type you already send is eligible. See [Tracked Change Types][1].
 
 | Where | What you see | Requirements |
 | --- | --- | --- |
 | [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
 | [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
-| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | APM data for the service. |
+| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | — |
 | [RUM Explorer][6] | Change markers at the top of RUM Explorer graphs (for example, when you group by errors), for correlating frontend regressions with frontend deployments and feature flag changes. | [RUM deployment tracking][7], and [RUM feature flag tracking][8] for flag changes. |
 
 ### On a dashboard
@@ -93,11 +86,10 @@ On dashboards and monitor status pages, Datadog displays a banner when a small n
 
 <!-- TODO: Add screenshot of the change side panel. -->
 
-Click a change on a timeline, an overlay, or a widget to open the Change Tracking side panel. The panel is where an investigation moves from "something changed" to "here is what changed."
+Click a change on a timeline, an overlay, or a widget to open the Change Tracking side panel.
 
-From the side panel, you can:
+From the side panel, you can investigate more details about the change and take the following actions:
 
-- See what the change was, when it happened, and which service it belongs to.
 - Open the deployment in your CI/CD system.
 - View the latest commits in your repository.
 - Compare two deployments to see what differs between them.
@@ -117,8 +109,6 @@ To get the most from Change Analysis, set up [Source Code Integration][10] for t
 
 ## Search for changes you can't see
 
-The timelines are scoped to one service and one time window. When your change falls outside that scope, widen the search.
-
 <!-- TODO: Add "Explore changes with Change Explorer" (Preview) section after product sends links. -->
 
 ### Search by symptom with Semantic Search
@@ -133,7 +123,7 @@ Semantic Search lets you describe the problem in your own words. For example, yo
 
 ### Build your own view with Change Tracking widgets
 
-Change Tracking is available as a data source for widgets in dashboards and notebooks, which lets you query change data directly rather than reading it off a timeline.
+Change Tracking is available as a data source for widgets across Datadog, including dashboards and notebooks.
 
 {{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
 
