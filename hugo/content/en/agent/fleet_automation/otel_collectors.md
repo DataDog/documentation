@@ -63,6 +63,8 @@ With OTel Collector health signals, you can:
 - Diagnose and fix issues with running configurations and pipeline topologies, with guided troubleshooting context.
 - Identify and mitigate emerging pipeline risks across your fleet at a glance.
 
+{{< img src="/agent/fleet_automation/fa-otel-collector-health.png" alt="Fleet View with the Agent & Collector Health Issues panel open, showing Agents and OTel Collectors with broken or warning health." style="width:100%;" >}}
+
 To view health signals in Fleet View, see [Monitor Agent and OTel Collector health][7].
 
 ## Visualize OTel pipelines
