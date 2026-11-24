@@ -27,7 +27,7 @@ Coding agents signed in with a subscription send two headers:
 - `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
 - `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
 
-`dd-application-key` is the standard Datadog application key header. It also accepts personal access tokens, without an API key.
+Despite its name, `dd-application-key` takes a personal access token, not an application key.
 
 For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](/ai_gateway/applications/#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
 
@@ -67,7 +67,7 @@ Append one of the following paths to the [base URL](#base-url). The operations a
 | OpenAI Chat Completions | `POST /chat/completions` | |
 | Anthropic Messages | `POST /messages` | |
 | Gemini generateContent | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent`, or `:streamGenerateContent` to stream | Also accepted under `/ai/v1beta1`. See [Native Gemini and decision APIs](#native-gemini-and-decision-apis). |
-| Claude on Vertex AI | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict`, or `:streamRawPredict` to stream | Anthropic Messages body. Not translated. |
+| Gemini rawPredict | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict`, or `:streamRawPredict` to stream | Anthropic Messages body, for Claude models on Vertex AI. Not translated. See [Native Gemini and decision APIs](#native-gemini-and-decision-apis). |
 | Decisions | `POST /decisions` | |
 | System One | `POST /systemone` | |
 
@@ -245,7 +245,7 @@ For a translated upstream HTTP error, AI Gateway preserves the status and releva
 See [AI Gateway troubleshooting][translation-6] for authentication, model access, and operation errors.
 ## Native Gemini and decision APIs
 
-Use a native API when your application needs its request and response format. AI Gateway accepts Gemini generateContent, OpenAI Decisions, and Baseten System One requests in addition to OpenAI Responses, Chat Completions, and Anthropic Messages.
+Use a native API when your application needs its request and response format. AI Gateway accepts Gemini generateContent, Gemini rawPredict, OpenAI Decisions, and Baseten System One requests in addition to OpenAI Responses, Chat Completions, and Anthropic Messages.
 
 OpenAI Decisions and Baseten System One are decision APIs: they evaluate an input against named questions and return a typed answer for each question.
 
@@ -265,10 +265,11 @@ The following paths start at the host `https://ai-gateway.{{< region-param key="
 | API | AI Gateway path | Model selection | Streaming |
 |---|---|---|---|
 | Gemini generateContent | `POST /ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent` | Provider slug and model ID in the URL | Use `:streamGenerateContent` for streaming. |
+| Gemini rawPredict | `POST /ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict` | Provider slug and model ID in the URL | Use `:streamRawPredict` for streaming. |
 | OpenAI Decisions | `POST /ai/v1/decisions` | `model` in the body | Non-streaming response. |
 | System One | `POST /ai/v1/systemone` | `model` in the body | Non-streaming response. |
 
-For Gemini, AI Gateway also accepts the `/ai/v1beta1/publishers/...` paths. Find your model in {{< ui >}}Model Catalog{{< /ui >}} and check its supported operations in the provider configuration before choosing an endpoint.
+Gemini rawPredict serves Claude models on Vertex AI: the request body uses the Anthropic Messages format, and AI Gateway does not translate it. For Gemini, AI Gateway also accepts the `/ai/v1beta1/publishers/...` paths. Find your model in {{< ui >}}Model Catalog{{< /ui >}} and check its supported operations in the provider configuration before choosing an endpoint.
 
 To use a routing rule with OpenAI Decisions or System One, set `model` to `router/<RULE_SLUG>`. For Gemini, use `/ai/v1/publishers/router/models/<RULE_SLUG>:generateContent` or its streaming variant. The rule's destinations must support the requested operation.
 
