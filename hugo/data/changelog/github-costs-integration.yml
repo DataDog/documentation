@@ -9,3 +9,13 @@ entries:
       - ListGitHubCostsIntegrationAccounts
       - UpdateGitHubCostsIntegrationAccount
     title: Add Integration Accounts v2 API for GitHub Costs
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42078
+    operations:
+      - CreateGitHubCostsIntegrationAccount
+      - DeleteGitHubCostsIntegrationAccount
+      - GetGitHubCostsIntegrationAccount
+      - ListGitHubCostsIntegrationAccounts
+      - UpdateGitHubCostsIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses
