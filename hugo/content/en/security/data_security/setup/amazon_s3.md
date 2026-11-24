@@ -26,7 +26,7 @@ Data Security is in Preview. To request access, fill out the form.
 
 Data Security scans Amazon S3 buckets with Agentless scanners, EC2 instances that you deploy in your AWS account. The scanners read up to 1,000 files per bucket and send only the match metadata to Datadog. The scanned data doesn't leave your AWS account. Data Security scans each bucket at most once every 7 days.
 
-Data Security scans CSV, JSON, Parquet, plain text, and ZIP files. It skips images, binary files, and other formats.
+Data Security scans CSV, JSON, Parquet, plain text, and ZIP files, including Microsoft Office documents such as DOCX, XLSX, and PPTX, and OpenDocument files such as ODT. It skips images, binary files, and other formats.
 
 ## Prerequisites
 

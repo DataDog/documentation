@@ -67,7 +67,7 @@ During Preview, Data Security has the following limitations:
 - Data Security finds sensitive data. It doesn't remediate it: it doesn't change access, mask, or redact data yet.
 - Data Security keeps no scan history. When a later scan no longer finds sensitive data in a resource, its finding disappears.
 - Snowflake scanning covers base tables only. Views, external tables, event tables, and materialized views are not scanned.
-- Amazon S3 scanning supports CSV, JSON, Parquet, plain text, and ZIP files. Images, binary files, and other formats are skipped.
+- Amazon S3 scanning supports CSV, JSON, Parquet, plain text, and ZIP files, including Microsoft Office documents such as DOCX, XLSX, and PPTX, and OpenDocument files such as ODT. Images, binary files, and other formats are skipped.
 
 ## Further reading
 
