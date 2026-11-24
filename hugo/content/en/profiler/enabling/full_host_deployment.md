@@ -15,7 +15,7 @@ Full-Host Profiler is in Preview.
 
 Before you continue, review the [supported environments][1] for the Full-Host Profiler.
 
-Select the tab that matches how your Kubernetes cluster is managed. If the Datadog Agent is already installed, including deployments that also run the Datadog Distribution of OpenTelemetry (DDOT), use a Datadog Agent tab so the Agent can enrich profiles with infrastructure metadata. Otherwise, use an OpenTelemetry tab.
+Select the tab that matches how your Kubernetes cluster is managed. If the Datadog Agent is already installed, including with the Agent's Collector, use a Datadog Agent tab so the Agent can enrich profiles with infrastructure metadata. Otherwise, use an OpenTelemetry tab.
 
 {{< tabs >}}
 
