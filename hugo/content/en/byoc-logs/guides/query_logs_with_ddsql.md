@@ -215,7 +215,6 @@ WHERE events > 100
 ORDER BY events DESC
 ```
 
-
 ## Limitations and recommendations
 
 - Inline calculated fields are not supported. To derive values, use SQL expressions in an analysis cell, such as `CASE` statements or arithmetic.
