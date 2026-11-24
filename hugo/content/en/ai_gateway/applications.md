@@ -48,6 +48,8 @@ Before you begin, complete [Get started][applications-1], or ask your administra
 3. Start the agent through Trajectory with `trajectory claude` or `trajectory codex`. The agent's `/model` picker lists the models and routing rules you can use through AI Gateway. To send requests on behalf of a team you belong to, see [Select a team](#select-a-team).
 4. Optional: Run `trajectory gateway-ui` to open the AI Gateway dashboard with your models, routing rules, and budgets.
 
+To list only the models of some provider accounts in the `/model` picker, pass their provider slugs when you start the agent, for example `trajectory claude --provider-slugs <PROVIDER_SLUG>,<PROVIDER_SLUG>` or `trajectory codex --provider-slugs <PROVIDER_SLUG>`. Routing rules stay in the picker. Each Claude Code session can use a different filter. Codex sessions share one model list, so the filter comes from the Codex session that starts it, and later Codex sessions ignore their flag while that list is in use. The filter changes only what the picker shows: [model access policies][applications-25] still decide which models you can call.
+
 AI Gateway signs you in to the site you pass with `--site`, or else the site of your existing Pup sign-in, or else US1. It does not use the site you choose in the installer's wizard. If AI Gateway signed you in to the wrong site, run `trajectory plugins ai-gateway login --site <SITE>`, for example `--site us3.datadoghq.com`.
 
 If you install another agent later, run `trajectory plugins ai-gateway setup --clients <CLIENT>`. To stop routing an agent through AI Gateway, run `trajectory plugins ai-gateway disable --clients <CLIENT>`.
@@ -56,7 +58,7 @@ A request that fails through AI Gateway is not retried with the agent's own prov
 
 ### Roll out Trajectory to your organization
 
-To connect a team or a whole organization, deploy Trajectory to developer computers with your MDM product, such as Jamf Pro or Microsoft Intune, instead of asking each developer to install it. See [Roll out Trajectory with MDM][applications-27]. On macOS, the deployment can also install launcher wrappers, so that ordinary `claude` and `codex` commands start through Trajectory. To limit which provider accounts appear in the agents' `/model` pickers, administrators can set `provider_slugs` for the `frontier-ai-gateway` module in the deployment profile.
+To connect a team or a whole organization, deploy Trajectory to developer computers with your MDM product, such as Jamf Pro or Microsoft Intune, instead of asking each developer to install it. See [Roll out Trajectory with MDM][applications-27]. On macOS, the deployment can also install launcher wrappers, so that ordinary `claude` and `codex` commands start through Trajectory. To limit which provider accounts appear in the supported coding agents' `/model` pickers for everyone, set `provider_slugs` for the `frontier-ai-gateway` module in the deployment profile. This list replaces any `--provider-slugs` a developer passes.
 
 ## Configure clients manually
 
