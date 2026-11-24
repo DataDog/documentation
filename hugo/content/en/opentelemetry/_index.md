@@ -94,7 +94,7 @@ Use the [upstream OpenTelemetry SDK][8] and the [upstream OpenTelemetry Collecto
 
 {{< img src="/opentelemetry/setup/otel-path-upstream.png" alt="The upstream OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to Datadog." style="width:100%;" >}}
 
-**Best for**: Teams whose policy allows only upstream OpenTelemetry components, or applications in languages that DDOT SDKs don't cover yet.
+**Best for**: Teams whose policy allows only upstream OpenTelemetry components, or applications in languages that DDOT SDKs don't support.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/getting_started/kubernetes/?tab=upstream" >}}Install upstream OpenTelemetry with the Kubernetes quickstart{{< /nextlink >}}
