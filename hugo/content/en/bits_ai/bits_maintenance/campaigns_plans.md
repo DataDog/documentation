@@ -83,8 +83,8 @@ To add a custom step to a plan:
 
 [1]: /bits_ai/bits_maintenance/
 [2]: /actions/workflows/
-[3]: /bits_ai/bits_maintenance/setup/#step-8-optional-create-a-rollout-order
-[4]: /bits_ai/bits_maintenance/setup/#step-7-recommended-create-an-operational-profile
+[3]: /bits_ai/bits_maintenance/setup/#step-5-optional-create-a-rollout-order
+[4]: /bits_ai/bits_maintenance/setup/#step-4-recommended-create-an-operational-profile
 [5]: https://app.datadoghq.com/bits-ai/maintenance/campaigns
 [6]: https://app.datadoghq.com/bits-ai/maintenance/plans
 [7]: /bits_ai/bits_maintenance/instructions_memories/#upgrade-instructions
