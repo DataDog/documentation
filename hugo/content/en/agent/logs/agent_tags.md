@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent automatically adds certain tags to all logs it collects before sending them to Datadog. These tags are added **pre-ingestion**, and are included in the payload that gets delivered to Datadog.
+The Datadog Agent automatically adds certain tags to all logs it collects before sending them to Datadog. These tags are added **pre-ingestion**, and are included in the payload that gets delivered to Datadog. To remove selected tags before the Agent sends logs, see [Filter tags before ingestion](#filter-tags-before-ingestion).
 
 ## Pre-ingestion processing
 
@@ -57,7 +57,13 @@ Choose the filter scope based on where you want the rule to apply:
 
 Tag filters apply to logs collected by the Agent's logs pipeline. They don't apply to logs from serverless-init, OTLP ingestion, or the Datadog Distribution of OpenTelemetry (DDOT) Collector.
 
-Before filtering a tag, review whether it supports pipelines, indexes, archives, monitors, dashboards, or other workflows.
+Before you filter a tag, check whether any pipelines, indexes, archives, monitors, dashboards, or other workflows use it.
+
+### Filter pattern syntax
+
+Patterns use `key:value` syntax. Keys must match exactly, values can contain `*` wildcards, and matching is not case-sensitive. An `include` pattern only preserves tags that an `exclude` pattern would otherwise remove. It doesn't remove any other tags.
+
+**Note**: The Agent sends `source`, `service`, and `host` separately from the tag list. Filtering these tags does not remove their values from the log.
 
 ### Global filters
 
@@ -134,10 +140,6 @@ logs:
 ```
 
 Per-source rules are evaluated before global rules, so a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
-
-Patterns use `key:value` syntax. Keys must match exactly, values can contain `*` wildcards, and matching is not case-sensitive. An `include` pattern preserves tags that match an `exclude` pattern; it does not remove other tags.
-
-**Note**: The Agent sends `source`, `service`, and `host` separately from the tag list. Filtering these tags does not remove their values from the log.
 
 ### Apply and verify filters
 
