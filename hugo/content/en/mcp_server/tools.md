@@ -1425,7 +1425,7 @@ Lists experiments for the organization, with optional name search, limit, and of
 ### `get_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Read`*\
-Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision.
+Gets a single experiment by ID, including status, linked feature flag, subject type, primary metric, assignment dates, and decision. The experiment details from this tool and from `create_experiment` also include tags when the experiment has any.
 
 - Get the details for experiment `abc123`.
 - What is the current status and linked flag for experiment `abc123`?
@@ -1433,9 +1433,10 @@ Gets a single experiment by ID, including status, linked feature flag, subject t
 ### `create_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
-Creates a new experiment with a name, hypothesis, subject type, and primary metric.
+Creates a new experiment with a name, hypothesis, subject type, and primary metric. Only the name is required. Optionally, include `tags`, an array of strings that the tool attaches to the experiment in the same call, whether you create the experiment [from a protocol][108] or without one. The tool rejects `team:` tags before creating the experiment. Datadog derives an experiment's team membership, so you can't set it with tags.
 
 - Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
+- Create an experiment called "Checkout Agent Prompt" with the tags `ml_app:checkout-agent` and `source:agent`.
 
 ### `link_feature_flag_to_experiment`
 *Toolset: **experiments***\
@@ -4002,6 +4003,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
 [107]: /integrations/kube_apiserver_metrics/
+[108]: /experiments/protocols/
 
 ## Further reading
 
