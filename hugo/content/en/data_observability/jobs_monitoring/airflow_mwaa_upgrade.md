@@ -41,7 +41,7 @@ Datadog recommends using the newest compatible provider release available for yo
 
 ## Recommended versions
 
-The following table shows the default versions pinned by MWAA constraints and the recommended upgrade versions for each Airflow version:
+The following table shows the default versions pinned by the Apache Airflow constraints files and the recommended upgrade versions for each Airflow version:
 
 | Package | Airflow 2.7.2 | Airflow 2.8.1 | Airflow 2.9.2 |
 |---|---|---|---|
@@ -94,7 +94,7 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    aws s3 cp constraints.txt "s3://${MWAA_BUCKET}/dags/constraints.txt"
    ```
 
-4. Update `requirements.txt` to reference the patched wheels and constraints. Add the following lines, with the `--constraint` line first, and keep your other packages. If `requirements.txt` already has a `--constraint` line, replace it.
+4. Update `requirements.txt` to reference the patched wheels and constraints. Make the `--constraint` line the first line, replacing any existing `--constraint` line. Replace any existing lines for the packages in the following block with these lines, including version pins for `apache-airflow-providers-openlineage` and `apache-airflow-providers-common-compat`, which the wheel paths replace. Keep your other packages.
 
    ```text
    --constraint /usr/local/airflow/dags/constraints.txt
@@ -139,7 +139,7 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    aws s3 cp constraints.txt "s3://${MWAA_BUCKET}/dags/constraints.txt"
    ```
 
-3. Update `requirements.txt` to reference the constraints file and pin the upgraded package versions. Add the following lines, with the `--constraint` line first, and keep your other packages. If `requirements.txt` already has a `--constraint` line, replace it.
+3. Update `requirements.txt` to reference the constraints file and pin the upgraded package versions. Make the `--constraint` line the first line, replacing any existing `--constraint` line. Replace any existing lines for the packages in the following block with these lines, and keep your other packages.
 
    ```text
    --constraint /usr/local/airflow/dags/constraints.txt
@@ -185,7 +185,7 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
    aws s3 cp constraints.txt "s3://${MWAA_BUCKET}/dags/constraints.txt"
    ```
 
-3. Update `requirements.txt` to reference the constraints file and pin the upgraded package versions. Add the following lines, with the `--constraint` line first, and keep your other packages. If `requirements.txt` already has a `--constraint` line, replace it.
+3. Update `requirements.txt` to reference the constraints file and pin the upgraded package versions. Make the `--constraint` line the first line, replacing any existing `--constraint` line. Replace any existing lines for the packages in the following block with these lines, and keep your other packages.
 
    ```text
    --constraint /usr/local/airflow/dags/constraints.txt
