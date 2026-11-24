@@ -122,7 +122,8 @@ point the frontmatter at them, and update each row.
 ---
 - [Runtime Metrics][11]
 -
-  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
+  {% if equals($otel_sdk, "ddot_sdk") %}{% x/ %} ({% tooltip contents="Python sends runtime metrics with DogStatsD, which needs the Datadog Agent." %}Partial{% /tooltip %}){% /if %}
 ---
 - [Span Links][12]
 -
@@ -248,7 +249,7 @@ Datadog recommends that you run the Datadog Agent with DDOT SDKs. Features marke
 
 ## API support
 
-DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces, Metrics, and Logs APIs. The Datadog SDKs for Ruby and PHP also support these APIs, but they don't export traces over OTLP, so they aren't DDOT SDKs. The Datadog SDK for Rust also supports these APIs. Select a language for setup guides and support details.
+DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces, Metrics, and Logs APIs. The Datadog SDKs for Ruby, PHP, and Rust also support these APIs, but they aren't DDOT SDKs. The Ruby and PHP SDKs don't export traces over OTLP. Select a language for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
