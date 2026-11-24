@@ -76,7 +76,7 @@ watchNamespaces:
   - ""
 ```
 
-Use a Helm chart for Datadog Operator v1.33.0 or later with the chart's default Operator image. The chart version and Operator image version are separate version numbers.
+Use Datadog Operator Helm chart version 2.33.0 or later with the chart's default Operator image. The chart version and Operator image version are separate version numbers.
 
 `watchNamespaces: [""]` watches all namespaces, including the `byoc` namespace used in this guide. To restrict the watch scope, list the namespaces to manage, including `byoc`. If you omit this setting, the Operator watches only its installation namespace.
 
@@ -84,13 +84,11 @@ For a new Operator installation, run:
 
 ```shell
 helm install datadog-operator datadog/datadog-operator \
-  --devel \
+  --version 2.33.0 \
   --namespace datadog \
   --create-namespace \
   --values operator-values.yaml
 ```
-
-The `--devel` flag includes pre-release chart versions, such as release candidates. Without this flag, Helm selects the latest stable chart. To pin a specific chart version, use `--version`; this option takes precedence over `--devel`.
 
 If an Operator is already installed, enable `datadogBYOCCluster` and the two BYOC-related CRDs in its existing values file. Upgrade that release in its existing namespace. Preserve other enabled controllers and CRDs. Don't apply the `false` settings from the previous example. Include `byoc` in its watch scope. See [Operator installation][9].
 
