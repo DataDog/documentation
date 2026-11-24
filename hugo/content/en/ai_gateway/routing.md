@@ -71,7 +71,7 @@ If the picked destination fails, AI Gateway tries the catch-all destination, the
 
 Decision calls run on your provider account and count toward your [budgets and rate limits](/ai_gateway/spend_controls/). The request's spans in Agent Observability record the decision in `classified_routing.*` tags: the outcome, the chosen destination, and its confidence.
 
-<div class="alert alert-warning">A Smart step optimizes cost and quality. It is not a security, privacy, or compliance control. The content of a request can influence which destination the decision model picks, for example a message that claims to be a large coding task, and the pick then applies to the whole session and its subagents. Only add destinations that are acceptable for everyone who can use the routing rule. To control which models handle sensitive data, use <a href="/ai_gateway/access_control/">access policies</a>, <a href="/ai_gateway/security/#configure-data-capture">data capture settings</a>, and <a href="/ai_gateway/security/#apply-ai-guard-policies">AI Guard</a>.</div>
+<div class="alert alert-warning">A Smart step optimizes cost and quality. It is not a security, privacy, or compliance control. The content of a request can influence which destination the decision model picks, for example a message that claims to be a large coding task, and the pick then applies to the whole session and its subagents. Only add destinations that are acceptable for everyone who can use the routing rule. To control which models handle sensitive data, use <a href="/ai_gateway/access_control/">access policies</a>, <a href="/ai_gateway/security/#configure-data-capture">data capture settings</a>, and <a href="/ai_gateway/security/#apply-guardrails">guardrails</a>.</div>
 
 ## Sessions
 
