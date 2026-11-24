@@ -4073,6 +4073,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [106]: /incident_response/on-call/
 [107]: /integrations/kube_apiserver_metrics/
 [108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/#bulk-migrate-detection-rules-in-the-ui
+[109]: /containers/monitoring/amazon_elastic_container_explorer/
+[110]: /containers/amazon_ecs/
 
 ## Further reading
 
