@@ -123,7 +123,7 @@ END $$;
 
 The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema.
 
-Tables the `datadog` user can't read appear as setup issues in the side panel.
+If the `datadog` user can't read the tables in a database, that database appears under setup issues in the side panel.
 
 ## Enable scanning
 
@@ -136,7 +136,7 @@ Scanning applies to each host separately.
 
 The side panel lists the Agents that monitor the host, with their {{< ui >}}Agent name{{< /ui >}}, {{< ui >}}Version{{< /ui >}}, {{< ui >}}Remote Agent Management{{< /ui >}} status, and {{< ui >}}Remote config status{{< /ui >}}.
 
-After the first scan, check the setup issues in the side panel. A missing read permission appears as a warning with the table name, for example `Scanning the table <DATABASE>.<SCHEMA>.<TABLE> failed: permission denied`. To fix it, grant `SELECT` on the table to the `datadog` user.
+After the first scan, check {{< ui >}}Setup issues{{< /ui >}} in the side panel. Missing read permissions are grouped by database, for example `The database user lacks the privileges to read tables in 1 database. Grant it read access to scan this database.` To list the affected databases, click {{< ui >}}See databases{{< /ui >}}. To fix the issue, [grant read access](#grant-read-access-to-all-schemas) to the `datadog` user in each of those databases.
 
 ## Disable scanning
 
