@@ -57,7 +57,7 @@ Code executed by the `code-exec` toolset runs against Datadog APIs using your us
 - `execute_code` exposes read-only Datadog API calls for investigations and analysis.
 - `execute_code_write` can create, update, or delete supported resources, such as monitors, SLOs, log configurations, incidents, and cases. Use `search_datadog_sdk` with `target: "execute_code_write"` to confirm which operations are available.
 - Teams access is read-only. Creating or updating teams, changing membership, and other team write operations are unavailable through code execution.
-- Dashboard and notebook creation and updates are unavailable through code execution. Use [`upsert_datadog_dashboard`][8] and the dedicated [notebook tools][9] for those actions. Reading and deleting dashboards and notebooks remain supported.
+- Dashboard and notebook creation and updates are unavailable through code execution. Use [`upsert_datadog_dashboard`][8] and the dedicated [notebook tools][9] for those actions. Code execution supports reading and deleting dashboards and notebooks.
 - Credential management, user and role management, and other sensitive administrative APIs remain unavailable, even if you can access them elsewhere in Datadog.
 - The sandbox is isolated. Scripts can't access your local machine, file system, arbitrary network destinations, or raw Datadog credentials.
 - Raw API responses stay inside the sandbox while the script processes them. The only data sent back to the agent is the value the code returns. Review what a script returns if the underlying data is sensitive, such as customer data stored in logs.
