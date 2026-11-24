@@ -16,9 +16,9 @@ further_reading:
 - link: '/metrics/guide/tag-indexing-rules/'
   tag: 'Documentation'
   text: 'Tag Indexing Rules'
-- link: '/metrics/guide/agent-filtering-for-custom-metrics'
+- link: '/metrics/guide/filtering-for-custom-metrics'
   tag: 'Documentation'
-  text: 'Agent Filtering for Custom Metrics'
+  text: 'Filtering for Custom Metrics'
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -95,7 +95,7 @@ Click the **⋮** menu on any rule row to edit or delete it. Edits take effect i
 You can create and manage specific rules for metrics from the Governance Console. Alternatively, you can manage these rules from Metrics Settings. For rule-specific details, see the reference documentation below:
 
 - [Tag Indexing](/metrics/guide/tag-indexing-rules/)
-- [Metric Name Filtering](/metrics/guide/agent-filtering-for-custom-metrics)
+- [Metric Name Filtering](/metrics/guide/filtering-for-custom-metrics)
 
 ## Limitations
 

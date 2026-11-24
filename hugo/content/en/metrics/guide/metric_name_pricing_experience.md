@@ -139,5 +139,5 @@ For billing questions, contact your [Customer Success][8] Manager.
 [6]: /account_management/billing/usage_metrics/
 [7]: /help/
 [8]: mailto:success@datadoghq.com
-[9]: /metrics/guide/agent-filtering-for-custom-metrics/
+[9]: /metrics/guide/filtering-for-custom-metrics/
 [10]: /metrics/guide/tag-indexing-rules/
