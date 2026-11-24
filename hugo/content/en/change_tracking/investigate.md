@@ -81,8 +81,6 @@ From the side panel, you can investigate more details about the change and take 
 
 ### Read the Change Analysis
 
-<!-- TODO: Confirm whether deployment Change Analysis needs a Preview label. -->
-
 Change Analysis is an AI-generated summary in the change side panel that describes what a change did. It goes beyond noting that a new version deployed, and summarizes what moved in the code behind it.
 
 Change Analysis is available for feature flag changes and deployments. It summarizes what was updated and lists the resources the change affected.
@@ -94,17 +92,21 @@ To get the most from Change Analysis, set up [Source Code Integration][10] for t
 
 ## Search for changes you can't see
 
-<!-- TODO: Add "Explore changes with Change Explorer" (Preview) section after product sends links. -->
-
 ### Search by symptom with Semantic Search
-
-<!-- TODO: Confirm Semantic Search status (Preview, or GA for feature flags). -->
 
 {{< callout url="https://www.datadoghq.com/product-preview/semantic-search-changes/" btn_hidden="false" header="Join the Preview!" >}}
 Semantic Search for changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
 {{< /callout >}}
 
 Semantic Search lets you describe the problem in your own words. For example, you can enter "my payment service is down, what change might have caused it?" and Semantic Search returns the most plausible match, instead of requiring you to know which service or change type to filter on.
+
+### Explore changes with Change Explorer
+
+{{< callout url="https://www.datadoghq.com/product-preview/change-explorer/" btn_hidden="false" header="Join the Preview!" >}}
+Change Explorer is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+{{< /callout >}}
+
+Use Change Explorer to search for changes outside of the change timeline on the page you're viewing.
 
 ### Build your own view with Change Tracking widgets
 
