@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/explorer/archive_search/"
   tag: "Documentation"
   text: "Archive Search"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 <div class="alert alert-info">

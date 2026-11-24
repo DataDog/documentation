@@ -25,6 +25,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
   tag: "Blog"
   text: "Bring live Datadog telemetry into your AI agents with native integrations"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
+- link: "https://www.datadoghq.com/blog/agentic-onboarding/"
+  tag: "Blog"
+  text: "Let your AI agent set up Datadog with Agentic Onboarding"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:

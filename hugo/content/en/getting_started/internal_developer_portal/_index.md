@@ -5,9 +5,6 @@ aliases:
   - /getting_started/service_catalog
   - /getting_started/software_catalog/
 further_reading:
-    - link: 'https://app.datadoghq.com/idp/get-started'
-      tag: 'App'
-      text: 'Exploring IDP in Datadog'
     - link: '/internal_developer_portal'
       tag: 'Documentation'
       text: 'IDP Documentation'
@@ -17,6 +14,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/service-owner-knowledge-with-datadog-service-catalog/'
       tag: 'Blog'
       text: 'Simplify microservice governance with the Datadog Service Catalog'
+    - link: "https://www.datadoghq.com/blog/check-ec2-workloads-imdsv2-readiness/"
+      tag: "Blog"
+      text: "How to check if your EC2 workloads are ready for IMDSv2"
+    - link: 'https://app.datadoghq.com/idp/get-started'
+      tag: 'App'
+      text: 'Exploring IDP in Datadog'
 ---
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}

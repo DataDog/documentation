@@ -9,6 +9,12 @@ further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
@@ -184,3 +190,7 @@ If the destination receives 3 events within 2 seconds, it flushes a batch with 2
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
 [4]: /observability_pipelines/configuration/secrets_management/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

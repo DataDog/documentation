@@ -17,6 +17,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/azure-secretless-authentication/"
       tag: "Blog"
       text: "Avoid Azure secret rotation with secretless authentication"
+    - link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+      tag: "Blog"
+      text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
 ---
 
 ## Overview

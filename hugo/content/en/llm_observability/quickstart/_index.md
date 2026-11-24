@@ -16,12 +16,15 @@ further_reading:
     - link: '/llm_observability/instrument/otel_instrumentation'
       tag: 'Documentation'
       text: 'Instrument with OpenTelemetry'
-    - link: '/llm_observability/investigate/evaluations'
-      tag: 'Evaluations'
-      text: 'Configure Evaluators on your application'
     - link: '/llm_observability/lapdog'
       tag: 'Documentation'
       text: 'Local development tool for Agent Observability'
+    - link: "https://www.datadoghq.com/blog/fine-tuning-patterns-baseten/"
+      tag: "Blog"
+      text: "How we fine-tuned a faster model for Patterns on Baseten"
+    - link: '/llm_observability/investigate/evaluations'
+      tag: 'Evaluations'
+      text: 'Configure Evaluators on your application'
 ---
 
 This page demonstrates using Datadog's Agent Observability SDK to instrument a Python, Node.js, or Java LLM application.

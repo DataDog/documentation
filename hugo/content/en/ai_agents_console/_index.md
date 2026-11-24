@@ -17,15 +17,18 @@ further_reading:
   - link: '/integrations/cursor/'
     tag: 'Documentation'
     text: 'Cursor integration'
-  - link: "https://github.com/datadog-labs/trajectory"
-    tag: "Source Code"
-    text: "Trajectory"
   - link: "https://www.datadoghq.com/blog/claude-code-monitoring"
     tag: "Blog"
     text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
   - link: "https://www.datadoghq.com/blog/datadog-agent-console/"
     tag: "Blog"
     text: "Monitor agent adoption with Datadog Agent Console"
+  - link: "https://www.datadoghq.com/blog/azure-ai-monitoring-ignite-2026/"
+    tag: "Blog"
+    text: "Monitor your Azure AI stack and get broad Azure coverage with Datadog"
+  - link: "https://github.com/datadog-labs/trajectory"
+    tag: "Source Code"
+    text: "Trajectory"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}

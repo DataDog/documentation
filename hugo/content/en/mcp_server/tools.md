@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview

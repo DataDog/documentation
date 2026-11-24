@@ -10,6 +10,9 @@ further_reading:
 - link: "/observability_pipelines/configuration/live_capture/"
   tag: "Documentation"
   text: "Live Capture"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 products:
 - name: Logs
   icon: logs

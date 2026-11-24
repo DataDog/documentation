@@ -38,6 +38,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
     tag: "Blog"
     text: "CI/CD security: How to secure your GitHub ecosystem"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2026/"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of Cloud Security study"
 
 ---
 ## Overview

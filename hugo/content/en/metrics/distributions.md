@@ -11,6 +11,9 @@ further_reading:
   - link: "/metrics/open_telemetry/otlp_metric_types/"
     tag: "Documentation"
     text: "OTLP Metric Types"
+  - link: "https://www.datadoghq.com/blog/engineering/how-we-scaled-metrics-aggregation/"
+    tag: "Blog"
+    text: "How we scaled metrics aggregation by moving durable state into storage"
 ---
 ## Overview
 

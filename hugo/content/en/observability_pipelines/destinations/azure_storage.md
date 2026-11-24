@@ -6,6 +6,10 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+further_reading:
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 {{< product-availability >}}
@@ -165,3 +169,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [17]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [18]: /logs/explorer/archive_search/
 [19]: /logs/explorer/archive_search/?tab=azurestorage#cloud-specific-permissions
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
