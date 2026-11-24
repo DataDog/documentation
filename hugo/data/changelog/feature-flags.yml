@@ -79,3 +79,45 @@ entries:
       - ListFeatureFlagsEnvironments
       - UpdateFeatureFlagsEnvironment
     title: Remove key and description from Feature Flags environment responses
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41903
+    operations:
+      - ArchiveFeatureFlag
+      - CreateFeatureFlag
+      - GetFeatureFlag
+      - ListFeatureFlags
+      - UnarchiveFeatureFlag
+      - UpdateFeatureFlag
+    title: Document bucketing_mode on feature flag responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - ArchiveFeatureFlag
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - CreateFeatureFlag
+      - CreateFeatureFlagsEnvironment
+      - CreateVariantForFeatureFlag
+      - DeleteFeatureFlagsEnvironment
+      - DeleteVariantFromFeatureFlag
+      - DisableFeatureFlagEnvironment
+      - EnableFeatureFlagEnvironment
+      - ExportFeatureFlagHistory
+      - GetFeatureFlag
+      - GetFeatureFlagsEnvironment
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - ListFeatureFlagsEnvironments
+      - PauseExposureSchedule
+      - ResumeExposureSchedule
+      - StartExposureSchedule
+      - StopExposureSchedule
+      - UnarchiveFeatureFlag
+      - UpdateAllocationsForFeatureFlagInEnvironment
+      - UpdateFeatureFlag
+      - UpdateFeatureFlagsEnvironment
+      - UpdateSavedFilterAttributes
+      - UpdateVariantForFeatureFlag
+    title: Document rate-limit headers on the shared 429 responses

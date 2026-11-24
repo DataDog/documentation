@@ -1,8 +1,8 @@
 ---
 aliases:
 - /fr/opentelemetry/agent/
-description: Le DDOT Collector est un OpenTelemetry Collector que Datadog développe
-  et prend en charge. Déployez-le sur Kubernetes avec les outils OpenTelemetry, avec
+description: Le DDOT Collector est un OpenTelemetry Collector développé et pris en
+  charge par Datadog. Déployez-le sur Kubernetes avec les outils OpenTelemetry, avec
   ou sans le Datadog Agent.
 further_reading:
 - link: https://learn.datadoghq.com/courses/using-ddot
@@ -29,21 +29,21 @@ further_reading:
 title: DDOT Collector
 ---
 {{< callout header="faux" btn_hidden="true" >}}
-Le DDOT Collector est en préversion.
+Le DDOT Collector est en Preview.
 {{< /callout >}}
 
 ## Présentation {#overview}
 
 Le Datadog OpenTelemetry (DDOT) Collector est une distribution open source de l'OpenTelemetry Collector, développée et maintenue par Datadog. Utilisez-le pour collecter, traiter et acheminer la télémétrie avec une configuration OpenTelemetry standard. Il ne nécessite pas le Datadog Agent.
 
-{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Votre application, instrumentée avec un SDK Datadog ou un SDK OpenTelemetry, envoie des données OTLP au DDOT Collector, qui envoie votre télémétrie à Datadog avec l'exportateur Datadog. Un Datadog Agent facultatif s'exécute parallèlement pour les fonctionnalités qui nécessitent l'Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Votre application, instrumentée avec un SDK Datadog ou un SDK OpenTelemetry, envoie des données OTLP au DDOT Collector, qui transmet votre télémétrie à Datadog via le Datadog Exporter. Un Datadog Agent facultatif s'exécute parallèlement pour les fonctionnalités qui nécessitent l'Agent." style="width:100%;" >}}
 
-- **Utilisez les outils OpenTelemetry** : déployez le collecteur sur Kubernetes avec l'OpenTelemetry Operator ou les charts Helm.
+- **Utilisez les outils OpenTelemetry** : déployez le Collector sur Kubernetes avec l'OpenTelemetry Operator ou les charts Helm.
 - **Configurez vos pipelines** : recevez la télémétrie depuis les [SDK Datadog][67], les SDK OpenTelemetry et d'autres sources. Traitez-la et acheminez-la vers Datadog et d'autres destinations.
-- **Commencez avec les composants inclus** : utilisez l'ensemble sélectionné de [composants OpenTelemetry](#opentelemetry-collector-components) et [Datadog](#datadog-components) sur cette page.
+- **Commencez avec les composants inclus** : utilisez l'ensemble sélectionné de composants [OpenTelemetry](#opentelemetry-collector-components) et [Datadog](#datadog-components) sur cette page.
 - **Obtenez une assistance au dépannage** : Datadog Support dépanne les composants pris en charge par Datadog. Pour la couverture des composants communautaires et personnalisés, consultez les [niveaux de support][57].
 
-Vous pouvez exécuter le Datadog Agent parallèlement au DDOT Collector pour les fonctionnalités qui nécessitent l'Agent. Pour l'OpenTelemetry Collector qui s'exécute parallèlement à l'Agent, consultez [Agent's Collector][69]. Sur les plateformes autres que Kubernetes, utilisez l'[OpenTelemetry Collector en amont][68] ou le [Datadog Agent][64].
+Vous pouvez exécuter le Datadog Agent parallèlement au collecteur pour les fonctionnalités qui nécessitent l'Agent. Pour l'OpenTelemetry Collector qui s'exécute parallèlement à l'Agent, consultez [Agent's Collector][69]. Sur les plateformes autres que Kubernetes, utilisez l'[upstream OpenTelemetry Collector][68] ou le [Datadog Agent][64].
 
 ## Démarrez {#get-started}
 
@@ -60,7 +60,7 @@ Vous pouvez exécuter le Datadog Agent parallèlement au DDOT Collector pour les
 
 ## Composants inclus {#included-components}
 
-Le DDOT Collector inclut les composants de l'OpenTelemetry Collector listés dans cette section. Pour ajouter des composants à l'Agent's Collector, consultez le [guide des composants personnalisés][2].
+Le DDOT Collector inclut les composants OpenTelemetry Collector répertoriés dans cette section. Pour compiler l'Agent's Collector avec d'autres composants, consultez [Add Components to the Agent's Collector][2].
 
 ### Niveaux de support {#support-levels}
 
@@ -68,7 +68,7 @@ Pour plus de détails sur le support de Datadog, de la communauté et des compos
 
 ### Composants du collecteur OpenTelemetry {#opentelemetry-collector-components}
 
-Par défaut, le DDOT Collector inclut ces composants. Cette liste correspond à DDOT 7.84. La liste est également disponible au [format YAML][11].
+Par défaut, le DDOT Collector inclut ces composants. Cette liste correspond à DDOT 7.85. Les composants amont sont également répertoriés dans le [manifeste DDOT 7.85.3][11]. Le manifeste ne répertorie pas le Datadog Exporter ni le Datadog Connector, que Datadog compile séparément.
 
 {{% collapse-content title="Récepteurs" level="p" %}}
 
@@ -76,9 +76,12 @@ Par défaut, le DDOT Collector inclut ces composants. Cette liste correspond à 
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
+- [httpcheckreceiver][73] (disponible depuis la version 7.85.0)
 - [jaegerreceiver][19]
 - [k8sclusterreceiver][70]
+- [k8seventsreceiver][74] (disponible depuis la version 7.85.0)
 - [k8sobjectsreceiver][59] (disponible depuis la version 7.56.0)
+- [kafkareceiver][75] (disponible depuis la version 7.85.0)
 - [kubeletstatsreceiver][60] (disponible depuis la version 7.56.0)
 - [otlpreceiver][20]
 - [podmanreceiver][61] (disponible depuis la version 7.56.0)
@@ -94,8 +97,9 @@ Par défaut, le DDOT Collector inclut ces composants. Cette liste correspond à 
 - [attributesprocessor][25]
 - [batchprocessor][26]
 - [cumulativetodeltaprocessor][27]
+- [deltatorateprocessor][76] (disponible depuis la version 7.85.0)
 - [filterprocessor][28]
-- [groupbyattributeprocessor][29]
+- [groupbyattrsprocessor][29]
 - [k8sattributesprocessor][30]
 - [memorylimiterprocessor][31]
 - [probabilisticsamplerprocessor][32]
@@ -146,31 +150,32 @@ En plus des composants OpenTelemetry standard, Datadog fournit et maintient les 
 
 {{% collapse-content title="Composants Datadog" level="p" %}}
 
-- [Infrastructure Attribute Processor][50] : un composant processeur OpenTelemetry qui attribue des [tags Kubernetes][53] à la télémétrie OTLP (métriques, traces et logs) provenant d'un pod ou d'un conteneur dans un pod. Datadog utilise ces tags pour corréler votre télémétrie avec votre infrastructure Kubernetes. Pour savoir comment `service`, `env` et `version` sont définis, consultez le [tagging de service unifié][54].
+- [Infrastructure Attribute Processor][50] : un composant processeur OpenTelemetry qui attribue des [tags Kubernetes][53] à la télémétrie OTLP (métriques, traces et logs) provenant d'un pod ou d'un conteneur dans un pod. Datadog utilise ces tags pour corréler votre télémétrie avec votre infrastructure Kubernetes. Pour savoir comment `service`, `env` et `version` sont définis, consultez le [tagging de service unifié][54].
 
 - [Converter][51] : Un composant convertisseur OpenTelemetry qui améliore les configurations fournies par l'utilisateur. Il offre une API pour renvoyer à la fois les configurations originales et améliorées, en vérifiant automatiquement les erreurs de configuration connues pour réduire les erreurs.
 
 
 {{% /collapse-content %}}
 
-L'Agent's Collector inclut également la [DD Flare Extension][52], qui ajoute les informations de diagnostic du collecteur à un flare de l'Agent.
+Le DDOT Collector et le collecteur de l'Agent incluent tous deux la [DD Flare Extension][52]. Avec le collecteur de l'Agent, l'extension ajoute les informations de diagnostic du collecteur à un flare de l'Agent.
 
 ## Versions de l'OpenTelemetry Collector {#opentelemetry-collector-versions}
 
-Chaque version de DDOT inclut ces versions de l'OpenTelemetry Collector :
+Chaque version de DDOT inclut les versions suivantes de l'OpenTelemetry Collector :
 
 | Version DDOT | Version bêta | Version stable |
 |--------------|--------------|----------------|
+| 7.85.x       | v0.159.0     | v1.65.0        |
 | 7.84.x       | v0.159.0     | v1.65.0        |
 | 7.83.x       | v0.158.0     | v1.64.0        |
 | 7.82.x       | v0.155.0     | v1.61.0        |
 | 7.81.x       | v0.154.0     | v1.60.0        |
-| 7.80.x       | v0.152.0     | v1.58.0        |
 
-{{% collapse-content title="Versions antérieures" level="p" %}}
+{{% collapse-content title="Versions précédentes" level="p" %}}
 
 | Version DDOT | Version bêta | Version stable |
 |--------------|--------------|----------------|
+| 7.80.x       | v0.152.0     | v1.58.0        |
 | 7.79.x       | v0.150.0     | v1.56.0        |
 | 7.78.x       | v0.147.0     | v1.53.0        |
 | 7.77.x       | v0.145.0     | v1.51.0        |
@@ -190,7 +195,7 @@ Chaque version de DDOT inclut ces versions de l'OpenTelemetry Collector :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /fr/opentelemetry/setup/ddot_collector/custom_components
-[11]: https://github.com/DataDog/datadog-agent/blob/7.84.0/comp/otelcol/collector-contrib/impl/manifest.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/7.85.3/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
 [18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
@@ -244,3 +249,7 @@ Chaque version de DDOT inclut ces versions de l'OpenTelemetry Collector :
 [70]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/README.md
 [71]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/countconnector/README.md
 [72]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/k8sleaderelector/README.md
+[73]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/httpcheckreceiver/README.md
+[74]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8seventsreceiver/README.md
+[75]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkareceiver/README.md
+[76]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/deltatorateprocessor/README.md

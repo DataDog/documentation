@@ -4,7 +4,7 @@ aliases:
 - /ja/continuous_integration/tests/swift
 - /ja/continuous_integration/tests/setup/swift
 code_lang: swift
-code_lang_weight: 50
+code_lang_weight: 60
 further_reading:
 - link: /tests
   tag: ドキュメント
@@ -18,7 +18,7 @@ further_reading:
 title: Swift テスト
 type: multi-code-lang
 ---
-## 互換性{#compatibility}
+## 互換性 {#compatibility}
 
 サポート対象言語:
 
@@ -203,7 +203,7 @@ DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme 
 **推奨**: `$(SRCROOT)`<br/>
 **例**: `/Users/ci/source/MyApp`
 
-`service` および `env` の予約タグの詳細については、[unified service tagging][8] を参照してください。
+`service` および `env` の予約タグの詳細については、[Unified Service Tagging][8] を参照してください。
 
 `DD_SITE` を構成します。サイト ({{< region-param key="dd_site_name" >}}) のためです。
 
@@ -266,7 +266,7 @@ RUM を使用しない場合は、アプリケーションターゲットを Tes
 : すべてのネットワークインスツルメンテーションを無効にします (ブール値)
 
 `DD_DISABLE_RUM_INTEGRATION`
-: RUM セッションとの統合を無効にします (ブール値)
+: RUM セッションとのインテグレーションを無効にします (ブール値)
 
 `DD_DISABLE_SOURCE_LOCATION`
 : テストのソースコードの場所と Codeowners を無効にします (ブール値)
@@ -313,7 +313,7 @@ RUM を使用しない場合は、アプリケーションターゲットを Tes
 
 ### 環境変数 {#environment-variables}
 
-`DD_TAGS` 環境変数を使用できます (または[後述する](#using-infoplist-for-configuration)ように`Info.plist`ファイル内で)。これには、スペースで区切られた `key:tag` のペアが含まれている必要があります。たとえば、以下のとおりです。
+`DD_TAGS` 環境変数を使用できます (または[後述する](#using-infoplist-for-configuration)ように`Info.plist`ファイル内で)。これには、スペースで区切られた `key:tag` のペアが含まれている必要があります。例:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
@@ -633,7 +633,7 @@ Xcode では、プロジェクト構成に応じて、テストプランまた�
 {{% /tab %}}
 {{< /tabs >}}
 
-## ベストプラクティス{#best-practices}
+## ベストプラクティス {#best-practices}
 
 テストフレームワークと Test Optimization を最大限に活用するために、以下のプラクティスに従ってください。
 
@@ -671,7 +671,7 @@ UI テストランナーバンドルに Entitlements を追加し、そこに `A
 
 #### `DD_TEST_SESSION_NAME` を使用するタイミング{#when-to-use-dd-test-session-name}
 
-Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。一時フォルダーなど、実行ごとに変化する文字列がテストコマンドに含まれる場合、Datadog はそれらのセッションを互いに無関係なものとみなします。たとえば、以下のとおりです。
+Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。一時フォルダーなど、実行ごとに変化する文字列がテストコマンドに含まれる場合、Datadog はそれらのセッションを互いに無関係なものとみなします。例:
 
 - `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 

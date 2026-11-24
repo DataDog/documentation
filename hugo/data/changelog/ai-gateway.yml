@@ -116,3 +116,135 @@ entries:
       - ListAiGatewayModelGroups
       - UpdateAiGatewayModelGroup
     title: Document AI Gateway policy visibility and safe membership updates
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayBudget
+      - CreateAiGatewayDataCaptureOverride
+      - CreateAiGatewayModel
+      - CreateAiGatewayModelGroup
+      - CreateAiGatewayProvider
+      - CreateAiGatewayRateLimit
+      - CreateAiGatewayRoutingRule
+      - DeleteAiGatewayBudget
+      - DeleteAiGatewayDataCaptureOverride
+      - DeleteAiGatewayModel
+      - DeleteAiGatewayModelGroup
+      - DeleteAiGatewayModelPricing
+      - DeleteAiGatewayPolicy
+      - DeleteAiGatewayProvider
+      - DeleteAiGatewayRateLimit
+      - DeleteAiGatewayRoutingRule
+      - GetAiGatewayBudget
+      - GetAiGatewayBudgetCurrentPeriod
+      - GetAiGatewayBudgetInstancesSummary
+      - GetAiGatewayDataCaptureConfiguration
+      - GetAiGatewayGovernance
+      - GetAiGatewayModelGroup
+      - GetAiGatewayModelPricing
+      - GetAiGatewayPolicy
+      - GetAiGatewayProvider
+      - GetAiGatewayRateLimit
+      - GetAiGatewayRateLimitInstancesSummary
+      - GetAiGatewayRateLimitUsage
+      - GetAiGatewayRoutingRule
+      - ListAiGatewayBudgetInstanceDimensions
+      - ListAiGatewayBudgetInstances
+      - ListAiGatewayBudgets
+      - ListAiGatewayModelGroups
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayPolicies
+      - ListAiGatewayProviderModels
+      - ListAiGatewayProviders
+      - ListAiGatewayRateLimitInstances
+      - ListAiGatewayRateLimitInstancesSummaries
+      - ListAiGatewayRateLimits
+      - ListAiGatewayRoutingRules
+      - OverrideAiGatewayBudgetInstanceCapacity
+      - ResetAiGatewayBudgetInstanceSpend
+      - UpdateAiGatewayBudget
+      - UpdateAiGatewayDataCaptureOverride
+      - UpdateAiGatewayGovernance
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelGroup
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+      - UpdateAiGatewayRateLimit
+      - UpdateAiGatewayRoutingRule
+      - UpsertAiGatewayPolicy
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42114
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayProvider
+      - CreateAiGatewayRoutingRule
+      - GetAiGatewayModelPricing
+      - GetAiGatewayProvider
+      - GetAiGatewayRoutingRule
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayRoutingRules
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelPricing
+      - UpdateAiGatewayProvider
+      - UpdateAiGatewayRoutingRule
+    title: Document missing AI Gateway control plane fields
+  - change_type: modified
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41721
+    operations:
+      - BulkCreateAiGatewayModels
+      - CreateAiGatewayModel
+      - CreateAiGatewayModelGroup
+      - CreateAiGatewayProvider
+      - GetAiGatewayModelGroup
+      - GetAiGatewayProvider
+      - ListAiGatewayModelGroups
+      - ListAiGatewayModels
+      - ListAiGatewayModelsByCanonical
+      - ListAiGatewayProviderModels
+      - ListAiGatewayProviders
+      - UpdateAiGatewayModel
+      - UpdateAiGatewayModelGroup
+      - UpdateAiGatewayProvider
+    title: Add missing AI Gateway model operations
+  - change_type: added
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42144
+    operations:
+      - DeleteAIGatewayModelPricingByCanonical
+      - GetAIGatewayModelPricingByCanonical
+      - UpdateAIGatewayModelPricingByCanonical
+    title: Add AI Gateway model pricing endpoints that take the canonical ID as 
+      a query parameter
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42144
+    operations:
+      - DeleteAiGatewayModelPricing
+      - GetAiGatewayModelPricing
+      - UpdateAiGatewayModelPricing
+    title: Add AI Gateway model pricing endpoints that take the canonical ID as 
+      a query parameter
+  - change_type: added
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42202
+    operations:
+      - DeleteAIGatewayModelByCanonical
+      - UpdateAIGatewayModelByCanonical
+    title: Add AI Gateway model update and delete endpoints that take the 
+      canonical ID as a query parameter
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42202
+    operations:
+      - DeleteAiGatewayModel
+      - UpdateAiGatewayModel
+    title: Add AI Gateway model update and delete endpoints that take the 
+      canonical ID as a query parameter

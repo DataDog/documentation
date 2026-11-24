@@ -1,6 +1,6 @@
 ---
 description: Comprenez les cycles de facturation, les méthodes de paiement, les calculs
-  d'utilisation et le comptage des hosts grâce à des informations tarifaires détaillées
+  d'utilisation et le décompte des hosts grâce à des informations tarifaires détaillées
   sur les produits Datadog.
 title: Facturation
 ---
@@ -12,9 +12,9 @@ Datadog mesure le nombre de hosts et de Custom Metrics toutes les heures. Le nom
 
 ### Hôtes {#hosts}
 
-Un host est toute instance de système d'exploitation physique ou virtuelle que vous surveillez avec Datadog. Il peut s'agir d'un serveur, d'une VM, d'un nœud (dans le cas de Kubernetes), d'une instance de plan de service d'application (dans le cas d'Azure App Service) ou d'un dyno Heroku (dans le cas de la plateforme Heroku). Les hosts peuvent être des instances sur lesquelles le Datadog Agent est installé, ainsi que des instances Amazon EC2, Google Cloud, Azure ou des VM vSphere surveillées via les intégrations Datadog. Toute instance EC2 ou VM sur laquelle l'Agent est installé compte comme une seule instance (pas de double facturation).
+Un host est toute instance de système d'exploitation physique ou virtuelle que vous surveillez avec Datadog. Il peut s'agir d'un serveur, d'une VM, d'un nœud (dans le cas de Kubernetes), d'une instance App Service Plan (dans le cas d'Azure App Service) ou d'un dyno Heroku (dans le cas de la plateforme Heroku). Les hosts peuvent être des instances sur lesquelles le Datadog Agent est installé, ainsi que des instances Amazon EC2 ou des VM Google Cloud, Azure ou vSphere surveillées via les intégrations Datadog. Toute instance EC2 ou VM sur laquelle l'Agent est installé compte comme une seule instance (pas de double facturation).
 
-Les hosts qui ne transmettent pas de données (statut `INACTIVE` dans votre [Infrastructure list][2]) ne sont pas pris en compte dans la facturation. Il peut s'écouler jusqu'à 2 heures avant que ces hosts ne disparaissent de l'[Infrastructure List][2]. Datadog conserve les données historiques de ces hosts (comptes payants). Les métriques peuvent être représentées graphiquement sur un tableau de bord en connaissant le nom spécifique du host ou ses tags.
+Les hosts qui ne transmettent pas de données (statut `INACTIVE` dans votre [Infrastructure list][2]) ne sont pas pris en compte dans la facturation. Il peut s'écouler jusqu'à 2 heures avant que ces hosts ne disparaissent de l'[Infrastructure List][2]. Datadog conserve les données historiques de ces hosts (comptes payants). Les métriques peuvent être représentées graphiquement sur un dashboard en connaissant le nom du host concerné ou ses tags.
 
 ### Containers {#containers}
 
@@ -22,15 +22,15 @@ Il est recommandé de surveiller les conteneurs avec un seul Agent conteneurisé
 
 ### Serverless {#serverless}
 
-Datadog facture en fonction du nombre moyen de fonctions par heure sur le mois pour vos comptes. Chaque heure, Datadog enregistre le nombre de fonctions qui ont été exécutées une ou plusieurs fois et surveillées par votre compte Datadog. À la fin du mois, Datadog calcule le montant facturé à partir de la moyenne des nombres de fonctions enregistrés chaque heure. Les forfaits Pro et Enterprise incluent cinq Custom Metrics par fonction facturable.
+Datadog facture en fonction du nombre moyen de fonctions par heure sur le mois pour vos comptes. Chaque heure, Datadog enregistre le nombre de fonctions qui ont été exécutées une ou plusieurs fois et surveillées par votre compte Datadog. À la fin du mois, Datadog facture en calculant la moyenne du nombre horaire de fonctions enregistrées. Les forfaits Pro et Enterprise incluent cinq Custom Metrics par fonction facturable.
 
-La facturation de Serverless APM repose sur le nombre total d'invocations AWS Lambda associées à des spans ingérés par l'APM au cours d'un mois donné. Vous serez également facturé pour le nombre total de [spans indexés][4] transmis au service Datadog APM à la fin du mois qui dépasse la quantité incluse. Aucun [APM Hosts][4] n'est facturable lorsque vous utilisez Serverless.
+La facturation de l'APM Serverless est basée sur la somme des invocations AWS Lambda associées aux spans ingérés par l'APM au cours d'un mois donné. Vous serez également facturé pour le nombre total de [spans indexés][4] soumis au service Datadog APM au-delà de la quantité incluse à la fin du mois. Aucun [APM Host][4] n'est facturable lorsque vous utilisez Serverless.
 
 Pour plus d'informations, consultez la [page de facturation Serverless][5] et la [page de tarification Datadog][6].
 
 ### IoT {#iot}
 
-Datadog mesure le nombre d'appareils IoT toutes les heures. Le nombre facturable d'appareils IoT est calculé à la fin du mois à partir du nombre maximal relevé parmi les 99 % d'heures où l'utilisation est la plus faible, en excluant les 1 % d'heures où elle est la plus élevée afin de réduire l'impact des pics d'utilisation sur votre facture.
+Datadog mesure le nombre d'appareils IoT toutes les heures. Le nombre facturable d'appareils IoT est calculé à la fin du mois à partir du nombre maximal (valeur maximale) relevé sur les 99 % d'heures où l'utilisation est la plus faible, en excluant les 1 % d'heures où elle est la plus élevée afin de réduire l'impact des pics d'utilisation sur votre facture.
 
 Pour plus d'informations sur la facturation IoT, consultez la [page de tarification Datadog][7].
 
@@ -38,7 +38,7 @@ Pour plus d'informations sur la facturation IoT, consultez la [page de tarificat
 
 Pour gérer vos {{< ui >}}Payment Method{{< /ui >}} et afficher {{< ui >}}Subscription Details{{< /ui >}}, vous devez être un utilisateur Datadog Admin.
 
-Sinon, les rôles disposant des [autorisations][8] Billing Read (`billing_read`) et Contract Read (`contract_read`) peuvent consulter ces données. La gestion de votre mode de paiement nécessite également l'autorisation Billing Edit (`billing_edit`).
+Les rôles disposant des [permissions][8] Billing Read (`billing_read`) et Contract Read (`contract_read`) peuvent également consulter ces données. La gestion de votre mode de paiement nécessite également la permission Billing Edit (`billing_edit`).
 
 ### Gestion de votre mode de paiement {#managing-your-payment-method}
 
@@ -46,7 +46,7 @@ La section [**Payment Method**][9] contient des détails sur vos options de paie
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Mode de paiement sur la page Plan" style="width:90%;" >}}
 
-{{< ui >}}Edit Payment{{< /ui >}} fournit des options pour gérer les modes de paiement. Vous pouvez modifier ou supprimer des cartes, et demander à passer d'un paiement par carte à un paiement sur facture, ou inversement. 
+{{< ui >}}Edit Payment{{< /ui >}} fournit des options pour gérer les modes de paiement. Vous pouvez modifier ou supprimer des cartes, et demander à changer votre mode de paiement de carte à facture et vice versa. 
 
 {{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Paramètres de paiement sur la page Plan" style="width:90%;" >}}
 
@@ -62,13 +62,13 @@ Vous pouvez consulter vos coordonnées de facturation dans la section [**Billing
 
 **Remarque** : L'adresse e-mail n'a pas besoin d'être celle d'un membre de l'équipe au sein de Datadog. Par exemple, vous pourriez utiliser `invoices@example.com`.
 
-### Voir les détails de votre abonnement {#view-your-subscription-details}
+### Consultez les détails de votre abonnement {#view-your-subscription-details}
 
-La section [Subscription Details][9] inclut la quantité, le prix contractuel et le prix à la demande pour tous les produits faisant l'objet d'un engagement.
+La section [Subscription Details][9] indique la quantité, le prix contractuel et le prix à la demande pour tous les produits faisant l'objet d'un engagement.
 
-{{< img src="/account_management/billing/subscription_details.png" alt="Page Account Plan & Usage mettant en évidence la section Subscription Details" style="width:90%;" >}}
+{{< img src="/account_management/billing/subscription_details.png" alt="Page Plan de compte et utilisation mettant en évidence la section Détails de l'abonnement" style="width:90%;" >}}
 
-**Remarque** : Si votre facturation est gérée directement par un partenaire Datadog, la section Subscription Details n'est pas disponible.
+**Remarque** : Si votre facturation est gérée directement par un partenaire Datadog, les détails de l'abonnement ne sont pas pris en charge.
 
 ## Paiement {#payment}
 
@@ -80,7 +80,7 @@ Il existe deux choix pour le mode de paiement :
 
 Si vous payez par carte de crédit, les reçus des mois précédents sont accessibles aux [Administrators][10] dans [Billing History][11]. Pour obtenir des copies de vos factures, envoyez un e-mail à [Datadog billing][13].
 
-Consultez [Facturation par carte de crédit][12] pour plus de détails.
+Consultez [Credit Card Billing][12] pour plus de détails.
 
 ### Facturation {#invoicing}
 
@@ -91,24 +91,24 @@ Si vous payez par chèque, ACH ou virement, les factures sont envoyées par e-ma
 | Question ou préoccupation                                                                                                                                                                               | Contact                      |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
 | Litige et demande de crédit<br>Utilisation<br>Changement de mode de paiement<br>Problème de paiement<br>Questions générales sur le compte<br>Mise à jour des contacts<br>Relevé de compte<br>Mise à jour des informations de facturation et d'expédition | success@datadoghq.com        |
-| Copies de factures<br>Demandes urgentes concernant les frais<br>Détail de la facturation<br>Invitation au portail                                                                                                        | billing@datadoghq.com        |
-| Remise de paiement                                                                                                                                                                                | remittances@datadoghq.com    |
+| Copies de factures<br>Demandes urgentes concernant des frais<br>Détail de la facturation<br>Invitation au portail                                                                                                        | billing@datadoghq.com        |
+| Envoi des paiements                                                                                                                                                                                | remittances@datadoghq.com    |
 | Copies de bons de commande                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
 ## Pour aller plus loin {#further-reading}
 
-{{< whatsnext desc="Sujets de facturation spécifiques :">}}
+{{< whatsnext desc="Sujets de facturation spécifiques :">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Tarification{{< /nextlink >}}
-    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Détails de l’utilisation{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Utilisation détaillée{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Métriques d'utilisation{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Carte de crédit{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom Metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="account_management/billing/log_management/" >}}Gestion des logs{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (traçage distribué et Continuous Profiler){{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}Optimisation CI/CD{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}Intégration AWS{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Intégration Azure{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Intégration Alibaba{{< /nextlink >}}

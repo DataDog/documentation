@@ -24,3 +24,11 @@ entries:
       - UpdateRestrictionPolicy
     title: Add AI Gateway capture override permissions and hidden preview 
       metadata
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - DeleteRestrictionPolicy
+      - GetRestrictionPolicy
+      - UpdateRestrictionPolicy
+    title: Document rate-limit headers on the shared 429 responses

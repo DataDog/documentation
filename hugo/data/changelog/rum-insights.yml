@@ -13,3 +13,23 @@ entries:
       - QueryAggregatedLongTasks
       - QueryAggregatedWaterfall
     title: Document rum-query insight criteria bounds
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41902
+    operations:
+      - QueryAggregatedLongTasks
+      - QueryAggregatedWaterfall
+    title: Document QueryAggregatedLongTasks input bounds and response types
+  - change_type: modified
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41901
+    operations:
+      - QueryAggregatedWaterfall
+    title: Document QueryAggregatedWaterfall input bounds and response caps
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - QueryAggregatedLongTasks
+      - QueryAggregatedWaterfall
+    title: Document rate-limit headers on the shared 429 responses
