@@ -148,37 +148,96 @@ To enable products, [set environment variables][3] in your application configura
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-<div class="alert alert-info">Instrumentation rules (available for Agent v7.73+) apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
+<div class="alert alert-info">Instrumentation rules apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
 {{< /site-region >}}
 
-Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+Instrumentation rules let you control which processes SSI automatically instruments on Windows hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
+You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
 
-To configure instrumentation rules:
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5].
 
-1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][5].
-1. Click {{< ui >}}Add or Edit Rules{{< /ui >}}.
-1. Define instrumentation rules:
-   1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
-   1. Name your rule.
-   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="The APM Instrumentation Rules page with Hosts selected, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 
-     {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
+#### Prerequisites for instrumentation rules
 
-1. (Optional) Drag and drop rules to reorder them.
+- **Agent**: v7.73 or later on each host, with SSI and [Remote Configuration][8] enabled. Hosts that meet these requirements are eligible for instrumentation rules.
+- **Permissions**: The **APM Workload Selection Write** [permission][9], which is required to create and manage instrumentation rules and host groups.
 
-   **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
+#### Set the default behavior
 
-1. Set the default behavior (allow or block) for processes that do not match any rule.
-1. Click {{< ui >}}Next{{< /ui >}} to preview your rules.
-1. Click {{< ui >}}Deploy Rules{{< /ui >}}.
+The default behavior applies to processes on eligible hosts that do not match any instrumentation rule. It also applies when you have not created any rules.
 
-If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click {{< ui >}}Export{{< /ui >}} to export the configuration file and apply it manually to your hosts.
+1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
+1. Select one of the following options:
+   - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them. The exception is .NET applications running outside of IIS, which remain blocked unless a rule allows them.
+   - {{< ui >}}Block everything else{{< /ui >}}: Applications are not instrumented unless a rule allows them.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+#### Create host groups
+
+Host groups are reusable collections of hosts that you can target with instrumentation rules.
+
+To create a host group:
+
+1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Hosts in Scope{{< /ui >}} card and click {{< ui >}}Manage host groups{{< /ui >}}.
+1. Click {{< ui >}}New Host Group{{< /ui >}} and enter a name for the group.
+1. Click {{< ui >}}Add Hosts{{< /ui >}}, then search for and select the hosts to add. You can search by hostname, facets, or host tags.
+
+   <div class="alert alert-info">Host groups are dynamic, so new hosts that match your search are added to the group automatically. A host can belong to more than one group, but all hosts in a group must run on the same platform, such as Linux or Windows.</div>
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="The new host group form, with two of three hosts selected in the Add Hosts list" style="width:80%;" >}}
+
+1. Click {{< ui >}}Save Group{{< /ui >}}.
+
+Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that do not belong to any other group, so you can see which hosts are left to group. You cannot edit its host list.
+
+If you delete a host group, Datadog removes the group's rules, and the Agent stops applying them the next time it polls Remote Configuration.
+
+To change the order of host groups, drag a group by its handle in the group list. Group order affects [how instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
+
+{{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
+
+#### Create instrumentation rules
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. In the Create instrumentation rule window, click {{< ui >}}Generate with Bits{{< /ui >}} and describe which processes to instrument. Bits AI generates the corresponding rule.
+
+To create an instrumentation rule:
+
+1. On the [Instrumentation Rules][5] page, click {{< ui >}}New Rule{{< /ui >}}. Alternatively, on the Host Groups page, select a group, open its {{< ui >}}Rules{{< /ui >}} tab, and click {{< ui >}}Create a new rule{{< /ui >}}.
+1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See the [Define rule conditions](#define-rule-conditions) section.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="The Create instrumentation rule window, with a condition of Language equals Python, the Allow Instrumentation action, and the Rule Impact Preview panel" style="width:100%;" >}}
+
+1. Under {{< ui >}}Set host targeting{{< /ui >}}, select {{< ui >}}All eligible hosts{{< /ui >}} or {{< ui >}}Select host groups{{< /ui >}}.
+
+   If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
+
+1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
+
+1. Click {{< ui >}}Create Rule{{< /ui >}}.
+
+Datadog deploys rules to eligible hosts through Remote Configuration within 50 seconds. After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][5] page shows how many eligible hosts have received the current rules.
+
+To apply rules manually, such as on hosts without Remote Configuration enabled, click {{< ui >}}Export{{< /ui >}} above the rules list to export the configuration file, then apply it to your hosts.
+
+#### How instrumentation rules are evaluated
+
+For each process, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
+
+1. Rules from the groups that the process's host belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules that target {{< ui >}}All eligible hosts{{< /ui >}}. These rules apply to every eligible host, including hosts in host groups.
+
+If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Define rule conditions
 
-Each rule consists of one or more conditions. A condition includes the following elements:
+Each rule consists of one or more conditions. A process must match all of a rule's conditions for the rule to apply. A condition includes the following elements:
 - {{< ui >}}Attribute{{< /ui >}}: The process property that the rule evaluates.
 - {{< ui >}}Operator{{< /ui >}}: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
 - {{< ui >}}Value{{< /ui >}}: The text or pattern to match, such as a process name or command-line flag.
@@ -199,21 +258,53 @@ Supported attributes include:
 
 Review the following examples demonstrating how to apply instrumentation rules:
 
-{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+{{% collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" %}}
 
 Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+1. Set the default behavior to {{< ui >}}Allow everything else{{< /ui >}}.
+1. Create the following rules, each targeting {{< ui >}}All eligible hosts{{< /ui >}}:
 
-{{< /collapse-content >}}
+   | Rule name | Condition | Action |
+   | --------- | --------- | ------ |
+   | Exclude analytics cron job | <code>Working Directory</code> <code>contains</code> <code>analytics-service</code> | Block Instrumentation |
+   | Exclude batch services | <code>Entry Point File</code> <code>contains</code> <code>batch-processor.jar</code> | Block Instrumentation |
 
-{{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
+{{% /collapse-content %}}
 
-Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use {{< ui >}}IIS Application Pool{{< /ui >}} to identify target applications. This approach is useful for gradual rollouts.
+{{% collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" %}}
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation" style="width:100%;" >}}
+Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use {{< ui >}}IIS Application Pool{{< /ui >}} to identify target applications.
 
-{{< /collapse-content >}}
+For example, to instrument only a checkout application and a customer portal:
+
+1. Set the default behavior to {{< ui >}}Block everything else{{< /ui >}}.
+1. Create the following rules, each targeting {{< ui >}}All eligible hosts{{< /ui >}}:
+
+   | Rule name | Condition | Action |
+   | --------- | --------- | ------ |
+   | Checkout | <code>IIS Application Pool</code> <code>equals</code> <code>CheckoutPool</code> | Allow Instrumentation |
+   | Customer portal | <code>IIS Application Pool</code> <code>equals</code> <code>CustomerPortalPool</code> | Allow Instrumentation |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Example 3: Roll out instrumentation gradually with a host group" level="h5" %}}
+
+Block all instrumentation by default, and allow it only on a small set of canary hosts. After you validate the results, add more hosts to the group, or change the rule to target all eligible hosts.
+
+1. Set the default behavior to {{< ui >}}Block everything else{{< /ui >}}.
+1. Create a host group named <code>canary</code> and add the hosts to instrument first.
+1. Create a rule with the following settings:
+
+   | Setting | Value |
+   | ------- | ----- |
+   | Condition | <code>Language</code> <code>equals</code> <code>java</code> |
+   | Action | Allow Instrumentation |
+   | Host targeting | Select host groups: <code>canary</code> |
+
+Only Java applications on hosts in the <code>canary</code> group are instrumented. All other applications are not instrumented.
+
+{{% /collapse-content %}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -238,3 +329,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/apm/instrumentation
 [7]: https://app.datadoghq.com/apm/services
+[8]: /remote_configuration/
+[9]: /account_management/rbac/permissions/

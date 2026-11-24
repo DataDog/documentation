@@ -8,3 +8,15 @@ entries:
       - UpdateLogsPipeline
       - UpdateLogsPipelineOrder
     title: Document 409 Conflict response on Logs Pipelines write endpoints
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateLogsPipeline
+      - DeleteLogsPipeline
+      - GetLogsPipeline
+      - GetLogsPipelineOrder
+      - ListLogsPipelines
+      - UpdateLogsPipeline
+      - UpdateLogsPipelineOrder
+    title: Document rate-limit headers on the shared 429 responses

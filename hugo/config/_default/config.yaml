@@ -168,6 +168,10 @@ module:
       target: i18n
     - source: ../shared/regions.yaml
       target: data/regions.yaml
+    - source: ../shared/site_support.yaml
+      target: data/site_support.yaml
+    - source: ../shared/tests/site_support_globs.yaml
+      target: data/site_support_globs.yaml
     - source: archetypes
       target: archetypes
     # custom mounts

@@ -75,7 +75,7 @@ Preserve the original exposure timestamp when joining identity data into the mod
 ### Select the experiment subjects
 
 1. [Create a draft experiment][6] and select the warehouse experiment key from the Exposure SQL Model.
-1. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}+{{< /ui >}} if only one subject selector appears.
+1. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}\+{{< /ui >}} if only one subject selector appears.
 1. Select {{< ui >}}Anonymous user{{< /ui >}} as the {{< ui >}}Randomization subject{{< /ui >}} and {{< ui >}}User{{< /ui >}} as the {{< ui >}}Additional subject{{< /ui >}}.
 1. Verify that the randomization subject matches the identifier used to assign variants.
 
@@ -162,7 +162,7 @@ Updated relationships can change historical attribution when results are recalcu
 
 | Symptom | What to check |
 |---|---|
-| The additional subject is missing during setup. | Confirm the Exposure SQL Model maps both subject types under {{< ui >}}Subject columns{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}+{{< /ui >}} to add the second selector. |
+| The additional subject is missing during setup. | Confirm the Exposure SQL Model maps both subject types under {{< ui >}}Subject columns{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}\+{{< /ui >}} to add the second selector. |
 | A metric is unavailable or shows a subject-type mismatch. | Confirm the Metric SQL Model supports an experiment subject and uses the same warehouse connection. For a ratio metric, check both numerator and denominator models. |
 | Expected metric events are missing. | Preview the exposure and metric queries. Check ID values, experiment key, variants, analysis dates, and the metric's observation window. Keep unmatched exposure rows and preserve the original exposure timestamp. |
 | A shared ID contributes to an unexpected participant. | Compare exposure rows containing that ID. Check the earliest timestamp, ties, and whether the selected participant was excluded for receiving multiple variants. |

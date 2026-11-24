@@ -1,9 +1,6 @@
 /**
- * Rules that the real `shared/site_support.yaml` must follow.
- *
- * Drift between this file and Hugo's copy of the data is not checked here. It
- * is reported by `yarn check:site-support-drift` instead, which warns rather
- * than fails, so upstream changes don't block unrelated work.
+ * Rules that the real `shared/site_support.yaml` must follow. Hugo and Astro
+ * both read this file, so these rules cover both sites.
  *
  * This lives in `tests/integration/` rather than beside the module it covers.
  * The unit config redirects `@shared/site_support.yaml` to a fixture, so a
@@ -34,10 +31,10 @@ describe("shared/site_support.yaml", () => {
     expect(Object.keys(sharedIds)).not.toContain("fake_product");
   });
 
-  it("adds url_paths and description only, never other fields", () => {
-    // `url_paths` and `description` are Astro-side additions; Hugo's copy has
-    // neither. This pins the rule that they are the *only* permitted
-    // divergence from Hugo's shape.
+  it("uses only regions, url_paths and description", () => {
+    // Zod and Hugo both ignore unknown fields without an error, so a
+    // misspelled field (for example, `url_path`) would be silently ignored.
+    // This test catches it.
     const extraFields: string[] = [];
     for (const [id, entry] of Object.entries(sharedIds)) {
       for (const field of Object.keys(entry)) {

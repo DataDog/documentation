@@ -137,14 +137,16 @@ auto core = datadog::Core::Create(config, datadog::TrackingConsent::Granted);
 {% tab label="C" %}
 ```c
 /* Configure the SDK with your client token and unified service tagging values */
-dd_core_config_t config;
-dd_core_config_init(&config, "<client_token>", "<service>", "<env>");
+dd_core_config_t* config = dd_core_config_create("<client_token>", "<service>", "<env>");
 
 /* Provide the SDK with the path to a storage directory owned by your application */
-dd_core_config_set_application_storage_path(&config, "<app-storage-dir>");
+dd_core_config_set_application_storage_path(config, "<app-storage-dir>");
 
 /* Create the core with your initial tracking consent value */
-dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
+dd_core_t* core = dd_core_create(config, DD_TRACKING_CONSENT_GRANTED);
+
+/* The core keeps its own copy of the config, so destroy the config after creating the core */
+dd_core_config_destroy(config);
 ```
 
 **Note**: The C API requires explicit cleanup:
@@ -173,7 +175,7 @@ config.SetSite(datadog::Site::us3);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US3);
+dd_core_config_set_site(config, DD_SITE_US3);
 ```
 {% /tab %}
 {% /tabs %}
@@ -190,7 +192,7 @@ config.SetSite(datadog::Site::us5);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US5);
+dd_core_config_set_site(config, DD_SITE_US5);
 ```
 {% /tab %}
 {% /tabs %}
@@ -207,7 +209,7 @@ config.SetSite(datadog::Site::eu1);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_EU1);
+dd_core_config_set_site(config, DD_SITE_EU1);
 ```
 {% /tab %}
 {% /tabs %}
@@ -224,7 +226,7 @@ config.SetSite(datadog::Site::ap1);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_AP1);
+dd_core_config_set_site(config, DD_SITE_AP1);
 ```
 {% /tab %}
 {% /tabs %}
@@ -241,7 +243,7 @@ config.SetSite(datadog::Site::ap2);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_AP2);
+dd_core_config_set_site(config, DD_SITE_AP2);
 ```
 {% /tab %}
 {% /tabs %}
@@ -258,7 +260,7 @@ config.SetSite(datadog::Site::us1_fed);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US1_FED);
+dd_core_config_set_site(config, DD_SITE_US1_FED);
 ```
 {% /tab %}
 {% /tabs %}
@@ -275,7 +277,7 @@ config.SetSite(datadog::Site::us2_fed);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_site(&config, DD_SITE_US2_FED);
+dd_core_config_set_site(config, DD_SITE_US2_FED);
 ```
 {% /tab %}
 {% /tabs %}
@@ -334,9 +336,11 @@ core->Start();
 {% tab label="C" %}
 ```c
 /* Configure and register RUM */
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
+dd_rum_config_t* rum_config = dd_rum_config_create("<rum_application_id>");
+dd_rum_t* rum = dd_rum_init(core, rum_config);
+
+/* RUM keeps its own copy of the config, so destroy the config after registering RUM */
+dd_rum_config_destroy(rum_config);
 
 /* Start the core to begin collecting and uploading data */
 dd_core_start(core);
@@ -366,7 +370,7 @@ rum_config.SetSessionSampleRate(75.0f);
 {% tab label="C" %}
 ```c
 /** In this example, only 75% of sessions will be sent to Datadog */
-dd_rum_config_set_session_sample_rate(&rum_config, 75.0f);
+dd_rum_config_set_session_sample_rate(rum_config, 75.0f);
 ```
 {% /tab %}
 {% /tabs %}
@@ -416,7 +420,7 @@ config.SetDiagnosticThreshold(datadog::DiagnosticLevel::Debug);
 {% /tab %}
 {% tab label="C" %}
 ```c
-dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
+dd_core_config_set_diagnostic_threshold(config, DD_DIAGNOSTIC_LEVEL_DEBUG);
 ```
 {% /tab %}
 {% /tabs %}

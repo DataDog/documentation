@@ -52,7 +52,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, ChatGPT Enterprise, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, ChatGPT Enterprise, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, Kiro, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -66,6 +66,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Azure Foundry (Models and Tools) | [Azure integration][18] |
 | ChatGPT Enterprise (Preview) | [SaaS integration][22] |
 | Google Gemini  | [Google Cloud integration][4] |
+| Kiro | [AWS integration][2] |
 | OpenAI (Platform only)     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
@@ -265,8 +266,51 @@ The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, 
 
 | Tag | Label | Description |
 |---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `copilot_user` | GitHub User | The GitHub username of the user who generated the cost. |
 | `organization_name` | Organization | The GitHub organization that the cost belongs to. |
 | `repository_name` | Repository | The GitHub repository that the cost belongs to. |
+
+The `user_email` and `copilot_user` tags are available only when the GitHub Costs integration is connected to a GitHub enterprise account. If the integration is connected to a single GitHub organization, Copilot costs are not broken down by user. For more information, see the [GitHub setup instructions][101].
+
+**Additional tags**
+
+The following GitHub Copilot tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `copilot_user_email` | The email address or SAML single sign-on identity that GitHub reports for the user. |
+| `copilot_user_email_source` | The source of the email address in `copilot_user_email`: `verified_domain` for a verified domain email, or `saml_name_id` for a SAML single sign-on identity. |
+| `copilot_user_name` | The GitHub display name of the user who generated the cost. Available only if the user has set a display name. |
+| `model` | The Copilot model as GitHub reports it, including the model selection mode (for example, `Auto: Claude Opus 4.6`). |
+
+`user_email` copies `copilot_user_email` into the same user tag that other AI providers use, and is set only when `copilot_user_email` is an email address rather than a SAML single sign-on identity in another format. `copilot_user_name` is the user's display name (for example, `Jane Doe`), while `copilot_user` is their GitHub username (for example, `jdoe`).
+
+[101]: /cloud_cost_management/setup/saas_costs/?tab=github#setup
+
+{{% /tab %}}
+{{% tab "Kiro" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `user_email` | User | The email address of the IAM Identity Center user who holds the Kiro subscription. |
+| `plan` | Plan | The Kiro subscription plan. Set on subscription costs only. |
+
+Kiro bills per-user subscriptions and credits, so its costs carry no model or token tags.
+
+**Additional tags**
+
+The following Kiro tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `user_id` | The IAM Identity Center user ID of the user who holds the Kiro subscription. |
+| `user_name` | The IAM Identity Center user name of the user who holds the Kiro subscription. |
+
+The `user_email` and `user_name` tags require [resource collection][102] to be enabled for the AWS account that hosts your IAM Identity Center instance. Without it, Kiro costs are broken down by `user_id` only.
+
+[102]: /integrations/amazon_web_services/#resource-collection
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}

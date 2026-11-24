@@ -7,6 +7,9 @@ further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Observability: Jobs Monitoring'
+    - link: '/monitors/types/data_observability/'
+      tag: 'Documentation'
+      text: 'Data Observability Monitor'
 ---
 
 [Data Observability: Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Google Cloud Dataproc.
