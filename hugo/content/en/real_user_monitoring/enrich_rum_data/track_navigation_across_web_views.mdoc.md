@@ -147,7 +147,7 @@ To access your web views:
    - The web component using `service`
    - The platform using `source`
 
-   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source:browser`.
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `-source:browser`.
 3. Click a session. A side panel with a list of events in the session appears. Any service with the web icon indicates a web view.
 
 From here, you can hover over a session event and click {% ui %}Open View waterfall{% /ui %} to navigate from the session to a resource waterfall visualization in the view's {% ui %}Performance{% /ui %} tab.

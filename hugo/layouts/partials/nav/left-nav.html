@@ -10,7 +10,11 @@
 {{ $excludeAsync := (slice "api" "partners" "dev_tools_metrics_api" "dev_tools_events_api" "integrations_top_level" "tracing api" "watchdog_top_level" "glossary_top_level" "video_top_level" "help_top_level" "other_integrations" "observability_pipelines_reference" "observability_pipelines_reference_sources" "observability_pipelines_reference_transforms" "observability_pipelines_reference_sinks" "cloud_cost_container_cost_allocation_aws" "cloud_cost_container_cost_allocation_azure" "cloud_cost_container_cost_allocation_google") }}
 
 {{/* Level 2 menu identifiers to hide from the left nav (page and children remain reachable, just not listed here) */}}
-{{ $hideFromLeftNav := (slice "application_monitoring" "rum_explorer" "rum_feature_flag_tracking" "rum_error_tracking" "rum_ai_investigations" "rum_without_limits" "rum_operations_monitoring" "rum_managed_archive" "rum_export" "rum_ownership_of_views" "real_user_monitoring_data_security") }}
+{{/* Only the English menu has the restructured RUM navigation. Translated menus keep their existing RUM sections until they are migrated. */}}
+{{ $hideFromLeftNav := slice }}
+{{ if eq $.Site.Language.Lang "en" }}
+{{ $hideFromLeftNav = (slice "application_monitoring" "rum_explorer" "rum_feature_flag_tracking" "rum_error_tracking" "rum_ai_investigations" "rum_without_limits" "rum_operations_monitoring" "rum_managed_archive" "rum_export" "rum_ownership_of_views" "real_user_monitoring_data_security") }}
+{{ end }}
 
 {{ $path := (printf "%s/" $.Site.Params.branch) }}
 

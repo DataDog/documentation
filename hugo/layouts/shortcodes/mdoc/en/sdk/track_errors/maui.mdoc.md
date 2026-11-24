@@ -47,7 +47,7 @@ To resolve method names and crash addresses in native iOS crash reports, upload 
      -p:DatadogUploadSymbols=true
    ```
 
-dSYMs are only produced for device builds (`-r ios-arm64`). Set `DatadogServiceName` and `DatadogSite` MSBuild properties if they differ from the defaults, so they match your SDK configuration. Android R8/ProGuard mapping files and Portable PDB files aren't uploaded. For the full list of properties and limitations, see [.NET MAUI Crash Reporting and Error Tracking][2].
+dSYMs are only produced for device builds (`-r ios-arm64`). Set `DatadogServiceName` and `DatadogSite` MSBuild properties if they differ from the defaults, so they match your SDK configuration. With `DatadogUploadSymbols=true`, Portable PDB files are uploaded on iOS and Android, and Android R8/ProGuard mapping files are uploaded when R8 is enabled. For the full list of properties and limitations, see [.NET MAUI Crash Reporting and Error Tracking][2].
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=maui
 [2]: /error_tracking/frontend/mobile/maui/
