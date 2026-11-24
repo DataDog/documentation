@@ -9076,8 +9076,7 @@ menu:
           - v2
         operationids:
           - GetAgentHealthIssue
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: List Agent Health issues
       url: /api/latest/agent-health/list-agent-health-issues/
@@ -9089,8 +9088,7 @@ menu:
           - v2
         operationids:
           - ListAgentHealthIssues
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
