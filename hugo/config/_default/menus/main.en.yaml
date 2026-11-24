@@ -2045,6 +2045,11 @@ menu:
       weight: 10
       parent: alerting
       identifier: monitor_quality
+    - name: Baseline Monitors
+      url: monitors/baseline_monitors/
+      weight: 10
+      parent: alerting
+      identifier: monitor_baseline_monitors
     - name: Guides
       url: monitors/guide/
       weight: 11
