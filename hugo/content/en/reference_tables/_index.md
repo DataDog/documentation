@@ -202,7 +202,10 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-{{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
+For other integrations, see the [Salesforce][17] or [ServiceNow][18] setup instructions.
+
+[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
@@ -219,6 +222,9 @@ First, [configure the Databricks integration][14] with access to the table or vi
 If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to configure it.
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
+
+[14]: /integrations/databricks/#reference-table-configuration
+[16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
 
@@ -237,6 +243,9 @@ First, [configure the Snowflake integration and grant read permissions][15] for 
 If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to configure it.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
+
+[15]: /integrations/snowflake-web/#reference-tables
+[16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
 
@@ -376,7 +385,3 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
 [13]: /reference_tables/#permissions
-
-[14]: /integrations/databricks/#reference-table-configuration
-[15]: /integrations/snowflake-web/#reference-tables
-[16]: https://app.datadoghq.com/reference-tables
