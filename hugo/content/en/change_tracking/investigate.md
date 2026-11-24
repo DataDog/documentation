@@ -1,6 +1,6 @@
 ---
 title: Investigate Relevant Changes
-description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, and service pages, or query change data with widgets."
+description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, service pages, and the RUM Explorer, or query change data with widgets."
 further_reading:
 - link: "/change_tracking/change_types/"
   tag: "Documentation"
@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/change_overlays/"
   tag: "Documentation"
   text: "Change Overlays"
+- link: "/watchdog/faulty_deployment_detection/"
+  tag: "Documentation"
+  text: "Faulty Deployment Detection"
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status Page"
@@ -17,14 +20,14 @@ further_reading:
 
 Use Change Tracking as the first step in your investigation:
 
-- **Changes come to you.** On the pages where you already investigate, such as dashboards, monitor status pages, and service pages, Datadog surfaces the changes most likely to be related to what you are looking at.
+- **Changes come to you.** On the pages where you already investigate, such as dashboards, monitor status pages, service pages, and the RUM Explorer, Datadog surfaces the changes most likely to be related to what you are looking at.
 - **You find the relevant changes.** When the change you need is not on the page in front of you, build your own view of change data.
 
 ## Find relevant changes where you're working
 
 When you open a page that is scoped to a service, Datadog surfaces that service's changes alongside your telemetry.
 
-On dashboards and monitor status pages, Datadog ranks changes by relevance, so that the changes most likely to explain what you are seeing appear first. Relevance is based on how close the change is in time to the behavior you are looking at, how strongly it is associated with the service in view, and the type of change.
+On dashboards and monitor status pages, Datadog ranks changes by relevance, so that the changes most likely to explain what you are seeing appear first. Relevance is based on how close the change is in time to the behavior you are looking at, how strongly it is associated with the service in view, and the type of change. When only a few changes are likely to be faulty, a banner calls them out. See [Faulty change banners](#faulty-change-banners).
 
 You do not need to configure this. Any change type you already send is eligible. See [Tracked Change Types][1].
 
@@ -35,6 +38,7 @@ You do not need to configure this. Any change type you already send is eligible.
 | [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. The triage card summarizes the changes most relevant to the current view. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
 | [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
 | [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | APM data for the service. |
+| [RUM Explorer][6] | Change markers at the top of RUM Explorer graphs (for example, when you group by errors), for correlating frontend regressions with frontend deployments and feature flag changes. | [RUM deployment tracking][7], and [RUM feature flag tracking][8] for flag changes. |
 
 ### On a dashboard
 
@@ -66,6 +70,25 @@ You do not need to configure this. Any change type you already send is eligible.
 1. Find the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
 1. Switch between {{< ui >}}Changes by Service{{< /ui >}} for changes to that service alone and {{< ui >}}Changes by Service + Dependencies{{< /ui >}} for changes to services it depends on.
 1. Click a change indicator to open the side panel.
+
+### On the RUM Explorer
+
+<!-- TODO: Add RUM Explorer screenshot showing change markers. Confirm step labels in the app. -->
+
+1. Go to the [RUM Explorer][6].
+1. Visualize your RUM data as a timeseries, for example by grouping by errors.
+1. Find the change markers at the top of the graph. Each marker represents a frontend deployment or feature flag change.
+1. Hover over a marker for a summary, or click it to open the side panel.
+
+### Faulty change banners
+
+<!-- TODO: Add screenshot of the faulty change banner and the view it opens. Add the faulty-deployment example narrative from product. Confirm the banner's open action label. -->
+
+On dashboards and monitor status pages, Datadog displays a banner when a small number of changes are likely causing the behavior you are looking at, such as an increase in errors. These changes are identified by [Watchdog Faulty Deployment Detection][9], which flags deployments that are likely causes of a symptom like an increased error rate.
+
+1. Find the faulty change banner at the top of the change timeline.
+1. Open the banner to see the changes Datadog flagged and the impact of each one.
+1. Click a change to open the side panel and investigate it.
 
 ## Open the change side panel
 
@@ -111,3 +134,7 @@ To open the side panel from a widget, click a datapoint and select {{< ui >}}Vie
 [3]: /dashboards/change_overlays/
 [4]: /monitors/status/
 [5]: /tracing/services/service_page/
+[6]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/guide/setup-rum-deployment-tracking/
+[8]: /real_user_monitoring/feature_flag_tracking/
+[9]: /watchdog/faulty_deployment_detection/
