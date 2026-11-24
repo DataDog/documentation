@@ -224,6 +224,10 @@ To edit {{< ui >}}Location{{< /ui >}} or {{< ui >}}SQL Query{{< /ui >}}, open th
 
 If ingestion fails, check the service account's permissions, the dataset location, and the SQL query. Correct the location or query with {{< ui >}}Update Config{{< /ui >}}.
 
+[5]: /help/
+[16]: https://app.datadoghq.com/reference-tables
+[21]: /integrations/google-cloud-bigquery/#reference-tables
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
@@ -242,6 +246,9 @@ If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to 
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
+[14]: /integrations/databricks/#reference-table-configuration
+[16]: https://app.datadoghq.com/reference-tables
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Salesforce" level="h3" id="salesforce" %}}
@@ -259,6 +266,11 @@ First, [configure the Salesforce integration][17] with read access to the object
 Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
 
 To investigate ingestion errors, search for `source:salesforce` in the [Events Explorer][20].
+
+[16]: https://app.datadoghq.com/reference-tables
+[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+[19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
+[20]: https://app.datadoghq.com/event/explorer
 
 {{% /collapse-content %}}
 
@@ -279,6 +291,10 @@ Additional fields must use paths supported by the ServiceNow Table API. The colu
 
 Data populates after the scheduled Query Builder query runs. To investigate ingestion errors, search for `source:servicenow` in the [Events Explorer][20].
 
+[16]: https://app.datadoghq.com/reference-tables
+[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
+[20]: https://app.datadoghq.com/event/explorer
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
@@ -296,6 +312,9 @@ First, [configure the Snowflake integration and grant read permissions][15] for 
 If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to configure it.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
+
+[15]: /integrations/snowflake-web/#reference-tables
+[16]: https://app.datadoghq.com/reference-tables
 
 {{% /collapse-content %}}
 
@@ -435,12 +454,3 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
 [13]: /reference_tables/#permissions
-
-[14]: /integrations/databricks/#reference-table-configuration
-[15]: /integrations/snowflake-web/#reference-tables
-[16]: https://app.datadoghq.com/reference-tables
-[17]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
-[18]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
-[19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
-[20]: https://app.datadoghq.com/event/explorer
-[21]: /integrations/google-cloud-bigquery/#reference-tables
