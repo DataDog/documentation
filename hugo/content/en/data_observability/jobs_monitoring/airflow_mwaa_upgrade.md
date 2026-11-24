@@ -13,12 +13,13 @@ Use this guide if your Amazon MWAA environment runs Airflow `2.7.2`, `2.8.1`, or
 
 For these Airflow versions, the Apache Airflow constraints files pin older `apache-airflow-providers-openlineage` and OpenLineage package versions. These versions can cause known reliability and compatibility issues, which can degrade the Data Observability experience.
 
-To use provider versions that include these fixes, pin the upgraded versions in a constraints file and in `requirements.txt`. Which constraints file you edit depends on your current `requirements.txt`:
+To use provider versions that include these fixes, pin the upgraded versions in a constraints file and in `requirements.txt`. Which constraints file you use depends on your Airflow version and your current `requirements.txt`:
 
-- **If `requirements.txt` has no `--constraint` line**, create a `constraints.txt` file that contains only the OpenLineage pins. The file doesn't constrain your other packages. MWAA pins `apache-airflow` to your environment's version during the install, so Airflow itself is not upgraded.
-- **If `requirements.txt` already has a `--constraint` line**, update the OpenLineage pins in that constraints file.
+- **Airflow 2.7.2 or 2.9.2, with no `--constraint` line in `requirements.txt`**: Download the Apache Airflow constraints file for your version and update the OpenLineage pins in it. MWAA already applies this file when `requirements.txt` doesn't specify one, so your other packages keep the same versions.
+- **Airflow 2.8.1, with no `--constraint` line in `requirements.txt`**: Create a `constraints.txt` file that contains only the OpenLineage pins. MWAA doesn't apply a constraints file on 2.8.1, so this file doesn't change how your other packages resolve. MWAA pins `apache-airflow` to your environment's version during the install, so Airflow itself is not upgraded.
+- **Any version, with a `--constraint` line in `requirements.txt`**: Update the OpenLineage pins in that constraints file.
 
-<div class="alert alert-warning">Don't download the full Apache Airflow constraints file to use as a new constraints file. Its pins often conflict with your other packages, such as a newer <code>boto3</code>. For Airflow 2.8.1 and 2.9.2, its <code>sqlparse</code> pin also conflicts with the upgraded <code>apache-airflow-providers-common-sql</code>. When pip can't resolve the requirements, MWAA installs none of the packages in <code>requirements.txt</code>, and the environment update still reports success.</div>
+<div class="alert alert-warning">Use the constraints file that matches your Airflow version. On 2.7.2 and 2.9.2, a file with only the OpenLineage pins replaces the constraints MWAA applies. Unpinned packages such as <code>pandas</code> and <code>numpy</code> can then upgrade to new major versions. On 2.8.1, the full Apache Airflow constraints file can conflict with your other packages, such as a newer <code>boto3</code>. When pip can't resolve the requirements, MWAA installs none of the packages in <code>requirements.txt</code>, and the environment update still reports success.</div>
 
 For details about MWAA dependency and constraints behavior, see AWS documentation on [Python dependencies][3]. To review provider compatibility and requirements, see [OpenLineage provider documentation][4].
 
@@ -28,11 +29,11 @@ For base setup steps, see [Enable Data Observability: Jobs Monitoring for Apache
 
 If your MWAA environment runs an Airflow version that is not listed in this guide, Datadog recommends using the newest `apache-airflow-providers-openlineage` release that is compatible with your Airflow version. Use the [Airflow OpenLineage provider compatibility table][8] to choose that release, then follow the same constraints pattern:
 
-1. Add the OpenLineage provider pin and any required OpenLineage dependency pins to a constraints file: either a new `constraints.txt` that contains only those pins, or the constraints file your `requirements.txt` already references.
+1. Update the OpenLineage provider pin and any required OpenLineage dependency pins in a constraints file. If `requirements.txt` already references a constraints file, edit that file. Otherwise, download the Apache Airflow constraints file for your Airflow and Python versions and edit it.
 2. Pin the same versions in `requirements.txt`, and make sure its first line references the constraints file.
 3. Upload both files to your MWAA S3 bucket and update the MWAA environment.
 
-Depending on the Airflow version, MWAA may apply its own constraints when `requirements.txt` doesn't specify a constraints file. After you add a `--constraint` line, pip uses your constraints file instead.
+Depending on the Airflow version, MWAA applies the Apache Airflow constraints file for your version when `requirements.txt` doesn't specify a constraints file. Starting from that file keeps your other packages at the versions MWAA installs. MWAA uses Python 3.11 for Airflow 2.10.3 and earlier, and Python 3.12 for Airflow 2.11 and later, including Airflow 3.
 
 Datadog recommends using the newest compatible provider release available for your Airflow version. Review the [OpenLineage provider changelog][9] before updating, because provider releases can change the minimum supported Airflow version or required dependency versions.
 
@@ -75,7 +76,20 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
 
 2. Create or update the constraints file.
 
-   **If `requirements.txt` has no `--constraint` line**, create a `constraints.txt` file that contains only these lines:
+   **If `requirements.txt` has no `--constraint` line**, download the Apache Airflow constraints file for Airflow 2.7.2 and update the OpenLineage pins in it. MWAA already applies this file when `requirements.txt` doesn't specify one, so your other packages keep the same versions.
+
+   ```shell
+   curl -s "https://raw.githubusercontent.com/apache/airflow/constraints-2.7.2/constraints-3.11.txt" \
+     | sed -E \
+       -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==1.14.0/' \
+       -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.24.2/' \
+       -e 's/^openlineage-python==.*/openlineage-python==1.24.2/' \
+       -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.24.2/' \
+     > constraints.txt
+   echo "apache-airflow-providers-common-compat==1.2.2" >> constraints.txt
+   ```
+
+   The resulting `constraints.txt` pins these versions.
 
    ```text
    apache-airflow-providers-openlineage==1.14.0
@@ -164,7 +178,22 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
 
 1. Create or update the constraints file.
 
-   **If `requirements.txt` has no `--constraint` line**, create a `constraints.txt` file that contains only these lines:
+   **If `requirements.txt` has no `--constraint` line**, download the Apache Airflow constraints file for Airflow 2.9.2 and update the OpenLineage pins in it. MWAA already applies this file when `requirements.txt` doesn't specify one, so your other packages keep the same versions.
+
+   ```shell
+   curl -s "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.11.txt" \
+     | sed -E \
+       -e 's/^apache-airflow-providers-openlineage==.*/apache-airflow-providers-openlineage==2.2.0/' \
+       -e 's/^apache-airflow-providers-common-sql==.*/apache-airflow-providers-common-sql==1.21.0/' \
+       -e 's/^openlineage-integration-common==.*/openlineage-integration-common==1.31.0/' \
+       -e 's/^openlineage-python==.*/openlineage-python==1.31.0/' \
+       -e 's/^openlineage[-_]sql==.*/openlineage-sql==1.31.0/' \
+       -e 's/^sqlparse==.*/sqlparse==0.5.1/' \
+     > constraints.txt
+   echo "apache-airflow-providers-common-compat==1.4.0" >> constraints.txt
+   ```
+
+   The resulting `constraints.txt` pins these versions. It also sets `sqlparse==0.5.1`, which `apache-airflow-providers-common-sql` 1.21.0 requires.
 
    ```text
    apache-airflow-providers-openlineage==2.2.0
@@ -220,7 +249,9 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
 
 - If no OpenLineage events arrive after the update, check the `requirements_install_*` log stream for `ERROR` lines, such as a pip `ResolutionImpossible` error. When pip fails, MWAA installs none of the packages in `requirements.txt`, including your own packages. The usual cause is a pin that conflicts with the constraints in use. These are your constraints file or, depending on the Airflow version, constraints that MWAA applies when you don't specify any.
 - If dependency resolution fails, verify that the same package versions are pinned in both `constraints.txt` and `requirements.txt`. Also verify that `constraints.txt` doesn't pin the same package twice, such as `openlineage-sql` and `openlineage_sql`.
-- If you created `constraints.txt` from the full Apache Airflow constraints file, its older pins can conflict with your other requirements. Replace it with a file that contains only the OpenLineage pins for your Airflow version. For Airflow 2.8.1 and 2.9.2, a full constraints file must also set `sqlparse==0.5.1`.
+- For Airflow 2.8.1 and 2.9.2, a constraints file based on the Apache Airflow constraints file must set `sqlparse==0.5.1`.
+- On Airflow 2.8.1, if you created `constraints.txt` from the full Apache Airflow constraints file, its older pins can conflict with your other requirements. Replace it with a file that contains only the OpenLineage pins.
+- On Airflow 2.7.2 and 2.9.2, packages can upgrade to unexpected versions if `constraints.txt` contains only the OpenLineage pins. Replace it with the Apache Airflow constraints file for your version, with the OpenLineage pins updated.
 - If MWAA installs older versions, verify that `requirements.txt` points to `--constraint /usr/local/airflow/dags/constraints.txt` and that the file exists in your S3 `dags/` path.
 - If uploads or reads fail, verify that the MWAA execution role has access to the required S3 objects. For details, see [Amazon MWAA execution role][5].
 
