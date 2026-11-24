@@ -31,7 +31,7 @@ The Remediation Inbox is in Preview.
 
 ## Overview
 
-The Remediation Inbox groups your Software Composition Analysis findings by the fix that resolves them, such as one package upgrade in a repository. Each group is a **remediation**. Instead of triaging findings one at a time, your team can prioritize the fixes that close the most critical findings first.
+The Remediation Inbox groups your [Software Composition Analysis][3] (SCA) findings by the fix that resolves them, such as one package upgrade in a repository. Each group is a **remediation**. Instead of triaging findings one at a time, your team can prioritize the fixes that close the most critical findings first.
 
 From a remediation, you can review its impact, assign an owner, track the work in a **remediation case** in [Work Management][2], and generate a pull request with AI.
 
