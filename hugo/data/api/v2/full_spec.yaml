@@ -261647,6 +261647,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -261742,6 +261746,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
