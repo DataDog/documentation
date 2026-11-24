@@ -105,6 +105,7 @@ Datadog adds tags from the reference table to usage it processes after you enabl
 | [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
 | [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
 | [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
+| [Bits Testing][12] | `datadog.estimated_usage.bits_testing.ai_credits` | AI Credits consumed by Bits Testing. |
 
 ## Availability
 
