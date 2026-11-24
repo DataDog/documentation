@@ -10,10 +10,6 @@ further_reading:
     text: "Track user sessions in Agent Observability"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
-{{< /callout >}}
-
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
 
 A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the rule selects the destination. Use a routing rule to change models or providers without changing application code, and to add fallback destinations.

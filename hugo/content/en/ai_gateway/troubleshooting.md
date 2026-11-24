@@ -7,10 +7,6 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
-{{< /callout >}}
-
 ## 401 or 403 responses
 
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.

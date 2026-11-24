@@ -7,10 +7,6 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
-{{< /callout >}}
-
 <!-- vale Datadog.words_case_insensitive = NO -->
 
 The [{{< ui >}}Overview{{< /ui >}}][3] page has two tabs for the selected time range:

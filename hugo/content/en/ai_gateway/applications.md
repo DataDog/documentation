@@ -10,10 +10,6 @@ further_reading:
     text: "Trajectory"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
-{{< /callout >}}
-
 Connect coding agents and your own applications to AI Gateway. For Claude Code and Codex, use [Trajectory](#connect-claude-code-and-codex-with-trajectory): it configures the agent and signs you in to Datadog, with no access token to manage. For other clients, and for applications built with an SDK, see [Configure clients manually](#configure-clients-manually) and [Connect applications with SDKs](#connect-applications-with-sdks).
 
 Before you begin, complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule.

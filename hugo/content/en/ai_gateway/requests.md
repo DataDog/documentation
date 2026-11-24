@@ -7,10 +7,6 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
-{{< /callout >}}
-
 Every request to AI Gateway needs a Datadog credential, the base URL for your Datadog site, and a model identifier. For a complete request example, see [Get Started](/ai_gateway/getting_started/#send-a-request). To set up a specific client, such as Claude Code, Codex, or an SDK, see [Connect Applications](/ai_gateway/applications/).
 
 ## Authenticate requests
