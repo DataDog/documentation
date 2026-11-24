@@ -5767,6 +5767,16 @@
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway provider."
   },
+  "DeleteAIGatewayModelByCanonical": {
+    "description": "Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a provider model by canonical ID"
+  },
+  "UpdateAIGatewayModelByCanonical": {
+    "description": "Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update a provider model by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request to update a model catalog entry."
+  },
   "DeleteAIGatewayModelPricingByCanonical": {
     "description": "Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Delete a model pricing override by canonical ID"
@@ -5798,11 +5808,11 @@
     "request_schema_description": "Request to create several model catalog entries."
   },
   "DeleteAiGatewayModel": {
-    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.",
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.\nA canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.",
     "summary": "Delete a model from an AI Gateway provider"
   },
   "UpdateAiGatewayModel": {
-    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Update a model for an AI Gateway provider",
     "request_description": "",
     "request_schema_description": "Request to update a model catalog entry."

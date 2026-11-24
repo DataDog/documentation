@@ -247617,6 +247617,102 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model:
+    delete:
+      description: >-
+        Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-08-24T12:00:00Z"
+                        enabled: true
+                        model_id_canonical: openai/gpt-4o
+                        model_id_wire: openai/gpt-4o-2024-08-06
+                        provider_id: 42
+                        source: manual
+                        supported_operations:
+                          - OPENAI_CHAT_COMPLETIONS
+                        updated_at: "2026-08-24T12:00:00Z"
+                      id: "101"
+                      type: model-catalog-entries
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelCatalogEntryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Update a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/providers/{provider_id}/model-pricing:
     delete:
       description: >-
@@ -247954,6 +248050,7 @@ paths:
       description: |-
         Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
         Delete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.
+        A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.
       operationId: DeleteAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247985,7 +248082,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: >-
-        Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
