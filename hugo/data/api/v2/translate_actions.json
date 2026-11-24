@@ -162,11 +162,11 @@
     "summary": "List active Agent Health issues"
   },
   "ListAgentHealthIssues": {
-    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nSet `count_by=issue_type` to include `meta.page`, where `total_count` is the number of\nopen issues matching the filters and `counts_by_issue_type` holds the per-type counts.\n`meta` is omitted when `count_by` is not requested.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nThe response always includes `meta.page` with the applied `limit`, `offset`, and\n`total_count` (the number of open issues matching the filters). Set `count_by=issue_type`\nto also include `counts_by_issue_type` with per-issue-type counts.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
     "summary": "List Agent Health issues"
   },
   "GetAgentHealthIssue": {
-    "description": "Get an Agent Health issue and its available remediation in your organization.\nOnly open issues are returned. The `remediation` attribute is omitted when\nthe issue has no remediation.\n\nReturns `404` if the issue does not exist, is not open, belongs to another\norganization, or you do not have access to its data. This response does not\nreveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.",
+    "description": "Get an Agent Health issue and its available remediation in your organization.\nThe `remediation` attribute is omitted when the issue has no remediation.\n\nReturns `404` if the issue does not exist, belongs to another organization, or\nyou do not have access to its data. This response does not reveal whether the\nissue exists. Returns `403` if you lack the `hosts_read` permission.",
     "summary": "Get an Agent Health issue"
   },
   "ListAwsScanOptions": {
@@ -3327,6 +3327,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListGitHubCostsIntegrationAccounts": {
+    "description": "List GitHub Costs integration accounts.",
+    "summary": "List GitHub Costs integration accounts"
+  },
+  "CreateGitHubCostsIntegrationAccount": {
+    "description": "Create a GitHub Costs integration account.",
+    "summary": "Create a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a GitHub Costs integration account."
+  },
+  "DeleteGitHubCostsIntegrationAccount": {
+    "description": "Delete a GitHub Costs integration account.",
+    "summary": "Delete a GitHub Costs integration account"
+  },
+  "GetGitHubCostsIntegrationAccount": {
+    "description": "Get a GitHub Costs integration account.",
+    "summary": "Get a GitHub Costs integration account"
+  },
+  "UpdateGitHubCostsIntegrationAccount": {
+    "description": "Update a GitHub Costs integration account. Only the fields provided are changed.",
+    "summary": "Update a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a GitHub Costs integration account."
   },
   "ListNebiusCloudIntegrationAccounts": {
     "description": "List Nebius Cloud integration accounts.",

@@ -1433,7 +1433,7 @@ Gets a single experiment by ID, including status, linked feature flag, subject t
 ### `create_experiment`
 *Toolset: **experiments***\
 *Permissions Required: `Product Analytics Experiments Write`*\
-Creates a new experiment with a name, hypothesis, subject type, and primary metric. Only the name is required. Optionally, include `tags`, an array of strings that the tool attaches to the experiment in the same call, whether you create the experiment [from a protocol][108] or without one. The tool rejects `team:` tags before creating the experiment. Datadog derives an experiment's team membership, so you can't set it with tags.
+Creates a new experiment with a name, hypothesis, subject type, and primary metric. Only the name is required. Optionally, include `tags`, an array of strings that the tool attaches to the experiment in the same call, whether you create the experiment [from a protocol][109] or without one. The tool rejects `team:` tags before creating the experiment. Datadog derives an experiment's team membership, so you can't set it with tags.
 
 - Create an experiment called "New Checkout Flow" to test whether the redesign improves conversion rate.
 - Create an experiment called "Checkout Agent Prompt" with the tags `ml_app:checkout-agent` and `source:agent`.
@@ -3064,6 +3064,22 @@ Deletes one or more custom detection rules by ID. Only custom (non-default) rule
 - Delete detection rule `abc-123-def`.
 - Remove these three test detection rules I created earlier.
 
+### `propose_datadog_security_detection_rule`
+*Toolset: **security** (Preview)*\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate many rules at once, use [bulk migration][108].
+
+- Translate this Splunk rule into a Cloud SIEM detection rule: `<SPL query>`.
+- Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
+
+### `get_datadog_security_detection_rule_proposal`
+*Toolset: **security** (Preview)*\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`. When it fails, returns the error.
+
+- Check the status of detection rule proposal `abc-123`.
+- Show me the proposed rule, then save it as disabled.
+
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Read`*\
@@ -4003,7 +4019,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [105]: /observability_pipelines/configuration/manage_pipelines_with_ai_agents/
 [106]: /incident_response/on-call/
 [107]: /integrations/kube_apiserver_metrics/
-[108]: /experiments/protocols/
+[108]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/#bulk-migrate-detection-rules-in-the-ui
+[109]: /experiments/protocols/
 
 ## Further reading
 

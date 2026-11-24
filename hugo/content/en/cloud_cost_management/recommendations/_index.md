@@ -657,6 +657,12 @@ multifiltersearch:
       recommendation_type: Delete Idle Synapse Dedicated SQL Pool
       recommendation_description: Identifies online Synapse dedicated SQL pools with no logins and low DWU usage, and recommends deleting them.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: Synapse Dedicated SQL Pool
+      recommendation_type: Pause Idle Synapse Dedicated SQL Pool
+      recommendation_description: Identifies online Synapse dedicated SQL pools that sit idle for most of the hours they are online, and recommends pausing them on a schedule.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance

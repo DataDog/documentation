@@ -3278,6 +3278,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -6678,20 +6699,15 @@ components:
           example: my-hostname
           type: string
         resource_kind:
-          description: >-
-            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
-          example: host
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueResourceKind"
         resource_type:
           description: The type of the affected resource. Omitted when empty.
           example: host
           type: string
         severity:
-          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
-          example: high
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueSeverity"
         state:
-          description: The state of the issue. Only issues with state `open` are returned.
+          description: The state of the issue, such as `open`.
           example: open
           type: string
         tags:
@@ -6761,6 +6777,23 @@ components:
         - type
         - attributes
       type: object
+    AgentHealthIssueResourceKind:
+      description: >-
+        The kind of affected resource. The meaning of `resource_id` depends on this: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+      enum:
+        - host
+        - deployment
+        - cluster
+        - cluster_agent
+        - otel
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - DEPLOYMENT
+        - CLUSTER
+        - CLUSTER_AGENT
+        - OTEL
     AgentHealthIssueResourceType:
       description: The Agent Health issue resource type.
       enum:
@@ -6777,6 +6810,20 @@ components:
       required:
         - data
       type: object
+    AgentHealthIssueSeverity:
+      description: The severity of the issue.
+      enum:
+        - low
+        - medium
+        - high
+        - unknown
+      example: high
+      type: string
+      x-enum-varnames:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - UNKNOWN
     AgentHealthIssueTags:
       description: Tags associated with the issue. Omitted when empty.
       example:
@@ -6837,15 +6884,18 @@ components:
           $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
       required:
         - data
+        - meta
       type: object
     AgentHealthIssuesResponseMeta:
       description: >-
-        Aggregate counts for the matching Agent Health issues. Present only when `count_by=issue_type` is requested.
+        Pagination metadata for the matching Agent Health issues. Always present. Includes per-issue-type counts only when `count_by=issue_type` is requested.
       example:
         page:
           counts_by_issue_type:
             invalid_config: 8382
             read-only_filesystem_error: 82
+          limit: 100
+          offset: 0
           total_count: 25526
       properties:
         page:
@@ -6854,11 +6904,13 @@ components:
         - page
       type: object
     AgentHealthIssuesResponsePage:
-      description: Counts for the matching Agent Health issues.
+      description: Pagination details and counts for the matching Agent Health issues.
       example:
         counts_by_issue_type:
           invalid_config: 8382
           read-only_filesystem_error: 82
+        limit: 100
+        offset: 0
         total_count: 25526
       properties:
         counts_by_issue_type:
@@ -6870,14 +6922,25 @@ components:
             invalid_config: 8382
             read-only_filesystem_error: 82
           type: object
+        limit:
+          description: The maximum number of issues returned, echoing the requested `page[limit]`.
+          example: 100
+          format: int64
+          type: integer
+        offset:
+          description: The number of issues skipped, echoing the requested `page[offset]`.
+          example: 0
+          format: int64
+          type: integer
         total_count:
           description: The total number of open issues matching the filters.
           example: 25526
           format: int64
           type: integer
       required:
+        - limit
+        - offset
         - total_count
-        - counts_by_issue_type
       type: object
     AgentHealthRemediation:
       description: Remediation for the issue. Omitted when no remediation is available.
@@ -6930,6 +6993,8 @@ components:
           description: Whether the script requires root privileges.
           example: true
           type: boolean
+      required:
+        - requires_root
       type: object
     AgentHealthRemediationStep:
       description: A step to remediate the issue.
@@ -6937,12 +7002,16 @@ components:
         order:
           description: The order in which to perform the step.
           example: 1
-          format: int64
+          format: int32
+          maximum: 2147483647
           type: integer
         text:
           description: The instructions for the step.
           example: Open datadog.yaml
           type: string
+      required:
+        - order
+        - text
       type: object
     AgentHealthRemediationSteps:
       description: Steps to remediate the issue.
@@ -9514,12 +9583,14 @@ components:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
       example: OPENAI_CHAT_COMPLETIONS
       type: string
       x-enum-varnames:
         - OPENAI_CHAT_COMPLETIONS
         - OPENAI_RESPONSES
         - ANTHROPIC_MESSAGES
+        - SYSTEM_ONE
     AiGatewayDataCaptureMode:
       description: Controls whether AI Gateway captures request and response content in addition to metadata.
       enum:
@@ -13229,6 +13300,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
       example: OPENAI_CHAT_COMPLETIONS
@@ -13240,6 +13313,8 @@ components:
         - OPENAI_RESPONSES
         - OPENAI_WEB_SEARCH
         - OPENAI_EMBEDDINGS
+        - OPENAI_DECISIONS
+        - SYSTEM_ONE
         - GEMINI_GENERATE_CONTENT
         - GEMINI_RAW_PREDICTIONS
     AiGatewayZDRMode:
@@ -26622,7 +26697,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26655,7 +26731,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26952,7 +27029,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -26985,7 +27063,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -69031,6 +69110,256 @@ components:
       required:
         - data
       type: object
+    GitHubCostsCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        GitHub costs, including Actions, storage, and Copilot, which you can analyze in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Reported costs are estimates based on list prices and usage data and include discounts when available, but not negotiated rates. Requires Cloud Cost Management on your Datadog organization and a GitHub account on the enhanced billing platform. Without them, this dataflow collects no data. This dataflow is always on and cannot be turned off, so it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    GitHubCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthRequest"
+    GitHubCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the GitHub Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthResponse"
+    GitHubCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthUpdate"
+    GitHubCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    GitHubCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the token type that matches `settings.enterprise_name`: a classic personal access token for an enterprise, or a fine-grained personal access token for an organization. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: >-
+            For an enterprise, a personal access token (classic) from an Enterprise Admin user with the `manage_billing:enterprise` and `read:org` scopes. For an organization, a fine-grained personal access token owned by that organization and created by an organization owner, with the `Administration` organization permission set to read-only.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a GitHub Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountCreateData:
+      description: Data envelope for creating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountCreateRequest:
+      description: Request payload to create a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponse:
+      description: Response payload for a single GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponseAttributes:
+      description: Attributes of a GitHub Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/GitHubCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountResponseData:
+      description: Data envelope of a GitHub Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the GitHub Costs integration account.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    GitHubCostsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsResponse:
+      description: Settings configured on the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the GitHub Costs integration account. Only the provided fields are changed.
+      properties:
+        enterprise_name:
+          description: >-
+            Slug of the GitHub enterprise, as in `https://github.com/enterprises/<enterprise-name>`, or login of a GitHub organization, as in `https://github.com/<organization-name>`. An enterprise covers every organization it owns. Connecting both an enterprise and one of its organizations counts that organization's costs twice. The token in `authentication` must match: classic for an enterprise, fine-grained for an organization.
+          example: enterprise-name
+          type: string
+        tags:
+          description: Comma-separated list of custom tags for this GitHub Costs account.
+          example: "env:prod,team:example"
+          type: string
+      type: object
+    GitHubCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a GitHub Costs integration account. Every field is optional. Only the provided fields are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsUpdate"
+      type: object
+    GitHubCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the GitHub Costs integration account to update.
+          example: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountsResponse:
+      description: Response payload for a list of GitHub Costs integration accounts.
+      properties:
+        data:
+          description: List of GitHub Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from GitHub Costs, keyed by dataflow ID.
+      properties:
+        github-cloud-cost-metrics:
+          $ref: "#/components/schemas/GitHubCostsCloudCostMetricsIntegrationDataflowResponse"
+      type: object
     GitHubOIDCClaimPatterns:
       additionalProperties: false
       description: |-
@@ -110053,7 +110382,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -110086,7 +110416,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -169116,9 +169447,9 @@ paths:
         (`high`, `medium`, `low`, then other values), then `first_seen_at` descending with
         missing timestamps last, then issue ID ascending.
 
-        Set `count_by=issue_type` to include `meta.page`, where `total_count` is the number of
-        open issues matching the filters and `counts_by_issue_type` holds the per-type counts.
-        `meta` is omitted when `count_by` is not requested.
+        The response always includes `meta.page` with the applied `limit`, `offset`, and
+        `total_count` (the number of open issues matching the filters). Set `count_by=issue_type`
+        to also include `counts_by_issue_type` with per-issue-type counts.
 
         Each filter accepts up to 50 comma-separated exact values of at most 256 characters
         each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
@@ -169126,13 +169457,35 @@ paths:
       operationId: ListAgentHealthIssues
       parameters:
         - description: >-
-            Set to `issue_type` to include `meta.page` with `total_count` and per-issue-type counts. If you don't set this parameter, the response omits `meta`. Only `issue_type` is supported.
+            Set to `issue_type` to also include `counts_by_issue_type` in `meta.page` with per-issue-type counts. Pagination metadata is always included. Only `issue_type` is supported.
           example: issue_type
           in: query
           name: count_by
           required: false
           schema:
             $ref: "#/components/schemas/AgentHealthIssuesCountBy"
+        - description: >-
+            The maximum number of issues to return. Defaults to 100, with a minimum of 1 and a maximum of 1000.
+          example: 100
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The number of issues to skip before returning results. Defaults to 0, with a minimum of 0.
+          example: 0
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
         - description: |-
             Filter by a comma-separated list of exact `severity` values, up to 50 values
             of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
@@ -169225,6 +169578,8 @@ paths:
                       page:
                         counts_by_issue_type:
                           invalid_config: 8382
+                        limit: 100
+                        offset: 0
                         total_count: 25526
               schema:
                 $ref: "#/components/schemas/AgentHealthIssuesResponse"
@@ -169258,23 +169613,23 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 2
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agenthealth/issues/{issue_id}:
     get:
       description: |-
         Get an Agent Health issue and its available remediation in your organization.
-        Only open issues are returned. The `remediation` attribute is omitted when
-        the issue has no remediation.
+        The `remediation` attribute is omitted when the issue has no remediation.
 
-        Returns `404` if the issue does not exist, is not open, belongs to another
-        organization, or you do not have access to its data. This response does not
-        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+        Returns `404` if the issue does not exist, belongs to another organization, or
+        you do not have access to its data. This response does not reveal whether the
+        issue exists. Returns `403` if you lack the `hosts_read` permission.
       operationId: GetAgentHealthIssue
       parameters:
         - description: |-
@@ -169326,6 +169681,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AgentHealthIssueResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -169359,9 +169720,6 @@ paths:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -214316,6 +214674,249 @@ paths:
           - manage_integrations
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts:
+    get:
+      description: List GitHub Costs integration accounts.
+      operationId: ListGitHubCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            github-cloud-cost-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: github-costs-acme
+                          settings:
+                            enterprise_name: enterprise-name
+                            tags: "env:prod,team:example"
+                        id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub Costs integration accounts
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub Costs integration account.
+      operationId: CreateGitHubCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts/{account_id}:
+    delete:
+      description: Delete a GitHub Costs integration account.
+      operationId: DeleteGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a GitHub Costs integration account.
+      operationId: GetGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a GitHub Costs integration account. Only the fields provided are changed.
+      operationId: UpdateGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: enterprise-name
+                          tags: "env:prod,team:example"
+                      id: 5f1a8d3c-7e2b-4f9a-b6c4-8d0e3a7f1b52
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/nebius-cloud/accounts:
     get:
@@ -295178,6 +295779,15 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/integrations/google_cloud_platform
     name: GCP Integration
+  - description: |-
+      Manage your Datadog GitHub Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [GitHub Costs integration page](https://docs.datadoghq.com/integrations/github-costs/) for
+      more information.
+    externalDocs:
+      description: GitHub Costs integration.
+      url: https://docs.datadoghq.com/integrations/github-costs/
+    name: GitHub Costs Integration
   - description: |-
       Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
       directly through the Datadog API.
