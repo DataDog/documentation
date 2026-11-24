@@ -6216,11 +6216,41 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_terraform
       weight: 11
+    - name: MCP Gateway
+      url: ai_gateway/mcp_gateway/
+      parent: ai_gateway
+      identifier: ai_gateway_mcp_gateway
+      weight: 12
+    - name: Register MCP Servers
+      url: ai_gateway/mcp_gateway/servers/
+      parent: ai_gateway_mcp_gateway
+      identifier: ai_gateway_mcp_gateway_servers
+      weight: 1
+    - name: Control Server and Tool Access
+      url: ai_gateway/mcp_gateway/access_control/
+      parent: ai_gateway_mcp_gateway
+      identifier: ai_gateway_mcp_gateway_access_control
+      weight: 2
+    - name: Connect to MCP Servers
+      url: ai_gateway/mcp_gateway/connect/
+      parent: ai_gateway_mcp_gateway
+      identifier: ai_gateway_mcp_gateway_connect
+      weight: 3
+    - name: Call Tools
+      url: ai_gateway/mcp_gateway/tools/
+      parent: ai_gateway_mcp_gateway
+      identifier: ai_gateway_mcp_gateway_tools
+      weight: 4
+    - name: Observe MCP Tool Activity
+      url: ai_gateway/mcp_gateway/observability/
+      parent: ai_gateway_mcp_gateway
+      identifier: ai_gateway_mcp_gateway_observability
+      weight: 5
     - name: Troubleshooting
       url: ai_gateway/troubleshooting/
       parent: ai_gateway
       identifier: ai_gateway_troubleshooting
-      weight: 12
+      weight: 13
     - name: CI/CD Optimization
       url: cicd/
       pre: ci

@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot AI Gateway
-description: Diagnose authentication failures, spending and rate limits, unavailable models, missing traces, and Gateway errors.
+description: Diagnose authentication failures, spending and rate limits, unavailable models, missing traces, and errors for AI Gateway model requests and MCP Gateway tool calls.
 further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
@@ -11,7 +11,16 @@ further_reading:
 AI Gateway is in Preview. Request access or contact your Customer Success Manager.
 {{< /callout >}}
 
-## 401 or 403 responses
+Use this page to diagnose problems with the two kinds of traffic that AI Gateway handles:
+
+- For requests to LLM providers, see the [Model requests](#model-requests) section.
+- For tool calls to MCP servers, see the [MCP Gateway tool calls](#mcp-gateway-tool-calls) section.
+
+## Model requests
+
+The following sections cover model requests that applications send to AI Gateway at `/ai/v1`.
+
+### 401 or 403 responses
 
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.
 - Confirm that the user or service account and the credential scope allow `ai_gateway_usage`.
@@ -20,17 +29,17 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 - For a coding agent signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers), send a personal access token, not an application key, in the `dd-application-key` header.
 - A `401` or `403` can also come from the model provider, for example when a provider key is revoked. That response has the provider's body and no `X-Ai-Gateway-Error-Code` header. Check the provider's integration account.
 
-## 402 responses
+### 402 responses
 
 Budgets in Block mode blocked every destination for the request. Review the budget's filters, tracked spend, and window on the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Budgets{{< /ui >}}][9] page. AI Gateway falls back when a budget blocks one destination and another destination remains.
 
-## 429 responses
+### 429 responses
 
 - If the response includes `X-Ai-Gateway-Error-Code: gateway_rate_limit`, an AI Gateway [rate limit](/ai_gateway/spend_controls/#set-rate-limits) in Enforce mode rejected the request. Use the `X-Ai-Gateway-Ratelimit-Id` header to find the rule on the [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Rate limits{{< /ui >}}][15] page. Retry after the `Retry-After` duration.
 - If the response includes `X-Ai-Gateway-Error-Code: gateway_concurrency_limit`, your organization has too many AI Gateway requests in progress at the same time. Retry after the time in `Retry-After`.
 - If the response does not include `X-Ai-Gateway-Error-Code`, the model provider returned the `429`. Check the provider's rate limits for your account, or add a [fallback destination](/ai_gateway/routing/#fallback-behavior) on another provider.
 
-## Model unavailable
+### Model unavailable
 
 - Check the exact `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` value.
 - Confirm that the model is discovered or manually added on the provider, and that it supports the operation you called.
@@ -38,11 +47,11 @@ Budgets in Block mode blocked every destination for the request. Review the budg
 
 A model that is available from the upstream provider might not be enabled on your AI Gateway provider.
 
-## Request not visible in Agent Observability
+### Request not visible in Agent Observability
 
 Confirm the time range and organization, and that the request reached AI Gateway. Check the HTTP status and response body. AI Gateway does not write a span for a request it rejects before it selects a destination: authentication failures, malformed requests, an unknown model (`model_not_found`), a rejected `x-ai-gateway-team` header, and a routing rule the caller cannot use. A span can take up to a minute to appear. Spans include prompt and response content only when full capture applies to the request.
 
-## Error codes
+### Error codes
 
 Errors that AI Gateway generates include the `X-Ai-Gateway-Error-Code` response header. For OpenAI and Anthropic, the same code is in the response body's `error.code` field. For Gemini, read the code from the header. Gemini's `error.code` is the numeric HTTP status.
 
@@ -133,6 +142,69 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 `internal_error`
 : HTTP `500`. An unclassified internal error. Contact [Datadog support][14] and include the response headers, the timestamp, and the model identifier. Do not send the `Authorization` header.
 
+## MCP Gateway tool calls
+
+The following sections cover tool calls that clients send through [MCP Gateway][16] at `/mcp`.
+
+### A server is missing from My servers
+
+The {{< ui >}}My servers{{< /ui >}} page lists a server when all of the following are true:
+
+- An administrator has given you {{< ui >}}Runner{{< /ui >}} or {{< ui >}}Editor{{< /ui >}} access to the server.
+- The server is enabled.
+- For a server with a shared credential, an administrator has connected the credential.
+
+If the page shows {{< ui >}}No servers yet{{< /ui >}}, no server is shared with you. If the page shows {{< ui >}}You don't have access to the MCP gateway{{< /ui >}}, your role does not have the `mcp_gateway_usage` permission.
+
+### A server stays Not connected after you authorize
+
+- Reload the {{< ui >}}My servers{{< /ui >}} page.
+- If a banner says that the server's authorization page didn't grant access, click {{< ui >}}Authorize{{< /ui >}} again and approve access at the server.
+- Complete the server's sign-in within 30 minutes of clicking {{< ui >}}Authorize{{< /ui >}}.
+- If the connect button is unavailable, Datadog could not load how the server connects. Reload the page.
+
+### A server's tools are missing from a client
+
+Listing tools succeeds even when one server cannot be listed. If a server's tools are missing:
+
+- Confirm that the server is enabled and connected. For a server with per-user credentials, confirm that the caller's own account is connected.
+- Confirm the caller's access to the server or to a policy that lists its tools. See [Control MCP Server and Tool Access][17].
+- Start a new session in the client.
+- Check the server itself. MCP Gateway leaves out a server that takes more than 10 seconds to list its tools, or that returns more than 1,500 tools or 4,000,000 bytes.
+- Check the tool names. MCP Gateway leaves out tools whose names it cannot serve. See the [List tools][18] section of Call Tools Through MCP Gateway.
+
+### A tool call returns unknown tool
+
+A call refused by server access or a policy returns the same `unknown tool` response as a call to a tool name that matches no server. To find out why a call was refused, find the call in Agent Observability and check its outcome: `not_found`, `server_access_denied`, or `policy_denied`. See the [Tool call outcomes][19] section of Observe MCP Tool Activity.
+
+### A tool call is missing from Agent Observability
+
+- Confirm the time range and organization, and that the request reached MCP Gateway. Check the HTTP status and response body.
+- MCP Gateway sends spans asynchronously and on a best-effort basis. When you need a record of each call, use [Audit Trail][20].
+- In search mode, `tool_search`, `list_tools`, and `get_tool_definition` are not recorded as tool calls.
+- MCP Gateway does not record a request that it rejects for missing credentials, a missing `mcp_gateway_usage` permission, or an invalid REST request body.
+
+### MCP Gateway errors
+
+MCP Gateway returns the following errors on the MCP endpoint (`POST /mcp`) and the REST endpoints (`/mcp/api/tools`):
+
+| Case | MCP endpoint | REST endpoints |
+|---|---|---|
+| Missing or invalid credentials | HTTP `401` | HTTP `401` |
+| The caller does not have `mcp_gateway_usage` | The request is refused | The request is refused |
+| MCP Gateway is not enabled for the organization | HTTP `403` with an empty body | HTTP `403` with an empty body |
+| The tool name is unknown or outside the chosen servers, or the caller is not allowed to use the tool | `-32602` `unknown tool`, HTTP `400` | HTTP `404` |
+| The server does not have a tool with that name, or it rejects the arguments | `-32602` `unknown tool or invalid arguments`, HTTP `400` | HTTP `400` |
+| Invalid cursor | `-32602` `invalid cursor`, HTTP `400` | HTTP `400` |
+| A slug in `?slug=` matches no server the caller can use | `-32602` `unknown server slug`, HTTP `400` | Does not apply |
+| More than 20 slugs in `?slug=` | `-32602` `at most 20 server slugs may be named`, HTTP `400` | Does not apply |
+| The server failed or timed out, or MCP Gateway could not check access | `-32603` `upstream MCP server request failed`, HTTP `200` | HTTP `502` |
+| MCP protocol version older than `2026-07-28`, or no `MCP-Protocol-Version` header | `-32022`, HTTP `400` | Does not apply |
+| Malformed `search` or `slug` query parameter | HTTP `400` | Ignored |
+| The request body is not a JSON object, or is larger than 1 MiB | Does not apply | HTTP `400` or `413` |
+
+The REST endpoints return errors with the body `{"error": {"code": <CODE>, "message": "<MESSAGE>"}}`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -141,3 +213,8 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [11]: https://app.datadoghq.com/llm/gateway/model-catalog
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
+[16]: /ai_gateway/mcp_gateway/
+[17]: /ai_gateway/mcp_gateway/access_control/
+[18]: /ai_gateway/mcp_gateway/tools/#list-tools
+[19]: /ai_gateway/mcp_gateway/observability/#tool-call-outcomes
+[20]: /account_management/audit_trail/

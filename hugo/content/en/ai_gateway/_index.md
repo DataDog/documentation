@@ -51,7 +51,8 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 | Review usage and inspect requests | [Observe AI Gateway Activity](/ai_gateway/observability/) |
 | Manage configuration from scripts, CI jobs, or agents | [Configure with the API](/ai_gateway/api/) |
 | Manage configuration as code with Terraform | [Manage with Terraform](/ai_gateway/terraform/) |
-| Diagnose failed or missing requests | [Troubleshooting](/ai_gateway/troubleshooting/) |
+| Give agents and coding assistants governed access to your organization's MCP servers | [MCP Gateway](/ai_gateway/mcp_gateway/) |
+| Diagnose failed or missing model requests and MCP tool calls | [Troubleshooting](/ai_gateway/troubleshooting/) |
 
 ## Further reading
 
