@@ -69,22 +69,23 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 {{% tab "ChatGPT" %}}
 
-Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
+Connect Datadog to ChatGPT by installing the [Datadog plugin][1]. The plugin authenticates with your Datadog organization through an OAuth flow.
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">The Datadog ChatGPT app is in Preview. During the Preview, it is available for US1 customers only.</div>
-
-1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
-1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the guided setup.
-1. Complete the OAuth login flow when prompted.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In ChatGPT, open the [Datadog plugin][2]. If the plugin isn't available in your workspace, ask your ChatGPT workspace admin to add it.
+1. Click {{< ui >}}Connect{{< /ui >}} and follow the guided setup.
+1. When prompted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}) and complete the OAuth login flow.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[2]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
+[3]: /getting_started/site/
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,ap1,ap2,uk1,gov,gov2" >}}
-<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
+[1]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
 {{% /tab %}}
 
 {{% tab "Claude" %}}
