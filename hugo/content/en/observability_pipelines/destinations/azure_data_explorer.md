@@ -14,11 +14,6 @@ further_reading:
 
 {{< product-availability >}}
 
-{{< callout url="#"
- btn_hidden="true" header="Join the Preview!">}}
-The Azure Data Explorer destination is in Preview. Contact your account manager to request access.
-{{< /callout >}}
-
 ## Overview
 
 Use Observability Pipelines' Azure Data Explorer destination to send logs to [Azure Data Explorer][1] (ADX). The destination sends logs to your ADX cluster using streaming or queued ingestion. See the [Ingestion modes](#ingestion-modes) section for more information.

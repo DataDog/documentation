@@ -4,4 +4,4 @@
 
 <div class="shortcode-wrapper shortcode-img expand"><figure class="text-center"><a href="https://docs.dd-static.net/images/continuous_integration/itr_overview.03793aa7ffdec7d28903b5d3c9d9c32d.png?fit=max&amp;auto=format" class="pop" data-bs-toggle="modal" data-bs-target="#popupImageModal"><picture><img class="img-fluid" srcset="https://docs.dd-static.net/images/continuous_integration/itr_overview.03793aa7ffdec7d28903b5d3c9d9c32d.png?auto=format" alt="Test Impact Analysis enabled in test service settings in the CI section of Datadog."></picture></a></figure></div>
 
-[101]: https://app.datadoghq.com/ci/settings/test-service
+[101]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

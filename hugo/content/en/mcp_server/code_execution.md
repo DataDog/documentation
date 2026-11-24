@@ -2,7 +2,7 @@
 title: Code Execution with the MCP Server
 description: "Run agent-authored JavaScript against Datadog APIs in a single MCP tool call to investigate issues and modify supported resources."
 algolia:
-  tags: ["mcp", "mcp server", "code execution", "code-exec"]
+  tags: ["mcp", "mcp server", "code execution", "execute_code"]
   rank: 65
 further_reading:
 - link: "mcp_server"
@@ -66,7 +66,7 @@ Code execution scripts run against Datadog APIs using your user identity. Every 
 
 The default `core` toolset includes all three code execution tools: `execute_code`, `execute_code_write`, and `search_datadog_sdk`.
 
-To enable only code execution tools, set `toolsets=execute_code` when connecting your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions.
+To enable only code execution tools, set `toolsets=execute_code` when connecting your AI client to the Datadog MCP Server. See [Set Up the Datadog MCP Server][5] for client-specific connection instructions. Toolset selection does not change the required [role permissions][4].
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Based on your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}), this URL enables only code execution tools:

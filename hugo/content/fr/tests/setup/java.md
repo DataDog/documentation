@@ -4,7 +4,7 @@ aliases:
 - /fr/continuous_integration/tests/java
 - /fr/continuous_integration/tests/setup/java
 code_lang: java
-code_lang_weight: 10
+code_lang_weight: 20
 further_reading:
 - link: /tests/containers/
   tag: Documentation
@@ -156,7 +156,7 @@ Ensuite, définissez les variables d'environnement communes suivantes pour confi
 : Active Test Optimization.<br/>
 **Par défaut**: `false`
 
-`DD_ENV` (Optionnel)
+`DD_ENV` (Facultatif)
 : Nom de l'environnement où les tests sont exécutés.<br/>
 **Par défaut**: `(empty)`<br/>
 **Exemples**: `local`, `ci`
@@ -487,7 +487,7 @@ Le nom de la session de test doit être unique au sein d'un dépôt pour vous ai
 
 #### Quand utiliser `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name} :
 
-Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme un dossier temporaire, Datadog considère que les sessions ne sont pas liées entre elles. Exemple :
+Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme un dossier temporaire, Datadog considère que les sessions ne sont pas liées entre elles. Par exemple :
 
 - `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 

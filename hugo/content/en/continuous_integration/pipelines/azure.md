@@ -30,6 +30,7 @@ Set up CI Visibility for Azure Pipelines to gain real time insights into your CI
 |-------------------------------------------------|-------------------------------------|-----------------------------------------------------------|
 | [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
+| [Automatic job retries][24]                     | Automatic job retries               | Datadog retries failed jobs classified as transient by its AI error model. |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime.       |
 | [Custom spans][15]                              | Custom spans                        | Configure custom spans for your pipelines.                |
 | [Filter CI Jobs on the critical path][19]       | Filter CI Jobs on the critical path | Filter by jobs on the critical path.                      |
@@ -177,6 +178,8 @@ Logs Analysis is enabled by default in Datadog. To receive Azure Pipelines job l
 
 You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][22].
 
+Logs Analysis being enabled is also a prerequisite for [automatic job retries][24].
+
 #### Logs Storage
 
 To enable Logs Storage, go to [CI/CD Repository settings][23], and enable Logs Storage at the Datadog organization level or for the desired repositories.
@@ -209,3 +212,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[24]: /continuous_integration/pipelines/automatic_retries/

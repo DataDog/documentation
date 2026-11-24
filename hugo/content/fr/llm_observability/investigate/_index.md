@@ -42,7 +42,7 @@ Déboguez des workflows LLM complexes avec une visibilité détaillée sur l'ex�
 
 {{< img src="llm_observability/index/llm_example_eval_light.png" alt="Vue détaillée d'un span dans Agent Observability, onglet Evaluations. Affiche une évaluation d'hallucination avec « Contradiction confirmée », la sortie signalée, la citation du contexte et une explication de la raison pour laquelle cela a été signalé." style="width:100%">}}
 
-Assurez-vous que vos agents ou applications LLM respectent les normes de qualité grâce aux évaluations en ligne. Pour des informations complètes sur les évaluations hébergées et gérées par Datadog, l'ingestion d'évaluations personnalisées et les capacités de surveillance de la sécurité, consultez la [documentation sur les évaluations][5].
+Aidez vos agents ou applications LLM à respecter les normes de qualité grâce aux évaluations en ligne. Pour des informations complètes sur les évaluateurs hébergés et gérés par Datadog, l'ingestion d'évaluations personnalisées et les capacités de surveillance de la sécurité, consultez la [documentation sur les évaluations][5].
 
 ### Interrogez les traces et les spans de votre application LLM {#query-your-llm-applications-traces-and-spans}
 
@@ -92,4 +92,4 @@ Apprenez à surveiller les applications LLM agentiques, qui utilisent plusieurs 
 [5]: /fr/llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /fr/llm_observability/configure/prompt_management
-[8]: /fr/llm_observability/configure/prompt_experimentation
+[8]: /fr/llm_observability/improve/online_experiments/prompt_experimentation/

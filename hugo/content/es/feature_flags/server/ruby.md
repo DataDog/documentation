@@ -26,20 +26,20 @@ title: Feature Flags de Ruby
 ---
 ## Descripción general {#overview}
 
-Esta página describe cómo instrumentar una aplicación Ruby con el Datadog Feature Flags SDK. El SDK de Ruby se integra con [OpenFeature][3], un estándar abierto para la gestión de Feature Flags. En `datadog` 2.46.0 y versiones posteriores, carga la configuración de flags directamente desde la CDN gestionada por Datadog de forma predeterminada.
+Esta página describe cómo instrumentar una aplicación Ruby con el SDK de Feature Flags de Datadog. El SDK de Ruby se integra con [OpenFeature][3], un estándar abierto para la gestión de flags de funcionalidades. En `datadog` 2.46.0 y versiones posteriores, carga la configuración de flags directamente desde la CDN gestionada por Datadog de forma predeterminada.
 
 No se requiere un Datadog Agent para la entrega de configuración o la evaluación de flags local. Para mantener la entrega gestionada por el Agent, seleccione [Agent Remote Configuration](#agent-configuration-delivery).
 
-<div class="alert alert-warning">Los eventos de exposición de experimentos y los eventos de evaluación de flags agregados del Event Platform Proxy (EVP) requieren un Datadog Agent compatible o un relé de telemetría local. Ruby no admite la entrega directa de eventos cuando un relé no está disponible. El <code>feature_flag.evaluations</code> la métrica requiere una ruta de exportación de OpenTelemetry configurada por separado. Consulte <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Enviar telemetría de Feature Flags</a>.</div>
+<div class="alert alert-warning">Los eventos de exposición a experimentos y los eventos de evaluación de flags agregados del Event Platform Proxy (EVP) requieren un Datadog Agent compatible o un relé de telemetría local. Ruby no admite la entrega directa de eventos cuando un relé no está disponible. El <code>feature_flag.evaluations</code> la métrica requiere una ruta de exportación de OpenTelemetry configurada por separado. Consulte <a href="/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry">Enviar telemetría de flags de funcionalidades</a>.</div>
 
 ## Requisitos previos {#prerequisites}
 
 Para la configuración sin agente predeterminada, necesita:
 
-- **Datadog Ruby SDK** `datadog` versión **2.46.0 o posterior**
+- **SDK de Ruby de Datadog** `datadog` versión **2.46.0 o posterior**
 - **Entorno de ejecución de Ruby** versión 3.1 o posterior para utilizar la integración completa de Datadog Feature Flags con OpenFeature
 - **SDK de OpenFeature para Ruby** `openfeature-sdk` versión 0.5.1 o posterior para soporte de hooks de proveedor, registro de exposición y métricas de evaluación de Feature Flags
-- **[Clave de API][4] y sitio de Datadog**: La clave de API y el sitio de Datadog que aloja su organización
+- **[Clave de API][4] y sitio de Datadog**: la clave de API y el sitio de Datadog que aloja su organización
 - **Servicio y entorno configurados** - Las Feature Flags se aplican por servicio y entorno
 - **Sistema operativo compatible** - El soporte para producción está limitado a [sistemas operativos Linux][2]. macOS y Windows no son objetivos de producción compatibles de forma nativa, pero los entornos de Linux en contenedores Docker que se ejecutan en esos sistemas operativos sí lo son. Para el desarrollo local en macOS, puede utilizar un artefacto nativo precompilado compatible cuando esté disponible.
 
@@ -94,7 +94,7 @@ client = OpenFeature::SDK.build_client
 
 El ejemplo captura `ProviderInitializationError` para que la aplicación pueda continuar con los valores predeterminados proporcionados por el llamador. Si un error temporal de entrega provoca que la inicialización exceda el tiempo de espera, el sondeo continúa y el proveedor puede recuperarse cuando llegue una configuración válida. Para una inicialización no bloqueante, utilice `OpenFeature::SDK.set_provider` en su lugar. Las evaluaciones devuelven valores predeterminados hasta que la configuración esté disponible.
 
-El SDK realiza un sondeo cada 30 segundos y utiliza un tiempo de espera de solicitud de 5 segundos de forma predeterminada. Después de recibir una configuración válida, retiene dicha configuración durante errores temporales de entrega. Consulte [Fuentes de configuración][6] para obtener información sobre el sondeo y la configuración de puntos de conexión personalizados. Ruby acepta intervalos de sondeo expresados en números enteros positivos sin límite superior; los tiempos de espera de solicitud deben estar entre 1 y 300 segundos.
+El SDK realiza sondeos cada 30 segundos y utiliza un tiempo de espera de solicitud de 5 segundos de forma predeterminada. Después de recibir una configuración válida, retiene dicha configuración durante errores temporales de entrega. Consulte [Configuration Sources][6] para conocer la configuración de sondeo y de punto de conexión personalizado. Ruby acepta intervalos de sondeo enteros positivos sin un límite superior; los tiempos de espera de solicitud deben estar entre 1 y 300 segundos.
 
 ### Entrega de configuración del Agent {#agent-configuration-delivery}
 
@@ -107,28 +107,28 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
-Utilice el código de inicialización del proveedor de la sección [Inicializar el proveedor](#initialize-the-provider). Seleccionar `remote_config` habilita la suscripción a Feature Flags cuando el tracer se inicia, incluso antes de que la aplicación registre un proveedor. La clave de API para la entrega de configuración debe configurarse en el Agent.
+Utilice el código de inicialización del proveedor de la sección [Inicializar el proveedor](#initialize-the-provider). Seleccionar `remote_config` habilita la suscripción a Feature Flags cuando el tracer se inicia, incluso antes de que la aplicación registre un proveedor. La clave de API para la entrega de configuración pertenece al Agent.
 
 Las versiones anteriores de `datadog`, a partir de la 2.24.0, utilizan `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` o `config.open_feature.enabled = true` para Agent Remote Configuration.
 
 ### Migrar una configuración existente {#migrate-an-existing-setup}
 
-En la versión 2.46.0 y posteriores, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` y `config.open_feature.enabled` están obsoletos. Si no se selecciona ninguna fuente explícita, un valor heredado de `true` conserva Remote Configuration, y `false` deshabilita Feature Flags.
+En la versión 2.46.0 y posteriores, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` y `config.open_feature.enabled` están obsoletos. Si no se selecciona ninguna fuente explícita, un valor heredado de `true` preserva la Remote Configuration, y `false` deshabilita Feature Flags.
 
-Para migrar a la entrega Agentless, establezca `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, configure las credenciales de la aplicación indicadas arriba y elimine la configuración heredada tanto del entorno como de la configuración de Ruby. Para mantener la entrega mediante Agent, establezca `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` antes de eliminar la configuración heredada. Consulte [Migrar una configuración existente de Remote Configuration][7].
+Para migrar a la entrega sin Agent, establezca `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, configure las credenciales de la aplicación anteriormente mencionadas y elimine la configuración heredada tanto del entorno como de la configuración de Ruby. Para mantener la entrega mediante Agent, establezca `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` antes de eliminar la configuración heredada. Consulte [Migre una configuración de Remote Configuration existente][7].
 
-`DD_FEATURE_FLAGS_ENABLED=false` deshabilita los Feature Flags y ambas rutas de entrega de configuración, independientemente de la fuente seleccionada. Utilícelo en lugar de la configuración heredada para deshabilitar los Feature Flags.
+`DD_FEATURE_FLAGS_ENABLED=false` desactiva los Feature Flags y ambas rutas de entrega de configuración, independientemente de la fuente seleccionada. Úselo en lugar de la configuración heredada para desactivar los Feature Flags.
 
 ### Métricas de evaluación de Feature Flags {#flag-evaluation-metrics}
 
-Las métricas de evaluación de Feature Flags utilizan un pipeline de OpenTelemetry independiente. Agregue las gemas de métricas al bundle de la aplicación:
+Las métricas de evaluación de flags utilizan una canalización de OpenTelemetry independiente. Agregue las gemas de métricas al paquete de la aplicación:
 
 ```ruby
 gem 'opentelemetry-metrics-sdk', '>= 0.8.0'
 gem 'opentelemetry-exporter-otlp-metrics', '>= 0.4.0'
 ```
 
-Establezca `DD_METRICS_OTEL_ENABLED=true` y configure el exportador como se describe en [Configure métricas de evaluación de Feature Flags del lado del servidor][5]. Habilitar la configuración Agentless no configura la exportación de métricas.
+Establezca `DD_METRICS_OTEL_ENABLED=true` y configure el exportador como se describe en [Configurar métricas de evaluación de flags del lado del servidor][5]. Habilitar la configuración Agentless no configura la exportación de métricas.
 
 ## Establezca el contexto de evaluación {#set-the-evaluation-context}
 
@@ -147,6 +147,47 @@ context = OpenFeature::SDK::EvaluationContext.new(
 ```
 
 La clave de segmentación se utiliza para una distribución de tráfico consistente (lanzamientos porcentuales). Los atributos adicionales permiten reglas de segmentación, como "habilitar para usuarios en EE. UU." o "habilitar para usuarios de nivel premium" en el ejemplo anterior.
+
+## Controle la telemetría de evaluación de flags y la participación en experimentos {#control-flag-evaluation-telemetry-and-experiment-participation}
+
+La exclusión de telemetría requiere `datadog` versión `2.47.0` o posterior. La exclusión de Experimentation requiere `datadog` versión `2.49.0` o posterior. El ejemplo combinado requiere `2.49.0` o posterior. Ambos controles son independientes y están desactivados de forma predeterminada. Consulte [Exclusión de la evaluación de flags y de Experimentation][14] para conocer el comportamiento compartido.
+
+Establezca estas variables antes de construir el proveedor:
+
+```bash
+export DD_FEATURE_FLAGS_EVALUATION_TELEMETRY_PER_SUBJECT_OPT_OUT_ENABLED=true
+export DD_FEATURE_FLAGS_EXPERIMENTATION_OPT_OUT_MODE=immediate
+```
+
+Inicialice el proveedor durante el inicio. Pase las preferencias del sujeto con cada evaluación:
+
+```ruby
+require 'datadog'
+require 'open_feature/sdk'
+require 'datadog/open_feature/provider'
+
+OpenFeature::SDK.set_provider_and_wait(Datadog::OpenFeature::Provider.new)
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+  targeting_key: 'user-123',
+  dd_evaluation_telemetry_opt_out: true,
+  dd_experimentation_opt_out_at: '2026-10-30T12:00:00Z'
+)
+enabled = client.fetch_boolean_value(
+  flag_key: 'new-checkout',
+  default_value: false,
+  evaluation_context: context
+)
+```
+
+Reemplace la marca de tiempo del ejemplo con la preferencia almacenada del sujeto.
+
+Las opciones de proveedor equivalentes son `enable_evaluation_telemetry_opt_out_parameter: true` y `experimentation_opt_out_mode: :immediate`. Las opciones explícitas del proveedor anulan la configuración de implementación. Use `:disabled` para anular una política de implementación habilitada o bien omita la opción para usar la configuración de implementación.
+
+Use `future_experiments_only` o `experimentation_opt_out_mode: :future_experiments_only` para retener las asignaciones activadas estrictamente antes de la marca de tiempo. Ambos modos habilitados rechazan las marcas de tiempo del sujeto con formato incorrecto con `INVALID_CONTEXT` y devuelven el valor predeterminado de la aplicación. El modo de solo experimentos futuros verifica la activación de la asignación, no la inscripción previa.
+
+La exclusión voluntaria de telemetría suprime cada uno de estos elementos que la aplicación habilita: nuevos eventos de evaluación, métricas de evaluación y anotaciones automáticas de tramos de flags. Las exposiciones permanecen habilitadas para las asignaciones elegibles. Proporcione un contexto separado para cada solicitud. Para reanudar la telemetría, proporcione el valor booleano `false` o elimine el atributo. Para permitir la experimentación de nuevo, elimine la marca de tiempo. Consulte [Configurar los SDK de servidor][15] para saber cómo se aplican los valores de contexto heredados.
 
 ## Evalúe marcadores {#evaluate-flags}
 
@@ -220,7 +261,7 @@ batch_size = client.fetch_number_value(
 
 ### Marcadores de objeto {#object-flags}
 
-Para datos estructurados, use `fetch_object_value()`. Este método devuelve un hash. Utilice flags de objeto cuando varias propiedades de configuración deban agruparse.
+Para datos estructurados, use `fetch_object_value()`. Este método devuelve un hash. Use flags de objeto cuando varias propiedades de configuración pertenezcan juntas.
 
 ```ruby
 config = client.fetch_object_value(
@@ -272,9 +313,13 @@ if maintenance_mode
 end
 ```
 
-## Registre exposiciones en su propio almacén de datos {#record-exposures-in-your-own-data-store}
+## Registre las exposiciones en su propio almacén de datos {#record-exposures-in-your-own-data-store}
 
-Utilice `Datadog::OpenFeature::ExposureHook` para registrar exposiciones en sus propios registros, almacén de datos o pipeline de análisis. Llama a su código después de cada evaluación de flag con la misma decisión de exposición que el proveedor utiliza para Datadog. Para dejar de enviar exposiciones a Datadog, configure `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. Consulte [Registre exposiciones de Feature Flags en su propio almacén de datos][12] para conocer los requisitos mínimos del SDK y otros detalles.
+Use `Datadog::OpenFeature::ExposureHook` para registrar las exposiciones en sus propios registros, almacén de datos o canalización de análisis. Llama a su código después de cada evaluación de flag con la misma decisión de exposición que el proveedor utiliza para Datadog. Para dejar de enviar exposiciones a Datadog, establezca `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. Consulte [Registrar exposiciones de Feature Flag en su propio almacén de datos][12] para conocer los requisitos mínimos del SDK y otros detalles.
+
+## Eventos de evaluación y privacidad {#evaluation-events-and-privacy}
+
+Use `datadog` 2.46.0 o posterior para el hashing de la clave de segmentación y la recopilación de contexto controlada por el entorno en los eventos de evaluación de flags EVP. Estos eventos están habilitados de forma predeterminada. Establezca `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` para deshabilitar solo esta ruta de evento. Consulte [Eventos de evaluación del lado del servidor y privacidad][13] para conocer los datos recopilados, el contexto de exclusión y los requisitos de entrega.
 
 ## Pruebas {#testing}
 
@@ -370,21 +415,21 @@ Para eventos del proveedor, manejo de errores y los métodos de evaluación, con
 
 Si la aplicación se ejecuta en JRuby, utilice el SDK de Java. Consulte [Use el SDK de Java en JRuby][10].
 
-### La configuración sin agente no funciona {#agentless-configuration-not-working}
+### La configuración agentless no funciona {#agentless-configuration-not-working}
 
-- Verifique que `datadog` 2.46.0 o posterior esté instalado y que la aplicación registre el proveedor Datadog OpenFeature.
+- Verifique que `datadog` 2.46.0 o posterior esté instalado y que la aplicación registre el proveedor OpenFeature de Datadog.
 - Verifique `DD_API_KEY`, `DD_SITE`, `DD_SERVICE` y `DD_ENV` en el proceso de la aplicación.
 - Confirme que `DD_FEATURE_FLAGS_ENABLED` no sea `false`.
-- Deje `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` sin configurar para una nueva instalación, o establézcalo en `agentless`. Elimine la configuración de habilitación heredada al realizar la migración.
+- Deje `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` sin configurar para una nueva instalación, o establézcalo en `agentless`. Elimine la configuración de habilitación heredada al migrar.
 - Permita el tráfico HTTPS saliente hacia `ufc-server.ff-cdn.<DD_SITE>`.
 - Habilite `DD_TRACE_DEBUG=true` y revise los registros del tracer en busca de errores de autenticación, tiempo de espera o configuración.
 
-Antes de la primera configuración válida, las evaluaciones devuelven los valores predeterminados proporcionados por el llamador. Después de una inicialización exitosa, los errores de entrega temporales conservan la última configuración válida.
+Antes de la primera configuración válida, las evaluaciones devuelven los valores predeterminados proporcionados por el llamador. Después de una inicialización exitosa, los fallos de entrega temporales conservan la última configuración válida.
 
-### Problemas de conexión con Remote Configuration {#remote-configuration-connection-issues}
+### Problemas de conexión de Remote Configuration {#remote-configuration-connection-issues}
 
-- En `datadog` 2.46.0 o posterior, confirme que `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` esté configurado en `remote_config`.
-- Verifique que Remote Configuration esté habilitada en el Agent y en el tracer de Ruby.
+- En `datadog` 2.46.0 o posterior, confirme que `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` esté establecido en `remote_config`.
+- Verifique que Remote Configuration esté habilitado en el Agent y en el tracer de Ruby.
 - Verifique que el Datadog Agent estuviera disponible cuando se inició la aplicación. Si los problemas continúan después de que el Agent esté disponible, reinicie la aplicación. Consulte [Disponibilidad del Agent][11].
 - Verifique la clave de API en el Agent y `DD_SERVICE` y `DD_ENV` en la aplicación.
 - Confirme que la aplicación pueda comunicarse con el Agent. Habilite `DD_TRACE_DEBUG=true` y revise los registros del tracer en busca de errores de Remote Configuration.
@@ -405,3 +450,6 @@ Antes de la primera configuración válida, las evaluaciones devuelven los valor
 [10]: #use-the-java-sdk-on-jruby
 [11]: /es/feature_flags/concepts/configuration_sources/#agent-availability
 [12]: /es/feature_flags/guide/record_exposures_in_your_own_data_store/
+[13]: /es/feature_flags/guide/server_evaluation_events/
+[14]: /es/feature_flags/concepts/opt_out/
+[15]: /es/feature_flags/concepts/opt_out/#configure-server-sdks

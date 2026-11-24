@@ -23,7 +23,7 @@ Le flux comporte trois parties :
 
 1. Un [test d'API][2] se connecte à votre fournisseur d'authentification selon un planning et extrait un jeton d'accès.
 2. Une [variable globale][3] provenant de ce test contient la valeur du jeton.
-3. Votre test d'application mobile transmet la variable globale à l'application en tant qu'argument de lancement ou extra d'intention. Votre application le lit au démarrage et ignore son flux de connexion normal.
+3. Votre test d'application mobile transmet la variable globale à l'application au lancement, en tant qu'extra d'intent sur Android ou variable d'environnement sur iOS. Votre application le lit au démarrage et ignore son flux de connexion normal.
 
 Comme le test d'API actualise le jeton selon un planning, la valeur de la variable globale se met à jour d'elle-même, sans aucun travail manuel ni appel à la Datadog API.
 
@@ -117,9 +117,7 @@ Retour `SecureTokenStore` avec `EncryptedSharedPreferences` et un `MasterKey`, p
 
 {{< code-block lang="swift" >}}
 #if AUTOMATION
-if let index = ProcessInfo.processInfo.arguments.firstIndex(of: "-auth_token"),
-   index + 1 < ProcessInfo.processInfo.arguments.count {
-    let authToken = ProcessInfo.processInfo.arguments[index + 1]
+if let authToken = ProcessInfo.processInfo.environment["auth_token"] {
     KeychainManager.shared.save(token: authToken)
     SessionManager.shared.restoreSession(with: authToken)
 }
@@ -130,6 +128,8 @@ Stockez le jeton dans le trousseau d'accès plutôt que dans `UserDefaults`, afi
 
 {{% /tab %}}
 {{% tab "React Native" %}}
+
+<div class="alert alert-info">Cet exemple fonctionne uniquement sur Android. <code>react-native-launch-arguments</code> lit les extras d'intent sur Android, mais sur iOS, il ne lit que les arguments de lancement, et Datadog transmet les valeurs en tant que variables d'environnement. Pour obtenir le jeton sur iOS, lisez-le depuis <code>ProcessInfo.processInfo.environment</code> dans le code natif, comme dans l'exemple iOS (Swift), et transmettez-le à JavaScript.</div>
 
 {{< code-block lang="javascript" >}}
 import { LaunchArguments } from 'react-native-launch-arguments';
@@ -144,7 +144,7 @@ if (__DEV__ || Config.AUTOMATION) {
 }
 {{< /code-block >}}
 
-`react-native-launch-arguments` lit les arguments de processus sur iOS et les extras d'intention sur Android via une seule API. `react-native-keychain` stocke le jeton dans le trousseau d'accès ou le Keystore de la plateforme au lieu de `AsyncStorage`.
+`react-native-keychain` stocke le jeton dans le trousseau d'accès ou le Keystore de la plateforme au lieu de `AsyncStorage`.
 
 {{% /tab %}}
 {{< /tabs >}}

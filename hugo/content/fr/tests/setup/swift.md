@@ -4,7 +4,7 @@ aliases:
 - /fr/continuous_integration/tests/swift
 - /fr/continuous_integration/tests/setup/swift
 code_lang: swift
-code_lang_weight: 50
+code_lang_weight: 60
 further_reading:
 - link: /tests
   tag: Documentation
@@ -189,19 +189,19 @@ Définissez toutes ces variables dans votre cible de test :
 `DD_SERVICE` (Optionnel)
 : Nom du service ou de la bibliothèque en cours de test.<br/>
 **Par défaut** : le nom du dépôt<br/>
-**Exemple** : `my-ios-app`
+**Exemple** : `my-ios-app`
 
-`DD_ENV` (Optionnel)
+`DD_ENV` (Facultatif)
 : Nom de l'environnement où les tests sont exécutés.<br/>
 **Par défaut** : `ci` lorsqu'un fournisseur CI est détecté ; sinon, `none`.<br/>
-**Recommandé** : `$(DD_ENV)`<br/>
+**Recommandé** : `$(DD_ENV)`<br/>
 **Exemples** : `local`, `ci`
 
 `SRCROOT`
 : Le chemin vers l'emplacement du projet : Si vous utilisez Xcode, utilisez `$(SRCROOT)` pour la valeur, car elle est automatiquement définie par celui-ci.<br/>
-**Par défaut** : `(empty)`<br/>
+**Par défaut** : `(empty)`<br/>
 **Recommandé** : `$(SRCROOT)`<br/>
-**Exemple** : `/Users/ci/source/MyApp`
+**Exemple** : `/Users/ci/source/MyApp`
 
 Pour plus d'informations sur les tags réservés `service` et `env` , consultez [Unified Service Tagging][8].
 
@@ -209,7 +209,7 @@ Configurez `DD_SITE` pour votre site ({{< region-param key="dd_site_name" >}}) :
 
 `DD_SITE` (Facultatif)
 : Le [site Datadog][3] vers lequel télécharger les résultats.<br/>
-**Par défaut** : `datadoghq.com`<br/>
+**Par défaut** : `datadoghq.com`<br/>
 **Site sélectionné** : {{< region-param key="dd_site" code="true" >}}
 
 ## Collecte des métadonnées Git {#collecting-git-metadata}
@@ -313,7 +313,7 @@ Vous pouvez également désactiver ou activer une auto-instrumentation spécifiq
 
 ### Variables d'environnement {#environment-variables}
 
-Vous pouvez utiliser une variable d'environnement `DD_TAGS` (ou dans le fichier `Info.plist` comme [ décrit ci-dessous ](#using-infoplist-for-configuration)). Elle doit contenir des paires de `key:tag` séparées par des espaces. Exemple :
+Vous pouvez utiliser une variable d'environnement `DD_TAGS` (ou dans le fichier `Info.plist` comme [ décrit ci-dessous ](#using-infoplist-for-configuration)). Elle doit contenir des paires de `key:tag` séparées par des espaces. Par exemple :
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
@@ -671,7 +671,7 @@ Le nom de la session de test doit être unique au sein d'un dépôt pour vous ai
 
 #### Quand utiliser `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name} :
 
-Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme un dossier temporaire, Datadog considère que les sessions ne sont pas liées entre elles. Exemple :
+Il existe un ensemble de paramètres que Datadog vérifie pour établir une correspondance entre les sessions de test. La commande de test utilisée pour exécuter les tests en fait partie. Si la commande de test contient une chaîne qui change à chaque exécution, comme un dossier temporaire, Datadog considère que les sessions ne sont pas liées entre elles. Par exemple :
 
 - `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 

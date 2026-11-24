@@ -20,6 +20,7 @@ La [página GPU Monitoring Summary][0] analiza toda su flota de GPU y destaca in
 
 Haga clic en los títulos de las secciones a continuación para acceder a la sección correspondiente:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Fleet Health](#fleet-health)
 - [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
@@ -32,11 +33,11 @@ La eficiencia operativa es un factor clave del costo general. Comprender la util
 
 Datadog GPU Monitoring proporciona observabilidad que permite visualizar tanto los dispositivos locales como los de la nube de forma unificada.
 
-Esta visualización proporciona un desglose de toda su flota de GPU, ya sea en un proveedor importante de nube (AWS, GCP, Azure, Oracle Cloud), en instalaciones locales o en un proveedor de GPUaaS como Coreweave o Lambda Labs -- y muestra todos sus clústeres de Kubernetes, hosts y dispositivos GPU.
+Esta visualización proporciona un desglose en tiempo real de toda su flota de GPU, ya sea alojada en un proveedor importante de nube (AWS, GCP, Azure, Oracle Cloud), en sus propias instalaciones o en un proveedor de GPUaaS como Coreweave o Lambda Labs -- y muestra todos sus clústeres de Kubernetes, servidores y dispositivos GPU.
 
-El embudo también destaca cualquier problema de rendimiento o ineficiencia de aprovisionamiento en los esfuerzos de utilización de recursos de sus equipos, como dispositivos inactivos, núcleos de GPU subutilizados o falta de recursos que requiera un reequilibrio.
+El embudo también destaca los problemas de rendimiento o las ineficiencias en el aprovisionamiento, como los dispositivos GPU inactivos o ineficaces, y muestra cómo evolucionan mes a mes.
 
-{{< img src="gpu_monitoring/funnel-5.jpg" alt="Visualización de embudo titulada 'Su flota de GPU de un vistazo'. Muestra la cantidad de dispositivos totales, activos y efectivos, la asignación de Kubernetes y la asignación de dispositivos a lo largo del tiempo, con un pronóstico de una semana." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="Visualización de embudo titulada 'Su flota de GPU de un vistazo'. Muestra el tamaño de la flota por clústeres, servidores y dispositivos; recuentos de dispositivos para cada etapa del embudo con tendencias mes a mes; y asignación de Kubernetes." style="width:90%;" >}}
 
 Los pasos del embudo se definen de la siguiente manera:
 - {{< ui >}}Total Devices{{< /ui >}}: Recuento de dispositivos GPU con GPU Monitoring configurado correctamente y que reportan métricas
@@ -45,11 +46,32 @@ Los pasos del embudo se definen de la siguiente manera:
 
 Si utiliza Kubernetes y ha habilitado la integración de Kubernetes, verá información adicional sobre Kubernetes Allocation que le permite determinar cuántos de sus dispositivos GPU están {{< ui >}}Allocated{{< /ui >}} a cargas de trabajo de Kubernetes.
 
-### Asignación de dispositivos a lo largo del tiempo {#device-allocation-over-time}
+### Previsión de capacidad {#capacity-forecasting}
 
 Las cargas de trabajo de IA pueden experimentar picos impredecibles en el uso de recursos. Como resultado, es importante alinear las GPU disponibles con las cargas de trabajo entrantes. Esta sección le ayuda a identificar si está asignando demasiadas GPU que terminan inactivas o si está aprovisionando recursos insuficientes que paralizan trabajos críticos.
 
 Por ejemplo, si ve un pico en los valores pronosticados para la cantidad de dispositivos asignados, es posible que sus futuras cargas de trabajo requieran dispositivos GPU adicionales.
+
+La adquisición de hardware puede ser un proceso que consume mucho tiempo. Utilice el widget **Device Allocation Over Time** para comprender la demanda histórica durante el período seleccionado y pronosticar las necesidades futuras de capacidad.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="Widget Device Allocation Over Time que muestra los recuentos de dispositivos totales, asignados, activos y efectivos durante la última semana, con un pronóstico de una semana representado con una línea punteada que se extiende más allá del momento actual." style="width:90%;" >}}
+
+También puede usar {{< ui >}}Group by{{< /ui >}} para agrupar la asignación de dispositivos por etiquetas como clúster, proveedor, dispositivo GPU, tipo de dispositivo o proveedor de nube. Esto desglosa los recuentos de dispositivos totales, asignados, activos y efectivos de su flota según esa etiqueta.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Widget Device Allocation Over Time agrupado por clúster con la vista Active seleccionada, que muestra un gráfico de barras apiladas de dispositivos activos por clúster durante la última semana y una lista de los principales clústeres por recuento de dispositivos activos." style="width:90%;" >}}
+
+## Fleet Health {#fleet-health}
+
+La sección Fleet Health le permite detectar de un vistazo problemas de estado del hardware en toda su flota. Puede agrupar por clúster, rack, dominio NVLink o proveedor para ver una visualización de la topología del estado del hardware durante el período de tiempo seleccionado. Por ejemplo, si agrupa por rack, cada mosaico representa un rack y cada cuadrado en el mosaico representa un servidor de ese rack. Haga clic en cualquier servidor para ver sus dispositivos GPU relacionados.
+
+La visualización está coloreada según la gravedad del error XID:
+- Rojo: XID crítico
+- Naranja: XID no crítico
+- Verde: En buen estado
+
+Con este código de colores, puede identificar si los problemas de hardware están aislados en un grupo en particular. Pase el cursor sobre un servidor para ver el código de error XID exacto.
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="Página Fleet Health agrupada por clúster, que muestra un mosaico por clúster con un cuadrado para cada servidor, coloreado según el estado de la GPU. Cada mosaico muestra la cantidad de servidores y GPU que tiene." style="width:90%;" >}}
 
 ## Cost & Utilization {#cost-utilization}
 
