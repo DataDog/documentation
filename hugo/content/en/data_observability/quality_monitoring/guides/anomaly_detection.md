@@ -117,7 +117,7 @@ Monitors that use the {{< ui >}}Anomalies{{< /ui >}} detection method send each 
 
 The reviewer analyzes the metric's history. It compares the flagged value with earlier periods of normal behavior in the same context, such as the same hour or day of the week. The review has one of the following outcomes:
 
-- If the reviewer finds earlier normal periods that match the flagged value's pattern and timing, it dismisses the point. The monitor widens the bounds at that point to include the observed value and doesn't alert.
+- If the reviewer finds earlier periods that match the flagged value's pattern and timing, it prevents the alert. The monitor widens the bounds at that point to include the observed value.
 - If the reviewer doesn't dismiss the point, the monitor alerts as usual. Later points in the same anomaly aren't reviewed again.
 - If the review doesn't run or doesn't finish, the point keeps its original bounds and the monitor alerts as usual. For example, this happens when the monitor has reached its daily review limit or the review times out. The review also doesn't run for organizations whose settings don't allow AI model providers, such as HIPAA-enabled organizations.
 
