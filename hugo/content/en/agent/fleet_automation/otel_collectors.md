@@ -123,7 +123,7 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 1. In Fleet Automation, open the [Configuration][10] tab.
 1. On the {{< ui >}}Configure OTel with YAML{{< /ui >}} card, click {{< ui >}}Configure{{< /ui >}}.
 
-   {{< img src="/agent/fleet_automation/fa-configure-otel-yaml.png" alt="Fleet Automation Configuration tab with the Configure OTel with YAML card highlighted among the agent configuration options." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa-configure-otel-yaml.png" alt="Fleet Automation Configuration tab with the Configure OTel with YAML card highlighted among the Agent configuration options." style="width:100%;" >}}
 
 1. Scope the configuration to the target Collectors. Filter by host information or tags to target a specific group.
 1. Update the target fields, or replace the entire YAML configuration.
