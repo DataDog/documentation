@@ -131,7 +131,6 @@ In the following settings, replace the model placeholder with the identifier you
 ```toml
 model = "<PROVIDER_SLUG>/<MODEL_ID>"
 model_provider = "datadog"
-web_search = "live"
 
 [model_providers.datadog]
 name = "Datadog AI Gateway"
@@ -153,7 +152,7 @@ model_catalog_json = "<ABSOLUTE_PATH_TO_CODEX_MODEL_CATALOG>"
 
 The catalog entry's `slug` must match `model`. An AI Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][applications-20].
 
-`web_search = "live"` lets Codex search the web with the `web_search` tool of each Responses request. OpenAI targets run the search natively. For Anthropic targets, API translation passes it on as Anthropic's web search, except on Amazon Bedrock, where the request fails. Other targets answer without searching. See [API translation](/ai_gateway/requests/#api-translation).
+By default, Codex adds a hosted `web_search` tool to each Responses request. OpenAI providers run the search, and API translation passes it to Anthropic providers as Anthropic's web search. For other providers, AI Gateway drops the tool and returns a `web_search_omitted` warning, and the model answers without searching. See [API translation](/ai_gateway/requests/#api-translation). To remove the tool from the model's tools altogether, add `web_search = "disabled"` before the first TOML table.
 
 For OpenAI models, Codex can instead send its searches to AI Gateway's standalone search endpoint. Add `supports_standalone_web_search = true` to the provider, and set `standalone_web_search = true` under `[features]`. Turn it on only when you use OpenAI models: Codex then stops sending the `web_search` tool, and AI Gateway doesn't send standalone searches to other providers. Codex marks standalone search as under development.
 
