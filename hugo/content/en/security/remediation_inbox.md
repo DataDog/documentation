@@ -49,7 +49,7 @@ A typical workflow in the Remediation Inbox:
 
 ## Prerequisites
 
-You need [Software Composition Analysis][3] (SCA) library vulnerability findings.
+You need SCA library vulnerability findings.
 
 You also need the [permissions][13] for the actions you take:
 
