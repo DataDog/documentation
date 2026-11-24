@@ -55,6 +55,8 @@ In the SAST, Secret Scanning, and IaC Security explorers on the [{{< ui >}}Code 
 - In the {{< ui >}}Risks{{< /ui >}} facet group, filter by each runtime risk that applies to the product, such as {{< ui >}}Service in Production{{< /ui >}} and {{< ui >}}Service Exposed to Attacks{{< /ui >}}.
 - Each finding shows risk badges under its title, such as {{< ui >}}Service In Production{{< /ui >}} or {{< ui >}}Exposed to attacks{{< /ui >}}. IaC Security findings show {{< ui >}}In production{{< /ui >}}. Hover over a badge to see what it means.
 
+{{< img src="code_security/runtime_context/explorer-risks-facets.png" alt="The Static Code Analysis explorer filtered to Service in Production and Service Exposed to Attacks in the Risks facet group, with the Exposed to attacks and Service In Production badges on each finding" style="width:100%;" >}}
+
 Findings with no runtime context never match a runtime risk filter. If a risk filter returns no results, clear it to see more findings.
 
 ### In the finding side panel
@@ -63,12 +65,18 @@ Findings with no runtime context never match a runtime risk filter. If a risk fi
 - **Risk badges**: The panel header shows the runtime risks that apply to the product.
 - **{{< ui >}}Severity Breakdown{{< /ui >}}**: The base score, followed by one sentence for each runtime risk, for example: "This vulnerability has associated service(s) running in a production environment."
 
+{{< img src="code_security/runtime_context/side-panel-related-to.png" alt="The Detected In and Related To sections of a finding side panel, with two related services" style="width:70%;" >}}
+
+{{< img src="code_security/runtime_context/side-panel-severity-breakdown.png" alt="The Severity Breakdown tab of a finding side panel, with the base score followed by one row for each runtime risk of the related services" style="width:100%;" >}}
+
 ### On the Summary page
 
 On the [{{< ui >}}Code Security Summary{{< /ui >}}][6] page:
 
 - In the {{< ui >}}Code vulnerabilities{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to see a funnel of SAST findings: {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In your services{{< /ui >}}, {{< ui >}}In Production{{< /ui >}}, and {{< ui >}}Exposed to Attacks{{< /ui >}}. Counts for {{< ui >}}Publicly Accessible{{< /ui >}}, {{< ui >}}Access to Sensitive Data{{< /ui >}}, and {{< ui >}}Privileged Access{{< /ui >}} appear below the funnel.
 - In the {{< ui >}}Code vulnerabilities grouped{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to group SAST findings by repository and team.
+
+{{< img src="code_security/runtime_context/summary-funnel.png" alt="The static code vulnerabilities funnel on the Code Security Summary page, with the Default branch, In your services, In Production, and Exposed to Attacks stages" style="width:100%;" >}}
 
 Click a funnel stage or a risk count to open the explorer filtered to those findings.
 
