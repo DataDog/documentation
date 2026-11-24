@@ -9827,7 +9827,7 @@ components:
         - AVAILABLE_TOOLS
         - GENERATION_SETTINGS
     AiGatewayModelAutomaticPricing:
-      description: The published models.dev price. Present only when it is the effective price.
+      description: The automatically synced published price. Present only when it is the effective price.
       properties:
         last_validated_at:
           description: Time the price was last revalidated against the source.
@@ -9988,10 +9988,6 @@ components:
           description: Model identifier in the source.
           example: gpt-5.2-codex
           type: string
-        name:
-          description: Pricing source name.
-          example: models.dev
-          type: string
         provider_id:
           description: Provider identifier in the source.
           example: openai
@@ -10001,7 +9997,6 @@ components:
           example: source-revision
           type: string
       required:
-        - name
         - provider_id
         - model_id
         - revision
@@ -10720,10 +10715,6 @@ components:
           description: Model identifier in the metadata source provider catalog.
           example: gpt-5.2-codex
           type: string
-        name:
-          description: Metadata source name.
-          example: models.dev
-          type: string
         observed_at:
           description: Last successful observation of this valid source record. Retained invalid entries keep their previous timestamp.
           format: date-time
@@ -10736,7 +10727,6 @@ components:
           description: SHA-256 content revision of the source snapshot that supplied this record.
           type: string
       required:
-        - name
         - provider
         - model_id
         - matched_by
@@ -10787,7 +10777,7 @@ components:
       description: Attributes of a model pricing resource.
       properties:
         authoritative:
-          description: True when models.dev pricing is authoritative for this organization and provider.
+          description: True when automatic pricing is authoritative for this organization and provider.
           example: true
           type: boolean
         automatic_pricing:
@@ -10931,16 +10921,16 @@ components:
     AiGatewayModelPricingEffectiveSource:
       description: Effective source of the model pricing data.
       enum:
+        - automatic
         - catalog_auto
         - model_override
-        - models_dev
         - unpriced
         - unknown
       type: string
       x-enum-varnames:
+        - AUTOMATIC
         - CATALOG_AUTO
         - MODEL_OVERRIDE
-        - MODELS_DEV
         - UNPRICED
         - UNKNOWN
     AiGatewayModelPricingRates:
@@ -123557,16 +123547,18 @@ components:
       type: object
     RemediationGroupAttributes:
       description: |-
-        Attributes of a remediation group. Each group includes one kind object, depending on its grouping definition.
+        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
+        depending on its grouping definition.
       properties:
         findings:
           $ref: "#/components/schemas/RemediationGroupFindings"
         grouping_definition_id:
-          description: Grouping definition that formed the group, such as `sca.package_update`.
+          description: |-
+            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
           example: sca.package_update
           type: string
-        owners:
-          $ref: "#/components/schemas/RemediationGroupOwners"
+        image_update:
+          $ref: "#/components/schemas/RemediationGroupImageUpdate"
         package_update:
           $ref: "#/components/schemas/RemediationGroupPackageUpdate"
         title:
@@ -123577,7 +123569,6 @@ components:
         - grouping_definition_id
         - title
         - findings
-        - owners
       type: object
     RemediationGroupCaseRelationship:
       description: Relationship to the case that tracks the group's remediation.
@@ -123626,10 +123617,12 @@ components:
       description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
       enum:
         - library_vulnerability
+        - host_and_container_vulnerability
       example: library_vulnerability
       type: string
       x-enum-varnames:
         - LIBRARY_VULNERABILITY
+        - HOST_AND_CONTAINER_VULNERABILITY
     RemediationGroupFindings:
       description: |-
         Counts of the group's open findings. The counts include every finding in the group, including findings that
@@ -123695,6 +123688,70 @@ components:
         - none
         - unknown
       type: object
+    RemediationGroupImageUpdate:
+      description: |-
+        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
+        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
+        them by `grouping_location`, `remediation_kind`, and `action`.
+      properties:
+        action:
+          description: |-
+            Name of the container image, base image, or package to upgrade. The value comes from the first of these
+            attributes that the findings have: `@remediation.container_image.latest_major.name`,
+            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
+          example: alpine
+          type: string
+        advisory_count:
+          description: Number of distinct values of `@advisory.id` across the group's findings.
+          example: 25
+          format: int64
+          type: integer
+        exploitable_cve_count:
+          description: |-
+            Number of distinct values of `@advisory.id` across the group's findings that have
+            `@risk.has_exploit_available` set to `true`.
+          example: 2
+          format: int64
+          type: integer
+        file_count:
+          description: Number of distinct values of `@code_location.filename` across the group's findings.
+          example: 1
+          format: int64
+          type: integer
+        grouping_location:
+          description: |-
+            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
+            the value is the findings' `@container_image.name`.
+          example: Dockerfile
+          type: string
+        location_is_filename:
+          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
+          example: true
+          type: boolean
+        remediation_kind:
+          description: |-
+            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
+            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
+            `package_update` otherwise.
+          example: image_update
+          type: string
+        target_version:
+          description: |-
+            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
+            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
+            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
+            or when the recommended versions can't be ordered.
+          example: 3.20.3
+          type: string
+      required:
+        - grouping_location
+        - location_is_filename
+        - remediation_kind
+        - action
+        - advisory_count
+        - exploitable_cve_count
+        - file_count
+      type: object
     RemediationGroupInclude:
       description: Related resource to add to `included`.
       enum:
@@ -123703,42 +123760,6 @@ components:
       type: string
       x-enum-varnames:
         - CASE
-    RemediationGroupOwnerList:
-      description: |-
-        Owners of the group's open findings. `items` lists at most 5 owners, the owners of the most findings first,
-        then by name. `total` counts every distinct owner, so the list is cut when `total` is larger than the number
-        of items.
-      properties:
-        items:
-          description: Owners of the most findings in the group, at most 5.
-          example:
-            - "@acme/payments"
-            - "@acme/platform"
-          items:
-            type: string
-          type: array
-        total:
-          description: Number of distinct owners across the group's findings.
-          example: 2
-          format: int64
-          type: integer
-      required:
-        - items
-        - total
-      type: object
-    RemediationGroupOwners:
-      description: |-
-        Who should fix the group: the code owners of the group's findings, from their `@git.codeowners` attribute,
-        and their Datadog teams, from their `team` tag. A group with no owners has empty `items` and a `total` of 0.
-      properties:
-        codeowners:
-          $ref: "#/components/schemas/RemediationGroupOwnerList"
-        teams:
-          $ref: "#/components/schemas/RemediationGroupOwnerList"
-      required:
-        - codeowners
-        - teams
-      type: object
     RemediationGroupPackageUpdate:
       description: |-
         A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
@@ -265468,14 +265489,15 @@ paths:
     get:
       description: |-
         Search the remediation groups of your organization. A remediation group gathers the open security findings
-        that one change fixes, such as updating a package in a repository.
+        that one change fixes, such as updating a package in a repository or upgrading an image.
 
         Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
         group returns:
 
-        | Grouping definition  | Finding type            | Kind object      |
-        | -------------------- | ----------------------- | ---------------- |
-        | `sca.package_update` | `library_vulnerability` | `package_update` |
+        | Grouping definition    | Finding type                       | Kind object      |
+        | ---------------------- | ---------------------------------- | ---------------- |
+        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
+        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
 
         Groups are computed from the attributes of security findings, described in the
         [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
@@ -265555,6 +265577,42 @@ paths:
           content:
             application/json:
               examples:
+                cloud_vm_group_without_case:
+                  summary: A host and container vulnerability group with no case yet
+                  value:
+                    data:
+                      - attributes:
+                          findings:
+                            by_severity:
+                              critical: 1
+                              high: 9
+                              info: 0
+                              low: 10
+                              medium: 20
+                              none: 0
+                              unknown: 0
+                            total: 40
+                          grouping_definition_id: cloudvm.image_update
+                          image_update:
+                            action: alpine
+                            advisory_count: 25
+                            exploitable_cve_count: 2
+                            file_count: 1
+                            grouping_location: Dockerfile
+                            location_is_filename: true
+                            remediation_kind: image_update
+                            target_version: 3.20.3
+                          title: Upgrade alpine to 3.20.3
+                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
+                        relationships:
+                          case:
+                            data:
+                        type: remediation_groups
+                    meta:
+                      page:
+                        number: 1
+                        size: 50
+                        total_filtered_count: 134
                 default:
                   summary: A library vulnerability group with a case, with include=case
                   value:
@@ -265571,16 +265629,6 @@ paths:
                               unknown: 0
                             total: 12
                           grouping_definition_id: sca.package_update
-                          owners:
-                            codeowners:
-                              items:
-                                - "@acme/payments"
-                                - "@acme/platform"
-                              total: 2
-                            teams:
-                              items:
-                                - payments
-                              total: 1
                           package_update:
                             advisory_count: 3
                             ecosystem: npm
