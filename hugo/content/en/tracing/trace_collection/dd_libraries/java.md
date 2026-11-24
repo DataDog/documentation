@@ -34,7 +34,7 @@ For a full list of Datadog's Java version and framework support (including legac
 
 ## Getting started
 
-<div class="alert alert-tip">Datadog recommends <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), which installs and loads the Java SDK without changes to your application code. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
+<div class="alert alert-tip">Datadog recommends <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), which installs the Java SDK and manages its version from your Datadog Agent configuration, without changes to your application code. Use the manual setup on this page if <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI doesn't support your environment</a> or you need to manage the SDK in your application code.</div>
 
 Before you begin, make sure you've already [installed and configured the Agent][18].
 
