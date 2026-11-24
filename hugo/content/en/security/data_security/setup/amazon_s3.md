@@ -31,7 +31,7 @@ Choose where the scanners run:
 | | Scanners in your AWS account | Datadog-hosted scanners |
 |---|---|---|
 | **What runs where** | EC2 instances that you deploy in your AWS account | A disposable sandbox in Datadog's infrastructure. Nothing to deploy in your account. |
-| **Does scanned data leave your AWS account?** | No | Yes. The scanner reads the files from Datadog's infrastructure. Datadog stores only the match metadata. |
+| **Does scanned data leave your AWS account?** | No | Yes. The scanner reads the files from Datadog's infrastructure. It holds the rows in memory only during the scan and stores only the match metadata. |
 | **Cloud provider cost** | Compute and networking costs appear on your AWS bill. | No scanner instances run in your account. |
 
 Data Security scans CSV, JSON, Parquet, plain text, and ZIP files. It skips images, binary files, and other formats.
