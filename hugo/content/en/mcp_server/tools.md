@@ -851,7 +851,7 @@ Code executed by this toolset runs against your Datadog APIs using your own user
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes read-only JavaScript authored by an AI agent in a Datadog-managed sandbox. The code receives a `dd.*` namespace for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs. It returns a structured value to the agent. Combining queries in one script reduces tool calls for investigations and data exploration.
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with read-only access to Datadog APIs. The code receives a `dd.*` namespace for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs. It returns a structured value to the agent. Combining queries in one script reduces tool calls for investigations and data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
