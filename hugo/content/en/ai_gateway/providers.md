@@ -7,6 +7,10 @@ further_reading:
     text: "AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 An AI Gateway provider connects a Datadog integration account to a set of models. Applications call those models with Datadog credentials instead of receiving the upstream provider's credentials.
 
 Create separate providers when workloads need different upstream accounts, regions, or access policies. Give each provider a stable slug: callers include that slug in the model identifier.

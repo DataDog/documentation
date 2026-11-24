@@ -7,6 +7,10 @@ further_reading:
     text: "AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
 
 ## Set budgets

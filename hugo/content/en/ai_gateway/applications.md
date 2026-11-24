@@ -10,6 +10,10 @@ further_reading:
     text: "Trajectory"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 Connect coding agents and your own applications to AI Gateway. For Claude Code and Codex, use [Trajectory](#connect-claude-code-and-codex-with-trajectory): it configures the agent and signs you in to Datadog, with no access token to manage. For other clients, and for applications built with an SDK, see [Configure clients manually](#configure-clients-manually) and [Connect applications with SDKs](#connect-applications-with-sdks).
 
 Before you begin, complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule. Review the [data capture setting][applications-6] before sending sensitive content.
@@ -86,12 +90,13 @@ To connect Claude Code for every session, add the AI Gateway settings to the `en
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
     "ANTHROPIC_DEFAULT_FABLE_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION": "<PROVIDER_SLUG>/<MODEL_ID>",
     "ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code"
   }
 }
 ```
 
-Set each model variable to an approved AI Gateway model or routing rule. Claude Code uses the Sonnet, Opus, Haiku, and Fable aliases for subagents and background tasks, so a request through an unmapped alias reaches AI Gateway without a provider prefix and fails with `model_not_found`. This file holds your token, so keep it out of shared project settings and source control. Make sure `ANTHROPIC_API_KEY` isn't set in your shell, because Claude Code can use it instead of the AI Gateway token.
+Set each model variable to an approved AI Gateway model or routing rule. Claude Code uses the Sonnet, Opus, Haiku, and Fable aliases for subagents and background tasks, so a request through an unmapped alias reaches AI Gateway without a provider prefix and fails with `model_not_found`. `ANTHROPIC_CUSTOM_MODEL_OPTION` adds the model to the `/model` picker. This file holds your token, so keep it out of shared project settings and source control. Make sure `ANTHROPIC_API_KEY` isn't set in your shell, because Claude Code can use it instead of the AI Gateway token.
 
 To try AI Gateway in one terminal instead, export the settings and start Claude Code:
 

@@ -7,6 +7,10 @@ further_reading:
     text: "AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
 
 Access policies control who can call each model and routing rule. A policy lists providers, models, routing rules, or a combination of them, and the users, [Datadog teams][13], and service accounts who can use them.

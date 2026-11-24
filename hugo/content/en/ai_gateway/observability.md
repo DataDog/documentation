@@ -7,6 +7,10 @@ further_reading:
     text: "AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 <!-- vale Datadog.words_case_insensitive = NO -->
 
 The [{{< ui >}}Overview{{< /ui >}}][3] page has two tabs for the selected time range:

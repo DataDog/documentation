@@ -7,6 +7,10 @@ further_reading:
     text: "AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 ## 401 or 403 responses
 
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.

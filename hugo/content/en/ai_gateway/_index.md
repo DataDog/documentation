@@ -18,6 +18,10 @@ further_reading:
     text: "Get Started with AI Gateway"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
+{{< /callout >}}
+
 Datadog's AI Gateway lets you govern how your organization uses large language models (LLMs) by routing agent and application traffic through a single endpoint. Because every request passes through one control point, you can:
 
 - Call models from multiple providers through one endpoint and one set of Datadog credentials
