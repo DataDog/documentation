@@ -830,7 +830,7 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Cloud Resources
 
-Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure with [Cloudcraft][108]. Resource lookup uses the [Resource Catalog][86] and covers AWS, Azure, Google Cloud, and OCI.
+Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure with [Cloudcraft][108]. Resource lookup uses the [Resource Catalog][86] and covers AWS, Azure, Google Cloud, and OCI. Diagrams cover AWS, Azure, Google Cloud, OCI, vSphere, Nutanix, and network devices.
 
 <div class="alert alert-info">Tools marked <em>Preview</em> are available only when you request <code>cloud-resources</code> by name. Preview tools are not included in <code>toolsets=all</code>.</div>
 
@@ -848,7 +848,7 @@ Gets the configuration and metadata that Datadog records for a single cloud reso
 ### `get_cloud_infrastructure_diagram_scope`
 *Toolset: **cloud-resources** (Preview)*\
 *Permissions Required: `Cloudcraft Read`*\
-Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. Also takes highlights, stories, an overlay, or a design when determining the scope. The diagram is shown in your conversation, with a link to open it in [Cloudcraft][108].
+Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. Also takes highlights, stories, an overlay, or a design when determining the scope. The diagram is shown in your conversation, with a link to open diagrams of your infrastructure in [Cloudcraft][108]. To show the diagram in your conversation, also enable the `visualizations` toolset (in clients that support MCP Apps).
 
 - Diagram AWS account 123456789012.
 - Walk me through how traffic reaches the checkout service in prod.
@@ -858,8 +858,8 @@ Gets the scope of an interactive architecture diagram: accounts, regions, resour
 
 ### `get_cloud_infrastructure_overlay_data`
 *Toolset: **cloud-resources** (Preview)*\
-*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (`Cloud Cost Management Read`, `Monitors Read`, `Security Monitoring Findings Read`, or `Hosts Read`)*\
-Finds the resources that have overlay data within a diagram's scope: cost savings and monthly cost, monitor states, security findings, or changes in a time window, including deleted resources. Use the results to choose which resources to highlight or walk through in a diagram.
+*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (`Cloud Cost Management Read`; `Monitors Read`; `Security Monitoring Findings Read` or `Data Scanner Read` for security findings; or `Hosts Read`)*\
+Finds the resources that have overlay data within a diagram's scope: cost savings and monthly cost, monitor states, security findings, or changes in a time window, including deleted resources. Use the results to choose which resources to highlight or walk through in a diagram. Available for AWS.
 
 - What are the top 3 cost savings opportunities in account prod-main? Show them on the diagram.
 - Which resources in us-east-1 have alerting monitors?
