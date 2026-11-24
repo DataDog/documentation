@@ -4,9 +4,9 @@ further_reading:
     - link: 'profiler/enabling/full_host'
       tag: 'Documentation'
       text: 'Enabling the Full-Host Profiler'
-    - link: 'profiler/enabling/full_host_deployment'
-      tag: 'Documentation'
-      text: 'Deploying the Full-Host Profiler'
+    - link: 'https://github.com/DataDog/datadog-agent/tree/main/cmd/host-profiler/deploy'
+      tag: 'Source Code'
+      text: 'Full-Host Profiler deployment instructions'
 ---
 
 Use this page to diagnose common Full-Host Profiler issues, such as pods that don't start, profiles that don't appear in Datadog, and function names that are missing. The steps cover both the Datadog Agent and OpenTelemetry deployment paths.
@@ -58,7 +58,7 @@ Common causes:
   A value greater than `0` means the encoded key is present.
 
 - **Cluster security policy**: Host-wide eBPF profiling requires host-level access, including `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. If your cluster uses Pod Security Admission, OPA Gatekeeper, Kyverno, or another admission controller, make sure it allows the settings from the deployment path you're using. The Full-Host Profiler doesn't run as a privileged container.
-- **SELinux profile errors**: The deployment examples use the `spc_t` SELinux type. If that type isn't available in your environment, replace it with an equivalent type supported by your distribution and security policy. See [Deploying the Full-Host Profiler][1] for the `seLinuxOptions` setting for your deployment path. The replacement must allow the host and process access the Full-Host Profiler requires.
+- **SELinux profile errors**: The deployment examples use the `spc_t` SELinux type. If that type isn't available in your environment, replace it with an equivalent type supported by your distribution and security policy. See [Full-Host Profiler deployment instructions][1] for the `seLinuxOptions` setting for your deployment path. The replacement must allow the host and process access the Full-Host Profiler requires.
 - **Seccomp or AppArmor profile errors**: In the OpenTelemetry deployment paths, an init container installs the seccomp profile automatically. If the pod is stuck in init, inspect the init container logs. In the Datadog Operator preview path, seccomp is optional and must be provisioned manually if you enable it. AppArmor is optional; if you enable it, make sure the profile is loaded on every node where the Full-Host Profiler can run.
 - **Unsupported environment**: This preview requires Kubernetes nodes that support host-level DaemonSets. Serverless, virtual-node, and restricted-node environments aren't supported. See [Supported environments][2].
 
@@ -94,7 +94,7 @@ The Full-Host Profiler uploads debug symbols to Datadog when they are available 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/enabling/full_host_deployment/
+[1]: https://github.com/DataDog/datadog-agent/tree/main/cmd/host-profiler/deploy
 [2]: /profiler/enabling/full_host/#supported-environments
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/site/
