@@ -1594,6 +1594,11 @@ menu:
       identifier: bits_ai_agent_builder_improve_with_traces
       parent: bits_ai_agent_builder
       weight: 101
+    - name: Bits Autonomous Operations
+      url: bits_ai/bits_autonomous_operations
+      identifier: bits_ai_autonomous_operations
+      parent: bits_ai
+      weight: 1
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
@@ -1604,6 +1609,11 @@ menu:
       identifier: bits_ai_bits_chat_usage
       parent: bits_ai_bits_chat
       weight: 201
+    - name: Bits CLI
+      url: bits_ai/bits_chat/bits_cli
+      identifier: bits_ai_bits_chat_bits_cli
+      parent: bits_ai_bits_chat
+      weight: 202
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
@@ -1709,6 +1719,11 @@ menu:
       identifier: bits_ai_skills_library
       parent: bits_ai
       weight: 12
+    - name: Bits AI Settings
+      url: bits_ai/bits_settings
+      identifier: bits_ai_settings
+      parent: bits_ai
+      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2989,6 +3004,11 @@ menu:
       parent: oncall_integrations
       identifier: oncall_integrations_servicenow
       weight: 801
+    - name: Jira
+      url: incident_response/on-call/integrations/jira/
+      parent: oncall_integrations
+      identifier: oncall_integrations_jira
+      weight: 802
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
@@ -4294,21 +4314,26 @@ menu:
       parent: network_path
       identifier: network_path_as_view
       weight: 505
+    - name: On-Demand Tests
+      url: network_monitoring/network_path/on_demand_tests/
+      parent: network_path
+      identifier: network_path_on_demand_tests
+      weight: 506
     - name: Monitors
       url: monitors/types/network_path/
       parent: network_path
       identifier: network_path_monitor
-      weight: 506
+      weight: 507
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 507
+      weight: 508
     - name: Terms and Concepts
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 508
+      weight: 509
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -7171,16 +7196,21 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_network_traffic
       weight: 109
+    - name: Version History
+      url: observability_pipelines/configuration/version_history/
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_version_history
+      weight: 110
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 110
+      weight: 111
     - name: Manage Pipelines with AI Agents
       url: observability_pipelines/configuration/manage_pipelines_with_ai_agents/
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_manage_pipelines_with_ai_agents
-      weight: 111
+      weight: 112
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -7596,16 +7626,21 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_replay
       weight: 6
+    - name: Log Anomaly Detection
+      url: observability_pipelines/log_anomaly_detection/
+      parent: observability_pipelines
+      identifier: observability_pipelines_log_anomaly_detection
+      weight: 7
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
       identifier: observability_pipelines_logs_search_syntax
-      weight: 7
+      weight: 8
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 8
+      weight: 9
     - name: Buffering and Backpressure
       url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
@@ -7620,7 +7655,7 @@ menu:
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 9
+      weight: 10
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
@@ -7645,7 +7680,7 @@ menu:
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 10
+      weight: 11
     - name: Upgrade Worker Guide
       url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
@@ -8777,6 +8812,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail
       weight: 104
+    - name: Link Images to Dockerfiles
+      url: security/cloud_security_management/setup/dockerfile_labels
+      parent: csm_setup
+      identifier: csm_setup_dockerfile_labels
+      weight: 105
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
@@ -9129,6 +9169,11 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
     - name: Manage Policies
       url: /security/ai_guard/policies/
       identifier: ai_guard_policies

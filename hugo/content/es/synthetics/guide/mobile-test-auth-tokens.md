@@ -22,7 +22,7 @@ El flujo tiene tres partes:
 
 1. Una [prueba de API][2] inicia sesión en su proveedor de autenticación según un horario y extrae un token de acceso.
 2. Una [variable global][3] que tiene como fuente esa prueba contiene el valor del token.
-3. Su prueba de aplicación móvil pasa la variable global a la aplicación como un argumento de inicio o un extra de intent. Su aplicación lo lee al iniciarse y omite su flujo de inicio de sesión normal.
+3. La prueba de su aplicación móvil pasa la variable global a la aplicación al iniciar, como un extra del intent en Android o una variable de entorno en iOS. Su aplicación lo lee al iniciarse y omite su flujo de inicio de sesión normal.
 
 Debido a que la prueba de API actualiza el token según un horario, el valor de la variable global se actualiza por sí solo, sin ningún trabajo manual ni llamadas a la API de Datadog.
 
@@ -116,9 +116,7 @@ Respalde `SecureTokenStore` con `EncryptedSharedPreferences` y un `MasterKey`, e
 
 {{< code-block lang="swift" >}}
 #if AUTOMATION
-if let index = ProcessInfo.processInfo.arguments.firstIndex(of: "-auth_token"),
-   index + 1 < ProcessInfo.processInfo.arguments.count {
-    let authToken = ProcessInfo.processInfo.arguments[index + 1]
+if let authToken = ProcessInfo.processInfo.environment["auth_token"] {
     KeychainManager.shared.save(token: authToken)
     SessionManager.shared.restoreSession(with: authToken)
 }
@@ -129,6 +127,8 @@ Almacene el token en el Keychain en lugar de `UserDefaults`, para que esté prot
 
 {{% /tab %}}
 {{% tab "React Native" %}}
+
+<div class="alert alert-info">Este ejemplo funciona solo en Android. <code>react-native-launch-arguments</code> lee los extras del intent en Android, pero en iOS solo lee los argumentos de inicio, y Datadog pasa los valores como variables de entorno. Para obtener el token en iOS, léalo desde <code>ProcessInfo.processInfo.environment</code> en código nativo, como en el ejemplo de iOS (Swift), y páselo a JavaScript.</div>
 
 {{< code-block lang="javascript" >}}
 import { LaunchArguments } from 'react-native-launch-arguments';
@@ -143,7 +143,7 @@ if (__DEV__ || Config.AUTOMATION) {
 }
 {{< /code-block >}}
 
-`react-native-launch-arguments` lee los argumentos de proceso en iOS y los extras de intent en Android a través de una API. `react-native-keychain` almacena el token en el Keychain o Keystore de la plataforma en lugar de `AsyncStorage`.
+`react-native-keychain` almacena el token en el Keychain o Keystore de la plataforma en lugar de `AsyncStorage`.
 
 {{% /tab %}}
 {{< /tabs >}}

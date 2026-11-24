@@ -17,3 +17,11 @@ entries:
       - GetAllCaseTypes
       - UpdateCaseType
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/42008
+    operations:
+      - CreateCaseType
+      - DeleteCaseType
+      - GetAllCaseTypes
+    title: Fix Work Management API permission metadata
