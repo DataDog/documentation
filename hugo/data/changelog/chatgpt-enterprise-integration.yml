@@ -29,3 +29,11 @@ entries:
       - ListChatGPTEnterpriseIntegrationAccounts
       - UpdateChatGPTEnterpriseIntegrationAccount
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42082
+    operations:
+      - CreateChatGPTEnterpriseIntegrationAccount
+      - UpdateChatGPTEnterpriseIntegrationAccount
+    title: Improve token descriptions for Claude Compliance, ChatGPT Enterprise,
+      and OpenAI Codex

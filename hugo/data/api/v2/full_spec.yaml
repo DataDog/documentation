@@ -26614,7 +26614,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26647,7 +26648,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26944,7 +26946,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -26977,7 +26980,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -110045,7 +110049,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -110078,7 +110083,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
