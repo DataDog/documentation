@@ -188,6 +188,8 @@ spec:
 
 Replace `<CLUSTER_NAME>` with your cluster's name.
 
+This configuration sends telemetry with the Datadog Exporter, which Datadog recommends for the DDOT Collector. To keep an existing OTLP HTTP pipeline, see [Migrate to the DDOT Collector](/opentelemetry/migrate/upstream_to_ddot_collector/).
+
 2. Add an OTLP receiver, the Datadog Connector, and the cluster-name processor, and define a pipeline for each signal. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node.
 
 The Datadog Connector computes APM trace metrics from your traces. Datadog needs these metrics to show your service's requests, errors, and latency. The `resource/add-cluster-name` processor adds `k8s.cluster.name` to all telemetry, which Datadog maps to the `kube_cluster_name` tag.
@@ -557,6 +559,8 @@ extraEnvs:
   - name: DD_HOSTNAME
     value: $(OTEL_K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
 {{< /code-block >}}
+
+This configuration sends telemetry with the Datadog Exporter, which Datadog recommends for the DDOT Collector. To keep an existing OTLP HTTP pipeline, see [Migrate to the DDOT Collector](/opentelemetry/migrate/upstream_to_ddot_collector/).
 
 Replace `<CLUSTER_NAME>` with your cluster's name.
 

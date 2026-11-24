@@ -48,6 +48,8 @@ export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 
 The installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. Datadog recommends running the Datadog Agent alongside DDOT for the Datadog-specific capabilities of DDOT SDKs, such as Live Debugger, Dynamic Instrumentation, and remotely configured sampling. The Datadog Agent acts mainly as a Remote Configuration proxy: your traces, metrics, and logs still go over OTLP to the Collector. See [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To skip the Datadog Agent, also set `DD_AGENT_ENABLED=false`. Without it, those capabilities aren't available.
 
+To also install the [Full-Host Profiler](/profiler/enabling/full_host/) (Preview), set `DD_HOST_PROFILER_ENABLED=true`. It requires Linux nodes with kernel 5.10 or later and Kubernetes 1.30 or later.
+
 {{% /tab %}}
 {{% tab "Upstream" %}}
 

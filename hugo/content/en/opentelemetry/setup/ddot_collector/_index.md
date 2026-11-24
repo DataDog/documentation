@@ -40,6 +40,8 @@ The Datadog OpenTelemetry (DDOT) Collector is Datadog's version of the OpenTelem
 - **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
 - **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
 
+The DDOT Collector sends telemetry with the Datadog Exporter, which compresses data and reduces egress. Pipelines that use the OTLP HTTP exporter also work.
+
 Datadog recommends running the Datadog Agent alongside the Collector for the Datadog-specific capabilities of DDOT SDKs and for Datadog Agent-based features, such as Cloud Network Monitoring. Traces, metrics, and logs still go over OTLP to the Collector. See [Feature Compatibility][77]. For the OpenTelemetry Collector that runs alongside the Datadog Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
