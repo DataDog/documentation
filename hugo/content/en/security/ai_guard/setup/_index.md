@@ -7,9 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/"
   tag: "Blog"
   text: "Detect when your AI agent copies a self-replicating prompt injection"
-- link: "https://www.datadoghq.com/blog/runtime-security-for-ai-agents/"
-  tag: "Blog"
-  text: "Agents make decisions at runtime—your security controls should too"
 ---
 
 {{< site-region region="gov,gov2" >}}

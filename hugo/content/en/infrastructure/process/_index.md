@@ -22,9 +22,6 @@ further_reading:
     - link: https://www.datadoghq.com/blog/watchdog-live-processes/
       tag: 'Blog'
       text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
-    - link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
-      tag: "Blog"
-      text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 
