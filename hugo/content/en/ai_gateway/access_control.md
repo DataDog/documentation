@@ -21,6 +21,24 @@ A caller can use models included in the default policy. For other models, they n
 
 AI Gateway denies access if no policy grants it.
 
+## Permissions
+
+Datadog role permissions control who can send requests to AI Gateway and who can view and change its configuration. Access policies then control which models and routing rules each caller can use.
+
+| Permission | Allows | Default role |
+|---|---|---|
+| AI Gateway Usage (`ai_gateway_usage`) | Send requests to AI Gateway. | Datadog Standard Role |
+| AI Gateway Config Read (`ai_gateway_config_read`) | View AI Gateway configuration, such as providers, routing rules, policies, budgets, and rate limits. | Datadog Admin Role |
+| AI Gateway Config Write (`ai_gateway_config_write`) | Create, edit, and delete AI Gateway configuration. | Datadog Admin Role |
+
+- AI Gateway rejects requests from callers without `ai_gateway_usage` before it evaluates access policies.
+- `ai_gateway_usage` does not grant access to any model. A caller can use a model or routing rule only when the default policy or an access policy includes it. If neither does, AI Gateway denies the request.
+- Users without `ai_gateway_config_read` cannot see AI Gateway configuration in Datadog.
+
+Because every user with the Datadog Standard Role has `ai_gateway_usage`, every resource in the default policy is available to all of them. To limit model use to specific users, teams, or service accounts, leave those resources out of the default policy and grant access through access policies.
+
+For all Datadog permissions, see [Datadog Role Permissions][14].
+
 ## Default policy
 
 The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It grants everyone in your organization access to the selected resources.
@@ -202,6 +220,7 @@ If a request unexpectedly succeeds, review every applicable access policy and th
 
 [8]: https://app.datadoghq.com/llm/gateway/access
 [13]: /account_management/teams/manage/
+[14]: /account_management/rbac/permissions/#agent-observability
 
 [reasoning-1]: /ai_gateway/getting_started/
 [reasoning-2]: https://app.datadoghq.com/llm/gateway/access

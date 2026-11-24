@@ -1,6 +1,17 @@
 {{ $permission_group := .group }}
 {{ $permissions_data := .data }}
 
+{{/* Append rows from data/rbac_supplemental_permissions.yaml that the generated data does not list yet. */}}
+{{ with and $permissions_data (index (site.Data.rbac_supplemental_permissions | default dict) $permission_group) }}
+  {{ $listed := slice }}
+  {{ range $permissions_data }}{{ with .attributes.name }}{{ $listed = $listed | append . }}{{ end }}{{ end }}
+  {{ range . }}
+    {{ if not (in $listed .attributes.name) }}
+      {{ $permissions_data = $permissions_data | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{ if ne $permissions_data nil }}
   <table>
     <thead>
