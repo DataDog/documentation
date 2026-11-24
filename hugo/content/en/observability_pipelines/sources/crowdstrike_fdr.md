@@ -40,7 +40,7 @@ The rest of this page covers the CrowdStrike hosted storage bucket. For a custom
 
 To use Observability Pipelines' CrowdStrike FDR source, you need an FDR feed that uses a CrowdStrike hosted storage bucket. The source authenticates with the feed's client ID and secret. Because CrowdStrike manages the bucket and queue, assuming an IAM role is not supported.
 
-To create the feed, follow CrowdStrike's [Create a feed][2] instructions with these settings:
+To create the feed, follow CrowdStrike's [Create an FDR feed][2] instructions with these settings:
 
 - For {{< ui >}}Storage{{< /ui >}}, choose {{< ui >}}CrowdStrike hosted storage bucket{{< /ui >}} then select the events to include in the feed.
 - On the {{< ui >}}Copy feed credentials{{< /ui >}} page, copy the values in the following table. You need them when you set up the source.
