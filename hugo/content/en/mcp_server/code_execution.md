@@ -100,7 +100,9 @@ Before retrying a script:
 
 For sensitive changes, ask the agent to show its plan before writing. Use narrowly scoped prompts, and request a compact result with affected resource IDs and completed actions.
 
-## Write examples
+## Example prompts
+
+The following prompts use `execute_code_write` to change Datadog resources:
 
 - Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
 - Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
