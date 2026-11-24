@@ -22,9 +22,9 @@ otel_api_support_signal_options:
 # lists only the destinations that pair with that SDK.
 
 otel_compatibility_sdk_options:
-  - id: opentelemetry_sdk
-    default: true
   - id: ddot_sdk
+    default: true
+  - id: upstream_otel_sdk
   - id: datadog_sdk
 
 otel_compatibility_ddot_sdk_destination_options:
@@ -36,9 +36,9 @@ otel_compatibility_datadog_sdk_destination_options:
   - id: agents_collector
     default: true
 
-otel_compatibility_opentelemetry_sdk_destination_options:
+otel_compatibility_upstream_otel_sdk_destination_options:
+  - id: ddot_collector
   - id: upstream_otel_collector
     default: true
   - id: agents_collector
   - id: direct_otlp_ingest
-  - id: ddot_collector

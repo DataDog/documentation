@@ -598,7 +598,7 @@ options:
   id: datadog_sdk
 
 - label: Upstream OpenTelemetry SDK
-  id: opentelemetry_sdk
+  id: upstream_otel_sdk
 
 - label: DDOT Collector
   id: ddot_collector

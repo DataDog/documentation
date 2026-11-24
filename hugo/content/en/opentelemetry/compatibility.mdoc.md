@@ -37,43 +37,43 @@ Use this page to check which Datadog products and features each OpenTelemetry (O
 [DDOT SDKs][1] export OTLP telemetry through the [upstream OpenTelemetry Collector][55] to Datadog. Run the Datadog Agent alongside the Collector to enable features marked **With Agent**.
 
 {% /if %}
-{% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "ddot_collector")) %}
+{% if and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "ddot_collector")) %}
 
 ### Upstream OpenTelemetry SDK + DDOT Collector
 
 [Upstream OpenTelemetry SDKs][57] export OTLP telemetry through the [DDOT Collector][54] to Datadog. Run the Datadog Agent alongside the Collector to enable features marked **With Agent**. See [Add the Datadog Agent][27].
 
 {% /if %}
-{% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "upstream_otel_collector")) %}
+{% if and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "upstream_otel_collector")) %}
 
 ### Upstream OpenTelemetry SDK + Upstream OpenTelemetry Collector
 
 [Upstream OpenTelemetry SDKs][57] export OTLP telemetry through the [upstream OpenTelemetry Collector][55] to Datadog.
 
 {% /if %}
-{% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "agents_collector")) %}
+{% if and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "agents_collector")) %}
 
 ### Upstream OpenTelemetry SDK + Agent's Collector
 
 [Upstream OpenTelemetry SDKs][57] export OTLP telemetry to the [Agent's Collector][3], which runs alongside the Datadog Agent.
 
 {% /if %}
-{% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "direct_otlp_ingest")) %}
+{% if and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "direct_otlp_ingest")) %}
 
 ### Upstream OpenTelemetry SDK + Direct OTLP Ingest
 
-[Upstream OpenTelemetry SDKs][57] export OTLP telemetry directly to the [Datadog OTLP intake endpoint][56], without a Collector or Agent.
+[Upstream OpenTelemetry SDKs][57] export OTLP telemetry directly to the [Datadog OTLP intake endpoint][56], without a Collector or the Datadog Agent.
 
 {% /if %}
 {% if and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector")) %}
 
 ### Datadog SDK + Agent's Collector
 
-[Datadog SDKs][9] support both Datadog and [OpenTelemetry APIs][58] and send telemetry to the Datadog Agent. The [Agent's Collector][3] runs alongside the Agent for OpenTelemetry Collector pipelines.
+[Datadog SDKs][9] support both Datadog and [OpenTelemetry APIs][58] and send telemetry to the Datadog Agent. The [Agent's Collector][3] runs alongside the Datadog Agent for OpenTelemetry Collector pipelines.
 
 {% /if %}
 
-{% if or(equals($otel_sdk, "ddot_sdk"), and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "ddot_collector"))) %}
+{% if or(equals($otel_sdk, "ddot_sdk"), and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "ddot_collector"))) %}
 {% alert level="info" %}
 This setup is in Preview.
 {% /alert %}
@@ -105,76 +105,76 @@ point the frontmatter at them, and update each row.
 ---
 - [Cloud SIEM][7]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Correlated Traces, Metrics, Logs][8]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
 ---
 - [Distributed Tracing][9]
 -
-  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
 ---
 - [Agent Observability][10]
 -
-  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
 ---
 - [Runtime Metrics][11]
 -
-  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["ddot_sdk", "datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
 ---
 - [Span Links][12]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector", "direct_otlp_ingest"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
 ---
 - [Trace Metrics][13]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
   {% if equals($otel_destination, "direct_otlp_ingest") %}{% x/ %} ({% tooltip contents="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." %}Sampled{% /tooltip %}){% /if %}
 ---
 - [Infrastructure Host List][14]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
 ---
 - [Kubernetes Monitoring][15]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Source Code Integration][16]
 -
-  {% if or(and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
+  {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector"))) %}{% x/ %}{% /if %}
 ---
 - [Database Monitoring][17] (DBM)
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(equals($otel_sdk, "opentelemetry_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %} ({% tooltip contents="Doesn't include SQL query-level monitoring, which needs a DDOT SDK." %}Partial{% /tooltip %}){% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "upstream_otel_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %} ({% tooltip contents="Doesn't include SQL query-level monitoring, which needs a DDOT SDK." %}Partial{% /tooltip %}){% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Datadog Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Datadog Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Cloud Network Monitoring][18] (CNM)
 -
-  {% if and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(includes($otel_sdk, ["opentelemetry_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["upstream_otel_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Live Container Monitoring][19]
 -
-  {% if and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(includes($otel_sdk, ["opentelemetry_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["upstream_otel_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Live Processes][20]
 -
-  {% if and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(includes($otel_sdk, ["opentelemetry_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["upstream_otel_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Universal Service Monitoring][21] (USM)
 -
-  {% if and(includes($otel_sdk, ["datadog_sdk", "opentelemetry_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(includes($otel_sdk, ["opentelemetry_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
+  {% if and(includes($otel_sdk, ["upstream_otel_sdk", "ddot_sdk"]), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the DDOT Collector." %}With Agent{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Works when you also run the Datadog Agent alongside the upstream OpenTelemetry Collector." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [App and API Protection][22] (AAP)
@@ -199,8 +199,8 @@ point the frontmatter at them, and update each row.
 - [Data Streams Monitoring][25] (DSM)
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), equals($otel_destination, "agents_collector")) %}{% x/ %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
-  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Datadog Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your message brokers. The Datadog Agent can run on your broker hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Dynamic Instrumentation][49]
 -
@@ -233,19 +233,22 @@ point the frontmatter at them, and update each row.
   {% if equals($otel_destination, "agents_collector") %}{% tooltip contents="This feature is in Preview." %}Preview{% /tooltip %}{% /if %}
 {% /table %}
 
+<!-- Shown only for DDOT SDKs. -->
+{% if equals($otel_sdk, "ddot_sdk") %}
 ## DDOT SDK setups {% #ddot-sdk-setups %}
 
 DDOT SDKs export traces, metrics, and logs over standard OTLP. These signals don't need the Datadog Agent, and you can also send them to other OTLP-compatible backends. Availability varies by language and SDK version. See [DDOT SDKs][1].
 
 Datadog recommends that you run the Datadog Agent with DDOT SDKs. Features marked **With Agent** need it:
 
-- **Remote Configuration**: For [Dynamic Instrumentation][49], [Live Debugger][51], and [remotely configured head sampling][52], the Agent proxies Remote Configuration. With an upstream OpenTelemetry Collector, [App and API Protection][22] and [Feature Flags][50] also need it. The Agent doesn't change how your OTLP telemetry flows.
-- **Host data**: For [Cloud Network Monitoring][18], [Live Container Monitoring][19], [Live Processes][20], and [Universal Service Monitoring][21], the Agent collects data from the host.
-- **Database and broker monitoring**: For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application while the Agent monitors the database or message broker. You can run the Agent on those hosts instead of alongside your applications.
+- **Remote Configuration**: For [Dynamic Instrumentation][49], [Live Debugger][51], and [remotely configured head sampling][52], the Datadog Agent proxies Remote Configuration. With an upstream OpenTelemetry Collector, [App and API Protection][22] and [Feature Flags][50] also need it. The Datadog Agent doesn't change how your OTLP telemetry flows.
+- **Host data**: For [Cloud Network Monitoring][18], [Live Container Monitoring][19], [Live Processes][20], and [Universal Service Monitoring][21], the Datadog Agent collects data from the host.
+- **Database and broker monitoring**: For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application while the Datadog Agent monitors the database or message broker. You can run the Datadog Agent on those hosts instead of alongside your applications.
+{% /if %}
 
 ## API support
 
-DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces, Metrics, and Logs APIs. The Datadog SDKs for Ruby and PHP also support these APIs, but they don't export traces over OTLP, so they aren't DDOT SDKs. Select a language for setup guides and support details.
+DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces, Metrics, and Logs APIs. The Datadog SDKs for Ruby and PHP also support these APIs, but they don't export traces over OTLP, so they aren't DDOT SDKs. The Datadog SDK for Rust also supports these APIs. Select a language for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
@@ -256,6 +259,7 @@ DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces
 | [Go][32] | {% x/ %} | {% x/ %} | {% x/ %} |
 | [Ruby][33] | {% x/ %} | Alpha | {% x/ %} |
 | [PHP][34] | {% x/ %} | {% x/ %} | {% x/ %} |
+| [Rust][59] | {% x/ %} | {% x/ %} | {% x/ %} |
 
 ## Feature notes
 
@@ -265,12 +269,12 @@ DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces
 {% /if %}
 - **Real User Monitoring (RUM)**: To enable full RUM functionality, [inject supported headers][36] to correlate RUM and traces.
 {% if equals($otel_sdk, "datadog_sdk") %}
-- **Runtime metrics**: Datadog SDKs send [runtime metrics][11] with DogStatsD (UDP port 8125). Turn on DogStatsD in the Agent.
+- **Runtime metrics**: Datadog SDKs send [runtime metrics][11] with DogStatsD (UDP port 8125). Turn on DogStatsD in the Datadog Agent.
 {% /if %}
 {% if equals($otel_sdk, "ddot_sdk") %}
-- **Runtime metrics**: Supported languages and versions send [runtime metrics][11] over OTLP. See [Export runtime metrics over OTLP][53].
+- **Runtime metrics**: Supported languages and versions send [runtime metrics][11] over OTLP. See [Export runtime metrics over OTLP][53]. Python sends runtime metrics with DogStatsD (UDP port 8125), so turn on DogStatsD in the Datadog Agent.
 {% /if %}
-{% if equals($otel_sdk, "opentelemetry_sdk") %}
+{% if equals($otel_sdk, "upstream_otel_sdk") %}
 - **Runtime metrics**: Upstream OpenTelemetry SDKs follow the [OpenTelemetry Runtime Metrics][35] specification and typically send [runtime metrics][11] over OTLP (ports 4317/4318).
 {% /if %}
 {% if not(equals($otel_destination, "direct_otlp_ingest")) %}
@@ -284,7 +288,7 @@ DDOT SDKs (Java, .NET, Node.js, Python, and Go) support the OpenTelemetry Traces
 - **Datadog SDKs**: Datadog maintains and supports Datadog SDKs.
 - **DDOT SDKs**: Datadog maintains and supports DDOT SDKs. During Preview, support is best-effort.
 - **Upstream OpenTelemetry SDKs**: The OpenTelemetry community maintains and supports upstream OpenTelemetry SDKs. Datadog supports the traces, metrics, and logs they send.
-- **Unsupported runtimes** (Custom): For [instrumentation of unsupported runtimes][44], Datadog provides documentation as a starting point and basic troubleshooting only. For more help, contact the [OpenTelemetry community][45] or the instrumentation maintainers.
+- **Unsupported runtimes**: For [instrumentation of unsupported runtimes][44], Datadog provides documentation as a starting point and basic troubleshooting only. For more help, contact the [OpenTelemetry community][45] or the instrumentation maintainers.
 
 ### Collector components
 
@@ -296,7 +300,7 @@ For the DDOT Collector and the Agent's Collector, support depends on who maintai
 |---|---|---|---|
 | **Datadog Supported** | The DDOT Collector image and Datadog-owned components, such as the [Datadog Exporter][39], [Datadog Connector][39], [Infrastructure Attribute Processor][40], and [Datadog Extension][41]. | Datadog maintains these components and fixes bugs and security issues without waiting for an upstream release. | Troubleshoots them under your support agreement. |
 | **Community Supported** | Upstream OpenTelemetry components [included by default in the DDOT Collector][42] or the Agent's Collector. | Datadog tests them in each release and ships security fixes. The OpenTelemetry community handles behavior fixes upstream on a best-effort basis. | Helps you configure them. |
-| **Custom** | Components not included by default, such as ones you add to the DDOT Collector or [the Agent's Collector][43]. | None from Datadog. Datadog provides setup documentation as a starting point. | Provides basic troubleshooting only. For more help, contact the [OpenTelemetry community][45] or the component maintainers. |
+| **Custom** | Components not included by default, such as ones you add to the DDOT Collector or [the Agent's Collector][43]. | Limited. Datadog provides setup documentation as a starting point. | Provides basic troubleshooting only. For more help, contact the [OpenTelemetry community][45] or the component maintainers. |
 
 <!-- Only the upstream OpenTelemetry Collector has platform limits to list. Remove the condition if you add one for another destination. -->
 {% if equals($otel_destination, "upstream_otel_collector") %}
@@ -312,7 +316,7 @@ Datadog doesn't support the upstream OpenTelemetry Collector on **AWS EKS Fargat
 Follow these practices when using Datadog with OpenTelemetry:
 
 - **Avoid mixed instrumentation**: Run one SDK per application process. Don't activate a DDOT SDK and an upstream OpenTelemetry SDK in the same process. Follow the [language-specific instrumentation documentation][46] for required SDK components and dependencies.
-- **Run the Datadog Agent with the DDOT Collector**: Datadog recommends that you run the Agent alongside the DDOT Collector, including on the same nodes. To avoid duplicate logs and port conflicts, check the settings in [Add the Datadog Agent][27] before you deploy the Agent.
+- **Run the Datadog Agent with the DDOT Collector**: Datadog recommends that you run the Datadog Agent alongside the DDOT Collector, including on the same nodes. To avoid duplicate logs and port conflicts, check the settings in [Add the Datadog Agent][27] before you deploy the Datadog Agent.
 
 [1]: /opentelemetry/instrument/ddot_sdks/
 [3]: /opentelemetry/setup/agent/#agents-collector
@@ -368,3 +372,4 @@ Follow these practices when using Datadog with OpenTelemetry:
 [56]: /opentelemetry/setup/otlp_ingest/
 [57]: /opentelemetry/instrument/upstream_otel_sdks/
 [58]: /opentelemetry/instrument/ddot_sdks/api_support/
+[59]: /opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=rust&platform=traces
