@@ -164,7 +164,7 @@ A continuación, haz clic en la ejecución de una sesión de test y ve la cantid
 
 [1]: /es/tests/test_impact_analysis/
 [2]: /es/tests/
-[3]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /es/account_management/rbac/permissions/
 [5]: /es/tests/code_coverage
 [6]: /es/dashboards/

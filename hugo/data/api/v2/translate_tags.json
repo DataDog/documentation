@@ -55,6 +55,10 @@
     "name": "Annotations",
     "description": "Add annotations to dashboards and notebooks to mark events such as deployments, incidents, or other notable moments in time."
   },
+  "anthropic-usage-and-costs-integration": {
+    "name": "Anthropic Usage And Costs Integration",
+    "description": "Manage your Datadog Anthropic Usage and Costs integration accounts and account resources\ndirectly through the Datadog API. See the\n[Anthropic Usage and Costs integration page](https://docs.datadoghq.com/integrations/anthropic-usage-and-costs/) for\nmore information."
+  },
   "app-builder": {
     "name": "App Builder",
     "description": "Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps."
@@ -134,6 +138,10 @@
   "chatgpt-enterprise-integration": {
     "name": "ChatGPT Enterprise Integration",
     "description": "Manage your Datadog ChatGPT Enterprise integration accounts and account resources\ndirectly through the Datadog API. See the\n[ChatGPT Enterprise integration page](https://docs.datadoghq.com/integrations/chatgpt-enterprise/) for\nmore information."
+  },
+  "claude-compliance-integration": {
+    "name": "Claude Compliance Integration",
+    "description": "Manage your Datadog Claude Compliance integration accounts and account resources\ndirectly through the Datadog API. See the\n[Claude Compliance integration page](https://docs.datadoghq.com/integrations/anthropic-compliance-logs/) for\nmore information."
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
@@ -287,6 +295,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "github-costs-integration": {
+    "name": "GitHub Costs Integration",
+    "description": "Manage your Datadog GitHub Costs integration accounts and account resources\ndirectly through the Datadog API. See the\n[GitHub Costs integration page](https://docs.datadoghq.com/integrations/github-costs/) for\nmore information."
+  },
   "google-chat-integration": {
     "name": "Google Chat Integration",
     "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
@@ -370,6 +382,10 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
+  "notebooks": {
+    "name": "Notebooks",
+    "description": "Create, read, and edit Datadog notebooks using Notebooks Flavored Markdown, which builds on GitHub\nFlavored Markdown with encodings for notebook content. Full-document Markdown includes the title as\na leading H1; JSON attributes.title represents the same stored title.\n\nWork with a whole notebook or individual sections, tasks, and widgets. Apply scoped content\noperations and update task state and widget definitions by ID.\nSee the [Notebooks API guide](https://docs.datadoghq.com/notebooks/guide/notebooks_api/) and\n[Markdown reference](https://docs.datadoghq.com/notebooks/notebooks_flavored_markdown/) for examples."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",

@@ -2,13 +2,18 @@
 # ticket keys to a Jira Automation incoming webhook. Runs when either label is added,
 # so the order the labels are applied in doesn't matter. The Jira rule decides whether
 # to create an Editorial Review ticket and skips tickets that already have one.
+#
+# Also sends the other DOCS keys mentioned in the PR's comments (comment_keys), so the
+# Jira rule can skip the PR if a comment already references a ticket with the
+# editorial-review label. Only Jira can check ticket labels, so the check runs there.
 name: Editorial review ticket
 on:
   pull_request:
     types:
       - labeled
 
-permissions: {}
+permissions:
+  pull-requests: read
 
 jobs:
   notify-jira:
@@ -25,6 +30,9 @@ jobs:
           BRANCH: ${{ github.event.pull_request.head.ref }}
           BODY: ${{ github.event.pull_request.body }}
           PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           WEBHOOK_URL: ${{ secrets.JIRA_ER_WEBHOOK_URL }}
           WEBHOOK_TOKEN: ${{ secrets.JIRA_ER_WEBHOOK_TOKEN }}
         run: |
@@ -43,8 +51,15 @@ jobs:
             exit 0
           fi
 
-          echo "Sending $keys to Jira Automation"
-          jq -n --argjson issues "$keys" --arg pr "$PR_URL" '{issues: $issues, pr_url: $pr}' \
+          # Other DOCS keys in the PR's comments, formatted as ", DOCS-1, DOCS-2" so the Jira
+          # rule can append them to a JQL "key in (...)" list. Empty when there are none.
+          comment_keys=$(gh api --paginate "repos/$GH_REPO/issues/$PR_NUMBER/comments" -q '.[].body' \
+            | { grep -oiE 'DOCS-[0-9]+' || true; } | tr '[:lower:]' '[:upper:]' | sort -u \
+            | jq -R . | jq -sr --argjson issues "$keys" '(. - $issues) | map(", " + .) | join("")')
+
+          echo "Sending $keys to Jira Automation (other DOCS keys in comments: ${comment_keys#, })"
+          jq -n --argjson issues "$keys" --arg pr "$PR_URL" --arg ck "$comment_keys" \
+              '{issues: $issues, pr_url: $pr, comment_keys: $ck}' \
             | curl -fsS -X POST "$WEBHOOK_URL" \
                 -H 'Content-Type: application/json' \
                 -H "X-Automation-Webhook-Token: $WEBHOOK_TOKEN" \
