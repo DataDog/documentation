@@ -122,7 +122,7 @@ point the frontmatter at them, and update each row.
 - [Runtime Metrics][11]
 -
   {% if and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "datadog_agent", "upstream_otel_collector", "direct_otlp_ingest"])) %}{% x/ %}{% /if %}
-  {% if equals($otel_sdk, "ddot_sdk") %}{% x/ %} ({% tooltip contents="Python sends runtime metrics with DogStatsD, which needs the Datadog Agent." %}Partial{% /tooltip %}){% /if %}
+  {% if equals($otel_sdk, "ddot_sdk") %}{% x/ %} {% tooltip contents="Python sends runtime metrics with DogStatsD, which needs the Datadog Agent." %}Partial{% /tooltip %}{% /if %}
 ---
 - [Span Links][12]
 -
@@ -131,7 +131,7 @@ point the frontmatter at them, and update each row.
 - [Trace Metrics][13]
 -
   {% if or(and(includes($otel_sdk, ["datadog_sdk", "upstream_otel_sdk"]), includes($otel_destination, ["ddot_collector", "agents_collector", "datadog_agent", "upstream_otel_collector"])), and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"]))) %}{% x/ %}{% /if %}
-  {% if equals($otel_destination, "direct_otlp_ingest") %}{% x/ %} ({% tooltip contents="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." %}Sampled{% /tooltip %}){% /if %}
+  {% if equals($otel_destination, "direct_otlp_ingest") %}{% x/ %} {% tooltip contents="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." %}Sampled{% /tooltip %}{% /if %}
 ---
 - [Infrastructure Host List][14]
 -
@@ -148,7 +148,7 @@ point the frontmatter at them, and update each row.
 - [Database Monitoring][17] (DBM)
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), includes($otel_destination, ["agents_collector", "datadog_agent"])) %}{% x/ %}{% /if %}
-  {% if and(equals($otel_sdk, "upstream_otel_sdk"), includes($otel_destination, ["agents_collector", "datadog_agent"])) %}{% x/ %} ({% tooltip contents="Doesn't include SQL query-level monitoring, which needs a DDOT SDK." %}Partial{% /tooltip %}){% /if %}
+  {% if and(equals($otel_sdk, "upstream_otel_sdk"), includes($otel_destination, ["agents_collector", "datadog_agent"])) %}{% x/ %} {% tooltip contents="Doesn't include SQL query-level monitoring, which needs a DDOT SDK." %}Partial{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "ddot_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Datadog Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
   {% if and(equals($otel_sdk, "ddot_sdk"), equals($otel_destination, "upstream_otel_collector")) %}{% tooltip contents="Needs the Datadog Agent to monitor your databases. The Datadog Agent can run on your database hosts instead of your application hosts." %}With Agent{% /tooltip %}{% /if %}
 ---
