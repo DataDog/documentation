@@ -20,7 +20,7 @@ To request access, contact your Datadog account team. Self-service installation 
 
 ## Overview
 
-BYOC (Bring Your Own Cloud) APM runs APM span ingestion, processing, and storage in your own cloud account. You investigate those spans in the Datadog APM UI.
+Bring Your Own Cloud (BYOC) APM runs APM span ingestion, processing, and storage in your own cloud account. You investigate those spans in the Datadog APM UI.
 
 With BYOC APM, you control the infrastructure and the location of your trace data. You use Datadog to search spans, explore services, and monitor application performance.
 
@@ -33,7 +33,7 @@ BYOC APM supports these use cases:
 - **Tracing at scale**: If cost limits your tracing coverage or retention, run span processing and storage on your own cloud infrastructure. BYOC APM uses object storage as the durable data layer. You can apply your existing cloud provider commitments to this infrastructure.
 - **Data residency and control**: Store trace data in your own cloud account or in a geography that you approve. Use this option when regulations, company policy, or the sensitivity of an application require it.
 
-<div class="alert alert-info">BYOC APM keeps span storage in your cloud account, but some data goes to Datadog. Query results display in Datadog, and metrics and profiles stay in Datadog. Include these data flows in a data residency review, in addition to span storage.</div>
+<div class="alert alert-info">BYOC APM keeps span storage in your cloud account, but some data goes to Datadog. Query results are sent to Datadog for display, and trace metrics, metrics, and profiles are stored in Datadog. Include these data flows in a data residency review, in addition to span storage.</div>
 
 ## How it works
 
@@ -51,7 +51,7 @@ BYOC APM has two parts:
 | [Observability Pipelines][3] Worker | Your cloud account | Receives spans and sends them to the Datadog BYOC Traces destination. Inside this destination, Datadog runs a fixed ingestion pipeline that prepares spans for storage and queries. You can't edit this pipeline. |
 | Traces database cluster | Your cloud account | Stores spans in object storage. The cluster is dedicated to traces and is separate from BYOC Logs clusters. |
 | Metrics, trace metrics, and profiles | Datadog | Receives trace metrics without processing, and stores metrics and profiles. |
-| APM UI and control plane | Datadog | Shows the APM UI and queries the span data in your cloud account. |
+| APM UI and control plane | Datadog | Sends queries to the traces database cluster in your cloud account and displays the results in the APM UI. |
 
 ### Data flows
 
@@ -90,9 +90,9 @@ To use BYOC APM, you need:
 - A Datadog organization for the APM UI and metrics
 - Applications instrumented with [OpenTelemetry][9] that send traces over OTLP through the OpenTelemetry Collector
 
-The Preview supports Amazon EKS only. Other cloud providers and on-premises deployment aren't supported.
+The Preview supports only Amazon EKS. Other cloud providers and on-premises deployment aren't supported.
 
-Installation is similar to BYOC Logs. For the prerequisites, such as the minimum versions and the cloud resources to create, see [Install BYOC Logs on Amazon EKS][10].
+The BYOC APM installation is similar to the BYOC Logs installation. For prerequisites, such as minimum versions and the cloud resources to create, see [Install BYOC Logs on Amazon EKS][10].
 
 ## Preview capabilities
 
@@ -135,7 +135,7 @@ You and Datadog share responsibility for a BYOC APM deployment. The data plane r
 [7]: /internal_developer_portal/catalog/
 [8]: /monitors/types/apm/
 [9]: /opentelemetry/
-[10]: /byoc-logs/install/aws_eks/
+[10]: /byoc-logs/install/aws_eks/#prerequisites
 [11]: /tracing/trace_explorer/
 [12]: /tracing/trace_pipeline/generate_metrics/
 [13]: /tracing/other_telemetry/connect_logs_and_traces/
