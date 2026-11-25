@@ -739,11 +739,18 @@ For example, to collect 100% of the spans from the service named `my-service`, f
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
+Starting in SDK [version 1.69.0][3], for Java applications, set by-resource and by-tags **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
 
+For example, to collect 100% of the spans from the service named `my-svc`, for the resource that starts with `GET /checkout`, whose `customer.tier` tag is `gold`:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"service": "my-svc", "resource": "GET /checkout*", "tags": {"customer.tier": "gold"}, "sample_rate": 1.0}]
+```
 Read more about sampling controls in the [Java SDK documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.7.0
 [2]: /tracing/trace_collection/dd_libraries/java
+[3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.69.0
 {{% /tab %}}
 {{% tab "Python" %}}
 Starting from version [v1.4.0][1], for Python applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
