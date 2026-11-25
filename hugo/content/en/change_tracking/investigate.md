@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Changes appear on the pages where you already investigate: dashboards, monitor status pages, and service pages. You can also build your own view of change data with Change Tracking widgets. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
+Change Tracking makes changes available across Datadog products, including dashboards, monitor status pages, and service pages. You can also build your own view of change data with Change Tracking widgets. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
 
-## Find relevant changes where you're working
+## Investigate changes across Datadog products
 
 On dashboards and monitor status pages, Datadog ranks changes by likely cause, so that the changes most likely to explain what you are seeing appear first.
 
