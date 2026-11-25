@@ -546,14 +546,26 @@ const provider = new DatadogProvider({
 
 You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
 
-Response signing does not support `flaggingProxy`, other proxies, or custom flag endpoints. Send flag configuration requests directly to Datadog. If you set a custom `flagConfigurationFetch`, it must send the request without change and return the exact response bytes.
+Response signing does not support `flaggingProxy` or a custom flag endpoint. The SDK must send flag configuration requests to the Datadog flag endpoint. A network proxy that forwards requests and responses without change does not affect verification. A proxy that changes the response body or a signed header causes verification to fail. If you set a custom `flagConfigurationFetch`, it must send the request without change and return the exact response bytes and headers.
+
+#### Serve the verifier files with the CDN bundle
+
+In `'observe'` and `'required'` modes, the SDK loads the verifier code as a separate script file. If you install the SDK from npm, your bundler includes this file. If you use the CDN bundle, do these steps:
+
+1. Serve the `chunks/` directory in the same directory as `datadog-openfeature-browser.js`.
+1. Serve each SDK release from its own versioned directory. The chunk file names contain a content hash, so a cached main file can request chunk files of its own release only.
+1. If your page has a Content Security Policy without `strict-dynamic`, allow scripts from the chunk location.
+
+The chunk loads without Subresource Integrity. An `integrity` attribute on the main script does not cover the verifier code.
+
+If the verifier does not load within 5 seconds, `'required'` mode sends no assignment request and reports the reason `verifier-unavailable`. `'observe'` mode sends the request without signing. The SDK tries to load the verifier again on the next fetch.
 
 ### Confirm that response signing works
 
 1. Open your browser developer tools and select the **Network** tab.
 1. Find the flag assignment request.
-1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` header.
-1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` and `x-datadog-feature-flags-signed-headers` headers.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature`, `x-datadog-feature-flags-signing-chain`, and `x-datadog-feature-flags-signed-response-headers` headers.
 1. Confirm that flag evaluations return assigned values, not reason `ERROR`.
 
 At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions that support response signing.
@@ -565,6 +577,7 @@ In `'required'` mode, the provider rejects a response that fails verification. I
 - The provider emits a `PROVIDER_ERROR` event with error code `GENERAL`. The event message has the format `Flag response signing failed (<code>): <what failed>. <fix hint>.`, where `<code>` is a [reason code][11].
 - If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR`, error code `GENERAL`, and the same message.
 - If the Datadog site does not support response signing, the provider sends no flag request, enters its error state, and reports the reason `unsupported-site`.
+- If the verifier code does not load, the provider sends no flag request and reports the reason `verifier-unavailable`. See [Serve the verifier files with the CDN bundle](#serve-the-verifier-files-with-the-cdn-bundle).
 - The provider keeps verified assignments in memory only. It does not use the persistent cache or `initialFlagsConfiguration` in this mode. After a page reload, evaluations return default values until the first verified response arrives.
 - Verification uses the device clock. The SDK rejects a signature if its issue time is more than 30 seconds after the device time. It also rejects a signature if its expiry time is at or before the device time.
 

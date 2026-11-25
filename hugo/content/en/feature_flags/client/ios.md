@@ -599,14 +599,14 @@ Flags.enable(with: .init(
 
 You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
 
-Response signing does not support proxies or custom flag endpoints, such as `customFlagsEndpoint`. Send flag configuration requests directly to Datadog.
+Response signing does not support a flag proxy or a custom flag endpoint, such as `customFlagsEndpoint`. The SDK must send flag configuration requests to the Datadog flag endpoint. A network proxy that forwards requests and responses without change does not affect verification. A proxy that changes the response body or a signed header causes verification to fail.
 
 ### Confirm that response signing works
 
-1. Route your test device or simulator through an HTTPS debugging proxy that you trust, or use a network inspector.
+1. Use a network inspector, or route your test device or simulator through an HTTPS debugging proxy that you trust. The proxy must forward traffic without change. Do not use proxy features that rewrite requests or responses.
 1. Find the flag assignment request.
-1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` header.
-1. Confirm that the response includes the `x-datadog-feature-flags-signature` and `x-datadog-feature-flags-signing-chain` headers.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` and `x-datadog-feature-flags-signed-headers` headers.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature`, `x-datadog-feature-flags-signing-chain`, and `x-datadog-feature-flags-signed-response-headers` headers.
 1. Confirm that the client state is `ready` and that flag evaluations return assigned values.
 
 The SDK writes response signing warnings and errors to the Xcode console. To see them, set `Datadog.verbosityLevel = .debug`.
