@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/observability_pipelines/guide/upgrade_worker_2_7/
-description: Worker バージョン 2.7 から 2.25 までの新機能、機能強化、修正について説明します。
+description: Worker バージョン 2.7 から 2.26 までの新機能、機能強化、修正について説明します。
 disable_toc: false
 title: Worker のアップグレードガイド
 ---
@@ -12,6 +12,120 @@ Datadog では、マイナーリリースおよびパッチリリースごとに
 </div>
 
 このガイドでは、特定の Worker バージョンへのアップグレード方法と、そのバージョンの更新情報について説明します。
+
+## Worker バージョン 2.26.0 {#worker-version-2260}
+
+Worker バージョン 2.26.0 にアップグレードするには、以下の手順に従います。
+
+- Docker: [2.26.0 イメージ][69]に対して `docker pull` コマンドを実行します。
+- Kubernetes: [Helm チャート][2]および [Worker のアップグレード][37]を参照してください。
+- APT: コマンド `apt-get install observability-pipelines-worker=2.26.0` を実行します。
+- RPM: コマンド `sudo yum install observability-pipelines-worker-2.26.0` を実行します。
+
+<div class="alert alert-warning"><strong>破壊的変更:</strong> Worker 2.26.0 には、以下の破壊的変更が含まれています:<ul>
+<li><strong>インデックス化されたグループ別フィールドを持つ Generate Metrics プロセッサー</strong>: タグキーは、最後のフィールド名の末尾に配列インデックスが付いたものを使用します:<code>items[0]</code> は、 <code>items_0</code>を生成し、<code>items[-1]</code> は、 <code>items_-1</code>を生成し、 <code>http.items[2].status[4]</code> は、 <code>status_4</code>を生成します。新しいキーを使用するように、ダッシュボード、モニター、アラート、ノートブック、およびその他のクエリを更新してください。過去のデータポイントは、引き続き古いキーで利用できます。</li>
+<li><strong>合計のない、受信されたヒストグラム</strong> (OpenTelemetry や Prometheus などのソースから受信したものなど): これらのヒストグラムでは、Prometheus 送信先は <code>_sum</code> 系列を省略します。合計の欠落を処理するように、平均を計算する Prometheus クエリを更新してください。Datadog Metrics 送信先は、ヒストグラムバケットから合計と平均を推定します。ヒストグラム分位点クエリは影響を受けません。</li>
+<li><strong>Custom Processor スクリプト ( <code>to_unix_timestamp</code> を <code>unit: "nanoseconds"</code>で呼び出すもの)</strong>: アップグレードする前に、これらの呼び出しを <code>to_unix_timestamp!(ts, unit: "nanoseconds")</code>に変更します。この形式では、範囲外の変換が行われると処理が停止され、イベントが破棄されます。代わりにフォールバック値を使用する場合は、アップグレード後に呼び出しを <code>to_unix_timestamp(ts, unit: "nanoseconds") ?? 0</code> に変更します。この形式では、旧バージョンの Worker ではコンパイルされないためです。他の単位を使用する呼び出しは影響を受けません。</li>
+</ul></div>
+
+Worker バージョン 2.26.0 では、以下を利用できます。
+
+#### セキュリティ {#security}
+
+- Databricks (Zerobus) 送信先で OAuth および Unity Catalog スキーマリクエストに対し、サーバー証明書とホスト名の検証が行われるようになりました。
+
+#### 新機能 {#new-features}
+
+- カスタムプロセッサーに、開始値 (含む) から終了値 (含まない) までの整数の配列を作成する `range` 関数とオプションのステップが追加されました。
+- Datadog Agent ソースが、Datadog Agent 7.81.0 以降で使用されている v3 シリーズのメトリクス取り込み形式に対応しました。
+
+#### 機能強化 {#enhancements}
+
+- カスタムプロセッサーで、以下の機能強化が行われました。
+    - `.type` に値を割り当てて、カウンターとゲージの間でメトリクスのタイプを変更できるようになりました。メトリクスの値は保持されます。
+    - `to_syslog_severity` 関数で、`critical` および `crit` の両方が受け入れられるようになりました。
+    - オブジェクトや配列を割り当てる際のメモリ使用量が削減され、パフォーマンスが向上しました。
+    - `sha1`、`sha2`、`sha3`、`md5`、`hmac`、`xxhash`、`seahash`、`crc`、`encrypt`、`decrypt`、`encrypt_ip`、および `decrypt_ip` などの、ハッシュ化および暗号化関数を使用できるようになりました。
+    - 後続のコメントに非 ASCII 文字や引用符が含まれる場合でも、ブロック内の連続するコメント行を正しく処理できるようになりました。
+- Datadog Metrics 送信先で、v3 メトリクスインテーク API が使用されるようになりました。
+- Worker で、以下が行われるようになりました。
+    - 破棄されたイベントの件数をグループ別に 10 分間ごとに集計し、Worker あたり最大 30,000 の個別の `group` 値をサポートするようになりました。この制限を超える件数も報告されますが、`group` タグは付けられません。
+    - `pipelines.host.*` メトリクスを 5 秒間隔で収集します。
+    - 最初のスクレイプのカウンター値とヒストグラムの観測値を内部テレメトリに保持します。
+    - Generate Metrics プロセッサー後の集計を含め、すべてのプロセッサーについて `pipelines.component_cpu_usage_ns_total` を報告します。
+    - ディスクバッファのライフサイクルイベントをログおよび `pipelines.topology_disk_buffer_lifecycle_events_total` カウンターで報告します。`event` タグの値は、`removed`、`replacement_unreferenced`、または `unreferenced` です。
+- HTTP ベースの送信先では、テンプレート以外のエンドポイントパスおよびクエリで UTF-8 文字を受け入れるようになりました。ホスト名は引き続き ASCII である必要があります。HTTP クライアントおよび OpenTelemetry 送信先の URI テンプレートには、引き続き ASCII を使用する必要があります。
+- 文字区切りまたは改行区切りのフレーミングを使用するソースで、サイズ超過でドロップされたフレームがエラーとして報告されるようになりました。これらは、`error_code:decoder_frame_too_long` で `pipelines.component_errors_total` をインクリメントします。
+
+#### 修正 {#fixes}
+
+- Worker で、以下が行われるようになりました。
+    - US1 以外の商用 Datadog サイトでパイプライン構成を初期化します。
+    - 構成リクエストは、レスポンスの読み取りを含め 30 秒後にタイムアウトし、次のポーリングで再試行します。接続の確立は 10 秒後にタイムアウトします。
+    - HTTP フォワードプロキシ経由で、AWS エンドポイントへの HTTP リクエストに対し、構成されたプロキシ認証情報を送信します。HTTPS プロキシ接続では変更はありません。
+    - イベントがそれ自体で次のバッチを満たした場合、送信先バッチ全体を即座に送信します。これは Databricks (Zerobus)、Elasticsearch、および New Relic の送信先に適用されます。
+- Generate Metrics プロセッサーは、メトリクス集計が有効な場合 (これがデフォルトです)、10 秒を超えて遅れて到着したディストリビューションメトリクスを転送するようになりました。その場合も、遅延カウンターはドロップされます。
+- Datadog Metrics 送信先は、正確なヒストグラムの合計が利用可能で有効な場合、それらを使用するようになりました。
+- Google Pub/Sub ソースで、以下が行われるようになりました。
+    - 他のコンポーネントと同じ、システムの認証局を使用します。
+    - 接続中、再試行中、または確認応答対応ストリームでの待機中に、速やかにシャットダウンします。
+    - 構成されている TLS 検証、サーバー名、アプリケーションプロトコル、およびプロキシ設定に従います。
+- WebSocket ソースは、リクエストされていないサブプロトコルを指定するハンドシェイクレスポンスを拒否するようになりました。
+- 検索クエリで、以下が行われるようになりました。
+    - 単語が含まれない全文検索のプレフィックス、用語、フレーズを無視します。
+    - 別のフレーズが既に同じフィールドに一致している場合でも、フレーズを一致とします。
+    - 失敗した部分一致に実際の一致と重複する部分がある場合に、フレーズを一致とします。
+    - 異なる種類の括弧が使用されている範囲クエリ (指定された上限が範囲に含まれるものなど) を処理します。
+
+#### 削除されたメトリクス {#removed-metrics}
+
+以下の Worker 健全性メトリクスは削除されました。代わりに以下のメトリクスを使用するように、ダッシュボードとモニターを更新してください。
+
+- `pipelines.buffer_max_byte_size` → `pipelines.buffer_max_size_bytes`
+- `pipelines.buffer_max_event_size` → `pipelines.buffer_max_size_events`
+- `pipelines.source_buffer_max_byte_size` → `pipelines.source_buffer_max_size_bytes`
+- `pipelines.source_buffer_max_event_size` → `pipelines.source_buffer_max_size_events`
+- `pipelines.transform_buffer_max_byte_size` → `pipelines.transform_buffer_max_size_bytes`
+- `pipelines.transform_buffer_max_event_size` → `pipelines.transform_buffer_max_size_events`
+- `pipelines.internal_metrics_cardinality_total` → `pipelines.internal_metrics_cardinality` (現在のメトリクス数のゲージ)
+
+## Worker バージョン 2.25.2 {#worker-version-2252}
+
+Worker バージョン 2.25.2 にアップグレードするには、以下の手順に従います。
+
+- Docker: [2.25.2 イメージ][67]に対して `docker pull` コマンドを実行します。
+- Kubernetes: [Helm チャート][2]および [Worker のアップグレード][37]を参照してください。
+- APT: コマンド `apt-get install observability-pipelines-worker=2.25.2` を実行します。
+- RPM: コマンド `sudo yum install observability-pipelines-worker-2.25.2` を実行します。
+
+Worker バージョン 2.25.2 では、以下を利用できます。
+
+#### 修正 {#fixes-1}
+
+- Worker 2.25.1 で発生した、US1 以外の商用 Datadog サイト上の Worker が起動後にパイプラインを読み込めなくなり、`RC client wasn't initialized, will retry` エラーが繰り返し発生するという問題を引き起こす可能性がある回帰を修正しました。
+
+## Worker バージョン 2.25.1 {#worker-version-2251}
+
+Worker バージョン 2.25.1 にアップグレードするには、以下の手順に従います。
+
+- Docker: [2.25.1 イメージ][66]に対して `docker pull` コマンドを実行します。
+- Kubernetes: [Helm チャート][2]および [Worker のアップグレード][37]を参照してください。
+- APT: コマンド `apt-get install observability-pipelines-worker=2.25.1` を実行します。
+- RPM: コマンド `sudo yum install observability-pipelines-worker-2.25.1` を実行します。
+
+Worker バージョン 2.25.1 では、以下を利用できます。
+
+#### セキュリティ {#security-1}
+
+- Microsoft Sentinel 送信先で、Azure OAuth トークンリクエストおよびログ取り込みリクエストのサーバー証明書とホスト名が検証されるようになりました。
+
+#### 修正 {#fixes-2}
+
+- Microsoft Sentinel 送信先で、以下が行われるようになりました。
+    - バッチを必要に応じて複数のリクエストに分割し、各リクエストが Azure の 1 MB のリクエストサイズの制限内に収まるようにします。
+    - Azure OAuth トークンを、有効期限が切れる 60 秒前に更新します。更新に失敗した場合は、エラーをログに記録し、更新に成功するまで 2 秒ごとに再試行します。その後、元のスケジュールに戻ります。
+    - Azure OAuth トークンリクエストを 30 秒後にタイムアウトさせ、他の失敗した更新と同様に再試行します。
+- パイプラインコンポーネントメトリクスの `rc_version` タグとコンポーネントログの `op_component.rc_version` フィールドで、パイプライン更新によって変更されなかったコンポーネントを含め、各コンポーネントが実行する最新の構成バージョンが報告されるようになりました。
 
 ## Worker バージョン 2.25.0 {#worker-version-2250}
 
@@ -24,14 +138,18 @@ Worker バージョン 2.25.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.25.0 では、以下を利用できます。
 
-#### セキュリティ {#security}
+#### セキュリティ {#security-2}
 
 - Worker にバンドルされている Mozilla ルート証明書ストアが更新されました。このストアに以前含まれていた、`emSign ECC Root CA - G3` ([eMudhra 中間証明書の侵害][61]後に削除) や Mozilla で信頼できないと判断されたその他のルートが削除されました。その結果として、以下のようになります。
     - 組み込みのルートストアを使用するコンポーネントでは、信頼されていない emSign 中間証明書を介した証明書チェーンを信頼しなくなります。
     - 削除されたルートで証明書チェーンが終了するサーバーへの TLS 接続は、検証に失敗します。
 - コンポーネントがクラッシュしたときに Worker が Datadog に報告するエラーメッセージに、Worker のログと同じ機密データのリダクションルールが適用されるようになります。
 
-#### 機能強化 {#enhancements}
+#### 新機能 {#new-features-1}
+
+- [Azure Data Explorer 送信先][68]が利用可能になりました。
+
+#### 機能強化 {#enhancements-1}
 
 - Grok Parser プロセッサーのログに以下が含まれるようになりました。
     - ルールのソースを識別する `rule` フィールド。
@@ -43,7 +161,7 @@ Worker バージョン 2.25.0 では、以下を利用できます。
 - Sample プロセッサーで、サンプリンググループを追跡するためのメモリが 128 MiB に制限されました。この制限に達すると、使用された時刻が最も古いグループが削除されます。
 - Worker のログ取り込みパフォーマンスが向上しました。
 
-#### 修正 {#fixes}
+#### 修正 {#fixes-3}
 
 - ソースまたは送信先でエラーが発生した場合、Worker は `the task completed with an error` だけではなく、`Address already in use` のようなその根本原因であるエラーをログに記録するようになりました。コンポーネントでパニックが発生した場合、ログにはパニックメッセージも含まれます。
 - Google Pub/Sub ソースは、サーバーがストリーミングプルをリセットしたときに、エラーをログに記録することなく即座に再接続するようになりました。
@@ -62,20 +180,20 @@ Worker バージョン 2.24.1 にアップグレードするには、以下の�
 
 Worker バージョン 2.24.1 では、以下を利用できます。
 
-#### セキュリティ {#security-1}
+#### セキュリティ {#security-3}
 
 - `rustls-webpki` がバージョン 0.103.16 に更新されました。Worker は、[秘密鍵の侵害が報告された eMudhra 中間 CA (認証局)][61]が含まれる証明書チェーンを拒否するようになりました。Worker は、発行元のルート CA が信頼されている場合でも、これらのチェーンを拒否します。
 
   この保護は、rustls を使用するコンポーネントにのみ適用されます。以下のコンポーネントは、代わりに次のシステム CA 信頼ストアを使用します。
     - OpenSSL を使用するコンポーネント
-    - Amazon Security Lake 配信先の AWS アカウント検索
+    - Amazon Security Lake 送信先の AWS アカウント検索
     - Google Cloud Pub/Sub ソース
 
   システム CA 信頼ストアを使用するコンポーネントを保護するには、以下のようにします。
     - **コンテナイメージ**: 独自の CA バンドルをマウントしている場合、または `SSL_CERT_FILE` を設定している場合を除き、アクションは不要です。Worker コンテナイメージは `emSign ECC Root CA - G3` を信頼しません。
     - **APT および RPM パッケージ**: ディストリビューションから更新された `ca-certificates` パッケージが提供されるまで、`emSign ECC Root CA - G3` を信頼しないでください。古いディストリビューションでは、Debian および Ubuntu で `Comodo_AAA_Services_root` として提供される `AAA Certificate Services` も信頼しないでください。
 
-#### 修正 {#fixes-1}
+#### 修正 {#fixes-4}
 
 - 完全一致の値とワイルドカード、範囲、その他の属性などの他のオペランドを合わせて指定する `OR` グループにおいて、検索クエリがオペランドを暗黙的に削除する問題を修正しました。以前は、`@url:(nope OR aa* OR dummy/api/v1/check_run)` のようなクエリでは、ワイルドカードが原因で一致するイベントが検出されない可能性がありました。
 - Worker は、検索クエリのワイルドカードパターン内の正規表現メタ文字 (`.`、`+`、`^`、`$`、`(`、`[`、`|`) をリテラル文字として扱うようになりました。たとえば、`@url:dummy\/api.v1*` は `dummy/api/v1/check_run` に一致しなくなりました。
@@ -91,11 +209,11 @@ Worker バージョン 2.24.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.24.0 では、以下を利用できます。
 
-#### セキュリティ {#security-2}
+#### セキュリティ {#security-4}
 
 - Datadog BYOC Logs 送信先は、Worker の Datadog API キーを BYOC Logs に転送しなくなりました。
 
-#### 機能強化 {#enhancements-1}
+#### 機能強化 {#enhancements-2}
 
 - Enrichment Table プロセッサーは、以下の動作を行うようになりました。
     - 1 秒間隔で集計される、個別のルックアップキーの推定数である `enrichment_distinct_lookup_keys_total` メトリクスを報告します。
@@ -110,7 +228,7 @@ Worker バージョン 2.24.0 では、以下を利用できます。
 - Worker の構成起動パフォーマンスが向上しました。
 - `pipelines.quota_fill` メトリクスに `quota_name` タグが追加されました。Worker は、下位互換性を保持するために従来の `name` タグを保持します。
 
-#### 修正 {#fixes-2}
+#### 修正 {#fixes-5}
 
 - Sensitive Data Scanner プロセッサーのライブラリルールでパターンキャプチャグループが使用されるようになり、キャプチャされた値の周囲にある機密でないコンテキストが保持されるようになりました。以前は、Worker はキャプチャグループを無視していました。たとえば、IPv4 アドレスルールは、`172.16.0.1:80` を `<REDACTION TEXT>80` ではなく `<REDACTION TEXT>:80` とマスキングするようになりました。
 - Grok Parser、Parse JSON、および Parse XML プロセッサーは、フィールドの解析に失敗した場合、エラーではなく警告をログに記録するようになりました。Parse JSON プロセッサーのエラーメッセージには、汎用用語 `source` ではなく、解析に失敗したフィールド名も示されます。
@@ -129,11 +247,11 @@ Worker バージョン 2.23.2 にアップグレードするには、以下の�
 
 Worker バージョン 2.23.2 では、以下を利用できます。
 
-#### 機能強化 {#enhancements-2}
+#### 機能強化 {#enhancements-3}
 
 - Datadog Logs 送信先で、900 KB を超えるログイベントが切り捨てられるようになりました。以前は、バッチサイズ制限を超えるログイベントは切り捨てられるのではなく、破棄されていました。
 
-#### 修正 {#fixes-3}
+#### 修正 {#fixes-6}
 
 - Docker イメージを修正し、`sgc` (secret generic connector) バイナリを `observability-pipelines-worker` サービスユーザーが実行できるようにしました。
 
@@ -148,7 +266,7 @@ Worker バージョン 2.23.1 にアップグレードするには、以下の�
 
 Worker バージョン 2.23.1 では、以下を利用できます。
 
-#### セキュリティ {#security-3}
+#### セキュリティ {#security-5}
 
 - バンドルされている `sgc` (secret generic connector ) バイナリを Datadog Agent 7.84.1 に付属のバージョンに更新しました。これにより、CVE-2026-56854 が修正されます。
 
@@ -165,12 +283,12 @@ Worker バージョン 2.23.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.23.0 では、以下を利用できます。
 
-#### 新機能 {#new-features}
+#### 新機能 {#new-features-2}
 
 - Enrichment Table プロセッサーで、メトリクスパイプラインで CSV ファイルと Reference Table がサポートされるようになりました。
 - カスタムプロセッサーで `break` ステートメントがサポートされ、`for_each` ループを早期に終了できるようになりました。
 
-#### 機能強化 {#enhancements-3}
+#### 機能強化 {#enhancements-4}
 
 - OpenTelemetry ソースで、同時リクエスト数が 100 に、リクエスト処理時間が 30 秒にデフォルトで制限されるようになりました。この制限は、HTTP エンドポイントと gRPC エンドポイントの両方に適用されます。時間内に処理できないリクエストには、再試行可能な応答が返されます。これらの制限を上書きするには、`DD_OP_SOURCE_OTEL_MAX_CONCURRENT_REQUESTS` および `DD_OP_SOURCE_OTEL_REQUEST_TIMEOUT_SECS` 環境変数を使用してください。
 - Databricks Zerobus の送信先で、`User-Agent` ヘッダーで Worker が識別されるようになりました。
@@ -179,7 +297,7 @@ Worker バージョン 2.23.0 では、以下を利用できます。
     - `for_each` 関数がコレクションを直接反復処理するようになり、パフォーマンスが向上し、メモリ使用量が削減されました。
     - `md5`、`sha1`、`sha2`、および `sha3` 関数の実行速度が高まりました。
 
-#### 修正 {#fixes-4}
+#### 修正 {#fixes-7}
 
 - TLS 証明書、エンリッチメントテーブル、GCP 認証情報ファイルなどの構成ファイルパスが、`bootstrap.yaml` で設定された `data_dir` に対して解決されるようになりました。以前は、`data_dir` が `bootstrap.yaml` のみで設定され、`DD_OP_DATA_DIR` 環境変数で設定されていない場合、Worker はこれらのファイルをデフォルトのデータディレクトリで検索し、有効なファイルであっても存在しないものとして拒否していました。
 - ソースの TCP 確認応答エラーログおよび TLS 接続エラーログに、リモートの `peer_addr` が含まれるようになりました。
@@ -198,11 +316,11 @@ Worker バージョン 2.22.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.22.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-1}
+#### 新機能 {#new-features-3}
 
 - Aggregate プロセッサーでイベント時間の集計がサポートされるようになりました。これは、処理時間ではなくメトリクスのタイムスタンプを使用します。設定可能な猶予期間には、イベント時間ウィンドウの遅延到着メトリクスが含まれます。
 
-#### 機能強化 {#enhancements-4}
+#### 機能強化{#enhancements-5}
 
 - ログパイプラインの Generate Metrics プロセッサーに、メトリクス集計を有効にするオプションが追加されました。このオプションを有効にすると、生成されたメトリクスがイベントのタイムスタンプに基づいて 1 秒単位のバケットにまとめられます。これにより、Datadog メトリクスインテークで、同じ秒内に生成されたメトリクスが last-point-wins (後着優先) の動作によって破棄されることが防がれます。
 - ソース、プロセッサー、または送信先の構成解析エラーに、コンポーネントの ID とタイプ、および特定可能な場合はエラーの原因となったフィールドが含まれるようになりました。
@@ -218,12 +336,12 @@ Worker バージョン 2.22.0 では、以下を利用できます。
     - Syslog (TCP モード)
 - Enrichment Table プロセッサー (CSV またはファイル) は、イベントのバッチごとにテーブル全体をコピーしなくなりました。これにより、大きなエンリッチメントテーブルのメモリと CPU の使用量が削減されます。
 
-#### 修正 {#fixes-5}
+#### 修正 {#fixes-8}
 
 - Syslog 送信先は、ログの `timestamp` フィールドが JSON 文字列などのタイムスタンプ値ではない場合に、Worker をシャットダウンしなくなりました。これらのログでは、syslog ヘッダーの現在の UTC 時刻が使用されるようになりました。
 - `chunked_gelf` フレーミングデコーダーで、未完了のメッセージについてバッファリングされるペイロードが 128 MiBに制限されるようになりました。以前は、認証されていない送信者が、特に UDP モードのソケットソースの場合に、永久に完了しないメッセージのチャンクを送信してメモリを枯渇させる可能性がありました。
 - Logstash ソースでは、設定された最大サイズを超えるフレームを無限にバッファリングするのではなく、これらを拒否するようになりました。以前は、送信者が非常に大きなフレームを宣言して、メモリが枯渇するまでソースにフレームのデータを保持させることができました。
-- Splunk TCP ソースは、イベントを破棄するのではなく、`DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` の上限を超えるフレームを切り捨てるようになりました。これはSplunkの `TRUNCATE` の動作と一致します。
+- Splunk TCP ソースは、イベントを破棄するのではなく、`DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` の上限を超えるフレームを切り捨てるようになりました。これは Splunk の `TRUNCATE` の動作と一致します。
 - `chunked_gelf` フレーミングデコーダーでトレースレベルのロギングが有効になっており、1 バイトのメッセージが到着した場合に、ソースがシャットダウンする問題を修正しました。デコーダーは、他の不正な形式のペイロードと同様に、これらのメッセージを拒否するようになりました。
 - 内部バッファの使用状況報告機能が、報告対象のバッファよりも長く存続し、古いバッファの報告機能が後継バッファと同じ `buffer_id` で古いメトリクスを出力し続けるという問題を修正しました。置き換えられるのではなく、削除されたバッファのメトリクスも、`expire_metrics_secs` に従って期限切れになるようになりました。以前は、値が継続的に再発行されていたため、期限切れになりませんでした。
 - `chunked_gelf` フレーミングデコーダーの制限に関する以下の問題を修正しました。
@@ -232,7 +350,7 @@ Worker バージョン 2.22.0 では、以下を利用できます。
 - FIPS エンドポイント設定が、STS AssumeRole クライアントにも適用されるようになりました。`AWS_USE_FIPS_ENDPOINT=true` が設定されている場合、Worker はプライマリサービスクライアントだけでなく、STS オペレーションに対しても `sts-fips.<region>.amazonaws.com` のような FIPS エンドポイントを使用します。
 - 圧縮されたリクエストペイロードの解凍に失敗した場合、OpenTelemetry ソースの gRPC モードで、汎用的な `reached impossible error during decompressor finalization` メッセージではなく、根本原因となるエラーが示されるようになりました。
 
-#### 削除されたメトリクス {#removed-metrics}
+#### 削除されたメトリクス {#removed-metrics-1}
 
 - 非推奨だった `pipelines.buffer_byte_size` および `pipelines.buffer_events` ゲージメトリクスが削除されました。代わりに `pipelines.buffer_size_bytes` および `pipelines.buffer_size_events` を使用してください。
 
@@ -240,14 +358,14 @@ Worker バージョン 2.22.0 では、以下を利用できます。
 
 Worker バージョン 2.21.0 にアップグレードするには、以下の手順に従います。
 
-- Docker: [2.21.0 イメージ][54] に対して `docker pull` コマンドを実行します。
+- Docker: [2.21.0 イメージ][54]に対して `docker pull` コマンドを実行します。
 - Kubernetes: [Helm チャート][2]および [Worker のアップグレード][37]を参照してください。
 - APT: コマンド `apt-get install observability-pipelines-worker=2.21.0` を実行します。
 - RPM: コマンド `sudo yum install observability-pipelines-worker-2.21.0` を実行します。
 
 Worker バージョン 2.21.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-2}
+#### 新機能 {#new-features-4}
 
 - メトリクスパイプラインでは、以下を利用できます。
     - [Prometheus ソース][63]が利用可能になりました。
@@ -259,7 +377,7 @@ Worker バージョン 2.21.0 では、以下を利用できます。
     - 複数のソースフィールドまたは定数値の文字列表現を結合する OCSF マッピング関数 `concat_strings`。
 - Splunk HEC 送信先で、イベントの送信先となる Splunk HEC エンドポイントを決定するための `endpoint_target` オプション (`event` または `raw`) がサポートされました。
 
-#### 機能強化{#enhancements-5}
+#### 機能強化{#enhancements-6}
 
 - Splunk TCP ソースで、TCP キープアライブと接続数の制限の構成がサポートされました。
 - Worker の内部ログとトレースがパイプライン名 (`op_worker.pipeline_name:<pipeline_name>`) でエンリッチされるようになりました。これにより、メトリクスにすでに存在するタグと一致します。
@@ -275,7 +393,7 @@ Worker バージョン 2.21.0 では、以下を利用できます。
     - ルックアップで一致が見つかったかどうかにかかわらず、行を約 30 分間キャッシュに保持する。
     - このプロセッサーが生成するイベントを、ソースの送信元のバッチサイズに基づいてバッチに分割する。
 
-#### 修正 {#fixes-6}
+#### 修正{#fixes-9}
 
 - UTF-8 テキストを含む検索クエリでの大文字と小文字を区別しないグロブマッチングを修正しました。この問題は、非 ASCII 入力でパニックが発生したり、誤った結果が返されたりする状況を引き起こしていました。
 - アカウントキーの接続文字列を使用するときの Azure Blob Storage への 4 MiB を超えるアップロードを修正しました。
@@ -292,7 +410,7 @@ Worker バージョン 2.20.4 にアップグレードするには、以下の�
 
 Worker バージョン 2.20.4 では、以下を利用できます。
 
-#### 修正 {#fixes-7}
+#### 修正{#fixes-10}
 
 - Splunk TCP ソースでは、以前はハードコードされた最大フレーム長として 10,000 バイトが適用されていました。Worker はこれよりも大きなイベントを拒否し、警告をログに記録していました。このソースでは、デフォルトでフレーム長が制限されなくなりました。無制限なメモリ消費の増加を防ぐには、`DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` 環境変数を使用して最大フレーム長を設定します。
 
@@ -310,7 +428,7 @@ Worker バージョン 2.20.3 にアップグレードするには、以下の�
 
 Worker バージョン 2.20.3 では、以下を利用できます。
 
-#### 修正 {#fixes-8}
+#### 修正 {#fixes-11}
 
 - OpenTelemetry ソースの gRPC リスナーが修正され、TLS が有効な場合に ALPN 経由で `h2` をアドバタイズするようになりました。以前は、TLS 経由で接続する gRPC クライアントが接続を確立できないことがありました。
 
@@ -325,7 +443,7 @@ Worker バージョン 2.20.2 にアップグレードするには、以下の�
 
 Worker バージョン 2.20.2 では、以下を利用できます。
 
-#### 修正{#fixes-9}
+#### 修正 {#fixes-12}
 
 - 非有限 (NaN または Infinity) のゲージ値、カウンターデルタ値、ヒストグラムデルタサム値、およびゼロカウントヒストグラムが、不正な形式の OTLP メトリクスペイロードにシリアル化される可能性がある問題を修正しました。これらの値は、OTLP エンコーディングの前に破棄されるようになりました。
 
@@ -340,17 +458,17 @@ Worker バージョン 2.20.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.20.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-3}
+#### 新機能{#new-features-5}
 
 - OpenTelemetry ソースおよび Splunk HEC ソースが TLS 証明書のホットリロードをサポートしました。これにより、Worker を再起動することなく証明書のローテーションが適用されます。
 
-#### 機能強化{#enhancements-6}
+#### 機能強化 {#enhancements-7}
 
 - Split Array プロセッサーのパフォーマンスが向上しました。
 - 認証トークンの構成時に、HTTP/S Server ソースにおいてヘッダー名フィールドで大文字と小文字を区別しない一致が使用されるようになりました。
 - Splunk HEC ソースは、オプションでイベントの認証に使用するトークンのリストを受け入れるようになりました。
 
-#### 修正{#fixes-10}
+#### 修正 {#fixes-13}
 
 - Add Fields プロセッサーは、イベントの更新に失敗したときに `component_errors_total` メトリクスをインクリメントするようになりました。
 - サーバー名が構成されている送信先での TLS 証明書のホスト名検証の問題が修正され、サーバー名が検証に使用されるようにしました。
@@ -366,7 +484,7 @@ Worker バージョン 2.19.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.19.0 では、以下を利用できます。
 
-#### 機能強化 {#enhancements-7}
+#### 機能強化 {#enhancements-8}
 
 - BYOC Logs、HTTP クライアント、Socket、Syslog の各送信先、および HTTP クライアントソースに TLS オプション `server_name` が追加されました。これは、TLS ハンドシェイクに使用される SNI および証明書のホスト名を上書きするもので、ダイヤル先アドレスが証明書の Common Name または Subject Alternative Name と一致しない場合に適用されます。
 - Splunk TCP ソースが TLS 証明書のホットリロードをサポートしました。これにより、Worker を再起動せずに証明書のローテーションが適用されるようになりました。
@@ -374,7 +492,7 @@ Worker バージョン 2.19.0 では、以下を利用できます。
 - Worker で正常なシャットダウンの制限値を構成できるようになりました。
 - Amazon S3 送信先で `server_side_encryption` および `ssekms_key_id` オプションを使用した SSE-KMS 暗号化がサポートされました。
 
-#### 修正 {#fixes-11}
+#### 修正 {#fixes-14}
 
 - Reduce プロセッサーにおいて、パス内で引用符が必要なタイムスタンプフィールド (例: `"created.at"` または `"event-time"`) の `_end` コンパニオンフィールドが、削減されたイベントから警告なしに削除される問題を修正しました。コンパニオンフィールドが、ベースフィールドの隣に正しく配置されるようになりました。
 - 構成のリロードに関する問題が修正されました。リロードによってコンポーネントの名前を変えずにタイプを変更した場合 (例: `X` という名前のソースを `X` という名前のプロセッサーに置き換えた場合など)、`X` から読み取っていたダウンストリームのプロセッサーや送信先は、新しいコンポーネントに再接続されます。
@@ -395,21 +513,21 @@ Worker バージョン 2.18.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.18.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-4}
+#### 新機能{#new-features-6}
 
 - `run` コマンドは、Worker 自体の `stdout` ログと `stderr` ログの形式を選択するための `--log-format` フラグをサポートしています。このフラグは `DD_OP_LOG_FORMAT` 環境変数を使用して構成することもできます。デフォルトの `text` では既存の人間が判読できる出力が維持され、`json` では、追加のパースルールなしで直接テールおよびパースできる構造化 JSON ログが出力されます。
 - Tag Cardinality Limit プロセッサーが `tracking_mode` オプションをサポートしています。`exact_fingerprint` は 64 ビットのフィンガープリントを使用してタグの値を正確に追跡するため、生の値を保存する従来の方法よりもメモリ使用量が削減されます。`probabilistic` は、時折発生する誤検知と引き換えに、ブルームフィルターを使用してメモリ使用量をさらに削減します。確率的モードは `false_positive_rate` フィールドを受け入れます。このフィールドのデフォルトは `0.001` (0.1%) です。
 - WebSocket ソースは、WebSocket エンドポイントからログを取り込むために利用可能であり、`none`、`basic`、`bearer`、および`custom` 認証戦略と TLS をサポートしています。
 - 新しい `generate_metrics` プロセッサーは、サポートされている任意のメトリクス送信先にメトリクスをルーティングします。Datadog は既存の `generate_datadog_metrics` プロセッサーよりもこのプロッサ―を使用することを推奨していますが、既存のプロセッサーも引き続き使用できます。
 
-#### 機能強化 {#enhancements-8}
+#### 機能強化 {#enhancements-9}
 
 - BYOC Logs 送信先に mTLS サポートが追加されました。
 - `measure_cpu_usage` オプションが有効になり、ログプロセッサー (カスタムプロセッサー、Sensitive Data Scanner、Grok Parser、Parse JSON、Parse XML、OCSF Mapper、Enrichment Table、Reduce、Dedupe、Split Array、Throttle) とメトリクスプロセッサー (Aggregate および Tag Cardinality Limit) に対し常に `pipelines.component_cpu_usage_ns_total` が出力されるようになりました。
 - パイプライン構成エラーに、エラーの原因となったコンポーネントの ID が含まれるようになりました。これにより、修正が必要なソース、プロセッサー、または送信先を特定しやすくなりました。カスタムプロセッサー、Generate Metrics、OCSF Mapper など、複数のブロックで構成されるプロセッサーの場合、エラーは失敗した個々のブロックとその位置も特定し、ブロックに名前がある場合はその名前も示します。
 - パイプラインメトリクスに `pipeline_name:<NORMALIZED_PIPELINE_NAME>` を使用してパイプライン名がタグ付けされるようになりました。
 
-#### 修正 {#fixes-12}
+#### 修正 {#fixes-15}
 
 - ログ専用パイプライン (従来の検索構文を使用) が、新しいパーサーで処理できなかった検索クエリを実行したときに発生する問題が修正されました。パーサーは警告を出力し、無効なクエリを実行しません。
 - エスケープ文字で始まるクエリに影響する問題が修正されました (新しい検索構文を使用するパイプラインのみ)。
@@ -433,18 +551,18 @@ Worker バージョン 2.17.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.17.0 では、以下を利用できます。
 
-#### 新機能{#new-features-5}
+#### 新機能{#new-features-7}
 
 - カスタムプロセッサーで、以下が強化されました。
     - VRL 文字列リテラルで `\u{HEX}` Unicode エスケープシーケンスがサポートされました。有効な Unicode スカラー値 (`"hello\u{1F30E}world"` など) はすべて表現可能です。空の括弧、16 進数以外の数字、サロゲートコードポイント、U+10FFFF を超える値などの無効なシーケンスは、コンパイル時のエラーとして報告されます。
     - `parse_regex` 関数が、`parse_regex_all` と同様に動的な正規表現パターン (変数およびランタイム式) を受け入れるようになりました。パターンがリテラルの場合、名前付きキャプチャグループに基づいて戻り値の型情報が正確に保持されます。
 
-#### 機能強化 {#enhancements-9}
+#### 機能強化{#enhancements-10}
 
 - Generate Metrics プロセッサーのパフォーマンスが向上し、`group_by` タグラベル使用時の CPU オーバーヘッドが削減されました。
 - カスタムプロセッサーでは、呼び出し間でコンパイル済み正規表現を再利用することで、`parse_regex_all` のパフォーマンスが向上しました。
 
-#### 修正 {#fixes-13}
+#### 修正{#fixes-16}
 
 - Quota プロセッサーのバックグラウンド同期によって出力される HTTP メトリクスに、正しいコンポーネントタグ (`component_kind:transform`、`component_type:quota`、`component_id:quota_global_state`) が付与されるようになりました。
 - Reference Table を使用する Enrichment Table プロセッサーが、空のイベントバッチの送信をスキップするようになりました。これにより、ディスクバッファでの致命的なエラーが防止されます。
@@ -470,7 +588,7 @@ Worker バージョン 2.16.1 にアップグレードするには、以下の�
 
 Worker バージョン 2.16.1 では、以下を利用できます。
 
-#### 修正 {#fixes-14}
+#### 修正{#fixes-17}
 
 - US1 以外のデータセンターで構成を取得するときに Worker が失敗することがなくなりました。
 
@@ -487,7 +605,7 @@ Worker バージョン 2.16.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.16.0 では、以下を利用できます。
 
-#### 新機能{#new-features-6}
+#### 新機能{#new-features-8}
 
 - [Databricks Zerobus][47] 送信先: Zerobus 取り込みサービスを使用して、Databricks Unity Catalog テーブルにログデータを送信します。Databricks 送信先は、OAuth 2.0 認証、Unity Catalog からの自動スキーマ取得、および protobuf バッチエンコーディングをサポートしています。
 - Splunk HEC ソースは、VRL デコーダーを使用した受信ログイベントのエンリッチメントをサポートしています。
@@ -496,7 +614,7 @@ Worker バージョン 2.16.0 では、以下を利用できます。
     - `encode_proto` 関数が `allow_lossy_string_coercion` 引数を受け入れるようになりました。
     - Protobuf エンコーディングでは、互換性のあるスカラー型がターゲットのフィールド型に強制的に変換されるようになり、`bool` フィールドには整数と文字列、`float` または `double` フィールドには整数を指定できるようになりました。
 
-#### 機能強化 {#enhancements-10}
+#### 機能強化{#enhancements-11}
 
 - Fluent、Logstash、OpenTelemetry (ログおよびメトリクス)、Splunk HEC、Splunk TCP、HTTP/S Server、Socket、および Syslog の各ソースに mTLS サポートが追加されました。
 - Live Capture イベントに、イベントを送信した Worker の UUID が含まれるようになりました。
@@ -506,7 +624,7 @@ Worker バージョン 2.16.0 では、以下を利用できます。
     - `source_send_latency_seconds`: ソースがイベントのチャンクを次のコンポーネントに送信するまでにかかる時間。
     - `source_send_batch_latency_seconds`: ソースがバッチ (複数のイベントチャンクを含む場合がある) を次のコンポーネントに送信するのにかかる時間。
 
-#### 修正 {#fixes-15}
+#### 修正{#fixes-18}
 
 - Reference Tables プロセッサーの競合状態が修正され、Worker のシャットダウン中にバッファリングされたイベントが破棄されないようになりました。
 - Live Capture が更新され、突発的なトラフィックおよび Generate Metrics プロセッサーからのメトリクスの処理が改善されました。
@@ -529,16 +647,16 @@ Worker バージョン 2.15.1 にアップグレードするには、以下の�
 
 Worker バージョン 2.15.1 では、以下を利用できます。
 
-#### 新機能 {#new-features-7}
+#### 新機能{#new-features-9}
 
 - カスタムプロセッサーで、オブジェクトとキー値ペアの配列 (jq スタイル) 間で変換を行うための `to_entries` 関数と `from_entries` 関数がサポートされました。
 
-#### 機能強化 {#enhancements-11}
+#### 機能強化{#enhancements-12}
 
 - Datadog Metrics 送信先が Datadog API v2 および sketches エンドポイントに zstd 圧縮を使用するようになりました。これにより、CPU、メモリ、帯域幅の使用量が削減されます。
 - カスタムプロセッサーの `flatten` 関数で、フラット化から特定のキーを除外するためのオプション引数 `except` を指定できるようになりました。
 
-#### 修正 {#fixes-16}
+#### 修正{#fixes-19}
 
 - バッファメトリクストラッキングにおけるパフォーマンスの低下が修正されました。
 - Datadog Agent ソースが修正され、Datadog API v2 リソースからの `device` タグが保持されるようになりました。
@@ -556,10 +674,10 @@ Worker バージョン 2.15.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.15.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-8}
+#### 新機能{#new-features-10}
 
 - 以下のログタイプに対して新しい OCSF マッピングが追加されました。
-    - AWS GuardDuty: `AWS GuardDuty` という名前の単一マッピングにおけるすべての検出結果タイプ (EKS Audit、EC2、Lambda、IAM、DNS など) を対象
+    - AWS GuardDuty: `AWS GuardDuty` という名前の単一マッピングにおけるすべての検出結果タイプ (EKS Audit、EC2、Lambda、IAM、DNS など) が対象。
     - Infoblox NIOS: DNS Activity、DHCP Activity、audit (Authentication および API Activity)、および port と syslog Base Event (Infoblox DNS Query、Infoblox DHCP、Infoblox Audit Authentication、Infoblox Audit API、Infoblox Port)。
     - `datetime` および `host` プロファイルを含む OCSF スキーマバージョン1.3.0 (Authentication、クラス 3002) に対する Zscaler ZPA App Connector Status ログ。
     - `datetime`、`host`、`network_proxy`、および `security_control` プロファイルを含む OCSF スキーマバージョン 1.3.0 (Network Activity、クラス 4001) に対する Zscaler ZPA User Activity ログ。
@@ -577,7 +695,7 @@ Worker バージョン 2.15.0 では、以下を利用できます。
         - Observability Pipelines の簡略化された構文: `field: "message"`
         - カスタムプロセッサーの VRL 構文: `field: ".message"`
 
-#### 機能強化 {#enhancements-12}
+#### 機能強化{#enhancements-13}
 
 - Amazon S3 ソースが圧縮データを受け入れるようになりました。
 - Elasticsearch 送信先が更新され、新しいオプション `auto_routing`、`compression`、`id_key`、`pipeline`、`request_retry_partial`、`sync_fields`、および `tls` が追加されました。
@@ -587,7 +705,7 @@ Worker バージョン 2.15.0 では、以下を利用できます。
 - カスタムプロセッサーに、値の配列を CSV 形式の文字列にエンコードする `encode_csv` 関数が追加されました。これは `parse_csv` 関数とは逆に機能し、オプションの 1 バイトの区切り文字 (デフォルトは `,`) をサポートしています。
 - フィールド名で `.` がサポートされました (例: `foo."bar.baz"`)。
 
-#### 修正 {#fixes-17}
+#### 修正{#fixes-20}
 
 - バッファ使用率メトリクスの追跡精度が向上しました。
 - カスタムプロセッサーで `floor`、`md5`、`parse_key_value`、`precision`、`seahash` の誤ったパラメーター型が修正されました。
@@ -601,11 +719,11 @@ Worker バージョン 2.14.1 にアップグレードするには、以下の�
 - Docker: [2.14.1 イメージ][42]に対して `docker pull` コマンドを実行します。
 - Kubernetes: [Helm チャート][2]および [Worker のアップグレード][37]を参照してください。
 - APT: コマンド `apt-get install observability-pipelines-worker=2.14.1` を実行します。
-- RPM: `sudo yum install observability-pipelines-worker-2.14.1` コマンドを実行します。
+- RPM: コマンド `sudo yum install observability-pipelines-worker-2.14.1` を実行します。
 
 Worker バージョン 2.14.1 では、以下を利用できます。
 
-#### 修正 {#fixes-18}
+#### 修正{#fixes-21}
 
 - プロセッサーフィールドの空のパスの処理方法が修正されました。たとえば、Parse JSON プロセッサーが、値が `.` の `Field to parse JSON on` を処理する方法などです。
 
@@ -622,13 +740,13 @@ Worker バージョン 2.14.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.14.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-9}
+#### 新機能{#new-features-11}
 
 - Palo Alto Networks Threat イベントの OCSF マッピングが追加されました。
 - Database ソースが更新され、タイムアウト関連の変更が行われました。
 - `component_latency_seconds` ヒストグラムおよび `component_latency_mean_seconds` ゲージの内部メトリクスが追加されました。これらのメトリクスは、プロセッサーバッファ内を含め、イベントが単一プロセッサー内で費やす時間に基づいています。
 
-#### 機能強化 {#enhancements-13}
+#### 機能強化 {#enhancements-14}
 
 - Enrichment Table のエラー報告で Reference Tables メトリクスが使用されるようになり、類似ログの数が削減されました。
 - Splunk HEC 送信先でイベントからのインデックスフィールドの抽出がサポートされました。
@@ -640,7 +758,7 @@ Worker バージョン 2.14.0 では、以下を利用できます。
 - Datadog Logs 送信先が更新され、デフォルトが圧縮なしから `zstd` 圧縮に変更されました。
 - Datadog Agent ソースのアドレスを指定する環境変数が構成可能になりました。
 
-#### 修正 {#fixes-19}
+#### 修正 {#fixes-22}
 
 - Remote Configuration のポーリングが成功した時点でエラー状態が解除されないバグが修正されました。
 - バッファ使用率メトリクスが修正され、実際の使用レベルを適切に記録するようになりました。
@@ -663,7 +781,7 @@ Worker バージョン 2.13.2 にアップグレードするには、以下の�
 
 Worker バージョン 2.13.2 では、以下を利用できます。
 
-#### 修正 {#fixes-20}
+#### 修正{#fixes-23}
 
 - オブジェクトと一致するように `exists` および `missing` クエリが修正されました。
 
@@ -680,7 +798,7 @@ Worker バージョン 2.13.1 にアップグレードするには、以下の�
 
 Worker バージョン 2.13.1 では、以下を利用できます。
 
-#### 修正 {#fixes-21}
+#### 修正{#fixes-24}
 
 - すべてのプロセッサーが更新され、誤ったフィルタークエリ構文を適切に処理できるようになりました。
 
@@ -697,14 +815,14 @@ Worker バージョン 2.13.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.13.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-10}
+#### 新機能{#new-features-12}
 
 - メトリクスの[カスタムプロセッサー][24]: VRL を使用してメトリクスイベントを変換します。
 - [Secrets Management][31]: Observability Pipelines は、Datadog Secrets Management を使用してシークレットを取得できます。
 - [Live Capture][25] はメトリクスパイプラインで利用できます。
 - [Enrichment Tables][28] プロセッサーは、Reference Tables 内のデータセットを使用できます。
 
-#### 機能強化 {#enhancements-14}
+#### 機能強化{#enhancements-15}
 
 - [ディスクバッファ][18]が更新され、バッファがいっぱいになったときにログを破棄するようになりました。
 - Dedupe プロセッサーが更新され、キャッシュサイズを構成できるようになりました。
@@ -721,7 +839,7 @@ Worker バージョン 2.13.0 では、以下を利用できます。
     - `transform_buffer_utilization_level`
 - TLS 実装が更新され、認証情報を FIPS 準拠の PEM 形式で保存するようになりました。
 
-#### 修正 {#fixes-22}
+#### 修正{#fixes-25}
 
 - Live Capture が更新され、バグが修正されました。
 - ハイフンで区切られたセグメントの処理に関する検索構文のバグが修正されました。
@@ -743,19 +861,19 @@ Worker バージョン 2.12.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.12.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-11}
+#### 新機能{#new-features-13}
 
 - メトリクスパイプラインの [HTTP 送信先][29]: メトリクスを HTTP クライアントエンドポイントにルーティングします。
 - [MySQL ソース][30]: MySQL データベースから Observability Pipelines にログを送信します。
 
-#### 機能強化 {#enhancements-15}
+#### 機能強化{#enhancements-16}
 
 - HTTP クライアントのソースと送信先が更新され、カスタム認証戦略を設定できるようになりました。
 - メトリクスフィルタープロセッサーが更新され、`kind` および `value` でメトリクスをフィルタリングできるようになりました。
 - ターゲットイベントのみをルーティングおよび処理するプロセッサーグループが更新され、処理オーバーヘッドが削減されました。
 - Datadog Agent ソースが更新されました。これにより、タイムアウトがサポートされ、`component_timed_out_events_total` および `component_timed_out_requests_total` メトリクスが増加するようになりました。
 
-#### 修正 {#fixes-23}
+#### 修正{#fixes-26}
 
 - Amazon S3 送信先が更新され、`message` フィールドが常に文字列となり、必要に応じて JSON エンコードされるようになりました。
 - Worker のバグが修正され、Worker のログが正しく報告されるようになりました。
@@ -774,11 +892,11 @@ Worker バージョン 2.11.0 にアップグレードするには、以下の�
 - APT: コマンド `apt-get install observability-pipelines-worker=2.11.0` を実行します。
 - RPM: コマンド `sudo yum install observability-pipelines-worker-2.11.0` を実行します。
 
-<div class="alert alert-info">Worker 2.10 以前を実行しているパイプラインの場合:<br>- Worker 2.11 にアップグレードした後も、プロセッサーのフィルタークエリは引き続き従来の検索構文で実行されます。<br>- フィルタークエリを新しい検索構文に手動で更新する必要があります。<br>- その後、UI で [<b>New Search Syntax</b>] (新しい検索構文) トグルを有効にするか、API または Terraform を使用して <code>use_legacy_search_syntax</code> から <code>false</code> に設定します。<br><br>詳細については、<a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">フィルタークエリを新しい検索構文にアップグレードする</a>を参照してください。</a></div>
+<div class="alert alert-info">Worker 2.10 以前を実行しているパイプラインの場合:<br>- Worker 2.11 にアップグレードした後も、プロセッサーのフィルタークエリは引き続き従来の検索構文で実行されます。<br>- フィルタークエリを新しい検索構文に手動で更新する必要があります。<br>- その後、UI で [<b>New Search Syntax</b>] (新しい検索構文) トグルを有効にするか、API または Terraform を使用して <code>use_legacy_search_syntax</code> から <code>false</code> に設定します。<br><br>詳細については、「<a href="https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/">フィルタークエリを新しい検索構文にアップグレードする</a>」を参照してください。</a></div>
 
 バーョン 2.11.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-12}
+#### 新機能 {#new-features-14}
 
 - Sensitive Data Scanner プロセッサーのすぐに使えるルールが 100 個以上追加されました。これらのルールにより、個人を特定できる情報 (PII) とアクセスキー情報がリダクションされます。
 - 更新された[検索構文][3]により、以下の操作が可能になります。
@@ -799,7 +917,7 @@ Worker バージョン 2.10.0 にアップグレードするには、以下の�
 
 Worker バージョン 2.10.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-13}
+#### 新機能{#new-features-15}
 
 - [Kafka 送信先][5]: Observability Pipelines から Kafka トピックにログを送信します。
 - 新規および更新された[カスタムプロセッサー関数][6]:
@@ -808,24 +926,24 @@ Worker バージョン 2.10.0 では、以下を利用できます。
         - これらの関数は IPCrypt 仕様を使用しており、2 つの暗号化モードで IPv4 および IPv6 アドレスの両方をサポートしています。
             - aes128 (IPCrypt 決定論的、16 バイトキー)
             - pfx (IPCryptPfx、32 バイトキー)。
-            - どちらのアルゴリズムも形式を保持し (出力は有効な IP アドレス )、決定論的です。
+            - どちらのアルゴリズムも形式を保持し (出力は有効な IP アドレス)、決定論的です。
     - `xxhash` 関数は、`xxh32`、`xxh64`、`xxh3_64`、および `xxh3_128` ハッシュアルゴリズムを実装しています。
     - `parse_aws_alb_log` 関数が更新され、オプションの `strict_mode` パラメーターが追加されました。
         - `strict_mode` が `false` に設定されている場合、パーサーは失敗する代わりに、AWS ALB ログに新しく追加されたフィールドや、ログの末尾にあるフィールドを無視します。
-        - 現在の動作を維持するため、デフォルトは `true` です。
+        - 現在の動作を維持するため、デフォルトで `true` に設定されます。
     - [メトリクスパイプライン][32]:
         - [Datadog Agent ソース][33]: Datadog Agent から Observability Pipelines に処理のためにメトリクスを送信します。
         - [Filter プロセッサー][35]: 処理するメトリクスをフィルタリングします。
         - [Tag プロセッサー][36]: メトリクスに特定のタグを含めるか、除外します。
         - [Datadog Metrics 送信先][34]: 処理されたメトリクスを Datadog に送信します。
 
-#### 機能強化 {#enhancements-16}
+#### 機能強化{#enhancements-17}
 
 - カスタムプロセッサーのパフォーマンスが向上しました。
 - Worker が更新され、古いキーの使用を防ぐために、Datadog Agent から送信されたキーを無視し、認証に独自の Datadog キーのコピーを使用するようになりました。
 - `validate_json_schema` 関数を使用するカスタム関数で JSON スキーマを検証する際のエラー報告が改善されました。
 
-#### 修正 {#fixes-24}
+#### 修正{#fixes-27}
 
 - グループレベルのフィルタリングロジックが修正され、該当するログが除外されるようになりました。
 
@@ -842,7 +960,7 @@ Worker バージョン 2.9.1 にアップグレードするには、以下の手
 
 Worker バージョン 2.9.1 では、以下を利用できます。
 
-#### 修正 {#fixes-25}
+#### 修正{#fixes-28}
 
 - Microsoft Sentinel 送信先では、Azure Logs Ingestion API を使用してログを読み取るときのバッチサイズが 1 MB に制限されました。この制限サイズは、[Azure のドキュメント][8]に基づいて決定されました。
 
@@ -859,14 +977,14 @@ Worker バージョン 2.9.0 にアップグレードするには、以下の手
 
 Worker バージョン 2.9.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-14}
+#### 新機能{#new-features-16}
 
 - [OpenTelemetry Collector ソース][10]: OpenTelemetry Collector から Observability Pipelines にログを取り込みます。
 - [Datadog BYOC Logs 送信先][11]: ログを Datadog BYOC Logs 送信先にルーティングします。
 - [Google Pub/Sub 送信先][12]: Observability Pipelines から Google Pub/Sub メッセージングシステムにログを送信します。
 - Haversine で距離と方位を計算する `haversine` カスタム関数。
 
-#### 機能強化 {#enhancements-17}
+#### 機能強化{#enhancements-18}
 
 - Observability Pipelines Worker の内部ログが更新され、Datadog API キーの最初の 28 文字のみをリダクションできるようになりました。これは API キーに関連する問題を調査する際に役立ちます。
 - Remote Configuration の配信にかかる時間のパフォーマンスが向上しました。
@@ -885,7 +1003,7 @@ Worker バージョン 2.8.1 にアップグレードするには、以下の手
 
 Worker バージョン 2.8.1 では、以下を利用できます。
 
-#### 修正 {#fixes-26}
+#### 修正{#fixes-29}
 
 - HTTP クライアントソースの認証戦略が修正されました。
 
@@ -902,16 +1020,16 @@ Worker バージョン 2.8.0 にアップグレードするには、以下の手
 
 Worker バージョン 2.8.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-15}
+#### 新機能{#new-features-17}
 
 - すべてのソースと送信先が更新され、カスタム環境変数をサポートするようになりました。
 
-#### 機能強化 {#enhancements-18}
+#### 機能強化{#enhancements-19}
 
 - Elasticsearch 送信先の[インデックス戦略][21]が更新され、データストリームが含まれるようになりました。
 - HTTP クライアント送信先でテンプレート構文がサポートされました。
 
-#### 修正 {#fixes-27}
+#### 修正{#fixes-30}
 
 - HTTP Server ソースの TLS 有効化が修正されました。
 - Worker のヘルスメトリクスが修正されました。
@@ -930,20 +1048,20 @@ Worker バージョン 2.7.0 にアップグレードするには、以下の手
 
 Worker バージョン 2.7.0 では、以下を利用できます。
 
-#### 新機能 {#new-features-16}
+#### 新機能{#new-features-18}
 
 - [HTTP クライアント送信先][16]: ログをロギングプラットフォームや SIEM などの HTTP クライアントに送信します。
 - [プロセッサーグループ][17]: プロセッサーを論理グループに整理して、管理しやすくします。
 - 送信先に[ディスクおよびメモリ][18]のバッファリングオプションを使用できます。
 
-#### 機能強化 {#enhancements-19}
+#### 機能強化{#enhancements-20}
 
 - カスタム関数 `decode_lz4` が更新され、`lz4` フレームデータの解凍がサポートされました。
 - Azure Blob Storage および Google Cloud Storage アーカイブ送信先のプレフィックスフィールドでテンプレート構文がサポートされています。
 - Splunk HEC 送信先にはカスタム環境変数があります。
 - Sample プロセッサーにはオプションの [`group_by` パラメーター][20]があります。
 
-#### 修正 {#fixes-28}
+#### 修正{#fixes-31}
 
 - Datadog Logs 送信先のデフォルトの圧縮が `zstd` に更新されました。これは Datadog Agent のデフォルト圧縮と一致しています。
 - Amazon S3、Google Cloud Storage、および Azure Blob Storage の各送信先が修正され、ログのタイムスタンプが正しく解決されるようになりました。
@@ -1013,3 +1131,7 @@ Worker バージョン 2.7.0 では、以下を利用できます。
 [63]: /ja/observability_pipelines/sources/prometheus/
 [64]: /ja/observability_pipelines/destinations/prometheus/
 [65]: /ja/observability_pipelines/destinations/opentelemetry/metrics/
+[66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
+[67]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.2
+[68]: /ja/observability_pipelines/destinations/azure_data_explorer/
+[69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0

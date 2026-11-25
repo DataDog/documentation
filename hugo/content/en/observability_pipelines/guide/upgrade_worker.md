@@ -14,6 +14,75 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.26.2
+
+To upgrade to Worker version 2.26.2:
+
+- Docker: Run the `docker pull` command for the [2.26.2 image][73].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.2`.
+
+Worker version 2.26.2 gives you access to the following:
+
+#### Enhancements
+
+- Reduced network usage for Worker internal telemetry.
+
+## Worker version 2.26.1
+
+To upgrade to Worker version 2.26.1:
+
+- Docker: Run the `docker pull` command for the [2.26.1 image][71].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.1`.
+
+Worker version 2.26.1 gives you access to the following:
+
+#### Security
+
+- The Worker now redacts secrets from the pipeline load errors it reports to Datadog. Secrets
+  referenced in pipeline settings don't appear in deployment errors in the Observability Pipelines
+  UI.
+
+#### New features
+
+- The Custom Processor now includes `log10` and `pow` functions. For example, `10 * log10!(<mw>)` converts milliwatts to dBm, and `pow!(10, <dbm> / 10)` converts dBm to milliwatts.
+
+#### Enhancements
+
+- Destinations now include the retry attempt number in their retry logs. Continuous retry
+  failures are logged as errors every 10 attempts.
+- The `pipelines.stopped_total` metric is now available. It tells you the number of times the Worker instance has stopped and includes the `reason` tag to identify what triggered the shutdown.
+
+#### Fixes
+
+- Live Capture now:
+    - Limits each publish request to approximately 4 MB of captured events.
+    - Keeps capturing when the intake rejects a batch, and drops the rejected batch with a warning.
+      The capture fails only if no batches are published.
+    - Includes the HTTP status reason and the intake's response in publish errors.
+- The Datadog BYOC Logs destination now handles log events that are too large for a single
+  request in the following ways:
+    - Shortens the `message` field so the log fits within the payload limit, and appends
+      `...TRUNCATED...`. The default limit is 5 MB. To change it, set
+      `DD_OP_DESTINATION_CLOUDPREM_MAX_PAYLOAD_BYTES`.
+    - Truncated logs are tagged with `truncated:single_line` and included in the
+      `datadog_logs_events_truncated_total` metric.
+    - Drops logs that have no string `message` field or whose other fields alone exceed the limit.
+- The Worker now:
+    - Keeps its internal telemetry running for 5 seconds after pipelines stop, so shutdown metrics
+      such as `pipelines.stopped_total` are sent to Datadog.
+    - Keeps pipelines running when the configuration file in its data directory changes, such as
+      when Kubernetes reapplies volume ownership after a node restart.
+    - Reports the failed source's error when the Worker stops all sources because one source failed or panicked.
+    - No longer panics with the `Replacing unknown sink from fanout` error when a configuration reload reuses a component ID for a different type of component, or when a failed reload restores a removed component.
+- TLS-enabled sources with `tls.verify_certificate: true` no longer fail the handshake of clients that resume a previous TLS session. Previously, the Worker rejected these connections with a `session id context uninitialized` error.
+- For the Custom Processor:
+    - The `Event mapping aborted.` debug log now includes the abort reason in its error field.
+    - Field paths with array indexes outside the `isize` range return an error instead of silently wrapping to a different index.
+
 ## Worker version 2.26.0
 
 To upgrade to Worker version 2.26.0:
@@ -150,6 +219,7 @@ Worker version 2.25.0 gives you access to the following:
 #### New features
 
 - The [Azure Data Explorer destination][68] is now available.
+- [Log Anomaly Detection][72] is now available.
 
 #### Enhancements
 
@@ -1138,3 +1208,6 @@ Worker version 2.7.0 gives you access to the following:
 [68]: /observability_pipelines/destinations/azure_data_explorer/
 [69]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.0
 [70]: /observability_pipelines/processors/spike_protection/
+[71]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.1
+[72]: /observability_pipelines/log_anomaly_detection/
+[73]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.2

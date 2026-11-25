@@ -557,6 +557,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Azure Application Gateway
+      recommendation_type: Delete Idle Azure Application Gateway
+      recommendation_description: Identifies Azure Application Gateways that served no requests over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: Azure Firewall
       recommendation_type: Delete Idle Azure Firewall
       recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
@@ -656,6 +662,12 @@ multifiltersearch:
       resource_type: Synapse Dedicated SQL Pool
       recommendation_type: Delete Idle Synapse Dedicated SQL Pool
       recommendation_description: Identifies online Synapse dedicated SQL pools with no logins and low DWU usage, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: Synapse Dedicated SQL Pool
+      recommendation_type: Pause Idle Synapse Dedicated SQL Pool
+      recommendation_description: Identifies online Synapse dedicated SQL pools that sit idle for most of the hours they are online, and recommends pausing them on a schedule.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -788,6 +800,12 @@ multifiltersearch:
       resource_type: Compute Instance
       recommendation_type: Downsize Compute Instance
       recommendation_description: Compute instance with low CPU and memory usage that can be downsized to a smaller instance type.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Migrate
+      cloud_provider: GCP
+      resource_type: Compute Instance
+      recommendation_type: Migrate Old-Generation Compute Instance
+      recommendation_description: Identifies standalone N1 Compute Engine instances and recommends migrating them to a cheaper E2 or N2D machine type.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP

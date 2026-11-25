@@ -162,11 +162,11 @@
     "summary": "List active Agent Health issues"
   },
   "ListAgentHealthIssues": {
-    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nSet `count_by=issue_type` to include `meta.page`, where `total_count` is the number of\nopen issues matching the filters and `counts_by_issue_type` holds the per-type counts.\n`meta` is omitted when `count_by` is not requested.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nThe response always includes `meta.page` with the applied `limit`, `offset`, and\n`total_count` (the number of open issues matching the filters). Set `count_by=issue_type`\nto also include `counts_by_issue_type` with per-issue-type counts.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
     "summary": "List Agent Health issues"
   },
   "GetAgentHealthIssue": {
-    "description": "Get an Agent Health issue and its available remediation in your organization.\nOnly open issues are returned. The `remediation` attribute is omitted when\nthe issue has no remediation.\n\nReturns `404` if the issue does not exist, is not open, belongs to another\norganization, or you do not have access to its data. This response does not\nreveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.",
+    "description": "Get an Agent Health issue and its available remediation in your organization.\nThe `remediation` attribute is omitted when the issue has no remediation.\n\nReturns `404` if the issue does not exist, belongs to another organization, or\nyou do not have access to its data. This response does not reveal whether the\nissue exists. Returns `403` if you lack the `hosts_read` permission.",
     "summary": "Get an Agent Health issue"
   },
   "ListAwsScanOptions": {
@@ -1363,7 +1363,7 @@
     "summary": "Get commitments coverage (scalar)"
   },
   "GetCommitmentsCoverageTimeseries": {
-    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type for both hours and cost. AWS and Azure report Reserved Instances, Savings Plans, On-Demand, and Spot. GCP reports Flex Committed Use Discounts and On-Demand.",
     "summary": "Get commitments coverage (timeseries)"
   },
   "GetCommitmentsOnDemandHotspotsScalar": {
@@ -1833,7 +1833,7 @@
     "summary": "Get all deployment gates"
   },
   "CreateDeploymentGate": {
-    "description": "Endpoint to create a deployment gate.",
+    "description": "Create a deployment gate for a specific environment or for all environments using `*`.\nA gate for all environments and a gate for a specific environment cannot coexist for the\nsame organization, service, and identifier. A conflicting creation returns 400 Bad Request.",
     "summary": "Create deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
@@ -2383,7 +2383,7 @@
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
-    "description": "Creates a new environment for organizing feature flags.",
+    "description": "Creates an environment for organizing feature flags. A non-null subject authorization provider ID\nmust be registered in the current organization and site, even when authorization is disabled. An unknown\nID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.",
     "summary": "Create an environment",
     "request_description": "",
     "request_schema_description": "Request to create a new environment."
@@ -2397,7 +2397,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
@@ -3327,6 +3327,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListGitHubCostsIntegrationAccounts": {
+    "description": "List GitHub Costs integration accounts.",
+    "summary": "List GitHub Costs integration accounts"
+  },
+  "CreateGitHubCostsIntegrationAccount": {
+    "description": "Create a GitHub Costs integration account.",
+    "summary": "Create a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a GitHub Costs integration account."
+  },
+  "DeleteGitHubCostsIntegrationAccount": {
+    "description": "Delete a GitHub Costs integration account.",
+    "summary": "Delete a GitHub Costs integration account"
+  },
+  "GetGitHubCostsIntegrationAccount": {
+    "description": "Get a GitHub Costs integration account.",
+    "summary": "Get a GitHub Costs integration account"
+  },
+  "UpdateGitHubCostsIntegrationAccount": {
+    "description": "Update a GitHub Costs integration account. Only the fields provided are changed.",
+    "summary": "Update a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a GitHub Costs integration account."
   },
   "ListNebiusCloudIntegrationAccounts": {
     "description": "List Nebius Cloud integration accounts.",
@@ -5017,6 +5041,64 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "CreateNotebook": {
+    "description": "Create a notebook from its full Markdown document and metadata. The leading H1 supplies the title.\nJSON requests may also supply an explicit title attribute; if both are supplied, they must agree.\nCreation without a title returns 422. Other metadata comes from JSON attributes or YAML frontmatter\nin text/markdown requests. For older documents, a non-blank frontmatter title is accepted when no\nnon-blank leading H1 is supplied.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json. Full-document responses include the title H1 in both representations;\nMarkdown responses omit title from frontmatter.",
+    "summary": "Create a notebook",
+    "request_description": "Notebook create request body.",
+    "request_schema_description": "Request body for creating a notebook."
+  },
+  "GetNotebook": {
+    "description": "Get a notebook by ID.\n\nUse `Accept: text/markdown` to retrieve the full notebook, with its title as a leading H1 and other\nmetadata as YAML frontmatter. JSON attributes.markdown includes the same title H1.\nUse the JSON response to retrieve the notebook resource, relationships, and\nrequest-specific metadata.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook"
+  },
+  "UpdateNotebook": {
+    "description": "Update notebook metadata, optionally replacing the full Markdown document. Omitted attributes are\nunchanged. JSON requests supply metadata as attributes; text/markdown requests supply other metadata\nas YAML frontmatter. A supplied markdown attribute or a text/markdown body replaces the whole body\nand consumes its leading H1 as the title. When no title is supplied, the existing title is preserved.\nIf explicit JSON title and document title disagree and exactly one matches the stored title, the\nother wins; if both change to different values, return 422. Use POST /content with op=replace to\nreplace the document without changing metadata other than the title.\nRead-only fields in frontmatter are ignored; unknown writable fields are rejected.\nReturns the full notebook.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook",
+    "request_description": "Notebook update request body.",
+    "request_schema_description": "Request body for updating a notebook."
+  },
+  "UpdateNotebookContent": {
+    "description": "Append, replace, edit, or remove notebook content, optionally within a section.\n\nJSON requests require `Content-Type: application/json` and supply all operation fields in the\nbody. Operation-related query parameters are rejected, even when they match the body. Supply one\nappend, replace, or remove operation, or an ordered atomic batch of 1 to 100 edit operations.\nMixed batches and multiple non-edit operations are rejected.\n\nMarkdown requests require `Content-Type: text/markdown` and an explicit `op` query parameter.\nThe body contains the Markdown to append or replace, or the literal `new_text` for an edit.\nA remove operation requires an empty body. `old_text` and `expected_match_count` apply only to\nedits. Supply `scope[type]` and `scope[id]` together. Each operation query parameter may occur\nonly once.\n\nOmit the scope to target the whole notebook. An explicit `notebooks` scope must match the ID in\nthe URL. To replace a section, use `op=replace` with `scope[type]=notebook_sections` and the\nsection ID. The replacement must start with a heading, which keeps the section ID. Empty\nreplacements, including those containing only white space, remove the section. Section-scoped\nedits must preserve a leading heading unless they remove the section entirely.\nAn append operation adds content after the selected section and its nested sections.\nReplacing or removing a section can change the surrounding heading hierarchy. An unavailable\nscope returns an error instead of targeting the whole notebook.\n\nWhole-document replacement consumes a leading H1 as the notebook title. Whole-document edits\nmatch the same projection, including that H1, so editing it can rename the notebook. Append and\nsection-scoped operations retain their headings as body content and preserve the notebook title.\nOther notebook metadata is unchanged, including when frontmatter is supplied. Edit operations\nmatch exact text in the Markdown document and treat replacement text literally.\nEdit, replace, remove, and scoped append operations check for conflicting changes before writing.\nSend the most recently observed `document_revision` with the request.\n\nEvery successful operation returns 200 and the full resulting notebook, including operations\nthat make no changes or remove the entire body. Responses negotiate JSON or Markdown\nindependently of the request format. JSON responses and all errors use `application/vnd.api+json`.",
+    "summary": "Update notebook content",
+    "request_description": "JSON operations request or single-operation Markdown body. JSON requires a body; Markdown remove\nrequires an empty body.",
+    "request_schema_description": "Canonical content operations request. Supply one append, replace, or remove, or an atomic batch\nconsisting only of edits."
+  },
+  "ListNotebookSections": {
+    "description": "List the notebook sections in document order. JSON returns section metadata without markdown\nunless requested through fields[notebook_sections]. Markdown returns an outline of section\nheadings with stable HTML anchors, without section content.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook sections"
+  },
+  "GetNotebookSection": {
+    "description": "Get one section by its stable ID. A section includes its heading and descendants up to the next\nheading at the same or a higher level.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook section"
+  },
+  "ListNotebookTasks": {
+    "description": "List the notebook tasks in document order.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook tasks"
+  },
+  "GetNotebookTask": {
+    "description": "Get one task by its stable ID.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook task"
+  },
+  "UpdateNotebookTask": {
+    "description": "Update task text or completion state. Supplying text replaces all inline content with plain\ntext, removing formatting, links, and mentions. Use POST /content edits for formatted changes.\nSupply at least one of text or checked. Returns the updated task; request bodies must be JSON.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook task",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a task."
+  },
+  "ListNotebookWidgets": {
+    "description": "List the notebook widgets in document order. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook widgets"
+  },
+  "GetNotebookWidget": {
+    "description": "Get one widget by its stable ID. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook widget"
+  },
+  "UpdateNotebookWidget": {
+    "description": "Update the widget definition or notebook-owned graph_size, time, or split_by. Supply at least one\nwritable field. Definitions are replaced as a whole; title belongs in definition.title. Null\nclears graph_size, time, or split_by. Request and response bodies must be JSON. Returns the\nupdated widget.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook widget",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a widget."
+  },
   "GetOIDCDiscoveryDocument": {
     "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
     "summary": "Get OpenID Connect provider metadata"
@@ -5685,6 +5767,30 @@
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway provider."
   },
+  "DeleteAIGatewayModelByCanonical": {
+    "description": "Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a provider model by canonical ID"
+  },
+  "UpdateAIGatewayModelByCanonical": {
+    "description": "Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update a provider model by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request to update a model catalog entry."
+  },
+  "DeleteAIGatewayModelPricingByCanonical": {
+    "description": "Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a model pricing override by canonical ID"
+  },
+  "GetAIGatewayModelPricingByCanonical": {
+    "description": "Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.",
+    "summary": "Get a model pricing override by canonical ID"
+  },
+  "UpdateAIGatewayModelPricingByCanonical": {
+    "description": "Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Set a model pricing override by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request body for setting model pricing."
+  },
   "ListAiGatewayModels": {
     "description": "List all model catalog entries for a provider. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "List models for an AI Gateway provider"
@@ -5702,25 +5808,25 @@
     "request_schema_description": "Request to create several model catalog entries."
   },
   "DeleteAiGatewayModel": {
-    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.",
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.\nA canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.",
     "summary": "Delete a model from an AI Gateway provider"
   },
   "UpdateAiGatewayModel": {
-    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Update a model for an AI Gateway provider",
     "request_description": "",
     "request_schema_description": "Request to update a model catalog entry."
   },
   "DeleteAiGatewayModelPricing": {
-    "description": "Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Delete a model pricing override"
   },
   "GetAiGatewayModelPricing": {
-    "description": "Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "description": "Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "Get a model pricing override"
   },
   "UpdateAiGatewayModelPricing": {
-    "description": "Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Set a model pricing override",
     "request_description": "",
     "request_schema_description": "Request body for setting model pricing."
@@ -5910,53 +6016,53 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection agent rule.",
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListCSMThreatsAgentPolicies": {
-    "description": "Get the list of Workload Protection policies.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection policies.",
     "summary": "Get all Workload Protection policies"
   },
   "CreateCSMThreatsAgentPolicy": {
-    "description": "Create a new Workload Protection policy with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection policy with the given parameters.",
     "summary": "Create a Workload Protection policy",
     "request_description": "The definition of the new Agent policy",
     "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
-    "description": "Get the details of a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection policy.",
     "summary": "Get a Workload Protection policy"
   },
   "UpdateCSMThreatsAgentPolicy": {
-    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.",
     "summary": "Update a Workload Protection policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
@@ -6696,7 +6802,7 @@
     "summary": "Get Application Security details for a service"
   },
   "ListSecurityFindings": {
-    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\nThis endpoint takes the query, sort, and pagination as URL query parameters. `SearchSecurityFindings` (`POST /api/v2/security/findings/search`) accepts the same parameters in a JSON request body and returns the same results, so pick by how you want to send them. Use this endpoint when the query fits easily in a URL. To send the query in a JSON body without URL encoding, use `SearchSecurityFindings` instead. A `meta.page.after` cursor from either endpoint works on the other.\n\nUse this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "List security findings"
   },
   "UpdateFindingsAssignee": {
@@ -6920,7 +7026,7 @@
     "request_schema_description": "Request to mute or unmute security findings."
   },
   "SearchSecurityFindings": {
-    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\nThis endpoint takes the query, sort, and pagination in a JSON request body. `ListSecurityFindings` (`GET /api/v2/security/findings`) accepts the same parameters as URL query parameters and returns the same results, so pick by how you want to send them. Use this endpoint to send the query without URL encoding, for example when it has many quotes, parentheses, or spaces. To get the next page, send `meta.page.after` as `data.attributes.page.cursor` in the request body. The `links.next` URL always points to `ListSecurityFindings`, with the query in the URL.\n\nUse this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "Search security findings",
     "request_description": "",
     "request_schema_description": "The request body for searching security findings."
@@ -6970,7 +7076,7 @@
     "summary": "List ownership history by owner type"
   },
   "SearchRemediationGroups": {
-    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository or upgrading an image.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition    | Finding type                       | Kind object      |\n| ---------------------- | ---------------------------------- | ---------------- |\n| `sca.package_update`   | `library_vulnerability`            | `package_update` |\n| `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
+    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition  | Finding type            | Kind object      |\n| -------------------- | ----------------------- | ---------------- |\n| `sca.package_update` | `library_vulnerability` | `package_update` |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
     "summary": "Search remediation groups"
   },
   "ListAssetsSBOMs": {
@@ -7124,11 +7230,11 @@
     "summary": "Start a batch migration"
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get all Workload Protection agent rules](https://docs.datadoghq.com/api/latest/csm-threats/#get-all-workload-protection-agent-rules)\ninstead, on all sites including US1-FED.\n\nGet the list of agent rules.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get a Workload Protection agent rule](https://docs.datadoghq.com/api/latest/csm-threats/#get-a-workload-protection-agent-rule)\ninstead, on all sites including US1-FED.\n\nGet the details of a specific agent rule.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
@@ -7168,6 +7274,10 @@
     "summary": "Create an entity context sync configuration",
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
+  },
+  "GetAWSIdentityCenterAWSAccounts": {
+    "description": "Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and\nwhether users have been collected from them. Collected users are a prerequisite for creating or enabling the\nAWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management\naccounts and any accounts that users were collected from.",
+    "summary": "Get AWS IAM Identity Center account prerequisites"
   },
   "GetEntraIdAzureAppRegistrations": {
     "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
@@ -7470,6 +7580,32 @@
   "GetSecurityAgentInvestigation": {
     "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
     "summary": "Get a Bits Security Analyst investigation"
+  },
+  "GetSecurityAgentOutreachPolicy": {
+    "description": "Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule\nautomation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains\nthat could be allowed next.",
+    "summary": "Get the user outreach policy"
+  },
+  "UpdateSecurityAgentOutreachMode": {
+    "description": "Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an\nanalyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users\nwhose email domain is allowed).",
+    "summary": "Update the outreach mode",
+    "request_description": "The new outreach mode.",
+    "request_schema_description": "Request to set the organization's outreach mode."
+  },
+  "AddSecurityAgentOutreachPolicyDomain": {
+    "description": "Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The\ndomain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.\nAn organization can allow at most 20 domains.",
+    "summary": "Add an allowed outreach domain",
+    "request_description": "The email domain to allow.",
+    "request_schema_description": "Request to add one allowed email domain."
+  },
+  "RemoveSecurityAgentOutreachPolicyDomain": {
+    "description": "Remove one allowed email domain, by its name.",
+    "summary": "Remove an allowed outreach domain"
+  },
+  "UpdateSecurityAgentOutreachPolicyRules": {
+    "description": "Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;\nrules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews\nin `automated` mode.",
+    "summary": "Update outreach policy rules",
+    "request_description": "The rules to upsert.",
+    "request_schema_description": "Request to upsert the outreach automation state of detection rules."
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",

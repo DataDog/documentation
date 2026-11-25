@@ -63,12 +63,12 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
 To provision a user's Datadog role (built-in or custom) through SCIM, add an explicit mapping for the `roles` attribute. Okta does not map this attribute by default.
 
-Datadog's SCIM role support follows the SCIM multi-valued attribute convention defined in [RFC 7643][8], using the role UUID as `value` and the role name as `display`:
+Datadog represents roles as a multi-valued SCIM attribute, as defined in [RFC 7643][8]. Each role has a UUID (`value`) and a name (`display`). When a user has exactly one role, Datadog returns `primary: true` for that role:
 
 ```json
 {
   "roles": [
-    { "value": "<DATADOG_ROLE_UUID>", "display": "<DATADOG_ROLE_NAME>" }
+    { "value": "<DATADOG_ROLE_UUID>", "display": "<DATADOG_ROLE_NAME>", "primary": true }
   ]
 }
 ```
@@ -82,6 +82,10 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
     - For {{< ui >}}Enum{{< /ui >}}, select {{< ui >}}Define enumerated list of values{{< /ui >}} and add one entry per Datadog role, using the role name as the display name and the role UUID as the value. You can find a role's UUID in the role's URL on your [Organization Settings][9] page. Add any custom roles the same way.
 2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
 3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
+
+With this mapping, changing the role in Okta replaces the user's single Datadog role on the next profile push. For example, changing the assignment from Standard to Read Only removes Standard and assigns Read Only.
+
+If a user has multiple Datadog roles, Datadog does not mark any of them as primary. The single-role mapping does not remove accumulated roles automatically. If the user should have only one role, confirm the intended role in Okta. Edit the user's roles in Datadog so that only that role remains. After this one-time cleanup, Okta can replace the role on subsequent updates. For users who need multiple roles, use [role slots](#assign-multiple-roles-to-a-user).
 
 If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. Unmatched roles are logged to Audit Trail. Users with no role matches are assigned the role set in {{< ui >}}Assign Role to auto-created users{{< /ui >}} on the [SAML login methods][10] page. If that setting is empty, the user gets no role. For more details, see [SCIM][1].
 

@@ -202,3 +202,16 @@ entries:
     operations:
       - SearchCostRecommendations
     title: Document extra fields in cost recommendations
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42087
+    operations:
+      - GetCommitmentsCommitmentList
+      - GetCommitmentsCoverageScalar
+      - GetCommitmentsCoverageTimeseries
+      - GetCommitmentsOnDemandHotspotsScalar
+      - GetCommitmentsSavingsScalar
+      - GetCommitmentsSavingsTimeseries
+      - GetCommitmentsUtilizationScalar
+      - GetCommitmentsUtilizationTimeseries
+    title: Fix Cloud Cost Management commitments response schemas
