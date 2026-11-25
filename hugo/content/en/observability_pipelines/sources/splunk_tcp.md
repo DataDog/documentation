@@ -32,13 +32,15 @@ After you select the Splunk TCP source in the pipeline UI, enter the identifier 
 
 #### Maximum connection duration
 
-Enter the maximum number of seconds to keep a connection open. If left unset, connections can remain open indefinitely.
+Enter the maximum number of seconds to keep a connection open. If left unset, connections can remain open indefinitely. When [**Verify client identities**](#enable-tls) is on, this setting is required and must be between 30 and 86400 seconds.
 
 #### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
 
 {{% observability_pipelines/tls_settings_mtls %}}
+
+{{% observability_pipelines/tls_settings_client_identity %}}
 
 ### Settings configured with environment variables
 
