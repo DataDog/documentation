@@ -11,7 +11,7 @@ further_reading:
 site_support_id: kubernetes_actions
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/kubernetes-actions/" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/kubernetes-actions/" >}}
 Kubernetes Actions is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}
 
@@ -24,7 +24,7 @@ You can run the following actions:
 - Roll back a deployment
 - View the full manifest of a ConfigMap
 
-The Datadog Cluster Agent in your cluster runs each action. Datadog sends the action to the Cluster Agent's [Private Action Runner][2] as a signed task. [Remote Configuration][3] stays available as a second delivery channel.
+The Datadog Cluster Agent in your cluster runs each action. Datadog sends each action to the Cluster Agent's [Private Action Runner][2] as a signed task. Datadog can also send actions through [Remote Configuration][3].
 
 ## Prerequisites
 
@@ -40,10 +40,10 @@ The Datadog Cluster Agent in your cluster runs each action. Datadog sends the ac
 ### Cluster Agent versions
 
 - **7.84.x and 7.85.x**: Remote Configuration is always enabled as a second delivery channel, and you can't disable it.
-- **7.86.0 or later**: You can disable the Remote Configuration delivery channel (optional). This option requires Helm chart 3.265.0 or later, or Operator 1.32.0 or later. See the [Disable the Remote Configuration delivery channel](#disable-the-remote-configuration-delivery-channel) section.
+- **7.86.0 or later**: You can disable the Remote Configuration delivery channel. This option requires Helm chart 3.265.0 or later, or Operator 1.32.0 or later. See the [Disable the Remote Configuration delivery channel](#disable-the-remote-configuration-delivery-channel) section.
 - **Earlier than 7.84.0**: Not supported. The Cluster Agent ignores the Kubernetes Actions configuration.
 
-## Give users access
+## Give users access to Kubernetes Actions
 
 ### Create a role with the Kubernetes Actions permissions
 
@@ -54,13 +54,13 @@ Kubernetes Actions uses the following permissions:
 
 To run an action, a user needs both permissions and must be a member of the team that owns the resource. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section.
 
-If a user doesn't have the required permissions, the action is unavailable in Kubernetes Explorer. Hover over the action to see the permissions that it requires.
+If a user doesn't have the required permissions or team membership, the action is unavailable in Kubernetes Explorer. Hover over the action to see the permissions that it requires.
 
 The Datadog managed roles don't include Kubernetes Actions Write. To give users this permission, create a [custom role][6]:
 
 1. In Datadog, go to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Roles{{< /ui >}}][7] and click {{< ui >}}New Role{{< /ui >}}.
 1. Enter a name for the role, for example `Kubernetes Actions Operator`.
-1. In the permissions list, search for `Kubernetes Actions` and enable {{< ui >}}Kubernetes Actions Write{{< /ui >}} and {{< ui >}}Kubernetes Actions Read{{< /ui >}}.
+1. In the permissions list, search for `Kubernetes Actions` and enable {{< ui >}}Kubernetes Actions Read{{< /ui >}} and {{< ui >}}Kubernetes Actions Write{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
 1. Assign the role to each user who runs actions. Users keep their existing roles, and the new role adds permissions. For instructions, see [Manage users][8].
 
@@ -68,7 +68,7 @@ The Datadog managed roles don't include Kubernetes Actions Write. To give users 
 
 Users can run actions only on resources that belong to one of their [Datadog teams][9]. Before an action runs, Datadog reads the `team` tag of the target resource and checks that the user is a member of that team. If the resource has no `team` tag, or if the user isn't a member of the team, Datadog rejects the action.
 
-To assign a resource to a team, add a `team` label set to the team **handle** (for example, `my-team`), not the team's display name. The Cluster Agent adds the `team` tag from the label.
+To assign a resource to a team, add a `team` label set to the team handle (for example, `my-team`), not the team's display name. The Cluster Agent adds the `team` tag from the label.
 
 | Action | Resource that needs the `team` label |
 | --- | --- |
@@ -93,7 +93,9 @@ spec:
         team: my-team      # Delete pods
 ```
 
-- **More than one team**: Label values can't contain commas. To assign a resource to more than one team, use a `team` annotation with a comma-separated list of handles instead of the label, for example `team: "my-team,other-team"`.
+The following rules apply to team assignment:
+
+- **More than one team**: Label values can't contain commas. To assign a resource to more than one team, use a `team` annotation with a comma-separated list of handles instead of the label, for example, `team: "my-team,other-team"`.
 - **Delay**: Datadog uses the resource data that it received in the last 15 minutes. A new label can take a few minutes to take effect.
 - **Organizations**: Team membership applies to one Datadog organization. Users must be members of the team in the organization where they run the action.
 
@@ -102,74 +104,11 @@ spec:
 Follow the instructions for your deployment method and version. In each example, replace `7.84.6` with the Cluster Agent version that you run (7.84.0 or later).
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-#### Helm chart 3.265.0 or later
-
-1. Add the following to your `values.yaml` file:
-
-   ```yaml
-   datadog:
-     kubernetesActions:
-       enabled: true
-
-   clusterAgent:
-     enabled: true
-     image:
-       tag: 7.84.6
-   ```
-
-   Keep the rest of your `values.yaml` file. Don't set `datadog.leaderElection: false` or `remoteConfiguration.enabled: false`.
-
-1. Upgrade the release:
-
-   ```bash
-   helm repo update
-   helm upgrade --install <RELEASE_NAME> datadog/datadog \
-     --version 3.265.0 \
-     --namespace <NAMESPACE> \
-     -f values.yaml
-   ```
-
-This chart version grants the Cluster Agent all the Kubernetes permissions that the actions need.
-
-#### Helm chart 3.228.0 to 3.264.x
-
-1. Add the following to your `values.yaml` file. The `clusterAgent.privateActionRunner.enabled` setting enables the Private Action Runner delivery channel.
-
-   ```yaml
-   datadog:
-     kubernetesActions:
-       enabled: true
-
-   clusterAgent:
-     enabled: true
-     image:
-       tag: 7.84.6
-     privateActionRunner:
-       enabled: true
-   ```
-
-   Keep the rest of your `values.yaml` file. Don't set `datadog.leaderElection: false` or `remoteConfiguration.enabled: false`.
-
-1. Upgrade the release with your current chart version:
-
-   ```bash
-   helm repo update
-   helm upgrade --install <RELEASE_NAME> datadog/datadog \
-     --version <CHART_VERSION> \
-     --namespace <NAMESPACE> \
-     -f values.yaml
-   ```
-
-1. To let users roll back deployments, follow the steps in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section.
-
-{{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-#### Datadog Operator 1.32.0 or later
+### Datadog Operator 1.32.0 or later
 
-1. Upgrade the Datadog Operator:
+1. Upgrade the Datadog Operator to 1.32.0 or later:
 
    ```bash
    helm repo update
@@ -205,7 +144,7 @@ This chart version grants the Cluster Agent all the Kubernetes permissions that 
 
 This Operator version grants the Cluster Agent all the Kubernetes permissions that the actions need.
 
-#### Datadog Operator 1.29.0 to 1.31.x
+### Datadog Operator 1.29.0 to 1.31.x
 
 These Operator versions enable the Private Action Runner delivery channel only through annotations on the `DatadogAgent` resource.
 
@@ -247,11 +186,74 @@ These Operator versions enable the Private Action Runner delivery channel only t
 1. To let users roll back deployments, follow the steps in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section.
 
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+### Helm chart 3.265.0 or later
+
+1. Add the following to your `values.yaml` file:
+
+   ```yaml
+   datadog:
+     kubernetesActions:
+       enabled: true
+
+   clusterAgent:
+     enabled: true
+     image:
+       tag: 7.84.6
+   ```
+
+   Keep your other settings in the `values.yaml` file. Don't set `datadog.leaderElection: false` or `remoteConfiguration.enabled: false`.
+
+1. Upgrade the release:
+
+   ```bash
+   helm repo update
+   helm upgrade --install <RELEASE_NAME> datadog/datadog \
+     --version 3.265.0 \
+     --namespace <NAMESPACE> \
+     -f values.yaml
+   ```
+
+This chart version grants the Cluster Agent all the Kubernetes permissions that the actions need.
+
+### Helm chart 3.228.0 to 3.264.x
+
+1. Add the following to your `values.yaml` file. The `clusterAgent.privateActionRunner.enabled` setting enables the Private Action Runner delivery channel.
+
+   ```yaml
+   datadog:
+     kubernetesActions:
+       enabled: true
+
+   clusterAgent:
+     enabled: true
+     image:
+       tag: 7.84.6
+     privateActionRunner:
+       enabled: true
+   ```
+
+   Keep your other settings in the `values.yaml` file. Don't set `datadog.leaderElection: false` or `remoteConfiguration.enabled: false`.
+
+1. Upgrade the release with your current chart version:
+
+   ```bash
+   helm repo update
+   helm upgrade --install <RELEASE_NAME> datadog/datadog \
+     --version <CHART_VERSION> \
+     --namespace <NAMESPACE> \
+     -f values.yaml
+   ```
+
+1. To let users roll back deployments, follow the steps in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Grant the rollback permission (earlier versions only)
 
-Do this step only if you use Helm chart 3.228.0 to 3.264.x, or Operator 1.29.0 to 1.31.x. These versions let the Cluster Agent delete pods and restart deployments. To roll back deployments, the Cluster Agent also needs to read ReplicaSets.
+Do these steps only if you use Helm chart 3.228.0 to 3.264.x, or Operator 1.29.0 to 1.31.x. These versions let the Cluster Agent delete pods and restart deployments. To roll back deployments, the Cluster Agent also needs to read ReplicaSets.
 
 1. Find the name of the Cluster Agent service account:
 
@@ -320,7 +322,7 @@ You can stop sending actions through Remote Configuration. This option requires 
 
 ### Grant permission to view ConfigMap manifests
 
-To let users view the full manifest of a ConfigMap, the Cluster Agent needs to read ConfigMaps. This permission gives the Cluster Agent read access to all ConfigMaps in the cluster. Do this step only if your users need to see ConfigMap keys and values.
+To let users view the full manifest of a ConfigMap, the Cluster Agent needs to read ConfigMaps. This permission gives the Cluster Agent read access to all ConfigMaps in the cluster. Do these steps only if your users need to see ConfigMap keys and values.
 
 1. Find the name of the Cluster Agent service account:
 
@@ -402,7 +404,7 @@ Kubernetes Actions doesn't run actions on protected system namespaces, such as `
 
 To limit the risk of storing sensitive data in Datadog, the Agent collects ConfigMap metadata only. The Agent removes the `data`, `binaryData`, and `managedFields` fields in your cluster before it sends the ConfigMap to Datadog. To see the keys and values of a ConfigMap, request the full manifest from the Cluster Agent.
 
-Viewing the full manifest is a Kubernetes action. It uses the same permissions and team checks as the other actions.
+Viewing the full manifest is a separate Kubernetes action. It uses the same permissions and team checks as the other actions.
 
 To view the full manifest of a ConfigMap:
 
@@ -418,8 +420,8 @@ If {{< ui >}}View Full Manifest{{< /ui >}} is unavailable, hover over it to see 
 | --- | --- | --- |
 | An action is unavailable in Kubernetes Explorer. | The user doesn't have the required permissions, or isn't a member of the team that owns the resource. | Hover over the action to see the permissions that it requires. See the [Create a role with the Kubernetes Actions permissions](#create-a-role-with-the-kubernetes-actions-permissions) section. |
 | The Kubernetes Actions permissions don't appear in the role editor. | Kubernetes Actions isn't enabled for your organization. | [Sign up for the Preview][11]. |
-| An action fails with `permission denied: failed to retrieve resource team tag: no pod found matching query` or `no deployment found`. | Datadog hasn't received the resource. The Datadog Agent isn't running on that node, or the resource is new. | Check that the Datadog Agent runs on each node. Wait a few minutes, and run the action again. |
-| An action fails with `permission denied: resource has no team tags`. | The resource has no `team` label. | Add a `team` label, and wait a few minutes. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section. |
+| An action fails with `permission denied: failed to retrieve resource team tag: no pod found matching query` or `no deployment found`. | Datadog hasn't received the resource. The Datadog Agent isn't running on that node, or the resource is new. | Check that the Datadog Agent runs on each node. Wait a few minutes and run the action again. |
+| An action fails with `permission denied: resource has no team tags`. | The resource has no `team` label. | Add a `team` label and wait a few minutes. See the [Tag your resources with a team](#tag-your-resources-with-a-team) section. |
 | An action fails with `permission denied: user is not a member of team(s)`. | The user isn't a member of the team on the resource. | Add the user to the team in the organization where they run the action, or correct the `team` label on the resource. |
 | The Cluster Agent restarts with `remote config is a required dependency for kubeactions`. | Remote Configuration is disabled. | Enable Remote Configuration. |
 | The `datadog-private-action-runner-identity` secret doesn't appear. | Leader election is disabled, the Cluster Agent is earlier than 7.84.0, or the Operator `private-action-runner-configdata` annotation is incomplete. | Check the requirements in the [Prerequisites](#prerequisites) section. For Operator 1.29.0 to 1.31.x, copy the annotation exactly. |
@@ -427,7 +429,7 @@ If {{< ui >}}View Full Manifest{{< /ui >}} is unavailable, hover over it to see 
 | Actions stay in the **Pending** status. | The Cluster Agent isn't enrolled. | Do steps 1 and 2 in the [Verify the setup](#verify-the-setup) section. |
 | A rollback fails with `forbidden`. | The Cluster Agent can't read ReplicaSets. | Upgrade the Helm chart or the Operator, or follow the steps in the [Grant the rollback permission](#grant-the-rollback-permission-earlier-versions-only) section. |
 | Viewing the full manifest of a ConfigMap fails with `forbidden`. | The Cluster Agent can't read ConfigMaps. | Follow the steps in the [Grant permission to view ConfigMap manifests](#grant-permission-to-view-configmap-manifests) section. |
-| Datadog rejects an action in a namespace such as `kube-system`. | Kubernetes Actions doesn't run actions on protected system namespaces. | No action is necessary. |
+| Datadog rejects an action in a namespace such as `kube-system`. | Kubernetes Actions doesn't run actions on protected system namespaces. | This behavior is expected. |
 
 ## Further reading
 
