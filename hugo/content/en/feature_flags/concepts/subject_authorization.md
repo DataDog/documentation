@@ -33,7 +33,7 @@ The SDK sends the JWT alongside your existing Datadog client token. The client t
 ## Requirements
 
 - Access to subject authorization and custom OIDC providers in [Workload Identity Federation (WIF)][8].
-- The `workload_identity_federation_write` permission to register a custom OIDC provider in WIF, and **Feature Flag Environment Write** permission to configure the environment. See [Permissions and Access Control][7].
+- The **Workload Identity Federation Write** permission to register a custom OIDC provider in WIF, and **Feature Flag Environment Write** permission to configure the environment. See [Permissions and Access Control][7].
 - A backend that issues signed JWTs and publishes its public signing keys at a JWKS endpoint.
 
 ### Supported clients
