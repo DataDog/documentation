@@ -169,7 +169,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 ### Detection Rules
 
 `get_datadog_security_detection_rules_schema`
-: Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection and API security.
+: Returns the reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and field names that can be used as search facets. Use it to explain, check, or update a rule, or to query detection rules. Currently supported rule types: log detection and API security.
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `get_datadog_security_detection_rules`
@@ -177,7 +177,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Rules Read`*
 
 `create_datadog_security_detection_rule`
-: Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the required payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+: Creates a new detection rule from a complete rule payload that you supplied or reviewed. To draft a rule from a description, use `propose_datadog_security_detection_rule`. On success, returns the full rule including its server-assigned ID.
 : *Permissions required: `Security Monitoring Rules Write`*
 
 `update_datadog_security_detection_rule`
