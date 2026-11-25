@@ -37,17 +37,17 @@ When you create an alert, Datadog saves a copy of the funnel's configuration wit
 - Global filters and per-step filters
 - The conversion metric (conversion count, conversion rate, or time to convert), the counting method, and the step target
 - The conversion window (the {{< ui >}}Converted within{{< /ui >}} setting)
-- The chart's timeframe, which becomes the alert's evaluation window
+- The chart's time frame, which becomes the alert's evaluation window
 
 The alert owns this definition, not the chart, so one funnel can back several alerts on different metrics. For example, a checkout funnel can have one alert on end-to-end conversion rate and another on time to convert. Each alert evaluates independently.
 
 ## Evaluation window and frequency
 
-Each time Datadog evaluates the alert, it calculates the metric over a period of the same length as the funnel's timeframe, ending at the time of evaluation. For example, if the funnel shows the past week, each evaluation looks at the most recent seven days of data.
+Each time Datadog evaluates the alert, it calculates the metric over the most recent period of the same length as the funnel's time frame. For example, if the funnel shows the past week, each evaluation looks at the most recent seven days of data.
 
-How often Datadog evaluates the alert depends on the length of the timeframe:
+How often Datadog evaluates the alert depends on the length of the time frame:
 
-| Funnel timeframe                | Evaluation frequency |
+| Funnel time frame               | Evaluation frequency |
 |---------------------------------|----------------------|
 | Less than 24 hours              | Every minute         |
 | 24 hours to less than 48 hours  | Every 10 minutes     |
@@ -59,7 +59,7 @@ For example, if the funnel shows the past week, Datadog evaluates the alert ever
 
 If the threshold is too close to normal performance, the alert fires often and your team learns to ignore it. If it's too far away, the alert never fires.
 
-The evaluation preview samples the metric over recent history using the alert's evaluation window and draws your threshold across those values. Adjust the threshold so it sits outside the funnel's normal range, including typical weekday and weekend variation, but still catches drops that need immediate attention.
+The evaluation preview samples the metric over recent history using the alert's evaluation window and draws your threshold across those values. Adjust the threshold so it sits outside the funnel's normal range, including typical weekday and weekend variation. The threshold should still catch drops that need immediate attention.
 
 <!-- TODO: Add image of the evaluation preview, showing recent metric values with the threshold drawn across them. -->
 
@@ -96,7 +96,7 @@ When you save a funnel change that affects its definition, Datadog asks what to 
 - Adding, removing, reordering, or changing the filters on a step
 - Changing a global filter
 - Changing the conversion window
-- Changing the timeframe length (the timeframe is the evaluation window)
+- Changing the length of the time frame, which is the evaluation window
 
 Choose one of the following options:
 
