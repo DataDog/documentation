@@ -214,7 +214,7 @@ First, [configure the Google Cloud integration][21] with a service account and [
    - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
    - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll be redirected to the table’s details page. Data can take a few minutes to populate.
+3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Data can take a few minutes to populate.
 
 If no projects are available, add the project to the service account's Google Cloud integration configuration.
 
