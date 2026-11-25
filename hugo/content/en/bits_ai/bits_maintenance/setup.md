@@ -1,5 +1,5 @@
 ---
-title: Set up Bits Maintenance
+title: Set Up Bits Maintenance
 description: "Set up Bits Maintenance by verifying your organization connections and enrolling your Kubernetes clusters."
 further_reading:
 - link: "/bits_ai/bits_maintenance/"
@@ -50,7 +50,7 @@ To enroll clusters:
 1. In the list of clusters, click the checkbox next to each cluster you'd like to enroll.
 1. Click {{< ui >}}Enroll Selected{{< /ui>}}.
 
-After you enroll a cluster, Bits Maintenance scans it to understand which software packages are running. Bits regularly re-scans your enrolled clusters to understand their software inventory. You can also manually trigger a re-scan.
+After you enroll a cluster, Bits Maintenance scans it to understand which software packages are running. Bits regularly rescans your enrolled clusters to understand their software inventory. You can also manually trigger a rescan.
 
 ## Step 3 (Recommended): Create upgrade instructions
 
@@ -63,12 +63,12 @@ An operational profile determines whether Bits Maintenance can execute a [plan][
 To create an operational profile:
 1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Operational Profile{{< /ui>}}.
 1. Click {{< ui >}}Configure Profile{{< /ui>}}.
-1. Fill in the form, including configuring {{< ui >}}Labels{{< /ui>}} and {{< ui >}}Rules{{< /ui>}}. 
+1. Fill in the form, including configuring {{< ui >}}Labels{{< /ui>}} and {{< ui >}}Rules{{< /ui>}}.
 1. Click {{< ui >}}Save Changes{{< /ui>}}.
 
 ## Step 5 (Optional): Create a rollout order
 
-A rollout order defines the sequence in which, for a [project campaign][4], upgrades are deployed across your clusters. You can set a certain rollout order as a default. 
+A rollout order defines the sequence in which, for a [project campaign][4], upgrades are deployed across your clusters. You can set a certain rollout order as a default.
 
 To create a rollout order:
 1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Rollout Order{{< /ui>}}.
@@ -84,7 +84,7 @@ After creating a rollout order, you can select it when [configuring a project ca
 
 ## Advanced configuration (optional)
 
-Bits Maintenance works without a Private Action Runner (PAR). Set up a PAR if you want Bits Maintenance to read the custom resources in your clusters, which helps it catch compatibility issues and breaking changes in CRDs during upgrades.
+Bits Maintenance works without a Private Action Runner (PAR). Set up a PAR if you want Bits Maintenance to read the custom resources in your clusters, which helps it catch compatibility issues and breaking changes in custom resource definitions (CRDs) during upgrades.
 
 To set up a PAR for Bits Maintenance, complete the following sections in order.
 
@@ -98,12 +98,12 @@ For a new PAR, use [ownerless enrollment][10]. Enable the **Private Action Runne
 
 ### Configure Agent permissions
 
-The PAR needs read-only permissions to access the custom objects and custom resource definitions (CRDs) in your clusters.
+The PAR needs read-only permissions to access the custom objects and CRDs in your clusters.
 
 Set up the runner in the Cluster Agent using the [Helm][11] or [Datadog Operator][12] instructions. Add the following actions to the runner's allowlist. Keep any actions you already use.
 
-- **Helm:** In `values.yaml`, edit `clusterAgent.privateActionRunner.actionsAllowlist`.
-- **Datadog Operator:** In the `DatadogAgent` manifest, edit `private_action_runner.actions_allowlist` in the `cluster-agent.datadoghq.com/private-action-runner-configdata` annotation.
+- **Helm**: In `values.yaml`, edit `clusterAgent.privateActionRunner.actionsAllowlist`.
+- **Datadog Operator**: In the `DatadogAgent` manifest, edit `private_action_runner.actions_allowlist` in the `cluster-agent.datadoghq.com/private-action-runner-configdata` annotation.
 
 ```yaml
 - com.datadoghq.kubernetes.apiextensions.getCustomResourceDefinition
@@ -120,7 +120,7 @@ Set up the runner in the Cluster Agent using the [Helm][11] or [Datadog Operator
 
 If you have an existing owned runner, give Bits Maintenance access to the cluster's connection. Ownerless runners use [Execution Policies][14] instead, so you can skip this section.
 
-For each cluster you'd like to enroll with Bits Maintenance: 
+For each cluster you'd like to enroll with Bits Maintenance:
 
 1. Navigate to {{< ui >}}Actions{{< /ui>}} > {{< ui >}}Actions Catalog{{< /ui>}} > {{< ui >}}Connections{{< /ui>}}.
 1. Hover over the row of the cluster, then click {{< ui >}}Edit{{< /ui>}}.
@@ -145,5 +145,5 @@ For each cluster you'd like to enroll with Bits Maintenance:
 [11]: /actions/private_actions/set_up_agent_based/?tab=kuberneteshelm#manual-installation
 [12]: /actions/private_actions/set_up_agent_based/?tab=kubernetesoperator#manual-installation
 [13]: /actions/private_actions/set_up_agent_based/#change-the-allowlist
-[14]: /actions/private_actions/execution_policies/
+[14]: /actions/execution_policies/
 [15]: /bits_ai/bits_maintenance/instructions_memories/#add-upgrade-instructions

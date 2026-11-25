@@ -25,13 +25,13 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-Bits Maintenance helps you keep the software running on your Kubernetes clusters up to date, including open source (OSS) and vendor-provided projects. When a project releases a new version, Bits Maintenance researches release changes, identifies how your environment is affected, generates an upgrade [campaign][2] according to your team's [instructions][4], and executes within your guardrails.
+Bits Maintenance helps you keep the software running on your Kubernetes clusters up to date, including open source (OSS) and vendor-provided projects. When a project releases a new version, Bits Maintenance researches the changes and identifies how they affect your environment. It then generates an upgrade [campaign][2] based on your team's [instructions][4] and executes it within your guardrails.
 
 OSS is constantly changing, often due to CVE remediation or end-of-life decisions. Upgrading by hand can be slow and risky: you need to understand what changed, find breaking changes that apply to your fleet, update configurations, roll out in stages, and verify the results. You can instead use Bits Maintenance as your always-on AI teammate for OSS maintenance.
 
 {{< img src="bits_ai/maintenance/overview.png" alt="The Bits Maintenance landing page, showing supported software projects connected to Bits, a campaign waiting for approval, and a cert-manager upgrade that has completed in development and staging clusters and is waiting for human approval in production" style="width:100%;" >}}
 
-Bits Maintenance supports a [specific set of OSS projects](#supported-oss-projects) running on Kubernetes.
+To get started, see [Set up Bits Maintenance][6].
 
 ## How Bits Maintenance works
 
@@ -65,3 +65,4 @@ You can work with Bits Maintenance:
 [3]: /mcp_server/
 [4]: /bits_ai/bits_maintenance/instructions_memories/#upgrade-instructions
 [5]: https://app.datadoghq.com/bits-ai/maintenance/coverage
+[6]: /bits_ai/bits_maintenance/setup/

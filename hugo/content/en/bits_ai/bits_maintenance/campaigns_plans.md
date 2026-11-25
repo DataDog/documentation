@@ -22,7 +22,7 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) coordinates an upgrade across your fleet and rolls out in ordered stages. Each stage includes one or more [installations](#installations) of a software project, and each installation has its own [plan](#plans). A plan uses your team's [upgrade instructions][7] and lists the steps Bits takes to upgrade that installation.
+[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) performs an upgrade in stages. Each stage includes one or more [installations](#installations) of a software project, and each installation has its own [plan](#plans). A plan uses your team's [upgrade instructions][7] and lists the steps Bits takes to upgrade that installation.
 
 ## Campaigns
 
@@ -66,7 +66,7 @@ After a plan is created, but before you have approved it, you can add [custom st
 
 ### Custom steps
 
-You can add custom steps to a plan that is awaiting approval. 
+You can add custom steps to a plan that is awaiting approval.
 
 A custom step can be:
 - Human: requires a person to perform an action before the plan continues.
@@ -75,7 +75,7 @@ A custom step can be:
 When you create a custom step, Datadog saves it. You can then reuse it later, in other plans.
 
 To add a custom step to a plan:
-1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}][6]. 
+1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}][6].
 1. Select a plan that is awaiting approval.
 1. Click {{< ui >}}Revise Plan{{< /ui>}}.
 1. In the interactive workflow diagram, hover over an arrow and click {{< ui >}}Insert custom step{{< /ui>}}.
