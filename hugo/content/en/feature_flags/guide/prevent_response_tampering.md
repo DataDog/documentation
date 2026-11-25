@@ -20,7 +20,7 @@ Response signing verifies that each feature flag assignment response came from D
 
 With response signing, Datadog signs each response with ECDSA P-256, and the SDK verifies the signature against a pinned Datadog root certificate that ships inside the SDK. This protects your flag assignments against tampered, spoofed, and replayed responses, and against responses moved from one request to another. Response signing is available in the [iOS][1], [Android][2], and [browser (JavaScript)][3] SDKs.
 
-[Setup](#enable-response-signing) for response signing requires enabling a single SDK option. You don't need to manage any keys, certificates, or Datadog settings. Response signing doesn't encrypt traffic, which TLS still handles, and it doesn't protect a compromised device or application. Flag requests must go to the Datadog flag endpoint. A flag proxy or a custom flag endpoint is not supported.
+[Setup](#enable-response-signing) for response signing requires enabling a single SDK option. You don't need to manage any keys, certificates, or Datadog settings. Response signing doesn't encrypt traffic, which TLS still handles, and it doesn't protect a compromised device or application. In the browser, it also doesn't protect against the device owner. See [Limits of response signing](#limits-of-response-signing). Flag requests must go to the Datadog flag endpoint. A flag proxy or a custom flag endpoint is not supported.
 
 ## Key terms
 
@@ -67,6 +67,7 @@ The following table lists the threats to flag assignment responses and the prote
 | Misused certificate | An attacker uses a TLS or code-signing certificate from the same hierarchy to sign responses. | Yes | The leaf certificate must contain a Datadog-specific extended key usage for flag responses. |
 | Eavesdropping | A network observer reads flag values. | Not by signing | TLS encrypts the traffic. Signing does not encrypt. |
 | Inspection by the device owner | The user reads flag values in the browser developer tools. | No | The device owner can always read data that the application receives. Do not put secrets in client-side flag values. |
+| Changed application code (browser) | A user who trusts their own debugging proxy, or uses browser developer tools, changes the SDK script or the page. | No | In the browser, the SDK and its pinned root reach the page over the network. A party that can change scripts can remove the check. iOS and Android ship the SDK inside the store-signed app, so a proxy cannot change it. |
 | Compromised device or application | Malware or a modified application changes values after verification. | No | Signing protects data in transit. It cannot protect an application whose code an attacker controls. Enforce sensitive decisions on your server. |
 
 ## How response signing works
@@ -225,6 +226,7 @@ The following table summarizes how response signing behaves in common situations
 
 ## Limits of response signing
 
+- **In the browser, signing does not protect against the device owner.** It protects against a party on the network path that changes API responses but not your page scripts, for example a CDN or a cache layer. Do not use client-side flags as the only control for entitlements or security kill switches. Enforce them on your server.
 - **Signing does not encrypt responses.** TLS encrypts the traffic. Signing adds a check on top of TLS.
 - **Signing does not hide flag values.** The device owner can read the assignments, the flag values, and the signature. Do not put secrets in client-side flag values. To reduce readable flag names in responses, see [Flag Key Obfuscation][4].
 - **Signing does not protect a compromised device.** If an attacker controls the device or the application process, the attacker can change the application code, the SDK, or the evaluated values after verification. Enforce sensitive access decisions on your server.

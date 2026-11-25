@@ -546,6 +546,8 @@ const provider = new DatadogProvider({
 
 You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
 
+In the browser, signing does not protect against a user who can change the page or its scripts. See [Limits of response signing][12].
+
 Response signing does not support `flaggingProxy` or a custom flag endpoint. The SDK must send flag configuration requests to the Datadog flag endpoint. A network proxy that forwards requests and responses without change does not affect verification. A proxy that changes the response body or a signed header causes verification to fail. If you set a custom `flagConfigurationFetch`, it must send the request without change and return the exact response bytes and headers.
 
 #### Serve the verifier files with the CDN bundle
@@ -672,3 +674,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [10]: /feature_flags/guide/prevent_response_tampering/
 
 [11]: /feature_flags/guide/prevent_response_tampering/#verification-failures
+
+[12]: /feature_flags/guide/prevent_response_tampering/#limits-of-response-signing
