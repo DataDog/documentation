@@ -168,6 +168,30 @@ The Worker's catalog of integration pipelines is updated only through new Worker
 
 All available integration pipelines are enabled by default when you first add and deploy a Sawmill processor. However, integration pipelines introduced in subsequent Worker releases are **not** automatically enabled for existing processors. You must enable them manually.
 
+## Pipeline metrics
+
+The Sawmill processor emits the following metrics for each integration pipeline and custom pipeline. These metrics are available for Worker version 2.26 and later.
+
+Events ingested
+: **Metric**: `pipelines.sawmill_ingested_events_total`
+: **Description**: The number of events processed by a pipeline. An integration pipeline processes the events the processor dispatches to it, and a custom pipeline processes the events that match its filter query.
+
+Event bytes ingested
+: **Metric**: `pipelines.sawmill_ingested_event_bytes_total`
+: **Description**: The byte size of events processed by a pipeline. The size is measured when the event enters the processor, before preprocessing.
+
+In addition to the [component tags][4], these metrics have the following tags:
+
+- `sawmill_pipeline_id`: The ID of the integration pipeline, such as `apache`, or of the custom pipeline. **Note**: Tag values are lowercased, so filter on lowercase IDs.
+- `sawmill_pipeline_name`: The name of the pipeline, when it has one.
+- `is_transformed`: `true` if the pipeline modified the event, `false` otherwise. Use `is_transformed:true` to see the events or bytes a pipeline modified, and compare them with the total to see how useful the pipeline is.
+
+For example, this query returns the number of events each pipeline of a processor modified:
+
+```text
+sum:pipelines.sawmill_ingested_events_total{component_id:<COMPONENT_ID>, is_transformed:true} by {sawmill_pipeline_id}.as_count()
+```
+
 ## Health metrics
 
 See [Processor buffer metrics][2] for more information on metrics emitted by all processors. To filter or group by this processor, use `component_type:integration_pipelines`.
@@ -175,3 +199,4 @@ See [Processor buffer metrics][2] for more information on metrics emitted by all
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#buffer
 [3]: /logs/log_configuration/pipelines/
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
