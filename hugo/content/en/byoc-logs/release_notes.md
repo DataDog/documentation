@@ -46,17 +46,14 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 #### Changed
 
-- Enforces the searcher warmup memory budget while downloading data and avoids counting cached bytes twice. Split searches wait for available warmup memory, reducing the risk of out-of-memory restarts during expensive queries.
-- Adds a per-split warmup memory cap, `searcher.warmup_single_split_max_allocation`. A split search that exceeds the cap fails without retrying.
-- Deduplicates concurrent identical searches and improves predicate cache performance.
+- Improves searcher memory management to reduce out-of-memory restarts during expensive queries. Searches wait for available warmup memory; split searches that exceed the per-split memory cap fail without retrying.
 - Indexes long tokens, truncated to 1024 bytes, instead of dropping tokens of 255 bytes or more. Use prefix queries for values longer than 1024 bytes. Queries with tokens longer than 255 bytes only match data indexed after upgrading to v0.1.37 or later.
-- Excludes attribute values of 255 bytes or more from fast fields. These values do not match `@attr:*` existence queries and are excluded from terms aggregations, sorts, and ranges.
+- Excludes attribute values of 255 bytes or more from `@attr:*` existence queries, terms aggregations, sorts, and ranges.
 - Excludes span indexes from searches without an explicit index pattern.
 - Accepts object fields containing `null`, `[]`, or arrays beginning with `null` without rejecting the document.
-- Limits ingest request bodies before and after decompression. `ingest_api.max_body_size` defaults to 10 MiB and `ingest_api.max_decompressed_body_size` defaults to 256 MiB. Oversized requests return HTTP `413`. The previous `content_length_limit` name remains accepted, and `Content-Length` is optional.
-- Disables fsync for indexing and merge scratch directories by default. Set `QW_ENABLE_SPLIT_SCRATCH_FSYNC=true` to enable it.
-- Validates metastore configuration at startup, compiles VRL transforms when sources are created or updated, and fixes retention scheduling after an index is deleted and recreated.
-- Adds `leaf_search_split_warmup_out_of_memory_total` and `leaf_search_warmup_budget_num_bytes` metrics. Reworks Tokio runtime metrics and removes `tokio_worker_busy_ratio`.
+- Limits ingest request bodies to 10 MiB before decompression and 256 MiB after decompression by default. Oversized requests return HTTP `413`. Configure these limits with `ingest_api.max_body_size` (previously `content_length_limit`, still accepted) and `ingest_api.max_decompressed_body_size`.
+- Fixes retention scheduling after an index is deleted and recreated.
+- Adds metrics for search warmup memory usage and allocation failures, and removes `tokio_worker_busy_ratio`.
 
 #### Helm chart changes
 
@@ -64,7 +61,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 <strong>Breaking change</strong>: Removes the <code>6xlarge</code> and <code>8xlarge</code> indexer pod sizes. Select a supported indexer size before upgrading. Searcher pod sizes are unchanged.
 </div>
 
-- Lowers the indexer WAL memory budget for `large` (1.5 to 0.8 GiB), `xlarge` (3.6 to 2.4 GiB), and `2xlarge` (8.1 to 7.2 GiB), and raises it for `4xlarge` (17.1 to 21.6 GiB). The WAL disk budget remains twice the memory budget. Lower memory budgets cause ingestion backpressure to start earlier during spikes or slow rollouts.
+- Lowers the indexer WAL memory budget for `large`, `xlarge`, and `2xlarge`, and raises it for `4xlarge`. Lower budgets cause ingestion backpressure to start earlier during spikes or slow rollouts. See the [chart changelog](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/CHANGELOG.md#070) for the per-size budgets.
 - Adds CPU limits of 2, 4, 8, and 16 cores to sizing-map indexers from `large` through `4xlarge`. CPU requests and explicit `indexer.resources` overrides are unchanged.
 - Changes default document clustering to group logs by `source` and `service`, then `status`, then tokenized `message`.
 
