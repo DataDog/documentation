@@ -383,6 +383,8 @@ site_support_ids:
       - /integrations/nebius-cloud/**
   network_config_management:
     regions: [gov, gov2]
+  network_l1_l7_map:
+    regions: [gov, gov2]
   on-call:
     regions: [gov2]
     url_paths:
@@ -390,6 +392,8 @@ site_support_ids:
       - /api/latest/on-call/**
       - /incident_response/on-call/**
       - /service_management/on-call/**
+  opamp_extension:
+    regions: [gov, gov2]
   opentelemetry_collector_otlp_export:
     regions: [gov, gov2]
   oracle-fusion:

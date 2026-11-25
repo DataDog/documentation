@@ -84,6 +84,10 @@ On the {{< ui >}}Secret Scanning (Secrets){{< /ui >}} tab, use filters to narrow
 - Repository visibility
 - {{< ui >}}Is Git History{{< /ui >}}
 
+### Prioritize secrets with runtime context
+
+Secret Scanning findings show the services that each finding maps to and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in production services. For more information, see [Prioritize Findings with Runtime Context][19].
+
 ### Create Jira tickets from findings
 
 You can create a bidirectional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][16].
@@ -126,3 +130,4 @@ To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details pan
 [16]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [17]: /security/code_security/secret_scanning/secret_validation/
 [18]: /security/code_security/static_analysis/setup/#diff-aware-scanning
+[19]: /security/code_security/runtime_context/

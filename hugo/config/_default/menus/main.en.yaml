@@ -570,51 +570,56 @@ menu:
       url: agent/fleet_automation/fleet_view
       parent: agent_fleet_automation
       weight: 801
+    - name: Access Control
+      identifier: access_control
+      url: agent/fleet_automation/access_control
+      parent: agent_fleet_automation
+      weight: 802
     - name: Configure Agents
       identifier: configure_agents
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
-      weight: 802
+      weight: 803
     - name: Supported datadog.yaml Fields
       identifier: supported_datadog_yaml_fields
       url: agent/fleet_automation/supported_datadog_yaml_fields
       parent: agent_fleet_automation
-      weight: 803
+      weight: 804
     - name: Configure Agent Integrations
       identifier: configure_integrations
       url: agent/fleet_automation/configure_integrations
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Configure Custom Logs
       identifier: configure_logs
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
-      weight: 805
+      weight: 806
     - name: Modify Tags
       identifier: modify_tags
       url: agent/fleet_automation/modify_tags
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Configuration Policies
       identifier: configuration_policies
       url: agent/fleet_automation/configuration_policies
       parent: agent_fleet_automation
-      weight: 807
+      weight: 808
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 808
+      weight: 809
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 809
+      weight: 810
     - name: OpenTelemetry Collectors
       identifier: fleet_otel_collectors
       url: agent/fleet_automation/otel_collectors
       parent: agent_fleet_automation
-      weight: 810
+      weight: 811
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -947,86 +952,91 @@ menu:
       identifier: otel_datadog_extension
       parent: otel_integrations
       weight: 804
+    - name: OpAMP Extension
+      url: opentelemetry/integrations/opamp_extension/
+      identifier: otel_opamp_extension
+      parent: otel_integrations
+      weight: 805
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: Kubernetes Metrics
       url: opentelemetry/integrations/kubernetes_metrics/
       identifier: otel_kubernetes_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: MongoDB Metrics
       url: opentelemetry/integrations/mongodb_metrics/
       identifier: otel_mongodb_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: PostgreSQL Metrics
       url: opentelemetry/integrations/postgres_metrics/
       identifier: otel_postgres_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 816
     - name: RabbitMQ Metrics
       url: opentelemetry/integrations/rabbitmq_metrics/
       identifier: otel_rabbitmq_metrics
       parent: otel_integrations
-      weight: 816
+      weight: 817
     - name: Redis Metrics
       url: opentelemetry/integrations/redis_metrics/
       identifier: otel_redis_metrics
       parent: otel_integrations
-      weight: 817
+      weight: 818
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 818
+      weight: 819
     - name: SQL Server Metrics
       url: opentelemetry/integrations/sqlserver_metrics/
       identifier: otel_sqlserver_metrics
       parent: otel_integrations
-      weight: 819
+      weight: 820
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 820
+      weight: 821
     - name: Fleet Automation
       url: opentelemetry/fleet_automation/
       identifier: otel_fleet_automation
@@ -4359,6 +4369,11 @@ menu:
       parent: network_path
       identifier: network_path_glossary
       weight: 509
+    - name: L1 to L7 Map
+      url: network_monitoring/l1_to_l7_map/
+      parent: nm_parent
+      identifier: nm_l1_l7_map
+      weight: 6
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -8746,11 +8761,16 @@ menu:
       url: /security/code_security/iac_security/custom_rules/guide/
       parent: code_security_iac_security
       weight: 100006
+    - name: Prioritize Findings with Runtime Context
+      identifier: sec_code_sec_runtime_context
+      url: /security/code_security/runtime_context/
+      parent: code_security
+      weight: 6
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/pull_request_comments/
@@ -8795,12 +8815,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 7
+      weight: 8
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 8
+      weight: 9
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading

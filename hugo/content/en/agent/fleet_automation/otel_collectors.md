@@ -11,6 +11,9 @@ further_reading:
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
   text: "Datadog Extension"
+- link: "/opentelemetry/integrations/opamp_extension/"
+  tag: "Documentation"
+  text: "OpAMP Extension"
 - link: "/opentelemetry/setup/agent/"
   tag: "Documentation"
   text: "Send OpenTelemetry Data Through the Datadog Agent"
@@ -37,7 +40,7 @@ For every kind of Collector, you can view its version, distribution, and configu
 
 - **Agent's Collector**: No setup is needed. The configuration view is enabled by default.
 - **DDOT Collector**: The Datadog Extension is enabled automatically. Don't configure it manually.
-- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] to your Collector configuration.
+- **Upstream OpenTelemetry Collector**: Add the [Datadog Extension][4] (recommended) or the [OpAMP extension][15] to your Collector configuration.
 
 ## Examine an OpenTelemetry Collector
 
@@ -55,7 +58,7 @@ In [Fleet View][1], filter for OTel Collectors and select a Collector to open it
 OTel Collector health is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-To show health signals for a Collector, enable the Collector's [internal telemetry][16].
+To show health signals for a Collector, enable the Collector's [internal telemetry][16]. If you use the OpAMP extension, see [Send the Collector's internal telemetry][17].
 
 With OTel Collector health signals, you can:
 
@@ -120,7 +123,7 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 1. In Fleet Automation, open the [Configuration][10] tab.
 1. On the {{< ui >}}Configure OTel with YAML{{< /ui >}} card, click {{< ui >}}Configure{{< /ui >}}.
 
-   {{< img src="/agent/fleet_automation/fa-configure-otel-yaml.png" alt="Fleet Automation Configuration tab with the Configure OTel with YAML card highlighted among the agent configuration options." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/fa-configure-otel-yaml.png" alt="Fleet Automation Configuration tab with the Configure OTel with YAML card highlighted among the Agent configuration options." style="width:100%;" >}}
 
 1. Scope the configuration to the target Collectors. Filter by host information or tags to target a specific group.
 1. Update the target fields, or replace the entire YAML configuration.
@@ -153,4 +156,6 @@ The Agent's Collector is bundled with the Agent, so upgrading the Agent also upg
 [12]: /agent/fleet_automation/configure_agents/#edit-the-configuration-of-a-single-agent-or-its-collector
 [13]: /agent/fleet_automation/fleet_view/#send-a-remote-flare
 [14]: /agent/fleet_automation/upgrade_agents/
+[15]: /opentelemetry/integrations/opamp_extension/
 [16]: /opentelemetry/integrations/datadog_extension/#4-enable-the-collectors-internal-telemetry
+[17]: /opentelemetry/integrations/opamp_extension/#3-send-the-collectors-internal-telemetry

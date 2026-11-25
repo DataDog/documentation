@@ -100922,7 +100922,7 @@ components:
         - version
       type: object
     NotificationRulePreviewNotificationStatus:
-      description: The notification status for the given rule type. `SUCCESS` means a matching event was found and the notification was sent successfully. `DEFAULT` means no matching event was found and a default placeholder notification was sent instead. `ERROR` means an error occurred while sending the notification.
+      description: The notification status for the given rule type. `SUCCESS` means a matching event was found and the test notification was queued. `DEFAULT` means no matching event was found and a placeholder test notification was queued instead. `ERROR` means the test notification couldn't be built or queued. A queued notification can still fail to reach its target later, and this status doesn't report it.
       enum:
         - SUCCESS
         - DEFAULT
@@ -270292,7 +270292,36 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/configuration/notification_rules/send_notification_preview:
     post:
-      description: Send a notification preview to test that a notification rule's targets are properly configured.
+      description: |-
+        Send a notification preview to test that a notification rule's targets are properly configured.
+        The request body has the same shape as the body of `CreateSignalNotificationRule` and `CreateVulnerabilityNotificationRule`.
+        The preview sends test notifications to the targets but doesn't save a notification rule. To save the rule, use
+        `CreateSignalNotificationRule` or `CreateVulnerabilityNotificationRule`.
+
+        Fields to set in `data.attributes`:
+        - `selectors.trigger_source`: `security_signals` for a signal-based rule, or `security_findings` for a rule on security findings and vulnerabilities.
+        - `selectors.rule_types`: with `security_signals`, any of `application_security`, `log_detection`, `workload_security`
+          and `signal_correlation`. With `security_findings`, any of
+          `application_code_vulnerability`, `application_library_vulnerability`, `attack_path`, `container_image_vulnerability`,
+          `identity_risk`, `misconfiguration`, `api_security`, `host_vulnerability`, `iac_misconfiguration`, `sast_vulnerability`,
+          `secret_vulnerability`, `workload_activity`, `sensitive_data` and `serverless_function_code_vulnerability`.
+          Set at least one rule type. An empty list, or a rule type that doesn't match `selectors.trigger_source`, is rejected with HTTP 400.
+          The preview runs once for each rule type in this list.
+        - `selectors.severities`: any of `critical`, `high`, `medium`, `low` and `info`. The value `unknown` is rejected with HTTP 400.
+        - `selectors.query`: one or several `key:value` pairs on tags and attributes, for example `env:prod`, up to 6,000 characters.
+        - `targets`: a list of 1 to 20 notification handles, each starting with `@` and up to 500 characters. Use `@<EMAIL>` for an email address,
+          `@slack-<CHANNEL>` or `@slack-<ACCOUNT>-<CHANNEL>` for a Slack channel, `@pagerduty-<SERVICE_NAME>` for a PagerDuty service,
+          and `@webhook-<WEBHOOK_NAME>` for a webhook. Other integrations use `@<INTEGRATION_NAME>-<VALUES>`, such as `@teams-` or `@jira-`.
+          Handles that contain parentheses `()` are not supported. In HIPAA-compliant organizations, webhook targets are rejected with a 403.
+          With `security_findings`, `@case-`, `@incident-`, `@jira-` and `@linear-` targets are rejected with HTTP 400.
+        - `time_aggregation`: with `security_signals`, leave it out or set it to `0`. With `security_findings`, leave it out, set it to `0`,
+          or set it between 1,800 and 2,592,000 seconds (30 minutes to 30 days). `@workflow-` targets are rejected when it's greater than `0`.
+
+        The integration behind each target (Slack, PagerDuty, and so on) must already be configured in Datadog.
+        The response has one result per rule type. `SUCCESS` means a matching event was found and the test notification was queued.
+        `DEFAULT` means no matching event was found and a placeholder test notification was queued instead.
+        `ERROR` means the test notification couldn't be built or queued. A queued notification can still fail to reach its target later,
+        for example when the target's integration isn't configured or a target team doesn't exist, and the response doesn't report it.
       operationId: SendSecurityMonitoringNotificationPreview
       requestBody:
         content:
