@@ -25,11 +25,15 @@ Change Tracking is available on several pages in Datadog.
 | --- | --- | --- |
 | [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
 | [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
-| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | None |
+| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | An APM service. To see deployments, the service needs a `version` tag. See [Tracked Change Types][1]. |
+
+Click a change on any of these pages to open the side panel. For deployments, the side panel includes {{< ui >}}View Deployment in CI/CD{{< /ui >}}, {{< ui >}}View commit{{< /ui >}}, and {{< ui >}}View deployment diff{{< /ui >}}.
 
 ### On a dashboard
 
 On dashboards, Datadog can rank changes by likely cause, so that the changes most likely to explain what you are seeing appear first.
+
+{{< img src="/change_tracking/change-tracking-dashboard-overlays.png" alt="A dashboard with change overlays turned on, showing a change timeline for the most relevant service" style="width:100%;" >}}
 
 1. Navigate to your dashboard.
 1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
@@ -41,6 +45,8 @@ On dashboards, Datadog can rank changes by likely cause, so that the changes mos
 
 On monitor status pages, Datadog can rank changes by likely cause, so that the changes most likely to explain the most recent alert appear first.
 
+{{< img src="/change_tracking/change-tracking-monitor-status-timeline.png" alt="A monitor status page with a banner listing changes that could explain the monitor's behavior above the change timeline" style="width:100%;" >}}
+
 1. Go to the monitor status page for the monitor you are investigating.
 1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
 1. To rank changes by likely cause, select {{< ui >}}Relevant Changes{{< /ui >}}.
@@ -50,22 +56,16 @@ On monitor status pages, Datadog can rank changes by likely cause, so that the c
 
 ### On a service page
 
+<!-- IMAGE PLACEHOLDER: The changes timeline in the Service Summary section of a service page. -->
+
 1. Go to the service page for the service you are investigating.
 1. Find the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
 1. Switch between {{< ui >}}Changes by Service{{< /ui >}} for changes to that service alone and {{< ui >}}Changes by Service + Dependencies{{< /ui >}} for changes to services it depends on.
 1. Click a change indicator to open the side panel.
 
-## Open the change side panel
-
-Click a change on a timeline, an overlay, or a widget to open the Change Tracking side panel.
-
-From the side panel, you can investigate more details about the change and take the following actions:
-
-- Open the deployment in your CI/CD system.
-- View the latest commits in your repository.
-- Compare two deployments to see what differs between them.
-
 ## Build your own view with Change Tracking widgets
+
+<!-- IMAGE PLACEHOLDER: A widget that uses Change Tracking as its data source. -->
 
 Change Tracking is available as a data source for widgets across Datadog, including dashboards and notebooks.
 
@@ -76,7 +76,7 @@ Change Tracking is available as a data source for widgets across Datadog, includ
 
 For timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}} to draw changes on top of the series.
 
-To open the side panel from a widget, click a datapoint and select {{< ui >}}View Changes{{< /ui >}}.
+To open the side panel from a widget, click a datapoint and select {{< ui >}}View changes{{< /ui >}}.
 
 ## Further reading
 
