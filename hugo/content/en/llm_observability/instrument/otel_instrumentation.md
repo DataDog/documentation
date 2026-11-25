@@ -584,7 +584,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 [Microsoft.Extensions.AI][62] wraps the official [`OpenAI` .NET library][63]. It emits spans that follow the OpenTelemetry 1.37+ GenAI semantic conventions, including streaming calls and tool calls. Use it instead of the `OpenAI` library's own experimental instrumentation, which doesn't capture message content by default and doesn't instrument streaming chat completions.
 
-1. Add the packages. Install `Microsoft.Extensions.AI` and `Microsoft.Extensions.AI.OpenAI` at the same version. Each `Microsoft.Extensions.AI.OpenAI` version requires a minimum `OpenAI` package version, so pick one that supports the `OpenAI` version you're on. Otherwise, the restore fails with a `NU1605` package downgrade error.
+1. Add the packages. Install the same version of `Microsoft.Extensions.AI` and `Microsoft.Extensions.AI.OpenAI`. Each `Microsoft.Extensions.AI.OpenAI` version requires a minimum `OpenAI` package version, so choose one that supports the `OpenAI` version you're on. Otherwise, the restore fails with a `NU1605` package downgrade error.
 
    ```shell
    dotnet add package Microsoft.Extensions.AI
@@ -593,7 +593,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
    ```
 
-2. Set the following environment variables in your application. Use the generic `OTEL_EXPORTER_OTLP_*` variables, because the .NET `AddOtlpExporter()` method ignores the signal-specific `OTEL_EXPORTER_OTLP_TRACES_*` variables.
+2. Set the following environment variables in your application. Use the generic `OTEL_EXPORTER_OTLP_*` variables because the .NET `AddOtlpExporter()` method ignores the signal-specific `OTEL_EXPORTER_OTLP_TRACES_*` variables.
 
    ```
    OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
