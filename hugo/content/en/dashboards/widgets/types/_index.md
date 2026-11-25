@@ -25,6 +25,8 @@ further_reading:
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heatgrid"
         img="dashboards/widgets/icons/heatgrid_light_large.svg">}} Heatgrid{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/image_map"
+        img="dashboards/widgets/icons/image_light_large.png">}} Image Map{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/point_plot"
