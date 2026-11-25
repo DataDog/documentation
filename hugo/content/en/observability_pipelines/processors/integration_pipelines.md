@@ -30,7 +30,7 @@ For every log that matches the processor's filter:
 1. Each enabled [custom pipeline](#custom-pipelines) processes the log if the log matches its filter.
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
-{{< img src="observability_pipelines/processors/integration_pipelines_panel.png" alt="The Integration Pipelines tab of the Manage Sawmill panel, listing enabled pipelines and their source filters." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/sawmill_panel.png" alt="The Integration Pipelines tab of the Manage Sawmill panel, listing enabled pipelines and their source filters." style="width:100%;" >}}
 
 **Notes**:
 
@@ -120,7 +120,7 @@ In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
 
 After making changes, click {{< ui >}}Save{{< /ui >}}, then redeploy your log pipeline for the changes to take effect.
 
-{{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab of the Manage Sawmill panel, listing two enabled custom pipelines with reorder handles." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/sawmill_custom_pipelines_tab.png" alt="The Custom Pipelines tab of the Manage Sawmill panel, listing two enabled custom pipelines with reorder handles." style="width:100%;" >}}
 
 ## CPU sizing
 
