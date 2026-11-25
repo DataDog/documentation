@@ -6016,53 +6016,53 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection agent rule.",
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListCSMThreatsAgentPolicies": {
-    "description": "Get the list of Workload Protection policies.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection policies.",
     "summary": "Get all Workload Protection policies"
   },
   "CreateCSMThreatsAgentPolicy": {
-    "description": "Create a new Workload Protection policy with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection policy with the given parameters.",
     "summary": "Create a Workload Protection policy",
     "request_description": "The definition of the new Agent policy",
     "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
-    "description": "Get the details of a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection policy.",
     "summary": "Get a Workload Protection policy"
   },
   "UpdateCSMThreatsAgentPolicy": {
-    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.",
     "summary": "Update a Workload Protection policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
@@ -7106,25 +7106,25 @@
     "request_schema_description": "Request body for creating or updating an indicator triage state."
   },
   "GetSignalNotificationRules": {
-    "description": "Returns the list of notification rules for security signals.",
+    "description": "Returns the list of notification rules for security signals.\nA signal-based notification rule sends a notification to its `targets` when a security signal matches its\nselectors (rule types, severities, and query), so you don't have to set up notifications on each detection rule.\nUse the signal routes for rules whose `trigger_source` is `security_signals`. For rules on security findings,\nsuch as vulnerabilities and misconfigurations (`trigger_source` `security_findings`), use\n`GetVulnerabilityNotificationRules`.\nThis route only returns rules whose `trigger_source` is `security_signals`. The response isn't paginated: it\ncontains every such rule in the organization, and the route takes no paging parameters.",
     "summary": "Get the list of signal-based notification rules"
   },
   "CreateSignalNotificationRule": {
-    "description": "Create a new notification rule for security signals and return the created rule.",
+    "description": "Create a new notification rule for security signals and return the created rule.\nSet `selectors.trigger_source` to `security_signals`. The signal routes only return rules with that trigger\nsource, so a rule with `security_findings` is read through `GetVulnerabilityNotificationRules` instead.\nTo notify on security findings, use `CreateVulnerabilityNotificationRule`.\n`selectors.rule_types` accepts the signal rule types `application_security`, `log_detection`,\n`workload_security`, and `signal_correlation`.\nGive at least one; finding rule types are rejected.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\n`time_aggregation` is only available for finding-based rules: omit it or set it to `0`.\nTrial organizations can't use email address targets: the request returns 400.\nRule names must be unique in the organization (case-insensitive); a duplicate name returns 409.\nAn organization can have at most 1,000 signal-based rules; past that, the request returns 429.",
     "summary": "Create a new signal-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteSignalNotificationRule": {
-    "description": "Delete a notification rule for security signals.",
+    "description": "Delete a notification rule for security signals.\nGet the rule `id` from `GetSignalNotificationRules`.\nThis route doesn't check the rule's `trigger_source`, so make sure the `id` belongs to a signal rule.\nTo stop notifications without deleting the rule, set `enabled` to `false` with\n`PatchSignalNotificationRule` instead.",
     "summary": "Delete a signal-based notification rule"
   },
   "GetSignalNotificationRule": {
-    "description": "Get the details of a notification rule for security signals.",
+    "description": "Get the details of a notification rule for security signals.\nGet the rule `id` from `GetSignalNotificationRules`.\nReturns 404 when the rule's `trigger_source` is `security_findings`; read that rule with\n`GetVulnerabilityNotificationRule` instead.",
     "summary": "Get details of a signal-based notification rule"
   },
   "PatchSignalNotificationRule": {
-    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "description": "Partially update the notification rule. All fields except `version` are optional; if a field is not provided,\nit is not updated. Give at least one field to change.\nGet the rule `id` from `GetSignalNotificationRules`, then read the rule with `GetSignalNotificationRule`\nand send its current `version`. The `version` is incremented each time the rule is modified.\nA `version` that isn't the current one returns 409: fetch the rule again and retry.\nA missing or `0` `version` is rejected.\nIf you send `selectors`, it must include `trigger_source`, and every entry in `selectors.rule_types` must\nmatch that trigger source (give at least one). For `security_findings`, the rule types are\n`application_code_vulnerability`, `application_library_vulnerability`, `attack_path`,\n`container_image_vulnerability`, `identity_risk`, `misconfiguration`, `api_security`, `host_vulnerability`,\n`iac_misconfiguration`, `sast_vulnerability`, `secret_vulnerability`, `workload_activity`, `sensitive_data`,\nand `serverless_function_code_vulnerability`.\nFor `security_signals`, they are `application_security`, `log_detection`, `workload_security`, and\n`signal_correlation`.\nChanging `trigger_source` moves the rule to the other family's routes, and the change counts toward that\nfamily's limit of 1,000 rules.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters. Finding-based rules can't filter on attributes in the\n`@workflow` or `@_dd` namespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\nTrial organizations can't use email address targets: the request returns 400.",
     "summary": "Patch a signal-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
@@ -7146,25 +7146,25 @@
     "request_schema_description": "A CycloneDX 1.5 Bill of Materials (BOM) document containing vulnerability data."
   },
   "GetVulnerabilityNotificationRules": {
-    "description": "Returns the list of notification rules for security vulnerabilities.",
+    "description": "Returns the list of notification rules for security findings.\nA finding-based notification rule sends a notification to its `targets` when a security finding, such as a\nvulnerability or a misconfiguration, matches its selectors (rule types, severities, and query). It can group\nnotifications over a `time_aggregation` window.\nUse the finding routes (under `/api/v2/security/vulnerabilities/`) for rules whose `trigger_source` is\n`security_findings`. For rules on security\nsignals (`trigger_source` `security_signals`), use `GetSignalNotificationRules`.\nThis route only returns rules whose `trigger_source` is `security_findings`. The response isn't paginated: it\ncontains every such rule in the organization, and the route takes no paging parameters.",
     "summary": "Get the list of vulnerability notification rules"
   },
   "CreateVulnerabilityNotificationRule": {
-    "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
+    "description": "Create a new notification rule for security findings and return the created rule.\nSet `selectors.trigger_source` to `security_findings`. The finding routes only return rules with that\ntrigger source, so a rule with `security_signals` is read through `GetSignalNotificationRules` instead.\nTo notify on security signals, use `CreateSignalNotificationRule`.\n`selectors.rule_types` accepts the finding rule types `application_code_vulnerability`,\n`application_library_vulnerability`, `attack_path`, `container_image_vulnerability`, `identity_risk`,\n`misconfiguration`, `api_security`, `host_vulnerability`, `iac_misconfiguration`, `sast_vulnerability`,\n`secret_vulnerability`, `workload_activity`, `sensitive_data`, and `serverless_function_code_vulnerability`.\nGive at least one; signal rule types are rejected.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters, and can't filter on attributes in the `@workflow` or `@_dd`\nnamespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\n`time_aggregation` is a rolling window in seconds, from `1800` (30 minutes) to `2592000` (30 days); omit it\nor set it to `0` for no aggregation.\nTrial organizations can't use email address targets: the request returns 400.\nRule names must be unique in the organization (case-insensitive); a duplicate name returns 409.\nAn organization can have at most 1,000 finding-based rules; past that, the request returns 429.",
     "summary": "Create a new vulnerability-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteVulnerabilityNotificationRule": {
-    "description": "Delete a notification rule for security vulnerabilities.",
+    "description": "Delete a notification rule for security findings.\nGet the rule `id` from `GetVulnerabilityNotificationRules`.\nThis route doesn't check the rule's `trigger_source`, so make sure the `id` belongs to a finding rule.\nTo stop notifications without deleting the rule, set `enabled` to `false` with\n`PatchVulnerabilityNotificationRule` instead.",
     "summary": "Delete a vulnerability-based notification rule"
   },
   "GetVulnerabilityNotificationRule": {
-    "description": "Get the details of a notification rule for security vulnerabilities.",
+    "description": "Get the details of a notification rule for security findings.\nGet the rule `id` from `GetVulnerabilityNotificationRules`.\nReturns 404 when the rule's `trigger_source` is `security_signals`; read that rule with\n`GetSignalNotificationRule` instead.",
     "summary": "Get details of a vulnerability notification rule"
   },
   "PatchVulnerabilityNotificationRule": {
-    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "description": "Partially update the notification rule. All fields except `version` are optional; if a field is not provided,\nit is not updated. Give at least one field to change.\nGet the rule `id` from `GetVulnerabilityNotificationRules`, then read the rule with\n`GetVulnerabilityNotificationRule` and send its current `version`. The `version` is incremented each time\nthe rule is modified. A `version` that isn't the current one returns 409: fetch the rule again and retry.\nA missing or `0` `version` is rejected.\nIf you send `selectors`, it must include `trigger_source`, and every entry in `selectors.rule_types` must\nmatch that trigger source (give at least one). For `security_findings`, the rule types are\n`application_code_vulnerability`, `application_library_vulnerability`, `attack_path`,\n`container_image_vulnerability`, `identity_risk`, `misconfiguration`, `api_security`, `host_vulnerability`,\n`iac_misconfiguration`, `sast_vulnerability`, `secret_vulnerability`, `workload_activity`, `sensitive_data`,\nand `serverless_function_code_vulnerability`.\nFor `security_signals`, they are `application_security`, `log_detection`, `workload_security`, and\n`signal_correlation`.\nChanging `trigger_source` moves the rule to the other family's routes, and the change counts toward that\nfamily's limit of 1,000 rules.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters. Finding-based rules can't filter on attributes in the\n`@workflow` or `@_dd` namespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\nTrial organizations can't use email address targets: the request returns 400.",
     "summary": "Patch a vulnerability-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
@@ -7230,11 +7230,11 @@
     "summary": "Start a batch migration"
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get all Workload Protection agent rules](https://docs.datadoghq.com/api/latest/csm-threats/#get-all-workload-protection-agent-rules)\ninstead, on all sites including US1-FED.\n\nGet the list of agent rules.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get a Workload Protection agent rule](https://docs.datadoghq.com/api/latest/csm-threats/#get-a-workload-protection-agent-rule)\ninstead, on all sites including US1-FED.\n\nGet the details of a specific agent rule.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
@@ -7274,6 +7274,10 @@
     "summary": "Create an entity context sync configuration",
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
+  },
+  "GetAWSIdentityCenterAWSAccounts": {
+    "description": "Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and\nwhether users have been collected from them. Collected users are a prerequisite for creating or enabling the\nAWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management\naccounts and any accounts that users were collected from.",
+    "summary": "Get AWS IAM Identity Center account prerequisites"
   },
   "GetEntraIdAzureAppRegistrations": {
     "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
