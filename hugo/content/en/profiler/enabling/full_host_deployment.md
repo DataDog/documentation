@@ -22,7 +22,7 @@ Select the tab that matches how your Kubernetes cluster is managed. If the Datad
 
 {{% tab "Datadog Helm chart" %}}
 
-Use this path when the Datadog Agent is already installed with Helm, including DDOT deployments. If your Agent is managed by the Datadog Operator, use the **Datadog Operator** tab instead.
+Use this path when the Datadog Agent is already installed with Helm, including with the Agent's Collector. If your Agent is managed by the Datadog Operator, use the **Datadog Operator** tab instead.
 
 The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the Agent enriches profiles with Datadog infrastructure metadata.
 
@@ -102,7 +102,7 @@ The provided profile limits what the Full-Host Profiler container can run. It al
 
 {{% tab "Datadog Operator" %}}
 
-Use this path when the Datadog Agent is already installed with the Datadog Operator, including DDOT deployments. If your Agent is installed with Helm, use the **Datadog Helm chart** tab instead.
+Use this path when the Datadog Agent is already installed with the Datadog Operator, including with the Agent's Collector. If your Agent is installed with Helm, use the **Datadog Helm chart** tab instead.
 
 The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the Agent enriches profiles with Datadog infrastructure metadata.
 
@@ -203,7 +203,7 @@ The provided profile limits what the Full-Host Profiler container can run. It al
 
 {{% tab "OpenTelemetry Helm chart" %}}
 
-Use this path when your cluster doesn't run the Datadog Agent and you manage deployments with Helm. If the Datadog Agent is already installed, including deployments that also run DDOT, use a Datadog Agent tab instead.
+Use this path when your cluster doesn't run the Datadog Agent and you manage deployments with Helm. If the Datadog Agent is already installed, including with the Agent's Collector, use a Datadog Agent tab instead.
 
 The Full-Host Profiler runs independently and sends profiles directly to Datadog. This path deploys the OpenTelemetry Collector as a DaemonSet, which is the recommended mode.
 
@@ -302,7 +302,7 @@ The provided profile limits what the Full-Host Profiler container can run. It al
 
 {{% tab "OpenTelemetry Operator" %}}
 
-Use this path when your cluster doesn't run the Datadog Agent and you use the OpenTelemetry Operator to manage Collector deployments. If the Datadog Agent is already installed, including deployments that also run DDOT, use a Datadog Agent tab instead.
+Use this path when your cluster doesn't run the Datadog Agent and you use the OpenTelemetry Operator to manage Collector deployments. If the Datadog Agent is already installed, including with the Agent's Collector, use a Datadog Agent tab instead.
 
 The Full-Host Profiler runs independently and sends profiles directly to Datadog. This path uses the recommended OpenTelemetry Collector DaemonSet deployment.
 

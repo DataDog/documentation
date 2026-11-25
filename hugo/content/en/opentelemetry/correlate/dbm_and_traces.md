@@ -1,9 +1,9 @@
 ---
 title: Correlate OpenTelemetry Traces and DBM
 further_reading:
-- link: "/opentelemetry/otel_tracing/"
+- link: "/opentelemetry/setup/"
   tag: "Documentation"
-  text: "Send OpenTelemetry Traces to Datadog"
+  text: "Send OpenTelemetry Data to Datadog"
 ---
 
 ## Overview
@@ -99,7 +99,7 @@ with tracer.start_as_current_span("postgres.query") as span:
 Depending on how you send traces to Datadog, you may need to enable specific feature gates to ensure database spans are processed correctly.
 
 {{< tabs >}}
-{{% tab "Datadog Agent (DDOT Collector)" %}}
+{{% tab "Datadog Agent (Agent's Collector)" %}}
 
 
 If you are using the Datadog Helm chart (v3.107.0 or later), set the feature gate in your `values.yaml`:
