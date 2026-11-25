@@ -60,11 +60,11 @@ Each scoped permission has the following parts:
 **Description**
 : A name for the scoped permission.
 
-**Features**
-: The actions the scoped permission covers: {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
-
 **Scope**
 : A tag filter that selects a group of Agents, such as `team:checkout` or `env:prod`. Scopes match host tags as they appear on the [Host Map][11] and [Infrastructure List][12]. A scope with no filters matches all Agents. On the {{< ui >}}Access Controls{{< /ui >}} page, it appears as {{< ui >}}Any Agent{{< /ui >}} in the {{< ui >}}Scope{{< /ui >}} column. A host tag change applies to the next deployment after the new tag appears on the host.
+
+**Features**
+: The actions the scoped permission covers: {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
 
 **Has access**
 : The Datadog Teams, roles, users, and service accounts that get Edit access to the Agents in the scope. Granting access to a team includes its [subteams][9].
@@ -102,7 +102,7 @@ To move from the Default scoped permission to your own:
 1. Click {{< ui >}}Add Permission{{< /ui >}}.
 1. Enter a description.
 1. Under {{< ui >}}Grant access to{{< /ui >}}, choose {{< ui >}}Configurations{{< /ui >}}, {{< ui >}}Upgrades{{< /ui >}}, or both.
-1. Under {{< ui >}}Select the Agents this permission applies to{{< /ui >}}, use the {{< ui >}}env{{< /ui >}} dropdown or click {{< ui >}}Filter{{< /ui >}} to filter by tag. The table lists the matching Agents.
+1. Under {{< ui >}}Select the Agents this permission applies to{{< /ui >}}, use the {{< ui >}}env{{< /ui >}} dropdown, or click {{< ui >}}Filter{{< /ui >}} to add a filter for another tag, such as `team`. The table lists the matching Agents.
 
    {{< img src="/agent/fleet_automation/create_scoped_permission.png" alt="The Create Scoped Permission dialog with the description Checkout, both Configurations and Upgrades selected, and a team:checkout filter that matches 214 Agents." style="width:100%;" >}}
 
