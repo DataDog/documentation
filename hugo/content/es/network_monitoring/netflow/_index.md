@@ -86,7 +86,37 @@ Sus datos de NetFlow son procesados por el backend de Datadog y enriquecidos con
 
 Si la IP del exportador de NetFlow es una de las IPs del dispositivo, pero no la configurada en la integración de SNMP, Datadog intenta localizar el dispositivo al que pertenece la IP del exportador y enriquece sus datos de NetFlow con él, siempre y cuando la coincidencia sea única.
 
-### Enriquecimiento de IP de proveedor de nube {#cloud-provider-ip-enrichment}
+### Enriquecimiento de IP {#ip-enrichment}
+
+Datadog admite los siguientes tipos de enriquecimiento de IP.
+
+#### Enriquecimiento de IP personalizado {#custom-ip-enrichment}
+
+Puede agregar enriquecimientos personalizados para asignar IP y CIDR a etiquetas personalizadas (por ejemplo, para categorizar servicios que se ejecutan en direcciones IP específicas). El enriquecimiento de IP personalizado permite a los ingenieros de red y a sus equipos interpretar y consultar los datos de NetFlow con nombres legibles por humanos.
+
+Vaya a [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}IP Enrichment{{< /ui >}}][10], luego haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para cargar un archivo CSV de asignaciones.
+
+Para agregar una sola asignación manualmente, haga clic en la flecha hacia abajo junto a {{< ui >}}\+ Add Enrichment{{< /ui >}} y seleccione {{< ui >}}Single Entry{{< /ui >}}.
+
+Para establecer el nombre de la aplicación para los flujos hacia o desde una dirección IP, agregue una etiqueta `application_name` a la asignación (por ejemplo, `application_name:client_device`). Las asignaciones de IP personalizadas tienen prioridad sobre todas las demás fuentes de nombres de aplicaciones. Para ver el orden completo, consulte la sección [Asignación de nombre de aplicación](#application-name-assignment).
+
+#### Enriquecimiento de IP privada de DNS inverso {#reverse-dns-private-ip-enrichment}
+
+El enriquecimiento de IP privada de DNS inverso agrega nombres de servidor a sus registros de NetFlow. Cuando lo habilita, el Agent realiza búsquedas de DNS inverso en las direcciones IP de origen y destino en rangos de direcciones privadas y agrega los nombres de servidor correspondientes a los registros de flujo.
+
+El enriquecimiento de DNS inverso está deshabilitado de forma predeterminada. Para habilitarlo, configure `reverse_dns_enrichment_enabled: true` en `network_devices.netflow` en su archivo [`datadog.yaml`][3], luego [reinicie el Agent][4]. Para ver el ejemplo de configuración completo, consulte la sección [Configuración](#configuration).
+
+Para filtrar flujos por nombre de servidor:
+
+1. Vaya a la [página de NetFlow][5].
+2. Haga clic en {{< ui >}}\+ Filter{{< /ui >}}.
+3. Seleccione {{< ui >}}Source Reverse DNS Hostname{{< /ui >}} o {{< ui >}}Destination Reverse DNS Hostname{{< /ui >}}.
+
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Menú de filtro mejorado para mostrar las facetas de destino y fuente de DNS inverso" width="100%" >}}
+
+**Nota**: Las entradas de DNS inverso se almacenan en caché y están sujetas a limitación de velocidad para minimizar las consultas de DNS y reducir la carga en los servidores DNS. Para obtener más opciones de configuración, incluida la modificación del almacenamiento en caché predeterminado y la limitación de velocidad, consulte la sección `reverse_dns_enrichment` del [archivo de configuración de ejemplo del Agent][7].
+
+#### Enriquecimiento de IP de proveedor de nube {#cloud-provider-ip-enrichment}
 
 Datadog enriquece las IPs con el servicio y la región del proveedor de nube pública para direcciones IPv4, de modo que pueda filtrar los registros de flujo de un servicio y una región específicos.
 
@@ -94,39 +124,135 @@ Datadog enriquece las IPs con el servicio y la región del proveedor de nube pú
 
 ### Enriquecimiento de puertos {#port-enrichment}
 
-Datadog enriquece los puertos en NetFlow con datos de IANA (Internet Assigned Numbers Authority) para resolver asignaciones de puertos conocidos (como Postgres en 5432 y HTTPS en 443). 
+Datadog admite los siguientes tipos de enriquecimiento de puertos.
 
-### Enriquecimiento de puertos personalizados {#custom-port-enrichment}
+#### Enriquecimiento de puertos predeterminado {#default-port-enrichment}
 
-También puede agregar sus propios enriquecimientos personalizados para asignar puertos y protocolos a aplicaciones específicas (por ejemplo, si un servicio personalizado se ejecuta en un puerto específico). Esto facilita que los ingenieros de red y sus equipos interpreten y consulten los datos de NetFlow con nombres legibles por humanos.
+Datadog enriquece los puertos en NetFlow con datos de IANA (Internet Assigned Numbers Authority) para resolver asignaciones de puertos conocidos (como Postgres en 5432 y HTTPS en 443).
 
-Desde la pestaña {{< ui >}}Configuration{{< /ui >}} en NetFlow, haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para cargar el archivo CSV que contiene sus enriquecimientos personalizados.
+#### Enriquecimiento de puertos personalizado {#custom-port-enrichment}
 
-{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="El modal de Nueva asignación de enriquecimiento en la pestaña de configuración de NetFlow" width="100%" >}}
+Puede agregar enriquecimientos personalizados para asignar puertos y protocolos a aplicaciones específicas (por ejemplo, si un servicio personalizado se ejecuta en un puerto específico). El enriquecimiento de puertos personalizado permite a los ingenieros de red y a sus equipos interpretar y consultar los datos de NetFlow con nombres legibles por humanos.
 
-### Enriquecimiento de IP personalizado {#custom-ip-enrichment}
+Vaya a [{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}Port Enrichment{{< /ui >}}][13], luego haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para cargar el archivo CSV que contiene sus enriquecimientos personalizados.
 
-También puede agregar sus propios enriquecimientos personalizados para asignar IP y CIDR a etiquetas personalizadas (por ejemplo, para categorizar servicios que se ejecutan en direcciones IP específicas). Esto facilita que los ingenieros de red y sus equipos interpreten y consulten los datos de NetFlow con nombres legibles por humanos.
+### Inspección profunda de paquetes {#deep-packet-inspection}
 
-Desde la [{{< ui >}}Enrichment{{< /ui >}} página de configuración][10], haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para agregar asignaciones manualmente o cargar un archivo CSV para agregar asignaciones de forma masiva.
+**Nota**: La inspección profunda de paquetes requiere la versión 7.86.0 o posterior del Agent.
 
-### Enriquecimiento de IP privada de DNS inverso {#reverse-dns-private-ip-enrichment}
+Con la inspección profunda de paquetes (DPI), su dispositivo de red identifica la aplicación para cada flujo inspeccionando su tráfico, en lugar de que Datadog infiera la aplicación a partir del número de puerto. Datadog no inspecciona las cargas útiles de los paquetes. El Agent lee la aplicación que el dispositivo clasificó (usando Cisco NBAR2 o Palo Alto Networks App-ID) a partir de registros NetFlow v9 o IPFIX.
 
-Habilite el enriquecimiento de IP privada de DNS inverso para realizar búsquedas de DNS de nombres de host asociados con direcciones IP de fuente o destino. Cuando está habilitado, el Agent realiza búsquedas de DNS inverso en las IP de fuente y destino dentro de rangos de direcciones privadas, enriqueciendo los registros de NetFlow con los nombres de host correspondientes.
+DPI no requiere que asigne manualmente direcciones IP o puertos a aplicaciones. Para usar DPI, configure tanto el Datadog Agent como su dispositivo de red.
 
-De forma predeterminada, el enriquecimiento de IP de DNS inverso en su [`datadog.yaml` archivo][7] está deshabilitado. Para habilitarlo, consulte la sección [Configuración](#configuration) de esta página.
+#### Configure el Agent {#configure-the-agent}
 
-Busque DNS en el menú {{< ui >}}\+ Filter{{< /ui >}} para localizar flujos asociados con el enriquecimiento de IP de DNS inverso:
+En su archivo [`datadog.yaml`][3], establezca `enable_dpi: true` en cada receptor que reciba flujos de un dispositivo habilitado para DPI. DPI solo es compatible con los receptores `netflow9` y `ipfix`. DPI no es compatible con los receptores `netflow5` o `sflow5`.
 
-{{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Menú de filtro mejorado para mostrar las facetas de destino y fuente de DNS inverso" width="100%" >}}
+```yaml
+network_devices:
+  netflow:
+    enabled: true
+    listeners:
+      - flow_type: netflow9
+        port: 2055
+        enable_dpi: true
+      - flow_type: ipfix
+        port: 4739
+        enable_dpi: true
+```
 
-**Nota**: Las entradas de DNS inverso se almacenan en caché y están sujetas a limitación de velocidad para minimizar las consultas de DNS y reducir la carga en los servidores DNS. Para obtener más opciones de configuración, incluida la modificación del almacenamiento en caché predeterminado y la limitación de velocidad, consulte la sección `reverse_dns_enrichment` del [archivo de configuración de ejemplo del Agent][7].
+Después de guardar sus cambios, [reinicie el Agent][4].
+
+#### Configure Cisco NBAR2 {#configure-cisco-nbar2}
+
+Cisco Next Generation Network-Based Application Recognition (NBAR2) es compatible con NetFlow v9 e IPFIX. Para exportar datos de aplicaciones NBAR2 desde un dispositivo Cisco:
+
+1. Habilite el descubrimiento de protocolos NBAR2 en cada interfaz que desee clasificar:
+
+   ```text
+   configure terminal
+   interface <INTERFACE>
+    ip nbar protocol-discovery
+   exit
+   ```
+
+2. Agregue el campo `match application name` a su registro de flujo. El dispositivo luego exporta un ID de aplicación con cada flujo:
+
+   ```text
+   configure terminal
+   flow record <RECORD_NAME>
+    match application name
+   exit
+   ```
+
+3. Agregue la opción de tabla de aplicaciones a su exportador de flujo. El dispositivo envía periódicamente una tabla que asigna cada ID de aplicación a un nombre y descripción de aplicación:
+
+   ```text
+   configure terminal
+   flow exporter <EXPORTER_NAME>
+    option application-table timeout 60
+   exit
+   ```
+
+   El valor de tiempo de espera está en segundos.
+
+4. (Opcional) Para agregar más detalles de aplicación a sus flujos, agregue la opción de atributos de aplicación a su exportador de flujo:
+
+   ```text
+   configure terminal
+   flow exporter <EXPORTER_NAME>
+    option application-attributes
+   exit
+   ```
+
+   Datadog luego enriquece los flujos con la categoría, subcategoría, grupo, clase de tráfico, relevancia comercial, conjunto de aplicaciones, familia de aplicaciones y si la aplicación utiliza P2P, tunelización o cifrado.
+
+**Notas**:
+
+- Los ID de aplicación son específicos para cada exportador porque dependen del paquete de protocolo NBAR y la versión del motor del dispositivo. El Agent mantiene una tabla de aplicaciones separada para cada exportador.
+- El Agent mantiene cada entrada de la tabla de aplicaciones durante una hora después de que el exportador la envía por última vez. Para mantener los nombres de las aplicaciones en todos los flujos del exportador, establezca el tiempo de espera `option application-table` en menos de 3600 segundos.
+
+#### Configure Palo Alto Networks App-ID {#configure-palo-alto-networks-app-id}
+
+Palo Alto Networks App-ID es compatible con NetFlow v9. Los firewalls de Palo Alto Networks envían el nombre de la aplicación en cada registro de flujo, por lo que no se requiere una tabla de aplicaciones.
+
+Para exportar datos de App-ID, habilite {{< ui >}}PAN-OS Field Types{{< /ui >}} en el perfil del servidor NetFlow del firewall. Para obtener más información, consulte la [documentación de monitoreo de NetFlow][12] de Palo Alto Networks.
+
+### Asignación de nombre de aplicación {#application-name-assignment}
+
+Datadog asigna un nombre de aplicación a cada punto de conexión de un flujo (la fuente y el destino, o el iniciador y el respondedor). Cada nombre proviene de la primera fuente en esta lista que tiene una coincidencia:
+
+Asignaciones de 1. [enriquecimiento de IP personalizado](#custom-ip-enrichment)
+Asignaciones de 2. [enriquecimiento de puertos personalizado](#custom-port-enrichment)
+3. [Inspección profunda de paquetes (DPI)](#deep-packet-inspection), solo para el respondedor (el punto de conexión que recibe la conexión, generalmente el servidor)
+Nombre de servidor de 4. [DNS inverso](#reverse-dns-private-ip-enrichment)
+5. Dominio del sistema autónomo (AS) de GeoIP
+6. [Enriquecimiento de puertos predeterminado](#default-port-enrichment) (asignaciones de puertos IANA)
+7. `unknown`, si ninguna otra fuente coincide
+
+DPI se aplica solo al respondedor. Para el iniciador, Datadog utiliza la siguiente fuente coincidente. Para obtener más información sobre iniciadores y respondedores, consulte la sección [Unión de conversaciones](#conversation-stitching).
+
+Datadog también asigna un `application_name` al flujo en su conjunto, utilizando el mismo orden. En cada paso, Datadog verifica al respondedor antes que al iniciador.
 
 ## Detalles de IP {#ip-details}
 
 En la vista **Conversaciones**, puede visualizar la dirección IP pública de la IP de destino. Pase el cursor sobre la IP para mostrar metadatos enriquecidos sobre la IP y un enlace a {{< ui >}}View Related Network Connections{{< /ui >}} donde puede inspeccionar la conectividad con más detalle.
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Pase el cursor sobre una dirección IP para mostrar los detalles de la IP y visualizar conexiones de red relacionadas." width="100%" >}}
+
+## Aplicaciones {#applications}
+
+La sección {{< ui >}}Applications{{< /ui >}} de la [página de NetFlow][5] muestra qué aplicaciones generan la mayor cantidad de tráfico en su red. Úsela para identificar las aplicaciones que generan el uso de ancho de banda o causan problemas de rendimiento o congestión.
+
+{{< img src="network_device_monitoring/netflow/netflow_top_applications.png" alt="La sección Applications de la página de NetFlow, que muestra un gráfico circular Top Applications y una tabla de aplicaciones con tasa de bits, tasa de paquetes y total de bytes" width="100%" >}}
+
+Para filtrar los datos de NetFlow por aplicación, utilice los filtros {{< ui >}}Initiator Application{{< /ui >}} y {{< ui >}}Responder Application{{< /ui >}} en la vista {{< ui >}}Bidirectional{{< /ui >}}, o los filtros {{< ui >}}Source Application{{< /ui >}} y {{< ui >}}Destination Application{{< /ui >}} en la vista {{< ui >}}Unidirectional{{< /ui >}}.
+
+Para ver las principales aplicaciones del tráfico que pasa por un solo dispositivo, abra la página del dispositivo y seleccione la pestaña {{< ui >}}Traffic{{< /ui >}}.
+
+Datadog asigna nombres de aplicaciones desde varias fuentes de enriquecimiento y, luego, agrupa los flujos por nombre de aplicación para crear la sección {{< ui >}}Applications{{< /ui >}}. Para obtener la lista de fuentes y el orden en el que Datadog las verifica, consulte la sección [Asignación de nombres de aplicaciones](#application-name-assignment).
+
+Para reducir la cantidad de flujos etiquetados como `unknown`, configure la [inspección profunda de paquetes](#deep-packet-inspection) en dispositivos compatibles de Cisco y Palo Alto Networks, o agregue enriquecimientos de [IP personalizada](#custom-ip-enrichment) y [puerto personalizado](#custom-port-enrichment).
 
 ## Diagrama de flujo {#flow-diagram}
 
@@ -241,7 +367,7 @@ Además de los campos, también puede utilizar facetas listas para usar para com
 | IP de fuente | La dirección IP de fuente. |
 | Latitud de fuente | La coordenada de latitud asociada con la IP de fuente. |
 | Longitud de fuente | La coordenada de longitud asociada con la IP de fuente. |
-| MAC de fuente | La dirección de Control de Acceso al Medio (MAC) asociada con la IP de fuente. |
+| MAC de fuente | La dirección de Media Access Control (MAC) asociada con la IP de fuente. |
 | Máscara de fuente | La máscara de subred asociada con la IP de fuente. |
 | Puerto de fuente | El número de puerto de fuente. |
 | Nombre de host DNS inverso de fuente | El nombre de host DNS asociado con la IP de fuente. |
@@ -386,3 +512,5 @@ Utilice el comando `netstat -s` para ver si hay paquetes UDP perdidos:
 [9]: /es/network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
 [11]: /es/network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+[12]: https://docs.paloaltonetworks.com/ngfw/administration/monitoring/netflow-monitoring/netflow-templates
+[13]: https://app.datadoghq.com/devices/settings/enrichment/port

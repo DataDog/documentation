@@ -1,5 +1,5 @@
 ---
-title: Flaky Tests Management
+title: Flaky Management
 description: Track, triage, and manage flaky tests.
 further_reading:
 - link: "/continuous_integration/tests/"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The [Flaky Tests Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
+The [Flaky Management][1] page provides a centralized view to track, triage, and remediate flaky tests across your organization. You can view every test's state along with key impact metrics like number of pipeline failures, CI time wasted, and failure rate.
 
 From this UI, you can act on flaky tests to mitigate their impact. Quarantine or disable problematic tests to keep known flakes from breaking builds, and create work items and Jira issues to track work toward fixes.
 

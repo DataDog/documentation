@@ -19,22 +19,22 @@ further_reading:
   tag: Blog
   text: Améliorez votre workflow de dépannage avec Container Images dans Datadog Container
     Monitoring
-- link: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+- link: /security/cloud_security_management/setup/dockerfile_labels
   tag: Documentation
-  text: Lier un Dockerfile aux vulnérabilités détectées en production
+  text: Liez les Container Images aux Dockerfiles
 title: Cloud Security Vulnerabilities
 ---
 ## Présentation {#overview}
 
 Cloud Security Vulnerabilities vous aide à améliorer votre posture de sécurité et à atteindre la conformité, en analysant en continu les images de conteneurs, les hosts, les images de hosts et les fonctions serverless à la recherche de vulnérabilités, des pipelines CI/CD à la production en direct. En tirant parti de l'observabilité au moment de l'exécution, il vous aide à hiérarchiser et à remédier aux vulnérabilités exploitables dans vos workflows quotidiens, le tout dans une vue unique, et sans aucune dépendance vis-à-vis d'autres produits Datadog.
 
-Avec Cloud Security Vulnerabilities, vous pouvez gérer votre stratégie de gestion de la sécurité cloud, le tout au même endroit :
+Avec Cloud Security Vulnerabilities, vous pouvez gérer votre stratégie de gestion de la Cloud Security, le tout au même endroit :
 
 - Créer un programme de gestion des vulnérabilités, des pipelines CI/CD aux ressources de production
 - Réussir les audits de conformité (tels que SOC2, PCI, HIPAA, CIS et FedRamp)
 - Remédier aux vulnérabilités émergentes (0-day CVEs)
 
-**Remarque** : Pour la gestion des vulnérabilités dans les bibliothèques d'applications, consultez [Software Composition Analysis][5]. Pour le code d'application, consultez [Code Security][10].
+**Remarque** : Pour la gestion des vulnérabilités dans les bibliothèques d'applications, consultez [Software Composition Analysis][5]. Pour le code d'application, consultez [Code Security][10].
 
 ## Fonctionnalités clés {#key-capabilities}
 
@@ -113,12 +113,13 @@ Pour les images de conteneur non aplaties à phase unique construites à partir 
 
 Lorsque Datadog détecte une CVE sur une image de conteneur en cours d'exécution, il peut lier la CVE directement au Dockerfile et au commit qui ont introduit le paquet vulnérable. Cela comble l'écart entre une alerte de production et la modification de code qui l'a causée, donnant aux développeurs le contexte dont ils ont besoin pour corriger à la source plutôt que de rechercher des versions de packages dans les registres.
 
-Pour activer ce mappage du code au cloud, ajoutez des annotations d'image OCI à vos images de conteneur au moment de la construction. Datadog utilise ces annotations pour afficher un aperçu du Dockerfile dans le panneau des vulnérabilités des images de conteneur et pour faire apparaître le dépôt, le commit et le chemin de fichier exacts associés à la vulnérabilité.
+Pour activer ce mappage du code au cloud, ajoutez des métadonnées de source d'image à vos Container Images. Datadog utilise ces métadonnées pour prévisualiser le Dockerfile dans le panneau Container Image Vulnerabilities. Il affiche également le dépôt, le commit et le chemin d'accès au fichier pour la vulnérabilité. Ajoutez les métadonnées de l'une des deux manières suivantes :
 
-Pour configurer la liaison à la source, consultez [Link Dockerfile to vulnerabilities][22] dans le guide d'analyse des images de conteneur CI/CD.
+- **Étiquettes de source d'image** : Fusionnez les pull requests que Datadog ouvre depuis la page Cloud Security Setup. Vous pouvez également définir les étiquettes dans votre Dockerfile ou au moment de la génération. Consultez [Liez les Container Images aux Dockerfiles][22].
+- **Annotations d'image OCI** : Ajoutez des annotations lors de la génération de l'image et analysez-la avec Datadog Security CLI. Consultez [Liez le Dockerfile aux vulnérabilités][25] dans le guide d'analyse des Container Images dans le cadre de la CI/CD.
 
 ## Automatisation et intégration Jira {#automation-and-jira-integration}
-Intégrez Cloud Security Vulnerabilities à votre workflow quotidien en configurant [{{< ui >}}security notification rules{{< /ui >}}][17] et [automation pipelines][20] :
+Intégrez Cloud Security Vulnerabilities à votre workflow quotidien en configurant [{{< ui >}}security notification rules{{< /ui >}}][17] et [automation pipelines][20] :
 - Soyez alerté lors de la détection d'une vulnérabilité exploitable pour votre périmètre
 - Créez automatiquement des tickets Jira
 - Configurez des SLA pour remédier aux vulnérabilités
@@ -156,9 +157,10 @@ Le [{{< ui >}}Infrastructure Packages Catalog{{< /ui >}}][19] fournit un inventa
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: /fr/security/automation_pipelines/
 [21]: /fr/security/cloud_security_management/setup/ci_cd
-[22]: /fr/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[22]: /fr/security/cloud_security_management/setup/dockerfile_labels/
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /fr/security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
+[25]: /fr/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 
 ## Pour aller plus loin {#further-reading}
 

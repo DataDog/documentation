@@ -7,13 +7,16 @@ further_reading:
 - link: /data_jobs
   tag: Documentación
   text: 'Data Observability: Jobs Monitoring'
+- link: /monitors/types/data_observability/
+  tag: Documentación
+  text: Seguimiento de Data Observability
 title: 'Data Observability: Jobs Monitoring para Spark en Kubernetes'
 ---
-[Data Observability: Jobs Monitoring][6] ofrece visibilidad sobre el rendimiento y la confiabilidad de las aplicaciones de Apache Spark en Kubernetes.
+[Data Observability: Jobs Monitoring][6] proporciona visibilidad sobre el rendimiento y la confiabilidad de las aplicaciones de Apache Spark en Kubernetes.
 
 ## Configuración {#setup}
 
-<div class="alert alert-info">Data Observability: Jobs Monitoring requiere la versión 7.64.0 o posterior del <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent</a> y la versión 1.38.0 o posterior del <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">rastreador de Java</a>.</div>
+<div class="alert alert-info">Data Observability: Jobs Monitoring requiere <a href="https://github.com/DataDog/datadog-agent/releases" target="_blank">Datadog Agent versión</a> 7.64.0 o posterior y <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> versión 1.38.0 o posterior.</div>
 
 Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Spark en Kubernetes.
 
@@ -23,7 +26,7 @@ Siga estos pasos para habilitar Data Observability: Jobs Monitoring para Spark e
 
 ### Instale el Datadog Agent en su clúster de Kubernetes {#install-the-datadog-agent-on-your-kubernetes-cluster}
 
-Si ya ha [instalado el Datadog Agent en su clúster de Kubernetes][1], asegúrese de haber habilitado el [Datadog Admission Controller][2]. Luego puede pasar al siguiente paso, [Habilitar Single Step Instrumentation](#enable-single-step-instrumentation).
+Si ya ha [instalado el Datadog Agent en su clúster de Kubernetes][1], asegúrese de haber habilitado el [Datadog Admission Controller][2]. Luego puede pasar al siguiente paso, [Habilite Single Step Instrumentation](#enable-single-step-instrumentation).
 
 Puede instalar el Datadog Agent mediante el [Datadog Operator][3] o [Helm][4].
 
@@ -81,7 +84,7 @@ Puede instalar el Datadog Agent mediante el [Datadog Operator][3] o [Helm][4].
 
    Reemplace `<DATADOG_AGENT_VERSION>` con la versión `7.64.0` o posterior.
 
-   **Opcional**: Quite los comentarios de la sección `logCollection` para comenzar a recopilar logs de aplicaciones que se correlacionarán con los traces de ejecución de trabajos de Spark. Una vez habilitada, los logs se recopilan de todos los contenedores descubiertos de forma predeterminada. Consulte la [documentación de recopilación de logs de Kubernetes][7] para obtener más detalles sobre el proceso de configuración.
+   **Opcional**: Quite el comentario de la sección `logCollection` para comenzar a recopilar logs de aplicaciones que se correlacionarán con las trazas de ejecución de trabajos de Spark. Una vez habilitada, los logs se recopilan de todos los contenedores descubiertos de forma predeterminada. Consulte la [documentación de recopilación de logs de Kubernetes][7] para obtener más detalles sobre el proceso de configuración.
 1. Implemente el Datadog Agent con el archivo de configuración anterior:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -126,7 +129,7 @@ Puede instalar el Datadog Agent mediante el [Datadog Operator][3] o [Helm][4].
 
    Reemplace `<DATADOG_AGENT_VERSION>` con la versión `7.64.0` o posterior.
 
-   **Opcional**: Quite los comentarios de la sección de logs para comenzar a recopilar logs de aplicaciones que se correlacionarán con los traces de ejecución de trabajos de Spark. Una vez habilitada, los logs se recopilan de todos los contenedores descubiertos de forma predeterminada. Consulte la [documentación de recopilación de logs de Kubernetes][5] para obtener más detalles sobre el proceso de configuración.
+   **Opcional**: Quite el comentario de la sección de logs para comenzar a recopilar logs de aplicaciones que se correlacionarán con las trazas de ejecución de trabajos de Spark. Una vez habilitada, los logs se recopilan de todos los contenedores descubiertos de forma predeterminada. Consulte la [documentación de recopilación de logs de Kubernetes][5] para obtener más detalles sobre el proceso de configuración.
 1. Ejecute el siguiente comando:
    ```shell
    helm install <RELEASE_NAME> \
@@ -148,13 +151,13 @@ Puede instalar el Datadog Agent mediante el [Datadog Operator][3] o [Helm][4].
 
 ### (Opcional) Recopile el linaje de datos de Spark con OpenLineage {#optional-collect-spark-data-lineage-with-openlineage}
 
-Data Observability: Jobs Monitoring puede recopilar el linaje de Spark a través de [OpenLineage][8], para que pueda ver las tablas ascendentes y descendentes de sus trabajos y visualizar pipelines completos de Spark. La configuración consta de dos pasos: instale el proveedor de OpenLineage Spark y luego habilite la función en el rastreador de Java.
+Data Observability: Jobs Monitoring puede recopilar el linaje de Spark a través de [OpenLineage][8], para que pueda ver las tablas ascendentes y descendentes de sus trabajos y visualizar canalizaciones de Spark completas. La configuración consta de dos pasos: instale el proveedor de OpenLineage para Spark y luego habilite la función en el Java tracer.
 
-<div class="alert alert-info">La recopilación de linaje de OpenLineage requiere la versión 1.48.0 o posterior del <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">rastreador de Java</a>.</div>
+<div class="alert alert-info">La recopilación de linaje de OpenLineage requiere <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> versión 1.48.0 o posterior.</div>
 
 1. **Instale el proveedor de OpenLineage Spark.** Haga que el JAR de `openlineage-spark` esté disponible en el classpath de su controlador y ejecutores de Spark, siguiendo la [guía de instalación de OpenLineage Spark][9]. Utilice la versión `1.29.0` o posterior de OpenLineage, que es la primera versión que admite las facetas de etiquetas de ejecución de las que depende Data Observability: Jobs Monitoring.
 
-   No necesita establecer `spark.extraListeners` ni configurar ninguna opción de `spark.openlineage.transport.*`. Cuando la función está habilitada y el JAR está presente, el rastreador de Java de Datadog registra el listener de OpenLineage y enruta los eventos de linaje a través del Datadog Agent local.
+   No necesita establecer `spark.extraListeners` ni configurar ninguna opción de `spark.openlineage.transport.*`. Cuando la función está habilitada y el JAR está presente, el Java tracer de Datadog registra el oyente de OpenLineage y enruta los eventos de linaje a través del Datadog Agent local.
 
 2. **Habilite la recopilación de OpenLineage.** Establezca la variable de entorno `DD_DATA_JOBS_OPENLINEAGE_ENABLED` en `true` en el controlador de Spark.
 
@@ -174,9 +177,9 @@ Data Observability: Jobs Monitoring puede recopilar el linaje de Spark a través
 
 ### Habilitar Single Step Instrumentation {#enable-single-step-instrumentation}
 
-Single Step Instrumentation (SSI) inyecta el rastreador de Java en los pods del controlador y de los ejecutores de Spark al iniciarse. Funciona independientemente de si su controlador de Spark se ejecuta en **modo clúster** (como un pod de Kubernetes dedicado) o **modo cliente** (como un proceso dentro de su pod de envío; por ejemplo, un programador o trabajador de Airflow).
+Single Step Instrumentation (SSI) inyecta el Java tracer en sus pods de controlador y ejecutor de Spark al iniciarse. Funciona independientemente de si su controlador de Spark se ejecuta en **cluster mode** (como un pod de Kubernetes dedicado) o **client mode** (como un proceso dentro de su pod de envío; por ejemplo, un programador o trabajador de Airflow).
 
-Spark establece automáticamente `spark-role: driver` en los pods de controlador y `spark-role: executor` en los pods de ejecutor. En modo cliente, reemplace `spark-role: driver` con las etiquetas que identifican a su pod de envío. Para encontrar esas etiquetas, ejecute:
+Spark establece automáticamente `spark-role: driver` en los pods de controlador y `spark-role: executor` en los pods de ejecutor. En client mode, reemplace `spark-role: driver` con las etiquetas que identifican su pod de envío. Para encontrar esas etiquetas, ejecute:
 
 ```shell
 kubectl get pod <SUBMITTER_POD_NAME> -n <NAMESPACE> --show-labels
@@ -281,9 +284,9 @@ helm upgrade <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
 
 Después de aplicar la configuración, reinicie los pods seleccionados. SSI inyecta el contenedor de inicialización en cada pod al iniciarse.
 
-`DD_INTEGRATIONS_ENABLED=false` mantiene la instrumentación de Spark y deshabilita todas las demás integraciones del rastreador (por ejemplo, AWS SDK, JDBC o clientes HTTP) en los pods seleccionados, por lo que solo se envían datos de Jobs Monitoring. Elimínelo si también desea trazas de APM de estas integraciones.
+`DD_INTEGRATIONS_ENABLED=false` mantiene la instrumentación de Spark y deshabilita todas las demás integraciones del trazador (por ejemplo, AWS SDK, JDBC o clientes HTTP) en los pods seleccionados, por lo que solo se envían datos de Jobs Monitoring. Elimínelo si también desea trazas de APM de estas integraciones.
 
-<div class="alert alert-warning">En modo cliente, el <code>spark-driver</code> objetivo coincide con su pod de envío. Si ese pod también ejecuta una aplicación que envía sus propias trazas de APM, no configure <code>DD_INTEGRATIONS_ENABLED</code> a <code>false</code> en ese objetivo.</div>
+<div class="alert alert-warning">En client mode, el <code>spark-driver</code> objetivo coincide con su pod de envío. Si ese pod también ejecuta una aplicación que envía sus propias trazas de APM, no configure <code>DD_INTEGRATIONS_ENABLED</code> a <code>false</code> en ese objetivo.</div>
 
 ## Validación {#validation}
 

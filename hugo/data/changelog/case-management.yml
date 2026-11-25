@@ -95,3 +95,84 @@ entries:
       - ListCaseViews
       - UpdateCaseView
     title: Deprecate np_rule_id on work item views
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AddCaseInsights
+      - AggregateCases
+      - ArchiveCase
+      - AssignCase
+      - BulkUpdateCases
+      - CommentCase
+      - CountCases
+      - CreateCase
+      - CreateCaseAutomationRule
+      - CreateCaseJiraIssue
+      - CreateCaseLink
+      - CreateCaseNotebook
+      - CreateCaseServiceNowTicket
+      - CreateCaseView
+      - CreateMaintenanceWindow
+      - CreateProject
+      - CreateProjectNotificationRule
+      - DeleteCaseAutomationRule
+      - DeleteCaseComment
+      - DeleteCaseCustomAttribute
+      - DeleteCaseLink
+      - DeleteCaseView
+      - DeleteMaintenanceWindow
+      - DeleteProject
+      - DeleteProjectNotificationRule
+      - DisableCaseAutomationRule
+      - EnableCaseAutomationRule
+      - FavoriteCaseProject
+      - GetCase
+      - GetCaseAutomationRule
+      - GetCaseView
+      - GetProject
+      - GetProjectNotificationRules
+      - GetProjects
+      - LinkIncident
+      - LinkJiraIssueToCase
+      - ListCaseAutomationRules
+      - ListCaseLinks
+      - ListCaseTimeline
+      - ListCaseViews
+      - ListCaseWatchers
+      - ListMaintenanceWindows
+      - ListUserCaseProjectFavorites
+      - MoveCaseToProject
+      - RemoveCaseInsights
+      - SearchCases
+      - UnarchiveCase
+      - UnassignCase
+      - UnfavoriteCaseProject
+      - UnlinkJiraIssue
+      - UnwatchCase
+      - UpdateAttributes
+      - UpdateCaseAutomationRule
+      - UpdateCaseComment
+      - UpdateCaseCustomAttribute
+      - UpdateCaseDescription
+      - UpdateCaseDueDate
+      - UpdateCaseResolvedReason
+      - UpdateCaseTitle
+      - UpdateCaseView
+      - UpdateMaintenanceWindow
+      - UpdatePriority
+      - UpdateProject
+      - UpdateProjectNotificationRule
+      - UpdateStatus
+      - WatchCase
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/42008
+    operations:
+      - CommentCase
+      - CreateCaseNotebook
+      - DeleteCaseComment
+      - UnwatchCase
+      - WatchCase
+    title: Fix Work Management API permission metadata

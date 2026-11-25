@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/patterns-agent-observability/"
   tag: "Blog"
   text: "Understand production LLM behavior with Patterns in Agent Observability"
+- link: "https://www.datadoghq.com/blog/fine-tuning-patterns-baseten/"
+  tag: "Blog"
+  text: "How we fine-tuned a faster model for Patterns on Baseten"
 ---
 
 

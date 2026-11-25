@@ -4,10 +4,6 @@ description: "Set up and run infrastructure actions from Bits Investigation."
 site_support_id: bits_remediation
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
-  One-click infrastructure actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 During an investigation, Bits can recommend and take action on your infrastructure, such as rolling back a Kubernetes deployment or rebooting an EC2 instance. An infrastructure action can resolve an infrastructure-related root cause, or reduce the impact of an issue while you work on a longer-term fix. To let Bits run a recommended action, click {{< ui >}}Approve{{< /ui >}} in the investigation or in a Slack notification.
 
 Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. Guardrails define which actions Bits can take, where those actions apply, and who needs to approve them.
@@ -37,7 +33,7 @@ To set up actions for Kubernetes:
 
 1. Update the settings in your Datadog Cluster Agent configuration to enable both a [Private Action Runner][3] and Kubernetes actions:
 
-   - Enroll the runner as ownerless (`api_key_only_enrollment`). The Private Action Runner must be ownerless because guardrails authorize actions through [Execution Policies][5], which apply only to ownerless runners.
+   - Enroll the runner as ownerless (`api_key_only_enrollment`). The Private Action Runner must be ownerless because guardrails authorize actions through [Execution Policies][5], which authorize private actions only on ownerless runners.
    - Enable Kubernetes Actions (`kubernetesActions`), which grants the Cluster Agent permission to delete pods and to scale, restart, patch, and roll back deployments.
    - Add the actions you want Bits to run to the `actions_allowlist`. The allowlist controls which actions the runner can run. Bits can recommend any of the [supported Kubernetes actions](#supported-kubernetes-actions), but can run only the ones in this allowlist.
 
@@ -214,7 +210,9 @@ The following table lists the Kubernetes actions that Bits supports. You allow a
 
 ## AWS actions
 
-{{< callout >}} AWS actions are in Preview. {{< /callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities" >}}
+  AWS actions are in Preview. Click <strong>Request Access</strong> to join the Preview program.
+{{< /callout >}}
 
 Bits runs AWS actions through your Datadog AWS integration. This means you don't need a Private Action Runner or a separate connection for them.
 
@@ -256,7 +254,7 @@ When an investigation recommends an infrastructure action:
 [2]: /integrations/amazon_web_services/
 [3]: /actions/private_actions/set_up_agent_based/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /actions/private_actions/execution_policies/
+[5]: /actions/execution_policies/
 [6]: https://app.datadoghq.com/actions/private-action-runners
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
 [8]: /bits_ai/bits_remediation/guardrails/#create-a-guardrail

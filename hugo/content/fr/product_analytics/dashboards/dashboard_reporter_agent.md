@@ -26,10 +26,6 @@ further_reading:
   text: Monitors
 title: Dashboard Reporter Agent
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/product-analytics-dashboard-reporter-agent/" btn_hidden="false" header="Rejoignez la Preview !">}}
-Dashboard Reporter Agent est en préversion. Remplissez le formulaire pour demander l'accès.
-{{< /callout >}}
-
 ## Présentation {#overview}
 
 Dashboard Reporter Agent surveille les dashboards Product Analytics que vous choisissez et envoie à votre équipe un rapport programmé dans Slack, Microsoft Teams ou par e-mail. Chaque rapport résume ce qui a changé, ce qui nécessite une attention particulière et ce qu'il faut faire ensuite, afin que vous n'ayez pas à ouvrir chaque dashboard pour vérifier. À mesure que vous déployez plus de fonctionnalités, un agent peut surveiller de nombreux dashboards, y compris les dashboards pour les lancements passés qui ne font plus l'objet d'une attention régulière.
@@ -42,10 +38,10 @@ Les rapports sont des résumés textuels envoyés selon un planning. Pour être 
 
 ## Cas d'utilisation {#use-cases}
 
-Utilisez Dashboard Reporter Agent pour :
+Utilisez Dashboard Reporter Agent pour :
 
 - **Surveiller plusieurs fonctionnalités à la fois** : un agent peut couvrir de nombreux dashboards.
-- **Garder les lancements visibles** : abonnez un dashboard de lancement pour qu'il continue d'être examiné une fois l'attention portée au lancement retombée.
+- **Garder les lancements visibles** : abonnez un dashboard de lancement pour qu'il continue d'être examiné une fois l'attention portée au lancement retombée.
 - **Partager un point hebdomadaire sur l'état du produit** : publiez un rapport hebdomadaire sur le canal de votre équipe afin que tout le monde voie les mêmes signaux.
 - **Informer la direction** : communiquez les indicateurs clés et l'état général du produit sans préparer de présentation.
 - **Détecter les régressions tôt** : un rapport quotidien fait apparaître les baisses et les pics d'erreurs peu après leur apparition.
@@ -96,7 +92,7 @@ Vous pouvez commencer à partir d'un dashboard ou depuis la page Agents dans Pro
 
 ### Configurez l'agent {#configure-the-agent}
 
-1. Saisissez un nom qui indique aux lecteurs ce que couvre le rapport, tel que « Checkout Weekly Health ». Le nom apparaît dans le titre de chaque rapport.
+1. Saisissez un nom qui indique aux lecteurs ce que couvre le rapport, tel que « Checkout Weekly Health ». Le nom apparaît dans le titre de chaque rapport.
 2. Sélectionnez un ou plusieurs dashboards à surveiller. Vous pouvez ajouter d'autres dashboards ultérieurement.
 3. Sélectionnez un format de rapport prédéfini, tel que Team Update ou Leadership Update, ou rédigez le vôtre. Pour un format personnalisé, décrivez les questions auxquelles le rapport doit répondre à chaque exécution ainsi que toute exigence de formatage.
 4. Sélectionnez un canal Slack, un canal Microsoft Teams ou une adresse e-mail pour recevoir les rapports.
@@ -111,7 +107,7 @@ Les rapports arrivent à la destination que vous avez configurée. Chaque exécu
 
 Vous pouvez ouvrir un rapport dans Datadog et poser des questions de suivi à l'agent. Par exemple, demandez quel segment a entraîné un changement ou ce qui a changé d'autre au même moment.
 
-1. Ouvrez le rapport :
+1. Ouvrez le rapport :
    - **Depuis le message de rapport** : Dans le message Slack, Microsoft Teams ou e-mail, cliquez sur {{< ui >}}Chat with this report{{< /ui >}}.
    - **Depuis Datadog** : Accédez à la page Agents et sélectionnez l'agent.
 2. Saisissez votre question dans la zone de message et appuyez sur <kbd>Enter</kbd>.
@@ -132,14 +128,14 @@ Vous pouvez modifier les dashboards, le format de rapport, la destination ou la 
 1. Depuis la page Agents, cliquez sur l'agent.
 2. Effectuez vos modifications de l'une des manières suivantes :
    - **Demandez à l'agent** : Décrivez la modification dans le chat. Par exemple : `Add the Checkout Funnel dashboard and send reports on Mondays at 9:00 AM.`
-   - **Modifiez la configuration** : sur la page Agents, ou depuis un tableau de bord auquel vous êtes abonné, survolez l'Agent et cliquez sur {{< ui >}}Edit{{< /ui >}}. Vous pouvez modifier les tableaux de bord auxquels vous êtes abonné, le format du rapport, la cadence ou la destination.
+   - **Modifiez la configuration** : sur la page Agents ou depuis un dashboard auquel l’Agent est abonné, survolez l’Agent et cliquez sur {{< ui >}}Edit{{< /ui >}}. Vous pouvez modifier les dashboards auxquels l’Agent est abonné, le format du rapport, la fréquence ou la destination.
 
 ### Suspendez ou reprenez un agent {#pause-or-resume-an-agent}
 
 Suspendez un agent pour arrêter temporairement les rapports, par exemple pendant une période creuse ou pendant la reconstruction d'un dashboard. Un agent suspendu conserve sa configuration.
 
 - **Pour suspendre un agent** : Sur la page Agents, survolez l'agent et cliquez sur {{< ui >}}Pause{{< /ui >}}. Dans la fenêtre de confirmation, cliquez à nouveau sur {{< ui >}}Pause{{< /ui >}}.
-- **Pour reprendre un agent** : sur la page Agents, survolez l'agent et cliquez sur {{< ui >}}Resume{{< /ui >}}. Dans la fenêtre de confirmation, cliquez sur {{< ui >}}Resume{{< /ui >}}.
+- **Pour reprendre un agent** : sur la page Agents, survolez l'agent et cliquez sur {{< ui >}}Resume{{< /ui >}}. Dans la fenêtre de confirmation, cliquez sur {{< ui >}}Resume{{< /ui >}}.
 
 ### Supprimez un agent {#delete-an-agent}
 

@@ -1,121 +1,122 @@
 ---
-description: Comprende los ciclos de facturación, los métodos de pago, los cálculos
-  de uso y el recuento de hosts con información detallada sobre los precios de los
-  productos Datadog.
+description: Comprenda los ciclos de facturación, los métodos de pago, los cálculos
+  de uso y el conteo de servidores con información detallada de precios para los productos
+  de Datadog.
 title: Facturación
 ---
+## Descripción general {#overview}
 
-## Información general
+El ciclo de facturación comienza el primero del mes (UTC) independientemente de cuándo se registre. Su primer mes se prorratea según su fecha real de registro.
 
-El ciclo de facturación comienza el primer día del mes (UTC), independientemente de la fecha en la que te registres. El primer mes se prorratea en función de la fecha de alta real.
+Datadog mide el conteo de servidores y Custom Metrics cada hora. La cantidad facturable de servidores se calcula al final del mes utilizando la cantidad máxima (marca de agua alta) del 99 por ciento inferior de uso para esas horas. Datadog excluye el 1 por ciento superior para reducir el impacto de los picos de uso en su factura. El conteo facturable de Custom Metrics se basa en el número promedio de horas de Custom Metrics durante el mes. Consulte su [Usage][1] en Datadog. Las páginas de facturación solo son accesibles para usuarios con el rol de Datadog Admin.
 
-Datadog mide el recuento de hosts y métricas personalizadas cada hora. El recuento facturable de hosts se calcula al final del mes utilizando el recuento máximo (marca de pleamar) del 99 % inferior del uso durante esas horas. Datadog excluye el 1 % superior para reducir el impacto de los picos de uso en tu factura. El recuento facturable de métricas personalizadas se basa en el número medio de horas de métricas personalizadas del mes. Consulta tu [Uso][1] en Datadog. Las páginas de facturación sólo son accesibles para usuarios con el rol de administrador de Datadog.
+### Hosts {#hosts}
 
-### Hosts
+Un servidor es cualquier instancia de sistema operativo física o virtual que usted monitorea con Datadog. Podría ser un servidor, una VM, un nodo (en el caso de Kubernetes), una instancia de App Service Plan (en el caso de Azure App Service) o un dyno de Heroku (en el caso de la plataforma Heroku). Los servidores pueden ser instancias con el Datadog Agent instalado, además de cualquier VM de Amazon EC2, Google Cloud, Azure o vSphere monitoreada con integraciones de Datadog. Cualquier instancia de EC2 o VM con el Agent instalado cuenta como una sola instancia (sin doble facturación).
 
-Un host es cualquier instancia de sistema operativo físico o virtual que monitorizas con Datadog. Puede ser un servidor, una máquina virtual, un nodo (en el caso de Kubernetes), una instancia de un plan de App Service (en el caso de Azure App Service) o un dyno de Heroku (en el caso de la plataforma Heroku). Los hosts pueden ser instancias del Datadog Agent instalado, además de cualquier máquina virtual de Amazon EC2, Google Cloud, Azure o vSphere monitorizada con integraciones de Datadog. Cualquier EC2 o máquina virtual con el Agent instalado cuenta como una instancia única (no hay doble facturación).
+Los servidores que no reportan (estado `INACTIVE` en su [Infrastructure list][2]) no cuentan para la facturación. Estos servidores pueden tardar hasta 2 horas en desaparecer de la [Infrastructure List][2]. Datadog conserva los datos históricos de estos servidores (cuentas pagas). Las métricas se pueden graficar en un panel conociendo el nombre específico del servidor o las etiquetas.
 
-Los hosts que no informan (estado `INACTIVE` en tu [lista de infraestructuras][2]) no cuentan para la facturación. Estos hosts pueden tardar hasta 2 horas en salir de [la lista de infraestructuras][2]. Datadog conserva los datos históricos de estos hosts (cuentas de pago). Las métricas se pueden graficar en un dashboard sabiendo el nombre del host específico o etiquetas (tags).
+### Containers {#containers}
 
-### Contenedores
+Se recomienda que los contenedores sean monitoreados con un solo Agent contenedorizado por servidor. Este Agent recopila métricas tanto del contenedor como del servidor. Si elige instalar el Agent directamente en cada contenedor, cada contenedor se cuenta como un servidor desde una perspectiva de facturación. Puede encontrar más detalles en la documentación de [instalación del Agent][3].
 
-Se recomienda que los contenedores se monitoricen con un único Agent contenedorizado por host. Este Agent recopila métricas tanto del contenedor como del host. Si decides instalar el Agent directamente en cada contenedor, cada contenedor se contabilizará como un host desde el punto de vista de la facturación. Para más información, consulta la documentación sobre la [instalación del Agent][3].
+### Serverless {#serverless}
 
-### Serverless
+Datadog factura en función del número promedio de funciones por hora a lo largo del mes para sus cuentas. Cada hora, Datadog registra el número de funciones que se ejecutaron una o más veces y que fueron monitoreadas por su cuenta de Datadog. Al final del mes, Datadog realiza el cobro calculando el promedio del número de funciones registradas por hora. Los planes Pro y Enterprise incluyen cinco Custom Metrics por función facturable.
 
-La facturación de Datadog se basa en el número medio de funciones ejecutadas por hora durante todo el mes en cada una de tus cuentas. Cada hora, Datadog registra el número de funciones que se han ejecutado una o más veces y que se han monitorizado mediante tu cuenta Datadog. Al final del mes, Datadog cobra calculando la media del número de funciones por hora registradas. Los planes Pro y Enterprise incluyen cinco métricas personalizadas por función facturable.
+La facturación de APM de Serverless se basa en la suma de las invocaciones de AWS Lambda conectadas a los spans ingeridos por APM en un mes determinado. También se le facturará por el número total de [spans indexados][4] enviados al servicio Datadog APM que excedan la cantidad incluida al final del mes. No hay [APM Hosts][4] facturables cuando se utiliza Serverless.
 
-La facturación de APM serverless se basa en la suma de invocaciones de AWS Lambda conectadas a tramos (spans) ingeridos de APM en un mes concreto. También se te cobrará por el número total de [tramos indexados][4] enviados al servicio APM de Datadog que superen la cantidad incluida al final del mes. Cuando se utiliza serverless no se cobran los [hosts de APM][4].
+Para obtener más información, consulte la [página de facturación de Serverless][5] y la [página de precios de Datadog][6].
 
-Para obtener más información, consulta la [página de facturación de Serverless][5] y la [página Precios de Datadog][6].
+### IoT {#iot}
 
-### IoT
+Datadog mide el recuento de dispositivos IoT cada hora. El recuento facturable de dispositivos IoT se calcula al final del mes utilizando el recuento máximo (marca de nivel alto) del 99 % inferior de uso para esas horas, excluyendo el 1 % superior para reducir el impacto de los picos de uso en su factura.
 
-Datadog mide el recuento de dispositivos de IoT cada hora. El recuento facturable de dispositivos de IoT se calcula al final del mes utilizando el recuento máximo (marca de pleamar) del 99 % inferior del uso durante esas horas, excluyendo el 1 % superior para reducir el impacto de los picos de uso en tu factura.
+Para obtener más información sobre la facturación de IoT, consulte la [página de precios de Datadog][7].
 
-Para obtener más información sobre la facturación de IoT, consulta la [página Precios de Datadog][7].
+## Detalles del plan {#plan-details}
 
-## Información sobre tu plan
+Para administrar su {{< ui >}}Payment Method{{< /ui >}} y ver {{< ui >}}Subscription Details{{< /ui >}}, debe ser un usuario Datadog Admin.
 
-Para gestionar tu **Método de pago** y ver los **Detalles de suscripción**, debes ser usuario administrador de Datadog.
+Alternativamente, los roles con los [permisos][8] Billing Read (`billing_read`) y Contract Read (`contract_read`) pueden ver estos datos. La administración de su método de pago también requiere el permiso Billing Edit (`billing_edit`).
 
-Alternativamente, los roles con [permisos][8] de Lectura de facturación (`billing_read`) y Edición de facturación (`billing_edit`) pueden acceder a estos datos.
+### Administración de su método de pago {#managing-your-payment-method}
 
-### Gestionar el método de pago
-
-La sección [**Método de pago**][9] contiene detalles sobre tus opciones de pago. 
+La sección [**Payment Method**][9] contiene detalles sobre sus opciones de pago. 
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Método de pago en la página Plan" style="width:90%;" >}}
 
-La opción de **Editar pago** permite gestionar los métodos de pago. Puedes editar o eliminar tarjetas y solicitar el cambio del método de pago de tarjeta a transferencia o cheque y viceversa.
+{{< ui >}}Edit Payment{{< /ui >}} proporciona opciones para administrar los métodos de pago. Puede editar o eliminar tarjetas, y solicitar el cambio de su método de pago de tarjeta a factura y viceversa. 
 
-{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Parámetros de pago en la página Plan" style="width:90%;" >}}
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Configuración de pago en la página Plan" style="width:90%;" >}}
 
-### Gestionar los datos de contacto para la facturación
+### Administración de sus datos de contacto de facturación {#managing-your-billing-contact-details}
 
-Puedes consultar los datos de contacto de facturación en la sección [**Datos de contacto de facturación**][9]. 
+Puede ver sus datos de contacto de facturación en la sección [**Billing Contact Details**][9]. 
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Datos de contacto de facturación en la página Plan" style="width:90%;" >}}
 
-En **Editar datos** se puede añadir, editar o eliminar la dirección de facturación. También es posible especificar las direcciones de correo electrónico a las que deben enviarse las facturas.
+{{< ui >}}Edit Details{{< /ui >}} para agregar, editar o eliminar su dirección de facturación. También puede especificar las direcciones de correo electrónico a las que se deben enviar las facturas.
 
-{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editar los datos de contacto de facturación en la página Plan" style="width:90%;" >}}
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Edición de los datos de contacto de facturación en la página Plan" style="width:90%;" >}}
 
-**Nota**: No es necesario que la dirección de correo electrónico sea de un miembro del equipo dentro de Datadog. Por ejemplo, se puede utilizar `invoices@example.com`.
+**Nota**: La dirección de correo electrónico no tiene que pertenecer a un miembro del equipo de Datadog. Por ejemplo, podría usar `invoices@example.com`.
 
-### Consultar los datos de suscripción
+### Ver los detalles de su suscripción {#view-your-subscription-details}
 
-La sección [Datos de la suscripción][9] incluye la cantidad, el precio del contrato y el precio bajo demanda de todos los productos comprometidos.
+La sección [Subscription Details][9] incluye la cantidad, el precio del contrato y el precio bajo demanda de todos los productos contratados.
 
-{{< img src="/account_management/billing/subscription_details.png" alt="Página Plan y uso de la cuenta en la que se destaca la sección Datos de suscripción" style="width:90%;" >}}
+{{< img src="/account_management/billing/subscription_details.png" alt="Página Account Plan & Usage con la sección Subscription Details resaltada" style="width:90%;" >}}
 
-**Nota**: Si tu facturación se gestiona directamente a través de un servicio asociado de Datadog, los datos de suscripción no estarán disponibles.
+**Nota**: Si su facturación se gestiona directamente a través de un socio de Datadog, Subscription Details no está disponible.
 
-## Pago
+## Pago {#payment}
 
-Puedes elegir entre dos opciones de pago diferentes:
+Existen dos opciones para el método de pago:
 - Tarjeta de crédito
-- Otro método de pago (transferencia ACH, transferencia bancaria o cheque)
+- Facturación (ACH, transferencia bancaria o cheque)
 
-### Tarjeta de crédito
+### Tarjeta de crédito {#credit-card}
 
-Si pagas con tarjeta de crédito, los recibos de los meses anteriores están a disposición de los [Administradores][10] en [Historial de facturación][11]. Para obtener copias de tu factura, envía un correo electrónico a [Facturación de Datadog][13].
+Si paga con tarjeta de crédito, los recibos de los meses anteriores están disponibles para los [Administrators][10] en [Billing History][11]. Para obtener copias de su factura, envíe un correo electrónico a [Facturación de Datadog][13].
 
-Para más información, consulta la página [Facturación con tarjeta de crédito][9].
+Consulte [Facturación con tarjeta de crédito][12] para obtener más detalles.
 
-### Otro método de pago
+### Facturación {#invoicing}
 
-Si pagas con cheque, ACH o transferencia, las facturas se envían por correo electrónico a las direcciones de facturación cerca del décimo día laborable de cada mes. Para solicitar una copia adicional, envía un correo electrónico a [Facturación de Datadog][13]. En la factura encontrarás información sobre dónde remitir el pago.
+Si paga con cheque, ACH o transferencia bancaria, las facturas se envían a las direcciones de correo electrónico de facturación alrededor del décimo día hábil de cada mes. Para solicitar una copia adicional, envíe un correo electrónico a [Facturación de Datadog][13]. Los detalles sobre dónde realizar el pago se pueden encontrar en la factura.
 
-## Información de contacto
+## Contacto {#contact}
 
-| Consulta                                                                                                                                                                               | Información de contacto                      |
+| Pregunta o inquietud                                                                                                                                                                               | Contacto                      |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
-| Reclamación y solicitud de crédito<br>Uso<br>Cambio de método de pago<br>Consulta sobre el pago<br>Cuestiones generales de la cuenta<br>Actualizar contactos<br>Extracto de la cuenta<br>Actualizar la información de facturación y envío | success@datadoghq.com        |
-| Copias de facturas<br>Solicitudes de cobro urgentes<br>Desglose de la facturación<br>Invitación al portal                                                                                                        | billing@datadoghq.com        |
-| Envío de pagos                                                                                                                                                                                | remittances@datadoghq.com    |
+| Disputa y solicitud de crédito<br>Uso<br>Cambio de método de pago<br>Problema con el pago<br>Problemas generales de la cuenta<br>Actualizar contactos<br>Estado de cuenta<br>Actualizar información de facturación y envío | success@datadoghq.com        |
+| Copias de facturas<br>Solicitudes de cargos urgentes<br>Desglose de facturación<br>Invitación al portal                                                                                                        | billing@datadoghq.com        |
+| Remisión de pago                                                                                                                                                                                | remittances@datadoghq.com    |
 | Copias de órdenes de compra                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< whatsnext desc="Temas específicos de facturación:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Precios{{< /nextlink >}}
     {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Detalles de uso{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Métricas de uso{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Tarjeta de crédito{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/custom_metrics/" >}}Métricas personalizadas{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/containers/" >}}Contenedores{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/log_management/" >}}Administración de logs{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Rastreo distribuido y perfilador continuo){{< /nextlink >}}
+    {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom Metrics{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/log_management/" >}}Gestión de registros{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (rastreo distribuido y Continuous Profiler){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/ci_visibility/" >}}CI Visibility{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ci_visibility/" >}}Optimización de CI/CD{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}Integración de AWS{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Integración de Azure{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Integración de Alibaba{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Integración de Google Cloud{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}Integración de vSphere{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_attribution/" >}}Atribución de uso{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ai_credits/" >}}AI Credits{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ai_credit_limits/" >}}Límites de crédito de IA{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

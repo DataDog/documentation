@@ -38,6 +38,7 @@ También puede gestionar pipelines, índices y archivos de registro a través de
 - Establezca un control detallado sobre su presupuesto de gestión de registros con [índices de registros][7].
 - Reenvíe los registros ingeridos a su propio bucket de almacenamiento en la nube para conservarlos como un [archivo][8] para futuras tareas de solución de problemas o auditorías de cumplimiento.
 - [Busque en un archivo][12] con Archive Search para consultar registros en tiempo real directamente desde el almacenamiento. Use el modo **Search & Rehydration** cuando necesite acceso completo a la plataforma o una retención más larga.
+- Conecte [fuentes externas][15], como tablas de Databricks, para buscar logs almacenados en su plataforma de datos con Federated Logs.
 - Restrinja el [acceso a los datos de los registros][10] con consultas de restricción.
 
 ## Log Explorer {#log-explorer}
@@ -64,3 +65,4 @@ Una vez que haya completado la configuración, comience a investigar y soluciona
 [12]: /es/logs/explorer/archive_search/
 [13]: /es/mcp_server/setup/
 [14]: /es/mcp_server/tools/#logs-configuration
+[15]: /es/logs/log_configuration/external_sources/

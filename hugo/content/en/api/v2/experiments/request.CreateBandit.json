@@ -1,0 +1,26 @@
+{
+  "data": {
+    "type": "bandits",
+    "attributes": {
+      "name": "bandit-14bb9543f523edde",
+      "datadog_flag_configuration": {
+        "feature_flag_id": "550e8400-e29b-41d4-a716-446655440000",
+        "environment_id": "550e8400-e29b-41d4-a716-446655440001",
+        "targeting_rules": []
+      },
+      "variants": [
+        {
+          "feature_flag_variant_id": "550e8400-e29b-41d4-a716-446655440002",
+          "is_fallback": true
+        },
+        {
+          "feature_flag_variant_id": "8385917b-53d3-23de-914c-c0250ef24884"
+        }
+      ],
+      "subject_type_id": "550e8400-e29b-41d4-a716-446655440010",
+      "tags": [
+        "bdd"
+      ]
+    }
+  }
+}
