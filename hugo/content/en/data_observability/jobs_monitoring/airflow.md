@@ -548,10 +548,10 @@ aws emr-serverless start-job-run \
 
 ### Link your Databricks jobs with Airflow tasks
 
-OpenLineage can inject Airflow's parent job information into Databricks job runs, linking each Databricks job to the Airflow task that triggered it. This works with both `DatabricksSubmitRunOperator` and `DatabricksRunNowOperator`.
+The Databricks provider can inject Airflow's parent job information into Databricks job runs, linking each Databricks job run to the Airflow task that triggered it. This works with both `DatabricksSubmitRunOperator` and `DatabricksRunNowOperator`.
 
 **Requirements**:
-- A recent `apache-airflow-providers-databricks`: 7.17.0 or later for `DatabricksSubmitRunOperator`, and 7.20.0 or later for `DatabricksRunNowOperator`.
+- `apache-airflow-providers-databricks` 7.20.0 or later. Versions 7.17.0 to 7.19.x support only `DatabricksSubmitRunOperator` runs that create a `new_cluster`.
 - Your Databricks jobs are monitored through [Data Observability: Jobs Monitoring][2].
 
 To enable injection, set the following in your Airflow configuration:
