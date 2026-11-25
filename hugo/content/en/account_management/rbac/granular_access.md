@@ -86,4 +86,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [27]: /experiments/
 [28]: /incident_response/status_pages/#granular-access-control
 [29]: /integrations/oracle_cloud_infrastructure/#limit-edit-access
-[30]: /agent/fleet_automation/access_control
+[30]: /agent/fleet_automation/access_control/#scoped-permissions-for-fleet-automation

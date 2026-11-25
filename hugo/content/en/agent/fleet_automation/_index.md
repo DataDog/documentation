@@ -68,7 +68,7 @@ You can also create and manage Agent upgrade schedules with the Datadog Terrafor
 
 ## Control access to Fleet Automation
 
-Use role permissions to control which Fleet Automation actions users can take, such as upgrading or configuring Agents. Use scoped permissions (in Preview) to control which Agents they can take those actions on. For details, see [Control Access to Fleet Automation][2].
+Use role permissions to control which Fleet Automation actions users can take, such as upgrading or configuring Agents. Use scoped permissions (in Preview) to limit those actions to specific Agents. For details, see [Control Access to Fleet Automation][2].
 
 ## Further Reading
 
