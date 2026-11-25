@@ -71,7 +71,7 @@ For details on Datadog, community, and custom component support, see [Support le
 
 ### OpenTelemetry Collector components
 
-By default, the DDOT Collector includes these components. This list matches DDOT 7.85. The upstream components are also listed in the [DDOT 7.85.3 manifest][11]. The manifest doesn't list the Datadog Exporter and Datadog Connector, which Datadog builds separately.
+By default, the DDOT Collector includes these components. This list matches DDOT 7.86. The upstream components are also listed in the [DDOT 7.86.0 manifest][11]. The manifest doesn't list the Datadog Exporter and Datadog Connector, which Datadog builds separately.
 
 {{% collapse-content title="Receivers" level="p" %}}
 
@@ -141,6 +141,7 @@ The `routingprocessor` was removed in version 7.71.0. Use the [routingconnector]
 - [healthcheckextension][46]
 - [k8sleaderelector][72]
 - [observer][47]
+- [opampextension][78] (available since version 7.86.0)
 - [pprofextension][48]
 - [storage/filestorage][63] (available since version 7.56.0)
 - [zpagesextension][49]
@@ -167,6 +168,7 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 
 | DDOT version | Beta version | Stable version |
 |--------------|--------------|----------------|
+| 7.86.x       | v0.163.0     | v1.69.0        |
 | 7.85.x       | v0.159.0     | v1.65.0        |
 | 7.84.x       | v0.159.0     | v1.65.0        |
 | 7.83.x       | v0.158.0     | v1.64.0        |
@@ -197,7 +199,7 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /opentelemetry/setup/ddot_collector/custom_components
-[11]: https://github.com/DataDog/datadog-agent/blob/7.85.3/comp/otelcol/collector-contrib/impl/manifest.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/7.86.0/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
 [18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
@@ -256,3 +258,4 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 [75]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkareceiver/README.md
 [76]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/deltatorateprocessor/README.md
 [77]: /opentelemetry/compatibility/#feature-compatibility
+[78]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/opampextension/README.md
