@@ -232,7 +232,7 @@ If ingestion fails, check the service account's permissions, the dataset locatio
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
-First, [configure the Databricks integration][14] with an account that has read access to the source data.
+First, [configure the Databricks integration][14] with an account and [grant it read access to the source data][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
@@ -240,18 +240,28 @@ First, [configure the Databricks integration][14] with an account that has read 
    - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click {{< ui >}}Add Databricks account{{< /ui >}}.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
+#### Troubleshooting
+
+Data can take a few minutes to populate.
+
+- Check [Databricks ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's read permissions and the source table or view configuration.
+
 [14]: /integrations/databricks/#connect-to-a-new-databricks-workspace
 [16]: https://app.datadoghq.com/reference-tables
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Adatabricks%20service%3Aintegration-reference-table
+[22]: /integrations/databricks/#reference-table-configuration
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Salesforce" level="h3" id="salesforce" %}}
 
-First, [configure the Salesforce integration][17] with an account that has read access to the source objects and fields.
+First, [configure the Salesforce integration][17] with an account and [grant it read access to the source objects and fields][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Salesforce{{< /ui >}}.
 2. Complete the configuration:
@@ -259,22 +269,29 @@ First, [configure the Salesforce integration][17] with an account that has read 
    - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above.
    - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
    - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
 
 Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
 
-To investigate ingestion errors, search for `source:salesforce` in the [Events Explorer][20].
+#### Troubleshooting {#salesforce-troubleshooting}
+
+Data can take a few minutes to populate.
+
+- Check [Salesforce ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's access to the queried objects and fields, and the SOQL query.
 
 [16]: https://app.datadoghq.com/reference-tables
 [17]: /integrations/salesforce/#step-4-connect-your-org
 [19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
-[20]: https://app.datadoghq.com/event/explorer
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Asalesforce%20service%3Aintegration-reference-table
+[22]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="ServiceNow" level="h3" id="servicenow" %}}
 
-First, [configure the ServiceNow integration][18] with an account that can read the source data and run Query Builder queries. Create and schedule a Query Builder query for the data to ingest.
+First, [configure the ServiceNow integration][18] with an account, then [configure Query Builder access and schedule a query][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}ServiceNow{{< /ui >}}.
 2. Complete the configuration:
@@ -283,21 +300,28 @@ First, [configure the ServiceNow integration][18] with an account that can read 
    - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
    - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
 
 Additional fields must use paths supported by the ServiceNow Table API. The column name combines the root table name with the last two parts of the path. For example, `vendor.manufacturer.name` with root table `cmdb_ci_server` creates `cmdb_ci_server_manufacturer_name`.
 
-Data populates after the scheduled Query Builder query runs. To investigate ingestion errors, search for `source:servicenow` in the [Events Explorer][20].
+#### Troubleshooting {#servicenow-troubleshooting}
+
+Data can take a few minutes to populate after the scheduled Query Builder query runs.
+
+- Check [ServiceNow ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's Query Builder access and the scheduled query configuration.
 
 [16]: https://app.datadoghq.com/reference-tables
 [18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
-[20]: https://app.datadoghq.com/event/explorer
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Aservicenow%20service%3Aintegration-reference-table
+[22]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
 
-First, [configure the Snowflake integration][15] with an account that has read access to the source data.
+First, [configure the Snowflake integration][15] with an account and [grant it read access to the source data][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
@@ -305,12 +329,13 @@ First, [configure the Snowflake integration][15] with an account that has read a
    - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click {{< ui >}}Add Snowflake account{{< /ui >}}.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll be redirected to the table’s details page. Data can take a few minutes to populate.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
 [15]: /integrations/snowflake-web/#connect-your-snowflake-account
 [16]: https://app.datadoghq.com/reference-tables
+[22]: /integrations/snowflake-web/#reference-tables
 
 {{% /collapse-content %}}
 
