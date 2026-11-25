@@ -204,7 +204,7 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 
 {{% collapse-content title="BigQuery" level="h3" id="bigquery" %}}
 
-First, [configure the Google Cloud integration][21] with a service account that can read the source data and run BigQuery queries. If BigQuery is not listed as a source, contact [support][5] to check availability.
+First, [configure the Google Cloud integration][21] with a service account and [grant it BigQuery access][22]. If BigQuery is not listed as a source, contact [support][5] to check availability.
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}BigQuery{{< /ui >}}.
 2. Complete the configuration:
@@ -214,7 +214,7 @@ First, [configure the Google Cloud integration][21] with a service account that 
    - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
    - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll be redirected to the table’s details page. Data can take a few minutes to populate.
 
 If no projects are available, add the project to the service account's Google Cloud integration configuration.
 
@@ -227,6 +227,7 @@ If ingestion fails, check the service account's permissions, the dataset locatio
 [5]: /help/
 [16]: https://app.datadoghq.com/reference-tables
 [21]: /integrations/google-cloud-platform/#setup
+[22]: /integrations/google-cloud-bigquery/#reference-tables
 
 {{% /collapse-content %}}
 
