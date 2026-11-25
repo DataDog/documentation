@@ -1,6 +1,6 @@
 ---
 title: Sawmill Processor
-description: Use Datadog's out-of-the-box integration pipelines and custom pipelines in Observability Pipelines to parse and normalize logs before sending them to your destinations.
+description: Use the Sawmill processor to apply Datadog's out-of-the-box integration pipelines and custom pipelines in Observability Pipelines, and parse and normalize logs before sending them to your destinations.
 disable_toc: false
 products:
 - name: Logs
