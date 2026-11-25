@@ -31,6 +31,7 @@ The following integrations cover **software-defined and edge networking platform
   {{< image-card href="/integrations/velocloud-sd-wan/" src="integrations_logos/velocloud-sd-wan_small.svg" alt="velocloud" >}}
   {{< image-card href="/integrations/fortinet-fortimanager/" src="integrations_logos/fortinet-fortimanager_small.svg" alt="fortinet fortimanager" >}}
   {{< image-card href="/integrations/versa/" src="integrations_logos/versa-networks-logo-small.svg" alt="versa" >}}
+  {{< image-card href="/integrations/hpe-aruba-edgeconnect/" src="integrations_logos/snmp-aruba_small.svg" alt="hpe aruba edgeconnect" >}}
 {{< /card-grid >}}
 
 | Integration | Summary | Collection type |
@@ -40,6 +41,7 @@ The following integrations cover **software-defined and edge networking platform
 | [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Crawler-based |
 | [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Crawler-based |
 | [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based |
+| [HPE Aruba EdgeConnect](/integrations/hpe-aruba-edgeconnect/) | Monitors EdgeConnect SD-WAN appliances managed by Orchestrator for device health, interface and tunnel performance, QoS, and circuit SLA metrics through the Orchestrator and appliance REST APIs. | Agent-based |
 
 ## Wireless Networking
 
@@ -49,27 +51,27 @@ The following integrations cover **wireless networking platforms** that support 
   {{< image-card href="/integrations/meraki/" src="integrations_logos/meraki.png" alt="meraki" >}}
   {{< image-card href="/integrations/juniper-mist/" src="integrations_logos/juniper-mist_small.svg" alt="juniper-mist" >}}
   {{< image-card href="/integrations/aruba-central/" src="integrations_logos/aruba-central_small.svg" alt="aruba-central" >}}
+  {{< image-card href="/integrations/cisco-catalyst-center/" src="integrations_logos/cisco_small.svg" alt="cisco catalyst center" >}}
 {{< /card-grid >}}
 
 | Integration | Summary | Collection type |
 |---|---|---|
 | [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based |
-| [Juniper Mist](/integrations/juniper-mist/) (Preview) | Provides end-to-end visibility into cloud-managed Juniper Mist wireless, wired, and WAN network infrastructure, including access points, switches, and gateways through the Juniper Mist API. | Crawler-based |
-| [Aruba Central](/integrations/aruba-central/) (Preview) | Monitors Aruba Central-managed network devices, including access points and switches for health and performance metrics through the Aruba Central API. | Crawler-based |
+| [Juniper Mist](/integrations/juniper-mist/) | Provides end-to-end visibility into cloud-managed Juniper Mist wireless, wired, and WAN network infrastructure, including access points, switches, and gateways through the Juniper Mist API. | Crawler-based |
+| [Aruba Central](/integrations/aruba-central/) | Monitors Aruba Central-managed network devices, including access points and switches for health and performance metrics through the Aruba Central API. | Crawler-based |
+| [Cisco Catalyst Center](/integrations/cisco-catalyst-center/) | Monitors switches, routers, wireless controllers, and access points managed by Cisco Catalyst Center, including device inventory, site and client health scores, and Assurance issues, through the Catalyst Center REST API. | Agent-based |
 
 ## Network and security management
 
-The following integrations cover **enterprise network management and firewall platforms** that support NDM collection. These integrations provide visibility into device inventory, health, and performance across campus, branch, and security infrastructure.
+The following integrations cover **firewall management platforms** that support NDM collection. These integrations provide visibility into firewall inventory, health, and performance across your security infrastructure.
 
 {{< card-grid card_width="130px" >}}
-  {{< image-card href="/integrations/cisco-catalyst-center/" src="integrations_logos/cisco_small.svg" alt="cisco catalyst center" >}}
   {{< image-card href="/integrations/pan-firewall/" src="integrations_logos/palo-alto-panorama_small.svg" alt="palo alto networks panorama" >}}
 {{< /card-grid >}}
 
 | Integration | Summary | Collection type |
 |---|---|---|
-| [Cisco Catalyst Center](/integrations/cisco-catalyst-center/) (Preview) | Monitors switches, routers, wireless controllers, and access points managed by Cisco Catalyst Center, including device inventory, site and client health scores, and Assurance issues, through the Catalyst Center REST API. | Agent-based |
-| [Palo Alto Networks Panorama](/integrations/pan-firewall/#metrics) (Preview) | Discovers firewalls managed by Panorama and collects inventory, high availability, interface, tunnel, routing, and resource metrics from each firewall through the PAN-OS XML API. | Agent-based |
+| [Palo Alto Networks Panorama](/integrations/pan-firewall/#metrics) | Discovers firewalls managed by Panorama and collects inventory, high availability, interface, tunnel, routing, and resource metrics from each firewall through the PAN-OS XML API. | Agent-based |
 
 ## Virtualization
 
