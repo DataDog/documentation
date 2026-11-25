@@ -3222,7 +3222,7 @@ Discover filterable fields and their values for [IoC Explorer][67]. Omit `filter
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Returns the reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use it to explain, check, or update a rule, or to query detection rules. Currently supported rule types: log detection, API security, and AppSec.
+Returns the reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use it to explain, check, update, or query detection rules. Currently supported rule types: log detection, API security, and AppSec.
 
 - What fields and options are available when creating a threshold detection rule?
 - Show me the schema for sequence detection rules.
