@@ -1638,21 +1638,21 @@ Describes the configuration options a Datadog Agent integration accepts, includi
 
 ### `upgrade_fleet_agents`
 *Toolset: **fleet-automation***\
-*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
 Upgrades the Datadog Agent to a target version across hosts that match a scope query. The tool requires `confirm:true`.
 
 - Upgrade all Agents tagged `env:staging` to the latest Agent version.
 
 ### `configure_fleet_agents`
 *Toolset: **fleet-automation***\
-*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
 Pushes configuration changes, and optionally installs or pins packages, across hosts that match a scope query. The tool supports `dry_run` and requires `confirm:true` for a real deployment.
 
 - Enable log collection on Agents tagged `service:checkout`, and do a dry run first.
 
 ### `cancel_fleet_deployment`
 *Toolset: **fleet-automation***\
-*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
 Cancels an active (running or pending) deployment. The cancellation is irreversible and requires `confirm:true`.
 
 - Cancel the Agent upgrade deployment that is running right now.
