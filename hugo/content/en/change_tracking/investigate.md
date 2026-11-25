@@ -1,107 +1,89 @@
 ---
 title: Investigate Relevant Changes
-description: "View and analyze changes on monitor status pages, service pages, dashboards, and widgets."
+description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, and service pages, or query change data with widgets."
 further_reading:
+- link: "/change_tracking/change_types/"
+  tag: "Documentation"
+  text: "Tracked Change Types"
+- link: "/dashboards/change_overlays/"
+  tag: "Documentation"
+  text: "Change Overlays"
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status Page"
-- link: "/dashboards/"
-  tag: "Documentation"
-  text: "Dashboards"
-- link: "/tracing/services/service_page/"
-  tag: "Documentation"
-  text: "Service Page"
 ---
 
 ## Overview
 
+Change Tracking makes changes available across Datadog products, including dashboards, monitor status pages, and service pages. You can also build your own view of change data with Change Tracking widgets. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
+
+## Investigate changes across Datadog products
+
 Change Tracking is available on several pages in Datadog.
 
-## Monitor status page
+| Where | What you see | Requirements |
+| --- | --- | --- |
+| [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
+| [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
+| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | An APM service. To see deployments, the service needs a `version` tag. See [Tracked Change Types][1]. |
 
-View and analyze changes from the [monitor status page][1].
+Click a change on any of these pages to open the side panel. For deployments, the side panel includes {{< ui >}}View Deployment in CI/CD{{< /ui >}}, {{< ui >}}View commit{{< /ui >}}, and {{< ui >}}View deployment diff{{< /ui >}}.
 
-{{< img src="/change_tracking/change-tracking-monitor-status-page-2.png" alt="Change Tracking displayed on the Monitor Status Page" style="width:100%;" >}}
+### On a dashboard
 
-### Prerequisites
+On dashboards, Datadog can rank changes by likely cause, so that the changes most likely to explain what you are seeing appear first.
 
-To use change tracking on the Monitor Status Page, ensure the appropriate service has been:
-- Specified in the monitor query.
-- Selected as part of a group.
-- Added as a `service` tag on the monitor.
-
-### To analyze changes from the monitor status page:
-
-1. Go to the monitor status page for the monitor you are analyzing.
-1. Locate the change tracking timeline at the top of the page.
-   - For monitors with multiple graphs (dictated by the group by in the monitor query), filter to an individual group.
-1. Use the timeline together with the event graphs to correlate change events with the alert.
-1. Click the change indicator in the timeline to view more details about the change in the side panel.
-1. From the side panel, you can investigate more details about the change and take the following actions:
-   - View the deployment in your CI/CD system.
-   - View the latest commits in your repository.
-   - Compare changes between deployments to identify potential issues.
-   - Configure additional custom links in the deployment side panel to quickly access other resources relevant to you.
-
-## Services
-
-View and analyze changes from the [service page][2].
-
-{{< img src="/change_tracking/change-tracking-service-page-2.png" alt="Recent Changes component within the Service Summary section with dependency changes shown" style="width:100%;" >}}
-
-### To analyze changes from the service page:
-
-1. Navigate to the service page you want to investigate.
-1. Locate the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
-1. Use the service and dependencies tabs to view either:
-   - Changes limited to the specific service ({{< ui >}}Changes by Service{{< /ui >}})
-   - Changes to the specific service and dependent services that might impact this service ({{< ui >}}Changes by Service + Dependencies{{< /ui >}})
-1. Click the change indicator to view detailed information and take remediation actions.
-
-## Dashboards
-
-View and analyze changes from any [dashboard][3].
-
-{{< img src="/change_tracking/change-tracking-dashboard-show-overlays-active-2.png" alt="Change Tracking displayed on the Dashboard" style="width:100%;" >}}
-
-### Prerequisites
-To see relevant changes within the timeline and as overlays on your dashboard, ensure you have set at least one timeseries widget.
-
-### To analyze changes from dashboards:
+{{< img src="/change_tracking/change-tracking-dashboard-overlays.png" alt="A dashboard with change overlays turned on, showing a change timeline for the most relevant service" style="width:100%;" >}}
 
 1. Navigate to your dashboard.
-2. Click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page to enable the change timeline and change overlays on supported widgets.
-3. Hover over any change indicator or overlay to view a summary of the change.
-4. Click the change indicator or overlay to view detailed information and take remediation actions.
+1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
+1. By default, overlays use {{< ui >}}Automatic{{< /ui >}} mode, which shows the changes relevant to each widget's filters.
+1. To choose the changes yourself, switch to {{< ui >}}Manual{{< /ui >}}. Then select a change type and filters, such as {{< ui >}}Service{{< /ui >}} and {{< ui >}}Environment{{< /ui >}}. The service that Datadog detects from your dashboard is marked {{< ui >}}MOST RELEVANT{{< /ui >}}.
+1. Hover over a change indicator or overlay for a summary, or click it to open the side panel.
 
-## Widgets
+### On a monitor status page
 
-In addition to the out-of-the-box integrations, Change Tracking is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
+On monitor status pages, Datadog can rank changes by likely cause, so that the changes most likely to explain the most recent alert appear first.
 
-{{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
+{{< img src="/change_tracking/change-tracking-monitor-status-timeline.png" alt="A monitor status page with a banner listing changes that could explain the monitor's behavior above the change timeline" style="width:100%;" >}}
 
-To configure a widget using Change Tracking data:
+1. Go to the monitor status page for the monitor you are investigating.
+1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
+1. To rank changes by likely cause, select {{< ui >}}Relevant Changes{{< /ui >}}.
+1. For monitors with multiple graphs, filter to an individual group first.
+1. Read the timeline together with the event graphs to line up changes with the alert.
+1. Click a change indicator to open the side panel.
 
-1. In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
+### On a service page
+
+<!-- IMAGE PLACEHOLDER: The changes timeline in the Service Summary section of a service page. -->
+
+1. Go to the service page for the service you are investigating.
+1. Find the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
+1. Switch between {{< ui >}}Changes by Service{{< /ui >}} for changes to that service alone and {{< ui >}}Changes by Service + Dependencies{{< /ui >}} for changes to services it depends on.
+1. Click a change indicator to open the side panel.
+
+## Build your own view with Change Tracking widgets
+
+<!-- IMAGE PLACEHOLDER: A widget that uses Change Tracking as its data source. -->
+
+Change Tracking is available as a data source for widgets across Datadog, including dashboards and notebooks.
+
+1. In a dashboard or notebook, add or edit a supported widget type: Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart.
 1. From the {{< ui >}}data source{{< /ui >}} dropdown, select {{< ui >}}Change Tracking{{< /ui >}}.
-1. Configure your filters ({{< ui >}}Service{{< /ui >}} is required).
+1. Configure your filters. {{< ui >}}Service{{< /ui >}} is required.
 1. (Optional) For widgets that support grouping, use {{< ui >}}Group by{{< /ui >}} to split results.
 
-{{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
+For timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}} to draw changes on top of the series.
 
-For Timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}}, which displays changes on top of the timeseries to help correlate them with metric behavior.
-
-{{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
-
-
-### View change details
-
-To view information about a change or set of changes, click a datapoint in the widget and select {{< ui >}}View Changes{{< /ui >}}. This opens the Change Tracking side panel with additional details.
+To open the side panel from a widget, click a datapoint and select {{< ui >}}View changes{{< /ui >}}.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/status/
-[2]: /tracing/services/service_page/
-[3]: /dashboards/
+[1]: /change_tracking/change_types/
+[2]: /dashboards/
+[3]: /dashboards/change_overlays/
+[4]: /monitors/status/
+[5]: /tracing/services/service_page/
