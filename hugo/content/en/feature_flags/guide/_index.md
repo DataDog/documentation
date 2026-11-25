@@ -24,5 +24,5 @@ cascade:
     {{< nextlink href="/feature_flags/guide/estimating_and_managing_costs" >}}Estimate and Manage Feature Flags Costs{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/proxy_sdk_traffic" >}}Proxy Feature Flag SDK Traffic{{< /nextlink >}}
     {{< nextlink href="/feature_flags/guide/proxy_server_setup" >}}Set Up a Proxy Server for Feature Flag SDK Traffic{{< /nextlink >}}
-    {{< nextlink href="/feature_flags/guide/prevent_response_tampering" >}}Prevent Response Tampering and Verify Response Origin for Client-Side Feature Flags{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/guide/prevent_response_tampering" >}}Verify Flag Responses with Response Signing{{< /nextlink >}}
 {{< /whatsnext >}}

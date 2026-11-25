@@ -465,7 +465,7 @@ OpenFeatureAPI.setProviderAndWait(provider)
 Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.<br><br>The response signing SDK option is experimental. Its name and behavior can change before general availability.
 {{< /callout >}}
 
-Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Prevent Response Tampering and Verify Response Origin][5].
+Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Verify Flag Responses with Response Signing][5].
 
 <!-- TODO: set the first SDK release version that includes response signing. -->
 Response signing requires `dd-sdk-android-flags` version `X.Y.Z` or later.

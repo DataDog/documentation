@@ -36,7 +36,7 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
 
-To protect flag assignments from response tampering, the iOS, Android, and JavaScript SDKs can verify that each response comes from Datadog and was not changed or replayed. See [Prevent Response Tampering and Verify Response Origin][4].
+To protect flag assignments from response tampering, the iOS, Android, and JavaScript SDKs can verify that each response comes from Datadog and was not changed or replayed. See [Verify Flag Responses with Response Signing][4].
 
 ## Opt out individual users or devices
 
