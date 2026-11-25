@@ -209,14 +209,14 @@ First, [configure the Google Cloud integration][21] with a service account that 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}BigQuery{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Service Account Email{{< /ui >}}: Select the service account configured above.
+   - {{< ui >}}Service Account Email{{< /ui >}}: Select the service account configured above. If it isn't listed, click {{< ui >}}Add GCP Account with BigQuery Access{{< /ui >}}.
    - {{< ui >}}Project ID{{< /ui >}}: The project to run the query in. The available projects depend on the selected service account.
    - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
    - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
 
-If the service account is missing, click {{< ui >}}Add GCP Account with BigQuery Access{{< /ui >}} to configure it. If no projects are available, add the project to the service account's Google Cloud integration configuration.
+If no projects are available, add the project to the service account's Google Cloud integration configuration.
 
 Queries executed by Datadog incur BigQuery charges. Select only the rows and columns you need.
 
@@ -237,12 +237,10 @@ First, [configure the Databricks integration][14] with an account that has read 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above.
+   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click {{< ui >}}Add Databricks account{{< /ui >}}.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
-
-If the account is missing, click {{< ui >}}Add Databricks account{{< /ui >}} to configure it.
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
@@ -304,12 +302,10 @@ First, [configure the Snowflake integration][15] with an account that has read a
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click {{< ui >}}Add Snowflake account{{< /ui >}}.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}.
-
-If the account is missing, click {{< ui >}}Add Snowflake account{{< /ui >}} to configure it.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
