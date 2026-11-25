@@ -222,14 +222,14 @@ After the new naming logic is active, take the following steps:
     - Update any monitors or dashboards that query, filter, or group by `operation_name` to use the new expected names.
     - Update any metric monitors or dashboards observing metrics derived from traces that might change due to the new operation names (for example, metrics starting with `trace.*` tagged by operation name).
 2.  **(Optional) Replicate previous customizations:**
-    If you previously used the removed configurations in [Prerequisites](#prerequisites) (`span_name_as_resource_name` or `span_name_remappings`) and need equivalent functionality, you must now use different methods:
+    If you used `span_name_as_resource_name` or `span_name_remappings`, which you removed in [Prerequisites](#prerequisites), replace them as follows:
 
 {{< tabs >}}
 {{% tab "Upstream OpenTelemetry Collector" %}}
 
-Use processors in your Collector pipeline:
+Use a `transform` processor in your Collector pipeline:
 
-- **To replicate `span_name_as_resource_name`**: Use a `transform` processor to explicitly set `operation.name` from the span name. This is generally **not recommended** as it overrides the improved standard logic, but can be used if specific span names are required as operation names.
+- **To replicate `span_name_as_resource_name`**: Set `operation.name` to the span name. Datadog doesn't recommend this, because it replaces the new naming logic for every span. Use it only if you need span names as operation names.
     ```yaml
     processors:
       transform:
@@ -238,7 +238,7 @@ Use processors in your Collector pipeline:
             statements:
             - set(attributes["operation.name"], name)
     ```
-- **To replicate `span_name_remappings`**: Use a `transform` processor to conditionally set `operation.name`. This allows targeted overrides while letting the default logic handle other cases.
+- **To replicate `span_name_remappings`**: Set `operation.name` only on the spans you match. The new naming logic still names all other spans.
     ```yaml
     processors:
       transform:
@@ -253,9 +253,9 @@ Use processors in your Collector pipeline:
 {{% /tab %}}
 {{% tab "Agent's Collector" %}}
 
-The Agent's Collector includes the `transform` processor, so you can use the same processors as an upstream OpenTelemetry Collector:
+The Agent's Collector includes the `transform` processor. Use it the same way as in an upstream OpenTelemetry Collector:
 
-- **To replicate `span_name_as_resource_name`**: Use a `transform` processor to explicitly set `operation.name` from the span name. This is generally **not recommended** as it overrides the improved standard logic, but can be used if specific span names are required as operation names.
+- **To replicate `span_name_as_resource_name`**: Set `operation.name` to the span name. Datadog doesn't recommend this, because it replaces the new naming logic for every span. Use it only if you need span names as operation names.
     ```yaml
     processors:
       transform:
@@ -264,7 +264,7 @@ The Agent's Collector includes the `transform` processor, so you can use the sam
             statements:
             - set(attributes["operation.name"], name)
     ```
-- **To replicate `span_name_remappings`**: Use a `transform` processor to conditionally set `operation.name`. This allows targeted overrides while letting the default logic handle other cases.
+- **To replicate `span_name_remappings`**: Set `operation.name` only on the spans you match. The new naming logic still names all other spans.
     ```yaml
     processors:
       transform:
@@ -276,16 +276,27 @@ The Agent's Collector includes the `transform` processor, so you can use the sam
             # Add more specific renaming rules as needed
     ```
 
-Add `transform` to the `processors` list of your `traces` pipeline. To provide a custom Collector configuration with Helm or the Datadog Operator, see [Configure the OpenTelemetry Collector][2].
+Then add `transform` to the `processors` list of your `traces` pipeline. For example, with the default configuration:
+
+```yaml
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [infraattributes, transform]
+      exporters: [datadog, datadog/connector]
+```
+
+To provide a custom Collector configuration with Helm or the Datadog Operator, see [Configure the OpenTelemetry Collector][2].
 
 [2]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/#configure-the-opentelemetry-collector
 
 {{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
-Follow these steps only if your applications send OTLP data to the Datadog Agent's OTLP endpoint without a Collector. This setup has no Collector pipeline, so the `transform` processor and other OpenTelemetry Transformation Language (OTTL) features aren't available. If you use the Agent's Collector, follow the **Agent's Collector** tab instead.
+Use this method only if your applications send OTLP data to the Datadog Agent's OTLP endpoint without a Collector. Without a Collector pipeline, you can't use the `transform` processor or other OpenTelemetry Transformation Language (OTTL) features. If you use the Agent's Collector, see the **Agent's Collector** tab.
 
-To replicate `span_name_as_resource_name` or `span_name_remappings`, set the `operation.name` span attribute directly within your instrumented application code before the span is exported. This gives you the most control if you need specific overrides. Consult the OpenTelemetry SDK documentation for your language on how to modify span attributes.
+To replicate `span_name_as_resource_name` or `span_name_remappings`, set the `operation.name` span attribute in your application code before the SDK exports the span. To learn how to set span attributes, see the OpenTelemetry SDK documentation for your language.
 
 {{% /tab %}}
 {{< /tabs >}}
