@@ -19,15 +19,17 @@ Change Tracking makes changes available across Datadog products, including dashb
 
 ## Investigate changes across Datadog products
 
-On dashboards and monitor status pages, Datadog ranks changes by likely cause, so that the changes most likely to explain what you are seeing appear first.
+Change Tracking is available on several pages in Datadog.
 
 | Where | What you see | Requirements |
 | --- | --- | --- |
 | [Dashboards][2] | A change timeline above the dashboard and change overlays on timeseries widgets. | At least one timeseries widget. For APM deployments, an `env` must be set. See [Change Overlays][3]. |
 | [Monitor status pages][4] | A change timeline at the top of the page, aligned with the alert's event graphs. | The service must be named in the monitor query, selected as part of a group, or added as a `service` tag on the monitor. |
-| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | — |
+| [Service pages][5] | A changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section, for the service alone or for the service and its dependencies. | None |
 
 ### On a dashboard
+
+On dashboards, Datadog can rank changes by likely cause, so that the changes most likely to explain what you are seeing appear first.
 
 1. Navigate to your dashboard.
 1. If change overlays aren't already on, click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page.
@@ -37,8 +39,11 @@ On dashboards and monitor status pages, Datadog ranks changes by likely cause, s
 
 ### On a monitor status page
 
+On monitor status pages, Datadog can rank changes by likely cause, so that the changes most likely to explain the most recent alert appear first.
+
 1. Go to the monitor status page for the monitor you are investigating.
 1. Find the change timeline at the top of the page. If the timeline is collapsed, expand it.
+1. To rank changes by likely cause, select {{< ui >}}Relevant Changes{{< /ui >}}.
 1. For monitors with multiple graphs, filter to an individual group first.
 1. Read the timeline together with the event graphs to line up changes with the alert.
 1. Click a change indicator to open the side panel.
