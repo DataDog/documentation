@@ -46,7 +46,7 @@ With Fleet Automation, you can:
 - **[Configure Agent Integrations][9]** to deploy, update, and remove integration configuration files across your fleet.
 - **[Configure Custom Logs][10]** to manage custom log collection settings on your Agents at scale.
 - **[Manage Datadog Agent tags][12]** to correct and standardize tagging across your fleet.
-- **[Create configuration policies][15]** to keep Agent configuration consistent across your fleet and correct drift automatically.
+- **[Create configuration policies][15]** _(Preview)_ to keep Agent configuration consistent across your fleet and correct drift automatically.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
 - **[Send a support flare remotely][6]** to debug issues on an Agent or the Agent's Collector.

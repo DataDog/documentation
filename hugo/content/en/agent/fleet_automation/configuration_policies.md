@@ -13,6 +13,10 @@ further_reading:
   text: "Modify Tags"
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Configuration policies are in Preview. To request access, contact your Customer Success Manager or <a href="/help/">Datadog Support</a>.
+{{< /callout >}}
+
 Define a desired Agent configuration once and apply it to all Agents or to a subset that you filter by host information or tags. Fleet Automation re-applies the policy on a schedule and reports Agents that drift from it.
 
 ## What is a configuration policy?
