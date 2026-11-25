@@ -82,7 +82,12 @@ Register a dedicated custom OIDC provider in the same Datadog organization and s
 
 The issuer URL must use a public DNS hostname and HTTPS on port 443, without URL credentials, query strings, or fragments.
 
-Save the provider ID returned when you register the provider. To retrieve it later, use the [List providers API][10]. This flow uses the provider registration directly; it does not require a WIF identity mapping, intake mapping, or token exchange.
+After creating the provider, retrieve and save its UUID:
+
+- **Created in the UI:** Use the [List providers API][10], find the provider matching your issuer URL, and copy its `id`.
+- **Created through the API:** Copy `data.id` from the [provider creation response][9].
+
+This flow uses the provider registration directly; it does not require a WIF identity mapping, intake mapping, or token exchange.
 
 After registering the provider, allow at least 15 minutes for signing keys to propagate before enabling subject authorization.
 
