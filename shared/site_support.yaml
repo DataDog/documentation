@@ -383,6 +383,8 @@ site_support_ids:
       - /integrations/nebius-cloud/**
   network_config_management:
     regions: [gov, gov2]
+  network_l1_l7_map:
+    regions: [gov, gov2]
   on-call:
     regions: [gov2]
     url_paths:
