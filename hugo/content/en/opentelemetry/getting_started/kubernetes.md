@@ -17,6 +17,8 @@ further_reading:
 
 Monitor your Kubernetes applications and infrastructure in Datadog with OpenTelemetry. This quickstart installs a Collector, adds instrumentation to your application, and shows you where to find your services, traces, and logs in Datadog.
 
+<div class="alert alert-info">For guided setup in Datadog, use <a href="https://app.datadoghq.com/signup/setup/plan/opentelemetry">OpenTelemetry onboarding</a> in the app.</div>
+
 Use DDOT components, which Datadog recommends and which are in Preview, or upstream OpenTelemetry components. The installation steps are the same. Select your setup in the **DDOT** or **Upstream** tab in step 1. To compare the two, see [Choose a setup][25].
 
 This quickstart runs on Kubernetes, and so does the DDOT Collector. On other platforms, use an upstream OpenTelemetry Collector or the Datadog Agent. See [Send OpenTelemetry Data to Datadog][17].
