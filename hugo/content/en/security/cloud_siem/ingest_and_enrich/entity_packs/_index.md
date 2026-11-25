@@ -26,6 +26,9 @@ further_reading:
 - link: "/account_management/rbac/permissions/"
   tag: "Documentation"
   text: "Review Datadog role permissions"
+- link: "https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/"
+  tag: "Blog"
+  text: "Investigate the person behind the risk with Datadog Cloud SIEM"
 ---
 
 {{< site-region region="gov" >}}

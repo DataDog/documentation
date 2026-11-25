@@ -101,6 +101,8 @@ El StackSet no configura el reenvío de registros en las cuentas de AWS. Para co
 
 ## Desinstalar la integración de AWS {#uninstall-aws-integration}
 
+Si instaló la [instrumentación de Datadog][11] en los recursos de estas cuentas, elimínela primero. Datadog elimina la instrumentación con el rol IAM de integración. Después de eliminar las StackInstances, Datadog no puede acceder a sus recursos, y el Agent, las capas de Lambda y la configuración de funciones que Datadog agregó permanecen en su lugar. Para cada cuenta, elimine la instrumentación de Fleet Automation como se describe en [Eliminar la integración][12] y luego regrese aquí para eliminar las StackInstances y el StackSet.
+
 Para desinstalar la integración de AWS de todas las cuentas y regiones de AWS en una organización, primero elimine todas las StackInstances y luego el StackSet. Siga los pasos descritos en [Eliminar un StackSet][7] para eliminar las StackInstances y el StackSet creados. 
 
 ## Lecturas adicionales {#further-reading}
@@ -117,3 +119,5 @@ Para desinstalar la integración de AWS de todas las cuentas y regiones de AWS e
 [8]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [9]: https://docs.datadoghq.com/es/integrations/guide/amazon_cloudformation/
 [10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
+[11]: /es/integrations/guide/aws-agent-installation/
+[12]: /es/getting_started/integrations/aws/#remove-the-integration

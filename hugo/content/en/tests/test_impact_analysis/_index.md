@@ -61,7 +61,7 @@ Test Impact Analysis decides which tests to skip by matching the files each test
 
 Test Impact Analysis applies the following size limits:
 
-- Datadog analyzes up to the 100 most recent commits for a change. On large changesets, some older commits may not be analyzed, so slightly fewer tests are skipped.
+- Datadog analyzes only recent commit history for a change. Tests covered by older changes may run instead of being skipped.
 - If a single commit changes more than 5,000 files, that commit is not analyzed for impact, and its tests are run rather than skipped.
 - If a single test or suite covers more than 16,000 files, it is not skipped.
 

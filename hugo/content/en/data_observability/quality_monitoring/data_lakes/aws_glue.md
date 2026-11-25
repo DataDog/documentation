@@ -17,6 +17,8 @@ further_reading:
 
 If you're [using the Iceberg framework in AWS Glue][5], you can see metadata from your Iceberg tables in Datadog through the [AWS Glue integration][6]. Use this data to monitor table schemas, data freshness, row counts, and table sizes.
 
+<div class="alert alert-info">To see which Glue jobs read and write your Iceberg tables, <a href="/data_observability/jobs_monitoring/glue/#optional-enable-dataset-lineage">enable dataset lineage for Jobs Monitoring for AWS Glue</a>.</div>
+
 ## Prerequisites
 
 Before you begin, make sure you have:

@@ -2,14 +2,17 @@
 description: AI Guard 평가를 위한 탐지 규칙을 생성하고, 규칙이 생성한 신호를 조사하며, AI Guard 활동에 대한 경보를 설정하세요.
 further_reading:
 - link: /security/ai_guard/
-  tag: 문서
+  tag: 설명서
   text: AI Guard
 - link: /security/ai_guard/setup/
-  tag: 문서
-  text: AI Guard 설정하기
+  tag: 설명서
+  text: AI Guard 설정
 - link: /security/detection_rules/
-  tag: 문서
+  tag: 설명서
   text: 탐지 규칙
+- link: https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/
+  tag: 블로그
+  text: AI 에이전트가 자기 복제형 프롬프트 인젝션을 복사하는 경우 탐지하기
 title: AI Guard 신호 분류 및 조사
 ---
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard는 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.</div>
@@ -17,7 +20,7 @@ title: AI Guard 신호 분류 및 조사
 
 AI Guard 보안 신호는 AI Guard가 애플리케이션에서 탐지한 위협 및 공격에 대한 가시성을 제공합니다. 이러한 신호는 [AAP(애플리케이션 및 API 보호) 보안 신호][1]를 기반으로 구축되며 Datadog의 보안 모니터링 워크플로와 통합됩니다.
 
-## AI Guard 신호 이해하기 {#understand-ai-guard-signals}
+## AI Guard 신호 이해 {#understand-ai-guard-signals}
 
 Datadog은 구성된 탐지 규칙에 따라 위협을 탐지하면 AI Guard 보안 신호를 생성합니다. 프롬프트 인젝션, 탈옥 또는 도구 오용과 같은 위협을 나타내는 신호는 Datadog Security Signals 탐색기에 표시됩니다. 이러한 신호는 다음을 제공할 수 있습니다.
 
@@ -30,13 +33,13 @@ Datadog은 구성된 탐지 규칙에 따라 위협을 탐지하면 AI Guard 보
 
 ## 탐지 규칙 생성 {#create-detection-rules}
 
-알림을 받을 임계값을 정의하여 사용자 지정 탐지 규칙을 생성할 수 있습니다. 예를 들어 10분 동안 5건을 초과하는 `DENY` 액션이 발생할 경우 등이 있습니다. AI Guard 평가가 해당 임계값을 초과하면 보안 신호가 생성됩니다.
+알림을 받을 임계값을 정의하여 사용자 지정 탐지 규칙을 생성할 수 있습니다. 예를 들어, 10분 동안 5건을 초과하는 `DENY` 액션이 발생할 경우 등이 있습니다. AI Guard 평가가 해당 임계값을 초과하면 보안 신호가 생성됩니다.
 
 AI Guard 탐지 규칙을 생성하려면 다음 단계를 따르세요.
 1. Datadog에서 [AI Guard 탐지 규칙 탐색기][2]로 이동한 다음 {{< ui >}}New Rule{{< /ui >}}을 클릭합니다.
    {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard 탐지 규칙 탐색기" style="width:100%;" >}}
-1. {{< ui >}}Define your Real-time rule{{< /ui >}}: 생성할 규칙 유형을 선택하세요.
-1. {{< ui >}}Define Search Queries{{< /ui >}}: 신호를 생성할 태그 유형을 정의하세요. 다음 AI Guard 속성을 사용하여 특정 위협 패턴을 필터링하고 타겟팅할 수 있습니다:
+1. {{< ui >}}Define your Real-time rule{{< /ui >}} 아래에서 생성할 규칙 유형을 선택합니다.
+1. {{< ui >}}Define Search Queries{{< /ui >}} 아래에서 신호를 생성할 태그 유형을 정의합니다. 다음 AI Guard 속성을 사용하여 특정 위협 패턴을 필터링하고 타겟팅할 수 있습니다.
    <table>
      <thead>
        <tr>
@@ -84,26 +87,26 @@ AI Guard 탐지 규칙을 생성하려면 다음 단계를 따르세요.
        </tr>
      </tbody>
    </table>
-1. {{< ui >}}Define Rule Conditions{{< /ui >}}:
-   1. 선택한 규칙 유형에 적용되는 경우 임계값 조건을 정의하세요.
-   1. 이 규칙으로 AI Guard가 생성하는 보안 신호의 심각도 수준을 설정하세요.
-   1. 새 신호에 대한 알림을 받을 대상과 알림 빈도를 선택하세요.
-   1. 자동화된 IP 또는 사용자 차단, IP 플래깅과 같은 보안 대응 조치를 선택하세요.
-   1. AI Guard가 설정된 시간 내에 새로운 값을 탐지할 경우 새 신호를 생성하는 대신 동일한 신호를 업데이트하거나, 비운영 환경에 대해 신호 심각도를 낮추는 등의 추가 설정을 구성하세요.
-1. {{< ui >}}Describe your Playbook{{< /ui >}}: 알림을 사용자 지정하고 신호와 함께 보낼 태그를 정의하세요.
+1. {{< ui >}}Define Rule Conditions{{< /ui >}} 아래에서 다음을 수행합니다.
+   1. 선택한 규칙 유형에 적용되는 경우 임계값 조건을 정의합니다.
+   1. 이 규칙으로 AI Guard가 생성하는 보안 신호의 심각도 수준을 설정합니다.
+   1. 새 신호에 대한 알림을 받을 대상과 알림 빈도를 선택합니다.
+   1. 자동화된 IP 또는 사용자 차단, IP 플래깅과 같은 보안 대응 조치를 선택합니다.
+   1. AI Guard가 설정된 시간 내에 새로운 값을 탐지할 경우 새 신호를 생성하는 대신 동일한 신호를 업데이트하거나, 프로덕션 외 환경에 대해 신호 심각도를 낮추는 등의 추가 설정을 구성합니다.
+1. {{< ui >}}Describe your Playbook{{< /ui >}} 아래에서 알림을 사용자 지정하고 신호와 함께 보낼 태그를 정의합니다.
 1. {{< ui >}}Save Rule{{< /ui >}}을 클릭합니다.
 
-더 포괄적인 탐지 규칙 기능을 조회하려면 [탐지 규칙][3]을 참조하세요.
+더 포괄적인 탐지 규칙 기능은 [탐지 규칙][3]을 참조하세요.
 
 ## 신호 조사 {#investigate-signals}
 
 AI Guard 보안 신호를 보고 조사하며 다른 보안 이벤트와 연관시키려면 다음 두 곳에서 신호를 볼 수 있습니다.
-- [애플리케이션 및 API 보호 보안 신호 탐색기][4]
-- [Cloud SIEM 보안 신호 탐색기][5]
+- [App and API Protection Security Signals 탐색기][4]
+- [Cloud SIEM Security Signals 탐색기][5]
 
   Cloud SIEM Security Signals 탐색기 검색 창 옆에서 {{< ui >}}Filter{{< /ui >}} 아이콘을 클릭하고 {{< ui >}}App & API Protection{{< /ui >}} 확인란을 선택하여 AI Guard 신호를 확인합니다.
 
-Security Signals explorers를 사용하면 AI Guard 신호를 다른 애플리케이션 보안 위협과 함께 필터링, 우선 순위 지정 및 조사할 수 있어 보안 상태를 통합적으로 파악할 수 있습니다.
+Security Signals 탐색기를 사용하면 AI Guard 신호를 다른 애플리케이션 보안 위협과 함께 필터링, 우선 순위 지정 및 조사할 수 있어 보안 상태를 통합적으로 파악할 수 있습니다.
 
 AI Guard 보안 신호에서 직접 케이스를 생성하거나 연결할 수 있으며, 신호를 클릭하여 추가 컨텍스트가 포함된 측면 패널을 열 수 있습니다.
 
@@ -117,32 +120,32 @@ AI Guard 스팬은 수행된 평가와 그 이유에 대한 자세한 정보를 
 - 요청이 발생한 서비스 및 환경
 - 해당 서비스에 대해 구성된 [차단 정책][7]. 이 정책은 AI Guard가 안전하지 않은 요청을 차단할지, 아니면 차단하지 않고 탐지 및 태그만 지정할지를 결정합니다.
 - 에이전트와 상호 작용한 사용자
-- 에이전트의 특정 입력 및 출력과 해당 데이터가 LLM에서 왔는지 외부 도구에서 왔는지 여부
-- AI Guard가 각 요청을 안전 또는 안전하지 않음으로 평가했는지 여부
+- 에이전트의 특정 입력 및 출력과 해당 데이터가 LLM에서 왔는지 또는 외부 도구에서 왔는지 여부
+- AI Guard가 각 요청을 안전한 것으로 평가했는지 또는 안전하지 않은 것으로 평가했는지 여부
 - AI Guard가 요청을 차단했는지 여부
 - AI Guard가 호출을 안전하지 않은 것으로 평가한 경우, 포함된 공격 범주
 - 요청에 민감한 데이터가 포함되었는지 여부와 포함되었다면 어떤 유형의 민감한 데이터인지 여부
 - 탐색기에서 스팬을 필터링하는 데 사용할 수 있는 추가 태그
 
-또한 {{< ui >}}Explore in graph view{{< /ui >}}을 클릭하여 대화의 요청을 그래프로 확인하거나 [APM][8] 또는 [Agent Observability][9]에서 스팬을 볼 수 있습니다.
+또한 {{< ui >}}Explore in graph view{{< /ui >}}를 클릭하여 대화의 요청을 그래프로 확인하거나 [APM][8] 또는 [Agent Observability][9]에서 스팬을 볼 수 있습니다.
 
 ## Datadog Monitors를 사용하여 AI Guard 활동에 대한 경보 설정 {#set-up-datadog-monitors}
 
-특정 임계값에서 경보를 받기 위한 모니터를 생성하려면 [Datadog Monitors][10]를 사용할 수 있습니다. APM 트레이스 또는 메트릭을 사용하여 AI Guard 평가를 모니터링할 수 있습니다. 두 가지 유형의 모니터 모두 경보 조건을 설정하고 경보 이름을 지정하며 Notifications를 정의해야 합니다. Datadog은 Slack 사용을 권장합니다.
+특정 임계값에서 경보를 받기 위한 모니터를 생성하려면 [Datadog Monitors][10]를 사용할 수 있습니다. APM 트레이스 또는 메트릭을 사용하여 AI Guard 평가를 모니터링할 수 있습니다. 두 가지 유형의 모니터 모두 경보 조건을 설정하고 경보 이름을 지정하며 알림을 정의해야 합니다. Datadog은 Slack 사용을 권장합니다.
 
 ### APM 모니터 {#apm-monitor}
 
 지침에 따라 [APM 모니터][11]를 생성하고 범위를 {{< ui >}}Trace Analytics{{< /ui >}}로 설정하세요.
 
-- 거부된 평가를 모니터링하려면 쿼리 `@ai_guard.action:DENY`을 사용하세요.
-- 차단된 트래픽을 모니터링하려면 쿼리 `@ai_guard.blocked:true`를 사용하세요.
+- 거부된 평가를 모니터링하려면 쿼리 `@ai_guard.action:DENY`를 사용합니다.
+- 차단된 트래픽을 모니터링하려면 쿼리 `@ai_guard.blocked:true`를 사용합니다.
 
 ### 메트릭 모니터 {#metric-monitor}
 
 지침에 따라 [메트릭 모니터][12]를 생성하세요.
 
-- 거부된 평가를 모니터링하려면 태그 `action:deny`와 함께 메트릭 `datadog.ai_guard.evaluations`을 사용하세요.
-- 차단된 트래픽을 모니터링하려면 태그 `blocking_enabled:true`과 함께 메트릭 `datadog.ai_guard.evaluations`을 사용하세요.
+- 거부된 평가를 모니터링하려면 태그 `action:deny`와 함께 메트릭 `datadog.ai_guard.evaluations`를 사용합니다.
+- 차단된 트래픽을 모니터링하려면 태그 `blocking_enabled:true`와 함께 메트릭 `datadog.ai_guard.evaluations`를 사용합니다.
 
 ## 추가 자료 {#further-reading}
 

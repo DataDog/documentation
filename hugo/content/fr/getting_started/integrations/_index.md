@@ -223,7 +223,7 @@ journalisation
 : Le fichier qui répertorie et stocke les métriques collectées par chaque intégration.
 
 métriques
-: La liste des éléments collectés depuis votre système par chaque intégration. Vous pouvez trouver les métriques pour chaque intégration dans le fichier `metadata.csv` de cette intégration et dans le tableau **Données collectées** sur la page de documentation de l'intégration. Dans ce tableau, une métrique répertoriée avec *Affiché en tant que \\<unité\\>* possède déjà une unité définie dans les métadonnées de l'intégration. Une métrique sans cette notation n'a pas d'unité définie par défaut, vous devez donc en configurer une manuellement sur la page [résumé des métriques][48]. Pour plus d'informations sur les métriques, consultez la page développeur [Metrics][42]. Vous pouvez également configurer des [métriques personnalisées][43], donc si l'intégration ne propose pas de métrique prête à l'emploi, vous pouvez généralement l'ajouter.
+: La liste des éléments collectés depuis votre système par chaque intégration. Vous pouvez trouver les métriques pour chaque intégration dans le fichier `metadata.csv` de cette intégration et dans le tableau **Données collectées** sur la page de documentation de l'intégration. Dans ce tableau, une métrique répertoriée avec *Shown as \<unit\>* possède déjà une unité définie dans les métadonnées de l'intégration. Une métrique sans cette notation n'a pas d'unité définie par défaut, vous devez donc en configurer une manuellement sur la page [Metrics Catalog][48]. Pour plus d'informations sur les métriques, consultez la page développeur [Metrics][42]. Vous pouvez également configurer des [métriques personnalisées][43], donc si l'intégration ne propose pas de métrique prête à l'emploi, vous pouvez généralement l'ajouter.
 
 paramètres
 : Utilisez les paramètres du fichier `conf.yaml` pour contrôler les accès entre votre source de données d'intégration et l'Agent. Le fichier `conf.yaml.example` de chaque intégration répertorie tous les paramètres requis et non requis.
@@ -284,4 +284,4 @@ tagging
 [45]: /fr/account_management/rbac/permissions/#integrations
 [46]: /fr/integrations/
 [47]: /fr/containers/kubernetes/integrations/#tag-cardinality
-[48]: https://app.datadoghq.com/metric/summary
+[48]: https://app.datadoghq.com/metric/catalog

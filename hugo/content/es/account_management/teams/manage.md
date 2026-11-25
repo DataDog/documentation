@@ -99,12 +99,6 @@ Un equipo puede estar conectado a más de una fuente, aunque el tipo de fuente d
 
 ## Jerarquías de equipos{#team-hierarchies}
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">
-Esta función no es compatible con el sitio de Datadog seleccionado ({{< region-param key="dd_site_name" >}}).
-</div>
-{{< /site-region >}}
-
 Cree un mapa de Teams para visualizar las jerarquías de equipos, anidando equipos dentro de otros (subequipos) para reflejar la estructura real de su empresa. El resultado es un modelo de propiedad más completo que una lista de equipos plana y desconectada. Los equipos relacionados, equipos principales, equipos hermanos y subequipos de un equipo aparecen en su página de equipo, en la sección **Hierarchy** de la pestaña **Info**. Para explorar el mapa completo de todos los equipos de su organización, consulte el [Teams map][7] en el Datadog Internal Developer Portal.
 
 {{< img src="/account_management/teams/github/manage/teams-map.png" alt="Teams map que muestra una jerarquía de equipos principales y secundarios, con el panel de detalles de un equipo seleccionado que muestra sus miembros y subequipos" style="width:100%;" >}}

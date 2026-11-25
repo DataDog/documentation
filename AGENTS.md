@@ -175,6 +175,10 @@ The full Vale linter rules are at https://github.com/DataDog/datadog-vale. Key s
 
 Avoid temporal words: currently, now, will, won't
 
+## Jira cards
+
+After opening a PR against this repo, do not create an associated Jira card on the DOCS board to prompt an editorial review. Doing so may interfere with the Docs team's own processes for creating Jira cards to track PR reviews.
+
 ## Hugo-Specific Details
 
 ### Shortcodes
