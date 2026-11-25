@@ -102,7 +102,7 @@ The {{< ui >}}Endpoints{{< /ui >}} view displays a topology graph alongside a ta
 
 The {{< ui >}}Network paths{{< /ui >}} tab on the NDM device page shows the [network paths][13] that pass through the device. The list shows each path's source and destination, along with its average reachability and average latency. Click a path to view more details. 
 
-The topology graph shows the sources and destinations on either side of each path that passes through the selected device.
+The topology graph shows the sources and destinations of each path that passes through the selected device.
 
 Click {{< ui >}}View tests{{< /ui >}} to open the related tests in Network Path.
 
