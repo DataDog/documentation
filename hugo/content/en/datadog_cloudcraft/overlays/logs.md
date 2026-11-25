@@ -27,7 +27,11 @@ The overlay adds a pin to each supported resource that has logs. The pin shows t
 
 {{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay with a log search panel, and log pins and status counts on resources in an AWS diagram." style="width:100%;" >}}
 
-### Supported resource types
+## Prerequisites
+
+Enable Log Management in your Datadog organization. To start collecting logs, see [Log Collection and Integrations][1].
+
+## Supported resource types
 
 The Logs overlay supports the following resource types:
 
@@ -53,10 +57,6 @@ The overlay does not show the following ECS logs:
 - Container logs from tasks that run on the Fargate launch type
 - Logs sent through the `awslogs` log driver to CloudWatch Logs
 - Logs sent through FireLens
-
-## Prerequisites
-
-Enable Log Management in your Datadog organization. To start collecting logs, see [Log Collection and Integrations][1].
 
 ## Investigate logs
 
