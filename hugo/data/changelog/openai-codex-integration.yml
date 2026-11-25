@@ -1,0 +1,29 @@
+entries:
+  - change_type: added
+    date: '2026-11-19'
+    link: https://github.com/DataDog/documentation/pull/41633
+    operations:
+      - CreateOpenAICodexIntegrationAccount
+      - DeleteOpenAICodexIntegrationAccount
+      - GetOpenAICodexIntegrationAccount
+      - ListOpenAICodexIntegrationAccounts
+      - UpdateOpenAICodexIntegrationAccount
+    title: Add Integration Accounts v2 API for OpenAI Codex
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateOpenAICodexIntegrationAccount
+      - DeleteOpenAICodexIntegrationAccount
+      - GetOpenAICodexIntegrationAccount
+      - ListOpenAICodexIntegrationAccounts
+      - UpdateOpenAICodexIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42082
+    operations:
+      - CreateOpenAICodexIntegrationAccount
+      - UpdateOpenAICodexIntegrationAccount
+    title: Improve token descriptions for Claude Compliance, ChatGPT Enterprise,
+      and OpenAI Codex

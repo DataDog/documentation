@@ -29,7 +29,7 @@ Le fournisseur Datadog implémente la norme [OpenFeature](https://openfeature.de
 
 La version agentless de Java évalue localement les indicateurs et envoie des événements d'exposition aux expériences ainsi que des événements agrégés d'évaluation d'indicateurs via l'Event Platform Proxy (EVP). Il privilégie un relais de télémétrie local compatible. Il envoie les deux types d'événements directement lorsqu'aucun relais compatible n'est disponible.
 
-##  Exigences de compatibilité {#compatibility-requirements}
+## Exigences de compatibilité {#compatibility-requirements}
 
 Pour la configuration agentless par défaut, vous avez besoin de :
 
@@ -342,6 +342,7 @@ Utilisez [Sources de configuration du SDK serveur][9] comme référence canoniqu
 - [Utiliser un endpoint agentless personnalisé][10] pour des tests avancés, le développement local ou un proxy géré par l'opérateur
 - [Utiliser Agent Remote Configuration][13] pour conserver la distribution gérée par l'agent
 - [Migrer une Remote Configuration existante][11] et supprimer le paramètre obsolète `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`
+- [Démarrez l'Agent avant l'application][18] lorsque vous utilisez la Remote Configuration de l'Agent
 
 En mode agentless, Java privilégie un relais de télémétrie local compatible pour l'exposition aux expériences et les événements d'évaluation d'indicateurs agrégés. Il envoie les deux types d'événements directement lorsqu'aucun relais compatible n'est disponible. Le chemin direct utilise les paramètres `DD_API_KEY` et `DD_SITE` de l'application. Pour les environnements serverless sans agent, vous pouvez utiliser [`serverless-init`][17] comme relais de télémétrie local.
 
@@ -376,7 +377,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` est un événement OpenFeature facultatif. Consultez la documentation du fournisseur Datadog pour vérifier si cet événement est pris en charge dans votre version.
+Une fois le fournisseur prêt, il émet `PROVIDER_CONFIGURATION_CHANGED` pour chaque nouvelle configuration de flag qu'il reçoit.
 
 ### Clients multiples {#multiple-clients}
 
@@ -401,6 +402,10 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 {{< /code-block >}}
 
 L'instance `Provider` est partagée globalement. Les noms des clients sont uniquement à des fins organisationnelles et ne créent pas d'instances de fournisseur distinctes. Tous les clients utilisent le même fournisseur Datadog sous-jacent et les mêmes configurations d'indicateurs.
+
+## Enregistrez les expositions dans votre propre magasin de données {#record-exposures-in-your-own-data-store}
+
+Utilisez `ExposureHook` pour enregistrer les expositions dans vos propres journaux, votre entrepôt de données ou votre pipeline d'analyse. Il appelle votre code après chaque évaluation de flag avec la même décision d'exposition que celle utilisée par le fournisseur pour Datadog. Pour arrêter l'envoi des expositions à Datadog, définissez `DD_FEATURE_FLAGS_EXPOSURES_DATADOG_LOGGING_ENABLED=false`. Cela nécessite `dd-java-agent` et la version 1.68.0 ou ultérieure de `dd-openfeature`. Consultez [Enregistrer les expositions aux Feature Flags dans votre propre magasin de données][19].
 
 ## Bonnes pratiques {#best-practices}
 
@@ -642,6 +647,7 @@ Lorsque le chemin de configuration sélectionné prend en charge les expositions
 
 1. Vérifiez que le feature flag est associé à une expérience dans l'interface utilisateur Datadog.
 2. Vérifiez la clé d'API de l'agent et la connectivité.
+3. Si vous utilisez la Remote Configuration de l'Agent, vérifiez que l'Agent était disponible au démarrage de l'application. Si ce n'était pas le cas, redémarrez l'application. Consultez [Disponibilité de l'Agent][18].
 
 ## Pour aller plus loin {#further-reading}
 
@@ -663,3 +669,5 @@ Lorsque le chemin de configuration sélectionné prend en charge les expositions
 [15]: /fr/serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /fr/serverless/google_cloud_run/containers/in_container/java/
 [17]: /fr/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /fr/feature_flags/concepts/configuration_sources/#agent-availability
+[19]: /fr/feature_flags/guide/record_exposures_in_your_own_data_store/

@@ -3,120 +3,119 @@ description: Dépannage des problèmes liés aux conteneurs
 further_reading:
 - link: /containers/troubleshooting/duplicate_hosts
   tag: Documentation
-  text: Dupliquer des hosts avec Kubernetes sur AWS (EC2 ou EKS)
+  text: Hosts en double avec Kubernetes sur AWS (EC2 ou EKS)
 title: Dépannage des conteneurs
 ---
-
 Cette page fournit des informations de dépannage pour la surveillance des conteneurs.
 
 
 Il existe trois méthodes pour déployer l'Agent :
-1. En tant que [**conteneur dans un runtime**][1]
+1. En tant que [**conteneur dans un runtime**][1] 
 
 2. Dans un **environnement cloud**, tel qu'[Amazon ECS][2], [Fargate dans un environnement Amazon ECS][3] ou [Amazon EKS][4]
 
 3. Dans un [environnement Kubernetes][16]
 
-Ces différentes méthodes présentent des défis de déploiement uniques. Utilisez cette page comme point de départ pour résoudre les problèmes. Si vous continuez à rencontrer des difficultés, contactez [l'assistance Datadog][6] pour obtenir de l'aide supplémentaire.
+Ces différentes méthodes présentent des défis de déploiement uniques. Utilisez cette page comme point de départ pour résoudre les problèmes. Si vous continuez à rencontrer des difficultés, contactez le [support Datadog][6] pour obtenir de l'aide. 
 
-Pour plus de détails sur les mises à jour ou modifications des versions de l'Agent, consultez les [notes de version][7] de Datadog.
+Pour plus de détails sur les mises à jour ou les modifications des versions de l'Agent, consultez les [notes de version][7] de Datadog.
 
-## Problèmes généraux
+## Problèmes généraux {#general-issues}
 
-### Les variables d'environnement ne sont pas définies et les tags ne sont pas injectés
+### Les variables d'environnement ne sont pas définies et les tags ne sont pas injectés {#environment-variables-are-not-being-set-and-tags-are-not-injected}
 
-Une méthode utile pour injecter des [variables d'environnement][8] ou pour configurer une bibliothèque DogStatsD consiste à implémenter la fonctionnalité [contrôleur d'admission][9] sur l'Agent de cluster. **Remarque** : l'Agent de cluster doit être déployé et en cours d'exécution _avant_ le déploiement de l'application.
+Un moyen utile d'injecter des [variables d'environnement][8] ou de configurer une bibliothèque DogStatsD consiste à implémenter la fonctionnalité [Admission Controller][9] sur le Cluster Agent. **Remarque** : le Cluster Agent doit être déployé et en cours d'exécution _avant_ que l'application ne soit déployée.
 
-### Les métriques n'apparaissent pas sur la plateforme Web Datadog
+### Les métriques n'apparaissent pas sur la plateforme Web Datadog {#metrics-are-not-appearing-on-the-datadog-web-platform}
 
-Vérifiez que les éléments suivants sont vrais :
+Vérifiez que les conditions suivantes sont remplies :
 
-- L'endpoint de métriques est exposé et ouvert pour que l'Agent puisse l'atteindre.
+- L'endpoint des métriques est exposé et accessible à l'Agent.
 
-- Il n'y a pas de proxys ou de pare-feu susceptibles d'empêcher l'Agent d'accéder à l'endpoint.
+- Aucun proxy ni pare-feu ne risque d'empêcher l'Agent d'accéder à l'endpoint. 
 
-- L'Agent a [Autodiscovery][10] activé.
+- [Autodiscovery][10] est activé sur l'Agent.
 
 
-### Les logs ne sont pas collectés
+### Les journaux ne sont pas collectés {#logs-are-not-collected}
 
-Il existe deux [variables d'environnement][8] qui peuvent affecter la collecte des logs et depuis quels conteneurs :
+Il existe deux [variables d'environnement][8] qui peuvent influer sur la collecte des journaux et sur les conteneurs à partir desquels ils sont collectés :
 
-- Définissez `DD_LOGS_ENABLED` sur `true` pour collecter les logs.
-- De plus, définissez `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` sur `true` pour collecter tous les logs de tous les conteneurs.
+- Définissez `DD_LOGS_ENABLED` sur `true` pour collecter les journaux. 
+- De plus, définissez `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` sur `true` pour collecter tous les journaux de tous les conteneurs.
 
-Pour exclure les logs (et autres fonctionnalités) de la collecte, consultez le [guide de gestion de la découverte de conteneurs][11].
+Pour exclure des journaux (et d'autres fonctionnalités) de la collecte, consultez le [guide de gestion de la découverte de conteneurs][11].
 
-### Impossible de se connecter au Kubelet
+### Impossible de se connecter au Kubelet {#cannot-connect-to-the-kubelet}
 
-L'erreur la plus courante qui empêche la connexion à l'API Kubelet est la vérification du certificat TLS Kubelet.
+L'erreur la plus courante qui empêche la connexion à l'API Kubelet est la vérification du certificat TLS du Kubelet.
 
 La vérification TLS est activée par défaut et peut empêcher l'Agent de se connecter à l'API Kubelet via HTTPS. Vous pouvez désactiver la vérification TLS en utilisant des paramètres dédiés ou en définissant la variable `DD_KUBELET_TLS_VERIFY` pour tous les conteneurs dans le manifeste de l'Agent :
 
  - Définissez `TLS_VERIFY` sur `false`.
 
-### Les métriques HPA n'apparaissent pas ou ne correspondent pas à la valeur attendue
+### Les métriques HPA n'apparaissent pas ou ne correspondent pas à la valeur attendue {#hpa-metrics-are-not-appearing-or-are-not-aligning-with-the-expected-value}
 
-Tout d'abord, assurez-vous que l'Agent de cluster est déployé et capable d'envoyer des données à l'Agent de nœud.
+Tout d'abord, assurez-vous que le Cluster Agent est déployé et capable d'envoyer des données à l'Agent de nœud.
 
-Ensuite, examinez la requête utilisée pour mettre à l'échelle les métriques externes dans le récapitulatif des métriques. Seules les requêtes valides effectuent une mise à l'échelle automatique. S'il y a plusieurs requêtes, **toutes** les requêtes sont ignorées si **l'une** des requêtes est invalide.
+Ensuite, examinez la requête utilisée pour mettre à l'échelle les métriques externes dans Metrics Catalog. Seules les requêtes valides permettent la mise à l'échelle automatique. S'il y a plusieurs requêtes, **toutes** les requêtes sont ignorées si **l'une** d'entre elles est invalide.
 
-Lorsque vous contactez l'assistance pour obtenir de l'aide supplémentaire concernant les métriques HPA, fournissez les éléments suivants à [l'assistance Datadog][6] :
-  - Une sortie `describe` du manifeste HPA :
+Lorsque vous demandez une assistance supplémentaire pour les métriques HPA, fournissez les éléments suivants au [support Datadog][6] :
+  - La sortie `describe` du manifeste HPA :
       ```
       $ kubectl describe hpa > hpa.log
       ```
-  - Une sortie `describe` de la Custom Resource Definition DatadogMetric :
+  - La sortie `describe` de la définition de ressource personnalisée DatadogMetric :
       ```
       $ kubectl describe DatadogMetric > DatadogMetric.log
       ```
 
 
-## Runtime
+## Runtime {#runtime}
 
- Pour les logs, assurez-vous que la commande de déploiement de l'Agent a `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` et `DD_LOGS_ENABLED` activés.
+ Pour les journaux, assurez-vous que `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` et `DD_LOGS_ENABLED` sont activés dans la commande de déploiement de l'Agent.
 
-## Cloud
+## Cloud {#cloud}
 
-Assurez-vous que votre stratégie IAM est mise à jour.
+Assurez-vous que votre politique IAM est mise à jour.
 
-### Les logs ne sont pas collectés dans Fargate
+### Les journaux ne sont pas collectés dans Fargate {#logs-are-not-collected-in-fargate}
 
-  - [ECS][12] : assurez-vous que le routeur de logs est attaché au conteneur depuis lequel vous souhaitez collecter les logs.
+  - [ECS][12] : Assurez-vous que le routeur de journaux est associé au conteneur dont vous souhaitez collecter les journaux.
 
-  - [EKS][13] : il existe deux méthodes courantes pour que l'Agent collecte les logs dans un environnement EKS Fargate : le transfert de logs avec les logs CloudWatch et le transfert de logs via [Amazon Data Firehose][14]. L'utilisation d'Amazon Data Firehose pour collecter les logs nécessite l'implémentation réussie du flux de distribution Amazon Data Firehose, ainsi que certains outils de ligne de commande.
+  - [EKS][13] : Il existe deux méthodes courantes pour que l'Agent collecte des journaux dans un environnement EKS Fargate : le transfert des journaux via CloudWatch et le transfert des journaux via [Amazon Data Firehose][14]. L'utilisation d'Amazon Data Firehose pour collecter des journaux nécessite la mise en œuvre réussie du flux de diffusion Amazon Data Firehose, ainsi que certains outils de ligne de commande. 
+ 
 
+## Kubernetes {#kubernetes}
 
-## Kubernetes
+### Le conteneur ne se déploie pas ou ne collecte pas de métriques {#container-not-deploying-or-collecting-metrics}
 
-### Le conteneur ne se déploie pas ou ne collecte pas de métriques
-
-Tout d'abord, assurez-vous que votre clé API est valide.
+Tout d'abord, assurez-vous que votre clé d'API est valide.
 
 Ensuite, dans votre pod d'Agent de nœud, exécutez la commande `agent status` et examinez les résultats.
 
-### Métriques `kubeapi_server`, `kube_controller_manager` ou `etcd` non reçues
+### Vous ne recevez pas de métriques `kubeapi_server`, `kube_controller_manager` ou `etcd` {#not-getting-kubeapi-server-kube-controller-manager-or-etcd-metrics}
 
-Sur les services managés tels qu'Azure Kubernetes Service (AKS) et Google Kubernetes Engine (GKE), l'utilisateur ne peut pas accéder aux composants du control plane. Par conséquent, il n'est pas possible d'exécuter les checks `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` ou `etcd` dans ces environnements.
+Sur les services gérés tels qu'Azure Kubernetes Service (AKS) et Google Kubernetes Engine (GKE), l'utilisateur ne peut pas accéder aux composants du plan de contrôle. Par conséquent, il n'est pas possible d'exécuter les vérifications `kube_apiserver`, `kube_controller_manager`, `kube_scheduler` ou `etcd` dans ces environnements.
 
-## ECS Fargate
+## ECS Fargate {#ecs-fargate}
 
-### L'Agent Windows expire lors du démarrage du service
+### Délai d'attente dépassé pour l'Agent Windows lors du démarrage du service {#windows-agent-times-out-while-starting-service}
 
 ```text
 [ENTRYPOINT][ERROR] Could not start the service: The service did not respond to the start or control request in a timely fashion.
 . Error: [1053 (0x41d)]
 ```
 
-Pour éviter cette erreur, assurez-vous d'avoir défini une réservation d'**unités CPU** d'au moins `512` pour l'Agent Datadog.
+Pour éviter cette erreur, assurez-vous d'avoir défini une réservation de **unités CPU** d'au moins `512` pour le Datadog Agent.
 
-# Données de dépannage demandées par l'assistance Datadog
+# Données de dépannage demandées par le support Datadog {#troubleshooting-data-requested-by-datadog-support}
 
-Après avoir ouvert un ticket d'assistance, il peut vous être demandé les types d'informations suivants :
+Après avoir ouvert un ticket de support, il se peut que l'on vous demande les types d'informations suivants :
 
-### Agent Flare 
+### Agent Flare {#agent-flare}
 
-Vous pouvez utiliser la commande [`flare`][15] pour envoyer des informations de dépannage à l'assistance Datadog.
+Vous pouvez utiliser la commande [`flare`][15] pour envoyer des informations de dépannage au support Datadog.
 
 **Flare de l'Agent de nœud**
 
@@ -129,27 +128,27 @@ $ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
 $ kubectl exec <CLUSTER_AGENT_POD_NAME> -it agent flare <CASE_ID>
 ```
+ 
 
+### Sortie de Describe Pod {#describe-pod-output}
 
-### Sortie de describe Pod
-
-Cela fournit à l'équipe un aperçu de la manière dont l'Agent de nœud ou l'Agent de cluster a été déployé, quels étaient les événements les plus récents pour le pod et si certaines qualités (telles que les tags custom) ont été injectées et appliquées aux métriques de host. La section `> <FILENAME>.yaml` de la commande crée une sortie de fichier qui peut être envoyée à l'assistance Datadog en tant que pièce jointe :
+Cela fournit à l'équipe des informations sur la manière dont l'Agent de nœud ou de cluster a été déployé, quels ont été les événements les plus récents pour le pod, et si certaines propriétés (telles que des tags personnalisés) ont été injectées et appliquées aux métriques du host. La section `> <FILENAME>.yaml` de la commande crée un fichier de sortie qui peut être envoyé au support Datadog en tant que pièce jointe : 
 
 ```
 $ kubectl describe pod <POD_NAME> > <FILENAME>.yaml
 ```
 
-### Manifeste/déploiement
+### Manifeste/déploiement {#manifestdeployment}
 
-Il s'agit du fichier utilisé pour déployer l'Agent dans votre environnement. Il informe Datadog des tags configurés, si les logs ont été activés et si certains conteneurs sont définis pour être ignorés.
+Il s'agit du fichier utilisé pour déployer l'Agent dans votre environnement. Il indique à Datadog les tags configurés, si la collecte des journaux a été activée et si certains conteneurs sont configurés pour être ignorés. 
 
-Dans le cas du déploiement de l'Agent dans un environnement runtime, envoyez à l'assistance la ligne de commande utilisée pour déployer l'Agent.
+Dans le cas d'un déploiement de l'Agent dans un environnement d'exécution, envoyez au support la ligne de commande utilisée pour déployer l'Agent.
 
-Les trois méthodes de déploiement les plus courantes sont : chart Helm, DaemonSet et opérateur.
+Les trois méthodes de déploiement les plus courantes sont : Helm chart, DaemonSet et Operator.
 
-### Sortie cURL 
+### Sortie cURL {#curl-output}
 
-Si vous rencontrez des métriques manquantes ou inexactes, l'assistance Datadog peut demander le résultat d'une sortie cURL de l'Agent de nœud tentant d'atteindre l'endpoint de métriques. Cela se fait en exécutant la commande depuis l'intérieur du conteneur de l'Agent et peut informer l'assistance si l'Agent a accès aux métriques. **Remarque** : cela n'est pas possible dans Fargate ou les services managés :
+Si vous constatez que des métriques sont manquantes ou inexactes, le support Datadog peut vous demander la sortie de la commande cURL exécutée par l'Agent de nœud pour tenter d'atteindre l'endpoint des métriques. L'exécution de la commande depuis le conteneur de l'Agent permet au support Datadog de déterminer si l'Agent a accès aux métriques. **Remarque** : Cela n'est pas possible dans un environnement Fargate ou dans des services gérés : 
 
 ```
 $ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
@@ -159,7 +158,7 @@ $ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
 $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 ```
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

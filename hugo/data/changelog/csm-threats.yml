@@ -28,3 +28,68 @@ entries:
       - DeleteCloudWorkloadSecurityAgentRule
       - UpdateCloudWorkloadSecurityAgentRule
     title: Make legacy Workload Protection agent rule write operations private
+  - change_type: modified
+    date: '2026-11-18'
+    link: https://github.com/DataDog/documentation/pull/41917
+    operations:
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentRule
+      - GetCSMThreatsAgentRule
+      - GetCloudWorkloadSecurityAgentRule
+      - ListCSMThreatsAgentRules
+      - ListCloudWorkloadSecurityAgentRules
+      - UpdateCSMThreatsAgentRule
+    title: Fix CSM Threats agent rule error response schemas
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentPolicy
+      - DeleteCSMThreatsAgentRule
+      - DownloadCSMThreatsPolicy
+      - GetCSMThreatsAgentPolicy
+      - GetCSMThreatsAgentRule
+      - GetCloudWorkloadSecurityAgentRule
+      - ListCSMThreatsAgentPolicies
+      - ListCSMThreatsAgentRules
+      - ListCloudWorkloadSecurityAgentRules
+      - UpdateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentRule
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42102
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentPolicy
+      - DeleteCSMThreatsAgentRule
+      - DownloadCSMThreatsPolicy
+      - GetCSMThreatsAgentPolicy
+      - GetCSMThreatsAgentRule
+      - ListCSMThreatsAgentPolicies
+      - ListCSMThreatsAgentRules
+      - UpdateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentRule
+    title: Document permissions for Workload Protection agent rule and policy 
+      endpoints
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42113
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentPolicy
+      - DeleteCSMThreatsAgentRule
+      - DownloadCSMThreatsPolicy
+      - GetCSMThreatsAgentPolicy
+      - GetCSMThreatsAgentRule
+      - GetCloudWorkloadSecurityAgentRule
+      - ListCSMThreatsAgentPolicies
+      - ListCSMThreatsAgentRules
+      - ListCloudWorkloadSecurityAgentRules
+      - UpdateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentRule
+    title: Deprecate legacy Workload Protection agent rule read endpoints

@@ -1,78 +1,75 @@
 ---
-description: Ingerir valores de métricas personalizadas con marcas de tiempo anteriores
-  a una hora, hasta su período de retención de métricas.
+description: Ingiera valores de métricas personalizadas con marcas de tiempo de más
+  de una hora de antigüedad, hasta el límite de su período de retención de métricas.
 further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
-  text: Supervisar el rendimiento del sistema durante períodos de tiempo más largos
-    con métricas históricas
+  text: Monitoree el rendimiento del sistema durante períodos más largos con métricas
+    históricas
 - link: /extend/dogstatsd/
   tag: Documentación
-  text: Aprenda más sobre DogStatsD
+  text: Obtenga más información sobre DogStatsD
 - link: /extend/community/libraries/
   tag: Documentación
-  text: Bibliotecas cliente de API y DogStatsD, tanto oficiales como creadas por la
-    comunidad.
+  text: Bibliotecas de cliente para API y DogStatsD oficiales y creadas por la comunidad
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
-  text: Supervisar el rendimiento del sistema durante períodos de tiempo más largos
-    con métricas históricas
-title: Ingesta de Métricas Históricas
+  text: Monitoree el rendimiento del sistema durante períodos más largos con métricas
+    históricas
+title: Historical Metrics Ingestion
 ---
 {{< jqmath-vanilla >}}
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">La ingesta de métricas históricas no es compatible con su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
+## Descripción general {#overview}
 
-## Resumen {#overview}
+Habilitar Historical Metrics Ingestion le permite recopilar valores de **métricas personalizadas** con marcas de tiempo de más de una hora de antigüedad con respecto al momento del envío, pero no anteriores a su período total de retención de métricas (15 meses de forma predeterminada).
 
-Habilitar la ingesta de métricas históricas le permite recopilar valores de **métricas personalizadas** con marcas de tiempo más antiguas de una hora desde el momento de la presentación, pero no más antiguas que su período total de retención de métricas (por defecto de 15 meses).
+Tener Historical Metrics Ingestion habilitada para sus métricas puede ser útil para una variedad de casos de uso, como la recuperación de una interrupción, la corrección de valores erróneos y la gestión de retrasos de IoT.
 
-Tener habilitada la ingesta de métricas históricas en sus métricas puede ser útil para una variedad de casos de uso, como recuperarse de una interrupción, corregir valores erróneos y gestionar retrasos de IoT.
+## ¿Qué es Historical Metrics Ingestion? {#what-is-historical-metrics-ingestion}
 
-## ¿Qué es la ingesta de métricas históricas? {#what-is-historical-metrics-ingestion}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagrama que muestra el flujo de ingesta para Métricas Históricas habilitadas" >}}
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagrama que muestra el flujo de ingesta para métricas históricas habilitadas" >}}
+Datadog clasifica las *métricas históricas* como puntos de métrica con marcas de tiempo que tienen más de una hora de antigüedad en relación con el momento del envío. Si Historical Metrics Ingestion no está habilitada, los valores de una métrica con más de una hora de antigüedad desde el envío no se ingieren.
 
-Datadog clasifica *métricas históricas* como puntos métricos con marcas de tiempo que son más antiguas de una hora en relación con el momento de la presentación. Si la ingesta de métricas históricas no está habilitada, los valores de una métrica más antiguos de una hora desde la presentación no se ingieren.
+Por ejemplo, su métrica (`exampleMetricA`) envía un valor a Datadog a la 1:00 p. m. EST, y la marca de tiempo de ese valor corresponde a las 10:00 a. m. EST. Este valor de métrica se clasifica como _histórico_ porque tiene una marca de tiempo 3 horas más antigua en relación con el momento del envío.
 
-Por ejemplo, su métrica (`exampleMetricA`) emite un valor a Datadog a la 1:00 PM EST, y la marca de tiempo de ese valor es 10:00 AM EST. Este valor de métrica se clasifica como _histórico_ porque tiene una marca de tiempo 3 horas más antigua en relación con el momento de la presentación.
+Con Historical Metrics Ingestion habilitada, si envía varios valores con la misma marca de tiempo y la misma combinación de etiqueta-valor a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si envía una métrica con un valor de X y luego la misma métrica con un valor de Y, ambas con la misma marca de tiempo, se conservará el valor enviado más recientemente.
 
-Con la ingesta de métricas históricas habilitada, si envía múltiples valores con la misma marca de tiempo y la misma combinación de etiqueta-valor a Datadog, Datadog preserva el valor más recientemente enviado. Es decir, si dentro de la misma marca de tiempo, envía una métrica con un valor de X, y también envía esa métrica con un valor de Y, el valor que se haya enviado más recientemente será preservado.
+Puede comenzar a ingerir valores de métricas históricas habilitando Historical Metrics Ingestion en la [página Metrics Catalog][1] para los tipos de métricas de *conteos, tasas y medidores*.  
 
-Puede comenzar la ingesta de valores de métricas históricas habilitando la Ingesta de Métricas Históricas en la [Metrics Summary Page][1] para los tipos de métricas *cuentas, tasas y gauge*.  
-
-**Nota**: La Ingestión de Métricas Históricas no está disponible para métricas de distribución, o métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como registros).
+**Nota**: Historical Metrics Ingestion no está disponible para métricas de distribución, ni para métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como registros).
 
 ## Configuración {#configuration}
 
-Para habilitar la ingestión de métricas históricas para una métrica específica:
-1. Navegue a la [Metrics Summary Page][1].
-1. Haga clic en el nombre de la métrica para la que desee habilitar la Ingesta de Métricas Históricas para abrir el panel lateral de detalles.
-1. Dentro de la sección *Avanzada* del panel lateral, haga clic en **Configure**.
-1. Seleccione el interruptor **Habilitar métricas históricas** y presione **Guardar**.
+Habilitar o deshabilitar Historical Metrics Ingestion, incluso con configuración masiva, requiere el permiso Historical Metrics Config Write ([`late_metrics_config_write`][6]).
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page mostrando el panel de facetas de métricas históricas y la sección Avanzada de un panel de detalles de Métrica abierto con la opción Habilitar métricas históricas seleccionada." style="width:100%;" >}}
+Para habilitar la ingesta de métricas históricas para una métrica específica:
+1. Vaya a la [página Metrics Catalog][1].
+1. Haga clic en el nombre de la métrica para la que desea habilitar Historical Metrics Ingestion para abrir el panel lateral de detalles de la métrica.
+1. En la sección *Advanced* del panel lateral, haga clic en {{< ui >}}Configure{{< /ui >}}.
+1. Seleccione el interruptor {{< ui >}}Enable historical metrics{{< /ui >}} y presione {{< ui >}}Save{{< /ui >}}.
+
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Página Metrics Catalog que muestra el panel de facetas Historical Metrics y la sección Advanced de un panel de detalles de métrica abierto con la opción Enable historical metrics seleccionada" style="width:100%;" >}}
 
 ### Configuración masiva para múltiples métricas {#bulk-configuration-for-multiple-metrics}
 
-Puedes habilitar o deshabilitar la Ingestión de Métricas Históricas para múltiples métricas a la vez, en lugar de tener que configurar cada una individualmente.
+Puede habilitar o deshabilitar Historical Metrics Ingestion para múltiples métricas a la vez, en lugar de tener que configurar cada una individualmente.
 
-1. Navegue a la [Metrics Summary Page][1] y haga clic en el menú desplegable **Configure Metrics**.
-1. Seleccione **Habilitar métricas históricas**.
+1. Vaya a la [página Metrics Catalog][1] y haga clic en el menú desplegable {{< ui >}}Actions{{< /ui >}}.
+1. Seleccione {{< ui >}}Manage Historical Metrics{{< /ui >}}.
 1. Especifique un prefijo de espacio de nombres de métrica para seleccionar todas las métricas que coincidan con ese espacio de nombres.
-1. (Opcional) Para deshabilitar la Ingestión de Métricas Históricas para todas las métricas en el espacio de nombres, haga clic en el interruptor **Métricas históricas**.
+1. (Opcional) Para deshabilitar Historical Metrics Ingestion para todas las métricas en el espacio de nombres, haga clic en el interruptor {{< ui >}}Historical metrics{{< /ui >}}.
 
-{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Interruptor de ingestión de métricas históricas" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Interruptor de ingesta de métricas históricas" >}}
 
 ## Envío de métricas históricas {#historical-metrics-submission}
 
-Después de habilitar la Ingesta de Métricas Históricas, puede enviar valores métricos con marcas de tiempo históricas a través de la [API](#api) o a través del [Agent](#agent).
+Después de habilitar Historical Metrics Ingestion, puede enviar valores de métricas con marcas de tiempo históricas a través de la [API](#api) o a través del [Agent](#agent).
 
 ### API {#api}
 
-Con la API, puede enviar valores métricos con marcas de tiempo históricas en la carga útil (siempre que el nombre de la métrica ya haya sido habilitado para aceptar métricas históricas a través de la interfaz de usuario descrita anteriormente).
+Con la API, puede enviar valores de métricas con marcas de tiempo históricas en la carga útil (siempre que el nombre de la métrica ya se haya habilitado para aceptar métricas históricas a través de la interfaz de usuario descrita anteriormente).
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -368,9 +365,9 @@ EOF
 
 {{< /programming-lang-wrapper >}}
 
-### Agente {#agent}
+### Agent {#agent}
 
-Para enviar métricas históricas con el Agente, asegúrese de tener instalada la versión 7.40.0 o posterior del Agente. Esta versión incluye una interfaz actualizada de DogStatsD, que soporta **Java**, **GoLang** y **.NET**. Esto le permite enviar puntos métricos retrasados a través del Agente.
+Para enviar métricas históricas con el Agent, asegúrese de tener instalada la versión 7.40.0 o posterior del Agent. Esta versión incluye una interfaz de DogStatsD actualizada, que es compatible con **Java**, **GoLang** y **.NET**. Esto le permite enviar puntos de métricas retrasados a través del Agent.
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
@@ -452,47 +449,48 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## Latencia de Ingesta de Métricas Históricas {#historical-metrics-ingestions-latency}
+## Latencia de Historical Metrics Ingestion {#historical-metrics-ingestions-latency}
 
-La Ingesta de Métricas Históricas tiene una latencia variable dependiendo de cuán atrás en el tiempo estén las marcas de tiempo de sus métricas.
+Historical Metrics Ingestion tiene una latencia variable según qué tan atrás en el pasado estén las marcas de tiempo de sus métricas.
 
-| Métrica Retrasada por:   | Latencia de Ingesta                         |
+| Métrica retrasada por:   | Latencia de ingesta                         |
 |----------------------|-------------------------------------------|
-| 1-12 horas           | Ingesta Casi en Tiempo Real (máximo 1 hora) |
+| 1-12 horas           | Ingesta casi en tiempo real (1 hora máximo) |
 | 12 horas - 30 días   | Hasta 14 horas de latencia                    |
 | Más de 30 días         | Más de 14 horas de latencia                     |
 
-## Facturación de Ingesta de Métricas Históricas {#historical-metrics-ingestion-billing}
+## Facturación de Historical Metrics Ingestion {#historical-metrics-ingestion-billing}
 
-Las métricas históricas se cuentan y facturan como métricas personalizadas indexadas. Las métricas personalizadas facturables se determinan por la **marca de tiempo de las métricas enviadas**, independientemente de si tienen una marca de tiempo de hoy o de hace 15 meses. Siempre que esa combinación de nombres de métrica y valor de etiqueta esté reportando activamente **cualquier** valor (independientemente de la marca de tiempo), se consideraría activa en la hora en que fue enviada. 
+Las métricas históricas se cuentan y facturan como Custom Metrics indexadas. Las Custom Metrics facturables se determinan mediante la **marca de tiempo de las métricas enviadas**, independientemente de si tienen una marca de tiempo de hoy o de hace 15 meses. Siempre que esa combinación de nombre de métrica y valor de etiqueta esté reportando activamente **cualquier** valor (independientemente de la marca de tiempo), se consideraría activa en la hora en que se envió. 
 
 El siguiente ejemplo asume:
-- 3000 combinaciones únicas de etiqueta-valor
+- 3000 combinaciones únicas de valor de etiqueta
 - 1500 métricas en tiempo real
 - 1500 métricas históricas 
 - 720 horas en el mes (30 días)
-- Costo de métrica personalizada de $5 por cada 100 métricas
+- Costo de las Custom Metrics de $5 por cada 100 métricas
 
 $(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
-Realice un seguimiento de sus métricas históricas indexadas a través de la sección Resumen de Uso de la [página de Plan y Uso][4].
+Realice un seguimiento de sus métricas históricas indexadas en la sección Usage Summary de la [página Plan and Usage][4].
 
-{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Sección Resumen de Uso de la página de Plan y Uso, que muestra tanto métricas personalizadas indexadas como métricas históricas indexadas" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Sección Usage Summary de la página Plan and Usage, que muestra tanto las Custom Metrics indexadas como las métricas históricas indexadas" style="width:100%;" >}}
 
-Para más información, consulte la documentación de [facturación de Métricas Personalizadas][3].
+Para obtener más información, consulte la documentación de [facturación de Custom Metrics][3].
 
-### Facturación bajo el precio de Nombre de Métrica {#billing-under-metric-name-pricing}
+### Facturación según el modelo de precios de Metric Name {#billing-under-metric-name-pricing}
 
-Si su organización utiliza [precio de Nombre de Métrica][5] en lugar de precios por cardinalidad, la facturación de HMI es diferente. El uso de HMI se calcula en función del tiempo de ingestión en lugar de la marca de tiempo original de la métrica. Cada punto de datos de HMI contribuye tanto al volumen ingerido como al volumen indexado.
+Si su organización utiliza el [modelo de precios de Metric Name][5] en lugar del modelo de precios por cardinalidad, la facturación de HMI es diferente. El uso de HMI se calcula en función del tiempo de ingesta en lugar de la marca de tiempo original de la métrica. Cada punto de datos de HMI contribuye tanto al volumen ingerido como al indexado.
 
-Para detalles sobre el modelo de precios de Nombre de Métrica, consulte [Precios de Nombre de Métrica para Métricas Personalizadas][5].
+Para obtener detalles sobre el modelo de precios de Metric Name, consulte [Metric Name Pricing para Custom Metrics][5].
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /es/metrics/#submit-metrics
 [3]: /es/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /es/account_management/billing/metric_name_pricing/
+[6]: /es/account_management/rbac/permissions/#metrics

@@ -302,6 +302,7 @@ Utilice [Server SDK Configuration Sources][6] como referencia canónica para la 
 - [Configure la entrega sin agente][9], incluyendo el sondeo, el tiempo de espera de la solicitud y los ajustes del punto de conexión
 - [Utilice un punto de conexión sin agente personalizado][7] para pruebas avanzadas, desarrollo local o un proxy gestionado por el operador
 - [Utilice Remote Configuration del Agent][10] para conservar la entrega gestionada por el Agent
+- [Inicie el Agent antes de iniciar la aplicación][12] cuando utilice Agent Remote Configuration
 - [Migre una configuración de Remote Configuration existente][8] y elimine el ajuste `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` obsoleto
 
 En el modo sin agente, Node.js utiliza un relé de telemetría local compatible cuando está disponible. Envía eventos de exposición a experimentos directamente cuando no hay un relé compatible disponible. Para entornos serverless sin Agent, puede utilizar [`serverless-init`][11] como relé de telemetría local.
@@ -383,3 +384,4 @@ El fragmento anterior utiliza Vitest por su compatibilidad de primer nivel con E
 [9]: /es/feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [10]: /es/feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /es/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /es/feature_flags/concepts/configuration_sources/#agent-availability

@@ -548,6 +548,13 @@
       "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
+  "CreateTerraformCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an HCP Terraform persona mapping returns \"Created\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -902,6 +909,13 @@
       "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
     }
   ],
+  "CreateBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create bandit returns \"Created\" response"
+    }
+  ],
   "CreateExperimentMetricGroup": [
     {
       "group": "experiments",
@@ -963,6 +977,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
+  "PatchBandit": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update bandit returns \"OK\" response"
     }
   ],
   "UpdateExperimentAnalysisPlanAttributes": [
@@ -1033,6 +1054,16 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3184074211",
+      "description": "Create an environment with full evaluation data false returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2722766232",
+      "description": "Create an environment with full evaluation data true returns \"Created\" response"
     }
   ],
   "UpdateSavedFilterAttributes": [
@@ -1087,6 +1118,28 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
+  "UpdateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_681909188",
+      "description": "Update an environment to disable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_169745239",
+      "description": "Update an environment to enable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_628630684",
+      "description": "Update an environment to preserve disabled full evaluation data when omitted returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4250936367",
+      "description": "Update an environment to preserve enabled full evaluation data when omitted returns \"OK\" response"
     }
   ],
   "UpdateAllocationsForFeatureFlagInEnvironment": [
@@ -2047,6 +2100,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_989273865",
+      "description": "Validate an observability pipeline with CrowdStrike FDR source returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1785209526",
       "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
     },
@@ -2117,6 +2175,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_33892008",
+      "description": "Validate an observability pipeline with named and unnamed parse grok include rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_3928499240",
       "description": "Validate an observability pipeline with parse grok processor include rules returns \"OK\" response"
     },
@@ -2158,6 +2221,13 @@
       "group": "okta_integration",
       "suffix": "",
       "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
+  "CreateOnCallPageComment": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create On-Call Page comment returns \"No Content\" response"
     }
   ],
   "CreateOnCallEscalationPolicy": [

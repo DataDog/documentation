@@ -3,60 +3,61 @@ aliases:
 - /es/continuous_integration/guides/code_coverage/
 - /es/continuous_integration/integrate_tests/code_coverage/
 - /es/continuous_integration/tests/code_coverage/
-description: Aprende a informar y utilizar la cobertura de código en Datadog.
+description: Aprenda a reportar y utilizar Code Coverage en Datadog.
 further_reading:
 - link: https://www.datadoghq.com/blog/gitlab-source-code-integration
   tag: Blog
-  text: Soluciona los problemas más rápidamente con la integración del código source
-    (fuente) de GitLab en Datadog
+  text: Resuelva problemas más rápido con la integración de GitLab Source Code en
+    Datadog
 - link: /tests
   tag: Documentación
-  text: Más información sobre Test Optimization
+  text: Aprenda sobre Test Optimization
 - link: /monitors/types/ci
   tag: Documentación
-  text: Más información sobre CI Monitors
+  text: Obtenga información sobre los monitores de CI.
 title: Code Coverage en Datadog
 ---
+<div class="alert alert-warning">
+Esta función de Test Optimization es heredada. Utilice el nuevo producto dedicado <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> en su lugar.
+</div>
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-Esta función de Test Optimization estará obsoleta y será sustituida por un nuevo producto exclusivo para la <a href="https://docs.datadoghq.com/code_coverage/">cobertura de código</a>. Inscríbete para la vista previa.
-{{< /callout >}}
+## Descripción general {#overview}
 
-## Información general
+Code Coverage mide el porcentaje total de código que ejercita un módulo o una sesión.
 
-La cobertura de código es una medida del porcentaje total de cobertura de código que ejerce un módulo o sesión.
+Asegúrese de que [Test Optimization][1] ya esté configurado para su lenguaje de programación.
 
-Asegúrate de que [Test Optimization][1] ya está configurado para tu lenguaje.
-
-## Informe de cobertura de código
+## Reporte Code Coverage {#report-code-coverage}
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility}
 
 * `dd-trace>=4.45.0` y `dd-trace>=5.21.0`.
-* `jest>=24.8.0`, sólo cuando se ejecuta con `jest-circus`.
+* `jest>=24.8.0`, solo cuando se ejecuta con `jest-circus`.
 * `mocha>=5.2.0`.
 * `cucumber-js>=7.0.0`.
 * `vitest>=2.0.0`.
 
 <div class="alert alert-danger">
-  <strong>Nota</strong>: El rastreador de DataDog no genera cobertura de código. Si tus tests se ejecutan con la cobertura de código habilitada, <code>dd-trace</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
+  <strong>Nota</strong>: El DataDog Tracer no genera datos de Code Coverage. Si sus pruebas se ejecutan con Code Coverage habilitado, <code>dd-trace</code> lo reporta bajo la <code>test.code_coverage.lines_pct</code> etiqueta para sus sesiones de prueba automáticamente.
 </div>
 
-#### Mocha/Cucumber-js
+#### Mocha/Cucumber-js {#mochacucumber-js}
 
-Sólo se admite la cobertura de código [`Istanbul`][1] para `mocha` y `cucumber-js`.
+Solo se admite Code Coverage de [`Istanbul`][1] para `mocha` y `cucumber-js`.
 
-Para informar de la cobertura total del código de tus sesiones de test de `mocha` y `cucumber-js`, instala [`nyc`][2] y envuelve tus comandos de test:
+Para reportar el Code Coverage total de sus sesiones de prueba `mocha` y `cucumber-js`, instale [`nyc`][2] y ejecute sus comandos de prueba mediante esa herramienta:
 
-1. Instala `nyc`:
+1. Instale `nyc`:
+
 ```
 npm install --save-dev nyc
 ```
 
-2. Envuelve tus comandos de test con `nyc`:
+2. Ejecute sus comandos de prueba mediante `nyc`:
+
 ```json
 {
   "scripts": {
@@ -66,8 +67,8 @@ npm install --save-dev nyc
 }
 ```
 
-#### Jest
-Jest incluye Istanbul por defecto, por lo que no es necesario instalar `nyc`. Basta con pasar `--coverage`:
+#### Jest {#jest}
+Jest incluye Istanbul de forma predeterminada, por lo que no necesita instalar `nyc`. Simplemente pase `--coverage`:
 
 ```json
 {
@@ -79,8 +80,8 @@ Jest incluye Istanbul por defecto, por lo que no es necesario instalar `nyc`. Ba
 
 El único [`coverageProvider`][3] admitido es `babel`, que es el predeterminado.
 
-#### Vitest
-Vitest requiere dependencias adicionales para ejecutarse con cobertura de código. Consulta [documentación de vitest][4] para más información. Una vez instaladas las dependencias, pasa `--coverage` a tu comando de test:
+#### Vitest {#vitest}
+Vitest requiere dependencias adicionales para ejecutarse con Code Coverage. Consulte la [documentación de vitest][4] para obtener más información. Una vez instaladas las dependencias, pase `--coverage` a su comando de prueba:
 
 ```json
 {
@@ -90,7 +91,8 @@ Vitest requiere dependencias adicionales para ejecutarse con cobertura de códig
 }
 ```
 
-Después de modificar tus comandos de test, ejecuta tus tests con el nuevo comando `coverage`:
+Después de modificar sus comandos de prueba, ejecute sus pruebas con el nuevo comando `coverage`:
+
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
@@ -104,20 +106,21 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 {{% tab ".NET" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-1}
 * `dd-trace>=2.31.0`.
 
-Cuando la cobertura del código está disponible, el rastreador de Datadog (v2.31.0 o posterior) informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando Code Coverage está disponible, el trazador de Datadog (v2.31.0 o posterior) lo informa bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Si utilizas [Coverlet][1] para calcular la cobertura del código, indica la ruta del archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en los formatos OpenCover o Cobertura. Alternativamente, puedes activar el cálculo de cobertura de código integrado en el rastreador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
+Si utiliza [Coverlet][1] para calcular Code Coverage, indique la ruta del archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en formato OpenCover o Cobertura. Alternativamente, puede habilitar el cálculo de Code Coverage integrado del trazador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
 
-**Nota**: `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` solo se utiliza cuando el comando instrumentado por `dd-trace (traza) ci run` es `dotnet test`, `dotnet vstest` o `vstest.console`. Por ejemplo, los resultados de la variable se ignoran cuando se ejecuta `dd-trace ci run -- coverlet TestAssembly.dll --target dotnet --targetargs "test TestAssembly.dll"`.
+**Nota**: `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` solo se utiliza cuando el comando instrumentado por `dd-trace ci run` es `dotnet test`, `dotnet vstest` o `vstest.console`. Por ejemplo, los resultados en la variable se ignoran al ejecutar `dd-trace ci run -- coverlet TestAssembly.dll --target dotnet --targetargs "test TestAssembly.dll"`.
 
-### Opciones avanzadas
+### Opciones avanzadas {#advanced-options}
 
-La cobertura de código incorporada en el rastreador Datadog es compatible con las opciones `Coverlet` y `VS Code Coverage` a través del archivo `.runsettings`.
+La cobertura de código integrada del Datadog Tracer tiene soporte para las opciones `Coverlet` y `VS Code Coverage` a través del archivo `.runsettings`.
 
-#### Estructura del archivo
+#### Estructura de archivos {#file-structure}
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
@@ -134,57 +137,58 @@ La cobertura de código incorporada en el rastreador Datadog es compatible con l
 </RunSettings>
 ```
 
-#### Opciones de Coverlet
+#### Opciones de Coverlet {#coverlet-options}
 
 | Opción                   | Resumen                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ExcludeByAttribute       | Excluir métodos, clases o ensamblados decorados con atributos de la cobertura de código.                                                                                                                |
-| ExcludeByFile            | Excluir archivos fuente específicos de la cobertura de código.                                                                                                                |
-| Exclude                  | Excluir del análisis de cobertura de código mediante expresiones de filtro.                                                                                                  |
+| ExcludeByAttribute       | Excluya métodos, clases o ensamblados decorados con atributos de la cobertura de código.                                                                                                                |
+| ExcludeByFile            | Excluya archivos fuente específicos de la cobertura de código.                                                                                                                |
+| Exclude                  | Excluya del análisis de cobertura de código mediante expresiones de filtro.                                                                                                  |
 
-##### Atributos
+##### Atributos {#attributes}
 
-Puedes excluir un método, una clase entera o un ensamblado de la cobertura de código creando y aplicando el atributo `ExcludeFromCodeCoverage` presente en el espacio de nombres `System.Diagnostics.CodeAnalysis`.
+Puede excluir un método, una clase completa o un ensamblado de la cobertura de código creando y aplicando el atributo `ExcludeFromCodeCoverage` presente en el espacio de nombres `System.Diagnostics.CodeAnalysis`.
 
-Excluir atributos adicionales con la propiedad `ExcludeByAttribute` y el nombre corto del atributo (el nombre del tipo sin el espacio de nombres).
+Excluya atributos adicionales con la propiedad `ExcludeByAttribute` y el nombre corto del atributo (el nombre del tipo sin el espacio de nombres).
 
-##### Archivos fuente
+##### Archivos fuente {#source-files}
 
-Excluye archivos fuente específicos de la cobertura de código con la propiedad `ExcludeByFile`.
+Excluya archivos fuente específicos de la cobertura de código con la propiedad `ExcludeByFile`.
 
-* Utiliza una o varias rutas, separadas por comas.
-* Utiliza la ruta del archivo o directorio con un comodín (`*`), por ejemplo: `dir1/*.cs`.
+* Utilice una o varias rutas, separadas por comas.
+* Utilice la ruta del archivo o la ruta del directorio con un comodín (`*`), por ejemplo: `dir1/*.cs`.
 
-##### Filtros
+##### Filtros {#filters}
 
-Los filtros proporcionan un control preciso sobre lo que se excluye utilizando **expresiones de filtro** con la siguiente sintaxis:
+Los filtros proporcionan un control preciso sobre lo que se excluye mediante **expresiones de filtro** con la siguiente sintaxis:
 
 `[<ASSEMBLY_FILTER>]<TYPE_FILTER>`
 
-Se admiten **comodines**:
+Se admiten los **comodines**:
 
 * `*` => coincide con cero o más caracteres
 * `?` => el carácter prefijado es opcional
 
 **Ejemplos**:
 
-* `[*]*` => excluye todos los tipos en todos los ensamblajes (no se instrumenta nada)
-* `[coverlet.*]Coverlet.Core.Coverage` => excluye la clase `Coverage` del espacio de nombres `Coverlet.Core` perteneciente a cualquier ensamblaje que coincida con `coverlet.*` (por ejemplo, `coverlet.core`)
-* `[*]Coverlet.Core.Instrumentation.*` => Excluye todos los tipos pertenecientes al espacio de nombres `Coverlet.Core.Instrumentation` en cualquier ensamblaje
-* `[coverlet.*.tests?]*` => excluye todos los tipos en cualquier ensamblaje que empiecen por `coverlet.` y terminen por `.test` o `.tests` (el `?` hace que `s` sea opcional)
-* `[coverlet.*]*,[*]Coverlet.Core*\` => excluye los ensamblajes que coincidan con `coverlet.*` y excluye todos los tipos pertenecientes al espacio de nombres `Coverlet.Core` en cualquier ensamblaje
+* `[*]*` => Excluye todos los tipos en todos los ensamblados (no se instrumenta nada)
+* `[coverlet.*]Coverlet.Core.Coverage` => Excluye la clase `Coverage` en el espacio de nombres `Coverlet.Core` que pertenece a cualquier ensamblado que coincida con `coverlet.*` (por ejemplo, `coverlet.core`)
+* `[*]Coverlet.Core.Instrumentation.*` => Excluye todos los tipos que pertenecen al espacio de nombres `Coverlet.Core.Instrumentation` en cualquier ensamblado
+* `[coverlet.*.tests?]*` => Excluye todos los tipos en cualquier ensamblado que comience con `coverlet.` y termine con `.test` o `.tests` (el `?` hace que el `s` sea opcional)
+* `[coverlet.*]*,[*]Coverlet.Core*\` => Excluye los ensamblados que coinciden con `coverlet.*` y excluye todos los tipos que pertenecen al espacio de nombres `Coverlet.Core` en cualquier ensamblado
 
-#### Opciones de cobertura de código VS
+#### Opciones de cobertura de código de VS {#vs-code-coverage-options}
 
 
-Consulta [Personalizar el análisis de cobertura de código][2] en la documentación de Microsoft para obtener información adicional.
+Consulte [Personalizar el análisis de cobertura de código][2] en la documentación de Microsoft para obtener información adicional.
 
 | Opción                   | Resumen                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Attributes\Exclude       | Excluye métodos, clases o ensamblados decorados con atributos de la cobertura de código.                                                                                                                |
-| Sources\Exclude          | Excluir archivos fuente específicos de la cobertura de código.                                                                                                                |
+| Attributes\Exclude       | Excluye de la cobertura de código métodos, clases o ensamblados decorados con atributos.                                                                                                                |
+| Sources\Exclude          | Excluye archivos fuente específicos de la cobertura de código.                                                                                                                |
 
-#### Ejemplo de Runsettings
+#### Ejemplo de Runsettings {#runsettings-example}
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
@@ -222,17 +226,17 @@ Consulta [Personalizar el análisis de cobertura de código][2] en la documentac
 {{% /tab %}}
 {{% tab "Java" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-2}
 * `dd-trace-java >= 1.24.2`.
 
-Cuando la cobertura de código está disponible, el rastreador de Datadog informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando la cobertura de código está disponible, el Datadog Tracer la reporta bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-[Jacoco][1] es compatible con la biblioteca de cobertura de código.
+[Jacoco][1] es compatible como biblioteca de cobertura de código.
 
-Si tu proyecto ya tiene Jacoco configurado, el rastreador de Datadog lo instrumenta e informa los datos de cobertura a Datadog automáticamente.
+Si su proyecto ya tiene configurado Jacoco, el Datadog Tracer lo instrumenta y reporta los datos de cobertura a Datadog automáticamente.
 
-De lo contrario, puedes configurar el rastreador para añadir Jacoco a tus ejecuciones de tests en tiempo de ejecución.
-Utiliza la variable de entorno `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` para especificar qué [versión de Jacoco][2] deseas que se inyecte (por ejemplo: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
+De lo contrario, puede configurar el SDK para agregar Jacoco a sus ejecuciones de prueba en tiempo de ejecución.
+Utilice la variable de entorno `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` para especificar qué [versión de Jacoco][2] desea que se inyecte (por ejemplo: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
 
 [1]: https://www.eclemma.org/jacoco/
@@ -240,7 +244,7 @@ Utiliza la variable de entorno `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` para espe
 {{% /tab %}}
 {{% tab "Python" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-3}
 
 * `dd-trace>=2.5.0`.
 * `Python>=3.7`.
@@ -248,36 +252,41 @@ Utiliza la variable de entorno `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` para espe
 * `pytest>=3.0.0`.
 * `pytest-cov>=2.7.0`.
 * `unittest>=3.8`.
-* Sólo se admiten las coberturas de código [`coverage.py`][1] y [`pytest-cov`][2].
+* Solo se admite la cobertura de código de [`coverage.py`][1] y [`pytest-cov`][2].
 
 
-Cuando los tests se instrumentan con [`coverage.py`][1] o [`pytest-cov`][2], el rastreador de Datadog informa automáticamente de la cobertura de código bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando las pruebas se instrumentan con [`coverage.py`][1] o [`pytest-cov`][2], el Datadog Tracer reporta automáticamente la cobertura de código bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Para informar de la cobertura total de código de tus sesiones de test con [`coverage.py`][1], sigue estos pasos:
+Para informar la cobertura de código total de sus sesiones de prueba con [`coverage.py`][1], siga estos pasos:
 
-1. Instala `coverage`:
+1. Instale `coverage`:
+
 ```
 python3 -m pip install coverage
 ```
 
-2. Ejecuta tu test con el nuevo comando `coverage`:
+2. Ejecute su prueba con el nuevo comando `coverage`:
+
 ```
 DD_ENV=ci DD_SERVICE=my-python-service coverage run -m pytest
 ```
 
-Alternativamente, para informar de la cobertura total de código de tus sesiones de test con [`pytest-cov`][2], sigue estos pasos:
+Alternativamente, para informar la cobertura de código total de sus sesiones de prueba con [`pytest-cov`][2], siga estos pasos:
 
-1. Instala `pytest`:
+1. Instale `pytest`:
+
 ```
 python3 -m pip install pytest
 ```
 
-2. Instala `pytest-cov`:
+2. Instale `pytest-cov`:
+
 ```
 python3 -m pip install pytest-cov
 ```
 
-3. Ejecuta tu test añadiendo el indicador `--cov` a tu comando `pytest`:
+3. Ejecute su prueba añadiendo la opción `--cov` a su comando `pytest`:
+
 ```
 DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 ```
@@ -287,111 +296,111 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-4}
 
 * `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
 <div class="alert alert-danger">
-  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se con la cobertura de código habilitada, <code>datadog-ci-rb</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
+  <strong>Nota</strong>: La biblioteca de Datadog no genera la cobertura de código total. Si sus pruebas se ejecutan con la cobertura de código habilitada, <code>datadog-ci-rb</code> la reporta bajo la <code>test.code_coverage.lines_pct</code> etiqueta para sus sesiones de prueba automáticamente.
 </div>
 
-Si tu proyecto tiene configurado [simplecov][1], la biblioteca satadog-ci-rb lo instrumenta e informa los datos de cobertura a Datadog automáticamente bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Si su proyecto tiene configurado [simplecov][1], la biblioteca datadog-ci-rb lo instrumenta e informa los datos de cobertura a Datadog automáticamente bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Esta función está activada por defecto. Utiliza la variable de entorno `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED` para desactivar esta función (por ejemplo: `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED=0`).
+Esta función está habilitada de forma predeterminada. Utilice la variable de entorno `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED` para deshabilitar esta función (por ejemplo: `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATION_ENABLED=0`).
 
 [1]: https://github.com/simplecov-ruby/simplecov
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-5}
 
 * `go test -cover`
 
 <div class="alert alert-danger">
-  <strong>Nota</strong>: La biblioteca de DataDog no genera cobertura total de código. Si tus tests se ejecutan con la cobertura de código habilitada, <code>dd-trace-go</code> lo informa de modo automático en la tag (etiqueta) <code>test.code_coverage.lines_pct</code> para tus sesiones de test.
+  <strong>Nota</strong>: La biblioteca de Datadog no genera la cobertura de código total. Si sus pruebas se ejecutan con la cobertura de código habilitada, <code>ddtest instrument</code> la reporta bajo la <code>test.code_coverage.lines_pct</code> etiqueta para sus sesiones de prueba automáticamente.
 </div>
 
-Si tus tests se ejecutan con el indicador `-cover`, la biblioteca de Datadog lo instrumenta y automáticamente reporta los datos de cobertura a Datadog bajo la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Si sus pruebas se ejecutan con la opción `-cover`, `ddtest instrument` reporta automáticamente los datos de cobertura a Datadog bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba. Cuando `go test` ejecuta más de un paquete, establezca también `-coverprofile`, porque el total de la sesión proviene de ese perfil.
 
 {{% /tab %}}
 
 {{% tab "Swift" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-6}
 * `dd-sdk-swift-testing>=2.5.3`.
 * `Xcode>=14.3`.
 
-Cuando la cobertura de código está activada, el rastreador de Datadog informa de ella en la etiqueta `test.code_coverage.lines_pct` para tus sesiones de test.
+Cuando la cobertura de código está habilitada, Datadog Tracer la reporta bajo la etiqueta `test.code_coverage.lines_pct` para sus sesiones de prueba.
 
-Para habilitar la cobertura de código en proyectos Xcode puedes seguir esta guía de Apple: [Habilitar la cobertura de código en tu plan de tests][1].
+Para habilitar la cobertura de código para proyectos de Xcode, puede seguir esta guía de Apple: [Habilitar la cobertura de código en su plan de prueba][1].
 
-Para los tests SPM, añade el parámetro `--enable-code-coverage` a tu invocación `swift test`.
+Para pruebas de SPM, agregue el parámetro `--enable-code-coverage` a su invocación de `swift test`.
 
 [1]: https://developer.apple.com/documentation/xcode/determining-how-much-code-your-tests-cover#Enable-code-coverage-in-your-test-plan
 {{% /tab %}}
 
-{{% tab "JUnit Report Uploads" %}}
+{{% tab "Cargas de informes de JUnit" %}}
 
-### Compatibilidad
+### Compatibilidad {#compatibility-7}
 * `datadog-ci>=2.17.2`.
 
-Puedes cargar un valor de porcentaje de cobertura de código cuando utilices la carga de informes JUnit:
+Puede cargar un valor de porcentaje de cobertura de código al usar cargas de informes JUnit:
 
 ```shell
 datadog-ci junit upload --service <service_name> --report-measures=test.code_coverage.lines_pct:85 <path>
 ```
 
-En este ejemplo, `85` es el porcentaje de líneas cubiertas por tus tests y debe generarse con una herramienta diferente.
+En este ejemplo, `85` es el porcentaje de líneas cubiertas por sus pruebas y debe generarse con una herramienta diferente.
 
-El informe de cobertura de código debe generarse en un proceso diferente, de lo contrario las cargas de informes JUnit no generarán informes de cobertura de código. El nombre de la métrica informada debe ser `test.code_coverage.lines_pct`.
+El informe de cobertura de código debe generarse en un proceso diferente; de lo contrario, las cargas de informes JUnit no generarán informes de cobertura de código. El nombre de la métrica reportada debe ser `test.code_coverage.lines_pct`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Cobertura del código en gráficos
+## Grafique la cobertura de código {#graph-code-coverage}
 
-La cobertura de código informada se reporta como `@test.code_coverage.lines_pct`, que representa el porcentaje total en la faceta, y puede ser graficada como cualquier otra faceta de medida en el CI Visibility Explorer.
+La cobertura de código reportada se informa como `@test.code_coverage.lines_pct`, lo cual representa el porcentaje total en la faceta, y puede graficarse como cualquier otra faceta de medida en el CI Visibility Explorer.
 
-{{< img src="/continuous_integration/graph_code_coverage.png" text="Cobertura del código en gráficos" style="width:100%" >}}
+{{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
 
-## Pestaña Cobertura de la sesión de test
+## Pestaña de cobertura de Test Session {#test-session-coverage-tab}
 
-La cobertura de código notificada también aparece en la pestaña **Coverage** (Cobertura) en la página de detalles de una sesión de test:
+La cobertura de código reportada también aparece en la pestaña {{< ui >}}Coverage{{< /ui >}} en la página de detalles de una sesión de prueba:
 
-{{< img src="/continuous_integration/code_coverage_tab.png" text="Pestaña Cobertura de código de sesiones de test" style="width:100%" >}}
-
-
-## Exportar el gráfico
-
-Puedes exportar tu gráfico a un [dashboard][2] o a un [notebook][3] y crear un [monitor][4] basado en él haciendo clic en el botón **Export** (Exportar):
-
-{{< img src="/continuous_integration/code_coverage_export_to.png" text="Exportar cobertura de código" style="width:60%" >}}
+{{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
 
-## Añadir un monitor
+## Exportar su gráfico {#export-your-graph}
 
-Recibe alertas cada vez que la cobertura de código de tu servicio caiga por debajo de un determinado umbral creando un [Monitor de CI Test][5]:
+Puede exportar su gráfico a un [dashboard][2] o a un [notebook][3], y crear un [monitor][4] basado en él haciendo clic en el botón {{< ui >}}Export{{< /ui >}}:
 
-{{< img src="/continuous_integration/code_coverage_monitor.png" text="Monitor de cobertura de código" style="width:100%" >}}
-
-## Ver la evolución de la cobertura de código de tu rama
-
-También puedes ver la evolución de la cobertura del código en la página [Información general de la rama][6] y comprobar si está mejorando o empeorando:
-
-{{< img src="/continuous_integration/code_coverage_branch_view.png" text="Cobertura del código de la vista de la rama" style="width:100%" >}}
+{{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:60%" >}}
 
 
-## Mostrar los cambios en la cobertura del código de una solicitud pull
+## Agregar un monitor {#add-a-monitor}
 
-El [comentario de resumen del test][7] de la solicitud pull muestra el cambio en la cobertura del código de una solicitud pull de GitHub en comparación con la rama por defecto.
+Reciba alertas cuando la cobertura de código de su servicio caiga por debajo de cierto umbral creando un [CI Test Monitor][5]:
 
-## Test Impact Analysis y cobertura total del código
+{{< img src="/continuous_integration/code_coverage_monitor.png" text="Code coverage monitor" style="width:100%" >}}
 
-[Test Impact Analysis][8] **no** proporciona automáticamente mediciones de la cobertura total del código, aunque requiere una cobertura del código _por test_ para funcionar.
+## Consulte la evolución de la cobertura de código de su rama {#see-your-branchs-code-coverage-evolution}
 
-## Referencias adicionales
+También puede ver la evolución de la cobertura de código en la [página Branch Overview][6] y verificar si está mejorando o empeorando:
+
+{{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
+
+
+## Muestre el cambio en la cobertura de código de una solicitud de extracción {#show-code-coverage-change-of-a-pull-request}
+
+El [comentario de resumen de prueba][7] de la solicitud de extracción muestra el cambio en la cobertura de código de una solicitud de extracción de GitHub en comparación con la rama predeterminada.
+
+## Test Impact Analysis y cobertura total de código {#test-impact-analysis-and-total-code-coverage}
+
+[Test Impact Analysis][8] **no** proporciona automáticamente mediciones de cobertura total de código, aunque requiere cobertura de código _por prueba_ para funcionar.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

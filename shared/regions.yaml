@@ -85,6 +85,7 @@ regions:
       metrics_endpoint: metrics.agent.datadoghq.com
       metrics_endpoint_private_link: metrics.agent.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.datadoghq.com/v1/metrics"
@@ -176,6 +177,7 @@ regions:
       metrics_endpoint: metrics.agent.us3.datadoghq.com
       metrics_endpoint_private_link: metrics.agent.us3.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.us3.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.us3.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.us3.datadoghq.com/v1/metrics"
@@ -267,6 +269,7 @@ regions:
       metrics_endpoint: metrics.agent.us5.datadoghq.com
       metrics_endpoint_private_link: metrics.agent.us5.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.us5.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.us5.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.us5.datadoghq.com/v1/metrics"
@@ -358,6 +361,7 @@ regions:
       metrics_endpoint: metrics.agent.datadoghq.eu
       metrics_endpoint_private_link: metrics.agent.datadoghq.eu
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.datadoghq.eu/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.datadoghq.eu/v1/logs"
       otlp_metrics_endpoint: "https://otlp.datadoghq.eu/v1/metrics"
@@ -449,6 +453,7 @@ regions:
       metrics_endpoint: metrics.agent.ap1.datadoghq.com
       metrics_endpoint_private_link: beige.intake.ap1.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.ap1.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.ap1.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.ap1.datadoghq.com/v1/metrics"
@@ -540,6 +545,7 @@ regions:
       metrics_endpoint: metrics.agent.ap2.datadoghq.com
       metrics_endpoint_private_link: beige.intake.ap2.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.ap2.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.ap2.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.ap2.datadoghq.com/v1/metrics"
@@ -631,6 +637,7 @@ regions:
       metrics_endpoint: metrics.agent.uk1.datadoghq.com
       metrics_endpoint_private_link: beige.intake.uk1.datadoghq.com
       microsoft_teams_app_name: Datadog
+      opamp_endpoint: "https://opamp.uk1.datadoghq.com/v1/opamp"
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.uk1.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.uk1.datadoghq.com/v1/metrics"
@@ -721,6 +728,7 @@ regions:
       metrics_endpoint: metrics.agent.ddog-gov.com
       metrics_endpoint_private_link: metrics.agent.ddog-gov.com
       microsoft_teams_app_name: Datadog for Government
+      opamp_endpoint: ""
       org_management_max_session_duration: "12 hours"
       otlp_logs_endpoint: "https://otlp.ddog-gov.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.ddog-gov.com/v1/metrics"
@@ -811,6 +819,7 @@ regions:
       metrics_endpoint: metrics.agent.us2.ddog-gov.com
       metrics_endpoint_private_link: metrics.agent.us2.ddog-gov.com
       microsoft_teams_app_name: Datadog for Government
+      opamp_endpoint: ""
       org_management_max_session_duration: "12 hours"
       otlp_logs_endpoint: "https://otlp.us2.ddog-gov.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.us2.ddog-gov.com/v1/metrics"

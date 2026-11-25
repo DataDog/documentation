@@ -54,3 +54,40 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Deprecate `service` in data-streams Topology Map widgets
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41714
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add dashboard archived_at timestamp to schema
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateDashboard
+      - CreatePublicDashboard
+      - DeleteDashboard
+      - DeleteDashboards
+      - DeletePublicDashboard
+      - DeletePublicDashboardInvitation
+      - GetDashboard
+      - GetDashboardUsage
+      - GetPublicDashboard
+      - GetPublicDashboardInvitations
+      - ListDashboards
+      - ListDashboardsUsage
+      - RestoreDashboards
+      - SendPublicDashboardInvitation
+      - UpdateDashboard
+      - UpdatePublicDashboard
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41954
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add optional color palette to scatterplot widget definition

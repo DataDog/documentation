@@ -1,6 +1,6 @@
 ---
 title: Workflow Logic
-description: Add control logic to workflows using if conditions, switch statements, loops, sleep intervals, and branching actions.
+description: Add control logic to workflows using AI decisions, if conditions, switch statements, loops, sleep intervals, and branching actions.
 disable_toc: false
 type: workflows
 is_beta: false
@@ -20,7 +20,21 @@ further_reading:
 <div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
 {{< /site-region >}}
 
-Use [Logic actions][1] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
+Use [Logic actions][1] to add control logic to your workflow. For example, you can make an AI decision, branch from a condition, perform an action iteratively, include a sleep interval, and more.
+
+## Decision
+
+The {{< ui >}}Decision{{< /ui >}} action makes a judgment call that a fixed condition can't. For example, it can pick the team that handles an alert, or rate how severe a support case is. It evaluates one or more questions against the context you provide in {{< ui >}}State{{< /ui >}} and returns an answer for each question. A Decision action times out after 60 seconds and accepts requests up to 1 MiB. Each organization can send up to 100,000 input tokens per minute.
+
+| Question type | Use it to | Answer |
+|---|---|---|
+| `noul` | Answer a yes or no question. | `noul`: the probability that the answer is yes, from 0 to 1 |
+| `choice` | Pick one of several named options. | `choice`: the selected option, plus `probabilities` for each option |
+| `score` | Rate against ordered levels, such as severity from low to critical. | `score`: the numeric score, plus `legend` and `probabilities` for each level |
+
+Use the answers as the input to an [If condition](#if-condition) or a [Switch statement](#switch-statement). Each answer is available at `Steps.<step_name>.answers.<question_name>`. For example, a Switch statement can route on `{{ Steps.Decision.answers.team.choice }}`.
+
+{{< img src="actions/workflows/actions/flow_control/decision.png" alt="The workflow canvas with a Decision action selected and the configuration tab open. The State field holds context from earlier steps, and a choice question asks which memory limit to apply." >}}
 
 ## If condition
 
