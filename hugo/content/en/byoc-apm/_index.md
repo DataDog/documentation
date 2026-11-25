@@ -58,7 +58,7 @@ BYOC APM has two parts:
 BYOC APM moves data along these paths:
 
 - **Spans**: Your application, instrumented with an OpenTelemetry SDK, sends spans to the OpenTelemetry Collector over OTLP. The Collector sends the spans to the Observability Pipelines Worker, which writes them to the traces database cluster in your cloud account.
-- **Trace metrics**: [Trace metrics][4], including RED metrics (request rate, errors, and latency), go to Datadog without processing. As a result, they stay aligned with the spans in your cloud account. Trace metrics supply the data for [service pages][5], [resource pages][6], [Catalog][7] entries, and [monitors on trace metrics][8].
+- **Trace metrics**: The OpenTelemetry Collector sends [trace metrics][4], including RED metrics (request rate, errors, and latency), to the Observability Pipelines Worker. The Worker sends them to Datadog without processing, so the metrics match the spans stored in your cloud account. Trace metrics supply the data for [service pages][5], [resource pages][6], [Catalog][7] entries, and [monitors on trace metrics][8].
 - **Queries**: The APM UI in Datadog queries the traces database cluster in your cloud account. Query results display in Datadog.
 
 ### Sampling and span attributes
@@ -118,8 +118,7 @@ You and Datadog share responsibility for a BYOC APM deployment. The data plane r
 
 | Owner | Responsibilities |
 | --- | --- |
-| You | Operate the data plane: the Kubernetes cluster, cloud infrastructure, deployment, upgrades, and versioning. Pay for the compute and object storage that the data plane uses. |
-| Datadog Operator | Automates deployment and upgrades of the data plane in your Kubernetes cluster. |
+| You | Operate the data plane: the Kubernetes cluster, cloud infrastructure, and versioning. Use the Datadog Operator to automate deployment and upgrades. Pay for the compute and object storage that the data plane uses. |
 | Datadog | Supplies the Datadog Operator and the ingestion pipeline. Runs the control plane and the APM UI. |
 
 ## Further reading
