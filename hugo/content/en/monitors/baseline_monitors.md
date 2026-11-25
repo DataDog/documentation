@@ -114,6 +114,16 @@ metadata:
 
 Datadog adds the tag `cost-center:retail` to every Baseline Monitor of the `shopping-cart` service.
 
+**Note**: Service definitions that use schema v2.2 or earlier do not have a `metadata` section. In those definitions, add the tags to the top-level `tags` list:
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" >}}
+schema-version: v2.2
+dd-service: shopping-cart
+team: shopping-team
+tags:
+  - cost-center:retail
+{{< /code-block >}}
+
 ### Monitor tuning
 
 Datadog checks the threshold of each published Baseline Monitor about **once every 7 days**. Datadog changes the threshold only when:
