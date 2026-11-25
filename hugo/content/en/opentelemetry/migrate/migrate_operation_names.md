@@ -251,9 +251,41 @@ Use processors in your Collector pipeline:
     ```
 
 {{% /tab %}}
+{{% tab "Agent's Collector" %}}
+
+The Agent's Collector includes the `transform` processor, so you can use the same processors as an upstream OpenTelemetry Collector:
+
+- **To replicate `span_name_as_resource_name`**: Use a `transform` processor to explicitly set `operation.name` from the span name. This is generally **not recommended** as it overrides the improved standard logic, but can be used if specific span names are required as operation names.
+    ```yaml
+    processors:
+      transform:
+        trace_statements:
+          - context: span
+            statements:
+            - set(attributes["operation.name"], name)
+    ```
+- **To replicate `span_name_remappings`**: Use a `transform` processor to conditionally set `operation.name`. This allows targeted overrides while letting the default logic handle other cases.
+    ```yaml
+    processors:
+      transform:
+        trace_statements:
+          - context: span
+            statements:
+            # Example: Rename spans named "old_name" to "new_name"
+            - set(attributes["operation.name"], "new_name") where name == "old_name"
+            # Add more specific renaming rules as needed
+    ```
+
+Add `transform` to the `processors` list of your `traces` pipeline. To provide a custom Collector configuration with Helm or the Datadog Operator, see [Configure the OpenTelemetry Collector][2].
+
+[2]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/#configure-the-opentelemetry-collector
+
+{{% /tab %}}
 {{% tab "Datadog Agent" %}}
 
-To `replicate span_name_as_resource_name` or `span_name_remappings`, set the `operation.name` span attribute directly within your instrumented application code before the span is exported. This gives you the most control if you need specific overrides. Consult the OpenTelemetry SDK documentation for your language on how to modify span attributes.
+Follow these steps only if your applications send OTLP data to the Datadog Agent's OTLP endpoint without a Collector. This setup has no Collector pipeline, so the `transform` processor and other OpenTelemetry Transformation Language (OTTL) features aren't available. If you use the Agent's Collector, follow the **Agent's Collector** tab instead.
+
+To replicate `span_name_as_resource_name` or `span_name_remappings`, set the `operation.name` span attribute directly within your instrumented application code before the span is exported. This gives you the most control if you need specific overrides. Consult the OpenTelemetry SDK documentation for your language on how to modify span attributes.
 
 {{% /tab %}}
 {{< /tabs >}}
