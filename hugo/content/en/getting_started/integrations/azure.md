@@ -17,6 +17,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/azure-secretless-authentication/"
       tag: "Blog"
       text: "Avoid Azure secret rotation with secretless authentication"
+    - link: 'https://learn.datadoghq.com/courses/getting-started-azure-integration'
+      tag: 'Learning Center'
+      text: 'Getting Started with the Datadog Azure Integration'
 ---
 
 ## Overview

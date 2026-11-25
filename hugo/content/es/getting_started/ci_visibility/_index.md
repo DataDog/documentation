@@ -161,7 +161,7 @@ Para configurar un monitor que envía alertas sobre tu pipeline CI cuando la dur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/settings
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [2]: /es/continuous_integration/pipelines/custom_commands/
 [3]: /es/continuous_integration/pipelines/custom_tags_and_measures/
 [4]: /es/continuous_integration/pipelines/?tab=githubactions#terminology

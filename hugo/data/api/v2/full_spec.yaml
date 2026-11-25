@@ -231,6 +231,15 @@ components:
       schema:
         maxLength: 256
         type: string
+    AiGatewayModelCanonicalIDQuery:
+      description: Canonical model identifier. It can contain `/`, such as `openai/gpt-4o`.
+      example: openai/gpt-4o
+      in: query
+      name: canonical
+      required: true
+      schema:
+        maxLength: 256
+        type: string
     AiGatewayModelGroupID:
       description: Model group ID, or "default" for the explicit organization-wide access policy.
       example: "7"
@@ -3278,6 +3287,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -6678,20 +6708,15 @@ components:
           example: my-hostname
           type: string
         resource_kind:
-          description: >-
-            The kind of affected resource. Known values are `host`, `deployment`, `cluster`, `cluster_agent`, and `otel`.
-          example: host
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueResourceKind"
         resource_type:
           description: The type of the affected resource. Omitted when empty.
           example: host
           type: string
         severity:
-          description: The severity of the issue. Known values are `low`, `medium`, `high`, and `unknown`.
-          example: high
-          type: string
+          $ref: "#/components/schemas/AgentHealthIssueSeverity"
         state:
-          description: The state of the issue. Only issues with state `open` are returned.
+          description: The state of the issue, such as `open`.
           example: open
           type: string
         tags:
@@ -6761,6 +6786,23 @@ components:
         - type
         - attributes
       type: object
+    AgentHealthIssueResourceKind:
+      description: >-
+        The kind of affected resource. The meaning of `resource_id` depends on this: hostname for `host`, DaemonSet UID for `deployment` (node Agent), cluster UUID for `cluster`, hostname of the host running the Cluster Agent for `cluster_agent`, or OpenTelemetry collector ID for `otel`.
+      enum:
+        - host
+        - deployment
+        - cluster
+        - cluster_agent
+        - otel
+      example: host
+      type: string
+      x-enum-varnames:
+        - HOST
+        - DEPLOYMENT
+        - CLUSTER
+        - CLUSTER_AGENT
+        - OTEL
     AgentHealthIssueResourceType:
       description: The Agent Health issue resource type.
       enum:
@@ -6777,6 +6819,20 @@ components:
       required:
         - data
       type: object
+    AgentHealthIssueSeverity:
+      description: The severity of the issue.
+      enum:
+        - low
+        - medium
+        - high
+        - unknown
+      example: high
+      type: string
+      x-enum-varnames:
+        - LOW
+        - MEDIUM
+        - HIGH
+        - UNKNOWN
     AgentHealthIssueTags:
       description: Tags associated with the issue. Omitted when empty.
       example:
@@ -6837,15 +6893,18 @@ components:
           $ref: "#/components/schemas/AgentHealthIssuesResponseMeta"
       required:
         - data
+        - meta
       type: object
     AgentHealthIssuesResponseMeta:
       description: >-
-        Aggregate counts for the matching Agent Health issues. Present only when `count_by=issue_type` is requested.
+        Pagination metadata for the matching Agent Health issues. Always present. Includes per-issue-type counts only when `count_by=issue_type` is requested.
       example:
         page:
           counts_by_issue_type:
             invalid_config: 8382
             read-only_filesystem_error: 82
+          limit: 100
+          offset: 0
           total_count: 25526
       properties:
         page:
@@ -6854,11 +6913,13 @@ components:
         - page
       type: object
     AgentHealthIssuesResponsePage:
-      description: Counts for the matching Agent Health issues.
+      description: Pagination details and counts for the matching Agent Health issues.
       example:
         counts_by_issue_type:
           invalid_config: 8382
           read-only_filesystem_error: 82
+        limit: 100
+        offset: 0
         total_count: 25526
       properties:
         counts_by_issue_type:
@@ -6870,14 +6931,25 @@ components:
             invalid_config: 8382
             read-only_filesystem_error: 82
           type: object
+        limit:
+          description: The maximum number of issues returned, echoing the requested `page[limit]`.
+          example: 100
+          format: int64
+          type: integer
+        offset:
+          description: The number of issues skipped, echoing the requested `page[offset]`.
+          example: 0
+          format: int64
+          type: integer
         total_count:
           description: The total number of open issues matching the filters.
           example: 25526
           format: int64
           type: integer
       required:
+        - limit
+        - offset
         - total_count
-        - counts_by_issue_type
       type: object
     AgentHealthRemediation:
       description: Remediation for the issue. Omitted when no remediation is available.
@@ -6930,6 +7002,8 @@ components:
           description: Whether the script requires root privileges.
           example: true
           type: boolean
+      required:
+        - requires_root
       type: object
     AgentHealthRemediationStep:
       description: A step to remediate the issue.
@@ -6937,12 +7011,16 @@ components:
         order:
           description: The order in which to perform the step.
           example: 1
-          format: int64
+          format: int32
+          maximum: 2147483647
           type: integer
         text:
           description: The instructions for the step.
           example: Open datadog.yaml
           type: string
+      required:
+        - order
+        - text
       type: object
     AgentHealthRemediationSteps:
       description: Steps to remediate the issue.
@@ -26628,7 +26706,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26661,7 +26740,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ChatGPTEnterpriseIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with ChatGPT Enterprise.
+          description: >-
+            ChatGPT Enterprise admin API key with the **Costs** permission set to **Read** and every other permission category set to **None**. Create it in the [OpenAI Admin Console](https://admin.openai.com/credentials?tab=admin-keys) of your ChatGPT Enterprise workspace, not in the API Platform admin-key console.
           example: your-token
           type: string
           writeOnly: true
@@ -26958,7 +27038,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -26991,7 +27072,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/ClaudeComplianceIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with Claude Compliance.
+          description: >-
+            Anthropic Admin API key (prefix `sk-ant-admin01-`) with the `read:compliance_activities` scope, or a dedicated Compliance Access key (prefix `sk-ant-api01-`). Generate an Admin API key in the Anthropic Console under **Organization settings > API keys**.
           example: your-token
           type: string
           writeOnly: true
@@ -34406,6 +34488,15 @@ components:
           description: Indicates whether feature flag changes require approval in this environment.
           example: false
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The ID of a Custom OIDC provider, formatted as a nonzero UUID. Required when `subject_authorization_state` is `enabled`. If omitted or `null`, no provider is associated. A non-null ID must be registered in the current organization and site, even when subject authorization is disabled. An unregistered ID returns `400 Bad Request`, and an unavailable registry returns `503 Service Unavailable`. Saving does not verify provider eligibility or key publication.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - name
         - queries
@@ -49962,6 +50053,15 @@ components:
           description: Indicates whether feature flag changes require approval in this environment.
           example: false
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The associated Custom OIDC provider ID, or `null` when no provider is associated. Disabled environments may retain a provider association.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
         updated_at:
           description: The timestamp when the environment was last updated.
           example: "2023-01-01T00:00:00Z"
@@ -49978,6 +50078,17 @@ components:
       required:
         - data
       type: object
+    EnvironmentSubjectAuthorizationState:
+      description: >-
+        Whether assignment requests for this environment require subject authorization. Allowed values are `disabled` and `enabled`. Enabling requires a provider ID formatted as a nonzero UUID. If omitted on create, defaults to `disabled`. If omitted on update, the stored state is preserved. `null` is not accepted. This setting applies only to the current Datadog site and is not copied to other sites. Before you enable it, configure an eligible Custom OIDC provider in the same organization and site, and verify that the provider's keys are published. Assignment requests fail when the required verification configuration is unavailable.
+      enum:
+        - disabled
+        - enabled
+      example: disabled
+      type: string
+      x-enum-varnames:
+        - DISABLED
+        - ENABLED
     EnvironmentsPaginationMeta:
       description: Pagination metadata for environments.
       properties:
@@ -62452,6 +62563,14 @@ components:
           type: boolean
         status:
           $ref: "#/components/schemas/FeatureFlagStatus"
+        subject_authorization_oidc_provider_id:
+          description: The environment's associated Custom OIDC provider ID, or `null` when no provider is associated.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - environment_id
         - status
@@ -62517,6 +62636,14 @@ components:
           type: boolean
         status:
           $ref: "#/components/schemas/FeatureFlagStatus"
+        subject_authorization_oidc_provider_id:
+          description: The environment's associated Custom OIDC provider ID, or `null` when no provider is associated.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - environment_id
         - status
@@ -110309,7 +110436,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -110342,7 +110470,8 @@ components:
         auth_type:
           $ref: "#/components/schemas/OpenAICodexIntegrationAccountBearerTokenAuthType"
         token:
-          description: Secret token used to authenticate with OpenAI Codex.
+          description: >-
+            Workspace-scoped OpenAI Admin key with the `codex.enterprise.analytics.read` scope. To collect turn metrics, also grant `chatgpt.enterprise.compliance_logs_platform.workspace_analytics.read` to the same key.
           example: your-token
           type: string
           writeOnly: true
@@ -123482,18 +123611,16 @@ components:
       type: object
     RemediationGroupAttributes:
       description: |-
-        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
-        depending on its grouping definition.
+        Attributes of a remediation group. Each group includes one kind object, depending on its grouping definition.
       properties:
         findings:
           $ref: "#/components/schemas/RemediationGroupFindings"
         grouping_definition_id:
-          description: |-
-            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
+          description: Grouping definition that formed the group, such as `sca.package_update`.
           example: sca.package_update
           type: string
-        image_update:
-          $ref: "#/components/schemas/RemediationGroupImageUpdate"
+        owners:
+          $ref: "#/components/schemas/RemediationGroupOwners"
         package_update:
           $ref: "#/components/schemas/RemediationGroupPackageUpdate"
         title:
@@ -123504,6 +123631,7 @@ components:
         - grouping_definition_id
         - title
         - findings
+        - owners
       type: object
     RemediationGroupCaseRelationship:
       description: Relationship to the case that tracks the group's remediation.
@@ -123552,12 +123680,10 @@ components:
       description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
       enum:
         - library_vulnerability
-        - host_and_container_vulnerability
       example: library_vulnerability
       type: string
       x-enum-varnames:
         - LIBRARY_VULNERABILITY
-        - HOST_AND_CONTAINER_VULNERABILITY
     RemediationGroupFindings:
       description: |-
         Counts of the group's open findings. The counts include every finding in the group, including findings that
@@ -123623,70 +123749,6 @@ components:
         - none
         - unknown
       type: object
-    RemediationGroupImageUpdate:
-      description: |-
-        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
-        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
-        them by `grouping_location`, `remediation_kind`, and `action`.
-      properties:
-        action:
-          description: |-
-            Name of the container image, base image, or package to upgrade. The value comes from the first of these
-            attributes that the findings have: `@remediation.container_image.latest_major.name`,
-            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
-          example: alpine
-          type: string
-        advisory_count:
-          description: Number of distinct values of `@advisory.id` across the group's findings.
-          example: 25
-          format: int64
-          type: integer
-        exploitable_cve_count:
-          description: |-
-            Number of distinct values of `@advisory.id` across the group's findings that have
-            `@risk.has_exploit_available` set to `true`.
-          example: 2
-          format: int64
-          type: integer
-        file_count:
-          description: Number of distinct values of `@code_location.filename` across the group's findings.
-          example: 1
-          format: int64
-          type: integer
-        grouping_location:
-          description: |-
-            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
-            the value is the findings' `@container_image.name`.
-          example: Dockerfile
-          type: string
-        location_is_filename:
-          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
-          example: true
-          type: boolean
-        remediation_kind:
-          description: |-
-            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
-            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
-            `package_update` otherwise.
-          example: image_update
-          type: string
-        target_version:
-          description: |-
-            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
-            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
-            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
-            or when the recommended versions can't be ordered.
-          example: 3.20.3
-          type: string
-      required:
-        - grouping_location
-        - location_is_filename
-        - remediation_kind
-        - action
-        - advisory_count
-        - exploitable_cve_count
-        - file_count
-      type: object
     RemediationGroupInclude:
       description: Related resource to add to `included`.
       enum:
@@ -123695,6 +123757,42 @@ components:
       type: string
       x-enum-varnames:
         - CASE
+    RemediationGroupOwnerList:
+      description: |-
+        Owners of the group's open findings. `items` lists at most 5 owners, the owners of the most findings first,
+        then by name. `total` counts every distinct owner, so the list is cut when `total` is larger than the number
+        of items.
+      properties:
+        items:
+          description: Owners of the most findings in the group, at most 5.
+          example:
+            - "@acme/payments"
+            - "@acme/platform"
+          items:
+            type: string
+          type: array
+        total:
+          description: Number of distinct owners across the group's findings.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - items
+        - total
+      type: object
+    RemediationGroupOwners:
+      description: |-
+        Who should fix the group: the code owners of the group's findings, from their `@git.codeowners` attribute,
+        and their Datadog teams, from their `team` tag. A group with no owners has empty `items` and a `total` of 0.
+      properties:
+        codeowners:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+        teams:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+      required:
+        - codeowners
+        - teams
+      type: object
     RemediationGroupPackageUpdate:
       description: |-
         A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
@@ -135442,6 +135540,137 @@ components:
       x-enum-varnames:
         - DONE
         - TIMEOUT
+    SecurityMonitoringAWSIdentityCenterAWSAccount:
+      description: An integrated AWS account the AWS IAM Identity Center integration reads users from.
+      properties:
+        account_config_id:
+          description: The ID of the AWS account integration configuration.
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        account_id:
+          description: The AWS account ID.
+          example: "111122223333"
+          type: string
+        account_name:
+          description: The name of the AWS account integration.
+          example: management
+          type: string
+        collecting_users:
+          description: Whether AWS IAM Identity Center users were collected from this AWS account.
+          example: false
+          type: boolean
+        resource_collection_enabled:
+          description: Whether resource collection is enabled for this AWS account.
+          example: true
+          type: boolean
+      required:
+        - account_id
+        - account_config_id
+        - account_name
+        - resource_collection_enabled
+        - collecting_users
+      type: object
+    SecurityMonitoringAWSIdentityCenterAWSAccountsAttributes:
+      description: The attributes of the AWS IAM Identity Center AWS account prerequisites.
+      properties:
+        aws_accounts:
+          description: |-
+            The integrated AWS accounts that users are read from, including AWS Organization management accounts
+            and any accounts that users were collected from.
+          items:
+            $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterAWSAccount"
+          type: array
+        has_valid_prerequisite:
+          description: Whether AWS IAM Identity Center users were collected for the organization.
+          example: false
+          type: boolean
+        reason:
+          description: The missing setup step when `has_valid_prerequisite` is `false`.
+          example: Resource collection on an AWS Organization management account is required
+          type: string
+      required:
+        - aws_accounts
+        - has_valid_prerequisite
+      type: object
+    SecurityMonitoringAWSIdentityCenterAWSAccountsData:
+      description: The AWS account prerequisites for the AWS IAM Identity Center integration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterAWSAccountsAttributes"
+        id:
+          description: The ID of the organization the AWS accounts belong to.
+          example: "123456"
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterAWSAccountsResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringAWSIdentityCenterAWSAccountsResourceType:
+      default: aws_identity_center_aws_accounts
+      description: The type of the resource. The value should always be `aws_identity_center_aws_accounts`.
+      enum:
+        - aws_identity_center_aws_accounts
+      example: aws_identity_center_aws_accounts
+      type: string
+      x-enum-varnames:
+        - AWS_IDENTITY_CENTER_AWS_ACCOUNTS
+    SecurityMonitoringAWSIdentityCenterAWSAccountsResponse:
+      description: Response containing the AWS account prerequisites for the AWS IAM Identity Center integration.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterAWSAccountsData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringAWSIdentityCenterIntegrationConfigCreateAttributes:
+      description: |-
+        The attributes of an AWS IAM Identity Center entity context sync configuration to create. The sync reads
+        the users that the AWS integration collects, so it doesn't require any secrets.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: default
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeAWSIdentityCenter"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: AWS IAM Identity Center
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+      type: object
+    SecurityMonitoringAWSIdentityCenterIntegrationConfigUpdateAttributes:
+      description: |-
+        Fields to update on an AWS IAM Identity Center entity context sync configuration. Enabling the sync requires
+        the AWS integration to have collected AWS IAM Identity Center users.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: default
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeAWSIdentityCenter"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: AWS IAM Identity Center (renamed)
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
     SecurityMonitoringAzureAppRegistration:
       description: An Azure App Registration discovered for the organization.
       properties:
@@ -137624,6 +137853,7 @@ components:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
     SecurityMonitoringIntegrationConfigCreateData:
@@ -137775,6 +138005,7 @@ components:
         - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
         - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
     SecurityMonitoringIntegrationConfigUpdateData:
@@ -137840,6 +138071,7 @@ components:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - AWS_IDENTITY_CENTER
         - CROWDSTRIKE
         - SENTINELONE
       example: GOOGLE_WORKSPACE
@@ -137848,8 +138080,17 @@ components:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - AWS_IDENTITY_CENTER
         - CROWDSTRIKE
         - SENTINELONE
+    SecurityMonitoringIntegrationTypeAWSIdentityCenter:
+      description: The source type for an AWS IAM Identity Center entity context sync.
+      enum:
+        - AWS_IDENTITY_CENTER
+      example: AWS_IDENTITY_CENTER
+      type: string
+      x-enum-varnames:
+        - AWS_IDENTITY_CENTER
     SecurityMonitoringIntegrationTypeCrowdStrike:
       description: The source type for a CrowdStrike entity context sync.
       enum:
@@ -162145,6 +162386,15 @@ components:
             Indicates whether feature flag changes require approval in this environment. If omitted, resets to false. Include the existing value to preserve it.
           example: true
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The ID of a Custom OIDC provider, formatted as a nonzero UUID. If omitted, the stored association is preserved. Set to `null` to clear the association, which is allowed only when the resulting `subject_authorization_state` is `disabled`. A new non-null ID must be registered in the current organization and site, even when subject authorization is disabled. An unregistered ID returns `400 Bad Request`, and an unavailable registry returns `503 Service Unavailable`. Omitted, cleared, and unchanged IDs skip this check, including when you enable a retained provider. An ID that matches the stored ID in a different format, such as different letter case, is treated as unchanged. Saving does not verify provider eligibility or key publication.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       type: object
     UpdateEnvironmentData:
       description: Data for updating an environment.
@@ -169372,9 +169622,9 @@ paths:
         (`high`, `medium`, `low`, then other values), then `first_seen_at` descending with
         missing timestamps last, then issue ID ascending.
 
-        Set `count_by=issue_type` to include `meta.page`, where `total_count` is the number of
-        open issues matching the filters and `counts_by_issue_type` holds the per-type counts.
-        `meta` is omitted when `count_by` is not requested.
+        The response always includes `meta.page` with the applied `limit`, `offset`, and
+        `total_count` (the number of open issues matching the filters). Set `count_by=issue_type`
+        to also include `counts_by_issue_type` with per-issue-type counts.
 
         Each filter accepts up to 50 comma-separated exact values of at most 256 characters
         each, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter
@@ -169382,13 +169632,35 @@ paths:
       operationId: ListAgentHealthIssues
       parameters:
         - description: >-
-            Set to `issue_type` to include `meta.page` with `total_count` and per-issue-type counts. If you don't set this parameter, the response omits `meta`. Only `issue_type` is supported.
+            Set to `issue_type` to also include `counts_by_issue_type` in `meta.page` with per-issue-type counts. Pagination metadata is always included. Only `issue_type` is supported.
           example: issue_type
           in: query
           name: count_by
           required: false
           schema:
             $ref: "#/components/schemas/AgentHealthIssuesCountBy"
+        - description: >-
+            The maximum number of issues to return. Defaults to 100, with a minimum of 1 and a maximum of 1000.
+          example: 100
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            default: 100
+            format: int64
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: The number of issues to skip before returning results. Defaults to 0, with a minimum of 0.
+          example: 0
+          in: query
+          name: page[offset]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            minimum: 0
+            type: integer
         - description: |-
             Filter by a comma-separated list of exact `severity` values, up to 50 values
             of at most 256 characters each. Values are combined with OR within this filter and AND across filters.
@@ -169481,6 +169753,8 @@ paths:
                       page:
                         counts_by_issue_type:
                           invalid_config: 8382
+                        limit: 100
+                        offset: 0
                         total_count: 25526
               schema:
                 $ref: "#/components/schemas/AgentHealthIssuesResponse"
@@ -169514,23 +169788,23 @@ paths:
       tags:
         - Agent Health
       x-menu-order: 2
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agenthealth/issues/{issue_id}:
     get:
       description: |-
         Get an Agent Health issue and its available remediation in your organization.
-        Only open issues are returned. The `remediation` attribute is omitted when
-        the issue has no remediation.
+        The `remediation` attribute is omitted when the issue has no remediation.
 
-        Returns `404` if the issue does not exist, is not open, belongs to another
-        organization, or you do not have access to its data. This response does not
-        reveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.
+        Returns `404` if the issue does not exist, belongs to another organization, or
+        you do not have access to its data. This response does not reveal whether the
+        issue exists. Returns `403` if you lack the `hosts_read` permission.
       operationId: GetAgentHealthIssue
       parameters:
         - description: |-
@@ -169582,6 +169856,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AgentHealthIssueResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -169615,9 +169895,6 @@ paths:
         operator: OR
         permissions:
           - hosts_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/agentless_scanning/accounts/aws:
     get:
       description: Fetches the scan options configured for AWS accounts.
@@ -201750,7 +202027,9 @@ paths:
           - feature_flag_environment_config_read
     post:
       description: |-
-        Creates a new environment for organizing feature flags.
+        Creates an environment for organizing feature flags. A non-null subject authorization provider ID
+        must be registered in the current organization and site, even when authorization is disabled. An unknown
+        ID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.
       operationId: CreateFeatureFlagsEnvironment
       requestBody:
         content:
@@ -201785,6 +202064,8 @@ paths:
                           - staging
                           - canary
                         require_feature_flag_approval: false
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000017
                       type: environments
               schema:
@@ -201881,6 +202162,8 @@ paths:
                         queries:
                           - staging
                         require_feature_flag_approval: false
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000018
                       type: environments
               schema:
@@ -201918,14 +202201,14 @@ paths:
         Updates an environment's name, DD_ENV values, and settings.
 
 
-        Every request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.
+        Every request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.
 
         To preserve the current name and DD_ENV values, get the environment first and include those values in the request.
 
 
         Omitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.
 
-        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.
+        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.
       operationId: UpdateFeatureFlagsEnvironment
       parameters:
         - $ref: "#/components/parameters/environment_id"
@@ -201964,6 +202247,8 @@ paths:
                           - production
                           - prod-us
                         require_feature_flag_approval: true
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000019
                       type: environments
               schema:
@@ -201987,6 +202272,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -247537,6 +247828,269 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model:
+    delete:
+      description: >-
+        Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-08-24T12:00:00Z"
+                        enabled: true
+                        model_id_canonical: openai/gpt-4o
+                        model_id_wire: openai/gpt-4o-2024-08-06
+                        provider_id: 42
+                        source: manual
+                        supported_operations:
+                          - OPENAI_CHAT_COMPLETIONS
+                        updated_at: "2026-08-24T12:00:00Z"
+                      id: "101"
+                      type: model-catalog-entries
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelCatalogEntryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Update a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model-pricing:
+    delete:
+      description: >-
+        Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: >-
+        Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.
+      operationId: GetAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: >-
+        Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              custom:
+                summary: Set custom pricing
+                value:
+                  data:
+                    attributes:
+                      pricing_config:
+                        rates:
+                          cache_read_cost_per_mtok: 0.02
+                          cache_write_cost_per_mtok: 0.25
+                          non_cached_input_cost_per_mtok: 0.2
+                          output_cost_per_mtok: 1.0
+                        source:
+                          type: custom
+                        version: 1
+                    id: 7/openai/gpt-4o
+                    type: model-pricing
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelPricingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Set a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 58
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/providers/{provider_id}/models:
     get:
       description: >-
@@ -247707,6 +248261,7 @@ paths:
       description: |-
         Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
         Delete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.
+        A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.
       operationId: DeleteAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247738,7 +248293,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: >-
-        Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247800,7 +248355,7 @@ paths:
   /api/v2/providers/{provider_id}/models/{canonical}/pricing:
     delete:
       description: >-
-        Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: DeleteAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247834,7 +248389,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: >-
-        Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
+        Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
       operationId: GetAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247887,7 +248442,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -250292,8 +250847,6 @@ paths:
         Get the list of Workload Protection agent rules.
 
         Set `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: ListCSMThreatsAgentRules
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityQueryAgentPolicyID"
@@ -250342,8 +250895,6 @@ paths:
         To add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.
 
         This endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: CreateCSMThreatsAgentRule
       requestBody:
         content:
@@ -250417,8 +250968,6 @@ paths:
 
         The rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.
         This action cannot be undone.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: DeleteCSMThreatsAgentRule
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
@@ -250450,8 +250999,6 @@ paths:
     get:
       description: |-
         Get the details of a specific Workload Protection agent rule.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: GetCSMThreatsAgentRule
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
@@ -250504,8 +251051,6 @@ paths:
         See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.
 
         This endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: UpdateCSMThreatsAgentRule
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
@@ -250585,8 +251130,6 @@ paths:
     get:
       description: |-
         Get the list of Workload Protection policies.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: ListCSMThreatsAgentPolicies
       responses:
         "200":
@@ -250619,8 +251162,6 @@ paths:
     post:
       description: |-
         Create a new Workload Protection policy with the given parameters.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: CreateCSMThreatsAgentPolicy
       requestBody:
         content:
@@ -250679,8 +251220,6 @@ paths:
         The download endpoint generates a Workload Protection policy file from your currently active
         Workload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to
         your agents to update the policy running in your environment.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: DownloadCSMThreatsPolicy
       responses:
         "200":
@@ -250710,8 +251249,6 @@ paths:
         Delete a specific Workload Protection policy.
 
         Datadog-managed policies cannot be deleted. This action cannot be undone.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: DeleteCSMThreatsAgentPolicy
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID"
@@ -250736,8 +251273,6 @@ paths:
     get:
       description: |-
         Get the details of a specific Workload Protection policy.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: GetCSMThreatsAgentPolicy
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID"
@@ -250775,8 +251310,6 @@ paths:
       description: |-
         Update a specific Workload Protection policy.
         Returns the policy object when the request is successful.
-
-        **Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.
       operationId: UpdateCSMThreatsAgentPolicy
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityPathAgentPolicyID"
@@ -255095,11 +255628,19 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a RUM-based metric
@@ -255125,7 +255666,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM-based metric
@@ -255172,7 +255717,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM-based metric
@@ -255251,13 +255800,25 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM-based metric
@@ -261154,6 +261715,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -261249,6 +261814,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -261338,6 +261907,10 @@ paths:
     get:
       description: |-
         Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+
+        This endpoint takes the query, sort, and pagination as URL query parameters. `SearchSecurityFindings` (`POST /api/v2/security/findings/search`) accepts the same parameters in a JSON request body and returns the same results, so pick by how you want to send them. Use this endpoint when the query fits easily in a URL. To send the query in a JSON body without URL encoding, use `SearchSecurityFindings` instead. A `meta.page.after` cursor from either endpoint works on the other.
+
+        Use this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.
 
         ### Query Syntax
 
@@ -264589,6 +265162,10 @@ paths:
       description: |-
         Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
 
+        This endpoint takes the query, sort, and pagination in a JSON request body. `ListSecurityFindings` (`GET /api/v2/security/findings`) accepts the same parameters as URL query parameters and returns the same results, so pick by how you want to send them. Use this endpoint to send the query without URL encoding, for example when it has many quotes, parentheses, or spaces. To get the next page, send `meta.page.after` as `data.attributes.page.cursor` in the request body. The `links.next` URL always points to `ListSecurityFindings`, with the query in the URL.
+
+        Use this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.
+
         ### Query Syntax
 
         The API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.
@@ -265397,15 +265974,14 @@ paths:
     get:
       description: |-
         Search the remediation groups of your organization. A remediation group gathers the open security findings
-        that one change fixes, such as updating a package in a repository or upgrading an image.
+        that one change fixes, such as updating a package in a repository.
 
         Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
         group returns:
 
-        | Grouping definition    | Finding type                       | Kind object      |
-        | ---------------------- | ---------------------------------- | ---------------- |
-        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
-        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
+        | Grouping definition  | Finding type            | Kind object      |
+        | -------------------- | ----------------------- | ---------------- |
+        | `sca.package_update` | `library_vulnerability` | `package_update` |
 
         Groups are computed from the attributes of security findings, described in the
         [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
@@ -265485,42 +266061,6 @@ paths:
           content:
             application/json:
               examples:
-                cloud_vm_group_without_case:
-                  summary: A host and container vulnerability group with no case yet
-                  value:
-                    data:
-                      - attributes:
-                          findings:
-                            by_severity:
-                              critical: 1
-                              high: 9
-                              info: 0
-                              low: 10
-                              medium: 20
-                              none: 0
-                              unknown: 0
-                            total: 40
-                          grouping_definition_id: cloudvm.image_update
-                          image_update:
-                            action: alpine
-                            advisory_count: 25
-                            exploitable_cve_count: 2
-                            file_count: 1
-                            grouping_location: Dockerfile
-                            location_is_filename: true
-                            remediation_kind: image_update
-                            target_version: 3.20.3
-                          title: Upgrade alpine to 3.20.3
-                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
-                        relationships:
-                          case:
-                            data:
-                        type: remediation_groups
-                    meta:
-                      page:
-                        number: 1
-                        size: 50
-                        total_filtered_count: 134
                 default:
                   summary: A library vulnerability group with a case, with include=case
                   value:
@@ -265537,6 +266077,16 @@ paths:
                               unknown: 0
                             total: 12
                           grouping_definition_id: sca.package_update
+                          owners:
+                            codeowners:
+                              items:
+                                - "@acme/payments"
+                                - "@acme/platform"
+                              total: 2
+                            teams:
+                              items:
+                                - payments
+                              total: 1
                           package_update:
                             advisory_count: 3
                             ecosystem: npm
@@ -268468,10 +269018,12 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/cloud_workload_security/agent_rules:
     get:
+      deprecated: true
       description: |-
-        Get the list of agent rules.
+        **Note**: This endpoint is deprecated. Use [Get all Workload Protection agent rules](https://docs.datadoghq.com/api/latest/csm-threats/#get-all-workload-protection-agent-rules)
+        instead, on all sites including US1-FED.
 
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
+        Get the list of agent rules.
       operationId: ListCloudWorkloadSecurityAgentRules
       responses:
         "200":
@@ -268506,12 +269058,15 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
+      x-sunset: "2027-11-30"
   /api/v2/security_monitoring/cloud_workload_security/agent_rules/{agent_rule_id}:
     get:
+      deprecated: true
       description: |-
-        Get the details of a specific agent rule.
+        **Note**: This endpoint is deprecated. Use [Get a Workload Protection agent rule](https://docs.datadoghq.com/api/latest/csm-threats/#get-a-workload-protection-agent-rule)
+        instead, on all sites including US1-FED.
 
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
+        Get the details of a specific agent rule.
       operationId: GetCloudWorkloadSecurityAgentRule
       parameters:
         - $ref: "#/components/parameters/CloudWorkloadSecurityAgentRuleID"
@@ -268554,6 +269109,7 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_cws_agent_rules_read
+      x-sunset: "2027-11-30"
   /api/v2/security_monitoring/configuration/critical_assets:
     get:
       description: Get the list of all dynamic severity rules (previously called critical assets).
@@ -268964,6 +269520,55 @@ paths:
         operator: OR
         permissions:
           - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/configuration/integration_config/aws_identity_center/aws_accounts:
+    get:
+      description: |-
+        Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and
+        whether users have been collected from them. Collected users are a prerequisite for creating or enabling the
+        AWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management
+        accounts and any accounts that users were collected from.
+      operationId: GetAWSIdentityCenterAWSAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        aws_accounts:
+                          - account_config_id: 11111111-2222-3333-4444-555555555555
+                            account_id: "111122223333"
+                            account_name: management
+                            collecting_users: false
+                            resource_collection_enabled: true
+                        has_valid_prerequisite: false
+                        reason: AWS IAM Identity Center users collected from an AWS Organization management account are required
+                      id: "123456"
+                      type: aws_identity_center_aws_accounts
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringAWSIdentityCenterAWSAccountsResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - integrations_read
+      summary: Get AWS IAM Identity Center account prerequisites
+      tags: ["Security Monitoring"]
+      x-menu-order: 191
+      x-permission:
+        operator: OR
+        permissions:
+          - integrations_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -295517,7 +296122,7 @@ tags:
   - description: |-
       Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.
 
-      **Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using.
+      **Note**: The `/api/v2/security_monitoring/cloud_workload_security` endpoints are deprecated. Use the `/api/v2/remote_config/products/cws` endpoints on all sites, including US1-FED.
     name: "CSM Threats"
   - description: >-
       View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/).
