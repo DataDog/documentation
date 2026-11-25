@@ -214,7 +214,7 @@ First, [configure the Databricks integration][14] with an account and [grant it 
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
-To limit data transfer and query costs, use a [view][23] that selects only the rows and columns you need.
+To limit data transfer and query costs, use a [view][23] that selects only the rows and columns you need. For expensive queries, consider a materialized view or precomputed table.
 
 #### Troubleshooting
 
