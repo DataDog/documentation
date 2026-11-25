@@ -1,6 +1,6 @@
 ---
 title: On-Demand Packet Capture
-description: Run header-only packet captures on the hosts in a Cloud Network Monitoring connection, then review a Bits summary or download the raw .pcap files.
+description: Run header-only packet captures on the hosts in a Cloud Network Monitoring connection, then review a Bits summary or download the raw `.pcapng` file.
 further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/network_analytics/'
       tag: 'Documentation'
@@ -16,7 +16,7 @@ On-Demand Packet Capture is in Preview. Contact your account manager for access.
 
 ## Overview
 
-Cloud Network Monitoring (CNM) shows when a connection is degraded through metrics such as throughput, latency, TCP retransmits, and resets. To find out why a connection degraded at the packet level, you can run an on-demand packet capture (PCAP) on that connection's hosts directly in Datadog. After the capture completes, Datadog provides a [Bits summary](#bits-summary) of what it observed. You can also download an archive of the raw `.pcapng` files to verify the summary or continue your investigation in tools such as Wireshark.
+Cloud Network Monitoring (CNM) shows when a connection is degraded through metrics such as throughput, latency, TCP retransmits, and resets. To find out why a connection degraded at the packet level, you can run an on-demand packet capture (PCAP) on that connection's hosts directly in Datadog. After the capture completes, Datadog provides a [Bits summary](#bits-summary) of what it observed. You can also download an archive of the raw `.pcapng` file to verify the summary or continue your investigation in tools such as Wireshark.
 
 ### Limitations
 
@@ -54,7 +54,13 @@ A network connection in CNM is an aggregation based on the tags you group by, so
 - Highest retransmits
 - A random sample of the remaining hosts
 
-Datadog selects hosts for each criterion separately. For example, Datadog might select the three hosts with the most resets, the three hosts with the highest failure rates, and the three hosts with the most retransmits. Datadog doesn't rank hosts by a combined score across the three criteria.
+Datadog selects hosts for each criterion separately. For example, Datadog might select the following 25 hosts:
+- 6 hosts with the most resets
+- 6 hosts with the highest failure rates
+- 6 hosts with the most retransmits
+- 7 randomly selected hosts
+
+Datadog doesn't rank hosts by a combined score across the three criteria or show duplicate hosts in the list.
 
 Hosts are labeled by their role in the connection: client, server, or both, depending on the tags used to define the connection.
 
@@ -65,7 +71,7 @@ To view packet capture results:
 1. Navigate to [Network Analytics][1].
 1. Click the {{< ui >}}Packet Capture{{< /ui >}} tab to see a list of packet capture requests.
 1. Click a request to open the side panel for details of the capture.
-1. (Optional) To download the raw packets, click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel. The download is a `.zip` file.
+1. (Optional) To download the raw headers-only packet data, click {{< ui >}}Download .pcap{{< /ui >}} in the capture side panel. The download is a `.gz` file that contains a single `.pcapng` file, which appends the results across all the hosts that are part of the packet capture request.
 
 ### Packet capture request status
 
@@ -93,8 +99,8 @@ The results for each capture include:
 
 - **Metadata**: The connection's client and server tags, the number of hosts, the completion time, and other capture details.
 - **Bits summary**: A plain-language analysis of the capture. See the [Bits summary](#bits-summary) section.
-- **Per-host breakdown**: The findings for each host in the capture.
-- **`.pcap` files**: A `.zip` file of the `.pcap` files from all hosts in the capture. Use the files to analyze raw packets in a third-party tool such as Wireshark, or share them with other users.
+- **Per-host breakdown**: The details for each host in the capture.
+- **`.pcapng` file**: A `.zip` file of the `.pcapng` file from all hosts in the capture. Use the files to analyze raw packets in a third-party tool such as Wireshark, or share them with other users.
 
 #### Bits summary
 
@@ -102,25 +108,24 @@ The Bits summary describes the capture results and labels which findings are dir
 
 Based on packet header data, the summary can identify:
 
-- TCP handshake completion
-- Graceful closes and resets
-- Retransmission and packet-loss patterns
-- Zero-window conditions
-- Out-of-order delivery
-- RTT and latency
-- Signs of asymmetric routing and maximum transmission unit (MTU) issues
-- Traffic volume
+- Connection attempts that get no response or are refused
+- Repeated connection attempts (SYN retries)
+- Connections closed with FIN or reset with RST, and which side sent the packet
+- Handshake time as seen from the client
+- TTL differences that suggest asymmetric routing
+- Connection churn (many short-lived connections)
 
 ## Security and data handling
 
 ### Captured data
 
-Packet capture records only packet header metadata, such as IP addresses, ports, TCP flags, sequence and acknowledgment numbers, window size, and time to live (TTL). The Agent uses a dynamic snap length to read each packet only up to the end of its headers. Payload data is not captured and is not included in the `.pcap` files or the summary.
+Packet capture records only packet header metadata, such as IP addresses, ports, TCP flags, sequence and acknowledgment numbers, window size, and time to live (TTL). The Agent uses a dynamic snap length to read each packet only up to the end of its headers. Payload data is not captured and is not included in the `.pcapng` file or the summary.
 
 ### Access and auditing
 
 - For auditing, each packet capture request records the user who initiated it.
 - Packet captures are visible to everyone in the organization.
+- Users need the `network_connections_read` permission to access CNM pages, including the {{< ui >}}Packet Capture{{< /ui >}} tab and packet capture configuration side panel.
 
 ### Data retention
 
@@ -128,7 +133,7 @@ Datadog retains packet capture data for the following periods:
 
 | Data                                 | Retention |
 |--------------------------------------|-----------|
-| `.pcap` files                        | 15 days   |
+| `.pcapng` file                        | 15 days   |
 | Bits summary and capture metadata    | 90 days   |
 
 ## Further reading
