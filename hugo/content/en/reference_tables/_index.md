@@ -204,7 +204,7 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
-First, [configure the Databricks integration][14] with an account that has read access to the source data.
+First, [configure the Databricks integration][14] with an account and [grant it read access to the source data][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
@@ -212,12 +212,22 @@ First, [configure the Databricks integration][14] with an account that has read 
    - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click {{< ui >}}Add Databricks account{{< /ui >}}.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
+#### Troubleshooting
+
+Data can take a few minutes to populate.
+
+- Check [Databricks ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's read permissions and the source table or view configuration.
+
 [14]: /integrations/databricks/#connect-to-a-new-databricks-workspace
 [16]: https://app.datadoghq.com/reference-tables
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Adatabricks%20service%3Aintegration-reference-table
+[22]: /integrations/databricks/#reference-table-configuration
 
 {{% /collapse-content %}}
 
@@ -269,7 +279,7 @@ Data populates after the scheduled Query Builder query runs. To investigate inge
 
 {{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
 
-First, [configure the Snowflake integration][15] with an account that has read access to the source data.
+First, [configure the Snowflake integration][15] with an account and [grant it read access to the source data][22].
 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
@@ -277,12 +287,13 @@ First, [configure the Snowflake integration][15] with an account that has read a
    - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click {{< ui >}}Add Snowflake account{{< /ui >}}.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}.
+3. Click {{< ui >}}Save{{< /ui >}}. You’ll be redirected to the table’s details page. Data can take a few minutes to populate.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
 [15]: /integrations/snowflake-web/#connect-your-snowflake-account
 [16]: https://app.datadoghq.com/reference-tables
+[22]: /integrations/snowflake-web/#reference-tables
 
 {{% /collapse-content %}}
 
