@@ -6820,31 +6820,31 @@
     "summary": "Get a default inbox rule"
   },
   "DisableSecurityFindingsAutomationDefaultInboxRule": {
-    "description": "Disable a default inbox rule for the current organization.",
+    "description": "Disable a default inbox rule for the current organization.\nA disabled default rule stops adding the findings that match its `rule` to the Security\nInbox, and Datadog removes findings it added from the inbox unless another inbox rule matches them.\nDisable a default rule when it doesn't fit how your organization reviews findings. To add your own\nrules, use `CreateSecurityFindingsAutomationInboxRule`. Only `enabled`\nchanges. Existing findings can take up to two hours to update. To turn it back on, use `EnableSecurityFindingsAutomationDefaultInboxRule`.",
     "summary": "Disable a default inbox rule"
   },
   "EnableSecurityFindingsAutomationDefaultInboxRule": {
-    "description": "Enable a default inbox rule for the current organization.",
+    "description": "Enable a default inbox rule for the current organization.\nAn enabled default rule adds the findings that match its `rule` to the Security Inbox.\nDefault rules are enabled unless the organization disabled them. Only `enabled` changes;\nthe rule's `name`, `rule`, and `action` stay managed by Datadog. Existing findings can take up to two hours to update.\nTo turn it off again, use\n`DisableSecurityFindingsAutomationDefaultInboxRule`.",
     "summary": "Enable a default inbox rule"
   },
   "ListSecurityFindingsAutomationDueDateRules": {
-    "description": "Get all due date rules for the current organization.",
+    "description": "Get all due date rules for the current organization.\nA due date rule sets a remediation due date on the findings that match its `rule`: a number of\ndays per severity, counted from `action.due_from` (when the finding was first seen, or when a\nfix became available).\nThe response lists rules in evaluation order: Datadog checks each finding against the due date\nrules in this order and applies the first one that matches. A rule only matches findings whose\nseverity is listed in its `action.due_days_per_severity`. To change the order, use\n`ReorderSecurityFindingsAutomationDueDateRules`.",
     "summary": "Get all due date rules"
   },
   "CreateSecurityFindingsAutomationDueDateRule": {
-    "description": "Create a due date rule for the current organization.",
+    "description": "Create a due date rule for the current organization.\nThe rule sets a due date on every finding that matches `rule.finding_types`, `rule.query`, and\na severity listed in `action.due_days_per_severity`. It applies immediately to new findings;\nExisting findings can take up to two hours to update.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationDueDateRules`. An organization can have at most 1,000 due date rules;\ncreating more fails with a `422` error.",
     "summary": "Create a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule create request."
   },
   "ReorderSecurityFindingsAutomationDueDateRules": {
-    "description": "Reorder the list of due date rules for the current organization.",
+    "description": "Set the order in which due date rules are evaluated for the current organization.\nDatadog checks each finding against the due date rules in this order and applies only the first rule that matches.\nA rule only matches findings whose severity is listed in its `action.due_days_per_severity`.\nThe first item in `data` is evaluated first.\n`data` must list every due date rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationDueDateRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the evaluation order.",
     "summary": "Reorder due date rules",
     "request_description": "",
     "request_schema_description": "The body of a due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
-    "description": "Delete a due date rule by ID.",
+    "description": "Delete a due date rule by ID.\nDeleting the rule removes the due dates it set on findings, unless another due date rule\nmatches them. Existing findings can take up to two hours to update. You can't restore a deleted rule. To stop a rule temporarily,\nupdate it with `enabled: false` instead.",
     "summary": "Delete a due date rule"
   },
   "GetSecurityFindingsAutomationDueDateRule": {
@@ -6852,29 +6852,29 @@
     "summary": "Get a due date rule"
   },
   "UpdateSecurityFindingsAutomationDueDateRule": {
-    "description": "Update a due date rule by ID.",
+    "description": "Update a due date rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule update request."
   },
   "ListSecurityFindingsAutomationInboxRules": {
-    "description": "Get all inbox rules for the current organization.",
+    "description": "Get all inbox rules for the current organization.\nAn inbox rule adds the findings that match its `rule` to the Security Inbox. This list\ndoesn't include the default inbox rules that Datadog manages. To get those, use\n`ListSecurityFindingsAutomationDefaultInboxRules`.\nThe response lists rules in evaluation order: Datadog checks each finding against the inbox\nrules in this order and applies the first one that matches. Datadog checks the default inbox rules\nbefore these rules. To change the order, use `ReorderSecurityFindingsAutomationInboxRules`.",
     "summary": "Get all inbox rules"
   },
   "CreateSecurityFindingsAutomationInboxRule": {
-    "description": "Create an inbox rule for the current organization.",
+    "description": "Create an inbox rule for the current organization.\nThe rule adds every finding that matches `rule.finding_types` and `rule.query` to the\nSecurity Inbox. It applies immediately to new findings; existing findings can\ntake up to two hours to update. Use inbox rules to surface findings that the Datadog default inbox rules\n(`ListSecurityFindingsAutomationDefaultInboxRules`) don't cover.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationInboxRules`. An organization can have at most 1,000 inbox rules;\ncreating more fails with a `422` error.",
     "summary": "Create an inbox rule",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule create request."
   },
   "ReorderSecurityFindingsAutomationInboxRules": {
-    "description": "Reorder the list of inbox rules for the current organization.",
+    "description": "Set the order in which inbox rules are evaluated for the current organization.\nDatadog checks each finding against the inbox rules in this order and applies only the first rule that matches.\nDatadog checks the default inbox rules (`ListSecurityFindingsAutomationDefaultInboxRules`) before these rules.\nThe first item in `data` is evaluated first.\n`data` must list every inbox rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationInboxRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the evaluation order.",
     "summary": "Reorder inbox rules",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule reorder request."
   },
   "DeleteSecurityFindingsAutomationInboxRule": {
-    "description": "Delete an inbox rule by ID.",
+    "description": "Delete an inbox rule by ID.\nDatadog removes findings that the rule added from the Security Inbox, unless another inbox rule\nmatches them. Existing findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead.",
     "summary": "Delete an inbox rule"
   },
   "GetSecurityFindingsAutomationInboxRule": {
@@ -6882,29 +6882,29 @@
     "summary": "Get an inbox rule"
   },
   "UpdateSecurityFindingsAutomationInboxRule": {
-    "description": "Update an inbox rule by ID.",
+    "description": "Update an inbox rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update an inbox rule",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule update request."
   },
   "ListSecurityFindingsAutomationMuteRules": {
-    "description": "Get all mute rules for the current organization.",
+    "description": "Get all mute rules for the current organization.\nA mute rule automatically mutes new and existing findings that match its `rule` (finding types and query),\nusing the reason in its `action`. To mute or unmute specific findings by ID as a one-time action,\nuse `MuteSecurityFindings` instead.\nThe response lists rules in evaluation order: Datadog checks each finding against the mute\nrules in this order and applies the first one that matches. To change the order, use\n`ReorderSecurityFindingsAutomationMuteRules`.",
     "summary": "Get all mute rules"
   },
   "CreateSecurityFindingsAutomationMuteRule": {
-    "description": "Create a mute rule for the current organization.",
+    "description": "Create a mute rule for the current organization.\nThe rule mutes every finding that matches `rule.finding_types` and `rule.query`, with the\nreason in `action.reason`, until `action.expire_at` if set. It applies immediately to\nnew findings; existing findings can take up to two hours to update. Use a rule to keep\nmuting a class of findings, including ones detected later. To mute or unmute specific\nfindings by ID as a one-time action, use `MuteSecurityFindings` instead. Mute rules don't change\nmanually muted findings.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationMuteRules`. An organization can have at most 1,000 mute rules;\ncreating more fails with a `422` error.",
     "summary": "Create a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule create request."
   },
   "ReorderSecurityFindingsAutomationMuteRules": {
-    "description": "Reorder the list of mute rules for the current organization.",
+    "description": "Set the order in which mute rules are evaluated for the current organization.\nDatadog checks each finding against the mute rules in this order and applies only the first rule that matches.\nThe first item in `data` is evaluated first.\n`data` must list every mute rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationMuteRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder mute rules",
     "request_description": "",
     "request_schema_description": "The body of a mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
-    "description": "Delete a mute rule by ID.",
+    "description": "Delete a mute rule by ID.\nDatadog unmutes findings that the rule muted, unless another mute rule matches them. Manually\nmuted findings stay muted. Existing findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead. Disabling a rule has the same effect on findings as deleting it.",
     "summary": "Delete a mute rule"
   },
   "GetSecurityFindingsAutomationMuteRule": {
@@ -6912,29 +6912,29 @@
     "summary": "Get a mute rule"
   },
   "UpdateSecurityFindingsAutomationMuteRule": {
-    "description": "Update a mute rule by ID.",
+    "description": "Update a mute rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
   },
   "ListSecurityFindingsAutomationSeverityModifierRules": {
-    "description": "Get all severity modifier rules for the current organization.",
+    "description": "Get all severity modifier rules for the current organization.\nA severity modifier rule changes the severity of the findings that match its `rule`: it either\nsets a fixed severity or shifts it up or down by one rank. Severity modifier rules run before\nmute, due date, inbox, and ticket creation rules, so those rules see the modified severity.\nTo override the severity of specific findings by ID, use `UpdateFindingsSeverity` instead.\nThe response lists rules in evaluation order: Datadog checks each finding against the severity modifier\nrules in this order and applies the first one that would change the finding's severity. To change the order, use\n`ReorderSecurityFindingsAutomationSeverityModifierRules`.",
     "summary": "Get all severity modifier rules"
   },
   "CreateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Create a severity modifier rule for the current organization.",
+    "description": "Create a severity modifier rule for the current organization.\nThe rule changes the severity of every finding that matches `rule.finding_types` and\n`rule.query`. It applies immediately to new findings; existing findings can\ntake up to two hours to update. Use a rule to continuously adjust the severity of a class of findings,\nsuch as all findings in a development environment. To override the severity of specific\nfindings by ID as a one-time action, use `UpdateFindingsSeverity` instead. `UpdateFindingsSeverity` can't\noverride or clear a severity set by a rule.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationSeverityModifierRules`. An organization can have at most 1,000 severity modifier rules;\ncreating more fails with a `422` error.",
     "summary": "Create a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule create request."
   },
   "ReorderSecurityFindingsAutomationSeverityModifierRules": {
-    "description": "Reorder the list of severity modifier rules for the current organization.",
+    "description": "Set the order in which severity modifier rules are evaluated for the current organization.\nDatadog checks each finding against the severity modifier rules in this order and applies only the first rule that would change the finding's severity.\nThe first item in `data` is evaluated first.\n`data` must list every severity modifier rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationSeverityModifierRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder severity modifier rules",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule reorder request."
   },
   "DeleteSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Delete a severity modifier rule by ID.",
+    "description": "Delete a severity modifier rule by ID.\nUnresolved findings whose severity the rule changed go back to their Datadog severity, unless\nanother severity modifier rule matches them. Resolved findings keep the severity they had.\nExisting findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead.",
     "summary": "Delete a severity modifier rule"
   },
   "GetSecurityFindingsAutomationSeverityModifierRule": {
@@ -6942,29 +6942,29 @@
     "summary": "Get a severity modifier rule"
   },
   "UpdateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Update a severity modifier rule by ID.",
+    "description": "Update a severity modifier rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule update request."
   },
   "ListSecurityFindingsAutomationTicketCreationRules": {
-    "description": "Get all ticket creation rules for the current organization.",
+    "description": "Get all ticket creation rules for the current organization.\nA ticket creation rule automatically creates tickets for new findings that match its `rule`,\nin Jira, Linear, or Datadog Work Management (`action.target`; formerly Case Management), up to\n`action.max_tickets_per_day`.\nEach returned rule includes its scope (`rule`), its target project, assignee, and ticket\nfields (`action`), and `action.auto_disabled_reason` when Datadog disabled the rule after a\nticketing integration error.\nThe response lists rules in evaluation order: Datadog checks each finding against the ticket creation\nrules in this order and applies the first one that matches. To change the order, use\n`ReorderSecurityFindingsAutomationTicketCreationRules`.",
     "summary": "Get all ticket creation rules"
   },
   "CreateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Create a ticket creation rule for the current organization.",
+    "description": "Create a ticket creation rule for the current organization.\nThe rule automatically creates tickets for new findings that match `rule.finding_types` and\n`rule.query`, in the project set by `action.target` and `action.project_id`. It doesn't\ncreate tickets for findings that existed before the rule. Use a rule to create tickets for findings\ncontinuously as Datadog detects them. To create tickets for specific existing findings, use\n`CreateJiraIssues` or `CreateCases` instead.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationTicketCreationRules`. An organization can have at most 1,000 ticket creation rules;\ncreating more fails with a `422` error.",
     "summary": "Create a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule create request."
   },
   "ReorderSecurityFindingsAutomationTicketCreationRules": {
-    "description": "Reorder the list of ticket creation rules for the current organization.",
+    "description": "Set the order in which ticket creation rules are evaluated for the current organization.\nDatadog checks each finding against the ticket creation rules in this order and applies only the first rule that matches.\nThe first item in `data` is evaluated first.\n`data` must list every ticket creation rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationTicketCreationRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder ticket creation rules",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Delete a ticket creation rule by ID.",
+    "description": "Delete a ticket creation rule by ID.\nTickets that the rule already created stay attached to their findings and aren't deleted.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with\n`enabled: false` instead.",
     "summary": "Delete a ticket creation rule"
   },
   "GetSecurityFindingsAutomationTicketCreationRule": {
@@ -6972,7 +6972,7 @@
     "summary": "Get a ticket creation rule"
   },
   "UpdateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Update a ticket creation rule by ID.",
+    "description": "Update a ticket creation rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.\nTo re-enable a rule that Datadog disabled after a ticketing integration error, update it.\nUpdating a rule clears `action.auto_disabled_reason`.",
     "summary": "Update a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule update request."
