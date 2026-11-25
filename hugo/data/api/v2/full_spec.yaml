@@ -51374,18 +51374,19 @@ components:
         from:
           default: "now-15m"
           description: |-
-            The minimum time for the requested events. Supports date math and regular timestamps in milliseconds.
+            The minimum time for the requested events. Supports date math, ISO 8601, and timestamps in milliseconds.
+            Set an earlier time than the default to search beyond the last 15 minutes.
           example: "now-15m"
           type: string
         query:
           default: "*"
-          description: The search query following the event search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          description: The search query following the event search syntax. Attributes take `@` (`@evt.category:alert`); tags and reserved fields don't (`service:web`).
+          example: "@evt.integration_id:kubernetes @evt.category:alert"
           type: string
         to:
           default: "now"
           description: |-
-            The maximum time for the requested events. Supports date math and regular timestamps in milliseconds.
+            The maximum time for the requested events. Supports date math, ISO 8601, and timestamps in milliseconds.
           example: "now"
           type: string
       type: object
@@ -51499,7 +51500,9 @@ components:
           type: string
       type: object
     EventsSort:
-      description: The sort parameters when querying events.
+      description: |-
+        The sort order of events. `-timestamp` (the default) returns the newest events first, and `timestamp` returns
+        the oldest first. The client libraries reject any other value.
       enum:
         - timestamp
         - -timestamp
@@ -194011,21 +194014,33 @@ paths:
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
         Use this endpoint to see your latest events.
+
+        Query syntax: Attributes take `@` (`@evt.integration_id:kubernetes`, `@evt.category:alert`), while tags and
+        reserved fields don't (`kube_cluster_name:gizmo`, `service:web`, `source:oom_kill`). A name that needs `@`
+        matches nothing without it. To filter by integration, prefer `@evt.integration_id`, whose values use hyphens
+        (`oom-kill`), over `source`, whose values use underscores (`oom_kill`). Bare words search the event text.
+        Quoted phrases, `OR`, `-` negation, and value wildcards are supported. Wildcards in attribute names, such as
+        `@*.name`, are not supported.
+
+        Without `filter[from]`, the endpoint searches only the last 15 minutes. Widen the time window before concluding that no event exists.
+        Each event's own fields are under `data[].attributes.attributes`, for example `evt.integration_id`, `evt.category`,
+        `title`, and `service`. To fetch one event with `GetEvent`, use its `evt.id` or `evt.uid`, not the top-level `data[].id`.
       operationId: ListEvents
       parameters:
-        - description: Search query following events syntax.
+        - description: Search query following events syntax. Attributes take `@` (`@evt.category:alert`); tags and reserved fields don't (`service:web`).
+          example: "@evt.integration_id:kubernetes @evt.category:alert"
           in: query
           name: filter[query]
           required: false
           schema:
             type: string
-        - description: Minimum timestamp for requested events, in milliseconds.
+        - description: Minimum time for requested events, as date math (`now-1h`), ISO 8601, or a timestamp in milliseconds. Defaults to `now-15m`.
           in: query
           name: filter[from]
           required: false
           schema:
             type: string
-        - description: Maximum timestamp for requested events, in milliseconds.
+        - description: Maximum time for requested events, as date math, ISO 8601, or a timestamp in milliseconds. Defaults to `now`.
           in: query
           name: filter[to]
           required: false
@@ -194254,23 +194269,52 @@ paths:
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
         Use this endpoint to build complex events filtering and search.
+
+        Query syntax: Attributes take `@` (`@evt.integration_id:kubernetes`, `@evt.category:alert`), while tags and
+        reserved fields don't (`kube_cluster_name:gizmo`, `service:web`, `source:oom_kill`). A name that needs `@`
+        matches nothing without it. To filter by integration, prefer `@evt.integration_id`, whose values use hyphens
+        (`oom-kill`), over `source`, whose values use underscores (`oom_kill`). Bare words search the event text.
+        Quoted phrases, `OR`, `-` negation, and value wildcards are supported. Wildcards in attribute names, such as
+        `@*.name`, are not supported.
+
+        Without `filter.from`, the endpoint searches only the last 15 minutes. Widen the time window before concluding that no event exists.
+        Each event's own fields are under `data[].attributes.attributes`, for example `evt.integration_id`, `evt.category`,
+        `title`, and `service`. To fetch one event with `GetEvent`, use its `evt.id` or `evt.uid`, not the top-level `data[].id`.
       operationId: SearchEvents
       requestBody:
         content:
           "application/json":
             examples:
               default:
+                summary: Alert events from an integration at a cluster, newest first
                 value:
                   filter:
-                    from: now-15m
-                    query: service:web* AND @http.status_code:[200 TO 299]
+                    from: now-1h
+                    query: "@evt.integration_id:kubernetes @evt.category:alert kube_cluster_name:prod-cluster"
                     to: now
-                  options:
-                    timezone: GMT
                   page:
-                    cursor: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
-                    limit: 25
-                  sort: timestamp
+                    limit: 100
+                  sort: -timestamp
+              impacted_resource_changes:
+                summary: Changes that name an impacted resource
+                value:
+                  filter:
+                    from: now-24h
+                    query: '@evt.integration_id:change-tracking @impacted_resources.name:"checkout-api"'
+                    to: now
+                  page:
+                    limit: 100
+                  sort: -timestamp
+              service_changes:
+                summary: Changes to a service over the last day
+                value:
+                  filter:
+                    from: now-24h
+                    query: "@evt.category:change service:checkout"
+                    to: now
+                  page:
+                    limit: 100
+                  sort: -timestamp
             schema:
               $ref: "#/components/schemas/EventsListRequest"
         required: false
@@ -194324,7 +194368,7 @@ paths:
         Get the details of an event by `event_id`.
       operationId: GetEvent
       parameters:
-        - description: The UID of the event.
+        - description: The event's `evt.id` or `evt.uid`, read from `data[].attributes.attributes.evt` in `ListEvents` or `SearchEvents` results. The top-level `data[].id` is not accepted.
           in: path
           name: event_id
           required: true
