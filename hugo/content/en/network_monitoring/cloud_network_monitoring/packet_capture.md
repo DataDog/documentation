@@ -32,18 +32,18 @@ Packet capture has the following limitations:
 To start a packet capture on a connection:
 
 1. Navigate to [Network Analytics][1].
-1. Filter, group, and sort connections to find the connection you want to investigate.
+1. Filter, group, and sort aggregate connections to find the connection you want to investigate.
 
     For example, group by `client_service` and `server_service` and sort by latency or round-trip time (RTT) to see the service-to-service connections with the highest latency.
 1. Open the packet capture configuration panel using one of these options:
-    - Click the kebab menu on the network connection row and select {{< ui >}}Packet Capture{{< /ui >}}.
-    - Click the network connection to open its side panel, then click {{< ui >}}Configure Packet Capture{{< /ui >}}.
+    - Click the kebab menu on the aggregate connection row and select {{< ui >}}Packet Capture{{< /ui >}}.
+    - Click the aggregate connection to open its side panel, then click {{< ui >}}Configure Packet Capture{{< /ui >}}.
 1. Review the selected hosts. Up to 25 hosts are listed and selected by default. See the [Host selection](#host-selection) section for how Datadog chooses them.
     - Sort by hostname, role, resets, failures, or retransmits.
     - Clear the checkbox for any host you don't want to include.
 1. Click {{< ui >}}Start Packet Capture{{< /ui >}}.
 
-Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture can take up to 2 minutes to complete, including the 30-second capture and processing time. The capture runs in the background, so you can close the panel. To review the results, see the [View packet capture results](#view-packet-capture-results) section.
+Datadog sends a remote command to the Agents on the selected hosts, and the Agents run the capture. A packet capture typically takes 1-2 minutes to complete, including the 30-second capture and processing time, but can take up to 10 minutes before it times out. The capture runs in the background, so you can close the panel. To review the results, see the [View packet capture results](#view-packet-capture-results) section.
 
 ### Host selection
 
@@ -119,7 +119,7 @@ Packet capture records only packet header metadata, such as IP addresses, ports,
 
 ### Access and auditing
 
-- For auditing, every packet capture is logged with the user who started it.
+- For auditing, each packet capture request records the user who initiated it.
 - Packet captures are visible to everyone in the organization.
 
 ### Data retention
