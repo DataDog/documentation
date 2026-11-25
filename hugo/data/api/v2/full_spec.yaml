@@ -255236,6 +255236,10 @@ paths:
       tags:
         - RUM Managed Archives
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
@@ -256791,6 +256795,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
@@ -256872,6 +256880,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 7
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-permission:
         operator: OR
         permissions:
