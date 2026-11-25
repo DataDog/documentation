@@ -573,11 +573,16 @@ To enable injection for a single task, or to opt a task out, set `openlineage_in
 DatabricksRunNowOperator(
     task_id="run_databricks_job",
     job_id=<JOB_ID>,
+    job_parameters={"env": "prod"},
     openlineage_inject_parent_job_info=True,
 )
 ```
 
-<div class="alert alert-info">If you manually set any <code>spark.openlineage.parent*</code> property on the job, injection is skipped for that job.</div>
+The parent job information is passed to Databricks as follows:
+- `DatabricksSubmitRunOperator`: as `spark.openlineage.parent*` and `spark.openlineage.rootParent*` properties in the `spark_conf` of each `new_cluster`, and as an `OPENLINEAGE_CONTEXT` parameter on notebook, Python wheel, SQL, and Run Job tasks. Spark JAR, Spark Python, and Spark Submit tasks are linked only when they run on a `new_cluster`.
+- `DatabricksRunNowOperator`: as the `OPENLINEAGE_CONTEXT` job parameter. The job does not need to declare this parameter.
+
+<div class="alert alert-info">If you manually set any <code>spark.openlineage.parent*</code> property in a cluster's <code>spark_conf</code>, the Spark properties are not injected for that cluster. <code>DatabricksRunNowOperator</code> skips injection when it uses legacy parameter fields such as <code>notebook_params</code> or <code>jar_params</code>; pass parameters through <code>job_parameters</code> instead.</div>
 
 ### Backport OpenLineage lineage macros for older provider versions
 
