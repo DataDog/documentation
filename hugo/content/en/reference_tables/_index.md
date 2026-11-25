@@ -241,7 +241,7 @@ First, [configure the Salesforce integration][17] with an account and [grant it 
    - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above.
    - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
    - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
 Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
 
@@ -272,7 +272,7 @@ First, [configure the ServiceNow integration][18] with an account, then [configu
    - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
    - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
 Additional fields must use paths supported by the ServiceNow Table API. The column name combines the root table name with the last two parts of the path. For example, `vendor.manufacturer.name` with root table `cmdb_ci_server` creates `cmdb_ci_server_manufacturer_name`.
 
