@@ -407,7 +407,7 @@ See this list for links to respective sections:
 [20]: /api/v1/hosts/
 [21]: /api/v1/aws-integration/
 [22]: /api/v1/gcp-integration/
-[23]: /api/v1/metrics/#query-timeseries-points
+[23]: /api/latest/metrics/#query-timeseries-points
 [24]: /api/v1/monitors/#get-all-monitor-details
 [25]: /api/v1/monitors/#mute-a-monitor
 [26]: /api/v1/dashboards/#create-a-new-dashboard

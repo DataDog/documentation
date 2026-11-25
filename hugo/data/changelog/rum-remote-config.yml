@@ -13,3 +13,10 @@ entries:
       - GetRumSdkConfig
     title: Add RUM API permissions for operation strong links and sdk remote 
       config
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - GetRumSdkConfig
+      - UpdateRumSdkConfig
+    title: Document rate-limit headers on the shared 429 responses

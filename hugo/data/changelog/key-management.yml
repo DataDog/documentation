@@ -20,3 +20,30 @@ entries:
       - UpdateAPIKey
       - UpdateApplicationKey
     title: Deprecate v1 key management endpoints
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateAPIKey
+      - CreateApplicationKey
+      - CreateCurrentUserApplicationKey
+      - CreatePersonalAccessToken
+      - DeleteAPIKey
+      - DeleteApplicationKey
+      - DeleteCurrentUserApplicationKey
+      - GetAPIKey
+      - GetApplicationKey
+      - GetCurrentUserApplicationKey
+      - GetPersonalAccessToken
+      - ListAPIKeys
+      - ListApplicationKeys
+      - ListCurrentUserApplicationKeys
+      - ListPersonalAccessTokens
+      - RevokePersonalAccessToken
+      - UpdateAPIKey
+      - UpdateApplicationKey
+      - UpdateCurrentUserApplicationKey
+      - UpdatePersonalAccessToken
+      - Validate
+      - ValidateAPIKey
+    title: Document rate-limit headers on the shared 429 responses

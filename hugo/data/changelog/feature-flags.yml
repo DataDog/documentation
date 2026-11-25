@@ -90,3 +90,49 @@ entries:
       - UnarchiveFeatureFlag
       - UpdateFeatureFlag
     title: Document bucketing_mode on feature flag responses
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - ArchiveFeatureFlag
+      - CreateAllocationsForFeatureFlagInEnvironment
+      - CreateFeatureFlag
+      - CreateFeatureFlagsEnvironment
+      - CreateVariantForFeatureFlag
+      - DeleteFeatureFlagsEnvironment
+      - DeleteVariantFromFeatureFlag
+      - DisableFeatureFlagEnvironment
+      - EnableFeatureFlagEnvironment
+      - ExportFeatureFlagHistory
+      - GetFeatureFlag
+      - GetFeatureFlagsEnvironment
+      - GetSavedFilter
+      - ListFeatureFlagHistory
+      - ListFeatureFlags
+      - ListFeatureFlagsEnvironments
+      - PauseExposureSchedule
+      - ResumeExposureSchedule
+      - StartExposureSchedule
+      - StopExposureSchedule
+      - UnarchiveFeatureFlag
+      - UpdateAllocationsForFeatureFlagInEnvironment
+      - UpdateFeatureFlag
+      - UpdateFeatureFlagsEnvironment
+      - UpdateSavedFilterAttributes
+      - UpdateVariantForFeatureFlag
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42193
+    operations:
+      - ArchiveFeatureFlag
+      - CreateFeatureFlag
+      - CreateFeatureFlagsEnvironment
+      - GetFeatureFlag
+      - GetFeatureFlagsEnvironment
+      - ListFeatureFlags
+      - ListFeatureFlagsEnvironments
+      - UnarchiveFeatureFlag
+      - UpdateFeatureFlag
+      - UpdateFeatureFlagsEnvironment
+    title: Add subject authorization settings to Feature Flag environments

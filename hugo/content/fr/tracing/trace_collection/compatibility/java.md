@@ -71,7 +71,7 @@ Datadog ne prend pas officiellement en charge les versions de Java en accès ant
 
 ## Intégrations {#integrations}
 
-Les intégrations en Preview sont désactivées par défaut, mais peuvent être activées individuellement :
+Les intégrations en Preview sont désactivées par défaut, mais peuvent être activées individuellement :
 
 - Propriété système : `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Variable d'environnement : `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
@@ -139,13 +139,13 @@ Les instrumentations suivantes sont désactivées par défaut et peuvent être a
 
 **Remarque** : L'intégration JAX-WS instrumente les endpoints annotés avec @WebService (JAX-WS 1.x) et @WebServiceProvider (JAX-WS 2.x).
 
-Vous ne trouvez pas le framework web que vous recherchez ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
+Vous ne trouvez pas le framework web que vous recherchez ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
 
 ### Compatibilité des frameworks réseau {#networking-framework-compatibility}
 
 `dd-java-agent` inclut la prise en charge du traçage automatique des frameworks réseau suivants.
 
-**Le traçage réseau fournit :**
+**Le traçage réseau fournit :**
 
 - le temps écoulé entre la requête et la réponse
 - des tags pour la requête (par exemple, le code de réponse)
@@ -179,7 +179,7 @@ Vous ne trouvez pas le framework web que vous recherchez ? Datadog étend const
 | Spring SessionAwareMessageListener | 3.1+        | Entièrement pris en charge                                        | `spring-jms-3.1`                                        |
 | Spring WebClient                   | 5.0+        | Entièrement pris en charge                                        | `spring-webflux`, `spring-webflux-client`               |
 
-**Remarque sur Kafka** : l'intégration Kafka de Datadog fonctionne avec la version de Kafka `0.11+`, qui prend en charge la Header API. Cette API est utilisée pour injecter et extraire le contexte de trace. Si vous exécutez un environnement avec des versions mixtes, le broker Kafka peut signaler à tort la version plus récente de Kafka. Cela pose un problème lorsque le SDK tente d'injecter des en-têtes qui ne sont pas pris en charge par le producteur local. De plus, les anciens consommateurs sont incapables de consommer le message en raison de la présence d'en-têtes. Pour éviter ces problèmes, si vous utilisez un environnement Kafka combinant plusieurs versions, dont certaines sont antérieures à 0.11, désactivez la propagation du contexte avec la variable d'environnement : `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
+**Remarque sur Kafka** : l'intégration Kafka de Datadog fonctionne avec la version de Kafka `0.11+`, qui prend en charge la Header API. Cette API est utilisée pour injecter et extraire le contexte de trace. Si vous exécutez un environnement avec des versions mixtes, le broker Kafka peut signaler à tort la version plus récente de Kafka. Cela pose un problème lorsque le SDK tente d'injecter des en-têtes qui ne sont pas pris en charge par le producteur local. De plus, les anciens consommateurs sont incapables de consommer le message en raison de la présence d'en-têtes. Pour éviter ces problèmes, si vous utilisez un environnement Kafka combinant plusieurs versions, dont certaines sont antérieures à 0.11, désactivez la propagation du contexte avec la variable d'environnement : `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
 **Remarque JMS** : L'intégration JMS de Datadog ajoute et lit automatiquement les propriétés d'objet de message `x__dash__datadog__dash__trace__dash__id` et `x__dash__datadog__dash__parent__dash__id` pour maintenir la propagation du contexte entre les services consommateur et producteur.
 
@@ -187,7 +187,7 @@ Vous ne trouvez pas le framework web que vous recherchez ? Datadog étend const
 
 **Remarque SOFA RPC** : L'intégration SOFA RPC de Datadog prend en charge les protocoles de transport Bolt, Triple et REST. Triple utilise le transport gRPC ; le traçage distribué des appels Triple nécessite que l'intégration `grpc` reste activée.
 
-Vous ne trouvez pas le framework réseau que vous recherchez ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
+Vous ne trouvez pas le framework réseau que vous recherchez ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
 
 ### Compatibilité des magasins de données {#data-store-compatibility}
 
@@ -220,12 +220,12 @@ Vous ne trouvez pas le framework réseau que vous recherchez ? Datadog étend c
 | Vert.x Redis Client     | 3.9-4.x  | Entièrement pris en charge | `vertx-redis-client`                                                                       |
 | Vert.x MySQL Client     | 3.9-4.x  | Entièrement pris en charge | `vertx-sql-client`																		                                                       |
 
-**Remarque** : Redis 6.0+ prend en charge l'authentification intégrée aux commandes telles que `HELLO`, `MIGRATE` et `ACL SETUSER`.
+**Remarque** : Redis 6.0+ prend en charge l'authentification intégrée aux commandes telles que `HELLO`, `MIGRATE` et `ACL SETUSER`.
 
-  - **Datadog Trace Agent** : La version minimale requise et recommandée est `7.76.1` pour garantir que les paramètres d'authentification sont automatiquement masqués dans les métadonnées de trace.
-  - **Datadog Lambda Extension** (environnements Serverless) : La version minimale requise est `v28.0.0`.
+  - **Datadog Trace Agent** : La version minimale requise et recommandée est `7.76.1` pour garantir que les paramètres d'authentification sont automatiquement masqués dans les métadonnées de trace.
+  - **Datadog Lambda Extension** (environnements Serverless) : La version minimale requise est `v28.0.0`.
 
-`dd-java-agent` est également compatible avec les pilotes JDBC courants, notamment :
+`dd-java-agent` est également compatible avec les pilotes JDBC courants, notamment :
 
 - Apache Derby
 - Firebird SQL
@@ -245,9 +245,9 @@ Les instrumentations suivantes sont désactivées par défaut et peuvent être a
 
 | Instrumentation   | Pour activer 									                             |
 |-------------------|-------------------------------------------------|
-| JDBC-Datasource		 | - Propriété système : `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Variable d'environnement : `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
+| JDBC-Datasource		 | - Propriété système : `-Ddd.integration.jdbc-datasource.enabled=true`<br /> - Variable d'environnement : `DD_INTEGRATION_JDBC_DATASOURCE_ENABLED=true` |
 
-Vous ne trouvez pas les systèmes de stockage de données recherchés ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
+Vous ne trouvez pas les systèmes de stockage de données recherchés ? Datadog étend constamment sa prise en charge. Contactez le [support Datadog][2] si vous avez besoin d'aide.
 
 ### Compatibilité avec d'autres frameworks {#additional-framework-compatibility}
 
@@ -274,9 +274,9 @@ Vous ne trouvez pas les systèmes de stockage de données recherchés ? Datadog
 | TIBCO BusinessWorks | 5.14.0 - 6.11.0  | [Préversion](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
 | Twilio SDK          | < 8.0            | Entièrement pris en charge                                        | `twilio-sdk`                                   |
 
-Vous ne voyez pas les frameworks souhaités ? Datadog étend constamment sa prise en charge. Pour demander la prise en charge d'un framework, contactez notre formidable [équipe d'assistance][2].
+Vous ne voyez pas les frameworks souhaités ? Datadog étend constamment sa prise en charge. Pour demander la prise en charge d'un framework, contactez notre formidable [équipe d'assistance][2].
 
-Pour améliorer la visibilité des applications utilisant des frameworks non pris en charge, considérez l'une des solutions suivantes :
+Pour améliorer la visibilité des applications utilisant des frameworks non pris en charge, considérez l'une des solutions suivantes :
 
 - [Ajout d'une instrumentation personnalisée][3].
 - [Soumettre une pull request][4] contenant une instrumentation à intégrer dans une prochaine version.
@@ -286,8 +286,8 @@ Pour améliorer la visibilité des applications utilisant des frameworks non pri
 
 La plupart des intégrations sont activées par défaut. Le paramètre suivant permet de désactiver les intégrations par défaut.
 
-- Propriété système : `-Ddd.integrations.enabled=false`
-- Variable d'environnement : `DD_INTEGRATIONS_ENABLED=false`
+- Propriété système : `-Ddd.integrations.enabled=false`
+- Variable d'environnement : `DD_INTEGRATIONS_ENABLED=false`
 
 Les intégrations peuvent être activées ou désactivées individuellement (ce qui remplace la valeur par défaut ci-dessus).
 
@@ -308,14 +308,14 @@ Pour améliorer le temps de démarrage, le chargement et la liaison anticipés d
 
 ### Prérequis {#requirements}
 
-Utilisez :
+Utilisez :
 
 - Java 25 ou version ultérieure
 - [Datadog Java SDK][1] 1.57.0 ou version ultérieure
 
 ### Configuration {#setup}
 
-Pour configurer le chargement et la liaison de classes AOT pour APM, ajoutez le Datadog Java SDK pendant l'exécution de l'entraînement :
+Pour configurer le chargement et la liaison de classes AOT pour APM, ajoutez le Datadog Java SDK pendant l'exécution de l'entraînement :
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=app.aot -jar App.jar
@@ -323,7 +323,7 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=app.aot -jar App.j
 
 #### Utilisation {#usage}
 
-En production, ajoutez le même Datadog Java SDK avec les données d'entraînement précédemment mises en cache :
+En production, ajoutez le même Datadog Java SDK avec les données d'entraînement précédemment mises en cache :
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
@@ -334,7 +334,7 @@ Vous pouvez consulter les traces dans le [Trace Explorer][9].
 {{% collapse-content title="Dépannage" level="h5" %}}
 ##### Ne pas attacher le Datadog Java SDK pendant l'exécution de l'entraînement {#not-attaching-the-datadog-java-sdk-during-the-training-run}
 
-Si vous voyez cet avertissement en production, cela signifie que le Datadog Java SDK n'a pas été attaché pendant l'entraînement :
+Si vous voyez cet avertissement en production, cela signifie que le Datadog Java SDK n'a pas été attaché pendant l'entraînement :
 
 ```
 Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
@@ -349,7 +349,7 @@ GraalVM Native Image est une technologie qui vous permet de compiler des applica
 
 ### Prérequis {#requirements-1}
 
-Utilisez :
+Utilisez :
 
 - [GraalVM JDK 21 ou JDK 25][7]
 - [Datadog Java SDK][1]
@@ -358,10 +358,10 @@ Utilisez :
 
 {{< tabs >}}
 {{% tab "GraalVM" %}}
-Pour configurer le Datadog Java SDK avec GraalVM Native Image, suivez ces étapes :
+Pour configurer le Datadog Java SDK avec GraalVM Native Image, suivez ces étapes :
 
 1. Instrumentez votre application en suivant les étapes décrites dans [Traçage des applications Java][6].
-2. Lorsque vous générez un exécutable natif avec la commande `native-image`, ajoutez l'argument `-J-javaagent:/path/to/dd-java-agent.jar`. Par exemple :
+2. Lorsque vous générez un exécutable natif avec la commande `native-image`, ajoutez l'argument `-J-javaagent:/path/to/dd-java-agent.jar`. Par exemple :
    ```shell
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
@@ -373,10 +373,10 @@ Pour configurer le Datadog Java SDK avec GraalVM Native Image, suivez ces étape
 {{% /tab %}}
 
 {{% tab "Quarkus Native" %}}
-Pour configurer le Datadog Java SDK avec Quarkus Native, suivez ces étapes :
+Pour configurer le Datadog Java SDK avec Quarkus Native, suivez ces étapes :
 
 1. Instrumentez votre application en suivant les étapes décrites dans [Traçage des applications Java][6].
-2. Lorsque vous générez un exécutable natif, utilisez la propriété `quarkus.native.additional-build-args`. Par exemple :
+2. Lorsque vous générez un exécutable natif, utilisez la propriété `quarkus.native.additional-build-args`. Par exemple :
    ```shell
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
@@ -388,7 +388,7 @@ Pour configurer le Datadog Java SDK avec Quarkus Native, suivez ces étapes :
 {{% /tab %}}
 
 {{% tab "Spring Native" %}}
-Pour configurer le Datadog Java SDK avec Spring Native, suivez ces étapes :
+Pour configurer le Datadog Java SDK avec Spring Native, suivez ces étapes :
 
 1. Instrumentez votre application en suivant les étapes décrites dans [Traçage des applications Java][6].
 2. Pour les builds Spring Native basés sur Buildpacks, activez le [Paketo Buildpack for Datadog][8] en utilisant `BP_DATADOG_ENABLED=true`.
@@ -460,7 +460,7 @@ Les solutions à ce problème sont :
 
 ##### Versions de Paketo Buildpack for Datadog antérieures à 4.6.0 {#paketo-buildpack-for-datadog-versions-older-than-460}
 
-Dans ses anciennes versions, Paketo Buildpack for Datadog présentait un bug qui se manifestait par le message d'erreur suivant :
+Dans ses anciennes versions, Paketo Buildpack for Datadog présentait un bug qui se manifestait par le message d'erreur suivant :
 
 ```text
 disabling Datadog at launch time is unsupported for Node
@@ -531,7 +531,7 @@ Pour plus d'informations, consultez [Configurer le mode de communication d'APM e
 [5]: /fr/tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /fr/tracing/trace_explorer/
-[10]: /fr/opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[10]: /fr/opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=java
 [11]: /fr/containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /fr/tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472

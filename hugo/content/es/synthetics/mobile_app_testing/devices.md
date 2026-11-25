@@ -2,416 +2,485 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/
   tag: Blog
-  text: Creación de tests Synthetic fiables y precisos para tus aplicaciones móviles
+  text: Cómo crear pruebas Synthetic confiables y precisas para sus aplicaciones móviles.
 - link: synthetics/mobile_app_testing/
   tag: Documentación
-  text: Tests de aplicaciones móviles
+  text: Mobile App Testing
 multifiltersearch:
   data:
-  - device: Google Pixel 6a
-    eu: Sí
-    os: Android 13
+  - device: Google Pixel 10
+    eu: 'Yes'
+    os: Android 16
     platform: Android
-    us: Sí
-  - device: Google Pixel 8
-    eu: Sí
-    os: Android 14
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 10 Pro
+    eu: 'Yes'
+    os: Android 16
     platform: Android
-    us: Sí
-  - device: Google Pixel 8 Pro
-    eu: Sí
-    os: Android 14
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 10 Pro XL
+    eu: 'Yes'
+    os: Android 16
     platform: Android
-    us: Sí
-  - device: Google Pixel 7
-    eu: Sí
-    os: Android 14
-    platform: Android
-    us: Sí
-  - device: Google Pixel 7
-    eu: Sí
-    os: Android 13
-    platform: Android
-    us: Sí
-  - device: Google Pixel 7 Pro
-    eu: Sí
-    os: Android 13
-    platform: Android
-    us: Sí
-  - device: Google Pixel 6 Pro (desbloqueado)
-    eu: Sí
-    os: Android 12
-    platform: Android
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
   - device: Google Pixel 5
-    eu: Sí
+    eu: 'Yes'
     os: Android 12
     platform: Android
-    us: Sí
-  - device: Google Pixel 4a
-    eu: Sí
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 7
+    eu: 'Yes'
+    os: Android 14
+    platform: Android
+    routed: 'No'
+    us: 'Yes'
+  - device: Google Pixel 7
+    eu: 'Yes'
+    os: Android 13
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 7 Pro
+    eu: 'Yes'
+    os: Android 13
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 8
+    eu: 'Yes'
+    os: Android 14
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 8 Pro
+    eu: 'Yes'
+    os: Android 14
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 9
+    eu: 'Yes'
+    os: Android 15
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 9 Pro
+    eu: 'Yes'
+    os: Android 15
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 9 Pro XL
+    eu: 'Yes'
+    os: Android 15
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S21
+    eu: 'Yes'
+    os: Android 12
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S21
+    eu: 'Yes'
     os: Android 11
     platform: Android
-    us: Sí
-  - device: Google Pixel 4 XL (desbloqueado)
-    eu: Sí
-    os: Android 10
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S24
-    eu: Sí
-    os: Android 14
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S24 o posterior
-    eu: Sí
-    os: Android 14
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S24 Ultra
-    eu: Sí
-    os: Android 14
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S23
-    eu: Sí
-    os: Android 14
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S23
-    eu: Sí
-    os: Android 13
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S23 Ultra
-    eu: Sí
-    os: Android 13
-    platform: Android
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
   - device: Samsung Galaxy S22 Ultra 5G
-    eu: Sí
+    eu: 'Yes'
     os: Android 12
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy S21
-    eu: Sí
-    os: Android 12
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S23
+    eu: 'Yes'
+    os: Android 14
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy S21
-    eu: Sí
-    os: Android 11
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S23 Ultra
+    eu: 'Yes'
+    os: Android 13
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy A51
-    eu: Sí
-    os: Android 10
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S24
+    eu: 'Yes'
+    os: Android 14
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy Tab S8
-    eu: Sí
-    os: Android 12
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S24 Plus
+    eu: 'Yes'
+    os: Android 14
     platform: Android
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S24 Ultra
+    eu: 'Yes'
+    os: Android 14
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
   - device: Samsung Galaxy Tab S7
-    eu: Sí
+    eu: 'Yes'
     os: Android 11
     platform: Android
-    us: Sí
-  - device: Google Pixel 6 (desbloqueado)
-    eu: false
+    routed: 'No'
+    us: 'Yes'
+  - device: Samsung Galaxy Tab S8
+    eu: 'Yes'
     os: Android 12
     platform: Android
-    us: Sí
-  - device: Google Pixel 3a XL
-    eu: false
-    os: Android 11
+    routed: 'No'
+    us: 'Yes'
+  - device: Google Pixel 10 Pro
+    eu: 'No'
+    os: Android 17
     platform: Android
-    us: Sí
-  - device: LG Stylo 6
-    eu: false
-    os: Android 10
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S23 o posterior
-    eu: false
-    os: Android 13
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S22 5G
-    eu: false
-    os: Android 13
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy S22 o posterior 5G
-    eu: false
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 6 (Unlocked)
+    eu: 'No'
     os: Android 12
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy S21 Ultra
-    eu: false
-    os: Android 11
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Google Pixel 6 Pro (Unlocked)
+    eu: 'No'
+    os: Android 12
     platform: Android
-    us: Sí
-  - device: Samsung Galaxy S21 o posterior (desbloqueado para Estados Unidos)
-    eu: false
-    os: Android 11
-    platform: Android
-    us: Sí
-  - device: Samsung Galaxy Note 20
-    eu: false
-    os: Android 11
-    platform: Android
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
   - device: Samsung Galaxy A71
-    eu: false
+    eu: 'No'
     os: Android 11
     platform: Android
-    us: Sí
-  - device: iPhone 16
-    eu: Sí
-    os: iOS 18
-    platform: Apple
-    us: Sí
-  - device: iPhone 16 Pro
-    eu: Sí
-    os: iOS 18
-    platform: Apple
-    us: Sí
-  - device: iPhone 16 Pro Max
-    eu: Sí
-    os: iOS 18
-    platform: Apple
-    us: Sí
-  - device: iPhone 15
-    eu: Sí
-    os: iOS 18
-    platform: Apple
-    us: Sí
-  - device: iPhone 15
-    eu: Sí
-    os: iOS 17
-    platform: Apple
-    us: Sí
-  - device: iPhone 15 Pro
-    eu: Sí
-    os: iOS 17
-    platform: Apple
-    us: Sí
-  - device: iPhone 15 Pro Max
-    eu: Sí
-    os: iOS 17
-    platform: Apple
-    us: Sí
-  - device: iPhone 14
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 14 Pro
-    eu: Sí
-    os: iOS 17
-    platform: Apple
-    us: Sí
-  - device: iPhone 14 Pro
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 14 Plus
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 14 Pro Max
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 13
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 13 Mini
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 13 Mini
-    eu: Sí
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPhone 13 Pro Max
-    eu: Sí
-    os: iOS 17
-    platform: Apple
-    us: Sí
-  - device: iPhone 12 Pro Max
-    eu: Sí
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPhone 12
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
-  - device: iPhone 12
-    eu: Sí
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPhone 12
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 12 Pro
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 11
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 11 Pro
-    eu: Sí
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPhone XR
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone X
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 8
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 8
-    eu: Sí
-    os: iOS 13
-    platform: Apple
-    us: Sí
-  - device: iPhone SE (2020)
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 12 Pro Max
-    eu: Sí
-    os: iOS 14
-    platform: Apple
-    us: Sí
-  - device: iPhone 13 Pro
-    eu: Sí
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPad Pro 11" (2022)
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
+    routed: 'No'
+    us: 'Yes'
+  - device: Samsung Galaxy S21 Ultra
+    eu: 'No'
+    os: Android 11
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S21+ (US Unlocked)
+    eu: 'No'
+    os: Android 11
+    platform: Android
+    routed: 'No'
+    us: 'Yes'
+  - device: Samsung Galaxy S22 5G
+    eu: 'No'
+    os: Android 13
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S22+ 5G
+    eu: 'No'
+    os: Android 12
+    platform: Android
+    routed: 'No'
+    us: 'Yes'
+  - device: Samsung Galaxy S23
+    eu: 'No'
+    os: Android 13
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy S23+
+    eu: 'No'
+    os: Android 13
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
+  - device: Samsung Galaxy A15 5G
+    eu: 'No'
+    os: Android 14
+    platform: Android
+    routed: 'No'
+    us: 'Yes'
+  - device: Samsung Galaxy Note 20
+    eu: 'No'
+    os: Android 11
+    platform: Android
+    routed: 'Yes'
+    us: 'Yes'
   - device: iPad (2022)
-    eu: Sí
+    eu: 'Yes'
     os: iOS 16
     platform: Apple
-    us: Sí
-  - device: iPad Pro 12,9" (2022)
-    eu: Sí
-    os: iOS 16
-    platform: Apple
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
   - device: iPad Air 4 (2020)
-    eu: Sí
+    eu: 'Yes'
     os: iOS 14
     platform: Apple
-    us: Sí
-  - device: iPhone SE (2022)
-    eu: false
+    routed: 'No'
+    us: 'Yes'
+  - device: iPad Pro 11" (2022)
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPad Pro 13 (2025)
+    eu: 'Yes'
+    os: iOS 26
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 11 Pro
+    eu: 'Yes'
     os: iOS 15
     platform: Apple
-    us: Sí
-  - device: iPhone 12 Mini
-    eu: false
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 12
+    eu: 'Yes'
     os: iOS 16
     platform: Apple
-    us: Sí
-  - device: iPhone 12 Mini
-    eu: false
-    os: iOS 14
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 12
+    eu: 'Yes'
+    os: iOS 15
     platform: Apple
-    us: Sí
-  - device: iPhone 11
-    eu: false
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 13
+    eu: 'Yes'
     os: iOS 16
     platform: Apple
-    us: Sí
-  - device: iPad (2022)
-    eu: false
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 13 Mini
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 13 Mini
+    eu: 'Yes'
+    os: iOS 15
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 13 Pro
+    eu: 'Yes'
+    os: iOS 15
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 13 Pro Max
+    eu: 'Yes'
     os: iOS 17
     platform: Apple
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 13 Pro Max
+    eu: 'Yes'
+    os: iOS 15
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 14
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 14 Plus
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 14 Pro
+    eu: 'Yes'
+    os: iOS 17
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 14 Pro
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 14 Pro Max
+    eu: 'Yes'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 15
+    eu: 'Yes'
+    os: iOS 18
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 15
+    eu: 'Yes'
+    os: iOS 17
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 15 Pro Max
+    eu: 'Yes'
+    os: iOS 17
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 16
+    eu: 'Yes'
+    os: iOS 18
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 16 Pro
+    eu: 'Yes'
+    os: iOS 18
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 16 Pro Max
+    eu: 'Yes'
+    os: iOS 18
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 17
+    eu: 'Yes'
+    os: iOS 26
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 17 Pro
+    eu: 'Yes'
+    os: iOS 26
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 17 Pro Max
+    eu: 'Yes'
+    os: iOS 26
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPad (2022)
+    eu: 'No'
+    os: iOS 17
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPad 9th Gen (2021)
+    eu: 'No'
+    os: iOS 15
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
   - device: iPad Air (2022)
-    eu: false
+    eu: 'No'
     os: iOS 15
     platform: Apple
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPad Mini (5th Gen)
+    eu: 'No'
+    os: iOS 14
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
   - device: iPad Mini 2021
-    eu: false
+    eu: 'No'
     os: iOS 15
     platform: Apple
-    us: Sí
-  - device: iPad 9ª generación (2021)
-    eu: false
-    os: iOS 15
-    platform: Apple
-    us: Sí
-  - device: iPad Pro 5ª generación (2021)
-    eu: false
-    os: iOS 15
-    platform: Apple
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
   - device: iPad Pro 12.9 (2020)
-    eu: false
+    eu: 'No'
     os: iOS 14
     platform: Apple
-    us: Sí
-  - device: iPad Mini (5ª generación)
-    eu: false
-    os: iOS 14
+    routed: 'No'
+    us: 'Yes'
+  - device: iPad Pro 12.9" (2022)
+    eu: 'No'
+    os: iOS 16
     platform: Apple
-    us: Sí
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPad Pro 5th Gen (2021)
+    eu: 'No'
+    os: iOS 15
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 11
+    eu: 'No'
+    os: iOS 16
+    platform: Apple
+    routed: 'No'
+    us: 'Yes'
+  - device: iPhone 12 Mini
+    eu: 'No'
+    os: iOS 16
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone 15 Pro
+    eu: 'No'
+    os: iOS 17
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
+  - device: iPhone SE (2022)
+    eu: 'No'
+    os: iOS 15
+    platform: Apple
+    routed: 'Yes'
+    us: 'Yes'
   headers:
-  - id: dispositivo
+  - id: device
     name: Dispositivo
   - id: os
-    name: Sistema operativo
+    name: OS
   - filter_by: true
-    id: plataforma
+    id: platform
     name: Plataforma
   - id: eu
-    name: UE
+    name: EU
   - id: us
-    name: Estados Unidos
-title: Dispositivos compatibles para realizar pruebas de aplicaciones móviles
+    name: US
+  - id: routed
+    name: Routed
+title: Dispositivos compatibles con Mobile App Testing
 ---
+Ejecute pruebas de Mobile App Testing en dispositivos Android e iOS reales. La disponibilidad del dispositivo depende del modelo del dispositivo, la versión del sistema operativo y las ubicaciones de prueba seleccionadas.
 
-Los siguientes dispositivos móviles son compatibles con Mobile App Testing. Estos dispositivos se clasifican por sistema operativo y disponibilidad en las regiones de la UE y Estados Unidos.
+## Tipos de ubicación {#location-types}
+
+Mobile App Testing admite dos tipos de ubicaciones:
+
+- **Ubicaciones físicas:** Utilice la ubicación del dispositivo en US o EU sin aplicar el enrutamiento de ubicación IP.
+- **Ubicaciones con enrutamiento IP:** Enrute el tráfico de red del dispositivo a través de una ubicación geográfica seleccionada para probar el comportamiento de la aplicación que depende de la ubicación.
+
+Seleccionar una ubicación con enrutamiento IP cambia el origen geográfico aparente del tráfico de red del dispositivo. No mueve el dispositivo a esa ubicación ni establece una conexión a una VPN corporativa.
+
+Utilice la tabla a continuación para verificar la disponibilidad de la ubicación física y la compatibilidad con el enrutamiento IP para cada dispositivo y versión del sistema operativo. Seleccione los dispositivos que admiten las ubicaciones que desea probar. Un dispositivo puede admitir solo un subconjunto de las ubicaciones seleccionadas.
+
+## Dispositivos compatibles {#supported-devices}
+
+Las columnas EU y US muestran la compatibilidad con la ubicación física. La columna **Routed** muestra si el dispositivo admite el enrutamiento IP, no si está ubicado físicamente en cada ubicación enrutada.
 
 {{< multifilter-search >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

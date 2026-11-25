@@ -139,6 +139,10 @@ Worker reloads
 : **Metric**: `pipelines.reloaded_total`
 : **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
 
+Worker stops
+: **Metric**: `pipelines.stopped_total`
+: **Description:** The number of times the Worker instance has stopped. Use the `reason` tag to determine if the Worker was stopped because of an error. The `reason` value is:<br>&nbsp;&nbsp;&nbsp;&nbsp;- `none` when an error didn't trigger the stop, such as when the Worker received a shutdown signal.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `source_aborted`, `transform_aborted`, or `sink_aborted` when a source, processor, or destination failed while running.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `api_failed` when the Worker API failed to start.<br>&nbsp;&nbsp;&nbsp;&nbsp;- `reload_failed_to_restore` when a configuration reload failed and the Worker couldn't restore the previous configuration.<br><br>**Note**: The metric is available for Worker version 2.26.1 and later.
+
 ## Component metrics
 
 These metrics are available for sources, processors, and destinations.

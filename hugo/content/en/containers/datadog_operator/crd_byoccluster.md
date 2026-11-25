@@ -5,6 +5,9 @@ further_reading:
   - link: "/byoc-logs/install/datadog_operator/"
     tag: "Documentation"
     text: "Install BYOC with the Datadog Operator"
+  - link: "https://www.datadoghq.com/blog/simplify-byoc-cluster-operations-with-datadog-operator/"
+    tag: "Blog"
+    text: "Simplify BYOC cluster operations with Datadog Operator"
 ---
 
 To deploy and manage a BYOC Logs cluster and its Observability Pipelines Workers, use the Datadog Operator and `DatadogBYOCCluster` custom resource definition (CRD).

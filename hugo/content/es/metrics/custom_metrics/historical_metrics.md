@@ -1,6 +1,6 @@
 ---
-description: Ingrese valores de métricas personalizadas con marcas de tiempo de más
-  de una hora de antigüedad, hasta su período de retención de métricas.
+description: Ingiera valores de métricas personalizadas con marcas de tiempo de más
+  de una hora de antigüedad, hasta el límite de su período de retención de métricas.
 further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
@@ -16,31 +16,33 @@ further_reading:
   tag: Blog
   text: Monitoree el rendimiento del sistema durante períodos más largos con métricas
     históricas
-title: Ingesta de métricas históricas
+title: Historical Metrics Ingestion
 ---
 {{< jqmath-vanilla >}}
 
 ## Descripción general {#overview}
 
-Habilitar Historical Metrics Ingestion le permite recopilar valores de **métricas personalizadas** con marcas de tiempo de más de una hora de antigüedad desde el momento del envío, pero no más antiguas que su período total de retención de métricas (predeterminado de 15 meses).
+Habilitar Historical Metrics Ingestion le permite recopilar valores de **métricas personalizadas** con marcas de tiempo de más de una hora de antigüedad con respecto al momento del envío, pero no anteriores a su período total de retención de métricas (15 meses de forma predeterminada).
 
-Tener Historical Metrics Ingestion habilitada en sus métricas puede ser útil para una variedad de casos de uso, como la recuperación de una interrupción, la corrección de valores erróneos y la gestión de retrasos de IoT.
+Tener Historical Metrics Ingestion habilitada para sus métricas puede ser útil para una variedad de casos de uso, como la recuperación de una interrupción, la corrección de valores erróneos y la gestión de retrasos de IoT.
 
 ## ¿Qué es Historical Metrics Ingestion? {#what-is-historical-metrics-ingestion}
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagrama que muestra el flujo de ingesta con Historical Metrics habilitada" >}}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagrama que muestra el flujo de ingesta para Métricas Históricas habilitadas" >}}
 
 Datadog clasifica las *métricas históricas* como puntos de métrica con marcas de tiempo que tienen más de una hora de antigüedad en relación con el momento del envío. Si Historical Metrics Ingestion no está habilitada, los valores de una métrica con más de una hora de antigüedad desde el envío no se ingieren.
 
-Por ejemplo, su métrica (`exampleMetricA`) emite un valor a Datadog a la 1:00 p. m. EST, y la marca de tiempo de ese valor es de las 10:00 a. m. EST. Este valor de métrica se clasifica como _histórico_ porque tiene una marca de tiempo 3 horas más antigua en relación con el momento del envío.
+Por ejemplo, su métrica (`exampleMetricA`) envía un valor a Datadog a la 1:00 p. m. EST, y la marca de tiempo de ese valor corresponde a las 10:00 a. m. EST. Este valor de métrica se clasifica como _histórico_ porque tiene una marca de tiempo 3 horas más antigua en relación con el momento del envío.
 
-Con Historical Metrics Ingestion habilitada, si envía varios valores con la misma marca de tiempo y la misma combinación de etiqueta-valor a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si envía una métrica con un valor de X y también envía esa métrica con un valor de Y, ambos con la misma marca de tiempo, se conservará el valor que se haya enviado más recientemente.
+Con Historical Metrics Ingestion habilitada, si envía varios valores con la misma marca de tiempo y la misma combinación de etiqueta-valor a Datadog, Datadog conserva el valor enviado más recientemente. Es decir, si envía una métrica con un valor de X y luego la misma métrica con un valor de Y, ambas con la misma marca de tiempo, se conservará el valor enviado más recientemente.
 
 Puede comenzar a ingerir valores de métricas históricas habilitando Historical Metrics Ingestion en la [página Metrics Catalog][1] para los tipos de métricas de *conteos, tasas y medidores*.  
 
-**Nota**: Historical Metrics Ingestion no está disponible para métricas de distribución ni para métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como logs).
+**Nota**: Historical Metrics Ingestion no está disponible para métricas de distribución, ni para métricas personalizadas generadas a partir de otros tipos de datos de Datadog (como registros).
 
 ## Configuración {#configuration}
+
+Habilitar o deshabilitar Historical Metrics Ingestion, incluso con configuración masiva, requiere el permiso Historical Metrics Config Write ([`late_metrics_config_write`][6]).
 
 Para habilitar la ingesta de métricas históricas para una métrica específica:
 1. Vaya a la [página Metrics Catalog][1].
@@ -63,7 +65,7 @@ Puede habilitar o deshabilitar Historical Metrics Ingestion para múltiples mét
 
 ## Envío de métricas históricas {#historical-metrics-submission}
 
-Después de habilitar Historical Metrics Ingestion, puede enviar valores de métricas con marcas de tiempo históricas a través de la [API](#api) o del [Agent](#agent).
+Después de habilitar Historical Metrics Ingestion, puede enviar valores de métricas con marcas de tiempo históricas a través de la [API](#api) o a través del [Agent](#agent).
 
 ### API {#api}
 
@@ -459,28 +461,28 @@ Historical Metrics Ingestion tiene una latencia variable según qué tan atrás 
 
 ## Facturación de Historical Metrics Ingestion {#historical-metrics-ingestion-billing}
 
-Las métricas históricas se cuentan y facturan como métricas personalizadas indexadas. Las métricas personalizadas facturables se determinan por la **marca de tiempo de las métricas enviadas**, independientemente de si tienen una marca de tiempo de hoy o de hace 15 meses. Siempre que esa combinación de nombre de métrica y valor de etiqueta esté reportando activamente **cualquier** valor (independientemente de la marca de tiempo), se consideraría activa en la hora en que se envió. 
+Las métricas históricas se cuentan y facturan como Custom Metrics indexadas. Las Custom Metrics facturables se determinan mediante la **marca de tiempo de las métricas enviadas**, independientemente de si tienen una marca de tiempo de hoy o de hace 15 meses. Siempre que esa combinación de nombre de métrica y valor de etiqueta esté reportando activamente **cualquier** valor (independientemente de la marca de tiempo), se consideraría activa en la hora en que se envió. 
 
 El siguiente ejemplo asume:
-- 3000 combinaciones únicas de etiqueta-valor
+- 3000 combinaciones únicas de valor de etiqueta
 - 1500 métricas en tiempo real
 - 1500 métricas históricas 
 - 720 horas en el mes (30 días)
-- Costo de métrica personalizada de $5 por cada 100 métricas
+- Costo de las Custom Metrics de $5 por cada 100 métricas
 
 $(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
-Haga un seguimiento de sus métricas históricas indexadas en la sección Usage Summary de la [página Plan and Usage][4].
+Realice un seguimiento de sus métricas históricas indexadas en la sección Usage Summary de la [página Plan and Usage][4].
 
-{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Sección Usage Summary de la página Plan and Usage, que muestra tanto las métricas personalizadas indexadas como las métricas históricas indexadas" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Sección Usage Summary de la página Plan and Usage, que muestra tanto las Custom Metrics indexadas como las métricas históricas indexadas" style="width:100%;" >}}
 
-Para obtener más información, consulte la documentación sobre [facturación de Custom Metrics][3].
+Para obtener más información, consulte la documentación de [facturación de Custom Metrics][3].
 
-### Facturación según los precios de Metric Name {#billing-under-metric-name-pricing}
+### Facturación según el modelo de precios de Metric Name {#billing-under-metric-name-pricing}
 
-Si su organización utiliza [precios de Metric Name][5] en lugar de precios por cardinalidad, la facturación de HMI es diferente. El uso de HMI se calcula en función del tiempo de ingesta en lugar de la marca de tiempo original de la métrica. Cada punto de datos de HMI contribuye tanto al volumen ingerido como al indexado.
+Si su organización utiliza el [modelo de precios de Metric Name][5] en lugar del modelo de precios por cardinalidad, la facturación de HMI es diferente. El uso de HMI se calcula en función del tiempo de ingesta en lugar de la marca de tiempo original de la métrica. Cada punto de datos de HMI contribuye tanto al volumen ingerido como al indexado.
 
-Para obtener detalles sobre el modelo de precios de Metric Name, consulte [Precios de Metric Name para Custom Metrics][5].
+Para obtener detalles sobre el modelo de precios de Metric Name, consulte [Metric Name Pricing para Custom Metrics][5].
 
 ## Lecturas adicionales {#further-reading}
 
@@ -491,3 +493,4 @@ Para obtener detalles sobre el modelo de precios de Metric Name, consulte [Preci
 [3]: /es/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /es/account_management/billing/metric_name_pricing/
+[6]: /es/account_management/rbac/permissions/#metrics
