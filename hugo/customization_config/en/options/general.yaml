@@ -606,7 +606,7 @@ options:
 - label: Upstream OpenTelemetry Collector
   id: upstream_otel_collector
 
-- label: "Agent's Collector"
+- label: "Agent’s Collector"
   id: agents_collector
 
 - label: Datadog Agent
