@@ -171,7 +171,7 @@ To generate the configuration through the UI, go to the [Install the Datadog Age
 
    The output includes `datadog-init-apm-inject` and a `datadog-lib-<language>-init` container for each instrumented language.
 
-1. After your applications receive traffic, confirm your services appear on the [APM Services page][42]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][35].
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][42]. If they do not appear within a few minutes, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > {{< ui >}}Instrumentation Errors{{< /ui >}}. The Instrumentation Errors page lists processes that SSI could not instrument and the steps to fix them. For more help, follow the [SSI troubleshooting guide][35].
 
 ## Configure Unified Service Tags
 

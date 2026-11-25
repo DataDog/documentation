@@ -17,7 +17,54 @@ Single Step Instrumentation (SSI) helps instrument applications by automatically
 
 ## Troubleshooting methods
 
-You can investigate injection issues in the Datadog UI with Fleet Automation, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs](#injector-debug-logs).
+You can investigate injection issues in the Datadog UI with the Instrumentation Errors page, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs](#injector-debug-logs).
+
+### Troubleshoot injection with Instrumentation Errors
+
+The [Instrumentation Errors][15] page lists the processes that SSI could not instrument, grouped by error type. The list includes only processes that restarted after you enabled SSI, and excludes processes that are no longer running. For each process, you can see the hosts where the process runs and the steps to resolve the error.
+
+<!-- TODO: Confirm prerequisites with PM (minimum Agent version, Kubernetes support at GA, Datadog site availability). Permissions: confirm whether APM read access is enough to view the page. -->
+
+Instrumentation Errors supports SSI on Linux hosts, Windows hosts, and Kubernetes.
+
+#### View and resolve instrumentation errors
+
+1. Go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Errors{{< /ui >}}][15].
+
+   Each entry shows the error type, the process language, the error message, the process command, the number of hosts where the error occurs, and when SSI last attempted to instrument the process.
+
+1. (Optional) Filter the list to the processes you want to investigate:
+   - Use the {{< ui >}}Env{{< /ui >}}, {{< ui >}}Deployment type{{< /ui >}}, and {{< ui >}}Language{{< /ui >}} filters, or click {{< ui >}}Add filter{{< /ui >}} to filter on other attributes.
+   - Search by host, service, or process.
+   - Select an error type from the {{< ui >}}Error type{{< /ui >}} dropdown.
+
+   {{< img src="tracing/trace_collection/ssi-instrumentation-errors-list.png" alt="The Instrumentation Errors page, filtered to the Prod environment and Linux, listing processes with Incompatible Runtime and Incorrect Installation errors" style="width:100%;" >}}
+
+1. Click a process to open its details panel. Alternatively, hover over the process and click {{< ui >}}View next steps{{< /ui >}}.
+1. On the {{< ui >}}Setup Status{{< /ui >}} tab, review the error in the {{< ui >}}Errors for Review{{< /ui >}} section. Each error shows how many times SSI attempted to instrument the process and when Datadog first detected the error. For process details and the host where the process runs, open the {{< ui >}}Process Overview{{< /ui >}} tab. <!-- TODO: Confirm the Process Overview tab ships at GA. -->
+
+   {{< img src="tracing/trace_collection/ssi-instrumentation-errors-next-steps.png" alt="The Setup Status tab for a Python process with an Incompatible Runtime error, showing next steps to check the runtime version and upgrade to a supported version" style="width:100%;" >}}
+
+1. Follow the next steps for the error. For a summary of each error type and its resolution, see the [Instrumentation error types](#instrumentation-error-types) section.
+1. (Optional) To resolve the error with an AI coding agent, click {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into your agent. The prompt includes the error, the process and host details, and the next steps. It instructs the agent to make the smallest change needed and to ask before restarting a production service.
+1. After you apply the fix, restart the service. SSI injects the SDK when the process starts. <!-- TODO: Confirm how long it takes for a resolved error to clear from the list. -->
+
+To remove a process from the list without resolving its error, hover over the process and click {{< ui >}}Skip{{< /ui >}}. Skipping a process is separate from the Skipped error type. <!-- TODO: Confirm whether the Skip button is renamed with the Skipped -> Blocked change. -->
+
+#### Instrumentation error types
+
+<!-- TODO: The "Skipped" label may be renamed to "Blocked" before GA. Confirm the final label with PM. -->
+
+The Instrumentation Errors page reports the following error types:
+
+| Error type | Cause | Example message | How to resolve |
+| --- | --- | --- | --- |
+| {{< ui >}}Incompatible Runtime{{< /ui >}} | The process runtime does not meet the SDK requirements, or the process is not a service. | `Python 3.6 or older is not supported (detected Python 3.6.8)` | Upgrade the runtime to a version that the SDK supports. See [SSI compatibility][16]. |
+| {{< ui >}}Incorrect Installation{{< /ui >}} | The SSI setup on the host has a problem. For example, the SDK for the detected language is not installed. | `the tracing library is not installed for the language` | Confirm that the Datadog Agent and the APM injector are installed on the host. Reinstall SSI if needed. |
+| {{< ui >}}Skipped{{< /ui >}} (already instrumented) | The process already loads a Datadog SDK, for example from a manual SDK installation, so SSI does not inject one. | `Datadog Java agent already on command line` | To let SSI manage the SDK, remove the manual SDK installation from the application. |
+| {{< ui >}}Skipped{{< /ui >}} (instrumentation rule) | An [instrumentation rule][17] blocks injection for the process. The entry shows the conditions of the matching rule. | `rejected by workload selection` | To instrument the process, change or remove the rule. |
+| {{< ui >}}Internal Error{{< /ui >}} | Injection failed for a reason that you cannot fix in your environment. | `failed to get process arguments` | Restart the process to retry injection. If the error continues, send an Agent flare and contact [Datadog Support][18]. |
+| {{< ui >}}Crash{{< /ui >}} | The process crashed during injection. | `The process terminated due to signal 'SIGSEGV'` | Restart the process to retry injection. If the error continues, send an Agent flare and contact [Datadog Support][18]. |
 
 ### Troubleshoot injection in Datadog Fleet Automation
 
@@ -539,3 +586,7 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /tracing/troubleshooting/tracer_debug_logs/
 [14]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdv785#enable-apm-with-datadoginstrumentation
+[15]: https://app.datadoghq.com/apm/service-setup?product=apm&tab=errors
+[16]: /tracing/trace_collection/single-step-apm/compatibility/
+[17]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
+[18]: /help/

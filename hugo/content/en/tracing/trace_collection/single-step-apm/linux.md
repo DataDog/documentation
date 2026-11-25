@@ -96,7 +96,7 @@ If you already have a Datadog Agent installed, enable SSI remotely from Datadog.
 
    The output lists the APM injector library in `/etc/ld.so.preload` and one or more `datadog-apm-*` packages.
 
-1. After your applications receive traffic, confirm your services appear on the [APM Services page][23]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][19].
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][23]. If they do not appear within a few minutes, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > {{< ui >}}Instrumentation Errors{{< /ui >}}. The Instrumentation Errors page lists processes that SSI could not instrument and the steps to fix them. For more help, follow the [SSI troubleshooting guide][19].
 
 ## Configure Unified Service Tags
 
