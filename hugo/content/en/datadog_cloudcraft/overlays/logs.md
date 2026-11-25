@@ -23,9 +23,9 @@ The Logs overlay shows logs from your cloud resources in the context of your Clo
 
 To open the overlay, click the {{< ui >}}Logs{{< /ui >}} tab in the overlay selector at the top of your diagram.
 
-The overlay adds a pin to each supported resource that has logs. The pin shows the most severe log status for that resource and the number of logs with that status. A second count combines the logs with all other statuses, for example, **9 Emergency, 14k other**.
+The overlay adds a pin to each supported resource that has logs. The pin shows the most severe log status for that resource and the number of logs with that status, followed by the total number of logs with any other status. For example, a pin can show **9 Emergency, 14k other**.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay with a log search panel, and log pins and status counts on resources in an AWS diagram." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_logs_overlay_diagram.png" alt="Cloudcraft Logs overlay showing a log search panel and log pins with status counts on resources in an AWS diagram." style="width:100%;" >}}
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ The Logs overlay shows a search bar, a list of log results, and the pins on your
 To investigate logs:
 
 1. In the search bar, enter a query to filter the logs. The search bar uses the standard [log search syntax][2].
-1. Use the time selector next to the {{< ui >}}Group Patterns{{< /ui >}} toggle to change the time range.
+1. (Optional) To change the time range, use the time selector next to the {{< ui >}}Group Patterns{{< /ui >}} toggle.
 1. (Optional) Turn on {{< ui >}}Group Patterns{{< /ui >}} to group similar logs. For more information, see [Grouping Logs Into Patterns][4].
 1. In the list of results, click a log to see its details in the log side panel.
 
