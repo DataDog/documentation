@@ -34,7 +34,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
+<div class="alert alert-info">For vulnerability management in application libraries, see <a href="/security/code_security/software_composition_analysis/">Software Composition Analysis</a>. For application code, see <a href="/security/code_security/iast/">Code Security</a>.</div>
 
 ## Key capabilities
 
@@ -139,9 +139,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 {{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
-[5]: /security/code_security/software_composition_analysis/
 [7]: https://app.datadoghq.com/container-images
-[10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
