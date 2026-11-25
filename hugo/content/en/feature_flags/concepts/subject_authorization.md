@@ -26,51 +26,57 @@ This setting controls access to flag assignments. Your backend remains responsib
 
 ## How it works
 
-Your backend issues a signed JSON Web Token (JWT) for an authenticated subject and environment. The SDK includes this token with assignment requests. Datadog validates the token and checks that its subject and environment match the request before evaluating flags.
+Your backend issues a signed JSON Web Token (JWT) for an authenticated subject and environment. The SDK includes this token with assignment requests. Datadog validates the token and checks that its subject and environment match the request before returning new flag assignments to the SDK.
 
-The JWT accompanies the public client token, which identifies your application's configuration.
+The SDK sends the JWT alongside your existing Datadog client token. The client token identifies your Datadog organization; the JWT authorizes assignment downloads for the requested subject and environment.
 
 ## Requirements
 
-- Access to subject authorization and custom OIDC providers in Workload Identity Federation (WIF).
-- Permission to register a custom OIDC provider in WIF, and **Feature Flag Environment Config Write** permission to configure the environment. See [Permissions and Access Control][7].
+- Access to subject authorization and custom OIDC providers in [Workload Identity Federation (WIF)][8].
+- The `workload_identity_federation_write` permission to register a custom OIDC provider in WIF, and **Feature Flag Environment Write** permission to configure the environment. See [Permissions and Access Control][7].
 - A backend that issues signed JWTs and publishes its public signing keys at a JWKS endpoint.
 
 ### Supported clients
 
-Subject authorization requires the browser SDK, `@datadog/openfeature-browser`, version `2.4.0` or later. See [JavaScript Feature Flags][1] for installation instructions.
+| SDK | Minimum version |
+|-----|-----------------|
+| Browser (`@datadog/openfeature-browser`) | `2.4.0` |
+
+See [Client SDKs][1] for installation instructions.
 
 ## Register an OIDC provider
 
-Register a dedicated custom OIDC provider in the same Datadog organization and site as your Feature Flags environment. Follow [Register the OIDC provider in Datadog][2], using these settings:
+Register a dedicated custom OIDC provider in the same Datadog organization and site as your Feature Flags environment. Follow [Register the OIDC provider in Datadog][2], or use the [Create a Custom OIDC provider API][9], with these settings:
 
-- **Key discovery:** Direct JWKS URL (`direct_jwks`).
-- **Issuer URL:** The exact `iss` value your backend includes in its JWTs.
-- **Audience:** A single value, `datadog/<ORG_UUID>`. Find the organization UUID on **Organization Settings > Workload Identity Federation**.
-- **Org routing:** Audience (`aud`).
-- **Required claims:** Only the following exact matcher:
-
-```json
-{
-  "claim": "feature_flags",
-  "mode": "exact",
-  "values": ["true"]
-}
-```
-
-The provider matcher uses the string `"true"`; the JWT itself must contain Boolean `true`. Additional required-claim matchers and custom subject-claim mappings are not supported. Use the default `sub` identity claim.
+- **Name:** A descriptive name for the provider, such as `Feature Flags Subject Authorization - Staging`.
+- **Issuer URL:** The exact issuer identifier your backend includes in the JWT's `iss` claim, such as `https://auth.example.com`.
+- **Key discovery:** Select **Direct JWKS URL** (`direct_jwks`).
+- **JWKS URL:** The public HTTPS endpoint that serves your public signing keys as a JSON Web Key Set, such as `https://auth.example.com/.well-known/jwks.json`. The endpoint must return the JWKS directly, without redirects. Keep private keys on your backend.
+- **Org routing:** Select **Org UUID in the token audience**.
+- **Audiences:** A single value, `datadog/<ORG_UUID>`. Find the organization UUID on **Organization Settings > Workload Identity Federation**.
+- Use the default `sub` identity claim.
+- **Required claims:** Add exactly one claim matcher:
+  - **Claim name:** `feature_flags`
+  - **Match:** **Exact**
+  - **Value:** `true`
 
 Both the issuer and JWKS URLs must use public DNS hostnames and HTTPS on port 443, without URL credentials, query strings, or fragments. The JWKS endpoint must return the keys directly, without redirects.
 
 Publish up to three public signing keys. Each key must use RSA-2048 with exponent 65537, support PS256 signatures, and have a unique, nonempty `kid`. If present, `alg` must be `PS256`, `use` must be `sig`, and `key_ops` must contain only `verify`. Keep private keys on your backend.
 
-Save the provider ID returned when you register the provider. This flow uses the provider registration directly; it does not require a WIF identity mapping, intake mapping, or token exchange.
+Save the provider ID returned when you register the provider. To retrieve it later, use the [List providers API][10]. This flow uses the provider registration directly; it does not require a WIF identity mapping, intake mapping, or token exchange.
 
-After publishing keys, allow at least 15 minutes for propagation. After enabling authorization, verify assignment downloads with a token signed by the new key. Follow the same process when [rotating keys](#rotate-signing-keys).
+After publishing keys, allow at least 15 minutes for propagation.
 
 ## Issue subject tokens
 
-After authenticating a subject, issue a JWT from your backend with a `PS256` signature. Include the signing key's `kid` in the JWT header. If you include `typ`, set it to `JWT`.
+After authenticating a subject, issue a JWT from your backend with a `PS256` signature. The JWT header accepts only these fields:
+
+- `alg`: Set to `PS256`.
+- `kid`: The signing key's identifier, between 1 and 128 bytes.
+- `typ`: Optional. If included, set to `JWT`.
+
+Additional header fields are rejected.
 
 The complete encoded token must be 8192 bytes or smaller.
 
@@ -94,22 +100,23 @@ Replace the example values as follows:
 - `aud` must match the provider's audience.
 - `sub` must exactly match the SDK's `targetingKey` and must not be empty.
 - `environment_id` must be the Feature Flags environment's UUID, not its name or the SDK's `env` value. Retrieve it with the [List environments API][3].
+- `feature_flags` must be Boolean `true`.
 - `iat` and `exp` must be UNIX timestamps in seconds. Set `iat` to the issue time and `exp` to a later expiration time. Replace the example timestamps when issuing a token. Datadog also validates `nbf` if present, with a 30-second clock tolerance for timestamp checks.
 
-Return the signed token to the authenticated application through your existing session or bootstrap flow. The browser must not hold the signing private key. A JWT is signed, not encrypted; omit secrets and unnecessary personal data.
+Return the signed token to the authenticated application through your existing session or bootstrap flow. Keep the signing private key on your backend. A JWT is signed, not encrypted; omit secrets and unnecessary personal data.
 
 ## Configure the client
 
 Include the subject token in the reserved `dd_assignment_token` evaluation context field when initializing the provider. Replace it through a complete context update before it expires. See [Authorize assignment downloads][4] for browser initialization, token refresh, and subject-switching behavior.
 
-Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one.
+Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one. For authorization errors, see [Troubleshoot assignment downloads](#troubleshoot-assignment-downloads).
 
 ## Enable authorization through the API
 
 Configure subject authorization with the [Update environment API][5]. Select one OIDC provider for the environment with these attributes:
 
 - `subject_authorization_state`: `enabled` or `disabled`. Environments default to `disabled`.
-- `subject_authorization_oidc_provider_id`: The registered provider's UUID. Required when authorization is enabled.
+- `subject_authorization_oidc_provider_id`: The UUID of your registered custom OIDC provider. Retrieve it from the [provider creation response][9] or the [List providers API][10]. Required when authorization is enabled.
 
 Use your [Datadog API and application keys][6] to authenticate these requests.
 
@@ -153,7 +160,9 @@ To disable authorization, repeat the read and update process with `subject_autho
 
 ## Rotate signing keys
 
-1. Add the new public key to your JWKS, retaining existing keys. Use a new `kid` and keep the total at three keys or fewer.
+Your JWKS can contain up to three keys, such as the previous, current, and next signing keys. Datadog uses all published keys to validate tokens.
+
+1. Add the new public key to your JWKS, retaining existing keys. Use a new `kid`.
 2. Allow at least 15 minutes for key changes to propagate.
 3. Verify assignment downloads with a token signed by the new key, then start issuing replacement tokens with it.
 4. Keep old public keys published until tokens signed with them expire. Remove keys after they are no longer needed.
@@ -172,10 +181,13 @@ For browser configuration and proxy requirements, see [Authorize assignment down
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /feature_flags/client/javascript/#installation
+[1]: /feature_flags/client/
 [2]: /account_management/workload_identity_federation/#register-the-oidc-provider-in-datadog
 [3]: /api/latest/feature-flags/#list-environments
 [4]: /feature_flags/client/javascript/#authorize-assignment-downloads
 [5]: /api/latest/feature-flags/#update-an-environment
 [6]: /account_management/api-app-keys/
 [7]: /feature_flags/concepts/permissions/
+[8]: /account_management/workload_identity_federation/
+[9]: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
+[10]: /api/latest/cloud-authentication/list-all-custom-oidc-providers/
