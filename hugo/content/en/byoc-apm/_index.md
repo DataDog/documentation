@@ -77,7 +77,7 @@ BYOC APM maps these core OpenTelemetry span attributes to Datadog span fields:
 
 In a Datadog organization that uses BYOC APM:
 
-- All traces are stored in BYOC, in one traces database cluster. You can't use SaaS APM and BYOC APM in the same organization.
+- All traces are stored in your cloud account, in one traces database cluster.
 - Logs can be stored in Datadog or in [BYOC Logs][1].
 
 ## Requirements
@@ -87,7 +87,7 @@ To use BYOC APM, you need:
 - An AWS account and an Amazon EKS cluster
 - A platform team that can operate the data plane, including the installation and operation of the [Datadog Operator][2]
 - A budget for the compute and object storage that the data plane uses
-- A Datadog organization for the APM UI and metrics
+- A Datadog organization for the APM UI and metrics. You can't use Datadog-hosted APM and BYOC APM in the same organization.
 - Applications instrumented with [OpenTelemetry][9] that send traces over OTLP through the OpenTelemetry Collector
 
 The Preview supports only Amazon EKS. Other cloud providers and on-premises deployment aren't supported.
@@ -101,16 +101,17 @@ The following table lists the capabilities that BYOC APM supports and doesn't su
 | Area | Supported | Not supported |
 | --- | --- | --- |
 | Ingestion | OTLP trace ingestion and span storage in your cloud account | Datadog Agent ingestion, pipeline customization |
-| Search and analytics | Historical span queries | Trace queries, Live Search, some aggregations, the scatter plot, calculated fields, cluster selection in [Trace Explorer][11] |
-| Metrics | RED metrics: request rate, errors, and latency | Sorting by error rate, percentiles, the distribution widget, [custom metrics generated from spans][12] |
+| Search and analytics | Historical span queries | Trace Queries, Live Search, DDSQL, some aggregations, calculated fields, cluster selection in [Trace Explorer][11] |
+| Visualizations | | [Scatter Plot][12] and [Point Plot][13] widgets |
+| Metrics | RED metrics: request rate, errors, and latency | Sorting by error rate, percentiles, the distribution widget, [custom metrics generated from spans][14] |
 | Services | [Service pages][5], [resource pages][6], [Catalog][7] entries | The service dependency graph, service remapping configuration, [Error Tracking][15] |
 | Monitors | [Monitors on trace metrics][8] | Some monitor types |
-| Logs | [Logs and traces correlation][13], using the trace ID on each log | |
-| AI agents | [Datadog MCP Server][14] tools that search spans, get a trace, and summarize a trace | |
+| Logs | [Logs and traces correlation][16], using the trace ID on each log | |
+| AI agents | [Datadog MCP Server][17] tools that search spans, get a trace, and summarize a trace | |
 | Span data | | Span links, span events, enrichments |
 | Data management | | Retention filters, Sensitive Data Scanner |
 
-Datadog hides some unsupported features in the UI.
+Datadog hides some unsupported features in the UI. Other unsupported features can appear in the UI, but don't work with BYOC data.
 
 ## Responsibilities
 
@@ -136,7 +137,9 @@ You and Datadog share responsibility for a BYOC APM deployment. The data plane r
 [9]: /opentelemetry/
 [10]: /byoc-logs/install/aws_eks/#prerequisites
 [11]: /tracing/trace_explorer/
-[12]: /tracing/trace_pipeline/generate_metrics/
-[13]: /tracing/other_telemetry/connect_logs_and_traces/
-[14]: /mcp_server/
+[12]: /dashboards/widgets/scatter_plot/
+[13]: /dashboards/widgets/point_plot/
+[14]: /tracing/trace_pipeline/generate_metrics/
 [15]: /tracing/error_tracking/
+[16]: /tracing/other_telemetry/connect_logs_and_traces/
+[17]: /mcp_server/
