@@ -138,36 +138,24 @@ Use the [Update environment API][5] to associate one registered OIDC provider wi
 - `subject_authorization_state`: `enabled` or `disabled`. Environments default to `disabled`.
 - `subject_authorization_oidc_provider_id`: The UUID of your registered custom OIDC provider. Retrieve it from the [provider creation response][9] or the [List providers API][10]. Required when authorization is enabled.
 
-Use your [Datadog API and application keys][6] to authenticate these requests.
+1. Retrieve the current environment settings with the [Get environment API][6], using the environment UUID.
 
-1. Retrieve the environment's current settings. Replace `<ENVIRONMENT_ID>` with the environment UUID:
+2. Update the same environment with the [Update environment API][5]. Copy the current `name`, `queries`, `is_production`, and `require_feature_flag_approval` values into the request body and replace `<OIDC_PROVIDER_ID>` with your provider UUID. This example enables authorization for a production environment named `Production`:
 
-   ```bash
-   curl -X GET "{{< region-param key="dd_api" code="true" >}}/api/v2/feature-flags/environments/<ENVIRONMENT_ID>" \
-     -H "DD-API-KEY: ${DD_API_KEY}" \
-     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
-   ```
-
-2. Update the environment. Replace `<OIDC_PROVIDER_ID>` with the registered provider UUID. Copy the existing `name`, `queries`, `is_production`, and `require_feature_flag_approval` values from the previous response into the request. The following example uses a production environment named `Production`:
-
-   ```bash
-   curl -X PUT "{{< region-param key="dd_api" code="true" >}}/api/v2/feature-flags/environments/<ENVIRONMENT_ID>" \
-     -H "DD-API-KEY: ${DD_API_KEY}" \
-     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
-     -H "Content-Type: application/json" \
-     -d '{
-       "data": {
-         "type": "environments",
-         "attributes": {
-           "name": "Production",
-           "queries": ["production"],
-           "is_production": true,
-           "require_feature_flag_approval": false,
-           "subject_authorization_state": "enabled",
-           "subject_authorization_oidc_provider_id": "<OIDC_PROVIDER_ID>"
-         }
+   ```json
+   {
+     "data": {
+       "type": "environments",
+       "attributes": {
+         "name": "Production",
+         "queries": ["production"],
+         "is_production": true,
+         "require_feature_flag_approval": false,
+         "subject_authorization_state": "enabled",
+         "subject_authorization_oidc_provider_id": "<OIDC_PROVIDER_ID>"
        }
-     }'
+     }
+   }
    ```
 
    Updates require `name` and `queries`. Include the current `is_production` and `require_feature_flag_approval` values to preserve them; omitting either resets it to `false`.
@@ -226,8 +214,8 @@ To recover, obtain a valid token for the requested subject and environment and s
 [2]: /account_management/workload_identity_federation/#register-the-oidc-provider-in-datadog
 [3]: /api/latest/feature-flags/#list-environments
 [4]: /feature_flags/client/javascript/#authorize-assignment-downloads
-[5]: /api/latest/feature-flags/#update-an-environment
-[6]: /account_management/api-app-keys/
+[5]: /api/latest/feature-flags/update-an-environment/
+[6]: /api/latest/feature-flags/get-an-environment/
 [7]: /feature_flags/concepts/permissions/
 [8]: /account_management/workload_identity_federation/
 [9]: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
