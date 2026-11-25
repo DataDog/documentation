@@ -65,7 +65,7 @@ BYOC APM moves data along these paths:
 
 BYOC APM doesn't sample spans. To control span volume, configure sampling in your OpenTelemetry SDK or in the OpenTelemetry Collector.
 
-BYOC APM maps these core OpenTelemetry span attributes:
+BYOC APM maps these core OpenTelemetry span attributes to Datadog span fields:
 
 - Service
 - Operation name
