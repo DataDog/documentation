@@ -246,3 +246,9 @@ entries:
       - ListTagConfigurations
       - ListVolumesByMetricName
     title: Mark metric volume attributes as nullable in ListVolumesByMetricName
+  - change_type: modified
+    date: '2026-11-25'
+    link: https://github.com/DataDog/documentation/pull/42226
+    operations:
+      - ListTagConfigurations
+    title: Document generated metrics in the Get a list of metrics response

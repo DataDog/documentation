@@ -16770,11 +16770,6 @@ components:
         description:
           description: The description of the widget.
           type: string
-        palette:
-          description: >-
-            Color palette to apply to the widget. Supported values include `datadog16`, `datadog32`, `semantic`, `classic`, and `dog_classic`. A guide to the available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
-          example: datadog16
-          type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"
         time:
