@@ -46,28 +46,28 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 #### Changed
 
-- Improves searcher memory management to reduce out-of-memory restarts during expensive queries. Searches wait for available warmup memory; split searches that exceed the per-split memory cap fail without retrying.
-- Indexes long tokens, truncated to 1024 bytes, instead of dropping tokens of 255 bytes or more. Use prefix queries for values longer than 1024 bytes. Queries with tokens longer than 255 bytes only match data indexed after upgrading to v0.1.37 or later.
-- Excludes attribute values of 255 bytes or more from `@attr:*` existence queries, terms aggregations, sorts, and ranges.
-- Excludes span indexes from searches without an explicit index pattern.
-- Accepts object fields containing `null`, `[]`, or arrays beginning with `null` without rejecting the document.
-- Limits ingest request bodies to 10 MiB before decompression and 256 MiB after decompression by default. Oversized requests return HTTP `413`. Configure these limits with `ingest_api.max_body_size` (previously `content_length_limit`, still accepted) and `ingest_api.max_decompressed_body_size`.
-- Fixes retention scheduling after an index is deleted and recreated.
-- Adds metrics for search warmup memory usage and allocation failures, and removes `tokio_worker_busy_ratio`.
+- Reduces out-of-memory restarts during expensive searches by enforcing searcher memory limits.
+- Makes long IDs and URLs searchable in newly indexed data. Tokens are truncated to 1024 bytes; use prefix queries for longer values.
+- **Query behavior change**: Attribute values of 255 bytes or more are excluded from `@attr:*` existence queries, terms aggregations, sorts, and ranges.
+- Keeps span indexes out of log searches unless explicitly selected.
+- Prevents document rejections caused by empty or null object fields.
+- Protects ingestion memory by limiting request bodies to 10 MiB before decompression and 256 MiB after decompression by default. Oversized requests return HTTP `413`.
+- Applies retention correctly after an index is deleted and recreated.
+- Adds metrics to diagnose search memory pressure. Removes `tokio_worker_busy_ratio`.
 
 #### Helm chart changes
 
 <div class="alert alert-warning">
-<strong>Breaking change</strong>: Removes the <code>6xlarge</code> and <code>8xlarge</code> indexer pod sizes. Select a supported indexer size before upgrading. Searcher pod sizes are unchanged.
+<strong>Breaking change</strong>: Removes the <code>6xlarge</code> and <code>8xlarge</code> indexer sizes. Select a supported indexer size before upgrading.
 </div>
 
-- Lowers the indexer WAL memory budget for `large`, `xlarge`, and `2xlarge`, and raises it for `4xlarge`. Lower budgets cause ingestion backpressure to start earlier during spikes or slow rollouts. See the [chart changelog](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/CHANGELOG.md#070) for the per-size budgets.
-- Adds CPU limits of 2, 4, 8, and 16 cores to sizing-map indexers from `large` through `4xlarge`. CPU requests and explicit `indexer.resources` overrides are unchanged.
-- Changes default document clustering to group logs by `source` and `service`, then `status`, then tokenized `message`.
+- Adjusts default [indexer WAL memory budgets](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/CHANGELOG.md#070) to reduce the risk of out-of-memory restarts.
+- Adds CPU limits to keep standard indexer pods within their allocated resources. Explicit `indexer.resources` overrides are unchanged.
+- Groups similar logs by source and service to improve compression.
 
 #### Known issues
 
-- The Azure Blob Storage client does not trust operating system or custom CA certificates. Azure deployments using a TLS-inspecting proxy or a private CA are affected.
+- Azure Blob Storage connections using private CAs or TLS inspection can fail certificate validation.
 
 ### v0.1.36 — 2026-11-03
 
