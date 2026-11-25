@@ -18,13 +18,13 @@ Feature Flags response signing is in Preview. To request access, contact <a href
 
 ## Summary
 
-- **Problem**: Client applications receive flag assignments over the network. Without an end-to-end check, the application cannot prove that a response came from Datadog, was not changed in transit, and answers the current request.
+- **Problem**: Client applications receive flag assignments over the network. Without a check from the Datadog edge to the application, the application cannot prove that a response came from Datadog, was not changed in transit, and answers the current request.
 - **Solution**: Response signing. Datadog signs each flag assignment response. The SDK verifies the signature against a Datadog root certificate that ships inside the SDK.
 - **Protects against**: Response tampering, spoofed responses, replayed responses, and responses moved from one request to another.
 - **Does not protect against**: A compromised device or application, and inspection of flag values by the device owner. Signing does not encrypt traffic. TLS still encrypts it.
 - **Supported SDKs**: [iOS][1], [Android][2], and [browser (JavaScript)][3].
 - **Setup**: Set one SDK option. No keys, certificates, or Datadog settings to manage. The SDK sends flag requests directly to Datadog. Proxies and custom flag endpoints are not supported.
-- **Expiry**: Each signature expires after a few minutes. By default, the SDK continues to serve the last verified flags after expiry and reports a stale state. An option makes the SDK return default values instead.
+- **Expiry**: Each signature expires at most 5 minutes after Datadog issues it. The SDK does not fetch again by itself. By default, the SDK continues to serve the last verified flags after expiry and reports a stale state. An option makes the SDK return default values instead.
 - **Cryptography**: ECDSA P-256 with SHA-256, an X.509 certificate chain, a pinned root, short-lived leaf certificates that rotate automatically every day, and a per-request nonce.
 
 ## Key terms
@@ -64,7 +64,7 @@ The following table lists the threats to flag assignment responses and the prote
 | --- | --- | --- | --- |
 | Changed response body | A TLS-inspecting network proxy changes a flag value from `false` to `true`. | Yes | The signature covers the exact response bytes. A change of one byte causes verification to fail. |
 | Spoofed response | A server that is not Datadog returns its own flag assignments. | Yes | Only a certificate chain that leads to the pinned Datadog root is accepted. The attacker does not have a Datadog signing key. |
-| Replayed response | An attacker stores a valid response and returns it later. | Yes | The signature covers the nonce of the current request and an expiry time of a few minutes. |
+| Replayed response | An attacker stores a valid response and returns it later. | Yes | The signature covers the nonce of the current request and an expiry time of at most 5 minutes. |
 | Response for a different request | An attacker returns a valid response for a different user, client token, or URL. | Yes | The signature binds the request content (method, host, path, query, and body) and the client identity (the client token). |
 | Blocked refresh | An attacker blocks new responses so that the application keeps old flag values. | Partly | The attacker cannot change the values. By default, the SDK serves the last verified flags and reports a stale state. To use default values instead, enable the `expireVerifiedFlags` option. See [Signature expiry](#signature-expiry). |
 | Removed signature | An attacker removes the signature headers so that the SDK accepts an unsigned response. | Yes | With signing enabled, the SDK rejects a response that has no signature. It does not retry without signing. |
@@ -78,10 +78,10 @@ The following table lists the threats to flag assignment responses and the prote
 Response signing adds origin attestation to every flag assignment response. When you enable response signing, the SDK verifies three properties before it uses a response:
 
 - **Origin**: Datadog produced the response.
-- **Integrity**: Nobody changed the response body or the request it answers.
+- **Integrity**: Nobody changed the response body or the signed parts of the request. The signature does not cover all request headers. See [Request and verification flow](#request-and-verification-flow).
 - **Freshness**: The response answers this exact request. It is not a copy of an earlier response.
 
-The SDK rejects a response that fails any of these checks. Your application does not receive unverified flag values.
+In `required` mode, the SDK rejects a response that fails any of these checks, and your application does not receive unverified flag values. In `observe` mode, the SDK reports the failure but accepts the response.
 
 ### Trust model
 
@@ -112,10 +112,10 @@ Response signing uses a public key infrastructure (PKI). A PKI is a hierarchy of
 1. Datadog returns the response. The signature, the leaf certificate, and the intermediate certificate chain are in `x-datadog-feature-flags-*` response headers.
 1. The SDK verifies the certificate chain: leaf, then each intermediate, then the pinned root. It checks each signature, the validity dates of each certificate, and the leaf EKU.
 1. The SDK verifies the signature against the request it sent and the exact bytes it received.
-1. The SDK checks that the signature has not expired. A signature is valid for a few minutes at most.
+1. The SDK checks that the signature has not expired. A signature is valid for at most 5 minutes after Datadog issues it.
 1. If all checks pass, the SDK parses the response and makes the flag values available to your application. If a check fails, the SDK rejects the response. See [Verification failures](#verification-failures).
 
-The SDK verifies the response before it parses the assignments. Unverified data never reaches flag evaluation.
+The SDK verifies the response before it parses the assignments. In `required` mode, unverified data never reaches flag evaluation.
 
 ### Certificate rotation
 
@@ -153,9 +153,9 @@ With signing enabled, the SDK rejects a response if any check fails. A request t
 | `invalid-proof` | The signature headers are present but not valid. | A proxy or CDN changed the response headers. |
 | `invalid-certificate` | The certificate chain does not lead to the pinned Datadog root, or a certificate rule fails. For example, the leaf has no Datadog Feature Flags EKU. | The response did not come from Datadog, or the network intercepts TLS. Contact Datadog Support. |
 | `invalid-signature` | The signature does not match the request and the response. | The response changed in transit. |
-| `expired-proof` | The signature is expired or not yet valid. | Check the device clock. |
+| `expired-proof` | The signature is expired, or its issue time is more than 30 seconds after the device time. | Check the device clock. |
 | `response-too-large` | The response body is larger than the size limit for signed responses. | Contact Datadog Support. |
-| `unsupported-request` | The SDK cannot sign this request. | Use the default flags endpoint and request options. |
+| `unsupported-request` | This request cannot be used with response signing. | Use the default flags endpoint and request options. |
 | `unavailable-crypto` | The platform cryptography API is not available. | Browser: use a secure (HTTPS) context. Mobile: use a supported OS version. |
 | `missing-anchor` | The SDK has no trusted root for this Datadog site. | Use a Datadog site that supports response signing. |
 | `unsupported-site` | Response signing is not available on this Datadog site. | Use a Datadog site that supports response signing. |
@@ -180,14 +180,26 @@ The SDK fails closed: when it cannot verify a response, it uses your default val
 
 ### Signature expiry
 
-Each signature expires a few minutes after Datadog issues it. The `expireVerifiedFlags` option sets what the SDK does in `required` mode when the signature of the last verified response expires:
+Each signature expires at most 5 minutes after Datadog issues it. It can expire sooner. The `expireVerifiedFlags` option sets what the SDK does in `required` mode when the signature of the last verified response expires:
 
-- `false` (default): The SDK continues to serve the last verified flags. The provider reports a stale state (`PROVIDER_STALE` in OpenFeature). Your application decides when to fetch again.
+- `false` (default): The SDK continues to serve the last verified flags. The provider reports a stale state (`PROVIDER_STALE` in OpenFeature). The SDK does not fetch again by itself.
 - `true`: The SDK stops serving the verified flags. The provider reports an error state, and evaluations return default values.
 
 In both settings, a new verified response restores the ready state. The SDK detects expiry with a timer at the expiry time and with a check at each flag read.
 
 <div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags</code> to <code>true</code>.</div>
+
+### Fetch again before expiry
+
+No SDK fetches flag assignments again when a signature expires. With the default setting, a `required` client changes to the stale state no later than 5 minutes after the last verified response. To get a new verified response, set the evaluation context again with the current context:
+
+| SDK | Call |
+| --- | --- |
+| Browser | `OpenFeature.setContext()` |
+| iOS | `FlagsClient.setEvaluationContext` |
+| Android | `FlagsClient.setEvaluationContext` |
+
+Each call starts a new fetch, also when the context does not change. If you set `expireVerifiedFlags` to `true`, fetch again before the signature expires. Leave time for network latency. For example, fetch again every 2 minutes while the application is in use.
 
 ## Limits of response signing
 
@@ -195,6 +207,10 @@ In both settings, a new verified response restores the ready state. The SDK dete
 - **Signing does not hide flag values.** The device owner can read the assignments, the flag values, and the signature. Do not put secrets in client-side flag values. To reduce readable flag names in responses, see [Flag Key Obfuscation][4].
 - **Signing does not protect a compromised device.** If an attacker controls the device or the application process, the attacker can change the application code, the SDK, or the evaluated values after verification. Enforce sensitive access decisions on your server.
 - **Signing does not change authorization.** Your client token and targeting rules control which assignments a client receives. Signing proves only that Datadog produced the response.
+- **Key compromise and revocation.** In Preview, the SDKs do not check certificate revocation. A certificate stays valid until its expiry time.
+  - If a leaf key or an intermediate key is compromised, Datadog issues new certificates. This rotation needs no SDK update. A leaf certificate is valid for a few days.
+  - If a root key is compromised, you must update the SDK to replace the pinned root. Datadog publishes a security bulletin in this case.
+- **The check starts at the Datadog edge.** Datadog signs responses at its edge network. The check covers the path from the Datadog edge to the SDK.
 - **Signing applies to flag assignment responses only.** Exposure events and evaluation telemetry that the SDK sends to Datadog are not signed by this feature.
 
 ## Frequently asked questions
@@ -205,15 +221,15 @@ Enable response signing in the Datadog iOS, Android, or browser SDK. The SDK the
 
 ### How does the SDK know that a response came from Datadog?
 
-The SDK verifies an ECDSA P-256 signature on the response. The signing certificate must chain to a Datadog root certificate that ships inside the SDK. Only Datadog holds the signing keys for that hierarchy.
+The SDK verifies an ECDSA P-256 signature on the response. The signing certificate must chain to a Datadog root certificate that ships inside the SDK. Only Datadog holds the signing keys for that hierarchy. For what happens if a key is compromised, see [Limits of response signing](#limits-of-response-signing).
 
 ### Does response signing prevent replay attacks?
 
-Yes. Each request contains a new random nonce, and the signature covers that nonce. Each signature also expires after a few minutes. A stored response does not verify for a later request.
+Yes. Each request contains a new random nonce, and the signature covers that nonce. Each signature also expires at most 5 minutes after Datadog issues it. A stored response does not verify for a later request.
 
 ### Is response signing the same as TLS certificate pinning?
 
-No. TLS certificate pinning checks the server that terminates the TLS connection. Response signing checks the response content, end to end, whatever network components or caches the response passes through.
+No. TLS certificate pinning checks the server that terminates the TLS connection. Response signing checks the response content from the Datadog edge to the SDK, whatever network components or caches the response passes through.
 
 ### What happens if I do not enable response signing?
 

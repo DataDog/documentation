@@ -566,7 +566,7 @@ In `'required'` mode, the provider rejects a response that fails verification. I
 - If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR`, error code `GENERAL`, and the same message.
 - If the Datadog site does not support response signing, the provider sends no flag request, enters its error state, and reports the reason `unsupported-site`.
 - The provider keeps verified assignments in memory only. It does not use the persistent cache or `initialFlagsConfiguration` in this mode. After a page reload, evaluations return default values until the first verified response arrives.
-- Verification uses the device clock. A device clock that is far off from the correct time causes verification to fail.
+- Verification uses the device clock. The SDK rejects a signature if its issue time is more than 30 seconds after the device time. It also rejects a signature if its expiry time is at or before the device time.
 
 Error messages do not contain the client token, the evaluation context, the response, or certificate data.
 
@@ -574,9 +574,9 @@ In `'observe'` mode, verification failures do not emit provider errors or change
 
 ### Signature expiry
 
-Each signature expires a few minutes after Datadog issues it. In `'required'` mode, `expireVerifiedFlags` sets what the provider does when the signature of the last verified response expires:
+Each signature expires at most 5 minutes after Datadog issues it. It can expire sooner. In `'required'` mode, `expireVerifiedFlags` sets what the provider does when the signature of the last verified response expires:
 
-- `false` (default): The provider continues to serve the last verified flags. Its status changes from `READY` to `STALE`, and it emits one `PROVIDER_STALE` event. Your application decides when to fetch again.
+- `false` (default): The provider continues to serve the last verified flags. Its status changes from `READY` to `STALE`, and it emits one `PROVIDER_STALE` event. The SDK does not fetch again by itself. See [Fetch again before expiry](#fetch-again-before-expiry).
 - `true`: The provider stops serving the verified flags. Its status changes to `ERROR`, it emits one `PROVIDER_ERROR` event, and evaluations return default values with reason `ERROR`.
 
 In both settings, a new verified response changes the status to `READY` and emits `PROVIDER_READY`. The provider detects expiry with a timer at the expiry time and with a check at each flag evaluation.
@@ -586,6 +586,16 @@ experimentalResponseSigning: { mode: 'required', expireVerifiedFlags: true }
 {{< /code-block >}}
 
 <div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags: true</code>.</div>
+
+#### Fetch again before expiry
+
+The SDK does not fetch flag assignments again when a signature expires. To get a new verified response, call `OpenFeature.setContext()` with the current context. This call starts a new fetch, also when the context does not change:
+
+{{< code-block lang="javascript" >}}
+await OpenFeature.setContext(OpenFeature.getContext());
+{{< /code-block >}}
+
+If you set `expireVerifiedFlags` to `true`, fetch again before the signature expires. Leave time for network latency. For example, fetch again every 2 minutes while the application is in use.
 
 ## Testing
 
