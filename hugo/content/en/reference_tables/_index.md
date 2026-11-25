@@ -248,7 +248,7 @@ Test the query in the [Salesforce Developer Console][19]. Select fields directly
 
 #### Troubleshooting {#salesforce-troubleshooting}
 
-Data can take a few minutes to populate.
+Allow several minutes for the initial sync to complete.
 
 - Check [Salesforce ingestion events][20] for sync status and errors.
 - Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
@@ -279,7 +279,7 @@ Additional fields must use paths supported by the ServiceNow Table API. The colu
 
 #### Troubleshooting {#servicenow-troubleshooting}
 
-Data can take a few minutes to populate after the scheduled Query Builder query runs.
+Allow several minutes for the initial sync to complete after the scheduled Query Builder query runs.
 
 - Check [ServiceNow ingestion events][20] for sync status and errors.
 - Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
