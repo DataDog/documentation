@@ -214,6 +214,10 @@ En la página de configuración de [Security cases][13] de Cloud SIEM, puede adm
   - **Al actualizar una incidencia**:
     - **Estado de la señal**: Elija asignar un estado a la señal que corresponda con la incidencia, o dejarlo tal como está.
 
+- **Signal Grouping**
+
+  Seleccione las estrategias de agrupación que usa la creación automática de casos para añadir señales relacionadas a un caso existente. Consulte [Agrupar señales en casos][15].
+
 ### Declarar un incidente {#declare-an-incident}
 
 Ya sea que se base en una sola señal o después de una investigación de una incidencia, cierta actividad malintencionada exige una respuesta. Puede declarar incidentes en Datadog para reunir a los equipos de desarrollo, operaciones y Security para abordar un evento de Security crítico. [Incident Management][7] proporciona un marco y un flujo de trabajo para ayudar a los equipos a identificar y mitigar incidentes de manera efectiva.
@@ -242,7 +246,7 @@ Consulte la documentación de [Threat Intelligence][10] para obtener más inform
 
 ### Buscar por atributos de IP de red {#search-by-network-ip-attributes}
 
-Cuando se detecte una actividad sospechosa en sus registros, determine si el actor sospechoso ha interactuado con sus sistemas buscando su IP de red. Utilice la siguiente consulta para buscar por atributos de IP en el Explorador de registros: `@network.ip.list:<IP address>`. La consulta busca IPs en cualquier parte de los registros, incluyendo las etiquetas, los atributos, el error y los campos de mensaje.
+Cuando se detecte una actividad sospechosa en sus registros, determine si el actor sospechoso ha interactuado con sus sistemas buscando su IP de red. Utilice la siguiente consulta para buscar por atributos de IP en el Log Explorer: `@network.ip.list:<IP address>`. La consulta busca IPs en cualquier parte de los registros, incluyendo las etiquetas, los atributos, el error y los campos de mensaje.
 
 También puede iniciar esta consulta directamente desde el panel de señales:
 1. Haga clic en la dirección IP en la sección {{< ui >}}IPS{{< /ui >}}.
@@ -268,3 +272,4 @@ También puede iniciar esta consulta directamente desde el panel de señales:
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
 [14]: /es/bits_ai/bits_security_analyst/
+[15]: /es/security/cloud_siem/triage_and_investigate/signal_grouping/

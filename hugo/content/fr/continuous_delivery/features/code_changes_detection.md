@@ -25,11 +25,6 @@ Les modifications de code déployées sont visibles dans toute exécution de dé
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Onglet Code Changes pour la fonctionnalité Code Changes Detection" style="width:100%;">}}
 
-De plus, la colonne {{< ui >}}Deployments{{< /ui >}} de la page [Recent Code Changes][3] affiche les détails du service et de l'environnement pour tous les déploiements incluant un commit spécifique. Cette vue permet de comprendre rapidement si vos modifications de code sont déployées et où elles le sont.
-Le survol de la valeur du service révèle si le déploiement a atteint tous les environnements attendus, en fonction de l'endroit où le service est généralement déployé.
-
-{{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Affichage des déploiements sur la page Recent Code Changes" style="width:100%;">}}
-
 Les modifications de code ne sont détectées que pour les déploiements qui :
 - Possèdent un service (`@deployment.service`) avec des spécifications de chemins de fichiers définies dans Catalog (voir les [instructions de configuration](#specify-service-file-path-patterns) pour plus d'informations).
 - Possèdent un environnement (`@deployment.env`).
@@ -37,7 +32,7 @@ Les modifications de code ne sont détectées que pour les déploiements qui :
 
 ## Configuration {#setup}
 
-Pour activer Code Changes Detection sur vos déploiements, deux étapes sont nécessaires :
+Pour activer Code Changes Detection sur vos déploiements, deux étapes sont nécessaires :
 1. [Synchronisez les métadonnées de votre dépôt avec Datadog](#synchronize-repository-metadata-to-datadog).
 2. [Spécifiez le chemin d'accès aux fichiers de code source pour vos services](#specify-service-file-path-patterns).
 
@@ -72,7 +67,7 @@ Pour confirmer que la configuration est valide, sélectionnez votre GitHub App d
 
 Suivez le [parcours d'intégration dans l'application][1] pour configurer l'intégration GitLab Source Code.
 
-**Remarque** : Le périmètre du jeton d'accès personnel du compte de service doit être au moins `read_api`.
+**Remarque** : Le périmètre du jeton d'accès personnel du compte de service doit être au moins `read_api`.
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 {{% /tab %}}
@@ -174,6 +169,5 @@ Dans ce cas, Code Changes Detection pour les déploiements du service `shopist` 
 
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
-[3]: https://app.datadoghq.com/ci/commits
 [4]: /fr/internal_developer_portal/catalog/entity_model/
 [5]: /fr/internal_developer_portal/catalog/

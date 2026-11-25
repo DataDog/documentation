@@ -25,3 +25,13 @@ entries:
       - ListDatabricksIntegrationAccounts
       - UpdateDatabricksIntegrationAccount
     title: Fix 400 and 404 error schemas for Integration Accounts v2 APIs
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateDatabricksIntegrationAccount
+      - DeleteDatabricksIntegrationAccount
+      - GetDatabricksIntegrationAccount
+      - ListDatabricksIntegrationAccounts
+      - UpdateDatabricksIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses

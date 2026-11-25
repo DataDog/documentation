@@ -165,9 +165,13 @@ To act on several findings at once, select them and use:
 
 Bulk selection is available on ungrouped tables and inside expanded groups. Click any finding to open its side panel, which shows the full detection detail and remediation guidance for that finding type.
 
+## Group findings by fix
+
+The **Remediations** tab groups findings by the fix that resolves them, such as one package upgrade in a repository or one container image update. For more information, see [Remediation Inbox][26].
+
 ## Report on your inbox
 
-The **Reporting** tab shows a dashboard of Security Inbox trends over time, so you can track whether remediation is keeping pace with detection.
+The **Dashboard** tab shows Security Inbox trends over time, so you can track whether remediation is keeping pace with detection.
 
 ## Investigate attack paths with Context Graph
 
@@ -221,3 +225,4 @@ For more information, see [Add to Security Inbox Rules][11] and [Set Due Date Ru
 [23]: /security/assignee_management/
 [24]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=add_to_inbox
 [25]: /security/cloud_security_management/security_graph/
+[26]: /security/remediation_inbox/

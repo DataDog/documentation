@@ -262,6 +262,8 @@ More information about OpenFeature SDK configuration options can be found in its
 
 ### Step 2: Create a feature flag
 
+To reuse an existing flag's configuration, [clone the flag][11].
+
 Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
@@ -408,3 +410,4 @@ For server-side applications, you can also enable flag evaluation metrics to tra
 [8]: /feature_flags/concepts/traffic_splitting/
 [9]: /feature_flags/guide/server_flag_evaluation_metrics/
 [10]: /feature_flags/guide/apm_trace_enrichment/
+[11]: /feature_flags/concepts/cloning/

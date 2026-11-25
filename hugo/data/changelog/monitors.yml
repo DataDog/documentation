@@ -74,3 +74,39 @@ entries:
       - ValidateMonitor
     title: Add platform_settings.snowflake.warehouse to data quality monitor 
       options
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CheckCanDeleteMonitor
+      - CreateMonitor
+      - CreateMonitorConfigPolicy
+      - CreateMonitorNotificationRule
+      - CreateMonitorUserTemplate
+      - DeleteMonitor
+      - DeleteMonitorConfigPolicy
+      - DeleteMonitorNotificationRule
+      - DeleteMonitorUserTemplate
+      - GetMonitor
+      - GetMonitorConfigPolicy
+      - GetMonitorNotificationRule
+      - GetMonitorNotificationRules
+      - GetMonitorUserTemplate
+      - ListMonitorConfigPolicies
+      - ListMonitorUserTemplates
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - SearchMonitorGroups
+      - SearchMonitors
+      - UnmuteAllMonitors
+      - UnmuteMonitor
+      - UpdateMonitor
+      - UpdateMonitorConfigPolicy
+      - UpdateMonitorNotificationRule
+      - UpdateMonitorUserTemplate
+      - ValidateExistingMonitor
+      - ValidateExistingMonitorUserTemplate
+      - ValidateMonitor
+      - ValidateMonitorUserTemplate
+    title: Document rate-limit headers on the shared 429 responses

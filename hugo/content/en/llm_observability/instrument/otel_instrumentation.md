@@ -130,6 +130,7 @@ This environment variable enables version 1.37+-compliant OpenTelemetry traces f
 
 **Note**:
 * If you are using an OpenTelemetry library other than the default OpenTelemetry SDK, you may need to configure the endpoint, protocol, and headers differently depending on the library's API. See your library's documentation for the appropriate configuration method.
+* In .NET, the `AddOtlpExporter()` method doesn't read the signal-specific `OTEL_EXPORTER_OTLP_TRACES_*` variables. If you set only those variables, the exporter falls back to gRPC on `localhost:4317` and sends nothing to Datadog. Use the generic `OTEL_EXPORTER_OTLP_PROTOCOL`, `OTEL_EXPORTER_OTLP_ENDPOINT`, and `OTEL_EXPORTER_OTLP_HEADERS` variables instead. See [Using Microsoft.Extensions.AI (.NET)](#using-microsoft-extensions-ai-dotnet).
 * When using OpenTelemetry instrumentation, some data sent to Agent Observability may also be written to the corresponding APM traces. If you are protecting sensitive data, consider also configuring a Restricted Dataset on APM to match your Agent Observability access controls. See [Data Access Control][8] for more information.
 
 #### Using strands-agents
@@ -226,6 +227,16 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [52]: https://docs.langchain4j.dev/
 [53]: https://docs.aws.amazon.com/bedrock/latest/userguide/
 [54]: https://opentelemetry.io/docs/zero-code/java/agent/
+{{% /tab %}}
+{{% tab ".NET" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [OpenAI][60] | Native ([`Microsoft.Extensions.AI`][61], through `UseOpenTelemetry`) | `OpenAI` >= 2.9.1, `Microsoft.Extensions.AI` >= 10.4.1 |
+
+See [Using Microsoft.Extensions.AI (.NET)](#using-microsoft-extensions-ai-dotnet) for setup.
+
+[60]: https://www.nuget.org/packages/OpenAI
+[61]: https://www.nuget.org/packages/Microsoft.Extensions.AI
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -567,6 +578,70 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    }
    ```
    After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using Microsoft.Extensions.AI (.NET)" level="h3" expanded=false id="using-microsoft-extensions-ai-dotnet" %}}
+
+[Microsoft.Extensions.AI][62] wraps the official [`OpenAI` .NET library][63]. It emits spans that follow the OpenTelemetry 1.37+ GenAI semantic conventions, including streaming calls and tool calls. Use it instead of the `OpenAI` library's own experimental instrumentation, which doesn't capture message content by default and doesn't instrument streaming chat completions.
+
+1. Add the packages. Install the same version of `Microsoft.Extensions.AI` and `Microsoft.Extensions.AI.OpenAI`. Each `Microsoft.Extensions.AI.OpenAI` version requires a minimum `OpenAI` package version, so choose one that supports the `OpenAI` version you're on. Otherwise, the restore fails with a `NU1605` package downgrade error.
+
+   ```shell
+   dotnet add package Microsoft.Extensions.AI
+   dotnet add package Microsoft.Extensions.AI.OpenAI
+   dotnet add package OpenTelemetry
+   dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+   ```
+
+2. Set the following environment variables in your application. Use the generic `OTEL_EXPORTER_OTLP_*` variables because the .NET `AddOtlpExporter()` method ignores the signal-specific `OTEL_EXPORTER_OTLP_TRACES_*` variables.
+
+   ```
+   OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+   OTEL_EXPORTER_OTLP_ENDPOINT=https://otlp.{{< region-param key="dd_site" code="true" >}}
+   OTEL_EXPORTER_OTLP_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=llmobs,DD-LLMObs-Enabled=true
+   ```
+
+   Replace `<YOUR_API_KEY>` with your [Datadog API key][2]. The exporter adds the `/v1/traces` path to the endpoint.
+
+3. Configure the tracer provider and wrap the `OpenAI` chat client:
+
+   ```csharp
+   using Microsoft.Extensions.AI;
+   using OpenTelemetry;
+   using OpenTelemetry.Resources;
+   using OpenTelemetry.Trace;
+   using OpenAIChatClient = OpenAI.Chat.ChatClient;
+
+   const string ServiceName = "simple-dotnet-example";
+
+   using var tracerProvider = Sdk.CreateTracerProviderBuilder()
+       .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(ServiceName))
+       .AddSource(ServiceName)
+       .AddOtlpExporter()
+       .Build();
+
+   IChatClient client = new OpenAIChatClient("gpt-4.1-mini", Environment.GetEnvironmentVariable("OPENAI_API_KEY"))
+       .AsIChatClient()
+       .AsBuilder()
+       .UseFunctionInvocation()
+       .UseOpenTelemetry(sourceName: ServiceName, configure: c => c.EnableSensitiveData = true)
+       .Build();
+
+   var options = new ChatOptions
+   {
+       Tools = [AIFunctionFactory.Create((int orderId) => $"Order {orderId} has shipped.", name: "get_order_status")]
+   };
+
+   var response = await client.GetResponseAsync("Where is my order 1042?", options);
+   Console.WriteLine(response.Text);
+   ```
+
+   - Keep `UseFunctionInvocation()` before `UseOpenTelemetry()`. With this order, each model round trip gets its own LLM span and each tool call gets its own tool span.
+   - The `sourceName` passed to `UseOpenTelemetry()` must match the name passed to `AddSource()`.
+   - `EnableSensitiveData = true` records prompts, completions, and tool arguments and results. Without it, spans carry only metadata such as model, token counts, and latency.
+   - Pass an explicit `name` to `AIFunctionFactory.Create()`. Otherwise, tools that are local functions or lambdas appear under compiler-generated names.
+
+After running this example, search for `ml_app:simple-dotnet-example` in the Agent Observability UI to find the generated trace.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Custom OpenTelemetry instrumentation" level="h3" expanded=false id="custom-opentelemetry-instrumentation" %}}
@@ -1300,6 +1375,8 @@ For the complete list of supported attributes and their specifications, see the 
 [17]: https://sdk.vercel.ai/
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
+[62]: https://learn.microsoft.com/dotnet/ai/microsoft-extensions-ai
+[63]: https://github.com/openai/openai-dotnet
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
 [57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
 [58]: /llm_observability/investigate/cost/#supported-providers
