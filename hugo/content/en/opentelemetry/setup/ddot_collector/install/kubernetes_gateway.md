@@ -562,7 +562,7 @@ spec:
       # Custom image (optional)
       image:
         name: ddot-collector
-        tag: "{{< version key="ddot_gateway_version" >}}"
+        tag: "{{< version key="agent_version" >}}"
         pullPolicy: IfNotPresent
 
       # Pod-level security context
@@ -868,8 +868,8 @@ To use a custom-built Collector image for your gateway, specify the image reposi
 <strong>Note:</strong> The Datadog Operator supports the following image name formats:
 <ul>
   <li><code>name</code> - The image name (for example, <code>ddot-collector</code>)</li>
-  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
-  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
+  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:{{% version key="agent_version" %}}</code>)</li>
+  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:{{% version key="agent_version" %}}</code>)</li>
 </ul>
 The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use the image name with a separate <code>tag</code> field.
 </div>
