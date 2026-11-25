@@ -53,7 +53,7 @@ With Fleet Automation, you can:
 
 ## Set up Fleet Automation
 
-An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration and set `remote_updates` to `true`][8]. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
+An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration][8] and, on Agents older than 7.73, set `remote_updates` to `true`. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
 
 <a id="fleet-automation-api"></a>
 

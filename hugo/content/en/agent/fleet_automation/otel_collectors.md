@@ -112,7 +112,7 @@ Use Fleet Automation to update the OTel configuration of the Agent's Collector o
 ### Prerequisites for configuring the Agent's Collector
 
 - [Remote Configuration][2] enabled for your organization and the Agent's API key
-- Agent version 7.82+ with the [Agent's Collector][9] enabled
+- Agent version 7.83.1 or later, with the [Agent's Collector][9] enabled
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
 
 ### Configure the Agent's Collector on multiple hosts
