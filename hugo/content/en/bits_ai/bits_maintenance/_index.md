@@ -2,6 +2,9 @@
 title: Bits Maintenance
 description: "Learn how Bits Maintenance keeps the software on your Kubernetes clusters up to date by assessing, planning, and rolling out upgrades one environment at a time."
 further_reading:
+- link: "https://www.datadoghq.com/blog/bits-maintenance/"
+  tag: "Blog"
+  text: "Introducing Bits Maintenance, your AI teammate for infrastructure patching and upgrades"
 - link: "/bits_ai/bits_maintenance/setup/"
   tag: "Documentation"
   text: "Set up Bits Maintenance"
@@ -25,6 +28,8 @@ Bits Maintenance is in Preview. Use this form to request access.
 Bits Maintenance helps you keep the software running on your Kubernetes clusters up to date, including open source (OSS) and vendor-provided projects. When a project releases a new version, Bits Maintenance researches release changes, identifies how your environment is affected, generates an upgrade [campaign][2] according to your team's [instructions][4], and executes within your guardrails.
 
 OSS is constantly changing, often due to CVE remediation or end-of-life decisions. Upgrading by hand can be slow and risky: you need to understand what changed, find breaking changes that apply to your fleet, update configurations, roll out in stages, and verify the results. You can instead use Bits Maintenance as your always-on AI teammate for OSS maintenance.
+
+{{< img src="bits_ai/maintenance/overview.png" alt="The Bits Maintenance landing page, showing supported software projects connected to Bits, a campaign waiting for approval, and a cert-manager upgrade that has completed in development and staging clusters and is waiting for human approval in production" style="width:100%;" >}}
 
 Bits Maintenance supports a [specific set of OSS projects](#supported-oss-projects) running on Kubernetes.
 
@@ -50,9 +55,6 @@ You can work with Bits Maintenance:
 - In the Datadog web application
 - Using the [Datadog MCP][3], which has Bits Maintenance tools and skills
 - Through [Bits Chat][1] and Slack (with `@Datadog`)
-
-## Bits Maintenance data retention
-<!-- TODO -->
 
 ## Further reading
 

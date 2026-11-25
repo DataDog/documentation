@@ -22,13 +22,15 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) coordinates an upgrade across your fleet. Each campaign is made up of [plans](#plans), one for each [installation](#installations) of a software project. A plan uses your team's [upgrade instructions][7], and lists the steps Bits takes to upgrade that installation.
+[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) coordinates an upgrade across your fleet and rolls out in ordered stages. Each stage includes one or more [installations](#installations) of a software project, and each installation has its own [plan](#plans). A plan uses your team's [upgrade instructions][7] and lists the steps Bits takes to upgrade that installation.
 
 ## Campaigns
 
-Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages. Each stage of a campaign has a [plan](#plans).
+Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages. Each stage includes one or more installations, and each installation has its own [plan](#plans).
 
 A campaign can upgrade one software project across many clusters, or several software projects on one cluster.
+
+{{< img src="bits_ai/maintenance/campaigns.png" alt="The Bits Maintenance Campaigns page, showing recommended upgrades for Argo CD, cert-manager, and ExternalDNS, and a list of active campaigns with their Bits activity and stage progress" style="width:100%;" >}}
 
 ### Installations
 
@@ -57,7 +59,8 @@ A plan describes the upgrade of one [installation](#installations) of a software
 Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
 
 You can view plan steps in an interactive workflow diagram:
-<!-- TODO: plan screenshot -->
+
+{{< img src="bits_ai/maintenance/plan_steps.png" alt="The Steps tab of a Bits Maintenance plan to upgrade AWS Load Balancer Controller from 2.17.1 to 3.4.3, showing a workflow diagram of steps including a preflight check, an IaC pull request, a merge gate, and a soak" style="width:100%;" >}}
 
 After a plan is created, but before you have approved it, you can add [custom steps](#custom-steps) and remove any step that isn't a preflight or postflight check.
 

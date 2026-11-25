@@ -85,7 +85,6 @@ After creating a rollout order, you can select it when [configuring a project ca
 ## Advanced configuration (optional)
 
 Bits Maintenance works without a Private Action Runner (PAR). Set up a PAR if you want Bits Maintenance to read the custom resources in your clusters, which helps it catch compatibility issues and breaking changes in CRDs during upgrades.
-<!-- TODO: confirm with reviewer what a PAR adds and what Bits Maintenance can't do without one. Is Remote Configuration needed only for the PAR? -->
 
 To set up a PAR for Bits Maintenance, complete the following sections in order.
 
@@ -126,7 +125,6 @@ For each cluster you'd like to enroll with Bits Maintenance:
 1. Navigate to {{< ui >}}Actions{{< /ui>}} > {{< ui >}}Actions Catalog{{< /ui>}} > {{< ui >}}Connections{{< /ui>}}.
 1. Hover over the row of the cluster, then click {{< ui >}}Edit{{< /ui>}}.
 1. Within {{< ui >}}Access{{< /ui>}}, click {{< ui >}}Edit Access{{< /ui>}}.
-<!-- TODO: Which permission do you need to add organization access? Even with connections I could edit, there was no "Edit Access" button. Does it need to be the owner? -->
 1. Under {{< ui >}}Organization Access{{< /ui>}}, add the current Datadog organization as an {{< ui >}}Editor{{< /ui>}}.
 1. Click {{< ui >}}Save{{< /ui>}}.
 

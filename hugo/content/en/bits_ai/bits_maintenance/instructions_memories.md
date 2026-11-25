@@ -23,7 +23,6 @@ Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
 Teach [Bits Maintenance][1] to work the way your team works with upgrade instructions and memories. Bits uses this information when developing [campaigns and plans][2] for your team.
-<!-- TODO: confirm that^ statement about Bits using it for campaigns/plans -->
 
 ## Upgrade instructions
 
@@ -42,7 +41,8 @@ To add upgrade instructions:
     - {{< ui >}}Your runbook{{< /ui>}}: Describe your upgrade process, such as who does what, in which order, and which repositories or workflows to use.
 1. Click {{< ui >}}Create Draft for Review{{< /ui >}}.
     - Bits Maintenance parses the instructions you entered into a plan template.
-<!-- TODO: finish these instructions. like, Review the proposed plan template...? -->
+
+{{< img src="bits_ai/maintenance/upgrade_instructions.png" alt="A set of upgrade instructions named Platform Component Upgrades, showing built-in and custom steps grouped into Before the upgrade and Upgrade changes and merge gates sections" style="width:100%;" >}}
 
 ## Memories
 
