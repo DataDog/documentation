@@ -26,7 +26,7 @@ Bits Maintenance is in Preview. Use this form to request access.
 
 ## Campaigns
 
-Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages. Each stage includes one or more installations, and each installation has its own [plan](#plans).
+Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages.
 
 A campaign can upgrade one software project across many clusters, or several software projects on one cluster.
 
@@ -40,9 +40,9 @@ An installation is one instance of a supported software project deployed in a Ku
 
 There are two types of campaigns: project campaigns and cluster campaigns. Each type indicates the starting point for the campaign:
 
-- Project campaign: Start by choosing a software project, and upgrade its installations across all or selected clusters.
+- **Project campaign**: Start by choosing a software project, and upgrade its installations across all or selected clusters.
     - Project campaigns can define a [rollout order][3]—for example, development clusters first, then staging, then production.
-- Cluster campaign: Start by choosing a cluster, and upgrade all or selected software projects on it.
+- **Cluster campaign**: Start by choosing a cluster, and upgrade all or selected software projects on it.
 
 ### Create a campaign
 
@@ -56,23 +56,22 @@ To create a campaign in Datadog:
 
 A plan describes the upgrade of one [installation](#installations) of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Bits uses your [upgrade instructions][7] when building plans to tailor them to your organization's specific way of working.
 
-Whether or not Bits requires your approval for a plan to be executed depends on the [operational profile][4].
+The [operational profile][4] determines whether Bits needs your approval before it executes a plan.
 
 You can view plan steps in an interactive workflow diagram:
 
-{{< img src="bits_ai/maintenance/plan_steps.png" alt="The Steps tab of a Bits Maintenance plan to upgrade AWS Load Balancer Controller from 2.17.1 to 3.4.3, showing a workflow diagram of steps including a preflight check, an IaC pull request, a merge gate, and a soak" style="width:100%;" >}}
+{{< img src="bits_ai/maintenance/plan_steps.png" alt="The Steps tab of a Bits Maintenance plan to upgrade AWS Load Balancer Controller from 2.17.1 to 3.4.3, showing a workflow diagram of steps including a preflight check, an infrastructure as code (IaC) pull request, a merge gate, and a soak" style="width:100%;" >}}
 
-After a plan is created, but before you have approved it, you can add [custom steps](#custom-steps) and remove any step that isn't a preflight or postflight check.
+While a plan is awaiting approval, you can add [custom steps](#custom-steps) and remove any step except preflight and postflight checks.
 
 ### Custom steps
 
-You can add custom steps to a plan that is awaiting approval.
 
 A custom step can be:
-- Human: requires a person to perform an action before the plan continues.
-- Workflow: executes a [Datadog workflow][2], and waits for it to complete before the plan continues.
+- **Human**: Requires a person to perform an action before the plan continues.
+- **Workflow**: Executes a [Datadog workflow][2] and waits for it to complete before the plan continues.
 
-When you create a custom step, Datadog saves it. You can then reuse it later, in other plans.
+Datadog saves each custom step you create, so you can reuse it in other plans.
 
 To add a custom step to a plan:
 1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}][6].

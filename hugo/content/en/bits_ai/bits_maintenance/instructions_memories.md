@@ -22,7 +22,7 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-Teach [Bits Maintenance][1] to work the way your team works with upgrade instructions and memories. Bits uses this information when developing [campaigns and plans][2] for your team.
+Use upgrade instructions and memories to teach [Bits Maintenance][1] how your team works. Bits uses this information when developing [campaigns and plans][2] for your team.
 
 ## Upgrade instructions
 
@@ -46,7 +46,7 @@ To add upgrade instructions:
 
 ## Memories
 
-As Bits Maintenance builds or executes a plan, it may pause to ask you a question. If you click {{< ui >}}Remember this answer{{< /ui >}}, Bits records it as a memory so that you don't have to answer the same question repeatedly.
+As Bits Maintenance builds or executes a plan, it may pause to ask you a question. If you select {{< ui >}}Remember this answer{{< /ui >}} when you respond, Bits records your answer as a memory so you don't have to answer the same question again.
 
 To view the memories Bits has collected, or to delete a memory, navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Memories{{< /ui>}}.
 

@@ -25,9 +25,9 @@ further_reading:
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
 
-Bits Maintenance helps you keep the software running on your Kubernetes clusters up to date, including open source (OSS) and vendor-provided projects. When a project releases a new version, Bits Maintenance researches the changes and identifies how they affect your environment. It then generates an upgrade [campaign][2] based on your team's [instructions][4] and executes it within your guardrails.
+Bits Maintenance helps you keep the software running on your Kubernetes clusters up to date, including open source software (OSS) and vendor-provided projects. When a project releases a new version, Bits Maintenance researches the changes and identifies how they affect your environment. It then generates an upgrade [campaign][2] based on your team's [instructions][4] and executes it within your guardrails.
 
-OSS is constantly changing, often due to CVE remediation or end-of-life decisions. Upgrading by hand can be slow and risky: you need to understand what changed, find breaking changes that apply to your fleet, update configurations, roll out in stages, and verify the results. You can instead use Bits Maintenance as your always-on AI teammate for OSS maintenance.
+OSS projects release new versions frequently, often due to CVE remediation or end-of-life decisions. Upgrading by hand can be slow and risky: you need to understand what changed, find breaking changes that apply to your fleet, update configurations, roll out in stages, and verify the results. Bits Maintenance handles this work for you.
 
 {{< img src="bits_ai/maintenance/overview.png" alt="The Bits Maintenance landing page, showing supported software projects connected to Bits, a campaign waiting for approval, and a cert-manager upgrade that has completed in development and staging clusters and is waiting for human approval in production" style="width:100%;" >}}
 
@@ -53,7 +53,7 @@ Some projects are experimental, meaning Datadog is evaluating the data quality a
 
 You can work with Bits Maintenance:
 - In the Datadog web application
-- Using the [Datadog MCP][3], which has Bits Maintenance tools and skills
+- Using the [Datadog MCP Server][3], which has Bits Maintenance tools and skills
 - Through [Bits Chat][1] and Slack (with `@Datadog`)
 
 ## Further reading

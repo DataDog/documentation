@@ -50,7 +50,7 @@ To enroll clusters:
 1. In the list of clusters, click the checkbox next to each cluster you'd like to enroll.
 1. Click {{< ui >}}Enroll Selected{{< /ui>}}.
 
-After you enroll a cluster, Bits Maintenance scans it to understand which software packages are running. Bits regularly rescans your enrolled clusters to understand their software inventory. You can also manually trigger a rescan.
+After you enroll a cluster, Bits Maintenance scans it to identify installations of supported software projects. Bits regularly rescans your enrolled clusters to understand their software inventory. You can also manually trigger a rescan.
 
 ## Step 3 (Recommended): Create upgrade instructions
 
@@ -68,7 +68,7 @@ To create an operational profile:
 
 ## Step 5 (Optional): Create a rollout order
 
-A rollout order defines the sequence in which, for a [project campaign][4], upgrades are deployed across your clusters. You can set a certain rollout order as a default.
+A rollout order defines the sequence in which a [project campaign][4] deploys upgrades across your clusters. You can set one rollout order as the default.
 
 To create a rollout order:
 1. Navigate to {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui>}} > {{< ui >}}Rollout Order{{< /ui>}}.
@@ -77,10 +77,10 @@ To create a rollout order:
 1. In the {{< ui >}}Group by tag{{< /ui>}} field, select a cluster tag.
     - Corresponding tag values populate.
 1. Drag the values to set your desired cluster rollout order.
-    - The {{< ui >}}Cluster assignment preview{{< /ui>}} shows the sequence in which clusters would actually be deployed using this rollout order.
+    - The {{< ui >}}Cluster assignment preview{{< /ui>}} shows the sequence in which clusters are deployed using this rollout order.
 1. Click {{< ui >}}Save Rollout Order{{< /ui>}}.
 
-After creating a rollout order, you can select it when [configuring a project campaign][5]. You can also create a rollout order at this time.
+After creating a rollout order, you can select it when [configuring a project campaign][5]. You can also create a rollout order while configuring the campaign.
 
 ## Advanced configuration (optional)
 
