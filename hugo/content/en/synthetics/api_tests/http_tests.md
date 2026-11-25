@@ -184,6 +184,8 @@ The response body is only returned if you have added assertions on its content a
 
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
+If a test contains an assertion on the response body and the response is larger than 150 KB (compressed), the preview shows only the first 150 KB of the body, and body assertions are marked as **not evaluated**. This does not affect scheduled runs.
+
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
