@@ -52,6 +52,8 @@ To monitor Azure App Service workloads with APM and custom metrics, you can inst
 | Linux   | Container | [Linux - Container instrumentation][8] |
 | Windows | Java, Node.js, .NET | [Windows - Code instrumentation][9]
 
+For code-based Linux Web Apps, you can use [Single Step Instrumentation][7] (Preview) with the Datadog CLI to add the APM tracer without changing code.
+
 Capabilities:
 - Fully distributed APM tracing using automatic instrumentation
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata
