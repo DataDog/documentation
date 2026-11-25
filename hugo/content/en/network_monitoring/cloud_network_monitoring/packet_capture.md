@@ -16,7 +16,7 @@ On-Demand Packet Capture is in Preview. Contact your account manager for access.
 
 ## Overview
 
-Cloud Network Monitoring (CNM) shows when a connection is degraded through metrics such as throughput, latency, TCP retransmits, and resets. To find out why a connection degraded at the packet level, you can run an on-demand packet capture (PCAP) on that connection's hosts directly in Datadog. After the capture completes, Datadog provides a [Bits summary](#bits-summary) of what it observed. You can also download an archive of the raw `.pcap` files to verify the summary or continue your investigation in tools such as Wireshark.
+Cloud Network Monitoring (CNM) shows when a connection is degraded through metrics such as throughput, latency, TCP retransmits, and resets. To find out why a connection degraded at the packet level, you can run an on-demand packet capture (PCAP) on that connection's hosts directly in Datadog. After the capture completes, Datadog provides a [Bits summary](#bits-summary) of what it observed. You can also download an archive of the raw `.pcapng` files to verify the summary or continue your investigation in tools such as Wireshark.
 
 ### Limitations
 
