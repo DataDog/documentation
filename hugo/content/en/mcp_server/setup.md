@@ -798,7 +798,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, notebooks, and code execution.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
-- `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
+- `apm`: Tools for [APM][34], including investigating errors and latency across services and traces, finding optimization opportunities, and reviewing ingestion and retention configuration. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
@@ -810,10 +810,11 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 - `derived-metrics`: Tools for creating, updating, and deleting [derived metrics][85] from formulas and named metric queries.
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+- `ecs`: Tools for searching and describing [Amazon ECS][98] resources and retrieving task definitions that Datadog monitors, across all AWS accounts and regions.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
-- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
+- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting, and for managing [Bits Detection][99] scopes that triage and investigate alerts automatically.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
@@ -1116,3 +1117,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [95]: https://github.com/datadog-labs/pi-plugin
 [96]: /incident_response/on-call/
 [97]: /account_management/rbac/mcp_access/#keep-credentials-out-of-ai-agent-conversations
+[98]: /containers/amazon_ecs/
+[99]: /bits_ai/bits_detection/

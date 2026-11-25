@@ -214,3 +214,37 @@ entries:
       - UpdateAiGatewayModelGroup
       - UpdateAiGatewayProvider
     title: Add missing AI Gateway model operations
+  - change_type: added
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42144
+    operations:
+      - DeleteAIGatewayModelPricingByCanonical
+      - GetAIGatewayModelPricingByCanonical
+      - UpdateAIGatewayModelPricingByCanonical
+    title: Add AI Gateway model pricing endpoints that take the canonical ID as 
+      a query parameter
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42144
+    operations:
+      - DeleteAiGatewayModelPricing
+      - GetAiGatewayModelPricing
+      - UpdateAiGatewayModelPricing
+    title: Add AI Gateway model pricing endpoints that take the canonical ID as 
+      a query parameter
+  - change_type: added
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42202
+    operations:
+      - DeleteAIGatewayModelByCanonical
+      - UpdateAIGatewayModelByCanonical
+    title: Add AI Gateway model update and delete endpoints that take the 
+      canonical ID as a query parameter
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42202
+    operations:
+      - DeleteAiGatewayModel
+      - UpdateAiGatewayModel
+    title: Add AI Gateway model update and delete endpoints that take the 
+      canonical ID as a query parameter

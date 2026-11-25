@@ -231,6 +231,15 @@ components:
       schema:
         maxLength: 256
         type: string
+    AiGatewayModelCanonicalIDQuery:
+      description: Canonical model identifier. It can contain `/`, such as `openai/gpt-4o`.
+      example: openai/gpt-4o
+      in: query
+      name: canonical
+      required: true
+      schema:
+        maxLength: 256
+        type: string
     AiGatewayModelGroupID:
       description: Model group ID, or "default" for the explicit organization-wide access policy.
       example: "7"
@@ -34479,6 +34488,15 @@ components:
           description: Indicates whether feature flag changes require approval in this environment.
           example: false
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The ID of a Custom OIDC provider, formatted as a nonzero UUID. Required when `subject_authorization_state` is `enabled`. If omitted or `null`, no provider is associated. A non-null ID must be registered in the current organization and site, even when subject authorization is disabled. An unregistered ID returns `400 Bad Request`, and an unavailable registry returns `503 Service Unavailable`. Saving does not verify provider eligibility or key publication.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - name
         - queries
@@ -50035,6 +50053,15 @@ components:
           description: Indicates whether feature flag changes require approval in this environment.
           example: false
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The associated Custom OIDC provider ID, or `null` when no provider is associated. Disabled environments may retain a provider association.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
         updated_at:
           description: The timestamp when the environment was last updated.
           example: "2023-01-01T00:00:00Z"
@@ -50051,6 +50078,17 @@ components:
       required:
         - data
       type: object
+    EnvironmentSubjectAuthorizationState:
+      description: >-
+        Whether assignment requests for this environment require subject authorization. Allowed values are `disabled` and `enabled`. Enabling requires a provider ID formatted as a nonzero UUID. If omitted on create, defaults to `disabled`. If omitted on update, the stored state is preserved. `null` is not accepted. This setting applies only to the current Datadog site and is not copied to other sites. Before you enable it, configure an eligible Custom OIDC provider in the same organization and site, and verify that the provider's keys are published. Assignment requests fail when the required verification configuration is unavailable.
+      enum:
+        - disabled
+        - enabled
+      example: disabled
+      type: string
+      x-enum-varnames:
+        - DISABLED
+        - ENABLED
     EnvironmentsPaginationMeta:
       description: Pagination metadata for environments.
       properties:
@@ -62525,6 +62563,14 @@ components:
           type: boolean
         status:
           $ref: "#/components/schemas/FeatureFlagStatus"
+        subject_authorization_oidc_provider_id:
+          description: The environment's associated Custom OIDC provider ID, or `null` when no provider is associated.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - environment_id
         - status
@@ -62590,6 +62636,14 @@ components:
           type: boolean
         status:
           $ref: "#/components/schemas/FeatureFlagStatus"
+        subject_authorization_oidc_provider_id:
+          description: The environment's associated Custom OIDC provider ID, or `null` when no provider is associated.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       required:
         - environment_id
         - status
@@ -123557,18 +123611,16 @@ components:
       type: object
     RemediationGroupAttributes:
       description: |-
-        Attributes of a remediation group. Each group includes one kind object, `package_update` or `image_update`,
-        depending on its grouping definition.
+        Attributes of a remediation group. Each group includes one kind object, depending on its grouping definition.
       properties:
         findings:
           $ref: "#/components/schemas/RemediationGroupFindings"
         grouping_definition_id:
-          description: |-
-            Grouping definition that formed the group: `sca.package_update` or `cloudvm.image_update`.
+          description: Grouping definition that formed the group, such as `sca.package_update`.
           example: sca.package_update
           type: string
-        image_update:
-          $ref: "#/components/schemas/RemediationGroupImageUpdate"
+        owners:
+          $ref: "#/components/schemas/RemediationGroupOwners"
         package_update:
           $ref: "#/components/schemas/RemediationGroupPackageUpdate"
         title:
@@ -123579,6 +123631,7 @@ components:
         - grouping_definition_id
         - title
         - findings
+        - owners
       type: object
     RemediationGroupCaseRelationship:
       description: Relationship to the case that tracks the group's remediation.
@@ -123627,12 +123680,10 @@ components:
       description: Value of the findings' `@finding_type` attribute that a grouping definition covers.
       enum:
         - library_vulnerability
-        - host_and_container_vulnerability
       example: library_vulnerability
       type: string
       x-enum-varnames:
         - LIBRARY_VULNERABILITY
-        - HOST_AND_CONTAINER_VULNERABILITY
     RemediationGroupFindings:
       description: |-
         Counts of the group's open findings. The counts include every finding in the group, including findings that
@@ -123698,70 +123749,6 @@ components:
         - none
         - unknown
       type: object
-    RemediationGroupImageUpdate:
-      description: |-
-        An image or package to upgrade, for a group of host and container vulnerabilities (`cloudvm.image_update`).
-        The group gathers the open vulnerabilities of running production images that have a fix available, and groups
-        them by `grouping_location`, `remediation_kind`, and `action`.
-      properties:
-        action:
-          description: |-
-            Name of the container image, base image, or package to upgrade. The value comes from the first of these
-            attributes that the findings have: `@remediation.container_image.latest_major.name`,
-            `@remediation.base_image.latest_major.name`, or `@remediation.recommended.name`.
-          example: alpine
-          type: string
-        advisory_count:
-          description: Number of distinct values of `@advisory.id` across the group's findings.
-          example: 25
-          format: int64
-          type: integer
-        exploitable_cve_count:
-          description: |-
-            Number of distinct values of `@advisory.id` across the group's findings that have
-            `@risk.has_exploit_available` set to `true`.
-          example: 2
-          format: int64
-          type: integer
-        file_count:
-          description: Number of distinct values of `@code_location.filename` across the group's findings.
-          example: 1
-          format: int64
-          type: integer
-        grouping_location:
-          description: |-
-            File that contains the findings, from their `@code_location.filename` attribute. When no file is known,
-            the value is the findings' `@container_image.name`.
-          example: Dockerfile
-          type: string
-        location_is_filename:
-          description: Whether `grouping_location` is a `@code_location.filename` rather than a `@container_image.name`.
-          example: true
-          type: boolean
-        remediation_kind:
-          description: |-
-            Kind of upgrade: `image_update` when the findings have a `@remediation.container_image.latest_major.name`,
-            `base_image_bump` when they have `@vulnerability.is_inherited_from_base_image` set to `true`, and
-            `package_update` otherwise.
-          example: image_update
-          type: string
-        target_version:
-          description: |-
-            Version to upgrade to: the `@remediation.container_image.latest_major.tag` or
-            `@remediation.base_image.latest_major.tag` of the image in `action`, or else the highest
-            `@remediation.recommended.version` across the group's findings. Omitted when no version is recommended
-            or when the recommended versions can't be ordered.
-          example: 3.20.3
-          type: string
-      required:
-        - grouping_location
-        - location_is_filename
-        - remediation_kind
-        - action
-        - advisory_count
-        - exploitable_cve_count
-        - file_count
-      type: object
     RemediationGroupInclude:
       description: Related resource to add to `included`.
       enum:
@@ -123770,6 +123757,42 @@ components:
       type: string
       x-enum-varnames:
         - CASE
+    RemediationGroupOwnerList:
+      description: |-
+        Owners of the group's open findings. `items` lists at most 5 owners, the owners of the most findings first,
+        then by name. `total` counts every distinct owner, so the list is cut when `total` is larger than the number
+        of items.
+      properties:
+        items:
+          description: Owners of the most findings in the group, at most 5.
+          example:
+            - "@acme/payments"
+            - "@acme/platform"
+          items:
+            type: string
+          type: array
+        total:
+          description: Number of distinct owners across the group's findings.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - items
+        - total
+      type: object
+    RemediationGroupOwners:
+      description: |-
+        Who should fix the group: the code owners of the group's findings, from their `@git.codeowners` attribute,
+        and their Datadog teams, from their `team` tag. A group with no owners has empty `items` and a `total` of 0.
+      properties:
+        codeowners:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+        teams:
+          $ref: "#/components/schemas/RemediationGroupOwnerList"
+      required:
+        - codeowners
+        - teams
+      type: object
     RemediationGroupPackageUpdate:
       description: |-
         A package to update in a repository, for a group of library vulnerabilities (`sca.package_update`). The group
@@ -162220,6 +162243,15 @@ components:
             Indicates whether feature flag changes require approval in this environment. If omitted, resets to false. Include the existing value to preserve it.
           example: true
           type: boolean
+        subject_authorization_oidc_provider_id:
+          description: >-
+            The ID of a Custom OIDC provider, formatted as a nonzero UUID. If omitted, the stored association is preserved. Set to `null` to clear the association, which is allowed only when the resulting `subject_authorization_state` is `disabled`. A new non-null ID must be registered in the current organization and site, even when subject authorization is disabled. An unregistered ID returns `400 Bad Request`, and an unavailable registry returns `503 Service Unavailable`. Omitted, cleared, and unchanged IDs skip this check, including when you enable a retained provider. An ID that matches the stored ID in a different format, such as different letter case, is treated as unchanged. Saving does not verify provider eligibility or key publication.
+          example: "550e8400-e29b-41d4-a716-446655440003"
+          format: uuid
+          nullable: true
+          type: string
+        subject_authorization_state:
+          $ref: "#/components/schemas/EnvironmentSubjectAuthorizationState"
       type: object
     UpdateEnvironmentData:
       description: Data for updating an environment.
@@ -176414,6 +176446,10 @@ paths:
         - Case Management Type
       x-displayName: Get all work item types
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a work item type.
       operationId: CreateCaseType
@@ -176463,6 +176499,10 @@ paths:
         - Case Management Type
       x-displayName: Create a work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/custom_attributes:
     get:
       description: Get all custom attributes
@@ -176497,6 +176537,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/cases/types/{case_type_id}:
     delete:
       description: Delete a work item type
@@ -176517,6 +176561,10 @@ paths:
         - Case Management Type
       x-displayName: Delete a work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the name, emoji, or description of an existing work item type.
       operationId: UpdateCaseType
@@ -176614,6 +176662,10 @@ paths:
         - Case Management Attribute
       x-displayName: Get custom attribute configs for work item type
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Create a custom attribute configuration for a work item type.
       operationId: CreateCustomAttributeConfig
@@ -176672,6 +176724,10 @@ paths:
         - Case Management Attribute
       x-displayName: Create custom attribute config for work item type
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
   /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
     delete:
       description: Delete custom attribute config
@@ -176694,6 +176750,10 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_shared_settings_write
     put:
       description: Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.
       operationId: UpdateCustomAttributeConfig
@@ -177291,6 +177351,10 @@ paths:
         - Case Management
       x-displayName: Add a comment to a work item
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
       description: Delete work item comment
@@ -177316,6 +177380,10 @@ paths:
         - Case Management
       x-displayName: Delete work item comment
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_write
     put:
       description: Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.
       operationId: UpdateCaseComment
@@ -178133,12 +178201,18 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
+            - notebooks_write
       summary: Create investigation notebook for case
       tags:
         - Case Management
       x-displayName: Create investigation notebook for work item
       x-menu-order: 57
+      x-permission:
+        operator: AND
+        permissions:
+          - cases_read
+          - notebooks_write
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a work item
@@ -178729,12 +178803,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Unwatch a case
       tags:
         - Case Management
       x-displayName: Unwatch a work item
       x-menu-order: 66
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
     post:
       description: Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.
       operationId: WatchCase
@@ -178758,12 +178836,16 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - cases_write
+            - cases_read
       summary: Watch a case
       tags:
         - Case Management
       x-displayName: Watch a work item
       x-menu-order: 65
+      x-permission:
+        operator: OR
+        permissions:
+          - cases_read
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -201802,7 +201884,9 @@ paths:
           - feature_flag_environment_config_read
     post:
       description: |-
-        Creates a new environment for organizing feature flags.
+        Creates an environment for organizing feature flags. A non-null subject authorization provider ID
+        must be registered in the current organization and site, even when authorization is disabled. An unknown
+        ID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.
       operationId: CreateFeatureFlagsEnvironment
       requestBody:
         content:
@@ -201837,6 +201921,8 @@ paths:
                           - staging
                           - canary
                         require_feature_flag_approval: false
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000017
                       type: environments
               schema:
@@ -201933,6 +202019,8 @@ paths:
                         queries:
                           - staging
                         require_feature_flag_approval: false
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000018
                       type: environments
               schema:
@@ -201970,14 +202058,14 @@ paths:
         Updates an environment's name, DD_ENV values, and settings.
 
 
-        Every request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.
+        Every request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.
 
         To preserve the current name and DD_ENV values, get the environment first and include those values in the request.
 
 
         Omitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.
 
-        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.
+        Include their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.
       operationId: UpdateFeatureFlagsEnvironment
       parameters:
         - $ref: "#/components/parameters/environment_id"
@@ -202016,6 +202104,8 @@ paths:
                           - production
                           - prod-us
                         require_feature_flag_approval: true
+                        subject_authorization_oidc_provider_id:
+                        subject_authorization_state: disabled
                       id: 00000000-0000-0000-0000-000000000019
                       type: environments
               schema:
@@ -202039,6 +202129,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -247589,6 +247685,269 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model:
+    delete:
+      description: >-
+        Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 59
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-08-24T12:00:00Z"
+                        enabled: true
+                        model_id_canonical: openai/gpt-4o
+                        model_id_wire: openai/gpt-4o-2024-08-06
+                        provider_id: 42
+                        source: manual
+                        supported_operations:
+                          - OPENAI_CHAT_COMPLETIONS
+                        updated_at: "2026-08-24T12:00:00Z"
+                      id: "101"
+                      type: model-catalog-entries
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelCatalogEntryResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Update a provider model by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/providers/{provider_id}/model-pricing:
+    delete:
+      description: >-
+        Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: DeleteAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Delete a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 56
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: >-
+        Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.
+      operationId: GetAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_read
+      summary: Get a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-menu-order: 57
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: >-
+        Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+      operationId: UpdateAIGatewayModelPricingByCanonical
+      parameters:
+        - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
+        - $ref: "#/components/parameters/AiGatewayModelCanonicalIDQuery"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              custom:
+                summary: Set custom pricing
+                value:
+                  data:
+                    attributes:
+                      pricing_config:
+                        rates:
+                          cache_read_cost_per_mtok: 0.02
+                          cache_write_cost_per_mtok: 0.25
+                          non_cached_input_cost_per_mtok: 0.2
+                          output_cost_per_mtok: 1.0
+                        source:
+                          type: custom
+                        version: 1
+                    id: 7/openai/gpt-4o
+                    type: model-pricing
+            schema:
+              $ref: "#/components/schemas/AiGatewayModelPricingRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        effective_source: model_override
+                        pricing_config:
+                          rates:
+                            cache_read_cost_per_mtok: 0.02
+                            cache_write_cost_per_mtok: 0.25
+                            non_cached_input_cost_per_mtok: 0.2
+                            output_cost_per_mtok: 1.0
+                          source:
+                            type: custom
+                          version: 1
+                      id: 7/openai/gpt-4o
+                      type: model-pricing
+              schema:
+                $ref: "#/components/schemas/AiGatewayModelPricingResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_gateway_config_write
+      summary: Set a model pricing override by canonical ID
+      tags:
+        - AI Gateway
+      x-codegen-request-body-name: body
+      x-menu-order: 58
+      x-permission:
+        operator: OR
+        permissions:
+          - ai_gateway_config_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/providers/{provider_id}/models:
     get:
       description: >-
@@ -247759,6 +248118,7 @@ paths:
       description: |-
         Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
         Delete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.
+        A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.
       operationId: DeleteAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247790,7 +248150,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: >-
-        Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModel
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247852,7 +248212,7 @@ paths:
   /api/v2/providers/{provider_id}/models/{canonical}/pricing:
     delete:
       description: >-
-        Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: DeleteAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247886,7 +248246,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: >-
-        Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
+        Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.
       operationId: GetAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -247939,7 +248299,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
-        Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
+        Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.
       operationId: UpdateAiGatewayModelPricing
       parameters:
         - $ref: "#/components/parameters/AiGatewayProviderIDForModels"
@@ -255147,11 +255507,19 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a RUM-based metric
@@ -255177,7 +255545,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM-based metric
@@ -255224,7 +255596,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM-based metric
@@ -255303,13 +255679,25 @@ paths:
                 $ref: "#/components/schemas/RumMetricResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "409":
-          $ref: "#/components/responses/ConflictResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM-based metric
@@ -261206,6 +261594,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -261301,6 +261693,10 @@ paths:
       tags:
         - Entity Risk Scores
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
       x-unstable: |-
         **Note**: This endpoint is in public beta and it's subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -265449,15 +265845,14 @@ paths:
     get:
       description: |-
         Search the remediation groups of your organization. A remediation group gathers the open security findings
-        that one change fixes, such as updating a package in a repository or upgrading an image.
+        that one change fixes, such as updating a package in a repository.
 
         Each group comes from a grouping definition, which sets the finding type it covers and the kind object the
         group returns:
 
-        | Grouping definition    | Finding type                       | Kind object      |
-        | ---------------------- | ---------------------------------- | ---------------- |
-        | `sca.package_update`   | `library_vulnerability`            | `package_update` |
-        | `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |
+        | Grouping definition  | Finding type            | Kind object      |
+        | -------------------- | ----------------------- | ---------------- |
+        | `sca.package_update` | `library_vulnerability` | `package_update` |
 
         Groups are computed from the attributes of security findings, described in the
         [security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of
@@ -265537,42 +265932,6 @@ paths:
           content:
             application/json:
               examples:
-                cloud_vm_group_without_case:
-                  summary: A host and container vulnerability group with no case yet
-                  value:
-                    data:
-                      - attributes:
-                          findings:
-                            by_severity:
-                              critical: 1
-                              high: 9
-                              info: 0
-                              low: 10
-                              medium: 20
-                              none: 0
-                              unknown: 0
-                            total: 40
-                          grouping_definition_id: cloudvm.image_update
-                          image_update:
-                            action: alpine
-                            advisory_count: 25
-                            exploitable_cve_count: 2
-                            file_count: 1
-                            grouping_location: Dockerfile
-                            location_is_filename: true
-                            remediation_kind: image_update
-                            target_version: 3.20.3
-                          title: Upgrade alpine to 3.20.3
-                        id: cloudvm.image_update:eyJhY3Rpb24iOiJhbHBpbmUiLCJncm91cGluZ19sb2NhdGlvbiI6IkRvY2tlcmZpbGUiLCJyZW1lZGlhdGlvbl9raW5kIjoiaW1hZ2VfdXBkYXRlIn0
-                        relationships:
-                          case:
-                            data:
-                        type: remediation_groups
-                    meta:
-                      page:
-                        number: 1
-                        size: 50
-                        total_filtered_count: 134
                 default:
                   summary: A library vulnerability group with a case, with include=case
                   value:
@@ -265589,6 +265948,16 @@ paths:
                               unknown: 0
                             total: 12
                           grouping_definition_id: sca.package_update
+                          owners:
+                            codeowners:
+                              items:
+                                - "@acme/payments"
+                                - "@acme/platform"
+                              total: 2
+                            teams:
+                              items:
+                                - payments
+                              total: 1
                           package_update:
                             advisory_count: 3
                             ecosystem: npm

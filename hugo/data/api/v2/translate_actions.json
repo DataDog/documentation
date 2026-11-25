@@ -2383,7 +2383,7 @@
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
-    "description": "Creates a new environment for organizing feature flags.",
+    "description": "Creates an environment for organizing feature flags. A non-null subject authorization provider ID\nmust be registered in the current organization and site, even when authorization is disabled. An unknown\nID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.",
     "summary": "Create an environment",
     "request_description": "",
     "request_schema_description": "Request to create a new environment."
@@ -2397,7 +2397,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
@@ -5767,6 +5767,30 @@
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway provider."
   },
+  "DeleteAIGatewayModelByCanonical": {
+    "description": "Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a provider model by canonical ID"
+  },
+  "UpdateAIGatewayModelByCanonical": {
+    "description": "Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update a provider model by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request to update a model catalog entry."
+  },
+  "DeleteAIGatewayModelPricingByCanonical": {
+    "description": "Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a model pricing override by canonical ID"
+  },
+  "GetAIGatewayModelPricingByCanonical": {
+    "description": "Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.",
+    "summary": "Get a model pricing override by canonical ID"
+  },
+  "UpdateAIGatewayModelPricingByCanonical": {
+    "description": "Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Set a model pricing override by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request body for setting model pricing."
+  },
   "ListAiGatewayModels": {
     "description": "List all model catalog entries for a provider. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "List models for an AI Gateway provider"
@@ -5784,25 +5808,25 @@
     "request_schema_description": "Request to create several model catalog entries."
   },
   "DeleteAiGatewayModel": {
-    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.",
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.\nA canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.",
     "summary": "Delete a model from an AI Gateway provider"
   },
   "UpdateAiGatewayModel": {
-    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Update a model for an AI Gateway provider",
     "request_description": "",
     "request_schema_description": "Request to update a model catalog entry."
   },
   "DeleteAiGatewayModelPricing": {
-    "description": "Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Delete a model pricing override"
   },
   "GetAiGatewayModelPricing": {
-    "description": "Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "description": "Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "Get a model pricing override"
   },
   "UpdateAiGatewayModelPricing": {
-    "description": "Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Set a model pricing override",
     "request_description": "",
     "request_schema_description": "Request body for setting model pricing."
@@ -7052,7 +7076,7 @@
     "summary": "List ownership history by owner type"
   },
   "SearchRemediationGroups": {
-    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository or upgrading an image.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition    | Finding type                       | Kind object      |\n| ---------------------- | ---------------------------------- | ---------------- |\n| `sca.package_update`   | `library_vulnerability`            | `package_update` |\n| `cloudvm.image_update` | `host_and_container_vulnerability` | `image_update`   |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
+    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition  | Finding type            | Kind object      |\n| -------------------- | ----------------------- | ---------------- |\n| `sca.package_update` | `library_vulnerability` | `package_update` |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
     "summary": "Search remediation groups"
   },
   "ListAssetsSBOMs": {

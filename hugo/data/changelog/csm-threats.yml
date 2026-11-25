@@ -75,3 +75,21 @@ entries:
       - UpdateCSMThreatsAgentRule
     title: Document permissions for Workload Protection agent rule and policy 
       endpoints
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42113
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - CreateCSMThreatsAgentRule
+      - DeleteCSMThreatsAgentPolicy
+      - DeleteCSMThreatsAgentRule
+      - DownloadCSMThreatsPolicy
+      - GetCSMThreatsAgentPolicy
+      - GetCSMThreatsAgentRule
+      - GetCloudWorkloadSecurityAgentRule
+      - ListCSMThreatsAgentPolicies
+      - ListCSMThreatsAgentRules
+      - ListCloudWorkloadSecurityAgentRules
+      - UpdateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentRule
+    title: Deprecate legacy Workload Protection agent rule read endpoints

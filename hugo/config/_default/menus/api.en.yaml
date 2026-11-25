@@ -8201,6 +8201,71 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Set a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/set-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-set-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 58
+    - name: Get a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/get-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-get-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 57
+    - name: Delete a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/delete-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-delete-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 56
+    - name: Update a provider model by canonical ID
+      url: /api/latest/ai-gateway/update-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-update-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 60
+    - name: Delete a provider model by canonical ID
+      url: /api/latest/ai-gateway/delete-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-delete-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 59
     - name: Update an AI Gateway provider
       url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
       identifier: ai-gateway-update-an-ai-gateway-provider
