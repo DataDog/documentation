@@ -65,22 +65,16 @@ From the side panel, you can investigate more details about the change and take 
 - View the latest commits in your repository.
 - Compare two deployments to see what differs between them.
 
-## Search for changes you can't see
+## Build your own view with Change Tracking widgets
 
 Change Tracking is available as a data source for widgets across Datadog, including dashboards and notebooks.
-
-{{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
 
 1. In a dashboard or notebook, add or edit a supported widget type: Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart.
 1. From the {{< ui >}}data source{{< /ui >}} dropdown, select {{< ui >}}Change Tracking{{< /ui >}}.
 1. Configure your filters. {{< ui >}}Service{{< /ui >}} is required.
 1. (Optional) For widgets that support grouping, use {{< ui >}}Group by{{< /ui >}} to split results.
 
-{{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
-
 For timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}} to draw changes on top of the series.
-
-{{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
 
 To open the side panel from a widget, click a datapoint and select {{< ui >}}View Changes{{< /ui >}}.
 
