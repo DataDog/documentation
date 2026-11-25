@@ -238,7 +238,7 @@ First, [configure the Salesforce integration][17] with an account and [grant it 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Salesforce{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above.
+   - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above. If it isn't listed, click "Add Salesforce account".
    - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
    - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
 3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
@@ -268,7 +268,7 @@ First, [configure the ServiceNow integration][18] with an account, then [configu
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}ServiceNow{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Instance{{< /ui >}}: Select the instance configured above.
+   - {{< ui >}}Instance{{< /ui >}}: Select the instance configured above. If it isn't listed, click "Add ServiceNow account".
    - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
    - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
