@@ -47,7 +47,7 @@ Runtime risks help you decide which findings to fix first, based on how the mapp
 | Privileged Access | The service runs with elevated privileges or can assume a privileged role. | Yes | Yes | Yes | Yes |
 | Publicly Accessible | The service is reachable from the internet. | Yes | Yes | Yes | Yes |
 
-SCA findings also carry signals about the vulnerability itself, such as reachability, exploit availability, and exploitation probability (EPSS). For details, see [how SCA calculates the Datadog Severity Score][9].
+SCA findings also carry signals about the vulnerability itself, such as reachability, exploit availability, and Exploit Prediction Scoring System (EPSS) scores. For details, see [how SCA calculates the Datadog Severity Score][9].
 
 ## Use runtime context
 
@@ -79,7 +79,7 @@ The finding side panel shows the services that a finding maps to and the runtime
 
 ### On the Summary page
 
-On the [{{< ui >}}Code Security Summary{{< /ui >}}][5] page, runtime context shows how many SAST and SCA findings run in production and are exposed to attacks, so you can track risk across repositories and teams.
+On the [{{< ui >}}Code Security Summary{{< /ui >}}][5] page, runtime context shows how many SAST and SCA findings are in production services and in services exposed to attacks, so you can track risk across repositories and teams.
 
 - In the {{< ui >}}Code vulnerabilities{{< /ui >}} section, select {{< ui >}}Static (SAST){{< /ui >}} to see a funnel of SAST findings: {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In your services{{< /ui >}}, {{< ui >}}In Production{{< /ui >}}, and {{< ui >}}Exposed to Attacks{{< /ui >}}.
 - In the {{< ui >}}Library vulnerabilities{{< /ui >}} section, a funnel shows SCA findings: {{< ui >}}Default branch{{< /ui >}}, {{< ui >}}In Production{{< /ui >}}, {{< ui >}}Exploit Available{{< /ui >}}, and {{< ui >}}Exposed to Attacks{{< /ui >}}.
