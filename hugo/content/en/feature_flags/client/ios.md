@@ -159,6 +159,58 @@ do {
 }
 {{< /code-block >}}
 
+## Authorize assignment downloads
+
+Use subject authorization to restrict assignment downloads to authenticated users or accounts. Follow [Subject Authorization][3] to register an OIDC provider and configure the environment.
+
+In `dd-sdk-ios` version `3.23.0` or later, pass a JWT from your backend in the reserved `dd_assignment_token` attribute of `FlagsEvaluationContext`:
+
+{{< code-block lang="swift" >}}
+// Obtain this token from your authenticated backend session.
+let assignmentToken = "<SUBJECT_JWT>"
+let flagsClient = FlagsClient.shared()
+
+try await flagsClient.setEvaluationContext(
+    FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: [
+            "country": .string("US"),
+            "dd_assignment_token": .string(assignmentToken)
+        ]
+    )
+)
+{{< /code-block >}}
+
+The token's `sub` must match `targetingKey`, and its `environment_id` must identify the environment selected by `Datadog.Configuration.env`. The SDK sends the token in the `DD-Assignment-Token` request header. It does not parse JWT claims or refresh tokens automatically.
+
+### Refresh tokens and change subjects
+
+Obtain a replacement token from your backend before expiration. Call `setEvaluationContext` again with the complete context, including the targeting key and targeting attributes:
+
+{{< code-block lang="swift" >}}
+try await flagsClient.setEvaluationContext(
+    FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: [
+            "country": .string("US"),
+            "dd_assignment_token": .string("<REPLACEMENT_SUBJECT_JWT>")
+        ]
+    )
+)
+{{< /code-block >}}
+
+For a different subject, update `targetingKey` and supply a token issued for that subject in the same context update. Omitting `dd_assignment_token`, or setting it to `.null` or an empty string, removes the credential. Removing a token does not disable authorization on the environment.
+
+Each token update triggers an assignment download.
+
+Token expiration alone does not clear assignments already downloaded by the SDK.
+
+### Token handling and proxies
+
+The SDK excludes `dd_assignment_token` from targeting attributes, stored context, and Datadog telemetry. Keep tokens out of application logs and keep the signing private key on your backend.
+
+If you use a [proxy][4], forward `DD-Assignment-Token` and set `customFlagsEndpoint` to the final HTTPS URL to avoid redirects. Set the credential through the evaluation context; the SDK ignores a custom `DD-Assignment-Token` header.
+
 ## Evaluate flags
 
 After creating the `FlagsClient` and setting its evaluation context, you can start reading flag values throughout your app. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags. This makes evaluations safe to perform on the main thread.
@@ -563,3 +615,5 @@ final class CheckoutFlagTests: XCTestCase {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /account_management/api-app-keys/#client-tokens
+[3]: /feature_flags/concepts/subject_authorization/
+[4]: /feature_flags/guide/proxy_sdk_traffic/

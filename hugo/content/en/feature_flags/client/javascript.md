@@ -106,6 +106,64 @@ await OpenFeature.setProviderAndWait(provider, evaluationContext);
 
 Most applications run several asynchronous tasks at startup, such as fetching data from another service or loading configuration. This example shows only feature flag initialization. As a best practice, start all of your startup promises together and await them as a group (for example, with `Promise.all`) right before the results are needed, rather than awaiting each one sequentially. This keeps total startup time close to the slowest task instead of the sum of all of them.
 
+## Authorize assignment downloads
+
+Use subject authorization to restrict assignment downloads to authenticated users or accounts. Follow [Subject Authorization][10] to register an OIDC provider and configure the environment.
+
+In `@datadog/openfeature-browser` version `2.4.0` or later, pass a backend-issued JWT in the reserved `dd_assignment_token` evaluation context field.
+
+Register the provider in a dedicated OpenFeature domain so other providers do not share the token-bearing context. Use that domain for context updates and flag evaluations:
+
+{{< code-block lang="javascript" >}}
+const domain = 'authorized-feature-flags';
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+});
+
+// Obtain this token from your authenticated backend session.
+const assignmentToken = '<SUBJECT_JWT>';
+
+await OpenFeature.setProviderAndWait(domain, provider, {
+  targetingKey: 'user-123',
+  country: 'US',
+  dd_assignment_token: assignmentToken,
+});
+
+const client = OpenFeature.getClient(domain);
+const enabled = client.getBooleanValue('checkout_new', false);
+{{< /code-block >}}
+
+The token's `sub` must match `targetingKey`, and its `environment_id` must identify the environment selected by `env`. The SDK forwards the token in the reserved `DD-Assignment-Token` header. It does not parse JWT claims or refresh tokens automatically.
+
+### Refresh tokens and change subjects
+
+Obtain a replacement token from your backend before expiration. Supply it with the complete context, including the targeting key and targeting attributes:
+
+{{< code-block lang="javascript" >}}
+await OpenFeature.setContext(domain, {
+  targetingKey: 'user-123',
+  country: 'US',
+  dd_assignment_token: '<REPLACEMENT_SUBJECT_JWT>',
+});
+{{< /code-block >}}
+
+For a different subject, update `targetingKey` and supply a token issued for that subject in the same context update. Omitting `dd_assignment_token`, or setting it to `null` or an empty string, removes the credential. Removing a token does not disable authorization on the environment.
+
+Each token update triggers an assignment download. Avoid unnecessary token-only updates: a refreshed response can reset exposure deduplication and cause another exposure on the next flag evaluation.
+
+Token expiration or removal does not clear assignments already downloaded by the SDK.
+
+### Token handling and proxies
+
+The SDK excludes `dd_assignment_token` from Datadog targeting attributes, telemetry, and assignment-cache data. Keep tokens out of application logs.
+
+**Note**: Application hooks and other OpenFeature providers that share the original context can still access the token. Use a dedicated OpenFeature domain for the Datadog provider.
+
+If you use a [proxy][8], forward `DD-Assignment-Token`, allow it in CORS preflight responses, and include CORS headers on error responses. Otherwise, the browser can block the request or prevent the SDK from recognizing an authorization rejection. Set the credential through the evaluation context; custom headers and RUM attributes cannot supply it.
+
 ## Evaluate flags
 
 After the provider is initialized, you can evaluate flags anywhere in your application. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags.
@@ -465,3 +523,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
 [7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
 [8]: /feature_flags/guide/proxy_sdk_traffic/
+[10]: /feature_flags/concepts/subject_authorization/

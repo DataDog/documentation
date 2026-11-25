@@ -36,6 +36,10 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
 
+## Authorize assignment downloads
+
+Use [Subject Authorization][4] to restrict feature flag assignment downloads to authenticated users or accounts.
+
 ## Telemetry options by platform
 
 The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
@@ -133,3 +137,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 
 [1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [2]: /feature_flags/concepts/flag_key_obfuscation/
+[4]: /feature_flags/concepts/subject_authorization/
