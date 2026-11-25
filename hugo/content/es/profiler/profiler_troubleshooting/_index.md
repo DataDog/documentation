@@ -4,13 +4,12 @@ aliases:
 further_reading:
 - link: /tracing/troubleshooting
   tag: Documentación
-  text: Solucionar problemas de APM
-title: Solucionar problemas del generador de perfiles
+  text: Solución de problemas de APM
+title: Solución de problemas del generador de perfiles
 type: multi-code-lang
 ---
-
 {{< card-grid >}}
-  {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
   {{< image-card href="php/" src="integrations_logos/php.png" alt="PHP" >}}
@@ -20,4 +19,5 @@ type: multi-code-lang
   {{< image-card href="ddprof/" src="integrations_logos/rust.png" alt="Rust" >}}
   {{< image-card href="ddprof/" src="integrations_logos/c.png" alt="C" >}}
   {{< image-card href="ddprof/" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="full_host/" src="integrations_logos/otel.png" alt="Full-Host Profiler" >}}
 {{< /card-grid >}}
