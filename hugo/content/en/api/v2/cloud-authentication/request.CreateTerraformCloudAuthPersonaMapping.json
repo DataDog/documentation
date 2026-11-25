@@ -1,0 +1,10 @@
+{
+  "data": {
+    "type": "terraform_cloud_auth_config",
+    "attributes": {
+      "issuer_url": "https://app.terraform.io",
+      "sub_pattern": "organization:datadog-api-spec:project:Default Project:workspace:sdk-examplecloudauthentication:run_phase:*",
+      "account_identifier": "string"
+    }
+  }
+}

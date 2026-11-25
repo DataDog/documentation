@@ -10,9 +10,15 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Live call routing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <div class="alert alert-info">
 Live call routing is provisioned by Datadog. To enable it for your organization, contact <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the desired country code (for example, <code>+33</code> for France).
 </div>
+{{< /site-region >}}
 
 ## Overview
 

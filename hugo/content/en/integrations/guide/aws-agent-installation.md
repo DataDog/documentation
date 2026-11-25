@@ -1,11 +1,13 @@
 ---
 title: Install Datadog Instrumentation through the AWS Integration
-description: "Instrument your Amazon EC2 instances and AWS Lambda functions directly from the AWS integration, without connecting to each host or redeploying each function."
-private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry under "AWS guides" in hugo/content/en/integrations/guide/_index.md at that time
+description: "Instrument your Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters directly from the AWS integration."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/"
   tag: "Documentation"
   text: "How Datadog instrumentation through the AWS integration works"
+- link: "/containers/guide/operator-eks-addon/"
+  tag: "Documentation"
+  text: "Install the Datadog Operator as an Amazon EKS add-on"
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Documentation"
   text: "AWS Integration"
@@ -50,8 +52,9 @@ You can instrument your AWS workloads directly from Datadog, without connecting 
 |---|---|
 | Amazon EC2 instances | The Datadog Agent |
 | AWS Lambda functions | The Datadog Lambda extension and, for supported runtimes, the Datadog tracing layer that matches the function's runtime |
+| Amazon EKS clusters | The Datadog Operator EKS add-on and the Datadog Agent |
 
-Amazon EKS is not supported. For Lambda functions, Datadog also offers remote instrumentation, a separate product. To decide which to use, see the following section.
+For Lambda functions, Datadog also offers remote instrumentation, a separate product. To decide which to use, see the following section.
 
 <div class="alert alert-warning">A Lambda function can be managed by only one Datadog instrumentation product. Datadog skips any function that remote instrumentation already manages, and skips any function you instrumented yourself.</div>
 
@@ -66,8 +69,8 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 
 | Aspect | Instrumentation through the AWS integration | Remote instrumentation |
 |---|---|---|
-| Workloads | Amazon EC2 instances and AWS Lambda functions | AWS Lambda functions |
-| What runs in your account | No Datadog compute. Datadog calls the AWS APIs with the AWS integration IAM role created by the CloudFormation stack | The instrumenter Lambda function |
+| Workloads | Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters | AWS Lambda functions |
+| What runs in your account for Lambda instrumentation | No Datadog compute. Datadog calls the AWS APIs with the AWS integration IAM role created by the CloudFormation stack | The instrumenter Lambda function |
 | Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
 | Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
 | Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
@@ -79,7 +82,7 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 
 Both products deploy a CloudFormation stack in your account. The stack for remote instrumentation also creates a CloudTrail trail and supporting resources. For what the stack in this guide creates, including the EventBridge resources that send change events to Datadog, see [How Datadog instrumentation through the AWS integration works][6].
 
-Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place, or when you want to narrow the function list by region, runtime, and memory size.
+Use instrumentation through the AWS integration when you want to instrument EC2 instances, Lambda functions, and EKS clusters from one place, or when you want to narrow the function list by region, runtime, and memory size.
 
 Use remote instrumentation when you want to match on the tags in `DD_TAGS`. Both products can match on AWS resource tags.
 
@@ -117,6 +120,16 @@ For all workloads, confirm the following:
   | OS-only | `provided.al2` and `provided.al2023` (extension layer only, no tracing layer) |
 
 Datadog marks any function that doesn't meet these conditions as ineligible in the rule preview, so you can see what is excluded before you apply a rule.
+
+### Amazon EKS clusters
+
+- **AWS partition**: The cluster must be in the commercial `aws` partition. Clusters in AWS GovCloud or the AWS China partitions are not supported.
+- **AWS Marketplace access**: The AWS account must be able to accept the agreement for the Datadog Operator EKS add-on. The CloudFormation setup handles this one-time, account-level agreement.
+- **Supported add-on version**: Datadog Operator EKS add-on version 0.1.31 or later must be available for the cluster's AWS region and Kubernetes version.
+- **Existing Datadog Operator add-on**: The cluster must not have a `datadog_operator` add-on that Datadog did not install.
+- **Existing AWS Secrets Store CSI Driver Provider add-on**: If the `aws-secrets-store-csi-driver-provider` add-on is already installed, its configuration must set `secrets-store-csi-driver.syncSecret.enabled` to `true`. Datadog doesn't modify the configuration of an existing add-on.
+- **Existing Pod Identity association**: The `datadog-agent/datadog-ascp-sync` service account must not have an existing Pod Identity association unless it matches an association Datadog previously created.
+- **Supported clusters**: The cluster must be in the `ACTIVE` state, all workloads must run on Amazon EC2-backed nodes, and at least one node must run Linux. Other EC2 nodes can run Linux or Windows. Clusters with EKS Fargate profiles are not supported.
 
 ## Required AWS permissions
 
@@ -160,22 +173,37 @@ These permissions let Datadog react to changes to your AWS resources. They apply
 
 Lambda instrumentation needs no Secrets Manager, Systems Manager, or IAM write permissions. Function reads and updates are restricted to Lambda functions in your own account.
 
+### Amazon EKS permissions
+
+Datadog uses the following permissions for EKS instrumentation:
+
+| Permission | Why Datadog needs it |
+|---|---|
+| `eks:DescribeCluster`, `eks:ListFargateProfiles` | Read the selected cluster's status and exclude clusters with Fargate profiles |
+| `eks:CreateAddon`, `eks:DescribeAddon`, `eks:UpdateAddon`, `eks:DescribeUpdate`, `eks:DeleteAddon`, `eks:TagResource` | Install and manage the Datadog Operator, AWS Secrets Store CSI Driver Provider, and EKS Pod Identity Agent add-ons |
+| `eks:CreatePodIdentityAssociation`, `eks:DescribePodIdentityAssociation`, `eks:ListPodIdentityAssociations`, `eks:DeletePodIdentityAssociation` | Give the credential synchronization service account access to its scoped IAM role |
+| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource`, `secretsmanager:DeleteSecret` | Create the cluster-specific API key and Service Access Token secrets, reuse existing ones that Datadog created, and delete Datadog-owned copies during uninstall |
+| `secretsmanager:PutSecretValue`, `secretsmanager:UpdateSecretVersionStage` | Store and activate a replacement Service Access Token in its secret |
+| `iam:GetRole`, `iam:CreateRole`, `iam:PutRolePolicy`, `iam:PassRole`, `iam:TagRole`, `iam:DeleteRolePolicy`, `iam:DeleteRole` | Create the credential synchronization role, scope it to the cluster's API key and Service Access Token secrets, pass it to EKS Pod Identity, and remove the role during uninstall |
+| `iam:SimulatePrincipalPolicy` | Confirm that the AWS integration role has the required EKS instrumentation permissions before installation |
+
+Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API key and Service Access Token secrets for the selected cluster. `iam:CreateRole` is restricted to role names matching `dd-eks-ascp-sync-*` in your account, and `iam:PassRole` is restricted to EKS Pod Identity (`pods.eks.amazonaws.com`).
+
 ## How it works
 
 An **instrumentation rule** is the saved **Scope to** selection for an AWS account. It determines which resources Datadog automatically instruments, including resources that match the selection later. Datadog evaluates the selection, instruments each covered resource inside your own account, and keeps it instrumented:
 
 1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
 1. Datadog evaluates the rule against your account and records which resources it covers.
-1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function.
-1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed.
+1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function; on EKS, by installing the Datadog Operator and Agent.
 
-You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch.
+   For EKS, Datadog also adds any missing prerequisite EKS add-ons and IAM configuration, and stores the API key and a cluster-specific Service Access Token in AWS Secrets Manager.
+
+1. Datadog maintains instrumentation on covered resources. For EC2 and Lambda, it restores instrumentation that goes missing. For EKS, the Datadog Operator maintains the Agent resources inside each covered cluster.
+
+You approve one CloudFormation stack, one time, during initial setup. For EKS, the stack also handles the one-time Datadog Operator AWS Marketplace agreement. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch.
 
 For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and how Datadog keeps instrumentation in place, see [How Datadog instrumentation through the AWS integration works][6].
-
-{{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
-
-<!-- TODO(DOCS-14545): the "How it works" diagram shows the EC2 flow only. Add a Lambda equivalent (or a workload-agnostic version) before publish. -->
 
 ### Choose how your rule matches resources
 
@@ -226,37 +254,46 @@ To tune what the extension collects, set the standard Datadog environment variab
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
 - **AWS integration setup**: When you [set up the AWS integration][5], turn on **Grant Datadog permission to manage installations** on the [AWS integration page][7], next to log and resource collection. Then choose how to install:
-  - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs for EC2 and Lambda, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
+  - **Select resources later** (the default): The CloudFormation stack grants the permissions Datadog needs for EC2, Lambda, and EKS, but Datadog installs nothing. Select resources later on the AWS Install Agents page.
   - **Install on all resources**: Select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear. For Lambda, this covers functions with at least 256 MB of memory. See [Functions with low memory](#functions-with-low-memory).
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
 
-<!-- TODO(DOCS-14545): per AWS team, surfacing the install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
+When you choose **Install on all resources**, under **Select platforms to instrument**, select one or more of **EC2 Instances**, **EKS Clusters**, or **Lambda Functions**:
 
-When you choose **Install on all resources**, a workload selector lists **EC2 Instances**, **Lambda Functions**, and **EKS Clusters**. Only **EC2 Instances** and **Lambda Functions** can be selected:
-
-{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) workload toggle turned on." style="width:80%;" >}}
-
-<!-- TODO(DOCS-14545): the setup-toggle screenshot predates the Lambda workload. Recapture it showing EC2 Instances, Lambda Functions, and EKS Clusters (Coming Soon) before publish. -->
+{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-platforms.png" alt="The Add resource-level observability step in AWS setup, with telemetry installation enabled for EC2, EKS, and Lambda." style="width:80%;" >}}
 
 To install from the AWS Install Agents page:
 
-1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
+1. Select the workload you want to instrument: **EC2 Instances**, **Lambda Functions**, or **EKS Clusters**.
 1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size. New Lambda rules exclude functions with less than 256 MB of memory unless you clear **Exclude low-memory functions**.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
 1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and remain until you edit the rule.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
-<!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
+For EKS, the CloudFormation setup configures the required permissions, the EventBridge rule that sends cluster change events to Datadog, and the AWS Marketplace agreement. You don't need to apply Kubernetes manifests or run Helm commands for this workflow.
 
 ## Verify instrumentation
 
-After instrumentation completes:
+An instrumented status doesn't confirm that telemetry is arriving. After the Agent is healthy or the Lambda configuration is applied, telemetry appears within minutes in the following places:
 
 - **EC2**: The newly installed Agents appear in the [Infrastructure List][3] and on the host map. Fleet Automation lists the same Agents in the Fleet View.
 - **Lambda**: The instrumented functions appear on the [Serverless][11] page, and their traces appear in [APM][12]. If a function is instrumented but its telemetry doesn't arrive, see [Troubleshoot AWS Lambda Monitoring][15].
 
-<!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
+### Verify EKS instrumentation
+
+An active instrumentation status on the [AWS Install Agents page][8] confirms that the Datadog Operator completed the installation workflow. Verify Agent workload health and telemetry separately:
+
+- Confirm that the `datadog_operator`, `aws-secrets-store-csi-driver-provider`, and `eks-pod-identity-agent` add-ons are in the `ACTIVE` state in Amazon EKS.
+- Open [Fleet View][20], switch to the Kubernetes view, and find the cluster.
+- Open [Kubernetes Explorer][21] and confirm that the expected cluster, nodes, and workloads appear.
+
+If you have Kubernetes API access, confirm that the `DatadogAgent` resource and Agent pods exist:
+
+```shell
+kubectl get datadogagent datadog-agent -n datadog-agent
+kubectl get pods -n datadog-agent
+```
 
 ## Manage instrumented resources
 
@@ -268,7 +305,9 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, edit the rule to change layer versions or to turn APM and Logs on or off.
+The rule is the source of truth. To stop coverage, update the rule. On EC2 and Lambda, if you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, edit the rule to change layer versions or to turn APM and Logs on or off.
+
+For EKS, keep the Datadog Operator add-on installed while the cluster is covered by a rule. The Operator maintains the Agent resources inside the cluster, but Datadog does not automatically recreate a manually deleted Operator add-on after installation completes.
 
 ## Remove Datadog instrumentation
 
@@ -276,20 +315,22 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 
 - **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Layers and environment variables you added yourself are left in place.
+- **EKS**: Datadog removes the managed Agent resources and Operator add-on, revokes the Service Access Token, removes the Pod Identity association and scoped IAM role it created, and deletes the Datadog-owned credential secrets. For the removal order and the resources Datadog retains, see [Remove Datadog instrumentation][23] in the technical reference.
 
 <div class="alert alert-danger">Remove instrumentation in Datadog before you delete the CloudFormation stack or remove the AWS integration. Unlike remote instrumentation, deleting the stack does not remove instrumentation. It removes the permissions Datadog uses to uninstall, so the instrumentation stays on your resources and Datadog can no longer remove it.</div>
 
 To remove all instrumentation from an AWS account:
 
 1. Open the [AWS Install Agents page][8] and select the account.
-1. Select **Lambda Functions** and click **Remove all**. Repeat for **EC2 Instances**.
+1. Select **Lambda Functions** and click **Remove all**. Repeat for **EC2 Instances** and **EKS Clusters**.
 1. Review the summary and click **Uninstall Agent**.
 1. Wait for Datadog to report that the resources are uninstrumented. Only then delete the CloudFormation stack or remove the AWS integration, if you still want to.
 
 If the stack is already deleted, Datadog can't clean up. On the AWS Install Agents page, click **Remove all** and **Uninstall Agent** anyway, so that Datadog does not instrument the resources again if the stack is recreated. Then remove the instrumentation yourself:
 
+- **EC2**: [Uninstall the Agent][24] from each instance, then delete the AWS resources listed in [Created as needed, for EC2 instances][25]. Leave `AmazonSSMManagedInstanceCore` attached to an instance's existing role unless you know Datadog added it, because Systems Manager needs it to reach the instance.
 - **Lambda**: Restore your functions from your infrastructure-as-code, or by hand. To clean up a function by hand, make these changes in a single update: restore the original handler from `DD_LAMBDA_HANDLER` (Node.js and Python), remove `AWS_LAMBDA_EXEC_WRAPPER` (Java and .NET), remove the Datadog layers, remove `DD_SITE`, `DD_ORG_UUID`, and `DD_LAMBDA_HANDLER`, and restore `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to the values they had before, or remove them if the function didn't set them. A function whose handler or wrapper still points at a removed Datadog layer fails on every invocation. For the full list of changes, see [What Datadog changes on a function][17].
-- **EC2**: [Uninstall the Agent][20] from each instance, then delete the AWS resources listed in [Created as needed, for EC2 instances][21]. Leave `AmazonSSMManagedInstanceCore` attached to an instance's existing role unless you know Datadog added it, because Systems Manager needs it to reach the instance.
+- **EKS**: Restore the CloudFormation stack with the EKS instrumentation permissions, then repeat the removal workflow above. This lets Datadog remove the managed resources in the required order and revoke the Service Access Token. If you cannot restore the stack, contact [Datadog Support][26].
 
 ## Troubleshooting
 
@@ -327,6 +368,12 @@ New Lambda rules exclude these functions by default, so they appear as excluded 
 
 Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisites](#aws-lambda-functions). The most common reasons are a container image package type, an unsupported runtime or architecture, a function outside the commercial `aws` partition, and Lambda@Edge functions. Lambda@Edge replicas and the functions they replicate are both excluded.
 
+### A required EKS add-on is incompatible or unhealthy
+
+Datadog installs the `datadog_operator` add-on and installs or reuses the `aws-secrets-store-csi-driver-provider` and `eks-pod-identity-agent` prerequisite add-ons. Each add-on must reach the `ACTIVE` state before instrumentation can complete.
+
+If instrumentation reports an add-on error, open the cluster's **Add-ons** tab in the Amazon EKS console, select the affected add-on, and review its **Health issues**. Resolve the reported issue. If an existing `aws-secrets-store-csi-driver-provider` add-on is affected, set `secrets-store-csi-driver.syncSecret.enabled` to `true` in its configuration. Datadog retries instrumentation during the next reconciliation. For more information, see [FAQs: Amazon EKS add-ons][22] in the AWS re:Post Knowledge Center.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -350,5 +397,10 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
 [19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[20]: https://docs.datadoghq.com/agent/guide/how-do-i-uninstall-the-agent/
-[21]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances
+[20]: https://app.datadoghq.com/fleet?view_by=clusters
+[21]: https://app.datadoghq.com/orchestration/overview/pod
+[22]: https://repost.aws/knowledge-center/eks-managed-add-on
+[23]: /integrations/guide/aws-agent-installation-technical-reference/#remove-datadog-instrumentation
+[24]: /agent/guide/how-do-i-uninstall-the-agent/
+[25]: /integrations/guide/aws-agent-installation-technical-reference/#created-as-needed-for-ec2-instances
+[26]: /help/

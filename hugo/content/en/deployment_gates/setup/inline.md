@@ -12,7 +12,7 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-With **inline** Deployment Gates, rules are defined in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes inline gates a good fit for rules-as-code and per-deployment flexibility.
+With an **inline** Deployment Gate, the gate and its rules are defined in the evaluation request. You do not need to store a gate in Datadog, which makes inline gates a good fit for rules-as-code and per-deployment flexibility.
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
 
@@ -45,34 +45,26 @@ Top-level fields:
 
 Each rule has these fields:
 
-- `type` (required): The rule type, `monitor` or `faulty_deployment_detection`. See [Rule types](#rule-types) for what each evaluates.
+- `type` (required): The rule type, `monitor` or `faulty_deployment_detection`. See the [Rules](#rules) section for each type's options.
 - `name` (required): A human-readable label that shows up on the [Deployment Gates Evaluations][6] page.
-- `options` (required): Rule-specific settings; see [Rule types](#rule-types).
+- `options` (required): Rule-specific settings. See the [Rules](#rules) section.
 - `dry_run` (optional): Per-rule dry-run override. Overrides the gate-level `dry_run`.
 
-## Rule types
+## Rules
 
-For the full schema and all available options, see the [Deployment Gates API reference][4].
+This section lists the options for each rule type. For how each rule type is evaluated, see [Rules in the Deployment Gates overview][7]. For the full schema and all available options, see the [Deployment Gates API reference][4].
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-The Monitor rule evaluates the state of a set of monitors over a configurable period of time. Select monitors with either `query` or `monitor_ids`; the two options are mutually exclusive. The rule can fail if at any time during the evaluation period:
+For how monitor rules are evaluated, see [Monitor rules][1].
 
-- No monitor groups match the configured selection.
-- An explicit monitor ID does not exist or is unavailable to your organization.
-- More than 300 monitors match the configured selection.
-- Any matching monitor group is in `ALERT` or `NO_DATA` state.
+Options for inline monitor rules:
 
-**Options**:
+- `query`: A monitor search query. For syntax and examples, see [Monitor search queries][2]. Can't be used with `monitor_ids`.
+- `monitor_ids`: A list of specific monitors. Each item contains a monitor `id` (the monitor's numeric ID, as a string) and a `groups` array of exact group names. Only the listed groups are evaluated, so alerts on other groups don't fail the rule. Pass an empty `groups` array to evaluate all groups for that monitor. Can't be used with `query`.
+- `duration`: The period of time (in seconds) for which the selected monitors are evaluated.
 
-- `query`: A monitor search query based on the [Search Monitor syntax][1]. Filter on monitor tags:
-  - Monitor static tags: `service:transaction-backend`
-  - Tags within the monitor's query: `scope:"service:transaction-backend"`
-  - Tags within a [monitor grouping][2]: `group:"service:transaction-backend"`
-- `monitor_ids`: A list of specific monitors. Each item contains a decimal monitor `id` and a `groups` array of exact group names. An empty `groups` array evaluates all groups for that monitor.
-- `duration`: The period of time (in seconds) for which the selected monitors are evaluated. Default is 0 (monitors are evaluated instantly). Maximum is 7200 seconds (2 hours).
-
-Example inline rules:
+Example inline monitor rule with a [monitor query][2]:
 
 ```json
 {
@@ -84,6 +76,8 @@ Example inline rules:
   }
 }
 ```
+
+Example inline monitor rule with specific monitor IDs:
 
 ```json
 {
@@ -99,29 +93,19 @@ Example inline rules:
 }
 ```
 
-**Notes**:
-- `group` query filters and `monitor_ids[].groups` evaluate only matching groups.
-- An explicit monitor ID that does not exist or is unavailable to your organization causes the rule to fail. If the monitor exists but is excluded because it is muted or its selected groups have no data, the rule applies the no-matching-groups behavior.
-- Muted monitors are automatically excluded from both selection modes.
-
-[1]: /monitors/manage/search/
-[2]: /monitors/manage/#triggered-monitors
+[1]: /deployment_gates/#monitor-rules
+[2]: /deployment_gates/#monitor-search-queries
 {{% /tab %}}
 {{% tab "Watchdog Faulty Deployment Detection" %}}
-This rule type uses [Watchdog Faulty Deployment Detection][1] analysis to compare the deployed version against previous versions of the same service. The analysis detects:
+For how Watchdog Faulty Deployment Detection (FDD) rules are evaluated, see [Watchdog Faulty Deployment Detection rules][1].
 
-- New types of errors.
-- Significant increases in error rates compared to previous versions.
+Options for inline FDD rules:
 
-The analysis is automatically performed for all APM-instrumented services, and no prior setup is required.
+- `allowed_resources`: A list of APM resources to include in the analysis. Can't be used with `excluded_resources`.
+- `excluded_resources`: A list of APM resources to exclude from the analysis. Can't be used with `allowed_resources`.
+- `duration`: The period of time (in seconds) for which the analysis runs.
 
-**Options**:
-
-- `duration`: The period of time (in seconds) for which the analysis runs. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts. Maximum is 7200 seconds (2 hours).
-- `allowed_resources` (optional): [APM resources][2] to include in the analysis. When specified, only the listed resources are analyzed. Mutually exclusive with `excluded_resources`.
-- `excluded_resources` (optional): [APM resources][2] to ignore (such as low-volume or low-priority endpoints). Mutually exclusive with `allowed_resources`.
-
-Example inline rule:
+Example inline FDD rule with excluded resources:
 
 ```json
 {
@@ -134,14 +118,7 @@ Example inline rule:
 }
 ```
 
-**Notes**:
-- The rule is evaluated for each [additional primary tag][3] value as well as an aggregate analysis. To consider only a single primary tag, specify it as `primary_tag` in the request attributes.
-- New errors and error rate increases are detected at the resource level.
-- This rule type does not support services marked as `database` or `inferred service`.
-
-[1]: /watchdog/faulty_deployment_detection/
-[2]: /tracing/services/resource_page/
-[3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
+[1]: /deployment_gates/#watchdog-faulty-deployment-detection-rules
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -733,3 +710,4 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [4]: /api/latest/deployment-gates
 [5]: /deployment_gates/setup/preconfigured
 [6]: https://app.datadoghq.com/ci/deployment-gates/evaluations
+[7]: /deployment_gates/#rules

@@ -57,6 +57,7 @@ These break the rendered page without failing the build:
 ### 7. Links, images, and accessibility
 - Link text describes the destination. Flag "here," "this link," "click here," and bare URLs as link text.
 - A link to a section on the same page says so: "the [Modes](#modes) section," not a bare "[Modes](#modes)."
+- A link to a section on another page names that page: "the [Advanced configuration][20] section of the private locations page," not "the [Advanced configuration][20] section." Without the page name, readers expect a section on the page they're reading. Flag this as a **Style** comment, even where older pages leave out the page name.
 - Every image has alt text that describes what the image shows in a complete sentence ending with a period. Don't start alt text with "Image of" or "Screenshot of."
 - Use inclusive terms: allowlist and denylist, primary and secondary or leader and follower.
 

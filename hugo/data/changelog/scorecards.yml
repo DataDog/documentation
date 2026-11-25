@@ -16,3 +16,22 @@ entries:
       - ListScorecards
       - UpdateScorecardCampaign
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateScorecardCampaign
+      - CreateScorecardOutcomesBatch
+      - CreateScorecardRule
+      - DeleteScorecardCampaign
+      - DeleteScorecardRule
+      - GetScorecardCampaign
+      - ListScorecardCampaigns
+      - ListScorecardOutcomes
+      - ListScorecardRules
+      - ListScorecardScores
+      - ListScorecards
+      - UpdateScorecardCampaign
+      - UpdateScorecardOutcomes
+      - UpdateScorecardRule
+    title: Document rate-limit headers on the shared 429 responses

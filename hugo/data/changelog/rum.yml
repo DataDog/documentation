@@ -82,3 +82,21 @@ entries:
       - SearchRUMEvents
       - UpdateRUMApplication
     title: Document RUM applications, events and aggregate endpoints
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - AggregateRUMEvents
+      - CreateRUMApplication
+      - DeleteRUMApplication
+      - DeleteSourcemaps
+      - GetRUMApplication
+      - GetRUMApplications
+      - GetServiceRepositoryInfo
+      - GetSourcemaps
+      - ListRUMEvents
+      - ListSourcemaps
+      - RestoreSourcemaps
+      - SearchRUMEvents
+      - UpdateRUMApplication
+    title: Document rate-limit headers on the shared 429 responses

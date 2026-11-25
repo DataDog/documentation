@@ -26,7 +26,7 @@ Datadog evaluates MCP access in layers. A request through the MCP Server succeed
 | 2 | [{{< ui >}}MCP Write Access{{< /ui >}} organization setting](#enable-or-disable-mcp-write-access) | Entire organization | Off |
 | 3 | [IP allowlist](#restrict-network-access) | Entire organization | Off |
 | 4 | [{{< ui >}}MCP Read{{< /ui >}} and {{< ui >}}MCP Write{{< /ui >}} role permissions](#control-mcp-access-for-specific-users) | Per role | - Datadog Read Only role: MCP Read<br>- Datadog Standard and Admin roles: MCP Read and MCP Write |
-| 5 | [OAuth application scopes](#restrict-actions-for-a-specific-ai-client) | Per AI client | All requested scopes allowed |
+| 5 | [OAuth application scopes](#restrict-actions-for-a-specific-ai-client), or [access token scopes](#limit-connections-that-dont-use-oauth) for connections that don't use OAuth | Per AI client (OAuth) or per token | - OAuth: All requested scopes allowed<br>- Access tokens: Scopes selected when the token is created |
 | 6 | [Standard Datadog access controls](#standard-access-controls-apply-to-mcp) | Per user, resource, and dataset | Same as in the Datadog UI and API |
 
 The MCP Server never grants a user more access than they already have in Datadog. Each layer can only narrow access further.
@@ -114,19 +114,34 @@ To let agents read data across Datadog but only write to Notebooks:
 
 Users can still perform other write actions in the Datadog UI, subject to their role permissions.
 
-### Scopes apply only to OAuth connections
+### Limit connections that don't use OAuth
 
-Application scopes restrict MCP connections that authenticate through OAuth. A user who configures an AI client with an API key and application key, or with a personal or service access token, bypasses the OAuth application's scopes. That connection has the access of the key or token instead.
+Application scopes restrict MCP connections that authenticate through OAuth. A user who configures an AI client with a personal or service access token, or with an API key and application key, bypasses the OAuth application's scopes. That connection has the access of the token or key instead.
 
-To limit key-based MCP connections:
+When an AI client cannot use OAuth, such as on a server or in a CI environment, connect it with an access token:
 
-- Use [scoped application keys][7] that include only the permissions the agent needs.
-- Use keys from a [service account][8] that has only the required permissions.
-- Restrict who can create and manage application keys with the {{< ui >}}User App Keys{{< /ui >}} and {{< ui >}}Org App Keys Write{{< /ui >}} [permissions][16].
+- Use a [Personal Access Token (PAT)][7] for an individual user. Every PAT requires scopes and an expiration date, so the token carries only the permissions the agent needs and stops working when it expires.
+- Use a [Service Access Token (SAT)][17] for a [service account][8] that has only the required permissions. Select only the scopes the agent needs. SATs can be created with no expiration, so set an expiration date unless the workflow requires a long-lived token.
+
+<div class="alert alert-warning">Datadog does not recommend API and application keys for MCP connections. Application keys are unscoped by default and never expire. If an AI client uses an API key and application key, replace them with a PAT or SAT.</div>
+
+To limit who can create these credentials, restrict the {{< ui >}}User App Keys{{< /ui >}} and {{< ui >}}Org App Keys Write{{< /ui >}} [permissions][16]. These permissions control PATs as well as application keys. Creating SATs also requires {{< ui >}}Service Account Write{{< /ui >}}.
+
+## Keep credentials out of AI agent conversations
+
+Never share a token, API key, or application key with an AI agent. This includes pasting a credential into a prompt, or asking an agent to write one into a configuration file. Anything you send to an agent becomes part of its context. The agent can repeat it in output, write it to files or logs, or send it to its model provider.
+
+Instead:
+
+- **Use OAuth** where your AI client supports it. The client obtains and stores credentials for you, so you never handle a secret.
+- **Enter tokens in your MCP client's configuration yourself**, not through the agent. If your client can read header values from environment variables, store the token in an environment variable or a secrets manager and reference it from the configuration.
+- **In CI and other automated environments**, store the token in the platform's secret store and inject it at runtime.
+
+If a credential is exposed to an agent, revoke it and create a new one. See [What to do if an API or application key was exposed][18].
 
 ## Standard access controls apply to MCP
 
-In addition to the MCP-specific controls on this page, the MCP Server follows the same access controls the user has everywhere else in Datadog. The MCP Server authenticates as the signed-in user and calls Datadog APIs with that user's credentials, so:
+In addition to the MCP-specific controls on this page, the MCP Server follows the same access controls the user has everywhere else in Datadog. The MCP Server calls Datadog APIs with the caller's credentials: the signed-in user's, or the service account's when the connection uses a SAT. As a result:
 
 - **Role permissions**: A user needs the standard permission for the underlying resource in addition to {{< ui >}}MCP Read{{< /ui >}} or {{< ui >}}MCP Write{{< /ui >}}. For example, creating a monitor through the MCP Server requires {{< ui >}}Monitors Write{{< /ui >}}. See [Role Based Access Control][9].
 - **Restricted datasets**: [Data Access Control][10] and [log restriction queries][11] limit which logs, spans, and other telemetry the MCP Server returns to a user.
@@ -146,7 +161,7 @@ Every MCP Server tool call is recorded in [Audit Trail][13] with the tool name, 
 [4]: https://app.datadoghq.com/organization-settings/roles
 [5]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
 [6]: https://app.datadoghq.com/organization-settings/oauth-applications
-[7]: /account_management/api-app-keys/#scopes
+[7]: /account_management/personal-access-tokens/
 [8]: /account_management/org_settings/service_accounts/
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/data_access/
@@ -156,3 +171,5 @@ Every MCP Server tool call is recorded in [Audit Trail][13] with the tool name, 
 [14]: /account_management/org_settings/ip_allowlist/
 [15]: /mcp_server/#track-tool-calls-in-audit-trail
 [16]: /account_management/rbac/permissions/#api-and-application-keys
+[17]: /account_management/service-access-tokens/
+[18]: /account_management/api-app-keys/#what-to-do-if-an-api-or-application-key-was-exposed

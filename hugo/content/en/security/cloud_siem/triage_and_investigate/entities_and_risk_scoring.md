@@ -15,6 +15,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
       tag: "Blog"
       text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
+    - link: "https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/"
+      tag: "Blog"
+      text: "Investigate the person behind the risk with Datadog Cloud SIEM"
 ---
 
 ## Overview

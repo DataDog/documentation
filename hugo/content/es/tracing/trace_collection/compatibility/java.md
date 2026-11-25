@@ -531,7 +531,7 @@ Para obtener más información, consulte [Configurar el modo de comunicación de
 [5]: /es/tracing/trace_collection/otel_instrumentation/java/
 [7]: https://www.graalvm.org/downloads/
 [9]: /es/tracing/trace_explorer/
-[10]: /es/opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[10]: /es/opentelemetry/instrument/ddot_sdks/instrumentation_libraries/?tab=java
 [11]: /es/containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /es/tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472

@@ -28,7 +28,7 @@ Si vous exécutez des déploiements à l'aide d'un fournisseur CI, vous pouvez s
 ## Configuration {#setup}
 
 <div class="alert alert-info">
-La configuration nécessite le <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> version `2.26.0` ou ultérieure.
+La configuration nécessite le <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> Version de la CLI </a> <code>2.26.0</code> ou ultérieure.
 </div>
 
 Pour configurer CD Visibility, utilisez la commande `datadog-ci deployment mark` dans le job CI qui effectue le déploiement.
@@ -96,7 +96,7 @@ datadog-ci deployment mark --env prod --tags team:backend --tags reason:schedule
 
 {{% collapse-content title="Pour les versions de datadog-ci antérieures à 4.1.1" level="h3" expanded=false %}}
 
-Si vous utilisez `datadog-ci` dans une version comprise entre `2.29.0` et `4.1.0` et que le nom du job ne correspond pas à l'entrée définie dans le fichier de configuration du workflow (l'[ID du job][12] GitHub), la variable d'environnement `DD_GITHUB_JOB_NAME` doit être exposée et pointer vers le nom du job. Par exemple :
+Si vous utilisez `datadog-ci` dans une version comprise entre `2.29.0` et `4.1.0` et que le nom du job ne correspond pas à l'entrée définie dans le fichier de configuration du workflow (l'[ID du job][12] GitHub), la variable d'environnement `DD_GITHUB_JOB_NAME` doit être exposée et pointer vers le nom du job. Exemple :
 
 1. Si le nom du job est modifié à l'aide de la [propriété name][13] :
     ```yaml

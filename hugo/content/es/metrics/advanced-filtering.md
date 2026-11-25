@@ -23,13 +23,13 @@ title: Filtrado avanzado
 ---
 ## Descripción general {#overview}
 
-Al utilizar Metrics Explorer, los monitores o Dashboards para consultar datos de métricas, puede filtrar los datos para reducir el contexto de las series temporales devueltas. Cualquier métrica se puede filtrar por etiqueta(s) utilizando el campo {{< ui >}}from{{< /ui >}} a la derecha de la métrica. 
+Al usar Metrics Explorer, monitores o paneles para consultar datos de métricas, puede filtrar los datos para reducir el contexto de las series temporales devueltas. Cualquier métrica puede filtrarse por una o varias etiquetas usando el campo {{< ui >}}from{{< /ui >}} a la derecha de la métrica. 
 
-También puede realizar filtrado avanzado con filtros booleanos o Wildcard para valores de etiquetas. Para consultas fuera de los datos de métricas, como registros, trazas, Network Monitoring, Real User Monitoring, Synthetics o Security, consulte la documentación de [Sintaxis de búsqueda de registros][1] para la configuración.
+También puede realizar un filtrado avanzado con filtros booleanos o Wildcard para los valores de las etiquetas. Para consultas fuera de los datos de métricas, como registros, trazas, Network Monitoring, Real User Monitoring, Synthetics o Security, consulte la documentación de [Sintaxis de búsqueda de registros][1] para la configuración.
 
 ## Consultas con filtros booleanos {#boolean-filtered-queries}
 
-Se admite la siguiente sintaxis para consultas de métricas con filtros booleanos: 
+Se admite la siguiente sintaxis para las consultas de métricas con filtros booleanos: 
 
 - `!`
 - `,`
@@ -43,10 +43,7 @@ Al incluir o excluir varias etiquetas:
 * Incluir usa lógica `AND`
 * Excluir usa lógica `OR`
 
-Para obtener más información sobre las etiquetas, consulte la guía [Introducción al uso de etiquetas][2].
-
-**Nota:** La sintaxis booleana simbólica (`!`, `,`) no se puede utilizar con operadores de sintaxis funcional (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La siguiente consulta se considera _inválida_: 
-`avg:mymetric{env:prod AND !region:us-east}`
+Para obtener más información sobre las etiquetas, consulte la guía [Primeros pasos para usar etiquetas][2].
 
 ### Ejemplos de consultas con filtros booleanos {#boolean-filtered-query-examples}
 
@@ -62,13 +59,13 @@ avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availabilit
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Ejemplo booleano AND IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Ejemplo de consulta booleana con AND IN" style="width:100%;" >}}
 
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Ejemplo booleano NOT IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Ejemplo de consulta booleana con NOT IN" style="width:100%;" >}}
 
 ## Consultas filtradas con Wildcard {#wildcard-filtered-queries}
 
@@ -104,7 +101,7 @@ Agregue una [función de exclusión][3] a su consulta para:
 - Aplicar un valor mínimo o máximo a las métricas que cumplen con el umbral.
 - Excluir valores que están por encima o por debajo de los valores de umbral.
 
-Las funciones no eliminan puntos de datos de Datadog, pero sí los eliminan de sus visualizaciones.
+Las funciones no eliminan puntos de datos de Datadog, pero sí eliminan puntos de datos de sus visualizaciones.
 
 ## Lecturas adicionales {#further-reading}
 

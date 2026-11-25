@@ -9,22 +9,22 @@ further_reading:
   text: Logging without Limits™ 시작하기
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: 설명서
-  text: Datadog 에이전트를 로그 수집용으로만 사용하기
+  text: Datadog Agent를 로그 수집용으로만 사용
 - link: /logs/log_configuration/processors
   tag: 설명서
   text: 로그 처리 방법 알아보기
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 구문 분석에 대해 알아보기
 - link: /logs/live_tail/
   tag: 설명서
-  text: Datadog 라이브 테일 기능
+  text: Datadog 라이브 테일링 기능
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색 방법 보기
 - link: /glossary/#tail
-  tag: 용어
-  text: '"tail" 관련 용어 항목'
+  tag: 용어집
+  text: '''테일링'' 관련 용어집 항목'
 title: 고급 로그 수집 구성
 ---
 [로그 수집][1]을 구성한 후에 수집 구성을 사용자 지정할 수 있습니다.
@@ -33,8 +33,8 @@ title: 고급 로그 수집 구성
   - [일치 시 포함](#include-at-match)
   - [잘린 로그 제외](#exclude-truncated)
 - [로그에서 민감한 데이터 스크러빙](#scrub-sensitive-data-from-your-logs)
-- [여러 줄 집계](#manually-aggregate-multi-line-logs)
-- [여러 줄 로그 자동 집계](#automatically-aggregate-multi-line-logs)
+- [멀티라인 집계](#manually-aggregate-multi-line-logs)
+- [멀티라인 로그 자동 집계](#automatically-aggregate-multi-line-logs)
 - [자주 사용되는 로그 처리 규칙](#commonly-used-log-processing-rules)
 - [와일드카드를 사용한 디렉터리 테일링](#tail-directories-using-wildcards)
   - [수정 시간을 기준으로 테일링 파일 우선순위 지정](#prioritize-tailed-files-by-modification-time)
@@ -59,7 +59,7 @@ Datadog으로 특정 로그 하위 집합만 전송하려면 구성 파일에서
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | 지정한 패턴이 메시지에 포함되어 있으면 해당 로그는 제외되며 Datadog으로 전송되지 않습니다. |
 
-예를 들어 Datadog 이메일 주소가 포함된 로그를 **필터링해서 제외**하려면 다음 `log_processing_rules`을 사용하세요.
+예를 들어, Datadog 이메일 주소가 포함된 로그를 **필터링해서 제외**하려면 다음 `log_processing_rules`를 사용하세요.
 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
@@ -101,11 +101,40 @@ Docker 환경에서는 **필터링하려는 로그를 전송하는 컨테이너*
 ```
 
 **참고**:
-- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 레이블 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+[`DatadogInstrumentation` 설정][10]을 완료한 후, 다음 리소스를 `cardpayment` Deployment에 적용하세요.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: exclude_at_match
+            name: exclude_datadoghq_users
+            pattern: '\w+@datadoghq.com'
+```
+
+[10]: /ko/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "주석" %}}
 
 <div class="alert alert-info">
 Agent 구성에 대한 자세한 내용은 <a href="/containers/guide/container-discovery-management/?tab=datadogoperator#agent-configuration">컨테이너 검색 관리</a>를 참조하세요.
@@ -144,7 +173,7 @@ spec:
 ```
 
 **참고**:
-- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 주석 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
@@ -157,7 +186,7 @@ spec:
 | `include_at_match` | 지정한 패턴이 포함된 메시지를 가진 로그만 Datadog으로 전송됩니다. 여러 개의 `include_at_match` 규칙이 정의된 경우 로그가 포함되려면 모든 규칙 패턴이 일치해야 합니다. |
 
 
-예를 들어 Datadog 이메일 주소가 포함된 로그를 **필터링해서 포함**시키려면 다음 `log_processing_rules` 구성을 사용하세요.
+예를 들어, Datadog 이메일 주소가 포함된 로그를 **필터링해서 포함**시키려면 다음 `log_processing_rules` 구성을 사용하세요.
 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
@@ -225,11 +254,40 @@ Docker 환경에서는 필터링하려는 로그를 전송하는 컨테이너에
 ```
 
 **참고**:
-- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 레이블 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+[`DatadogInstrumentation` 설정][10]을 완료한 후, 다음 리소스를 `cardpayment` Deployment에 적용하세요.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: include_at_match
+            name: include_datadoghq_users
+            pattern: '\w+@datadoghq.com'
+```
+
+[10]: /ko/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "주석" %}}
 
 Kubernetes 환경에서는 포드에 `ad.datadoghq.com` 주석을 사용하여 `log_processing_rules`를 지정합니다. 예를 들면 다음과 같습니다.
 
@@ -264,7 +322,7 @@ spec:
 ```
 
 **참고**:
-- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 주석 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
@@ -276,7 +334,7 @@ spec:
 |---------------------|--------------------------------------------------------------------|
 | `exclude_truncated` | 설정한 경우 잘린 로그를 제외하며 Datadog으로 전송하지 않습니다. `exclude_truncated` 규칙은 Agent v7.69부터 사용할 수 있습니다. |
 
-예를 들어 잘린 로그를 **필터해서 제외**하려면 다음을 사용합니다.
+예를 들어, 잘린 로그를 **필터링해서 제외**하려면 다음과 같이 합니다.
 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
@@ -311,7 +369,34 @@ Docker 환경에서는 필터링하려는 로그를 전송하는 컨테이너에
 **참고**: 레이블 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+[`DatadogInstrumentation` 설정][10]을 완료한 후, 다음 리소스를 `cardpayment` Deployment에 적용하세요.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: exclude_truncated
+```
+
+[10]: /ko/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "주석" %}}
 
 Kubernetes 환경에서는 포드에 `ad.datadoghq.com` 주석을 사용하여 `log_processing_rules`를 지정합니다. 예를 들면 다음과 같습니다.
 
@@ -354,7 +439,7 @@ spec:
 
 이 기능은 일치하는 모든 그룹을 `replace_placeholder` 파라미터의 값으로 대체합니다.
 
-예를 들어, 신용 카드 번호를 삭제하려면 다음과 같이 하세요.
+예를 들어, 신용카드 번호를 삭제하려면 다음과 같이 하세요.
 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
@@ -394,11 +479,41 @@ Docker 환경에서는 컨테이너에 `com.datadoghq.ad.logs` 레이블을 사�
 ```
 
 **참고**:
-- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 레이블을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 레이블 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+[`DatadogInstrumentation` 설정][10]을 완료한 후, 다음 리소스를 `cardpayment` Deployment에 적용하세요.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: cardpayment-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cardpayment
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: java
+        service: cardpayment
+        log_processing_rules:
+          - type: mask_sequences
+            name: mask_credit_cards
+            replace_placeholder: "[masked_credit_card]"
+            pattern: '(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})'
+```
+
+[10]: /ko/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "주석" %}}
 
 Kubernetes 환경에서는 포드에 `ad.datadoghq.com` 주석을 사용하여 `log_processing_rules`를 지정합니다. 예를 들면 다음과 같습니다.
 
@@ -434,7 +549,7 @@ spec:
 ```
 
 **참고**:
-- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 포드 주석을 사용할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 주석 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
@@ -442,28 +557,28 @@ spec:
 
 Agent 버전 7.17 이상에서는 `replace_placeholder` 문자열이 `$1`, `$2` 등의 캡처 그룹 참조를 확장할 수 있습니다. 공백 없이 캡처 그룹 뒤에 문자열을 이어 붙이려면 `${<GROUP_NUMBER>}` 형식을 사용하세요.
 
-예를 들어 로그 `User email: foo.bar@example.com`에서 사용자 정보를 스크러빙하려면 다음을 사용합니다.
+예를 들어, 로그 `User email: foo.bar@example.com`에서 사용자 정보를 스크러빙하려면 다음을 사용합니다.
 
 * `pattern: "(User email: )[^@]*@(.*)"`
 * `replace_placeholder: "$1 masked_user@${2}"`
 
-그러면 다음 로그가 Datadog으로 전송됩니다. `User email: masked_user@example.com`
+그러면 `User email: masked_user@example.com` 로그가 Datadog으로 전송됩니다.
 
-## 여러 줄 로그 자동 집계 {#automatically-aggregate-multi-line-logs}
+## 멀티라인 로그 자동 집계 {#automatically-aggregate-multi-line-logs}
 
-자동 여러 줄 감지는 복잡한 형식의 로그 소스가 많거나 각 소스를 개별적으로 구성할 시간이 없을 때 유용합니다. 이 기능은 사용자 지정 정규식 패턴을 작성할 필요 없이 여러 줄 로그를 자동으로 감지하고 집계합니다.
+자동 멀티라인 탐지는 복잡한 형식의 로그 소스가 많거나 각 소스를 개별적으로 구성할 시간이 없을 때 유용합니다. 이 기능은 사용자 지정 정규식 패턴을 작성할 필요 없이 멀티라인 로그를 자동으로 탐지하고 집계합니다.
 
-자세한 내용은 [자동 여러 줄 감지 및 집계][7] 설명서를 참조하세요.
+자세한 내용은 [자동 멀티라인 탐지 및 집계][7] 설명서를 참조하세요.
 
-기능에 대한 기존 지원은 [자동 여러 줄 감지 및 집계(레거시)][8] 설명서를 참조하세요.
+기능에 대한 기존 지원은 [자동 멀티라인 탐지 및 집계(레거시)][8] 설명서를 참조하세요.
 
-## 여러 줄 로그 수동 집계 {#manually-aggregate-multi-line-logs}
+## 멀티라인 로그 수동 집계 {#manually-aggregate-multi-line-logs}
 
-수동 여러 줄 규칙은 로그 형식을 알고 있는 경우 로그 집계를 정밀하게 제어할 수 있게 해줍니다. 이 방식은 특정 로그 구조에 맞춘 사용자 지정 정규식 패턴을 사용하여 일관된 로그 처리를 보장하는 데 적합합니다.
+수동 멀티라인 규칙은 로그 형식을 알고 있는 경우 로그 집계를 정밀하게 제어할 수 있게 해 줍니다. 이 방식은 특정 로그 구조에 맞춘 사용자 지정 정규식 패턴을 사용하여 일관된 로그 처리를 보장하는 데 적합합니다.
 
-로그가 JSON 형식으로 전송되지 않고 여러 줄을 하나의 항목으로 집계하려는 경우, Datadog Agent가 줄마다 하나의 로그를 생성하는 대신 특정 정규식 패턴을 사용하여 새 로그를 감지하도록 구성할 수 있습니다. `log_processing_rules` 파라미터에서 `multi_line` 유형을 사용하면 지정된 패턴이 다시 감지될 때까지 모든 줄을 하나의 항목으로 집계합니다.
+로그가 JSON 형식으로 전송되지 않고 여러 줄을 하나의 항목으로 집계하려는 경우, Datadog Agent가 줄마다 하나의 로그를 생성하는 대신 특정 정규식 패턴을 사용하여 새 로그를 탐지하도록 구성할 수 있습니다. `log_processing_rules` 파라미터에서 `multi_line` 유형을 사용하면 지정된 패턴이 다시 탐지될 때까지 모든 줄을 하나의 항목으로 집계합니다.
 
-예를 들어 Java 로그의 각 줄은 `yyyy-dd-mm` 형식의 타임스탬프로 시작합니다. 이러한 라인에는 다음과 같이 두 개의 로그로 전송될 수 있는 스택 트레이스가 포함됩니다.
+예를 들어, Java 로그의 각 줄은 `yyyy-dd-mm` 형식의 타임스탬프로 시작합니다. 이러한 줄에는 다음과 같이 두 개의 로그로 전송될 수 있는 스택 트레이스가 포함됩니다.
 
 ```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -476,7 +591,7 @@ Agent 버전 7.17 이상에서는 `replace_placeholder` 문자열이 `$1`, `$2` 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
 
-위 예제 로그를 구성 파일을 사용하여 전송하려면 다음 `log_processing_rules`를 사용합니다.
+위의 예시 로그를 구성 파일을 사용하여 전송하려면 다음 `log_processing_rules`를 사용합니다.
 
 ```yaml
 logs:
@@ -510,7 +625,36 @@ Docker 환경에서는 컨테이너에 `com.datadoghq.ad.logs` 레이블을 사�
 ```
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+[`DatadogInstrumentation` 설정][10]을 완료한 후, 다음 리소스를 `postgres` Deployment에 적용하세요.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: postgres-logs
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: postgres
+  config:
+    logs:
+      - containerName: <CONTAINER_NAME>
+        source: postgresql
+        service: database
+        log_processing_rules:
+          - type: multi_line
+            name: log_start_with_date
+            pattern: '\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])'
+```
+
+[10]: /ko/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "주석" %}}
 
 Kubernetes 환경에서는 포드에 `ad.datadoghq.com` 주석을 사용하여 `log_processing_rules`를 지정합니다. 예를 들면 다음과 같습니다.
 
@@ -545,13 +689,13 @@ spec:
 ```
 
 **참고**:
-- 포드 주석을 사용하여 여러 줄 집계를 수행할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어 `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
+- 포드 주석을 사용하여 멀티라인 집계를 수행할 때는 패턴 내 정규식 문자를 이스케이프 처리해야 합니다. 예를 들어, `\d`는 `\\d`가 되고, `\w`는 `\\w`가 됩니다.
 - 주석 값은 JSON 구문을 따라야 하므로 후행 쉼표나 주석을 포함해서는 안 됩니다.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"><strong>중요!</strong> 여러 줄 로그용 정규식 패턴은 반드시 로그의 <em>시작 부분</em>부터 일치해야 합니다. 패턴은 줄 중간에서 일치할 수 없습니다. <em>절대로 일치하지 않는 패턴을 사용하면 로그 라인이 유실될 수 있습니다.</em> <br><br>로그 수집은 밀리초 단위까지의 정밀도만 지원합니다. 그보다 더 높은 정밀도의 로그는 패턴과 일치하더라도 전송되지 않습니다.</div>
+<div class="alert alert-danger"><strong>중요!</strong> 멀티라인 로그용 정규식 패턴은 반드시 로그의 <em>시작 부분</em>부터 일치해야 합니다. 패턴은 줄 중간에서 일치할 수 없습니다. <em>절대로 일치하지 않는 패턴을 사용하면 로그 라인이 손실될 수 있습니다.</em> <br><br>로그 수집은 밀리초 단위까지의 정밀도만 지원합니다. 그보다 더 높은 정밀도의 로그는 패턴과 일치하더라도 전송되지 않습니다.</div>
 
 더 많은 예시:
 
@@ -567,11 +711,11 @@ spec:
 
 ## 자주 사용되는 로그 처리 규칙 {#commonly-used-log-processing-rules}
 
-예제 목록은 전용 [자주 사용되는 로그 처리 규칙 FAQ][4]를 참조하세요.
+예시 목록은 전용 [자주 사용되는 로그 처리 규칙 FAQ][4]를 참조하세요.
 
 ## 와일드카드를 사용한 디렉터리 테일링 {#tail-directories-using-wildcards}
 
-로그 파일이 날짜별로 명명되어 있거나 모두 동일한 디렉터리에 저장되어 있는 경우, `path` 속성에 와일드카드를 사용하여 Datadog Agent가 해당 파일들을 모두 모니터링하고 새 파일을 자동으로 감지하도록 구성할 수 있습니다. 선택한 `path`와 일치하는 일부 파일을 제외하려면 `exclude_paths` 속성에 나열하세요.
+로그 파일이 날짜별로 명명되어 있거나 모두 동일한 디렉터리에 저장되어 있는 경우, `path` 속성에 와일드카드를 사용하여 Datadog Agent가 해당 파일들을 모두 모니터링하고 새 파일을 자동으로 탐지하도록 구성할 수 있습니다. 선택한 `path`와 일치하는 일부 파일을 제외하려면 `exclude_paths` 속성에 나열하세요.
 
 * `path: /var/log/myapp/*.log` 사용:
   * `/var/log/myapp/` 디렉터리에 포함된 모든 `.log` 파일과 일치합니다.
@@ -614,6 +758,7 @@ logs:
 **참고**:
 - Agent가 디렉터리 내의 모든 사용 가능한 파일을 나열하려면 해당 디렉터리에 대한 읽기 및 실행 권한이 필요합니다.
 - path 및 exclude_paths 값은 대소문자를 구분합니다.
+- Agent 버전 7.76.0부터 `datadog.yaml`에서 `logs_config.enable_recursive_glob: true`를 설정하면 `path` 및 `exclude_paths`에서 재귀 glob(`**`)이 지원됩니다. 이는 기본적으로 비활성화되어 있습니다.
 
 ### 수정 시간을 기준으로 테일링 파일 우선순위 지정 {#prioritize-tailed-files-by-modification-time}
 
@@ -626,7 +771,7 @@ Agent는 `logs_config.open_files_limit` 파라미터를 사용하여 동시에 �
 **예시**:
 - `open_files_limit` = 500
 - 와일드카드 패턴이 700개의 파일과 일치합니다.
-- `by_name` 사용 시: Agent는 역 사전순 기준으로 가장 높은 이름을 가진 500개 파일(예: app.log.700 ~ app.log.201)을 테일링합니다.
+- `by_name` 사용 시: Agent는 역 사전순 기준으로 가장 높은 이름을 가진 500개 파일(예: app.log.700~app.log.201)을 테일링합니다.
 - `by_modification_time` 사용 시: Agent는 파일 이름과 관계없이 가장 최근에 기록된 500개 파일을 테일링합니다.
 
 ```yaml
@@ -648,14 +793,14 @@ logs_config:
 
 ## 로그 파일 인코딩 {#log-file-encodings}
 
-기본적으로 Datadog Agent는 로그가 UTF-8 인코딩을 사용한다고 가정합니다. 애플리케이션 로그가 다른 인코딩을 사용하는 경우 로그 구성 구성에서 `encoding` 파라미터를 지정하세요.
+기본적으로 Datadog Agent는 로그가 UTF-8 인코딩을 사용한다고 가정합니다. 애플리케이션 로그가 다른 인코딩을 사용하는 경우 로그 구성에서 `encoding` 파라미터를 지정하세요.
 
 아래 목록은 지원되는 인코딩 값을 보여줍니다. 지원되지 않는 값을 지정하면 Agent는 해당 값을 무시하고 파일을 UTF-8로 읽습니다.
  * `utf-16-le` - UTF-16 리틀 엔디언(Datadog Agent **v6.23/v7.23**)
  * `utf-16-be` - UTF-16 빅 엔디언(Datadog Agent **v6.23/v7.23**)
  * `shift-jis` - Shift-JIS(Datadog Agent **v6.34/v7.34**)
 
-<div class="alert alert-warning">Agent가 <code>encoding</code> <em>이미 테일링 중인</em> 파일의 인코딩을 변경하면 문자가 깨질 수 있습니다. Agent는 이전 바이트 오프셋에서 읽기를 재개하는데, 인코딩이 변경된 후에는 해당 위치가 문자 경계와 일치하지 않을 수 있습니다. 이 문제를 해결하려면 로그 파일을 로테이션하거나 교체하거나 새 인코딩을 사용하는 파일의 처음부터 다시 테일링을 시작하세요. 이러한 작업을 수행하면 Agent가 올바른 인코딩으로 로그를 읽기 시작할 수 있습니다.</div>
+<div class="alert alert-warning"> <code>encoding</code> (Agent가 <em>이미 테일링 중인</em> 파일의 인코딩)을 변경하면 문자가 깨질 수 있습니다. Agent는 이전 바이트 오프셋에서 읽기를 재개하는데, 인코딩이 변경된 후에는 해당 위치가 문자 경계와 일치하지 않을 수 있습니다. 이 문제를 해결하려면 로그 파일을 로테이션하거나, 교체하거나, 새 인코딩을 사용하는 파일의 처음부터 테일링을 다시 시작하세요. 이러한 작업을 수행하면 Agent가 올바른 인코딩으로 로그를 읽기 시작할 수 있습니다.</div>
 
 구성 예시:
 
@@ -695,7 +840,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "환경 변수" %}}
 
-전역 처리 규칙을 구성하려면 환경 변수 `DD_LOGS_CONFIG_PROCESSING_RULES`을 사용합니다. 예를 들면 다음과 같습니다.
+전역 처리 규칙을 구성하려면 환경 변수 `DD_LOGS_CONFIG_PROCESSING_RULES`를 사용합니다. 예를 들면 다음과 같습니다.
 
 ```shell
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
@@ -737,14 +882,14 @@ Datadog Agent가 수집하는 모든 로그는 전역 처리 규칙의 영향을
 
 **참고**: 전역 처리 규칙에 형식 문제가 있는 경우 Datadog Agent는 로그 수집기를 시작하지 않습니다. 문제를 해결하려면 Agent의 [상태 하위 명령][6]을 실행하세요.
 
-## 여러 줄 로그 집계 FAQ {#multi-line-log-aggregation-faq}
+## 멀티라인 로그 집계 FAQ {#multi-line-log-aggregation-faq}
 
-**1. 수동 여러 줄 규칙과 자동 여러 줄 감지 중 어느 것을 사용해야 하나요?**
+**1. 수동 멀티라인 규칙과 자동 멀티라인 탐지 중 어느 것을 사용해야 하나요?**
 
-로그 형식을 알고 있는 경우에는 정밀한 제어를 위해 수동 여러 줄 규칙을 사용하는 것이 좋습니다.
-여러 줄 로그를 대량으로 전송하고 있으며 로그 형식을 정확히 모르거나 모든 소스를 개별적으로 구성할 수 없는 경우에는 자동 여러 줄 감지를 사용하는 것이 좋습니다.
+로그 형식을 알고 있는 경우에는 정밀한 제어를 위해 수동 멀티라인 규칙을 사용하는 것이 좋습니다.
+멀티라인 로그를 대량으로 전송하고 있으며 로그 형식을 정확히 모르거나 모든 소스를 개별적으로 구성할 수 없는 경우에는 자동 멀티라인 탐지를 사용하는 것이 좋습니다.
 
-**2. 여러 줄 패턴이 어떤 로그와도 일치하지 않으면 어떻게 되나요?**
+**2. 멀티라인 패턴이 어떤 로그와도 일치하지 않으면 어떻게 되나요?**
 
 JSON 형식이 아닌 모든 로그 라인은 각각 별도의 로그 항목으로 처리됩니다.
 JSON 형식의 로그 라인은 모두 하나의 로그 라인으로 처리되며, 첫 번째 유효한 JSON 형식만 수집 대상으로 전달되고 나머지는 폐기됩니다.

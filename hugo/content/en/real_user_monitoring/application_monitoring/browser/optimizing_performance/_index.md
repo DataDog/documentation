@@ -20,6 +20,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/rum-optimization/"
     tag: "Blog"
     text: "From data to action: Optimize Core Web Vitals and more with Datadog RUM"
+  - link: "https://www.datadoghq.com/blog/lighthouse-audits-rum-synthetic-monitoring/"
+    tag: "Blog"
+    text: "Track Lighthouse scores alongside real-user data in Datadog"
 ---
 
 ## Overview

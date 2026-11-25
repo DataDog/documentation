@@ -162,11 +162,11 @@
     "summary": "List active Agent Health issues"
   },
   "ListAgentHealthIssues": {
-    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nSet `count_by=issue_type` to include `meta.page`, where `total_count` is the number of\nopen issues matching the filters and `counts_by_issue_type` holds the per-type counts.\n`meta` is omitted when `count_by` is not requested.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
+    "description": "List open Agent Health issues across your organization. Returns `403` if you\nlack the `hosts_read` permission.\n\nEach item in `data` is a JSON:API resource object whose `attributes` hold the issue\nfields, including its `issue_type`. Issues use a stable order: severity rank\n(`high`, `medium`, `low`, then other values), then `first_seen_at` descending with\nmissing timestamps last, then issue ID ascending.\n\nThe response always includes `meta.page` with the applied `limit`, `offset`, and\n`total_count` (the number of open issues matching the filters). Set `count_by=issue_type`\nto also include `counts_by_issue_type` with per-issue-type counts.\n\nEach filter accepts up to 50 comma-separated exact values of at most 256 characters\neach, combined with OR within a filter and AND across filters. Blank entries are ignored; an all-blank filter\nis treated as absent.",
     "summary": "List Agent Health issues"
   },
   "GetAgentHealthIssue": {
-    "description": "Get an Agent Health issue and its available remediation in your organization.\nOnly open issues are returned. The `remediation` attribute is omitted when\nthe issue has no remediation.\n\nReturns `404` if the issue does not exist, is not open, belongs to another\norganization, or you do not have access to its data. This response does not\nreveal whether the issue exists. Returns `403` if you lack the `hosts_read` permission.",
+    "description": "Get an Agent Health issue and its available remediation in your organization.\nThe `remediation` attribute is omitted when the issue has no remediation.\n\nReturns `404` if the issue does not exist, belongs to another organization, or\nyou do not have access to its data. This response does not reveal whether the\nissue exists. Returns `403` if you lack the `hosts_read` permission.",
     "summary": "Get an Agent Health issue"
   },
   "ListAwsScanOptions": {
@@ -1363,7 +1363,7 @@
     "summary": "Get commitments coverage (scalar)"
   },
   "GetCommitmentsCoverageTimeseries": {
-    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type for both hours and cost. AWS and Azure report Reserved Instances, Savings Plans, On-Demand, and Spot. GCP reports Flex Committed Use Discounts and On-Demand.",
     "summary": "Get commitments coverage (timeseries)"
   },
   "GetCommitmentsOnDemandHotspotsScalar": {
@@ -1531,7 +1531,7 @@
     "summary": "Get active billing dimensions for cost attribution"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.",
+    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for\n[parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\nThis endpoint is not available in the US2-FED site.",
     "summary": "Get Monthly Cost Attribution"
   },
   "ListAllCSMAgents": {
@@ -1833,7 +1833,7 @@
     "summary": "Get all deployment gates"
   },
   "CreateDeploymentGate": {
-    "description": "Endpoint to create a deployment gate.",
+    "description": "Create a deployment gate for a specific environment or for all environments using `*`.\nA gate for all environments and a gate for a specific environment cannot coexist for the\nsame organization, service, and identifier. A conflicting creation returns 400 Bad Request.",
     "summary": "Create deployment gate",
     "request_description": "",
     "request_schema_description": "Parameters for creating a deployment gate."
@@ -2062,13 +2062,55 @@
     "description": "List the organization's bandits, newest first by default. Each item is a summary. For a bandit's setup, active policy, and latest refresh, use Get bandit. Bandits must be enabled for the organization.",
     "summary": "List bandits"
   },
+  "CreateBandit": {
+    "description": "Create a draft bandit. `name` is required; you can set everything else now, or later with PATCH `/api/v2/experiments/bandits/{bandit_id}`. A draft on a flag holds a targeting rule that doesn't serve traffic until the bandit starts. `variants` lists the flag variants the bandit uses by `feature_flag_variant_id`: `is_active` makes a variant an arm (the default), and `is_fallback` marks the variant served after a scheduled end. The server fills in each variant's `key` and `name` from the flag. A scheduled end needs a fallback. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Whether the draft is ready to run is checked when it starts. Validation can return several field errors at once. This endpoint is not idempotent. Bandits must be enabled for the organization.",
+    "summary": "Create bandit",
+    "request_description": "",
+    "request_schema_description": "Request to create a draft bandit."
+  },
+  "DeleteBandit": {
+    "description": "Delete a bandit in any status, with its targeting rule, in one transaction. As with deleting an experiment, a running bandit's rule stops serving and traffic falls through to the flag's other rules; the flag can then be used by another bandit or experiment. After deletion the API no longer returns the bandit. Deleting a bandit cannot be undone. Bandits must be enabled for the organization.",
+    "summary": "Delete bandit"
+  },
   "GetBandit": {
     "description": "Get a bandit: its setup, the policy it serves, its latest refresh, and the arm most likely to be best. When the caller lacks feature flag or environment read permissions, the response omits `datadog_flag_configuration` and `meta.warnings` includes `datadog_flag_configuration_omitted`. Bandits must be enabled for the organization.",
     "summary": "Get bandit"
   },
+  "PatchBandit": {
+    "description": "Update a bandit. Omitted attributes, including omitted fields of `datadog_flag_configuration` and `bayesian_prior`, are unchanged. `variants`, `tags`, and `teams` replace the stored lists. Setting a nullable attribute to `null` clears it; `datadog_flag_configuration: null` takes a draft off its flag. What can change depends on the status. A draft can change anything. A running or paused bandit can change its name, description, refresh schedule, scheduled end, prior, fallback (send the current arms in `variants` with a different `is_fallback`), tags, and teams. A stopped or completed bandit can change only its tags and teams. Values that don't change can be sent again in any status. Setting `datadog_flag_configuration` or `variants` needs feature flag and environment read permissions and edit access to the flag. Validation can return several field errors at once: HTTP 400 if any is about invalid input, or 409 if all are status conflicts. Bandits must be enabled for the organization.",
+    "summary": "Update bandit",
+    "request_description": "",
+    "request_schema_description": "Request to update a bandit."
+  },
+  "PauseBandit": {
+    "description": "Pause a running bandit. Its targeting rule keeps serving the current traffic split, and refreshes stop changing the split until the bandit is resumed. Pausing a bandit that isn't running returns 409. Bandits must be enabled for the organization.",
+    "summary": "Pause bandit"
+  },
+  "ListBanditPolicies": {
+    "description": "List the policies a bandit has served, newest first by default, including the policy it serves after it ends. Each policy is the traffic split SDKs served from when it was applied until the next one. Exposures log the policy's ID as `bandit.policy_id`, so the history tells you the split behind each exposure. Exposures logged after the bandit ends have no policy ID. `filter[from]` and `filter[to]` keep the policies in effect during the range, including the one already in effect at `filter[from]`. Bandits must be enabled for the organization.",
+    "summary": "List bandit policies"
+  },
+  "RefreshBandit": {
+    "description": "Start a refresh of a running bandit now, instead of waiting for its schedule. The refresh reads the bandit's latest data and saves new results. Outside warmup it also serves the traffic split it proposes, so it can change traffic. HTTP 202 confirms the refresh started, not that it finished. The response returns the refresh ID, which the bandit then reports as `latest_refresh`. Bandits must be enabled for the organization.",
+    "summary": "Refresh bandit"
+  },
   "GetBanditResults": {
     "description": "Get what a bandit's refreshes have learned: each arm's estimate and probability of being best from the latest saved refresh, and each arm's point estimate over time. `filter[from]` and `filter[to]` narrow only `point_estimates`, not the latest estimates. For observation counts, use Get bandit traffic summary. Bandits must be enabled for the organization.",
     "summary": "Get bandit results"
+  },
+  "ResumeBandit": {
+    "description": "Resume a paused bandit, so refreshes change its traffic split again. Resuming a bandit that isn't paused returns 409. Bandits must be enabled for the organization.",
+    "summary": "Resume bandit"
+  },
+  "StartBandit": {
+    "description": "Start a draft bandit. Its targeting rule is published serving every arm equally, and each refresh then shifts traffic toward the arms that do best. The bandit starts exactly as it is configured; set it up with PATCH `/api/v2/experiments/bandits/{bandit_id}` first. It needs a flag, at least two arms, a subject type, a metric, and an exposure SQL model. The request is idempotent: a bandit that is already running still returns 204, so a retry after a timeout is safe. Stop is not idempotent. A start is blocked when the flag environment requires an approval or a pending change request touches the flag's targeting rules; retrying alone does not resolve an approval requirement. Bandits must be enabled for the organization.",
+    "summary": "Start bandit"
+  },
+  "StopBandit": {
+    "description": "Stop a running or paused bandit. From then on its targeting rule serves `served_variant_key` to everyone, overriding any configured fallback, and the bandit stops refreshing. `served_variant_key` can be any of the flag's variants. Stopping can't be reversed and is not idempotent: stopping a bandit that has already stopped or completed returns 409. Bandits must be enabled for the organization.",
+    "summary": "Stop bandit",
+    "request_description": "",
+    "request_schema_description": "Request to stop a bandit and serve one variant."
   },
   "GetBanditTrafficSummary": {
     "description": "Get what a bandit has observed, as of its latest saved refresh: observation counts, subjects, and each arm's valid observations and subjects in total and per UTC day. An observation is a subject's reward on the arm it was exposed to, counted on the UTC day of its anchor time. `filter[from]` and `filter[to]` narrow only `daily`, not the totals. Bandits must be enabled for the organization.",
@@ -2341,7 +2383,7 @@
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
-    "description": "Creates a new environment for organizing feature flags.",
+    "description": "Creates an environment for organizing feature flags. A non-null subject authorization provider ID\nmust be registered in the current organization and site, even when authorization is disabled. An unknown\nID returns `400 Bad Request`; an unavailable registry returns `503 Service Unavailable`.",
     "summary": "Create an environment",
     "request_description": "",
     "request_schema_description": "Request to create a new environment."
@@ -2355,7 +2397,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only subject authorization or evaluation data settings.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value. Omitting either subject authorization field preserves its stored value. Set `subject_authorization_oidc_provider_id` to `null` to clear the association while subject authorization is disabled. The following requests return `400 Bad Request`: enabling subject authorization without a provider, an unrecognized `subject_authorization_state` value, a malformed or zero UUID provider ID, or an unregistered provider ID. If the provider registry is unavailable, a new provider ID returns `503 Service Unavailable`. Omitted, cleared, or unchanged provider IDs skip the registry check, including when enabling a retained provider. Saving does not verify provider eligibility or key publication, so a successful save does not mean the environment is ready for assignment requests. Concurrent policy changes return `409 Conflict`; reload the environment and retry.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
@@ -3142,6 +3184,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListAnthropicUsageAndCostsIntegrationAccounts": {
+    "description": "List Anthropic Usage and Costs integration accounts.",
+    "summary": "List Anthropic Usage and Costs accounts"
+  },
+  "CreateAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Create an Anthropic Usage and Costs integration account.",
+    "summary": "Create an Anthropic Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Anthropic Usage and Costs integration account."
+  },
+  "DeleteAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Delete an Anthropic Usage and Costs integration account.",
+    "summary": "Delete an Anthropic Usage and Costs account"
+  },
+  "GetAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Get an Anthropic Usage and Costs integration account.",
+    "summary": "Get an Anthropic Usage and Costs account"
+  },
+  "UpdateAnthropicUsageAndCostsIntegrationAccount": {
+    "description": "Update an Anthropic Usage and Costs integration account. Only the fields provided are changed.",
+    "summary": "Update an Anthropic Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Anthropic Usage and Costs integration account."
+  },
   "ListChatGPTEnterpriseIntegrationAccounts": {
     "description": "List ChatGPT Enterprise integration accounts.",
     "summary": "List ChatGPT Enterprise integration accounts"
@@ -3165,6 +3231,30 @@
     "summary": "Update a ChatGPT Enterprise integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update a ChatGPT Enterprise integration account."
+  },
+  "ListClaudeComplianceIntegrationAccounts": {
+    "description": "List Claude Compliance integration accounts.",
+    "summary": "List Claude Compliance integration accounts"
+  },
+  "CreateClaudeComplianceIntegrationAccount": {
+    "description": "Create a Claude Compliance integration account.",
+    "summary": "Create a Claude Compliance integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Claude Compliance integration account."
+  },
+  "DeleteClaudeComplianceIntegrationAccount": {
+    "description": "Delete a Claude Compliance integration account.",
+    "summary": "Delete a Claude Compliance integration account"
+  },
+  "GetClaudeComplianceIntegrationAccount": {
+    "description": "Get a Claude Compliance integration account.",
+    "summary": "Get a Claude Compliance integration account"
+  },
+  "UpdateClaudeComplianceIntegrationAccount": {
+    "description": "Update a Claude Compliance integration account. Only the fields provided are changed.",
+    "summary": "Update a Claude Compliance integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Claude Compliance integration account."
   },
   "ListCoreWeaveCloudIntegrationAccounts": {
     "description": "List CoreWeave integration accounts.",
@@ -3238,6 +3328,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
   },
+  "ListGitHubCostsIntegrationAccounts": {
+    "description": "List GitHub Costs integration accounts.",
+    "summary": "List GitHub Costs integration accounts"
+  },
+  "CreateGitHubCostsIntegrationAccount": {
+    "description": "Create a GitHub Costs integration account.",
+    "summary": "Create a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a GitHub Costs integration account."
+  },
+  "DeleteGitHubCostsIntegrationAccount": {
+    "description": "Delete a GitHub Costs integration account.",
+    "summary": "Delete a GitHub Costs integration account"
+  },
+  "GetGitHubCostsIntegrationAccount": {
+    "description": "Get a GitHub Costs integration account.",
+    "summary": "Get a GitHub Costs integration account"
+  },
+  "UpdateGitHubCostsIntegrationAccount": {
+    "description": "Update a GitHub Costs integration account. Only the fields provided are changed.",
+    "summary": "Update a GitHub Costs integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a GitHub Costs integration account."
+  },
   "ListNebiusCloudIntegrationAccounts": {
     "description": "List Nebius Cloud integration accounts.",
     "summary": "List Nebius Cloud integration accounts"
@@ -3261,6 +3375,30 @@
     "summary": "Update a Nebius Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update a Nebius Cloud integration account."
+  },
+  "ListOpenAICodexIntegrationAccounts": {
+    "description": "List OpenAI Codex integration accounts.",
+    "summary": "List OpenAI Codex integration accounts"
+  },
+  "CreateOpenAICodexIntegrationAccount": {
+    "description": "Create an OpenAI Codex integration account.",
+    "summary": "Create an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Codex integration account."
+  },
+  "DeleteOpenAICodexIntegrationAccount": {
+    "description": "Delete an OpenAI Codex integration account.",
+    "summary": "Delete an OpenAI Codex integration account"
+  },
+  "GetOpenAICodexIntegrationAccount": {
+    "description": "Get an OpenAI Codex integration account.",
+    "summary": "Get an OpenAI Codex integration account"
+  },
+  "UpdateOpenAICodexIntegrationAccount": {
+    "description": "Update an OpenAI Codex integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Codex integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Codex integration account."
   },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
@@ -4560,7 +4698,7 @@
     "request_schema_description": "Request body for creating or updating a derived metric."
   },
   "CreateHistoricalMetricsConfiguration": {
-    "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
+    "description": "Enable historical metrics ingestion for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
     "summary": "Enable historical metrics ingestion",
     "request_description": "",
     "request_schema_description": "Request body for enabling historical metrics ingestion for a metric."
@@ -4731,6 +4869,14 @@
     "description": "List all artifact files for a specific Model Lab project.",
     "summary": "List Model Lab project artifacts"
   },
+  "RemoveModelLabProjectOwner": {
+    "description": "Remove a user from the owners of a Model Lab project. Removing a user who\nisn't an owner has no effect. The project's creator is always an owner and\ncan't be removed.",
+    "summary": "Remove an owner from a Model Lab project"
+  },
+  "AddModelLabProjectOwner": {
+    "description": "Add a user as an owner of a Model Lab project. The user must belong to the\nproject's organization. The project's creator is always an owner, so adding\nthe creator, or a user who is already an owner, has no effect.\nA project can have at most 50 owners besides its creator.",
+    "summary": "Add an owner to a Model Lab project"
+  },
   "UnstarModelLabProject": {
     "description": "Remove the star from a Model Lab project for the current user.",
     "summary": "Remove star from a Model Lab project"
@@ -4894,6 +5040,64 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "CreateNotebook": {
+    "description": "Create a notebook from its full Markdown document and metadata. The leading H1 supplies the title.\nJSON requests may also supply an explicit title attribute; if both are supplied, they must agree.\nCreation without a title returns 422. Other metadata comes from JSON attributes or YAML frontmatter\nin text/markdown requests. For older documents, a non-blank frontmatter title is accepted when no\nnon-blank leading H1 is supplied.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json. Full-document responses include the title H1 in both representations;\nMarkdown responses omit title from frontmatter.",
+    "summary": "Create a notebook",
+    "request_description": "Notebook create request body.",
+    "request_schema_description": "Request body for creating a notebook."
+  },
+  "GetNotebook": {
+    "description": "Get a notebook by ID.\n\nUse `Accept: text/markdown` to retrieve the full notebook, with its title as a leading H1 and other\nmetadata as YAML frontmatter. JSON attributes.markdown includes the same title H1.\nUse the JSON response to retrieve the notebook resource, relationships, and\nrequest-specific metadata.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook"
+  },
+  "UpdateNotebook": {
+    "description": "Update notebook metadata, optionally replacing the full Markdown document. Omitted attributes are\nunchanged. JSON requests supply metadata as attributes; text/markdown requests supply other metadata\nas YAML frontmatter. A supplied markdown attribute or a text/markdown body replaces the whole body\nand consumes its leading H1 as the title. When no title is supplied, the existing title is preserved.\nIf explicit JSON title and document title disagree and exactly one matches the stored title, the\nother wins; if both change to different values, return 422. Use POST /content with op=replace to\nreplace the document without changing metadata other than the title.\nRead-only fields in frontmatter are ignored; unknown writable fields are rejected.\nReturns the full notebook.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook",
+    "request_description": "Notebook update request body.",
+    "request_schema_description": "Request body for updating a notebook."
+  },
+  "UpdateNotebookContent": {
+    "description": "Append, replace, edit, or remove notebook content, optionally within a section.\n\nJSON requests require `Content-Type: application/json` and supply all operation fields in the\nbody. Operation-related query parameters are rejected, even when they match the body. Supply one\nappend, replace, or remove operation, or an ordered atomic batch of 1 to 100 edit operations.\nMixed batches and multiple non-edit operations are rejected.\n\nMarkdown requests require `Content-Type: text/markdown` and an explicit `op` query parameter.\nThe body contains the Markdown to append or replace, or the literal `new_text` for an edit.\nA remove operation requires an empty body. `old_text` and `expected_match_count` apply only to\nedits. Supply `scope[type]` and `scope[id]` together. Each operation query parameter may occur\nonly once.\n\nOmit the scope to target the whole notebook. An explicit `notebooks` scope must match the ID in\nthe URL. To replace a section, use `op=replace` with `scope[type]=notebook_sections` and the\nsection ID. The replacement must start with a heading, which keeps the section ID. Empty\nreplacements, including those containing only white space, remove the section. Section-scoped\nedits must preserve a leading heading unless they remove the section entirely.\nAn append operation adds content after the selected section and its nested sections.\nReplacing or removing a section can change the surrounding heading hierarchy. An unavailable\nscope returns an error instead of targeting the whole notebook.\n\nWhole-document replacement consumes a leading H1 as the notebook title. Whole-document edits\nmatch the same projection, including that H1, so editing it can rename the notebook. Append and\nsection-scoped operations retain their headings as body content and preserve the notebook title.\nOther notebook metadata is unchanged, including when frontmatter is supplied. Edit operations\nmatch exact text in the Markdown document and treat replacement text literally.\nEdit, replace, remove, and scoped append operations check for conflicting changes before writing.\nSend the most recently observed `document_revision` with the request.\n\nEvery successful operation returns 200 and the full resulting notebook, including operations\nthat make no changes or remove the entire body. Responses negotiate JSON or Markdown\nindependently of the request format. JSON responses and all errors use `application/vnd.api+json`.",
+    "summary": "Update notebook content",
+    "request_description": "JSON operations request or single-operation Markdown body. JSON requires a body; Markdown remove\nrequires an empty body.",
+    "request_schema_description": "Canonical content operations request. Supply one append, replace, or remove, or an atomic batch\nconsisting only of edits."
+  },
+  "ListNotebookSections": {
+    "description": "List the notebook sections in document order. JSON returns section metadata without markdown\nunless requested through fields[notebook_sections]. Markdown returns an outline of section\nheadings with stable HTML anchors, without section content.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook sections"
+  },
+  "GetNotebookSection": {
+    "description": "Get one section by its stable ID. A section includes its heading and descendants up to the next\nheading at the same or a higher level.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook section"
+  },
+  "ListNotebookTasks": {
+    "description": "List the notebook tasks in document order.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook tasks"
+  },
+  "GetNotebookTask": {
+    "description": "Get one task by its stable ID.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook task"
+  },
+  "UpdateNotebookTask": {
+    "description": "Update task text or completion state. Supplying text replaces all inline content with plain\ntext, removing formatting, links, and mentions. Use POST /content edits for formatted changes.\nSupply at least one of text or checked. Returns the updated task; request bodies must be JSON.\n\nResponses negotiate JSON or Markdown independently of the request Content-Type. Resource requests\naccept application/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook task",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a task."
+  },
+  "ListNotebookWidgets": {
+    "description": "List the notebook widgets in document order. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "List notebook widgets"
+  },
+  "GetNotebookWidget": {
+    "description": "Get one widget by its stable ID. Widgets only support JSON responses.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Get a notebook widget"
+  },
+  "UpdateNotebookWidget": {
+    "description": "Update the widget definition or notebook-owned graph_size, time, or split_by. Supply at least one\nwritable field. Definitions are replaced as a whole; title belongs in definition.title. Null\nclears graph_size, time, or split_by. Request and response bodies must be JSON. Returns the\nupdated widget.\n\nWidgets accept and return JSON only; text/markdown is rejected. Resource requests accept\napplication/json or application/vnd.api+json; JSON responses and all errors use\napplication/vnd.api+json.",
+    "summary": "Update a notebook widget",
+    "request_description": "Resource update request.",
+    "request_schema_description": "Request to update a widget."
   },
   "GetOIDCDiscoveryDocument": {
     "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
@@ -5563,6 +5767,30 @@
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway provider."
   },
+  "DeleteAIGatewayModelByCanonical": {
+    "description": "Delete a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a provider model by canonical ID"
+  },
+  "UpdateAIGatewayModelByCanonical": {
+    "description": "Update a manually managed model catalog entry, naming the model in the `canonical` query parameter. Discovered entries are read-only. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update a provider model by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request to update a model catalog entry."
+  },
+  "DeleteAIGatewayModelPricingByCanonical": {
+    "description": "Clear a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a model pricing override by canonical ID"
+  },
+  "GetAIGatewayModelPricingByCanonical": {
+    "description": "Get a provider model's pricing override and effective pricing source, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Direct reads of hidden resources return 404.",
+    "summary": "Get a model pricing override by canonical ID"
+  },
+  "UpdateAIGatewayModelPricingByCanonical": {
+    "description": "Set a provider model's pricing override, naming the model in the `canonical` query parameter. Unlike the endpoint that takes the canonical ID in the path, this one accepts canonical IDs that contain `/`. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Set a model pricing override by canonical ID",
+    "request_description": "",
+    "request_schema_description": "Request body for setting model pricing."
+  },
   "ListAiGatewayModels": {
     "description": "List all model catalog entries for a provider. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "List models for an AI Gateway provider"
@@ -5580,25 +5808,25 @@
     "request_schema_description": "Request to create several model catalog entries."
   },
   "DeleteAiGatewayModel": {
-    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.",
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.\nA canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead.",
     "summary": "Delete a model from an AI Gateway provider"
   },
   "UpdateAiGatewayModel": {
-    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Update a model for an AI Gateway provider",
     "request_description": "",
     "request_schema_description": "Request to update a model catalog entry."
   },
   "DeleteAiGatewayModelPricing": {
-    "description": "Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Clear a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Delete a model pricing override"
   },
   "GetAiGatewayModelPricing": {
-    "description": "Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "description": "Get a custom provider model's pricing override and effective pricing source. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
     "summary": "Get a model pricing override"
   },
   "UpdateAiGatewayModelPricing": {
-    "description": "Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "description": "Set a custom provider model's pricing override. A canonical ID that contains `/` can't be sent in the path; use the `/api/v2/providers/{provider_id}/model-pricing` endpoint with the `canonical` query parameter instead. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
     "summary": "Set a model pricing override",
     "request_description": "",
     "request_schema_description": "Request body for setting model pricing."
@@ -5788,53 +6016,53 @@
     "request_schema_description": "Request object that includes the policy to update."
   },
   "ListCSMThreatsAgentRules": {
-    "description": "Get the list of Workload Protection agent rules.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection agent rules.\n\nSet `policy_id` to only return the rules of one policy. Without it, the rules of all policies are returned.",
     "summary": "Get all Workload Protection agent rules"
   },
   "CreateCSMThreatsAgentRule": {
-    "description": "Create a new Workload Protection agent rule with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection agent rule with the given parameters.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL),\nfor example `exec.file.name == \"sh\"`. See [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/)\nfor the syntax and the list of available event types and fields.\n\nIf `policy_id` is not set, the rule is added to the `CWS_CUSTOM-canary` policy. This policy is created if it does not exist yet.\nTo add the rule to another policy, set `policy_id` to the ID of that policy, as returned by `ListCSMThreatsAgentPolicies`.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Create a Workload Protection agent rule",
     "request_description": "The definition of the new agent rule",
     "request_schema_description": "Request object that includes the Agent rule to create"
   },
   "DeleteCSMThreatsAgentRule": {
-    "description": "Delete a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection agent rule.\n\nThe rule is removed from every policy that contains it. Datadog-managed rules cannot be deleted.\nThis action cannot be undone.",
     "summary": "Delete a Workload Protection agent rule"
   },
   "GetCSMThreatsAgentRule": {
-    "description": "Get the details of a specific Workload Protection agent rule.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection agent rule.",
     "summary": "Get a Workload Protection agent rule"
   },
   "UpdateCSMThreatsAgentRule": {
-    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection Agent rule.\nReturns the agent rule object when the request is successful.\n\nThe `expression` attribute is written in the Security Agent Expression Language (SECL).\nSee [Agent expressions](https://docs.datadoghq.com/security/workload_protection/agent_expressions/) for the syntax.\n\nThis endpoint does not accept `kill` or `network_filter` actions, or `blocking` policies. A request that contains them returns a `400` error.",
     "summary": "Update a Workload Protection agent rule",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
   },
   "ListCSMThreatsAgentPolicies": {
-    "description": "Get the list of Workload Protection policies.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the list of Workload Protection policies.",
     "summary": "Get all Workload Protection policies"
   },
   "CreateCSMThreatsAgentPolicy": {
-    "description": "Create a new Workload Protection policy with the given parameters.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Create a new Workload Protection policy with the given parameters.",
     "summary": "Create a Workload Protection policy",
     "request_description": "The definition of the new Agent policy",
     "request_schema_description": "Request object that includes the Agent policy to create"
   },
   "DownloadCSMThreatsPolicy": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.",
     "summary": "Download the Workload Protection policy"
   },
   "DeleteCSMThreatsAgentPolicy": {
-    "description": "Delete a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Delete a specific Workload Protection policy.\n\nDatadog-managed policies cannot be deleted. This action cannot be undone.",
     "summary": "Delete a Workload Protection policy"
   },
   "GetCSMThreatsAgentPolicy": {
-    "description": "Get the details of a specific Workload Protection policy.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Get the details of a specific Workload Protection policy.",
     "summary": "Get a Workload Protection policy"
   },
   "UpdateCSMThreatsAgentPolicy": {
-    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.\n\n**Note**: This endpoint is not available for the Government (US1-FED) site. Please reference the (US1-FED) specific resource below.",
+    "description": "Update a specific Workload Protection policy.\nReturns the policy object when the request is successful.",
     "summary": "Update a Workload Protection policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
@@ -6274,13 +6502,13 @@
     "request_schema_description": "The request body for updating a RUM operation."
   },
   "QueryAggregatedLongTasks": {
-    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",
+    "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across\nmultiple view instances.",
     "summary": "Query aggregated long tasks",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
   },
   "QueryAggregatedWaterfall": {
-    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
+    "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view\ninstances.",
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
@@ -6574,7 +6802,7 @@
     "summary": "Get Application Security details for a service"
   },
   "ListSecurityFindings": {
-    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\nThis endpoint takes the query, sort, and pagination as URL query parameters. `SearchSecurityFindings` (`POST /api/v2/security/findings/search`) accepts the same parameters in a JSON request body and returns the same results, so pick by how you want to send them. Use this endpoint when the query fits easily in a URL. To send the query in a JSON body without URL encoding, use `SearchSecurityFindings` instead. A `meta.page.after` cursor from either endpoint works on the other.\n\nUse this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "List security findings"
   },
   "UpdateFindingsAssignee": {
@@ -6592,31 +6820,31 @@
     "summary": "Get a default inbox rule"
   },
   "DisableSecurityFindingsAutomationDefaultInboxRule": {
-    "description": "Disable a default inbox rule for the current organization.",
+    "description": "Disable a default inbox rule for the current organization.\nA disabled default rule stops adding the findings that match its `rule` to the Security\nInbox, and Datadog removes findings it added from the inbox unless another inbox rule matches them.\nDisable a default rule when it doesn't fit how your organization reviews findings. To add your own\nrules, use `CreateSecurityFindingsAutomationInboxRule`. Only `enabled`\nchanges. Existing findings can take up to two hours to update. To turn it back on, use `EnableSecurityFindingsAutomationDefaultInboxRule`.",
     "summary": "Disable a default inbox rule"
   },
   "EnableSecurityFindingsAutomationDefaultInboxRule": {
-    "description": "Enable a default inbox rule for the current organization.",
+    "description": "Enable a default inbox rule for the current organization.\nAn enabled default rule adds the findings that match its `rule` to the Security Inbox.\nDefault rules are enabled unless the organization disabled them. Only `enabled` changes;\nthe rule's `name`, `rule`, and `action` stay managed by Datadog. Existing findings can take up to two hours to update.\nTo turn it off again, use\n`DisableSecurityFindingsAutomationDefaultInboxRule`.",
     "summary": "Enable a default inbox rule"
   },
   "ListSecurityFindingsAutomationDueDateRules": {
-    "description": "Get all due date rules for the current organization.",
+    "description": "Get all due date rules for the current organization.\nA due date rule sets a remediation due date on the findings that match its `rule`: a number of\ndays per severity, counted from `action.due_from` (when the finding was first seen, or when a\nfix became available).\nThe response lists rules in evaluation order: Datadog checks each finding against the due date\nrules in this order and applies the first one that matches. A rule only matches findings whose\nseverity is listed in its `action.due_days_per_severity`. To change the order, use\n`ReorderSecurityFindingsAutomationDueDateRules`.",
     "summary": "Get all due date rules"
   },
   "CreateSecurityFindingsAutomationDueDateRule": {
-    "description": "Create a due date rule for the current organization.",
+    "description": "Create a due date rule for the current organization.\nThe rule sets a due date on every finding that matches `rule.finding_types`, `rule.query`, and\na severity listed in `action.due_days_per_severity`. It applies immediately to new findings;\nExisting findings can take up to two hours to update.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationDueDateRules`. An organization can have at most 1,000 due date rules;\ncreating more fails with a `422` error.",
     "summary": "Create a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule create request."
   },
   "ReorderSecurityFindingsAutomationDueDateRules": {
-    "description": "Reorder the list of due date rules for the current organization.",
+    "description": "Set the order in which due date rules are evaluated for the current organization.\nDatadog checks each finding against the due date rules in this order and applies only the first rule that matches.\nA rule only matches findings whose severity is listed in its `action.due_days_per_severity`.\nThe first item in `data` is evaluated first.\n`data` must list every due date rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationDueDateRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the evaluation order.",
     "summary": "Reorder due date rules",
     "request_description": "",
     "request_schema_description": "The body of a due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
-    "description": "Delete a due date rule by ID.",
+    "description": "Delete a due date rule by ID.\nDeleting the rule removes the due dates it set on findings, unless another due date rule\nmatches them. Existing findings can take up to two hours to update. You can't restore a deleted rule. To stop a rule temporarily,\nupdate it with `enabled: false` instead.",
     "summary": "Delete a due date rule"
   },
   "GetSecurityFindingsAutomationDueDateRule": {
@@ -6624,29 +6852,29 @@
     "summary": "Get a due date rule"
   },
   "UpdateSecurityFindingsAutomationDueDateRule": {
-    "description": "Update a due date rule by ID.",
+    "description": "Update a due date rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule update request."
   },
   "ListSecurityFindingsAutomationInboxRules": {
-    "description": "Get all inbox rules for the current organization.",
+    "description": "Get all inbox rules for the current organization.\nAn inbox rule adds the findings that match its `rule` to the Security Inbox. This list\ndoesn't include the default inbox rules that Datadog manages. To get those, use\n`ListSecurityFindingsAutomationDefaultInboxRules`.\nThe response lists rules in evaluation order: Datadog checks each finding against the inbox\nrules in this order and applies the first one that matches. Datadog checks the default inbox rules\nbefore these rules. To change the order, use `ReorderSecurityFindingsAutomationInboxRules`.",
     "summary": "Get all inbox rules"
   },
   "CreateSecurityFindingsAutomationInboxRule": {
-    "description": "Create an inbox rule for the current organization.",
+    "description": "Create an inbox rule for the current organization.\nThe rule adds every finding that matches `rule.finding_types` and `rule.query` to the\nSecurity Inbox. It applies immediately to new findings; existing findings can\ntake up to two hours to update. Use inbox rules to surface findings that the Datadog default inbox rules\n(`ListSecurityFindingsAutomationDefaultInboxRules`) don't cover.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationInboxRules`. An organization can have at most 1,000 inbox rules;\ncreating more fails with a `422` error.",
     "summary": "Create an inbox rule",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule create request."
   },
   "ReorderSecurityFindingsAutomationInboxRules": {
-    "description": "Reorder the list of inbox rules for the current organization.",
+    "description": "Set the order in which inbox rules are evaluated for the current organization.\nDatadog checks each finding against the inbox rules in this order and applies only the first rule that matches.\nDatadog checks the default inbox rules (`ListSecurityFindingsAutomationDefaultInboxRules`) before these rules.\nThe first item in `data` is evaluated first.\n`data` must list every inbox rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationInboxRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the evaluation order.",
     "summary": "Reorder inbox rules",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule reorder request."
   },
   "DeleteSecurityFindingsAutomationInboxRule": {
-    "description": "Delete an inbox rule by ID.",
+    "description": "Delete an inbox rule by ID.\nDatadog removes findings that the rule added from the Security Inbox, unless another inbox rule\nmatches them. Existing findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead.",
     "summary": "Delete an inbox rule"
   },
   "GetSecurityFindingsAutomationInboxRule": {
@@ -6654,29 +6882,29 @@
     "summary": "Get an inbox rule"
   },
   "UpdateSecurityFindingsAutomationInboxRule": {
-    "description": "Update an inbox rule by ID.",
+    "description": "Update an inbox rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update an inbox rule",
     "request_description": "",
     "request_schema_description": "The body of an inbox rule update request."
   },
   "ListSecurityFindingsAutomationMuteRules": {
-    "description": "Get all mute rules for the current organization.",
+    "description": "Get all mute rules for the current organization.\nA mute rule automatically mutes new and existing findings that match its `rule` (finding types and query),\nusing the reason in its `action`. To mute or unmute specific findings by ID as a one-time action,\nuse `MuteSecurityFindings` instead.\nThe response lists rules in evaluation order: Datadog checks each finding against the mute\nrules in this order and applies the first one that matches. To change the order, use\n`ReorderSecurityFindingsAutomationMuteRules`.",
     "summary": "Get all mute rules"
   },
   "CreateSecurityFindingsAutomationMuteRule": {
-    "description": "Create a mute rule for the current organization.",
+    "description": "Create a mute rule for the current organization.\nThe rule mutes every finding that matches `rule.finding_types` and `rule.query`, with the\nreason in `action.reason`, until `action.expire_at` if set. It applies immediately to\nnew findings; existing findings can take up to two hours to update. Use a rule to keep\nmuting a class of findings, including ones detected later. To mute or unmute specific\nfindings by ID as a one-time action, use `MuteSecurityFindings` instead. Mute rules don't change\nmanually muted findings.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationMuteRules`. An organization can have at most 1,000 mute rules;\ncreating more fails with a `422` error.",
     "summary": "Create a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule create request."
   },
   "ReorderSecurityFindingsAutomationMuteRules": {
-    "description": "Reorder the list of mute rules for the current organization.",
+    "description": "Set the order in which mute rules are evaluated for the current organization.\nDatadog checks each finding against the mute rules in this order and applies only the first rule that matches.\nThe first item in `data` is evaluated first.\n`data` must list every mute rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationMuteRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder mute rules",
     "request_description": "",
     "request_schema_description": "The body of a mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
-    "description": "Delete a mute rule by ID.",
+    "description": "Delete a mute rule by ID.\nDatadog unmutes findings that the rule muted, unless another mute rule matches them. Manually\nmuted findings stay muted. Existing findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead. Disabling a rule has the same effect on findings as deleting it.",
     "summary": "Delete a mute rule"
   },
   "GetSecurityFindingsAutomationMuteRule": {
@@ -6684,29 +6912,29 @@
     "summary": "Get a mute rule"
   },
   "UpdateSecurityFindingsAutomationMuteRule": {
-    "description": "Update a mute rule by ID.",
+    "description": "Update a mute rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
   },
   "ListSecurityFindingsAutomationSeverityModifierRules": {
-    "description": "Get all severity modifier rules for the current organization.",
+    "description": "Get all severity modifier rules for the current organization.\nA severity modifier rule changes the severity of the findings that match its `rule`: it either\nsets a fixed severity or shifts it up or down by one rank. Severity modifier rules run before\nmute, due date, inbox, and ticket creation rules, so those rules see the modified severity.\nTo override the severity of specific findings by ID, use `UpdateFindingsSeverity` instead.\nThe response lists rules in evaluation order: Datadog checks each finding against the severity modifier\nrules in this order and applies the first one that would change the finding's severity. To change the order, use\n`ReorderSecurityFindingsAutomationSeverityModifierRules`.",
     "summary": "Get all severity modifier rules"
   },
   "CreateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Create a severity modifier rule for the current organization.",
+    "description": "Create a severity modifier rule for the current organization.\nThe rule changes the severity of every finding that matches `rule.finding_types` and\n`rule.query`. It applies immediately to new findings; existing findings can\ntake up to two hours to update. Use a rule to continuously adjust the severity of a class of findings,\nsuch as all findings in a development environment. To override the severity of specific\nfindings by ID as a one-time action, use `UpdateFindingsSeverity` instead. `UpdateFindingsSeverity` can't\noverride or clear a severity set by a rule.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationSeverityModifierRules`. An organization can have at most 1,000 severity modifier rules;\ncreating more fails with a `422` error.",
     "summary": "Create a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule create request."
   },
   "ReorderSecurityFindingsAutomationSeverityModifierRules": {
-    "description": "Reorder the list of severity modifier rules for the current organization.",
+    "description": "Set the order in which severity modifier rules are evaluated for the current organization.\nDatadog checks each finding against the severity modifier rules in this order and applies only the first rule that would change the finding's severity.\nThe first item in `data` is evaluated first.\n`data` must list every severity modifier rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationSeverityModifierRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder severity modifier rules",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule reorder request."
   },
   "DeleteSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Delete a severity modifier rule by ID.",
+    "description": "Delete a severity modifier rule by ID.\nUnresolved findings whose severity the rule changed go back to their Datadog severity, unless\nanother severity modifier rule matches them. Resolved findings keep the severity they had.\nExisting findings can take up to two hours to update.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with `enabled: false`\ninstead.",
     "summary": "Delete a severity modifier rule"
   },
   "GetSecurityFindingsAutomationSeverityModifierRule": {
@@ -6714,29 +6942,29 @@
     "summary": "Get a severity modifier rule"
   },
   "UpdateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Update a severity modifier rule by ID.",
+    "description": "Update a severity modifier rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.",
     "summary": "Update a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule update request."
   },
   "ListSecurityFindingsAutomationTicketCreationRules": {
-    "description": "Get all ticket creation rules for the current organization.",
+    "description": "Get all ticket creation rules for the current organization.\nA ticket creation rule automatically creates tickets for new findings that match its `rule`,\nin Jira, Linear, or Datadog Work Management (`action.target`; formerly Case Management), up to\n`action.max_tickets_per_day`.\nEach returned rule includes its scope (`rule`), its target project, assignee, and ticket\nfields (`action`), and `action.auto_disabled_reason` when Datadog disabled the rule after a\nticketing integration error.\nThe response lists rules in evaluation order: Datadog checks each finding against the ticket creation\nrules in this order and applies the first one that matches. To change the order, use\n`ReorderSecurityFindingsAutomationTicketCreationRules`.",
     "summary": "Get all ticket creation rules"
   },
   "CreateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Create a ticket creation rule for the current organization.",
+    "description": "Create a ticket creation rule for the current organization.\nThe rule automatically creates tickets for new findings that match `rule.finding_types` and\n`rule.query`, in the project set by `action.target` and `action.project_id`. It doesn't\ncreate tickets for findings that existed before the rule. Use a rule to create tickets for findings\ncontinuously as Datadog detects them. To create tickets for specific existing findings, use\n`CreateJiraIssues` or `CreateCases` instead.\nDatadog adds the new rule to the end of the evaluation order. To move it, use\n`ReorderSecurityFindingsAutomationTicketCreationRules`. An organization can have at most 1,000 ticket creation rules;\ncreating more fails with a `422` error.",
     "summary": "Create a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule create request."
   },
   "ReorderSecurityFindingsAutomationTicketCreationRules": {
-    "description": "Reorder the list of ticket creation rules for the current organization.",
+    "description": "Set the order in which ticket creation rules are evaluated for the current organization.\nDatadog checks each finding against the ticket creation rules in this order and applies only the first rule that matches.\nThe first item in `data` is evaluated first.\n`data` must list every ticket creation rule exactly once, using the IDs that\n`ListSecurityFindingsAutomationTicketCreationRules` returns. If a rule is missing, unknown, or listed twice, the\nrequest fails with a `422` error and the order doesn't change. Datadog adds rules created later\nto the end of the order.",
     "summary": "Reorder ticket creation rules",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Delete a ticket creation rule by ID.",
+    "description": "Delete a ticket creation rule by ID.\nTickets that the rule already created stay attached to their findings and aren't deleted.\nYou can't restore a deleted rule. To stop a rule temporarily, update it with\n`enabled: false` instead.",
     "summary": "Delete a ticket creation rule"
   },
   "GetSecurityFindingsAutomationTicketCreationRule": {
@@ -6744,25 +6972,25 @@
     "summary": "Get a ticket creation rule"
   },
   "UpdateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Update a ticket creation rule by ID.",
+    "description": "Update a ticket creation rule by ID.\nThis request replaces the whole rule. Send every attribute you want to keep, because the API clears\noptional fields you omit and saves an omitted `enabled` as `false`. The rule keeps its ID and\nits position in the evaluation order.\nTo re-enable a rule that Datadog disabled after a ticketing integration error, update it.\nUpdating a rule clears `action.auto_disabled_reason`.",
     "summary": "Update a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule update request."
   },
   "DetachCase": {
-    "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
+    "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. List the security findings to detach in `data.relationships.findings`. The API detaches each one from its current case, so you don't need to pass a case ID. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
     "request_description": "",
     "request_schema_description": "Request for detaching security findings from their case."
   },
   "CreateCases": {
-    "description": "Create cases for security findings.\nYou can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
+    "description": "Create cases for security findings.\nTo add security findings to a case that already exists, use `AttachCase` instead.\nYou can create up to 50 cases per request and associate up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the newly created case.",
     "summary": "Create cases for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create cases for security findings."
   },
   "AttachCase": {
-    "description": "Attach security findings to a case.\nYou can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
+    "description": "Attach security findings to a case.\nIdentify the existing Case Management case with the `case_id` path parameter, using the case `id` or `key` that `SearchCases` or `CreateCases` returns. To open a new case for security findings, use `CreateCases` instead.\nYou can attach up to 50 security findings per case. Security findings that are already attached to another case will be detached from their previous case and attached to the specified case.",
     "summary": "Attach security findings to a case",
     "request_description": "",
     "request_schema_description": "Request for attaching security findings to a case."
@@ -6792,13 +7020,13 @@
     "request_schema_description": "List of requests to create Linear issues for security findings."
   },
   "MuteSecurityFindings": {
-    "description": "Mute or unmute security findings.\nYou can mute or unmute up to 100 security findings per request. The request body must include `is_muted` and `reason` attributes. The allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `OTHER`, `NO_FIX`, `DUPLICATE`, `RISK_ACCEPTED`.\n  - To unmute a finding: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.",
+    "description": "Mute or unmute security findings.\nMute security findings that you want to ignore, such as false positives, accepted risks, or findings with a pending fix. Datadog issue explorers hide muted findings by default, and muted misconfigurations no longer count toward the posture score. Datadog automatically unmutes findings when their `expire_at` date passes. To unmute them earlier, set `is_muted` to `false`.\nYou can mute or unmute up to 100 security findings per request. The request body must include `is_muted` and `reason` attributes. The allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `OTHER`, `NO_FIX`, `DUPLICATE`, `RISK_ACCEPTED`.\n  - To unmute a finding: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.",
     "summary": "Mute or unmute security findings",
     "request_description": "",
     "request_schema_description": "Request to mute or unmute security findings."
   },
   "SearchSecurityFindings": {
-    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\nThis endpoint takes the query, sort, and pagination in a JSON request body. `ListSecurityFindings` (`GET /api/v2/security/findings`) accepts the same parameters as URL query parameters and returns the same results, so pick by how you want to send them. Use this endpoint to send the query without URL encoding, for example when it has many quotes, parentheses, or spaces. To get the next page, send `meta.page.after` as `data.attributes.page.cursor` in the request body. The `links.next` URL always points to `ListSecurityFindings`, with the query in the URL.\n\nUse this endpoint rather than `ListFindings` (`GET /api/v2/posture_management/findings`), which uses the legacy security findings data model and is planned for deprecation.\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "Search security findings",
     "request_description": "",
     "request_schema_description": "The request body for searching security findings."
@@ -6816,7 +7044,7 @@
     "request_schema_description": "List of requests to create ServiceNow tickets for security findings."
   },
   "UpdateFindingsSeverity": {
-    "description": "Set or clear the manual severity override of security findings.\n\nYou can update up to 100 security findings per request.\nUse the `set` action with a `value` to apply a manual severity override.\n`value` is required for `set` and must be omitted for `clear`.\nThe `info` value sets the lowest severity the finding type allows.\nUse the `clear` action to remove a manual severity override.\n`clear` does not remove a severity set by an automation rule.\nThe optional `description` is accepted with both actions and has a limit of 280 characters.\n\nAuto-closed findings are excluded.\nFindings whose severity was set by an automation rule are skipped and listed in the response `meta.warnings`.\nIf every finding is skipped this way, the request fails with a `400` error.\nFindings that cannot be found are skipped without a warning.\nThe request fails with a `404` error only if none of the findings can be found.",
+    "description": "Set or clear the manual severity override of security findings.\n\nYou can update up to 100 security findings per request.\nUse the `set` action with a `value` to apply a manual severity override.\nThe allowed values are `critical`, `high`, `medium`, `low`, and `info`.\n`value` is required for `set` and must be omitted for `clear`.\nThe `info` value sets the lowest severity the finding type allows.\nUse the `clear` action to remove a manual severity override.\n`clear` does not remove a severity set by an automation rule.\nThe optional `description` is accepted with both actions and has a limit of 280 characters.\n\nAuto-closed findings are excluded.\nFindings whose severity was set by an automation rule are skipped and listed in the response `meta.warnings`.\nIf every finding is skipped this way, the request fails with a `400` error.\nFindings that cannot be found are skipped without a warning.\nThe request fails with a `404` error only if none of the findings can be found.",
     "summary": "Override the severity of security findings",
     "request_description": "",
     "request_schema_description": "Request to set or clear the manual severity override of security findings."
@@ -6847,6 +7075,10 @@
     "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
     "summary": "List ownership history by owner type"
   },
+  "SearchRemediationGroups": {
+    "description": "Search the remediation groups of your organization. A remediation group gathers the open security findings\nthat one change fixes, such as updating a package in a repository.\n\nEach group comes from a grouping definition, which sets the finding type it covers and the kind object the\ngroup returns:\n\n| Grouping definition  | Finding type            | Kind object      |\n| -------------------- | ----------------------- | ---------------- |\n| `sca.package_update` | `library_vulnerability` | `package_update` |\n\nGroups are computed from the attributes of security findings, described in the\n[security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/). The description of\neach kind object lists the findings its grouping definition reads and the attribute each field comes from.\n\nThe search includes all open findings, regardless of when they were first detected.\n\nThis endpoint requires the `cases_read` permission and either the `security_monitoring_findings_read` or\n`appsec_vm_read` permission.",
+    "summary": "Search remediation groups"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -6874,25 +7106,25 @@
     "request_schema_description": "Request body for creating or updating an indicator triage state."
   },
   "GetSignalNotificationRules": {
-    "description": "Returns the list of notification rules for security signals.",
+    "description": "Returns the list of notification rules for security signals.\nA signal-based notification rule sends a notification to its `targets` when a security signal matches its\nselectors (rule types, severities, and query), so you don't have to set up notifications on each detection rule.\nUse the signal routes for rules whose `trigger_source` is `security_signals`. For rules on security findings,\nsuch as vulnerabilities and misconfigurations (`trigger_source` `security_findings`), use\n`GetVulnerabilityNotificationRules`.\nThis route only returns rules whose `trigger_source` is `security_signals`. The response isn't paginated: it\ncontains every such rule in the organization, and the route takes no paging parameters.",
     "summary": "Get the list of signal-based notification rules"
   },
   "CreateSignalNotificationRule": {
-    "description": "Create a new notification rule for security signals and return the created rule.",
+    "description": "Create a new notification rule for security signals and return the created rule.\nSet `selectors.trigger_source` to `security_signals`. The signal routes only return rules with that trigger\nsource, so a rule with `security_findings` is read through `GetVulnerabilityNotificationRules` instead.\nTo notify on security findings, use `CreateVulnerabilityNotificationRule`.\n`selectors.rule_types` accepts the signal rule types `application_security`, `log_detection`,\n`workload_security`, and `signal_correlation`.\nGive at least one; finding rule types are rejected.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\n`time_aggregation` is only available for finding-based rules: omit it or set it to `0`.\nTrial organizations can't use email address targets: the request returns 400.\nRule names must be unique in the organization (case-insensitive); a duplicate name returns 409.\nAn organization can have at most 1,000 signal-based rules; past that, the request returns 429.",
     "summary": "Create a new signal-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteSignalNotificationRule": {
-    "description": "Delete a notification rule for security signals.",
+    "description": "Delete a notification rule for security signals.\nGet the rule `id` from `GetSignalNotificationRules`.\nThis route doesn't check the rule's `trigger_source`, so make sure the `id` belongs to a signal rule.\nTo stop notifications without deleting the rule, set `enabled` to `false` with\n`PatchSignalNotificationRule` instead.",
     "summary": "Delete a signal-based notification rule"
   },
   "GetSignalNotificationRule": {
-    "description": "Get the details of a notification rule for security signals.",
+    "description": "Get the details of a notification rule for security signals.\nGet the rule `id` from `GetSignalNotificationRules`.\nReturns 404 when the rule's `trigger_source` is `security_findings`; read that rule with\n`GetVulnerabilityNotificationRule` instead.",
     "summary": "Get details of a signal-based notification rule"
   },
   "PatchSignalNotificationRule": {
-    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "description": "Partially update the notification rule. All fields except `version` are optional; if a field is not provided,\nit is not updated. Give at least one field to change.\nGet the rule `id` from `GetSignalNotificationRules`, then read the rule with `GetSignalNotificationRule`\nand send its current `version`. The `version` is incremented each time the rule is modified.\nA `version` that isn't the current one returns 409: fetch the rule again and retry.\nA missing or `0` `version` is rejected.\nIf you send `selectors`, it must include `trigger_source`, and every entry in `selectors.rule_types` must\nmatch that trigger source (give at least one). For `security_findings`, the rule types are\n`application_code_vulnerability`, `application_library_vulnerability`, `attack_path`,\n`container_image_vulnerability`, `identity_risk`, `misconfiguration`, `api_security`, `host_vulnerability`,\n`iac_misconfiguration`, `sast_vulnerability`, `secret_vulnerability`, `workload_activity`, `sensitive_data`,\nand `serverless_function_code_vulnerability`.\nFor `security_signals`, they are `application_security`, `log_detection`, `workload_security`, and\n`signal_correlation`.\nChanging `trigger_source` moves the rule to the other family's routes, and the change counts toward that\nfamily's limit of 1,000 rules.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters. Finding-based rules can't filter on attributes in the\n`@workflow` or `@_dd` namespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\nTrial organizations can't use email address targets: the request returns 400.",
     "summary": "Patch a signal-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
@@ -6914,25 +7146,25 @@
     "request_schema_description": "A CycloneDX 1.5 Bill of Materials (BOM) document containing vulnerability data."
   },
   "GetVulnerabilityNotificationRules": {
-    "description": "Returns the list of notification rules for security vulnerabilities.",
+    "description": "Returns the list of notification rules for security findings.\nA finding-based notification rule sends a notification to its `targets` when a security finding, such as a\nvulnerability or a misconfiguration, matches its selectors (rule types, severities, and query). It can group\nnotifications over a `time_aggregation` window.\nUse the finding routes (under `/api/v2/security/vulnerabilities/`) for rules whose `trigger_source` is\n`security_findings`. For rules on security\nsignals (`trigger_source` `security_signals`), use `GetSignalNotificationRules`.\nThis route only returns rules whose `trigger_source` is `security_findings`. The response isn't paginated: it\ncontains every such rule in the organization, and the route takes no paging parameters.",
     "summary": "Get the list of vulnerability notification rules"
   },
   "CreateVulnerabilityNotificationRule": {
-    "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
+    "description": "Create a new notification rule for security findings and return the created rule.\nSet `selectors.trigger_source` to `security_findings`. The finding routes only return rules with that\ntrigger source, so a rule with `security_signals` is read through `GetSignalNotificationRules` instead.\nTo notify on security signals, use `CreateSignalNotificationRule`.\n`selectors.rule_types` accepts the finding rule types `application_code_vulnerability`,\n`application_library_vulnerability`, `attack_path`, `container_image_vulnerability`, `identity_risk`,\n`misconfiguration`, `api_security`, `host_vulnerability`, `iac_misconfiguration`, `sast_vulnerability`,\n`secret_vulnerability`, `workload_activity`, `sensitive_data`, and `serverless_function_code_vulnerability`.\nGive at least one; signal rule types are rejected.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters, and can't filter on attributes in the `@workflow` or `@_dd`\nnamespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\n`time_aggregation` is a rolling window in seconds, from `1800` (30 minutes) to `2592000` (30 days); omit it\nor set it to `0` for no aggregation.\nTrial organizations can't use email address targets: the request returns 400.\nRule names must be unique in the organization (case-insensitive); a duplicate name returns 409.\nAn organization can have at most 1,000 finding-based rules; past that, the request returns 429.",
     "summary": "Create a new vulnerability-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteVulnerabilityNotificationRule": {
-    "description": "Delete a notification rule for security vulnerabilities.",
+    "description": "Delete a notification rule for security findings.\nGet the rule `id` from `GetVulnerabilityNotificationRules`.\nThis route doesn't check the rule's `trigger_source`, so make sure the `id` belongs to a finding rule.\nTo stop notifications without deleting the rule, set `enabled` to `false` with\n`PatchVulnerabilityNotificationRule` instead.",
     "summary": "Delete a vulnerability-based notification rule"
   },
   "GetVulnerabilityNotificationRule": {
-    "description": "Get the details of a notification rule for security vulnerabilities.",
+    "description": "Get the details of a notification rule for security findings.\nGet the rule `id` from `GetVulnerabilityNotificationRules`.\nReturns 404 when the rule's `trigger_source` is `security_signals`; read that rule with\n`GetSignalNotificationRule` instead.",
     "summary": "Get details of a vulnerability notification rule"
   },
   "PatchVulnerabilityNotificationRule": {
-    "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
+    "description": "Partially update the notification rule. All fields except `version` are optional; if a field is not provided,\nit is not updated. Give at least one field to change.\nGet the rule `id` from `GetVulnerabilityNotificationRules`, then read the rule with\n`GetVulnerabilityNotificationRule` and send its current `version`. The `version` is incremented each time\nthe rule is modified. A `version` that isn't the current one returns 409: fetch the rule again and retry.\nA missing or `0` `version` is rejected.\nIf you send `selectors`, it must include `trigger_source`, and every entry in `selectors.rule_types` must\nmatch that trigger source (give at least one). For `security_findings`, the rule types are\n`application_code_vulnerability`, `application_library_vulnerability`, `attack_path`,\n`container_image_vulnerability`, `identity_risk`, `misconfiguration`, `api_security`, `host_vulnerability`,\n`iac_misconfiguration`, `sast_vulnerability`, `secret_vulnerability`, `workload_activity`, `sensitive_data`,\nand `serverless_function_code_vulnerability`.\nFor `security_signals`, they are `application_security`, `log_detection`, `workload_security`, and\n`signal_correlation`.\nChanging `trigger_source` moves the rule to the other family's routes, and the change counts toward that\nfamily's limit of 1,000 rules.\n`selectors.severities` accepts `critical`, `high`, `medium`, `low`, and `info`; `unknown` is rejected.\n`selectors.query` is at most 6,000 characters. Finding-based rules can't filter on attributes in the\n`@workflow` or `@_dd` namespaces, on `@status`, or on `@compliance.evaluation`.\nEach entry in `targets` is a handle that starts with `@`, such as an email address\n(`@john.doe@email.com`) or an integration handle (`@slack-<VALUES>`); see `targets`.\nTrial organizations can't use email address targets: the request returns 400.",
     "summary": "Patch a vulnerability-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
@@ -6998,11 +7230,11 @@
     "summary": "Start a batch migration"
   },
   "ListCloudWorkloadSecurityAgentRules": {
-    "description": "Get the list of agent rules.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get all Workload Protection agent rules](https://docs.datadoghq.com/api/latest/csm-threats/#get-all-workload-protection-agent-rules)\ninstead, on all sites including US1-FED.\n\nGet the list of agent rules.",
     "summary": "Get all Workload Protection agent rules (US1-FED)"
   },
   "GetCloudWorkloadSecurityAgentRule": {
-    "description": "Get the details of a specific agent rule.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
+    "description": "**Note**: This endpoint is deprecated. Use [Get a Workload Protection agent rule](https://docs.datadoghq.com/api/latest/csm-threats/#get-a-workload-protection-agent-rule)\ninstead, on all sites including US1-FED.\n\nGet the details of a specific agent rule.",
     "summary": "Get a Workload Protection agent rule (US1-FED)"
   },
   "ListSecurityMonitoringCriticalAssets": {
@@ -7042,6 +7274,10 @@
     "summary": "Create an entity context sync configuration",
     "request_description": "The definition of the new integration configuration.",
     "request_schema_description": "Request body to create an entity context sync configuration."
+  },
+  "GetAWSIdentityCenterAWSAccounts": {
+    "description": "Get the integrated AWS accounts that the AWS IAM Identity Center entity context sync reads users from, and\nwhether users have been collected from them. Collected users are a prerequisite for creating or enabling the\nAWS IAM Identity Center entity context sync configuration. The accounts include AWS Organization management\naccounts and any accounts that users were collected from.",
+    "summary": "Get AWS IAM Identity Center account prerequisites"
   },
   "GetEntraIdAzureAppRegistrations": {
     "description": "Get the Azure App Registrations discovered for the organization and whether at least one of them has\nresource collection enabled, which is a prerequisite for activating the Entra ID entity context sync integration.",
@@ -7345,6 +7581,32 @@
     "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
     "summary": "Get a Bits Security Analyst investigation"
   },
+  "GetSecurityAgentOutreachPolicy": {
+    "description": "Get the organization's user outreach policy for Bits Security Analyst: the outreach mode, the per-rule\nautomation state, the allowed email domains that user outreach can be sent to, and, for the caller, domains\nthat could be allowed next.",
+    "summary": "Get the user outreach policy"
+  },
+  "UpdateSecurityAgentOutreachMode": {
+    "description": "Set the organization's outreach mode: `off` (no user outreach), `manual` (outreach is only sent when an\nanalyst triggers it), or `automated` (rules with outreach enabled auto-send automated interviews to users\nwhose email domain is allowed).",
+    "summary": "Update the outreach mode",
+    "request_description": "The new outreach mode.",
+    "request_schema_description": "Request to set the organization's outreach mode."
+  },
+  "AddSecurityAgentOutreachPolicyDomain": {
+    "description": "Add one allowed email domain. User outreach is only sent to users whose email domain is allowed. The\ndomain must be a fully qualified domain name, like `example.com`; it is lowercased before being stored.\nAn organization can allow at most 20 domains.",
+    "summary": "Add an allowed outreach domain",
+    "request_description": "The email domain to allow.",
+    "request_schema_description": "Request to add one allowed email domain."
+  },
+  "RemoveSecurityAgentOutreachPolicyDomain": {
+    "description": "Remove one allowed email domain, by its name.",
+    "summary": "Remove an allowed outreach domain"
+  },
+  "UpdateSecurityAgentOutreachPolicyRules": {
+    "description": "Upsert the outreach automation state of detection rules. Each rule in the request gets the given state;\nrules not in the request keep their state. A rule with `is_enabled: true` auto-sends automated interviews\nin `automated` mode.",
+    "summary": "Update outreach policy rules",
+    "request_description": "The rules to upsert.",
+    "request_schema_description": "Request to upsert the outreach automation state of detection rules."
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
@@ -7478,6 +7740,14 @@
   "ListStandardPatterns": {
     "description": "Returns all standard patterns.",
     "summary": "List standard patterns"
+  },
+  "ListTargetScanningGroups": {
+    "description": "List the Agent Observability scanning groups, with their rules included.\nThe list always includes the default Agent Observability scanning group.\nScanning groups of logs, RUM, events, and APM are listed by the List Scanning Groups endpoint.",
+    "summary": "List Agent Observability Scanning Groups"
+  },
+  "GetScanningGroup": {
+    "description": "Get an Agent Observability scanning group, with its rules included.\nScanning groups of logs, RUM, events, and APM are reported as not found.",
+    "summary": "Get Agent Observability Scanning Group"
   },
   "SubmitMetrics": {
     "description": "The metrics end-point allows you to post time-series data that can be graphed on Datadog’s dashboards.\nThe maximum payload size is 500 kilobytes (512000 bytes). Compressed payloads must have a decompressed size of less than 5 megabytes (5242880 bytes).\n\nIf you’re submitting metrics directly to the Datadog API without using DogStatsD, expect:\n\n- 64 bits for the timestamp\n- 64 bits for the value\n- 20 bytes for the metric names\n- 50 bytes for the timeseries\n- The full payload is approximately 100 bytes.\n\nHost name is one of the resources in the Resources field.",
@@ -8137,7 +8407,7 @@
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
   "ListSyntheticsBrowserTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "description": "Get the latest result summaries for a given Synthetic browser test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a browser test's latest results"
   },
   "GetSyntheticsBrowserTestResult": {
@@ -8198,7 +8468,7 @@
     "summary": "Get parent suites for a test"
   },
   "ListSyntheticsTestLatestResults": {
-    "description": "Get the latest result summaries for a given Synthetic test.",
+    "description": "Get the latest result summaries for a given Synthetic test.\nTo filter tests across your organization by monitor status, state, or tags, use\nthe Search Synthetic tests with filters endpoint.",
     "summary": "Get a test's latest results"
   },
   "GetSyntheticsTestResult": {
@@ -8767,6 +9037,24 @@
   "GetOIDCCloudAuthProvider": {
     "description": "Get a Custom OIDC provider by UUID.",
     "summary": "Get a Custom OIDC provider"
+  },
+  "ListTerraformCloudAuthPersonaMappings": {
+    "description": "List all HCP Terraform persona mappings in the organization. Each mapping associates an HCP Terraform workload identity token issuer and `sub` claim pattern with a Datadog user or service account.",
+    "summary": "List HCP Terraform persona mappings"
+  },
+  "CreateTerraformCloudAuthPersonaMapping": {
+    "description": "Create an HCP Terraform persona mapping. The mapping associates a Datadog user or service account with workload identity tokens from an HCP Terraform issuer whose `sub` claim matches `sub_pattern`.\n\nThe response includes the `audience` value to set as the `TFC_WORKLOAD_IDENTITY_AUDIENCE_DATADOG` environment variable in HCP Terraform. The API returns a 409 error if the pattern duplicates an existing mapping, or if it can match the same token as an existing mapping for a different account.",
+    "summary": "Create an HCP Terraform persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request to create an HCP Terraform persona mapping."
+  },
+  "DeleteTerraformCloudAuthPersonaMapping": {
+    "description": "Delete an HCP Terraform persona mapping by ID. Workload identity tokens that matched only this mapping can no longer be exchanged.",
+    "summary": "Delete an HCP Terraform persona mapping"
+  },
+  "GetTerraformCloudAuthPersonaMapping": {
+    "description": "Get an HCP Terraform persona mapping by ID.",
+    "summary": "Get an HCP Terraform persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
