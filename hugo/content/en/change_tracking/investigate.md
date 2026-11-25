@@ -2,6 +2,9 @@
 title: Investigate Relevant Changes
 description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, service pages, and the RUM Explorer, or search for them with Semantic Search, widgets, and Bits AI."
 further_reading:
+- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+  tag: "Blog"
+  text: "Teaching a 9B model to investigate production alerts"
 - link: "/change_tracking/change_types/"
   tag: "Documentation"
   text: "Tracked Change Types"

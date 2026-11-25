@@ -1,63 +1,51 @@
 ---
 title: Change Tracking
-description: "Streamline troubleshooting with Change Tracking by monitoring deployments, feature flags, configuration changes, and other modifications to your services."
+description: "Simplify troubleshooting with Change Tracking by monitoring deployments, feature flags, configuration changes, and other modifications to your services."
 further_reading:
 - link: "https://www.datadoghq.com/blog/change-tracking/"
   tag: "Blog"
   text: "Unify visibility into changes to your services and dependencies"
-- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+- link: "https://www.datadoghq.com/blog/change-overlays/"
   tag: "Blog"
-  text: "Teaching a 9B model to investigate production alerts"
+  text: "Quickly spot and revert faulty deployments with Change Overlays"
 ---
 
 ## Overview
 
-Change Tracking streamlines troubleshooting and incident response by surfacing relevant changes to your service and its dependencies, enabling faster detection and remediation when issues arise.
+Change Tracking collects the changes happening across your systems, such as code deployments, feature flag flips, and infrastructure and configuration edits. It shows these changes alongside your telemetry, so you can see what changed as soon as you start investigating.
 
-{{< img src="/change_tracking/change-tracking-overview-2.png" alt="The details of a change on the Recent Changes timeline in the Service Summary" style="width:100%;" >}}
+With Change Tracking, you can:
 
-Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
-- Deployments
-- Feature Flags
-- Traffic Spikes
-- Configuration Changes
-- Database Modifications
-- Schema Changes
-- Scale Adjustments
-- Kubernetes Adjustments
-- Kubernetes Pod Crashes
-- Watchdog Alerts
-
-For details on specific types of supported changes and setup requirements, see [Tracked Change Types][16].
-
-## Investigate changes in Datadog
-
-Changes show up on monitor status pages, service pages, dashboards, and widgets. To view and analyze changes on each of these pages, see [Investigate Relevant Changes][17].
+- See the changes to a service and its dependencies alongside the graphs you are already looking at.
+- Narrow a regression down to a specific deployment, flag, or configuration edit, and, for deployments, open the commit or CI run behind it.
+- Ask what changed in plain language, in Bits Chat or from your own AI tools with the Datadog MCP Server.
 
 ## Change types you can track
 
-Change Tracking covers deployments, feature flags, database changes, streaming and application behavior, infrastructure changes, and any custom change you send yourself.
+Change Tracking covers deployments, feature flags, infrastructure changes, database changes, streaming and application behavior, and any custom change you send yourself.
 
-For the full list of change types, the Datadog feature each one comes from, and what you need to enable it, see [Tracked Change Types][16].
-  
+For the full list of change types, the Datadog feature each one comes from, and what you need to enable it, see [Tracked Change Types][1].
+
+## Investigate changes in Datadog
+
+Change Tracking is available on several pages in Datadog:
+
+- [Dashboards][2]: A change timeline above the dashboard and change overlays on timeseries widgets.
+- [Monitor status pages][3]: A change timeline aligned with the alert's event graphs.
+- [Service pages][4]: A change timeline in the {{< ui >}}Service Summary{{< /ui >}}, for the service alone or for the service and its dependencies.
+- [RUM Explorer][5]: Change markers at the top of RUM Explorer graphs, for correlating frontend regressions with frontend deployments and frontend feature flag changes.
+
+When Datadog flags a change as likely faulty, a banner above the change timeline calls it out. Hover over a flagged change to see why it was flagged.
+
+For the full investigation path, including Change Explorer, Semantic Search, widgets, and Bits Chat, see [Investigate Relevant Changes][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/status/
-[2]: /tracing/services/service_page/
-[3]: /dashboards/
-[4]: /tracing/services/deployment_tracking/
-[5]: /integrations/launchdarkly/#feature-flag-tracking-integration/
-[6]: /api/latest/events/
-[7]: /watchdog/
-[8]: /database_monitoring/
-[9]: /data_streams/
-[10]: /database_monitoring/connect_dbm_and_apm/
-[11]: /actions/connections/#work-with-connections
-[12]: /database_monitoring/schema_explorer
-[13]: /infrastructure/resource_catalog/resource_changes/
-[15]: /tracing
-[16]: /change_tracking/change_types/
-[17]: /change_tracking/investigate/
+[1]: /change_tracking/change_types/
+[2]: /dashboards/
+[3]: /monitors/status/
+[4]: /tracing/services/service_page/
+[5]: /real_user_monitoring/explorer/
+[6]: /change_tracking/investigate/
