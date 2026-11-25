@@ -6,11 +6,11 @@ aliases:
 
 ## Availability
 
-Agentless Scanning is supported on AWS, Azure, and GCP.
+Agentless Scanning is supported on AWS, Azure, and Google Cloud. Datadog-hosted scanning is supported on AWS only. For more information, see [Choose where scanners run][19].
 
 The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
 
-| Component                                       | AWS                                                                                                                           | Azure                                                                                                                                                                             | GCP                                                                                                                                                                                                                       |
+| Component                                       | AWS                                                                                                                           | Azure                                                                                                                                                                             | Google Cloud                                                                                                                                                                                                                       |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Operating System                                | Linux; Windows Server 2016 or later; Windows 10 or later                                                                      | Linux; Windows Server 2016 or later; Windows 10 or later                                                                                                                          | Linux; Windows Server 2016 or later; Windows 10 or later                                                                                                                                                                  |
 | Host File System                                | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                            | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                                                                                | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                                                                                                                        |
@@ -109,3 +109,4 @@ The following container runtimes are supported:
 [16]: /help
 [17]: /security/cloud_security_management/setup/agentless_scanning/update
 [18]: /containers/cluster_agent/setup/
+[19]: /security/cloud_security_management/setup/agentless_scanning#choose-where-scanners-run

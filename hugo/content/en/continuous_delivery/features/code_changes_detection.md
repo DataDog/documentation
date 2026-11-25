@@ -26,11 +26,6 @@ The deployed code changes are visible inside any deployment execution of the [De
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
-Additionally, the {{< ui >}}Deployments{{< /ui >}} column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
-Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
-
-{{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
-
 Code changes are only detected for deployments that:
 - Have a service (`@deployment.service`) with file path specs defined in Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
 - Have an environment (`@deployment.env`).
@@ -178,7 +173,6 @@ In this case, Code Changes Detection for deployments of the `shopist` service wi
 
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
-[3]: https://app.datadoghq.com/ci/commits
 [4]: /internal_developer_portal/catalog/entity_model/
 [5]: /internal_developer_portal/catalog/
 

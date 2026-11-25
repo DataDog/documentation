@@ -13,10 +13,10 @@ further_reading:
   text: NetFlow용 동적 테스트 설정
 - link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: 블로그
-  text: Datadog로 NetFlow 트래픽 데이터 모니터링하기
+  text: Datadog으로 NetFlow 트래픽 데이터 모니터링
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: 블로그
-  text: SNMP 트랩을 사용하여 네트워크 성능 문제 모니터링 및 진단하기
+  text: SNMP 트랩을 사용하여 네트워크 성능 문제 모니터링 및 진단
 - link: https://www.datadoghq.com/blog/understanding-netflow-duplication/
   tag: 블로그
   text: 'NetFlow 중복 이해: 중복이 발생하는 이유와 중복 제거 방법'
@@ -30,7 +30,7 @@ NetFlow 뷰는 장치 및 인터페이스별로 집계된 트래픽 메트릭을
 
 {{< img src="network_device_monitoring/netflow/netflow.png" alt="트래픽 양, 장치 상태, 흐름 등을 위한 접을 수 있는 범례가 포함된 NetFlow Monitoring 페이지입니다." style="width:100%;" >}}
 
-## Side Navigation {#side-navigation}
+## 사이드 탐색 메뉴 {#side-navigation}
 
 왼쪽 탐색을 사용하여 추가 NetFlow 뷰를 탐색하세요.
 
@@ -81,11 +81,41 @@ Datadog Agent는 NetFlow로 수신된 데이터를 자동으로 집계하여 대
 
 ## 보강 {#enrichment}
 
-귀하의 NetFlow 데이터는 Datadog 백엔드에 의해 처리되며, 귀하의 장치와 인터페이스에서 사용할 수 있는 메타데이터로 보강됩니다. 보강은 NetFlow 익스포터 IP와 인터페이스 인덱스를 기반으로 합니다. 재사용된 개인 IP 간의 충돌 가능성을 해소하기 위해, 각 Agent 구성 파일에 대해 다른 `namespace`을 구성할 수 있습니다(설정 `network_devices.namespace` 포함).
+귀하의 NetFlow 데이터는 Datadog 백엔드에 의해 처리되며, 귀하의 장치와 인터페이스에서 사용할 수 있는 메타데이터로 보강됩니다. 보강은 NetFlow 익스포터 IP와 인터페이스 인덱스를 기반으로 합니다. 재사용된 프라이빗 IP 간의 충돌 가능성을 해소하기 위해, 각 Agent 구성 파일에 대해 다른 `namespace`을 구성할 수 있습니다(설정 `network_devices.namespace` 사용).
 
-NetFlow 익스포터 IP가 장치 IP 중 하나이지만 SNMP 통합에 구성된 IP가 아닌 경우 Datadog은 익스포터 IP가 속한 장치를 찾고 일치 항목이 고유한 경우에 한해 이정보로 NetFlow 데이터를 보강합니다.
+NetFlow 익스포터 IP가 장치 IP 중 하나이지만 SNMP 통합에 구성된 IP가 아닌 경우 Datadog은 익스포터 IP가 속한 장치를 찾고 일치 항목이 고유한 경우에 한해 이 정보로 NetFlow 데이터를 보강합니다.
 
-### 클라우드 공급자 IP 보강 {#cloud-provider-ip-enrichment}
+### IP 보강 {#ip-enrichment}
+
+Datadog은 다음과 같은 유형의 IP 보강을 지원합니다.
+
+#### 커스텀 IP 보강 {#custom-ip-enrichment}
+
+또한, 특정 IP 주소에서 실행 중인 서비스를 분류하기 위해, IP와 CIDR을 커스텀 태그에 매핑하는 커스텀 보강을 추가할 수 있습니다. 커스텀 IP 보강을 통해 네트워크 엔지니어와 그 팀은 사람이 읽기 쉬운 이름으로 NetFlow 데이터를 해석하고 쿼리할 수 있습니다.
+
+[{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}IP Enrichment{{< /ui >}}][10]로 이동한 다음 {{< ui >}}\+ Add Enrichment{{< /ui >}}을 클릭하여 매핑 CSV 파일을 업로드합니다.
+
+단일 매핑을 수동으로 추가하려면 {{< ui >}}\+ Add Enrichment{{< /ui >}} 옆의 아래쪽 화살표를 클릭하고 {{< ui >}}Single Entry{{< /ui >}}를 선택합니다.
+
+IP 주소로 오가는 흐름의 애플리케이션 이름을 설정하려면 매핑에 `application_name` 태그를 추가합니다(예: `application_name:client_device`). 커스텀 IP 매핑은 다른 모든 애플리케이션 이름 소스보다 우선합니다. 전체 순서는 [애플리케이션 이름 할당](#application-name-assignment) 섹션을 참조하세요.
+
+#### 역방향 DNS 프라이빗 IP 보강 {#reverse-dns-private-ip-enrichment}
+
+역방향 DNS 프라이빗 IP 보강은 NetFlow 레코드에 호스트 이름을 추가합니다. 이를 활성화하면 Agent가 프라이빗 주소 범위 내의 소스 및 목적지 IP 주소에 대해 역방향 DNS 조회를 수행하고 해당 호스트 이름을 흐름 레코드에 추가합니다.
+
+역방향 DNS 보강은 기본적으로 비활성화되어 있습니다. 활성화하려면 [`datadog.yaml`][3] 파일의 `network_devices.netflow` 아래에 `reverse_dns_enrichment_enabled: true`를 설정한 다음 [Agent를 다시 시작][4]하세요. 전체 구성 예시는 [구성](#configuration) 섹션을 참조하세요.
+
+호스트 이름별로 흐름을 필터링하려면 다음 단계를 따르세요.
+
+1. [NetFlow 페이지][5]로 이동합니다.
+2. {{< ui >}}\+ Filter{{< /ui >}}를 클릭합니다.
+3. {{< ui >}}Source Reverse DNS Hostname{{< /ui >}} 또는 {{< ui >}}Destination Reverse DNS Hostname{{< /ui >}}를 선택합니다.
+
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="역 DNS 목적지 및 소스 패싯을 표시하도록 향상된 필터 메뉴" width="100%" >}}
+
+**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [예시 Agent 구성 파일][7]의 `reverse_dns_enrichment` 섹션을 참조하세요.
+
+#### 클라우드 공급자 IP 보강 {#cloud-provider-ip-enrichment}
 
 Datadog은 IPv4 주소용 퍼블릭 클라우드 공급자 서비스 및 리전으로 IP를 강화하므로 특정 서비스 및 리전의 흐름 레코드를 필터링할 수 있습니다.
 
@@ -93,39 +123,135 @@ Datadog은 IPv4 주소용 퍼블릭 클라우드 공급자 서비스 및 리전�
 
 ### 포트 보강 {#port-enrichment}
 
-Datadog은 IANA(인터넷 할당 번호 관리국) 데이터를 사용하여 NetFlow의 포트를 보강하여 잘 알려진 포트 매핑(예: Postgres의 5432 및 HTTPS의 443)을 해결합니다. 
+Datadog은 다음과 같은 유형의 포트 보강을 지원합니다.
 
-### 커스텀 포트 보강 {#custom-port-enrichment}
+#### 기본 포트 보강 {#default-port-enrichment}
 
-또한, 특정 애플리케이션에 포트와 프로토콜을 매핑할 수 있도록, 맞춤 보강을 추가할 수 있습니다(예: 특정 포트에서 실행되는 맞춤 서비스의 경우). 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
+Datadog은 IANA(인터넷 할당 번호 관리 기관) 데이터를 사용하여 NetFlow의 포트를 보강하고, 잘 알려진 포트 매핑(예: Postgres의 5432 및 HTTPS의 443)을 확인합니다.
 
-NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}\+ Add Enrichment{{< /ui >}}를 클릭하여 사용자 지정 보강이 포함된 CSV 파일을 업로드합니다.
+#### 커스텀 포트 보강 {#custom-port-enrichment}
 
-{{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="NetFlow 구성 탭의 새 보강 매핑 모달" width="100%" >}}
+포트와 프로토콜을 특정 애플리케이션에 매핑하기 위해 커스텀 보강을 추가할 수 있습니다(예: 특정 포트에서 실행되는 커스텀 서비스의 경우). 커스텀 포트 보강을 통해 네트워크 엔지니어와 팀은 사람이 읽기 쉬운 이름을 사용하여 NetFlow 데이터를 해석하고 쿼리할 수 있습니다.
 
-### 커스텀 IP 보강 {#custom-ip-enrichment}
+[{{< ui >}}Network Devices{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}NetFlow{{< /ui >}} > {{< ui >}}Port Enrichment{{< /ui >}}][13]으로 이동한 다음 {{< ui >}}\+ Add Enrichment{{< /ui >}}를 클릭하여 커스텀 보강이 포함된 CSV 파일을 업로드합니다.
 
-또한, 특정 IP 주소에서 실행 중인 서비스를 분류하기 위해, IP와 CIDR을 맞춤 태그에 매핑하는 맞춤 보강을 추가할 수 있습니다. 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
+### 심층 패킷 검사 {#deep-packet-inspection}
 
-[{{< ui >}}Enrichment{{< /ui >}} 설정 페이지][10]에서 {{< ui >}}\+ Add Enrichment{{< /ui >}}를 클릭하여 매핑을 수동으로 추가하거나 CSV 파일을 업로드하여 매핑을 일괄 추가합니다.
+**참고**: 심층 패킷 검사를 사용하려면 Agent 버전 7.86.0 이상이 필요합니다.
 
-### 역방향 DNS 개인 IP 보강 {#reverse-dns-private-ip-enrichment}
+심층 패킷 검사(DPI)를 사용하면 Datadog이 포트 번호에서 애플리케이션을 추론하는 대신, 네트워크 장치가 트래픽을 검사하여 각 흐름에 대한 애플리케이션을 식별합니다. Datadog은 패킷 페이로드를 검사하지 않습니다. Agent는 NetFlow v9 또는 IPFIX 레코드에서 장치가 분류한(Cisco NBAR2 또는 Palo Alto Networks App-ID 사용) 애플리케이션을 읽습니다.
 
-소스 또는 목적지 IP 주소와 연결된 호스트 이름에 대한 DNS 조회를 수행하기 위해 Reverse DNS 개인 IP 보강을 활성화합니다. 활성화되면 Agent는 개인 주소 범위 내의 소스 및 목적지 IP에 대해 Reverse DNS 조회를 수행하여 해당 호스트 이름으로 NetFlow 레코드를 보강합니다.
+DPI를 사용하면 IP 주소나 포트를 애플리케이션에 수동으로 매핑할 필요가 없습니다. DPI를 사용하려면 Datadog Agent와 네트워크 장치를 모두 구성해야 합니다.
 
-기본적으로 [`datadog.yaml` 파일][7]의 Reverse DNS IP 보강은 비활성화되어 있습니다. 활성화하려면 이 페이지의 [구성](#configuration) 섹션을 참조하세요.
+#### Agent 구성 {#configure-the-agent}
 
-Reverse DNS IP 보강과 관련된 흐름을 찾으려면 {{< ui >}}\+ Filter{{< /ui >}} 메뉴에서 DNS를 검색하세요.
+[`datadog.yaml`][3] 파일에서 DPI 지원 장치로부터 흐름을 수신하는 각 리스너에 `enable_dpi: true`을 설정합니다. DPI는 `netflow9` 및 `ipfix` 리스너에서만 지원됩니다. DPI는 `netflow5` 또는 `sflow5` 리스너에서 지원되지 않습니다.
 
-{{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="역 DNS 목적지 및 소스 패싯을 표시하도록 향상된 필터 메뉴" width="100%" >}}
+```yaml
+network_devices:
+  netflow:
+    enabled: true
+    listeners:
+      - flow_type: netflow9
+        port: 2055
+        enable_dpi: true
+      - flow_type: ipfix
+        port: 4739
+        enable_dpi: true
+```
 
-**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [예시 Agent 구성 파일][7]의 `reverse_dns_enrichment` 섹션을 참조하세요.
+변경 사항을 저장한 후 [Agent를 재시작][4]합니다.
 
-## IP 세부정보 {#ip-details}
+#### Cisco NBAR2 구성 {#configure-cisco-nbar2}
+
+Cisco NBAR2(Next Generation Network-Based Application Recognition)는 NetFlow v9 및 IPFIX에서 지원됩니다. Cisco 장치에서 NBAR2 애플리케이션 데이터를 내보내려면 다음 단계를 따르세요.
+
+1. 분류하려는 각 인터페이스에서 NBAR2 프로토콜 검색을 활성화합니다.
+
+   ```text
+   configure terminal
+   interface <INTERFACE>
+    ip nbar protocol-discovery
+   exit
+   ```
+
+2. 흐름 레코드에 `match application name` 필드를 추가합니다. 그러면 장치가 각 흐름과 함께 애플리케이션 ID를 내보냅니다.
+
+   ```text
+   configure terminal
+   flow record <RECORD_NAME>
+    match application name
+   exit
+   ```
+
+3. 흐름 익스포터에 애플리케이션 표 옵션을 추가합니다. 장치는 각 애플리케이션 ID를 애플리케이션 이름 및 설명에 매핑하는 표를 주기적으로 보냅니다.
+
+   ```text
+   configure terminal
+   flow exporter <EXPORTER_NAME>
+    option application-table timeout 60
+   exit
+   ```
+
+   제한 시간 값은 초 단위입니다.
+
+4. (선택 사항) 흐름에 애플리케이션 세부 정보를 더 추가하려면 흐름 익스포터에 애플리케이션 속성 옵션을 추가합니다:
+
+   ```text
+   configure terminal
+   flow exporter <EXPORTER_NAME>
+    option application-attributes
+   exit
+   ```
+
+   그러면 Datadog이 애플리케이션 카테고리, 하위 카테고리, 그룹, 트래픽 클래스, 비즈니스 관련성, 애플리케이션 세트, 애플리케이션 제품군, 그리고 해당 애플리케이션이 P2P, 터널링 또는 암호화를 사용하는지 여부를 사용하여 흐름을 보강합니다.
+
+**참고**:
+
+- 애플리케이션 ID는 장치의 NBAR 프로토콜 팩 및 엔진 버전에 따라 다르므로 익스포터마다 고유합니다. Agent는 각 익스포터에 대해 별도의 애플리케이션 표를 유지합니다.
+- Agent는 익스포터가 마지막으로 전송한 시점부터 1시간 동안 각 애플리케이션 표 항목을 유지합니다. 익스포터의 모든 흐름에서 애플리케이션 이름을 유지하려면 `option application-table` 제한 시간을 3,600초 미만으로 설정하세요.
+
+#### Palo Alto Networks App-ID 구성 {#configure-palo-alto-networks-app-id}
+
+Palo Alto Networks App-ID는 NetFlow v9에서 지원됩니다. Palo Alto Networks 방화벽은 각 흐름 레코드에 애플리케이션 이름을 전송하므로 애플리케이션 표가 필요하지 않습니다.
+
+App-ID 데이터를 내보내려면 방화벽의 NetFlow 서버 프로필에서 {{< ui >}}PAN-OS Field Types{{< /ui >}} 옵션을 활성화하세요. 자세한 내용은 Palo Alto Networks [NetFlow Monitoring 설명서][12]를 참조하세요.
+
+### 애플리케이션 이름 할당 {#application-name-assignment}
+
+Datadog은 흐름의 각 엔드포인트(소스 및 목적지, 또는 개시자 및 응답자)에 애플리케이션 이름을 할당합니다. 각 이름은 이 목록에서 일치하는 항목이 있는 첫 번째 소스에서 가져옵니다.
+
+1. [커스텀 IP 보강](#custom-ip-enrichment) 매핑
+2. [커스텀 포트 보강](#custom-port-enrichment) 매핑
+3. [심층 패킷 검사(DPI)](#deep-packet-inspection), 응답자 전용(연결을 수신하는 엔드포인트, 일반적으로 서버)
+4. [역방향 DNS](#reverse-dns-private-ip-enrichment) 호스트 이름
+5. GeoIP 자율 시스템(AS) 도메인
+6. [기본 포트 보강](#default-port-enrichment)(IANA 포트 매핑)
+7. `unknown`, 다른 소스가 일치하지 않는 경우
+
+DPI는 응답자에게만 적용됩니다. 개시자의 경우 Datadog이 목록에서 다음으로 일치하는 소스를 사용합니다. 개시자와 응답자에 대한 자세한 내용은 [대화 스티칭](#conversation-stitching) 섹션을 참조하세요.
+
+Datadog은 동일한 순서를 사용하여 전체 흐름에 `application_name` 하나를 할당합니다. 각 단계에서 Datadog은 개시자보다 응답자를 먼저 확인합니다.
+
+## IP 세부 정보 {#ip-details}
 
 **대화** 보기에서 목적지 IP의 공용 IP 주소를 볼 수 있습니다. IP 위에 마우스를 올리면 IP에 대한 풍부한 메타데이터와 {{< ui >}}View Related Network Connections{{< /ui >}}로 이동하는 링크가 표시되며, 여기에서 연결 상태를 더 자세히 확인할 수 있습니다.
 
-{{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="IP 주소 위에 마우스를 올리면 IP 세부정보와 관련 네트워크 연결 보기를 표시합니다." width="100%" >}}
+{{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="IP 주소 위에 마우스를 올리면 IP 세부 정보와 관련 네트워크 연결 보기를 표시합니다." width="100%" >}}
+
+## 애플리케이션 {#applications}
+
+[NetFlow 페이지][5]의 {{< ui >}}Applications{{< /ui >}} 섹션은 네트워크에서 가장 많은 트래픽을 생성하는 애플리케이션을 보여줍니다. 이를 사용하여 대역폭 사용량을 늘리거나 성능 문제 또는 혼잡을 일으키는 애플리케이션을 식별하세요.
+
+{{< img src="network_device_monitoring/netflow/netflow_top_applications.png" alt="Top Applications 원형 차트와 비트 전송률, 패킷 전송률, 총 바이트 수가 표시된 애플리케이션 표를 보여주는 NetFlow 페이지의 Applications 섹션" width="100%" >}}
+
+애플리케이션별로 NetFlow 데이터를 필터링하려면 {{< ui >}}Bidirectional{{< /ui >}} 뷰에서 {{< ui >}}Initiator Application{{< /ui >}} 및 {{< ui >}}Responder Application{{< /ui >}} 필터를 사용하거나 {{< ui >}}Unidirectional{{< /ui >}} 뷰에서 {{< ui >}}Source Application{{< /ui >}} 및 {{< ui >}}Destination Application{{< /ui >}} 필터를 사용하세요.
+
+단일 장치를 통과하는 트래픽에 대한 상위 애플리케이션을 보려면 장치 페이지를 열고 {{< ui >}}Traffic{{< /ui >}} 탭을 선택하세요.
+
+Datadog은 여러 보강 소스를 통해 애플리케이션 이름을 할당한 다음, 애플리케이션 이름별로 흐름을 그룹화하여 {{< ui >}}Applications{{< /ui >}} 섹션을 구성합니다. 소스 목록과 Datadog이 이를 확인하는 순서는 [애플리케이션 이름 할당](#application-name-assignment) 섹션을 참조하세요.
+
+`unknown`으로 레이블이 지정된 흐름 수를 줄이려면 지원되는 Cisco 및 Palo Alto Networks 장치에서 [심층 패킷 검사](#deep-packet-inspection)를 설정하거나 [커스텀 IP](#custom-ip-enrichment) 및 [커스텀 포트](#custom-port-enrichment) 보강을 추가하세요.
 
 ## 흐름 다이어그램 {#flow-diagram}
 
@@ -139,15 +265,15 @@ NetFlow용 동적 테스트는 NetFlow 트래픽을 수집하는 Agent에서 Net
 
 NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`가 필요합니다. NetFlow용 동적 테스트를 설정하려면 [Network Path 설정][11]을 참조하세요.
 
-## NetFlow 모니터링 {#netflow-monitor}
+## NetFlow 모니터 {#netflow-monitor}
 
-어느 보기에서든 {{< ui >}}Create Monitor{{< /ui >}} 아이콘을 클릭하여 [NetFlow 모니터][6]를 생성합니다. 모니터링을 생성할 때 장치 관점에서 소스 IP 또는 대상 IP와 관련된 다음 패싯을 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
+어느 보기에서든 {{< ui >}}Create Monitor{{< /ui >}} 아이콘을 클릭하여 [NetFlow 모니터][6]를 생성합니다. 모니터를 생성할 때 장치 관점에서 소스 IP 또는 목적지 IP와 관련된 다음 필드를 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
 
-{{< img src="network_device_monitoring/netflow/create_monitor.png" alt="모니터링 생성 링크가 강조 표시된 NetFlow 모니터링의 흐름 뷰." width="100%" >}}
+{{< img src="network_device_monitoring/netflow/create_monitor.png" alt="모니터 생성 링크가 강조 표시된 NetFlow Monitoring의 흐름 뷰." width="100%" >}}
 
 ### 인터페이스 정보 {#interface-information}
 
-다음 필드는 수신 및 송신 인터페이스에 대한 세부정보를 나타냅니다.
+다음 필드는 수신 및 송신 인터페이스에 대한 세부 정보를 나타냅니다.
 
 | 필드 이름 | 필드 설명 |
 |---|---|
@@ -171,15 +297,15 @@ NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`가 필요�
 | 장치 네임스페이스 | 장치의 네임스페이스입니다. |
 | 장치 공급업체 | 장치의 공급업체입니다. |
 
-### 흐름 세부정보 {#flow-details}
+### 흐름 세부 정보 {#flow-details}
 
 다음 필드는 네트워크 플로우의 특성을 나타냅니다.
 
 | 필드 이름 | 필드 설명 |
 |---|---|
 | 방향 | 흐름이 인바운드인지 아웃바운드인지를 나타냅니다. |
-| 시작 시간 | 소스 IP 주소와 대상 IP 주소 사이의 첫 번째 네트워크 패킷의 타임스탬프입니다. |
-| 종료 시간 | 소스 IP 주소와 대상 IP 주소 사이의 마지막 네트워크 패킷의 타임스탬프입니다. |
+| 시작 시간 | 소스 IP 주소와 목적지 IP 주소 사이의 첫 번째 네트워크 패킷의 타임스탬프입니다. |
+| 종료 시간 | 소스 IP 주소와 목적지 IP 주소 사이의 마지막 네트워크 패킷의 타임스탬프입니다. |
 | Ether Type | Ethernet 프레임 캡슐화 유형(IPv4 또는 IPv6)입니다. |
 | 흐름 유형 | NetFlow 데이터 형식의 유형(IPFIX, sFlow5, NetFlow5, NetFlow9, Unknown). |
 | IP 프로토콜 | 통신에 사용되는 프로토콜(예: ICMP, TCP, UDP). |
@@ -188,38 +314,38 @@ NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`가 필요�
 | 바이트 | 전송된 총 바이트 수. |
 | 패킷 | 전송된 총 패킷 수. |
 
-필드 외에도 기본 패싯을 사용하여 NetFlow 대상 및 소스 IP 주소를 기반으로 트래픽 패턴 분석을 시작할 수도 있습니다.
+필드 외에도 기본 패싯을 사용하여 NetFlow 목적지 및 소스 IP 주소를 기반으로 트래픽 패턴 분석을 시작할 수도 있습니다.
 
-### NetFlow 대상 IP 패싯 {#netflow-destination-ip-facets}
+### NetFlow 목적지 IP 패싯 {#netflow-destination-ip-facets}
 
 | 패싯 이름 | 패싯 설명 |
 |---|---|
-| Destination AS Domain | 대상 IP가 속한 Autonomous System(AS)과 연결된 도메인입니다. |
-| Destination AS Name | 대상 IP가 속한 Autonomous System(AS)의 이름입니다. |
-| Destination AS Number | 대상 IP가 속한 Autonomous System(AS)에 할당된 번호입니다. |
-| Destination AS Route | 대상 IP가 속한 Autonomous System(AS)과 관련된 경로 정보입니다. |
-| Destination AS Type | 대상 IP가 속한 Autonomous System(AS) 유형(예: transit, customer, peer)입니다. |
-| Destination Application Name | 대상 IP와 연결된 애플리케이션의 이름입니다. |
-| Destination City Name | 대상 IP와 연결된 도시의 이름입니다. |
-| Destination Cloud Provider Name | 대상 IP와 연결된 클라우드 제공업체의 이름입니다. |
-| Destination Cloud Provider Region | 대상 IP와 연결된 클라우드 제공업체의 리전입니다. |
-| Destination Cloud Provider Service | 대상 IP와 연결된 클라우드 제공업체가 제공하는 서비스입니다. |
-| Destination Continent Code | 대상 IP와 연결된 대륙을 나타내는 코드입니다. |
-| Destination Continent Name | 대상 IP와 연결된 대륙의 이름입니다. |
-| Destination Country ISO Code | 대상 IP와 연결된 국가를 나타내는 ISO 코드입니다. |
-| Destination Country Name | 대상 IP와 연결된 국가의 이름입니다. |
-| Destination IP | 대상 IP 주소입니다. |
-| Destination Latitude | 대상 IP와 연결된 위도 좌표입니다. |
-| Destination Longitude | 대상 IP와 연결된 경도 좌표입니다. |
-| Destination MAC | 대상 IP와 연결된 Media Access Control(MAC) 주소입니다. |
-| Destination Mask | 대상 IP와 연결된 서브넷 마스크입니다. |
-| Destination Port | 대상 포트 번호입니다. |
-| Destination Reverse DNS Hostname | 대상 IP와 연결된 Reverse DNS 호스트 이름입니다. |
-| Destination Subdivision ISO Code | 대상 IP와 연결된 하위 구역(예: 시/도)을 나타내는 ISO 코드입니다. |
-| Destination Subdivision Name | 대상 IP와 연결된 하위 구역(예: 시/도)의 이름입니다. |
-| Destination Timezone | 대상 IP와 연결된 시간대입니다. |
+| Destination AS Domain | 목적지 IP가 속한 Autonomous System(AS)과 연결된 도메인입니다. |
+| Destination AS Name | 목적지 IP가 속한 Autonomous System(AS)의 이름입니다. |
+| Destination AS Number | 목적지 IP가 속한 Autonomous System(AS)에 할당된 번호입니다. |
+| Destination AS Route | 목적지 IP가 속한 Autonomous System(AS)과 관련된 경로 정보입니다. |
+| Destination AS Type | 목적지 IP가 속한 Autonomous System(AS) 유형(예: transit, customer, peer)입니다. |
+| Destination Application Name | 목적지 IP와 연결된 애플리케이션의 이름입니다. |
+| Destination City Name | 목적지 IP와 연결된 도시의 이름입니다. |
+| Destination Cloud Provider Name | 목적지 IP와 연결된 클라우드 제공업체의 이름입니다. |
+| Destination Cloud Provider Region | 목적지 IP와 연결된 클라우드 제공업체의 리전입니다. |
+| Destination Cloud Provider Service | 목적지 IP와 연결된 클라우드 제공업체가 제공하는 서비스입니다. |
+| Destination Continent Code | 목적지 IP와 연결된 대륙을 나타내는 코드입니다. |
+| Destination Continent Name | 목적지 IP와 연결된 대륙의 이름입니다. |
+| Destination Country ISO Code | 목적지 IP와 연결된 국가를 나타내는 ISO 코드입니다. |
+| Destination Country Name | 목적지 IP와 연결된 국가의 이름입니다. |
+| Destination IP | 목적지 IP 주소입니다. |
+| Destination Latitude | 목적지 IP와 연결된 위도 좌표입니다. |
+| Destination Longitude | 목적지 IP와 연결된 경도 좌표입니다. |
+| Destination MAC | 목적지 IP와 연결된 Media Access Control(MAC) 주소입니다. |
+| Destination Mask | 목적지 IP와 연결된 서브넷 마스크입니다. |
+| Destination Port | 목적지 포트 번호입니다. |
+| Destination Reverse DNS Hostname | 목적지 IP와 연결된 Reverse DNS 호스트 이름입니다. |
+| Destination Subdivision ISO Code | 목적지 IP와 연결된 하위 구역(예: 시/도)을 나타내는 ISO 코드입니다. |
+| Destination Subdivision Name | 목적지 IP와 연결된 하위 구역(예: 시/도)의 이름입니다. |
+| Destination Timezone | 목적지 IP와 연결된 시간대입니다. |
 
-### NetFlow Source IP 패싯 {#netflow-source-ip-facets}
+### NetFlow 소스 IP 패싯 {#netflow-source-ip-facets}
 
 | 패싯 이름 | 패싯 설명 |
 |---|---|
@@ -255,8 +381,8 @@ NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`가 필요�
 대화 스티칭을 사용하면 다음을 수행할 수 있습니다.
 
 - 두 엔드포인트 간에 교환된 총 트래픽을 별도의 방향 흐름이 아닌 하나의 대화로 보기
-- 소스 및 대상 위젯이 정확한 역할을 반영하도록 실제 시작자와 응답자를 식별합니다.
-- 서버가 잘못된 상위 소스로 나타나는 노이즈를 제거합니다.
+- 소스 및 목적지 위젯이 정확한 역할을 반영하도록 실제 개시자와 응답자를 식별합니다.
+- 서버가 주요 소스로 잘못 표시되는 노이즈를 제거합니다.
 
 스티칭된(양방향) 보기와 스티칭되지 않은(단방향) 보기 사이를 전환하려면 엔드포인트 기반 NetFlow 보기로 이동하여 시간 선택기 아래의 {{< ui >}}Bidirectional{{< /ui >}} 토글을 사용하세요.
 
@@ -302,17 +428,17 @@ network_devices:
 
 `max_flows_per_flush_interval * (minutes_per_day / flush_interval_minutes)`
 
-예를 들어, 플러시당 `10,000` 흐름과 5분 플러시 간격을 사용할 경우:
+예를 들어, 플러시당 `10,000`개의 흐름과 5분 플러시 간격을 사용할 경우:
 
 `10,000 * (1440 / 5) = 2,880,000 flows/day`
 
 ### 예상 동작 {#expected-behavior}
 
-- **상위 통신자 우선 처리:** 이는 대량 트래픽에 집중하는 워크플로에 가장 적합합니다(예: 대역폭 드라이버 및 소음 링크).
-- **저용량 흐름에 대한 가시성 축소:** 트래픽이 적은 소스/대상 쌍은 한도에 도달하면 나타나지 않을 수 있습니다.
+- **상위 통신자 우선 처리:** 이는 대량 트래픽에 집중하는 워크플로에 가장 적합합니다(예: 대역폭 사용량을 높이는 요인 및 트래픽이 과도한 링크).
+- **저용량 흐름에 대한 가시성 축소:** 트래픽이 적은 소스/목적지 쌍은 한도에 도달하면 나타나지 않을 수 있습니다.
 - **Agent별 동작:** 한도는 각 Agent에 독립적으로 적용됩니다. 여러 Agent가 동일한 대화에 대한 트래픽을 감지하는 경우, 잘림 전에 전역적으로 집계되지 않습니다.
 
-### 모니터링 잘림 {#monitoring-truncation}
+### 잘림 모니터링 {#monitoring-truncation}
 
 흐름 제한이 활성화되면 Agent는 유지되는 데이터와 드롭되는 데이터의 양을 이해하는 데 사용할 수 있는 메트릭을 제공합니다.
 
@@ -328,7 +454,7 @@ network_devices:
 ## 문제 해결 {#troubleshooting}
 
 ### NetFlow 패킷 드롭 {#netflow-packet-drops}
-NetFlow 패킷 드롭은 초당 NetFlow 패킷 수가 많을 때(일반적으로 50,000개 이상) 발생할 수 있습니다. 다음 단계는 NetFlow 패킷 드롭을 식별하고 완화하는 데 도움이 될 수 있습니다.
+NetFlow 패킷 드롭은 초당 NetFlow 패킷 수가 많을 때(일반적으로 50,000개 초과) 발생할 수 있습니다. 다음 단계는 NetFlow 패킷 드롭을 식별하고 완화하는 데 도움이 될 수 있습니다.
 
 #### 패킷 드롭 식별 {#identifying-packet-drops}
 
@@ -385,3 +511,5 @@ NetFlow 패킷 드롭은 초당 NetFlow 패킷 수가 많을 때(일반적으로
 [9]: /ko/network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
 [11]: /ko/network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+[12]: https://docs.paloaltonetworks.com/ngfw/administration/monitoring/netflow-monitoring/netflow-templates
+[13]: https://app.datadoghq.com/devices/settings/enrichment/port

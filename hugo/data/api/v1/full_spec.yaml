@@ -33,6 +33,27 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
+      headers:
+        X-RateLimit-Limit:
+          description: Number of requests allowed in the rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Period:
+          description: Length of the rate-limit period in seconds.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Remaining:
+          description: Number of requests remaining in the current rate-limit period.
+          schema:
+            format: int64
+            type: integer
+        X-RateLimit-Reset:
+          description: Number of seconds until the current rate-limit period resets.
+          schema:
+            format: int64
+            type: integer
   schemas:
     APIErrorResponse:
       description: Error response object.
@@ -4229,6 +4250,13 @@ components:
             Only VM instance resources that apply to specified filters are imported into Datadog.
             **Note:** This field is deprecated. Instead, use `monitored_resource_configs` with `type=gce_instance`
           example: "$KEY1:$VALUE1,$KEY2:$VALUE2"
+          type: string
+        id:
+          description: |-
+            The Datadog-assigned ID of the GCP integration account.
+          example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          format: uuid
+          readOnly: true
           type: string
         is_cspm_enabled:
           description: |-
@@ -16741,6 +16769,11 @@ components:
           type: array
         description:
           description: The description of the widget.
+          type: string
+        palette:
+          description: >-
+            Color palette to apply to the widget. Supported values include `datadog16`, `datadog32`, `semantic`, `classic`, and `dog_classic`. A guide to the available color palettes can be found at https://docs.datadoghq.com/dashboards/guide/widget_colors
+          example: datadog16
           type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"

@@ -1,6 +1,6 @@
 ---
-description: Ingérez des valeurs de métriques personnalisées horodatées de plus d’une
-  heure, jusqu’à la fin de votre période de rétention des métriques.
+description: Ingérez des valeurs de métriques personnalisées dont les horodatages
+  remontent à plus d’une heure, dans la limite de votre période de rétention des métriques.
 further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: Blog
@@ -16,25 +16,25 @@ further_reading:
   tag: Blog
   text: Surveillez les performances du système sur des périodes plus longues avec
     des métriques historiques
-title: Ingestion historique de métriques
+title: Historical Metrics Ingestion
 ---
 {{< jqmath-vanilla >}}
 
 ## Présentation {#overview}
 
-L’activation de Historical Metrics Ingestion vous permet de collecter des valeurs de **métriques personnalisées** dont l’horodatage remonte à plus d’une heure avant leur soumission, sans dépasser votre période totale de rétention des métriques (15 mois par défaut).
+L’activation de Historical Metrics Ingestion vous permet de collecter des valeurs de **métriques personnalisées** dont les horodatages remontent à plus d’une heure avant leur soumission, mais ne dépassent pas votre période totale de rétention des métriques (15 mois par défaut).
 
-L’activation de Historical Metrics Ingestion pour vos métriques peut être utile dans divers cas d’utilisation, notamment pour récupérer après une panne, corriger des valeurs erronées et gérer les retards liés à l’IoT.
+L’activation de Historical Metrics Ingestion pour vos métriques peut être utile dans divers cas, comme la récupération après une panne, la correction de valeurs erronées et la gestion des retards liés à l’Internet des objets (IoT).
 
 ## Qu’est-ce que Historical Metrics Ingestion ? {#what-is-historical-metrics-ingestion}
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagramme montrant le flux d’ingestion lorsque Historical Metrics est activée" >}}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagramme montrant le flux d’ingestion lorsque Historical Metrics Ingestion est activé" >}}
 
-Datadog classe les *métriques historiques* comme des points de métrique dont l’horodatage remonte à plus d’une heure avant leur soumission. Si Historical Metrics Ingestion n’est pas activée, les valeurs d’une métrique dont l’horodatage remonte à plus d’une heure avant leur soumission ne sont pas ingérées.
+Datadog classe les *métriques historiques* comme des points de métrique dont les horodatages remontent à plus d’une heure avant leur soumission. Si Historical Metrics Ingestion n’est pas activé, les valeurs d’une métrique dont les horodatages remontent à plus d’une heure avant leur soumission ne sont pas ingérées.
 
-Par exemple, votre métrique (`exampleMetricA`) envoie une valeur à Datadog à 13 h 00 EST, et cette valeur est horodatée à 10 h 00 EST. Cette valeur de métrique est classée comme _historique_ car son horodatage est antérieur de 3 heures par rapport à l'heure de soumission.
+Par exemple, votre métrique (`exampleMetricA`) envoie une valeur à Datadog à 13 h 00 EST, et cette valeur porte l’horodatage 10 h 00 EST. Cette valeur de métrique est classée comme _historique_, car son horodatage précède l’heure de soumission de 3 heures.
 
-Lorsque Historical Metrics Ingestion est activée pour vos métriques, si vous soumettez à Datadog plusieurs valeurs ayant le même horodatage et la même combinaison tag-valeur, Datadog conserve la dernière valeur soumise. C'est-à-dire que si, pour le même horodatage, vous soumettez une métrique avec une valeur de X, et que vous envoyez également cette métrique avec une valeur de Y, la valeur la plus récemment soumise sera conservée.
+Lorsque Historical Metrics Ingestion est activé pour vos métriques, si vous soumettez à Datadog plusieurs valeurs ayant le même horodatage et la même combinaison tag-valeur, Datadog conserve la dernière valeur soumise. C'est-à-dire que si, pour le même horodatage, vous soumettez une métrique avec une valeur X, puis envoyez cette même métrique avec une valeur Y, la valeur la plus récemment soumise sera conservée.
 
 Vous pouvez commencer à ingérer des valeurs de métriques historiques en activant Historical Metrics Ingestion sur la [page Metrics Catalog][1] pour les types de métriques *comptes, taux et jauges*.  
 
@@ -42,13 +42,15 @@ Vous pouvez commencer à ingérer des valeurs de métriques historiques en activ
 
 ## Configuration {#configuration}
 
+L'activation ou la désactivation de Historical Metrics Ingestion, y compris via une configuration en masse, nécessite l'autorisation Historical Metrics Config Write ([`late_metrics_config_write`][6]).
+
 Pour activer l'ingestion de métriques historiques pour une métrique spécifique :
 1. Accédez à la [page Metrics Catalog][1].
 1. Cliquez sur le nom de la métrique pour laquelle vous souhaitez activer Historical Metrics Ingestion afin d'ouvrir le panneau latéral des détails de la métrique.
 1. Dans la section *Advanced* du panneau latéral, cliquez sur {{< ui >}}Configure{{< /ui >}}.
-1. Sélectionnez le bouton {{< ui >}}Enable historical metrics{{< /ui >}} et appuyez sur {{< ui >}}Save{{< /ui >}}.
+1. Sélectionnez le bouton bascule {{< ui >}}Enable historical metrics{{< /ui >}} et appuyez sur {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Page Metrics Catalog montrant le panneau des facettes Historical Metrics et la section Advanced d’un panneau de détails de métrique ouvert, avec l’option Enable historical metrics sélectionnée" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Page Metrics Catalog affichant le panneau des facettes Historical Metrics et la section Advanced d'un panneau de détails de métrique ouvert avec l'option Enable historical metrics sélectionnée" style="width:100%;" >}}
 
 ### Configuration en masse pour plusieurs métriques {#bulk-configuration-for-multiple-metrics}
 
@@ -56,10 +58,10 @@ Vous pouvez activer ou désactiver Historical Metrics Ingestion pour plusieurs m
 
 1. Accédez à la [page Metrics Catalog][1] et cliquez sur le menu déroulant {{< ui >}}Actions{{< /ui >}}.
 1. Sélectionnez {{< ui >}}Manage Historical Metrics{{< /ui >}}.
-1. Spécifiez un préfixe d'espace de nom de métrique pour sélectionner toutes les métriques correspondant à cet espace de nom.
-1. (Facultatif) Pour désactiver Historical Metrics Ingestion pour toutes les métriques de l'espace de nom, cliquez sur le bouton {{< ui >}}Historical metrics{{< /ui >}}.
+1. Spécifiez un préfixe d'espace de noms de métrique pour sélectionner toutes les métriques qui correspondent à cet espace de noms.
+1. (Facultatif) Pour désactiver Historical Metrics Ingestion pour toutes les métriques de l'espace de noms, cliquez sur le bouton bascule {{< ui >}}Historical metrics{{< /ui >}}.
 
-{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Bouton d'ingestion historique de métriques" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Bouton bascule d'ingestion de métriques historiques" >}}
 
 ## Soumission de métriques historiques {#historical-metrics-submission}
 
@@ -67,7 +69,7 @@ Après avoir activé Historical Metrics Ingestion, vous pouvez soumettre des val
 
 ### API {#api}
 
-Avec l'API, vous pouvez soumettre des valeurs de métriques avec des horodatages historiques dans la charge utile (à condition que le nom de la métrique ait déjà été activé pour accepter les métriques historiques via l'interface utilisateur décrite ci-dessus).
+Avec l'API, vous pouvez soumettre des valeurs de métriques avec des horodatages historiques dans la charge utile (tant que le nom de la métrique a déjà été activé pour accepter les métriques historiques via l'interface utilisateur décrite ci-dessus).
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -365,7 +367,7 @@ EOF
 
 ### Agent {#agent}
 
-Pour soumettre des métriques historiques avec l'Agent, assurez-vous d'avoir installé l'Agent en version 7.40.0 ou ultérieure. Cette version inclut une interface DogStatsD mise à jour, qui prend en charge **Java**, **GoLang** et **.NET**. Cela vous permet d'envoyer des points de métrique différés via l'Agent.
+Pour soumettre des métriques historiques avec l'Agent, assurez-vous d'avoir installé la version 7.40.0 ou une version ultérieure de l'Agent. Cette version inclut une interface DogStatsD mise à jour, qui prend en charge **Java**, **GoLang** et **.NET**. Cela vous permet d'envoyer des points de métriques différés via l'Agent.
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
@@ -453,34 +455,34 @@ Historical Metrics Ingestion présente une latence variable selon l'ancienneté 
 
 | Métrique différée de :   | Latence d'ingestion                         |
 |----------------------|-------------------------------------------|
-| 1 à 12 heures           | Ingestion quasi en temps réel (1 heure maximum) |
-| 12 heures à 30 jours   | Jusqu'à 14 heures de latence                    |
+| 1-12 heures           | Ingestion en temps quasi réel (1 heure maximum) |
+| 12 heures - 30 jours   | Jusqu'à 14 heures de latence                    |
 | Plus de 30 jours         | Plus de 14 heures de latence                     |
 
 ## Facturation de Historical Metrics Ingestion {#historical-metrics-ingestion-billing}
 
-Les métriques historiques sont comptabilisées et facturées en tant que métriques personnalisées indexées. Les métriques personnalisées facturables sont déterminées par l'**horodatage des métriques soumises**, indépendamment du fait qu'elles aient un horodatage d'aujourd'hui ou remontant à 15 mois. Tant que cette combinaison de nom de métrique et de valeur de tag transmet **une valeur quelconque** (quel que soit l'horodatage), elle est considérée comme active pendant l'heure où elle a été soumise. 
+Les métriques historiques sont comptabilisées et facturées en tant que métriques personnalisées indexées. Les métriques personnalisées facturables sont déterminées par l'**horodatage des métriques soumises**, qu'elles soient horodatées à la date du jour ou à une date remontant à 15 mois. Tant que cette combinaison de nom de métrique et de valeur de tag transmet activement **une quelconque** valeur (indépendamment de l'horodatage), elle est considérée comme active pendant l'heure où elle a été soumise. 
 
 L'exemple suivant suppose :
-- 3 000 combinaisons uniques de tags et de valeurs
-- 1 500 métriques en temps réel
-- 1 500 métriques historiques 
+- 3000 combinaisons uniques de tag-valeur
+- 1500 métriques en temps réel
+- 1500 métriques historiques 
 - 720 heures dans le mois (30 jours)
 - Coût des métriques personnalisées de 5 $ pour 100 métriques
 
 $(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
-Suivez vos métriques historiques indexées dans la section Usage Summary de la [page Plan and Usage][4].
+Suivez vos métriques historiques indexées via la section Usage Summary de la [page Plan and Usage][4].
 
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Section Usage Summary de la page Plan and Usage, qui affiche à la fois les métriques personnalisées indexées et les métriques historiques indexées" style="width:100%;" >}}
 
-Pour plus d'informations, consultez la documentation sur la [facturation des métriques personnalisées][3].
+Pour plus d'informations, consultez la documentation sur la [facturation des Custom Metrics][3].
 
-### Facturation selon la tarification Metric Name {#billing-under-metric-name-pricing}
+### Facturation selon la tarification par Metric Name {#billing-under-metric-name-pricing}
 
-Si votre organisation utilise la [tarification Metric Name][5] au lieu de la tarification par cardinalité, la facturation HMI diffère. L'utilisation HMI est calculée en fonction de l'heure d'ingestion plutôt que de l'horodatage d'origine de la métrique. Chaque point de données HMI contribue à la fois au volume ingéré et au volume indexé.
+Si votre organisation utilise la [tarification par Metric Name][5] au lieu de la tarification par cardinalité, la facturation HMI diffère. L'utilisation HMI est calculée en fonction de l'heure d'ingestion plutôt que de l'horodatage d'origine de la métrique. Chaque point de données HMI contribue à la fois au volume ingéré et au volume indexé.
 
-Pour plus de détails sur le modèle de tarification Metric Name, consultez [Tarification Metric Name pour Custom Metrics][5].
+Pour plus de détails sur le modèle de tarification Metric Name, consultez [Metric Name Pricing pour les Custom Metrics][5].
 
 ## Pour aller plus loin {#further-reading}
 
@@ -491,3 +493,4 @@ Pour plus de détails sur le modèle de tarification Metric Name, consultez [Tar
 [3]: /fr/account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /fr/account_management/billing/metric_name_pricing/
+[6]: /fr/account_management/rbac/permissions/#metrics
