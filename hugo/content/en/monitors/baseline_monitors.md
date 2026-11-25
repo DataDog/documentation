@@ -174,7 +174,7 @@ To receive Baseline Monitor alerts:
 
 If the team of a monitor has no notification channels, the alert goes to no one.
 
-To stop all Baseline Monitor notifications for your organization, set the Baseline notification rule to inactive. If you delete the rule, Datadog creates it again.
+To stop all Baseline Monitor notifications for your organization, disable the Baseline notification rule. If you delete the rule, Datadog creates it again.
 
 ## View the monitors
 
