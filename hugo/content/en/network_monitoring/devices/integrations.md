@@ -57,6 +57,20 @@ The following integrations cover **wireless networking platforms** that support 
 | [Juniper Mist](/integrations/juniper-mist/) (Preview) | Provides end-to-end visibility into cloud-managed Juniper Mist wireless, wired, and WAN network infrastructure, including access points, switches, and gateways through the Juniper Mist API. | Crawler-based |
 | [Aruba Central](/integrations/aruba-central/) (Preview) | Monitors Aruba Central-managed network devices, including access points and switches for health and performance metrics through the Aruba Central API. | Crawler-based |
 
+## Network and security management
+
+The following integrations cover **enterprise network management and firewall platforms** that support NDM collection. These integrations provide visibility into device inventory, health, and performance across campus, branch, and security infrastructure.
+
+{{< card-grid card_width="130px" >}}
+  {{< image-card href="/integrations/cisco-catalyst-center/" src="integrations_logos/cisco_small.svg" alt="cisco catalyst center" >}}
+  {{< image-card href="/integrations/pan-firewall/" src="integrations_logos/palo-alto-panorama_small.svg" alt="palo alto networks panorama" >}}
+{{< /card-grid >}}
+
+| Integration | Summary | Collection type |
+|---|---|---|
+| [Cisco Catalyst Center](/integrations/cisco-catalyst-center/) (Preview) | Monitors switches, routers, wireless controllers, and access points managed by Cisco Catalyst Center, including device inventory, site and client health scores, and Assurance issues, through the Catalyst Center REST API. | Agent-based |
+| [Palo Alto Networks Panorama](/integrations/pan-firewall/#metrics) (Preview) | Discovers firewalls managed by Panorama and collects inventory, high availability, interface, tunnel, routing, and resource metrics from each firewall through the PAN-OS XML API. | Agent-based |
+
 ## Virtualization
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
