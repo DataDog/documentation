@@ -14,6 +14,21 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.26.2
+
+To upgrade to Worker version 2.26.2:
+
+- Docker: Run the `docker pull` command for the [2.26.2 image][73].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.26.2`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.26.2`.
+
+Worker version 2.26.2 gives you access to the following:
+
+#### Enhancements
+
+- Reduced network usage for Worker internal telemetry.
+
 ## Worker version 2.26.1
 
 To upgrade to Worker version 2.26.1:
@@ -1195,3 +1210,4 @@ Worker version 2.7.0 gives you access to the following:
 [70]: /observability_pipelines/processors/spike_protection/
 [71]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.1
 [72]: /observability_pipelines/log_anomaly_detection/
+[73]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.26.2

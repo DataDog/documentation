@@ -39,7 +39,7 @@ De forma predeterminada, Datadog detecta automáticamente las anomalías de cost
 
 Para personalizar la detección de anomalías:
 
-1. Desde la [pestaña {{< ui >}}Anomalies{{< /ui >}}][1], haga clic en {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Detection rules{{< /ui >}}.
+1. En la [pestaña {{< ui >}}Anomalies{{< /ui >}}][1], haga clic en {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Detection rules{{< /ui >}}.
 1. En el panel {{< ui >}}Configure Cost Anomalies{{< /ui >}}, seleccione un proveedor. Una marca de verificación indica que el proveedor utiliza configuraciones personalizadas, y un círculo vacío indica que utiliza la configuración predeterminada de Datadog.
 1. Ajuste las siguientes opciones de configuración para el proveedor seleccionado:
    - **Detection dimension**: La dimensión en la que Datadog detecta anomalías de costos (por ejemplo, servicio o descripción del cargo). Esta configuración es obligatoria.
@@ -121,13 +121,16 @@ Las notificaciones de anomalías en tiempo real requieren datos de costos estima
 
 Para configurar las notificaciones de anomalías en tiempo real:
 
-1. Desde la [pestaña {{< ui >}}Anomalies{{< /ui >}}][1], haga clic en {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
+1. En la [pestaña {{< ui >}}Anomalies{{< /ui >}}][1], haga clic en {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
+
+   {{< img src="cloud_cost/anomalies/real-time-notifications-form.png" alt="El formulario de notificaciones en tiempo real, con los proveedores de IA seleccionados y opciones para notificar por correo electrónico, Slack o Microsoft Teams." style="width:80;" >}}
+
 1. Seleccione {{< ui >}}AI providers{{< /ui >}} y active {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}}, o seleccione {{< ui >}}Cloud/SaaS providers{{< /ui >}} y active {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. La opción {{< ui >}}Cloud/SaaS providers{{< /ui >}} cubre AWS, Azure y Google Cloud.
 1. En {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, opcionalmente agrupe las alertas por hasta dos etiquetas y filtre el costo.
 1. Establezca el impacto de costo mínimo. Datadog envía una notificación solo cuando es probable que el costo de la anomalía durante las próximas 24 horas supere el mayor de los siguientes valores:
    - Un monto en la moneda de su organización: un número entero mayor que 0 (predeterminado: 500)
-   - Un porcentaje del costo base: del 0 al 100 % (predeterminado: 5 %)
-1. En {{< ui >}}Choose who to notify{{< /ui >}}, agregue direcciones de correo electrónico o canales de Slack.
+   - Un porcentaje del costo de referencia: del 0 al 100 % (predeterminado: 5 %)
+1. En {{< ui >}}Choose who to notify{{< /ui >}}, agregue direcciones de correo electrónico, canales de Slack o canales de Microsoft Teams.
 1. Haga clic en {{< ui >}}Save configuration{{< /ui >}}. Los cambios se aplican a las anomalías detectadas después de guardar.
 
 Las anomalías en tiempo real se envían solo como notificaciones. No aparecen en la pestaña {{< ui >}}Anomalies{{< /ui >}} y no afectan a las anomalías detectadas a partir de datos de facturación finalizados.

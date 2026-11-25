@@ -2,15 +2,19 @@
 aliases:
 - /fr/logs/workspaces/sql_reference
 - /fr/ddsql_reference/ddsql_default
-description: Référence complète pour la syntaxe DDSQL, les types de données, les fonctions,
-  les opérateurs et les instructions pour interroger les données Datadog avec SQL.
+description: Référence complète de la syntaxe DDSQL, des types de données, des fonctions,
+  des opérateurs et des instructions permettant d’interroger les données Datadog avec
+  SQL.
 further_reading:
-- link: bits_ai/mcp_server
+- link: mcp_server
   tag: Documentation
-  text: Serveur MCP Datadog
+  text: Datadog MCP Server
 - link: /ddsql_editor/
   tag: Documentation
   text: Éditeur DDSQL
+- link: https://learn.datadoghq.com/courses/getting-started-ddsql-editor
+  tag: Centre d'apprentissage
+  text: Prise en main de l'éditeur DDSQL
 products:
 - icon: ddsql
   name: Éditeur DDSQL
@@ -22,40 +26,41 @@ title: Référence DDSQL
 ---
 {{< product-availability >}}
 
-## Aperçu {#overview}
+## Présentation {#overview}
 
-DDSQL est SQL pour les données Datadog. Il implémente plusieurs opérations SQL standard, telles que `SELECT`, et permet des requêtes sur des données non structurées. Vous pouvez effectuer des actions comme obtenir exactement les données que vous souhaitez en écrivant votre propre instruction `SELECT`, ou interroger des tags comme s'ils étaient des colonnes de table standard.
+DDSQL est le langage SQL pour les données Datadog. Il implémente plusieurs opérations SQL standard, telles que `SELECT`, et permet d'effectuer des requêtes sur des données non structurées. Vous pouvez effectuer des actions telles qu’obtenir exactement les données que vous souhaitez en écrivant votre propre instruction `SELECT`, ou interroger des tags comme s’il s’agissait de colonnes de tableau standard.
 
-Vous pouvez exécuter des requêtes DDSQL à partir d'agents AI en utilisant l'ensemble d'outils [Datadog MCP Server][10] `ddsql` (Aperçu).
+Vous pouvez exécuter des requêtes DDSQL depuis des agents IA en utilisant la boîte à outils [Datadog MCP Server][10] `ddsql` (en avant-première).
 
-Cette documentation couvre le support SQL disponible et inclut :
+Cette documentation couvre la prise en charge SQL disponible et inclut :
 - [Syntaxe compatible avec PostgreSQL](#syntax)
 - [Types de données](#data-types)
 - [Littéraux de type](#type-literals)
 - [Tableaux](#arrays)
 - [Fonctions SQL](#functions)
 - [Expressions régulières](#regular-expressions)
-- [Fonctions de fenêtre](#window-functions)
+- [Fonctions de fenêtrage](#window-functions)
 - [Fonctions JSON](#json-functions-and-operators)
 - [Fonctions d'adresse réseau](#network-address-functions-and-operators)
-- [Fonctions de table](#table-functions)
+- [Fonctions de tableau](#table-functions)
 - [Tags](#tags)
+- [Variables de modèle](#template-variables)
 
 
-{{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Exemple de cellule de travail avec syntaxe SQL" style="width:100%;" >}}
+{{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Exemple de cellule d'espace de travail avec syntaxe SQL" style="width:100%;" >}}
 
 ## Syntaxe {#syntax}
 
-La syntaxe SQL suivante est prise en charge :
+La syntaxe SQL suivante est prise en charge :
 
 `SELECT (DISTINCT)` (DISTINCT: Optionnel)
-: Récupère des lignes d'une base de données, en `DISTINCT` filtrant les enregistrements en double.
+: Récupère des lignes d’une base de données, `DISTINCT` permettant d’éliminer les enregistrements en double.
 
     {{< code-block lang="sql" >}}SELECT DISTINCT customer_id
 FROM orders {{< /code-block >}}
 
 `JOIN`
-: Combine des lignes de deux tables ou plus en fonction d'une colonne liée entre elles. Prend en charge FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.
+: Combine des lignes de deux tableaux ou plus en fonction d’une colonne qui leur est commune. Prend en charge FULL JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN.
 
     {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
@@ -63,7 +68,7 @@ JOIN customers
 ON orders.customer_id = customers.customer_id {{< /code-block >}}
 
 `GROUP BY`
-: Regroupe les lignes ayant les mêmes valeurs dans des colonnes spécifiées en lignes de résumé.
+: Regroupe les lignes ayant les mêmes valeurs dans des colonnes spécifiées en lignes récapitulatives.
 
     {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
@@ -75,7 +80,7 @@ GROUP BY product_id {{< /code-block >}}
     {{< code-block lang="sql" >}}SELECT first_name || ' ' || last_name AS full_name
 FROM employees {{< /code-block >}}
 
-`WHERE` (Inclut le support pour `LIKE`, `IN`, `ON`, `OR` filtres)
+`WHERE` (Inclut la prise en charge des filtres `LIKE`, `IN`, `ON`, `OR`)
 : Filtre les enregistrements qui répondent à une condition spécifiée.
 
     {{< code-block lang="sql" >}}SELECT *
@@ -83,7 +88,7 @@ FROM employees
 WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}}
 
 `CASE`
-: Fournit une logique conditionnelle pour renvoyer différentes valeurs en fonction des conditions spécifiées.
+: Fournit une logique conditionnelle pour renvoyer différentes valeurs en fonction de conditions spécifiées.
 
     {{< code-block lang="sql" >}}SELECT order_id,
   CASE
@@ -93,7 +98,7 @@ WHERE department = 'Sales' AND name LIKE 'J%' {{< /code-block >}}
 FROM orders {{< /code-block >}}
 
 `WINDOW`
-: Effectue un calcul sur un ensemble de lignes de table qui sont liées à la ligne actuelle.
+: Effectue un calcul sur un ensemble de lignes de tableau liées à la ligne actuelle.
 
     {{< code-block lang="sql" >}}SELECT
   timestamp,
@@ -111,28 +116,28 @@ FROM orders
 WHERE delivery_date IS NULL {{< /code-block >}}
 
 `LIMIT`
-: Spécifie le nombre maximum d'enregistrements à renvoyer.
+: Spécifie le nombre maximal d'enregistrements à renvoyer.
 
     {{< code-block lang="sql" >}}SELECT *
 FROM customers
 LIMIT 10 {{< /code-block >}}
 
 `OFFSET`
-: Ignore un nombre spécifié d'enregistrements avant de commencer à renvoyer des enregistrements de la requête.
+: Ignore un nombre spécifié d'enregistrements avant de commencer à renvoyer les enregistrements de la requête.
 
     {{< code-block lang="sql" >}}SELECT *
 FROM employees
 OFFSET 20 {{< /code-block >}}
 
 `ORDER BY`
-: Trie l'ensemble des résultats d'une requête par une ou plusieurs colonnes. Inclut ASC, DESC pour l'ordre de tri.
+: Trie le jeu de résultats d'une requête par une ou plusieurs colonnes. Inclut ASC, DESC pour l'ordre de tri.
 
     {{< code-block lang="sql" >}}SELECT *
 FROM sales
 ORDER BY sale_date DESC {{< /code-block >}}
 
 `HAVING`
-: Filtre les enregistrements qui répondent à une condition spécifiée après regroupement.
+: Filtre les enregistrements qui répondent à une condition spécifiée après le regroupement.
 
     {{< code-block lang="sql" >}}SELECT product_id, SUM(quantity)
 FROM sales
@@ -147,7 +152,7 @@ FROM orders
 WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}}
 
 `USING`
-: Cette clause est un raccourci pour les jointures où les colonnes de jointure ont le même nom dans les deux tables. Elle prend une liste de ces colonnes séparées par des virgules et crée une condition d'égalité distincte pour chaque paire correspondante. Par exemple, joindre `T1` et `T2` avec `USING (a, b)` est équivalent à `ON T1.a = T2.a AND T1.b = T2.b`.
+: Cette clause est un raccourci pour les jointures où les colonnes de jointure ont le même nom dans les deux tableaux. Elle prend une liste séparée par des virgules de ces colonnes et crée une condition d'égalité distincte pour chaque paire correspondante. Par exemple, joindre `T1` et `T2` avec `USING (a, b)` équivaut à `ON T1.a = T2.a AND T1.b = T2.b`.
 
     {{< code-block lang="sql" >}}SELECT orders.order_id, customers.customer_name
 FROM orders
@@ -155,32 +160,32 @@ JOIN customers
 USING (customer_id) {{< /code-block >}}
 
 `AS`
-: Renomme une colonne ou une table avec un alias.
+: Renomme une colonne ou un tableau avec un alias.
 
     {{< code-block lang="sql" >}}SELECT first_name AS name
 FROM employees {{< /code-block >}}
 
 Opérations arithmétiques
-: Effectue des calculs de base en utilisant des opérateurs comme `+`, `-`, `*`, `/`.
+: Effectue des calculs de base à l'aide d'opérateurs tels que `+`, `-`, `*`, `/`.
 
     {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost
 FROM products {{< /code-block >}}
 
 `INTERVAL value unit`
-: Intervalle représentant une durée de temps spécifiée dans une unité donnée.
-Unités prises en charge :<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day`
+: Intervalle représentant une durée spécifiée dans une unité donnée.
+Unités prises en charge :<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day`
 
 ## Types de données {#data-types}
 
-DDSQL prend en charge les types de données suivants :
+DDSQL prend en charge les types de données suivants :
 
 | Type de données | Description |
 |-----------|-------------|
-| `BIGINT` | Entiers signés de 64 bits. |
-| `BOOLEAN` | `true` ou `false` valeurs. |
+| `BIGINT` | Entiers signés 64 bits. |
+Valeurs | `BOOLEAN` | `true` ou `false`. |
 | `DECIMAL` | Nombres à virgule flottante. |
-| `INET` | Valeurs d'adresse réseau (IPv4 et IPv6, avec longueur de préfixe CIDR optionnelle). |
-| `INTERVAL` | Valeurs de durée de temps. |
+| `INET` | Valeurs d'adresse réseau (IPv4 et IPv6, avec longueur de préfixe CIDR facultative). |
+| `INTERVAL` | Valeurs de durée. |
 | `JSON` | Données JSON. |
 | `TIMESTAMP` | Valeurs de date et d'heure. |
 | `VARCHAR` | Chaînes de caractères de longueur variable. |
@@ -204,7 +209,7 @@ DDSQL prend en charge les littéraux de type explicites en utilisant la syntaxe 
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
 | `VARCHAR` | `VARCHAR 'value'` | `VARCHAR 'hello world'` |
 
-Le préfixe de type peut être omis et le type est automatiquement déduit de la valeur. Par exemple, `'hello world'` est déduit comme `VARCHAR`, `123` comme `BIGINT`, et `true` comme `BOOLEAN`. Utilisez des préfixes de type explicites lorsque les valeurs pourraient être ambiguës ; par exemple, `TIMESTAMP '2025-01-01'` serait déduit comme `VARCHAR` sans le préfixe.
+Le préfixe de type peut être omis et le type est automatiquement déduit de la valeur. Par exemple, `'hello world'` est déduit comme `VARCHAR`, `123` comme `BIGINT`, et `true` comme `BOOLEAN`. Utilisez des préfixes de type explicites lorsque les valeurs peuvent être ambiguës ; par exemple, `TIMESTAMP '2025-01-01'` serait déduit comme `VARCHAR` sans le préfixe.
 
 ### Exemple {#example}
 
@@ -220,11 +225,11 @@ WHERE created_at > TIMESTAMP '2025-01-01';
 
 ## Tableaux {#arrays}
 
-Les tableaux sont des collections ordonnées de valeurs qui partagent toutes le même type de données. Chaque type de base DDSQL a un type de tableau correspondant.
+Les tableaux sont des collections ordonnées de valeurs qui partagent toutes le même type de données. Chaque type de base DDSQL possède un type de tableau correspondant.
 
 ### Littéraux de tableau {#array-literals}
 
-Utilisez la syntaxe `ARRAY[value1, value2, ...]` pour construire un littéral de tableau. Le type du tableau est automatiquement déduit des valeurs.
+Utilisez la syntaxe `ARRAY[value1, value2, ...]` pour construire un littéral de tableau. Le type du tableau est automatiquement déduit à partir des valeurs.
 
 {{< code-block lang="sql" >}}
 SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits;  -- VARCHAR array
@@ -235,7 +240,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;              -- DECIMAL array
 
 ### Accès aux éléments {#element-access}
 
-Accédez aux éléments individuels d'un tableau avec un indice basé sur 1. Accéder à un indice qui est hors limites renvoie `NULL`.
+Accédez aux éléments individuels d'un tableau avec un indice commençant à 1. L'accès à un indice hors limites renvoie `NULL`.
 
 {{< code-block lang="sql" >}}
 SELECT ARRAY['a', 'b', 'c'][1];   -- Returns 'a'
@@ -243,7 +248,7 @@ SELECT ARRAY['a', 'b', 'c'][2];   -- Returns 'b'
 SELECT ARRAY['a', 'b', 'c'][10];  -- Returns NULL (out of bounds)
 {{< /code-block >}}
 
-Pour accéder aux éléments d'une colonne de tableau, utilisez la même syntaxe d'indice :
+Pour accéder aux éléments d'une colonne de tableau, utilisez la même syntaxe d'indice :
 
 {{< code-block lang="sql" >}}
 SELECT recipients[1] AS first_recipient
@@ -252,18 +257,18 @@ FROM emails
 
 ### Fonctions de tableau {#array-functions}
 
-Les fonctions suivantes opèrent sur des tableaux :
+Les fonctions suivantes opèrent sur les tableaux :
 
 | Fonction | Type de retour | Description |
 |----------|-------------|-------------|
 | `CARDINALITY(array a)` | `BIGINT` | Renvoie le nombre d'éléments dans le tableau. |
-| `ARRAY_POSITION(array a, typeof_array value)` | `BIGINT` | Renvoie l'indice basé sur 1 de la première occurrence de `value` dans le tableau, ou `NULL` si non trouvé. |
-| `STRING_TO_ARRAY(string s, string delimiter)` | `VARCHAR[]` | Divise une chaîne en un tableau de chaînes sur le délimiteur donné. |
-| `ARRAY_TO_STRING(array a, string delimiter)` | `VARCHAR` | Joint les éléments du tableau en une chaîne avec le délimiteur donné. |
+| `ARRAY_POSITION(array a, typeof_array value)` | `BIGINT` | Renvoie l'indice commençant à 1 de la première occurrence de `value` dans le tableau, ou `NULL` si elle n'est pas trouvée. |
+| `STRING_TO_ARRAY(string s, string delimiter)` | `VARCHAR[]` | Divise une chaîne en un tableau de chaînes selon le délimiteur donné. |
+| `ARRAY_TO_STRING(array a, string delimiter)` | `VARCHAR` | Joint les éléments d'un tableau en une chaîne avec le délimiteur donné. |
 | `ARRAY_AGG(expression e)` | tableau du type d'entrée | Agrège les valeurs de plusieurs lignes dans un tableau. |
-| `UNNEST(array a [, array b...])` | lignes de a[, b...] | Développe un ou plusieurs tableaux en un ensemble de lignes. Valide uniquement dans une clause `FROM` . |
+| `UNNEST(array a [, array b...])` | lignes de a [, b...] | Développe un ou plusieurs tableaux en un ensemble de lignes. Valide uniquement dans une clause `FROM`. |
 
-{{% collapse-content title="Scénarios" level="h3" %}}
+{{% collapse-content title="Scénarios" level="h4" %}}
 
 ### `CARDINALITY` {#cardinality}
 {{< code-block lang="sql" >}}
@@ -319,7 +324,7 @@ FROM
 
 ## Fonctions {#functions}
 
-Les fonctions SQL suivantes sont prises en charge. Pour la fonction de fenêtre, voir la section [Fonction de fenêtre](#window-functions) séparée dans cette documentation.
+Les fonctions SQL suivantes sont prises en charge. Pour les fonctions de fenêtrage, consultez la section distincte [Fonctions de fenêtrage](#window-functions) de cette documentation.
 
 | Fonction                                         | Type de retour                           | Description                                                                                                                                                                                       |
 |--------------------------------------------------|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -328,39 +333,39 @@ Les fonctions SQL suivantes sont prises en charge. Pour la fonction de fenêtre,
 | `COUNT(any a)`                                   | numeric                               | Renvoie le nombre de valeurs d'entrée qui ne sont pas nulles.                                                                                                                                             |
 | `SUM(numeric n)`                                 | numeric                               | Renvoie la somme de toutes les valeurs d'entrée.                                                                                                                                                    |
 | `AVG(numeric n)`                                 | numeric                               | Renvoie la valeur moyenne (moyenne arithmétique) de toutes les valeurs d'entrée.                                                                                                                              |
-| `BOOL_AND(boolean b)`                            | boolean                               | Renvoie si toutes les valeurs d'entrée non nulles sont vraies.                                                                                                                                               |
-| `BOOL_OR(boolean b)`                             | boolean                               | Renvoie si au moins une valeur d'entrée non nulle est vraie.                                                                                                                                                 |
-| `CEIL(numeric n)` / `CEILING(numeric n)`         | numeric                               | Renvoie la valeur arrondie à l'entier supérieur le plus proche. Les deux `CEIL` et `CEILING` sont pris en charge en tant qu'alias.                                                                                         |
+| `BOOL_AND(boolean b)`                            | boolean                               | Indique si toutes les valeurs d'entrée non nulles sont vraies.                                                                                                                                               |
+| `BOOL_OR(boolean b)`                             | boolean                               | Indique si au moins une valeur d'entrée non nulle est vraie.                                                                                                                                                 |
+| `CEIL(numeric n)` / `CEILING(numeric n)`         | numeric                               | Renvoie la valeur arrondie à l'entier supérieur le plus proche. `CEIL` et `CEILING` sont tous deux pris en charge en tant qu'alias.                                                                                         |
 | `FLOOR(numeric n)`                               | numeric                               | Renvoie la valeur arrondie à l'entier inférieur le plus proche.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Renvoie la valeur arrondie à l'entier le plus proche.                                                                                                                                                 |
 | `POWER(numeric base, numeric exponent)`          | numeric                               | Renvoie la valeur de la base élevée à la puissance de l'exposant.                                                                                                                                        |
 | `LOWER(string s)`                                | string                                | Renvoie la chaîne en minuscules.                                                                                                                                                                  |
 | `UPPER(string s)`                                | string                                | Renvoie la chaîne en majuscules.                                                                                                                                                                  |
 | `ABS(numeric n)`                                 | numeric                               | Renvoie la valeur absolue.                                                                                                                                                                       |
-| `COALESCE(args a)`                               | typeof first non-null a OR null       | Renvoie la première valeur non nulle ou null si toutes sont nulles.                                                                                                                                         |
+| `COALESCE(args a)`                               | typeof first non-null a OR null       | Renvoie la première valeur non nulle ou null si toutes les valeurs sont nulles.                                                                                                                                         |
 | `CAST(value AS type)`                            | type                                  | Convertit la valeur donnée au type de données spécifié.                                                                                                                                              |
 | `LENGTH(string s)`                               | integer                               | Renvoie le nombre de caractères dans la chaîne.                                                                                                                                                   |
 | `TRIM(string s)`                                 | string                                | Supprime les espaces blancs au début et à la fin de la chaîne.                                                                                                                                          |
-| `REPLACE(string s, string from, string to)`      | string                                | Remplace les occurrences d'une sous-chaîne dans une chaîne par une autre sous-chaîne.                                                                                                                       |
+| `REPLACE(string s, string from, string to)`      | string                                | Remplace les occurrences d'une sous-chaîne au sein d'une chaîne par une autre sous-chaîne.                                                                                                                       |
 | `SUBSTRING(string s, int start, int length)`     | string                                | Extrait une sous-chaîne d'une chaîne, en commençant à une position donnée et pour une longueur spécifiée.                                                                                                      |
 | `REVERSE(string s)`                              | string                                | Renvoie la chaîne avec les caractères dans l'ordre inverse.                                                                                                                                               |
-| `STRPOS(string s, string substring)`             | entier                               | Renvoie la première position d'index de la sous-chaîne dans une chaîne donnée, ou 0 s'il n'y a pas de correspondance.                                                                                                   |
-| `SPLIT_PART(string s, string delimiter, integer index)` | chaîne                         | Divise la chaîne sur le délimiteur donné et renvoie la chaîne à la position spécifiée en comptant à partir de 1.                                                                                          |
-| `EXTRACT(unit from timestamp/interval)`          | numérique                               | Extrait une partie d'un champ de date ou d'heure (comme l'année ou le mois) à partir d'un horodatage ou d'un intervalle.                                                                                                     |
-| `TO_TIMESTAMP(string timestamp, string format)`  | horodatage                             | Convertit une chaîne en un horodatage selon le format donné.                                                                                                                                   |
-| `TO_TIMESTAMP(numeric epoch)`                    | horodatage                             | Convertit un horodatage d'époque UNIX (en secondes) en un horodatage.                                                                                                                                      |
-| `TO_CHAR(timestamp t, string format)`            | chaîne                                | Convertit un horodatage en une chaîne selon le format donné.                                                                                                                                   |
-| `DATE_BIN(interval stride, timestamp source, timestamp origin)` | horodatage                             | Aligne un horodatage (source) sur des seaux de longueur égale (pas). Renvoie le début du seau contenant la source, calculé comme le plus grand horodatage inférieur ou égal à la source et qui est un multiple du pas à partir de l'origine. |
-| `DATE_TRUNC(string unit, timestamp t)`           | horodatage                             | Tronque un horodatage à une précision spécifiée en fonction de l'unité fournie.                                                                                                                        |
-| `CURRENT_SETTING(string setting_name)`           | chaîne                                | Renvoie la valeur actuelle du paramètre spécifié. Prend en charge les paramètres `dd.time_frame_start` et `dd.time_frame_end`, qui renvoient respectivement le début et la fin de la période de temps globale. |
-| `NOW()`                                          | horodatage                             | Renvoie l'horodatage UTC actuel au début de la requête actuelle.                                                                                                                              |
-| `CARDINALITY(array a)`                           | entier                               | Renvoie le nombre d'éléments dans le tableau.                                                                                                                                                      |
-| `ARRAY_POSITION(array a, typeof_array value)`    | entier                               | Renvoie l'index de la première occurrence de la valeur trouvée dans le tableau, ou null si la valeur n'est pas trouvée.                                                                                         |
-| `STRING_TO_ARRAY(string s, string delimiter)`    | tableau de chaînes                      | Divise la chaîne donnée en un tableau de chaînes en utilisant le délimiteur donné.                                                                                                                       |
-| `ARRAY_TO_STRING(array a, string delimiter)`     | chaîne                                | Convertit un tableau en une chaîne en concaténant les éléments avec le délimiteur donné.                                                                                                                 |
-| `ARRAY_AGG(expression e)`                        | tableau de type d'entrée                   | Crée un tableau en collectant toutes les valeurs d'entrée.                                                                                                                                              |
-| `APPROX_PERCENTILE(double percentile) WITHIN GROUP (ORDER BY expression e)` | type d'expression        | Calcule une valeur percentile approximative. Le percentile doit être compris entre 0,0 et 1,0 (inclus). Nécessite la syntaxe `WITHIN GROUP (ORDER BY ...)`.                                              |
-| `UNNEST(array a [, array b...])`                 | lignes d'un [, b...]                    | Développe les tableaux en un ensemble de lignes. Cette forme n'est autorisée que dans une clause FROM.                                                                                                                    |
+| `STRPOS(string s, string substring)`             | integer                               | Renvoie la première position d'index de la sous-chaîne dans une chaîne donnée, ou 0 en l'absence de correspondance.                                                                                                   |
+| `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Divise la chaîne selon le délimiteur donné et renvoie la chaîne à la position indiquée en comptant à partir de 1.                                                                                          |
+| `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extrait une partie d'un champ de date ou d'heure (tel que l'année ou le mois) à partir d'un horodatage ou d'un intervalle.                                                                                                     |
+| `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Convertit une chaîne en horodatage selon le format donné.                                                                                                                                   |
+| `TO_TIMESTAMP(numeric epoch)`                    | timestamp                             | Convertit un horodatage UNIX (en secondes) en horodatage.                                                                                                                                      |
+| `TO_CHAR(timestamp t, string format)`            | string                                | Convertit un horodatage en chaîne selon le format donné.                                                                                                                                   |
+| `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligne un horodatage (source) sur des compartiments de longueur égale (pas). Renvoie le début du compartiment contenant la source, calculé comme étant le plus grand horodatage inférieur ou égal à la source et qui est un multiple de la longueur du pas à partir de l'origine. |
+| `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Tronque un horodatage à une précision spécifiée basée sur l'unité fournie.                                                                                                                        |
+| `CURRENT_SETTING(string setting_name)`           | string                                | Renvoie la valeur actuelle du paramètre spécifié. Prend en charge les paramètres `dd.time_frame_start` et `dd.time_frame_end`, qui renvoient respectivement le début et la fin de la période globale. |
+| `NOW()`                                          | timestamp                             | Renvoie l'horodatage UTC actuel au début de la requête en cours.                                                                                                                              |
+| `CARDINALITY(array a)`                           | integer                               | Renvoie le nombre d'éléments dans le tableau.                                                                                                                                                      |
+| `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Renvoie l'index de la première occurrence de la valeur trouvée dans le tableau, ou null si la valeur n'est pas trouvée.                                                                                         |
+| `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Divise la chaîne donnée en un tableau de chaînes en utilisant le délimiteur donné.                                                                                                                       |
+| `ARRAY_TO_STRING(array a, string delimiter)`     | string                                | Convertit un tableau en une chaîne en concaténant les éléments avec le délimiteur donné.                                                                                                                 |
+| `ARRAY_AGG(expression e)`                        | array of input type                   | Crée un tableau en collectant toutes les valeurs d'entrée.                                                                                                                                              |
+| `APPROX_PERCENTILE(double percentile) WITHIN GROUP (ORDER BY expression e)` | typeof expression        | Calcule une valeur de centile approximative. Le centile doit être compris entre 0.0 et 1.0 (bornes incluses). Nécessite la syntaxe `WITHIN GROUP (ORDER BY ...)`.                                              |
+| `UNNEST(array a [, array b...])`                 | lignes de a [, b...]                    | Développe les tableaux en un ensemble de lignes. Cette forme n'est autorisée que dans une clause FROM.                                                                                                                    |
 
 {{% collapse-content title="Scénarios" level="h3" %}}
 
@@ -539,9 +544,9 @@ Unités d'extraction prises en charge :
 | Littéral           | Type d'entrée               | Description                                  |
 | ------------------| ------------------------ | -------------------------------------------- |
 | `day`             | `timestamp` / `interval` | jour du mois                             |
-| `dow`             | `timestamp`              | jour de la semaine `1` (lundi) à `7` (dimanche) |
+| `dow`             | `timestamp`              | jour de la semaine, de `1` (lundi) à `7` (dimanche) |
 | `doy`             | `timestamp`              | jour de l'année (`1` - `366`)                |
-| `epoch`           | `timestamp` / `interval` | secondes depuis 1970-01-01 00:00:00 UTC (pour les horodatages), ou nombre total de secondes (pour les intervalles) |
+| `epoch`           | `timestamp` / `interval` | secondes depuis le 1970-01-01 00:00:00 UTC (pour les horodatages), ou nombre total de secondes (pour les intervalles) |
 | `hour`            | `timestamp` / `interval` | heure de la journée (`0` - `23`)                 |
 | `minute`          | `timestamp` / `interval` | minute de l'heure (`0` - `59`)              |
 | `second`          | `timestamp` / `interval` | seconde de la minute (`0` - `59`)            |
@@ -584,32 +589,32 @@ FROM
 
 `TO_TIMESTAMP` a deux formes :
 
-**Forme 1 : Convertir une chaîne en horodatage avec le format**
+**Forme 1 : Convertissez une chaîne en horodatage selon un format**
 
-Modèles pris en charge pour le formatage de date/heure :
+Modèles pris en charge pour le formatage des dates et des heures :
 | Modèle     | Description                          |
 | ----------- | ------------------------------------ |
 | `YYYY`      | année (4 chiffres)                      |
 | `YY`        | année (2 chiffres)                      |
-| `MM`        | numéro de mois (01 - 12)               |
-| `DD`        | jour du mois (01 - 31)                 |
-| `HH24`      | heure du jour (00 - 23)                |
-| `HH12`      | heure du jour (01 - 12)                |
-| `HH`        | heure du jour (01 - 12)                |
-| `MI`        | minute (00 - 59)                       |
-| `SS`        | seconde (00 - 59)                       |
-| `MS`        | milliseconde (000 - 999)                |
-| `TZ`        | abréviation de fuseau horaire           |
-| `OF`        | décalage horaire par rapport à UTC      |
-| `AM` / `am` | indicateur de méridien (sans points) |
-| `PM` / `pm` | indicateur de méridien (sans points) |
+| `MM`        | numéro du mois (01 - 12)               |
+| `DD`        | jour du mois (01 - 31)               |
+| `HH24`      | heure de la journée (00 - 23)                |
+| `HH12`      | heure de la journée (01 - 12)                |
+| `HH`        | heure de la journée (01 - 12)                |
+| `MI`        | minute (00 - 59)                     |
+| `SS`        | seconde (00 - 59)                     |
+| `MS`        | milliseconde (000 - 999)              |
+| `TZ`        | abréviation du fuseau horaire               |
+| `OF`        | décalage du fuseau horaire par rapport à UTC            |
+| `AM` / `am` | indicateur méridien (sans points) |
+| `PM` / `pm` | indicateur méridien (sans points) |
 
 {{< code-block lang="sql" >}}
 SELECT
   TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
-**Forme 2 : Convertir le timestamp UNIX en timestamp**
+**Forme 2 : convertir un horodatage de l’époque Unix en horodatage**
 
 {{< code-block lang="sql" >}}
 SELECT
@@ -623,18 +628,18 @@ Modèles pris en charge pour le formatage de date/heure :
 | ----------- | ------------------------------------ |
 | `YYYY`      | année (4 chiffres)                      |
 | `YY`        | année (2 chiffres)                      |
-| `MM`        | numéro de mois (01 - 12)               |
+| `MM`        | numéro du mois (01 - 12)               |
 | `DD`        | jour du mois (01 - 31)               |
-| `HH24`      | heure du jour (00 - 23)                |
-| `HH12`      | heure du jour (01 - 12)                |
-| `HH`        | heure du jour (01 - 12)                |
+| `HH24`      | heure de la journée (00 - 23)                |
+| `HH12`      | heure de la journée (01 - 12)                |
+| `HH`        | heure de la journée (01 - 12)                |
 | `MI`        | minute (00 - 59)                     |
 | `SS`        | seconde (00 - 59)                     |
 | `MS`        | milliseconde (000 - 999)              |
-| `TZ`        | abréviation de fuseau horaire               |
-| `OF`        | décalage horaire par rapport à UTC            |
-| `AM` / `am` | indicateur de méridien (sans points) |
-| `PM` / `pm` | indicateur de méridien (sans points) |
+| `TZ`        | abréviation du fuseau horaire               |
+| `OF`        | décalage du fuseau horaire par rapport à l'UTC            |
+| `AM` / `am` | indicateur méridien (sans points) |
+| `PM` / `pm` | indicateur méridien (sans points) |
 
 {{< code-block lang="sql" >}}
 SELECT
@@ -654,7 +659,7 @@ SELECT DATE_BIN('1 day', TIMESTAMP '2025-09-15 12:34:56', TIMESTAMP '2025-01-01'
 
 ### `DATE_TRUNC` {#date-trunc}
 
-Tronquages pris en charge :
+Troncatures prises en charge :
 - `milliseconds`
 - `seconds` / `second`
 - `minutes` / `minute`
@@ -726,26 +731,26 @@ GROUP BY
 
 ## Expressions régulières {#regular-expressions}
 
-### Variantes {#flavor}
+### Variante {#flavor}
 
-Toutes les fonctions d'expressions régulières (regex) utilisent la variante des Composants Internationaux pour Unicode (ICU) :
+Toutes les fonctions d'expression régulière (regex) utilisent la variante d'International Components for Unicode (ICU) :
 
 - [Métacaractères][5]
 - [Opérateurs][6]
-- [Expressions d'ensemble (Classes de caractères)][7]
-- [Options de drapeau pour les drapeaux dans le motif][8]. Reportez-vous à la section [drapeaux ci-dessous](#function-level-flags) pour les drapeaux au niveau de la fonction.
-- [Trouver et Remplacer (en utilisant des groupes de capture)][9]
+- [Expressions d'ensembles (classes de caractères)][7]
+- [Options d'indicateurs pour les indicateurs dans le modèle][8]. Reportez-vous à la [section des indicateurs ci-dessous](#function-level-flags) pour les indicateurs au niveau de la fonction.
+- [Rechercher et remplacer (avec des groupes de capture)][9]
 
 ### Fonctions {#functions-1}
 
 | Fonction                                                                                                         | Type de retour      | Description                                                                                                                                                                                                                                                                |
 |------------------------------------------------------------------------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `REGEXP_LIKE(string input, string pattern)`                                                                      | Booléen          | Évalue si une chaîne correspond à un motif d'expression régulière.                                                                                                                                                                                                           |
-| `REGEXP_MATCH(string input, string pattern [, string flags ])`                                                   | tableau de chaînes | Renvoie les sous-chaînes de la première correspondance de motif dans la chaîne. <br><br> Cette fonction recherche la chaîne d'entrée en utilisant le motif donné et renvoie les sous-chaînes capturées (groupes de capture) de la première correspondance. Si aucun groupe de capture n'est présent, renvoie la correspondance complète. |
-| `REGEXP_REPLACE(string input, string pattern, string replacement [, string flags ])`                             | chaîne           | Remplace la sous-chaîne correspondant à la première occurrence du motif, ou toutes ces occurrences si vous utilisez le [ flag optionnel `g`](#function-level-flags)                                                                                                                              |
-| `REGEXP_REPLACE (string input, string pattern, string replacement, integer start, integer N [, string flags ] )` | chaîne           | Remplace la sous-chaîne qui est la N-ième correspondance au motif, ou toutes ces correspondances si `N` est zéro, en commençant par `start`.                                                                                                                                                    |
+| `REGEXP_LIKE(string input, string pattern)`                                                                      | Booléen          | Évalue si une chaîne correspond à un modèle d'expression régulière.                                                                                                                                                                                                           |
+| `REGEXP_MATCH(string input, string pattern [, string flags ])`                                                   | tableau de chaînes | Renvoie les sous-chaînes de la première correspondance du modèle dans la chaîne. <br><br> Cette fonction recherche dans la chaîne d'entrée à l'aide du modèle donné et renvoie les sous-chaînes capturées (groupes de capture) de la première correspondance. Si aucun groupe de capture n'est présent, renvoie la correspondance complète. |
+| `REGEXP_REPLACE(string input, string pattern, string replacement [, string flags ])`                             | chaîne           | Remplace la sous-chaîne qui constitue la première correspondance au modèle, ou toutes ces correspondances si vous utilisez l'indicateur [optionnel `g` ](#function-level-flags).                                                                                                                              |
+| `REGEXP_REPLACE (string input, string pattern, string replacement, integer start, integer N [, string flags ] )` | chaîne           | Remplace la sous-chaîne qui constitue la n-ième correspondance au modèle, ou toutes ces correspondances si `N` est égal à zéro, à partir de `start`.                                                                                                                                                    |
 
-{{% collapse-content title="Scénarios" level="h3" %}}
+{{% collapse-content title="Scénarios" level="h4" %}}
 
 ### `REGEXP_LIKE` {#regexp-like}
 {{< code-block lang="sql" >}}
@@ -783,22 +788,22 @@ SELECT regexp_replace('INFO INFO INFO', 'INFO', 'DEBUG', 1, 2);
 
 {{% /collapse-content %}}
 
-### Drapeaux au niveau de la fonction {#function-level-flags}
+### Indicateurs au niveau de la fonction {#function-level-flags}
 
-Vous pouvez utiliser les drapeaux suivants avec [les fonctions d'expressions régulières](#regular-expressions) :
+Vous pouvez utiliser les indicateurs suivants avec les [fonctions d'expression régulière](#regular-expressions) :
 
 `i`
 : Correspondance insensible à la casse
 
 `n` ou `m`
-: Correspondance sensible aux nouvelles lignes
+: Correspondance sensible aux sauts de ligne
 
 `g`
-: Global; remplace _toutes_ les sous-chaînes correspondantes plutôt que seulement la première.
+: Global ; remplace _toutes_ les sous-chaînes correspondantes plutôt que seulement la première
 
-{{% collapse-content title="Scénarios" level="h3" %}}
+{{% collapse-content title="Scénarios" level="h4" %}}
 
-### `i` drapeau {#i-flag}
+### `i` indicateur {#i-flag}
 
 {{< code-block lang="sql" >}}
 SELECT regexp_match('INFO', 'info')
@@ -808,7 +813,7 @@ SELECT regexp_match('INFO', 'info', 'i')
 -- ['INFO']
 {{< /code-block >}}
 
-### `n` drapeau {#n-flag}
+### `n` indicateur {#n-flag}
 
 {{< code-block lang="sql" >}}
 SELECT regexp_match('a
@@ -820,7 +825,7 @@ b', '^b', 'n');
 -- ['b']
 {{< /code-block >}}
 
-### `g` drapeau {#g-flag}
+### `g` indicateur {#g-flag}
 
 {{< code-block lang="sql" >}}
 SELECT icu_regexp_replace('Request id=12345 completed, id=67890 pending', 'id=\d+', 'id=XXX');
@@ -832,44 +837,44 @@ SELECT regexp_replace('Request id=12345 completed, id=67890 pending', 'id=\d+', 
 
 {{% /collapse-content %}}
 
-## Fonctions de fenêtre {#window-functions}
+## Fonctions de fenêtrage {#window-functions}
 
-Ce tableau fournit un aperçu des fonctions de fenêtre prises en charge. Pour des détails complets et des exemples, consultez la [documentation PostgreSQL][2].
+Ce tableau donne un aperçu des fonctions de fenêtrage prises en charge. Pour des détails complets et des exemples, consultez la [documentation PostgreSQL][2].
 
-| Fonction                | Type de retour       | Description                                                            |
+| Fonction                | Type de retour    | Description                                                            |
 |-------------------------|-------------------|------------------------------------------------------------------------|
-| `OVER`                  | N/A               | Définit une fenêtre pour un ensemble de lignes sur lesquelles d'autres fonctions de fenêtre peuvent opérer. |
-| `PARTITION BY`          | N/A               | Divise l'ensemble des résultats en partitions, spécifiquement pour appliquer des fonctions de fenêtre. |
-| `RANK()`                | entier           | Attribue un rang à chaque ligne au sein d'une partition, avec des lacunes pour les égalités.     |
-| `ROW_NUMBER()`          | entier           | Attribue un numéro séquentiel unique à chaque ligne au sein d'une partition.     |
-| `LEAD(column n)`        | type de colonne     | Renvoie la valeur de la ligne suivante dans la partition.                  |
-| `LAG(column n)`         | type de colonne     | Renvoie la valeur de la ligne précédente dans la partition.              |
-| `FIRST_VALUE(column n)` | type de colonne     | Renvoie la première valeur dans un ensemble ordonné de valeurs.                   |
-| `LAST_VALUE(column n)`  | type de colonne     | Renvoie la dernière valeur dans un ensemble ordonné de valeurs.                    |
-| `NTH_VALUE(column n, offset)`| type de colonne | Renvoie la valeur à l'offset spécifié dans un ensemble ordonné de valeurs. |
+| `OVER`                  | N/A               | Définit une fenêtre pour un ensemble de lignes sur lequel d'autres fonctions de fenêtrage peuvent opérer. |
+| `PARTITION BY`          | N/A               | Divise l'ensemble de résultats en partitions, spécifiquement pour l'application de fonctions de fenêtrage. |
+| `RANK()`                | entier            | Attribue un rang à chaque ligne au sein d'une partition, avec des sauts en cas d'égalité.     |
+| `ROW_NUMBER()`          | entier            | Attribue un numéro séquentiel unique à chaque ligne au sein d'une partition.     |
+| `LEAD(column n)`        | type de colonne   | Renvoie la valeur de la ligne suivante dans la partition.                  |
+| `LAG(column n)`         | type de colonne   | Renvoie la valeur de la ligne précédente dans la partition.              |
+| `FIRST_VALUE(column n)` | type de colonne   | Renvoie la première valeur dans un ensemble ordonné de valeurs.                   |
+| `LAST_VALUE(column n)`  | type de colonne   | Renvoie la dernière valeur dans un ensemble ordonné de valeurs.                    |
+| `NTH_VALUE(column n, offset)`| type de colonne | Renvoie la valeur au décalage spécifié dans un ensemble ordonné de valeurs. |
 
 
 ## Fonctions et opérateurs JSON {#json-functions-and-operators}
 
-| Nom                                          | Type de retour  | Description                                                                                                                                                                                                                                                                                                    |
+| Nom                                           | Type de retour | Description                                                                                                                                                                                                                                                                                                    |
 |-----------------------------------------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| json_extract_path_text(text json, text path…) | texte         | Extrait un sous-objet JSON sous forme de texte, défini par le chemin. Son comportement est équivalent à la [fonction Postgres du même nom][3]. Par exemple, `json_extract_path_text(col, ‘forest')` renvoie la valeur de la clé `forest` pour chaque objet JSON dans `col`. Voir l'exemple ci-dessous pour une syntaxe de tableau JSON. |
-| json_extract_path(text json, text path…)      | JSON         | Même fonctionnalité que `json_extract_path_text`, mais renvoie une colonne de type JSON au lieu de type texte.                                                                                                                                                                                                        |
+| json_extract_path_text(text json, text path…) | text         | Extrait un sous-objet JSON sous forme de texte, défini par le chemin. Son comportement est équivalent à celui de la [fonction Postgres du même nom][3]. Par exemple, `json_extract_path_text(col, ‘forest')` renvoie la valeur de la clé `forest` pour chaque objet JSON dans `col`. Consultez l'exemple ci-dessous pour voir la syntaxe d'un tableau JSON. |
+| json_extract_path(text json, text path…)      | JSON         | Même fonctionnalité que `json_extract_path_text`, mais renvoie une colonne de type JSON au lieu d'une colonne de type text.                                                                                                                                                                                                        |
 | json_array_elements(text json)                | lignes de JSON | Développe un tableau JSON en un ensemble de lignes. Cette forme n'est autorisée que dans une clause FROM.                                                                                                                                                                                                                           |
-| json_array_elements_text(text json)           | lignes de résultat | Transforme un tableau JSON en un ensemble de lignes. Cette forme n'est autorisée que dans une clause FROM.                                                                                                                                                                                                                           |
+| json_array_elements_text(text json)           | lignes de texte | Développe un tableau JSON en un ensemble de lignes. Cette forme n'est autorisée que dans une clause FROM.                                                                                                                                                                                                                           |
 
-## Fonctions et opérateurs d'adresse réseau {#network-address-functions-and-operators}
+## Fonctions et opérateurs d'adresses réseau {#network-address-functions-and-operators}
 
-Le type `inet` représente les adresses réseau IPv4 et IPv6 avec une longueur de préfixe CIDR optionnelle (par exemple, `192.168.1.5/24` ou `::1`). Créez des valeurs `inet` avec la syntaxe littérale de type `INET 'value'` ou en convertissant une chaîne avec `CAST(column AS inet)`.
+Le type `inet` représente des adresses réseau IPv4 et IPv6 avec une longueur de préfixe CIDR optionnelle (par exemple, `192.168.1.5/24` ou `::1`). Créez des valeurs `inet` avec la syntaxe de littéral de type `INET 'value'` ou en convertissant une chaîne avec `CAST(column AS inet)`.
 
 ### Fonctions {#functions-2}
 
 | Fonction | Type de retour | Description |
 |----------|-------------|-------------|
-| `host(inet addr)` | `VARCHAR` | Renvoie l'adresse IP sous forme de texte, sans la longueur de préfixe. |
-| `network(inet addr)` | `INET` | Renvoie la partie réseau de l'adresse, avec les bits d'hôte mis à zéro. |
+| `host(inet addr)` | `VARCHAR` | Renvoie l'adresse IP sous forme de texte, sans la longueur du préfixe. |
+| `network(inet addr)` | `INET` | Renvoie la partie réseau de l'adresse, avec les bits de host mis à zéro. |
 | `netmask(inet addr)` | `INET` | Renvoie le masque réseau pour l'adresse. |
-| `masklen(inet addr)` | `BIGINT` | Renvoie la longueur de préfixe du masque réseau. |
+| `masklen(inet addr)` | `BIGINT` | Renvoie la longueur du préfixe du masque réseau. |
 | `broadcast(inet addr)` | `INET` | Renvoie l'adresse de diffusion du réseau. |
 | `family(inet addr)` | `BIGINT` | Renvoie la famille d'adresses : `4` pour IPv4, `6` pour IPv6. |
 
@@ -878,12 +883,12 @@ Le type `inet` représente les adresses réseau IPv4 et IPv6 avec une longueur d
 | Opérateur | Type de retour | Description |
 |----------|-------------|-------------|
 | `inet a << inet b` | `BOOLEAN` | Renvoie `true` si `a` est strictement contenu dans `b`. |
-| `inet a <<= inet b` | `BOOLEAN` | Renvoie `true` si `a` est contenu dans ou égal à `b`. |
+| `inet a <<= inet b` | `BOOLEAN` | Renvoie `true` si `a` est contenu dans `b` ou lui est égal. |
 | `inet a >> inet b` | `BOOLEAN` | Renvoie `true` si `a` contient strictement `b`. |
 | `inet a >>= inet b` | `BOOLEAN` | Renvoie `true` si `a` contient ou est égal à `b`. |
 | `inet a && inet b` | `BOOLEAN` | Renvoie `true` si les sous-réseaux de `a` et `b` se chevauchent. |
 
-{{% collapse-content title="Scénarios" level="h3" %}}
+{{% collapse-content title="Scénarios" level="h4" %}}
 
 ### `host` {#host}
 {{< code-block lang="sql" >}}
@@ -957,8 +962,8 @@ WHERE CAST(src_ip AS inet) << INET '10.0.0.0/8'
 
 {{% /collapse-content %}}
 
-## Fonctions de table {#table-functions}
-Les fonctions de table sont utilisées pour interroger les journaux, les métriques, les coûts cloud et d'autres sources de données.
+## Fonctions de tableau {#table-functions}
+Les fonctions de tableau sont utilisées pour interroger des logs, des métriques, des coûts cloud et d'autres sources de données.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
@@ -973,15 +978,15 @@ Les fonctions de table sont utilisées pour interroger les journaux, les métriq
       <td>
         <pre>
 dd.logs(
-    colonnes => tableau < varchar >,
-    filtre ? => varchar,
-    index ? => tableau < varchar >,
-    stockage ? => varchar,
-    depuis_timestamp ? => timestamp,
-    vers_timestamp ? => timestamp
-) EN (nom_colonne type [, ...])</pre>
+    columns => array < varchar >,
+    filter ? => varchar,
+    indexes ? => array < varchar >,
+    storage ? => varchar,
+    from_timestamp ? => timestamp,
+    to_timestamp ? => timestamp
+) AS (column_name type [, ...])</pre>
       </td>
-      <td>Renvoie les données de journal sous forme de tableau. Le paramètre colonnes spécifie quels champs de journal extraire. Les champs imbriqués sont accessibles en utilisant la notation par points, et les champs non principaux doivent être précédés par <code>@</code>. La clause AS définit le schéma du tableau renvoyé. Optionnel : filtrage par index ou plage horaire. Lorsque le temps n'est pas spécifié, DDSQL utilise par défaut le paramètre de temps global, qui dans l'éditeur DDSQL est réglé sur la dernière heure. Optionnel : spécifier le stockage à utiliser (par exemple, <code>hot</code>, <code>flex_tier</code>). Si non spécifié, la valeur par défaut est le hot storage.</td>
+      <td>Renvoie les données de log sous forme de tableau. Le paramètre columns spécifie les champs de log à extraire. Les champs imbriqués sont accessibles via la notation par points, et les champs non principaux doivent être précédés de <code>@</code>. La clause AS définit le schéma du tableau renvoyé. Optionnel : filtrage par index ou plage temporelle. Lorsque la période n'est pas spécifiée, DDSQL utilise par défaut le paramètre temporel global, défini sur la dernière heure dans DDSQL Editor. Optionnel : spécification du stockage à utiliser (par exemple, <code>hot</code>, <code>flex_tier</code>). Lorsqu'il n'est pas spécifié, le stockage à chaud est utilisé par défaut.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT timestamp, host, service, message, asset_id
@@ -1002,10 +1007,10 @@ FROM dd.logs(
         <pre>
 dd.metrics_scalar(
     query varchar,
-    réducteur varchar [, depuis_timestamp timestamp, vers_timestamp timestamp]
+    reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Renvoie des données métriques sous forme de valeur scalaire. La fonction accepte une requête de métriques (avec regroupement optionnel), un réducteur pour déterminer comment les valeurs sont agrégées (moyenne, maximum, etc.), et des paramètres de timestamp optionnels (par défaut 1 heure) pour définir la plage horaire.</td>
+      <td>Renvoie les données de métriques sous forme de valeur scalaire. La fonction accepte une requête de métriques (avec regroupement optionnel), un réducteur pour déterminer comment les valeurs sont agrégées (avg, max, etc.), et des paramètres d'horodatage optionnels (par défaut 1 heure) pour définir la plage temporelle.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -1022,10 +1027,10 @@ ORDER BY value DESC;{{< /code-block >}}
       <td>
         <pre>
 dd.metrics_timeseries(
-    requête varchar [, from_timestamp timestamp, to_timestamp timestamp]
+    query varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Renvoie les données métriques sous forme de série temporelle. La fonction accepte une requête de métriques (avec regroupement optionnel) et des paramètres d'horodatage optionnels (par défaut 1 heure) pour définir la plage temporelle. Renvoie des points de données au fil du temps plutôt qu'une seule valeur agrégée.</td>
+      <td>Renvoie les données métriques sous forme de série temporelle. La fonction accepte une requête de métriques (avec regroupement optionnel) et des paramètres d'horodatage optionnels (par défaut 1 heure) pour définir la plage temporelle. Renvoie des points de données au fil du temps plutôt qu'une valeur agrégée unique.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -1041,13 +1046,13 @@ ORDER BY timestamp, service;{{< /code-block >}}
       <td>
         <pre>
 dd.cloud_cost_scalar(
-    requête varchar,
-    réducteur varchar
+    query varchar,
+    reducer varchar
     [, from_timestamp timestamp,
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Renvoie <a href="/cloud_cost_management/">des données de coût cloud</a> sous forme de valeur scalaire. La fonction accepte une requête de coût cloud (avec regroupement optionnel), un réducteur d'agrégation (utilisez <code>sum</code> pour les données de coût ; d'autres réducteurs tels que <code>avg</code>, <code>min</code>, et <code>max</code> sont acceptés mais rarement applicables aux requêtes de coût), et des paramètres timestamp optionnels (par défaut 1 heure) pour définir la plage temporelle. <strong>Remarque</strong> : Les données de coût cloud sont généralement retardées de 24 à 48 heures, donc les timestamps récents peuvent ne renvoyer aucun résultat.</td>
+      <td>Renvoie les données de <a href="/cloud_cost_management/">Cloud Cost Management</a> sous forme de valeur scalaire. La fonction accepte une requête de coût cloud (avec regroupement optionnel), un réducteur d'agrégation (utilisez <code>sum</code> pour les données de coût ; d'autres réducteurs tels que <code>avg</code>, <code>min</code>, et <code>max</code> sont acceptés mais rarement applicables aux requêtes de coût), et des paramètres d'horodatage optionnels (par défaut 1 heure) pour définir la plage temporelle. <strong>Remarque</strong> : Les données de coût cloud sont généralement retardées de 24 à 48 heures, de sorte que les horodatages récents peuvent ne renvoyer aucun résultat.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -1064,12 +1069,12 @@ ORDER BY value DESC;{{< /code-block >}}
       <td>
         <pre>
 dd.cloud_cost_timeseries(
-    requête varchar
+    query varchar
     [, from_timestamp timestamp,
     to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Renvoie <a href="/cloud_cost_management/">des données de coût cloud</a> sous forme de série temporelle. La fonction accepte une requête de coût cloud (avec regroupement optionnel) et des paramètres timestamp optionnels (par défaut 1 heure) pour définir la plage temporelle. Renvoie des points de données de coût au fil du temps plutôt qu'une seule valeur agrégée. <strong>Remarque</strong> : Les données de coût cloud sont généralement retardées de 24 à 48 heures, donc les timestamps récents peuvent ne retourner aucun résultat.</td>
+      <td>Renvoie des données de <a href="/cloud_cost_management/">Cloud Cost Management</a> sous forme de série temporelle. La fonction accepte une requête de coût cloud (avec regroupement optionnel) et des paramètres d'horodatage optionnels (par défaut 1 heure) pour définir la plage temporelle. Renvoie des points de données de coût au fil du temps plutôt qu'une valeur agrégée unique. <strong>Remarque</strong> : Les données de coût cloud sont généralement retardées de 24 à 48 heures, de sorte que les horodatages récents peuvent ne renvoyer aucun résultat.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
@@ -1086,7 +1091,7 @@ ORDER BY timestamp, service;{{< /code-block >}}
 
 {{% collapse-content title="Scénarios" level="h3" %}}
 
-### Absolute timestamps {#absolute-timestamps}
+### Horodatages absolus {#absolute-timestamps}
 
 {{< code-block lang="sql" >}}
 SELECT *
@@ -1102,7 +1107,7 @@ FROM dd.logs(
 )
 {{< /code-block >}}
 
-### Relative timestamps {#relative-timestamps}
+### Horodatages relatifs {#relative-timestamps}
 
 {{< code-block lang="sql" >}}
 SELECT *
@@ -1137,7 +1142,7 @@ FROM dd.logs(
 
 ### Accès aux champs imbriqués {#nested-field-access}
 
-Les alias de colonnes ne peuvent pas contenir de points ; remplacez-les par des underscores ou tout autre caractère valide lors de la définition de l'alias.
+Les alias de colonne ne peuvent pas contenir de points ; remplacez-les par des traits de soulignement ou tout autre caractère valide lors de la définition de l'alias.
 
 {{< code-block lang="sql" >}}
 SELECT timestamp, host, asset_id, view_url, data_resource_type
@@ -1155,9 +1160,9 @@ FROM dd.logs(
 
 {{% /collapse-content %}}
 
-## Étiquettes {#tags}
+## Tags {#tags}
 
-DDSQL expose les étiquettes comme un `hstore` type, inspiré de PostgreSQL. Vous pouvez accéder aux valeurs pour des clés d'étiquettes spécifiques en utilisant l'opérateur flèche de PostgreSQL. Exemple :
+DDSQL expose les tags en tant que type `hstore`, inspiré de PostgreSQL. Vous pouvez accéder aux valeurs de clés de tag spécifiques en utilisant l'opérateur flèche de PostgreSQL. Par exemple :
 
 ```sql
 SELECT instance_type, count(instance_type)
@@ -1166,7 +1171,7 @@ WHERE tags->'region' = 'us-east-1' -- region is a tag, not a column
 GROUP BY instance_type
 ```
 
-Les étiquettes sont des paires clé-valeur où chaque clé peut avoir zéro, une ou plusieurs valeurs d'étiquettes correspondantes. Lorsqu'elle est accédée, la valeur de l'étiquette renvoie une seule chaîne, contenant _toutes_ les valeurs correspondantes. Lorsque les données ont plusieurs valeurs d'étiquettes pour la même clé d'étiquette, elles sont représentées sous forme de chaîne triée, séparée par des virgules. Exemple :
+Les tags sont des paires clé-valeur où chaque clé peut avoir zéro, une ou plusieurs valeurs de tag correspondantes. Lorsque l'on accède à une valeur de tag, celle-ci est renvoyée sous forme d'une chaîne unique contenant _toutes_ les valeurs correspondantes. Lorsque les données comportent plusieurs valeurs de tag pour une même clé de tag, elles sont représentées sous forme de chaîne de valeurs triées et séparées par des virgules. Par exemple :
 
 ```sql
 SELECT tags->'team', instance_type, architecture, COUNT(*) as instance_count
@@ -1176,7 +1181,7 @@ GROUP BY tags->'team', instance_type, architecture
 ORDER BY instance_count DESC
 ```
 
-Vous pouvez également comparer les valeurs d'étiquettes en tant que chaînes ou ensembles d'étiquettes entiers :
+Vous pouvez également comparer des valeurs de tag en tant que chaînes ou des ensembles de tags complets :
 
 ```sql
 SELECT *
@@ -1184,7 +1189,7 @@ FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
 
-De plus, vous pouvez extraire les clés et les valeurs d'étiquettes dans des tableaux individuels de texte :
+De plus, vous pouvez extraire les clés de tag et les valeurs de tag dans des tableaux de texte distincts :
 
 ```sql
 SELECT akeys(tags), avals(tags)
@@ -1195,11 +1200,410 @@ FROM aws.ec2_instance
 
 | Nom                                          | Type de retour   | Description                                                                                      |
 |-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
-| tags -> 'text'                                  | Texte          | Obtient la valeur pour une clé donnée. Renvoie `null` si la clé n'est pas présente.                             |
-| akeys(hstore tags)                            | Tableau de texte | Obtient les clés d'un HSTORE sous forme de tableau                                                            |
-| avals(hstore tags)                            | Tableau de texte | Obtient les valeurs d'un HSTORE sous forme de tableau                                                          |
+| tags -> 'text'                                  | Texte          | Récupère la valeur pour une clé donnée. Renvoie `null` si la clé n'est pas présente.                             |
+| akeys(hstore tags)                            | Tableau de texte | Récupère les clés d'un HSTORE sous forme de tableau                                                            |
+| avals(hstore tags)                            | Tableau de texte | Récupère les valeurs d'un HSTORE sous forme de tableau                                                          |
 
-## Lectures complémentaires {#further-reading}
+## Variables de modèle {#template-variables}
+
+<div class="alert alert-info">Les variables de modèle dans DDSQL Editor sont en préversion ; leur syntaxe et les types pris en charge sont donc susceptibles de changer. Vous ne pouvez utiliser une variable qu'en tant que second argument de <code>dd.matches()</code>. Référencer <code>$var</code> à tout autre endroit dans une requête n'est pas pris en charge. Contactez <a href="/help/">le support Datadog</a> pour demander l'accès.</div>
+
+Les variables de modèle vous permettent de modifier les filtres de requête sans modifier le SQL.
+
+### Filtrez les lignes avec `dd.matches` {#filter-rows-with-ddmatches}
+
+Utilisez `dd.matches(column, $var)` dans une clause `WHERE` pour comparer une colonne ou une expression avec les valeurs sélectionnées de la variable. Par exemple, pour une variable nommée `env` :
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM aws.ec2_instance
+WHERE dd.matches(tags->'env', $env);
+{{< /code-block >}}
+
+| Valeurs sélectionnées | Correspondances |
+|-----------------|---------|
+| `prod` | Une correspondance exacte et sensible à la casse. |
+| `prod, staging` | L'une ou l'autre valeur. |
+| `*` | Aucun filtre. Une sélection vide n'applique également aucun filtre. |
+| `prod*` | Valeurs commençant par `prod`. |
+| `*prod` | Valeurs se terminant par `prod`. |
+| `*prod*` | Valeurs contenant `prod`. |
+
+### Syntaxe de variable {#variable-syntax}
+
+Passez `$env` directement, sans guillemets simples ou `.value`. La colonne ou l'expression détermine ce qui est filtré ; le tag de la variable n'est pas ajouté.
+
+Pour les colonnes non textuelles, convertissez d'abord l'expression en `VARCHAR`, par exemple `dd.matches(CAST(status_code AS VARCHAR), $status)`.
+
+Utilisez `$env` pour un nom de variable en minuscules. Mettez les noms contenant des lettres majuscules, des espaces ou de la ponctuation entre guillemets doubles, par exemple `$"aws-region"`.
+
+## Écriture de requêtes efficaces {#writing-efficient-queries}
+
+Les requêtes qui lisent de grandes quantités de données ou effectuent des calculs lourds peuvent être lentes ou renvoyer des erreurs de ressources. Les pratiques ci-dessous sont les causes les plus courantes ; pour chacune, une réécriture permet généralement de résoudre le problème.
+
+**Filtrez et agrégez dès que possible**. Les calculs dans le filtre de la requête ou un résumé `GROUP BY` s'exécutent sur l'index. Les calculs dans un `JOIN` ou un `LIMIT` large sont conservés en mémoire.
+
+### Liste de contrôle {#checklist}
+
+Avant de relancer une requête lente, posez-vous les questions suivantes :
+
+- Le filtre de la requête inclut-il un jeton sélectif (et non un Wildcard comme `service:*` ou `env:*`) ?
+- La plage temporelle est-elle aussi réduite que possible pour la question ?
+- Sélectionnez-vous uniquement les colonnes que vous utilisez réellement ?
+- Si vous avez un grand `LIMIT`, un résumé `GROUP BY` pourrait-il fonctionner à la place ?
+- Si vous avez de nombreuses clauses `JOIN`, la requête pourrait-elle être réécrite sous forme d'analyse unique ?
+- Lors de jointures entre sources, chaque côté est-il filtré ?
+- La clé `JOIN` a-t-elle une cardinalité élevée (ID d'utilisateur/ID de requête/ID de trace) ?
+- La même expression régulière est-elle exécutée plus d'une fois par ligne ?
+
+### Filtrage {#filtering}
+
+#### Filtrez sur la source de données {#filter-on-the-data-source}
+
+Incluez toujours un jeton sélectif dans votre requête de source de données, tel que `service:`, `host:`, `env:` ou tout `@attribute:value`.
+
+Les filtres Wildcard tels que `service:*` ou `env:*` correspondent à chaque événement, ils ne restreignent donc pas réellement les données. Considérez ces filtres comme équivalents à laisser le filtre vide.
+
+**Avant**
+
+```sql
+-- No filter; scans all logs in the time range
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
+```
+
+**Après**
+
+```sql
+-- filter => narrows the scan to matching events before any SQL runs
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    filter         => 'service:checkout-api env:prod',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
+```
+
+#### Choisissez une plage temporelle adaptée à la question {#choose-a-time-range-that-fits-the-question}
+
+Le temps d'analyse augmente avec la plage temporelle. Envisagez de commencer par une fenêtre qui couvre la question (souvent quelques heures ou une journée) et de l'élargir uniquement lorsque la question l'exige. Pour les tendances à long terme, une métrique pré-agrégée ou une requête de résumé quotidien s'exécute plus rapidement qu'une nouvelle analyse des événements bruts à chaque exécution.
+
+*Objectif : comprendre le volume de logs du service de facturation sur le mois dernier.*
+
+**Avant**
+
+```sql
+-- Scans 31 days of raw events
+SELECT timestamp, message
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp', 'message'],
+    from_timestamp => NOW() - INTERVAL '31 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    message   VARCHAR
+)
+```
+
+**Après**
+
+```sql
+-- Aggregate up front for trends; only fetch the timestamp column needed for grouping
+SELECT date_trunc('day', timestamp) AS day, count(*) AS events
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP
+)
+GROUP BY 1
+ORDER BY 1;
+```
+
+### Sélection de colonnes {#column-selection}
+
+#### Projetez uniquement les colonnes que vous utilisez {#project-only-the-columns-you-use}
+
+Chaque colonne de votre requête est extraite du stockage. Réduisez la liste des colonnes à ce que vous utilisez en aval. Les attributs volumineux comme le `message` brut ou les en-têtes HTTP complets peuvent ralentir considérablement la requête.
+
+**Avant**
+
+```sql
+-- columns array fetches every field, including the expensive raw message
+SELECT *
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message', '@http.url', '@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    host        VARCHAR,
+    message     VARCHAR,
+    http_url    VARCHAR,
+    status_code VARCHAR
+)
+```
+
+**Après**
+
+```sql
+-- Only declare the columns the analysis actually uses
+SELECT timestamp, service, host
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR
+)
+```
+
+### Agrégations {#aggregations}
+
+#### Retournez des résumés, pas des lignes brutes {#return-summaries-not-raw-rows}
+
+Lorsque votre objectif est de comprendre les données (comme le top-N, les comptes par catégorie ou les distributions), une `GROUP BY` renvoie un résultat ciblé qui est plus rapide à calculer et plus facile à exploiter que l'analyse de millions de lignes brutes.
+
+**Avant**
+
+```sql
+SELECT *
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['timestamp', 'service', '@http.status_code', 'message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    status_code VARCHAR,
+    message     VARCHAR
+)
+LIMIT 5000000;
+```
+
+**Après**
+
+```sql
+-- Returns ~10 rows (one per status_code), answers the actual question
+SELECT status_code, count(*) AS hits
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    status_code VARCHAR
+)
+GROUP BY status_code
+ORDER BY hits DESC
+LIMIT 100;
+```
+
+**Remarque :** L'agrégation en SQL avec `GROUP BY` est plus efficace que la récupération de lignes brutes et l'agrégation dans une étape en aval. Le moteur filtre et résume les données à la source.
+
+#### Réduisez le périmètre du scan avant d'agréger sur une colonne à haute cardinalité {#narrow-the-scan-before-aggregating-on-a-high-cardinality-column}
+
+Lorsque vous travaillez avec des colonnes à haute cardinalité (telles que des e-mails, des adresses IP ou des identifiants de requête) :
+
+- Utilisez `SELECT DISTINCT` ou `GROUP BY` pour renvoyer une entrée par valeur distincte entre les workers. Sans filtre strict, l'ensemble de résultats croît sans limite.
+- Affinez d'abord le filtre de la source de données afin que l'agrégation porte sur moins de lignes.
+- Pour les cardinalités élevées, pré-agrégez les données en une ligne par intervalle de temps et par clé, puis comptez les valeurs distinctes sur l'ensemble des intervalles.
+
+*Objectif : trouver les adresses e-mail distinctes des utilisateurs dans les logs du service de validation de commande sur les 7 derniers jours.*
+
+**Avant**
+
+```sql
+-- No service filter; unbounded distinct set across all logs
+SELECT DISTINCT user_email
+FROM dd.logs(
+    columns        => ARRAY['@usr.email'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    user_email VARCHAR
+)
+```
+
+**Après**
+
+```sql
+-- Pre-aggregate to one row per (day, email), then count distinct across days
+SELECT count(DISTINCT user_email) AS distinct_emails
+FROM (
+  SELECT date_trunc('day', timestamp) AS day, user_email
+  FROM dd.logs(
+      filter         => 'service:checkout-api',
+      columns        => ARRAY['timestamp', '@usr.email'],
+      from_timestamp => NOW() - INTERVAL '7 days',
+      to_timestamp   => NOW()
+  ) AS (
+      timestamp  TIMESTAMP,
+      user_email VARCHAR
+  )
+  GROUP BY 1, 2
+) daily;
+```
+
+### Jointures {#joins}
+
+#### Combinez les auto-jointures en un seul scan {#combine-self-joins-into-a-single-scan}
+
+Joindre une source à elle-même plusieurs fois pour corréler différents événements est l'une des causes les plus fréquentes de lenteur des requêtes. La plupart des auto-jointures peuvent être réécrites en un seul scan avec des expressions `CASE`, des fonctions de fenêtrage ou `GROUP BY ... HAVING`.
+
+**Avant : 4 auto-jointures**
+
+```sql
+WITH a AS (
+    SELECT user_id FROM dd.logs(filter => 'service:checkout-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+b AS (
+    SELECT user_id FROM dd.logs(filter => 'service:payment-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+c AS (
+    SELECT user_id FROM dd.logs(filter => 'service:shipping-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+d AS (
+    SELECT user_id FROM dd.logs(filter => 'service:orders-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+)
+SELECT user_id
+FROM a JOIN b USING (user_id)
+       JOIN c USING (user_id)
+       JOIN d USING (user_id);
+```
+
+**Après : scan unique**
+
+```sql
+SELECT user_id
+FROM dd.logs(
+    filter         => 'service:(checkout-api OR payment-api OR shipping-api OR orders-api)',
+    columns        => ARRAY['service', '@usr.id'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    service VARCHAR,
+    user_id VARCHAR
+)
+GROUP BY user_id
+HAVING count(DISTINCT service) = 4;
+```
+
+#### Utilisez une clé de jointure à haute cardinalité {#use-a-high-cardinality-join-key}
+
+Lors d'une jointure, privilégiez une clé à cardinalité élevée comme `user_id`, `request_id` ou `trace_id`. Des clés trop générales comme `service` ou `status` peuvent transformer un jeu de données d'entrée de taille modérée en des milliards de lignes intermédiaires. Pour les grands jeux de données, affinez également le filtre de la source de données et réduisez la plage temporelle de chaque côté de la jointure.
+
+#### Filtrez les deux côtés d'une jointure inter-sources {#filter-both-sides-of-a-cross-source-join}
+
+Lorsque vous joignez deux sources de données avec `JOIN`, appliquez un filtre sélectif de chaque côté. Par exemple : logs + RUM, logs + traces et flux + logs. Un côté non filtré entraîne un scan complet dont les données doivent être conservées en mémoire pour la jointure. Dans la mesure du possible, pré-agrégez chaque source séparément et joignez les résumés.
+
+**Avant**
+
+```sql
+-- No filter on the logs side; full scan held in memory for the join
+SELECT logs.message, rum.user_id
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
+```
+
+**Après**
+
+```sql
+-- Both sides filtered before the join
+SELECT logs.message, rum.user_id
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        filter         => 'service:checkout-api status:error',
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
+```
+
+### Expressions {#expressions}
+
+#### Exécutez les expressions régulières une fois par ligne {#run-regular-expressions-once-per-row}
+
+Si vous appelez `REGEXP_MATCH` une fois pour chaque colonne de sortie, le même motif est appliqué à `message` à répétition pour chaque ligne. Exécutez-la une seule fois pour stocker le résultat dans un tableau, concaténez les captures en une seule chaîne délimitée, puis extrayez-les avec `SPLIT_PART` dans un `SELECT` en aval.
+
+**Avant**
+
+```sql
+-- Same regex evaluated 3 times per row
+SELECT
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 1) AS user_id,
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 2) AS latency_ms,
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 3) AS error_code
+FROM dd.logs(
+    columns        => ARRAY['message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (message VARCHAR);
+```
+
+**Après**
+
+```sql
+-- Regex runs once per row; captures unpacked in the outer SELECT
+SELECT
+  SPLIT_PART(matched, '|||', 1) AS user_id,
+  SPLIT_PART(matched, '|||', 2) AS latency_ms,
+  SPLIT_PART(matched, '|||', 3) AS error_code
+FROM (
+  SELECT ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||') AS matched
+  FROM dd.logs(
+      columns        => ARRAY['message'],
+      from_timestamp => NOW() - INTERVAL '1 day',
+      to_timestamp   => NOW()
+  ) AS (message VARCHAR)
+) sub;
+```
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1212,4 +1616,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
-[10]: /fr/bits_ai/mcp_server/
+[10]: /fr/mcp_server/
