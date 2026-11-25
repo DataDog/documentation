@@ -243,11 +243,11 @@ First, [configure the Databricks integration][14] with an account and [grant it 
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
-Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
+To limit data transfer and query costs, use a [view][23] that selects only the rows and columns you need.
 
 #### Troubleshooting
 
-Data can take a few minutes to populate.
+Allow several minutes for the initial sync to complete.
 
 - Check [Databricks ingestion events][20] for sync status and errors.
 - Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
@@ -257,6 +257,7 @@ Data can take a few minutes to populate.
 [16]: https://app.datadoghq.com/reference-tables
 [20]: https://app.datadoghq.com/event/explorer?query=source%3Adatabricks%20service%3Aintegration-reference-table
 [22]: /integrations/databricks/#reference-table-configuration
+[23]: https://docs.databricks.com/aws/en/views/
 
 {{% /collapse-content %}}
 
@@ -276,7 +277,7 @@ Test the query in the [Salesforce Developer Console][19]. Select fields directly
 
 #### Troubleshooting {#salesforce-troubleshooting}
 
-Data can take a few minutes to populate.
+Allow several minutes for the initial sync to complete.
 
 - Check [Salesforce ingestion events][20] for sync status and errors.
 - Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
@@ -307,7 +308,7 @@ Additional fields must use paths supported by the ServiceNow Table API. The colu
 
 #### Troubleshooting {#servicenow-troubleshooting}
 
-Data can take a few minutes to populate after the scheduled Query Builder query runs.
+Allow several minutes for the initial sync to complete after the scheduled Query Builder query runs.
 
 - Check [ServiceNow ingestion events][20] for sync status and errors.
 - Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
@@ -330,9 +331,9 @@ First, [configure the Snowflake integration][15] with an account and [grant it r
    - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click "Add Snowflake account".
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Data can take a few minutes to populate.
+3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Allow several minutes for the initial sync to complete.
 
-Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
+To limit data transfer and query costs, restrict your query to the rows and columns you need.
 
 [15]: /integrations/snowflake-web/#connect-your-snowflake-account
 [16]: https://app.datadoghq.com/reference-tables
