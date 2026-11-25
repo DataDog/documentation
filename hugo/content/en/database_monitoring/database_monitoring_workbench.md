@@ -14,6 +14,12 @@ further_reading:
 - link: "/mcp_server/"
   tag: "Documentation"
   text: "Datadog MCP Server"
+- link: "/database_monitoring/query_metrics/"
+  tag: "Documentation"
+  text: "Query Metrics"
+- link: "/database_monitoring/bits_database_optimization/"
+  tag: "Documentation"
+  text: "Bits Database Optimization"
 ---
 
 {{< callout url="https://app.datadoghq.com/forms/share/45a8d961134a872c7118d345cff413cfd3d88bc1f1558f76bb5067a85ae43118" btn_hidden="false" header="Join the Preview!" >}}
@@ -26,8 +32,10 @@ Database Monitoring Workbench is an ephemeral, production-like Postgres database
 
 This page explains how to:
 
+- Use Workbench in Datadog
 - Connect to a Workbench instance with MCP, the API, or a SQL client
-- Compare query plans and test index and migration changes
+- Compare query plans and test index, optimization, and migration changes
+- Replay production traffic
 - Catch plan regressions in CI
 - Experiment with data model changes
 
@@ -35,10 +43,42 @@ This page explains how to:
 
 - A Postgres database monitored by [Database Monitoring][5].
 - [Schema collection][1] enabled for the specific logical database, not only the instance.
-- The **Database Monitoring Read** permission. See [Role-based access control][6] for how to manage permissions.
+- The **Database Monitoring Read** and `built_in_features` permissions. See [Role-based access control][6] for how to manage permissions.
 - Workbench enabled for your organization. To request access, use the preview form at the top of this page.
+- To use the Bits tabs in Workbench, [Bits Chat][8] and DBM AI enabled for your organization.
 
 ## Connect to Workbench
+
+### Using Workbench in Datadog
+
+To open Workbench, go to **Database Monitoring > Workbench**, or click **Workbench** on a query's page.
+
+1. Select a PostgreSQL instance and a logical database.
+1. Optionally, check **Monitor this Workbench** to see its metrics in Database Monitoring while you work.
+1. Click **Start New Workbench**. The page shows each build step, such as **Reading database schema** and **Building schema and data**, and then a countdown to when the Workbench expires.
+
+To open a Workbench that an agent or a CI job started, click the arrow next to **Start New Workbench** and select **Open a Workbench by id**, or add `?workbench=<WORKBENCH_ID>` to the page's URL. You can keep several Workbenches open as tabs. **View instance** opens the production instance the Workbench copies.
+
+The sidebar groups the Workbench's tools:
+
+| Group | Page | What it does |
+| --- | --- | --- |
+| Query | **SQL Editor** | Run SQL and **Explain Plan** with autocomplete. The schema sidebar lists each table's columns and types, primary key, indexes, foreign keys, the tables that reference it, and its partitions. |
+| Query | **History** | The statements run in this Workbench. |
+| Telemetry | **Performance Metrics** | For a monitored Workbench, the instance's performance graphs, and a Workbench dashboard you can create and edit. |
+| Telemetry | **Setup** | How closely the Workbench matches production, the Agent configuration, and a planner settings experiment. |
+| Test a change | **Migration Test** | Paste a migration and compare the busiest production queries' plans before and after it. |
+| Test a change | **Partitioning** | Build a partitioned copy of a table, swap it in, and compare partitions read and plan cost for the queries on it. |
+| Test a change | **Optimizations** | Test Database Monitoring's index and query recommendations in the Workbench, and compare the query's plan with production's. |
+| Workload | **Replay** | Replay the busiest production queries, weighted by how often production runs them, and compare each query's latency with production's. |
+| Data | **Load data** | Load your own rows from a CSV file, or reshape the generated data. |
+| Production | **Top queries** | The instance's production queries, ordered by total time, calls, or average duration, with **Test in Workbench**. |
+
+When [Bits AI][9] is enabled, each tool also has a Bits tab with suggested prompts. Bits gets the Workbench's connection, tables, and busiest queries. **Use Workbench in Bits**, next to **View instance**, starts a Bits chat about the Workbench and the page you're on. In the SQL Editor, **Run in Bits** sends the current statement.
+
+<!-- TODO: add screenshot
+{{< img src="database_monitoring/database_monitoring_workbench/sql_editor.png" alt="The Workbench SQL Editor, with the schema sidebar showing a table's columns, indexes and foreign keys" style="width:100%;" >}}
+-->
 
 ### Connecting with the MCP server
 
@@ -95,6 +135,7 @@ The application key must belong to a user or service account with the **Database
 | <code style="white-space: nowrap;">database_instance</code> | The name of the instance in Database Monitoring. |
 | <code style="white-space: nowrap;">database_name</code> | The name of the logical database inside the `database_instance`. |
 | <code style="white-space: nowrap;">populate</code> | Set to `false` to create the instance without generated data. To load your own data, see [Connecting with a SQL client](#connecting-with-a-sql-client). |
+| <code style="white-space: nowrap;">monitoring</code> | Set to `true` to monitor the instance with Database Monitoring. The response then includes `monitoring_database_instance`, the name it reports under. <!-- TODO(backend): cost and setup --> |
 
 The request returns `202 Accepted` with the instance ID, its status, and a Postgres connection string:
 
@@ -108,9 +149,20 @@ The request returns `202 Accepted` with the instance ID, its status, and a Postg
 }
 {{< /code-block >}}
 
-Creating an instance is asynchronous. To check readiness, send `GET /api/unstable/databases/workbench/session/{id}` until `status` is `ready`. The response also includes `expires_at`.
+Creating an instance is asynchronous. To check readiness, send `GET /api/unstable/databases/workbench/session/{id}` until `status` is `ready`. Stop polling if `status` is `failed` or `cancelled`. A failed instance returns `error.code` and `error.message`.
 
-Instances expire after the number of seconds set in `ttl_seconds`, which is 1,800 seconds (30 minutes) by default. You cannot set the TTL in the request.
+| `status` | Meaning |
+| --- | --- |
+| `pending`, `running` | Being built. `phase` shows which step the build is on. |
+| `ready` | Accepting connections. |
+| `cancelling`, `cancelled` | Deleted or expired. |
+| `failed` | The build failed. See `error`. |
+
+`phase` is one of `queued`, `telemetry_extraction`, `population_planning`, `workload_discovery`, `claiming_sandbox`, `initializing_postgres`, `building_schema`, or `ready`. The response also includes `postgres_major`, `schema.tables`, `schema.columns`, `population.populated_rows`, `created_at`, `ready_at`, and `expires_at`.
+
+An instance expires 60 minutes after it's created, including the time it takes to build. <!-- TODO(backend): confirm the default --> Use `expires_at` for the deadline. `ttl_seconds` is the time left when you read the status, not the TTL. You cannot set the TTL in the request.
+
+To run a statement without a database client, send `POST /api/unstable/databases/workbench/session/{id}/query` with `{"sql": "<STATEMENT>"}`. The response includes `columns`, `rows`, `row_count`, `duration_ms`, and `truncated` when the rows were cut short. <!-- TODO(backend): confirm it's public -->
 
 To delete an instance, send `DELETE /api/unstable/databases/workbench/session/{id}`. A successful request returns `204`.
 
@@ -126,6 +178,19 @@ psql "postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require"
 The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use Workbench](#how-to-use-workbench). When the instance expires or you delete it, open connections close and in-flight queries can fail.
 
 By default, Workbench populates the instance with synthetic data. To use your own data instead, create the instance with `"populate": false` in the API request. Then load your data with `INSERT`, `COPY FROM STDIN`, or the `psql` `\copy` command, and run `ANALYZE` afterward. Instance resources and the TTL limit how much data you can load.
+
+### Loading data from the app
+
+In Workbench, open **Load data**:
+
+- **Load from file:** Load a CSV file into a table. Pick an **Existing table** and **Insert new rows**, **Update matching rows** (matched on the key columns you pick), or **Replace all rows** (in one statement, so a failure leaves the table as it was). Or, pick **New table** to create one shaped like the file. You can load up to 50,000 rows per file.
+- **Change the generated data:** Skew a column toward one value, scale a table up, add nulls, or thin a table out, then see how plans change.
+
+To keep personal data out of the Workbench, check **Anonymize before loading** and pick the columns. Values are replaced in your browser, so only the anonymized rows are sent. Each value keeps its shape and type: an email stays an email, a number keeps its digit count and stays within its integer type, a date moves by up to a year, and a UUID stays a UUID. Each distinct value gets one stand-in, so repeats, uniqueness, and joins between columns still hold.
+
+To keep joins working across files, turn on **Match earlier uploads**. The same value then gets the same stand-in in every file you load into that Workbench. The key stays in your browser and can't be read.
+
+**Replace all rows** isn't available when another table's foreign key deletes or resets rows in this one (`ON DELETE CASCADE`, `SET NULL`, or `SET DEFAULT`).
 
 ## How to use Workbench
 
@@ -222,12 +287,19 @@ id=$(jq -r .id <<<"$resp")
 dsn=$(jq -r .connection.dsn <<<"$resp")
 trap 'curl -sf -X DELETE "$API/$id" "${AUTH[@]}" >/dev/null || true' EXIT  # always delete
 
-# Wait for ready
+# Wait for ready, and stop if the build fails
 for _ in $(seq 60); do
-  status=$(curl -sf "$API/$id" "${AUTH[@]}" | jq -r .status)
-  [ "$status" = ready ] && break; sleep 5
+  status_json=$(curl -sf "$API/$id" "${AUTH[@]}")
+  status=$(jq -r .status <<<"$status_json")
+  case "$status" in
+    ready) break ;;
+    failed|cancelled)
+      echo "Workbench $status: $(jq -r '.error.message // "no error message"' <<<"$status_json")" >&2
+      exit 1 ;;
+  esac
+  sleep 5
 done
-[ "$status" = ready ] || { echo "Workbench not ready: $status"; exit 1; }
+[ "$status" = ready ] || { echo "Workbench not ready in time: $status" >&2; exit 1; }
 
 # Apply the change, then EXPLAIN top queries
 psql "$dsn" -v ON_ERROR_STOP=1 -f migrations/change.sql
@@ -237,7 +309,7 @@ psql "$dsn" -v ON_ERROR_STOP=1 -f ci/explain_top_queries.sql > plans.txt
 if grep -q "Seq Scan on orders" plans.txt; then echo "Plan regression"; exit 1; fi
 ```
 
-In this example, `migrations/change.sql` contains your change, and `ci/explain_top_queries.sql` contains an `EXPLAIN` statement for each of your top queries. The last check fails the job if a plan includes a sequential scan on `orders`. Replace it with your own invariants.
+In this example, `migrations/change.sql` contains your change, and `ci/explain_top_queries.sql` contains an `EXPLAIN` statement for each of your top queries. The last check fails the job if a plan includes a sequential scan on `orders`. Replace it with your own invariants. Each statement is limited to 30 seconds, so long migrations and index builds on large tables can fail. <!-- TODO(backend) -->
 
 ### Experiment with data model changes
 
@@ -247,18 +319,42 @@ A Workbench instance gives you your real schema to experiment on. Try the change
 
 With the default synthetic data, no privacy review is required, because Workbench contains none of your customer data.
 
-## Limitations
+### Test an optimization from Database Monitoring
+
+1. In Workbench, open **Optimizations**, or click **Test in Workbench** on a query in **Top queries**.
+1. On a recommendation's card, click **Test in Workbench**. Workbench applies the index or rewrite, explains the query with several sets of parameter values (common values, rare values, values not in the table, and wide ranges), and then removes any index it added.
+1. Compare the plan cost before and after for each set. **Compare with production** compares the Workbench plan with the plan production runs most.
+
+For an index, Workbench also lists the production queries on that table as **Faster reads**, **Slower writes**, and **Unaffected**.
+
+### Test a migration in the app
+
+1. Open **Migration Test** and choose how many of the busiest production queries to check, from 1 to 50.
+1. Paste the migration and click **Apply change**.
+1. Each query shows its plan cost before and after, with **Compare plans**.
+
+Each statement is limited to 30 seconds. <!-- TODO(backend) -->
+
+### Replay production traffic
+
+**Replay** runs the busiest production queries in the Workbench from your browser, weighted by their share of production calls, and compares each query's mean and p95 latency with production's. Pick **Replay reads**, **Replay reads and writes**, or **Stress the busiest**, then a preset such as **Quick check**, or a custom size of up to 50 queries and 2,000 runs. Replays keep running if you leave the page, and each query has **Compare plans** and **Open in editor**.
+
+Workbench hardware isn't production's, so compare the latency ratio between queries, not the absolute numbers.
+
+## How Workbench compares to production
 
 Workbench answers questions about schema, query plans, and relative cost. It does not reproduce production hardware, data, or every schema object.
 
-- **Only Postgres is supported.** Workbench supports Postgres 12 through 18. Other database engines are not supported.
-- **Timings may vary.** Instances are small and not sized like your production hardware. Compare plan shape, row estimates, index usage, and before-and-after results, not absolute timings such as "this query takes 40ms." To benchmark a rewrite or index, use [Bits Database Optimization][4].
-- **Generated data is approximate.** By default, Workbench generates rows from collected statistics, so table sizes are close to production. Skew, column correlation, and value distributions can differ, which can change plans that depend on them. Populating Workbench with your own data avoids this.
+- **Supports PostgreSQL 12 through 18.**
+- **Workbench runs on smaller hardware than production.** Compare plan shape, row estimates, index usage, and before-and-after results, not absolute timings such as "this query takes 40ms." **Optimizations**, **Migration Test**, and **Replay** compare plans, plan cost, and latency against production for you. To benchmark a rewrite or index, use [Bits Database Optimization][4].
+- **Generated data is approximate.** By default, Workbench generates rows from collected statistics. Skew, column correlation, and value distributions can differ, which can change plans that depend on them. Populating Workbench with your own data avoids this.
 - **Some indexes and foreign keys may be missing.** Workbench may skip an index or foreign key, or drop an expression that calls an unavailable function.
-- **Views, functions, triggers, roles, and grants are not reconstructed.** Changes that depend on them do not reproduce accurately.
-- **Instances are temporary.** Instances expire after 30 minutes by default, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
-
-Use Workbench to check structure, query plans, and order-of-magnitude effects. It does not cover other effects.
+- **Workbench rebuilds tables, columns, indexes, and foreign keys.** Views, functions, triggers, roles, and grants stay out of it, so test changes that depend on them elsewhere.
+- **Generated data is capped at 2,000,000 rows per table**, so larger tables have fewer rows than production. Row estimates in plans reflect the Workbench's tables. <!-- TODO(backend) -->
+- **Statements are limited to 30 seconds.** Index builds and migrations on large tables can exceed the limit. <!-- TODO(backend) -->
+- **Schemas over <N> tables are not fully built.** <!-- TODO(backend): the number and what happens to the rest -->
+- **Helper schemas can appear.** `workbench_tools` and `workbench_meta` can appear in a Workbench. The app and Bits add them when you use some features, and they aren't part of your database.
+- **Instances are temporary.** Instances expire 60 minutes after creation by default, so re-create any that you need to keep. <!-- TODO(backend): confirm the default -->
 
 ## Further reading
 
@@ -271,3 +367,5 @@ Use Workbench to check structure, query plans, and order-of-magnitude effects. I
 [5]: /database_monitoring/
 [6]: /account_management/rbac/permissions/
 [7]: /mcp_server/setup/
+[8]: /bits_ai/bits_chat/
+[9]: /bits_ai/
