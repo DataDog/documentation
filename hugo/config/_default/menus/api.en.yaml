@@ -4192,19 +4192,6 @@ menu:
         unstable:
           - v2
         order: 157
-    - name: Get AWS IAM Identity Center account prerequisites
-      url: /api/latest/security-monitoring/get-aws-iam-identity-center-account-prerequisites/
-      identifier: security-monitoring-get-aws-iam-identity-center-account-prerequisites
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetAWSIdentityCenterAWSAccounts
-        unstable:
-          - v2
-        order: 191
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration
@@ -22110,6 +22097,153 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: Rum Audience Management
+      url: /api/latest/rum-audience-management/
+      identifier: rum-audience-management
+      generated: true
+    - name: List connections
+      url: /api/latest/rum-audience-management/list-connections/
+      identifier: rum-audience-management-list-connections
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListConnections
+        unstable:
+          - v2
+        order: 7
+    - name: Delete connection
+      url: /api/latest/rum-audience-management/delete-connection/
+      identifier: rum-audience-management-delete-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteConnection
+        unstable:
+          - v2
+        order: 6
+    - name: Update connection
+      url: /api/latest/rum-audience-management/update-connection/
+      identifier: rum-audience-management-update-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateConnection
+        unstable:
+          - v2
+        order: 3
+    - name: Create connection
+      url: /api/latest/rum-audience-management/create-connection/
+      identifier: rum-audience-management-create-connection
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateConnection
+        unstable:
+          - v2
+        order: 2
+    - name: Get mapping
+      url: /api/latest/rum-audience-management/get-mapping/
+      identifier: rum-audience-management-get-mapping
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMapping
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a user profile
+      url: /api/latest/rum-audience-management/delete-a-user-profile/
+      identifier: rum-audience-management-delete-a-user-profile
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserProfile
+        unstable:
+          - v2
+        order: 11
+    - name: Query users
+      url: /api/latest/rum-audience-management/query-users/
+      identifier: rum-audience-management-query-users
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryUsers
+        unstable:
+          - v2
+        order: 8
+    - name: Get user facet info
+      url: /api/latest/rum-audience-management/get-user-facet-info/
+      identifier: rum-audience-management-get-user-facet-info
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserFacetInfo
+        unstable:
+          - v2
+        order: 9
+    - name: Query event filtered users
+      url: /api/latest/rum-audience-management/query-event-filtered-users/
+      identifier: rum-audience-management-query-event-filtered-users
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryEventFilteredUsers
+        unstable:
+          - v2
+        order: 4
+    - name: Query accounts
+      url: /api/latest/rum-audience-management/query-accounts/
+      identifier: rum-audience-management-query-accounts
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - QueryAccounts
+        unstable:
+          - v2
+        order: 1
+    - name: Get account facet info
+      url: /api/latest/rum-audience-management/get-account-facet-info/
+      identifier: rum-audience-management-get-account-facet-info
+      parent: rum-audience-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAccountFacetInfo
+        unstable:
+          - v2
+        order: 5
     - name: RUM Config
       url: /api/latest/rum-config/
       identifier: rum-config
@@ -22123,7 +22257,7 @@ menu:
         versions:
           - v2
         operationids:
-          - CreateRumConfig
+          - CreateRUMConfig
         unstable:
           - v2
         order: 2
@@ -22136,7 +22270,7 @@ menu:
         versions:
           - v2
         operationids:
-          - UpdateRumConfig
+          - UpdateRUMConfig
         unstable:
           - v2
         order: 3
@@ -22149,7 +22283,7 @@ menu:
         versions:
           - v2
         operationids:
-          - GetRumConfig
+          - GetRUMConfig
         unstable:
           - v2
         order: 1
@@ -22233,6 +22367,70 @@ menu:
           - v2
         operationids:
           - ListRUMArchiveConfigs
+        unstable: []
+        order: 1
+    - name: RUM Metrics
+      url: /api/latest/rum-metrics/
+      identifier: rum-metrics
+      generated: true
+    - name: Update a RUM-based metric
+      url: /api/latest/rum-metrics/update-a-rum-based-metric/
+      identifier: rum-metrics-update-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMMetric
+        unstable: []
+        order: 4
+    - name: Get a RUM-based metric
+      url: /api/latest/rum-metrics/get-a-rum-based-metric/
+      identifier: rum-metrics-get-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMMetric
+        unstable: []
+        order: 3
+    - name: Delete a RUM-based metric
+      url: /api/latest/rum-metrics/delete-a-rum-based-metric/
+      identifier: rum-metrics-delete-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMMetric
+        unstable: []
+        order: 5
+    - name: Create a RUM-based metric
+      url: /api/latest/rum-metrics/create-a-rum-based-metric/
+      identifier: rum-metrics-create-a-rum-based-metric
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMMetric
+        unstable: []
+        order: 2
+    - name: Get all RUM-based metrics
+      url: /api/latest/rum-metrics/get-all-rum-based-metrics/
+      identifier: rum-metrics-get-all-rum-based-metrics
+      parent: rum-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMMetrics
         unstable: []
         order: 1
     - name: RUM Operations
@@ -22448,7 +22646,7 @@ menu:
         versions:
           - v2
         operationids:
-          - UpdateRumSdkConfig
+          - UpdateRUMSdkConfig
         unstable:
           - v2
         order: 2
@@ -22461,10 +22659,414 @@ menu:
         versions:
           - v2
         operationids:
-          - GetRumSdkConfig
+          - GetRUMSdkConfig
         unstable:
           - v2
         order: 1
+    - name: RUM Replay Heatmaps
+      url: /api/latest/rum-replay-heatmaps/
+      identifier: rum-replay-heatmaps
+      generated: true
+    - name: Update replay heatmap snapshot
+      url: /api/latest/rum-replay-heatmaps/update-replay-heatmap-snapshot/
+      identifier: rum-replay-heatmaps-update-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateReplayHeatmapSnapshot
+        unstable: []
+        order: 3
+    - name: Delete replay heatmap snapshot
+      url: /api/latest/rum-replay-heatmaps/delete-replay-heatmap-snapshot/
+      identifier: rum-replay-heatmaps-delete-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteReplayHeatmapSnapshot
+        unstable: []
+        order: 4
+    - name: Create replay heatmap snapshot
+      url: /api/latest/rum-replay-heatmaps/create-replay-heatmap-snapshot/
+      identifier: rum-replay-heatmaps-create-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReplayHeatmapSnapshot
+        unstable: []
+        order: 1
+    - name: List replay heatmap snapshots
+      url: /api/latest/rum-replay-heatmaps/list-replay-heatmap-snapshots/
+      identifier: rum-replay-heatmaps-list-replay-heatmap-snapshots
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReplayHeatmapSnapshots
+        unstable: []
+        order: 2
+    - name: RUM Replay Playlists
+      url: /api/latest/rum-replay-playlists/
+      identifier: rum-replay-playlists
+      generated: true
+    - name: Add RUM replay session to playlist
+      url: /api/latest/rum-replay-playlists/add-rum-replay-session-to-playlist/
+      identifier: rum-replay-playlists-add-rum-replay-session-to-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddRUMReplaySessionToPlaylist
+        unstable: []
+        order: 8
+    - name: Remove RUM replay session from playlist
+      url: /api/latest/rum-replay-playlists/remove-rum-replay-session-from-playlist/
+      identifier: rum-replay-playlists-remove-rum-replay-session-from-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveRUMReplaySessionFromPlaylist
+        unstable: []
+        order: 9
+    - name: List RUM replay playlist sessions
+      url: /api/latest/rum-replay-playlists/list-rum-replay-playlist-sessions/
+      identifier: rum-replay-playlists-list-rum-replay-playlist-sessions
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMReplayPlaylistSessions
+        unstable: []
+        order: 3
+    - name: Bulk remove RUM replay playlist sessions
+      url: /api/latest/rum-replay-playlists/bulk-remove-rum-replay-playlist-sessions/
+      identifier: rum-replay-playlists-bulk-remove-rum-replay-playlist-sessions
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkRemoveRUMReplayPlaylistSessions
+        unstable: []
+        order: 4
+    - name: Update RUM replay playlist
+      url: /api/latest/rum-replay-playlists/update-rum-replay-playlist/
+      identifier: rum-replay-playlists-update-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMReplayPlaylist
+        unstable: []
+        order: 6
+    - name: Get RUM replay playlist
+      url: /api/latest/rum-replay-playlists/get-rum-replay-playlist/
+      identifier: rum-replay-playlists-get-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMReplayPlaylist
+        unstable: []
+        order: 5
+    - name: Delete RUM replay playlist
+      url: /api/latest/rum-replay-playlists/delete-rum-replay-playlist/
+      identifier: rum-replay-playlists-delete-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMReplayPlaylist
+        unstable: []
+        order: 7
+    - name: Create RUM replay playlist
+      url: /api/latest/rum-replay-playlists/create-rum-replay-playlist/
+      identifier: rum-replay-playlists-create-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMReplayPlaylist
+        unstable: []
+        order: 1
+    - name: List RUM replay playlists
+      url: /api/latest/rum-replay-playlists/list-rum-replay-playlists/
+      identifier: rum-replay-playlists-list-rum-replay-playlists
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMReplayPlaylists
+        unstable: []
+        order: 2
+    - name: RUM Replay Sessions
+      url: /api/latest/rum-replay-sessions/
+      identifier: rum-replay-sessions
+      generated: true
+    - name: Get segments
+      url: /api/latest/rum-replay-sessions/get-segments/
+      identifier: rum-replay-sessions-get-segments
+      parent: rum-replay-sessions
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSegments
+        unstable: []
+        order: 1
+    - name: RUM Replay Viewership
+      url: /api/latest/rum-replay-viewership/
+      identifier: rum-replay-viewership
+      generated: true
+    - name: List RUM replay viewership history sessions
+      url: /api/latest/rum-replay-viewership/list-rum-replay-viewership-history-sessions/
+      identifier: rum-replay-viewership-list-rum-replay-viewership-history-sessions
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMReplayViewershipHistorySessions
+        unstable: []
+        order: 1
+    - name: Create RUM replay session watch
+      url: /api/latest/rum-replay-viewership/create-rum-replay-session-watch/
+      identifier: rum-replay-viewership-create-rum-replay-session-watch
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMReplaySessionWatch
+        unstable: []
+        order: 2
+    - name: Delete RUM replay session watch
+      url: /api/latest/rum-replay-viewership/delete-rum-replay-session-watch/
+      identifier: rum-replay-viewership-delete-rum-replay-session-watch
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMReplaySessionWatch
+        unstable: []
+        order: 3
+    - name: List RUM replay session watchers
+      url: /api/latest/rum-replay-viewership/list-rum-replay-session-watchers/
+      identifier: rum-replay-viewership-list-rum-replay-session-watchers
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMReplaySessionWatchers
+        unstable: []
+        order: 4
+    - name: RUM Retention Filters
+      url: /api/latest/rum-retention-filters/
+      identifier: rum-retention-filters
+      generated: true
+    - name: Update a RUM retention filter
+      url: /api/latest/rum-retention-filters/update-a-rum-retention-filter/
+      identifier: rum-retention-filters-update-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRetentionFilter
+        unstable: []
+        order: 4
+    - name: Get a RUM retention filter
+      url: /api/latest/rum-retention-filters/get-a-rum-retention-filter/
+      identifier: rum-retention-filters-get-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRetentionFilter
+        unstable: []
+        order: 2
+    - name: Delete a RUM retention filter
+      url: /api/latest/rum-retention-filters/delete-a-rum-retention-filter/
+      identifier: rum-retention-filters-delete-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRetentionFilter
+        unstable: []
+        order: 5
+    - name: Update a permanent RUM retention filter
+      url: /api/latest/rum-retention-filters/update-a-permanent-rum-retention-filter/
+      identifier: rum-retention-filters-update-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePermanentRetentionFilter
+        unstable: []
+        order: 9
+    - name: Get a permanent RUM retention filter
+      url: /api/latest/rum-retention-filters/get-a-permanent-rum-retention-filter/
+      identifier: rum-retention-filters-get-a-permanent-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPermanentRetentionFilter
+        unstable: []
+        order: 8
+    - name: Get all permanent RUM retention filters
+      url: /api/latest/rum-retention-filters/get-all-permanent-rum-retention-filters/
+      identifier: rum-retention-filters-get-all-permanent-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPermanentRetentionFilters
+        unstable: []
+        order: 7
+    - name: Update a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/update-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-update-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExclusionFilter
+        unstable: []
+        order: 13
+    - name: Get a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-get-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExclusionFilter
+        unstable: []
+        order: 11
+    - name: Delete a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-delete-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExclusionFilter
+        unstable: []
+        order: 14
+    - name: Create a RUM exclusion filter
+      url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
+      identifier: rum-retention-filters-create-a-rum-exclusion-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExclusionFilter
+        unstable: []
+        order: 12
+    - name: Get all RUM exclusion filters
+      url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
+      identifier: rum-retention-filters-get-all-rum-exclusion-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExclusionFilters
+        unstable: []
+        order: 10
+    - name: Create a RUM retention filter
+      url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
+      identifier: rum-retention-filters-create-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRetentionFilter
+        unstable: []
+        order: 3
+    - name: Get all RUM retention filters
+      url: /api/latest/rum-retention-filters/get-all-rum-retention-filters/
+      identifier: rum-retention-filters-get-all-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRetentionFilters
+        unstable: []
+        order: 1
+    - name: Order RUM retention filters
+      url: /api/latest/rum-retention-filters/order-rum-retention-filters/
+      identifier: rum-retention-filters-order-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - OrderRetentionFilters
+        unstable: []
+        order: 6
     - name: RUM Retention Quotas
       url: /api/latest/rum-retention-quotas/
       identifier: rum-retention-quotas
@@ -22478,7 +23080,7 @@ menu:
         versions:
           - v2
         operationids:
-          - UpsertRumQuotaConfig
+          - UpsertRUMQuotaConfig
         unstable: []
         order: 2
     - name: Get a RUM retention quota configuration
@@ -22490,7 +23092,7 @@ menu:
         versions:
           - v2
         operationids:
-          - GetRumQuotaConfig
+          - GetRUMQuotaConfig
         unstable: []
         order: 1
     - name: Delete a RUM retention quota configuration
@@ -22502,9 +23104,91 @@ menu:
         versions:
           - v2
         operationids:
-          - DeleteRumQuotaConfig
+          - DeleteRUMQuotaConfig
         unstable: []
         order: 3
+    - name: Rum Teams Ownership
+      url: /api/latest/rum-teams-ownership/
+      identifier: rum-teams-ownership
+      generated: true
+    - name: List teams ownership rules
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-rules/
+      identifier: rum-teams-ownership-list-teams-ownership-rules
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipRules
+        unstable:
+          - v2
+        order: 5
+    - name: Get a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-get-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-delete-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 4
+    - name: Bulk create and remove teams ownership mappings
+      url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
+      identifier: rum-teams-ownership-bulk-create-and-remove-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMappingsBatch
+        unstable:
+          - v2
+        order: 6
+    - name: Create a teams ownership mapping
+      url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
+      identifier: rum-teams-ownership-create-a-teams-ownership-mapping
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamsOwnershipMapping
+        unstable:
+          - v2
+        order: 2
+    - name: List teams ownership mappings
+      url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
+      identifier: rum-teams-ownership-list-teams-ownership-mappings
+      parent: rum-teams-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamsOwnershipMappings
+        unstable:
+          - v2
+        order: 1
     - name: Reference Tables
       url: /api/latest/reference-tables/
       identifier: reference-tables
@@ -22984,703 +23668,6 @@ menu:
         operationids:
           - ListPermissions
         unstable: []
-        order: 1
-    - name: Rum Audience Management
-      url: /api/latest/rum-audience-management/
-      identifier: rum-audience-management
-      generated: true
-    - name: List connections
-      url: /api/latest/rum-audience-management/list-connections/
-      identifier: rum-audience-management-list-connections
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListConnections
-        unstable:
-          - v2
-        order: 7
-    - name: Delete connection
-      url: /api/latest/rum-audience-management/delete-connection/
-      identifier: rum-audience-management-delete-connection
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteConnection
-        unstable:
-          - v2
-        order: 6
-    - name: Update connection
-      url: /api/latest/rum-audience-management/update-connection/
-      identifier: rum-audience-management-update-connection
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateConnection
-        unstable:
-          - v2
-        order: 3
-    - name: Create connection
-      url: /api/latest/rum-audience-management/create-connection/
-      identifier: rum-audience-management-create-connection
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateConnection
-        unstable:
-          - v2
-        order: 2
-    - name: Get mapping
-      url: /api/latest/rum-audience-management/get-mapping/
-      identifier: rum-audience-management-get-mapping
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetMapping
-        unstable:
-          - v2
-        order: 10
-    - name: Delete a user profile
-      url: /api/latest/rum-audience-management/delete-a-user-profile/
-      identifier: rum-audience-management-delete-a-user-profile
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteUserProfile
-        unstable:
-          - v2
-        order: 11
-    - name: Query users
-      url: /api/latest/rum-audience-management/query-users/
-      identifier: rum-audience-management-query-users
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - QueryUsers
-        unstable:
-          - v2
-        order: 8
-    - name: Get user facet info
-      url: /api/latest/rum-audience-management/get-user-facet-info/
-      identifier: rum-audience-management-get-user-facet-info
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetUserFacetInfo
-        unstable:
-          - v2
-        order: 9
-    - name: Query event filtered users
-      url: /api/latest/rum-audience-management/query-event-filtered-users/
-      identifier: rum-audience-management-query-event-filtered-users
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - QueryEventFilteredUsers
-        unstable:
-          - v2
-        order: 4
-    - name: Query accounts
-      url: /api/latest/rum-audience-management/query-accounts/
-      identifier: rum-audience-management-query-accounts
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - QueryAccounts
-        unstable:
-          - v2
-        order: 1
-    - name: Get account facet info
-      url: /api/latest/rum-audience-management/get-account-facet-info/
-      identifier: rum-audience-management-get-account-facet-info
-      parent: rum-audience-management
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetAccountFacetInfo
-        unstable:
-          - v2
-        order: 5
-    - name: RUM Metrics
-      url: /api/latest/rum-metrics/
-      identifier: rum-metrics
-      generated: true
-    - name: Update a RUM-based metric
-      url: /api/latest/rum-metrics/update-a-rum-based-metric/
-      identifier: rum-metrics-update-a-rum-based-metric
-      parent: rum-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateRumMetric
-        unstable: []
-        order: 4
-    - name: Get a RUM-based metric
-      url: /api/latest/rum-metrics/get-a-rum-based-metric/
-      identifier: rum-metrics-get-a-rum-based-metric
-      parent: rum-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetRumMetric
-        unstable: []
-        order: 3
-    - name: Delete a RUM-based metric
-      url: /api/latest/rum-metrics/delete-a-rum-based-metric/
-      identifier: rum-metrics-delete-a-rum-based-metric
-      parent: rum-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteRumMetric
-        unstable: []
-        order: 5
-    - name: Create a RUM-based metric
-      url: /api/latest/rum-metrics/create-a-rum-based-metric/
-      identifier: rum-metrics-create-a-rum-based-metric
-      parent: rum-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateRumMetric
-        unstable: []
-        order: 2
-    - name: Get all RUM-based metrics
-      url: /api/latest/rum-metrics/get-all-rum-based-metrics/
-      identifier: rum-metrics-get-all-rum-based-metrics
-      parent: rum-metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRumMetrics
-        unstable: []
-        order: 1
-    - name: RUM Replay Heatmaps
-      url: /api/latest/rum-replay-heatmaps/
-      identifier: rum-replay-heatmaps
-      generated: true
-    - name: Update replay heatmap snapshot
-      url: /api/latest/rum-replay-heatmaps/update-replay-heatmap-snapshot/
-      identifier: rum-replay-heatmaps-update-replay-heatmap-snapshot
-      parent: rum-replay-heatmaps
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateReplayHeatmapSnapshot
-        unstable: []
-        order: 3
-    - name: Delete replay heatmap snapshot
-      url: /api/latest/rum-replay-heatmaps/delete-replay-heatmap-snapshot/
-      identifier: rum-replay-heatmaps-delete-replay-heatmap-snapshot
-      parent: rum-replay-heatmaps
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteReplayHeatmapSnapshot
-        unstable: []
-        order: 4
-    - name: Create replay heatmap snapshot
-      url: /api/latest/rum-replay-heatmaps/create-replay-heatmap-snapshot/
-      identifier: rum-replay-heatmaps-create-replay-heatmap-snapshot
-      parent: rum-replay-heatmaps
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateReplayHeatmapSnapshot
-        unstable: []
-        order: 1
-    - name: List replay heatmap snapshots
-      url: /api/latest/rum-replay-heatmaps/list-replay-heatmap-snapshots/
-      identifier: rum-replay-heatmaps-list-replay-heatmap-snapshots
-      parent: rum-replay-heatmaps
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListReplayHeatmapSnapshots
-        unstable: []
-        order: 2
-    - name: RUM Replay Playlists
-      url: /api/latest/rum-replay-playlists/
-      identifier: rum-replay-playlists
-      generated: true
-    - name: Add RUM replay session to playlist
-      url: /api/latest/rum-replay-playlists/add-rum-replay-session-to-playlist/
-      identifier: rum-replay-playlists-add-rum-replay-session-to-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - AddRumReplaySessionToPlaylist
-        unstable: []
-        order: 8
-    - name: Remove RUM replay session from playlist
-      url: /api/latest/rum-replay-playlists/remove-rum-replay-session-from-playlist/
-      identifier: rum-replay-playlists-remove-rum-replay-session-from-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - RemoveRumReplaySessionFromPlaylist
-        unstable: []
-        order: 9
-    - name: List RUM replay playlist sessions
-      url: /api/latest/rum-replay-playlists/list-rum-replay-playlist-sessions/
-      identifier: rum-replay-playlists-list-rum-replay-playlist-sessions
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRumReplayPlaylistSessions
-        unstable: []
-        order: 3
-    - name: Bulk remove RUM replay playlist sessions
-      url: /api/latest/rum-replay-playlists/bulk-remove-rum-replay-playlist-sessions/
-      identifier: rum-replay-playlists-bulk-remove-rum-replay-playlist-sessions
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - BulkRemoveRumReplayPlaylistSessions
-        unstable: []
-        order: 4
-    - name: Update RUM replay playlist
-      url: /api/latest/rum-replay-playlists/update-rum-replay-playlist/
-      identifier: rum-replay-playlists-update-rum-replay-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateRumReplayPlaylist
-        unstable: []
-        order: 6
-    - name: Get RUM replay playlist
-      url: /api/latest/rum-replay-playlists/get-rum-replay-playlist/
-      identifier: rum-replay-playlists-get-rum-replay-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetRumReplayPlaylist
-        unstable: []
-        order: 5
-    - name: Delete RUM replay playlist
-      url: /api/latest/rum-replay-playlists/delete-rum-replay-playlist/
-      identifier: rum-replay-playlists-delete-rum-replay-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteRumReplayPlaylist
-        unstable: []
-        order: 7
-    - name: Create RUM replay playlist
-      url: /api/latest/rum-replay-playlists/create-rum-replay-playlist/
-      identifier: rum-replay-playlists-create-rum-replay-playlist
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateRumReplayPlaylist
-        unstable: []
-        order: 1
-    - name: List RUM replay playlists
-      url: /api/latest/rum-replay-playlists/list-rum-replay-playlists/
-      identifier: rum-replay-playlists-list-rum-replay-playlists
-      parent: rum-replay-playlists
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRumReplayPlaylists
-        unstable: []
-        order: 2
-    - name: RUM Replay Sessions
-      url: /api/latest/rum-replay-sessions/
-      identifier: rum-replay-sessions
-      generated: true
-    - name: Get segments
-      url: /api/latest/rum-replay-sessions/get-segments/
-      identifier: rum-replay-sessions-get-segments
-      parent: rum-replay-sessions
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSegments
-        unstable: []
-        order: 1
-    - name: RUM Replay Viewership
-      url: /api/latest/rum-replay-viewership/
-      identifier: rum-replay-viewership
-      generated: true
-    - name: List RUM replay viewership history sessions
-      url: /api/latest/rum-replay-viewership/list-rum-replay-viewership-history-sessions/
-      identifier: rum-replay-viewership-list-rum-replay-viewership-history-sessions
-      parent: rum-replay-viewership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRumReplayViewershipHistorySessions
-        unstable: []
-        order: 1
-    - name: Create RUM replay session watch
-      url: /api/latest/rum-replay-viewership/create-rum-replay-session-watch/
-      identifier: rum-replay-viewership-create-rum-replay-session-watch
-      parent: rum-replay-viewership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateRumReplaySessionWatch
-        unstable: []
-        order: 2
-    - name: Delete RUM replay session watch
-      url: /api/latest/rum-replay-viewership/delete-rum-replay-session-watch/
-      identifier: rum-replay-viewership-delete-rum-replay-session-watch
-      parent: rum-replay-viewership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteRumReplaySessionWatch
-        unstable: []
-        order: 3
-    - name: List RUM replay session watchers
-      url: /api/latest/rum-replay-viewership/list-rum-replay-session-watchers/
-      identifier: rum-replay-viewership-list-rum-replay-session-watchers
-      parent: rum-replay-viewership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRumReplaySessionWatchers
-        unstable: []
-        order: 4
-    - name: RUM Retention Filters
-      url: /api/latest/rum-retention-filters/
-      identifier: rum-retention-filters
-      generated: true
-    - name: Update a RUM retention filter
-      url: /api/latest/rum-retention-filters/update-a-rum-retention-filter/
-      identifier: rum-retention-filters-update-a-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateRetentionFilter
-        unstable: []
-        order: 4
-    - name: Get a RUM retention filter
-      url: /api/latest/rum-retention-filters/get-a-rum-retention-filter/
-      identifier: rum-retention-filters-get-a-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetRetentionFilter
-        unstable: []
-        order: 2
-    - name: Delete a RUM retention filter
-      url: /api/latest/rum-retention-filters/delete-a-rum-retention-filter/
-      identifier: rum-retention-filters-delete-a-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteRetentionFilter
-        unstable: []
-        order: 5
-    - name: Update a permanent RUM retention filter
-      url: /api/latest/rum-retention-filters/update-a-permanent-rum-retention-filter/
-      identifier: rum-retention-filters-update-a-permanent-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdatePermanentRetentionFilter
-        unstable: []
-        order: 9
-    - name: Get a permanent RUM retention filter
-      url: /api/latest/rum-retention-filters/get-a-permanent-rum-retention-filter/
-      identifier: rum-retention-filters-get-a-permanent-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetPermanentRetentionFilter
-        unstable: []
-        order: 8
-    - name: Get all permanent RUM retention filters
-      url: /api/latest/rum-retention-filters/get-all-permanent-rum-retention-filters/
-      identifier: rum-retention-filters-get-all-permanent-rum-retention-filters
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListPermanentRetentionFilters
-        unstable: []
-        order: 7
-    - name: Update a RUM exclusion filter
-      url: /api/latest/rum-retention-filters/update-a-rum-exclusion-filter/
-      identifier: rum-retention-filters-update-a-rum-exclusion-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateExclusionFilter
-        unstable: []
-        order: 13
-    - name: Get a RUM exclusion filter
-      url: /api/latest/rum-retention-filters/get-a-rum-exclusion-filter/
-      identifier: rum-retention-filters-get-a-rum-exclusion-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetExclusionFilter
-        unstable: []
-        order: 11
-    - name: Delete a RUM exclusion filter
-      url: /api/latest/rum-retention-filters/delete-a-rum-exclusion-filter/
-      identifier: rum-retention-filters-delete-a-rum-exclusion-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteExclusionFilter
-        unstable: []
-        order: 14
-    - name: Create a RUM exclusion filter
-      url: /api/latest/rum-retention-filters/create-a-rum-exclusion-filter/
-      identifier: rum-retention-filters-create-a-rum-exclusion-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateExclusionFilter
-        unstable: []
-        order: 12
-    - name: Get all RUM exclusion filters
-      url: /api/latest/rum-retention-filters/get-all-rum-exclusion-filters/
-      identifier: rum-retention-filters-get-all-rum-exclusion-filters
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListExclusionFilters
-        unstable: []
-        order: 10
-    - name: Create a RUM retention filter
-      url: /api/latest/rum-retention-filters/create-a-rum-retention-filter/
-      identifier: rum-retention-filters-create-a-rum-retention-filter
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateRetentionFilter
-        unstable: []
-        order: 3
-    - name: Get all RUM retention filters
-      url: /api/latest/rum-retention-filters/get-all-rum-retention-filters/
-      identifier: rum-retention-filters-get-all-rum-retention-filters
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListRetentionFilters
-        unstable: []
-        order: 1
-    - name: Order RUM retention filters
-      url: /api/latest/rum-retention-filters/order-rum-retention-filters/
-      identifier: rum-retention-filters-order-rum-retention-filters
-      parent: rum-retention-filters
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - OrderRetentionFilters
-        unstable: []
-        order: 6
-    - name: Rum Teams Ownership
-      url: /api/latest/rum-teams-ownership/
-      identifier: rum-teams-ownership
-      generated: true
-    - name: List teams ownership rules
-      url: /api/latest/rum-teams-ownership/list-teams-ownership-rules/
-      identifier: rum-teams-ownership-list-teams-ownership-rules
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamsOwnershipRules
-        unstable:
-          - v2
-        order: 5
-    - name: Get a teams ownership mapping
-      url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
-      identifier: rum-teams-ownership-get-a-teams-ownership-mapping
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetTeamsOwnershipMapping
-        unstable:
-          - v2
-        order: 3
-    - name: Delete a teams ownership mapping
-      url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
-      identifier: rum-teams-ownership-delete-a-teams-ownership-mapping
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteTeamsOwnershipMapping
-        unstable:
-          - v2
-        order: 4
-    - name: Bulk create and remove teams ownership mappings
-      url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
-      identifier: rum-teams-ownership-bulk-create-and-remove-teams-ownership-mappings
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateTeamsOwnershipMappingsBatch
-        unstable:
-          - v2
-        order: 6
-    - name: Create a teams ownership mapping
-      url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
-      identifier: rum-teams-ownership-create-a-teams-ownership-mapping
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateTeamsOwnershipMapping
-        unstable:
-          - v2
-        order: 2
-    - name: List teams ownership mappings
-      url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
-      identifier: rum-teams-ownership-list-teams-ownership-mappings
-      parent: rum-teams-ownership
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListTeamsOwnershipMappings
-        unstable:
-          - v2
         order: 1
     - name: SCIM
       url: /api/latest/scim/

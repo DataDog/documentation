@@ -2402,6 +2402,20 @@
       "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
+  "CreateRUMMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Create a RUM-based metric returns \"Created\" response"
+    }
+  ],
+  "UpdateRUMMetric": [
+    {
+      "group": "rum_metrics",
+      "suffix": "",
+      "description": "Update a RUM-based metric returns \"OK\" response"
+    }
+  ],
   "GetRUMRecoverySessionCount": [
     {
       "group": "rum_recovery",
@@ -2414,6 +2428,27 @@
       "group": "rum_recovery",
       "suffix": "_3394116303",
       "description": "Search archived sessions returns canonical data and first-page metadata"
+    }
+  ],
+  "CreateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Create a RUM retention filter returns \"Created\" response"
+    }
+  ],
+  "OrderRetentionFilters": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Order RUM retention filters returns \"Ordered\" response"
+    }
+  ],
+  "UpdateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
@@ -2463,41 +2498,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
-    }
-  ],
-  "CreateRumMetric": [
-    {
-      "group": "rum_metrics",
-      "suffix": "",
-      "description": "Create a RUM-based metric returns \"Created\" response"
-    }
-  ],
-  "UpdateRumMetric": [
-    {
-      "group": "rum_metrics",
-      "suffix": "",
-      "description": "Update a RUM-based metric returns \"OK\" response"
-    }
-  ],
-  "CreateRetentionFilter": [
-    {
-      "group": "rum_retention_filters",
-      "suffix": "",
-      "description": "Create a RUM retention filter returns \"Created\" response"
-    }
-  ],
-  "OrderRetentionFilters": [
-    {
-      "group": "rum_retention_filters",
-      "suffix": "",
-      "description": "Order RUM retention filters returns \"Ordered\" response"
-    }
-  ],
-  "UpdateRetentionFilter": [
-    {
-      "group": "rum_retention_filters",
-      "suffix": "",
-      "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
   "CreateScorecardRule": [

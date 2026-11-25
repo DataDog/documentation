@@ -16,3 +16,14 @@ entries:
       - ListTeamsOwnershipMappings
       - ListTeamsOwnershipRules
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/41965
+    operations:
+      - CreateTeamsOwnershipMapping
+      - CreateTeamsOwnershipMappingsBatch
+      - DeleteTeamsOwnershipMapping
+      - GetTeamsOwnershipMapping
+      - ListTeamsOwnershipMappings
+      - ListTeamsOwnershipRules
+    title: Uppercase RUM acronym in tags, operationIds and schemas

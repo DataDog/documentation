@@ -1,3 +1,3 @@
 ---
-title: Rum Teams Ownership
+title: RUM Teams Ownership
 ---
