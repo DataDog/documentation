@@ -1008,7 +1008,7 @@ Gets the scope of an interactive architecture diagram: accounts, regions, resour
 
 ### `get_cloud_infrastructure_overlay_data`
 *Toolset: **cloud-resources** (Preview)*\
-*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (`Cloud Cost Management Read`; `Monitors Read`; `Security Monitoring Findings Read` or `Data Scanner Read` for security findings; or `Hosts Read`)*\
+*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (for example, one of: `Cloud Cost Management Read`, `Monitors Read`, `Security Monitoring Findings Read`, `Data Scanner Read`, or `Hosts Read`)*\
 Finds the resources that have overlay data within a diagram's scope: cost savings and monthly cost, monitor states, security findings, or changes in a time window, including deleted resources. Use the results to choose which resources to highlight or walk through in a diagram. Available for AWS.
 
 - What are the top 3 cost savings opportunities in account prod-main? Show them on the diagram.
