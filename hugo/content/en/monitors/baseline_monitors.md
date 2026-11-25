@@ -184,10 +184,27 @@ To list Baseline Monitors, go to [**Monitors > List**][7] and search for `tag:ma
 
 ## Edit the monitors
 
-You can edit, publish, or mute a Baseline Monitor in the same way as any other monitor. After you edit a Baseline Monitor:
+Datadog manages Baseline Monitors, so you can edit only some of their fields:
 
-- Datadog does not change the threshold that you set.
+| You can change | You cannot change |
+|---|---|
+| Name | Metric |
+| Message | Aggregation and functions |
+| Tags | Evaluation window |
+| Priority | Comparison operator (above or below) |
+| Draft or published status | Other monitor options, such as no-data and renotification settings |
+| Alert and warning thresholds | |
+| Query scope (filter tags) | |
+| Query group-by tags | |
+
+If you try to change a field that you cannot change, Datadog rejects the update. You can also mute a Baseline Monitor with a [downtime][8].
+
+After you edit a Baseline Monitor:
+
 - Datadog does not move the monitor to draft.
+- If you changed a threshold, Datadog does not change the thresholds of the monitor again.
+
+Publishing a draft or moving a monitor to draft does not count as an edit. Datadog never moves a monitor that you published back to draft.
 
 ## Further reading
 
@@ -200,3 +217,4 @@ You can edit, publish, or mute a Baseline Monitor in the same way as any other m
 [5]: /monitors/notify/notification_rules/
 [6]: /account_management/teams/manage/
 [7]: https://app.datadoghq.com/monitors/manage
+[8]: /monitors/downtimes/
