@@ -69,22 +69,23 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 {{% tab "ChatGPT" %}}
 
-Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
+Connect Datadog to ChatGPT by installing the [Datadog plugin][1]. The plugin authenticates with your Datadog organization through an OAuth flow.
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">The Datadog ChatGPT app is in Preview. During the Preview, it is available for US1 customers only.</div>
-
-1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
-1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the guided setup.
-1. Complete the OAuth login flow when prompted.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In ChatGPT, open the [Datadog plugin][2]. If the plugin isn't available in your workspace, ask your ChatGPT workspace admin to add it.
+1. Click {{< ui >}}Connect{{< /ui >}} and follow the guided setup.
+1. When prompted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}) and complete the OAuth login flow.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[2]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
+[3]: /getting_started/site/
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,ap1,ap2,uk1,gov,gov2" >}}
-<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
+[1]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
 {{% /tab %}}
 
 {{% tab "Claude" %}}
@@ -798,10 +799,11 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, notebooks, and code execution.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
-- `apm`: Tools for [APM][34], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
+- `apm`: Tools for [APM][34], including investigating errors and latency across services and traces, finding optimization opportunities, and reviewing ingestion and retention configuration. Some tools in this toolset are in Preview and are available only when you request `apm` by name and have Preview access ([sign up][45]). See [Datadog MCP Server Tools][49] for details.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
+- `cloud-resources`: Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure. Some tools in this toolset are in Preview and are available only when you request `cloud-resources` by name. See [Datadog MCP Server Tools][49] for details.
 - `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -810,10 +812,11 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 - `derived-metrics`: Tools for creating, updating, and deleting [derived metrics][85] from formulas and named metric queries.
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
+- `ecs`: Tools for searching and describing [Amazon ECS][98] resources and retrieving task definitions that Datadog monitors, across all AWS accounts and regions.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
-- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
+- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting, and for managing [Bits Detection][99] scopes that triage and investigate alerts automatically.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
@@ -1116,3 +1119,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [95]: https://github.com/datadog-labs/pi-plugin
 [96]: /incident_response/on-call/
 [97]: /account_management/rbac/mcp_access/#keep-credentials-out-of-ai-agent-conversations
+[98]: /containers/amazon_ecs/
+[99]: /bits_ai/bits_detection/

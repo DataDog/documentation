@@ -9,3 +9,13 @@ entries:
       - ListAnthropicUsageAndCostsIntegrationAccounts
       - UpdateAnthropicUsageAndCostsIntegrationAccount
     title: Add Integration Accounts v2 API for Anthropic Usage and Costs
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42078
+    operations:
+      - CreateAnthropicUsageAndCostsIntegrationAccount
+      - DeleteAnthropicUsageAndCostsIntegrationAccount
+      - GetAnthropicUsageAndCostsIntegrationAccount
+      - ListAnthropicUsageAndCostsIntegrationAccounts
+      - UpdateAnthropicUsageAndCostsIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses

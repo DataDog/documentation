@@ -3,12 +3,11 @@ aliases:
 - /ja/tracing/profiler/profiler_troubleshooting/
 further_reading:
 - link: /tracing/troubleshooting
-  tag: Documentation
+  tag: ドキュメント
   text: APM トラブルシューティング
-title: プロファイラのトラブルシューティング
+title: プロファイラーのトラブルシューティング
 type: multi-code-lang
 ---
-
 {{< card-grid >}}
   {{< image-card href="go/" src="integrations_logos/go-metro.png" alt="go" >}}
   {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
@@ -20,4 +19,5 @@ type: multi-code-lang
   {{< image-card href="ddprof/" src="integrations_logos/rust.png" alt="Rust" >}}
   {{< image-card href="ddprof/" src="integrations_logos/c.png" alt="C" >}}
   {{< image-card href="ddprof/" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="full_host/" src="integrations_logos/otel.png" alt="Full-Host Profiler" >}}
 {{< /card-grid >}}
