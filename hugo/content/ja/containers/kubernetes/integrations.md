@@ -4,63 +4,96 @@ aliases:
 - /ja/guides/servicediscovery/
 - /ja/guides/autodiscovery/
 - /ja/agent/kubernetes/integrations
-description: Autodiscovery テンプレートを使用して、Kubernetes で実行されているアプリケーションのモニターインテグレーションを構成します
+description: Autodiscovery テンプレートを使用して、Kubernetes で実行されているアプリケーションのモニターインテグレーションを構成する
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-karpenter-datadog
   tag: ブログ
-  text: Datadog で Karpenter をモニターします
+  text: Datadog で Karpenter をモニターする
 - link: /agent/kubernetes/log/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: アプリケーションログの収集
 - link: /agent/kubernetes/apm/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: アプリケーショントレースの収集
 - link: /agent/kubernetes/prometheus/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Prometheus メトリクスの収集
 - link: /agent/guide/autodiscovery-management/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/kubernetes/tag/
-  tag: よくあるご質問
-  text: コンテナから送信された全データにタグを割り当て
+  tag: ドキュメント
+  text: コンテナから送信された全データにタグを割り当てる
 - link: https://www.youtube.com/watch?v=nuxmVf9ByE0
   tag: ビデオ
   text: 'Datadog のヒントとコツ: Datadog Autodiscovery 用に JSON で Kubernetes のアノテーションを記述する方法'
 title: Kubernetes とインテグレーション
 ---
-このページでは、_Autodiscovery_ という Datadog 機能を使用して、Kubernetes インフラストラクチャーのインテグレーションをインストールおよび構成する方法について説明します。これにより、`%%host%%` のような [変数][16] を使用して、構成設定を動的に入力することができます。Autodiscovery の動作についての詳細な説明は、[コンテナの概要: Autodiscovery][12] を参照してください。特定のコンテナを Autodiscovery から除外したり、準備されていない Pod を許容したりするなどの高度な Autodiscovery オプションについては、[コンテナディスカバリー管理][23] を参照してください。
+このページでは、_Autodiscovery_ という Datadog 機能を使用して、Kubernetes インフラストラクチャーのインテグレーションをインストールおよび構成する方法について説明します。これにより、`%%host%%` のような[変数][16]を使用して、構成設定を動的に入力することができます。Autodiscovery の動作についての詳細な説明は、[コンテナの概要: Autodiscovery][12] を参照してください。特定のコンテナを Autodiscovery から除外したり、準備されていない Pod を許容したりするなどの高度な Autodiscovery オプションについては、[コンテナディスカバリー管理][23]を参照してください。
 
 Docker または Amazon ECS を使用している場合は、[Docker および Integrations][1] を参照してください。
 
 <div class="alert alert-info">
-次の Datadog インテグレーションは、プロセスツリーデータまたはファイルシステムアクセスを必要とするため、Autodiscovery では機能しません: <a href="/integrations/ceph">Ceph</a>、<a href="/integrations/varnish">Varnish</a>、<a href="/integrations/postfix">Postfix</a>、<a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>、および <a href="/integrations/gunicorn">Gunicorn</a>。<br/><br/>
+次の Datadog インテグレーションは、プロセスツリーデータまたはファイルシステムアクセスを必要とするため、Autodiscovery では機能しません。<a href="/integrations/ceph">Ceph</a>、<a href="/integrations/varnish">Varnish</a>、<a href="/integrations/postfix">Postfix</a>、<a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>、および <a href="/integrations/gunicorn">Gunicorn</a>。<br/><br/>
 Autodiscovery と互換性のないインテグレーションをモニターするには、Pod 内で Prometheus エクスポーターを使用して HTTP エンドポイントを公開し、<a href="/integrations/openmetrics/">OpenMetrics インテグレーション</a> (Autodiscovery をサポート) を使用して Pod を見つけ、エンドポイントをクエリします。
 </div>
 
-## インテグレーションを設定する {#set-up-your-integration}
+## インテグレーションをセットアップする {#set-up-your-integration}
 
 一部のインテグレーションでは、アクセストークンの作成や Datadog Agent への読み取り権限の付与などのセットアップを行う必要があります。インテグレーションのドキュメントの**セットアップ**セクションの手順に従ってください。
 
-### コミュニティのインテグレーション {#community-integrations}
-Datadog Agent に同梱されていないインテグレーションを使用する場合は、目的のインテグレーションを含むカスタム イメージをビルドする必要があります。手順については [コミュニティインテグレーションを使用する][13] を参照してください。
+### コミュニティインテグレーション {#community-integrations}
+Datadog Agent に同梱されていないインテグレーションを使用する場合は、目的のインテグレーションを含むカスタムイメージをビルドする必要があります。手順については、[コミュニティインテグレーションを使用する][13]を参照してください。
 
 ## 構成 {#configuration}
 
-一般的に使用される一部のインテグレーションには、Autodiscovery 用のデフォルト構成が付属しています。詳細については、[Autodiscovery 自動構成][20] を参照してください。ここには、自動構成されるインテグレーションと対応するデフォルト構成ファイルのリストが記載されています。このリストにご使用のインテグレーションが含まれており、デフォルトの構成がユースケースに十分であれば、追加のアクションは必要ありません。
+一般的に使用される一部のインテグレーションには、Autodiscovery 用のデフォルト構成が付属しています。詳細については、[Autodiscovery 自動構成][20]を参照してください。ここには、自動構成されるインテグレーションと対応するデフォルト構成ファイルのリストが記載されています。このリストにご使用のインテグレーションが含まれており、デフォルトの構成がユースケースに十分であれば、追加のアクションは必要ありません。
 
-そうでない場合は、次のようにします。
+それ以外の場合は、インテグレーションを構成してください。
 
-1. ユースケースに適した構成方法 (Kubernetes Pod のアノテーション、ローカルファイル、ConfigMap、key-value ストア、Datadog Operator マニフェスト、または Helm チャート) を選択してください。
+1. 構成方法を選択します。`DatadogInstrumentation` カスタムリソース (推奨)、Kubernetes Pod のアノテーション、ローカルファイル、ConfigMap、key-value ストア、Datadog Operator マニフェスト、または Helm チャート。
 2. 選択した方法のテンプレート形式を参照します。各形式には、`<CONTAINER_NAME>` などのプレースホルダーが含まれています。
 3. [これらのプレースホルダーの値を提供](#placeholder-values)します。
 
 {{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+Pod アノテーションの代わりに `DatadogInstrumentation` カスタムリソースを使用して、特定のワークロードの Autodiscovery チェックとログ収集を構成できます。これにより、Pod 仕様を編集したりアプリケーション Pod を再起動したりすることなく、Autodiscovery 構成を更新または削除できます。Kubernetes `Service` をターゲットにして、その Service の各エンドポイントのエンドポイントチェックをスケジュールすることもできます。
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <CR_NAME>
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerName: <CONTAINER_NAME>
+        initConfig:
+          <INIT_CONFIG>
+        instances:
+          - <INSTANCES_CONFIG>
+    logs:
+      - containerName: <CONTAINER_NAME>
+        <LOGS_CONFIG>
+```
+
+セットアップ手順、完全なリソーススキーマ、および優先順位ルールについては、[DatadogInstrumentation CRD で Autodiscovery を構成する][29]を参照してください。
+
+[29]: /ja/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
 {{% tab "アノテーション" %}}
 
-Kubernetes Pod を `kind: Pod` で直接定義する場合は、次のようにして各 Pod のアノテーションを `metadata` セクションで直接追加してください。
+Kubernetes Pod を `kind: Pod` で直接定義する場合は、次のようにして各 Pod のアノテーションを `metadata` セクションで直接追加します。
 
-**Autodiscovery Annotations v2** (Datadog Agent v7.36 以降用)
+**Autodiscovery Annotations v2** (Datadog Agent v7.36 以降)
 
 ```yaml
 apiVersion: v1
@@ -179,7 +212,7 @@ data:
 {{% /tab %}}
 {{% tab "key-value ストア" %}}
 
-Autodiscovery テンプレートは [Consul][1]、[etcd][2]、または [ZooKeeper][3] から取得できます。key-value ストアは `datadog.yaml` 構成ファイルで設定するか (その後、このファイルを Agent コンテナ内にマウントします)、または Agent コンテナ内の環境変数として設定できます。
+Autodiscovery テンプレートは、[Consul][1]、[etcd][2]、または [ZooKeeper][3] から取得できます。key-value ストアは `datadog.yaml` 構成ファイルで設定するか (その後、このファイルを Agent コンテナ内にマウントします)、または Agent コンテナ内の環境変数として設定できます。
 
 **datadog.yaml での構成**:
 
@@ -214,11 +247,11 @@ Autodiscovery テンプレートは [Consul][1]、[etcd][2]、または [ZooKeep
       password:
   ```
 
-[Datadog Agent を再起動][4] して、変更を適用します。
+[Datadog Agent を再起動][4]して、変更を適用します。
 
 **環境変数での構成**:
 
-key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下にテンプレートを探します。Autodiscovery では、このような key-value 階層を使用する必要があります。
+key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。Autodiscovery では、次のような key-value 階層を使用する必要があります。
 
 ```yaml
 /datadog/
@@ -265,9 +298,9 @@ spec:
             logs:
               <LOGS_CONFIG>
 ```
-<div class="alert alert-info">デプロイされた複数の <code>DatadogAgent</code> CRD で、 <code>configDataMap</code>を使用している場合、各 CRD は <code>nodeagent-extra-confd</code>という名前の共有の ConfigMap に書き込みます。これにより、構成が互いにオーバーライドされる可能性があります。</div>
+<div class="alert alert-info">デプロイされた複数の <code>DatadogAgent</code> CRD で <code>configDataMap</code>を使用している場合、各 CRD は <code>nodeagent-extra-confd</code>という名前の共有の ConfigMap に書き込みます。これにより、構成が互いにオーバーライドされる可能性があります。</div>
 
-[Cluster チェック][1] をモニターするには、オーバーライド `extraConfd.configDataMap` を `clusterAgent` コンポーネントに追加します。`features.clusterChecks.enabled: true` を設定して、クラスターチェックも有効にする必要があります。
+[クラスターチェック][1]をモニターするには、オーバーライド `extraConfd.configDataMap` を `clusterAgent` コンポーネントに追加します。`features.clusterChecks.enabled: true` を設定して、クラスターチェックも有効にする必要があります。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -299,7 +332,7 @@ spec:
               <LOGS_CONFIG>
 ```
 
-詳細については、[Cluster チェック][1] を参照してください。
+詳細については、[クラスターチェック][1]を参照してください。
 
 [1]: /ja/agent/cluster_agent/clusterchecks
 
@@ -322,7 +355,7 @@ datadog:
         <LOGS_CONFIG>
 ```
 
-[Cluster チェック][3] をモニターするには、`clusterAgent.confd` の下にテンプレートを定義します。サンプルの [values.yaml][2] にインラインの例が用意されています。`clusterAgent.enabled: true` を設定して Cluster Agent を有効にし、`datadog.clusterChecks.enabled: true` を設定してクラスターチェックを有効にする必要もあります。
+[クラスターチェック][3]をモニターするには、`clusterAgent.confd` の下でテンプレートを定義します。サンプルの [values.yaml][2] にインラインの例が用意されています。`clusterAgent.enabled: true` を設定して Cluster Agent を有効にし、`datadog.clusterChecks.enabled: true` を設定してクラスターチェックを有効にする必要もあります。
 
 ```yaml
 datadog:
@@ -343,7 +376,7 @@ clusterAgent:
         <LOGS_CONFIG>
 ```
 
-詳細については、[Cluster チェック][3] を参照してください。
+詳細については、[クラスターチェック][3]を参照してください。
 
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
 [2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
@@ -364,8 +397,8 @@ clusterAgent:
 
 `<CONTAINER_IMAGE>`
 : コンテナイメージ (`.spec.containers[i].image`) に対して照合する識別子。<br/><br/>
-例: `redis` をコンテナ識別子として指定した場合、Autodiscovery テンプレートは `redis` と一致するイメージ名を持つすべてのコンテナに適用されます。`foo/redis:latest` と `bar/redis:v2` を実行している 1 つのコンテナを使用している場合は、Autodiscovery テンプレートは両方のコンテナに適用されます。<br/><br/>
-`ad_identifiers` パラメーターはリストを受け入れるため、複数のコンテナ識別子を指定できます。カスタム識別子も使用できます。[カスタム Autodiscovery 識別子][21] を参照してください。
+例: `redis` をコンテナ識別子として指定した場合、Autodiscovery テンプレートは `redis` と一致するイメージ名を持つすべてのコンテナに適用されます。`foo/redis:latest` と `bar/redis:v2` を実行している 1 つのコンテナを使用している場合、Autodiscovery テンプレートは両方のコンテナに適用されます。<br/><br/>
+`ad_identifiers` パラメーターはリストを受け入れるため、複数のコンテナ識別子を指定できます。カスタム識別子も使用できます。[カスタム Autodiscovery 識別子][21]を参照してください。
 
 `<INIT_CONFIG>`
 : インテグレーションの `<INTEGRATION_NAME>.d/conf.yaml.example` ファイルの `init_config` の下にリストされている構成パラメーター。`init_config` セクションは通常は空です。
@@ -376,13 +409,48 @@ clusterAgent:
 `<LOGS_CONFIG>`
 : インテグレーションの `<INTEGRATION_NAME>.d/conf.yaml.example` ファイルの `logs` の下にリストされている構成パラメーター。
 
-### 高度なアノテーションパラメーター {#advanced-annotation-parameters}
+### 高度なチェック構成 {#advanced-check-configuration}
 
-チェック、ログ、インスタンスのためのコア Autodiscovery アノテーションに加えて、チェックの動作をカスタマイズするための追加のアノテーションを使用できます。
+`DatadogInstrumentation` リソースまたは Pod アノテーションでチェックのタグ付けをカスタマイズします。
 
 #### タグのカーディナリティ {#tag-cardinality}
 
-`check_tag_cardinality` アノテーションを使用して、特定のチェックに対するタグのカーディナリティレベルを設定します。これは、そのチェックによって収集されたメトリクスのグローバル Agent タグのカーディナリティ設定をオーバーライドします。
+特定のチェックに対するタグのカーディナリティレベルを、`low`、`orchestrator`、または `high` に設定します。この設定は、そのチェックによって収集されたメトリクスのグローバル Agent タグのカーディナリティ設定をオーバーライドします。省略した場合、チェックは Agent の設定を引き継ぎます。
+
+{{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+チェックエントリに `checkTagCardinality` を設定します。次の例では、`redis` StatefulSet 内の `redis` コンテナに対して Redis チェックを構成します。
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: redis-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: redis
+  config:
+    checks:
+      - integration: redisdb
+        containerName: redis
+        checkTagCardinality: low
+        instances:
+          - host: "%%host%%"
+            port: 6379
+```
+
+セットアップおよびサポートされているフィールドについては、[DatadogInstrumentation CRD で Autodiscovery を構成する][29]を参照してください。
+
+[29]: /ja/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
+{{% /tab %}}
+{{% tab "アノテーション" %}}
+
+`check_tag_cardinality` アノテーションを設定します。
 
 ```yaml
 apiVersion: v1
@@ -403,15 +471,35 @@ spec:
     - name: '<CONTAINER_NAME>'
 ```
 
-<div class="alert alert-info"> <code>check_tag_cardinality</code> アノテーションは、インテグレーションチェックによって収集されたメトリクスにのみ影響します。DogStatsD を介して送信されたメトリクスには影響しません。DogStatsD タグのカーディナリティを設定するには、グローバル <code>dogstatsd_tag_cardinality</code> 構成パラメーターまたは <code>DD_DOGSTATSD_TAG_CARDINALITY</code> 環境変数を使用します。</div>
+{{% /tab %}}
+{{< /tabs >}}
 
-タグのカーディナリティに関する詳細は、[チェック別のタグコンフィギュレーション][27] を参照してください。
+これらの設定は、インテグレーションチェックによって収集されたメトリクスにのみ影響し、DogStatsD を介して送信されたメトリクスには影響しません。DogStatsD のタグのカーディナリティを構成するには、グローバル `dogstatsd_tag_cardinality` 構成パラメーターまたは `DD_DOGSTATSD_TAG_CARDINALITY` 環境変数を使用します。
+
+タグのカーディナリティに関する詳細については、[チェック別のタグ構成][27]を参照してください。
+
+#### Autodiscovery タグを無効にする {#disable-autodiscovery-tags}
+
+Autodiscovery によって追加されたコンテナタグと Pod タグを抑制するには、`spec.config.checks` のチェックエントリで `ignoreAutodiscoveryTags: true` を設定します。デフォルトは `false` です。この設定では、チェックで明示的に構成されたタグや、インテグレーション自体によって出力されたタグは削除されません。
+
+アノテーションベースの構成の場合は、チェックの JSON 構成で `init_config` および `instances` とともに `ignore_autodiscovery_tags` を設定します。例えば、`redis` という名前のコンテナを持つ Pod に次のアノテーションを追加します。
+
+```yaml
+ad.datadoghq.com/redis.checks: |
+  {
+    "redisdb": {
+      "ignore_autodiscovery_tags": true,
+      "init_config": {},
+      "instances": [{"host": "%%host%%", "port": 6379}]
+    }
+  }
+```
 
 ### 自動構成 {#auto-configuration}
 
-Datadog Agent は、一般的な技術に対する基本的な構成を自動的に認識し、提供します。完全なリストについては、[Autodiscovery 自動構成][20] を参照してください。
+Datadog Agent は、一般的な技術に対する基本的な構成を自動的に認識し、提供します。完全なリストについては、[Autodiscovery 自動構成][20]を参照してください。
 
-Kubernetes アノテーションで設定された構成は自動構成よりも優先されますが、自動構成は Datadog Operator または Helm で設定された構成よりも優先されます。Datadog Operator または Helm を使用して [Autodiscovery 自動構成][20] リストのインテグレーションを構成するには、[自動構成を無効化][22] する必要があります。
+Kubernetes アノテーションで設定された構成は、`DatadogInstrumentation` リソースおよび自動構成よりも優先されます。`DatadogInstrumentation` リソースは、自動構成や Datadog Operator または Helm で設定された構成を含む、静的な構成よりも優先されます。Datadog Operator または Helm を使用して [Autodiscovery 自動構成][20]リストのインテグレーションを構成するには、[自動構成を無効にする][22]必要があります。
 
 ## インテグレーションのセキュリティ {#integrations-security}
 
@@ -419,11 +507,11 @@ Kubernetes アノテーションで設定された構成は自動構成よりも
 
 Datadog Agent バージョン 7.78.0 以降、構成プロバイダーの信頼レベルに基づいてファイルシステムアクセスを制御するために、Agent の `datadog.yaml` に次のパラメーターを設定できます。
 
-| パラメーター | 型 | デフォルト | 説明 |
+| パラメーター | タイプ | デフォルト | 説明 |
 |-----------|------|---------|-------------|
 | `integration_ignore_untrusted_file_params` | ブール | `false` | 有効にすると、インテグレーションは、信頼できない構成プロバイダーから提供されたファイルパスを参照する構成パラメーターを無視します。|
 | `integration_file_paths_allowlist` | リスト | `[]` | 信頼できない構成プロバイダーから提供された場合でも、インテグレーションがアクセスを許可されるファイルパスのリスト。空のリストは、すべてのファイルパスが許可されていることを意味します。|
-| `integration_trusted_providers` | リスト | `["file", "remote-config"]` | 信頼されていると見なされる構成プロバイダーのリスト。このリストにないプロバイダーは信頼できないと見なされます。デフォルトで、ローカル構成ファイル (`file`) と Datadog Remote Configuration (`remote-config`) は信頼されています。サポートされているプロバイダーの完全なリストについては、[Datadog Agent のプロバイダー名][28] を参照してください。|
+| `integration_trusted_providers` | リスト | `["file", "remote-config"]` | 信頼されているとみなされる構成プロバイダーのリスト。このリストにないプロバイダーは信頼できないとみなされます。デフォルトで、ローカル構成ファイル (`file`) と Datadog Remote Configuration (`remote-config`) は信頼されています。サポートされているプロバイダーの完全なリストについては、[Datadog Agent のプロバイダー名][28]を参照してください。|
 | `integration_security_excluded_checks` | リスト | `[]` | 上記のセキュリティ制限から除外されるインテグレーション名のリスト。|
 
 これらのオプションは後方互換性があり、デフォルト値は既存の動作を維持します。オプトインするには、`integration_ignore_untrusted_file_params` を有効にし、残りのパラメーターを環境に合わせて調整してください。
@@ -446,9 +534,9 @@ integration_security_excluded_checks:
 
 ## 例: Postgres インテグレーション {#example-postgres-integration}
 
-この例のシナリオでは、Kubernetes 上に Postgres をデプロイしています。[Datadog-Postgres インテグレーション][26] を設定および構成しようと考えています。すべての Postgres コンテナは、`postgres` という文字列が含まれるコンテナ名を持ちます。
+この例のシナリオでは、Kubernetes 上に Postgres をデプロイしています。[Datadog-Postgres インテグレーション][26]を設定および構成しようと考えています。すべての Postgres コンテナは、`postgres` という文字列が含まれるコンテナ名を持ちます。
 
-まず、追加のセットアップ手順について、[Postgres インテグレーションのドキュメント][26] を参照してください。Postgres インテグレーションでは、`datadog` という名前の読み取り専用ユーザーを作成し、対応するパスワードを `PG_PASSWORD` という名前の環境変数として保存する必要があります。
+まず、追加のセットアップ手順について、[Postgres インテグレーションのドキュメント][26]を参照してください。Postgres インテグレーションでは、`datadog` という名前の読み取り専用ユーザーを作成し、対応するパスワードを `PG_PASSWORD` という名前の環境変数として保存する必要があります。
 
 このインテグレーションを**ホスト上で**構成する場合は、[`postgresql.d/conf.yaml.example`][15] のパラメーターを参照し、次の内容を含む `postgresql.d/conf.yaml` ファイルを作成できます。
 
@@ -471,11 +559,55 @@ logs:
 この構成を Postgres コンテナに適用するには、次のようにします。
 
 {{< tabs >}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+ターゲットの Postgres ワークロードのネームスペースに次のリソースを作成します。
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: postgres-instrumentation
+  namespace: <WORKLOAD_NAMESPACE>
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: postgres
+  config:
+    checks:
+      - integration: postgres
+        containerName: postgres
+        instances:
+          - host: "%%host%%"
+            port: 5432
+            username: datadog
+            password: "%%env_PG_PASSWORD%%"
+    logs:
+      - containerName: postgres
+        type: file
+        path: /var/log/postgres.log
+        source: postgresql
+        service: pg_service
+```
+
+`targetRef` でのワークロードの API バージョン、種類、および名前を使用します。ファイルを収集するには、Agent が `/var/log/postgres.log` へのアクセス権を持っている必要があります。詳細については、[コンテナのローカルログファイルからのログ収集][30]を参照してください。
+
+リソースを `postgres-instrumentation.yaml` として保存し、適用し、そのステータスを確認します。
+
+```shell
+kubectl apply -f postgres-instrumentation.yaml
+kubectl describe datadoginstrumentation postgres-instrumentation -n <WORKLOAD_NAMESPACE>
+```
+
+[30]: /ja/containers/kubernetes/log/#from-a-container-local-log-file
+
+{{% /tab %}}
 {{% tab "アノテーション" %}}
 
-Pod マニフェストで、次のようにしあす。
+Pod マニフェスト:
 
-**Autodiscovery Annotations v2** (Datadog Agent v7.36 以降用)
+**Autodiscovery Annotations v2** (Datadog Agent v7.36 以降)
 
 ```yaml
 apiVersion: v1
@@ -591,7 +723,7 @@ spec:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-ConfigMap で、次のようにします。
+ConfigMap:
 
 ```yaml
 kind: ConfigMap
@@ -653,7 +785,7 @@ etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","por
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-`datadog-agent.yaml` で、次のようにします。
+`datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -684,7 +816,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-`datadog-values.yaml` で、次のようにします。
+`datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -704,11 +836,11 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-これらのテンプレートは、次の [Autodiscovery テンプレート変数][16] を使用します。
+これらのテンプレートは、次の [Autodiscovery テンプレート変数][16]を使用します。
 - `%%host%%` には、コンテナの IP が動的に設定されます。
 - `%%env_PG_PASSWORD%%`は、Agent プロセスから見た `PG_PASSWORD` という名前の環境変数を参照します。
 
-複数のコンテナセットに対して複数のチェックを設定する方法など、さらに多くの例については [Autodiscovery: シナリオと例][24] を参照してください。
+複数のコンテナセットに対して複数のチェックを設定する方法などさらに多くの例については、[Autodiscovery: シナリオと例][24]を参照してください。
 
 ## 参考資料 {#further-reading}
 

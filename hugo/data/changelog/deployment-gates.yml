@@ -53,3 +53,22 @@ entries:
       - ListDeploymentGates
       - UpdateDeploymentGate
     title: Document all-environment deployment gate API contract
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42147
+    operations:
+      - CreateDeploymentGate
+      - CreateDeploymentRule
+      - DeleteDeploymentGate
+      - DeleteDeploymentRule
+      - GetDeploymentGate
+      - GetDeploymentGateRules
+      - GetDeploymentGatesEvaluationResult
+      - GetDeploymentRule
+      - ListDeploymentGateEvaluations
+      - ListDeploymentGates
+      - ListDeploymentRuleEvaluations
+      - TriggerDeploymentGatesEvaluation
+      - UpdateDeploymentGate
+      - UpdateDeploymentRule
+    title: Mark Deployment Gates API endpoints as stable

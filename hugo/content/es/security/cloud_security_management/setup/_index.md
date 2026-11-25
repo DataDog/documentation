@@ -16,45 +16,49 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management/setup/supported_deployment_types
   tag: Documentación
-  text: Tipos de despliegue compatibles
+  text: Tipos de implementación admitidos
 - link: /security/guide/aws_fargate_config_guide
   tag: Documentación
-  text: Guía de configuración de AWS Fargate para la seguridad de Datadog
+  text: Guía de configuración de AWS Fargate para Datadog Security
 - link: /security/cloud_security_management/guide/agent_variables/
   tag: Guía
-  text: Variables del Agent de Cloud Security
+  text: Variables del Cloud Security Agent
 title: Configuración de Cloud Security
 ---
+## Descripción general {#overview}
 
-## Información general
+Para comenzar con Cloud Security, revise lo siguiente:
 
-Para empezar con Cloud Security, revisa lo siguiente:
+- [Habilite Agentless Scanning](#enable-agentless-scanning)
+- [Implemente el Agent para obtener cobertura adicional](#deploy-the-agent-for-additional-coverage)
+- [Habilite funciones adicionales](#enable-additional-features)
+  - [Container Image Scanning en CI/CD](#container-image-scanning-in-cicd)
+  - [Registros de AWS CloudTrail](#aws-cloudtrail-logs)
+  - [Implemente mediante integraciones en la nube](#deploy-using-cloud-integrations)
+- [Deshabilite Cloud Security](#disable-cloud-security)
+- [Lecturas adicionales](#further-reading)
 
-- [Activar Agentless Scanning](#enable-agentless-scanning)
-- [Desplegar el Agent para una cobertura adicional](#deploy-the-agent-for-additional-coverage)
-- [Activar funciones adicionales](#enable-additional-features)
-  - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
-  - [Desplegar a través de integraciones en la nube](#deploy-via-cloud-integrations)
-- [Desactivar Cloud Security](#disable-cloud-security)
-- [Referencias adicionales](#further-reading)
+## Habilite Agentless Scanning {#enable-agentless-scanning}
 
-## Activar Agentless Scanning
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">El escaneo Agentless no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-La forma más sencilla de empezar con Cloud Security es [habilitar Agentless Scanning][1]. Agentless Scanning proporciona visibilidad de las vulnerabilidades que existen en tus hosts de AWS, contenedores en ejecución, funciones de Lambda y Amazon Machine Images (AMI) en ejecución, sin necesidad de instalar el Datadog Agent.
+La forma más sencilla de comenzar con Cloud Security es [habilitando Agentless Scanning][1]. Agentless Scanning proporciona la cobertura más amplia en su infraestructura de AWS, Azure y Google Cloud: escanea todos los servidores, contenedores en ejecución y otras cargas de trabajo compatibles sin requerir que instale nada en los recursos individuales.
 
-Para obtener más información sobre Agentless Scanning, consulta [Cloud Security Agentless Scanning][2].
+Puede ejecutar escáneres de Agentless en su propia cuenta en la nube (alojados por usted) o dejar que Datadog los ejecute por usted (alojados por Datadog, en versión preliminar para AWS). Para comparar las opciones, consulte [Elija dónde se ejecutan los escáneres][10]. Para obtener más información sobre Agentless Scanning, consulte [Cloud Security Agentless Scanning][2].
 
-## Desplegar el Agent para una cobertura adicional
+## Implemente el Agent para obtener un contexto más profundo {#deploy-the-agent-for-deeper-context}
 
-Para una cobertura más amplia y funcionalidades adicionales, despliega el Datadog Agent en tus hosts. La siguiente tabla resume las mejoras ofrecidas por los despliegues basados en el Agent. Para obtener más información, consulta [Configuración de Cloud Security en Agent][3].
+Agentless Scanning cubre toda su infraestructura en la nube, pero implementar el Datadog Agent en servidores críticos agrega un contexto de seguridad más profundo, como la priorización de vulnerabilidades en tiempo de ejecución, actualizaciones en tiempo real y evaluaciones de referencia de servidores. La siguiente tabla describe las mejoras que ofrecen las implementaciones basadas en Agent. Para obtener más información, consulte [Configuración de Cloud Security en el Agent][3].
 
 <table>
   <thead>
     <tr>
       <th>Característica</th>
-      <th>Sin Agent</th>
-      <th>Sin Agent y despliegue basado en Agent</th>
-      <th>Despliegue basado en Agent</th>
+      <th>Agentless</th>
+      <th>Agentless &#43; implementación basada en Agent</th>
+      <th>Implementación basada en Agent</th>
     </tr>
   </thead>
   <tr>
@@ -70,7 +74,7 @@ Para una cobertura más amplia y funcionalidades adicionales, despliega el Datad
     <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Marcas de referencia de host</a></td>
+    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Evaluaciones de referencia de servidores</a></td>
     <td></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -82,16 +86,16 @@ Para una cobertura más amplia y funcionalidades adicionales, despliega el Datad
     <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;">Priorización de vulnerabilidad</td>
+    <td style="padding-left: 20px;">Priorización de vulnerabilidades</td>
     <td>{{< X >}}</td>
     <td>{{< X >}}<br />Con contexto de tiempo de ejecución</td>
     <td>{{< X >}}<br />Con contexto de tiempo de ejecución</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;">Frecuencia de actualización de vulnerabilidad</td>
+    <td style="padding-left: 20px;">Frecuencia de actualización de vulnerabilidades</td>
     <td>12 horas</td>
-    <td>En tiempo real</td>
-    <td>En tiempo real</td>
+    <td>Tiempo real</td>
+    <td>Tiempo real</td>
   </tr>
   <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
@@ -101,23 +105,27 @@ Para una cobertura más amplia y funcionalidades adicionales, despliega el Datad
   </tr>
 </table>
 
-## Activar funciones adicionales
+## Habilite funciones adicionales {#enable-additional-features}
 
-### AWS CloudTrail Logs
+### Container Image Scanning en CI/CD {#container-image-scanning-in-cicd}
 
-Maximiza los beneficios de [Cloud Security Identity Risks][6] con AWS CloudTrail Logs. Obtén información más detallada sobre el uso de los recursos en la nube, identificando a los usuarios y funciones con diferencias significativas entre los permisos proporcionados y aquellos utilizados. Para obtener más información, consulta [Configuración de AWS CloudTrail Logs para Cloud Security][4].
+Escanee imágenes de contenedor en busca de vulnerabilidades durante sus canalizaciones de CI/CD, antes de implementar imágenes en producción. La CLI de Datadog Security se ejecuta directamente en sus trabajos de CI, brindándole control sobre cuándo y cómo se ejecutan los escaneos. Para obtener más información, consulte [Container Image Scanning en CI/CD][9].
 
-### Desplegar a través de integraciones en la nube
+### Registros de AWS CloudTrail {#aws-cloudtrail-logs}
 
-Monitoriza tu cobertura de seguridad del cumplimiento y protege tu infraestructura de nube contra ataques basados en IAM, habilitando el análisis de recursos AWS, Azure y GCP. Para obtener más información, consulta [Despliegue de Cloud Security a través de integraciones en la nube][7].
+Maximice los beneficios de [Cloud Security Identity Risks][6] con los registros de AWS CloudTrail. Obtenga información más detallada sobre el uso de recursos en la nube, identificando usuarios y roles con brechas significativas entre los permisos aprovisionados y los utilizados. Para obtener más información, consulte [Configuración de registros de AWS CloudTrail para Cloud Security][4].
 
-## Desactivar Cloud Security
+### Implemente mediante integraciones en la nube {#deploy-using-cloud-integrations}
 
-Para obtener información sobre cómo desactivar Cloud Security, consulta lo siguiente:
+Supervise la cobertura de seguridad de su cumplimiento normativo y proteja su infraestructura en la nube contra ataques basados en IAM habilitando el análisis de recursos de AWS, Azure, Google Cloud y OCI. Para obtener más información, consulte [Implementación de Cloud Security mediante Cloud Integrations][7].
 
-- [Desactivar Cloud Security Vulnerabilities][8]
+## Deshabilitar Cloud Security {#disable-cloud-security}
 
-## Referencias adicionales
+Para obtener información sobre cómo deshabilitar Cloud Security, consulte lo siguiente:
+
+- [Deshabilitar Cloud Security Vulnerabilities][8]
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -128,5 +136,5 @@ Para obtener información sobre cómo desactivar Cloud Security, consulta lo sig
 [6]: /es/security/cloud_security_management/identity_risks
 [7]: /es/security/cloud_security_management/setup/cloud_accounts
 [8]: /es/security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[9]: /es/security/workload_protection/troubleshooting/threats/#disable-csm-threats
-[10]: /es/security/cloud_security_management/setup/iac_scanning
+[9]: /es/security/cloud_security_management/setup/ci_cd
+[10]: /es/security/cloud_security_management/setup/agentless_scanning#choose-where-scanners-run

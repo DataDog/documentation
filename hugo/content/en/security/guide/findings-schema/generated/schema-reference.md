@@ -565,6 +565,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><strong>Path:</strong> <code>@container_image.base_image</code><br>Base image this container image is built on. A base image is itself a container image and may have its own <code>base_image</code>. Absent when no base image is identified.</td>
     </tr>
     <tr>
+      <td><code>built_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@container_image.built_at</code><br>Timestamp in milliseconds (UTC) when the container image was built. Absent when the build time is unknown.</td>
+    </tr>
+    <tr>
       <td><code>git_repository_url</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@container_image.git_repository_url</code><br>URL of the Git repository for the code used to build the container image. Available only when Source Code Integration is configured.</td>
@@ -2180,6 +2185,11 @@ Current package version that the finding was detected on, before any remediation
       <td><strong>Path:</strong> <code>@remediation.package.base.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2215,6 +2225,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2241,6 +2256,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2266,6 +2286,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2314,6 +2339,11 @@ Closest package version that only contains vulnerabilities for which no fix is a
       <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2349,6 +2379,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2375,6 +2410,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2400,6 +2440,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2448,6 +2493,11 @@ Closest package version with no critical vulnerabilities (based on base score).
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2483,6 +2533,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2509,6 +2564,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2534,6 +2594,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2582,6 +2647,11 @@ Closest package version with no vulnerabilities.
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2617,6 +2687,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2643,6 +2718,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2668,6 +2748,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2716,6 +2801,11 @@ The latest remediation package version with no critical vulnerabilities (based o
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2751,6 +2841,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2777,6 +2872,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2802,6 +2902,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2850,6 +2955,11 @@ Latest package version with no vulnerabilities.
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -2885,6 +2995,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2911,6 +3026,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2936,6 +3056,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3030,6 +3155,11 @@ Current package version that the finding was detected on, before any remediation
       <td><strong>Path:</strong> <code>@remediation.root_package.base.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3065,6 +3195,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3091,6 +3226,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3116,6 +3256,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3164,6 +3309,11 @@ Closest package version that only contains vulnerabilities for which no fix is a
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3199,6 +3349,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3225,6 +3380,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3250,6 +3410,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3298,6 +3463,11 @@ Closest package version with no critical vulnerabilities (based on base score).
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3333,6 +3503,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3359,6 +3534,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3384,6 +3564,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3432,6 +3617,11 @@ Closest package version with no vulnerabilities.
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3467,6 +3657,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3493,6 +3688,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3518,6 +3718,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3566,6 +3771,11 @@ The latest remediation package version with no critical vulnerabilities (based o
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3601,6 +3811,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3627,6 +3842,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3652,6 +3872,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3700,6 +3925,11 @@ Latest package version with no vulnerabilities.
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.original_name</code><br>Original name of the recommended package that fixes the finding.</td>
     </tr>
     <tr>
+      <td><code>published_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.published_at</code><br>Timestamp in milliseconds (UTC) when the recommended package version was published.</td>
+    </tr>
+    <tr>
       <td><code>remaining_advisories</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories</code><br>Advisories that will remain unfixed if the remediation is applied.</td>
@@ -3735,6 +3965,11 @@ Advisories that the remediation will fix.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3761,6 +3996,11 @@ Advisories that will appear if the remediation is applied.
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.id</code><br>Identifier of the advisory.</td>
     </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3786,6 +4026,11 @@ Advisories that will remain unfixed if the remediation is applied.
       <td><code>id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.id</code><br>Identifier of the advisory.</td>
+    </tr>
+    <tr>
+      <td><code>severity</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.severity</code><br>Contains the adjusted severity of the advisory. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -4889,6 +5134,11 @@ Groups attributes related to runtime context.
       <td><strong>Path:</strong> <code>@runtime_context.database_monitoring</code><br>Contains database monitoring context associated with the finding.</td>
     </tr>
     <tr>
+      <td><code>is_available</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@runtime_context.is_available</code><br><code>true</code> if runtime context is available for the finding: the finding was detected on a running service, or the static finding has related services. <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
       <td><code>span_id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@runtime_context.span_id</code><br>Span identifier where the finding was detected. Available only for IAST (Interactive Application Security Testing).</td>
@@ -5020,6 +5270,11 @@ Attributes specific to Sensitive Data Scanner (SDS) findings.
       <td><code>match_action_type</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@sensitive_data.match_action_type</code><br>Indicates the match action configured on the Sensitive Data Scanner rule, such as <code>redact</code> or <code>hash</code>.</td>
+    </tr>
+    <tr>
+      <td><code>unstable</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@sensitive_data.unstable</code><br>Contains preview attributes for Sensitive Data findings. These attributes are subject to change without notice.</td>
     </tr>
   </tbody>
 </table>
