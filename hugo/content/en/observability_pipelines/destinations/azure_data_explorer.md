@@ -10,6 +10,9 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 {{< product-availability >}}

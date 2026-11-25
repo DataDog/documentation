@@ -8253,6 +8253,32 @@ menu:
         unstable:
           - v2
         order: 56
+    - name: Update a provider model by canonical ID
+      url: /api/latest/ai-gateway/update-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-update-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 60
+    - name: Delete a provider model by canonical ID
+      url: /api/latest/ai-gateway/delete-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-delete-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 59
     - name: Update an AI Gateway provider
       url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
       identifier: ai-gateway-update-an-ai-gateway-provider
@@ -15295,8 +15321,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGatesEvaluationResult
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Trigger a deployment gate evaluation
       url: /api/latest/deployment-gates/trigger-a-deployment-gate-evaluation/
@@ -15308,8 +15333,7 @@ menu:
           - v2
         operationids:
           - TriggerDeploymentGatesEvaluation
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Update deployment gate
       url: /api/latest/deployment-gates/update-deployment-gate/
@@ -15321,8 +15345,7 @@ menu:
           - v2
         operationids:
           - UpdateDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get deployment gate
       url: /api/latest/deployment-gates/get-deployment-gate/
@@ -15334,8 +15357,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete deployment gate
       url: /api/latest/deployment-gates/delete-deployment-gate/
@@ -15347,8 +15369,7 @@ menu:
           - v2
         operationids:
           - DeleteDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Update deployment rule
       url: /api/latest/deployment-gates/update-deployment-rule/
@@ -15360,8 +15381,7 @@ menu:
           - v2
         operationids:
           - UpdateDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Get deployment rule
       url: /api/latest/deployment-gates/get-deployment-rule/
@@ -15373,8 +15393,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Delete deployment rule
       url: /api/latest/deployment-gates/delete-deployment-rule/
@@ -15386,8 +15405,7 @@ menu:
           - v2
         operationids:
           - DeleteDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: Create deployment rule
       url: /api/latest/deployment-gates/create-deployment-rule/
@@ -15399,8 +15417,7 @@ menu:
           - v2
         operationids:
           - CreateDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get rules for a deployment gate
       url: /api/latest/deployment-gates/get-rules-for-a-deployment-gate/
@@ -15412,8 +15429,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGateRules
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: List deployment gate rule evaluations
       url: /api/latest/deployment-gates/list-deployment-gate-rule-evaluations/
@@ -15425,8 +15441,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentRuleEvaluations
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: List deployment gate evaluations
       url: /api/latest/deployment-gates/list-deployment-gate-evaluations/
@@ -15438,8 +15453,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentGateEvaluations
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Create deployment gate
       url: /api/latest/deployment-gates/create-deployment-gate/
@@ -15451,8 +15465,7 @@ menu:
           - v2
         operationids:
           - CreateDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get all deployment gates
       url: /api/latest/deployment-gates/get-all-deployment-gates/
@@ -15464,8 +15477,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentGates
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/

@@ -19,6 +19,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
@@ -527,9 +533,9 @@ Concise mode leaves out the task definition's tags and these fields of each cont
 
 ## APM
 
-Tools for [APM][50], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules.
+Tools for [APM][50], including investigating errors and latency across services and traces, finding optimization opportunities, and reviewing ingestion and retention configuration.
 
-<div class="alert alert-info">The <code>apm</code> toolset is not enabled by default. Add <code>apm</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,apm</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
+<div class="alert alert-info">Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. To use them, add <code>apm</code> to the <code>toolsets</code> parameter by name. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -553,9 +559,19 @@ Analyzes the trace dependencies of a service resource to find downstream service
 *Permissions Required: `APM Read`*\
 Analyzes latency bottlenecks across traces in an anomaly period using self-time calculations. Identifies which service and resource combinations consume the most self-time, detects cascading call patterns, and surfaces root causes of latency spikes.
 
-- Summarize the latency bottlenecks for the checkout service between 2pm and 3pm today.
+- Summarize the latency bottlenecks for the checkout service between 2 PM and 3 PM today.
 - What is consuming the most self-time in the payments service during this latency spike?
-- Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
+- Identify which endpoints are the top bottlenecks for `service:api` between 10 AM and 10:30 AM.
+
+### `apm_query_trace`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
+
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_search_recommendations`
 *Toolset: **apm***\
@@ -580,15 +596,51 @@ Discovers available tag keys on spans within a time range.
 - What tags are available on spans for `service:checkout`?
 - Show me the tag keys I can filter by in APM.
 
-### `apm_query_trace`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Read`*\
-Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
+### `apm_get_config`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Retrieves the [runtime configuration][113] applied through Remote Configuration for one service and environment, including every sampling rule the service applies, whether your organization or Adaptive Sampling set it. Request specific keys, or omit them to return the full configuration.
 
-- Which service accounted for the most self-time in trace `abc123`?
-- Get the attributes for span `xyz789` along with the root span's attributes.
-- How many database calls happened in this trace, and which one took the longest?
-- Which of the child spans under span `xyz789` was slowest?
+- What runtime configuration is applied to the checkout service in prod?
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists the remote sampling rules your organization created, each setting a fixed sample rate for spans that match a service, environment, and resource. Filter by service, environment, or both. Rates that Adaptive Sampling sets don't appear here. To see every rule a service applies, use `apm_get_config`.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `check_adaptive_sampling_service_eligibility`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Checks whether a service and environment can use [Adaptive Sampling][114]. Returns whether the service is eligible, its onboarding and target state, prerequisites, and any blockers.
+
+- Can the checkout service in prod use Adaptive Sampling?
+- What's blocking the payments service from onboarding to Adaptive Sampling?
+
+### `get_adaptive_sampling_target`
+*Toolset: **apm***\
+*Permissions Required: `APM Service Ingest Read` and `APM Remote Configuration Read`*\
+Retrieves the organization-wide Adaptive Sampling target, including whether one is configured and its strategy and value.
+
+- What is my organization's Adaptive Sampling target?
+
+### `search_apm_retention_filters`
+*Toolset: **apm***\
+*Permissions Required: `APM Retention Filters Read`*\
+Lists the organization's [retention filters][115] in execution order, or retrieves one filter by ID. Retention filters decide which spans are indexed and stay searchable in the Trace Explorer. A span is kept by the first filter it matches, so the order determines which rate applies. Filter the list by name, query, or enabled status.
+
+- Why aren't errors from the checkout service showing up in the Trace Explorer?
+- List the enabled retention filters in my organization.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
 
 ### `apm_get_primary_tag_keys`
 *Toolset: **apm** (Preview)*\
@@ -596,14 +648,6 @@ Runs a read-only SQL query against a trace's spans to answer a specific question
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
-
-### `search_apm_sampling_rules`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Remote Configuration Read`*\
-Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
-
-- Show me the sampling rules for the checkout service in prod.
-- List all remote sampling rules in my organization.
 
 ### `create_apm_sampling_rule`
 *Toolset: **apm** (Preview)*\
@@ -627,14 +671,6 @@ Changes the sample rate of an existing remote sampling rule, identified by its s
 Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
 - Remove the sampling rule for `GET /health` on the checkout service in prod.
-
-### `search_apm_service_remapping_rules`
-*Toolset: **apm** (Preview)*\
-*Permissions Required: `APM Read`*\
-Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
-
-- List all service remapping rules in my organization.
-- Which remapping rule renames the `postgres` inferred service?
 
 ### `create_apm_service_remapping_rule`
 *Toolset: **apm** (Preview)*\
@@ -694,6 +730,66 @@ Translates a natural-language description into an Audit Trail query string. If y
 - Provide an Audit Trail query to see who created new monitors in the past 2 weeks.
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
 - Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
+
+## Bits Guardrails
+
+Tools for [Bits Guardrails][112]. Guardrails define which remediation actions Bits can take, where those actions apply, and who needs to approve them. Each guardrail covers a set of actions, is scoped to resources by tags, and sets whether Bits needs approval before taking the action (ask) or can recommend the action but not take it (deny). When several guardrails match an action, the strictest one applies.
+
+Write tools change how much oversight Bits has over remediation actions. The `create_bits_guardrail`, `update_bits_guardrail`, and `delete_bits_guardrail` tools require `confirm: true`, and your agent should check with you before setting it. Changes made through these tools are recorded in [Audit Trail](#audit-trail).
+
+### `list_bits_guardrails`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists your organization's guardrails, including each one's trust level, actions, conditions, approvers, and notification channels. Filter by text, trust level, or action. A guardrail with a non-empty `overridden_by` never takes effect, because stricter guardrails already match every action it covers.
+
+- Which remediation actions need approval before Bits can take them?
+- List the guardrails that cover Kubernetes deployment restarts.
+
+### `get_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Retrieves a guardrail by ID. Beyond what `list_bits_guardrails` returns, the result includes the looser guardrails that this one makes ineffective.
+
+- Show me the details of guardrail `abc123`.
+- Which guardrails does the production deny guardrail override?
+
+### `list_bits_guardrail_actions`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read`*\
+Lists the Bits remediation actions that a guardrail can cover, with each action's ID and the infrastructure it runs on.
+
+- What remediation actions can a guardrail cover?
+- List the Kubernetes actions that guardrails can control.
+
+### `search_bits_guardrail_approvers`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Teams Read` and `User Access Read`*\
+Searches your organization's teams, roles, and active users for approvers to name on an ask guardrail. Use it while creating or updating a guardrail to find the approver values that `create_bits_guardrail` and `update_bits_guardrail` require.
+
+- Find the SRE team so I can add it as an approver on the production guardrail.
+
+### `create_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Creates a guardrail with a trust level, one or more actions from `list_bits_guardrail_actions` (all for the same type of infrastructure), the resource tags it applies to, and, for ask guardrails, its approvers. For an ask guardrail, you can also choose Slack channels where Bits posts approval requests when it needs to take a covered action. Because the strictest matching guardrail wins, a new ask guardrail has no effect where a deny guardrail already matches.
+
+- Require approval from the SRE team before Bits restarts or rolls back Kubernetes deployments tagged `env:prod`.
+- Prevent Bits from scaling Kubernetes deployments tagged `team:payments`.
+
+### `update_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Read` and `Guardrails Write`*\
+Updates a guardrail. Only the fields you provide change, and omitted fields keep their current values.
+
+- Change the staging deployment-restart guardrail from ask to deny.
+- Add the platform team as an approver on guardrail `abc123`.
+
+### `delete_bits_guardrail`
+*Toolset: **bits-guardrails***\
+*Permissions Required: `Guardrails Write`*\
+Deletes a guardrail. Deleting an ask or deny guardrail can let a looser guardrail take effect for the same actions.
+
+- Delete the guardrail for the decommissioned checkout cluster.
 
 ## Cases (Work Management)
 
@@ -4132,6 +4228,10 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [109]: /containers/monitoring/amazon_elastic_container_explorer/
 [110]: /containers/amazon_ecs/
 [111]: /bits_ai/bits_detection/
+[112]: /bits_ai/bits_remediation/guardrails/
+[113]: /tracing/trace_collection/runtime_config/
+[114]: /tracing/trace_pipeline/adaptive_sampling/
+[115]: /tracing/trace_pipeline/trace_retention/#retention-filters
 
 ## Further reading
 
