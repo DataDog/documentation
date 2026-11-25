@@ -61,7 +61,7 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 `(no groups found)` typically occurs in the following cases:
 
 - New Setup: The monitor has received no data for any groups since creation.
-- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. The retention period depends on the monitor type and can be customized through the {{< ui >}}Missing data options{{< /ui >}} setting ({{< ui >}}If a group stops reporting data, resolve after X hours{{< /ui >}}). For details, see [Group retention time][3].
+- Aged Out: Previously active groups stopped reporting and have been cleared from the monitor's memory. The retention period depends on the monitor type. For multi alert monitors that support custom retention, you can change it with the {{< ui >}}Remove the non-reporting group after{{< /ui >}} option. For details, see [Group retention time][3].
 
 {{% /collapse-content %}}
 
