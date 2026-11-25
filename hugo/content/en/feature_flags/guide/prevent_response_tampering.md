@@ -63,7 +63,7 @@ The following table lists the threats to flag assignment responses and the prote
 | Response for a different request | An attacker returns a valid response for a different user, client token, or URL. | Yes | The signature binds the request content (method, host, path, query, and body), the client identity (the client token), and the listed request headers. |
 | Changed response header | A proxy adds or removes the `DD-Flag-Selection-Ignored` header. | Yes | The signature covers each response header that Datadog lists in the signed response header list. The SDK uses only the verified values of these headers. |
 | Blocked refresh | An attacker blocks new responses so that the application keeps old flag values. | Partly | The attacker cannot change the values. By default, the SDK serves the last verified flags and reports a stale state. To use default values instead, enable the `expireVerifiedFlags` option. See [Signature expiry](#signature-expiry). |
-| Removed signature | An attacker removes the signature headers so that the SDK accepts an unsigned response. | Yes | With signing enabled, the SDK rejects a response that has no signature. It does not retry without signing. |
+| Removed signature | An attacker removes the signature headers so that the SDK accepts an unsigned response. | Yes | In `required` mode, the SDK rejects a response that has no signature. It does not retry without signing. |
 | Misused certificate | An attacker uses a TLS or code-signing certificate from the same hierarchy to sign responses. | Yes | The leaf certificate must contain a Datadog-specific extended key usage for flag responses. |
 | Eavesdropping | A network observer reads flag values. | Not by signing | TLS encrypts the traffic. Signing does not encrypt. |
 | Inspection by the device owner | The user reads flag values in the browser developer tools. | No | The device owner can always read data that the application receives. Do not put secrets in client-side flag values. |
@@ -113,7 +113,7 @@ When response signing is enabled, each flag assignment request follows these ste
 1. The SDK verifies the certificate chain: leaf, then each intermediate, then the pinned root. It checks each signature, the validity dates of each certificate, and the leaf EKU.
 1. The SDK verifies the signature against the request it sent, the exact bytes it received, and the listed response headers.
 1. The SDK checks that the signature has not expired. A signature is valid for at most 5 minutes after Datadog issues it.
-1. If all checks pass, the SDK parses the response and makes the flag values available to your application. If a check fails, the SDK rejects the response. See [Verification failures](#verification-failures).
+1. If all checks pass, the SDK parses the response and makes the flag values available to your application. If a check fails in `required` mode, the SDK rejects the response. See [Verification failures](#verification-failures).
 
 The SDK verifies the response before it parses the assignments. In `required` mode, unverified data never reaches flag evaluation. The SDK uses a listed response header, such as `DD-Flag-Selection-Ignored`, only after verification passes.
 
@@ -149,7 +149,7 @@ If you do not enable response signing, nothing changes. The SDK sends the same r
 
 ## Verification failures
 
-With signing enabled, the SDK rejects a response if any check fails. A request that was redirected also fails. The SDK reports each failure with a reason code. All three SDKs use the same reason codes. Only the browser SDK reports `verifier-unavailable`.
+In `required` mode, the SDK rejects a response if any check fails. A request that was redirected also fails. In `observe` mode, the SDK reports the same failures but accepts the response. The SDK reports each failure with a reason code. All three SDKs use the same reason codes. Only the browser SDK reports `verifier-unavailable`.
 
 | Reason code | Meaning | What to check |
 | --- | --- | --- |
@@ -181,7 +181,7 @@ In `required` mode, the SDK keeps verified flag assignments in memory only. It d
 - After a change to the evaluation context, evaluations return default values until a verified response for the new context arrives.
 - In these cases, the evaluation details report an error, and the provider reports an error state. A new verified response restores the ready state.
 
-The SDK fails closed: when it cannot verify a response, it uses your default values, not unverified data. Choose default values that are safe for your application.
+In `required` mode, the SDK fails closed: when it cannot verify a response, it uses your default values, not unverified data. Choose default values that are safe for your application.
 
 ### Signature expiry
 
@@ -229,7 +229,7 @@ The following table summarizes how response signing behaves in common situations
 - **Signing does not hide flag values.** The device owner can read the assignments, the flag values, and the signature. Do not put secrets in client-side flag values. To reduce readable flag names in responses, see [Flag Key Obfuscation][4].
 - **Signing does not protect a compromised device.** If an attacker controls the device or the application process, the attacker can change the application code, the SDK, or the evaluated values after verification. Enforce sensitive access decisions on your server.
 - **Signing does not change authorization.** Your client token and targeting rules control which assignments a client receives. Signing proves only that Datadog produced the response.
-- **Key compromise and revocation.** In Preview, the SDKs do not check certificate revocation. A certificate stays valid until its expiry time.
+- **Key compromise and revocation.** In Preview, the SDKs do not check certificate revocation. Until a compromised certificate expires, a party that holds its private key can sign responses that pass verification.
   - If a leaf key or an intermediate key is compromised, Datadog issues new certificates. This rotation needs no SDK update. A leaf certificate is valid for a few days.
   - If a root key is compromised, you must update the SDK to replace the pinned root. Datadog publishes a security bulletin in this case.
 - **The check starts at the Datadog edge.** Datadog signs responses at its edge network. The check covers the path from the Datadog edge to the SDK.
