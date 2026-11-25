@@ -2,9 +2,9 @@
 title: Subject Authorization
 description: Control which subjects can download feature flag assignments for an environment.
 further_reading:
-- link: "/feature_flags/client/javascript/#authorize-assignment-downloads"
+- link: "/feature_flags/client/"
   tag: "Documentation"
-  text: "Configure browser subject authorization"
+  text: "Client-Side SDKs"
 - link: "/account_management/workload_identity_federation/"
   tag: "Documentation"
   text: "Workload Identity Federation"
@@ -40,7 +40,8 @@ The SDK sends the JWT alongside your existing Datadog client token. The client t
 
 | SDK | Minimum version |
 |-----|-----------------|
-| Browser (`@datadog/openfeature-browser`) | `2.4.0` |
+| [Browser][4] (`@datadog/openfeature-browser`) | `2.4.0` |
+| [iOS][11] (`DatadogFlags`) | `3.23.0` |
 
 See [Client SDKs][1] for installation instructions.
 
@@ -99,7 +100,7 @@ Replace the example values as follows:
 - `iss` must exactly match the registered issuer URL.
 - `aud` must match the provider's audience.
 - `sub` must exactly match the SDK's `targetingKey` and must not be empty.
-- `environment_id` must be the Feature Flags environment's UUID, not its name or the SDK's `env` value. Retrieve it with the [List environments API][3].
+- `environment_id` must be the Feature Flags environment's UUID, not its name or the SDK's environment setting. Retrieve it with the [List environments API][3].
 - `feature_flags` must be Boolean `true`.
 - `iat` and `exp` must be UNIX timestamps in seconds. Set `iat` to the issue time and `exp` to a later expiration time. Replace the example timestamps when issuing a token. Datadog also validates `nbf` if present, with a 30-second clock tolerance for timestamp checks.
 
@@ -107,7 +108,7 @@ Return the signed token to the authenticated application through your existing s
 
 ## Configure the client
 
-Include the subject token in the reserved `dd_assignment_token` evaluation context field when initializing the provider. Replace it through a complete context update before it expires. See [Authorize assignment downloads][4] for browser initialization, token refresh, and subject-switching behavior.
+Include the subject token in the reserved `dd_assignment_token` evaluation context attribute. Replace it through a complete context update before it expires. For SDK setup, token refresh, and subject changes, see the guides linked in [Supported clients](#supported-clients).
 
 Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one. For authorization errors, see [Troubleshoot assignment downloads](#troubleshoot-assignment-downloads).
 
@@ -175,7 +176,7 @@ Key changes take time to propagate. Removing a key does not immediately invalida
 - **`503 ASSIGNMENT_AUTHORIZATION_UNAVAILABLE`:** Verification configuration is unavailable. Check the selected provider and supported settings, allow time for keys to propagate, and contact your Datadog representative if failures persist.
 - **Environment API errors:** A new provider ID must be registered in the same organization and site. Invalid or unknown provider IDs return `400`; an unavailable registry returns `503`. A concurrent policy change returns `409`; retrieve the environment again before retrying.
 
-For browser configuration and proxy requirements, see [Authorize assignment downloads][4]. Authorization controls new downloads; token expiration alone does not clear previously downloaded assignments.
+Authorization controls new downloads; token expiration alone does not clear previously downloaded assignments.
 
 ## Further reading
 
@@ -191,3 +192,4 @@ For browser configuration and proxy requirements, see [Authorize assignment down
 [8]: /account_management/workload_identity_federation/
 [9]: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
 [10]: /api/latest/cloud-authentication/list-all-custom-oidc-providers/
+[11]: /feature_flags/client/ios/#authorize-assignment-downloads
