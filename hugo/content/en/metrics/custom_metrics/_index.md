@@ -96,7 +96,7 @@ Set metric units on the [Metrics Catalog page][12] or set custom metric units wi
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
-    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
+    {{< nextlink href="/api/latest/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
