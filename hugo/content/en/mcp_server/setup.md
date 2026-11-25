@@ -802,6 +802,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
+- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
@@ -810,7 +811,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `derived-metrics`: Tools for creating, updating, and deleting [derived metrics][85] from formulas and named metric queries.
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
-- `execute_code`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.

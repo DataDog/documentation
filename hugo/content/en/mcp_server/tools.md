@@ -849,7 +849,7 @@ Tools for running agent-authored JavaScript in a Datadog-managed sandbox with di
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
-*Toolsets: **core**, **execute_code***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
 Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with read-only access to Datadog APIs. The code receives a `dd.*` namespace for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs. It returns a structured value to the agent. Combining queries in one script reduces tool calls for investigations and data exploration.
 
@@ -858,7 +858,7 @@ Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with re
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ### `execute_code_write`
-*Toolsets: **core**, **execute_code***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
 Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
 
@@ -871,7 +871,7 @@ The AI client's normal approval behavior applies; the MCP Server does not add a 
 - Create a case for the current incident, assign it to the on-call team, and include links to the relevant traces and logs.
 
 ### `search_datadog_sdk`
-*Toolsets: **core**, **execute_code***\
+*Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
 Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution checks your permissions separately.
 
