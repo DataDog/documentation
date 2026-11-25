@@ -51,6 +51,7 @@ With Fleet Automation, you can:
 - **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
 - **[Send a support flare remotely][6]** to debug issues on an Agent or the Agent's Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
+- **[Manage your fleet from AI agents][16]** _(Preview)_ with the `fleet-automation` toolset for the Datadog MCP Server.
 
 ## Set up Fleet Automation
 
@@ -91,3 +92,4 @@ Use role permissions to control which Fleet Automation actions users can take, s
 [13]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades-with-terraform
 [14]: /agent/fleet_automation/otel_collectors/
 [15]: /agent/fleet_automation/configuration_policies/
+[16]: /mcp_server/tools/#fleet-automation
