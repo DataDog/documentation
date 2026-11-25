@@ -98,7 +98,21 @@ Datadog creates the monitor without the required tag when the service definition
 - Sets more than one value for the tag.
 - Sets a value that the tag policy does not allow.
 
-For Baseline Monitors to have the required tags, set each required tag to one allowed value in the service definition.
+For Baseline Monitors to have the required tags, set each required tag to one allowed value in the service definition. Add the tags to the `metadata.tags` list of the definition. For the full schema, see [Entity Model][4].
+
+For example, suppose that your tag policy requires the `cost-center` tag. The following service definition sets `cost-center` to `retail`:
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart
+  owner: shopping-team
+  tags:
+    - cost-center:retail
+{{< /code-block >}}
+
+Datadog adds the tag `cost-center:retail` to every Baseline Monitor of the `shopping-cart` service.
 
 ### Monitor tuning
 
