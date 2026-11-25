@@ -33,14 +33,6 @@ OSS projects release new versions frequently, often due to CVE remediation or en
 
 To get started, see [Set up Bits Maintenance][6].
 
-## How Bits Maintenance works
-
-When a project your team uses releases a new version, Bits Maintenance:
-
-1. Assesses the changes.
-2. Creates a [campaign][2] to implement the upgrade.
-3. Executes the upgrade rollout.
-
 ## Supported OSS projects
 
 Bits Maintenance supports a specific set of OSS Kubernetes projects, including Redis, cert-manager, Argo CD, and others. See the full list of supported projects on [{{< ui >}}Bits Maintenance{{< /ui >}} > {{< ui >}}Coverage{{< /ui >}}][5]. To request support for a project, search for the project on the {{< ui >}}Coverage{{< /ui >}} page, then click {{< ui >}}Request Project Coverage{{< /ui >}}.

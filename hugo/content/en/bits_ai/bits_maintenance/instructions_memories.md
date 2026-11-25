@@ -28,7 +28,7 @@ Use upgrade instructions and memories to teach [Bits Maintenance][1] how your te
 
 Provide upgrade instructions to Bits Maintenance to teach it how your team performs upgrades, such as who does what, in which order, and which repositories or workflows to use.
 
-Bits Maintenance has a default upgrade runbook, which it combines with the instructions you provide to create a complete upgrade campaign. View the default instructions at {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Upgrade Instructions{{< /ui >}} > {{< ui >}}View Default Instructions{{< /ui >}}.
+Bits Maintenance has default upgrade instructions, which it combines with the instructions you provide to build upgrade campaigns. View the default instructions at {{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Upgrade Instructions{{< /ui >}} > {{< ui >}}View Default Instructions{{< /ui >}}.
 
 ### Add upgrade instructions
 
