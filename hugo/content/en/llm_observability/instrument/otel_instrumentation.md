@@ -546,15 +546,14 @@ After running this example, search for `ml_app:simple-openinference-test` in the
      }
    }
    ```
-2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
+2. Create the destination in the Cloudflare dashboard under **Observability** > **Destinations**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
    | Field | Value |
    |-------|-------|
-   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
+   | Destination URL | `https://cloudflare.integrations.otlp.{{< region-param key="dd_site" >}}/v1/traces` |
    | Header | `dd-api-key`: `<YOUR_API_KEY>` |
-   | Header | `dd-otlp-source`: `llmobs` |
    | Header | `DD-LLMObs-Enabled`: `true` |
 
-   The `dd-otlp-source=llmobs` header identifies the source; `DD-LLMObs-Enabled=true` enables conversion. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
+   The dedicated Cloudflare endpoint identifies the source and does not use the `dd-otlp-source` header. The `DD-LLMObs-Enabled: true` header enables Agent Observability conversion for eligible AI spans. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
    ```typescript
    import { Agent } from "agents";
@@ -578,6 +577,8 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    }
    ```
    After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+
+Built-in Worker spans, such as fetch, binding, and RPC spans, without supported AI attributes do not appear in Agent Observability. See [Trace eligibility](#trace-eligibility) for conversion rules and [Agent Observability metrics](/llm_observability/investigate/metrics/) for supported latency and error metric tags.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using Microsoft.Extensions.AI (.NET)" level="h3" expanded=false id="using-microsoft-extensions-ai-dotnet" %}}
