@@ -33,23 +33,6 @@ An entry point is a server or consumer operation (`span.kind:server` or `span.ki
 
 Your existing monitors stay in place. Baseline Monitors does not change or delete monitors that your team creates.
 
-### Related features
-
-Baseline Monitors and [Bits Detection][1] both create Datadog-managed monitors for your APM services. They differ in what they monitor and how they handle alerts and edits:
-
-| | Baseline Monitors | Bits Detection |
-|---|---|---|
-| Resource types | APM services | APM services, hosts, and serverless functions |
-| What it monitors | Every entry point of every service in scope | The endpoints that Bits identifies as critical to your users and business |
-| Monitors per endpoint | Error rate, latency, and low traffic | Error rate, latency, and low traffic, plus service-level anomaly and Watchdog monitors |
-| How you enable it | Monitor Settings | An Autonomous Ops scope |
-| Notifications | Created as drafts during the Preview. A monitor sends notifications only after you publish it. | Created as published monitors. Alerts can start Bits investigations automatically. |
-| Your edits | Datadog keeps your changes. | Datadog replaces your changes with its own configuration. |
-| Deleted monitors | Created again after a 7-day cooldown, if the entry point is still in scope | Created again on the next update, if the endpoint is still critical |
-| Cost | Included at no additional cost | Consumes [AI Credits][9] |
-
-You can use both features at the same time. Each feature creates its own monitors, so an endpoint that both features cover can have two sets of monitors.
-
 ## Setup
 
 ### Permissions
@@ -221,6 +204,27 @@ After you edit a Baseline Monitor:
 - If you changed a threshold, Datadog does not change the thresholds of the monitor again.
 
 Publishing a draft or moving a monitor to draft does not count as an edit. Datadog never moves a monitor that you published back to draft.
+
+## Enhance your automatic coverage with Bits
+
+Baseline Monitors applies the same deterministic rules to every service in scope. To extend that coverage, use [Bits Detection][1]. Bits Detection uses AI reasoning to decide what to monitor. It identifies the endpoints that matter most to your users and business. It sets detection logic from production behavior and keeps that coverage current as your services change. Bits Detection also monitors resources beyond APM, such as hosts and serverless functions.
+
+You can use both features at the same time. Baseline Monitors gives every service in scope a consistent minimum of coverage, and Bits Detection adds coverage where it matters most.
+
+The following table compares the two features:
+
+| | Baseline Monitors | Bits Detection |
+|---|---|---|
+| Resource types | APM services | APM services, hosts, and serverless functions |
+| What it monitors | Every entry point of every service in scope | The endpoints that Bits identifies as critical to your users and business |
+| Monitors per endpoint | Error rate, latency, and low traffic | Error rate, latency, and low traffic, plus service-level anomaly and Watchdog monitors |
+| How you enable it | Monitor Settings | An Autonomous Ops scope |
+| Notifications | Created as drafts during the Preview. A monitor sends notifications only after you publish it. | Created as published monitors. Alerts can start Bits investigations automatically. |
+| Your edits | Datadog keeps your changes. | Datadog replaces your changes with its own configuration. |
+| Deleted monitors | Created again after a 7-day cooldown, if the entry point is still in scope | Created again on the next update, if the endpoint is still critical |
+| Cost | Included at no additional cost | Consumes [AI Credits][9] |
+
+**Note**: Each feature creates its own monitors. An endpoint that both features cover can have two sets of monitors.
 
 ## Further reading
 
