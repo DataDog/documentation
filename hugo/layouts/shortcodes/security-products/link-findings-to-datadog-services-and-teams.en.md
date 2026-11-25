@@ -1,10 +1,11 @@
-Datadog associates code and library scan results with Datadog services and teams to automatically route findings to the appropriate owners. This enables service-level visibility, ownership-based workflows, and faster remediation. For Static Code Analysis, Secret Scanning, and IaC Security findings, mapped services also provide [runtime context](/security/code_security/runtime_context/).
+Datadog associates code and library scan results with Datadog services and teams to automatically route findings to the appropriate owners. This enables service-level visibility, ownership-based workflows, and faster remediation. For Static Code Analysis, Software Composition Analysis, Secret Scanning, and IaC Security findings, mapped services also provide [runtime context](/security/code_security/runtime_context/).
 
 To determine the services that a finding belongs to, Datadog combines the results of several mapping sources. Each source can map a finding to one or more services, and Datadog keeps every valid mapping instead of selecting a single source or service:
 
 - **Software Catalog code locations (recommended)**: The `codeLocations` field in your service definitions. See [Mapping using the Software Catalog](#mapping-using-the-software-catalog-recommended).
-- **Runtime data from your services**: File information that Datadog collects from your instrumented services, for supported languages.
+- **Runtime data from your services**: The directories that your services load code from, which the Datadog tracer reports when [Dynamic Instrumentation autocomplete and search](/dynamic_instrumentation/symdb/) is enabled. Available for Java, Python, and .NET services.
 - **Repository analysis**: Datadog analyzes the repositories linked to your services to detect each service's entry points and dependencies. Datadog also reads deployment files that reference a service, such as Dockerfiles and YAML manifests.
+- **Error Tracking**: File paths in the stack traces that Error Tracking collected from your services in the last 30 days. Files in the same directory as a file in a stack trace map to the service that reported the error.
 - **Service inference from file paths or repository names**: Used only when none of the other sources returns a mapping. See [Service inference from file paths or repository names](#service-inference-from-file-paths-or-repository-names).
 
 A mapping means that the finding's file is related to the service. It does not confirm that the file is part of the deployed version of the service. Mappings apply at the directory level, so files in the same directory map to the same services. For repositories that Datadog identifies as forks, Datadog uses only Software Catalog code locations.

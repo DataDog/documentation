@@ -37,10 +37,6 @@ Diff-aware scanning, which is available for [Static Code Analysis][18], is not s
 
 ## Key capabilities
 
-### Prioritize secrets with runtime context
-
-Secret Scanning findings show the services that run the affected file and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in live, exposed services. For more information, see [Runtime Context for Static Findings][19].
-
 ### Detect secrets in Git history
 
 Deleting a secret from a file does not remove it from the repository. The secret remains in earlier commits, where anyone with access to the repository can recover it.
@@ -87,6 +83,10 @@ On the {{< ui >}}Secret Scanning (Secrets){{< /ui >}} tab, use filters to narrow
 - Team
 - Repository visibility
 - {{< ui >}}Is Git History{{< /ui >}}
+
+### Prioritize secrets with runtime context
+
+Secret Scanning findings show the services that each finding maps to and the runtime risks those services carry: {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}}, and {{< ui >}}Publicly Accessible{{< /ui >}}. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on secrets in production services. For more information, see [Prioritize Findings with Runtime Context][19].
 
 ### Create Jira tickets from findings
 

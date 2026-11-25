@@ -8696,7 +8696,7 @@ menu:
       url: /security/code_security/iac_security/custom_rules/guide/
       parent: code_security_iac_security
       weight: 100006
-    - name: Runtime Context
+    - name: Prioritize Findings with Runtime Context
       identifier: sec_code_sec_runtime_context
       url: /security/code_security/runtime_context/
       parent: code_security
