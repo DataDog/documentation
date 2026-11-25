@@ -63,7 +63,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 - Adjusts default [indexer WAL memory budgets](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/CHANGELOG.md#070) to reduce the risk of out-of-memory restarts.
 - Adds CPU limits to keep standard indexer pods within their allocated resources. Explicit `indexer.resources` overrides are unchanged.
-- Groups similar logs by source and service to improve compression.
+- Updates default log clustering to distinguish services, including when `source` is absent.
 
 #### Known issues
 
