@@ -18,12 +18,12 @@ Product Analytics alerts notify you when a key business metric, such as checkout
 
 ## Create an alert
 
-You can create an alert from any funnel in Product Analytics or on a dashboard.
+You can create an alert from any funnel in Product Analytics or on a dashboard. Alerts are only available for funnel charts.
 
 1. Open the funnel you want to alert on.
 2. Click the bell icon.
 3. Choose a direction, {{< ui >}}above{{< /ui >}} or {{< ui >}}below{{< /ui >}}, and enter the threshold value.
-4. Use the evaluation preview to compare your threshold with recent values. See [Choose a threshold](#choose-a-threshold).
+4. Use the evaluation preview to compare your threshold with recent values. See the [Choose a threshold](#choose-a-threshold) section.
 5. Review the notification message and add recipients.
 6. Click {{< ui >}}Create{{< /ui >}}.
 
@@ -89,7 +89,7 @@ To see the active alerts on a saved funnel or dashboard widget, open it and clic
 
 ### Edit a funnel that has alerts
 
-Each alert keeps its own copy of the funnel definition, so editing a chart never changes what an alert evaluates without your knowledge.
+Each alert keeps its own copy of the funnel definition, so editing a chart never changes what an alert evaluates.
 
 When you save a funnel change that affects its definition, Datadog asks what to do with the alerts linked to it. Changes that affect the definition include:
 
