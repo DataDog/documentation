@@ -35,12 +35,20 @@ Your existing monitors stay in place. Baseline Monitors does not change or delet
 
 ### Related features
 
-Baseline Monitors and [Bits Detection][1] both create monitors for your APM services, but they solve different problems:
+Baseline Monitors and [Bits Detection][1] both create Datadog-managed monitors for your APM services. They differ in what they monitor and how they handle alerts and edits:
 
-- **Baseline Monitors** gives every in-scope service the same minimum coverage: error rate, latency, and traffic on each entry point. You turn it on from the Monitor Settings page. Baseline Monitors is included at no additional cost.
-- **Bits Detection** finds the endpoints that are most critical to your users and business, and adapts its detection to them. You turn it on by creating an Autonomous Ops scope. Bits Detection is a paid product.
+| | Baseline Monitors | Bits Detection |
+|---|---|---|
+| Resource types | APM services | APM services, hosts, and serverless functions |
+| What it monitors | Every entry point of every service in scope | The endpoints that Bits identifies as critical to your users and business |
+| Monitors per endpoint | Error rate, latency, and low traffic | Error rate, latency, and low traffic, plus service-level anomaly and Watchdog monitors |
+| How you enable it | Monitor Settings | An Autonomous Ops scope |
+| Notifications | Created as drafts during the Preview. A monitor sends notifications only after you publish it. | Created as published monitors. Alerts can start Bits investigations automatically. |
+| Your edits | Datadog keeps your changes. | Datadog replaces your changes with its own configuration. |
+| Deleted monitors | Created again after a 7-day cooldown, if the entry point is still in scope | Created again on the next update, if the endpoint is still critical |
+| Cost | Included at no additional cost | Consumes [AI Credits][9] |
 
-You can use both features at the same time.
+You can use both features at the same time. Each feature creates its own monitors, so an endpoint that both features cover can have two sets of monitors.
 
 ## Setup
 
@@ -226,3 +234,4 @@ Publishing a draft or moving a monitor to draft does not count as an edit. Datad
 [6]: /account_management/teams/manage/
 [7]: https://app.datadoghq.com/monitors/manage
 [8]: /monitors/downtimes/
+[9]: /account_management/billing/ai_credits/
