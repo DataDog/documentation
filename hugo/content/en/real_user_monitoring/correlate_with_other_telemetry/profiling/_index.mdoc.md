@@ -138,6 +138,21 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 {% /collapse-content %}
 
+### Step 3 - Upload your source maps
+
+Profiles collected from production code contain minified function names, file paths, and line and column numbers. Datadog uses JavaScript source maps to resolve them to your original source code. The flame graphs, call hierarchies, and function lists across the profiling views display these resolved function calls.
+
+Upload your source maps with [`datadog-ci`][32] (or with a [Datadog build plugin][33]) as part of your build or CI pipeline. Without uploaded source maps, profiles show the minified function names and locations.
+
+```shell
+datadog-ci sourcemaps upload /path/to/dist \
+  --service my-web-application \
+  --release-version 1.0.0 \
+  --minified-path-prefix https://example.com/static
+```
+
+The `--service` and `--release-version` values must match the `service` and `version` set in your RUM SDK initialization. For other options, such as Debug IDs, see [Upload JavaScript source maps][32].
+
 ## Explore profiling
 
 ### Within the Sessions Explorer
@@ -242,6 +257,10 @@ Pages loaded from `file://` are not served with this header by default, so profi
 
 3. Add the `Document-Policy: js-profiling` response header to the responses that serve your renderer pages.
 
+### Step 4 - Upload your source maps
+
+Renderer profiles contain minified function names and locations. Datadog uses JavaScript source maps to resolve them to your original source code in the flame graphs and function calls. Upload the source maps of your renderer code with [`datadog-ci`][32], as described in [Upload source maps][electron-5]. The `--service` and `--release-version` values must match your Browser SDK configuration.
+
 ## Explore profiling
 
 Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the Browser SDK.
@@ -250,6 +269,7 @@ Renderer profiling data appears in the same places as browser profiling data. Se
 [electron-2]: /real_user_monitoring/application_monitoring/electron/setup/
 [electron-3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
 [electron-4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser#explore-profiling
+[electron-5]: /real_user_monitoring/application_monitoring/electron/error_tracking/#upload-source-maps
 
 {% /if %}
 <!-- end Electron -->
@@ -547,3 +567,5 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 [29]: /real_user_monitoring/bits_ai/bits_chat/
 [30]: /mcp_server/tools/#profiling
 [31]: /mcp_server/setup/#toolsets
+[32]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[33]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
