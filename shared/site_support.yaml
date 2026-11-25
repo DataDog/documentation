@@ -390,6 +390,8 @@ site_support_ids:
       - /api/latest/on-call/**
       - /incident_response/on-call/**
       - /service_management/on-call/**
+  opamp_extension:
+    regions: [gov, gov2]
   opentelemetry_collector_otlp_export:
     regions: [gov, gov2]
   oracle-fusion:

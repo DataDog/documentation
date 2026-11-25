@@ -1,6 +1,7 @@
 ---
 title: OpAMP Extension
 description: "Use the OpenTelemetry OpAMP extension to view upstream OpenTelemetry Collector configuration and health in Fleet Automation."
+site_support_id: opamp_extension
 further_reading:
 - link: "/opentelemetry/integrations/datadog_extension/"
   tag: "Documentation"
@@ -22,11 +23,11 @@ The OpAMP extension is in Preview.
 
 ## Overview
 
-The [OpenTelemetry OpAMP extension][1] connects an upstream OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2] and acts as an alternative to the [Datadog Extension][4]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
+The [OpenTelemetry OpAMP extension][1] uses the [Open Agent Management Protocol (OpAMP)][2] to connect an upstream OpenTelemetry (OTel) Collector to Datadog. The Collector reports its configuration, health, and available components, which you can view in [Fleet Automation][3].
 
-The OpAMP extension doesn't support remote configuration of the Collector.
+The OpAMP extension is an alternative to the [Datadog Extension][4], which is the recommended way to connect upstream Collectors to Fleet Automation. The OpAMP extension doesn't support remote configuration of the Collector.
 
-The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the upstream OpenTelemetry Collector, and you can add it to [custom builds][6]. Upstream, the extension's stability level is alpha.
+The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the upstream OpenTelemetry Collector, and you can add it to [custom builds][6]. The extension's upstream stability level is alpha.
 
 <div class="alert alert-info">If you use the <a href="/opentelemetry/setup/agent/#agents-collector">Agent's Collector</a> or the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, you don't need the OpAMP extension. Both connect to Fleet Automation without extra configuration.</div>
 
@@ -58,10 +59,6 @@ Set the following environment variables:
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Set `DD_OPAMP_ENDPOINT` to the OpAMP endpoint for your Datadog site: {{< region-param key="opamp_endpoint" code="true" >}}.
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-The OpAMP endpoint isn't available on US1-FED or US2-FED.
 {{< /site-region >}}
 
 The extension's `reports_health`, `reports_effective_config`, and `reports_available_components` capabilities are on by default. Don't turn them off. Fleet Automation uses them as follows:
