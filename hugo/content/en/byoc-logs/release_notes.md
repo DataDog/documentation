@@ -65,10 +65,6 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 - Adds CPU limits to keep standard indexer pods within their allocated resources. Explicit `indexer.resources` overrides are unchanged.
 - Updates default log clustering to distinguish services, including when `source` is absent.
 
-#### Known issues
-
-- Azure Blob Storage connections using private CAs or TLS inspection can fail certificate validation.
-
 ### v0.1.36 — 2026-11-03
 
 *Bundled in chart: `0.6.0`.*
