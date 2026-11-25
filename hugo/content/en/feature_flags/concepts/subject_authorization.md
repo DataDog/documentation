@@ -45,6 +45,25 @@ The SDK sends the JWT alongside your existing Datadog client token. The client t
 
 See [Client SDKs][1] for installation instructions.
 
+## Setup overview
+
+Set up subject authorization in this order:
+
+1. [Prepare signing keys and publish a JWKS](#prepare-signing-keys-and-publish-a-jwks). Generate or select compatible signing keys and publish the public keys at an HTTPS endpoint.
+2. [Register an OIDC provider](#register-an-oidc-provider). Register your issuer and JWKS URL in Datadog and allow time for the keys to propagate.
+3. [Issue subject tokens](#issue-subject-tokens). Update your backend to issue JWTs for authenticated subjects and the intended environment.
+4. [Configure the client](#configure-the-client). Update your application to obtain a JWT and supply it through the SDK's evaluation context.
+5. [Enable authorization through the API](#enable-authorization-through-the-api). Associate the provider with the environment and enable authorization in the same update.
+6. [Verify authorization](#verify-authorization). Confirm that valid requests succeed and requests with missing or invalid tokens are rejected.
+
+## Prepare signing keys and publish a JWKS
+
+Generate a signing key pair, or select an existing pair that meets the following requirements. Keep private keys on your backend.
+
+Publish up to three public signing keys at a JSON Web Key Set (JWKS) endpoint. Each key must use RSA-2048 with exponent 65537, support PS256 signatures, and have a unique, nonempty `kid`. If present, `alg` must be `PS256`, `use` must be `sig`, and `key_ops` must contain only `verify`.
+
+The JWKS URL must use a public DNS hostname and HTTPS on port 443, without URL credentials, query strings, or fragments. The endpoint must return the keys directly, without redirects.
+
 ## Register an OIDC provider
 
 Register a dedicated custom OIDC provider in the same Datadog organization and site as your Feature Flags environment. Follow [Register the OIDC provider in Datadog][2], or use the [Create a Custom OIDC provider API][9], with these settings:
@@ -52,7 +71,7 @@ Register a dedicated custom OIDC provider in the same Datadog organization and s
 - **Name:** A descriptive name for the provider, such as `Feature Flags Subject Authorization - Staging`.
 - **Issuer URL:** The exact issuer identifier your backend includes in the JWT's `iss` claim, such as `https://auth.example.com`.
 - **Key discovery:** Select **Direct JWKS URL** (`direct_jwks`).
-- **JWKS URL:** The public HTTPS endpoint that serves your public signing keys as a JSON Web Key Set, such as `https://auth.example.com/.well-known/jwks.json`. The endpoint must return the JWKS directly, without redirects. Keep private keys on your backend.
+- **JWKS URL:** The HTTPS endpoint that serves your public signing keys, such as `https://auth.example.com/.well-known/jwks.json`.
 - **Org routing:** Select **Org UUID in the token audience**.
 - **Audiences:** A single value, `datadog/<ORG_UUID>`. Find the organization UUID on **Organization Settings > Workload Identity Federation**.
 - Use the default `sub` identity claim.
@@ -61,15 +80,15 @@ Register a dedicated custom OIDC provider in the same Datadog organization and s
   - **Match:** **Exact**
   - **Value:** `true`
 
-Both the issuer and JWKS URLs must use public DNS hostnames and HTTPS on port 443, without URL credentials, query strings, or fragments. The JWKS endpoint must return the keys directly, without redirects.
-
-Publish up to three public signing keys. Each key must use RSA-2048 with exponent 65537, support PS256 signatures, and have a unique, nonempty `kid`. If present, `alg` must be `PS256`, `use` must be `sig`, and `key_ops` must contain only `verify`. Keep private keys on your backend.
+The issuer URL must use a public DNS hostname and HTTPS on port 443, without URL credentials, query strings, or fragments.
 
 Save the provider ID returned when you register the provider. To retrieve it later, use the [List providers API][10]. This flow uses the provider registration directly; it does not require a WIF identity mapping, intake mapping, or token exchange.
 
-After publishing keys, allow at least 15 minutes for propagation.
+After registering the provider, allow at least 15 minutes for signing keys to propagate before enabling subject authorization.
 
 ## Issue subject tokens
+
+Retrieve the UUID of your Feature Flags environment with the [List environments API][3]. Use this UUID in the token's `environment_id` claim.
 
 After authenticating a subject, issue a JWT from your backend with a `PS256` signature. The JWT header accepts only these fields:
 
@@ -100,7 +119,7 @@ Replace the example values as follows:
 - `iss` must exactly match the registered issuer URL.
 - `aud` must match the provider's audience.
 - `sub` must exactly match the SDK's `targetingKey` and must not be empty.
-- `environment_id` must be the Feature Flags environment's UUID, not its name or the SDK's environment setting. Retrieve it with the [List environments API][3].
+- `environment_id` must be the Feature Flags environment's UUID, not its name or the SDK's environment setting.
 - `feature_flags` must be Boolean `true`.
 - `iat` and `exp` must be UNIX timestamps in seconds. Set `iat` to the issue time and `exp` to a later expiration time. Replace the example timestamps when issuing a token. Datadog also validates `nbf` if present, with a 30-second clock tolerance for timestamp checks.
 
@@ -108,13 +127,13 @@ Return the signed token to the authenticated application through your existing s
 
 ## Configure the client
 
-Include the subject token in the reserved `dd_assignment_token` evaluation context attribute. Replace it through a complete context update before it expires. For SDK setup, token refresh, and subject changes, see the guides linked in [Supported clients](#supported-clients).
-
-Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one. For authorization errors, see [Troubleshoot assignment downloads](#troubleshoot-assignment-downloads).
+Update your application to obtain a subject token from your backend and include it in the reserved `dd_assignment_token` evaluation context attribute. Replace it through a complete context update before it expires. For SDK setup, token refresh, and subject changes, see the guides linked in [Supported clients](#supported-clients).
 
 ## Enable authorization through the API
 
-Configure subject authorization with the [Update environment API][5]. Select one OIDC provider for the environment with these attributes:
+Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one.
+
+Use the [Update environment API][5] to associate one registered OIDC provider with the environment and enable subject authorization in the same update. Set these attributes:
 
 - `subject_authorization_state`: `enabled` or `disabled`. Environments default to `disabled`.
 - `subject_authorization_oidc_provider_id`: The UUID of your registered custom OIDC provider. Retrieve it from the [provider creation response][9] or the [List providers API][10]. Required when authorization is enabled.
@@ -153,11 +172,23 @@ Use your [Datadog API and application keys][6] to authenticate these requests.
 
    Updates require `name` and `queries`. Include the current `is_production` and `require_feature_flag_approval` values to preserve them; omitting either resets it to `false`.
 
-3. Verify assignment downloads with the configured SDK after enabling authorization. Saving the policy does not verify key publication.
-
 Configure the provider and environment policy independently in each Datadog site. These settings are not copied between sites.
 
 To disable authorization, repeat the read and update process with `subject_authorization_state` set to `disabled`. Disabling retains the provider association. To also clear the association, set `subject_authorization_oidc_provider_id` to `null` in that update.
+
+## Verify authorization
+
+After enabling authorization, send new assignment requests with the configured SDK and check the responses for each case:
+
+| Token supplied | Expected assignment response |
+|----------------|------------------------------|
+| A valid token for the requested subject and environment | The assignment request succeeds. |
+| No token | `401 ASSIGNMENT_AUTHORIZATION_FAILED` |
+| A token issued for a different subject | `401 ASSIGNMENT_AUTHORIZATION_FAILED` |
+
+The rejection checks confirm that authorization is enforced. Inspect the assignment request's network response rather than evaluated flag values, which can come from previously downloaded assignments. Saving the environment policy does not verify that signing keys have propagated.
+
+For authorization errors, see [Troubleshoot assignment downloads](#troubleshoot-assignment-downloads).
 
 ## Rotate signing keys
 
