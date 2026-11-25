@@ -78,9 +78,14 @@ Fleet Automation identifies each Collector by its OpAMP `instance_uid`. If you d
 
 To reduce this noise and make individual Collectors easier to identify:
 
-- Tag your Collectors under `service.telemetry.resource`:
+- Tag your Collectors under `service.telemetry.resource`, and set `include_resource_attributes` so the OpAMP extension sends the tags to Fleet Automation:
 
   ```yaml
+  extensions:
+    opamp:
+      agent_description:
+        include_resource_attributes: true
+
   service:
     telemetry:
       resource:
