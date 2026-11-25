@@ -17,12 +17,10 @@ further_reading:
   text: "Datadog Teams"
 ---
 
-<!-- TODO(Ethan): Confirm customer-facing terminology. Draft uses "Access Controls" (UI page name) made up of "scoped permissions." -->
-
 Fleet Automation uses two layers of access control:
 
 - **Role permissions** control which actions a user can take in Fleet Automation, such as upgrading or configuring Agents. Role permissions are available in every organization.
-- **Scoped permissions** limit those actions to specific Agents. Scoped permissions are in Preview.
+- **Scoped permissions** limit those actions to specific Agents. Scoped permissions are part of granular access controls, which are in Preview.
 
 To upgrade or configure an Agent, a user needs the role permission for that action. If your organization uses scoped permissions, a scoped permission must also grant the user that action on that Agent.
 
@@ -46,11 +44,10 @@ For descriptions of all Datadog permissions, see [Datadog Role Permissions][2].
 ## Scoped permissions for Fleet Automation
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Scoped permissions for Fleet Automation are in Preview. To request access, contact your Customer Success Manager or <a href="/help/">Datadog Support</a>.
+Granular access controls for Fleet Automation are in Preview. To request access, contact your Customer Success Manager or <a href="/help/">Datadog Support</a>.
 {{< /callout >}}
-<!-- TODO(Ethan): Is there a Preview request form? If so, add the URL and unhide the button. -->
 
-Scoped permissions limit which Agents a team, role, or user can upgrade or configure. For example, you can let each application team manage only the Agents tagged with their team name, while a central platform team manages every Agent.
+With granular access controls, you use scoped permissions to limit which Agents a team, role, or user can upgrade or configure. For example, you can let each application team manage only the Agents tagged with their team name, while a central platform team manages every Agent.
 
 Scoped permissions are checked whenever an upgrade or configuration deployment starts, whether from the Fleet Automation UI, the API, or the Datadog MCP Server. For API requests, Datadog checks the access of the user or service account that owns the application key. For MCP Server requests, it checks the signed-in user's access. Upgrade schedules managed with Terraform follow the same rules as schedules created in the UI.
 
