@@ -11,6 +11,9 @@ further_reading:
 - link: "/byoc-logs/operate/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshoot BYOC"
+- link: "https://www.datadoghq.com/blog/simplify-byoc-cluster-operations-with-datadog-operator/"
+  tag: "Blog"
+  text: "Simplify BYOC cluster operations with Datadog Operator"
 ---
 
 ## Overview

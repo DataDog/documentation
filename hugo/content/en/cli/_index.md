@@ -2,6 +2,9 @@
 title: Pup CLI
 description: "Use the Pup command-line interface to interact with Datadog APIs from the terminal or AI agent workflows."
 further_reading:
+    - link: "mcp_server/"
+      tag: "Documentation"
+      text: "Datadog MCP Server"
     - link: "https://github.com/DataDog/pup"
       tag: "GitHub"
       text: "Pup CLI repository"
@@ -11,9 +14,6 @@ further_reading:
     - link: "https://github.com/DataDog/pup/blob/main/docs/COMMANDS.md"
       tag: "GitHub"
       text: "Command reference"
-    - link: "mcp_server/"
-      tag: "Documentation"
-      text: "Datadog MCP Server"
 ---
 
 ## Overview
