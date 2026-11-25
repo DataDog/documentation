@@ -45,7 +45,7 @@ The SDK sends the JWT alongside your existing Datadog client token. The client t
 
 See [Client SDKs][1] for installation instructions.
 
-## Setup overview
+## Set up subject authorization
 
 Set up subject authorization in this order:
 
@@ -56,7 +56,7 @@ Set up subject authorization in this order:
 5. [Enable authorization through the API](#enable-authorization-through-the-api). Associate the provider with the environment and enable authorization in the same update.
 6. [Verify authorization](#verify-authorization). Confirm that valid requests succeed and requests with missing or invalid tokens are rejected.
 
-## Prepare signing keys and publish a JWKS
+### Prepare signing keys and publish a JWKS
 
 Generate a signing key pair, or select an existing pair that meets the following requirements. Keep private keys on your backend.
 
@@ -64,7 +64,7 @@ Publish up to three public signing keys at a JSON Web Key Set (JWKS) endpoint. E
 
 The JWKS URL must use a public DNS hostname and HTTPS on port 443, without URL credentials, query strings, or fragments. The endpoint must return the keys directly, without redirects.
 
-## Register an OIDC provider
+### Register an OIDC provider
 
 Register a dedicated custom OIDC provider in the same Datadog organization and site as your Feature Flags environment. Follow [Register the OIDC provider in Datadog][2], or use the [Create a Custom OIDC provider API][9], with these settings:
 
@@ -86,7 +86,7 @@ Save the provider ID returned when you register the provider. To retrieve it lat
 
 After registering the provider, allow at least 15 minutes for signing keys to propagate before enabling subject authorization.
 
-## Issue subject tokens
+### Issue subject tokens
 
 Retrieve the UUID of your Feature Flags environment with the [List environments API][3]. Use this UUID in the token's `environment_id` claim.
 
@@ -125,11 +125,11 @@ Replace the example values as follows:
 
 Return the signed token to the authenticated application through your existing session or bootstrap flow. Keep the signing private key on your backend. A JWT is signed, not encrypted; omit secrets and unnecessary personal data.
 
-## Configure the client
+### Configure the client
 
 Update your application to obtain a subject token from your backend and include it in the reserved `dd_assignment_token` evaluation context attribute. Replace it through a complete context update before it expires. For SDK setup, token refresh, and subject changes, see the guides linked in [Supported clients](#supported-clients).
 
-## Enable authorization through the API
+### Enable authorization through the API
 
 Deploy the token-aware application before enabling authorization on its environment. After authorization is enabled, requests without a valid token are rejected, including requests from older applications that do not supply one.
 
@@ -176,7 +176,7 @@ Configure the provider and environment policy independently in each Datadog site
 
 To disable authorization, repeat the read and update process with `subject_authorization_state` set to `disabled`. Disabling retains the provider association. To also clear the association, set `subject_authorization_oidc_provider_id` to `null` in that update.
 
-## Verify authorization
+### Verify authorization
 
 After enabling authorization, send new assignment requests with the configured SDK and check the responses for each case:
 
@@ -207,7 +207,16 @@ Key changes take time to propagate. Removing a key does not immediately invalida
 - **`503 ASSIGNMENT_AUTHORIZATION_UNAVAILABLE`:** Verification configuration is unavailable. Check the selected provider and supported settings, allow time for keys to propagate, and contact your Datadog representative if failures persist.
 - **Environment API errors:** A new provider ID must be registered in the same organization and site. Invalid or unknown provider IDs return `400`; an unavailable registry returns `503`. A concurrent policy change returns `409`; retrieve the environment again before retrying.
 
-Authorization controls new downloads; token expiration alone does not clear previously downloaded assignments.
+### Authorization failures and recovery
+
+Authorization controls new downloads; token expiration alone does not clear previously downloaded assignments. After a `401 ASSIGNMENT_AUTHORIZATION_FAILED` response, the supported SDKs handle cached assignments as follows:
+
+| Available assignments | SDK behavior |
+|-----------------------|--------------|
+| Eligible cached assignments for the same targeting key | Continues serving those assignments and enters a stale state. |
+| Assignments for a different targeting key, or no eligible cached assignments | Returns application-provided defaults and enters an error state. |
+
+To recover, obtain a valid token for the requested subject and environment and supply it through a complete evaluation context update. A successful download restores normal evaluation without recreating the SDK client or provider.
 
 ## Further reading
 
