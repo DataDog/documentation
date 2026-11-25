@@ -113,11 +113,11 @@ When response signing is enabled, each flag assignment request follows these ste
 1. The SDK verifies the certificate chain: leaf, then each intermediate, then the pinned root. It checks each signature, the validity dates of each certificate, and the leaf EKU.
 1. The SDK verifies the signature against the request it sent, the exact bytes it received, and the listed response headers.
 1. The SDK checks that the signature has not expired. A signature is valid for at most 5 minutes after Datadog issues it.
-1. If all checks pass, the SDK parses the response and makes the flag values available to your application. If a check fails in `required` mode, the SDK rejects the response. See [Verification failures](#verification-failures).
+1. If all checks pass, the SDK parses the response and makes the flag values available to your application. If a check fails in `required` mode, the SDK rejects the response. In `observe` mode, the SDK reports the failure and uses the response. See [Verification failures](#verification-failures).
 
 The SDK verifies the response before it parses the assignments. In `required` mode, unverified data never reaches flag evaluation. The SDK uses a listed response header, such as `DD-Flag-Selection-Ignored`, only after verification passes.
 
-The signature does not cover request headers that are not in the list, such as `DD-Assignment-Token` and `dd-service`. These headers cannot change the content of a signed response.
+The signature does not cover other request headers, such as `DD-Assignment-Token` and `dd-service`. These headers cannot change the content of a signed response.
 
 A proxy or CDN that changes, adds, or removes a listed request header or response header causes verification to fail.
 
@@ -196,7 +196,7 @@ In both settings, a new verified response restores the ready state. The SDK dete
 
 ### Fetch again before expiry
 
-No SDK fetches flag assignments again when a signature expires. With the default setting, a `required` client changes to the stale state no later than 5 minutes after the last verified response. To get a new verified response, set the evaluation context again with the current context:
+No SDK fetches flag assignments again when a signature expires. With the default setting, a `required` client changes to the stale state when it detects that the signature expired. This happens no later than 5 minutes after Datadog issued the signature. A new verified response must arrive before the signature expires. To get a new verified response, set the evaluation context again with the current context:
 
 | SDK | Call |
 | --- | --- |
@@ -229,8 +229,9 @@ The following table summarizes how response signing behaves in common situations
 - **Signing does not hide flag values.** The device owner can read the assignments, the flag values, and the signature. Do not put secrets in client-side flag values. To reduce readable flag names in responses, see [Flag Key Obfuscation][4].
 - **Signing does not protect a compromised device.** If an attacker controls the device or the application process, the attacker can change the application code, the SDK, or the evaluated values after verification. Enforce sensitive access decisions on your server.
 - **Signing does not change authorization.** Your client token and targeting rules control which assignments a client receives. Signing proves only that Datadog produced the response.
-- **Key compromise and revocation.** In Preview, the SDKs do not check certificate revocation. Until a compromised certificate expires, a party that holds its private key can sign responses that pass verification.
-  - If a leaf key or an intermediate key is compromised, Datadog issues new certificates. This rotation needs no SDK update. A leaf certificate is valid for a few days.
+- **Key compromise and revocation.** In Preview, the SDKs do not check certificate revocation. A compromised key stays usable until its certificate expires.
+  - If a leaf key is compromised, a party that holds it can sign responses that pass verification until the leaf certificate expires. A leaf certificate is valid for a few days. Datadog issues new leaf certificates, and this rotation needs no SDK update.
+  - If an intermediate key is compromised, a party that holds it can issue leaf certificates that the SDK accepts until the intermediate certificate expires. Datadog issues a new intermediate certificate, and this rotation needs no SDK update. The SDK continues to accept the old intermediate certificate until it expires.
   - If a root key is compromised, you must update the SDK to replace the pinned root. Datadog publishes a security bulletin in this case.
 - **The check starts at the Datadog edge.** Datadog signs responses at its edge network. The check covers the path from the Datadog edge to the SDK.
 - **Signing applies to flag assignment responses only.** Exposure events and evaluation telemetry that the SDK sends to Datadog are not signed by this feature.
