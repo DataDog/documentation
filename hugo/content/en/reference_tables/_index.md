@@ -214,7 +214,7 @@ First, [configure the Databricks integration][14] with an account and [grant it 
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click {{< ui >}}Add Databricks account{{< /ui >}}.
+   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click "Add Databricks account".
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
@@ -243,7 +243,7 @@ First, [configure the Snowflake integration][15] with an account and [grant it r
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click {{< ui >}}Add Snowflake account{{< /ui >}}.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click "Add Snowflake account".
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
 3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Data can take a few minutes to populate.
