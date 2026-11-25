@@ -55,7 +55,7 @@ For cluster-wide Kubernetes metrics and Kubernetes Explorer, see [Kubernetes Met
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Upstream OpenTelemetry Collector**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see [Feature Compatibility][7] for the upstream OpenTelemetry SDK and upstream OpenTelemetry Collector.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -1009,7 +1009,7 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
-[7]: /opentelemetry/compatibility/
+[7]: /opentelemetry/compatibility/?otel_sdk=upstream_otel_sdk&otel_destination=upstream_otel_collector#feature-compatibility
 [8]: /opentelemetry/setup/otlp_ingest/#intake-limits
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
