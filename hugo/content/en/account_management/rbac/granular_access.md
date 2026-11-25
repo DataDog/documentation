@@ -46,6 +46,7 @@ Use the different principals to control access patterns in your organization and
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Synthetic downtimes][30]                        | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
@@ -85,3 +86,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [27]: /experiments/
 [28]: /incident_response/status_pages/#granular-access-control
 [29]: /integrations/oracle_cloud_infrastructure/#limit-edit-access
+[30]: /synthetics/platform/downtime/#restrict-access
