@@ -16,8 +16,6 @@ further_reading:
   text: "Container Monitoring"
 ---
 
-## Overview
-
 {{< callout url="https://www.datadoghq.com/product-preview/bits-maintenance/" btn_hidden="false" header="Join the Preview!" >}}
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}

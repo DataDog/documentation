@@ -16,8 +16,6 @@ further_reading:
   text: "Container Monitoring"
 ---
 
-## Overview
-
 {{< callout url="https://www.datadoghq.com/product-preview/bits-maintenance/" btn_hidden="false" header="Join the Preview!" >}}
 Bits Maintenance is in Preview. Use this form to request access.
 {{< /callout >}}
@@ -65,7 +63,6 @@ You can view plan steps in an interactive workflow diagram:
 While a plan is awaiting approval, you can add [custom steps](#custom-steps) and remove any step except preflight and postflight checks.
 
 ### Custom steps
-
 
 A custom step can be:
 - **Human**: Requires a person to perform an action before the plan continues.
