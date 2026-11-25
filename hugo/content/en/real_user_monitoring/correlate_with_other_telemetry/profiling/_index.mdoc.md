@@ -144,14 +144,19 @@ Profiles collected from production code contain minified function names, file pa
 
 Upload your source maps with [`datadog-ci`][32] (or with a [Datadog build plugin][33]) as part of your build or CI pipeline. Without uploaded source maps, profiles show the minified function names and locations.
 
+Datadog recommends matching source maps with Debug IDs. A Debug ID associates a JavaScript bundle with its source map without relying on the bundle URL, service, or version. Browser profiling sends Debug IDs with profiles from Browser SDK version 7.16.0 or later.
+
 ```shell
-datadog-ci sourcemaps upload /path/to/dist \
-  --service my-web-application \
-  --release-version 1.0.0 \
-  --minified-path-prefix https://example.com/static
+# Inject Debug IDs into your bundles and source maps after the build
+datadog-ci sourcemaps inject /path/to/dist
+
+# Upload the source maps and the corresponding JavaScript bundles
+datadog-ci sourcemaps upload /path/to/dist --debug-id
 ```
 
-The `--service` and `--release-version` values must match the `service` and `version` set in your RUM SDK initialization. For other options, such as Debug IDs, see [Upload JavaScript source maps][32].
+Do not pass `--service`, `--release-version`, or `--minified-path-prefix` with `--debug-id`.
+
+If you use an earlier Browser SDK version, upload your source maps by service and version instead. The `--service` and `--release-version` values must match the `service` and `version` set in your RUM SDK initialization. For both methods, and for the build plugin options, see [Upload JavaScript source maps][32].
 
 ## Explore profiling
 
