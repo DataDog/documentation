@@ -1,6 +1,6 @@
 ---
 title: Investigate Relevant Changes
-description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, service pages, and the RUM Explorer, or query change data with widgets."
+description: "Find the changes most likely to explain a regression on dashboards, monitor status pages, service pages, and the RUM Explorer, or search for them with Semantic Search, widgets, and Bits AI."
 further_reading:
 - link: "/change_tracking/change_types/"
   tag: "Documentation"
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Change Tracking makes changes available across Datadog products, including dashboards, monitor status pages, service pages, and the RUM Explorer. You can also build your own view of change data with Change Tracking widgets. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
+Change Tracking makes changes available across Datadog products, including dashboards, monitor status pages, service pages, and the RUM Explorer. You can also search for changes by symptom, build your own view of change data with Change Tracking widgets, or ask Bits AI. For details on specific types of supported changes and setup requirements, see [Tracked Change Types][1].
 
 ## Investigate changes across Datadog products
 
@@ -88,6 +88,34 @@ For example, the banner might read "Datadog has found a faulty deployment on `<S
 1. Open the banner to see the changes Datadog flagged and the impact of each one.
 1. Click a change to open the side panel and investigate it.
 
+## Understand a change with Change Analysis
+
+Change Analysis is an AI-generated summary in the change side panel that describes what a change did.
+
+Change Analysis is available for feature flag changes and deployments. It summarizes what was updated and lists the resources the change affected.
+
+- **Feature flags**: Change Analysis uses your source code when [Source Code Integration][10] is set up. Without it, Change Analysis uses the flag name and other flag metadata.
+- **Deployments**: Change Analysis is generated from your source code and requires [Source Code Integration][10]. Without it, Change Analysis isn't available for deployments.
+
+To get the most from Change Analysis, set up [Source Code Integration][10] for the services and repositories behind your changes.
+
+## Search for changes with Change Explorer
+
+{{< callout url="https://www.datadoghq.com/product-preview/change-explorer/" btn_hidden="false" header="Join the Preview!" >}}
+Change Explorer is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+{{< /callout >}}
+
+Use Change Explorer to search for changes outside of the change timeline on the page you're viewing.
+
+{{< callout url="https://www.datadoghq.com/product-preview/semantic-search-changes/" btn_hidden="false" header="Join the Preview!" >}}
+Semantic Search for changes is in Preview. Click <strong>Request Access</strong> and complete the form to request access.
+{{< /callout >}}
+
+With Semantic Search, you can search for changes by describing a change or its impact in natural language. Semantic Search is available for feature flag and deployment changes.
+
+1. In Change Explorer, set {{< ui >}}Search mode{{< /ui >}} to {{< ui >}}Semantic Search{{< /ui >}}.
+1. Describe the change or its impact. For example, "Users can't complete checkout because the Submit button is gone."
+
 ## Build your own view with Change Tracking widgets
 
 <!-- IMAGE PLACEHOLDER: A widget that uses Change Tracking as its data source. -->
@@ -103,6 +131,15 @@ For timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Even
 
 To open the side panel from a widget, click a datapoint and select {{< ui >}}View changes{{< /ui >}}.
 
+## Ask about changes with AI
+
+You can ask about changes in natural language, from Datadog or from your own AI tools:
+
+- In [Bits Chat][12], ask Bits what changed on a service.
+- From an external AI client, such as your editor or an agent, use the [Datadog MCP Server][11] tools:
+  - `get_change_stories` retrieves change events for an APM service over a time range, optionally filtered by environment, tags, or change type.
+  - `semantic_search_change_stories` runs Semantic Search for changes, and is subject to the same Preview access.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -116,3 +153,6 @@ To open the side panel from a widget, click a datapoint and select {{< ui >}}Vie
 [7]: /real_user_monitoring/guide/setup-rum-deployment-tracking/
 [8]: /real_user_monitoring/feature_flag_tracking/
 [9]: /watchdog/faulty_deployment_detection/
+[10]: /source_code/
+[11]: /mcp_server/
+[12]: /bits_ai/bits_chat/
