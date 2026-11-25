@@ -7432,7 +7432,7 @@ menu:
       identifier: observability_pipelines_processors_sample
       weight: 317
     - name: Sawmill
-      url: observability_pipelines/processors/integration_pipelines
+      url: observability_pipelines/processors/sawmill
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_integration_pipelines
       weight: 318

@@ -73,7 +73,7 @@ These are the available processors:
 [17]: /observability_pipelines/processors/split_array/
 [18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
-[20]: /observability_pipelines/processors/integration_pipelines/
+[20]: /observability_pipelines/processors/sawmill/
 [21]: /observability_pipelines/processors/spike_protection/
 
 {{% /tab %}}
