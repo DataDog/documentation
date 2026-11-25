@@ -860,11 +860,11 @@ Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with re
 ### `execute_code_write`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
-Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. You may need to reauthorize the MCP connection in your AI client to consent to the additional write scopes.
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. Reauthorize the MCP connection in your AI client if it connected before your role had `mcp_write`.
 
 Teams access is read-only. To create or update dashboards and notebooks, use `upsert_datadog_dashboard` and the notebook tools. Code execution supports reading and deleting those resources. See [What the sandbox can access][110] for details.
 
-The AI client's normal approval behavior applies; the MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][109] before retrying a script.
+The AI client's normal approval behavior applies. The MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][109] before retrying a script.
 
 - Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
 - Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
