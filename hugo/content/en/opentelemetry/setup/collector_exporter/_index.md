@@ -21,9 +21,9 @@ further_reading:
 - link: "/opentelemetry/config/otlp_receiver"
   tag: "Documentation"
   text: "Enable the OTLP Receiver"
-- link: "/opentelemetry/setup/ddot_collector/install/"
+- link: "/opentelemetry/setup/ddot_collector/kubernetes/"
   tag: "Documentation"
-  text: "Install the DDOT Collector (Recommended)"
+  text: "Install the DDOT Collector on Kubernetes (Recommended)"
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
@@ -41,7 +41,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
-This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
+This is the recommended setup for a Collector you manage yourself. If you want a Collector that Datadog builds and supports, use the [DDOT Collector][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
@@ -474,7 +474,7 @@ docker run \
 
 Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
 
-To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Kubernetes Metrics][13].
+To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Kubernetes Metrics][110].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -519,6 +519,7 @@ To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes E
 [107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
 [108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[110]: /opentelemetry/integrations/kubernetes_metrics/
 
 {{% /tab %}}
 
@@ -1013,7 +1014,7 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /opentelemetry/setup/ddot_collector/install/
+[12]: /opentelemetry/setup/ddot_collector/
 [13]: /opentelemetry/integrations/kubernetes_metrics/
 [14]: /opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

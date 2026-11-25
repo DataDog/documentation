@@ -1,0 +1,64 @@
+{{/*
+    Compiles the url_paths globs in shared/site_support.yaml to regular
+    expressions. Call it with partialCached so it runs once per build, not once
+    per page:
+
+      partialCached "site_support_banner/url_path_matchers.html" site
+
+    Returns a dict:
+      any:  one regex that matches any url_paths pattern. Most pages match no
+            pattern, so this one check skips the per-key loop for them.
+      keys: a slice of dicts {id, re}, one regex for each site_support_id that
+            has url_paths.
+
+    Before it returns, it checks the translation against
+    shared/tests/site_support_globs.yaml and fails the build on a mismatch.
+    Astro checks its matcher against the same table, so the two sites can't
+    disagree about which pages get a banner.
+
+    HUGO_DUPLICATE: Astro has its own copy of this logic, compileUrlPath in
+    astro/src/config/siteSupport.ts. To change what a glob matches, update the
+    cases in shared/tests/site_support_globs.yaml first, then change both
+    copies until they pass.
+
+    Caller: layouts/partials/site_support_banner/get_unsupported_regions.html
+*/}}
+{{ $ids := site.Data.site_support.site_support_ids }}
+{{ $cases := site.Data.site_support_globs.cases }}
+{{ if not $ids }}
+    {{ errorf "site support: data/site_support.yaml is missing or empty. Check the shared/site_support.yaml mount in config/_default/config.yaml." }}
+{{ end }}
+{{ if not $cases }}
+    {{ errorf "site support: data/site_support_globs.yaml is missing or empty. Check the shared/tests/site_support_globs.yaml mount in config/_default/config.yaml." }}
+{{ end }}
+
+{{/* Fail the build if the glob translation disagrees with the shared table. */}}
+{{ range $cases }}
+    {{ $pattern := .pattern }}
+    {{ $regex := printf "^%s$" (partial "site_support_banner/glob_to_regex.html" $pattern) }}
+    {{ range .matches }}
+        {{ if not (findRE $regex . 1) }}
+            {{ errorf "site support: url_paths pattern %q should match %q, but its Hugo regex %q does not. See shared/tests/site_support_globs.yaml." $pattern . $regex }}
+        {{ end }}
+    {{ end }}
+    {{ range .does_not_match }}
+        {{ if findRE $regex . 1 }}
+            {{ errorf "site support: url_paths pattern %q should not match %q, but its Hugo regex %q does. See shared/tests/site_support_globs.yaml." $pattern . $regex }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $keys := slice }}
+{{ $all := slice }}
+{{ range $id, $entry := $ids }}
+    {{ with $entry.url_paths }}
+        {{ $bodies := slice }}
+        {{ range . }}
+            {{ $bodies = $bodies | append (partial "site_support_banner/glob_to_regex.html" .) }}
+        {{ end }}
+        {{ $keys = $keys | append (dict "id" $id "re" (printf "^(?:%s)$" (delimit $bodies "|"))) }}
+        {{ $all = $all | append $bodies }}
+    {{ end }}
+{{ end }}
+
+{{ return dict "any" (printf "^(?:%s)$" (delimit $all "|")) "keys" $keys }}

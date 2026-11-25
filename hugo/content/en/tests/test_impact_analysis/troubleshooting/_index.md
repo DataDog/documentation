@@ -29,7 +29,7 @@ Test Impact Analysis only takes into account the commit history and test code co
 
 There are edge cases where Test Impact Analysis skips fewer tests than expected.
 
-- A large Git history may result in slightly fewer tests being skipped, because Datadog analyzes up to the 100 most recent commits.
+- A large Git history may result in fewer tests being skipped, because Datadog analyzes the 30 most recent commits. This number can vary depending on the volume of code coverage data to analyze.
 - A commit that changes more than 5,000 files is not analyzed for impact, so the coverage information from that commit is ignored.
 - A test or suite that covers more than 16,000 files is never skipped.
 - A small fraction of tests (approximately 0.04%) may run even when they could have been skipped.

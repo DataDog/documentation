@@ -17,7 +17,7 @@ title: Incident Response
 {{< whatsnext desc="Explore los componentes de Incident Response" >}}
     {{< nextlink href="/incident_response/incident_management/" >}}<u>Incident Management</u> - Aprenda a gestionar y resolver incidentes de manera eficiente.{{< /nextlink >}}
     {{< nextlink href="/incident_response/work_management/" >}}<u>Gestión del trabajo</u> - Realice un seguimiento y organice los elementos de trabajo relacionados con los incidentes.{{< /nextlink >}}
-    {{< nextlink href="/incident_response/status_pages/" >}}<u>Páginas de estado</u> - Comunique el estado del sistema en tiempo real con páginas internas o públicas.{{< /nextlink >}}
+    {{< nextlink href="/incident_response/status_pages/" >}}<u>Status Pages</u> - Comunique el estado del sistema en tiempo real con páginas públicas, internas o privadas.{{< /nextlink >}}
     {{< nextlink href="/incident_response/on-call/" >}}<u>On Call</u> - Administre los horarios de guardia y las rotaciones de los responsables.{{< /nextlink >}}
 {{< /whatsnext >}}
 

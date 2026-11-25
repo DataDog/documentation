@@ -1,7 +1,7 @@
 ---
-description: Aprenda a configurar widgets en los dashboards de Datadog, incluyendo
-  opciones para pantalla completa, enlaces personalizados, información de métricas
-  y anulaciones de unidades.
+description: Aprenda a configurar widgets en los paneles de Datadog, incluidas las
+  opciones de pantalla completa, enlaces personalizados, información de métricas y
+  anulaciones de unidad.
 further_reading:
 - link: /dashboards/widgets/
   tag: Documentación
@@ -13,25 +13,25 @@ title: Configuración de widgets
 ---
 ## Descripción general {#overview}
 
-La configuración de widgets es esencial para crear dashboards efectivos que proporcionen información significativa sobre su infraestructura y aplicaciones. Esta guía cubre las opciones de configuración clave y las consideraciones que debe comprender al configurar widgets.
+La configuración de widgets es esencial para crear paneles eficaces que proporcionen información significativa sobre su infraestructura y aplicaciones. Esta guía cubre las opciones de configuración clave y las consideraciones que debe comprender al configurar widgets.
 
 
 ## Pantalla completa {#full-screen}
 
-El modo de pantalla completa proporciona capacidades mejoradas de visualización y análisis para sus widgets. Puede visualizar la mayoría de los widgets en modo de pantalla completa y hacer lo siguiente:
+El modo de pantalla completa proporciona capacidades mejoradas de visualización y análisis para sus widgets. Puede ver la mayoría de los widgets en modo de pantalla completa y hacer lo siguiente:
 
 * Cambiar los marcos de tiempo
 * Moverse hacia atrás o hacia adelante según el marco de tiempo seleccionado
-* Pausar el gráfico en el momento actual o visualizar el gráfico en tiempo real
+* Pausar el gráfico en el momento actual o ver el gráfico en tiempo real
 * Restablecer el marco de tiempo
-* Exportar el gráfico a un dashboard, notebook o copiar la consulta
+* Exportar el gráfico a un panel o notebook, o copiar la consulta
 * Descargar los datos que generan el gráfico en formato CSV
 
 Para acceder directamente a la vista general del widget, haga clic en el botón de pantalla completa en la esquina superior derecha del widget.
 
 Hay opciones adicionales disponibles para [widgets de series temporales][1].
 
-## Data Preview {#data-preview}
+## Data preview {#data-preview}
 
 Puede combinar múltiples fuentes de datos en el editor de gráficos para enriquecer sus visualizaciones con contexto y metadatos adicionales. Con Data Preview, puede ver qué datos está combinando o si la consulta funciona como se espera. Esta función le ayuda a:
 
@@ -49,8 +49,8 @@ Las fuentes de datos admitidas para las uniones incluyen (pero no se limitan a):
 - RUM
 - Cloud Cost Recommendations
 - Netflow
-- Spans de APM
-- Trazas de APM
+- APM Spans
+- APM Traces
 - Profiles
 - Synthetics CI Batches
 - Synthetics Run
@@ -60,33 +60,33 @@ Las fuentes de datos admitidas para las uniones incluyen (pero no se limitan a):
 - Product Analytics
 - Tablas de referencia
 
-El uso de uniones y vistas previas de datos facilita la selección de los campos correctos y el enriquecimiento de sus gráficos con detalles relevantes, lo que mejora la calidad y la utilidad de sus dashboards.
+El uso de uniones y vistas previas de datos facilita la selección de los campos correctos y el enriquecimiento de sus gráficos con detalles relevantes, lo que mejora la calidad y la utilidad de sus paneles.
 
 
 {{% /collapse-content %}}
 
 ## Enlaces personalizados {#custom-links}
 
-Los enlaces personalizados mejoran la interacción con los datos al conectar los valores de datos de los widgets con URLs relevantes, como las páginas de Datadog o su consola de AWS.
+Los enlaces personalizados mejoran la interacción con los datos al conectar los valores de datos de los widgets con URL relevantes, como las páginas de Datadog o su consola de AWS.
 
-Para personalizar las interacciones con los datos en línea en sus widgets genéricos, consulte [Context Links][2].
+Para personalizar las interacciones con los datos en sus widgets genéricos, consulte [Context Links][2].
 
-## Descripciones de widgets {#widget-descriptions}
+## Descripciones de widget {#widget-descriptions}
 
-Las descripciones de widgets le permiten agregar una descripción de texto a cualquier widget de dashboard. Utilice descripciones para proporcionar contexto sobre una métrica, como qué representa, cómo interpretarla o qué acción tomar.
+Las descripciones de widget le permiten agregar una descripción de texto a cualquier widget de un panel. Utilice descripciones para proporcionar contexto sobre una métrica, como qué representa, cómo interpretarla o qué acción tomar.
 
 Para añadir una descripción:
 1. Abra el editor de gráficos para el widget.
-2. Introduzca una **Description** en la parte inferior del editor.
+2. Ingrese una **Description** en la parte inferior del editor.
 3. Haga clic en **Save**.
 
-Después de guardar, pase el cursor sobre el icono de descripción en la esquina superior izquierda del widget para visualizar la descripción.
+Después de guardar, pase el cursor sobre el icono de descripción en la esquina superior izquierda del widget para ver la descripción.
 
-{{< img src="dashboards/widgets/configuration/widget-description-hover.png" alt="Un widget de gráfico de barras titulado \"Avg CPU User % by Service (Top 10)\" con el cursor sobre el icono de descripción en la esquina superior izquierda y la descripción mostrada en una ventana emergente encima del widget." >}}
+{{< img src="dashboards/widgets/configuration/widget-description-hover.png" alt="Un widget de gráfico de barras titulado \"Avg CPU User % by Service (Top 10)\" con el cursor sobre el icono de descripción en la esquina superior izquierda; encima del widget se muestra el texto emergente de la descripción." >}}
 
 ## Información de métricas {#metrics-info}
 
-En un gráfico de métricas, haga clic en el menú contextual (tres puntos verticales) para encontrar la opción {{< ui >}}Metrics Info{{< /ui >}}. Esto abre un panel con una descripción de la métrica. Hacer clic en el nombre de la métrica en este panel abre la métrica en la página de resumen de métricas para un análisis o ediciones adicionales.
+En un gráfico de métricas, haga clic en el menú contextual (tres puntos verticales) para encontrar la opción {{< ui >}}Metrics Info{{< /ui >}}. Esto abre un panel con una descripción de la métrica. Hacer clic en el nombre de la métrica en este panel abre la métrica en la página Metrics Catalog para un análisis o edición posterior.
 
 ## Anulación de unidad {#unit-override}
 
@@ -103,30 +103,30 @@ Esta no es una alternativa para asignar unidades a sus datos.
 
 ## Selector de tiempo global {#global-time-selector}
 
-El selector de tiempo global es una opción fundamental de configuración de tiempo que sincroniza todos los widgets de un dashboard para usar el mismo marco de tiempo. Para usar el selector de tiempo global, al menos un widget basado en tiempo debe estar configurado para usar `Global Time`. Realice la selección en el editor de widgets en {{< ui >}}Set display preferences{{< /ui >}}, o agregue un widget (el tiempo global es la configuración de tiempo predeterminada).
+El selector de tiempo global es una opción fundamental de configuración temporal que sincroniza todos los widgets de un panel para que usen el mismo intervalo de tiempo. Para usar el selector de tiempo global, al menos un widget basado en tiempo debe estar configurado para usar `Global Time`. Realice la selección en el editor de widgets, en {{< ui >}}Set display preferences{{< /ui >}}, o agregue un widget (el tiempo global es la configuración de tiempo predeterminada).
 
-El selector de tiempo global establece el mismo marco de tiempo para todos los widgets que usan la opción `Global Time` en el mismo dashboard. Seleccione una ventana móvil en el pasado (por ejemplo, `Past 1 Hour` o `Past 1 Day`) o un período fijo con la opción `Select from calendar…` o [ingrese un marco de tiempo personalizado][8]. Si se elige una ventana móvil, los widgets se actualizan para moverse junto con la ventana de tiempo.
+El selector de tiempo global establece el mismo marco de tiempo para todos los widgets que usan la opción `Global Time` en el mismo panel. Seleccione una ventana móvil en el pasado (por ejemplo, `Past 1 Hour` o `Past 1 Day`) o un período fijo con la opción `Select from calendar…` o [ingrese un marco de tiempo personalizado][8]. Si se elige una ventana móvil, los widgets se actualizan para moverse junto con la ventana de tiempo.
 
-Los widgets que no están vinculados al tiempo global muestran los datos de su marco de tiempo local según se aplica a la ventana global. Por ejemplo, si el selector de tiempo global está configurado del 1 de enero de 2019 al 2 de enero de 2019, un widget configurado con el marco de tiempo local para `Past 1 Minute` muestra el último minuto del 2 de enero de 2019 a partir de las 11:59 p. m.
+Los widgets que no están vinculados al tiempo global muestran los datos correspondientes a su marco de tiempo local aplicado a la ventana global. Por ejemplo, si el selector de tiempo global está configurado del 1 de enero de 2019 al 2 de enero de 2019, un widget configurado con el marco de tiempo local para `Past 1 Minute` muestra el último minuto del 2 de enero de 2019 a partir de las 11:59 p. m.
 
 ## Copiar y pegar widgets {#copy-and-paste-widgets}
 
 La funcionalidad de copiar y pegar es una característica clave de uso compartido y colaboración que le permite reutilizar widgets en diferentes contextos de Datadog y herramientas externas.
 
-<div class="alert alert-info">Para compartir widgets fuera de Datadog con vistas previas de enlaces, un administrador debe configurar <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Widget Share URLs</strong></a> como Public o Private en Organization Settings. Los administradores pueden deshabilitar esta configuración para evitar que los usuarios generen enlaces y vistas previas para compartir widgets.</div>
+<div class="alert alert-info">Para compartir widgets fuera de Datadog con vistas previas de enlaces, un administrador debe configurar <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Widget Share URLs</strong></a> como Public o Private en Organization Settings. Los administradores pueden deshabilitar esta configuración para evitar que los usuarios generen enlaces para compartir widgets y sus vistas previas.</div>
 
-Los widgets se pueden copiar en [Dashboards][4], [Notebooks][5], [APM Service][6] y en la página de [recursos de APM][7] usando <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, o seleccionando el icono de compartir y eligiendo "Copy".
+Los widgets se pueden copiar en [Dashboards][4], [Notebooks][5], [APM Service][6] y la página de [APM resource][7] usando <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd>, o seleccionando el icono de compartir y eligiendo "Copy".
 
 Los widgets copiados se pueden pegar dentro de Datadog usando <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd>:
 
 * **Dashboards**: Agrega un nuevo widget posicionado debajo del cursor del mouse.
 * **Notebooks**: Agrega una nueva celda al final del notebook.
 
-También puede pegar el widget en su programa de chat favorito que muestre vistas previas de enlaces (como Slack o Microsoft Teams). Según el modo de Widget Share URLs de su organización, se muestra una imagen pública de vista previa de su gráfico o una imagen privada de vista previa en Slack, junto con un enlace directo a su widget. Para obtener más información, consulte [Widget Share URLs][11].
+También puede pegar el widget en su programa de chat favorito que muestre vistas previas de enlaces (como Slack o Microsoft Teams). Según el modo de Widget Share URLs de su organización, se muestra una imagen de vista previa pública de su gráfico o una imagen de vista previa privada en Slack, junto con un enlace directo a su widget. Para obtener más información, consulte [Widget Share URLs][11].
 
 ## Grupos de widgets {#groups-of-widgets}
 
-Copie los widgets del grupo del timeboard pasando el cursor sobre el área del widget de grupo y usando <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd> o seleccionando el icono de compartir y eligiendo "Copy".
+Copie los widgets de grupo del Timeboard pasando el cursor sobre el área del widget de grupo y usando <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>C</kbd> o seleccionando el icono de compartir y eligiendo "Copy".
 
 **Nota**: Cuando pega gráficos en un panel visual o notebook, Datadog pega cada widget del grupo individualmente.
 
@@ -140,15 +140,15 @@ Los menús de gráficos de widgets proporcionan opciones esenciales de interacci
 
 ### View in full screen {#view-in-full-screen}
 
-Visualice el gráfico en [modo de pantalla completa](#full-screen).
+Vea el gráfico en [modo de pantalla completa](#full-screen).
 
 ### Exportar {#export}
 
-Haga clic en el icono de exportación de cualquier gráfico del dashboard para abrir un menú de opciones:
+Haga clic en el icono de exportación de cualquier gráfico del panel para abrir un menú de opciones:
 
 | Opción         | Descripción                               |
 |----------------|-------------------------------------------|
-| Copy           | Cree una copia del gráfico del dashboard.     |
+| Copy           | Cree una copia del gráfico del panel.     |
 | Share snapshot | Cree y envíe una instantánea de su gráfico. |
 
 #### Use within Datadog {#use-within-datadog}
@@ -157,7 +157,7 @@ Haga clic en el icono de exportación de cualquier gráfico del dashboard para a
 |------------------|----------------------------------------------------|
 | Declare incident | Declare un incidente desde el gráfico.                |
 | Add to incident  | Agregue el gráfico a un incidente existente.             |
-| Create case      | Cree una incidencia desde el gráfico.                      |
+| Create case      | Cree un caso desde el gráfico.                      |
 | Save to notebook | Guarde el gráfico en un notebook.                      |
 | Link to widget   | Obtenga un enlace al widget copiado en el portapapeles. |
 
@@ -171,40 +171,40 @@ Haga clic en el icono de exportación de cualquier gráfico del dashboard para a
 
 ### Edit {#edit}
 
-Haga clic en el icono de lápiz de cualquier gráfico del dashboard para realizar ediciones.
+Haga clic en el icono de lápiz de cualquier gráfico del panel para realizar ediciones.
 
 ### Opciones adicionales {#additional-options}
 
-Haga clic en el menú contextual (tres puntos verticales) de cualquier gráfico del dashboard para abrir un menú de opciones:
+Haga clic en el menú contextual (tres puntos verticales) de cualquier gráfico del panel para abrir un menú de opciones:
 
 | Opción                            | Descripción                                                                                                                |
 |-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | Edit                              | Edite el gráfico.                                                                                                            |
 | Clone                             | Cree una copia adyacente del gráfico.                                                                                      |
-| Gráfico dividido                       | Cree un [gráfico dividido][10].                                                                                                |
+| Split graph                       | Cree un [gráfico dividido][10].                                                                                                |
 | Create custom links               | Cree [enlaces personalizados](#custom-links).                                                                                      |
-| Crear seguimiento                    | Cree un seguimiento preconfigurado con la consulta del gráfico.                                                                     |
-| Información de métricas (solo gráficos de métricas) | Obtenga una descripción de las métricas en este gráfico. Puede hacer clic en los nombres de las métricas para abrirlos en la página Metric Summary. |
+| Create monitor                    | Cree un monitor preconfigurado con la consulta del gráfico.                                                                     |
+| Metrics info (solo gráficos de métricas) | Obtenga una descripción de las métricas en este gráfico. Puede hacer clic en los nombres de las métricas para abrirlas en la página Metrics Catalog. |
 | Delete                            | Elimine el gráfico.                                                                                                          |
 
 ## Exportar datos del widget a CSV {#export-widget-data-to-csv}
 
-Para descargar los datos subyacentes de un solo widget como un archivo CSV, haga clic en el icono de exportación del widget y seleccione {{< ui >}}Download as CSV{{< /ui >}}. También puede descargar datos CSV cuando visualiza el widget en [modo de pantalla completa](#full-screen).
+Para descargar los datos de un solo widget como archivo CSV, haga clic en el icono de exportación del widget y seleccione {{< ui >}}Download as CSV{{< /ui >}}. También puede descargar datos CSV cuando visualiza el widget en [modo de pantalla completa](#full-screen).
 
 La exportación a CSV está disponible para los siguientes tipos de widgets:
 
-* Bar Chart
+* Gráfico de barras
 * Lista
-* Pie Chart
-* Scatter Plot
+* Gráfico circular
+* Gráfico de dispersión
 * Tabla
 * Series temporales
 * Lista principal
 * Treemap
 
-**Nota**: la exportación a CSV funciona en un widget a la vez. No puede exportar los datos de todos los widgets de un dashboard en un solo archivo.
+**Nota**: la exportación a CSV funciona en un widget a la vez. No puede exportar los datos de todos los widgets de un panel en un solo archivo.
 
-La exportación a CSV está habilitada de forma predeterminada. Si {{< ui >}}Download as CSV{{< /ui >}} no aparece para un widget compatible, es posible que el soporte de Datadog haya deshabilitado la exportación a CSV para su organización. Esta restricción se aplica a todos los usuarios de la organización y a la exportación a CSV en otros productos de Datadog, así como en los widgets de los dashboards. No puede cambiar esta configuración desde la interfaz de usuario de Datadog. Para deshabilitar o volver a habilitar la exportación a CSV, comuníquese con [Datadog Support][12].
+La exportación a CSV está habilitada de forma predeterminada. Si {{< ui >}}Download as CSV{{< /ui >}} no aparece para un widget compatible, es posible que Datadog Support haya deshabilitado la exportación a CSV para su organización. Esta restricción se aplica a todos los usuarios de la organización y a la exportación a CSV en otros productos de Datadog, así como en los widgets de los paneles. No puede cambiar esta configuración desde la interfaz de usuario de Datadog. Para deshabilitar o volver a habilitar la exportación a CSV, comuníquese con [Datadog Support][12].
 
 ## Lecturas adicionales {#further-reading}
 
