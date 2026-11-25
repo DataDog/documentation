@@ -98,6 +98,12 @@ The {{< ui >}}Endpoints{{< /ui >}} view displays a topology graph alongside a ta
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_endpoints.png" alt="The Dependencies tab on the NDM device page with the Endpoints tab selected, showing a topology graph with five connected end user devices with one device's detail view open, plus a table with more details about connected devices." style="width:100%;" >}}
 
+### Network paths
+
+The {{< ui >}}Network paths{{< /ui >}} tab on the full device page shows the [Network Path][13] paths that pass through the device. The list shows each path's source and destination, along with its average reachability and average latency. Search by source or destination, or sort the list by status. The graph places the device between the sources and destinations of those paths.
+
+Click {{< ui >}}View tests{{< /ui >}} to open the related tests in Network Path.
+
 ### Metrics
 
 Click the {{< ui >}}Metrics{{< /ui >}} tab in the NDM device view to see key metrics for the device, including CPU usage, memory usage, and throughput. Summary stats are displayed at the top, and each metric is shown as a graph over time. Click {{< ui >}}View all metrics{{< /ui >}} to explore the full list of collected metrics.
@@ -260,3 +266,4 @@ NDM provides multiple visualization tools to monitor your infrastructure:
 [10]: https://app.datadoghq.com/devices
 [11]: https://app.datadoghq.com/devices/netflow
 [12]: /infrastructure/end_user_device_monitoring/
+[13]: /network_monitoring/network_path/
