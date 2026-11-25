@@ -241,7 +241,7 @@ First, [configure the Databricks integration][14] with an account and [grant it 
    - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click {{< ui >}}Add Databricks account{{< /ui >}}.
    - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
 Use a view to select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider a materialized view or precomputed table.
 
@@ -270,7 +270,7 @@ First, [configure the Salesforce integration][17] with an account and [grant it 
    - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above.
    - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
    - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
 Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
 
@@ -301,7 +301,7 @@ First, [configure the ServiceNow integration][18] with an account, then [configu
    - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
    - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
    - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll return to the Reference Tables page.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
 
 Additional fields must use paths supported by the ServiceNow Table API. The column name combines the root table name with the last two parts of the path. For example, `vendor.manufacturer.name` with root table `cmdb_ci_server` creates `cmdb_ci_server_manufacturer_name`.
 
@@ -330,7 +330,7 @@ First, [configure the Snowflake integration][15] with an account and [grant it r
    - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click {{< ui >}}Add Snowflake account{{< /ui >}}.
    - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
    - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
-3. Click {{< ui >}}Save{{< /ui >}}. You’ll be redirected to the table’s details page. Data can take a few minutes to populate.
+3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Data can take a few minutes to populate.
 
 Select only the rows and columns you need to limit data transfer and query costs. For expensive queries, consider querying a materialized view, dynamic table, or precomputed table.
 
