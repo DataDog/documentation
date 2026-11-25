@@ -184,18 +184,26 @@ To list Baseline Monitors, go to [**Monitors > List**][7] and search for `tag:ma
 
 ## Edit the monitors
 
-Datadog manages Baseline Monitors, so you can edit only some of their fields:
+Datadog manages Baseline Monitors, so you can edit only some of their fields.
 
-| You can change | You cannot change |
-|---|---|
-| Name | Metric |
-| Message | Aggregation and functions |
-| Tags | Evaluation window |
-| Priority | Comparison operator (above or below) |
-| Draft or published status | Other monitor options, such as no-data and renotification settings |
-| Alert and warning thresholds | |
-| Query scope (filter tags) | |
-| Query group-by tags | |
+You can change:
+
+- Name
+- Message
+- Tags
+- Priority
+- Draft or published status
+- Alert and warning thresholds
+- Query scope (filter tags)
+- Query group-by tags
+
+You cannot change:
+
+- Metric
+- Aggregation and functions
+- Evaluation window
+- Comparison operator (above or below)
+- Other monitor options, such as no-data and renotification settings
 
 If you try to change a field that you cannot change, Datadog rejects the update. You can also mute a Baseline Monitor with a [downtime][8].
 
