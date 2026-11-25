@@ -209,7 +209,7 @@ First, [configure the Google Cloud integration][21] with a service account and [
 1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}BigQuery{{< /ui >}}.
 2. Complete the configuration:
    - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
-   - {{< ui >}}Service Account Email{{< /ui >}}: Select the service account configured above. If it isn't listed, click {{< ui >}}Add GCP Account with BigQuery Access{{< /ui >}}.
+   - {{< ui >}}Service Account Email{{< /ui >}}: Select the service account configured above. If it isn't listed, click "Add GCP Account with BigQuery Access".
    - {{< ui >}}Project ID{{< /ui >}}: The project to run the query in. The available projects depend on the selected service account.
    - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
    - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
