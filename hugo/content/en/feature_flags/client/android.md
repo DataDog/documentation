@@ -459,6 +459,99 @@ val provider = FlagsClient.Builder()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
+## Verify flag responses with response signing
+
+{{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
+Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.<br><br>The response signing SDK option is experimental. Its name and behavior can change before general availability.
+{{< /callout >}}
+
+Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Verify Flag Responses with Response Signing][5].
+
+<!-- TODO: set the first SDK release version that includes response signing. -->
+Response signing requires `dd-sdk-android-flags` version `X.Y.Z` or later.
+
+To enable response signing, set `experimentalResponseSigning` in the global Flags configuration. The response signing API is experimental and requires opt-in with `@OptIn(ExperimentalFlagsApi::class)`:
+
+{{< code-block lang="kotlin" >}}
+@OptIn(ExperimentalFlagsApi::class)
+fun enableFlags() {
+    val config = FlagsConfiguration.Builder()
+        .experimentalResponseSigning(ResponseSigningMode.REQUIRED)
+        .build()
+
+    Flags.enable(config)
+}
+{{< /code-block >}}
+
+`experimentalResponseSigning(mode)` accepts these modes:
+
+`ResponseSigningMode.OFF` (default)
+: The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+
+`ResponseSigningMode.REQUIRED`
+: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+
+`ResponseSigningMode.OBSERVE`
+: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
+
+`expireVerifiedFlags(enabled)` is a second builder option. It applies to `REQUIRED` mode only. It sets what the client does when the signature of the last verified response expires. The default is `false`. See [Signature expiry](#signature-expiry).
+
+You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+Response signing does not support a flag proxy or a custom flag endpoint, such as `useCustomFlagEndpoint`. The SDK must send flag configuration requests to the Datadog flag endpoint. A network proxy that forwards requests and responses without change does not affect verification. A proxy that changes the response body or a signed header causes verification to fail.
+
+### Confirm that response signing works
+
+1. Use a network inspector, or route your test device through an HTTPS debugging proxy that you trust. The proxy must forward traffic without change. Do not use proxy features that rewrite requests or responses.
+1. Find the flag assignment request.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` and `x-datadog-feature-flags-signed-headers` headers.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature`, `x-datadog-feature-flags-signing-chain`, and `x-datadog-feature-flags-signed-response-headers` headers.
+1. Confirm that the client state is `Ready` and that flag evaluations return assigned values.
+
+The SDK writes response signing warnings and errors to Logcat. To see them, set `Datadog.setVerbosity(Log.WARN)` or a lower level.
+
+### Verification failures
+
+In `REQUIRED` mode, the client rejects a response that fails verification. It does not retry the request without signing.
+
+- The fetch fails with `FlagsResponseSigningException`. Its `reason` property is a `ResponseSigningFailureReason` value, such as `ResponseSigningFailureReason.INVALID_SIGNATURE`. `reason.code` is the [reason code][6], such as `invalid-signature`. A signing failure is not reported as a network error. `FlagsResponseSigningException` and `ResponseSigningFailureReason` are part of the experimental API.
+- The SDK logs `Flag response signing failed (<code>): <what failed>. <fix hint>.` once for each reason code, as an error.
+- If no verified assignments are available for the evaluation context, the client state is `Error` and evaluations return the default value.
+- If the Datadog site does not support response signing, the client sends no flag request, and every fetch fails with `FlagsResponseSigningException` with the reason `unsupported-site`.
+- The client keeps verified assignments in memory only. It does not read or write the on-disk cache in this mode. After an app restart, or after a change to the evaluation context, evaluations return default values until a new verified response arrives.
+- Verification uses the device clock. The SDK rejects a signature if its issue time is more than 30 seconds after the device time. It also rejects a signature if its expiry time is at or before the device time.
+
+In `OBSERVE` mode, the client accepts otherwise valid responses and logs the same message as a warning.
+
+### Signature expiry
+
+Each signature expires at most 5 minutes after Datadog issues it. It can expire sooner. In `REQUIRED` mode, `expireVerifiedFlags` sets what the client does when the signature of the last verified response expires:
+
+- `false` (default): The client continues to serve the last verified flags. Its state changes to `FlagsClientState.Stale`, and the OpenFeature provider emits `PROVIDER_STALE`. The SDK does not fetch again by itself. See [Fetch again before expiry](#fetch-again-before-expiry).
+- `true`: The client stops serving the verified flags. Its state changes to `FlagsClientState.Error`, and evaluations return default values.
+
+In both settings, a new verified response changes the state to `FlagsClientState.Ready`.
+
+{{< code-block lang="kotlin" >}}
+@OptIn(ExperimentalFlagsApi::class)
+val config = FlagsConfiguration.Builder()
+    .experimentalResponseSigning(ResponseSigningMode.REQUIRED)
+    .expireVerifiedFlags(true)
+    .build()
+{{< /code-block >}}
+
+<div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags(true)</code>.</div>
+
+#### Fetch again before expiry
+
+The SDK does not fetch flag assignments again when a signature expires. To get a new verified response, call `setEvaluationContext` on the `FlagsClient` with the current context. Each call starts a new fetch, also when the context does not change:
+
+{{< code-block lang="kotlin" >}}
+flagsClient.setEvaluationContext(evaluationContext)
+{{< /code-block >}}
+
+If you set `expireVerifiedFlags` to `true`, fetch again before the signature expires. Leave time for network latency. For example, fetch again every 2 minutes while the application is in use.
+
 ## Direct FlagsClient integration (advanced)
 
 For most applications, the OpenFeature API described above is the recommended approach. However, you can use the Datadog `FlagsClient` directly if you have specific requirements that the OpenFeature abstraction doesn't support.
@@ -711,3 +804,7 @@ class CheckoutFlagsTest {
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
 
 [4]: /feature_flags/concepts/opt_out/
+
+[5]: /feature_flags/guide/prevent_response_tampering/
+
+[6]: /feature_flags/guide/prevent_response_tampering/#verification-failures

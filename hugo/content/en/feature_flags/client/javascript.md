@@ -513,6 +513,105 @@ For setup, configuration formats, and optional tracking, see [Browser Rules-Base
 
 To browse your organization's flags and override them locally while you develop, compose the `DatadogDevtools` wrapper into your provider stack and use the **Feature Flags** tab in the [Datadog Browser SDK developer extension][3].
 
+## Verify flag responses with response signing
+
+{{< callout url="https://www.datadoghq.com/support/" btn_hidden="true" header="Response signing is in Preview" >}}
+Feature Flags response signing is in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your account team.<br><br>The response signing SDK option is experimental. Its name and behavior can change before general availability.
+{{< /callout >}}
+
+Response signing protects flag assignments from response tampering and replay. The SDK verifies that each response comes from Datadog (origin attestation) and answers the current request. For the threat model and trust model, see [Verify Flag Responses with Response Signing][10].
+
+<!-- TODO: set the first SDK release version that includes response signing. -->
+Response signing requires `@datadog/openfeature-browser` version `X.Y.Z` or later.
+
+To enable response signing, set `experimentalResponseSigning` when you create the provider:
+
+{{< code-block lang="javascript" >}}
+const provider = new DatadogProvider({
+  clientToken: '<CLIENT_TOKEN>',
+  env: '<ENV_NAME>',
+  experimentalResponseSigning: { mode: 'required' },
+})
+{{< /code-block >}}
+
+`experimentalResponseSigning` accepts these options:
+
+`mode`
+: `'off'` (default): The SDK does not request or verify signatures. Requests and responses are the same as without this option.
+: `'required'`: The SDK requests a signature and uses only verified responses. If verification fails, the SDK rejects the response. Use this mode in production.
+: `'observe'`: The SDK requests a signature and verifies it, but it also accepts responses that fail verification. Use this mode to test signing in your application before you enforce it.
+
+`expireVerifiedFlags`
+: `false` (default) or `true`. Applies to `'required'` mode only. Sets what the provider does when the signature of the last verified response expires. See [Signature expiry](#signature-expiry).
+
+You do not need to configure keys or certificates. The SDK contains the Datadog root certificate, and Datadog rotates signing certificates automatically.
+
+In the browser, signing does not protect against a user who can change the page or its scripts. See [Limits of response signing][12].
+
+Response signing does not support `flaggingProxy` or a custom flag endpoint. The SDK must send flag configuration requests to the Datadog flag endpoint. A network proxy that forwards requests and responses without change does not affect verification. A proxy that changes the response body or a signed header causes verification to fail. If you set a custom `flagConfigurationFetch`, it must send the request without change and return the exact response bytes and headers.
+
+#### Serve the verifier files with the CDN bundle
+
+In `'observe'` and `'required'` modes, the SDK loads the verifier code as a separate script file. If you install the SDK from npm, your bundler includes this file. If you use the CDN bundle, do these steps:
+
+1. Serve the `chunks/` directory in the same directory as `datadog-openfeature-browser.js`.
+1. Serve each SDK release from its own versioned directory. The chunk file names contain a content hash, so a cached main file can request chunk files of its own release only.
+1. If your page has a Content Security Policy without `strict-dynamic`, allow scripts from the chunk location.
+
+The chunk loads without Subresource Integrity. An `integrity` attribute on the main script does not cover the verifier code.
+
+If the verifier does not load within 5 seconds, `'required'` mode sends no assignment request and reports the reason `verifier-unavailable`. `'observe'` mode sends the request without signing. The SDK tries to load the verifier again on the next fetch.
+
+### Confirm that response signing works
+
+1. Open your browser developer tools and select the **Network** tab.
+1. Find the flag assignment request.
+1. Confirm that the request includes the `x-datadog-feature-flags-request-nonce` and `x-datadog-feature-flags-signed-headers` headers.
+1. Confirm that the response includes the `x-datadog-feature-flags-signature`, `x-datadog-feature-flags-signing-chain`, and `x-datadog-feature-flags-signed-response-headers` headers.
+1. Confirm that flag evaluations return assigned values, not reason `ERROR`.
+
+At runtime, `DatadogProvider.responseSigningVersion` returns `1` in SDK versions that support response signing.
+
+### Verification failures
+
+In `'required'` mode, the provider rejects a response that fails verification. It does not retry the request without signing.
+
+- The provider emits a `PROVIDER_ERROR` event with error code `GENERAL`. The event message has the format `Flag response signing failed (<code>): <what failed>. <fix hint>.`, where `<code>` is a [reason code][11].
+- If no verified assignments are available for the evaluation context, evaluations return the default value with reason `ERROR`, error code `GENERAL`, and the same message.
+- If the Datadog site does not support response signing, the provider sends no flag request, enters its error state, and reports the reason `unsupported-site`.
+- If the verifier code does not load, the provider sends no flag request and reports the reason `verifier-unavailable`. See [Serve the verifier files with the CDN bundle](#serve-the-verifier-files-with-the-cdn-bundle).
+- The provider keeps verified assignments in memory only. It does not use the persistent cache or `initialFlagsConfiguration` in this mode. After a page reload, evaluations return default values until the first verified response arrives.
+- Verification uses the device clock. The SDK rejects a signature if its issue time is more than 30 seconds after the device time. It also rejects a signature if its expiry time is at or before the device time.
+
+Error messages do not contain the client token, the evaluation context, the response, or certificate data.
+
+In `'observe'` mode, verification failures do not emit provider errors or change evaluation reasons.
+
+### Signature expiry
+
+Each signature expires at most 5 minutes after Datadog issues it. It can expire sooner. In `'required'` mode, `expireVerifiedFlags` sets what the provider does when the signature of the last verified response expires:
+
+- `false` (default): The provider continues to serve the last verified flags. Its status changes from `READY` to `STALE`, and it emits one `PROVIDER_STALE` event. The SDK does not fetch again by itself. See [Fetch again before expiry](#fetch-again-before-expiry).
+- `true`: The provider stops serving the verified flags. Its status changes to `ERROR`, it emits one `PROVIDER_ERROR` event, and evaluations return default values with reason `ERROR`.
+
+In both settings, a new verified response changes the status to `READY` and emits `PROVIDER_READY`. The provider detects expiry with a timer at the expiry time and with a check at each flag evaluation.
+
+{{< code-block lang="javascript" >}}
+experimentalResponseSigning: { mode: 'required', expireVerifiedFlags: true }
+{{< /code-block >}}
+
+<div class="alert alert-warning">With the default setting, a network attacker who blocks refreshes can keep the flags at their last verified values. The attacker cannot change the values. The guarantee is that Datadog verified the values once, not that they are fresh. If your application must use default values instead of old verified values, set <code>expireVerifiedFlags: true</code>.</div>
+
+#### Fetch again before expiry
+
+The SDK does not fetch flag assignments again when a signature expires. To get a new verified response, call `OpenFeature.setContext()` with the current context. This call starts a new fetch, also when the context does not change:
+
+{{< code-block lang="javascript" >}}
+await OpenFeature.setContext(OpenFeature.getContext());
+{{< /code-block >}}
+
+If you set `expireVerifiedFlags` to `true`, fetch again before the signature expires. Leave time for network latency. For example, fetch again every 2 minutes while the application is in use.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
@@ -571,3 +670,9 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [8]: /feature_flags/guide/proxy_sdk_traffic/
 
 [9]: /feature_flags/concepts/opt_out/
+
+[10]: /feature_flags/guide/prevent_response_tampering/
+
+[11]: /feature_flags/guide/prevent_response_tampering/#verification-failures
+
+[12]: /feature_flags/guide/prevent_response_tampering/#limits-of-response-signing
