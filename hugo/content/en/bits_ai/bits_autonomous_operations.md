@@ -1,0 +1,170 @@
+---
+title: Bits Autonomous Operations
+description: "Assign ongoing operational work to Bits so it can detect, investigate, and remediate issues in a single operational loop."
+further_reading:
+- link: "/bits_ai/"
+  tag: "Documentation"
+  text: "Bits AI Overview"
+- link: "/bits_ai/bits_detection/"
+  tag: "Documentation"
+  text: "Bits Detection"
+- link: "/bits_ai/bits_investigation/"
+  tag: "Documentation"
+  text: "Bits Investigation"
+- link: "/bits_ai/bits_remediation/"
+  tag: "Documentation"
+  text: "Bits Remediation"
+---
+
+## Overview
+
+With Autonomous Operations, Bits joins your team as a first responder for production alerts: Bits triages alerts, investigates the issues that need attention, and proposes next steps. When a remediation action is approved, Bits runs it and verifies whether the issue is resolved, reducing the time from alert to resolution and keeping your systems healthy.
+
+Autonomous Ops connects [Bits Detection][1], [Bits Investigation][2], and [Bits Remediation][3]. It can handle application issues, such as rising error rates or latency on an endpoint, and infrastructure issues across hosts, containers, and serverless functions.
+
+You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog MCP Server][4]. 
+
+## Prerequisites
+
+- [Create monitors][7] that alert when your systems might be unhealthy.
+- (Optional) [Enable automatic code fixes][16] to let Bits create pull requests for code fixes.
+- (Optional) To let Bits take infrastructure actions after you approve them:
+  1. Set up the type of action that you want Bits to take:
+     - For Kubernetes, see [Kubernetes actions][20].
+     - For Amazon EC2, Amazon ECS, and AWS Lambda, see [AWS actions][21].
+  1. [Create one or more guardrails][18] to authorize Bits to take action.
+- (Recommended) Install the [Slack integration][19] and add Bits to your team's ops channel.
+
+## Scopes
+
+{{< callout url="#" btn_hidden="true" header="false" >}}
+Some scope options are in Preview and might not be available in your organization. Contact your account manager for access.
+{{< /callout >}}
+
+You enable Autonomous Ops by creating one or more _scopes_. Each scope defines where Bits detects, triages, and investigates health and performance issues.
+
+### Requirements
+
+Creating and managing scopes requires the following permissions:
+
+- Bits Investigations Read
+- Bits Investigations Write
+- Monitors Write
+
+For information about the permissions available in Datadog, see [Datadog Role Permissions][9].
+
+### Create a scope
+
+These steps describe how to create a scope in Datadog. You can also ask Bits to create a scope from [Bits Chat][6], Slack, or the [Datadog MCP Server][4].
+
+To create a scope:
+
+1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}}][24] and click {{< ui >}}Create scope{{< /ui >}}.
+1. Select the type of scope and complete its fields:
+
+   | Scope type | How to configure |
+   |---|---|
+   | {{< ui >}}Watch&nbsp;parts&nbsp;of&nbsp;my&nbsp;system{{< /ui >}} | <ol><li>Enter tags for the resources that you want Bits to watch.</li><li>Clear any resource types that you want Bits to skip.<div class="alert alert-info">The Hosts and Serverless resource types are in Preview.</div></li><li>(Optional) To turn off automatic investigations, clear {{< ui >}}Investigate{{< /ui >}}.</li><li>(Optional) (Preview) To let Bits create and manage monitors for your services, turn on {{< ui >}}Enable Bits Managed Monitors for services{{< /ui >}}.</li></ol> |
+   | {{< ui >}}Watch&nbsp;monitor&nbsp;alerts{{< /ui >}} | Enter a tag or query for the monitors that you want Bits to watch. |
+   | {{< ui >}}Watch&nbsp;a&nbsp;Slack&nbsp;channel{{< /ui >}} | Select the Slack channel for Bits to join. Optionally, exclude monitors by tag. |
+
+1. Describe in natural language which alerts are most important to your team. You can also add specific runbook steps for Bits to follow.
+1. Configure Bits to post to one or more Slack channels when there is activity in this scope.
+1. Click {{< ui >}}Create Scope{{< /ui >}}.
+
+   After you create a scope, Bits watches the monitors or Slack channel in the scope for issues. Bits triages and investigates issues, then creates a remediation plan. Bits can apply the remediation plan within the [guardrails][18] that you set.
+
+For information about how to add a quote for AI credit usage to your scopes, see the [Manage credit usage](#manage-credit-usage) section.
+
+### View and manage scopes
+
+To view your scopes, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}} > {{< ui >}}Scopes{{< /ui >}}][24]. For each scope, the list shows its status, what it covers, its most recent Bits activity, and how many runs Bits has for it. From the list, you can search, filter, and pin scopes, and open a scope to review its recent Bits activity.
+
+The page for each scope lists recent Bits activity in the scope, with the triage verdict or remediation steps for each item. It also shows the scope's configuration. To change a scope's settings, click {{< ui >}}Edit scope{{< /ui >}}.
+
+<div class="alert alert-info">After you create a scope, you can't change its type. For example, if you create a scope that watches monitor alerts, you can't edit that scope to watch parts of your system instead. To cover other services, monitors, or Slack channels, create additional scopes.</div>
+
+## Manage credit usage
+
+Autonomous Ops activity consumes [AI Credits][22].
+
+To control how many AI Credits your scopes can use, set quotas in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Credit Usage{{< /ui >}}][23].
+
+You can set:
+
+- A default quota that applies to each scope
+- A quota for an individual scope
+- A total quota for all Autonomous Ops activity
+
+## Review Bits activity
+
+The Autonomous Ops {{< ui >}}Issues{{< /ui >}} view shows Bits activity across your scopes.
+
+To review Bits activity:
+
+1. Go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}} > {{< ui >}}Issues{{< /ui >}}][25]. You can also click {{< ui >}}Review issues{{< /ui >}} on a scope in the {{< ui >}}Scopes{{< /ui >}} view.
+1. Find the issue that you want to review. To narrow the list, edit the search query, click {{< ui >}}Filters{{< /ui >}}, or change the time range.
+1. Click the issue to open the investigation. Review the triage decision, the hypotheses that Bits tested, and the conclusion, which includes the root cause and impact.
+1. Under {{< ui >}}Remediation{{< /ui >}}, review the next steps from Bits. For each step, either approve the action or follow the provided steps to resolve the issue yourself.
+1. After the fixes are applied, click the {{< ui >}}Verify resolution{{< /ui >}} next step. Bits checks whether the issue is resolved. For more information, see [Validate that issues are resolved][12].
+1. (Recommended) Use the thumbs-up or thumbs-down buttons on the conclusion and the next steps to give Bits feedback on the investigation.
+
+## Adoption best practices
+
+- **Start with a focused scope.** Choose one team's services, a set of production monitors, or an ops channel with clear ownership. Avoid mixing unrelated services and response procedures during the initial rollout.
+- **Provide operational context.** Describe important customer workflows, checks to perform when an alert fires, and runbooks to follow. Update scope guidance when investigations miss context or focus on the wrong issues.
+- **Review results before expanding coverage.** Check whether Bits prioritizes meaningful issues, supports its conclusions with evidence, and proposes appropriate fixes. Use feedback to refine guidance, and review credit usage before adding scopes.
+
+For example, add scope guidance such as:
+
+> Prioritize production errors affecting checkout. Check recent deployments and upstream dependencies. Follow the checkout incident runbook, and include the affected services and customer impact in the investigation conclusion.
+
+## Frequently asked questions
+
+### Do existing alert notifications continue?
+
+Yes. Bits triages alerts alongside your existing notifications. Keep your team's notification and response procedures in place as you evaluate Autonomous Ops. If your team works in Slack, see [Set up Bits in Slack][26].
+
+### Can investigations run without remediation actions?
+
+Yes. You can use investigations and recommendations without enabling one-click infrastructure actions. Configure those actions when your team is ready. See [Infrastructure Actions][27] for requirements.
+
+### What controls which actions Bits can run?
+
+[Guardrails][18] define which infrastructure actions Bits can run, the resources they apply to, and who can approve them. A guardrail must cover both the action and its target resource. An {{< ui >}}Ask{{< /ui >}} guardrail requires approval from a designated approver before Bits runs an action. Scope guidance does not grant that authorization.
+
+### How does this differ from automatic investigations on individual monitors?
+
+[Scopes](#scopes) let you manage automated work across resources, monitor queries, or Slack channels, with shared guidance for the scope. Define coverage around your team's operational responsibilities instead of configuring automated work monitor by monitor.
+
+### What happens when a scope reaches its credit limit?
+
+The scope completes work already in progress and pauses new runs until the applicable limit increases or the next billing cycle begins. For instructions on managing quotas, see [Manage credit usage](#manage-credit-usage).
+
+### What if Bits dismisses an important alert or recommends an inappropriate action?
+
+Review the alert and relevant telemetry using your team's response procedures, and update scope guidance with missing context. For investigations, give feedback using the [review workflow](#review-bits-activity). If a proposed action is inappropriate, do not approve it; follow your team's procedures to resolve the issue.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /bits_ai/bits_detection/
+[2]: /bits_ai/bits_investigation/
+[3]: /bits_ai/bits_remediation/
+[4]: /mcp_server/
+[6]: /bits_ai/bits_chat/
+[7]: /monitors/configuration/
+[9]: /account_management/rbac/permissions/
+[12]: /bits_ai/bits_remediation/#validate-that-issues-are-resolved
+[16]: /bits_ai/bits_remediation/#enable-automatic-code-fixes
+[18]: /bits_ai/bits_remediation/guardrails/
+[19]: /integrations/slack/
+[20]: /bits_ai/bits_remediation/infrastructure_actions/#kubernetes-actions
+[21]: /bits_ai/bits_remediation/infrastructure_actions/#aws-actions
+[22]: /account_management/billing/ai_credits/
+[23]: https://app.datadoghq.com/bits/settings/usage
+[24]: https://app.datadoghq.com/bits/autonomous-ops/scopes
+[25]: https://app.datadoghq.com/bits/autonomous-ops/activity
+[26]: /bits_ai/bits_chat/usage/#slack
+[27]: /bits_ai/bits_remediation/infrastructure_actions/

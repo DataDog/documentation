@@ -44,3 +44,17 @@ entries:
       - UpdateNotebookTask
       - UpdateNotebookWidget
     title: Publish the Notebooks v2 API documentation preview
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42078
+    operations:
+      - GetNotebookSection
+      - GetNotebookTask
+      - GetNotebookWidget
+      - ListNotebookSections
+      - ListNotebookTasks
+      - ListNotebookWidgets
+      - UpdateNotebookContent
+      - UpdateNotebookTask
+      - UpdateNotebookWidget
+    title: Document rate-limit headers on the shared 429 responses
