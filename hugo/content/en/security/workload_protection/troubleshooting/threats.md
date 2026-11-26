@@ -52,7 +52,7 @@ The network based detections of Workload Protection rely on the traffic control 
 - Check if your vendor returns TC_ACT_OK or TC_ACT_UNSPEC after granting access to a network packet. If they return TC_ACT_UNSPEC, you can ignore this paragraph.
 - Check which priority your vendor attaches their eBPF classifiers to:
   - If they use priority 1, Workload Protection network detections do not work inside your containers.
-  - If they use priority 2 to 10, make sure to configure `event_monitoring_config.network.classifier_priority` (`DD_EVENT_MONITORING_CONFIG_NETWORK_CLASSIFIER_PRIORITY`) to a number strictly below the priority chosen by your vendor.
+  - If they use priority 2 to 10, set `event_monitoring_config.network.classifier_priority` (`DD_EVENT_MONITORING_CONFIG_NETWORK_CLASSIFIER_PRIORITY`) to a number lower than your vendor's priority.
   - If they use priority 11 or higher, you can ignore this paragraph.
 
 Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should disable the network based detections of Workload Protection by following the steps below:
@@ -155,7 +155,7 @@ To disable Workload Protection, follow the steps for your Agent platform.
 
 ### Helm
 
-In the Helm `values.yaml`, set `datadog.securityAgent.runtime` to `enabled: false` as follows:
+In the Helm `values.yaml`, set `datadog.securityAgent.runtime.enabled` to `false`:
 
 {{< code-block lang="yaml" filename="values.yaml" disable_copy="false" collapsible="true" >}}
 

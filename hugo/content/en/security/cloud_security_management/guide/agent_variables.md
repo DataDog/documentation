@@ -13,11 +13,11 @@ The Datadog Agent has several environment variables that can be enabled for Clou
     </tr>
     <tr>
         <td><code>DD_COMPLIANCE_CONFIG_ENABLED</code></td>
-        <td>Enables the Misconfigurations Agent (runs in the Security Agent).</td>
+        <td>Enables the compliance module of the Security Agent, used by Misconfigurations.</td>
     </tr>
     <tr>
         <td><code>DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED</code></td>
-        <td>Enables Misconfigurations host benchmarks. Enabled by default. Requires the Misconfigurations Agent (<code>DD_COMPLIANCE_CONFIG_ENABLED</code>).</td>
+        <td>Enables Misconfigurations host benchmarks. Enabled by default. Requires the compliance module of the Security Agent (<code>DD_COMPLIANCE_CONFIG_ENABLED</code>).</td>
     </tr>
     <tr>
         <td><code>DD_RUNTIME_SECURITY_CONFIG_ENABLED</code></td>
@@ -25,7 +25,7 @@ The Datadog Agent has several environment variables that can be enabled for Clou
     </tr>
     <tr>
         <td><code>DD_SYSTEM_PROBE_ENABLED</code></td>
-        <td>Deprecated. Setting it alone also enables Network Performance Monitoring (NPM). It is not required for Workload Protection: the System Probe starts automatically when <code>DD_RUNTIME_SECURITY_CONFIG_ENABLED</code> is set.</td>
+        <td>Deprecated. Not required for Workload Protection, because the System Probe starts automatically when <code>DD_RUNTIME_SECURITY_CONFIG_ENABLED</code> is set. Setting <code>DD_SYSTEM_PROBE_ENABLED</code> on its own also enables Cloud Network Monitoring (CNM).</td>
     </tr>
     <tr>
         <td><code>DD_RUNTIME_SECURITY_CONFIG_REMOTE<br>_CONFIGURATION_ENABLED</code></td>

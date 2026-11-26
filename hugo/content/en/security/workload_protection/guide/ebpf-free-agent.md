@@ -121,7 +121,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Next, modify the `/etc/datadog-agent/system-probe.yaml` file to enable Workload Protection and eBPF-less mode as follows. The same configuration applies if you install the Agent `.deb` or `.rpm` package manually:
+Next, modify the `/etc/datadog-agent/system-probe.yaml` file to enable Workload Protection and eBPF-less mode. The same configuration applies if you install the Agent `.deb` or `.rpm` package manually:
 
 {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 runtime_security_config:
@@ -139,7 +139,7 @@ Ensure you perform the following configuration requirements before deploying the
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
 2. Install or update the Agent with Workload Protection enabled. For steps, see [Setting up Workload Protection][4].
-3. Apply the additional configuration from the previous **eBPF-less setup steps** section to enable eBPF-less mode.
+3. Apply the additional configuration from the [eBPF-less setup steps](#ebpf-less-setup-steps) section to enable eBPF-less mode.
 
 
 ## Verify setup
