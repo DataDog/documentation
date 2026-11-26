@@ -159,10 +159,18 @@ spec:
         sending_queue:
           batch:
             flush_timeout: 10s
+    extensions:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+        deployment_type: daemonset
+        hostname: ${env:DD_HOSTNAME}
     service:
       telemetry:
         resource:
           k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
+      extensions: ['datadog']
   env:
     - name: DD_API_KEY
       valueFrom:
@@ -187,6 +195,8 @@ spec:
 {{< /code-block >}}
 
 Replace `<CLUSTER_NAME>` with your cluster's name.
+
+The [Datadog Extension][74] reports the Collector to Fleet Automation. Its `hostname` matches `DD_HOSTNAME`, so the Collector and its telemetry appear under the same host.
 
 This configuration sends telemetry with the Datadog Exporter, which Datadog recommends for the DDOT Collector. To keep an existing OTLP HTTP pipeline, see [Migrate to the DDOT Collector](/opentelemetry/migrate/upstream_to_ddot_collector/).
 
@@ -279,7 +289,7 @@ spec:
     # [...]
     service:
       # [...]
-      extensions: ['health_check']
+      extensions: ['datadog', 'health_check']
       pipelines:
         metrics:
           receivers: ['host_metrics', 'otlp', 'kubelet_stats', 'datadog/connector']
@@ -425,13 +435,19 @@ spec:
           batch:
             flush_timeout: 10s
     extensions:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+        deployment_type: daemonset
+        hostname: ${env:DD_HOSTNAME}
       health_check:
         endpoint: "${env:K8S_POD_IP}:13133"
     service:
       telemetry:
         resource:
           k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
-      extensions: ['health_check']
+      extensions: ['datadog', 'health_check']
       pipelines:
         logs:
           receivers: ['otlp', 'filelog']
@@ -540,6 +556,16 @@ config:
       sending_queue:
         batch:
           flush_timeout: 10s
+  extensions:
+    datadog:
+      api:
+        key: ${env:DD_API_KEY}
+        site: ${env:DD_SITE}
+      deployment_type: daemonset
+      hostname: ${env:DD_HOSTNAME}
+  service:
+    # Keep the chart's default health_check extension
+    extensions: ['health_check', 'datadog']
 extraEnvs:
   - name: DD_API_KEY
     valueFrom:
@@ -673,6 +699,13 @@ config:
       sending_queue:
         batch:
           flush_timeout: 10s
+  extensions:
+    datadog:
+      api:
+        key: ${env:DD_API_KEY}
+        site: ${env:DD_SITE}
+      deployment_type: daemonset
+      hostname: ${env:DD_HOSTNAME}
   processors:
     infraattributes:
       cardinality: 2
@@ -691,6 +724,7 @@ config:
   service:
     extensions:
       - health_check
+      - datadog
     pipelines:
       logs:
         receivers:
@@ -963,3 +997,4 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
 [72]: /opentelemetry/migrate/upstream_to_ddot_collector/
 [73]: /opentelemetry/getting_started/kubernetes/?tab=ddot
+[74]: /opentelemetry/integrations/datadog_extension/
