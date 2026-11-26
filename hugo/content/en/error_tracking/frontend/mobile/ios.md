@@ -39,6 +39,8 @@ To start sending Error Tracking data from your iOS or tvOS application to Datado
 
 Declare the iOS library as a dependency depending on your package manager. Datadog recommends using Swift Package Manager (SPM).
 
+**Note**: For macOS apps, use Swift Package Manager with SDK version 3.23.0 or later. CocoaPods and Carthage are not supported on macOS. For details, see [Supported versions][15].
+
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
@@ -833,7 +835,8 @@ See the [RUM Debug Symbols][20] page to view all uploaded symbols.
 ## Limitations
 
 - `.dSYM` files are limited in size to **2 GB** each, uncompressed, and each zip archive you upload is limited to **800 MB**.
-- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, iPadOS, tvOS, watchOS, and visionOS devices.
+- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, iPadOS, tvOS, watchOS, and visionOS devices, and on Macs.
+- On macOS, Watchdog Terminations are not available, and Objective-C exceptions that AppKit catches on the main thread are not reported. For details, see the macOS section of [Track Errors and Crashes][21].
 
 ## Test your implementation
 
@@ -972,3 +975,4 @@ To disable watchdog terminations reporting, update the initialization snippet an
 [18]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#facets
 [19]: /dashboards/widgets/timeseries
 [20]: https://app.datadoghq.com/source-code/setup/rum
+[21]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=ios#macos

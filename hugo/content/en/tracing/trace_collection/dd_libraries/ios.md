@@ -25,6 +25,8 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 
 <div class="alert alert-info">Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
 
+**Note**: The `dd-sdk-ios` library also supports macOS 12 or later, in Preview. On macOS, install it with Swift Package Manager. For details, see [Supported versions][13].
+
 ## Setup
 
 1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
@@ -639,3 +641,4 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 [10]: https://docs.datadoghq.com/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: /tracing/trace_collection/custom_instrumentation/client-side/ios/otel
+[13]: /real_user_monitoring/setup/install/?platform=ios#supported-versions

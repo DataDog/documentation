@@ -111,6 +111,8 @@ The following telemetry provides insight into your application's performance, in
 | CPU ticks per second | High CPU usage impacts the [battery life](https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/) on your users' devices. RUM tracks CPU ticks per second for each view and the CPU utilization over the course of a session. The recommended range is <40 for good and <60 for moderate. |
 | Memory utilization | High memory usage can lead to [watchdog terminations](/error_tracking/frontend/mobile/ios/?tab=cocoapods#add-watchdog-terminations-reporting), which causes a poor user experience. RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. |
 
+**Note**: On macOS, refresh rate and slow renders are not collected. CPU, memory, long tasks (frozen frames), crashes, and app hangs are collected. Long tasks that run inside the action handler of a mouse click are not reported.
+
 ## Performance timeseries
 
 {% callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" header="Join the Preview!" btn_hidden=false %}

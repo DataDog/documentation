@@ -7,10 +7,12 @@ If you have not set up the RUM iOS SDK yet, follow the [in-app setup instruction
 
 ## Initialization parameters
 
+**Note**: Options marked as not available on macOS do not exist in macOS builds of the SDK. Using them in code that builds for macOS causes a build error. To keep shared code building, set these options as properties in an `#if !os(macOS)` block instead of passing them to the initializer.
+
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
 `backgroundTasksEnabled`
-: This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`.
+: This flag determines if the `UIApplication` methods `beginBackgroundTask(expirationHandler:)` and `endBackgroundTask:` are used to perform background uploads. Enabling this flag might increase the amount of time that the app operates in the background by 30 seconds. Tasks are normally stopped when there's nothing to upload or when encountering a blocker to uploading, such as having no internet connection or having a low battery. By default, this flag is set to `false`. Not available on macOS.
 
 `batchProcessingLevel`
 : Batch processing level defines the maximum number of batches processed sequentially without a delay within one reading/uploading cycle. The default value is `.medium`.
@@ -58,11 +60,14 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `appHangThreshold`
 : Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][7].
 
+`appKitViewsPredicate`
+: (macOS only) Enables tracking `NSViewControllers` as RUM views. You can use the default implementation by setting `DefaultAppKitRUMViewsPredicate` or implement [your own `AppKitRUMViewsPredicate`][12] customized for your app. By default, this is set to `nil`.
+
 `applicationID`
 : The RUM application identifier.
 
 `collectAccessibility`
-: Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`.
+: Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`. On macOS, only `increase_contrast_enabled`, `should_differentiate_without_color`, `reduce_transparency_enabled`, `reduce_motion_enabled`, `invert_colors_enabled`, `screen_reader_enabled`, `assistive_switch_enabled`, and `rtl_enabled` are collected. The other accessibility attributes are not sent.
 
 `customEndpoint`
 : A custom server URL for sending RUM data.
@@ -78,6 +83,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `longTaskThreshold`
 : The threshold for RUM long tasks tracking (in seconds). By default, this is set to `0.1` seconds.
+
+`macOSActionsPredicate`
+: (macOS only) Enables tracking user clicks and menu item selections as RUM actions. You can use the default implementation by setting `DefaultMacOSRUMActionsPredicate` or implement [your own `MacOSRUMActionsPredicate`][13] customized for your app. By default, this is set to `nil`.
 
 `networkSettledResourcePredicate`
 : The predicate used to classify "initial" resources for the Time-to-Network-Settled (TNS) view timing calculation.
@@ -95,7 +103,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`. For more information, see [Manage Sessions][9].
 
 `swiftUIActionsPredicate`
-: Enables tracking SwiftUI interactions as RUM actions. You can use the default implementation by setting `DefaultSwiftUIRUMActionsPredicate` or implement [your own `SwiftUIRUMActionsPredicate`][4] customized for your app.
+: Enables tracking SwiftUI interactions as RUM actions. You can use the default implementation by setting `DefaultSwiftUIRUMActionsPredicate` or implement [your own `SwiftUIRUMActionsPredicate`][4] customized for your app. Not available on macOS.
 
 `swiftUIViewsPredicate`
 : Enables tracking SwiftUI views as RUM views. You can use the default implementation by setting `DefaultSwiftUIRUMViewsPredicate` or implement [your own `SwiftUIRUMViewsPredicate`][5] customized for your app.
@@ -107,25 +115,25 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID is attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
 `trackBackgroundEvents`
-: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`.
+: Determines whether RUM events are tracked when no view is active. By default, this is set to `false`. Not available on macOS, where some events tracked while no view is active are kept in a `NoActiveView` view after the first view starts. See [Track Background Events][14].
 
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
 
 `trackMemoryWarnings`
-: Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`.
+: Determines whether automatic tracking of memory warnings is enabled. By default, this is set to `true`. Not available on macOS.
 
 `trackSlowFrames`
-: Determines whether the SDK tracks slow frames for views. By default, this is set to `true`.
+: Determines whether the SDK tracks slow frames for views. By default, this is set to `true`. Not available on macOS.
 
 `trackWatchdogTerminations`
-: Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`.
+: Determines whether the SDK should track application terminations performed by Watchdog. The default setting is `false`. Not available on macOS.
 
 `uiKitActionsPredicate`
-: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`][4] customized for your app.
+: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`][4] customized for your app. Not available on macOS.
 
 `uiKitViewsPredicate`
-: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`][5] customized for your app.
+: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`][5] customized for your app. Not available on macOS.
 
 `urlSessionTracking`
 : Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking][6]. The `trackResourceHeaders` parameter configures which HTTP headers are captured for resources. It's set to `.disabled` by default. Use `.defaults` to capture a default set of headers.
@@ -151,3 +159,6 @@ To add custom attributes, user information, account information, and other conte
 [9]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
 [10]: /real_user_monitoring/remote_configuration/
 [11]: /real_user_monitoring/enrich_rum_data/
+[12]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#appkit
+[13]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#appkit
+[14]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios

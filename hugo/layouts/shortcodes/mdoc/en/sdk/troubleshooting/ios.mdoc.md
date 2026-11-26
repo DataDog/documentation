@@ -26,10 +26,21 @@ You should then see output similar to the following, indicating that a batch of 
 
 **Recommendation:** Use `Datadog.verbosityLevel` in the `DEBUG` configuration, and unset it in `RELEASE`.
 
+## macOS
+
+### Build errors with iOS-only options
+
+Some options, such as `uiKitViewsPredicate`, `trackBackgroundEvents`, and `trackWatchdogTerminations`, do not exist on macOS. If code that builds for both iOS and macOS uses them, the macOS build fails. Set these options as properties in an `#if !os(macOS)` block instead of passing them to the `RUM.Configuration` initializer, because Swift does not allow `#if` inside an argument list. Use `appKitViewsPredicate` and `macOSActionsPredicate` for macOS. For the full list, see [macOS support][2].
+
+### No data is uploaded from a sandboxed app
+
+Apps that use the App Sandbox need the `com.apple.security.network.client` entitlement (Outgoing Connections (Client) in Xcode) to send data to Datadog. Without it, uploads fail.
+
 ## "Deobfuscation failed" warning
 
 A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][4] to view all your uploaded dSYMs. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][5].
 
 [1]: /help
+[2]: /real_user_monitoring/setup/install/?platform=ios#macos-support
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/guide/debug-symbols

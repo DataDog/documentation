@@ -1,6 +1,6 @@
 ## Automatically track views
 
-You can automatically track views with UIKit and SwiftUI.
+You can automatically track views with UIKit and SwiftUI. On macOS, you can automatically track AppKit views.
 
 ### UIKit
 
@@ -121,9 +121,65 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 **Note**: The RUM iOS SDK calls `rumView(for:)` many times while your app is running. Datadog recommends keeping its implementation fast and single-threaded.
 
+### AppKit
+
+On macOS, `uiKitViewsPredicate` is not available. To automatically track views (`NSViewControllers`), use the `appKitViewsPredicate` option when enabling RUM. By default, this option is `nil`, so no AppKit views are tracked.
+
+The default predicate, `DefaultAppKitRUMViewsPredicate`, names views with the view controller's class name. It ignores view controllers defined by AppKit and SwiftUI, such as `NSHostingController`, and `NSCollectionViewItem` and its subclasses. To customize it, provide your own implementation of the `AppKitRUMViewsPredicate` protocol:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+public protocol AppKitRUMViewsPredicate {
+    func rumView(for viewController: NSViewController) -> RUMView?
+}
+
+// Example: name views explicitly and ignore the rest
+class YourCustomPredicate: AppKitRUMViewsPredicate {
+    func rumView(for viewController: NSViewController) -> RUMView? {
+        switch viewController {
+        case is SidebarViewController:  return .init(name: "Sidebar")
+        case is DetailsViewController:  return .init(name: "Details")
+        default:                        return nil
+        }
+    }
+}
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@protocol DDAppKitRUMViewsPredicate <NSObject>
+- (DDRUMView * _Nullable)rumViewFor:(NSViewController * _Nonnull)viewController;
+@end
+
+@interface YourCustomPredicate : NSObject<DDAppKitRUMViewsPredicate>
+@end
+
+@implementation YourCustomPredicate
+- (DDRUMView * _Nullable)rumViewFor:(NSViewController * _Nonnull)viewController {
+    if ([viewController isKindOfClass:[SidebarViewController class]]) {
+        return [[DDRUMView alloc] initWithName:@"Sidebar" attributes:@{}];
+    }
+    return nil;
+}
+@end
+```
+
+{% /tab %}
+{% /tabs %}
+
+The SDK starts a view at the `viewDidAppear()` event of the `NSViewController` and stops it at `viewDidDisappear()`. Views from all windows share one stack: the active view is the most recent view controller that appeared and has not disappeared, whichever window it belongs to. When it disappears, the previous view in the stack restarts.
+
+To track SwiftUI views on macOS, use the `trackRUMView(name:)` modifier described in the [Instrument SwiftUI views](#instrument-swiftui-views) section.
+
 ### SwiftUI
 
 To automatically track views with SwiftUI, use the `swiftUIViewsPredicate` option when enabling RUM.
+
+**Note**: On macOS, Datadog recommends tracking SwiftUI views with the `trackRUMView(name:)` modifier described in the [Instrument SwiftUI views](#instrument-swiftui-views) section.
 
 The mechanism to extract a SwiftUI view name relies on reflection. As a result, view names may not always be meaningful. If a meaningful name cannot be extracted, a generic name such as `AutoTracked_HostingController_Fallback` or `AutoTracked_NavigationStackController_Fallback` is used.
 
@@ -237,6 +293,8 @@ override func viewDidDisappear(_ animated: Bool) {
 {% /tab %}
 {% /tabs %}
 
+**Note**: On macOS, call the same methods from the `viewDidAppear()` and `viewDidDisappear()` methods of your `NSViewController`.
+
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
 
 ### Instrument SwiftUI views
@@ -275,5 +333,13 @@ RUM integrates with `UIKit` and `SwiftUI` views and also provides APIs for manua
 When the application leaves the foreground, RUM automatically stops the current view, leaving no active view. Since RUM's data model requires an active view to track other events, by default, all events tracked in the background are skipped due to the absence of a view. To capture these events instead, see [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios).
 
 **Note**: If you're tracking views manually, you need to decide on your own whether the view should be stopped when the app leaves the foreground.
+
+### macOS
+
+**AppKit Views**: When [automatically tracking AppKit views](#appkit) using `AppKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear()` event of the `NSViewController` and stops it at `viewDidDisappear()`, for example when its window closes or the app is hidden.
+
+macOS apps do not move to the background. RUM stops the current view when the Mac goes to sleep, and restarts it when the Mac wakes up. Switching to another app does not stop the view.
+
+A macOS app often has no active view, for example after its last window closes, or when it only shows a menu bar item. After the first view of the app process has started, events tracked while no view is active are kept in a view named `NoActiveView` (URL `com/datadog/no-active-view/view`). Errors, resources, actions, feature flag evaluations, and operations start this view. Long tasks and app hangs are added to it only if it is already active. The `NoActiveView` view stops when the next view starts. Before the first view starts, events are tracked in the `ApplicationLaunch` view, as on iOS.
 
 [1]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
