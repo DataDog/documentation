@@ -86,6 +86,115 @@ Set the `model` field in the request body to one of the following:
 - `<PROVIDER_SLUG>/<MODEL_ID>` to call a model on a specific provider.
 - `router/<RULE_SLUG>` to let a [routing rule](/ai_gateway/routing/) choose the destination.
 
+### List available models
+
+To see which values you can use for `model`, call `GET /ai/v1/models`. AI Gateway returns only the models and routing rules that your credential's [access policies](/ai_gateway/access_control/) allow, in the OpenAI list format.
+
+```shell
+curl "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/models?category=language" \
+  -H "Authorization: Bearer <DATADOG_ACCESS_TOKEN>"
+```
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "<PROVIDER_SLUG>/<MODEL_ID>",
+      "object": "model",
+      "created": 1795500000,
+      "owned_by": "openai",
+      "category": "language",
+      "metadata": {
+        "source": { "provider": "openai", "model_id": "<MODEL_ID>" },
+        "status": "available",
+        "capabilities": { "reasoning": true, "tool_call": true, "structured_output": true },
+        "modalities": { "input": ["text", "image"], "output": ["text"] },
+        "limits": { "context_window_tokens": 400000, "max_output_tokens": 128000 },
+        "reasoning": { "controls": [{ "type": "effort", "effort_levels": ["low", "medium", "high"] }] }
+      }
+    },
+    {
+      "id": "router/<RULE_SLUG>",
+      "object": "model",
+      "created": 1795500000,
+      "owned_by": "router",
+      "category": "language"
+    }
+  ]
+}
+```
+
+Pass an entry's `id` as `model`. Each model has one `category`, which says what kind of task it serves. Routing rules are always `language`. To filter the list, pass one or more categories separated by commas, for example `?category=language,fine_tune`. An unknown category returns HTTP `400`. Without `category`, AI Gateway returns every model you can use.
+
+{{% collapse-content title="Model categories" level="h4" %}}
+
+| Category | Models |
+|---|---|
+| `language` | General text generation, including routing rules |
+| `fine_tune` | OpenAI organization fine-tunes |
+| `checkpoint` | Fine-tune training checkpoints |
+| `image` | Image generation |
+| `video` | Video generation |
+| `tts` | Text to speech |
+| `transcription` | Speech to text |
+| `realtime` | Realtime or live audio |
+| `embedding` | Embeddings |
+| `search` | Search and deep research |
+| `moderation` | Moderation and safety classifiers |
+| `other` | Known models that don't generate content, such as decision models, rerankers, legacy completions, or computer use |
+| `unknown` | Models AI Gateway can't classify yet |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Model metadata fields" level="h4" %}}
+
+`metadata` is present when AI Gateway has metadata for the model. Fields without a known value are omitted.
+
+| Field | Type | Description |
+|---|---|---|
+| `source.provider` | string | Provider that serves the model. |
+| `source.model_id` | string | Model ID at the provider. |
+| `source.revision` | string | Revision of the metadata source. |
+| `source.observed_at` | timestamp | When AI Gateway last read the metadata. |
+| `status` | string | `available` when the metadata is complete, `partial` when some fields are missing. |
+| `display_name` | string | Human-readable model name. |
+| `description` | string | Model description. |
+| `kind` | string | Model kind reported by the metadata source. |
+| `family` | string | Model family. |
+| `lifecycle` | string | Release stage, such as preview or deprecated. |
+| `knowledge_cutoff` | string | Training data cutoff date. |
+| `release_date` | string | Release date. |
+| `last_updated` | string | Date the model was last updated. |
+| `open_weights` | boolean | Whether the model's weights are public. |
+| `capabilities.attachment` | boolean | Accepts file attachments. |
+| `capabilities.reasoning` | boolean | Supports reasoning. |
+| `capabilities.interleaved_reasoning` | boolean | Can reason between tool calls. |
+| `capabilities.tool_call` | boolean | Supports tool calls. |
+| `capabilities.structured_output` | boolean | Supports structured output. |
+| `capabilities.temperature` | boolean | Accepts a `temperature` setting. |
+| `modalities.input` | array of strings | Input types, such as `text` or `image`. |
+| `modalities.output` | array of strings | Output types. |
+| `limits.context_window_tokens` | integer | Context window, in tokens. |
+| `limits.max_input_tokens` | integer | Maximum input tokens. |
+| `limits.max_output_tokens` | integer | Maximum output tokens. |
+| `reasoning.controls[].type` | string | `toggle` (on or off), `effort` (effort levels), or `budget_tokens` (a token budget). |
+| `reasoning.controls[].effort_levels` | array of strings | Accepted effort levels, for `effort` controls. |
+| `reasoning.controls[].min_budget_tokens` | integer | Minimum reasoning budget, for `budget_tokens` controls. `-1` means the model decides. |
+| `reasoning.controls[].max_budget_tokens` | integer | Maximum reasoning budget, for `budget_tokens` controls. |
+| `reference_pricing[].component` | string | Priced part of the request, such as `input` or `output`. |
+| `reference_pricing[].amount` | string | Price, as a decimal string. |
+| `reference_pricing[].currency` | string | Always `USD`. |
+| `reference_pricing[].unit` | string | Always `million_tokens`. |
+| `reference_pricing[].mode` | string | Pricing mode, such as `standard`. |
+| `reference_pricing[].service_tier` | string | Provider service tier the price applies to. |
+| `reference_pricing[].context_min_tokens` | integer | Smallest context size this price applies to. |
+| `reference_pricing[].context_max_tokens` | integer | Largest context size this price applies to. Absent means no upper limit. |
+
+`reference_pricing` lists the provider's published prices. AI Gateway uses your [custom prices](/ai_gateway/spend_controls/) for budgets and rate limits when you set them.
+
+{{% /collapse-content %}}
+
 ## API translation
 
 API translation lets an application keep its inference API while calling a model that supports another API. For example, a Responses client can call a model that accepts Anthropic Messages, and a Messages client can call a model that accepts Responses.
