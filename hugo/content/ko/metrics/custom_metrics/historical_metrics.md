@@ -13,35 +13,35 @@ further_reading:
 - link: https://www.datadoghq.com/blog/historical-metrics/
   tag: 블로그
   text: 과거 메트릭으로 더 긴 기간에 걸쳐 시스템 성능 모니터링하기
-title: 과거 메트릭 수집
+title: Historical Metrics Ingestion
 ---
 {{< jqmath-vanilla >}}
 
 ## 개요 {#overview}
 
-과거 메트릭 수집을 활성화하면 제출 시점 기준으로 한 시간보다 오래된 **사용자 지정 메트릭** 값을 수집할 수 있습니다. 단, 총 메트릭 보존 기간(기본 15개월)을 초과할 수는 없습니다.
+Historical Metrics Ingestion을 활성화하면 제출 시점 기준으로 한 시간보다 오래된 **사용자 지정 메트릭** 값을 수집할 수 있습니다. 단, 총 메트릭 보존 기간(기본 15개월)을 초과할 수는 없습니다.
 
-메트릭에 과거 메트릭 수집이 활성화되어 있으면 장애 복구, 잘못된 값 수정, IoT 지연 관리 등 다양한 사용 사례에 유용할 수 있습니다.
+메트릭에 Historical Metrics Ingestion이 활성화되어 있으면 장애 복구, 잘못된 값 수정, IoT 지연 관리 등 다양한 사용 사례에 유용할 수 있습니다.
 
-## 과거 메트릭 수집이란 무엇인가요? {#what-is-historical-metrics-ingestion}
+## Historical Metrics Ingestion이란 무엇인가요? {#what-is-historical-metrics-ingestion}
 
 {{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="과거 메트릭이 활성화된 수집 흐름을 보여주는 다이어그램" >}}
 
-Datadog은 *과거 메트릭*을 제출 시점 기준으로 한 시간 이상 과거의 타임스탬프를 가진 메트릭 포인트로 분류합니다. 과거 메트릭 수집이 활성화되어 있지 않으면 제출 시점 기준으로 한 시간보다 오래된 메트릭 값은 수집되지 않습니다.
+Datadog은 *과거 메트릭*을 제출 시점 기준으로 한 시간 이상 과거의 타임스탬프를 가진 메트릭 포인트로 분류합니다. Historical Metrics Ingestion이 활성화되어 있지 않으면 제출 시점 기준으로 한 시간보다 오래된 메트릭 값은 수집되지 않습니다.
 
 예를 들어, 메트릭(`exampleMetricA`)이 오후 1시(EST)에 Datadog으로 값을 전송했지만 해당 값의 타임스탬프가 오전 10시(EST)인 경우를 가정합니다. 이 메트릭 값은 제출 시점보다 3시간 이전의 타임스탬프를 가지므로 _과거 메트릭_으로 분류됩니다.
 
-과거 메트릭 수집이 활성화된 상태에서 동일한 타임스탬프와 동일한 태그-값 조합으로 여러 값을 제출하면 Datadog은 가장 최근에 제출된 값을 유지합니다. 즉, 동일한 타임스탬프에 값 X를 제출한 후 동일한 메트릭에 값 Y를 다시 제출하면 가장 나중에 제출된 값이 유지됩니다.
+Historical Metrics Ingestion이 활성화된 상태에서 동일한 타임스탬프와 동일한 태그-값 조합으로 여러 값을 제출하면 Datadog은 가장 최근에 제출된 값을 유지합니다. 즉, 동일한 타임스탬프에 값 X를 제출한 후 동일한 메트릭에 값 Y를 다시 제출하면 가장 나중에 제출된 값이 유지됩니다.
 
 *counts, rates, gauges* 메트릭 유형에 대해 [Metrics Catalog 페이지][1]에서 Historical Metrics Ingestion을 활성화하면 과거 메트릭 값 수집을 시작할 수 있습니다.  
 
-**참고**: 과거 메트릭 수집은 분포형 메트릭 또는 로그와 같은 다른 Datadog 데이터 유형에서 생성된 사용자 지정 메트릭에는 사용할 수 없습니다.
+**참고**: Historical Metrics Ingestion은 분포형 메트릭 또는 로그와 같은 다른 Datadog 데이터 유형에서 생성된 사용자 지정 메트릭에는 사용할 수 없습니다.
 
 ## 구성 {#configuration}
 
 특정 메트릭에 대해 과거 메트릭 수집을 활성화하려면 다음을 수행합니다.
 1. [Metrics Catalog 페이지][1]로 이동합니다.
-1. 과거 메트릭 수집을 활성화할 메트릭 이름을 클릭하여 메트릭 세부 정보 사이드 패널을 엽니다.
+1. Historical Metrics Ingestion을 활성화할 메트릭 이름을 클릭하여 메트릭 세부 정보 사이드 패널을 엽니다.
 1. 사이드 패널의 *Advanced* 섹션에서 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
 1. {{< ui >}}Enable historical metrics{{< /ui >}} 토글을 선택하고 {{< ui >}}Save{{< /ui >}}를 누릅니다.
 
@@ -49,22 +49,22 @@ Datadog은 *과거 메트릭*을 제출 시점 기준으로 한 시간 이상 �
 
 ### 다중 메트릭 일괄 구성 {#bulk-configuration-for-multiple-metrics}
 
-각 메트릭을 개별적으로 구성하지 않고 여러 메트릭에 대해 과거 메트릭 수집을 한 번에 활성화하거나 비활성화할 수 있습니다.
+각 메트릭을 개별적으로 구성하지 않고 여러 메트릭에 대해 Historical Metrics Ingestion을 한 번에 활성화하거나 비활성화할 수 있습니다.
 
-1. [Metrics Catalog 페이지][1]로 이동하여 {{< ui >}}Configure Metrics{{< /ui >}} 드롭다운을 클릭합니다.
-1. {{< ui >}}Enable historical metrics{{< /ui >}}를 선택합니다.
+1. [Metrics Catalog 페이지][1]로 이동하고 {{< ui >}}Actions{{< /ui >}} 드롭다운을 클릭합니다.
+1. {{< ui >}}Manage Historical Metrics{{< /ui >}}를 선택합니다.
 1. 메트릭 네임스페이스 접두사를 지정하여 해당 네임스페이스와 일치하는 모든 메트릭을 선택합니다.
 1. (선택 사항) 네임스페이스의 모든 메트릭에 대해 Historical Metrics Ingestion을 비활성화하려면 {{< ui >}}Historical metrics{{< /ui >}} 토글을 클릭합니다.
 
-{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="과거 메트릭 수집 토글" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics 수집 토글" >}}
 
 ## 과거 메트릭 제출 {#historical-metrics-submission}
 
-과거 메트릭 수집을 활성화한 후에는 [API](#api) 또는 [Agent](#agent)를 통해 과거 타임스탬프를 가진 메트릭 값을 제출할 수 있습니다.
+Historical Metrics Ingestion을 활성화한 후에는 [API](#api) 또는 [Agent](#agent)를 통해 과거 타임스탬프를 가진 메트릭 값을 제출할 수 있습니다.
 
 ### API {#api}
 
-API를 사용하면 페이로드에 과거 타임스탬프를 포함하여 메트릭 값을 제출할 수 있습니다(단, 해당 메트릭 이름은 앞서 설명한 사용자 인터페이스에서 과거 메트릭 허용이 이미 활성화되어 있어야 합니다).
+API를 사용하면 페이로드에 과거 타임스탬프를 포함하여 메트릭 값을 제출할 수 있습니다. 단, 해당 메트릭 이름은 앞서 설명한 사용자 인터페이스에서 과거 메트릭 허용이 이미 활성화되어 있어야 합니다.
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -444,9 +444,9 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## 과거 메트릭 수집 지연 시간 {#historical-metrics-ingestions-latency}
+## Historical Metrics Ingestion 지연 시간 {#historical-metrics-ingestions-latency}
 
-과거 메트릭 수집의 지연 시간은 메트릭 타임스탬프가 얼마나 과거인지에 따라 달라집니다.
+Historical Metrics Ingestion의 지연 시간은 메트릭 타임스탬프가 얼마나 과거인지에 따라 달라집니다.
 
 | 메트릭 지연 기간:   | 수집 지연 시간 |
 |----------------------|-------------------------------------------|
@@ -454,7 +454,7 @@ public class DogStatsdClient
 | 12시간~30일   | 최대 14시간 지연                    |
 | 30일 초과         | 14시간 이상 지연                     |
 
-## 과거 메트릭 수집 청구 {#historical-metrics-ingestion-billing}
+## Historical Metrics Ingestion 청구 {#historical-metrics-ingestion-billing}
 
 과거 메트릭은 인덱싱된 사용자 지정 메트릭으로 계산되어 청구됩니다. 청구 대상 사용자 지정 메트릭은 **제출된 메트릭의 타임스탬프**로 결정되며, 그 타임스탬프가 오늘 날짜든 15개월 전이든 상관없습니다. 해당 메트릭 이름과 태그-값 조합이 제출된 시간 동안 **어떤** 값이라도 보고하고 있다면(타임스탬프와 무관하게) 해당 시간에 활성 상태로 간주됩니다. 
 

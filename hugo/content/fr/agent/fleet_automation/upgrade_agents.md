@@ -19,10 +19,10 @@ Sur US1-FED et US2-FED, les mises à niveau à distance nécessitent l'Agent 7.8
 </div>
 {{< /site-region >}}
 
-- [Remote Configuration][7] activée pour votre organisation et la clé d'API de l'Agent
-- [Remote updates][8] activées sur chaque Agent de VM cible (`remote_updates: true`)
-- Agent version 7.71.1 ou ultérieure pour Windows et 7.69.0 ou ultérieure pour Linux
-- Des VM Linux ou des VM Windows
+- [Remote Configuration][7] activée pour votre organisation et pour la clé d'API utilisée par vos Agents. Les deux sont activées par défaut.
+- [Remote updates][8] activées sur chaque Agent de VM cible (`remote_updates: true`).
+- Agent version 7.71.1 ou ultérieure pour Windows et 7.69.0 ou ultérieure pour Linux.
+- Des VM Linux ou des VM Windows.
 - Au moins 2 GB d'espace disque pour l'installation initiale de l'Agent, plus 2 GB supplémentaires pour les mises à niveau. (La mise à niveau nécessite 1.3 GB dans `/opt/datadog-packages` sur Linux ou `C:\ProgramData\Datadog\Installer\packages` sur Windows. L'espace supplémentaire permet de conserver temporairement deux installations de l'Agent pendant la mise à niveau au cas où un retour à la version précédente serait nécessaire.)
 
 <div class="alert alert-info">
@@ -83,11 +83,11 @@ Utilisez le fournisseur Terraform Datadog pour créer et gérer les plannings de
 
 Avant de commencer :
 
-- Vérifiez que les Agents remplissent les [prérequis de mise à niveau](#prerequisites).
+- Vérifiez que les Agents respectent les [prérequis de mise à niveau](#prerequisites).
 - [Configurez le fournisseur Terraform Datadog][9] (version 4.22.0 ou ultérieure).
 - Utilisez une clé d'application avec les autorisations `agent_upgrade_write` et `hosts_read`.
 
-L'exemple suivant définit un planning inactif pour les hosts correspondant à `env:staging service:example`. Le planning cible la dernière version de l'Agent (`version_to_latest = 0`). Il spécifie une fenêtre de maintenance de deux heures (`maintenance_window_duration = 120`, en minutes), commençant à 03:00 les mardis et jeudis dans le fuseau horaire `America/New_York`.
+L'exemple suivant définit un planning inactif pour les hosts correspondant à `env:staging service:example`. Le planning cible la dernière version de l'Agent (`version_to_latest = 0`). Il spécifie une fenêtre de maintenance de deux heures (`maintenance_window_duration = 120`, en minutes), commençant à 03 h 00 les mardis et jeudis dans le fuseau horaire `America/New_York`.
 
 ```hcl
 resource "datadog_fleet_schedule" "staging" {
@@ -105,9 +105,9 @@ resource "datadog_fleet_schedule" "staging" {
 }
 ```
 
-Remplacez la requête de recherche des hosts et la fenêtre de maintenance par des valeurs adaptées à votre environnement. Exécutez `terraform plan` pour examiner les modifications, puis `terraform apply` pour créer le planning. Lorsque vous êtes prêt à activer les mises à niveau planifiées, définissez `status` sur `active` et appliquez la modification.
+Remplacez la requête de hosts et la fenêtre de maintenance par des valeurs adaptées à votre environnement. Exécutez `terraform plan` pour examiner les modifications, puis `terraform apply` pour créer le planning. Lorsque vous êtes prêt à activer les mises à niveau planifiées, réglez `status` sur `active` et appliquez la modification.
 
-Pour connaître toutes les options prises en charge et les instructions d'importation d'un planning existant, consultez la [documentation de la ressource `datadog_fleet_schedule`][10].
+Pour toutes les options prises en charge et les instructions d'importation d'un planning existant, consultez la [documentation de la ressource `datadog_fleet_schedule`][10].
 
 ## Processus de mise à niveau {#upgrade-process}
 

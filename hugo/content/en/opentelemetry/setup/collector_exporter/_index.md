@@ -21,9 +21,9 @@ further_reading:
 - link: "/opentelemetry/config/otlp_receiver"
   tag: "Documentation"
   text: "Enable the OTLP Receiver"
-- link: "/opentelemetry/setup/ddot_collector/install/"
+- link: "/opentelemetry/setup/ddot_collector/kubernetes/"
   tag: "Documentation"
-  text: "Install the DDOT Collector (Recommended)"
+  text: "Install the DDOT Collector on Kubernetes (Recommended)"
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
@@ -41,7 +41,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
-This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
+This is the recommended setup for a Collector you manage yourself. If you want a Collector that Datadog builds and supports, use the [DDOT Collector][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
@@ -55,7 +55,7 @@ For cluster-wide Kubernetes metrics and Kubernetes Explorer, see [Kubernetes Met
 
 This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Upstream OpenTelemetry Collector**.
+This setup does not support serverless or task-based container runtimes such as ECS Fargate, EKS Fargate, or AWS Lambda. For supported Datadog features, see [Feature Compatibility][7] for the upstream OpenTelemetry SDK and upstream OpenTelemetry Collector.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -874,7 +874,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 
 ### 3. Configure your application
 
-Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+Configure your OpenTelemetry-instrumented application to send data to the Collector. If your application isn't instrumented yet, see [Instrument Your Applications][502]. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -1009,12 +1009,13 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
-[7]: /opentelemetry/compatibility/
+[7]: /opentelemetry/compatibility/?otel_sdk=upstream_otel_sdk&otel_destination=upstream_otel_collector#feature-compatibility
 [8]: /opentelemetry/setup/otlp_ingest/#intake-limits
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /opentelemetry/setup/ddot_collector/install/
+[12]: /opentelemetry/setup/ddot_collector/
 [13]: /opentelemetry/integrations/kubernetes_metrics/
 [14]: /opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[502]: /opentelemetry/instrument/

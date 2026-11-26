@@ -96,7 +96,7 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 ## Git information
 
-Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear on the [Recent Code Changes page][4]. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
+Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
 
 ## Further reading
 
@@ -105,4 +105,3 @@ Providing Git information of the commit that triggered the pipeline execution is
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
-[4]: https://app.datadoghq.com/ci/commits

@@ -6,7 +6,7 @@ code_lang_weight: 7
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 ---
 
 ## Overview
@@ -14,7 +14,7 @@ further_reading:
 Deploy the Agent's Collector on Amazon EKS Fargate. The Agent's Collector is the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
 
 <div class="alert alert-info">
-  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
+  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Add Components to the Agent's Collector</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
 </div>
 
 ## Requirements
@@ -33,7 +33,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and upstream OpenTelemetry SDK + Agent's Collector configurations. In this route, the Agent's Collector receives and forwards OTLP metrics and logs.</div>
 
 ### Set up Datadog API key
 

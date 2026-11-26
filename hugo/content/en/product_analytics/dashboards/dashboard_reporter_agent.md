@@ -18,13 +18,12 @@ further_reading:
 - link: "/monitors/"
   tag: "Documentation"
   text: "Monitors"
+- link: "https://www.datadoghq.com/blog/agentic-reporting-product-analytics/"
+  tag: "Blog"
+  text: "Let your product dashboards report to you with the Dashboard Reporter Agent"
 algolia:
   tags: ['dashboard reporter', 'agentic reporting', 'scheduled report', 'product analytics agent']
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/product-analytics-dashboard-reporter-agent/" btn_hidden="false" header="Join the Preview!">}}
-Dashboard Reporter Agent is in Preview. Complete the form to request access.
-{{< /callout >}}
 
 ## Overview
 

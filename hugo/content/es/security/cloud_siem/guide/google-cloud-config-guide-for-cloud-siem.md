@@ -150,6 +150,8 @@ El comportamiento predeterminado para los trabajadores de canalización de Dataf
       **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.
    1. En el campo **Output deadletter Pub/Sub topic**, seleccione el [tema adicional](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) que creó anteriormente para recibir los mensajes rechazados por la Datadog API.
    1. Especifique una ruta para los archivos temporales en su bucket de almacenamiento en el campo **Temporary location**.
+1. En {{< ui >}}Optional Parameters{{< /ui >}}, marque {{< ui >}}Include full Pub/Sub message in the payload{{< /ui >}}.<br />
+   **Nota**: Las reglas de detección de Cloud SIEM y el paquete de contenido de Google Cloud Audit Logs esperan que los campos de registro de auditoría estén anidados bajo `@data`. Si no marca esta opción, los registros seguirán llegando a Datadog, pero las reglas de detección no podrán encontrar coincidencias en ellos.
 1. Si [creó un secreto en Secret Manager](#create-a-secret-in-secret-manager) para el valor de su clave de API de Datadog anteriormente:
    1. Haga clic en {{< ui >}}Optional Parameters{{< /ui >}} para ver los campos adicionales.
    1. Ingrese el nombre del recurso del secreto en el campo **Google Cloud Secret Manager ID**.<br />

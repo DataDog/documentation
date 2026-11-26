@@ -1,0 +1,95 @@
+---
+title: Campaigns and Plans
+description: "Learn how Bits Maintenance uses campaigns and plans to roll out open source software upgrades across your Kubernetes clusters in ordered stages."
+further_reading:
+- link: "/bits_ai/bits_maintenance/"
+  tag: "Documentation"
+  text: "Bits Maintenance"
+- link: "/bits_ai/bits_maintenance/setup/"
+  tag: "Documentation"
+  text: "Set up Bits Maintenance"
+- link: "/bits_ai/bits_maintenance/instructions_memories/"
+  tag: "Documentation"
+  text: "Bits Maintenance upgrade instructions and memories"
+- link: "/containers/monitoring/"
+  tag: "Documentation"
+  text: "Container Monitoring"
+---
+
+{{< callout url="https://www.datadoghq.com/product-preview/bits-maintenance/" btn_hidden="false" header="Join the Preview!" >}}
+Bits Maintenance is in Preview. Use this form to request access.
+{{< /callout >}}
+
+[Bits Maintenance][1] organizes upgrades into campaigns and plans. A [campaign](#campaigns) performs an upgrade in stages. Each stage includes one or more [installations](#installations) of a software project, and each installation has its own [plan](#plans). A plan uses your team's [upgrade instructions][7] and lists the steps Bits takes to upgrade that installation.
+
+## Campaigns
+
+Bits Maintenance creates a campaign to coordinate the rollout of multiple [installations](#installations) of a software project across your fleet through ordered stages.
+
+A campaign can upgrade one software project across many clusters, or several software projects on one cluster.
+
+{{< img src="bits_ai/maintenance/campaigns.png" alt="The Bits Maintenance Campaigns page, showing recommended upgrades for Argo CD, cert-manager, and ExternalDNS, and a list of active campaigns with their Bits activity and stage progress" style="width:100%;" >}}
+
+### Installations
+
+An installation is one instance of a supported software project deployed in a Kubernetes cluster. Bits Maintenance tracks the workloads that make up that instance together. For example, the controller, webhook, and certificate authority (CA) injector deployed by one `cert-manager` Helm release count as one installation.
+
+### Project campaigns vs. cluster campaigns
+
+There are two types of campaigns: project campaigns and cluster campaigns. Each type indicates the starting point for the campaign:
+
+- **Project campaign**: Start by choosing a software project, and upgrade its installations across all or selected clusters.
+    - Project campaigns can define a [rollout order][3]—for example, development clusters first, then staging, then production.
+- **Cluster campaign**: Start by choosing a cluster, and upgrade all or selected software projects on it.
+
+### Create a campaign
+
+To create a campaign in Datadog:
+1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Campaigns{{< /ui >}}][5].
+1. Click {{< ui >}}Create Campaign{{< /ui>}}.
+1. Choose a [campaign type](#project-campaigns-vs-cluster-campaigns): {{< ui >}}Project{{< /ui>}} or {{< ui >}}Cluster{{< /ui>}}.
+1. Fill in the required fields, then click {{< ui >}}Create Campaign{{< /ui>}}.
+
+## Plans
+
+A plan describes the upgrade of one [installation](#installations) of a software project. Each plan has multiple steps. Common plan steps include preflight checks, soaks, pull request merge gates, and postflight checks. Bits uses your [upgrade instructions][7] when building plans to tailor them to your organization's specific way of working.
+
+The [operational profile][4] determines whether Bits needs your approval before it executes a plan.
+
+You can view plan steps in an interactive workflow diagram:
+
+{{< img src="bits_ai/maintenance/plan_steps.png" alt="The Steps tab of a Bits Maintenance plan to upgrade AWS Load Balancer Controller from 2.17.1 to 3.4.3, showing a workflow diagram of steps including a preflight check, an infrastructure as code (IaC) pull request, a merge gate, and a soak" style="width:100%;" >}}
+
+While a plan is awaiting approval, you can add [custom steps](#custom-steps) and remove any step except preflight and postflight checks.
+
+### Custom steps
+
+A custom step can be:
+- **Human**: Requires a person to perform an action before the plan continues.
+- **Workflow**: Executes a [Datadog workflow][2] and waits for it to complete before the plan continues.
+
+Datadog saves each custom step you create, so you can reuse it in other plans.
+
+To add a custom step to a plan:
+1. Navigate to [{{< ui >}}Bits Maintenance{{< /ui>}} > {{< ui >}}Plans{{< /ui>}}][6].
+1. Select a plan that is awaiting approval.
+1. Click {{< ui >}}Revise Plan{{< /ui>}}.
+1. In the interactive workflow diagram, hover over an arrow and click {{< ui >}}Insert custom step{{< /ui>}}.
+1. Add an existing custom step your team has already created, or create one:
+    - To add an existing custom step, select it, then click {{< ui >}}Add Step{{< /ui>}}.
+    - To create a custom step:
+        1. Click {{< ui >}}Create Custom Step{{< /ui>}}.
+        1. Select either {{< ui >}}Human{{< /ui>}} or {{< ui >}}Workflow{{< /ui>}}, then fill in the fields.
+        1. Click {{< ui >}}Create and Add Step{{< /ui>}}.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /bits_ai/bits_maintenance/
+[2]: /actions/workflows/
+[3]: /bits_ai/bits_maintenance/setup/#step-5-optional-create-a-rollout-order
+[4]: /bits_ai/bits_maintenance/setup/#step-4-recommended-create-an-operational-profile
+[5]: https://app.datadoghq.com/bits-ai/maintenance/campaigns
+[6]: https://app.datadoghq.com/bits-ai/maintenance/plans
+[7]: /bits_ai/bits_maintenance/instructions_memories/#upgrade-instructions

@@ -385,7 +385,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [3]: /dashboards/
 [4]: /metrics/custom_metrics/
 [5]: /getting_started/tagging/
-[6]: /api/v1/metrics/#edit-metric-metadata
+[6]: /api/latest/metrics/#edit-metric-metadata
 [7]: /metrics/units/
 [8]: /metrics/types/
 [9]: /integrations/

@@ -11,95 +11,95 @@ aliases:
 - /es/tracing/runtime_metrics/nodejs
 - /es/tracing/runtime_metrics/python
 - /es/tracing/runtime_metrics/ruby
-description: Obtén información adicional sobre el rendimiento de una aplicación con
-  las métricas de tiempo de ejecución asociadas a tus trazas.
+description: Obtenga información adicional sobre el rendimiento de una aplicación
+  con las métricas de tiempo de ejecución asociadas a sus trazas.
 further_reading:
 - link: /opentelemetry/integrations/runtime_metrics/
   tag: Documentación
-  text: Métricas de Tiempo de Ejecución de OpenTelemetry
+  text: Métricas de tiempo de ejecución de OpenTelemetry
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: Documentación
-  text: Correlaciona tus registros y trazas
+  text: Correlacione sus registros y trazas
 - link: tracing/trace_collection/custom_instrumentation
   tag: Documentación
-  text: Instrumenta manualmente tu aplicación para crear trazas.
+  text: Instrumente manualmente su aplicación para crear trazas.
 - link: tracing/glossary/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
-title: Métricas de Tiempo de Ejecución
+  text: Explore sus servicios, recursos y trazas
+title: Runtime Metrics
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Las métricas de tiempo de ejecución monitorean el uso de memoria de tu aplicación, la recolección de basura y la paralelización. Los SDK de Datadog recopilan automáticamente estas métricas para entornos compatibles y las envían al Datadog Agent.
+Las métricas de tiempo de ejecución monitorean el uso de memoria, la recolección de basura y la paralelización de su aplicación. Los SDK de Datadog recopilan automáticamente estas métricas para los entornos compatibles.
 
-Estas métricas te ayudan a identificar cuellos de botella, solucionar problemas de rendimiento y optimizar la utilización de recursos. Al ver las métricas de tiempo de ejecución junto con trazas y registros, obtienes una visibilidad completa sobre la salud y el rendimiento de tu aplicación.
+Estas métricas le ayudan a identificar cuellos de botella, solucionar problemas de rendimiento y optimizar la utilización de recursos. Al ver las métricas de tiempo de ejecución junto con las trazas y los registros, obtiene una visibilidad integral de la salud y el rendimiento de su aplicación.
 
-Si instrumentas tu aplicación con OpenTelemetry en lugar de las bibliotecas de trazado de Datadog, consulta [Métricas de Tiempo de Ejecución de OpenTelemetry][10] para las instrucciones de configuración.
+Para las métricas de tiempo de ejecución recopiladas por los SDK de OpenTelemetry de origen, consulte [Métricas de tiempo de ejecución de OpenTelemetry][10] para obtener instrucciones de configuración.
 
 ## Compatibilidad {#compatibility}
 
-Las métricas de tiempo de ejecución están disponibles para varios lenguajes de programación y entornos de ejecución, con diferentes niveles de soporte y opciones de configuración. 
+Las métricas de tiempo de ejecución están disponibles para varios lenguajes de programación y entornos de ejecución, con distintos niveles de soporte y opciones de configuración. 
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-- **Habilitado por defecto**: Sí
-- **Versión de la Biblioteca**: 0.29.0+
-- **Entornos de Ejecución**: Java 8+
+- **Habilitado de forma predeterminada**: Sí
+- **Versión de la biblioteca**: 0.29.0+
+- **Entornos de ejecución**: Java 8+
 
-<div class="alert alert-danger">La recopilación de métricas JMX no es compatible en entornos de AWS Lambda.</div>
+<div class="alert alert-danger">La recopilación de métricas JMX no se admite en entornos de AWS Lambda.</div>
 
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
-  - **Habilitado por defecto**: No
+  - **Habilitado de forma predeterminada**: No
   - **Versión de la biblioteca**: 0.30.0+
   - **Nivel de soporte**: Vista previa
-  - **Entornos de ejecución**: Todas las versiones de Python soportadas
+  - **Entornos de ejecución**: Todas las versiones de Python compatibles
 
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-  - **Habilitado por defecto**: No
+  - **Habilitado de forma predeterminada**: No
   - **Versión de la biblioteca**: 0.44.0+
-  - **Entornos de ejecución**: Todas las versiones de Ruby soportadas
+  - **Entornos de ejecución**: Todas las versiones de Ruby compatibles
 
 
-<div class="alert alert-info">Debes agregar la gema <a href="https://rubygems.org/gems/dogstatsd-ruby">dogstatsd-ruby</a> a tu aplicación.</div>
+<div class="alert alert-info">Debe agregar la gema <a href="https://rubygems.org/gems/dogstatsd-ruby">dogstatsd-ruby</a> a su aplicación.</div>
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
-  - **Habilitado por defecto**: No
+  - **Habilitado de forma predeterminada**: No
   - **Versión de la biblioteca**: 1.18.0+
-  - **Entornos de ejecución**: Todas las versiones de Go soportadas
+  - **Entornos de ejecución**: Todas las versiones de Go compatibles
 
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-  - **Habilitado por defecto**: No
+  - **Habilitado de forma predeterminada**: No
   - **Versión de la biblioteca**: 3.0.0+
-  - **Entornos de ejecución**: Todas las versiones de Node.js soportadas
+  - **Entornos de ejecución**: Todas las versiones de Node.js compatibles
 
 {{% /tab %}}
 
 {{% tab ".NET" %}}
 
-  - **Habilitado por defecto**: Sí, en .NET 6+ (v3.40.0+).
+  - **Habilitado de forma predeterminada**: Sí, en .NET 6+ (v3.40.0+).
   - **Versión de la biblioteca**: 1.23.0+
-  - **Entornos de ejecución**: .NET Framework 4.6.1+ y .NET Core 3.1+ (incluyendo .NET 5 y versiones más recientes).
+  - **Entornos de ejecución**: .NET Framework 4.6.1+ y .NET Core 3.1+ (incluidos .NET 5 y versiones posteriores).
 
 #### Permisos para Internet Information Services (IIS) (solo .NET Framework) {#permissions-for-internet-information-services-iis-net-framework-only}
 
-En .NET Framework, las métricas se recopilan utilizando contadores de rendimiento. Los usuarios en sesiones de inicio de sesión no interactivas (que incluyen cuentas de pool de aplicaciones de IIS y algunas cuentas de servicio) deben ser añadidos al **grupo Usuarios de Seguimiento del Rendimiento** para acceder a los datos de contadores.
+En .NET Framework, las métricas se recopilan mediante contadores de rendimiento. Los usuarios en sesiones de inicio de sesión no interactivas (lo que incluye cuentas de grupos de aplicaciones de IIS y algunas cuentas de servicio) deben agregarse al grupo {{< ui >}}Performance Monitoring Users{{< /ui >}} para acceder a los datos de los contadores.
 
-Los pools de aplicaciones de IIS utilizan cuentas especiales que no aparecen en la lista de usuarios. Para añadirlos al grupo Usuarios de Seguimiento del Rendimiento, busque `IIS APPPOOL\<name of the pool>`. Por ejemplo, el usuario para el DefaultAppPool sería `IIS APPPOOL\DefaultAppPool`.
+Los grupos de aplicaciones de IIS utilizan cuentas especiales que no aparecen en la lista de usuarios. Para agregarlos al grupo Performance Monitoring Users, busque `IIS APPPOOL\<name of the pool>`. Por ejemplo, el usuario para DefaultAppPool sería `IIS APPPOOL\DefaultAppPool`.
 
-Esto se puede hacer desde la interfaz de "Computer Management" o desde un símbolo del sistema de administrador:
+Esto se puede hacer desde la interfaz de usuario de "Computer Management" o desde un símbolo del sistema de administrador:
 
 ```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
@@ -120,46 +120,48 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 
 ## Instrucciones de configuración {#setup-instructions}
 
-Para configurar las métricas de tiempo de ejecución, debes configurar tanto el Datadog Agent como tu aplicación.
+Las siguientes instrucciones exportan métricas de tiempo de ejecución a través de DogStatsD. Para la exportación OTLP, consulte [Exportar métricas de tiempo de ejecución a través de OTLP][12].
 
-### 1. Configura el Datadog Agent {#1-configure-the-datadog-agent}
+Para configurar las métricas de tiempo de ejecución, necesita configurar tanto el Datadog Agent como su aplicación.
 
-Habilita [DogStatsD para el Datadog Agent][2]. Por defecto, el Datadog Agent está configurado para ingerir métricas con UDP a través del puerto `8125`.
+### 1. Configure el Datadog Agent {#1-configure-the-datadog-agent}
+
+Habilite [DogStatsD para el Agent][2]. De forma predeterminada, el Datadog Agent está configurado para ingerir métricas con UDP a través del puerto `8125`.
 
 {{% collapse-content title="Configuración específica del contenedor" level="h4" expanded=false %}}
 
-Al ejecutar el Datadog Agent en entornos contenedorizados, se requiere configuración adicional:
+Cuando ejecute el Agent en entornos en contenedores, se requiere configuración adicional:
 
-1. Verifica que el tráfico no local de DogStatsD esté habilitado. Esta configuración está habilitada por defecto. Si anteriormente lo has deshabilitado, configura `dogstatsd_non_local_traffic: true` en tu archivo principal de configuración [`datadog.yaml`][8], o establece la [variable de entorno][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
-2. Sigue estas instrucciones de configuración específicas del contenedor:
+1. Verifique que el tráfico no local de DogStatsD esté habilitado. Esta configuración está habilitada de forma predeterminada. Si la ha deshabilitado previamente, establezca `dogstatsd_non_local_traffic: true` en su [`datadog.yaml` archivo de configuración principal][8], o establezca la [variable de entorno][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
+2. Siga estas instrucciones de configuración específicas del contenedor:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
 
 <br>
 
-{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2,uk1" >}}
 
-3. Establece `DD_SITE` en el Datadog Agent para {{< region-param key="dd_site" code="true" >}} para garantizar que el Datadog Agent envíe datos a la ubicación correcta de Datadog.
+3. Establezca `DD_SITE` en el Datadog Agent con el valor {{< region-param key="dd_site" code="true" >}} para asegurarse de que el Agent envíe datos a la ubicación correcta de Datadog.
 
 {{< /site-region >}}
 
 {{% /collapse-content %}}
 
-### 2. Configura tu aplicación {#2-configure-your-application}
+### 2. Configure su aplicación {#2-configure-your-application}
 
-Configura las métricas de tiempo de ejecución en tu aplicación utilizando variables de entorno. Algunos lenguajes también permiten configurar métricas de tiempo de ejecución [directamente en el código](#code-based-configuration).
+Configure las métricas de tiempo de ejecución en su aplicación usando variables de entorno. Algunos lenguajes también admiten la configuración de métricas de tiempo de ejecución [directamente en el código](#code-based-configuration).
 
 #### Variables de entorno {#environment-variables}
 
-Utiliza las siguientes variables de entorno para configurar métricas de tiempo de ejecución en tu aplicación:
+Utilice las siguientes variables de entorno para configurar las métricas de tiempo de ejecución en su aplicación:
 
 `DD_RUNTIME_METRICS_ENABLED`
 : **Predeterminado**: `true` para Java y .NET 6+ (v3.40.0+), `false` para todos los demás lenguajes y entornos de ejecución. <br>
-**Descripción**: Habilita la recopilación de métricas de tiempo de ejecución. Las métricas se envían al Datadog Agent, según lo configurado para la aplicación instrumentada.
+**Descripción**: Habilita la recopilación de métricas de tiempo de ejecución. Las métricas se envían al Datadog Agent, según la configuración de la aplicación instrumentada.
 
 `DD_RUNTIME_METRICS_RUNTIME_ID_ENABLED`
-: **Predeterminado**: `true` para Java, `false` para Node.js, Ruby y Python. No existe para .NET y Go; el `runtime_id` siempre se informa. <br>
-**Descripción**: Habilita métricas de tiempo de ejecución mejoradas, proporcionando una `runtime_id` etiqueta junto con cada métrica. La `runtime_id` representa el identificador de proceso de la aplicación y te permite correlacionar directamente las métricas de tiempo de ejecución con aplicaciones individuales en ejecución. 
+: **Predeterminado**: `true` para Java, `false` para Node.js, Ruby y Python. No existe para .NET y Go; el `runtime_id` siempre se reporta. <br>
+**Descripción**: Habilita métricas de tiempo de ejecución mejoradas, proporcionando una etiqueta `runtime_id` junto con cada métrica. El `runtime_id` representa el identificador de proceso de la aplicación y le permite correlacionar directamente las métricas de tiempo de ejecución con las aplicaciones en ejecución individuales. 
 
 `DD_AGENT_HOST`
 : **Predeterminado**: `localhost` <br>
@@ -170,38 +172,38 @@ Utiliza las siguientes variables de entorno para configurar métricas de tiempo 
 **Descripción**: Establece el puerto para el envío de métricas del SDK.
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
-: **Predeterminado**: `true` iniciando el rastreador v3.40.0+ en .NET 8+ y (.NET 6/7 cuando `DD_RUNTIME_METRICS_ENABLED` no está configurado explícitamente), de lo contrario `false`. <br>
-**Descripción**: Disponible a partir de .NET 6. Controla si el rastreador de .NET utiliza la nueva API de [`System.Diagnostics.Metrics`][9] para recopilar las métricas en lugar del colector basado en `EventListener`.
+: **Predeterminado**: `true` a partir de la versión v3.40.0+ del trazador en .NET 8+ y en .NET 6/7 cuando `DD_RUNTIME_METRICS_ENABLED` no está configurado explícitamente; de lo contrario, `false`. <br>
+**Descripción**: Disponible a partir de .NET 6. Controla si el trazador de .NET utiliza la nueva API [`System.Diagnostics.Metrics`][9] para recopilar las métricas en lugar del recopilador basado en `EventListener`.
 
 #### Configuración basada en código {#code-based-configuration}
 
-Además de las variables de entorno, algunos lenguajes permiten configurar métricas de tiempo de ejecución directamente en el código.
+Además de las variables de entorno, algunos lenguajes admiten la configuración de métricas de tiempo de ejecución directamente en el código.
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Solo puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables).
+Solo puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables).
 
-Sin embargo, puedes ampliar las métricas recopiladas agregando métricas JMX personalizadas. Para más información, consulta la documentación de [Integración JMX][100].
+Sin embargo, puede ampliar las métricas recopiladas añadiendo métricas JMX personalizadas. Para obtener más información, consulte la documentación de [JMX Integration][100].
 
 [100]: /es/integrations/java/
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
-Puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en código:
+Puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en el código:
 
 ```python
 from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-danger">Esto solo se aplica si no estás utilizando <code>ddtrace-run</code></div>
+<div class="alert alert-danger">Esto solo se aplica si no está utilizando <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
 
-Puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en código:
+Puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en el código:
 
 ```ruby
 # config/initializers/datadog.rb
@@ -221,7 +223,7 @@ end
 
 {{% tab "Go" %}}
 
-Puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en código:
+Puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en el código:
 
 ```go
 // Basic configuration
@@ -234,7 +236,7 @@ tracer.Start(
 )
 ```
 
-La opción `WithDogstatsdAddr` te permite especificar una dirección personalizada para el servidor DogStatsD. Utiliza la opción [`WithDogstatsdAddr`][101] (o [`WithDogstatsdAddress` v1][100]) si tu dirección difiere de la predeterminada `localhost:8125`. (Disponible para 1.18.0+)
+La opción `WithDogstatsdAddr` le permite especificar una dirección personalizada para el servidor DogStatsD. Utilice la opción [`WithDogstatsdAddr`][101] (o [`WithDogstatsdAddress` v1][100]) si su dirección difiere de la `localhost:8125` predeterminada. (Disponible para 1.18.0+)
 
 [100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddr
@@ -242,7 +244,7 @@ La opción `WithDogstatsdAddr` te permite especificar una dirección personaliza
 
 {{% tab "Node.js" %}}
 
-Puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en código:
+Puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables) o en el código:
 
 ```js
 const tracer = require('dd-trace').init({
@@ -254,28 +256,41 @@ const tracer = require('dd-trace').init({
 
 {{% tab ".NET" %}}
 
-Solo puedes habilitar métricas de tiempo de ejecución con [variables de entorno](#environment-variables).
+Solo puede habilitar las métricas de tiempo de ejecución con [variables de entorno](#environment-variables).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tableros {#dashboards}
+## Exportar métricas de tiempo de ejecución mediante OTLP {#export-runtime-metrics-over-otlp}
 
-Una vez que la configuración esté completa, puedes ver las métricas de tiempo de ejecución en:
+Utilice uno de los siguientes SDK de DDOT para exportar métricas de tiempo de ejecución mediante OTLP:
+
+| SDK | Versión mínima del SDK | Requisito de tiempo de ejecución |
+|-----|---------------------|---------------------|
+| Java | v1.63.0 | Java 8+ |
+| .NET | v3.44.0 | .NET 6+ |
+| Node.js | v5.107.0 | Una versión de Node.js compatible con el SDK |
+| Go | v2.10.0 | Una versión de Go compatible con el SDK |
+
+Para conocer las variables de entorno y la configuración del punto de conexión, consulte [Exportar métricas de tiempo de ejecución mediante OTLP][11].
+
+## Dashboards {#dashboards}
+
+Una vez completada la configuración, puede ver las métricas de tiempo de ejecución en:
 
 - La página de detalles del servicio instrumentado
-- La gráfica de llamas, pestaña **Métricas**
-- Tableros de tiempo de ejecución predeterminados
+- La pestaña {{< ui >}}Metrics{{< /ui >}} de gráfico de flama
+- Paneles predeterminados de tiempo de ejecución
 
-{{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="Traza de tiempo de ejecución de JVM" >}}
+{{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
 ## Solución de problemas {#troubleshooting}
-- Para asociar métricas de tiempo de ejecución dentro de flame graphs, asegúrese de que la etiqueta `env` (sensible a mayúsculas) esté configurada y coincida en su entorno.
-- Para que las métricas de tiempo de ejecución aparezcan en la página del servicio al usar Fargate, asegúrese de que `DD_DOGSTATSD_TAGS` esté configurado en su tarea de Agent, y que la etiqueta `env` configurada coincida con el `env` del servicio instrumentado.
+- Para asociar métricas de tiempo de ejecución dentro de los gráficos de flama, asegúrese de que la etiqueta `env` (que distingue entre mayúsculas y minúsculas) esté configurada y coincida en todo su entorno.
+- Para que las métricas de tiempo de ejecución aparezcan en la página del servicio al usar Fargate, asegúrese de que `DD_DOGSTATSD_TAGS` esté configurado en su tarea de Agent y que la etiqueta `env` configurada coincida con el `env` del servicio instrumentado.
 
 ## Datos recopilados {#data-collected}
 
-Cada lenguaje soportado recopila un conjunto de métricas de tiempo de ejecución que proporcionan información sobre el uso de memoria, la recolección de basura, la utilización de CPU y otros indicadores de rendimiento.
+Cada lenguaje compatible recopila un conjunto de métricas de tiempo de ejecución que proporcionan información sobre el uso de memoria, la recolección de basura, la utilización de CPU y otros indicadores de rendimiento.
 
 {{< tabs >}}
 {{< tab "Java" >}}
@@ -303,7 +318,7 @@ Cada lenguaje soportado recopila un conjunto de métricas de tiempo de ejecució
 {{< /tab >}}
 {{< /tabs >}}
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -313,3 +328,5 @@ Cada lenguaje soportado recopila un conjunto de métricas de tiempo de ejecució
 [8]: /es/agent/configuration/agent-configuration-files/#main-configuration-file
 [9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
 [10]: /es/opentelemetry/integrations/runtime_metrics/
+[11]: /es/opentelemetry/config/environment_variable_support/#export-runtime-metrics-over-otlp
+[12]: #export-runtime-metrics-over-otlp

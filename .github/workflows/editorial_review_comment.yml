@@ -1,0 +1,62 @@
+# Comments on open PRs for a DOCS work ticket with the key of its new Editorial Review
+# ticket. A Jira Automation rule triggers this workflow through workflow_dispatch after it
+# creates the Editorial Review ticket. PRs match the same way as in
+# editorial_review_ticket.yml: the work ticket key in the PR title or branch name, or a
+# "Fixes DOCS-XXXXX" line in the PR description.
+name: Editorial review ticket comment
+on:
+  workflow_dispatch:
+    inputs:
+      work_key:
+        description: 'DOCS work ticket key, for example DOCS-12345'
+        required: true
+        type: string
+      er_key:
+        description: 'Editorial Review ticket key, for example DOCS-12346'
+        required: true
+        type: string
+
+permissions:
+  pull-requests: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    name: Comment on PRs for the work ticket
+    steps:
+      - name: Comment on matching PRs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          WORK_KEY: ${{ inputs.work_key }}
+          ER_KEY: ${{ inputs.er_key }}
+        run: |
+          for key in "$WORK_KEY" "$ER_KEY"; do
+            if ! [[ "$key" =~ ^DOCS-[0-9]+$ ]]; then
+              echo "Invalid ticket key: $key"
+              exit 1
+            fi
+          done
+
+          prs=$(gh pr list --state open --limit 2000 --json number,title,headRefName,body \
+            | jq -r --arg key "$WORK_KEY" '
+                .[]
+                | select(
+                    ((.title + "\n" + .headRefName) | ascii_upcase | test("\\b" + $key + "\\b"))
+                    or ((.body // "") | ascii_upcase | test("FIXES " + $key + "\\b"))
+                  )
+                | .number')
+
+          if [ -z "$prs" ]; then
+            echo "No open PR found for $WORK_KEY."
+            exit 0
+          fi
+
+          for pr in $prs; do
+            if gh pr view "$pr" --json comments -q '.comments[].body' | grep -qF "$ER_KEY"; then
+              echo "PR #$pr already mentions $ER_KEY. Skipping."
+              continue
+            fi
+            gh pr comment "$pr" --body "Docs editorial review ticket: $ER_KEY"
+            echo "Commented on PR #$pr."
+          done

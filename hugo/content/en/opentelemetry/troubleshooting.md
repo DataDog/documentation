@@ -8,6 +8,12 @@ further_reading:
 
 If you experience unexpected behavior using OpenTelemetry with Datadog, this guide may help you resolve the issue. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
+## DDOT SDK configuration
+
+DDOT SDK startup logs report the effective values of important OpenTelemetry configuration settings. Use this information to check whether the SDK applied the configuration you intended when troubleshooting missing telemetry or unexpected behavior. The settings reported depend on the SDK language and version. A configuration log does not confirm successful telemetry delivery.
+
+For instructions to enable and locate these logs, see [Tracer Startup Logs][18].
+
 ## Incorrect or unexpected hostnames
 
 When using OpenTelemetry with Datadog, you might encounter various hostname-related issues. The following sections cover common scenarios and their solutions.
@@ -326,13 +332,13 @@ To verify the configuration:
 
 ## Port binding errors and connection failures
 
-**Symptom**: You experience port conflicts or binding issues when deploying the DDOT Collector, or applications cannot connect to the DDOT Collector.
+**Symptom**: You experience port conflicts or binding issues when deploying the Agent's Collector, or applications cannot connect to the Agent's Collector.
 
 **Cause**: This typically occurs due to port naming conflicts, incorrect port configurations, or when multiple services attempt to use the same ports.
 
 **Resolution**:
 
-The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
+The Datadog Operator automatically binds the Agent's Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
 To explicitly override the default ports, use the `features.otelCollector.ports` parameter:
 
@@ -373,3 +379,4 @@ features:
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
 [16]: /opentelemetry/setup/ddot_collector/kubernetes/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
+[18]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration

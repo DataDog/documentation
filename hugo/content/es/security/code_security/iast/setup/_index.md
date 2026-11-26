@@ -10,20 +10,20 @@ title: Configure el Análisis de código en tiempo de ejecución (IAST)
 Antes de configurar Runtime Code Analysis (IAST), asegúrese de que se cumplan los siguientes requisitos previos:
 
 1. **Instalación del Datadog Agent:** El Datadog Agent está instalado y configurado para el sistema operativo o contenedor, la nube o el entorno virtual de su aplicación.
-2. **SDK compatible:** El Datadog SDK utilizado por su aplicación o servicio admite las capacidades de Runtime Code Analysis (IAST) para el lenguaje de su aplicación o servicio. Para obtener más detalles, consulte la sección **Requisitos de compatibilidad** a continuación.
+2. **SDK compatible:** El Datadog SDK utilizado por su aplicación o servicio admite capacidades de Runtime Code Analysis (IAST) para el lenguaje de su aplicación o servicio. Para obtener más detalles, consulte la sección **Requisitos de compatibilidad** a continuación.
 
 <div class="alert alert-info">El Datadog Agent y el SDK son los únicos requisitos para IAST. El rastreo de APM y Infrastructure Monitoring no son necesarios; IAST reporta hallazgos independientemente de ambos. Para deshabilitar APM o Infrastructure Monitoring, consulte <a href="#disable-apm-and-infrastructure-monitoring">Deshabilitar APM e Infrastructure Monitoring</a>. 
 <br>
-Incluso si APM está deshabilitado, se siguen generando costos de ingesta de APM al ingerir datos, como rastreos y spans de seguridad, para admitir IAST.</div>
+Incluso si APM está deshabilitado, se sigue incurriendo en costos de ingesta de APM por la ingesta de datos, como rastreos y spans de seguridad, para admitir IAST.</div>
 
-## Uso de Datadog SDKs {#using-datadog-sdks}
+## Uso de los SDK de Datadog {#using-datadog-sdks}
 
 Seleccione el lenguaje de su aplicación para obtener detalles sobre cómo habilitar Runtime Code Analysis (IAST) para su lenguaje y tipos de infraestructura.
 
 
 {{% collapse-content title="Java" level="h3" %}}
 
-Puede detectar vulnerabilidades a nivel de código y hacer un seguimiento de la seguridad de las aplicaciones Java que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
+Puede detectar vulnerabilidades a nivel de código y monitorear la seguridad de las aplicaciones en aplicaciones Java que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
 
 Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 
@@ -42,7 +42,7 @@ Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
    **Nota**: Los sistemas de archivos de solo lectura no son compatibles. La aplicación debe tener acceso a un directorio `/tmp` que se pueda escribir.
 
 
-#### CLI de Docker {#docker-cli}
+#### Docker CLI {#docker-cli}
 
 Actualice su contenedor de configuración para APM agregando el siguiente argumento en su comando `docker run`:
 
@@ -129,7 +129,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% collapse-content title=".NET" level="h3" %}}
 
-Puede detectar vulnerabilidades a nivel de código y hacer un seguimiento de la seguridad de las aplicaciones .NET que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
+Puede detectar vulnerabilidades a nivel de código y monitorear la seguridad de aplicaciones .NET que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
 
 Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 
@@ -144,7 +144,7 @@ Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 
 O uno de los siguientes métodos, dependiendo de dónde se ejecute su aplicación:
 
-#### Windows autohospedado {#windows-self-hosted}
+#### Windows-Self-Hosted {#windows-self-hosted}
 
 En una consola de Windows:
 
@@ -175,7 +175,7 @@ Agregue lo siguiente a la configuración de su aplicación:
 DD_IAST_ENABLED=true
 ```
 
-#### CLI de Docker {#docker-cli-1}
+#### Docker CLI {#docker-cli-1}
 
 Actualice su contenedor de configuración para APM agregando el siguiente argumento en su comando docker run:
 
@@ -257,7 +257,7 @@ Si necesita asistencia adicional, comuníquese con [soporte de Datadog][5].
 
 {{% collapse-content title="Node.js" level="h3" %}}
 
-Puede detectar vulnerabilidades a nivel de código y hacer un seguimiento de la seguridad de las aplicaciones Node.js que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
+Puede detectar vulnerabilidades a nivel de código y monitorear la seguridad de aplicaciones Node.js que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
 
 Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 
@@ -265,7 +265,7 @@ Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 2. Actualice su Datadog SDK al menos a la versión mínima necesaria para activar Runtime Code Analysis (IAST). Para obtener más detalles, consulte los **Requisitos de compatibilidad** a continuación.
 3. Agregue la variable de entorno `DD_IAST_ENABLED=true` a la configuración de su aplicación.
 
-   Si inicializa el Datadog SDK en la línea de comandos mediante la opción `--require` de Node.js:
+   Si inicializa el SDK de Datadog en la línea de comandos usando la opción `--require` para Node.js:
 
    ```shell
    node --require dd-trace/init app.js
@@ -276,7 +276,7 @@ Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
    ```
    La forma de hacerlo varía según dónde se ejecute su servicio:
 
-#### CLI de Docker {#docker-cli-2}
+#### Docker CLI {#docker-cli-2}
 
 Actualice su contenedor de configuración para APM agregando el siguiente argumento en su comando `docker run`:
 
@@ -344,7 +344,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% collapse-content title="Python" level="h3" %}}
 
-Puede detectar vulnerabilidades a nivel de código y hacer un seguimiento de la seguridad de las aplicaciones Python que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
+Puede detectar vulnerabilidades a nivel de código y monitorear la seguridad de aplicaciones Python que se ejecutan en Docker, Kubernetes, Amazon ECS y AWS Fargate.
 
 Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
 
@@ -361,7 +361,7 @@ Siga estos pasos para habilitar Runtime Code Analysis (IAST) en su servicio:
    O uno de los siguientes métodos, dependiendo de dónde se ejecute su aplicación:
 
 
-#### CLI de Docker {#docker-cli-3}
+#### Docker CLI {#docker-cli-3}
 
 Actualice su contenedor de configuración para APM agregando el siguiente argumento en su comando `docker run`:
 
@@ -431,8 +431,8 @@ Runtime Code Analysis (IAST) modifica el código Python en tiempo de ejecución.
 - Codetransformer
 - PyPy
 
-Además, Runtime Code Analysis (IAST) no propaga correctamente los rangos de contaminación sobre código nativo (compilado). Por lo tanto, si su base de código depende en gran medida de módulos escritos en C o C++,
-que utilizan la API de CPython, o de sistemas de lenguaje intermedio como Cython, los resultados podrían ser menos precisos de lo esperado.
+Además, Runtime Code Analysis (IAST) no propaga correctamente los rangos de contaminación en código nativo (compilado). Por lo tanto, si su base de código depende en gran medida de módulos escritos en C o C++,
+que usan la API de CPython, o de sistemas de lenguaje intermedio como Cython, los resultados podrían ser menos precisos de lo esperado.
 
 
 [1]: https://github.com/DataDog/dd-trace-py/releases
@@ -444,7 +444,7 @@ que utilizan la API de CPython, o de sistemas de lenguaje intermedio como Cython
 
 {{% /collapse-content %}}
 
-### Finalizando la configuración {#finishing-setup}
+### Finalización de la configuración {#finishing-setup}
 
 1. Reinicie su servicio.
 2. Para ver Runtime Code Analysis (IAST) en acción, explore su servicio y encuentre vulnerabilidades de IAST en el [Runtime Code (IAST) Vulnerability Explorer][4].
@@ -457,7 +457,7 @@ Si necesita asistencia adicional, comuníquese con [soporte de Datadog][5].
 
 ## Deshabilitar APM e Infrastructure Monitoring {#disable-apm-and-infrastructure-monitoring}
 
-Para ejecutar IAST sin rastreos de APM o métricas de infraestructura, deshabilítelos con las variables de entorno a continuación.
+Para ejecutar IAST sin rastreos de APM ni métricas de infraestructura, deshabilítelos con las variables de entorno que se indican a continuación.
 
 ### Deshabilitar el rastreo de APM {#disable-apm-tracing}
 
@@ -472,7 +472,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 ### Deshabilitar el monitoreo de infraestructura {#disable-infrastructure-monitoring}
 
-Para deshabilitar la recopilación de métricas de infraestructura en el Datadog Agent, configure `DD_INFRASTRUCTURE_MODE=none` en la configuración de su Datadog Agent:
+Para deshabilitar la recopilación de métricas de infraestructura en el Datadog Agent, configure `DD_INFRASTRUCTURE_MODE=none` en la configuración de su Agent:
 
 {{< code-block lang="bash" >}}
 DD_INFRASTRUCTURE_MODE=none
@@ -480,29 +480,29 @@ DD_INFRASTRUCTURE_MODE=none
 
 ## Requisitos de compatibilidad {#compatibility-requirements}
 
-Las siguientes capacidades de Code Security son compatibles con el SDK de cada lenguaje:
+Las siguientes capacidades de seguridad de código son compatibles con el SDK de cada lenguaje:
 
 | Capacidad de Code Security                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
-| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | no se admite  | no se admite | no se admite |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | no compatible  | no compatible | no compatible |
 
-**Nota**: Las capacidades de **Static Software Composition Analysis (SCA)** y **Static Code Analysis (SAST)** no requieren el SDK de Datadog. Por lo tanto, los requisitos enumerados a continuación no se aplican a estas dos capacidades de Code Security.
+**Nota**: Las capacidades **Static Software Composition Analysis (SCA)** y **Static Code Analysis (SAST)** no requieren el SDK de Datadog. Por lo tanto, los requisitos enumerados a continuación no se aplican a estas dos capacidades de Code Security.
 
-Seleccione el lenguaje de su aplicación para obtener detalles sobre la compatibilidad con los frameworks y las funciones disponibles.
+Seleccione el lenguaje de su aplicación para obtener detalles sobre la compatibilidad de marcos y el soporte de funciones.
 
 {{% collapse-content title="Java" level="h3" %}}
 
 ### Capacidades de Code Security {#code-security-capabilities}
 
-Las siguientes capacidades de Code Security son compatibles con la biblioteca de Java para la versión del trazador especificada:
+Las siguientes capacidades de seguridad de código son compatibles con la biblioteca de Java, para la versión del trazador especificada:
 
 | Capacidad de Code Security                    | Versión mínima del trazador de Java |
 | ------------------------------------------- | ----------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.1.4                       |
 | Runtime Code Analysis (IAST)                | 1.15.0                      |
 
-La versión mínima del trazador para obtener todas las capacidades de Code Security admitidas para Java es 1.15.0.
+La versión mínima del trazador para obtener todas las capacidades de seguridad de código compatibles para Java es 1.15.0.
 
 #### Tipos de implementación admitidos {#supported-deployment-types}
 | Tipo              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST)        |
@@ -514,12 +514,12 @@ La versión mínima del trazador para obtener todas las capacidades de Code Secu
 | AWS Lambda        |                                             |                                     |
 | Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Nota**: Azure App Service es compatible **únicamente con aplicaciones web**. Code Security no es compatible con Azure Functions.
+**Nota**: Azure App Service solo es compatible con **aplicaciones web**. Code Security no es compatible con Azure Functions.
 
-### Compatibilidad con lenguajes y marcos {#language-and-framework-compatibility}
+### Compatibilidad de lenguaje y marco {#language-and-framework-compatibility}
 
 #### Versiones de Java compatibles {#supported-java-versions}
-Java Tracer admite la instrumentación automática para los siguientes entornos de ejecución de JVM de Oracle JDK y OpenJDK.
+El trazador de Java admite la instrumentación automática para los siguientes entornos de ejecución de JVM de Oracle JDK y OpenJDK.
 
 | Versiones de JVM | Sistemas operativos                                                                     | Nivel de soporte                       | Versión del trazador |
 | -------------| ------------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
@@ -528,14 +528,14 @@ Java Tracer admite la instrumentación automática para los siguientes entornos 
 
 Datadog no admite oficialmente ninguna versión de acceso anticipado de Java.
 
-Las versiones 22 y posteriores son compatibles en versión preliminar.
+Las versiones 22 y superiores son compatibles en versión preliminar.
 
 #### Compatibilidad con marcos web {#web-framework-compatibility}
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes}
-- **Runtime Software Composition Analysis (SCA)** es compatible con todos los frameworks
-- Si **Runtime Code Analysis (IAST)** no es compatible con su framework, continúa detectando vulnerabilidades de Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag y Cookie without SameSite Flag.
+- **Runtime Software Composition Analysis (SCA)** es compatible con todos los marcos
+- Si **Runtime Code Analysis (IAST)** no es compatible con su marco, sigue detectando vulnerabilidades de Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag y Cookie without SameSite Flag.
 
-| Framework                   | Versiones         | Runtime Code Analysis (IAST)      |
+| Marco                   | Versiones         | Runtime Code Analysis (IAST)      |
 | --------------------------- | ---------------- | --------------------------------- |
 | Grizzly                     | 2.0+             | <i class="icon-check-bold"></i>   |
 | Glassfish                   |                  | <i class="icon-check-bold"></i>   |
@@ -549,17 +549,17 @@ Las versiones 22 y posteriores son compatibles en versión preliminar.
 
 **Nota**: Muchos servidores de aplicaciones son compatibles con Servlet y están cubiertos automáticamente por esa instrumentación, como Websphere, Weblogic y JBoss. Además, marcos de trabajo como Spring Boot (versión 3) funcionan de forma inherente porque generalmente utilizan un servidor de aplicaciones integrado compatible, como Tomcat, Jetty o Netty.
 
-<div class="alert alert-info">Si no encuentra su framework preferido en la lista, háganoslo saber. Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si no ve su marco preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-#### Compatibilidad de frameworks de red {#networking-framework-compatibility}
+#### Compatibilidad con marcos de red {#networking-framework-compatibility}
 
 `dd-java-agent` incluye soporte para rastrear automáticamente los siguientes marcos de trabajo de red.
 
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-1}
-- **Runtime Software Composition Analysis (SCA)** es compatible con todos los frameworks
+- **Runtime Software Composition Analysis (SCA)** es compatible con todos los marcos
 - Si **Runtime Code Analysis (IAST)** no es compatible con su framework, continúa detectando vulnerabilidades de Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing y X-Content-Type-Options Header Missing.
 
-| Framework                              | Versiones    | Runtime Code Analysis (IAST)                   |
+| Marco de trabajo                              | Versiones    | Runtime Code Analysis (IAST)                   |
 | -------------------------------------- | ----------- | ---------------------------------------------- |
 | Apache HTTP Client                     | 4.0+        |                                                |
 | gRPC                                   | 1.5+        |                                                |
@@ -584,7 +584,7 @@ Las versiones 22 y posteriores son compatibles en versión preliminar.
 
 ##### Notas sobre la capacidad de Code Security {#code-security-capability-notes-2}
 - **Runtime Software Composition Analysis (SCA)** es compatible con todos los marcos de trabajo
-- Si su marco de trabajo no es compatible con los que aparecen a continuación, **Runtime Code Analysis (IAST)** no detectará vulnerabilidades de inyección SQL, pero seguirá detectando los demás tipos de vulnerabilidad enumerados [aquí][3].
+- Si su marco de trabajo no es compatible según la lista a continuación, **Runtime Code Analysis (IAST)** no detectará vulnerabilidades de SQL Injection, pero seguirá detectando los demás tipos de vulnerabilidades enumerados [aquí][3].
 
 | Base de datos                | Versiones | Runtime Code Analysis (IAST)     |
 | ----------------------- | -------- | -------------------------------- |
@@ -606,7 +606,7 @@ Las versiones 22 y posteriores son compatibles en versión preliminar.
 
 ### Compatibilidad con las capacidades de Code Security {#code-security-capabilities-support}
 
-Las siguientes capacidades de Code Security son compatibles con la biblioteca .NET para la versión del rastreador especificada:
+Las siguientes capacidades de Code Security son compatibles con la biblioteca .NET para la versión especificada del rastreador:
 
 | Capacidad de Code Security                    | Versión mínima del tracer de .NET |
 | ------------------------------------------- | --------------------------- |
@@ -625,68 +625,70 @@ La versión mínima del tracer para obtener todas las capacidades de Code Securi
 | AWS Lambda        |                                             |                                     |
 | Azure App Service | <i class="icon-check-bold"></i>             | <i class="icon-check-bold"></i>     |
 
-**Nota**: Azure App Service es compatible **solo con aplicaciones web**. Las capacidades de Code Security no son compatibles con Azure Functions.
+**Nota**: Azure App Service es compatible con **aplicaciones web únicamente**. Las capacidades de Code Security no son compatibles con Azure Functions.
 
-### Compatibilidad con lenguajes y marcos de trabajo {#language-and-framework-compatibility-1}
+### Compatibilidad con lenguajes y frameworks {#language-and-framework-compatibility-1}
 
 #### Versiones de .NET compatibles {#supported-net-versions}
 
 Todas las versiones enumeradas en esta sección están disponibles de forma general (GA).
 
-Runtime Code Analysis (IAST) es compatible con los siguientes runtimes de .NET y .NET Core:
+Runtime Code Analysis (IAST) es compatible con los siguientes entornos de ejecución de .NET y .NET Core:
 
 | Versión de .NET  | Fin de vida útil de Microsoft | Versión del paquete    |
 | ------------- | --------------------- | ------------------ |
-| .NET 10       | _2028-11-14_   | más reciente (>= 3.31.0) |
-| .NET 9        | _2026-11-10_   | más reciente (>= 3.6.0)  |
-| .NET 8        | _2026-11-10_   | más reciente (>= 2.42.0) |
-| .NET 7        | 2024-05-14          | más reciente (>= 2.42.0) |
-| .NET 6        | 2024-11-12     | más reciente (>= 2.42.0) |
-| .NET 5        | 2022-05-10          | más reciente (>= 2.42.0) |
-| .NET Core 3.1 | 2022-12-13     | más reciente (>= 2.42.0) |
+| .NET 10       | _14 de noviembre de 2028_   | más reciente (>= 3.31.0) |
+| .NET 9        | _10 de noviembre de 2026_   | más reciente (>= 3.6.0)  |
+| .NET 8        | _10 de noviembre de 2026_   | más reciente (>= 2.42.0) |
+| .NET 7        | 14 de mayo de 2024          | más reciente (>= 2.42.0) |
+| .NET 6        | 12 de noviembre de 2024     | más reciente (>= 2.42.0) |
+| .NET 5        | 10 de mayo de 2022          | más reciente (>= 2.42.0) |
+| .NET Core 3.1 | 13 de diciembre de 2022     | más reciente (>= 2.42.0) |
 
 Runtime Code Analysis (IAST) es compatible con las siguientes versiones de .NET Framework:
 
 | Versión de .NET Framework  | Fin de vida útil de Microsoft | Versión del paquete     |
 | ----------------------- | --------------------- | ------------------- |
+| 4.8.1                   |                       | más reciente              |
 | 4.8                     |                       | más reciente              |
 | 4.7.2                   |                       | más reciente              |
+| 4.7.1                   |                       | más reciente              |
 | 4.7                     |                       | más reciente              |
 | 4.6.2                   |                       | más reciente              |
-| 4.6.1                   | 2022-04-26        | más reciente              |
+| 4.6.1                   | 26 de abril de 2022        | más reciente              |
 
-Estos son compatibles con las siguientes arquitecturas:
+Estas son compatibles con las siguientes arquitecturas:
 - Linux (GNU) x86-64, ARM64
 - Alpine Linux (musl) x86-64, ARM64
 - Windows (msvc) x86, x86-64
 
-Para obtener más información sobre los entornos de ejecución y sistemas operativos que admite el rastreador de .NET, consulte [Requisitos de compatibilidad de .NET y .NET Core][45] y [Requisitos de compatibilidad de .NET Framework][46].
+Para obtener más información sobre los entornos de ejecución y los sistemas operativos que admite el tracer de .NET, consulte [Requisitos de compatibilidad de .NET y .NET Core][45] y [Requisitos de compatibilidad de .NET Framework][46].
 
-#### Compatibilidad con marcos de trabajo web {#web-framework-compatibility-1}
-##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-3}
+#### Compatibilidad con marcos web {#web-framework-compatibility-1}
+##### Notas sobre la capacidad de Code Security {#code-security-capability-notes-3}
 
 - **Runtime Software Composition Analysis (SCA)** es compatible con todos los marcos de trabajo.
-- Si su marco de trabajo no aparece en la lista a continuación, **Runtime Code Analysis (IAST)** continúa detectando vulnerabilidades de cookies inseguras.
+- Si su framework no aparece a continuación, **Runtime Code Analysis (IAST)** continúa detectando vulnerabilidades de Insecure Cookie.
 
-| Marco de trabajo               | Runtime Code Analysis (IAST)     |
+| Marco de trabajo               | Análisis de código en tiempo de ejecución (IAST)     |
 | ----------------------- | -------------------------------- |
 | ASP.NET Core (incluidas las API mínimas) | <i class="icon-check-bold"></i>  |
 | ASP.NET MVC             | <i class="icon-check-bold"></i>  |
 | ASP.NET Web API 2       | <i class="icon-check-bold"></i>  |
 
-<div class="alert alert-info">Si no ve su marco de trabajo preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si no ve su framework de preferencia en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-### Compatibilidad con marcos de trabajo de red {#networking-framework-compatibility-1}
+### Compatibilidad con marcos de red {#networking-framework-compatibility-1}
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-4}
 
-- **Software Composition Analysis (SCA) en tiempo de ejecución**  es compatible con todos los frameworks
+- **Software Composition Analysis (SCA) en tiempo de ejecución**  es compatible con todos los marcos de trabajo
 
-| Framework | Análisis de código en tiempo de ejecución (IAST)                |
+| Marco de trabajo | Análisis de código en tiempo de ejecución (IAST)                |
 |---------- |-------------------------------------------- |
 | http      | <i class="icon-check-bold"></i>             |
 | https     | <i class="icon-check-bold"></i>             |
 
-<div class="alert alert-info">Si no ve su framework preferido en la lista, ¡háganoslo saber! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si no ve su framework de preferencia en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
 #### Compatibilidad con almacenes de datos {#data-store-compatibility-1}
 
@@ -697,9 +699,9 @@ Para obtener más información sobre los entornos de ejecución y sistemas opera
 
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-5}
 
-- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los frameworks.
+- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los marcos de trabajo.
 
-| Framework        | Análisis de código en tiempo de ejecución (IAST)    |
+| Marco de trabajo        | Análisis de código en tiempo de ejecución (IAST)    |
 |------------------|---------------------------------|
 | OracleDB         | <i class="icon-check-bold"></i> |
 | ADO.NET          | <i class="icon-check-bold"></i> |
@@ -720,14 +722,14 @@ Para obtener más información sobre los entornos de ejecución y sistemas opera
 
 ### Capacidades de Code Security {#code-security-capabilities-1}
 
-Las siguientes capacidades de Code Security son compatibles con la biblioteca de Node.js para la versión del tracer especificada:
+Las siguientes capacidades de Code Security son compatibles con la biblioteca de Node.js para la versión especificada del tracer:
 
 | Capacidad de Code Security                      | Versión mínima del tracer de Node.js                     |
 |---------------------------------------------- | -------------------------------------------------- |
 | Software Composition Analysis (SCA) en tiempo de ejecución   | 4.0.0                                              |
-| Análisis de código en tiempo de ejecución (IAST)                  | 4.18.0 para Node.js 16+, o 5.0.0 para Node.js 18+   |
+| Runtime Code Analysis (IAST)                  | 4.18.0 para Node.js 16+, o 5.0.0 para Node.js 18+   |
 
-La versión mínima del tracer para obtener todas las capacidades de Code Security compatibles es 4.30.0 para Node.js 16+ y 5.0.0 para Node.js 18+.
+La versión mínima del tracer para obtener todas las capacidades compatibles de Code Security es 4.30.0 para Node.js 16+ y 5.0.0 para Node.js 18+.
 
 #### Tipos de implementación admitidos {#supported-deployment-types-2}
 | Tipo         | Software Composition Analysis (SCA) en tiempo de ejecución   | Análisis de código en tiempo de ejecución (IAST)                               |
@@ -738,23 +740,23 @@ La versión mínima del tracer para obtener todas las capacidades de Code Securi
 | AWS Fargate  | <i class="icon-check-bold"></i>               | Preview (4.18.0 para Node.js 16+, o 5.0.0 para Node.js 18+) |
 | AWS Lambda   | <i class="icon-check-bold"></i>               | no admitido                                              |
 
-### Compatibilidad de lenguaje y framework {#language-and-framework-compatibility-2}
+### Compatibilidad con lenguajes y marcos de trabajo {#language-and-framework-compatibility-2}
 
 #### Compatibilidad con versiones de Node.js {#nodejs-version-support}
 
-Cuando el proyecto Node.js deja de dar soporte a una línea de versión principal LTS (cuando llega al fin de su vida útil), el soporte para la misma se elimina en la siguiente versión principal de `dd-trace`.
-La última línea de versiones principales de la biblioteca `dd-trace` que ofrece compatibilidad con esa versión de Node.js al final de su vida útil continúa admitiéndola durante al menos un año más en modo de mantenimiento.
+Cuando el proyecto de Node.js deja de dar soporte a una línea de versión principal LTS (cuando llega al fin de su vida útil), el soporte para la misma se elimina en la siguiente versión principal de `dd-trace`.
+La última línea de versiones principales de la biblioteca `dd-trace` que ofrece soporte sigue admitiendo esa versión de Node.js que llegó al fin de su vida útil durante al menos un año más, en modo de mantenimiento.
 
-Algunos problemas no pueden resolverse en `dd-trace` y, en su lugar, deben resolverse en Node.js. Cuando esto sucede y la versión de Node.js en cuestión ha llegado al fin de su vida útil (EOL), no es posible resolver el problema sin cambiar a otra versión que no sea EOL.
-Datadog no realiza nuevos lanzamientos de `dd-trace` para proporcionar soporte específico para líneas de versión principal de Node.js que no sean LTS (versiones con números impares).
+Algunos problemas no pueden resolverse en `dd-trace` y, en su lugar, deben resolverse en Node.js. Cuando esto sucede y la versión de Node.js en cuestión es EOL, no es posible resolver el problema sin cambiar a otra versión que no sea EOL.
+Datadog no publica nuevas versiones de `dd-trace` para proporcionar soporte específico para las líneas de versiones principales de Node.js que no son LTS (versiones con números impares).
 
-Para obtener el mejor nivel de soporte, ejecute siempre la versión LTS más reciente de Node.js y la versión principal más reciente de `dd-trace`. Independientemente de la línea de versión de Node.js que utilice, emplee también la versión más reciente de Node.js de esa línea para asegurarse de contar con las correcciones de seguridad más recientes.
+Para obtener el mejor nivel de soporte, ejecute siempre la última versión LTS de Node.js y la última versión principal de `dd-trace`. Independientemente de la línea de versión de Node.js que utilice, use también la versión más reciente de Node.js en esa línea de versión, para asegurarse de tener las últimas correcciones de seguridad.
 
 Para obtener más información sobre las versiones de Node.js, consulte la [documentación oficial de Node.js][4].
 
 #### Compatibilidad con sistemas operativos {#operating-system-support}
 
-Los siguientes sistemas operativos son compatibles oficialmente con `dd-trace`. Es probable que cualquier sistema operativo que no aparezca en la lista también funcione, pero con algunas funciones faltantes, por ejemplo, capacidades de seguridad de aplicaciones, generación de perfiles y métricas de tiempo de ejecución. En términos generales, los sistemas operativos que reciben mantenimiento activo en el momento del lanzamiento inicial de una versión principal son compatibles.
+Los siguientes sistemas operativos son compatibles oficialmente con `dd-trace`. Es probable que cualquier sistema operativo que no aparezca en la lista también funcione, pero con algunas funciones faltantes, por ejemplo, capacidades de seguridad de aplicaciones, generación de perfiles y métricas de tiempo de ejecución. En términos generales, se admiten los sistemas operativos que reciben mantenimiento activo en el momento del lanzamiento inicial de una versión principal.
 
 | Sistema operativo | Arquitecturas | Versiones mínimas                         |
 |------------------|---------------|------------------------------------------|
@@ -763,30 +765,30 @@ Los siguientes sistemas operativos son compatibles oficialmente con `dd-trace`. 
 | macOS            | arm64, x64    | Catalina (10.15)                         |
 | Windows          | x64           | Windows 8.1, Windows Server 2012         |
 
-#### Compatibilidad con frameworks web {#web-framework-compatibility-2}
+#### Compatibilidad con marcos web {#web-framework-compatibility-2}
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-6}
-- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los frameworks
-- Si su framework no aparece en la lista a continuación, **el análisis de código en tiempo de ejecución (IAST)** sigue detectando las vulnerabilidades Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing y X-Content-Type-Options Header Missing.
+- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los marcos de trabajo
+- Si su marco de trabajo no aparece en la lista a continuación, **el análisis de código en tiempo de ejecución (IAST)** continúa detectando las vulnerabilidades Weak Cipher, Weak Hashing, Weak Randomness, Insecure Cookie, Cookie without HttpOnly Flag, Cookie without SameSite Flag, HSTS Header Missing y X-Content-Type-Options Header Missing.
 
-| Framework | Versiones | Análisis de código en tiempo de ejecución (IAST)     |
+| Marco de trabajo | Versiones | Análisis de código en tiempo de ejecución (IAST)     |
 |-----------|----------|----------------------------------|
 | express   | >=4      | <i class="icon-check-bold"></i>  |
 | fastify   | >=2      | <i class="icon-check-bold"></i>  |
 | nextjs    | >=11.1   |                                  |
 
-<div class="alert alert-info">Si desea que se añada compatibilidad para alguna de las capacidades no admitidas o para su framework de Node.js, ¡háganoslo saber! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si desea que se agregue soporte para alguna de las capacidades no admitidas o para su marco de trabajo de Node.js, ¡háganoslo saber! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
-### Compatibilidad con frameworks de red {#networking-framework-compatibility-2}
+### Compatibilidad con marcos de red {#networking-framework-compatibility-2}
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-7}
 
-- **Software Composition Analysis (SCA) en tiempo de ejecución**  es compatible con todos los frameworks
+- **Software Composition Analysis (SCA) en tiempo de ejecución**  es compatible con todos los marcos de trabajo
 
-| Framework | Análisis de código en tiempo de ejecución (IAST)                |
+| Marco de trabajo | Análisis de código en tiempo de ejecución (IAST)                |
 |---------- |-------------------------------------------- |
 | http      | <i class="icon-check-bold"></i>             |
 | https     | <i class="icon-check-bold"></i>             |
 
-<div class="alert alert-info">Si no ve su framework preferido en la lista, ¡háganoslo saber! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si no ve su marco de trabajo de preferencia en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
 ### Compatibilidad con almacenes de datos {#data-store-compatibility-2}
 
@@ -795,7 +797,7 @@ El rastreo de Datastore proporciona:
 - Información de consulta (por ejemplo, una cadena de consulta saneada)
 - Captura de errores y seguimientos de pila
 
-##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-8}
+##### Notas sobre la capacidad de Code Security {#code-security-capability-notes-8}
 
 - **Software Composition Analysis (SCA) en tiempo de ejecución**  es compatible con todos los frameworks
 
@@ -848,22 +850,22 @@ El rastreo de Datastore proporciona:
 
 {{% collapse-content title="Python" level="h3" %}}
 
-### Soporte de capacidades de Code Security {#code-security-capabilities-support-1}
+### Compatibilidad con las capacidades de Code Security {#code-security-capabilities-support-1}
 
 Las siguientes capacidades de Code Security son compatibles con la biblioteca de Python para la versión especificada del rastreador:
 
 | Capacidad de Code Security                    | Versión mínima del rastreador de Python |
 | ------------------------------------------- |-------------------------------|
-| Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | 3.18.0                        |
+| Software Composition Analysis (SCA) en tiempo de ejecución | 1.5.0                         |
+| Análisis de código en tiempo de ejecución (IAST)                | 3.18.0                        |
 
 #### Tipos de implementación admitidos {#supported-deployment-types-3}
-| Tipo        | Runtime Code Analysis (IAST)      |
+| Tipo        | Análisis de código en tiempo de ejecución (IAST)      |
 |------------ |---------------------------------- |
 | Docker      | <i class="icon-check-bold"></i>   |
 | Kubernetes  | <i class="icon-check-bold"></i>   |
 | Amazon ECS  | <i class="icon-check-bold"></i>   |
-| AWS Fargate | Vista previa (2.9.3)                   |
+| AWS Fargate | Preview (2.9.3)                   |
 | AWS Lambda  |                                   |
 
 
@@ -871,7 +873,7 @@ Las siguientes capacidades de Code Security son compatibles con la biblioteca de
 
 #### Versiones de Python compatibles {#supported-python-versions}
 
-La biblioteca Python Application Security Client sigue una [política de versiones][3] que especifica el nivel de soporte para las diferentes versiones de la biblioteca y el tiempo de ejecución de Python.
+La biblioteca Python Application Security Client sigue una [política de versiones][3] que especifica el nivel de soporte para las diferentes versiones de la biblioteca y del entorno de ejecución de Python.
 
 Se admiten dos ramas de lanzamiento:
 
@@ -879,7 +881,7 @@ Se admiten dos ramas de lanzamiento:
 
 Y la biblioteca admite los siguientes tiempos de ejecución:
 
-| SO      | CPU                   | Tiempo de ejecución   | Versión del tiempo de ejecución | Versiones de ddtrace compatibles   |
+| SO      | CPU                   | Entorno de ejecución   | Versión del entorno de ejecución | Versiones de ddtrace soportadas   |
 |---------|-----------------------|-----------|-----------------|------------------------------|
 | Linux   | x86-64, AArch64       | CPython   | 3.9+            | >=4, <5                      |
 | macOS   | Intel, Apple Silicon  | CPython   | 3.9+            | >=4, <5                      |
@@ -889,17 +891,17 @@ Y la biblioteca admite los siguientes tiempos de ejecución:
 #### Compatibilidad con frameworks web {#web-framework-compatibility-3}
 ##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-9}
 
-- **Runtime Software Composition Analysis (SCA)** es compatible con todos los frameworks
+- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los frameworks
 
-#### Frameworks compatibles {#supported-frameworks}
+#### Frameworks soportados {#supported-frameworks}
 
-| Framework   | Versiones | Runtime Code Analysis (IAST)    |
+| Framework   | Versiones | Análisis de código en tiempo de ejecución (IAST)    |
 |-------------|----------|---------------------------------|
 | Django      | 2.2      | <i class="icon-check-bold"></i> |
 | FastAPI     | 0.86     | <i class="icon-check-bold"></i> |
 | Flask       | 1.1      | <i class="icon-check-bold"></i> |
 
-<div class="alert alert-info">Si no encuentra su framework preferido en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
+<div class="alert alert-info">Si no ve su framework de preferencia en la lista, ¡avísenos! Complete <a href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviar los detalles</a>.</div>
 
 #### Compatibilidad con almacenes de datos {#data-store-compatibility-3}
 
@@ -908,11 +910,11 @@ El rastreo de Datastore proporciona:
 - información de consulta (por ejemplo, una cadena de consulta saneada)
 - captura de errores y seguimientos de pila
 
-##### Notas sobre la capacidad de Code Security {#code-security-capability-notes-10}
+##### Notas sobre las capacidades de Code Security {#code-security-capability-notes-10}
 
-- **Runtime Software Composition Analysis (SCA)** es compatible con todos los frameworks.
+- **Software Composition Analysis (SCA) en tiempo de ejecución** es compatible con todos los frameworks.
 
-La biblioteca de Python es compatible con las [especificaciones de API de base de datos][4] y es compatible con todas las bases de datos SQL genéricas. Esto incluye bases de datos como SQLite, Mysql, Postgres y MariaDB.
+La biblioteca de Python soporta las [especificaciones de la API de base de datos][4] y soporta todas las bases de datos SQL genéricas. Esto incluye bases de datos como SQLite, Mysql, Postgres y MariaDB.
 
 [1]: /es/tracing/trace_collection/compatibility/python/
 [2]: /es/remote_configuration#enabling-remote-configuration

@@ -1,12 +1,12 @@
 ---
-title: Kubernetes
+title: Add Components to the Agent's Collector on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 1
 further_reading:
-- link: "/opentelemetry/setup/ddot_collector/install/"
+- link: "/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with the Agent's Collector"
+  text: "Set Up the Agent's Collector as a Kubernetes DaemonSet"
 ---
 
 This guide explains how to build a Datadog Agent image with OpenTelemetry components that the Agent's Collector doesn't include by default. To see the components it includes, see [Included components][1].
