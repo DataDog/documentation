@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-11-26'
+    link: https://github.com/DataDog/documentation/pull/42026
+    operations:
+      - CreateOpenAIModelInferenceIntegrationAccount
+      - DeleteOpenAIModelInferenceIntegrationAccount
+      - GetOpenAIModelInferenceIntegrationAccount
+      - ListOpenAIModelInferenceIntegrationAccounts
+      - UpdateOpenAIModelInferenceIntegrationAccount
+    title: Add Integration Accounts v2 API for OpenAI Model Inference
