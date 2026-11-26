@@ -61,7 +61,7 @@ This section covers Docker and Linux hosts. For steps on setting up an AWS Farga
 ### eBPF-less Agent requirements
 
 - The eBPF-less Agent is designed for environments where eBPF is disabled, using ptrace for runtime security, and supports arm64/amd64 architectures.
-- The eBPF-less mode ships in the standard Datadog Agent. Enable it with the configuration provided in this section for Docker and Linux host installations.
+- The eBPF-less mode ships in the standard Datadog Agent starting with version 7.51 (version 7.54 or later is required for the `--disable-seccomp` option). Enable it with the configuration provided in this section for Docker and Linux host installations.
 
 The eBPF-less solution includes two tracing modes for applications:
 
