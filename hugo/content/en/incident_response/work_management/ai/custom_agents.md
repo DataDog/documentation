@@ -52,7 +52,7 @@ Use [work item automation rules][3] to assign work items to agents automatically
 1. Select **Assign Agent** and choose the custom agent to assign matching work items to.
 1. Enable and name your rule.
 
-**Note**: Agents run using the permissions of the user who assigned the agent to the work item.
+**Note**: Agent Builder agents run using the permissions of the user who assigned the agent to the work item. Claude agents run as their own Datadog user, with their own permissions. See [Claude Agents][5].
 
 ## Further reading
 
@@ -62,3 +62,4 @@ Use [work item automation rules][3] to assign work items to agents automatically
 [2]: /actions/actions_catalog/
 [3]: /incident_response/work_management/automation_rules/
 [4]: https://app.datadoghq.com/work/settings
+[5]: /incident_response/work_management/ai/claude_agents/
