@@ -187,6 +187,7 @@ point the frontmatter at them, and update each row.
 - [Continuous Profiler][23]
 -
   {% if and(equals($otel_sdk, "datadog_sdk"), includes($otel_destination, ["agents_collector", "datadog_agent"])) %}{% x/ %}{% /if %}
+  {% if and(equals($otel_sdk, "ddot_sdk"), includes($otel_destination, ["ddot_collector", "upstream_otel_collector"])) %}{% tooltip contents="Enable profiling in the DDOT SDK and configure it to send profiles to the Datadog Agent." %}With Agent{% /tooltip %}{% /if %}
 ---
 - [Data Observability: Jobs Monitoring][24] (DJM)
 -
@@ -239,6 +240,7 @@ DDOT SDKs export traces, metrics, and logs over standard OTLP. These signals don
 Datadog recommends that you run the Datadog Agent with DDOT SDKs. Features marked **With Agent** need it:
 
 - **Remote Configuration**: For [Dynamic Instrumentation][49], [Live Debugger][51], and [remotely configured head sampling][52], the Datadog Agent proxies Remote Configuration. The Datadog Agent doesn't change how your OTLP telemetry flows.
+- **Continuous Profiler**: Enable profiling in the DDOT SDK and send profiles to the Datadog Agent. Traces, metrics, and logs continue over OTLP to the Collector. See [Enable Continuous Profiler][60] for setup and language requirements.
 - **Host data**: For [Cloud Network Monitoring][18], [Live Container Monitoring][19], [Live Processes][20], and [Universal Service Monitoring][21], the Datadog Agent collects data from the host.
 - **Database and broker monitoring**: For [Database Monitoring][17] and [Data Streams Monitoring][25], DDOT SDKs instrument your application while the Datadog Agent monitors the database or message broker. You can run the Datadog Agent on those hosts instead of alongside your applications.
 {% /if %}
@@ -370,3 +372,4 @@ Follow these practices when using Datadog with OpenTelemetry:
 [57]: /opentelemetry/instrument/upstream_otel_sdks/
 [58]: /opentelemetry/instrument/ddot_sdks/api_support/
 [59]: /opentelemetry/instrument/ddot_sdks/api_support/?prog_lang=rust&platform=traces
+[60]: /opentelemetry/instrument/ddot_sdks/#enable-continuous-profiler

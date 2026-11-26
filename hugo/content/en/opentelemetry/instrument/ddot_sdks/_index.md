@@ -56,7 +56,7 @@ For installation without the OpenTelemetry Operator, follow the [installation in
 
 ## Configure OpenTelemetry mode and export
 
-DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Collector can batch, enrich, and route telemetry before exporting it to Datadog or another OTLP-compatible backend. These signals don't go through the Datadog Agent. Datadog recommends running a Datadog Agent alongside the Collector for the Datadog-specific capabilities of DDOT SDKs, such as Live Debugger and Dynamic Instrumentation. It acts mainly as a Remote Configuration proxy, while traces, metrics, and logs keep flowing over OTLP to the Collector, so it doesn't affect your OpenTelemetry setup's freedom from vendor lock-in. See [feature compatibility][8] for language support and capability requirements.
+DDOT SDKs send traces, metrics, and logs over OTLP to an OpenTelemetry Collector. The Collector can batch, enrich, and route telemetry before exporting it to Datadog or another OTLP-compatible backend. These signals don't go through the Datadog Agent. Datadog recommends running a Datadog Agent alongside the Collector for capabilities such as Live Debugger, Dynamic Instrumentation, and Continuous Profiler. The Agent proxies Remote Configuration and receives profiles. Traces, metrics, and logs keep flowing over OTLP to the Collector. See [feature compatibility][8] for language support and capability requirements.
 
 ### Language support
 
@@ -160,6 +160,19 @@ The [existing-configuration guide][15] covers these migration paths.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+### Enable Continuous Profiler
+
+DDOT SDKs support [Continuous Profiler][18] when profiling is enabled in the application and the SDK can reach the Datadog Agent. Support depends on the language, runtime, and SDK version; follow the [profiler setup instructions for your language][19].
+
+Keep the OpenTelemetry mode and OTLP export settings above. Enable profiling using the language-specific instructions, and configure the SDK to reach the Datadog Agent's profiling intake. For a Java application using the Agent's HTTP intake on port `8126`, set:
+
+```text
+DD_PROFILING_ENABLED=true
+DD_AGENT_HOST=<DATADOG_AGENT_HOST>
+```
+
+Profiles use the Datadog profiling protocol and go to the Datadog Agent. Traces, metrics, and logs continue over OTLP to the Collector.
+
 ## View your telemetry
 
 <span id="verify"></span>
@@ -185,6 +198,8 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [15]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/ddot/ADAPT-EXISTING-CONFIG.md
 [16]: /tracing/guide/orchestrion_dockerfile/
 [17]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration
+[18]: /profiler/
+[19]: /profiler/enabling/
 
 [export-2]: /opentelemetry/setup/ddot_collector/
 [export-3]: /opentelemetry/setup/collector_exporter/
