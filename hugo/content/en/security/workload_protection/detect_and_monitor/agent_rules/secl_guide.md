@@ -5,6 +5,8 @@ aliases:
   - /security/workload_protection/agent_expressions
   - /security/threats/agent_expressions
   - /security/workload_protection/secl_auth_guide
+  - /security/workload_protection/guide/custom-rules-guidelines
+  - /security/cloud_security_management/guide/custom-rules-guidelines
 disable_toc: false
 ---
 
