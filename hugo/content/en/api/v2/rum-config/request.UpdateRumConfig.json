@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "enforced_application_tags": false
+    },
+    "type": "rum_config"
+  }
+}

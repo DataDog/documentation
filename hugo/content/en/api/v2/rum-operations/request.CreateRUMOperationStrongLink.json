@@ -1,0 +1,13 @@
+{
+  "data": {
+    "type": "strong_links",
+    "attributes": {
+      "operation_id": "abc12345-1234-5678-abcd-ef1234567890",
+      "feature_id": "bdd-examplerumoperation",
+      "status": "DRAFT",
+      "tags": [
+        "team:rum-backend"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "application_id": "ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b",
+      "criteria": {
+        "max": 5.0,
+        "metric": "largest_contentful_paint",
+        "min": 2.5
+      },
+      "filter": "@session.type:user",
+      "from": 1636625471,
+      "sample_size": 20,
+      "to": 1636629071,
+      "view_name": "/account/login(/:type)"
+    },
+    "type": "aggregated_long_tasks"
+  }
+}
