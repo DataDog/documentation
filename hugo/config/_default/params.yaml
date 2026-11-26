@@ -282,6 +282,7 @@ unsupported_sites:
   dashboard_anomaly_detection: [gov,gov2]
   data_jobs: [gov,gov2]
   data_observability: [gov,gov2]
+  data_security: [gov,gov2]
   data_streams: [gov,gov2]
   datadog_disaster_recovery: [gov,gov2]
   dd.llm_observability.dataset: [gov,gov2]

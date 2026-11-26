@@ -14,10 +14,6 @@ further_reading:
     text: "Investigate Data Security findings"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Data Security is not available for the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{< callout url="https://www.datadoghq.com/product-preview/dspm/" btn_hidden="false" header="Join the Preview!">}}
 Data Security is in Preview. To request access, fill out the form.
 {{< /callout >}}
@@ -52,6 +48,14 @@ If the Agent runs a version earlier than 7.86.0, upgrade it:
 
 If [Remote Agent Management][4] is enabled on the Agent, push the following settings from the side panel. Otherwise, add them to the Agent's `datadog.yaml` file:
 
+```yaml
+data_security:
+  enabled: true
+shared_library_check:
+  enabled: true
+remote_configuration:
+  enabled: true
+```
 
 Optional: to make scans use TLS when the `postgres` integration instance does not require it, also set `enforce_ssl` to `true`:
 
@@ -75,13 +79,13 @@ GRANT SELECT ON ALL TABLES IN SCHEMA <SCHEMA_NAME> TO datadog;
 ALTER DEFAULT PRIVILEGES IN SCHEMA <SCHEMA_NAME> GRANT SELECT ON TABLES TO datadog;
 ```
 
-`ALTER DEFAULT PRIVILEGES` applies only to tables that the user running the command creates later. If another user creates tables in the schema, add `FOR ROLE <TABLE_OWNER>` after `ALTER DEFAULT PRIVILEGES`. For example, if the `app_owner` role creates the tables in the `sales` schema:
+`ALTER DEFAULT PRIVILEGES` applies only to tables that the user running the command creates later. If another role creates tables in the schema, run the command for that role, replacing `<TABLE_OWNER>` with the role that owns the tables:
 
 ```sql
-ALTER DEFAULT PRIVILEGES FOR ROLE app_owner IN SCHEMA sales GRANT SELECT ON TABLES TO datadog;
+ALTER DEFAULT PRIVILEGES FOR ROLE <TABLE_OWNER> IN SCHEMA <SCHEMA_NAME> GRANT SELECT ON TABLES TO datadog;
 ```
 
-To run this command, you must be a member of the `app_owner` role or a superuser.
+To run this command, you must be a member of the `<TABLE_OWNER>` role or a superuser.
 
 ### Grant read access to all schemas
 
@@ -111,7 +115,7 @@ BEGIN
 END $$;
 ```
 
-The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema.
+The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema. Run the block as a superuser or as the owner of the schemas. For tables that another role creates later, also run the `FOR ROLE` command for that role.
 
 If the `datadog` user can't read the tables in a database, that database appears under setup issues in the side panel.
 

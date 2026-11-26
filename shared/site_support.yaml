@@ -126,6 +126,10 @@ site_support_ids:
     regions: [gov, gov2]
   data_observability:
     regions: [gov, gov2]
+  data_security:
+    regions: [gov, gov2]
+    url_paths:
+      - /security/data_security/**
   data_streams:
     regions: [gov, gov2]
   datadog_disaster_recovery:

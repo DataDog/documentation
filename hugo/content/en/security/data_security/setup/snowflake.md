@@ -11,10 +11,6 @@ further_reading:
     text: "Investigate Data Security findings"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Data Security is not available for the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{< callout url="https://www.datadoghq.com/product-preview/dspm/" btn_hidden="false" header="Join the Preview!">}}
 Data Security is in Preview. To request access, fill out the form.
 {{< /callout >}}
@@ -54,10 +50,6 @@ On the {{< ui >}}Snowflake{{< /ui >}} tab, click the account to open its side pa
 ## View findings in Data Observability
 
 Snowflake findings also appear in the Data Observability catalog. On a database, schema, or table, the {{< ui >}}Sensitive Data{{< /ui >}} row shows the number of findings, {{< ui >}}No findings{{< /ui >}}, or {{< ui >}}Unscanned{{< /ui >}}. Click {{< ui >}}View Explorer{{< /ui >}} to open the finding in Data Security. The column list marks the columns that hold sensitive data.
-
-## Snowflake integration overhead
-
-Data Security scans run as `SELECT` queries against your tables and are billed as normal warehouse usage. They run on the warehouse you set up for Data Observability (`DATADOG_WH` by default).
 
 ## Disable scanning
 

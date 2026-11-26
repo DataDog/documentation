@@ -14,10 +14,6 @@ further_reading:
     text: "Investigate Data Security findings"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Data Security is not available for the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 {{< callout url="https://www.datadoghq.com/product-preview/dspm/" btn_hidden="false" header="Join the Preview!">}}
 Data Security is in Preview. To request access, fill out the form.
 {{< /callout >}}
