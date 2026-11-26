@@ -34,7 +34,7 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 | ----------- | ----------- |
 | {{< ui >}}Active{{< /ui >}} | The test is known to be flaky and is running in CI. |
 | {{< ui >}}Quarantined{{< /ui >}} | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
-| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. Disabled tests are excluded from the automatic move to {{< ui >}}Fixed{{< /ui >}}. |
+| {{< ui >}}Disabled{{< /ui >}} | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_test_disabled:true` when disabled. Disabled tests are excluded from the automatic move to {{< ui >}}Fixed{{< /ui >}}. |
 | {{< ui >}}Fixed{{< /ui >}} | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this state after it is merged into the default branch. |
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
