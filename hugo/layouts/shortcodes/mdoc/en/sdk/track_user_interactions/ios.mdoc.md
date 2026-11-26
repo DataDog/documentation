@@ -68,6 +68,30 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 | Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
+### AppKit
+
+On macOS, `uiKitActionsPredicate` and `swiftUIActionsPredicate` are not available. To automatically track user actions in AppKit and SwiftUI views, set the `macOSActionsPredicate` option when enabling RUM. By default, this option is `nil`, so no actions are tracked automatically.
+
+With a macOS actions predicate, the SDK tracks:
+- Left mouse clicks. For clicks inside SwiftUI views, the SDK finds the clicked element through the accessibility hierarchy.
+- Menu items selected from the menu bar or a pop-up menu, with the mouse or with a keyboard shortcut.
+
+Other keyboard input is not tracked, for privacy reasons. Actions are reported with the `click` type.
+
+The default predicate, `DefaultMacOSRUMActionsPredicate`, names an action after the kind of element clicked (the view class, the menu item class, or the accessibility role of a SwiftUI element), and adds its accessibility identifier when it is set. Labels and titles are not used, to protect privacy. To filter or rename actions, provide your own implementation of the `MacOSRUMActionsPredicate` protocol. Return `nil` to ignore an action:
+
+```swift
+public protocol MacOSRUMActionsPredicate {
+    func rumAction(targetView: NSView) -> RUMAction?
+    func rumAction(accessibilityRole: NSAccessibility.Role, identifier: String?) -> RUMAction?
+    func rumAction(targetMenuItem: NSMenuItem) -> RUMAction?
+}
+```
+
+Depending on the view hierarchy and the macOS version, a click on a SwiftUI view calls `rumAction(targetView:)` or `rumAction(accessibilityRole:identifier:)`. Do not rely on which one is called.
+
+**Note**: Calling `NSMenu.performActionForItem(at:)` from your code also records an action, because the SDK cannot tell it apart from a user selection.
+
 ## Manually track actions and send custom events
 
 In addition to [tracking actions automatically](#automatically-track-user-interactions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
@@ -107,13 +131,15 @@ let rum = RUMMonitor.shared()
 {% /tab %}
 {% /tabs %}
 
+**Note**: On macOS, use the `.click` action type for user clicks.
+
 **Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
 For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
 
 ### Instrument SwiftUI tap actions
 
-You can also instrument tap actions of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. `.trackRUMTapAction(name:)` isn't available on tvOS.
+You can also instrument tap actions of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. `.trackRUMTapAction(name:)` isn't available on tvOS. On macOS, it reports actions with the `click` type.
 
 {% alert level="warning" %}
 Using `.trackRUMTapAction(name:)` for `SwiftUI` controls inside a `List` can break its default gestures. For example, it may disable the `Button` action or break `NavigationLink`. To track taps in a `List` element, use the `addAction(type:name:)` API described above instead.

@@ -85,6 +85,12 @@ configuration.trackWatchdogTerminations = YES;
 
 **Note**: App hangs and watchdog terminations are only monitored in the main app, not in app extensions or widgets.
 
+### macOS
+
+On macOS, Crash Reporting and App Hangs work as on iOS, with the following differences:
+- Watchdog Terminations are not available, and the `trackWatchdogTerminations` option does not exist.
+- Objective-C exceptions (`NSException`) that AppKit catches on the main thread are not reported, because AppKit logs them and keeps the app running. If you set the `NSApplicationCrashOnExceptions` user default to `YES`, the app crashes instead, and the crash is reported as a `SIGTRAP` signal without the exception name or reason.
+
 ### Report errors from logs
 
 "Error" and "critical" logs sent with `Logger` are automatically reported as RUM errors and linked to the current RUM view. This requires the Logs feature to be enabled, and only applies to logs that are actually sent, so logs dropped by `remoteSampleRate` or `remoteLogThreshold` aren't reported:

@@ -89,6 +89,43 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 
 {% /tab %}
 {% /tabs %}
+
+On macOS, the UIKit predicates and `swiftUIActionsPredicate` are not available. To track AppKit views and user actions automatically, set `appKitViewsPredicate` and `macOSActionsPredicate` instead, as early as possible in your `NSApplicationDelegate`:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    appKitViewsPredicate: DefaultAppKitRUMViewsPredicate(),
+    macOSActionsPredicate: DefaultMacOSRUMActionsPredicate(),
+    urlSessionTracking: RUM.Configuration.URLSessionTracking()
+  )
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogRUM;
+
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+configuration.appKitViewsPredicate = [DDDefaultAppKitRUMViewsPredicate new];
+configuration.macOSActionsPredicate = [DDDefaultMacOSRUMActionsPredicate new];
+[configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
+
+[DDRUM enableWith:configuration];
+```
+
+{% /tab %}
+{% /tabs %}
+
+For the other differences on macOS, see [macOS support][2].
 {% /if %}
 
 <!-- Flutter -->
@@ -272,3 +309,4 @@ Then, [configure retention filters](/real_user_monitoring/retain_and_recover_val
 Continue to [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/).
 
 [1]: /real_user_monitoring/setup/install/
+[2]: /real_user_monitoring/setup/install/?platform=ios#macos-support

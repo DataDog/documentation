@@ -19,7 +19,9 @@ Send logs to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` cli
 * Record real client IP addresses and User-Agents.
 * Leverage optimized network usage with automatic bulk posts.
 
-The `dd-sdk-ios` library supports all versions of iOS 11 or later.
+The `dd-sdk-ios` library supports all versions of iOS 15 or later.
+
+**Note**: The library also supports macOS 12 or later, in Preview. On macOS, install it with Swift Package Manager. For details, see [Supported versions][8].
 
 ## Setup
 
@@ -671,3 +673,4 @@ Logs.removeAttribute(forKey: "device-model")
 [4]: /logs/processing/attributes_naming_convention/
 [5]: /getting_started/tagging/
 [6]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[8]: /real_user_monitoring/setup/install/?platform=ios#supported-versions

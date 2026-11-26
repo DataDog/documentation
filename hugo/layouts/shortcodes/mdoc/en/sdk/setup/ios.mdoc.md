@@ -5,7 +5,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your Apple platform applications with the Datadog iOS SDK.
 
-The iOS SDK supports the Apple ecosystem, including iOS, iPadOS, tvOS, watchOS, and visionOS. It supports [Real User Monitoring (RUM)][1], [Error Tracking][2], [Product Analytics][3], and [Session Replay][4]. For supported versions per platform, see [Supported versions](#supported-versions).
+The iOS SDK supports the Apple ecosystem, including iOS, iPadOS, macOS, tvOS, watchOS, and visionOS. It supports [Real User Monitoring (RUM)][1], [Error Tracking][2], [Product Analytics][3], and [Session Replay][4]. For supported versions per platform, see [Supported versions](#supported-versions).
 
 ## Prerequisites
 
@@ -29,6 +29,8 @@ To send RUM data from your Apple platform application to Datadog, complete the f
 
 {% step title="Add the dependencies" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
+
+**Note**: For macOS apps, use Swift Package Manager with SDK version 3.23.0 or later. CocoaPods and Carthage are not supported on macOS.
 
 {% tabs %}
 {% tab label="Swift Package Manager (SPM)" %}
@@ -96,6 +98,8 @@ In the initialization snippet, set an environment name, service name, and client
 The SDK should be initialized as early as possible in the app life cycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. The `AppDelegate` is your app's main entry point that handles app life cycle events. 
 
 Initializing here allows the SDK to correctly capture all measurements, including application startup duration. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
+
+**Note**: On macOS, initialize the SDK in your `NSApplicationDelegate`, as early as possible, for example in `applicationWillFinishLaunching(_:)`. For apps built with SwiftUI, use `@NSApplicationDelegateAdaptor`.
 
 {% alert level="warning" %}
 Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
@@ -488,7 +492,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Supported versions
 
-The Datadog iOS SDK is the single SDK for instrumenting Real User Monitoring on all Apple platforms: iOS, iPadOS, tvOS, watchOS, and visionOS. Use this section to confirm the minimum OS version, dependency manager, and Datadog modules available for each platform.
+The Datadog iOS SDK is the single SDK for instrumenting Real User Monitoring on all Apple platforms: iOS, iPadOS, macOS, tvOS, watchOS, and visionOS. Use this section to confirm the minimum OS version, dependency manager, and Datadog modules available for each platform.
 
 The RUM iOS SDK supports the following platforms and versions:
 
@@ -501,22 +505,42 @@ The RUM iOS SDK supports the following platforms and versions:
 | watchOS | {% x/ %} | 9+ | |
 | macOS (Designed for iPad) | {% x/ %} | 15+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
-| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogSessionReplay`, which heavily depends on `UIKit`, does not build on macOS. |
+| macOS | {% x/ %} | 12+ | In Preview. Requires SDK 3.23.0 or later and Swift Package Manager. See the [macOS support](#macos-support) section. |
 | Linux | | n/a | |
 
 ### Module support by platform
 
-| Module | iOS | tvOS | watchOS | visionOS | Notes |
-|--------|-----|------|---------|----------|-------|
-| DatadogCore | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
-| DatadogLogs | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
-| DatadogTrace | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
-| DatadogCrashReporting | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
-| DatadogRUM | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. |
-| DatadogFlags | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
-| DatadogProfiling | {% x/ %} | {% x/ %} | | {% x/ %} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
-| DatadogSessionReplay | {% x/ %} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay requires rendering capabilities not available on these platforms. |
-| DatadogWebViewTracking | {% x/ %} | | | {% x/ %} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
+| Module | iOS | macOS | tvOS | watchOS | visionOS | Notes |
+|--------|-----|-------|------|---------|----------|-------|
+| DatadogCore | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogLogs | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogTrace | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogCrashReporting | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogRUM | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. macOS: see the [macOS support](#macos-support) section for the differences. |
+| DatadogFlags | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | {% x/ %} | |
+| DatadogProfiling | {% x/ %} | | {% x/ %} | | {% x/ %} | Not available on watchOS and macOS. |
+| DatadogSessionReplay | {% x/ %} | | | | | Not available on macOS, tvOS, watchOS, and visionOS. |
+| DatadogWebViewTracking | {% x/ %} | {% x/ %} | | | {% x/ %} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
+
+### macOS support
+
+{% alert level="info" %}
+macOS support is in Preview.
+{% /alert %}
+
+The iOS SDK supports native macOS apps built with AppKit or SwiftUI, starting with SDK version 3.23.0. Most features work the same as on iOS. The main differences are:
+
+- Install the SDK with Swift Package Manager. CocoaPods and Carthage are not supported on macOS.
+- Session Replay and Profiling are not available.
+- To track views and actions automatically, set `appKitViewsPredicate` and `macOSActionsPredicate` when you enable RUM. For details, see [Track Navigation][23] and [Track User Interactions][24].
+- Automatically tracked actions are reported with the `click` type, not `tap`.
+- After the first view starts, events such as errors, resources, and actions tracked while no view is active are kept in a view named `NoActiveView`. The `trackBackgroundEvents` option does not exist on macOS. For details, see [Track Background Events][25].
+- Watchdog Terminations, memory warnings, slow frames, and background upload tasks are not available.
+- Exceptions that AppKit catches are not reported as crashes. For details, see the macOS section of [Track Errors and Crashes][26].
+
+The `uiKitViewsPredicate`, `uiKitActionsPredicate`, `swiftUIActionsPredicate`, `trackBackgroundEvents`, `trackWatchdogTerminations`, `trackMemoryWarnings`, `trackSlowFrames`, and `backgroundTasksEnabled` options do not exist on macOS. If you use them in code that also builds for macOS, the build fails. Swift does not allow `#if` inside an argument list, so set these options as properties in an `#if !os(macOS)` block instead of passing them to the initializer, for example `configuration.trackBackgroundEvents = true`.
+
+**Note**: Mac Catalyst apps and iPad apps running on a Mac are covered by the macOS (Catalyst) and macOS (Designed for iPad) rows in the table above, not by native macOS support.
 
 ### Xcode
 
@@ -530,6 +554,8 @@ The iOS SDK supports the following dependency managers:
 - CocoaPods
 - Carthage
 
+**Note**: On macOS, only Swift Package Manager is supported.
+
 ### Languages
 
 | Language | Version |
@@ -542,6 +568,7 @@ The iOS SDK supports the following dependency managers:
 | Framework | Automatic | Manual |
 |--------|-------|-------|
 | UIKit | {% x/ %} | {% x/ %} |
+| AppKit (macOS) | {% x/ %} | {% x/ %} |
 | SwiftUI | {% x/ %} | {% x/ %} |
 
 ### Network compatibility
@@ -583,3 +610,7 @@ The Datadog iOS SDK depends on the following third-party libraries:
 [20]: https://cocoapods.org/
 [21]: https://github.com/Carthage/Carthage
 [22]: https://github.com/open-telemetry/opentelemetry-swift-core
+[23]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#appkit
+[24]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#appkit
+[25]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios
+[26]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=ios#macos

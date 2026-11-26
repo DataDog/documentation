@@ -56,6 +56,8 @@ The following device-related attributes are attached automatically to all events
 | `device.time_zone`                    | string | The device's current time zone identifier.                                                               |
 | `device.type`                        | string | The device type as reported by the device (System User-Agent).                                           |
 
+**Note**: On macOS, `device.type` is `desktop`, `device.brand` is `Apple`, and `device.model` is the Mac model identifier (for example, `MacBookPro18,3`). `device.battery_level` and `device.brightness_level` are not collected on macOS, and `device.power_saving_mode` is always `false`.
+
 ### Connectivity
 
 The following network-related attributes are attached automatically to Resource and Error events collected by Datadog:
@@ -67,6 +69,8 @@ The following network-related attributes are attached automatically to Resource 
 | `connectivity.cellular.technology`   | string | The type of radio technology used for cellular connection.                                              |
 | `connectivity.cellular.carrier_name` | string | The name of the SIM carrier.                                                                              |
 
+**Note**: The `connectivity.cellular` attributes are not collected on macOS.
+
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -77,6 +81,8 @@ The following OS-related attributes are attached automatically to all events col
 | `os.name`          | string | The OS name as reported by the device (System User-Agent).                |
 | `os.version`       | string | The OS version as reported by the device (System User-Agent).             |
 | `os.version_major` | string | The OS version major as reported by the device (System User-Agent).       |
+
+**Note**: On macOS, `os.name` is `macOS`.
 
 ### Geolocation
 
@@ -193,6 +199,8 @@ The following attributes are collected for each view after collection is enabled
 | `view.accessibility.speak_screen_enabled` | Boolean | Whether the Speak Screen feature is enabled. |
 | `view.accessibility.speak_selection_enabled` | Boolean | Whether the Speak Selection feature is enabled. |
 | `view.accessibility.rtl_enabled` | Boolean | Whether right-to-left layout direction is active. |
+
+**Note**: On macOS, only `increase_contrast_enabled`, `should_differentiate_without_color`, `reduce_transparency_enabled`, `reduce_motion_enabled`, `invert_colors_enabled`, `screen_reader_enabled`, `assistive_switch_enabled`, and `rtl_enabled` are collected. The other accessibility attributes are not sent.
 
 ### Resource attributes
 

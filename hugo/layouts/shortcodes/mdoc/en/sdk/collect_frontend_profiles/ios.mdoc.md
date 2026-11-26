@@ -2,6 +2,8 @@
 iOS Profiling is in Preview.
 {% /callout %}
 
+**Note**: Profiling is not available on macOS.
+
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
 iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][1] and periodically samples all application threads to collect call stacks. 

@@ -37,4 +37,7 @@ configuration.trackBackgroundEvents = YES;
 
 When the application leaves the foreground, RUM stops the current view if it was tracked automatically. Views started manually with `startView` keep running. Without background event tracking, events tracked while no view is active are skipped. For details, see [Data Collected][1].
 
+**Note**: On macOS, `trackBackgroundEvents` is not available, because macOS apps do not move to the background. After the first view starts, events tracked while no view is active are kept in a view named `NoActiveView`. This behavior is always on, so these events can also lead to additional sessions. For details, see the macOS section of [Track Navigation][2].
+
 [1]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#views-instrumentation-versus-app-life-cycle
+[2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#macos

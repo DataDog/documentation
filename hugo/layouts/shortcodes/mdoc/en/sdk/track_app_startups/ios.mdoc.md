@@ -32,6 +32,8 @@ The iOS SDK automatically measures the time to initial display (TTID) for the `A
 
 The SDK drops TTID if the first frame is rendered more than 60 seconds after launch, and doesn't collect TTID for background launches.
 
+**Note**: On macOS, the time to initial display ends when the first window of the app is visible, after its first draw. Any window counts, including the window of a menu bar item, even when other windows cover it. If the SDK starts after the first window appears, the SDK records the TTID at that window's next update, so initialize the SDK as early as possible. macOS launches are not prewarmed, and every launch counts as a user launch. TTID profiling is not available on macOS.
+
 ## Manual tracking
 
 Every app defines "fully drawn" differently, so the SDK doesn't automatically measure the time to full display (TTFD). Call `RUMMonitor.shared().reportAppFullyDisplayed()` when your app reaches that state:

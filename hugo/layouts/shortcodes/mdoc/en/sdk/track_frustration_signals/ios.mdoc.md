@@ -1,8 +1,10 @@
-The iOS SDK detects frustration signals from tracked actions. To collect them, enable action tracking with `uiKitActionsPredicate`, `swiftUIActionsPredicate`, or manual actions, and keep `trackFrustrations` enabled (it's `true` by default).
+The iOS SDK detects frustration signals from tracked actions. To collect them, enable action tracking with `uiKitActionsPredicate`, `swiftUIActionsPredicate`, or manual actions, and keep `trackFrustrations` enabled (it's `true` by default). On macOS, enable action tracking with `macOSActionsPredicate` or manual actions.
 
 ## Error taps
 
 A user taps on an element, and at least one error occurs during the action's duration or within 100 ms after the action ends.
+
+**Note**: On macOS, the SDK detects error clicks instead: a `click` action followed by an error, under the same conditions. Search for them with `action.frustration.type:error_click`. Manual actions of the `tap` type do not produce frustration signals on macOS.
 
 ## Search for frustration signals in the RUM Explorer
 
