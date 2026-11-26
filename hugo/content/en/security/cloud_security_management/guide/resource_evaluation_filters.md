@@ -13,7 +13,7 @@ You can use resource tags to create filters that include or exclude resources fr
 
 **Notes**:
 
-- Resource evaluation filters can only be used with cloud resources that are scanned by cloud integrations.
+- You can use resource evaluation filters only with cloud resources that cloud integrations scan.
 - Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog.
 
 | Format                       | Value        |

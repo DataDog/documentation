@@ -55,7 +55,7 @@ If a telemetry source for a signal type is missing and Datadog can't populate re
 
 ## Use the list to filter findings
 
-Findings linked to a resource on the Crown Jewels list are tagged with `@risk.is_crown_jewel:true`. The tag propagates to these findings through Datadog's security data model. All of the following would be marked as crown jewel findings:
+Datadog's security data model propagates the `@risk.is_crown_jewel:true` tag to every finding linked to a resource on the Crown Jewels list. All of the following are crown jewel findings:
 
 - A misconfiguration on a virtual machine attached to a crown jewel service
 - A vulnerability in a container image used by a crown jewel service

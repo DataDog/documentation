@@ -30,7 +30,7 @@ If you haven't already, set up the [Amazon Web Services integration][1]. You mus
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}AWS{{< /ui >}} section and click the account you want to enable Cloud Security for. A side panel with configuration options for that account opens.
 1. Under {{< ui >}}Features{{< /ui >}}, beside each feature you want to enable, turn on the {{< ui >}}Enable{{< /ui >}} toggle.
-1. Optionally, to exclude certain resources from being evaluated by Cloud Security, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][5].
+1. Optionally, to stop Cloud Security from evaluating certain resources, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][5].
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-management
@@ -64,7 +64,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}Azure{{< /ui >}} section.
 2. To enable Posture Management for an account, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-3. Optionally, to exclude certain resources from being evaluated by Cloud Security, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][4].
+3. Optionally, to stop Cloud Security from evaluating certain resources, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][4].
 
 [1]: /integrations/azure
 [2]: /integrations/guide/azure-graph-api-permissions/
@@ -96,7 +96,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][2] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}GCP{{< /ui >}} section.
 2. To enable Posture Management for an account, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-3. Optionally, to exclude certain resources from being evaluated by Cloud Security, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][11].
+3. Optionally, to stop Cloud Security from evaluating certain resources, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][11].
 
 [2]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://support.google.com/cloud/answer/6293499?hl=en
@@ -117,7 +117,7 @@ If you haven't already, set up the [Oracle Cloud Infrastructure integration][1].
 1. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][2] page, click {{< ui >}}Cloud Integrations{{< /ui >}}.
 1. Expand the {{< ui >}}OCI{{< /ui >}} section.
 1. To enable Posture Management for a tenancy, switch the {{< ui >}}Posture Management{{< /ui >}} toggle to the on position.
-1. Optionally, to exclude certain resources from being evaluated by Cloud Security, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][3].
+1. Optionally, to stop Cloud Security from evaluating certain resources, create a resource evaluation filter. For instructions, see [Use Filters to Exclude Resources from Evaluation][3].
 1. Click {{< ui >}}Done{{< /ui >}}.
 
 [1]: /integrations/oracle-cloud-infrastructure/

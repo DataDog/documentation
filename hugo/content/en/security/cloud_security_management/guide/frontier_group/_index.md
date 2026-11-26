@@ -49,7 +49,7 @@ More accurate public access evaluations of containers through EKS and runtime da
 ### Critical assets
 
 ***Status:*** *generally available*<br>
-Automatic critical asset inference based on observability data, which you can curate by adding or removing resources. See [Crown Jewels][3] for an overview of detection signals and how to use the list to prioritize findings.
+Automatic critical asset inference based on observability data. You can curate the inferred list by adding or removing resources. See [Crown Jewels][3] for an overview of detection signals and how to use the list to prioritize findings.
 
 [3]: /security/cloud_security_management/crown_jewels/
 
