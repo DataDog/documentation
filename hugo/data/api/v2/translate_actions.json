@@ -5642,7 +5642,7 @@
     "request_schema_description": "Request body for a journey funnel analysis."
   },
   "QueryProductAnalyticsJourneyList": {
-    "description": "Return the individual sessions that reached, or dropped off at, a given step of the journey.\nEach row contains the identity join key, the event timestamp, and the columns requested\nin `entity_columns`.",
+    "description": "Return the individual sessions that reached, or dropped off at, a given step of the journey.\nEach row contains the identity join key, the event timestamp, and the columns requested\nin `entity_columns`.\nThis endpoint only lists sessions: omit `query.search.join_keys` or set its `primary` to `@session.id`.\nAny other primary join key, such as `@usr.id`, returns a 400 error.\nTo get the users behind the sessions, add `@usr.id` or `@usr.email` to `entity_columns`.",
     "summary": "List journey entities",
     "request_description": "",
     "request_schema_description": "Request body for a journey list query."
@@ -5666,7 +5666,7 @@
     "request_schema_description": "Request body for a retention grid query."
   },
   "QueryProductAnalyticsRetentionList": {
-    "description": "List the individual users or accounts counted in one cell of the retention grid.\nSet `computation_scope` to the cohort and return period you want to examine.",
+    "description": "List the individual users or accounts counted in one cell of the retention grid.\nSet `computation_scope` to the cohort and return period you want to examine.\nIndexes are zero-based, and the cohort index plus the return period index must be lower than the number of\ncohorts between `from` and `to`. Make the window long enough to contain the return period you ask for.",
     "summary": "List the entities behind a retention cell",
     "request_description": "The retention list query.",
     "request_schema_description": "Request body listing the individual entities behind one cell of the retention grid."
@@ -5684,13 +5684,13 @@
     "request_schema_description": "Request body for a retention scalar or retention timeseries query."
   },
   "QueryProductAnalyticsSankey": {
-    "description": "Compute a Sankey diagram of how sessions flow between the values of two facets,\nshowing where users continue and where they drop off at each step.",
+    "description": "Compute a Sankey diagram of how sessions flow from or to one view,\nshowing where users continue and where they drop off at each step.\nSet either `definition.source` or `definition.target`, and send the other one as an empty string.",
     "summary": "Compute a Sankey diagram",
     "request_description": "The Sankey diagram query.",
     "request_schema_description": "Request body for a Sankey diagram query."
   },
   "QueryEventFilteredUsers": {
-    "description": "Query users filtered by both user properties and event platform data",
+    "description": "Query users filtered by both user properties and event platform data.\n`event_query.query` selects users who have matching events in `event_query.time_frame`, which is in\nmilliseconds.\n`query` and `select_columns` use user profile attribute names, not event facets.",
     "summary": "Query event filtered users",
     "request_description": "",
     "request_schema_description": "Request body for querying users filtered by user properties combined with event platform activity."
@@ -5708,7 +5708,7 @@
     "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
   "DeleteUserProfile": {
-    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
+    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few\nminutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
     "summary": "Delete a user profile"
   },
   "GetMapping": {
