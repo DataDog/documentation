@@ -614,6 +614,10 @@ h5 {
     }
 }
 
+.ai-gateway-best-practices #mainContent > ul > li + li {
+    margin-top: 1rem;
+}
+
 .mainContent-wrapper {
     h1 {
         @media (min-width: 992px) {
