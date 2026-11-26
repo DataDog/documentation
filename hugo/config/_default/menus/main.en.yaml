@@ -1719,31 +1719,51 @@ menu:
       identifier: bits_ai_live_debugger
       parent: bits_ai
       weight: 7
+    - name: Bits Maintenance
+      url: bits_ai/bits_maintenance
+      identifier: bits_maintenance
+      parent: bits_ai
+      weight: 8
+    - name: Setup
+      url: bits_ai/bits_maintenance/setup
+      identifier: bits_maintenance_setup
+      parent: bits_maintenance
+      weight: 801
+    - name: Campaigns and Plans
+      url: bits_ai/bits_maintenance/campaigns_plans
+      identifier: bits_maintenance_campaigns_plans
+      parent: bits_maintenance
+      weight: 802
+    - name: Upgrade Instructions and Memories
+      url: bits_ai/bits_maintenance/instructions_memories
+      identifier: bits_maintenance_instructions_memories
+      parent: bits_maintenance
+      weight: 803
     - name: Bits Release
       url: bits_release/
       identifier: bits_release
       parent: bits_ai
-      weight: 8
+      weight: 9
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 9
+      weight: 10
     - name: Bits AI Settings
       url: bits_ai/bits_settings
       identifier: bits_ai_settings
       parent: bits_ai
-      weight: 10
+      weight: 11
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai_settings
-      weight: 1001
+      weight: 1101
     - name: AI Credit Limits
       url: account_management/billing/ai_credit_limits/
       identifier: bits_ai_settings_ai_credit_limits
       parent: bits_ai_settings
-      weight: 1002
+      weight: 1102
     - name: Dashboards
       url: dashboards/
       pre: dashboard
