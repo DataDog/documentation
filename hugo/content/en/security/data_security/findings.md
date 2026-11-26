@@ -21,45 +21,41 @@ Data Security is in Preview. To request access, fill out the form.
 
 ## Overview
 
-The [Data Security explorer][1] shows where sensitive data sits across your Snowflake, PostgreSQL, and Amazon S3 data stores. Start from the accounts that hold sensitive data, then go down to the database, schema, table, and column, or to the bucket and file, to see which rules matched.
+Use the [Data Security explorer][1] to see where sensitive data is located across your Snowflake, PostgreSQL, and Amazon S3 data stores. Start at the account level, then navigate into databases, schemas, tables, and columns (or buckets and files) to see which rules matched.
 
-## Find the accounts with sensitive data
+## Find accounts with sensitive data
 
-By default, the {{< ui >}}Sensitive Data Only{{< /ui >}} toggle is on, and the explorer shows only the accounts where Data Security found sensitive data. To show all scanned accounts, including the accounts with no sensitive data, turn off {{< ui >}}Sensitive Data Only{{< /ui >}}.
-
-By default, the explorer sorts the accounts by last scan date.
+By default, the explorer sorts accounts by last scan date and shows only accounts where Data Security found sensitive data. Turn off the {{< ui >}}Sensitive Data Only{{< /ui >}} toggle to view all scanned accounts, including those with no sensitive data.
 
 ### Filter findings
 
-Use the search bar or the facets to filter findings. The search bar autocompletes facet names and values. Facets include:
+Use the search bar or facets to filter findings. The search bar autocompletes facet names and values. Available facets include:
 
 - Sensitive data category and matched rule
 - Resource type: Snowflake, PostgreSQL, or Amazon S3
 - Account name
 
-To filter on a value from the list, click a tag or a category on a row, then choose to filter on the value or to exclude it.
+To filter directly from the list, click a tag or category on a row and choose to include or exclude that value.
 
 ## Explore an account
 
-Click an account to open it. The tree on the left shows the databases, schemas, and tables of the account, or the buckets and folders. The tree highlights the resources that hold sensitive data. Click a folder to filter the list, or click a table to open its side panel.
+Click an account to inspect its resources. The tree on the left displays the account's databases, schemas, and tables (or buckets and folders) and highlights resources that contain sensitive data. Click a folder to filter the list, or click a table or file to open its side panel.
 
 ## Review a resource
 
-The side panel of a table or file shows:
+The side panel for a table or file displays:
 
-- The rules that matched, with their descriptions
-- The column where each rule matched, for tables
-- The severity, based on the matched rule
-- The compliance frameworks that the match affects
-- The number of matches
-- The number of rows scanned out of the total, for example {{< ui >}}Scanned rows: 100 out of 50,000{{< /ui >}}
+- Matched rules and their descriptions
+- Affected columns (for tables)
+- Severity, based on the matched rule
+- Impacted compliance frameworks
+- Number of matches
+- Number of rows scanned out of the total (for example, {{< ui >}}Scanned rows: 100 out of 50,000{{< /ui >}})
 - When the finding was first detected
 
-Group the findings by column or by rule. To include the columns with no match, turn on {{< ui >}}All scanned columns{{< /ui >}}.
+Group findings by column or by rule, and turn on {{< ui >}}All scanned columns{{< /ui >}} to include columns without matches. For Snowflake tables, click {{< ui >}}View in Data Observability{{< /ui >}} to open the table in the Data Observability catalog.
 
-Data Security records where a match is, not the matched value.
-
-For Snowflake tables, click {{< ui >}}View in Data Observability{{< /ui >}} to open the table in the Data Observability catalog.
+<div class="alert alert-info">Data Security records where a match occurs, not the matched values.</div>
 
 ## Further reading
 

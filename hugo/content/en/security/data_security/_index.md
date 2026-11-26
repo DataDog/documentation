@@ -24,9 +24,7 @@ Data Security is in Preview. To request access, fill out the form.
 
 ## Overview
 
-Sensitive data spreads through copies. A customer table lands in a data warehouse, then in an export, then in a storage bucket, and nobody keeps track of where it ends up. Regulations such as GDPR and CCPA require you to know where personal data lives, and AI agents connected to your data stores can read whatever those stores hold.
-
-Data Security is Datadog's Data Security Posture Management (DSPM) product. It scans your data stores at rest, finds sensitive data such as personally identifiable information (PII), financial data, and secrets, and shows you which databases, tables, columns, and buckets hold it.
+Data Security is Datadog's Data Security Posture Management (DSPM) product. It scans your data stores at rest, finds sensitive data such as personally identifiable information (PII), financial data, and secrets, and shows you which databases, tables, columns, and buckets hold it. Use it to keep track of sensitive data as it's copied between data stores, including personal data covered by regulations such as GDPR and CCPA.
 
 Data Security builds on the Datadog services you already run. If you use Data Observability on Snowflake, Database Monitoring on PostgreSQL, or Agentless Scanning on AWS, the integrations Data Security needs are already in place.
 
@@ -43,7 +41,7 @@ Data Security builds on the Datadog services you already run. If you use Data Ob
 
 Data Security scans a sample of each resource with the [Sensitive Data Scanner library rules][7]. Library rules cover categories such as PII, financial data, network information, and secrets.
 
-When a rule matches, Data Security creates a finding. A finding links a rule to a resource: a table for Snowflake and PostgreSQL, a file for Amazon S3. Each finding records where the match is, such as the column, the number of matches, and the number of rows scanned. Data Security doesn't store the matched values.
+When a rule matches, Data Security creates a finding. A finding links a rule to a resource: a table for Snowflake and PostgreSQL, or a file for Amazon S3. Each finding records the match location (such as the column), the number of matches, and the number of rows scanned. Data Security doesn't store the matched values.
 
 ### Data handling
 
@@ -53,9 +51,9 @@ The following diagram shows where each scan runs and what Datadog receives.
 
 | | Snowflake | PostgreSQL | Amazon S3 |
 |---|---|---|---|
-| **Does scanned data leave your environment?** | Yes. Sampled rows are read by a Datadog-hosted scanner and held in memory only during the scan. Datadog stores only the match metadata. | No. The Agent scans the data in your environment and sends only the match metadata to Datadog. | No. The scanner reads files in your AWS account and sends only the match metadata to Datadog. |
+| **Scanned data leaves your environment** | Yes. A Datadog-hosted scanner reads sampled rows and holds them in memory only during the scan. Datadog stores only the match metadata. | No. The Agent scans the data in your environment and sends only the match metadata to Datadog. | No. The scanner reads files in your AWS account and sends only the match metadata to Datadog. |
 | **Sample size** | A sample of rows per table | A sample of rows per table | Up to 1,000 files per bucket |
-| **Scan frequency** | Every table at least once a week | Continuously, a few tables at a time | Each bucket at most once every 7 days |
+| **Scan frequency** | Every table at least once every 7 days | Continuously, a few tables at a time | Each bucket at most once every 7 days |
 
 Because Data Security scans a sample, a resource with no finding is not guaranteed to be free of sensitive data.
 
@@ -64,10 +62,10 @@ Because Data Security scans a sample, a resource with no finding is not guarante
 During Preview, Data Security has the following limitations:
 
 - Scanning uses the Sensitive Data Scanner library rules. Custom rules are not supported, and scanning groups and rules are read-only.
-- Data Security finds sensitive data. It doesn't remediate it: it doesn't change access, mask, or redact data yet.
+- Data Security detects sensitive data but doesn't remediate it. It doesn't modify access permissions, mask data, or redact values.
 - Data Security keeps no scan history. When a later scan no longer finds sensitive data in a resource, its finding disappears.
 - Snowflake scanning covers base tables only. Views, external tables, event tables, and materialized views are not scanned.
-- Amazon S3 scanning supports CSV, JSON, Parquet, plain text, and ZIP files, including Microsoft Office documents such as DOCX, XLSX, and PPTX, and OpenDocument files such as ODT. Images, binary files, and other formats are skipped.
+- Amazon S3 scanning supports CSV, JSON, Parquet, plain text, Microsoft Office (such as DOCX, XLSX, and PPTX), OpenDocument (such as ODT), and ZIP files. Images, binary files, and other formats are skipped.
 
 ## Further reading
 

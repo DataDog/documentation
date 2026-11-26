@@ -25,14 +25,13 @@ Data Security scans data stores that another Datadog service already monitors. B
 
 | Data store | Required Datadog service | Setup guide |
 |---|---|---|
-| Snowflake | Data Observability, with the Snowflake integration | [Set up Data Security for Snowflake][1] |
-| PostgreSQL | Database Monitoring, with Datadog Agent 7.86.0 or later | [Set up Data Security for PostgreSQL][2] |
-| Amazon S3 | Agentless Scanning on AWS, with scanners in your AWS account | [Set up Data Security for Amazon S3][3] |
+| Snowflake | Data Observability with the Snowflake integration | [Set up Data Security for Snowflake][1] |
+| PostgreSQL | Database Monitoring with Datadog Agent 7.86.0 or later | [Set up Data Security for PostgreSQL][2] |
+| Amazon S3 | Agentless Scanning on AWS with scanners in your AWS account | [Set up Data Security for Amazon S3][3] |
 
 ## Prerequisites
 
-- Your organization has access to the Data Security Preview. To request access, fill out the [Preview form][4].
-- Your Datadog role has the [permissions][6] for what you need to do:
+- Your Datadog role has the required [permissions][6]:
 
 | Action | Permission |
 |---|---|

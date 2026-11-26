@@ -21,32 +21,35 @@ Data Security is in Preview. To request access, fill out the form.
 
 ## Overview
 
-Data Security scans Snowflake tables through the Snowflake integration you set up for Data Observability. A Datadog-hosted scanner reads a sample of rows of each table. It holds the rows in memory only during the scan and stores only the match metadata. Every table is scanned at least once a week.
+Data Security scans Snowflake tables through the Snowflake integration you set up for Data Observability. A Datadog-hosted scanner reads a sample of rows from each table. It holds the rows in memory only during the scan and stores only the match metadata. Every table is scanned at least once every 7 days.
 
 ## Prerequisites
 
 - The [Snowflake integration for Data Observability][1] is set up for the Snowflake account.
-- Your Datadog role has the Integrations Manage permission, to turn on scanning.
+- Your Datadog role has the Integrations Manage permission to turn on scanning.
 - The Datadog role has read access to the databases you want to scan. To grant it, follow the read-only access step of the [Snowflake integration setup][1], which grants `SELECT` on the tables of each database you list.
+
+## Costs
+
+Data Security scans run as `SELECT` queries against your tables and are billed as normal warehouse usage. They run on the warehouse you set up for Data Observability (`DATADOG_WH` by default).
 
 ## Enable scanning
 
 1. Go to the [Data Security configuration page][2] and click the {{< ui >}}Snowflake{{< /ui >}} tab. The list shows the Snowflake accounts connected to Data Observability.
 1. In the row of the account to scan, turn on the {{< ui >}}Scanning{{< /ui >}} toggle and confirm.
-1. Click the account to open its side panel. The side panel lists setup issues, such as a database the Datadog role can't read.
 
 Findings appear in the [Data Security explorer][3] within a few minutes after you turn on scanning.
 
-Scanning applies to the whole account. To scan an additional database, grant the Datadog role read access to it.
+Scanning applies to the whole account. To scan an additional database, grant the `DATADOG_ROLE` role read access to it.
 
 ## Verify the setup
 
-In the account side panel, check the setup issues:
+On the {{< ui >}}Snowflake{{< /ui >}} tab, click the account to open its side panel, then check the setup issues:
 
 | Setup issue | Cause | Fix |
 |---|---|---|
-| Databases found with zero tables | The Datadog role can't list the tables in these databases. | Grant the Datadog role read access to the databases, as described in the [Snowflake integration setup][1]. |
-| No Snowflake base tables found | The database contains no base tables, or the Datadog role can't list them. Data Security scans base tables only. Views, external tables, event tables, and materialized views appear in the catalog but are not scanned. | If the database contains base tables, check the permissions of the Datadog role. |
+| Databases found with zero tables | The `DATADOG_ROLE` role can't list the tables in these databases. | Grant the `DATADOG_ROLE` role read access to the databases, as described in the [Snowflake integration setup][1]. |
+| No Snowflake base tables found | The database contains no base tables, or the `DATADOG_ROLE` role can't list them. Data Security scans base tables only. Views, external tables, event tables, and materialized views appear in the catalog but are not scanned. | If the database contains base tables, check the permissions of the `DATADOG_ROLE` role. |
 
 ## View findings in Data Observability
 
