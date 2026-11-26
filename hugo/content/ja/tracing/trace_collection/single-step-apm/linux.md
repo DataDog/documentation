@@ -9,13 +9,13 @@ further_reading:
   text: ランタイムメトリクスを有効にする
 - link: https://www.datadoghq.com/blog/single-step-instrumentation-rules/
   tag: ブログ
-  text: Single Step Instrumentation ルールを使用して、ホスト全体でサービスのトレーシングを管理します。
+  text: Single Step Instrumentation ルールを使用して、ホスト全体でサービスのトレーシングを管理する
 title: Linux での Single Step APM インスツルメンテーション
 type: multi-code-lang
 ---
 ## 概要 {#overview}
 
-Linux ホストまたは VM 上では、APM 用の Single Step Instrumentation (SSI) を使用して Datadog Agent をインストールし、ワンステップで [アプリケーションをインスツルメント][4] します。追加の構成は不要です。
+Linux ホストまたは VM 上では、APM 用の Single Step Instrumentation (SSI) を使用して Datadog Agent をインストールし、ワンステップで[アプリケーションをインスツルメント][4]します。追加の構成は不要です。
 
 {{< skill-callout
     title="エージェントを使用して APM をセットアップする"
@@ -53,21 +53,21 @@ Datadog Agent がまだインストールされていない場合は、Agent を
 
 To get a command pre-filled with your API key and site, go to the [Install the Datadog Agent on Linux][15] page and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}} under {{< ui >}}Core Observability{{< /ui >}}.
 
-{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux で Datadog Agent をインストールするためのアプリ内手順の「Agent カバレッジのカスタマイズ」セクション" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux で Datadog Agent をインストールするためのアプリ内手順の「Agent カバレッジをカスタマイズする」セクション" style="width:100%;" >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 ドロップダウンから SDK バージョンを選択するには、{{< ui >}}Customize Library Versions{{< /ui >}} をクリックします。
 
-{{< img src="tracing/trace_collection/customize_library_versions.png" alt="Linux で Datadog Agent をインストールするための手順にある「ライブラリバージョンのカスタマイズ」ドロップダウン" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/customize_library_versions.png" alt="Linux で Datadog Agent をインストールするための手順にある「ライブラリバージョンをカスタマイズする」ドロップダウン" style="width:100%;" >}}
 {{< /site-region >}}
 
 次に、生成されたコマンドをコピーして実行します。
 
 ### 既存の Agent のインストール {#existing-agent-installation}
 
-Datadog agent が既にインストールされている場合は、Datadog からリモートで SSI を有効にします。各ホストでコマンドを実行する必要はありません。
+Datadog agent がすでにインストールされている場合は、Datadog からリモートで SSI を有効にします。各ホストでコマンドを実行する必要はありません。
 
-1. Datadog で、[**APM > Instrument a Service**][21] に移動します。
+1. Datadog で、[**APM > サービスをインスツルメントする**][21]に移動します。
 
 1. {{< ui >}}How do you want to instrument these hosts?{{< /ui >}} で {{< ui >}}Deploy on existing hosts{{< /ui >}} を選択し、Datadog agent 経由でリモートからサービスをインスツルメントします。
 
@@ -79,7 +79,7 @@ Datadog agent が既にインストールされている場合は、Datadog か�
 
 1. {{< ui >}}Review and apply APM instrumentation{{< /ui >}} で {{< ui >}}Configuration Summary{{< /ui >}} を確認し ({{< ui >}}Summary{{< /ui >}} と {{< ui >}}YAML{{< /ui >}} を切り替えます)、{{< ui >}}Apply Instrumentation{{< /ui >}} をクリックします。
 
-## インストールの検証 {#verify-the-installation}
+## インストールを検証する {#verify-the-installation}
 
 1. Agent が実行されていることを確認します。
 
@@ -87,7 +87,7 @@ Datadog agent が既にインストールされている場合は、Datadog か�
    sudo datadog-agent status
    ```
 
-1.  ホストで SSI インジェクションが有効になっていることを確認します。
+1. ホストで SSI インジェクションが有効になっていることを確認します。
 
    ```shell
    cat /etc/ld.so.preload && ls /opt/datadog-packages/ | grep apm
@@ -95,11 +95,11 @@ Datadog agent が既にインストールされている場合は、Datadog か�
 
    `/etc/ld.so.preload` 内の APM インジェクターライブラリと、1 つ以上の `datadog-apm-*` パッケージが出力されます。
 
-1. アプリケーションがトラフィックを受信した後、[APM Services ページ][23] にサービスが表示されることを確認します。数分以内に表示されない場合は、[SSI トラブルシューティングガイド][19] に従ってください。
+1. アプリケーションがトラフィックを受信した後、[APM サービスページ][23]にサービスが表示されることを確認します。数分以内に表示されない場合は、[SSI トラブルシューティングガイド][19]に従います。
 
 ## 統合サービスタグを構成する {#configure-unified-service-tags}
 
-統合サービスタグ (UST) は、トレース、メトリクス、ログを通じて一貫したタグを適用し、監視可能性データのナビゲートと相関を容易にします。[Linux サービスの USTs を設定する][16] 方法を参照してください。
+統合サービスタグ (UST) は、トレース、メトリクス、ログを通じて一貫したタグを適用し、監視可能性データのナビゲートと相関を容易にします。[Linux サービスの USTs を設定する][16]方法を参照してください。
 
 ## SDK に依存する製品と機能を有効にする {#enable-sdk-dependent-products-and-features}
 
@@ -131,37 +131,94 @@ SDK バージョンを更新するには、以下の手順を実行します。
 ### インスツルメンテーションルールを定義する {#define-instrumentation-rules}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">インスツルメンテーションルールは、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Datadog MCP Server はサポートされません。</div>
+<div class="alert alert-warning">インスツルメンテーションルールは、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではサポートされていません。</div>
 {{< /site-region >}}
 
-インスツルメンテーションルール (Agent v7.73 以降で利用可能) を使用すると、Linux ホスト上で SSI によって自動的にインスツルメンテーションされるプロセスを制御できます。
+インスツルメンテーションルールを使用すると、Linux ホスト上で SSI が自動的にインストルメントするプロセスを制御できます。各ルールはプロセス属性と照合され、一致するプロセスに対してインスツルメンテーションを許可またはブロックします。ルールをすべての対象ホストにデプロイすることも、1 つ以上の[ホストグループ](#create-host-groups)にスコープを絞って適用範囲を制限することもできます。
 
-**注**: Bits AI を使用して、自然言語でインスツルメンテーションルールを作成できます。インスツルメントするプロセスを指定すると、Bits AI が対応するルールを生成します。
+インスツルメンテーションルールを表示および管理するには、{{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20] に移動します。
 
-インスツルメンテーションルールを構成するには、以下の手順を実行します。
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-hosts.png" alt="ホストが選択された APM インスツルメンテーションルールページ。インスツルメンテーションルールのリストの上に、デフォルトの動作、スコープ内のホスト、デプロイメントステータスカードが表示されています" style="width:100%;" >}}
 
-1. Datadog で、{{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20] に移動します。
-1. {{< ui >}}Add or Edit Rules{{< /ui >}} をクリックします。
-1. インスツルメンテーションルールを定義します。
-   1. {{< ui >}}Add New Rule{{< /ui >}} をクリックし、{{< ui >}}Allow Rule{{< /ui >}} または {{< ui >}}Block Rule{{< /ui >}} を選択して、一致するプロセスをインスツルメントするかどうかを指定します。
-   1. ルールに名前を付けます。
-   1. 1 つ以上の条件を追加します。詳細については、[ルール条件を定義する](#define-rule-conditions)を参照してください。
+#### インスツルメンテーションルールの前提条件 {#prerequisites-for-instrumentation-rules}
 
-   {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="ルールを定義するための構成オプションが表示されているインスツルメンテーションルール UI" style="width:100%;" >}}
+- **Agent**: 各ホストで v7.73 以降。SSI および [Remote Configuration][24] が有効であること。これらの要件を満たすホストが、インスツルメンテーションルールの対象となります。
+- **権限**: インスツルメンテーションルールとホストグループの作成および管理に必要な **APM Workload Selection Write** [権限][25]。
 
-1. (オプション) ルールをドラッグアンドドロップして並べ替えます。
+#### デフォルトの動作を設定する {#set-the-default-behavior}
 
-   **注**: ルールは順番に評価されます。プロセスがルールに一致すると、それ以降のルールは無視されます。
+デフォルトの動作は、どのインスツルメンテーションルールにも一致しない対象ホスト上のプロセスに適用されます。また、ルールをまだ作成していない場合にも適用されます。
 
-1. どのルールにも一致しないプロセスのデフォルトの動作 (許可またはブロック) を設定します。
-1. {{< ui >}}Next{{< /ui >}} をクリックしてルールをプレビューします。
-1. {{< ui >}}Deploy Rules{{< /ui >}} をクリックします。
+1. [インスツルメンテーションルール][102]ページで {{< ui >}}Default Behavior{{< /ui >}} カードに移動し、{{< ui >}}Edit{{< /ui >}} をクリックします。
+1. 次のいずれかのオプションを選択します。
+   - {{< ui >}}Allow everything else{{< /ui >}}: ルールでブロックされない限り、サポートされているアプリケーションがインストルメントされます。
+   - {{< ui >}}Block everything else{{< /ui >}}: ルールで許可されない限り、アプリケーションはインストルメントされません。
+1. {{< ui >}}Save{{< /ui >}} をクリックします。
 
-Remote Configuration が有効な場合、ルールはすべてのホストに展開され、SSI が有効なホストには 50 秒以内に適用されます。または、{{< ui >}}Export{{< /ui >}} をクリックして構成ファイルをエクスポートし、ホストに手動で適用します。
+#### ホストグループを作成する {#create-host-groups}
+
+ホストグループは、インスツルメンテーションルールのターゲットにできる再利用可能なホストのコレクションです。
+
+ホストグループを作成するには、以下を実行します。
+
+1. [インスツルメンテーションルール][20]ページで {{< ui >}}Hosts in Scope{{< /ui >}} カードに移動し、{{< ui >}}Manage host groups{{< /ui >}} をクリックします。
+1. {{< ui >}}New Host Group{{< /ui >}} をクリックし、グループの名前を入力します。
+1. {{< ui >}}Add Hosts{{< /ui >}} をクリックし、追加するホストを検索して選択します。ホスト名、ファセット、またはホストタグで検索できます。
+
+   <div class="alert alert-info">ホストグループは動的であるため、検索条件に一致する新しいホストは自動的にグループに追加されます。1 つのホストが複数のグループに属することはできますが、グループ内のすべてのホストは、Linux や Windows など、同じプラットフォームで実行される必要があります。</div>
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="ホストを追加するリストで 3 つのうち 2 つのホストが選択されている、新しいホストグループフォーム" style="width:80%;" >}}
+
+1. {{< ui >}}Save Group{{< /ui >}} をクリックします。
+
+Datadog は {{< ui >}}All hosts{{< /ui >}} グループを自動的に維持します。これには、他のグループに属していない対象ホストが一覧表示されるため、どのホストがグループ化されていないかを確認できます。ホストリストを編集することはできません。
+
+ホストグループを削除すると、Datadog でそのグループのルールが削除され、Agent が次回 Remote Configuration をポーリングするときに、そのルールの適用が停止します。
+
+ホストグループの順序を変更するには、グループリストでグループのハンドルを使用してグループをドラッグします。グループの順序は[インスツルメンテーションルールの評価方法](#how-instrumentation-rules-are-evaluated)に影響します。
+
+{{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="すべてのホストグループの上に Canary グループが表示され、Canary グループのホストが表示されている、ホストグループページ" style="width:100%;" >}}
+
+#### インスツルメンテーションルールを作成する {#create-instrumentation-rules}
+
+**注**: Bits AI を使用して、自然言語でインスツルメンテーションルールを作成できます。インスツルメントルールを作成するウィンドウで {{< ui >}}Generate with Bits{{< /ui >}} をクリックし、インスツルメンテーション対象のプロセスを記述します。Bits AI により対応するルールが生成されます。
+
+インスツルメンテーションルールを作成するには、以下を実行します。
+
+1. [インスツルメンテーションルール][102]ページで {{< ui >}}New Rule{{< /ui >}} をクリックします。または、ホストグループページでグループを選択し、その {{< ui >}}Rules{{< /ui >}} タブを開いて {{< ui >}}Create a new rule{{< /ui >}} をクリックします。
+1. 1 つ以上の条件を定義し、{{< ui >}}Block Instrumentation{{< /ui >}} または {{< ui >}}Allow Instrumentation{{< /ui >}} を選択します。[ルール条件を定義する](#define-rule-conditions)セクションを参照してください。
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="Language equals Python の条件、インスツルメンテーションを許可するアクション、および Rule Impact Preview パネルが表示された、インスツルメンテーションルールを作成するウィンドウ" style="width:100%;" >}}
+
+1. {{< ui >}}Set host targeting{{< /ui >}} で、{{< ui >}}All eligible hosts{{< /ui >}} または {{< ui >}}Select host groups{{< /ui >}} を選択します。
+
+   複数のグループを選択した場合、それらのグループは 1 つのルールを共有します。後でそのルールを編集すると、選択したすべてのグループが更新されます。
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="Select host groups が選択され、テストという名前のホストグループが選択された、ホストターゲティングを設定するステップ。" style="width:80%;" >}}
+
+1. ルールに名前を付け、{{< ui >}}Next{{< /ui >}} をクリックします。
+1. ルールを確認します。各ターゲットグループのルールリストの末尾に新しいルールが追加されます。必要に応じて、{{< ui >}}Set evaluation order{{< /ui >}} でルールをドラッグして、各グループ内の順序を変更します。[インスツルメンテーションルールの評価方法](#how-instrumentation-rules-are-evaluated)セクションを参照してください。
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="ルールサマリーとテストホストグループ内のルールの評価順序が表示された、ルール確認ステップ" style="width:100%;" >}}
+
+1. {{< ui >}}Create Rule{{< /ui >}} をクリックします。
+
+Datadog は、50 秒以内にRemote Configuration を介して対象ホストへルールをデプロイします。ルールがデプロイされたら、影響を受けるサービスを再起動して変更を反映させます。インスツルメンテーションルール][20]ページの {{< ui >}}Deployment Status{{< /ui >}} カードに、現在のルールを受信した対象ホストの数が表示されます。
+
+Remote Configuration が有効になっていないホストなどでルールを手動で適用するには、ルールリストの上にある {{< ui >}}Export{{< /ui >}} をクリックして構成ファイルをエクスポートし、それをホストに適用します。
+
+#### インスツルメンテーションルールの評価方法 {#how-instrumentation-rules-are-evaluated}
+
+Datadog は各プロセスに対して以下の順序でインスツルメンテーションルールを評価し、最初に一致したルールを適用します。
+
+1. プロセスのホストが属するグループのルール (グループ順に上から下へ)。各グループ内では、ルールは {{< ui >}}Set evaluation order{{< /ui >}} で設定された順序で評価されます。
+1. {{< ui >}}All eligible hosts{{< /ui >}} をターゲットとするルール。これらのルールは、ホストグループ内のホストを含むすべての対象ホストに適用されます。
+
+一致するルールがない場合は、[デフォルトの動作](#set-the-default-behavior)が適用されます。
 
 #### ルール条件を定義する {#define-rule-conditions}
 
-各ルールは 1 つ以上の条件で構成されます。条件には以下の要素が含まれます。
+各ルールは 1 つ以上の条件で構成されます。ルールが適用されるには、プロセスがそのルールのすべての条件に一致している必要があります。条件には以下の要素が含まれます。
 - {{< ui >}}Attribute{{< /ui >}}: ルールが評価するプロセスプロパティ。
 - {{< ui >}}Operator{{< /ui >}}: 比較ロジック (`equals`、`not equals`、`prefix`、または `contains`)。
 - {{< ui >}}Value{{< /ui >}}: プロセス名やコマンドラインフラグなど、一致させるテキストまたはパターン。
@@ -179,25 +236,55 @@ Remote Configuration が有効な場合、ルールはすべてのホストに�
 
 #### 使用例 {#example-use-cases}
 
-インスツルメンテーションルールの適用方法を示す以下の例をご確認ください。
+インスツルメンテーションルールの適用方法を示す以下の例を確認してください。
 
-{{< collapse-content title="例 1: 特定のプロセスを除くすべてのプロセスをインスツルメントする" level="h5" >}}
+{{% collapse-content title="例 1: 特定のプロセスを除くすべてのプロセスをインスツルメントする" level="h5" %}}
 
 デフォルトですべてのプロセスをインスツルメントします。分析用の cron ジョブや Java バッチプロセッサなど、価値のないノイズを追加するサービスを除外するために、ブロックルールを追加します。
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="作業ディレクトリとエントリーポイントファイルの条件を対象とする 2 つのブロックインスツルメンテーションルール (デフォルトはインスツルメンテーションを許可)" style="width:100%;" >}}
+1. デフォルトの動作を {{< ui >}}Allow everything else{{< /ui >}} に設定します。
+1. それぞれ {{< ui >}}All eligible hosts{{< /ui >}} をターゲットとする以下のルールを作成します。
 
-{{< /collapse-content >}}
+   | ルール名 | 条件 | アクション |
+   | --------- | --------- | ------ |
+   | 分析用の cron ジョブを除外する | <code>Working Directory</code> <code>contains</code> <code>analytics-service</code> | インスツルメンテーションをブロックする |
+   | バッチサービスを除外する | <code>Entry Point File</code> <code>contains</code> <code>batch-processor.jar</code> | インスツルメンテーションをブロックする |
 
-{{< collapse-content title="例 2: 特定のプロセスのみをインスツルメントする" level="h5" >}}
+{{% /collapse-content %}}
 
-デフォルトですべてのインスツルメンテーションをブロックします。特定のプロセスを APM にオプトインさせるために、許可ルールを追加します。このアプローチは正確な制御を可能にし、段階的なロールアウトに適しています。
+{{% collapse-content title="例 2: 特定のプロセスのみをインスツルメントする" level="h5" %}}
 
-たとえば、チェックアウトサービスとカスタマーポータルのみをインスツルメンテーションするには、{{< ui >}}Working Directory{{< /ui >}} を使用して許可ルールを作成し、デフォルトの動作を {{< ui >}}Block Instrumentation{{< /ui >}} に設定します。
+デフォルトですべてのインスツルメンテーションをブロックします。特定のプロセスを APM にオプトインさせるために、許可ルールを追加します。
 
-{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="特定の作業ディレクトリ内のサービスを対象とする 2 つの許可インスツルメンテーションルール (デフォルトはインスツルメンテーションをブロック)" style="width:100%;" >}}
+例えば、チェックアウトサービスとカスタマーポータルにのみインスツルメンテーションを適用するには、以下を実行します。
 
-{{< /collapse-content >}}
+1. デフォルトの動作を {{< ui >}}Block everything else{{< /ui >}} に設定します。
+1. それぞれ {{< ui >}}All eligible hosts{{< /ui >}} をターゲットとする以下のルールを作成します。
+
+   | ルール名 | 条件 | アクション |
+   | --------- | --------- | ------ |
+   | チェックアウトサービス | <code>Working Directory</code> <code>equals</code> <code>/srv/checkout</code> | インスツルメンテーションを許可する |
+   | カスタマーポータル | <code>Working Directory</code> <code>equals</code> <code>/srv/customer-portal</code> | インスツルメンテーションを許可する |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="例 3: ホストグループを使用してインスツルメンテーションを段階的にロールアウトする" level="h5" %}}
+
+デフォルトですべてのインスツルメンテーションをブロックし、少数の canary ホストでのみ許可します。結果を検証した後、グループにホストを追加するか、すべての対象ホストをターゲットにするようにルールを変更します。
+
+1. デフォルトの動作を {{< ui >}}Block everything else{{< /ui >}} に設定します。
+1.  <code>canary</code> という名前のホストグループを作成し、インスツルメントするホストを追加します。
+1. 次の設定でルールを作成します。
+
+   | 設定 | 値 |
+   | ------- | ----- |
+   | 条件 | <code>Language</code> <code>equals</code> <code>python</code> |
+   | アクション | インスツルメンテーションを許可する |
+   | ホストのターゲティング | ホストグループを選択:<code>canary</code> |
+
+ホスト上の Python アプリケーション ( <code>canary</code> グループ内) のみがインスツルメントされます。その他のすべてのアプリケーションはインスツルメントされません。
+
+{{% /collapse-content %}}
 
 ## シングルステップ APM インスツルメンテーションを Agent から削除する {#remove-single-step-apm-instrumentation-from-your-agent}
 
@@ -209,9 +296,9 @@ Remote Configuration が有効な場合、ルールはすべてのホストに�
    ```
 2. ホストまたは VM 上のサービスを再起動します。
 
-## トラブルシューティング {#troubleshooting}
+## トラブルシューティング{#troubleshooting}
 
-SSI で APM を有効にする際に問題が発生した場合は、[SSI トラブルシューティングガイド][19] を参照してください。
+SSI で APM を有効にする際に問題が発生した場合は、[SSI トラブルシューティングガイド][19]を参照してください。
 
 ## 参考資料 {#further-reading}
 
@@ -233,3 +320,5 @@ SSI で APM を有効にする際に問題が発生した場合は、[SSI トラ
 [21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
+[24]: /ja/remote_configuration/
+[25]: /ja/account_management/rbac/permissions/

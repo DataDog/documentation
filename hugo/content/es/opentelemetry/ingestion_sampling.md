@@ -15,11 +15,11 @@ title: Muestreo de ingesta con OpenTelemetry
 ---
 ## Descripción general {#overview}
 
-Los SDK de OpenTelemetry y el OpenTelemetry Collector proporcionan capacidades de muestreo, ya que ingerir el 100% de las trazas suele ser innecesario para obtener visibilidad sobre el estado de sus aplicaciones. Configure las tasas de muestreo antes de enviar trazas a Datadog para ingerir los datos que sean más relevantes para su negocio y sus objetivos de observabilidad, mientras controla y gestiona los costos generales.
+Los SDK de OpenTelemetry y el OpenTelemetry Collector proporcionan capacidades de muestreo, ya que ingerir el 100 % de las trazas a menudo es innecesario para obtener visibilidad sobre el estado de sus aplicaciones. Configure las tasas de muestreo antes de enviar trazas a Datadog para ingerir los datos que sean más relevantes para sus objetivos de negocio y observabilidad, mientras controla y gestiona los costos generales.
 
 Este documento demuestra dos métodos principales para enviar trazas a Datadog con OpenTelemetry:
 
-- Envíe trazas al **[OpenTelemetry Collector][1]** y utilice el exportador OTLP HTTP para reenviarlas a Datadog.
+- Envíe trazas al **[OpenTelemetry Collector][1]** y utilice el exportador HTTP de OTLP para reenviarlas a Datadog.
 - Envíe trazas a **[Datadog Agent OTLP ingest][3]**, que las reenvía a Datadog.
 
 **Nota**: Datadog no admite la ejecución del OpenTelemetry Collector y el Datadog Agent en el mismo servidor.
@@ -30,17 +30,17 @@ Con este método, el OpenTelemetry Collector recibe trazas de los SDK de OpenTel
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="Un SDK de OpenTelemetry envía datos de OTLP a un OpenTelemetry Collector, el cual los exporta a Datadog a través de OTLP HTTP." style="width:100%;" >}}
 
-En la configuración recomendada del Collector, el conector `span_metrics` calcula las [métricas de traza de APM][4] antes de que el Collector aplique el muestreo.
+En la configuración recomendada del Collector, el conector `span_metrics` calcula [métricas de traza de APM][4] antes de que el Collector aplique el muestreo.
 
 Elija este método si requiere capacidades de procesamiento avanzadas del OpenTelemetry Collector, como el muestreo basado en el seguimiento de las últimas líneas. Para configurar el Collector, siga [Configure el OpenTelemetry Collector][1].
 
 ### Uso de la ingesta de OTLP del Datadog Agent {#using-datadog-agent-otlp-ingestion}
 
-Con este método, el Datadog Agent recibe trazas directamente de los SDK de OpenTelemetry mediante el protocolo OTLP. Esto le permite enviar trazas a Datadog sin ejecutar un servicio de OpenTelemetry Collector independiente. En este escenario, el Agent calcula las métricas de traza de APM:
+Con este método, el Datadog Agent recibe trazas directamente de los SDK de OpenTelemetry utilizando el protocolo OTLP. Esto le permite enviar trazas a Datadog sin ejecutar un servicio de OpenTelemetry Collector por separado. En este escenario, el Agent calcula las métricas de traza de APM:
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="Cálculo de métricas de APM de OpenTelemetry mediante el Datadog Agent" style="width:100%;" >}}
 
-Elija este método si prefiere una configuración más sencilla sin la necesidad de un servicio de OpenTelemetry Collector independiente. Para configurar el Datadog Agent para recibir trazas mediante OTLP, siga las instrucciones en [Ingesta de OTLP del Datadog Agent][15].
+Elija este método si prefiere una configuración más sencilla sin la necesidad de un servicio de OpenTelemetry Collector por separado. Para configurar el Datadog Agent para recibir trazas mediante OTLP, siga las instrucciones en [Configure el punto de conexión de OTLP del Agent][15].
 
 ## Reducción del volumen de ingesta {#reducing-ingestion-volume}
 
@@ -52,7 +52,7 @@ Con OpenTelemetry, puede configurar el muestreo tanto en las bibliotecas de Open
 
 ### Muestreo basado en el inicio {#head-based-sampling}
 
-A nivel de SDK, puede implementar _muestreo basado en el inicio_. Esto ocurre cuando la decisión de muestreo se toma al principio de la traza. Este tipo de muestreo es particularmente útil para aplicaciones de alto rendimiento, donde tiene una comprensión clara de qué trazas son más importantes para ingerir y desea tomar decisiones de muestreo al principio del proceso de rastreo.
+A nivel de SDK, puede implementar _muestreo basado en el inicio_. Esto ocurre cuando la decisión de muestreo se toma al inicio de la traza. Este tipo de muestreo es particularmente útil para aplicaciones de alto rendimiento, donde tiene una comprensión clara de qué trazas son más importantes para ingerir y desea tomar decisiones de muestreo al principio del proceso de rastreo.
 
 #### Configuración {#configuring}
 
@@ -60,36 +60,52 @@ Para configurar el muestreo basado en el inicio, utilice los muestreadores [Trac
 
 #### Consideraciones {#considerations}
 
-El muestreo basado en el inicio afecta el cálculo de las métricas de APM. Solo las trazas muestreadas se envían al OpenTelemetry Collector o al Datadog Agent, que calculan las métricas.
+El muestreo basado en el inicio reduce los tramos disponibles para el cálculo de métricas de APM. Para los SDK de DDOT, consulte [extrapolación de métricas de traza][27].
 
-Para aproximar las métricas no muestreadas a partir de las métricas muestreadas, utilice [fórmulas y funciones][7] con la tasa de muestreo configurada en el SDK.
+Utilice la [guía de control de volumen de ingesta][8] para leer más sobre las implicaciones de configurar el muestreo de trazas en los monitores de análisis de trazas y las métricas de los tramos.
 
-Utilice la [guía de control de volumen de ingesta][8] para leer más sobre las implicaciones de configurar el muestreo de trazas en los monitores de análisis de trazas y en las métricas de los spans.
+#### Extrapolación de métricas de traza para los SDK de Datadog {#trace-metric-extrapolation-for-datadog-sdks}
 
+Los SDK de DDOT registran la probabilidad de muestreo en los `tracestate` de los tramos exportados. Los receptores compatibles lo utilizan para estimar el tráfico total a partir de las trazas muestreadas. Para saber cómo funciona la extrapolación (upsampling), consulte la [especificación de OpenTelemetry][21] y la [propuesta detallada de umbral de muestreo (OTEP 235)][22].
+
+Utilice estas versiones mínimas para la extrapolación automática:
+
+| Componente que calcula métricas de traza | Versión mínima |
+| --- | --- |
+| Span Metrics Connector (SMC) en OpenTelemetry Collector Contrib | [0.148.0][24] |
+| Conector de Datadog en OpenTelemetry Collector Contrib | [0.159.0][25] |
+| Conector de Datadog en DDOT, o el receptor OTLP de Datadog Agent | [7.82.0][26] |
+
+Para configurar métricas de traza a partir de tramos muestreados:
+
+1. Utilice una [versión de SDK de DDOT compatible][23].
+2. Conserve `tracestate` y coloque el conector de métricas antes de cualquier procesador de muestreo del Collector.
+
+La extrapolación es automática cuando hay un umbral válido de `ot.th`. Para obtener conteos precisos, la probabilidad registrada debe coincidir con los tramos realmente exportados.
 
 ### Muestreo basado en el seguimiento de las últimas líneas {#tail-based-sampling}
 
-A nivel del OpenTelemetry Collector, puede realizar _muestreo basado en el seguimiento de las últimas líneas_, lo que le permite definir reglas más avanzadas para mantener la visibilidad sobre las trazas con errores o alta latencia.
+A nivel del OpenTelemetry Collector, puede realizar _muestreo basado en el seguimiento de las últimas líneas_, lo que le permite definir reglas más avanzadas para mantener la visibilidad de las trazas con errores o alta latencia.
 
-#### Configuración {#configuring-1}
+#### Configuración de {#configuring-1}
 
 Para configurar el muestreo basado en el seguimiento de las últimas líneas, utilice el [Tail Sampling Processor][9] o el [Probabilistic Sampling Processor][10] para muestrear trazas según un conjunto de reglas a nivel del Collector.
 
 #### Consideraciones {#considerations-1}
 
-Una limitación del muestreo basado en el seguimiento de las últimas líneas es que todos los spans de una traza determinada deben ser recibidos por la misma instancia del collector para tomar decisiones de muestreo efectivas. Si una traza se distribuye entre varias instancias del collector y se utiliza el muestreo basado en el seguimiento de las últimas líneas, es posible que algunas partes de esa traza no se envíen a Datadog.
+Una limitación del muestreo basado en el seguimiento de las últimas líneas es que la misma instancia del Collector debe recibir todos los tramos de una traza determinada para tomar decisiones de muestreo efectivas. Si una traza se distribuye entre varias instancias del Collector y se utiliza el muestreo basado en el seguimiento de las últimas líneas, es posible que algunas partes de esa traza no se envíen a Datadog.
 
-La configuración recomendada del Collector utiliza el patrón de despliegue del agente y no proporciona enrutamiento consciente de las trazas a través de múltiples Collectors. Para el muestreo distribuido basado en el seguimiento de las últimas líneas, utilice un [despliegue de gateway][19] y configure el enrutamiento de modo que todos los spans de una traza lleguen al mismo Collector de gateway.
+La configuración recomendada del Collector utiliza el patrón de implementación de agente y no proporciona enrutamiento basado en trazas entre varias instancias del Collector. Para el muestreo distribuido basado en el seguimiento de las últimas líneas, utilice una [implementación de gateway][19] y configure el enrutamiento de modo que todos los tramos de una traza lleguen al mismo Collector de gateway.
 
-Para calcular las métricas de APM a partir del 100 % del tráfico de la aplicación mientras utiliza el muestreo basado en el seguimiento de las últimas líneas a nivel de Collector, configure el [conector `span_metrics`][20] antes del procesador de muestreo.
+Configure el [conector `span_metrics`][20] antes del procesador de muestreo. Para los SDK de DDOT que muestrean trazas antes de la exportación, siga los [requisitos de extrapolación de métricas de traza][27].
 
-Consulte la [guía de control de volumen de ingesta][8] para obtener información sobre las implicaciones de configurar el muestreo de trazas en los monitores de análisis de trazas y las métricas de los spans.
+Consulte la [guía de control de volumen de ingesta][8] para obtener información sobre las implicaciones de configurar el muestreo de trazas en los monitores de análisis de trazas y las métricas derivadas de tramos.
 
 ### Muestreo probabilístico {#probabilistic-sampling}
 
-Al utilizar la ingesta OTLP del Datadog Agent, hay disponible un muestreador probabilístico para la versión 7.70.0 del Agent y posteriores.
+Al usar la ingesta OTLP de Datadog Agent, hay un muestreador probabilístico disponible para la versión 7.70.0 de Agent y posteriores.
 
-<div class="alert alert-danger">El muestreo probabilístico se introdujo en la versión v7.54.0 del Agent, pero las versiones del Agent anteriores a v7.70.0 pueden descartar todos los datos de trazas OTLP entrantes cuando el muestreador está habilitado. Actualice a la versión v7.70.0 o posterior antes de usar el muestreo probabilístico con la ingesta OTLP.</div>
+<div class="alert alert-danger">El muestreo probabilístico se introdujo con Agent v7.54.0, pero las versiones de Agent anteriores a la v7.70.0 pueden descartar todos los datos de traza OTLP entrantes cuando el muestreador está habilitado. Actualice a la v7.70.0 o posterior antes de usar el muestreo probabilístico con la ingesta OTLP.</div>
 
 #### Configuración {#configuring-2}
 
@@ -111,31 +127,31 @@ Para configurar el muestreo probabilístico, realice una de las siguientes accio
 **Si utiliza una configuración mixta de SDK de Datadog y SDK de OTel**:
 
 - El muestreo probabilístico se aplica a los spans tanto de los SDK de Datadog como de los de OTel.
-- Si envía spans tanto al Datadog Agent **como** a las instancias del Collector de OTel, configure el Agent para que tome las mismas decisiones de muestreo que el Collector:
-  1. Establezca la misma semilla en el Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) y en el Collector (`hash_seed`).
-  2. Agregue `probabilistic_sampler_full_trace_id` a las funciones de APM del Agent. Establezca `DD_APM_FEATURES` en `probabilistic_sampler_full_trace_id`, o agregue `features: ["probabilistic_sampler_full_trace_id"]` bajo `apm_config`. Si ya configuró las funciones de APM, agregue el indicador a la lista existente.
+- Si envía spans tanto al Datadog Agent **como** a instancias de OTel Collector, configure el Agent para que tome las mismas decisiones de muestreo que el OTel Collector:
+  1. Establezca la misma semilla en el Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) y en el OTel Collector (`hash_seed`).
+  2. Agregue `probabilistic_sampler_full_trace_id` a las características de APM del Agent. Establezca `DD_APM_FEATURES` en `probabilistic_sampler_full_trace_id`, o agregue `features: ["probabilistic_sampler_full_trace_id"]` bajo `apm_config`. Si ya configuró las características de APM, agregue la bandera a la lista existente.
 
-  De forma predeterminada, el Agent aplica hash solo a los 64 bits inferiores del ID de traza, y el Collector aplica hash a los 128 bits completos. Sin el indicador, ambos toman decisiones diferentes para la misma traza, incluso con la misma semilla. El Agent coincide con el Collector solo en el modo `hash_seed` del Collector, que es el predeterminado.
+  De forma predeterminada, el Agent solo aplica hash a los 64 bits inferiores del ID de traza, y el OTel Collector aplica hash a los 128 bits. Sin la bandera, ambos toman decisiones diferentes para la misma traza, incluso con la misma semilla. El Agent coincide con el OTel Collector solo en el modo `hash_seed` del OTel Collector, que es el predeterminado.
 
 <div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> está obsoleto y ha sido reemplazado por <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
 #### Consideraciones {#considerations-2}
 
-- El muestreador probabilístico ignorará la prioridad de muestreo de los spans que se establezcan a nivel de SDK. Como resultado, el muestreo probabilístico es **incompatible con el [muestreo basado en el inicio][16]**. Esto significa que las trazas seleccionadas mediante el muestreo basado en el inicio aún podrían ser descartadas por el muestreo probabilístico.
-- Los spans que no sean capturados por el muestreador probabilístico aún pueden ser capturados por los [muestreadores de errores y casos poco frecuentes][12] del Datadog Agent.
-- Si habilita `probabilistic_sampler_full_trace_id`, todos los SDK deben generar y propagar [ID de traza de 128 bits][17]. Si un SDK descarta los 64 bits superiores del ID de traza, el Agent toma una decisión de muestreo diferente para los spans de ese SDK y las trazas quedan incompletas.
+- El muestreador probabilístico ignorará la prioridad de muestreo de los spans que se establecen a nivel de SDK. Como resultado, el muestreo probabilístico es **incompatible con el [muestreo basado en el inicio de la traza][16]**. Esto significa que las trazas muestreadas al inicio aún podrían ser descartadas por el muestreo probabilístico.
+- Los spans no capturados por el muestreador probabilístico aún pueden ser capturados por los [muestreadores de errores y casos raros][12] del Datadog Agent.
+- Si habilita `probabilistic_sampler_full_trace_id`, todos los SDK deben generar y propagar [IDs de traza de 128 bits][17]. Si un SDK descarta los 64 bits superiores del ID de traza, el Agent toma una decisión de muestreo diferente para los spans de ese SDK y las trazas quedan incompletas.
 
 ## Monitoreo de volúmenes ingeridos en Datadog {#monitoring-ingested-volumes-in-datadog}
 
-Utilice el [APM Estimated Usage dashboard][13] y la métrica `datadog.estimated_usage.apm.ingested_bytes` para consultar los volúmenes ingeridos durante un período específico. Filtre el panel de control por entornos y servicios específicos para ver qué servicios son responsables de la mayor parte del volumen ingerido.
+Utilice el [panel APM Estimated Usage][13] y la métrica `datadog.estimated_usage.apm.ingested_bytes` para obtener visibilidad de sus volúmenes ingeridos durante un período de tiempo específico. Filtre el panel por entornos y servicios específicos para ver qué servicios son responsables de la mayor parte del volumen ingerido.
 
 Si el volumen de ingesta es mayor de lo esperado, considere ajustar sus tasas de muestreo.
 
-## Unified service tagging {#unified-service-tagging}
+## Etiquetado unificado de servicios {#unified-service-tagging}
 
-Al enviar datos de OpenTelemetry a Datadog, es importante vincular los datos de las trazas mediante unified service tagging.
+Al enviar datos de OpenTelemetry a Datadog, es importante vincular los datos de traza mediante el etiquetado unificado de servicios.
 
-Configurar las etiquetas de unified service tagging garantiza que las trazas se vinculen con precisión a sus servicios y entornos correspondientes. Esto evita que los hosts se atribuyan incorrectamente, lo que puede provocar aumentos inesperados en el uso y los costos.
+Configurar etiquetas de servicio unificadas garantiza que las trazas se vinculen con precisión a sus servicios y entornos correspondientes. Esto evita que los hosts se atribuyan incorrectamente, lo que puede provocar aumentos inesperados en el uso y los costos.
 
 Para obtener más información, consulte [Unified Service Tagging][18].
 
@@ -148,7 +164,6 @@ Para obtener más información, consulte [Unified Service Tagging][18].
 [4]: /es/tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [6]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
-[7]: /es/dashboards/functions/#add-a-function
 [8]: /es/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
@@ -160,3 +175,10 @@ Para obtener más información, consulte [Unified Service Tagging][18].
 [18]: /es/getting_started/tagging/unified_service_tagging/#opentelemetry
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [20]: /es/opentelemetry/setup/collector_exporter/#span-metrics-connector
+[21]: https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/#sampling-threshold-value-th
+[22]: https://github.com/open-telemetry/oteps/blob/main/text/trace/0235-sampling-threshold-in-trace-state.md
+[23]: /es/opentelemetry/instrument/ddot_sdks/#sampling-and-trace-metrics
+[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
+[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
+[26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0
+[27]: /es/opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks

@@ -11,8 +11,6 @@ further_reading:
   text: Private Action Runners
 title: Conectividad de Private Link
 ---
-<div class="alert alert-info">El hacer un seguimiento de Databricks a través de Private Link Connectivity se encuentra en versión preliminar.</div>
-
 Los espacios de trabajo de Databricks implementados mediante [Private Link Connectivity][1] están aislados de la internet pública, lo que impide que Datadog acceda directamente a las API de Databricks. Para hacer un seguimiento de estos espacios de trabajo, implemente un [Private Action Runner][2] (PAR) en su entorno. El runner consulta a Datadog para obtener solicitudes, las ejecuta localmente contra la API de Databricks y envía los resultados de vuelta a través de su [punto de conexión Datadog VPC][3] existente.
 
 ## Arquitectura {#architecture}
@@ -66,6 +64,7 @@ Toda la autenticación ante Datadog es gestionada por el Private Action Runner s
    1. Seleccione el principal de servicio creado anteriormente.
    1. Haga clic en la pestaña **Secrets**, luego haga clic en **Generate secret**.
    1. Establezca la duración del secreto en días (máximo 730 días).
+   1. Establezca el contexto del secreto en `all-apis`.
    1. Haga clic en **Generate**.
    1. Haga que las credenciales de Databricks estén disponibles para el runner utilizando **uno** de los siguientes métodos:
       - **Almacenamiento de secretos en la nube** (AWS Secrets Manager, AWS Parameter Store, Azure Key Vault o Google Cloud Secret Manager): almacene las credenciales como un blob JSON:
@@ -155,7 +154,7 @@ Configure su Private Action Runner usando **una** de las siguientes opciones.
    1. El Private Action Runner debería aparecer en la parte inferior como "instalado correctamente".
 1. Actualice el `values.yaml` existente (haciendo referencia a los [valores del gráfico de Helm][4]):
    1. Establecer `image.repository` en `gcr.io/datadoghq/dd-data-observability-par`.
-   1. Establecer `image.tag` en `1.21.0-3`.
+   1. Establezca `image.tag` en `1.22.2-0`.
 1. Configure las credenciales en el Private Action Runner usando uno de los siguientes métodos:
     - Establezca las variables de entorno `DATABRICKS_CLIENT_ID` y `DATABRICKS_CLIENT_SECRET` directamente en el runner. Si utiliza una entidad de servicio administrada de Microsoft Entra ID, establezca también `DATABRICKS_AZURE_TENANT_ID`. Deje en blanco la "Ruta del secreto" (Secret Path) en el mosaico de integración.
     - Utilice el almacenamiento de secretos en la nube. Asegúrese de que se asigne una identidad al pod ([Azure Workload Identity][5], [AWS IAM Role][6] o [GKE Workload Identity][7]) con permisos para leer el secreto creado en el [Paso 2](#step-2-databrick-prerequisites), y proporcione la ruta al secreto ya sea a través de la variable de entorno `DATABRICKS_SECRET_PATH`, o proporcionándola en el campo "Ruta del secreto" (Secret Path) en el mosaico de integración.
@@ -178,7 +177,7 @@ Configure su Private Action Runner usando **una** de las siguientes opciones.
    1. Seleccione la opción **Script**, luego haga clic en **Siguiente**.
    1. Siga las instrucciones en **Docker**.
 
-      **Importante**: Reemplace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` con `gcr.io/datadoghq/dd-data-observability-par:1.21.0-3`.
+      **Importante**: Reemplace `gcr.io/datadoghq/private-action-runner:v1.22.1-large` con `gcr.io/datadoghq/dd-data-observability-par:1.22.2-0`.
 
    1. El Private Action Runner debería aparecer en la parte inferior como "instalado correctamente".
 1. Configure las credenciales en el Private Action Runner usando uno de los siguientes métodos:

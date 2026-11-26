@@ -10,14 +10,12 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/adx-observability-pipelines/"
+  tag: "Blog"
+  text: "Send query-ready logs to Azure Data Explorer with Datadog Observability Pipelines"
 ---
 
 {{< product-availability >}}
-
-{{< callout url="#"
- btn_hidden="true" header="Join the Preview!">}}
-The Azure Data Explorer destination is in Preview. Contact your account manager to request access.
-{{< /callout >}}
 
 ## Overview
 

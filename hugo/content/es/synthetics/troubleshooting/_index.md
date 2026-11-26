@@ -21,20 +21,20 @@ Utilice esta página para solucionar problemas comunes con la configuración de 
 
 ## Mensajes de error comunes {#common-error-messages}
 
-Utilice esta tabla para encontrar pasos de solución de problemas para errores comunes.
+Utilice esta tabla para encontrar los pasos necesarios para solucionar errores comunes.
 
 | Mensaje de error                                  | Ver sección |
 |------------------------------------------------|-------------|
 | `self-signed certificate in certificate chain` | [Ubicaciones privadas → Certificados](?tab=windows#self-signed-certificate-errors) |
 | `401 Unauthorized`                           | [Pruebas de API y de navegador → No autorizado](#api-and-browser-tests) |
-| `Element not found`                            | [Ejecución de la prueba → Problemas de selección de elementos](#element-detection-warning-in-browser-test-steps) |
+| `Element not found`                            | [Ejecución de pruebas → Problemas de selección de elementos](#element-detection-warning-in-browser-test-steps) |
 | `Unsupported browser version`                  | [Ubicaciones privadas → Compatibilidad del navegador](?tab=common#requirements-for-browser-tests-running-on-private-location) |
 | `Failed to load resource: ERR_INVALID_ARGUMENT` | [Ubicaciones privadas → Problema con Chrome 149](?tab=common#chrome-149-issue-on-private-locations) |
 
 
 ## Pruebas de API {#api-tests}
 
-### Los tiempos de red son variados {#network-timings-are-varied}
+### Los tiempos de red varían {#network-timings-are-varied}
 
 Si observa un aumento repentino o un incremento general en las [métricas de tiempo][2] de su prueba de API, esto generalmente indica un cuello de botella o un retraso en la solicitud. Para obtener más información, consulte [Tiempos y variaciones de las pruebas de API][3].
 
@@ -42,15 +42,15 @@ Si observa un aumento repentino o un incremento general en las [métricas de tie
 
 ### Grabación {#recording}
 
-#### El sitio web no está cargando en el iframe {#the-website-is-not-loading-in-the-iframe}
+#### El sitio web no se carga en el iframe {#the-website-is-not-loading-in-the-iframe}
 
-Si su sitio web no aparece en el iframe de la grabadora de pruebas de navegador después de instalar la [extensión de Datadog][4], es posible que vea el mensaje `Your website does not support being loaded through an iframe`. Esto indica que la configuración de seguridad de su aplicación, como la Content Security Policy (CSP) o encabezados de seguridad relacionados como `X-Frame-Options`, impiden la carga del iframe.
+Si su sitio web no aparece en el iframe de la herramienta de grabación de pruebas de navegador después de instalar la [extensión de Datadog][4], es posible que vea el mensaje `Your website does not support being loaded through an iframe`. Esto indica que la configuración de seguridad de su aplicación, como Content Security Policy (CSP) o encabezados de seguridad relacionados como `X-Frame-Options`, impiden la carga del iframe.
 
-De manera similar, si los intentos de inicio de sesión fallan durante la grabación en el iframe, es posible que su aplicación esté bloqueando ciertas solicitudes debido a reglas de CSP u otras configuraciones de seguridad. En algunos casos, los errores de inicio de sesión también pueden ser causados por un problema con el token CSRF cuando el flujo de inicio de sesión se origina desde una aplicación web cargada dentro de un iframe, lo que puede provocar que el token CSRF se elimine.
+De manera similar, si los intentos de inicio de sesión fallan durante la grabación en el iframe, es posible que su aplicación esté bloqueando ciertas solicitudes debido a reglas de CSP u otras configuraciones de seguridad. En algunos casos, los errores de inicio de sesión también pueden ser causados por un problema con el token CSRF cuando el flujo de inicio de sesión se origina desde una aplicación web cargada dentro de un iframe, lo que puede provocar que el token CSRF se descarte.
 
-**Solución**: Haga clic en {{< ui >}}Open in Popup{{< /ui >}} para grabar su recorrido de usuario en una ventana separada en lugar del iframe.  
+**Solución**: Haga clic en {{< ui >}}Open in Popup{{< /ui >}} para grabar el recorrido del usuario en una ventana separada en lugar del iframe.  
 
-#### Solo ciertas aplicaciones cargan en el iframe {#only-certain-applications-load-in-the-iframe}
+#### Solo ciertas aplicaciones se cargan en el iframe {#only-certain-applications-load-in-the-iframe}
 
 Diferentes aplicaciones y entornos tienen configuraciones de CSP y otras restricciones de seguridad variables. Algunas permiten la carga en iframe, mientras que otras la bloquean por motivos de seguridad.
 
@@ -66,7 +66,7 @@ Esta advertencia aparece al intentar grabar en una página `http`. El iframe de 
 
 Si su sitio web no aparece en el iframe de la grabadora de pruebas de navegador después de instalar la [extensión de Datadog][4], y la grabación falla tanto en el modo iframe como en el de ventana emergente:
 
-   {{< img src="synthetics/recording_iframe.mp4" alt="Problemas al grabar pasos de pruebas de navegador" video="true" width="100%" >}}
+   {{< img src="synthetics/recording_iframe.mp4" alt="Problemas al grabar los pasos de una prueba de navegador" video="true" width="100%" >}}
 
    **Solución**: Verifique que la [extensión de Datadog][5] tenga los permisos adecuados especificando su sitio web en la sección `On specific sites` o habilitando `On all sites`:
 
@@ -76,7 +76,7 @@ Si su sitio web no aparece en el iframe de la grabadora de pruebas de navegador 
 
 Las políticas del navegador Chrome pueden impedir que la extensión grabe correctamente.
 
-**Solución**: Verifique `chrome://policy` para ver la configuración relacionada con la extensión, como [`ExtensionSettings`][6], que podría estar bloqueando la grabadora.
+**Solución**: Verifique `chrome://policy` para ver configuraciones relacionadas con la extensión, como [`ExtensionSettings`][6], que podrían estar bloqueando la grabadora.
 
 #### La página de inicio de sesión no es visible en la grabadora {#login-page-not-visible-in-recorder}
 
@@ -84,23 +84,23 @@ El iframe/ventana emergente de la grabadora utiliza su sesión de navegador actu
 
 **Solución**: Utilice {{< ui >}}incognito mode{{< /ui >}} de la grabadora para grabar los pasos de inicio de sesión sin cerrar su sesión actual:
 
-{{< img src="synthetics/incognito_mode.mp4" alt="Uso de pruebas de navegador en modo incógnito" video="true" width="100%" >}}
+{{< img src="synthetics/incognito_mode.mp4" alt="Uso del modo incógnito en las pruebas de navegador" video="true" width="100%" >}}
 
 {{< ui >}}Incognito mode{{< /ui >}} crea una sesión aislada que ignora su historial de navegación, cookies y datos de inicio de sesión. Esto le permite grabar los pasos de inicio de sesión desde cero, como si visitara su sitio web por primera vez.
 
 ### Resultados de la prueba {#test-results}
 
-#### Las pruebas de navegador en móviles y tabletas fallan constantemente {#mobile-and-tablet-browser-tests-consistently-fail}
+#### Las pruebas de navegador en dispositivos móviles y tabletas fallan constantemente {#mobile-and-tablet-browser-tests-consistently-fail}
 
-Los sitios web **responsivos** pueden tener estructuras DOM significativamente diferentes entre dispositivos. El DOM de un sitio web en {{< ui >}}Laptop Large{{< /ui >}} puede diferir mucho del que se muestra en los viewports {{< ui >}}Tablet{{< /ui >}} o {{< ui >}}Mobile Small{{< /ui >}}.
+Los sitios web **responsivos** pueden tener estructuras DOM significativamente diferentes entre dispositivos. El DOM de un sitio web en {{< ui >}}Laptop Large{{< /ui >}} puede diferir enormemente de las vistas de {{< ui >}}Tablet{{< /ui >}} o {{< ui >}}Mobile Small{{< /ui >}}.
 
-Los pasos grabados en {{< ui >}}Laptop Large{{< /ui >}} pueden no funcionar en viewports más pequeños, lo que provoca que las pruebas en móviles y tabletas fallen:
+Los pasos grabados en {{< ui >}}Laptop Large{{< /ui >}} pueden no funcionar en vistas más pequeñas, lo que provoca que las pruebas en móviles y tabletas fallen:
 
 {{< img src="synthetics/device_failures.png" alt="Falla en dispositivo móvil o tableta" style="width:100%;" >}}
 
-**Solución**: Cree pruebas específicas para cada dispositivo donde los pasos grabados coincidan con el viewport de destino.
+**Solución**: Cree pruebas específicas para cada dispositivo donde los pasos grabados coincidan con la vista de destino.
 
-Para grabar en viewports de móvil o tableta, seleccione {{< ui >}}Mobile Small{{< /ui >}} o {{< ui >}}Tablet{{< /ui >}} en el menú desplegable de la grabadora antes de hacer clic en {{< ui >}}Start Recording{{< /ui >}}.
+Para grabar en vistas de móvil o tableta, seleccione {{< ui >}}Mobile Small{{< /ui >}} o {{< ui >}}Tablet{{< /ui >}} en el menú desplegable del grabador antes de hacer clic en {{< ui >}}Start Recording{{< /ui >}}.
 
 {{< img src="synthetics/record_device.png" alt="Grabación de pasos en móvil o tableta" style="width:100%;" >}}
 
@@ -114,23 +114,23 @@ Los pasos de la prueba de navegador pueden mostrar una advertencia `None or mult
 
 Esto indica que el localizador de usuario apunta a múltiples elementos o a ninguno, lo que impide que la prueba sepa con qué elemento interactuar.
 
-**Solución**: Edite su grabación, abra las opciones avanzadas del paso problemático, navegue a la página de prueba y haga clic en {{< ui >}}Test{{< /ui >}}. Esto resalta el elemento localizado o muestra un error. Ajuste su localizador de usuario para apuntar a un único elemento exclusivo:
+**Solución**: Edite su grabación, abra las opciones avanzadas del paso problemático, navegue a la página de prueba y haga clic en {{< ui >}}Test{{< /ui >}}. Esto resalta el elemento localizado o muestra un error. Ajuste su localizador de usuario para apuntar a un solo elemento único:
 
-{{< img src="synthetics/fix_user_locator.mp4" alt="Corrección del error de localizador de usuario" video="true" width="100%" >}}
+{{< img src="synthetics/fix_user_locator.mp4" alt="Cómo corregir el error de localizador de usuario" video="true" width="100%" >}}
 
-#### Limitaciones de la propiedad de puntero CSS {#css-pointer-property-limitations}
+#### Limitaciones de la propiedad pointer de CSS {#css-pointer-property-limitations}
 
-Los navegadores automatizados no pueden emular la característica de medios CSS `pointer`. Todas las pruebas de navegador utilizan `pointer: none` independientemente del tipo de dispositivo (computadora portátil, tableta o móvil).
+Los navegadores automatizados no pueden emular la característica de medios de CSS `pointer`. Todas las pruebas de navegador utilizan `pointer: none` independientemente del tipo de dispositivo (laptop, tableta o móvil).
 
 ### Duración del recurso {#resource-duration}
 
 #### La duración del recurso excede la duración del paso {#resource-duration-exceeds-step-duration}
 
-Los recursos con tiempos de carga prolongados pueden abarcar varios pasos de la prueba. Datadog devuelve todos los recursos iniciados durante un paso específico, pero permite aproximadamente 20 segundos para que las llamadas de red críticas se completen antes de proceder al siguiente paso.
+Los recursos con tiempos de carga prolongados pueden abarcar varios pasos de prueba. Datadog devuelve todos los recursos iniciados durante un paso específico, pero permite aproximadamente 20 segundos para que las llamadas de red críticas se completen antes de proceder al siguiente paso.
 
-El worker de synthetics utiliza tiempos de espera jerárquicos para equilibrar la velocidad y la confiabilidad. Por lo tanto, [duración del paso][14] no debe utilizarse para medir el rendimiento de la aplicación web, ya que refleja el tiempo necesario para una ejecución confiable de la prueba.
+El worker de pruebas sintéticas utiliza tiempos de espera jerárquicos para equilibrar la velocidad y la confiabilidad. Por lo tanto, la [duración del paso][14] no debe utilizarse para medir el rendimiento de la aplicación web, ya que refleja el tiempo necesario para una ejecución confiable de la prueba.
 
-## Pruebas de API y pruebas de navegador {#api-and-browser-tests}
+## Pruebas de API y de navegador {#api-and-browser-tests}
 
 ### Errores de acceso no autorizado {#unauthorized-errors}
 
@@ -141,27 +141,27 @@ Un error 401 en las pruebas de Synthetic Monitoring generalmente indica un fallo
   * **Autenticación basada en tokens**: Extraiga su token con una primera [prueba HTTP][7], cree una [variable global][9] mediante el parseo de la respuesta de esa primera prueba y vuelva a inyectar esa variable en una segunda [prueba HTTP][7] o [prueba de navegador][10] que requiera el token de autenticación.
   * **Autenticación basada en sesiones**: Agregue los encabezados o cookies requeridos en el {{< ui >}}Advanced options{{< /ui >}} de su [HTTP][7] o [Browser Test][8].
   
-* ¿Su punto de conexión utiliza **autenticación basada en parámetros de consulta** (como agregar una clave de API a los parámetros de la URL)?
+* ¿Su punto de conexión utiliza **autenticación mediante parámetros de consulta** (como agregar una clave de API a los parámetros de la URL)?
 
 * ¿Su punto de conexión utiliza **autenticación basada en IP**? Si es así, permita los [rangos de IP de Synthetic Monitoring][11] en su firewall o configuración de seguridad.
 
 ### Errores de acceso prohibido {#forbidden-errors}
 
-Un error `403 Forbidden` de una prueba de Synthetic Monitoring generalmente significa que su servidor web o firewall está bloqueando el tráfico de Synthetic. Permita los [rangos de IP de Synthetic Monitoring][11] e identifique las solicitudes de Synthetic mediante su encabezado `user-agent`: `Datadog/Synthetics` para pruebas de API, o un valor que termine en `DatadogSynthetics` para pruebas de navegador. Las pruebas de Synthetic ya no envían el encabezado `Sec-Datadog`, así que actualice cualquier lista de permitidos que dependa de él. Para otros identificadores, consulte [Identificar bots de Synthetic][18].
+Un error `403 Forbidden` de una prueba de Synthetic Monitoring generalmente significa que su servidor web o firewall está bloqueando el tráfico de Synthetic. Permita los [rangos de IP de Synthetic Monitoring][11] e identifique las solicitudes de Synthetic mediante su encabezado `user-agent`: `Datadog/Synthetics` para pruebas de API, o un valor que termine en `DatadogSynthetics` para pruebas de navegador. Las pruebas Synthetic ya no envían el encabezado `Sec-Datadog`, así que actualice cualquier lista de permitidos que dependa de él. Para otros identificadores, consulte [Identificar bots de Synthetic][18].
 
 ### Notificaciones faltantes {#missing-notifications}
 
-Las pruebas de Synthetic no [reenvían notificaciones][12] de forma predeterminada. Si agrega destinatarios de notificaciones (direcciones de correo electrónico o identificadores de Slack) después de que ocurra una transición de estado (como que una prueba entre en alerta o se recupere), no se enviará ninguna notificación para esa transición. Las notificaciones solo se envían para transiciones posteriores.
+Las pruebas Synthetic no [reenvían notificaciones][12] de forma predeterminada. Si agrega destinatarios de notificaciones (direcciones de correo electrónico o identificadores de Slack) después de que ocurra una transición de estado (como que una prueba entre en alerta o se recupere), no se enviará ninguna notificación para esa transición. Las Notifications solo se envían para transiciones posteriores.
 
 ## Pruebas móviles {#mobile-tests}
 
-### No se puede iniciar una grabación de dispositivo {#unable-to-launch-a-device-recording}
+### No se puede iniciar una grabación del dispositivo {#unable-to-launch-a-device-recording}
 
-Las aplicaciones con verificaciones de seguridad de inicio (como la verificación de depuración USB) pueden impedir la grabación. Cargue una versión de su aplicación sin estas comprobaciones de seguridad para una grabación de prueba óptima. 
+Las aplicaciones con comprobaciones de seguridad al inicio (como la verificación de depuración USB) pueden impedir la grabación. Cargue una versión de su aplicación sin estas comprobaciones de seguridad para una grabación de prueba óptima. 
 
 ### Problemas de funcionalidad de la aplicación durante la grabación y ejecución {#app-functionality-issues-during-recording-and-execution}
 
-Es posible que las funciones de la aplicación iOS no funcionen correctamente durante la grabación o ejecución debido al proceso de volver a firmar la aplicación. Este proceso, necesario para establecer la confianza del dispositivo, puede eliminar derechos esenciales de iOS (Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, etc.).
+Es posible que las funciones de la aplicación iOS no funcionen correctamente durante la grabación o ejecución debido al proceso de volver a firmar la aplicación. Este proceso, necesario para que el dispositivo confíe en la aplicación, puede eliminar derechos esenciales de iOS (Contactos, Cámara, Llavero, Fotos, Health Kit, Home Kit, etc.).
 
 **Solución**: Utilice perfiles de aprovisionamiento Ad Hoc o de desarrollo al distribuir su aplicación iOS para minimizar los problemas relacionados con los derechos y mejorar la compatibilidad.
 
@@ -169,7 +169,7 @@ Es posible que las funciones de la aplicación iOS no funcionen correctamente du
 
 ### Datadog Agent no aparece como opción en Locations & Agents {#datadog-agent-not-listed-as-an-option-in-locations-agents}
 
-Si no ve el Datadog Agent listado como una opción seleccionable durante la creación de la prueba, verifique que cumple con todos los requisitos previos y completó los pasos de configuración. Consulte [Configuración del Agent][16] para obtener más información.
+Si no ve el Datadog Agent en la lista como una opción seleccionable durante la creación de la prueba, verifique que cumple con todos los requisitos previos y que completó los pasos de configuración. Consulte [Configuración del Agent][16] para obtener más información.
 
 ### Las pruebas programadas desde el Datadog Agent no se ejecutan en el horario previsto {#scheduled-tests-from-the-datadog-agent-is-not-running-at-the-expected-schedule}
 
@@ -194,7 +194,7 @@ Además, asegúrese de que el propio proxy esté configurado para permitir el tr
 {{< tabs >}}
 {{% tab "Común" %}}
 
-### Private Location no puede obtener pruebas debido a un error 403 {#private-location-unable-to-fetch-tests-due-to-403-error}
+### La Private Location no puede obtener las pruebas debido a un error 403 {#private-location-unable-to-fetch-tests-due-to-403-error}
 
 Una Private Location muestra este error cuando intenta obtener pruebas de Datadog:
 
@@ -205,25 +205,25 @@ Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
     at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
 ```
 
-**Causa**: El registro muestra que la Private Location pudo comunicarse exitosamente con la ingesta de Synthetics para obtener pruebas, pero la solicitud falló con una respuesta 403 de Datadog debido a un problema de autenticación. Específicamente, la firma de la solicitud se consideró caducada o aún no válida. La comunicación entre la Private Location y Datadog está asegurada mediante Datadog Signature v1 (basada en el mismo proceso de firma que [AWS Signature v4][105]), la cual incluye una marca de tiempo en cada solicitud, garantizando tanto la autenticación como la integridad. Si el reloj del sistema en el servidor que aloja la Private Location no está sincronizado, la marca de tiempo puede quedar fuera del intervalo permitido y la validación de la firma fallará.
+**Causa**: El registro muestra que la Private Location pudo comunicarse exitosamente con la ingesta de Synthetics para obtener pruebas, pero la solicitud falló con una respuesta 403 de Datadog debido a un problema de autenticación. Específicamente, la firma de la solicitud se consideró caducada o aún no válida. La comunicación entre la Private Location y Datadog está asegurada mediante Datadog Signature v1 (basada en el mismo proceso de firma que [AWS Signature v4][105]), la cual incluye una marca de tiempo en cada solicitud, garantizando tanto la autenticación como la integridad. Si el reloj del sistema en el servidor que aloja la Private Location no está sincronizado, la marca de tiempo puede quedar fuera de la ventana permitida y la validación de la firma falla.
 
 **Solución**: Asegúrese de que el servidor que aloja la Private Location tenga una sincronización de tiempo precisa. Si se utilizan servicios NTP (Network Time Protocol), verifique que estos servicios estén configurados correctamente y funcionen adecuadamente, y solucione cualquier configuración incorrecta que pueda impedir que el reloj del sistema se sincronice con sus fuentes de tiempo.
 
 ### Las pruebas de navegador muestran `Page crashed` errores {#browser-tests-show-page-crashed-errors}
 
-Los bloqueos de página generalmente indican agotamiento de recursos en los workers de la ubicación privada. Asegúrese de que sus workers de la ubicación privada tengan [suficientes recursos de memoria][101].
+Los bloqueos de página generalmente indican agotamiento de recursos en los trabajadores de la ubicación privada. Asegúrese de que sus trabajadores de ubicación privada tengan [suficientes recursos de memoria][101].
 
 ### La ejecución de la prueba es más lenta de lo esperado {#test-execution-is-slower-than-expected}
 
-La ejecución lenta de las pruebas generalmente indica agotamiento de recursos en los workers de la ubicación privada. Asegúrese de que sus workers de la ubicación privada tengan [suficientes recursos de CPU][103].
+La ejecución lenta de las pruebas generalmente indica agotamiento de recursos en los trabajadores de la ubicación privada. Asegúrese de que sus trabajadores de ubicación privada tengan [suficientes recursos de CPU][103].
 
 ### Mis pruebas de navegador tardan demasiado en ejecutarse {#my-browser-tests-are-taking-too-long-to-run}
 
-Confirme que no está viendo [problemas de falta de memoria][102] con sus implementaciones de ubicaciones privadas. Si ya ha intentado escalar sus instancias de workers siguiendo las [pautas de dimensionamiento][101], comuníquese con [Datadog Support][104].
+Confirme que no está viendo [problemas de falta de memoria][102] con sus implementaciones de ubicación privada. Si ya ha intentado escalar sus instancias de trabajadores siguiendo las [pautas de dimensionamiento][101], comuníquese con el [Soporte de Datadog][104].
 
 ### Requisitos para pruebas de navegador que se ejecutan en una ubicación privada {#requirements-for-browser-tests-running-on-private-location}
 
-Las pruebas de navegador requieren privilegios elevados para iniciar (cuando comienza la ejecución de la prueba) y finalizar (cuando termina la ejecución de la prueba) el proceso del navegador. Si su ubicación privada está configurada con un contexto de seguridad que restringe los privilegios elevados, la ubicación privada emite registros de error cuando se ejecuta el Browser Test. Los registros reportados varían según el navegador seleccionado para la ejecución de la prueba. Las pruebas ejecutadas en Chrome/Edge reportan el siguiente error:
+Las pruebas de navegador requieren privilegios elevados para generar (cuando comienza la ejecución de la prueba) y finalizar (cuando termina la ejecución de la prueba) el proceso del navegador. Si su ubicación privada está configurada con un contexto de seguridad que restringe los privilegios elevados, la ubicación privada emite registros de error cuando se ejecuta el Browser Test. Los registros reportados varían según el navegador que se seleccione para la ejecución de la prueba. Las pruebas ejecutadas en Chrome/Edge reportan el siguiente error:
 
 ```
 Critical error in startBrowser: Failed to launch the browser process!
@@ -247,15 +247,15 @@ Además, `ping` requiere privilegios elevados para crear el socket sin procesar.
 
 ### `TIMEOUT` errores en pruebas de API desde ubicaciones privadas {#timeout-errors-in-api-tests-from-private-locations}
 
-Los errores `TIMEOUT` generalmente indican que su ubicación privada no puede acceder al punto de conexión de la prueba. Verifique que la ubicación privada esté instalada en la misma red que su punto de conexión de destino. Pruebe diferentes puntos de conexión para determinar si el problema es específico de un punto de conexión o afecta a toda la red.
+Los errores `TIMEOUT` generalmente indican que su ubicación privada no puede acceder al punto de conexión de la prueba. Verifique que la ubicación privada esté instalada en la misma red que el punto de conexión de destino. Pruebe diferentes puntos de conexión para determinar si el problema es específico de un punto de conexión o afecta a toda la red.
 
-{{< img src="synthetics/timeout.png" alt="La prueba de API en una ubicación privada agota el tiempo de espera" style="width:70%;" >}}
+{{< img src="synthetics/timeout.png" alt="Se agota el tiempo de espera de la prueba de API en la ubicación privada" style="width:70%;" >}}
 
 ### Problema de Chrome 149 en ubicaciones privadas {#chrome-149-issue-on-private-locations}
 
 La versión 149 de Chrome introdujo una validación más estricta para los encabezados de solicitud, lo que puede causar que las solicitudes de subrecursos fallen con `net::ERR_INVALID_ARGUMENT`. Las versiones anteriores de Chrome eran más permisivas.
 
-**Solución**: Actualice su ubicación privada a [versión 1.69.1 o posterior][106] para resolver este problema.
+**Solución**: Actualice su ubicación privada a [versión 1.70.0 o posterior][106] para resolver este problema.
 
 [101]: /es/synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
@@ -267,9 +267,9 @@ La versión 149 de Chrome introdujo una validación más estricta para los encab
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-### Resolución de problemas de reenvío de IPv4 para containers de ubicación privada {#resolving-ipv4-forwarding-issues-for-private-location-containers}
+### Resolución de problemas de reenvío de IPv4 para contenedores de ubicación privada {#resolving-ipv4-forwarding-issues-for-private-location-containers}
 
-Las ubicaciones privadas requieren acceso a los [puntos de conexión de ingesta de Synthetic Monitoring de Datadog][103] para extraer las configuraciones de prueba y enviar los resultados de las pruebas. Si el reenvío de IPv4 está deshabilitado en un servidor Linux, la ubicación privada puede perder el acceso a la internet pública y, por consiguiente, no puede conectarse a la ingesta. Docker normalmente intenta habilitar el reenvío de IP cuando se inicia un contenedor, pero si permanece deshabilitado, entonces el contenedor no puede comunicarse con servicios externos como la ingesta. 
+Las ubicaciones privadas requieren acceso a los [puntos de conexión de ingesta de Synthetic Monitoring de Datadog][103] para extraer configuraciones de prueba y enviar resultados de prueba. Si el reenvío de IPv4 está deshabilitado en un servidor Linux, la ubicación privada puede perder el acceso a la internet pública y, por consiguiente, no puede conectarse a la ingesta. Docker normalmente intenta habilitar el reenvío de IP cuando se inicia un contenedor, pero si permanece deshabilitado, el contenedor no puede comunicarse con servicios externos como la ingesta. 
 
 Si este es el caso, la ubicación privada informa lo siguiente:
 
@@ -284,19 +284,19 @@ Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.syntheti
 
 **Solución**: Asegúrese de que `net.ipv4.ip_forward` esté habilitado en el servidor. 
 
-### Requisitos del sistema de archivos raíz de solo lectura para containers de ubicación privada {#read-only-root-file-system-requirements-for-private-location-containers}
+### Requisitos de sistema de archivos raíz de solo lectura para contenedores de ubicación privada {#read-only-root-file-system-requirements-for-private-location-containers}
 
-Los containers de ubicación privada necesitan acceso de lectura y escritura a carpetas y archivos específicos para un funcionamiento correcto. Los sistemas de archivos raíz de solo lectura impiden el inicio debido a operaciones críticas que requieren acceso de escritura.
+Los contenedores de ubicación privada necesitan acceso de lectura y escritura a carpetas y archivos específicos para un funcionamiento correcto. Los sistemas de archivos raíz de solo lectura impiden el inicio debido a operaciones críticas que requieren acceso de escritura.
 
-Durante el inicio, los containers establecen capacidades de Linux en binarios cuyos metadatos se eliminaron durante el proceso de compilación por seguridad. Esto restringe la ejecución al usuario `root` de forma predeterminada. Dado que las ubicaciones privadas se ejecutan como el usuario `dog`, los containers deben volver a aplicar los permisos para una ejecución correcta. Los sistemas de archivos de solo lectura impiden estas actualizaciones de permisos, lo que provoca fallos en el inicio.
+Durante el inicio, los contenedores establecen capacidades de Linux en binarios cuyos metadatos fueron eliminados durante el proceso de compilación por seguridad. Esto restringe la ejecución al usuario `root` de forma predeterminada. Dado que las ubicaciones privadas se ejecutan como el usuario `dog`, los contenedores deben volver a aplicar los permisos para una ejecución correcta. Los sistemas de archivos de solo lectura impiden estas actualizaciones de permisos, lo que provoca fallas en el inicio.
 
-### Containers de ubicación privada terminados por errores de `OOM` {#private-location-containers-killed-by-oom-errors}
+### Contenedores de ubicación privada finalizados por errores de `OOM` {#private-location-containers-killed-by-oom-errors}
 
-Los containers de ubicación privada terminados por errores de `Out Of Memory` indican agotamiento de recursos en los workers. Asegúrese de que sus containers de ubicación privada tengan [suficientes recursos de memoria][101].
+Los contenedores de ubicación privada finalizados por errores de `Out Of Memory` indican un agotamiento de recursos en los procesos de trabajo. Asegúrese de que sus contenedores de ubicación privada tengan [suficientes recursos de memoria][101].
 
 ### `Invalid mount config` error al ejecutar ubicaciones privadas {#invalid-mount-config-error-when-running-private-locations}
 
-Este error ocurre al intentar montar un solo archivo en containers basados en Windows, lo cual no es compatible. **Solución**: Asegúrese de que la fuente del montaje de enlace sea un directorio local. Para obtener más información, consulte la documentación de [montaje de volúmenes de Docker][102].
+Este error ocurre al intentar montar un solo archivo en contenedores basados en Windows, una operación que no se admite. **Solución**: Asegúrese de que la fuente del montaje de enlace sea un directorio local. Para obtener más información, consulte la documentación de [Docker mount volume][102].
 
 [101]: /es/synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
@@ -316,24 +316,24 @@ Asegúrese de que la ubicación privada se haya instalado con una configuración
 1. Encuentre `Datadog Synthetics Private Location` en {{< ui >}}Services (Local){{< /ui >}}.
 1. Haga clic derecho en el servicio y seleccione {{< ui >}}Restart{{< /ui >}}.
 
-El worker se ejecuta con la cuenta {{< ui >}}Local Service{{< /ui >}}. Verifique esto buscando el proceso `synthetics-pl-worker` en la pestaña {{< ui >}}Details{{< /ui >}} de Task Manager.
+El proceso de trabajo se ejecuta con la cuenta {{< ui >}}Local Service{{< /ui >}}. Verifique esto buscando el proceso `synthetics-pl-worker` en la pestaña {{< ui >}}Details{{< /ui >}} de Task Manager.
 
 #### Método de PowerShell {#powershell-method}
 
 1. Abra {{< ui >}}Windows PowerShell{{< /ui >}} con derechos de ejecución de scripts.
 1. Ejecute: `Restart-Service -Name "Datadog Synthetics Private Location"`
 
-### Mantenimiento del tiempo de actividad de Synthetics Private Location Worker {#maintaining-synthetics-private-location-worker-uptime}
+### Mantenimiento del tiempo de actividad del servicio Synthetics Private Location Worker {#maintaining-synthetics-private-location-worker-uptime}
 
 **Requisitos previos**: Inicie sesión en la máquina con permisos para crear tareas programadas.
 
-**Recuperación ante fallos**: Cree una tarea programada de Windows que ejecute un script de PowerShell para reiniciar el worker si deja de funcionar. Esto garantiza la recuperación automática después de fallos.
+**Recuperación tras fallos**: Cree una tarea programada de Windows que ejecute un script de PowerShell para reiniciar el proceso de trabajo si deja de funcionar. Esto garantiza la recuperación automática después de fallos.
 
 **Inicio automático**: Si proporcionó un archivo de configuración durante la instalación, el servicio de Windows `Datadog Synthetics Private Location` se inicia automáticamente. Verifique que el servicio se esté ejecutando en la herramienta {{< ui >}}Services{{< /ui >}}: este servicio maneja los reinicios automáticos.
 
 ### Errores de certificado autofirmado {#self-signed-certificate-errors}
 
-Windows Private Locations pueden mostrar este error inmediatamente después del inicio:
+Las ubicaciones privadas de Windows pueden mostrar este error inmediatamente después del inicio:
 
 ```
 Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
@@ -347,21 +347,21 @@ Error: self-signed certificate in certificate chain
 
 **Síntomas**:
 - Los mensajes de error se repiten continuamente en los registros.
-- Las cadenas de certificados parecen modificadas al navegar desde el servidor de Windows (por ejemplo, los sitios de Datadog muestran intermediarios autofirmados en lugar de CA de confianza).
+- Las cadenas de certificados aparecen modificadas al navegar desde el servidor de Windows (por ejemplo, los sitios de Datadog muestran intermediarios autofirmados en lugar de CA de confianza).
 
 **Causa**: Este error ocurre cuando se realiza una **Inspección profunda de paquetes (DPI)** o inspección TLS en el tráfico de su red. La DPI intercepta, descifra y vuelve a cifrar el tráfico SSL/TLS. Durante este proceso, la ubicación privada recibe una cadena de certificados que incluye un certificado autofirmado.  
 
 **Solución**:
 
 - Cargue sus [certificados raíz][101] autofirmados personalizados en su ubicación privada.
-- Verifique que los registros de Windows Private Location ya no informen el error.
+- Verifique que los registros de su ubicación privada de Windows ya no informen el error.
 
 ```
 "Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
 Error: self-signed certificate in certificate chain"
 ```
 
-Sin omitir la inspección TLS, Windows Private Location no puede recuperar los mensajes de prueba y permanece en estado de error.
+Sin omitir la inspección TLS, la ubicación privada de Windows no puede recuperar los mensajes de prueba y permanece en estado de error.
 
 [101]: /es/synthetics/platform/private_locations?tab=windowsservice#root-certificates
 
@@ -370,11 +370,11 @@ Sin omitir la inspección TLS, Windows Private Location no puede recuperar los m
 
 ### Solicitudes de contraseña para el usuario sudo o dog {#password-prompts-for-sudo-or-dog-user}
 
-El usuario de Private Location (`dog`) requiere acceso `sudo` para un funcionamiento correcto. Este usuario normalmente recibe permisos durante el inicio del contenedor. Verifique que ninguna política restrinja el acceso `sudo` del usuario `dog` o impida que el contenedor se ejecute como el usuario `dog` (UID 501).
+El usuario de la ubicación privada (`dog`) requiere acceso `sudo` para un funcionamiento correcto. Este usuario normalmente recibe permisos durante el inicio del contenedor. Verifique que ninguna política restrinja el acceso `sudo` del usuario `dog` o impida que el contenedor se ejecute como el usuario `dog` (UID 501).
 
-Además, las versiones de Private Location `>v1.27` dependen de la llamada al sistema `clone3`. Los entornos de tiempo de ejecución de contenedores más antiguos (versiones de Docker <20.10.10) podrían no admitir `clone3` en su política `seccomp` predeterminada. 
+Además, las versiones de Private Location `>v1.27` dependen de la llamada al sistema `clone3`. Los entornos de ejecución de contenedores más antiguos (versiones de Docker <20.10.10) podrían no admitir `clone3` en su política `seccomp` predeterminada. 
 
-**Solución**: Asegúrese de que la política `seccomp` de su tiempo de ejecución incluya `clone3` actualizando su versión de tiempo de ejecución, agregando manualmente `clone3` a su política o utilizando una política `unconfined` seccomp. Consulte la [documentación de Docker `seccomp`][13] para obtener más detalles.
+**Solución**: Asegúrese de que la política `seccomp` de su entorno de ejecución incluya `clone3` actualizando la versión de su entorno de ejecución, agregando manualmente `clone3` a su política o utilizando una política `unconfined` seccomp. Consulte la [documentación de Docker sobre `seccomp`][13] para obtener más detalles.
 
 ## Lecturas adicionales {#further-reading}
 

@@ -214,6 +214,10 @@ On the Cloud SIEM [Security cases][13] settings page, you can manage the default
   - **When updating a case**:
     - **Signal Status**: Choose to either assign a status to the signal that corresponds with the case, or to leave it as-is.
 
+- **Signal Grouping**
+
+  Select the grouping strategies that automatic case creation uses to add related signals to an existing case. See [Group Signals into Cases][15].
+
 ### Declare an incident
 
 Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [Incident Management][7] provides a framework and workflow to help teams effectively identify and mitigate incidents.
@@ -268,3 +272,4 @@ You can also launch this query directly from the signal panel:
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
 [14]: /bits_ai/bits_security_analyst/
+[15]: /security/cloud_siem/triage_and_investigate/signal_grouping/

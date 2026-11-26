@@ -39,7 +39,7 @@ further_reading:
 
 ## Overview
 
-This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations, install the Datadog Agent on EC2 instances for deeper visibility, and configure log forwarding.
+This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations and configure log forwarding. You can also instrument EC2 instances, Lambda functions, and EKS clusters for deeper visibility.
 
 ## Prerequisites
 
@@ -113,7 +113,7 @@ Before you begin, ensure that you have an [AWS][7] account. The CloudFormation t
    1. Add your Datadog [API key][9].
    1. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].
    1. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
-   1. Optionally, choose whether Datadog can install [instrumentation][64] on your Amazon EC2 instances and AWS Lambda functions. This option appears in the {{< ui >}}Install Datadog on your AWS resources{{< /ui >}} section when it is available for your account:
+   1. Optionally, choose whether Datadog can install [instrumentation][64] on your Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters. This option appears in the {{< ui >}}Install Datadog on your AWS resources{{< /ui >}} section when it is available for your account:
       - The {{< ui >}}Grant Datadog permission to manage installations{{< /ui >}} toggle is on by default. It adds the instrumentation permissions to the stack. To leave them out, turn the toggle off.
       - {{< ui >}}Select resources later{{< /ui >}} is selected by default. Nothing is installed until you choose resources in [Fleet Automation][65].
       - {{< ui >}}Install on all resources{{< /ui >}} instruments every eligible resource for the platforms you select, which changes running workloads. Lambda functions with less than 256 MB of memory are excluded.
@@ -198,9 +198,11 @@ Once you have enabled logs, find them in the [Log Explorer][15] using either the
 
 ## Get more from the Datadog platform
 
-### Deeper visibility with the Datadog Agent on EC2
+### Deeper visibility with Datadog instrumentation
 
-To install the Agent on your EC2 instances from Datadog, without connecting to each instance, see [Install Datadog Instrumentation through the AWS Integration][64]. The same guide covers adding the Datadog Lambda extension to your Lambda functions.
+You can instrument eligible Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters directly through the AWS integration. See [Install Datadog Instrumentation through the AWS Integration][64].
+
+#### Install the Agent manually on EC2
 
 By default the Datadog AWS integration crawls the CloudWatch API for AWS-provided metrics, but you can gain even deeper visibility into your EC2 instances with the [Datadog Agent][16]. The Agent is a lightweight daemon that reports metrics and events, and can also be configured for logs and traces. The [Agent Installation][17] section of the Datadog application provides instructions for installing the Agent on a wide variety of operating systems. Many operating systems (for example, Amazon Linux) have one-step installation commands that you can run from the instance terminal to install the Agent:
 {{< img src="getting_started/integrations/integrations-agent-installation.png" alt="The 'Agent' section of the 'Integrations' tab in Datadog. Along the left are displayed a list of supported operating systems for the Datadog Agent. 'Amazon Linux' is highlighted from this list. On the right is displayed 'Use our easy one-step install'. The command for installing the Agent is displayed below this, with the DD_API_KEY section obfuscated.">}}
@@ -230,7 +232,7 @@ Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the A
 
 #### EKS
 
-You don't need any specific configuration for Amazon Elastic Kubernetes Service (EKS), as mentioned in the [Kubernetes Distributions documentation][29]. Use the [dedicated Kubernetes documentation][30] to deploy the Agent in your EKS cluster.
+For eligible EKS clusters, you can [install and manage the Agent automatically through the AWS integration][64]. To install the Agent manually, see the [EKS guidance in Kubernetes Distributions][29] and the [Kubernetes installation documentation][30].
 
 #### EKS with Fargate
 
@@ -276,7 +278,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 If you installed [Datadog instrumentation][64] through the AWS integration, remove it before you delete the CloudFormation stack or remove the AWS account from Datadog. Datadog removes instrumentation with the integration IAM role. After the stack or the account is gone, Datadog can't reach your resources, and the Agent, Lambda layers, and function configuration that Datadog added stay in place.
 
 1. Open the [AWS Install Agents page][65] in Fleet Automation and select the AWS account.
-1. For each instrumented workload type ({{< ui >}}EC2 Instances{{< /ui >}} and {{< ui >}}Lambda Functions{{< /ui >}}), click {{< ui >}}Remove all{{< /ui >}}.
+1. For each instrumented workload type ({{< ui >}}EC2 Instances{{< /ui >}}, {{< ui >}}Lambda Functions{{< /ui >}}, and {{< ui >}}EKS Clusters{{< /ui >}}), click {{< ui >}}Remove all{{< /ui >}}.
 1. Review the summary and click {{< ui >}}Uninstall Agent{{< /ui >}}.
 1. After the removal completes, delete the CloudFormation stack or remove the account.
 

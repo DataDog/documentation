@@ -19,7 +19,7 @@ Chaque attribut de ciblage comprend les éléments suivants :
 
 - **Clé d'attribut** : L'identifiant que vous référencez dans les règles de ciblage, par exemple `country` ou `user.plan`. Les clés sont uniques au sein de votre organisation et sont sensibles à la casse.
 - **Type de données** : `Boolean`, `String`, `Number` ou `Semver`. Le type de données détermine quels opérateurs sont disponibles lorsque vous utilisez l'attribut dans une règle de ciblage.
-- **Canal de distribution** : Quels SDK rapportent cet attribut dans leur contexte d'évaluation : **Client et Serveur**, **Client uniquement** ou **Serveur uniquement**. Les attributs Semver ne sont disponibles que pour les SDK clients.
+- **Canal de distribution** : Quels SDK rapportent cet attribut dans leur contexte d'évaluation : **Client et Serveur**, **Client uniquement** ou **Serveur uniquement**.
 - **Description** (facultatif) : Notes destinées aux autres utilisateurs sur ce que représente l'attribut.
 
 Les attributs de ciblage s'appliquent à l'ensemble de l'organisation : une fois définis, un attribut est disponible pour les règles de ciblage dans tous les feature flags et environnements.

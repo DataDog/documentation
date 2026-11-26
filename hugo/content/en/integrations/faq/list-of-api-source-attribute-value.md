@@ -250,7 +250,6 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Gunicorn                        | gunicorn                          | gunicorn                           |
 | Haproxy                         | haproxy                           | haproxy                            |
 | Hdfs                            | hdfs                              | hdfs                               |
-| Hipchat                         | hipchat                           | hipchat                            |
 | Honeybadger                     | honeybadger                       | honeybadger                        |
 | Iis                             | iis                               | iis                                |
 | Immunio                         | immunio                           | immunio                            |

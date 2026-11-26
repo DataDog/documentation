@@ -1,43 +1,49 @@
 ---
-title: Surveillance de votre utilisation de Synthetics
-
+description: Découvrez les métriques d'utilisation estimée générées à partir de vos
+  tests Synthetic.
 further_reading:
-  - link: /synthetics/api_tests
-    tag: Documentation
-    text: Créer un test API
-  - link: /synthetics/multistep
-    tag: Documentation
-    text: Créer un test API à plusieurs étapes
-  - link: /synthetics/browser_tests
-    tag: Documentation
-    text: Créer un test Browser
-  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
-    tag: Blog
-    text: Pratiques recommandées pour la création de tests de bout en bout
+- link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  tag: Blog
+  text: Bonnes pratiques pour la création de tests de bout en bout
+- link: /synthetics/api_tests
+  tag: Documentation
+  text: Créez un test API
+- link: /synthetics/multistep
+  tag: Documentation
+  text: Créez un test API à plusieurs étapes
+- link: /synthetics/browser_tests
+  tag: Documentation
+  text: Créez un test de navigateur
+title: Utilisez des métriques d'utilisation estimée
 ---
-Les tests Synthetic proposent des [métriques d'estimation][1] vous permettant de surveiller votre utilisation de Synthetic. Grâce à ces métriques, vous pouvez notamment :
+## Présentation {#overview}
 
-* Déterminer l'évolution de votre utilisation
-* Visualiser les équipes, applications ou services qui se servent le plus de Synthetics
-* Recevoir des alertes en cas de pics d'utilisation inattendue susceptibles d'augmenter vos coûts
+Les tests Synthetic sont accompagnés de [métriques d'utilisation estimée][1] qui vous permettent de suivre votre utilisation. Ces métriques vous permettent notamment de :
 
-Pour visualiser votre utilisation Synthetics ou recevoir des alertes à ce sujet, utilisez les requêtes suivantes :
+* Comprendre comment votre utilisation évolue au fil du temps.
+* Visualiser quelles équipes, applications ou services contribuent le plus à votre utilisation de Synthetic Monitoring.
+* Déclencher une alerte en cas de pics d'utilisation inattendus pouvant avoir une incidence sur votre facturation.
 
-* [Test API uniques][2] et [tests API à plusieurs étapes][3] : `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
+Pour visualiser ou être alerté sur votre utilisation de Synthetic Monitoring, utilisez les requêtes suivantes :
 
-* [Tests Browser][4] : `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
+* [Tests API à une seule étape][2] et [tests API à plusieurs étapes][3] : `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
-Pour optimiser vos requêtes, précisez le contexte de ces métriques ou regroupez-les en fonction des tags associés à votre test, comme `team` ou `application`. 
+* [Tests de navigateur][4] : `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
-Vous pouvez comparer ces métriques à des seuils statiques, représenter graphiquement ces valeurs et utiliser des algorithmes d'apprentissage automatique pour la [détection des anomalies][5] ou les [prévisions][6], afin de ne pas recevoir d'alertes en cas d'augmentation attendue de l'utilisation.
+  **Remarque :** La tarification des exécutions de tests de navigateur ( {{< tooltip glossary="test_run">}}s) dépend du nombre d'étapes. Consultez la [documentation sur la tarification][7] pour plus d'informations.
 
-## Pour aller plus loin
+Pour un niveau de précision supérieur, définissez le périmètre de ces métriques ou regroupez-les selon les tags associés à votre test, tels que `team` ou `application`. 
+
+Vous pouvez représenter graphiquement et surveiller ces métriques par rapport à des seuils statiques, ainsi qu'utiliser des algorithmes basés sur l'apprentissage automatique comme la [détection d'anomalies][5] ou les [prévisions][6] pour vous assurer de ne pas être alerté en cas de croissance attendue de l'utilisation.
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/account_management/billing/usage_metrics/#types-of-usage
+[1]: /fr/account_management/billing/usage_metrics/estimated_usage_metrics/#types-of-usage
 [2]: /fr/synthetics/api_tests
 [3]: /fr/synthetics/multistep
 [4]: /fr/synthetics/browser_tests
-[5]: /fr/monitors/create/types/anomaly/
-[6]: /fr/monitors/create/types/forecasts
+[5]: /fr/monitors/types/anomaly/
+[6]: /fr/monitors/types/forecasts
+[7]: https://www.datadoghq.com/pricing/?product=synthetic-monitoring#synthetic-monitoring-api--browser-what-counts-as-a-browser-test-run

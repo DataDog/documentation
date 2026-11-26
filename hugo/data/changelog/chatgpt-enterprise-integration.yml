@@ -9,3 +9,31 @@ entries:
       - ListChatGPTEnterpriseIntegrationAccounts
       - UpdateChatGPTEnterpriseIntegrationAccount
     title: Add Integration Accounts v2 API for ChatGPT Enterprise
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41846
+    operations:
+      - CreateChatGPTEnterpriseIntegrationAccount
+      - DeleteChatGPTEnterpriseIntegrationAccount
+      - GetChatGPTEnterpriseIntegrationAccount
+      - ListChatGPTEnterpriseIntegrationAccounts
+      - UpdateChatGPTEnterpriseIntegrationAccount
+    title: Fix 400 and 404 error schemas for Integration Accounts v2 APIs
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateChatGPTEnterpriseIntegrationAccount
+      - DeleteChatGPTEnterpriseIntegrationAccount
+      - GetChatGPTEnterpriseIntegrationAccount
+      - ListChatGPTEnterpriseIntegrationAccounts
+      - UpdateChatGPTEnterpriseIntegrationAccount
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42082
+    operations:
+      - CreateChatGPTEnterpriseIntegrationAccount
+      - UpdateChatGPTEnterpriseIntegrationAccount
+    title: Improve token descriptions for Claude Compliance, ChatGPT Enterprise,
+      and OpenAI Codex

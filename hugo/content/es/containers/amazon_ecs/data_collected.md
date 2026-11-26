@@ -1,44 +1,44 @@
 ---
 aliases:
 - /es/agent/amazon_ecs/data_collected
+description: Guía de referencia para métricas, logs y eventos recopilados por el Datadog
+  Agent en Amazon ECS
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentación
-  text: Recopilar tus logs de aplicación
+  text: Recopile los registros de su aplicación
 - link: /agent/amazon_ecs/apm/
   tag: Documentación
-  text: Recopilar tus trazas de aplicaciones
+  text: Recopile las trazas de su aplicación
 - link: /agent/amazon_ecs/data_collected/#metrics
   tag: Documentación
-  text: Recopilar métricas de ECS
+  text: Recopile métricas de ECS
 title: Recopilación de datos de Amazon ECS
 ---
+## Datos recopilados {#data-collected}
 
-## Datos recopilados
+### Métricas {#metrics}
 
-### Métricas
+Amazon ECS en EC2 es un servicio de administración de contenedores para contenedores Docker que se ejecutan en instancias EC2.
 
-Amazon ECS en EC2 es un servicio de gestión de contenedores para contenedores de Docker que se ejecutan en instancias EC2. Las métricas recopiladas por el Agent para Amazon ECS son:
+La siguiente tabla enumera las métricas recopiladas por el Agent o el rastreador de API para Amazon ECS:
 
 {{< get-metrics-from-git "amazon-ecs" >}}
 
-Las métricas recopiladas por el Agent cuando se despliegan en un contenedor de Docker también incluyen las mismas métricas recopiladas por la integración con Docker. Consulta las [métricas de integración con Docker][1] para obtener una lista completa de métricas.
+Las métricas recopiladas por el Agent cuando se implementa en un contenedor Docker también incluyen las mismas métricas recopiladas por la integración de Docker. Consulte las [métricas de la integración de Docker][1] para obtener una lista completa de métricas.
 
-Las métricas con los prefijos `ecs.containerinsights.*` pueden recopilarse activando la opción **collect custom metrics** (recopilar métricas personalizadas) en la pestaña de recopilación de métricas de la página de integración con AWS.
+Las métricas con el prefijo `ecs.containerinsights.*` se pueden recopilar habilitando **collect custom metrics** en la pestaña Metric Collection de AWS Integration.
 
-**Nota**: Las métricas Docker se etiquetan en consecuencia con las siguientes etiquetas (tags): `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`. No es necesaria ninguna configuración adicional.
+**Nota**: Las métricas de Docker se etiquetan según corresponda con las siguientes etiquetas: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`. No se requiere configuración adicional.
 
-### Eventos
+### Events {#events}
 
-Para reducir el ruido, la integración con Amazon ECS se configura automáticamente para incluir sólo eventos que contengan las siguientes palabras: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. Consulta los ejemplos de eventos a continuación:
+La integración de Amazon ECS recopila eventos emitidos por clústeres y servicios, que suelen tener el siguiente aspecto:
 
-{{< img src="integraciones/amazon_ecs/aws_ecs_events.png" alt="Eventos de Amazon ECS" >}}
+{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Eventos de Amazon ECS" >}}
 
-Para eliminar esta lista de inclusión y recibir todos los eventos de tu integración Datadog con Amazon ECS, ponte en contacto con el [servicio de asistencia de Datadog][2].
-
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/es/agent/docker/data_collected/#metrics
-[2]: https://docs.datadoghq.com/es/help/

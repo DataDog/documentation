@@ -11,7 +11,7 @@ further_reading:
     Datadog
 - link: https://www.datadoghq.com/blog/error-tracking-and-github/
   tag: Blog
-  text: Solucione las causas raíz con los datos de commits y propiedad de GitHub en
+  text: Investigue las causas raíz con datos de commits y de propiedad de GitHub en
     Error Tracking
 - link: https://www.datadoghq.com/blog/go-error-handling/
   tag: Blog
@@ -27,7 +27,7 @@ title: Error Tracking
 
 {{% error-tracking-description %}}
 
-Hay funciones adicionales disponibles según la fuente del error. Consulte [fuentes de error compatibles](#supported-error-sources).
+Hay funciones adicionales disponibles según la fuente del error. Consulte [fuentes de error admitidas](#supported-error-sources).
 
 ## Primeros pasos {#getting-started}
 
@@ -36,7 +36,7 @@ Hay funciones adicionales disponibles según la fuente del error. Consulte [fuen
 
 ## Configuración {#setup}
 {{< whatsnext desc="Para comenzar con Datadog Error Tracking, elija una de las siguientes opciones de configuración:" >}}
-    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding{{< /nextlink >}}
+    {{< nextlink href="/agentic_onboarding/" >}}Agentic Onboarding{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/browser" >}}Navegador{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}
@@ -47,11 +47,11 @@ Hay funciones adicionales disponibles según la fuente del error. Consulte [fuen
     {{< nextlink href="error_tracking/frontend/logs" >}}Registros{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Fuentes de error compatibles {#supported-error-sources}
+## Fuentes de error admitidas {#supported-error-sources}
 
-Error Tracking captura y procesa errores en sus aplicaciones web, móviles y de backend. Puede instrumentar sus aplicaciones y servicios utilizando el [Browser SDK][6], [Mobile SDK][7] o ingerir errores desde sus Logs, Traces y eventos de Real User Monitoring. 
+Error Tracking captura y procesa errores en sus aplicaciones web, móviles y de backend. Puede instrumentar sus aplicaciones y servicios utilizando el [Browser SDK][6] o el [Mobile SDK][7], o ingerir errores de sus eventos de Logs, Traces y Real User Monitoring. 
 
-Hay funciones adicionales disponibles según la fuente del error. Por ejemplo, en errores que se originan a partir de un trace de APM, la función [Exception Replay][4] captura automáticamente los valores de las variables de producción. 
+Hay funciones adicionales disponibles según la fuente del error. Por ejemplo, en errores originados a partir de una traza de APM, la función [Exception Replay][4] captura automáticamente los valores de las variables de producción. 
 
 Para obtener más detalles, consulte la documentación de Error Tracking específica del producto:
 

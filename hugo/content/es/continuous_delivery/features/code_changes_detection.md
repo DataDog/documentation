@@ -25,11 +25,6 @@ Los cambios de código implementados son visibles dentro de cualquier ejecución
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Pestaña Code Changes para la función Code Changes Detection" style="width:100%;">}}
 
-Además, la columna {{< ui >}}Deployments{{< /ui >}} de la página [Recent Code Changes][3] muestra los detalles del servicio y el entorno para todas las implementaciones que incluyeron un commit específico. Esta vista proporciona una forma rápida de entender si sus cambios de código están implementados y dónde.
-Al pasar el cursor sobre el valor del servicio se revela si la implementación ha llegado a todos los entornos esperados, según dónde se implementa normalmente el servicio.
-
-{{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Implementaciones en la página Recent Code Changes" style="width:100%;">}}
-
 Los cambios de código solo se detectan para las implementaciones que:
 - Tienen un servicio (`@deployment.service`) con especificaciones de ruta de archivo definidas en Catalog (consulte las [instrucciones de configuración](#specify-service-file-path-patterns) para obtener más información).
 - Tienen un entorno (`@deployment.env`).
@@ -174,6 +169,5 @@ En este caso, Code Changes Detection para las implementaciones del servicio `sho
 
 [1]: https://git-scm.com/docs/git-log
 [2]: https://app.datadoghq.com/ci/deployments/executions
-[3]: https://app.datadoghq.com/ci/commits
 [4]: /es/internal_developer_portal/catalog/entity_model/
 [5]: /es/internal_developer_portal/catalog/

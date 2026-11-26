@@ -35,7 +35,7 @@ La configuración correcta depende de cómo envíe la telemetría a Datadog. Enc
 
 ### Ingesta de OTLP por parte del Datadog Agent {#otlp-ingestion-by-the-datadog-agent}
 
-Implemente el Datadog Agent en cada servidor que genere telemetría OTLP. Datadog no admite el envío de telemetría desde un servidor a un Agent en otro servidor. Para obtener instrucciones de configuración, consulte [Ingesta de OTLP por el Datadog Agent][11].
+Implemente el Datadog Agent en cada servidor que genere telemetría OTLP. Datadog no admite el envío de telemetría desde un servidor a un Agent en otro servidor. Para obtener instrucciones de configuración, consulte [Configurar el punto de conexión OTLP del Agent][11].
 
 Si la telemetría entrante no tiene [atributos de nombre de servidor][8] válidos, Datadog utiliza el nombre de servidor del Agent. Si establece `host.name`, `host.id` u otro atributo de nombre de servidor, configúrelo con el nombre de servidor del Agent para evitar servidores duplicados. Para anular la resolución del nombre de servidor, establezca el atributo de recurso `datadog.host.name` en el nombre de servidor del Agent.
 
@@ -49,7 +49,7 @@ El resto de la configuración depende de si el DDOT Collector se ejecuta en un s
 
 Esto se aplica al DDOT Collector como un [Kubernetes DaemonSet][9] y en servidores [Linux][14] y [Windows][15].
 
-Debido a que el DDOT Collector se ejecuta dentro del Datadog Agent, los atributos del nombre de servidor en la telemetría entrante pueden resolverse con un nombre diferente al del nombre de servidor del Agent. Entonces, un solo nodo aparece como dos servidores. Para usar el nombre de servidor del Agent en su lugar, habilite `allow_hostname_override`:
+Debido a que el Collector del Agent se ejecuta como un proceso separado del Datadog Agent, los atributos de nombre de host de la telemetría entrante pueden resolverse en un nombre diferente al nombre de host del Agent. Entonces, un solo nodo aparece como dos servidores. Para usar el nombre de servidor del Agent en su lugar, habilite `allow_hostname_override`:
 
 ```yaml
 processors:

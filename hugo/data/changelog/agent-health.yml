@@ -12,3 +12,27 @@ entries:
       - GetAgentHealthIssue
       - ListAgentHealthIssues
     title: Add Agent Health issues list and get endpoints
+  - change_type: modified
+    date: '2026-11-17'
+    link: https://github.com/DataDog/documentation/pull/41843
+    operations:
+      - GetAgentHealthIssue
+      - ListAgentHealthIssues
+    title: Align the Agent Health issues list response schema with the 
+      implementation
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - GetAgentHealthIssue
+      - ListAgentHealthHostIssues
+      - ListAgentHealthIssues
+    title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42111
+    operations:
+      - GetAgentHealthIssue
+      - ListAgentHealthIssues
+    title: Add pagination to the Agent Health issues API and promote it to 
+      general availability
