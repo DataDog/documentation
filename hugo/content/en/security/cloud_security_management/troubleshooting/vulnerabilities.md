@@ -22,7 +22,7 @@ If you experience issues with Cloud Security Vulnerabilities, use the following 
 
 ### Disk space requirements
 
-Before scanning a container image, the Datadog Agent checks that the disk has at least the free space set by `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (10 MB by default in Agent 7.82 and later, 1 GB in earlier versions). When the Agent exports the image to disk to scan it, such as with Docker or with containerd in its default mode, it also requires free disk space of at least 120% of the image size.
+Before scanning a container image, the Datadog Agent checks that the disk has at least the minimum free space set by `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK`. The default is 10 MB in Agent 7.82 and later, and 1 GB in earlier versions. When the Agent exports the image to disk to scan it, such as with Docker or with containerd in its default mode, the disk must also have free space of at least 120% of the image size.
 
 The resulting error appears as:
 ```sh
@@ -36,8 +36,8 @@ not enough disk space to export the image, 524288000 available, 1258291200 requi
 
 Workaround:
 
-- Increase the available disk space to more than the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` value and, for image exports, to at least 120% of the size of your largest container image.
-- If your disk has less free space than the minimum, but enough to hold your images, you can decrease the minimum with the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` environment variable.
+- Increase the available disk space to at least the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` value. For image exports, also increase it to at least 120% of the size of your largest container image.
+- If your disk has less free space than the minimum but enough for your images, decrease the minimum with the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` environment variable.
 
 ### Uncompressed container image layers
 
@@ -86,7 +86,7 @@ datadog:
       enabled: false
 
   # Disables container image collection
-  # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
+  # Datadog Helm chart 3.46.0 and later enables image collection by default
   containerImageCollection:
     enabled: false
 ```

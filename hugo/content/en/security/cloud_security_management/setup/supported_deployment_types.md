@@ -19,9 +19,9 @@ The following table summarizes the Cloud Security features available relative to
 | Windows             | {{< X >}}      |                   | {{< X >}}       |                | {{< X >}}          |
 | AWS Fargate ECS/EKS | {{< X >}}      |                   | {{< X >}}       |                | {{< X >}}          |
 
-For the minimum Agent version required on each platform, see [Setting up Cloud Security on the Agent][1].
+For the minimum Agent version required on each platform, see [Deploying Cloud Security on the Agent][1].
 
-Agentless Scanning is available on AWS, Azure, and GCP. For Agent-based deployment types, it covers hosts and containers running on these cloud providers, whether or not they run Docker or Kubernetes. It does not cover on-premises infrastructure. For the full list of supported resources, including serverless workloads and container registries, see [Agentless Scanning compatibility][2].
+Agentless Scanning is available on AWS, Azure, and GCP. For deployment types that require the Agent, Agentless Scanning covers hosts and containers that run on these cloud providers, with or without Docker or Kubernetes. Agentless Scanning does not cover on-premises infrastructure. For the full list of supported resources, including serverless workloads and container registries, see [Agentless Scanning compatibility][2].
 
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
 | Resources monitored | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
