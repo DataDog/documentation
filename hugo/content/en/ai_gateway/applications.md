@@ -25,7 +25,7 @@ Before you begin, complete [Get started][applications-1], or ask your administra
 ### Before you start
 
 - Install the coding agents you want to connect: Claude Code 2.1.83 or later, or Codex 0.128.0 or later. Trajectory sets up only the agents it finds on your computer.
-- Use macOS, Linux, or Windows Subsystem for Linux (WSL). Native Windows support is coming soon.
+- Use macOS, Linux, or Windows Subsystem for Linux (WSL).
 - Your Datadog site must be US1, US3, US5, EU, AP1, AP2, or UK1.
 
 ### Set up Trajectory for AI Gateway
