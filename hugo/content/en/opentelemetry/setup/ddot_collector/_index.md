@@ -65,23 +65,23 @@ For details on Datadog, community, and custom component support, see [Support le
 
 ### OpenTelemetry Collector components
 
-By default, the DDOT Collector includes these components. This list matches DDOT 7.85. The upstream components are also listed in the [DDOT {{% version key="ddot_version" %}} manifest][11]. The manifest doesn't list the Datadog Exporter and Datadog Connector, which Datadog builds separately.
+By default, the DDOT Collector includes these components. This list matches DDOT 7.86. The upstream components are also listed in the [DDOT {{% version key="ddot_version" %}} manifest][11]. The manifest doesn't list the Datadog Exporter and Datadog Connector, which Datadog builds separately.
 
 {{% collapse-content title="Receivers" level="p" %}}
 
-- [dockerstatsreceiver][58] (available since version 7.56.0)
+- [dockerstatsreceiver][58] (available since version 7.81.0)
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [httpcheckreceiver][73] (available since version 7.85.0)
 - [jaegerreceiver][19]
-- [k8sclusterreceiver][70]
+- [k8sclusterreceiver][70] (available since version 7.83.0)
 - [k8seventsreceiver][74] (available since version 7.85.0)
-- [k8sobjectsreceiver][59] (available since version 7.56.0)
+- [k8sobjectsreceiver][59] (available since version 7.80.0)
 - [kafkareceiver][75] (available since version 7.85.0)
-- [kubeletstatsreceiver][60] (available since version 7.56.0)
+- [kubeletstatsreceiver][60] (available since version 7.81.0)
 - [otlpreceiver][20]
-- [podmanreceiver][61] (available since version 7.56.0)
+- [podmanreceiver][61] (available since version 7.81.0)
 - [prometheusreceiver][21]
 - [receivercreator][22]
 - [zipkinreceiver][23]
@@ -122,21 +122,22 @@ The `routingprocessor` was removed in version 7.71.0. Use the [routingconnector]
 
 {{% collapse-content title="Connectors" level="p" %}}
 
-- [countconnector][71]
+- [countconnector][71] (available since version 7.83.0)
 - [datadogconnector][44]
-- [routingconnector][56] (available since version 7.68.0)
+- [routingconnector][56]
 - [spanmetricsconnector][45]
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Extensions" level="p" %}}
 
-- [datadogextension][62] (available since version 7.72.0)
+- [datadogextension][62]
 - [healthcheckextension][46]
-- [k8sleaderelector][72]
+- [k8sleaderelector][72] (available since version 7.83.0)
 - [observer][47]
+- [opampextension][77] (available since version 7.86.0)
 - [pprofextension][48]
-- [storage/filestorage][63] (available since version 7.56.0)
+- [storage/filestorage][63]
 - [zpagesextension][49]
 
 {{% /collapse-content %}}
@@ -251,3 +252,4 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 [74]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8seventsreceiver/README.md
 [75]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkareceiver/README.md
 [76]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/deltatorateprocessor/README.md
+[77]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/opampextension/README.md
