@@ -208,6 +208,8 @@ agent diagnose show-metadata agent-telemetry
 | postgres.schema_tables_count                | Total tables in Postgres schema                                                                                        |
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
+| **Configuration**                           |                                                                                                                        |
+| config.schema_violations                    | Number of settings in `datadog.yaml` or `system-probe.yaml` that don't match the configuration schema, tagged by configuration file, setting name, where the setting was set (for example, a configuration file or an environment variable), installation method, and error type. Configured values are not collected. |
 | **Events**                                  |                                                                                                                        |
 | agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
@@ -270,6 +272,7 @@ agent diagnose show-metadata agent-telemetry
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 | appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| appsec_injector.enabled                     | Set to 1 for each proxy type the AppSec injector runs for, tagged by proxy type and injection mode                     |
 | agent_performance.containers_restarts       | Number of container restarts for the Cluster Agent and Cluster Checks Runner pods                                      |
 | agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
 | agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |

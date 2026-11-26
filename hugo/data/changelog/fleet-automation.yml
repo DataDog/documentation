@@ -20,3 +20,14 @@ entries:
       - TriggerFleetSchedule
       - UpdateFleetSchedule
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42140
+    operations:
+      - CreateFleetDeploymentConfigureV2
+      - CreateFleetDeploymentUpgradeV2
+      - GetFleetDeploymentV2
+      - ListFleetDeploymentsV2
+      - TriggerFleetSchedule
+    title: Clarify that Fleet Automation deployment file_path is relative to the
+      Agent config directory

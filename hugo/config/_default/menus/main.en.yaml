@@ -570,41 +570,56 @@ menu:
       url: agent/fleet_automation/fleet_view
       parent: agent_fleet_automation
       weight: 801
+    - name: Access Control
+      identifier: access_control
+      url: agent/fleet_automation/access_control
+      parent: agent_fleet_automation
+      weight: 802
     - name: Configure Agents
       identifier: configure_agents
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
-      weight: 802
+      weight: 803
     - name: Supported datadog.yaml Fields
       identifier: supported_datadog_yaml_fields
       url: agent/fleet_automation/supported_datadog_yaml_fields
       parent: agent_fleet_automation
-      weight: 803
+      weight: 804
     - name: Configure Agent Integrations
       identifier: configure_integrations
       url: agent/fleet_automation/configure_integrations
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Configure Custom Logs
       identifier: configure_logs
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
-      weight: 805
+      weight: 806
     - name: Modify Tags
       identifier: modify_tags
       url: agent/fleet_automation/modify_tags
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
+    - name: Configuration Policies
+      identifier: configuration_policies
+      url: agent/fleet_automation/configuration_policies
+      parent: agent_fleet_automation
+      weight: 808
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 807
+      weight: 809
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 808
+      weight: 810
+    - name: OpenTelemetry Collectors
+      identifier: fleet_otel_collectors
+      url: agent/fleet_automation/otel_collectors
+      parent: agent_fleet_automation
+      weight: 811
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -703,20 +718,10 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /opentelemetry/getting_started/
+      url: /opentelemetry/getting_started/kubernetes/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
-    - name: Datadog Example Application
-      url: /opentelemetry/getting_started/datadog_example
-      parent: otel_guides_getting_started
-      weight: 101
-      identifier: otel_guides_getting_started_datadog_example
-    - name: OpenTelemetry Demo Application
-      url: /opentelemetry/getting_started/otel_demo_to_datadog
-      parent: otel_guides_getting_started
-      weight: 102
-      identifier: otel_guides_getting_started_otel_demo_to_datadog
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -937,106 +942,116 @@ menu:
       identifier: otel_datadog_extension
       parent: otel_integrations
       weight: 804
+    - name: OpAMP Extension
+      url: opentelemetry/integrations/opamp_extension/
+      identifier: otel_opamp_extension
+      parent: otel_integrations
+      weight: 805
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: Kubernetes Metrics
       url: opentelemetry/integrations/kubernetes_metrics/
       identifier: otel_kubernetes_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: MongoDB Metrics
       url: opentelemetry/integrations/mongodb_metrics/
       identifier: otel_mongodb_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: PostgreSQL Metrics
       url: opentelemetry/integrations/postgres_metrics/
       identifier: otel_postgres_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 816
     - name: RabbitMQ Metrics
       url: opentelemetry/integrations/rabbitmq_metrics/
       identifier: otel_rabbitmq_metrics
       parent: otel_integrations
-      weight: 816
+      weight: 817
     - name: Redis Metrics
       url: opentelemetry/integrations/redis_metrics/
       identifier: otel_redis_metrics
       parent: otel_integrations
-      weight: 817
+      weight: 818
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 818
+      weight: 819
     - name: SQL Server Metrics
       url: opentelemetry/integrations/sqlserver_metrics/
       identifier: otel_sqlserver_metrics
       parent: otel_integrations
-      weight: 819
+      weight: 820
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 820
+      weight: 821
+    - name: Fleet Automation
+      url: opentelemetry/fleet_automation/
+      identifier: otel_fleet_automation
+      parent: opentelemetry_top_level
+      weight: 9
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
-      weight: 9
+      weight: 10
     - name: Guides and Resources
       url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
-      weight: 10
+      weight: 11
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog/
+      parent: otel_guides
+      weight: 1000
+      identifier: otel_guides_otel_demo_to_datadog
     - name: Produce Delta Temporality Metrics
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
       weight: 1001
       identifier: otel_guides_otlp_delta_temporality
-    - name: Visualize Histograms as Heatmaps
-      url: /opentelemetry/guide/otlp_histogram_heatmaps
-      parent: otel_guides
-      weight: 1002
-      identifier: otel_guides_otlp_histogram_heatmaps
     - name: Instrument Unsupported Runtimes
       url: /opentelemetry/guide/instrument_unsupported_runtimes
       parent: otel_guides
@@ -1076,7 +1091,7 @@ menu:
       url: /opentelemetry/reference
       identifier: otel_reference
       parent: opentelemetry_top_level
-      weight: 11
+      weight: 12
     - name: Terms and Concepts
       url: /opentelemetry/reference/concepts
       identifier: otel_concepts
@@ -1598,127 +1613,137 @@ menu:
       url: bits_ai/bits_autonomous_operations
       identifier: bits_ai_autonomous_operations
       parent: bits_ai
-      weight: 1
-    - name: Bits Chat
-      url: bits_ai/bits_chat
-      identifier: bits_ai_bits_chat
-      parent: bits_ai
       weight: 2
-    - name: Use Bits Chat
-      url: bits_ai/bits_chat/usage
-      identifier: bits_ai_bits_chat_usage
-      parent: bits_ai_bits_chat
-      weight: 201
-    - name: Bits Code
-      url: bits_ai/bits_code
-      parent: bits_ai
-      identifier: bits_ai_dev_agent
-      weight: 3
-    - name: Setup
-      url: bits_ai/bits_code/setup
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_setup
-      weight: 301
-    - name: Automations
-      url: bits_ai/bits_code/automations
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_automations
-      weight: 302
-    - name: Code Channels in Slack
-      url: bits_ai/bits_code/slack_code_channels
-      parent: bits_ai_dev_agent
-      identifier: bits_ai_dev_agent_slack_code_channels
-      weight: 303
-    - name: Bits Data Analysis
-      url: bits_ai/bits_data_analysis
-      identifier: bits_data_analysis
-      parent: bits_ai
-      weight: 4
-    - name: Bits Database Optimization
-      url: database_monitoring/bits_database_optimization
-      identifier: bits_ai_database_optimization
-      parent: bits_ai
-      weight: 5
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
-      parent: bits_ai
-      weight: 6
+      parent: bits_ai_autonomous_operations
+      weight: 201
     - name: Bits Investigation
       url: bits_ai/bits_investigation
       identifier: bits_ai_sre
-      parent: bits_ai
-      weight: 7
+      parent: bits_ai_autonomous_operations
+      weight: 202
     - name: Investigate Issues
       url: bits_ai/bits_investigation/investigate_issues
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
-      weight: 701
+      weight: 20201
     - name: Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 702
+      weight: 20202
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 703
+      weight: 20203
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 704
+      weight: 20204
     - name: Improve Bits Investigation Accuracy
       url: bits_ai/bits_investigation/improve_accuracy
       identifier: bits_ai_sre_improve_accuracy
       parent: bits_ai_sre
-      weight: 705
+      weight: 20205
     - name: MCP, API, CLI
       url: bits_ai/bits_investigation/mcp_api_cli
       identifier: bits_ai_sre_mcp_api_cli
       parent: bits_ai_sre
-      weight: 706
-    - name: Bits Live Debugger
-      url: tracing/live_debugger/bits-live-debugger
-      identifier: bits_ai_live_debugger
-      parent: bits_ai
-      weight: 8
-    - name: Bits Release
-      url: bits_release/
-      identifier: bits_release
-      parent: bits_ai
-      weight: 9
+      weight: 20206
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
-      parent: bits_ai
-      weight: 10
+      parent: bits_ai_autonomous_operations
+      weight: 203
     - name: Infrastructure Actions
       url: bits_ai/bits_remediation/infrastructure_actions
       identifier: bits_remediation_infrastructure_actions
       parent: bits_remediation
-      weight: 1001
+      weight: 20301
     - name: Bits Guardrails
       url: bits_ai/bits_remediation/guardrails
       identifier: bits_remediation_guardrails
       parent: bits_remediation
-      weight: 1002
+      weight: 20302
+    - name: Bits Chat
+      url: bits_ai/bits_chat
+      identifier: bits_ai_bits_chat
+      parent: bits_ai
+      weight: 3
+    - name: Use Bits Chat
+      url: bits_ai/bits_chat/usage
+      identifier: bits_ai_bits_chat_usage
+      parent: bits_ai_bits_chat
+      weight: 301
+    - name: Bits CLI
+      url: bits_ai/bits_chat/bits_cli
+      identifier: bits_ai_bits_chat_bits_cli
+      parent: bits_ai_bits_chat
+      weight: 302
+    - name: Bits Code
+      url: bits_ai/bits_code
+      parent: bits_ai
+      identifier: bits_ai_dev_agent
+      weight: 4
+    - name: Setup
+      url: bits_ai/bits_code/setup
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_setup
+      weight: 401
+    - name: Automations
+      url: bits_ai/bits_code/automations
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_automations
+      weight: 402
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 403
+    - name: Bits Data Analysis
+      url: bits_ai/bits_data_analysis
+      identifier: bits_data_analysis
+      parent: bits_ai
+      weight: 5
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      identifier: bits_ai_database_optimization
+      parent: bits_ai
+      weight: 6
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger
+      identifier: bits_ai_live_debugger
+      parent: bits_ai
+      weight: 7
+    - name: Bits Release
+      url: bits_release/
+      identifier: bits_release
+      parent: bits_ai
+      weight: 8
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 11
-    - name: Skills Library
-      url: bits_ai/skills_library
-      identifier: bits_ai_skills_library
-      parent: bits_ai
-      weight: 12
+      weight: 9
     - name: Bits AI Settings
       url: bits_ai/bits_settings
       identifier: bits_ai_settings
       parent: bits_ai
-      weight: 13
+      weight: 10
+    - name: Skills Library
+      url: bits_ai/skills_library
+      identifier: bits_ai_skills_library
+      parent: bits_ai_settings
+      weight: 1001
+    - name: AI Credit Limits
+      url: account_management/billing/ai_credit_limits/
+      identifier: bits_ai_settings_ai_credit_limits
+      parent: bits_ai_settings
+      weight: 1002
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2989,11 +3014,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Analytics
+      url: incident_response/on-call/analytics/
+      parent: oncall
+      identifier: oncall_analytics
+      weight: 8
     - name: Integrations
       url: incident_response/on-call/integrations/
       parent: oncall
       identifier: oncall_integrations
-      weight: 8
+      weight: 9
     - name: ServiceNow
       url: incident_response/on-call/integrations/servicenow/
       parent: oncall_integrations
@@ -3008,7 +3038,7 @@ menu:
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 9
+      weight: 10
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
@@ -4329,6 +4359,11 @@ menu:
       parent: network_path
       identifier: network_path_glossary
       weight: 509
+    - name: L1 to L7 Map
+      url: network_monitoring/l1_to_l7_map/
+      parent: nm_parent
+      identifier: nm_l1_l7_map
+      weight: 6
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -4571,6 +4606,11 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 803
+    - name: Outcomes
+      url: cloud_cost_management/planning/outcomes
+      parent: cloud_cost_planning
+      identifier: cloud_cost_planning_outcomes
+      weight: 804
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
@@ -5243,6 +5283,11 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
       weight: 708
+    - name: Full-Host Profiler
+      url: profiler/profiler_troubleshooting/full_host/
+      parent: profiler_troubleshooting
+      identifier: profiler_troubleshooting_full_host
+      weight: 709
     - name: Guides
       url: profiler/guide/
       parent: profiler
@@ -6853,111 +6898,116 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 301
+    - name: Cloning Feature Flags
+      url: feature_flags/concepts/cloning
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_cloning
+      weight: 302
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 302
+      weight: 303
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 303
+      weight: 304
     - name: Environments
       url: feature_flags/concepts/environments
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_environments
-      weight: 304
+      weight: 305
     - name: Evaluation Context
       url: feature_flags/concepts/evaluation_context
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_evaluation_context
-      weight: 305
+      weight: 306
     - name: Evaluation Results
       url: feature_flags/concepts/evaluation_results
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_evaluation_results
-      weight: 306
+      weight: 307
     - name: Evaluation Tester
       url: feature_flags/concepts/evaluation_tester
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_evaluation_tester
-      weight: 307
+      weight: 308
     - name: Experiments
       url: feature_flags/concepts/experiments
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_experiments
-      weight: 308
+      weight: 309
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 309
+      weight: 310
     - name: Flag Evaluation and Experimentation Opt-Out
       url: feature_flags/concepts/opt_out
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_opt_out
-      weight: 310
+      weight: 311
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 311
+      weight: 312
     - name: Flag Key Obfuscation
       url: feature_flags/concepts/flag_key_obfuscation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_key_obfuscation
-      weight: 312
+      weight: 313
     - name: Monthly Flag Configuration Requests
       url: feature_flags/concepts/monthly_flag_configuration_requests
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_mfcr
-      weight: 313
+      weight: 314
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_permissions
-      weight: 314
+      weight: 315
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 315
+      weight: 316
     - name: Scheduled Rollouts
       url: feature_flags/concepts/scheduled_rollouts
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_scheduled_rollouts
-      weight: 316
+      weight: 317
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 317
+      weight: 318
     - name: Targeting Attributes
       url: feature_flags/concepts/targeting_attributes
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_attributes
-      weight: 318
+      weight: 319
     - name: Targeting Rules and Filters
       url: feature_flags/concepts/targeting_rules
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
-      weight: 319
+      weight: 320
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 320
+      weight: 321
     - name: Variants and Flag Types
       url: feature_flags/concepts/variants_and_flag_types
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_variants
-      weight: 321
+      weight: 322
     - name: Workflow Automation
       url: feature_flags/concepts/workflow_automation
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_workflow_automation
-      weight: 322
+      weight: 323
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
@@ -8445,31 +8495,36 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_sequence_rule
       weight: 2029
+    - name: Migrate Detection Rules
+      url: security/cloud_siem/detect_and_monitor/migrate_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_migrate_detection_rules
+      weight: 203
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_version_history
-      weight: 203
+      weight: 204
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
-      weight: 204
+      weight: 205
     - name: Dynamic Severity
       url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_dynamic_severity
-      weight: 205
+      weight: 206
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 206
+      weight: 207
     - name: MITRE ATT&CK Map
       url: security/cloud_siem/detect_and_monitor/mitre_attack_map
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_mitre_attack_map
-      weight: 207
+      weight: 208
     - name: Triage and Investigate
       url: security/cloud_siem/triage_and_investigate
       parent: cloud_siem
@@ -8696,11 +8751,16 @@ menu:
       url: /security/code_security/iac_security/custom_rules/guide/
       parent: code_security_iac_security
       weight: 100006
+    - name: Prioritize Findings with Runtime Context
+      identifier: sec_code_sec_runtime_context
+      url: /security/code_security/runtime_context/
+      parent: code_security
+      weight: 6
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Pull Request Comments
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/pull_request_comments/
@@ -8745,12 +8805,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 7
+      weight: 8
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 8
+      weight: 9
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading

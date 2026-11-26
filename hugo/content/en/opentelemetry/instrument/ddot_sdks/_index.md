@@ -175,7 +175,7 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [1]: /opentelemetry/instrument/ddot_sdks/api_support/
 [5]: /tracing/trace_collection/dd_libraries/#instrument-your-application
 [7]: /opentelemetry/config/environment_variable_support/
-[8]: /opentelemetry/compatibility/#ddot-sdk-setups
+[8]: /opentelemetry/compatibility/?otel_sdk=ddot_sdk#ddot-sdk-setups
 [9]: https://opentelemetry.io/docs/platforms/kubernetes/operator/automatic/
 [10]: /tracing/trace_explorer/
 [11]: /metrics/explorer/

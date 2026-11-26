@@ -15,6 +15,8 @@ further_reading:
 
 Bits Chat has context on Datadog public documentation, telemetry, and ownership. Use Bits Chat to ask questions about your system or active incident. Bits Chat is available in the Datadog web application, the mobile app, Slack, and Microsoft Teams.
 
+To use Bits Chat in your terminal, see [Bits CLI][12].
+
 ## Web application
 There are multiple ways to open Bits Chat in the Datadog web application:
 - Go directly to [Bits Chat][1].
@@ -85,3 +87,4 @@ In a channel where the Datadog app is installed, mention `@Datadog` followed by 
 [9]: /bits_ai/bits_chat/#permissions
 [10]: /bits_ai/bits_investigation/
 [11]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
+[12]: /bits_ai/bits_chat/bits_cli/

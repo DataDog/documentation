@@ -1,9 +1,9 @@
 ---
 title: Correlate OpenTelemetry Traces and Metrics
 further_reading:
-- link: "/opentelemetry/otel_tracing/"
+- link: "/opentelemetry/setup/"
   tag: "Documentation"
-  text: "Send OpenTelemetry Traces to Datadog"
+  text: "Send OpenTelemetry Data to Datadog"
 ---
 
 ## Overview

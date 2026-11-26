@@ -18,6 +18,8 @@ The DDOT Collector is in Preview.
 
 Switch an upstream OpenTelemetry Collector on Kubernetes to the [DDOT Collector][1] by changing its container image. You keep your pipeline configuration. To switch back, restore the original image.
 
+Your exporter stays the same. Pipelines that use the OTLP HTTP exporter keep working after the switch, and moving to the Datadog Exporter, which Datadog recommends for the DDOT Collector, is optional.
+
 To set up a new Collector instead, see [Install the DDOT Collector on Kubernetes][2]. To run your pipeline alongside the Datadog Agent, see [Migrate to the Agent's Collector][3].
 
 ## Before you switch

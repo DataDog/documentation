@@ -6,12 +6,12 @@ aliases:
   - /metrics/guide/metrics-without-limits-getting-started/
   - /metrics/faq/why-is-my-save-button-disabled/
 further_reading:
-  - link: "https://www.datadoghq.com/blog/metrics-without-limits"
-    tag: "Blog"
-    text: "Dynamically control custom metrics volume with Metrics without Limits™"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to unlock the full potential of metrics"
+  - link: "https://www.datadoghq.com/blog/metrics-without-limits"
+    tag: "Blog"
+    text: "Dynamically control custom metrics volume with Metrics without Limits™"
 algolia:
   tags: ['metrics without limits']
 ---

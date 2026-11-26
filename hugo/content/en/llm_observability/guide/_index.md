@@ -16,6 +16,7 @@ cascade:
     {{< nextlink href="/llm_observability/guide/advanced_experiment_runs" >}}Advanced offline experiment runs{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/analyzing_experiment_results" >}}Analyze offline experiment results{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/offline_experiments_api" >}}Offline Experiments API{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/guide/prompt_optimization" >}}Automatically improve prompts with Prompt Optimization{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agent_observability_and_apm" >}}Using Agent Observability and APM{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/monitor_mcp_client" >}}Monitor MCP Clients{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/crewai_guide" >}}Using the Datadog-CrewAI integration for Agent Observability{{< /nextlink >}}

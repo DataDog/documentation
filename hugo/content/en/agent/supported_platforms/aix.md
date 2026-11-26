@@ -89,6 +89,14 @@ To request support for an integration on AIX, open a feature request with [Datad
 
 ## Migrate from the UNIX Agent
 
+<div class="alert alert-warning">
+
+The UNIX Agent includes its own certificate authority (CA) certificates. Agent 7 on AIX relies on the host's trust store to verify the TLS certificates of Datadog intake endpoints. If the host's trust store does not include the root CA that signs Datadog certificates, Agent 7 fails to send data after the migration. The Agent logs errors such as `x509: certificate signed by unknown authority`.
+
+Before you migrate, verify that the host trusts the Datadog certificate chain. See [Changes to Datadog's TLS certificate chain of trust][14] for the certificates to add to the host's trust store. If you encounter issues, contact [Datadog Support][13].
+
+</div>
+
 To migrate from the Datadog UNIX Agent to Agent 7, uninstall the UNIX Agent and then install Agent 7:
 
 1. Back up the UNIX Agent configuration. Uninstalling the UNIX Agent removes the `/etc/datadog-agent` directory.
@@ -136,3 +144,4 @@ Uninstalling the Agent removes the Agent services and the boot entry.
 [10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_aix.yaml.example
 [12]: /agent/guide/install-unix-agent-aix/
 [13]: /help/
+[14]: /data_security/guide/tls_cert_chain_of_trust/?tab=g1rootcertificateold

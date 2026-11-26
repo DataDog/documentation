@@ -158,3 +158,14 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Add CrowdStrike FDR source to Observability Pipelines
+  - change_type: modified
+    date: '2026-11-10'
+    link: https://github.com/DataDog/documentation/pull/41525
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Document anomaly_detection and end_to_end_acknowledgements in 
+      Observability Pipelines config

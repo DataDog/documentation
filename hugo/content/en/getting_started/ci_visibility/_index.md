@@ -27,7 +27,7 @@ CI Visibility, or CI Pipeline Visibility, allows you to monitor the health of yo
 
 {{< img src="/getting_started/ci_visibility/pipelines_list.png" alt="A list view of your CI pipelines in Datadog CI Visibility" style="width:100%" >}}
 
-You can forward CI job logs and automatically correlate them with your pipelines in CI Visibility. Depending on the providers you are using, you can either enable job log collection on the [{{< ui >}}Settings{{< /ui >}} page][1] in CI Visibility or in your provider’s settings to integrate with Datadog.
+You can forward CI job logs and automatically correlate them with your pipelines in CI Visibility. Depending on the providers you are using, you can either enable job log collection in [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][1] or in your provider’s settings to integrate with Datadog.
 
 You can also use the `datadog-ci` CLI to [trace commands][2] in your pipelines, as well as the [custom tags and measures commands][3] to add user-defined text and numerical tags in your pipeline traces.
 
@@ -155,7 +155,7 @@ To set up a monitor that alerts on your CI pipeline when the average duration in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/settings
+[1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [2]: /continuous_integration/pipelines/custom_commands/
 [3]: /continuous_integration/pipelines/custom_tags_and_measures/
 [4]: /continuous_integration/pipelines/?tab=githubactions#terminology
