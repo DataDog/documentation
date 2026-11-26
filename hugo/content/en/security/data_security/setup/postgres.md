@@ -115,7 +115,7 @@ BEGIN
 END $$;
 ```
 
-The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema. Run the block as a superuser or as the owner of the schemas. For tables that another role creates later, also run the `FOR ROLE` command for that role.
+The block applies to the schemas that exist when you run it. For a schema created later, run the commands for that schema. Run the block as a superuser or as the owner of the schemas and their tables. For tables that another role creates later, also run the `FOR ROLE` command for that role.
 
 If the `datadog` user can't read the tables in a database, that database appears under setup issues in the side panel.
 
