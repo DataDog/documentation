@@ -30,7 +30,7 @@ These OTLP metric types are mapped to Datadog metric types:
 - COUNT
 - GAUGE
 - DISTRIBUTION
-- HISTOGRAM (Explicit, Exponential)
+- HISTOGRAM (Explicit, Exponential), for histograms that Datadog stores natively. See the Histogram tab in [Mapping](#mapping).
 
 A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
@@ -78,14 +78,19 @@ Both types have one feature that influences the mapping:
 
 The default mapping for both histogram temporality types is as follows:
 
-- **Delta (Default and Recommended)**: Explicit Bucket and Exponential Histograms are ingested natively and stored with their original bucket structure preserved. Histograms with a count of 0 are dropped.
+- **Delta (Default and Recommended)**: The [OTLP metrics intake endpoint][4] ingests Explicit Bucket and Exponential Histograms natively and stores them with their original bucket structure preserved. Histograms with a count of 0 are dropped.
 - **Cumulative**: The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
 
 **Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for configuration instructions.
 
-Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
+For native histograms, Datadog computes percentile aggregations directly from the bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
+
+**Note**: By default, DDOT converts histograms to Datadog [distributions][5], which use the DDSketch format. Native histograms in DDOT are in Preview. To turn them on, see [Send Native OpenTelemetry Histograms][6].
 
 [3]: /opentelemetry/guide/otlp_delta_temporality/
+[4]: /opentelemetry/setup/otlp_ingest/metrics/
+[5]: /metrics/distributions/
+[6]: /opentelemetry/guide/native_otel_histograms/
 
 {{% /tab %}}
 {{% tab "Summary" %}}
