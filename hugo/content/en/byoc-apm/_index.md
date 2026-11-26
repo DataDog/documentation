@@ -101,17 +101,17 @@ The following table lists the capabilities that BYOC APM supports and doesn't su
 | Area | Supported | Not supported |
 | --- | --- | --- |
 | Ingestion | OTLP trace ingestion and span storage in your cloud account | Datadog Agent ingestion, pipeline customization |
-| Search and analytics | Historical span queries | Trace Queries, Live Search, DDSQL, some aggregations, calculated fields, cluster selection in [Trace Explorer][11] |
+| Search and analytics | Historical span queries | Trace Queries, Live Search, DDSQL, grouping by more than one attribute, sorting by a string attribute, calculated fields, cluster selection in [Trace Explorer][11] |
 | Visualizations | | [Scatter Plot][12] and [Point Plot][13] widgets |
 | Metrics | RED metrics: request rate, errors, and latency | Sorting by error rate, percentiles, the distribution widget, [custom metrics generated from spans][14] |
 | Services | [Service pages][5], [resource pages][6], [Catalog][7] entries | The service dependency graph, service remapping configuration, [Error Tracking][15] |
-| Monitors | [Monitors on trace metrics][8] | Some monitor types |
-| Logs | [Logs and traces correlation][16], using the trace ID on each log | |
-| AI agents | [Datadog MCP Server][17] tools that search spans, get a trace, and summarize a trace | |
+| Monitors and SLOs | [APM Metrics monitors][8] (threshold and anomaly), [metric-based SLOs][16] | Trace Analytics monitors |
+| Logs | [Logs and traces correlation][17], using the trace ID on each log | |
+| AI agents | [Datadog MCP Server][18] tools that search spans, get a trace, and summarize a trace | |
 | Span data | | Span links, span events, enrichments |
 | Data management | | Retention filters, Sensitive Data Scanner |
 
-Datadog hides some unsupported features in the UI. Other unsupported features can appear in the UI, but don't work with BYOC data.
+Datadog hides unsupported features in the UI, such as trace patterns, latency breakdown, Generate Metrics, and the APM settings pages.
 
 ## Responsibilities
 
@@ -141,5 +141,6 @@ You and Datadog share responsibility for a BYOC APM deployment. The data plane r
 [13]: /dashboards/widgets/point_plot/
 [14]: /tracing/trace_pipeline/generate_metrics/
 [15]: /tracing/error_tracking/
-[16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /mcp_server/
+[16]: /service_level_objectives/metric/
+[17]: /tracing/other_telemetry/connect_logs_and_traces/
+[18]: /mcp_server/
