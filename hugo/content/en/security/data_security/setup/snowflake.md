@@ -27,7 +27,7 @@ Data Security scans Snowflake tables through the Snowflake integration you set u
 
 - The [Snowflake integration for Data Observability][1] is set up for the Snowflake account.
 - Your Datadog role has the Integrations Manage permission to turn on scanning.
-- The Datadog role has read access to the databases you want to scan. To grant it, follow the read-only access step of the [Snowflake integration setup][1], which grants `SELECT` on the tables of each database you list.
+- The Snowflake role you created for Datadog has read access to the databases you want to scan. To grant it, follow the read-only access step of the [Snowflake integration setup instructions][1], which grants `SELECT` on the tables of each database you list.
 
 ## Costs
 
