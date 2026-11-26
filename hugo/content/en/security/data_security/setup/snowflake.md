@@ -52,7 +52,7 @@ In the account side panel, check the setup issues:
 
 Snowflake findings also appear in the Data Observability catalog. On a database, schema, or table, the {{< ui >}}Sensitive Data{{< /ui >}} row shows the number of findings, {{< ui >}}No findings{{< /ui >}}, or {{< ui >}}Unscanned{{< /ui >}}. Click {{< ui >}}View Explorer{{< /ui >}} to open the finding in Data Security. The column list marks the columns that hold sensitive data.
 
-## Snowflake cost
+## Snowflake integration overhead
 
 Data Security scans run as `SELECT` queries against your tables and are billed as normal warehouse usage. They run on the warehouse you set up for Data Observability (`DATADOG_WH` by default).
 
