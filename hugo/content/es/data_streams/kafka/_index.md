@@ -17,6 +17,7 @@ Con la Kafka Console de Data Streams Monitoring, una verificación del Datadog A
 - **Identifique la causa raíz**: Correlacione los cambios de configuración y esquema con el retraso, el rendimiento y los errores, y rastree los problemas hasta el tema, la versión del esquema o el cambio de configuración exactos.
 - **Conecte servicios a temas**: Vea qué productores y consumidores interactúan con cada tema, con propietarios vinculados, repositorios, rotaciones de guardia, trazas y registros de errores.
 - **Inspeccione esquemas y mensajes de temas**: Vea esquemas, compare versiones y acceda a mensajes para depurar cargas útiles dañinas o explorar el tema.
+- **Administrar temas**: cree y elimine temas directamente desde Kafka Console
 - **Alerte y automatice respuestas**: Utilice [plantillas de monitor recomendadas][4] y active Workflow Automation o webhooks cuando se dispare una condición de Kafka.
 
 Para comenzar, consulte [Configuración de la Consola de Kafka][2].
@@ -57,12 +58,16 @@ Utilice esta información para contactar al equipo correcto cuando un consumidor
 
 La sección {{< ui >}}Schema{{< /ui >}} muestra el esquema actual para la clave o el valor de un tema, con el historial de versiones. Utilice el selector de versiones para comparar esquemas entre versiones.
 
-La sección {{< ui >}}Messages{{< /ui >}} le permite recuperar mensajes por partición y desplazamiento para inspeccionar las cargas útiles directamente. Esto es útil para depurar cargas útiles dañinas o verificar la estructura de los mensajes después de un cambio de esquema. Consulte [Habilitar inspección de mensajes][3] para conocer los requisitos previos y permisos adicionales necesarios para recuperar mensajes.
+La sección {{< ui >}}Messages{{< /ui >}} le permite recuperar mensajes por partición y desplazamiento para inspeccionar las cargas útiles directamente. Esto es útil para depurar cargas útiles dañinas o verificar la estructura de los mensajes después de un cambio de esquema. Consulte [Habilitar acciones de Kafka][3] para conocer los requisitos previos y permisos adicionales necesarios para recuperar mensajes.
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Vista de esquema y mensajes de tema que muestra una definición de esquema de Protobuf y una tabla de mensajes recientes con fecha, partición, desplazamiento y valor del mensaje." >}}
 
+### Crear y eliminar temas {#create-and-delete-topics}
+
+Cree un tema en un clúster o elimine un tema que ya no necesite. Puede hacer ambas cosas desde el mismo lugar donde hace un seguimiento del estado, el retraso y los propietarios de un tema, sin tener que cambiar a una herramienta de administración de Kafka independiente. Para conocer la configuración y los permisos necesarios, consulte [Habilitar acciones de Kafka][3].
+
 [2]: /es/data_streams/kafka/setup/
-[3]: /es/data_streams/kafka/setup/#enable-message-inspection
+[3]: /es/data_streams/kafka/setup/#enable-kafka-actions
 [4]: /es/data_streams/kafka/monitors_and_automation/
 
 ## Lecturas adicionales {#further-reading}

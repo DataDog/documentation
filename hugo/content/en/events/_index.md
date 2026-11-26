@@ -14,7 +14,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/"
   tag: "Blog"
   text: "Identify and redact sensitive data in Events with Sensitive Data Scanner"
-- link: "https://app.datadoghq.com/event/configuration/quick-start"
+- link: "https://app.datadoghq.com/event/settings/quick-start"
   tag: "App"
   text: "Quick Start Guide"
 - link: "https://www.datadoghq.com/blog/datadog-event-management"

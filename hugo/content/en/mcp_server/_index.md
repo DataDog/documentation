@@ -16,6 +16,9 @@ further_reading:
 - link: "mcp_server/code_execution"
   tag: "Documentation"
   text: "Code Execution with the MCP Server"
+- link: "account_management/rbac/mcp_access"
+  tag: "Documentation"
+  text: "Access Control for MCP"
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
@@ -58,6 +61,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=claude" src="integrations_logos/claude_app.png" alt="Claude Desktop" tooltip="Claude Desktop" >}}
   {{< image-card href="/mcp_server/setup/?tab=goose" src="integrations_logos/goose.svg" alt="Goose" tooltip="Goose" >}}
   {{< image-card href="/mcp_server/setup/?tab=opencode" src="integrations_logos/opencode.svg" alt="OpenCode" tooltip="OpenCode" >}}
+  {{< image-card href="/mcp_server/setup/?tab=pi" src="integrations_logos/pi.svg" alt="Pi" tooltip="Pi" >}}
   {{< image-card href="/mcp_server/setup/?tab=copilotcli" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
   {{< image-card href="/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
   {{< image-card href="/mcp_server/setup/?tab=grokbuild" src="integrations_logos/grok.png" alt="Grok Build" tooltip="Grok Build" >}}
@@ -88,7 +92,7 @@ Most MCP Server tools, such as `search_datadog_logs`, query Datadog backends dir
 
 ### Restrict which data the Datadog MCP Server can access
 
-The MCP Server forwards the authenticated user's own credentials to Datadog APIs. Your existing access controls apply exactly as they do for direct API or UI access. The MCP Server cannot grant a user access beyond what that user already has. It cannot reach resources that are not visible to that user in the Datadog UI.
+The MCP Server forwards the caller's own credentials to Datadog APIs: the signed-in user's, or a service account's when the connection uses a Service Access Token. Your existing access controls apply exactly as they do for direct API or UI access. The MCP Server cannot grant access beyond what that user or service account already has. It cannot reach resources that are not visible to that user or service account in the Datadog UI.
 
 Because your AI client controls what it sends to its model provider, limiting what a provider can receive means limiting what the MCP Server returns. To scope the data an MCP Server user can retrieve, use:
 
@@ -97,6 +101,8 @@ Because your AI client controls what it sends to its model provider, limiting wh
 - [Log restriction queries][40] to limit a role's log access to the subset of logs matching a query.
 
 Write operations require the corresponding permission, such as `monitors_write`, and the MCP Server checks it on each tool call. A read-only user's call to a write-enabled tool is rejected.
+
+Administrators can also turn off the MCP Server or its write tools for the entire organization. They can restrict which actions each AI client can perform, even when a user can perform those actions elsewhere in Datadog. See [Access Control for MCP][41].
 
 ## Fair-use rate limits
 
@@ -157,3 +163,4 @@ The Datadog MCP Server is under significant development. Use [this feedback form
 [38]: /account_management/rbac/
 [39]: /account_management/rbac/data_access/
 [40]: /logs/guide/logs-rbac-permissions/?tab=ui#create-a-restriction-query
+[41]: /account_management/rbac/mcp_access/

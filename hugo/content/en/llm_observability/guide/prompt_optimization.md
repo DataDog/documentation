@@ -4,7 +4,6 @@ aliases:
 - /llm_observability/improve/experiments/prompt_optimization/
 - /llm_observability/experiments/prompt_optimization/
 description: Automatically improve LLM prompts through iterative refinement and AI-powered evaluation.
-private: true
 further_reading:
   - link: /llm_observability/guide/offline_experiments
     tag: "Documentation"

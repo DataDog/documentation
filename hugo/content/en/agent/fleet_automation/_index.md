@@ -42,17 +42,19 @@ SDK upgrades and remote flare collection are not supported on US1-FED or US2-FED
 With Fleet Automation, you can:
 - **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
 - **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
+- **[Manage OpenTelemetry Collectors][14]** to view Collector pipelines and topology, and to configure the Agent's Collector.
 - **[Configure Agent Integrations][9]** to deploy, update, and remove integration configuration files across your fleet.
 - **[Configure Custom Logs][10]** to manage custom log collection settings on your Agents at scale.
-- **[Manage Datadog Agent tags][12]** _(Preview)_ to correct and standardize tagging across your fleet.
+- **[Manage Datadog Agent tags][12]** to correct and standardize tagging across your fleet.
+- **[Create configuration policies][15]** _(Preview)_ to keep Agent configuration consistent across your fleet and correct drift automatically.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
-- **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
+- **[Send a support flare remotely][6]** to debug issues on an Agent or the Agent's Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
 
 ## Set up Fleet Automation
 
-An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration and set `remote_updates` to `true`][8]. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
+An Agent appearing in Fleet View does not necessarily have remote management enabled. To remotely upgrade or configure Agents on Linux or Windows VMs, [enable Remote Configuration][8] and, on Agents older than 7.73, set `remote_updates` to `true`. Check the version and platform requirements for [upgrades][5] and [configuration changes][4].
 
 <a id="fleet-automation-api"></a>
 
@@ -68,23 +70,14 @@ You can also create and manage Agent upgrade schedules with the Datadog Terrafor
 
 ## Control access to Fleet Automation
 
-Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
-
-| Permission | Description |
-|--------------|---------------|
-| `API Keys Read`| Restricts which users can view and search Agents by API key. |
-| `Agent Flare Collection` | Restricts which users can remotely send flares from Fleet Automation. |
-| `Agent Upgrade` | Restricts which users have access to upgrade Agents from Fleet Automation. |
-| `Agent Configuration Management` | Restricts which users have access to configure Agents from Fleet Automation. |
-
-For information on setting up roles and permissions, see [Access Control][2].
+Use role permissions to control which Fleet Automation actions users can take, such as upgrading or configuring Agents. Use scoped permissions (in Preview) to limit those actions to specific Agents. For details, see [Control Access to Fleet Automation][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/fleet-automation/
-[2]: /account_management/rbac/
+[2]: /agent/fleet_automation/access_control/
 [3]: /agent/fleet_automation/fleet_view/
 [4]: /agent/fleet_automation/configure_agents/
 [5]: /agent/fleet_automation/upgrade_agents/
@@ -94,5 +87,7 @@ For information on setting up roles and permissions, see [Access Control][2].
 [9]: /agent/fleet_automation/configure_integrations/
 [10]: /agent/fleet_automation/configure_logs/
 [11]: /agent/fleet_automation/upgrade_sdks/
-[12]: https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/
+[12]: /agent/fleet_automation/modify_tags/
 [13]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades-with-terraform
+[14]: /agent/fleet_automation/otel_collectors/
+[15]: /agent/fleet_automation/configuration_policies/

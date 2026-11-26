@@ -4,6 +4,9 @@ further_reading:
 - link: "/opentelemetry/setup/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
+- link: "/opentelemetry/integrations/opamp_extension/"
+  tag: "Documentation"
+  text: "OpAMP Extension"
 - link: "/infrastructure/list/"
   tag: "Documentation"
   text: "Infrastructure List"
@@ -17,6 +20,8 @@ further_reading:
 As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is automatically enabled.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. The extension works with the recommended OTLP HTTP exporter setup and with the Datadog Exporter.
+
+The Datadog Extension is the recommended way to connect upstream Collectors to Fleet Automation. As an alternative, you can use the [OpAMP extension][11].
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
@@ -68,7 +73,11 @@ service:
 
 The Collector automatically attaches `service.name`, `service.version`, and `service.instance.id` (a randomly generated UUID) to its internal telemetry. You don't need to set these manually.
 
-### 4. (Optional) Configure gateway topology (preview)
+### 4. Enable the Collector's internal telemetry
+
+Send the Collector's internal metrics to Datadog on every Collector that runs the Datadog Extension. Fleet Automation uses them to show Collector health and to power the **Show traffic** toggle in the Pipeline and Topology views. For setup, see [Collector Health Metrics][10].
+
+### 5. (Optional) Configure gateway topology
 
 When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
 
@@ -81,7 +90,7 @@ To enable this view, configure each Collector in the pipeline:
 - Set `gateway_service` on gateway Collectors. The value is the Kubernetes Service that fronts the gateway pods.
 - A **middle** gateway in a multi-layer pipeline sets **both** `gateway_service` (its own service) and `gateway_destination` (the next gateway).
 - Set `k8s.cluster.name` under `service.telemetry.resource` on every Collector in the pipeline. This is **required**: together with `gateway_service` and `gateway_destination`, it forms the join key that Fleet Automation uses to reconstruct the pipeline graph.
-- Enable Collector internal metrics so the extension can attribute logs, metrics, or traces volume data to each edge in the graph with the **Show traffic** toggle. See [OpenTelemetry Collector Health Metrics][10].
+- Enable [internal telemetry](#4-enable-the-collectors-internal-telemetry) on every Collector in the pipeline. The extension uses it to show logs, metrics, or traces volume on each edge of the graph with the **Show traffic** toggle.
 
 The example below covers the common two-layer case: a node-local DaemonSet forwards to a gateway Deployment, which sends to Datadog with the Datadog Exporter.
 
@@ -245,7 +254,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `hostname` | Custom hostname for the Collector. | Auto-detected |
 | `http.endpoint` | Local HTTP server endpoint. | `localhost:9875` |
 | `http.path` | HTTP server path for metadata. | `/metadata` |
-| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#4-optional-configure-gateway-topology-preview). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
+| `deployment_type` | Identifies how the Collector is deployed. This value appears in [Fleet Automation][7] and is required for [gateway topology](#5-optional-configure-gateway-topology). One of: `gateway`, `daemonset`, or `unknown`. The default `unknown` means the deployment type was not set. | `unknown` |
 | `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
 | `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
 | `gateway_destination` | Set on any Collector that forwards telemetry to a downstream gateway. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
@@ -365,3 +374,4 @@ This endpoint provides:
 [8]: /opentelemetry/setup/ddot_collector/
 [9]: /opentelemetry/setup/collector_exporter/
 [10]: /opentelemetry/integrations/collector_health_metrics/
+[11]: /opentelemetry/integrations/opamp_extension/

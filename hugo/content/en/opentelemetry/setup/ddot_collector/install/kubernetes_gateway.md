@@ -6,7 +6,7 @@ code_lang_weight: 2
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with Datadog Agent"
+  text: "Add Components to the Agent's Collector"
 - link: "https://www.datadoghq.com/blog/ddot-gateway"
   tag: "Blog"
   text: "Centralize and govern your OpenTelemetry pipeline with the DDOT gateway"
@@ -64,7 +64,7 @@ Before you begin, ensure you have the following:
 
 This guide shows how to configure the Agent's Collector as a gateway using either the Datadog Operator or Helm chart.
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and upstream OpenTelemetry SDK + Agent's Collector configurations. In this route, the Agent's Collector receives and forwards OTLP metrics and logs.</div>
 
 Choose one of the following installation methods:
 
@@ -862,7 +862,7 @@ To ensure APM Stats are calculated on 100% of your traces before sampling, the <
 
 ### Using a custom Collector image
 
-To use a custom-built Collector image for your gateway, specify the image repository and tag. If you need instructions on how to build the custom images, see [Use Custom OpenTelemetry Components][5].
+To use a custom-built Collector image for your gateway, specify the image repository and tag. If you need instructions on how to build the custom images, see [Add Components to the Agent's Collector][5].
 
 <div class="alert alert-info">
 <strong>Note:</strong> The Datadog Operator supports the following image name formats:

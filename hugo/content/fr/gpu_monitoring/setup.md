@@ -21,12 +21,12 @@ Pour commencer à utiliser GPU Monitoring de Datadog, votre environnement doit r
   - [Installer Datadog Agent sur Kubernetes][1]
   - [Installer Datadog Agent sur Docker][7]
   - [Installer Datadog Agent sur Linux non conteneurisé][8]
-- Les pilotes NVIDIA sont installés sur les hosts. Si vous utilisez Kubernetes, le plugin de périphérique NVIDIA pour Kubernetes est installé ([directement][3], ou via [NVIDIA GPU Operator][4])
+- Les pilotes NVIDIA sont installés sur les hosts. Si vous utilisez Kubernetes, le plugin de périphérique NVIDIA pour Kubernetes est installé ([directement][3], ou via [NVIDIA GPU Operator][4]). Si vos GPU sont plutôt alloués via Dynamic Resource Allocation (DRA), suivez également [Set Up GPU Monitoring with Dynamic Resource Allocation][15].
 
 #### Versions minimales requises {#minimum-version-requirements}
 
 - **Datadog Agent** : v7.80
-  - (Version recommandée : la [version la plus récente de l'Agent][2]). Datadog déconseille d'utiliser la version 7.82.0 en raison d'un bug provoquant des paniques inattendues du noyau. 
+  - (Version recommandée : la [version la plus récente de l'Agent][2]). Datadog déconseille d'utiliser la version 7.82.0 en raison d'un bug provoquant des paniques inattendues du noyau.
 - **Système d'exploitation** : Linux
 - **Noyau Linux** : version 5.8 ou ultérieure
 - **Pilote NVIDIA** : version 450.51
@@ -36,7 +36,10 @@ Si vous utilisez Kubernetes, les exigences supplémentaires suivantes doivent ê
 - [**Datadog Operator**][5] : version 1.18, _ou_ [**Datadog Helm chart**][6] : version 3.137.3
 - **Kubernetes** : 1.22 avec l'API PodResources active
 
-Si vous utilisez Google Kubernetes Engine, les nœuds Container-Optimized OS ne sont _pas_ pris en charge en raison de limitations du noyau et du système de permissions.
+Si vous utilisez Google Kubernetes Engine (GKE) avec des nœuds Container-Optimized OS (COS), les exigences supplémentaires suivantes doivent être remplies :
+
+- [**Datadog Operator**][5] : version 1.29, _ou_ [**Datadog Helm chart**][6] : version 3.231.4
+- Le [provider][14] GKE COS est défini, comme indiqué dans les exemples GKE sur cette page. Ce paramètre monte les bibliothèques de pilotes NVIDIA que GKE installe sur les nœuds COS dans les conteneurs de l'Agent.
 
 ## Configuration de GPU Monitoring {#setting-up-gpu-monitoring}
 
@@ -60,11 +63,19 @@ Les instructions suivantes décrivent les étapes de base pour configurer GPU Mo
    `gpu.enabled: true`
    : Active GPU Monitoring.
 
+   `gpu.privilegedMode: true`
+   : _Requis pour GKE_. Active le module GPU Monitoring dans `system-probe`. Requis par `gpu.patchCgroupPermissions`.
+
    `gpu.patchCgroupPermissions: true`
    : _Uniquement pour GKE_. Active un chemin de code dans `system-probe` qui aide l'Agent à accéder aux périphériques GPU.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS et Oracle Cloud, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS, Oracle Cloud et GKE avec des pilotes GPU gérés par GKE, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+
+   Si les nœuds GKE utilisent Container-Optimized OS, ajoutez également l'annotation [provider][3] suivante aux métadonnées `DatadogAgent` :
+
+   `agent.datadoghq.com/cluster-provider: gke-cos`
+   : Monte les bibliothèques de pilotes NVIDIA du host COS dans les conteneurs de l'Agent.
 
    Exemple de `datadog-agent.yaml` exécuté sur GKE :
 
@@ -73,18 +84,22 @@ Les instructions suivantes décrivent les étapes de base pour configurer GPU Mo
    kind: DatadogAgent
    metadata:
      name: datadog
+     annotations:
+       agent.datadoghq.com/cluster-provider: gke-cos # Only for GKE with Container-Optimized OS nodes
    spec:
      features:
        gpu:
          enabled: true
+         privilegedMode: true # Required for GKE
          patchCgroupPermissions: true # Only for GKE
-         requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
+         requiredRuntimeClassName: "" # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
    ```
 
 3. Appliquez vos modifications et redémarrez Datadog Agent.
 
 [1]: /fr/containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases
+[3]: /fr/containers/datadog_operator/providers/#on-a-datadogagent
 
 {{% /tab %}}
 
@@ -96,11 +111,17 @@ Les instructions suivantes décrivent les étapes de base pour configurer GPU Mo
    `gpuMonitoring.enabled: true`
    : Active GPU Monitoring.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _Requis pour GKE_. Active le module GPU Monitoring dans `system-probe`. Requis par `gpuMonitoring.configureCgroupPerms`.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _Uniquement pour GKE_. Active un chemin de code dans `system-probe` qui aide l'Agent à accéder aux périphériques GPU.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS et Oracle Cloud, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS, Oracle Cloud et GKE avec des pilotes GPU gérés par GKE, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+
+   `providers.gke.cos: true`
+   : _Uniquement pour GKE avec des nœuds Container-Optimized OS_. Monte les bibliothèques de pilotes NVIDIA du host COS dans les conteneurs de l'Agent.
 
    Exemple de `datadog-values.yaml` exécuté sur GKE :
 
@@ -108,8 +129,13 @@ Les instructions suivantes décrivent les étapes de base pour configurer GPU Mo
    datadog:
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
    ```
 
 3. Mettez à jour votre chart Helm et redémarrez Datadog Agent.
@@ -231,15 +257,17 @@ Pour configurer GPU Monitoring sur un cluster mixte, utilisez la fonctionnalité
    datadogAgentInternal:
      enabled: true
 
-    datadogCRDs:
-      crds:
-        datadogAgentProfiles: true
-        datadogAgentInternal: true
+   datadogCRDs:
+     crds:
+       datadogAgentProfiles: true
+       datadogAgentInternal: true
    ```
 
    Redéployez ensuite Datadog Operator avec : `helm upgrade --install <release-name> datadog/datadog-operator -f datadog-operator.yaml`.
 
 2. Modifiez votre ressource `DatadogAgent` en ajoutant l'annotation `agent.datadoghq.com/update-metadata` à la ressource `DatadogAgent`.
+
+   Si tous les nœuds du cluster utilisent GKE Container-Optimized OS, ajoutez également l'annotation `agent.datadoghq.com/cluster-provider: gke-cos` [provider][5]. Si seuls certains nœuds utilisent Container-Optimized OS, définissez l'annotation sur un [Datadog Agent Profile qui cible ces nœuds][6] à la place.
 
    Les ajouts au fichier `datadog-agent.yaml` devraient ressembler à ceci :
 
@@ -250,6 +278,7 @@ Pour configurer GPU Monitoring sur un cluster mixte, utilisez la fonctionnalité
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
+       agent.datadoghq.com/cluster-provider: gke-cos # Only when every node in the cluster uses Container-Optimized OS
    ```
 
 3. Appliquez vos modifications à la ressource `DatadogAgent`. Ces modifications peuvent être appliquées en toute sécurité à tous les Datadog Agents, qu'ils s'exécutent ou non sur des nœuds GPU.
@@ -274,6 +303,7 @@ Pour configurer GPU Monitoring sur un cluster mixte, utilisez la fonctionnalité
        features:
          gpu:
            enabled: true
+           privilegedMode: true # Required for GKE
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -283,6 +313,8 @@ Pour configurer GPU Monitoring sur un cluster mixte, utilisez la fonctionnalité
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
 [4]: https://github.com/DataDog/datadog-agent/releases
+[5]: /fr/containers/datadog_operator/providers/#on-a-datadogagent
+[6]: /fr/containers/datadog_operator/providers/#on-a-datadogagentprofile
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 ou 1.19)" %}}
@@ -411,11 +443,17 @@ Pour configurer GPU Monitoring sur un cluster mixte avec Helm, créez deux dépl
    `gpuMonitoring.enabled: true`
    : Active GPU Monitoring.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _Requis pour GKE_. Active le module GPU Monitoring dans `system-probe`. Requis par `gpuMonitoring.configureCgroupPerms`.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _Uniquement pour GKE_. Active un chemin de code dans `system-probe` qui aide l'Agent à accéder aux périphériques GPU.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS et Oracle Cloud, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+   : _Optionnel_. Spécifie le runtime de conteneur pour les pods qui ont besoin d'accéder aux périphériques GPU, par exemple : `nvidia`, `nvidia-cdi`, `nvidia-legacy`. La valeur par défaut est `nvidia`, car il s'agit du runtime par défaut défini par NVIDIA GPU Operator. Dans EKS, Oracle Cloud et GKE avec des pilotes GPU gérés par GKE, cette valeur doit être définie sur une chaîne vide, car la classe de runtime par défaut autorise déjà l'accès aux périphériques GPU.
+
+   `providers.gke.cos: true`
+   : _Uniquement pour GKE avec des nœuds Container-Optimized OS_. Monte les bibliothèques de pilotes NVIDIA du host COS dans les conteneurs de l'Agent.
 
    Exemple `datadog-gpu-values.yaml` :
 
@@ -425,8 +463,13 @@ Pour configurer GPU Monitoring sur un cluster mixte avec Helm, créez deux dépl
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
 
    agents:
      affinity:
@@ -484,3 +527,5 @@ Pour configurer GPU Monitoring sur un cluster mixte avec Helm, créez deux dépl
 [11]: /fr/getting_started/integrations/azure/?tab=createanappregistration
 [12]: /fr/getting_started/integrations/oci/
 [13]: /fr/infrastructure/process?tab=linuxwindows#installation
+[14]: /fr/containers/datadog_operator/providers/
+[15]: /fr/gpu_monitoring/dra/

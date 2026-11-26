@@ -1,5 +1,6 @@
 ---
 title: Datadog OTLP Intake Endpoint
+description: Send OpenTelemetry traces, metrics, and logs straight from your applications to the Datadog OTLP intake, with no Collector or Agent.
 aliases:
 - /opentelemetry/setup/intake_endpoint/
 - /opentelemetry/setup/agentless/
@@ -36,7 +37,7 @@ Datadog enforces a maximum payload size per request on each OTLP intake endpoint
 
 | Signal  | Endpoint path   | Maximum payload size    |
 |---------|-----------------|-------------------------|
-| Metrics | `/v1/metrics`   | 512 KiB (compressed)    |
+| Metrics | `/v1/metrics`   | 5.1 MiB (uncompressed)  |
 | Logs    | `/v1/logs`      | 5.1 MiB (uncompressed)  |
 | Traces  | `/v1/traces`    | 15 MiB (uncompressed)   |
 

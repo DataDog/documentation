@@ -82,3 +82,34 @@ entries:
       - UpdateQuota
       - UpdateTemporaryGrantRequest
     title: Add AI Gateway route permissions and safe editing
+  - change_type: modified
+    date: '2026-11-12'
+    link: https://github.com/DataDog/documentation/pull/41667
+    operations:
+      - GetUsageBillableSummary
+    title: Expose Error Tracking usage in the billable summary
+  - change_type: added
+    date: '2026-11-13'
+    link: https://github.com/DataDog/documentation/pull/41665
+    operations:
+      - GetUsageMonthlyResources
+    title: Expose monthly resource usage in the public API
+  - change_type: modified
+    date: '2026-11-20'
+    link: https://github.com/DataDog/documentation/pull/41900
+    operations:
+      - CreateQuotas
+      - CreateTemporaryGrantRequest
+      - DeletePendingQuota
+      - DeleteQuota
+      - DeleteRequestedTemporaryGrant
+      - DeleteTemporaryGrantRequest
+      - GetMyTemporaryGrantRequest
+      - GetQuota
+      - GetTemporaryGrantRequest
+      - ListMyTemporaryGrantRequests
+      - ListQuotas
+      - ListTemporaryGrantRequests
+      - UpdateQuota
+      - UpdateTemporaryGrantRequest
+    title: Document rate-limit headers on the shared 429 responses

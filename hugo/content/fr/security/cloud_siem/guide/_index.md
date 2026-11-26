@@ -17,6 +17,5 @@ title: Guides sur Cloud SIEM
     {{< nextlink href="/security/cloud_siem/guide/oci-config-guide-for-cloud-siem/" >}}Guide de configuration OCI pour Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Surveillance des logs d'authentification pour identifier les menaces de sécurité{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes" >}}Personnalisez les logs analysés par Cloud SIEM{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence" >}}Ingérez des renseignements sur les menaces STIX{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/troubleshoot-cribl-stream-cloud-siem" >}}Dépannez avec Cribl Stream et Cloud SIEM{{< /nextlink >}}
 {{< /whatsnext >}}

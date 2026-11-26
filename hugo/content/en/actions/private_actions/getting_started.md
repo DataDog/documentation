@@ -132,9 +132,9 @@ This guide uses Datadog's default Execution Policies, which authorize read-only 
 [4]: /actions/private_actions/set_up_agent_based/
 [5]: /actions/private_actions/enroll_runner/
 [6]: https://app.datadoghq.com/actions/private-action-runners
-[7]: /actions/private_actions/execution_policies/#default-execution-policies
+[7]: /actions/execution_policies/#default-execution-policies
 [8]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.kubernetes/com.datadoghq.kubernetes.core/com.datadoghq.kubernetes.core.listPod
-[9]: /actions/private_actions/execution_policies/#use-an-execution-policy-in-a-workflow
-[10]: /actions/private_actions/execution_policies/
+[9]: /actions/execution_policies/#use-an-execution-policy-in-a-workflow
+[10]: /actions/execution_policies/
 [11]: https://app.datadoghq.com/fleet?view_by=clusters
 [12]: /actions/private_actions/set_up_agent_based/#debugging-with-logs

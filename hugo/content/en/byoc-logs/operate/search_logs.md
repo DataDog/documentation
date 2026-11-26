@@ -8,6 +8,9 @@ further_reading:
 - link: "/byoc-logs/operate/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting BYOC Logs"
+- link: "/byoc-logs/guides/query_logs_with_ddsql/"
+  tag: "Documentation"
+  text: "Query BYOC Logs with DDSQL in Notebooks"
 - link: "/logs/explorer/search_syntax/"
   tag: "Documentation"
   text: "Log Search Syntax"
@@ -23,7 +26,7 @@ aliases:
 BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```text
-byoc--<CLUSTER_NAME>--<INDEX_NAME>
+byoc--<cluster_id>--<index_name>
 ```
 
 To search your BYOC Logs indexes:
@@ -45,13 +48,13 @@ Use Log Explorer, dashboards, log monitors, or the public Logs API to search acr
 
 ### Use Log Explorer
 
-In the [Log Explorer][1] search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
+In the [Log Explorer][1] search bar, prefix each cluster ID with `byoc--`. Group the IDs in parentheses after `index:`, separated by `OR`. For example:
 
 ```text
 index:(byoc--cluster-1 OR byoc--cluster-2)
 ```
 
-Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
+Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster IDs.
 
 Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters.
 
@@ -76,6 +79,19 @@ Send a request to the [Search logs endpoint][2] (`POST /api/v2/logs/events/searc
 }
 ```
 
+## Query BYOC Logs with DDSQL
+
+In [Datadog Notebooks][5], you can query BYOC Logs indexes with [DDSQL][6] (Preview). Add a Logs data source cell named `app_logs` with a query such as `index:byoc--cluster-1--application`, then query the cell by name from a SQL analysis cell. For example:
+
+```sql
+SELECT service, COUNT(*) AS events
+FROM app_logs
+GROUP BY service
+ORDER BY events DESC
+```
+
+For setup steps and more example queries, see [Query BYOC Logs with DDSQL in Notebooks][7].
+
 ## Search limitations
 
 You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs is not supported with BYOC Logs.
@@ -88,3 +104,6 @@ You cannot query BYOC Logs indexes alongside other Datadog log indexes. Addition
 [2]: /api/latest/logs/#search-logs
 [3]: /dashboards/widgets/
 [4]: /monitors/types/log/
+[5]: /notebooks/advanced_analysis/
+[6]: /ddsql_reference/
+[7]: /byoc-logs/guides/query_logs_with_ddsql/

@@ -1,5 +1,5 @@
 ---
-description: Filtra tus datos para reducir el contexto de las métricas devueltas.
+description: Filtre sus datos para reducir el contexto de las métricas devueltas.
 further_reading:
 - link: /getting_started/search/
   tag: Documentación
@@ -9,27 +9,27 @@ further_reading:
   text: Metrics Explorer
 - link: /metrics/summary/
   tag: Documentación
-  text: Metrics Summary
+  text: Metrics Catalog
 - link: /metrics/distributions/
   tag: Documentación
-  text: Distribuciones de métricas
+  text: Distribución de métricas
 - link: /logs/explorer/search_syntax/
   tag: Documentación
-  text: Filtro de consulta de registros y sintaxis de búsqueda
+  text: Sintaxis de búsqueda y filtro de consultas de registros
 - link: /dashboards/functions/exclusion/
   tag: Documentación
   text: Funciones de exclusión
 title: Filtrado avanzado
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Al usar el Metrics Explorer, seguimientos o tableros para consultar datos de métricas, puedes filtrar los datos para limitar el contexto de las series temporales devueltas. Cualquier métrica puede ser filtrada por etiqueta(s) usando el campo **de** a la derecha de la métrica. 
+Al usar Metrics Explorer, monitores o paneles para consultar datos de métricas, puede filtrar los datos para reducir el contexto de las series temporales devueltas. Cualquier métrica puede filtrarse por una o varias etiquetas usando el campo {{< ui >}}from{{< /ui >}} a la derecha de la métrica. 
 
-También puedes realizar filtrado avanzado con filtros de valores de etiqueta booleanos o de Wildcard. Para consultas fuera de los datos de métricas, como registros, trazas, Network Monitoring, Real User Monitoring, Sintéticos o Seguridad, consulta la documentación de [Sintaxis de Búsqueda de Registros][1] para la configuración.
+También puede realizar un filtrado avanzado con filtros booleanos o Wildcard para los valores de las etiquetas. Para consultas fuera de los datos de métricas, como registros, trazas, Network Monitoring, Real User Monitoring, Synthetics o Security, consulte la documentación de [Sintaxis de búsqueda de registros][1] para la configuración.
 
-## Consultas filtradas booleanas {#boolean-filtered-queries}
+## Consultas con filtros booleanos {#boolean-filtered-queries}
 
-La siguiente sintaxis es compatible para consultas de métricas filtradas booleanas: 
+Se admite la siguiente sintaxis para las consultas de métricas con filtros booleanos: 
 
 - `!`
 - `,`
@@ -39,45 +39,42 @@ La siguiente sintaxis es compatible para consultas de métricas filtradas boolea
 - `IN`, `in`
 - `NOT IN`, `not in`
 
-Al incluir o excluir múltiples etiquetas:
-* Include usa la lógica `AND`
-* Exclude usa la lógica `OR`
+Al incluir o excluir varias etiquetas:
+* Incluir usa lógica `AND`
+* Excluir usa lógica `OR`
 
-Para más información sobre etiquetas, consulte la guía [Introducción al uso de etiquetas][2].
+Para obtener más información sobre las etiquetas, consulte la guía [Primeros pasos para usar etiquetas][2].
 
-**Nota:** La sintaxis booleana simbólica (`!`, `,`) no se puede usar con operadores de sintaxis funcional (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). La siguiente consulta se considera _inválida_: 
-`avg:mymetric{env:prod AND !region:us-east}`
+### Ejemplos de consultas con filtros booleanos {#boolean-filtered-query-examples}
 
-### Ejemplos de consultas filtradas booleanas {#boolean-filtered-query-examples}
-
-Para usar los ejemplos a continuación, haga clic en el ícono de código `</>` para ver el editor de consultas en la interfaz de usuario, y luego copie y pegue el ejemplo de consulta en el editor de consultas.
+Para usar los ejemplos a continuación, haga clic en el icono de código {{< ui >}}</>{{< /ui >}} para ver el editor de consultas en la interfaz de usuario y, luego, copie y pegue el ejemplo de consulta en el editor de consultas.
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Haga clic en el ícono de código para ver la consulta en bruto" video=true >}}
+{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Haga clic en el icono de código para ver la consulta sin procesar" video=true >}}
 
 ```
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Ejemplo booleano AND IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Ejemplo de consulta booleana con AND IN" style="width:100%;" >}}
 
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Ejemplo booleano NOT IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Ejemplo de consulta booleana con NOT IN" style="width:100%;" >}}
 
 ## Consultas filtradas con Wildcard {#wildcard-filtered-queries}
 
-Se admiten filtros de etiquetas mediante Wildcard de prefijo, sufijo y subcadena: 
+Se admite el filtrado de etiquetas con Wildcard de prefijo, sufijo y subcadena: 
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
 
-### Ejemplos de consultas filtradas por Wildcard {#wildcard-filtered-query-examples}
+### Ejemplos de consultas filtradas con Wildcard {#wildcard-filtered-query-examples}
 
 ```
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
@@ -99,12 +96,12 @@ avg:system.disk.utilized{region:*east*} by {region}
 
 ## Funciones de exclusión {#exclusion-functions}
 
-Agrega una [función de exclusión][3] a tu consulta para: 
+Agregue una [función de exclusión][3] a su consulta para: 
 - Excluir valores N/A.
 - Aplicar un valor mínimo o máximo a las métricas que cumplen con el umbral.
-- Excluir valores que están por encima o por debajo de los valores umbral.
+- Excluir valores que están por encima o por debajo de los valores de umbral.
 
-Las funciones no eliminan puntos de datos de Datadog, pero sí eliminan puntos de datos de tus visualizaciones.
+Las funciones no eliminan puntos de datos de Datadog, pero sí eliminan puntos de datos de sus visualizaciones.
 
 ## Lecturas adicionales {#further-reading}
 

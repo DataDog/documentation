@@ -40,6 +40,8 @@ You can start ingesting historical metric values by enabling Historical Metrics 
 
 ## Configuration
 
+Enabling or disabling Historical Metrics Ingestion, including with bulk configuration, requires the Historical Metrics Config Write ([`late_metrics_config_write`][6]) permission.
+
 To enable the ingestion of historical metrics for a specific metric:
 1. Navigate to the [Metrics Catalog page][1].
 1. Click on the metric name you want to enable Historical Metrics Ingestion for to open the metric's details side panel.
@@ -52,8 +54,8 @@ To enable the ingestion of historical metrics for a specific metric:
 
 You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Catalog page][1] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
-1. Select {{< ui >}}Enable historical metrics{{< /ui >}}.
+1. Navigate to the [Metrics Catalog page][1] and click the {{< ui >}}Actions{{< /ui >}} dropdown.
+1. Select {{< ui >}}Manage Historical Metrics{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the {{< ui >}}Historical metrics{{< /ui >}} toggle.
 
@@ -480,3 +482,4 @@ For details on the Metric Name pricing model, see [Metric Name Pricing for Custo
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
 [5]: /account_management/billing/metric_name_pricing/
+[6]: /account_management/rbac/permissions/#metrics

@@ -5,18 +5,47 @@ aliases:
 ---
 
 Set up integrations to extend Bits Investigation's capabilities:
-- [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry and code context.
+- [Integrate with third-party observability and SCM platforms](#integrate-with-third-party-observability-and-scm-platforms) to enrich investigations with external telemetry, code context, and ServiceNow records.
 - [Send investigation findings to ITSM and collaboration platforms](#send-investigation-findings-to-itsm-and-collaboration-platforms) to streamline incident response.
 - [Pull context from knowledge bases](#pull-context-from-knowledge-bases) to incorporate runbooks and documentation into investigations.
 
 ## Integrate with third-party observability and SCM platforms
 
-Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow to incorporate observability data and source code into investigations. Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
+Bits Investigation integrates with source code, third-party observability, and ITSM platforms to incorporate external data and code context into investigations.
 
-### GitHub
+<div class="alert alert-info">You can connect Bits Investigation to any MCP server to give it access to more data. This feature is in Preview. <a href="https://www.datadoghq.com/product-preview/bits-autonomous-operations-preview-capabilities/">Request access here</a>.</div>
+
+### Source code
+
+Bits Investigation integrates with the following source code platforms:
+- GitHub
+- GitLab
+- Azure DevOps
+- Bitbucket Cloud
+
+Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
+
 To configure GitHub:
 1. Install the [GitHub integration][13].
 1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
+
+### Third-party observability
+
+Bits Investigation integrates with the following observability platforms to query external telemetry during investigations:
+- Dynatrace
+- Elastic
+- Grafana
+- New Relic
+- Sentry
+- Splunk
+
+To connect a platform, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4].
+
+### ServiceNow
+
+Bits Investigation integrates with ServiceNow to search incidents, knowledge base articles, change requests, and CMDB configuration item dependencies during investigations.
+
+To connect ServiceNow, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4].
 
 ## Send investigation findings to ITSM and collaboration platforms
 
@@ -33,13 +62,10 @@ For monitor alert investigations, a summary of the findings is available on the 
 
 <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
-### Microsoft Teams (Preview)
+### Microsoft Teams
 
 1. [Connect your Microsoft tenant to Datadog][12].
-1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
-
-<div class="alert alert-info">
-The Microsoft Teams integration with Bits Investigation is in Preview for all customers.</div>
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits appends its findings to these notifications.
 
 ### Datadog Work Management
 
@@ -82,6 +108,8 @@ There are two RBAC permissions that apply to Bits Investigation:
 |:--------------------------------------------------------|:---------------------------------------|:-----------------------|
 | Bits Investigations Read (`bits_investigations_read`)   | Read Bits investigations.              | Datadog Read Only Role |
 | Bits Investigations Write (`bits_investigations_write`) | Run and configure Bits investigations. | Datadog Standard Role  |
+
+These permissions also control access to Bits Detection. For details, see [Bits Detection permissions][20].
 
 These permissions are added by default to Managed Roles. If your organization uses Custom Roles or has previously modified the default roles, an admin with the User Access Manage permission needs to manually add these permissions to the appropriate roles. For details, see [Access Control][8].
 
@@ -159,3 +187,4 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
 [19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true
+[20]: /bits_ai/bits_detection/#permissions
