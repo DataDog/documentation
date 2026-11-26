@@ -34,11 +34,10 @@ Setup takes three steps:
 
 ## How it works
 
-- **Each agent has its own Datadog identity.** When you add a Claude agent, Datadog creates a Datadog user for it. The agent acts as this user, with the permissions you pick. It does not act as the person who assigned the work item. Its actions appear under its own name in [Audit Trail][3].
-- **Datadog sets up the agent's access to Datadog.** When you add the agent, Datadog adds the Datadog MCP Server to the agent in Anthropic, under the name `datadog`, with the `core` and `cases` toolsets. If the agent already has an MCP server on your Datadog site's MCP host, Datadog keeps it as is. Datadog also creates a vault named `Datadog - <agent name>` in your Anthropic workspace. When a session starts, Datadog puts a short-lived Datadog credential in this vault, scoped to the agent's permissions. You never handle a Datadog API key for the agent.
+- **Each agent has its own Datadog identity.** When you add a Claude agent, Datadog creates a Datadog user for it. The agent acts as this user, with the permissions you pick. Its actions appear under its own name in [Audit Trail][3].
+- **Datadog sets up the agent's access to Datadog.** When you add the agent, Datadog adds the Datadog MCP Server to the agent in Anthropic, under the name `datadog`, with the `core` and `cases` toolsets. If the agent already has an MCP server on your Datadog site's MCP host, Datadog keeps it as is. Datadog also creates a vault named `Datadog - <agent name>` in your Anthropic workspace. When a session starts, Datadog puts a short-lived Datadog credential in this vault, scoped to the agent's permissions. You never handle Datadog secrets.
 - **Keep Datadog's setup in place.** Don't remove or edit the `datadog` MCP server or the `Datadog - <agent name>` vault in Anthropic. Without them, the agent can't reach Datadog.
-- **Sessions run in your Anthropic workspace.** Sessions use your Anthropic environment, vaults, and API key. Anthropic bills them to your account. They don't consume Datadog AI credits.
-- **The agent runs without approval prompts.** The agent can call Datadog MCP tools without asking someone to confirm each call. Its Datadog permissions limit what it can do, so grant only what it needs.
+- **Sessions run in your Anthropic workspace.** Sessions use your Anthropic environment, vaults, and API key. Anthropic bills them to your account.
 
 ## Prerequisites
 
@@ -86,6 +85,8 @@ Datadog lists the Claude agents of every Anthropic account you add here. Add one
 
 The agent appears in the {{< ui >}}Claude{{< /ui >}} tab of the Agents page with the {{< ui >}}Active{{< /ui >}} status.
 
+{{< img src="incident_response/work_management/ai/claude_agents/agents_list.png" alt="The Claude tab of the Agents page, listing four Claude agents with their source, type, last activity, and status toggle" style="width:100%;" >}}
+
 ### Choose the agent's permissions
 
 A new agent starts with these permissions:
@@ -100,7 +101,7 @@ A new agent starts with these permissions:
 
 Add the permissions for any other data the agent works with, such as Logs Read or APM Read. Grant only what the agent needs.
 
-You can only grant permissions that you have. Some sensitive permissions can't be given to an agent. Both kinds appear grayed out in the list.
+You can only grant permissions that you have. The others appear grayed out in the list.
 
 ## Step 3: Assign work items to the agent
 
@@ -111,6 +112,10 @@ Each assignment starts a new Claude session. The agent receives the work item's 
 In a work item, select the agent in the {{< ui >}}Agent Assignee{{< /ui >}} field.
 
 If you don't have the {{< ui >}}AI Agents Run{{< /ui >}} permission, Claude agents appear grayed out in the list.
+
+The work item banner shows the agent's progress and its last message. The agent's comments appear in the work item activity.
+
+{{< img src="incident_response/work_management/ai/claude_agents/work_item_agent.png" alt="A work item assigned to a Claude agent, with the agent's status banner and its comment in the activity feed" style="width:80%;" >}}
 
 ### Assign work items automatically
 
@@ -128,23 +133,6 @@ The rule starts sessions on behalf of its author. The author needs the {{< ui >}
 ### Send a message to a running agent
 
 To give the agent more context or a new instruction, mention it in a work item comment. Type `@`, pick the agent, and post the comment. Datadog sends the comment to the agent's session. After a session ends, it can't take new messages. Assign the agent again to start a new session.
-
-## Follow the agent's work
-
-The work item banner shows the status of the agent's latest session:
-
-| Status | What it means |
-|---|---|
-| {{< ui >}}Queued{{< /ui >}} | The session is created and waiting to start. |
-| {{< ui >}}Running{{< /ui >}} | The agent is working. The banner shows for how long. |
-| {{< ui >}}Needs action{{< /ui >}} | The session is waiting for someone to act in the Claude Console, such as confirming a tool call. |
-| {{< ui >}}Done{{< /ui >}} | The agent finished. The banner shows its last message. |
-| {{< ui >}}Failed{{< /ui >}} | The session stopped on an error. The banner shows the error. |
-| {{< ui >}}Cancelled{{< /ui >}} | Someone stopped the session. |
-
-Open the session from the work item timeline to read the conversation and send the agent a message. You can also open the session in the Claude Console.
-
-Only users who can see the work item can read its session or message it.
 
 ## Manage agents
 
