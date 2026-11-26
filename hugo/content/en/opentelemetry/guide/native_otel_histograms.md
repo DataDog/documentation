@@ -27,14 +27,19 @@ Use native histograms when you need percentiles that match the buckets your appl
 
 - DDOT 7.87.0 or later.
 - Every metrics destination uses v3 for distributions, including a multi-region failover destination, even while failover is off. Datadog URLs use v3 by default. See [When v2 is used][4].
-- DDOT converts cumulative histograms and counters to delta temporality with the `cumulativetodelta` processor, which it adds automatically. Without this conversion, DDOT drops cumulative histograms **and counters**. This happens if:
-  - `DD_OTELCOLLECTOR_CONVERTER_FEATURES` doesn't include `cumulativetodelta`, or the converter is off.
-  - Your own `cumulativetodelta` processor converts only some metrics, for example with `include` or `exclude` filters.
-  - You use the DaemonSet and gateway setup with the Datadog Operator, or with a Datadog Helm chart older than 3.272.0.
-
-  To avoid this, configure your applications to send delta temporality, or add a `cumulativetodelta` processor without filters to the metrics pipelines. In the DaemonSet and gateway setup, add it to the DaemonSet. See [Producing Delta Temporality Metrics][6].
+- Cumulative histograms and counters are converted to delta temporality. DDOT adds the `cumulativetodelta` processor for this automatically. See [Avoid dropped cumulative metrics](#avoid-dropped-cumulative-metrics).
 
 <div class="alert alert-warning">If any metrics destination uses v2 for distributions, DDOT doesn't start and sends no telemetry. Check the requirements before you enable native histograms.</div>
+
+### Avoid dropped cumulative metrics
+
+DDOT drops cumulative histograms and counters that aren't converted to delta temporality. This happens if:
+
+- `DD_OTELCOLLECTOR_CONVERTER_FEATURES` doesn't include `cumulativetodelta`, or the converter is off.
+- Your own `cumulativetodelta` processor converts only some metrics, for example with `include` or `exclude` filters.
+- You use the DaemonSet and gateway setup with the Datadog Operator, or with a Datadog Helm chart older than 3.272.0.
+
+To avoid this, configure your applications to send delta temporality, or add a `cumulativetodelta` processor without filters to the metrics pipelines. In the DaemonSet and gateway setup, add it to the DaemonSet. See [Producing Delta Temporality Metrics][6].
 
 ## Enable native histograms
 
@@ -43,7 +48,7 @@ Enable the `datadog.serializerexporter.NativeOTelHistograms` feature gate on eve
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-For DDOT running with the Agent, in your `values.yaml`:
+For the Agent's Collector, in your `values.yaml`:
 
 ```yaml
 datadog:
@@ -108,11 +113,16 @@ DDOT sends histogram points even when their count is 0, for example for interval
 
 ### Metric names
 
-With the default settings, metric names don't change. If you turned off the `exporter.datadogexporter.DisableAllMetricRemapping` feature gate, metric names change. DDOT stops adding the `otel.` prefix to some metrics, such as `system.*` metrics, and stops copying runtime metrics under Datadog names.
+Native histograms change metric names only if you turned off the `exporter.datadogexporter.DisableAllMetricRemapping` feature gate. With native histograms, DDOT ignores this setting and sends metric names as with the default settings:
+
+- System, process, and some Kafka metrics don't have the `otel.` prefix. For example, DDOT sends `system.cpu.utilization` instead of `otel.system.cpu.utilization`.
+- DDOT doesn't send copies of OpenTelemetry runtime metrics under Datadog runtime metric names.
+
+Update dashboards and monitors that use the `otel.` names or the Datadog runtime metric names.
 
 ## Limitations
 
-- Native histograms are available only in DDOT, not in OTLP ingestion in the Datadog Agent or the Datadog Exporter in the upstream OpenTelemetry Collector.
+- Native histograms are available only in DDOT. They aren't supported with the Agent's OTLP endpoint or with the Datadog Exporter in the upstream OpenTelemetry Collector.
 - DDOT drops histogram datapoints that don't follow the OpenTelemetry specification, for example points with bucket boundaries that don't increase. It also drops points that have more than 2,147,483,647 values in a single bucket.
 - If some DDOT instances send converted histograms and others send native histograms under the same metric name, percentiles for that metric can be inaccurate.
 
