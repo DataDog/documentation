@@ -2999,16 +2999,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Compensation
+      url: incident_response/on-call/compensation/
+      parent: oncall
+      identifier: oncall_compensation
+      weight: 6
     - name: Handover automation
       url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
-      weight: 6
+      weight: 7
     - name: Notification Preferences
       url: incident_response/on-call/notification_preferences/
       parent: oncall
       identifier: oncall_notification_preferences
-      weight: 7
+      weight: 8
     - name: Supported Countries
       url: incident_response/on-call/notification_preferences/supported_countries/
       identifier: oncall_notification_preferences_countries
