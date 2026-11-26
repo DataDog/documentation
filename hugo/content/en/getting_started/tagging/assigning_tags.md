@@ -351,7 +351,7 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 [1]: /api/v1/service-checks/#submit-a-service-check
 [2]: /api/v1/events/#post-an-event
 [3]: /api/v1/aws-integration/
-[4]: /api/v1/metrics/#submit-metrics
+[4]: /api/latest/metrics/#submit-metrics
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: /api/v1/monitors/#edit-a-monitor
 [7]: /api/v1/tags/#add-tags-to-a-host

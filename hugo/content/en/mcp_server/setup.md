@@ -69,22 +69,23 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 {{% tab "ChatGPT" %}}
 
-Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
+Connect Datadog to ChatGPT by installing the [Datadog plugin][1]. The plugin authenticates with your Datadog organization through an OAuth flow.
 
-{{< site-region region="us" >}}
-<div class="alert alert-info">The Datadog ChatGPT app is in Preview. During the Preview, it is available for US1 customers only.</div>
-
-1. In ChatGPT, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Browse Apps{{< /ui >}} and search for **Datadog**. If the Datadog app is not available, contact your organization's ChatGPT administrator for approval.
-1. Select the app, click {{< ui >}}Connect{{< /ui >}}, and follow the guided setup.
-1. Complete the OAuth login flow when prompted.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In ChatGPT, open the [Datadog plugin][2]. If the plugin isn't available in your workspace, ask your ChatGPT workspace admin to add it.
+1. Click {{< ui >}}Connect{{< /ui >}} and follow the guided setup.
+1. When prompted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}) and complete the OAuth login flow.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[2]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
+[3]: /getting_started/site/
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,eu,ap1,ap2,uk1,gov,gov2" >}}
-<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
+[1]: https://chatgpt.com/plugins/plugins_6afc7a4f98608191a585034f8cf5e618?category=developer-tools&search=datadog
 {{% /tab %}}
 
 {{% tab "Claude" %}}
@@ -802,6 +803,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
 - `chat`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
+- `cloud-resources`: Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure. Some tools in this toolset are in Preview and are available only when you request `cloud-resources` by name. See [Datadog MCP Server Tools][49] for details.
 - `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. These tools are also included in the default `core` toolset. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -838,6 +840,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
+- `fleet-automation`: ([Sign up][101]) Tools for monitoring and managing Datadog Agent deployments, upgrade schedules, and Agent and package versions across an organization's fleet of hosts with [Fleet Automation][100].
 - `gpu-monitoring`: Tools for [GPU Monitoring][90], including listing self-hosted LLM inference deployments, measuring their serving performance, inspecting their configuration, profiling their forward passes, and ranking and tracking GPU kernels. Contact your Customer Success Manager for access.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `on-call`: Tools for [Datadog On-Call][96], including searching and creating pages, finding who is on call for a team or schedule, viewing schedule calendars, managing schedule overrides, and analyzing On-Call activity.
@@ -1119,3 +1122,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [97]: /account_management/rbac/mcp_access/#keep-credentials-out-of-ai-agent-conversations
 [98]: /containers/amazon_ecs/
 [99]: /bits_ai/bits_detection/
+[100]: /agent/fleet_automation/
+[101]: https://www.datadoghq.com/product-preview/fleet-automation-mcp-toolset/

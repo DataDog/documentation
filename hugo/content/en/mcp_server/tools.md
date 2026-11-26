@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
   tag: "Blog"
   text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mcp-server-ai-agents/"
+  tag: "Blog"
+  text: "Build and troubleshoot Observability Pipelines with AI agents"
 ---
 
 ## Overview
@@ -977,41 +980,87 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Cloud Resources
 
-Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+Tools for looking up cloud resources and their relationships, and for diagramming cloud infrastructure with [Cloudcraft][142]. Resource lookup uses the [Resource Catalog][86] and covers AWS, Azure, Google Cloud, and OCI. Diagrams cover AWS, Azure, Google Cloud, OCI, vSphere, Nutanix, and network devices.
+
+<div class="alert alert-info">Tools marked <em>Preview</em> are available only when you request <code>cloud-resources</code> by name. Preview tools are not included in <code>toolsets=all</code>.</div>
 
 ### `get_cloud_resource_details`
 *Toolset: **cloud-resources***\
 *Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
-Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. For EC2 instances, load balancers, target groups, Auto Scaling groups, and security groups, also returns linked resources. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
 
 - Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
 - What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
 - Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
 - What tags are set on this resource, and is it owned by a team?
+- Which targets sit behind this load balancer?
+
+### `get_cloud_infrastructure_diagram_scope`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read`*\
+Gets the scope of an interactive architecture diagram: accounts, regions, resource types, tags, and grouping. Resolves account names to account IDs. Also takes highlights, stories, an overlay, or a design when determining the scope. The diagram is shown in your conversation, with a link to open diagrams of your infrastructure in [Cloudcraft][142]. To show the diagram in your conversation, also enable the `visualizations` toolset (in clients that support MCP Apps).
+
+- Diagram AWS account 123456789012.
+- Walk me through how traffic reaches the checkout service in prod.
+- Highlight the load balancers in front of the API service.
+- Show me what changed in account prod-main over the last 24 hours.
+- Draw my Azure subscription prod.
+
+### `get_cloud_infrastructure_overlay_data`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read` and the permission for the requested overlay (for example, one of: `Cloud Cost Management Read`, `Monitors Read`, `Security Monitoring Findings Read`, `Data Scanner Read`, or `Hosts Read`)*\
+Finds the resources that have overlay data within a diagram's scope: cost savings and monthly cost, monitor states, security findings, or changes in a time window, including deleted resources. Use the results to choose which resources to highlight or walk through in a diagram. Available for AWS.
+
+- What are the top 3 cost savings opportunities in account prod-main? Show them on the diagram.
+- Which resources in us-east-1 have alerting monitors?
+- Which resources in prod have the most critical security findings?
+
+### `design_cloud_infrastructure`
+*Toolset: **cloud-resources** (Preview)*\
+*Permissions Required: `Cloudcraft Read` (also `Hosts Read` when extending real infrastructure)*\
+Designs infrastructure that does not exist yet, either from scratch or on top of your real infrastructure, and shows it as a hypothetical diagram.
+
+- Design a LAMP stack on EKS.
+- What would the production account look like in three regions?
+- Add a second load balancer in front of these instances.
 
 ## Code Execution
 
-Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs. Investigate findings, explore data, or modify supported resources in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox with read-only access to Datadog APIs. The code receives a `dd.*` namespace for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs. It returns a structured value to the agent. Combining queries in one script reduces tool calls for investigations and data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
+### `execute_code_write`
+*Toolsets: **core**, **code-exec***\
+*Permissions Required: `mcp_write` and product-specific permissions for resources the script modifies (for example, `Monitors Write` to create a monitor).*\
+Executes JavaScript authored by an AI agent in a Datadog-managed sandbox to create, update, or delete supported resources. The tool is also included in `toolsets=all`. Reauthorize the MCP connection in your AI client if it connected before your role had `mcp_write`.
+
+Teams access is read-only. To create or update dashboards and notebooks, use `upsert_datadog_dashboard` and the notebook tools. Code execution supports reading and deleting those resources. See [What the sandbox can access][150] for details.
+
+The AI client's normal approval behavior applies. The MCP Server does not add a separate confirmation step. Scripts are not transactions, and completed writes remain if a later operation fails. See [Review and retry write operations safely][149] before retrying a script.
+
+- Create a monitor for `checkout-api` that alerts when its error rate exceeds 5% over 5 minutes. Return the monitor ID and verify its query and notification message.
+- Find monitors owned by `payments-team` that have not notified in 90 days. Show the proposed changes, then mute only approved monitors.
+- Create a case for the current incident, assign it to the on-call team, and include links to the relevant traces and logs.
+
 ### `search_datadog_sdk`
 *Toolsets: **core**, **code-exec***\
 *Permissions Required: None*\
-Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+Looks up SDK operations, request types, and response types for `execute_code` and `execute_code_write` scripts. Call this before writing a script to confirm which methods exist and their signatures. Set `target: "execute_code_write"` to look up supported write operations. The write catalog describes supported operations; execution checks your permissions separately.
 
 - What SDK methods are available for querying logs in a script?
 - Show me the available methods for aggregating spans.
 - What does the `dd.time` namespace provide?
+- Look up the operation and request and response types for creating a monitor.
 
 ## Dashboards
 
@@ -1730,6 +1779,96 @@ Checks if a feature flag is implemented in code.
 Syncs feature flag allocations for a specific environment. This replaces all existing allocations for the flag in that environment. Confirm the change before applying.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
+
+## Fleet Automation
+
+Tools for monitoring and managing Datadog Agent deployments, upgrade schedules, and Agent and package versions across an organization's fleet of hosts with [Fleet Automation][116].
+
+<div class="alert alert-info">The <code>fleet-automation</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/fleet-automation-mcp-toolset/">Sign up for access.</a></div>
+
+### `search_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists Datadog Agents monitored by Fleet Automation, filterable by environment, operating system, cloud provider, remote management status, and other attributes.
+
+- Which Agents in `env:prod` do not have remote management enabled?
+
+### `get_fleet_agent`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves detailed information on one Agent, including metadata, integration status, and optional raw configuration files.
+
+- Show me the integrations and configuration files for the Agent on host `web-01`.
+
+### `list_fleet_agent_versions`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists the Datadog Agent versions available to deploy through Fleet Automation.
+
+- Which Agent versions can I upgrade to through Fleet Automation?
+
+### `search_fleet_deployments`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists Agent upgrade and configuration deployments, filterable by status, update type, and date.
+
+- Show me Agent deployments that failed in the last 7 days.
+
+### `get_fleet_deployment`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves one deployment's status, update type, and per-host details.
+
+- Which hosts failed in deployment `<deployment_id>`, and why?
+
+### `list_fleet_packages`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists the language and APM package versions available to deploy through Fleet Automation.
+
+- Which Python APM SDK versions are available to deploy?
+
+### `list_fleet_schedules`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists all recurring upgrade schedules, including maintenance window, host targeting query, and status.
+
+- List my Agent upgrade schedules and their maintenance windows.
+
+### `get_fleet_schedule`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves one upgrade schedule by ID.
+
+- Show me the details of upgrade schedule `<schedule_id>`.
+
+### `get_fleet_integration_schema`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Describes the configuration options a Datadog Agent integration accepts, including each config file and its options (name, type, required, allowed values, default, example, and nested options).
+
+- What configuration options does the Postgres integration accept?
+
+### `upgrade_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
+Upgrades the Datadog Agent to a target version across hosts that match a scope query. The tool requires `confirm:true`.
+
+- Upgrade all Agents tagged `env:staging` to the latest Agent version.
+
+### `configure_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
+Pushes configuration changes, and optionally installs or pins packages, across hosts that match a scope query. The tool supports `dry_run` and requires `confirm:true` for a real deployment.
+
+- Enable log collection on Agents tagged `service:checkout`, and do a dry run first.
+
+### `cancel_fleet_deployment`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `Agent Configuration Management`*\
+Cancels an active (running or pending) deployment. The cancellation is irreversible and requires `confirm:true`.
+
+- Cancel the Agent upgrade deployment that is running right now.
 
 ## Forms
 
@@ -4229,6 +4368,10 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [113]: /tracing/trace_collection/runtime_config/
 [114]: /tracing/trace_pipeline/adaptive_sampling/
 [115]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[116]: /agent/fleet_automation/
+[142]: /cloudcraft/
+[149]: /mcp_server/code_execution/#review-and-retry-write-operations-safely
+[150]: /mcp_server/code_execution/#what-the-sandbox-can-access
 
 ## Further reading
 
