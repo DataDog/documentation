@@ -78,6 +78,31 @@ Alternatively, use [agentless delivery][34] to retrieve prompt assignments and r
 [33]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
 [34]: /feature_flags/server/nodejs/#configure-agentless-delivery
 {{% /tab %}}
+{{% tab "Go" %}}
+
+Use `dd-trace-go/v2` 2.12.0 or later, and install the `github.com/DataDog/dd-trace-go/v2/openfeature` package. Set the following before [starting the tracer][36]:
+
+```shell
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
+
+**Note:** Go 2.12.0 Prompt Management requires `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` for exposure reporting with either delivery method. The setting is deprecated for general Feature Flags setup.
+
+Add the import that enables experiment reporting:
+
+```go
+import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
+```
+
+Make sure the application can reach the Agent and [Remote Configuration][35] is enabled. No additional SDK initialization is needed.
+
+Alternatively, use [agentless delivery][37] to retrieve prompt assignments and report exposures without an Agent. Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` and configure `DD_API_KEY`. The explicit source setting overrides the Agent delivery selected by the legacy enablement setting.
+
+[35]: /remote_configuration/
+[36]: /tracing/trace_collection/dd_libraries/go/#getting-started
+[37]: /feature_flags/server/go/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Match prompt requests to outcomes
@@ -105,6 +130,23 @@ const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
   targetingKey: currentUser.id,
   fallback: 'You are a helpful checkout assistant.',
 })
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+The following example uses the request's `ctx` and passes the user's ID as a string:
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "checkout-assistant",
+    llmobs.WithPromptTargetingKey(userID),
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Text: "You are a helpful checkout assistant."},
+    }),
+)
+if err != nil {
+    return err
+}
 ```
 
 {{% /tab %}}
