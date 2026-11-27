@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
 ---
 
-Use the following instructions to enable Misconfigurations and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Cloud Security Vulnerabilities.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -34,12 +34,12 @@ compliance_config:
 # Vulnerabilities are evaluated and scanned against your containers and hosts every hour.
 sbom:
   enabled: true
-  # Set to true to enable Container Vulnerability Management
+  # Set to true to enable container image vulnerability scanning
   container_image:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
-  # Set to true to enable Host Vulnerability Management
+  # Set to true to enable host vulnerability scanning
   host:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
@@ -52,6 +52,16 @@ sbom:
 {{< /code-block >}}
 
 **Note**: `enrichment.usage.enabled: true` requires Datadog Agent **7.79.0 or later**. See the [Runtime Package Prioritization](#runtime-package-prioritization) section for requirements.
+
+If `/etc/datadog-agent/security-agent.yaml` does not exist, create it from the example file shipped with the Agent and give the `dd-agent` group read access:
+
+```shell
+sudo cp /etc/datadog-agent/security-agent.yaml.example /etc/datadog-agent/security-agent.yaml
+sudo chmod 640 /etc/datadog-agent/security-agent.yaml
+sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
+```
+
+Then enable Misconfigurations in `security-agent.yaml`:
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -67,43 +77,11 @@ compliance_config:
 
 ### Supported application library package managers
 
-The `languages` analyzer covers the following package ecosystems:
-
-| Ecosystem | Package manager / format |
-|-----------|--------------------------|
-| Ruby | Bundler, GemSpec |
-| Rust | Cargo, Rust binary |
-| PHP | Composer |
-| Java | Jar, Maven (pom.xml), Gradle lock, Sbt lock |
-| JavaScript | npm (package-lock.json), Yarn, pnpm, Node package |
-| .NET | NuGet, .NET Core, PackagesProps |
-| Python | Python package (egg), pip, Pipenv, Poetry, uv, Conda package, Conda environment |
-| Go | Go binary, Go modules |
-| C/C++ | Conan lock |
-| Swift / Objective-C | CocoaPods, Swift |
-| Dart | PubSpec lock |
-| Elixir | Mix lock |
-| Julia | Julia |
+{{% csm-language-package-managers %}}
 
 ## Runtime Package Prioritization
 
-Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
-
-When enabled, the Agent uses eBPF to observe file access on your workloads and adds these signals to vulnerability findings for that image:
-
-| Signal | What it tells you |
-|--------|-------------------|
-| Package is running | The package's files were observed being accessed by a running process. |
-| Accessed by root process | The package was accessed by a process running as root (UID 0). |
-| SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
-
-*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][8]. To query these signals directly, see [Filter findings by runtime signals][9].
-
-**Requirements**:
-- Datadog Agent **7.79.0 or later**.
-- Linux only (eBPF dependency). See [Workload Protection setup][10] for supported distributions and kernel versions.
-
-Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
+{{% csm-runtime-package-prioritization %}}
 
 Add the `enrichment` block to the `sbom` section of your `datadog.yaml` file:
 
@@ -124,27 +102,14 @@ To verify the setup, filter vulnerability findings by [runtime signals][9].
 
 **Notes**:
 
-- You can also use the following [Agent install script][5] to automatically enable Misconfigurations and Threat Detection:
+- You can also use the following [Agent install script][5] to automatically enable Misconfigurations:
 
   ```shell
   DD_COMPLIANCE_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
   ```
 
-- If you use the Agent install script to enable Misconfigurations and Vulnerability Management, you must manually update the `datadog.yaml` file to enable `host_benchmarks` for Misconfigurations, and `sbom` and `container_image` for Vulnerability Management.
+- The Agent install script doesn't enable host benchmarks or Cloud Security Vulnerabilities. If you use the script, manually update the `datadog.yaml` file to enable `host_benchmarks` for Misconfigurations, and `sbom` and `container_image` for Cloud Security Vulnerabilities.
 
-```shell
-sudo cp /etc/datadog-agent/security-agent.yaml.example /etc/datadog-agent/security-agent.yaml
-sudo chmod 640 /etc/datadog-agent/security-agent.yaml
-sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
-```
-
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [5]: /getting_started/agent/#installation
 [6]: /agent/?tab=Linux
-[7]: /security/workload_protection/
-[8]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
-[10]: /security/workload_protection/setup/

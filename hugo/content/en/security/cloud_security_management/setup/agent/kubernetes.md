@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/kubernetes/
 ---
 
-Use the following instructions to enable Misconfigurations and Vulnerability Management.
+Use the following instructions to enable Misconfigurations and Cloud Security Vulnerabilities.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -45,13 +45,13 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
         sbom:
           enabled: true
 
-          # Enables Container Vulnerability Management
+          # Enables container image vulnerability scanning
           containerImage:
             enabled: true
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables Host Vulnerability Management
+          # Enables host vulnerability scanning
           host:
             enabled: true
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
@@ -65,8 +65,6 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
     ```
 
 2. Apply the changes and restart the Agent.
-
-[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
 
@@ -86,13 +84,13 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
       # Enables Software Bill of Materials (SBOM) collection
       sbom:
-        # Enables Container Vulnerability Management
+        # Enables container image vulnerability scanning
         containerImage:
           enabled: true
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables Host Vulnerability Management
+        # Enables host vulnerability scanning
         host:
           enabled: true
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
@@ -111,7 +109,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{% tab "DaemonSet" %}}
 
-1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Vulnerability Management, mount-based container image scanning, and runtime package prioritization.
+1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Cloud Security Vulnerabilities, mount-based container image scanning, and runtime package prioritization.
 
     ```yaml
     - name: DD_COMPLIANCE_CONFIG_ENABLED
@@ -172,44 +170,13 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 ### Supported application library package managers
 
-The `languages` analyzer covers the following package ecosystems:
-
-| Ecosystem | Package manager/format |
-|-----------|------------------------|
-| Ruby | Bundler, GemSpec |
-| Rust | Cargo, Rust binary |
-| PHP | Composer |
-| Java | Jar, Maven (pom.xml), Gradle lock, Sbt lock |
-| JavaScript | npm (package-lock.json), Yarn, pnpm, Node package |
-| .NET | NuGet, .NET Core, PackagesProps |
-| Python | Python package (egg), pip, Pipenv, Poetry, uv, Conda package, Conda environment |
-| Go | Go binary, Go modules |
-| C/C++ | Conan lock |
-| Swift / Objective-C | CocoaPods, Swift |
-| Dart | PubSpec lock |
-| Elixir | Mix lock |
-| Julia | Julia |
+{{% csm-language-package-managers %}}
 
 ## Runtime Package Prioritization
 
-Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
-
-When enabled, the Agent uses eBPF to observe file access on your workloads and adds these signals to vulnerability findings for that image:
-
-| Signal | What it tells you |
-|--------|-------------------|
-| Package is running | The package's files were observed being accessed by a running process. |
-| Accessed by root process | The package was accessed by a process running as root (UID 0). |
-| SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
-
-*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][9]. To query these signals directly, see [Filter findings by runtime signals][10].
-
-**Requirements**:
-- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
-- Linux only (eBPF dependency). See [Workload Protection setup][11] for supported distributions and kernel versions.
+{{% csm-runtime-package-prioritization %}}
+- Datadog Agent **7.81.0 or later** is recommended for the most complete signal coverage.
 - On Bottlerocket nodes, the `spc_t` SELinux type for `system-probe`. Bottlerocket's SELinux policy limits an unprivileged container to the files of its own pod. Without this type, only the Agent's own image receives runtime signals. The tabs below show how to set it.
-
-Runtime signals apply to packages installed by an operating system package manager (`apt`, `yum`, or `apk`) in container image vulnerability findings.
 
 {{< tabs >}}
 
@@ -319,14 +286,7 @@ Restart the Agent.
 
 To verify the setup, filter vulnerability findings by [runtime signals][10].
 
-[1]: /security/cloud_security_management/misconfigurations/
-[2]: /security/threats
-[3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [5]: /getting_started/agent
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
-[8]: /security/workload_protection/
-[9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [10]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
-[11]: /security/workload_protection/setup/
