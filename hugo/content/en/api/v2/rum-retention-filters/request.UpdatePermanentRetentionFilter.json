@@ -1,0 +1,12 @@
+{
+  "data": {
+    "id": "synthetics_sessions",
+    "type": "permanent_retention_filters",
+    "attributes": {
+      "cross_product_sampling": {
+        "trace_enabled": true,
+        "trace_sample_rate": 25.0
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "051601eb-54a0-abc0-03f9-cc02efa18892",
+    "type": "exclusion_filters",
+    "attributes": {
+      "enabled": false,
+      "name": "Example-Rum-Retention-Filter-updated"
+    }
+  }
+}

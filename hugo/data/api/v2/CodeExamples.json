@@ -2479,6 +2479,13 @@
       "description": "Update a RUM-based metric returns \"OK\" response"
     }
   ],
+  "CreateExclusionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Create a RUM exclusion filter returns \"Created\" response"
+    }
+  ],
   "CreateRetentionFilter": [
     {
       "group": "rum_retention_filters",
@@ -2493,11 +2500,25 @@
       "description": "Order RUM retention filters returns \"Ordered\" response"
     }
   ],
+  "UpdateExclusionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Update a RUM exclusion filter returns \"Updated\" response"
+    }
+  ],
   "UpdateRetentionFilter": [
     {
       "group": "rum_retention_filters",
       "suffix": "",
       "description": "Update a RUM retention filter returns \"Updated\" response"
+    }
+  ],
+  "UpdatePermanentRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Update a permanent RUM retention filter returns \"Updated\" response"
     }
   ],
   "CreateScorecardRule": [

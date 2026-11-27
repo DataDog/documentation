@@ -1,0 +1,11 @@
+{
+  "data": {
+    "type": "exclusion_filters",
+    "attributes": {
+      "name": "Example-Rum-Retention-Filter",
+      "enabled": true,
+      "event_type": "error",
+      "query": "@error.message:*extension*"
+    }
+  }
+}
