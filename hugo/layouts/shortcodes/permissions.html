@@ -15,6 +15,10 @@
         {{- $intro_text = "Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you’d assign this permission to. See the recommendations on how to assign permissions to team members in the <a href='/logs/guide/logs-rbac'>Logs RBAC guide</a>." -}}
       {{- end -}}
 
+      {{- if eq $group_name "Agent Observability" -}}
+        {{- $intro_text = "Find below the list of permissions for the agent observability assets. For how AI Gateway permissions work with model access policies, see <a href='/ai_gateway/access_control/#permissions'>Control Model Access in AI Gateway</a>." -}}
+      {{- end -}}
+
       {{- if ne $group_name "General" -}}
         <h2 id="{{ anchorize $group_name }}">
           {{- $group_name -}}

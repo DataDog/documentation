@@ -1,0 +1,21 @@
+# Permissions to list on /account_management/rbac/permissions/ that the generated
+# permission data (data/permissions.json) does not include yet, keyed by permission group.
+# The permissions table appends these rows to the group's table and skips any row whose
+# name the generated data already lists, so a row can stay here until it is removed.
+# A group only renders if the generated data contains it.
+Agent Observability:
+  - attributes:
+      name: ai_gateway_usage
+      display_name: AI Gateway Usage
+      description: Use the AI Gateway LLM proxy.
+    role_name: Datadog Standard Role
+  - attributes:
+      name: ai_gateway_config_read
+      display_name: AI Gateway Config Read
+      description: View the AI Gateway control plane configuration.
+    role_name: Datadog Admin Role
+  - attributes:
+      name: ai_gateway_config_write
+      display_name: AI Gateway Config Write
+      description: Administer the AI Gateway control plane configuration.
+    role_name: Datadog Admin Role
