@@ -38,7 +38,7 @@ A gate for all environments applies the same rules to every environment of a ser
 
 To create it, leave the {{< ui >}}Environment{{< /ui >}} field empty. With the [API][4] or [Terraform][9], set `env` to `*`.
 
-When you evaluate the gate, pass the environment you are deploying to (for example, `--env staging`). Datadog runs the gate rules for that environment, and the evaluation shows that environment on the [Evaluations][7] page.
+When you evaluate the gate, pass the environment you are deploying to. Datadog runs the gate rules for that environment, and the evaluation shows that environment on the [Evaluations][7] page.
 
 For the same service and identifier, a gate for all environments can't coexist with environment-specific gates.
 
