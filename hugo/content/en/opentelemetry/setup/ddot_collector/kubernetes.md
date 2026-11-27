@@ -175,7 +175,7 @@ spec:
           key: site
           name: datadog-secret
     - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-      value: datadog,pprof,zpages,prometheus,infraattributes
+      value: datadog,pprof,zpages,prometheus,infraattributes,cumulativetodelta
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
     - name: K8S_NODE_NAME
@@ -457,7 +457,7 @@ spec:
           key: site
           name: datadog-secret
     - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-      value: datadog,pprof,zpages,prometheus,infraattributes
+      value: datadog,pprof,zpages,prometheus,infraattributes,cumulativetodelta
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
     - name: K8S_NODE_NAME
@@ -552,7 +552,7 @@ extraEnvs:
         key: site
         name: datadog-secret
   - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-    value: datadog,pprof,zpages,prometheus,infraattributes
+    value: datadog,pprof,zpages,prometheus,infraattributes,cumulativetodelta
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
   # The chart defines OTEL_K8S_NODE_NAME before extraEnvs
@@ -733,7 +733,7 @@ extraEnvs:
         key: site
         name: datadog-secret
   - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-    value: datadog,pprof,zpages,prometheus,infraattributes
+    value: datadog,pprof,zpages,prometheus,infraattributes,cumulativetodelta
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
   # The chart defines OTEL_K8S_NODE_NAME before extraEnvs

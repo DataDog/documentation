@@ -560,6 +560,11 @@ menu:
       url: agent/configuration/agent-data-plane/
       parent: agent_configuration
       weight: 611
+    - name: Metrics v3 Intake
+      identifier: agent_configuration_metrics_v3_intake
+      url: agent/configuration/metrics-v3-intake/
+      parent: agent_configuration
+      weight: 612
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -1057,11 +1062,16 @@ menu:
       parent: otel_guides
       weight: 1003
       identifier: otel_guides_instrument_unsupported_runtimes
+    - name: Send Native OTel Histograms
+      url: /opentelemetry/guide/native_otel_histograms
+      parent: otel_guides
+      weight: 1004
+      identifier: otel_guides_native_otel_histograms
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1004
+      weight: 1005
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
