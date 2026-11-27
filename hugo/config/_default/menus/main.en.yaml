@@ -1956,11 +1956,21 @@ menu:
       parent: notebooks_advanced_analysis
       identifier: notebooks_advanced_analysis_getting_started
       weight: 101
+    - name: Markdown Format
+      url: notebooks/notebooks_flavored_markdown/
+      parent: notebooks
+      identifier: notebooks_markdown
+      weight: 2
+    - name: API Guide
+      url: notebooks/guide/notebooks_api/
+      parent: notebooks
+      identifier: notebooks_api
+      weight: 3
     - name: Guides
       url: notebooks/guide
       parent: notebooks
       identifier: notebooks_guide
-      weight: 2
+      weight: 4
     - name: DDSQL Editor
       url: ddsql_editor/
       pre: ddsql

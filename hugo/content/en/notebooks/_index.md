@@ -67,7 +67,7 @@ Notebooks support various rich-text and embedded content types, including but no
 - Lists (bullet lists, numbered lists, and checklists)
 - Codeblocks
 - Block quotes
-- Markdown cells
+- Markdown widgets
 
 For the full list, type <kbd>/</kbd> into a notebook.
 
@@ -94,7 +94,7 @@ Notebooks support commonly used rich text features like bold, italics, inline co
 | `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                          |
 | Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
 | Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
-| Text tables   | Insert a table by typing `/table` or using the {{< ui >}}Add Cell{{< /ui >}} menu.                                                          |
+| Text tables   | Insert a table by typing `/table` or choosing it from the widget menu.                                                                   |
 | Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then pressing <kbd>Space</kbd>.   |
 
 ### Smart chips
@@ -139,7 +139,7 @@ Notebooks automatically generate a table of contents from any headers or graphs 
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using `/image` or the {{< ui >}}Add Cell{{< /ui >}} menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
+You can add images to your notebook using `/image` or the widget menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -317,6 +317,12 @@ If no filters are enabled, the Jump Back In section appears, displaying the most
 
 You can sort notebooks by selecting the ⭐, details, or modified headers to sort by those values.
 
+## Automate notebooks
+
+Use the [Notebooks v2 API][10] to create and maintain notebooks as Markdown documents, make exact text edits, or update tasks and widgets by ID. The v2 API is in Preview and is subject to change.
+
+For content syntax, widget blocks, metadata, and round-trip behavior, see [Notebooks Flavored Markdown][11].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -331,3 +337,5 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 [7]: /account_management/rbac/
 [8]: /incident_response/incident_management/post_incident/postmortems
 [9]: /dashboards/template_variables/#team-filter
+[10]: /notebooks/guide/notebooks_api/
+[11]: /notebooks/notebooks_flavored_markdown/
