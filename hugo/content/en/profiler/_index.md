@@ -71,7 +71,10 @@ Continuous Profiler runs in production across all services by using technologies
 
 ## Getting started
 
-Profiling your service to visualize all your stack traces in one place takes just minutes.
+Choose how to get started:
+
+- [Instrument your application](#instrument-your-application) to collect profiles from your service.
+- Use [Host Profiler](/profiler/enabling/full_host/) to profile CPU across processes on Kubernetes nodes.
 
 ### Instrument your application
 
