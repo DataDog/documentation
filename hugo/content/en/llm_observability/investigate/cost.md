@@ -17,9 +17,10 @@ Use cases:
 
 ## Setting up cost monitoring 
 
-Datadog provides two ways to monitor your LLM costs:
+Choose the cost source that matches your provider:
 - [Automatic](#automatic): Use [supported LLM providers'](#supported-providers) public pricing rates
 - [Manual](#manual): For custom pricing rates, self-hosted models, or unsupported providers, manually supply your own cost values.
+- [Provider-reported conversation costs](#provider-reported-conversation-costs-unreleased): Submit reported USD charges for a completed ElevenLabs conversation (unreleased).
 
 ### Automatic 
 If your LLM requests involve any of the [listed supported providers](#supported-providers), Datadog automatically calculates the cost of each request based on the following:
@@ -30,7 +31,7 @@ If your LLM requests involve any of the [listed supported providers](#supported-
 ### Manual
 To manually supply cost information, follow the instrumentation steps described in the [SDK Reference][2] or [API][3]. When setting your costs up manually (e.g. setting `total_cost`), the unit must be in dollar units; however, the unit will be stored as nanodollars.
 
-<div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not input/output cost values, Datadog uses provider pricing and token values annotated on your span to compute the input/output cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog’s computed input/output costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
+<div class="alert alert-info">If you provide partial cost information, Datadog tries to estimate missing information. For example, if you supply a total cost but not I/O cost values, Datadog uses provider pricing and token values annotated on your span to compute the I/O cost values. This can cause a mismatch between your manually provided total cost and the sum of Datadog's computed I/O costs. Datadog always displays your provided total cost as-is, even if these values differ.</div>
 
 #### How token counts are calculated
 The following relationships apply to token usage fields:
@@ -46,8 +47,30 @@ Datadog recommends providing the full cache token breakdown whenever cache usage
 
 If only `input_tokens` is provided, Datadog treats all input tokens as non-cached input tokens. Providing only a partial cache breakdown may result in inaccurate token counts or cost discrepancies.
 
+## Provider-reported conversation costs (unreleased)
+
+This feature requires Datadog backend support and a released Python or Node.js tracer exposing the [conversation billing API](/llm_observability/instrument/sdk/#submit-conversation-costs-unreleased).
+
+ElevenLabs reports its conversation-level USD total in `metadata.cost_fiat`. Datadog prefers that total and retains `metadata.charging.llm_price` and `metadata.charging.platform_price` as breakdowns. Without a reported total, both USD components are required to derive one. A missing amount stays unknown; an explicit zero stays zero. A user total override takes precedence, including when provider amounts are unavailable.
+
+One dedicated conversation billing workflow owns the charge. For example, a total of **$0.12**, with **$0.02 LLM** and **$0.10 platform**, contributes **$0.12 once**. Conversation totals are not copied onto turns or added to their component charges. Keep the hosted provider as `elevenlabs`, including when its configured model is an OpenAI or Anthropic model.
+
+Configure an ElevenLabs [post-call transcription webhook](https://elevenlabs.io/docs/eleven-agents/workflows/post-call-webhooks), verify its signature in your application, and submit the received data with the conversation billing API. The tracer makes no background billing polls or additional provider requests. The conversation process can exit before billing arrives; the webhook handler must finish submitting and flushing its data before it exits. You can also submit completed details your application already obtained.
+
+Billing can arrive after completion. Exact retries are no-ops. Missing-to-known enrichment is accepted for 24 hours after the first known total is accepted; retries do not extend that deadline. Expired enrichment is rejected asynchronously. A late initial report starts its window when accepted, regardless of the conversation start time. Changes to known amounts are rejected. Supply any user override on the first submission.
+
+Pass the originating voice application when submitting from a webhook service with a different configured application. The first accepted application owns the charge; later observations cannot reassign it.
+
+Initial cost-metric delivery must occur within 3 hours and 55 minutes of first acceptance. After that deadline, undelivered records remain pending for diagnosis and accounting, without automatic backfill.
+
+USD inputs are stored in nanodollars (USD multiplied by 1e9, rounded to the nearest nanodollar), while original USD amounts and provenance remain on the billing workflow. The [conversation cost metric](/llm_observability/investigate/metrics/#conversation-costs-unreleased) is attributed to when Datadog first accepts a known total.
+
+Credit fields such as `metadata.cost`, `llm_charge`, and `platform_charge` are not converted to USD. Captured WAV length, transcript length, and `context_usage` do not establish billable usage. Separate charge records are not added to the documented USD total. This API does not backfill transcript token usage onto already-exported response spans.
+
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
+
+Token-based estimates depend on supported provider and model pricing. Provider-reported conversation billing uses USD charges separately from token pricing.
 
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
@@ -154,7 +177,7 @@ To view costs for a single application, click the application in the Cost Overvi
 
 {{< img src="llm_observability/cost_tracking_trace_v2.png" alt="Cost data in trace detail." style="width:100%;" >}}
 
-Cost data is also available within your application’s traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
+Cost data is also available within your application's traces and spans, allowing you to understand cost at both the request (trace) and operation level (span).
 Click any trace or span to open a detailed side-panel view that includes cost metrics for the full trace and for each individual LLM call.
 At the top of the trace view, the banner shows aggregated cost information for the full trace, including estimated cost and total tokens. Hovering over these values reveals a breakdown of input and output token/costs.
 
