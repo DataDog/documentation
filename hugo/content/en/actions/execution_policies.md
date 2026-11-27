@@ -33,7 +33,7 @@ Slack actions
 
 Execution Policies give you two main advantages:
 
-- **Manage access at scale**: With [Connections][3], you create one connection per integration on each private action runner. That approach becomes hard to manage across a large fleet. An Execution Policy controls access to many targets at once. A single policy can also list more than one target, so the same rule can cover several teams or environments without being duplicated.
+- **Manage access at scale**: With connections attached to runners, you create one [connection][3] per integration on each private action runner. That approach becomes hard to manage across a large fleet. An Execution Policy controls access to many targets at once. A single policy can also list more than one target, so the same rule can cover several teams or environments without being duplicated.
 - **Fine-grained control**: Allow or deny specific actions or sets of actions. Limit a policy to specific targets, such as Kubernetes namespaces or Slack channels.
 
 ## Prerequisites
@@ -143,15 +143,18 @@ Only the workflow owner can turn on Execution Policies for a workflow.
 
 ### Target an Agent from a private action step
 
-When you configure a private action step in a workflow, you can target an Agent directly instead of selecting a connection:
+When you configure a private action step in a workflow, you can target an Agent directly:
 
 1. In the step's connection picker, choose **Target** instead of **Connection**.
 2. Select how to identify the Agent:
     - **Hostname**: Use for a private action runner on a specific Datadog Agent host.
     - **Orch Cluster ID**: Use for a private action runner in a Kubernetes Cluster Agent.
 3. Enter the hostname or orchestration cluster ID of the target Agent.
+4. If the action requires authentication, under **Credentials**, select a [credential-only connection][9].
 
-Targeting an Agent creates a virtual connection for the step, identified by the target Agent only. The virtual connection carries no credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
+Targeting an Agent creates a virtual connection for the step, identified by the target Agent only. The virtual connection carries no credentials. If you select a credential-only connection, it supplies the credentials. When the workflow runs, the action executes only if an Execution Policy authorizes it for that target and the requesting user.
+
+For credential configuration instructions, see [Handling private action credentials][8].
 
 ### Target a private Slack channel from a Slack step
 
@@ -168,6 +171,8 @@ Execution Policies authorize actions for the following integrations:
 | **Kubernetes** (`com.datadoghq.kubernetes.*`) | Private actions | Agents, with optional Target Namespaces |
 | **Remote Action** (`com.datadoghq.remoteaction.*`), including the rshell bundle (the `runCommand` action) and network path actions | Private actions | Agents |
 | **Script** (`com.datadoghq.script.*`) | Private actions | Agents |
+| **HTTP** (`com.datadoghq.http.*`) | Private actions | Agents |
+| **MongoDB** (`com.datadoghq.mongodb.*`) | Private actions | Agents |
 | **Slack** | Slack actions | Workspaces and private channels |
 
 The [Private Action Runner Reference][7] shows which private actions each runner type supports. If your integration isn't authorizable through Execution Policies, use [Connections][3] instead.
@@ -218,3 +223,5 @@ When a Slack action runs:
 [5]: /account_management/rbac/
 [6]: https://app.datadoghq.com/actions/execution-policies
 [7]: /actions/private_actions/reference/
+[8]: /actions/connections/private_action_credentials/
+[9]: /actions/private_actions/authorize_private_actions/#connections

@@ -163,7 +163,9 @@ Under {{< ui >}}Error on Status{{< /ui >}}, enter a comma-delineated list of any
 Private Actions are in Preview. Use this form to request access today.
 {{< /callout >}}
 
-You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Private actions make use of a private action runner which you install on a host in your network using Docker and pair with a Datadog Connection. For more information, see [Private Actions][5].
+You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Deploy a private action runner in the Datadog Agent or as a standalone container. For more information, see [Private Actions][5].
+
+If you use runner credentials, define them in the Agent configuration before you create the connection. See [Credentials in the Datadog Agent][7]. Then, in the authentication fields, set {{< ui >}}Credential source{{< /ui >}} to {{< ui >}}Runner credential{{< /ui >}} and enter the credential's key.
 
 To configure a private HTTP request:
 1. Add an HTTP action to your app.
@@ -193,3 +195,4 @@ To configure a private HTTP request:
 [4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
 [6]: /actions/connections/private_action_credentials/?tab=httpsaction#credential-files
+[7]: /actions/connections/private_action_credentials/#runner-credentials-in-the-datadog-agent

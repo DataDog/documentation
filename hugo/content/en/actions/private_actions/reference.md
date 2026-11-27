@@ -45,10 +45,10 @@ This matrix shows, for each integration, its availability in each runner type an
 | Kubernetes | {{< X >}} | {{< X >}} | {{< X >}} |
 | Remote Action (for example, rshell) | {{< X >}} | {{< X >}} | {{< X >}} |
 | Script | {{< X >}} | {{< X >}} | {{< X >}} |
-| HTTP | {{< X >}} |  | {{< X >}} |
+| HTTP | {{< X >}} | {{< X >}} | {{< X >}} |
 | GitLab | {{< X >}} |  | {{< X >}} |
 | Jenkins | {{< X >}} |  | {{< X >}} |
-| MongoDB | {{< X >}} |  | {{< X >}} |
+| MongoDB | {{< X >}} | {{< X >}} | {{< X >}} |
 | PostgreSQL |  |  | {{< X >}} |
 | Temporal | {{< X >}} |  | {{< X >}} |
 
@@ -61,11 +61,11 @@ This matrix shows, for each integration, its availability in each runner type an
 
 {{% /collapse-content %}}
 
-## Credential file formats
+## Credentials
 
-Some integrations, such as HTTP, Jenkins, PostgreSQL, MongoDB, and Temporal, require credentials to run. Credentials are supplied to the runner as JSON files that you reference from a [connection][6]. Each integration has its own credential file structure and supported authentication methods.
+Actions that require authentication use a [connection][6] to reference credentials stored locally with the runner.
 
-For the full set of credential file formats and examples, see [Handling private action credentials][7].
+For supported credential sources, configuration steps, and file formats, see [Handling private action credentials][7].
 
 ## Further reading
 

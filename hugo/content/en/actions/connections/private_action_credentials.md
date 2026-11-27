@@ -10,15 +10,82 @@ disable_toc: false
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection. For more information on setting up a runner and pairing it with a connection, see [Private Actions][1].
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. For actions that require authentication, a connection describes how the private action runner obtains credentials locally. For runner setup instructions, see [Private Actions][1].
 
-Some private actions, such as Jenkins and PostgreSQL, require credentials to function. To configure credentials for a private action, you must:
+
+## Runner credentials in the Datadog Agent
+
+<div class="alert alert-info">The <strong>Runner credential</strong> source requires Datadog Agent 7.86 or later.</div>
+
+Define runner credentials under `private_action_runner.credentials.values` in the Agent configuration. Each entry has a key, such as `mongoPassword`, and an object that contains its `value` and optional restrictions. A value can use an `ENC[...]` reference resolved by [Agent secret management][2].
+
+The connection references the runner credential key, not the `ENC[...]` handle or the secret value. For example, the connection references `mongoPassword`, and the Agent looks up `private_action_runner.credentials.values.mongoPassword.value`.
+
+### Define runner credentials
+
+Add the credentials to the configuration of the Agent that executes the action. On a host, edit `datadog.yaml`. For the Datadog Operator, include the configuration in the `agent.datadoghq.com/private-action-runner-configdata` annotation for the node Agent, or `cluster-agent.datadoghq.com/private-action-runner-configdata` for the Cluster Agent. For deployment instructions, see [Set up a private action runner in the Datadog Agent][3].
+
+The following example uses AWS Secrets Manager. Configure the Agent's AWS access as described in [Agent secret management][2], and replace the secret ID placeholders with your secret IDs. In this example, the MongoDB secret contains a `password` field, and the HTTP secret contains a `token` field:
+
+```yaml
+secret_backend_type: aws.secrets
+secret_backend_config:
+  aws_session:
+    aws_region: us-east-1
+
+private_action_runner:
+  enabled: true
+  actions_allowlist:
+    - com.datadoghq.mongodb.*
+    - com.datadoghq.http.request
+    - com.datadoghq.http.testConnection
+  http_allowlist:
+    - api.example.com
+  credentials:
+    values:
+      mongoPassword:
+        value: "ENC[<MONGODB_SECRET_ID>;password]"
+        allowed_actions:
+          - com.datadoghq.mongodb.*
+      httpToken:
+        value: "ENC[<HTTP_SECRET_ID>;token]"
+        allowed_actions:
+          - com.datadoghq.http.request
+          - com.datadoghq.http.testConnection
+        allowed_http_domains:
+          - api.example.com
+```
+
+You can also use another supported Agent secret backend.
+
+After you change the Agent configuration, restart the Agent.
+
+Each credential supports the following settings:
+
+| Setting | Description |
+|---|---|
+| `value` | Required credential value, either a string or an `ENC[...]` reference. |
+| `allowed_actions` | Optional list of action names or trailing bundle wildcards, such as `com.datadoghq.mongodb.*`. If omitted, the credential does not restrict actions. An empty list (`[]`) denies all actions. |
+| `allowed_http_domains` | Optional list of hostnames, IP addresses, or wildcard domains, such as `*.example.com`. Use hostnames without a URL scheme, port, or path. If set, only HTTP actions can use the credential. If omitted, the credential does not restrict destinations. An empty list (`[]`) denies all destinations. |
+
+Credential restrictions apply in addition to the runner's `actions_allowlist` and `http_allowlist` and the action's authorization in Datadog. A credential restriction does not grant permission to run an action.
+
+### Select a runner and test the connection
+
+For a connection attached to a runner, select the runner configured with the credentials. For a [credential-only connection][5], save the connection without a runner and select the target Agent when configuring the action. An [Execution Policy][4] must allow the action for that target and requesting user. The policy authorizes execution, and the connection supplies credential references.
+
+For a credential-only connection, select a **Test target** to test credential resolution on an Agent. Testing does not bind the connection to that runner. Every target Agent that uses the connection needs the referenced credential keys configured locally; values can differ between Agents.
+
+If credential resolution fails, check that the target Agent defines the referenced key and that its secret backend can read the secret. Check that the credential's action and HTTP domain restrictions allow the request. For MongoDB TLS failures, check the runner's CA trust configuration.
+
+## Credential files
+
+For connections that ask for a credential file path:
+
 1. Navigate to the directory where you stored your runner's configuration (default: `config/credentials/`).
 2. In this directory, create a JSON file using the JSON structure provided in Credential files. Alternatively, edit the default JSON file automatically generated during runner bootstrap.
    - **Note**: These files are available to the runner in its `/etc/dd-action-runner/config/credentials/` directory.
 3. Specify the path to the credential in the runner's connection. Use the path to the file on the container. For example: `/etc/dd-action-runner/config/credentials/jenkins_token.json`.
-
-## Credential files
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
@@ -467,3 +534,7 @@ For this connection type, you do not need to create a credential file since the 
 {{< /tabs >}}
 
 [1]: /actions/private_actions
+[2]: /agent/configuration/secrets-management/
+[3]: /actions/private_actions/set_up_agent_based/
+[4]: /actions/execution_policies/
+[5]: /actions/private_actions/authorize_private_actions/#connections
