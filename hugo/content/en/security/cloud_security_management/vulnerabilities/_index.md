@@ -4,13 +4,13 @@ aliases:
     - /security/infrastructure_vulnerabilities/
     - /security/vulnerabilities/
 further_reading:
-- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
+- link: "/containers/monitoring/container_images/#enable-sbom-collection"
   tag: "Documentation"
   text: "Enable SBOM collection in Cloud Security Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: "/security/cloud_security_management/setup/agent/"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
-- link: "/infrastructure/containers/container_images"
+- link: "/containers/monitoring/container_images"
   tag: "Documentation"
   text: "Viewing Container Images"
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
@@ -34,7 +34,7 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
+<div class="alert alert-info">For vulnerability management in application libraries, see <a href="/security/code_security/software_composition_analysis/">Software Composition Analysis</a>. For application code, see <a href="/security/code_security/iast/">Code Security</a>.</div>
 
 ## Key capabilities
 
@@ -87,10 +87,10 @@ Use these tables to decide which solution to start with:
 | Container image               | OS packages and app packages, mapped to image                                                                                                                | OS packages                    |
 | Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not applicable                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Functions, Azure Container Apps, Azure Container Instances, GCP Cloud Run, GCP Cloud Functions                         | Not applicable                 |
 | Container registries          | Amazon ECR and Google Artifact Registry (running + at-rest); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry, and Kubernetes registry (authenticated pull only). See [Container image registries][24] for details | Not applicable                 |
 
-For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
+For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or contact [Datadog support][26].
 
 ## Continuously detect, prioritize, and remediate exploitable vulnerabilities
 The [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} page][1] helps you investigate vulnerabilities detected across your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
@@ -107,7 +107,7 @@ In [{{< ui >}}Container Images{{< /ui >}}][7], you can trace vulnerabilities fou
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
-For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View container images in Datadog][23].
+For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View vulnerabilities inherited from base images][23].
 
 ## Trace production vulnerabilities to source code
 
@@ -140,20 +140,13 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 {{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="The inventory of packages deployed in the infrastructure with vulnerability context and pivot to resources using them" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
-[2]: https://app.datadoghq.com/containers/images
-[3]: https://app.datadoghq.com/security/csm
-[4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
-[5]: /security/code_security/software_composition_analysis/
-[6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [7]: https://app.datadoghq.com/container-images
-[9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-[10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
-[18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
+[18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: /security/automation_pipelines/
 [21]: /security/cloud_security_management/setup/ci_cd
@@ -161,6 +154,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
 [25]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[26]: /help/
 
 ## Further reading
 

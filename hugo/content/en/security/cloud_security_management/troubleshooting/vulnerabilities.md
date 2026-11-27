@@ -3,10 +3,10 @@ title: Troubleshooting Cloud Security Vulnerabilities
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
-- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
+- link: "/containers/monitoring/container_images/#enable-sbom-collection"
   tag: "Documentation"
   text: "Enable SBOM collection in Cloud Security Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: "/security/cloud_security_management/setup/agent/"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
@@ -22,17 +22,22 @@ If you experience issues with Cloud Security Vulnerabilities, use the following 
 
 ### Disk space requirements
 
-Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities (1 GB by default).
+Before scanning a container image, the Datadog Agent checks that the disk has at least the minimum free space set by `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK`. The default is 10 MB in Agent 7.82 and later, and 1 GB in earlier versions. When the Agent exports the image to disk to scan it, such as with Docker or with containerd in its default mode, the disk must also have free space of at least 120% of the image size.
 
 The resulting error appears as:
 ```sh
-Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
+Error: failed to check current disk usage: not enough disk space to safely collect sbom, 5242880 available, 10485760 required
 ```
 
-Workaround: 
+Or, for an image export:
+```sh
+not enough disk space to export the image, 524288000 available, 1258291200 required
+```
 
-- Increase the available disk space to at least 1 GB. If your images are larger than 1 GB, increase your disk space accordingly.
-- If all of your images are smaller than 1 GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
+Workaround:
+
+- Increase the available disk space to at least the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` value. For image exports, also increase it to at least 120% of the size of your largest container image.
+- If your disk has less free space than the minimum but enough for your images, decrease the minimum with the `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` environment variable.
 
 ### Uncompressed container image layers
 
@@ -69,20 +74,21 @@ In the `datadog-values.yaml` file for the Agent, set the following configuration
 # datadog-values.yaml file
 datadog:
   sbom:
+    # Disables Cloud Security Vulnerabilities for container images
     containerImage:
       enabled: false
 
       # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
       # uncompressedLayersSupport: true
 
-    # Enables Host Vulnerability Management
+    # Disables Cloud Security Vulnerabilities for hosts
     host:
       enabled: false
 
-    # Enables Container Vulnerability Management
-    # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-      containerImageCollection:
-        enabled: false
+  # Disables container image collection
+  # Datadog Helm chart 3.46.0 and later enables image collection by default
+  containerImageCollection:
+    enabled: false
 ```
 
 ## Further Reading
@@ -90,7 +96,4 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
-[3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: https://app.datadoghq.com/metric/catalog
 [5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
