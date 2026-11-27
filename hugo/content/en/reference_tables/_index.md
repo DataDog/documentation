@@ -202,7 +202,60 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-{{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
+For other integrations, see the [Salesforce][17] or [ServiceNow][18] setup instructions.
+
+[17]: /integrations/salesforce/#step-4-connect-your-org
+[18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
+
+{{% collapse-content title="Databricks" level="h3" id="databricks" %}}
+
+First, [configure the Databricks integration][14] with an account and [grant it read access to the source data][22].
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Databricks{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Databricks Account{{< /ui >}}: Select the workspace configured above. If it isn't listed, click "Add Databricks account".
+   - {{< ui >}}Databricks Table Name{{< /ui >}}: The source table or view to ingest.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
+
+To limit data transfer and query costs, use a [view][23] that selects only the rows and columns you need. For expensive queries, consider a materialized view or precomputed table.
+
+#### Troubleshooting
+
+Allow several minutes for the initial sync to complete.
+
+- Check [Databricks ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's read permissions and the source table or view configuration.
+
+[14]: /integrations/databricks/#connect-to-a-new-databricks-workspace
+[16]: https://app.datadoghq.com/reference-tables
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Adatabricks%20service%3Aintegration-reference-table
+[22]: /integrations/databricks/#reference-table-configuration
+[23]: https://docs.databricks.com/aws/en/views/
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Snowflake" level="h3" id="snowflake" %}}
+
+First, [configure the Snowflake integration][15] with an account and [grant it read access to the source data][22].
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Snowflake{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Snowflake Account{{< /ui >}}: Select the account configured above. If it isn't listed, click "Add Snowflake account".
+   - {{< ui >}}Query{{< /ui >}}: SQL selecting the data to ingest, for example, `SELECT customer_id, tier FROM database.schema.customers`.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Allow several minutes for the initial sync to complete.
+
+To limit data transfer and query costs, restrict your query to the rows and columns you need.
+
+[15]: /integrations/snowflake-web/#connect-your-snowflake-account
+[16]: https://app.datadoghq.com/reference-tables
+[22]: /integrations/snowflake-web/#reference-tables
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{< /tabs >}}
