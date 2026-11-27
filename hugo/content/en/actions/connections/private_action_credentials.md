@@ -72,7 +72,7 @@ Credential restrictions apply in addition to the runner's `actions_allowlist` an
 
 ### Select a runner and test the connection
 
-For a connection attached to a runner, select the runner configured with the credentials. For a [credential-only connection][7], save the connection without a runner and select the target Agent when configuring the action. An [Execution Policy][6] must allow the action for that target and requesting user. The policy authorizes execution, and the connection supplies credential references.
+For a connection attached to a runner, select the runner configured with the credentials. For a [credential-only connection][5], save the connection without a runner and select the target Agent when configuring the action. An [Execution Policy][4] must allow the action for that target and requesting user. The policy authorizes execution, and the connection supplies credential references.
 
 For a credential-only connection, select a **Test target** to test credential resolution on an Agent. Testing does not bind the connection to that runner. Every target Agent that uses the connection needs the referenced credential keys configured locally; values can differ between Agents.
 
@@ -536,5 +536,5 @@ For this connection type, you do not need to create a credential file since the 
 [1]: /actions/private_actions
 [2]: /agent/configuration/secrets-management/
 [3]: /actions/private_actions/set_up_agent_based/
-[6]: /actions/execution_policies/
-[7]: /actions/private_actions/authorize_private_actions/#connections
+[4]: /actions/execution_policies/
+[5]: /actions/private_actions/authorize_private_actions/#connections

@@ -195,4 +195,4 @@ To configure a private HTTP request:
 [4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
 [6]: /actions/connections/private_action_credentials/?tab=httpsaction#credential-files
-[7]: /actions/connections/private_action_credentials/#credentials-in-the-datadog-agent
+[7]: /actions/connections/private_action_credentials/#runner-credentials-in-the-datadog-agent
