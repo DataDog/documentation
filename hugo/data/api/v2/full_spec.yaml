@@ -141906,13 +141906,15 @@ components:
         - type
       type: object
     SensitiveDataScannerGroupTargetType:
-      description: Type of target whose scanning groups are served by the target-scoped group routes. `llm_observability` is Agent Observability.
+      description: Type of target whose scanning groups are served by the target-scoped group routes. `llm_observability` is Agent Observability, `ai_guard` is AI Guard.
       enum:
         - llm_observability
+        - ai_guard
       example: llm_observability
       type: string
       x-enum-varnames:
         - LLM_OBSERVABILITY
+        - AI_GUARD
     SensitiveDataScannerGroupType:
       default: sensitive_data_scanner_group
       description: Sensitive Data Scanner group type.
@@ -276174,8 +276176,8 @@ paths:
   /api/v2/sensitive-data-scanner/groups:
     get:
       description: |-
-        List the Agent Observability scanning groups, with their rules included.
-        The list always includes the default Agent Observability scanning group.
+        List the scanning groups of a target, such as Agent Observability or AI Guard, with their rules included.
+        The list always includes the default scanning group of the target.
         Scanning groups of logs, RUM, events, and APM are listed by the List Scanning Groups endpoint.
       operationId: ListTargetScanningGroups
       parameters:
@@ -276257,7 +276259,7 @@ paths:
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List Agent Observability Scanning Groups
+      summary: List Target Scanning Groups
       tags:
         - Sensitive Data Scanner
       x-menu-order: 10
@@ -276268,7 +276270,7 @@ paths:
   /api/v2/sensitive-data-scanner/groups/{group_id}:
     get:
       description: |-
-        Get an Agent Observability scanning group, with its rules included.
+        Get an Agent Observability or AI Guard scanning group, with its rules included.
         Scanning groups of logs, RUM, events, and APM are reported as not found.
       operationId: GetScanningGroup
       parameters:
@@ -276351,7 +276353,7 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get Agent Observability Scanning Group
+      summary: Get Target Scanning Group
       tags:
         - Sensitive Data Scanner
       x-menu-order: 11
