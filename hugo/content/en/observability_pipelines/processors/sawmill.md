@@ -1,7 +1,9 @@
 ---
-title: Integration Pipelines Processor
-description: Use Datadog's out-of-the-box integration pipelines and custom pipelines in Observability Pipelines to parse and normalize logs before sending them to your destinations.
+title: Sawmill Processor
+description: Use the Sawmill processor to apply Datadog's out-of-the-box integration pipelines and custom pipelines in Observability Pipelines, and parse and normalize logs before sending them to your destinations.
 disable_toc: false
+aliases:
+  - /observability_pipelines/processors/integration_pipelines/
 products:
 - name: Logs
   icon: logs
@@ -11,12 +13,12 @@ products:
 {{< product-availability >}}
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-The Integration Pipelines processor is in Preview. Contact your account manager to request access.
+The Sawmill processor is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
 ## Overview
 
-The Integration Pipelines processor brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations. You can also import your custom Log Management pipelines to Observability Pipelines.
+The Sawmill processor (formerly the Integration Pipelines processor) brings Datadog's out-of-the-box log processing pipelines to Observability Pipelines. Use it to parse and normalize logs from integrations, such as Apache and NGINX, before sending them to your destinations. You can also import your custom Log Management pipelines to Observability Pipelines.
 
 <div class="alert alert-warning">Datadog does not recommend using this processor when sending logs to the Datadog Logs destination. Processing logs both in the Worker and in Datadog duplicates work and could produce conflicting results. Datadog Log Management's integration pipelines update automatically and more frequently than the Worker's catalog. The Datadog Logs destination could also reverse some of the processor's parsing and normalization.</div>
 
@@ -30,7 +32,7 @@ For every log that matches the processor's filter:
 1. Each enabled [custom pipeline](#custom-pipelines) processes the log if the log matches its filter.
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
-{{< img src="observability_pipelines/processors/integration_pipelines_panel.png" alt="The Integration Pipelines tab of the Manage Integration Pipelines panel, listing enabled pipelines and their source filters." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/sawmill_panel.png" alt="The Integration Pipelines tab of the Manage Sawmill panel, listing enabled pipelines and their source filters." style="width:100%;" >}}
 
 **Notes**:
 
@@ -42,15 +44,15 @@ For every log that matches the processor's filter:
 
 ## Setup
 
-To set up an Integration Pipelines processor:
+To set up a Sawmill processor:
 
 1. Define a filter query to select the logs that enter the processor. See [Search Syntax][1] for more information.
     - Only matching logs are normalized and processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved attribute mappings the Worker uses for preprocessing. See [Preprocessing options](#preprocessing-options) for more information.
-1. Click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Integration Pipelines{{< /ui >}} row to view a list of integration pipelines that have been enabled or disabled.
-1. In the {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel, enable or disable integration pipelines. When the {{< ui >}}Enabled{{< /ui >}} button is selected, the list shows all enabled integration pipelines.
-    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
+1. Click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Integration Pipelines{{< /ui >}} row to view a list of integration pipelines that have been enabled or disabled.
+1. In the {{< ui >}}Manage Sawmill{{< /ui >}} panel, enable or disable integration pipelines. When the {{< ui >}}Enabled{{< /ui >}} button is selected, the list shows all enabled integration pipelines.
+    {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Sawmill panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
     - To enable integration pipelines:
       1. Click {{< ui >}}Disabled{{< /ui >}} to see the list of disabled pipelines.
       1. Select the checkboxes for the pipelines you want to enable.
@@ -59,7 +61,7 @@ To set up an Integration Pipelines processor:
       1. Click {{< ui >}}Enabled{{< /ui >}} to see the list of enabled pipelines.
       1. Select the checkboxes for the pipelines you want to disable.
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
-1. (Optional) Click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row to import and manage custom pipelines. See [Custom pipelines](#custom-pipelines) for more information.
+1. (Optional) Click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row to import and manage custom pipelines. See [Custom pipelines](#custom-pipelines) for more information.
 1. Click {{< ui >}}Save{{< /ui >}}.
 1. If you made changes to integration or custom pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
 
@@ -83,7 +85,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 ## Custom pipelines
 
-You can import custom pipelines created in [Log Management][3] into the Integration Pipelines processor to process your logs. The processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
+You can import custom pipelines created in [Log Management][3] into the Sawmill processor to process your logs. The processor first matches logs to integration pipeline filters and then tries to match logs to custom pipeline filters.
 
 Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipelines{{< /ui >}} tab, from top to bottom. Each log is processed by every enabled custom pipeline whose filter it matches, including logs previously processed by an integration pipeline.
 
@@ -93,7 +95,7 @@ Custom pipelines run in the order they are listed in the {{< ui >}}Custom Pipeli
 
 ### Import pipelines from Log Management
 
-1. In the Integration Pipelines processor, click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
+1. In the Sawmill processor, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
 1. Click {{< ui >}}Import Pipelines{{< /ui >}}.
 1. In the {{< ui >}}Import Custom Pipelines{{< /ui >}} modal, select the Log Management pipelines you want to import. You can search pipelines by name, ID, or filter. The toggle for each pipeline reflects whether the pipeline is enabled or disabled in Log Management.
     {{< img src="observability_pipelines/processors/integration_pipelines_import_custom_pipelines.png" alt="The Import Custom Pipelines modal listing Log Management pipelines, with three pipelines selected for import." style="width:100%;" >}}
@@ -120,11 +122,11 @@ In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
 
 After making changes, click {{< ui >}}Save{{< /ui >}}, then redeploy your log pipeline for the changes to take effect.
 
-{{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab listing two enabled custom pipelines with edit, disable, clone, delete, and reorder actions." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/sawmill_custom_pipelines_tab.png" alt="The Custom Pipelines tab of the Manage Sawmill panel, listing two enabled custom pipelines with reorder handles." style="width:100%;" >}}
 
 ## CPU sizing
 
-The Integration Pipelines processor is CPU intensive. Use **10,000 events per second per virtual CPU (vCPU)** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
+The Sawmill processor is CPU intensive. Use **10,000 events per second per virtual CPU (vCPU)** as a conservative starting estimate, then size Workers using sample logs and enabled pipelines.
 
 CPU usage depends on:
 
@@ -166,12 +168,44 @@ The Worker normalizes every log that matches the processor's filter, even if the
 
 The Worker's catalog of integration pipelines is updated only through new Worker releases. You must upgrade your Worker to receive catalog updates.
 
-All available integration pipelines are enabled by default when you first add and deploy an Integration Pipelines processor. However, integration pipelines introduced in subsequent Worker releases are **not** automatically enabled for existing processors. You must enable them manually.
+All available integration pipelines are enabled by default when you first add and deploy a Sawmill processor. However, integration pipelines introduced in subsequent Worker releases are **not** automatically enabled for existing processors. You must enable them manually.
 
 ## Health metrics
 
 See [Processor buffer metrics][2] for more information on metrics emitted by all processors. To filter or group by this processor, use `component_type:integration_pipelines`.
 
+### Sawmill metrics
+
+The Sawmill processor emits the following metrics for each integration pipeline and custom pipeline.
+
+**Note** These metrics are available for Worker versions 2.26 and later.
+
+Events ingested
+: **Metric**: `pipelines.sawmill_ingested_events_total`
+: **Description**: The number of events processed by a pipeline.
+
+Event bytes ingested
+: **Metric**: `pipelines.sawmill_ingested_event_bytes_total`
+: **Description**: The byte size of events processed by a pipeline. The size is measured when the event enters the processor, before preprocessing.
+
+In addition to the [component tags][4], Sawmill metrics have the following tags:
+
+- `sawmill_pipeline_id`: The ID of the integration pipeline, such as `apache`, or the custom pipeline. **Note**: Tag values are lowercased, so filter on lowercase IDs.
+- `sawmill_pipeline_name`: The name of the pipeline, when it has one.
+- `is_transformed`: `true` if the pipeline modified the event, `false` otherwise.
+    - Use `is_transformed:true` to see the events or bytes a pipeline modified. Compare the value with the total to see how much data the pipeline is processing.
+
+For example, use the following query in [Metrics Explorer][5] or a [dashboard graph][6] to see the number of events each integration or custom pipeline in a Sawmill processor modified:
+
+```text
+sum:pipelines.sawmill_ingested_events_total{component_id:<COMPONENT_ID>, is_transformed:true} by {sawmill_pipeline_id}.as_count()
+```
+Replace the following placeholders `<COMPONENT_ID>` with the ID of the Sawmill processor.
+
+
 [1]: /observability_pipelines/search_syntax/logs/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#buffer
 [3]: /logs/log_configuration/pipelines/
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[5]: /metrics/explorer/
+[6]: /dashboards/widgets/types/
