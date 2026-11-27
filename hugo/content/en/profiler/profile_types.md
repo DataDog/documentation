@@ -292,12 +292,12 @@ Allocated memory
 {{< /programming-lang >}}
 {{< programming-lang lang="full_host" >}}
 
-Once profiling is enabled, the following profile types are collected for [supported languages and versions][1]:
+Once profiling is enabled, the following profile types are collected for [supported languages and runtimes][1]:
 
 CPU Time (eBPF)
 : Time each method or function spent running on the CPU. In multi-threaded programs, CPU time can be greater than elapsed time: if 2 threads are running during 45s each, you'd see "eBPF CPU Time, 1m 30s per minute".
 
-[1]: /profiler/enabling/full_host/
+[1]: https://github.com/DataDog/opentelemetry-ebpf-profiler/blob/datadog/README.md#core-features-and-strengths
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
