@@ -49,3 +49,10 @@ entries:
       - GetScanningGroup
       - ListTargetScanningGroups
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-27'
+    link: https://github.com/DataDog/documentation/pull/42270
+    operations:
+      - GetScanningGroup
+      - ListTargetScanningGroups
+    title: Add AI Guard to the Sensitive Data Scanner target group routes

@@ -24089,9 +24089,9 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
-    - name: Get Agent Observability Scanning Group
-      url: /api/latest/sensitive-data-scanner/get-agent-observability-scanning-group/
-      identifier: sensitive-data-scanner-get-agent-observability-scanning-group
+    - name: Get Target Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-target-scanning-group/
+      identifier: sensitive-data-scanner-get-target-scanning-group
       parent: sensitive-data-scanner
       generated: true
       params:
@@ -24101,9 +24101,9 @@ menu:
           - GetScanningGroup
         unstable: []
         order: 11
-    - name: List Agent Observability Scanning Groups
-      url: /api/latest/sensitive-data-scanner/list-agent-observability-scanning-groups/
-      identifier: sensitive-data-scanner-list-agent-observability-scanning-groups
+    - name: List Target Scanning Groups
+      url: /api/latest/sensitive-data-scanner/list-target-scanning-groups/
+      identifier: sensitive-data-scanner-list-target-scanning-groups
       parent: sensitive-data-scanner
       generated: true
       params:
