@@ -18,10 +18,11 @@ further_reading:
 ## Overview
 Set up budgets and enable engineering teams to visualize how they are tracking against budgets.
 
-You can create two types of budgets:
+You can create three types of budgets:
 
 - {{< ui >}}Basic{{< /ui >}}: A flat, single-level budget for tracking your cloud costs.
 - {{< ui >}}Hierarchical{{< /ui >}}: A two-level, parent-child budget for tracking costs in a way that mirrors your organization's structure. For example, if your organization has departments made up of many teams, you can budget on the department (parent) and team (child) levels and track budget health at both levels. In addition, this option allows you to create a single budget instead of needing to create multiple budgets.
+- {{< ui >}}AI Spend Limits{{< /ui >}}: A daily or monthly limit on each user's AI model and agent spend. See [AI spend limits](#ai-spend-limits).
 
 ## Set up budgets
 
@@ -82,7 +83,48 @@ To create a hierarchical budget:
 [2]: /api/latest/cloud-cost-management/#create-or-update-a-budget
 
 {{% /tab %}}
+
+{{% tab "AI Spend Limits" %}}
+
+<div class="alert alert-info">AI spend limits are in Preview.</div>
+
+To create an AI spend limit:
+
+1. Navigate to [**Cloud Cost > Plan > Budgets**][1].
+1. Click {{< ui >}}New Budget{{< /ui >}}.
+1. Click {{< ui >}}AI Spend Limits{{< /ui >}}.
+1. Enter your spend limit information using the details below.
+
+   - {{< ui >}}Name{{< /ui >}}: Enter a name for your spend limit.
+   - {{< ui >}}Limit spend for{{< /ui >}}: Set the limit for each user, per day or per month.
+   - {{< ui >}}From sources{{< /ui >}}: Choose where spend comes from:
+     - {{< ui >}}Cloud Cost{{< /ui >}}: Costs from the AI providers you select, grouped by `user_email`.
+     - {{< ui >}}Metrics{{< /ui >}}: Any metric query, grouped by a user email tag. It defaults to the [LLM Observability][2] cost metric `ml_obs.span.llm.total.cost`, grouped by `dd.user_email`.
+   - {{< ui >}}Active period{{< /ui >}} (Cloud Cost only): Set the start and end months. Alerts and the status page only cover spend inside this period.
+   - {{< ui >}}Monthly ceiling{{< /ui >}} (Cloud Cost only, optional): Set a total for all users, the same every month.
+   - {{< ui >}}Slack notification{{< /ui >}}: Select the Slack workspace where users get a direct message.
+
+   {{< img src="cloud_cost/budgets/ai-spend-limit-create.png" alt="Form to create an AI spend limit with a $3,000 monthly limit per user email, a Cloud Cost query for AI providers grouped by user_email, and a Slack workspace" style="width:100%;" >}}
+
+1. Click {{< ui >}}Save AI Spend Limit{{< /ui >}}.
+
+[1]: https://app.datadoghq.com/cost/plan/budgets
+[2]: /llm_observability/
+
+{{% /tab %}}
 {{< /tabs >}}
+
+## AI spend limits
+
+<div class="alert alert-info">AI spend limits are in Preview.</div>
+
+AI spend limits notify each user when their AI model and agent spend reaches their limit. Users get a Slack direct message, or an email when Slack isn't available. Behind the scenes, each spend limit is backed by a [monitor][5] and a [workflow][6] that Datadog creates when you save it.
+
+Spend limits that use Cloud Cost have a status page. Open the spend limit from the [Budgets page][1] to see total and forecasted spend, and each user's spend, limit, and alerts.
+
+{{< img src="cloud_cost/budgets/ai-spend-limit-status.png" alt="AI spend limit status page showing actual and forecasted cost against a $20k monthly ceiling, 2 of 38 users over their limit, and a table of each user's spend, limit, status, and alerts" style="width:100%;" >}}
+
+**Note**: To send notifications, you need the `monitors_write` and `workflows_write` permissions in addition to `ccm_budget_write`.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
@@ -215,6 +257,7 @@ To remove an override, clear the cell. The cell reverts to the gray Bits forecas
 | View budgets | `cloud_cost_management_read` |
 | Create, edit, or delete a budget | `ccm_budget_write` |
 | Edit custom forecast values | `ccm_forecast_write` |
+| Create an AI spend limit | `ccm_budget_write` (add `monitors_write` and `workflows_write` to send notifications) |
 
 For the full list of CCM permissions, see the [Permissions documentation][4].
 
@@ -225,3 +268,5 @@ For the full list of CCM permissions, see the [Permissions documentation][4].
 [2]: /cloud_cost_management/cost_changes/monitors/
 [3]: /cloud_cost_management/planning/forecasting
 [4]: /cloud_cost_management/setup/permissions
+[5]: /monitors/
+[6]: /actions/workflows/
