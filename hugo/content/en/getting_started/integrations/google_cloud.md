@@ -183,7 +183,8 @@ To use the Quick Start method, your Datadog user role must be able to create API
    **Note**: Datadog recommends running this script locally through the [gcloud CLI][201], as it may be faster. This requires having your Google Cloud credentials available locally, and the gcloud CLI installed on your machine.
 4. Click {{< ui >}}Open Google Cloud Shell{{< /ui >}}, or go to [Google Cloud Shell][204].
 5. Paste the script into the shell prompt and run it.
-6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.
+6. Select any folders and projects to be monitored. You can only see projects and folders that you have the required access and permissions for.<br>
+   Under {{< ui >}}Limit Monitored Projects{{< /ui >}} (optional), choose whether to monitor every project the service account can access, or only the selected projects. By default, Datadog also monitors projects the service account gains access to later. If you limit monitoring to the selected projects, then projects the service account gains access to later are not monitored. To change this later, see [Limit monitored projects](#limit-monitored-projects).
 7. Under {{< ui >}}Provide Service Account Details{{< /ui >}}:
    1. Give the service account a name.
    2. Select the project to contain the service account.
@@ -259,14 +260,15 @@ To use the Quick Start method, your Datadog user role must be able to create API
 5. Click the service account link under the {{< ui >}}Email{{< /ui >}} column.
 6. Copy the {{< ui >}}Email{{< /ui >}} value.
 7. In Datadog, paste the service account email in the {{< ui >}}Add Service Account Email{{< /ui >}} section.
-8. Configure {{< ui >}}Metric Collection{{< /ui >}} (optional).
+8. Configure {{< ui >}}Limit Monitored Projects{{< /ui >}} (optional). Add project ID or project label filters to monitor only some of the projects the service account can access. See [Limit monitored projects](#limit-monitored-projects) for the filter syntax. You can edit the filters later in the {{< ui >}}Projects{{< /ui >}} tab.
+9. Configure {{< ui >}}Metric Collection{{< /ui >}} (optional).
    1. Choose whether to disable the option for silencing monitors for expected GCE instance shutdowns and autoscaling events.
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
    5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
-9. Configure {{< ui >}}Resource Collection{{< /ui >}} (attributes and configuration information of the resources in your Google Cloud environment, optional).
-10. Click {{< ui >}}Verify and Save Account{{< /ui >}}.
+10. Configure {{< ui >}}Resource Collection{{< /ui >}} (attributes and configuration information of the resources in your Google Cloud environment, optional).
+11. Click {{< ui >}}Verify and Save Account{{< /ui >}}.
 
 [600]: https://app.datadoghq.com/integrations/google-cloud-platform
 {{% /collapse-content %}}
@@ -324,6 +326,51 @@ For deep dives into monitoring many of the more popular services, check out the 
 
 [Vertex AI][30]
 : Vertex AI is a fully-managed generative AI development platform.
+{{% /collapse-content %}}
+
+### Limit monitored projects
+
+By default, Datadog monitors every project the service account can access, including projects it gains access to later. To monitor only some of these projects, add filters under {{< ui >}}Limit Monitored Projects{{< /ui >}} in the {{< ui >}}Projects{{< /ui >}} tab of the [Google Cloud integration page][11]. You can filter by project ID, by project label, or both.
+
+{{% collapse-content title="Limit monitored projects by project ID" level="h4" %}}
+
+Each filter is a project ID or a project ID pattern. Use `*` to match any number of characters and `?` to match a single character. Start a filter with `!` to exclude matching projects. Filters without a wildcard match a project ID exactly.
+
+{{< img src="integrations/google_cloud_platform/project_id_filter.png" alt="The Limit Monitored Projects section of the Projects tab in the Datadog Google Cloud integration page, with the project ID filter prod-* entered in the Filter by Project ID field" style="width:80%;" >}}
+
+**Example filters**:
+
+`prod-*` `shared-*`
+: Monitor projects with IDs **matching either** `prod-*` **or** `shared-*`
+
+`!*-sandbox` `!*-test`
+: Monitor projects with IDs **matching neither** `*-sandbox` **nor** `*-test`
+
+`prod-*` `!prod-legacy`
+: Monitor projects with IDs **matching** `prod-*` **but not** `prod-legacy`
+
+`team-?-prod`
+: Monitor projects with IDs such as `team-a-prod` and `team-b-prod`
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Limit monitored projects by project label" level="h4" %}}
+
+Each filter is a Google Cloud [project label][69] in the form `key:value`. Keys are matched exactly, and the `*` and `?` wildcards apply only to values, so `key:*` matches any value of that label, including an empty one. Start a filter with `!` to exclude matching projects. Every filter needs both a key and a value, so a key on its own (such as `!testing`) is not valid.
+
+{{< img src="integrations/google_cloud_platform/project_label_filter.png" alt="The Limit Monitored Projects section of the Projects tab in the Datadog Google Cloud integration page, with the project label filter env:prod entered in the Filter by Project Label field" style="width:80%;" >}}
+
+**Example filters**:
+
+`datadog:monitored` `env:prod*`
+: Monitor projects that have **either** label
+
+`!env:staging` `!team:testing`
+: Monitor projects that have **neither** label
+
+`datadog:monitored` `!region:us-east-?`
+: Monitor projects that have `datadog:monitored` **but not** `region:us-east-?`
+
 {{% /collapse-content %}}
 
 ### Limit metric collection filters
@@ -526,3 +573,4 @@ Expanded BigQuery monitoring provides granular visibility into your BigQuery env
 [66]: https://cloud.google.com/identity/docs/overview
 [67]: https://docs.datadoghq.com/logs/guide/google-cloud-log-forwarding
 [68]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses/bigquery/
+[69]: https://cloud.google.com/resource-manager/docs/labels-overview
