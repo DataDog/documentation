@@ -103,7 +103,7 @@ If you have not setup the Datadog iOS Logs SDK yet, follow the [in-app setup ins
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /logs/log_collection/ios/#setup
 [3]: https://github.com/Datadog/dd-sdk-ios
-[4]: /logs/log_collection/ios/?tab=cocoapods#setup
+[4]: /logs/log_collection/ios/#setup
 
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}

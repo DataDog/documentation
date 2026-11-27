@@ -27,9 +27,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 
 ## Setup
 
-1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+1. Declare the library as a dependency.
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
@@ -40,36 +38,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogTrace
 ```
-
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][4] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogTrace'
-```
-
-[4]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-You can use [Carthage][5] to install `dd-sdk-ios`:
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogTrace.xcframework
-```
-
-[5]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
     For more information about setting up a client token, see the [client token documentation][2].
