@@ -61,7 +61,7 @@ instances:
 
 Column statistics collection reads per-column statistics from `pg_stats` (`n_distinct`, `null_frac`, `avg_width`, `correlation`, `most_common_freqs`) on a periodic schedule. This requires the `datadog.column_statistics()` function to exist in every monitored database—see [Setting Up Database Monitoring for Self-Hosted Postgres][1] for the function definition.
 
-Once the function exists, enable and tune collection in your Postgres instance config:
+Starting with Agent 7.87.0, column statistics are collected by default on DBM instances once the function exists. Databases without the function are skipped and reported once by the Agent; run `datadog-agent diagnose` for a per-database list. To tune or turn off collection, set these options in your Postgres instance config:
 
 ```yaml
 instances:
@@ -75,7 +75,7 @@ instances:
 
 | Option | Default | When to change it |
 | --- | --- | --- |
-| `enabled` | `false` | Set to `true` to enable column statistics collection. |
+| `enabled` | `true` (`false` before Agent 7.87.0) | Set to `false` to stop collecting column statistics. On Agent versions earlier than 7.87.0, set to `true` to enable collection. |
 | `collection_interval` | `3600` | Lower for more responsive statistics (at the cost of more queries against `pg_stats`); raise on very large or busy clusters to reduce query load. |
 | `max_tables` | `500` | Raise if you monitor a database with more than 500 tables and want full coverage; lower to cap collection cost. This limit is separate from the `max_tables` option under `collect_schemas`, which defaults to `300`. |
 
