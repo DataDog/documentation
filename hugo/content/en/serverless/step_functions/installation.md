@@ -57,11 +57,7 @@ Then, to send your Step Functions logs to Datadog:
 
 4. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the {{< ui >}}Tags{{< /ui >}} section and add `env:<ENV_NAME>`, `service:<SERVICE_NAME>`, and `version:<VERSION>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name. The `version` tag defaults to `1.0`.
 
-5. To enable tracing, you have two options:
-   - **Per Step Function**: Add the `DD_TRACE_ENABLED` tag to each Step Function and set the value to `true`.
-   - **At the Forwarder level**: To enable tracing for all Step Functions connected to the Forwarder, you have two options:
-     - When creating the CloudFormation stack for the forwarder, set the `DdStepFunctionsTraceEnabled` parameter to `true`.
-     - After the forwarder is created, set the environment variable `DD_STEP_FUNCTIONS_TRACE_ENABLED` to `true`.
+5. Enable tracing. See [Enable tracing](#enable-tracing).
 
 [6]: /logs/guide/forwarder
 [11]: /serverless/step_functions/merge-step-functions-lambda
@@ -211,9 +207,60 @@ For additional settings, [see the documentation on GitHub][2].
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% svl-tracing-env %}}
+## Enable tracing
+
+Tracing is off by default. If you set up Step Functions with the Datadog CLI, the Serverless Framework plugin, or the AWS CDK construct, tracing is already enabled. Otherwise, enable tracing with one of the following methods. If you configure tracing in more than one place, see [Configuration precedence](#configuration-precedence).
+
+{{< tabs >}}
+{{% tab "Datadog UI" %}}
+Use the Datadog UI to set a default for all Step Functions in your organization. This method works with the Datadog Lambda Forwarder and with Amazon Data Firehose.
+
+1. In Datadog, go to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > {{< ui >}}Generate APM Traces{{< /ui >}}][1].
+2. In the {{< ui >}}AWS Step Functions{{< /ui >}} row, click {{< ui >}}Set Up{{< /ui >}}.
+   {{< img src="serverless/step_functions/generate_apm_traces.png" alt="The Generate APM Traces page in Logs Configuration. A table lists the AWS Step Functions integration with a Set Up button and a sampling rate of 100%." style="width:100%;" >}}
+3. In the {{< ui >}}Step Functions{{< /ui >}} panel, turn on {{< ui >}}Generate traces{{< /ui >}}.
+4. Optionally, use the {{< ui >}}Trace sampling rate{{< /ui >}} slider to set the percentage of Step Functions logs that Datadog converts into traces. The default is 100%.
+   {{< img src="serverless/step_functions/generate_apm_traces_setup.png" alt="The Step Functions panel on the Generate APM Traces page. The Generate traces toggle is on, the Trace sampling rate slider is set to 100%, and Cancel and Save buttons appear at the bottom." style="width:100%;" >}}
+5. Click {{< ui >}}Save{{< /ui >}}.
+
+Changes can take a few minutes to take effect.
+
+**Note**: To view this setting, you need the `APM Traces from Logs Config Read` permission. To change it, you need the `APM Traces from Logs Config Write` permission. The Datadog Standard and Admin [roles][2] have both permissions by default.
+
+[1]: https://app.datadoghq.com/logs/apm-traces#step_functions
+[2]: /account_management/rbac/
+{{% /tab %}}
+{{% tab "Step Function tags" %}}
+Add the `DD_TRACE_ENABLED` tag to each Step Function and set the value to `true`.
+
+This tag takes precedence over the configuration in Datadog. To turn off tracing for one Step Function when tracing is on for your organization, set the value to `false`.
+{{% /tab %}}
+{{% tab "Forwarder" %}}
+To enable tracing for all Step Functions connected to a Datadog Lambda Forwarder, use one of these options:
+
+- When you create the CloudFormation stack for the Forwarder, set the `DdStepFunctionsTraceEnabled` parameter to `true`.
+- After you create the Forwarder, set the `DD_STEP_FUNCTIONS_TRACE_ENABLED` environment variable on the Forwarder to `true`.
+{{% /tab %}}
+{{< /tabs >}}
+
+### Configuration precedence
+
+When tracing settings disagree, Datadog applies them in this order:
+
+1. **Step Function tags and Forwarder settings**: The `DD_TRACE_ENABLED` and `DD_TRACE_SAMPLE_RATE` tags on a Step Function. A Forwarder setting (`DD_STEP_FUNCTIONS_TRACE_ENABLED` or `DdStepFunctionsTraceEnabled`) has the same effect as a `DD_TRACE_ENABLED` tag on each Step Function connected to that Forwarder.
+2. **Datadog settings**: The {{< ui >}}Generate traces{{< /ui >}} toggle and {{< ui >}}Trace sampling rate{{< /ui >}} on the [{{< ui >}}Generate APM Traces{{< /ui >}}][17] page. These settings apply to all Step Functions in your organization that do not have the tags or Forwarder settings.
+
+If you do not configure tracing in any of these places, tracing is off. When you turn on {{< ui >}}Generate traces{{< /ui >}}, the sampling rate is 100% by default.
+
+For example, you turn on {{< ui >}}Generate traces{{< /ui >}} in Datadog and set {{< ui >}}Trace sampling rate{{< /ui >}} to 50%. You also have these Step Functions:
+
+- `order-processing` has the `DD_TRACE_ENABLED:false` tag. Datadog does not trace it.
+- `payment-processing` has the `DD_TRACE_SAMPLE_RATE:1.0` tag. Datadog traces all of its invocations.
+- `inventory-sync` has no tracing tags. Datadog traces 50% of its invocations.
 
 <div class="alert alert-info">Enhanced metrics are automatically enabled if you enable tracing. Therefore, if tracing is enabled, you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
+
+{{% svl-tracing-env %}}
 
 ## Additional options for instrumentation
 
@@ -224,7 +271,9 @@ See [Merge Step Functions traces with Lambda traces][11]. Ensure that you have a
 
 ### Sample traces
 
-To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.00 (no tracing of Step Function invocations) and 1.00 (trace all Step Function invocations). 
+To manage the sampling rate of traced Step Function invocations, add the `DD_TRACE_SAMPLE_RATE` tag to the Step Function. Set the value between 0.00 (no tracing of Step Function invocations) and 1.00 (trace all Step Function invocations).
+
+You can also set the sampling rate for all Step Functions on the [{{< ui >}}Generate APM Traces{{< /ui >}}][17] page. If a Step Function has the `DD_TRACE_SAMPLE_RATE` tag, the tag value takes precedence over the setting in Datadog.
 
 The dropped traces are not ingested into Datadog. 
 
@@ -257,3 +306,4 @@ If you cannot see your traces, see [Troubleshooting][5].
 [14]: /getting_started/integrations/aws/
 [15]: https://app.datadoghq.com/integrations/aws
 [16]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination
+[17]: https://app.datadoghq.com/logs/apm-traces#step_functions
