@@ -168,7 +168,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 ### Setup
 
-<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: MWAA default constraints pin older <code>apache-airflow-providers-openlineage</code> versions. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/">Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
+<div class="alert alert-info"><strong>If you are using Airflow 2.7.2, 2.8.1, or 2.9.2</strong>: The Apache Airflow constraints files for these versions pin older <code>apache-airflow-providers-openlineage</code> versions. These versions include known issues that can degrade the Data Observability experience. To upgrade to provider versions with fixes, see <a href="/data_observability/jobs_monitoring/airflow_mwaa_upgrade/">Upgrade OpenLineage provider on Amazon MWAA for Airflow 2.7.2, 2.8.1, and 2.9.2</a>.</div>
 
 To get started, follow the instructions below.
 
@@ -188,12 +188,13 @@ To get started, follow the instructions below.
    #!/bin/sh
    export OPENLINEAGE_URL=<DD_DATA_OBSERVABILITY_INTAKE>
    export OPENLINEAGE_API_KEY=<DD_API_KEY>
-   # AIRFLOW__OPENLINEAGE__NAMESPACE sets the 'env' tag value in Datadog. You can hardcode this to a different value
+   # AIRFLOW__OPENLINEAGE__NAMESPACE sets the 'env' tag value in Datadog. ${AIRFLOW_ENV_NAME} is your MWAA environment name. You can hardcode this to a different value
    export AIRFLOW__OPENLINEAGE__NAMESPACE=${AIRFLOW_ENV_NAME}
    ```
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
+   * If your startup script sets `AIRFLOW__OPENLINEAGE__TRANSPORT` (for example, from an earlier OpenLineage setup), it takes precedence over `OPENLINEAGE_URL` and `OPENLINEAGE_API_KEY`. Remove it, or set its URL and API key to the Datadog intake and API key for your site.
    * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLineage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
@@ -204,7 +205,7 @@ To get started, follow the instructions below.
 
    Check official documentation [configuration-openlineage][4] for other supported configurations of `openlineage` provider.
 
-   Amazon MWAA dependency resolution is controlled by MWAA constraints. If the newest compatible provider conflicts with MWAA defaults, follow the custom constraints pattern in the [MWAA upgrade guide][11].
+   If pip can't resolve the newest compatible provider against your other requirements, follow the constraints pattern in the [MWAA upgrade guide][11].
 
 1. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
@@ -231,6 +232,12 @@ In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list
 ### Troubleshooting
 
 Ensure your Execution role configured for your Amazon MWAA Environment has the right permissions to the `requirements.txt` and [Amazon MWAA start script][3]. This is required if you are managing your own Execution role and it's the first time you are adding those supporting files. See official guide [Amazon MWAA execution role][6] for details if needed.
+
+If DAGs run but no job runs appear in Datadog:
+
+* **Check that `requirements.txt` installed.** MWAA reports an environment update as successful even when pip fails to install `requirements.txt`. In that case, MWAA installs none of the packages in the file, including your own packages. In CloudWatch, open the `requirements_install_*` log stream in your environment's worker (or scheduler) log group, and search for `ERROR` lines, such as a pip `ResolutionImpossible` error. The usual cause is a pin that conflicts with the constraints in use. These are your constraints file or, depending on the Airflow version, constraints that MWAA applies when you don't specify any. To avoid common conflicts on Airflow 2.7.2, 2.8.1, and 2.9.2, see the [MWAA upgrade guide][11].
+* **Check the intake URL and API key.** If `OPENLINEAGE_URL` points to the wrong Datadog site or the API key is invalid, the intake rejects events with a `401` error. The OpenLineage listener doesn't log this at the default log level, and DAG runs still succeed. Verify that `OPENLINEAGE_URL` is `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}} and that the API key belongs to the Datadog organization on that site.
+* **Check for an `AIRFLOW__OPENLINEAGE__TRANSPORT` variable.** If your startup script sets it, it takes precedence over `OPENLINEAGE_URL` and `OPENLINEAGE_API_KEY`.
 
 Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3] for OpenLineage client and its child modules. This can be useful in troubleshooting during the configuration of `openlineage` provider.
 
