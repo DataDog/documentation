@@ -19,9 +19,9 @@ further_reading:
 - link: /opentelemetry/config/otlp_receiver
   tag: 설명서
   text: OTLP 수신기 활성화
-- link: /opentelemetry/setup/ddot_collector/install/
+- link: /opentelemetry/setup/ddot_collector/kubernetes/
   tag: 설명서
-  text: DDOT Collector 설치(권장)
+  text: Kubernetes에 DDOT Collector 설치(권장)
 - link: /opentelemetry/compatibility/
   tag: 설명서
   text: 기능 호환성
@@ -33,14 +33,14 @@ title: OpenTelemetry Collector 설정
 ---
 ## 개요 {#overview}
 
-OpenTelemetry Collector를 사용하여 Datadog으로 트레이스, 메트릭, 로그를 전송하세요. 이 페이지의 인라인 구성은 OpenTelemetry Collector Contrib 배포판 v0.161.0에서 테스트되었으며, 다음 주요 구성 요소를 포함하는 OTLP 기반 텔레메트리 파이프라인을 사용합니다:
+OpenTelemetry Collector를 사용하여 Datadog으로 트레이스, 메트릭, 로그를 전송하세요. 이 페이지의 인라인 구성은 OpenTelemetry Collector Contrib 배포판 v0.161.0에서 테스트되었으며, 다음 주요 구성 요소를 포함하는 OTLP 기반 텔레메트리 파이프라인을 사용합니다.
 
 - **OTLP HTTP 익스포터**: Datadog의 OTLP 수집 엔드포인트로 텔레메트리를 전송합니다.
-- **스팬 메트릭 커넥터**: 트레이스 데이터에서 RED(Rate, Error, Duration) 메트릭을 생성하여 Catalog 및 Service Page와 같은 APM 기능을 지원합니다.
+- **스팬 메트릭 커넥터**: 트레이스 데이터에서 RED(Rate, Error, Duration) 메트릭을 생성하여 Catalog 및 Service Page와 같은 APM 기능을 지원합니다. 이 메트릭을 계산하는 다른 방법은 [트레이스 메트릭][14]을 참조하세요.
 - **리소스 탐지 프로세서**: 호스트 및 클라우드 리소스 속성을 탐지하며, Datadog은 이러한 속성을 호스트 이름 확인 및 태깅에 사용합니다.
 - **Datadog 확장 프로그램**: Fleet Automation을 위해 컬렉터의 구성을 Datadog에 보고합니다. 텔레메트리 데이터는 내보내지 않습니다.
 
-직접 관리하는 컬렉터를 위한 권장 설정입니다. Datadog이 유지 관리하고 지원하는 컬렉터 배포판을 원하시면 대신 [Datadog Distribution of OTel Collector(DDOT)][12]를 사용하세요.
+직접 관리하는 컬렉터를 위한 권장 설정입니다. Datadog에서 빌드하고 지원하는 Collector를 원한다면 대신 [DDOT Collector][12]를 사용하세요.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="OpenTelemetry SDK는 OTLP 데이터를 OpenTelemetry Collector로 전송하고, 컬렉터는 이를 OTLP HTTP를 통해 Datadog으로 내보냅니다." style="width:100%;" >}}
 
@@ -57,7 +57,7 @@ OpenTelemetry Collector를 사용하여 Datadog으로 트레이스, 메트릭, �
 이 설정은 ECS Fargate, EKS Fargate 또는 AWS Lambda와 같은 서버리스 또는 작업 기반 컨테이너 런타임을 지원하지 않습니다. 지원되는 Datadog 기능은 **OTel SDK + Upstream OpenTelemetry Collector** 아래의 [기능 호환성 표][7]를 참조하세요.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 이상
-- [Datadog API key][2]
+- [Datadog API 키][2]
 - [Datadog 사이트][3](예: `datadoghq.com` 또는 `datadoghq.eu`)
 
 ## 설치 및 구성 {#install-and-configure}
@@ -255,7 +255,7 @@ service:
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-컬렉터를 실행합니다. `<YOUR_DD_SITE>`를 사용 중인 Datadog 사이트, {{< region-param key="dd_site" code="true" >}}으로 변경합니다.
+컬렉터를 실행합니다. `<YOUR_DD_SITE>`를 사용 중인 Datadog 사이트, {{< region-param key="dd_site" code="true" >}}값으로 바꾸세요.
 
 ```shell
 DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -473,9 +473,9 @@ docker run \
 
 [공식 OpenTelemetry Collector Helm 차트][102]를 사용하여 컬렉터를 DaemonSet으로 Kubernetes에 배포하세요. 예시 값 파일은 차트 v0.147.1에서 테스트되었으며, 컬렉터 버전을 v0.154.0으로 고정하고 필수 마운트, 환경 변수, RBAC 리소스 및 포트 노출을 설정합니다.
 
-클러스터 메트릭을 수집하거나 Kubernetes 리소스 데이터를 Kubernetes Explorer로 보내려면 DaemonSet과 함께 클러스터 컬렉터를 배포하세요. [Kubernetes 메트릭][13]을 참조하세요.
+클러스터 메트릭을 수집하거나 Kubernetes 리소스 데이터를 Kubernetes Explorer로 보내려면 DaemonSet과 함께 클러스터 컬렉터를 배포하세요. [Kubernetes 메트릭][110]을 참조하세요.
 
-1. Datadog API key를 사용하여 Kubernetes 시크릿을 생성합니다.
+1. Datadog API 키를 사용하여 Kubernetes 시크릿을 생성합니다.
 
    ```shell
    kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
@@ -518,6 +518,7 @@ docker run \
 [107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
 [108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[110]: /ko/opentelemetry/integrations/kubernetes_metrics/
 
 {{% /tab %}}
 
@@ -914,9 +915,9 @@ GKE Autopilot 및 AKS Automatic은 호스트 포트를 허용하지 않습니다
 
 애플리케이션의 OpenTelemetry 구성에서 `service.name`, `deployment.environment.name`, `service.version` 리소스 속성을 설정합니다. Datadog은 이러한 속성을 [Unified Service Tagging][4]에 매핑하여 트레이스, 메트릭 및 로그를 상호 연결합니다.
 
-## 설정 확인 {#verify-the-setup}
+## 설정 검증 {#verify-the-setup}
 
-사용자의 애플리케이션이 컬렉터로 텔레메트리를 전송한 후 Datadog에 데이터가 나타나는지 확인합니다.
+사용자의 애플리케이션이 컬렉터로 텔레메트리를 전송한 후 Datadog에 데이터가 나타나는지 검증합니다.
 
 1. Datadog에서 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}로 이동하여 `service.name`이 나타나는지 확인합니다.
 2. {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}를 열고 서비스를 검색합니다.
@@ -928,7 +929,7 @@ GKE Autopilot 및 AKS Automatic은 호스트 포트를 허용하지 않습니다
 
 ### 스팬 메트릭 커넥터 {#span-metrics-connector}
 
-`span_metrics` 커넥터는 트레이스 데이터에서 RED 메트릭을 생성합니다. 이러한 메트릭은 Catalog, Service Page 및 Resource Page를 포함한 APM 기능을 지원합니다. 이 커넥터는 Datadog이 트레이스에서 호스트 태그, 피어 서비스 및 작업 이름을 계산하도록 지원하는 차원으로 구성됩니다.
+`span_metrics` 커넥터는 트레이스 데이터에서 RED 메트릭을 생성합니다. 이러한 메트릭은 Catalog, Service Page 및 Resource Page를 포함한 APM 기능을 지원합니다. 이 커넥터는 Datadog이 트레이스에서 호스트 태그, 피어 서비스 및 작업 이름을 계산하도록 지원하는 차원으로 구성됩니다. 커넥터를 다른 트레이스 메트릭 소스와 비교하려면 [트레이스 메트릭][14]을 참조하세요.
 
 [컬렉터 구성 및 배포](#2-configure-and-deploy-the-collector)의 각 환경별 구성에는 전체 `span_metrics` 커넥터 블록이 포함되어 있습니다. Datadog이 필요한 호스트 태그, 피어 서비스, 작업 이름 및 리소스 이름을 파생할 수 있도록 구성을 조정할 때 모든 차원을 유지하세요.
 
@@ -968,7 +969,7 @@ GKE Autopilot 및 AKS Automatic은 호스트 포트를 허용하지 않습니다
 }
 ```
 
-<div class="alert alert-info">권장되는 OpenTelemetry Collector 구성에서는 <code>span_metrics</code> 커넥터를 사용하여 APM 보기를 구동하는 RED 메트릭을 생성합니다. 이 <code>trace_metrics.instrumentation_metrics_calc</code> 및 <code>raw_instrumentation_metrics_drop</code> 필드는 대신 HTTP 계측 메트릭에서 APM 트레이스 메트릭을 파생하는 설정을 위한 대체 구성을 지원합니다. 이때 <code>instrumentation_metrics_calc</code> 를 <code>span_metrics</code> 커넥터와 함께 활성화하지 마세요. 두 소스 모두에서 트레이스 메트릭을 계산하기 때문입니다.</div>
+<div class="alert alert-info"> <code>trace_metrics.instrumentation_metrics_calc</code> 및 <code>raw_instrumentation_metrics_drop</code> 필드는 HTTP 계측 메트릭을 APM 트레이스 메트릭의 기반으로 사용할지, Datadog이 이를 사용자 지정 메트릭으로 유지할지를 제어합니다. 이때 <code>instrumentation_metrics_calc</code> 를 <code>span_metrics</code> 커넥터와 함께 활성화하지 마세요. Datadog이 두 소스 모두에서 트레이스 메트릭을 계산하기 때문입니다. 이 필드들의 각 조합에 대해서는 <a href="/opentelemetry/integrations/trace_metrics/#use-http-metrics-from-the-sdk">트레이스 메트릭</a>을 참조하세요.</div>
 
 ### 트레이스 전달 커넥터 {#trace-forward-connector}
 
@@ -1015,6 +1016,7 @@ Datadog은 OTLP 데이터를 수집할 때 다음 제한을 적용합니다. 제
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /ko/opentelemetry/setup/ddot_collector/install/
+[12]: /ko/opentelemetry/setup/ddot_collector/
 [13]: /ko/opentelemetry/integrations/kubernetes_metrics/
+[14]: /ko/opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

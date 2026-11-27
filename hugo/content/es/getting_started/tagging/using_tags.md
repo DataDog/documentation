@@ -83,7 +83,7 @@ A continuación, se actualiza el editor para incluir una etiqueta (`region:eastu
 
 Finalmente, el segundo campo vacío (el cuadro de texto {{< ui >}}avg by{{< /ui >}}) se utiliza para mostrar una línea de series temporales para cada `host`. Se muestra el uso de CPU de cada servidor de la región US East.
 
-{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Editor de gráficos de series temporales filtrado por 'region:us-east-1' y agrupado por 'host'" style="width:75%;">}}
+{{< img src="tagging/using_tags/dashboard_timeseries_graph_editor_sumby_tag.png" alt="Editor de gráficos de series temporales filtrado por 'region:us-east-1' y agrupado por 'servidor'" style="width:75%;">}}
 
 Si es necesario, añada etiquetas adicionales para delimitar aún más el contexto; por ejemplo, servidores en `region:eastus` y `env:production`. Las etiquetas se pueden utilizar en todo Datadog y aplicarse a todos los elementos principales (métricas, trazas y registros).
 
@@ -97,7 +97,7 @@ Para filtrar el [Mapa de servidores][4], la [Lista de infraestructura][5], los [
 {{< tabs >}}
 {{% tab "Mapa de servidores" %}}
 
-En esta sección, utilice etiquetas para filtrar o agrupar hosts:
+En esta sección, utilice etiquetas para filtrar o agrupar servidores:
 
 {{< img src="tagging/using_tags/hostmaptags.png" alt="Etiquetas del mapa de servidores" style="width:80%;">}}
 
@@ -248,9 +248,9 @@ Para excluir etiquetas, utilice `</>` para editar el texto y luego añada la eti
 
 ## Logs {#logs}
 
-Para Logs [Search][10], [Analytics][11], [Patterns][12] y [Live Tail][13], filtre los logs con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`, por ejemplo: `service:coffee-house`. Para búsquedas avanzadas, consulte [Search Logs][10].
+Para Logs [Search][10], [Analytics][11], [Patterns][12] y [Live Tail][13], filtre los registros con etiquetas utilizando la barra de búsqueda o las casillas de verificación de facetas. El formato de la barra de búsqueda es `<KEY>:<VALUE>`, por ejemplo: `service:coffee-house`. Para búsquedas avanzadas, consulte [Search Logs][10].
 
-Además, las etiquetas se utilizan para filtrar un [Pipeline][14] de logs. Por ejemplo, si solo desea que los logs del servicio coffee-house pasen por el pipeline, añada la etiqueta `service:coffee-house` al campo de filtro.
+Además, las etiquetas se utilizan para filtrar un [Pipeline][14] de registros. Por ejemplo, si solo desea que los registros del servicio coffee-house pasen por el pipeline, añada la etiqueta `service:coffee-house` al campo de filtro.
 
 ## RUM y Session Replay {#rum-session-replay}
 
@@ -355,7 +355,7 @@ Para filtrar las ejecuciones de pipelines por etiquetas, use la barra de búsque
 
 ## DORA Metrics {#dora-metrics}
 
-El [DORA Metrics Explorer][33] muestra sus agregaciones de DORA Metrics. Para filtrar las métricas y agregaciones mostradas por etiquetas, use el botón {{< ui >}}\+ Filter{{< /ui >}} para agregar facetas para las etiquetas existentes. Para realizar consultas con etiquetas en gráficos y tableros, consulte [DORA Metrics Create Custom Dashboards][34].
+El [DORA Metrics Explorer][33] muestra sus agregaciones de DORA Metrics. Para filtrar las métricas y agregaciones mostradas por etiquetas, use el botón {{< ui >}}\+ Filter{{< /ui >}} para agregar facetas para las etiquetas existentes. Para realizar consultas con etiquetas en gráficos y paneles, consulte [DORA Metrics Create Custom Dashboards][34].
 
 {{< img src="/delivery_performance/dora_metrics/dora_ui_3.png" alt="Una descripción general de los cálculos de DORA Metrics filtrados por la etiqueta personalizada de idioma" style="width:80%;">}}
 
@@ -406,7 +406,7 @@ Consulte esta lista para obtener enlaces a las secciones respectivas:
 [20]: /es/api/v1/hosts/
 [21]: /es/api/v1/aws-integration/
 [22]: /es/api/v1/gcp-integration/
-[23]: /es/api/v1/metrics/#query-timeseries-points
+[23]: /es/api/latest/metrics/#query-timeseries-points
 [24]: /es/api/v1/monitors/#get-all-monitor-details
 [25]: /es/api/v1/monitors/#mute-a-monitor
 [26]: /es/api/v1/dashboards/#create-a-new-dashboard

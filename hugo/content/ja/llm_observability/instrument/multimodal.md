@@ -10,6 +10,9 @@ further_reading:
 - link: /llm_observability/instrument/api/
   tag: ドキュメント
   text: Agent Observability HTTP API リファレンス
+- link: https://www.datadoghq.com/blog/agent-observability-voice-agent/
+  tag: ブログ
+  text: Datadog Agent Observability で音声エージェントをトレースする
 title: マルチモーダルサポート
 ---
 ## 概要 {#overview}
@@ -61,8 +64,11 @@ Nova 2 Sonic および ElevenLabs には、`ddtrace` 4.17以降が必要です�
 | OpenAI チャット補完 | 入力 `input_audio` コンテンツおよび出力音声 (モデルの音声トランスクリプトを含む)| v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI エージェント | OpenAI チャット補完形式の入力および出力音声 | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Realtime API | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | v6: >= 6.17.0; v5: >= 5.128.0 |
+| OpenAI Agents Realtime SDK | WebSocket および SIP サイドバンド接続のターンごとの入力および出力音声、トランスクリプト、トークン使用量、ツール呼び出し | v6: >= 6.25.0、v5: >= 5.136.0 |
 | Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | ターンごとの入力および出力音声、トランスクリプト、トークン使用量、およびツール呼び出し | v6: >= 6.22.0; v5: >= 5.133.0 |
-| ElevenLabs Agents (WebSocket) | 会話の入力および出力音声、トランスクリプト、およびクライアントツール呼び出し | 近日公開 |
+| ElevenLabs Agents (WebSocket) | 会話の入力および出力音声、トランスクリプト、およびクライアントツール呼び出し | v6: >= 6.25.0、v5: >= 5.136.0 |
+
+OpenAI Agents Realtime SDK のインスツルメンテーションには、`@openai/agents-realtime` 0.20.0 以降が必要です。SIP サイドバンドに対してトレーサーが実行する音声取得を無効にするには、`DD_OPENAI_REALTIME_SIDEBAND_AUDIO_RETRIEVAL_ENABLED=false` を設定してください。
 
 ストリーミングされたチャット補完内の音声はキャプチャされません。
 
@@ -268,7 +274,7 @@ voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'o
 - **型指定されたメディアフィールドを使用します。**メッセージの `content` に base64 文字列を埋め込むのではなく、`image_parts` と `audio_parts` を使用してメディアを添付します。型指定されたフィールドのみがトレースビューでレンダリングされます。
 - **音声とともにトランスクリプトを添付します。**メッセージの `content` をターンのトランスクリプトに設定します。これにより、音声が再生される前であってもスパンが評価器により読み取り可能、検索可能、使用可能になります。
 
-## 参考資料{#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

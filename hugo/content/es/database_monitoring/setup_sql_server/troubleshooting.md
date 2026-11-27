@@ -1,31 +1,63 @@
 ---
-description: Soluciones para los problemas de configuración de Database Monitoring
-  para SQL Server
-title: Solucionar problemas de configuración de DBM (Database Monitoring) para SQL
+description: Solucione problemas de la configuración de Database Monitoring para SQL
   Server
+title: Solución de problemas de la configuración de DBM para SQL Server
 ---
+Esta página detalla problemas comunes con la configuración y el uso de Database Monitoring con SQL Server y cómo resolverlos. Datadog recomienda mantenerse en la versión estable más reciente del Agent y seguir la [documentación de configuración][1] más reciente, ya que puede cambiar con las versiones del Agent.
 
-En esta página se detallan los problemas más comunes relacionados con la configuración y el uso de Database Monitoring con SQL Server y se explica cómo resolverlos. Datadog recomienda utilizar la última versión estable del Agent y seguir la última [documentación de configuración][1], ya que puede cambiar según las versiones del Agent.
+## Valide su configuración con el comando diagnose del Agent {#agent-diagnose}
 
-## Diagnóstico de problemas comunes de conexión {#common-connection-issues}
+A partir del Agent v7.81.0, la integración de SQL Server valida su configuración a través del [comando diagnose][15] del Agent. Para cada instancia configurada, el comando verifica si:
 
-### SQL Server no se puede conectar 'Login Failed for user' {#login-failed-for-user}
+- El Agent puede conectarse a SQL Server
+- El controlador ODBC configurado está instalado
+- La versión de SQL Server es compatible
+- El Agent tiene los permisos que requiere Database Monitoring, incluidos `VIEW SERVER STATE`, `CONNECT ANY DATABASE`, `VIEW ANY DEFINITION`, acceso a cada base de datos monitoreada y `SELECT` en `msdb`
 
-El Agent puede conectarse a una instancia de SQL Server de dos maneras:
+Ejecute la suite de diagnóstico `check-datadog`:
 
-1. [Autenticación de Windows][2] (sólo disponible en hosts de Windows)
+{{< tabs >}}
+{{% tab "Windows" %}}
+
+Desde un símbolo del sistema de PowerShell con privilegios elevados:
+
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" diagnose --include check-datadog
+```
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+```shell
+sudo datadog-agent diagnose --include check-datadog
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+De forma predeterminada, el comando ejecuta los diagnósticos dentro del servicio del Agent en ejecución, como la cuenta de servicio del Agent. El comando `agent.exe check sqlserver` se conecta como el usuario que inició sesión, por lo que el comando diagnose es la forma recomendada de probar la autenticación de Windows. Para la configuración de la autenticación de Windows, consulte la sección [Login Failed for user](#login-failed-for-user).
+
+**Nota**: Si el comando no puede comunicarse con el servicio del Agent, imprime `Error running diagnose in Agent process` y ejecuta los diagnósticos como el usuario actual. La bandera `--local` también los ejecuta como el usuario actual. En ambos casos, los resultados no reflejan el acceso de la cuenta de servicio del Agent.
+
+## Diagnóstico de problemas de conexión comunes {#common-connection-issues}
+
+### SQL Server no puede conectarse: 'Login Failed for user' {#login-failed-for-user}
+
+Hay dos formas en las que el Agent puede conectarse a una instancia de SQL Server:
+
+1. [Autenticación de Windows][2] (solo disponible en servidores Windows)
 
 2. [Autenticación de SQL Server][3]
 
-Windows es el modo de autenticación por defecto y es más seguro que la autenticación de SQL Server. Cuando se utiliza la autenticación de Windows, se pueden crear grupos de Windows a nivel de dominio y se puede crear un inicio de sesión en SQL Server para todo el grupo. Para utilizar la autenticación de Windows debes:
+La autenticación de Windows es el modo de autenticación predeterminado y es más segura que la autenticación de SQL Server. Al usar la autenticación de Windows, se pueden crear grupos de Windows a nivel de dominio y se puede crear un inicio de sesión en SQL Server para todo el grupo. Para usar la autenticación de Windows, usted debe:
 
-1. Utilizar la cuenta de servicio creada en el momento de [instalación del Agent][4] y asegurarte de que esta cuenta tiene el acceso adecuado a SQL Server.
+1. Use la cuenta de servicio creada al momento de la [instalación del Agent][4] y asegúrese de que esta cuenta tenga el acceso adecuado a SQL Server.
 
-2. Configurar `connection_string: "Trusted_Connection=yes"` y omitir los campos `username` y `password`. El atributo de conexión `Trusted_Connection=yes` indica al controlador de bases de datos OLE para SQL Server que debe utilizar la autenticación de Windows para validar el inicio de sesión.
+2. Establezca `connection_string: "Trusted_Connection=yes"` y omita los campos `username` y `password`. El atributo de conexión `Trusted_Connection=yes` indica al controlador OLE DB para SQL Server que utilice la autenticación de Windows para la validación del inicio de sesión.
 
-Las autenticaciones de SQL Server no se basan en cuentas de usuario de Windows, sino que se crean en la instancia y se almacenan en el propio SQL Server. La autenticación de SQL requiere definir el `username` y el `password` en la configuración de la instancia de SQL Server para la conexión.
+La autenticación de SQL Server no se basa en cuentas de usuario de Windows; las cuentas se crean en la instancia y se almacenan en SQL Server. La autenticación de SQL requiere configurar `username` y `password` en la configuración de la instancia de SQL Server para conectarse.
 
-Si se produce un error de inicio de sesión al conectarse, es importante comprobar primero que puedes acceder a la instancia como usuario del Datadog Agent. Una forma sencilla de hacerlo es a través de una utilidad de línea de comandos como `sqlcmd`.
+Si recibe un error de inicio de sesión al conectarse, es importante verificar primero que puede iniciar sesión en la instancia como el usuario del Agent de Datadog. Una forma sencilla de hacerlo es mediante una utilidad de línea de comandos como `sqlcmd`.
 
 Por ejemplo:
 
@@ -38,15 +70,15 @@ sqlcmd -S <INSTANCE_ENDPOINT> -U datadog -P <DATADOG_PASSWORD> -d master
 sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 ```
 
-Si el usuario `datadog` no puede acceder a la instancia de SQL Server, asegúrate de que el usuario ha sido creado y se le han dado los permisos adecuados de acuerdo con la [documentación de configuración][1].
+Si el usuario `datadog` no puede iniciar sesión en la instancia de SQL Server, verifique que el usuario exista. Luego, verifique que tenga los permisos enumerados en la [documentación de configuración][1]. Para probar la conexión y los permisos como la cuenta de servicio del Agent, ejecute el comando diagnose del Agent descrito en la sección [Valide su configuración con el comando diagnose del Agent](#agent-diagnose). La autenticación de Windows es compatible cuando el Agent se conecta a una instancia de SQL Server que se ejecuta en el mismo servidor que el Agent.
 
-Microsoft también ofrece un documento útil para solucionar este tipo de errores, que puedes [consultar aquí][5].
+Microsoft también proporciona un documento útil sobre la solución de problemas de este tipo de errores, que puede [consultarse aquí][5].
 
 ### Error de conexión TCP de SQL Server {#tcp-connection-error}
 
-Los problemas de conexión TCP son comunes cuando hay un error de configuración con el Agent. Los mensajes de error proporcionados por el controlador no siempre son claros.
+Los problemas de conexión TCP son comunes cuando hay una configuración incorrecta del Agent. Los mensajes de error proporcionados por el controlador no siempre son claros.
 
-Por ejemplo, el siguiente error se debe a que ha fallado la conexión TCP:
+Por ejemplo, el siguiente error se debe a que la conexión TCP falló:
 
 ```bash
 TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
@@ -54,25 +86,25 @@ TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could n
 
 Algunos errores comunes son:
 
-**"Login failed for user"**: significa que el Agent ha conseguido establecer una conexión con el host, pero el inicio de sesión ha sido rechazado por alguna razón.
+**"login failed for user"**: esto significa que el Agent logró establecer una conexión con el servidor, pero el inicio de sesión fue rechazado por alguna razón.
 
-Para solucionar este problema:
+Para solucionar el problema:
 
-1. Comprueba las credenciales de inicio de sesión del Agent.
+1. Verifique las credenciales de inicio de sesión del Agent
 
-2. Intenta iniciar sesión con esas credenciales manualmente utilizando sqlcmd. Por ejemplo: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`.
+2. Intente iniciar sesión con esas credenciales manualmente usando sqlcmd. Por ejemplo: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-**"Could not open database requested for login"**: este error aparece debido a problemas de red o debido a una base de datos desconocida.
+**"could not open database requested for login"**: este error aparece debido a problemas de red o a una base de datos desconocida.
 
-Para solucionar este problema:
+Para solucionar el problema:
 
-1. Comprueba la conexión TCP del Agent al host ejecutando `telnet {host} {port}` para asegurarte de que existe una conectividad de red del Agent a la base de datos.
+1. Verifique la conexión TCP desde el Agent al servidor ejecutando `telnet {host} {port}` para asegurarse de que haya conectividad de red desde el Agent a la base de datos.
 
-2. Intenta iniciar sesión manualmente utilizando sqlcmd y observa si existe algún error en la base de datos configurada. Por ejemplo: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`.
+2. Intente iniciar sesión manualmente usando sqlcmd y vea si hay un problema con la base de datos configurada. Por ejemplo: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-#### Debido a "Atributo de cadena de conexión no válido"
+####  Debido a "Invalid connection string attribute" {#due-to-invalid-connection-string-attribute}
 
-Los siguientes proveedores ADO son compatibles con Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
+Los siguientes proveedores ADO son compatibles en Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
 Los proveedores `SQLOLEDB` y `SQLNCLI11` podrían mostrar el mensaje de error `Invalid connection string attribute` debido a varios problemas. Por ejemplo:
 
@@ -85,47 +117,48 @@ OperationalError(com_error(-2147352567, 'Exception occurred.',
 'Error opening connection to "ConnectRetryCount=2;Provider=SQLOLEDB;Data Source=foo.com,1433;Initial Catalog=master;User ID=datadog;Password=******;"')
 ```
 
-Este mismo error se muestra independientemente del motivo del fallo (por ejemplo, debido a un nombre de host desconocido, a que la conexión TCP no se ha establecido, a que las credenciales de acceso no son válidas o a que la base de datos es desconocida).
+Este mismo error se muestra independientemente del motivo del fallo (por ejemplo, debido a un nombre de servidor desconocido, a que la conexión TCP no se estableció, a credenciales de inicio de sesión no válidas o a una base de datos desconocida).
 
-Busca los códigos de error HResult en el mensaje de error. Estos son ejemplos de códigos conocidos:
+Busque en el mensaje de error los códigos de error HResult. Estos son ejemplos de códigos conocidos:
 
-`-2147217843` **"Login failed for user"**: significa que el Agent ha conseguido establecer una conexión con el host, pero el inicio de sesión ha sido rechazado por algún motivo.
+`-2147217843` **"login failed for user"**: esto significa que el Agent logró establecer una conexión con el servidor, pero el inicio de sesión fue rechazado por alguna razón.
 
-`-2147467259` **"Could not open database requested for login"**: este error aparece debido a problemas de red o debido a una base de datos desconocida.
+`-2147467259` **"could not open database requested for login"**: este error aparece debido a problemas de red o a una base de datos desconocida.
 
-Si ninguno de los dos pasos te ayuda a resolver el problema o si el código de error que ves no aparece en la lista, Datadog te recomienda utilizar el controlador `MSOLEDBSQL` o el `Microsoft ODBC Driver for SQL Server`. Los controladores proporcionan mensajes de error más detallados, que pueden ayudarte a determinar por qué está fallando la conexión.
+Si ninguno de los pasos ayuda con el problema, o si el código de error que ve no aparece en la lista, Datadog recomienda usar el controlador `MSOLEDBSQL` o el `Microsoft ODBC Driver for SQL Server`. Los controladores proporcionan mensajes de error más detallados, lo que puede ayudar a solucionar los problemas por los que falla la conexión.
 
 ### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
 
-Algunas veces, este error puede deberse a que no se ha configurado correctamente el campo `host`. Para la integración, configura el campo `host` con la siguiente sintaxis: `host:server,port`.
+Este error a veces puede ser el resultado de no configurar correctamente el campo `host`. Para la integración, configure el campo `host` con la siguiente sintaxis: `host:server,port`.
 
-Por ejemplo, si has configurado `host` de esta manera:
+Por ejemplo, si ha configurado `host` de esta manera:
 
 ```
 host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com
 ```
-Debes añadir el puerto y configurarlo como se indica a continuación:
+Debe agregar el puerto y, en su lugar, configurarlo de la siguiente manera:
+
 ```
 host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 ```
 
-### Proveedor SSL: La cadena de certificados ha sido emitida por una autoridad que no es de confianza {#certificate-verify-fail}
+### SSL Provider: The certificate chain was issued by an authority that is not trusted {#certificate-verify-fail}
 
-#### Controlador de bases de datos OLE Microsoft 2019
+#### Microsoft OLE DB Driver 2019 {#microsoft-ole-db-driver-2019}
 
-Este error es común después de actualizar al controlador [`MSOLEDBSQL` 2019][6] debido a los [cambios de última hora][7] que se han introducido. En la última versión del controlador, todas las conexiones a la instancia de SQL están cifradas por defecto.
+Este error es común después de actualizar al controlador [`MSOLEDBSQL` 2019][6] debido a los [cambios importantes][7] que se introdujeron. En la versión más reciente del controlador, todas las conexiones a la instancia de SQL están cifradas de forma predeterminada.
 
-Si estás utilizando la última versión del controlador de bases de datos OLE Microsoft para SQL Server e intentas conectarte a una instancia de SQL Server que requiere conexiones cifradas, puedes utilizar una de las siguientes soluciones alternativas:
+Si está utilizando la versión más reciente de Microsoft OLE DB Driver for SQL Server e intenta conectarse a una instancia de SQL Server que requiere conexiones cifradas, puede utilizar una de las siguientes soluciones alternativas:
 
-1. Si utilizas un certificado autofirmado y el parámetro Forzar cifrado en el servidor (`rds.force_ssl=1` en AWS) para garantizar que los clientes se conectan mediante cifrado:
+1. Si está utilizando un certificado autofirmado y la configuración Force Encryption en el servidor (`rds.force_ssl=1` en AWS) para garantizar que los clientes se conecten con cifrado:
 
-   - Cambia a un certificado de confianza como parte de la cadena de confianza del cliente.
-   - Añade el certificado autofirmado como certificado de confianza en el cliente.
-   - Añade `Trust Server Certificate=True;` a la cadena de conexión.
+   - Cambie a un certificado que sea de confianza como parte de la cadena de confianza del cliente.
+   - Agregue el certificado autofirmado como un certificado de confianza en el cliente.
+   - Agregue `Trust Server Certificate=True;` a la cadena de conexión.
 
-Este procedimiento se describe con más detalle [en la documentación de Microsoft][7].
+Esto se describe con más detalle [en la documentación de Microsoft][7]
 
-2. Si tu instancia de SQL Server no requiere cifrado para conectarse (`rds.force_ssl=0` en AWS), entonces actualiza la cadena de conexión para incluir `Use Encryption for Data=False;`. Por ejemplo:
+2. Si su instancia de SQL Server no requiere cifrado para conectarse (`rds.force_ssl=0` en AWS), actualice la cadena de conexión para incluir `Use Encryption for Data=False;`. Por ejemplo:
 
   ```yaml
   instances:
@@ -135,7 +168,7 @@ Este procedimiento se describe con más detalle [en la documentación de Microso
       adoprovider: MSOLEDBSQL19
   ```
 
-3. Instala la [versión 2018 del controlador MSOLEDBSQL][8], que no utiliza cifrado por defecto. Luego de instalar el controlador, actualiza `adoprovider` a `MSOLEDBSQL`. Por ejemplo:
+3. Instale la [versión 2018 del controlador MSOLEDBSQL][8], que no utiliza cifrado de forma predeterminada. Después de instalar el controlador, actualice `adoprovider` a `MSOLEDBSQL`. Por ejemplo:
 
   ```yaml
   instances:
@@ -145,9 +178,9 @@ Este procedimiento se describe con más detalle [en la documentación de Microso
       adoprovider: MSOLEDBSQL
   ```
 
-#### Otras versiones de controladores de bases de datos OLE y ODBC de Microsoft
+#### Otras versiones de controladores Microsoft OLE DB y ODBC {#other-microsoft-ole-db-and-odbc-driver-versions}
 
-Si utiliza un controlador de bases de datos OLE distinto de `MSOLEDBSQL` 2019 o de los controladores ODBC, este error puede resolverse configurando `TrustServerCertificate=yes` en la cadena de conexión. Por ejemplo, para el controlador `ODBC`:
+Si está utilizando un controlador OLE DB distinto de `MSOLEDBSQL` 2019 o controladores ODBC, este error puede resolverse configurando `TrustServerCertificate=yes` en la cadena de conexión. Por ejemplo, para el controlador `ODBC`:
 
   ```yaml
   # this example uses SQL Server authentication
@@ -160,41 +193,43 @@ Si utiliza un controlador de bases de datos OLE distinto de `MSOLEDBSQL` 2019 o 
       driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
-### SQL Server no puede conectarse 'SSL Security error (18)' {#ssl-security-error}
+### SQL Server no puede conectarse: 'SSL Security error (18)' {#ssl-security-error}
 
-Se trata de un problema conocido para versiones antiguas del controlador ODBC de SQL Server. Puedes comprobar qué versión del controlador utiliza el Agent consultando la cadena de conexión en el mensaje de error.
+Este es un problema conocido en versiones anteriores del controlador ODBC de SQL Server. Puede verificar qué versión del controlador está utilizando el Agent observando la cadena de conexión en el mensaje de error.
 
-Por ejemplo, si ves `Provider=SQL Server` en la cadena de conexión del mensaje de error, la actualización a una versión más reciente del controlador ODBC solucionará el error.
+Por ejemplo, si ve `Provider=SQL Server` en la cadena de conexión del mensaje de error, actualizar a una versión más reciente del controlador ODBC solucionará el error.
 
-Este problema se describe con más detalles en esta [entrada del blog de Microsoft][9]
+Este problema se describe con más detalle en esta [publicación del blog de Microsoft][9]
 
 ### Cadena de conexión vacía {#empty-connection-string}
 
-El check de SQL Server de Datadog se basa en la librería Python `adodbapi`, que tiene algunas limitaciones en cuanto a los caracteres que puede utilizar para establecer una cadena de conexión con un SQL Server. Si tu Agent tiene problemas para conectarse a tu SQL Server y si encuentras errores similares a los siguientes en los logs del recopilador de tu Agent, es posible que tu `sqlserver.yaml` incluya algunos caracteres que causan problemas con `adodbapi`.
+La comprobación de SQL Server de Datadog depende de la biblioteca de Python `adodbapi`, la cual tiene algunas limitaciones en los caracteres que puede utilizar al crear una cadena de conexión a un servidor SQL Server. Si su Agent tiene problemas para conectarse a su SQL Server y encuentra errores similares a los siguientes en el archivo collector.logs de su Agent, es posible que `sqlserver.yaml` incluya caracteres que causen problemas con `adodbapi`.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
 
-Por el momento, el único carácter conocido que causa este problema específico de conectividad es el carácter `%`. Si necesitas utilizar el carácter `%` en tu archivo `sqlserver.yaml` (por ejemplo, si tu contraseña de usuario de SQL Server de Datadog incluye un `%`), debes escapar este carácter incluyendo un doble `%%` en lugar de cada `%` simple.
+Por el momento, el único carácter que se sabe que causa este problema de conectividad específico es el carácter `%`. Si necesita utilizar el carácter `%` en su archivo `sqlserver.yaml` (por ejemplo, si la contraseña de usuario de Datadog SQL Server incluye un `%`), debe escapar ese carácter incluyendo un `%%` doble en lugar de cada `%` individual.
 
 ## Diagnóstico de problemas comunes del controlador de SQL Server {#common-driver-issues}
 
-### No se ha encontrado el nombre de la fuente de datos y no se ha especificado ningún controlador por defecto {#data-source-name-not-found}
+### Nombre de origen de datos no encontrado y no se especificó un controlador predeterminado {#data-source-name-not-found}
 
-Este es un error comúnmente visto en Linux cuando se utiliza la configuración por defecto para el controlador ODBC. Esto puede ocurrir debido a que el [DSN][10], que se configura para el controlador en el archivo `/etc/odbcinst.ini`, no coincide con el nombre del controlador configurado en tu Agent.
+Este es un error común que se observa en Linux al utilizar la configuración predeterminada para el controlador ODBC. Esto puede suceder porque el [DSN][10] configurado para su controlador en el archivo `/etc/odbcinst.ini` no coincide con el nombre del controlador configurado en su configuración del Agent.
 
-Por ejemplo, si quieres utilizar el controlador ODBC predeterminado para el Agent (`{ODBC Driver 18 for SQL Server}`), la configuración de tu instancia debe contener lo siguiente:
+Por ejemplo, si desea utilizar el controlador ODBC predeterminado para el Agent (`{ODBC Driver 18 for SQL Server}`), la configuración de su instancia debe contener lo siguiente:
 
 ```yaml
   connector: odbc
 ```
 
-Cuando el Agent se inicia e intenta establecer una conexión con tu instancia de SQL Server, busca el archivo `/etc/odbcinst.ini` para encontrar la ruta a los binarios del controlador.
+Cuando el Agent se inicia e intenta establecer una conexión con su instancia de SQL Server, busca el archivo `/etc/odbcinst.ini` para encontrar la ruta a los binarios del controlador.
 
 Por ejemplo, este archivo `/etc/odbcinst.ini` configura el controlador:
 
-    ```text
+    
+
+```text
     $ cat /etc/odbcinst.ini
     [ODBC Driver 18 for SQL Server]
     Description=Microsoft ODBC Driver 18 for SQL Server
@@ -202,11 +237,13 @@ Por ejemplo, este archivo `/etc/odbcinst.ini` configura el controlador:
     UsageCount=1
     ```
 
-El DSN en el ejemplo anterior es `[ODBC Driver 18 for SQL Server]`, que coincide con el nombre del controlador por defecto que está utilizando el Agent. Si el DSN de tu controlador no coincide con el nombre del controlador que está utilizando el Agent, obtendrás el error `Data source not found`.
+El DSN en el ejemplo anterior es `[ODBC Driver 18 for SQL Server]`, que coincide con el nombre del controlador predeterminado que está utilizando el Agent. Si el DSN de su controlador no coincide con el nombre del controlador que está utilizando el Agent, obtendrá el error `Data source not found`.
 
-Es posible definir `dsn` en la configuración de tu instancia para que coincida con lo definido en el archivo `/etc/odbcinst.ini`. Por ejemplo:
+Es posible configurar el `dsn` en la configuración de su instancia para que coincida con lo que está configurado en su archivo `/etc/odbcinst.ini`. Por ejemplo:
 
-    ```text
+    
+
+```text
     $ cat /etc/odbcinst.ini
     [Custom]
     Description=Microsoft ODBC Driver 18 for SQL Server
@@ -214,7 +251,7 @@ Es posible definir `dsn` en la configuración de tu instancia para que coincida 
     UsageCount=1
     ```
 
-En la configuración de tu instancia, deberías definir el campo `dsn`:
+En la configuración de su instancia, usted configuraría entonces el campo `dsn`:
 
 ```yaml
   connector: odbc
@@ -223,29 +260,29 @@ En la configuración de tu instancia, deberías definir el campo `dsn`:
 
 ### Proveedor o controlador no encontrado {#provider-not-found}
 
-Este mensaje de error puede variar de un controlador a otro, pero normalmente tiene el siguiente aspecto en `ODBC`:
+Este mensaje de error puede variar en su redacción según los diferentes controladores, pero normalmente se ve de la siguiente manera para `ODBC`:
 
 1. `Can't open lib .* file not found`
 2. `Data source name not found.* and no default driver specified`
 
-Y para los proveedores de `MSOLEDBSQL`, el mensaje de error tiene el siguiente aspecto:
+Y para los proveedores `MSOLEDBSQL` el mensaje de error se ve así:
 
   ```text
   Provider cannot be found. It may not be properly installed.
   ```
 
-Esto significa que el controlador o el proveedor no está instalado correctamente en el host en que se ejecuta el Agent. Debes asegurarte de que has seguido todas las instrucciones de instalación del controlador que has decidido utilizar.
+Esto significa que el controlador o proveedor no está instalado correctamente en el servidor donde se está ejecutando el Agent. Debe asegurarse de haber seguido todas las instrucciones de instalación para el controlador que ha elegido utilizar.
 
-Es posible que el Agent no encuentre el controlador. Esto sucede con mayor frecuencia en los controladores ODBC en Linux. Para obtener más instrucciones sobre cómo instalar el controlador ODBC en Linux, consulta la sección [conectarse a SQL Server en un host Linux](#connecting-to-sql-server-on-a-linux-host).
+Es posible que el Agent no esté encontrando el controlador. Esto es más común con los controladores ODBC en Linux. Consulte la sección [conectarse a SQL Server en un servidor Linux](#connecting-to-sql-server-on-a-linux-host) para obtener más instrucciones sobre cómo instalar el controlador ODBC en Linux.
 
-Para obtener ayuda al elegir un controlador, consulta la sección [elegir un controlador de SQL Server](#picking-a-sql-server-driver) para saber cómo configurar correctamente tu controlador con el Agent.
+Para obtener ayuda para elegir un controlador, consulte la sección [elegir un controlador de SQL Server](#picking-a-sql-server-driver) sobre cómo configurar correctamente el controlador con el Agent.
 
-### Conexión a SQL Server en un host de Linux
+### Conectarse a SQL Server en un servidor Linux {#connecting-to-sql-server-on-a-linux-host}
 
-Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host de Linux:
+Para conectar SQL Server (ya sea alojado en Linux o Windows) a un servidor Linux:
 
-1. Instala el [controlador ODBC de Microsoft][11] para tu distribución Linux.
-   Si no sabes cuál es el nombre del controlador que debes utilizar, puede encontrarlo entre paréntesis en la parte superior de `/etc/odbcinst.ini`.
+1. Instale el [Microsoft ODBC Driver][11] para su distribución de Linux.
+   Si no está seguro del nombre del controlador que debe usar, puede encontrarlo entre corchetes en la parte superior de `/etc/odbcinst.ini`.
 
     ```text
     $ cat /etc/odbcinst.ini
@@ -254,13 +291,13 @@ Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host de Linux:
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
     UsageCount=1
     ```
-2. Copia los archivos `odbc.ini` y `odbcinst.ini` en la carpeta `/opt/datadog-agent/embedded/etc`.
-3. Si es necesario, instala el módulo pyodbc. Puedes hacerlo ejecutando pip install pyodbc en el entorno Python de tu Agent. Por ejemplo:
+2. Copie los archivos `odbc.ini` y `odbcinst.ini` en la carpeta `/opt/datadog-agent/embedded/etc`.
+3. Si es necesario, instale el módulo pyodbc. Esto se puede hacer ejecutando pip install pyodbc dentro del entorno de Python de su Agent. Por ejemplo:
 
     ```shell
     $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
     ```
-3. Configura tu SQL Server `conf.yaml` para utilizar el conector odbc y especifique el controlador adecuado como se indica en el archivo `odbcinst.ini`.
+3. Configure su `conf.yaml` de SQL Server para usar el conector odbc y especifique el controlador adecuado como se indica en el archivo `odbcinst.ini`.
 
     ```yaml
     init_config:
@@ -277,52 +314,52 @@ Para conectar SQL Server (ya sea alojado en Linux o Windows) a un host de Linux:
 
 ### Elección de un controlador de SQL Server {#picking-a-driver}
 
-Para que el Agent pueda conectarse a la instancia de SQL Server, debes instalar el [controlador ODBC de Microsoft][12] o el [controlador de bases de datos OLE][13].
+Para que el Agent se conecte a la instancia de SQL Server, debe instalar el [controlador Microsoft ODBC][12] o el [controlador OLE DB][13].
 
-El controlador que elijas determinará lo que configures para el campo [conector][14] en la configuración de tu instancia.
+El controlador que elija determina lo que debe establecer para el campo [conector][14] en la configuración de su instancia.
 
-Por ejemplo, para el [controlador ODBC de Microsoft][12]:
+Por ejemplo, para el [controlador Microsoft ODBC][12]:
 
   ```yaml
   connector: odbc
   driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
-Para el [controlador de bases de datos OLE][13]:
+Para el [controlador OLE DB][13]:
 
   ```yaml
   connector: adodbapi
   adoprovider: MSOLEDBSQL
   ```
 
-Estos valores se utilizarán para asignar la parte `Provider` de la cadena de conexión.
+Estos valores se utilizarán para establecer la parte `Provider` de la cadena de conexión.
 
-Así, por ejemplo, si configuras `adoprovider: MSOLEDBSQL`, la cadena de conexión incluirá `Provider=MSOLEDBSQL`. Esto debería coincidir con el nombre de la versión del controlador que tengas instalada.
+Por ejemplo, si configura `adoprovider: MSOLEDBSQL`, entonces la cadena de conexión incluiría `Provider=MSOLEDBSQL`. Esto debe coincidir con el nombre de la versión del controlador que tiene instalada.
 
-En la última versión del [controlador de bases de datos OLE Microsoft][13], el nombre del controlador ha cambiado de `MSOLEDBSQL` a `MSOLEDBSQL19`, lo que significa que debería aparecer en la configuración de tu instancia de la siguiente forma:
+En la versión más reciente del [controlador Microsoft OLE DB][13], el nombre del controlador cambió de `MSOLEDBSQL` a `MSOLEDBSQL19`, lo que significa que esto debería aparecer en la configuración de su instancia de la siguiente manera:
 
   ```yaml
   connector: adodbapi
   adoprovider: MSOLEDBSQL19
   ```
 
-Esto se recomienda para mantener una actualización con la última versión disponible del controlador que selecciones.
+Se recomienda mantenerse al día con la última versión disponible del controlador que seleccione.
 
-## Otros problemas comunes
+## Otros problemas comunes {#other-common-issues}
 
-### Falta la etiqueta (tag) de usuario de SQL Server en Métricas de consultas y muestras de planes
+### Falta la etiqueta de usuario de SQL Server en Query Metrics y Plan Samples {#sql-server-user-tag-is-missing-on-the-query-metrics-and-plan-samples}
 
-La etiqueta `user` ya no es compatible con Métricas de consultas y Muestras de planes debido a limitaciones técnicas en SQL Server que impiden la recopilación de las consultas correctas ejecutadas por el usuario.
+La etiqueta `user` ya no es compatible con Query Metrics ni con Plan Samples debido a limitaciones técnicas de SQL Server que impiden recopilar correctamente el usuario que ejecuta las consultas.
 
-La etiqueta `user` está disponible para Eventos de actividades de consulta y Métricas de cargas de bases de datos.
+La etiqueta `user` está disponible para los eventos de Query Activity y las métricas de Database Load.
 
-### ¿Por qué hay tantas consultas "CREATE PROCEDURE"?
+### ¿Por qué hay tantas consultas "CREATE PROCEDURE"? {#why-are-there-so-many-create-procedure-queries}
 
-En versiones del Agent anteriores a la v7.40.0, existe un error por el que las estadísticas de `PROCEDURE` se cuentan en exceso. Esto lleva a ver muchas ejecuciones de `CREATE PROCEDURE...` en la interfaz de usuario de las métricas de consultas de Database Monitoring. Para solucionar este problema, actualiza a la última versión del Datadog Agent.
+En las versiones del Agent anteriores a la 7.40.0, existe un error que hace que las estadísticas de `PROCEDURE` se contabilicen en exceso. Esto hace que se muestren muchas ejecuciones de `CREATE PROCEDURE...` en la interfaz de Query Metrics de Database Monitoring. Para solucionar este problema, actualice a la versión más reciente del Agent de Datadog.
 
-### Los trabajos del Agent de SQL Server no se recopilan con el error "The SELECT permission was denied on the object 'sysjobs'" (Se ha denegado el permiso SELECT en el objeto 'sysjobs').
+### No se recopilan los SQL Server Agent Jobs y aparece el error "The SELECT permission was denied on the object 'sysjobs'" {#sql-server-agent-jobs-are-not-being-collected-with-error-the-select-permission-was-denied-on-the-object-sysjobs}
 
-El check de los trabajos del Agent de SQL Server requiere el permiso `SELECT` en la base de datos `msdb`. Si aparece el error `The SELECT permission was denied on the object 'sysjobs'`, debes conceder el permiso `SELECT` al usuario que el Agent está utilizando para conectarse a la instancia de SQL Server.
+La comprobación de SQL Server Agent Jobs requiere el permiso `SELECT` en la base de datos `msdb`. Si ve el error `The SELECT permission was denied on the object 'sysjobs'`, debe otorgar el permiso `SELECT` al usuario que el Agent utiliza para conectarse a la instancia de SQL Server.
 
 ```SQL
 USE msdb;
@@ -330,11 +367,11 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
-## Limitaciones conocidas
+## Limitaciones conocidas {#known-limitations}
 
-### SQL Server 2012
+### SQL Server 2012 {#sql-server-2012}
 
-Las siguientes métricas no están disponible para SQL Server 2012:
+Las siguientes métricas no están disponibles para SQL Server 2012:
 
 - `sqlserver.files.read_io_stall_queued`
 - `sqlserver.files.write_io_stall_queued`
@@ -355,12 +392,16 @@ Las siguientes métricas no están disponible para SQL Server 2012:
 - `sqlserver.fci.is_current_owner`
 - `sqlserver.latches.latch_wait_time`
 
-### SQL Server 2014
+La recopilación de interbloqueos (`collect_deadlocks: enabled: true`) no es compatible con SQL Server 2012. La consulta de recopilación utiliza `AT TIME ZONE`, un operador de T-SQL introducido en SQL Server 2016. Habilitar esta característica en SQL Server 2012 provoca un error de sintaxis de consulta (`Incorrect syntax near 'AT'`) en cada ejecución de comprobación. Para evitar este error, establezca `collect_deadlocks: enabled: false` en la configuración de su instancia.
 
-Las siguientes métricas no están disponible para SQL Server 2014:
+### SQL Server 2014 {#sql-server-2014}
+
+Las siguientes métricas no están disponibles para SQL Server 2014:
 
 - `sqlserver.ao.secondary_lag_seconds`
 - `sqlserver.latches.latch_wait_time`
+
+La recopilación de interbloqueos (`collect_deadlocks: enabled: true`) no es compatible con SQL Server 2014. La consulta de recopilación utiliza `AT TIME ZONE`, un operador de T-SQL introducido en SQL Server 2016. Habilitar esta característica en SQL Server 2014 provoca un error de sintaxis de consulta (`Incorrect syntax near 'AT'`) en cada ejecución de comprobación. Para evitar este error, establezca `collect_deadlocks: enabled: false` en la configuración de su instancia.
 
 [1]: /es/database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
@@ -376,3 +417,4 @@ Las siguientes métricas no están disponible para SQL Server 2014:
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: /es/agent/configuration/agent-commands/#other-commands

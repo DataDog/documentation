@@ -86,7 +86,7 @@ Metrics Explorer は最近の調査履歴を自動的に保持するため、前
 
 ### スプリットグラフ {#split-graph}
 
-[{{< ui >}}Split Graph{{< /ui >}}] (スプリットグラフ) ボタンを使用すると、リージョン、サービス、環境などのタグの値でデータを分割して異なるグラフで表示できます。
+region、service、environment などのタグを 1 つ以上選択し、タグ値の組み合わせごとにグラフを 1 つ表示するには、[{{< ui >}}Split Graph{{< /ui >}}] (スプリットグラフ) ボタンを使用します。ダッシュボードに保存すると、1 つのタグまたの場合は[スプリットグラフウィジェット][12]が作成され、複数のタグの場合は複数タグのグラフのグループが作成され、すべてのスプリットタグがグループタイトルに含まれます。
 
 ### エクスポート {#export}
 
@@ -119,3 +119,4 @@ Quick Graphs を使用すると、[ダッシュボード][4]や[ノートブッ�
 [9]: /ja/monitors/
 [10]: /ja/dashboards/
 [11]: /ja/account_management/rbac/permissions/#access-management
+[12]: /ja/dashboards/widgets/split_graph/

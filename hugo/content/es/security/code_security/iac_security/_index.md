@@ -49,7 +49,7 @@ Puede delegar la corrección de un hallazgo de IaC a un agente de codificación 
 
 1. En la página [Code Security Vulnerabilities][3], haga clic en un hallazgo para abrir su panel lateral.
 2. En la sección {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}}, haga clic en {{< ui >}}Remediate with AI{{< /ui >}}.
-3. Seleccione la pestaña {{< ui >}}Coding agent{{< /ui >}}.
+3. Seleccione la {{< ui >}}Coding agent{{< /ui >}}pestaña.
 4. En {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, haga clic en {{< ui >}}Open{{< /ui >}} junto a {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog abre Cursor con un aviso de corrección personalizado para el error de configuración.
 
 Para usar un agente diferente, haga clic en {{< ui >}}Copy{{< /ui >}} junto a {{< ui >}}Copy fix prompt{{< /ui >}} y pegue el aviso en el agente de su elección.
@@ -70,18 +70,22 @@ Después de configurar IaC Security, cada confirmación en un repositorio escane
 
 Utilice filtros para limitar los resultados por:
 
-- Gravedad
-- Estado (abierto, silenciado, corregido)
+- Severity
+- Status (open, muted, fixed)
 - Tipo de recurso
 - Proveedor de nube
 - Ruta del archivo
-- Equipo
+- Team
 - Repositorio
 
 Haga clic en cualquier hallazgo para abrir un panel lateral que muestra:
 
 - {{< ui >}}Details{{< /ui >}}: Una descripción y el código relevante que activó el hallazgo. (Para visualizar fragmentos de código, [instale la aplicación de GitHub][9]. )
 - {{< ui >}}Remediation{{< /ui >}}: Si están disponibles, se proporcionan sugerencias de corrección de código para los hallazgos que admiten remediación.
+
+### Priorice las configuraciones incorrectas con contexto de tiempo de ejecución {#prioritize-misconfigurations-with-runtime-context}
+
+Los hallazgos de IaC Security muestran los servicios a los que se asigna cada hallazgo y los riesgos de tiempo de ejecución que conllevan esos servicios, como {{< ui >}}In Production{{< /ui >}} y {{< ui >}}Exposed to Attacks{{< /ui >}}. Una asignación significa que el archivo IaC se encuentra en el repositorio o en los archivos de despliegue del servicio asignado. No confirma que la configuración incorrecta esté presente en el servicio en ejecución. Utilice las facetas {{< ui >}}Risks{{< /ui >}} para centrarse en los hallazgos asignados a servicios activos y expuestos. Para obtener más información, consulte [Priorizar hallazgos con contexto de tiempo de ejecución][15].
 
 ### Crear tickets de Jira a partir de hallazgos {#create-jira-tickets-from-findings}
 
@@ -124,3 +128,4 @@ Las exclusiones se administran a través de un archivo de configuración o comen
 [12]: /es/pr_gates/setup
 [13]: /es/security/code_security/iac_security/iac_rules
 [14]: /es/security/code_security/iac_security/custom_rules
+[15]: /es/security/code_security/runtime_context/

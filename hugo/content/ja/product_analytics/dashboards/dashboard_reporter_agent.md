@@ -25,10 +25,6 @@ further_reading:
   text: モニター
 title: Dashboard Reporter Agent
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/product-analytics-dashboard-reporter-agent/" btn_hidden="false" header="プレビューに参加しましょう。">}}
-Dashboard Reporter Agent はプレビュー版です。フォームに入力してアクセスをリクエストします。
-{{< /callout >}}
-
 ## 概要 {#overview}
 
 Dashboard Reporter Agent は、選択した Product Analytics ダッシュボードを監視し、スケジュール済みレポートを Slack、Microsoft Teams、またはメールでチームに送信します。各レポートでは、変更点、注意が必要な点、次にやるべき点が要約されているため、各ダッシュボードを開いてチェックする必要はありません。機能のリリースが増えても、1 つの Agent で、注目度が低下した過去のローンチのダッシュボードを含む多くのダッシュボードを監視できます。
@@ -74,7 +70,7 @@ Agent は、その Agent を作成したユーザーの権限を使用してダ�
 {{% tab "ダッシュボードから" %}}
 
 1. 監視する Product Analytics ダッシュボードを開きます。
-2. [{{< ui >}}Set Up Report{{< /ui >}}] をクリックします。ダッシュボードが他の Agent のレポートにすでに含まれている場合は、ここに一覧表示されます。
+2. [{{< ui >}}Set Up Report{{< /ui >}}] (レポート) をクリックします。ダッシュボードが他の Agent のレポートにすでに含まれている場合は、ここに一覧表示されます。
 
    {{< img src="product_analytics/dashboards/dashboard_reporter_agent/from-dashboard.png" alt="Set Up Report ボタンが強調表示された Product Analytics ダッシュボードのヘッダー。" style="width:100%;" >}}
 
@@ -83,24 +79,24 @@ Agent は、その Agent を作成したユーザーの権限を使用してダ�
 {{% /tab %}}
 {{% tab "Agents ページから" %}}
 
-1. Datadog で、[**Product Analytics > Agents**][1] に移動します。
+1. Datadog で、[**[Product Analytics] > [Agents]**][1] に移動します。
 2. [{{< ui >}}\+ New Agent{{< /ui >}}] をクリックします。
-3. {{< ui >}}Dashboard Reporter{{< /ui >}} ブループリントを選択します。
+3. [{{< ui >}}Dashboard Reporter{{< /ui >}}] ブループリントを選択します。
 
-{{< img src="product_analytics/dashboards/dashboard_reporter_agent/from-agents.png" alt="Start from blueprint の下で Dashboard Reporter ブループリントが強調表示された新しい Agent ページ。" style="width:60%;" >}}
+{{< img src="product_analytics/dashboards/dashboard_reporter_agent/from-agents.png" alt="[Start from blueprint] の下で [Dashboard Reporter] ブループリントが強調表示された新しい Agent ページ。" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/agents
 {{% /tab %}}
 {{< /tabs >}}
 
-### Agent の構成 {#configure-the-agent}
+### Agent を構成する {#configure-the-agent}
 
 1. 「Checkout Weekly Health」のように、レポートの内容が読者にわかる名前を入力します。この名前は、すべてのレポートのタイトルに表示されます。
 2. 監視するダッシュボードを 1 つ以上選択します。ダッシュボードは後から追加できます。
 3. Team Update や Leadership Update などの定義済みのレポート形式を選択するか、独自の形式を作成します。カスタム形式の場合は、実行するたびにレポートが回答すべき質問と、書式設定の要件を記述します。
 4. レポートを受信する Slack チャンネル、Microsoft Teams チャンネル、またはメールアドレスを選択します。
 5. Agent の実行頻度 (毎日、毎週、または毎月)、レポートの送信時刻、およびタイムゾーンを選択します。
-6. [{{< ui >}}Create{{< /ui >}}] をクリックします。
+6. [{{< ui >}}Create{{< /ui >}}] (作成) をクリックします。
 
 ## レポートを読む {#read-reports}
 
@@ -111,44 +107,44 @@ Agent は、その Agent を作成したユーザーの権限を使用してダ�
 Datadog でレポートを開き、Agent に補足質問をすることができます。たとえば、どのセグメントが変化の要因となったのか、ほかにどんな変化が同時に生じたのかを質問します。
 
 1. レポートを開く:
-   - **レポートメッセージから**: Slack、Microsoft Teams、またはメールメッセージで、[{{< ui >}}Chat with this report{{< /ui >}}] をクリックします。
+   - **レポートメッセージから**: Slack、Microsoft Teams、またはメールメッセージで、[{{< ui >}}Chat with this report{{< /ui >}}] (このレポートとチャットする) をクリックします。
    - **Datadog から**: Agent ページに移動し、Agent を選択します。
 2. メッセージボックスに質問を入力し、<kbd>Enter</kbd> キーを押します。
 
 ### Slack で Bits AI に質問する {#ask-bits-ai-in-slack}
 
-レポートが Slack に送信される設定になっており、Datadog Slack インテグレーションで Bits AI が有効になっている場合、Slack から離れることなく Bits Chat にレポートについて質問できます。たとえば、`@Datadog Why did checkout conversion drop this week?` のように、質問する際に `@Datadog` をメンションしてください。設定については、[Slack で Bits Chat を使用する][5] を参照してください。
+レポートが Slack に送信される設定になっており、Datadog Slack インテグレーションで Bits AI が有効になっている場合、Slack から離れることなく Bits Chat にレポートについて質問できます。たとえば、`@Datadog Why did checkout conversion drop this week?` のように、質問する際に `@Datadog` をメンションしてください。設定については、「[Slack で Bits Chat を使用する][5]」を参照してください。
 
 
-## Dashboard Reporter Agent の管理 {#manage-dashboard-reporter-agents}
+## Dashboard Reporter Agent を管理する {#manage-dashboard-reporter-agents}
 
-Agent を表示するには、[**Product Analytics > Agents**][6] に移動します。
+Agent を表示するには、[**[Product Analytics] > [Agents]**][6] に移動します。
 
-### Agent の編集{#edit-an-agent}
+### Agent を編集する {#edit-an-agent}
 
 Agent のダッシュボード、レポート形式、送信先、または実行頻度を変更できます。
 
 1. Agents ページで、その Agent をクリックします。
 2. 以下のいずれかの方法で変更を行います。
    - **Agent に質問する**: チャットで変更内容を説明します。例: `Add the Checkout Funnel dashboard and send reports on Mondays at 9:00 AM.`
-   - **指示の編集**: ダッシュボード、レポート形式、または送信先を変更するには、{{< ui >}}Instructions{{< /ui >}} パネルをクリックし、Markdown で編集します。頻度を変更するには、{{< ui >}}Automation{{< /ui >}} パネルを展開します。
+   - **構成を編集する**: Agents ページまたはサブスクライブしているダッシュボードで、Agent にカーソルを合わせ、[{{< ui >}}Edit{{< /ui >}}] (編集) をクリックします。サブスクライブしているダッシュボード、レポート形式、頻度、または送信先を変更できます。
 
-### Agent の一時停止または再開 {#pause-or-resume-an-agent}
+### Agent を一時停止または再開する {#pause-or-resume-an-agent}
 
 閑散期やダッシュボードの再構築中など、レポートを一時的に停止するには、Agent を一時停止します。一時停止した Agent の構成は保持されます。
 
-- **Agent を一時停止するには**: Agents ページで Agent にカーソルを合わせ、[{{< ui >}}Pause{{< /ui >}}] をクリックします。確認ウィンドウで、もう一度 [{{< ui >}}Pause{{< /ui >}}] をクリックします。
-- **Agent を再開するには**: Agents ページで Agent にカーソルを合わせ、[{{< ui >}}Resume{{< /ui >}}] をクリックします。確認ウィンドウで、[{{< ui >}}Resume{{< /ui >}}] をクリックします。
+- **Agent を一時停止するには**: Agents ページで Agent にカーソルを合わせ、[{{< ui >}}Pause{{< /ui >}}] (一時停止) をクリックします。確認ウィンドウで、もう一度 [{{< ui >}}Pause{{< /ui >}}] をクリックします。
+- **Agent を再開するには**: Agents ページで Agent にカーソルを合わせ、[{{< ui >}}Resume{{< /ui >}}] (再開) をクリックします。確認ウィンドウで、[{{< ui >}}Resume{{< /ui >}}] をクリックします。
 
-### Agent の削除 {#delete-an-agent}
+### Agent を削除する {#delete-an-agent}
 
 レポートを一時的に停止するには、代わりに [Agent を一時停止](#pause-or-resume-an-agent)します。
 
 <div class="alert alert-warning">Agent を削除すると、元に戻すことはできません。Agent はレポートの送信を停止し、<a href="/actions/workflows/">Workflow Automation</a> 内の基盤となるワークフローも削除され、どちらも復元することはできません。</div>
 
-agent を削除するには、Agents ページに移動し、agent にカーソルを合わせて [{{< ui >}}Delete{{< /ui >}}] をクリックします。
+Agent を削除するには、Agents ページに移動し、Agent にカーソルを合わせて [{{< ui >}}Delete{{< /ui >}}] (削除) をクリックします。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

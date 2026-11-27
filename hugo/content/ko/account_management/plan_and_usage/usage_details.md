@@ -6,7 +6,7 @@ description: 월간 누적 요약, 사용량 추이, 상위 사용자 지정 메
 title: 사용량 세부 정보
 ---
 {{< callout url="" btn_hidden="true" header="새로운 기능: 청구 개요" respect-site-support="false" >}}
-새로운 청구 개요 환경이 현재 제한적으로 제공되고 있으며 2026년 3월부터 모든 조직에 자동으로 배포되기 시작할 예정입니다. [자세히 알아보기](/account_management/plan_and_usage/bill_overview/).
+새로운 Bill Overview 환경이 현재 제한적으로 제공되고 있으며 2026년 3월부터 모든 조직에 자동으로 배포되기 시작할 예정입니다. [자세히 알아보기](/account_management/plan_and_usage/bill_overview/).
 {{< /callout >}}
 
 ## 개요 {#overview}
@@ -71,7 +71,7 @@ API 사용자는 ['All'][2] 사용량과 ['Billable'][3] 사용량에 액세스�
 
 ## 사용량 추세 {#usage-trends}
 
-[Usage Trends][5] 섹션에는 계정 내 모든 조직의 합산 사용량을 표시하는 제품 사용량 그래프가 포함되어 있습니다. 사용량 보고서는 {{< ui >}}Download as CSV{{< /ui >}} 버튼을 통해 다운로드할 수 있습니다. 각 조직에 대한이러한 보고서에는 제품별 사용량의 시간별 분석이 포함되어 있습니다. 
+[Usage Trends][5] 섹션에는 계정 내 모든 조직의 합산 사용량을 표시하는 제품 사용량 그래프가 포함되어 있습니다. 사용량 보고서는 {{< ui >}}Download as CSV{{< /ui >}} 버튼을 통해 다운로드할 수 있습니다. 각 조직에 대한 이러한 보고서에는 제품별 사용량의 시간별 분석이 포함되어 있습니다. 
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Download as CSV 옵션이 강조 표시되어 있는 Datadog 애플리케이션의 Usage Trends 그래프 페이지" style="width:100%; align:left" >}}
 
@@ -104,7 +104,7 @@ API 사용자는 ['All'][2] 사용량과 ['Billable'][3] 사용량에 액세스�
 {{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="추세 그래프의 청구 가능한 온디맨드 사용량 배지와 약정 사용량 라인" style="width:100%; align:left" >}}
 
 
-## Top Custom Metrics {#top-custom-metrics}
+## 상위 사용자 지정 메트릭 {#top-custom-metrics}
 
 Custom Metrics 탭의 Top Custom Metrics 표는 이번 달 누적 사용량과 마지막 업데이트 날짜의 사용량 등 가장 최근 일자의 사용량을 보여주는 2가지 보기를 제공합니다.
 
@@ -121,10 +121,10 @@ Custom Metrics 탭의 Top Custom Metrics 표는 이번 달 누적 사용량과 �
 * 시간당 평균 사용자 지정 메트릭
 * 시간당 최대 사용자 지정 메트릭
 * 모든 사용자 지정 메트릭 내에서 메트릭 검색
-* 이 데이터는 CSV 파일로 다운로드할 수 있으며, 최대 300,000개의 사용자 지정 메트릭이 포함됩니다. Datadog [API 엔드포인트][6]를 사용하여 300,000개가 넘는 사용자 지정 메트릭을 다운로드할 수 있습니다.
+* 이 데이터는 CSV 파일로 다운로드할 수 있으며, 최대 300,000개의 사용자 지정 메트릭이 포함됩니다. [API 엔드포인트][6]를 사용하여 300,000개가 넘는 사용자 지정 메트릭을 다운로드할 수 있습니다.
 
 
-메트릭에 대한 자세한 내용을 보려면 관심 있는 메트릭의 행 위로 마우스를 가져가고 오른쪽에 표시되는 미터 아이콘을 클릭하여 [Metrics Catalog][7]로 이동합니다.
+메트릭에 대한 자세한 내용을 보려면 해당 행 위로 마우스를 가져간 다음 오른쪽에 있는 미터 아이콘을 클릭하여 Metrics Catalog 페이지에서 메트릭을 여세요. 자세한 내용은 [Metrics Catalog 설명서][7]를 참조하세요.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Top Custom Metrics 표 개요" >}}
 
@@ -151,7 +151,7 @@ Log Management 탭의 이 표에는 인덱스 이름 및 보존 기간별로 시
 
 {{< img src="account_management/plan_and_usage/usage-notifications.png" alt="선택 및 선택 해제된 항목이 포함된 제품 목록이 있는 최초 사용 알림 페이지" style="width:100%; align:left" >}}
 
-_사용 알림 읽기_ 또는 _쓰기_ 권한이 있는 모든 사용자가 이메일을 받습니다. 대부분의 조직에서 이는 모든 관리자를 의미합니다.
+_Usage Notifications Read_ 또는 _Write_ 권한이 있는 모든 사용자가 이메일을 받습니다. 대부분의 조직에서 이는 모든 관리자를 의미합니다.
 
 Datadog 계정이 다중 조직인 경우 권한이 있는 상위 조직 사용자가 하위 조직의 사용량에 대한 이메일 알림을 받습니다. 이 이메일에는 사용량이 발생한 하위 조직과 사용량이 발생한 제품이 표시됩니다. 이 권한이 있는 하위 조직 사용자는 자신의 조직에 대한 이메일만 받습니다.
 
@@ -170,7 +170,7 @@ Datadog 계정이 다중 조직인 경우 권한이 있는 상위 조직 사용�
 [4]: /ko/metrics/custom_metrics/
 [5]: https://app.datadoghq.com/billing/usage
 [6]: https://docs.datadoghq.com/ko/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[7]: https://docs.datadoghq.com/ko/metrics/summary/#overview
+[7]: /ko/metrics/catalog/#overview
 [8]: https://docs.datadoghq.com/ko/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /ko/help/
 [10]: mailto:success@datadoghq.com

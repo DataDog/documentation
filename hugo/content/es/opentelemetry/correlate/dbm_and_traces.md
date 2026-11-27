@@ -1,55 +1,54 @@
 ---
 further_reading:
-- link: /opentelemetry/otel_tracing/
+- link: /opentelemetry/setup/
   tag: Documentación
-  text: Envío de traces (trazas) de OpenTelemetry a Datadog
-title: Correlaciona traces (trazas) de OpenTelemetry y DBM
+  text: Enviar datos de OpenTelemetry a Datadog
+title: Correlacione trazas de OpenTelemetry y DBM
 ---
+## Descripción general {#overview}
 
-## Información general
+Datadog Database Monitoring (DBM) correlaciona las trazas de backend de su aplicación instrumentada con OpenTelemetry con datos detallados de rendimiento de la base de datos. Esto le permite vincular tramos de su aplicación con métricas de consulta y planes de ejecución relacionados, ayudándole a identificar las consultas exactas que están ralentizando sus servicios.
 
-Database Monitoring (DBM) de Datadog correlaciona las traces (trazas) de backend de tu aplicación instrumentada en OpenTelemetry con datos detallados sobre el rendimiento de la base de datos. Esto te permite vincular spans (tramos) de tu aplicación con métricas de consulta y planes de ejecución relacionados, lo que te ayuda a identificar las consultas exactas que están ralentizando tus servicios.
+## Requisitos {#requirements}
 
-## Requisitos
+Antes de comenzar, asegúrese de haber configurado el [etiquetado de servicio unificado][1]. Esto es necesario para toda la correlación de datos en Datadog.
 
-Antes de empezar, asegúrate de haber configurado el [etiquetado unificado de servicios][1]. Esto es necesario para todas las correlaciones de datos en Datadog.
+## Configuración {#setup}
 
-## Configuración
+Para correlacionar trazas y métricas, debe:
 
-Para correlacionar traces (trazas) y métricas, debes:
+1. **Instrumente los tramos de base de datos**: Agregue atributos específicos de OpenTelemetry a sus tramos de base de datos para habilitar la correlación con DBM.
 
-1. **Instrumentar spans (tramos) de la base de datos**: Añade atributos específicos de OpenTelemetry a tus spans (tramos) de base de datos para permitir la correlación con DBM.
+2. **Configure la ruta de ingesta de trazas**: Habilite el feature gate correcto en su Collector o Agent para asegurarse de que los tramos de base de datos se procesen correctamente para DBM.
 
-2. **Configurar la ruta de ingesta de traces (trazas)**: Activa la puerta de función correcta en tu recopilador o Agent para garantizar que los spans (tramos) de base de datos se procesen correctamente para DBM.
+### Paso 1: Instrumente sus tramos de base de datos {#step-1-instrument-your-database-spans}
 
-### Step (UI) / paso (generic) 1: Instrumenta tu base de datos
-
-Para que la correlación de DBM funcione, los spans (tramos) de tu base de datos deben incluir los siguientes atributos.
+Para que la correlación de DBM funcione, sus tramos de base de datos deben incluir los siguientes atributos.
 
 
-| Atributo      | ¿Es obligatorio? | Descripción                                                                                                       | Ejemplo                                 |
+| Atributo      | ¿Requerido? | Descripción                                                                                                       | Ejemplo                                 |
 |----------------|-----------|:------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| `db.system`    | Sí       | La tecnología de bases de datos.                                                                                          | `postgres`, `mysql`, `sqlserver`        |
-| `db.statement` | Sí       | El texto de la consulta de SQL sin procesar. Datadog lo utiliza para configurar el nombre del recurso del span (tramo) después de la ofuscación y la normalización.    | `SELECT * FROM users WHERE id = ?`      |
-| `span.type`    | Sí*      | **(Datadog-específico)** Identifica los spans (tramos) de la base de datos. *Derivado automáticamente de otros atributos de OpenTelemetry según las [reglas de asignación de tipos de spans (tramos)][6]. Configúralo manualmente solo cuando crees spans (tramos) directamente con un kit de desarrollo de software (SDK). | `sql`, `postgres`, `mysql`, `sql.query` |
-| `db.name`      | No        | La base de datos lógica o el nombre del esquema que se está consultando.                                                                | `user_accounts`                         |
+| `db.system`    | Sí       | La tecnología de base de datos.                                                                                          | `postgres`, `mysql`, `sqlserver`        |
+| `db.statement` | Sí       | El texto de la consulta SQL sin procesar. Datadog utiliza esto para establecer el nombre del recurso del tramo después de la ofuscación y normalización.    | `SELECT * FROM users WHERE id = ?`      |
+| `span.type`    | Sí*      | **(Específico de Datadog)** Identifica los tramos de base de datos. *Derivado automáticamente de otros atributos de OpenTelemetry de acuerdo con las [reglas de mapeo de tipos de tramo][6]. Solo configúrelo manualmente cuando cree tramos directamente con un SDK. | `sql`, `postgres`, `mysql`, `sql.query` |
+| `db.name`      | No        | El nombre de la base de datos lógica o del esquema que se está consultando.                                                                | `user_accounts`                         |
 
 <div class="alert alert-info">
-El atributo de <code>span.type</code> es una convención específica de Datadog para identificar y procesar los spans (tramos) de la base de datos.
-Cuando se utiliza la autoinstrumentación de OpenTelemetry o el Datadog Agent, este atributo se configura automáticamente.
-Añádelo manualmente solo si estás instrumentando spans (tramos) directamente con el kit de desarrollo de software (SDK).
+El <code>span.type</code> El atributo es una convención específica de Datadog para identificar y procesar tramos de bases de datos.
+Al usar la auto-instrumentación de OpenTelemetry o el Datadog Agent, este atributo se establece automáticamente.
+Solo agréguelo manualmente si está instrumentando tramos directamente con el SDK.
 </div>
 
-#### Utilización de la instrumentación automática
+#### Uso de auto-instrumentación {#using-auto-instrumentation}
 
-Para empezar, instrumenta tu aplicación utilizando la biblioteca de autoinstrumentación de OpenTelemetry apropiada para tu lenguaje. Para obtener instrucciones de configuración, consulta la [documentación de instrumentación de OpenTelemetry][4] oficial.
+Para comenzar, instrumente su aplicación usando la biblioteca de auto-instrumentación de OpenTelemetry adecuada para su lenguaje. Para obtener instrucciones de configuración, consulte la [documentación oficial de instrumentación de OpenTelemetry][4].
 
-Estas bibliotecas añaden automáticamente los atributos `db.system` y `db.statement` necesarios. A continuación, el Datadog Agent o el kit de desarrollo de software (SDK) obtienen `span.type` automáticamente, por lo que no es necesario configurar manualmente los atributos.
+Estas bibliotecas agregan automáticamente los atributos `db.system` y `db.statement` requeridos. El Datadog Agent o el SDK derivan `span.type` automáticamente, por lo que no se necesita una configuración manual de atributos.
 
-{{% collapse-content title="Set attributes manually (advanced)" level="h4" %}}
-Si tu entorno incluye un cliente de base de datos personalizado o spans (tramos) no reconocidos por la biblioteca, puedes enriquecerlos con el procesador `attributes` del recopilador de OpenTelemetry.
+{{% collapse-content title="Establecer atributos manualmente (avanzado)" level="h5" %}}
+Si su entorno involucra un cliente de base de datos personalizado o tramos no reconocidos por la biblioteca, puede enriquecerlos usando el procesador `attributes` del OpenTelemetry Collector.
 
-Por ejemplo, puedes añadir `span.type: sql` a cualquier span (tramo) que tenga el atributo `db.system`:
+Por ejemplo, puede agregar `span.type: sql` a cualquier tramo que tenga el atributo `db.system`:
 
 ```yaml
 processors:
@@ -71,11 +70,11 @@ service:
 ```
 {{% /collapse-content %}}
 
-#### Utilización de instrumentación manual
+#### Uso de instrumentación manual {#using-manual-instrumentation}
 
-Si estás creando spans (tramos) manualmente con kit de desarrollo de software (SDK) de OpenTelemetry, puedes configurar los atributos directamente en tu código. Para obtener más información, consulta la [documentación de OpenTelemetry][4].
+Si está creando tramos manualmente con el SDK de OpenTelemetry, puede establecer los atributos directamente en su código. Para obtener más información, consulte la [documentación de OpenTelemetry][4].
 
-A continuación se muestra un ejemplo conceptual de instrumentación manual con el kit de desarrollo de software (SDK) de OpenTelemetry de Python:
+El siguiente es un ejemplo conceptual de instrumentación manual usando el SDK de OpenTelemetry para Python:
 
 ```python
 from opentelemetry import trace
@@ -94,15 +93,15 @@ with tracer.start_as_current_span("postgres.query") as span:
     # db_cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 ```
 
-### Step (UI) / paso (generic) 2: Configurar tu ruta de ingesta
+### Paso 2: Configure su ruta de ingesta {#step-2-configure-your-ingest-path}
 
-Según cómo envíes las traces (trazas) a Datadog, puede que necesites activar puertas de función específicas para asegurarte de que los spans (tramos) de base de datos se procesen correctamente.
+Dependiendo de cómo envíe las trazas a Datadog, es posible que deba habilitar feature gates específicos para asegurarse de que los tramos de la base de datos se procesen correctamente.
 
 {{< tabs >}}
-{{% tab "Datadog Agent (Datadog distribution of OpenTelemetry (DDOT) Collector)" %}}
+{{% tab "Datadog Agent (Collector del Agent)" %}}
 
 
-Si utilizas el gráfico de Helm de Datadog (v3.107.0 o posterior), configura la puerta de función en tu `values.yaml`:
+Si está utilizando el chart de Helm de Datadog (v3.107.0 o posterior), configure el feature gate en su `values.yaml`:
 
 ```yaml
 datadog:
@@ -111,21 +110,21 @@ datadog:
 ```
 
 {{% /tab %}}
-{{% tab "Recopilador de OpenTelemetry" %}}
+{{% tab "Colector de OTel" %}}
 
-Al iniciar el recopilador, debes activar la puerta de función correcta para tu versión.
+Al iniciar el Collector, debe habilitar el feature gate correcto para su versión.
 
-#### Recopilador v0.124.0 y posteriores
+#### Collector v0.124.0 y posterior {#collector-v01240-and-later}
 
-En las versiones recientes del recopilador, activa la puerta de función `datadog.EnableOperationAndResourceNameV2`:
+Para versiones recientes del Collector, habilite el feature gate `datadog.EnableOperationAndResourceNameV2`:
 
 ```sh
 otelcontribcol --config=config.yaml \
 --feature-gates=datadog.EnableOperationAndResourceNameV2
 ```
-#### Recopilador v0.118.0 - v0.123.0
+#### Collector v0.118.0 - v0.123.0 {#collector-v01180-v01230}
 
-Para las versiones anteriores del recopilador, se requieren las dos puertas de funciones siguientes:
+Para versiones anteriores del Collector, se requieren ambos feature gates siguientes:
 
 ```sh
 otelcontribcol --config=config.yaml \
@@ -134,33 +133,60 @@ otelcontribcol --config=config.yaml \
 
 {{% /tab %}}
 
-{{% tab "Datadog Agent (Ingesta de OpenTelemetry Protocol)" %}}
+{{% tab "Datadog Agent (OTLP Ingest)" %}}
 
-En tu configuración del Datadog Agent, asegúrate de que la variable de entorno `DD_APM_FEATURES` incluya `enable_operation_and_resource_name_logic_v2`.
+En la configuración de su Datadog Agent, asegúrese de que la variable de entorno `DD_APM_FEATURES` incluya `enable_operation_and_resource_name_logic_v2`.
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-### Visualizar datos correlacionados en Datadog
+### Ver datos correlacionados en Datadog {#view-correlated-data-in-datadog}
 
-Después de que tu aplicación envíe traces (trazas), podrás ver la correlación en la vista de traces (trazas) de APM:
+Una vez que su aplicación esté enviando trazas, puede ver la correlación en APM Trace View:
 
-1. Ve a [**APM** > **Traces**][3] (APM > Traces (trazas).
-2. Busca y haz clic en una trace (traza) de tu servicio instrumentado.
-3. En el gráfico de llamas de la trace (traza), selecciona un span (tramo) de base de datos (por ejemplo, un span (tramo) con `span.type: sql`)
-4. En el panel de detalles, haz clic en la pestaña **SQL Queries** (Consultas SQL). Deberías ver las métricas de rendimiento y los planes de ejecución de la consulta.
+1. Navegue a [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][3].
+2. Busque y haga clic en una traza de su servicio instrumentado.
+3. En el gráfico de llama de la traza, seleccione un tramo de base de datos (por ejemplo, un tramo con `span.type: sql`)
+4. En el panel de detalles, haga clic en la pestaña {{< ui >}}SQL Queries{{< /ui >}}. Debería ver métricas de rendimiento y planes de ejecución para la consulta.
 
-## Solucionar problemas
+## Niveles de correlación {#correlation-levels}
 
-Si no ves la correlación esperada entre tus traces (trazas) de APM y DBM, normalmente se debe a una falta de configuración o a una configuración incorrecta. Check las siguientes causas comunes:
+La correlación de DBM para trazas de OpenTelemetry funciona en dos niveles:
 
-- **Faltan atributos**: El span (tramo) de base de datos debe contener `db.system` y `db.statement`. El atributo `span.type` también es necesario, pero Datadog suele obtenerlo automáticamente.
-- **Etiquetado incorrecto del servicio unificado**: La tag (etiqueta) `service` en los spans (tramos) de tu base de datos debe estar configurada. Comprueba que el [etiquetado de servicio unificado][1] esté configurado correctamente.
-- **La consulta SQL puede no ser analizable**: La correlación se basa en la capacidad de Datadog para analizar la consulta SQL a partir del atributo `db.statement`. Si la consulta utiliza una sintaxis no estándar o compleja, el análisis puede fallar. Si sospechas que se trata de case (incidencia), [ponte en contacto con el servicio de asistencia de Datadog ][5] para obtener ayuda.
-- **Las puertas de función correctas deben estar activadas** para tu ruta de ingesta de traces (trazas) específica, tal y como se describe en los pasos de configuración.
+- **Correlación a nivel de sentencia**: Vincula una muestra de consulta o un plan de ejecución con la firma de consulta calculada a partir de `db.statement`. Esto funciona automáticamente después de completar los pasos de configuración anteriores.
+- **Correlación a nivel de servicio**: completa la pestaña {{< ui >}}Databases{{< /ui >}} y la lista {{< ui >}}Calling Services{{< /ui >}} en una página de instancia de base de datos, vinculando una consulta al servicio que la emitió. Esto requiere un comentario SQL que contenga metadatos del servicio en la consulta.
 
-## Referencias adicionales
+Los SDK de Datadog añaden este comentario automáticamente. La instrumentación automática de OpenTelemetry no lo hace, por lo que la correlación a nivel de servicio requiere añadir el comentario manualmente:
+
+```sql
+/*dddbs='<service>',dde='<env>',ddps='<service>',ddpv='<version>'*/ SELECT * FROM users WHERE id = ?
+```
+
+| Campo   | Descripción                       |
+|---------|------------------------------------|
+| `dddbs` | El nombre del servicio que emite la consulta. |
+| `dde`   | El entorno del servicio.    |
+| `ddps`  | El nombre del servicio principal.           |
+| `ddpv`  | La versión del servicio.        |
+
+Sin este comentario, una instancia de base de datos no muestra los servicios que la llaman. La página de servicio de APM no muestra ninguna sección de base de datos, incluso cuando la correlación a nivel de sentencia está funcionando.
+
+### Procedimientos almacenados {#stored-procedures}
+
+La correlación no es compatible con llamadas a procedimientos almacenados (por ejemplo, `CALL my_procedure()`). El tramo registra la llamada al procedimiento en sí, mientras que DBM captura las sentencias SQL individuales que el procedimiento ejecuta internamente. Estas dos representaciones no coinciden, por lo que DBM no puede vincular el tramo a las sentencias que ejecuta el procedimiento.
+
+## Solución de problemas {#troubleshooting}
+
+Si no ve la correlación esperada entre sus trazas de APM y DBM, generalmente se debe a una configuración faltante o incorrecta. Verifique las siguientes causas comunes:
+
+- **Atributos faltantes**: El tramo de la base de datos debe contener `db.system` y `db.statement`. El atributo `span.type` también es obligatorio, pero generalmente Datadog lo deriva automáticamente.
+- **Etiquetado de servicio unificado incorrecto**: La etiqueta `service` en sus tramos de base de datos debe estar configurada. Verifique que el [etiquetado de servicio unificado][1] esté configurado correctamente.
+- **Es posible que la consulta SQL no sea analizable**: La correlación depende de la capacidad de Datadog para analizar la consulta SQL del atributo `db.statement`. Si la consulta utiliza una sintaxis compleja o no estándar, es posible que falle el parseo. Si sospecha que este es el caso, [comuníquese con el soporte de Datadog][5] para obtener ayuda.
+- **Se deben habilitar los feature gates correctos** para su ruta específica de ingesta de trazas, tal como se describe en los pasos de configuración.
+- **No hay servicios que realicen llamadas o la sección de base de datos está vacía en la página de servicio de APM**: OpenTelemetry no inyecta comentarios SQL automáticamente. Consulte [Niveles de correlación](#correlation-levels) para agregarlos manualmente.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -2,7 +2,7 @@
 aliases:
 - /ja/service_management/incident_management/zoom_integration/
 - /ja/incident_response/incident_management/zoom_integration
-description: Datadog インシデントの Zoom ミーティングをワンクリックまたは自動で作成し、AI ミーティングの要約を生成します。
+description: Datadog インシデントの Zoom ミーティングをワンクリックまたは自動で作成し、AI ミーティングのサマリーとライブトランスクリプトのノートブックを生成します。
 further_reading:
 - link: /incident_response/incident_management/setup_and_configuration/integrations
   tag: ドキュメント
@@ -10,14 +10,14 @@ further_reading:
 - link: /integrations/zoom-incident-management/
   tag: ドキュメント
   text: Zoom Incident Management インテグレーション
-- link: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+- link: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
   tag: ドキュメント
-  text: Incident AI のミーティングの要約
+  text: ミーティングのサマリーとトランスクリプト
 title: Datadog Incident Management に Zoom を統合する
 ---
 ## 概要 {#overview}
 
-Datadog Incident Management の Zoom インテグレーションにより、チームはインシデントの Zoom ミーティングを開始できます。定義した条件に基づいて、ワンクリックまたは自動でミーティングを作成できます。インシデントの Zoom ミーティングの AI 要約を生成することもできます。
+Datadog Incident Management の Zoom インテグレーションにより、チームはインシデントの Zoom ミーティングを開始できます。定義した条件に基づいて、ワンクリックまたは自動でミーティングを作成できます。インシデント Zoom ミーティングのライブトランスクリプトノートブックと AI サマリーを生成することもできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -31,7 +31,7 @@ Incident Management の Zoom 機能を使用するには、まず [Zoom Incident
 
 インシデントの Zoom ミーティングをワンクリックで有効にするには、以下を行います。
 
-1. [[**Settings] > [Integrations]**][2] に移動し、[**Zoom**] を選択します。
+1. [**Settings] > [Integrations]**[2] に移動し、[**Zoom**] を選択します。
 2. [**Enable Zoom meeting creation**] をオンにします。
 3. 設定を保存します。
 
@@ -43,7 +43,7 @@ Datadog は、ミーティングを作成したユーザーのメールアドレ
 
 インシデントの条件に基づいた Zoom ミーティングを自動で有効にするには、以下を行います。
 
-1. [[**Settings] > [Integrations]**][2] に移動し、[**Zoom**] を選択します。
+1. [**Settings] > [Integrations]**[2] に移動し、[**Zoom**] を選択します。
 2. [**Enable Zoom meeting creation**] をオンにします。
    1. [**Automatically create Zoom meetings**] をオンにします。
    2. (オプション) Zoom ミーティングを作成するインシデントの条件を指定します。条件を空白のままにすると、Zoom ミーティングが存在しないインシデントに変更が加えられた場合に、Zoom ミーティングが作成されます。
@@ -63,7 +63,7 @@ Datadog が承認済み Zoom アカウント内のホストメールアドレス
 
 フォールバック Zoom ユーザーを設定するには、以下を行います。
 
-1. [[**Settings] > [Integrations]**][2] に移動し、[**Zoom**] を選択します。
+1. [**Settings] > [Integrations]**[2] に移動し、[**Zoom**] を選択します。
 2. [**Enable Zoom meeting creation**] をオンにします。
 3. [**Fallback user account**] で、承認済み Zoom アカウントに関連付けられたメールアドレスを入力します。従業員が退職した際の問題を回避するため、共有ユーザーを使用します。
 4. (オプション) すべての Zoom ミーティングのホストとしてフォールバックユーザーを使用するには、[**Always use this account as the meeting host**] をオンにします。
@@ -81,27 +81,35 @@ Datadog が承認済み Zoom アカウント内のホストメールアドレス
 
 その他の Slack 機能については、「[Datadog Incident Management に Slack を統合する][4]」を参照してください。
 
-### ミーティングの要約{#meeting-summaries}
+### ミーティングのサマリーとトランスクリプト {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">ミーティングの要約は、選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
+<div class="alert alert-danger">ミーティングのサマリーとミーティングのライブトランスクリプトは、選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
 {{< /site-region >}}
 
-AI 生成によるミーティングの要約を有効にして、インシデントの Zoom ミーティングを自動的に要約します。
+インシデント AI は、インシデント Zoom ミーティングのサマリーを生成し、オプションでライブミーティングトランスクリプトを Datadog ノートブックに保存できます。
 
-<div class="alert alert-info">ミーティングの要約が有効になっている場合、Datadog の<a href="https://www.datadoghq.com/legal/subprocessors/">サブプロセッサー</a>がミーティングの音声を録音し、文字起こしします。7 日間の保持期間が経過すると、サブプロセッサーはすべてのデータを自動的に削除します。</div>
+<div class="alert alert-info">ミーティングのサマリーが有効になっている場合、Datadog の<a href="https://www.datadoghq.com/legal/subprocessors/">サブプロセッサー</a>がミーティングの音声を録音し、文字起こしします。保持の詳細については、「ミーティングのサマリーとトランスクリプト」の<a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">保持と削除</a>を参照してください。</div>
 
-インシデントの Zoom ミーティングでミーティングの要約を有効にするには、以下を行います。
+#### 前提条件 {#prerequisites-1}
 
-1. [[**Settings] > [Integrations]**][2] に移動し、[**Zoom**] を選択します。
+- 組織で AI 機能が有効になっていること。
+- インシデント設定を編集する権限を持つアカウントを使用していること。
+- ミーティングのライブトランスクリプトを保存するには、組織がミーティングのライブトランスクリプトに対するアクセス権限を持っていること。**ミーティングトランスクリプトの生成** 設定が利用できない場合は、[Datadog サポート][5] にお問い合わせください。
+- インシデント AI がサマリーを生成できるように、Zoom でミーティングのキャプションを有効にする必要があります。
+
+#### ミーティングのサマリーとトランスクリプトを有効にする {#enable-meeting-summaries-and-transcripts}
+
+インシデントの Zoom ミーティングでミーティングのサマリーとトランスクリプトを有効にするには、以下を行います。
+
+1. [**Settings] > [Integrations]**[2] に移動し、[**Zoom**] を選択します。
 2. [**Enable Zoom meeting creation**] をオンにします。
 3. [**Generate AI meeting summaries**] をオンにします。
-4. (オプション) 特定のインシデントの要約を防止するための条件を追加します。デフォルトでは、インシデント AI はプライベートインシデントのミーティングを要約しません。
-5. 設定を保存します。
+4. (オプション) ミーティングのライブトランスクリプトを保存するには、**ミーティングトランスクリプトを生成** (**AI ミーティングサマリーの生成** の下に表示されます) をオンにしてください。
+5. (オプション) 特定のインシデントのサマリーを防止するための条件を追加します。
+6. 設定を保存します。
 
-**注**: インシデント AI が要約を生成できるように、Zoom でミーティングのキャプションを有効にしてください。
-
-前提条件、要約の投稿先、要約の確認、Transcriber の再招待については、[Incident AI のミーティングの要約][5]を参照してください。
+サマリーの確認、トランスクリプトの表示、トランスクリプトノートブックへのアクセス権限の管理、およびトランスクリプト担当者の再招待については、[ミーティングのサマリーとトランスクリプト][6] を参照してください。
 
 ## 参考資料 {#further-reading}
 
@@ -111,4 +119,5 @@ AI 生成によるミーティングの要約を有効にして、インシデ�
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /ja/incident_response/incident_management/guides/test_incidents
 [4]: /ja/incident_response/incident_management/setup_and_configuration/integrations/slack
-[5]: /ja/incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+[5]: /ja/help/
+[6]: /ja/incident_response/incident_management/investigate/meeting_summaries_and_transcripts

@@ -1,15 +1,15 @@
 ---
 further_reading:
 - link: /gpu_monitoring/summary
-  tag: 문서
+  tag: 설명서
   text: GPU Monitoring Summary 페이지
 - link: /gpu_monitoring/explorer
-  tag: 문서
+  tag: 설명서
   text: GPU Monitoring 탐색기
 - link: https://www.datadoghq.com/blog/datadog-gpu-monitoring/
   tag: 블로그
-  text: Datadog GPU Monitoring으로 AI 인프라 최적화 및 문제 해결
-title: GPU Monitoring 설정하기
+  text: Datadog GPU Monitoring으로 AI 인프라 최적화 및 문제 해결하기
+title: GPU Monitoring 설정
 ---
 이 페이지에서는 인프라에 Datadog GPU Monitoring을 설정하는 방법을 안내합니다. 아래에서 운영 환경에 해당하는 구성 지침을 따르세요.
 
@@ -21,7 +21,7 @@ Datadog의 GPU Monitoring을 사용하려면 환경이 다음 조건을 충족�
   - [Kubernetes에 Datadog Agent 설치][1]
   - [Docker에 Datadog Agent 설치][7]
   - [컨테이너화되지 않은 Linux에 Datadog Agent 설치][8]
-- 호스트에 NVIDIA 드라이버가 설치되어 있어야 합니다. Kubernetes를 사용하는 경우, Kubernetes용 NVIDIA 장치 플러그인이 [직접][3] 또는 [NVIDIA GPU Operator][4]를 통해 설치되어 있어야 합니다.
+- 호스트에 NVIDIA 드라이버가 설치되어 있어야 합니다. Kubernetes를 사용하는 경우, Kubernetes용 NVIDIA 장치 플러그인이 [직접][3] 또는 [NVIDIA GPU Operator][4]를 통해 설치되어 있어야 합니다. GPU가 Dynamic Resource Allocation(DRA)을 통해 할당되는 경우, [Set Up GPU Monitoring with Dynamic Resource Allocation][15]도 따르세요.
 
 #### 최소 버전 요구 사항 {#minimum-version-requirements}
 
@@ -49,7 +49,7 @@ GPU Monitoring 메트릭 수집을 활성화한 후, 더욱 심층적인 인사�
 - 클라우드 비용 및 클라우드 인스턴스 유형 정보를 확인하려면 Datadog UI에서 [AWS][9], [Google Cloud][10], [Azure][11] 또는 [Oracle][12] 클라우드 통합을 활성화하세요.
 - 프로세스 수준의 인사이트를 얻으려면 Datadog의 [Live Processes][13]를 설정하세요.
 
-### 비 Kubernetes 환경 또는 균일한 Kubernetes 클러스터에서 GPU Monitoring 설정하기 {#set-up-gpu-monitoring-on-a-non-kubernetes-environment-or-uniform-kubernetes-cluster}
+### 비 Kubernetes 환경 또는 균일한 Kubernetes 클러스터에서 GPU Monitoring 설정 {#set-up-gpu-monitoring-on-a-non-kubernetes-environment-or-uniform-kubernetes-cluster}
 
 다음 환경에서 GPU Monitoring을 설정하는 기본 단계는 다음과 같습니다.
 - **모든** 노드에 GPU 장치가 있는 Kubernetes 클러스터
@@ -528,3 +528,4 @@ Helm을 사용하여 혼합 클러스터에서 GPU Monitoring을 설정하려면
 [12]: /ko/getting_started/integrations/oci/
 [13]: /ko/infrastructure/process?tab=linuxwindows#installation
 [14]: /ko/containers/datadog_operator/providers/
+[15]: /ko/gpu_monitoring/dra/

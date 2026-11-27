@@ -15,7 +15,7 @@ further_reading:
 title: .NET MAUI のクラッシュレポートと Error Tracking
 type: multi-code-lang
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Error Tracking は、.NET MAUI SDK から収集されたエラーを処理します。
 
@@ -46,11 +46,9 @@ C# Error Trackingは、RUM が有効になるとすぐに自動的に有効に�
 })
 ```
 
-{% alert level="info" %}
-`NativeCrashReportEnabled = true` の場合、アプリケーションをクラッシュさせる未処理の C# 例外は **2 回**報告されます。1 回は `AppDomain.UnhandledException` によってキャプチャされた C# エラーとして、もう 1 回はプラットフォームのクラッシュレポーターによってキャプチャされたネイティブの iOS または Android クラッシュとして報告されます。これらのイベントは同じ RUM セッションおよびビューを共有するため、エクスプローラーで関連付けることができます。
-
-どちらか一方のみを保持したい場合は、[`ErrorEventMapper`][5] を使用して、ワークフローに合わないコピーを破棄してください (例: `Source` または `Stacktrace` コンテンツでフィルタリング)。
-{% /alert %}
+<div class="alert alert-info">
+ <code>NativeCrashReportEnabled = true</code>の場合は、アプリケーションをクラッシュさせる未処理の C# 例外が <strong>2 回</strong>報告されます。報告される例外の一つは <code>AppDomain.UnhandledException</code>によってキャプチャされる C# エラーです。もう一つは、プラットフォームのクラッシュ報告機能によってキャプチャされるネイティブの iOS または Android のクラッシュです。これらのイベントは同じ RUM セッションおよびビューを共有するため、エクスプローラーで関連付けることができます。<br><br>どちらか一方のみを保持するには、<a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> を使用して、ワークフローに合わないほうを破棄します。たとえば、 <code>Source</code> または <code>Stacktrace</code> の内容でフィルタリングします。
+</div>
 
 ## セットアップ {#setup}
 
@@ -126,7 +124,7 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
   -p:DatadogUploadSymbols=true -v n -tl:off
 ```
 
-アップロード後、シンボルの処理には最大 5 分かかります。[{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4] で受信されたことを確認できます。
+アップロード後、シンボルの処理には最大 5 分かかります。[[{{< ui >}}Error Tracking{{< /ui >}}] (エラー追跡) > [{{< ui >}}Settings{{< /ui >}}] (設定) > [{{< ui >}}Symbol Files{{< /ui >}}] (シンボルファイル)][4] で受信されたことを確認できます。
 
 ## 制限事項 {#limitations}
 
@@ -166,7 +164,7 @@ MAUI アプリでは、ネイティブの `.so` ファイルは通常、.NET ラ
 Crash Reporting と Error Tracking の構成を検証するには、クラッシュを発生させ、Datadog にエラーが表示されることを確認します。
 
 1. 実機またはエミュレーターでアプリケーションを実行します (dSYM は iOS のデバイスビルドでのみ生成されます)。
-2. 未処理の例外をスローするコードを実行します。たとえば、以下のとおりです。
+2. 未処理の例外をスローするコードを実行します。例:
 
    ```csharp
    void OnButtonClicked(object sender, EventArgs e)
@@ -193,7 +191,7 @@ dSYM はデバイスビルドに対してのみ生成されます (`-r ios-arm64
 ターミナルロガーは情報メッセージを非表示にします。`-v n -tl:off` を `dotnet publish` コマンドに追加します。
 
 **アップロードは完了するが、Datadog にシンボルが表示されない**
-シンボルの処理には最大 5 分かかります。[{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4] をチェックしてください。
+シンボルの処理には最大 5 分かかります。[[{{< ui >}}Error Tracking{{< /ui >}}] > [{{< ui >}}Settings{{< /ui >}}] > [{{< ui >}}Symbol Files{{< /ui >}}]][4] をチェックしてください。
 
 ## 参考資料 {#further-reading}
 
@@ -203,4 +201,3 @@ dSYM はデバイスビルドに対してのみ生成されます (`-r ios-arm64
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /ja/real_user_monitoring/application_monitoring/maui/setup
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /ja/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events

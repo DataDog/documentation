@@ -13,7 +13,7 @@ title: GPU モニタリングの設定
 ---
 このページでは、インフラストラクチャーで Datadog の GPU モニタリングをセットアップするための手順を説明します。以下の動作環境に合わせた構成手順に従ってください。
 
-### 前提条件 {#prerequisites}
+### 前提条件{#prerequisites}
 
 Datadog の GPU モニタリングの使用を開始するには、環境が以下の基準を満たしている必要があります。
 
@@ -21,7 +21,7 @@ Datadog の GPU モニタリングの使用を開始するには、環境が以�
   - [Kubernetes に Datadog Agent をインストールする][1]
   - [Docker に Datadog Agent をインストールする][7]
   - [非コンテナ化 Linux に Datadog Agent をインストールする][8]
-- ホストに NVIDIA ドライバーがインストールされていること。Kubernetes を使用している場合は、Kubernetes 用の NVIDIA デバイスプラグインがインストールされていること ([直接][3]、または [NVIDIA GPU Operator][4] を経由)
+- ホストに NVIDIA ドライバーがインストールされていること。Kubernetes を使用している場合は、Kubernetes 用の NVIDIA デバイスプラグインがインストールされていること ([直接][3]、または [NVIDIA GPU Operator][4] を経由)。代わりに GPU が Dynamic Resource Allocation (DRA) により割り当てられている場合は、[Dynamic Resource Allocation を使用した GPU モニタリングのセットアップ][15]も参照してください。
 
 #### 最小バージョン要件 {#minimum-version-requirements}
 
@@ -510,7 +510,7 @@ Helm を使用して混在クラスターで GPU モニタリングをセット�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -528,3 +528,4 @@ Helm を使用して混在クラスターで GPU モニタリングをセット�
 [12]: /ja/getting_started/integrations/oci/
 [13]: /ja/infrastructure/process?tab=linuxwindows#installation
 [14]: /ja/containers/datadog_operator/providers/
+[15]: /ja/gpu_monitoring/dra/

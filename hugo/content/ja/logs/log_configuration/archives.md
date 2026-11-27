@@ -169,7 +169,7 @@ Datadog アカウントを設定して、取り込まれたすべてのログ ([
    * Datadog インテグレーションで使用されているロールを特定します。デフォルトでは **DatadogIntegrationRole** という名前ですが、組織で名称が変更されている場合は異なる可能性があります。ロール名をクリックして、ロールのサマリーページを開きます。
    * [{{< ui >}}Add permissions{{< /ui >}}]、続いて [{{< ui >}}Attach policies{{< /ui >}}] をクリックします。
    * 上記で作成したポリシーの名称を入力します。
-   * {{< ui >}}Attach policies{{< /ui >}} をクリックします。
+   * [{{< ui >}}Attach policies{{< /ui >}}] (ポリシーをアタッチ) をクリックします。
 
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
@@ -220,7 +220,7 @@ Datadog アカウントを設定して、取り込まれたすべてのログ ([
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Amazon S3**               | - S3 バケットに適した AWS アカウントとロールの組み合わせを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツにプレフィックスディレクトリを入力できます。|
 | **Azure Storage**        | - {{< ui >}}Azure Storage{{< /ui >}} アーカイブタイプを選択し、ストレージアカウントに対する Storage Blob Data Contributor ロールを持つ Datadog アプリの Azure テナントおよびクライアントを選択します。<br>- ストレージアカウント名とアーカイブのコンテナ名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツに使用するプレフィックスディレクトリを入力します。|
-| **Google Cloud Storage** | - {{< ui >}}Google Cloud Storage{{< /ui >}} アーカイブタイプを選択し、ストレージバケットへの書き込みアクセス許可を持つ GCS サービスアカウントを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツに使用するプレフィックスディレクトリを入力します。|
+| **Google Cloud Storage** | - {{< ui >}}Google Cloud Storage{{< /ui >}} アーカイブタイプを選択し、ストレージバケットへの書き込み権限を持つ GCS サービスアカウントを選択します。<br>- バケット名を入力します。<br>**オプション**: ログアーカイブのすべてのコンテンツに使用するプレフィックスディレクトリを入力します。|
 
 ### 高度な設定 {#advanced-settings}
 
@@ -452,6 +452,12 @@ Datadog アカウントでアーカイブ設定が正常に構成された時点
 
 アーカイブにカーソルを合わせると、エラーの詳細と問題を解決するための対処方法が表示されます。[Events Explorer][15] にもイベントが生成されます。これらのイベントに対してモニターを作成し、障害を迅速に検出して修正することができます。
 
+## Observability Pipelines アーカイブ{#observability-pipelines-archives}
+
+Observability Pipelines のアーカイブ送信先で Archive Search を有効にすると、パイプラインのデプロイ後に Datadog によりログアーカイブが作成されます。セットアップの手順については、[Datadog Archives (Amazon S3)][20]、[Google Cloud Storage][21]、または [Azure Storage][22] の送信先に関するドキュメントを参照してください。これらのアーカイブは、[Log Archiving & Forwarding ページ][3]の [{{< ui >}}Observability Pipelines Archives{{< /ui >}}] (Observability Pipelines アーカイブ) タブに一覧表示されます。
+
+Observability Pipelines でこれらのアーカイブのバケット構成を管理します。Datadog では、それらの権限、タグ、および [最大スキャンサイズ](#define-maximum-scan-size)を編集できます。
+
 ## 複数のアーカイブ {#multiple-archives}
 
 複数のアーカイブが定義されている場合、フィルターに基づき、最初のアーカイブにログが入力されます。
@@ -471,7 +477,7 @@ Datadog がストレージバケットに転送するログアーカイブは、
 
 このディレクトリ構造により、過去のログアーカイブを日付に基づいてクエリする処理が簡略化されます。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -498,3 +504,6 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 [19]: /ja/logs/explorer/search_syntax/#reserved-attributes
+[20]: /ja/observability_pipelines/destinations/datadog_archives/#archive-search
+[21]: /ja/observability_pipelines/destinations/google_cloud_storage/#archive-search
+[22]: /ja/observability_pipelines/destinations/azure_storage/#archive-search

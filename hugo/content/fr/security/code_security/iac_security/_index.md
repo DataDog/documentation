@@ -28,11 +28,11 @@ further_reading:
   tag: Blog
   text: 'Repérez les erreurs de configuration CI/CD avant que les bots ne le fassent
     : sécurisez GitHub Actions avec Datadog IaC Security.'
-title: Sécurité de l'infrastructure en tant que code (IaC)
+title: Infrastructure as Code (IaC) Security
 ---
 La sécurité de l'infrastructure en tant que code (IaC) de Datadog détecte les erreurs de configuration dans les configurations IaC avant qu'elles ne soient déployées. Elle signale des problèmes tels qu'un chiffrement manquant ou un accès trop permissif dans les fichiers stockés dans vos dépôts GitHub, GitLab ou Azure DevOps connectés. Pour plus d'informations, consultez [Règles IaC Security][13].
 
-{{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="Panneau latéral d’erreur de configuration IaC affichant les détails du problème de haute gravité IMDSv1 activé, incluant un résumé de sécurité, un extrait de code, des horodatages de détection et des étapes de remédiation." width="100%">}}
+{{< img src="/security/infrastructure_as_code/iac_misconfiguration_side_panel.png" alt="Panneau latéral d'erreur de configuration IaC affichant les détails du problème de haute gravité IMDSv1 activé, incluant un résumé de sécurité, un extrait de code, des horodatages de détection et des étapes de remédiation." width="100%">}}
 
 ## Fonctionnement {#how-it-works}
 
@@ -62,7 +62,7 @@ Pour gérer le lien profond Cursor, installez l'extension [Datadog extension for
 
 Utilisez [PR Gates][11] pour appliquer des normes de sécurité aux modifications d'infrastructure en tant que code avant qu'elles ne soient fusionnées. Datadog analyse les modifications IaC dans chaque pull request, identifie toute vulnérabilité dépassant votre seuil de gravité configuré et signale un statut de réussite ou d'échec à GitHub ou Azure DevOps.
 
-Par défaut, les vérifications sont informatives, mais vous pouvez les rendre bloquantes dans GitHub ou Azure DevOps pour empêcher la fusion lorsque des problèmes critiques sont détectés. Pour obtenir des instructions de configuration, consultez [Set up PR Gate Rules][12].
+Par défaut, les checks sont informatifs, mais vous pouvez les rendre bloquants dans GitHub ou Azure DevOps pour empêcher la fusion lorsque des problèmes critiques sont détectés. Pour obtenir des instructions de configuration, consultez [Set up PR Gate Rules][12].
 
 ### Afficher et filtrer les constats {#view-and-filter-findings}
 
@@ -83,9 +83,13 @@ Cliquez sur n'importe quel constat pour ouvrir un panneau latéral qui affiche :
 - {{< ui >}}Details{{< /ui >}} : Une description et le code pertinent qui a déclenché le constat. (Pour afficher des extraits de code, [installez GitHub App][9].)
 - {{< ui >}}Remediation{{< /ui >}} : Si disponibles, des corrections de code suggérées sont fournies pour les constats qui prennent en charge la remédiation.
 
+### Priorisez les erreurs de configuration en tenant compte du contexte d’exécution {#prioritize-misconfigurations-with-runtime-context}
+
+Les résultats d’IaC Security indiquent les services auxquels chaque résultat est associé et les risques d’exécution que ces services comportent, tels que {{< ui >}}In Production{{< /ui >}} et {{< ui >}}Exposed to Attacks{{< /ui >}}. Une association signifie que le fichier IaC se trouve dans le référentiel ou les fichiers de déploiement du service associé. Cela ne confirme pas que l'erreur de configuration est présente dans le service en cours d'exécution. Utilisez les facettes {{< ui >}}Risks{{< /ui >}} pour vous concentrer sur les résultats associés aux services actifs et exposés. Pour plus d’informations, consultez [Prioriser les résultats en tenant compte du contexte d’exécution][15].
+
 ### Créer des tickets Jira à partir des constats {#create-jira-tickets-from-findings}
 
-Vous pouvez créer un ticket Jira bidirectionnel directement à partir de n'importe quel constat pour suivre et corriger les problèmes dans vos flux de travail existants. Le statut du ticket reste synchronisé entre Datadog et Jira. Pour plus d'informations, consultez [Bidirectional ticket syncing with Jira][4].
+Vous pouvez créer un ticket Jira bidirectionnel directement à partir de n'importe quel constat pour suivre et corriger les problèmes dans vos workflows existants. Le statut du ticket reste synchronisé entre Datadog et Jira. Pour plus d'informations, consultez [Bidirectional ticket syncing with Jira][4].
 
 ### Masquer les résultats {#mute-findings}
 
@@ -97,7 +101,7 @@ Pour restaurer un constat en mode mute, cliquez sur {{< ui >}}Unmute{{< /ui >}} 
 
 Vous pouvez configurer des exclusions pour empêcher certains constats d'apparaître dans les résultats d'analyse. Les exclusions peuvent être basées sur l'ID de règle, le chemin de fichier, le type de ressource, la gravité ou le tag.
 
-Les exclusions sont gérées via un fichier de configuration ou des commentaires en ligne dans votre code IaC. Pour les formats pris en charge et des exemples d’utilisation, consultez [Configure IaC Security][7].
+Les exclusions sont gérées via un fichier de configuration ou des commentaires en ligne dans votre code IaC. Pour les formats pris en charge et des exemples d'utilisation, consultez [Configure IaC Security][7].
 
 ## Étapes suivantes {#next-steps}
 
@@ -124,3 +128,4 @@ Les exclusions sont gérées via un fichier de configuration ou des commentaires
 [12]: /fr/pr_gates/setup
 [13]: /fr/security/code_security/iac_security/iac_rules
 [14]: /fr/security/code_security/iac_security/custom_rules
+[15]: /fr/security/code_security/runtime_context/

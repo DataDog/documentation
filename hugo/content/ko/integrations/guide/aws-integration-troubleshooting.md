@@ -99,7 +99,7 @@ AWS에서 메트릭이 생성된 시점과 Datadog에 나타나는 시점 사이
 
 수집 방법으로 인한 지연 외에도 일부 AWS 서비스는 CloudWatch 측에서 자체적인 지연 시간을 발생시킵니다.
 
-- **S3 Storage Lens** 메트릭은 지속적으로 게시되지 않고 일단위로 게시됩니다.
+- **S3 Storage Lens** 메트릭은 지속적으로 게시되지 않고 일 단위로 게시됩니다.
 - **AWS 결제 메트릭**은 몇 시간 지연되며 드물게 업데이트됩니다.
 EC2에 대한 - **상세 모니터링**은 기본 5분 단위 대신 1분 단위 메트릭을 제공하지만, AWS에서 인스턴스별로 활성화해야 합니다.
 
@@ -145,12 +145,14 @@ AWS 호스트에 Agent를 설치할 때 Agent 구성에서 호스트 이름을 �
 
 ### IMDS v2를 사용하는 EC2 메타데이터 {#ec2-metadata-with-imds-v2}
 
-컨테이너화된 환경에서는 Kubernetes 클러스터에서 실행 중인 파드에 IAM 역할/자격 증명을 할당하는 방식으로 EC2 메타데이터 엔드포인트를 잠가 두었기 때문에 문제가 발생할 수 있습니다. `Kube2IAM` 및 `kiam`은 이를 수행하는 데 일반적으로 사용되는 도구입니다. 이 문제를 해결하려면 `Kube2IAM` 또는 `kiam` 구성을 업데이트하여 이 엔드포인트에 대한 접근을 허용하세요.
+컨테이너화된 환경에서는 Kubernetes 클러스터에서 실행 중인 포드에 IAM 역할/자격 증명을 할당하는 방식으로 EC2 메타데이터 엔드포인트를 잠가 두었기 때문에 문제가 발생할 수 있습니다. `Kube2IAM` 및 `kiam`은 이를 수행하는 데 일반적으로 사용되는 도구입니다. 이 문제를 해결하려면 `Kube2IAM` 또는 `kiam` 구성을 업데이트하여 이 엔드포인트에 대한 접근을 허용하세요.
 
 IMDSv2는 기본 구성에서 IP 홉 수가 1보다 큰 연결, 즉 IP 게이트웨이를 통과한 연결을 거부합니다. 런타임이 컨테이너의 트래픽을 가상 IP 게이트웨이를 통해 전달하므로 Agent가 호스트 네트워크가 아닌 다른 네트워크의 컨테이너에서 실행 중일 때 문제가 발생할 수 있습니다. 이는 ECS 배포에서 흔히 발생합니다. 이 문제는 다음 옵션으로 해결할 수 있습니다.
 
  * [최대 홉 수를 `2` 이상으로 늘리기][8]. 이렇게 하면 Agent 이외의 컨테이너도 IMDS에 저장된 데이터에 접근할 수 있게 되므로 IMDS에 저장된 데이터의 보안에 영향을 줄 수 있습니다.
- * [`providers.eks.ec2.useHostnameFromFile`을 true로 설정][9]하여 cloud-init이 검색한 호스트 이름을 사용합니다.
+ * cloud-init에서 발견한 호스트 이름을 사용하세요.
+     * Helm을 사용하여 [`providers.eks.ec2.useHostnameFromFile`을 `true`로 설정[9]하세요.
+     * Datadog Operator 버전 1.29.0 이상에서는 `DatadogAgent` 또는 영향을 받는 노드를 대상으로 하는 [DatadogAgentProfile][31]에서 `agent.datadoghq.com/cluster-provider` 주석을 `eks-ec2-use-hostname-from-file` 값으로 설정하세요. [공급자 문서][32]를 참조하세요.
  * [`agents.useHostNetwork`를 true로 설정][10]하여 호스트 UTS 네임스페이스에서 Agent를 실행합니다.
 
 ### IMDS를 사용하는 EC2 호스트 이름 {#ec2-hostname-with-imds}
@@ -221,3 +223,5 @@ AWS 통합을 제거했더라도 EC2 인스턴스에서 Datadog Agent를 계속 
 [28]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html
 [29]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
 [30]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+[31]: /ko/containers/datadog_operator/datadog_agent_profiles
+[32]: /ko/containers/datadog_operator/providers

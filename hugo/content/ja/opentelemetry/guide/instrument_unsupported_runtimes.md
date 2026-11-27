@@ -5,7 +5,7 @@ further_reading:
   text: Datadog と OpenTelemetry の互換性
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: ドキュメント
-  text: カスタム OpenTelemetry コンポーネントを使用する
+  text: Agent のコレクターにコンポーネントを追加する
 - link: /opentelemetry/instrument/
   tag: ドキュメント
   text: OpenTelemetry を使用してアプリケーションをインスツルメントする
@@ -25,7 +25,7 @@ title: OpenTelemetry を使用してサポートされていないランタイ�
 
 ## 前提条件 {#prerequisites}
 
-- Datadog にデータを送信するように構成された OpenTelemetry 互換バックエンド。DDOT Collector、OpenTelemetry Collector、または直接 OTLP インジェストなどのセットアップオプションについては、[Send OpenTelemetry Data to Datadog][4] を参照してください。
+- Datadog にデータを送信するように構成された OpenTelemetry 互換バックエンド。DDOT Collector、OpenTelemetry Collector、または直接 OTLP インジェクトなどのセットアップオプションについては、[OpenTelemetry のデータを Datadog に送信する][4] を参照してください。
 - [Bun][2] がインストールされていること (v1.0 以降)。
 - インスツルメントする Bun アプリケーション。
 
@@ -168,7 +168,7 @@ export function startServer() {
 
 ## 制限事項 {#limitations}
 
-- **自動インスツルメンテーションの対応範囲**: OpenTelemetry Node.js 自動インスツルメンテーションライブラリは、Bun の Node.js 互換レイヤーに依存しています。一般的なライブラリ (HTTP クライアント、Express、データベースドライバなど) は動作しますが、一部のインスツルメンテーションパッケージは期待どおりに機能しない場合があります。
+- **自動インスツルメンテーションの対応範囲**: OpenTelemetry Node.js 自動インスツルメンテーションライブラリは、Bun の Node.js 互換レイヤーに依存しています。一般的なライブラリ (HTTP クライアント、Express、データベースドライバーなど) は動作しますが、一部のインスツルメンテーションパッケージは期待どおりに機能しない場合があります。
 - **Bun ネイティブ API**: `Bun.serve()`、`bun:sqlite`、およびネイティブのファイル I/O API などの組み込み Bun API は、自動的にインスツルメントされません。例については、[Bun ネイティブ API の手動インスツルメンテーションの追加](#add-manual-instrumentation-for-bun-native-apis)を参照してください。
 - **ライブラリの互換性**: すべての Node.js インスツルメンテーションライブラリが Bun で動作することは保証されていません。特定の依存関係をテストし、エラーの原因となるインスツルメンテーションがある場合は、`getNodeAutoInstrumentations()` に構成オプションを渡してそのインスツルメンテーションを無効にしてください。`@opentelemetry/instrumentation-fs` パッケージは問題の原因となることが多く、上記の構成例では無効にされています。
 

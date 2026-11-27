@@ -15,13 +15,13 @@ further_reading:
 - link: /bits_ai/bits_security_analyst/
   tag: 설명서
   text: Bits Security Analyst
-title: 보안 신호 조사하기
+title: 보안 신호 조사
 ---
 ## 개요 {#overview}
 
 Datadog이 탐지 규칙에 따라 로그를 분석하는 동안 위협을 탐지하면 Cloud SIEM 보안 신호가 생성됩니다. 전용 쿼리 언어를 배울 필요 없이 Signals Explorer에서 보안 신호를 조회하고, 검색하고, 필터링하고, 연결할 수 있습니다. Datadog 플랫폼에서 본인이나 다른 사용자에게 보안 신호를 할당할 수도 있습니다. Signals Explorer 외에도 [Notification Rules][1]를 구성하여 특정 개인이나 팀에 신호를 보내 문제를 알릴 수 있습니다.
 
-[Audit Trail][2]에서 상태를 변경하고 신호 작업 기록을 조회하는 등 보안 신호를 수정하려면 `Security Signals Write` 권한이 필요합니다. Cloud Security의 Datadog Security에서 사용할 수 있는 Datadog의 기본 역할과 세분화된 역할 기반 액세스 제어 권한에 대한 자세한 내용은 [역할 기반 액세스 제어][3]를 참조하세요.
+보안 신호의 상태를 변경하거나 [Audit Trail][2]에서 신호 작업 기록을 조회하는 등 보안 신호를 수정하려면 `Security Signals Write` 권한이 필요합니다. Cloud Security의 Datadog Security에서 사용할 수 있는 Datadog의 기본 역할과 세분화된 역할 기반 액세스 제어 권한에 대한 자세한 내용은 [역할 기반 액세스 제어][3]를 참조하세요.
 
 Cloud SIEM 보안 신호를 조사하는 자율 AI 에이전트를 사용하려면 [Bits Security Analyst][14]를 참조하세요.
 
@@ -75,7 +75,7 @@ MITRE ATT&CK 전술 및 기법별로 신호를 조회하려면 다음 단계를 
    1. {{< ui >}}Assign Signal{{< /ui >}}을 클릭하여 본인 또는 다른 Datadog 사용자에게 신호를 할당합니다.
    1. {{< ui >}}Take Action{{< /ui >}}에서 케이스를 생성하거나, 인시던트를 선언하거나, 억제 규칙을 편집하거나, 워크플로를 실행할 수 있습니다. 케이스를 생성하면 분류 상태가 자동으로 `Under Review`로 설정됩니다. 케이스와 신호를 연결하는 방법에 대한 자세한 내용은 [Case Management](#case-management)를 참조하세요.
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="두 개의 IP 주소와 해당 위치가 표시된 손상된 AWS IAM 사용자 액세스 키의 신호 사이드 패널" style="width:90%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="두 개의 IP 주소와 해당 위치가 표시된 보안이 침해된 AWS IAM 사용자 액세스 키의 신호 사이드 패널" style="width:90%;" >}}
 
 ### 여러 신호 분류 {#triage-multiple-signals}
 
@@ -109,7 +109,7 @@ Workflow Automation을 사용하여 신호를 조사하고 수정하는 데 필�
 인시던트 대응을 간소화하고 분류 과정의 불편을 줄이기 위해 Cloud SIEM은 신호와 관련된 워크플로를 제안합니다. 제안된 워크플로는 신호와 태그 유사성이 가장 높은 것을 기준으로 선택됩니다. Cloud SIEM은 다음 정보를 사용하여 신호에 대한 워크플로를 제안합니다.
 
 - **사전 구성된 워크플로인 Blueprints에서 자동으로 추가된 태그**<br>
-워크플로는 AWS CloudTrail과 같은 플랫폼과 관련된 일련의 작업으로 구성됩니다. Blueprint에서 생성된 워크플로에는 소스를 기반으로 태그가 자동으로 적용됩니다. 예를 들어, 'AWS에서 가상 머신 종료'와 같은 워크플로 작업에는 AWS CloudTrail `source` 태그가 지정됩니다.
+워크플로는 AWS CloudTrail과 같은 플랫폼과 관련된 일련의 작업으로 구성됩니다. Blueprint에서 생성된 워크플로에는 소스를 기반으로 태그가 자동으로 적용됩니다. 예를 들어, 'Shutdown virtual machine on AWS'와 같은 워크플로 작업에는 AWS CloudTrail `source` 태그가 지정됩니다.
 - **수동으로 추가한 태그**<br>
 Blueprint에서 파생된 워크플로와 사용자 지정 워크플로 모두에 수동으로 태그를 추가하여 어떤 워크플로에 우선순위를 지정할지 사용자 지정할 수 있습니다. 올바른 컨텍스트 매칭을 위해 이러한 태그는 신호, 경보를 생성한 로그 또는 탐지 규칙 자체의 태그와 일치해야 합니다.
 - **태그 지정 전략**<br>
@@ -194,24 +194,28 @@ Cloud SIEM [Security cases][13] 설정 페이지에서 신호 및 보안 케이�
 - **케이스 프로젝트 설정**
 
   기본 Cloud SIEM 보안 케이스 프로젝트와 선택 가능한 다른 보안 프로젝트를 선택하세요.
-  - **기본 SIEM 보안 케이스 프로젝트**: 보안 케이스를 프로젝트에 연결할 때 기본적으로 표시할 프로젝트를 선택합니다. 이 프로젝트는 Cloud SIEM [Cases][12] 페이지에서도 기본 프로젝트로 표시됩니다.
-  - **보안 케이스 프로젝트 범위 지정**: 보안 케이스를 연결할 때 선택할 수 있는 보안 케이스 프로젝트를 최대 20개까지 선택합니다.
+  - **Default SIEM Security Case Project**: 보안 케이스를 프로젝트에 연결할 때 기본적으로 표시할 프로젝트를 선택합니다. 이 프로젝트는 Cloud SIEM [Cases][12] 페이지에서도 기본 프로젝트로 표시됩니다.
+  - **Security Case project scoping**: 보안 케이스를 연결할 때 선택할 수 있는 보안 케이스 프로젝트를 최대 20개까지 선택합니다.
 
 - **케이스 생성 기본 설정**
 
   하나 이상의 신호에서 케이스를 생성할 때 케이스 필드에 따라 신호의 값을 케이스에 사용하거나, 값을 비워 두거나, 정적 값을 할당할 수 있습니다.
-  <div class="alert alert-tip"><strong>신호-케이스 상관관계 스키마 표시</strong>를 클릭하여 Datadog이 신호 상태를 케이스 상태로, 신호 중증도를 케이스 우선순위로 매핑하는 방법을 확인하세요.</div>
+  <div class="alert alert-tip"><strong>Show signal to case correlation scheme</strong>을 클릭하여 Datadog이 신호 상태를 케이스 상태로, 신호 중증도를 케이스 우선순위로 매핑하는 방법을 확인하세요.</div>
 
 - **신호 첨부 설정**
 
   신호를 케이스에 첨부할 때 해당 신호에 할당할 기본값을 선택합니다.
-  <div class="alert alert-tip"><strong>케이스-신호 보관 사유 매핑 표시</strong>를 클릭하여 Datadog이 케이스 해결 사유를 신호 보관 사유로 매핑하는 방법을 확인하세요.</div>
+  <div class="alert alert-tip"><strong>Show case to signal archive reason mapping</strong>을 클릭하여 Datadog이 케이스 해결 사유를 신호 보관 사유로 매핑하는 방법을 확인하세요.</div>
 
   - **케이스에 첨부 시**:
-    - **신호 상태** 및 **신호 담당자**: 신호를 케이스에 첨부할 때 신호 상태와 담당자를 유지하거나 특정 값을 할당하도록 선택합니다.
-    - **재정의 허용**: 이 토글을 켜서 해당 필드의 기존 값을 재정의할 수 있도록 합니다. 이 토글이 꺼져 있으면 선택한 상태와 담당자는 해당 필드가 비어 있는 경우에만 적용됩니다.
+    - **Signal Status** 및 **Signal Assignee**: 신호를 케이스에 첨부할 때 신호 상태와 담당자를 유지하거나 특정 값을 할당하도록 선택합니다.
+    - **Allow Override**: 이 토글을 켜서 해당 필드의 기존 값을 재정의할 수 있도록 합니다. 이 토글이 꺼져 있으면 선택한 상태와 담당자는 해당 필드가 비어 있는 경우에만 적용됩니다.
   - **케이스 업데이트 시**:
-    - **신호 상태**: 케이스에 해당하는 상태를 신호에 할당하거나 기존 상태를 그대로 유지할지 선택합니다.
+    - **Signal Status**: 케이스에 해당하는 상태를 신호에 할당하거나 기존 상태를 그대로 유지할지 선택합니다.
+
+- **Signal Grouping**
+
+  자동 케이스 생성 시 관련 신호를 기존 케이스에 추가하는 데 사용할 그룹화 전략을 선택하세요. [신호를 케이스로 그룹화][15]를 참조하세요.
 
 ### 인시던트 선언 {#declare-an-incident}
 
@@ -219,7 +223,7 @@ Cloud SIEM [Security cases][13] 설정 페이지에서 신호 및 보안 케이�
 
 신호 패널에서 인시던트를 선언하려면 다음 단계를 따르세요.
 
-1. {{< ui >}}Next Steps{{< /ui >}} 섹션에서 {{< ui >}}Declare Incident{{< /ui >}}를 클릭합니다.
+1. {{< ui >}}Next Steps{{< /ui >}} 섹션에서 {{< ui >}}Declare Incident{{< /ui >}}을 클릭합니다.
 1. 인시던트 템플릿을 작성합니다.
 
 신호를 인시던트에 추가하려면 {{< ui >}}Declare Incident{{< /ui >}} 옆의 아래쪽 화살표를 클릭하고 신호를 추가할 인시던트를 선택하세요. {{< ui >}}Confirm{{< /ui >}}를 클릭하세요.
@@ -237,7 +241,7 @@ Security Signals Explorer에서 모든 위협 인텔리전스 일치 항목을 �
 
 {{< img src="security/security_monitoring/investigate_security_signals/threat_intel_results_categories.png" alt="residential proxy, corp_vpn, cryptomining 및 malware 위협 인텔리전스 범주별로 분류된 신호의 막대 그래프를 보여주는 Signals Explorer" style="width:80%;" >}}
 
-위협 인텔리전스 피드에 대한 자세한 내용은 [Threat Intelligence][10] 문서를 참조하세요.
+위협 인텔리전스 피드에 대한 자세한 내용은 [위협 인텔리전스][10] 문서를 참조하세요.
 
 ### 네트워크 IP 속성별 검색 {#search-by-network-ip-attributes}
 
@@ -245,7 +249,7 @@ Security Signals Explorer에서 모든 위협 인텔리전스 일치 항목을 �
 
 신호 패널에서 직접 이 쿼리를 실행할 수도 있습니다.
 1. {{< ui >}}IPS{{< /ui >}} 섹션에서 IP 주소를 클릭합니다.
-2. {{< ui >}}View Logs with @network.client.ip:<ip_address>{{< /ui >}}를 선택합니다.
+2. {{< ui >}}View Logs with @network.client.ip:<ip_address>{{< /ui >}}를 선택하세요.
 
 {{< img src="security/security_monitoring/investigate_security_signals/search_logs_by_ip.png" alt="선택한 IP 주소에 대한 위협 옵션을 보여주는 신호 패널" style="width:90%;" >}}
 
@@ -267,3 +271,4 @@ Security Signals Explorer에서 모든 위협 인텔리전스 일치 항목을 �
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
 [14]: /ko/bits_ai/bits_security_analyst/
+[15]: /ko/security/cloud_siem/triage_and_investigate/signal_grouping/

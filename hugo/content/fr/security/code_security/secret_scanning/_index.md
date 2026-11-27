@@ -47,13 +47,13 @@ Lorsqu'un dépôt est analysé pour la première fois avec l'analyse hébergée,
 
 Les découvertes d'historique uniquement sont étiquetées {{< ui >}}Detected in Git History{{< /ui >}} dans la liste des découvertes. Pour les examiner :
 
-- **Sur tous les dépôts** : Accédez à [{{< ui >}}Vulnerabilities{{< /ui >}} > {{< ui >}}Secret Scanning (Secrets){{< /ui >}}][15] et filtrez selon la facette {{< ui >}}Is Git History{{< /ui >}}.
-- **Pour un seul dépôt** : Accédez à [{{< ui >}}Repositories{{< /ui >}}][14], sélectionnez le dépôt et ouvrez l'onglet {{< ui >}}Leaked Secrets{{< /ui >}}.
+- **Sur tous les dépôts** : Accédez à [{{< ui >}}Vulnerabilities{{< /ui >}} > {{< ui >}}Secret Scanning (Secrets){{< /ui >}}][15] et filtrez selon la facette {{< ui >}}Is Git History{{< /ui >}}.
+- **Pour un seul dépôt** : Accédez à [{{< ui >}}Repositories{{< /ui >}}][14], sélectionnez le dépôt et ouvrez l'onglet {{< ui >}}Leaked Secrets{{< /ui >}}.
 
-Le panneau de détails de la découverte indique où se trouve le secret dans l'historique du dépôt :
+Le panneau de détails de la découverte indique où se trouve le secret dans l'historique du dépôt :
 
-- {{< ui >}}Introduced in{{< /ui >}} : Le commit qui a ajouté le secret, et l'auteur de ce commit.
-- {{< ui >}}Removed in{{< /ui >}} : Le commit qui a supprimé le secret. Si le secret est toujours présent sur une branche ou un tag non fusionné, cela indique {{< ui >}}Not removed{{< /ui >}}.
+- {{< ui >}}Introduced in{{< /ui >}} : Le commit qui a ajouté le secret, et l'auteur de ce commit.
+- {{< ui >}}Removed in{{< /ui >}} : Le commit qui a supprimé le secret. Si le secret est toujours présent sur une branche ou un tag non fusionné, cela indique {{< ui >}}Not removed{{< /ui >}}.
 
 <div class="alert alert-info">L'historique Git est analysé une fois, lors de la première analyse d'un dépôt avec l'analyse hébergée. Un secret toujours présent sur une branche ou un tag non fusionné, mais pas sur la branche par défaut, est signalé comme une découverte d'historique uniquement. Les analyses CI n'analysent que le commit analysé.</div>
 
@@ -85,6 +85,10 @@ Sous l'onglet {{< ui >}}Secret Scanning (Secrets){{< /ui >}}, utilisez des filtr
 - Équipe
 - Visibilité du dépôt
 - {{< ui >}}Is Git History{{< /ui >}}
+
+### Priorisez les secrets en fonction du contexte d'exécution {#prioritize-secrets-with-runtime-context}
+
+Les résultats de Secret Scanning indiquent les services auxquels chaque résultat est associé et les risques d'exécution que ces services comportent : {{< ui >}}Service in Production{{< /ui >}}, {{< ui >}}Privileged Access{{< /ui >}} et {{< ui >}}Publicly Accessible{{< /ui >}}. Utilisez les facettes {{< ui >}}Risks{{< /ui >}} pour vous concentrer sur les secrets dans les services de production. Pour plus d'informations, consultez [Priorisez les résultats en fonction du contexte d'exécution][19].
 
 ### Créer des tickets Jira à partir des constats {#create-jira-tickets-from-findings}
 
@@ -128,3 +132,4 @@ Pour restaurer un constat en mode mute, cliquez sur {{< ui >}}Unmute{{< /ui >}} 
 [16]: /fr/security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [17]: /fr/security/code_security/secret_scanning/secret_validation/
 [18]: /fr/security/code_security/static_analysis/setup/#diff-aware-scanning
+[19]: /fr/security/code_security/runtime_context/

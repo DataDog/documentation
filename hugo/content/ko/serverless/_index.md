@@ -11,7 +11,7 @@ cascade:
     rank: 70
 further_reading:
 - link: /serverless/installation/
-  tag: 문서
+  tag: 설명서
   text: Serverless Monitoring 설치
 - link: https://dtdg.co/fe
   tag: 기반 활성화
@@ -21,7 +21,7 @@ further_reading:
   text: Serverless 상태
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: 블로그
-  text: Datadog으로 Azure 컨테이너 앱 모니터링
+  text: Datadog으로 Azure 컨테이너 앱 모니터링하기
 - link: https://app.datadoghq.com/release-notes?category=Serverless
   tag: 릴리스 노트
   text: 최신 Serverless 릴리스를 확인해 보세요! (앱 로그인 필요).
@@ -39,7 +39,7 @@ Serverless Monitoring을 통해 팀이 민첩성을 유지하고 운영 오버�
 
 [Datadog Serverless Monitoring][1]은 Serverless 컴퓨팅의 실시간 메트릭, 로그, 트레이스는 물론 완전 관리형 API, 대기열, 스트림, 데이터 저장소를 통합하여 서버리스 애플리케이션을 구동하는 모든 관리형 서비스에 대한 완벽한 가시성을 제공합니다.
 
-Datadog은 [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure 컨테이너 앱](#azure-container-apps) 및 [Google Cloud Run](#google-cloud-run)을 모니터링하기 위한 솔루션을 제공합니다.
+Datadog은 [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps), [Google Cloud Run](#google-cloud-run) 및 [Vercel](#vercel)을 모니터링하기 위한 솔루션을 제공합니다.
 
 ### AWS Lambda {#aws-lambda}
 
@@ -65,7 +65,7 @@ Datadog에 접두사 `aws.states.enhanced`가 붙은 향상된 Step Function 메
 
 ### Azure App Service {#azure-app-service}
 
-[Azure App Service용 Datadog 확장][7]은 Azure 웹 앱에 대한 트레이싱 기능을 제공합니다.
+[Azure App Service용 Datadog 확장 프로그램][7]은 Azure Web Apps에 대한 트레이싱 기능을 제공합니다.
 
 [{{< ui >}}Azure App Service{{< /ui >}} 뷰][8]를 사용하여 다음을 수행하세요.
 
@@ -77,11 +77,11 @@ Datadog에 접두사 `aws.states.enhanced`가 붙은 향상된 Step Function 메
 
 - App Service 플랜에서 실행 중인 앱을 매핑하여 비용이나 성능에 영향을 미칠 수 있는 앱 식별
 
-Azure App Service용 Datadog 확장은 Azure 웹 앱에 대한 트레이싱 기능을 제공합니다. Azure에서 트레이싱을 설정하는 방법에 대한 자세한 내용은 [Azure App Service][7]를 참조하세요.
+Azure App Service용 Datadog 확장 프로그램은 Azure Web Apps에 대한 트레이싱 기능을 제공합니다. Azure에서 트레이싱을 설정하는 방법에 대한 자세한 내용은 [Azure App Service][7]를 참조하세요.
 
-### Azure 컨테이너 앱 {#azure-container-apps}
+### Azure Container Apps {#azure-container-apps}
 
-Azure 컨테이너 앱은 컨테이너 기반 애플리케이션을 배포하고 확장하기 위한 완전 관리형 Serverless 플랫폼입니다. Datadog은 [Azure 통합][9]을 통해 컨테이너 앱에 대한 모니터링 및 로그 수집을 제공합니다.
+Azure Container Apps는 컨테이너 기반 애플리케이션을 배포하고 확장하기 위한 완전 관리형 Serverless 플랫폼입니다. Datadog은 [Azure 통합][9]을 통해 컨테이너 앱에 대한 모니터링 및 로그 수집을 제공합니다.
 
 또한 Datadog은 Serverless Agent를 사용하여 [컨테이너 앱을 계측][10]하고 트레이싱, 사용자 지정 메트릭, 직접 로그 수집을 가능하게 하는 솔루션을 제공합니다.
 
@@ -90,6 +90,14 @@ Azure 컨테이너 앱은 컨테이너 기반 애플리케이션을 배포하고
 Google Cloud Run은 소규모의 단일 기능 함수를 생성할 수 있는 이벤트 기반 비동기식 경량 컴퓨팅 솔루션입니다. Google Cloud Platform에서 실행되는 Serverless 함수를 모니터링하려면 [Google Cloud Platform 통합][11]을 활성화하세요.
 
 또한 Datadog은 Serverless Agent를 사용하여 [Cloud Run 애플리케이션을 계측][12]하고 트레이싱, 사용자 지정 메트릭, 직접 로그 수집을 가능하게 하는 솔루션을 제공합니다.
+
+### Vercel {#vercel}
+
+Vercel은 Next.js 애플리케이션과 같은 프런트엔드 프레임워크 및 서버리스 함수를 배포하기 위한 플랫폼입니다. [Vercel 통합][15]은 Vercel의 Log Drains 및 Trace Drains를 통해 로그, 메트릭 및 트레이스를 수집합니다. Datadog 라이브러리나 코드 변경이 필요하지 않습니다. {{< ui >}}Serverless{{< /ui >}} 앱 뷰는 각 Vercel 프로젝트의 요청, 오류 및 로그를 보여줍니다.
+
+Vercel Functions 로그의 오류는 [Error Tracking][16]의 이슈로 그룹화됩니다. 여기에는 `console.error` 출력, Pino 또는 Winston으로 기록된 오류, 처리되지 않은 예외 및 함수 크래시가 포함됩니다. Error Tracking은 트레이스 없이 로그만으로 작동하지만, 조직에서 로그에 대한 Error Tracking을 활성화해야 합니다. 이슈는 Vercel 프로젝트 이름을 `service`로 사용하며 {{< ui >}}Serverless{{< /ui >}} 앱 뷰의 각 프로젝트 페이지에 표시됩니다. 통합의 로그 파이프라인이 추출하는 항목에 대해서는 [Vercel Error Tracking][17]을 참조하세요.
+
+시작하려면 [Vercel Marketplace에서 Datadog][18]을 설치한 다음 [Vercel 통합 설정][19]을 따르세요.
 
 ## 추가 자료 {#further-reading}
 
@@ -109,3 +117,8 @@ Google Cloud Run은 소규모의 단일 기능 함수를 생성할 수 있는 �
 [12]: /ko/serverless/google_cloud_run
 [13]: /ko/integrations/amazon_step_functions
 [14]: /ko/serverless/step_functions/installation
+[15]: /ko/integrations/vercel/
+[16]: /ko/error_tracking/backend/logs/
+[17]: /ko/integrations/vercel/#error-tracking
+[18]: https://vercel.com/marketplace/datadog
+[19]: /ko/integrations/vercel/#setup

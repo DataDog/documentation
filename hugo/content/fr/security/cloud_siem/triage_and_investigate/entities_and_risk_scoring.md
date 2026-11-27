@@ -11,12 +11,15 @@ further_reading:
     Entity Analytics
 - link: https://www.datadoghq.com/blog/ai-powered-threat-analysis
   tag: Blog
-  text: 'L''IA dans les enquêtes de sécurité cloud : le rôle de l''UEBA et d''une
+  text: 'L''IA dans les enquêtes de Cloud Security : le rôle de l''UEBA et d''une
     meilleure télémétrie'
 - link: https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026
   tag: Blog
-  text: 'Nouveautés dans Cloud SIEM : enquêtes assistées par IA, renseignement sur
+  text: 'Nouveautés dans Cloud SIEM : enquêtes assistées par IA, renseignement sur
     les menaces amélioré et opérations de sécurité évolutives'
+- link: https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/
+  tag: Blog
+  text: Enquêtez sur la personne à l'origine du risque avec Datadog Cloud SIEM
 title: Entity Risks
 ---
 ## Présentation {#overview}
@@ -76,7 +79,7 @@ La section {{< ui >}}What Happened{{< /ui >}} du panneau résume le nombre de si
 
 La section {{< ui >}}Risk Contributors{{< /ui >}} affiche la liste des signaux déclenchés, des mauvaises configurations pertinentes et des risques liés à l'identité.
 
-Les sections {{< ui >}}What Happened{{< /ui >}} et {{< ui >}}Risk Contributors{{< /ui >}} incluent uniquement les signaux, les mauvaises configurations et les risques liés à l'identité qui contribuent au score de risque de l'entité. Pour voir tous les signaux associés à l'entité, y compris ceux qui n'affectent pas le score, cliquez sur {{< ui >}}View All Related Signals{{< /ui >}} ; pour les mauvaises configurations et les risques liés à l'identité, cliquez sur {{< ui >}}View in Vulnerability Explorer{{< /ui >}}.
+Les sections {{< ui >}}What Happened{{< /ui >}} et {{< ui >}}Risk Contributors{{< /ui >}} incluent uniquement les signaux, les mauvaises configurations et les risques liés à l'identité qui contribuent au score de risque de l'entité. Pour voir tous les signaux associés à l'entité, y compris ceux qui n'affectent pas le score, cliquez sur {{< ui >}}View All Related Signals{{< /ui >}} ; pour les mauvaises configurations et les risques liés à l'identité, cliquez sur {{< ui >}}View in Vulnerability Explorer{{< /ui >}}.
 
 ### Triez et atténuez les menaces en masse {#triage-and-mitigate-threats-in-bulk}
 
@@ -89,18 +92,18 @@ La section {{< ui >}}Risk Contributors{{< /ui >}} du panneau latéral de l'entit
 
 Vous pouvez configurer Datadog pour qu'il vous envoie des notifications dès qu'il détecte de nouvelles menaces correspondant à vos critères.
 
-1. Accédez à la page {{< ui >}}Create a new Entity Risk notification{{< /ui >}}. Il existe deux façons de procéder :
+1. Accédez à la page {{< ui >}}Create a new Entity Risk notification{{< /ui >}}. Il existe deux façons de procéder :
    - Dans Datadog, accédez à la page [Entity Risks][4], puis cliquez sur {{< ui >}}Create Notification Rule{{< /ui >}}.
    - Dans Datadog, accédez à {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Sous {{< ui >}}Products{{< /ui >}}, dans la section {{< ui >}}Cloud SIEM{{< /ui >}}, cliquez sur [{{< ui >}}Entity Risks{{< /ui >}}][7] ; puis, sous {{< ui >}}Notification rules{{< /ui >}}, cliquez sur {{< ui >}}New notification rule{{< /ui >}}.
-1. Sous {{< ui >}}Group risk by{{< /ui >}}, choisissez ce que la règle mesure :
-   - {{< ui >}}Individual entity{{< /ui >}} : La règle évalue le score de risque propre à chaque entité.
-   - {{< ui >}}User identity{{< /ui >}} : La règle évalue le score de risque cumulé d'une identité utilisateur, qui additionne les scores de chaque entité résolue pour cette personne. Cette option est disponible après avoir configuré un pack d'entités et que les identités utilisateur sont en cours de synchronisation. Voir [Notifier sur le risque d'identité utilisateur cumulé](#notify-on-rolled-up-user-identity-risk).
+1. Sous {{< ui >}}Group risk by{{< /ui >}}, choisissez ce que la règle mesure :
+   - {{< ui >}}Individual entity{{< /ui >}} : La règle évalue le score de risque propre à chaque entité.
+   - {{< ui >}}User identity{{< /ui >}} : La règle évalue le score de risque cumulé d'une identité utilisateur, qui additionne les scores de chaque entité résolue pour cette personne. Cette option est disponible après avoir configuré un pack d'entités et que les identités utilisateur sont en cours de synchronisation. Voir [Notifier sur le risque d'identité utilisateur cumulé](#notify-on-rolled-up-user-identity-risk).
    <div class="alert alert-warning">Vous ne pouvez pas modifier le regroupement d'une règle après l'avoir créée. Pour utiliser un regroupement différent, créez une autre règle.</div>
 1. Sous {{< ui >}}Define entity attributes{{< /ui >}}, spécifiez les attributs qui doivent déclencher des notifications lorsque Datadog les détecte sur une entité. À côté de {{< ui >}}Entities matching{{< /ui >}}, commencez à saisir les attributs et les valeurs de l'entité. Au fur et à mesure que vous tapez, le tableau de prévisualisation affiche dynamiquement les entités qui correspondent à vos critères.
    <div class="alert alert-info">Cette étape est facultative, mais si vous n'entrez aucun attribut, la notification envoie par défaut des alertes pour toutes les entités.</div>
 1. Sous {{< ui >}}Set notification conditions{{< /ui >}}, définissez la condition de déclenchement en fonction de la gravité de l'entité ou de la valeur du score de risque :
    - {{< ui >}}Entity severity{{< /ui >}} : Déclenche une notification lorsqu'une entité atteint un certain niveau de gravité. Sélectionnez un opérateur, puis sélectionnez un niveau de gravité. Pour le score de risque correspondant à chaque niveau de gravité, consultez [Seuils de gravité des entités](#entity-severity-thresholds).
-   - {{< ui >}}Risk score value{{< /ui >}} : Déclenche une notification lorsque le score de risque de l'entité dépasse un seuil spécifié. Spécifiez le seuil pour les notifications.
+   - {{< ui >}}Risk score value{{< /ui >}} : Déclenche une notification lorsque le score de risque de l'entité dépasse un seuil spécifié. Spécifiez le seuil pour les notifications.
 1. Sous {{< ui >}}Configure notification{{< /ui >}}, saisissez un nom pour la notification, ajoutez un corps de message personnalisé et spécifiez les destinataires auxquels l'envoyer.
    - En option, vous pouvez également activer les re-notifications et spécifier la période de temps qui doit s'écouler avant que Datadog ne notifie à nouveau les destinataires que l'entité répond toujours aux critères que vous avez spécifiés.
 1. Pour vérifier votre configuration, cliquez sur {{< ui >}}Test Notification{{< /ui >}} pour envoyer une notification de test aux destinataires configurés.

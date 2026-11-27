@@ -4,10 +4,10 @@ description: Metrics Overview 페이지를 사용하여 메트릭 소스를 탐�
 further_reading:
 - link: https://www.datadoghq.com/blog/metrics-without-limits
   tag: 블로그
-  text: Metrics without Limits™를 사용하여 동적으로 사용자 지정 메트릭 볼륨 제어
+  text: Metrics without Limits™를 사용하여 동적으로 사용자 지정 메트릭 볼륨 제어하기
 - link: https://dtdg.co/fe
   tag: 기반 활성화
-  text: 대화형 세션에 참여해 메트릭을 최대한으로 활용해 보세요.
+  text: 대화형 세션에 참여해 메트릭을 최대한으로 활용해 보세요
 - link: /metrics/units
   tag: 설명서
   text: 메트릭 단위
@@ -28,11 +28,11 @@ Metrics Overview 페이지를 통해 다음 방법을 알아볼 수 있습니다
 
 이 섹션에는 모든 메트릭 소스, 메트릭 데이터에 적용되는 추가 처리 및 구성, 표준 메트릭과 사용자 지정 메트릭의 볼륨 분석이 표시됩니다.
 
-**참고**: Overview 페이지는 메트릭 비용 관리를 위한 전용 페이지가 아닙니다. 비용 최적화 방법에 대한 자세한 내용은 [사용자 지정 메트릭 거버넌스 모범 사례][25]를 참조하세요.
+**참고**: Overview 페이지는 메트릭 비용 관리를 위한 전용 페이지가 아닙니다. 비용 최적화 방법에 대한 자세한 내용은 [Custom Metrics 거버넌스 모범 사례][25]를 참조하세요.
 
 ### 메트릭 소스 {#metric-sources}
 
-{{< ui >}}Metric Sources{{< /ui >}} 열은 Datadog에 보고하는 메트릭 소스의 요약을 보여줍니다. 소스 중 하나를 클릭하여 해당 소스로 범위가 지정된 [Metrics Catalog][2]를 엽니다. Datadog 메트릭은 다음 소스에서 생성될 수 있습니다.
+{{< ui >}}Metric Sources{{< /ui >}} 열은 Datadog에 보고하는 메트릭 소스의 요약을 보여줍니다. 소스 중 하나를 클릭하여 해당 소스로 범위가 지정된 Metrics Catalog 페이지를 여세요. 자세한 내용은 [Metrics Catalog 설명서][2]를 참조하세요. Datadog 메트릭은 다음 소스에서 생성될 수 있습니다.
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 [Datadog Agent][3]는 설치된 호스트에서 메트릭을 수집하여 Datadog으로 전달합니다. 이러한 메트릭은 다음 항목에서 생성될 수 있습니다.
@@ -59,7 +59,7 @@ Datadog은 총 {{< translate key="integration_count" >}} 개가 넘는 통합이
 {{< ui >}}Configurable Processing{{< /ui >}} 열에는 메트릭의 가치를 높이는 데 사용할 수 있는 다양한 고급 구성 옵션이 나열되어 있습니다. 자세한 내용과 관련 구성 화면으로 연결되는 링크를 보려면 옵션 중 하나를 클릭하세요.
 
 {{% collapse-content title="Metrics without Limits™를 사용하여 사용자 지정 메트릭 비용 최적화" level="h4" %}}
-[Metrics without Limits™][19]는 조직에 가장 가치 있는 메트릭 태그만 인덱싱하여 사용자 지정 메트릭 비용을 관리하도록 돕습니다. Metrics without Limits™ 사용은 Overview 페이지 상단 섹션에서 {{< ui >}}Selected Metrics{{< /ui >}}로 표시됩니다. 사용자 지정 메트릭 비용 관리에 대한 자세한 내용은 [사용자 지정 메트릭 거버넌스 모범 사례][22]를 참조하세요.
+[Metrics without Limits™][19]는 조직에 가장 가치 있는 메트릭 태그만 인덱싱하여 사용자 지정 메트릭 비용을 관리하도록 돕습니다. Metrics without Limits™ 사용은 Overview 페이지 상단 섹션에서 {{< ui >}}Selected Metrics{{< /ui >}}로 표시됩니다. 사용자 지정 메트릭 비용 관리에 대한 자세한 내용은 [Custom Metrics 거버넌스 모범 사례][22]를 참조하세요.
 {{% /collapse-content %}} 
 
 {{% collapse-content title="분포 메트릭에 대해 백분위수 활성화" level="h4" %}}
@@ -91,12 +91,12 @@ Datadog은 총 {{< translate key="integration_count" >}} 개가 넘는 통합이
 {{% /collapse-content %}} 
 
 {{% collapse-content title="과거 메트릭 수집" level="h4" %}}
-[과거 메트릭 수집][21]을 사용하면 제출 시점으로부터 1시간 이상 지난 타임스탬프가 포함된 메트릭 값을 수집할 수 있습니다.
+[Historical Metrics Ingestion][21]을 사용하면 제출 시점으로부터 1시간 이상 지난 타임스탬프가 포함된 메트릭 값을 수집할 수 있습니다.
 {{% /collapse-content %}} 
 
 ### 사용 가능한 메트릭 {#available-metrics}
 
-{{< ui >}}Available Metrics{{< /ui >}} 열은 지난 한 달 동안의 표준 메트릭과 사용자 지정 메트릭별 총 메트릭 볼륨을 분류합니다. 사용자 지정 메트릭 볼륨을 관리하려면 [Best Practices for Custom Metrics Governance 페이지][25]와 [Metrics Catalog 페이지][26]에서 자세한 인사이트를 확인하세요.
+{{< ui >}}Available Metrics{{< /ui >}} 열은 지난 한 달 동안의 표준 메트릭과 사용자 지정 메트릭별 총 메트릭 볼륨을 분류합니다. 사용자 지정 메트릭 볼륨을 관리하려면 [Custom Metrics 거버넌스를 위한 모범 사례][25] 가이드와 [Metrics Catalog 설명서][26]를 참조하세요.
 
 ## 소스별 메트릭 {#your-metrics-by-source}
 
@@ -115,7 +115,7 @@ Datadog은 총 {{< translate key="integration_count" >}} 개가 넘는 통합이
 
 ## 쿼리 가능한 메트릭 {#metrics-available-for-querying}
 
-이 섹션에서 검색창을 사용하면 메트릭의 최신 데이터와 구성 옵션을 살펴볼 수 있습니다. 모든 태그를 검색하거나 클릭하여 [Metrics Explorer][23] 또는 [Summary][24] 페이지에서 메트릭을 자세히 조사할 수 있습니다.
+이 섹션에서 검색창을 사용하면 메트릭의 최신 데이터와 구성 옵션을 살펴볼 수 있습니다. 모든 태그를 검색하거나 클릭하여 [Metrics Explorer][23] 또는 [Metrics Catalog][24] 페이지에서 메트릭을 자세히 조사할 수 있습니다.
 
 {{< img src="metrics/overview/available_metrics.png" alt="Metrics Overview 페이지의 쿼리 가능한 메트릭 섹션" >}}
 
@@ -124,7 +124,7 @@ Datadog은 총 {{< translate key="integration_count" >}} 개가 넘는 통합이
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/metrics/custom_metrics/
-[2]: /ko/metrics/summary/
+[2]: /ko/metrics/catalog/
 [3]: /ko/agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /ko/agent/guide/integration-management/
@@ -148,4 +148,4 @@ Datadog은 총 {{< translate key="integration_count" >}} 개가 넘는 통합이
 [23]: https://app.datadoghq.com/metric/explorer
 [24]: https://app.datadoghq.com/metric/catalog
 [25]: /ko/metrics/guide/custom_metrics_governance/
-[26]: /ko/metrics/volume/
+[26]: /ko/metrics/catalog/

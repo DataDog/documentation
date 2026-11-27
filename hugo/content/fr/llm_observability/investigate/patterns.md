@@ -26,6 +26,9 @@ further_reading:
   tag: Blog
   text: Comprendre le comportement des LLM en production avec Patterns dans Agent
     Observability.
+- link: https://www.datadoghq.com/blog/fine-tuning-patterns-baseten/
+  tag: Blog
+  text: Comment nous avons affiné un modèle plus rapide pour Patterns sur Baseten
 title: Patterns
 ---
 ## Présentation {#overview}
@@ -56,7 +59,7 @@ Chaque sujet affiche son volume d'interactions et sa part du trafic total. Les i
 1. Cliquez sur **+ New Pattern**.
 1. Saisissez un **Name**.
 1. Utilisez le sélecteur multiple **Application** pour choisir une ou plusieurs applications LLM pour lesquelles inclure des spans. La sélection d'applications met automatiquement à jour la requête de filtre de span sous-jacente, et la modification de la requête met à jour les applications sélectionnées.
-1. Sous **Configuration** :
+1. Sous **Configuration** :
   1. Sélectionnez ce que vous souhaitez **Analyser** avec Patterns, des **Spans** individuels ou des **Traces**.
   1. (Facultatif) Rédigez une courte **Instruction de clustering** pour fournir des conseils libres sur la manière dont Patterns doit regrouper les interactions et générer des sujets, tels que l'intention de l'utilisateur, la tâche de l'agent ou le produit utilisé. Par exemple, pour regrouper selon l'intention de l'utilisateur, vous pouvez écrire « Cluster based on the user intent ». Modifier ce champ après une première exécution réussie **supprimera les sujets trouvés et conservés** lors des exécutions précédentes de Patterns. Laissez ce champ vide pour regrouper les interactions par objectif principal de chaque interaction.
   1. Sélectionnez les variables de votre interaction sur lesquelles vous souhaitez que Patterns **effectue le clustering**. Utilisez `{{variable}}` syntax to reference any span field; for example, `{{meta.input.value}}` to analyze patterns by user input, or `{{meta.span.kind}}` à analyser par type de span.
@@ -64,16 +67,16 @@ Chaque sujet affiche son volume d'interactions et sa part du trafic total. Les i
   1. Définissez la **Fenêtre temporelle** pour déterminer la période de rétrospection des interactions à analyser.
   1. **L'échantillonnage** des interactions correspondantes est accessible en cliquant sur le bouton **Change**. Il est limité à 10 000 spans et 5 000 traces. Si votre filtre correspond à un nombre supérieur, Agent Observability échantillonne aléatoirement les interactions jusqu'à atteindre ce nombre. 
   1. Cliquez sur **Select a model**. La fenêtre de configuration du Model s'ouvre, où vous pouvez ajouter des détails qu'Agent Observability utilise pour générer des noms de sujets, des résumés, une hiérarchie de sujets et pour attribuer chaque interaction à un sujet :
-    - **Fournisseur LLM** : Les fournisseurs pris en charge sont OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI et Vertex AI.
+    - **Fournisseur LLM** : Les fournisseurs pris en charge sont OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI et Vertex AI.
     - **Compte**
-    - **Modèle** : Préférez l'utilisation des modèles recommandés et étiquetés, pour des exigences de performance et de coût.
+    - **Modèle** : Préférez l'utilisation des modèles recommandés et étiquetés, pour des exigences de performance et de coût.
     Cliquez sur **Confirm** pour enregistrer vos modifications et fermer la fenêtre.
-1. (Facultatif) Sous **Jeux de données** :
+1. (Facultatif) Sous **Jeux de données** :
   1. Activez le bouton radio pour comparer votre trafic de production avec vos jeux de données d'évaluation hors ligne.
   1. Utilisez le sélecteur **Jeux de données** pour sélectionner le ou les jeux de données que vous utilisez pour évaluer votre agent IA hors ligne.
   1. (Facultatif) Activez le bouton radio **Automatic curation** pour combler automatiquement les lacunes de couverture détectées par Patterns. Une fois activé, Datadog crée un projet géré (`Patterns-coverage`) et un Dataset par Pattern (`{pattern-name}-pattern-curated`) pour recevoir les interactions suggérées après chaque exécution. Le commutateur est **activé** par défaut pour les nouveaux Patterns. 
 1. Sous **Planification**, choisissez la fréquence d'exécution du Pattern. Les heures planifiées utilisent votre préférence de fuseau horaire Datadog. Les exécutions planifiées utilisent le même pipeline qu'une exécution manuelle, les résultats apparaissent donc au même endroit, et la page Patterns affiche toujours votre exécution la plus récente.
-   - **Quotidien**, **Jours de semaine**, ou **Hebdomadaire (Par défaut)** : Exécutez automatiquement à une heure (et, pour hebdomadaire, un jour) que vous choisissez.
+   - **Quotidien**, **Jours de semaine**, ou **Hebdomadaire (Par défaut)** : Exécutez automatiquement à une heure (et, pour hebdomadaire, un jour) que vous choisissez.
    - **À la demande** : Exécutez le Pattern manuellement.
    - **Personnalisé** : exécutez automatiquement tous les 1 à 7 jours.
 1. Sous **Notifications** Entrez les e-mails et/ou les intégrations de messagerie externe que vous avez activés dans Datadog (voir [**Intégrations**][5] pour activer les intégrations externes dans Datadog) pour être averti lorsque les résultats des Patterns sont disponibles.
@@ -117,18 +120,18 @@ Cliquez sur n'importe quel nom de sujet pour ouvrir sa vue détaillée. Utilisez
 
 {{< img src="llm_observability/patterns_topic_details.png" alt="La vue détaillée du sujet montrant un résumé du pattern et une carte interactive des sujets avec les nombres d'interactions et les changements de trafic." style="width:100%;" >}}
 
-La vue détaillée comprend :
+La vue détaillée comprend :
 
-- {{< ui >}}Pattern Summary{{< /ui >}} : Met en évidence les tendances du trafic, l'état de santé de l'évaluation en ligne, les valeurs aberrantes opérationnelles, les lacunes de couverture des jeux de données et les prochaines étapes recommandées.
-- {{< ui >}}Scorecard{{< /ui >}} : Résume le volume et la part du trafic, le coût, le taux d'erreur, la latence médiane et la couverture des jeux de données.
-- {{< ui >}}Dataset Coverage Detail{{< /ui >}} : Affiche le statut de couverture et l'attribution par jeu de données. Examinez les cas recommandés pour combler les lacunes de couverture, ou ouvrez le jeu de données géré lorsque la curation automatique des jeux de données est activée.
-- {{< ui >}}Evaluations{{< /ui >}} : Résume chaque évaluateur en ligne avec son résultat clé et un graphique dans le temps. Ouvrez les spans correspondants pour étudier des résultats spécifiques.
-- {{< ui >}}Interactions{{< /ui >}} : Liste les entrées et sorties assignées au sujet, ainsi que leur sous-sujet, horodatage, statut de recommandation et résultats d'évaluation. Filtrez avec une requête en texte intégral ou à facettes, configurez les colonnes d'évaluation, ou cliquez sur une ligne pour ouvrir les détails de sa trace.
+- {{< ui >}}Pattern Summary{{< /ui >}} : Met en évidence les tendances du trafic, l'état de santé de l'évaluation en ligne, les valeurs aberrantes opérationnelles, les lacunes de couverture des jeux de données et les prochaines étapes recommandées.
+- {{< ui >}}Scorecard{{< /ui >}} : Résume le volume et la part du trafic, le coût, le taux d'erreur, la latence médiane et la couverture des jeux de données.
+- {{< ui >}}Dataset Coverage Detail{{< /ui >}} : Affiche le statut de couverture et l'attribution par jeu de données. Examinez les cas recommandés pour combler les lacunes de couverture, ou ouvrez le jeu de données géré lorsque la curation automatique des jeux de données est activée.
+- {{< ui >}}Evaluations{{< /ui >}} : Résume chaque évaluateur en ligne avec son résultat clé et un graphique dans le temps. Ouvrez les spans correspondants pour étudier des résultats spécifiques.
+- {{< ui >}}Interactions{{< /ui >}} : Liste les entrées et sorties assignées au sujet, ainsi que leur sous-sujet, horodatage, statut de recommandation et résultats d'évaluation. Filtrez avec une requête en texte intégral ou à facettes, configurez les colonnes d'évaluation, ou cliquez sur une ligne pour ouvrir les détails de sa trace.
 
 {{< img src="llm_observability/patterns_topic_details_scorecard.png" alt="La vue détaillée du sujet montrant la fiche d'évaluation, les détails de couverture des jeux de données et le tableau des interactions." style="width:100%;" >}}
 
 ### Exporter et agir sur les interactions {#export-and-act-on-interactions}
-Sélectionnez une ou plusieurs lignes dans le tableau des interactions pour agir sur ces interactions :
+Sélectionnez une ou plusieurs lignes dans le tableau des interactions pour agir sur ces interactions :
 
 - **Télécharger au format CSV :** Exporter les interactions sous forme de fichier CSV.
 - **Ajouter au Dataset:** Envoyer les interactions vers un [Dataset][2] pour créer des cas de test d'évaluation à partir du trafic de production réel.

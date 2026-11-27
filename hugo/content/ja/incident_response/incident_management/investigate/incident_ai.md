@@ -38,60 +38,18 @@ Slack でインシデントチャンネル (Datadog Incident Management に接�
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Slack でのインシデントサマリーの例" style="width:100%;" >}}
 
-## ミーティングの要約 {#meeting-summaries}
+## ミーティングのサマリーとトランスクリプト {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">ミーティングの要約は、選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
+<div class="alert alert-danger">ミーティングのサマリーとミーティングのライブトランスクリプトは、選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
 {{< /site-region >}}
 
-インシデント AI は、Zoom、Google Meet、Microsoft Teams でのインシデントミーティングを自動的に要約できます。ミーティング中、ライブ要約がインシデントタイムラインおよびインシデントチャットチャンネルに定期的に投稿されます。ミーティングが終了すると、最終的なミーティング後の要約が投稿されます。
+インシデントミーティングの場合、インシデント AI はサマリーを生成し、ライブトランスクリプトを以下の Datadog ノートブックに保存できます。
 
-<div class="alert alert-info">ミーティングの要約が有効になっている場合、Datadog の<a href="https://www.datadoghq.com/legal/subprocessors/">サブプロセッサー</a>がミーティングの音声を録音し、文字起こしします。7 日間の保持期間が経過すると、サブプロセッサーはすべてのデータを自動的に削除します。</div>
+- **ミーティングのサマリー**: ミーティング中、インシデント AI はインシデントタイムラインおよびインシデントチャットチャンネルにライブサマリーを定期的に投稿します。ミーティングが終了すると、インシデント AI は最終的なサマリーを投稿します。
+- **ミーティングのライブトランスクリプト**: Datadog ノートブックには、話者名と該当タイムゾーンのタイムスタンプとともに会話が記録されます。ノートブックはミーティング中に更新され、終了後も利用可能です。
 
-Datadog Transcriber がミーティングに参加するには、組織で AI 機能を有効にする必要があります。ミーティングの要約をオンにするには、ミーティングプラットフォームのインテグレーション設定で **AI ミーティングの要約を生成する**を有効にします。
-
-- [Zoom][4]
-- [Google Meet][5]
-- [Microsoft Teams][6]
-
-デフォルトでは、インシデント AI はプライベートインシデントのミーティングを要約しません。インテグレーション設定で条件を追加して、他のインシデントの要約も防ぐことができます。
-
-### ミーティングの要約の仕組み {#how-meeting-summaries-work}
-
-インシデントに紐付けられたミーティングが開始されると、Datadog Transcriber がミーティングへの参加を試みます。これには 10 ～ 30 秒かかる場合があります。ミーティングにロビーや待機室がある場合、文字起こしを開始する前に参加者が Datadog Transcriber の参加を許可する必要があります。Datadog Transcriber の参加後、ミーティング中に以下の場所にライブ要約が定期的に投稿されます。
-
-- **インシデントタイムライン**の**ミーティングの要約**エントリーの下。
-- **インシデントチャットチャンネル** (ミーティングカードのスレッド内、およびチャンネルへのメッセージの両方)。
-
-ミーティングが終了すると、最終的なミーティング後の要約が同じ場所に投稿されます。
-
-### 要約の確認 {#reviewing-a-summary}
-
-要約が投稿された後、承認、テキストの編集、または拒否を行うことができます。これらの操作は、Datadog のインシデントタイムラインから、または要約がブロードキャストされた場合はインシデントチャットチャンネルから実行できます。
-
-インシデントタイムラインから要約を確認するには、以下の手順を実行します。
-
-1. Datadog でインシデントを開き、タイムライン上で**ミーティングの要約**エントリを見つけます。
-2. チェックマークアイコンをクリックして要約を承認するか、鉛筆アイコンをクリックしてテキストを編集するか、拒否アイコンをクリックしてタイムラインから削除します。
-
-ユーザーが要約を承認または編集すると、Datadog は誰がその操作を行ったかを記録します。要約が編集された後は承認できなくなります。編集されたバージョンが優先されます。要約を拒否すると、全員のインシデントタイムラインから要約が削除され、接続されているチャットチャンネルではその内容が非表示になります。この操作は元に戻せないため、Datadog は拒否する前に確認を求めます。
-
-要約がインシデントチャットチャンネルにブロードキャストされた場合は、メッセージの **Approve**、**Edit**、または **Reject summary** ボタンを使用してください。
-
-### Transcriber の再招待 {#re-inviting-the-transcriber}
-
-Datadog Transcriber がミーティングから退出した場合は、紐付けられた同じミーティングに再招待して要約を再開します。
-
-1. Datadog でインシデントを開きます。
-2. インシデントヘッダーで、紐付けられたミーティングのメニューを開きます。
-3. ミーティングの横にある **Add Transcriber** (ロボットアイコン) をクリックします。
-4. 必要に応じて、ミーティングのロビーまたは待機室にいる Datadog Transcriber の参加を許可し、文字起こしを開始できるようにします。
-
-ロボットアイコンは、Transcriber がミーティングに参加中か、すでに参加しているかを示します。Transcriber を追加できない場合は、アイコンにカーソルを合わせて理由を確認してください。
-
-Transcriber が退出した後、インシデントの Slack または Microsoft Teams のミーティングカードのスレッドに再招待のプロンプトが表示されることもあります。これは、入室許可や参加者を待つ間にタイムアウトした場合、全員がミーティングから退出した場合、または誰かが Transcriber をミーティングから退出させた場合に発生することがあります。Transcriber を再招待するには **Yes** を、プロンプトを閉じるには **No** を選択してください。
-
-再招待にはインシデントを編集する権限が必要であり、シートベースの課金を行っている組織の場合は、[Incident Management または Incident Response シート][7]が必要です。再招待を行っても、プライベートインシデントがデフォルトで対象外となる設定など、要約を妨げる条件は覆りません。
+ミーティングのサマリーとトランスクリプトを設定するには、[Zoom][4]、[Google Meet][5]、または [Microsoft Teams][6] のインテグレーションページを参照してください。サマリーの確認、トランスクリプトの表示、Transcriber の再招待、およびミーティングデータの保持方法については、[ミーティングのサマリーとトランスクリプト][7] を参照してください。
 
 ## 関連インシデントの検出 {#related-incident-detection}
 
@@ -135,7 +93,7 @@ Slack から、インシデント発生中に以下のいずれかの方法で�
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_slack.png" alt="根本原因の検出結果および View Full Investigation ボタンと、完了済みの Bits Investigation が表示された Datadog インシデント Slack チャンネル。" >}}
 
-**ウェブ UI から**、インシデント概要ページの調査セクションから調査を直接トリガーできます。
+**ウェブ UI から**、インシデント概要ページの調査セクションで、調査を直接トリガーできます。
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="調査セクションに完了済みの Bits Investigation と View Investigation ボタンが表示された Incident Management の概要ページ。" >}}
 
@@ -153,5 +111,5 @@ Slack から、インシデント発生中に以下のいずれかの方法で�
 [4]: /ja/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
 [5]: /ja/incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
 [6]: /ja/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
-[7]: /ja/account_management/billing/incident_response/#allocate-seats
+[7]: /ja/incident_response/incident_management/investigate/meeting_summaries_and_transcripts
 [8]: /ja/bits_ai/bits_investigation

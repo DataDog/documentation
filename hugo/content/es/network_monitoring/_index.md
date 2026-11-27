@@ -43,6 +43,7 @@ title: Network Monitoring
     {{< nextlink href="network_monitoring/devices" >}}<u>Network Device Monitoring</u>: Obtenga visibilidad de sus dispositivos conectados a la red, como enrutadores, switches, servidores y firewalls.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/netflow" >}}<u>NetFlow Monitoring</u>: Analice los flujos de tráfico de red para identificar los principales emisores y el uso de ancho de banda en su infraestructura.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/network_path" >}}<u>Network Path</u>: Investigue las rutas que sigue el tráfico de red desde el origen hasta el destino para identificar problemas de red.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/l1_to_l7_map" >}}<u>L1 to L7 Map</u>: Visualice cómo se conectan los recursos a través de la pila de red y limite una investigación a un recurso o conexión específica.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Lecturas adicionales {#further-reading}

@@ -24,11 +24,11 @@ further_reading:
   tag: 소스 코드
   text: 오픈 소스 프로젝트에 기여하기
 - link: /tracing/glossary/
-  tag: 설명서
+  tag: 문서
   text: 서비스, 리소스, 트레이스 탐색
 - link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
   tag: 학습 센터
-  text: 애플리케이션용 APM SDK를 구성하고 관리하십시오
+  text: 애플리케이션용 APM SDK 구성 및 관리하기
 title: PHP 애플리케이션 트레이싱
 type: multi-code-lang
 ---
@@ -38,11 +38,11 @@ type: multi-code-lang
 
 Datadog의 PHP 버전 및 프레임워크 지원 전체 목록(레거시 및 유지 관리 버전 포함)은 [호환성 요구 사항][1] 페이지를 참조하세요.
 
-## 시작 {#getting-started}
+## 시작하기 {#getting-started}
 
 시작하기 전에 먼저 [Agent를 설치하고 구성][14]했는지 확인하세요.
 
-### 확장 설치 {#install-the-extension}
+### 확장 프로그램 설치 {#install-the-extension}
 
 공식 설치 프로그램 다운로드:
 
@@ -56,7 +56,7 @@ Alpine Linux를 사용 중인 경우, 설치 프로그램을 실행하기 전에
 apk add libgcc
 ```
 
-설치 프로그램을 실행하고 활성화하려는 기능에 대한 플래그만 전달하십시오:
+활성화하려는 기능에 해당하는 플래그만 전달하여 설치 프로그램을 실행합니다.
 
 ```shell
 # APM only
@@ -76,19 +76,19 @@ php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 <strong>참고</strong>: Windows에서는 APM만 지원됩니다. Windows에서 PHP 애플리케이션을 추적할 때 <code>--enable-appsec</code> 및 <code>--enable-profiling</code> 플래그를 사용하지 마세요.
 </div>
 
-이 명령을 실행하면 호스트 또는 컨테이너에서 찾은 모든 PHP 바이너리에 확장을 설치합니다. `--php-bin`이 생략되면 설치 프로그램이 대화형 모드로 실행되고, 사용자에게 설치할 바이너리를 선택해 달라고 요청합니다. `dd-trace-php`가 특정 바이너리에만 설치되어야 하는 경우, `--php-bin`의 값이 해당 바이너리로의 경로일 수 있습니다.
+이 명령을 실행하면 호스트 또는 컨테이너에서 찾은 모든 PHP 바이너리에 확장 프로그램이 설치됩니다. `--php-bin`이 생략되면 설치 프로그램이 대화형 모드로 실행되고, 사용자에게 설치할 바이너리를 선택해 달라고 요청합니다. `dd-trace-php`가 특정 바이너리에만 설치되어야 하는 경우, `--php-bin`의 값이 해당 바이너리로의 경로일 수 있습니다.
 
 PHP(PHP-FPM 또는 Apache SAPI)를 다시 시작하고 애플리케이션의 추적이 활성화된 엔드포인트를 방문하세요. 생성된 트레이스를 보려면 [APM Traces 페이지][4]로 이동합니다.
 
-`--enable-appsec`를 지정하지 않으면, 시작 시 짧게 AppSec 확장이 로드되고, 기본적으로 활성화되지 않습니다. 이것은 즉시 단락되어 미미한 성능 오버헤드를 초래합니다.
+`--enable-appsec`를 지정하지 않으면 시작 후 곧 AppSec 확장 프로그램이 로드되고 기본적으로 활성화되지 않습니다. 이것은 즉시 단락되어 미미한 성능 오버헤드를 초래합니다.
 
 <div class="alert alert-info">
-트레이스가 UI에 표시되려면 몇 분 걸릴 수 있습니다. 몇 분이 지난 뒤에도 여전히 트레이스가 표시되지 않는 경우, 호스트 머신에서 <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> 페이지를 만든 다음 `ddtrace`까지 스크롤을 내립니다. 이 섹션에 실패한 진단 검사가 표시되어 문제가 있는지 식별하는 데 도움이 됩니다.
+트레이스가 UI에 표시되려면 몇 분 걸릴 수 있습니다. 몇 분이 지난 뒤에도 여전히 트레이스가 표시되지 않는 경우, 호스트 머신에서 <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code>호스트 머신에서 </a> 페이지를 열고 아래로 스크롤하여 <code>ddtrace</code>. 이 섹션에는 실패한 진단 검사 결과가 표시되어 문제를 식별하는 데 도움이 됩니다.
 </div>
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-PHP CLI 바이너리가 NTS로 빌드되었고(스레드 안전(thread-safe)하지 않음) Apache는 PHP의 ZTS(Zend thread-safe) 버전을 사용하는 경우, ZTS 바이너리에 대한 확장 로드를 수동으로 변경해야 합니다. 코드 <code>/path/to/php-zts --ini</code> 를 실행하여 Datadog의 <code>.ini</code> 파일 위치를 찾은 다음, 파일 이름에서 <code>-zts</code> 접미사를 추가하세요. 예를 들어 <code>extension=ddtrace-20210902.so</code> 에서 <code>extension=ddtrace-20210902-zts.so</code>입니다.
+PHP CLI 바이너리가 NTS로 빌드되었고(스레드 안전 아님) Apache는 PHP의 ZTS(Zend 스레드 안전) 버전을 사용하는 경우, ZTS 바이너리에 대한 확장 프로그램 로드를 수동으로 변경해야 합니다.  <code>/path/to/php-zts --ini</code> 를 실행하여 Datadog의 <code>.ini</code> 파일 위치를 찾은 다음 파일 이름에서 <code>-zts</code> 접미사를 추가하세요. 예를 들어, <code>extension=ddtrace-20210902.so</code> 를 <code>extension=ddtrace-20210902-zts.so</code>로 변경합니다.
 </div>
 
 <div class="alert alert-danger">
@@ -101,7 +101,7 @@ PHP CLI 바이너리가 NTS로 빌드되었고(스레드 안전(thread-safe)하�
 
 ## 자동 계측 {#automatic-instrumentation}
 
-트레이싱은 기본적으로 활성화됩니다. 확장이 설치되고 나면, **ddtrace**가 애플리케이션을 추적하고 트레이스를 Agent로 전송합니다.
+트레이싱은 기본적으로 활성화됩니다. 확장 프로그램이 설치되면 **ddtrace**가 애플리케이션을 추적하고 트레이스를 Agent로 전송합니다.
 
 Datadog은 모든 웹 프레임워크를 기본적으로 지원합니다. 자동 계측은 PHP의 런타임이 특정 함수 및 메서드를 래핑하여 추적하도록 수정하는 방식으로 작동합니다. PHP 트레이서는 여러 라이브러리에 대하여 자동 계측을 지원합니다.
 
@@ -124,7 +124,7 @@ CLI 스크립트를 계측하려면 추가적인 단계가 필요합니다. 자�
 
 ## 업그레이드 {#upgrading}
 
-PHP 트레이서를 업그레이드하려면 [최신 릴리스를 다운로드][5]하고 [확장 설치](#install-the-extension)와 동일한 단계를 따릅니다.
+PHP 트레이서를 업그레이드하려면 [최신 릴리스를 다운로드][5]하고 [확장 프로그램 설치](#install-the-extension)와 동일한 단계를 따릅니다.
 
 설치가 완료되면 PHP(PHP-FPM 또는 Apache SAPI)를 다시 시작합니다.
 
@@ -156,7 +156,7 @@ PHP 또는 PHP-FPM의 디버그 기호가 설치되었는지 검사하려면 `gd
 apt|yum install -y gdb
 ```
 
-관심 바이너리를 사용하여 `gdb`를 실행합니다. 예를 들어 PHP-FPM의 경우:
+관심 바이너리를 사용하여 `gdb`를 실행합니다. 예를 들어, PHP-FPM의 경우:
 
 ```
 gdb php-fpm
@@ -193,7 +193,7 @@ PHP 바이너리의 패키지 이름을 찾으세요. 이 이름은 PHP 설치 �
 yum list installed | grep php
 ```
 
-디버그 기호를 설치합니다. 예를 들어 패키지 `php-fpm`의 경우:
+디버그 기호를 설치합니다. 예를 들어, 패키지 `php-fpm`의 경우:
 
 ```
 debuginfo-install -y php-fpm
@@ -209,7 +209,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### Sury Debian DPA에서 설치된 PHP {#php-installed-from-the-sury-debian-dpa}
 
-PHP가 [Sury Debian DPA][8]에서 설치된 경우, 이미 디버그 기호를 DPA에서 사용할 수 있습니다. 예를 들어 PHP-FPM 7.2의 경우:
+PHP가 [Sury Debian DPA][8]에서 설치된 경우, 이미 디버그 기호를 DPA에서 사용할 수 있습니다. 예를 들어, PHP-FPM 7.2의 경우:
 
 ```
 apt update
@@ -236,7 +236,7 @@ deb http://deb.debian.org/debian-debug/ buster-debug main
 apt update
 ```
 
-먼저 디버그 기호의 표준 패키지 이름을 사용해 보세요. 예를 들어 패키지 이름이 `php7.2-fpm`인 경우, 다음을 사용해 보기:
+먼저 디버그 기호의 표준 패키지 이름을 사용해 보세요. 예를 들어, 패키지 이름이 `php7.2-fpm`인 경우, 다음을 시도해 보세요.
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -278,7 +278,7 @@ PHP가 [`ppa:ondrej/php`][10]에서 설치된 경우, `main/debug` 구성 요소
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
 
-디버그 기호를 업데이트하고 설치합니다. 예를 들어 PHP-FPM 7.2의 경우:
+디버그 기호를 업데이트하고 설치합니다. 예를 들어, PHP-FPM 7.2의 경우:
 
 ```
 apt update
@@ -292,9 +292,9 @@ PHP 바이너리의 패키지 이름을 찾으세요. 이 이름은 PHP 설치 �
 apt list --installed | grep php
 ```
 
-**참고**: 상황에 따라 `php-fpm`이 실제 패키지를 참조하는 메타패키지일 수 있습니다. 예를 들어 PHP-FPM 7.2인 경우 `php7.2-fpm`이 됩니다. 이런 경우 패키지 이름은 실제 패키지 이름입니다.
+**참고**: 상황에 따라 `php-fpm`이 실제 패키지를 참조하는 메타패키지일 수 있습니다. 예를 들어, PHP-FPM 7.2인 경우 `php7.2-fpm`이 됩니다. 이런 경우 패키지 이름은 실제 패키지 이름입니다.
 
-먼저 디버그 기호의 표준 패키지 이름을 사용해 보세요. 예를 들어 패키지 이름이 `php7.2-fpm`인 경우, 다음을 사용해 보기:
+먼저 디버그 기호의 표준 패키지 이름을 사용해 보세요. 예를 들어, 패키지 이름이 `php7.2-fpm`인 경우, 다음을 시도해 보세요.
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -306,7 +306,7 @@ apt install -y php7.2-fpm-dbg
 
 `-dbg` 및 `-dbgsym` 패키지를 찾을 수 없는 경우, `ddebs` 리포지토리를 활성화합니다. `ddebs`에서 [디버그 기호를 설치][11]하는 방법에 관한 자세한 정보는 Ubuntu 설명서를 참조하세요.
 
-예를 들어 Ubuntu 18.04+의 경우, `ddebs` 리포지토리 활성화:
+예를 들어, Ubuntu 18.04+의 경우 `ddebs` 리포지토리를 활성화합니다.
 
 ```
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
@@ -322,7 +322,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-디버그 기호에 대한 표준 패키지 이름을 추가해 보세요. 예를 들어 패키지 이름이 `php7.2-fpm`인 경우, 다음을 사용해 보기:
+디버그 기호에 대한 표준 패키지 이름을 추가해 보세요. 예를 들어, 패키지 이름이 `php7.2-fpm`인 경우, 다음을 시도해 보세요.
 
 ```
 apt install -y php7.2-fpm-dbgsym

@@ -4,9 +4,6 @@ aliases:
 description: Realice el parseo, enriquezca y gestione sus registros con las pipelines
   y los procesadores de Datadog
 further_reading:
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Centro de aprendizaje
-  text: Cree y gestione pipelines de registros
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Consulte la lista completa de Processors disponibles
@@ -19,6 +16,9 @@ further_reading:
 - link: /logs/troubleshooting/
   tag: Documentación
   text: Solución de problemas de registros
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centro de aprendizaje
+  text: Cree y gestione pipelines de registros
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: Centro de aprendizaje
   text: Depuración de pipelines de registros
@@ -41,6 +41,9 @@ further_reading:
   tag: Blog
   text: Cómo usamos Datadog para obtener una visibilidad integral y detallada de nuestro
     sistema de entrega de correo electrónico
+- link: https://www.datadoghq.com/blog/auto-processing-log-pipelines/
+  tag: Blog
+  text: Obtenga registros útiles de cualquier fuente con Auto-Processing de Datadog
 title: Pipelines
 ---
 ## Descripción general {#overview}
@@ -322,7 +325,7 @@ Identifique cuándo se realizó el último cambio en un pipeline o procesador y 
 
 {{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="Cómo administrar sus Pipelines con búsqueda facetada, información de modificación de Pipelines y el modal de reordenamiento" style="width:50%;">}}
 
-Reordene los Pipelines con precisión con la opción {{< ui >}}Move to{{< /ui >}} en el panel de opciones deslizante. Desplácese y haga clic en la posición exacta a la que desea mover el pipeline seleccionado utilizando el modal {{< ui >}}Move to{{< /ui >}}. Los Pipelines no se pueden mover a otros Pipelines de solo lectura. Los Pipelines que contienen Pipelines anidados solo se pueden mover a otras posiciones de nivel superior. No se pueden mover a otros Pipelines.
+Reordene las Pipelines con precisión con la opción {{< ui >}}Move to{{< /ui >}} en el panel de opciones deslizante. Desplácese y haga clic en la posición exacta a la que desea mover el pipeline seleccionado utilizando el modal {{< ui >}}Move to{{< /ui >}}. Los Pipelines no se pueden mover a otros Pipelines de solo lectura. Los Pipelines que contienen Pipelines anidados solo se pueden mover a otras posiciones de nivel superior. No se pueden mover a otros Pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="Cómo reordenar sus Pipelines con precisión utilizando el modal de mover a" style="width:50%;">}}
 
@@ -342,21 +345,21 @@ Se muestran métricas de uso estimadas para cada pipeline. Esto muestra el volum
 <div class="alert alert-warning">Auto-Processing no está disponible para su <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Auto-Processing analiza los registros de su aplicación personalizada y extrae atributos principales, incluidos la marca de tiempo, el estado, el ID de traza y el ID de tramo. Le ayuda a buscar, filtrar y correlacionar registros sin configurar manualmente los pipelines.
+Auto-Processing analiza los registros de su aplicación personalizada y extrae atributos principales, incluidos la marca de tiempo, el estado, el ID de traza y el ID de tramo. Le ayuda a buscar, filtrar y correlacionar registros sin configurar manualmente las canalizaciones.
 
-Auto-Processing solo maneja registros que no coinciden con el filtro de ninguna integración o pipeline personalizado. Si un registro coincide con el filtro de un pipeline, Auto-Processing no lo procesa, incluso si ese pipeline no modifica el registro. Sus configuraciones de Pipelines existentes permanecen sin cambios.
+Auto-Processing solo maneja registros que no coinciden con el filtro de ninguna integración o canalización personalizada. Si un registro coincide con el filtro de una canalización, Auto-Processing no lo procesa, incluso si esa canalización no modifica el registro. Sus configuraciones de Pipelines existentes permanecen sin cambios.
 
-<div class="alert alert-warning">Si el filtro de un pipeline coincide con todos los registros (por ejemplo, <code>*</code>), Auto-Processing no procesa ningún registro en su organización. Para usar Auto-Processing, limite el filtro de ese pipeline a los registros que necesita procesar.</div>
+<div class="alert alert-warning">Si el filtro de una canalización coincide con todos los registros (por ejemplo, <code>*</code>), Auto-Processing no procesa ningún registro en su organización. Para usar Auto-Processing, limite el filtro de esa canalización a los registros que necesita procesar.</div>
 
 ### Cómo se crean las entradas {#how-entries-are-created}
 
-Datadog agrupa los registros admitidos en entradas de Auto-Processing. Cada entrada cubre un par de fuente y servicio. Por ejemplo, los registros con `source:storefront` y `service:catalog-api` forman una entrada. A medida que aparecen nuevos patrones de registro, Datadog actualiza las entradas para admitirlos sin cambiar la forma en que se parsean los patrones admitidos anteriormente. Los atributos ya extraídos mantienen sus nombres, por lo que las facetas, los tableros y los monitores que los utilizan siguen funcionando.
+Datadog agrupa los registros admitidos en entradas de Auto-Processing. Cada entrada cubre un par de fuente y servicio. Por ejemplo, los registros con `source:storefront` y `service:catalog-api` forman una entrada. A medida que aparecen nuevos patrones de registro, Datadog actualiza las entradas para admitirlos sin cambiar la forma en que se parsean los patrones admitidos anteriormente. Los atributos ya extraídos conservan sus nombres, por lo que las facetas, los paneles y los monitores que los utilizan siguen funcionando.
 
-Datadog crea una entrada para un nuevo par de fuente y servicio aproximadamente 15 minutos después de recibir los primeros registros para ese par. El par debe tener al menos 1,000 registros indexados en las últimas 24 horas. Los registros descartados por [filtros de exclusión][15] no cuentan para este umbral. Si el volumen está por debajo del umbral, Datadog vuelve a verificar aproximadamente 12 horas después. Si el volumen sigue estando por debajo del umbral, Datadog no crea una entrada hasta que aparezca un nuevo patrón de registro para ese par.
+Datadog crea una entrada para un nuevo par de fuente y servicio unos 15 minutos después de recibir los primeros registros para ese par. El par debe tener al menos 1,000 registros indexados en las últimas 24 horas. Los registros descartados por [filtros de exclusión][15] no cuentan para este umbral. Si el volumen está por debajo del umbral, Datadog vuelve a comprobarlo unas 12 horas después. Si el volumen sigue estando por debajo del umbral, Datadog no crea una entrada hasta que aparece un nuevo patrón de registro para ese par.
 
 Cada organización puede tener hasta 100 entradas de Auto-Processing. Si su organización ya envía registros cuando activa Auto-Processing, Datadog crea entradas para hasta 100 pares de fuente y servicio. Datadog selecciona los pares que procesarían la mayor cantidad de registros. Después de eso, Datadog crea entradas para nuevos pares a medida que llegan sus registros, hasta que la organización tenga 100 entradas.
 
-{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="La pestaña Auto-Processing en la página Processing, que enumera las entradas por fuente y servicio con el número de atributos parseados, el uso y un interruptor de habilitación para cada entrada" style="width:100%;" >}}
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="La pestaña Auto-Processing en la página Processing, que enumera las entradas por fuente y servicio con el número de atributos parseados, el uso y un interruptor de activación para cada entrada" style="width:100%;" >}}
 
 ### Active o desactive Auto-Processing {#turn-auto-processing-on-or-off}
 
@@ -369,7 +372,7 @@ En la [página {{< ui >}}Processing{{< /ui >}}][8], seleccione la pestaña {{< u
 En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, elija si las nuevas entradas se habilitan automáticamente:
 
 - **Habilitar automáticamente nuevas entradas**: Las nuevas entradas se habilitan al crearse y comienzan a procesar los registros entrantes que coincidan.
-- **Revisar nuevas entradas antes de habilitar**: Las nuevas entradas se deshabilitan al crearse. [Revise sus transformaciones](#review-transformations) y luego habilite las que desee utilizar.
+- **Revisar nuevas entradas antes de habilitar**: Las nuevas entradas se deshabilitan al crearse. [Revise sus transformaciones](#review-transformations), luego habilite las que desee utilizar.
 
 ### Revisar transformaciones {#review-transformations}
 
@@ -384,19 +387,19 @@ En la pestaña {{< ui >}}Auto-Processing{{< /ui >}}, use el interruptor de una e
 
 ### Cambiar a un pipeline manual {#switch-to-a-manual-pipeline}
 
-Para personalizar el parseo o los nombres de los atributos, haga clic en {{< ui >}}Switch to manual pipeline{{< /ui >}} en la página {{< ui >}}View Transformations{{< /ui >}}. Datadog crea un pipeline personalizado con el mismo filtro y procesadores, y elimina la entrada de Auto-Processing para ese par de fuente y servicio.
+Para personalizar el parseo o los nombres de los atributos, haga clic en {{< ui >}}Switch to manual pipeline{{< /ui >}} en la página {{< ui >}}View Transformations{{< /ui >}}. Datadog crea una canalización personalizada con el mismo filtro y procesadores, y elimina la entrada de Auto-Processing para ese par de fuente y servicio.
 
 Después de cambiar:
 
-- El pipeline aparece en su lista de Pipelines y parsea los registros de la misma manera. Los nombres de los atributos permanecen iguales, por lo que las facetas, los tableros y los monitores existentes siguen funcionando.
-- Datadog ya no actualiza el pipeline cuando aparecen nuevos patrones de registro. Usted gestiona su configuración a partir de ese momento.
-- Debido a que el filtro del pipeline coincide con estos registros, Auto-Processing ya no los procesa.
+- La canalización aparece en su lista de canalizaciones y analiza los registros de la misma manera. Los nombres de los atributos permanecen iguales, por lo que las facetas, los paneles y los monitores existentes siguen funcionando.
+- Datadog ya no actualiza la canalización cuando aparecen nuevos patrones de registro. Usted gestiona su configuración a partir de ese momento.
+- Debido a que el filtro de la canalización coincide con estos registros, Auto-Processing ya no los procesa.
 
-Para volver a Auto-Processing, elimine el pipeline manual. Datadog crea entonces una nueva entrada para ese par de fuente y servicio después de que sus registros cumplan con los [requisitos de creación de entradas](#how-entries-are-created). La nueva entrada se genera desde cero y no restaura su entrada anterior ni sus ediciones.
+Para volver a Auto-Processing, elimine la canalización manual. Datadog crea entonces una nueva entrada para ese par de fuente y servicio después de que sus registros cumplan con los [requisitos de creación de entradas](#how-entries-are-created). La nueva entrada se genera desde cero y no restaura su entrada anterior ni sus ediciones.
 
 ### Limitaciones {#limitations}
 
-- Cada organización puede tener hasta 100 entradas de Auto-Processing. Datadog no procesa registros de pares de fuente y servicio que excedan este límite. Para obtener más detalles, consulte [Cómo se crean las entradas](#how-entries-are-created).
+- Cada organización puede tener hasta 100 entradas de Auto-Processing. Datadog no procesa registros de pares de fuente y servicio que superen este límite. Para obtener más detalles, consulte [Cómo se crean las entradas](#how-entries-are-created).
 - Es posible que algunos patrones de registro permanezcan sin parsear, incluso para un par de fuente y servicio que Auto-Processing ya cubre.
 
 ## Lecturas adicionales {#further-reading}

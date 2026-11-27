@@ -15,7 +15,7 @@ further_reading:
 - link: /bits_ai/bits_security_analyst/
   tag: ドキュメント
   text: Bits Security Analyst
-title: セキュリティシグナルの調査
+title: Security シグナルの調査
 ---
 ## 概要 {#overview}
 
@@ -50,7 +50,7 @@ Signals Explorer では、ファセットパネルまたは検索バーを使用
 
 ### 検出ルール別にシグナルを表示 {#view-signals-by-detection-rules}
 
-検出ルールに基づいてシグナルを表示するには、検索バーの下にある {{< ui >}}Visualize as{{< /ui >}} フィールドで {{< ui >}}Rules List{{< /ui >}} をクリックします。ルールをクリックして、そのルールに関連するシグナルを確認します。シグナルをクリックして、シグナルの詳細を確認します。
+検出ルールに基づいてシグナルを表示するには、検索バーの下にある {{< ui >}}Visualize as{{< /ui >}} フィールドで [{{< ui >}}Rules List{{< /ui >}}] をクリックします。ルールをクリックして、そのルールに関連するシグナルを確認します。シグナルをクリックして、シグナルの詳細を確認します。
 
 ### MITRE ATT&CK 別にシグナルを表示 {#view-signals-by-mitre-attck}
 
@@ -96,9 +96,9 @@ Workflow Automation を使用して、シグナルの調査と修復に役立つ
 - サードパーティの脅威インテリジェンスプロバイダーで IP アドレスを調査します。
 - 同僚に Slack メッセージを送信して、調査への協力を依頼します。
 
-シグナルのサイドパネルにある {{< ui >}}Workflows{{< /ui >}} タブをクリックすると、そのシグナルに対してトリガーされたワークフローと、実行が推奨されるワークフローを確認できます。推奨されるワークフローを実行する場合は、{{< ui >}}Run Workflow{{< /ui >}} をクリックします。詳細については、[推奨ワークフローの選択方法](#how-suggested-workflows-are-selected)を参照してください。ワークフローに追加の入力変数が必要な場合は、ダイアログボックスが表示され、続行する前に必要な値を入力するよう求められます。
+シグナルのサイドパネルにある {{< ui >}}Workflows{{< /ui >}} タブをクリックすると、そのシグナルに対してトリガーされたワークフローと、実行が推奨されるワークフローを確認できます。推奨されるワークフローを実行する場合は、[{{< ui >}}Run Workflow{{< /ui >}}] をクリックします。詳細については、[推奨ワークフローの選択方法](#how-suggested-workflows-are-selected)を参照してください。ワークフローに追加の入力変数が必要な場合は、ダイアログボックスが表示され、続行する前に必要な値を入力するよう求められます。
 
-実行したいワークフローがリストに表示されない場合は、{{< ui >}}Search and Run Workflow{{< /ui >}} をクリックします。ワークフローブラウザで、実行するワークフローを検索して選択します。
+実行したいワークフローがリストに表示されない場合は、[{{< ui >}}Search and Run Workflow{{< /ui >}}] をクリックします。ワークフローブラウザで、実行するワークフローを検索して選択します。
 
 または、{{< ui >}}Run Workflows{{< /ui >}} セクションの {{< ui >}}Next Steps{{< /ui >}} を選択して、ワークフローを検索して実行することもできます。
 
@@ -149,7 +149,7 @@ Blueprints から派生したワークフローとカスタムワークフロー
 
 シグナルを生成した検出ルールの抑制ルールを表示するには、以下のいずれかを実行します。
 
-- {{< ui >}}What Happened{{< /ui >}} セクションで、ファネルアイコンにマウスを合わせ、{{< ui >}}Add Suppression{{< /ui >}} をクリックします。
+- {{< ui >}}What Happened{{< /ui >}} セクションで、ファネルアイコンにマウスを合わせ、[{{< ui >}}Add Suppression{{< /ui >}}] をクリックします。
 - {{< ui >}}Next Steps{{< /ui >}} セクションで {{< ui >}}Edit Suppressions{{< /ui >}} をクリックすると、検出ルールエディターでそのルールの抑制セクションが表示されます。
 -  タブをクリックすると、抑制のリスト (存在する場合) が表示されます。{{< ui >}}Suppressions{{< /ui >}}{{< ui >}}Edit Suppressions{{< /ui >}}をクリックして検出ルールエディターに移動し、そのルールの抑制セクションを表示します。
 
@@ -165,13 +165,13 @@ Blueprints から派生したワークフローとカスタムワークフロー
 - 単一のシグナルのケースを管理するには、{{< ui >}}Cases{{< /ui >}} 列を使用します。
   - シグナルにケースが関連付けられている場合は、ケース ID にカーソルを合わせると、その情報を表示したり、新しいウィンドウで開いたり、シグナルとのリンクを解除したりできます。
   - シグナルに関連付けられたケースがない場合は、{{< ui >}}Create Case{{< /ui >}} アイコンをクリックして、ケースを作成するか、既存のケースを選択してシグナルに関連付けます。[Create Case] ウィンドウが開きます。
-    - ケースを作成するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Project{{< /ui >}}、{{< ui >}}Title{{< /ui >}}、{{< ui >}}Description{{< /ui >}}、および {{< ui >}}Assignee{{< /ui >}} を入力し、{{< ui >}}Create Case{{< /ui >}} をクリックします。
-    - 既存のケースを選択するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Add to Existing Case{{< /ui >}} タブをクリックします。ケースを選択し、{{< ui >}}Attach to an Existing Case{{< /ui >}} をクリックします。
+    - ケースを作成するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Project{{< /ui >}}、{{< ui >}}Title{{< /ui >}}、{{< ui >}}Description{{< /ui >}}、および {{< ui >}}Assignee{{< /ui >}} を入力し、[{{< ui >}}Create Case{{< /ui >}}] をクリックします。
+    - 既存のケースを選択するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Add to Existing Case{{< /ui >}} タブをクリックします。ケースを選択し、[{{< ui >}}Attach to an Existing Case{{< /ui >}}] をクリックします。
 - 複数のシグナルのケースを管理するには、
   1. ケースにリンクするシグナルを選択します。
-  1. 表示される {{< ui >}}Bulk Actions{{< /ui >}} リストで、{{< ui >}}Create a Case{{< /ui >}} または {{< ui >}}Add to Existing Case{{< /ui >}} をクリックします。[Create Case] ウィンドウが開きます。
-     - ケースを作成するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Project{{< /ui >}}、{{< ui >}}Title{{< /ui >}}、{{< ui >}}Description{{< /ui >}}、および {{< ui >}}Assignee{{< /ui >}} を入力し、{{< ui >}}Create Case{{< /ui >}} をクリックします。
-     - 既存のケースを選択するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Add to Existing Case{{< /ui >}} タブをクリックします。ケースを選択し、{{< ui >}}Attach to an Existing Case{{< /ui >}} をクリックします。
+  1. 表示される {{< ui >}}Bulk Actions{{< /ui >}} リストで、[{{< ui >}}Create a Case{{< /ui >}}] または [{{< ui >}}Add to Existing Case{{< /ui >}}] をクリックします。[Create Case] ウィンドウが開きます。
+     - ケースを作成するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Project{{< /ui >}}、{{< ui >}}Title{{< /ui >}}、{{< ui >}}Description{{< /ui >}}、および {{< ui >}}Assignee{{< /ui >}} を入力し、[{{< ui >}}Create Case{{< /ui >}}] をクリックします。
+     - 既存のケースを選択するには、{{< ui >}}Create Case{{< /ui >}} ウィンドウで {{< ui >}}Add to Existing Case{{< /ui >}} タブをクリックします。ケースを選択し、[{{< ui >}}Attach to an Existing Case{{< /ui >}}] をクリックします。
 
 ユーザーがケースを作成すると、デフォルトで以下の自動変更が行われます。
 - トリアージステータスが自動的に `Under Review` に設定されます。
@@ -194,7 +194,7 @@ Cloud SIEM の[セキュリティケース][13]設定ページでは、シグナ
 - **ケースプロジェクト設定**
 
   デフォルトの Cloud SIEM セキュリティケースプロジェクトと、選択可能なその他のセキュリティプロジェクトを選択します。
-  - **デフォルトの SIEM セキュリティケースプロジェクト**: セキュリティケースをプロジェクトに関連付ける際に、デフォルトで表示されるプロジェクトを選択します。このプロジェクトは、Cloud SIEM の [Cases] ページでデフォルトのプロジェクトとしても表示されます。
+  - **デフォルトの SIEM セキュリティケースプロジェクト**: セキュリティケースをプロジェクトに関連付ける際に、デフォルトで表示されるプロジェクトを選択します。このプロジェクトは、Cloud SIEM の [Cases][12] ページでデフォルトのプロジェクトとしても表示されます。
   - **セキュリティケースのプロジェクトスコープ**: セキュリティケースの関連付け先として選択できるセキュリティケースプロジェクトを最大 20 個まで選択します。
 
 - **ケース作成のデフォルト**
@@ -213,16 +213,20 @@ Cloud SIEM の[セキュリティケース][13]設定ページでは、シグナ
   - **ケースを更新する際**:
     - **シグナルのステータス**: ケースに対応するステータスをシグナルに割り当てるか、そのままにするかを選択します。
 
+- **シグナルのグループ化**
+
+  ケースの自動作成で既存のケースに関連シグナルを追加する際に使用されるグループ化方法を選択します。「[シグナルをケースにグループ化する][15]」を参照してください。
+
 ### インシデントを宣言する {#declare-an-incident}
 
 単一のシグナルに基づく場合でも、ケースの調査後であっても、特定の悪意のあるアクティビティには対応が必要です。Datadog でインシデントを宣言することで、開発チーム、運用チーム、セキュリティチームを集め、重大なセキュリティイベントに対処できます。[Incident Management][7] は、チームがインシデントを効果的に特定し、軽減するためのフレームワークとワークフローを提供します。
 
 シグナルパネルでインシデントを宣言するには:
 
-1. {{< ui >}}Next Steps{{< /ui >}} セクションで {{< ui >}}Declare Incident{{< /ui >}} をクリックします。
+1. {{< ui >}}Next Steps{{< /ui >}} セクションで [{{< ui >}}Declare Incident{{< /ui >}}] をクリックします。
 1. インシデントテンプレートに入力します。
 
-シグナルをインシデントに追加する場合は、{{< ui >}}Declare Incident{{< /ui >}} の横にある下向き矢印をクリックし、シグナルを追加するインシデントを選択します。{{< ui >}}Confirm{{< /ui >}}をクリックします。
+シグナルをインシデントに追加する場合は、{{< ui >}}Declare Incident{{< /ui >}} の横にある下向き矢印をクリックし、シグナルを追加するインシデントを選択します。[{{< ui >}}Confirm{{< /ui >}}] をクリックします。
 
 ### 脅威インテリジェンス {#threat-intelligence}
 
@@ -245,11 +249,11 @@ Security Signals エクスプローラーですべての脅威インテリジェ
 
 このクエリはシグナルパネルから直接起動することもできます。
 1. {{< ui >}}IPS{{< /ui >}} セクションの IP アドレスをクリックします。
-2. {{< ui >}}View Logs with @network.client.ip:<ip_address>{{< /ui >}} を選択します。
+2. [{{< ui >}}View Logs with @network.client.ip:<ip_address>{{< /ui >}}] (@network.client.ip:<ip_address> のログを表示) を選択します。
 
 {{< img src="security/security_monitoring/investigate_security_signals/search_logs_by_ip.png" alt="選択した IP アドレスの脅威オプションを表示するシグナルパネル" style="width:90%;" >}}
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -267,3 +271,4 @@ Security Signals エクスプローラーですべての脅威インテリジェ
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
 [14]: /ja/bits_ai/bits_security_analyst/
+[15]: /ja/security/cloud_siem/triage_and_investigate/signal_grouping/

@@ -22,7 +22,7 @@ code_lang_weight: 70
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: Documentación
-  text: Conectar los registros de la aplicación .NET a las trazas
+  text: Conecte los registros de aplicaciones .NET a los rastreos
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: Documentación
   text: Métricas de tiempo de ejecución
@@ -31,50 +31,51 @@ further_reading:
   text: Extensión de Microsoft Azure App Service
 - link: /tracing/glossary/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
+  text: Explore sus servicios, recursos y trazas
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
   tag: Blog
-  text: .NET monitoreo con Datadog APM y trazado distribuido
+  text: Monitoreo de .NET con Datadog APM y rastreo distribuido
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: Blog
-  text: Monitorea aplicaciones ASP.NET Core en contenedores
+  text: Monitoree aplicaciones ASP.NET Core en contenedores
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
   tag: Blog
-  text: Monitorea aplicaciones ASP.NET Core en contenedores en AWS Fargate
+  text: Monitoree aplicaciones ASP.NET Core en contenedores en AWS Fargate
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: Blog
-  text: Optimiza el rendimiento de tu aplicación .NET con el Continuous Profiler de
-    Datadog
+  text: Optimice el rendimiento de su aplicación .NET con el Datadog Continuous Profiler
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: Código fuente
   text: Ejemplos de instrumentación personalizada
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: Código fuente
   text: Código fuente
-title: Trazado de aplicaciones .NET Framework
+title: Rastreo de aplicaciones .NET Framework
 type: multi-code-lang
 ---
 ## Requisitos de compatibilidad {#compatibility-requirements}
 
-### Runtimes de .NET Framework soportados {#supported-net-framework-runtimes}
+### Entornos de ejecución de .NET Framework compatibles {#supported-net-framework-runtimes}
 
-El trazador .NET soporta instrumentación en .NET Framework >= 4.6.1.
+El .NET Tracer admite la instrumentación en .NET Framework >= 4.6.1.
 
-Para una lista completa de la biblioteca de .NET Framework de Datadog y el soporte de arquitectura de procesador (incluyendo versiones heredadas y de mantenimiento), consulta [Requisitos de Compatibilidad][1].
+Para obtener una lista completa de la compatibilidad de Datadog con bibliotecas y arquitecturas de procesador de .NET Framework (incluidas las versiones heredadas y de mantenimiento), consulte [Requisitos de compatibilidad][1].
 
 ## Instalación y primeros pasos {#installation-and-getting-started}
+
+<div class="alert alert-tip">Datadog recomienda <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), que instala el SDK de .NET y gestiona su versión desde la configuración de su Datadog Agent, sin realizar cambios en el código de su aplicación. Utilice la configuración manual en esta página si <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI no es compatible con su entorno</a> o si necesita gestionar el SDK en el código de su aplicación.</div>
 
 <div class="alert alert-info">
   Para configurar Datadog APM en entornos Serverless, como AWS Lambda o Azure Functions, consulte <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> La instrumentación automática de Datadog se basa en la API de perfilado de .NET CLR. Esta API permite solo un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecute solo una solución APM en su entorno de aplicación.
+  <strong>Nota:</strong> La instrumentación automática de Datadog depende de la API de perfilado de .NET CLR. Esta API permite solo un suscriptor (por ejemplo, Datadog APM). Para garantizar la máxima visibilidad, ejecute solo una solución de APM dentro de su entorno de aplicación.
 </div>
 
 ### Instalación {#installation}
 
-Antes de comenzar, asegúrese de haber [instalado y configurado el Agente][12].
+Antes de comenzar, asegúrese de haber [instalado y configurado el Agent][12].
 
 1. [Instale el SDK.](#install-the-sdk)
 3. [Habilite el SDK para su servicio.](#enable-the-sdk-for-your-service)
@@ -82,21 +83,21 @@ Antes de comenzar, asegúrese de haber [instalado y configurado el Agente][12].
 
 ### Instale el SDK {#install-the-sdk}
 
-Después de instalar y configurar su Agente de Datadog, el siguiente paso es agregar el SDK directamente en la aplicación para instrumentarla. Lea más sobre [información de compatibilidad][1].
+Después de instalar y configurar su Datadog Agent, el siguiente paso es agregar el SDK directamente en la aplicación para instrumentarla. Lea más sobre [información de compatibilidad][1].
 
-Instale el trazador de Datadog .NET a nivel de máquina para que todos los servicios en la máquina estén instrumentados o a nivel de aplicación, para que los desarrolladores puedan gestionar la instrumentación a través de las dependencias de la aplicación. Para ver las instrucciones de instalación a nivel de máquina, haga clic en la pestaña de Windows. Para ver las instrucciones de instalación por aplicación, haga clic en la pestaña de NuGet.
+Instale el Datadog .NET Tracer en todo el equipo para instrumentar todos los servicios del equipo, o por aplicación para que los desarrolladores puedan administrar la instrumentación mediante las dependencias de la aplicación. Para ver las instrucciones de instalación en todo el equipo, haga clic en la pestaña Windows. Para ver las instrucciones de instalación por aplicación, haga clic en la pestaña NuGet.
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-Para instalar el trazador .NET a nivel de máquina:
+Para instalar el .NET Tracer en todo el equipo:
 
-1. Descargue el [.NET Tracer MSI installer][1]. Utilice el instalador MSI x64 si está ejecutando Windows de 64 bits; esto puede instrumentar tanto aplicaciones de 64 bits como de 32 bits. Solo elige el instalador x86 si estás ejecutando Windows de 32 bits. A partir de la versión 3.0.0, solo se proporciona el instalador x64, ya que no soportamos sistemas operativos de 32 bits.
+1. Descargue el [instalador MSI de .NET Tracer][1]. Use el instalador MSI x64 si ejecuta Windows de 64 bits; este puede instrumentar aplicaciones tanto de 64 bits como de 32 bits. Elija el instalador x86 solo si está ejecutando Windows de 32 bits. A partir de la versión v3.0.0, solo se proporciona el instalador x64, ya que no admitimos sistemas operativos de 32 bits.
 
-2. Ejecuta el instalador MSI de .NET Tracer con privilegios de administrador.
+2. Ejecute el instalador MSI de .NET Tracer con privilegios de administrador.
 
-También puedes automatizar la configuración de MSI ejecutando lo siguiente en PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
+También puede crear un script para la configuración de MSI ejecutando lo siguiente en PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -104,12 +105,12 @@ También puedes automatizar la configuración de MSI ejecutando lo siguiente en 
 {{% tab "NuGet" %}}
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. Para aplicaciones que se ejecutan en IIS, sigue el proceso de instalación a nivel de máquina de Windows.
+  <strong>Nota:</strong> Esta instalación no instrumenta aplicaciones que se ejecutan en IIS. Para las aplicaciones que se ejecutan en IIS, siga el proceso de instalación en todo el equipo para Windows.
 </div>
 
 Para instalar el .NET Tracer por aplicación:
 
-1. Agrega el `Datadog.Trace.Bundle` [paquete de NuGet][1] a tu aplicación.
+1. Agregue el `Datadog.Trace.Bundle` [paquete NuGet][1] a su aplicación.
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
@@ -117,21 +118,21 @@ Para instalar el .NET Tracer por aplicación:
 
 {{< /tabs >}}
 
-### Habilita el SDK para tu servicio {#enable-the-sdk-for-your-service}
+### Habilite el SDK para su servicio {#enable-the-sdk-for-your-service}
 
-Para habilitar el .NET Tracer para tu servicio, establece las variables de entorno requeridas y reinicia la aplicación.
+Para habilitar el .NET Tracer para su servicio, configure las variables de entorno requeridas y reinicie la aplicación.
 
-Para información sobre los diferentes métodos para establecer variables de entorno, consulta [Configuración de variables de entorno del proceso](#configuring-process-environment-variables).
+Para obtener información sobre los diferentes métodos para configurar variables de entorno, consulte [Configuración de variables de entorno del proceso](#configuring-process-environment-variables).
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-#### Servicios de Información de Internet (IIS) {#internet-information-services-iis}
+#### Internet Information Services (IIS) {#internet-information-services-iis}
 
-1. El instalador MSI de .NET Tracer agrega todas las variables de entorno requeridas. No hay variables de entorno que necesites configurar.
+1. El instalador MSI de .NET Tracer agrega todas las variables de entorno necesarias. No hay variables de entorno que necesite configurar.
 
-2. Para instrumentar automáticamente aplicaciones alojadas en IIS, detén y reinicia IIS completamente ejecutando los siguientes comandos como administrador:
+2. Para instrumentar automáticamente las aplicaciones alojadas en IIS, detenga e inicie IIS por completo ejecutando los siguientes comandos como administrador:
 
    ```cmd
    net stop /y was
@@ -140,28 +141,28 @@ Para información sobre los diferentes métodos para establecer variables de ent
    ```
 
    <div class="alert alert-danger">
-     <strong>Nota:</strong> Siempre utiliza los comandos anteriores para detener y reiniciar completamente IIS para habilitar el SDK. Evita usar la aplicación GUI del Administrador de IIS o <code>iisreset.exe</code>.
+     <strong>Nota:</strong> Utilice siempre los comandos anteriores para detener y reiniciar IIS por completo a fin de habilitar el SDK. Evite utilizar la aplicación de interfaz gráfica de IIS Manager o <code>iisreset.exe</code>.
    </div>
 
 
 #### Servicios fuera de IIS {#services-outside-iis}
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> El runtime de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicie con estas variables de entorno configuradas. Deberías limitar la instrumentación solo a las aplicaciones que necesitan ser instrumentadas. <strong>No configures estas variables de entorno globalmente, ya que esto causa que <em>todos</em> los procesos de .NET en el servidor sean instrumentados.</strong>
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicie con estas variables de entorno configuradas. Debe limitar la instrumentación solo a las aplicaciones que necesiten ser instrumentadas. <strong>No configure estas variables de entorno de forma global, ya que esto provoca que <em>todos</em> los procesos de .NET en el servidor sean instrumentados.</strong>
 </div>
 
-1. Configura las siguientes variables de entorno requeridas para que la instrumentación automática se adjunte a tu aplicación:
+1. Establezca las siguientes variables de entorno requeridas para que la instrumentación automática se adjunte a su aplicación:
 
    ```
    COR_ENABLE_PROFILING=1
    ```
-2. Para aplicaciones independientes y servicios de Windows, reinicia manualmente la aplicación.
+2. Para aplicaciones independientes y servicios de Windows, reinicie manualmente la aplicación.
 
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
 
-Sigue las instrucciones en el archivo readme del paquete, también disponible en [`dd-trace-dotnet` repositorio][1].
+Siga las instrucciones del README del paquete, también disponible en el [`dd-trace-dotnet` repositorio][1].
 Los ejemplos de Docker también están disponibles en el [repositorio][2].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
@@ -171,19 +172,19 @@ Los ejemplos de Docker también están disponibles en el [repositorio][2].
 
 {{< /tabs >}}
 
-### Ve tus datos en vivo {#view-your-live-data}
+### Vea sus datos en vivo {#view-your-live-data}
 
-Después de habilitar el .NET Tracer para tu servicio:
+Después de habilitar el .NET Tracer para su servicio:
 
-1. Reinicia tu servicio.
+1. Reinicie su servicio.
 
-2. Crea carga de aplicación.
+2. Genere carga en la aplicación.
 
-3. En Datadog, navega a [**APM** > **Trazas de APM**][3].
+3. En Datadog, navegue a [{{< ui >}}APM{{< /ui >}} > {{< ui >}}APM Traces{{< /ui >}}][3].
 
 ## Configuración {#configuration}
 
-Si es necesario, configura el SDK para enviar datos de telemetría de rendimiento de la aplicación, incluyendo la configuración de Unified Service Tagging. Lee [Configuración de la Biblioteca][4] para más detalles.
+Si es necesario, configure el SDK para enviar datos de telemetría de rendimiento de la aplicación, incluyendo la configuración de Unified Service Tagging. Lea [Configuración de la biblioteca][4] para obtener detalles.
 
 ## Instrumentación personalizada {#custom-instrumentation}
 
@@ -194,13 +195,13 @@ La instrumentación personalizada depende de su instrumentación automática e i
 {{% tab "Windows" %}}
 
 <div class="alert alert-danger">
-<strong>Nota:</strong> A partir de la versión 3.0.0, la instrumentación personalizada requiere que también utilice la instrumentación automática. Debería esforzarse por mantener sincronizadas las versiones de los paquetes de instrumentación automática y personalizada (por ejemplo: MSI y NuGet), y asegurarse de no mezclar versiones principales de los paquetes.
+<strong>Nota:</strong> A partir de la v3.0.0, la instrumentación personalizada requiere que también utilice la instrumentación automática. Debe intentar mantener sincronizadas las versiones de los paquetes de instrumentación automática y personalizada (por ejemplo, MSI y NuGet) y asegurarse de no mezclar versiones principales de los paquetes.
 </div>
 
-Para utilizar la instrumentación personalizada en su aplicación .NET:
+Para usar la instrumentación personalizada en su aplicación .NET:
 
-1. Instrumente su aplicación utilizando la instrumentación automática.
-2. Agregue el `Datadog.Trace` [paquete de NuGet][1] a su aplicación.
+1. Instrumente su aplicación usando instrumentación automática.
+2. Agregue el `Datadog.Trace` [paquete NuGet][1] a su aplicación.
 3. En el código de su aplicación, acceda al rastreador global a través de la propiedad `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
@@ -209,7 +210,7 @@ Para utilizar la instrumentación personalizada en su aplicación .NET:
 
 {{% tab "NuGet" %}}
 
-Para utilizar la instrumentación personalizada en su aplicación .NET:
+Para usar la instrumentación personalizada en su aplicación .NET:
 
 1. En el código de su aplicación, acceda al rastreador global a través de la propiedad `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
@@ -217,29 +218,29 @@ Para utilizar la instrumentación personalizada en su aplicación .NET:
 
 {{< /tabs >}}
 
-Para obtener más información sobre cómo agregar tramos y etiquetas para la instrumentación personalizada, consulte la [.NET Documentación de Instrumentación Personalizada][5].
+Para obtener más información sobre cómo agregar tramos y etiquetas para instrumentación personalizada, consulte la [documentación de instrumentación personalizada de .NET][5].
 
-## Configurando variables de entorno del proceso {#configuring-process-environment-variables}
+## Configuración de variables de entorno del proceso {#configuring-process-environment-variables}
 
-Para adjuntar la instrumentación automática a su servicio, establezca las variables de entorno requeridas antes de iniciar la aplicación. Consulte la sección [Habilitar el SDK para su servicio](#enable-the-sdk-for-your-service) para identificar qué variables de entorno establecer según su método de instalación del Tracer .NET y siga los ejemplos a continuación para configurar correctamente las variables de entorno según el entorno de su servicio instrumentado.
+Para adjuntar la instrumentación automática a su servicio, establezca las variables de entorno requeridas antes de iniciar la aplicación. Consulte la sección [Habilite el SDK para su servicio](#enable-the-sdk-for-your-service) para identificar qué variables de entorno establecer según el método de instalación de .NET Tracer y siga los ejemplos a continuación para establecer correctamente las variables de entorno según el entorno de su servicio instrumentado.
 
 <div class="alert alert-danger">
-  <strong>Nota:</strong> El runtime de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicie con estas variables de entorno configuradas. Deberías limitar la instrumentación solo a las aplicaciones que necesitan ser instrumentadas. <strong>No configures estas variables de entorno globalmente, ya que esto causa que <em>todos</em> los procesos de .NET en el host sean instrumentados.</strong>
+  <strong>Nota:</strong> El tiempo de ejecución de .NET intenta cargar la biblioteca de .NET en <em>cualquier</em> proceso de .NET que se inicie con estas variables de entorno configuradas. Debe limitar la instrumentación solo a las aplicaciones que necesiten ser instrumentadas. <strong>No configure estas variables de entorno de forma global, ya que esto provoca que <em>todos</em> los procesos de .NET en el servidor sean instrumentados.</strong>
 </div>
 
 #### Servicios de Windows {#windows-services}
 
 {{< tabs >}}
 
-{{% tab "Editor del Registro" %}}
+{{% tab "Registry Editor" %}}
 
-En el Editor del Registro, cree un valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y establezca los datos del valor en:
+En el Registry Editor, cree un valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y establezca los datos del valor en:
 
 ```text
 COR_ENABLE_PROFILING=1
 ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Usando el Editor del Registro para crear variables de entorno para un servicio de Windows" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Uso del Registry Editor para crear variables de entorno para un servicio de Windows" >}}
 
 {{% /tab %}}
 
@@ -254,9 +255,9 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 #### IIS {#iis}
 
-Después de instalar el MSI, no se necesita configuración adicional para instrumentar automáticamente sus sitios de IIS. Para establecer variables de entorno adicionales que son heredadas por todos los sitios de IIS, realice los siguientes pasos:
+Después de instalar el MSI, no se necesita configuración adicional para instrumentar automáticamente sus sitios de IIS. Para establecer variables de entorno adicionales que sean heredadas por todos los sitios de IIS, realice los siguientes pasos:
 
-1. Abra el Editor del Registro, busque el valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\WAS`, y agregue las variables de entorno, una por línea. Por ejemplo, para agregar inyección de registros y métricas de tiempo de ejecución, agregue las siguientes líneas a los datos del valor:
+1. Abra el Registry Editor, busque el valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\WAS` y agregue las variables de entorno, una por línea. Por ejemplo, para agregar la inyección de registros y las métricas de tiempo de ejecución, agregue las siguientes líneas a los datos del valor:
    ```text
    DD_LOGS_INJECTION=true
    DD_RUNTIME_METRICS_ENABLED=true
@@ -268,7 +269,7 @@ Después de instalar el MSI, no se necesita configuración adicional para instru
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Usando el Editor del Registro para crear variables de entorno para todos los sitios de IIS" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Uso del Registry Editor para crear variables de entorno para todos los sitios de IIS" >}}
 
 #### Aplicaciones de consola {#console-applications}
 
@@ -286,7 +287,7 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

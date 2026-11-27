@@ -10,7 +10,7 @@ further_reading:
   text: Agent のコレクターをセットアップする
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: ドキュメント
-  text: Agent のコレクターでカスタム OpenTelemetry コンポーネントを使用する
+  text: Agent のコレクターにコンポーネントを追加する
 - link: /opentelemetry/migrate/ddot_collector
   tag: ドキュメント
   text: Agent のコレクターに移行する
@@ -55,11 +55,11 @@ Agent のコレクターの Remote Configuration は<strong>プレビュー版</
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Agent のコレクターをセットアップする{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}カスタム OpenTelemetry コンポーネントを使用する{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Agent のコレクターにコンポーネントを追加する{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Agent のコレクターに移行する{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 参考資料{#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

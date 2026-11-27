@@ -5,7 +5,6 @@ title: Guides
 ## Guides {#guides}
 
 {{< whatsnext desc=" " >}}
-{{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}Premiers pas avec OpenTelemetry chez Datadog{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Générer des métriques de temporalité delta{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Envoi de données de la démo OpenTelemetry vers Datadog{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/instrument_unsupported_runtimes/" >}}Instrumenter des runtimes non pris en charge avec OpenTelemetry{{< /nextlink >}}
@@ -17,8 +16,8 @@ title: Guides
 {{< nextlink href="/opentelemetry/migrate/collector_0_120_0" >}}Migrez vers OpenTelemetry Collector version 0.120.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/collector_0_95_0" >}}Migrez vers OpenTelemetry Collector version 0.95.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/migrate_operation_names" >}}Migrez vers les nouveaux mappages de noms d'opération{{< /nextlink >}}
-{{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrez vers la distribution Datadog de l'OTel Collector
-{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrez vers le Collector de l’Agent{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/upstream_to_ddot_collector" >}}Migrer vers le collecteur DDOT{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## En savoir plus sur le blog {#read-more-on-the-blog}

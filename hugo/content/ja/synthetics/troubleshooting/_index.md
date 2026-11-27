@@ -161,7 +161,7 @@ Synthetic テストは、デフォルトでは[再通知][12]を行いません�
 
 ### 記録および実行中のアプリ機能の問題{#app-functionality-issues-during-recording-and-execution}
 
-iOS アプリの再署名プロセスにより、記録中または実行中にアプリの機能が正しく動作しない場合があります。デバイスの信頼を確保するために必要なこのプロセスにより、重要な iOS エンタイトルメント (Contacts、Camera、Keychain、Photos、HealthKit、HomeKit など) が削除される場合があります。
+iOS アプリの再署名プロセスにより、記録中または実行中にアプリの機能が正しく動作しない場合があります。デバイスの信頼を確保するために必要なこのプロセスにより、重要な iOS エンタイトルメント (Contacts、Camera、Keychain、Photos、Health Kit、Home Kit など) が削除される場合があります。
 
 **解決策**: iOSアプリを配布する際は、Ad Hocまたは開発用プロビジョニングプロファイルを使用して、エンタイトルメント関連の問題を最小限に抑え、互換性を向上させてください。
 
@@ -255,7 +255,7 @@ ICMP テストは `ping` コマンドを使用して、ネットワークルー�
 
 Chrome バージョン 149 ではリクエストヘッダーの検証が厳格化されており、これによりサブリソースのリクエストが `net::ERR_INVALID_ARGUMENT` で失敗する可能性があります。以前の Chrome バージョンの検証はより緩やかでした。
 
-**解決策**: この問題を解決するには、プライベートロケーションを[バージョン 1.69.1 以降][106]にアップグレードしてください。
+**解決策**: この問題を解決するには、プライベートロケーションを[バージョン 1.70.0 以降][106]にアップグレードしてください。
 
 [101]: /ja/synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
@@ -376,7 +376,7 @@ TLS インスペクションをバイパスしないと、Windows プライベ�
 
 **解決策**: ランタイムのバージョンを更新する、`clone3` をポリシーに手動で追加する、または `unconfined` seccomp ポリシーを使用することで、ランタイムの `seccomp` ポリシーに `clone3` が含まれるようにしてください。詳細については、[Docker の `seccomp` ドキュメント][13]を参照してください。
 
-## 参考資料{#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

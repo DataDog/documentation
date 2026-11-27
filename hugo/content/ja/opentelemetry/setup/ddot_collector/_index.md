@@ -20,7 +20,7 @@ further_reading:
   tag: ブログ
   text: DDOT Collector を使用して、OpenTelemetry と Datadog を統合する
 - link: https://www.datadoghq.com/architecture/monitoring-kubernetes-with-datadog-distribution/
-  tag: Architecture Center
+  tag: アーキテクチャセンター
   text: Datadog Distribution of the OpenTelemetry (DDOT) コレクターによる Kubernetes の監視
 title: DDOT コレクター
 ---
@@ -56,7 +56,7 @@ Agent を必要とする機能のために、コレクターと並行して Data
 
 ## 含まれているコンポーネント {#included-components}
 
-DDOT コレクターには、このセクションに記載されている OpenTelemetry コレクターコンポーネントが含まれています。Agent のコレクターにコンポーネントを追加するには、[カスタムコンポーネントガイド][2]を参照してください。
+DDOT コレクターには、このセクションに記載されている OpenTelemetry コレクターコンポーネントが含まれています。他のコンポーネントを使用して Agent のコレクターをビルドするには、[Agent のコレクターにコンポーネントを追加する][2] を参照してください。
 
 ### サポートレベル {#support-levels}
 
@@ -64,7 +64,7 @@ Datadog、コミュニティ、およびカスタムコンポーネントサポ�
 
 ### OpenTelemetry コレクターコンポーネント {#opentelemetry-collector-components}
 
-デフォルトでは、DDOT コレクターにはこれらのコンポーネントが含まれています。このリストは DDOT 7.84 に対応しています。このリストは [YAML 形式][11]でも入手できます。
+デフォルトでは、DDOT コレクターにはこれらのコンポーネントが含まれています。このリストは DDOT 7.85 と一致します。アップストリームコンポーネントは [DDOT 7.85.3 のマニフェスト][11] にも記載されています。このマニフェストには、Datadog が個別にビルドする Datadog Exporter と Datadog Connector は記載されていません。
 
 {{% collapse-content title="レシーバー" level="p" %}}
 
@@ -72,9 +72,12 @@ Datadog、コミュニティ、およびカスタムコンポーネントサポ�
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
+- [httpcheckreceiver][73] (バージョン 7.85.0 以降で利用可能)
 - [jaegerreceiver][19]
 - [k8sclusterreceiver][70]
+- [k8seventsreceiver][74] (バージョン 7.85.0 以降で利用可能)
 - [k8sobjectsreceiver][59] (バージョン 7.56.0 以降で利用可能)
+- [kafkareceiver][75] (バージョン 7.85.0 以降で利用可能)
 - [kubeletstatsreceiver][60] (バージョン 7.56.0 以降で利用可能)
 - [otlpreceiver][20]
 - [podmanreceiver][61] (バージョン 7.56.0 以降で利用可能)
@@ -90,8 +93,9 @@ Datadog、コミュニティ、およびカスタムコンポーネントサポ�
 - [attributesprocessor][25]
 - [batchprocessor][26]
 - [cumulativetodeltaprocessor][27]
+- [deltatorateprocessor][76] (バージョン 7.85.0 以降で利用可能)
 - [filterprocessor][28]
-- [groupbyattributeprocessor][29]
+- [groupbyattrsprocessor][29]
 - [k8sattributesprocessor][30]
 - [memorylimiterprocessor][31]
 - [probabilisticsamplerprocessor][32]
@@ -149,7 +153,7 @@ Datadog、コミュニティ、およびカスタムコンポーネントサポ�
 
 {{% /collapse-content %}}
 
-Agent のコレクターには [DD Flare Extension][52] も含まれており、コレクターの診断情報が Agent フレアに追加されます。
+DDOT コレクターと Agent のコレクターには、どちらにも [DD フレア拡張機能][52] が含まれています。Agent のコレクターでは、この拡張機能によってコレクターの診断情報が Agent フレアに追加されます。
 
 ## OpenTelemetry コレクターバージョン {#opentelemetry-collector-versions}
 
@@ -157,16 +161,17 @@ Agent のコレクターには [DD Flare Extension][52] も含まれており、
 
 | DDOT バージョン | ベータ版 | 安定版 |
 |--------------|--------------|----------------|
+| 7.85.x       | v0.159.0     | v1.65.0        |
 | 7.84.x       | v0.159.0     | v1.65.0        |
 | 7.83.x       | v0.158.0     | v1.64.0        |
 | 7.82.x       | v0.155.0     | v1.61.0        |
 | 7.81.x       | v0.154.0     | v1.60.0        |
-| 7.80.x       | v0.152.0     | v1.58.0        |
 
 {{% collapse-content title="以前のバージョン" level="p" %}}
 
 | DDOT バージョン | ベータ版 | 安定版 |
 |--------------|--------------|----------------|
+| 7.80.x       | v0.152.0     | v1.58.0        |
 | 7.79.x       | v0.150.0     | v1.56.0        |
 | 7.78.x       | v0.147.0     | v1.53.0        |
 | 7.77.x       | v0.145.0     | v1.51.0        |
@@ -181,12 +186,12 @@ Agent のコレクターには [DD Flare Extension][52] も含まれており、
 
 {{% /collapse-content %}}
 
-## 参考資料{#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /ja/opentelemetry/setup/ddot_collector/custom_components
-[11]: https://github.com/DataDog/datadog-agent/blob/7.84.0/comp/otelcol/collector-contrib/impl/manifest.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/7.85.3/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
 [18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
@@ -240,3 +245,7 @@ Agent のコレクターには [DD Flare Extension][52] も含まれており、
 [70]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/README.md
 [71]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/countconnector/README.md
 [72]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/k8sleaderelector/README.md
+[73]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/httpcheckreceiver/README.md
+[74]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8seventsreceiver/README.md
+[75]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkareceiver/README.md
+[76]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/deltatorateprocessor/README.md

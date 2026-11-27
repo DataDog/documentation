@@ -21,7 +21,7 @@ El Full-Host Profiler recopila perfiles de CPU en todos los procesos de un servi
 
 El Full-Host Profiler es útil para:
 
-- Generar perfiles de software que no utiliza SDK de Datadog, como componentes de código abierto y binarios de terceros.
+- Generar perfiles de software que no utiliza los SDK de Datadog, como componentes de código abierto y binarios de terceros.
 - Analizar el rendimiento en procesos y entornos de ejecución multilingües.
 
 ## Entornos compatibles {#supported-environments}
@@ -68,7 +68,7 @@ env:
     value: my-service
 ```
 
-Si no se establece ninguna variable, el generador de perfiles infiere el nombre del servicio a partir del nombre del binario. Para lenguajes interpretados, este es el nombre del intérprete, como `java` o `python`.
+Si no se establece ninguna variable, el perfilador infiere el nombre del servicio a partir del nombre del binario. Para lenguajes interpretados, este es el nombre del intérprete, como `java` o `python`.
 
 {{< img src="profiler/inferred_service_example.png" alt="Ejemplo de un servicio inferido dentro de Profiling." style="width:50%;">}}
 
@@ -80,7 +80,7 @@ Establezca `DD_ENV` y `DD_VERSION` en sus cargas de trabajo para un filtrado má
 
 Para lenguajes compilados como C, C++, Rust y Go, se requieren símbolos de depuración para que los nombres de las funciones aparezcan en los perfiles.
 
-El Full-Host Profiler carga símbolos de depuración a Datadog cuando están disponibles localmente. Si se eliminaron los símbolos de sus binarios de producción, cargue los símbolos por separado desde sus artefactos de compilación:
+El Full-Host Profiler carga símbolos de depuración a Datadog cuando están disponibles localmente. Si se eliminaron los símbolos de sus binarios de producción, cargue por separado los símbolos de sus artefactos de compilación:
 
 1. Instale la CLI de [datadog-ci][4].
 2. Configure su clave de API y sitio:
@@ -98,26 +98,26 @@ El Full-Host Profiler carga símbolos de depuración a Datadog cuando están dis
 
 ## Privilegios de Security {#security-privileges}
 
-El Full-Host Profiler no se ejecuta como un contenedor privilegiado. En Kubernetes, se ejecuta como un DaemonSet a nivel del servidor con `hostPID: true` para que pueda observar los procesos en el nodo. Los manifiestos de despliegue añaden solo las capacidades de Linux requeridas para la creación de perfiles del servidor basada en eBPF.
+El Full-Host Profiler no se ejecuta como un contenedor privilegiado. En Kubernetes, se ejecuta como un DaemonSet a nivel de servidor con `hostPID: true` para que pueda observar los procesos en el nodo. Los manifiestos de despliegue añaden solo las capacidades de Linux requeridas para la creación de perfiles del servidor basada en eBPF.
 
 - **SELinux** está configurado con el tipo de contenedor superprivilegiado `spc_t` para que SELinux no bloquee el acceso al servidor y a los procesos que requiere el Full-Host Profiler. Este tipo no proporciona confinamiento adicional de SELinux. Si `spc_t` no está disponible, reemplácelo con un tipo equivalente compatible con su distribución y política de seguridad.
-- **Seccomp** restringe las llamadas al sistema que el contenedor puede realizar más allá de lo que permiten esas capacidades. El perfil de seccomp se incluye en `/etc/dd-host-profiler/seccomp.json` dentro de la imagen y se aplica automáticamente en las rutas basadas en Helm y en la ruta del OpenTelemetry Operator. En la ruta de vista previa del Datadog Operator, seccomp es opcional y debe aprovisionarse manualmente.
+- **Seccomp** restringe las llamadas al sistema que el contenedor puede realizar más allá de lo que permiten esas capacidades. El perfil de seccomp se incluye en `/etc/dd-host-profiler/seccomp.json` dentro de la imagen y se aplica automáticamente en las rutas basadas en Helm y en la ruta de OpenTelemetry Operator. En la ruta de vista previa del Datadog Operator, seccomp es opcional y debe aprovisionarse manualmente.
 - **AppArmor** es opcional donde esté disponible. El perfil proporcionado restringe qué binarios puede ejecutar el generador de perfiles: solo se permite `objcopy`, utilizado para la extracción de símbolos.
 
 Consulte las [Instrucciones de implementación del Full-Host Profiler][2] para conocer la configuración que se aplica a cada ruta de implementación.
 
 ## Relación con OpenTelemetry {#relationship-to-opentelemetry}
 
-El Full-Host Profiler está construido como una distribución de OpenTelemetry Collector para la generación de perfiles basada en eBPF de todo el servidor. Utiliza el [OpenTelemetry eBPF Profiler][1] y exporta datos de perfil a Datadog a través de OTLP HTTP.
+El Full-Host Profiler está construido como una distribución de OpenTelemetry Collector para la generación de perfiles basada en eBPF en todo el servidor. Utiliza el [OpenTelemetry eBPF Profiler][1] y exporta datos de perfil a Datadog a través de OTLP HTTP.
 
-### Implementación con DDOT o como Collector independiente {#deployment-with-ddot-or-as-a-standalone-collector}
+### Implementación con el Datadog Agent o como un Collector independiente {#deployment-with-the-datadog-agent-or-as-a-standalone-collector}
 
-El Full-Host Profiler es compatible de dos maneras:
+El Full-Host Profiler se admite de dos maneras:
 
-- **Con el Datadog Agent, incluido el Collector del Agent**: El Full-Host Profiler se ejecuta como un sidecar en el Datadog Agent DaemonSet, implementado con el chart de Helm de Datadog o el Datadog Operator. Infiere su configuración del Agent y el Agent enriquece los perfiles con metadatos de infraestructura de Datadog.
+- **Con el Datadog Agent, incluido el Collector del Agent**: El Full-Host Profiler se ejecuta como un sidecar en el Datadog Agent DaemonSet, implementado con el chart de Helm de Datadog o el Datadog Operator. Infiere su configuración del Agent, y el Agent enriquece los perfiles con metadatos de infraestructura de Datadog.
 - **Independiente**: El Full-Host Profiler se ejecuta como su propio DaemonSet de OpenTelemetry Collector, implementado con el chart de Helm de OpenTelemetry o el OpenTelemetry Operator, y envía perfiles directamente a Datadog. No se requiere el Datadog Agent ni el DDOT Collector.
 
-En ambos casos, el Full-Host Profiler se ejecuta en su propio contenedor enfocado en la generación de perfiles en lugar de dentro del DDOT Collector. La generación de perfiles eBPF en todo el servidor requiere acceso elevado al servidor, como `hostPID: true`, montajes del kernel del servidor y capacidades de Linux relacionadas con eBPF. Mantener el generador de perfiles separado evita otorgar ese acceso a una distribución de Collector de propósito general más grande y reduce la cantidad de código que se ejecuta con privilegios a nivel de servidor.
+En ambos casos, el Full-Host Profiler se ejecuta en su propio contenedor enfocado en la generación de perfiles en lugar de dentro del Collector del Agent o del DDOT Collector. La generación de perfiles eBPF en todo el servidor requiere acceso elevado al servidor, como `hostPID: true`, montajes del kernel del servidor y capacidades de Linux relacionadas con eBPF. Mantener el generador de perfiles separado evita otorgar ese acceso a una distribución de Collector de propósito general más grande y reduce la cantidad de código que se ejecuta con privilegios a nivel del servidor.
 
 Ejecutar el generador de perfiles por separado sigue el enfoque del proyecto original de OpenTelemetry: el generador de perfiles eBPF se empaqueta como una distribución dedicada en lugar de incluirse directamente en `otelcol-contrib`.
 
@@ -125,15 +125,15 @@ Para obtener instrucciones sobre cada opción, consulte [Instrucciones de implem
 
 ### En qué se diferencia el Full-Host Profiler del generador de perfiles eBPF del proyecto original {#how-the-full-host-profiler-differs-from-the-upstream-ebpf-profiler}
 
-El Full-Host Profiler empaqueta el [OpenTelemetry eBPF Profiler][1] del proyecto original con componentes y valores predeterminados para enviar perfiles a Datadog. En comparación con ejecutar el generador de perfiles del proyecto original por su cuenta, el Full-Host Profiler:
+El Full-Host Profiler empaqueta el [OpenTelemetry eBPF Profiler][1] del proyecto original con componentes y valores predeterminados para enviar perfiles a Datadog. En comparación con ejecutar por su cuenta el generador de perfiles del proyecto original, el Full-Host Profiler:
 
-- **Carga símbolos de depuración automáticamente**: Cuando los símbolos están disponibles localmente, el generador de perfiles los carga en Datadog. Los marcos de pila nativos en lenguajes como C, C++, Go y Rust se simbolizan sin un paso de carga de CI independiente. Para binarios despojados de símbolos, consulte [Símbolos de depuración](#debug-symbols).
-- **Exporta a Datadog con etiquetas de contenedor**: Incluye la configuración de exportación de Datadog y el etiquetado de contenedores, por lo que no necesita configurar estos componentes del recopilador usted mismo.
+- **Carga símbolos de depuración automáticamente**: Cuando los símbolos están disponibles localmente, el generador de perfiles los carga en Datadog. Las tramas nativas en lenguajes como C, C++, Go y Rust se simbolizan sin un paso independiente de carga en CI. Para los binarios sin símbolos, consulte [Símbolos de depuración](#debug-symbols).
+- **Exporta a Datadog con etiquetas de contenedor**: Incluye la configuración de exportación de Datadog y el etiquetado de contenedores, por lo que no necesita configurar estos componentes del Collector usted mismo.
 - **Utiliza valores predeterminados probados a escala**: Datadog prueba la configuración predeterminada para verificar la sobrecarga y la estabilidad en miles de servidores.
 
 ### Madurez de la generación de perfiles de OpenTelemetry {#opentelemetry-profiling-maturity}
 
-La señal OTLP Profiles no es estable en OpenTelemetry. Para conocer su estado de madurez, consulte el [anuncio de perfiles de OpenTelemetry][5]. Datadog contribuye a la señal OTLP Profiles, a OpenTelemetry eBPF Profiler y a la especificación de OpenTelemetry para el intercambio de contexto de [procesos][7] e [hilos][8], lo que permite correlacionar trazas con perfiles.
+La señal OTLP Profiles no es estable en OpenTelemetry. Para conocer su estado de madurez, consulte el [anuncio de perfiles de OpenTelemetry][5]. Datadog contribuye a la señal OTLP Profiles, al generador de perfiles eBPF de OpenTelemetry y a la especificación de OpenTelemetry para el intercambio de contexto de [procesos][7] y [hilos][8], lo que permite correlacionar trazas con perfiles.
 
 ## ¿Qué sigue? {#whats-next}
 
