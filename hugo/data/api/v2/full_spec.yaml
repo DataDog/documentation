@@ -278308,9 +278308,6 @@ paths:
         operator: OR
         permissions:
           - rum_delete_data
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
         Retrieves the content of a specific JavaScript source map file. Provide either
@@ -278433,9 +278430,6 @@ paths:
         operator: OR
         permissions:
           - rum_apps_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/list:
     get:
       description: |-
@@ -278807,9 +278801,6 @@ paths:
         operator: OR
         permissions:
           - rum_apps_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/restore:
     patch:
       description: |-
@@ -279049,9 +279040,6 @@ paths:
         operator: OR
         permissions:
           - rum_delete_data
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/service_repository_info:
     post:
       description: |-
@@ -279118,9 +279106,6 @@ paths:
         operator: OR
         permissions:
           - rum_apps_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/spans/analytics/aggregate:
     post:
       description: |-

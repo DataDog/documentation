@@ -21959,8 +21959,7 @@ menu:
           - v2
         operationids:
           - GetServiceRepositoryInfo
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: Restore source maps
       url: /api/latest/rum/restore-source-maps/
@@ -21972,8 +21971,7 @@ menu:
           - v2
         operationids:
           - RestoreSourcemaps
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: List source maps
       url: /api/latest/rum/list-source-maps/
@@ -21985,8 +21983,7 @@ menu:
           - v2
         operationids:
           - ListSourcemaps
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Get a JavaScript source map
       url: /api/latest/rum/get-a-javascript-source-map/
@@ -21998,8 +21995,7 @@ menu:
           - v2
         operationids:
           - GetSourcemaps
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Delete source maps
       url: /api/latest/rum/delete-source-maps/
@@ -22011,8 +22007,7 @@ menu:
           - v2
         operationids:
           - DeleteSourcemaps
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Search RUM events
       url: /api/latest/rum/search-rum-events/

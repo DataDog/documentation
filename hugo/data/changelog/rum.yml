@@ -100,3 +100,13 @@ entries:
       - SearchRUMEvents
       - UpdateRUMApplication
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-27'
+    link: https://github.com/DataDog/documentation/pull/42261
+    operations:
+      - DeleteSourcemaps
+      - GetServiceRepositoryInfo
+      - GetSourcemaps
+      - ListSourcemaps
+      - RestoreSourcemaps
+    title: Mark RUM source maps endpoints as stable and opt-in into pup
