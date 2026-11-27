@@ -261,6 +261,8 @@ This setting stops only the exposures sent to Datadog. It does not stop the aggr
 DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false
 {{< /code-block >}}
 
+The Java, Go, and Ruby providers also accept an option that stops a single provider from recording exposures, so `ExposureHook` receives none of its exposures. See the [Java][11], [Go][12], and [Ruby][13] SDK pages.
+
 ### Browser SDK
 
 Set `trackExposures` to `false` when you create the provider:
@@ -298,3 +300,6 @@ const provider = new DatadogProvider({
 [8]: /feature_flags/browser_developer_extension/
 [9]: /feature_flags/server/nodejs/
 [10]: /feature_flags/server/ruby/
+[11]: /feature_flags/server/java/#configure-evaluation-telemetry-and-exposures
+[12]: /feature_flags/server/go/#configure-evaluation-telemetry-and-exposures
+[13]: /feature_flags/server/ruby/#configure-evaluation-telemetry-and-exposures
