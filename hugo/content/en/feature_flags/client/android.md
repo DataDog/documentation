@@ -257,6 +257,10 @@ Similar detail methods exist for other types: `getBooleanDetails()`, `getInteger
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+With `dd-sdk-android-flags` 3.15.0 and later, a successful evaluation from flags restored from persistent storage reports `CACHED`. After a network response replaces those flags, successful evaluations use the reasons supplied by that response. Check the error field as well: a missing flag or type mismatch returns an error and the default value, rather than a successful cached evaluation.
+
+`CACHED` describes where the evaluated assignment came from. It does not mean the configuration is fresh, matches a newly requested evaluation context, or that an OpenFeature client has finished initialisation.
+
 ## Observe provider events
 
 <div class="alert alert-info">Provider event observation is available in <code>dd-sdk-android-flags-openfeature</code> 3.6.0 and later. Use the same version for <code>dd-sdk-android-flags</code>.</div>

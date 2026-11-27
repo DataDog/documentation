@@ -326,6 +326,12 @@ contextSubscription.cancel();
 
 The provider does not poll automatically. Each context change reloads assignments, even when the context is unchanged. Do not call `refresh()` from every `error` event: repeated retries can prevent a slow request from completing.
 
+<!-- Publication gate: confirm the first SDK release supporting CACHED before merging this addition. -->
+
+In SDK versions that support the `CACHED` evaluation reason, a successful evaluation from flags restored from persistent storage reports `CACHED`. After a network response replaces those flags, successful evaluations use the reasons supplied by that response.
+
+`CACHED` describes where the evaluated assignment came from. It does not mean the configuration is fresh or matches a newly requested evaluation context.
+
 ## Advanced configuration
 
 Pass a `DatadogFlagsConfiguration` to `DatadogProvider.fromConfiguration()`:
