@@ -26,6 +26,12 @@ Bits Investigation is an autonomous AI agent that investigates production issues
 
 {{< img src="bits_ai/overview_2.png" alt="Bits AI analysis on a monitor alert" style="width:100%;" >}}
 
+## Scout
+
+Scout 1.0 is Datadog's AI model specialized for investigating production issues. Scout works alongside frontier models as part of Bits Investigation to gather evidence, test competing hypotheses, and identify root causes.
+
+To learn more about the model that powers Bits AI, read the [Datadog blog post introducing Scout 1.0][1].```
+
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits Investigation:" >}}
@@ -40,3 +46,5 @@ Bits Investigation is an autonomous AI agent that investigates production issues
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.datadoghq.com/blog/ai/introducing-scout-sre-specialized-model-bits-ai/
