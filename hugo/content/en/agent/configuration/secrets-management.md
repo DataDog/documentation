@@ -104,7 +104,7 @@ For example, assuming the secret ID `My-Secrets` contains the following 3 values
 {
     "prodApiKey": "datadog api key to use",
     "anotherSecret1": "value2",
-    "anotherSecret2": "value3",
+    "anotherSecret2": "value3"
 }
 ```
 
