@@ -6261,15 +6261,15 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_providers
       weight: 2
-    - name: Connect Applications
-      url: ai_gateway/applications/
-      parent: ai_gateway
-      identifier: ai_gateway_applications
-      weight: 3
     - name: Send Requests
       url: ai_gateway/requests/
       parent: ai_gateway
       identifier: ai_gateway_requests
+      weight: 3
+    - name: Connect Applications
+      url: ai_gateway/applications/
+      parent: ai_gateway
+      identifier: ai_gateway_applications
       weight: 4
     - name: Route Requests
       url: ai_gateway/routing/

@@ -7,27 +7,75 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
-Send requests to the base URL for your [Datadog site][12]:
+Every request to AI Gateway needs a Datadog credential, the base URL for your Datadog site, and a model identifier. For a complete request example, see [Get Started](/ai_gateway/getting_started/#send-a-request). To set up a specific client, such as Claude Code, Codex, or an SDK, see [Connect Applications](/ai_gateway/applications/).
+
+## Authenticate requests
+
+AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
+
+For Claude Code and Codex, [Trajectory](/ai_gateway/applications/#connect-claude-code-and-codex-with-trajectory) signs you in to Datadog, so you do not need a long-lived token for them.
+
+| Credential | Request headers |
+|---|---|
+| [Personal access token][requests-1] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
+| [Personal access token][requests-1], for coding agents signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
+| [Service access token (SAT)][requests-2] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+| [Workload Identity Federation][requests-3] token | `Authorization: Bearer <WIF_TOKEN>` |
+
+Coding agents signed in with a subscription send two headers:
+
+- `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
+- `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
+
+Despite its name, `dd-application-key` takes a personal access token, not an application key.
+
+For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](/ai_gateway/applications/#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
+
+## Base URL
+
+Send requests to the base URL for your Datadog site, followed by the path of the [request format](#supported-request-formats):
 
 ```text
 https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1
 ```
 
-[Authenticate requests](/ai_gateway/applications/#authenticate-requests) with a Datadog personal access token or service access token. For a complete request example, see [Get Started](/ai_gateway/getting_started/#send-a-request).
+Clients that add `/v1` to the base URL themselves, such as Claude Code and the Anthropic SDK, use `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai` instead.
+
+The URLs on this page match the site chosen in the {{< ui >}}Datadog Site{{< /ui >}} selector. To find your site, see [Datadog sites][12].
+
+## Request headers
+
+AI Gateway reads these request headers. Clients set them through their own header settings, such as `ANTHROPIC_CUSTOM_HEADERS` in Claude Code, `http_headers` in Codex, or `default_headers` in an SDK.
+
+| Header | Required | Purpose |
+|---|---|---|
+| `Authorization: Bearer <TOKEN>` | Yes | Your Datadog credential. See [Authenticate requests](#authenticate-requests). |
+| `dd-application-key: <PERSONAL_ACCESS_TOKEN>` | For subscription agents | Your Datadog personal access token, when `Authorization` carries a [subscription](/ai_gateway/providers/#use-subscription-providers) credential. |
+| `x-ai-gateway-provider: <PROVIDER_SLUG>` | No | Sends a model ID without its provider prefix to this provider. Ignored for `router/<RULE_SLUG>` models. |
+| `x-ai-gateway-team: <TEAM_SLUG>` | No | Attributes the request to a team you belong to. See [Select a team](/ai_gateway/applications/#select-a-team). |
+| `x-dd-tag-ml_app: <APPLICATION_NAME>` | No | Names the application in Agent Observability. See [Attribute requests to an application](/ai_gateway/applications/#attribute-requests-to-an-application). |
+| `x-dd-tag-<KEY>: <VALUE>` | No | Adds a custom tag that budgets, rate limits, and data capture overrides can match. |
+| `x-session-id: <SESSION_ID>` | No | Identifies the conversation, so routing keeps it on one destination. Coding agents send their own session IDs. See [Sessions](/ai_gateway/routing/#sessions). |
 
 ## Supported request formats
 
-Append one of the following paths to the base URL. The operations available depend on the model and provider account; the provider page shows the operations and request examples for your account.
+Append one of the following paths to the [base URL](#base-url). The operations available depend on the model and provider account; the provider page shows the operations and request examples for your account.
 
-| Request format | Path |
-|---|---|
-| OpenAI Responses | `POST /responses` |
-| OpenAI Chat Completions | `POST /chat/completions` |
-| Anthropic Messages | `POST /messages` |
+| Request format | Method and path | Notes |
+|---|---|---|
+| OpenAI Responses | `POST /responses` | |
+| OpenAI Chat Completions | `POST /chat/completions` | |
+| Anthropic Messages | `POST /messages` | |
+| Gemini generateContent | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent`, or `:streamGenerateContent` to stream | Also accepted under `/ai/v1beta1`. See [Native Gemini and decision APIs](#native-gemini-and-decision-apis). |
+| Gemini rawPredict | `POST /publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict`, or `:streamRawPredict` to stream | Anthropic Messages body, for Claude models on Vertex AI. Not translated. See [Native Gemini and decision APIs](#native-gemini-and-decision-apis). |
+| Decisions | `POST /decisions` | |
+| System One | `POST /systemone` | |
+
+A format that AI Gateway accepts still has to be supported by the provider and model that serve the request. AI Gateway translates between some formats, but not all formats translate into each other. Check the operations listed for the model on its provider page, and see [API translation](#api-translation).
 
 A request in the Anthropic Messages format must include the `anthropic-version` header. AI Gateway adds the header only when it translates a request from another format into Messages.
 
@@ -37,6 +85,115 @@ Set the `model` field in the request body to one of the following:
 
 - `<PROVIDER_SLUG>/<MODEL_ID>` to call a model on a specific provider.
 - `router/<RULE_SLUG>` to let a [routing rule](/ai_gateway/routing/) choose the destination.
+
+### List available models
+
+To see which values you can use for `model`, call `GET /ai/v1/models`. AI Gateway returns only the models and routing rules that your credential's [access policies](/ai_gateway/access_control/) allow, in the OpenAI list format.
+
+```shell
+curl "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/models?category=language" \
+  -H "Authorization: Bearer <DATADOG_ACCESS_TOKEN>"
+```
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "<PROVIDER_SLUG>/<MODEL_ID>",
+      "object": "model",
+      "created": 1795500000,
+      "owned_by": "openai",
+      "category": "language",
+      "metadata": {
+        "source": { "provider": "openai", "model_id": "<MODEL_ID>" },
+        "status": "available",
+        "capabilities": { "reasoning": true, "tool_call": true, "structured_output": true },
+        "modalities": { "input": ["text", "image"], "output": ["text"] },
+        "limits": { "context_window_tokens": 400000, "max_output_tokens": 128000 },
+        "reasoning": { "controls": [{ "type": "effort", "effort_levels": ["low", "medium", "high"] }] }
+      }
+    },
+    {
+      "id": "router/<RULE_SLUG>",
+      "object": "model",
+      "created": 1795500000,
+      "owned_by": "router",
+      "category": "language"
+    }
+  ]
+}
+```
+
+Pass an entry's `id` as `model`. Each model has one `category`, which says what kind of task it serves. Routing rules are always `language`. To filter the list, pass one or more categories separated by commas, for example `?category=language,fine_tune`. An unknown category returns HTTP `400`. Without `category`, AI Gateway returns every model you can use.
+
+{{% collapse-content title="Model categories" level="h4" %}}
+
+| Category | Models |
+|---|---|
+| `language` | General text generation, including routing rules |
+| `fine_tune` | OpenAI organization fine-tunes |
+| `checkpoint` | Fine-tune training checkpoints |
+| `image` | Image generation |
+| `video` | Video generation |
+| `tts` | Text to speech |
+| `transcription` | Speech to text |
+| `realtime` | Realtime or live audio |
+| `embedding` | Embeddings |
+| `search` | Search and deep research |
+| `moderation` | Moderation and safety classifiers |
+| `other` | Known models that don't generate content, such as decision models, rerankers, legacy completions, or computer use |
+| `unknown` | Models AI Gateway can't classify yet |
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Model metadata fields" level="h4" %}}
+
+`metadata` is present when AI Gateway has metadata for the model. Fields without a known value are omitted.
+
+| Field | Type | Description |
+|---|---|---|
+| `source.provider` | string | Provider that serves the model. |
+| `source.model_id` | string | Model ID at the provider. |
+| `source.revision` | string | Revision of the metadata source. |
+| `source.observed_at` | timestamp | When AI Gateway last read the metadata. |
+| `status` | string | `available` when the metadata is complete, `partial` when some fields are missing. |
+| `display_name` | string | Human-readable model name. |
+| `description` | string | Model description. |
+| `kind` | string | Model kind reported by the metadata source. |
+| `family` | string | Model family. |
+| `lifecycle` | string | Release stage, such as preview or deprecated. |
+| `knowledge_cutoff` | string | Training data cutoff date. |
+| `release_date` | string | Release date. |
+| `last_updated` | string | Date the model was last updated. |
+| `open_weights` | boolean | Whether the model's weights are public. |
+| `capabilities.attachment` | boolean | Accepts file attachments. |
+| `capabilities.reasoning` | boolean | Supports reasoning. |
+| `capabilities.interleaved_reasoning` | boolean | Can reason between tool calls. |
+| `capabilities.tool_call` | boolean | Supports tool calls. |
+| `capabilities.structured_output` | boolean | Supports structured output. |
+| `capabilities.temperature` | boolean | Accepts a `temperature` setting. |
+| `modalities.input` | array of strings | Input types, such as `text` or `image`. |
+| `modalities.output` | array of strings | Output types. |
+| `limits.context_window_tokens` | integer | Context window, in tokens. |
+| `limits.max_input_tokens` | integer | Maximum input tokens. |
+| `limits.max_output_tokens` | integer | Maximum output tokens. |
+| `reasoning.controls[].type` | string | `toggle` (on or off), `effort` (effort levels), or `budget_tokens` (a token budget). |
+| `reasoning.controls[].effort_levels` | array of strings | Accepted effort levels, for `effort` controls. |
+| `reasoning.controls[].min_budget_tokens` | integer | Minimum reasoning budget, for `budget_tokens` controls. `-1` means the model decides. |
+| `reasoning.controls[].max_budget_tokens` | integer | Maximum reasoning budget, for `budget_tokens` controls. |
+| `reference_pricing[].component` | string | Priced part of the request, such as `input` or `output`. |
+| `reference_pricing[].amount` | string | Price, as a decimal string. |
+| `reference_pricing[].currency` | string | Always `USD`. |
+| `reference_pricing[].unit` | string | Always `million_tokens`. |
+| `reference_pricing[].mode` | string | Pricing mode, such as `standard`. |
+| `reference_pricing[].service_tier` | string | Provider service tier the price applies to. |
+| `reference_pricing[].context_min_tokens` | integer | Smallest context size this price applies to. |
+| `reference_pricing[].context_max_tokens` | integer | Largest context size this price applies to. Absent means no upper limit. |
+
+`reference_pricing` lists the provider's published prices. AI Gateway uses your [custom prices](/ai_gateway/spend_controls/) for budgets and rate limits when you set them.
+
+{{% /collapse-content %}}
 
 ## API translation
 
@@ -97,7 +254,7 @@ Common supported features include user and assistant text, system instructions, 
 | Reasoning effort | Values map where supported, but the target model must accept the requested level. An explicit thinking-token budget is not equivalent to a reasoning-effort level. |
 | Provider-specific settings | Settings such as Google safety configuration, cached content, or top-k can fail when the destination has no supported mapping. An unsupported mapping does not imply that the destination model lacks the capability. |
 | Hosted tools | Support depends on the API pair. Hosted web search translates between Responses and Messages with supported search settings. Other server-side tools, compaction, and cross-API token-counting endpoints are unsupported. |
-| Hosted search on Chat or Google targets | A declared search tool is omitted with `web_search_omitted`; a tool choice that requires hosted search fails translation. Check warnings before relying on search. |
+| Hosted search on targets that cannot run it, such as Chat or Google targets | A declared search tool is omitted with `web_search_omitted`; a tool choice that requires hosted search fails translation. Check warnings before relying on search. |
 | Response metadata | Google `generateContent` translation rejects nonempty Responses `metadata`, the `user` field, and the `safety_identifier` field. Client correlation context in `client_metadata` is separate and is omitted from translated Google and Chat requests. |
 
 Disabled or empty settings such as `background: false`, `include: []`, and `truncation: "disabled"` are accepted without the `X-Ai-Gateway-Allow-Lossy-Translation` request header or a translation warning. They do not enable the corresponding service. Meaningful unsupported settings return a field-specific error.
@@ -201,7 +358,7 @@ For a translated upstream HTTP error, AI Gateway preserves the status and releva
 See [AI Gateway troubleshooting][translation-6] for authentication, model access, and operation errors.
 ## Native Gemini and decision APIs
 
-Use a native API when your application needs its request and response format. AI Gateway accepts Gemini generateContent, OpenAI Decisions, and Baseten System One requests in addition to OpenAI Responses, Chat Completions, and Anthropic Messages.
+Use a native API when your application needs its request and response format. AI Gateway accepts Gemini generateContent, Gemini rawPredict, OpenAI Decisions, and Baseten System One requests in addition to OpenAI Responses, Chat Completions, and Anthropic Messages.
 
 OpenAI Decisions and Baseten System One are decision APIs: they evaluate an input against named questions and return a typed answer for each question.
 
@@ -221,10 +378,11 @@ The following paths start at the host `https://ai-gateway.{{< region-param key="
 | API | AI Gateway path | Model selection | Streaming |
 |---|---|---|---|
 | Gemini generateContent | `POST /ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:generateContent` | Provider slug and model ID in the URL | Use `:streamGenerateContent` for streaming. |
+| Gemini rawPredict | `POST /ai/v1/publishers/<PROVIDER_SLUG>/models/<MODEL_ID>:rawPredict` | Provider slug and model ID in the URL | Use `:streamRawPredict` for streaming. |
 | OpenAI Decisions | `POST /ai/v1/decisions` | `model` in the body | Non-streaming response. |
 | System One | `POST /ai/v1/systemone` | `model` in the body | Non-streaming response. |
 
-For Gemini, AI Gateway also accepts the `/ai/v1beta1/publishers/...` paths. Find your model in {{< ui >}}Model Catalog{{< /ui >}} and check its supported operations in the provider configuration before choosing an endpoint.
+Gemini rawPredict serves Claude models on Vertex AI: the request body uses the Anthropic Messages format, and AI Gateway does not translate it. For Gemini, AI Gateway also accepts the `/ai/v1beta1/publishers/...` paths. Find your model in {{< ui >}}Model Catalog{{< /ui >}} and check its supported operations in the provider configuration before choosing an endpoint.
 
 To use a routing rule with OpenAI Decisions or System One, set `model` to `router/<RULE_SLUG>`. For Gemini, use `/ai/v1/publishers/router/models/<RULE_SLUG>:generateContent` or its streaming variant. The rule's destinations must support the requested operation.
 
@@ -348,7 +506,7 @@ For AI Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Pr
 [12]: /getting_started/site/
 
 [translation-1]: /ai_gateway/providers/#add-a-provider
-[translation-2]: /ai_gateway/applications/#authenticate-requests
+[translation-2]: /ai_gateway/requests/#authenticate-requests
 [translation-3]: /ai_gateway/routing/
 [translation-4]: /getting_started/site/
 [translation-5]: https://app.datadoghq.com/llm/gateway
@@ -362,3 +520,6 @@ For AI Gateway errors, inspect the `X-Ai-Gateway-Error-Code` response header. Pr
 [inference_apis-7]: https://docs.baseten.co/reference/inference-api/system-one
 [inference_apis-8]: https://app.datadoghq.com/llm/gateway
 [inference_apis-9]: /ai_gateway/troubleshooting/#error-codes
+[requests-1]: /account_management/personal-access-tokens/
+[requests-2]: /account_management/service-access-tokens/
+[requests-3]: /account_management/workload_identity_federation/

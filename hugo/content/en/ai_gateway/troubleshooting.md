@@ -7,8 +7,8 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
 ## 401 or 403 responses
@@ -110,10 +110,10 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request. This code applies only to organizations with zero data retention enabled.
 
 `guardrail_violation`
-: HTTP `422` (OpenAI) / `400` (Anthropic). An AI Guard policy attached in Block unsafe mode refused the request or its response. See [Apply AI Guard policies](/ai_gateway/security/#apply-ai-guard-policies).
+: HTTP `422` (OpenAI) / `400` (Anthropic). A guardrail in Block unsafe mode refused the request or its response. See [Apply guardrails](/ai_gateway/security/#apply-guardrails).
 
 `guardrail_unavailable`
-: HTTP `422` (OpenAI) / `400` (Anthropic). AI Guard could not evaluate a request that an attachment in Block unsafe mode covers. See [Apply AI Guard policies](/ai_gateway/security/#apply-ai-guard-policies).
+: HTTP `422` (OpenAI) / `400` (Anthropic). AI Guard could not evaluate a request that a guardrail in Block unsafe mode covers. See [Apply guardrails](/ai_gateway/security/#apply-guardrails).
 
 `config_error`
 : HTTP `500`. A routing rule is misconfigured: a resolution cycle, an expansion limit, or an invalid rule. Contact [Datadog support][14].

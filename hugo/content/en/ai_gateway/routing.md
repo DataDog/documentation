@@ -10,8 +10,8 @@ further_reading:
     text: "Track user sessions in Agent Observability"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
@@ -61,7 +61,7 @@ A {{< ui >}}Smart{{< /ui >}} step lets a decision model choose the destination f
 
 ### How a Smart step chooses a destination
 
-When a request reaches the Smart step, AI Gateway sends the decision model the user messages of the conversation's opening turn, the context prompt, and the rubrics. Notes that coding agents add to user messages are removed first. The decision model picks one destination, or none.
+When a request reaches the Smart step, AI Gateway sends the decision model the user messages of the conversation's opening turn, up to 4,000 characters, the context prompt, and the rubrics. Notes that coding agents add to user messages are removed first. The decision model runs on the provider account you selected for it. The decision model picks one destination, or none.
 
 AI Gateway uses the catch-all destination when the decision model picks none of the destinations, when the pick's confidence is below the threshold, or when the decision model errors, refuses, or times out.
 
@@ -70,6 +70,8 @@ A Smart step decides once per session. [Session pinning](#session-pinning) keeps
 If the picked destination fails, AI Gateway tries the catch-all destination, then the fallback steps. It never tries destinations the decision model did not pick.
 
 Decision calls run on your provider account and count toward your [budgets and rate limits](/ai_gateway/spend_controls/). The request's spans in Agent Observability record the decision in `classified_routing.*` tags: the outcome, the chosen destination, and its confidence.
+
+<div class="alert alert-warning">A Smart step optimizes cost and quality. It is not a security, privacy, or compliance control. The content of a request can influence which destination the decision model picks, for example a message that claims to be a large coding task, and the pick then applies to the whole session and its subagents. Only add destinations that are acceptable for everyone who can use the routing rule. To control which models handle sensitive data, use <a href="/ai_gateway/access_control/">access policies</a>, <a href="/ai_gateway/security/#configure-data-capture">data capture settings</a>, and <a href="/ai_gateway/security/#apply-guardrails">guardrails</a>.</div>
 
 ## Sessions
 

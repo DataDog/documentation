@@ -1,6 +1,6 @@
 ---
 title: Security and Data Capture in AI Gateway
-description: Apply AI Guard policies to AI Gateway traffic and control recorded prompt and response content with data capture defaults and overrides.
+description: Apply guardrails to AI Gateway traffic and control recorded prompt and response content with data capture defaults and overrides.
 further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
@@ -10,52 +10,50 @@ further_reading:
     text: "Data Access Control in Agent Observability"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
 
-<!-- vale Datadog.headings = NO -->
-## Apply AI Guard policies
-<!-- vale Datadog.headings = YES -->
+## Apply guardrails
 
-Attach an [AI Guard policy][ai_guard-1] to AI Gateway to evaluate supported LLM traffic. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the AI Gateway attachment defines which traffic it evaluates and how AI Gateway handles the result.
+Guardrails evaluate supported LLM traffic in AI Gateway. Guardrails are powered by [AI Guard policies][ai_guard-1]: a guardrail attaches an AI Guard policy to all traffic or to a routing rule. Use **Monitor only** to observe policy decisions, then select **Block unsafe** to enforce them. The policy defines what AI Guard detects; the guardrail defines which traffic it evaluates and how AI Gateway handles the result.
 
-For AI Gateway traffic, the attachment's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** attachment allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** attachment blocks a `DENY` even when the policy is set to **Monitor only**.
+For AI Gateway traffic, the guardrail's **AI Gateway Action** controls whether a `DENY` stops the request, independently of the policy's **Enforcement mode**. A **Monitor only** guardrail allows the request to continue even when the policy is set to **Block unsafe**. A **Block unsafe** guardrail blocks a `DENY` even when the policy is set to **Monitor only**.
 
-Start with an attachment on a test routing rule before applying a policy across the organization.
+Start with a guardrail on a test routing rule before applying a policy across the organization.
 
 ### Prerequisites
 
 - Complete the [AI Gateway prerequisites][ai_guard-2] and configure an accessible model or routing rule.
-- AI Guard for AI Gateway is enabled per organization during the Preview. If {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} is not visible, contact your Customer Success Manager.
-- To manage attachments, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions. To attach a policy to a routing rule, you also need View and Edit access to that rule.
+- Guardrails are enabled per organization during the Preview. If {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Guardrails{{< /ui >}} is not visible, contact your Customer Success Manager.
+- To manage guardrails, have the `ai_gateway_config_read` and `ai_gateway_config_write` permissions. To attach a policy to a routing rule, you also need View and Edit access to that rule.
 - To select a policy, have **AI Guard View** (`ai_guard_view`). To create or edit a policy, also have **AI Guard Write** (`ai_guard_write`). See [AI Guard permissions][ai_guard-3].
 - The **same credential used to call AI Gateway** must allow both **AI Gateway Usage** (`ai_gateway_usage`) and **AI Guard Evaluate** (`ai_guard_evaluate`). Both the calling user or service account and the credential scope must permit these actions. An administrator's permissions do not grant evaluation access to an application's credential.
 
-### Choose the attachment scope
+### Choose the guardrail scope
 
 | Target | Traffic evaluated |
 |---|---|
-| **Everything** | All AI Gateway requests without a route-specific attachment. This is the organization default. |
+| **Everything** | All AI Gateway requests without a route-specific guardrail. This is the organization default. |
 | **Route** | Requests sent to the selected routing rule, such as `router/support-assistant`. |
 
-A route-specific attachment replaces the organization default for that route. The policies do not accumulate. The routing rule originally requested by the caller determines the attachment. This selection also applies to nested routing rules and fallback destinations.
+A route-specific guardrail replaces the organization default for that route. The policies do not accumulate. The routing rule originally requested by the caller determines the guardrail. This selection also applies to nested routing rules and fallback destinations.
 
-### Attach a policy
+### Create a guardrail
 
-1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}}][ai_guard-4] and click {{< ui >}}Attach AI Guard policy{{< /ui >}}.
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Guardrails{{< /ui >}}][ai_guard-4] and click {{< ui >}}New guardrail{{< /ui >}}.
 2. Under {{< ui >}}Target{{< /ui >}}, select {{< ui >}}Everything{{< /ui >}}, or select {{< ui >}}Route{{< /ui >}} and choose a routing rule.
 3. Select an {{< ui >}}Existing policy{{< /ui >}}. To create a policy:
    1. Enter a {{< ui >}}New policy name{{< /ui >}}. AI Gateway policy names use the `datadog-ai-gateway.` prefix.
    2. Click {{< ui >}}Create in AI Guard{{< /ui >}} to open the policy editor.
    3. Configure and save the policy. For detection settings, see [Configure AI Guard policies][ai_guard-1].
-   4. Return to the attachment form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
+   4. Return to the guardrail form, click {{< ui >}}Refresh policy list{{< /ui >}}, and select the saved policy.
 4. Under {{< ui >}}AI Gateway Action{{< /ui >}}, explicitly select {{< ui >}}Monitor only{{< /ui >}} or {{< ui >}}Block unsafe{{< /ui >}}. The form defaults to {{< ui >}}Block unsafe{{< /ui >}}.
-5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target and policy, then follow the steps in the [Verify the attachment](#verify-the-attachment) section.
+5. Click {{< ui >}}Attach policy{{< /ui >}}. Review the saved target and policy, then follow the steps in the [Verify the guardrail](#verify-the-guardrail) section.
 
-To change an attachment, attach a policy to the same target again. The new attachment replaces the previous one. Allow configuration changes to propagate before checking fresh requests.
+To change a guardrail, attach a policy to the same target again. The new guardrail replaces the previous one. Allow configuration changes to propagate before checking fresh requests.
 
 ### Choose an action
 
@@ -64,9 +62,9 @@ To change an attachment, attach a policy to the same target again. The new attac
 | **Monitor only** | Evaluates supported prompt content asynchronously. Policy denials and sensitive-data findings do not block the model request. Responses are not evaluated. |
 | **Block unsafe** | Evaluates supported prompt content before calling the model. Policy denials block the request. Also evaluates successful, buffered Chat Completions output before returning it. |
 
-For an attachment created in the AI Gateway UI, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
+For a guardrail created in the AI Gateway UI, **Block unsafe** also blocks sensitive-data findings. It refuses requests when an evaluator timeout, network error, or server error prevents evaluation. **Monitor only** allows these findings and evaluator availability failures to pass through.
 
-Attachments created outside the AI Gateway UI can have different saved sensitive-data or evaluator-error settings. Attaching the policy again in the UI applies the behavior described above.
+Guardrails created outside the AI Gateway UI can have different saved sensitive-data or evaluator-error settings. Attaching the policy again in the UI applies the behavior described above.
 
 In **Block unsafe**, other failures can also prevent requests from completing. These include evaluation permission errors, unsupported content, invalid results, oversized evaluation payloads, and evaluator rate limits. A failed evaluation is different from a policy denial. See the [Troubleshooting](#troubleshooting) section.
 
@@ -85,17 +83,17 @@ A successful model response alone does not prove that AI Guard evaluated the req
 
 #### Sensitive data scanning
 
-Configure [sensitive data scanning][ai_guard-5] in the AI Guard policy. For an attachment created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
+Configure [sensitive data scanning][ai_guard-5] in the AI Guard policy. For a guardrail created in the AI Gateway UI, **Monitor only** records findings without blocking, and **Block unsafe** blocks sensitive-data findings.
 
-The AI Gateway integration with AI Guard does not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. AI Gateway does not apply those redactions to the content it forwards.
+Guardrails do not redact content. An allowed request is not a redacted request. AI Guard [sensitive data redaction][ai_guard-9] supports direct SDK calls and the HTTP API. AI Gateway does not apply those redactions to the content it forwards.
 
 #### Data capture and evaluation
 
-[AI Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable AI Guard: AI Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the AI Guard action separately.
+[AI Gateway data capture][ai_guard-6] controls the prompt and response content recorded in Agent Observability. **Metadata only** does not disable guardrails: AI Gateway still sends supported content to AI Guard for evaluation. Choose the capture setting and the guardrail action separately.
 
-### Verify the attachment
+### Verify the guardrail
 
-Use synthetic content and an isolated routing rule. Avoid changing an organization-wide attachment to test enforcement.
+Use synthetic content and an isolated routing rule. Avoid changing an organization-wide guardrail to test enforcement.
 
 1. Create a dedicated AI Guard policy. Add a [custom rule][ai_guard-7] that denies a harmless test keyword such as `gatewayguardtest` in the last evaluated message.
 2. Attach the policy to the test route with **Monitor only** explicitly selected.
@@ -114,7 +112,7 @@ Use synthetic content and an isolated routing rule. Avoid changing an organizati
 
 4. Confirm the request succeeds. In [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][ai_guard-8], follow the request into Agent Observability and check that prompt evaluation completed with an `ALLOW` decision.
 5. Change the last message to `Reply briefly to gatewayguardtest.` and repeat the request. Confirm that the model request continues and prompt evaluation completes with `DENY`. A skipped or failed evaluation does not verify monitoring.
-6. Change the attachment action to **Block unsafe**, save, and repeat the keyword request. For this Chat Completions request, expect HTTP `422` and `guardrail_violation` in both the `X-Ai-Gateway-Error-Code` header and the response's `error.code`. Confirm a completed prompt denial in the matching span.
+6. Change the guardrail action to **Block unsafe**, save, and repeat the keyword request. For this Chat Completions request, expect HTTP `422` and `guardrail_violation` in both the `X-Ai-Gateway-Error-Code` header and the response's `error.code`. Confirm a completed prompt denial in the matching span.
 7. Repeat the harmless request and confirm it still succeeds. This distinguishes selective enforcement from a credential, model-access, or evaluator failure.
 8. Remove the temporary rule. To return the target to its previous behavior, attach the policy again with the original action.
 
@@ -126,12 +124,12 @@ Match the route, caller, and timestamp when reviewing evaluation evidence. For s
 |---|---|
 | The policy is missing from the selector. | Confirm **AI Guard View**, check the `datadog-ai-gateway.` policy-name prefix, and refresh the policy list after saving in AI Guard. |
 | Evaluation fails for an application's credential. | Confirm that both the principal and credential scope permit `ai_gateway_usage` and `ai_guard_evaluate`. |
-| A request succeeds without an evaluation. | Check the requested route's effective attachment, supported API and content, and whether the evaluation completed asynchronously. Without an attachment, AI Guard does not evaluate the request. |
+| A request succeeds without an evaluation. | Check the requested route's effective guardrail, supported API and content, and whether the evaluation completed asynchronously. Without a guardrail, AI Guard does not evaluate the request. |
 | A request returns `guardrail_violation`. | AI Guard denied evaluated content, or a sensitive-data finding triggered blocking. Inspect the evaluation decision. |
 | A request returns `guardrail_unavailable`. | AI Gateway could not complete a required evaluation. Check permission, payload, supported content, and evaluator availability. This code does not mean that unsafe content was detected. |
-| A monitoring request is refused. | Check for errors resolving the attachment or policy. **Monitor only** allows findings from an evaluated policy; it does not bypass configuration errors or other AI Gateway controls. |
+| A monitoring request is refused. | Check for errors resolving the guardrail or policy. **Monitor only** allows findings from an evaluated policy; it does not bypass configuration errors or other AI Gateway controls. |
 
-When AI Guard refuses an AI Gateway request, OpenAI-compatible requests return HTTP `422` and native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
+When a guardrail refuses an AI Gateway request, OpenAI-compatible requests return HTTP `422` and native Anthropic requests return HTTP `400`. Inspect `X-Ai-Gateway-Error-Code` to distinguish a policy violation from an unavailable evaluation.
 
 ## Configure data capture
 
