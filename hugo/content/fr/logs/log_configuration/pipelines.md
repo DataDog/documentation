@@ -4,9 +4,6 @@ aliases:
 description: Analysez, enrichissez et gérez vos logs avec les pipelines et processeurs
   Datadog
 further_reading:
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: Centre d'apprentissage
-  text: Créer et gérer des pipelines de logs
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Consulter la liste complète des processeurs disponibles
@@ -19,6 +16,9 @@ further_reading:
 - link: /logs/troubleshooting/
   tag: Documentation
   text: Dépannage des logs
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: Centre d'apprentissage
+  text: Créer et gérer des pipelines de logs
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: Centre d'apprentissage
   text: Débogage des pipelines de logs
@@ -42,6 +42,10 @@ further_reading:
   tag: Blog
   text: Comment nous utilisons Datadog pour obtenir une visibilité complète et précise
     sur notre système de distribution d'e-mails
+- link: https://www.datadoghq.com/blog/auto-processing-log-pipelines/
+  tag: Blog
+  text: Obtenez des logs utiles de n'importe quelle source grâce à l'Auto-Processing
+    de Datadog
 title: Pipelines
 ---
 ## Présentation {#overview}
@@ -100,13 +104,13 @@ Si un fichier de log au format JSON inclut l'attribut `ddsource`, Datadog interp
 
 #### Attribut host {#host-attribute}
 
-L'utilisation de Datadog Agent ou du format RFC5424 définit automatiquement la valeur de le host sur vos logs. Cependant, si un fichier de log au format JSON inclut l'attribut suivant, Datadog interprète sa valeur comme le host du log :
+L'utilisation de Datadog Agent ou du format RFC5424 définit automatiquement la valeur du host sur vos logs. Cependant, si un fichier de log au format JSON inclut l'attribut suivant, Datadog interprète sa valeur comme le host du log :
 
 * `host`
 * `hostname`
 * `syslog.hostname`
 
-**Remarque :** dans Kubernetes, si un log JSON ingéré par le Datadog Agent contient un attribut de clé `host`, `hostname` ou `syslog.hostname`, cette valeur remplace le nom de host par défaut de l'Agent pour ce log. Par conséquent, le log n'hérite pas des tags au niveau de le host attendus, lesquels sont définis pour le host approprié. Dans ce cas, Datadog recommande de supprimer ces attributs pour garantir que vos logs puissent être attribués aux hosts corrects.
+**Remarque :** dans Kubernetes, si un log JSON ingéré par le Datadog Agent contient un attribut de clé `host`, `hostname` ou `syslog.hostname`, cette valeur remplace le nom de host par défaut de l'Agent pour ce log. Par conséquent, le log n'hérite pas des tags au niveau du host attendus, lesquels sont définis pour le host approprié. Dans ce cas, Datadog recommande de supprimer ces attributs pour garantir que vos logs puissent être attribués aux hosts corrects.
 
 {{% /tab %}}
 {{% tab "Date" %}}
@@ -171,7 +175,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le
 
 #### Attribut service {#service-attribute}
 
-L'utilisation de le Datadog Agent ou du format RFC5424 définit automatiquement la valeur de service sur vos logs. Cependant, si un fichier de log au format JSON inclut l'attribut suivant, Datadog interprète sa valeur comme le service du log :
+L'utilisation du Datadog Agent ou du format RFC5424 définit automatiquement la valeur de service sur vos logs. Cependant, si un fichier de log au format JSON inclut l'attribut suivant, Datadog interprète sa valeur comme le service du log :
 
 * `service`
 * `syslog.appname`
@@ -186,7 +190,7 @@ Vous pouvez préciser des attributs alternatifs à utiliser comme source pour le
 
 #### Attribut d'ID de trace {#trace-id-attribute}
 
-Par défaut, les [SDK Datadog peuvent injecter automatiquement des ID de trace et de span dans vos logs][1]. Cependant, si un log au format JSON inclut les attributs suivants, Datadog interprète sa valeur comme le `trace_id` du log :
+Par défaut, les [SDK Datadog peuvent injecter automatiquement des ID de trace et de span dans vos logs][1]. Cependant, si un log au format JSON contient l'un des attributs suivants, Datadog interprète sa valeur comme le `trace_id` du log :
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -228,7 +232,7 @@ Par défaut, les SDK Datadog peuvent [injecter automatiquement des ID de span da
 5. (Facultatif) Ajoutez une description et des tags au pipeline pour indiquer son objectif et son propriétaire. Les tags de pipeline n'affectent pas les logs, mais peuvent être utilisés pour filtrer et effectuer des recherches sur la [page Pipelines][8].
 6. Appuyez sur {{< ui >}}Create{{< /ui >}}.
 
-Voici un exemple de log transformé par un pipeline :
+Voici un exemple de log transformé par un pipeline :
 
 {{< img src="logs/processing/pipelines/log_post_processing.png" alt="Exemple d'un log transformé par un pipeline" style="width:50%;">}}
 
@@ -240,15 +244,15 @@ Consultez la <a href="/integrations/#cat-log-collection">liste des intégrations
 
 Des pipelines de traitement d'intégration sont disponibles pour certaines sources lorsqu'elles sont configurées pour collecter des logs. Ces pipelines sont **en lecture seule** et extraient les données de vos logs de manière adaptée à la source concernée. Pour les logs d'intégration, un pipeline d'intégration est automatiquement installé ; il se charge du parsing de vos logs et ajoute la facettes correspondante dans votre Log Explorer.
 
-Pour afficher un pipeline d'intégration, accédez à la page [Pipelines][8]. Pour modifier un pipeline d'intégration, clonez-le, puis modifiez le clone :
+Pour afficher un pipeline d'intégration, accédez à la page [Pipelines][8]. Pour modifier un pipeline d'intégration, clonez-le, puis modifiez le clone :
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Clonage d'un pipeline" style="width:80%;">}}
 
-Consultez l'exemple de logs ELB ci-dessous :
+Consultez l'exemple de logs ELB ci-dessous :
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="Post-traitement des logs ELB" style="width:70%;">}}
 
-**Remarque** : les pipelines d'intégration ne peuvent pas être supprimés, seulement désactivés.
+**Remarque** : les pipelines d'intégration ne peuvent pas être supprimés, seulement désactivés.
 
 ### Bibliothèque de pipelines d'intégration {#integration-pipeline-library}
 
@@ -276,13 +280,13 @@ Consultez [Parsing de dates][12] pour en savoir plus sur les formats de date et 
 
 ### Priorité des attributs lorsque plusieurs processeurs correspondent {#attribute-precedence}
 
-Lorsque plusieurs processeurs au sein de pipelines correspondants définissent le même attribut, le résultat dépend du type de processeur. Il existe trois comportements :
+Lorsque plusieurs processeurs au sein de pipelines correspondants définissent le même attribut, le résultat dépend du type de processeur. Il existe trois comportements :
 
 | Comportement | Description | Processeurs |
 | --- | --- | --- |
 | La dernière écriture l'emporte | La valeur définie par le processeur ultérieur (plus loin dans l'ordre) remplace la valeur précédente. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
 | Dépend de `override_on_conflict` | Suit le paramètre `override_on_conflict`. Par défaut (`false`), l'élément cible n'est pas remplacé s'il est déjà défini. | Remapper, Array Map processor |
-| La première écriture l'emporte | Seul le premier processeur est appliqué (à l'exception du Log date remapper, qui utilise le dernier). Au sein d'un même pipeline, la valeur du premier processeur est utilisée ; dans plusieurs pipelines correspondants, le premier rencontré s'applique. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
+| La première écriture l'emporte | Seul le premier processeur est appliqué (à l'exception du Log date remapper, qui utilise le dernier). Au sein d'un même pipeline, la valeur du premier processeur est utilisée ; dans plusieurs pipelines correspondants, le premier rencontré s'applique. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
 
 Pour plus de détails sur chaque processeur, consultez [Processors][3].
 
@@ -294,10 +298,10 @@ Un pipeline peut inclure des pipelines imbriqués et des processeurs, tandis qu'
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Pipelines imbriqués" style="width:80%;">}}
 
-Déplacez un pipeline dans un autre pipeline pour le transformer en pipeline imbriqué :
+Déplacez un pipeline dans un autre pipeline pour le transformer en pipeline imbriqué :
 
 1. Survolez le pipeline que vous souhaitez déplacer et cliquez sur l'icône {{< ui >}}Move to{{< /ui >}}.
-1. Sélectionnez le pipeline dans lequel vous souhaitez déplacer le pipeline d'origine. **Remarque** : les pipelines contenant des pipelines imbriqués ne peuvent être déplacés qu'à une autre position de niveau supérieur. Ils ne peuvent pas être déplacés dans un autre pipeline.
+1. Sélectionnez le pipeline dans lequel vous souhaitez déplacer le pipeline d'origine. **Remarque** : les pipelines contenant des pipelines imbriqués ne peuvent être déplacés qu'à une autre position de niveau supérieur. Ils ne peuvent pas être déplacés dans un autre pipeline.
 1. Cliquez sur {{< ui >}}Move{{< /ui >}}.
 
 ## Prévisualiser les modifications du pipeline {#preview-pipeline-changes}
@@ -306,16 +310,16 @@ Lors de la création ou de la modification d'un pipeline ou de ses processeurs, 
 
 {{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="La vue de simulation du pipeline affichant ses processeurs à gauche et les différences pour un log sélectionné à droite" >}}
 
-Pour chaque log, comparez ses états avant et après. Sélectionnez la modification à comparer :
+Pour chaque log, comparez ses états avant et après. Sélectionnez la modification à comparer :
 
-- **Your changes** : compare la version déployée actuelle du pipeline à la version incluant vos modifications.
-- **Entire pipeline** : compare le log à son entrée dans le pipeline au log après l'exécution de l'ensemble du pipeline.
+- **Your changes** : compare la version déployée actuelle du pipeline à la version incluant vos modifications.
+- **Entire pipeline** : compare le log à son entrée dans le pipeline au log après l'exécution de l'ensemble du pipeline.
 
-Pour restreindre la liste des logs, utilisez le filtre de requête ou filtrez par impact :
+Pour restreindre la liste des logs, utilisez le filtre de requête ou filtrez par impact :
 
-- **All logs** : tous les logs du live tail.
-- **Impacted logs** : uniquement les logs affectés par vos modifications au cours de cette session.
-- **Not impacted logs** : uniquement les logs que vos modifications laissent inchangés.
+- **All logs** : tous les logs du live tail.
+- **Impacted logs** : uniquement les logs affectés par vos modifications au cours de cette session.
+- **Not impacted logs** : uniquement les logs que vos modifications laissent inchangés.
 
 ## Gérer vos pipelines {#manage-your-pipelines}
 
@@ -340,28 +344,28 @@ Les métriques d'utilisation estimées sont affichées pour chaque pipeline. Cel
 <!-- vale Datadog.headings = YES -->
 
 {{< site-region region="us5" >}}
-<div class="alert alert-warning">Auto-Processing n'est pas disponible pour votre <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">L'Auto-Processing n'est pas disponible pour votre <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Auto-Processing analyse vos logs d'application personnalisés et extrait les attributs principaux, notamment l'horodatage, le statut, l'ID de trace et l'ID de span. Il vous aide à rechercher, filtrer et corréler les logs sans configurer manuellement de pipelines.
+L'Auto-Processing analyse vos logs d'application personnalisés et extrait les attributs principaux, notamment l'horodatage, le statut, l'ID de trace et l'ID de span. Il vous aide à rechercher, filtrer et corréler les logs sans configurer manuellement de pipelines.
 
-Auto-Processing ne gère que les logs qui ne correspondent au filtre d'aucune intégration ou pipeline personnalisé. Si un log correspond au filtre d'un pipeline, Auto-Processing ne le traite pas, même si ce pipeline ne modifie pas le log. Vos configurations de pipeline existantes restent inchangées.
+L'Auto-Processing ne gère que les logs qui ne correspondent au filtre d'aucune intégration ou d'aucun pipeline personnalisé. Si un log correspond au filtre d'un pipeline, l'Auto-Processing ne le traite pas, même si ce pipeline ne modifie pas le log. Vos configurations de pipeline existantes restent inchangées.
 
-<div class="alert alert-warning">Si le filtre d'un pipeline correspond à tous les logs (par exemple, <code>*</code>), Auto-Processing ne traite aucun log dans votre organisation. Pour utiliser Auto-Processing, restreignez le filtre de ce pipeline aux logs qu'il doit traiter.</div>
+<div class="alert alert-warning">Si le filtre d'un pipeline correspond à tous les logs (par exemple, <code>*</code>), l'Auto-Processing ne traite aucun log de votre organisation. Pour utiliser l'Auto-Processing, restreignez le filtre de ce pipeline aux logs qu'il doit traiter.</div>
 
 ### Comment les entrées sont créées {#how-entries-are-created}
 
-Datadog regroupe les logs pris en charge dans des entrées Auto-Processing. Chaque entrée couvre une paire source et service. Par exemple, les logs avec `source:storefront` et `service:catalog-api` forment une seule entrée. À mesure que de nouveaux modèles de logs apparaissent, Datadog met à jour les entrées pour les prendre en charge sans modifier la façon dont les modèles précédemment pris en charge sont analysés. Les attributs déjà extraits conservent leurs noms, de sorte que les facettes, les dashboards et les monitors qui les utilisent continuent de fonctionner.
+Datadog regroupe les logs pris en charge dans des entrées d'Auto-Processing. Chaque entrée correspond à une paire source-service. Par exemple, les logs avec `source:storefront` et `service:catalog-api` forment une seule entrée. À mesure que de nouveaux modèles de logs apparaissent, Datadog met à jour les entrées pour les prendre en charge sans modifier la façon dont les modèles précédemment pris en charge sont analysés. Les attributs déjà extraits conservent leurs noms, de sorte que les facettes, les dashboards et les moniteurs qui les utilisent continuent de fonctionner.
 
-Datadog crée une entrée pour une nouvelle paire de source et de service environ 15 minutes après avoir reçu les premiers logs pour cette paire. La paire doit avoir au moins 1,000 logs indexés au cours des 24 dernières heures. Les logs écartés par les [filtres d'exclusion][15] ne sont pas comptabilisés dans ce seuil. Si le volume est inférieur au seuil, Datadog vérifie à nouveau environ 12 heures plus tard. Si le volume est toujours inférieur au seuil, Datadog ne crée pas d'entrée tant qu'un nouveau modèle de log n'apparaît pas pour cette paire.
+Datadog crée une entrée pour une nouvelle paire de source et de service environ 15 minutes après avoir reçu les premiers logs pour cette paire. La paire doit avoir au moins 1 000 logs indexés au cours des 24 dernières heures. Les logs exclus par les [filtres d'exclusion][15] ne sont pas pris en compte dans ce seuil. Si le volume est inférieur au seuil, Datadog vérifie à nouveau environ 12 heures plus tard. Si le volume est toujours inférieur au seuil, Datadog ne crée pas d'entrée tant qu'un nouveau modèle de log n'apparaît pas pour cette paire.
 
-Chaque organisation peut avoir jusqu'à 100 entrées d'Auto-Processing. Si votre organisation envoie déjà des logs lorsque vous activez Auto-Processing, Datadog crée des entrées pour un maximum de 100 paires de source et de service. Datadog sélectionne les paires qui traiteraient le plus grand nombre de logs. Ensuite, Datadog crée des entrées pour les nouvelles paires à mesure que leurs logs arrivent, jusqu'à ce que l'organisation atteigne 100 entrées.
+Chaque organisation peut avoir jusqu'à 100 entrées d'Auto-Processing. Si votre organisation envoie déjà des logs lorsque vous activez l'Auto-Processing, Datadog crée des entrées pour un maximum de 100 paires de source et de service. Datadog sélectionne les paires qui traiteraient le plus grand nombre de logs. Ensuite, Datadog crée des entrées pour les nouvelles paires à mesure que leurs logs arrivent, jusqu'à ce que l'organisation atteigne 100 entrées.
 
-{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="L'onglet Auto-Processing sur la page Processing, qui répertorie les entrées par source et service avec le nombre d'attributs analysés, l'utilisation et un bouton bascule d'activation pour chaque entrée" style="width:100%;" >}}
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="L'onglet Auto-Processing sur la page Processing, listant les entrées par source et service avec le nombre d'attributs analysés, l'utilisation et un bouton bascule d'activation pour chaque entrée" style="width:100%;" >}}
 
 ### Activer ou désactiver Auto-Processing {#turn-auto-processing-on-or-off}
 
-Pour les organisations créées le 2026-11-04 ou après cette date, Auto-Processing est activé par défaut et les nouvelles entrées sont activées automatiquement. Pour les organisations créées avant le 2026-11-04, Auto-Processing est désactivé par défaut.
+Pour les organisations créées à partir du 2026-11-04, Auto-Processing est activé par défaut et les nouvelles entrées sont activées automatiquement. Pour les organisations créées avant le 2026-11-04, Auto-Processing est désactivé par défaut.
 
 Sur la [page {{< ui >}}Processing{{< /ui >}}][8], sélectionnez l'onglet {{< ui >}}Auto-Processing{{< /ui >}} et utilisez le bouton bascule de la fonctionnalité pour activer ou désactiver Auto-Processing pour votre organisation.
 
@@ -369,8 +373,8 @@ Sur la [page {{< ui >}}Processing{{< /ui >}}][8], sélectionnez l'onglet {{< ui 
 
 Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, choisissez si les nouvelles entrées sont activées automatiquement :
 
-- **Automatically enable new entries** : les nouvelles entrées sont activées lors de leur création et commencent à traiter les logs entrants correspondants.
-- **Review new entries before enabling** : les nouvelles entrées sont désactivées lors de leur création. [Examinez leurs transformations](#review-transformations), puis activez celles que vous souhaitez utiliser.
+- **Automatically enable new entries** : les nouvelles entrées sont activées lors de leur création et commencent à traiter les logs entrants correspondants.
+- **Review new entries before enabling** : les nouvelles entrées sont désactivées lors de leur création. [Examinez leurs transformations](#review-transformations), puis activez celles que vous souhaitez utiliser.
 
 ### Examiner les transformations {#review-transformations}
 
@@ -385,15 +389,15 @@ Dans l'onglet {{< ui >}}Auto-Processing{{< /ui >}}, utilisez le bouton bascule d
 
 ### Passer à un pipeline manuel {#switch-to-a-manual-pipeline}
 
-Pour personnaliser le parsing ou les noms d'attributs, cliquez sur {{< ui >}}Switch to manual pipeline{{< /ui >}} sur la page {{< ui >}}View Transformations{{< /ui >}}. Datadog crée un pipeline personnalisé avec le même filtre et les mêmes processeurs et supprime l'entrée Auto-Processing pour cette paire source et service.
+Pour personnaliser le parsing ou les noms d'attributs, cliquez sur {{< ui >}}Switch to manual pipeline{{< /ui >}} sur la page {{< ui >}}View Transformations{{< /ui >}}. Datadog crée un pipeline personnalisé avec le même filtre et les mêmes processeurs, et supprime l'entrée Auto-Processing pour cette paire source et service.
 
 Après le basculement :
 
-- Le pipeline apparaît dans votre liste de pipelines et analyse les logs de la même manière. Les noms des attributs restent les mêmes, de sorte que les facettes, les dashboards et les monitors existants continuent de fonctionner.
+- Le pipeline apparaît dans votre liste de pipelines et analyse les logs de la même manière. Les noms des attributs restent identiques, de sorte que les facettes, les dashboards et les moniteurs existants continuent de fonctionner.
 - Datadog ne met plus à jour le pipeline lorsque de nouveaux modèles de logs apparaissent. Vous gérez sa configuration à partir de ce moment-là.
-- Comme ces logs correspondent au filtre du pipeline, Auto-Processing ne les traite plus.
+- Comme le filtre du pipeline correspond à ces logs, Auto-Processing ne les traite plus.
 
-Pour revenir à Auto-Processing, supprimez le pipeline manuel. Datadog crée alors une nouvelle entrée pour cette paire source et service une fois que ses logs répondent aux [exigences de création d'entrée](#how-entries-are-created). La nouvelle entrée est générée à partir de zéro et ne restaure pas votre entrée précédente ni vos modifications.
+Pour revenir à Auto-Processing, supprimez le pipeline manuel. Datadog crée ensuite une nouvelle entrée pour cette paire source et service une fois que ses logs répondent aux [exigences de création d'entrée](#how-entries-are-created). La nouvelle entrée est générée à partir de zéro et ne restaure pas votre entrée précédente ni vos modifications.
 
 ### Limitations {#limitations}
 

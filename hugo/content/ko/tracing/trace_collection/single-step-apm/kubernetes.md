@@ -5,13 +5,13 @@ code_lang: kubernetes
 code_lang_weight: 20
 further_reading:
 - link: /tracing/metrics/runtime_metrics/
-  tag: 문서
+  tag: 설명서
   text: 런타임 메트릭 활성화
 - link: /tracing/guide/init_resource_calc/
-  tag: 문서
+  tag: 설명서
   text: init 컨테이너 리소스 사용량에 관해 알아보기
 - link: /tracing/guide/local_sdk_injection
-  tag: 문서
+  tag: 설명서
   text: 로컬 SDK 인젝션을 사용한 애플리케이션 계측
 - link: https://learn.datadoghq.com/courses/configuring-ssi-k8s
   tag: 학습 센터
@@ -145,7 +145,7 @@ UI를 통해 구성을 생성하려면 [Kubernetes에 Datadog Agent 설치][11] 
 
 {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="Datadog 앱을 통해 Kubernetes에 Datadog Agent를 설치하기 위한 구성 블록" style="width:100%;" >}}
 
-##  설치 확인 {#verify-the-installation}
+## 설치 검증 {#verify-the-installation}
 
 1. Agent 포드가 실행 중인지 확인합니다.
 
@@ -176,7 +176,7 @@ UI를 통해 구성을 생성하려면 [Kubernetes에 Datadog Agent 설치][11] 
 Unified Service Tags(UST)는 트레이스, 메트릭, 로그에 일관된 태그를 적용해 탐색 및 관측 가능성 데이터 상호 연계가 간편합니다. UST는 자동 레이블 추출(권장)을 통해 구성할 수도 있고, `ddTraceConfigs`를 사용한 명시적 구성을 통하거나 배포 매니페스트에서 구성할 수도 있습니다.
 
 <div class="alert alert-warning">
-<a href="/agent/remote_config/">Remote Configuration</a>을 사용하는 경우, <a href="#recommended-configure-usts-through-automatic-label-extraction">자동 레이블 추출</a>이 호환되지 않습니다. <a href="#configure-usts-explicitly-with-ddtraceconfigs">명시적으로 UST를 구성</a>해야 합니다. 이때 <code>ddTraceConfigs</code>를 사용합니다.
+<a href="/agent/remote_config/">Remote Configuration</a>을 사용하는 경우, <a href="#recommended-configure-usts-through-automatic-label-extraction">자동 레이블 추출</a>이 호환되지 않습니다. <a href="#configure-usts-explicitly-with-ddtraceconfigs">명시적으로 UST를 구성</a>해야 합니다. 이때 <code>ddTraceConfigs</code>입니다.
 </div>
 
 ### (권장) 자동 레이블 추출을 통해 UST 구성 {#recommended-configure-usts-through-automatic-label-extraction}
@@ -297,7 +297,7 @@ SSI는 여러 인젝션 모드를 지원합니다. 인젝션 모드는 인젝터
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-클러스터 전체에 인젝션 모드를 설정하려면 `datadog-values.yaml`에 `injectionMode`를 추가합니다.
+클러스터 전체에 인젝션 모드를 설정하려면 `datadog-values.yaml`에 `injectionMode`를 추가하세요.
 
 ```yaml
 datadog:
@@ -323,14 +323,14 @@ spec:
 
 지원되는 값: `auto`(기본값), `init_container`, `csi`.
 
-Datadog Operator 1.25.0 이전 버전을 사용하는 경우, [포드 어노테이션](#configure-injection-mode-per-pod)을 사용하여 특정 포드의 인젝션 모드를 재정의합니다.
+Datadog Operator 1.25.0 이전 버전을 사용하는 경우, [포드 주석](#configure-injection-mode-per-pod)을 사용하여 특정 포드의 인젝션 모드를 재정의합니다.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### 포드당 인젝션 모드 구성 {#configure-injection-mode-per-pod}
 
-특정 포드의 인젝션 모드를 재정의하려면 포드 사양에 다음 어노테이션을 추가합니다.
+특정 포드의 인젝션 모드를 재정의하려면 포드 사양에 다음 주석을 추가합니다.
 
 ```yaml
 metadata:
@@ -342,9 +342,123 @@ metadata:
 
 ### 특정 워크로드 대상 {#target-specific-workloads}
 
-기본적으로 SSI는 클러스터의 모든 네임스페이스에 속한 모든 서비스를 계측합니다. Agent 버전에 따라 다음 구성 방법 중 하나를 사용하여 어느 서비스가 어떻게 계측될지 미세 조정하세요.
+기본적으로 SSI는 클러스터의 모든 네임스페이스에 속한 모든 서비스를 계측합니다. 계측할 워크로드를 세부적으로 조정하려면 Datadog에서 계측 규칙을 정의하거나, Agent 구성 또는 `DatadogInstrumentation` 리소스를 사용하여 타겟팅을 구성하세요. Datadog의 계측 규칙을 사용하면 Agent 구성을 변경하지 않고도 일치하는 포드에 대한 계측을 허용하거나 차단할 수 있습니다. 사용 가능한 방법은 Agent 또는 Cluster Agent 버전에 따라 다릅니다.
 
 {{< tabs >}}
+{{% tab "Datadog의 계측 규칙(v7.84.2+)" %}}
+
+<div class="alert alert-info">Kubernetes용 계측 규칙은 미리 보기로 제공되고 있습니다. <a href="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/">액세스하려면 등록하세요.</a></div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>에서는 계측 규칙이 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+각 계측 규칙은 네임스페이스 또는 포드 속성을 기준으로 일치하는 포드를 찾은 다음, 해당 포드에 대한 계측을 허용하거나 차단합니다. 규칙을 모든 적격 클러스터에 배포하거나 하나 이상의 [클러스터 그룹](#create-cluster-groups)으로 범위를 지정하여 적용 위치를 제한할 수 있습니다.
+
+계측 규칙을 보고 관리하려면 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102]로 이동한 다음, 페이지 제목의 드롭다운에서 {{< ui >}}Kubernetes{{< /ui >}}을 선택하세요.
+
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="Kubernetes가 선택된 APM Instrumentation Rules 페이지로, 계측 규칙 목록이 비어 있는 상태에서 Default Behavior, Clusters in Scope 및 Deployment Status 카드가 표시됩니다." style="width:100%;" >}}
+
+#### 계측 규칙을 위한 필수 구성 요소 {#prerequisites-for-instrumentation-rules}
+
+- **Cluster Agent**: 각 클러스터에서 v7.84.2 이상, [Remote Configuration][101]이 활성화되어 있어야 합니다. 이러한 요구 사항을 충족하는 클러스터는 계측 규칙을 사용할 수 있습니다.
+- **권한**: 계측 규칙 및 클러스터 그룹을 생성하고 관리하는 데 필요한 **APM Workload Selection Write** [권한][103]입니다.
+
+#### 기본 동작 설정 {#set-the-default-behavior}
+
+기본 동작은 Datadog에서 계측 규칙을 사용할 때 Agent 구성(`targets` 및 `enabledNamespaces`)의 워크로드 타겟팅이 여전히 적용되는지 여부를 제어합니다. 기본 동작과 관계없이 일부 포드는 계측에서 제외되며, 다른 타겟팅 방법이 계측 규칙보다 우선할 수 있습니다. [계측 규칙에 대한 예외](#exceptions-to-instrumentation-rules) 및 [구성 우선 순위](#configuration-precedence) 섹션을 참조하세요.
+
+<div class="alert alert-warning">SSI가 클러스터 전체에서 활성화되어 있고 다음이 없는 경우 <code>targets</code>, 규칙을 생성하기 전에 기본 동작을 <strong>Allow everything else</strong>로 설정하세요. 그렇지 않으면 첫 번째 규칙이 클러스터 전체 계측을 끄게 되어 규칙과 일치하지 않는 포드는 더 이상 계측되지 않습니다.</div>
+
+1. [Instrumentation Rules][102] 페이지에서 {{< ui >}}Default Behavior{{< /ui >}} 카드로 이동하여 {{< ui >}}Edit{{< /ui >}}를 클릭합니다.
+1. 다음 옵션 중 하나를 선택합니다.
+   - {{< ui >}}No default{{< /ui >}}(초기 설정): Agent 구성의 워크로드 타겟팅이 여전히 적용되지만, Datadog에 정의된 규칙이 이를 재정의할 수 있습니다. 규칙이나 Agent 구성과 일치하지 않는 포드는 계측되지 않습니다.
+   - {{< ui >}}Block everything else{{< /ui >}}: Agent 구성의 워크로드 타겟팅이 무시됩니다. 허용 규칙과 일치하지 않는 포드는 계측되지 않습니다.
+   - {{< ui >}}Allow everything else{{< /ui >}}: Agent 구성의 워크로드 타겟팅이 무시됩니다. 차단 규칙과 일치하지 않는 포드는 계측됩니다.
+1. {{< ui >}}Save{{< /ui >}}를 클릭합니다.
+
+{{< img src="tracing/trace_collection/k8s-default-behavior.png" alt="Kubernetes Default Behavior 옵션: No default, Block everything else, Allow everything else" style="width:50%;" >}}
+
+#### 클러스터 그룹 생성 {#create-cluster-groups}
+
+클러스터 그룹은 계측 규칙으로 타겟팅할 수 있는 Kubernetes 클러스터의 재사용 가능한 컬렉션입니다.
+
+클러스터 그룹을 생성하려면 다음 단계를 따르세요.
+
+1. [Instrumentation Rules][102] 페이지에서 {{< ui >}}Clusters in Scope{{< /ui >}} 카드로 이동하여 {{< ui >}}Manage cluster groups{{< /ui >}}를 클릭합니다.
+1. {{< ui >}}New Cluster Group{{< /ui >}}을 클릭하고 그룹 이름을 입력합니다.
+1. {{< ui >}}Add Clusters{{< /ui >}}를 클릭한 다음, 추가할 클러스터를 검색하여 선택합니다.
+
+   <div class="alert alert-info">클러스터 그룹은 정적입니다. 새 클러스터는 기존 그룹에 자동으로 추가되지 않습니다. 대신, 그룹에 추가할 때까지 <strong>All clusters</strong> 그룹에 나타납니다. 클러스터는 둘 이상의 그룹에 속할 수 있습니다.</div>
+
+   {{< img src="tracing/trace_collection/k8s-add-clusters.png" alt="Add Clusters 목록에서 4개의 클러스터 중 2개가 선택된 새 클러스터 그룹 양식" style="width:80%;" >}}
+
+1. {{< ui >}}Save Group{{< /ui >}}를 클릭하세요.
+
+Datadog은 {{< ui >}}All clusters{{< /ui >}} 그룹을 자동으로 유지 관리합니다. 이 그룹은 다른 그룹에 속하지 않는 적격 클러스터를 나열하므로 그룹화할 클러스터가 무엇인지 확인할 수 있습니다. 해당 클러스터 목록은 편집할 수 없습니다.
+
+클러스터 그룹을 삭제하면 Datadog은 그룹의 규칙을 제거하며, Cluster Agent는 다음에 Remote Configuration을 폴링할 때 해당 규칙 적용을 중단합니다.
+
+클러스터 그룹의 순서를 변경하려면 그룹 목록에서 핸들을 사용하여 그룹을 드래그하세요. 그룹 순서는 [계측 규칙이 평가되는 방식](#how-instrumentation-rules-are-evaluated)에 영향을 줍니다.
+
+{{< img src="tracing/trace_collection/k8s-cluster-groups.png" alt="Kubernetes용 Cluster Groups 페이지. Canary 그룹이 All clusters 그룹 위에 정렬되어 있으며 All clusters 그룹의 클러스터가 나열되어 있습니다." style="width:100%;" >}}
+
+#### 계측 규칙 생성 {#create-instrumentation-rules}
+
+**참고**: Bits AI를 사용하여 자연어로 계측 규칙을 생성할 수 있습니다. Create instrumentation rule 창에서 {{< ui >}}Generate with Bits{{< /ui >}}를 클릭하고 계측할 포드를 설명하세요. Bits AI가 해당 규칙을 생성합니다.
+
+계측 규칙을 생성하려면 다음 단계를 따르세요.
+
+1. [Instrumentation Rules][102] 페이지에서 {{< ui >}}New Rule{{< /ui >}}를 클릭합니다. 또는 Cluster Groups 페이지에서 그룹을 선택하고 {{< ui >}}Rules{{< /ui >}} 탭을 연 다음 {{< ui >}}Create a new rule{{< /ui >}}를 클릭합니다.
+1. 하나 이상의 조건을 정의한 다음 {{< ui >}}Block Instrumentation{{< /ui >}} 또는 {{< ui >}}Allow Instrumentation{{< /ui >}}를 선택합니다. [지원되는 Kubernetes 속성](#supported-kubernetes-attributes) 섹션을 참조하세요.
+1. {{< ui >}}Set cluster targeting{{< /ui >}}에서 {{< ui >}}All clusters{{< /ui >}} 또는 {{< ui >}}Select cluster groups{{< /ui >}}을 선택합니다.
+
+   둘 이상의 그룹을 선택하면 그룹이 단일 규칙을 공유하며, 나중에 이를 편집하면 선택한 모든 그룹이 업데이트됩니다.
+
+   {{< img src="tracing/trace_collection/k8s-create-rule.png" alt="Kubernetes용 Create instrumentation rule 창. Namespace Name이 default와 같다는 조건, Allow Instrumentation 작업, Canary 그룹을 선택한 Select cluster groups 옵션이 표시됩니다." style="width:100%;" >}}
+
+1. 규칙의 이름을 지정한 다음 {{< ui >}}Next{{< /ui >}}을 클릭합니다.
+1. 규칙을 검토합니다. Datadog은 각 타겟 그룹의 규칙 목록 끝에 새 규칙을 추가합니다. 필요시 {{< ui >}}Set evaluation order{{< /ui >}} 아래에서 규칙을 드래그하여 각 그룹 내의 순서를 변경하세요. [계측 규칙 평가 방법](#how-instrumentation-rules-are-evaluated) 섹션을 참조하세요.
+1. {{< ui >}}Create Rule{{< /ui >}}을 클릭합니다.
+
+Datadog은 50초 이내에 Remote Configuration을 통해 적격 클러스터에 규칙을 배포합니다. 규칙이 배포된 후 변경 사항을 적용하려면 영향을 받는 워크로드를 다시 시작하세요. [Instrumentation Rules][102] 페이지의 {{< ui >}}Deployment Status{{< /ui >}} 카드는 현재 규칙의 롤아웃 상태를 보여줍니다.
+
+#### 계측 규칙 평가 방법 {#how-instrumentation-rules-are-evaluated}
+
+각 포드에 대해 Datadog은 다음 순서로 계측 규칙을 평가하고 일치하는 첫 번째 규칙을 적용합니다.
+
+1. 포드의 클러스터가 속한 그룹의 규칙(그룹 순서대로 위에서 아래로). 각 그룹 내에서 규칙은 {{< ui >}}Set evaluation order{{< /ui >}} 아래에 설정된 순서대로 평가됩니다.
+1. {{< ui >}}All clusters{{< /ui >}} 타겟팅 옵션을 사용하는 규칙. 이 규칙은 클러스터 그룹 내의 클러스터를 포함하여 모든 적격 클러스터에 적용됩니다.
+
+일치하는 규칙이 없으면 [기본 동작](#set-the-default-behavior)이 적용됩니다.
+
+<div class="alert alert-info">포드 SDK 주석 및 <code>DatadogInstrumentation</code> 리소스는 기본 동작과 관계없이 계측 규칙보다 우선합니다. 전체 순서는 <a href="#configuration-precedence">구성 우선 순위</a> 섹션을 참조하세요.</div>
+
+#### 계측 규칙에 대한 예외 {#exceptions-to-instrumentation-rules}
+
+계측 규칙이나 기본 동작과 관계없이 다음 포드는 계측되지 않습니다.
+
+- `kube-system` 네임스페이스의 포드
+- Datadog Agent가 설치된 네임스페이스의 포드
+- `disabledNamespaces`에 나열된 네임스페이스의 포드
+- `admission.datadoghq.com/enabled: "false"`로 레이블이 지정된 포드
+
+#### 지원되는 Kubernetes 속성 {#supported-kubernetes-attributes}
+
+Kubernetes에 대한 계측 규칙은 다음 속성을 지원합니다. 규칙이 적용되려면 포드가 규칙의 모든 조건을 충족해야 합니다. 레이블 속성의 경우, 레이블 키와 일치시킬 값을 지정하세요.
+
+| 속성 | 설명 | 연산자 | 예시 |
+| --------- | ----------- | --------- | ------- |
+| 네임스페이스 이름 | 포드 네임스페이스의 이름입니다. | `equals`, `not equals`, `prefix`, `contains` | `default`, `production` |
+| 네임스페이스 레이블 | 포드 네임스페이스의 레이블입니다. | `equals`, `not equals`, `prefix` | 레이블 키 `team`, 값 `checkout` |
+| 포드 레이블 | 포드의 레이블입니다. | `equals`, `not equals`, `prefix` | 레이블 키 `app`, 값 `web` |
+
+[101]: /ko/remote_configuration/
+[102]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[103]: /ko/account_management/rbac/permissions/
+
+{{% /tab %}}
+
 {{% tab "타겟팅 규칙(v7.64+)" %}}
 
 `targets` 레이블을 사용하여 대상 지정 블록을 생성해 어느 워크로드를 계측하고 어느 구성을 적용할지 지정합니다.
@@ -431,7 +545,7 @@ metadata:
 
 이 구성이 하는 일은 다음과 같습니다.
 - 다음 레이블이 있는 포드에 대하여 APM 활성화:
-  - `app:db-user`, 이 레이블은 `db-user` 애플리케이션을 실행하는 포드를 나타냅니다.
+  - `app:db-user`, 이는 `db-user` 애플리케이션을 실행하는 포드를 나타냅니다.
   - `webserver:routing`, 이 레이블은 `request-router` 애플리케이션을 실행하는 포드를 나타냅니다.
 - Datadog에 Datadog Tracer SDK 기본 버전을 사용하도록 지시합니다.
 - 각 대상 그룹에 적용할 Datadog 환경 변수를 설정하고 SDK를 구성합니다.
@@ -547,14 +661,14 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
 
 {{% tab "DatadogInstrumentation CRD (v7.85+)" %}}
 
-`DatadogInstrumentation` 커스텀 리소스를 사용하여 SSI를 활성화하고 특정 워크로드 세트에 대한 SDK를 구성합니다.
+`DatadogInstrumentation` 사용자 지정 리소스를 사용하여 SSI를 활성화하고 특정 워크로드 세트에 대한 SDK를 구성합니다.
 
 이 방법을 사용하려면 Datadog Agent와 Cluster Agent **v7.85.0 이상**이 필요하며, 다음 중 하나를 사용하여 `DatadogInstrumentation` CRD를 설치해야 합니다.
 
 - Datadog Operator **v1.31.0 이상**.
 - Datadog Helm 차트 **v3.255.0 이상**.
 
-##### 워크로드를 타겟팅하는 리소스 생성 {#create-a-resource-targeting-your-workload}
+##### 워크로드를 대상으로 하는 리소스 생성 {#enable-apm-with-datadoginstrumentation}
 
 `DatadogInstrumentation` 리소스를 생성하고 타겟팅하려는 워크로드와 동일한 네임스페이스에 적용합니다. 이 예시는 `apps` 네임스페이스의 `checkout` 배포를 기본 Java SDK로 계측합니다.
 
@@ -609,17 +723,9 @@ ddTraceConfigs:
 
 참조된 레이블은 애플리케이션 포드에 있어야 합니다. 더 많은 SDK 옵션은 [라이브러리 구성][7]을 참조하세요.
 
-##### 구성 우선 순위{#configuration-precedence}
+##### 다른 대상 지정 방법보다 우선 적용 {#precedence-over-other-targeting-methods}
 
-허용 대상인 포드의 경우 Cluster Agent는 다음 순서로 APM 구성을 선택합니다. 아래 순서는 우선순위가 높은 항목부터 나열되어 있습니다.
-
-1. 포드 주석(예: `admission.datadoghq.com/java-lib.version`)
-1. 워크로드의 `DatadogInstrumentation` APM 구성
-1. Remote Configuration 계측 정책(활성화된 경우)
-1. Agent에서 구성한 `apm.instrumentation.targets` 또는 `enabledNamespaces`
-1. 클러스터 전체 계측(대상 지정 규칙 없이 활성화된 경우).
-
-`spec.config.apm.enabled` 값이 `false`인 경우를 포함하여 일치하는 DDI 구성은 우선순위가 낮은 소스보다 우선합니다. 포드 SDK 주석이 이를 재정의할 수 있습니다. DDI만으로 워크로드를 관리하려면 포드 사양에서 충돌하는 주석을 제거하세요.
+`spec.config.apm.enabled` 값이 `false`인 경우를 포함하여 일치하는 DDI 구성은 우선 순위가 낮은 소스보다 우선합니다. 포드 SDK 주석이 이를 재정의할 수 있습니다. DDI만으로 워크로드를 관리하려면 포드 사양에서 충돌하는 주석을 제거하세요. 전체 순서는 [구성 우선 순위](#configuration-precedence) 섹션을 참조하세요.
 
 [7]: /ko/tracing/trace_collection/library_config/
 [36]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
@@ -648,7 +754,7 @@ ddTraceConfigs:
            - applications
 {{< /highlight >}}
 
-특정 네임스페이스에 대해 계측을 비활성화하려면 `datadog-agent.yaml`에 `disabledNamespaces` 구성을 추가합니다.
+특정 네임스페이스에 대해 계측을 비활성화하려면 `datadog-agent.yaml`에 `disabledNamespaces` 구성을 추가하세요.
 
 {{< highlight yaml "hl_lines=5-7" >}}
    features:
@@ -694,7 +800,7 @@ ddTraceConfigs:
 
 <div class="alert alert-info">Datadog Cluster Agent v7.52.0+부터 사용자가 지정하는 SDK에 따라 애플리케이션의 부분 집합을 자동으로 계측할 수 있습니다.</div>
 
-Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리케이션이 자동으로 계측됩니다. 이것은 두 가지 방식으로 구성할 수 있으며, 다음과 같은 우선순위 순서대로 적용됩니다.
+Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리케이션이 자동으로 계측됩니다. 이것은 두 가지 방식으로 구성할 수 있으며, 다음과 같은 우선 순위 순서대로 적용됩니다.
 
 1. [서비스 수준에서 지정](#specify-at-the-service-level) 또는
 2. [클러스터 수준에서 지정](#specify-at-the-cluster-level).
@@ -703,9 +809,9 @@ Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리�
 
 ##### 서비스 수준에서 지정 {#specify-at-the-service-level}
 
-특정 포드의 애플리케이션을 자동으로 계측하려면 포드 사양의 애플리케이션에 적절한 언어 어노테이션 및 라이브러리 버전을 추가합니다.
+특정 포드의 애플리케이션을 자동으로 계측하려면 포드 사양의 애플리케이션에 적절한 언어 주석 및 라이브러리 버전을 추가합니다.
 
-| 언어   | 포드 어노테이션                                                        |
+| 언어   | 포드 주석                                                        |
 |------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | Node.js    | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
@@ -745,7 +851,7 @@ spec:
 
 ##### 클러스터 수준에서 지정 {#specify-at-the-cluster-level}
 
-어노테이션을 사용해 특정 포드의 자동 계측을 활성화하지 않은 경우, SSI 구성을 사용해 클러스터 전체를 어느 언어로 계측할지 지정할 수 있습니다. `apm.instrumentation.libVersions`가 설정된 경우, 지정된 언어로 작성된 애플리케이션만 지정된 라이브러리 버전을 사용하여 계측됩니다.
+주석을 사용해 특정 포드의 자동 계측을 활성화하지 않은 경우, SSI 구성을 사용해 클러스터 전체를 어느 언어로 계측할지 지정할 수 있습니다. `apm.instrumentation.libVersions`가 설정된 경우, 지정된 언어로 작성된 애플리케이션만 지정된 라이브러리 버전을 사용하여 계측됩니다.
 
 구성해야 하는 파일은 Single Step Instrumentation을 Datadog Operator 또는 Helm 중 무엇으로 활성화했는지에 따라 다릅니다.
 
@@ -795,6 +901,16 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### 구성 우선 순위 {#configuration-precedence}
+
+허용 대상인 포드의 경우 Cluster Agent는 다음 순서로 APM 구성을 선택합니다. 아래 순서는 우선 순위가 높은 항목부터 나열되어 있습니다.
+
+1. 포드 주석(예: `admission.datadoghq.com/java-lib.version`)
+1. 워크로드의 `DatadogInstrumentation` APM 구성
+활성화된 경우 1. [Datadog에 정의된 계측 규칙](?tab=instrumentationrulesindatadogv7842#target-specific-workloads).
+1. Agent에서 구성한 `apm.instrumentation.targets` 또는 `enabledNamespaces` 계측 규칙의 [기본 동작](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior)이 {{< ui >}}Block everything else{{< /ui >}} 또는 {{< ui >}}Allow everything else{{< /ui >}}인 경우 이러한 설정은 무시됩니다.
+1. `apm.instrumentation.targets` 및 Datadog의 계측 규칙 없이 활성화된 경우의 클러스터 전체 계측.
+
 ### 기본 이미지 레지스트리 변경 {#change-the-default-image-registry}
 
 Datadog은 계측 라이브러리 이미지를 gcr.io, Docker Hub, Amazon ECR에 게시합니다.
@@ -839,7 +955,7 @@ SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하려면 다�
    미러링하는 버전이 워크로드에서 구성된 버전과 일치해야 하며, 이는 다음 중 한 가지 방법으로 설정할 수 있습니다.
    - DDI 리소스 내 `spec.config.apm.ddTraceVersions`에서 워크로드당.
    - `ddTraceVersions`를 사용하는 Agent 구성 대상에서 또는
-   - `admission.datadoghq.com/java-lib.version`과 같은 어노테이션을 사용하여 포드당.
+   - `admission.datadoghq.com/java-lib.version`과 같은 주석을 사용하여 포드당.
 
    명시적으로 구성된 버전이 없으면 기본 버전(`0`)이 사용됩니다.
 
@@ -861,9 +977,9 @@ SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하려면 다�
    - `dd-lib-java-init:1`
    - `dd-lib-python-init:3`
 
-3. 프라이빗 레지스트리를 사용하려면 Cluster Agent 구성을 업데이트하세요.
+3. 프라이빗 레지스트리를 사용하려면 Cluster Agent 구성을 업데이트합니다.
 
-   프라이빗 레지스트리를 사용하려면 Cluster Agent 구성에서 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 환경 변수를 설정하세요.
+   프라이빗 레지스트리를 사용하려면 Cluster Agent 구성에서 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 환경 변수를 설정합니다.
 
 컨테이너 레지스트리 변경에 관한 자세한 내용은 [컨테이너 레지스트리 변경][33]을 참조하세요.
 
@@ -913,9 +1029,9 @@ spec:
 
 리소스를 적용하고 상태에 변경 사항이 반영되었는지 확인한 후 워크로드를 다시 시작합니다. 기존 포드는 교체될 때까지 계측된 상태로 유지됩니다.
 
-#### 특정 워크로드를 대상으로 지정하는 계측 규칙 사용 {#use-instrumentation-rules-to-target-specific-workloads}
+#### 타겟팅 규칙을 사용하여 특정 워크로드 지정 {#use-targeting-rules-to-target-specific-workloads}
 
-계측 규칙을 사용하면(Agent v7.64+에서 사용 가능) 특정 애플리케이션의 추적을 활성화 또는 비활성화할 수 있습니다. [여기에서 구성 세부 정보를 참조하세요](#advanced-options).
+타겟팅 규칙을 사용하면(Agent v7.64+에서 사용 가능) 특정 애플리케이션의 추적을 활성화 또는 비활성화할 수 있습니다. 구성 세부 정보는 [고급 옵션](#advanced-options) 섹션을 참조하세요.
 
 #### Datadog Admission Controller 사용 {#use-the-datadog-admission-controller}
 
@@ -951,7 +1067,7 @@ spec:
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml`에서 `instrumentation.enabled=false`를 설정합니다.
+1. `datadog-agent.yaml`에서 `instrumentation.enabled=false`를 설정하세요.
    ```yaml
    features:
      apm:
@@ -984,7 +1100,7 @@ spec:
 
 ## 모범 사례 {#best-practices}
 
-APM 활성화를 정밀하게 제어하려면 [DatadogInstrumentation(DDI)](#target-specific-workloads)을 사용하여 특정 워크로드를 계측하세요. 소수의 워크로드로 시작하여 트레이스를 확인한 다음 추가 워크로드로 확장합니다.
+APM 활성화를 정밀하게 제어하려면 [DatadogInstrumentation(DDI)](#target-specific-workloads)을 사용하여 특정 워크로드를 계측하세요. 소수의 워크로드로 시작하여 트레이스를 검증한 다음 추가 워크로드로 확장합니다.
 
 Agent 구성 타겟팅 규칙을 사용하는 경우 다음 예시에서는 레이블 및 네임스페이스 선택기를 사용하여 계측을 제어하는 방법을 보여줍니다.
 

@@ -30,7 +30,7 @@ APM 用のシングルステップインスツルメンテーション (SSI) を
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
 {{< /skill-callout >}}
 
-## 要件 {#requirements}
+## 要件{#requirements}
 
 - Kubernetes v1.20 以上。
 - [`Helm`][1] (Datadog Operator デプロイ用)。
@@ -176,7 +176,7 @@ UI を通じて構成を生成するには、[Kubernetes への Datadog Agent �
 統合サービスタグ (UST) は、トレース、メトリクス、ログを通じて一貫したタグを適用し、監視可能性データのナビゲートと相関を容易にします。UST は、自動ラベル抽出 (推奨)、`ddTraceConfigs` による明示的な構成、またはデプロイメントマニフェストで構成できます。
 
 <div class="alert alert-warning">
-<a href="/agent/remote_config/">Remote Configuration</a> を使用している場合、<a href="#recommended-configure-usts-through-automatic-label-extraction">自動ラベル抽出</a>には互換性がありません。次のものを使用して、<a href="#configure-usts-explicitly-with-ddtraceconfigs">UST を明示的に構成する</a>必要があります。 <code>ddTraceConfigs</code>。
+<a href="/agent/remote_config/">Remote Configuration</a> を使用している場合、<a href="#recommended-configure-usts-through-automatic-label-extraction">自動ラベル抽出</a>には互換性がありません。次のものを使用して、<a href="#configure-usts-explicitly-with-ddtraceconfigs">UST を明示的に構成する</a>必要があります。 <code>ddTraceConfigs</code>です。
 </div>
 
 ### (推奨) 自動ラベル抽出を通じて UST を構成する {#recommended-configure-usts-through-automatic-label-extraction}
@@ -193,7 +193,7 @@ SSI を使用すると、個々のデプロイメントに変更を加えるこ�
 | `datadog-operator` | 1.16.0   |
 | `datadog-helm-chart` | 3.120.0 |
 
-#### 構成 {#configuration}
+#### 構成{#configuration}
 
 次の例では、`app.kubernetes.io/name` を、サービス名が含まれる任意のラベルに置き換えてください (例:`service.kubernetes.io/name` や `component`)。この方法で複数のラベルを構成できます。
 
@@ -342,9 +342,123 @@ metadata:
 
 ### 特定のワークロードをターゲットにする {#target-specific-workloads}
 
-デフォルトの場合、SSI はクラスター内のすべてのネームスペースのすべてのサービスをインスツルメントします。Agent のバージョンに応じて、インスツルメンテーションするサービスとその方法を微調整するために、以下の構成方法のいずれかを使用してください。
+デフォルトの場合、SSI はクラスター内のすべてのネームスペースのすべてのサービスをインスツルメントします。インスツルメントするワークロードを調整するには、Datadog でインスツルメンテーションルールを定義するか、Agent 構成または `DatadogInstrumentation` リソースを使用してターゲティングを構成します。Datadog のインスツルメンテーションルールを使用すると、Agent 構成を変更することなく、一致する Pod のインスツルメンテーションを許可またはブロックできます。利用可能な方法は、ご使用の Agent または Cluster Agent のバージョンによって異なります。
 
 {{< tabs >}}
+{{% tab "Datadog のインスツルメンテーションルール (v7.84.2+)" %}}
+
+<div class="alert alert-info">Kubernetes 用のインスツルメンテーションルールはプレビュー版です。<a href="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/">アクセスをお申し込みください。</a></div>
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">インスツルメンテーションルールは、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
+{{< /site-region >}}
+
+各インスツルメンテーションルールは、ネームスペースまたは Pod の属性と照合され、一致する Pod に対してインスツルメンテーションを許可またはブロックします。ルールをすべての対象クラスターにデプロイすること、または 1 つ以上の [クラスターグループ](#create-cluster-groups) にスコープを絞って適用範囲を制限することができます。
+
+インスツルメンテーションルールを表示および管理するには、[{{< ui >}}APM{{< /ui >}}] > [{{< ui >}}Instrument a Service{{< /ui >}}] (サービスのインスツルメント) > [[{{< ui >}}Instrumentation Rules{{< /ui >}}] (インスツルメンテーションルール)][102] に移動し、ページタイトルのドロップダウンから [{{< ui >}}Kubernetes{{< /ui >}}] を選択します。
+
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="[APM Instrumentation Rules] (APM インスツルメンテーションルール) ページ。Kubernetes が選択され、[Default Behavior] (デフォルトの動作)、[Clusters in Scope] (スコープ内のクラスター)、[Deployment Status] (デプロイメントステータス) カードが表示されており、その下にインスツルメンテーションルールの空のリストがあります。" style="width:100%;" >}}
+
+#### インスツルメンテーションルールの前提条件 {#prerequisites-for-instrumentation-rules}
+
+- **Cluster Agent**: 各クラスターで v7.84.2 以降の Cluster Agent、かつ [Remote Configuration][101] が有効であること。これらの要件を満たすクラスターが、インスツルメンテーションルールの対象となります。
+- **権限**: インスツルメンテーションルールとクラスターグループの作成および管理に必要な **APM Workload Selection Write** [権限][103]。
+
+#### デフォルトの動作を設定する {#set-the-default-behavior}
+
+デフォルトの動作は、Datadog でインスツルメンテーションルールを使用する際に、Agent 構成 (`targets` および `enabledNamespaces`) のワークロードターゲティングが引き続き適用されるかどうかを制御します。デフォルトの動作に関係なく、一部の Pod がインスツルメンテーションから除外され、他のターゲティング方法がインスツルメンテーションルールよりも優先される場合があります。「[インスツルメンテーションルールの例外](#exceptions-to-instrumentation-rules)」および「[構成の優先順位](#configuration-precedence)」のセクションを参照してください。
+
+<div class="alert alert-warning">SSI がクラスター全体で <code>targets</code>なしで有効になっている場合、ルールを作成する前に、デフォルトの動作を [<strong>Allow everything else</strong>] (その他をすべて許可) に設定します。このように設定しないと、最初のルールによってクラスター全体のインスツルメンテーションが無効になり、ルールに一致しない Pod がインスツルメンテーションの対象外になります。</div>
+
+1. [インスツルメンテーションルール][102]ページで [{{< ui >}}Default Behavior{{< /ui >}}] (デフォルトの動作) カードに移動し、[{{< ui >}}Edit{{< /ui >}}] (編集) をクリックします。
+1. 次のいずれかのオプションを選択します。
+   - [{{< ui >}}No default{{< /ui >}}] (デフォルトなし) (初期設定): Agent 構成でのワークロードターゲティングは引き続き適用されますが、Datadog で定義されたルールによって上書きされる場合があります。ルールにも Agent 構成にも一致しない Pod はインスツルメントされません。
+   - {{< ui >}}Block everything else{{< /ui >}}: Agent 構成のワークロードターゲティングは無視されます。許可ルールに一致しない Pod はインスツルメントされません。
+   - {{< ui >}}Allow everything else{{< /ui >}}: Agent 構成のワークロードターゲティングは無視されます。ブロックルールに一致しない Pod はインスツルメントされます。
+1. [{{< ui >}}Save{{< /ui >}}] (保存) をクリックします。
+
+{{< img src="tracing/trace_collection/k8s-default-behavior.png" alt="Kubernetes のデフォルト動作オプション: [No default] (デフォルトなし)、[Block everything else] (他をすべてブロック)、[Allow everything else] (他をすべて許可)" style="width:50%;" >}}
+
+#### クラスターグループを作成する {#create-cluster-groups}
+
+クラスターグループは、インスツルメンテーションルールのターゲットにできる Kubernetes クラスターの再利用可能なコレクションです。
+
+クラスターグループを作成するには:
+
+1. [インスツルメンテーションルール][102]ページで [{{< ui >}}Clusters in Scope{{< /ui >}}] (スコープ内のクラスター) カードに移動し、[{{< ui >}}Manage cluster groups{{< /ui >}}] (クラスターグループの管理) をクリックします。
+1. [{{< ui >}}New Cluster Group{{< /ui >}}] (新規クラスターグループ) をクリックし、グループの名前を入力します。
+1. [{{< ui >}}Add Clusters{{< /ui >}}] (クラスターを追加) をクリックし、追加するクラスターを検索して選択します。
+
+   <div class="alert alert-info">クラスターグループは静的です。新しいクラスターは、既存のグループに自動的には追加されません。代わりに、グループに追加するまでは [<strong>All clusters</strong>] (すべてのクラスター) グループに表示されます。クラスターは複数のグループに所属できます。</div>
+
+   {{< img src="tracing/trace_collection/k8s-add-clusters.png" alt="[Add Clusters] (クラスターを追加) リストで 4 つのクラスターのうち 2 つが選択されている新しいクラスターグループのフォーム" style="width:80%;" >}}
+
+1. [{{< ui >}}Save Group{{< /ui >}}] (グループを保存) をクリックします。
+
+Datadog は [{{< ui >}}All clusters{{< /ui >}}] (すべてのクラスター) グループを自動的に維持します。このグループには、他のグループに属していない対象クラスターが一覧表示されるため、どのクラスターがグループ化されていないかを確認できます。このクラスターリストは編集できません。
+
+クラスターグループを削除すると、Datadog でそのグループのルールが削除され、Cluster Agent が次回 Remote Configuration をポーリングするときに、そのルールの適用が停止します。
+
+クラスターグループの順序を変更するには、グループリストでグループのハンドルを使用してグループをドラッグします。グループの順序は[インスツルメンテーションルールの評価方法](#how-instrumentation-rules-are-evaluated)に影響します。
+
+{{< img src="tracing/trace_collection/k8s-cluster-groups.png" alt="[Cluster Groups for Kubernetes] (Kubernetes のクラスターグループ) ページ。Canary グループが [All clusters] (すべてのクラスター) グループの上に配置され、[All clusters] (すべてのクラスター) グループ内のクラスターが一覧表示されています。" style="width:100%;" >}}
+
+#### インスツルメンテーションルールを作成する {#create-instrumentation-rules}
+
+**注**: Bits AI を使用して、自然言語でインスツルメンテーションルールを作成できます。[Create instrumentation rule] (インスツルメンテーションルールの作成) ウィンドウで [{{< ui >}}Generate with Bits{{< /ui >}}] (Bits を使用して生成) をクリックし、インスツルメンテーション対象の Pod を記述します。Bits AI により対応するルールが生成されます。
+
+インスツルメンテーションルールを作成するには:
+
+1. [インスツルメンテーションルール][102]ページで [{{< ui >}}New Rule{{< /ui >}}] (新規ルール) をクリックします。または、クラスターグループページでグループを選択し、その [{{< ui >}}Rules{{< /ui >}}] (ルール) タブを開いて [{{< ui >}}Create a new rule{{< /ui >}}] (新規ルールを作成) をクリックします。
+1. 1 つ以上の条件を定義し、[{{< ui >}}Block Instrumentation{{< /ui >}}] (インスツルメンテーションをブロックする) または [{{< ui >}}Allow Instrumentation{{< /ui >}}] (インスツルメンテーションを許可する) を選択します。「[サポートされている Kubernetes 属性](#supported-kubernetes-attributes)」セクションを参照してください。
+1. [{{< ui >}}Set cluster targeting{{< /ui >}}] (クラスターターゲティングの設定) で、[{{< ui >}}All clusters{{< /ui >}}] (すべてのクラスター) または [{{< ui >}}Select cluster groups{{< /ui >}}] (クラスターグループを選択) を選択します。
+
+   複数のグループを選択した場合、それらのグループは 1 つのルールを共有します。後でそのルールを編集すると、選択したすべてのグループが更新されます。
+
+   {{< img src="tracing/trace_collection/k8s-create-rule.png" alt="Kubernetes の [Create instrumentation rule] (インスツルメンテーションルールの作成) ウィンドウ。条件は Namespace Name equals default、アクションは [Allow Instrumentation] (インスツルメンテーションを許可)、[Select cluster groups] (クラスターグループを選択) で Canary グループが選択されています。" style="width:100%;" >}}
+
+1. ルールに名前を付けて、[{{< ui >}}Next{{< /ui >}}] (次へ) をクリックします。
+1. ルールを確認します。各ターゲットグループのルールリストの末尾に新しいルールが追加されます。必要に応じて、[{{< ui >}}Set evaluation order{{< /ui >}}] (評価順序の設定) でルールをドラッグして、各グループ内の順序を変更します。「[インスツルメンテーションルールの評価方法](#how-instrumentation-rules-are-evaluated)」セクションを参照してください。
+1. [{{< ui >}}Create Rule{{< /ui >}}] (ルールを作成) をクリックします。
+
+Datadog は、50 秒以内にRemote Configuration を介して対象クラスターへルールをデプロイします。ルールがデプロイされたら、影響を受けるワークロードを再起動して変更を反映させます。[[Instrumentation Rules] (インスツルメンテーションルール)][102] ページの [{{< ui >}}Deployment Status{{< /ui >}}] (デプロイメントステータス) カードに、現在のルールのロールアウト状況が表示されます。
+
+#### インスツルメンテーションルールの評価方法 {#how-instrumentation-rules-are-evaluated}
+
+Datadog は各 Pod に対して以下の順序でインスツルメンテーションルールを評価し、最初に一致したルールを適用します。
+
+1. Pod のクラスターが属するグループのルール (グループ順に上から下へ)。各グループ内では、ルールは [{{< ui >}}Set evaluation order{{< /ui >}}] (評価順序の設定) で設定された順序で評価されます。
+1. [{{< ui >}}All clusters{{< /ui >}}] (すべてのクラスター) ターゲティングオプションを使用するルール。これらのルールは、クラスターグループ内のクラスターを含め、すべての対象クラスターに適用されます。
+
+一致するルールがない場合は、[デフォルトの動作](#set-the-default-behavior)が適用されます。
+
+<div class="alert alert-info">Pod SDK アノテーションと <code>DatadogInstrumentation</code> リソースは、デフォルトの動作に関係なく、インスツルメンテーションルールよりも優先されます。完全な順序については、「<a href="#configuration-precedence">構成の優先順位</a>」セクションを参照してください。</div>
+
+#### インスツルメンテーションルールの例外 {#exceptions-to-instrumentation-rules}
+
+以下の Pod は、インスツルメンテーションルールやデフォルトの動作に関係なく、インスツルメントされません。
+
+- `kube-system` ネームスペース内の Pod
+- Datadog Agent がインストールされているネームスペース内の Pod
+- `disabledNamespaces` にリストされているネームスペース内の Pod
+- `admission.datadoghq.com/enabled: "false"` というラベルが付いている Pod
+
+#### サポートされている Kubernetes 属性 {#supported-kubernetes-attributes}
+
+Kubernetes のインスツルメンテーションルールでは、以下の属性がサポートされています。ルールが適用されるには、Pod がそのルールのすべての条件に一致している必要があります。ラベル属性の場合は、ラベルキーと一致させる値を指定します。
+
+| 属性 | 説明 | 演算子 | 例 |
+| --------- | ----------- | --------- | ------- |
+| ネームスペース名 | Pod のネームスペースの名前。| `equals`、`not equals`、`prefix`、`contains` | `default`、`production` |
+| ネームスペースラベル | Pod のネームスペースのラベル。| `equals`、`not equals`、`prefix` | ラベルキー `team`、値 `checkout` |
+| Pod ラベル | Pod のラベル。| `equals`、`not equals`、`prefix` | ラベルキー `app`、値 `web` |
+
+[101]: /ja/remote_configuration/
+[102]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[103]: /ja/account_management/rbac/permissions/
+
+{{% /tab %}}
+
 {{% tab "ターゲティングルール (v7.64+)" %}}
 
 `targets` ラベルを使用してターゲティングブロックを作成し、インスツルメントするワークロードと適用する構成を指定します。
@@ -354,8 +468,8 @@ metadata:
 | キー             | 説明 |
 |------------------|-------------|
 | `name`            | ターゲットブロックの名前。これは監視状態には影響せず、メタデータとしてのみ使用されます。|
-| `namespaceSelector` | インスツルメントするネームスペース。以下のいずれかを使用して指定します。<br> ～ `matchNames`: 1 つ以上のネームスペース名のリスト。<br> ～ `matchLabels`: `{key,value}` のペアで定義される 1 つ以上のラベルのリスト。<br> ～ `matchExpressions`: ネームスペースセレクター要件のリスト。<br><br>ネームスペースはすべての基準を満たす必要があります。詳細については、[Kubernetes セレクターのドキュメント][10]を参照してください。|
-| `podSelector`     | インスツルメントする Pod。以下のいずれかを使用して指定します。<br> ～ `matchLabels`: `{key,value}` のペアで定義される 1 つ以上のラベルのリスト。<br> ～ `matchExpressions`: Pod セレクター要件のリスト。<br><br> Pod はすべての基準を満たす必要があります。詳細については、[Kubernetes セレクターのドキュメント][10]を参照してください。|
+| `namespaceSelector` | インスツルメントするネームスペース。以下のいずれかを使用して指定します。<br> - `matchNames`: 1 つ以上のネームスペース名のリスト。<br> - `matchLabels`: `{key,value}` のペアで定義される 1 つ以上のラベルのリスト。<br> - `matchExpressions`: ネームスペースセレクター要件のリスト。<br><br>ネームスペースはすべての基準を満たす必要があります。詳細については、[Kubernetes セレクターのドキュメント][10]を参照してください。|
+| `podSelector`     | インスツルメントする Pod。以下のいずれかを使用して指定します。<br> - `matchLabels`: `{key,value}` のペアで定義される 1 つ以上のラベルのリスト。<br> - `matchExpressions`: Pod セレクター要件のリスト。<br><br> Pod はすべての基準を満たす必要があります。詳細については、[Kubernetes セレクターのドキュメント][10]を参照してください。|
 | `ddTraceVersions` | 各言語で使用する [Datadog APM SDK][9] のバージョン。|
 | `ddTraceConfigs`  | [統合サービスタグ][8]を設定できる APM SDK 構成、トレースを超えた [SDK 依存製品](#enable-sdk-dependent-products-and-features)を有効にし、他の [APM 設定][14]をカスタマイズします。|
 
@@ -554,7 +668,7 @@ SSI を通じて有効にできる製品の完全なリストについては、[
 - Datadog Operator **v1.31.0 以上**。
 - Datadog Helm チャート **v3.255.0 以上**。
 
-##### ワークロードをターゲットとするリソースを作成する {#create-a-resource-targeting-your-workload}
+##### ワークロードをターゲットとするリソースを作成する {#enable-apm-with-datadoginstrumentation}
 
 ターゲットとするワークロードと同じネームスペースで `DatadogInstrumentation` リソースを作成して適用します。この例では、デフォルトの Java SDK を使用して `apps` ネームスペースで `checkout` Deployment をインスツルメントします。
 
@@ -585,7 +699,7 @@ spec:
 
 サポートされているターゲットの種類は、`Deployment`、`StatefulSet`、`DaemonSet`、`Job`、`CronJob`、および Argo `Rollout` です。
 
-##### コンフィギュレーション設定 {#configuration-settings}
+##### 構成設定 {#configuration-settings}
 
 `spec.config.apm` の下に以下のフィールドを設定します。
 
@@ -595,7 +709,7 @@ spec:
 | `ddTraceVersions` | SDK 言語識別子をバージョンにマッピングします。[SSI 互換性要件][36]に従い、`java`、`js` (Node.js)、`python`、`dotnet`、`ruby`、`php`、または `c` を指定します。リストされている SDK のみが挿入されます。`"default"` を使用して Agent のデフォルトの SDK バージョンを使用するか、特定のバージョンを固定します。省略した場合、Agent はサポートされている SDK のデフォルトセットを使用します。|
 | `ddTraceConfigs` | SDK 環境変数のリスト。各 `name` は `DD_` で始まる必要があります。リテラル文字列には `value` を、Kubernetes 環境変数リファレンスには `valueFrom` を使用します。|
 
-例えば、Continuous Profiler を有効にし、Pod ラベルからサービス名を読み取るには、これらのエントリを `ddTraceConfigs` に追加します。
+たとえば、Continuous Profiler を有効にし、Pod ラベルからサービス名を読み取るには、これらのエントリを `ddTraceConfigs` に追加します。
 
 ```yaml
 ddTraceConfigs:
@@ -609,17 +723,9 @@ ddTraceConfigs:
 
 参照先のラベルはアプリケーションの Pod 上に存在する必要があります。その他の SDK オプションについては、[ライブラリ構成][7]を参照してください。
 
-##### 構成の優先順位 {#configuration-precedence}
+##### 他のターゲティング方法に対する優先順位 {#precedence-over-other-targeting-methods}
 
-アドミッションの対象となる Pod の場合、Cluster Agent は以下の順序 (優先度の高い順) で APM 構成を選択します。
-
-1. `admission.datadoghq.com/java-lib.version` などの Pod アノテーション。
-1. ワークロードの `DatadogInstrumentation` APM 構成。
-1. Remote Configuration インスツルメンテーションポリシー (有効な場合)。
-1. Agent で構成された `apm.instrumentation.targets` または `enabledNamespaces`。
-1. クラスター全体のインスツルメンテーション (ターゲティングルールなしで有効な場合)。
-
-一致する DDI 構成は、`spec.config.apm.enabled` が `false` である場合を含め、優先度の低いソースよりも優先されます。Pod SDK アノテーションで上書きできます。DDI のみでワークロードを管理するには、Pod の仕様から競合するアノテーションを削除してください。
+一致する DDI 構成は、`spec.config.apm.enabled` が `false` である場合を含め、優先度の低いソースよりも優先されます。Pod SDK アノテーションで上書きできます。DDI のみでワークロードを管理するには、Pod の仕様から競合するアノテーションを削除してください。完全な順序については、「[構成の優先順位](#configuration-precedence)」セクションを参照してください。
 
 [7]: /ja/tracing/trace_collection/library_config/
 [36]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
@@ -795,6 +901,16 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### 構成の優先順位 {#configuration-precedence}
+
+アドミッションの対象となる Pod の場合、Cluster Agent は以下の順序 (優先度の高い順) で APM 構成を選択します。
+
+1. `admission.datadoghq.com/java-lib.version` などの Pod アノテーション。
+1. ワークロードの `DatadogInstrumentation` APM 構成。
+1. [Datadog で定義されたインスツルメンテーションルール](?tab=instrumentationrulesindatadogv7842#target-specific-workloads) (有効な場合)。
+1. Agent で構成された `apm.instrumentation.targets` または `enabledNamespaces`。インスツルメンテーションルールの [デフォルトの動作](?tab=instrumentationrulesindatadogv7842#set-the-default-behavior)が [{{< ui >}}Block everything else{{< /ui >}}] (その他をすべてブロック) または [{{< ui >}}Allow everything else{{< /ui >}}] (その他をすべて許可) の場合、これらの設定は無視されます。
+1. クラスター全体のインスツルメンテーション (`apm.instrumentation.targets` なし、かつ Datadog にインスツルメンテーションルールがない状態で有効にした場合)。
+
 ### デフォルトのイメージレジストリを変更する {#change-the-default-image-registry}
 
 Datadog は、以下の gcr.io、Docker Hub、Amazon ECR にインスツルメンテーションライブラリのイメージを公開しています。
@@ -834,7 +950,7 @@ Datadog Cluster Agent の構成の中の `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMEN
 
    これらのイメージは、[gcr.io][12]、[Docker Hub][13]、または [Amazon ECR Public Gallery][14] にあります。
 
-2. イメージを構成に従ってタグ付けします。
+2. 構成に従ってイメージをタグ付けします。
 
    ミラーリングするバージョンは、ワークロードで設定されているバージョンと一致している必要があります。これらは以下のいずれかの方法で設定されていることがあります。
    - DDI リソース内の `spec.config.apm.ddTraceVersions` でワークロードごとに、
@@ -843,7 +959,7 @@ Datadog Cluster Agent の構成の中の `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMEN
 
    明示的にバージョンが設定されていない場合は、デフォルトバージョン (`0`) が使用されます。
 
-   例:
+   たとえば、次のようになります。
 
    ```
    apm:
@@ -861,9 +977,9 @@ Datadog Cluster Agent の構成の中の `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMEN
    - `dd-lib-java-init:1`
    - `dd-lib-python-init:3`
 
-3. プライベートレジストリを使用するよう、クラスター Agent 構成を更新します。
+3. プライベートレジストリを使用するよう、Cluster Agent 構成を更新します。
 
-   プライベートレジストリを使用するように、クラスター Agent 構成の中で `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数を設定します。
+   プライベートレジストリを使用するように、Cluster Agent 構成の中で `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数を設定します。
 
 コンテナレジストリを変更する詳細については、[コンテナレジストリの変更][33]を参照してください。
 
@@ -913,9 +1029,9 @@ spec:
 
 リソースを適用し、ステータスに変更が反映されていることを確認し、ワークロードを再起動します。既存の Pod は、置き換えられるまでインスツルメントされたままになります。
 
-#### インスツルメンテーションルールを使用して、特定のワークロードをターゲットにする {#use-instrumentation-rules-to-target-specific-workloads}
+#### ターゲティングルールを使用して特定のワークロードをターゲットにする {#use-targeting-rules-to-target-specific-workloads}
 
-インスツルメンテーションルール (Agent v7.64 以上で利用可能) を使用すると、特定のアプリケーションのトレースを有効または無効にできます。[構成の詳細についてはこちらでご確認ください](#advanced-options)。
+ターゲティングルール (Agent v7.64 以上で利用可能) を使用すると、特定のアプリケーションのトレースを有効または無効にできます。構成の詳細については、「[高度なオプション](#advanced-options)」セクションを参照してください。
 
 #### Datadog Admission Controller を使用する {#use-the-datadog-admission-controller}
 
@@ -951,7 +1067,7 @@ spec:
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml` の中で `instrumentation.enabled=false` を設定します。
+1. `datadog-agent.yaml` で `instrumentation.enabled=false` を設定します。
    ```yaml
    features:
      apm:
@@ -967,7 +1083,7 @@ spec:
 
 {{% tab "Helm" %}}
 
-1. `datadog-values.yaml` の中で `instrumentation.enabled=false` を設定します。
+1. `datadog-values.yaml` で `instrumentation.enabled=false` を設定します。
    ```yaml
    datadog:
      apm:
@@ -1083,7 +1199,7 @@ targets:
 
 {{% /collapse-content %}}
 
-## トラブルシューティング {#troubleshooting}
+## トラブルシューティング{#troubleshooting}
 
 SSI で APM を有効にする際に問題が発生した場合は、[SSI トラブルシューティングガイド][35]を参照してください。
 

@@ -2,7 +2,8 @@
 aliases:
 - /ko/service_management/incident_management/zoom_integration/
 - /ko/incident_response/incident_management/zoom_integration
-description: 클릭 한 번으로 또는 자동으로 Datadog 인시던트에 대한 Zoom 회의를 만들고 AI 회의 요약을 생성할 수 있습니다.
+description: 클릭 한 번으로 또는 자동으로 Datadog 인시던트에 대한 Zoom 회의를 만들고, AI 회의 요약 및 실시간 녹취록 노트북을
+  생성할 수 있습니다.
 further_reading:
 - link: /incident_response/incident_management/setup_and_configuration/integrations
   tag: 설명서
@@ -10,14 +11,14 @@ further_reading:
 - link: /integrations/zoom-incident-management/
   tag: 설명서
   text: Zoom Incident Management 통합
-- link: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+- link: /incident_response/incident_management/investigate/meeting_summaries_and_transcripts
   tag: 설명서
-  text: Incident AI의 회의 요약
+  text: 회의 요약 및 녹취록
 title: Zoom과 Datadog Incident Management 통합
 ---
 ## 개요 {#overview}
 
-Datadog Incident Management용 Zoom 통합을 통해 팀이 인시던트에 대한 Zoom 회의를 시작할 수 있습니다. 사용자가 정의한 기준에 따라 클릭 한 번으로 또는 자동으로 회의를 생성할 수 있습니다. 인시던트 Zoom 회의의 AI 요약을 생성할 수도 있습니다.
+Datadog Incident Management용 Zoom 통합을 통해 팀이 인시던트에 대한 Zoom 회의를 시작할 수 있습니다. 사용자가 정의한 기준에 따라 클릭 한 번으로 또는 자동으로 회의를 생성할 수 있습니다. 인시던트 Zoom 회의의 실시간 녹취록 노트북과 AI 요약을 생성할 수도 있습니다.
 
 ## 전제 조건 {#prerequisites}
 
@@ -66,7 +67,7 @@ Datadog이 권한 있는 Zoom 계정에서 호스트 이메일을 확인할 수 
 1. [**Settings > Integrations**][2]로 이동하여 **Zoom**을 선택합니다.
 2. **Enable Zoom meeting creation**을 활성화합니다.
 3. **Fallback user account** 아래에 권한 있는 Zoom 계정과 연동된 이메일을 입력합니다. 직원이 퇴사할 때 발생하는 문제를 방지하려면 공유 사용자를 사용하세요.
-4. (선택 사항) 모든 Zoom 회의의 호스트로 폴백 사용자를 사용하려면 **Always use this account as the meeting host**를 켜세요.
+4. (선택 사항) 모든 Zoom 회의의 호스트로 폴백 사용자를 사용하려면 **Always use this account as the meeting host**를 켭니다.
 5. 설정을 저장합니다.
 
 ### Slack 북마크 {#slack-bookmark}
@@ -81,27 +82,35 @@ Datadog이 권한 있는 Zoom 계정에서 호스트 이메일을 확인할 수 
 
 Slack의 추가 기능에 대한 자세한 내용은 [Slack과 Datadog Incident Management 통합][4]을 참조하세요.
 
-### 회의 요약 {#meeting-summaries}
+### 회의 요약 및 녹취록 {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">선택한 Datadog 사이트에서는 회의 요약을 사용할 수 없습니다({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">선택한 Datadog 사이트에서는 회의 요약 및 실시간 회의 녹취록을 사용할 수 없습니다({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-AI 생성 회의 요약을 활성화하여 인시던트 Zoom 회의를 자동으로 요약할 수 있습니다.
+Incident AI는 인시던트 Zoom 회의의 요약을 생성하고 필요시 실시간 회의 녹취록을 Datadog 노트북에 저장할 수 있습니다.
 
-<div class="alert alert-info">회의 요약이 활성화되면 Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">하위 프로세서</a>가 회의 오디오를 녹음하고 전사합니다. 7일의 보존 기간이 지나면 하위 프로세서가 모든 데이터를 자동으로 삭제합니다.</div>
+<div class="alert alert-info">회의 요약이 활성화되면 Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">하위 프로세서</a>가 회의 오디오를 녹음하고 전사합니다. 보존 세부 정보는 회의 요약 및 녹취록의 <a href="/incident_response/incident_management/investigate/meeting_summaries_and_transcripts/#retention-and-deletion">보존 및 삭제</a>를 참조하세요.</div>
 
-인시던트 Zoom 회의에 대한 회의 요약을 활성화하려면 다음 단계를 따르세요.
+#### 전제 조건 {#prerequisites-1}
+
+- 조직에서 AI 기능을 활성화해야 합니다.
+- 인시던트 설정을 편집할 권한이 있는 계정을 사용해야 합니다.
+- 실시간 회의 녹취록을 저장하려면 조직에 실시간 회의 녹취록에 대한 액세스 권한이 있어야 합니다. **Generate meeting transcripts** 설정을 사용할 수 없는 경우 [Datadog 지원팀][5]에 문의하세요.
+- Incident AI가 요약을 생성할 수 있도록 Zoom에서 회의 자막을 활성화해야 합니다.
+
+#### 회의 요약 및 녹취록 활성화 {#enable-meeting-summaries-and-transcripts}
+
+인시던트 Zoom 회의에 대한 회의 요약 및 녹취록을 활성화하려면 다음 단계를 따르세요.
 
 1. [**Settings > Integrations**][2]로 이동하여 **Zoom**을 선택합니다.
 2. **Enable Zoom meeting creation**을 활성화합니다.
 3. **Generate AI meeting summaries**를 활성화합니다.
-4. (선택 사항) 특정 인시던트의 회의가 요약되지 않도록 조건을 추가합니다. 기본적으로 Incident AI는 프라이빗 인시던트에 대한 회의를 요약하지 않습니다.
-5. 설정을 저장합니다.
+4. (선택 사항) 실시간 회의 녹취록을 저장하려면 **Generate meeting transcripts**를 켭니다. 이 설정은 **Generate AI meeting summaries** 아래에 표시됩니다.
+5. (선택 사항) 특정 인시던트에 대한 요약을 방지하기 위한 조건을 추가합니다.
+6. 설정을 저장합니다.
 
-**참고**: Incident AI가 요약을 생성할 수 있도록 Zoom에서 회의 자막을 활성화하세요.
-
-필수 조건, 요약 게시 위치, 요약 검토 및 회의 기록자 재초대에 대한 자세한 내용은 [Incident AI의 회의 요약][5]을 참조하세요.
+요약을 검토하고, 녹취록을 확인하고, 녹취록 노트북 액세스를 관리하고, 녹취 담당자를 다시 초대하려면 [회의 요약 및 녹취록][6]을 참조하세요.
 
 ## 추가 자료 {#further-reading}
 
@@ -111,4 +120,5 @@ AI 생성 회의 요약을 활성화하여 인시던트 Zoom 회의를 자동으
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /ko/incident_response/incident_management/guides/test_incidents
 [4]: /ko/incident_response/incident_management/setup_and_configuration/integrations/slack
-[5]: /ko/incident_response/incident_management/investigate/incident_ai/#meeting-summaries
+[5]: /ko/help/
+[6]: /ko/incident_response/incident_management/investigate/meeting_summaries_and_transcripts

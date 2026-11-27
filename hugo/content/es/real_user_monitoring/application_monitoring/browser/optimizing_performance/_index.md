@@ -22,6 +22,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rum-optimization/
   tag: Blog
   text: 'De los datos a la acción: Optimice Core Web Vitals y más con Datadog RUM'
+- link: https://www.datadoghq.com/blog/lighthouse-audits-rum-synthetic-monitoring/
+  tag: Blog
+  text: Realice un seguimiento de las puntuaciones de Lighthouse junto con los datos
+    de usuarios reales en Datadog
 title: Optimización del rendimiento
 ---
 ## Descripción general {#overview}
@@ -119,7 +123,7 @@ La auditoría se ejecuta una vez por ejecución de prueba, en la URL final a la 
 - **SEO**: Mide si los motores de búsqueda pueden descubrir, comprender e indexar la página.
 - **Agentic**: Mide qué tan bien pueden los agentes de IA comprender, navegar e interactuar con la página.
 
-### Requisitos previos {#prerequisites-1}
+### Prerequisites {#prerequisites-1}
 
 - Una [prueba Synthetic de navegador][7] que se ejecuta en **Chrome de escritorio** desde una ubicación administrada (Datadog).
 - [Recopilación de datos de RUM habilitada en la prueba][16], con una aplicación de RUM seleccionada. La prueba inyecta el SDK de navegador de RUM en la página que carga, por lo que el sitio probado no necesita ser instrumentado para RUM por separado.
@@ -156,7 +160,7 @@ En la **página de resumen de Performance Monitoring**, la sección {{< ui >}}Li
 
 El atributo `@synthetics.lighthouse_audited` se establece en `true` en cada opción para visualizar que se haya auditado. Para encontrar las opciones auditadas para visualizar en el [explorador de RUM][17], cambie el tipo de evento a {{< ui >}}Views{{< /ui >}} y busque `@synthetics.lighthouse_audited:true`. Las opciones auditadas para visualizar provienen de pruebas Synthetic y no de sesiones de usuarios reales, así que elimine cualquier filtro `@session.type:user` de la consulta.
 
-Las puntuaciones de las categorías están disponibles como métricas, por lo que puede graficarlas en tableros y configurar monitores para alertar sobre regresiones:
+Las puntuaciones de las categorías están disponibles como métricas, por lo que puede graficarlas en paneles y configurar monitores para alertar sobre regresiones:
 
 - `rum.measure.lighthouse.performance`
 - `rum.measure.lighthouse.accessibility`

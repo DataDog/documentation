@@ -95,11 +95,11 @@ Cliquez sur une violation pour ouvrir un panneau latéral contenant des informat
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-violation.png" alt="Panneau latéral pour une violation d'analyse statique" style="width:80%;">}}  -->
 
-Le contenu de la violation est réparti dans plusieurs onglets :
+Le contenu de la violation est réparti dans plusieurs onglets :
 
-- {{< ui >}}Details{{< /ui >}} : Une description de la violation et des lignes de code qui l'ont provoquée. Pour voir l'extrait de code incriminé, configurez l'intégration de code source appropriée pour votre fournisseur ([GitHub][4], [GitLab][5], Azure[6]).
-- {{< ui >}}Remediation{{< /ui >}} : Une ou plusieurs corrections de code permettant de résoudre la violation, avec des options de remédiation.
-- {{< ui >}}Event{{< /ui >}} : Métadonnées JSON concernant la violation.
+- {{< ui >}}Details{{< /ui >}} : Une description de la violation et des lignes de code qui l'ont provoquée. Pour voir l'extrait de code incriminé, configurez l'intégration de code source appropriée pour votre fournisseur ([GitHub][4], [GitLab][5], Azure[6]).
+- {{< ui >}}Remediation{{< /ui >}} : Une ou plusieurs corrections de code permettant de résoudre la violation, avec des options de remédiation.
+- {{< ui >}}Event{{< /ui >}} : Métadonnées JSON concernant la violation.
 
 ### Exclure les faux positifs {#filter-out-false-positives}
 Pour un sous-ensemble de vulnérabilités SAST, Bits AI peut examiner le contexte et évaluer s'il s'agit plus probablement d'un vrai ou d'un faux positif, accompagné d'une brève explication du raisonnement. 
@@ -109,16 +109,20 @@ Pour plus d'informations, consultez [Static Code Analysis amélioré par l'IA][1
 ## Personnalisez votre configuration {#customize-your-configuration}
 Pour personnaliser les règles de Static Code Analysis configurées dans vos dépôts ou dans l'ensemble de votre organisation, consultez la [documentation de configuration][8].
 
-## Liez les résultats aux services et équipes Datadog {#link-findings-to-datadog-services-and-teams}
-Pour lier les résultats aux services et équipes Datadog, consultez la [documentation de configuration][13].
+## Hiérarchisez les résultats en tenant compte du contexte d’exécution {#prioritize-findings-with-runtime-context}
+
+Les résultats de Static Code Analysis montrent les services auxquels chaque résultat est associé et les risques d’exécution que ces services comportent, tels que {{< ui >}}Service in Production{{< /ui >}} et {{< ui >}}Service Exposed to Attacks{{< /ui >}}. Utilisez les facettes {{< ui >}}Risks{{< /ui >}} pour vous concentrer sur les résultats dans les services en cours d’exécution et exposés. Pour plus d’informations, consultez [Hiérarchisez les résultats en tenant compte du contexte d’exécution][18].
+
+## Liez les résultats aux services et Datadog Teams {#link-findings-to-datadog-services-and-teams}
+Pour lier les résultats aux services et Datadog Teams, consultez la [documentation de configuration][13].
 
 ## Appliquer les corrections suggérées {#apply-suggested-fixes}
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Onglet Corrections d'une violation d'analyse statique" style="width:80%;">}} -->
 
-Dans Datadog Static Code Analysis, il existe deux types de corrections suggérées :
+Dans Datadog Static Code Analysis, il existe deux types de corrections suggérées :
 
-1. **Correction suggérée déterministe :** Pour les violations simples comme les problèmes de linting, l'analyseur de règles fournit automatiquement des corrections basées sur des modèles.
-2. **Correctif suggéré par l'IA :** Pour les violations complexes, les correctifs ne sont généralement pas disponibles à l'avance. Au lieu de cela, vous pouvez utiliser les correctifs suggérés par l'IA, qui utilisent GPT-4 d'OpenAI pour générer un correctif suggéré. Vous pouvez choisir entre les correctifs {{< ui >}}Text{{< /ui >}} et {{< ui >}}Unified Diff{{< /ui >}}, qui produisent respectivement des instructions en texte brut ou une modification de code pour résoudre la violation.
+1. **Correction suggérée déterministe :** Pour les violations simples comme les problèmes de linting, l'analyseur de règles fournit automatiquement des corrections basées sur des modèles.
+2. **Correctif suggéré par l'IA :** Pour les violations complexes, les correctifs ne sont généralement pas disponibles à l'avance. Au lieu de cela, vous pouvez utiliser les correctifs suggérés par l'IA, qui utilisent GPT-4 d'OpenAI pour générer un correctif suggéré. Vous pouvez choisir entre les correctifs {{< ui >}}Text{{< /ui >}} et {{< ui >}}Unified Diff{{< /ui >}}, qui produisent respectivement des instructions en texte brut ou une modification de code pour résoudre la violation.
 
 <!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Indicateur visuel d'un correctif suggéré par l'analyse statique par défaut" style="width:60%;">}}
 
@@ -168,7 +172,7 @@ Si vous pensez qu'une violation spécifique est un faux positif, vous pouvez la 
 
 <!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Bouton pour signaler une violation de Static Code Analysis comme faux positif" style="width:60%;">}} -->
 
-## <!-- Lectures complémentaires
+## <!-- Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}} -->
 
@@ -189,3 +193,4 @@ Si vous pensez qu'une violation spécifique est un faux positif, vous pouvez la 
 [15]: /fr/integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /fr/integrations/azure-devops-source-code/
 [17]: /fr/security/code_security/static_analysis/ai_enhanced_sast/
+[18]: /fr/security/code_security/runtime_context/

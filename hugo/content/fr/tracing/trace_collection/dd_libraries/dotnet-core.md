@@ -17,7 +17,7 @@ code_lang_weight: 60
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: Documentation
-  text: Associer vos logs d'application .NET à vos traces
+  text: Connectez les logs de votre application .NET aux traces
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: Documentation
   text: Métriques runtime
@@ -29,46 +29,51 @@ further_reading:
   text: Explorer vos services, ressources et traces
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
   tag: Blog
-  text: Surveillance .NET avec l'APM et le tracing distribué de Datadog
+  text: Surveillance .NET avec Datadog APM et le tracing distribué
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: Blog
-  text: Surveiller des applications ASP.NET Core conteneurisées
+  text: Surveillez les applications ASP.NET Core conteneurisées
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: Blog
   text: Déployer des applications ASP.NET Core sur Azure App Service
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: Blog
-  text: Optimiser les performances de votre application .NET avec le profileur en
-    continu Datadog
+  text: Optimisez les performances de votre application .NET avec Datadog Continuous
+    Profiler
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: Code source
   text: Exemples d'instrumentation personnalisée
 - link: https://github.com/DataDog/dd-trace-dotnet
   tag: Code source
   text: Code source
-title: Tracer des applications .NET Core
+- link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
+  tag: Centre d'apprentissage
+  text: Configurez et gérez le SDK APM pour vos applications
+title: Tracing d'applications .NET Core
 type: multi-code-lang
 ---
 ## Exigences de compatibilité {#compatibility-requirements}
 
 ### Runtimes .NET Core pris en charge {#supported-net-core-runtimes}
 
-Le traceur .NET prend en charge l'instrumentation sur .NET Core 3.1, .NET 5, .NET 6, .NET 7, .NET 8, .NET 9 et .NET 10.
+Le .NET Tracer prend en charge l'instrumentation sur .NET Core 3.1, .NET 5, .NET 6, .NET 7, .NET 8, .NET 9 et .NET 10.
 
-Pour obtenir la liste complète des bibliothèques et architectures de processeur .NET Core de Datadog prises en charge (y compris les anciennes versions et les versions de maintenance), consultez la section relative aux [exigences de compatibilité][1].
+Pour obtenir une liste complète de la prise en charge des bibliothèques .NET Core et des architectures de processeur par Datadog (y compris les versions héritées et de maintenance), consultez les [Exigences de compatibilité][1].
 
 ## Installation et prise en main {#installation-and-getting-started}
 
+<div class="alert alert-tip">Datadog recommande <a href="/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a> (SSI), qui installe le SDK .NET et gère sa version à partir de la configuration de votre Datadog Agent, sans modifier le code de votre application. Utilisez la configuration manuelle sur cette page si <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI ne prend pas en charge votre environnement</a> ou si vous devez gérer le SDK dans le code de votre application.</div>
+
 <div class="alert alert-info">
-    Pour configurer Datadog APM dans des environnements sans serveur, tels qu'AWS Lambda ou Azure Functions, voir <a href="/serverless">Serverless</a>.
+    Pour configurer Datadog APM dans des environnements Serverless, tels qu'AWS Lambda ou Azure Functions, consultez <a href="/serverless">Serverless</a>.
 </div>
 
 <div class="alert alert-danger">
-  <strong>Remarque :</strong> L'instrumentation automatique de Datadog repose sur l'API de profilage .NET CLR. Cette API permet uniquement un abonné (par exemple, Datadog APM). Pour garantir une visibilité maximale, exécutez uniquement une solution APM dans votre environnement d'application. 
+  <strong>Remarque :</strong> L'instrumentation automatique de Datadog repose sur la .NET CLR Profiling API. Cette API n'autorise qu'un seul abonné (par exemple, Datadog APM). Pour garantir une visibilité maximale, exécutez une seule solution APM au sein de votre environnement d'application. 
 </div>
 
 <div class="alert alert-info">
-  Pour instrumenter des applications réduites, référencez le package NuGet <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> dans votre projet.
+  Pour instrumenter les applications utilisant le trimming, référencez le package NuGet <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> dans votre projet.
 </div>
 
 ### Installation {#installation}
@@ -77,57 +82,57 @@ Avant de commencer, vérifiez que vous avez bien [installé et configuré l'Agen
 
 1. [Installez le SDK.](#install-the-sdk)
 2. [Activez le SDK pour votre service.](#enable-the-sdk-for-your-service)
-3. [Consultez vos données en direct.](#view-your-live-data)
+3. [Affichez vos données en temps réel.](#view-your-live-data)
 
 ### Installez le SDK {#install-the-sdk}
 
-Après avoir installé et configuré votre agent Datadog, l'étape suivante consiste à ajouter le SDK directement dans l'application pour l'instrumenter. Pour en savoir plus, consultez [les informations de compatibilité][1].
+Une fois le Datadog Agent installé et configuré, l'étape suivante consiste à ajouter le SDK directement dans l'application pour l'instrumenter. Consultez les [informations de compatibilité][1] pour en savoir plus.
 
-Vous pouvez installer le traceur .NET Datadog à l'échelle de la machine afin que tous les services sur la machine soient instrumentés, ou vous pouvez l'installer sur une base par application pour permettre aux développeurs de gérer l'instrumentation via les dépendances de l'application. Pour voir les instructions d'installation à l'échelle de la machine, cliquez sur l'onglet Windows ou Linux. Pour voir les instructions d'installation par application, cliquez sur l'onglet NuGet.
+Vous pouvez installer le Datadog .NET Tracer à l'échelle de la machine afin d'instrumenter tous ses services, ou l'installer par application pour permettre aux développeurs de gérer l'instrumentation via les dépendances de l'application. Pour consulter les instructions d'installation à l'échelle de la machine, cliquez sur l'onglet Windows ou Linux. Pour consulter les instructions d'installation par application, cliquez sur l'onglet NuGet.
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
-Pour installer le traceur .NET à l'échelle de la machine, procédez comme suit :
+Pour installer le .NET Tracer à l'échelle de la machine :
 
-1. Téléchargez le [.NET Tracer MSI installer][1]. Utilisez l'installateur MSI x64 si vous exécutez Windows 64 bits ; cela peut instrumenter à la fois des applications 64 bits et 32 bits. Choisissez uniquement l'installateur x86 si vous exécutez Windows 32 bits. À partir de la version 3.0.0, seul l'installateur x64 est fourni, car nous ne supportons pas les systèmes d'exploitation 32 bits.
+1. Téléchargez le [programme d'installation MSI du .NET Tracer][1]. Utilisez le programme d'installation MSI x64 si vous exécutez Windows 64 bits ; cela permet d'instrumenter les applications 64 bits et 32 bits. Choisissez le programme d'installation x86 uniquement si vous exécutez Windows 32 bits. À partir de la version 3.0.0, seul le programme d'installation x64 est fourni, car nous ne prenons pas en charge les systèmes d'exploitation 32 bits.
 
-2. Exécutez l'installateur MSI .NET Tracer avec des privilèges d'administrateur.
+2. Exécutez le programme d'installation MSI du .NET Tracer avec des privilèges d'administrateur.
 
-Vous pouvez également automatiser la configuration MSI en exécutant ce qui suit dans PowerShell : `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
+Vous pouvez également scripter l'installation MSI en exécutant la commande suivante dans PowerShell : `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-Pour installer le traceur .NET à l'échelle de la machine, procédez comme suit :
+Pour installer le .NET Tracer à l'échelle de la machine :
 
-1. Téléchargez le dernier [.NET Tracer package][1] qui prend en charge votre système d'exploitation et votre architecture.
+1. Téléchargez la dernière version du [package .NET Tracer][1] compatible avec votre système d'exploitation et votre architecture.
 
-2. Exécutez l'une des commandes suivantes pour installer le package et créer le répertoire de journaux .NET Tracer `/var/log/datadog/dotnet` avec les autorisations appropriées :
+2. Exécutez l'une des commandes suivantes pour installer le package et créer le répertoire des logs du traceur .NET `/var/log/datadog/dotnet` avec les autorisations appropriées :
 
    Debian ou Ubuntu
-   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
+    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
 
    CentOS ou Fedora
-   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
+    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
 
-   Alpine ou autre distribution basée sur musl
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
+   Alpine ou autres distributions basées sur musl
+    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Autres distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
+    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
 
-#### Conteneurs ciselés {#chiseled-containers}
+#### Conteneurs chiseled {#chiseled-containers}
 
-Pour installer le .NET Tracer dans des images Docker ciselées ou distroless (sans shell), utilisez les commandes Dockerfile suivantes :
+Pour installer le .NET Tracer dans des images Docker chiseled ou distroless (sans shell), utilisez les commandes Dockerfile suivantes :
 
-- Utilisez `ADD` pour placer les fichiers SDK dans le conteneur.
-- Utilisez `COPY --chown=$APP_UID` avec un dossier vide comme source pour créer le chemin des journaux.
+- Utilisez `ADD` pour placer les fichiers du SDK dans le conteneur.
+- Utilisez `COPY --chown=$APP_UID` avec un dossier vide comme source pour créer le chemin des logs.
 
-Par exemple, dans votre Dockerfile :
+Par exemple, dans votre Dockerfile :
 
 ```dockerfile
 ADD datadog-dotnet-apm-<TRACER_VERSION>.tar.gz /opt/datadog/
@@ -140,10 +145,10 @@ COPY --chown=$APP_UID --from=<OTHER_STAGE> /empty/ /var/log/datadog/dotnet/
 {{% tab "NuGet" %}}
 
 <div class="alert alert-danger">
-  <strong>Remarque :</strong> Cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour les applications s'exécutant dans IIS, suivez le processus d'installation à l'échelle de la machine Windows.
+  <strong>Remarque :</strong> Cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour les applications s'exécutant dans IIS, suivez la procédure d'installation à l'échelle de la machine pour Windows.
 </div>
 
-Pour installer le traceur .NET pour certaines applications, procédez comme suit :
+Pour installer le .NET Tracer par application :
 
 1. Ajoutez le `Datadog.Trace.Bundle` [package NuGet][1] à votre application.
 
@@ -154,9 +159,9 @@ Pour installer le traceur .NET pour certaines applications, procédez comme suit
 
 ### Activez le SDK pour votre service {#enable-the-sdk-for-your-service}
 
-Pour activer le traceur .NET pour votre service, définissez les variables d'environnement requises et redémarrez l'application.
+Pour activer le .NET Tracer pour votre service, définissez les variables d'environnement requises et redémarrez l'application.
 
-Pour des informations sur les différentes méthodes de configuration des variables d'environnement, consultez [Configuration des variables d'environnement du processus](#configuring-process-environment-variables).
+Pour plus d'informations sur les différentes méthodes de définition des variables d'environnement, consultez [Configuration des variables d'environnement de processus](#configuring-process-environment-variables).
 
 {{< tabs >}}
 
@@ -164,13 +169,13 @@ Pour des informations sur les différentes méthodes de configuration des variab
 
 #### Internet Information Services (IIS) {#internet-information-services-iis}
 
-1. L'installateur MSI .NET Tracer ajoute toutes les variables d'environnement requises. Il n'y a pas de variables d'environnement que vous devez configurer.
+1. Le programme d'installation MSI du .NET Tracer ajoute toutes les variables d'environnement requises. Il n'y a aucune variable d'environnement que vous devez configurer.
 
    <div class="alert alert-danger">
-     <strong>Remarque :</strong> Vous devez définir la <strong>version .NET CLR</strong> pour le pool d'applications sur <strong>Aucun code géré</strong> comme recommandé par <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
+     <strong>Remarque :</strong> Vous devez définir la <strong>.NET CLR version</strong> du pool d'applications sur <strong>No Managed Code</strong>, comme le recommande <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
    </div>
 
-2. Pour instrumenter automatiquement les applications hébergées dans IIS, arrêtez complètement et redémarrez IIS en exécutant les commandes suivantes en tant qu'administrateur :
+2. Pour instrumenter automatiquement les applications hébergées dans IIS, arrêtez et démarrez complètement IIS en exécutant les commandes suivantes en tant qu'administrateur :
 
    ```cmd
    net stop /y was
@@ -179,13 +184,13 @@ Pour des informations sur les différentes méthodes de configuration des variab
    ```
 
    <div class="alert alert-danger">
-     <strong>Remarque :</strong> Utilisez toujours les commandes ci-dessus pour arrêter complètement et redémarrer IIS afin d'activer le SDK. Évitez d'utiliser l'application GUI du Gestionnaire IIS ou <code>iisreset.exe</code>.
+     <strong>Remarque :</strong> Utilisez toujours les commandes ci-dessus pour arrêter et redémarrer complètement IIS afin d'activer le SDK. Évitez d'utiliser l'application graphique IIS Manager ou <code>iisreset.exe</code>.
    </div>
 
 
-#### Services non dans IIS {#services-not-in-iis}
+#### Services non hébergés dans IIS {#services-not-in-iis}
 
-1. Définissez les variables d'environnement requises suivantes pour que l'instrumentation automatique s'attache à votre application :
+1. Définissez les variables d'environnement requises suivantes pour que l'instrumentation automatique puisse s'attacher à votre application :
 
    ```
    CORECLR_ENABLE_PROFILING=1
@@ -196,7 +201,7 @@ Pour des informations sur les différentes méthodes de configuration des variab
 
 {{% tab "Linux" %}}
 
-1. Définissez les variables d'environnement requises suivantes pour que l'instrumentation automatique s'attache à votre application :
+1. Définissez les variables d'environnement requises suivantes pour que l'instrumentation automatique puisse s'attacher à votre application :
 
    ```
    CORECLR_ENABLE_PROFILING=1
@@ -205,13 +210,13 @@ Pour des informations sur les différentes méthodes de configuration des variab
    DD_DOTNET_TRACER_HOME=/opt/datadog
    ```
 
-2. Pour les applications autonomes, redémarrez manuellement l'application comme vous le feriez normalement.
+2. Pour les applications autonomes, redémarrez manuellement l'application comme vous le faites habituellement.
 
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
 
-Suivez les instructions dans le fichier readme du package, également disponible dans [`dd-trace-dotnet` dépôt][1].
+Suivez les instructions du fichier README du package, également disponible dans le [`dd-trace-dotnet` dépôt][1].
 Des exemples Docker sont également disponibles dans le [dépôt][2].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
@@ -220,35 +225,35 @@ Des exemples Docker sont également disponibles dans le [dépôt][2].
 
 {{< /tabs >}}
 
-### Affichez vos données en direct {#view-your-live-data}
+### Affichez vos données en temps réel {#view-your-live-data}
 
-Après avoir activé le traceur .NET pour votre service, procédez comme suit :
+Après avoir activé le .NET Tracer pour votre service :
 
 1. Redémarrez votre service.
 
-2. Générez une charge sur votre application.
+2. Générez une charge applicative.
 
-3. Dans Datadog, accédez à [**APM** > **APM Traces**][3].
+3. Dans Datadog, accédez à [{{< ui >}}APM{{< /ui >}} > {{< ui >}}APM Traces{{< /ui >}}][3].
 
 ## Configuration {#configuration}
 
-Si nécessaire, configurez le SDK pour envoyer les données de télémétrie de performance de l'application comme vous le souhaitez, y compris la configuration du Tagging de Service Unifié. Consultez [Configuration de la Bibliothèque][4] pour plus de détails.
+Si nécessaire, configurez le SDK pour envoyer les données de télémétrie de performance de l'application selon vos besoins, y compris la mise en place du marquage de service unifié (Unified Service Tagging) : Consultez [Configuration de la bibliothèque][4] pour plus de détails.
 
 ## Instrumentation personnalisée {#custom-instrumentation}
 
-L'instrumentation personnalisée dépend de votre instrumentation automatique et inclut des étapes supplémentaires selon la méthode :
+L'instrumentation personnalisée dépend de votre instrumentation automatique et inclut des étapes supplémentaires selon la méthode :
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
 <div class="alert alert-danger">
-  <strong>Remarque :</strong> À partir de la version 3.0.0, l'instrumentation personnalisée nécessite également que vous utilisiez l'instrumentation automatique. Vous devez viser à maintenir les versions des packages d'instrumentation automatique et personnalisée (par exemple : MSI et NuGet) synchronisées, et vous assurer de ne pas mélanger les versions majeures des packages.
+  <strong>Remarque :</strong> À partir de la version 3.0.0, l'instrumentation personnalisée nécessite également l'utilisation de l'instrumentation automatique. Vous devez veiller à maintenir les versions des packages d'instrumentation automatique et personnalisée (par exemple : MSI et NuGet) synchronisées, et vous assurer de ne pas mélanger les versions majeures des packages.
 </div>
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
-1. Instrumentez votre application en utilisant l'instrumentation automatique.
+1. Instrumentez votre application à l'aide de l'instrumentation automatique.
 2. Ajoutez le `Datadog.Trace` [package NuGet][1] à votre application.
 3. Dans le code de votre application, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouveaux spans.
 
@@ -258,11 +263,11 @@ Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 {{% tab "Linux" %}}
 
 <div class="alert alert-danger">
-  <strong>Remarque:</strong> À partir de la version 3.0.0, l'instrumentation personnalisée nécessite également que vous utilisiez l'instrumentation automatique. Vous devez viser à maintenir les versions des packages d'instrumentation automatique et personnalisée (par exemple : MSI et NuGet) synchronisées, et vous assurer de ne pas mélanger les versions majeures des packages.
+  <strong>Remarque :</strong> À partir de la version v3.0.0, l'instrumentation personnalisée nécessite également l'utilisation de l'instrumentation automatique. Vous devez veiller à maintenir les versions des packages d'instrumentation automatique et personnalisée (par exemple : MSI et NuGet) synchronisées, et vous assurer de ne pas mélanger les versions majeures des packages.
 </div>
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
-1. Instrumentez votre application en utilisant l'instrumentation automatique.
+1. Instrumentez votre application à l'aide de l'instrumentation automatique.
 2. Ajoutez le `Datadog.Trace` [package NuGet][1] à votre application.
 3. Dans le code de votre application, accédez au traceur global via la propriété `Datadog.Trace.Tracer.Instance` pour créer de nouveaux spans.
 
@@ -279,31 +284,31 @@ Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
 {{< /tabs >}}
 
-Pour découvrir comment ajouter des spans et des tags pour l'instrumentation personnalisée, consultez la [documentation relative à l'instrumentation personnalisée .NET][5].
+Pour plus d'informations sur l'ajout de spans et de tags pour l'instrumentation personnalisée, consultez la [documentation relative à l'instrumentation personnalisée .NET][5].
 
-## Configuration des variables d'environnement du processus {#configuring-process-environment-variables}
+## Configuration des variables d'environnement de processus {#configuring-process-environment-variables}
 
-Pour attacher l'instrumentation automatique à votre service, vous devez définir les variables d'environnement requises avant de démarrer l'application. Voir la section [Activer le SDK pour votre service](#enable-the-sdk-for-your-service) pour identifier quelles variables d'environnement définir en fonction de votre méthode d'installation du Traceur .NET et suivez les exemples ci-dessous pour définir correctement les variables d'environnement en fonction de l'environnement de votre service instrumenté.
+Pour associer l'instrumentation automatique à votre service, vous devez définir les variables d'environnement requises avant de démarrer l'application. Consultez la section [Activer le SDK pour votre service](#enable-the-sdk-for-your-service) pour identifier les variables d'environnement à définir en fonction de votre méthode d'installation de .NET Tracer, et suivez les exemples ci-dessous pour définir correctement les variables d'environnement en fonction de l'environnement de votre service instrumenté.
 
 ### Windows {#windows}
 
 <div class="alert alert-danger">
-  <strong>Remarque:</strong> Le runtime .NET essaie de charger la bibliothèque .NET dans <em>tout</em> processus .NET qui est démarré avec ces variables d'environnement définies. Vous devez limiter l'instrumentation uniquement aux applications qui doivent être instrumentées. <strong>Ne définissez pas ces variables d'environnement globalement car cela entraîne que <em>tous</em> les processus .NET sur l'hôte soient instrumentés.</strong>
+  <strong>Remarque :</strong> Le runtime .NET tente de charger la bibliothèque .NET dans <em>n'importe quel</em> processus .NET démarré avec ces variables d'environnement définies. Vous devriez limiter l'instrumentation aux seules applications qui doivent être instrumentées. <strong>Ne définissez pas ces variables d'environnement globalement, car cela entraîne l'instrumentation de <em>tous</em> les processus .NET sur le host.</strong>
 </div>
 
 #### Services Windows {#windows-services}
 
 {{< tabs >}}
 
-{{% tab "Éditeur de Registre" %}}
+{{% tab "Registry Editor" %}}
 
-Dans l'Éditeur de registre, créez une valeur multi-chaîne appelée `Environment` dans la clé `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` et définissez les données de valeur sur :
+Dans Registry Editor, créez une valeur multi-chaîne appelée `Environment` dans la clé `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` et définissez les données de la valeur sur :
 
 ```text
 CORECLR_ENABLE_PROFILING=1
 ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Utiliser l'Éditeur de registre pour créer des variables d'environnement pour un service Windows" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Utilisation de Registry Editor pour créer des variables d'environnement pour un service Windows" >}}
 
 {{% /tab %}}
 
@@ -318,25 +323,25 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 #### IIS {#iis}
 
-Après l'installation du MSI, aucune configuration supplémentaire n'est nécessaire pour instrumenter automatiquement vos sites IIS. Pour définir des variables d'environnement supplémentaires qui sont héritées par tous les sites IIS, effectuez les étapes suivantes :
+Après l'installation du MSI, aucune configuration supplémentaire n'est nécessaire pour instrumenter automatiquement vos sites IIS. Pour définir des variables d'environnement supplémentaires héritées par tous les sites IIS, effectuez les étapes suivantes :
 
-1. Ouvrez l'Éditeur de registre, trouvez la valeur multi-chaîne appelée `Environment` dans la clé `HKLM\System\CurrentControlSet\Services\WAS`, et ajoutez les variables d'environnement, une par ligne. Par exemple, pour ajouter l'injection de journaux et les métriques d'exécution, ajoutez les lignes suivantes aux données de valeur :
+1. Ouvrez Registry Editor, recherchez la valeur multi-chaîne appelée `Environment` dans la clé `HKLM\System\CurrentControlSet\Services\WAS` et ajoutez les variables d'environnement, une par ligne. Par exemple, pour ajouter l'injection de logs et les métriques d'exécution, ajoutez les lignes suivantes aux données de la valeur :
    ```text
    DD_LOGS_INJECTION=true
    DD_RUNTIME_METRICS_ENABLED=true
    ```
-2. Exécutez les commandes suivantes pour redémarrer IIS :
+2. Exécutez les commandes suivantes pour redémarrer IIS :
    ```cmd
    net stop /y was
    net start w3svc
    # Also, start any other services that were stopped when WAS was shut down.
    ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Utiliser l'Éditeur de registre pour créer des variables d'environnement pour tous les sites IIS" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Utilisation de Registry Editor pour créer des variables d'environnement pour tous les sites IIS" >}}
 
 #### Applications console {#console-applications}
 
-Pour instrumenter automatiquement une application console, définissez les variables d'environnement depuis un fichier de commandes avant de démarrer votre application :
+Pour instrumenter automatiquement une application console, définissez les variables d'environnement à partir d'un fichier batch avant de démarrer votre application :
 
 ```bat
 rem Set required environment variables
@@ -354,7 +359,7 @@ dotnet.exe example.dll
 
 #### Script Bash {#bash-script}
 
-Pour définir les variables d'environnement requises à l'aide d'un fichier bash avant le lancement de votre application :
+Pour définir les variables d'environnement requises à partir d'un fichier bash avant de démarrer votre application :
 
 ```bash
 # Set required environment variables
@@ -371,7 +376,7 @@ export DD_RUNTIME_METRICS_ENABLED=true
 dotnet example.dll
 ```
 
-<div class="alert alert-info"> Si vous utilisez Alpine Linux, définissez le <code>CORECLR_PROFILER_PATH</code> variable d'environnement vers un chemin pour les distributions basées sur musl : <code>linux-musl-x64/</code>.</div>
+<div class="alert alert-info"> Si vous utilisez Alpine Linux, définissez la <code>CORECLR_PROFILER_PATH</code> variable d'environnement sur un chemin pour les distributions basées sur musl : <code>linux-musl-x64/</code>.</div>
 
 #### Conteneur Docker Linux {#linux-docker-container}
 
@@ -394,9 +399,9 @@ Pour définir les variables d'environnement requises sur un conteneur Docker Lin
 
 #### `systemctl` (par service) {#systemctl-per-service}
 
-Lors de l'utilisation de `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez ajouter les variables d'environnement requises à charger pour un service spécifique.
+Lorsque vous utilisez `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez ajouter les variables d'environnement requises à charger pour un service spécifique.
 
-1. Créez un fichier appelé `environment.env` contenant :
+1. Créez un fichier nommé `environment.env` contenant :
 
     ```ini
     # Set required environment variables
@@ -409,24 +414,24 @@ Lors de l'utilisation de `systemctl` pour exécuter des applications .NET en tan
     DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
-2. Dans le fichier de configuration du service, référencez ceci comme un [`EnvironmentFile`][1] dans le bloc de service :
+2. Dans le fichier de configuration du service, référencez ceci en tant que [`EnvironmentFile`][1] dans le bloc de service :
 
     ```ini
     [Service]
     EnvironmentFile=/path/to/environment.env
     ExecStart=<command used to start the application>
     ```
-3. Redémarrez le service .NET pour que les paramètres de la variable d'environnement prennent effet.
+3. Redémarrez le service .NET pour que les paramètres des variables d'environnement prennent effet.
 
 #### `systemctl` (tous les services) {#systemctl-all-services}
 
 <div class="alert alert-danger">
-  <strong>Remarque :</strong> Le runtime .NET essaie de charger la bibliothèque .NET dans <em>tout</em> processus .NET qui est démarré avec ces variables d'environnement définies. Vous devez limiter l'instrumentation uniquement aux applications qui doivent être instrumentées. <strong>Ne définissez pas ces variables d'environnement globalement, car cela entraîne l'instrumentation de tous les processus .NET sur l'hôte.</strong>
+  <strong>Remarque :</strong> Le runtime .NET tente de charger la bibliothèque .NET dans <em>n'importe quel</em> processus .NET démarré avec ces variables d'environnement définies. Vous devriez limiter l'instrumentation aux seules applications qui doivent être instrumentées. <strong>Ne définissez pas ces variables d'environnement globalement, car cela entraîne l'instrumentation de <em>tous</em> les processus .NET sur le host.</strong>
 </div>
 
 Lorsque vous utilisez `systemctl` pour exécuter des applications .NET en tant que service, vous pouvez également définir des variables d'environnement à charger pour tous les services exécutés par `systemctl`.
 
-1. Définissez les variables d'environnement requises en exécutant [`systemctl set-environment`][6] :
+1. Définissez les variables d'environnement requises en exécutant [`systemctl set-environment`][6] :
 
     ```bash
     # Set required environment variables
@@ -443,7 +448,7 @@ Lorsque vous utilisez `systemctl` pour exécuter des applications .NET en tant q
 
 3. Redémarrez le service .NET pour que les variables d'environnement prennent effet.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -4,10 +4,10 @@ aliases:
 description: 실험 결과를 읽고 이해하세요.
 further_reading:
 - link: /product_analytics/analytics_explorer/
-  tag: 문서
+  tag: 설명서
   text: Analytics Explorer
 - link: /experiments/diagnostics/
-  tag: 문서
+  tag: 설명서
   text: 실험 진단
 - link: https://www.datadoghq.com/blog/datadog-product-analytics/
   tag: 블로그
@@ -20,7 +20,7 @@ title: 실험 결과 읽기
 
 - **메트릭 측정**: 의사결정 메트릭에서 대조군과 처리군의 성과를 비교하는 스코어카드를 검토합니다.
 - **결과 추가 분석**: 사용자 세그먼트별로 메트릭 상승폭을 세분화하거나 시간 경과에 따른 상승폭을 플롯하여 변경 사항이 코호트 전반에서 어떻게 수행되었는지 이해합니다.
-- **Session Replay 검사**: 개별 사용자 세션 리플레이를 열어 특정 사용자가 각 버전을 어떻게 경험했는지 확인합니다.
+- **Session Replay 검사**: 개별 사용자 Session Replay를 열어 특정 사용자가 각 버전을 어떻게 경험했는지 확인합니다.
 - **학습 내용 문서화**: 팀을 위한 결론 및 시사점을 기록합니다.
 
 다음 섹션에서는 메트릭 스코어카드와 결과를 탐색하는 방법을 설명합니다.
@@ -75,13 +75,31 @@ Relative lift = (Treatment − Control) / Control
 
 실험은 일반적으로 적격 사용자 중 일부만 참여시킵니다. 메트릭 스코어카드의 {{< ui >}}Global lift{{< /ui >}} 탭으로 전환하여 적격 사용자 전체에게 처리군을 적용할 경우 전체 메트릭 합계에 미치는 영향을 추정할 수 있습니다. 전체 방법론은 [글로벌 상승폭][7]을 참조하세요.
 
-{{< img src="/product_analytics/experiment/exp_reading_global_lift.png" alt="실험 스코어카드의 글로벌 상승폭 탭에서 각 의사결정 메트릭에 대한 대조군 및 처리군 평균 메트릭 값, 커버리지, 글로벌 상승폭을 보여줍니다." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_reading_global_lift.png" alt="실험 스코어카드의 Global lift 탭에서 각 의사결정 메트릭에 대한 대조군 및 처리군 평균 메트릭 값, 적용 범위, 글로벌 상승폭을 보여줍니다." style="width:90%;" >}}
 
 각 메트릭에 대해 {{< ui >}}Global lift{{< /ui >}} 탭은 다음을 표시합니다.
 
 - **대조군 및 처리군 값**: 각 버전의 대상자당 평균 메트릭 값으로, 주요 스코어카드 탭에 표시된 값과 동일합니다.
-- **커버리지**: 실험의 적격 사용자와 관련된 글로벌 메트릭 합계의 추정 비율입니다(실험의 효과는 제외).
-- **글로벌 상승폭**: 모든 적격 사용자에게 처리군을 적용했을 경우 전체 메트릭 합계에 영향을 미칠 것으로 예상되는 변화입니다. Datadog은 커버리지와 실험의 로컬(상대적) 상승폭을 곱하여 글로벌 상승폭을 계산합니다.
+- **적용 범위**: 실험의 적격 사용자와 관련된 글로벌 메트릭 합계의 추정 비율입니다(실험의 효과는 제외).
+- **글로벌 상승폭**: 모든 적격 사용자에게 처리군을 적용했을 경우 전체 메트릭 합계에 영향을 미칠 것으로 예상되는 변화입니다. Datadog은 적용 범위와 실험의 로컬(상대적) 상승폭을 곱하여 글로벌 상승폭을 계산합니다.
+
+### 통계 세부 정보 {#statistical-details}
+
+메트릭 스코어카드의 {{< ui >}}Statistical details{{< /ui >}} 탭(계산기 아이콘)은 그룹 평균 및 리프트 추정치 외에도 실험의 [분석 방법][2]에 대한 추가 통계를 보여줍니다. [CUPED][15]가 켜져 있으면 통계는 CUPED 조정 결과를 사용합니다. 전체 방법론은 [리프트 및 구간 계산][12]과 [예상 후회 및 EVSI][13]를 참조하세요.
+
+고정 표본, 순차적 및 순차적 하이브리드 분석의 경우, 탭에는 다음이 포함됩니다.
+
+- **Standard Error**: 상대적 리프트 추정치의 표준 오차(퍼센트 포인트 단위)입니다. 값이 작을수록 추정치가 더 정밀합니다.
+- **p-value**: 값이 작을수록 실제 효과에 대한 증거가 더 강하다는 뜻입니다. 각 분석 방법에 대한 기술적 해석은 [리프트 및 구간 계산][14]을 참조하세요.
+- **z-score**: 리프트 추정치와 0 사이의 표준 오차 수입니다. 부호는 변화의 방향을 나타내며, 바람직한지 여부를 나타내지는 않습니다.
+
+베이지안 분석의 경우, 탭에는 다음이 포함됩니다.
+
+- **Prob. Beats Control**: 처리군이 메트릭을 원하는 방향으로 이동시킬 사후 확률입니다.
+- **Min. Expected Regret**: 더 나아 보이는 변형이 잘못된 선택으로 판명될 경우 잃게 되는 리프트로, 그럴 가능성에 대해 평균을 낸 값입니다. Datadog은 이를 대조군 값의 백분율로 표시합니다.
+- **EVSI**: 대조군 값의 백분율로 나타낸 표본 정보의 기대 가치입니다. EVSI는 실험이 최근 트래픽 수준으로 계속 진행될 경우 최소 예상 후회가 얼마나 감소할지를 정량화합니다. EVSI가 최소 예상 후회에 비해 작으면, 더 많은 데이터를 수집해도 가치가 거의 없을 것으로 예상됩니다. 열 머리글의 툴팁은 Datadog이 가정하는 기간과 트래픽을 보여줍니다.
+
+대시(—)는 통계를 사용할 수 없음을 의미합니다. EVSI의 경우, 이유를 확인하려면 대시 위로 마우스를 가져가세요.
 
 ## 홀드아웃 결과 {#holdout-results}
 
@@ -95,7 +113,7 @@ Relative lift = (Treatment − Control) / Control
 
 메트릭에서 {{< ui >}}Chart{{< /ui >}}를 클릭하면 실험 기간 동안 메트릭이 어떻게 수행되었는지 보여주는 대화형 시각화가 열립니다. 차트 내에서 다음을 수행할 수 있습니다.
 
-- **세분화 속성별 분할**: 기기 유형이나 사용자 계층과 같은 코호트 전반의 상승폭을 비교합니다. 속성은 노출 초기 시점의 대상자 속성을 반영합니다.
+- **세분화 속성별 분할**: 장치 유형이나 사용자 계층과 같은 코호트 전반의 상승폭을 비교합니다. 속성은 노출 초기 시점의 대상자 속성을 반영합니다.
 - **시간 경과에 따른 상승폭 플롯**: 달력 기준 날짜별 또는 각 대상자가 실험에 처음 노출된 후 경과한 일수별로 플롯된 실험 전반의 상승 추이를 확인합니다.
 - **필터 추가**: 차트를 특정 대상자 하위 집합으로 좁힙니다.
 - **상승폭 유형 전환**: 상대적 상승폭과 절대적 상승폭(처리군 - 대조군) 간에 전환합니다.
@@ -128,3 +146,7 @@ Relative lift = (Treatment − Control) / Control
 [9]: /ko/experiments/diagnostics/
 [10]: /ko/experiments/holdouts/
 [11]: /ko/experiments/holdouts/#interpret-results
+[12]: /ko/experiments/statistics/lift_and_interval_calculations/
+[13]: /ko/experiments/statistics/expected_regret_and_evsi/
+[14]: /ko/experiments/statistics/lift_and_interval_calculations/#calculate-the-interval
+[15]: /ko/experiments/statistics/cuped/

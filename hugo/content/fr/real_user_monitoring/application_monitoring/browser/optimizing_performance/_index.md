@@ -11,7 +11,7 @@ further_reading:
   text: Configurez les tests de navigateur dans Synthetic Monitoring
 - link: https://learn.datadoghq.com/courses/rum-optimize-frontend-performance
   tag: Centre d'apprentissage
-  text: 'Interactive Lab : Optimisez les performances frontend avec Datadog RUM Browser
+  text: 'Interactive Lab : Optimisez les performances frontend avec Datadog RUM Browser
     Monitoring'
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
@@ -21,8 +21,12 @@ further_reading:
   text: Surveiller les signaux Web essentiels avec Datadog RUM et Synthetic Monitoring
 - link: https://www.datadoghq.com/blog/rum-optimization/
   tag: Blog
-  text: 'Des données à l''action : Optimisez les Core Web Vitals et plus encore avec
+  text: 'Des données à l''action : Optimisez les Core Web Vitals et plus encore avec
     Datadog RUM'
+- link: https://www.datadoghq.com/blog/lighthouse-audits-rum-synthetic-monitoring/
+  tag: Blog
+  text: Suivez les scores Lighthouse parallèlement aux données des utilisateurs réels
+    dans Datadog
 title: Optimisation des performances
 ---
 ## Présentation {#overview}
@@ -35,7 +39,7 @@ Pour une analyse plus approfondie, la page Optimization fournit une répartition
 
 ## Prérequis {#prerequisites}
 
-Pour optimiser votre application, assurez-vous d'utiliser :
+Pour optimiser votre application, assurez-vous d'utiliser :
 
 - [RUM Browser SDK][3] version 5.4.0 ou ultérieure
 - [Session Replay][4] pour au moins certaines sessions
@@ -46,22 +50,22 @@ Accédez à la [page Optimization][5], située sous l'onglet [{{< ui >}}Digital 
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/page-selectors.png" alt="Vous pouvez vérifier la page Optimization pour les pages les plus visitées ou pour des pages spécifiques." style="width:100%;" >}}
 
-Depuis cette vue, il existe deux façons de sélectionner une page ou un indicateur vital :
+Depuis cette vue, il existe deux façons de sélectionner une page ou un indicateur vital :
 
 - Choisissez parmi les pages les plus visitées sur une treemap
 - Saisissez un nom de vue dans la zone de saisie et sélectionnez la page
 
-Les indicateurs vitaux disponibles incluent :
+Les indicateurs vitaux disponibles incluent :
 
-- **[Loading Time (LT)][2]** : KPI personnalisé de Datadog qui mesure le temps de chargement d'une page du point de vue de l'utilisateur.
-- **[Largest Contentful Paint (LCP)][8]** : mesure la rapidité avec laquelle le plus grand élément visuel de votre page se charge, ce qui est un facteur critique tant pour l'expérience utilisateur que pour le classement SEO. Un LCP lent peut frustrer les utilisateurs, augmenter les taux de rebond et nuire à la visibilité dans les recherches. La page Optimization décompose le LCP en sous-parties (Time to First Byte (TTFB), délai de chargement des ressources, temps de chargement des ressources, délai de rendu) afin que vous puissiez identifier quelle phase contribue le plus à la métrique globale.
-- **[First Contentful Paint (FCP)][9]** : mesure le temps écoulé entre le moment où l'utilisateur a accédé à la page pour la première fois et celui où une partie du contenu de la page est affichée à l'écran. Un FCP rapide aide à rassurer l'utilisateur sur le fait qu'une action est en cours.
-- **[Cumulative Layout Shift (CLS)][10]** : mesure la plus grande série de décalages de mise en page inattendus qui se produisent pendant le cycle de vie d'une page. Un décalage de mise en page se produit lorsqu'un élément visible se déplace d'une image rendue à la suivante sans aucune interaction de l'utilisateur, perturbant la stabilité visuelle de la page. Un KPI important pour mesurer la stabilité visuelle, car il aide à quantifier la fréquence à laquelle les utilisateurs rencontrent des décalages de mise en page inattendus. Un CLS faible contribue à garantir que la page est agréable.
-- **[Interaction to Next Paint (INP)][11]** : mesure le temps nécessaire pour qu'une page réponde visuellement après qu'un utilisateur a interagi avec elle. La page Optimization décompose l'INP en sous-parties (délai d'entrée, durée de traitement, délai de présentation) afin que vous puissiez déterminer si le goulot d'étranglement est dû à une contention du thread principal, à l'exécution des gestionnaires d'événements ou au rendu.
+- **[Loading Time (LT)][2]** : KPI personnalisé de Datadog qui mesure le temps de chargement d'une page du point de vue de l'utilisateur.
+- **[Largest Contentful Paint (LCP)][8]** : mesure la rapidité avec laquelle le plus grand élément visuel de votre page se charge, ce qui est un facteur critique tant pour l'expérience utilisateur que pour le classement SEO. Un LCP lent peut frustrer les utilisateurs, augmenter les taux de rebond et nuire à la visibilité dans les recherches. La page Optimization décompose le LCP en sous-parties (Time to First Byte (TTFB), délai de chargement des ressources, temps de chargement des ressources, délai de rendu) afin que vous puissiez identifier quelle phase contribue le plus à la métrique globale.
+- **[First Contentful Paint (FCP)][9]** : mesure le temps écoulé entre le moment où l'utilisateur a accédé à la page pour la première fois et celui où une partie du contenu de la page est affichée à l'écran. Un FCP rapide aide à rassurer l'utilisateur sur le fait qu'une action est en cours.
+- **[Cumulative Layout Shift (CLS)][10]** : mesure la plus grande série de décalages de mise en page inattendus qui se produisent pendant le cycle de vie d'une page. Un décalage de mise en page se produit lorsqu'un élément visible se déplace d'une image rendue à la suivante sans aucune interaction de l'utilisateur, perturbant la stabilité visuelle de la page. Un KPI important pour mesurer la stabilité visuelle, car il aide à quantifier la fréquence à laquelle les utilisateurs rencontrent des décalages de mise en page inattendus. Un CLS faible contribue à garantir que la page est agréable.
+- **[Interaction to Next Paint (INP)][11]** : mesure le temps nécessaire pour qu'une page réponde visuellement après qu'un utilisateur a interagi avec elle. La page Optimization décompose l'INP en sous-parties (délai d'entrée, durée de traitement, délai de présentation) afin que vous puissiez déterminer si le goulot d'étranglement est dû à une contention du thread principal, à l'exécution des gestionnaires d'événements ou au rendu.
 
 ## Filtrer et évaluer {#filter-and-evaluate}
 
-Après avoir sélectionné une page et un indicateur vital, analysez les informations sur les performances :
+Après avoir sélectionné une page et un indicateur vital, analysez les informations sur les performances :
 
 - Ajustez la période dans le coin supérieur droit
 - Utilisez les menus déroulants pour filtrer par attributs
@@ -86,7 +90,7 @@ Pour les métriques Largest Contentful Paint et Interaction to Next Paint, la pa
 
 ## Diagnostiquer les problèmes liés aux ressources et aux erreurs {#troubleshoot-resources-and-errors}
 
-Dans la section de dépannage, vous pouvez voir les ressources et les erreurs que les utilisateurs ont rencontrées sur la page et qui pourraient avoir affecté la performance de l'indicateur vital. Par exemple, pour le Largest Contentful Paint (LCP), vous pouvez voir les ressources qui ont été chargées avant que le LCP ne soit déclenché. Puisque le LCP est un indicateur du temps nécessaire au chargement du plus grand élément sur la page, vous pourriez examiner les points suivants :
+Dans la section de dépannage, vous pouvez voir les ressources et les erreurs que les utilisateurs ont rencontrées sur la page et qui pourraient avoir affecté la performance de l'indicateur vital. Par exemple, pour le Largest Contentful Paint (LCP), vous pouvez voir les ressources qui ont été chargées avant que le LCP ne soit déclenché. Puisque le LCP est un indicateur du temps nécessaire au chargement du plus grand élément sur la page, vous pourriez examiner les points suivants :
 
 - Tout ce qui se produit avant cela pourrait causer des lenteurs ou des problèmes de rendu
 - Les ressources particulièrement lentes ou volumineuses pourraient contribuer aux problèmes de performance
@@ -112,11 +116,11 @@ Pour une analyse plus approfondie des causes profondes, utilisez le profilage de
 
 Un [test Synthetic de navigateur][7] peut exécuter un audit Lighthouse et envoyer les scores à la vue RUM correspondante. Les mesures de laboratoire Lighthouse complètent les données recueillies auprès des utilisateurs réels sur cette page, afin que vous puissiez suivre régulièrement la qualité du front-end.
 
-L'audit s'exécute une fois par exécution de test, sur l'URL finale atteinte par le test, et fournit cinq scores, un par catégorie, allant de 0 à 100 :
+L'audit s'exécute une fois par exécution de test, sur l'URL finale atteinte par le test, et fournit cinq scores, un par catégorie, allant de 0 à 100 :
 
-- **Performance** : mesure la rapidité avec laquelle la page se charge, affiche le contenu et devient interactive.
-- **Accessibility** : mesure dans quelle mesure les personnes handicapées peuvent naviguer sur la page et l'utiliser, sur la base de checks automatisés.
-- **Best Practices** : mesure si la page respecte les normes modernes en matière de sécurité, de compatibilité avec les navigateurs et de qualité du code.
+- **Performance** : mesure la rapidité avec laquelle la page se charge, affiche le contenu et devient interactive.
+- **Accessibility** : mesure dans quelle mesure les personnes handicapées peuvent naviguer sur la page et l'utiliser, sur la base de checks automatisés.
+- **Best Practices** : mesure si la page respecte les normes modernes en matière de sécurité, de compatibilité avec les navigateurs et de qualité du code.
 - **SEO** : mesure si les moteurs de recherche peuvent découvrir, comprendre et indexer la page.
 - **Agentic** : mesure dans quelle mesure les agents IA peuvent comprendre la page, y naviguer et interagir avec elle.
 

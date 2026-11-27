@@ -17,6 +17,9 @@ further_reading:
   tag: Blog
   text: 'Novedades en Cloud SIEM: investigaciones impulsadas por IA, inteligencia
     de amenazas mejorada y operaciones de seguridad escalables'
+- link: https://www.datadoghq.com/blog/cloud-siem-investigate-user-entity-risks/
+  tag: Blog
+  text: Investigue a la persona detrás del riesgo con Datadog Cloud SIEM
 title: Riesgos de entidad
 ---
 ## Descripción general {#overview}

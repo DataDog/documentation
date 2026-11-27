@@ -5,7 +5,7 @@ further_reading:
   text: Datadog과 OpenTelemetry 호환성
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: 설명서
-  text: 사용자 지정 OpenTelemetry 구성 요소 사용
+  text: Agent의 Collector에 구성 요소 추가
 - link: /opentelemetry/instrument/
   tag: 설명서
   text: OpenTelemetry를 사용하여 애플리케이션 계측
@@ -25,7 +25,7 @@ title: OpenTelemetry를 사용하여 지원되지 않는 런타임 계측
 
 ## 전제 조건 {#prerequisites}
 
-- Datadog으로 데이터를 보내도록 구성된 OpenTelemetry 호환 백엔드. DDOT Collector, OpenTelemetry Collector 또는 직접 OTLP ingest를 포함한 설정 옵션은 [Send OpenTelemetry Data to Datadog][4]를 참조하십시오.
+- Datadog으로 데이터를 보내도록 구성된 OpenTelemetry 호환 백엔드. DDOT Collector, OpenTelemetry Collector 또는 직접 OTLP 수집을 포함한 설정 옵션은 [Datadog으로 OpenTelemetry 데이터 전송][4]을 참조하세요.
 - [Bun][2] 설치됨(v1.0 이상).
 - 계측하려는 Bun 애플리케이션.
 
@@ -50,7 +50,7 @@ bun add @opentelemetry/api \
 
 Node.js에서 OpenTelemetry는 일반적으로 `--require` 플래그를 통해 로드되며, 이때 애플리케이션 코드가 실행되기 전에 계측을 미리 로드합니다. Bun의 모듈 확인 시스템은 다르게 작동하므로 대신 프로그래밍 방식으로 OpenTelemetry를 초기화해야 합니다.
 
-OpenTelemetry Node.js SDK를 구성하는 `tracing.ts` 파일을 만듭니다:
+OpenTelemetry Node.js SDK를 구성하는 `tracing.ts` 파일을 만듭니다.
 
 {{< code-block lang="typescript" filename="tracing.ts" >}}
 import { NodeSDK } from '@opentelemetry/sdk-node';
@@ -93,7 +93,7 @@ process.on('SIGTERM', () => {
 
 ### 애플리케이션 진입점에서 텔레메트리 초기화 {#initialize-telemetry-at-your-application-entry-point}
 
-`tracing.ts` 모듈을 다른 애플리케이션이 가져오기 **전에** 먼저 가져옵니다. 자동 계측을 위해 라이브러리를 패치하려면 OpenTelemetry SDK가 먼저 초기화되어야 합니다.
+`tracing.ts` 모듈을 애플리케이션의 다른 모듈을 가져오기 **전에** 먼저 가져옵니다. 자동 계측을 위해 라이브러리를 패치하려면 OpenTelemetry SDK가 먼저 초기화되어야 합니다.
 
 {{< code-block lang="typescript" filename="index.ts" >}}
 import './tracing';
@@ -158,7 +158,7 @@ export function startServer() {
 
 더 많은 수동 계측 패턴은 [OpenTelemetry JS 계측 문서][7]를 참조하세요.
 
-### Datadog에서 트레이스 확인 {#verify-traces-in-datadog}
+### Datadog에서 트레이스 검증 {#verify-traces-in-datadog}
 
 애플리케이션이 몇 가지 요청을 처리한 후:
 

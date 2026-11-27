@@ -13,7 +13,7 @@ title: 使用量の詳細
 管理者は、左下のユーザー名にカーソルを合わせて [Usage][1] ページにアクセスし、以下に移動します。
 `Plan & Usage`--> `Usage`.
 
-Usage ページには、製品カテゴリー別にグループ化された利用状況が表示されます。製品タブに移動してその製品カテゴリーに特化した利用状況を表示するか、[All] タブに移動して全製品の利用状況を表示します。各タブには、以下の情報が表示されます。
+Usage ページには、製品カテゴリ別にグループ化された利用状況が表示されます。製品タブに移動してその製品カテゴリに特化した利用状況を表示するか、[All] タブに移動して全製品の利用状況を表示します。各タブには、以下の情報が表示されます。
 
 * 月間累計サマリー
 * 全体の利用状況 (現在および過去)
@@ -29,7 +29,7 @@ Usage ページには、製品カテゴリー別にグループ化された利�
 
 {{< img src="account_management/billing/usage-details-v2-01.png" alt="利用状況サマリー - All タブ" >}}
 
-製品別のタブでは、その製品カテゴリーに含まれる製品の月間累計利用状況を確認します。
+製品別のタブでは、その製品カテゴリに含まれる製品の月間累計利用状況を確認します。
 
 {{< img src="account_management/billing/usage-details-v2-02.png" alt="利用状況サマリー - ネットワーク" >}}
 
@@ -74,7 +74,7 @@ API ユーザーは、エンドポイントを使用して [All][2] の利用状
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Datadog アプリケーションの Usage Trends グラフページ。Download as CSV オプションが強調表示されています。" style="width:100%; align:left" >}}
 
-サブタイプを持つ製品については、各カテゴリーがその製品のグラフ上で区別されます。
+サブタイプを持つ製品については、各カテゴリがその製品のグラフ上で区別されます。
 
 {{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="インフラストラクチャータブを選択した利用状況サマリー。インフラホスト、Agent ホスト、コンテナなど、インフラストラクチャーの利用状況サブタイプを示す複数のグラフ。" style="width:100%; align:left" >}}
 
@@ -123,7 +123,7 @@ Custom Metrics タブの Top Custom Metrics テーブルでは、当月集計の
 * このデータは CSV ファイルとしてダウンロードできます (最大 300,000 個のカスタムメトリクス)。[API エンドポイント][6]を使用して、300,000 個を超えるカスタムメトリクスをダウンロードできます。
 
 
-メトリクスの詳細を確認するには、対象のメトリクスの行にマウスオーバーし、右側に表示されるメーターアイコンをクリックして [Metrics Catalog][7] に移動します。
+メトリクスの詳細については、その行にカーソルを合わせ、右側にあるメーターアイコンをクリックして、Metrics Catalog ページでメトリクスを開いてください。詳細については、[Metrics Catalog のドキュメント][7]を参照してください。
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Top Custom Metrics テーブルの概要" >}}
 
@@ -169,7 +169,7 @@ Datadog アカウントがマルチ組織である場合、権限を持つ親組
 [4]: /ja/metrics/custom_metrics/
 [5]: https://app.datadoghq.com/billing/usage
 [6]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[7]: https://docs.datadoghq.com/ja/metrics/summary/#overview
+[7]: /ja/metrics/catalog/#overview
 [8]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /ja/help/
 [10]: mailto:success@datadoghq.com

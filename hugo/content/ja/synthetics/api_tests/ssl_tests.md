@@ -2,162 +2,148 @@
 algolia:
   category: Documentation
   rank: 70
-  subcategory: Synthetic API テスト
+  subcategory: Synthetic API Tests
   tags:
   - ssl
-  - ssl テスト
-  - ssl テスト
+  - ssl test
+  - ssl tests
 aliases:
 - /ja/synthetics/ssl_test
 - /ja/synthetics/ssl_check
-description: 世界中のロケーションから SSL 証明書を監視します
+description: 世界中のロケーションから SSL 証明書を監視する
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
-  text: Datadog Synthetic モニタリングの紹介
+  text: Datadog Synthetic Monitoring の紹介
 - link: /getting_started/synthetics/api_test
-  tag: Documentation
+  tag: ドキュメント
   text: API テストの概要
 - link: /synthetics/private_locations
-  tag: Documentation
+  tag: ドキュメント
   text: 内部ホストで SSL テストを実行する
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
 title: SSL テスト
 ---
+## 概要 {#overview}
 
-## 概要
+SSL テストを使用すると、SSL/TLS 証明書の有効性と有効期限を積極的にモニターし、主要なサービスとユーザー間に安全な接続を確実に提供できます。証明書の有効期限が近づいている場合や、証明書が侵害された場合、Datadog から問題の詳細が記載されたアラートが送信されるので、問題の根本原因を特定して修正できます。
 
-SSL テストを使用すると、SSL/TLS 証明書の有効性と有効期限をプロアクティブに監視して、主要なサービスとユーザー間の安全な接続を確保できます。証明書の有効期限が近づいているか、侵害された場合、Datadog は失敗の詳細を含むアラートを送信し、問題の根本原因をすばやく特定、修正できるようにします。
+SSL テストは、ネットワークの外部と内部のどちらからテストを実行するのかに応じて、[管理対象の](#select-locations)ロケーションと[プライベートロケーション][1]のいずれからでも実行できます。SSL テストは、スケジュールに従って、オンデマンドで、または [CI/CD パイプライン][2]内で直接実行できます。
 
-SSL テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。SSL テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
+## 構成 {#configuration}
 
-## 構成
+次のいずれかの方法でテストを作成します。
 
-You may create a test using one of the following options:
+- **テンプレートからテストを作成する**:
+   
+     1. 事前設定済みテンプレートのいずれかにカーソルを合わせて、[{{< ui >}}View Template{{< /ui >}}] をクリックします。すると、[Test Details] (テストの詳細)、[Request Details] (リクエストの詳細)、[Assertions] (アサーション)、[Alert Conditions] (アラートの条件)、[Monitor Settings] (モニターの設定) など、あらかじめ設定された構成情報が表示されるサイドパネルが開きます。
+     2. {{< ui >}}\+ Create Test{{< /ui >}} をクリックして {{< ui >}}Define Request{{< /ui >}} ページを開きます。このページで、事前に設定された構成オプションを確認し、編集できます。表示されるフィールドは、テストを一から作成する際に利用可能なフィールドと同じです。
+     3. {{< ui >}}Save Details{{< /ui >}} をクリックして、API テストを送信します。<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="テンプレートを使った Synthetics API テストのランディングページの動画" video="true" >}}
 
-- **Create a test from a template**:
+- **テストを一から作成する**:
 
-     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-     3. Click **Save Details** to submit your API test.<br /><br>
-        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
-
-- **Build a test from scratch**:
-
-   1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、SSL リクエストタイプを選択します。
-   1. テストを実行する **Host** と **Port** を指定します。デフォルトの SSL ポートは `443` です。
-   1. **Advanced Options** (オプション) をテストに追加します。
-      * **Accept self-signed certificates**: 自己署名証明書に関連するサーバーエラーをバイパスします。
-      * **Fail on revoked certificate in stapled OCSP**: 証明書が OCSP ステープリングによって取り消されたとラベル付けされた場合、テストに失敗します。
-      * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
-      * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
-      * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
-
-      `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+   1. テストを一から作成するには、[{{< ui >}}\+ Start from scratch{{< /ui >}}] (+ 一から開始する) テンプレートをクリックし、SSL リクエストタイプを選択します。
+   1. テストを実行する {{< ui >}}Host{{< /ui >}} と {{< ui >}}Port{{< /ui >}} を指定します。デフォルトの SSL ポートは `443` です。
+   1. テストに [{{< ui >}}Advanced Options{{< /ui >}}] (高度なオプション) を追加します (任意)。
+      * [{{< ui >}}Accept self-signed certificates{{< /ui >}}] (自己署名証明書を受け入れる): 自己署名証明書に関連するサーバーエラーをバイパスします。
+      * [{{< ui >}}Fail on revoked certificate in stapled OCSP{{< /ui >}}] (添付された OCSP で証明書が失効していた場合に失敗する): OCSP ステープリングで証明書が失効していると判定された場合、テストは失敗します。
+      * [{{< ui >}}Fail on incomplete certificate chain{{< /ui >}}] (不完全な証明書チェーンで失敗する): AIA フェッチを無効にします。そのため、サーバーの証明書チェーンで欠落している中間証明書があった場合、テストは失敗します。
+      * [{{< ui >}}Timeout{{< /ui >}}] (タイムアウト): テストがタイムアウトするまでの時間を秒単位で指定します。
+      * [{{< ui >}}Server Name{{< /ui >}}] (サーバー名): TLS ハンドシェイクを開始するサーバーを指定します。これにより、サーバーは同じ IP アドレスと TCP ポート番号で、使用できる複数の証明書のうちの 1 つを提示できるようになります。デフォルトでは、このパラメーターには [{{< ui >}}Host{{< /ui >}}] (ホスト) の値が設定されます。
+      * [{{< ui >}}Client certificate{{< /ui >}}] (クライアント証明書): クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS による認証を行います。
+   
+      `openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換できます。
 
       ```
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
 
-   1. SSL テストに**名前**を付けます。
+   1. [{{< ui >}}Name{{< /ui >}}] (名前) に SSL テストの名前を入力します。
 
-   1. SSL テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
-   1. **Test Certificate** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
+   1. [{{< ui >}}Tags{{< /ui >}}] (タグ) に、SSL テストに追加する環境タグおよびその他のタグを入力します。これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+   1. [{{< ui >}}Test Certificate{{< /ui >}}] (証明書をテスト) をクリックして、リクエストの構成を試します。画面の右側にレスポンスのプレビューが表示されます。<br /><br>
 
       {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
 
-   1. Click **Create Test** to submit your API test.
+   1. [{{< ui >}}Create Test{{< /ui >}}] (テストを作成) をクリックして、API テストを送信します。
 
+   
 
-
-### スニペット
+### スニペット {#snippets}
 
 {{% synthetics-api-tests-snippets %}}
 
-### アサーションを定義する
+### アサーションを定義する {#define-assertions}
 
-アサーションは、期待されるテスト結果が何であるかを定義します。**Test URL** をクリックした後、証明書の有効性、有効期限データ、TLS バージョン、`response time` の基本的なアサーションが、取得された応答に基づいて追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
+アサーションは、期待されるテスト結果を定義します。[{{< ui >}}Test URL{{< /ui >}}] (URL をテスト) をクリックすると、取得されたレスポンスに基づいて、証明書の有効性、有効期限データ、TLS バージョン、および `response time` の基本的なアサーションが追加されます。テストで監視するには、少なくとも 1 つのアサーションを定義する必要があります。
 
 | タイプ                  | 演算子                                                                               | 値の型                 |
 |-----------------------|----------------------------------------------------------------------------------------|----------------------------|
 | 証明書           | `expires in more than`、`expires in less than`                                         | _整数 (日数)_ |
 | プロパティ              | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`       | _文字列_ <br> _[正規表現][4]_ |
-| response time         | `is less than`                                                                         | 整数 (ms)             |
-| TLS 最大バージョン   | `is less than`、`is less than or equal`、`is`、`is more than`、`is more than or equal` | _Decimal_                  |
-| TLS 最小バージョン   | `is more than`、`is more than or equal`                                                | _Decimal_                  |
+| 応答時間         | `is less than`                                                                         | _整数 (ミリ秒)_             |
+| 最大 TLS バージョン   | `is less than`、`is less than or equal`、`is`、`is more than`、`is more than or equal` | _10 進数_                  |
+| 最小 TLS バージョン   | `is more than`、`is more than or equal`                                                | _10 進数_                  |
 
-**New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
+SSL テストは TLS 1.2 または TLS 1.3 で接続するため、サーバーはこれらのバージョンの少なくとも 1 つをサポートしている必要があります。`minimum TLS version` アサーションは、サーバーが受け入れるこれら 2 つのバージョンのうち、低いほうをチェックします。SSL テストでは TLS 1.0 または TLS 1.1 はテストされません。
 
-{{< img src="synthetics/api_tests/assertions_ssl.png" alt="SSL テストが成功または失敗するためのアサーションを定義する" style="width:90%;" >}}
+[{{< ui >}}New Assertion{{< /ui >}}] をクリックするか、レスポンスプレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
-アサーションで `OR` ロジックを実行するには、`matches regex` あるいは `does not match regex` コンパレータを使用して、`(0|100)` のように同じアサーションタイプに対して複数の期待値を設定した正規表現を定義します。プロパティアサーションの値が 0 あるいは 100 の場合、テストは成功です。
+{{< img src="synthetics/api_tests/assertions_ssl.png" alt="SSL テストの成功または失敗を判定するアサーションを定義する" style="width:90%;" >}}
 
-テストがレスポンス本文にアサーションを含まない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連するレスポンスタイムを返します。
+アサーションで `OR` ロジックを実行するには、`matches regex` または `does not match regex` コンパレーターを使用して、同じアサーションタイプに対して `(0|100)` のような複数の期待値を持つ正規表現を定義します。プロパティアサーションの値が 0 または 100 の場合、テスト結果は成功となります。
 
-テストがレスポンス本文に対するアサーションを含み、タイムアウトの制限に達した場合、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
+テストに応答本文に関するアサーションが含まれていない場合、本文のペイロードはドロップし、Synthetics Worker で設定されたタイムアウト制限内でリクエストに関連する応答時間が返されます。
 
-### ロケーションを選択する
+テストに応答本文に関するアサーションが含まれていて、タイムアウトの制限に達した場合は、`Assertions on the body/response cannot be run beyond this limit` というエラーが表示されます。
 
-SSL テストを実行する**ロケーション**を選択します。SSL テストは、ネットワークの外部または内部のどちらから証明書を監視するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
+### ロケーションを選択する {#select-locations}
+
+SSL テストの実行元となる [{{< ui >}}Locations{{< /ui >}}] (ロケーション) を選択します。SSL テストは、ネットワークの外部と内部のどちらから証明書を監視するのかに応じて、管理対象ロケーションと[プライベートロケーション][1]のいずれからでも実行できます。
 
 {{% managed-locations %}}
 
-### テストの頻度を指定する
+### テストの頻度を指定する {#specify-test-frequency}
 
-SSL テストは次の頻度で実行できます。
+SSL テストは次のように実行できます。
 
-* **On a schedule**: SSL/TLS 証明書が常に有効であり、主要なサービスのユーザーへの安全な接続が確保されるようにします。Datadog で SSL テストを実行する頻度を選択します。
-* [**Within your CI/CD pipelines**][2]。
-* **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
+* **スケジュールに従って実行**: SSL/TLS 証明書が常に有効であり、主要サービスのユーザーに対して常に安全な接続が提供されるようにします。Datadog で SSL テストを実行する頻度を選択します。
+* [**CI/CD パイプライン**][2]。
+[* **オンデマンド**]: チームにとって最適なタイミングでテストを実行します。
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 {{% synthetics-variables %}}
 
-### 変数を使用する
+### 変数を使用する {#use-variables}
 
-SSL テストの URL、高度なオプション、アサーションで、[**Settings** ページで定義されたグローバル変数][9]を使用することができます。
+SSL テストの URL、高度なオプション、アサーションでは、[[{{< ui >}}Settings{{< /ui >}}] (設定) ページで定義されたグローバル変数][9]を使用できます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
-## テストの失敗
+## テストの失敗 {#test-failure}
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが失敗することもあります。
 
-これらの理由には以下が含まれます。
+SSL エラーコードの完全なリストについては、「[API テストのエラー][10]」を参照してください。
 
-`CONNRESET`
-: 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
+## 権限 {#permissions}
 
-`DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
+デフォルトでは、[Datadog Admin および Datadog 標準のロール][11]を持つユーザーのみが、Synthetic SSL テストを作成、編集、削除できます。Synthetic SSL テストの作成、編集、削除権限を取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
 
-`INVALID_REQUEST`
-: テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
+[カスタムロール機能][12]を使用している場合は、`synthetics_read` および `synthetics_write` の権限を含むカスタムロールにユーザーを追加してください。
 
-`SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][10]。
-
-`TIMEOUT`
-: リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
-  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
-
-## 権限
-
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが、Synthetic SSL テストを作成、編集、削除できます。Synthetic SSL テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
-
-[カスタムロール機能][12]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
-
-### アクセス制限
+### アクセス制限 {#restrict-access}
 
 {{% synthetics_grace_permissions %}}
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -170,6 +156,6 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 [7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /ja/synthetics/guide/synthetic-test-monitors
 [9]: /ja/synthetics/settings/#global-variables
-[10]: /ja/synthetics/api_tests/errors/#ssl-errors
+[10]: /ja/synthetics/api_tests/errors/
 [11]: /ja/account_management/rbac/
 [12]: /ja/account_management/rbac#custom-roles

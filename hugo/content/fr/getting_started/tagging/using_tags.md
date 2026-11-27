@@ -18,16 +18,16 @@ title: Utiliser les tags
 
 Après avoir [attribué des tags][1], commencez à les utiliser pour filtrer et regrouper vos données sur votre plateforme Datadog. Les tags peuvent être utilisés pour inclure ou exclure des données.
 
-Lorsque vous souhaitez inclure ou exclure plusieurs tags :
+Lorsque vous souhaitez inclure ou exclure plusieurs tags :
 
 * Include utilise la logique `AND`
 * Exclude utilise la logique `OR`
 
-## Événements{#events}
+## Événements {#events}
 
 L'[Events Explorer][2] affiche les événements de votre environnement sur une période donnée. Utilisez des tags pour filtrer la liste des événements et vous concentrer sur un sous-ensemble d'événements. Saisissez `tags:` suivi d'un tag pour voir tous les événements provenant d'un host, d'une [intégration][3] ou d'un service avec ce tag. Par exemple, utilisez `tags:(service:coffee-house)` pour rechercher le tag `service:coffee-house`.
 
-Pour rechercher plusieurs tags de manière inclusive, séparez chaque tag par OR : `tags:(service:coffee-house OR host:coffeehouseprod)`. Pour rechercher plusieurs tags qui doivent tous être présents, séparez chaque tag par AND : `tags:(service:coffee-house AND host:coffeehouseprod)`.
+Pour rechercher plusieurs tags de manière inclusive, séparez chaque tag par OR : `tags:(service:coffee-house OR host:coffeehouseprod)`. Pour rechercher plusieurs tags qui doivent tous être présents, séparez chaque tag par AND : `tags:(service:coffee-house AND host:coffeehouseprod)`.
 
 ## Dashboards {#dashboards}
 
@@ -56,7 +56,7 @@ Utilisez `IN`, `NOT IN` pour filtrer rapidement une métrique sur des tags spéc
 
 Pour créer un groupe agrégé à l'aide de tags, saisissez la partie clé du tag dans la zone de texte {{< ui >}}avg by{{< /ui >}}. Par exemple, si vous avez un graphique de séries temporelles affichant une métrique taguée avec la clé `service`, telle que `service:web-store`, saisissez `service` dans la zone de texte {{< ui >}}avg by{{< /ui >}} pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour toutes les sources qui partagent cette valeur de tag `service`.
 
-{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Tags dans le champ « avg by » des dashboards" style="width:80%;">}}
+{{< img src="tagging/using_tags/dashboard_group_by_tags.png" alt="Tags dans le champ « avg by » des dashboards" style="width:80%;">}}
 
 Les tags peuvent également être utilisés pour superposer des événements sur le dashboard. Cela fonctionne de la même manière que dans l'[Events Explorer][2].
 Les événements correspondants sont superposés sous forme de barres verticales sur le graphique. L'exemple ci-dessous utilise `service:web-store`.
@@ -97,32 +97,32 @@ Pour filtrer [Host Map][4], [Infrastructure List][5], [Containers][6] et [Proces
 {{< tabs >}}
 {{% tab "Hostmap" %}}
 
-Depuis cette section, utilisez des tags pour filtrer ou regrouper des hosts :
+Depuis cette section, utilisez des tags pour filtrer ou regrouper des hosts :
 
 {{< img src="tagging/using_tags/hostmaptags.png" alt="Tags de Hostmap" style="width:80%;">}}
 
-Ou des conteneurs :
+Ou des conteneurs :
 
 {{< img src="tagging/using_tags/containermaptags.png" alt="Tags de Container Map" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Liste d'infrastructures" %}}
 
-La liste d'infrastructures propose les champs de filtrage et de regroupement suivants :
+La liste d'infrastructures propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/infrastructuretags.png" alt="Tags de Infrastructure List" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Containers" %}}
 
-La page des live containers propose les champs de filtrage et de regroupement suivants :
+La page des live containers propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/livecontainertags.png" alt="Tags de Live Container" style="width:80%;">}}
 {{% /tab %}}
 
 {{% tab "Processus" %}}
 
-La page Live Processes propose les champs de filtrage et de regroupement suivants :
+La page Live Processes propose les champs de filtrage et de regroupement suivants :
 
 {{< img src="tagging/using_tags/liveprocessestags.png" alt="Tags de Live Process" style="width:80%;">}}
 {{% /tab %}}
@@ -130,7 +130,7 @@ La page Live Processes propose les champs de filtrage et de regroupement suivant
 
 ## monitors {#monitors}
 
-Pour filtrer les monitors et les [downtimes des monitors][31] par [tags assignés][32], utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `tag:"<KEY>:<VALUE>"`, par exemple : `tag:"service:coffee-house"`. Pour faire correspondre n'importe quelle valeur d'une clé de tag, échappez le deux-points avec une barre oblique inverse (`\`) au lieu d'utiliser des guillemets, car les caractères génériques ne sont pas pris en charge entre guillemets. Par exemple, `tag:service\:*` renvoie tous les monitors qui possèdent un tag `service`. Pour exclure les monitors avec un tag spécifique de votre recherche, utilisez `-`, par exemple : `-tag:"service:coffee-house"`.
+Pour filtrer les monitors et les [downtimes des monitors][31] par [tags assignés][32], utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `tag:"<KEY>:<VALUE>"`, par exemple : `tag:"service:coffee-house"`. Pour faire correspondre n'importe quelle valeur d'une clé de tag, échappez le deux-points avec une barre oblique inverse (`\`) au lieu d'utiliser des guillemets, car les caractères génériques ne sont pas pris en charge entre guillemets. Par exemple, `tag:service\:*` renvoie tous les monitors qui possèdent un tag `service`. Pour exclure les monitors avec un tag spécifique de votre recherche, utilisez `-`, par exemple : `-tag:"service:coffee-house"`.
 
 {{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filtrer les monitors dans la barre de recherche avec des tags" style="width:80%;">}}
 
@@ -256,7 +256,7 @@ De plus, les tags permettent de filtrer un [Pipeline][14] de logs. Par exemple, 
 
 Le [RUM Explorer][15] représente les événements provenant de votre environnement sur une période donnée.
 
-Pour filtrer les données d'événements RUM par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`, par exemple : `service:shopist`. Pour une recherche avancée, consultez [Rechercher des événements RUM][16].
+Pour filtrer les données d'événements RUM par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`, par exemple : `service:shopist`. Pour une recherche avancée, consultez [Rechercher des événements RUM][16].
 
 {{< img src="tagging/using_tags/rumtags.png" alt="Tags RUM" style="width:80%;">}}
 
@@ -267,7 +267,7 @@ Pour filtrer les données d'événements RUM par tags, utilisez la barre de rech
 
 La page [Synthetic Tests][1] répertorie la liste de vos tests Synthetic.
 
-Pour filtrer les tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `tag:mini-website`. Pour une recherche avancée, consultez [Rechercher et gérer les tests Synthetic][2].
+Pour filtrer les tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `tag:mini-website`. Pour une recherche avancée, consultez [Rechercher et gérer les tests Synthetic][2].
 
 {{< img src="tagging/using_tags/syntheticstags.png" alt="Tags Synthetics" style="width:80%;">}}
 
@@ -279,7 +279,7 @@ Pour filtrer les tests par tags, utilisez la barre de recherche ou les cases à 
 
 La vue [Synthetic Monitoring & Testing Results Explorer][1] présente vos exécutions de test et lots d'exécutions au sein d'un [pipeline de CI][2].
 
-Pour filtrer les exécutions de tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `@ci.provider.name:github`. Pour une recherche avancée, consultez [Rechercher des lots de tests][3].
+Pour filtrer les exécutions de tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `@ci.provider.name:github`. Pour une recherche avancée, consultez [Rechercher des lots de tests][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Tags Synthetics et CI" style="width:80%;">}}
 
@@ -306,7 +306,7 @@ Les tags de SLO ne fonctionnent pas de la même façon que les tags appliqués a
 
 {{% tab "SLO basés sur des métriques" %}}
 
-Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de métrique dans les requêtes de calcul du taux de réussite du SLO (toutes les métriques doivent utiliser le même ensemble de tags de métrique) :
+Lorsque vous créez un [SLO basé sur des métriques][1], utilisez les tags de métrique dans les requêtes de calcul du taux de réussite du SLO (toutes les métriques doivent utiliser le même ensemble de tags de métrique) :
 
 * {{< ui >}}from{{< /ui >}} zone de texte pour limiter le périmètre de la métrique à ces tags uniquement.
 * {{< ui >}}sum by{{< /ui >}} zone de texte pour créer un SLO groupé basé sur une métrique qui affiche un pourcentage de statut et un budget d'erreur restant pour l'ensemble du SLO et pour chaque valeur de tag.
@@ -331,7 +331,7 @@ Lors de la création d'un [SLO basé sur un monitor][1] à partir d'un seul [mon
 
 La vue [CI Visibility Explorer][101] affiche vos exécutions de test dans un pipeline de CI.
 
-Pour filtrer les exécutions de tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `@test.status:failed`. Pour une recherche avancée, consultez [Syntaxe de recherche du Test Optimization Explorer][102].
+Pour filtrer les exécutions de tests par tags, utilisez la barre de recherche ou les cases à cocher des facettes. Le format de la barre de recherche est `<KEY>:<VALUE>`. Par exemple : `@test.status:failed`. Pour une recherche avancée, consultez [Syntaxe de recherche du Test Optimization Explorer][102].
 
 {{< img src="/continuous_integration/test_runs.png" alt="Exécutions de tests dans le CI Visibility Explorer" style="width:80%;">}}
 
@@ -363,7 +363,7 @@ Le [DORA Metrics Explorer][33] affiche vos agrégations DORA Metrics. Pour filtr
 
 Il existe diverses façons d'exploiter les tags avec l'[API][17].
 
-Consultez la liste de liens ci-dessous pour accéder aux rubriques correspondantes :
+Consultez la liste de liens ci-dessous pour accéder aux rubriques correspondantes :
 
 * [Planifier un downtime de monitor][18]
 * [Interroger l'Event Explorer][19]
@@ -406,7 +406,7 @@ Consultez la liste de liens ci-dessous pour accéder aux rubriques correspondant
 [20]: /fr/api/v1/hosts/
 [21]: /fr/api/v1/aws-integration/
 [22]: /fr/api/v1/gcp-integration/
-[23]: /fr/api/v1/metrics/#query-timeseries-points
+[23]: /fr/api/latest/metrics/#query-timeseries-points
 [24]: /fr/api/v1/monitors/#get-all-monitor-details
 [25]: /fr/api/v1/monitors/#mute-a-monitor
 [26]: /fr/api/v1/dashboards/#create-a-new-dashboard

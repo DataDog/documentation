@@ -25,6 +25,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/patterns-agent-observability/
   tag: Blog
   text: Comprenda el comportamiento de LLM en producción con Patterns en Agent Observability
+- link: https://www.datadoghq.com/blog/fine-tuning-patterns-baseten/
+  tag: Blog
+  text: Cómo realizamos el ajuste fino de un modelo más rápido para Patterns en Baseten
 title: Patterns
 ---
 ## Descripción general {#overview}

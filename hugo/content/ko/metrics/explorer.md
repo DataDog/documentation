@@ -74,8 +74,8 @@ Metrics Explorer는 최근 조사 기록을 자동으로 유지하므로 이전 
 가능한 옵션:
 
 * 보고된 값의 평균(기본값)
-* 보고된 값의 최댓값
-* 보고된 값의 최솟값
+* 보고된 값의 최대값
+* 보고된 값의 최소값
 * 보고된 값의 합계
 
 **참고**: 옵션은 선택한 메트릭 유형에 따라 달라질 수 있습니다.
@@ -86,7 +86,7 @@ Metrics Explorer는 최근 조사 기록을 자동으로 유지하므로 이전 
 
 ### 분할 그래프 {#split-graph}
 
-{{< ui >}}Split Graph{{< /ui >}} 버튼을 사용하여 리전, 서비스 또는 환경과 같은 태그 값을 기준으로 개별 그래프로 분할된 데이터를 조회할 수 있습니다.
+{{< ui >}}Split Graph{{< /ui >}} 버튼을 사용하여 region, service 또는 environment와 같은 하나 이상의 태그를 선택하고 태그 값 조합당 하나의 그래프를 확인하세요. 대시보드에 저장하면 하나의 태그에 대해서는 [분할 그래프 위젯][12]이 생성되고, 여러 태그에 대해서는 그룹 제목에 모든 분할 태그가 포함된 그래프 그룹이 생성됩니다.
 
 ### 내보내기 {#export}
 
@@ -119,3 +119,4 @@ Quick Graphs를 사용하면 [대시보드][4]나 [노트북][2]을 생성할 �
 [9]: /ko/monitors/
 [10]: /ko/dashboards/
 [11]: /ko/account_management/rbac/permissions/#access-management
+[12]: /ko/dashboards/widgets/split_graph/

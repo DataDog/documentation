@@ -11,6 +11,9 @@ further_reading:
 - link: /llm_observability/instrument/api/
   tag: 설명서
   text: Agent Observability HTTP API 참조
+- link: https://www.datadoghq.com/blog/agent-observability-voice-agent/
+  tag: 블로그
+  text: Datadog Agent Observability로 음성 에이전트 추적하기
 title: 멀티모달 지원
 ---
 ## 개요 {#overview}
@@ -41,7 +44,7 @@ LLM 스팬에 이미지와 오디오를 첨부하여 음성 에이전트 및 이
 
 | 통합 | 캡처된 미디어 | Datadog SDK 버전 |
 | ----------- | -------------- | ------------------- |
-| OpenAI 채팅 완료 | 입력 `input_audio` 콘텐츠 및 출력 오디오(모델의 오디오 대본 포함) | >= 4.12.0 |
+| OpenAI chat 완료 | 입력 `input_audio` 콘텐츠 및 출력 오디오(모델의 오디오 대본 포함) | >= 4.12.0 |
 | OpenAI Realtime API | 턴별 입력 및 출력 오디오, 대본, 토큰 사용량 및 도구 호출 | >= 4.13.0 |
 | Amazon Nova 2 Sonic(`aws-sdk-bedrock-runtime`) | 턴별 입력 및 출력 오디오, 대본, 토큰 사용량 및 도구 호출 | >= 4.17.0 |
 | ElevenLabs Agents(WebSocket) | 대화 입력 및 출력 오디오, 대본 및 클라이언트 도구 호출 | >= 4.17.0 |
@@ -62,8 +65,11 @@ Nova 2 Sonic 및 ElevenLabs에는 `ddtrace` 4.17 이상이 필요합니다. Nova
 | OpenAI 채팅 완료 | 입력 `input_audio` 콘텐츠 및 출력 오디오(모델의 오디오 대본 포함) | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI 에이전트 | OpenAI 채팅 완료 형식을 통한 입력 및 출력 오디오 | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Realtime API | 턴별 입력 및 출력 오디오, 대본, 토큰 사용량 및 도구 호출 | v6: >= 6.17.0; v5: >= 5.128.0 |
+| OpenAI Agents Realtime SDK | WebSocket 및 SIP sideband 연결의 턴별 입력 및 출력 오디오, 대본, 토큰 사용량 및 도구 호출 | v6: >= 6.25.0; v5: >= 5.136.0 |
 | Amazon Nova 2 Sonic(`@aws-sdk/client-bedrock-runtime`) | 턴별 입력 및 출력 오디오, 대본, 토큰 사용량 및 도구 호출 | v6: >= 6.22.0; v5: >= 5.133.0 |
-| ElevenLabs Agents(WebSocket) | 대화 입력 및 출력 오디오, 대본 및 클라이언트 도구 호출 | 출시 예정 |
+| ElevenLabs Agents (WebSocket) | 대화 입력 및 출력 오디오, 대본 및 클라이언트 도구 호출 | v6: >= 6.25.0; v5: >= 5.136.0 |
+
+OpenAI Agents Realtime SDK 계측에는 `@openai/agents-realtime` 0.20.0 이상이 필요합니다. SIP sideband에 대해 tracer가 요청하는 오디오 가져오기를 비활성화하려면 `DD_OPENAI_REALTIME_SIDEBAND_AUDIO_RETRIEVAL_ENABLED=false`을 설정하세요.
 
 스트리밍된 채팅 완료의 오디오는 캡처되지 않습니다.
 
@@ -234,7 +240,7 @@ voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'o
 }
 ```
 
-전체 메시지 스키마는 [Agent Observability HTTP API 참조][3]의 [Message][2]를 참조하세요.
+전체 메시지 스키마는 [Agent Observability HTTP API 참조][3]의 [메시지][2]를 참조하세요.
 
 [1]: /ko/llm_observability/instrument/api/#spans-api
 [2]: /ko/llm_observability/instrument/api/#message

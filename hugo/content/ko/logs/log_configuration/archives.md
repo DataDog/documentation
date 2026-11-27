@@ -6,7 +6,7 @@ aliases:
 - /ko/logs/archives/gcs/
 - /ko/logs/archives/gcp/
 - /ko/logs/archives/
-description: 수집된 모든 로그를 장기 스토리지로 전달하기
+description: 수집된 모든 로그를 장기 스토리지로 전달
 further_reading:
 - link: /logs/archives/rehydrating
   tag: 설명서
@@ -17,7 +17,7 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: 설명서
   text: Logging without Limits*에 대해 알아보기
-title: 로그 아카이브
+title: Log Archives
 ---
 ## 개요 {#overview}
 
@@ -32,7 +32,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 3. 해당 아카이브에 대해 `read` 및/또는 `write` [권한](#set-permissions)을 설정합니다.
 4. [로그를 해당 아카이브로 라우팅](#route-your-logs-to-a-bucket)하고 필요 시 다시 가져오도록 구성합니다.
 5. 암호화, 스토리지 클래스 및 태그와 같은 [고급 설정](#advanced-settings)을 구성합니다.
-설정을 6. [검증](#validation)하고 Datadog이 감지할 수 있는 구성 오류가 있는지 확인합니다.
+설정을 6. [검증](#validation)하고 Datadog이 탐지할 수 있는 구성 오류가 있는지 확인합니다.
 
 로그를 내 환경에서 스토리지 최적화된 아카이브에 라우팅하려면 [Observability Pipelines로 로그를 아카이브][4]하는 방법을 알아보세요.
 
@@ -42,9 +42,9 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 - datadog.archives.logs.count
 
 
-## 아카이브 구성하기 {#configure-an-archive}
+## 아카이브 구성 {#configure-an-archive}
 
-### 통합 설정하기 {#set-up-an-integration}
+### 통합 설정 {#set-up-an-integration}
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -74,7 +74,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 {{% /tab %}}
 {{< /tabs >}}
 
-### 스토리지 버킷 생성하기 {#create-a-storage-bucket}
+### 스토리지 버킷 생성 {#create-a-storage-bucket}
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">로그를 아카이브로 전송하는 작업은 Datadog GovCloud 환경 외부에서 이루어지며, 이는 Datadog의 통제 범위를 벗어납니다. Datadog은 Datadog GovCloud 환경을 벗어난 로그에 대해 책임을 지지 않으며, 여기에는 FedRAMP, DoD Impact Level, ITAR, 수출 규정 준수, 데이터 레지던시 또는 해당 로그에 적용되는 유사 규정과 관련하여 사용자가 부담할 수 있는 의무나 요구 사항이 포함되지만 이에 국한되지 않습니다.</div>
@@ -102,7 +102,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 {{% tab "Azure Storage" %}}
 
-* [Azure Portal][1]로 이동하여 아카이브를 저장할 [스토리지 계정을 생성][2]합니다. 스토리지 계정 이름을 지정하고, 표준 성능 또는 {{< ui >}}Block blobs{{< /ui >}} 프리미엄 계정 유형을 선택한 후, {{< ui >}}hot{{< /ui >}} 또는 {{< ui >}}cool{{< /ui >}} 액세스 계층을 선택합니다.
+* [Azure 포털][1]로 이동하여 아카이브를 저장할 [스토리지 계정을 생성][2]합니다. 스토리지 계정 이름을 지정하고, 표준 성능 또는 {{< ui >}}Block blobs{{< /ui >}} 프리미엄 계정 유형을 선택한 후, {{< ui >}}hot{{< /ui >}} 또는 {{< ui >}}cool{{< /ui >}} 액세스 계층을 선택합니다.
 * 해당 스토리지 계정 내에 {{< ui >}}container{{< /ui >}} 서비스를 생성합니다. 컨테이너 이름은 나중에 Datadog Archive 페이지에 입력해야 하므로 기록해 두세요.
 
 **참고:** 드물게(일반적으로 시간 초과 발생 시) 마지막 데이터를 다시 기록해야 하는 경우가 있으므로 [불변성 정책][3]은 설정하지 마세요.
@@ -163,13 +163,13 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
      * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets.
 
 2. 버킷 이름을 수정합니다.
-3. 원할 경우 로그 아카이브가 포함된 경로를 지정합니다.
+3. 필요시 로그 아카이브가 포함된 경로를 지정합니다.
 4. 새 정책을 Datadog 통합 역할에 연결합니다.
    * AWS IAM 콘솔의 {{< ui >}}Roles{{< /ui >}}로 이동합니다.
-   * Datadog 통합에 사용되는 역할을 찾습니다. 기본 이름은 **DatadogIntegrationRole**이지만 조직에서 이름을 변경한 경우 다를 수 있습니다. 역할 이름을 클릭하여 역할 요약 페이지를 엽니다.
+   * Datadog 통합이 사용하는 역할을 찾으세요. 기본적으로 이름이 **DatadogIntegrationRole**로 지정되지만, 조직에서 이름을 변경한 경우 다른 이름일 수 있습니다. 역할 이름을 클릭하여 역할 요약 페이지를 엽니다.
    * {{< ui >}}Add permissions{{< /ui >}}를 클릭한 다음 {{< ui >}}Attach policies{{< /ui >}}를 클릭합니다.
    * 위에서 생성한 정책 이름을 입력합니다.
-   * {{< ui >}}Attach policies{{< /ui >}}를 클릭합니다.
+   * {{< ui >}}Attach policies{{< /ui >}}를 클릭하세요.
 
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
@@ -206,7 +206,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 {{% /tab %}}
 {{< /tabs >}}
 
-### 로그를 버킷으로 라우팅하기 {#route-your-logs-to-a-bucket}
+### 로그를 버킷으로 라우팅 {#route-your-logs-to-a-bucket}
 
 [Log Archiving & Forwarding 페이지][6]로 이동하여 {{< ui >}}Archives{{< /ui >}} 탭에서 {{< ui >}}Add a new archive{{< /ui >}}를 선택합니다.
 
@@ -214,7 +214,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 * 이 단계와 다음 단계를 완료하려면 [`logs_write_archive` 권한][5]이 있는 Datadog 사용자여야 합니다.
 * Azure Blob Storage에 로그를 아카이브하려면 앱 등록이 필요합니다. [Azure 통합 페이지][7]의 지침을 참조하고, 설명서 페이지 오른쪽의 "site"를 "US"로 설정하세요. 아카이브 전용으로 생성된 앱 등록에는 "Storage Blob Data Contributor" 역할만 필요합니다. 스토리지 버킷이 Datadog Resource를 통해 모니터링되는 구독에 있는 경우 앱 등록이 중복된다는 경고가 표시될 수 있습니다. 이 경고는 무시해도 됩니다.
 * 버킷이 특정 IP에 대해서만 네트워크 액세스를 허용하도록 제한되어 있는 경우, 허용 목록에 {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} 의 웹훅 IP를 추가해야 합니다.
-* **US1-FED 및 US2-FED 사이트**에서는 Datadog이 Datadog GovCloud 환경 외부의 대상에 로그를 전송하도록 구성할 수 있습니다. Datadog은 GovCloud 환경을 벗어난 로그에 대해 책임을 지지 않습니다. 또한 로그가 GovCloud 환경을 벗어난 이후 적용될 수 있는 FedRAMP, DoD Impact Level, ITAR, 수출 규정 준수, 데이터 레지던시 또는 유사한 규정과 관련하여 사용자가 부담할 수 있는 어떠한 의무나 요구 사항에 대해서도 Datadog은 책임을 지지 않습니다.
+* **US1-FED 및 US2-FED 사이트**에서는 Datadog이 Datadog GovCloud 환경 외부의 목적지에 로그를 전송하도록 구성할 수 있습니다. Datadog은 GovCloud 환경을 벗어난 로그에 대해 책임을 지지 않습니다. 또한 로그가 GovCloud 환경을 벗어난 이후 적용될 수 있는 FedRAMP, DoD Impact Level, ITAR, 수출 규정 준수, 데이터 레지던시 또는 유사한 규정과 관련하여 사용자가 부담할 수 있는 어떠한 의무나 요구 사항에 대해서도 Datadog은 책임을 지지 않습니다.
 
 | 서비스                  | 단계                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -233,7 +233,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 * 모든 로그 태그를 아카이브에 포함합니다(모든 새 아카이브에서 기본적으로 활성화됨). **참고**: 이 옵션을 활성화하면 생성되는 아카이브의 크기가 증가합니다.
 * 제한 쿼리 정책에 따라 리하이드레이션된 로그에 태그를 추가합니다. [`logs_read_data`][13] 권한을 참조하세요.
 
-#### 최대 스캔 크기 정의하기 {#define-maximum-scan-size}
+#### 최대 스캔 크기 정의 {#define-maximum-scan-size}
 
 이 선택적 구성 단계를 사용하여 로그 아카이브에서 Archive Search 또는 리하이드레이션을 위해 스캔할 수 있는 로그 데이터의 최대 용량(GB)을 정의합니다.
 
@@ -345,9 +345,9 @@ Archiving 및 [Archive Search][1]는 다음 액세스 계층을 지원합니다.
 
 {{< /tabs >}}
 
-#### S3 아카이브에 대한 서버 측 암호화(SSE) {#server-side-encryption-sse-for-s3-archives}
+#### S3 아카이브에 대한 SSE(서버 측 암호화) {#server-side-encryption-sse-for-s3-archives}
 
-Datadog에서 S3 아카이브를 생성하거나 업데이트할 때 {{< ui >}}Advanced Encryption{{< /ui >}}을 선택적으로 구성할 수 있습니다. {{< ui >}}Encryption Type{{< /ui >}} 드롭다운에서 다음 3가지 옵션을 선택할 수 있습니다.
+Datadog에서 S3 아카이브를 생성하거나 업데이트할 때 필요시 {{< ui >}}Advanced Encryption{{< /ui >}}을 구성할 수 있습니다. {{< ui >}}Encryption Type{{< /ui >}} 드롭다운에서 다음 3가지 옵션을 선택할 수 있습니다.
 
 - {{< ui >}}Default S3 Bucket-Level Encryption{{< /ui >}}(기본값): Datadog은 S3 버킷의 기본 암호화 설정을 재정의하지 않습니다.
 - {{< ui >}}Amazon S3 managed keys{{< /ui >}}: S3 버킷의 기본 암호화와 관계없이 Amazon S3 관리형 키([SSE-S3][17])를 사용한 서버 측 암호화를 강제로 적용합니다.
@@ -450,7 +450,13 @@ Datadog 계정에서 아카이브 설정이 성공적으로 구성되면 처리 
 
 {{< img src="logs/archives/archive_errors_details.png" alt="아카이브가 올바르게 설정되었는지 확인" style="width:100%;">}}
 
-아카이브 위에 마우스를 올리면 오류 세부 정보와 문제 해결을 위한 조치를 확인할 수 있습니다. 또한 [Event Explorer][15]에 이벤트가 생성됩니다. 이러한 이벤트에 대해 모니터링을 생성하면 장애를 빠르게 감지하고 해결할 수 있습니다.
+아카이브 위로 마우스를 가져가면 오류 세부 정보와 문제 해결을 위한 조치를 확인할 수 있습니다. 또한 [Event Explorer][15]에 이벤트가 생성됩니다. 이러한 이벤트에 대해 모니터링을 생성하면 장애를 빠르게 탐지하고 해결할 수 있습니다.
+
+## Observability Pipelines 아카이브 {#observability-pipelines-archives}
+
+Observability Pipelines 아카이브 목적지에서 Archive Search를 활성화하면, 파이프라인을 배포한 후 Datadog이 로그 아카이브를 생성합니다. 설정 지침은 [Datadog Archives (Amazon S3)][20], [Google Cloud Storage][21] 또는 [Azure Storage][22] 목적지 설명서를 참조하세요. 이러한 아카이브는 [Log Archiving & Forwarding 페이지][3]의 {{< ui >}}Observability Pipelines Archives{{< /ui >}} 탭에 나열됩니다.
+
+Observability Pipelines에서 이러한 아카이브에 대한 버킷 구성을 관리하세요. Datadog에서 해당 권한, 태그 및 [최대 스캔 크기](#define-maximum-scan-size)를 편집할 수 있습니다.
 
 ## 여러 아카이브 {#multiple-archives}
 
@@ -498,3 +504,6 @@ Datadog이 스토리지 버킷으로 전달하는 로그 아카이브는 압축�
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 [19]: /ko/logs/explorer/search_syntax/#reserved-attributes
+[20]: /ko/observability_pipelines/destinations/datadog_archives/#archive-search
+[21]: /ko/observability_pipelines/destinations/google_cloud_storage/#archive-search
+[22]: /ko/observability_pipelines/destinations/azure_storage/#archive-search

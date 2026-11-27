@@ -3,368 +3,367 @@ aliases:
 - /fr/tracing/connect_logs_and_traces/opentelemetry
 code_lang: opentelemetry
 code_lang_weight: 80
-description: Associez vos logs d'application à vos traces OpenTelemetry pour les mettre
-  en corrélation dans Datadog.
+description: Connectez vos logs d'application et vos traces OpenTelemetry pour les
+  corréler dans Datadog
 further_reading:
-- link: /opentelemetry/otel_tracing/
+- link: /opentelemetry/setup/
   tag: Documentation
-  text: Envoyer vos traces OpenTelemetry à Datadog
-- link: tracing/glossary/
-  tag: OpenTelemetry
+  text: Envoyer des données OpenTelemetry à Datadog
+- link: https://opentelemetry.io/docs/collector/
+  tag: Site externe
   text: Documentation Collector
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
-  tag: GitHub
+  tag: Blog
   text: Partenariat de Datadog avec OpenTelemetry
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guide
   text: Bénéficiez de diagnostics simplifiés grâce à la mise en corrélation entre
     produits.
-title: Associer vos traces OpenTelemetry à vos logs
+title: Corrélation des traces et des logs OpenTelemetry
 type: multi-code-lang
 ---
+## Présentation {#overview}
 
-Le processus d'association des logs et des traces pour les SDK OpenTelemetry est similaire à celui des [logs et des traces du SDK Datadog][1]. Vous devez simplement effectuer quelques étapes supplémentaires :
+La corrélation des traces et des logs vous permet d'enquêter sur des problèmes en naviguant depuis un span spécifique dans une trace directement vers les logs générés pendant cette opération. Cela rend le débogage plus rapide et plus intuitif en fournissant le contexte exact nécessaire pour comprendre une erreur ou un problème de performance.
 
-1. Les propriétés OpenTelemetry `TraceId` et `SpanId` ne respectent pas les normes de Datadog. Il est donc nécessaire de remplacer le format OpenTelemetry de `TraceId` et `SpanId` (à savoir, [un entier de 128 bits non signé et un entier de 64 bits non signé représentés respectivement par une chaîne en minuscule de 32 et 16 caractères hexadécimaux][2]) par un format Datadog ([un entier non signé 64 bits][3]).
+## Prérequis {#requirements}
 
-2. Contrairement aux SDK Datadog, les SDK OpenTelemetry ne prennent pas en charge la mise en corrélation automatique entre les traces et les logs. Ainsi, il est nécessaire d'ajouter manuellement à votre module de journalisation, ou à votre bibliothèque, un processeur qui ajoute les `TraceId` et `SpanId` convertis précédemment en tant qu'attributs de log `dd.trace_id` et `dd.span_id`.
+Avant de commencer, assurez-vous d'avoir configuré le [marquage de service unifié][1]. Ceci est requis pour toute corrélation de données dans Datadog.
 
-3. Assurez-vous que vos logs sont envoyés au format JSON, car vos logs au niveau des langages doivent être convertis en attributs Datadog afin que la corrélation entre les traces et les logs fonctionne.
+## Configuration {#setup}
 
-Consultez les exemples suivants pour chaque langage afin de découvrir comment mettre en corrélation vos traces et vos logs OpenTelemetry.
+Pour corréler les traces et les logs OpenTelemetry dans Datadog, vous devez :
+
+- **Injectez le contexte de trace** : le logger de votre application doit être configuré pour enrichir vos logs avec le `trace_id` et le `span_id` issus de la trace active. L'approche recommandée consiste à utiliser une bibliothèque de journalisation ou un appender compatible avec OpenTelemetry. Ces outils capturent automatiquement le contexte de trace actif et intègrent le `trace_id` et le `span_id` en tant que champs de premier niveau dans vos enregistrements de logs, ce qui constitue la méthode standard de corrélation.
+
+- **Envoyez les logs à Datadog** : vos logs, enrichis avec le contexte de trace, doivent être collectés et envoyés à Datadog.
+
+### 1. Injectez le contexte de trace dans vos logs {#1-inject-trace-context-into-your-logs}
+
+Les exemples suivants utilisent des ponts de journalisation ou une instrumentation automatique. Ces outils interceptent les logs provenant de bibliothèques de journalisation courantes (telles que `zap`, `Logback` et `Winston`), les convertissent dans le modèle de données de log OpenTelemetry et les transmettent au SDK OpenTelemetry. Ce processus enrichit automatiquement les logs avec le contexte de trace actif.
+
+Pour des applications complètes et fonctionnelles, consultez le [dépôt d'exemples Datadog OpenTelemetry][2].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{% tab "Go" %}}
 
-Pour mettre manuellement en corrélation vos traces et vos logs, ajoutez à votre module de journalisation un processeur qui convertit `trace_id` et `span_id` du format OpenTelemetry au format Datadog. L'exemple suivant utilise la [bibliothèque de journalisation structlog][1]. Pour les autres bibliothèques de journalisation, il peut être plus pertinent de [modifier les exemples de SDK Datadog][2]. Vous pouvez également consulter [un exemple d'application Python instrumentée avec OpenTelemetry et disposant de traces et de logs corrélés][3] dans le référentiel GitHub `trace-examples`.
+Tout d'abord, assurez-vous d'avoir initialisé un `LoggerProvider` OpenTelemetry. Ensuite, utilisez-le pour créer votre instance de logger `zap` :
 
-```python
-# ########## injection.py
-from opentelemetry import trace
+```go
+import "go.opentelemetry.io/contrib/bridges/otelzap"
 
-class CustomDatadogLogProcessor(object):
-    def __call__(self, logger, method_name, event_dict):
-        # Un exemple de contexte de trace au format Datadog ajouté aux logs
-        # depuis https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
-        current_span = trace.get_current_span()
+// Replace your standard zap logger with the otelzap-backed one
+logger := zap.New(otelzap.NewCore(
+    "my-service-name",
+    otelzap.WithLoggerProvider(loggerProvider),
+))
 
-        if current_span is not None:
-            event_dict['dd.trace_id'] = str(current_span.context.trace_id & 0xFFFFFFFFFFFFFFFF)
-            event_dict['dd.span_id'] = str(current_span.context.span_id)
-
-        return event_dict        
-# ##########
-
-# ########## app.py
-import .injection
-import logging
-import structlog
-# Ajouter un format personnalisé pour injecter dans les logs des ID de trace au format Datadog
-structlog.configure(
-    processors=[
-        injection.CustomDatadogLogProcessor(),
-        structlog.processors.JSONRenderer(sort_keys=True)
-    ],
-)
-
-log = structlog.getLogger()
-
-log.info("Exemple de ligne de log avec des informations de corrélation des traces")
+// Now, logs written with this logger are automatically correlated
+logger.Info("Processing user request")
 ```
 
+Pour voir comment le `LoggerProvider` est configuré dans une application complète, consultez l'[exemple Go complet dans le dépôt d'exemples][100].
 
+[100]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/golang/calendar/main.go
 
-[1]: https://www.structlog.org/en/stable/standard-library.html
-[2]: /fr/tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
-[3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
-{{< /tabs >}}
-
-{{% tab "Node.js" %}}
-
-Pour mettre manuellement en corrélation vos traces et vos logs, ajoutez à votre module de journalisation un processeur qui convertit `trace_id` et `span_id` du format OpenTelemetry au format Datadog. L'exemple suivant utilise la [bibliothèque de journalisation winston][1]. Pour les autres bibliothèques de journalisation, il peut être plus pertinent de [modifier les exemples de SDK Datadog][2]. Vous pouvez également consulter [un exemple d'application Node.js instrumentée avec OpenTelemetry et disposant de traces et de logs corrélés][3] dans le référentiel GitHub `trace-examples`.
-
-```js
-// ########## logger.js
-
-// convertir au format dd avec :
-// https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
-const opentelemetry = require('@opentelemetry/api');
-const winston = require('winston')
-const UINT_MAX = 4294967296
-
-// Convertir un buffer en chaîne numérique
-function toNumberString (buffer, radix) {
-  let high = readInt32(buffer, 0)
-  let low = readInt32(buffer, 4)
-  let str = ''
-
-  radix = radix || 10
-
-  while (1) {
-    const mod = (high % radix) * UINT_MAX + low
-
-    high = Math.floor(high / radix)
-    low = Math.floor(mod / radix)
-    str = (mod % radix).toString(radix) + str
-
-    if (!high && !low) break
-  }
-
-  return str
-}
-
-// Convertir une chaîne numérique en buffer en utilisant la base spécifiée
-function fromString (str, raddix) {
-  const buffer = new Uint8Array(8)
-  const len = str.length
-
-  let pos = 0
-  let high = 0
-  let low = 0
-
-  if (str[0] === '-') pos++
-
-  const sign = pos
-
-  while (pos < len) {
-    const chr = parseInt(str[pos++], raddix)
-
-    if (!(chr >= 0)) break // NaN
-
-    low = low * raddix + chr
-    high = high * raddix + Math.floor(low / UINT_MAX)
-    low %= UINT_MAX
-  }
-
-  if (sign) {
-    high = ~high
-
-    if (low) {
-      low = UINT_MAX - low
-    } else {
-      high++
-    }
-  }
-
-  writeUInt32BE(buffer, high, 0)
-  writeUInt32BE(buffer, low, 4)
-
-  return buffer
-}
-
-// Stocker les octets d'un entier non signé dans un buffer
-function writeUInt32BE (buffer, value, offset) {
-  buffer[3 + offset] = value & 255
-  value = value >> 8
-  buffer[2 + offset] = value & 255
-  value = value >> 8
-  buffer[1 + offset] = value & 255
-  value = value >> 8
-  buffer[0 + offset] = value & 255
-}
-
-// Lire un buffer contenant des octets d'entier non signé
-function readInt32 (buffer, offset) {
-  return (buffer[offset + 0] * 16777216) +
-    (buffer[offset + 1] << 16) +
-    (buffer[offset + 2] << 8) +
-    buffer[offset + 3]
-}
-
-const tracingFormat = function () {
-  return winston.format(info => {
-    const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
-    if (span) {
-      const context = span.context();
-      const traceIdEnd = context.traceId.slice(context.traceId.length / 2)
-      info['dd.trace_id'] = toNumberString(fromString(traceIdEnd,16))
-      info['dd.span_id'] = toNumberString(fromString(context.spanId,16))
-    }
-    return info;
-  })();
-}
-
-module.exports = winston.createLogger({
-  transports: [new winston.transports.Console],
-  format: winston.format.combine(tracingFormat(), winston.format.json())
-});
-
-// ##########
-
-// ########## index.js
-//
-// ...
-// initialize your tracer
-// ...
-// 
-const logger = require('./logger') 
-//
-// utiliser le logger dans votre application
-logger.info("Exemple de ligne de log avec des informations de corrélation des traces")
-```
-
-
-
-[1]: https://github.com/winstonjs/winston
-[2]: /fr/tracing/other_telemetry/connect_logs_and_traces/nodejs/#manually-inject-trace-and-span-ids
-[3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/node-microservice/logger.js#L86
-{{< /tabs >}}
-
-{{% tab "Ruby" %}}
-
-Pour mettre manuellement en corrélation vos traces et vos logs, ajoutez à votre module de journalisation un processeur qui convertit `trace_id` et `span_id` du format OpenTelemetry au format Datadog. L'exemple suivant utilise la [bibliothèque de journalisation Ruby standard][1]. Pour les applications Rails, ou les autres bibliothèques de journalisation, il peut être plus pertinent de [modifier les exemples de SDK Datadog][2]. Vous pouvez également consulter [un exemple d'application Ruby instrumentée avec OpenTelemetry et disposant de traces et de logs corrélés][3] dans le référentiel GitHub `trace-examples`.
-
-```ruby
-logger = Logger.new(STDOUT)
-logger.progname = 'multivac'
-original_formatter = Logger::Formatter.new
-logger.formatter  = proc do |severity, datetime, progname, msg|
-  current_span = OpenTelemetry::Trace.current_span(OpenTelemetry::Context.current).context
-
-  dd_trace_id = current_span.trace_id.unpack1('H*')[16, 16].to_i(16).to_s
-  dd_span_id = current_span.span_id.unpack1('H*').to_i(16).to_s
-
-  if current_span
-    "#{{datetime: datetime, progname: progname, severity: severity, msg: msg, 'dd.trace_id': dd_trace_id, 'dd.span_id': dd_span_id}.to_json}\n"
-  else
-    "#{{datetime: datetime, progname: progname, severity: severity, msg: msg}.to_json}\n"
-  end
-end
-
-logger.info("Exemple de ligne de log avec des informations de corrélation des traces")
-```
-
-
-
-
-[1]: https://ruby-doc.org/stdlib-3.0.0/libdoc/logger/rdoc/index.html
-[2]: /fr/tracing/other_telemetry/connect_logs_and_traces/ruby/#manually-inject-trace-and-span-ids
-[3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/ruby-microservice/app.rb#L21-L35
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Java" %}}
 
-Pour mettre manuellement en corrélation vos traces et vos logs, activez d'abord l'[instrumentation du logger MDC openTelemetry-java-instrumentation][1]. Ajoutez ensuite au module un processeur qui convertit `trace_id` et `span_id` du format OpenTelemetry au format Datadog. L'exemple suivant utilise [Spring Boot et Logback][2]. Pour les autres bibliothèques de journalisation, il peut être plus pertinent de [modifier les exemples de SDK Datadog][3].
+Pour injecter le contexte de trace en Java, vous pouvez utiliser OpenTelemetry Logback Appender. Ajoutez la dépendance `io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0` à votre projet et configurez-la dans votre `logback.xml` :
 
-```java
-String traceIdValue = Span.current().getSpanContext().getTraceId();
-String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
-long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
-String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
+```xml
+<configuration>
+  <appender name="OpenTelemetry"
+      class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+    <immediateFlush>true</immediateFlush>
+  </appender>
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
-long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
-String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
-
-logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
+  <root level="INFO">
+    <appender-ref ref="OpenTelemetry"/>
+  </root>
+</configuration>
 ```
 
+Pour une configuration d'exemple complète et fonctionnelle, consultez l'[exemple Java complet dans le dépôt d'exemples][200].
 
-[1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
-[2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
-[3]: /fr/tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
-{{< /tabs >}}
+[200]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/resources/logback.xml
 
-{{% tab "PHP" %}}
+{{% /tab %}}
 
-Pour mettre en corrélation des traces et des logs en PHP, modifiez les [exemples de SDK Datadog PHP][1] en suivant les étapes supplémentaires présentées ci-dessus.
+{{% tab "Node.js" %}}
 
-Pour toute question, contactez [l'assistance Datadog][2].
+Pour Node.js, utilisez le package `@opentelemetry/instrumentation-winston` avec [Winston][300] pour injecter automatiquement le contexte de trace dans vos logs. Installez les packages requis :
 
-
-
-
-[1]: /fr/tracing/other_telemetry/connect_logs_and_traces/php/
-[2]: /fr/help/
-{{< /tabs >}}
-
-{{% tab "Go" %}}
-
-Pour corréler manuellement vos traces avec vos logs, ajoutez au module de journalisation que vous utilisez une fonction qui convertit les `trace_id` and `span_id` du format OpenTelemetry au format Datadog. Voici un exemple avec la [bibliothèque logrus][1].
-
-```go
-package main
-
-import (
-    "context"
-    log "github.com/sirupsen/logrus"
-    "go.opentelemetry.io/otel"
-    "strconv"
-)
-
-func main() {
-    ctx := context.Background()
-    tracer := otel.Tracer("example/main")
-    ctx, span := tracer.Start(ctx, "example")
-    defer span.End()
-
-    log.SetFormatter(&log.JSONFormatter{})
-
-    standardFields := log.Fields{
-        "dd.trace_id": convertTraceID(span.SpanContext().TraceID().String()),
-        "dd.span_id":  convertTraceID(span.SpanContext().SpanID().String()),
-        "dd.service":  "serviceName",
-        "dd.env":      "serviceEnv",
-        "dd.version":  "serviceVersion",
-    }
-
-    log.WithFields(standardFields).WithContext(ctx).Info("hello world")
-}
-
-func convertTraceID(id string) string {
-    if len(id) < 16 {
-        return ""
-    }
-    if len(id) > 16 {
-        id = id[16:]
-    }
-    intValue, err := strconv.ParseUint(id, 16, 64)
-    if err != nil {
-        return ""
-    }
-    return strconv.FormatUint(intValue, 10)
-}
-
-
+```shell
+npm install winston @opentelemetry/instrumentation-winston
 ```
 
-Pour toute question, contactez [l'assistance Datadog][2].
+Ensuite, enregistrez l'instrumentation Winston dans le cadre de la configuration de votre SDK OpenTelemetry :
 
+```javascript
+const { WinstonInstrumentation } = require('@opentelemetry/instrumentation-winston');
+const { NodeSDK } = require('@opentelemetry/sdk-node');
 
-
-[1]: https://github.com/sirupsen/logrus
-[2]: /fr/help/
-{{< /tabs >}}
-
-{{% tab ".NET" %}}
-
-Pour corréler manuellement vos traces avec vos logs, convertissez les propriétés OpenTelemetry `TraceId` et `SpanId` au format utilisé par Datadog. Ajoutez ces ID à vos logs via les attributs `dd.trace_id` et `dd.span_id`. L'exemple suivant utilise la [bibliothèque Serilog][1] et montre comment convertir les ID de trace et de span OTel (`System.DiagnosticSource.Activity`) au format exigé par Datadog :
-
-```csharp
-var stringTraceId = Activity.Current.TraceId.ToString();
-var stringSpanId = Activity.Current.SpanId.ToString();
-
-var ddTraceId = Convert.ToUInt64(stringTraceId.Substring(16), 16).ToString();
-var ddSpanId = Convert.ToUInt64(stringSpanId, 16).ToString();
-
-using (LogContext.PushProperty("dd.trace_id", ddTraceId))
-using (LogContext.PushProperty("dd.span_id", ddSpanId))
-{
-    Serilog.Log.Logger.Information("Example log line with trace correlation info");
-}
+const sdk = new NodeSDK({
+  instrumentations: [
+    new WinstonInstrumentation(),
+    // ... other instrumentations
+  ],
+});
+sdk.start();
 ```
 
+Une fois l'instrumentation enregistrée, tout logger Winston inclut automatiquement les champs `trace_id`, `span_id` et `trace_flags` lorsqu'un log est émis au sein d'une trace active :
 
-[1]: https://serilog.net/
+```javascript
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [new winston.transports.Console()],
+});
+
+// Logs emitted within a traced context automatically include trace_id and span_id
+logger.info('Processing user request');
+```
+
+La même approche fonctionne avec [Pino][301] en utilisant le package `@opentelemetry/instrumentation-pino`.
+
+[300]: https://github.com/winstonjs/winston
+[301]: https://github.com/pinojs/pino
+
+{{% /tab %}}
 {{< /tabs >}}
 
-{{< /tabs >}}
+### 2. Choisissez votre pipeline de logs {#2-choose-your-log-pipeline}
 
+Une fois vos logs instrumentés avec le contexte de trace, vous devez les envoyer à Datadog. L'approche la plus simple consiste à les envoyer directement depuis votre application vers l'OpenTelemetry Collector en utilisant OTLP. Cependant, vous pouvez également récupérer les logs à partir de fichiers ou les collecter à l'aide du Datadog Agent.
 
+#### Envoyez des logs via OTLP {#send-logs-using-otlp}
+
+Il s'agit de la méthode la plus simple et la plus directe. Votre application envoie les logs directement vers un endpoint OTLP, évitant ainsi la complexité liée à l'écriture et au parsing de fichiers locaux.
+
+L'OpenTelemetry Collector et le Datadog Agent peuvent tous deux recevoir des logs OTLP.
+
+1. **Configurez votre application pour exporter les logs via OTLP** : dans la configuration de votre SDK OpenTelemetry, configurez un `LogRecordProcessor` pour utiliser un `OTLPLogExporter`. L'exemple suivant montre comment procéder en Python :
+   ```python
+   # In your OTel SDK setup for Python
+   import logging
+   from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
+   from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
+   from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
+   
+   # Configure the OTLP Log Exporter to send to your Collector
+   # Note: The endpoint should point to your OpenTelemetry Collector.
+   # The default port is 4317 for gRPC and 4318 for HTTP.
+   exporter = OTLPLogExporter(endpoint="localhost:4317", insecure=True)
+   
+   log_provider = LoggerProvider()
+   log_provider.add_log_record_processor(BatchLogRecordProcessor(exporter))
+   
+   # Attach to the root logger
+   handler = LoggingHandler(logger_provider=log_provider)
+   logging.getLogger().addHandler(handler)
+   ```
+2. **Configurez le Collector pour recevoir et exporter des logs OTLP** : dans le `config.yaml` du Collector, activez le récepteur `otlp` et ajoutez-le au pipeline `logs`. Utilisez la configuration de l'exportateur HTTP OTLP depuis [Configurer l'OpenTelemetry Collector][7] :
+   ```yaml
+   receivers:
+     otlp:
+       protocols:
+         grpc:
+         http:
+
+   processors:
+     resource_detection:
+       detectors: [env, system]
+
+   exporters:
+     otlp_http:
+       endpoint: https://otlp.${env:DD_SITE}
+       headers:
+         dd-api-key: ${env:DD_API_KEY}
+
+   service:
+     pipelines:
+       logs:
+         receivers: [otlp]
+         processors: [resource_detection]
+         exporters: [otlp_http]
+   ```
+   
+#### Collectez les logs à partir de fichiers {#scrape-logs-from-files}
+
+Cette approche est utile si vous devez conserver des fichiers de logs locaux pour des raisons de conformité ou pour d'autres outils.
+
+Pour que Datadog puisse corréler vos logs et vos traces, vos fichiers de logs doivent contenir des champs spécifiques correctement formatés :
+- `trace_id` : l'ID de trace. Il doit s'agir d'une chaîne hexadécimale en minuscules de 32 caractères.
+- `span_id` : l'ID du span. Il doit s'agir d'une chaîne hexadécimale en minuscules de 16 caractères.
+
+Le SDK OpenTelemetry les fournit généralement dans un format brut (tel qu'un entier ou un tableau d'octets), et ces données doivent être formatées en chaînes hexadécimales sans aucun <code>0x</code> préfixe.
+
+##### Logs JSON {#json-logs}
+
+1. **Configurez votre application pour générer des logs JSON** : utilisez une bibliothèque de journalisation standard pour écrire les logs au format JSON dans un fichier ou `stdout`. L'exemple Python suivant utilise la bibliothèque standard `logging`.
+2. **Injectez manuellement le contexte de trace** : dans le code de votre application, récupérez le contexte du span actuel et ajoutez `trace_id` et `span_id` à vos enregistrements de logs. L'exemple Python suivant montre comment créer un `logging.Filter` personnalisé pour effectuer cette opération automatiquement :
+
+   ```python
+   import logging
+   import sys
+   from opentelemetry import trace
+   from pythonjsonlogger import jsonlogger
+
+   # 1. Create a filter to inject trace context
+   class TraceContextFilter(logging.Filter):
+       def filter(self, record):
+           span = trace.get_current_span()
+           if span.is_recording():
+               span_context = span.get_span_context()
+               record.trace_id = f'{span_context.trace_id:032x}'
+               record.span_id = f'{span_context.span_id:016x}'
+           return True
+
+   # 2. Configure a JSON logger
+   logger = logging.getLogger("my-json-logger")
+   logger.setLevel(logging.DEBUG)
+
+   # 3. Add the filter to the logger
+   logger.addFilter(TraceContextFilter())
+
+   handler = logging.StreamHandler(sys.stdout)
+   formatter = jsonlogger.JsonFormatter(
+       '%(asctime)s %(name)s %(levelname)s %(message)s %(trace_id)s %(span_id)s'
+   )
+   handler.setFormatter(formatter)
+   logger.addHandler(handler)
+
+   # Logs will now contain the trace_id and span_id
+   logger.info("Processing user request with trace context.")
+   ```
+
+3. **Configurez le Collector pour collecter les fichiers de logs** : dans le `config.yaml` de votre Collector, activez le récepteur `filelog`. Configurez-le pour trouver vos fichiers de logs et les analyser au format JSON.
+   ```yaml
+   receivers:
+     filelog:
+       include: [ /var/log/my-app/*.log ] # Path to your log files
+       operators:
+         - type: json_parser
+           # The timestamp and severity fields should match your JSON output
+           timestamp:
+             parse_from: attributes.asctime
+             layout: '%Y-%m-%d %H:%M:%S,%f'
+           severity:
+             parse_from: attributes.levelname
+   # ... your logs pipeline ...
+   ```
+
+##### Logs non JSON {#non-json-logs}
+
+Si votre application génère des logs au format texte brut ou clé-valeur au lieu du format JSON, vous pouvez toujours les corréler avec des traces. Vous devez injecter manuellement le contexte de trace dans la chaîne de log et configurer le Collector pour l'extraire à l'aide d'un `regex_parser`.
+
+L'exemple Node.js suivant utilise Winston avec un formateur personnalisé pour injecter `trace_id` et `span_id` dans une ligne de log en texte brut :
+
+```javascript
+const { trace, context } = require('@opentelemetry/api');
+const winston = require('winston');
+
+// Custom format that injects trace context into plain text logs
+const traceFormat = winston.format((info) => {
+  const span = trace.getSpan(context.active());
+  if (span) {
+    const spanContext = span.spanContext();
+    info.trace_id = spanContext.traceId;
+    info.span_id = spanContext.spanId;
+  }
+  return info;
+});
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    traceFormat(),
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message, trace_id, span_id }) => {
+      return `${timestamp} ${level} trace_id=${trace_id || '0'} span_id=${span_id || '0'} ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.File({ filename: '/var/log/my-app/app.log' })
+  ],
+});
+
+// Output: 2025-01-15T12:00:00.000Z info trace_id=4bf92f3577b34da6a3ce929d0e0e4736 span_id=00f067aa0ba902b7 Processing request
+logger.info('Processing request');
+```
+
+Ensuite, configurez le récepteur `filelog` du Collector avec un `regex_parser` pour extraire le contexte de trace des lignes de logs en texte brut :
+
+```yaml
+receivers:
+  filelog:
+    include: [ /var/log/my-app/*.log ]
+    operators:
+      - type: regex_parser
+        regex: '^(?P<timestamp>\S+) (?P<severity>\S+) trace_id=(?P<trace_id>[a-f0-9]+) span_id=(?P<span_id>[a-f0-9]+) (?P<body>.*)$'
+        timestamp:
+          parse_from: attributes.timestamp
+          layout: '%Y-%m-%dT%H:%M:%S.%fZ'
+        severity:
+          parse_from: attributes.severity
+        trace:
+          trace_id:
+            parse_from: attributes.trace_id
+          span_id:
+            parse_from: attributes.span_id
+# ... your logs pipeline ...
+```
+
+Cette approche fonctionne avec n'importe quelle bibliothèque de journalisation ou n'importe quel langage. Les principales exigences sont les suivantes :
+- Incluez `trace_id` et `span_id` en tant que champs analysables dans vos logs.
+- Configurez le `regex_parser` du Collector pour qu'il corresponde au format de vos logs et extraie les champs de contexte de trace.
+
+#### Collectez les logs à l'aide du Datadog Agent {#collect-logs-using-the-datadog-agent}
+
+Si vous collectez des logs directement avec le Datadog Agent (sans les envoyer via l'OpenTelemetry Collector), vous devez vous assurer que les ID de trace sont présents dans vos logs.
+
+- **Format d'ID de trace** : Datadog détecte automatiquement la convention `dd.trace_id` et `dd.span_id` utilisée par les SDK Datadog, ainsi que les normes OpenTelemetry `trace_id` et `span_id`. Consultez la [documentation sur la compatibilité OpenTelemetry][6] pour plus de détails sur la norme.
+
+<div class="alert alert-info">Si votre instrumentation des logs utilise un nom d'attribut différent pour vos ID de trace ou de span, vous devez vous assurer que l'attribut est ajouté à la configuration <a href="/logs/log_configuration/pipelines/?tab=traceid#preprocessing">Prétraitement des logs JSON</a> afin qu'il soit reconnu comme un ID de trace valide.</div>
+
+- **Mappage d'attributs** : le Datadog Agent ne convertit pas automatiquement les attributs de ressource OTel (par exemple, `service.name`) en tags standard Datadog. Vous devrez peut-être remapper manuellement ces attributs dans votre pipeline de traitement des logs pour maintenir un taggage de service unifié.
+
+## Affichez les données corrélées dans Datadog {#view-correlated-data-in-datadog}
+
+Une fois que votre application envoie des traces, vous pouvez naviguer entre elles dans Datadog.
+
+### D'une trace aux logs {#from-a-trace-to-logs}
+
+1. Accédez à [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][3].
+2. Recherchez et cliquez sur une trace provenant de votre service instrumenté.
+3. Sélectionnez n'importe quel span dans le graphique de flammes pour afficher ses détails.
+4. Cliquez sur l'onglet {{< ui >}}Logs{{< /ui >}}.
+
+Ici, vous pouvez voir tous les logs générés pendant l'exécution de ce span spécifique.
+
+### D'un log à une trace {#from-a-log-to-a-trace}
+
+1. Accédez à [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][4].
+2. Recherchez et cliquez sur une entrée de log provenant de votre service instrumenté.
+3. Cliquez sur l'onglet {{< ui >}}Trace{{< /ui >}}.
+
+Ici, vous pouvez voir un graphique de flammes de la trace associée, avec le span qui a généré le log. 
+
+Cliquez sur {{< ui >}}View Trace in APM{{< /ui >}} pour accéder directement à la trace APM complète associée à cet événement de log et voir le contexte de l'ensemble de la requête.
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/other_telemetry/connect_logs_and_traces/
-[2]: https://github.com/open-telemetry/opentelemetry-specification/blob/eeef21259a12d61100804eff2e12ba06523821c3/specification/trace/api.md#retrieving-the-traceid-and-spanid
-[3]: /fr/api/latest/tracing/#send-traces
+[1]: /fr/opentelemetry/correlate/#prerequisite-unified-service-tagging
+[2]: https://github.com/DataDog/opentelemetry-examples
+[3]: https://app.datadoghq.com/apm/traces
+[4]: https://app.datadoghq.com/logs
+[5]: /fr/logs/log_configuration/processors
+[6]: https://opentelemetry.io/docs/specs/otel/compatibility/logging_trace_context/
+[7]: /fr/opentelemetry/setup/collector_exporter/

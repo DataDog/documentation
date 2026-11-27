@@ -45,9 +45,6 @@ Metrics Explorer、モニター、またはダッシュボードを使用して�
 
 タグの詳細については、[タグの使い方の概要][2] をご覧ください。
 
-**注:** 記号ブール構文 (`!`, `,`) を、機能的構文演算子 (`NOT`, `AND`, `OR`, `IN`, `NOT IN`) で使用することはできません。以下のクエリは、_無効_ とみなされます。
-`avg:mymetric{env:prod AND !region:us-east}`
-
 ### ブールでフィルタリングされたクエリの例 {#boolean-filtered-query-examples}
 
 以下の例を使用するには、コードアイコン {{< ui >}}</>{{< /ui >}} をクリックして UI にクエリエディターを表示し、クエリ例をコピーしてクエリエディターに貼り付けてください。
@@ -106,7 +103,7 @@ avg:system.disk.utilized{region:*east*} by {region}
 
 関数は Datadog からデータポイントを削除しませんが、可視化からデータポイントを削除します。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

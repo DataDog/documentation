@@ -68,7 +68,7 @@ API 테스트 [타이밍 메트릭][2]에서 갑작스러운 급증이나 전반
 
    {{< img src="synthetics/recording_iframe.mp4" alt="브라우저 테스트 단계 기록 문제" video="true" width="100%" >}}
 
-   **해결 방법**: `On specific sites` 섹션에서 웹사이트를 지정하거나 `On all sites`를 활성화하여 [Datadog 확장 프로그램][5]에 적절한 권한이 있는지 확인하세요.
+   **해결 방법**: `On specific sites` 섹션에서 웹사이트를 지정하거나 `On all sites`를 활성화하여 [Datadog 확장 프로그램][5]에 적절한 권한이 있는지 검증하세요.
 
    {{< img src="synthetics/extension.mp4" alt="모든 사이트에서 확장 프로그램이 데이터를 읽도록 허용" video="true" width="100%" >}}
 
@@ -76,7 +76,7 @@ API 테스트 [타이밍 메트릭][2]에서 갑작스러운 급증이나 전반
 
 Chrome 브라우저 정책으로 인해 확장 프로그램이 제대로 기록하지 못할 수 있습니다.
 
-**해결 방법**: `chrome://policy`에서 레코더를 차단할 수 있는 [`ExtensionSettings`][6]와 같은 확장 프로그램 관련 설정은 확인하세요.
+**해결 방법**: `chrome://policy`에서 레코더를 차단할 수 있는 [`ExtensionSettings`][6]와 같은 확장 프로그램 관련 설정을 확인하세요.
 
 #### 레코더에 로그인 페이지가 표시되지 않음{#login-page-not-visible-in-recorder}
 
@@ -169,7 +169,7 @@ iOS 앱 기능은 앱 재서명 프로세스로 인해 녹화 또는 실행 중�
 
 ### Locations & Agents에서 Datadog Agent가 옵션으로 표시되지 않음 {#datadog-agent-not-listed-as-an-option-in-locations-agents}
 
-테스트 생성 중에 Datadog Agent가 선택 가능한 옵션으로 표시되지 않는다면 모든 필수 구성 요소를 충족하고 설정 단계를 완료했는지 확인하세요. 자세한 정보는 [Agent 구성][16]을 참조하세요.
+테스트 생성 중에 Datadog Agent가 선택 가능한 옵션으로 표시되지 않는다면 모든 필수 구성 요소를 충족하고 설정 단계를 완료했는지 검증하세요. 자세한 정보는 [Agent 구성][16]을 참조하세요.
 
 ### Datadog Agent에서 예약된 테스트가 예정된 일정대로 실행되지 않음 {#scheduled-tests-from-the-datadog-agent-is-not-running-at-the-expected-schedule}
 
@@ -177,7 +177,7 @@ iOS 앱 기능은 앱 재서명 프로세스로 인해 녹화 또는 실행 중�
 
 ### Datadog Agent에서 실행된 테스트 결과 누락 {#missing-test-results-executed-from-the-datadog-agent}
 
-Datadog UI에 테스트 결과가 표시되지 않으면 Datadog Agent가 테스트 결과를 처리하는 Synthetics 수집기(https://http-synthetics.datadoghq.com)로 테스트 결과를 보내지 않는 것입니다. Datadog Agent에서 이 수집으로 아웃바운드 네트워크 트래픽이 허용되는지 확인하세요.
+Datadog UI에 테스트 결과가 표시되지 않으면 Datadog Agent가 테스트 결과를 처리하는 Synthetics 수집기(https://http-synthetics.datadoghq.com)로 테스트 결과를 보내지 않는 것입니다. Datadog Agent에서 이 수집 엔드포인트로의 아웃바운드 네트워크 트래픽이 허용되는지 검증하세요.
 
 Datadog Agent가 프록시 뒤에서 실행 중인 경우, Synthetics 포워더가 프록시를 통해 트래픽을 보내도록 구성되었는지 확인하세요. 예를 들면 다음과 같습니다.
 
@@ -207,7 +207,7 @@ Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
 
 **원인**: 로그를 보면 프라이빗 위치가 테스트를 가져오기 위해 Synthetics 수집기에 성공적으로 도달했지만, 인증 문제로 인해 Datadog에서 403 응답과 함께 요청이 실패했음을 알 수 있습니다. 구체적으로, 요청 서명이 만료되었거나 아직 유효하지 않은 것으로 간주되었습니다. 프라이빗 위치와 Datadog 간의 통신은 Datadog Signature v1([AWS Signature v4][105]와 동일한 서명 프로세스 기반)을 사용하여 보안이 유지되며, 각 요청에 타임스탬프가 포함되어 인증과 무결성을 둘 다 보장합니다. 프라이빗 위치를 호스팅하는 서버의 시스템 시계가 동기화되지 않으면 타임스탬프가 허용된 범위를 벗어날 수 있으며 서명 검증에 실패합니다.
 
-**해결 방법**: 프라이빗 위치를 호스팅하는 서버의 시간 동기화가 정확한지 확인하세요. NTP(Network Time Protocol) 서비스를 사용하는 경우, 해당 서비스가 올바르게 구성되어 정상적으로 작동하는지 확인하고 시스템 시계와 시간 소스 간의 동기화를 방해할 수 있는 잘못된 설정을 수정하세요.
+**해결 방법**: 프라이빗 위치를 호스팅하는 서버의 시간 동기화가 정확한지 확인하세요. NTP(Network Time Protocol) 서비스를 사용하는 경우, 해당 서비스가 올바르게 구성되어 정상적으로 작동하는지 검증하고 시스템 시계와 시간 소스 간의 동기화를 방해할 수 있는 잘못된 설정을 수정하세요.
 
 ### 브라우저 테스트에 `Page crashed` 오류가 표시됨 {#browser-tests-show-page-crashed-errors}
 
@@ -247,7 +247,7 @@ ICMP 테스트는 `ping` 명령을 사용하여 네트워크 경로와 호스트
 
 ### `TIMEOUT` 프라이빗 위치의 API 테스트 오류 {#timeout-errors-in-api-tests-from-private-locations}
 
-`TIMEOUT` 오류는 일반적으로 프라이빗 위치가 테스트 엔드포인트에 도달할 수 없음을 나타냅니다. 프라이빗 위치가 대상 엔드포인트와 동일한 네트워크에 설치되어 있는지 확인하세요. 다른 엔드포인트를 테스트하여 문제가 특정 엔드포인트에 국한된 것인지 아니면 네트워크 전체의 문제인지 확인하세요.
+`TIMEOUT` 오류는 일반적으로 프라이빗 위치가 테스트 엔드포인트에 도달할 수 없음을 나타냅니다. 프라이빗 위치가 대상 엔드포인트와 동일한 네트워크에 설치되어 있는지 검증하세요. 다른 엔드포인트를 테스트하여 문제가 특정 엔드포인트에 국한된 것인지 아니면 네트워크 전체의 문제인지 확인하세요.
 
 {{< img src="synthetics/timeout.png" alt="프라이빗 위치의 API 테스트 시간 초과" style="width:70%;" >}}
 
@@ -255,7 +255,7 @@ ICMP 테스트는 `ping` 명령을 사용하여 네트워크 경로와 호스트
 
 Chrome 버전 149에서는 요청 헤더에 대한 검증이 더 엄격해졌으며, 이로 인해 하위 리소스 요청에 실패하고 `net::ERR_INVALID_ARGUMENT` 오류가 발생할 수 있습니다. 이전 Chrome 버전은 더 허용적이었습니다.
 
-**해결 방법**: 이 문제를 해결하려면 프라이빗 위치를 [버전 1.69.1 이상][106]으로 업그레이드하세요.
+**해결 방법**: 이 문제를 해결하려면 프라이빗 위치를 [버전 1.70.0 이상][106]으로 업그레이드하세요.
 
 [101]: /ko/synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
@@ -316,7 +316,7 @@ Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.syntheti
 1. {{< ui >}}Services (Local){{< /ui >}}에서 `Datadog Synthetics Private Location`을 찾습니다.
 1. 서비스를 마우스 오른쪽 버튼으로 클릭하고 {{< ui >}}Restart{{< /ui >}}를 선택합니다.
 
-Worker는 {{< ui >}}Local Service{{< /ui >}} 계정으로 실행됩니다. `synthetics-pl-worker` 프로세스가 작업 관리자의 {{< ui >}}Details{{< /ui >}} 탭에 표시되는지 확인하세요.
+Worker는 {{< ui >}}Local Service{{< /ui >}} 계정으로 실행됩니다. `synthetics-pl-worker` 프로세스가 작업 관리자의 {{< ui >}}Details{{< /ui >}} 탭에 표시되는지 검증하세요.
 
 #### PowerShell 방법 {#powershell-method}
 
@@ -329,7 +329,7 @@ Worker는 {{< ui >}}Local Service{{< /ui >}} 계정으로 실행됩니다. `synt
 
 **충돌 복구**: Worker가 실행을 멈추면 Worker를 다시 시작하는 PowerShell 스크립트를 실행하도록 Windows 예약 작업을 생성하세요. 이렇게 하면 충돌 후 자동 복구가 보장됩니다.
 
-**자동 시작**: 설치 중에 구성 파일을 제공한 경우 `Datadog Synthetics Private Location` Windows 서비스가 자동으로 시작됩니다. {{< ui >}}Services{{< /ui >}} 도구에서 서비스가 실행 중인지 확인하세요. 이 서비스는 자동 다시 시작을 처리합니다.
+**자동 시작**: 설치 중에 구성 파일을 제공한 경우 `Datadog Synthetics Private Location` Windows 서비스가 자동으로 시작됩니다. {{< ui >}}Services{{< /ui >}} 도구에서 서비스가 실행 중인지 검증하세요. 이 서비스는 자동 다시 시작을 처리합니다.
 
 ### 자체 서명된 인증서 오류{#self-signed-certificate-errors}
 
@@ -354,7 +354,7 @@ Error: self-signed certificate in certificate chain
 **해결 방법**:
 
 - 사용자 지정 자체 서명 [루트 인증서][101]를 프라이빗 위치에 업로드합니다.
-- Windows 프라이빗 위치 로그에서 더 이상 오류가 보고되지 않는지 확인합니다.
+- Windows 프라이빗 위치 로그에서 더 이상 오류가 보고되지 않는지 검증합니다.
 
 ```
 "Queue error - onFetchMessagesLongPolling - self-signed certificate in certificate chain
@@ -370,9 +370,9 @@ TLS 검사를 우회하지 않으면 Windows 프라이빗 위치는 테스트 �
 
 ### sudo 또는 dog 사용자의 암호 프롬프트{#password-prompts-for-sudo-or-dog-user}
 
-프라이빗 위치 사용자(`dog`)가 올바르게 작동하려면 `sudo` 액세스 권한이 필요합니다. 이 사용자는 일반적으로 컨테이너 시작 중에 권한을 받습니다. 어떠한 정책도 `dog` 사용자의 `sudo` 액세스를 제한하지 않으며 컨테이너가 `dog` 사용자(UID 501)로 실행되는 것을 방해하지 않는지 확인하세요.
+프라이빗 위치 사용자(`dog`)가 올바르게 작동하려면 `sudo` 액세스 권한이 필요합니다. 이 사용자는 일반적으로 컨테이너 시작 중에 권한을 받습니다. 어떠한 정책도 `dog` 사용자의 `sudo` 액세스를 제한하지 않으며 컨테이너가 `dog` 사용자(UID 501)로 실행되는 것을 방해하지 않는지 검증하세요.
 
-또한 프라이빗 위치 버전 `>v1.27`은 `clone3` 시스템 호출에 따라 달라집니다. 이전 컨테이너 런타임 환경(Docker 버전 <20.10.10)은 기본 `seccomp` 정책에서 `clone3`을 지원하지 않을 수 있습니다. 
+또한 프라이빗 위치 버전 `>v1.27`은 `clone3` 시스템 호출에 의존합니다. 이전 컨테이너 런타임 환경(Docker 버전 <20.10.10)은 기본 `seccomp` 정책에서 `clone3`을 지원하지 않을 수 있습니다. 
 
 **해결 방법**: 런타임 버전을 업데이트하거나, 정책에 `clone3`을 수동으로 추가하거나, `unconfined` seccomp 정책을 사용하여 런타임의 `seccomp` 정책에 `clone3`이 포함되도록 하세요. 자세한 내용은 [Docker의 `seccomp` 설명서][13]를 참조하세요.
 

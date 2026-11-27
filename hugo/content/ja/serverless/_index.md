@@ -39,7 +39,7 @@ Serverless Monitoring を活用することで、チームの俊敏性を維持�
 
 [Datadog Serverless Monitoring][1] は、サーバーレスコンピューティングからのリアルタイムメトリクス、ログ、トレースおよび関連するフルマネージド API、キュー、ストリーム、データストアを収集することで、サーバーレスアプリケーションを稼働させるすべてのマネージドサービスに関する完全な可視性を提供します。
 
-Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service)、[Azure Container Apps](#azure-container-apps)、[Google Cloud Run](#google-cloud-run) を監視するためのソリューションを提供しています。
+Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service)、[Azure Container Apps](#azure-container-apps)、[Google Cloud Run](#google-cloud-run)、[Vercel](#vercel) を監視するためのソリューションを提供しています。
 
 ### AWS Lambda {#aws-lambda}
 
@@ -91,7 +91,15 @@ Google Cloud Run は、単一目的の小規模な関数を作成できる、軽
 
 また、Datadog は、トレース、カスタムメトリクス、直接ログ収集を可能にする Serverless Agent で [Cloud Run アプリケーションをインスツルメントする][12]ソリューションも提供しています。
 
-## 参考資料 {#further-reading}
+### Vercel {#vercel}
+
+Vercel は、Next.js アプリケーションなどのフロントエンドフレームワークやサーバーレス関数をデプロイするためのプラットフォームです。[Vercel インテグレーション][15]は、Vercel の Log Drains および Trace Drains を通じてログ、メトリクス、トレースを収集します。Datadog ライブラリやコードの変更は不要です。[{{< ui >}}Serverless{{< /ui >}}] アプリビューには、各 Vercel プロジェクトのリクエスト、エラー、ログが表示されます。
+
+Vercel Functions ログ内のエラーは、[Error Tracking][16] でイシューにグループ化されます。これには、`console.error` 出力、Pino または Winston で記録されたエラー、キャッチされなかった例外、関数のクラッシュが含まれます。Error Tracking はトレースなしでログのみで機能しますが、組織でログの Error Tracking を有効にする必要があります。イシューでは Vercel プロジェクト名が `service` として使用され、[{{< ui >}}Serverless{{< /ui >}}] アプリビューの各プロジェクトのページに表示されます。インテグレーションのログパイプラインで抽出される内容については、[Vercel Error Tracking][17] を参照してください。
+
+開始するには、[Vercel Marketplace から Datadog をインストール][18]し、[Vercel インテグレーションのセットアップ][19]に従います。
+
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -109,3 +117,8 @@ Google Cloud Run は、単一目的の小規模な関数を作成できる、軽
 [12]: /ja/serverless/google_cloud_run
 [13]: /ja/integrations/amazon_step_functions
 [14]: /ja/serverless/step_functions/installation
+[15]: /ja/integrations/vercel/
+[16]: /ja/error_tracking/backend/logs/
+[17]: /ja/integrations/vercel/#error-tracking
+[18]: https://vercel.com/marketplace/datadog
+[19]: /ja/integrations/vercel/#setup

@@ -38,11 +38,12 @@ title: Network Monitoring
 {{< /learning-center-callout >}}
 
 {{< whatsnext desc="Cette section comprend les sujets suivants :">}}
-    {{< nextlink href="network_monitoring/cloud_network_monitoring" >}}<u>Cloud Network Monitoring</u> : explorez les métriques pour la communication point à point sur votre infrastructure.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/dns" >}}<u>DNS Monitoring</u> : diagnostiquez et déboguez les problèmes de serveur DNS.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices" >}}<u>Network Device Monitoring</u> : obtenez une visibilité sur vos appareils connectés au réseau, tels que les routeurs, les commutateurs, les serveurs et les pare-feu.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/netflow" >}}<u>NetFlow Monitoring</u> : analysez les flux de trafic réseau pour identifier les principaux émetteurs et l'utilisation de la bande passante sur votre infrastructure.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/network_path" >}}<u>Network Path</u> : étudiez les itinéraires suivis par le trafic réseau de la source à la destination pour localiser les problèmes réseau.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/cloud_network_monitoring" >}}<u>Cloud Network Monitoring</u> : explorez les métriques pour la communication point à point sur votre infrastructure.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/dns" >}}<u>DNS Monitoring</u> : diagnostiquez et déboguez les problèmes de serveur DNS.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices" >}}<u>Network Device Monitoring</u> : obtenez une visibilité sur vos appareils connectés au réseau, tels que les routeurs, les commutateurs, les serveurs et les pare-feu.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/netflow" >}}<u>NetFlow Monitoring</u> : analysez les flux de trafic réseau pour identifier les principaux émetteurs et l'utilisation de la bande passante sur votre infrastructure.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/network_path" >}}<u>Network Path</u> : étudiez les itinéraires suivis par le trafic réseau de la source à la destination pour localiser les problèmes réseau.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/l1_to_l7_map" >}}<u>L1 to L7 Map</u> : Visualisez comment les ressources sont connectées à travers la pile réseau et concentrez l'enquête sur une ressource ou une connexion précise.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin {#further-reading}

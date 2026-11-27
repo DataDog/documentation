@@ -5,7 +5,7 @@ aliases:
 - /ja/opentelemetry/setup/collector_exporter/pure_otlp_collector/
 - /ja/opentelemetry/setup/collector_exporter/install/
 - /ja/opentelemetry/collector_exporter/
-description: OpenTelemetry コレクター と OTLP を使用して OpenTelemetry データを Datadog に送信します。
+description: OpenTelemetry コレクターと OTLP を使用して OpenTelemetry データを Datadog に送信します。
 further_reading:
 - link: https://opentelemetry.io/docs/collector/
   tag: 外部サイト
@@ -19,9 +19,9 @@ further_reading:
 - link: /opentelemetry/config/otlp_receiver
   tag: ドキュメント
   text: OTLP レシーバーの有効化
-- link: /opentelemetry/setup/ddot_collector/install/
+- link: /opentelemetry/setup/ddot_collector/kubernetes/
   tag: ドキュメント
-  text: DDOT コレクターのインストール (推奨)
+  text: Kubernetes に DDOT Collector をインストールする (推奨)
 - link: /opentelemetry/compatibility/
   tag: ドキュメント
   text: 機能の互換性
@@ -33,14 +33,14 @@ title: OpenTelemetry コレクターをセットアップする
 ---
 ## 概要 {#overview}
 
-OpenTelemetry コレクター を使用して、Datadog にトレース、メトリクス、ログを送信します。このページのインライン構成は、OpenTelemetry コレクター Contrib ディストリビューション v0.161.0 でテストされており、以下の主要コンポーネントを備えた OTLP ベースのテレメトリパイプラインを使用しています。
+OpenTelemetry コレクターを使用して、Datadog にトレース、メトリクス、ログを送信します。このページのインライン構成は、OpenTelemetry コレクター Contrib ディストリビューション v0.161.0 でテストされており、以下の主要コンポーネントを備えた OTLP ベースのテレメトリパイプラインを使用しています。
 
 - **OTLP HTTP エクスポーター**: テレメトリを Datadog の OTLP インテークエンドポイントに送信します。
-- **スパンメトリクスコネクタ**: トレースデータから RED (Rate、Error、Duration) メトリクスを生成し、カタログやサービスページなどの APM 機能を強化します。
+- **スパンメトリクスコネクタ**: トレースデータから RED (Rate、Error、Duration) メトリクスを生成し、カタログやサービスページなどの APM 機能を強化します。これらのメトリクスを計算するその他の方法については、[トレースメトリクス][14]を参照してください。
 - **リソース検出プロセッサー**: ホストとクラウドのリソース属性を検出します。これらの属性は、Datadog がホスト名の解決とタグ付けに使用します。
 - **Datadog 拡張機能**: Fleet Automation のために、コレクターの構成を Datadog に報告します。テレメトリデータはエクスポートされません。
 
-これは、ユーザーが自分でコレクターを管理する場合に推奨されるセットアップです。Datadog がコレクターディストリビューションの管理とサポート行うことを希望する場合は、代わりに [DDOT (OTel コレクター の Datadog ディストリビューション)][12] を使用してください。
+これは、ユーザーが自分でコレクターを管理する場合に推奨されるセットアップです。Datadog が構築およびサポートする Collector を使用する場合は、代わりに [DDOT Collector][12] を使用してください。
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="OpenTelemetry SDK は OTLP データを OpenTelemetry コレクターに送信し、それが OTLP HTTP 経由で Datadog にエクスポートされます。" style="width:100%;" >}}
 
@@ -255,7 +255,7 @@ service:
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-コレクターを実行します。`<YOUR_DD_SITE>` を自分の Datadog サイトに置き換えます。{{< region-param key="dd_site" code="true" >}}。
+コレクターを実行します。`<YOUR_DD_SITE>` を自分の Datadog サイトに置き換えます。{{< region-param key="dd_site" code="true" >}}です。
 
 ```shell
 DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -473,7 +473,7 @@ docker run \
 
 [公式 OpenTelemetry コレクター Helm チャート][102]を使用して、Kubernetes にコレクターを DaemonSet としてデプロイします。サンプル値ファイルはチャート v0.147.1 でテストされて、コレクターを v0.154.0 に固定し、必要なマウント、環境変数、RBAC リソース、およびポート公開を設定します。
 
-クラスター全体のメトリクスを収集する場合や、Kubernetes リソースデータを Kubernetes エクスプローラーに送信する場合は、DaemonSet と併せてクラスターコレクターをデプロイします。[Kubernetes メトリクス][13]を参照してください。
+クラスター全体のメトリクスを収集する場合や、Kubernetes リソースデータを Kubernetes エクスプローラーに送信する場合は、DaemonSet と併せてクラスターコレクターをデプロイします。[Kubernetes メトリクス][110]を参照してください。
 
 1. Datadog API キーを使用して Kubernetes シークレットを作成します。
 
@@ -518,6 +518,7 @@ docker run \
 [107]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
 [108]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
+[110]: /ja/opentelemetry/integrations/kubernetes_metrics/
 
 {{% /tab %}}
 
@@ -859,7 +860,7 @@ processors:
 
 これらのモードでは、`/hostfs` のマウントやホストポートの使用は許可されません。GKE または AKS の `resource_detection` プロセッサーを使用し、以下の追加変更を行ってください。
 
-- `receivers` ブロックと `metrics` パイプラインから `host_metrics` レシーバーを 削除します。ノード、Pod、コンテナ、およびボリュームのメトリクスは、引き続き `kubelet_stats` レシーバーから取得されます。
+- `receivers` ブロックと `metrics` パイプラインから `host_metrics` レシーバーを削除します。ノード、Pod、コンテナ、およびボリュームのメトリクスは、引き続き `kubelet_stats` レシーバーから取得されます。
 - コレクターのホストポートを無効にし、代わりにノードローカルのサービスを介して公開します。GKE Autopilot および AKS Automatic Helm 値ファイルは、これらの変更を適用します。[アプリケーションを構成する](#3-configure-your-application) に示されているホスト IP ではなく、そのサービスでアプリケーションをポイントします。
 
 各環境の完全な構成ファイルについては、[`opentelemetry-examples` リポジトリ][501]を参照してください。
@@ -928,9 +929,9 @@ GKE Autopilot および AKS Automatic では、ホストポートは許可され
 
 ### スパンメトリクスコネクタ {#span-metrics-connector}
 
-`span_metrics` コネクタは、トレースデータから RED メトリクスを生成します。これらのメトリクスは、Catalog、Service Page、Resource Page などの APM 機能を強化します。このコネクタは、Datadog がトレースからホストタグ、ピアサービス、オペレーション名を計算できるようにするディメンションで構成されています。
+`span_metrics` コネクタは、トレースデータから RED メトリクスを生成します。これらのメトリクスは、Catalog、Service Page、Resource Page などの APM 機能を強化します。このコネクタは、Datadog がトレースからホストタグ、ピアサービス、オペレーション名を計算できるようにするディメンションで構成されています。このコネクタを他のトレースメトリクスソースと比較するには、[トレースメトリクス][14]を参照してください。
 
-[コレクターを構成してデプロイする](#2-configure-and-deploy-the-collector) に示されている環境固有の各構成には、完全な `span_metrics` コネクターブロックが含まれています。構成を調整する際は、Datadog が必要なホストタグ、ピアサービス、オペレーション名、リソース名を導出できるよう、すべてのディメンションを保持してください。
+[コレクターを構成してデプロイする](#2-configure-and-deploy-the-collector) に示されている環境固有の各構成には、完全な `span_metrics` コネクタブロックが含まれています。構成を調整する際は、Datadog が必要なホストタグ、ピアサービス、オペレーション名、リソース名を導出できるよう、すべてのディメンションを保持してください。
 
 [完全な構成ファイル][5]には、`- glob: container.**` などの glob パターンを使用してコンテナタグディメンションのグループを置き換える方法も示されています。
 
@@ -968,7 +969,7 @@ GKE Autopilot および AKS Automatic では、ホストポートは許可され
 }
 ```
 
-<div class="alert alert-info">推奨される OpenTelemetry Collector 構成では、 <code>span_metrics</code> コネクタを使用して、APM ビューを強化する RED メトリクスが生成されます。ここでの <code>trace_metrics.instrumentation_metrics_calc</code> および <code>raw_instrumentation_metrics_drop</code> フィールドは、HTTP インスツルメンテーションメトリクスから APM トレースメトリクスを派生させるセットアップ向けの代替構成をサポートしています。この <code>instrumentation_metrics_calc</code> を <code>span_metrics</code> コネクタとともに有効にしないでください。このようにすると、両方のソースからのトレースメトリクスが計算されるためです。</div>
+<div class="alert alert-info"> <code>trace_metrics.instrumentation_metrics_calc</code> フィールドと <code>raw_instrumentation_metrics_drop</code> フィールドにより、HTTP インスツルメンテーションのメトリクスが APM トレースメトリクスの強化のために使用されるかどうか、および Datadog がそれらをカスタムメトリクスとして保持するかどうかが制御されます。この <code>instrumentation_metrics_calc</code> を <code>span_metrics</code> コネクタとともに有効にしないでください。このようにすると、Datadog が両方のソースからのトレースメトリクスを計算するためです。これらのフィールドの各組み合わせについては、<a href="/opentelemetry/integrations/trace_metrics/#use-http-metrics-from-the-sdk">トレースメトリクス</a>を参照してください。</div>
 
 ### トレースフォワードコネクタ {#trace-forward-connector}
 
@@ -1015,6 +1016,7 @@ Datadog は、OTLP データを取り込む際に以下の制限を適用しま�
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /ja/opentelemetry/setup/ddot_collector/install/
+[12]: /ja/opentelemetry/setup/ddot_collector/
 [13]: /ja/opentelemetry/integrations/kubernetes_metrics/
+[14]: /ja/opentelemetry/integrations/trace_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

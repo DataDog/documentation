@@ -29,11 +29,11 @@ title: 런타임 메트릭
 ---
 ## 개요 {#overview}
 
-런타임 메트릭은 애플리케이션의 메모리 사용량, 가비지 컬렉션 및 병렬화를 모니터링합니다. Datadog SDK는 지원되는 환경에서 이러한 메트릭을 자동으로 수집하며 Datadog Agent로 전송합니다.
+런타임 메트릭은 애플리케이션의 메모리 사용량, 가비지 컬렉션 및 병렬화를 모니터링합니다. Datadog SDK는 지원되는 환경에 대해 이러한 메트릭을 자동으로 수집합니다.
 
 이 메트릭은 병목 현상을 식별하고 성능 문제를 해결하며 리소스 사용을 최적화하는 데 도움을 줍니다. 트레이스 및 로그와 함께 런타임 메트릭을 확인하면 애플리케이션 상태와 성능에 대한 종합적인 가시성을 확보할 수 있습니다.
 
-Datadog 트레이싱 라이브러리 대신 OpenTelemetry를 사용하는 경우 [OpenTelemetry 런타임 메트릭][10]을 참조하여 설정하세요.
+업스트림 OpenTelemetry SDK에서 수집한 런타임 메트릭에 대한 설정 지침은 [OpenTelemetry 런타임 메트릭][10]을 참조하세요.
 
 ## 호환성 {#compatibility}
 
@@ -94,7 +94,7 @@ Datadog 트레이싱 라이브러리 대신 OpenTelemetry를 사용하는 경우
 
 #### IIS(Internet Information Services) 권한(.NET Framework 전용) {#permissions-for-internet-information-services-iis-net-framework-only}
 
-.NET Framework에서는 성능 카운터를 사용하여 메트릭을 수집합니다. 비대화형 로그온 세션의 사용자(IIS 애플리케이션 풀 계정 및 일부 서비스 계정 포함)가 반대의 데이터에 액세스하려면 ***성능 모니터링 사용자** 그룹에 추가되어야 합니다.
+.NET Framework에서는 성능 카운터를 사용하여 메트릭을 수집합니다. 비대화형 로그온 세션의 사용자(IIS 애플리케이션 풀 계정 및 일부 서비스 계정 포함)가 카운터 데이터에 액세스하려면 {{< ui >}}Performance Monitoring Users{{< /ui >}} 그룹에 추가되어야 합니다.
 
 IIS 애플리케이션 풀은 사용자 목록에 나타나지 않는 특수 계정을 사용합니다. 이 계정을 성능 모니터링 사용자 그룹에 추가하려면 `IIS APPPOOL\<name of the pool>` 형식을 사용합니다. 예를 들어, DefaultAppPool의 사용자는 `IIS APPPOOL\DefaultAppPool`입니다.
 
@@ -119,11 +119,13 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 
 ## 설정 지침 {#setup-instructions}
 
+다음은 DogStatsD를 통해 런타임 메트릭을 내보내는 방법에 대한 지침입니다. OTLP 내보내기에 대해서는 [OTLP를 통한 런타임 메트릭 내보내기][12]를 참조하세요.
+
 런타임 메트릭을 설정하려면 Datadog Agent와 애플리케이션을 모두 구성해야 합니다.
 
 ### 1. Datadog Agent 구성 {#1-configure-the-datadog-agent}
 
-[Agent에서 DogStatsD][2]를 활성화합니다. 기본적으로 Datadog Agent는 포트 `8125`를 통해 메트릭을 수집하도록 구성되어 있습니다.
+[Agent에서 DogStatsD][2]를 활성화합니다. 기본적으로 Datadog Agent는 포트 `8125`에서 UDP로 메트릭을 수집하도록 구성되어 있습니다.
 
 {{% collapse-content title="컨테이너 전용 구성" level="h4" expanded=false %}}
 
@@ -136,7 +138,7 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 
 <br>
 
-{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,gov,gov2,ap1,ap2,uk1" >}}
 
 3. Datadog Agent의 `DD_SITE`를 {{< region-param key="dd_site" code="true" >}} 로 설정하여 Agent가 데이터를 올바른 Datadog 위치에 전송되도록 보장합니다.
 
@@ -169,7 +171,7 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 **설명**: SDK의 메트릭 제출을 위한 포트를 설정합니다.
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
-: **기본값**: .NET 8 이상에서 tracer v3.40.0 이상이면(그리고 NET 6/7에서 `DD_RUNTIME_METRICS_ENABLED`가 명시적으로 설정되지 않은 경우) `true`, 그 외는 `false` <br>
+: **기본값**: .NET 8 이상에서 tracer v3.40.0 이상이면(그리고 .NET 6/7에서 `DD_RUNTIME_METRICS_ENABLED`가 명시적으로 설정되지 않은 경우) `true`, 그 외는 `false` <br>
 **설명**: .NET 6부터 사용할 수 있는 설정입니다. .NET 트레이서가 [`System.Diagnostics.Metrics` API][9]를 사용하여 메트릭을 수집할지, 아니면 `EventListener` 기반 컬렉터를 사용할지를 제어합니다.
 
 #### 코드 기반 구성 {#code-based-configuration}
@@ -195,7 +197,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-danger">이 설정은 <code>ddtrace-run</code></div>을 사용하지 않는 경우에만 적용됩니다.
+<div class="alert alert-danger">다음을 사용하지 않는 경우에만 이 설정이 적용됩니다. <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
@@ -258,12 +260,25 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{< /tabs >}}
 
-## 대시보드 {#dashboards}
+## OTLP를 통한 런타임 메트릭 내보내기 {#export-runtime-metrics-over-otlp}
+
+다음 DDOT SDK 중 하나를 사용하여 OTLP를 통해 런타임 메트릭을 내보내세요.
+
+| SDK | 최소 SDK 버전 | 런타임 요구 사항 |
+|-----|---------------------|---------------------|
+| Java | v1.63.0 | Java 8+ |
+| .NET | v3.44.0 | .NET 6+ |
+| Node.js | v5.107.0 | SDK에서 지원하는 Node.js 버전 |
+| Go | v2.10.0 | SDK에서 지원하는 Go 버전 |
+
+환경 변수 및 엔드포인트 설정은 [OTLP를 통한 런타임 메트릭 내보내기][11]를 참조하세요.
+
+## Dashboards {#dashboards}
 
 설정이 완료되면 런타임 메트릭을 볼 수 있습니다.
 
 - 계측된 서비스의 세부 정보 페이지
-- 플레임 그래프의 **Metrics** 탭
+- 플레임 그래프의 {{< ui >}}Metrics{{< /ui >}} 탭
 - 기본 런타임 대시보드
 
 {{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
@@ -272,7 +287,7 @@ const tracer = require('dd-trace').init({
 - 플레임 그래프 내에서 런타임 메트릭을 연결하려면 `env` 태그(대소문자 구분)가 설정되어 있고 환경과 일치하는지 확인하세요.
 - Fargate를 사용할 때 서비스 페이지에 런타임 메트릭이 표시되도록 하려면 `DD_DOGSTATSD_TAGS`가 Agent 작업에 설정되어 있고 구성된 `env` 태그가 계측된 서비스의 `env`와 일치하는지 확인하세요.
 
-## 수집된 데이터 {#data-collected}
+## 수집되는 데이터 {#data-collected}
 
 지원되는 각 언어는 메모리 사용량, 가비지 컬렉션, CPU 사용률 및 기타 성능 지표에 대한 인사이트를 제공하는 런타임 메트릭 세트를 수집합니다.
 
@@ -312,3 +327,5 @@ const tracer = require('dd-trace').init({
 [8]: /ko/agent/configuration/agent-configuration-files/#main-configuration-file
 [9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
 [10]: /ko/opentelemetry/integrations/runtime_metrics/
+[11]: /ko/opentelemetry/config/environment_variable_support/#export-runtime-metrics-over-otlp
+[12]: #export-runtime-metrics-over-otlp

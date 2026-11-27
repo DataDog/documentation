@@ -25,7 +25,7 @@ Private Link 모니터링은 Private Action Runner의 [폴링 아키텍처][4]�
 1. 러너가 가져온 쿼리를 Databricks API에 대해 실행합니다. 결과가 러너로 반환됩니다.
 1. 러너가 처리를 위해 결과를 Datadog 백엔드로 다시 전달합니다.
 
-Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리됩니다. 설치 중에 러너에 로컬로 구성된 허용 목록이 설정되어 필요한 액션만 수행할 수 있도록 제한됩니다. Datadog 내에서 액세스 제어를 구성하여 러너를 사용할 수 있는 사용자와 팀을 관리할 수도 있습니다. 자세한 내용은 [Private Action Runner에 대한 액세스 관리][16]를 참조하세요.
+Datadog에 대한 모든 인증은 기본 Private Action Runner가 처리합니다. 설치 중에 러너에 로컬로 구성된 허용 목록이 설정되어 필요한 액션만 수행할 수 있도록 제한됩니다. Datadog 내에서 액세스 제어를 구성하여 러너를 사용할 수 있는 사용자와 팀을 관리할 수도 있습니다. 자세한 내용은 [Private Action Runner에 대한 액세스 관리][16]를 참조하세요.
 
 ## 설치 {#installation}
 
@@ -63,6 +63,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. 위에서 생성한 서비스 주체를 선택합니다.
    1. **Secrets** 탭을 클릭한 다음 **Generate secret**을 클릭합니다.
    1. 시크릿의 수명을 일 단위로 설정합니다(최대 730일).
+   1. 시크릿의 범위를 `all-apis`로 설정합니다.
    1. **Generate**를 클릭합니다.
    1. 다음 방법 중 **하나**를 사용하여 Databricks 자격 증명을 러너에서 사용할 수 있도록 설정합니다.
       - **클라우드 시크릿 스토리지**(AWS Secrets Manager, AWS Parameter Store, Azure Key Vault 또는 Google Cloud Secret Manager): 자격 증명을 JSON Blob으로 저장합니다.
@@ -152,9 +153,9 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. Private Action Runner가 하단에 "successfully installed."로 표시되어야 합니다.
 1. 기존 `values.yaml`을 업데이트합니다([Helm 차트 값][4] 참조).
    1. `image.repository`를 `gcr.io/datadoghq/dd-data-observability-par`로 설정합니다.
-   1. `image.tag`를 `1.22.1-0`으로 설정합니다.
+   1. `image.tag`를 `1.22.2-0`으로 설정합니다.
 1. 다음 방법 중 하나를 사용하여 Private Action Runner에서 자격 증명을 구성합니다.
-    - 러너에서 직접 `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 설정합니다. Microsoft Entra ID 관리형 서비스 주체를 사용하는 경우 `DATABRICKS_AZURE_TENANT_ID`도 설정합니다. 통합 타일의 "Secret Path"는 비워 두세요.
+    - 러너에서 직접 `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 설정합니다. Microsoft Entra ID 관리형 서비스 주체를 사용하는 경우 `DATABRICKS_AZURE_TENANT_ID`도 설정합니다. 통합 타일의 'Secret Path'는 비워 두세요.
     - 클라우드 시크릿 스토리지를 사용합니다. [2단계](#step-2-databrick-prerequisites)에서 생성된 시크릿을 읽을 수 있는 권한이 있는 ID가 포드에 할당되었는지 확인하고([Azure Workload Identity][5], [AWS IAM Role][6] 또는 [GKE Workload Identity][7]), `DATABRICKS_SECRET_PATH` 환경 변수를 통해 또는 통합 타일의 'Secret Path' 필드에 제공하여 시크릿 경로를 지정하세요.
 1. 이러한 변경 사항을 적용하려면 배포를 다시 시작합니다.
 
@@ -175,11 +176,11 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Script** 옵션을 선택한 다음 **Next**를 클릭합니다.
    1. **Docker**의 지침을 따릅니다.
 
-      **중요**: `gcr.io/datadoghq/private-action-runner:v1.22.1-large`를 `gcr.io/datadoghq/dd-data-observability-par:1.22.1-0`으로 바꿉니다.
+      **중요**: `gcr.io/datadoghq/private-action-runner:v1.22.1-large`를 `gcr.io/datadoghq/dd-data-observability-par:1.22.2-0`으로 바꾸세요.
 
    1. Private Action Runner가 하단에 "successfully installed."로 표시되어야 합니다.
 1. 다음 방법 중 하나를 사용하여 Private Action Runner에서 자격 증명을 구성합니다.
-    - 러너에서 직접 `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 설정합니다. Microsoft Entra ID 관리형 서비스 주체를 사용하는 경우 `DATABRICKS_AZURE_TENANT_ID`도 설정합니다. 통합 타일의 "Secret Path"는 비워 두세요.
+    - 러너에서 직접 `DATABRICKS_CLIENT_ID` 및 `DATABRICKS_CLIENT_SECRET` 환경 변수를 설정합니다. Microsoft Entra ID 관리형 서비스 주체를 사용하는 경우 `DATABRICKS_AZURE_TENANT_ID`도 설정합니다. 통합 타일의 'Secret Path'는 비워 두세요.
     - 클라우드 시크릿 스토리지를 사용합니다. [2단계](#step-2-databricks-prerequisites)에서 생성된 시크릿을 읽을 수 있는 권한이 있는 ID가 인스턴스에 할당되었는지 확인하고([Azure Managed Identity][5], [AWS IAM Role][6] 또는 [GCE Service Account][7]), `DATABRICKS_SECRET_PATH` 환경 변수를 통해 또는 통합 타일의 'Secret Path' 필드에 제공하여 시크릿 경로를 지정하세요.
 
 1. 변경 사항을 적용하려면 Docker 컨테이너를 다시 시작합니다.
@@ -212,7 +213,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
    1. **Path to File**을 `/etc/data-observability/config/script.yaml`로 설정합니다.
    1. **Next, Confirm Access**를 선택합니다.
    1. [1단계](#step-1-datadog-prerequisites)에서 생성한 서비스 계정을 **Resolver** 액세스 권한과 함께 추가합니다. 이 단계는 필수입니다. 러너는 이 서비스 계정을 사용하여 Datadog 요청을 인증하며, 이 계정이 없으면 통합이 작동하지 않습니다.
-   1. **Create and Test**를 선택합니다. 테스트 결과에 오류가 반환되지 않는지 확인합니다.
+   1. **Create and Test**를 선택합니다. 테스트 결과에 오류가 반환되지 않는지 검증합니다.
 1. Databricks 통합을 설정합니다.
    1. [Databricks 통합][13] 타일로 이동합니다.
    1. **Credentials**에서 **Private Action Runner**를 선택합니다.
@@ -225,7 +226,7 @@ Datadog에 대한 모든 인증은 기본 Private Action Runner에 의해 처리
          **참고:** 현재 Private Link를 통한 모델 서빙은 지원되지 않습니다.
       1. 만약 **Jobs Monitoring**을 활성화한 경우, Datadog Agent 초기화 스크립트를 배포하여 클래식 컴퓨팅에서 작업 및 클러스터를 모니터링합니다. [Datadog Agent 설치][19]의 지침에 따라 초기화 스크립트를 설정한 다음, 실행 중인 클러스터를 다시 시작하여 변경 사항을 적용하세요.
    1. **Save Databricks Workspace**를 클릭합니다.
-   1. 저장 시 오류가 없는지 확인합니다.
+   1. 저장 시 오류가 없는지 검증합니다.
 
 ## 검증 {#validation}
 

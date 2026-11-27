@@ -19,10 +19,10 @@ US1-FED 및 US2-FED에서 원격 업그레이드를 수행하려면 Linux와 Win
 </div>
 {{< /site-region >}}
 
-- 조직과 Agent의 API 키에 대해 [Remote Configuration][7]이 활성화되어 있음
-- 각 대상 VM Agent에 대해 [원격 업데이트][8]가 활성화되어 있음(`remote_updates: true`)
-- Windows의 경우 Agent 버전 7.71.1 이상, Linux의 경우 7.69.0 이상
-- Linux VM 또는 Windows VM
+- 조직과 Agent가 사용하는 API 키에 대해 [Remote Configuration][7]이 활성화되어 있음. 둘 다 기본적으로 활성화되어 있습니다.
+- 각 대상 VM Agent에 대해 [Remote updates][8]가 활성화되어 있음(`remote_updates: true`).
+- Windows의 경우 Agent 버전 7.71.1 이상, Linux의 경우 7.69.0 이상.
+- Linux VMs or Windows VMs.
 - 최초로 Agent를 설치하려면 최소 2GB의 디스크 공간이 필요하며 업그레이드하는 경우 2GB가 추가로 필요합니다. (업그레이드하려면 Linux의 경우 `/opt/datadog-packages`에 1.3GB, Windows의 경우 `C:\ProgramData\Datadog\Installer\packages`에 1.3GB가 필요합니다. 추가 공간은 롤백이 필요한 경우를 대비하여 업그레이드 중에 2개의 Agent 설치를 일시적으로 유지합니다.)
 
 <div class="alert alert-info">
@@ -83,11 +83,11 @@ Datadog Terraform 공급자를 사용하여 Agent 업그레이드 일정을 코�
 
 시작에 앞서 다음 작업을 수행합니다.
 
-- Agent가 [업그레이드 전제 조건](#prerequisites)을 충족하는지 확인하세요.
+- Agent가 [업그레이드 전제 조건](#prerequisites)을 충족하는지 검증하세요.
 - [Datadog Terraform 공급자를 설정하세요][9](버전 4.22.0 이상).
 - `agent_upgrade_write` 및 `hosts_read` 권한이 있는 애플리케이션 키를 사용하세요.
 
-다음 예제는 `env:staging service:example`과 일치하는 호스트에 대한 비활성 일정을 정의합니다. 이 일정은 최신 Agent 버전(`version_to_latest = 0`)을 대상으로 합니다. 이 일정은 `America/New_York` 시간대의 화요일 및 목요일 03:00에 시작하는 2시간 유지 관리 기간(`maintenance_window_duration = 120`, 분 단위)을 지정합니다.
+다음 예시는 `env:staging service:example`과 일치하는 호스트에 대한 비활성 일정을 정의합니다. 이 일정은 최신 Agent 버전(`version_to_latest = 0`)을 대상으로 합니다. 이 일정은 `America/New_York` 시간대의 화요일 및 목요일 03:00에 시작하는 2시간 유지 관리 기간(`maintenance_window_duration = 120`, 분 단위)을 지정합니다.
 
 ```hcl
 resource "datadog_fleet_schedule" "staging" {
@@ -126,9 +126,9 @@ Windows:
 
 Agent는 이러한 파일에 대해 적절한 권한을 설정합니다. 업그레이드 중에 구성 파일은 변경되지 않습니다.
 
-## 업그레이드 우선순위 {#upgrade-precedence}
+## 업그레이드 우선 순위 {#upgrade-precedence}
 
-하나의 소스에서 한 번에 업그레이드를 관리하는 것이 좋습니다. Fleet Automation 또는 구성 관리 도구 중 하나만 사용하고 둘 다 사용하지 마세요. Fleet Automation을 통해 업그레이드된 Agent에서 구성 관리 도구를 실행하면, 해당 도구는 구성에서 Agent를 [`DD_AGENT_MINOR_VERSION`][4](으)로 되돌립니다. `DD_AGENT_MINOR_VERSION`이 설정되지 않은 경우 Agent는 사용 가능한 최신 버전으로 업그레이드됩니다.
+하나의 소스에서 한 번에 업그레이드를 관리하는 것이 좋습니다. Fleet Automation 또는 구성 관리 도구 중 하나만 사용하고 둘 다 사용하지 마세요. Fleet Automation을 통해 업그레이드된 Agent에서 구성 관리 도구를 실행하면, 해당 도구는 구성에서 Agent를 [`DD_AGENT_MINOR_VERSION`][4]으로 되돌립니다. `DD_AGENT_MINOR_VERSION`이 설정되지 않은 경우 Agent는 사용 가능한 최신 버전으로 업그레이드됩니다.
 
 ## 문제 해결 {#troubleshooting}
 
@@ -136,15 +136,15 @@ Agent는 이러한 파일에 대해 적절한 권한을 설정합니다. 업그�
 
 Agent의 측면 패널에 **Remote Agent Management: NOT ENABLED**가 표시되면 [원격 Agent 관리 활성화][8]에 따라 호스트에서 `remote_updates`를 활성화하고 Agent를 다시 시작합니다. 원격 업데이트가 비활성화된 상태에서도 Remote Configuration을 연결할 수 있습니다.
 
-Agent를 여전히 업그레이드할 수 없는 경우에는 [전제 조건](#prerequisites), Remote Configuration 연결 상태, Datadog Installer 실행 여부를 확인하세요.
+Agent를 여전히 업그레이드할 수 없는 경우에는 [전제 조건](#prerequisites), Remote Configuration 연결 상태, Datadog Installer 실행 여부를 검증하세요.
 
 ### 새로 릴리스된 Agent 버전으로 아직 업그레이드할 수 없음 {#newly-released-agent-version-is-not-yet-available-for-upgrade}
 
 새 Agent 버전이 릴리스되면 Fleet Automation에 업그레이드 대상으로 표시되기까지 최대 24시간이 걸릴 수 있습니다. 최근 출시된 버전이 업그레이드 선택기에 표시되지 않으면 최대 24시간까지 기다린 후 다시 시도해 보세요.
 
-### Datadog 설치 프로그램이 Agent(7.66 이전 버전)와 호환되지 않음 {#datadog-installer-incompatible-with-agent-pre-766}
+### Datadog Installer가 Agent(7.66 이전 버전)와 호환되지 않음 {#datadog-installer-incompatible-with-agent-pre-766}
 
-Preview 고객이었고 Agent 버전 7.66 이전에 원격 Agent 관리 활성화를 설정했다면 Datadog 설치 프로그램이 Agent와 호환되지 않을 수 있습니다.
+Preview 고객이었고 Agent 버전 7.66 이전에 원격 Agent 관리 활성화를 설정했다면 Datadog Installer가 Agent와 호환되지 않을 수 있습니다.
 
 버전 7.66부터는 설치 프로그램 구성 요소가 Agent와 함께 번들로 제공됩니다. 이렇게 하면 두 구성 요소가 동기화된 상태로 유지되어 원격 관리를 차단할 수 있는 버전 불일치를 방지합니다. 이전 Agent 버전에서는 설치 프로그램이 번들로 포함되지 않아 호환성 문제가 발생할 수 있습니다.
 

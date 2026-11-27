@@ -28,7 +28,7 @@ further_reading:
   text: サービス、リソース、トレースを調査する
 - link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
   tag: ラーニングセンター
-  text: APM SDKをアプリケーション用に設定し、管理してください。
+  text: アプリケーションの APM SDK を構成および管理する
 title: PHP アプリケーションのトレース
 type: multi-code-lang
 ---
@@ -36,11 +36,11 @@ type: multi-code-lang
 
 最新バージョンの `dd-trace-php` の最小 PHP バージョン要件は PHP 7 です。PHP 5 を使用している場合、PHP トレーサーはバージョン [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0) まで使用できます。PHP 5 は PHP ライブラリのバージョン 1.0 をもって EOL です。
 
-Datadog の PHP バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
+Datadog の PHP バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1] ページをご覧ください。
 
 ## はじめに {#getting-started}
 
-作業を始める前に、[Agent のインストールと構成][14]が済んでいることを確認してください。
+作業を始める前に、[Agent のインストールと構成][14] が済んでいることを確認してください。
 
 ### 拡張機能をインストール {#install-the-extension}
 
@@ -73,27 +73,27 @@ php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 ```
 
 <div class="alert alert-warning">
-<strong>注</strong>: Windows では APM のみがサポートされています。Windows で PHP アプリケーションをトレースする際は、 <code>--enable-appsec</code> と <code>--enable-profiling</code> フラグを使用しないでください。
+<strong>注</strong>: Windows では APM のみがサポートされています。Windows で PHP アプリケーションをトレースする際は、 <code>--enable-appsec</code> や <code>--enable-profiling</code> フラグを使用しないでください。
 </div>
 
 このコマンドは、ホストまたはコンテナ内で見つかったすべての PHP バイナリに拡張機能をインストールします。`--php-bin` が省略された場合、インストーラーは対話モードで実行され、ユーザーにインストールするバイナリを選択するように求めます。`--php-bin` の値は、`dd-trace-php` が特定のバイナリにのみインストールされる場合、そのバイナリへのパスにすることができます。
 
-PHP (PHP-FPM または Apache SAPI) を再起動し、アプリケーションのトレース可能なエンドポイントにアクセスします。生成されたトレースを確認するには、[APM トレースページ][4]に移動してください。
+PHP (PHP-FPM または Apache SAPI) を再起動し、アプリケーションのトレース可能なエンドポイントにアクセスします。生成されたトレースを確認するには、[APM トレースページ][4] に移動してください。
 
 `--enable-appsec` を指定しない場合、AppSec 拡張機能は起動時にすぐに読み込まれ、デフォルトでは有効になっていません。それは即座にショートサーキットし、パフォーマンスオーバーヘッドは無視できる程度です。
 
 <div class="alert alert-info">
-UI にトレースが表示されるまで、数分かかる場合があります。数分後もトレースが表示されない場合は、<a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"> を作成してください。<code>phpinfo()</code></a> ページに移動し、`ddtrace` までスクロールします。失敗した診断チェックは、このセクションに表示され、問題の特定に役立ちます。
+UI にトレースが表示されるまで、数分かかる場合があります。数分後もトレースが表示されない場合は、<a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"> を作成してください。<code>phpinfo()</code></a> ページをホストマシンから開き、下にスクロールして <code>ddtrace</code>を表示します。失敗した診断チェックは、このセクションに表示され、問題の特定に役立ちます。
 </div>
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-PHP CLI バイナリが NTS (非スレッドセーフ) としてビルドされている場合、Apache が ZTS (Zend スレッドセーフ) バージョンの PHP を使用しているときは、ZTS バイナリに対する拡張機能の読み込みを手動で変更する必要があります。実行 <code>/path/to/php-zts --ini</code> を実行して Datadog の <code>.ini</code> ファイルの場所を特定し、その後ファイル名から <code>-zts</code> のサフィックスを追加します。例えば、 <code>extension=ddtrace-20210902.so</code> から <code>extension=ddtrace-20210902-zts.so</code>まで。
+PHP CLI バイナリが NTS (非スレッドセーフ) としてビルドされている場合、Apache が ZTS (Zend スレッドセーフ) バージョンの PHP を使用しているときは、ZTS バイナリに対する拡張機能の読み込みを手動で変更する必要があります。 <code>/path/to/php-zts --ini</code> を実行して Datadog の <code>.ini</code> ファイルの場所を特定し、その後ファイル名から  <code>-zts</code>  サフィックスを追加します。たとえば、 <code>extension=ddtrace-20210902.so</code>  から  <code>extension=ddtrace-20210902-zts.so</code> です。
 </div>
 
 <div class="alert alert-danger">
 <strong>SELinux:</strong>
-ホストに httpd SELinux ポリシーが設定されている場合、SELinux 設定で一時ファイルの書き込みおよび実行が明示的に許可されていない限り、SDK の機能が制限される可能性があります。
+ホストに httpd SELinux ポリシーが構成されている場合、SELinux 設定で一時ファイルの書き込みおよび実行が明示的に許可されていない限り、SDK の機能が制限される可能性があります。
 
 `allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
 
@@ -103,24 +103,24 @@ PHP CLI バイナリが NTS (非スレッドセーフ) としてビルドされ�
 
 トレースはデフォルトで自動的に有効になっています。拡張機能がインストールされると、**ddtrace** はアプリケーションをトレースし、Agent へトレースを送ります。
 
-Datadog はすべてのウェブフレームワークを標準でサポートしています。自動インスツルメンテーションは、特定の関数やメソッドをトレースするために PHP のランタイムを変更して動作します。PHP トレーサーは、いくつかのライブラリに対して自動インスツルメンテーションをサポートしています。
+Datadog はすべての Web フレームワークを標準でサポートしています。自動インスツルメンテーションは、特定の関数やメソッドをトレースするために PHP のランタイムを変更して動作します。PHP トレーサーは、いくつかのライブラリに対して自動インスツルメンテーションをサポートしています。
 
 自動インスツルメンテーションは以下を取得します。
 
 * メソッド実行時間
 * Web リクエスト用 URL やステータスレスポンスコード、またはデータベースアクセス用 SQL クエリなどの関連するトレースデータ
-* 未処理の例外 (該当する場合スタックトレースを含む)
+* 未処理の例外 (該当する場合、スタックトレースを含む)
 * Web リクエストなど、システムを通過するトレースの合計数
 
 ## 構成 {#configuration}
 
-必要に応じて、Unified Service Tagging の設定など、アプリケーションパフォーマンスのテレメトリデータを送信するための SDK を構成します。詳細については、[ライブラリの構成][6]を参照してください。
+必要に応じて、Unified Service Tagging の設定など、アプリケーションパフォーマンスのテレメトリデータを送信するための SDK を構成します。詳細については、[ライブラリの構成][6] を参照してください。
 
-サービスまたはリソースによるトレースの取り込みを制御するには (リソース名でワイルドカードを使用する場合を含む)、[リソースベースのサンプリングによるトレース取り込みの制御][15]を参照してください。
+サービスまたはリソースによるトレースの取り込みを制御するには (リソース名でワイルドカードを使用する場合を含む)、[リソースベースのサンプリングによるトレース取り込みの制御][15] を参照してください。
 
 ## 短時間および長時間実行される CLI スクリプトのトレース {#tracing-short-and-long-running-cli-scripts}
 
-CLI スクリプトをインスツルメンテーションするには、追加のステップが必要です。詳細については、[PHP CLI スクリプトのトレース][7]を参照してください。
+CLI スクリプトをインスツルメンテーションするには、追加のステップが必要です。詳細については、[PHP CLI スクリプトのトレース][7] を参照してください。
 
 ## アップグレード {#upgrading}
 
@@ -135,7 +135,7 @@ PHP トレーサーをアップグレードするには、[最新のリリース
 PHP トレーサーを削除するには:
 
 1. php-fpm の場合は php-fpm サービスを停止し、それ以外の場合は Apache Web サーバーを停止します。
-2. ファイル `98-ddtrace.ini` と `99-ddtrace-custom.ini` のリンクを PHP 設定フォルダーから解除します。
+2. ファイル `98-ddtrace.ini` と `99-ddtrace-custom.ini` のリンクを PHP 構成フォルダーから解除します。
 3. php-fpm の場合は php-fpm サービスを再起動し、それ以外の場合は Apache Web サーバーを再起動します。
 
 **注**: OPcache でパラメーターを `opcache.file_cache` に設定してセカンドレベルキャッシングを使用する場合は、キャッシュフォルダーを削除します。
@@ -148,7 +148,7 @@ PHP トレーサーが原因でアプリケーションがクラッシュする�
 
 コアダンプを読み取るためには、PHP を実行するシステムに PHP バイナリのデバッグシンボルがインストールされていなければなりません。
 
-PHP や PHP-FPM にデバッグシンボルがインストールされているかどうかを確認するには、`gdb` を使用してください。
+PHP や PHP-FPM にデバッグシンボルがインストールされているかどうかをチェックするには、`gdb` を使用してください。
 
 `gdb` をインストールします。
 
@@ -193,13 +193,13 @@ PHP バイナリのパッケージ名を確認します。PHP のインストー
 yum list installed | grep php
 ```
 
-デバッグシンボルをインストールします。例えば、パッケージ `php-fpm` の場合。
+デバッグシンボルをインストールします。たとえば、パッケージ `php-fpm` の場合は次のようになります。
 
 ```
 debuginfo-install -y php-fpm
 ```
 
-**注**: PHP バイナリを提供するリポジトリがデフォルトで有効になっていない場合は、`debuginfo-install` コマンドを実行する際に有効にすることができます。例:
+**注**: PHP バイナリを提供するリポジトリがデフォルトで有効になっていない場合は、`debuginfo-install` コマンドを実行する際に有効にすることができます。たとえば、次のようになります。
 
 ```
 debuginfo-install --enablerepo=remi-php74 -y php-fpm
@@ -209,7 +209,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### Sury Debian DPA からインストールされた PHP {#php-installed-from-the-sury-debian-dpa}
 
-PHP を [Sury Debian DPA][8] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。例えば、PHP-FPM 7.2 の場合は次のようになります。
+PHP を [Sury Debian DPA][8] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
 
 ```
 apt update
@@ -218,7 +218,7 @@ apt install -y php7.2-fpm-dbgsym
 
 ##### 異なるパッケージからインストールされた PHP {#php-installed-from-a-different-package}
 
-Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][9]を掲載しています。
+Debian プロジェクトでは、wiki ページに[デバッグシンボルのインストール手順][9] を掲載しています。
 
 ファイル `/etc/apt/sources.list` を編集します。
 
@@ -236,7 +236,7 @@ deb http://deb.debian.org/debian-debug/ buster-debug main
 apt update
 ```
 
-まず、デバッグシンボル用の標準的なパッケージ名を試してください。例えば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
+まず、デバッグシンボル用の標準的なパッケージ名を試してください。たとえば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -278,7 +278,7 @@ PHP を [`ppa:ondrej/php`][10] からインストールした場合は、`/etc/a
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
 
-デバッグシンボルを更新およびインストールします。例えば、PHP-FPM 7.2 の場合は次のようになります。
+デバッグシンボルを更新およびインストールします。たとえば、PHP-FPM 7.2 の場合は次のようになります。
 
 ```
 apt update
@@ -294,7 +294,7 @@ apt list --installed | grep php
 
 **注**: `php-fpm` は、実際のパッケージを参照するメタパッケージである場合もあります (例: PHP-FPM 7.2 の場合は `php7.2-fpm`)。この場合、パッケージ名は後者のようになります。
 
-まず、デバッグシンボル用の標準的なパッケージ名を試してください。例えば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
+まず、デバッグシンボル用の標準的なパッケージ名を試してください。たとえば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -304,7 +304,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から[デバッグシンボルをインストール][11]する方法に関する詳細情報は、Ubuntu のドキュメントに記載されています。
+`-dbg` および `-dbgsym` パッケージが見つからない場合は、`ddebs` リポジトリを有効にしてください。`ddebs` から [デバッグシンボルをインストール][11] する方法に関する詳細情報は、Ubuntu のドキュメントに記載されています。
 
 たとえば、Ubuntu 18.04 以降の場合、`ddebs` リポジトリを有効にします。
 
@@ -314,7 +314,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-署名キーをインポートします ([署名キーが正しい][12]ことを確認してください)。
+署名キーをインポートします ([署名キーが正しい][12] ことを確認してください)。
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -322,7 +322,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-デバッグシンボル用の標準的なパッケージ名を追加してみてください。例えば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
+デバッグシンボル用の標準的なパッケージ名を追加してみてください。たとえば、パッケージ名が `php7.2-fpm` の場合、次を試してください。
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -357,14 +357,14 @@ PHP アプリケーションのコアダンプを取得することは、特に 
 1. アプリケーションエラーログを調べて、PHP-FPM がコアダンプを生成したかどうかを確認します。
    -  `(SIGSEGV - core dumped)` を検索してください。なぜなら、このようなメッセージはコアダンプがダンプされたことを意味するからです: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`。
    -  `(SIGSEGV)` を検索してください。なぜなら、このようなメッセージはコアがダンプされなかったことを示すからです: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`。
-1.  `cat /proc/sys/kernel/core_pattern` を実行してコアダンプを特定します。デフォルト値は通常 `core` であり、これは `core` という名前のファイルがウェブルートフォルダに生成されることを意味します。
+1.  `cat /proc/sys/kernel/core_pattern` を実行してコアダンプを特定します。デフォルト値は通常 `core` であり、これは `core` という名前のファイルが Web ルートフォルダーに生成されることを意味します。
 
-コアダンプが生成されなかった場合は、次の構成を確認し、必要に応じて変更します。
+コアダンプが生成されなかった場合は、次の構成をチェックし、必要に応じて変更します。
 
 1. `/proc/sys/kernel/core_pattern` にネストされたディレクトリを含むパスが含まれている場合は、完全なディレクトリパスが存在することを確認します。
 1. PHP-FPM プールワーカーを実行しているユーザーが `root` 以外の場合 (一般的なユーザー名は `www-data`)、そのユーザーにコアダンプディレクトリへの書き込みアクセス許可を付与します。
-1.  `/proc/sys/fs/suid_dumpable` の値が `0` でないことを確認してください。`1` または `2` に設定してください。ただし、PHP-FPM ワーカープールを `root` として実行する場合は除きます。システム管理者にオプションを確認してください。
-1. PHP-FPM プール設定セクションに適切な `rlimit_core` があることを確認してください。無制限に設定できます: `rlimit_core = unlimited`。
+1.  `/proc/sys/fs/suid_dumpable` の値が `0` でないことを確認してください。`1` または `2` に設定してください。ただし、PHP-FPM ワーカープールを `root` として実行する場合は除きます。システム管理者とともにオプションをチェックしてください。
+1. PHP-FPM プール構成セクションに適切な `rlimit_core` があることを確認してください。無制限に設定できます: `rlimit_core = unlimited`。
 1. システムに適切な `ulimit` が設定されていることを確認してください。無制限に設定できます: `ulimit -c unlimited`。
 1. アプリケーションが Docker コンテナ内で実行される場合、`/proc/sys/*` の変更はホストマシンで行う必要があります。利用可能なオプションについては、システム管理者にお問い合わせください。可能であれば、テスト環境またはステージング環境で問題を再現してみてください。
 
@@ -412,7 +412,7 @@ Apache を使用する場合、次のように実行します。
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][13]に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
+結果として得られる Valgrind のトレースは、デフォルトでは標準エラーに出力されますが、[公式ドキュメント][13] に従って別のターゲットに出力することもできます。想定される出力は、PHP-FPM プロセスの場合、以下の例のようになります。
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)

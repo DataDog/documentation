@@ -109,6 +109,10 @@ Para obtener más información, consulte [Análisis de código estático mejorad
 ## Personalice su configuración {#customize-your-configuration}
 Para personalizar qué reglas de Análisis de código estático están configuradas en sus repositorios o en toda su organización, consulte la [documentación de configuración][8].
 
+## Priorice los hallazgos con contexto de tiempo de ejecución {#prioritize-findings-with-runtime-context}
+
+Los hallazgos de Static Code Analysis muestran los servicios a los que se asigna cada hallazgo y los riesgos de tiempo de ejecución que conllevan esos servicios, como {{< ui >}}Service in Production{{< /ui >}} y {{< ui >}}Service Exposed to Attacks{{< /ui >}}. Utilice las facetas {{< ui >}}Risks{{< /ui >}} para centrarse en los hallazgos en servicios activos y expuestos. Para obtener más información, consulte [Priorizar hallazgos con contexto de tiempo de ejecución][18].
+
 ## Vincule los hallazgos a los servicios y equipos de Datadog {#link-findings-to-datadog-services-and-teams}
 Para vincular hallazgos a servicios y equipos de Datadog, consulte la [documentación de configuración][13].
 
@@ -189,3 +193,4 @@ Si cree que una infracción específica es un falso positivo, puede marcarla com
 [15]: /es/integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /es/integrations/azure-devops-source-code/
 [17]: /es/security/code_security/static_analysis/ai_enhanced_sast/
+[18]: /es/security/code_security/runtime_context/

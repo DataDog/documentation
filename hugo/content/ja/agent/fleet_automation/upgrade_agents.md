@@ -7,17 +7,22 @@ further_reading:
 - link: /api/latest/fleet-automation/
   tag: ドキュメント
   text: Fleet Automation API
-site_support_id: fleet-automation-standard-features
 title: Agent のアップグレード
 ---
-Fleet Automation を使用すると、個々のホストに直接アクセスすることなく、フリート全体で Datadog Agent をリモートでアップグレードできます。アップグレードを即座にトリガーしたり、メンテナンスウィンドウ中にスケジュールしたり、API を通じて自動化したりできます。
+Fleet Automation を使用すると、個々のホストに直接アクセスすることなく、フリート全体で Datadog Agent をリモートでアップグレードできます。アップグレードを即座にトリガーしたり、メンテナンスウィンドウ中にスケジュールしたり、Terraform や API を通じて自動化したりできます。
 
-## 前提条件{#prerequisites}
+## 前提条件 {#prerequisites}
 
-- 組織および Agent の API キーで [Remote Configuration][7] が有効になっていること
-- 各ターゲット VM Agent で[リモート更新][8]が有効化されていること (`remote_updates: true`)
-- Windows の場合は Agent バージョン 7.71.1 以降、Linux の場合は 7.69.0 以降
-- Linux VM または Windows VM
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+US1-FED および US2-FED では、リモートアップグレードには Linux と Windows の両方で Agent 7.85.0 以降が必要です。古いバージョンを実行している場合は、<a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">Agent インストール手順</a>を使用して更新してから、Fleet Automation でアップグレードしてください。
+</div>
+{{< /site-region >}}
+
+- 組織、および Agent が使用する API キーで、[Remote Configuration][7] が有効になっていること。デフォルトでは、両方とも有効になっています。
+- 各ターゲット VM Agent で [リモート更新][8] が有効になっていること (`remote_updates: true`)。
+- Windows の場合は Agent バージョン 7.71.1 以降、Linux の場合は 7.69.0 以降。
+- Linux VM または Windows VM。
 - 初期 Agent インストールに少なくとも 2 GB のディスク容量、さらにアップグレード用に追加で 2 GB の容量が必要。(アップグレードには、Linux では `/opt/datadog-packages` に、Windows では `C:\ProgramData\Datadog\Installer\packages` に 1.3 GB の空き容量が必要。ロールバックが必要になった場合に備えて、アップグレード中に 2 つの Agent インストールを一時的に維持するための追加領域が必要。)
 
 <div class="alert alert-info">
@@ -29,7 +34,7 @@ Fleet Automation を使用すると、個々のホストに直接アクセスす
 1. [{{< ui >}}Upgrades{{< /ui >}}][1] タブから、{{< ui >}}Upgrade Now{{< /ui >}} をクリックします。
 
    {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="Upgrade Now ボタンが表示されている Upgrades タブ。" style="width:100%;" >}}
-1. アップグレードする Agent を選択します。ホスト情報またはタグでフィルタリングして、特定のグループを対象にします。
+1. アップグレードする Agent を選択します。ホスト情報またはタグでフィルタリングして、特定のグループを絞り込みます。
 
    {{< img src="/agent/fleet_automation/start-agent-upgrade.png" alt="アップグレードする Agent のリストを絞り込むためのフィルタリングオプションを備えた Agent 選択画面。" style="width:100%;" >}}
 
@@ -50,7 +55,7 @@ Fleet Automation を使用すると、個々のホストに直接アクセスす
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="スケジュールされた Agent アップグレードのリストを確認します。" style="width:100%;" >}}
 
-1. アップグレードする Agent を指定します。ホスト情報またはタグでフィルタリングして、特定のグループを対象にします。
+1. アップグレードする Agent を指定します。ホスト情報またはタグでフィルタリングして、特定のグループを絞り込みます。
    
    {{< img src="/agent/fleet_automation/agent_upgrade_select_agents.png" alt="アップグレード対象の Agent のリストを確認します。" style="width:100%;" >}}
 
@@ -71,6 +76,38 @@ Fleet Automation を使用すると、個々のホストに直接アクセスす
 ## API を使用した Agent のアップグレード {#upgrade-agents-with-the-api}
 
 Fleet Automation は、プログラムから、または定期的なスケジュールに従って Agent のアップグレードをトリガーするための API を提供します。フィルタークエリを使用して任意のホスト群のアップグレードを開始するか、指定した Agent バージョンで、定義されたメンテナンスウィンドウ中に実行されるスケジュールを作成します。詳細については、[Fleet Automation API][3] を参照してください。
+
+## Terraform で Agent のアップグレードをスケジュールする {#schedule-agent-upgrades-with-terraform}
+
+Datadog Terraform プロバイダーを使用して、Agent のアップグレードスケジュールをコードとして作成および管理します。`datadog_fleet_schedule` リソースでは、ターゲットホスト、Agent バージョン、および定期的なメンテナンスウィンドウを定義します。Fleet Automation は、スケジュールに従ってアップグレードを実行します。
+
+開始する前に
+
+- Agent が [アップグレードの前提条件](#prerequisites) を満たしていることを確認すること。
+- [Datadog Terraform プロバイダーの設定][9] (バージョン 4.22.0 以降)。
+- `agent_upgrade_write` および `hosts_read` 権限のあるアプリケーションキーを使用すること。
+
+次の例では、`env:staging service:example` に一致するホストの非アクティブなスケジュールを定義しています。このスケジュールは、最新の Agent バージョン (`version_to_latest = 0`) をターゲットにしています。これは、`America/New_York` タイムゾーンの火曜日と木曜日の 03:00 に開始される 2 時間のメンテナンスウィンドウ (`maintenance_window_duration = 120`、分単位) を指定します。
+
+```hcl
+resource "datadog_fleet_schedule" "staging" {
+  name              = "Staging Agent upgrades"
+  query             = "env:staging service:example"
+  status            = "inactive"
+  version_to_latest = 0
+
+  rule = {
+    days_of_week                = ["Tue", "Thu"]
+    maintenance_window_duration = 120
+    start_maintenance_window    = "03:00"
+    timezone                    = "America/New_York"
+  }
+}
+```
+
+ホストクエリとメンテナンスウィンドウを、ご使用の環境の値に置き換えてください。`terraform plan` を実行して変更内容を確認し、`terraform apply` を実行してスケジュールを作成します。スケジュールされたアップグレードを有効にする準備ができたら、`status` を `active` に設定し、変更を適用します。
+
+サポートされているすべてのオプションおよび既存のスケジュールをインポートする手順については、[`datadog_fleet_schedule`リソースドキュメント][10] を参照してください。
 
 ## アップグレードプロセス {#upgrade-process}
 
@@ -97,7 +134,7 @@ Datadog では、一度に 1 つのソースからアップグレードを管理
 
 ### Remote Agent Management が有効になっていません {#remote-agent-management-is-not-enabled}
 
-Agent のサイドパネルに **Remote Agent Management: NOT ENABLED** と表示されている場合は、[Remote Agent Management の有効化][8]に従ってホスト上で `remote_updates` を有効にし、Agent を再起動してください。Remote Configuration に接続されている間も、リモート更新を無効にすることができます。
+Agent のサイドパネルに **Remote Agent Management: NOT ENABLED** と表示されている場合は、[Remote Agent Management の有効化][8] に従ってホスト上で `remote_updates` を有効にし、Agent を再起動してください。Remote Configuration に接続されている間も、リモート更新を無効にすることができます。
 
 Agent でアップグレードを引き続き利用できない場合は、[前提条件](#prerequisites)、Remote Configuration の接続性、および Datadog Installer が実行されているかどうかを確認してください。
 
@@ -113,15 +150,15 @@ Agent でアップグレードを引き続き利用できない場合は、[前�
 
 問題を診断して修正するには、以下の手順を実行します。
 
-1. 影響を受けるホストを特定するには、[Fleet Automation の次のクエリ][5]を使用します。
+1. 影響を受けるホストを特定するには、[Fleet Automation の次のクエリ][5] を使用します。
    ```txt
    support_remote_upgrade:datadog-installer
    ```
-1. セットアップが影響を受けている場合は、影響を受ける各 Agent で [インストールスクリプトを再実行し][6]、[前提条件](#prerequisites) を満たす Agent バージョンにアップグレードしてください。
+1. セットアップが影響を受けている場合は、影響を受ける各 Agent で [インストールスクリプトを再実行し][6]、[前提条件](#prerequisites)を満たす Agent バージョンにアップグレードしてください。
 
 更新後、[Remote Agent Management を有効にして][8]、今後のアップグレードに Fleet Automation を使用できるようにしてください。アップグレードしない場合、既存の Agent は引き続き機能しますが、リモートアップグレードは利用できません。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -133,3 +170,5 @@ Agent でアップグレードを引き続き利用できない場合は、[前�
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /ja/agent/guide/setup_remote_config
 [8]: /ja/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /ja/getting_started/integrations/terraform/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/fleet_schedule

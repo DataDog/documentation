@@ -12,11 +12,15 @@ title: Azure 自動ログ転送のセットアップ
 
 このガイドを使用して、Azure 自動ログ転送をセットアップおよび管理します。ログ転送は、Datadog で直接構成するか、Azure Resource Manager (ARM) テンプレートを使用してデプロイできます。
 
-ARM テンプレートは、ログを収集して Datadog に転送するサブスクリプションに一連の Azure サービス (ストレージアカウントと関数アプリ) からリソースをデプロイします。これらのサービスは、ログの量に応じて自動的にスケールアップまたはスケールダウンします。スケーリングは、選択したサブスクリプションとリージョンにデプロイされた一連の関数アプリで構成されるコントロールプレーンによって管理されます。ストレージアカウントと関数アプリは、Datadog にログを転送する各サブスクリプションにデプロイされます。
+ARM テンプレートは、ストレージアカウントと Azure Container Apps ジョブをサブスクリプションにデプロイします。これらのリソースはログを収集して Datadog に転送し、ログの量に合わせて自動的にスケールアップまたはスケールダウンします。スケーリングは、選択したサブスクリプションとリージョンにデプロイされた一連のコンテナアプリのジョブで構成されるコントロールプレーンによって管理されます。ストレージアカウントとコンテナアプリのジョブは、Datadog にログを転送する各サブスクリプションにデプロイされます。
 
-**すべてのサイト**: 自動ログ転送はすべての [Datadog サイト][4] で使用できます。
+**注**: 2026年8月3日以降、新しいデプロイメントでは、デフォルトで Azure Container Apps ジョブ上でコントロールプレーンが実行されます。それより前に作成されたデプロイメントは Azure 関数アプリのコントロールプレーンを維持し、デプロイメントを更新してもコントロールプレーンのタイプは変更されません。ログ転送は、どちらのコントロールプレーンでも同じように機能します。既存のデプロイメントをコンテナアプリのジョブに移行するには、[移行スクリプト][25] を使用してください。
 
-**サポートされる Azure 環境**: 自動ログ転送は Azure Commercial (Public) クラウドのみをサポートしています。Azure Government および Azure China はサポートされていません。Datadog for Government サイトを使用している場合、この機能は Azure Commercial クラウドのワークロードでのみ使用できます。
+**サポートされる Azure 環境**: 自動ログ転送は Azure Commercial (Public) クラウドのみをサポートしています。Azure Government および Azure China はサポートされていません。
+
+## 前提条件 {#prerequisites}
+
+ARM テンプレートを使用して自動ログ転送をデプロイするには、管理グループに対する権限が必要です。
 
 ## 自動セットアップか手動セットアップかの選択 {#how-to-choose-between-automated-and-manual-setup}
 
@@ -50,12 +54,12 @@ ARM テンプレートは、ログを収集して Datadog に転送するサブ�
 
 #### Basics (基本) {#basics}
 
-1. {{< ui >}}Project details{{< /ui >}} の下で、管理グループを選択します。これは、ARM テンプレートで自動ログ転送用に選択したサブスクリプションに対する権限を付与するために必要です。
+1. {{< ui >}}Project details{{< /ui >}} の下で、管理グループを選択します。このフィールドは必須です。ARM テンプレートは、自動ログ転送用に選択したサブスクリプションに対する権限を付与するために、管理グループを使用します。
 2. {{< ui >}}Instance details{{< /ui >}} の下で、次の値を選択します。
    - {{< ui >}}Region{{< /ui >}}。コントロールプレーンがデプロイされる場所です。
    - {{< ui >}}Subscriptions to Forward Logs{{< /ui >}}。ログ転送のために構成されるサブスクリプションです。
    - {{< ui >}}Control Plane Subscription{{< /ui >}}。コントロールプレーンがデプロイされるサブスクリプションです。
-   - {{< ui >}}Resource Group Name{{< /ui >}}。コントロールプレーンで使用するリソースグループです。コントロールプレーンサービスの管理を簡素化するために、新しい未使用のリソースグループ名を選択することをお勧めします。
+   - {{< ui >}}Resource Group Name{{< /ui >}}。コントロールプレーンで使用するリソースグループです。Datadog では、コントロールプレーンサービスの管理を簡素化するために、新しい未使用のリソースグループ名を選択することをお勧めします。
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_basics.png" alt="Azure 自動ログ転送の ARM テンプレートの Basics ページ" popup="true" style="width:100%">}}
 
@@ -130,8 +134,8 @@ LAW のログは、通常は Datadog に 2 ～ 5 分以内に表示されます�
 
 ### 使用されるサービス {#services-used}
 
-- [Azure Function][15] アプリは、Azure サブスクリプション内のリソースを検出し、ログフォワーダーのスケーリングを行い、検出されたリソースに対して診断設定を構成します。
-- [Azure Container Apps][8] は、診断設定によって生成されたリソースログを収集し、すでに処理済みのログを追跡し、Datadog に送信します。
+- [Azure Container Apps][8] ジョブはコントロールプレーンを実行して、Azure サブスクリプション内のリソースを検出し、ログフォワーダーのスケーリングを行い、検出されたリソースに対して診断設定を構成します。
+- Azure Container Apps ジョブはログフォワーダーを実行して、診断設定によって生成されたリソースログを収集し、すでに処理済みログを追跡し、Datadog に送信します。
 - [Azure Storage Accounts][9] は、リソースによって生成されたログおよびサブスクリプション ID、リソース ID、リージョンなどのメタデータを一時的に保存する小規模なキャッシュとして使用されます。
 
 ### ハイレベルアーキテクチャ {#high-level-architecture}
@@ -142,7 +146,7 @@ LAW のログは、通常は Datadog に 2 ～ 5 分以内に表示されます�
 
 #### コントロールプレーン {#control-plane}
 
-コントロールプレーンは、Azure Function アプリ群とキャッシュ用のストレージアカウントで構成されます。1 つのコントロールプレーンが、選択したサブスクリプションにデプロイされ、次のタスクを実行します。
+コントロールプレーンは、一連の Azure Container Apps ジョブと、キャッシュ用のストレージアカウントで構成されます。1 つのコントロールプレーンが、選択したサブスクリプションにデプロイされ、次のタスクを実行します。
 - 選択したサブスクリプションにおいて、診断設定を通じてログを出力可能なリソースを検出
 - 検出したリソースに対して診断設定を自動的に構成し、ログフォワーダーが監視するストレージアカウントにログを送るように設定
 - リソースが存在するリージョンでログフォワーダーをスケーリングし、ログ量に合わせて動的に対応
@@ -167,17 +171,24 @@ ARM テンプレートは、フォワーダーの管理とリソースへの診�
 
 #### 使用される権限 {#permissions-used}
 
-- 選択したサブスクリプションの**サブスクリプション**レベルにおける [Monitoring Contributor][10] ロール
+- 選択したサブスクリプションの**サブスクリプション**レベルにおける [Monitoring Reader][22] ロール。
+   - これは、選択したサブスクリプション内のリソースを一覧表示するために必要です。
+
+- 選択したサブスクリプションの**サブスクリプション**レベルにおける [Monitoring Contributor][10] ロール。
    - 診断設定が利用できるリソースを検出し、ストレージへのログ出力を有効にするために必要です。
 
-- 選択したサブスクリプション内のログ転送用リソースグループにおける**リソースグループ**レベルの [Contributor][11] ロール
+- 選択したサブスクリプション内のログ転送用リソースグループにおける**リソースグループ**レベルの [Contributor][11] ロール。
    - フォワーダーのストレージアカウントや Container Apps ジョブの作成・削除などを管理するために必要です。
 
-- コントロールプレーンの Function Apps を更新するための**コントロールプレーンリソースグループ**レベルの [Website Contributor][12] ロール
+- 選択したサブスクリプション内のログ転送用リソースグループにおける**リソースグループ**レベルの [Reader and Data Access][23] ロール。
+   - これは、ログをフォワーダーストレージアカウントに送信する診断設定を作成するために必要です。作成には、それらのストレージアカウントに対する `listKeys` 権限が必要になります。
+
+- **コントロールプレーンリソースグループ**レベルの [Container Apps Jobs Contributor][24] ロール。
+   - これは、コントロールプレーンの Container Apps ジョブを更新するために必要です。Function app コントロールプレーンを使用するデプロイメントでは、代わりに [Website Contributor][12] ロールを使用します。
 
 リソースに関する情報はエクスポートされません。Datadog はログ出力を有効にするために必要な情報のみを要求し、このアーキテクチャからの唯一の出力は Datadog に送信されるログのみです。
 
-**注**: 必要に応じて、コントロールプレーン自体の健全性メトリクス、ログ、およびイベントをデバッグ目的で Datadog に送信することができます。これを行うには、コントロールプレーンの任意の Function App または Container App で環境変数 `DD_TELEMETRY=true` を設定します。
+**注**: 必要に応じて、コントロールプレーン自体の健全性メトリクス、ログ、およびイベントをデバッグ目的で Datadog に送信することができます。これを行うには、コントロールプレーンの任意の Container Apps ジョブで環境変数 `DD_TELEMETRY=true` を設定します。Function app コントロールプレーンの場合は、任意の Function app で設定します。
 
 {{% azure-log-archiving %}}
 
@@ -208,10 +219,13 @@ python uninstall.py
 [12]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/web-and-mobile#website-contributor
 [13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
 [14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
-[15]: https://learn.microsoft.com/azure/azure-functions/
 [16]: https://app.datadoghq.com/integrations/azure
 [17]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal
 [18]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables
 [19]: https://portal.azure.com
 [20]: https://learn.microsoft.com/troubleshoot/azure/azure-monitor/log-analytics/workspaces/workspace-data-export-faq
 [21]: /ja/getting_started/integrations/azure/#resource-tag-filtering-for-logs
+[22]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/monitor#monitoring-reader
+[23]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/storage#reader-and-data-access
+[24]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/containers#container-apps-jobs-contributor
+[25]: https://github.com/DataDog/integrations-management/tree/main/azure/lfo_container_app_migration

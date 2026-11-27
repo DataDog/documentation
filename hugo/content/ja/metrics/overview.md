@@ -31,7 +31,7 @@ title: メトリクス概要ページ
 
 ### メトリクスソース {#metric-sources}
 
-{{< ui >}}Metric Sources{{< /ui >}} 列には、Datadog にメトリクスを報告しているソースの概要が表示されます。いずれかのソースをクリックすると、そのソースにスコープされた [Metrics Catalog][2] が開きます。Datadog メトリクスは、以下のソースから生成されます。
+{{< ui >}}Metric Sources{{< /ui >}} 列には、Datadog にメトリクスを報告しているソースの概要が表示されます。いずれかのソースをクリックすると、そのソースを対象とする Metrics Catalog ページが開きます。詳細については、[Metrics Catalog のドキュメント][2]を参照してください。Datadog メトリクスは、以下のソースから生成されます。
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 [Datadog Agent][3] は、インストールされているホストからメトリクスを収集し、Datadog に転送します。これらのメトリクスは、以下のソースから生成される可能性があります。
@@ -90,12 +90,12 @@ Datadog に取り込まれたすべてのログからのデータを集計する
 {{% /collapse-content %}} 
 
 {{% collapse-content title="過去のメトリクスを取り込む" level="h4" %}}
-[過去のメトリクスの取り込み][21]を使用すると、送信時点から 1 時間より前のタイムスタンプを持つメトリクス値を取り込むことができます。
+[Historical Metrics Ingestion][21]を使用すると、送信時点から 1 時間より前のタイムスタンプを持つメトリクス値を取り込むことができます。
 {{% /collapse-content %}} 
 
 ### 利用可能なメトリクス {#available-metrics}
 
-{{< ui >}}Available Metrics{{< /ui >}} 列には、過去 1 か月間の標準メトリクスとカスタムメトリクスの合計メトリクスボリュームの内訳が表示されます。カスタムメトリクスのボリューム管理に関心がある場合は、詳細について [Custom Metrics ガバナンスのベストプラクティスページ][25]および [Metrics Catalog ページ][26]を参照してください。
+{{< ui >}}Available Metrics{{< /ui >}} 列には、過去 1 か月間の標準メトリクスとカスタムメトリクスの合計メトリクスボリュームの内訳が表示されます。Custom Metrics の容量を管理するには、[Custom Metrics のガバナンスに関するベストプラクティス][25]ガイドおよび[Metrics Catalog のドキュメント][26]を参照してください。
 
 ## ソース別のメトリクス {#your-metrics-by-source}
 
@@ -114,7 +114,7 @@ Datadog に取り込まれたすべてのログからのデータを集計する
 
 ## クエリ可能なメトリクス {#metrics-available-for-querying}
 
-このセクションの検索バーを使用して、任意のメトリクスの最新データと構成オプションを表示します。すべてのタグを検索したり、クリックして [Metrics Explorer][23] または [Summary][24] ページでメトリクスをさらに調査したりできます。
+このセクションの検索バーを使用して、任意のメトリクスの最新データと構成オプションを表示します。すべてのタグを検索することや、クリックして [Metrics Explorer][23] または [Metrics Catalog][24] ページでメトリクスをさらに調査することができます。
 
 {{< img src="metrics/overview/available_metrics.png" alt="メトリクス概要ページの「クエリ可能なメトリクス」セクション" >}}
 
@@ -123,7 +123,7 @@ Datadog に取り込まれたすべてのログからのデータを集計する
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/metrics/custom_metrics/
-[2]: /ja/metrics/summary/
+[2]: /ja/metrics/catalog/
 [3]: /ja/agent/
 [4]: https://github.com/DataDog/integrations-core
 [5]: /ja/agent/guide/integration-management/
@@ -147,4 +147,4 @@ Datadog に取り込まれたすべてのログからのデータを集計する
 [23]: https://app.datadoghq.com/metric/explorer
 [24]: https://app.datadoghq.com/metric/catalog
 [25]: /ja/metrics/guide/custom_metrics_governance/
-[26]: /ja/metrics/volume/
+[26]: /ja/metrics/catalog/

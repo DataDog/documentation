@@ -8,13 +8,13 @@ description: Incident AI를 사용하여 활성 인시던트를 조사하고, �
   분석을 트리거하는 방법을 알아보세요.
 further_reading:
 - link: /bits_ai/bits_investigation/
-  tag: 문서
-  text: Bits Investigation이란
+  tag: 설명서
+  text: Bits Investigation에 대해 알아보기
 - link: /incident_response/incident_management/post_incident/postmortems
-  tag: 문서
+  tag: 설명서
   text: AI 지원 사후 분석 생성
 - link: /incident_response/incident_management/setup_and_configuration/templates
-  tag: 문서
+  tag: 설명서
   text: 알림 및 사후 분석 템플릿에서 AI 변수 구성
 - link: https://www.datadoghq.com/blog/datadog-incident-response-ai-features/
   tag: 블로그
@@ -39,60 +39,18 @@ Slack에서 Datadog Incident Management와 연결된 인시던트 채널에 참�
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Slack의 인시던트 요약 예시" style="width:100%;" >}}
 
-## 회의 요약 {#meeting-summaries}
+## 회의 요약 및 녹취록 {#meeting-summaries}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">선택한 Datadog 사이트에서는 회의 요약을 사용할 수 없습니다({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">선택한 Datadog 사이트에서는 회의 요약 및 실시간 회의 녹취록을 사용할 수 없습니다({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Incident AI는 Zoom, Google Meet 및 Microsoft Teams에서 인시던트 회의를 자동으로 요약할 수 있습니다. 회의 중 Incident AI는 인시던트 타임라인과 인시던트 채팅 채널에 실시간 요약을 주기적으로 게시합니다. 회의가 끝나면 Incident AI는 회의 종료 후 최종 요약을 게시합니다.
+인시던트 회의의 경우, Incident AI는 요약을 생성하고 실시간 녹취록을 Datadog 노트북에 저장할 수 있습니다.
 
-<div class="alert alert-info">회의 요약이 활성화되면 Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">하위 프로세서</a>가 회의 오디오를 녹음하고 전사합니다. 7일의 보존 기간이 지나면 하위 프로세서가 모든 데이터를 자동으로 삭제합니다.</div>
+- **회의 요약**: 회의 중 Incident AI는 인시던트 타임라인과 인시던트 채팅 채널에 실시간 요약을 주기적으로 게시합니다. 회의가 끝나면 최종 요약을 게시합니다.
+- **실시간 회의 녹취록**: Datadog 노트북은 화자 이름과 사용자 시간대 기준 타임스탬프를 포함한 대화 내용을 기록합니다. 노트북은 회의 중에 업데이트되며 회의 후에도 계속 사용할 수 있습니다.
 
-Datadog Transcriber가 회의에 참여하려면 조직에서 AI 기능을 활성화해야 합니다. 회의 요약을 켜려면 회의 플랫폼의 통합 설정에서 **Generate AI meeting summaries**를 활성화하세요.
-
-- [Zoom][4]
-- [Google Meet][5]
-- [Microsoft Teams][6]
-
-기본적으로 Incident AI는 비공개 인시던트에 대한 회의는 요약하지 않습니다. 통합 설정에 조건을 추가하여 다른 인시던트에 대한 요약도 방지할 수 있습니다.
-
-### 회의 요약 작동 방식 {#how-meeting-summaries-work}
-
-인시던트에 연결된 회의가 시작되면 Datadog Transcriber가 회의 참여를 시도합니다. 이 작업은 10~30초 정도 걸릴 수 있습니다. 회의에 로비나 대기실이 있는 경우 전사가 시작되려면 참가자가 Datadog Transcriber의 입장을 허용해야 합니다. Datadog Transcriber가 참여하면 회의 중 다음 위치에 실시간 요약을 주기적으로 게시합니다.
-
-- **인시던트 타임라인**의 **Meeting Summary** 항목 아래에 게시됩니다.
-- **인시던트 채팅 채널**의 회의 카드 스레드 및 채널 메시지 모두에 게시됩니다.
-
-회의가 끝나면 Datadog Transcriber는 동일한 위치에 회의 종료 후 최종 요약을 게시합니다.
-
-### 요약 검토 {#reviewing-a-summary}
-
-요약이 게시된 후 요약을 승인하거나 요약의 텍스트를 편집하거나 거부할 수 있습니다. Datadog의 인시던트 타임라인에서 이러한 작업을 수행할 수 있습니다. 요약이 인시던트 채팅 채널에도 브로드캐스트되었다면 해당 채널에서도 수행할 수 있습니다.
-
-인시던트 타임라인에서 요약을 검토하려면 다음 단계를 따르세요.
-
-1. Datadog에서 인시던트를 열고 타임라인에서 **Meeting Summary** 항목을 찾습니다.
-2. 요약을 승인하려면 체크 표시 아이콘을, 텍스트를 편집하려면 연필 아이콘을, 타임라인에서 제거하려면 거부 아이콘을 클릭합니다.
-
-사용자가 요약을 승인하거나 편집하면 Datadog은 해당 작업을 수행한 사용자를 기록합니다. 요약이 편집되면 승인할 수 없으며 편집된 버전이 우선합니다. 요약을 거부하면 모든 사용자의 인시던트 타임라인에서 해당 요약이 제거되고 연결된 채팅 채널에서 내용이 숨겨집니다. 거부 작업은 되돌릴 수 없으므로 Datadog은 거부하기 전에 확인을 요청합니다.
-
-요약이 인시던트 채팅 채널에 브로드캐스트되었다면 메시지의 **Approve**, **Edit**, **Reject summary** 버튼을 사용하세요.
-
-### Transcriber 다시 초대 {#re-inviting-the-transcriber}
-
-Datadog Transcriber가 회의에서 나갔다면 요약을 재개할 수 있도록 해당 인시던트에 연결된 동일한 회의에 다시 초대하세요.
-
-1. Datadog에서 인시던트를 엽니다.
-2. 인시던트 헤더에서 연결된 회의의 메뉴를 엽니다.
-3. 회의 옆에 있는 **Add Transcriber**(로봇 아이콘)를 클릭합니다.
-4. 필요한 경우 전사가 시작될 수 있도록 회의 로비나 대기실에서 Datadog Transcriber의 입장을 허용합니다.
-
-로봇 아이콘은 Datadog Transcriber가 회의에 참여하는 중인지, 이미 참여했는지를 보여줍니다. Datadog Transcriber를 추가할 수 없다면 아이콘 위에 마우스를 올려 이유를 확인하세요.
-
-Datadog Transcriber가 나간 후 인시던트의 Slack 또는 Microsoft Teams 회의 카드 스레드에도 다시 초대 프롬프트가 나타날 수 있습니다. 입장 허가나 참가자를 기다리다 시간이 초과되거나, 모두가 회의에서 나가거나, 누군가 Datadog Transcriber를 제거하면 이 프롬프트가 나타날 수 있습니다. **Yes**를 선택하여 기록자를 다시 초대하거나 **No**를 선택하여 메시지를 닫으세요.
-
-다시 초대하려면 인시던트 편집 권한이 필요합니다. 좌석 기반 요금제가 적용되는 조직에서는 [Incident Management 또는 Incident Response 좌석][7]도 필요합니다. 다시 초대는 비공개 인시던트에 대한 기본 제외를 포함하여 요약을 방해하는 조건을 무시하지 않습니다.
+회의 요약 및 녹취록을 설정하려면 [Zoom][4], [Google Meet][5] 또는 [Microsoft Teams][6] 통합 페이지를 참조하세요. 요약 검토, 녹취록 보기, 기록자 재초대 및 회의 데이터 보존 방법에 대해 알아보려면 [회의 요약 및 녹취록][7]을 참조하세요.
 
 ## 관련 인시던트 탐지 {#related-incident-detection}
 
@@ -154,5 +112,5 @@ Bits Investigation을 사용하려면 조직에서 해당 기능을 활성화해
 [4]: /ko/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
 [5]: /ko/incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
 [6]: /ko/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
-[7]: /ko/account_management/billing/incident_response/#allocate-seats
+[7]: /ko/incident_response/incident_management/investigate/meeting_summaries_and_transcripts
 [8]: /ko/bits_ai/bits_investigation

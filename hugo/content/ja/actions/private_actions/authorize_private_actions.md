@@ -11,7 +11,7 @@ further_reading:
 - link: /actions/private_actions/set_up_agent_based/
   tag: ドキュメント
   text: プライベートアクションランナーのセットアップ
-- link: /actions/private_actions/execution_policies/
+- link: /actions/execution_policies/
   tag: ドキュメント
   text: 実行ポリシー
 - link: /actions/connections/
@@ -49,7 +49,7 @@ title: Private Actions の認証
 
 ## 実行ポリシー {#execution-policies}
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">実行ポリシーは、ご利用の <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">実行ポリシーは、ご利用の <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}}) では利用できません。</div>
 {{< /site-region >}}
 
 **実行ポリシー**は、Datadog Agent 内のランナーのための認可モデルです。各ポリシーは、1 つ以上のランナーセット全体のアクセスを一度に管理します。インテグレーションごと、ランナーごとに個別のコネクションを作成する代わりに、**Agent タグ**を使用してターゲットの Agent を定義します。次に、それらに許可または拒否ルールを適用します。
@@ -76,5 +76,5 @@ title: Private Actions の認証
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/actions/private_actions/enroll_runner/
-[2]: /ja/actions/private_actions/execution_policies/
+[2]: /ja/actions/execution_policies/
 [3]: /ja/actions/connections/
