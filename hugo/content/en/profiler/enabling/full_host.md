@@ -12,8 +12,8 @@ further_reading:
       text: 'Getting Started with Profiler'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/full-host-profiler/" btn_hidden="false" header="Join the Preview!" >}}
-Full-Host Profiler is in Preview.
+{{< callout header="Limited Availability" url="#" btn_hidden="true" >}}
+Full-Host Profiler is in limited availability.
 {{< /callout >}}
 
 The Full-Host Profiler collects CPU profiles across all processes on a host, regardless of language or runtime. It runs as a DaemonSet on your Kubernetes nodes and is built on the [OpenTelemetry eBPF Profiler][1].
@@ -38,7 +38,7 @@ The Full-Host Profiler is supported in Kubernetes environments that meet these r
 
 Common supported setups include self-managed Kubernetes clusters, Amazon EKS with EC2 nodes, GKE Standard, and AKS VM node pools.
 
-This preview does not support direct host or VM installation, Docker without Kubernetes, serverless runtimes, or Kubernetes modes that can't run host-level DaemonSets, such as Amazon EKS on Fargate, GKE Autopilot, and AKS virtual nodes.
+The Full-Host Profiler does not support direct host or VM installation, Docker without Kubernetes, or serverless runtimes. It also does not support Kubernetes modes that can't run host-level DaemonSets. Examples of these modes include Amazon EKS on Fargate, GKE Autopilot, and AKS virtual nodes.
 
 ## Deployment
 
