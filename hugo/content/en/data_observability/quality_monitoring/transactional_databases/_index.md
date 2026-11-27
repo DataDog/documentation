@@ -20,6 +20,8 @@ Use these integrations to:
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}
    {{< nextlink href="data_observability/quality_monitoring/transactional_databases/postgres" >}}PostgreSQL{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/transactional_databases/mysql" >}}MySQL{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/transactional_databases/sql_server" >}}SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

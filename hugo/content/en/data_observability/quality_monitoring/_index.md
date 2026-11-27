@@ -45,6 +45,7 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/fabric" >}}Microsoft Fabric Warehouse{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these data lake sources:" >}}
@@ -54,6 +55,8 @@ With Quality Monitoring, you can:
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}
    {{< nextlink href="data_observability/quality_monitoring/transactional_databases/postgres" >}}PostgreSQL{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/transactional_databases/mysql" >}}MySQL{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/transactional_databases/sql_server" >}}SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
@@ -65,6 +68,7 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/glue" >}}AWS Glue Jobs{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/azure_data_factory" >}}Azure Data Factory{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -75,6 +79,7 @@ With Quality Monitoring, you can:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/hex" >}}Hex{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/looker" >}}Looker{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
