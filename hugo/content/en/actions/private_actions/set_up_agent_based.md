@@ -253,6 +253,8 @@ For more information on the process, see [Enrollment and ownership][8].
 
 ## Manage the runner
 
+For Datadog Agent 7.86 or later, define runner credentials in the Agent configuration. See [Runner credentials in the Datadog Agent][9].
+
 ### Change the allowlist
 
 To edit the allowlist for a runner in the Datadog Agent:
@@ -448,3 +450,4 @@ terraform apply -var="datadog_api_key=<YOUR_API_KEY>" -var="datadog_app_key=<YOU
 [6]: https://app.datadoghq.com/actions/action-catalog
 [7]: /actions/private_actions/reference/
 [8]: /actions/private_actions/enroll_runner/
+[9]: /actions/connections/private_action_credentials/#runner-credentials-in-the-datadog-agent

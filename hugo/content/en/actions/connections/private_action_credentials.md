@@ -12,9 +12,6 @@ disable_toc: false
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. For actions that require authentication, a connection describes how the private action runner obtains credentials locally. For runner setup instructions, see [Private Actions][1].
 
-MongoDB and HTTP actions in the Datadog Agent or Cluster Agent can use [runner credentials](#credentials-in-the-datadog-agent). Select this option when the connection form offers **Runner credential** as a credential source. The connection stores the credential key, and the Agent resolves the value locally when it runs an action.
-
-For standalone runners and connections that ask for a credential file path, use [credential files](#credential-files).
 
 ## Runner credentials in the Datadog Agent
 
@@ -75,9 +72,9 @@ Credential restrictions apply in addition to the runner's `actions_allowlist` an
 
 ### Select a runner and test the connection
 
-If the connection form requires a runner, select the runner configured with the credentials. If it allows saving without a runner, select the target Agent when configuring the action. An [Execution Policy][6] must allow the action for that target and requesting user. The policy authorizes execution, and the connection supplies credential references.
+For a connection attached to a runner, select the runner configured with the credentials. For a [credential-only connection][7], save the connection without a runner and select the target Agent when configuring the action. An [Execution Policy][6] must allow the action for that target and requesting user. The policy authorizes execution, and the connection supplies credential references.
 
-For a connection without a runner attachment, select a **Test target** to test credential resolution on an Agent. Testing does not bind the connection to that runner. Every target Agent that uses the connection needs the referenced credential keys configured locally; values can differ between Agents.
+For a credential-only connection, select a **Test target** to test credential resolution on an Agent. Testing does not bind the connection to that runner. Every target Agent that uses the connection needs the referenced credential keys configured locally; values can differ between Agents.
 
 If credential resolution fails, check that the target Agent defines the referenced key and that its secret backend can read the secret. Check that the credential's action and HTTP domain restrictions allow the request. For MongoDB TLS failures, check the runner's CA trust configuration.
 
@@ -540,3 +537,4 @@ For this connection type, you do not need to create a credential file since the 
 [2]: /agent/configuration/secrets-management/
 [3]: /actions/private_actions/set_up_agent_based/
 [6]: /actions/execution_policies/
+[7]: /actions/private_actions/authorize_private_actions/#connections

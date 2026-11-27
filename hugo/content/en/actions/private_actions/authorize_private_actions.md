@@ -44,9 +44,9 @@ For how enrollment sets a runner's ownership, see [Enrollment and ownership][1].
 |   | Execution Policies | Connections |
 |---|---|---|
 | **Works with** | Runners in the Datadog Agent only | Both standalone runners and runners in the Datadog Agent |
-| **How access is granted** | Agent tags target one or more sets of runners, so one policy manages access across a fleet instead of a separate connection per integration per runner | A connection references credentials and pairs them with a single runner |
-| **Credentials** | Execution Policies store no credentials. Actions can use a separate connection for service credentials. | The connection references credentials used to run the action. |
-| **Control** | Fine-grained: allow or deny specific actions or sets of actions, plus integration-specific scopes such as the target Kubernetes namespaces for a Kubernetes action | Per-runner: a connection targets one specific runner |
+| **How access is granted** | Agent tags target one or more sets of runners. One policy manages access across a fleet | A connection is attached to a single runner |
+| **Credentials** | Execution Policies store no credentials. Actions can use a [credential-only connection](#connections) for service credentials. | The connection references credentials used to run the action |
+| **Control** | Fine-grained: allow or deny specific actions or sets of actions, plus integration-specific scopes | Does not restrict the list of actions or scopes. |
 
 ## Execution Policies
 
@@ -57,18 +57,17 @@ For how enrollment sets a runner's ownership, see [Enrollment and ownership][1].
 
 Execution Policies also provide fine-grained control. A policy can allow or deny specific actions or sets of actions. It can also apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action. Execution Policies authorize access through Agent tags and are used by ownerless runners in the Agent.
 
-Actions that require authentication can use a separate connection to reference credentials on the target Agent. For setup instructions, see [Handling private action credentials][4].
+Actions that require authentication can use a [credential-only connection](#connections) to reference credentials on the target Agent. For setup instructions, see [Handling private action credentials][4].
 
 To learn more about Execution Policies and how to set them up (targets, rules, access control, and using Execution Policies in workflows), see [Execution Policies][2].
 
 ## Connections
 
-Connections attached to a runner work for both standalone runners and runners in the Datadog Agent, and are the authorization model used by owned runners.
+A connection references the credentials needed to run an action against your service. The credentials are stored locally with the runner, and the connection points to them. You can use a connection in one of two ways:
 
-A connection attached to a runner does two things:
+- **Attached to a runner**: The connection also authorizes access. It targets one runner, so the credentials are only used by the runner you intend. Owned runners use this model, on both standalone runners and runners in the Datadog Agent.
+- **Credential-only connection**: The connection has no runner attached and only supplies credentials. An Execution Policy authorizes the action, and the connection works on any target Agent that defines the referenced credentials. Requires Datadog Agent 7.86 or later.
 
-- **It references the credentials** needed to run an action against your service. The credentials are stored locally with the runner.
-- **It pairs those credentials with a single runner.** A connection targets one runner, so the credentials are only ever used by the runner you intend.
 
 To use a connection in a workflow or app, you need the appropriate permission for that connection. Access to a connection can be restricted so that only the people who need it can use it in their workflows and apps.
 
@@ -82,3 +81,4 @@ For the full setup instructions (creating, editing, and restricting connections,
 [2]: /actions/execution_policies/
 [3]: /actions/connections/
 [4]: /actions/connections/private_action_credentials/
+[5]: /actions/connections/private_action_credentials/#runner-credentials-in-the-datadog-agent

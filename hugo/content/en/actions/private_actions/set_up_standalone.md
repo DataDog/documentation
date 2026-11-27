@@ -214,7 +214,7 @@ services:
 
 ## Connect the runner
 
-A standalone runner is always owned and uses the Connections authorization model. A connection stores the credentials for a service and pairs them with the runner. To create a connection and pair it with your runner, see [Connections][2]. For how permissions on the runner itself work, see [Manage access to owned runners][4].
+A standalone runner is always owned and uses the Connections authorization model. A connection references the credentials for a service and pairs them with the runner. To create a connection and pair it with your runner, see [Connections][2]. For how permissions on the runner itself work, see [Manage access to owned runners][4].
 
 ## Manage the runner
 
