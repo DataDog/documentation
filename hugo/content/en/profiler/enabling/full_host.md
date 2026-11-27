@@ -61,7 +61,7 @@ The OpenTelemetry paths deploy the Host Profiler as its own OpenTelemetry Collec
 
 <div class="alert alert-info">Set <b>OTEL_SERVICE_NAME</b> or <b>DD_SERVICE</b> for each service you want to profile and identify separately. This gives you accurate attribution and more actionable profiling data.</div>
 
-The Host Profiler determines each process's service name from the `OTEL_SERVICE_NAME` or `DD_SERVICE` environment variable:
+For example, set `OTEL_SERVICE_NAME` on the workload:
 
 ```yaml
 env:
@@ -69,11 +69,7 @@ env:
     value: my-service
 ```
 
-If neither variable is set, the profiler infers the service name from the binary name. For interpreted languages, this is the interpreter name, such as `java` or `python`.
-
-{{< img src="profiler/inferred_service_example.png" alt="Example of an inferred service within Profiling." style="width:50%;">}}
-
-If multiple services share the same interpreter and don't set a service name, their profiles are grouped under the same inferred name. Datadog can't distinguish between them unless you provide a unique service name.
+For service-name precedence and fallback behavior, see [How does the Host Profiler name services?][10].
 
 Set `DD_ENV` and `DD_VERSION` on your workloads for richer filtering in the [Datadog Profiler][3] UI.
 
@@ -151,3 +147,4 @@ After deploying the Host Profiler, see [Getting Started with Profiler][9] to lea
 [7]: https://github.com/open-telemetry/opentelemetry-specification/pull/4719
 [8]: https://github.com/open-telemetry/opentelemetry-specification/pull/4947
 [9]: /getting_started/profiler/
+[10]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/faq.md#how-does-the-host-profiler-name-services

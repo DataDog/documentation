@@ -81,7 +81,7 @@ If profiles appear for some workloads but not for a specific process:
 
 - Make sure the workload runs on a node where the Host Profiler DaemonSet is scheduled.
 - Make sure the process runs long enough to be sampled and exported. Short-lived processes might not appear immediately.
-- Set `OTEL_SERVICE_NAME` or `DD_SERVICE` on the workload so profiles appear under the expected service. If neither environment variable is set, the Host Profiler infers the service name from the binary name, such as `java` or `python` for interpreted workloads.
+- Set `OTEL_SERVICE_NAME` or `DD_SERVICE` on the workload so profiles appear under the expected service. For service-name precedence and fallback behavior, see [How does the Host Profiler name services?][7].
 - Set `DD_ENV` and `DD_VERSION` for richer filtering in the Datadog Profiler UI.
 
 ## Function names are missing or hard to read
@@ -100,3 +100,4 @@ The Host Profiler uploads debug symbols to Datadog when they are available local
 [4]: /getting_started/site/
 [5]: /profiler/enabling/full_host/#debug-symbols
 [6]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/troubleshooting.md#pod-does-not-start
+[7]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/faq.md#how-does-the-host-profiler-name-services
