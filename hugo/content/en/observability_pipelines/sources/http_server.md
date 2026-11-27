@@ -45,6 +45,8 @@ After you select the HTTP/S Server source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
+{{% observability_pipelines/tls_settings_client_identity %}}
+
 #### Configure authentication tokens
 
 If you store tokens as credentials in your HTTP request's authorization header, you can configure the Worker to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.

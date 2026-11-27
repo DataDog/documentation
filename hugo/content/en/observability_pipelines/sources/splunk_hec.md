@@ -49,6 +49,8 @@ After you select the Splunk HEC source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
+{{% observability_pipelines/tls_settings_client_identity %}}
+
 #### Configure authentication tokens
 
 If you store Splunk HEC tokens in your HTTP request's authorization header, you can configure Observability Pipelines to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped.
