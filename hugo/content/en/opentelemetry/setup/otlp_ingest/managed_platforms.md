@@ -52,6 +52,18 @@ export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY}"
 
 <div class="alert alert-info">Managed platform endpoints do not use the <code>dd-otlp-source</code> header. If you migrate from the generic OTLP endpoint, remove this header from your configuration.</div>
 
+### Enable trace conversion
+
+To send GenAI traces to [Agent Observability][20], use the managed platform endpoint and add `DD-LLMObs-Enabled: true` to the trace export request headers alongside `dd-api-key`. For platforms that manage exports, such as Cloudflare Workers, configure this header on the platform's telemetry destination.
+
+For an application-owned OpenTelemetry exporter, set:
+
+```shell
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},DD-LLMObs-Enabled=true"
+```
+
+The header enables conversion for spans with supported GenAI or OpenInference attributes. An explicit `dd_llmobs_enabled=false` span or resource attribute overrides the header. For Cloudflare setup, see [Using Cloudflare Agents][21].
+
 ## Supported platforms
 
 All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< region-param key="dd_site" >}}/`.
@@ -125,3 +137,5 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
 [19]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector
+[20]: /llm_observability/instrument/otel_instrumentation/
+[21]: /llm_observability/instrument/otel_instrumentation/#using-cloudflare-agents
