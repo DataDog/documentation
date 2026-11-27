@@ -61421,6 +61421,116 @@ components:
         - rollout_options
         - rollout_steps
       type: object
+    ExternalTeamPermissionSettingDefaultResponse:
+      description: Response containing a single external team permission setting default.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsData"
+      required:
+        - data
+      type: object
+    ExternalTeamPermissionSettingDefaultUpdateAttributes:
+      description: Attributes for upserting an external team permission setting default.
+      properties:
+        value:
+          description: The default permission value to apply for the action.
+          example: user_access_manage
+          type: string
+      required:
+        - value
+      type: object
+    ExternalTeamPermissionSettingDefaultUpdateData:
+      description: Data for upserting an external team permission setting default.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultUpdateAttributes"
+        id:
+          description: The resource identifier, formatted as `{source}:{action}`. Must match the path parameters.
+          example: scim:add_and_remove_subteam
+          type: string
+        type:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    ExternalTeamPermissionSettingDefaultUpdateRequest:
+      description: Request body for upserting an external team permission setting default.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultUpdateData"
+      required:
+        - data
+      type: object
+    ExternalTeamPermissionSettingDefaultsAttributes:
+      description: Attributes of an external team permission setting default.
+      properties:
+        action:
+          description: The permission action this default applies to.
+          example: add_and_remove_subteam
+          type: string
+        source:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsSource"
+        value:
+          description: The default permission value for the action.
+          example: user_access_manage
+          type: string
+      required:
+        - source
+        - action
+        - value
+      type: object
+    ExternalTeamPermissionSettingDefaultsData:
+      description: A single external team permission setting default resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsAttributes"
+        id:
+          description: |-
+            The unique identifier of the external team permission setting default, formatted as `{source}:{action}`.
+          example: scim:add_and_remove_subteam
+          type: string
+        type:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ExternalTeamPermissionSettingDefaultsDataList:
+      description: A list of external team permission setting default resources.
+      items:
+        $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsData"
+      type: array
+    ExternalTeamPermissionSettingDefaultsListResponse:
+      description: Response containing a list of external team permission setting defaults.
+      properties:
+        data:
+          $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsDataList"
+      required:
+        - data
+      type: object
+    ExternalTeamPermissionSettingDefaultsSource:
+      description: The external integration source for the permission setting default.
+      enum:
+        - github
+        - scim
+        - servicenow
+      example: scim
+      type: string
+      x-enum-varnames:
+        - GITHUB
+        - SCIM
+        - SERVICENOW
+    ExternalTeamPermissionSettingDefaultsType:
+      description: Resource type for external team permission setting defaults.
+      enum:
+        - external_team_permission_setting_defaults
+      example: external_team_permission_setting_defaults
+      type: string
+      x-enum-varnames:
+        - EXTERNAL_TEAM_PERMISSION_SETTING_DEFAULTS
     ExternalUser:
       description: Definition of a user.
       properties:
@@ -288195,6 +288305,252 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/team/settings/external-permissions:
+    get:
+      description: |-
+        List the organization-level permission defaults for externally synced teams. Each default maps a
+        (source, action) pair to the Datadog permission required to perform that action on teams managed by that
+        source. For example, a default can set which permission level can add or remove subteams on SCIM-managed
+        teams. Returns configured defaults for all sources.
+      operationId: ListExternalTeamPermissionSettingDefaults
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action: add_and_remove_subteam
+                          source: scim
+                          value: user_access_manage
+                        id: scim:add_and_remove_subteam
+                        type: external_team_permission_setting_defaults
+              schema:
+                $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsListResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - teams_read
+      summary: List external team permission defaults
+      tags:
+        - Teams
+      x-menu-order: 36
+      x-permission:
+        operator: OR
+        permissions:
+          - teams_read
+  /api/v2/team/settings/external-permissions/{source}:
+    get:
+      description: |-
+        List the organization-level permission defaults for a specific external team integration source. Each default
+        maps a permission action to the Datadog permission required to perform it on teams synced from that source.
+      operationId: ListExternalTeamPermissionSettingDefaultsBySource
+      parameters:
+        - description: The external team integration source.
+          example: scim
+          in: path
+          name: source
+          required: true
+          schema:
+            $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsSource"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          action: add_and_remove_subteam
+                          source: scim
+                          value: user_access_manage
+                        id: scim:add_and_remove_subteam
+                        type: external_team_permission_setting_defaults
+              schema:
+                $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - teams_read
+      summary: List a source's external team permission defaults
+      tags:
+        - Teams
+      x-menu-order: 37
+      x-permission:
+        operator: OR
+        permissions:
+          - teams_read
+  /api/v2/team/settings/external-permissions/{source}/{action}:
+    delete:
+      description: |-
+        Delete the organization-level permission default for a specific (source, action) pair, reverting that action to
+        its built-in default for all synced teams. The operation is idempotent. Deleting an absent default returns 204. On
+        success, triggers a sync of all existing synced teams so they re-derive their permissions without the override.
+      operationId: DeleteExternalTeamPermissionSettingDefault
+      parameters:
+        - description: The external team integration source.
+          example: scim
+          in: path
+          name: source
+          required: true
+          schema:
+            $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsSource"
+        - description: The permission action to delete the default for.
+          example: add_and_remove_subteam
+          in: path
+          name: action
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+      summary: Delete an external team permission default
+      tags:
+        - Teams
+      x-menu-order: 39
+      x-permission:
+        operator: OR
+        permissions:
+          - user_access_manage
+    put:
+      description: |-
+        Create or update the organization-level permission default for a specific (source, action) pair. This controls
+        which Datadog permission is required to perform that action on teams synced from that source. For example, a
+        default can require `user_access_manage` to add or remove SCIM-managed subteams. On success, triggers a sync
+        of all existing synced teams so they re-derive the updated permission. Returns 400 if the (source, action,
+        value) combination is not supported.
+      operationId: UpdateExternalTeamPermissionSettingDefault
+      parameters:
+        - description: The external team integration source.
+          example: scim
+          in: path
+          name: source
+          required: true
+          schema:
+            $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultsSource"
+        - description: The permission action to configure a default for.
+          example: add_and_remove_subteam
+          in: path
+          name: action
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      value: user_access_manage
+                    id: scim:add_and_remove_subteam
+                    type: external_team_permission_setting_defaults
+            schema:
+              $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: add_and_remove_subteam
+                        source: scim
+                        value: user_access_manage
+                      id: scim:add_and_remove_subteam
+                      type: external_team_permission_setting_defaults
+              schema:
+                $ref: "#/components/schemas/ExternalTeamPermissionSettingDefaultResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - user_access_manage
+      summary: Update an external team permission default
+      tags:
+        - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 38
+      x-permission:
+        operator: OR
+        permissions:
+          - user_access_manage
   /api/v2/team/sync:
     get:
       description: |-

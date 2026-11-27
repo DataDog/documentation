@@ -8573,6 +8573,24 @@
     "request_description": "",
     "request_schema_description": "Request for creating team connections."
   },
+  "ListExternalTeamPermissionSettingDefaults": {
+    "description": "List the organization-level permission defaults for externally synced teams. Each default maps a\n(source, action) pair to the Datadog permission required to perform that action on teams managed by that\nsource. For example, a default can set which permission level can add or remove subteams on SCIM-managed\nteams. Returns configured defaults for all sources.",
+    "summary": "List external team permission defaults"
+  },
+  "ListExternalTeamPermissionSettingDefaultsBySource": {
+    "description": "List the organization-level permission defaults for a specific external team integration source. Each default\nmaps a permission action to the Datadog permission required to perform it on teams synced from that source.",
+    "summary": "List a source's external team permission defaults"
+  },
+  "DeleteExternalTeamPermissionSettingDefault": {
+    "description": "Delete the organization-level permission default for a specific (source, action) pair, reverting that action to\nits built-in default for all synced teams. The operation is idempotent. Deleting an absent default returns 204. On\nsuccess, triggers a sync of all existing synced teams so they re-derive their permissions without the override.",
+    "summary": "Delete an external team permission default"
+  },
+  "UpdateExternalTeamPermissionSettingDefault": {
+    "description": "Create or update the organization-level permission default for a specific (source, action) pair. This controls\nwhich Datadog permission is required to perform that action on teams synced from that source. For example, a\ndefault can require `user_access_manage` to add or remove SCIM-managed subteams. On success, triggers a sync\nof all existing synced teams so they re-derive the updated permission. Returns 400 if the (source, action,\nvalue) combination is not supported.",
+    "summary": "Update an external team permission default",
+    "request_description": "",
+    "request_schema_description": "Request body for upserting an external team permission setting default."
+  },
   "GetTeamSync": {
     "description": "Get all team synchronization configurations.\nReturns a list of configurations used for linking or provisioning teams with external sources like GitHub or ServiceNow.",
     "summary": "Get team sync configurations"

@@ -95,3 +95,12 @@ entries:
       - UpdateTeamNotificationRule
       - UpdateTeamPermissionSetting
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: added
+    date: '2026-11-24'
+    link: https://github.com/DataDog/documentation/pull/42174
+    operations:
+      - DeleteExternalTeamPermissionSettingDefault
+      - ListExternalTeamPermissionSettingDefaults
+      - ListExternalTeamPermissionSettingDefaultsBySource
+      - UpdateExternalTeamPermissionSettingDefault
+    title: Publish the external team permission settings API
