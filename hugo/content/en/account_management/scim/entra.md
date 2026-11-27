@@ -29,7 +29,7 @@ SCIM in Datadog is an advanced feature available with the Infrastructure Pro, In
 
 This documentation assumes your organization manages user identities using an identity provider.
 
-Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][2].
+If you don't use Workload Identity Federation, use a [service access token][13] (SAT). A SAT belongs to a service account, so access does not depend on an individual user.
 
 When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
@@ -47,19 +47,98 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
 ## Configure automatic user provisioning
 
+Microsoft Entra ID can authenticate to Datadog in two ways:
+
+- **Workload Identity Federation (recommended)**: Entra ID gets short-lived tokens from Datadog. There is no secret to store or rotate.
+- **Service access token**: Entra ID sends a Datadog service access token (SAT) with each request. Use this method if you can't use Workload Identity Federation.
+
+{{< tabs >}}
+{{% tab "Workload Identity Federation (recommended)" %}}
+
+This setup moves back and forth between the Microsoft Entra admin center and Datadog. Keep both open.
+
+To connect a tenant in Datadog, your user needs the `workload_identity_federation_read`, `user_access_read`, `user_access_invite`, and `user_access_manage` permissions.
+
+### Start the configuration in Entra ID
+
+1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel.
+2. Click {{< ui >}}Connect your application{{< /ui >}}. The {{< ui >}}New provisioning configuration{{< /ui >}} page appears.
+3. In {{< ui >}}Select authentication method{{< /ui >}}, select {{< ui >}}Workload identity based authentication{{< /ui >}}.
+
+### Get the Datadog URLs
+
+1. In Datadog, go to {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Workload Identity Federation{{< /ui >}} and open the {{< ui >}}SCIM Provisioning{{< /ui >}} tab.
+2. Click {{< ui >}}Add New{{< /ui >}}. The {{< ui >}}Connect Entra Tenant{{< /ui >}} dialog opens.
+3. Under {{< ui >}}Copy these values into Azure{{< /ui >}}, note the {{< ui >}}SCIM base URL{{< /ui >}} and the {{< ui >}}OAuth token endpoint{{< /ui >}}. Keep the dialog open.
+
+### Register the workload identity in Entra ID
+
+1. In {{< ui >}}Application API URL{{< /ui >}}, paste the {{< ui >}}SCIM base URL{{< /ui >}} from Datadog.
+2. Under {{< ui >}}Register the workload identity app{{< /ui >}}, click {{< ui >}}Select workload identity{{< /ui >}}.
+3. Register a new app or select an existing one:
+    - To register an app, open the {{< ui >}}Register new{{< /ui >}} tab, enter an {{< ui >}}App registration name{{< /ui >}}, and click {{< ui >}}Register{{< /ui >}}.
+    - To reuse an app, open the {{< ui >}}Select existing{{< /ui >}} tab and pick it.
+4. Entra ID shows four values under {{< ui >}}Configure trust in the target application{{< /ui >}}. Copy them for the next step: {{< ui >}}Token Issuer (iss claim){{< /ui >}}, {{< ui >}}JWKS URI{{< /ui >}}, {{< ui >}}Subject (sub claim){{< /ui >}}, and {{< ui >}}Audience (aud claim){{< /ui >}}.
+
+### Connect the tenant in Datadog
+
+1. In the {{< ui >}}Connect Entra Tenant{{< /ui >}} dialog, under {{< ui >}}Paste the trust values from Azure{{< /ui >}}, fill in all fields:
+
+   | Datadog field | Value from Entra ID |
+   |---------------|---------------------|
+   | {{< ui >}}Tenant ID{{< /ui >}} | Your Microsoft Entra tenant ID. It is the GUID in the Token Issuer URL. |
+   | {{< ui >}}Token Issuer (iss claim){{< /ui >}} | {{< ui >}}Token Issuer (iss claim){{< /ui >}} |
+   | {{< ui >}}JWKS URI{{< /ui >}} | {{< ui >}}JWKS URI{{< /ui >}} |
+   | {{< ui >}}Subject (sub claim){{< /ui >}} | {{< ui >}}Subject (sub claim){{< /ui >}} |
+   | {{< ui >}}Audience (aud claim){{< /ui >}} | {{< ui >}}Audience (aud claim){{< /ui >}} |
+
+2. Click {{< ui >}}Create Integration{{< /ui >}}. The tenant appears under {{< ui >}}Connected tenants{{< /ui >}}.
+3. Copy the {{< ui >}}Client ID{{< /ui >}} shown for the tenant.
+
+{{< img src="/account_management/scim/datadog-connect-entra-tenant.png" alt="Connect Entra Tenant dialog in Datadog, with the trust values from Entra ID filled in" style="width:80%;" >}}
+
+{{< img src="/account_management/scim/datadog-entra-tenant-connected.png" alt="SCIM Provisioning tab in Datadog showing the connected tenant and its Client ID" style="width:80%;" >}}
+
+### Finish the configuration in Entra ID
+
+1. Under {{< ui >}}Enter values from your application{{< /ui >}}, fill in:
+    - {{< ui >}}OAuth token endpoint{{< /ui >}}: the {{< ui >}}OAuth token endpoint{{< /ui >}} from Datadog.
+    - {{< ui >}}Client identifier{{< /ui >}}: the {{< ui >}}Client ID{{< /ui >}} from Datadog.
+2. Click {{< ui >}}Test connection{{< /ui >}}, and wait for the message confirming that the connection test was successful.
+3. Click {{< ui >}}Create{{< /ui >}}. Entra ID opens the provisioning overview for the app.
+
+{{< img src="/account_management/scim/entra-wif-provisioning-config.png" alt="New provisioning configuration page in Entra ID with workload identity values filled in and a successful connection test" style="width:80%;" >}}
+
+Provisioning starts paused. After you set your mappings (see the following section) and assign users and groups to the app, click {{< ui >}}Start provisioning{{< /ui >}}. To test with one user first, use {{< ui >}}Provision on demand{{< /ui >}}.
+
+For more information, see [Workload Identity Federation][1].
+
+[1]: /account_management/workload_identity_federation/
+
+{{% /tab %}}
+{{% tab "Service access token" %}}
+
 1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel
 2. In the {{< ui >}}Provisioning Mode{{< /ui >}} menu, select {{< ui >}}Automatic{{< /ui >}}
 3. Open {{< ui >}}Admin Credentials{{< /ui >}}
 4. Complete the {{< ui >}}Admin Credentials{{< /ui >}} section as follows:
     - {{< ui >}}Tenant URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim?aadOptscim062020`
-        - **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][3].
-        - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][8]. If you are not using Entra ID, you should not include this suffix on the URL.
-    - {{< ui >}}Secret Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
+        - **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][1].
+        - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][2]. If you are not using Entra ID, you should not include this suffix on the URL.
+    - {{< ui >}}Secret Token{{< /ui >}}: Use a Datadog [service access token][3]. Create it on a [service account][4] and grant at least the `user_access_invite` and `user_access_manage` scopes.
 
 {{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click {{< ui >}}Test Connection{{< /ui >}}, and wait for the message confirming that the credentials are authorized to enable provisioning.
 6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears. See the following section to configure mapping.
+
+[1]: /api/latest/scim/
+[2]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior
+[3]: /account_management/service-access-tokens/
+[4]: /account_management/org_settings/service_accounts
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Attribute mapping
 
@@ -93,14 +172,10 @@ Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9]
 Group mapping is not supported.
 
 [1]: /account_management/scim/
-[2]: /account_management/scim/#using-a-service-account-with-scim
-[3]: /api/latest/scim/
-[4]: https://app.datadoghq.com/organization-settings/application-keys
-[5]: /account_management/org_settings/service_accounts
 [6]: https://entra.microsoft.com/
 [7]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator
-[8]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior
 [9]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
 [10]: https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes#provisioning-a-role-to-a-scim-app
 [11]: https://app.datadoghq.com/organization-settings/roles
 [12]: https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-app-roles-in-apps
+[13]: /account_management/service-access-tokens/
