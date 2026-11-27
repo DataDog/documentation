@@ -25,7 +25,13 @@ For setup instructions and full details on the `cases` toolset, see the [Datadog
 
 Assign work items to specialized agents built with [Bits Agent Builder][3] to automate the full work item lifecycle, from initial triage to follow-up and resolution. For example use cases, agent archetypes, and manual and automated assignment, see [Custom Agents][4].
 
+## Claude agents
+
+Assign work items to [Claude Managed Agents][5] that you host in your Anthropic workspace. Each Claude agent works in Datadog as its own user, with the permissions you pick. For setup and management, see [Claude Agents][6].
+
 [1]: /mcp_server
 [2]: https://modelcontextprotocol.io/
 [3]: /actions/agents/
 [4]: /incident_response/work_management/ai/custom_agents/
+[5]: https://platform.claude.com/docs/en/managed-agents/overview
+[6]: /incident_response/work_management/ai/claude_agents/

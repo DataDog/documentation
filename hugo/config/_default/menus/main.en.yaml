@@ -3141,6 +3141,11 @@ menu:
       parent: case_management_ai
       identifier: case_management_ai_custom_agents
       weight: 801
+    - name: Claude Agents
+      url: incident_response/work_management/ai/claude_agents
+      parent: case_management_ai
+      identifier: case_management_ai_claude_agents
+      weight: 802
     - name: Troubleshooting
       url: incident_response/work_management/troubleshooting
       parent: case_management
