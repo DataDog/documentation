@@ -3400,6 +3400,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an OpenAI Codex integration account."
   },
+  "ListOpenAIUsageAndCostsIntegrationAccounts": {
+    "description": "List OpenAI Usage and Costs integration accounts.",
+    "summary": "List OpenAI Usage and Costs accounts"
+  },
+  "CreateOpenAIUsageAndCostsIntegrationAccount": {
+    "description": "Create an OpenAI Usage and Costs integration account.",
+    "summary": "Create an OpenAI Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Usage and Costs integration account."
+  },
+  "DeleteOpenAIUsageAndCostsIntegrationAccount": {
+    "description": "Delete an OpenAI Usage and Costs integration account.",
+    "summary": "Delete an OpenAI Usage and Costs account"
+  },
+  "GetOpenAIUsageAndCostsIntegrationAccount": {
+    "description": "Get an OpenAI Usage and Costs integration account.",
+    "summary": "Get an OpenAI Usage and Costs account"
+  },
+  "UpdateOpenAIUsageAndCostsIntegrationAccount": {
+    "description": "Update an OpenAI Usage and Costs integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Usage and Costs account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Usage and Costs integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"
