@@ -60,7 +60,7 @@ To remediate a misconfiguration, you can:
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security{{< /nextlink >}}
+  {{< nextlink href="/getting_started/security/cloud_security_management">}}Getting Started with Cloud Security{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Cloud Security Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for Cloud Security Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for Cloud Security Misconfigurations{{< /nextlink >}}
@@ -79,8 +79,6 @@ To remediate a misconfiguration, you can:
 [8]: /security/notifications/#notification-channels
 [9]: /security/notifications/#detection-rule-notifications
 [10]: /security/cloud_security_management/misconfigurations/findings
-[11]: /security/default_rules/#cat-posture-management-infra
-[12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[13]: /security/cloud_security_management/mute_issues
+[13]: /security/cloud_security_management/review_remediate/mute_issues
 [14]: /security/cloud_security_management/review_remediate/workflows/
 [15]: /security/ticketing_integrations

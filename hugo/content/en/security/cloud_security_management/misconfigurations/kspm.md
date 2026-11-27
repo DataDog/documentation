@@ -6,7 +6,7 @@ further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Cloud Security Misconfigurations cloud configuration detection rules"
-- link: "/security/misconfigurations/custom_rules"
+- link: "/security/cloud_security_management/misconfigurations/custom_rules"
   tag: "Documentation"
   text: "Create Custom Rules"
 ---
@@ -75,11 +75,11 @@ After you create the detection rule, you can customize its severity (`Critical`,
 [3]: /glossary/#security-posture-score
 [4]: https://www.openpolicyagent.org/docs/latest/policy-language/
 [5]: /security/cloud_security_management/guide/writing_rego_rules/
-[6]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
+[6]: /security/notifications/rules/
 [7]: /security/ticketing_integrations
 [8]: /security/cloud_security_management/review_remediate/workflows
 [9]: https://app.datadoghq.com/security/compliance/home
-[10]: /api/latest/security-monitoring/#list-findings
+[10]: /api/latest/security-monitoring/#search-security-findings
 [11]: https://app.datadoghq.com/security/compliance
 [12]: /security/cloud_security_management/setup/agent/
 [13]: /security/cloud_security_management/setup/cloud_integrations/

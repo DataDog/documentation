@@ -286,7 +286,7 @@ A Compute Firewall (`gcp_compute_firewall`) grants public access if all of the f
 |The firewall has one or more rules whose protocol is TCP or all and which have `0.0.0.0/0` or `::/0` in their `source_ranges`. | These CIDR prefixes allow access from the Internet, and are the protocol values that are relevant for determining public access. |
 |The firewall's direction is `ingress`. | This means that the firewall is relevant for inbound access from the Internet. |
 
-For more information about using Compute firewalls, [Choose to allow or disallow blob public access on Azure Storage accounts][47].
+For more information about using Compute firewalls, see [VPC firewall rules][47].
 
 ### Google Cloud Compute instance
 
@@ -415,7 +415,7 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [42]: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/associate-public-ip-address-vm?tabs=azure-portal
 [45]: https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal
 [46]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/
-[47]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/
+[47]: https://cloud.google.com/firewall/docs/firewalls
 [48]: https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address
 [49]: https://cloud.google.com/firewall/docs/firewalls#firewall_rule_components
 [50]: https://cloud.google.com/compute/docs/instances

@@ -20,7 +20,7 @@ Open Policy Agent (OPA) provides [Rego][1], an open source policy language with 
 
 Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. Cloud Security Misconfigurations uses a module template like the one below to simplify writing rules:
 
-```python
+```rego
 package datadog
 
 import data.datadog.output as dd_output
@@ -29,7 +29,7 @@ import future.keywords.contains
 import future.keywords.if
 import future.keywords.in
 
-eval(resource_type) = "skip" if {
+eval(resource) = "skip" if {
     # Logic that evaluates to true if the resource should be skipped
 } else = "pass" {
     # Logic that evaluates to true if the resource is compliant
@@ -51,7 +51,7 @@ Take a close look at each part of this module to understand how it works.
 
 The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace. 
 
-```python
+```rego
 import future.keywords.contains
 import future.keywords.if
 import future.keywords.in
@@ -59,7 +59,7 @@ import future.keywords.in
 
 The next three statements import the OPA-provided keywords [`contains`][5], [`if`][6], and [`in`][7]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** Importing all keywords with `import future.keywords` is [not recommended][8].
 
-```python
+```rego
 import data.datadog.output as dd_output
 ```
 
@@ -69,7 +69,7 @@ The next line imports the Datadog helper method, which formats your results to t
 
 After the import statements comes the first rule in the template module:
 
-```python
+```rego
 eval(resource) = "skip" if {
     resource.skip_me
 } else = "pass" {
@@ -81,7 +81,7 @@ eval(resource) = "skip" if {
 
 The rule evaluates the resource, and provides the outcome as a string depending on the state of the resource. You can change the order of `pass`, `fail`, and `skip` according to your needs. The rule above has `fail` as a default, if `skip_me` and `should_pass` are false or nonexistent in your resource. Alternatively, you can make `pass` the default: 
 
-```python
+```rego
 eval(resource) = "skip" if {
     resource.skip_me
 } else = "fail" {
@@ -95,7 +95,7 @@ eval(resource) = "skip" if {
 
 The final section of the template module builds your set of results:
 
-```python
+```rego
 # This part remains unchanged for all rules
 results contains result if {
 	some resource in input.resources[input.main_resource_type]
@@ -125,7 +125,7 @@ The template helps you start writing custom rules. You aren't required to follow
 
 The above rule example evaluates basic true or false flags like `should_pass` in your resource. Consider a rule that expresses a logical `OR`, for example:
 
-```python
+```rego
 bad_port_range(resource) {
     resource.port >= 100
     resource.port <= 200
@@ -137,7 +137,7 @@ bad_port_range(resource) {
 
 This rule evaluates to true if the `port` is between `100` and `200`, or between `300` and `400`, inclusive. For this, you can define your `eval` rule as follows:
 
-```python
+```rego
 eval(resource) = "skip" if {
     not resource.port
 } else = "fail" {
@@ -153,7 +153,7 @@ Sometimes you want to examine more than one resource type in your rule. To do th
 
 When writing a policy for more than one resource type, it can be time consuming to loop through all instances of a related resource type for each main resource. Take the following example:
 
-```python
+```rego
 eval(iam_service_account) = "fail" if {
     some key in input.resources.gcp_iam_service_account_key
     key.parent == iam_service_account.resource_name
@@ -173,7 +173,7 @@ This rule determines whether there are any instances of `gcp_iam_service_account
 
 To improve the time complexity significantly, build a [set][10] of key parents that are user managed with a [set comprehension][11]:
 
-```python
+```rego
 user_managed_keys_parents := {key_parent |
     some key in input.resources.gcp_iam_service_account_key
     key.key_type == "USER_MANAGED"
@@ -183,7 +183,7 @@ user_managed_keys_parents := {key_parent |
 
 To find out if your service account has a user managed key, query the set in `O(1)` time:
 
-```python
+```rego
 eval(iam_service_account) = "fail" if {
     user_managed_keys_parents[iam_service_account.resource_name]
 } else = "pass" {

@@ -4,13 +4,13 @@ aliases:
   - /security/misconfigurations/supported_frameworks
   - /security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
 further_reading:
-- link: "security/cspm/setup"
+- link: "security/cloud_security_management/setup"
   tag: "Documentation"
   text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
-- link: "security/cspm/findings"
+- link: "security/cloud_security_management/misconfigurations/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
 - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
@@ -81,7 +81,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security_monitoring/default_rules/
+[1]: /security/default_rules/
 [2]: https://www.cisecurity.org/benchmark/amazon_web_services/
 [3]: https://www.cisecurity.org/benchmark/azure
 [4]: https://www.cisecurity.org/benchmark/docker

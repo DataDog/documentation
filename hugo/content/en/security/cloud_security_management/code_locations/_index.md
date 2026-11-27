@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Misconfigurations"
-- link: "/integrations/guide/source-code-integration/"
+- link: "/source_code/"
   tag: "Documentation"
   text: "Set up Source Code Integration"
 - link: "/security/cloud_security_management/review_remediate/workflows/"
@@ -83,7 +83,7 @@ If a misconfiguration doesn't apply to your environment or is an accepted risk, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/misconfigurations/
-[2]: /integrations/guide/source-code-integration/
+[2]: /source_code/
 [3]: https://app.datadoghq.com/security/csm/misconfigurations-and-attack-paths
 [4]: /security/ticketing_integrations/
 [5]: /security/cloud_security_management/review_remediate/workflows/

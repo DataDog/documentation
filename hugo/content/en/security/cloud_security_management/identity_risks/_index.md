@@ -26,7 +26,7 @@ further_reading:
   text: "Detect cross-account access risks in AWS with Datadog"
 ---
 
-Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies](#remediate-identity-risks), [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
+Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to help protect your cloud infrastructure against IAM-based attacks. To speed up remediation, it suggests [downsized policies](#remediate-identity-risks), [Workflow Automation][3]-based remediations, and deep links to cloud consoles.
 
 <div class="alert alert-info">Cloud Security Identity Risks is available for AWS, Azure, and GCP.</div>
 
@@ -101,5 +101,5 @@ If you are enabling AWS IAM Access Analyzer for the first time:
 
 [1]: https://app.datadoghq.com/security/identities
 [2]: /security/ticketing_integrations/?tab=jira
-[3]: /security/cloud_security_management/workflows
+[3]: /security/cloud_security_management/review_remediate/workflows/
 [4]: /integrations/iam-access-analyzer/

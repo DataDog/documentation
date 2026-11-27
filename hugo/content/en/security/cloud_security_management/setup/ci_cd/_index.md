@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Vulnerabilities"
-- link: "/infrastructure/containers/container_images"
+- link: "/containers/monitoring/container_images"
   tag: "Documentation"
   text: "Viewing Container Images"
 - link: "/security/cloud_security_management/setup/agent"
@@ -271,16 +271,10 @@ For additional help, see the [Cloud Security troubleshooting guide][12] or conta
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/vulnerabilities
-[2]: /security/code_security/software_composition_analysis/
 [3]: https://app.datadoghq.com/security/csm/vm
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /account_management/api-app-keys/#application-keys
 [6]: /getting_started/site/
-[7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[8]: /integrations/guide/source-code-integration
-[9]: /security/code_security/dev_tool_int/github_pull_requests
-[10]: /integrations/gitlab-source-code/#setup
-[11]: /integrations/azure-devops-source-code/#setup
 [12]: /security/cloud_security_management/troubleshooting/vulnerabilities/
 [13]: /help/
 [14]: https://specs.opencontainers.org/image-spec/annotations/
