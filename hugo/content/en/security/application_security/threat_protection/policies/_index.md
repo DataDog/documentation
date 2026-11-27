@@ -91,7 +91,7 @@ The default HTTP response status code while serving the deny page to attackers i
 
 You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
 
-You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect, for example permanent (`301` response code) or temporary (`302` response code).
+You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect: `301` (permanent), `302` (found), `303` (see other), or `307` (temporary redirect). The redirect URL must be an `http` or `https` URL, or a path that starts with `/`.
 
 ### Disable protection across all services (Disabling protection mode)
 
