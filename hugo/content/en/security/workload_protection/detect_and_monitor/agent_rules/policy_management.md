@@ -58,7 +58,7 @@ When you add tags, Datadog displays how many agents the tags target as well the 
 ## Create a custom Agent rule {#create-a-custom-agent-rule}
 
 You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][19], you reference the custom Agent rule and add expression parameters.
-Custom Agent rules are deployed to the Agent in a custom policy. A custom policy is based on the default Agent rules: it contains your custom Agent rules and any changes you make to default Agent rules in that policy.
+Custom Agent rules are deployed to the Agent in a custom policy. A custom policy is based on the default Agent rules. It contains your custom Agent rules and any changes you make to default Agent rules in that policy.
 
 1. Go to [Agent Configuration][6].
 2. Create a policy or open an existing one.
