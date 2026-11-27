@@ -19,6 +19,9 @@ further_reading:
 - link: "/actions/agents/"
   tag: "Documentation"
   text: "Bits Agent Builder"
+- link: "/synthetics/bits_testing/"
+  tag: "Documentation"
+  text: "Bits Testing"
 ---
 
 ## Overview
@@ -38,6 +41,7 @@ The following products consume AI Credits:
 | [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
 | [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
 | [Bits Database Optimization][11] | Review and implement database query optimizations identified by Bits AI. |
+| [Bits Testing][12] | Explore your application to map critical user journeys and generate Synthetic tests that close coverage gaps. |
 
 ## Pricing
 
@@ -101,6 +105,7 @@ Datadog adds tags from the reference table to usage it processes after you enabl
 | [Bits Investigation][3] | `datadog.estimated_usage.bits_investigation.ai_credits` | AI Credits consumed by Bits Investigation. |
 | [Bits Code][2] | `datadog.estimated_usage.bits_code.ai_credits` | AI Credits consumed by Bits Code. |
 | [Bits Agent Builder][4] | `datadog.estimated_usage.bits_agent_builder.ai_credits` | AI Credits consumed by Bits Agent Builder. |
+| [Bits Testing][12] | `datadog.estimated_usage.bits_testing.ai_credits` | AI Credits consumed by Bits Testing. |
 
 Each metric covers one product, while the [**AI Credits Management**][10] page shows the total for all products. These metrics are estimates. For billed usage, use [**Plan & Usage > AI Credits**][6].
 
@@ -128,3 +133,4 @@ AI Credits are available to all Datadog customers except:
 [9]: /reference_tables/
 [10]: https://app.datadoghq.com/bits-ai/ai-credits-management
 [11]: /database_monitoring/bits_database_optimization/
+[12]: /synthetics/bits_testing/
