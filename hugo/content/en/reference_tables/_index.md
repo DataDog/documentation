@@ -202,6 +202,35 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
+{{% collapse-content title="BigQuery" level="h3" id="bigquery" %}}
+
+First, [configure the Google Cloud integration][21] with a service account and [grant it BigQuery access][22]. If BigQuery is not listed as a source, contact [support][5] to check availability.
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}BigQuery{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Service Account Email{{< /ui >}}: Select the service account configured above. If it isn't listed, click "Add GCP Account with BigQuery Access".
+   - {{< ui >}}Project ID{{< /ui >}}: The project to run the query in. The available projects depend on the selected service account.
+   - {{< ui >}}Location{{< /ui >}}: The BigQuery dataset location, such as `US`, `EU`, or `us-east1`.
+   - {{< ui >}}SQL Query{{< /ui >}}: The BigQuery SQL to execute. Use backticks around fully qualified table names, for example, ``SELECT customer_id, tier FROM `project_id.dataset_id.customers` ``.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column returned by the query that uniquely identifies each row.
+3. Click {{< ui >}}Save{{< /ui >}}. You're redirected to the table's details page. Allow several minutes for the initial sync to complete.
+
+If no projects are available, add the project to the service account's Google Cloud integration configuration.
+
+Queries executed by Datadog incur BigQuery charges. Select only the rows and columns you need.
+
+To edit {{< ui >}}Location{{< /ui >}} or {{< ui >}}SQL Query{{< /ui >}}, open the table and click {{< ui >}}Update Config{{< /ui >}}. The table name, service account, project, and primary key cannot be changed after creation.
+
+If ingestion fails, check the service account's permissions, the dataset location, and the SQL query. Correct the location or query with {{< ui >}}Update Config{{< /ui >}}.
+
+[5]: /help/
+[16]: https://app.datadoghq.com/reference-tables
+[21]: /integrations/google-cloud-platform/#setup
+[22]: /integrations/google-cloud-bigquery/#reference-tables
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
 First, [configure the Databricks integration][14] with an account and [grant it read access to the source data][22].
