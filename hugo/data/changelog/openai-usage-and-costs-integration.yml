@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-11-26'
+    link: https://github.com/DataDog/documentation/pull/42027
+    operations:
+      - CreateOpenAIUsageAndCostsIntegrationAccount
+      - DeleteOpenAIUsageAndCostsIntegrationAccount
+      - GetOpenAIUsageAndCostsIntegrationAccount
+      - ListOpenAIUsageAndCostsIntegrationAccounts
+      - UpdateOpenAIUsageAndCostsIntegrationAccount
+    title: Add Integration Accounts v2 API for OpenAI Usage and Costs
