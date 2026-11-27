@@ -7,8 +7,8 @@ further_reading:
     text: "AI Gateway"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
 ## Prerequisites
@@ -16,7 +16,7 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 - AI Gateway Preview access for your Datadog organization.
 - A Datadog role with the `ai_gateway_config_read` and `ai_gateway_config_write` permissions to configure AI Gateway providers, routing rules, budgets, and rate limits.
 - A provider [integration account][1] for a supported provider, such as OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, or Vertex AI. [See all supported providers](/ai_gateway/providers/#choose-a-provider-account).
-- A credential for the user or service account that sends requests. The principal and credential scope must allow `ai_gateway_usage`, and a model access policy or the default policy must allow the requested model or routing rule. See [Authenticate requests](/ai_gateway/applications/#authenticate-requests) and [Control model access](/ai_gateway/access_control/).
+- A credential for the user or service account that sends requests. The principal and credential scope must allow `ai_gateway_usage`, and a model access policy or the default policy must allow the requested model or routing rule. See [Authenticate requests](/ai_gateway/requests/#authenticate-requests) and [Control model access](/ai_gateway/access_control/).
 
 ## Add a provider
 
@@ -24,7 +24,7 @@ AI Gateway is in Preview. Request access or contact your Customer Success Manage
 
 ## Authenticate requests
 
-[Choose a personal access token or service access token](/ai_gateway/applications/#authenticate-requests). The caller and credential scope must allow `ai_gateway_usage`, and a [model access policy](/ai_gateway/access_control/) must allow the requested model or routing rule.
+[Choose a personal access token or service access token](/ai_gateway/requests/#authenticate-requests). The caller and credential scope must allow `ai_gateway_usage`, and a [model access policy](/ai_gateway/access_control/) must allow the requested model or routing rule.
 
 ## Send a request
 

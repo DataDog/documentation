@@ -39,13 +39,13 @@ These are the available processors:
 - [Filter Processor][7]
 - [Generate Metrics Processor][8]
 - [Grok Parser Processor][9]
-- [Integration Pipelines Processor (Preview)][20]
 - [Parse JSON Processor][10]
 - [Parse XML Processor][11]
 - [Quota Processor][12]
 - [Reduce Processor][13]
 - [Remap to OCSF Processor][14]
 - [Sample Processor][15]
+- [Sawmill Processor (Preview)][20]
 - [Sensitive Data Scanner Processor][16]
 - [Spike Protection Processor (Preview)][21]
 - [Split Array][17]
@@ -73,7 +73,7 @@ These are the available processors:
 [17]: /observability_pipelines/processors/split_array/
 [18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
-[20]: /observability_pipelines/processors/integration_pipelines/
+[20]: /observability_pipelines/processors/sawmill/
 [21]: /observability_pipelines/processors/spike_protection/
 
 {{% /tab %}}

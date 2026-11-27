@@ -1,44 +1,72 @@
 ---
 title: Connect Applications to AI Gateway
-description: Connect Claude Code, Codex, and Python SDKs to Datadog AI Gateway, attribute requests to applications and teams, and verify traffic.
+description: Connect Claude Code and Codex to Datadog AI Gateway with Trajectory, configure other clients and Python SDKs, attribute requests to applications and teams, and verify traffic.
 further_reading:
   - link: "/ai_gateway/"
     tag: "Documentation"
     text: "AI Gateway"
+  - link: "/integrations/trajectory/"
+    tag: "Documentation"
+    text: "Trajectory"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
-Connect a coding agent or SDK to AI Gateway with a Datadog credential and an approved model identifier. These examples connect organization-funded applications using provider credentials configured by your administrator.
+Connect coding agents and your own applications to AI Gateway. For Claude Code and Codex, use [Trajectory](#connect-claude-code-and-codex-with-trajectory): it configures the agent and signs you in to Datadog, with no access token to manage. For other clients, and for applications built with an SDK, see [Configure clients manually](#configure-clients-manually) and [Connect applications with SDKs](#connect-applications-with-sdks).
 
-Before you begin:
+Before you begin, complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule. Review the [data capture setting][applications-6] before sending sensitive content.
 
-- Complete [Get started][applications-1], or ask your administrator for access to a configured model or routing rule.
-- Have a [personal access token, service access token, or Workload Identity Federation token][applications-2] whose principal and scope allow `ai_gateway_usage`.
-- Review the [data capture setting][applications-6] before sending sensitive content.
-- Choose `<PROVIDER_SLUG>/<MODEL_ID>` for a specific provider model, or `router/<RULE_SLUG>` for a routing rule. The target must support the client's request format, either natively or through API translation. Translation supports a subset of each API; available client features depend on the target.
+## Connect Claude Code and Codex with Trajectory
 
-## Authenticate requests
+[Trajectory][applications-26], Datadog's open source CLI for coding agents, is the recommended way to connect Claude Code and Codex to AI Gateway. It configures each agent to use AI Gateway, lists your AI Gateway models in the agent's `/model` picker, and signs you in to Datadog in the browser.
 
-AI Gateway accepts the following Datadog credentials. The user or service account and the credential scope must allow `ai_gateway_usage`.
+### Before you start
 
-| Credential | Request headers |
-|---|---|
-| [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
-| [Personal access token][4], for coding agents signed in with a [subscription](/ai_gateway/providers/#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
-| [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
-| [Workload Identity Federation][applications-22] token | `Authorization: Bearer <WIF_TOKEN>` |
+- Install the coding agents you want to connect: Claude Code 2.1.83 or later, or Codex 0.128.0 or later. Trajectory sets up only the agents it finds on your computer.
+- Use macOS, Linux, or Windows Subsystem for Linux (WSL).
+- Your Datadog site must be US1, US3, US5, EU, AP1, AP2, or UK1.
 
-Coding agents signed in with a subscription send two headers:
+### Set up Trajectory for AI Gateway
 
-- `Authorization`: The subscription credential, which AI Gateway passes through to the subscription vendor.
-- `dd-application-key`: Your Datadog personal access token, which AI Gateway uses to authenticate you.
+1. Run the installer. It installs or updates Trajectory, installs Pup (the Datadog CLI that Trajectory uses to sign you in) if it's missing, and turns on AI Gateway for the coding agents you pick in its setup wizard. The installer asks for your Datadog site and an API key. The API key is optional: without one, Trajectory keeps its session data on your computer. AI Gateway routing works either way.
 
-Despite its name, `dd-application-key` takes a personal access token, not an application key.
+   ```shell
+   dir="$(mktemp -d)" &&
+   curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh -o "$dir/install.sh" &&
+   bash "$dir/install.sh" --plugin ai-gateway &&
+   export PATH="$HOME/.trajectory/bin:$PATH"
+   ```
 
-For service workloads, use a service access token. For workloads running in AWS, you can [authenticate with Workload Identity Federation](#authenticate-aws-workloads-with-workload-identity-federation) instead, with no Datadog secret to store or rotate. Store credentials in your application's secret manager and keep them out of source control and logs.
+2. Check that AI Gateway is ready:
+
+   ```shell
+   trajectory plugins ai-gateway status
+   ```
+
+3. Start the agent through Trajectory with `trajectory claude` or `trajectory codex`. The agent's `/model` picker lists the models and routing rules you can use through AI Gateway. To send requests on behalf of a team you belong to, see [Select a team](#select-a-team).
+4. Optional: Run `trajectory gateway-ui` to open the AI Gateway dashboard with your models, routing rules, and budgets.
+
+To list only the models of some provider accounts in the `/model` picker, pass their provider slugs when you start the agent, for example `trajectory claude --provider-slugs <PROVIDER_SLUG>,<PROVIDER_SLUG>` or `trajectory codex --provider-slugs <PROVIDER_SLUG>`. Routing rules stay in the picker. Each Claude Code session can use a different filter. Codex sessions share one model list, so the filter comes from the Codex session that starts it, and later Codex sessions ignore their flag while that list is in use. The filter changes only what the picker shows: [model access policies][applications-25] still decide which models you can call.
+
+AI Gateway signs you in to the site you pass with `--site`, or else the site of your existing Pup sign-in, or else US1. It does not use the site you choose in the installer's wizard. If AI Gateway signed you in to the wrong site, run `trajectory plugins ai-gateway login --site <SITE>`, for example `--site us3.datadoghq.com`.
+
+If you install another agent later, run `trajectory plugins ai-gateway setup --clients <CLIENT>`. To stop routing an agent through AI Gateway, run `trajectory plugins ai-gateway disable --clients <CLIENT>`.
+
+A request that fails through AI Gateway is not retried with the agent's own provider credentials.
+
+### Roll out Trajectory to your organization
+
+To connect a team or a whole organization, deploy Trajectory to developer computers with your MDM product, such as Jamf Pro or Microsoft Intune, instead of asking each developer to install it. See [Roll out Trajectory with MDM][applications-27]. On macOS, the deployment can also install launcher wrappers, so that ordinary `claude` and `codex` commands start through Trajectory. To limit which provider accounts appear in the supported coding agents' `/model` pickers for everyone, set `provider_slugs` for the `frontier-ai-gateway` module in the deployment profile. This list replaces any `--provider-slugs` a developer passes.
+
+## Configure clients manually
+
+Configure a client yourself when Trajectory doesn't support it, when you can't install Trajectory, or when you need settings it doesn't manage. Each client needs a Datadog credential, the base URL for your Datadog site, and any request headers you use. [Send Requests](/ai_gateway/requests/) describes each of them: [Authenticate requests](/ai_gateway/requests/#authenticate-requests), [Base URL](/ai_gateway/requests/#base-url), and [Request headers](/ai_gateway/requests/#request-headers).
+
+Request a model with `<PROVIDER_SLUG>/<MODEL_ID>` for a specific provider model, or `router/<RULE_SLUG>` for a routing rule. The target must support the client's request format, either natively or through API translation. [Translation](/ai_gateway/requests/#api-translation) supports a subset of each API; available client features depend on the target.
+
+### Set up your shell
 
 The following shell examples use Bash or Zsh. Load your Datadog token from your secret manager into `DD_AI_GATEWAY_TOKEN`, then set the model identifier:
 
@@ -46,19 +74,33 @@ The following shell examples use Bash or Zsh. Load your Datadog token from your 
 export DD_AI_GATEWAY_MODEL="<PROVIDER_SLUG>/<MODEL_ID>"
 ```
 
-Use the base URL for your [Datadog site][applications-12]. The paths differ because each client appends its API path:
-
-| Client | Base URL | Request path |
-|---|---|---|
-| Claude Code or Anthropic SDK | `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai` | `/v1/messages` |
-| Codex | `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1` | `/responses` |
-| OpenAI SDK | `https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1` | `/responses` or `/chat/completions` |
-
 <!-- vale Datadog.headings = NO -->
-## Configure Claude Code
+### Claude Code
 <!-- vale Datadog.headings = YES -->
 
-For the Claude Code CLI, set the AI Gateway URL and bearer token in the terminal where you start the client:
+Trajectory sets all of this for you. Configure Claude Code by hand only when you can't use [Trajectory](#connect-claude-code-and-codex-with-trajectory).
+
+To connect Claude Code for every session, add the AI Gateway settings to the `env` block of your user settings file, `~/.claude/settings.json`. Create the file if needed, and keep the other keys in an existing `env` block:
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
+    "ANTHROPIC_AUTH_TOKEN": "<DATADOG_ACCESS_TOKEN>",
+    "ANTHROPIC_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code"
+  }
+}
+```
+
+Set each model variable to an approved AI Gateway model or routing rule. Claude Code uses the Sonnet, Opus, Haiku, and Fable aliases for subagents and background tasks, so a request through an unmapped alias reaches AI Gateway without a provider prefix and fails with `model_not_found`. `ANTHROPIC_CUSTOM_MODEL_OPTION` adds the model to the `/model` picker. This file holds your token, so keep it out of shared project settings and source control. Make sure `ANTHROPIC_API_KEY` isn't set in your shell, because Claude Code can use it instead of the AI Gateway token.
+
+To try AI Gateway in one terminal instead, export the settings and start Claude Code:
 
 ```shell
 unset ANTHROPIC_API_KEY
@@ -79,16 +121,19 @@ This example maps the model aliases to one approved target for the connection te
 
 The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with AI Gateway credentials. Run `/status` and confirm the AI Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][applications-16]. Keep tokens out of shared project settings.
 
+To stop using AI Gateway, remove the settings from `~/.claude/settings.json`.
+
 <!-- vale Datadog.headings = NO -->
-## Configure Codex
+### Codex
 <!-- vale Datadog.headings = YES -->
+
+Trajectory sets all of this for you, including the model catalog that Codex needs for AI Gateway models. Configure Codex by hand only when you can't use [Trajectory](#connect-claude-code-and-codex-with-trajectory).
 
 In the following settings, replace the model placeholder with the identifier you selected earlier. Keep the top-level settings before the first TOML table, and update existing keys instead of adding duplicate definitions. Merge the settings into `~/.codex/config.toml`:
 
 ```toml
 model = "<PROVIDER_SLUG>/<MODEL_ID>"
 model_provider = "datadog"
-web_search = "disabled"
 
 [model_providers.datadog]
 name = "Datadog AI Gateway"
@@ -110,10 +155,22 @@ model_catalog_json = "<ABSOLUTE_PATH_TO_CODEX_MODEL_CATALOG>"
 
 The catalog entry's `slug` must match `model`. An AI Gateway model-listing response is not a Codex model catalog. See [Codex model catalog configuration][applications-20].
 
-Web search is disabled for the connection test. Enable additional client features after checking compatibility with the selected target. For desktop environment variables and configuration options, see [Codex gateway configuration][applications-17].
+By default, Codex adds a hosted `web_search` tool to each Responses request. OpenAI providers run the search, and API translation passes it to Anthropic providers as Anthropic's web search. For other providers, AI Gateway drops the tool and returns a `web_search_omitted` warning, and the model answers without searching. See [API translation](/ai_gateway/requests/#api-translation). To remove the tool from the model's tools altogether, add `web_search = "disabled"` before the first TOML table.
+
+For OpenAI models, Codex can instead send its searches to AI Gateway's standalone search endpoint. Add `supports_standalone_web_search = true` to the provider, and set `standalone_web_search = true` under `[features]`. Turn it on only when you use OpenAI models: Codex then stops sending the `web_search` tool, and AI Gateway doesn't send standalone searches to other providers. Codex marks standalone search as under development.
+
+To use AI Gateway only when you ask for it, put the provider in a profile instead of the top-level `model_provider`, and start Codex with `codex --profile <PROFILE>`. See [Codex configuration profiles][applications-28]. For desktop environment variables and configuration options, see [Codex gateway configuration][applications-17].
+
+### Other coding agents
+
+Any coding agent that lets you set a base URL and request headers can connect to AI Gateway. Use the [base URL](/ai_gateway/requests/#base-url) for the API format the agent speaks, send your Datadog credential as a bearer token, and add the [request headers](/ai_gateway/requests/#request-headers) you need. Check which session header the agent sends in [Session signals](/ai_gateway/routing/#session-signals). If it sends none, set `x-session-id` to a value that is unique to each conversation.
+
+## Connect applications with SDKs
+
+Use an SDK to call AI Gateway from your own applications. For service workloads, use a service access token, or [Workload Identity Federation](#authenticate-aws-workloads-with-workload-identity-federation) in AWS.
 
 <!-- vale Datadog.headings = NO -->
-## Configure the OpenAI Python SDK
+### OpenAI Python SDK
 <!-- vale Datadog.headings = YES -->
 
 Set the OpenAI Python SDK base URL to AI Gateway and use your Datadog token as the API key. This example uses the Responses API.
@@ -165,7 +222,7 @@ print()
 Handle stream failures as well as HTTP errors. Receiving an HTTP `200` does not guarantee that the stream completed successfully.
 
 <!-- vale Datadog.headings = NO -->
-## Configure the Anthropic Python SDK
+### Anthropic Python SDK
 <!-- vale Datadog.headings = YES -->
 
 Install the SDK:
@@ -451,15 +508,18 @@ The application name can also define who can read captured prompts and responses
 
 To attribute requests to a team you belong to, add `x-ai-gateway-team: <TEAM_SLUG>` to the client's request headers:
 
+- **Trajectory:** Add `--gateway-team <TEAM_SLUG>` when you start the agent, for example `trajectory claude --gateway-team <TEAM_SLUG>`. Trajectory also keeps a team and `x-dd-tag-*` tags that you set in the agent's own header settings.
 - **Claude Code:** Set both headers on separate lines: `export ANTHROPIC_CUSTOM_HEADERS=$'x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>'`.
 - **Codex:** Add `"x-ai-gateway-team" = "<TEAM_SLUG>"` to the provider's `http_headers` map.
 - **SDK:** Add `"x-ai-gateway-team": "<TEAM_SLUG>"` to `default_headers`.
 
 Team selection affects matching [budgets][applications-4], [rate limits][applications-5], and [data capture][applications-6]. It does not grant model access.
 
+If you don't select a team, a request matches the budgets and rate limits of every team you directly belong to, and its full cost counts against each of them.
+
 ## Verify your application
 
-1. In Claude Code or Codex, send `Reply with exactly: Gateway connected.` The SDK examples send the same prompt. Look for `Gateway connected.` in a successful response.
+1. In Claude Code or Codex, started directly or through Trajectory, send `Reply with exactly: Gateway connected.` The SDK examples send the same prompt. Look for `Gateway connected.` in a successful response.
 2. Open [Agent Observability traces][applications-traces] and select the time range containing the request.
 3. Filter by the application name. The examples set the application to `claude-code`, `codex`, or `my-application`.
 4. Confirm the caller, served model, and provider. For a routing rule, confirm the destination that served the request.
@@ -468,6 +528,9 @@ Team selection affects matching [budgets][applications-4], [rate limits][applica
 
 | Symptom | What to check |
 |---|---|
+| Trajectory doesn't route an agent through AI Gateway | Run `trajectory plugins ai-gateway status`. Check that the agent was picked during setup and that you started it with `trajectory claude` or `trajectory codex`. |
+| Trajectory reports that you aren't signed in | Run `trajectory plugins ai-gateway login`. |
+| Trajectory setup or launch fails for another reason | Run `trajectory plugins ai-gateway doctor` and follow its findings. |
 | A request returns HTTP `401` or `403` | Check the Datadog site, token, `ai_gateway_usage` permission, and model access. For Claude Code, use `ANTHROPIC_AUTH_TOKEN` so the Datadog token is sent as a bearer token. |
 | Unknown model or no eligible target | Use the full `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` identifier. Check the target's request format and the caller's access. For Claude Code, check model alias variables as well as the main model. |
 | Incorrect request path | Use `/ai` for Claude Code and the Anthropic SDK, and `/ai/v1` for Codex and the OpenAI SDK. Do not append the request path to the base URL. |
@@ -482,17 +545,12 @@ See [AI Gateway troubleshooting][applications-7] for AI Gateway error codes.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[4]: /account_management/personal-access-tokens/
-[5]: /account_management/service-access-tokens/
-[12]: /getting_started/site/
 [applications-1]: /ai_gateway/getting_started/
-[applications-2]: /ai_gateway/applications/#authenticate-requests
 [applications-traces]: https://app.datadoghq.com/llm/traces
 [applications-4]: /ai_gateway/spend_controls/#set-budgets
 [applications-5]: /ai_gateway/spend_controls/#set-rate-limits
 [applications-6]: /ai_gateway/security/#configure-data-capture
 [applications-7]: /ai_gateway/troubleshooting/
-[applications-12]: /getting_started/site/
 [applications-16]: https://code.claude.com/docs/en/llm-gateway-connect
 [applications-17]: https://learn.chatgpt.com/docs/enterprise/connect-to-a-gateway
 [applications-18]: https://developers.openai.com/api/reference/python
@@ -503,3 +561,6 @@ See [AI Gateway troubleshooting][applications-7] for AI Gateway error codes.
 [applications-23]: /integrations/amazon_web_services/
 [applications-24]: /account_management/org_settings/service_accounts/
 [applications-25]: /ai_gateway/access_control/
+[applications-26]: /integrations/trajectory/
+[applications-27]: /integrations/trajectory/#step-2-roll-out-trajectory-with-mdm
+[applications-28]: https://developers.openai.com/codex/config-advanced#profiles

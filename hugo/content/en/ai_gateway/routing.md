@@ -10,8 +10,8 @@ further_reading:
     text: "Track user sessions in Agent Observability"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
-AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+AI Gateway is in Preview.
 {{< /callout >}}
 
 Before you begin, review the [AI Gateway prerequisites](/ai_gateway/getting_started/#prerequisites).
@@ -61,15 +61,17 @@ A {{< ui >}}Smart{{< /ui >}} step lets a decision model choose the destination f
 
 ### How a Smart step chooses a destination
 
-When a request reaches the Smart step, AI Gateway sends the decision model the user messages of the conversation's opening turn, the context prompt, and the rubrics. Notes that coding agents add to user messages are removed first. The decision model picks one destination, or none.
+When a request reaches the Smart step, AI Gateway sends the decision model the user messages of the conversation's opening turn, up to 4,000 characters, the context prompt, and the rubrics. Notes that coding agents add to user messages are removed first. The decision model runs on the provider account you selected for it. The decision model picks one destination, or none.
 
 AI Gateway uses the catch-all destination when the decision model picks none of the destinations, when the pick's confidence is below the threshold, or when the decision model errors, refuses, or times out.
 
-A Smart step decides once per session. [Session pinning](#session-pinning) keeps the session on the destination that served it, so later requests skip the decision model. Subagents start on their main session's destination. A request without a session ID is identified by its [prompt fingerprint](#requests-without-a-session-id), so a Smart step still decides once per conversation. OpenAI Responses requests that continue stored history have no fingerprint, so without a session ID each of them is classified again.
+A Smart step decides once per session. [Session pinning](#session-pinning) keeps the session on the destination that served it, so later requests skip the decision model. Subagents start on their main session's destination. A request without a session ID is identified by its [prompt fingerprint](#prompt-fingerprints), so a Smart step still decides once per conversation. OpenAI Responses requests that continue stored history have no fingerprint, so without a session ID each of them is classified again.
 
 If the picked destination fails, AI Gateway tries the catch-all destination, then the fallback steps. It never tries destinations the decision model did not pick.
 
 Decision calls run on your provider account and count toward your [budgets and rate limits](/ai_gateway/spend_controls/). The request's spans in Agent Observability record the decision in `classified_routing.*` tags: the outcome, the chosen destination, and its confidence.
+
+<div class="alert alert-warning">A Smart step optimizes cost and quality. It is not a security, privacy, or compliance control. The content of a request can influence which destination the decision model picks, for example a message that claims to be a large coding task, and the pick then applies to the whole session and its subagents. Only add destinations that are acceptable for everyone who can use the routing rule. To control which models handle sensitive data, use <a href="/ai_gateway/access_control/">access policies</a>, <a href="/ai_gateway/security/#configure-data-capture">data capture settings</a>, and <a href="/ai_gateway/security/#apply-guardrails">guardrails</a>.</div>
 
 ## Sessions
 
@@ -81,7 +83,7 @@ A session is the set of requests that belong to one conversation or one agent ru
 
 AI Gateway also groups a session's requests as one session in Agent Observability. See [Observe AI Gateway Activity](/ai_gateway/observability/).
 
-Send a session ID with the `x-session-id` request header. Claude Code, Codex, and several other coding agents send their own session IDs, so you do not need to set the header for them. Without any session ID, AI Gateway identifies the conversation by a [prompt fingerprint](#requests-without-a-session-id).
+Send a session ID with the `x-session-id` request header. Claude Code, Codex, and several other coding agents send their own session IDs, so you do not need to set the header for them. Without any session ID, AI Gateway identifies the conversation by a [prompt fingerprint](#prompt-fingerprints).
 
 ### Set the session for a request
 
@@ -138,7 +140,13 @@ If a request carries no valid session signal, AI Gateway identifies its conversa
 - [Weighted routing steps](#weighted-routing-steps) order destinations by the opening's fingerprint. Every turn of a conversation keeps the same opening, so the conversation stays on one destination.
 - [Session pinning](#session-pinning) and [Smart routing steps](#smart-routing-steps) identify the first turn by its opening, and later turns by the opening plus the model's first reply. Conversations that open the same way separate after their first turn. The second turn starts on the destination that served the first.
 
-A fingerprint identifies an opening, not a conversation. Conversations with identical openings share a weighted destination, even when they are unrelated. For example, a batch job that sends the same system prompt and first message for every item sends all of them to the same destination. A change to the opening, such as an added tool or an edited system prompt, produces a new fingerprint, and the conversation can move to another destination. AI Gateway does not store the opening content: the fingerprint is a hash scoped to your organization.
+#### Prompt fingerprints
+
+<div class="alert alert-info">
+
+A **fingerprint** identifies an opening, not a conversation. Conversations with identical openings share a weighted destination, even when they are unrelated. For example, a batch job that sends the same system prompt and first message for every item sends all of them to the same destination. A change to the opening, such as an added tool or an edited system prompt, produces a new fingerprint, and the conversation can move to another destination. AI Gateway does not store the opening content: the fingerprint is a hash scoped to your organization.
+
+</div>
 
 OpenAI Responses requests that continue stored history, with `previous_response_id` or `conversation`, carry only the new turn, so they have no fingerprint. Without a session ID, they use the step's configured order and are not pinned.
 
@@ -162,7 +170,7 @@ When the first destination returns a [fallback status](#fallback-behavior), AI G
 
 Weighted ordering applies to OpenAI Chat Completions, OpenAI Responses, Anthropic Messages, and Gemini requests. Other operations use the step's configured order.
 
-A request without a session ID is ordered by its [prompt fingerprint](#requests-without-a-session-id). To use the step's configured order for a request instead, [opt out of session routing](#opt-out-of-session-routing).
+A request without a session ID is ordered by its [prompt fingerprint](#prompt-fingerprints). To use the step's configured order for a request instead, [opt out of session routing](#opt-out-of-session-routing).
 
 OpenAI Responses requests need a session signal for weighted ordering. Without one, a weighted step uses its configured order, so every such request starts at the first destination listed in the step. The exception is a request that sets `store` to `false` and references no stored state: no `previous_response_id`, no `conversation`, and no input item that references a stored item. Such a request can be ordered by its opening-content fingerprint.
 
@@ -170,7 +178,7 @@ Without session pinning, changes to a weighted step, such as new weights or an a
 
 ### Session pinning
 
-Session pinning remembers which destination served a session and sends the session's later requests there. It applies to requests that call a routing rule (`router/<RULE_SLUG>`) and have a session ID or a [prompt fingerprint](#requests-without-a-session-id). Requests to a specific model (`<PROVIDER_SLUG>/<MODEL_ID>`) are not pinned, because they have only one destination.
+Session pinning remembers which destination served a session and sends the session's later requests there. It applies to requests that call a routing rule (`router/<RULE_SLUG>`) and have a session ID or a [prompt fingerprint](#prompt-fingerprints). Requests to a specific model (`<PROVIDER_SLUG>/<MODEL_ID>`) are not pinned, because they have only one destination.
 
 AI Gateway keeps one record per session, routing rule, and request format. The same session ID used with two routing rules, or with both `/chat/completions` and `/responses`, has a separate record for each.
 
@@ -245,7 +253,7 @@ An evaluation harness, such as an agent benchmark, often calls models in several
 - They share a weighted destination and a pinning record, so a stateful request from one role can bind the others to its destination and take away their fallback.
 - Their requests appear as one session in Agent Observability, mixing the agent's conversation with the simulator's and reviewer's.
 
-If the roles send no session ID, AI Gateway tells their conversations apart only by their [prompt fingerprints](#requests-without-a-session-id), and Agent Observability shows no session for them.
+If the roles send no session ID, AI Gateway tells their conversations apart only by their [prompt fingerprints](#prompt-fingerprints), and Agent Observability shows no session for them.
 
 Give each role in each task its own session ID, and add request tags for the dimensions you want to budget or filter by. The following example uses the OpenAI Python SDK:
 

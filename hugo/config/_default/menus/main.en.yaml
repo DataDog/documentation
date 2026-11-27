@@ -6261,15 +6261,15 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_providers
       weight: 2
-    - name: Connect Applications
-      url: ai_gateway/applications/
-      parent: ai_gateway
-      identifier: ai_gateway_applications
-      weight: 3
     - name: Send Requests
       url: ai_gateway/requests/
       parent: ai_gateway
       identifier: ai_gateway_requests
+      weight: 3
+    - name: Connect Applications
+      url: ai_gateway/applications/
+      parent: ai_gateway
+      identifier: ai_gateway_applications
       weight: 4
     - name: Route Requests
       url: ai_gateway/routing/
@@ -6296,11 +6296,16 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_observability
       weight: 9
+    - name: Best practices
+      url: ai_gateway/best_practices/
+      parent: ai_gateway
+      identifier: ai_gateway_best_practices
+      weight: 10
     - name: Troubleshooting
       url: ai_gateway/troubleshooting/
       parent: ai_gateway
       identifier: ai_gateway_troubleshooting
-      weight: 10
+      weight: 11
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
@@ -7476,40 +7481,40 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_grok_parser
       weight: 311
-    - name: Integration Pipelines
-      url: observability_pipelines/processors/integration_pipelines
-      parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_integration_pipelines
-      weight: 312
     - name: Parse JSON
       url: observability_pipelines/processors/parse_json
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
-      weight: 313
+      weight: 312
     - name: Parse XML
       url: observability_pipelines/processors/parse_xml
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_xml
-      weight: 314
+      weight: 313
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 315
+      weight: 314
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 316
+      weight: 315
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 317
+      weight: 316
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
+      weight: 317
+    - name: Sawmill
+      url: observability_pipelines/processors/sawmill
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_integration_pipelines
       weight: 318
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
