@@ -1,12 +1,16 @@
-# Core versions
-agent_version: "7.83.1"
-agent_branch: "7.83.x"
-collector_version: "0.158.0"
+# Used for the Agent's Collector
+agent_version: "7.85.5"
 
-ddot_gateway_version: "7.83.1"
+# DDOT Collector (standalone) and BYOC
+ddot_version: "7.86.0"
+collector_version: "0.163.0"
 
-# Tags
-agent_tag: "7.83.1-full"
+# OpenTelemetry Helm charts
+otel_operator_chart_version: "0.129.1"
+otel_collector_chart_version: "0.183.1"
 
 # Code Security
 code_security_schema_version: "v1.7"
+
+# Removed, kept for translations
+ddot_gateway_version: "7.85.5"

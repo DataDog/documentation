@@ -29,7 +29,7 @@ To complete this guide, you need the following:
 This ensures all files are compatible:
 
 ```shell
-DD_AGENT_VERSION="{{< version key="agent_version" >}}"
+DD_AGENT_VERSION="{{< version key="ddot_version" >}}"
 ```
 
 ## Download the Dockerfile
@@ -48,7 +48,7 @@ Download the Dockerfile template:
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_version" %}}-full`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="ddot_version" %}}-full`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Agent's Collector source code.
 - Creates a virtual environment and installs required Python packages.
@@ -128,7 +128,7 @@ Build your custom Datadog Agent image and push it to a container registry.
 agents:
   image:
     repository: <YOUR-REPO>
-    tag: {{< version key="agent_version" >}}
+    tag: {{< version key="ddot_version" >}}
     doNotCheckTag: true
    {{< /code-block >}}
    Replace `<YOUR-REPO>` with your repository name, and set `tag` to the Agent version your custom image is built from.
@@ -137,7 +137,7 @@ agents:
 The Datadog Helm chart reads <code>agents.image.tag</code> as an Agent version and uses it to enable or disable version-dependent behavior. A tag that is not a valid Agent version, such as <code>byoc-0.0.2</code>, causes the chart to fail or to misconfigure the Agent. Setting <code>doNotCheckTag: true</code> only skips the chart's minimum-version check; it does not exempt the tag from being parsed as a version.
 </div>
 
-To distinguish between builds of the same Agent version, append a [SemVer][10] prerelease identifier to the version, such as `{{< version key="agent_version" >}}-byoc.1`.
+To distinguish between builds of the same Agent version, append a [SemVer][10] prerelease identifier to the version, such as `{{< version key="ddot_version" >}}-byoc.1`.
 
 ## Test and validate
 

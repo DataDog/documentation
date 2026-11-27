@@ -72,15 +72,15 @@ Install the OpenTelemetry Operator with the [OpenTelemetry Operator Helm chart][
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo update
 helm install opentelemetry-operator open-telemetry/opentelemetry-operator   \
-     --version 0.127.0                                                      \
+     --version {{< version key="otel_operator_chart_version" >}}                                                      \
      --set "manager.createRbacPermissions=true"                             \
      --set "manager.collectorImage.repository=datadog/ddot-collector"       \
-     --set "manager.collectorImage.tag=7.85.3"
+     --set "manager.collectorImage.tag={{< version key="ddot_version" >}}"
 ```
 
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-info">
-For FED, set the tag to <code>7.85.3-fips</code> to use the FIPS-compliant DDOT image.
+For FED, set the tag to <code>{{% version key="ddot_version" %}}-fips</code> to use the FIPS-compliant DDOT image.
 See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.
 </div>
 {{% /site-region %}}
@@ -159,10 +159,18 @@ spec:
         sending_queue:
           batch:
             flush_timeout: 10s
+    extensions:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+        deployment_type: daemonset
+        hostname: ${env:DD_HOSTNAME}
     service:
       telemetry:
         resource:
           k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
+      extensions: ['datadog']
   env:
     - name: DD_API_KEY
       valueFrom:
@@ -187,6 +195,8 @@ spec:
 {{< /code-block >}}
 
 Replace `<CLUSTER_NAME>` with your cluster's name.
+
+The [Datadog Extension][74] reports the Collector to Fleet Automation. Its `hostname` matches `DD_HOSTNAME`, so the Collector and its telemetry appear under the same host.
 
 This configuration sends telemetry with the Datadog Exporter, which Datadog recommends for the DDOT Collector. To keep an existing OTLP HTTP pipeline, see [Migrate to the DDOT Collector](/opentelemetry/migrate/upstream_to_ddot_collector/).
 
@@ -279,7 +289,7 @@ spec:
     # [...]
     service:
       # [...]
-      extensions: ['health_check']
+      extensions: ['datadog', 'health_check']
       pipelines:
         metrics:
           receivers: ['host_metrics', 'otlp', 'kubelet_stats', 'datadog/connector']
@@ -425,13 +435,19 @@ spec:
           batch:
             flush_timeout: 10s
     extensions:
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+        deployment_type: daemonset
+        hostname: ${env:DD_HOSTNAME}
       health_check:
         endpoint: "${env:K8S_POD_IP}:13133"
     service:
       telemetry:
         resource:
           k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
-      extensions: ['health_check']
+      extensions: ['datadog', 'health_check']
       pipelines:
         logs:
           receivers: ['otlp', 'filelog']
@@ -510,7 +526,7 @@ touch node-collector-values.yaml
 mode: daemonset
 image:
   repository: datadog/ddot-collector
-  tag: 7.85.3
+  tag: {{< version key="ddot_version" >}}
 ports:
   jaeger-compact:
     enabled: false
@@ -523,7 +539,7 @@ ports:
 {{< /code-block >}}
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">For FED, set <code>tag: 7.85.3-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+<div class="alert alert-info">For FED, set <code>tag: {{% version key="ddot_version" %}}-fips</code> to use the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
 
 <div class="alert alert-info">The Collector Helm chart publishes the OTLP ports on each node by default (<code>hostPort: 4317</code> for gRPC and <code>hostPort: 4318</code> for HTTP), so application pods can reach the Collector instance running on the same node. See <a href="#instrument-your-application">Instrument your application</a>.</div>
@@ -540,6 +556,16 @@ config:
       sending_queue:
         batch:
           flush_timeout: 10s
+  extensions:
+    datadog:
+      api:
+        key: ${env:DD_API_KEY}
+        site: ${env:DD_SITE}
+      deployment_type: daemonset
+      hostname: ${env:DD_HOSTNAME}
+  service:
+    # Keep the chart's default health_check extension
+    extensions: ['health_check', 'datadog']
 extraEnvs:
   - name: DD_API_KEY
     valueFrom:
@@ -649,7 +675,7 @@ Your `node-collector-values.yaml` file should look something like this:
 mode: daemonset
 image:
   repository: datadog/ddot-collector
-  tag: 7.85.3
+  tag: {{< version key="ddot_version" >}}
 presets:
   hostMetrics: # Add an hostmetrics receiver to the metrics pipeline
     enabled: true
@@ -673,6 +699,13 @@ config:
       sending_queue:
         batch:
           flush_timeout: 10s
+  extensions:
+    datadog:
+      api:
+        key: ${env:DD_API_KEY}
+        site: ${env:DD_SITE}
+      deployment_type: daemonset
+      hostname: ${env:DD_HOSTNAME}
   processors:
     infraattributes:
       cardinality: 2
@@ -691,6 +724,7 @@ config:
   service:
     extensions:
       - health_check
+      - datadog
     pipelines:
       logs:
         receivers:
@@ -776,7 +810,7 @@ kubectl rollout status daemonset/node-collector-collector --timeout=5m
 Install the OpenTelemetry Collector chart with your values file:
 
 ```shell
-helm install node-collector open-telemetry/opentelemetry-collector --version 0.177.0 -f node-collector-values.yaml
+helm install node-collector open-telemetry/opentelemetry-collector --version {{< version key="otel_collector_chart_version" >}} -f node-collector-values.yaml
 ```
 
 Wait for the Collector to run on every node:
@@ -785,7 +819,7 @@ Wait for the Collector to run on every node:
 kubectl rollout status daemonset/node-collector-opentelemetry-collector-agent --timeout=5m
 ```
 
-To apply later changes, run `helm upgrade node-collector open-telemetry/opentelemetry-collector --version 0.177.0 -f node-collector-values.yaml`.
+To apply later changes, run `helm upgrade node-collector open-telemetry/opentelemetry-collector --version {{% version key="otel_collector_chart_version" %}} -f node-collector-values.yaml`.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -963,3 +997,4 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
 [72]: /opentelemetry/migrate/upstream_to_ddot_collector/
 [73]: /opentelemetry/getting_started/kubernetes/?tab=ddot
+[74]: /opentelemetry/integrations/datadog_extension/

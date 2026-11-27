@@ -51,7 +51,7 @@ To set up a new Collector instead, see [Install the DDOT Collector on Kubernetes
 
    With either Helm chart (Collector or kube-stack), leave out `K8S_NODE_NAME` and set `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>`. Both charts define `OTEL_K8S_NODE_NAME` before your entries.
 
-1. Choose an image tag. Replace `<DDOT_VERSION>` in the next steps with version 7.85.3 or later. Versions before 7.84.4 can fail to start when your configuration doesn't use the Datadog Exporter. For available tags, see [datadog/ddot-collector][6] on Docker Hub.
+1. Choose an image tag, then replace `<DDOT_VERSION>` with it in the next steps. The latest release is `{{% version key="ddot_version" %}}`, which is based on OpenTelemetry Collector `v{{% version key="collector_version" %}}`. If you want to stay on the OpenTelemetry Collector version you already run, choose the matching DDOT version in [OpenTelemetry Collector versions][8] instead. Use version 7.84.0 or later. Earlier versions can fail to start when your configuration doesn't use the Datadog Exporter. For available tags, see [datadog/ddot-collector][6] on Docker Hub.
 
 ## Change the image
 
@@ -84,7 +84,7 @@ kubectl apply -f <COLLECTOR_FILE>
    ```
 
 1. If your values file sets `command.name`, remove it. The DDOT Collector image doesn't include the upstream binaries, such as `otelcol-contrib`.
-1. Find your release name and chart version. The `CHART` column shows the version, such as `opentelemetry-collector-0.177.0`:
+1. Find your release name and chart version. The `CHART` column shows the version, such as `opentelemetry-collector-{{% version key="otel_collector_chart_version" %}}`:
 
    ```shell
    helm list
@@ -187,3 +187,4 @@ kubectl logs daemonset/<DAEMONSET_NAME>
 [5]: /opentelemetry/setup/ddot_collector/kubernetes/#store-your-datadog-api-key
 [6]: https://hub.docker.com/r/datadog/ddot-collector/tags
 [7]: /opentelemetry/setup/ddot_collector/kubernetes/#verify-the-setup
+[8]: /opentelemetry/setup/ddot_collector/#opentelemetry-collector-versions
