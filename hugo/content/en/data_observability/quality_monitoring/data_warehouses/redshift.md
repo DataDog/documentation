@@ -14,6 +14,8 @@ further_reading:
 
 The Redshift integration connects Datadog to your Amazon Redshift cluster to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your warehouse and downstream tools.
 
+Datadog uses Redshift query history to build column-level lineage, show query patterns on the {{< ui >}}Queries{{< /ui >}} page, and add context to monitor alerts. By default, Datadog collects query history by running read-only SQL against your warehouse every hour. Redshift keeps query history for 7 days. To keep a longer history and collect it without running queries on your warehouse, [read query history from Amazon S3 Tables](#read-query-history-from-amazon-s3-tables).
+
 Datadog supports both provisioned Redshift clusters and Redshift Serverless workgroups.
 
 ## Prerequisites
@@ -176,6 +178,90 @@ To configure the Redshift integration in Datadog:
 
 5. Click {{< ui >}}Add account{{< /ui >}}.
 
+## Read query history from Amazon S3 Tables
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Reading Redshift query history from Amazon S3 Tables is in Preview. Contact your Datadog representative to enable it for your organization.
+{{< /callout >}}
+
+With the [Redshift system table integration with Amazon S3 Tables][4], Redshift delivers system table data as Apache Iceberg tables to an AWS managed `aws-redshift` table bucket in your AWS account. Datadog can read query history from these tables instead of from your warehouse:
+
+- Query history stays in your account for as long as your retention policy allows, instead of 7 days. If collection stops, for example because credentials expire, Datadog backfills the gap when collection resumes.
+- Collecting query history doesn't run queries on your clusters or workgroups.
+
+Datadog still connects to Redshift to sync table metadata and to run the monitors you configure.
+
+### Requirements
+
+- A provisioned cluster with RA3 or RG nodes, or a Redshift Serverless workgroup.
+- Amazon S3 Tables [integrated with the AWS Glue Data Catalog][5] in the account and region. This is a one-time step.
+- An IAM principal that can change the warehouse (`redshift:EnableLogging` or `redshift-serverless:UpdateNamespace`) and create the table bucket (`s3tables:CreateTableBucket`, `s3tables:PutTableBucketEncryption`, and `s3tables:PutTableBucketPolicy`).
+
+### Turn on the export in Redshift
+
+Run one command for each warehouse you want to monitor. Datadog reads per-warehouse exports, so use `cluster` granularity for provisioned clusters and `namespace` granularity for Serverless.
+
+{{< tabs >}}
+{{% tab "Provisioned Cluster" %}}
+
+```shell
+aws redshift enable-logging \
+  --cluster-identifier <CLUSTER_IDENTIFIER> \
+  --log-destination-type s3table \
+  --log-exports sys_query_history sys_query_text \
+  --s3-table-granularity cluster
+```
+
+{{% /tab %}}
+{{% tab "Serverless" %}}
+
+```shell
+aws redshift-serverless update-namespace \
+  --namespace-name <NAMESPACE_NAME> \
+  --log-destination-type s3table \
+  --s3-table-action Enable \
+  --s3-table-names sys_query_history sys_query_text \
+  --s3-table-granularity namespace
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">If you encrypt the export with a customer managed AWS KMS key, you can't change the key after Redshift creates the tables.</div>
+
+### Grant Datadog read access
+
+Add the following inline policy to the Datadog AWS integration IAM role:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3tables:GetTableBucket",
+            "Resource": "arn:aws:s3tables:<REGION>:<ACCOUNT_ID>:bucket/aws-redshift"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3tables:GetTableMetadataLocation",
+                "s3tables:GetTableData"
+            ],
+            "Resource": "arn:aws:s3tables:<REGION>:<ACCOUNT_ID>:bucket/aws-redshift/table/*"
+        }
+    ]
+}
+```
+
+If you encrypt the export with a customer managed AWS KMS key, also grant the role `kms:Decrypt` on that key.
+
+### Switch the query history source
+
+Ask your Datadog representative to switch your organization's query history source to S3 Tables. Datadog tracks its position in each warehouse's query history, so switching sources in either direction doesn't skip or duplicate queries.
+
+To turn off the export, first ask your Datadog representative to switch the source back to the warehouse. While the export is off, Redshift doesn't write to S3 Tables, and re-enabling it doesn't backfill that period.
+
 ## Next steps
 
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Redshift deployment.
@@ -189,3 +275,5 @@ After the initial sync completes, create a [Data Observability monitor][2] to st
 [1]: https://app.datadoghq.com/data-obs/settings/integrations
 [2]: /monitors/types/data_observability/
 [3]: /integrations/amazon-web-services/
+[4]: https://docs.aws.amazon.com/redshift/latest/mgmt/system-table-s3-tables.html
+[5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-integrating-aws.html
