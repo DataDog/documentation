@@ -58,7 +58,7 @@ docker run -d --name dd-agent \
 
 {{% csm-runtime-package-prioritization %}}
 
-Add `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true` to your Docker run command:
+The installation command includes `DD_SBOM_ENRICHMENT_USAGE_ENABLED=true`. If you start the Agent with a different command, add the variable to it:
 
 {{< code-block lang="shell" >}}
 docker run -d --name dd-agent \

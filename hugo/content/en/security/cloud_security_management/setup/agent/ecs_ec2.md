@@ -190,7 +190,7 @@ If the Agent fails to extract the SBOM from the container image, increase the Ag
 }
 ```
 
-**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When `DD_SBOM_CONTAINER_IMAGE_ANALYZERS` and `DD_SBOM_HOST_ANALYZERS` are omitted, Datadog only scans OS packages.
+**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers listed in [Supported application library package managers](#supported-application-library-package-managers), in addition to OS packages. When `DD_SBOM_CONTAINER_IMAGE_ANALYZERS` and `DD_SBOM_HOST_ANALYZERS` are omitted, Datadog scans only OS packages.
 
 ### Supported application library package managers
 

@@ -108,7 +108,7 @@ To verify the setup, filter vulnerability findings by [runtime signals][9].
   DD_COMPLIANCE_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
   ```
 
-- If you use the Agent install script to enable Misconfigurations and Cloud Security Vulnerabilities, you must manually update the `datadog.yaml` file to enable `host_benchmarks` for Misconfigurations, and `sbom` and `container_image` for Cloud Security Vulnerabilities.
+- The Agent install script doesn't enable host benchmarks or Cloud Security Vulnerabilities. If you use the script, manually update the `datadog.yaml` file to enable `host_benchmarks` for Misconfigurations, and `sbom` and `container_image` for Cloud Security Vulnerabilities.
 
 [5]: /getting_started/agent/#installation
 [6]: /agent/?tab=Linux

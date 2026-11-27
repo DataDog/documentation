@@ -52,7 +52,7 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 
 ## Set up the Datadog Agent
 
-If you're using the Datadog Agent, you must run Agent v7.46+.
+If you're using the Datadog Agent, you must run Agent 7.46 or later.
 
 {{< tabs >}}
 {{% tab "Host " %}}

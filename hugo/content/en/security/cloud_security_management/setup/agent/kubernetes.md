@@ -175,7 +175,7 @@ Use the following instructions to enable Misconfigurations and Cloud Security Vu
 ## Runtime Package Prioritization
 
 {{% csm-runtime-package-prioritization %}}
-- On Kubernetes, Datadog Agent **7.81.0 or later** for the most complete signal coverage.
+- Datadog Agent **7.81.0 or later** is recommended for the most complete signal coverage.
 - On Bottlerocket nodes, the `spc_t` SELinux type for `system-probe`. Bottlerocket's SELinux policy limits an unprivileged container to the files of its own pod. Without this type, only the Agent's own image receives runtime signals. The tabs below show how to set it.
 
 {{< tabs >}}

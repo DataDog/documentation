@@ -34,7 +34,7 @@ For other installation methods, see [Install the Datadog Agent on Windows][3].
 
 ### Enable vulnerability scanning
 
-1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
+1. Make sure you have access to `C:\ProgramData`, which is a hidden folder.
     - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
 2. In `C:\ProgramData\Datadog\datadog.yaml`, set the `sbom` and `host` flags:<br><br>
     ```
