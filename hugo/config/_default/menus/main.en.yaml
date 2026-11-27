@@ -6296,11 +6296,16 @@ menu:
       parent: ai_gateway
       identifier: ai_gateway_observability
       weight: 9
+    - name: Best practices
+      url: ai_gateway/best_practices/
+      parent: ai_gateway
+      identifier: ai_gateway_best_practices
+      weight: 10
     - name: Troubleshooting
       url: ai_gateway/troubleshooting/
       parent: ai_gateway
       identifier: ai_gateway_troubleshooting
-      weight: 10
+      weight: 11
     - name: CI/CD Optimization
       url: cicd/
       pre: ci
