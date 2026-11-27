@@ -101,18 +101,23 @@ You can also trigger an investigation from Slack.  Mention Datadog in a message:
 
 ### Enable automatic investigations
 
-In addition to manual investigations, you can configure Bits to run automatically when a monitor transitions to the alert state:
+In addition to manual investigations, Bits can investigate monitor alerts automatically. To set this up, create a [scope][25] in Bits Autonomous Operations that covers the monitors. Bits triages each alert from the monitors in the scope and investigates the alerts that need action.
 
-#### From the Bits Investigation Monitors list
-1. Go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Supported{{< /ui >}}][5].
-1. Toggle {{< ui >}}Auto-Investigate{{< /ui >}} on for a single monitor, or bulk-edit multiple monitors by selecting multiple monitors, then clicking {{< ui >}}Auto-Investigate All{{< /ui >}}.
+To create a scope:
+- For several monitors, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}}][26], click {{< ui >}}Create scope{{< /ui >}}, and select {{< ui >}}Watch monitor alerts{{< /ui >}}.
+- For a single monitor, open the monitor's status page and click {{< ui >}}Create Scope{{< /ui >}}. The scope opens in Autonomous Ops with the monitor already added.
 
-#### For a single monitor
-1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
-1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+<div class="alert alert-info">Scopes can't be managed through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</div>
 
-<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
-</li></ul></div>
+#### Monitors with Auto-Investigate turned on
+
+You can no longer turn on Auto-Investigate for individual monitors. Monitors that already have Auto-Investigate turned on keep starting investigations until you turn it off. Their settings are not converted to scopes.
+
+For these monitors:
+- An investigation starts when the monitor transitions to the alert state.
+- Transitions to the warn or no data state, [renotifications][28], and test notifications do not start an investigation.
+
+To view or turn off Auto-Investigate on these monitors, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Manage Legacy Investigations{{< /ui >}}][29]. This page appears only if your organization has monitors with Auto-Investigate turned on.
 
 ### Supported monitors
 
@@ -202,6 +207,10 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [21]: /error_tracking/bits_investigation/
 [22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
 [23]: /bits_ai/bits_remediation/
+[25]: /bits_ai/bits_autonomous_operations/#scopes
+[26]: https://app.datadoghq.com/bits/autonomous-ops/scopes
+[28]: /monitors/notify/#renotify
+[29]: https://app.datadoghq.com/bits/settings/legacy-monitor-investigations
 
 ## Further reading
 
