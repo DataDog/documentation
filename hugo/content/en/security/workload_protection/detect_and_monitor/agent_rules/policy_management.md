@@ -58,7 +58,7 @@ When you add tags, Datadog displays how many agents the tags target as well the 
 ## Create a custom Agent rule {#create-a-custom-agent-rule}
 
 You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][19], you reference the custom Agent rule and add expression parameters.
-Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
+Custom Agent rules are deployed to the Agent in a custom policy. A custom policy is based on the default Agent rules. It contains your custom Agent rules and any changes you make to default Agent rules in that policy.
 
 1. Go to [Agent Configuration][6].
 2. Create a policy or open an existing one.
@@ -106,14 +106,15 @@ A managed deployment rolls out your change in stages so you can validate it on a
 For **manual deployment**, you install a policy file on each Agent yourself. You can build the policy and its rules in the Datadog UI and **download** the generated file. If you already know the policy syntax, author a `.policy` file by hand. Then upload or sync that file to every Agent where the policy should run, as described below.
 
 1. On the {{< ui >}}Agent Configuration{{< /ui >}} page, open a policy.
-2. In Actions, select {{< ui >}}Download Policy{{< /ui >}}.
+2. In Actions, select {{< ui >}}Download Policy{{< /ui >}}. Datadog downloads a `policy.zip` archive. Each custom policy in the archive is a `<POLICY_ID>.policy` file.
+3. Extract the archive.
 
-Next, use the following instructions to upload the policy file to each host.
+Next, use the following instructions to upload the extracted policy files to each host.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder (that will contains all your `.policy` files). The file must have `read` and `write` access for the `root` user on the host.
+Copy the extracted `.policy` files to the target host in the `/etc/datadog-agent/runtime-security.d` folder, which contains all your `.policy` files. The files must have `read` and `write` access for the `root` user on the host.
 
 To apply the changes, do **one** of the following:
 
@@ -131,7 +132,7 @@ To apply the changes, do **one** of the following:
 
 {{% tab "Helm" %}}
 
-1. Create a ConfigMap containing `default.policy`, for example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
+1. Create a ConfigMap containing the extracted `.policy` files. For example, if you extracted the archive to the `policy` directory, run `kubectl create configmap jdefaultpol --from-file=policy/`.
 2. Add the ConfigMap (`jdefaultpol`) to `values.yaml` with `datadog.securityAgent.runtime.policies.configMap`:
 
     ```yaml
@@ -150,7 +151,7 @@ To apply the changes, do **one** of the following:
 
 3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
-    **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
+    **Note:** To make further changes to the policy files, either use `kubectl edit cm jdefaultpol` or replace the ConfigMap with `kubectl create configmap jdefaultpol --from-file=policy/ -o yaml --dry-run=client | kubectl replace -f -`.
 
 {{% /tab %}}
 {{< /tabs >}}
