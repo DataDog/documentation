@@ -19,15 +19,25 @@ Bits Investigation integrates with source code, third-party observability, and I
 
 Bits Investigation integrates with the following source code platforms:
 - GitHub
-- GitLab
+- GitLab, including [GitLab Self-Managed][13]
 - Azure DevOps
 - Bitbucket Cloud
 
 Source code access is also required for Bits Code to generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
 
-To configure GitHub:
-1. Install the [GitHub integration][13].
-1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
+Install the [integration for your source code provider][13] and check its connectivity requirements.
+
+#### How Bits Investigation finds your code
+
+Use [Source Code Integration][14] to tag APM telemetry with `git.repository_url` for the repository URL and `git.commit.sha` for the deployed commit. These tags link the running application version to a specific repository and commit. For setup instructions and the manual [Service Repository Mapping][22] option in Bits Code settings, see [Configure telemetry tagging][21].
+
+<!-- TODO(reviewer): Confirm whether Bits Investigation uses Service Repository Mapping from Bits Code settings when git.repository_url is missing, and which commit it selects when only a repository mapping is configured. -->
+
+<!-- TODO(reviewer): Document the verified fallback when git.repository_url or git.commit.sha is missing, including whether Bits Investigation can infer a repository from a container image or use the latest default-branch code. -->
+
+[Bits.md][23] provides additional context and guidance for investigations.
+
+<!-- TODO(reviewer): Confirm whether to recommend adding a full repository URL, rather than a bare project name, to Bits.md as a hint, and clarify that free-text guidance does not guarantee repository selection or access. -->
 
 ### Third-party observability
 
@@ -180,7 +190,7 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [10]: https://app.datadoghq.com/bits-ai/settings/rate-limits
 [11]: /account_management/audit_trail/events/#bits-ai-sre
 [12]: /integrations/microsoft-teams/?tab=datadogapprecommended
-[13]: /integrations/github/
+[13]: /source_code/source-code-management/
 [14]: /source_code/service-mapping
 [15]: /actions/workflows/actions/
 [16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
@@ -188,3 +198,6 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [18]: /api/latest/bits-ai/
 [19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true
 [20]: /bits_ai/bits_detection/#permissions
+[21]: /bits_ai/bits_code/setup/#configure-telemetry-tagging
+[22]: https://app.datadoghq.com/code/settings?tab=repositories
+[23]: /bits_ai/bits_investigation/knowledge_sources/#bitsmd

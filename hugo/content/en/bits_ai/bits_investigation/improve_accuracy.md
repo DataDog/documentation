@@ -77,7 +77,7 @@ On the [Supported Monitors][8] page, scope {{< ui >}}Auto-Investigate{{< /ui >}}
 Bits Investigation can only reason over telemetry and documentation it can reach. Connecting these sources gives it more to work with:
 
 - **Confluence**: [Connect your Confluence account][3] and link relevant pages in monitor messages. Bits extracts telemetry links and troubleshooting steps from the page. Enable account crawling to let [Bits Chat][4] search your Confluence space directly, not just linked pages.
-- **Source code**: Connect [GitHub][5] and [tag your APM telemetry with Git information][6] so Bits can tie a regression to the commit or deploy that caused it. This also lets Bits Code pick up the investigation and propose a fix.
+- **Source code**: Connect a [supported source code provider][5] and [tag APM telemetry with Git information][6]. For repository and deployed commit selection, see [How Bits Investigation finds your code][11]. This also lets Bits Code pick up the investigation and propose a fix.
 - **Other observability tools**: Connect Grafana, Dynatrace, Splunk, Sentry, or ServiceNow if telemetry lives there. See [Integrate with third-party observability and SCM platforms][7].
 
 For setting up Slack, Microsoft Teams, or other destinations for investigation findings, see [Send investigation findings to ITSM and collaboration platforms][12].
@@ -108,11 +108,12 @@ After chat reflects the change, re-run a known investigation to confirm the conc
 [2]: /internal_developer_portal/catalog/
 [3]: https://app.datadoghq.com/integrations/confluence
 [4]: /bits_ai/bits_investigation/chat_bits_investigation/
-[5]: /integrations/github/
+[5]: /bits_ai/bits_investigation/configure/#source-code
 [6]: /source_code/service-mapping
 [7]: /bits_ai/bits_investigation/configure/#integrate-with-third-party-observability-and-scm-platforms
 [8]: https://app.datadoghq.com/bits-ai/monitors/supported
 [9]: https://app.datadoghq.com/bits-ai/monitors/supported?q=priority%3Ap1&auto_only=false
 [10]: https://app.datadoghq.com/bits-ai/monitors/supported?q=notification%3A%2A&auto_only=false
+[11]: /bits_ai/bits_investigation/configure/#how-bits-investigation-finds-your-code
 [12]: /bits_ai/bits_investigation/configure/#send-investigation-findings-to-itsm-and-collaboration-platforms
 [13]: /bits_ai/bits_investigation/investigate_issues/#enable-automatic-investigations
