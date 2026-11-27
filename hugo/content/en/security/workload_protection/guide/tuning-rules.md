@@ -3,7 +3,7 @@ title: Best Practices for Tuning Workload Protection Security Signals
 description: Best practices for building signal suppressions that reduce Workload Protection noise without losing detection coverage.
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
-  - /security_platform/cloud_security_management/guide/
+  - /security_platform/cloud_security_management/guide/tuning-rules/
   - /security/cloud_security_management/guide/tuning-rules
 ---
 

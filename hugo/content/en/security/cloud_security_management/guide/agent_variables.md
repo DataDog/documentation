@@ -13,23 +13,23 @@ The Datadog Agent has several environment variables that can be enabled for Clou
     </tr>
     <tr>
         <td><code>DD_COMPLIANCE_CONFIG_ENABLED</code></td>
-        <td>Enables the Cloud Security Posture Management (CSPM) Agent (runs in the Security Agent).</td>
+        <td>Enables the compliance module of the Security Agent, used by Misconfigurations.</td>
     </tr>
     <tr>
         <td><code>DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED</code></td>
-        <td>Enables CSPM host benchmarks. Requires the CSPM Agent (<code>DD_COMPLIANCE_CONFIG_ENABLED</code>).</td>
+        <td>Enables Misconfigurations host benchmarks. Enabled by default. Requires the compliance module of the Security Agent (<code>DD_COMPLIANCE_CONFIG_ENABLED</code>).</td>
     </tr>
     <tr>
         <td><code>DD_RUNTIME_SECURITY_CONFIG_ENABLED</code></td>
-        <td>Enables Cloud Workload Security (CWS). Must be enabled for both the System Probe and Security Agent.</td>
+        <td>Enables Workload Protection. Must be enabled for both the System Probe and Security Agent.</td>
     </tr>
     <tr>
         <td><code>DD_SYSTEM_PROBE_ENABLED</code></td>
-        <td>Enables the System Probe, which is an add-on Agent. Similar to the Trace Agent or Process Agent, it supports different functionalities than the vanilla Datadog Agent. It is primarily used with NPM and CWS.</td>
+        <td>Deprecated. Not required for Workload Protection, because the System Probe starts automatically when <code>DD_RUNTIME_SECURITY_CONFIG_ENABLED</code> is set. Setting <code>DD_SYSTEM_PROBE_ENABLED</code> on its own also enables Cloud Network Monitoring (CNM).</td>
     </tr>
     <tr>
         <td><code>DD_RUNTIME_SECURITY_CONFIG_REMOTE<br>_CONFIGURATION_ENABLED</code></td>
-        <td>Enables Remote Configuration for automatic updates of default Agent rules and automatic deployment of custom Agent rules.</td>
+        <td>Enables Remote Configuration for automatic updates of default Agent rules and automatic deployment of custom Agent rules. Enabled by default.</td>
     </tr>
     <tr>
         <td><code>DD_SBOM_ENABLED</code></td>
