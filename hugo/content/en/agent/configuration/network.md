@@ -92,6 +92,10 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 [Remote Configuration][17]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
+[Data Observability][35]
+: `data-obs-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+The Agent's OpenLineage proxy sends events to this domain, including Spark lineage from the Java tracer. The Agent also sends the results of PostgreSQL data quality monitors (Preview) to this domain. See [Network Requirements for Data Observability][36].
+
 {{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][18]
@@ -337,3 +341,5 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [32]: /extend/dogstatsd/
 [33]: /integrations/go_expvar/
 [34]: /agent/configuration/proxy/
+[35]: /data_observability/
+[36]: /data_observability/network/

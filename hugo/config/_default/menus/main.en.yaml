@@ -5957,6 +5957,12 @@ menu:
       identifier: data_observability_integration_overhead
       parent: data_observability_heading
       weight: 90000
+    - name: Network Requirements
+      url: data_observability/network
+      pre: data-observability-wui
+      identifier: data_observability_network
+      parent: data_observability_heading
+      weight: 95000
     - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
