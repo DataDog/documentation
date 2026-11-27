@@ -94,9 +94,9 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Add historical timestamp here """
+                    # Add historical timestamp here
                     timestamp=int(datetime.now().timestamp()),
-                    """ *********************** """
+                    # ***********************
 
                     value=0.7,
                 ),

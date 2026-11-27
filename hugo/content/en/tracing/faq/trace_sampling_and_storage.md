@@ -145,9 +145,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    // Always Keep the Trace
+    # Always Keep the Trace
     span.set_tag(MANUAL_KEEP_KEY)
-    // method impl follows
+    # method impl follows
 ```
 
 Manually drop a trace:
@@ -159,9 +159,9 @@ from ddtrace.constants import MANUAL_DROP_KEY, MANUAL_KEEP_KEY
 @tracer.wrap()
 def handler():
     span = tracer.current_span()
-    //Always Drop the Trace
+    # Always Drop the Trace
     span.set_tag(MANUAL_DROP_KEY)
-    //method impl follows
+    # method impl follows
 ```
 
 {{< /programming-lang >}}
