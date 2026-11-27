@@ -18,7 +18,7 @@ further_reading:
 When a performance metric suddenly degrades, you can get to the root cause in two ways:
 
 - [Investigate an anomaly](#investigate-an-anomaly-on-a-vital-chart) that RUM detects on a vital chart.
-- [Enable automatic investigations](#automatically-investigate-rum-monitor-alerts) on your RUM monitors, so Bits starts investigating as soon as a monitor alerts.
+- [Add your RUM monitors to a scope](#automatically-investigate-rum-monitor-alerts), so Bits triages their alerts and investigates the ones that need action.
 
 ## Investigate an anomaly on a vital chart
 
@@ -32,15 +32,9 @@ To start an investigation, click **Anomaly · Investigate**. A Bits Investigatio
 
 ## Automatically investigate RUM monitor alerts
 
-Bits Investigation supports [RUM monitors][1]. When you enable automatic investigations on a RUM monitor, Bits starts an investigation every time the monitor transitions to the alert state, so the root cause and its evidence are ready when your on-call engineer opens the alert.
+Bits Investigation supports [RUM monitors][1]. When a RUM monitor is covered by a [scope][4], Bits triages each of its alerts and investigates the ones that need action, so the root cause and its evidence are ready when your on-call engineer opens the alert.
 
-To enable automatic investigations on a RUM monitor:
-
-1. Create or edit a [RUM monitor][2].
-2. Under **Configure notifications & automations**, toggle **Investigate with Bits** to **Enabled**.
-3. Save the monitor.
-
-{{< img src="real_user_monitoring/bits_ai/monitor-auto-investigate.png" alt="The Investigate with Bits setting in the monitor editor, toggled to Enabled to automatically investigate monitor alerts." style="width:100%;" >}}
+To add a RUM monitor to a scope, open the monitor's status page and click **Create Scope**. To cover several RUM monitors, create a **Watch monitor alerts** scope that selects them. For details, see [Enable automatic investigations][3].
 
 You can also start an investigation manually from an individual RUM monitor alert. For all the available entry points and the conditions that trigger automatic investigations, see [Investigate issues][3].
 
@@ -49,5 +43,5 @@ You can also start an investigation manually from an individual RUM monitor aler
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/types/real_user_monitoring/
-[2]: https://app.datadoghq.com/monitors/create/rum
 [3]: /bits_ai/bits_investigation/investigate_issues/#enable-automatic-investigations
+[4]: /bits_ai/bits_autonomous_operations/#scopes
