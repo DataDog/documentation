@@ -76,6 +76,29 @@ To create a scope:
 
 For information about how to add a quote for AI credit usage to your scopes, see the [Manage credit usage](#manage-credit-usage) section.
 
+### Scope query syntax
+
+For a {{< ui >}}Watch monitor alerts{{< /ui >}} scope, enter a tag or query to select monitors. Scope queries use the [Events search syntax][35], not the Manage Monitors search syntax.
+
+| To select | Example |
+|---|---|
+| Monitors with a tag | `team:payments` |
+| Monitors with a tag value that starts with a prefix | `team:payments*` |
+| Monitors that notify a specific recipient | `@monitor_notifications:<HANDLE>` |
+| Monitors that notify any of several recipients | `@monitor_notifications:(<HANDLE_1> OR <HANDLE_2>)` |
+| Monitors that match several filters | `env:prod AND @monitor_notifications:<HANDLE>` |
+| Monitors with a tag, excluding another tag | `team:payments -env:staging` |
+
+Keep the following in mind:
+
+- Notification recipients don't support wildcards. A query such as `@monitor_notifications:oncall-*` is rejected. List each handle in an `OR` group, or add a shared tag to the monitors and select that tag.
+- Text without a field name, such as `checkout`, matches service names. Scope queries can't filter on the contents of a monitor's notification message. To select monitors by message content, tag those monitors and select the tag.
+
+As you enter a query, the create form lists the monitors that match it. Review the matches before you save the scope. To preview matching monitors outside the create form, use the MCP tool [`preview_bits_detection_scope`][28].
+
+<!-- TODO(reviewer): Confirm that Watch monitor alerts supports priority:p1 for P1 monitors; the public monitor search example does not establish scope query support. -->
+<!-- TODO(reviewer): Confirm whether priority:p1 team:payments is supported and how to troubleshoot a scope preview with no matches when combining priority with other filters. -->
+
 ### View and manage scopes
 
 To view your scopes, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}} > {{< ui >}}Scopes{{< /ui >}}][24]. For each scope, the list shows its status, what it covers, its most recent Bits activity, and how many runs Bits has for it. From the list, you can search, filter, and pin scopes, and open a scope to review its recent Bits activity.
@@ -137,6 +160,40 @@ Yes. You can use investigations and recommendations without enabling one-click i
 
 [Scopes](#scopes) let you manage automated work across resources, monitor queries, or Slack channels, with shared guidance for the scope. Define coverage around your team's operational responsibilities instead of configuring automated work monitor by monitor.
 
+### What happens to monitors with Auto-Investigate turned on?
+
+Per-monitor Auto-Investigate settings are not converted to scopes. Monitors that already have Auto-Investigate turned on keep starting investigations until you turn it off. You can't turn on Auto-Investigate for additional individual monitors. To start automatic investigations for other monitors, [create a scope](#create-a-scope).
+
+If your organization has monitors with Auto-Investigate turned on, you can view and turn them off in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Manage Legacy Investigations{{< /ui >}}][36].
+
+<!-- TODO(reviewer): Confirm with the Autonomous Ops team whether a retirement date for per-monitor Auto-Investigate will be announced. -->
+
+### Does every alert in a scope start an investigation?
+
+Bits triages alerts and investigates issues that need action. To review triage decisions, see [Review Bits activity][32] and [View and manage scopes][33].
+
+<!-- TODO(reviewer): Confirm the triage verdict labels and behavior before adding a verdict table: only Action required proceeds to investigation; Watching alerts are re-checked; Dismissed and Inconclusive stop at triage. Distinguish the Inconclusive triage verdict from an inconclusive investigation conclusion. -->
+<!-- TODO(reviewer): Confirm whether there is no scope option to always investigate every alert, regardless of the triage verdict. -->
+<!-- TODO(reviewer): Confirm whether scope guidance and runbook steps inform the investigation itself as well as triage. -->
+
+### Can I use Microsoft Teams?
+
+For setup instructions, see [Send investigation findings to Microsoft Teams][29] and [Use Bits Chat in Microsoft Teams][30]. Bits Chat in Microsoft Teams cannot start or steer investigations.
+
+<!-- TODO(reviewer): Confirm support for scope notifications, Autonomous Ops notifications, and remediation approvals in Microsoft Teams, and document any limitations. Confirm Preview status for investigation findings and Bits Chat in Teams; the linked pages do not label these features as Preview. -->
+
+### How do triage and investigations consume AI Credits?
+
+Autonomous Ops activity consumes [AI Credits][22]. To control usage, see [Manage credit usage][34].
+
+<!-- TODO(reviewer): Confirm how triage, Watching re-checks, and investigations consume AI Credits, including alerts that stop at triage. Add only publicly approved billing details. -->
+
+### Can I manage scopes programmatically?
+
+The Datadog MCP Server's `investigator` toolset includes tools to [list, inspect, preview, create, update, and delete scopes][31]. These scope tools are separate from tools that trigger an individual investigation.
+
+Scopes are not available through the Datadog API or the Datadog Terraform provider.
+
 ### What happens when a scope reaches its credit limit?
 
 The scope completes work already in progress and pauses new runs until the applicable limit increases or the next billing cycle begins. For instructions on managing quotas, see [Manage credit usage](#manage-credit-usage).
@@ -168,3 +225,12 @@ Review the alert and relevant telemetry using your team's response procedures, a
 [25]: https://app.datadoghq.com/bits/autonomous-ops/activity
 [26]: /bits_ai/bits_chat/usage/#slack
 [27]: /bits_ai/bits_remediation/infrastructure_actions/
+[28]: /mcp_server/tools/#preview_bits_detection_scope
+[29]: /bits_ai/bits_investigation/configure/#microsoft-teams
+[30]: /bits_ai/bits_chat/usage/#microsoft-teams
+[31]: /mcp_server/tools/#list_bits_detection_scopes
+[32]: #review-bits-activity
+[33]: #view-and-manage-scopes
+[34]: #manage-credit-usage
+[35]: /events/explorer/searching/
+[36]: https://app.datadoghq.com/bits/settings/legacy-monitor-investigations
