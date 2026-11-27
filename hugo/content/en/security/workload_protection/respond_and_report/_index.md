@@ -111,7 +111,7 @@ Manual response lets you protect your infrastructure from the signal side panel 
 
 Confirm that each environment with hosts or containers running the Workload Protection-enabled Agent meets these requirements:
 
-- Datadog **Agent 7.78** or later on the hosts that should execute response actions.
+- Datadog **Agent 7.78.1** or later on the hosts that should execute response actions.
 - [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
 - Enforcement is enabled by default in `system-probe` as described in [Configure Agent enforcement](#configure-agent-enforcement).
 
