@@ -23,6 +23,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Amazon S3
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
 
+### CrowdStrike FDR
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/crowdstrike_fdr %}}
+
 ### Datadog Agent
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/datadog_agent %}}
 
