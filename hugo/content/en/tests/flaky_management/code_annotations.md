@@ -32,7 +32,7 @@ Annotations require [Test Optimization][4] set up with a Datadog SDK for your te
 
 ## Scope of test code annotations
 
-Code annotations are supported for JavaScript/TypeScript, Ruby, Java, .NET, Python, and Go. Other languages are not supported.
+Code annotations are supported for JavaScript/TypeScript, Ruby, Java, .NET, Python, Go, and Swift. Other languages are not supported.
 
 Test code annotations follow these scope rules:
 
@@ -496,6 +496,115 @@ Go retries a top-level test as a whole. After a subtest or Testify suite method 
 [80]: https://github.com/DataDog/ddtest
 [81]: https://github.com/DataDog/ddtest/releases/tag/v1.17.0
 [82]: /tests/setup/go/
+
+{{% /tab %}}
+
+{{% tab "Swift" %}}
+
+### SDK requirements
+
+Use the Datadog Swift testing SDK (`dd-sdk-swift-testing`) version [2.7.14][70] or later, and configure [Test Optimization for Swift][71]. Swift Testing suites, or standalone Swift Testing tests, need the `.datadogTesting` trait, as described there.
+
+### Annotation names
+
+The `DatadogSDKTesting` module provides one tag for each annotation. Each tag has an opposite value, so a test can override a declaration on its suite or class:
+
+| Annotation | Swift Testing | XCTest (Swift) | XCTest (Objective-C) |
+|------------|---------------|----------------|----------------------|
+| Prevent failure suppression | `.dd.preventFailureSuppression` (opposite: `.dd.allowFailureSuppression`) | `.preventFailureSuppression` set to `true` | `DDTag.preventFailureSuppressionType` and `DDTag.preventFailureSuppressionInstanceMethod` set to `@YES` |
+| Disable automatic retries | `.dd.nonretriable` (opposite: `.dd.retriable`) | `.retriable` set to `false` | `DDTag.retriableType` and `DDTag.retriableInstanceMethod` set to `@NO` |
+
+### Swift Testing
+
+Add the tags to a suite or a test, next to the `.datadogTesting` trait:
+
+```swift
+import Testing
+import DatadogSDKTesting
+
+@Suite(.datadogTesting, .tags(.dd.nonretriable, .dd.preventFailureSuppression))
+struct CheckoutTests {
+    @Test
+    func completesCheckout() throws {
+        // Not retried by Datadog, and its failure is never suppressed
+    }
+
+    @Test(.tags(.dd.retriable, .dd.allowFailureSuppression))
+    func showsRecommendations() throws {
+        // Overrides the suite: Datadog can retry, quarantine, and disable this test
+    }
+}
+```
+
+The most specific declaration wins: a test's tags override its suite's tags, and a nested suite's tags override its parent suite's tags. If one declaration lists a tag and its opposite, the last one listed wins. Tags on a parameterized test apply to every generated case.
+
+### XCTest
+
+A tag declared for the test class applies to every test in the class. A tag declared for a test method overrides it for that test.
+
+In Swift, adopt `FinalTaggedType` and declare the tags in `finalTypeTags`, passing test method names as strings:
+
+```swift
+import XCTest
+import DatadogSDKTesting
+
+final class CheckoutTests: XCTestCase, FinalTaggedType {
+    static var finalTypeTags: FinalTypeTags<CheckoutTests> {
+        withTagger { tagger in
+            // Every test in the class
+            tagger.set(type: .retriable, to: false)
+            tagger.set(type: .preventFailureSuppression, to: true)
+            // Override for one test
+            tagger.set(instance: .retriable, to: true, method: "testShowsRecommendations")
+            tagger.set(instance: .preventFailureSuppression, to: false, method: "testShowsRecommendations")
+        }
+    }
+
+    func testCompletesCheckout() throws {}
+    func testShowsRecommendations() throws {}
+}
+```
+
+For a test class that other test classes inherit from, adopt `ExtendableTaggedType` and declare the tags in `extendableTypeTags()` instead, with the same `withTagger` calls.
+
+In Objective-C, adopt `DDTaggedType` and return the tags from `attachedTypeTags`:
+
+```objective-c
+@import XCTest;
+@import DatadogSDKTesting;
+
+@interface CheckoutTests : XCTestCase <DDTaggedType>
+@end
+
+@implementation CheckoutTests
+
++ (DDTypeTags *)attachedTypeTags {
+    DDTypeTagger *tagger = [DDTypeTagger forType:self];
+    // Every test in the class
+    [tagger setWithTypeTag:DDTag.retriableType toValue:@NO];
+    [tagger setWithTypeTag:DDTag.preventFailureSuppressionType toValue:@YES];
+    // Override for one test
+    [tagger setWithTag:DDTag.retriableInstanceMethod toValue:@YES forMember:@"testShowsRecommendations"];
+    [tagger setWithTag:DDTag.preventFailureSuppressionInstanceMethod toValue:@NO forMember:@"testShowsRecommendations"];
+    return [tagger tags];
+}
+
+- (void)testCompletesCheckout {}
+- (void)testShowsRecommendations {}
+
+@end
+```
+
+### Framework requirements
+
+For supported test frameworks and versions, see [Test Optimization compatibility][72].
+
+To keep Test Impact Analysis from skipping a test, use its separate unskippable tags (`.dd.tia.unskippable`, `.tiaSkippable`), described in [Test Impact Analysis for Swift][73]. They follow the same override order.
+
+[70]: https://github.com/DataDog/dd-sdk-swift-testing/releases/tag/2.7.14
+[71]: /tests/setup/swift/
+[72]: /tests/setup/swift/#compatibility
+[73]: /tests/test_impact_analysis/setup/swift/#disabling-skipping-for-specific-tests
 
 {{% /tab %}}
 {{< /tabs >}}
