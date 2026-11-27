@@ -2886,15 +2886,15 @@ Searches recent process observations collected by [Live Processes][97], returnin
 
 ## Product Analytics
 
-Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
+Tools for querying [Product Analytics][68] data, including event search, org vocabulary lookup, aggregations, journeys, journey paths, pathways, and retention. Other tools in this toolset manage saved charts, labeled actions, segments, and launches.
 
 ### `search_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Finds Product Analytics views and actions matching a natural-language description using semantic search, including org-curated labeled actions.
+Retrieves individual Product Analytics session, view, action, and server-side events that match a query in Datadog query syntax, so you can inspect their attributes. For example, `@type:server @event.name:order_completed` matches server-side `order_completed` events. For counts and grouped analysis, use `aggregate_product_analytics_events`.
 
-- Find the view and action for adding an item to the cart.
-- What's the event for completing checkout?
+- Show me recent actions on the checkout page.
+- Show me the attributes of the most recent `order_completed` server-side event.
 
 ### `search_product_analytics_org_entities`
 *Toolset: **product-analytics***\
@@ -2914,13 +2914,22 @@ Retrieves the full definition of a saved Product Analytics chart by ID, includin
 - Load the saved chart `abc-123-def` and show me its query parameters.
 - Reproduce the "weekly retention" saved chart with an updated time range.
 
+### `create_product_analytics_saved_chart`
+*Toolset: **product-analytics***\
+*Permissions Required: `Product Analytics Saved Charts Write` or `RUM Apps Read`*\
+Saves a chart returned by `aggregate_product_analytics_events`, `run_product_analytics_journey`, `run_product_analytics_pathway`, or `run_product_analytics_retention` so you can reopen it in Product Analytics, and returns a link to it. The saved chart keeps the query's time range as fixed dates. Each call creates a new chart and does not change existing ones.
+
+- Save this funnel as "Signup funnel, Sep 1-7".
+- Save the retention chart from the last answer.
+
 ### `aggregate_product_analytics_events`
 *Toolset: **product-analytics***\
 *Permissions Required: `RUM Apps Read`*\
-Aggregates Product Analytics event data as a scalar or timeseries, supporting count, cardinality, average, sum, min, max, and percentile calculations with optional grouping.
+Aggregates Product Analytics event data, including server-side events, as a scalar or timeseries. Supports count, cardinality, average, sum, min, max, and percentile calculations with optional filtering and grouping.
 
 - How many sessions did we have today?
 - Show me daily active users over the past 30 days.
+- Count `@type:server` events grouped by `@event.name` to see which server-side events we send.
 
 ### `run_product_analytics_journey`
 *Toolset: **product-analytics***\
@@ -2929,6 +2938,14 @@ Runs funnel, timeseries, scalar, list, and drop-off queries across a multi-step 
 
 - What's the conversion rate from viewing a product to completing checkout?
 - Show me the users who dropped off between adding to cart and checkout.
+
+### `run_product_analytics_journey_path`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` and `Timeseries`*\
+Shows the most common paths users take between two known journey steps, tracked at the user, session, or account level. Maps the paths of users who completed the journey, or what users did after the first step when they dropped off. You can expand a path to see what happened next.
+
+- What do users do between the pricing page and checkout?
+- What do users do after adding to cart when they don't complete checkout?
 
 ### `run_product_analytics_pathway`
 *Toolset: **product-analytics***\
@@ -2945,6 +2962,74 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 
 - Show me the weekly retention grid for users who signed up in the last quarter.
 - What's the day-7 retention rate for users who joined in January?
+
+### `create_product_analytics_labeled_action`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Creates a labeled action: a named, reusable label for a user action that you can use in Product Analytics queries. A labeled action matches actions by their target name on a view, optionally narrowed to an action type. To cover variants of the same action, use wildcard patterns or up to 10 rules. The tool requires explicit confirmation before it creates the labeled action.
+
+- Create a labeled action called "Add to cart" for clicks on the Add to cart button on `/checkout`.
+- Label the Save button on every organization settings page as "Save org settings".
+
+### `get_product_analytics_segment`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Retrieves a segment by ID, including its name, description, tags, whether it contains users or accounts, the definition of each of its blocks and how they combine, and its stored member count. Use `search_product_analytics_org_entities` to find the segment ID.
+
+- What does the "power users" segment contain?
+- How many accounts are in segment `abc-123`?
+
+### `create_product_analytics_segment`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` or `RUM Apps Write`*\
+Creates a segment: a named, reusable audience of users or accounts. A segment can be defined by a funnel of one or more steps, by profile attributes, or by a combination of both. The tool requires explicit confirmation before it creates the segment.
+
+- Create a segment of users who added an item to their cart but didn't check out.
+- Create an account segment for accounts on the enterprise plan.
+
+### `update_product_analytics_segment`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` or `RUM Apps Write`*\
+Updates a segment's name, description, or tags, or changes its definition by adding, removing, excluding, or including blocks, or by changing how its blocks combine. Returns the segment as it was before the update so you can undo the change. The tool requires explicit confirmation before it applies changes.
+
+- Rename the "Checkout users" segment to "Checkout completers".
+- Exclude users in France from the "power users" segment.
+
+**Note**: Changes apply everywhere the segment is used, including charts and dashboards. This tool can't change a segment's definition if its blocks combine with a custom formula. It also can't change definitions that contain static lists, reference tables, templates, retention, or legacy event blocks. You can still change its name, description, and tags.
+
+### `search_product_analytics_launches`
+*Toolset: **product-analytics***\
+*Permissions Required: `Product Analytics Read` or `RUM Apps Read`*\
+Lists Product Analytics launches. A launch tracks a feature launch's phase, KPIs, and tracking plan. Filter by name, phase (`plan`, `setup`, `ready`, or `launched`), or application. Returns a summary of each launch. Use `get_product_analytics_launch` for the full record.
+
+- Is there already a launch for the promo codes feature?
+- Which launches are in the `ready` phase?
+
+### `get_product_analytics_launch`
+*Toolset: **product-analytics***\
+*Permissions Required: `Product Analytics Read` or `RUM Apps Read`*\
+Retrieves a launch by ID, including its phase, KPIs, tracking plan, linked experiment, dashboard, or funnel, and the latest code analysis of the tracking plan's instrumentation.
+
+- Show me the tracking plan for the checkout promo codes launch.
+- Which events in this launch's tracking plan weren't found in the code?
+
+### `create_product_analytics_launch`
+*Toolset: **product-analytics***\
+*Permissions Required: `Product Analytics Write` or `RUM Apps Read`*\
+Creates a launch with a name and a tracking plan of events and properties to instrument. You can also set KPIs, a feature flag, an application, and a linked experiment, dashboard, or funnel. The tool requires explicit confirmation before it creates the launch.
+
+- Create a launch for checkout promo codes with a tracking plan for applying and removing a promo code.
+- Plan a launch for the new onboarding flow, gated by the `new-onboarding` feature flag, with activation rate as its KPI.
+
+### `update_product_analytics_launch`
+*Toolset: **product-analytics***\
+*Permissions Required: `Product Analytics Write` or `RUM Apps Read`*\
+Updates a launch's phase, name, description, KPIs, tracking plan, feature flag, application, linked resources, or code analysis. Fields you don't provide stay unchanged. The tool requires explicit confirmation before it applies changes.
+
+- Move the checkout promo codes launch to the `ready` phase.
+- Add a `promo_code_rejected` event to this launch's tracking plan.
+
+**Note**: A new tracking plan or KPI list replaces the stored one in full. Changes made to the launch since it was last read are overwritten.
 
 ## Profiling
 Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
