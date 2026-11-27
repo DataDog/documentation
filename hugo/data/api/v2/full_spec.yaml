@@ -256226,12 +256226,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found. One or more mappings requested for removal do not exist.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict. One or more mappings requested for creation already exist.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Bulk create and remove teams ownership mappings
