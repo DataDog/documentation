@@ -78,16 +78,26 @@ For information about how to add a quote for AI credit usage to your scopes, see
 
 ### Scope query syntax
 
-For a {{< ui >}}Watch monitor alerts{{< /ui >}} scope, enter a tag or query to select monitors. For example, `team:payments` selects monitors with that tag.
+For a {{< ui >}}Watch monitor alerts{{< /ui >}} scope, enter a tag or query to select monitors. Scope queries use the [Events search syntax][35], not the Manage Monitors search syntax.
 
-Check which monitors match before creating a scope. The MCP tool [`preview_bits_detection_scope`][28] previews matching monitors without saving a scope.
+| To select | Example |
+|---|---|
+| Monitors with a tag | `team:payments` |
+| Monitors with a tag value that starts with a prefix | `team:payments*` |
+| Monitors that notify a specific recipient | `@monitor_notifications:<HANDLE>` |
+| Monitors that notify any of several recipients | `@monitor_notifications:(<HANDLE_1> OR <HANDLE_2>)` |
+| Monitors that match several filters | `env:prod AND @monitor_notifications:<HANDLE>` |
+| Monitors with a tag, excluding another tag | `team:payments -env:staging` |
 
-<!-- TODO(reviewer): Confirm the create-scope preview's UI label and behavior, then add instructions to check matching monitors in that preview before saving. -->
+Keep the following in mind:
+
+- Notification recipients don't support wildcards. A query such as `@monitor_notifications:oncall-*` is rejected. List each handle in an `OR` group, or add a shared tag to the monitors and select that tag.
+- Text without a field name, such as `checkout`, matches service names. Scope queries can't filter on the contents of a monitor's notification message. To select monitors by message content, tag those monitors and select the tag.
+
+As you enter a query, the create form lists the monitors that match it. Review the matches before you save the scope. To preview matching monitors outside the create form, use the MCP tool [`preview_bits_detection_scope`][28].
+
 <!-- TODO(reviewer): Confirm that Watch monitor alerts supports priority:p1 for P1 monitors; the public monitor search example does not establish scope query support. -->
-<!-- TODO(reviewer): Confirm the notification recipient syntax @monitor_notifications:<HANDLE>, OR lists such as @monitor_notifications:(<HANDLE_1> OR <HANDLE_2>), and combinations with tags. Confirm that recipient wildcards are rejected and document the restriction. -->
-<!-- TODO(reviewer): Confirm that tag value wildcards such as team:payments* are supported in scope queries before adding an example. -->
 <!-- TODO(reviewer): Confirm whether priority:p1 team:payments is supported and how to troubleshoot a scope preview with no matches when combining priority with other filters. -->
-<!-- TODO(reviewer): Confirm whether free text in a scope query searches the monitor title, notification message, or both. -->
 
 ### View and manage scopes
 
@@ -150,7 +160,13 @@ Yes. You can use investigations and recommendations without enabling one-click i
 
 [Scopes](#scopes) let you manage automated work across resources, monitor queries, or Slack channels, with shared guidance for the scope. Define coverage around your team's operational responsibilities instead of configuring automated work monitor by monitor.
 
-<!-- TODO(reviewer): For moving from per-monitor Auto-Investigate, confirm whether existing settings migrate to scopes and whether already-enabled monitors continue triggering investigations. Confirm where to view and disable legacy settings, including the proposed Bits AI > Settings > Manage Legacy Investigations path, and any transition behavior before publishing migration instructions. -->
+### What happens to monitors with Auto-Investigate turned on?
+
+Per-monitor Auto-Investigate settings are not converted to scopes. Monitors that already have Auto-Investigate turned on keep starting investigations until you turn it off. You can't turn on Auto-Investigate for additional individual monitors. To start automatic investigations for other monitors, [create a scope](#create-a-scope).
+
+If your organization has monitors with Auto-Investigate turned on, you can view and turn them off in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Manage Legacy Investigations{{< /ui >}}][36].
+
+<!-- TODO(reviewer): Confirm with the Autonomous Ops team whether a retirement date for per-monitor Auto-Investigate will be announced. -->
 
 ### Does every alert in a scope start an investigation?
 
@@ -176,7 +192,7 @@ Autonomous Ops activity consumes [AI Credits][22]. To control usage, set [scope 
 
 The Datadog MCP Server's `investigator` toolset includes tools to [list, inspect, preview, create, update, and delete scopes][31]. These scope tools are separate from tools that trigger an individual investigation.
 
-<!-- TODO(reviewer): Confirm whether a public API or Terraform resource supports scope management, and add public documentation links if available. Do not infer scope support from APIs for individual investigations or from per-monitor Auto-Investigate limitations. -->
+Scopes are not available through the Datadog API or the Datadog Terraform provider.
 
 ### What happens when a scope reaches its credit limit?
 
@@ -216,3 +232,5 @@ Review the alert and relevant telemetry using your team's response procedures, a
 [32]: #review-bits-activity
 [33]: #view-and-manage-scopes
 [34]: #manage-credit-usage
+[35]: /events/explorer/searching/
+[36]: https://app.datadoghq.com/bits/settings/legacy-monitor-investigations
