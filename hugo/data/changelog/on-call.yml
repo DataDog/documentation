@@ -147,3 +147,10 @@ entries:
       - UpdateOnCallSchedule
       - UpdateUserNotificationRule
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-05'
+    link: https://github.com/DataDog/documentation/pull/41198
+    operations:
+      - GetOnCallTeamRoutingRules
+      - SetOnCallTeamRoutingRules
+    title: Add customizable_content to On-Call Slack routing rule action
