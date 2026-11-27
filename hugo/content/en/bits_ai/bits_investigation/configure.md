@@ -117,8 +117,8 @@ These permissions are added by default to Managed Roles. If your organization us
 
 To prevent users from viewing, running, or configuring investigations, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
 
-Removing these permissions doesn't stop automatic investigations on monitors where they are already enabled. To stop automatic investigations, do one of the following:
-- Turn off automatic investigations for each monitor in {{< ui >}}Bits Investigation{{< /ui >}} > [{{< ui >}}Monitors{{< /ui >}}][19].
+Removing these permissions doesn't stop automatic investigations on monitors that have Auto-Investigate turned on. To stop those investigations, do one of the following:
+- Turn off Auto-Investigate for those monitors in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Manage Legacy Investigations{{< /ui >}}][19].
 - Disable all AI products billable through AI Credits using the org-level toggle in {{< ui >}}Plan & Usage{{< /ui >}} > [{{< ui >}}AI Credits{{< /ui >}}][16]. For details, see [Admin controls for AI Credits][17].
 
 ## Configure rate limits
@@ -186,5 +186,5 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
-[19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true
+[19]: https://app.datadoghq.com/bits/settings/legacy-monitor-investigations
 [20]: /bits_ai/bits_detection/#permissions
