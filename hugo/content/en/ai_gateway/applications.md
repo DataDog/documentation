@@ -58,26 +58,33 @@ Use the base URL for your [Datadog site][applications-12]. The paths differ beca
 ## Configure Claude Code
 <!-- vale Datadog.headings = YES -->
 
-For the Claude Code CLI, set the AI Gateway URL and bearer token in the terminal where you start the client:
+For the Claude Code CLI, merge the following settings into your Claude Code user settings file, `~/.claude/settings.json`. If the file already has an `env` block, add these keys to it. Do not add these settings to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4] and `<PROVIDER_SLUG>/<MODEL_ID>` with the model identifier you selected earlier.
 
-```shell
-unset ANTHROPIC_API_KEY
-unset CLAUDE_CODE_USE_BEDROCK CLAUDE_CODE_USE_VERTEX CLAUDE_CODE_USE_FOUNDRY CLAUDE_CODE_USE_ANTHROPIC_AWS
-export ANTHROPIC_BASE_URL="https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai"
-export ANTHROPIC_AUTH_TOKEN="$DD_AI_GATEWAY_TOKEN"
-export ANTHROPIC_MODEL="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_CUSTOM_MODEL_OPTION="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_DEFAULT_SONNET_MODEL="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_DEFAULT_OPUS_MODEL="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_DEFAULT_FABLE_MODEL="$DD_AI_GATEWAY_MODEL"
-export ANTHROPIC_CUSTOM_HEADERS="x-dd-tag-ml_app: claude-code"
-claude
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
+    "ANTHROPIC_AUTH_TOKEN": "<PERSONAL_ACCESS_TOKEN>",
+    "ANTHROPIC_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "<PROVIDER_SLUG>/<MODEL_ID>",
+    "ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code",
+    "CLAUDE_CODE_USE_BEDROCK": "0",
+    "CLAUDE_CODE_USE_VERTEX": "0",
+    "CLAUDE_CODE_USE_FOUNDRY": "0",
+    "CLAUDE_CODE_USE_ANTHROPIC_AWS": "0"
+  }
+}
 ```
 
 This example maps the model aliases to one approved target for the connection test. To use different models for those aliases, set each variable to an approved AI Gateway model or routing rule. See [Claude Code model configuration][applications-19].
 
-The example clears the API key and cloud-provider selectors in this terminal to use the Messages endpoint with AI Gateway credentials. Run `/status` and confirm the AI Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces and persistent configuration, see [Claude Code gateway configuration][applications-16]. Keep tokens out of shared project settings.
+Setting each `CLAUDE_CODE_USE_*` variable to `"0"` prevents cloud-provider selectors in your shell from routing requests away from AI Gateway.
+
+Start `claude`, run `/status`, and confirm the AI Gateway base URL and `ANTHROPIC_AUTH_TOKEN` credential source. Managed settings can override local configuration. For other client surfaces, see [Claude Code gateway configuration][applications-16].
 
 <!-- vale Datadog.headings = NO -->
 ## Configure Codex
@@ -451,7 +458,7 @@ The application name can also define who can read captured prompts and responses
 
 To attribute requests to a team you belong to, add `x-ai-gateway-team: <TEAM_SLUG>` to the client's request headers:
 
-- **Claude Code:** Set both headers on separate lines: `export ANTHROPIC_CUSTOM_HEADERS=$'x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>'`.
+- **Claude Code:** In `~/.claude/settings.json`, separate the two headers with `\n`: `"ANTHROPIC_CUSTOM_HEADERS": "x-dd-tag-ml_app: claude-code\nx-ai-gateway-team: <TEAM_SLUG>"`.
 - **Codex:** Add `"x-ai-gateway-team" = "<TEAM_SLUG>"` to the provider's `http_headers` map.
 - **SDK:** Add `"x-ai-gateway-team": "<TEAM_SLUG>"` to `default_headers`.
 
@@ -469,11 +476,13 @@ Team selection affects matching [budgets][applications-4], [rate limits][applica
 | Symptom | What to check |
 |---|---|
 | A request returns HTTP `401` or `403` | Check the Datadog site, token, `ai_gateway_usage` permission, and model access. For Claude Code, use `ANTHROPIC_AUTH_TOKEN` so the Datadog token is sent as a bearer token. |
-| Unknown model or no eligible target | Use the full `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` identifier. Check the target's request format and the caller's access. For Claude Code, check model alias variables as well as the main model. |
+| Unknown model or no eligible target | Use the full `<PROVIDER_SLUG>/<MODEL_ID>` or `router/<RULE_SLUG>` identifier. Check the target's request format and the caller's access. For Claude Code, check the model alias settings as well as `ANTHROPIC_MODEL`. |
 | Incorrect request path | Use `/ai` for Claude Code and the Anthropic SDK, and `/ai/v1` for Codex and the OpenAI SDK. Do not append the request path to the base URL. |
 | Codex returns `websocket_not_supported` | Set `supports_websockets = false` on the selected provider. |
 | Codex uses generic model settings | Check that the model catalog is compatible with your Codex version and its `slug` matches the AI Gateway model identifier. Restart Codex after changing the catalog. |
-| Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart with the AI Gateway environment variables. |
+| Claude Code reports an authentication conflict | Run `/logout` to clear the saved Claude account login, then restart Claude Code. |
+| Claude Code stops responding, then shows `Failed to authenticate. API Error: 401 {"errors":["Unauthorized"]}` | Claude Code retries a `401` from AI Gateway for about 3 minutes before it shows the error. Check that `ANTHROPIC_AUTH_TOKEN` is valid and not expired. |
+| Claude Code shows `Failed to authenticate` after you set `x-ai-gateway-team` | AI Gateway returns a `403` error with the message `you are not authorized to use the selected Datadog Team`. Check that the team slug is correct and that you belong to the team. |
 | Client does not use the configured AI Gateway | Check the client's active settings and credential source. Shell exports apply to processes launched from that shell; a desktop app can require separate environment configuration. |
 
 See [AI Gateway troubleshooting][applications-7] for AI Gateway error codes.
