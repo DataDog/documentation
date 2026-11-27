@@ -26,16 +26,12 @@ further_reading:
 
 Assign Work Management items to [Claude Managed Agents][1] that you build and host in your Anthropic workspace. When you assign a work item, Datadog starts a Claude session with the work item's details. The agent then works in Datadog through the [Datadog MCP Server][2]. It reads the work item and investigates. With the right permissions, it also comments on and updates the work item.
 
-Setup takes three steps:
-
-1. [Connect your Anthropic account](#step-1-connect-your-anthropic-account).
-2. [Add a Claude agent to Datadog](#step-2-add-a-claude-agent-to-datadog).
-3. [Assign work items to the agent](#step-3-assign-work-items-to-the-agent).
+This page is for Datadog admins who set up the agents, and for users who assign work items to them.
 
 ## How it works
 
 - **Each agent has its own Datadog identity.** When you add a Claude agent, Datadog creates a Datadog user for it. The agent acts as this user, with the permissions you pick. Its actions appear under its own name in [Audit Trail][3].
-- **Datadog sets up the agent's access to Datadog.** When you add the agent, Datadog adds the Datadog MCP Server to the agent in Anthropic, under the name `datadog`, with the `core` and `cases` toolsets. If the agent already has an MCP server on your Datadog site's MCP host, Datadog keeps it as is. Datadog also creates a vault named `Datadog - <agent name>` in your Anthropic workspace. When a session starts, Datadog puts a short-lived Datadog credential in this vault, scoped to the agent's permissions. You never handle Datadog secrets.
+- **Datadog connects the agent to Datadog.** When you add the agent, Datadog adds the Datadog MCP Server to it in Anthropic, under the name `datadog`. Datadog also creates a vault named `Datadog - <agent name>` in your Anthropic workspace. At the start of each session, Datadog puts a short-lived credential in this vault, limited to the agent's permissions. You never handle Datadog secrets.
 - **Keep Datadog's setup in place.** Don't remove or edit the `datadog` MCP server or the `Datadog - <agent name>` vault in Anthropic. Without them, the agent can't reach Datadog.
 - **Sessions run in your Anthropic workspace.** Sessions use your Anthropic environment, vaults, and API key. Anthropic bills them to your account.
 
@@ -43,10 +39,12 @@ Setup takes three steps:
 
 ### In Anthropic
 
-- A [Claude Console][4] organization with access to Claude Managed Agents. Claude Managed Agents runs on the Claude Platform, not in claude.ai.
-- At least one Claude agent in a workspace of that organization.
-- At least one environment in that workspace. Sessions can't start without one.
+- A [Claude Console][4] organization. Claude Managed Agents is on by default for API accounts. It runs on the Claude Platform, not in claude.ai.
+- At least one Claude agent in a workspace of that organization. To create one, see the [Claude Managed Agents quickstart][9].
+- At least one [environment][10] in that workspace. Sessions can't start without one.
 - An Anthropic API key for that workspace.
+
+<div class="alert alert-warning">New environments created in the Claude Console block all outside hosts. In the environment's network settings, allow MCP servers, or add the host of <code>{{< region-param key="mcp_server_endpoint" >}}</code> to the allowed hosts. Otherwise, the agent's sessions can't start.</div>
 
 ### In Datadog
 
@@ -78,9 +76,9 @@ Datadog lists the Claude agents of every Anthropic account you add here. Add one
 1. Click {{< ui >}}Add Agent{{< /ui >}} and select {{< ui >}}Claude{{< /ui >}}.
 1. Under {{< ui >}}Select a Claude agent{{< /ui >}}, pick the agent. The list shows the agents of all your connected Anthropic accounts that aren't added yet.
 1. Under {{< ui >}}Session settings{{< /ui >}}, pick:
-    - {{< ui >}}Environment{{< /ui >}} (required): the sandbox the agent's sessions run in, with its installed packages and network access.
+    - {{< ui >}}Environment{{< /ui >}} (required): the sandbox the agent's sessions run in, with its installed packages and network access. It must allow the Datadog MCP Server. See [Prerequisites](#in-anthropic).
     - {{< ui >}}Vaults{{< /ui >}} (optional): vaults with the credentials the agent needs for other tools, such as GitHub. You don't need a vault for Datadog: Datadog creates its own.
-1. Under {{< ui >}}Give it permissions{{< /ui >}}, pick the agent's Datadog permissions. See [Choose the agent's permissions](#choose-the-agents-permissions).
+1. Under {{< ui >}}Give it permissions{{< /ui >}}, add {{< ui >}}Work Items Write{{< /ui >}} so the agent can comment on and update work items. Add any other permissions it needs. See [Choose the agent's permissions](#choose-the-agents-permissions).
 1. Click {{< ui >}}Add Agent{{< /ui >}}.
 
 The agent appears in the {{< ui >}}Claude{{< /ui >}} tab of the Agents page with the {{< ui >}}Active{{< /ui >}} status.
@@ -97,15 +95,15 @@ A new agent starts with these permissions:
 | {{< ui >}}MCP Write{{< /ui >}} | Lets the agent use MCP tools that change data. |
 | {{< ui >}}Work Items Read{{< /ui >}} | Lets the agent read work items. |
 
-<div class="alert alert-warning">To let the agent comment on, update, or resolve work items, also grant <strong>Work Items Write</strong>. Without it, the agent can read the work item, but it can't change it. Its last message still shows in the work item banner.</div>
+{{< ui >}}Work Items Write{{< /ui >}} isn't a default. Without it, the agent can read the work item, but it can't comment on it or change it.
 
-Add the permissions for any other data the agent works with, such as Logs Read or APM Read. Grant only what the agent needs.
+Add the permissions for any other data the agent works with, such as {{< ui >}}Logs Read{{< /ui >}} or {{< ui >}}APM Read{{< /ui >}}. Grant only what the agent needs.
 
 You can only grant permissions that you have. The others appear grayed out in the list.
 
 ## Step 3: Assign work items to the agent
 
-Each assignment starts a new Claude session. The agent receives the work item's key, title, and description, and the links to any GitHub repositories on the work item.
+Each assignment starts a new Claude session. The agent receives the work item's key, title, and description, and the links to any GitHub repositories on the work item. To work in those repositories, the agent needs a vault with GitHub credentials.
 
 ### Assign a work item manually
 
@@ -144,12 +142,12 @@ Manage your Claude agents from [{{< ui >}}Organization Settings{{< /ui >}} > {{<
 1. Change the permissions.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-The agent's Datadog credential is renewed with the new permissions. To edit an agent, you need every permission it has.
+Datadog renews the agent's credential with the new permissions. To edit an agent, you need every permission it has.
 
 ### Change an agent's API key, environment, or vaults
 
 1. Find the agent and click {{< ui >}}Edit{{< /ui >}}.
-1. Pick another {{< ui >}}Anthropic API key{{< /ui >}}, environment, or vaults. Only the keys that reach the agent's workspace are listed. If Anthropic rejects the current key, for example because it expired, a warning asks you to pick another one.
+1. Pick another {{< ui >}}Anthropic API key{{< /ui >}}, environment, or vaults. The list shows only the keys that can reach the agent's workspace. If Anthropic rejects the current key, for example because it expired, a warning asks you to pick another one.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Disable or enable an agent
@@ -169,21 +167,21 @@ Datadog removes the agent, deletes its Datadog user and its permissions, and del
 
 Click an agent to open its side panel:
 
-- {{< ui >}}Activity{{< /ui >}}: what the agent did in Datadog in the last 30 days, from Audit Trail. This needs the {{< ui >}}Audit Trail Read{{< /ui >}} permission, and Audit Trail must be enabled for your organization. Click {{< ui >}}View in Audit Trail{{< /ui >}} to see all events.
+- {{< ui >}}Activity{{< /ui >}}: what the agent did in Datadog in the last 30 days, from Audit Trail. This needs the {{< ui >}}Audit Trail Read{{< /ui >}} permission and Audit Trail turned on for your organization. Click {{< ui >}}View in Audit Trail{{< /ui >}} to see all events.
 - {{< ui >}}Work Items{{< /ui >}}: the work items assigned to the agent that you can access.
 
-Changes to agents and session starts are recorded in Audit Trail under the {{< ui >}}AI Agents{{< /ui >}} category.
+Audit Trail records changes to agents and session starts under the {{< ui >}}AI Agents{{< /ui >}} category.
 
 ## Troubleshooting
 
-When a session can't start, the work item timeline explains why. Common messages:
+When a session can't start, the work item activity explains why. Common messages:
 
 | Message | What to do |
 |---|---|
 | This Claude agent has no Anthropic environment to run in yet. | An admin picks an environment for the agent in [Organization Settings > Agents][6]. Then assign the agent again. |
-| This Claude agent has no Datadog MCP server, so it can't reach Datadog. | Add an MCP server to the agent in Anthropic with the URL <code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,cases</code>. Or delete the agent in Datadog and add it again: Datadog sets up the server and the vault again. Then assign the agent again. |
+| This Claude agent has no Datadog MCP server, so it can't reach Datadog. | Delete the agent in Datadog and add it again. Datadog sets up the MCP server and the vault again. Then assign the agent again. |
 | The vault this agent reaches Datadog with isn't one Datadog set up. | An admin checks the agent in [Organization Settings > Agents][6]. If Datadog's vault was deleted in Anthropic, delete the agent in Datadog and add it again. |
-| Anthropic refused to start the session. | Pick another agent, or ask an admin to check the agent in [Organization Settings > Agents][6] and in the Claude Console. |
+| Anthropic refused to start the session. | Check that the agent's environment allows the Datadog MCP Server. See [Prerequisites](#in-anthropic). If it does, ask an admin to check the agent in [Organization Settings > Agents][6] and in the Claude Console. |
 | Anthropic rejected the API key of the Anthropic account this agent was added from. | Replace the key in the [Anthropic integration][5], or pick another key for the agent. Then assign the agent again. |
 | The Anthropic account this agent was added from is no longer in your Anthropic integration. | Add the account back in the [Anthropic integration][5]. Then assign the agent again. |
 | The Anthropic environment or vault this agent runs with was archived or deleted. | An admin picks another environment or vault for the agent. Then assign the agent again. |
@@ -198,6 +196,7 @@ Other issues:
 
 - **The agent doesn't appear on the Add page**: Check that the agent isn't archived in Anthropic and isn't already added. Datadog may warn that it couldn't read the agents of a key. In that case, check that the key is valid and can access Claude Managed Agents.
 - **The agent reads the work item but doesn't comment**: Grant the agent the {{< ui >}}Work Items Write{{< /ui >}} permission.
+- **The session starts, but the agent does nothing**: Open the session in the Claude Console. Check its events for MCP connection or authentication errors.
 
 ## Further reading
 
@@ -211,3 +210,5 @@ Other issues:
 [6]: https://app.datadoghq.com/organization-settings/agents
 [7]: /incident_response/work_management/automation_rules/
 [8]: https://app.datadoghq.com/work/settings
+[9]: https://platform.claude.com/docs/en/managed-agents/quickstart
+[10]: https://platform.claude.com/docs/en/managed-agents/environments
