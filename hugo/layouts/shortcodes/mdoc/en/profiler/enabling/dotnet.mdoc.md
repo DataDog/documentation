@@ -58,7 +58,7 @@ The following profiling features are available in the following minimum versions
 - Due to a limitation of the .NET Framework, Allocations profiling does not show the size of the allocations. Instead, it only shows the count.
 - Allocations and Live Heap profiling are available in .NET 10. For other previous versions of .NET, the statistical distribution of allocations sampling might not be accurate, so expect larger objects to be represented more often
 - Continuous Profiler is not supported for AWS Lambda.
-- Continuous Profiler does not support ARM64.
+- Continuous Profiler supports ARM64.
 
 {% alert level="danger" %}
 Unlike APM, Continuous Profiler is not activated by default when the APM package is installed. You must explicitly enable it for the applications you want to profile.
