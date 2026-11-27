@@ -45,6 +45,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 
 | AWS service                        | Log source                    | Storage        | Automatic collection |
 | ---------------------------------- | ----------------------------- | -------------- | -------------------- |
+| [Amazon Connect][44]              | `source:connect`              | CloudWatch     | Yes                  |
 | [API Gateway][3]                   | `source:apigateway`           | CloudWatch, S3 | Yes                  |
 | [AppSync][4]                       | `source:appsync`              | CloudWatch     | Yes                  |
 | Batch                              | `source:batch`                | CloudWatch     | Yes                  |
@@ -129,6 +130,7 @@ To see which services support automatic collection, and the storage locations th
     "cloudtrail:ListTrails",
     "codebuild:BatchGetProjects",
     "codebuild:ListProjects",
+    "connect:ListInstances",
     "dms:DescribeReplicationInstances",
     "ec2:DescribeFlowLogs",
     "ec2:DescribeVerifiedAccessInstanceLoggingConfigurations",
@@ -189,6 +191,7 @@ To see which services support automatic collection, and the storage locations th
     | `cloudtrail:ListTrails`                                     | List all Cloudtrail trails.                                                  |
     | `codebuild:BatchGetProjects`                                | List all CodeBuild projects.                                                 |
     | `codebuild:ListProjects`                                    | Get information on CodeBuild projects.                                       |
+    | `connect:ListInstances`                                     | List Amazon Connect instances to find their contact flow log groups.         |
     | `dms:DescribeReplicationInstances`                          | List all replication instances for DMS.                                      |
     | `ec2:DescribeFlowLogs`                                      | List all Flow log configurations.                                            |
     | `ec2:DescribeVerifiedAccessInstanceLoggingConfigurations`   | List all Verified Access instance logging configurations.                    |
@@ -427,3 +430,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [41]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
 [42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
 [43]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters
+[44]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-flow-logs.html
