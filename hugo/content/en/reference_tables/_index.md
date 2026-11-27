@@ -202,11 +202,6 @@ See [Creating, updating, and deleting a Reference Table with the API][11] for a 
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-For other integrations, see the [Salesforce][17] or [ServiceNow][18] setup instructions.
-
-[17]: /integrations/salesforce/#step-4-connect-your-org
-[18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
-
 {{% collapse-content title="Databricks" level="h3" id="databricks" %}}
 
 First, [configure the Databricks integration][14] with an account and [grant it read access to the source data][22].
@@ -234,6 +229,66 @@ Allow several minutes for the initial sync to complete.
 [20]: https://app.datadoghq.com/event/explorer?query=source%3Adatabricks%20service%3Aintegration-reference-table
 [22]: /integrations/databricks/#reference-table-configuration
 [23]: https://docs.databricks.com/aws/en/views/
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Salesforce" level="h3" id="salesforce" %}}
+
+First, [configure the Salesforce integration][17] with an account and [grant it read access to the source objects and fields][22].
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}Salesforce{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Salesforce Org{{< /ui >}}: Select the org configured above. If it isn't listed, click "Add Salesforce account".
+   - {{< ui >}}Primary Key{{< /ui >}}: A field returned by the query that uniquely identifies each row, such as `Id`.
+   - {{< ui >}}Salesforce Query{{< /ui >}}: The SOQL query to execute, for example, `SELECT Id, AccountId, OwnerId, Name FROM Contact`.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
+
+Test the query in the [Salesforce Developer Console][19]. Select fields directly on the object, such as `Name` or `CustomField__c`. Relationship fields such as `Account.Name` are not supported.
+
+#### Troubleshooting {#salesforce-troubleshooting}
+
+Allow several minutes for the initial sync to complete.
+
+- Check [Salesforce ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's access to the queried objects and fields, and the SOQL query.
+
+[16]: https://app.datadoghq.com/reference-tables
+[17]: /integrations/salesforce/#step-4-connect-your-org
+[19]: https://help.salesforce.com/s/articleView?id=platform.code_dev_console_tab_query_editor.htm&type=5
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Asalesforce%20service%3Aintegration-reference-table
+[22]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="ServiceNow" level="h3" id="servicenow" %}}
+
+First, [configure the ServiceNow integration][18] with an account, then [configure Query Builder access and schedule a query][22].
+
+1. On the [Reference Tables page][16], click {{< ui >}}New Reference Table{{< /ui >}} and select {{< ui >}}ServiceNow{{< /ui >}}.
+2. Complete the configuration:
+   - {{< ui >}}Table name{{< /ui >}}: A unique name for the Reference Table in Datadog.
+   - {{< ui >}}Instance{{< /ui >}}: Select the instance configured above. If it isn't listed, click "Add ServiceNow account".
+   - {{< ui >}}Query{{< /ui >}}: The saved Query Builder query to ingest.
+   - {{< ui >}}Primary Key{{< /ui >}}: A column from the query's root CI that uniquely identifies each row.
+   - {{< ui >}}Additional Fields{{< /ui >}} (optional): Dot-walked field paths to include beyond the Query Builder fields, such as `vendor.manufacturer.name`.
+3. Click {{< ui >}}Save{{< /ui >}}. You return to the Reference Tables page.
+
+Additional fields must use paths supported by the ServiceNow Table API. The column name combines the root table name with the last two parts of the path. For example, `vendor.manufacturer.name` with root table `cmdb_ci_server` creates `cmdb_ci_server_manufacturer_name`.
+
+#### Troubleshooting {#servicenow-troubleshooting}
+
+Allow several minutes for the initial sync to complete after the scheduled Query Builder query runs.
+
+- Check [ServiceNow ingestion events][20] for sync status and errors.
+- Search for the table by name on the [Reference Tables page][16] and open its preview to verify the data.
+- If ingestion fails, check the account's Query Builder access and the scheduled query configuration.
+
+[16]: https://app.datadoghq.com/reference-tables
+[18]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
+[20]: https://app.datadoghq.com/event/explorer?query=source%3Aservicenow%20service%3Aintegration-reference-table
+[22]: /integrations/guide/servicenow-cmdb-enrichment-setup/#reference-tables
 
 {{% /collapse-content %}}
 

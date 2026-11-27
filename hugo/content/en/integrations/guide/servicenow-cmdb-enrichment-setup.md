@@ -87,20 +87,17 @@ You can monitor the ingestion process in the Datadog [Events Explorer][2] by sco
 
 ## Reference Tables
 
-Use [Reference Tables][7] to automatically enrich logs and events with additional fields from your ServiceNow CIs. With Reference Tables, you can map sets of value fields to a primary key, such as a hostname, and automatically append these fields to all logs or events that contain the specified key.
-To enable ingestion of Reference Tables:
+Before importing ServiceNow data into a Reference Table:
 
-1. Configure a [Query Builder][8] query in your ServiceNow instance. Schedule the query to run at your desired refresh interval and save it.
-1. Select **Add New Query** and choose your query from the dropdown menu.
-1. In the primary key dropdown, select the column name you want to use as your primary key.<br />Optionally, create a [Processing Pipeline][9] with this primary key to enrich and correlate logs and events.
-1. Enter a name for your reference table. The Reference Table name must be unique.
-1. Click **Save**. The [Reference Table][7] populates with the data from the query shortly after saving.
+1. [Configure the ServiceNow integration tile][10] with the instance to ingest.
+2. Give the configured ServiceNow user the `cmdb_query_builder_read` role. Use the same user to create and execute the Query Builder query.
+3. Create and save a [Query Builder][8] query. Schedule it to run at the desired refresh interval.
+
+To select the query and create the table in Datadog, see [Create a Reference Table from ServiceNow][11].
 
 ### Additional non-CMDB fields in Reference Tables
 
-Some ServiceNow tables are non-CMDB and cannot be selected in the Query Builder. To include data from these tables, you can use **Additional Fields** by specifying a **full dot-walked path**. These fields are added as extra columns to the reference table, along with the ones defined by the Query Builder.
-
-**Note**: Only paths supported by the ServiceNow Table API are available for use in Additional Fields. The generated columns are based on the root table name and the last two columns of the field spec. For example, `vendor.manufacturer.name` generates a column named `cmdb_ci_server_manufacturer_name`, and `location.city` generates a column named `cmdb_ci_server_location_city` assuming a root table of `cmdb_ci_server`.
+For dot-walked field paths and column naming, see [ServiceNow Reference Table configuration][11].
 
 ## Troubleshooting
 
@@ -115,7 +112,6 @@ For tagging to work correctly, ensure that the following are true in your system
 - Ingestion is limited to 100k hosts per execution.
 - Updates to hosts and devices are throttled to a few thousand per hour. Take this limit into consideration when choosing your schedule interval.
 - Host aliases in Datadog are case sensitive. Your ingested CMDB hostnames must exactly match the corresponding hostnames in Datadog.
-- Deletions and schema updates of existing tables are not supported.
 
 ## Further reading
 
@@ -127,7 +123,6 @@ For tagging to work correctly, ensure that the following are true in your system
 [4]: https://docs.datadoghq.com/tracing/service_catalog/adding_metadata/
 [5]: https://docs.datadoghq.com/network_monitoring/devices/
 [6]: https://docs.datadoghq.com/network_monitoring/devices/snmp_metrics/
-[7]: https://app.datadoghq.com/reference-tables
 [8]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
-[9]: https://app.datadoghq.com/event/pipelines
 [10]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
+[11]: /reference_tables/?tab=integrations#servicenow
