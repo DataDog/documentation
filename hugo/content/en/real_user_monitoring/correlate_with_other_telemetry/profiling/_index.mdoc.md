@@ -138,6 +138,58 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 {% /collapse-content %}
 
+### Step 3 - Collect profiles during page load (optional)
+
+By default, the Browser SDK starts the profiler when the SDK is started (when `datadogRum.init()` is called). Everything between the page load and that point is not captured.
+
+To profile the entire page load, add the early collection script to your page. It is a very small script (about 250 bytes gzipped) that starts the profiler before anything else runs. When the SDK starts, it takes over the running profiler, so the first profile covers the time from the start of the page.
+
+{% alert %}
+Early collection requires Browser SDK version <VERSION_TBD> or later, and the setup described in [Step 1](#step-1---set-up-rum) and [Step 2](#step-2---configure-the-profiling-sampling-rate). It is supported in browsers that implement the [JS Self-Profiling API][3] (Chromium-based browsers such as Chrome and Edge).
+{% /alert %}
+
+1. Make sure your web servers serve HTML pages with the `Document-Policy: js-profiling` HTTP response header, as described in Step 2. Without this header, early collection does nothing.
+
+2. Add the early collection script as the first script of your page, before any application script and before the RUM SDK bundle:
+
+    ```html
+    <head>
+      <script src="https://www.datadoghq-browser-agent.com/datadog-early-collection.js"></script>
+
+      <!-- Your RUM SDK bundle and other scripts come after -->
+      <script src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"></script>
+      <script>
+        window.DD_RUM.init({ /* ... */ profilingSampleRate: 25 })
+      </script>
+    </head>
+    ```
+
+    Do not add the `async` or `defer` attributes: the script must run synchronously, before your other scripts. The script is served from the Datadog CDN and cached by the browser, so it is downloaded only once and later page loads use the cached copy.
+
+    Do not modify the script. It has no configuration option.
+
+{% collapse-content title="Inline the early collection script" id="early-collection-inline" %}
+
+Instead of loading the script from the CDN, you can copy the content of `https://www.datadoghq-browser-agent.com/datadog-early-collection.js` and paste it in an inline `<script>` tag, as the first script of your page. This avoids a request for the script, but your copy does not receive updates. Loading the script from the CDN is the most future-proof option.
+
+```html
+<head>
+  <script>
+    /* Content of datadog-early-collection.js */
+  </script>
+  <!-- Your RUM SDK bundle and other scripts come after -->
+</head>
+```
+
+{% /collapse-content %}
+
+#### What to expect
+
+- **No data is sent by the script**: It does not make any network request itself. The collected profile is sent by the SDK, according to your `profilingSampleRate`, like any other profile.
+- **Silent fallback**: If the `Document-Policy: js-profiling` header is missing or the browser does not support the JS Self-Profiling API, the script does nothing and does not log any error. The SDK then starts profiling when it starts, as it does without early collection.
+- **Safe to include more than once**: If your page evaluates the script more than once (for example, from both a shared layout and a tag manager), only the earliest profiler is used.
+- **Identify early profiles**: View events whose profile was collected by the early profiler have the `@profiling.collection_type` attribute set to `early`. This attribute is absent for profiles started by the SDK.
+
 ## Explore profiling
 
 ### Within the Sessions Explorer
