@@ -1,0 +1,30 @@
+# Cloud Security option groups
+
+# Where does the Agentless scanner run?
+agentless_scanner_hosting_options:
+  - id: datadog_hosted
+    default: true
+  - id: self_hosted
+
+# Which cloud provider do you want to scan with Agentless Scanning?
+agentless_cloud_provider_options:
+  - id: aws
+    default: true
+  - id: azure
+  - id: google_cloud
+
+# Where does the Agentless scanner run for AWS?
+agentless_aws_scanner_hosting_options:
+  - id: datadog_hosted
+    default: true
+  - id: self_hosted
+
+# Where does the Agentless scanner run for Azure? (Datadog-hosted scanning is AWS only.)
+agentless_azure_scanner_hosting_options:
+  - id: self_hosted
+    default: true
+
+# Where does the Agentless scanner run for Google Cloud? (Datadog-hosted scanning is AWS only.)
+agentless_google_cloud_scanner_hosting_options:
+  - id: self_hosted
+    default: true

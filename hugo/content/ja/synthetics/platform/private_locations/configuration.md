@@ -65,7 +65,7 @@ synthetics-pl-worker.exe --config=<PathToYourConfiguration> --logFormat=json
 
 ## 主な構成オプション {#top-configuration-options}
 
-### Datadogサイトの構成 {#datadog-site-configuration}
+### Datadog サイトの構成 {#datadog-site-configuration}
 
 `site`
 : **タイプ**: 文字列 <br>
@@ -137,7 +137,7 @@ Datadog から取得されるテストの最大数。
 
 `maxAPIDownloadBodySize`
 : **タイプ**: 数値 <br>
-**デフォルト**: `52428800`<br>
+**デフォルト**:`52428800`<br>
 ダウンロードの最大 HTTP ボディサイズ (バイト単位)。デフォルトは 50 MB (50 * 1024 * 1024) です。
 
 `maxAPIBodySizeIfProcessed`
@@ -154,7 +154,7 @@ API テストの最大実行時間 (ミリ秒単位)。デフォルトは 1 分 
 
 ### ネットワークセキュリティ構成 {#network-security-configuration}
 
-プライベートロケーションは、構成でエグレスが制限されていない限り、そのホストがリーチ可能なあらゆるネットワークアドレスにリーチできます。新しいプライベートロケーション用に生成された構成ファイルでは、`enableDefaultBlockedIpRanges` が `true` に設定されます。ワーカーのデフォルトは `false` です。以下のオプションでエグレスを制限します。
+プライベートロケーションは、構成でエグレスが制限されていない限り、そのホストがリーチ可能なあらゆるネットワークアドレスにリーチできます。デフォルトでは、ワーカーは予約済みおよびプライベート IP アドレス範囲をブロックします (`enableDefaultBlockedIpRanges` は `true`)。このデフォルト設定はワーカーバージョン 1.77.0 以降に適用されます。それ以前のバージョンではデフォルトで `false` になります。以下のオプションでエグレスを制限します。
 
 `allowedIPRanges`、`blockedIPRanges`、`enableDefaultBlockedIpRanges`、`allowedDomainNames`、`blockedDomainNames`
 
@@ -260,7 +260,7 @@ JSON 構成ファイルへのパス。
 `--environmentVariableOverride`
 : **タイプ**: 文字列 <br>
 プライベートロケーションで実行されるテストで使用される変数を環境変数で上書きします。これには、コンテナ化環境で環境変数をインポートする必要があります。
-例えば、Docker の場合、`docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE` となります。
+たとえば、Docker の場合、`docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE` となります。
 この方法でインポートされたすべての変数は難読化されます。
 
 `--retryAPIErrors`
@@ -280,8 +280,8 @@ API テストで発生したエラーを再試行する
 
 `--enableDefaultBlockedIpRanges`
 : **タイプ**: ブール値 <br>
-**デフォルト**: `false`<br>
-`--allowedIPRanges` または `--allowedDomainNames` パラメーターで明示的に設定されたものを除き、予約済み IP 範囲 (IANA [IPv4][4] および [IPv6][5] Special-Purpose Address Registry) を使用するエンドポイントに対してユーザーが Synthetic テストを作成できないようにします。新しいプライベートロケーション用に生成された構成ファイルでは、このパラメーターが `true` に設定されます。ワーカーのデフォルトは `false` です。[プライベートロケーションネットワークのセキュリティ強化][6]を参照してください。
+**デフォルト**: `true` (ワーカーバージョン 1.77.0 以降。それ以前のバージョンでは `false`)<br>
+`--allowedIPRanges` または `--allowedDomainNames` パラメーターで明示的に設定されたものを除き、予約済み IP 範囲 (IANA [IPv4][4] および [IPv6][5] Special-Purpose Address Registries) を使用するエンドポイントに対してユーザーが Synthetic テストを作成できないようにします。[プライベートロケーションネットワークのセキュリティ強化][6]を参照してください。
 
 `--allowedDomainNames`
 : **タイプ**: 配列 <br>

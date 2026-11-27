@@ -546,6 +546,44 @@ aws emr-serverless start-job-run \
     )
 ```
 
+### Link your Databricks jobs with Airflow tasks
+
+The Databricks provider can inject Airflow's parent job information into Databricks job runs, linking each Databricks job run to the Airflow task that triggered it. This works with both `DatabricksSubmitRunOperator` and `DatabricksRunNowOperator`.
+
+**Requirements**:
+- `apache-airflow-providers-databricks` 7.20.0 or later. Versions 7.17.0 to 7.19.x support only `DatabricksSubmitRunOperator` runs that create a `new_cluster`.
+- Your Databricks jobs are monitored through [Data Observability: Jobs Monitoring][2].
+
+To enable injection, set the following in your Airflow configuration:
+
+```ini
+[openlineage]
+spark_inject_parent_job_info = True
+```
+
+Or set the equivalent environment variable:
+
+```shell
+AIRFLOW__OPENLINEAGE__SPARK_INJECT_PARENT_JOB_INFO=true
+```
+
+To enable injection for a single task, or to opt a task out, set `openlineage_inject_parent_job_info` on the operator:
+
+```python
+DatabricksRunNowOperator(
+    task_id="run_databricks_job",
+    job_id=<JOB_ID>,
+    job_parameters={"env": "prod"},
+    openlineage_inject_parent_job_info=True,
+)
+```
+
+The parent job information is passed to Databricks as follows:
+- `DatabricksSubmitRunOperator`: as `spark.openlineage.parent*` and `spark.openlineage.rootParent*` properties in the `spark_conf` of each `new_cluster`, and as an `OPENLINEAGE_CONTEXT` parameter on notebook, Python wheel, SQL, and Run Job tasks. Spark JAR, Spark Python, and Spark Submit tasks are linked only when they run on a `new_cluster`.
+- `DatabricksRunNowOperator`: as the `OPENLINEAGE_CONTEXT` job parameter. The job does not need to declare this parameter.
+
+<div class="alert alert-info">If you manually set any <code>spark.openlineage.parent*</code> property in a cluster's <code>spark_conf</code>, the Spark properties are not injected for that cluster. <code>DatabricksRunNowOperator</code> skips injection when it uses legacy parameter fields such as <code>notebook_params</code> or <code>jar_params</code>; pass parameters through <code>job_parameters</code> instead.</div>
+
 ### Backport OpenLineage lineage macros for older provider versions
 
 The `lineage_root_job_namespace`, `lineage_root_job_name`, and `lineage_root_run_id` macros that emit the outermost DAG identifiers for root-parent linking were added in `apache-airflow-providers-openlineage` 2.3.0. If you cannot upgrade the provider (for example, Amazon MWAA on Airflow 2.9.2 pins provider 2.2.0), define the missing macros as `user_defined_macros` on the DAG:

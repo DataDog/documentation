@@ -2597,6 +2597,123 @@ menu:
       url: /api/latest/notebooks/
       identifier: notebooks
       generated: true
+    - name: Update a notebook widget
+      url: /api/latest/notebooks/update-a-notebook-widget/
+      identifier: notebooks-update-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookWidget
+        unstable:
+          - v2
+        order: 12
+    - name: Get a notebook widget
+      url: /api/latest/notebooks/get-a-notebook-widget/
+      identifier: notebooks-get-a-notebook-widget
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookWidget
+        unstable:
+          - v2
+        order: 11
+    - name: List notebook widgets
+      url: /api/latest/notebooks/list-notebook-widgets/
+      identifier: notebooks-list-notebook-widgets
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookWidgets
+        unstable:
+          - v2
+        order: 10
+    - name: Update a notebook task
+      url: /api/latest/notebooks/update-a-notebook-task/
+      identifier: notebooks-update-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookTask
+        unstable:
+          - v2
+        order: 9
+    - name: Get a notebook task
+      url: /api/latest/notebooks/get-a-notebook-task/
+      identifier: notebooks-get-a-notebook-task
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookTask
+        unstable:
+          - v2
+        order: 8
+    - name: List notebook tasks
+      url: /api/latest/notebooks/list-notebook-tasks/
+      identifier: notebooks-list-notebook-tasks
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookTasks
+        unstable:
+          - v2
+        order: 7
+    - name: Get a notebook section
+      url: /api/latest/notebooks/get-a-notebook-section/
+      identifier: notebooks-get-a-notebook-section
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetNotebookSection
+        unstable:
+          - v2
+        order: 6
+    - name: List notebook sections
+      url: /api/latest/notebooks/list-notebook-sections/
+      identifier: notebooks-list-notebook-sections
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListNotebookSections
+        unstable:
+          - v2
+        order: 5
+    - name: Update notebook content
+      url: /api/latest/notebooks/update-notebook-content/
+      identifier: notebooks-update-notebook-content
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateNotebookContent
+        unstable:
+          - v2
+        order: 4
     - name: Update a notebook
       url: /api/latest/notebooks/update-a-notebook/
       identifier: notebooks-update-a-notebook
@@ -2605,9 +2722,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - UpdateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 4
     - name: Get a notebook
       url: /api/latest/notebooks/get-a-notebook/
@@ -2617,9 +2736,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 5
     - name: Delete a notebook
       url: /api/latest/notebooks/delete-a-notebook/
@@ -2641,9 +2762,11 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - CreateNotebook
-        unstable: []
+        unstable:
+          - v2
         order: 1
     - name: Get all notebooks
       url: /api/latest/notebooks/get-all-notebooks/
@@ -4069,6 +4192,19 @@ menu:
         unstable:
           - v2
         order: 157
+    - name: Get AWS IAM Identity Center account prerequisites
+      url: /api/latest/security-monitoring/get-aws-iam-identity-center-account-prerequisites/
+      identifier: security-monitoring-get-aws-iam-identity-center-account-prerequisites
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSIdentityCenterAWSAccounts
+        unstable:
+          - v2
+        order: 191
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration
@@ -8078,6 +8214,71 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Set a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/set-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-set-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 58
+    - name: Get a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/get-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-get-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 57
+    - name: Delete a model pricing override by canonical ID
+      url: /api/latest/ai-gateway/delete-a-model-pricing-override-by-canonical-id/
+      identifier: ai-gateway-delete-a-model-pricing-override-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelPricingByCanonical
+        unstable:
+          - v2
+        order: 56
+    - name: Update a provider model by canonical ID
+      url: /api/latest/ai-gateway/update-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-update-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 60
+    - name: Delete a provider model by canonical ID
+      url: /api/latest/ai-gateway/delete-a-provider-model-by-canonical-id/
+      identifier: ai-gateway-delete-a-provider-model-by-canonical-id
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIGatewayModelByCanonical
+        unstable:
+          - v2
+        order: 59
     - name: Update an AI Gateway provider
       url: /api/latest/ai-gateway/update-an-ai-gateway-provider/
       identifier: ai-gateway-update-an-ai-gateway-provider
@@ -8953,8 +9154,7 @@ menu:
           - v2
         operationids:
           - GetAgentHealthIssue
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: List Agent Health issues
       url: /api/latest/agent-health/list-agent-health-issues/
@@ -8966,8 +9166,7 @@ menu:
           - v2
         operationids:
           - ListAgentHealthIssues
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List active Agent Health issues
       url: /api/latest/agent-health/list-active-agent-health-issues/
@@ -10894,6 +11093,71 @@ menu:
       url: /api/latest/bits-security-analyst/
       identifier: bits-security-analyst
       generated: true
+    - name: Update outreach policy rules
+      url: /api/latest/bits-security-analyst/update-outreach-policy-rules/
+      identifier: bits-security-analyst-update-outreach-policy-rules
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachPolicyRules
+        unstable:
+          - v2
+        order: 6
+    - name: Remove an allowed outreach domain
+      url: /api/latest/bits-security-analyst/remove-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-remove-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 8
+    - name: Add an allowed outreach domain
+      url: /api/latest/bits-security-analyst/add-an-allowed-outreach-domain/
+      identifier: bits-security-analyst-add-an-allowed-outreach-domain
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddSecurityAgentOutreachPolicyDomain
+        unstable:
+          - v2
+        order: 7
+    - name: Update the outreach mode
+      url: /api/latest/bits-security-analyst/update-the-outreach-mode/
+      identifier: bits-security-analyst-update-the-outreach-mode
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityAgentOutreachMode
+        unstable:
+          - v2
+        order: 5
+    - name: Get the user outreach policy
+      url: /api/latest/bits-security-analyst/get-the-user-outreach-policy/
+      identifier: bits-security-analyst-get-the-user-outreach-policy
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentOutreachPolicy
+        unstable:
+          - v2
+        order: 4
     - name: Get a Bits Security Analyst investigation
       url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
       identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
@@ -15057,8 +15321,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGatesEvaluationResult
-        unstable:
-          - v2
+        unstable: []
         order: 12
     - name: Trigger a deployment gate evaluation
       url: /api/latest/deployment-gates/trigger-a-deployment-gate-evaluation/
@@ -15070,8 +15333,7 @@ menu:
           - v2
         operationids:
           - TriggerDeploymentGatesEvaluation
-        unstable:
-          - v2
+        unstable: []
         order: 11
     - name: Update deployment gate
       url: /api/latest/deployment-gates/update-deployment-gate/
@@ -15083,8 +15345,7 @@ menu:
           - v2
         operationids:
           - UpdateDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get deployment gate
       url: /api/latest/deployment-gates/get-deployment-gate/
@@ -15096,8 +15357,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete deployment gate
       url: /api/latest/deployment-gates/delete-deployment-gate/
@@ -15109,8 +15369,7 @@ menu:
           - v2
         operationids:
           - DeleteDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Update deployment rule
       url: /api/latest/deployment-gates/update-deployment-rule/
@@ -15122,8 +15381,7 @@ menu:
           - v2
         operationids:
           - UpdateDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Get deployment rule
       url: /api/latest/deployment-gates/get-deployment-rule/
@@ -15135,8 +15393,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Delete deployment rule
       url: /api/latest/deployment-gates/delete-deployment-rule/
@@ -15148,8 +15405,7 @@ menu:
           - v2
         operationids:
           - DeleteDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: Create deployment rule
       url: /api/latest/deployment-gates/create-deployment-rule/
@@ -15161,8 +15417,7 @@ menu:
           - v2
         operationids:
           - CreateDeploymentRule
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get rules for a deployment gate
       url: /api/latest/deployment-gates/get-rules-for-a-deployment-gate/
@@ -15174,8 +15429,7 @@ menu:
           - v2
         operationids:
           - GetDeploymentGateRules
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: List deployment gate rule evaluations
       url: /api/latest/deployment-gates/list-deployment-gate-rule-evaluations/
@@ -15187,8 +15441,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentRuleEvaluations
-        unstable:
-          - v2
+        unstable: []
         order: 14
     - name: List deployment gate evaluations
       url: /api/latest/deployment-gates/list-deployment-gate-evaluations/
@@ -15200,8 +15453,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentGateEvaluations
-        unstable:
-          - v2
+        unstable: []
         order: 13
     - name: Create deployment gate
       url: /api/latest/deployment-gates/create-deployment-gate/
@@ -15213,8 +15465,7 @@ menu:
           - v2
         operationids:
           - CreateDeploymentGate
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get all deployment gates
       url: /api/latest/deployment-gates/get-all-deployment-gates/
@@ -15226,8 +15477,7 @@ menu:
           - v2
         operationids:
           - ListDeploymentGates
-        unstable:
-          - v2
+        unstable: []
         order: 10
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
@@ -17194,6 +17444,75 @@ menu:
           - v2
         operationids:
           - ListForms
+        unstable:
+          - v2
+        order: 1
+    - name: GitHub Costs Integration
+      url: /api/latest/github-costs-integration/
+      identifier: github-costs-integration
+      generated: true
+    - name: Update a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/update-a-github-costs-integration-account/
+      identifier: github-costs-integration-update-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/get-a-github-costs-integration-account/
+      identifier: github-costs-integration-get-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/delete-a-github-costs-integration-account/
+      identifier: github-costs-integration-delete-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/create-a-github-costs-integration-account/
+      identifier: github-costs-integration-create-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List GitHub Costs integration accounts
+      url: /api/latest/github-costs-integration/list-github-costs-integration-accounts/
+      identifier: github-costs-integration-list-github-costs-integration-accounts
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCostsIntegrationAccounts
         unstable:
           - v2
         order: 1
@@ -23295,8 +23614,7 @@ menu:
           - v2
         operationids:
           - ListTeamsOwnershipRules
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get a teams ownership mapping
       url: /api/latest/rum-teams-ownership/get-a-teams-ownership-mapping/
@@ -23308,8 +23626,7 @@ menu:
           - v2
         operationids:
           - GetTeamsOwnershipMapping
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete a teams ownership mapping
       url: /api/latest/rum-teams-ownership/delete-a-teams-ownership-mapping/
@@ -23321,8 +23638,7 @@ menu:
           - v2
         operationids:
           - DeleteTeamsOwnershipMapping
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Bulk create and remove teams ownership mappings
       url: /api/latest/rum-teams-ownership/bulk-create-and-remove-teams-ownership-mappings/
@@ -23334,8 +23650,7 @@ menu:
           - v2
         operationids:
           - CreateTeamsOwnershipMappingsBatch
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Create a teams ownership mapping
       url: /api/latest/rum-teams-ownership/create-a-teams-ownership-mapping/
@@ -23347,8 +23662,7 @@ menu:
           - v2
         operationids:
           - CreateTeamsOwnershipMapping
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List teams ownership mappings
       url: /api/latest/rum-teams-ownership/list-teams-ownership-mappings/
@@ -23360,8 +23674,7 @@ menu:
           - v2
         operationids:
           - ListTeamsOwnershipMappings
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: SCIM
       url: /api/latest/scim/
@@ -23776,6 +24089,30 @@ menu:
       url: /api/latest/sensitive-data-scanner/
       identifier: sensitive-data-scanner
       generated: true
+    - name: Get Agent Observability Scanning Group
+      url: /api/latest/sensitive-data-scanner/get-agent-observability-scanning-group/
+      identifier: sensitive-data-scanner-get-agent-observability-scanning-group
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScanningGroup
+        unstable: []
+        order: 11
+    - name: List Agent Observability Scanning Groups
+      url: /api/latest/sensitive-data-scanner/list-agent-observability-scanning-groups/
+      identifier: sensitive-data-scanner-list-agent-observability-scanning-groups
+      parent: sensitive-data-scanner
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTargetScanningGroups
+        unstable: []
+        order: 10
     - name: List standard patterns
       url: /api/latest/sensitive-data-scanner/list-standard-patterns/
       identifier: sensitive-data-scanner-list-standard-patterns

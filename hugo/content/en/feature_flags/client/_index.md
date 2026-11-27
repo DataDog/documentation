@@ -42,7 +42,7 @@ Flag evaluation opt-out and experimentation opt-out control different behaviors 
 
 ## Telemetry options by platform
 
-The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
+The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. The following Boolean options default to `true`; set an option to `false` to disable its behavior. Flutter OpenFeature RUM association requires an explicit hook.
 
 The web options below apply to `DatadogProvider`, the recommended browser provider. The advanced `DatadogCoreProvider` does not enable telemetry automatically. Applications using it explicitly register tracking hooks and manage their life cycle. See [Browser Rules-Based Evaluation][1].
 
@@ -72,11 +72,11 @@ Default: `true`. Set to `false` to disable.
 
 ### Attach evaluations to RUM
 
-Default: `true`. Set to `false` to disable.
+The Boolean options default to `true`. Set to `false` to disable. For Flutter OpenFeature, register the RUM hook explicitly.
 
 - **Web** (`@datadog/openfeature-browser`): `enableRumFeatureFlagTracking`
 - **Android** (`dd-sdk-android-flags`): `rumIntegrationEnabled`
-- **Flutter** (`datadog_flags_flutter`): `rumIntegrationEnabled`
+- **Flutter** (`datadog_flags_flutter`): Register `DatadogRumHook` with the OpenFeature API. Omit the hook to disable RUM association. The legacy plugin uses `rumIntegrationEnabled`. See [Dart and Flutter setup][4].
 - **iOS** (`DatadogFlags`): `rumIntegrationEnabled`
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed
@@ -138,3 +138,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [2]: /feature_flags/concepts/flag_key_obfuscation/
 [3]: /feature_flags/concepts/opt_out/
+[4]: /feature_flags/client/flutter/#flutter-integrated-setup

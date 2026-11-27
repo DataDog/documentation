@@ -82,6 +82,10 @@ Click any finding to open a side panel that shows:
 - {{< ui >}}Details{{< /ui >}}: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
 - {{< ui >}}Remediation{{< /ui >}}: If available, suggested code fixes are provided for findings that support remediation.
 
+### Prioritize misconfigurations with runtime context
+
+IaC Security findings show the services that each finding maps to and the runtime risks those services carry, such as {{< ui >}}In Production{{< /ui >}} and {{< ui >}}Exposed to Attacks{{< /ui >}}. A mapping means that the IaC file is in the mapped service's repository or deployment files. It does not confirm that the misconfiguration is present in the running service. Use the {{< ui >}}Risks{{< /ui >}} facets to focus on findings mapped to live, exposed services. For more information, see [Prioritize Findings with Runtime Context][15].
+
 ### Create Jira tickets from findings
 
 You can create a bidirectional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][4].
@@ -123,3 +127,4 @@ Exclusions are managed through a configuration file or inline comments in your I
 [12]: /pr_gates/setup
 [13]: /security/code_security/iac_security/iac_rules
 [14]: /security/code_security/iac_security/custom_rules
+[15]: /security/code_security/runtime_context/

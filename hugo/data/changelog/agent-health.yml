@@ -28,3 +28,11 @@ entries:
       - ListAgentHealthHostIssues
       - ListAgentHealthIssues
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-23'
+    link: https://github.com/DataDog/documentation/pull/42111
+    operations:
+      - GetAgentHealthIssue
+      - ListAgentHealthIssues
+    title: Add pagination to the Agent Health issues API and promote it to 
+      general availability

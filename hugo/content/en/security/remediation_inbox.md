@@ -13,13 +13,7 @@ further_reading:
 - link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
-- link: "/security/cloud_security_management/vulnerabilities/"
-  tag: "Documentation"
-  text: "Cloud Security Vulnerabilities"
 products:
-- name: Cloud Security
-  url: /security/cloud_security_management/
-  icon: cloud-security-management
 - name: Code Security
   url: /security/code_security/
   icon: security-code-security
@@ -35,27 +29,35 @@ products:
 The Remediation Inbox is in Preview.
 {{< /callout >}}
 
-The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. Instead of listing individual findings, it groups findings by the single fix that resolves them, such as one package upgrade in a repository or one container image update. Each group is a **remediation**.
+## Overview
 
-Use the Remediation Inbox to find the fixes that close the most critical findings. From a remediation, you can review its impact, assign an owner, track the work in a **remediation case** in [Work Management][2], and generate a pull request with AI.
+The Remediation Inbox groups your [Software Composition Analysis][3] (SCA) findings by the fix that resolves them, such as one package upgrade in a repository. Each group is a **remediation**. Instead of triaging findings one at a time, your team can prioritize the fixes that close the most critical findings first.
 
-To open the Remediation Inbox, go to [Security Inbox > Remediations][11] in Datadog.
+From a remediation, you can review its impact, assign an owner, track the work in a **remediation case** in [Work Management][2], and generate a pull request with AI.
+
+The Remediation Inbox is the **Remediations** tab of [Security Inbox][1]. To open it, go to [Security Inbox > Remediations][11].
 
 {{< img src="security/remediation_inbox/remediations_tab.png" alt="The Remediations tab of Security Inbox, listing package updates with the findings each one closes, its scope, and its tracking status." width="100%">}}
 
+A typical workflow in the Remediation Inbox:
+
+1. Filter the inbox to the remediations your team owns. See the [Filter remediations](#filter-remediations) section.
+1. Open the top-ranked remediation to review its impact. See the [How remediations are prioritized](#how-remediations-are-prioritized) section.
+1. Assign an owner and create a case or ticket to track the work.
+1. Fix the issue with AI or link a pull request you opened yourself.
+1. Track the remediation until its findings are resolved and the case closes.
+
 ## Prerequisites
 
-You need findings from at least one of the following products:
-
-- [Software Composition Analysis][3] (SCA) library vulnerabilities
-- [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
+You need SCA library vulnerability findings.
 
 You also need the [permissions][13] for the actions you take:
 
 | Action | Required permissions |
 |---|---|
 | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
-| Create cases, assign owners, link pull requests, and generate fixes with Bits Code | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Create cases, assign owners, and link pull requests | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
+| Generate fixes with Bits Code | `security_monitoring_findings_read` or `appsec_vm_read`, `cases_write`, and `bits_dev_write` (Bits Code Write) |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see the [Enable remediation capabilities](#enable-remediation-capabilities) section.
 
@@ -66,9 +68,10 @@ A remediation groups the open findings that a single change resolves:
 | Product | Remediation | Example |
 |---|---|---|
 | Software Composition Analysis | Update one package in one repository | Update `lodash` in `my-org/web-app` |
-| Cloud Security Vulnerabilities | Update one container image, update a base image, or update one OS package | Update `my-registry/api:1.4` |
 
 Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the findings and files affected, and the code owners of those files.
+
+Every remediation has an available fix, but AI can't generate every fix. For fixes AI can't generate, [create a case or ticket](#create-a-case-or-ticket) or [link a pull request](#link-a-pull-request) you opened yourself.
 
 ## How remediations are prioritized
 
@@ -79,6 +82,8 @@ Remediations are ranked by the findings they close:
 1. Total number of findings, when both counts are equal
 
 For example, a remediation that closes 5 critical findings ranks above one that closes 2 critical and 50 high findings.
+
+Exploit availability does not affect ranking. To focus on exploitable vulnerabilities, filter by **Risk**.
 
 ## Explore remediations
 
@@ -99,7 +104,7 @@ The status of a remediation follows the status of its remediation case. See the 
 
 Each row is one remediation, with the following columns:
 
-- **Remediation**: The change to make, such as the package or image to update and the target version.
+- **Remediation**: The change to make, such as the package to update and the target version.
 - **Impact**: The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
 - **Scope**: Where the fix applies (repository and files) and the code owners or teams responsible for it.
 - **Tracking**: The assignee, the remediation case or synced ticket, and any linked pull requests.
@@ -110,7 +115,7 @@ Use the filter bar to focus on the remediations your team can act on. Filters ap
 
 - **Ownership**: Filter by team, code owner, repository, or service to see the fixes your team owns.
 - **Risk**: Filter by severity or exploit availability to focus on the most urgent fixes.
-- **Finding type**: Filter by the type of finding, such as library or container image vulnerabilities.
+- **Finding type**: Filter by the type of finding.
 - **Vulnerability**: Filter by CVE or package to track a specific issue across your environment.
 - **Triage**: Filter by the assignee of the remediation case to see the remediations assigned to you.
 
@@ -123,7 +128,7 @@ Click a remediation to open its side panel:
 - **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If AI features are not available for your organization, Datadog shows a summary of the impact instead.
 - **Ticketing, Assignee, and PRs**: The remediation case, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
-- **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
+- **View findings**: Open the findings of the remediation in the SCA explorer.
 
 {{< img src="security/remediation_inbox/side_panel.png" alt="The side panel of a package update remediation, showing its summary, ticketing and assignee details, and the vulnerabilities the fix closes." width="100%">}}
 
@@ -177,21 +182,21 @@ If you fixed the issue outside Datadog, click **Link PR** in the side panel and 
 
 Datadog records each fix, whether a Bits Code session or a linked pull request, as a child case of the remediation case. Child cases can have their own owners, which lets several people work on parts of the same remediation.
 
-While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. Findings stay open until the pull request merges and the next scan confirms the fix.
+While a linked pull request is open or in draft, the side panel shows **PR opened — awaiting merge**. After the pull request merges, findings stay open until the next scan confirms the fix. Scan frequency depends on the product, and status updates can take up to an hour to appear after the scan.
 
-Findings that belong to a remediation case show the linked case in the SCA and Cloud Security Vulnerabilities explorers and in the finding side panel, so anyone investigating a finding can see that a fix is already underway.
+Findings that belong to a remediation case show the linked case in the SCA explorer and in the finding side panel, so anyone investigating a finding can see that a fix is already underway.
 
 ### Remediation lifecycle
 
 Datadog updates the status of remediation cases automatically:
 
 - A remediation case moves to **In Progress** when a fix starts, such as a Bits Code session or a linked pull request.
-- A remediation case closes when the remediation has no open findings. Findings leave a remediation when they are fixed, muted, or expired.
+- A remediation case closes when the remediation has no open findings. Findings leave a remediation when they are fixed, muted, or expired. A finding expires when scans no longer detect it and no fix was recorded.
 - A closed remediation case, including one closed manually, reopens if the remediation has open findings again within 30 days.
 
-Status updates can take up to an hour to appear.
-
 ## Enable remediation capabilities
+
+Fix with Bits, pull request status, and linked pull requests are supported only for GitHub repositories.
 
 | Capability | What it enables | How to enable |
 |---|---|---|
@@ -209,7 +214,6 @@ Status updates can take up to an hour to appear.
 [1]: /security/security_inbox/
 [2]: /incident_response/work_management/
 [3]: /security/code_security/software_composition_analysis/
-[4]: /security/cloud_security_management/vulnerabilities/
 [5]: /incident_response/work_management/projects/
 [6]: /bits_ai/bits_code/
 [7]: /security/code_security/dev_tool_int/mcp_server/

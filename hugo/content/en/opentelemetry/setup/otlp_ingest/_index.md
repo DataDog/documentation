@@ -1,5 +1,6 @@
 ---
 title: Datadog OTLP Intake Endpoint
+description: Send OpenTelemetry traces, metrics, and logs straight from your applications to the Datadog OTLP intake, with no Collector or Agent.
 aliases:
 - /opentelemetry/setup/intake_endpoint/
 - /opentelemetry/setup/agentless/

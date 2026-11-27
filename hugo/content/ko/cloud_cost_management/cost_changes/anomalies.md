@@ -9,7 +9,7 @@ further_reading:
 - link: /cloud_cost_management/cost_changes/monitors
   tag: 모니터
   text: 비용 모니터 생성
-title: 이상 징후 페이지
+title: Anomalies 페이지
 ---
 ## 개요 {#overview}
 
@@ -19,10 +19,10 @@ Datadog Cloud Cost Management(CCM)는 환경을 지속적으로 모니터링하�
 
 일반적인 워크플로는 다음과 같습니다.
 
-1. **조회**: {{< ui >}}Anomalies{{< /ui >}} 탭에서 이상 징후를 조회합니다.
-2. **조사**: Watchdog Explains를 사용하여 비용 변화의 원인을 파악합니다.
-3. **엔지니어링 팀과 공유**: 세부 정보를 검토하고, 추가 조사를 수행하거나, 모니터링을 설정하여 조치를 취할 수 있도록 합니다.
-4. **해결**: 예상되었거나 중요하지 않은 이상 징후를 해결합니다.
+1. {{< ui >}}Anomalies{{< /ui >}} 탭에서 이상 징후를 **조회**합니다.
+2. Watchdog Explains를 사용하여 **조사**를 진행해 비용 변화의 원인을 파악합니다.
+3. 세부 정보를 검토하고, 추가 조사를 수행하거나, 모니터링을 설정하여 조치를 취할 수 있는 **엔지니어링 팀과 공유**합니다.
+4. 예상되었거나 중요하지 않은 이상 징후를 **해결**합니다.
 
 ## 이상 징후 정의 방법 {#how-anomalies-are-defined}
 
@@ -39,7 +39,7 @@ Datadog Cloud Cost Management(CCM)는 환경을 지속적으로 모니터링하�
 
 이상 징후 탐지를 사용자 지정하려면 다음 단계를 따르세요.
 
-1. [{{< ui >}}Anomalies{{< /ui >}} 탭][1]에서 {{< ui >}}Configure{{< /ui >}}를 클릭합니다.
+1. [{{< ui >}}Anomalies{{< /ui >}} 탭][1]에서 {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Detection rules{{< /ui >}}를 클릭합니다.
 1. {{< ui >}}Configure Cost Anomalies{{< /ui >}} 패널에서 공급자를 선택합니다. 체크 표시는 공급자가 사용자 지정 설정을 사용함을 나타내고, 빈 원은 Datadog의 기본 설정을 사용함을 나타냅니다.
 1. 선택한 공급자에 대해 다음 설정을 조정합니다.
    - **Detection dimension**: Datadog이 비용 이상 징후를 탐지하는 차원입니다(예: 서비스 또는 요금 설명). 이 설정은 필수입니다.
@@ -70,7 +70,7 @@ Datadog Cloud Cost Management(CCM)는 환경을 지속적으로 모니터링하�
 
 ### 이상 징후 유발 원인 파악 {#understand-what-drives-anomalies}
 
-CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 비용 이상 징후를 유발하는 원인을 파악하도록 돕습니다. Watchdog Explains는 다음의 구체적인 항목을 분석하고 식별합니다.
+CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 비용 이상 징후를 유발하는 원인을 파악하도록 돕습니다. Watchdog Explains는 다음 중 이상 징후가 발생한 구체적인 항목을 분석하고 식별합니다.
 
 - 계정
 - 팀
@@ -78,7 +78,7 @@ CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 �
 - Kubernetes 또는 ECS 클러스터
 - 리전
 
-이와 같이 이상 징후가 발생한 위치를 파악하여 수동 조사 단계를 줄여줍니다. 이상 징후 그래프 위에 마우스를 올리면 두 개의 그래프를 볼 수 있습니다. 하나는 Watchdog Explains가 식별한 태그가 포함된 그래프이고, 다른 하나는 포함되지 않은 그래프입니다. 이는 특정 태그를 제거했을 때 급증 현상이 어떻게 완화되는지를 보여주며, 비용에 미치는 영향을 확인해 줍니다.
+이를 통해 수동 조사 단계가 줄어듭니다. 이상 징후 그래프 위로 마우스를 가져가면 두 개의 그래프를 볼 수 있습니다. 하나는 Watchdog Explains가 식별한 태그가 포함된 그래프이고, 다른 하나는 포함되지 않은 그래프입니다. 특정 태그를 제거했을 때 급증 현상이 어떻게 완화되는지 표시되어 비용에 미치는 영향을 확인할 수 있습니다.
 
 ### 이상 징후에 대한 조치 취하기 {#take-action-on-anomalies}
 
@@ -89,11 +89,11 @@ CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 �
    {{< img src="cloud_cost/anomalies/anomalies-watchdog.png" alt="See More를 클릭하여 이상 징후 세부 정보, 조사 옵션 및 작업 버튼이 표시된 사이드 패널을 확인합니다." style="width:80;" >}}
 
 1.  영향을 받는 서비스, 관련된 팀, 영향을 받는 환경, 리소스 ID 또는 사용량 및 단가가 비용 이상 징후를 유발하는 방식에 대한 세부 정보를 검토합니다.
-1. **추가 조사**: Cost Explorer 또는 Datadog 노트북에서 이상 징후를 확인하여 추가 차원을 사용해 더 자세히 조사합니다. 그런 다음 이상 징후, 탐색기 링크 또는 노트북을 Watchdog Explains에서 식별한 서비스 소유자나 팀에 보낼 수 있습니다. 이를 통해 팀은 이상 징후가 발생한 이유와 예상된 상황인지 여부에 대한 컨텍스트를 바탕으로 이상 징후를 해결할 수 있습니다.
+1. **추가 조사**: Cost Explorer 또는 Datadog 노트북에서 이상 징후를 확인하여 추가 차원을 사용해 더 자세히 조사합니다. 그런 다음 이상 징후, Explorer 링크 또는 노트북을 Watchdog Explains에서 식별한 서비스 소유자나 팀에 보낼 수 있습니다. 이를 통해 팀은 이상 징후가 발생한 이유와 예상된 상황인지 여부에 대한 컨텍스트를 바탕으로 이상 징후를 해결할 수 있습니다.
 
    {{< img src="cloud_cost/anomalies/anomalies-take-action.png" alt="Take Action을 클릭하여 Cost Explorer에서 이상 징후를 확인하거나 노트북에 추가합니다." style="width:80;" >}}
-1. **모니터링 설정**: 유사한 패턴에 대한 비용 이상 징후 모니터를 생성하거나 향후 발생할 이상 징후에 대한 경보를 구성합니다.
-   {{< img src="cloud_cost/anomalies/anomalies-create-monitor.png" alt="비용 이상 징후 모니터 생성" style="width:80;" >}}
+1. **모니터링 설정**: 유사한 패턴에 대한 비용 이상 탐지 모니터를 생성하거나 향후 발생할 이상 징후에 대한 경보를 구성합니다.
+   {{< img src="cloud_cost/anomalies/anomalies-create-monitor.png" alt="비용 이상 탐지 모니터 생성" style="width:80;" >}}
 
 ## 이상 징후 해결 {#resolve-anomalies}
 
@@ -113,9 +113,37 @@ CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 �
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-unexpected-1.png" alt="설명 필드가 포함된 예상치 못한 이상 징후 표시 양식" style="width:80;" >}}
 
+## 실시간 이상 알림 {#real-time-anomaly-notifications}
+
+실시간 이상 알림은 예상 AI 비용 또는 [실시간 클라우드 컴퓨팅 비용][6]이 예기치 않게 증가한 후 15분 이내에 사용자에게 이에 대해 경고합니다. 청구 데이터는 일반적으로 사용 후 2~3일이 지나야 제공되므로 청구 데이터에서 탐지된 비용 이상이 나타나기까지는 시간이 더 걸립니다.
+
+실시간 이상 알림에는 예상 비용 데이터가 필요합니다. 즉, AI 비용에는 Agent Observability의 LLM 비용 데이터가, 클라우드 컴퓨팅 비용에는 [실시간 비용][6]이 필요합니다. 전체 요구 사항은 [실시간 이상 탐지 모니터 전제 조건][8]을 참조하세요.
+
+실시간 이상 알림을 설정하려면 다음 단계를 따르세요.
+
+1. [{{< ui >}}Anomalies{{< /ui >}} 탭][1]에서 {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}를 클릭합니다.
+1. {{< ui >}}AI providers{{< /ui >}}를 선택하고 {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}}를 설정하거나, {{< ui >}}Cloud/SaaS providers{{< /ui >}}를 선택하고 {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}를 설정합니다. {{< ui >}}Cloud/SaaS providers{{< /ui >}} 옵션은 AWS, Azure 및 Google Cloud에 적용됩니다.
+1. {{< ui >}}Specify cost scope & alert conditions{{< /ui >}} 아래에서 필요시 최대 2개의 태그를 기준으로 경보를 그룹화하고 비용을 필터링합니다.
+1. 최소 비용 영향을 설정합니다. Datadog은 다음 24시간 동안 이상으로 인한 비용이 다음 중 더 높은 금액을 초과할 가능성이 있는 경우에만 알림을 보냅니다.
+   - 조직 통화 기준 금액: 0보다 큰 정수(기본값: 500)
+   - 기준 비용의 백분율: 0~100%(기본값: 5%)
+1. {{< ui >}}Choose who to notify{{< /ui >}} 아래에서 이메일 주소 또는 Slack 채널을 추가합니다.
+1. {{< ui >}}Save configuration{{< /ui >}}을 클릭합니다. 변경 사항은 저장 후 탐지되는 이상에 적용됩니다.
+
+실시간 이상은 알림으로만 전송됩니다. 실시간 이상은 {{< ui >}}Anomalies{{< /ui >}} 탭에 표시되지 않으며 확정된 청구 데이터에서 탐지된 이상에도 영향을 주지 않습니다.
+
+양식을 저장하면 `ccm_realtime_anomaly_notifications:true` 태그가 지정된 실시간 이상 탐지 모니터가 생성됩니다.
+
+- 경보를 그룹화하지 않으면 Datadog은 모니터를 하나 생성합니다.
+- 태그를 기준으로 경보를 그룹화하면 Datadog은 각 태그에 대해 모니터를 하나씩 생성합니다. 예를 들어, 2개의 태그를 기준으로 그룹화하면 두 태그 모두를 기준으로 그룹화된 모니터 하나가 생성되는 것이 아니라 2개의 모니터가 생성되고 각 모니터가 태그 중 하나를 기준으로 그룹화됩니다.
+
+실시간 이상 알림을 중지하려면 {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}} 또는 {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}를 해제하고 {{< ui >}}Save configuration{{< /ui >}}을 클릭합니다. Datadog은 해당 비용 유형에 대해 양식이 생성한 모니터를 삭제합니다. 별도로 생성한 모니터는 영향을 받지 않습니다.
+
+사용자 지정 알림 메시지가 필요하거나 공급자당 구성이 2개 이상인 경우, 대신 [실시간 이상 탐지 모니터를 생성][7]하세요.
+
 ## 문제 해결 {#troubleshooting}
 
-예상되는 이상 징후가 나타나지 않는 경우 다음 단계를 따르세요.
+예상되는 이상 징후가 나타나지 않는 경우 다음과 같이 하세요.
 - CCM이 [올바르게 설정][3]되었는지 확인합니다.
 - AWS, Azure, Google Cloud 또는 Oracle Cloud에 필요한 권한이 있는지 검사합니다.
 - 이상 징후 보기의 시간 범위를 검토합니다.
@@ -131,3 +159,6 @@ CCM은 조사 도우미인 [Watchdog Explains][2]를 자동으로 사용하여 �
 [3]: /ko/cloud_cost_management/setup/
 [4]: /ko/help/
 [5]: /ko/cloud_cost_management/cloud_cost_skill/
+[6]: /ko/cloud_cost_management/cost_changes/real_time_costs/
+[7]: /ko/cloud_cost_management/cost_changes/monitors/#create-a-real-time-anomaly-monitor
+[8]: /ko/cloud_cost_management/cost_changes/monitors/#prerequisites

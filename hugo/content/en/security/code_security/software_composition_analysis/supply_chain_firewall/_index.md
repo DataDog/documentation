@@ -10,12 +10,16 @@ further_reading:
 
 {{< callout url=https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc/viewform?edit_requested=true
  btn_hidden="false" header="Join the Preview!">}}
-Supply Chain Firewall is in preview.
+Supply Chain Firewall is in preview. Preview access is required to use the SCFW CLI, Explorer, and organization policies.
 {{< /callout >}}
 
 Supply Chain Firewall (SCFW) prevents malicious open source packages from entering your development environments at the point of installation, before they reach repositories or CI/CD pipelines.
 
-SCFW wraps supported package manager commands (`npm`, `pip`, and `poetry`). When you run an installation command through SCFW, it evaluates the package against Datadog Security Research's [threat intelligence feed][1] of known-malicious and compromised open source packages as well as custom allow and block policies you configure for your organization.
+SCFW wraps supported package manager commands (`npm`, `pip`, and `poetry`). SCFW evaluates each package in an installation command in this order:
+
+1. The [custom allow and block policies](#organization-policies) you configure for your organization.
+1. The Datadog Security Research [threat intelligence feed][1] of known-malicious and compromised open source packages.
+1. Vulnerability advisories, such as GitHub security advisories. Vulnerability advisories produce only warnings.
 
 Based on these checks, SCFW produces one of three outcomes for the command:
 
@@ -131,6 +135,81 @@ To check whether your credentials and aliases are configured correctly, run:
 scfw doctor
 ```
 
+## Organization policies
+
+Organization policies adapt SCFW to your security requirements. For example, a policy can block a package version your team doesn't trust, or allow a package your team has vetted.
+
+Each Datadog organization has one organization policy, defined in the same organization as the SCFW API and application keys. Editing the organization policy is optional, and an admin typically sets the policy once for the whole organization.
+
+The organization policy adds to the checks Datadog runs on each package. When the organization policy and a Datadog check disagree about a package, the organization policy takes precedence. For example, a Datadog check might flag a package as malicious while the organization policy has an allow rule for the package. In that case, SCFW allows the installation.
+
+If a package matches both an allow rule and a block rule in the organization policy, SCFW blocks the installation.
+
+Organization policies control two kinds of settings:
+
+- **Behaviors**: How SCFW handles warning-level findings in non-interactive environments, and how SCFW treats recently published packages.
+- **Rules**: Package versions SCFW blocks or allows, for npm and PyPI packages.
+
+### Edit the organization policy
+
+Edit the organization policy to block or allow specific package versions, and to change how SCFW handles warnings and recently published packages.
+
+Editing the organization policy requires the {{< ui >}}Vulnerability Management Write{{< /ui >}} permission, `appsec_vm_write`. For more information, see [Datadog Role Permissions][6].
+
+1. In the organization with your SCFW API and application keys, open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Supply Chain Firewall Settings{{< /ui >}}.
+1. In the {{< ui >}}Policy Configuration{{< /ui >}} editor, edit the policy YAML. For details about available fields, see the [Policy schema](#policy-schema) section.
+
+   To discard your edits and restore the default policy, click {{< ui >}}Reset to Default{{< /ui >}}.
+
+1. Click {{< ui >}}Save Configuration{{< /ui >}}.
+
+### Policy schema
+
+Organization policies follow the published [SCFW policy schema][5].
+
+The `behaviours` and `recent_packages_behaviour` keys use British spelling.
+
+| Field | Description |
+| --- | --- |
+| `schema-version` | Required. The schema version. Must be `1`. |
+| `behaviours.non_interactive_block_on_warning` | (Default: `true`) Whether SCFW blocks commands with only warning-level findings in non-interactive environments, such as CI pipelines. Set to `false` to allow those commands. In non-interactive environments, this setting takes precedence over the `--allow-on-warning` and `--block-on-warning` options and the `SCFW_ON_WARNING` environment variable. |
+| `behaviours.recent_packages_behaviour` | (Default: `block`) What SCFW does with packages published less than `recent_package_timeout` seconds ago. Accepts `block`, `warn`, or `allow`. |
+| `behaviours.recent_package_timeout` | (Default: `86400`) Number of seconds after publication during which SCFW treats a package as recent. The default is 24 hours. |
+| `policies.block` | List of rules for package versions SCFW blocks. |
+| `policies.allow` | List of rules for package versions SCFW allows. |
+
+Each rule in `policies.block` or `policies.allow` accepts these fields:
+
+| Field | Description |
+| --- | --- |
+| `ecosystem` | Required. The package ecosystem. Accepts `npm` or `pypi`. |
+| `package_name` | Required. The package name. |
+| `package_version` | Required. A glob matching the package versions the rule applies to, such as `*` for all versions. |
+
+### Example policy
+
+An example policy shows how behaviors and rules fit together in one organization policy. Start from the example instead of an empty editor, and replace the placeholder package names with your own.
+
+This example policy warns about packages published in the last 48 hours. The example also blocks every version of one npm package and allows a range of versions of one PyPI package:
+
+```yaml
+schema-version: 1
+behaviours:
+  non_interactive_block_on_warning: true
+  recent_packages_behaviour: warn
+  # 48 hours, in seconds
+  recent_package_timeout: 172800
+policies:
+  block:
+    - ecosystem: npm
+      package_name: <NPM_PACKAGE_NAME>
+      package_version: "*"
+  allow:
+    - ecosystem: pypi
+      package_name: <PYPI_PACKAGE_NAME>
+      package_version: "2.31.*"
+```
+
 ## Inspect a package during install
 
 After you install and configure SCFW, `npm`, `pip`, and `poetry` commands are automatically routed through SCFW. 
@@ -152,6 +231,24 @@ The `scfw run` command supports these options:
 | `--block-on-warning` | Non-interactively blocks commands with only warning-level findings. |
 
 The `SCFW_ON_WARNING` environment variable (`allow` or `block`) has the same effect as `--allow-on-warning` or `--block-on-warning`, and takes precedence when set. An environment variable is useful for enforcing a consistent policy across a CI environment without changing every invocation. In non-interactive contexts with no terminal, SCFW can't prompt for confirmation, so it blocks warning-level results by default unless `--allow-on-warning`, `--block-on-warning`, or `SCFW_ON_WARNING` is set.
+
+For SCFW CLIs connected to Datadog, the organization policy setting `behaviours.non_interactive_block_on_warning` takes precedence over these options in non-interactive contexts. See the [Policy schema](#policy-schema) section.
+
+## Investigate installation outcomes
+
+SCFW might block a package your team needs, or allow a package you expected SCFW to block. The SCFW Explorer shows which Datadog checks and organization policy rules decided each outcome.
+
+The SCFW Explorer includes every installation command inspected by an SCFW CLI configured with Datadog credentials.
+
+1. Open {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Supply Chain Firewall{{< /ui >}}.
+
+   Each row shows the outcome, the time, the package name and version, the host, and the repository.
+
+1. (Optional) Filter installations by {{< ui >}}Outcome{{< /ui >}}, {{< ui >}}Ecosystem{{< /ui >}}, {{< ui >}}Library name{{< /ui >}}, or {{< ui >}}Host name{{< /ui >}}.
+1. Click an installation to open its details.
+1. In {{< ui >}}Triggered policies{{< /ui >}}, review the result of each check SCFW ran on the package. Results come from two sources:
+   - **Datadog checks**: Show whether Datadog flagged the package, and the advisory behind the flag. Warnings don't have their own outcome. When a Datadog check warns about a package, the outcome indicates whether SCFW allowed or blocked the installation.
+   - **Organization policy**: Shows the rule or behavior that matched, such as `policies.block: pypi/pygame@2.6.1` or `behaviours.non_interactive_block_on_warning: false`.
 
 ## Compatibility
 
@@ -187,3 +284,5 @@ Then remove the `scfw` binary, for example by deleting it from `/usr/local/bin`,
 [2]: https://github.com/DataDog/supply-chain-firewall/releases/latest
 [3]: /security/code_security/dev_tool_int/scfw_github_action/
 [4]: /integrations/supply-chain-firewall/
+[5]: https://raw.githubusercontent.com/DataDog/schema/main/code-security/scfw/v1.0/schema.json
+[6]: /account_management/rbac/permissions/
