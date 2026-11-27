@@ -59,7 +59,7 @@ Common causes:
 
 - **Cluster security policy**: Host-wide eBPF profiling requires host-level access, including `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. If your cluster uses Pod Security Admission, OPA Gatekeeper, Kyverno, or another admission controller, make sure it allows the settings from the deployment path you're using. The Host Profiler doesn't run as a privileged container.
 - **SELinux profile errors**: The deployment examples use the `spc_t` SELinux type. If that type isn't available in your environment, replace it with an equivalent type supported by your distribution and security policy. See [Host Profiler deployment instructions][1] for the `seLinuxOptions` setting for your deployment path. The replacement must allow the host and process access the Host Profiler requires.
-- **Seccomp or AppArmor profile errors**: In the OpenTelemetry deployment paths, an init container installs the seccomp profile automatically. If the pod is stuck in init, inspect the init container logs. In the Datadog Operator preview path, seccomp is optional and must be provisioned manually if you enable it. AppArmor is optional; if you enable it, make sure the profile is loaded on every node where the Host Profiler can run.
+- **Seccomp or AppArmor profile errors**: See [Agent Troubleshooting][6] for pod security errors.
 - **Unsupported environment**: This preview requires Kubernetes nodes that support host-level DaemonSets. Serverless, virtual-node, and restricted-node environments aren't supported. See [Supported environments][2].
 
 ## Profiles do not appear in Datadog
@@ -99,3 +99,4 @@ The Host Profiler uploads debug symbols to Datadog when they are available local
 [3]: https://app.datadoghq.com/profiling
 [4]: /getting_started/site/
 [5]: /profiler/enabling/full_host/#debug-symbols
+[6]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/troubleshooting.md#pod-does-not-start
