@@ -77,6 +77,8 @@ Provider tool charges are charges for built-in tools, such as web search, on LLM
 
 For applicable breakdown tags, unavailable details use `unknown`. An `unknown` value does not mean zero usage. For example, if a provider does not report cache usage, input tokens are tagged `input_type:unknown`. When cache or reasoning usage cannot be assigned to individual modalities, the values keep their known category and use `token_modality:unknown`.
 
+{{< img src="llm_observability/input_token_breakdown.png" alt="Input token tooltip showing text and audio usage split into non-cached and cache-read tokens." caption="Input tokens for an LLM span, broken down by modality and cache category." style="width:100%;" >}}
+
 ### Choose between total and breakdown metrics
 
 Use total metrics for per-span statistics, and breakdown metrics to compare usage across categories.
@@ -102,6 +104,8 @@ For example, the following queries chart cost by input or output and modality, a
 sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
 sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
 ```
+
+{{< img src="llm_observability/cost_by_token_modality.png" alt="Line chart of estimated LLM cost by token modality, showing audio and text in cents." caption="Estimated LLM cost grouped by token modality, displayed in cents." style="width:100%;" >}}
 
 For a span with a valid total cost or token count, its breakdown values add up to that total. When a total is unavailable for cost or tokens, the breakdown metrics retain the available input or output values. The corresponding total distribution receives no observation.
 
