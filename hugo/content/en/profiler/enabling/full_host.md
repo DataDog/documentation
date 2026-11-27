@@ -1,33 +1,33 @@
 ---
-title: Enabling the Full-Host Profiler
+title: Enabling the Host Profiler
 further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/cmd/host-profiler/deploy'
       tag: 'Source Code'
-      text: 'Full-Host Profiler deployment instructions'
+      text: 'Host Profiler deployment instructions'
     - link: 'profiler/profiler_troubleshooting/full_host'
       tag: 'Documentation'
-      text: 'Full-Host Profiler Troubleshooting'
+      text: 'Host Profiler Troubleshooting'
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
 ---
 
 {{< callout header="Limited Availability" url="#" btn_hidden="true" >}}
-Full-Host Profiler is in limited availability.
+Host Profiler is in limited availability.
 {{< /callout >}}
 
-The Full-Host Profiler collects CPU profiles across all processes on a host, regardless of language or runtime. It runs as a DaemonSet on your Kubernetes nodes and is built on the [OpenTelemetry eBPF Profiler][1].
+The Host Profiler collects CPU profiles across all processes on a host, regardless of language or runtime. It runs as a DaemonSet on your Kubernetes nodes and is built on the [OpenTelemetry eBPF Profiler][1].
 
 ### Use cases
 
-The Full-Host Profiler is valuable for:
+The Host Profiler is valuable for:
 
 - Profiling software that doesn't use Datadog SDKs, such as open source components and third-party binaries.
 - Analyzing performance across multi-language processes and runtimes.
 
 ## Supported environments
 
-The Full-Host Profiler is supported in Kubernetes environments that meet these requirements:
+The Host Profiler is supported in Kubernetes environments that meet these requirements:
 
 | Requirement              | Supported values                          |
 |---------------------------|--------------------------------------------|
@@ -38,7 +38,7 @@ The Full-Host Profiler is supported in Kubernetes environments that meet these r
 
 Common supported setups include self-managed Kubernetes clusters, Amazon EKS with EC2 nodes, GKE Standard, and AKS VM node pools.
 
-The Full-Host Profiler does not support direct host or VM installation, Docker without Kubernetes, or serverless runtimes. It also does not support Kubernetes modes that can't run host-level DaemonSets. Examples of these modes include Amazon EKS on Fargate, GKE Autopilot, and AKS virtual nodes.
+The Host Profiler does not support direct host or VM installation, Docker without Kubernetes, or serverless runtimes. It also does not support Kubernetes modes that can't run host-level DaemonSets. Examples of these modes include Amazon EKS on Fargate, GKE Autopilot, and AKS virtual nodes.
 
 ## Deployment
 
@@ -53,13 +53,13 @@ Choose a deployment path based on how your Kubernetes cluster is managed:
 
 If the Datadog Agent is already installed, use one of the Datadog Agent deployment paths so the Agent can enrich profiles with infrastructure metadata. Otherwise, use one of the OpenTelemetry paths.
 
-The OpenTelemetry paths deploy the Full-Host Profiler as its own OpenTelemetry Collector DaemonSet. They don't require a pre-existing Datadog Agent, DDOT Collector, or other Agent-side Datadog component on the host, and you can run the DaemonSet alongside other Collector distributions.
+The OpenTelemetry paths deploy the Host Profiler as its own OpenTelemetry Collector DaemonSet. They don't require a pre-existing Datadog Agent, DDOT Collector, or other Agent-side Datadog component on the host, and you can run the DaemonSet alongside other Collector distributions.
 
 ## Service naming
 
 <div class="alert alert-info">Set <b>OTEL_SERVICE_NAME</b> or <b>DD_SERVICE</b> for each service you want to profile and identify separately. This gives you accurate attribution and more actionable profiling data.</div>
 
-The Full-Host Profiler determines each process's service name from the `OTEL_SERVICE_NAME` or `DD_SERVICE` environment variable:
+The Host Profiler determines each process's service name from the `OTEL_SERVICE_NAME` or `DD_SERVICE` environment variable:
 
 ```yaml
 env:
@@ -79,7 +79,7 @@ Set `DD_ENV` and `DD_VERSION` on your workloads for richer filtering in the [Dat
 
 For compiled languages such as C, C++, Rust, and Go, debug symbols are required for function names to appear in profiles.
 
-The Full-Host Profiler uploads debug symbols to Datadog when they are available locally. If your production binaries are stripped, upload symbols from your build artifacts separately:
+The Host Profiler uploads debug symbols to Datadog when they are available locally. If your production binaries are stripped, upload symbols from your build artifacts separately:
 
 1. Install the [datadog-ci][4] CLI.
 2. Set your API key and site:
@@ -97,34 +97,34 @@ The Full-Host Profiler uploads debug symbols to Datadog when they are available 
 
 ## Security privileges
 
-The Full-Host Profiler doesn't run as a privileged container. In Kubernetes, it runs as a host-level DaemonSet with `hostPID: true` so it can observe processes on the node. The deployment manifests add only the Linux capabilities required for eBPF-based host profiling.
+The Host Profiler doesn't run as a privileged container. In Kubernetes, it runs as a host-level DaemonSet with `hostPID: true` so it can observe processes on the node. The deployment manifests add only the Linux capabilities required for eBPF-based host profiling.
 
-- **SELinux** is configured with the `spc_t` super-privileged container type so that SELinux doesn't block the host and process access the Full-Host Profiler requires. This type doesn't provide additional SELinux confinement. If `spc_t` isn't available, replace it with an equivalent type supported by your distribution and security policy.
+- **SELinux** is configured with the `spc_t` super-privileged container type so that SELinux doesn't block the host and process access the Host Profiler requires. This type doesn't provide additional SELinux confinement. If `spc_t` isn't available, replace it with an equivalent type supported by your distribution and security policy.
 - **Seccomp** restricts the syscalls the container can make beyond what those capabilities allow. The seccomp profile ships at `/etc/dd-host-profiler/seccomp.json` inside the image and is applied automatically in the Helm-based paths and the OpenTelemetry Operator path. In the Datadog Operator preview path, seccomp is optional and must be provisioned manually.
 - **AppArmor** is optional where available. The provided profile restricts which binaries the profiler can run: only `objcopy`, used for symbol extraction, is permitted.
 
-See [Full-Host Profiler deployment instructions][2] for the settings that apply to each deployment path.
+See [Host Profiler deployment instructions][2] for the settings that apply to each deployment path.
 
 ## Relationship to OpenTelemetry
 
-The Full-Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF-based profiling. It uses the [OpenTelemetry eBPF Profiler][1] and exports profile data to Datadog through OTLP HTTP.
+The Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF-based profiling. It uses the [OpenTelemetry eBPF Profiler][1] and exports profile data to Datadog through OTLP HTTP.
 
 ### Deployment with the Datadog Agent or as a standalone Collector
 
-The Full-Host Profiler is supported in two ways:
+The Host Profiler is supported in two ways:
 
-- **With the Datadog Agent, including with the Agent's Collector**: The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, deployed with the Datadog Helm chart or the Datadog Operator. It infers its configuration from the Agent, and the Agent enriches profiles with Datadog infrastructure metadata.
-- **Standalone**: The Full-Host Profiler runs as its own OpenTelemetry Collector DaemonSet, deployed with the OpenTelemetry Helm chart or the OpenTelemetry Operator, and sends profiles directly to Datadog. No Datadog Agent or DDOT Collector is required.
+- **With the Datadog Agent, including with the Agent's Collector**: The Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, deployed with the Datadog Helm chart or the Datadog Operator. It infers its configuration from the Agent, and the Agent enriches profiles with Datadog infrastructure metadata.
+- **Standalone**: The Host Profiler runs as its own OpenTelemetry Collector DaemonSet, deployed with the OpenTelemetry Helm chart or the OpenTelemetry Operator, and sends profiles directly to Datadog. No Datadog Agent or DDOT Collector is required.
 
-In both cases, the Full-Host Profiler runs in its own profiling-focused container rather than inside the Agent's Collector or the DDOT Collector. Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the profiler separate avoids granting that access to a larger general-purpose Collector distribution, and reduces the amount of code running with host-level privileges.
+In both cases, the Host Profiler runs in its own profiling-focused container rather than inside the Agent's Collector or the DDOT Collector. Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the profiler separate avoids granting that access to a larger general-purpose Collector distribution, and reduces the amount of code running with host-level privileges.
 
 Running the profiler separately follows the upstream OpenTelemetry approach: the eBPF profiler is packaged as a dedicated distribution rather than being included directly in `otelcol-contrib`.
 
-For instructions for each option, see [Full-Host Profiler deployment instructions][2].
+For instructions for each option, see [Host Profiler deployment instructions][2].
 
-### How the Full-Host Profiler differs from the upstream eBPF profiler
+### Differences from the upstream eBPF profiler {#how-the-full-host-profiler-differs-from-the-upstream-ebpf-profiler}
 
-The Full-Host Profiler packages the upstream [OpenTelemetry eBPF Profiler][1] with components and defaults for sending profiles to Datadog. Compared to running the upstream profiler yourself, the Full-Host Profiler:
+The Host Profiler packages the upstream [OpenTelemetry eBPF Profiler][1] with components and defaults for sending profiles to Datadog. Compared to running the upstream profiler yourself, the Host Profiler:
 
 - **Uploads debug symbols automatically**: When symbols are available locally, the profiler uploads them to Datadog. Native frames in languages such as C, C++, Go, and Rust are symbolized without a separate CI upload step. For stripped binaries, see [Debug symbols](#debug-symbols).
 - **Exports to Datadog with container tags**: Includes the Datadog export configuration and container tagging, so you don't need to configure these Collector components yourself.
@@ -136,7 +136,7 @@ The OTLP Profiles signal isn't stable in OpenTelemetry. For its maturity status,
 
 ## What's next?
 
-After deploying the Full-Host Profiler, see [Getting Started with Profiler][9] to learn how to use Continuous Profiler to identify and fix performance problems.
+After deploying the Host Profiler, see [Getting Started with Profiler][9] to learn how to use Continuous Profiler to identify and fix performance problems.
 
 ## Further reading
 
