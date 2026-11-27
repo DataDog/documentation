@@ -71,9 +71,7 @@ Each credential supports the following settings:
 | `allowed_actions` | Optional list of action names or trailing bundle wildcards, such as `com.datadoghq.mongodb.*`. If omitted, the credential does not restrict actions. An empty list (`[]`) denies all actions. |
 | `allowed_http_domains` | Optional list of hostnames, IP addresses, or wildcard domains, such as `*.example.com`. Use hostnames without a URL scheme, port, or path. If set, only HTTP actions can use the credential. If omitted, the credential does not restrict destinations. An empty list (`[]`) denies all destinations. |
 
-Credential restrictions apply in addition to the runner's `actions_allowlist` and `http_allowlist` and the action's authorization in Datadog. A credential restriction does not grant permission to run an action. Include `com.datadoghq.http.testConnection` in `allowed_actions` to allow HTTP connection tests.
-
-The credential's `allowed_http_domains` checks the initial request URL; it does not restrict redirect destinations. Disable following redirects when requests must remain on the allowed hosts.
+Credential restrictions apply in addition to the runner's `actions_allowlist` and `http_allowlist` and the action's authorization in Datadog. A credential restriction does not grant permission to run an action.
 
 ### Select a runner and test the connection
 
