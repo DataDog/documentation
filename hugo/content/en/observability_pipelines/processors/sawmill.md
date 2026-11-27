@@ -182,7 +182,7 @@ The Sawmill processor emits the following metrics for each integration pipeline 
 
 Events ingested
 : **Metric**: `pipelines.sawmill_ingested_events_total`
-: **Description**: The number of events processed by a pipeline. An integration pipeline processes the events the processor dispatches to it, and a custom pipeline processes the events that match its filter query.
+: **Description**: The number of events processed by a pipeline.
 
 Event bytes ingested
 : **Metric**: `pipelines.sawmill_ingested_event_bytes_total`
