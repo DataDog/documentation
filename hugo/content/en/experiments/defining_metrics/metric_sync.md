@@ -338,7 +338,7 @@ Adoption does not recompute existing experiment results. Review all definition s
 | `reference_url` | No | Source-specific reference URL. |
 | `subject_types` | Yes | At least one subject mapping for the source. |
 | `measures` | No | Columns that metrics aggregate. |
-| `properties` | No | Columns used to filter metric events. Include these columns in the source SQL. |
+| `properties` | No | Columns available for event filters and metric-property breakouts. Include these columns in the source SQL. |
 
 ### Subject types
 
@@ -359,11 +359,11 @@ Adoption does not recompute existing experiment results. Review all definition s
 
 ### Properties
 
-Use `properties` on a warehouse metric source to declare columns for filters.
+Use `properties` on a warehouse metric source to declare columns for filters and metric-property breakouts. Declaring a property does not select it for a metric breakout; use metric-level `property_breakouts` to select properties and values.
 
 | Field | Required | Description |
 | ----- | -------- | ----------- |
-| `sync_id` | Yes | Stable identifier within the source's properties list. Filters reference it with `property_sync_id`. |
+| `sync_id` | Yes | Stable identifier within the source's properties list. Filters and breakouts reference it with `property_sync_id`. |
 | `property_name` | Yes | Display name in Datadog. |
 | `property_column` | Yes | SQL result column name. |
 | `property_type` | Yes | Column type, such as `STRING`. |
@@ -386,6 +386,7 @@ The Datadog YAML format differs from Eppo's format. When migrating, replace `fac
 | `format_as_percent` | No | Displays the metric as a percentage. |
 | `reference_url` | No | Metric-specific reference URL. |
 | `guardrail_cutoff_threshold` | No | Optional guardrail cutoff threshold. |
+| `property_breakouts` | No | Properties and explicit values to analyze as metric breakouts. Omit to preserve existing selections, or use `[]` to clear them. See [Metric-property breakouts][9]. |
 
 Add the aggregation field that matches the metric type:
 
@@ -464,6 +465,63 @@ percentile_metric_aggregation:
     warehouse_metric_source_sync_id: checkout_events
     measure_sync_id: revenue
 ```
+
+### Metric-property breakouts
+
+This option requires Metric Sync CLI v0.4.0 or later and metric-property breakouts enabled for the organization. If the API reports that metric-property breakouts are not enabled for your organization, contact [Datadog Support][10] to request access.
+
+Set `property_breakouts` directly on a metric to select properties and values for breakouts in experiment analysis and Deep Dive. Unlike aggregation `property_filters`, this setting does not restrict the parent metric to the selected values. For example, a revenue metric with country breakouts for `US` and `CA` still includes revenue from all countries in its parent result.
+
+Define the property on the warehouse metric source, then reference it from the metric:
+
+```yaml
+warehouse_metric_sources:
+  - sync_id: checkout_events
+    # Keep the source SQL, timestamp, subject mappings, and measures.
+    # The SQL must return the country column.
+    properties:
+      - sync_id: country
+        property_name: Country
+        property_column: country
+        property_type: STRING
+
+metrics:
+  - sync_id: revenue
+    name: Revenue
+    metric_type: simple
+    property_breakouts:
+      - property:
+          warehouse_metric_source_sync_id: checkout_events
+          property_sync_id: country
+        values: ["US", "CA"]
+    simple_metric_aggregation:
+      operation: sum
+      measure:
+        warehouse_metric_source_sync_id: checkout_events
+        measure_sync_id: revenue
+```
+
+This example shows only the property and metric settings. When you submit the configuration, keep the complete source definition and all other objects managed by the sync tag.
+
+| Field | Required | Description |
+| ----- | -------- | ----------- |
+| `property` | Yes | Reference to the source and property, containing `warehouse_metric_source_sync_id` and `property_sync_id`. For a source outside the submission, include `warehouse_metric_source_sync_tag` on both this reference and the aggregation measure reference. |
+| `values` | Yes | Nonempty list of distinct string values to analyze. Quote values such as `"true"` and `"123"` to keep them as strings. Values don't need to appear in your data yet. |
+
+Property breakouts have the following requirements:
+
+- Each property can appear once per metric.
+- The property must belong to the same source as every aggregation in the metric.
+- Same-source `simple`, `ratio`, and `percentile` metrics support breakouts. Ratios with different numerator and denominator sources do not.
+- Breakouts use metric-event properties, not exposure or subject properties.
+
+| YAML setting | Effect |
+| ------------ | ------ |
+| Omit `property_breakouts` | Preserve existing breakout selections, including when adopting a metric. A new metric has no breakouts. |
+| `property_breakouts: []` | Clear all breakout selections on the metric. |
+| Nonempty list | Replace the selection with the listed properties and values. |
+
+Use `metric-sync plan` to review breakout changes before `execute`. Planning does not create property values or change metric configurations. Syncing the configuration does not recompute historical experiment results. For analysis behavior, see [Break Out Metrics by Property][8].
 
 ### Filters
 
@@ -634,3 +692,6 @@ For adoption, use `existing_id` with `options.upgrade_mode: by_id`. Setting `upg
 [5]: #filters
 [6]: #cli-limitations
 [7]: #permissions-for-plans-and-execution
+[8]: /experiments/metric_property_breakouts/
+[9]: #metric-property-breakouts
+[10]: /help/
