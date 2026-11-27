@@ -140,11 +140,13 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 ### Step 3 - Upload your source maps
 
-Profiles collected from production code contain minified function names, file paths, and line and column numbers. Datadog uses JavaScript source maps to resolve them to your original source code. The flame graphs, call hierarchies, and function lists across the profiling views display these resolved function calls.
+Profiles collected from production code contain minified function names, file paths, and line and column numbers. Datadog uses JavaScript source maps to resolve them to your original source code in flame graphs, call hierarchies, and function lists.
 
-Upload your source maps with [`datadog-ci`][32] (or with a [Datadog build plugin][33]) as part of your build or CI pipeline. Without uploaded source maps, profiles show the minified function names and locations.
+Upload your source maps with [`datadog-ci`][32] or a [Datadog build plugin][33] as part of your build or CI pipeline. Without uploaded source maps, profiles show the minified function names and locations.
 
-Datadog recommends matching source maps with Debug IDs. A Debug ID associates a JavaScript bundle with its source map without relying on the bundle URL, service, or version. Browser profiling sends Debug IDs with profiles from Browser SDK version 7.16.0 or later.
+Datadog recommends matching source maps with Debug IDs. A Debug ID associates a JavaScript bundle with its source map without relying on the bundle URL, service, or version. Browser SDK version 7.16.0 or later sends Debug IDs with profiles. This minimum is later than the one for unminifying error stack traces, which is described in [Upload JavaScript source maps][32].
+
+To match source maps with Debug IDs, run the following commands after your build. This requires `@datadog/datadog-ci` version 5.24.0 or later:
 
 ```shell
 # Inject Debug IDs into your bundles and source maps after the build
@@ -264,7 +266,7 @@ Pages loaded from `file://` are not served with this header by default, so profi
 
 ### Step 4 - Upload your source maps
 
-Renderer profiles contain minified function names and locations. Datadog uses JavaScript source maps to resolve them to your original source code in the flame graphs and function calls. Upload the source maps of your renderer code with [`datadog-ci`][32], as described in [Upload source maps][electron-5]. The `--service` and `--release-version` values must match your Browser SDK configuration.
+Renderer profiles contain minified function names and locations. Datadog uses JavaScript source maps to resolve them to your original source code in flame graphs, call hierarchies, and function lists. Upload the source maps of your renderer code with [`datadog-ci`][electron-6], as described in [Upload source maps][electron-5]. Debug ID matching is not supported for Electron, so upload your source maps by service and version. The `--service` and `--release-version` values must match your Browser SDK configuration.
 
 ## Explore profiling
 
@@ -275,6 +277,7 @@ Renderer profiling data appears in the same places as browser profiling data. Se
 [electron-3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
 [electron-4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser#explore-profiling
 [electron-5]: /real_user_monitoring/application_monitoring/electron/error_tracking/#upload-source-maps
+[electron-6]: /real_user_monitoring/guide/upload-javascript-source-maps/
 
 {% /if %}
 <!-- end Electron -->
