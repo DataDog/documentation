@@ -38,6 +38,8 @@ The Host Profiler is supported in Kubernetes environments that meet these requir
 
 Common supported setups include self-managed Kubernetes clusters, Amazon EKS with EC2 nodes, GKE Standard, and AKS VM node pools.
 
+The standalone OpenTelemetry Helm and Operator examples require Kubernetes 1.30 or later.
+
 The Host Profiler does not support direct host or VM installation, Docker without Kubernetes, or serverless runtimes. It also does not support Kubernetes modes that can't run host-level DaemonSets. Examples of these modes include Amazon EKS on Fargate, GKE Autopilot, and AKS virtual nodes.
 
 ## Deployment
