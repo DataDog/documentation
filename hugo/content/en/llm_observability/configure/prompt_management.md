@@ -108,6 +108,7 @@ To create, update, or delete prompts through the API or SDK, provide an API key 
 
 ### Supported versions
 
+- Go 1.26 or later
 - `dd-trace-go/v2` version 2.12.0 or later
 
 ### Credentials
@@ -122,7 +123,7 @@ You need your [Datadog site][2] and the credentials required for your retrieval 
 
 #### Manage prompts
 
-The Go Prompt Management SDK supports retrieval and formatting. To create or manage prompts, use the UI or API.
+The Go SDK supports only prompt retrieval and formatting. It does not support creating or managing prompts. Use the UI or API instead.
 
 To create, update, or delete prompts through the API, provide an API key and an application key. The application key requires `llm_observability_read`, `feature_flag_config_read`, `feature_flag_environment_config_read`, `llm_observability_write`, and `feature_flag_config_write`.
 
@@ -169,7 +170,7 @@ For installation and application setup, see the [Node.js SDK guide][19].
 go get github.com/DataDog/dd-trace-go/v2@latest
 ```
 
-For Agent-backed retrieval, also install:
+For Agent-backed retrieval or experiment exposure reporting, also install:
 
 ```shell
 go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
@@ -298,6 +299,8 @@ export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 ```
 
+**Note:** Go 2.12.0 Prompt Management requires `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` for Agent-backed retrieval and experiment exposure reporting. The setting is deprecated for general Feature Flags setup.
+
 Add the import that enables Agent-backed retrieval and experiment reporting:
 
 ```go
@@ -393,7 +396,7 @@ If retrieval fails and no cached prompt or fallback is available, `getPrompt()` 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Use the request's `ctx` inside an application function that returns an error:
+The following example runs inside an application function that returns an error and uses the request's `ctx`:
 
 ```go
 import (
@@ -445,7 +448,10 @@ if err != nil {
 }
 ```
 
-`Format()` returns a `FormattedPrompt` and an error. For chat prompts, `rendered.Messages` contains typed `FormattedMessage` values. Convert them to the model client's message type, preserving the text and any tool calls or results. For text prompts, pass `rendered.Text` to the model client. A text fallback uses `llmobs.PromptTemplate{Text: "You are a helpful assistant."}`.
+`Format()` returns a `FormattedPrompt` and an error:
+
+- **Chat prompts**: `rendered.Messages` contains typed `FormattedMessage` values. Convert them to your model client's message type. Preserve the text and any tool calls or results.
+- **Text prompts**: Pass `rendered.Text` to your model client. To define a text fallback, use `llmobs.PromptTemplate{Text: "You are a helpful assistant."}`.
 
 If retrieval fails and no cached prompt or fallback is available, `GetPrompt()` returns an error. Handle it before formatting or calling the model.
 
@@ -574,9 +580,11 @@ The context associates metadata with LLM spans created inside the callback; it d
 {{% /tab %}}
 {{% tab "Go" %}}
 
+The Go Agent Observability tracking APIs are experimental.
+
 [Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
 
-Use the application's `client` and request `ctx` inside an application function that returns an error:
+The following example uses the application's `client` and the request's `ctx`. It runs inside an application function that returns an error:
 
 ```go
 import (
@@ -625,7 +633,7 @@ span.AnnotateLLMIO(
 span.Finish()
 ```
 
-[15]: /llm_observability/instrument/sdk/?tab=go
+[15]: /llm_observability/instrument/sdk/?tab=goexperimental
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -701,7 +709,7 @@ Check for an exact prompt-ID match with `LLMObs.list_prompts()` or `tracer.llmob
 If the installed SDK cannot deploy during creation, report the limitation; do not use private methods or the Prompt Management HTTP API as a workaround. Keep the returned `id` field as the prompt UUID for the final response. Remove the one-time setup key when no longer needed.
 {{< /agent-only >}}
 
-Use the SDK to create prompts, publish versions, and manage deployments. Perform these operations during setup. Do not run them during application startup or request handling.
+For SDKs that support prompt management, create prompts, publish versions, and manage deployments during setup. Do not run these operations during application startup or request handling.
 
 These methods require the API and application key permissions listed in the [Prerequisites](#prerequisites) section. The `env_ids` or `envIds` values are Feature Flags environment IDs from the [List environments API][9], not environment names.
 
@@ -785,7 +793,7 @@ Use `await` with these methods.
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Use the UI or the [Prompt Management API][8] to create, update, list, or delete prompts. The Go SDK exposes `llmobs.GetPrompt()` for runtime retrieval, not management operations.
+Use the UI or the [Prompt Management API][8] to create, update, list, or delete prompts. The Go SDK does not support management operations. It provides only `llmobs.GetPrompt()` for runtime retrieval.
 
 [8]: /api/latest/agent-observability/
 {{% /tab %}}
@@ -1024,7 +1032,7 @@ Pass these values to your existing model client along with the formatted prompt.
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Access `prompt.Config()` in your request handler or application function:
+The following example accesses `prompt.Config()` in a request handler or application function:
 
 ```go
 prompt, err := llmobs.GetPrompt(ctx, "summarizer")
