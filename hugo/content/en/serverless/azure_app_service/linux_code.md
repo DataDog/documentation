@@ -3,15 +3,20 @@ title: Azure App Service - Linux Code
 aliases:
   - /serverless/azure_app_services/azure_app_services_linux
 further_reading:
+- link: "/tracing/trace_collection/single-step-apm/"
+  tag: "Documentation"
+  text: "Single Step APM Instrumentation"
 - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
   tag: "Blog"
   text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 ## Overview
 
-This page describes how to instrument your Linux Azure App Service application with the Datadog Agent. The procedure on this page makes use of a sidecar container and Application Settings for Linux Azure App Service to instrument the application and manage its configuration.
+This page describes how to instrument your code-based Linux Azure App Service application with the Datadog Agent. This setup uses a sidecar container and Application Settings to collect traces, custom metrics, and logs.
 
-If you would prefer to not use the sidecar approach (Not Recommended), you can instead follow the instructions to [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][1].
+To enable distributed tracing without modifying application code, dependencies, or startup commands, use [Single Step Instrumentation](#single-step-instrumentation) with the Datadog CLI. If you use Terraform, Bicep, ARM templates, or the Azure Portal, use [Manual instrumentation](#manual-instrumentation). You can also use manual instrumentation to manage the tracing library in your project.
+
+If you prefer not to use the sidecar (not recommended), see [Instrument Azure App Service - Linux Code Deployment with the Datadog wrapper][1].
 
 **Supported runtimes**: Java, Node.js, .NET, PHP, Python
 
@@ -21,7 +26,77 @@ If you would prefer to not use the sidecar approach (Not Recommended), you can i
 
 If you haven't already, install the [Datadog-Azure integration][10] to collect metrics and logs.
 
-### Application
+### Single Step Instrumentation
+
+<div class="alert alert-info">Single Step Instrumentation (SSI) for code-based Linux Azure App Service is in Preview and requires <code>@datadog/datadog-ci</code> v5.29.0 or later. Containerized Linux Web Apps are not supported.</div>
+
+The Datadog CLI detects your Web App's runtime from Azure and stages the matching Datadog APM tracer on `/home/data/datadog-tracer`. It also configures the Datadog sidecar container and sets the startup environment variables, so you do not need to change application code or dependencies.
+
+#### Requirements
+
+- **Supported runtimes**:
+  - **.NET**: 8 to 11
+  - **Java**: 8 to 23 (Java SE, Tomcat, JBoss EAP)
+  - **Node.js**: 22, 24, 26
+  - **PHP**: 8.2 to 8.5
+  - **Python**: 3.10 to 3.14
+- **Datadog CLI**: `@datadog/datadog-ci` v5.29.0 or later with `@datadog/datadog-ci-plugin-aas`.
+- **SCM (Kudu) access**: The CLI stages tracer files through the Web App's SCM endpoint.
+- **No Key Vault references on managed settings**: Settings merged by tracer injection must use literal values, not `@Microsoft.KeyVault(...)` references. This applies to `DD_TAGS`, `NODE_OPTIONS`, `PYTHONPATH`, `JAVA_TOOL_OPTIONS`, `PHP_INI_SCAN_DIR`, `DD_LOADER_PACKAGE_PATH`, `LD_PRELOAD`, `CORECLR_*`, and `DD_DOTNET_TRACER_HOME`.
+
+#### Enable with Datadog CLI
+
+{{< tabs >}}
+{{% tab "Locally" %}}
+
+1. Install or update the [Datadog CLI][151]:
+
+   ```shell
+   npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+   ```
+
+2. Install the [Azure CLI][152] and authenticate with `az login`.
+
+3. Run `datadog-ci aas instrument` with `--apm-enabled`:
+
+   ```shell
+   export DD_API_KEY=<DATADOG_API_KEY>
+   export DD_SITE=<DATADOG_SITE>
+   datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --apm-enabled
+   ```
+
+[151]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+[152]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+
+{{% /tab %}}
+{{% tab "Azure Cloud Shell" %}}
+
+Open [Azure Cloud Shell][153], set your API key and Datadog site, and run the CLI with `npx`:
+
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --apm-enabled
+```
+
+[153]: https://portal.azure.com/#cloudshell/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+
+Use flags such as `--service`, `--env`, and `--version` to configure [Unified Service Tagging][11]. For a full list of options, run `datadog-ci aas instrument --help`.
+
+- `datadog-ci aas instrument --apm-enabled` persists across code deployments. You only need to re-run it to change Datadog configuration or update to the latest tracer version.
+- To disable automatic tracer injection while keeping the Datadog sidecar container, re-run `datadog-ci aas instrument` without `--apm-enabled`.
+- To remove the sidecar container, Datadog settings, and staged tracer files, run `datadog-ci aas uninstrument`.
+
+### Manual instrumentation
+
+Use this setup with Terraform, Bicep, ARM templates, or the Azure Portal. You can also use it to manage and pin the Datadog tracing library yourself.
+
+#### 1. Add the Datadog tracing library
 
 Install the SDK for your language:
 
@@ -33,7 +108,7 @@ Java supports adding instrumentation code through the use of a command line argu
 1. Download the [latest version of Datadog's Java SDK][101].
 1. Place the SDK inside your project. It must be included with your deployment.
    If you are using the `azure-webapp-maven` plugin, you can add the Java SDK as a resource entry with type `lib`.
-1. Set the environment variable `JAVA_OPTS` with `--javaagent:/home/site/lib/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/lib/dd-java-agent.jar`.
+1. Set the environment variable `JAVA_OPTS` with `-javaagent:/home/site/libs/dd-java-agent.jar`. When your application is deployed, the Java tracer is copied to `/home/site/libs/dd-java-agent.jar`.
 
 Instrumentation starts when the application is launched.
 
@@ -106,10 +181,12 @@ This bash script is intended to run as the startup command, which installs the t
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instrumentation
+#### 2. Configure the Datadog sidecar
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
+
+To skip manual SDK installation, add `--apm-enabled` as described in [Single Step Instrumentation](#single-step-instrumentation).
 
 #### Locally
 
@@ -271,7 +348,7 @@ Redeploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [Manual tab](?tab=manual#2-configure-the-datadog-sidecar) for descriptions of all environment variables.
 
 
 {{% /tab %}}
@@ -354,7 +431,7 @@ Redeploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+See the [Manual tab](?tab=manual#2-configure-the-datadog-sidecar) for descriptions of all environment variables.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -470,7 +547,7 @@ To instrument a [deployment slot][801] instead of the main web app, use one of t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--service`, `--env`, and `--version` to set distinct unified service tagging values for the slot.
+Using the [Datadog CLI][1] (v5.9.0+ for sidecar instrumentation; v5.29.0+ for `--apm-enabled`), add the `--slot` flag. Use `--service`, `--env`, and `--version` to set distinct unified service tagging values for the slot. Add `--apm-enabled` to use Single Step Instrumentation (Preview) without installing the SDK manually.
 
 To find the names of your deployment slots, run:
 ```shell
@@ -480,17 +557,19 @@ az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <
 ```shell
 datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
   --slot <slot-name> \
-  --service <service-name> --env <slot-env> --version <app-version>
+  --service <service-name> --env <slot-env> --version <app-version> \
+  --apm-enabled
 ```
 
 Alternatively, provide the full slot resource ID with the `--resource-id` flag:
 
 ```shell
 datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
-  --service <service-name> --env <slot-env> --version <app-version>
+  --service <service-name> --env <slot-env> --version <app-version> \
+  --apm-enabled
 ```
 
-**Note**: When you pass `--env`, the CLI automatically marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
+**Note**: When you pass `--env`, the CLI marks `DD_ENV` as a sticky setting so your `env` tag persists across slot swaps. With `--apm-enabled`, the CLI also marks the tracer injection environment variables as sticky settings so slot swaps do not copy staged tracer paths to another slot.
 
 [1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 
@@ -778,3 +857,4 @@ If Automatic Scaling is enabled on the App Service Plan and you see unrelated tr
 [8]: /profiler/
 [9]: /help
 [10]: https://app.datadoghq.com/integrations/azure
+[11]: /getting_started/tagging/unified_service_tagging/
