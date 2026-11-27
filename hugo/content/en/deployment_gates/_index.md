@@ -33,7 +33,7 @@ For setup instructions, see [Set up Deployment Gates][3].
 
 ## How Deployment Gates work
 
-A Deployment Gate evaluates one or more [rules](#rules) to decide whether a deployment should proceed. It is defined for a given service and environment.
+A Deployment Gate evaluates one or more [rules](#rules) to decide whether a deployment should proceed. It is defined for a given service and, optionally, an environment.
 
 After receiving a gate [evaluation](#evaluations) verdict, your deployment pipeline decides what to do next—for example, halting the deployment or performing a rollback.
 

@@ -25,7 +25,7 @@ Looking to define rules in your deployment configuration? See [Inline Deployment
 2. Click {{< ui >}}Create Gate{{< /ui >}}.
 3. Configure the following settings:
    - {{< ui >}}Service{{< /ui >}}: The service name (example: `transaction-backend`).
-   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`).
+   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`), or {{< ui >}}All environments{{< /ui >}} to use one gate for every environment of the service. With the API or Terraform, set the environment to `*` for all environments. A gate for all environments can't coexist with environment-specific gates for the same service and identifier.
    - {{< ui >}}Identifier{{< /ui >}} (optional, default value is `default`): Unique name for multiple gates on the same service/environment. Use this to:
      - Allow different deployment strategies (example: `fast-deploy` vs `default`)
      - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
@@ -90,7 +90,7 @@ Settings for preconfigured FDD rules:
 
 ## Evaluate a gate from your pipeline
 
-After the gate is configured, request an evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
+After the gate is configured, request an evaluation for the service and environment you are deploying to, and decide whether to block or continue the deployment based on the result.
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
