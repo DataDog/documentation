@@ -95,8 +95,9 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
          <td>
            <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
            <p>Tests in the {{< ui >}}Disabled{{< /ui >}} state are excluded from this automation and are never automatically moved to {{< ui >}}Fixed{{< /ui >}}. Because disabled tests are skipped in CI, Datadog has no signal about whether they are still flaky. To make a disabled test eligible again, change its state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}}.</p>
-           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
-           <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
+           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test that ran on its repository's default branch over the last 7 days, and whose runs there all failed. Datadog doesn't use runs on other branches, such as feature branches, to decide whether a test is broken. Datadog doesn't automatically mark broken tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
+           <p>A test that didn't run on the default branch over the last 7 days isn't considered broken. You can configure the default branch of your repositories under <a href="https://app.datadoghq.com/source-code/repositories">Repository Settings</a>.</p>
+           <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests whose runs on the default branch all failed over the last 7 days.</p>
          </td>
        </tr>
      </tbody>
@@ -272,6 +273,19 @@ To fix a disabled test, do one of the following:
 
 - Trigger the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests). It retries the test even while it is disabled, and moves it to {{< ui >}}Fixed{{< /ui >}} once the fix is confirmed and merged.
 - Manually change the test's state to {{< ui >}}Active{{< /ui >}} or {{< ui >}}Quarantined{{< /ui >}} using the [state drop-down](#change-a-flaky-tests-state). Datadog then automatically moves the test to {{< ui >}}Fixed{{< /ui >}} the next time the automation runs, unless the test flakes again.
+
+### Active or quarantined flaky tests are not automatically moved to Fixed
+
+Datadog doesn't move a broken test to {{< ui >}}Fixed{{< /ui >}}. A test is broken when all of its runs on the repository's default branch over the last 7 days failed. For details, see the {{< ui >}}Fixed{{< /ui >}} action in [Configure policies to automate the flaky test lifecycle](#configure-policies-to-automate-the-flaky-test-lifecycle).
+
+To check whether a test is broken, filter on `broken_test:true` in the Flaky Tests Management explorer. To see the test's runs, search the [Test Optimization Explorer][19] with the `@test.fingerprint_fqn` and `@git.branch` facets, for example `@test.fingerprint_fqn:<FINGERPRINT> @git.branch:main`. Replace `<FINGERPRINT>` with the test's identifier and `main` with your default branch. Fix the test, then use the [attempt-to-fix remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix.
+
+### A flaky test moved to Fixed but still fails
+
+A test that didn't run on the repository's default branch over the last 7 days isn't considered broken, so it can move to {{< ui >}}Fixed{{< /ui >}} even if it fails on other branches. Check the following:
+
+- **The test runs only on other branches.** For example, your CI runs the test only on merge queue or release branches. Run the test on the default branch. To keep Datadog from moving the test to {{< ui >}}Fixed{{< /ui >}} in the meantime, change its state to {{< ui >}}Disabled{{< /ui >}}. Disabled tests are skipped in CI and are never moved to {{< ui >}}Fixed{{< /ui >}} automatically.
+- **The default branch of the repository is not the one you expect.** Check the default branch configured for the repository under [Repository Settings][2].
 
 ### Slack notifications are not delivered
 
