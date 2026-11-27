@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/how-to-monitor-databricks-with-datadog/"
     tag: "Blog"
     text: "Monitor Databricks with Datadog"
+  - link: '/data_observability/quality_monitoring/guides/monitors_as_code/'
+    tag: 'Guide'
+    text: 'Create Data Observability Monitors with the API or Terraform'
 ---
 
 {{< img src="data_jobs/overview_052026.png" alt="Datadog Data Observability: Jobs Monitoring overview page" style="width:100%;" >}}
