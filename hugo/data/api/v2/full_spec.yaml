@@ -85572,6 +85572,9 @@ components:
           description: Source type of the evaluation.
           example: "managed"
           type: string
+        higher_is_better:
+          description: Whether a higher numeric score is better. Omitted when no direction was specified.
+          type: boolean
         id:
           description: Unique identifier of the evaluation metric event.
           example: "00000000-0000-0000-0000-000000000001"
@@ -85721,6 +85724,10 @@ components:
           type: string
         error:
           $ref: "#/components/schemas/LLMObsExperimentMetricError"
+        higher_is_better:
+          description: >-
+            Whether a higher numeric score is better. Set to `false` when a lower score is better. If omitted, the comparison uses the boolean value of `metadata.higher_is_better` when present, or the default direction otherwise.
+          type: boolean
         json_value:
           additionalProperties: {}
           description: JSON value. Used when `metric_type` is `json`.
@@ -85731,7 +85738,8 @@ components:
           type: string
         metadata:
           additionalProperties: {}
-          description: Arbitrary metadata associated with the metric.
+          description: >-
+            Arbitrary metadata associated with the metric. For a numeric score, clients can set `higher_is_better` here when they cannot send the top-level field.
           type: object
         metric_type:
           $ref: "#/components/schemas/LLMObsMetricScoreType"
@@ -89333,6 +89341,9 @@ components:
           description: Type of the evaluation metric (e.g., score, categorical, boolean).
           example: score
           type: string
+        higher_is_better:
+          description: Whether a higher numeric score is better. Omitted when no direction was specified.
+          type: boolean
         reasoning:
           description: Human-readable reasoning for the evaluation result.
           type: string
@@ -224312,8 +224323,10 @@ paths:
                     attributes:
                       metrics:
                         - assessment: pass
-                          label: faithfulness
+                          higher_is_better: false
+                          label: false_findings
                           metric_type: score
+                          score_value: 0
                           span_id: span-7a1b2c3d
                           timestamp_ms: 1705314600000
                       spans:
