@@ -61,7 +61,7 @@ This matrix shows, for each integration, its availability in each runner type an
 
 {{% /collapse-content %}}
 
-## Credential file formats
+## Credentials
 
 Actions that require authentication use a [connection][6] to reference credentials stored locally with the runner.
 
