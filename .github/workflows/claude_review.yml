@@ -122,6 +122,7 @@ jobs:
       github.event.issue.pull_request &&
       startsWith(github.event.comment.body, '/review')
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
       pull-requests: read
@@ -176,6 +177,7 @@ jobs:
     name: Acknowledge request
     needs: gate
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: write
       statuses: write
@@ -248,6 +250,7 @@ jobs:
     name: Run Claude review (read-only)
     needs: gate
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: read
       pull-requests: read
@@ -641,6 +644,7 @@ jobs:
     # always gets a "review submitted" event back from a /review.
     if: ${{ always() && needs.gate.result == 'success' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: read
       pull-requests: write
@@ -786,6 +790,7 @@ jobs:
     needs: [gate, start_signal, post]
     if: ${{ always() && needs.gate.result == 'success' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       pull-requests: write
       statuses: write
