@@ -47,7 +47,7 @@ Supported test frameworks:
 
 ## Installing the Swift testing SDK
 
-There are three ways you can install the testing framework:
+There are two ways you can install the testing framework:
 
 {{< tabs >}}
 {{% tab "Swift Package Manager" %}}
@@ -80,22 +80,6 @@ There are three ways you can install the testing framework:
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
-{{% /tab %}}
-{{% tab "Cocoapods" %}}
-
-1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
-
-{{< code-block lang="ruby" >}}
-target 'MyApp' do
-  # ...
-
-  target 'MyAppTests' do
-    inherit! :search_paths
-    pod 'DatadogSDKTesting'
-  end
-end
-{{< /code-block >}}
-
 {{% /tab %}}
 {{% tab "Framework linking" %}}
 
