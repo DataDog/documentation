@@ -169,3 +169,14 @@ entries:
       - ValidatePipeline
     title: Document anomaly_detection and end_to_end_acknowledgements in 
       Observability Pipelines config
+  - change_type: modified
+    date: '2026-11-25'
+    link: https://github.com/DataDog/documentation/pull/42235
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Add client identity allowlists to Observability Pipelines mTLS 
+      sources

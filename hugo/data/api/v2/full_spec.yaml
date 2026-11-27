@@ -103445,6 +103445,90 @@ components:
       type: string
       x-enum-varnames:
         - CLICKHOUSE
+    ObservabilityPipelineClientIdentity:
+      description: |-
+        Restricts which clients may connect, based on the identities in their TLS certificate. Checks run during the TLS handshake, after the client certificate chain is validated against `ca_file`, and never relax that validation.
+        Requires `verify_certificate: true` and `ca_file`. Set exactly one of `allowlist_file` or `allowlist`.
+        When set, connections are closed after a maximum age of 300 seconds so that clients removed from the allowlist are disconnected.
+        Requires Observability Pipelines Worker 2.27 or later.
+      properties:
+        allowlist:
+          $ref: "#/components/schemas/ObservabilityPipelineClientIdentityAllowlist"
+        allowlist_file:
+          description: Path to an allowlist file, relative to the Worker's data directory. The Worker reloads the file when it changes. Must not contain parent directory (`..`) references.
+          example: client-allowlist.yaml
+          minLength: 1
+          type: string
+        mode:
+          $ref: "#/components/schemas/ObservabilityPipelineClientIdentityMode"
+      type: object
+    ObservabilityPipelineClientIdentityAllowlist:
+      description: An allowlist of client identities. A client is allowed when any rule matches.
+      properties:
+        rules:
+          description: Rules, evaluated in order. The first matching rule is the one reported in metrics.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineClientIdentityRule"
+          maxItems: 1000
+          minItems: 1
+          type: array
+      required:
+        - rules
+      type: object
+    ObservabilityPipelineClientIdentityMode:
+      default: enforce
+      description: What happens to a client that no rule allows. `enforce` rejects the TLS handshake. `audit` accepts the client and reports that it would have been rejected.
+      enum:
+        - enforce
+        - audit
+      example: enforce
+      type: string
+      x-enum-varnames:
+        - ENFORCE
+        - AUDIT
+    ObservabilityPipelineClientIdentityRule:
+      description: A named rule. It matches when every constraint it defines matches at least one identity in the client's certificate. It must define at least one of `common_names`, `dns_sans`, or `uri_sans`.
+      properties:
+        common_names:
+          description: Patterns for the certificate subject common name. Matching is case-sensitive, and `*` matches any characters, including dots.
+          example:
+            - "collector-*"
+          items:
+            minLength: 1
+            type: string
+          maxItems: 1000
+          minItems: 1
+          type: array
+        dns_sans:
+          description: Patterns for DNS subject alternative names. Matching is case-insensitive, and `*` matches any characters within one DNS label.
+          example:
+            - "*.collectors.example.com"
+          items:
+            minLength: 1
+            type: string
+          maxItems: 1000
+          minItems: 1
+          type: array
+        name:
+          description: Unique rule name, reported in metrics.
+          example: collectors
+          maxLength: 64
+          minLength: 1
+          pattern: "^[A-Za-z0-9._-]+$"
+          type: string
+        uri_sans:
+          description: Patterns for URI subject alternative names. Matching is case-sensitive. `*` matches any characters within one path segment, and a trailing `/**` matches the path and everything below it. Wildcards are only supported in the path.
+          example:
+            - "spiffe://example.com/ns/prod/**"
+          items:
+            minLength: 1
+            type: string
+          maxItems: 1000
+          minItems: 1
+          type: array
+      required:
+        - name
+      type: object
     ObservabilityPipelineClientTls:
       description: Configuration for enabling TLS encryption between the pipeline component and external services.
       properties:
@@ -105567,7 +105651,7 @@ components:
           example: HTTP_AUTH_PASSWORD
           type: string
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTlsWithClientIdentity"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineHttpServerSourceType"
         username_key:
@@ -106222,7 +106306,32 @@ components:
           description: Path to the Certificate Authority (CA) file used to validate connecting clients' TLS certificates.
           type: string
         crt_file:
-          description: Path to the TLS server certificate file used to used to identify the pipeline component to connecting clients.
+          description: Path to the TLS server certificate file used to identify the pipeline component to connecting clients.
+          example: "/path/to/cert.crt"
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS server certificate.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase for the private key file.
+          example: TLS_KEY_PASSPHRASE
+          type: string
+        verify_certificate:
+          description: When `true`, requires client connections to present a valid certificate, enabling mutual TLS authentication.
+          type: boolean
+      required:
+        - crt_file
+      type: object
+    ObservabilityPipelineMtlsServerTlsWithClientIdentity:
+      description: Configuration for enabling TLS encryption between the pipeline component and external connecting clients, or mutual TLS when `verify_certificate` is `true`. Mutual TLS also enables an optional allowlist of client certificate identities.
+      properties:
+        ca_file:
+          description: Path to the Certificate Authority (CA) file used to validate connecting clients' TLS certificates.
+          type: string
+        client_identity:
+          $ref: "#/components/schemas/ObservabilityPipelineClientIdentity"
+        crt_file:
+          description: Path to the TLS server certificate file used to identify the pipeline component to connecting clients.
           example: "/path/to/cert.crt"
           type: string
         key_file:
@@ -106620,7 +106729,7 @@ components:
           example: opentelemetry-source
           type: string
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTlsWithClientIdentity"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySourceType"
       required:
@@ -108670,7 +108779,7 @@ components:
           example: true
           type: boolean
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTlsWithClientIdentity"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkHecSourceType"
         valid_tokens:
@@ -108739,7 +108848,7 @@ components:
           minimum: 1
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTlsWithClientIdentity"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSplunkTcpSourceType"
       required:
