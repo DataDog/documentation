@@ -17,7 +17,7 @@ algolia:
 
 ## Overview
 
-Tag Indexing Rules are centralized configurations that define how Datadog handles metric tags at ingestion. They allow you to proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and ensuring consistent tagging across your organization.
+Tag Indexing Rules are centralized configurations that define how Datadog handles metric tags at ingestion. They allow you to proactively control which tags are retained or excluded, helping reduce high cardinality by unindexing unnecessary tags and ensuring consistent tagging across your organization.
 
 Tag Indexing Rules operate on groups of metrics identified by name or prefix. They apply to both existing and newly ingested metrics that match the defined patterns, reducing the need for reactive cleanup or code changes while enabling more predictable cost management.
 
@@ -57,11 +57,15 @@ Define how the rule handles tags for metrics in scope.
 
 #### Merge or override existing configurations
 
-Choose whether this rule builds on or replaces existing tag configurations.
-- {{< ui >}}Merge{{< /ui >}} (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
-- {{< ui >}}Override{{< /ui >}}—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. Select the {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}} option to enable this behavior.
+Choose how this rule interacts with configurations established by earlier matching rules:
+- {{< ui >}}Merge{{< /ui >}} (default)—combines this rule with existing tag configurations. To use Merge behavior, disable {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}}. Rules using Merge behavior don't display an {{< ui >}}Override{{< /ui >}} label in the rule list.
+- {{< ui >}}Override{{< /ui >}}—replaces the effects of earlier matching rules for the selected metrics. To enable it, select {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}}. Matching rules below this rule still apply and can change which tags are ultimately indexed.
 
-**Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, suppose Rule 1 uses **Merge** behavior to exclude `host` from `dd.*`, and Rule 2 excludes `app_name` from `dd.payments.*`. If Rule 2 also uses **Merge**, both `host` and `app_name` are dropped from `dd.payments.*` metrics. If Rule 2 uses **Override**, only `app_name` is dropped (Rule 1's effect is overridden for that prefix).
+{{< ui >}}Include tags{{< /ui >}} and {{< ui >}}Exclude tags{{< /ui >}} are independent of Merge and Override. Include and Exclude determine which tags a rule selects. Merge and Override determine how the rule interacts with earlier matching rules.
+
+If an Include rule is the first rule that matches a metric, it acts as an allowlist, even with Merge behavior. Only the listed tags remain indexed. If an earlier rule matched the metric, an Include rule with Merge behavior restores the listed tags without unindexing other tags.
+
+**Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, suppose Rule 1 uses **Merge** behavior to exclude `host` from `dd.*`, and Rule 2 excludes `app_name` from `dd.payments.*`. If Rule 2 also uses **Merge**, both `host` and `app_name` are unindexed for `dd.payments.*` metrics. If Rule 2 uses **Override**, only `app_name` is unindexed (Rule 1's effect is overridden for that prefix).
 
 #### Apply to new metrics only
 
@@ -133,9 +137,9 @@ Tag rules can either override an existing configuration or merge with it. The ch
 Starting tags:  
 `host`, `env`, `service`, `team`
 
-{{< img src="metrics/guide/tag_indexing_rules/merge_vs_override.png" alt="Diagram showing two rules applied to metrics: Rule 1 excludes env from all metrics using Override, and Rule 2 includes env for infra metrics using Merge." style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/merge_vs_override.png" alt="Diagram showing two rules applied to metrics: Rule 1 excludes env from all metrics using Override, and Rule 2 includes env and service for infra metrics using Merge." style="width:100%;">}}
 
-**Key insight**: The `env` tag is re-added only to the `infra.*` metrics.
+**Key insight**: The `env` tag is indexed again only for the `infra.*` metrics.
 
 ### Example 2: Rule order
 
@@ -144,19 +148,19 @@ When multiple rules apply to the same metrics, Datadog evaluates them in order. 
 Starting tags:  
 `host`, `env`, `service`
 
-In this example, Rule 2 uses an {{< ui >}}Include{{< /ui >}} configuration, which acts as an allowlist. Only the listed tags are retained; any tag not listed is dropped.
+These examples use two rules: one includes `host` and `env` for all metrics using Merge, and the other excludes `host` from `infra.*` metrics using Override. The following diagrams show how reversing their order changes the results.
 
 #### Order 1: Specific rule first
 
-{{< img src="metrics/guide/tag_indexing_rules/rule_order_1.png" alt="Diagram showing the specific rule evaluated first: Rule 1 excludes host from infra.server metrics, then Rule 2 includes host for all infra metrics, restoring the tag." style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_1.png" alt="Diagram showing the specific rule evaluated first: Rule 1 excludes host from infra.* metrics using Override, then Rule 2 includes host and env for all metrics using Merge." style="width:100%;">}}
 
-**Key insight**: Rule 1 removes the `host` tag, then Rule 2 re-adds `host`.
+**Key insight**: Rule 2 indexes `host` again for `infra.metric` and keeps its other tags. For `payments.metric`, Rule 2 is the first matching rule, so only `host` and `env` remain indexed.
 
 #### Order 2: General rule first
 
-{{< img src="metrics/guide/tag_indexing_rules/rule_order_2.png" alt="Diagram showing the general rule evaluated first: Rule 1 includes host for all infra metrics, then Rule 2 excludes host from infra.server metrics, removing the tag." style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_2_2026-11-24.png" alt="Diagram showing the general rule evaluated first: Rule 1 includes host and env for all metrics, then Rule 2 overrides the configuration for infra.* metrics to exclude host." style="width:100%;">}}
 
-**Key insight**: The `host` tag is removed last, and stays removed.
+**Key insight**: Rule 2's Override replaces the earlier allowlist for `infra.metric`, leaving `env` and `service` indexed.
 
 ### Example 3: Exception to a broad rule
 
@@ -236,6 +240,25 @@ After establishing the Golden Rule, create narrower rules for Metrics that diffe
 
 {{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="A Tag Indexing Rule configured as the Golden Rule, excluding unqueried tag keys across all custom metrics." style="width:100%;">}}
 
+### Protect tags that must remain indexed
+
+To keep tags that workflows such as usage attribution depend on, add a catch-all rule at the end of the rule list.
+
+For example, suppose the Golden Rule unindexes tags that have not been queried in the last 90 days and are not used in Datadog assets. To keep `team`, `cost_center`, and `business_unit` indexed regardless of usage:
+
+1. Create a Tag Indexing Rule and apply it to all custom metrics using `*`.
+2. Select {{< ui >}}Include tags{{< /ui >}} and enter the tags to keep: `team`, `cost_center`, and `business_unit`.
+3. Leave {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}} disabled to use Merge behavior.
+4. Place the rule last in the rule list.
+
+This rule keeps the listed tags indexed while preserving the tag configurations set by earlier rules.
+
+**Note**: This approach requires an earlier rule, such as the Golden Rule scoped to `*`, to match every metric. If the protection rule is the first rule that matches a metric, it keeps only the listed tags, even with Override disabled.
+
+<div class="alert alert-warning">Leave Override disabled on the tag-protection rule. With Override enabled, listing <code>team</code>, <code>cost_center</code>, and <code>business_unit</code> means "keep only these three tags" for matching metrics. This replaces the results of earlier matching rules, including the Golden Rule, and can make other tags non-queryable.</div>
+
+Keep this rule last, and check its position whenever you add or reorder rules.
+
 ### Choose between Tag Indexing Rules and Metrics without Limits™
 
 Tag Indexing Rules are dynamic policies that can apply to a single metric, a namespace, multiple prefixes, or all custom metrics. New custom metrics are automatically evaluated against existing rules as they arrive. Any metric that matches a rule is governed without requiring individual configuration.
@@ -250,7 +273,7 @@ Existing Metrics without Limits™ configurations take precedence over Tag Index
 | Apply the same tag policy across a namespace or set of prefixes | Tag Indexing Rules |
 | Automatically govern new metrics and tag keys that match an existing policy | Tag Indexing Rules |
 | Unindex tags that are not queried and are not used in Datadog assets | Tag Indexing Rules |
-| Remove known high-cardinality tags across multiple metrics | Tag Indexing Rules |
+| Unindex known high-cardinality tags across multiple metrics | Tag Indexing Rules |
 | Keep only an approved set of tags across multiple metrics | Tag Indexing Rules |
 | Configure a different set of indexed tags for one metric | Metrics without Limits™ |
 
