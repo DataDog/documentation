@@ -16,11 +16,11 @@ MongoDB and HTTP actions in the Datadog Agent or Cluster Agent can use [runner c
 
 For standalone runners and connections that ask for a credential file path, use [credential files](#credential-files).
 
-## Credentials in the Datadog Agent
+## Runner credentials in the Datadog Agent
 
-The **Runner credential** source requires Datadog Agent 7.86 or later.
+<div class="alert alert-info">The <strong>Runner credential</strong> source requires Datadog Agent 7.86 or later.</div>
 
-Runner credentials are defined under `private_action_runner.credentials.values` in the Agent configuration. Each entry has a key, such as `mongoPassword`, and an object containing its `value`. A value can use an `ENC[...]` reference resolved by [Agent secret management][2].
+Define runner credentials under `private_action_runner.credentials.values` in the Agent configuration. Each entry has a key, such as `mongoPassword`, and an object that contains its `value` and optional restrictions. A value can use an `ENC[...]` reference resolved by [Agent secret management][2].
 
 The connection references the runner credential key, not the `ENC[...]` handle or the secret value. For example, the connection references `mongoPassword`, and the Agent looks up `private_action_runner.credentials.values.mongoPassword.value`.
 
@@ -59,7 +59,9 @@ private_action_runner:
           - api.example.com
 ```
 
-The MongoDB secret contains a `password` field, and the HTTP secret contains a `token` field. You can also use another supported Agent secret backend. Restart the Agent after changing its configuration.
+You can also use another supported Agent secret backend.
+
+After you change the Agent configuration, restart the Agent.
 
 Each credential supports the following settings:
 
@@ -67,7 +69,7 @@ Each credential supports the following settings:
 |---|---|
 | `value` | Required credential value, either a string or an `ENC[...]` reference. |
 | `allowed_actions` | Optional list of action names or trailing bundle wildcards, such as `com.datadoghq.mongodb.*`. If omitted, the credential does not restrict actions. An empty list (`[]`) denies all actions. |
-| `allowed_http_domains` | Optional list of hostnames, IP addresses, or wildcard domains such as `*.example.com`. Use hostnames without a URL scheme, port, or path. If set, only HTTP actions can use the credential. An empty list (`[]`) denies all destinations. If omitted, the credential does not restrict destinations. |
+| `allowed_http_domains` | Optional list of hostnames, IP addresses, or wildcard domains, such as `*.example.com`. Use hostnames without a URL scheme, port, or path. If set, only HTTP actions can use the credential. If omitted, the credential does not restrict destinations. An empty list (`[]`) denies all destinations. |
 
 Credential restrictions apply in addition to the runner's `actions_allowlist` and `http_allowlist` and the action's authorization in Datadog. A credential restriction does not grant permission to run an action. Include `com.datadoghq.http.testConnection` in `allowed_actions` to allow HTTP connection tests.
 

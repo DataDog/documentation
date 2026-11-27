@@ -165,7 +165,7 @@ Private Actions are in Preview. Use this form to request access today.
 
 You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Deploy a private action runner in the Datadog Agent or as a standalone container. For more information, see [Private Actions][5].
 
-For connections that offer **Runner credential** as a credential source, configure runner credentials on the target Agent. See [Credentials in the Datadog Agent][7]. For connections that ask for a credential file path, follow the steps below.
+If you use runner credentials, define them in the Agent configuration before you create the connection. See [Credentials in the Datadog Agent][7]. Then, in the authentication fields, set {{< ui >}}Credential source{{< /ui >}} to {{< ui >}}Runner credential{{< /ui >}} and enter the credential's key.
 
 To configure a private HTTP request:
 1. Add an HTTP action to your app.
