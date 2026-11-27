@@ -9486,6 +9486,37 @@ menu:
       identifier: sds_troubleshooting
       parent: sensitive_data_scanner
       weight: 4
+    - name: Data Security
+      url: /security/data_security/
+      pre: sensitive-data-scanner
+      identifier: security_data_security
+      parent: security_platform_heading
+      weight: 85000
+    - name: Setup
+      url: /security/data_security/setup/
+      identifier: security_data_security_setup
+      parent: security_data_security
+      weight: 1
+    - name: Snowflake
+      url: /security/data_security/setup/snowflake/
+      identifier: security_data_security_setup_snowflake
+      parent: security_data_security_setup
+      weight: 101
+    - name: PostgreSQL
+      url: /security/data_security/setup/postgres/
+      identifier: security_data_security_setup_postgres
+      parent: security_data_security_setup
+      weight: 102
+    - name: Amazon S3
+      url: /security/data_security/setup/amazon_s3/
+      identifier: security_data_security_setup_amazon_s3
+      parent: security_data_security_setup
+      weight: 103
+    - name: Findings
+      url: /security/data_security/findings/
+      identifier: security_data_security_findings
+      parent: security_data_security
+      weight: 2
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
