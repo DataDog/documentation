@@ -44,18 +44,16 @@ This preview does not support direct host or VM installation, Docker without Kub
 
 Choose a deployment path based on how your Kubernetes cluster is managed:
 
-| If your cluster...                                                                    | Deploys the profiler as...                                          |
-|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| Already runs the Datadog Agent with Helm, including with the Agent's Collector | A sidecar in the Agent DaemonSet, using the **Datadog Helm chart** tab       |
-| Already runs the Datadog Agent with the Datadog Operator, including with the Agent's Collector    | A sidecar in the Agent DaemonSet, using the **Datadog Operator** tab         |
-| Doesn't run the Datadog Agent, and you use Helm                                         | Its own OpenTelemetry Collector DaemonSet, using the **OpenTelemetry Helm chart** tab |
-| Doesn't run the Datadog Agent, and you use the OpenTelemetry Operator                    | Its own OpenTelemetry Collector DaemonSet, using the **OpenTelemetry Operator** tab |
+| If your cluster...                                                                    | Deploys the profiler as... |
+|-----------------------------------------------------------------------------------------|----------------------------|
+| Already runs the Datadog Agent with Helm, including with the Agent's Collector          | A sidecar in the Agent DaemonSet. See the [Datadog Helm chart guide](https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/bundled/helm.md). |
+| Already runs the Datadog Agent with the Datadog Operator, including with the Agent's Collector | A sidecar in the Agent DaemonSet. See the [Datadog Operator guide](https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/bundled/operator.md). |
+| Doesn't run the Datadog Agent, and you use Helm                                        | Its own OpenTelemetry Collector DaemonSet. See the [OpenTelemetry Helm chart guide](https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm.md). |
+| Doesn't run the Datadog Agent, and you use the OpenTelemetry Operator                  | Its own OpenTelemetry Collector DaemonSet. See the [OpenTelemetry Operator guide](https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator.md). |
 
 If the Datadog Agent is already installed, use one of the Datadog Agent deployment paths so the Agent can enrich profiles with infrastructure metadata. Otherwise, use one of the OpenTelemetry paths.
 
 The OpenTelemetry paths deploy the Full-Host Profiler as its own OpenTelemetry Collector DaemonSet. They don't require a pre-existing Datadog Agent, DDOT Collector, or other Agent-side Datadog component on the host, and you can run the DaemonSet alongside other Collector distributions.
-
-For step-by-step instructions for each path, see [Full-Host Profiler deployment instructions][2].
 
 ## Service naming
 
