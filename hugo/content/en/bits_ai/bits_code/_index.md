@@ -97,6 +97,10 @@ You can manually prompt Bits Code to implement changes for a certain finding, or
 
 Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with Bits Code on general coding tasks.
 
+### Multi-repository sessions
+
+A single Bits Code session can read code from multiple repositories to investigate issues across codebases. Bits Code adds repositories to the session as the task requires, and you can name specific repositories in your prompt. Bits Code can read only repositories that are accessible through your [source code integration][6].
+
 ### Automations
 
 [Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull or merge request (optionally in draft mode) or a Slack notification.
@@ -128,8 +132,7 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 
 ## Limitations
 
-- Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
-- Bits Code does not support multi-repository investigations.
+- Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.
 
 ## Further reading
 
