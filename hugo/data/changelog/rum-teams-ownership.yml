@@ -27,3 +27,10 @@ entries:
       - ListTeamsOwnershipMappings
       - ListTeamsOwnershipRules
     title: Make RUM Teams Ownership endpoints stable and opt into pup
+  - change_type: modified
+    date: '2026-11-27'
+    link: https://github.com/DataDog/documentation/pull/42254
+    operations:
+      - CreateTeamsOwnershipMappingsBatch
+    title: Enable RUM teams ownership BDD scenarios and drop unreachable batch 
+      409

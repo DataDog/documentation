@@ -1,0 +1,16 @@
+{
+  "atomic:operations": [
+    {
+      "op": "add",
+      "data": {
+        "type": "teams_ownership_mappings",
+        "attributes": {
+          "team_handle": "team-rum",
+          "view_name": "/checkout-examplerumteamsownership",
+          "service": "web-checkout-examplerumteamsownership",
+          "match_type": "exact"
+        }
+      }
+    }
+  ]
+}
