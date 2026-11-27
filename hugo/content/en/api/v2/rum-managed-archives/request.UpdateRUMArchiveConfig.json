@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "retention_days": 90
+    },
+    "id": "abcd1234-0000-0000-abcd-1234abcd5678",
+    "type": "rum_archive_config"
+  }
+}

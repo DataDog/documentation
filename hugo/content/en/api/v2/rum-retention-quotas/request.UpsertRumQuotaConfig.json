@@ -1,0 +1,16 @@
+{
+  "data": {
+    "attributes": {
+      "custom": {
+        "daily_reset_time": "08:00",
+        "daily_reset_timezone": "+09:00",
+        "quota_reached_action": "stop",
+        "session_limit": 1000000,
+        "window_type": "daily"
+      },
+      "mode": "custom"
+    },
+    "id": "abcd1234-0000-0000-abcd-1234abcd5678",
+    "type": "rum_quota_config"
+  }
+}

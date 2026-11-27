@@ -2402,6 +2402,13 @@
       "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
+  "UpdateRUMArchiveConfig": [
+    {
+      "group": "rum_managed_archives",
+      "suffix": "",
+      "description": "Create or update an archive configuration returns \"OK\" response"
+    }
+  ],
   "GetRUMRecoverySessionCount": [
     {
       "group": "rum_recovery",
@@ -2414,6 +2421,13 @@
       "group": "rum_recovery",
       "suffix": "_3394116303",
       "description": "Search archived sessions returns canonical data and first-page metadata"
+    }
+  ],
+  "UpsertRumQuotaConfig": [
+    {
+      "group": "rum_retention_quotas",
+      "suffix": "",
+      "description": "Create or update a RUM retention quota config returns \"OK\" response"
     }
   ],
   "UpdateRestrictionPolicy": [
