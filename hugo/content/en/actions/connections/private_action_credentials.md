@@ -28,7 +28,7 @@ The connection references the runner credential key, not the `ENC[...]` handle o
 
 Add the credentials to the configuration of the Agent that executes the action. On a host, edit `datadog.yaml`. For the Datadog Operator, include the configuration in the `agent.datadoghq.com/private-action-runner-configdata` annotation for the node Agent, or `cluster-agent.datadoghq.com/private-action-runner-configdata` for the Cluster Agent. For deployment instructions, see [Set up a private action runner in the Datadog Agent][3].
 
-The following example uses AWS Secrets Manager. Configure the Agent's AWS access as described in [Agent secret management][2], and replace the secret ID placeholders with your secret IDs:
+The following example uses AWS Secrets Manager. Configure the Agent's AWS access as described in [Agent secret management][2], and replace the secret ID placeholders with your secret IDs. In this example, the MongoDB secret contains a `password` field, and the HTTP secret contains a `token` field:
 
 ```yaml
 secret_backend_type: aws.secrets
