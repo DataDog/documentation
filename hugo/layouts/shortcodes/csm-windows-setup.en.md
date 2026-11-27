@@ -17,7 +17,7 @@ Use the following instructions to enable Cloud Security Vulnerabilities for Wind
 
 ### Installer
 
-1. Download the [Datadog Agent installer][12].
+1. Download the [Datadog Agent installer][12]. The link downloads the `.msi` file directly.
 2. Right-click the downloaded `.msi` file and select **Run as administrator**.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5]. If you are upgrading from an existing version of the Agent, the installer may not prompt you for an API key.
 
@@ -25,8 +25,12 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][12].
+1. Download the [Datadog Agent installer][12]. The link downloads the `.msi` file directly.
 2. From an elevated command prompt or PowerShell session, run the installer with `msiexec` and pass your [Datadog API key][5] with the `APIKEY` property. For the full list of supported properties, see [Installation configuration options][4].
+
+   ```powershell
+   msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<DATADOG_API_KEY>" SITE="<DATADOG_SITE>"
+   ```
 
 For other installation methods, see [Install the Datadog Agent on Windows][3].
 
@@ -35,7 +39,7 @@ For other installation methods, see [Install the Datadog Agent on Windows][3].
 ### Enable vulnerability scanning
 
 1. Make sure you have access to `C:\ProgramData`, which is a hidden folder.
-    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and select the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
 2. In `C:\ProgramData\Datadog\datadog.yaml`, set the `sbom` and `host` flags:<br><br>
     ```
     sbom:
