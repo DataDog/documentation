@@ -71,7 +71,7 @@ To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resour
 
 #### Using an export header
 
-If you export traces directly to Datadog over OTLP HTTP, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. This enables LLM Observability conversion for every span in the export unless `dd_llmobs_enabled=false` is explicitly set on a span or resource under the standard conversion policy. Use this header only for trace exports to Datadog, not for requests to your model provider.
+If you export traces directly to Datadog over OTLP HTTP, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. This enables LLM Observability conversion for every span in the export unless `dd_llmobs_enabled=false` is explicitly set on a span or resource under the standard conversion policy. Send this header only on direct OTLP HTTP trace exports to Datadog, not on requests to your model provider. The header doesn't apply to the OpenTelemetry Collector's Datadog exporter. For that setup, see the [Using the OpenTelemetry Collector](#using-the-opentelemetry-collector) section. The `dd-otlp-source=llmobs` header alone doesn't enable conversion.
 
 #### Using Claude Platform
 
@@ -91,21 +91,59 @@ OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
 
 #### Using code
 
-You can also set the attribute programmatically on any span in your trace:
+To set the attribute programmatically, add it to the resource so that every span your tracer provider exports includes it:
 
 ```python
 from opentelemetry import trace
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
 
-tracer = trace.get_tracer(__name__)
-
-with tracer.start_as_current_span("my-span") as span:
-    # Enable LLM Observability conversion for this entire trace
-    span.set_attribute("dd_llmobs_enabled", True)
+resource = Resource.create({"dd_llmobs_enabled": True})
+trace.set_tracer_provider(TracerProvider(resource=resource))
 ```
+
+#### Using the OpenTelemetry Collector
+
+If you send traces through an OpenTelemetry Collector with the Datadog exporter, set the attribute in the Collector with a `resource` processor. The Datadog exporter copies resource attributes into every span it sends, so the attribute applies to all spans in the pipeline. If a span sets `dd_llmobs_enabled` itself, the span value takes precedence.
+
+Add the processor to the `traces` pipeline that uses the `datadog` exporter:
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  resource:
+    attributes:
+      - key: dd_llmobs_enabled
+        value: "true"
+        action: upsert
+  batch:
+
+exporters:
+  datadog:
+    api:
+      site: <DATADOG_SITE>
+      key: ${env:DD_API_KEY}
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [datadog]
+```
+
+Replace `<DATADOG_SITE>` with your Datadog site ({{< region-param key="dd_site" code="true" >}}), and set the `DD_API_KEY` environment variable on the Collector to your [Datadog API key][2].
 
 ### 2. Configure the exporter {#configuration}
 
 Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
+
+If you use the OpenTelemetry Collector, point your application's OTLP exporter at the Collector's OTLP receiver instead. The Collector configuration in [Using the OpenTelemetry Collector](#using-the-opentelemetry-collector) sets the Datadog site and API key, so your application doesn't need the following Datadog endpoint or headers.
 
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
 
