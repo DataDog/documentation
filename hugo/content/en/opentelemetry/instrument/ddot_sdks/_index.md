@@ -173,7 +173,7 @@ DD_AGENT_HOST=<DATADOG_AGENT_HOST>
 
 The [OpenTelemetry Profiles signal][20] is in Alpha. DDOT SDKs therefore send in-process profiles using the Datadog profile format and transport through the Datadog Agent. Traces, metrics, and logs continue over OTLP to the Collector.
 
-For host-wide CPU profiling across processes, see [DDOT Full Host Profiler][21]. It exports profiles over OTLP and does not collect memory or lock profiles.
+For host-wide CPU profiling across processes, see [Host Profiler][21]. It exports profiles over OTLP and does not collect memory or lock profiles.
 
 ## View your telemetry
 

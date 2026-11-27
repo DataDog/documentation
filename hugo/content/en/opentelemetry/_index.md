@@ -77,7 +77,7 @@ Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog b
 |---|---|
 | [DDOT SDKs][4] (Preview) | Instrument your application. A DDOT SDK is Datadog's version of the OpenTelemetry SDK for your language, with Datadog support and Datadog-specific capabilities, such as Live Debugger, Dynamic Instrumentation, and Database Monitoring. |
 | [DDOT Collector][5] (Preview) | Receives your telemetry, processes it, and sends it to Datadog. It's an OpenTelemetry Collector that Datadog builds. |
-| [Full-Host Profiler][6] (Preview) | Profiles every process on a host. |
+| [Host Profiler][6] | Profiles every process on a host. |
 
 Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. Datadog recommends [running the Datadog Agent alongside them][7] for the Datadog-specific capabilities of DDOT SDKs, such as Live Debugger and Dynamic Instrumentation. The Datadog Agent acts mainly as a Remote Configuration proxy: traces, metrics, and logs still go over OTLP to the Collector. See [Feature Compatibility][14].
 

@@ -154,7 +154,7 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 {{< /programming-lang >}}
 
 {{< programming-lang lang="full_host" >}}
-Timeline view is currently not supported for Full Host profiling
+Timeline view is currently not supported for the Host Profiler.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

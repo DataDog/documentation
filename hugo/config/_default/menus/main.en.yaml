@@ -5313,7 +5313,7 @@ menu:
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_linux
       weight: 708
-    - name: Full-Host Profiler
+    - name: Host Profiler
       url: profiler/profiler_troubleshooting/full_host/
       parent: profiler_troubleshooting
       identifier: profiler_troubleshooting_full_host
