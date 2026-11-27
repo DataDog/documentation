@@ -25,12 +25,22 @@ Looking to define rules in your deployment configuration? See [Inline Deployment
 2. Click {{< ui >}}Create Gate{{< /ui >}}.
 3. Configure the following settings:
    - {{< ui >}}Service{{< /ui >}}: The service name (example: `transaction-backend`).
-   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`).
+   - {{< ui >}}Environment{{< /ui >}}: The target environment (example: `dev`). Leave it empty to apply the gate to all environments. See [Gates for all environments](#gates-for-all-environments).
    - {{< ui >}}Identifier{{< /ui >}} (optional, default value is `default`): Unique name for multiple gates on the same service/environment. Use this to:
      - Allow different deployment strategies (example: `fast-deploy` vs `default`)
      - Distinguish deployment phases (example: `pre-deploy` vs `post-deploy`)
      - Define canary stages (example: `pre-deploy` vs `canary-20pct`)
    - {{< ui >}}Evaluation Mode{{< /ui >}}: Enable {{< ui >}}Dry Run{{< /ui >}} to test gate behavior without impacting deployments. The evaluation of a dry-run gate always responds with a pass status, but the in-app result reflects the real evaluation. This is useful when performing an initial evaluation of the gate behavior without impacting the deployment pipeline.
+
+### Gates for all environments
+
+A gate for all environments applies the same rules to every environment of a service. Use it when you want one gate per service, instead of one gate per service in each environment.
+
+To create it, leave the {{< ui >}}Environment{{< /ui >}} field empty. With the [API][4] or [Terraform][9], set `env` to `*`.
+
+When you evaluate the gate, pass the environment you are deploying to. Datadog runs the gate rules for that environment, and the evaluation shows that environment on the [Evaluations][7] page.
+
+For the same service and identifier, a gate for all environments can't coexist with environment-specific gates.
 
 ## Add rules to a gate
 
@@ -90,7 +100,7 @@ Settings for preconfigured FDD rules:
 
 ## Evaluate a gate from your pipeline
 
-After the gate is configured, request an evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
+After the gate is configured, request an evaluation for the service and environment you are deploying to, and decide whether to block or continue the deployment based on the result.
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
@@ -560,3 +570,4 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
 [7]: https://app.datadoghq.com/ci/deployment-gates/evaluations
 [8]: /deployment_gates/#rules
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate
