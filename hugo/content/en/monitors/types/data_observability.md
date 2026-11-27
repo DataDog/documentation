@@ -37,6 +37,8 @@ Data quality monitors support the following metric types:
 | Row Count | Tracks the number of rows in a table or view. |
 | Custom SQL | Tracks a custom metric value returned by a SQL query. |
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 **Column-level metric types:**
 | Metric type | Description |
 |---|---|
@@ -47,6 +49,8 @@ Data quality monitors support the following metric types:
 | Percent Zero | Tracks the percentage of values equal to zero. |
 | Percent Negative | Tracks the percentage of negative values. |
 | Min / Max / Mean / Sum / Standard Deviation | Tracks statistical measures across column values. |
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
 
@@ -150,6 +154,8 @@ The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your 
 
 {{< ui >}}Column{{< /ui >}} metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 | Metric | Description |
 |---|---|
 | {{< ui >}}Uniqueness{{< /ui >}} | The percentage of values in a column that are unique. |
@@ -164,6 +170,8 @@ The {{< ui >}}Row Count{{< /ui >}} metric type tracks row count changes in your 
 | {{< ui >}}Sum{{< /ui >}} | The sum of all values in a column. |
 
 <div class="alert alert-info">Some column metrics are only available for specific column types. Numeric metrics (Percent Zero, Percent Negative, Min, Max, Mean, Standard Deviation, Sum) require numeric columns.</div>
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 {{% /tab %}}
 {{% tab "Custom SQL" %}}
@@ -194,15 +202,15 @@ If your SQL query includes a `GROUP BY` clause, list the grouped columns as a co
 
 Select a detection method:
 
-- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model requires **3 to 7 days** to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
+- {{< ui >}}Anomalies{{< /ui >}}: Alert when the metric deviates from an expected pattern. Threshold values are not required. The anomaly model needs a training period before it can alert. Training typically takes 3 to 7 days for a monitor that runs more than once a day, and 9 days for a monitor that runs once a day. Some metrics, such as Freshness and Job duration, follow different rules. See [Training period in the Anomaly Detection guide][17]. During the training period, the monitor does not trigger alerts and is visualized in blue. After training completes, the monitor is shown in green when in a normal state and red when in an outlier state.
 - {{< ui >}}Thresholds{{< /ui >}}: Alert when the metric crosses a fixed value. Set the comparison operator (`above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to`) and define a {{< ui >}}Critical{{< /ui >}} threshold (required) and optionally a {{< ui >}}Warning{{< /ui >}} threshold. For more details, see [Configure Monitors][8].
 
 ### WHERE clause
 
 Add a {{< ui >}}WHERE{{< /ui >}} clause to filter the data evaluated by the monitor. This is useful for monitoring specific segments of data or only recent records. For example:
 
-- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())` — only monitor rows from the past week.
-- `region = 'US'` — only monitor data for a specific region.
+- `created_at >= DATEADD(day, -7, CURRENT_TIMESTAMP())`: Monitor only rows from the past week.
+- `region = 'US'`: Monitor only data for a specific region.
 
 ### Group by
 
@@ -218,19 +226,15 @@ In the {{< ui >}}If data is missing to evaluate{{< /ui >}} dropdown menu, select
 
 ### Model configuration
 
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-The following model configuration settings are in Preview. Contact your Datadog representative to enable them for your organization.
-{{< /callout >}}
-
 For monitors using the {{< ui >}}Anomalies{{< /ui >}} detection method, expand the collapsed {{< ui >}}Model configuration{{< /ui >}} section to refine how the model behaves. Model configuration is part of the monitor definition, so to change it on an existing monitor, edit the monitor. Model configuration is separate from bound annotations, which you add from the monitor's status page. See the [Annotate bounds](#annotate-bounds) section.
 
 | Setting | Description |
 |---|---|
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | The number of consecutive failed evaluations before the monitor alerts. Configure this setting to suppress isolated spikes. |
-| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above. The model can still set a wider bound. |
-| {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the metric's own units. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
-| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations.  The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
-| {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. |
+| {{< ui >}}Minimum upper bound size{{< /ui >}} | The minimum distance between the predicted value and the upper bound, in the metric's units. Freshness uses seconds, job duration uses nanoseconds, and percentage metrics, such as Nullness, use percentage points. All other metrics use the metric's value, such as rows for Row Count, distinct values for Cardinality, or the returned value for Custom SQL. For example, a value of `1000` on a Row Count monitor keeps the upper bound at least 1,000 rows above the predicted value. A value of `3600` on a Freshness monitor keeps it at least one hour above, and a value of `60000000000` on a job duration monitor keeps it at least one minute above. The model can still set a wider bound. |
+| {{< ui >}}Minimum lower bound size{{< /ui >}} | The minimum distance between the predicted value and the lower bound, in the same units as {{< ui >}}Minimum upper bound size{{< /ui >}}. For example, a value of `1000` on a Row Count monitor keeps the lower bound at least 1,000 rows below the predicted value. The model can still set a wider bound. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controls the width of the expected bounds, relative to the metric's normal variation. Move the slider toward {{< ui >}}Fewer alerts{{< /ui >}} for wider bounds, or toward {{< ui >}}More alerts{{< /ui >}} for narrower bounds. The slider sets a bound-width multiplier whose values roughly correspond to numbers of standard deviations. The default is `3`, and the range is `0.1` (narrowest bounds) to `6` (widest bounds). In the API, set this value with the `sensitivity` option. Configured minimum bound sizes still apply. |
+| {{< ui >}}Model Instructions{{< /ui >}} | Provides plain-language context, up to 500 characters, about metric behavior you expect and don't want alerts for. For example: `Don't alert on large increases during US holidays`. An AI reviewer reads these instructions when a value falls outside the bounds. See [Model Instructions in the Anomaly Detection guide][18]. |
 
 Use the following guidelines to tune a monitor:
 
@@ -251,8 +255,12 @@ To define your own cadence, select {{< ui >}}Custom schedule{{< /ui >}} and supp
 
 Choose an aggregation type:
 
+<!-- vale Datadog.words_case_insensitive = NO -->
+
 - {{< ui >}}Simple Alert{{< /ui >}}: Send a single notification when any monitored table or column meets the condition.
 - {{< ui >}}Multi Alert{{< /ui >}}: Send a notification for each group meeting the condition. Customize which dimensions to group by (for example, `table`, `schema`, `database`) to control alert granularity. For example, grouping by `schema` only sends one alert per schema, bundling all affected tables together to reduce noise.
+
+<!-- vale Datadog.words_case_insensitive = YES -->
 
 ### Example notification
 
@@ -514,12 +522,16 @@ For monitors using the **Anomaly** detection method, you can annotate bound rang
 
 On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a time range on the chart, and choose one of the following annotations:
 
+<!-- vale Datadog.tense = NO -->
+
 | Annotation | Description |
 |---|---|
 | {{< ui >}}Expected{{< /ui >}} | Expand bounds to include the marked behavior permanently. |
 | {{< ui >}}Reset for now{{< /ui >}} | Mark behavior as OK, but alert if it happens again. |
 | {{< ui >}}Missed alert{{< /ui >}} | Contract bounds to alert on this behavior. |
 | {{< ui >}}Ignore{{< /ui >}} | Exclude annotated data when modeling bounds. |
+
+<!-- vale Datadog.tense = YES -->
 
 ## Further Reading
 
@@ -541,3 +553,5 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [14]: /data_observability/jobs_monitoring/
 [15]: https://app.datadoghq.com/data-obs/monitors/create/data-jobs
 [16]: /data_observability/jobs_monitoring/openlineage/
+[17]: /data_observability/quality_monitoring/guides/anomaly_detection/#training-period
+[18]: /data_observability/quality_monitoring/guides/anomaly_detection/#model-instructions
