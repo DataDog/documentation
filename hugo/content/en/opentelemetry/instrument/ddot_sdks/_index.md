@@ -164,14 +164,16 @@ The [existing-configuration guide][15] covers these migration paths.
 
 DDOT SDKs support [Continuous Profiler][18] when profiling is enabled in the application and the SDK can reach the Datadog Agent. Support depends on the language, runtime, and SDK version; follow the [profiler setup instructions for your language][19].
 
-Keep the OpenTelemetry mode and OTLP export settings above. Enable profiling using the language-specific instructions, and configure the SDK to reach the Datadog Agent's profiling intake. For a Java application using the Agent's HTTP intake on port `8126`, set:
+Keep the settings described in [Configure OpenTelemetry mode and export](#configure-opentelemetry-mode-and-export). Enable profiling using the language-specific instructions, and configure the SDK to reach the Datadog Agent's profiling intake. For a Java application using the Agent's HTTP intake on port `8126`, set:
 
 ```text
 DD_PROFILING_ENABLED=true
 DD_AGENT_HOST=<DATADOG_AGENT_HOST>
 ```
 
-Profiles use the Datadog profiling protocol and go to the Datadog Agent. Traces, metrics, and logs continue over OTLP to the Collector.
+The [OpenTelemetry Profiles signal][20] is in Alpha. DDOT SDKs therefore send in-process profiles using the Datadog profile format and transport through the Datadog Agent. Traces, metrics, and logs continue over OTLP to the Collector.
+
+For host-wide CPU profiling across processes, see [DDOT Full Host Profiler][21]. It exports profiles over OTLP and does not collect memory or lock profiles.
 
 ## View your telemetry
 
@@ -200,6 +202,8 @@ View your application's traces in [Trace Explorer][10], metrics in [Metrics Expl
 [17]: /tracing/troubleshooting/tracer_startup_logs/#opentelemetry-configuration
 [18]: /profiler/
 [19]: /profiler/enabling/
+[20]: https://opentelemetry.io/docs/concepts/signals/profiles/
+[21]: /profiler/enabling/full_host/
 
 [export-2]: /opentelemetry/setup/ddot_collector/
 [export-3]: /opentelemetry/setup/collector_exporter/
