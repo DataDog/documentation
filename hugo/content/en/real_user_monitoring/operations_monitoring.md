@@ -76,7 +76,7 @@ Datadog retains both metrics for 15 months. The metrics include these dimensions
 
 - `operation.name`, defined on the client side
 - `operation.status`, either `success` or `failure`
-- `operation.failure_reason`, either `error`, `abandoned`, or `other`
+- `operation.failure_reason`, either `error`, `abandoned`, `other`, or `timeout` (operations not stopped before the session expires)
 
 Use these metrics to create [metric monitors][22] and availability or latency Service Level Objectives (SLOs) for RUM operations. For recommended queries, thresholds, and examples, see [Best Practices for Creating SLOs for RUM Operations][23].
 

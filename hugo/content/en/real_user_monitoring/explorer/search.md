@@ -18,7 +18,7 @@ After applying a time range on the top right, you can find events with `key:valu
 
 ## Event types
 
-While RUM automatically captures events, you can also capture your own events. All auto-captured and custom events are stored into six event types for [browser][1], [iOS][2], [Android][3], and [React Native][4] applications and indexed to become searchable.
+While RUM automatically captures events, you can also capture your own events. All auto-captured and custom events are stored into eight event types for [browser][1], [iOS][2], [Android][3], and [React Native][4] applications and indexed to become searchable.
 
 | Event Type | Retention | Description                                                                                                                                                                                                                                                               |
 |------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,6 +28,8 @@ While RUM automatically captures events, you can also capture your own events. A
 | Error      | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                                 |
 | Resource   | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a webpage. It includes detailed loading timing information.                                                                                                                          |
 | Long Task  | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                                |
+| Vital      | 15 days   | A vital event is generated for each custom duration vital.                                                                                                                                                                                                                |
+| Operation  | 15 days   | An operation event tracks a critical step of a user journey from start to success or failure. See [Operations Monitoring][10].                                                                                                                                            |
 
 To search through your RUM events, select an event type from the dropdown menu to the left of the search bar. 
 
@@ -102,3 +104,4 @@ For example, if your facet name is **url** and you want to filter on the **url**
 [7]: /real_user_monitoring/explorer/events/
 [8]: /real_user_monitoring/explorer/visualize#timeseries
 [9]: /real_user_monitoring/explorer/
+[10]: /real_user_monitoring/operations_monitoring/
