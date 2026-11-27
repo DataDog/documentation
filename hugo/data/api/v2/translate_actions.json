@@ -3400,6 +3400,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an OpenAI Codex integration account."
   },
+  "ListOpenAIModelInferenceIntegrationAccounts": {
+    "description": "List OpenAI Model Inference integration accounts.",
+    "summary": "List OpenAI Model Inference accounts"
+  },
+  "CreateOpenAIModelInferenceIntegrationAccount": {
+    "description": "Create an OpenAI Model Inference integration account.",
+    "summary": "Create an OpenAI Model Inference account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an OpenAI Model Inference integration account."
+  },
+  "DeleteOpenAIModelInferenceIntegrationAccount": {
+    "description": "Delete an OpenAI Model Inference integration account.",
+    "summary": "Delete an OpenAI Model Inference account"
+  },
+  "GetOpenAIModelInferenceIntegrationAccount": {
+    "description": "Get an OpenAI Model Inference integration account.",
+    "summary": "Get an OpenAI Model Inference account"
+  },
+  "UpdateOpenAIModelInferenceIntegrationAccount": {
+    "description": "Update an OpenAI Model Inference integration account. Only the fields provided are changed.",
+    "summary": "Update an OpenAI Model Inference account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an OpenAI Model Inference integration account."
+  },
   "ListSnowflakeIntegrationAccounts": {
     "description": "List Snowflake integration accounts.",
     "summary": "List Snowflake integration accounts"

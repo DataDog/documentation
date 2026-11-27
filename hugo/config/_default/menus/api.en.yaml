@@ -21097,6 +21097,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: OpenAI Model Inference Integration
+      url: /api/latest/openai-model-inference-integration/
+      identifier: openai-model-inference-integration
+      generated: true
+    - name: Update an OpenAI Model Inference account
+      url: /api/latest/openai-model-inference-integration/update-an-openai-model-inference-account/
+      identifier: openai-model-inference-integration-update-an-openai-model-inference-account
+      parent: openai-model-inference-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenAIModelInferenceIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an OpenAI Model Inference account
+      url: /api/latest/openai-model-inference-integration/get-an-openai-model-inference-account/
+      identifier: openai-model-inference-integration-get-an-openai-model-inference-account
+      parent: openai-model-inference-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOpenAIModelInferenceIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an OpenAI Model Inference account
+      url: /api/latest/openai-model-inference-integration/delete-an-openai-model-inference-account/
+      identifier: openai-model-inference-integration-delete-an-openai-model-inference-account
+      parent: openai-model-inference-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenAIModelInferenceIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an OpenAI Model Inference account
+      url: /api/latest/openai-model-inference-integration/create-an-openai-model-inference-account/
+      identifier: openai-model-inference-integration-create-an-openai-model-inference-account
+      parent: openai-model-inference-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOpenAIModelInferenceIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List OpenAI Model Inference accounts
+      url: /api/latest/openai-model-inference-integration/list-openai-model-inference-accounts/
+      identifier: openai-model-inference-integration-list-openai-model-inference-accounts
+      parent: openai-model-inference-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOpenAIModelInferenceIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

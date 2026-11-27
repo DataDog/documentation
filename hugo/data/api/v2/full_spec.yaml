@@ -110757,6 +110757,287 @@ components:
       required:
         - type
       type: object
+    OpenAIModelInferenceIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the OpenAI Model Inference integration account. Set exactly one method.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthRequest"
+    OpenAIModelInferenceIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the OpenAI Model Inference integration account.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthResponse"
+    OpenAIModelInferenceIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the OpenAI Model Inference integration account. Set exactly one method.
+      oneOf:
+        - $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthUpdate"
+    OpenAIModelInferenceIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a project-scoped OpenAI API key with Write permission for model capabilities. While `openai-llm-completions` is enabled, the API returns a `422` response for a key that cannot call the OpenAI chat completions endpoint.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    OpenAIModelInferenceIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    OpenAIModelInferenceIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    OpenAIModelInferenceIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use a project-scoped OpenAI API key with Write permission for model capabilities. While `openai-llm-completions` is enabled, the API returns a `422` response for a key that cannot call the OpenAI chat completions endpoint. Only the provided fields are changed. To keep the stored token, omit `token`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with OpenAI.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    OpenAIModelInferenceIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create an OpenAI Model Inference integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Model Inference integration account.
+          example: openai-model-inference-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    OpenAIModelInferenceIntegrationAccountCreateData:
+      description: Data envelope for creating an OpenAI Model Inference integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    OpenAIModelInferenceIntegrationAccountCreateRequest:
+      description: Request payload to create an OpenAI Model Inference integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    OpenAIModelInferenceIntegrationAccountResponse:
+      description: Response payload for a single OpenAI Model Inference integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    OpenAIModelInferenceIntegrationAccountResponseAttributes:
+      description: Attributes of an OpenAI Model Inference integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the OpenAI Model Inference integration account.
+          example: openai-model-inference-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    OpenAIModelInferenceIntegrationAccountResponseData:
+      description: Data envelope of an OpenAI Model Inference integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the OpenAI Model Inference integration account.
+          example: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    OpenAIModelInferenceIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the OpenAI Model Inference integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIModelInferenceIntegrationAccountSettingsResponse:
+      description: Settings configured on the OpenAI Model Inference integration account.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIModelInferenceIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: >-
+        Settings for updating the OpenAI Model Inference integration account. Only the fields provided are changed.
+      properties:
+        custom_tags:
+          description: >-
+            Comma-separated list of custom tags applied to the data collected for this account, for example `team:ai,env:prod`.
+          example: team:ai,env:prod
+          type: string
+      type: object
+    OpenAIModelInferenceIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update an OpenAI Model Inference integration account. Every field is optional. Only the provided fields are changed. When `dataflows` is provided, only the dataflow IDs in the request are modified. Dataflows omitted from the map keep their current configuration.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the OpenAI Model Inference integration account.
+          example: openai-model-inference-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountSettingsUpdate"
+      type: object
+    OpenAIModelInferenceIntegrationAccountUpdateData:
+      description: Data envelope for updating an OpenAI Model Inference integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the OpenAI Model Inference integration account to update.
+          example: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OpenAIModelInferenceIntegrationAccountUpdateRequest:
+      description: Request payload to update an OpenAI Model Inference integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    OpenAIModelInferenceIntegrationAccountsResponse:
+      description: Response payload for a list of OpenAI Model Inference integration accounts.
+      properties:
+        data:
+          description: List of OpenAI Model Inference integration accounts.
+          items:
+            $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    OpenAIModelInferenceIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from OpenAI Model Inference, keyed by dataflow ID. Each dataflow turns on a distinct type of collection. Set `enabled` to start or stop a dataflow. The default for each dataflow applies when the account is created. On update, omitted fields keep their current values.
+      properties:
+        openai-llm-completions:
+          $ref: "#/components/schemas/OpenAIModelInferenceLLMCompletionsIntegrationDataflowRequest"
+        openai-project-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAIModelInferenceProjectCloudCostDataIntegrationDataflowRequest"
+      type: object
+    OpenAIModelInferenceIntegrationDataflowsResponse:
+      description: Data Datadog collects from OpenAI Model Inference, keyed by dataflow ID.
+      properties:
+        openai-llm-completions:
+          $ref: "#/components/schemas/OpenAIModelInferenceLLMCompletionsIntegrationDataflowResponse"
+        openai-project-cloud-cost-data:
+          $ref: "#/components/schemas/OpenAIModelInferenceProjectCloudCostDataIntegrationDataflowResponse"
+      type: object
+    OpenAIModelInferenceLLMCompletionsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Makes the key in `authentication` available to run evaluations in [LLM Observability](https://docs.datadoghq.com/llm_observability/). While this dataflow is enabled, the API returns a `422` response for a key that cannot call the OpenAI chat completions endpoint.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `true`. Set to `false` to stop collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAIModelInferenceLLMCompletionsIntegrationDataflowResponse:
+      description: >-
+        Makes the key in `authentication` available to run evaluations in [LLM Observability](https://docs.datadoghq.com/llm_observability/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    OpenAIModelInferenceProjectCloudCostDataIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Costs of the OpenAI project that owns the key in `authentication`. Analyze these costs in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Cost data appears in Cloud Cost Management within 24 hours after you enable this dataflow.
+      properties:
+        enabled:
+          description: >-
+            Whether Datadog collects this data. Defaults to `false`. Set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    OpenAIModelInferenceProjectCloudCostDataIntegrationDataflowResponse:
+      description: >-
+        Costs of the OpenAI project that owns the key in `authentication`. Analyze these costs in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     OpenAPIEndpoint:
       description: Endpoint info extracted from an `OpenAPI` specification.
       properties:
@@ -215762,6 +216043,265 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-model-inference/accounts:
+    get:
+      description: List OpenAI Model Inference integration accounts.
+      operationId: ListOpenAIModelInferenceIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            openai-llm-completions:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                            openai-project-cloud-cost-data:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-11-10T08:30:50Z"
+                          name: openai-model-inference-acme
+                          settings:
+                            custom_tags: team:ai,env:prod
+                        id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List OpenAI Model Inference accounts
+      tags:
+        - OpenAI Model Inference Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an OpenAI Model Inference integration account.
+      operationId: CreateOpenAIModelInferenceIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-model-inference-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an OpenAI Model Inference account
+      tags:
+        - OpenAI Model Inference Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/openai-model-inference/accounts/{account_id}:
+    delete:
+      description: Delete an OpenAI Model Inference integration account.
+      operationId: DeleteOpenAIModelInferenceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an OpenAI Model Inference account
+      tags:
+        - OpenAI Model Inference Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get an OpenAI Model Inference integration account.
+      operationId: GetOpenAIModelInferenceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-model-inference-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an OpenAI Model Inference account
+      tags:
+        - OpenAI Model Inference Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an OpenAI Model Inference integration account. Only the fields provided are changed.
+      operationId: UpdateOpenAIModelInferenceIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          openai-llm-completions:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                          openai-project-cloud-cost-data:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-11-10T08:30:50Z"
+                        name: openai-model-inference-acme
+                        settings:
+                          custom_tags: team:ai,env:prod
+                      id: 3f8b2c1d-6e4a-4b9f-8c2d-1a7e5b9c0f63
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/OpenAIModelInferenceIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/IntegrationAccountBadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/IntegrationAccountNotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update an OpenAI Model Inference account
+      tags:
+        - OpenAI Model Inference Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/snowflake/accounts:
     get:
       description: List Snowflake integration accounts.
@@ -296882,6 +297422,15 @@ tags:
       description: OpenAI Codex integration.
       url: https://docs.datadoghq.com/integrations/openai-codex/
     name: OpenAI Codex Integration
+  - description: |-
+      Manage your Datadog OpenAI Model Inference integration accounts and account resources
+      directly through the Datadog API. See the
+      [OpenAI integration page](https://docs.datadoghq.com/integrations/openai/) for
+      more information.
+    externalDocs:
+      description: OpenAI integration.
+      url: https://docs.datadoghq.com/integrations/openai/
+    name: OpenAI Model Inference Integration
   - description: |-
       Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
       directly through the Datadog API.
