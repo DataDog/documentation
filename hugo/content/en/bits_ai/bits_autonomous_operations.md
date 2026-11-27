@@ -170,7 +170,7 @@ If your organization has monitors with Auto-Investigate turned on, you can view 
 
 ### Does every alert in a scope start an investigation?
 
-Bits triages alerts and investigates issues that need action. Review triage decisions in [Autonomous Ops > Issues][32] or open a scope to review its [recent activity][33].
+Bits triages alerts and investigates issues that need action. To review triage decisions, see [Review Bits activity][32] and [View and manage scopes][33].
 
 <!-- TODO(reviewer): Confirm the triage verdict labels and behavior before adding a verdict table: only Action required proceeds to investigation; Watching alerts are re-checked; Dismissed and Inconclusive stop at triage. Distinguish the Inconclusive triage verdict from an inconclusive investigation conclusion. -->
 <!-- TODO(reviewer): Confirm whether there is no scope option to always investigate every alert, regardless of the triage verdict. -->
@@ -184,7 +184,7 @@ For setup instructions, see [Send investigation findings to Microsoft Teams][29]
 
 ### How do triage and investigations consume AI Credits?
 
-Autonomous Ops activity consumes [AI Credits][22]. To control usage, set [scope quotas][34].
+Autonomous Ops activity consumes [AI Credits][22]. To control usage, see [Manage credit usage][34].
 
 <!-- TODO(reviewer): Confirm how triage, Watching re-checks, and investigations consume AI Credits, including alerts that stop at triage. Add only publicly approved billing details. -->
 
