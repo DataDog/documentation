@@ -17,7 +17,7 @@ You can launch a Bits investigation from several entry points in the Datadog UI:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
-  - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
+  - [**Automatic**](#enable-automatic-investigations): Add monitors to a scope so Bits triages their alerts and investigates the ones that need action
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
 - [Real User Monitoring](#real-user-monitoring)
 - [Error Tracking](#error-tracking)
@@ -62,7 +62,7 @@ The investigation opens in a new page, and you can also view it from the test de
 
 #### From a Synthetic monitor
 
-Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
+Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options. To start investigations automatically, add the Synthetic monitor to a scope. For details, see [Enable automatic investigations](#enable-automatic-investigations).
 
 ### Real User Monitoring
 
@@ -107,11 +107,13 @@ To create a scope:
 - For several monitors, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}}][26], click {{< ui >}}Create scope{{< /ui >}}, and select {{< ui >}}Watch monitor alerts{{< /ui >}}.
 - For a single monitor, open the monitor's status page and click {{< ui >}}Create Scope{{< /ui >}}. The scope opens in Autonomous Ops with the monitor already added.
 
+For the required permissions and the rest of the setup, see [Scopes][25].
+
 <div class="alert alert-info">Scopes can't be managed through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</div>
 
 #### Monitors with Auto-Investigate turned on
 
-You can no longer turn on Auto-Investigate for individual monitors. Monitors that already have Auto-Investigate turned on keep starting investigations until you turn it off. Their settings are not converted to scopes.
+Auto-Investigate can't be turned on for individual monitors. Monitors that already have Auto-Investigate turned on keep starting investigations until you turn it off. Their settings are not converted to scopes.
 
 For these monitors:
 - An investigation starts when the monitor transitions to the alert state.
