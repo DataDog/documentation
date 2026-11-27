@@ -19,6 +19,12 @@ This guide covers setting up and using Remote Configuration with your SDKs. For 
 - Ensure you have the `APM Remote Configuration Read` and `APM Remote Configuration Write` [permissions][3].
   **Note**: If you don't have these permissions, ask your Datadog Admin to update your permissions from your Organization Settings.
 
+### Ruby application requirements
+
+The Ruby tracing integration starts Remote Configuration when a request passes through Datadog's Rack middleware. Standalone background workers, such as Sidekiq or Solid Queue processes, do not trigger this startup through their tracing integrations. These workers can send traces without receiving remote sampling updates.
+
+For standalone background workers, configure [trace sampling rules locally][9] instead of using remote or adaptive sampling. Enabling Remote Configuration on the Agent does not start it in the Ruby application.
+
 ## Set up Remote Configuration
 
 1. Ensure that [Remote Configuration is enabled for your organization][5]. This enables Datadog components across your organization to receive configurations from Datadog.
@@ -111,3 +117,4 @@ To disable Remote Configuration at the organization level:
 [6]: /agent/configuration/network
 [7]: /tracing/trace_collection/runtime_config/#supported-configuration-options
 [8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=ruby#in-sdks-user-defined-rules

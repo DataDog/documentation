@@ -171,6 +171,8 @@ Find below the minimum SDK version required for the feature:
 | .NET     | v2.53.2                  |
 | C++      | v0.2.2                   |
 
+**Ruby**: Standalone Sidekiq and Solid Queue tracing integrations do not automatically start Remote Configuration. See [Ruby application requirements][22] for the Rack startup requirement and local sampling configuration.
+
 {{% /collapse-content %}}
 
 #### Adaptive sampling
@@ -283,3 +285,4 @@ To phrase it another way, Datadog uses the following precedence rules:
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
 [20]: /account_management/rbac/permissions/
 [21]: /tracing/trace_pipeline/adaptive_sampling/#configure-the-adaptive-sampling-target
+[22]: /tracing/guide/remote_config/#ruby-application-requirements
