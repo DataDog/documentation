@@ -59,6 +59,8 @@ The table lists additional example journeys and their associated operations by i
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
+  - [Electron (0.2.0)][25]
+      - **Note**: Call the Electron SDK APIs from the main process. In renderer processes, use the Browser SDK APIs.
   - [Flutter (3.0.0)][7]
       - **Note**: On Flutter Web, operations route through the Browser SDK, which requires the `feature_operation_vital` experimental feature to be enabled.
   - [Kotlin Multiplatform (1.4.0)][4]
@@ -153,6 +155,21 @@ RUMMonitor.shared().startOperation(
 ```
 {{% /tab %}}
 
+{{% tab "Electron" %}}
+```javascript
+import { startOperation } from '@datadog/electron-sdk';
+
+startOperation(
+	name: string,
+	options?: {
+		operationKey?: string,
+		context?: Context,
+		description?: string,
+	}
+)
+```
+{{% /tab %}}
+
 {{% tab "React Native" %}}
 ```javascript
 DdRum.startFeatureOperation(
@@ -227,6 +244,23 @@ RUMMonitor.shared().succeedOperation(
 	name: String,
 	operationKey: String?,
 	attributes: [AttributeKey: AttributeValue]?
+)
+```
+
+{{% /tab %}}
+
+{{% tab "Electron" %}}
+
+```javascript
+import { succeedOperation } from '@datadog/electron-sdk';
+
+succeedOperation(
+	name: string,
+	options?: {
+		operationKey?: string,
+		context?: Context,
+		description?: string,
+	}
 )
 ```
 
@@ -317,6 +351,22 @@ RUMMonitor.shared().failOperation(
 	operationKey: String?,
     reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
 	attributes: [AttributeKey: AttributeValue]
+)
+```
+{{% /tab %}}
+
+{{% tab "Electron" %}}
+```javascript
+import { failOperation } from '@datadog/electron-sdk';
+
+failOperation(
+	name: string,
+	failureReason: FailureReason, // 'error' | 'abandoned' | 'other'
+	options?: {
+		operationKey?: string,
+		context?: Context,
+		description?: string,
+	}
 )
 ```
 {{% /tab %}}
@@ -473,4 +523,5 @@ When you open an operation, RUM displays recommendation cards ranked by severity
 [22]: /monitors/types/metric/
 [23]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/
 [24]: /journey_monitoring/details_report/
+[25]: https://github.com/DataDog/electron-sdk/releases/tag/v0.2.0
 
