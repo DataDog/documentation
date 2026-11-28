@@ -87,6 +87,7 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 - {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled.
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
+- {{< ui >}}Filtering Rules{{< /ui >}} (Preview): Metrics that match an Agent-side or server-side [metric filtering rule][47].
 
 {{< img src="metrics/catalog/facet_panel_2026-11-03.png" alt="The facet panel with the Core, Usage, and Configuration facet groups expanded." style="width:40%;" >}}
 
@@ -313,7 +314,7 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 {{< img src="metrics/catalog/actions_menu_2026-11-04.png" alt="The Actions menu, with the Manage Metric Name Filtering Rules, Manage Agent-Side Tag Aggregation Rules, Manage Percentile Aggregations, and Manage Historical Metrics options." style="width:60%;" >}}
 
-* {{< ui >}}Manage Metric Name Filtering Rules{{< /ui >}} (Preview): Drop custom metrics by name in the Datadog Agent before ingestion. See the [Agent-Side Filtering for Custom Metrics][47] guide for more information.
+* {{< ui >}}Manage Metric Name Filtering Rules{{< /ui >}} (Preview): Drop custom metrics by name at the Datadog Agent before ingestion, or server-side before indexing. See the [Filtering for Custom Metrics][47] guide for more information.
 * {{< ui >}}Manage Agent-Side Tag Aggregation Rules{{< /ui >}} (Preview): Remove tags and re-aggregate custom metrics in the Datadog Agent before they're sent to Datadog. See the [Agent-Side Tag Aggregation][48] guide for more information.
 * {{< ui >}}Manage Percentile Aggregations{{< /ui >}}: Enable or disable percentile, threshold, and standard deviation queries across multiple distribution metrics. See the [Distributions page][31] for more information.
 
@@ -422,5 +423,5 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [44]: /metrics/guide/custom_metrics_governance/
 [45]: /metrics/guide/tag-indexing-rules/
 [46]: https://app.datadoghq.com/metric/settings
-[47]: /metrics/guide/agent-filtering-for-custom-metrics/
+[47]: /metrics/guide/filtering-for-custom-metrics/
 [48]: /metrics/guide/agent-side-tag-aggregation/
