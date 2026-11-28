@@ -305,6 +305,14 @@ On the Bits AI home page, you can ask questions about your system or active inci
 
 When enabled, Bits Investigation initiates investigations directly on On-Call pages. These investigations present initial findings and conclusions to help responders identify potential root causes and next steps. For more information, see [Bits Investigation][28].
 
+### Bits Code
+
+Start and monitor [Bits Code][30] sessions from your mobile device. Track a session's progress, see when Bits Code needs your input, and take action without returning to your computer.
+
+<div class="alert alert-warning">Bits Code is available only in the iOS app. It is not yet available on Android.</div>
+
+{{< img src="mobile/ios_bits_code.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="A Bits Code session in the iOS Datadog mobile app, showing a summary of the fix and the code diff side by side">}}
+
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
 Upon successful authentication to the mobile app, you will remain logged in for 90 days.
@@ -363,3 +371,4 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [27]: /bits_ai/bits_chat/
 [28]: /bits_ai/bits_investigation/
 [29]: /account_management/multi_organization/#custom-sub-domains
+[30]: /bits_ai/bits_code/

@@ -18,7 +18,7 @@ further_reading:
 
 Bits Code is a generative AI coding assistant that uses Datadog observability data to automatically diagnose and fix issues in your code. It integrates with [source code providers](#supported-source-code-providers) to create production-ready pull or merge requests, then iterates on changes using CI logs and developer feedback. 
 
-You can work with Bits Code in Datadog or in a [Slack code channel][40].
+You can work with Bits Code in Datadog (including in the [Datadog Mobile App][45]) or in a [Slack code channel][40].
 
 {{< img src="bits_ai/dev_agent/sessions_overview.png" alt="A tab titled 'Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
@@ -115,6 +115,10 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 
 When you ask [Bits Chat][16] in Slack to make a code change, Bits Code creates a dedicated [code channel][40] for that task. In the code channel, you and your team can steer the agent, view a diff of proposed changes, and open a pull or merge request.
 
+### Bits Code on mobile
+
+Start and monitor Bits Code sessions from the [Datadog Mobile App][45]. Track a session's progress, see when Bits Code needs your input, and take action without returning to your computer.
+
 ### Pull or merge request collaboration
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
@@ -174,3 +178,4 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [42]: /actions/actions_catalog/
 [43]: /actions/workflows/
 [44]: /actions/app_builder/
+[45]: /mobile/#bits-code
