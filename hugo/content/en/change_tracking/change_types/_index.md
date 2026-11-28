@@ -35,9 +35,39 @@ See [Track Feature Flag Changes][6] for setup and advanced options.
 
 | Change type | Comes from | How to enable |
 | --- | --- | --- |
-| Cloud resource and configuration changes (AWS) {{< tooltip text="in Preview" tooltip="This feature is in Preview and limited to a small sample of cloud resource changes. To request access, see the Resource Collection documentation." >}} | Infrastructure Monitoring | Enable [Resource Collection][12], and optionally cloud provider event forwarding. |
+| Cloud resource and configuration changes (AWS) | Infrastructure Monitoring | Enable [Resource Collection][12], and optionally cloud provider event forwarding. |
 | Kubernetes deployment scale events | Kubernetes integration | Enable [Kubernetes audit logging][13]. |
 | CrashLoopBackOff pod crashes | Kubernetes integration | Add a `service` label to your Kubernetes YAML where possible. |
+
+Change Tracking shows changes to a subset of the AWS resources that Datadog collects. A change appears when Change Tracking can associate the resource with the service, host, or monitor you're investigating.
+
+{{% collapse-content title="Supported AWS resource types" level="h4" expanded=false id="supported-aws-resource-types" %}}
+
+Change Tracking associates these resource types with a service or ARN:
+
+- `aws_cloudfront_distribution`
+- `aws_dynamodb`
+- `aws_ecs_service`
+- `aws_ecs_task`
+- `aws_elb_load_balancer`
+- `aws_elbv2_load_balancer`
+- `aws_kinesis_stream`
+- `aws_lambda_function`
+- `aws_rds_instance`
+- `aws_route53_resource_record_set`
+- `aws_s3_bucket`
+- `aws_sqs_queue`
+
+These resource types appear only when you filter by the resource, such as by host or monitor group:
+
+- `aws_autoscaling_group`
+- `aws_ec2_instance`
+- `aws_ecs_cluster`
+- `aws_elasticache`
+- `aws_rds_cluster`
+- `aws_sns_topic`
+
+{{% /collapse-content %}}
 
 ### Database changes
 
