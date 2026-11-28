@@ -86,6 +86,16 @@ To create AI Guard detection rules:
          <td>Filter by specific sensitive data rule tags</td>
          <td><code>aws_access_key_id</code>, <code>aws_secret_access_key</code>, <code>claude_api_key</code>, <code>email_address</code>, etc.</td>
        </tr>
+       <tr>
+         <td><code>@ai_guard.content_moderation.categories</code></td>
+         <td>Filter by harmful content categories detected by content moderation</td>
+         <td><a href="/security/ai_guard/content_moderation/#content-moderation-categories">Content moderation category tags</a>, such as <code>hate</code>, <code>violence</code>, or <code>self_harm</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.content_moderation.blocked_categories</code></td>
+         <td>Filter by content moderation categories that caused a block</td>
+         <td><a href="/security/ai_guard/content_moderation/#content-moderation-categories">Content moderation category tags</a> configured to block in the policy</td>
+       </tr>
      </tbody>
    </table>
 1. Under {{< ui >}}Define Rule Conditions{{< /ui >}}:
@@ -125,6 +135,7 @@ When you click on a span in the explorer, you can see:
 - Whether AI Guard assessed each request as safe or unsafe
 - Whether AI Guard blocked the request
 - If AI Guard assessed the call as unsafe, which attack categories it included
+- Whether the request triggered any [content moderation categories][13], and which categories caused a block
 - Whether the request included sensitive data, and if so, what type of sensitive data
 - Additional tags, which you can use to filter spans in the explorer
 
@@ -164,3 +175,4 @@ Follow the instructions to create a [metric monitor][12].
 [10]: /monitors/
 [11]: /monitors/types/apm/?tab=traceanalytics
 [12]: /monitors/types/metric/
+[13]: /security/ai_guard/content_moderation/#content-moderation-categories

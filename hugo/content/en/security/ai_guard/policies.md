@@ -49,6 +49,7 @@ Policies include these settings:
 - [**Sensitive data scanning**](#sensitive-data-scanning): Whether AI Guard scans requests for sensitive data, and whether AI Guard redacts matches.
 - [**Tools policies**](#tools-policies): Whether AI Guard evaluates, passes, or blocks tool calls.
 - [**Custom rules**](#custom-rules): Keywords and regular expressions that AI Guard always flags as unsafe.
+- [**Content moderation**](#content-moderation): Harmful content categories that AI Guard detects and optionally blocks.
 
 ### Enforcement mode
 
@@ -149,6 +150,19 @@ There are two kinds of custom rules:
 - {{< ui >}}Keywords{{< /ui >}}: Matching ignores case and matches whole words only. For example, `confidential` matches `Confidential` but not `confidentiality`. All keywords combined are limited to 1,000 characters.
 - {{< ui >}}Regular expressions{{< /ui >}}: Patterns use the [Sensitive Data Scanner regex syntax][7]. Each pattern is limited to 1,000 characters. A regular expression can have a name, which AI Guard includes in the `reason` when the rule matches.
 
+### Content moderation
+
+Content moderation screens user prompts and assistant responses without tool calls for harmful content across 16 built-in categories, such as hate, violence, self-harm, and fraud.
+
+Content moderation is off by default. When you enable content moderation in a policy:
+
+- With no blocking categories selected, AI Guard detects and reports harmful categories on the AI Guard span without blocking requests.
+- With one or more blocking categories selected, AI Guard returns `DENY` with blocking enabled when a message matches a selected category at its blocking threshold.
+
+Content moderation evaluates only the last message in each evaluation call. Overriding content moderation in a custom policy replaces the parent policy's content moderation setting as a whole rather than merging category lists.
+
+For the full list of categories, evaluation behavior, and span attributes, see [Content Moderation][9].
+
 ## Edit or create a policy
 
 The default policy protects every service you set up from the start, so editing the default policy is the fastest way to tune AI Guard.
@@ -240,3 +254,4 @@ The default policy has no {{< ui >}}Set up alerting{{< /ui >}} button. For other
 [6]: /security/ai_guard/sensitive_data_redaction/
 [7]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
 [8]: /security/ai_guard/signals/#set-up-datadog-monitors
+[9]: /security/ai_guard/content_moderation/

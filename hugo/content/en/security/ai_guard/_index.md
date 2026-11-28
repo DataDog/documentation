@@ -65,7 +65,7 @@ Each evaluation takes up to two passes:
 
 Images skip the classifier and always go to the second pass, so image evaluation has higher latency than text evaluation.
 
-Custom rules and sensitive data scanning work differently. Custom rules flag messages that match a keyword or regular expression. Sensitive data scanning uses Sensitive Data Scanner rules to find personally identifiable information and secrets.
+Custom rules, sensitive data scanning, and content moderation work differently. Custom rules flag messages that match a keyword or regular expression. Sensitive data scanning uses Sensitive Data Scanner rules to find personally identifiable information and secrets. Content moderation uses a dedicated classifier to detect and optionally block harmful content across 16 categories in user prompts and assistant responses. See [Content Moderation][18].
 
 ### Key concepts: Traces, spans, and signals
 
@@ -89,6 +89,7 @@ AI Guard supports the full life cycle of securing AI agents, from finding unprot
 1. [Set up AI Guard][2] for target agents. The default security policy starts monitoring agent calls immediately.
 1. Explore AI security to find additional unprotected agents and onboard them.
 1. [Manage AI Guard policies][4] as needed, optionally previewing evaluations before applying changes.
+1. [Moderate harmful content][18] in prompts and model responses.
 1. [Redact sensitive data][6] that AI Guard detects in prompts and responses.
 1. [Control evaluations in code][16] with middleware, such as skipping trusted traffic or tagging evaluations with application context.
 1. [Triage signals][7] that detection rules create from AI Guard evaluation outcomes.
@@ -216,3 +217,4 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [15]: /security/ai_guard/setup/http_api/
 [16]: /security/ai_guard/middleware/
 [17]: /security/ai_guard/middleware/#skip-evaluations-for-trusted-traffic
+[18]: /security/ai_guard/content_moderation/
