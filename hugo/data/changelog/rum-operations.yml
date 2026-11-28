@@ -62,3 +62,10 @@ entries:
       - UpdateRUMOperation
       - UpdateRUMOperationStrongLink
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-25'
+    link: https://github.com/DataDog/documentation/pull/42225
+    operations:
+      - ListRUMOperationStrongLinks
+      - ListRUMOperations
+    title: Add x-pagination to RUM list endpoints
