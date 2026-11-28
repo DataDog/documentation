@@ -39,7 +39,7 @@ Code Coverage provides two ways to split coverage data in a monorepo:
 
 Automatically split coverage by code owner teams based on the `CODEOWNERS` file in your repository.
 
-These methods can be used together. Service splitting and code owner splitting work independently—you can have coverage split by both services and code owners simultaneously. For service definitions, Catalog integration takes priority over manual configuration. Coverage is calculated for up to 200 services and code owners per coverage report, with a total limit of 2000 services across your organization.
+These methods can be used together. Service splitting and code owner splitting work independently—you can have coverage split by both services and code owners simultaneously. For service definitions, Catalog integration takes priority over manual configuration. Coverage is calculated for up to 1000 services and code owners per coverage report, with a total limit of 2000 services across your organization.
 
 ## Catalog integration
 
@@ -226,7 +226,7 @@ datadog-ci coverage upload --base-path=src .
 
 Code Coverage has the following limits:
 
-- **Per-report limit (200)**: Up to 200 services and code owners combined per coverage report
+- **Per-report limit (1000)**: Up to 1000 services and code owners combined per coverage report
 - **Organization-wide service limit (2000)**: Up to 2000 services total across all repositories in your organization
 
 If you exceed these limits, coverage is not calculated for services or code owners beyond the limit.
