@@ -3361,7 +3361,7 @@ Discover filterable fields and their values for [IoC Explorer][67]. Omit `filter
 ### `get_datadog_security_detection_rules_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Read`*\
-Returns the authoring reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use this before authoring or querying detection rules. Currently supported rule types: log detection, API security, and AppSec.
+Returns the reference and schema for detection rules. Covers supported rule types, detection methods, query syntax, tag conventions, and valid search facets. Use it to explain, check, update, or query detection rules. Currently supported rule types: log detection, API security, and AppSec.
 
 - What fields and options are available when creating a threshold detection rule?
 - Show me the schema for sequence detection rules.
@@ -3380,11 +3380,10 @@ Retrieves security detection rules. Supports two modes: provide `rule_id` to get
 ### `create_datadog_security_detection_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Rules Write`*\
-Creates a new detection rule. Call `get_datadog_security_detection_rules_schema` first to fetch the payload grammar, then supply a complete rule payload. On success, returns the full rule including its server-assigned ID.
+Creates a new detection rule from a complete rule payload that you supplied or reviewed. To draft a rule from a description, use `propose_datadog_security_detection_rule`. On success, returns the full rule including its server-assigned ID.
 
-- Create a threshold detection rule that fires when more than 10 failed logins occur from the same IP in 5 minutes.
-- Author a new log detection rule for CloudTrail that alerts on IAM privilege escalation.
-- Create a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
+- Create this detection rule: `<JSON rule>`.
+- Create the detection rule I just reviewed, but keep it disabled.
 
 ### `update_datadog_security_detection_rule`
 *Toolset: **security***\
@@ -3412,6 +3411,8 @@ Proposes a Cloud SIEM detection rule from a natural-language description, or tra
 
 - Translate this Splunk rule into a Cloud SIEM detection rule: `<SPL query>`.
 - Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
+- Draft a CloudTrail detection rule that alerts on IAM privilege escalation.
+- Propose a detection rule for `source:nginx` that generates a signal when error rate exceeds 100 per minute.
 
 ### `get_datadog_security_detection_rule_proposal`
 *Toolset: **security** (Preview)*\
