@@ -260,11 +260,7 @@ If you are using the [custom role feature][17], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][18] on their accounts.
-
-You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Further Reading
 
@@ -287,6 +283,5 @@ You can restrict access to a multistep API test based on the roles in your organ
 [15]: /synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
-[18]: /account_management/rbac/#create-a-custom-role
 [19]: /synthetics/api_tests/errors/
 [20]: /synthetics/platform/private_locations/configuration/#advanced-configuration

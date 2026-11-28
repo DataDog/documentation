@@ -378,9 +378,15 @@ Use [granular access control][17] to limit who has access to your test based on 
 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
-| No access    |                         |                         |                   |           |                |                |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         |           | {{< X >}}      |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Runner       | {{< X >}}               |                         | {{< X >}}         | {{< X >}} |                |                |
 | Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
+
+Viewing or editing a recording opens the recorder, which requires Editor access. Viewers and Runners can see each step and its screenshots in test results.
+
+Only users with Editor access can delete the test or change who has access to it.
+
+Access levels apply on top of [role permissions][15]. To run a test, a user needs Runner or Editor access to the test and the `synthetics_write` permission. This applies to runs from the Datadog UI, the API, and CI pipelines.
 
 ## Further Reading
 
