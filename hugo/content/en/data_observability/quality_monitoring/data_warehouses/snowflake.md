@@ -211,6 +211,12 @@ To set up your account in Snowflake:
    CALL grant_database_access('["<YOUR_DATABASE>"]', '<ROLE_NAME>');
    ```
 
+   Enter each database name exactly as Snowflake stores it. The procedure quotes each name, so a database created without quotes must be listed in uppercase, such as `ANALYTICS`.
+
+   List only your own databases in the `CALL`. Leave out the `SNOWFLAKE` database and any database created from a share. Snowflake doesn't allow individual privilege grants on these imported databases, so the procedure stops with the error `Granting individual privileges on imported database is not allowed`. Datadog's access to the `SNOWFLAKE` database comes from the database roles granted in step 3. The `USE DATABASE SNOWFLAKE` statement only selects where to create the procedure.
+
+   If the procedure stops on an imported database, the databases listed before it already have access. Remove the imported database from the list and run the `CALL` again. Running it again is safe.
+
    Run the `CALL` statement again (with an updated database list) any time you want to grant access to a new database, or [as part of your CI setup][8] so ephemeral databases stay readable.
 
 5. (Optional) If your organization uses [Snowflake event tables][2], you can grant the Datadog role access to them.
