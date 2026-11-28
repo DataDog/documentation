@@ -33,13 +33,13 @@ test.describe("ApiEndpoint component", () => {
 
   test("renders response section when responses exist", async ({ page }) => {
     const endpoint = page.locator(".api-endpoint").first();
-    const response = endpoint.locator(".api-response");
+    const response = endpoint.locator(".api-response").first();
     await expect(response).toBeVisible();
   });
 
   test("renders code examples when they exist", async ({ page }) => {
     const endpoint = page.locator(".api-endpoint").first();
-    const codeExample = endpoint.locator(".api-code-example");
+    const codeExample = endpoint.locator(".api-code-example").first();
     await expect(codeExample).toBeVisible();
   });
 
@@ -160,5 +160,34 @@ test.describe("ApiEndpoint region switching", () => {
       }),
     );
     expect(gap).toBeCloseTo(headingMarginBottom, 0);
+  });
+});
+
+test.describe("ApiEndpoint date version switching", () => {
+  test("updates the schema, curl header, and shareable query parameter", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/api-endpoint");
+    const endpointWrapper = page.locator("#versioned-api-endpoint");
+    const endpoint = endpointWrapper.locator(
+      '[data-operation-id="GetDashboard"]',
+    );
+    const selector = page.locator(".api-endpoint__version-select--pill");
+    await expect(selector).toBeVisible();
+    await expect(selector.getByRole("button")).toHaveText("v1 (default)");
+    await expect(endpoint.locator(".api-endpoint__version-select")).toHaveCount(
+      0,
+    );
+
+    await chooseSelectOption(selector, "2027-04-15");
+
+    await expect(page).toHaveURL(/datadog-api-version=v1-2027-04-15/);
+    await expect(
+      endpoint.locator('[data-api-version-content="base"]'),
+    ).toBeHidden();
+    const dated = endpoint.locator('[data-api-version-content="2027-04-15"]');
+    await expect(dated).toBeVisible();
+    await expect(dated).toContainText("Added in 2027-04-15");
+    await expect(dated).toContainText("DD-API-Version: 2027-04-15");
   });
 });

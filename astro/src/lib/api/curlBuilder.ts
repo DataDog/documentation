@@ -58,6 +58,7 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
   const {
     method,
     path,
+    apiVersionDate,
     commentLines = [],
     site = "datadoghq.com",
     otherSites = [],
@@ -136,6 +137,9 @@ export function buildCurlCommand(options: GenerateCurlOptions): string {
     curlParts.push(`-H "Content-Type: multipart/form-data"`);
   } else if (requestBodyJson || hasRequestBody) {
     curlParts.push(`-H "Content-Type: application/json"`);
+  }
+  if (apiVersionDate) {
+    curlParts.push(`-H "DD-API-Version: ${apiVersionDate}"`);
   }
   curlParts.push(
     ...buildHeaderParamFlags(

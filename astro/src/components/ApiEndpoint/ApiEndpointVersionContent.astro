@@ -1,0 +1,51 @@
+---
+import ApiResponse from "@components/ApiResponse/ApiResponse.astro";
+import ApiCodeExample from "@components/ApiCodeExample/ApiCodeExample.astro";
+import ApiRequestBodyTabs from "@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro";
+import { renderMarkdownInline } from "@lib/api/markdownRenderer";
+import type { ResponseData } from "@components/ApiResponse/ApiResponse.astro";
+import type { CodeExampleSet } from "@components/ApiCodeExample/ApiCodeExample.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+import { useTranslations } from "@lib/i18n/i18n";
+import styles from "./ApiEndpoint.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+interface Props {
+  requestBody?: {
+    required: boolean;
+    description?: string;
+    schema: SchemaField[];
+    examples: Array<{ name: string; value: string }>;
+    showExampleTitles?: boolean;
+  };
+  responses: ResponseData[];
+  codeExamples: CodeExampleSet[];
+}
+
+const { requestBody, responses, codeExamples } = Astro.props;
+const translate = useTranslations(Astro.currentLocale);
+const cl = classListFactory(styles);
+---
+
+{
+  requestBody && (
+    <div class={cl("api-endpoint__section")} data-api-section="request">
+      <h3>{translate("request")}</h3>
+      <h4 class={cl("api-endpoint__body-label")}>
+        Body Data{requestBody.required && " (required)"}
+      </h4>
+      {requestBody.description && (
+        <p set:html={renderMarkdownInline(requestBody.description)} />
+      )}
+      <ApiRequestBodyTabs
+        schema={requestBody.schema}
+        examples={requestBody.examples}
+        showExampleTitles={requestBody.showExampleTitles}
+      />
+    </div>
+  )
+}
+
+{responses.length > 0 && <ApiResponse responses={responses} />}
+
+{codeExamples.length > 0 && <ApiCodeExample examples={codeExamples} />}

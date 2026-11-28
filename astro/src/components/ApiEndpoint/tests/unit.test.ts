@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import preactRenderer from "@astrojs/preact/server.js";
 import ApiEndpoint from "../ApiEndpoint.astro";
 
 const endpointWithTwoRegions = {
@@ -26,6 +27,10 @@ describe("ApiEndpoint anchor", () => {
   // per version on the same page.
   it("does not set an id on the section", async () => {
     const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
     const html = await container.renderToString(ApiEndpoint, {
       props: { data: JSON.stringify(endpointWithTwoRegions) },
     });
@@ -33,6 +38,62 @@ describe("ApiEndpoint anchor", () => {
     const section = html.match(/<section[^>]*class="[^"]*api-endpoint[^>]*>/);
     expect(section).not.toBeNull();
     expect(section![0]).not.toMatch(/\sid=/);
+  });
+});
+
+describe("ApiEndpoint date versions", () => {
+  it("renders the default content and hidden dated content", async () => {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    const html = await container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({
+          ...endpointWithTwoRegions,
+          dateVersions: [
+            {
+              apiVersion: "2027-04-15",
+              responses: [],
+              codeExamples: [],
+            },
+          ],
+        }),
+      },
+    });
+
+    expect(html).toContain("v1 (default)");
+    expect(html).toContain("v1 - 2027-04-15");
+    expect(html).toMatch(/data-api-version-content="base"/);
+    expect(html).toMatch(/data-api-version-content="2027-04-15"[^>]* hidden/);
+  });
+
+  it("can leave the selector to the operation page without dropping version content", async () => {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    const html = await container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({
+          ...endpointWithTwoRegions,
+          dateVersions: [
+            {
+              apiVersion: "2027-04-15",
+              responses: [],
+              codeExamples: [],
+            },
+          ],
+        }),
+        showDateVersionSelect: false,
+      },
+    });
+
+    expect(html).not.toContain("api-endpoint__version-select");
+    expect(html).toMatch(/data-api-version-content="base"/);
+    expect(html).toMatch(/data-api-version-content="2027-04-15"[^>]* hidden/);
   });
 });
 

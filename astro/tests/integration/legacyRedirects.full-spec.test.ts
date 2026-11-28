@@ -11,7 +11,7 @@ import { getCategoriesView } from "@lib/api/viewsBuilder";
 
 async function builtPagePaths(): Promise<Set<string>> {
   const categories = await getCategoriesView();
-  const paths = new Set(["/api/latest/"]);
+  const paths = new Set(["/api/latest/", "/api/latest/versions/"]);
   for (const category of categories) {
     paths.add(`/api/latest/${category.slug}/`);
     for (const operation of category.operations) {

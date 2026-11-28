@@ -52,6 +52,9 @@ function entryListItem(entry: ResolvedChangelogEntry): MarkdocNode {
     productNode,
     plaintext(": "),
     ...titleNodes(entry.title),
+    ...(entry.apiVersion
+      ? [plaintext(` (API version: ${entry.apiVersion})`)]
+      : []),
     ...operationsNodes(entry.operations),
   ];
   return listItem([inline(children)]);

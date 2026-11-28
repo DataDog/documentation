@@ -2,9 +2,8 @@
 import ApiMethodBadge from "@components/ApiMethodBadge/ApiMethodBadge.astro";
 import Alert from "@components/Alert/Alert.astro";
 import ApiSchemaTable from "@components/ApiSchemaTable/ApiSchemaTable.astro";
-import ApiResponse from "@components/ApiResponse/ApiResponse.astro";
-import ApiCodeExample from "@components/ApiCodeExample/ApiCodeExample.astro";
-import ApiRequestBodyTabs from "@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro";
+import ApiEndpointVersionContent from "./ApiEndpointVersionContent.astro";
+import ApiVersionSelect from "./ApiVersionSelect";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
 import type { ResponseData } from "@components/ApiResponse/ApiResponse.astro";
 import type { CodeExampleSet } from "@components/ApiCodeExample/ApiCodeExample.astro";
@@ -47,13 +46,21 @@ interface EndpointData {
   };
   responses: ResponseData[];
   codeExamples: CodeExampleSet[];
+  dateVersions?: Array<{
+    apiVersion: string;
+    requestBody?: EndpointData["requestBody"];
+    responses: ResponseData[];
+    codeExamples: CodeExampleSet[];
+  }>;
 }
 
 interface Props {
   data: string; // JSON string of EndpointData
+  /** The operation page can place this control in its version pill instead. */
+  showDateVersionSelect?: boolean;
 }
 
-const { data: dataJson } = Astro.props;
+const { data: dataJson, showDateVersionSelect = true } = Astro.props;
 const translate = useTranslations(Astro.currentLocale);
 
 let ep: EndpointData | null = null;
@@ -83,6 +90,17 @@ const hasOverview =
   (Boolean(ep.description) ||
     (ep.permissions && ep.permissions.length > 0) ||
     (ep.oauthScopes && ep.oauthScopes.length > 0));
+const versionContents = ep
+  ? [
+      {
+        apiVersion: "base",
+        requestBody: ep.requestBody,
+        responses: ep.responses,
+        codeExamples: ep.codeExamples,
+      },
+      ...(ep.dateVersions ?? []),
+    ]
+  : [];
 ---
 
 {
@@ -126,6 +144,18 @@ const hasOverview =
           );
         })}
       </div>
+      {showDateVersionSelect &&
+        ep.dateVersions &&
+        ep.dateVersions.length > 0 && (
+          <ApiVersionSelect
+            client:load
+            majorVersion={ep.version}
+            dates={ep.dateVersions
+              .map((version) => version.apiVersion)
+              .toReversed()}
+            operationId={ep.operationId}
+          />
+        )}
 
       {/* Description — rendered as slot content from the parent page */}
       {hasOverview && (
@@ -220,30 +250,26 @@ const hasOverview =
         </div>
       )}
 
-      {/* Request */}
-      {ep.requestBody && (
-        <div class={cl("api-endpoint__section")} data-api-section="request">
-          <h3>{translate("request")}</h3>
-          <h4 class={cl("api-endpoint__body-label")}>
-            Body Data{ep.requestBody.required && " (required)"}
-          </h4>
-          {ep.requestBody.description && (
-            <p set:html={renderMarkdownInline(ep.requestBody.description)} />
-          )}
-          <ApiRequestBodyTabs
-            schema={ep.requestBody.schema}
-            examples={ep.requestBody.examples}
-            showExampleTitles={ep.requestBody.showExampleTitles}
-          />
-        </div>
-      )}
-
-      {/* Response */}
-      {ep.responses.length > 0 && <ApiResponse responses={ep.responses} />}
-
-      {/* Code Examples */}
-      {ep.codeExamples.length > 0 && (
-        <ApiCodeExample examples={ep.codeExamples} />
+      {ep.dateVersions && ep.dateVersions.length > 0 ? (
+        versionContents.map((content) => (
+          <div
+            class={cl("api-endpoint__version-content")}
+            data-api-version-content={content.apiVersion}
+            hidden={content.apiVersion !== "base"}
+          >
+            <ApiEndpointVersionContent
+              requestBody={content.requestBody}
+              responses={content.responses}
+              codeExamples={content.codeExamples}
+            />
+          </div>
+        ))
+      ) : (
+        <ApiEndpointVersionContent
+          requestBody={ep.requestBody}
+          responses={ep.responses}
+          codeExamples={ep.codeExamples}
+        />
       )}
     </section>
   )

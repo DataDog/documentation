@@ -213,3 +213,22 @@
 .schema-table__children {
   /* Container for nested rows — display toggled by component */
 }
+.schema-table__version-change {
+  display: inline-block;
+  margin-inline-start: var(--space-xs);
+  padding: 0 var(--space-xs);
+  border-radius: var(--border-radius);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-2xs);
+  font-family: var(--font-family-sans);
+  white-space: nowrap;
+}
+
+.schema-table__row--removed {
+  opacity: 0.72;
+}
+
+.schema-table__row--removed .schema-table__name {
+  text-decoration: line-through;
+}

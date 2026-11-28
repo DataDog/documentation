@@ -44,6 +44,16 @@ describe("buildCurlCommand", () => {
     requestBodyJson: '[\n  {\n    "message": "Example-Log"\n  }\n]',
   };
 
+  it("sends the selected dated API version", () => {
+    const result = buildCurlCommand({
+      method: "GET",
+      path: "/api/v1/dashboard/123",
+      apiVersionDate: "2027-04-15",
+    });
+
+    expect(result).toContain('-H "DD-API-Version: 2027-04-15"');
+  });
+
   it("pipes a gzip body through gzip, as Hugo does", () => {
     const result = buildCurlCommand({
       ...compressedOptions,

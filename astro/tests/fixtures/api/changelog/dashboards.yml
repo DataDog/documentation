@@ -7,6 +7,7 @@ entries:
       - GetDashboardUsage
     title: Document dashboard quality scores in `GetDashboardUsage`
   - change_type: changed
+    api_version: '2027-04-15'
     date: '2026-10-08'
     link: https://github.com/DataDog/documentation/pull/40562
     operations:

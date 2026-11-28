@@ -499,6 +499,11 @@ components:
       maxItems: 1
       type: array
     Dashboard:
+      x-datadog-api-versioned: true
+      oneOf:
+        - $ref: "#/components/schemas/Dashboard_V1"
+        - $ref: "#/components/schemas/Dashboard_20270101"
+    Dashboard_V1:
       description: >-
         A dashboard is Datadog’s tool for visually tracking, analyzing, and
         displaying
@@ -619,6 +624,148 @@ components:
         - layout_type
         - widgets
       type: object
+    Dashboard_20270101:
+      x-ignore-duplicate-object: true
+      type: object
+      description: >-
+        A dashboard is Datadog’s tool for visually tracking, analyzing, and
+        displaying key performance metrics, which enable you to monitor the
+        health of your infrastructure.
+      required:
+        - title
+        - layout_type
+        - widgets
+      properties:
+        id:
+          type: string
+          description: ID of the dashboard.
+          example: 123-abc-456
+          readOnly: true
+        title:
+          type: string
+          example: ""
+          description: Title of the dashboard.
+        description:
+          type: string
+          description: Description of the dashboard.
+          nullable: true
+        restricted_roles:
+          type: array
+          items:
+            type: string
+            description: A role UUID.
+          description: A list of role identifiers. Only the author and users associated with at least one of these roles can edit this dashboard.
+        url:
+          type: string
+          readOnly: true
+          example: /dashboard/123-abc-456/example-dashboard-title
+          description: The URL of the dashboard.
+        experience_type:
+          $ref: "#/components/schemas/DashboardExperienceType"
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Creation date of the dashboard.
+        modified_at:
+          type: string
+          format: date-time
+          readOnly: true
+          description: Modification date of the dashboard.
+        author_handle:
+          type: string
+          example: test@datadoghq.com
+          readOnly: true
+          description: Identifier of the dashboard author.
+        author_name:
+          nullable: true
+          type: string
+          example: John Doe
+          readOnly: true
+          description: Name of the dashboard author.
+        layout_type:
+          $ref: "#/components/schemas/DashboardLayoutType"
+        reflow_type:
+          $ref: "#/components/schemas/DashboardReflowType"
+        notify_list:
+          nullable: true
+          type: array
+          description: List of handles of users to notify when changes are made to this dashboard.
+          items:
+            type: string
+            description: User handles.
+        tags:
+          nullable: true
+          type: array
+          description: List of team names representing ownership of a dashboard.
+          maxItems: 5
+          items:
+            type: string
+            description: The name of a Datadog team of the form `team:<name>`
+        template_variables:
+          description: List of template variables for this dashboard.
+          nullable: true
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardTemplateVariable"
+        template_variable_presets:
+          nullable: true
+          description: Array of template variables saved views.
+          type: array
+          items:
+            $ref: "#/components/schemas/DashboardTemplateVariablePreset"
+        tabs:
+          nullable: true
+          type: array
+          description: List of tabs for organizing dashboard widgets into groups.
+          maxItems: 100
+          items:
+            $ref: "#/components/schemas/DashboardTab"
+        widgets:
+          type: array
+          description: List of widgets to display on the dashboard.
+          items:
+            $ref: "#/components/schemas/DashboardBackendWidget_20270101"
+        is_read_only:
+          type: boolean
+          example: false
+          description: >-
+            Whether this dashboard is read-only. If True, only the author and
+            admins can make changes to it. This property is deprecated; use the
+            Restriction Policies API to manage write authorization instead.
+          deprecated: true
+        default_timeframe:
+          $ref: "#/components/schemas/DashboardDefaultTimeframeSetting"
+          nullable: true
+          description: The default timeframe applied when opening the dashboard. Set to `null` to clear.
+    DashboardBackendWidget_20270101:
+      x-ignore-duplicate-object: true
+      type: object
+      description: A dashboard widget using the dated backend widget contract.
+      properties:
+        definition:
+          type: object
+          properties:
+            type:
+              type: string
+            requests:
+              type: array
+              items:
+                type: object
+    DashboardDefaultTimeframeSetting:
+      description: The default timeframe applied when opening the dashboard.
+      type: object
+    DashboardExperienceType:
+      type: string
+      description: The experience type of the dashboard.
+      readOnly: true
+      example: default
+      enum:
+        - default
+        - product_analytics
+      x-enum-varnames:
+        - DEFAULT
+        - PRODUCT_ANALYTICS
     DashboardBulkActionData:
       description: Dashboard bulk action request data.
       example:

@@ -7,6 +7,7 @@ import Pagination from "@components/Pagination/Pagination.astro";
 import ApiChangelogEmptyState from "./ApiChangelogEmptyState.astro";
 import ApiChangelogFilterBar from "./ApiChangelogFilterBar";
 import ApiChangelogTimeline from "./ApiChangelogTimeline.astro";
+import ApiChangelogVersionSelect from "./ApiChangelogVersionSelect";
 import {
   CHANGELOG_BUCKET_LABELS,
   CHANGELOG_FILTERS,
@@ -21,9 +22,10 @@ import { useTranslations } from "@lib/i18n/i18n";
 interface Props {
   lang: Locale;
   page: ChangelogPage<ResolvedChangelogEntry>;
+  apiVersions?: string[];
 }
 
-const { lang, page } = Astro.props;
+const { lang, page, apiVersions = [] } = Astro.props;
 const translate = useTranslations(lang);
 // MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
 const filterBarLabels = { nav: "Filter by change type" };
@@ -35,14 +37,31 @@ const paginationLabels = {
 const filterTabs = CHANGELOG_FILTERS.map((filter) => ({
   filter,
   label: filter === "all" ? translate("all") : CHANGELOG_BUCKET_LABELS[filter],
-  href: changelogHref(lang, filter, 1),
+  href: changelogHref(lang, filter, 1, page.apiVersion),
 }));
 const hrefForPage = (pageNumber: number) =>
-  changelogHref(lang, page.filter, pageNumber);
+  changelogHref(lang, page.filter, pageNumber, page.apiVersion);
+const versionOptions = [
+  { value: "all", label: "All versions", href: changelogHref(lang, "all", 1) },
+  ...apiVersions.map((apiVersion) => ({
+    value: apiVersion,
+    label: apiVersion,
+    href: changelogHref(lang, "all", 1, apiVersion),
+  })),
+];
 ---
 
 <div class="api-changelog">
   <p class="api-changelog__intro">{CHANGELOG_INTRO}</p>
+  {
+    apiVersions.length > 0 && (
+      <ApiChangelogVersionSelect
+        client:load
+        options={versionOptions}
+        value={page.apiVersion ?? "all"}
+      />
+    )
+  }
   <ApiChangelogFilterBar
     client:load
     tabs={filterTabs}
