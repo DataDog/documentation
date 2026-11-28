@@ -49,7 +49,7 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 1. Run `/ddsetup` in the Antigravity chat and select your [Datadog site][2].
 
-1. Restart the Datadog MCP server so it uses the selected site:
+1. Restart the Datadog MCP Server so that it uses the selected site:
    1. In {{< ui >}}Customizations{{< /ui >}}, select the Datadog plugin on the {{< ui >}}Installed{{< /ui >}} tab.
    1. On the plugin's {{< ui >}}MCP{{< /ui >}} tab, click the {{< ui >}}⋮{{< /ui >}} menu next to `datadog-antigravity` and select {{< ui >}}Restart{{< /ui >}}.
 
