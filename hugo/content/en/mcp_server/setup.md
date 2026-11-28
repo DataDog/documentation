@@ -51,7 +51,7 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 1. Restart the Datadog MCP Server so that it uses the selected site:
    1. In {{< ui >}}Customizations{{< /ui >}}, select the Datadog plugin on the {{< ui >}}Installed{{< /ui >}} tab.
-   1. On the plugin's {{< ui >}}MCP{{< /ui >}} tab, click the {{< ui >}}⋮{{< /ui >}} menu next to `datadog-antigravity` and select {{< ui >}}Restart{{< /ui >}}.
+   1. On the plugin's {{< ui >}}MCP{{< /ui >}} tab, click the **More Options** menu (**⋮**) next to `datadog-antigravity` and select {{< ui >}}Restart{{< /ui >}}.
 
 1. Sign in to Datadog. When the {{< ui >}}Sign in required{{< /ui >}} banner appears, click {{< ui >}}Go to Accounts{{< /ui >}}, then click {{< ui >}}Sign in{{< /ui >}}. Log in to Datadog in your browser and approve the access request. When sign-in succeeds, the account shows a {{< ui >}}CONNECTED{{< /ui >}} badge.
 
