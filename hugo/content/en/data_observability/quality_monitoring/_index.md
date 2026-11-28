@@ -19,6 +19,9 @@ further_reading:
   - link: '/monitors/types/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Monitor'
+  - link: '/data_observability/quality_monitoring/guides/metaplane_migration/'
+    tag: 'Guide'
+    text: 'Migrate from Metaplane to Data Observability'
   - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
     tag: "Blog"
     text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"

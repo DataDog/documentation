@@ -8,6 +8,9 @@ further_reading:
  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
    tag: 'Blog'
    text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
+ - link: '/data_observability/quality_monitoring/guides/metaplane_migration/'
+   tag: 'Guide'
+   text: 'Migrate from Metaplane to Data Observability'
  - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
    tag: "Blog"
    text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
