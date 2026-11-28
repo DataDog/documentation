@@ -39,6 +39,8 @@ With Quality Monitoring, you can:
 
 ## Supported data sources
 
+For the capabilities available on each platform, see [Supported Platforms][7].
+
 {{< whatsnext desc="Connect to these data warehouses:" >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
@@ -121,3 +123,4 @@ Column masking support varies by warehouse:
 [4]: https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
 [5]: https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro
 [6]: https://docs.aws.amazon.com/redshift/latest/dg/t_ddm.html
+[7]: /data_observability/supported_platforms/

@@ -19,6 +19,8 @@ Use these integrations to:
 - **Analyze query and job history** to understand usage patterns, costs, and performance
 - **Trace column-level lineage** to map dependencies and pinpoint root causes of data issues
 
+For the capabilities available on each platform, see [Supported Platforms][1].
+
 {{< whatsnext desc="Connect to these data warehouses:" >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
@@ -31,3 +33,5 @@ Use these integrations to:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /data_observability/supported_platforms/

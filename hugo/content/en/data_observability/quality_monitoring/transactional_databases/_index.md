@@ -18,6 +18,8 @@ Use these integrations to:
 - **Create data quality monitors** to catch anomalies in row counts and column-level metrics
 - **Alert on custom SQL** to track business-specific data health checks
 
+For the capabilities available on each platform, see [Supported Platforms][1].
+
 {{< whatsnext desc="Connect to these transactional databases:" >}}
    {{< nextlink href="data_observability/quality_monitoring/transactional_databases/postgres" >}}PostgreSQL{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -25,3 +27,5 @@ Use these integrations to:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /data_observability/supported_platforms/

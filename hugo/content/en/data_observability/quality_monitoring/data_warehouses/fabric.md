@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Data Observability for Microsoft Fabric Warehouse is in Preview. Contact your Datadog representative to enable it for your organization.
+Data Observability for Microsoft Fabric Warehouse is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
 {{< /callout >}}
 
 ## Overview

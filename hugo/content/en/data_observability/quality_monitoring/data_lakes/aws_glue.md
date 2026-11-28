@@ -213,7 +213,7 @@ aws lakeformation grant-permissions \
 ## Query tables with Amazon Athena
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Querying AWS Glue tables with Amazon Athena is in Preview. Contact your Datadog representative to enable it for your organization.
+Querying AWS Glue tables with Amazon Athena is in Preview. To request access, see <a href="/data_observability/supported_platforms/#request-preview-access">Request Preview access</a>.
 {{< /callout >}}
 
 By default, Datadog calculates Iceberg table metrics, such as freshness and row count, from Iceberg metadata files without reading table data. To monitor metrics that metadata can't answer, configure Datadog to run queries through an [Amazon Athena workgroup][8] in your AWS account.
