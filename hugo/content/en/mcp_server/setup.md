@@ -34,7 +34,7 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 
 Install the Datadog plugin from the Antigravity marketplace. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1]. For a full walkthrough with troubleshooting steps, see the [plugin installation guide][3].
 
-**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it. Otherwise, the agent may call that server instead of the plugin's `datadog-antigravity` server.
+**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it. Otherwise, the agent might call that server instead of the plugin's `datadog-antigravity` server.
 
 [1]: https://github.com/datadog-labs/antigravity-plugin
 [3]: https://github.com/datadog-labs/antigravity-plugin/blob/main/docs/plugin-installation.md
