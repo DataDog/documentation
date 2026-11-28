@@ -2016,6 +2016,19 @@ menu:
           - ListTagIndexingRules
         unstable: []
         order: 15
+    - name: List metadata for multiple metrics
+      url: /api/latest/metrics/list-metadata-for-multiple-metrics/
+      identifier: metrics-list-metadata-for-multiple-metrics
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMetricMetadata
+        unstable:
+          - v2
+        order: 34
     - name: List tag indexing rule exemptions
       url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
       identifier: metrics-list-tag-indexing-rule-exemptions

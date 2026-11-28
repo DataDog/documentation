@@ -94578,6 +94578,178 @@ components:
         origin:
           $ref: "#/components/schemas/MetricOrigin"
       type: object
+    MetricMetadataAttributes:
+      description: |-
+        Metadata for one metric. Every attribute is always present. A value that is unknown or not set is `null`.
+      properties:
+        description:
+          description: Description of the metric, or `null` if none is set.
+          example: The percent of time the CPU spent running user space processes.
+          nullable: true
+          type: string
+        historical_metrics_enabled:
+          description: Whether historical metrics ingestion is enabled for the metric.
+          example: false
+          type: boolean
+        include_percentiles:
+          description: Whether percentile aggregations are enabled for the metric. Percentile aggregations are available only for distribution metrics.
+          example: false
+          type: boolean
+        integration:
+          description: |-
+            Name of the integration that sent the metric, or `null` if none is set. This is always `null` for
+            out-of-the-box RUM metrics.
+          example: system
+          nullable: true
+          type: string
+        last_configured_at:
+          description: |-
+            When the metric's tag or percentile configuration was last changed, or `null` if it has never been configured.
+          example: "2026-10-29T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        metric_type:
+          description: |-
+            Metric type, or `null` if it isn't known. Known values are `gauge`, `count`, `rate`, `distribution`,
+            `explicit_histogram`, and `exponential_histogram`, plus the legacy values `counter` and `hll`. New values may
+            be added. For histograms and sketches, this can differ from the type returned by
+            `GET /api/v1/metrics/{metric_name}`.
+          example: gauge
+          nullable: true
+          type: string
+        origin:
+          $ref: "#/components/schemas/MetricMetadataOrigin"
+        per_unit:
+          $ref: "#/components/schemas/MetricMetadataUnit"
+        short_name:
+          description: Short display name of the metric, or `null` if none is set.
+          example: cpu user
+          nullable: true
+          type: string
+        source:
+          description: |-
+            How the metric reaches Datadog, or `null` if it isn't known. Known values are `intake`, `api_default`, and
+            `intake_serverless` for submitted metrics, and `api_logs`, `api_processes`, `api_apm_spans`, and `api_rum`
+            for metrics generated from logs, processes, APM spans, and RUM events. New values may be added.
+          example: intake
+          nullable: true
+          type: string
+        statsd_interval:
+          description: StatsD flush interval of the metric in seconds, or `null` if none is set.
+          example: 10
+          format: int64
+          nullable: true
+          type: integer
+        unit:
+          $ref: "#/components/schemas/MetricMetadataUnit"
+      required:
+        - metric_type
+        - description
+        - short_name
+        - integration
+        - statsd_interval
+        - unit
+        - per_unit
+        - include_percentiles
+        - source
+        - historical_metrics_enabled
+        - last_configured_at
+        - origin
+      type: object
+    MetricMetadataData:
+      description: Metadata for one requested metric.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MetricMetadataAttributes"
+        id:
+          description: The metric name.
+          example: system.cpu.user
+          type: string
+        type:
+          $ref: "#/components/schemas/MetricMetadataType"
+      required:
+        - type
+        - id
+        - attributes
+      type: object
+    MetricMetadataListResponse:
+      description: Metadata for each requested metric that exists, in request order.
+      properties:
+        data:
+          description: One item per requested metric that exists. Metrics that don't exist are left out.
+          items:
+            $ref: "#/components/schemas/MetricMetadataData"
+          type: array
+      required:
+        - data
+      type: object
+    MetricMetadataOrigin:
+      description: |-
+        Where the metric comes from. Each value is the display label shown on the Metrics Summary page. The set of labels can grow as Datadog adds products. Each field is `null` when it isn't known.
+      properties:
+        product:
+          description: Product that reports the metric, such as `Agent`.
+          example: Agent
+          nullable: true
+          type: string
+        product_detail:
+          description: Finer-grained origin within the sub-product, such as `Cpu`.
+          example: Cpu
+          nullable: true
+          type: string
+        sub_product:
+          description: Part of the product that reports the metric, such as `Integration`.
+          example: Integration
+          nullable: true
+          type: string
+      required:
+        - product
+        - sub_product
+        - product_detail
+      type: object
+    MetricMetadataType:
+      default: metric_metadata
+      description: The metric metadata resource type.
+      enum:
+        - metric_metadata
+      example: metric_metadata
+      type: string
+      x-enum-varnames:
+        - METRIC_METADATA
+    MetricMetadataUnit:
+      description: A unit of measure from the Datadog unit catalog, or `null` when no unit is set.
+      nullable: true
+      properties:
+        family:
+          description: Unit family, such as `bytes`, `time`, or `percentage`.
+          example: bytes
+          type: string
+        name:
+          description: Full name of the unit, such as `byte`.
+          example: byte
+          type: string
+        plural:
+          description: Plural form of the unit name.
+          example: bytes
+          type: string
+        scale_factor:
+          description: Factor that converts a value in this unit to the base unit of its family.
+          example: 1.0
+          format: double
+          type: number
+        short_name:
+          description: Abbreviated unit name, or `null` if the unit has none.
+          example: B
+          nullable: true
+          type: string
+      required:
+        - name
+        - short_name
+        - plural
+        - family
+        - scale_factor
+      type: object
     MetricMonitorAsset:
       description: A monitor object with title.
       properties:
@@ -231973,6 +232145,145 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/metrics/metadata:
+    get:
+      description: |-
+        Get metadata for up to 50 metrics in one request: type, description, units, StatsD interval, percentile and
+        historical metrics settings, how the metric is ingested, and the product that reports it.
+        Results are returned in the order the metrics were requested. Metrics that don't exist are left out of `data`.
+        The request doesn't fail, and no not-found entry is returned. To find missing metrics, compare the returned `id`
+        values with the names you requested.
+      operationId: ListMetricMetadata
+      parameters:
+        - description: |-
+            Comma-separated list of metric names, at most 50 distinct names of up to 350 characters each, and at most
+            17,549 characters in total. Duplicate names are removed before counting, and results keep the order of each
+            name's first occurrence. A name that isn't a valid metric name is treated like any other metric that doesn't
+            exist: it's left out of `data` rather than failing the request.
+          example: "system.cpu.user,system.mem.used"
+          in: query
+          name: filter[metric_name]
+          required: true
+          schema:
+            maxLength: 17549
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          description: The percent of time the CPU spent running user space processes.
+                          historical_metrics_enabled: false
+                          include_percentiles: false
+                          integration: system
+                          last_configured_at:
+                          metric_type: gauge
+                          origin:
+                            product: Agent
+                            product_detail: Cpu
+                            sub_product: Integration
+                          per_unit:
+                          short_name: cpu user
+                          source: intake
+                          statsd_interval:
+                          unit:
+                            family: percentage
+                            name: percent
+                            plural: percent
+                            scale_factor: 1.0
+                            short_name: "%"
+                        id: system.cpu.user
+                        type: metric_metadata
+                      - attributes:
+                          description:
+                          historical_metrics_enabled: true
+                          include_percentiles: true
+                          integration:
+                          last_configured_at: "2026-10-29T12:00:00Z"
+                          metric_type: distribution
+                          origin:
+                            product: api
+                            product_detail:
+                            sub_product:
+                          per_unit:
+                            family: time
+                            name: second
+                            plural: seconds
+                            scale_factor: 1.0
+                            short_name: s
+                          short_name:
+                          source: api_default
+                          statsd_interval:
+                          unit:
+                            family: bytes
+                            name: byte
+                            plural: bytes
+                            scale_factor: 1.0
+                            short_name: B
+                        id: my.app.request.bytes
+                        type: metric_metadata
+              schema:
+                $ref: "#/components/schemas/MetricMetadataListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: Number of requests allowed in the current period.
+              schema:
+                format: int64
+                type: integer
+            X-RateLimit-Period:
+              description: Length of the rate limit period in seconds.
+              schema:
+                format: int64
+                type: integer
+            X-RateLimit-Remaining:
+              description: Number of requests left in the current period.
+              schema:
+                format: int64
+                type: integer
+            X-RateLimit-Reset:
+              description: Number of seconds until the current period resets.
+              schema:
+                format: int64
+                type: integer
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metrics_read
+      summary: List metadata for multiple metrics
+      tags:
+        - Metrics
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
