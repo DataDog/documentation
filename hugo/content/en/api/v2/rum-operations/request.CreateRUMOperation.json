@@ -1,0 +1,32 @@
+{
+  "data": {
+    "type": "operations",
+    "attributes": {
+      "name": "bdd_examplerumoperation",
+      "display_name": "BDD operation",
+      "tags": [
+        "team:rum-backend"
+      ],
+      "journey_rum": {
+        "rum_steps": [
+          {
+            "type": "start",
+            "nodes": [
+              {
+                "query": "@type:action @action.type:click"
+              }
+            ]
+          },
+          {
+            "type": "stop",
+            "nodes": [
+              {
+                "query": "@type:view"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

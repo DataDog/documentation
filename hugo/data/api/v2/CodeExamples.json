@@ -2402,6 +2402,55 @@
       "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
+  "UpdateRumConfig": [
+    {
+      "group": "rum_config",
+      "suffix": "",
+      "description": "Update the RUM configuration returns \"OK\" response"
+    }
+  ],
+  "QueryAggregatedLongTasks": [
+    {
+      "group": "rum_insights",
+      "suffix": "",
+      "description": "Query aggregated long tasks returns \"Successful response\" response"
+    }
+  ],
+  "QueryAggregatedWaterfall": [
+    {
+      "group": "rum_insights",
+      "suffix": "",
+      "description": "Query aggregated waterfall returns \"Successful response\" response"
+    }
+  ],
+  "CreateRUMOperationStrongLink": [
+    {
+      "group": "rum_operations",
+      "suffix": "",
+      "description": "Create a RUM operation link returns \"Created\" response"
+    }
+  ],
+  "CreateRUMOperation": [
+    {
+      "group": "rum_operations",
+      "suffix": "",
+      "description": "Create a RUM operation returns \"OK\" response"
+    }
+  ],
+  "UpdateRUMOperationStrongLink": [
+    {
+      "group": "rum_operations",
+      "suffix": "",
+      "description": "Update a RUM operation link returns \"OK\" response"
+    }
+  ],
+  "UpdateRUMOperation": [
+    {
+      "group": "rum_operations",
+      "suffix": "",
+      "description": "Update a RUM operation returns \"OK\" response"
+    }
+  ],
   "GetRUMRecoverySessionCount": [
     {
       "group": "rum_recovery",

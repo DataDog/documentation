@@ -1,0 +1,33 @@
+{
+  "data": {
+    "id": "abc12345-1234-5678-abcd-ef1234567890",
+    "type": "operations",
+    "attributes": {
+      "name": "checkout_completed",
+      "display_name": "BDD operation updated",
+      "tags": [
+        "team:rum-backend"
+      ],
+      "journey_rum": {
+        "rum_steps": [
+          {
+            "type": "start",
+            "nodes": [
+              {
+                "query": "@type:action @action.type:click"
+              }
+            ]
+          },
+          {
+            "type": "stop",
+            "nodes": [
+              {
+                "query": "@type:view"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
