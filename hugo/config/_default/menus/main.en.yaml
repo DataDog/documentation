@@ -11535,6 +11535,11 @@ menu:
       url: account_management/billing/ai_credit_limits/
       parent: account_management_billing
       weight: 1522
+    - name: Data Observability
+      identifier: account_management_billing_data_observability
+      url: account_management/billing/data_observability/
+      parent: account_management_billing
+      weight: 1523
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

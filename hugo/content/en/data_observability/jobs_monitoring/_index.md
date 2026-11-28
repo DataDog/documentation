@@ -16,6 +16,9 @@ further_reading:
   - link: '/monitors/types/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Monitor'
+  - link: '/account_management/billing/data_observability/'
+    tag: 'Documentation'
+    text: 'Data Observability Billing'
   - link: "https://www.datadoghq.com/blog/data-observability/"
     tag: "Blog"
     text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
