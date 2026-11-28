@@ -29,22 +29,19 @@ You can also use Bits Investigation from AI assistants, applications, and the co
 
 You can invoke Bits on an individual monitor alert or warn event from several entry points:
 
-#### Option 1: Bits Investigation Monitors list {#monitor-list}
-1. Go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Supported{{< /ui >}}][5].
-1. Click {{< ui >}}Investigate Recent Alerts{{< /ui >}} and select an alert.
+#### Option 1: Monitor status page
+1. Go to [{{< ui >}}Monitors{{< /ui >}}][5] and open a [Bits Investigation-supported monitor](#supported-monitors).
+1. Click {{< ui >}}Investigate{{< /ui >}}.
 
-#### Option 2: Monitor status page
-Navigate to the monitor status page of a [Bits Investigation-supported monitor](#supported-monitors) and click {{< ui >}}Investigate with Bits Investigation{{< /ui >}} in the top-right corner.
-
-#### Option 3: Monitor event side panel
+#### Option 2: Monitor event side panel
 In the monitor event side panel of a [Bits Investigation-supported monitor](#supported-monitors), click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
-#### Option 4: Slack
+#### Option 3: Slack
 To use the Slack integration, [connect your Slack workspace to Bits Investigation][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-#### Option 5: Microsoft Teams
+#### Option 4: Microsoft Teams
 
 To receive investigation findings in Microsoft Teams, [send monitor notifications to a Microsoft Teams channel][22].
 
@@ -82,7 +79,7 @@ You can launch a Bits investigation from an Error Tracking issue. To start an in
 
 ### General prompt
 
-Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
+In [Bits Chat][16], ask Bits to investigate and describe the issue you want to troubleshoot. Include as much relevant context as possible:
 - Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
 - Relevant tags such as service, application, or environment that isolate the issue
 - A time window (default is past 4 hours)
@@ -102,10 +99,6 @@ You can also trigger an investigation from Slack.  Mention Datadog in a message:
 ### Enable automatic investigations
 
 In addition to manual investigations, you can configure Bits to run automatically when a monitor transitions to the alert state:
-
-#### From the Bits Investigation Monitors list
-1. Go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Supported{{< /ui >}}][5].
-1. Toggle {{< ui >}}Auto-Investigate{{< /ui >}} on for a single monitor, or bulk-edit multiple monitors by selecting multiple monitors, then clicking {{< ui >}}Auto-Investigate All{{< /ui >}}.
 
 #### For a single monitor
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
@@ -183,18 +176,18 @@ Once the investigation is complete, you can switch to the {{< ui >}}Hypothesis T
 
 ## Reports
 
-The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits Investigation on your on-call efficiency.
+From [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Credit Usage{{< /ui >}}][24], you can track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits Investigation on your on-call efficiency.
 
 [3]: /bits_ai/bits_investigation/configure/#configure-knowledge-base-integrations
 [4]: /change_tracking
-[5]: https://app.datadoghq.com/bits-ai/monitors/supported
+[5]: https://app.datadoghq.com/monitors
 [6]: https://app.datadoghq.com/monitors/manage
 [8]: /bits_ai/bits_investigation/configure#slack
 [9]: /bits_ai/bits_investigation/knowledge_sources/
 [10]: /incident_response/on-call/pages/#page-from-notifications
 [14]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [15]: /account_management/rbac/permissions/#bits-ai
-[16]: https://app.datadoghq.com/bits-ai/investigations/new
+[16]: /bits_ai/bits_chat/
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /real_user_monitoring/bits_ai/optimize_performance/
@@ -202,6 +195,7 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [21]: /error_tracking/bits_investigation/
 [22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
 [23]: /bits_ai/bits_remediation/
+[24]: https://app.datadoghq.com/bits/settings/usage
 
 ## Further reading
 

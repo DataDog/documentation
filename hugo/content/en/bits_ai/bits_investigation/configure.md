@@ -49,7 +49,7 @@ To connect ServiceNow, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >
 
 ## Send investigation findings to ITSM and collaboration platforms
 
-By default, all investigations are listed on the [Bits Investigations][1] page.
+By default, all investigations are listed in [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Autonomous Ops{{< /ui >}}][1].
 
 For monitor alert investigations, a summary of the findings is available on the monitor's status page. If your monitor already has `@slack`, `@case`, or `@oncall` [notifications][2] configured, Bits automatically posts its findings to those destinations. If not, you can set up those integrations using the instructions below.
 
@@ -58,7 +58,7 @@ For monitor alert investigations, a summary of the findings is available on the 
 
 1. Ensure the [Datadog Slack app][3] is installed in your Slack workspace.
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
+1. Lastly, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
 
 <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
 
@@ -118,7 +118,7 @@ These permissions are added by default to Managed Roles. If your organization us
 To prevent users from viewing, running, or configuring investigations, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
 
 Removing these permissions doesn't stop automatic investigations on monitors where they are already enabled. To stop automatic investigations, do one of the following:
-- Turn off automatic investigations for each monitor in {{< ui >}}Bits Investigation{{< /ui >}} > [{{< ui >}}Monitors{{< /ui >}}][19].
+- Turn off automatic investigations in the settings for each of your [monitors][19].
 - Disable all AI products billable through AI Credits using the org-level toggle in {{< ui >}}Plan & Usage{{< /ui >}} > [{{< ui >}}AI Credits{{< /ui >}}][16]. For details, see [Admin controls for AI Credits][17].
 
 ## Configure rate limits
@@ -140,7 +140,7 @@ For multi alert monitors, each alerting group triggers its own investigation. Ev
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Rate Limits{{< /ui >}}][10].
+1. Navigate to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Advanced{{< /ui >}}][10].
 2. Toggle on the rate limit you want to enable.
 3. Set the maximum number of investigations you want to run within a rolling 24-hour window.
 4. Click {{< ui >}}Save{{< /ui >}}.
@@ -168,16 +168,16 @@ You can use these Actions to build Workflows, Agents, and Apps tailored to your 
 
 You can trigger and retrieve investigations programmatically [via API][18].
 
-[1]: https://app.datadoghq.com/bits-ai/investigations
+[1]: https://app.datadoghq.com/bits/autonomous-ops/activity
 [2]: /monitors/notify
 [3]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
-[4]: https://app.datadoghq.com/bits-ai/settings/integrations
+[4]: https://app.datadoghq.com/bits/settings/integrations
 [5]: /incident_response/work_management/projects
 [6]: https://app.datadoghq.com/work/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac
 [9]: /bits_ai/bits_investigation/investigate_issues#manually-start-an-investigation
-[10]: https://app.datadoghq.com/bits-ai/settings/rate-limits
+[10]: https://app.datadoghq.com/bits/settings/advanced
 [11]: /account_management/audit_trail/events/#bits-ai-sre
 [12]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [13]: /integrations/github/
@@ -186,5 +186,5 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
-[19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true
+[19]: https://app.datadoghq.com/monitors
 [20]: /bits_ai/bits_detection/#permissions

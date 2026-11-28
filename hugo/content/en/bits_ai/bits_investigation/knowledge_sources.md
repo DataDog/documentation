@@ -36,7 +36,7 @@ Bits follows the links in the monitor message that it has access to, such as Not
 
 ## Bits.md
 
-You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
+You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
@@ -137,12 +137,12 @@ If the conclusion was inaccurate, provide Bits with the correct root cause, high
 
 All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits to adapt to your environment, becoming more accurate and efficient with each investigation.
 
-To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
+To manage memories, including viewing and deleting them, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Memories{{< /ui >}}][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/bits-ai/monitors/supported
-[2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[1]: https://app.datadoghq.com/bits/settings/memories
+[2]: https://app.datadoghq.com/bits/settings/bits-md
 [3]: /bits_ai/bits_investigation/configure/#confluence
