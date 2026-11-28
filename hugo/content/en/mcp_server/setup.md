@@ -41,7 +41,7 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the Datadog plugin from the Antigravity marketplace, using either the app or the CLI:
-   - **App or IDE**: In the sidebar, click {{< ui >}}Customizations{{< /ui >}}. On the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, then click the plus button (**+**) to add the plugin. The plugin's {{< ui >}}Accounts{{< /ui >}} tab shows an MCP error until you complete the next step. This is expected because the Datadog site isn't configured yet.
+   - **App or IDE**: In the sidebar, click {{< ui >}}Customizations{{< /ui >}}. On the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, then click the **Add** button (**+**) to add the plugin. The plugin's {{< ui >}}Accounts{{< /ui >}} tab shows an MCP error until you select your site and restart the Datadog MCP Server in the following steps.
    - **CLI**: Run the following command:
      <pre><code>agy plugin install datadog@antigravity-plugins-partners</code></pre>
 
