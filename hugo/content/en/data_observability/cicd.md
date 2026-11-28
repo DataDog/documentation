@@ -19,6 +19,10 @@ further_reading:
       text: 'Jobs Monitoring'
 ---
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+CI/CD checks are in Preview.
+{{< /callout >}}
+
 ## Overview
 
 {{< img src="data_observability/cicd/cicd-overview.png" alt="The CI/CD feature report page" style="width:100%;" >}}
@@ -39,6 +43,19 @@ See [Lineage][1] for more detail on how Datadog builds and navigates lineage gra
 
 Drift Detection compares the data produced by your models before and after your changes using a series of statistical checks. Use it to confirm that a model change produces the expected output, or to catch unintended side effects such as significant row-count changes, null-rate shifts, or cardinality changes in a column's values.
 
+## Pull requests without checks
+
+Datadog doesn't run checks or post a comment on a pull request in the following cases:
+
+- The pull request is closed or merged.
+- The pull request is a draft, and `Run on Draft Pull/Merge Requests` is disabled. This setting applies to each check separately.
+- None of the changed files are inside the configured dbt project folder.
+- The directories filter is set, and none of the changed files are inside a listed directory.
+- None of the changed files map to a dbt model in the Data Catalog. For example, the pull request changes only YAML files, macros, or documentation.
+- The dbt model filter excludes every changed model.
+
+Checks support dbt models and seeds. If a pull request changes only dbt snapshots, the check result says that snapshots aren't supported.
+
 ## Setup
 
 ### 1. Connect your source control provider and dbt project
@@ -49,18 +66,37 @@ Drift Detection compares the data produced by your models before and after your 
 
 ### 2. Select your dbt project and repository
 
-1. From the CI/CD settings, click {{< ui >}}Add CI/CD Checks{{< /ui >}}.
-2. Select the dbt project you want to add checks for.
-3. Select the main job for the project. This is the job with the most knowledge of your dbt schema.
-4. If Datadog doesn't automatically infer the repository from your source-control provider, select it manually.
+1. In the CI/CD settings, find the dbt project you want to add checks for and click {{< ui >}}Configure checks{{< /ui >}}. The {{< ui >}}Project{{< /ui >}} field shows the selected project.
+2. Under {{< ui >}}Source Control{{< /ui >}}, check the {{< ui >}}Repository{{< /ui >}} field. Datadog fills it in when it detects the repository from the selected dbt project. Otherwise, select the repository.
 
+<!-- SCREENSHOT (replace cicd-connection.png): CI/CD checks configuration form for a sample dbt project, showing the Project field, the Repository field under Source Control, the dbt project folder field with the Detected label, and the dbt model filter and Directories filter under Trigger Settings. -->
 {{< img src="data_observability/cicd/cicd-connection.png" alt="The CI/CD feature creation page" style="width:100%;" >}}
 
-#### Advanced settings
+#### dbt project folder
 
-If your dbt project doesn't live at the root of your repository, you can specify the path to your dbt project in the advanced settings.
+If your dbt project isn't at the root of your repository, set {{< ui >}}dbt project folder{{< /ui >}} to the folder that contains `dbt_project.yml`. Enter the path relative to the repository root. Leave the field empty to use the repository root.
 
-### 3. Configure checks
+Datadog can detect the folder from the dbt metadata it receives for the project and the selected repository. When it does, Datadog fills in the field for new checks and marks it {{< ui >}}Detected{{< /ui >}}. If you change the folder, click {{< ui >}}Use detected{{< /ui >}} to restore the detected value.
+
+### 3. Limit which changes trigger checks (optional)
+
+By default, a change to any dbt model in the project can trigger checks. To narrow this, use the fields under {{< ui >}}Trigger Settings{{< /ui >}}:
+
+- {{< ui >}}dbt model filter{{< /ui >}}: Only models that match the filter can trigger checks. Enter a search query for the project's dbt models, for example `name:*prod*`. The form shows how many dbt models match.
+- {{< ui >}}Directories filter{{< /ui >}}: Only changes to files under the listed directories can trigger checks. Enter each path relative to the dbt project folder and click {{< ui >}}Add path{{< /ui >}}. A directory matches the files inside it and its subdirectories, and paths are case-sensitive.
+
+For example, if the dbt project folder is `analytics` and the directories filter lists `models/marts`:
+
+| Changed file | Can trigger checks |
+| ------------ | ------------------ |
+| `analytics/models/marts/orders.sql` | Yes |
+| `analytics/models/marts/finance/revenue.sql` | Yes |
+| `analytics/models/staging/stg_orders.sql` | No |
+| `analytics/models/marts_legacy/orders.sql` | No. `models/marts` matches only the `marts` directory, not other names that start with `marts`. |
+
+If you set both filters, a changed model must pass both.
+
+### 4. Configure checks
 
 You can enable each check independently. Enabling all checks yields the richest reports.
 

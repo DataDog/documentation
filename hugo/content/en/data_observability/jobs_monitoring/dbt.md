@@ -76,6 +76,12 @@ Use this option if you want Datadog to create and maintain the webhook in dbt Cl
 
 This mode requires a dbt Cloud token with {{< ui >}}Developer{{< /ui >}} permissions for the dbt Cloud Enterprise plan or {{< ui >}}Account Admin{{< /ui >}} permissions for the dbt Cloud Team plan.
 
+## How Datadog collects dbt Cloud runs
+
+Datadog creates dbt Cloud job runs from the webhook events. When a run starts, Datadog shows it as running. When the run finishes, Datadog fetches the run's artifacts with the API token and adds the run's model results and lineage.
+
+Datadog processes runs whose dbt Cloud connection uses Snowflake, BigQuery, Databricks, Redshift, or ClickHouse. Runs on other connection types don't appear in Datadog. Data Observability for [ClickHouse Cloud][3] is in Preview.
+
 ## What's next
 
 After your next dbt job run, you should start seeing job run and lineage data in [Datadog Data Observability][2], as shown below.
@@ -84,6 +90,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 [1]: https://app.datadoghq.com/data-obs/settings/integrations
 [2]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
+[3]: /data_observability/quality_monitoring/data_warehouses/clickhouse/
 
 {{% /tab %}}
 
@@ -102,7 +109,7 @@ Follow the steps below to connect dbt Core to Datadog.
 1. Install the `openlineage-dbt` package. Reference [Using dbt with Amazon MWAA][3] for setting up this package in your virtual environment.
 
    ```shell
-   pip3 install openlineage-dbt>=1.39.0
+   pip3 install "openlineage-dbt>=1.39.0"
    ```
 
 ## Set the environment variables
@@ -170,6 +177,25 @@ After your next dbt job run, you should start seeing job run and lineage data in
 {{% /tab %}}
 {{< /tabs >}}
 
+## In-progress runs
+
+On a dbt job's page in the catalog, the {{< ui >}}Job Runs{{< /ui >}} tab lists runs that are still in progress with a `RUNNING` status. Their duration counts up while the run continues. To show only in-progress runs, select {{< ui >}}RUNNING{{< /ui >}} in the {{< ui >}}Filter status{{< /ui >}} menu. In-progress runs appear when the selected time frame extends to the present.
+
+<!-- SCREENSHOT: Job Runs tab of a sample dbt job page in the catalog, with one run in progress, showing the RUNNING status, the run's elapsed duration, and the Filter status menu. -->
+
+Job duration monitors can alert on a dbt job while it's still running. See [How job duration is evaluated][2].
+
+## Exposures
+
+Datadog shows [dbt exposures][1] in lineage, downstream of the tables they depend on. Where Datadog reads exposures depends on how you run dbt:
+
+- **dbt Cloud**: Datadog reads exposures from the manifest of each successful run. Runs triggered by pull requests, such as the CI job that [CI/CD checks][3] use, don't update exposures.
+- **dbt Core**: Datadog reads exposures from the `dbt_exposures` facet that `openlineage-dbt` 1.52.0 and later add to the datasets of models that complete. Earlier versions don't send exposures. To upgrade, run `pip3 install --upgrade "openlineage-dbt>=1.52.0"`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.getdbt.com/docs/build/exposures
+[2]: /monitors/types/data_observability/#how-job-duration-is-evaluated
+[3]: /data_observability/cicd/
