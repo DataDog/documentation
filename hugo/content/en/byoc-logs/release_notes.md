@@ -40,6 +40,31 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.37 — 2026-11-24
+
+*Bundled in chart: `0.7.0`.*
+
+#### Changed
+
+- Reduces out-of-memory restarts during expensive searches by enforcing searcher memory limits.
+- Makes long IDs and URLs searchable in newly indexed data. Tokens are truncated to 1024 bytes; use prefix queries for longer values.
+- **Query behavior change**: Attribute values of 255 bytes or more are excluded from `@attr:*` existence queries, terms aggregations, sorts, and ranges.
+- Keeps span indexes out of log searches unless explicitly selected.
+- Prevents document rejections caused by empty or null object fields.
+- Protects ingestion memory by limiting request bodies to 10 MiB before decompression and 256 MiB after decompression by default. Oversized requests return HTTP `413`.
+- Applies retention correctly after an index is deleted and recreated.
+- Adds metrics to diagnose search memory pressure. Removes `tokio_worker_busy_ratio`.
+
+#### Helm chart changes
+
+<div class="alert alert-warning">
+<strong>Breaking change</strong>: Removes the <code>6xlarge</code> and <code>8xlarge</code> indexer sizes. Select a supported indexer size before upgrading.
+</div>
+
+- Adjusts default [indexer WAL memory budgets](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/CHANGELOG.md#070) to reduce the risk of out-of-memory restarts.
+- Adds CPU limits to keep standard indexer pods within their allocated resources. Explicit `indexer.resources` overrides are unchanged.
+- Updates default log clustering to distinguish services, including when `source` is absent.
+
 ### v0.1.36 — 2026-11-03
 
 *Bundled in chart: `0.6.0`.*
