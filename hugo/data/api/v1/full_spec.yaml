@@ -33,27 +33,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
   schemas:
     APIErrorResponse:
       description: Error response object.
@@ -34068,30 +34047,13 @@ paths:
         **Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.
       operationId: ListHosts
       parameters:
-        - description: |-
-            String to filter search results. A filter is one or more terms separated by spaces or commas.
-            A host must match every term. Prefix a term with `!` to exclude matching hosts.
-
-            Term types:
-            - `<text>`: Partial, case-insensitive match against host name, alias, AWS ID and name, tags, apps, and
-              agent metadata. Text of fewer than 3 characters only matches a field whose value is exactly that text.
-            - `tag:<key>:<value>`: Exact match on a tag, for example `tag:env:prod`.
-            - `field:apps:<app>`: Exact match on an app name, for example `field:apps:nginx`.
-            - `field:metadata_agent_version:<value>`, `field:metadata_machine:<value>`,
-              `field:metadata_platform:<value>`, `field:metadata_processor:<value>`: Exact match on that metadata field.
-            - `exists:tag:<key>` or `exists:field:<field>`: Match hosts that have the tag key or a non-empty value
-              for the field, for example `exists:tag:env` or `exists:field:metadata_platform`.
-            - `exact:<value>`: Whole-value, case-sensitive match.
-
-            Boolean operators (`AND`, `OR`, `NOT`) and `*` wildcards are not supported.
+        - description: String to filter search results.
           in: query
           name: filter
           required: false
           schema:
             type: string
-        - description: |-
-            Sort hosts by this field. Options include `name`, `aws_id`, `aws_name`, `up`, `apps`, `cpu`,
-            `iowait`, and `load`. Unrecognized values default to `cpu`..
+        - description: Sort hosts by this field.
           in: query
           name: sort_field
           required: false

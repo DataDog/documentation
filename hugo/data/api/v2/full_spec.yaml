@@ -3287,27 +3287,6 @@ components:
           schema:
             $ref: "#/components/schemas/APIErrorResponse"
       description: Too many requests
-      headers:
-        X-RateLimit-Limit:
-          description: Number of requests allowed in the rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Period:
-          description: Length of the rate-limit period in seconds.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Remaining:
-          description: Number of requests remaining in the current rate-limit period.
-          schema:
-            format: int64
-            type: integer
-        X-RateLimit-Reset:
-          description: Number of seconds until the current rate-limit period resets.
-          schema:
-            format: int64
-            type: integer
     UnauthorizedResponse:
       content:
         application/json:
@@ -51125,9 +51104,19 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/EventAttributes"
+        host:
+          description: The host associated with the event.
+          example: "example-host"
+          type: string
         message:
           description: The message of the event.
           type: string
+        service:
+          description: The service associated with the event.
+          example: "example-service"
+          type: string
+        status:
+          $ref: "#/components/schemas/EventStatusType"
         tags:
           description: An array of tags associated with the event.
           example: ["team:A"]
@@ -194089,7 +194078,10 @@ paths:
                   value:
                     data:
                       - attributes:
+                          host: "example-host"
                           message: "Test event"
+                          service: "example-service"
+                          status: "info"
                           tags:
                             - "env:prod"
                           timestamp: "2019-01-02T09:42:36.320Z"
@@ -194308,7 +194300,10 @@ paths:
                   value:
                     data:
                       - attributes:
+                          host: "example-host"
                           message: "Test event"
+                          service: "example-service"
+                          status: "info"
                           tags:
                             - "env:prod"
                           timestamp: "2019-01-02T09:42:36.320Z"
