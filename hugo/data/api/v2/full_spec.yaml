@@ -120839,7 +120839,7 @@ components:
         `filter.indexes` is not supported and is ignored.
       properties:
         compute:
-          description: The list of metrics or timeseries to compute for the retrieved buckets.
+          description: The list of metrics or timeseries to compute for the retrieved buckets. All rules must have the same `type`; mixing `total` and `timeseries` rules is rejected.
           items:
             $ref: "#/components/schemas/RUMCompute"
           type: array
@@ -120857,7 +120857,7 @@ components:
       type: object
     RUMAggregateSort:
       description: A sort rule.
-      example: {"aggregation": "count", "order": "asc"}
+      example: {"aggregation": "count", "order": "asc", "type": "measure"}
       properties:
         aggregation:
           $ref: "#/components/schemas/RUMAggregationFunction"
@@ -120872,7 +120872,7 @@ components:
       type: object
     RUMAggregateSortType:
       default: "alphabetical"
-      description: The type of sorting algorithm. `alphabetical` sorts buckets by the facet value. `measure` sorts them by a computed aggregation.
+      description: The type of sorting algorithm. `alphabetical` sorts buckets by the facet value. `measure` sorts them by a computed aggregation, and is required when the sort sets `aggregation` or `metric`.
       enum: ["alphabetical", "measure"]
       type: string
       x-enum-varnames: ["ALPHABETICAL", "MEASURE"]
@@ -253933,6 +253933,7 @@ paths:
                       sort:
                         aggregation: count
                         order: asc
+                        type: measure
                   options:
                     timezone: GMT
                   page:

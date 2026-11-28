@@ -100,3 +100,9 @@ entries:
       - SearchRUMEvents
       - UpdateRUMApplication
     title: Document rate-limit headers on the shared 429 responses
+  - change_type: modified
+    date: '2026-11-26'
+    link: https://github.com/DataDog/documentation/pull/42248
+    operations:
+      - AggregateRUMEvents
+    title: Document type measure for RUM aggregate sort and same type computes
