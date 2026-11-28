@@ -32,31 +32,42 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Antigravity" %}}
 
-Install the Datadog plugin from the Antigravity marketplace. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1].
+Install the Datadog plugin from the Antigravity marketplace. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1]. For a full walkthrough with troubleshooting steps, see the [plugin installation guide][3].
 
-**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it to avoid conflicts.
+**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it. Otherwise, the agent might call that server instead of the plugin's `datadog-antigravity` server.
 
 [1]: https://github.com/datadog-labs/antigravity-plugin
+[3]: https://github.com/datadog-labs/antigravity-plugin/blob/main/docs/plugin-installation.md
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-1. Install the Datadog plugin from the Antigravity marketplace, using either the CLI or the app:
+1. Install the Datadog plugin from the Antigravity marketplace, using either the app or the CLI:
+   - **App or IDE**: In the sidebar, click {{< ui >}}Customizations{{< /ui >}}. On the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, then click the **Add** button (**+**) to add the plugin. The plugin's {{< ui >}}Accounts{{< /ui >}} tab shows an MCP error until you select your site and restart the Datadog MCP Server in the following steps.
    - **CLI**: Run the following command:
-     <pre><code>agy plugin install datadog</code></pre>
+     <pre><code>agy plugin install datadog@antigravity-plugins-partners</code></pre>
 
-     If you're prompted to choose a marketplace, specify it directly with `agy plugin install datadog@antigravity-plugins-partners`. Run `agy plugin list` to confirm that the plugin is installed and enabled. Plugins installed with the CLI are also available in the Antigravity app and IDE.
-   - **App or IDE**: In the left sidebar, select {{< ui >}}Skills & Customizations{{< /ui >}} (or go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Customizations{{< /ui >}}). Open the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, and click {{< ui >}}Install{{< /ui >}}. If prompted, restart Antigravity to load the plugin's MCP server and skills. You can also open the plugin controls by typing `/plugin` in the chat input.
+     Run `agy plugin list` to confirm that the plugin is installed and enabled. Plugins installed with the CLI are also available in the Antigravity app and IDE.
 
-1. Run `/ddsetup` in Antigravity to connect the plugin to your Datadog account. During setup, select your [Datadog site][2].
+1. Run `/ddsetup` in the Antigravity chat and select your [Datadog site][2].
 
-1. Follow the agent's instructions to refresh the MCP servers, then complete the OAuth login flow in your browser.
+1. Restart the Datadog MCP Server so that it uses the selected site:
+   1. In {{< ui >}}Customizations{{< /ui >}}, select the Datadog plugin on the {{< ui >}}Installed{{< /ui >}} tab.
+   1. On the plugin's {{< ui >}}MCP{{< /ui >}} tab, click the **More Options** menu (**⋮**) next to `datadog-antigravity` and select {{< ui >}}Restart{{< /ui >}}.
+
+1. Sign in to Datadog. When the {{< ui >}}Sign in required{{< /ui >}} banner appears, click {{< ui >}}Go to Accounts{{< /ui >}}, then click {{< ui >}}Sign in{{< /ui >}}. Log in to Datadog in your browser and approve the access request. When sign-in succeeds, the account shows a {{< ui >}}CONNECTED{{< /ui >}} badge.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
-1. After making any configuration change, refresh the MCP servers for the new setting to take effect. If the plugin stops working after a plugin update, run `/ddsetup` again to reconnect.
-
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+<div class="alert alert-info">
+<ul>
+  <li>After any configuration change, restart the Datadog MCP Server from the plugin's {{< ui >}}MCP{{< /ui >}} tab for the change to take effect.</li>
+  <li>Plugin updates reset the plugin's configuration, including your Datadog site. After an update, run <code>/ddsetup</code> again, restart the Datadog MCP Server, and sign in again.</li>
+  <li>To change your site, or to troubleshoot a server that stopped responding, run <code>/ddconfig</code>. After changing your site, restart the Datadog MCP Server and sign in again.</li>
+  <li>To switch to another organization on the same site, click {{< ui >}}Sign out{{< /ui >}} on the plugin's {{< ui >}}Accounts{{< /ui >}} tab, then click {{< ui >}}Sign in{{< /ui >}} and choose the organization in your browser.</li>
+  <li>See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</li>
+</ul>
+</div>
 
 [2]: /getting_started/site/
 {{< /site-region >}}
