@@ -59,12 +59,15 @@ Install the Datadog plugin from the Antigravity marketplace. The plugin packages
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-**Notes**:
-- After any configuration change, restart the Datadog MCP server from the plugin's {{< ui >}}MCP{{< /ui >}} tab for the change to take effect.
-- Plugin updates reset the plugin's configuration, including your Datadog site. After an update, run `/ddsetup` again, restart the MCP server, and sign in again.
-- To change your site, or to troubleshoot a server that stopped responding, run `/ddconfig`. To switch to another organization on the same site, click {{< ui >}}Sign out{{< /ui >}} on the plugin's {{< ui >}}Accounts{{< /ui >}} tab, then click {{< ui >}}Sign in{{< /ui >}} and choose the organization in your browser.
-
-<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+<div class="alert alert-info">
+<ul>
+  <li>After any configuration change, restart the Datadog MCP Server from the plugin's {{< ui >}}MCP{{< /ui >}} tab for the change to take effect.</li>
+  <li>Plugin updates reset the plugin's configuration, including your Datadog site. After an update, run <code>/ddsetup</code> again, restart the Datadog MCP Server, and sign in again.</li>
+  <li>To change your site, or to troubleshoot a server that stopped responding, run <code>/ddconfig</code>. After changing your site, restart the Datadog MCP Server and sign in again.</li>
+  <li>To switch to another organization on the same site, click {{< ui >}}Sign out{{< /ui >}} on the plugin's {{< ui >}}Accounts{{< /ui >}} tab, then click {{< ui >}}Sign in{{< /ui >}} and choose the organization in your browser.</li>
+  <li>See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</li>
+</ul>
+</div>
 
 [2]: /getting_started/site/
 {{< /site-region >}}
