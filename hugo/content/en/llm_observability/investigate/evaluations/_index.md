@@ -18,6 +18,10 @@ further_reading:
 
 Agent Observability offers several ways to support evaluations. Evaluators can be configured by navigating to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
 
+### Evaluators provided by Datadog
+
+[Evaluators provided by Datadog][16] check whether your agent completed the user's goal and the tasks it took on. Datadog runs them for you on your traces, with no setup and no LLM provider account.
+
 ### Custom LLM-as-a-judge evaluators
 
 [Custom LLM-as-a-judge evaluators][1] allow you to define your own evaluation logic using natural language prompts. You can create custom evaluators to assess subjective or objective criteria (like tone, helpfulness, or factuality) and run them at scale across your traces and spans.
@@ -88,3 +92,4 @@ Agent Observability offers an [Export API][9] that you can use to retrieve spans
 [13]: /llm_observability/investigate/evaluations/end_user_feedback
 [14]: /llm_observability/data_governance/access_control/
 [15]: /llm_observability/investigate/evaluations/code_evaluations
+[16]: /llm_observability/investigate/evaluations/evaluators_provided_by_datadog
