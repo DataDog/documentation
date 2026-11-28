@@ -467,3 +467,22 @@ entries:
       - ListSecurityMonitoringIntegrationConfigs
       - UpdateSecurityMonitoringIntegrationConfig
     title: Add AWS IAM Identity Center entity context sync configurations
+  - change_type: modified
+    date: '2026-11-27'
+    link: https://github.com/DataDog/documentation/pull/42276
+    operations:
+      - ConvertSecurityMonitoringRuleFromJSONToTerraform
+      - CreateSecurityMonitoringRule
+      - GetHistoricalJob
+      - GetRuleVersionHistory
+      - GetSecurityMonitoringRule
+      - GetSuppressionsAffectingFutureRule
+      - ListHistoricalJobs
+      - ListSecurityMonitoringRules
+      - RestoreSecurityMonitoringRule
+      - RunHistoricalJob
+      - TestExistingSecurityMonitoringRule
+      - TestSecurityMonitoringRule
+      - UpdateSecurityMonitoringRule
+      - ValidateSecurityMonitoringRule
+    title: Fix listSecurityMonitoringRules response drift
