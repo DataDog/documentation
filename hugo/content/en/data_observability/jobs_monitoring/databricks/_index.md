@@ -10,6 +10,9 @@ further_reading:
     - link: '/monitors/types/data_observability/'
       tag: 'Documentation'
       text: 'Data Observability Monitor'
+    - link: '/data_observability/optimize/'
+      tag: 'Documentation'
+      text: 'Optimize'
     - link: "https://www.datadoghq.com/blog/databricks-serverless-jobs-datadog/"
       tag: "Blog"
       text: "Detect issues and optimize spend with Databricks serverless job monitoring"
